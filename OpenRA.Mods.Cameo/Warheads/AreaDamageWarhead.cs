@@ -103,7 +103,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 			"the single PhysicalStateName/Scale above. For a blend, e.g. Plasma: Temperature: 50, Corrosion: 50.")]
 		public readonly Dictionary<string, int> PhysicalStates = new();
 
-		[Desc("Drain the victim's Integrity (shield/EMP) pool by the damage this warhead deals x this",
+		[Desc("Drain the victim's Integrity ELECTRONICS pool by the damage this warhead deals x this",
 			"percentage, SCALED exactly like PhysicalStateScale (auto-tracks the real post-armor/falloff",
 			"damage, so no flat EMP number is hand-set). Cameo Tesla-content law: Tesla 100, Storm 50,",
 			"Quantum 33 (Tesla-parents / total-parents). 0 = off. Put it on the main + _Percentage warheads,",
@@ -151,6 +151,45 @@ namespace OpenRA.Mods.Cameo.Warheads
 		[Desc("Subclass validation hook, called once the base fields are checked.")]
 		protected virtual void ValidateFields() { }
 
+		// THE ARMOR-PLATING LAYER (maintainer, 2026-08-16).
+		//
+		// A plating is a MUTUALLY EXCLUSIVE upgrade — a unit picks one — and while it is on, the
+		// plating is what the shot actually hits. So it REPLACES the class armor rather than
+		// combining with it: "shield active -> shield armor, armor plating active -> that plating's
+		// armor type, otherwise -> the armor type from the unit class."
+		//
+		// ⚠ **Combining instead of replacing is what made an upgrade able to HURT you.** While
+		// platings were averaged with the class armor, `effective = (class + plating) / 2` rose
+		// above `class` whenever the plating row did — measured at 98 of 1152 cells, up to 1.84x
+		// MORE damage, worst on heavy units because they are the ones with the low class rows.
+		// Selection removes the whole failure mode: only one row is ever read.
+		//
+		// This is deliberately NOT the same as being strictly better. Each plating is strong against
+		// one damage axis and WEAK against the next (the cycle: thermochemical -> kinetic -> blast
+		// -> energy -> thermochemical), so picking one is a trade, not a free upgrade. That is only
+		// safe BECAUSE selection replaced averaging: under averaging a "weak" row would have been an
+		// unconditional penalty stacked on top of the class armor.
+		//
+		// `Shield` is absent here on purpose — it already does exactly this in yaml
+		// (`Armor: RequiresCondition: !shielded` in defaults.yaml), and it sits ABOVE plating in the
+		// layer stack, so its own condition takes it out of the running before this code runs.
+		//
+		// ⚠ Keep in step with `gen_weapon_template.PLATING_CYCLE`, which generates the columns.
+		// A name here with no column would select an armor the warheads have no row for, which
+		// `DamageVersus` answers with 100 — i.e. the plating would REMOVE the unit's armor.
+		static readonly string[] PlatingArmors =
+		{
+			"HAZMAT",     // sealed / filtered envelope — vs fire, chemical, radiation
+			"COMPOSITE",  // ceramic matrix + ERA       — vs kinetic penetrators AND shaped charges
+			"BLAST",      // spall liner / V-hull       — vs HE, demolition, concussion
+			"REFLECTOR",  // ablative / mirrored        — vs directed energy
+			// The GENERIC plating: flat against everything, so it counters nothing and is
+			// punished by nothing. Home for every non-branching "+armor" upgrade (Yuri scrap,
+			// Forgotten junk armor, the StarCraft/Warcraft armor and carapace levels), which
+			// were never designed with a counter-play identity.
+			"ARMOR",
+		};
+
 		protected override int DamageVersus(Actor victim, HitShape shape, WarheadArgs args)
 		{
 			if (MultiArmorCombination == ArmorCombination.Multiply)
@@ -161,11 +200,22 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 			// Same selection as the base: enabled armors this warhead has a Versus row for,
 			// filtered by the hit shape's own armor restriction. Only the COMBINATION differs.
-			var armor = victim.TraitsImplementing<Armor>()
+			var matched = victim.TraitsImplementing<Armor>()
 				.Where(a => !a.IsTraitDisabled && a.Info.Type != null && Versus.ContainsKey(a.Info.Type) &&
 					(shape.Info.ArmorTypes.IsEmpty || shape.Info.ArmorTypes.Contains(a.Info.Type)))
+				.ToList();
+
+			// A plating outranks the class armor: it is the outermost layer, so it is what got hit.
+			// If several are somehow active at once, the most protective wins rather than an
+			// average — stacking platings must never be worse than wearing one.
+			var plating = matched
+				.Where(a => PlatingArmors.Contains(a.Info.Type))
 				.Select(a => Versus[a.Info.Type])
 				.ToList();
+			if (plating.Count > 0)
+				return plating.Min();
+
+			var armor = matched.Select(a => Versus[a.Info.Type]).ToList();
 
 			// No matching armor means no modifier, exactly as the base's empty product does.
 			if (armor.Count == 0)
@@ -321,12 +371,18 @@ namespace OpenRA.Mods.Cameo.Warheads
 			physicalState?.ApplyChange(change, firedBy, true);
 		}
 
-		// Drain the victim's Integrity (shield/EMP) pool proportional to the damage just dealt, the same
+		// Drain the victim's Integrity ELECTRONICS pool proportional to the damage just dealt, the same
 		// way ApplyPhysicalState scales a heat/corrosion meter. Auto-tracks the final effective damage
 		// (armor + falloff already baked into `damage`), so the "EMP" self-adjusts with the weapon's
 		// output and never needs a hand-set number. Shared with the _Percentage subclass so both the flat
 		// main and the %HP twin drain the pool; the _ExtraDamage chip never calls this (excluded). No
-		// Integrity trait on the victim (most units have no shield) => a harmless no-op.
+		// Integrity trait on the victim (most units have no electronics pool) => a harmless no-op.
+		//
+		// ⚠ INTEGRITY IS NOT A SHIELD. It absorbs NOTHING — `INotifyDamage` runs after the damage has
+		// already landed on health — so draining it buys the attacker no extra damage, only the EMP
+		// DISABLE when it reaches zero. The shield is `Shielded` (OpenRA.Mods.AS), a separate trait and
+		// a separate layer. `Integrity.cs` had every [Desc] copied verbatim from `Shielded.cs` and this
+		// file inherited the same wrong word; corrected 2026-08-17 on the maintainer's report.
 		protected void ApplyIntegrityScale(Actor victim, Actor firedBy, int damage)
 		{
 			if (damage == 0 || IntegrityScale == 0)

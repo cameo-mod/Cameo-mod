@@ -257,6 +257,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Health.HP",
      "v": "122500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Japanese Bomber",
     "prerequisites": [
      "~japan_japaneseairfield",
@@ -266,6 +270,14 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -710,6 +722,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Health.HP",
      "v": "75000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Sky Hawk",
     "prerequisites": [
      "~japan_japaneseairfield",
@@ -719,6 +735,14 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -1021,6 +1045,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Health.HP",
      "v": "30000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Zero Fighter",
     "prerequisites": [
      "~japan_japaneseairfield"
@@ -1029,6 +1057,14 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -1065,6 +1101,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Japanese Airfield",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -1074,6 +1114,14 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -1104,6 +1152,10 @@
      "src": "inherited",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Japanese Barracks",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -1113,6 +1165,14 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -1139,6 +1199,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Japanese Construction Yard",
     "prerequisites": [
      "~disabled"
@@ -1147,6 +1211,14 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -1177,6 +1249,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Japanese Ore Refinery",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -1186,6 +1262,14 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -1216,6 +1300,10 @@
      "src": "inherited",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Japanese Radar Array",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -1225,6 +1313,14 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -1255,6 +1351,10 @@
      "src": "inherited",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Japanese Service Depot",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -1264,6 +1364,14 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -1294,6 +1402,10 @@
      "src": "inherited",
      "v": "500000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Japanese Tech Center",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -1303,6 +1415,14 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -1333,6 +1453,10 @@
      "src": "inherited",
      "v": "400000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Japanese War Factory",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -1342,6 +1466,14 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -1368,6 +1500,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml#Health.HP",
      "v": "175000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Waveforce Reactor",
     "prerequisites": [
      "~japan_japaneseconstructionyard"
@@ -1376,6 +1512,14 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c512"
@@ -1802,6 +1946,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#Health.HP",
      "v": "190000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Ballista Tower",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -1811,6 +1959,14 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "9214"
@@ -1969,6 +2125,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#Health.HP",
      "v": "110000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Japanese MG Nest",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -1978,6 +2138,14 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6696"
@@ -2013,6 +2181,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Japanese Shrine",
     "prerequisites": [
      "~japan_japanesetechcenter",
@@ -2023,6 +2195,14 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -2074,6 +2254,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#Health.HP",
      "v": "220000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Waveforce Turret",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -2083,6 +2267,14 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "9824"
@@ -2500,6 +2692,14 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7500"
@@ -2688,6 +2888,14 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -3054,6 +3262,14 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6500"
@@ -3295,6 +3511,14 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -3481,6 +3705,14 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -3715,6 +3947,14 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -3977,6 +4217,14 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -5145,6 +5393,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "42500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Armored Car",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -5154,6 +5406,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -5395,6 +5655,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "65000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Ballista",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -5404,6 +5668,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -5573,6 +5845,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "130000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Chi-Ha Heavy Tank",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -5582,6 +5858,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -5621,6 +5905,10 @@
      "src": "inherited",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Core (Airfield)",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -5631,6 +5919,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7c0"
@@ -5670,6 +5966,10 @@
      "src": "inherited",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Core (Barracks)",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -5680,6 +5980,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7c0"
@@ -5719,6 +6027,10 @@
      "src": "inherited",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Core (Power Plant)",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -5729,6 +6041,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7c0"
@@ -5768,6 +6088,10 @@
      "src": "inherited",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Core (Radar)",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -5778,6 +6102,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7c0"
@@ -5817,6 +6149,10 @@
      "src": "inherited",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Core (Refinery)",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -5827,6 +6163,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7c0"
@@ -5866,6 +6210,10 @@
      "src": "inherited",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Core (Service Depot)",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -5876,6 +6224,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7c0"
@@ -5915,6 +6271,10 @@
      "src": "inherited",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Core (Tech Center)",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -5925,6 +6285,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7c0"
@@ -5964,6 +6332,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Core (War Factory)",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -5974,6 +6346,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#RevealsShroud.Range",
      "v": "7c0"
@@ -6661,6 +7041,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "750000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Exorcist O-I Tank",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -6672,6 +7056,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -6814,6 +7206,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Grenade Buggy",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -6823,6 +7219,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -6950,6 +7354,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "120000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Hovercraft Flametank",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -6960,6 +7368,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -7588,6 +8004,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "65000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Hovercraft Transport",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -7598,6 +8018,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -7752,6 +8180,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "110000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "I-Go Medium Tank",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -7761,6 +8193,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -7800,6 +8240,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Japanese Mobile Construction Vehicle",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -7809,6 +8253,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -7848,6 +8300,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Japanese Ore Truck",
     "prerequisites": [
      "~japan_japaneseorerefinery"
@@ -7856,6 +8312,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -7973,6 +8437,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "37500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Nanodrone Buggy",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -7982,6 +8450,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -8713,6 +9189,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "650000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "O-I Tank",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -8722,6 +9202,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -8855,6 +9343,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Scout Car",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -8864,6 +9356,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -8939,6 +9439,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "3000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Shogun Executioner",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -8949,6 +9453,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -9018,6 +9530,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Shrine Minitank",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -9027,6 +9543,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -9083,6 +9607,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Waveforce Artillery",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -9093,6 +9621,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -9350,6 +9886,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Waveforce Tank",
     "prerequisites": [
      "~japan_japanesewarfactory",
@@ -9360,6 +9900,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"

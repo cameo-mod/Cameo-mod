@@ -27,6 +27,14 @@
      "v": "150000"
     },
     "name": "Badger",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -179,6 +187,14 @@
      "v": "125000"
     },
     "name": "Japanese Super Bomber",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -211,6 +227,14 @@
      "v": "150000"
     },
     "name": "Badger",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -294,6 +318,14 @@
      "v": "150000"
     },
     "name": "Cargo Plane",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -325,6 +357,14 @@
      "v": "150000"
     },
     "name": "Cargo Plane",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -357,6 +397,14 @@
      "v": "150000"
     },
     "name": "Badger",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -441,6 +489,14 @@
      "v": "150000"
     },
     "name": "Badger",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -473,6 +529,14 @@
      "v": "150000"
     },
     "name": "Badger",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -521,6 +585,14 @@
      "v": "100000"
     },
     "name": "Spy Plane",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -571,6 +643,14 @@
      "v": "100000"
     },
     "name": "Spy Plane",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -607,6 +687,10 @@
      "src": "inherited",
      "v": "600000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Japanese Naval Yard",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
@@ -617,6 +701,14 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12000"
@@ -643,6 +735,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Advanced Power Plant",
     "prerequisites": [
      "~rafact",
@@ -652,6 +748,14 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "5c0"
@@ -682,6 +786,10 @@
      "src": "inherited",
      "v": "600000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Allied Naval Yard",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
@@ -692,6 +800,14 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12000"
@@ -718,6 +834,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Ore Silo",
     "prerequisites": [
      "~rafact",
@@ -727,6 +847,14 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
@@ -753,6 +881,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
      "v": "125000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Power Plant",
     "prerequisites": [
      "~rafact"
@@ -761,6 +893,14 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
@@ -791,6 +931,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Kennel",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
@@ -801,6 +945,14 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
@@ -831,6 +983,10 @@
      "src": "inherited",
      "v": "600000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Sub Pen",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
@@ -841,6 +997,14 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12000"
@@ -896,6 +1060,14 @@
      "v": "2500"
     },
     "name": "Agent Delphi",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "2c0"
@@ -1139,6 +1311,14 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6500"
@@ -1333,6 +1513,14 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -1365,6 +1553,14 @@
      "v": "2500"
     },
     "name": "Prof. Einstein",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "2c0"
@@ -1437,6 +1633,14 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -1494,6 +1698,14 @@
      "v": "2500"
     },
     "name": "General",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "2c0"
@@ -1526,6 +1738,14 @@
      "v": "2500"
     },
     "name": "Scientist",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "2c0"
@@ -1669,6 +1889,14 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5500"
@@ -1726,6 +1954,14 @@
      "v": "2500"
     },
     "name": "Technician",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "2c0"
@@ -1775,6 +2011,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "225000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "actor_japan_japanesecarrier.name",
     "prerequisites": [
      "~japan_japanesenavalyard",
@@ -1784,6 +2024,14 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -2012,6 +2260,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "40000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Japanese Speedboat",
     "prerequisites": [
      "~japan_japanesenavalyard"
@@ -2020,6 +2272,14 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -2196,6 +2456,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Yamato Battleship",
     "prerequisites": [
      "~japan_japanesenavalyard",
@@ -2205,6 +2469,14 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -2520,7 +2792,19 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "7500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Zero Fighter",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -2659,6 +2943,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "225000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Cruiser",
     "prerequisites": [
      "~ra1_allies_alliednavalyard",
@@ -2668,6 +2956,14 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -2847,6 +3143,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "125000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Destroyer",
     "prerequisites": [
      "~ra1_allies_alliednavalyard",
@@ -2856,6 +3156,14 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -2962,6 +3270,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "60000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Gunboat",
     "prerequisites": [
      "~ra1_allies_alliednavalyard"
@@ -2970,6 +3282,14 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -3005,6 +3325,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Naval Transport",
     "prerequisites": [
      "~ranavaltransport"
@@ -3013,6 +3337,14 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#RevealsShroud.Range",
      "v": "7500"
@@ -3140,6 +3472,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "70000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Missile Submarine",
     "prerequisites": [
      "~ra1_soviets_subpen",
@@ -3149,6 +3485,14 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -3283,6 +3627,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Submarine",
     "prerequisites": [
      "~ra1_soviets_subpen"
@@ -3291,6 +3639,14 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -3550,6 +3906,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Allied APC",
     "prerequisites": [
      "~ra1_allies_alliedbarracks",
@@ -3559,6 +3919,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -3646,6 +4014,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Health.HP",
      "v": "160000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Allied Cyber Tank",
     "prerequisites": [
      "~disabled"
@@ -3654,6 +4026,14 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"

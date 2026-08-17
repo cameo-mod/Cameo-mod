@@ -189,13 +189,18 @@ def emit_chip(tag, family_name, damage, vt, level=None):
     d = CHIPS_LEVEL.get((family_name, level), CHIPS[family_name])
     floor = CHIP_FLOOR[family_name]
     spread = CHIP_SPREAD_LEVEL.get((family_name, level), CHIP_SPREAD[family_name])
-    order = ["REFLECTOR", "Shield", "None", "Flak", "Plate", "Heroic",
+    order = list(PLATING_CYCLE) + ["Shield", "None", "Flak", "Plate", "Heroic",
              "Scout", "Light", "Medium", "Heavy", "Superheavy",
              "Wood", "Steel", "Concrete", "Fighter", "Bomber", "Helicopter", "Spaceship"]
     # Through `emit_versus` so the chip obeys the same descending rule as the main and the
-    # %-twin — REFLECTOR and Shield stay pinned at the front, the armors sort by value.
-    rows = emit_versus([(a, d.get(a, floor)) for a in order
-                        if a != "REFLECTOR" or "REFLECTOR" in d])
+    # %-twin — the platings and Shield stay pinned at the front, the armors sort by value.
+    # The platings come from `plating_rows`, not from the CHIPS table: the chip belongs to
+    # the same family, and an armor plating cannot care which warhead of a weapon hit it.
+    # The hand-set `REFLECTOR: 50` the Tesla chip used to carry was a second source for one
+    # cell, which is the same trap that let Tesla's Shield be contested for months.
+    overlays = dict(plating_rows(family_name))
+    rows = emit_versus([(a, overlays.get(a, d.get(a, floor))) for a in order
+                       if a not in PLATING_CYCLE or a in overlays])
     dt = "Prone75Percent, TriggerProne, ExplosionDeath"
     if family_name in FAMILY_INTEGRITY_SCALE:
         dt += ", Tesla"
@@ -337,6 +342,281 @@ def shield_for(family, level, rows):
     return max(1, round(rank * SHIELD_LEVEL.get(level, 1.0) * damped * SHIELD_RAW_SCALE))
 
 
+# --------------------------------------------------------------------------- #
+# HAZMAT and REFLECTOR — the two OVERLAY armors (maintainer, 2026-08-16)
+# --------------------------------------------------------------------------- #
+# *"reflector armor is basically the same as HAZMAT but for energy weapons ... why is it
+#  missing from the waveforce when it is combining plasma and quantum which is an energy
+#  weapon? the values need to somehow reflect that"*
+#
+# These are not ladder rungs. They are CONDITIONAL overlay armors granted by upgrades —
+# `Armor@HAZMAT` (hazmat suits, Soviet reactive armor: 329 actors) and `Armor@REFLECTOR`
+# (Allied reflective plating: 16 actors) — carried IN ADDITION to the actor's real armor.
+#
+# ⚠ **THE ARITHMETIC CHANGED UNDER W21 AND THE VALUES DID NOT.** When armor types
+# MULTIPLIED, a row of 50 meant exactly "halve the incoming damage", independent of the
+# target. They now AVERAGE, so the same 50 gives
+#
+#     effective = (base + 50) / 2   ->   at base 100, that is 75, a 25% cut, NOT 50%.
+#
+# **Averaging silently halved every overlay's effect.** And it caps the mechanic: with one
+# overlay the best possible is `(base + 10) / 2`, i.e. ~45% — no row value can ever reach
+# the old 50%, because that would need a row of 0, which is immunity.
+#
+# So the row is solved from the REDUCTION it should produce rather than written directly:
+#
+#     effective = (100 + x) / 2 = 100 - R x 100      ->      x = 100 - 200 R
+#
+# The reference base of 100 is not an assumption — W25 S1 pinned every family's Versus MEAN
+# to exactly 100, so 100 IS the average armor row a weapon writes. That is the second thing
+# S1 bought: overlay armors became solvable.
+#
+# With `OVERLAY_DEPTH = 0.45` (the ceiling above), `x = 100 - 90 x share`. A share of 1.0
+# lands on the window floor of 10 and reproduces the old multiplicative feel as closely as
+# averaging permits; a share of 0 OMITS the row.
+#
+# ⚠ **OMITTING IS NOT THE SAME AS WRITING 100.** Both the engine and Cameo's override filter
+# on `Versus.ContainsKey(armorType)`, so an absent row drops the overlay OUT of the average
+# entirely, while `100` pulls the result toward 100. Omission is the only way to say "this
+# weapon does not care about the plating", and it is what a zero share must produce.
+# --------------------------------------------------------------------------- #
+# THE FIVE ARMOR PLATINGS (maintainer, 2026-08-16)
+# --------------------------------------------------------------------------- #
+# *"Hazmat against fire, chemical and radiation, BLAST against all the HE weapons,
+#  reflector against energy, composite against AP weapons and bullets ... they are all good
+#  against a certain family but bad against another and medium against everything else ...
+#  also they will average on 100% each across all weapon types ... and we need to make sure
+#  that every weapon family has an armor counter and every armor type has a weapon counter"*
+#
+# ⚠ **These get a row in EVERY template, exactly like `Shield`.** That is what makes LAYER
+# SELECTION safe: the plating replaces the class armor while it is on, and a sparse row set
+# would leave the armor list empty for the weapon classes it does not counter — which both
+# the engine and `AreaDamageWarhead.DamageVersus` answer with 100, i.e. a superheavy tank
+# taking full damage from bullets. Full columns, no gaps.
+#
+# ⚠ **A plating is a TRADE, not an upgrade.** Being WEAK against something is the design, so
+# the "an upgrade must never increase damage" invariant does NOT apply to these the way it
+# applied to the old additive overlays — it is superseded by the column law below. What makes
+# that safe is selection: only one row is ever read, so a weak row is a chosen exposure
+# rather than a penalty stacked on top of the class armor.
+#
+# THE COLUMN LAW: every plating's mean across all templates is the SAME, so no plating is
+# stronger overall — they differ only in WHAT they are strong against. This is the transpose
+# of W25 S1 (which pins each WEAPON's mean across armors) and the two cannot conflict:
+# platings live in NON_ARMOR_ROWS, so they never entered S1's row mean, and S1's armors never
+# enter this column mean.
+#
+# ⚠ **The common mean is 70, NOT 100, and the difference is a measured bug fix.** A plating
+# REPLACES the class armor, so what matters is how its column compares to the one it
+# displaces — and six of the sixteen class armors already average better than 100 (`Heroic`
+# 74.3, the four aircraft 76-80). At a mean of 100 a hero or an aircraft that took a plating
+# got 25-35% WORSE, and `td_gdi_upgrade_heavyaircraftarmorplating` is live. That is the same
+# failure as the old averaging bug arriving by a different route: not stacking badly, but
+# DISPLACING SOMETHING BETTER. 70 sits just under `Heroic`'s 74.3, so a plating is a genuine
+# upgrade for every armor it can replace. The maintainer's law is untouched — its purpose was
+# that platings be equal to EACH OTHER, which any common mean satisfies. The ~30% durability
+# this grants must then be PRICED (see E1); it is not free, it is merely not yet charged for.
+PLATING_TARGET_MEAN = 70.0
+#
+# NAMING: every plating is ALL CAPS (maintainer, 2026-08-16) — the class armors are
+# TitleCase (`None`, `Superheavy`, `Concrete`), so the case alone tells a reader which LAYER
+# a Versus row belongs to without having to remember the taxonomy. Each name is the most
+# recognisable real term for its role rather than a coined one:
+#
+#   HAZMAT     the sealed / filtered suit — already an all-caps acronym in the real world
+#   COMPOSITE  Chobham-type ceramic matrix, the standard word for modern armour
+#   BLAST      names the threat, as HAZMAT does; `SPALL` (the liner) was the alternative and
+#              is more precise but less legible — this is a one-word revert either way
+#   REFLECTOR  the mirrored / ablative coating
+#
+# THE CYCLE: FOUR platings over the roster's four real damage axes, each countering one and
+# weak to the next — `thermo -> kinetic -> blast -> energy -> thermo`. Every step is a defeat
+# mechanism, not flavour:
+#
+#   HAZMAT     counters thermochemical  weak to KINETIC  a seal has no mass; a bullet passes
+#                                                        through a rubber suit
+#   COMPOSITE  counters kinetic+SHAPED  weak to BLAST    ceramic shatters a penetrator and ERA
+#                                                        breaks a jet — a real tank carries
+#                                                        both — but neither spreads an impulse
+#   BLAST      counters blast           weak to ENERGY   a liner absorbs mechanical impulse,
+#                                                        and a beam delivers none
+#   REFLECTOR  counters energy          weak to THERMO   flame and corrosives foul the surface,
+#                                                        and a dull mirror is just thin plate
+#
+# ⚠ **`Reactive` was cut on the measurement, not on taste** (§H2). Composition share across
+# all 33 families: thermochemical 27.4%, kinetic 23.4%, blast 22.7%, energy 20.1% — and
+# shaped charge **6.4%**, with only `MissileAP` shaped-led. It failed the maintainer's own
+# niche test, the one that already retired `Insulated`, `Damping` and `Warding`. The `shaped`
+# AXIS survives as an honest description of what those warheads are; it is simply counted
+# under `COMPOSITE`, which is how a real tank is built anyway.
+#
+# A four-cycle is not degenerate: each plating is weak to what the NEXT one counters, so it is
+# one 4-cycle rather than two mirrored 2-cycles. (An earlier note claimed only an ODD cycle
+# could avoid that collapse — wrong; what matters is that no two platings counter each other's
+# weakness.)
+PLATING_AXES = ("thermo", "kinetic", "shaped", "blast", "energy")
+PLATING_CYCLE = {                  # plating: (axes it counters, axes it is weak to)
+    "HAZMAT":          (("thermo",),            ("kinetic", "shaped")),
+    "COMPOSITE":       (("kinetic", "shaped"),  ("blast",)),
+    "BLAST":           (("blast",),             ("energy",)),
+    "REFLECTOR":       (("energy",),            ("thermo",)),
+    # --- THE GENERIC PLATING (maintainer, 2026-08-17) --------------------------------- #
+    # *"there should also be a generic ARMOR armor type called ARMOR that receives 100%
+    #  damage from everything. This is for the things like Scrap or Junkarmor and the
+    #  StarCraft and Warcraft armor upgrades. So in a way this could be our fifth armor
+    #  type."*
+    #
+    # It counters nothing and is weak to nothing, so `plating_raw` returns a FLAT 100 for
+    # every family — "100% damage from everything", exactly as stated — and the column law
+    # then scales that flat row to the common mean like any other plating. No special case
+    # is needed anywhere: the empty tuples ARE the definition.
+    #
+    # It is the fifth plating the roster CAN support, and it sidesteps §H2 entirely: it is
+    # not a fifth damage AXIS (which the measurement showed cannot be even) but a fifth
+    # CHOICE with no axis at all. So the four-way partition stays exactly as even as it was.
+    #
+    # In play it is the HEDGE: identical average durability to the four specialists, but
+    # flat, so it is never punished for guessing wrong. Against a known opponent a specialist
+    # beats it; against an unknown one it does not. That is a real decision rather than a
+    # filler option — and it is the honest home for every generic "+armor" upgrade
+    # (Yuri scrap, Forgotten junk armor, the StarCraft/Warcraft armor and carapace levels),
+    # which have no business carrying a counter-play identity they were never designed with.
+    "ARMOR":           ((), ()),
+}
+# How much a full share moves the row away from the mean — so a pure-thermo weapon reads half
+# against HAZMAT and half again as much against REFLECTOR, before the column is normalised.
+PLATING_DEPTH = 0.50
+
+# Each PRIMITIVE family's damage composition over the five axes; shares sum to 1. Blends
+# average their parents, so a new blend is classified for free. This is the same kind of
+# design table as PHYSICS_RANK — measured against nothing, argued from what the weapon IS.
+COMPOSITION = {
+    # --- KINETIC: a solid mass arrives at speed. Defeated by hard, brittle ceramic that
+    # shatters or erodes the penetrator before it reaches the backing plate — which is what
+    # composite (Chobham-type) armour IS.
+    "Bullet":      {"kinetic": 1.00},
+    "Sniper":      {"kinetic": 1.00},
+    "Melee":       {"kinetic": 1.00},                   # a blade is a slow, sharp penetrator
+    "Arrow":       {"kinetic": 1.00},
+    "Railgun":     {"kinetic": 0.85, "energy": 0.15},   # a SLUG; the energy is in the launcher
+    "CannonAP":    {"kinetic": 0.75, "shaped": 0.25},   # APFSDS, the canonical KE dart
+    # Fragments are METAL MOVING FAST, not overpressure — which is exactly why "flak jacket"
+    # is a real garment and why fragmentation sleeves are rated in kinetic terms. Both of
+    # these were blast-led in the first draft, which credited them to the wrong counter.
+    "Flak":        {"kinetic": 0.60, "blast": 0.40},
+    "MissileAA":   {"kinetic": 0.55, "blast": 0.45},    # continuous-rod / frag warheads
+    # --- SHAPED CHARGE: a metal JET formed by an explosive-driven liner, defeated by making
+    # the jet form early or wander — ERA, slat, spaced plate. Nothing about mass or hardness.
+    "MissileAP":   {"shaped": 0.90, "blast": 0.10},     # HEAT/ATGM
+    "MissileHE":   {"blast": 0.75, "shaped": 0.25},
+    # --- BLAST: overpressure and shock through the structure, defeated by absorbing and
+    # spreading impulse — spall liners, V-hulls, standoff.
+    "CannonHE":    {"blast": 0.90, "kinetic": 0.10},
+    "Demolition":  {"blast": 1.00},
+    "Concussion":  {"blast": 1.00},
+    "Sonic":       {"blast": 0.70, "energy": 0.30},     # a pressure wave IS overpressure
+    "Thermobaric": {"blast": 0.60, "thermo": 0.40},     # fuel-air: overpressure + burn
+    # --- THERMOCHEMICAL: agents and thermal load, defeated by SEALING and insulating.
+    "Flame":       {"thermo": 1.00},
+    "Inferno":     {"thermo": 1.00},
+    "Chemical":    {"thermo": 1.00},
+    "Toxic":       {"thermo": 1.00},
+    "Cryo":        {"thermo": 1.00},
+    "Nuclear":     {"thermo": 0.50, "blast": 0.40, "energy": 0.10},
+    # --- ENERGY: radiated or conducted, defeated by REFLECTING or ablating it away.
+    "Laser":       {"energy": 1.00},
+    "Prism":       {"energy": 1.00},
+    "Tesla":       {"energy": 1.00},
+    "Storm":       {"energy": 0.90, "blast": 0.10},
+    "Magic":       {"energy": 0.60, "thermo": 0.20, "blast": 0.20},
+}
+# Where a blend's parent list understates what the weapon physically IS.
+COMPOSITION_OVERRIDE = {
+    # Flame + Chemical gives Plasma a pure thermo reading, but plasma is ionised and radiates.
+    "Plasma": {"thermo": 0.55, "energy": 0.45},
+}
+
+
+def composition(name):
+    """A family's share over PLATING_AXES; blends average their parents."""
+    if name in COMPOSITION_OVERRIDE:
+        raw = COMPOSITION_OVERRIDE[name]
+    elif name in COMPOSITION:
+        raw = COMPOSITION[name]
+    elif name in BLEND_FAMILIES:
+        parents = BLEND_FAMILIES[name][0]
+        raw = {}
+        for p in parents:
+            for axis, share in composition(p).items():
+                raw[axis] = raw.get(axis, 0.0) + share / len(parents)
+    else:
+        raw = {}
+    total = sum(raw.values())
+    return {a: raw.get(a, 0.0) / total if total else 0.0 for a in PLATING_AXES}
+
+
+def plating_raw(family):
+    """Un-normalised row per plating: flat, minus what it counters, plus what beats it.
+
+    Counter and weakness are SETS of axes, not single axes — `COMPOSITE` answers both
+    kinetic penetrators and shaped-charge jets, so it sums both shares.
+    """
+    comp = composition(family)
+    return {p: 100.0 * (1 - PLATING_DEPTH * sum(comp[a] for a in counters)
+                        + PLATING_DEPTH * sum(comp[a] for a in weak))
+            for p, (counters, weak) in PLATING_CYCLE.items()}
+
+
+def _plating_scales():
+    """Per-plating factor pinning each COLUMN's mean to 100 across every emitted template.
+
+    Computed here rather than in a second phase because a plating value depends only on the
+    FAMILY, and the set of templates the generator emits is fully determined by the tables
+    above — so the column mean is knowable without generating anything.
+    """
+    families = []
+    for nm, (_b, _d, _a, levels) in WEAPONS.items():
+        if nm not in HAND_TUNED:
+            families += [nm] * len(levels)
+    for nm, (_p, _n, _s, levels) in INHERIT_FAMILIES.items():
+        families += [nm] * len(levels)
+    for nm, (_p, _s, levels) in BLEND_FAMILIES.items():
+        families += [nm] * len(levels)
+    families += ["Storm"] * len(STORM_LEVELS)
+    scales = {}
+    for p in PLATING_CYCLE:
+        vals = [plating_raw(f)[p] for f in families]
+        mean = sum(vals) / len(vals) if vals else 100.0
+        scales[p] = PLATING_TARGET_MEAN / mean if mean else 1.0
+    return scales
+
+
+_PLATING_SCALES = None
+
+
+def plating_rows(family):
+    """`[(plating, value)]` — the five columns, each normalised to a mean of 100.
+
+    The scales are computed once, on first use, because `_plating_scales` reads WEAPONS /
+    BLEND_FAMILIES / STORM_LEVELS, which are defined further down this file.
+    """
+    global _PLATING_SCALES
+    if _PLATING_SCALES is None:
+        _PLATING_SCALES = _plating_scales()
+    raw = plating_raw(family)
+    return [(p, max(VERSUS_FLOOR, min(VERSUS_CEILING,
+                                      round(raw[p] * _PLATING_SCALES[p]))))
+            for p in PLATING_CYCLE]
+
+
+# ⚠ The earlier two-axis overlay model (CHEM_SHARE / ENERGY_SHARE / OVERLAY_DEPTH, with
+# a clamp keeping every row below the class floor) is SUPERSEDED by the five-plating
+# matrix above. It solved the wrong problem: it treated a plating as an ADDITIVE overlay
+# averaged into the class armor, so it had to guarantee the row could never make things
+# worse. Under layer SELECTION only one row is ever read, and being weak against one axis
+# is the whole design — so the clamp would have deleted the counter-play it was protecting.
+
+
 def table(order16, step, top, floor, shield):
     rows = [("Shield", shield)]
     for i, a in enumerate(order16):
@@ -427,7 +707,7 @@ BAND_LOW = 2.0                      # DESIGN.md §12.0 rule 5 — the target ban
 DERIVED_ARMORS = ("Heroic", "Airborne")
 # Rows that live on a Versus node but are not armor classes, so they never enter a
 # profile statistic: the shield LAYER, the HAZMAT gate, Tesla's REFLECTOR.
-NON_ARMOR_ROWS = ("Shield", "HAZMAT", "REFLECTOR")
+NON_ARMOR_ROWS = ("Shield",) + tuple(PLATING_CYCLE)
 
 
 # --------------------------------------------------------------------------- #
@@ -483,6 +763,116 @@ NON_ARMOR_ROWS = ("Shield", "HAZMAT", "REFLECTOR")
 MEAN_TARGET = 100.0
 
 
+# --------------------------------------------------------------------------- #
+# W25 S2 — THE CLASS TILT (maintainer, 2026-08-16)
+# --------------------------------------------------------------------------- #
+# *"light weapons have a bigger damage to light armor types while heavy weapons have a
+#  bigger damage to heavy armor types with medium weapons having bigger damage to medium
+#  armor types ... all inside their own family (compared for example light, medium and
+#  heavy flame weapons) ... and super just deals a more flat damage to everything so it's
+#  overall good (but still doesn't have the same values, just a more flat curve)"*
+#
+# With the mean pinned at 100 by S1, a tilt is FREE: it costs nothing in total output, it
+# only moves where the output lands. That is what makes this expressible at all.
+#
+# The maintainer wrote the tilt as three armor SETS (SHIELD_AND_NORMALISATION_PLAN §6c):
+#
+#     Light  -> None · Wood · Scout · Light · Fighter
+#     Medium -> Flak · Steel · Medium · Bomber · Helicopter
+#     Heavy  -> Plate · Concrete · Heavy · Superheavy · Spaceship
+#
+# Implemented as ladder POSITION rather than as a hard-coded set, because position is what
+# those sets ARE: the lightest rung of every ladder, the middle rung of every ladder, the
+# heaviest rung of every ladder. Reading them off `LADDERS` reproduces all three sets
+# exactly and keeps working if a ladder ever gains a rung, where a literal set would
+# silently leave the new armor untilted.
+#
+# ⚠ **THE TILT MUST NEVER REORDER A LADDER.** The two-level ordering law (maintainer
+# 2026-08-01, "the most important part") fixes which armor in a ladder takes the biggest
+# value, and a Heavy-level tilt on an anti-LIGHT family pushes exactly the wrong way — left
+# alone it would invert `None > Flak > Plate` and make a rifle best against plate. So the
+# tilt is applied to the VALUES, and then each armor is given back the RANK it held before:
+#
+#   * where the tilt agrees with the family's direction it SHARPENS the ladder;
+#   * where it disagrees it FLATTENS it;
+#   * it can never invert it, and it needs no `direction` argument — the profile's own
+#     order is the authority, which is what makes this work for the blends too (they have
+#     no `build_order` at all, their shape comes from averaging their parents).
+#
+# The relative statement the maintainer asked for survives intact: `Scout` takes a larger
+# share of Flame_Light's output than of Flame_Heavy's, and `Superheavy` the reverse.
+#
+# `TILT_RATIO` is the weight span across a ladder, so 1.5 means the favoured end is pulled
+# 1.5x harder than the disfavoured end BEFORE renormalisation. Chosen to stay inside the
+# measured field band (2/4/8) after the sharpening it causes — see the audit below.
+TILT_RATIO = 1.5
+# Super is not merely untilted, it is actively FLATTENED to the band's flat end: it is the
+# generalist, so it should have the shallowest curve of any level. Never to EQUAL values —
+# the no-ties law still binds; "flat" here means "lowest spread", not "uniform".
+SUPER_RATIO = BAND_LOW
+
+
+def tilt_exponent(level, pos, n):
+    """Where position `pos` of `n` sits in this level's favour, in [-0.5, +0.5].
+
+    All three tilts share one range, so `TILT_RATIO` means the same thing at every level.
+    `Trace` is the sub-Light tier and tilts with Light.
+    """
+    if n <= 1:
+        return 0.0
+    t = pos / (n - 1)
+    if level in ("Light", "Trace"):
+        return 0.5 - t                       # favours the lightest rung
+    if level == "Medium":
+        return 0.5 - 2 * abs(t - 0.5)        # favours the middle rungs
+    if level == "Heavy":
+        return t - 0.5                       # favours the heaviest rung
+    return 0.0                               # Super: no tilt, flattened instead
+
+
+def class_tilt(rows, level):
+    """Apply the level's class tilt to a MAIN profile, preserving every ladder's order."""
+    vals = dict(rows)
+    live = [v for a, v in rows if a not in NON_ARMOR_ROWS]
+    if not live or max(live) <= min(live):
+        return rows          # Sonic / Magic are flat BY DESIGN; a tilt would destroy that
+    out = dict(vals)
+    for ladder in LADDERS.values():
+        # Derived armors are excluded: `Heroic` is a PRODUCT of two other cells (§12.0b),
+        # so it has to be recomputed from the finished profile rather than tilted like an
+        # independent rung. That is also why §6c assigns it to no tier.
+        rungs = [a for a in ladder if a in vals and a not in DERIVED_ARMORS]
+        if len(rungs) < 2:
+            continue
+        n = len(rungs)
+        tilted = [vals[a] * TILT_RATIO ** tilt_exponent(level, i, n)
+                  for i, a in enumerate(rungs)]
+        # Give each armor back the rank it held BEFORE the tilt (see the warning above).
+        # `-vals[a]` ranks descending; the index breaks ties stably, so a ladder that
+        # already had two equal values keeps the ordering law's sequence between them.
+        order = sorted(range(n), key=lambda i: (-vals[rungs[i]], i))
+        for slot, i in enumerate(order):
+            out[rungs[i]] = sorted(tilted, reverse=True)[slot]
+    if level == "Super":
+        # The generalist: compress toward the band's flat end about the geometric mean.
+        body = [v for a, v in out.items() if a not in NON_ARMOR_ROWS and v > 0]
+        lo, hi = min(body), max(body)
+        if lo > 0 and hi / lo > SUPER_RATIO:
+            g = statistics.geometric_mean(body)
+            alpha = math.log(SUPER_RATIO) / math.log(hi / lo)
+            out = {a: (v if a in NON_ARMOR_ROWS else g * (max(v, 1.0) / g) ** alpha)
+                   for a, v in out.items()}
+    # Re-derive the products LAST, from the finished profile (§12.0b) — a derived value
+    # computed before the last cell moves is not derived, it is stale.
+    peak = max(v for a, v in out.items()
+               if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS)
+    for name, (first, second) in (("Heroic", ("Plate", "Scout")),
+                                  ("Airborne", ("Helicopter", "Scout"))):
+        if name in out and first in out and second in out and peak > 0:
+            out[name] = out[first] * out[second] / peak
+    return [(a, out[a]) for a, _ in rows]
+
+
 def _powerlaw(vals, alpha):
     g = statistics.geometric_mean([max(v, 1.0) for v in vals])
     return [g * (max(v, 1.0) / g) ** alpha for v in vals]
@@ -530,7 +920,62 @@ def mean_normalise(rows, target=MEAN_TARGET):
     return [(a, fixed.get(a, v)) for a, v in rows]
 
 
-def finish_blend(rows):
+def blend_direction(name, values):
+    """A blend's LIGHT/HEAVY direction: its parents' majority, else its own lean.
+
+    A blend has no `WEAPONS` entry, so `build_order` never runs for it and it has no
+    declared direction — which is exactly how eight families came to violate the ordering
+    law (see `relay_ladders`). The parents do declare one, and for seven of the eight they
+    agree unanimously.
+
+    The eighth is `Plasma` = `Flame`(light) + `Chemical`(heavy), a genuine 50/50 split. A
+    coin-flip default would be a hidden design decision, so the tie is settled by the
+    AVERAGED PROFILE ITSELF: whichever way the measured average already leans is the way it
+    is laid out. That keeps the answer derived from data rather than chosen, and it stays
+    correct if either parent's profile is ever re-measured.
+    """
+    parents = BLEND_FAMILIES.get(name, ([], None, None))[0]
+    votes = [WEAPONS[p][1] for p in parents if p in WEAPONS]
+    heavy, light = votes.count("heavy"), votes.count("light")
+    if heavy != light:
+        return "heavy" if heavy > light else "light"
+    lean = 0.0                       # sum of (heaviest rung - lightest rung) per ladder
+    for ladder in LADDERS.values():
+        rungs = [a for a in ladder if a in values and a not in DERIVED_ARMORS]
+        if len(rungs) >= 2:
+            lean += values[rungs[-1]] - values[rungs[0]]
+    return "heavy" if lean > 0 else "light"
+
+
+def relay_ladders(values, direction):
+    """Re-lay every macro ladder in `direction`, keeping the VALUES exactly.
+
+    ⚠ **This is the ordering law applied to blends, and it was missing.** The law
+    (maintainer 2026-08-01, "the most important part") fixes each ladder's direction, and
+    the reference side enforces it via `aggregate_archetype.lawful_profile`. Blends skipped
+    it entirely: `blend_versus` averages its parents per-armor, and averaging profiles that
+    disagree about direction produces a ladder that is monotone in NEITHER — measured, 23
+    ladders across 8 families, e.g. `Quantum_Light AIR` reading
+    `Fighter 65 · Bomber 63 · Helicopter 52 · Spaceship 81`. A player cannot predict that
+    from the weapon's type, which is the entire point the law exists to serve.
+
+    Only the PAIRING changes: the measured magnitudes, plateaus and cliffs all survive, and
+    are simply reassigned along the ladder in the lawful order. Same method, and same
+    justification, as `lawful_profile` on the reference side.
+    """
+    out = dict(values)
+    for ladder in LADDERS.values():
+        rungs = [a for a in ladder if a in values and a not in DERIVED_ARMORS]
+        if len(rungs) < 2:
+            continue
+        # `heavy` = best against the heaviest rung, so the biggest value goes to the END.
+        targets = list(reversed(rungs)) if direction == "heavy" else rungs
+        for armor, value in zip(targets, sorted((values[a] for a in rungs), reverse=True)):
+            out[armor] = value
+    return out
+
+
+def finish_blend(rows, name=None):
     """Repair a BLEND profile: re-derive its derived armors, then re-sharpen it.
 
     A blend is the per-armor AVERAGE of its parents, and averaging does two things
@@ -553,14 +998,21 @@ def finish_blend(rows):
        ordering and the geometric centre.
     """
     values = dict(rows)
-    peak = max(v for a, v in rows if a != "Shield" and a not in DERIVED_ARMORS)
-    for name, (first, second) in (("Heroic", ("Plate", "Scout")),
-                                  ("Airborne", ("Helicopter", "Scout"))):
-        if name in values and first in values and second in values and peak > 0:
-            values[name] = values[first] * values[second] / peak
+    # 0. THE ORDERING LAW, which blends used to skip entirely. Must run FIRST: the derived
+    #    armors below are computed from `Plate`/`Scout`, so re-laying afterwards would
+    #    derive them from cells that are about to move.
+    if name is not None:
+        values = relay_ladders(values, blend_direction(name, values))
+
+    peak = max(v for a, v in values.items()
+               if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS)
+    for derived, (first, second) in (("Heroic", ("Plate", "Scout")),
+                                     ("Airborne", ("Helicopter", "Scout"))):
+        if derived in values and first in values and second in values and peak > 0:
+            values[derived] = values[first] * values[second] / peak
 
     ladder = [v for a, v in values.items()
-              if a != "Shield" and a not in DERIVED_ARMORS and v > 0]
+              if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS and v > 0]
     if len(ladder) >= 2:
         hi, lo = max(ladder), min(ladder)
         if lo > 0 and 1.0 < hi / lo < BAND_LOW:
@@ -570,10 +1022,33 @@ def finish_blend(rows):
                       for a, v in values.items()}
 
     # Back inside the window, multiplicatively so the spread just set survives.
-    top = max(values.values())
-    scale = min(1.0, VERSUS_CEILING / top) if top > 0 else 1.0
-    out = [(a, int(round(values[a] * scale))) for a, _ in rows]
-    return sorted(distinct_ints(out), key=lambda r: -r[1])
+    #
+    # ⚠ **THE WINDOW SCALE MUST IGNORE THE PSEUDO-ARMORS.** `max(values.values())` used to
+    # include `Shield`, which is deliberately OUTSIDE the [10, 200] window in both
+    # directions — so the shield row, not the armor ladder, decided the scale for the whole
+    # profile. That was a quiet 2x crush while Shield ran 100..400; once phase 1 began
+    # emitting Shield in CENTI-UNITS it became catastrophic: `Quantum_Light` scaled by
+    # 200/18535 = 0.011, every armor rounded to 0 or 1, and `distinct_ints`' floor-repair
+    # pass then FABRICATED the entire ladder from the emit order (10, 11, 12, 14 ...).
+    #
+    # It was invisible because `mean_normalise` runs afterwards and scales the garbage back
+    # up to a mean of 100, so the profiles looked plausible and passed every window check.
+    # The only symptom was the 23 non-monotone ladders logged as E9 — which were never a
+    # missing ordering pass at all, but a ladder that had stopped carrying data.
+    ladder_top = max((v for a, v in values.items() if a not in NON_ARMOR_ROWS),
+                     default=0.0)
+    scale = min(1.0, VERSUS_CEILING / ladder_top) if ladder_top > 0 else 1.0
+    out = distinct_ints([(a, int(round(values[a] * scale))) for a, _ in rows])
+    # Re-lay ONE more time, on the finished integers. `distinct_ints` separates ties by
+    # walking the row list, and that list is in emit order rather than ladder order — so a
+    # raw tie (`Storm_Light` had `Bomber 16` and `Helicopter 16`) gets broken in whichever
+    # direction the list happened to run, re-inverting a ladder that was already lawful.
+    # A second pass is safe by construction: it only PERMUTES an already-valid multiset
+    # within each ladder, so distinctness and the window both survive untouched.
+    if name is not None:
+        final = relay_ladders(dict(out), blend_direction(name, dict(out)))
+        out = [(a, final[a]) for a, _ in out]
+    return sorted(out, key=lambda r: -r[1])
 
 
 def reference_main(name, order16, level):
@@ -617,7 +1092,7 @@ def reference_main(name, order16, level):
     return sorted(rows, key=lambda r: -r[1])
 
 
-def emit_versus(rows, indent="\t\t\t", hazmat=None):
+def emit_versus(rows, indent="\t\t\t"):
     """Emit a `Versus:` node: pseudo-rows first, then armors DESCENDING by value.
 
     Maintainer 2026-08-16: *"the percentage versus values are not ordered by power like
@@ -642,7 +1117,7 @@ def emit_versus(rows, indent="\t\t\t", hazmat=None):
     the [10, 200] window in both directions, so sorting it in would drag it to an end and
     hide the ladder it is not part of.
     """
-    out = [] if hazmat is None else [f"{indent}HAZMAT: {hazmat}"]
+    out = []
     lead = [r for r in rows if r[0] in NON_ARMOR_ROWS]
     body = sorted((r for r in rows if r[0] not in NON_ARMOR_ROWS), key=lambda r: -r[1])
     for a, v in lead + body:
@@ -669,7 +1144,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
            spreads=(400, 600, 800, 1000),
            falloffs=DEFAULT_FALLOFFS,
            damage_types="Prone75Percent, TriggerProne, ExplosionDeath",
-           hazmat=50, reload=25, rng=5120, versus_override=None, physical_states=None,
+           overlays=True, reload=25, rng=5120, versus_override=None, physical_states=None,
            profile_family=None):
     """mode: None = sloped (from order16); 'flat' = Sonic (uniform flat, small %);
     'pct' = Magic (tiny uniform flat + LARGE uniform % of max HP).
@@ -684,8 +1159,8 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         pct_damage = damage // 2000              # 1% chip per 2000 main flat damage
         if versus_override is not None:          # blend family (e.g. Plasma = avg of Flame + Chemical)
             main, pct = versus_override(level)
-            main = finish_blend(main)            # re-derive Heroic/Airborne, un-flatten
-            hz = hazmat
+            main = finish_blend(main, name)      # ordering law, re-derive Heroic/Airborne, un-flatten
+            hz = overlays
         elif mode == "flat":                       # Sonic: ignores armor on FLAT
             fv, fp = FLAT_VALUES[level], FLAT_PCT[level]
             main = [("Shield", fv)] + [(a, fv) for a in allr]
@@ -715,7 +1190,11 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
             # one change (denominator + values) or every %-twin deals a fifth or
             # five times. Until then the twin carries the ORDER, not the shape.
             pct = table(order16, 1, ptop, pfloor, ptop + pfloor)
-            hz = hazmat
+            hz = overlays
+        # W25 S2 — the class tilt, BEFORE the mean is pinned: the tilt moves output between
+        # armors and would otherwise leave the mean off 100. Order-preserving by
+        # construction (see class_tilt), so the two-level ordering law is untouched.
+        main = class_tilt(main, level)
         # W25 S1 — pin the profile's MEAN to 100 before anything reads it. Must run on
         # EVERY branch and BEFORE `shield_for`: Shield's structural term is
         # `sqrt((200+floor)(100+top))`, so it has to see the final ladder, not the
@@ -728,6 +1207,22 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         sv = shield_for(name, level, main)
         if sv is not None:
             main = [("Shield", sv)] + [(a, v) for a, v in main if a != "Shield"]
+        # The OVERLAY armors, derived from the family's composition (see overlay_rows).
+        # Carried inside `main` rather than passed separately so they are automatically
+        # excluded from the mean, the tilt and the Shield scale — all three key off
+        # NON_ARMOR_ROWS — and pinned ahead of the ladder by `emit_versus`.
+        #
+        # ⚠ **EVERY template gets all five, with no exceptions — including Sonic and Magic.**
+        # The flat families used to be skipped because "they ignore armor", and under the old
+        # additive overlay that was harmless. Under layer SELECTION it is a hole: a plated
+        # unit hit by a weapon with no row for its plating leaves the armor list EMPTY, which
+        # `DamageVersus` answers with 100 — so skipping the row would make Sonic and Magic
+        # ignore the plating layer entirely and hit plated units HARDER than unplated ones.
+        # Their identity is untouched: "ignores armor" is a statement about the 16 CLASS
+        # armors, which stay flat. A plating designed against pressure may still blunt a
+        # sonic weapon, and that is the correct reading.
+        main = [r for r in main if r[0] not in PLATING_CYCLE]
+        main = plating_rows(name) + main
         tag = f"{name}_{level}"
         # Energy families are thinned to near single-target; the chip/utility pays for the low spread.
         main_spread = ENERGY_THIN_SPREAD_LEVEL.get((name, level), ENERGY_THIN_SPREAD.get(name, at(spreads, li)))
@@ -750,7 +1245,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
              f"\t\tDamage: {damage}",
              f"\t\tFalloff: {at(falloffs, li)}",
              f"\t\tVersus:",
-             emit_versus(main, hazmat=hz),
+             emit_versus(main),
              f"\t\tDamageTypes: {damage_types}"]
         if name in FAMILY_PHYSICAL_STATE:  # heat/cold/corrosion meter, scaled by main damage
             psn, pss = FAMILY_PHYSICAL_STATE[name]
@@ -758,7 +1253,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         if physical_states:  # multi-state blend (e.g. Plasma: Temperature 50 + Corrosion 50)
             main_wh.append("\t\tPhysicalStates:")
             main_wh += [f"\t\t\t{k}: {v}" for k, v in physical_states.items()]
-        integ = FAMILY_INTEGRITY_SCALE.get(name)  # shield/EMP auto-drain
+        integ = FAMILY_INTEGRITY_SCALE.get(name)  # ELECTRONICS (EMP) auto-drain — NOT a shield
         if integ:
             main_wh.append(f"\t\tIntegrityScale: {integ}")
         percentage_state = FAMILY_PHYSICAL_STATE.get(name) if name in {"Flame", "Chemical", "Inferno", "Cryo"} else None
@@ -863,7 +1358,7 @@ FAMILY_PHYSICAL_STATE = {
     # Plasma (Temperature 50 + Corrosion 50) needs two states on one warhead -> handled at family build.
 }
 
-# Per-family Integrity (shield/EMP) auto-scale: the C# AreaDamage.IntegrityScale drains the victim's
+# Per-family Integrity ELECTRONICS auto-scale: the C# AreaDamage.IntegrityScale drains the victim's
 # shield by `damage x Scale%` on hit, EXACTLY like PhysicalStateScale (auto-tracks the real post-armor
 # damage, so no flat EMP number is ever hand-set and the ordering can't drift). Tesla-content law:
 # Scale = round(100 x Tesla-parents / total-parents) -> pure Tesla 100, Storm (Tesla+Magic) 50,
@@ -873,10 +1368,26 @@ FAMILY_PHYSICAL_STATE = {
 # the passive INotifyDamage drain. The flat AffectsIntegrity warhead stays UPGRADE-only (a concrete
 # bonus on top), so no template emits it. See PHYSICAL_STATE_SYSTEM.md.
 FAMILY_INTEGRITY_SCALE = {
-    "Tesla": 100,                          # pure Tesla = full shield-drain (the disable specialist)
+    "Tesla": 100,                          # pure Tesla = full drain (the EMP-disable specialist)
     "Storm": 50,                          # Tesla+Magic -> 1/2
     "Quantum": 33,                        # Railgun+Laser+Tesla -> 1/3
-    "Waveforce": 20,                      # Flame+Chemical+Railgun+Laser+Tesla -> 1/5
+    # ⚠ `Waveforce: 20` DELETED 2026-08-16 (maintainer order) — it could never fire.
+    #
+    # The drain rate is `(1 if the damage carries the `Tesla` type else 0) + IntegrityScale/100`
+    # per point of damage, against a pool of 100% of max HP. Waveforce is the one integrity
+    # family that never received `Tesla` in its DamageTypes, so it lost the 1:1 passive drain and
+    # kept only its 20% scale — needing **5x the target's max HP** to reach the disable. The
+    # target dies five times over first. Measured, not inferred (PSEUDO_ARMOR_AND_INTEGRITY §B).
+    #
+    # Maintainer: *"waveforce should remove the integrity damage entirely because it can never
+    # actually reach a full integrity damage, so that it is not calculated in the balance formula
+    # without any effect."* Exactly right, and the second half is the important half: a knob that
+    # does nothing in play but is still read by the pricing model is worse than no knob at all,
+    # because the weapon is charged for an effect it cannot deliver.
+    #
+    # The alternative — granting Waveforce the `Tesla` damage type — was NOT taken: that would
+    # give a 3/5-kinetic blend the same EMP status as a Tesla coil, which is a design claim
+    # nobody made. If Waveforce should have an EMP role it needs both halves, deliberately.
 }
 
 # Per-family DamageTypes override. Every family that affects Integrity (has IntegrityScale) MUST carry
@@ -1110,7 +1621,7 @@ def _generate():
     if not wanted or "storm" in wanted:
         print("###### Storm: Tesla_Super + Magic + TeslaSuperExtraDamage/5 (Super-anchored, scaled down) ######")
         print(family("Storm", None, valid_targets(False), STORM_LEVELS,
-                     versus_override=storm_versus, hazmat=None,
+                     versus_override=storm_versus,
                      damage_types="Prone100Percent, TriggerProne, ElectricityDeath, Tesla"))
         print()
 
