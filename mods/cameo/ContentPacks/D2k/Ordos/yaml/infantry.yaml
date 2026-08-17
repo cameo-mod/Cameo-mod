@@ -773,6 +773,7 @@ ordos_leech:
 	Inherits@cloak: ^CloakedVehicle
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130

@@ -49,6 +49,7 @@ protoss_dragoon:
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
 	Inherits@range: ^SingularityChargeUpgrade
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Tooltip:
 		Name: Dragoon
 	Valued:
@@ -108,6 +109,7 @@ protoss_manifold:
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
 	Inherits@range: ^SingularityChargeUpgrade
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Tooltip:
 		Name: Manifold
 	Valued:
@@ -183,6 +185,7 @@ protoss_analogue:
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
 	Inherits@range: ^SingularityChargeUpgrade
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Tooltip:
 		Name: Analogue
 	Valued:
@@ -263,6 +266,7 @@ protoss_idol:
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
 	Inherits@range: ^SingularityChargeUpgrade
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	-ExternalCondition@PropagandaEffect:
 	Tooltip:
 		Name: Idol
@@ -356,6 +360,7 @@ protoss_reaver:
 	Inherits@SHADOWS: ^Shadows
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Tooltip:
 		Name: Reaver
 	Valued:
@@ -436,6 +441,7 @@ protoss_archon:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Tooltip:
 		Name: Archon
 	Valued:
@@ -540,6 +546,7 @@ protoss_atreus:
 	Inherits@armor: ^ProtossGroundArmorUpgrades
 	Inherits@range: ^SingularityChargeUpgrade
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Tooltip:
 		Name: Atreus
 	Valued:
@@ -604,6 +611,7 @@ protoss_positron:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Tooltip:
 		Name: Positron
 	Valued:
