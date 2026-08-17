@@ -206,6 +206,49 @@ claims:
           except OSError: pass
       print(n)
 
+  - id: plating_row_ties
+    value: 0
+    tolerance: 0
+    what: >
+      Emitted families sharing a plating row with another family (ARMOR excluded — it is flat by
+      design). The maintainer's uniqueness law: *"don't put 3 energy weapons exactly on the same
+      versus value"*. Four groups tied before e7fa2d57b. A tie may ONLY be fixed by moving mass
+      across a group boundary onto a second real defeat mechanism — never by fabricated noise.
+    docs: [docs/design/PLATING_COMPOSITION_REFINEMENT.md, docs/design/PLATING_COMBINATION.md]
+    measure: |
+      import sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import gen_weapon_template as gen
+      fams = []
+      for nm, (_b, _d, _a, lv) in gen.WEAPONS.items():
+          if nm not in gen.HAND_TUNED:
+              fams += [nm] * len(lv)
+      for nm, (_p, _n, _s, lv) in gen.INHERIT_FAMILIES.items():
+          fams += [nm] * len(lv)
+      for nm, (_p, _s, lv) in gen.BLEND_FAMILIES.items():
+          fams += [nm] * len(lv)
+      fams += ['Storm'] * len(gen.STORM_LEVELS)
+      cols = [p for p in gen.PLATING_CYCLE if p != 'ARMOR']
+      names = sorted(set(fams))
+      rows = [tuple(dict(gen.plating_rows(f))[c] for c in cols) for f in names]
+      print(len(names) - len(set(rows)))
+
+  - id: plating_families
+    value: 31
+    tolerance: 0
+    what: >
+      Families the generator emits a plating row for. The row count of the matrix in
+      PLATING_COMPOSITION_REFINEMENT.md — so adding a family without updating that table, or
+      dropping one, goes red instead of silently making the document wrong.
+    docs: [docs/design/PLATING_COMPOSITION_REFINEMENT.md]
+    measure: |
+      import sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import gen_weapon_template as gen
+      fams = {nm for nm in gen.WEAPONS if nm not in gen.HAND_TUNED}
+      fams |= set(gen.INHERIT_FAMILIES) | set(gen.BLEND_FAMILIES) | {'Storm'}
+      print(len(fams))
+
   - id: signed_off_class_anchors
     value: 0
     tolerance: 0

@@ -318,32 +318,37 @@ thermal option and hand every heat weapon the anti-infantry spike.
 
 **A dragon's fire breath is fuel combustion with an anti-infantry bite → `Flame`.**
 
-### ⚠ CONTRADICTION FOUND while checking this (unfixed)
+### ✅ CONTRADICTION FOUND while checking this — FIXED (`e7fa2d57b`)
 
-Two tables in `gen_weapon_template.py` describe the same physics and disagree about Inferno:
+Two tables in `gen_weapon_template.py` described the same physics and disagreed about Inferno:
 
 ```
 PHYSICS_RANK["Inferno"] = 0.64      # "blended energy — part field-coupling, part thermal"
 COMPOSITION["Inferno"]  = {"thermo": 1.00}    # ...100% thermal, 0% energy
 ```
 
-`COMPOSITION` drives the plating columns, so Inferno ships with `HAZMAT 35` / `REFLECTOR 103` —
-**byte-identical to Flame**. A focused-energy heat ray should be *reflected* more and *insulated*
-less than a fuel flamethrower; today a REFLECTOR plating does nothing special against it while
-HAZMAT counters it as hard as a flamer.
+`COMPOSITION` drives the plating columns, so Inferno shipped **byte-identical to Flame** and a
+REFLECTOR plating did nothing special against a focused-energy heat ray.
 
-**Proposed fix, derived rather than invented** — take the energy share from the rank table so the
-two agree by construction:
+⚠ **The first fix — deriving the share from the rank table — was itself wrong and has been
+retired.** It over-reached: the two tables answer different questions (how much a FORCE FIELD
+absorbs vs what reaches MATTER), and `Railgun` is the standing disproof that they are one axis
+(rank 0.78, a nearly pure kinetic slug). A derivation like that has to be overruled the moment a
+ruling touches either table — which is exactly what happened when the maintainer ruled Inferno
+*"mostly thermal"* while its rank puts it above the midpoint.
 
-```
-energy_share = (rank[Inferno] - rank[Flame]) / (rank[Prism] - rank[Flame])
-             = (0.64 - 0.50) / (0.76 - 0.50) = 0.538
-COMPOSITION["Inferno"] = {"thermo": 0.46, "energy": 0.54}
-```
+**Shipped instead:** `COMPOSITION["Inferno"] = {"thermo": 0.60, "energy": 0.40}` (the ruling), and
+the anti-drift job moved to `rank_composition_conflicts()`, which constrains no share — a family
+the shield table calls field-coupling must have SOME energy, one it calls thermal/kinetic must
+have none. ⭐ Writing that guard immediately found the SAME drift a second time in **`Cryo`**
+(rank 0.66, a prism chassis, still `thermo 1.00`).
 
-Needs a regenerate + `verify_generator_sync` drift=0 + boot gate, so it is its own commit.
-⚠ Note this is exactly the class of contradiction `audit_doc_claims` **cannot** catch — it is
-code-vs-code, not a documented number.
+Result: `Inferno` HAZMAT **49** / REFLECTOR **75** — reduced by both, far more by HAZMAT, which is
+what the maintainer asked for. Full reasoning: `docs/design/PLATING_COMPOSITION_REFINEMENT.md`.
+
+⚠ Keep the general lesson: this was a **code-vs-code** contradiction, which `audit_doc_claims`
+cannot catch. Two tables describing one reality need a guard of their own, and a guard that
+DERIVES one from the other is too strong — it forbids a legitimate ruling.
 
 ### ⛔ THE PROCEDURE — resolve and INLINE first, remove inherits second, clean up third
 
