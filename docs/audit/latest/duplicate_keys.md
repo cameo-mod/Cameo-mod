@@ -1,29 +1,21 @@
 # audit_duplicate_keys — duplicate keys in one node (silent override)
 
-Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **443**
+Files scanned: **631** — D1 dropped inherits: **89**, D2 merged duplicates: **437**
 
 
 ## D1 — duplicate Inherits key with different values (one template is dropped)
 
 | file | lines | node | key | values |
 |---|---|---|---|---|
-| mods/cameo/audio/d2k.yaml | 30, 31 | D2KGenericVoice | Inherits | ^D2KAudioDefaults vs ^D2KInfantryDeath |
-| mods/cameo/audio/d2k.yaml | 51, 52 | D2KInfantryVoice | Inherits | ^D2KAudioDefaults vs ^D2KInfantryDeath |
-| mods/cameo/audio/d2k.yaml | 79, 80 | D2KFremenVoice | Inherits | ^D2KAudioDefaults vs ^D2KInfantryDeath |
-| mods/cameo/audio/d2k.yaml | 93, 94 | D2KSaboteurVoice | Inherits | ^D2KAudioDefaults vs ^D2KInfantryDeath |
-| mods/cameo/chrome.yaml | 2659, 2660 | sidebar-swempire | Inherits | sidebar-allies vs ^SidebarStarWars |
-| mods/cameo/chrome.yaml | 2684, 2685 | sidebar-swrebels | Inherits | sidebar-soviets vs ^SidebarStarWars |
-| mods/cameo/chrome.yaml | 2711, 2712 | sidebar-swseparatist | Inherits | sidebar-allies vs ^SidebarStarWars2 |
-| mods/cameo/chrome.yaml | 2736, 2737 | sidebar-swhutt | Inherits | sidebar-soviets vs ^SidebarStarWars2 |
 | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml | 202, 203 | harkonnen_repairpad | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
 | mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml | 283, 284 | ixian_repairpad | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
 | mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml | 336, 337 | ordos_repairpad | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml | 221, 222 | japan_waveforceturret | Inherits@AntiTank | ^PrioritizeVehicle vs ^PrioritizeTank |
 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/templates.yaml | 432, 433 | ^RAFIX | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml | 14, 15 | ra1_soviets_barracks | Inherits@ra1_soviets_barracks | ^IsBarrack vs ^Conscription |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 2097, 2100 | ThermobaricNuclearMaverick | Inherits@2 | ^Warhead_Flame_Heavy vs ^NuclearWarhead |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 2221, 2223 | HammerTankCannonThermobaric | Inherits@3 | ^Projectile_Flame_Medium vs HammerTankCannon |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 2328, 2330 | KotinCannonThermobaric | Inherits@3 | ^Projectile_Flame_Medium vs KotinCannon |
+| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 2104, 2107 | ThermobaricNuclearMaverick | Inherits@2 | ^Warhead_Flame_Heavy vs ^NuclearWarhead |
+| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 2228, 2230 | HammerTankCannonThermobaric | Inherits@3 | ^Projectile_Flame_Medium vs HammerTankCannon |
+| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 2335, 2337 | KotinCannonThermobaric | Inherits@3 | ^Projectile_Flame_Medium vs KotinCannon |
 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml | 255, 256 | ra2_allies_alliedservicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
 | mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml | 246, 247 | ra2_soviets_servicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml | 161, 162 | asianalliance_asianservicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
@@ -64,11 +56,19 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml | 362, 363 | ts_nod_servicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
 | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml | 2, 10 | wc2_humans_humanscouttower | Inherits | ^Defense vs ^BuildingPlugProducer |
 | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml | 2, 10 | wc2_orcs_orcwatchtower | Inherits | ^Defense vs ^BuildingPlugProducer |
+| mods/cameo/audio/d2k.yaml | 30, 31 | D2KGenericVoice | Inherits | ^D2KAudioDefaults vs ^D2KInfantryDeath |
+| mods/cameo/audio/d2k.yaml | 51, 52 | D2KInfantryVoice | Inherits | ^D2KAudioDefaults vs ^D2KInfantryDeath |
+| mods/cameo/audio/d2k.yaml | 79, 80 | D2KFremenVoice | Inherits | ^D2KAudioDefaults vs ^D2KInfantryDeath |
+| mods/cameo/audio/d2k.yaml | 93, 94 | D2KSaboteurVoice | Inherits | ^D2KAudioDefaults vs ^D2KInfantryDeath |
+| mods/cameo/chrome.yaml | 2659, 2660 | sidebar-swempire | Inherits | sidebar-allies vs ^SidebarStarWars |
+| mods/cameo/chrome.yaml | 2684, 2685 | sidebar-swrebels | Inherits | sidebar-soviets vs ^SidebarStarWars |
+| mods/cameo/chrome.yaml | 2711, 2712 | sidebar-swseparatist | Inherits | sidebar-allies vs ^SidebarStarWars2 |
+| mods/cameo/chrome.yaml | 2736, 2737 | sidebar-swhutt | Inherits | sidebar-soviets vs ^SidebarStarWars2 |
 | mods/cameo/rules/advancewars.yaml | 4608, 4610 | awcity | Inherits | OILB.Building vs ^BaseBuilding |
 | mods/cameo/rules/darkreign.yaml | 366, 367 | drwaterextract.freedomguard | Inherits@2 | ^BaseBuilding vs ^CashTricklerMultipliers |
 | mods/cameo/rules/darkreign.yaml | 8627, 8631 | drahq.eodalien | Inherits | ^BaseBuilding vs ^Conyard |
-| mods/cameo/rules/defaults.yaml | 1468, 1469 | ^ScoutVehicleTemplate | Inherits@upgrade | ^LightWeightArmorPlating vs ^AdvancedGuerillaTactics |
-| mods/cameo/rules/defaults.yaml | 1490, 1491 | ^SupportVehicleTemplate | Inherits@upgrade | ^LightWeightArmorPlating vs ^AdvancedGuerillaTactics |
+| mods/cameo/rules/defaults.yaml | 1470, 1471 | ^ScoutVehicleTemplate | Inherits@upgrade | ^LightWeightArmorPlating vs ^AdvancedGuerillaTactics |
+| mods/cameo/rules/defaults.yaml | 1492, 1493 | ^SupportVehicleTemplate | Inherits@upgrade | ^LightWeightArmorPlating vs ^AdvancedGuerillaTactics |
 | mods/cameo/rules/defaults.yaml | 2292, 2295 | ^BasicUnit | Inherits@cloak | ^AcceptsCloakCrate vs ^StealthGenCloakable |
 | mods/cameo/rules/generals.yaml | 2502, 2504 | glblackmarket | Inherits | OILB.Building vs ^BaseBuilding |
 | mods/cameo/rules/generals.yaml | 11876, 11878 | usadropzone | Inherits | OILB.Building vs ^BaseBuilding |
@@ -117,7 +117,6 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | ProvidesPrerequisite | 6 |
 | muzzle | 6 |
 | ValidTargets | 6 |
-| extract-raw | 6 |
 | Warhead@1Dam | 6 |
 | AttackTurreted | 5 |
 | WithAmmoPipsDecoration | 5 |
@@ -142,15 +141,13 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | Building | 3 |
 | Health | 3 |
 | GrantConditionOnPrerequisite@2 | 3 |
+| stand | 3 |
 
 
 ## D2 — full list
 
 | file | lines | node | key |
 |---|---|---|---|
-| mods/cameo/chrome/ingame_observer.yaml | 316, 320 | Container@OBSERVER_WIDGETS > Children > Image@REPLAY_PLAYER | Visible |
-| mods/cameo/chrome/settings_display.yaml | 26, 80, 110, 141, 165, 191, 206, 228, 283, 344, 386, 399, 431, 444, 457, 470, 483, 496, 509 | Container@DISPLAY_PANEL > Children > ScrollPanel@SETTINGS_SCROLLPANEL > Children | Container@ROW |
-| mods/cameo/chrome/settings_display.yaml | 66, 269 | Container@DISPLAY_PANEL > Children > ScrollPanel@SETTINGS_SCROLLPANEL > Children | Container@SPACER |
 | mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml | 731, 744 | ixian_rocketturret | AttackTurreted |
 | mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml | 1140, 1161 | ixian_stormlasher | WithMuzzleOverlay |
 | mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml | 1141, 1159 | ixian_stormlasher | WithSpriteBody |
@@ -179,7 +176,7 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml | 33, 35 | ra1_soviets_barracks | ProvidesPrerequisite |
 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml | 731, 737 | ra1_soviets_commissar | WithDecoration@Carryall |
 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml | 1759, 1762 | ra1_soviets_monstertank | WithAmmoPipsDecoration |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 1051, 1053 | FLAK-23-AG | ReloadDelay |
+| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 1058, 1060 | FLAK-23-AG | ReloadDelay |
 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/aircraft.yaml | 155, 170 | ra2_allies_blackeagle | Selectable |
 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml | 264, 268 | ra2_allies_pillbox | ActorStatValues |
 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml | 372, 374 | ra2_allies_guardiangi | ActorStatValues |
@@ -199,7 +196,7 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml | 637, 640 | ra2_soviets_boris | WithInfantryBody |
 | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml | 144, 146 | yuri_bioreactor | ActorStatValues |
 | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/sequences.yaml | 4, 45 | yuri_constructionyard | build |
-| mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml | 487, 538 | yuri_mastermind | AttackTurreted |
+| mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml | 485, 536 | yuri_mastermind | AttackTurreted |
 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml | 305, 336 | kami.asian | WithMoveAnimation |
 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml | 775, 782 | asianalliance_chaostower | Selectable |
 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml | 434, 436 | tsun.asian | ActorStatValues |
@@ -292,9 +289,9 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml | 512, 523 | ts_gdi_techcenter | Selectable |
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml | 555, 570 | ts_gdi_silo | ProvidesPrerequisite@buildingname |
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml | 272, 288 | ts_gdi_titan | RenderVoxels |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 536, 541 | TSHoverMissile | Report |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 604, 618 | TSMammothTusk2II_AA | Projectile |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 982, 984, 988, 991, 994 | TSAAPCCannon | ValidTargets |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 540, 545 | TSHoverMissile | Report |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 608, 622 | TSMammothTusk2II_AA | Projectile |
+| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 996, 998, 1002, 1005, 1008 | TSAAPCCannon | ValidTargets |
 | mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml | 6, 41 | ts_nod_constructionyard | Selectable |
 | mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml | 265, 288 | ts_nod_handof | ProvidesPrerequisite@buildingname |
 | mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml | 316, 340 | ts_nod_warfactory | ProvidesPrerequisite@buildingname |
@@ -320,12 +317,9 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/templates.yaml | 339, 356 | ^WC2Church | Power |
 | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml | 89, 118 | wc2_orcs_catapult | Mobile |
 | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml | 639, 644 | wc2dragonFireExplosion | Projectile |
-| mods/cameo/installer/aftermath.yaml | 6, 16 | aftermath > Install | extract-raw |
-| mods/cameo/installer/aftermath.yaml | 121, 131 | aftermath-linux > Install | extract-raw |
-| mods/cameo/installer/allies95.yaml | 7, 20 | allied > Install | extract-raw |
-| mods/cameo/installer/allies95.yaml | 204, 217 | allied-linux > Install | extract-raw |
-| mods/cameo/installer/soviet95.yaml | 7, 20 | soviet > Install | extract-raw |
-| mods/cameo/installer/soviet95.yaml | 215, 228 | soviet-linux > Install | extract-raw |
+| mods/cameo/chrome/ingame_observer.yaml | 316, 320 | Container@OBSERVER_WIDGETS > Children > Image@REPLAY_PLAYER | Visible |
+| mods/cameo/chrome/settings_display.yaml | 26, 80, 110, 141, 165, 191, 206, 228, 283, 344, 386, 399, 431, 444, 457, 470, 483, 496, 509 | Container@DISPLAY_PANEL > Children > ScrollPanel@SETTINGS_SCROLLPANEL > Children | Container@ROW |
+| mods/cameo/chrome/settings_display.yaml | 66, 269 | Container@DISPLAY_PANEL > Children > ScrollPanel@SETTINGS_SCROLLPANEL > Children | Container@SPACER |
 | mods/cameo/rules/advancewars.yaml | 1068, 1071 | ^AdvanceWarsUniversalPowers | RevealsShroudMultiplier@sonjapower1 |
 | mods/cameo/rules/advancewars.yaml | 1136, 1146 | ^AdvanceWarsVehicleAttack | SpeedMultiplier@jesspower1 |
 | mods/cameo/rules/advancewars.yaml | 2389, 2394 | hq.orange | Production@Research |
@@ -364,8 +358,8 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/rules/defaults.yaml | 3533, 3567 | ^Monster | CombatDebugOverlay |
 | mods/cameo/rules/defaults.yaml | 3918, 4017 | ^BaseBuilding | RepairableBuilding |
 | mods/cameo/rules/defaults.yaml | 3968, 4019 | ^BaseBuilding | WithBuildingRepairDecoration |
-| mods/cameo/rules/defaults.yaml | 6805, 6861 | ^Harvester | DockClientManager |
-| mods/cameo/rules/defaults.yaml | 6848, 6865 | ^Harvester | WithStoresResourcesPipsDecoration |
+| mods/cameo/rules/defaults.yaml | 6681, 6737 | ^Harvester | DockClientManager |
+| mods/cameo/rules/defaults.yaml | 6724, 6741 | ^Harvester | WithStoresResourcesPipsDecoration |
 | mods/cameo/rules/dune2.yaml | 621, 625 | dunemcv | RenderSprites |
 | mods/cameo/rules/generals.yaml | 3618, 3654 | glbggy | RenderSprites |
 | mods/cameo/rules/generals.yaml | 4905, 4937 | glworker | AutoTarget |
@@ -578,7 +572,7 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/weapons/lostunits.yaml | 278, 283 | InfantryExplode | Warhead@3Clust |
 | mods/cameo/weapons/monsters.yaml | 792, 798 | MothershipExplosion | Warhead@11Dam_areanuke3 |
 | mods/cameo/weapons/other.yaml | 1186, 1192 | MothershipExplosion | Warhead@11Dam_areanuke3 |
-| mods/cameo/weapons/redalert2.yaml | 2721, 2729 | LightningBolt | Warhead@TeslaChargedExtraDamage |
+| mods/cameo/weapons/redalert2.yaml | 2718, 2726 | LightningBolt | Warhead@TeslaChargedExtraDamage |
 | mods/cameo/weapons/shockwave.yaml | 1907, 1922 | SGLAngryMobMolotov | Warhead@3Eff |
 | mods/cameo/weapons/sow.yaml | 28, 36 | ^SowFlame | ValidTargets |
 | mods/cameo/weapons/starcraft2.yaml | 7, 18 | zealotPsionicBlades > Warhead@1Dam | Spread |
@@ -589,7 +583,7 @@ Files scanned: **645** — D1 dropped inherits: **89**, D2 merged duplicates: **
 | mods/cameo/weapons/starwars.yaml | 867, 871 | SWNapalm3 | Burst |
 | mods/cameo/weapons/tiberiansun.yaml | 1339, 1341 | TSEngineerPistol | ReloadDelay |
 | mods/cameo/weapons/warcraft2.yaml | 402, 407 | wc2mageBlizzard | ValidTargets |
-| mods/cameo/weapons/weapons.yaml | 3183, 3188 | ^RepairWeapon | Warhead@Defuse1 |
+| mods/cameo/weapons/weapons.yaml | 3108, 3113 | ^RepairWeapon | Warhead@Defuse1 |
 | mods/cameo/weapons/wh40k.yaml | 354, 357 | WH40KShootaBoyzGun | Warhead@1Dam |
 
 

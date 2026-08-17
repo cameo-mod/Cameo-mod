@@ -32,6 +32,18 @@ Current: **W1 ✅ done** (K coefficient + target model, `f8421d345`) · **W2 ⬜
 Devin** (`^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*`) · **W3–W5 ⬜ ready,
 owner Claude** (ledger split, retire weapon-class K, the five missing metrics).
 
+## ▶ ACTIVE — CAMEO CONTENT INSTALLER
+
+- [x] **Manage Content downloads:** hidden `cameo-content` installer mod,
+  Cameo switched to `ContentInstallerFileSystem`, `ContentPackages:` empty so
+  installation stays opt-in; disc-source outputs corrected from `Content/ca/`
+  to `Content/cameo/` (PR #260).
+- [ ] **Disc-source gaps surfaced by the installer going live:** `tsmusic` /
+  `fsmusic` `TestFiles` are not produced by their declared disc sources
+  (Firestorm writes `scores01.mix`), and `Content/cameo/{cnc/desert.mix,
+  ra2/theme.mix, ra2/thememd.mix, expand/*}` are written by disc installs but
+  not mounted by `mods/cameo/mod.yaml`.
+
 ## ▶ ACTIVE — VEHICLE BALANCE APPLY + BACKLOG (2026-07-31)
 
 **Vehicle ladder DESIGN is being re-tuned** — latest table = `docs/balance/anchor_decisions_log.md`

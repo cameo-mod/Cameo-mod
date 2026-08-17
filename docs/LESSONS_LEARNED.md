@@ -22,6 +22,23 @@ is provided for convenience; if it disagrees with README.md, README.md wins.
 
 Do not modify rules, assets, or balance numbers until these documents are in context. When this document and `DESIGN.md` conflict with code or old notes, the repository documents win unless an audit baseline explicitly defers the fix.
 
+## Content installer and music filesystem plumbing (2026-08-11)
+
+- Mounting `^SupportDir|Content/cameo/` does not recursively mount nested
+  packages. A nested `scores.mix` must be mounted explicitly, while the
+  Firestorm directory can be mounted because its `.aud` files are direct
+  children.
+- `Music:` in `mods/cameo/mod.yaml` loads `mods/cameo/music.yaml`; the
+  similarly named `mods/cameo/audio/music.yaml` is not loaded automatically.
+- `ModContent.TestFiles` must match the exact extraction destinations in the
+  download manifest, including every file required for a complete package.
+- Keep `ContentPackages:` empty and omit `RequiredContentFiles:` when content
+  installation must remain opt-in through Manage Content. Installer package
+  `Required` flags do not replace those filesystem-loader checks.
+- `cameo-content` is deliberately hyphenated to match the engine's
+  `*-content` mod convention; it is an explicit exception to Cameo's
+  underscore-only in-mod naming rule.
+
 ## Contents
 
 - [Latest lessons from the July 2026 infantry rebalance pass](#latest-lessons-from-the-july-2026-infantry-rebalance-pass)
