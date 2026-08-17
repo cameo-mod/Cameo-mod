@@ -103,7 +103,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 			"the single PhysicalStateName/Scale above. For a blend, e.g. Plasma: Temperature: 50, Corrosion: 50.")]
 		public readonly Dictionary<string, int> PhysicalStates = new();
 
-		[Desc("Drain the victim's Integrity (shield/EMP) pool by the damage this warhead deals x this",
+		[Desc("Drain the victim's Integrity ELECTRONICS pool by the damage this warhead deals x this",
 			"percentage, SCALED exactly like PhysicalStateScale (auto-tracks the real post-armor/falloff",
 			"damage, so no flat EMP number is hand-set). Cameo Tesla-content law: Tesla 100, Storm 50,",
 			"Quantum 33 (Tesla-parents / total-parents). 0 = off. Put it on the main + _Percentage warheads,",
@@ -183,6 +183,11 @@ namespace OpenRA.Mods.Cameo.Warheads
 			"COMPOSITE",  // ceramic matrix + ERA       — vs kinetic penetrators AND shaped charges
 			"BLAST",      // spall liner / V-hull       — vs HE, demolition, concussion
 			"REFLECTOR",  // ablative / mirrored        — vs directed energy
+			// The GENERIC plating: flat against everything, so it counters nothing and is
+			// punished by nothing. Home for every non-branching "+armor" upgrade (Yuri scrap,
+			// Forgotten junk armor, the StarCraft/Warcraft armor and carapace levels), which
+			// were never designed with a counter-play identity.
+			"ARMOR",
 		};
 
 		protected override int DamageVersus(Actor victim, HitShape shape, WarheadArgs args)
@@ -366,12 +371,18 @@ namespace OpenRA.Mods.Cameo.Warheads
 			physicalState?.ApplyChange(change, firedBy, true);
 		}
 
-		// Drain the victim's Integrity (shield/EMP) pool proportional to the damage just dealt, the same
+		// Drain the victim's Integrity ELECTRONICS pool proportional to the damage just dealt, the same
 		// way ApplyPhysicalState scales a heat/corrosion meter. Auto-tracks the final effective damage
 		// (armor + falloff already baked into `damage`), so the "EMP" self-adjusts with the weapon's
 		// output and never needs a hand-set number. Shared with the _Percentage subclass so both the flat
 		// main and the %HP twin drain the pool; the _ExtraDamage chip never calls this (excluded). No
-		// Integrity trait on the victim (most units have no shield) => a harmless no-op.
+		// Integrity trait on the victim (most units have no electronics pool) => a harmless no-op.
+		//
+		// ⚠ INTEGRITY IS NOT A SHIELD. It absorbs NOTHING — `INotifyDamage` runs after the damage has
+		// already landed on health — so draining it buys the attacker no extra damage, only the EMP
+		// DISABLE when it reaches zero. The shield is `Shielded` (OpenRA.Mods.AS), a separate trait and
+		// a separate layer. `Integrity.cs` had every [Desc] copied verbatim from `Shielded.cs` and this
+		// file inherited the same wrong word; corrected 2026-08-17 on the maintainer's report.
 		protected void ApplyIntegrityScale(Actor victim, Actor firedBy, int damage)
 		{
 			if (damage == 0 || IntegrityScale == 0)

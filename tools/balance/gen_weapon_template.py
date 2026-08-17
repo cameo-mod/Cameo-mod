@@ -460,6 +460,28 @@ PLATING_CYCLE = {                  # plating: (axes it counters, axes it is weak
     "COMPOSITE":       (("kinetic", "shaped"),  ("blast",)),
     "BLAST":           (("blast",),             ("energy",)),
     "REFLECTOR":       (("energy",),            ("thermo",)),
+    # --- THE GENERIC PLATING (maintainer, 2026-08-17) --------------------------------- #
+    # *"there should also be a generic ARMOR armor type called ARMOR that receives 100%
+    #  damage from everything. This is for the things like Scrap or Junkarmor and the
+    #  StarCraft and Warcraft armor upgrades. So in a way this could be our fifth armor
+    #  type."*
+    #
+    # It counters nothing and is weak to nothing, so `plating_raw` returns a FLAT 100 for
+    # every family — "100% damage from everything", exactly as stated — and the column law
+    # then scales that flat row to the common mean like any other plating. No special case
+    # is needed anywhere: the empty tuples ARE the definition.
+    #
+    # It is the fifth plating the roster CAN support, and it sidesteps §H2 entirely: it is
+    # not a fifth damage AXIS (which the measurement showed cannot be even) but a fifth
+    # CHOICE with no axis at all. So the four-way partition stays exactly as even as it was.
+    #
+    # In play it is the HEDGE: identical average durability to the four specialists, but
+    # flat, so it is never punished for guessing wrong. Against a known opponent a specialist
+    # beats it; against an unknown one it does not. That is a real decision rather than a
+    # filler option — and it is the honest home for every generic "+armor" upgrade
+    # (Yuri scrap, Forgotten junk armor, the StarCraft/Warcraft armor and carapace levels),
+    # which have no business carrying a counter-play identity they were never designed with.
+    "ARMOR":           ((), ()),
 }
 # How much a full share moves the row away from the mean — so a pure-thermo weapon reads half
 # against HAZMAT and half again as much against REFLECTOR, before the column is normalised.
@@ -1231,7 +1253,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         if physical_states:  # multi-state blend (e.g. Plasma: Temperature 50 + Corrosion 50)
             main_wh.append("\t\tPhysicalStates:")
             main_wh += [f"\t\t\t{k}: {v}" for k, v in physical_states.items()]
-        integ = FAMILY_INTEGRITY_SCALE.get(name)  # shield/EMP auto-drain
+        integ = FAMILY_INTEGRITY_SCALE.get(name)  # ELECTRONICS (EMP) auto-drain — NOT a shield
         if integ:
             main_wh.append(f"\t\tIntegrityScale: {integ}")
         percentage_state = FAMILY_PHYSICAL_STATE.get(name) if name in {"Flame", "Chemical", "Inferno", "Cryo"} else None
@@ -1336,7 +1358,7 @@ FAMILY_PHYSICAL_STATE = {
     # Plasma (Temperature 50 + Corrosion 50) needs two states on one warhead -> handled at family build.
 }
 
-# Per-family Integrity (shield/EMP) auto-scale: the C# AreaDamage.IntegrityScale drains the victim's
+# Per-family Integrity ELECTRONICS auto-scale: the C# AreaDamage.IntegrityScale drains the victim's
 # shield by `damage x Scale%` on hit, EXACTLY like PhysicalStateScale (auto-tracks the real post-armor
 # damage, so no flat EMP number is ever hand-set and the ordering can't drift). Tesla-content law:
 # Scale = round(100 x Tesla-parents / total-parents) -> pure Tesla 100, Storm (Tesla+Magic) 50,
@@ -1346,7 +1368,7 @@ FAMILY_PHYSICAL_STATE = {
 # the passive INotifyDamage drain. The flat AffectsIntegrity warhead stays UPGRADE-only (a concrete
 # bonus on top), so no template emits it. See PHYSICAL_STATE_SYSTEM.md.
 FAMILY_INTEGRITY_SCALE = {
-    "Tesla": 100,                          # pure Tesla = full shield-drain (the disable specialist)
+    "Tesla": 100,                          # pure Tesla = full drain (the EMP-disable specialist)
     "Storm": 50,                          # Tesla+Magic -> 1/2
     "Quantum": 33,                        # Railgun+Laser+Tesla -> 1/3
     # ⚠ `Waveforce: 20` DELETED 2026-08-16 (maintainer order) — it could never fire.

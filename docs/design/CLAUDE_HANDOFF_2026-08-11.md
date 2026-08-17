@@ -24,7 +24,8 @@ The maintainer separately committed the **Tesla 4-tier** migration (`14713d579`,
 `Tesla` in its DamageTypes, and the extra-damage chips passively drain integrity. I verified drift=1.
 
 ## 2. EMP / Integrity system (full detail in `EMP_INTEGRITY_SYSTEM.md`)
-`AreaDamage.IntegrityScale` drains the victim's `Integrity` shield by `damage × Scale/100` on hit —
+`AreaDamage.IntegrityScale` drains the victim's `Integrity` ELECTRONICS pool (**not** a shield) by
+`damage × Scale/100` on hit —
 Tesla 100 / Storm 50 / Quantum 33 (= 100 × Tesla-parents / total-parents). Integrity pool = 100% MaxHP,
 `AffectedByDamageTypes: Tesla`, so Tesla-typed weapons drain it **twice** (passive 1:1 + IntegrityScale)
 → Tesla disables at 50% HP, Storm ~67%, Quantum ~75%. Flat `Warhead@EMPUnit` is now **upgrade-only**.

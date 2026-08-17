@@ -322,14 +322,19 @@ def shield_hp_factor() -> float:
 def effective_hp(hp: float, shield_flat: float = 0.0, shield_pct: float = 0.0) -> float:
     """HP plus the shield pool, converted to HP-equivalent.
 
-    `Shielded` states its pool as `MaxStrength + MaxPercentageStrength% of max HP`, exactly
-    like `Integrity` — so a 100%-strength shield on a 20 000-HP tank is 20 000 shield points,
-    worth ~9 500 HP.
+    `Shielded` states its pool as `MaxStrength + MaxPercentageStrength% of max HP`, so a
+    100%-strength shield on a 20 000-HP tank is 20 000 shield points, worth ~10 800 HP.
 
-    ⚠ `Integrity` is deliberately NOT added. It is an ELECTRONICS pool that absorbs nothing
-    (`INotifyDamage` runs after the damage lands, see PSEUDO_ARMOR_AND_INTEGRITY §A5), so it
-    buys no survivability at all — it only gates the EMP disable. Pricing it as HP would
+    ⚠ **`Integrity` IS NOT A SHIELD and is deliberately NOT added.** It is an ELECTRONICS
+    pool that absorbs NOTHING — `INotifyDamage` runs after the damage has already landed on
+    health (see PSEUDO_ARMOR_AND_INTEGRITY §A5) — so it buys a unit no survivability
+    whatsoever. All it does is gate the EMP DISABLE when it hits zero. Pricing it as HP would
     charge a unit for durability it does not have.
+
+    It merely happens to state its pool in the same `MaxStrength + MaxPercentageStrength`
+    FORM, which is exactly the resemblance that has caused this confusion repeatedly:
+    `Integrity.cs` shipped for months with every `[Desc]` copied verbatim from `Shielded.cs`,
+    calling itself a shield. Same field shape, unrelated mechanic.
     """
     pool = shield_flat + shield_pct * hp / 100.0
     return hp + pool * shield_hp_factor()
