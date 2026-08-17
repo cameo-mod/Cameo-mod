@@ -1788,7 +1788,8 @@
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
        "^LightChemicalWeapon",
-       "^RA2Grenade"
+       "^RA2Grenade",
+       "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
@@ -5241,7 +5242,8 @@
        "^RailgunWeapon",
        "^ShrapnelWeapon",
        "^MediumChemicalWeapon",
-       "^RA2TankDestroyerCannon"
+       "^RA2TankDestroyerCannon",
+       "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
        "^Warhead_CannonAP_Light"
@@ -5881,7 +5883,8 @@
       "versus_templates": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
-       "^RA2TankDestroyerCannon"
+       "^RA2TankDestroyerCannon",
+       "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
        "^Warhead_CannonAP_Light"
@@ -6417,7 +6420,8 @@
       "slot": "Armament@primary",
       "versus_templates": [
        "^Warhead_Arrow_Light",
-       "^RA2LightMissile"
+       "^RA2LightMissile",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_Arrow_Light",
@@ -6468,7 +6472,8 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryelite",
       "versus_templates": [
-       "RA2HoverMissile"
+       "RA2HoverMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Arrow_Light",
@@ -6672,7 +6677,8 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteThunderbolt",
       "versus_templates": [
-       "RA2ThunderboltMissile"
+       "RA2ThunderboltMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -6820,7 +6826,8 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile"
+       "RA2MultiHoverMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -7018,7 +7025,8 @@
       "requires": "ifv-miss && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteThunderbolt",
       "versus_templates": [
-       "RA2MultiThunderboltMissile"
+       "RA2MultiThunderboltMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -7727,7 +7735,8 @@
       "versus_templates": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
-       "^RA2TankDestroyerCannon"
+       "^RA2TankDestroyerCannon",
+       "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
        "^Warhead_CannonAP_Light"
@@ -8263,7 +8272,8 @@
       "slot": "Armament@primary",
       "versus_templates": [
        "^Warhead_Arrow_Light",
-       "^RA2LightMissile"
+       "^RA2LightMissile",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_Arrow_Light",
@@ -8314,7 +8324,8 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryelite",
       "versus_templates": [
-       "RA2HoverMissile"
+       "RA2HoverMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Arrow_Light",
@@ -8518,7 +8529,8 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteThunderbolt",
       "versus_templates": [
-       "RA2ThunderboltMissile"
+       "RA2ThunderboltMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -8666,7 +8678,8 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile"
+       "RA2MultiHoverMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -8864,7 +8877,8 @@
       "requires": "ifv-miss && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteThunderbolt",
       "versus_templates": [
-       "RA2MultiThunderboltMissile"
+       "RA2MultiThunderboltMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -9575,7 +9589,8 @@
       "versus_templates": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
-       "^RA2TankDestroyerCannon"
+       "^RA2TankDestroyerCannon",
+       "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
        "^Warhead_CannonAP_Light"
@@ -10111,7 +10126,8 @@
       "slot": "Armament@primary",
       "versus_templates": [
        "^Warhead_Arrow_Light",
-       "^RA2LightMissile"
+       "^RA2LightMissile",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_Arrow_Light",
@@ -10162,7 +10178,8 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryelite",
       "versus_templates": [
-       "RA2HoverMissile"
+       "RA2HoverMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Arrow_Light",
@@ -10366,7 +10383,8 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteThunderbolt",
       "versus_templates": [
-       "RA2ThunderboltMissile"
+       "RA2ThunderboltMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -10514,7 +10532,8 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile"
+       "RA2MultiHoverMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -10712,7 +10731,8 @@
       "requires": "ifv-miss && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteThunderbolt",
       "versus_templates": [
-       "RA2MultiThunderboltMissile"
+       "RA2MultiThunderboltMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -11423,7 +11443,8 @@
       "versus_templates": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
-       "^RA2TankDestroyerCannon"
+       "^RA2TankDestroyerCannon",
+       "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
        "^Warhead_CannonAP_Light"
@@ -11959,7 +11980,8 @@
       "slot": "Armament@primary",
       "versus_templates": [
        "^Warhead_Arrow_Light",
-       "^RA2LightMissile"
+       "^RA2LightMissile",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_Arrow_Light",
@@ -12010,7 +12032,8 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryelite",
       "versus_templates": [
-       "RA2HoverMissile"
+       "RA2HoverMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Arrow_Light",
@@ -12214,7 +12237,8 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteThunderbolt",
       "versus_templates": [
-       "RA2ThunderboltMissile"
+       "RA2ThunderboltMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -12362,7 +12386,8 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile"
+       "RA2MultiHoverMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -12560,7 +12585,8 @@
       "requires": "ifv-miss && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteThunderbolt",
       "versus_templates": [
-       "RA2MultiThunderboltMissile"
+       "RA2MultiThunderboltMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -13270,7 +13296,8 @@
       "versus_templates": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
-       "^RA2TankDestroyerCannon"
+       "^RA2TankDestroyerCannon",
+       "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
        "^Warhead_CannonAP_Light"
@@ -13806,7 +13833,8 @@
       "slot": "Armament@primary",
       "versus_templates": [
        "^Warhead_Arrow_Light",
-       "^RA2LightMissile"
+       "^RA2LightMissile",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_Arrow_Light",
@@ -13857,7 +13885,8 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryelite",
       "versus_templates": [
-       "RA2HoverMissile"
+       "RA2HoverMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Arrow_Light",
@@ -14061,7 +14090,8 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteThunderbolt",
       "versus_templates": [
-       "RA2ThunderboltMissile"
+       "RA2ThunderboltMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -14209,7 +14239,8 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile"
+       "RA2MultiHoverMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -14407,7 +14438,8 @@
       "requires": "ifv-miss && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteThunderbolt",
       "versus_templates": [
-       "RA2MultiThunderboltMissile"
+       "RA2MultiThunderboltMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -15117,7 +15149,8 @@
       "versus_templates": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
-       "^RA2TankDestroyerCannon"
+       "^RA2TankDestroyerCannon",
+       "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
        "^Warhead_CannonAP_Light"
@@ -15653,7 +15686,8 @@
       "slot": "Armament@primary",
       "versus_templates": [
        "^Warhead_Arrow_Light",
-       "^RA2LightMissile"
+       "^RA2LightMissile",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_Arrow_Light",
@@ -15704,7 +15738,8 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryelite",
       "versus_templates": [
-       "RA2HoverMissile"
+       "RA2HoverMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Arrow_Light",
@@ -15908,7 +15943,8 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteThunderbolt",
       "versus_templates": [
-       "RA2ThunderboltMissile"
+       "RA2ThunderboltMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -16056,7 +16092,8 @@
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileelite",
       "versus_templates": [
-       "RA2MultiHoverMissile"
+       "RA2MultiHoverMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -16254,7 +16291,8 @@
       "requires": "ifv-miss && rank-elite && ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteThunderbolt",
       "versus_templates": [
-       "RA2MultiThunderboltMissile"
+       "RA2MultiThunderboltMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
@@ -16566,7 +16604,8 @@
       "versus_templates": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
-       "^RA2TankDestroyerCannon"
+       "^RA2TankDestroyerCannon",
+       "^Effect_Iron_Fx_RA2"
       ],
       "warheads": [
        "^Warhead_CannonAP_Light"

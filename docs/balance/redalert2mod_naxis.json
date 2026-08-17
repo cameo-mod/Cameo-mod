@@ -1157,7 +1157,8 @@
       "requires": "!rank-elite",
       "slot": "Armament@AA",
       "versus_templates": [
-       "NaxQuadCannon"
+       "NaxQuadCannon",
+       "^Effect_Flak_Puff_RA2"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -8196,7 +8197,8 @@
       "slot": "Armament@Torp",
       "versus_templates": [
        "^RA2Grenade",
-       "^RA2HeavyMissile"
+       "^RA2HeavyMissile",
+       "^Effect_Watersplash_Large_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -12227,9 +12229,9 @@
       "slot": "Armament@scud",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Effect_Demolition_Heavy",
        "^RA2Grenade",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Terrorist_Explosion_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy",
@@ -12947,7 +12949,8 @@
       "requires": "!rank-elite",
       "slot": "Armament@AA",
       "versus_templates": [
-       "NaxQuadCannon"
+       "NaxQuadCannon",
+       "^Effect_Flak_Puff_RA2"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"

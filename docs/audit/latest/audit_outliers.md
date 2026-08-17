@@ -189,10 +189,10 @@ _none found_
 | Selectable.Bounds | futuretech_launchpad | 5120 | 1024 | 10.8 |
 | Selectable.Bounds | C2KNUKE | 5120 | 1024 | 10.8 |
 | Selectable.Bounds | td_nod_airstrip | 4096 | 1024 | 8.1 |
-| Valued.Cost | cabal_coredefender | 15000 | 1600 | 9.0 |
-| Valued.Cost | schwarzermond_dieglocke | 15000 | 1600 | 9.0 |
-| Valued.Cost | wc2_orcs_orcgoldmine_bot | 15000 | 1600 | 9.0 |
-| Valued.Cost | wc2_humans_humangoldmine_bot | 15000 | 1600 | 9.0 |
+| Valued.Cost | cabal_coredefender | 15000 | 1575 | 9.3 |
+| Valued.Cost | schwarzermond_dieglocke | 15000 | 1575 | 9.3 |
+| Valued.Cost | wc2_orcs_orcgoldmine_bot | 15000 | 1575 | 9.3 |
+| Valued.Cost | wc2_humans_humangoldmine_bot | 15000 | 1575 | 9.3 |
 
 
 _Outliers are leads, not verdicts: epic units are legitimately extreme. Scan for CLUSTERS of similar z-scores — those are unit systems using a stale scale convention._

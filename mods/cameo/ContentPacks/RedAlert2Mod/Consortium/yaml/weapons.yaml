@@ -1464,6 +1464,7 @@ SteelInspectorIonCannonDamage:
 SteelHoverMissile:
 	Inherits: ^ArrowWeapon
 	Inherits@2: ^SteelLightMissile
+	Inherits@fx: ^Effect_Grey_Explosion_Small_RA2
 	Burst: 4
 	BurstDelays: 4
 	Range: 6666
@@ -1485,9 +1486,6 @@ SteelHoverMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_small_grey_explosion
-		ImpactSounds: gexpifva.wav
 
 SteelKatyCannons:
 	Inherits: ^Warhead_CannonHE_Heavy

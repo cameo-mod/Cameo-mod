@@ -439,10 +439,10 @@ RA2MagnetAA_elite:
 RA2PsychicJab:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
 	Inherits@4: ^TankDestroyerCannon
 	Inherits@5: ^LightFlameWeapon
 	Inherits@6: ^FlakWeapon
+	Inherits@fx: ^Effect_Init_Fire_RA2
 	ReloadDelay: 15
 	Range: 4440
 	Report: iiniatta.wav
@@ -490,11 +490,6 @@ RA2PsychicJab:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_initfire
-		ExplosionPalette: ra2effect
-		-ImpactSounds:
-		ValidTargets: Ground, Water
 
 RA2PsychicJab_elite:
 	Inherits: RA2PsychicJab
@@ -591,6 +586,7 @@ PsiWave:
 		ExplosionPalette: ra2effect
 
 PsiWaveX:
+	Inherits@fx: ^Effect_Psi_Wave_RA2
 	ReloadDelay: 300
 	Range: 5000
 	Report: iyurat2a.wav
@@ -601,11 +597,6 @@ PsiWaveX:
 		ValidTargets: Infantry
 		DamageTypes: PsychicDeath
 		Delay: 5
-	Warhead@2Eff: CreateEffect
-		ImpactActors: false
-		AffectsParent: true
-		Explosions: controlwave
-		ExplosionPalette: ra2effect
 
 BoomerLaunch:
 	Inherits: V3Launch
@@ -620,6 +611,7 @@ BoomerLaunch:
 YRBoomerTorpedo:
 	Inherits: ^RA2Grenade
 	Inherits@2: ^RA2HeavyMissile
+	Inherits@fx: ^Effect_Watersplash_Large_RA2
 	ReloadDelay: 176
 	Range: 15000
 	MinRange: 3000
@@ -659,10 +651,6 @@ YRBoomerTorpedo:
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir:
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
 
 ^YuriGatlingCannonProjectileStreak:
 	Projectile: Bullet

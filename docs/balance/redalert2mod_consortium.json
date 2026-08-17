@@ -9539,7 +9539,8 @@
       "slot": "Armament@AG",
       "versus_templates": [
        "^ArrowWeapon",
-       "^SteelLightMissile"
+       "^SteelLightMissile",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -9588,7 +9589,8 @@
       "requires": "rank-elite",
       "slot": "Armament@AGELITE",
       "versus_templates": [
-       "SteelHoverMissile"
+       "SteelHoverMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"

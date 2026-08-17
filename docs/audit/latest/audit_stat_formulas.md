@@ -1,6 +1,6 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **782** across 1909 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **785** across 1910 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
 ## F1 — Repairable.HpPerStep ≠ HP/20  (41)
@@ -478,11 +478,11 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | ra2_allies_ifv_missile | Turreted 60 vs Mobile 30 | must match |
 | ra2_allies_ifv_repair | Turreted 60 vs Mobile 30 | must match |
 | ra2_soviets_flaktrack | Turreted 38 vs Mobile 19 | must match |
+| schwarzermond_komet | Turreted 24 vs Mobile 12 | must match |
 | schwarzermond_laserbeetle | Turreted 34 vs Mobile 17 | must match |
 | schwarzermond_lasertank | Turreted 28 vs Mobile 14 | must match |
 | schwarzermond_lunarpanzer | Turreted 20 vs Mobile 18 | must match |
 | schwarzermond_lunartiger | Turreted 20 vs Mobile 16 | must match |
-| schwarzermond_m200bjagerline | Turreted 24 vs Mobile 12 | must match |
 | steelconsortium_barracuda | Turreted 12 vs Mobile 16 | must match |
 | td_gdi_apc | Turreted 40 vs Mobile 20 | must match |
 | td_gdi_assaultapc | Turreted 25 vs Mobile 20 | must match |
@@ -558,7 +558,7 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | zerg_drone | TurnSpeed 100 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
 
 
-## F11 — turreted artillery missing/incorrect firing-slow (Archer pattern)  (19)
+## F11 — turreted artillery missing/incorrect firing-slow (Archer pattern)  (18)
 
 | actor | actual | expected |
 |---|---|---|
@@ -578,7 +578,6 @@ _243 further infantry inherit Repairable from the infantry base template (^Defau
 | ra2_soviets_teslatank | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | schwarzermond_crystaltank | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | td_nod_ssmlauncher | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| tkm_stryker | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | yuri_magnetron | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | zerg_lurker | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 
@@ -815,28 +814,32 @@ _none found_
 | zerg_scourge | TurnSpeed 40 (Speed 200) | expected 13 = Speed/15 |
 
 
-## F18 — weapons targeting Air whose damage warheads can't hit Air  (20)
+## F18 — weapons targeting Air whose damage warheads can't hit Air  (24)
 
 | actor | actual | expected |
 |---|---|---|
 | beehivecarriertarget | Warhead@1Dam | targets Air but no damage warhead hits Air (used by futuretech_beehivedronecarrier) |
 | boomerlaunch | Warhead@1Dam | targets Air but no damage warhead hits Air (used by yuri_boomersubmarine) |
-| defilerplague | Warhead@HeavyChemicalWeapon, Warhead@HeavyChemicalWeaponFriendlyFire, Warhead@HeavyChemicalWeaponPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by zerg_defiler) |
+| cabaloverkillcharge | Warhead@Tesla_Heavy, Warhead@Tesla_Heavy_Percentage, Warhead@Tesla_Heavy_ExtraDamage | targets Air but no damage warhead hits Air (used by cabal_hunterdronecarrier) |
+| defilerplague | Warhead@Chemical_Heavy, Warhead@Chemical_Heavy_Percentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by zerg_defiler) |
 | ivanattachair | Warhead@2 | targets Air but no damage warhead hits Air (used by ra2_soviets_crazyivan) |
 | naxdefensiveplanetarget | Warhead@1Dam | targets Air but no damage warhead hits Air (used by naxis_airfield, schwarzermond_airfield) |
-| naxdieglocke | Warhead@HeavyChemicalWeapon, Warhead@HeavyChemicalWeaponFriendlyFire, Warhead@HeavyChemicalWeaponPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by schwarzermond_dieglocke) |
+| naxdieglocke | Warhead@Chemical_Heavy, Warhead@Chemical_Heavy_Percentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by schwarzermond_dieglocke) |
 | pdlaserbike | Warhead@1Dam | targets Air but no damage warhead hits Air (used by td_nod_chemicalattackbike, td_nod_reconbike) |
 | pdlaserltnk2 | Warhead@1Dam | targets Air but no damage warhead hits Air (used by td_nod_lighttankmkii) |
+| psionicshockwave | Warhead@Tesla_Super, Warhead@Tesla_Super_Percentage, Warhead@Tesla_Super_ExtraDamage | targets Air but no damage warhead hits Air (used by protoss_archon) |
 | sciencevesseldefensematrix | Warhead@1 | targets Air but no damage warhead hits Air (used by terran_sciencevessel) |
 | tkmpdlaser | Warhead@1Dam | targets Air but no damage warhead hits Air (used by tkm_t72m) |
-| tsassaultcannon | Warhead@FlakWeapon, Warhead@FlakWeaponPercentage, Warhead@Concrete, Warhead@Chaingun | targets Air but no damage warhead hits Air (used by ts_gdi_wolverine) |
-| tsassaultcannontal | Warhead@Chaingun, Warhead@ChaingunPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by ts_gdi_wolverinemkii) |
-| tsfiendshard | Warhead@LightChemicalWeapon, Warhead@LightChemicalWeaponFriendlyFire, Warhead@LightChemicalWeaponPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by forgotten_tiberianfiend) |
+| tsassaultcannon | Warhead@Flak_Medium, Warhead@Flak_Medium_Percentage, Warhead@Bullet_Medium, Warhead@Bullet_Medium_Percentage | targets Air but no damage warhead hits Air (used by ts_gdi_wolverine) |
+| tsassaultcannontal | Warhead@Bullet_Medium, Warhead@Bullet_Medium_Percentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by ts_gdi_wolverinemkii) |
+| tsfiendshard | Warhead@Chemical_Light, Warhead@Chemical_Light_Percentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by forgotten_tiberianfiend) |
 | tsfiendshardblue | Warhead@Grenade, Warhead@GrenadeFriendlyFire, Warhead@GrenadePercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by forgotten_viniferafiend) |
 | tsfiendshardblueup | Warhead@Grenade, Warhead@GrenadeFriendlyFire, Warhead@GrenadePercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by forgotten_viniferafiend) |
 | tsfiendshardup | Warhead@LightChemicalWeapon, Warhead@LightChemicalWeaponFriendlyFire, Warhead@LightChemicalWeaponPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by forgotten_tiberianfiend) |
 | tstacticalchemmissile | Warhead@Concrete | targets Air but no damage warhead hits Air (used by ts_nod_missilesilo) |
 | tstacticalmissile | Warhead@Concrete | targets Air but no damage warhead hits Air (used by ts_nod_missilesilo) |
+| venomlaserburning | Warhead@Inferno_Medium, Warhead@Inferno_Medium_Percentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by td_nod_venom) |
+| venomlaserinferno | Warhead@Inferno_Medium, Warhead@Inferno_Medium_Percentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by td_nod_venom) |
 | wc2deathknightdeathanddecay | Warhead@1Dam_impact | targets Air but no damage warhead hits Air (used by wc2_orcs_deathknight) |
 | wc2mageblizzard | Warhead@1Dam_impact | targets Air but no damage warhead hits Air (used by wc2_humans_archmage, wc2_humans_mage) |
 

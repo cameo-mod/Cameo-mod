@@ -2568,10 +2568,10 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
        "^TankDestroyerCannon",
        "^LightFlameWeapon",
-       "^FlakWeapon"
+       "^FlakWeapon",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -2656,10 +2656,10 @@
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
        "^TankDestroyerCannon",
        "^LightFlameWeapon",
-       "^FlakWeapon"
+       "^FlakWeapon",
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium"
@@ -3718,7 +3718,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^RA2Grenade",
-       "^RA2HeavyMissile"
+       "^RA2HeavyMissile",
+       "^Effect_Watersplash_Large_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",

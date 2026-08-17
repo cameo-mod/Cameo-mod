@@ -1,4 +1,4 @@
-# audit_k_linearity — the flat K must not move when Damage moves
+﻿# audit_k_linearity — the flat K must not move when Damage moves
 
 Analysed **2016** concrete weapons.
 

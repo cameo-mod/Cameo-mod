@@ -389,6 +389,7 @@ tkmturretcannon:
 	Inherits@wh2: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
+	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 28
 	Range: 8683
 	Report: cannon1.aud
@@ -402,18 +403,11 @@ tkmturretcannon:
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage:
 		Damage: 4
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
 tkmltgun:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
+	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 42
 	Range: 5316
 	Report: cannon1.aud
@@ -423,18 +417,11 @@ tkmltgun:
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
 tkm2a46gun:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
+	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 42
 	Range: 6196
 	Report: cannon1.aud
@@ -444,14 +431,6 @@ tkm2a46gun:
 		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
 TKMZazaCannonAG:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Flak_Medium
@@ -574,6 +553,7 @@ t30shell:
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Inherits@2: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 80
 	Range: 22000
 	Report: t30cannon.wav
@@ -603,9 +583,6 @@ t30shell:
 		ValidTargets: Ground, Water
 		Spread: 512
 		Damage: 10
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 	# Warhead@FireShrapnel: FireShrapnel
 	# 	InvalidTargets: FireImmune
 	# 	Weapon: AsianFlameFragment
@@ -700,6 +677,7 @@ sandmarinemortar:
 	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Projectile_Flame_Medium
 	Inherits@4: ^Effect_Flame_Medium
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 135
 	Range: 6464
 	Report: t30cannon.wav
@@ -723,14 +701,12 @@ sandmarinemortar:
 		Damage: 120000
 	Warhead@Flame_Medium_Percentage:
 		Damage: 60
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 bigshieemortar:
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Projectile_Flame_Medium
 	Inherits@4: ^Effect_Flame_Medium
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 86
 	Range: 7238
 	Report: t30cannon.wav
@@ -754,9 +730,6 @@ bigshieemortar:
 		Damage: 80000
 	Warhead@Flame_Medium_Percentage:
 		Damage: 40
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 TKMLockOn:
 	ReloadDelay: 20
 	Range: 10000
@@ -785,6 +758,7 @@ TKMMedicHeal:
 tkmkatyushalalauncherrockets:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
+	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 157
 	Burst: 8
 	BurstDelays: 4
@@ -809,32 +783,18 @@ tkmkatyushalalauncherrockets:
 	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 10
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
 tkmkatyushalalauncherrocketscryo:
 	Inherits: ^CryoMissileProjectile
 	Inherits@2: tkmkatyushalalauncherrockets
+	Inherits@fx: ^Effect_Clsn_Medium_RA2
 	Report: vintatta.wav
 	Range: 14000
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
 tkmkatyushalalauncherrocketsfire:
 	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Effect_Flame_Light
 	Inherits@3: tkmkatyushalalauncherrockets
+	Inherits@fx: ^Effect_Clsn_Medium_RA2
 	Report: vintatta.wav
 	Range: 14000
 	Projectile: Bullet
@@ -859,14 +819,6 @@ tkmkatyushalalauncherrocketsfire:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
 tkmkatyushalalauncherrocketstwin:
 	Inherits: tkmkatyushalalauncherrockets
 	Burst: 16
@@ -1307,6 +1259,7 @@ tkmt72cannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
+	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 76
 	Range: 5469
 	Burst: 1
@@ -1318,19 +1271,12 @@ tkmt72cannon:
 		Damage: 20000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
 
 tkmabramscannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
+	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 76
 	Range: 5469
 	Burst: 1
@@ -1342,14 +1288,6 @@ tkmabramscannon:
 		Damage: 20000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
 
 tkmquadcannonmg:
 	Inherits: ^Warhead_Bullet_Light
@@ -1454,6 +1392,7 @@ tkmrh120gun:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
+	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 46
 	Range: 5672
 	Report: cannon1.aud
@@ -1463,20 +1402,13 @@ tkmrh120gun:
 		Damage: 12000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
 
 tkmtrenchcannon:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
+	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 75
 	Range: 9237
 	Report: cannon1.aud
@@ -1490,14 +1422,6 @@ tkmtrenchcannon:
 		Damage: 20000
 	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 10
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
 
 tkmtrenchdepcannon:
 	Inherits: tkmtrenchcannon

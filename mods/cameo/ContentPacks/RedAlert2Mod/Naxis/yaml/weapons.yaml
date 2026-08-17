@@ -849,6 +849,7 @@ NaxQuadCannon_elite:
 
 NaxQuadCannon_AA:
 	Inherits: NaxQuadCannon
+	Inherits@fx: ^Effect_Flak_Puff_RA2
 	ValidTargets: Air
 	Range: 8052
 	Warhead@Grenade: SpreadDamage
@@ -870,8 +871,6 @@ NaxQuadCannon_AA:
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
 NaxQuadCannon_AA_elite:
@@ -1065,9 +1064,9 @@ NaxiInterceptorGun:
 
 NaxShoeRocket:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@2: ^RA2Grenade
 	Inherits@3: ^RA2MediumMissile
+	Inherits@4: ^Effect_Terrorist_Explosion_RA2
 	-Warhead@Effect1:
 	Report: vaegatta.wav, vaegattb.wav
 	ReloadDelay: 250
@@ -1088,8 +1087,6 @@ NaxShoeRocket:
 		TrailInterval: 1
 		Inaccuracy: 15000
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_terrorist_explosion
-		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine

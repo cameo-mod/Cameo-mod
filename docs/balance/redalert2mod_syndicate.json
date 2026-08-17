@@ -189,7 +189,8 @@
        "^HeavyBomb",
        "^HeavyAAWeapon",
        "^FlakWeapon",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -1131,7 +1132,8 @@
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium",
-       "^RA2FlakWeapon"
+       "^RA2FlakWeapon",
+       "^Effect_Flak_Puff_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium",
@@ -1183,7 +1185,8 @@
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium",
-       "^RA2FlakWeapon"
+       "^RA2FlakWeapon",
+       "^Effect_Flak_Puff_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium",
@@ -2160,7 +2163,8 @@
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^Chaingun",
-       "^SniperWeapon"
+       "^SniperWeapon",
+       "^Effect_Bullet_Light_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -2431,7 +2435,8 @@
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^Chaingun",
-       "^SniperWeapon"
+       "^SniperWeapon",
+       "^Effect_Bullet_Light_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -4776,10 +4781,10 @@
       "slot": "Armament@ARTILLERY",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Effect_Demolition_Heavy",
        "^RA2Grenade",
        "^RA2MediumMissile",
-       "^RA2RadShell"
+       "^RA2RadShell",
+       "^Effect_Terrorist_Explosion_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy",
@@ -5722,7 +5727,8 @@
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
        "^HeavyBomb",
-       "^RA2HeavyMissile"
+       "^RA2HeavyMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -5833,7 +5839,8 @@
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
        "^HeavyBomb",
-       "^RA2HeavyMissile"
+       "^RA2HeavyMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -6414,7 +6421,8 @@
       "requires": "!rank-elite",
       "slot": "Armament@AA",
       "versus_templates": [
-       "DiabloCannon"
+       "DiabloCannon",
+       "^Effect_Flak_Puff_RA2"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -6648,7 +6656,8 @@
        "^HeavyAAWeapon",
        "^LightMissile",
        "^TankDestroyerCannon",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy",
@@ -6745,7 +6754,8 @@
        "^HeavyAAWeapon",
        "^LightMissile",
        "^TankDestroyerCannon",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy",
@@ -7044,7 +7054,8 @@
       "requires": "!rank-elite",
       "slot": "Armament@FlakAA",
       "versus_templates": [
-       "RA2APCFlakCannon"
+       "RA2APCFlakCannon",
+       "^Effect_Flak_Puff_RA2"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -7402,7 +7413,8 @@
        "^HeavyBomb",
        "^HeavyAAWeapon",
        "^FlakWeapon",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -7733,7 +7745,7 @@
       "versus_templates": [
        "^Warhead_MissileHE_Medium",
        "^Projectile_ArtilleryRocket_Medium",
-       "^Effect_MissileHE_Medium_RA2"
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium"
@@ -7771,7 +7783,7 @@
       "versus_templates": [
        "^Warhead_MissileHE_Medium",
        "^Projectile_ArtilleryRocket_Medium",
-       "^Effect_MissileHE_Medium_RA2"
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium"
@@ -7978,7 +7990,8 @@
        "^ShrapnelWeapon",
        "^HeavyBomb",
        "^LightFlameWeapon",
-       "^MediumChemicalWeapon"
+       "^MediumChemicalWeapon",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -8763,9 +8776,9 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
-       "^Effect_Concussion_Medium",
        "^SteelLightMissile",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",

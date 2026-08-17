@@ -175,7 +175,8 @@
        "^MediumChemicalWeapon",
        "^ShrapnelWeapon",
        "^HeavyBomb",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Apoc_Explosion_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -300,7 +301,8 @@
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_MissileAP_Heavy",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_Concussion_Light",
@@ -625,7 +627,8 @@
        "^Warhead_Demolition_Light",
        "^Projectile_Flame_Medium",
        "^Effect_Flame_Medium",
-       "^RA2HeavyMissile"
+       "^RA2HeavyMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Medium",
@@ -1629,7 +1632,7 @@
       "versus_templates": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -2276,7 +2279,8 @@
       "reloaddelay": "90",
       "slot": "Armament",
       "versus_templates": [
-       "AsianSinglePlasma"
+       "AsianSinglePlasma",
+       "^Effect_Twlt_Large_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -2601,7 +2605,8 @@
       "versus_templates": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
+       "^Effect_Railgun_Heavy",
+       "^Effect_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy"
@@ -2738,7 +2743,8 @@
       "reloaddelay": "90",
       "slot": "Armament",
       "versus_templates": [
-       "AsianMLRS"
+       "AsianMLRS",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -4315,7 +4321,7 @@
       "versus_templates": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -4425,7 +4431,7 @@
       "versus_templates": [
        "^Warhead_Flame_Light",
        "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
+       "^Effect_Init_Fire_RA2"
       ],
       "warheads": [
        "^Warhead_Flame_Light"
@@ -4517,7 +4523,8 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^RA2SmallArms"
+       "^RA2SmallArms",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -4686,7 +4693,8 @@
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^RA2SmallArms"
+       "^RA2SmallArms",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Light"
@@ -6011,7 +6019,8 @@
        "^MediumChemicalWeapon",
        "^ShrapnelWeapon",
        "^HeavyBomb",
-       "^RA2HeavyCannon"
+       "^RA2HeavyCannon",
+       "^Effect_Apoc_Explosion_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -6358,7 +6367,8 @@
        "^MediumChemicalWeapon",
        "^ShrapnelWeapon",
        "^HeavyBomb",
-       "^RA2HeavyCannon"
+       "^RA2HeavyCannon",
+       "^Effect_Apoc_Explosion_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Medium",
@@ -6619,7 +6629,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -6690,7 +6701,8 @@
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_Melee_Medium",
-       "^Effect_Melee_Medium"
+       "^Effect_Melee_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Melee_Medium"
@@ -7502,7 +7514,8 @@
       "requires": "!rank-elite",
       "slot": "Armament@AA",
       "versus_templates": [
-       "RA2FlakTrackGun"
+       "RA2FlakTrackGun",
+       "^Effect_Flak_Puff_RA2"
       ],
       "warheads": [
        "^Warhead_Flak_Medium"
@@ -7916,7 +7929,8 @@
       "slot": "Armament@Torp",
       "versus_templates": [
        "^RA2Grenade",
-       "^RA2HeavyMissile"
+       "^RA2HeavyMissile",
+       "^Effect_Watersplash_Large_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -11317,7 +11331,8 @@
       "versus_templates": [
        "^Warhead_Railgun_Heavy",
        "^Projectile_Railgun_Heavy",
-       "^Effect_Railgun_Heavy"
+       "^Effect_Railgun_Heavy",
+       "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy"

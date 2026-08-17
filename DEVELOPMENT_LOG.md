@@ -1,5 +1,114 @@
 # Development Log
 
+## 2026-08-17 — RA2 effect-template final sweep (Shared/Allies/Yuri/redalert2mod/AsianAlliance/Syndicate, boot-gated)
+
+- Completed the final `ra2_*` inline-effect sweep in the loaded RA2 tree
+  (`mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`,
+  `mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml`,
+  `mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml`,
+  `mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml`,
+  `mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml`,
+  `mods/cameo/weapons/redalert2mod.yaml`).
+- Removed the unused `^Effect_Disk_Ray_RA2` template.
+- Updated `^Effect_Psi_Wave_RA2` with `ImpactActors: false` and `AffectsParent: true`
+  and wired `PsiWaveX` to it.
+- Wired `IonPulseDischarge` to `^Effect_Emp_Fx_RA2` and `ChronoshiftImpact` to
+  `^Effect_Chrono_Fd_RA2`, preserving their secondary/glow/distortion warheads.
+- Converted `NaxisBlackBomb`, `AsianOilBomb`, and `RA2FreedomAK47` to the
+  appropriate `^Effect_*_RA2` inherits.
+- Cleaned redundant local `Warhead@Effect` / `-ImpactSounds` blocks from
+  `RA2MirageGun` and `RA2HeavyMirageGun`.
+- Ensured `RA2PsychicJab` `Inherits@fx` is the last inherit.
+- Simplified `DredMissile` and `YRBoomerSCUD` water-effect overrides (removed
+  the `gexpwala` typo sound, kept `ImpactActors: false`).
+- Fixed `LatinBuggyRocket` and `AsianSmallOilBomb` to a single winning
+  `Inherits@fx`.
+- Boot crash on `^Effect_Tesla_Impact_RA2` / `^Effect_Tesla_Heavy` circular
+  inheritance was fixed by inlining the `^Effect_Tesla_Heavy` `EMPUnit` and
+  `ShieldHit` warheads into `^Effect_Tesla_Impact_RA2`, `^Effect_Ion_Ring_RA2`,
+  and `^Effect_Psi_Wave_RA2` instead of inheriting them.
+- Verification: `find_empty_warhead.py = 0`, `audit_empty_warheads.py = 0`,
+  `extract_stats.py` clean, `audit_balance_drift.py` clean,
+  `audit_effect_warhead_names.py` 0 violations, `check_effect_audio.py` OK,
+  `launch-game.cmd` reached the main menu
+  (`MenuPostProcessEffect.PostWorldLoaded` in `perf.log`; no new
+  `exception-*.log` after the successful run). One stale exception log from
+  the pre-fix boot remains (`exception-2026-08-17T161444Z.log`).
+- `python tools/audit/run_all.py` still exits 1 on pre-existing failures
+  (`audit_inherits`, `audit_upgrades`, `audit_fluent`, `audit_basebuilder_crates`,
+  `audit_buildable_order`, `audit_weapon_suffixes`, `audit_warhead_split`);
+  these are unrelated to this effect wiring and pre-date the current sweep.
+- Remaining: `SCTyr` in `StarCraft/Terran/yaml/weapons.yaml` still has a
+  three-explosion `ra2_*` list with no matching single RA2 template; the
+  legacy `mods/cameo/weapons/redalert2.yaml` is excluded from the loaded tree.
+
+## 2026-08-17 — RA2 sprite-named effect template library (foundation + shared/Soviets wiring, boot-gated)
+
+- Generated a complete `^Effect_<family>_<size>_RA2` template library for the
+  54 `ra2_*` effect sequences in `mods/cameo/sequences/misc.yaml` and inserted
+  it into `mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`.
+- Replaced the old `^Effect_MissileHE_Medium_RA2` with the new
+  `^Effect_Explosion_Large_RA2`.
+- Wired the shared RA2 weapon stacks to the new templates:
+  `^RA2FlakWeapon`, `^RA2LightMissile`, `^RA2MediumMissile`,
+  `^RA2HeavyMissile`, `^RA2TankDestroyerCannon`, `^RA2MediumCannon`,
+  `^RA2HeavyCannon`, `^RA2Grenade`, `^RA2TeslaWeapon`, `^RA2RailgunWeapon`,
+  `^RA2EliteEffects`, `RA2UnitExplode`, `RA2UnitExplodeBig`,
+  `RA2BuildingExplode`, `KirovExplode`, `RA2LargeDebris`, `RA2Terrorist`.
+- Wired `RA2RTruckRocket` in `mods/cameo/weapons/redalert2mod.yaml`.
+- Began Soviets concrete cleanup: `RA2TURRETFLAKAA`, `SeaScorpion_AA`,
+  `RA2FLAKAA`, `RA2FlakTrackAAGun`, `RA2KirovBomb`, `RA2KirovBomb_tesla`,
+  `RA2120xmm`, `RA160mmE_fire_elite`, `RA160mmE_tesla_elite`,
+  `RA2UnitExplodeSmall`.
+- Verification: `find_empty_warhead.py = 0`, `extract_stats.py` clean,
+  `audit_balance_drift.py` clean, `launch-game.cmd` reached the main menu
+  (`MenuPostProcessEffect.PostWorldLoaded` in `perf.log`, no new
+  `exception-*.log`).
+- Remaining: wire Allies/Yuri/redalert2mod/Shared concrete weapons that still
+  have inline `Explosions: ra2_*`; sweep RA2Atomic nuke-ball and Lightning
+  Storm ion-ring effects; run `review_resolve_diff.py`; full audit suite has
+  pre-existing failures unrelated to this change.
+
+## 2026-08-17 — RA2 effect template sweep continuation (Shared/redalert2mod/Yuri, Floating Disk, boot-gated)
+
+- `mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`:
+  - `RA2Atomic` now uses `Inherits@fx: ^Effect_Nuke_Ball_RA2`; removed local
+    `Warhead@Effect`, kept radiation warhead.
+  - `^Effect_Ion_Ring_RA2` updated to inherit `^Effect_Tesla_Heavy` and added
+    `ImpactActors: false`; `LightningStormDamage` now `Inherits@fx:` from it,
+    preserving both `SpawnSmokeParticle` warheads.
+  - Added `Warhead@EffectAir` to `^Effect_Tesla_Impact_RA2` and wired
+    `TeslaArmorDischargeDummy` to it, removing its local effect blocks.
+  - Wired remaining concrete weapons to RA2 effect templates:
+    `RA2HoverMissile_elite`, `RA2ThunderboltMissile_elite`,
+    `RA2MultiHoverMissile_elite`, `RA2MultiThunderboltMissile_elite`,
+    `RA2DroneSparks`, `MigMissiles_fire`, `MigMissiles_tesla`, `RA2SCUDELITE`,
+    `RA2DepthCharge` (added `^Effect_Depth_Charge_RA2`).
+  - Added `-ImpactSounds:` to `^Effect_Init_Fire_RA2`.
+- `mods/cameo/weapons/redalert2mod.yaml`:
+  - Wired `AsianHowitzerSplash`, `AsianFlameFragment`, `AsianFlamerTurret`,
+    `SteelHoverMissile_elite`, `MeteorFlameFragment` to RA2 effect templates.
+- `mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml`:
+  - Wired `RA2PsychicJab` to `^Effect_Init_Fire_RA2`.
+- Floating Disk muzzle:
+  - Added `^RA2DiskMuzzle` in `ContentPacks/RedAlert2/Shared/yaml/sequences.yaml`
+    with a `ra2_diskray` sequence.
+  - `yuri_floatingdisk` now `Inherits: ^RA2DiskMuzzle` and overrides
+    `ra2_diskray` with `Scale: 0.9`, `Offset: 0,35`, `Tick: 100`.
+  - `Armament@SECOND` and `Armament@Steal` in
+    `ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml` now use
+    `MuzzleSequence: ra2_diskray`.
+- Skipped weapons already inheriting wired RA2 stacks (e.g., `^RA2MediumMissile`,
+  `^RA2Grenade`, `^RA2TankDestroyerCannon`) and edge cases left for maintainer
+  review: `DredMissile`, `NaxTorpTube` (custom water sound + wired parent),
+  `NaxiMeteor` (glow fields), `MigMissiles_rad` (sprite `ra2radbang` not
+  matching the `ra2_*` underscore convention).
+- Verification: `find_empty_warhead.py = 0`, `extract_stats.py` clean,
+  `audit_balance_drift.py` clean, `launch-game.cmd` reached main menu
+  (`MenuPostProcessEffect.PostWorldLoaded` in `perf.log`, no new
+  `exception-*.log`). `python tools/audit/run_all.py` still reports the same
+  pre-existing failures as the prior session.
+
 ## 2026-07-18 — BALANCE PIPELINE LIVE (all agents read this)
 
 **NEW LAW: never hand-edit balance numbers in yaml.** The pipeline is

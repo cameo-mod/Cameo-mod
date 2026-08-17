@@ -776,6 +776,7 @@ UbermenschLaser_elite:
 NaxiCowDrop:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 50
 	Range: 2000
 	Report: vflolo5a.wav, vflolo5b.wav
@@ -799,10 +800,6 @@ NaxiCowDrop:
 		Explosions: large_splash
 		ImpactSounds: gexpwasa.wav
 		ValidTargets: Water, Underwater
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
 	-Warhead@Effect1:
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 3

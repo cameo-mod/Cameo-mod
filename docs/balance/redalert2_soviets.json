@@ -32,7 +32,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Effect_Demolition_Heavy"
+       "^Effect_Clsn_VeryLarge_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy"
@@ -173,7 +173,7 @@
       "versus_templates": [
        "^Warhead_Tesla_Super",
        "^Projectile_Lightning_Super",
-       "^Effect_Tesla_Super",
+       "^Effect_Kirov_Tesla_RA2",
        "RA2KirovBomb"
       ],
       "warheads": [
@@ -413,7 +413,8 @@
        "^HeavyBomb",
        "^HeavyAAWeapon",
        "^FlakWeapon",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -588,7 +589,8 @@
       "requires": "!rank-elite && ra2_soviets_doctrine_firemunitions",
       "slot": "Armament@fire",
       "versus_templates": [
-       "MigMissiles"
+       "MigMissiles",
+       "^Effect_Terrorist_Explosion_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -666,7 +668,8 @@
       "requires": "!rank-elite && ra2_soviets_doctrine_teslamunitions",
       "slot": "Armament@tesla",
       "versus_templates": [
-       "MigMissiles"
+       "MigMissiles",
+       "^Effect_Kirov_Tesla_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -1509,7 +1512,8 @@
       "slot": "Armament@DeployedEliteFire",
       "versus_templates": [
        "RA160mm_fire",
-       "^RA2EliteEffects"
+       "^RA2EliteEffects",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium",
@@ -1560,7 +1564,8 @@
       "slot": "Armament@DeployedEliteTesla",
       "versus_templates": [
        "RA160mm_tesla",
-       "^RA2EliteEffects"
+       "^RA2EliteEffects",
+       "^Effect_Kirov_Tesla_RA2"
       ],
       "warheads": [
        "^Warhead_Concussion_Medium",
@@ -5311,7 +5316,8 @@
       "versus_templates": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
-       "^RA2HeavyCannon"
+       "^RA2HeavyCannon",
+       "^Effect_Apoc_Explosion_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"

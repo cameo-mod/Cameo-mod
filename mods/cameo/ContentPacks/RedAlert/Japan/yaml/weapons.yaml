@@ -2076,6 +2076,7 @@ NanoArtilleryAG:
 
 NanoReturnHeal:
 	Inherits: NanoReturn
+	Inherits@fx: ^Effect_Emp_Fx_RA2
 	Warhead@Heal: SpreadDamage
 		AffectsParent: true
 		Spread: 1000
@@ -2083,9 +2084,6 @@ NanoReturnHeal:
 		Damage: -10000
 		ValidRelationships: Ally
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_emp_fx
-		ExplosionPalette: ra2effect
-		#ValidTargets: Vehicle
 		ImpactSounds: vifvrepa.wav
 
 NanoSmokeAG:

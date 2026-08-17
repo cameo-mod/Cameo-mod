@@ -5196,7 +5196,8 @@
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "DepthCharge"
+       "DepthCharge",
+       "^Effect_Depth_Charge_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Light"
@@ -7205,7 +7206,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^RA2Grenade",
-       "^RA2HeavyMissile"
+       "^RA2HeavyMissile",
+       "^Effect_Watersplash_Large_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -7424,7 +7426,8 @@
        "^HeavyBomb",
        "^HeavyAAWeapon",
        "^FlakWeapon",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -7599,7 +7602,8 @@
       "requires": "ra2_soviets_doctrine_firemunitions",
       "slot": "Armament@fire",
       "versus_templates": [
-       "MigMissiles"
+       "MigMissiles",
+       "^Effect_Terrorist_Explosion_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -7677,7 +7681,8 @@
       "requires": "ra2_soviets_doctrine_teslamunitions",
       "slot": "Armament@tesla",
       "versus_templates": [
-       "MigMissiles"
+       "MigMissiles",
+       "^Effect_Kirov_Tesla_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"

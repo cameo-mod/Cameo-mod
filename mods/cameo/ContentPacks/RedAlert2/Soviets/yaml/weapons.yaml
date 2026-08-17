@@ -7,10 +7,6 @@ RA2TURRETFLAKAA:
 		Damage: 10000
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
-		ValidTargets: Air
 
 SeaScorpion_AA:
 	Inherits: ^RA2FlakWeapon
@@ -21,14 +17,10 @@ SeaScorpion_AA:
 		Damage: 8000
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
-	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
-		ValidTargets: Air
 
 RA2KirovBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@fx: ^Effect_Clsn_VeryLarge_RA2
 	ReloadDelay: 50
 	Range: 2500
 	Report: vkiratta.wav
@@ -48,16 +40,6 @@ RA2KirovBomb:
 		ValidRelationships: Neutral, Enemy
 		Damage: 40
 		Spread: 4000
-	Warhead@EffectWater: CreateEffect
-		Explosions: large_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_verylarge_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 
 RA2KirovBomb_rad:
 	Inherits@wh: ^Warhead_Chemical_Heavy
@@ -121,7 +103,7 @@ RA2KirovBomb_fire:
 RA2KirovBomb_tesla:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
-	Inherits@fx: ^Effect_Tesla_Super
+	Inherits@fx: ^Effect_Kirov_Tesla_RA2
 	Inherits@2: RA2KirovBomb
 	Warhead@Tesla_Super:
 		Damage: 80000
@@ -134,12 +116,6 @@ RA2KirovBomb_tesla:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Effect1: CreateEffect
-		Delay: 0
-		Explosions: ra2_kirovtesla
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpapoa.wav
-		ValidTargets: Ground, Ship
 	Warhead@Shrapnel: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: TeslaFragmentLarge
@@ -355,11 +331,8 @@ RA160mmE_rad_elite:
 RA160mmE_fire_elite:
 	Inherits: RA160mm_fire
 	Inherits@Elite: ^RA2EliteEffects
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	Range: 12345
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianOilBombFragments
 		Amount: 2
@@ -367,17 +340,17 @@ RA160mmE_fire_elite:
 RA160mmE_tesla_elite:
 	Inherits: RA160mm_tesla
 	Inherits@Elite: ^RA2EliteEffects
+	Inherits@fx: ^Effect_Kirov_Tesla_RA2
 	Range: 12345
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: TeslaFragmentLarge
 		Amount: 2
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_kirovtesla
 
 RA2120xmm:
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^RA2HeavyCannon
+	Inherits@fx: ^Effect_Apoc_Explosion_RA2
 	Range: 6992
 	ReloadDelay: 63
 	Burst: 2
@@ -399,9 +372,6 @@ RA2120xmm:
 		Damage: 4000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_apoc_explosion
-		ImpactSounds: gexpapoa.wav
 
 RA2120xmm_rad:
 	Inherits: ^LightChemicalWeapon
@@ -780,10 +750,6 @@ RA2FLAKAA:
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 		ValidTargets: Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
-		ValidTargets: Air
 
 RA2FLAKAA_elite:
 	Inherits: RA2FLAKAA
@@ -821,10 +787,6 @@ RA2FlakTrackAAGun:
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
 RA2FlakTrackAAGun_elite:
@@ -889,13 +851,4 @@ MigTarget:
 
 RA2UnitExplodeSmall:
 	Inherits: UnitExplodeSmall
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_bang
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp06a.wav, gexp07a.wav, expnew13.wav
-		ValidTargets: Ground, Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water
+	Inherits@fx: ^Effect_Bang_Medium_RA2
