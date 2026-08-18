@@ -231,6 +231,59 @@ claims:
                   break
       print(n)
 
+  - id: meters_filling_before_death
+    value: 1
+    tolerance: 0
+    what: >
+      Fired weapons whose status meter reaches FULL effect while the target still has 25% HP —
+      the maintainer's condition for pricing a meter at all ("it is able to completely freeze a
+      unit BEFORE it dies"). Currently 1 of 367. The ratio is independent of target HP:
+      `2 x damage / Amount` for a discrete apply, `200 / scale` for a damage-scaled meter, so
+      `scale: 100` pins it at exactly 2.0 — the target dies with the meter half full. Raising
+      scale to 267, or lowering PhysicalState MaxValue from 20000 to 7500, is what moves this
+      number; E2's 1.25x multiplier must not be applied until it does.
+    docs: [docs/design/PHYSICAL_STATE_SYSTEM.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
+    measure: |
+      import sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from cameo_model import Model
+      MAXV, BAR = 20000, 0.75
+      m = Model(); rs = m.rs
+      def num(v, d=0.0):
+          try: return float(str(v).strip())
+          except (TypeError, ValueError): return d
+      fired = set()
+      for a in rs.actors:
+          if a.startswith('^'): continue
+          node = rs.resolve(a)
+          if node is None: continue
+          for c in node.children:
+              if c.key == 'Armament' or c.key.startswith('Armament@'):
+                  w = (c.get('Weapon') or '').strip()
+                  if w: fired.add(w)
+      n = 0
+      for w in sorted(fired):
+          node = rs.resolve_weapon(w)
+          if node is None: continue
+          dmg = 0.0; binding = None
+          for wh in node.children:
+              if not wh.key.startswith('Warhead'): continue
+              rel = (wh.get('ValidRelationships') or '').strip()
+              if 'Ally' in rel and 'Enemy' not in rel: continue
+              d = num(wh.get('Damage'))
+              if d > 0 and 'Percentage' not in wh.key: dmg += d
+              st = (wh.get('PhysicalStateName') or '').strip()
+              if st and binding is None:
+                  if (wh.value or '').strip() == 'ApplyPhysicalState':
+                      binding = ('apply', abs(num(wh.get('Amount'))))
+                  else:
+                      binding = ('scaled', abs(num(wh.get('PhysicalStateScale'))))
+          if binding is None or dmg <= 0 or binding[1] <= 0: continue
+          kind, amt = binding
+          ratio = (MAXV * dmg / (amt * 10000)) if kind == 'apply' else (MAXV / (amt * 100))
+          if ratio <= BAR: n += 1
+      print(n)
+
   - id: physical_state_fired_weapons
     value: 367
     tolerance: 0

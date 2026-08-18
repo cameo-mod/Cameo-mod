@@ -6,6 +6,57 @@ small (one C# field + yaml config). Verify against the code before building — 
 
 Companion: `AREADAMAGE_WARHEAD_REBALANCE.md`, `SPREAD_FALLOFF_PLAN.md`; memory `cameo-weapon-differentiation`.
 
+---
+
+## ⛔ THE METER NEVER FILLS IN TIME — measured 2026-08-18, and it blocks E2's pricing
+
+**Maintainer:** *"Cryo seems as strong as Fire IF it is able to completely freeze a unit BEFORE it
+dies, and so goes also the saying about Flame and Corrosion — they can reach their full effect
+before a unit dies at around 25% HP left, right? You need to make sure this works!"*
+
+**It does not work.** Of the **367** fired weapons carrying a meter, **1** reaches full effect
+while the target still has 25% HP. One. `SheridanMissilesCryo`, which carries `Amount: 48000`.
+
+### Why — and ⭐ the target's HP cancels out entirely
+
+Live config (`defaults.yaml`, on 1592 actors): `MaxValue: 20000`, `RelativeToHealth: true` — so an
+incoming change lands as `Amount × 10000 / HP` — with relaxation 5–10 linear + 50–100 health-scaled
+per tick after a 25-tick delay.
+
+```
+discrete `ApplyPhysicalState`      hits_to_fill = MaxValue × HP / (Amount × 10000)
+                                   hits_to_kill = HP / damage
+                                   ratio        = 2 × damage / Amount
+
+damage-scaled `PhysicalStateScale` ratio        = MaxValue / (scale × 100) = 200 / scale
+```
+
+Both ratios are **independent of the target's HP**, which is why this is a structural property of
+the constants rather than a per-unit balance issue. The bar is `ratio ≤ 0.75`. Measured:
+
+| mechanism | n | median ratio | best | reading |
+|---|--:|--:|--:|---|
+| Temperature, damage-scaled | 168 | **2.00** | 2.00 | every flamethrower fills its meter exactly **twice as slowly as it kills** |
+| Corrosion, damage-scaled | 33 | **2.00** | 2.00 | same, by construction |
+| Temperature, discrete apply | 166 | **59.6** | 0.67 | `Amount: 1200` against damage in the tens of thousands |
+
+⚠ **`scale: 100` pins the ratio at exactly 2.0 no matter what the weapon does** — damage cancels
+too. So a flame unit reliably kills its target with the meter around half full, and the "full
+effect" the pricing would pay for is never delivered. The relaxation makes the real figure *worse*
+than these numbers, which ignore decay between shots.
+
+### What makes it work — one constant, three ways to spend it
+
+| fix | value | note |
+|---|---|---|
+| raise `PhysicalStateScale` | 100 → **267** | the meter then fills at 75% of the way to death |
+| lower `MaxValue` | 20000 → **7500** | same effect, one number, applies to every axis at once |
+| raise discrete `Amount` | ≥ **2.67 × damage per shot** | per weapon, so only for the `ApplyPhysicalState` set |
+
+⛔ **E2's 1.25× cost multiplier cannot be applied before one of these lands** — it would charge for
+an effect the unit does not actually deliver. Fix the constant, re-measure this table, then price.
+Claim: `meters_filling_before_death`.
+
 ## 0. WHAT ALREADY EXISTS (verified 2026-08-09)
 
 **Engine traits** (`engine/OpenRA.Mods.Common/Traits/`): `PhysicalState`, `PhysicalStateBar`,
