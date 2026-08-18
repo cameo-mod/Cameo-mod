@@ -262,10 +262,10 @@ PHYSICS_RANK = {
     "Quantum": 0.82, "Railgun": 0.78, "Prism": 0.76, "Laser": 0.74,
     # blended energy — part field-coupling, part thermal
     "Waveforce": 0.70, "Plasma": 0.68, "Inferno": 0.64,
-    # PhotonCannon = 1/3 Waveforce + 2/3 MissileAA, so its shield coupling is the weighted mean:
-    # (0.70 + 2 x 0.34) / 3 = 0.46. One third of it is a resonant beam that couples to a field;
-    # the rest is ordnance, which is what a shield is built to stop.
-    "PhotonCannon": 0.46,
+    # PhotonCannon = Waveforce 25% + CannonHE 25% + MissileAA 50%, so its shield coupling is the
+    # weighted mean: 0.25 x 0.70 + 0.25 x 0.33 + 0.50 x 0.34 = 0.43. A quarter of it is a resonant
+    # beam that couples to a field; the rest is ordnance, which is what a shield is built to stop.
+    "PhotonCannon": 0.43,
     # exotic / field-adjacent
     "Sonic": 0.60, "Magic": 0.58, "Nuclear": 0.56,
     # thermal / chemical — a shield stops heat and reagents well; little field coupling
@@ -1611,30 +1611,32 @@ BLEND_FAMILIES = {
     # Temperature = (Flame 300 + Laser 225) / 5 parents = 105; Corrosion = (Chemical 300) / 5 = 60.
     "Waveforce": (["Flame", "Chemical", "Railgun", "Laser", "Tesla"],
                   {"Temperature": 105, "Corrosion": 60}, L3),
-    # PhotonCannon = Waveforce x MissileAA at ONE THIRD / TWO THIRDS, and DELIBERATELY WITHOUT
-    # METERS (maintainer 2026-08-18: *"a Waveforce x ... combo but without the physical states"*
-    # + *"the photon cannons also need to be very good against air"*). The resonant third gives
-    # anti-shield coupling and anti-infantry reach; the AA two-thirds are why it is the faction's
-    # air defence. It neither burns nor corrodes, so no Temperature and no Corrosion — which also
-    # makes it the first family whose price is pure damage, with nothing for E2 to weight.
+    # PhotonCannon = the maintainer's 3-way — Waveforce 25% / CannonHE 25% / MissileAA 50% — and
+    # DELIBERATELY WITHOUT METERS (2026-08-18: *"a Waveforce x ... combo but without the physical
+    # states"* … *"use a 3 way: waveforce x cannonHE x MissileAA"* … *"the photon cannon should
+    # NOT be better against air than against ground"*). The resonant quarter gives anti-shield
+    # coupling and anti-infantry reach, the HE quarter the ground punch, the AA half the air
+    # defence. It neither burns nor corrodes — no Temperature, no Corrosion — which also makes it
+    # the first family whose price is pure damage, with nothing for E2 to weight.
     #
-    # ⛔ `CannonHE` WAS TRIED AS A THIRD PARENT AND MEASURED OUT. The idea was to protect the
-    # ground half, but CannonHE is specifically anti-air-HOSTILE (Fighter 79, Helicopter 51,
-    # Spaceship 43), so it cancelled the AA parent outright: the 3-way landed at air/ground 0.88
-    # — an anti-armour gun that is BAD against aircraft, the exact opposite of the brief.
+    # ⭐ THE TARGET IS PARITY, and the weighting is what achieves it. Measured air/ground ratios:
     #
-    # ⚠ AND A TRUE 50/50 IS NOT ENOUGH EITHER: it puts Fighter at 95, still below baseline,
-    # because Waveforce's own ladder leans to ground and infantry. Two thirds AA is the point
-    # where the air rows actually clear the ground ones (air/ground 1.11: Fighter 115,
-    # Helicopter 130, Spaceship 134, while Heavy 119 / Superheavy 121 keep the punch).
+    #     equal thirds (Wave/HE/AA)      0.88   air WORSE than ground — fails the brief
+    #     Wave x AA 50/50                0.99   parity, but Fighter sits at 95, below baseline
+    #     Wave x AA 1/3 : 2/3            1.11   air-LED — overshot, and shipped once by mistake
+    #     Wave 25 / HE 25 / AA 50        1.01   ⭐ parity with every row healthy
+    #
+    # ⚠ Equal thirds fails for a specific reason worth keeping: `CannonHE` is anti-air HOSTILE
+    # (Fighter 79, Helicopter 51, Spaceship 43), so one AA share cannot cancel it. Doubling the
+    # AA parent is what buys the ground punch back WITHOUT tipping into an AA-led ladder.
     #
     # ⭐ THE REPEATED PARENTS ARE THE WEIGHTING, not a typo. `blend_versus` averages over the
-    # LIST, so 5 Waveforce primitives against 10 `MissileAA` entries is exactly one third to two
-    # thirds — a weighted blend of a blend and a primitive, which the machinery cannot express
-    # any other way (it averages PARENT FAMILIES, and a blend-of-blends would need the parents
-    # built first — see Waveforce above).
+    # LIST, so 5 Waveforce primitives : 5 CannonHE : 10 MissileAA is exactly 25/25/50 — a
+    # weighted blend of a blend and two primitives, which the machinery cannot express any other
+    # way (it averages PARENT FAMILIES, and a blend-of-blends would need the parents built first
+    # — see Waveforce above).
     "PhotonCannon": (["Flame", "Chemical", "Railgun", "Laser", "Tesla"]
-                     + ["MissileAA"] * 10, {}, L3),
+                     + ["CannonHE"] * 5 + ["MissileAA"] * 10, {}, L3),
 }
 # Fixed emission order for a blend (it has no single light/heavy direction).
 BLEND_ARMOR_ORDER = ["None", "Flak", "Plate", "Heroic", "Scout", "Light", "Medium", "Heavy",

@@ -155,39 +155,40 @@ That catches exactly the drift that shipped twice (`Inferno` 0.64 and `Cryo` 0.6
 
 32 families, 32 distinct rows (`ARMOR` excluded â€” it is flat by definition).
 
+| family | HAZMAT | COMPOSITE | BLAST | REFLECTOR | ARMOR | composition |
 |---|--:|--:|--:|--:|--:|---|
-| Arrow | 105 | 35 | 71 | 68 | 70 | kinetic 1.00 |
+| Arrow | 105 | 35 | 72 | 68 | 70 | kinetic 1.00 |
 | Bullet | 102 | 42 | 68 | 68 | 70 | kinetic 0.90, blast 0.10 |
-| Railgun | 100 | 41 | 77 | 63 | 70 | kinetic 0.85, energy 0.15 |
+| Railgun | 100 | 40 | 77 | 63 | 70 | kinetic 0.85, energy 0.15 |
 | MissileAP | 98 | 44 | 68 | 70 | 70 | thermo 0.05, shaped 0.85, blast 0.10 |
 | Melee | 96 | 53 | 63 | 68 | 70 | kinetic 0.75, blast 0.25 |
-| CannonAP | 95 | 41 | 71 | 73 | 70 | thermo 0.15, kinetic 0.70, shaped 0.15 |
-| Flak | 91 | 64 | 57 | 68 | 70 | kinetic 0.60, blast 0.40 |
-| MissileAA | 89 | 67 | 55 | 68 | 70 | kinetic 0.55, blast 0.45 |
-| PhotonCannon | 80 | 66 | 64 | 69 | 70 | thermo 0.14, kinetic 0.42, shaped 0.02, blast 0.31, energy 0.10 |
+| CannonAP | 95 | 40 | 72 | 73 | 70 | thermo 0.15, kinetic 0.70, shaped 0.15 |
+| Flak | 91 | 63 | 57 | 68 | 70 | kinetic 0.60, blast 0.40 |
+| MissileAA | 89 | 67 | 56 | 68 | 70 | kinetic 0.55, blast 0.45 |
 | MissileHE | 79 | 88 | 45 | 68 | 70 | shaped 0.25, blast 0.75 |
+| PhotonCannon | 79 | 74 | 58 | 69 | 70 | thermo 0.11, kinetic 0.34, shaped 0.01, blast 0.46, energy 0.08 |
 | ChemMissile | 75 | 53 | 70 | 82 | 70 | thermo 0.40, shaped 0.55, blast 0.05 |
 | CannonHE | 74 | 99 | 39 | 68 | 70 | kinetic 0.10, blast 0.90 |
-| ChemCannon | 74 | 51 | 71 | 83 | 70 | thermo 0.45, kinetic 0.35, shaped 0.20 |
-| Quantum | 74 | 61 | 89 | 57 | 70 | thermo 0.18, kinetic 0.28, blast 0.02, energy 0.52 |
+| ChemCannon | 74 | 51 | 72 | 83 | 70 | thermo 0.45, kinetic 0.35, shaped 0.20 |
+| Quantum | 74 | 61 | 90 | 57 | 70 | thermo 0.18, kinetic 0.28, blast 0.02, energy 0.52 |
 | Concussion | 70 | 106 | 36 | 68 | 70 | blast 1.00 |
 | Sonic | 70 | 95 | 57 | 58 | 70 | blast 0.70, energy 0.30 |
-| Prism | 67 | 71 | 104 | 41 | 70 | thermo 0.10, energy 0.90 |
-| Storm | 67 | 74 | 96 | 44 | 70 | thermo 0.10, blast 0.10, energy 0.80 |
-| Demolition | 65 | 101 | 41 | 73 | 70 | thermo 0.15, blast 0.85 |
-| Magic | 63 | 78 | 86 | 54 | 70 | thermo 0.20, blast 0.20, energy 0.60 |
-| Tesla | 63 | 72 | 96 | 49 | 70 | thermo 0.20, blast 0.05, energy 0.75 |
+| Prism | 67 | 70 | 104 | 41 | 70 | thermo 0.10, energy 0.90 |
+| Storm | 67 | 74 | 97 | 44 | 70 | thermo 0.10, blast 0.10, energy 0.80 |
+| Demolition | 65 | 100 | 41 | 73 | 70 | thermo 0.15, blast 0.85 |
+| Magic | 63 | 77 | 86 | 54 | 70 | thermo 0.20, blast 0.20, energy 0.60 |
+| Tesla | 63 | 72 | 97 | 49 | 70 | thermo 0.20, blast 0.05, energy 0.75 |
 | Waveforce | 63 | 64 | 81 | 72 | 70 | thermo 0.43, kinetic 0.17, shaped 0.05, blast 0.04, energy 0.31 |
-| FireMissile | 60 | 82 | 55 | 82 | 70 | thermo 0.42, shaped 0.12, blast 0.45 |
-| Laser | 58 | 71 | 95 | 58 | 70 | thermo 0.35, energy 0.65 |
+| FireMissile | 60 | 82 | 56 | 82 | 70 | thermo 0.42, shaped 0.12, blast 0.45 |
+| Laser | 58 | 70 | 95 | 58 | 70 | thermo 0.35, energy 0.65 |
 | FireCannon | 57 | 87 | 53 | 82 | 70 | thermo 0.42, kinetic 0.05, blast 0.53 |
 | Thermobaric | 56 | 92 | 50 | 82 | 70 | thermo 0.40, blast 0.60 |
-| Chemical | 53 | 62 | 71 | 93 | 70 | thermo 0.75, shaped 0.25 |
-| Cryo | 51 | 67 | 80 | 82 | 70 | thermo 0.65, kinetic 0.10, energy 0.25 |
-| Plasma | 51 | 71 | 88 | 71 | 70 | thermo 0.55, energy 0.45 |
-| Inferno | 49 | 71 | 86 | 75 | 70 | thermo 0.60, energy 0.40 |
+| Chemical | 53 | 62 | 72 | 93 | 70 | thermo 0.75, shaped 0.25 |
+| Cryo | 51 | 67 | 81 | 82 | 70 | thermo 0.65, kinetic 0.10, energy 0.25 |
+| Plasma | 51 | 70 | 88 | 71 | 70 | thermo 0.55, energy 0.45 |
+| Inferno | 49 | 70 | 86 | 75 | 70 | thermo 0.60, energy 0.40 |
 | Flame | 40 | 76 | 66 | 97 | 70 | thermo 0.85, blast 0.15 |
-| Toxic | 35 | 71 | 71 | 102 | 70 | thermo 1.00 |
+| Toxic | 35 | 70 | 72 | 102 | 70 | thermo 1.00 |
 
 **`ARMOR` is 70 for every family BY DESIGN** â€” it is the generic hedge that *"receives 100% damage
 from everything"*, so it must be flat. Varying it would contradict its purpose, and
