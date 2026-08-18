@@ -786,7 +786,6 @@ tkmkatyushalalauncherrockets:
 tkmkatyushalalauncherrocketscryo:
 	Inherits: ^CryoMissileProjectile
 	Inherits@2: tkmkatyushalalauncherrockets
-	Inherits@fx: ^Effect_Clsn_Medium_RA2
 	Report: vintatta.wav
 	Range: 14000
 tkmkatyushalalauncherrocketsfire:
@@ -794,7 +793,6 @@ tkmkatyushalalauncherrocketsfire:
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Effect_Flame_Light
 	Inherits@3: tkmkatyushalalauncherrockets
-	Inherits@fx: ^Effect_Clsn_Medium_RA2
 	Report: vintatta.wav
 	Range: 14000
 	Projectile: Bullet

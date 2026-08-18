@@ -829,7 +829,6 @@ NaxZombieSupportWeaponTanks:
 
 NaxTorpTube:
 	Inherits: RA2TorpTube
-	Inherits@fx: ^Effect_Watersplash_Large_RA2
 	Warhead@EffectWater: CreateEffect
 		ImpactSounds: nax_submissileexp.wav
 

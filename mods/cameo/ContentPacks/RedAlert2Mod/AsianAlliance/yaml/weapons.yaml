@@ -180,7 +180,6 @@ RA2AsianShotgunFanatic1:
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@3: ^RA2SmallArms
 	Inherits@4: ^RA2Chaingun
-	Inherits@5: ^Effect_Bullet_Medium_RA2
 	ReloadDelay: 50
 	Range: 5000
 	Report: aa_sshtgatt.wav
@@ -1755,7 +1754,6 @@ AAGunBoatCannon_elite:
 
 AAGunBoatFlak:
 	Inherits: RA2FlakTrackGun
-	Inherits@fx: ^Effect_Flak_Puff_RA2
 	Range: 9000
 	Burst: 2
 	BurstDelays: 3

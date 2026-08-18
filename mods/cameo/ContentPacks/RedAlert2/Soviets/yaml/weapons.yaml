@@ -765,10 +765,15 @@ RA2FlakTrackGun_elite:
 
 RA2FlakTrackAAGun:
 	Inherits: RA2FlakTrackGun
-	Inherits@2: ^RA2FlakWeapon
+	ReloadDelay: 25
+	Report: aacanon3.aud
 	ValidTargets: Air
 	Range: 8292
 	Projectile: Bullet
+		Image: 50CAL
+		Speed: 10000
+		Inaccuracy: 250
+		Blockable: false
 		-LaunchAngle:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
