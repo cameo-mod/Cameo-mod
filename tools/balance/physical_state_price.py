@@ -183,6 +183,13 @@ def effect_curve(rs, template: str, meter: str, positive: bool):
         gate = _gate_fraction(c.get("RequiresCondition"), conditions, top, sign)
         if gate is None:                      # gated by a condition this sign never grants
             continue
+        if gate >= 0.999:
+            # A consumer that needs a COMPLETELY full meter (`superhot`, `CorrosionMax`) is a
+            # bonus ON TOP of full delivery, not half of the axis. Averaging it in as an equal
+            # member would halve every partial score for an axis that happens to have one, and
+            # `superhot` is 1% of max HP per 25 ticks against `Overheating`'s 150 per tick —
+            # a rounding error deciding the shape of the curve.
+            continue
 
         if base == "ChangesHealthProportionalToPhysicalState":
             # share of DamageAtMaximum at fill x, using the engine's own normalisation

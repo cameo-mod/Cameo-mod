@@ -8,17 +8,16 @@ Companion: `AREADAMAGE_WARHEAD_REBALANCE.md`, `SPREAD_FALLOFF_PLAN.md`; memory `
 
 ---
 
-## ⛔⭐ THE FILL-RACE ARITHMETIC WAS WRONG BY 2–4× — corrected 2026-08-18
+## ⛔⭐ THE METERS WERE NOT THE SAME SHAPE — three defects, all fixed 2026-08-18
 
 **Maintainer:** *"Cryo seems as strong as Fire IF it is able to completely freeze a unit BEFORE it
-dies, and so goes also the saying about Flame and Corrosion — they can reach their full effect
-before a unit dies at around 25% HP left, right? You need to make sure this works!"*
+dies ... they can reach their full effect before a unit dies at around 25% HP left"* and, on being
+shown the asymmetry, *"Temperature has negative values while corrosion doesn't. The absolute
+maximum and minimum values are the same! cryo = -20k heat = 20k and corrosion 20k!"* — i.e. the
+three axes are ONE system and must behave alike. They did not. Model + guards:
+**`tools/balance/physical_state_price.py`**, `tools/tests/test_physical_state_price.py`.
 
-**Everything this section said on 2026-08-18 about the meter "never filling in time" was
-arithmetic, not measurement, and the arithmetic was wrong.** The corrected model and its guards
-live in **`tools/balance/physical_state_price.py`** + `tools/tests/test_physical_state_price.py`.
-
-### The mistake, exactly
+### D1 — the same `Scale` filled heat TWICE as fast as corrosion
 
 `PhysicalState.ApplyChange` health-scales every incoming change through `ScaleChangeToHealth`:
 
@@ -27,89 +26,84 @@ range = Info.MaxValue - Info.MinValue;                    // Created()
 return (int)((long)amount * range / health.MaxHP);        // ScaleChangeToHealth()
 ```
 
-The divisor is the meter's **own range**. But `PhysicalStateInfo.RelativeToHealth` still carries
-this `[Desc]`:
+The divisor is the meter's **own range** — ⚠ NOT the 10000 that `PhysicalStateInfo`'s
+`[Desc]` still advertises (*"divided by HP/10000"*), which is exactly what the first derivation
+trusted. `Temperature` is signed (−20000…20000) so its range is 40000; `Corrosion` shipped
+`MinValue: 0`, range 20000 — **so one number meant two different fill rates.** The fill DISTANCE
+was always the same 20000; only the divisor differed, which makes it an artifact, not a design.
 
-> *"Whether incoming value changes should be scaled relative to unit health (divided by HP/10000)."*
-
-⛔ **That Desc is stale, and trusting it instead of the code is the whole error.** 10000 is not
-`range` for either meter. Worse, the two meters do not even share a range — **`Temperature` is
-SIGNED (−20000…20000) so its range is 40000, while `Corrosion` is 0…20000** — so a single formula
-for both was never going to be right:
+**Fixed:** `Corrosion MinValue: 0 → -20000`. Both meters now:
 
 ```
-damage-scaled   ratio = MaxValue × 100 / (Scale × range)   →  Temperature   50 / Scale
-                                                              Corrosion    100 / Scale
-discrete apply  ratio = MaxValue × damage / (Amount × range) → Temperature  damage / (2 × Amount)
-                                                              Corrosion    damage / Amount
+damage-scaled   ratio = MaxValue × 100 / (Scale × range)   =  50 / Scale
+discrete apply  ratio = MaxValue × damage / (Amount × range)
 ```
 
 ⭐ In the damage-scaled form the target's **MaxHP and the weapon's damage BOTH cancel** — the race
-is a property of the constant alone. That is real, and it is why one constant moved every weapon at
-once. The `200 / scale` and `2 × damage / Amount` in the old text were **4× (Temperature) and 2×
-(Corrosion) too pessimistic**.
+is a property of the constant alone, which is why one constant moves every weapon at once.
+ℹ Negative corrosion is unreachable (nothing feeds it, `RelaxedValue: 0`), and the bar is
+unaffected: `PhysicalStateBar` with `ShowAbsoluteValues: false` measures deviation from relaxed.
 
-### What is actually true
+### D2 — corrosion did nothing at all below HALF the meter
+
+`Corroding` was gated at `LowerValue: 10000` of 20000 while `Overheating` opens at `200` — a **50×
+difference in the opening gate between two axes of the same system.** A corrosion weapon that
+49%-filled the meter had delivered literally nothing.
+**Fixed:** `Corroding LowerValue: 10000 → 200`, and `CorrosionDeadzone` mirrored to `-200…200`.
+
+### D3 — every DoT opened at HALF strength
+
+`ChangesHealthProportionalToPhysicalState` normalises over the **full signed range**
+(`(v − MinValue) / range`) and has no `UseDeviationFromRelaxed` option. On a signed meter that puts
+`DamageAtMinimum: 0` at the *midpoint*, so the burn opened at **75 of 150 per tick** the instant
+`Overheating` was granted — a target one point past the deadzone burned at half maximum.
+**Fixed** in yaml alone: `DamageAtMinimum: -DamageAtMaximum` puts the zero back at a relaxed meter
+(heat −150, corrosion −180, corrosion/hazmat −90). Now `damage = DamageAtMaximum × fill`, exactly.
+
+### What is true after the fixes
 
 | mechanism | bindings | reach full effect before 25% HP |
 |---|--:|--:|
-| Temperature, damage-scaled | 177 | **177 (100%)** |
-| Corrosion, damage-scaled | 33 | **33 (100%)** |
+| Temperature, damage-scaled | 177 | **177** |
+| Corrosion, damage-scaled | 33 | **33** |
 | Temperature, discrete apply | 144 | 4 |
 | Temperature (cryo), discrete apply | 22 | 9 |
 | **total** | **376** | **223 (59.3%)** |
 
-⚠ **`meters_filling_before_death` = 223, not 124 and not 1.** Both earlier values are void.
+⚠ **`meters_filling_before_death` = 223.** The earlier 1 and 124 were measured with the wrong
+formula and are void.
 
-⚠⚠ **The 100 → 300 constant (`354ed5ad3`) was calibrated against the wrong formula.** At the
-ORIGINAL `Scale: 100`, Temperature's ratio was **0.50** — already inside the 0.75 bar, on all 177
-damage-scaled bindings. Only `Corrosion` genuinely failed (ratio exactly **1.00**, full at the
-moment of death), and `150` would have fixed it (0.667). What 300 actually bought:
+⚠⚠ **The 100 → 300 constant (`354ed5ad3`) was calibrated against that wrong formula.** At the
+original `Scale: 100` the ratio was **0.50** — already inside the 0.75 bar. The only meter that
+appeared to fail was Corrosion (ratio 1.00), and that was D1's artifact, not a real shortfall.
+**300 is therefore a 3× faster fill than the bar needs, on every axis** — and the 1.25× ceiling
+cannot charge for it, because 100 and 300 both sit at full delivery. Keeping or dropping it to
+150/100 is a **maintainer call**; nothing has been reverted, because reverting is a balance change.
 
-| axis | Scale 100 | Scale 300 | effect delivered per kill |
-|---|--:|--:|---|
-| heat | ratio 0.50 | ratio 0.167 | 0.686 → 0.896 = **+31%**, uncharged |
-| corrosion | ratio 1.00 ⛔ | ratio 0.333 | 0.375 → 0.792 = **+111%**, the real fix |
-
-**A 3× faster fill is a buff the 1.25× ceiling cannot price**, because both scales already sit at
-full delivery. ⛔ **Open for the maintainer:** keep 300 (a deliberate, now-explicit buff), or drop
-to **150**, the smallest round constant that clears the bar on *both* meters. Reverting is a
-balance change and needs an order — nothing has been reverted.
-
-⛔ **The discrete `ApplyPhysicalState` weapons are still the real gap** (13 of 166 pass). They
-carry an absolute `Amount` against damage in the tens of thousands, so damage does NOT cancel and a
-heavy gun outruns its own meter — `FutureTankCannons` needs **313×** its lifetime to fill one.
+⛔ **The discrete `ApplyPhysicalState` weapons are the remaining gap** (13 of 166 pass). They carry
+an absolute `Amount` against damage in the tens of thousands, so damage does NOT cancel and a heavy
+gun outruns its own meter — `FutureTankCannons` needs **313×** its target's lifetime to fill one.
 Converting them to the damage-scaled mechanism is one rule instead of 166 numbers.
 
-### ⭐ A partial meter is not worth nothing — and the two axes differ completely
+### The effect curve — now one curve for all three axes
 
-The delivery weight cannot be a step function at the bar, because **the effects are graded** and
-their gates are an order of magnitude apart. Measured from the consumer traits on `^CryoFreezable`
-and `^Corrodible`:
+Derived from the consumer traits on `^CryoFreezable` / `^Corrodible`, never assumed:
 
-| axis | gate | share of the axis delivered at 5% / 25% / 50% / 75% / 100% fill |
-|---|--:|---|
-| heat | 1% | 0.26 · 0.31 · 0.38 · 0.44 · 1.00 |
-| cryo | 1% | 0.05 · 0.25 · 0.50 · 0.75 · 1.00 |
-| corrosion | **50%** | 0.00 · 0.00 · 0.50 · 0.75 · 1.00 |
+| axis | consumers | gate | share of the axis at 5% / 25% / 50% / 75% / 100% fill |
+|---|--:|--:|---|
+| heat | 1 (DoT) | 1% | 0.05 · 0.25 · 0.50 · 0.75 · 1.00 |
+| cryo | 2 (slow, damage amp) | 1% | 0.05 · 0.25 · 0.50 · 0.75 · 1.00 |
+| corrosion | 4 (DoT ×2, slow, damage amp) | 1% | 0.05 · 0.25 · 0.50 · 0.75 · 1.00 |
 
-* **`Corroding` is gated at `LowerValue: 10000` of 20000** — every corrosion effect (DoT, slow,
-  damage amplification) needs the meter at **half** before *anything* happens. A corrosion weapon
-  that 49%-fills the meter has done literally nothing.
-* **`Overheating` opens at 200 of 20000 = 1%**, and ⚠ `ChangesHealthProportionalToPhysicalState`
-  normalises over the FULL signed range (`(v − MinValue) / range`) with no
-  `UseDeviationFromRelaxed` option — so on the signed Temperature meter **the burn DoT opens at
-  half strength**, not at zero. That floor is why a heat weapon that never fills is still worth
-  something, and it is almost certainly not intended: a target one point above the deadzone burns
-  at 50% of maximum. ⛔ **Fixable in yaml alone** — `DamageAtMinimum: -150` makes the line cross
-  zero at a relaxed meter — but it is a balance number, so it needs an order.
-* **cryo is honestly proportional**: `SlowsProportionalToPhysicalState` and
-  `DamageMultiplierProportionalToPhysicalState` both use `UseDeviationFromRelaxed`, so half a
-  freeze is half a slow. The maintainer's mental model is exactly right for this axis.
+ℹ A consumer that needs a **completely full** meter (`superhot`, `CorrosionMax`) is excluded from
+the average: it is a bonus on top of full delivery, not half of the axis. `superhot` is 1% of max
+HP per 25 ticks against `Overheating`'s 150 per tick — letting it halve every partial score would
+be a rounding error deciding the shape of the curve.
 
-### ⭐ EXPOSURE — the term nothing in the price model saw
+### ⭐ EXPOSURE — the term the price model never had
 
-A meter the target does not carry delivers **nothing**, and the two meters are not equally present:
+A meter the target does not carry delivers **nothing**, and this is now the *only* thing separating
+the axes:
 
 | meter | actors | share of the 1609 priced (Health + Valued) actors |
 |---|--:|--:|
@@ -121,24 +115,24 @@ A corrosion weapon does nothing at all to 55% of the roster. Claim: `corrosion_m
 ### E2 pricing — the rule as built
 
 ```
-weight     = clamp01( exposure × delivery(ratio, curve) / delivery(0.75, cryo curve) )
+weight     = clamp01( exposure × delivery(ratio, curve) / delivery(0.75, curve) )
 multiplier = 1 + 0.25 × weight
 ```
 
 `delivery` is the mean effect share over the target's remaining life. The reference is a weapon
 that exactly meets the maintainer's bar on a fully-exposed meter, so **meeting the bar pays exactly
-1.25×** and filling faster is never charged more than the ruling allows. Result over 376 bindings:
-**190 pay the full 1.25×, 176 pay partially, 10 pay nothing.**
+1.25×** and filling faster is never charged more than the ruling allows. Over 376 bindings:
+**190 pay the full 1.25×, 174 partially, 12 nothing**; per actor **+15.7%** across 276 actors.
 
 | axis | mechanism | bindings | median ratio | median × |
 |---|---|--:|--:|--:|
 | heat | scaled | 177 | 0.167 | **1.250** |
-| corrosion | scaled | 33 | 0.333 | **1.143** |
+| corrosion | scaled | 33 | 0.167 | **1.165** |
 | cryo | apply | 22 | 0.519 | **1.250** |
-| heat | apply | 144 | 15.104 | **1.087** |
+| heat | apply | 144 | 15.104 | **1.013** |
 
-⚠ Corrosion tops out at 1.143 even though its meter fills three times over — **exposure**, not the
-race, is what holds it down. That is the term that separates Flame from Chemical.
+⚠ Corrosion caps at 1.165 with an identical meter and an identical fill rate — **exposure alone**
+holds it there. That is what separates Flame from Chemical now.
 
 ℹ Relaxation between shots is deliberately **outside** the priced ratio: `RelaxationDelay: 25`
 means a weapon reloading faster than 25 ticks loses nothing, and the linear term would reintroduce

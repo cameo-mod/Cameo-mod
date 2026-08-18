@@ -242,12 +242,14 @@ claims:
       `PhysicalState.ApplyChange` health-scales through `ScaleChangeToHealth`, which divides by
       MaxHP and multiplies by the meter's RANGE (`MaxValue - MinValue`) — NOT by the 10000
       that `PhysicalStateInfo`'s own [Desc] still advertises ("divided by HP/10000"), which is
-      what the old derivation trusted. `Temperature` is SIGNED so its range is 40000 while
-      `Corrosion`'s is 20000: the two meters do not even share a formula.
-      `ratio = MaxValue x 100 / (Scale x range)` gives Temperature 50/Scale, Corrosion
-      100/Scale — 2x to 4x faster than the docs claimed. Target HP and weapon damage both
-      cancel. The formula now lives ONLY in `tools/balance/physical_state_price.py`, which this
-      measure imports, so the two can no longer disagree.
+      what the old derivation trusted. `Temperature` is SIGNED so its range is 40000, while
+      `Corrosion` shipped `MinValue: 0` — so one Scale meant TWO fill rates, heat filling twice
+      as fast as corrosion. Fixed 2026-08-18 by making Corrosion signed too (maintainer: *"the
+      absolute maximum and minimum values are the same!"*), so
+      `ratio = MaxValue x 100 / (Scale x range)` = **50/Scale on both meters**, 4x faster than
+      the docs claimed. Target HP and weapon damage both cancel. The formula now lives ONLY in
+      `tools/balance/physical_state_price.py`, which this measure imports, so the two can no
+      longer disagree.
       ⚠ The failures are the discrete `ApplyPhysicalState` weapons (13 of 166 pass); the
       damage-scaled ones pass 210/210, and 177 of them already passed at the ORIGINAL Scale 100.
     docs: [docs/design/PHYSICAL_STATE_SYSTEM.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]

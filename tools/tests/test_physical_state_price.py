@@ -60,29 +60,35 @@ class MeterGeometry(unittest.TestCase):
         self.assertEqual(t["range"], 40000, "Temperature is signed: range is 40000, not 20000")
         self.assertTrue(t["relative"], "the race only cancels HP while RelativeToHealth holds")
 
-    def test_t1b_corrosion_is_unsigned(self):
-        c = self.geom["Corrosion"]
-        self.assertEqual((c["min"], c["max"], c["range"]), (0, 20000, 20000))
+    def test_t1b_corrosion_is_symmetric_with_temperature(self):
+        # Maintainer 2026-08-18: *"Temperature has negative values while corrosion doesn't. The
+        # absolute maximum and minimum values are the same! cryo = -20k heat = 20k and
+        # corrosion 20k"* — the meters are ONE shape by design. Corrosion shipped with
+        # `MinValue: 0`, giving it half Temperature's `range`, and since the engine divides by
+        # `range` the same Scale filled heat TWICE as fast. Fixed by making Corrosion signed.
+        c, t = self.geom["Corrosion"], self.geom["Temperature"]
+        self.assertEqual(c["range"], t["range"],
+                         "the meters must share a range or one Scale means two things")
+        self.assertEqual((c["min"], c["max"]), (-20000, 20000))
 
     def test_t2_ratio_uses_range_not_ten_thousand(self):
-        # Temperature 50/Scale and Corrosion 100/Scale. The old formula said 200/Scale for
-        # both — 4x and 2x too pessimistic, and blind to the two meters differing at all.
+        # 50/Scale on BOTH meters. The old formula said 200/Scale — 4x too pessimistic — because
+        # it trusted `RelativeToHealth`'s [Desc] ("divided by HP/10000") over the code.
         temp = psp.fill_ratio("scaled", 300, 0, self.geom["Temperature"])
         corr = psp.fill_ratio("scaled", 300, 0, self.geom["Corrosion"])
         self.assertAlmostEqual(temp, 50 / 300, places=9)
-        self.assertAlmostEqual(corr, 100 / 300, places=9)
-        self.assertAlmostEqual(corr / temp, 2.0, places=9,
-                               msg="Corrosion fills at half Temperature's rate per point of Scale")
+        self.assertAlmostEqual(corr, 50 / 300, places=9)
+        self.assertAlmostEqual(corr, temp, places=9,
+                               msg="one Scale must mean one fill rate on every meter")
 
-    def test_t2b_the_original_scale_already_cleared_the_bar_for_temperature(self):
-        # The 100 -> 300 change (354ed5ad3) was made to fix a shortfall that, for Temperature,
-        # did not exist: Scale 100 gives 0.50, comfortably inside the 0.75 bar. Corrosion at
-        # Scale 100 gives exactly 1.00 and genuinely failed.
-        geom = self.geom
-        self.assertLess(psp.fill_ratio("scaled", 100, 0, geom["Temperature"]),
-                        psp.FULL_EFFECT_BAR)
-        self.assertGreater(psp.fill_ratio("scaled", 100, 0, geom["Corrosion"]),
-                           psp.FULL_EFFECT_BAR)
+    def test_t2b_the_original_scale_already_cleared_the_bar(self):
+        # The 100 -> 300 change (354ed5ad3) was made to fix a shortfall that did not exist:
+        # Scale 100 gives 0.50, comfortably inside the 0.75 bar, on both meters. (It did NOT
+        # for Corrosion before the symmetry fix — that was the 1.00 that made the change look
+        # necessary, and it was an artifact of the unsigned MinValue.)
+        for meter in ("Temperature", "Corrosion"):
+            self.assertLess(psp.fill_ratio("scaled", 100, 0, self.geom[meter]),
+                            psp.FULL_EFFECT_BAR, meter)
 
     def test_t3_hp_and_damage_cancel_in_the_scaled_form(self):
         g = self.geom["Temperature"]
@@ -112,24 +118,29 @@ class EffectCurves(unittest.TestCase):
         for name, curve in (("heat", self.heat), ("cryo", self.cryo), ("corr", self.corr)):
             self.assertAlmostEqual(curve(1.0), 1.0, places=6, msg=name)
 
-    def test_t5_corrosion_delivers_nothing_below_half(self):
-        # `Corroding` is LowerValue 10000 of 20000 — every corrosion effect is gated at 50%.
-        # A corrosion weapon that half-fills the meter has done literally nothing.
-        self.assertEqual(self.corr(0.49), 0.0)
-        self.assertGreater(self.corr(0.51), 0.0)
+    def test_t5_every_axis_opens_at_the_same_1_percent_deadzone(self):
+        # `Corroding` shipped gated at LowerValue 10000 — HALF the meter — while `Overheating`
+        # opened at 200. Maintainer 2026-08-18: *"then corrosion should also start at 1%
+        # right?"* Yes. A gate difference of 50x between two axes of the same system is a
+        # defect, and it made a corrosion weapon that 49%-filled deliver literally nothing.
+        for name, curve in (("heat", self.heat), ("cryo", self.cryo), ("corr", self.corr)):
+            self.assertEqual(curve(0.005), 0.0, f"{name} must respect the deadzone")
+            self.assertGreater(curve(0.02), 0.0, f"{name} must open just past it")
 
-    def test_t6_heat_opens_almost_immediately_and_with_a_floor(self):
-        # `Overheating` opens at 200 of 20000 = 1%, and the DoT trait normalises over the FULL
-        # signed range, so it starts at HALF strength rather than at zero. That floor is why a
-        # heat weapon that never fills its meter is still worth something.
-        self.assertEqual(self.heat(0.005), 0.0)
-        self.assertGreater(self.heat(0.02), 0.2)
+    def test_t6_no_axis_opens_at_half_strength(self):
+        # `ChangesHealthProportionalToPhysicalState` normalises over the FULL signed range and
+        # has no `UseDeviationFromRelaxed` option, so a DoT written `DamageAtMinimum: 0` on a
+        # signed meter opens at HALF its maximum the instant its condition is granted.
+        # `DamageAtMinimum: -DamageAtMaximum` puts the zero back at a relaxed meter.
+        for name, curve in (("heat", self.heat), ("corr", self.corr)):
+            self.assertLess(curve(0.02), 0.1, f"{name} DoT still has a floor")
 
-    def test_t7_cryo_is_honestly_proportional(self):
-        # Slows/DamageMultiplier both use UseDeviationFromRelaxed, so cryo is linear in fill —
-        # which is exactly the maintainer's mental model ("completely freeze").
-        for x in (0.25, 0.5, 0.75):
-            self.assertAlmostEqual(self.cryo(x), x, places=6)
+    def test_t7_every_axis_is_honestly_proportional(self):
+        # All three now interpolate linearly in fill, which is the maintainer's mental model
+        # ("completely freeze") and makes one Scale mean one thing across the whole system.
+        for name, curve in (("heat", self.heat), ("cryo", self.cryo), ("corr", self.corr)):
+            for x in (0.25, 0.5, 0.75):
+                self.assertAlmostEqual(curve(x), x, places=6, msg=f"{name} at {x}")
 
 
 class Pricing(unittest.TestCase):

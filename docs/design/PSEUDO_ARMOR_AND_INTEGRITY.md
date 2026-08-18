@@ -672,25 +672,31 @@ multiplier = 1 + 0.25 × weight            formula.physical_state_price_multipli
 with all three inputs measured from the resolved tree, never assumed. Full derivation in
 `PHYSICAL_STATE_SYSTEM.md`; the three findings that matter here:
 
-* ⛔ **the fill-race formula this document and that one both carried was wrong by 2–4×** — the
-  engine divides by the meter's `range` (`MaxValue − MinValue`), not by the `10000` its own
-  `[Desc]` advertises, and `Temperature` is signed so its range is double `Corrosion`'s. Corrected
-  count: **223 of 376 bindings** reach full effect before the target dies, not 124 and not 1;
-* ⭐ **exposure is a first-class term** — `Corrosion` sits on **45.0%** of priced actors against
-  `Temperature`'s 98.6%, so a corrosion weapon caps at **1.143×** where a flame weapon reaches
-  1.25×. This is the term that separates Flame from Chemical, and nothing in the price model saw
-  it before;
-* ⭐ **a partial meter is priced partially, on a per-axis curve** — every corrosion effect is gated
-  at **half** the meter (`Corroding: LowerValue 10000`), while heat opens at 1% and its DoT opens
-  at *half strength* because the trait normalises over the full signed range.
+Building it uncovered **three defects that made the axes behave differently** — all fixed in
+`defaults.yaml` on maintainer order (*"the absolute maximum and minimum values are the same!"*):
 
-Result: 190 bindings pay the full 1.25×, 176 pay partially, 10 pay nothing. Guards:
-`tools/tests/test_physical_state_price.py` (17 tests) + claims `meters_filling_before_death`,
-`corrosion_meter_actors`, `physical_state_fired_weapons`.
+* ⛔ **D1 — one `Scale` meant two fill rates.** The engine divides by the meter's `range`
+  (`MaxValue − MinValue`), not by the `10000` its own `[Desc]` advertises. `Corrosion` shipped
+  `MinValue: 0`, so its range was half `Temperature`'s and the same Scale filled heat **twice as
+  fast**. Fixed by making Corrosion signed. Corrected count: **223 of 376 bindings** reach full
+  effect, not the 124 or the 1 this document previously carried — both were wrong-formula values;
+* ⛔ **D2 — corrosion delivered nothing below HALF the meter** (`Corroding: LowerValue 10000`)
+  while heat opened at 1%: a 50× gate difference inside one system. Now both open at 1%;
+* ⛔ **D3 — every DoT opened at half strength**, because
+  `ChangesHealthProportionalToPhysicalState` normalises over the full *signed* range with no
+  deviation option. `DamageAtMinimum: -DamageAtMaximum` puts the zero back at a relaxed meter;
+* ⭐ **exposure is now the ONLY thing separating the axes** — `Corrosion` sits on **45.0%** of
+  priced actors against `Temperature`'s 98.6%, so a corrosion weapon caps at **1.165×** where a
+  flame weapon reaches 1.25× despite an identical meter and an identical fill rate. That is what
+  separates Flame from Chemical, and nothing in the price model saw it before.
+
+Result: 190 bindings pay the full 1.25×, 174 partially, 12 nothing; **+15.7%** across 276 actors.
+Guards: `tools/tests/test_physical_state_price.py` (17 tests) + claims
+`meters_filling_before_death`, `corrosion_meter_actors`, `physical_state_fired_weapons`.
 
 ⛔ **Still owed by the maintainer:** whether `PhysicalStateScale` stays at **300**. It was chosen
-against the wrong arithmetic; **150** is the smallest round constant that clears the bar on both
-meters, and 300 is a 3× faster fill that the 1.25× ceiling cannot charge for.
+against the wrong arithmetic — `Scale: 100` already cleared the bar at ratio 0.50 — so 300 is a 3×
+faster fill that the 1.25× ceiling cannot charge for.
 
 ### E1, as measured and fixed (2026-08-17)
 

@@ -5316,7 +5316,7 @@
 		PhysicalStateName: Temperature
 		UsePercentageDamage: false
 		DamageAtMaximum: 150
-		DamageAtMinimum: 0
+		DamageAtMinimum: -150
 		DamageThreshold: 0
 		DamageInterval: 1
 		DamageTypes: FireDeath
@@ -5540,12 +5540,12 @@
 		Palette: ra2effect
 	# --- Corrosion METER (physical-state axis). ADDITIVE + inert until a weapon feeds it via
 	# AreaDamage PhysicalStateName: Corrosion / PhysicalStateScale. Green tint 200->20000; effects
-	# ramp 50%->100% (Corroding); nax_corr_frag pulse at max. Binary `corroded` above kept until the
+	# open at 1% (Corroding); nax_corr_frag pulse at max. Binary `corroded` above kept until the
 	# Schwarzer Mond weapons are migrated onto the meter. See docs/design/PHYSICAL_STATE_SYSTEM.md.
 	PhysicalState@Corrosion:
 		Name: Corrosion
 		MaxValue: 20000
-		MinValue: 0
+		MinValue: -20000
 		RelaxedValue: 0
 		RelativeToHealth: true
 		RelaxationLinear: 5
@@ -5565,12 +5565,12 @@
 		PhysicalStateName: Corrosion
 		Condition: CorrosionDeadzone
 		UpperValue: 200
-		LowerValue: 0
+		LowerValue: -200
 	GrantConditionOnPhysicalState@Corroding:
 		PhysicalStateName: Corrosion
 		Condition: Corroding
 		UpperValue: 20000
-		LowerValue: 10000
+		LowerValue: 200
 	GrantConditionOnPhysicalState@CorrosionMax:
 		PhysicalStateName: Corrosion
 		Condition: CorrosionMax
@@ -5586,7 +5586,7 @@
 		PhysicalStateName: Corrosion
 		UsePercentageDamage: false
 		DamageAtMaximum: 180
-		DamageAtMinimum: 0
+		DamageAtMinimum: -180
 		DamageThreshold: 0
 		DamageInterval: 1
 		RequiresCondition: Corroding && !hazmatsuits
@@ -5594,7 +5594,7 @@
 		PhysicalStateName: Corrosion
 		UsePercentageDamage: false
 		DamageAtMaximum: 90
-		DamageAtMinimum: 0
+		DamageAtMinimum: -90
 		DamageThreshold: 0
 		DamageInterval: 1
 		RequiresCondition: Corroding && hazmatsuits
