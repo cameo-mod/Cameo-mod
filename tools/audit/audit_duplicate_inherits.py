@@ -28,6 +28,13 @@ Findings:
   D2 a parent that is ALSO reachable through another parent — legal only by line order
      (a latent D1: the same redundancy, currently saved by where the line sits)
   D3 an inherit target that is defined nowhere — BLOCKING (`Parent type not found`)
+  D4 a `-Key:` removal with nothing to remove — BLOCKING, the OTHER throw in the same engine
+     method (`MiniYaml.cs:486`, "There are no elements with key `X` to remove")
+
+⚠ D4 exists because emptying a field out of a template orphans every `-Field:` that was deleting
+it, and the mod then refuses to load. That is the same shape as the `[FieldLoader.Require]`
+orphan class (LESSONS_LEARNED) and it cost a boot cycle during the `Report:` sweep: 25 removals
+went dangling at once. **Scan for dependents BEFORE deleting anything from a template.**
 """
 
 from __future__ import annotations
@@ -102,6 +109,57 @@ def reachable(target, kind, depth=0, seen=None):
     return seen
 
 
+def dangling_removals(root_name, kind, model):
+    """D4 — `-Key:` children whose resolved ancestry never provides `Key`.
+
+    Replicates `ResolveInherits` closely enough for the question being asked: parents are merged
+    in document order, a `-Key` deletes what has resolved so far, and an own `Key` sets it. The
+    removal is legal iff something is present at the moment it runs, so this walks the node's
+    children IN ORDER and tracks the live key set rather than just unioning the ancestors.
+    """
+    rows = []
+    root = kind.lookup(root_name)
+    if root is None:
+        return rows
+
+    def keys_of(name, depth=0, seen=None):
+        seen = seen if seen is not None else set()
+        if name in seen or depth > 24:
+            return set()
+        seen = seen | {name}
+        node = kind.lookup(name)
+        if node is None:
+            return set()
+        live = set()
+        for child in node.children:
+            key = child.key
+            if key == "Inherits" or key.startswith("Inherits@"):
+                target = (child.value or "").strip()
+                if target:
+                    live |= keys_of(target, depth + 1, seen)
+            elif key.startswith("-"):
+                live.discard(key[1:])
+            else:
+                live.add(key)
+        return live
+
+    live = set()
+    for child in root.children:
+        key = child.key
+        if key == "Inherits" or key.startswith("Inherits@"):
+            target = (child.value or "").strip()
+            if target:
+                live |= keys_of(target)
+        elif key.startswith("-"):
+            removed = key[1:]
+            if removed not in live:
+                rows.append([root_name, key, relpath(root.file, model.root) + f":{child.line}"])
+            live.discard(removed)
+        else:
+            live.add(key)
+    return rows
+
+
 def latent(root_name, kind, model):
     """D2 — a direct parent that another direct parent already brings in."""
     rows = []
@@ -126,23 +184,31 @@ def main() -> int:
     print(h1("audit_duplicate_inherits — `Parent type X was already inherited` (boot crash)"))
     blocking = 0
     for kind in kinds:
-        d1, d2, d3 = [], [], []
+        d1, d2, d3, d4 = [], [], [], []
         for name in sorted(kind.nodes):
             a, c = walk(name, kind, m)
             d1 += a
             d3 += c
             d2 += latent(name, kind, m)
+            d4 += dangling_removals(name, kind, m)
         # D2 rows for a node that is ALREADY a D1 are noise — the crash outranks the warning.
         crashed = {r[0] for r in d1}
         d2 = [r for r in d2 if r[0] not in crashed]
-        blocking += len(d1) + len(d3)
+        blocking += len(d1) + len(d3) + len(d4)
 
         print(h2(f"{kind.label}s — {len(kind.nodes)} nodes scanned"))
         print(table(["finding", "meaning", "count"], [
             ["D1", "same parent twice on one chain (BLOCKING — boot crash)", len(d1)],
             ["D2", "redundant parent, legal only by line ORDER (latent D1)", len(d2)],
             ["D3", "inherit target defined nowhere (BLOCKING)", len(d3)],
+            ["D4", "`-Key:` with nothing to remove (BLOCKING — boot crash)", len(d4)],
         ]))
+        if d4:
+            print(h2(f"D4 — removals the engine will refuse to load ({kind.label}s)"))
+            print("`MiniYaml.cs:486` throws when a `-Key:` finds nothing to delete. Either the "
+                  "key was emptied out of a parent (restore it or drop the removal), or the "
+                  "removal was always dead.\n")
+            print(table([kind.label, "removal", "site"], d4[:MAX_ROWS]))
         if d1:
             print(h2(f"D1 — {kind.label}s the engine will refuse to load"))
             print("Fix: DELETE the redundant direct inherit — the other parent already "
