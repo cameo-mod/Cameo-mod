@@ -208,12 +208,12 @@ GladiusCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -221,12 +221,12 @@ GladiusCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -234,12 +234,12 @@ GladiusCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@ShrapnelWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
@@ -976,12 +976,12 @@ EpigraphMG:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@HeavyAAWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000

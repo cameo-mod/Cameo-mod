@@ -232,12 +232,14 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 223
+    value: 534
     tolerance: 0
     what: >
       Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
       still has 25% HP left — the maintainer's condition for pricing a meter at all ("it is
-      able to completely freeze a unit BEFORE it dies"). 223 of 376 bindings on 372 weapons.
+      able to completely freeze a unit BEFORE it dies"). 534 of 549 bindings on 449 weapons: all
+      527 damage-scaled ones pass at full strength 100 (ratio 0.500), and the 15 failures are the
+      last discrete `ApplyPhysicalState` cryo weapons.
       ⛔ THE EARLIER VALUES (1, then 124) WERE MEASURED WITH A WRONG FORMULA and are void.
       `PhysicalState.ApplyChange` health-scales through `ScaleChangeToHealth`, which divides by
       MaxHP and multiplies by the meter's RANGE (`MaxValue - MinValue`) — NOT by the 10000
@@ -251,7 +253,8 @@ claims:
       `tools/balance/physical_state_price.py`, which this measure imports, so the two can no
       longer disagree.
       ⚠ The failures are the discrete `ApplyPhysicalState` weapons (13 of 166 pass); the
-      damage-scaled ones pass 210/210, and 177 of them already passed at the ORIGINAL Scale 100.
+      damage-scaled ones all pass. `423bb5b07` converted the legacy discrete warheads, so the
+      mechanism gap is nearly closed.
     docs: [docs/design/PHYSICAL_STATE_SYSTEM.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
     measure: |
       import sys, pathlib
@@ -289,7 +292,7 @@ claims:
                   break
       print(n)
   - id: physical_state_fired_weapons
-    value: 372
+    value: 449
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced

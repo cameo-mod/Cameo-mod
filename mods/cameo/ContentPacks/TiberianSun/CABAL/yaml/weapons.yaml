@@ -224,22 +224,22 @@ TSCABALObeliskLaserFire:
 		FriendlyFireSpread: 50
 		Damage: 70000
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 35
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 70000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 35
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	-Warhead@EffectAir:
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
@@ -338,22 +338,22 @@ TSCABALEnlightedLaser:
 		FriendlyFireSpread: 50
 		Damage: 70000
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 35
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 70000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 35
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	-Warhead@EffectAir:
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
@@ -811,11 +811,11 @@ CabalArtilleryWalkerShellUpgraded:
 		FriendlyFireSpread: 50
 		Damage: 42000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 21
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		Damage: 42000
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
@@ -1045,11 +1045,11 @@ CabalDissolverSpray:
 		FriendlyFireSpread: 50
 		Damage: 2000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 2000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
@@ -1086,22 +1086,22 @@ CabalCommandoPlasma:
 		FriendlyFireSpread: 50
 		Damage: 50000
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 25
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 50000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
@@ -1129,22 +1129,22 @@ CabalCommandoPlasmaMk2:
 		FriendlyFireSpread: 50
 		Damage: 50000
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 25
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 50000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
@@ -1177,22 +1177,22 @@ CabalSubmarinePlasma:
 		FriendlyFireSpread: 50
 		Damage: 25000
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 12
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 25000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 12
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
@@ -1482,12 +1482,12 @@ CabalMothershipRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1495,12 +1495,12 @@ CabalMothershipRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
@@ -2297,22 +2297,22 @@ CabalCommandoPlasmaNeutron:
 		FriendlyFireSpread: 50
 		Damage: 50000
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 25
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 50000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 50000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
@@ -2355,22 +2355,22 @@ CabalCommandoPlasmaMk2Neutron:
 		FriendlyFireSpread: 50
 		Damage: 50000
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 25
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 50000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 50000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage

@@ -263,11 +263,11 @@ ArcherArtilleryShell:
 		FriendlyFireSpread: 50
 		Damage: 14000
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 7
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 14000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
@@ -758,12 +758,12 @@ MissileSoldierWeapon:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@ShrapnelWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
@@ -839,12 +839,12 @@ EMPGrenade:
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -909,11 +909,11 @@ EMPGrenadeExplode:
 		FriendlyFireSpread: 50
 		Damage: 4000
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
@@ -1742,12 +1742,12 @@ FirehawkBomb:
 		ValidTargets: Ground, Ship
 		Damage: 10000
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Ship
 		Damage: 5
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 
 ##########################
 # TIBERIAN DAWN EXPANSION

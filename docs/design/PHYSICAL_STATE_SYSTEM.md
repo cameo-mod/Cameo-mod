@@ -62,35 +62,27 @@ difference in the opening gate between two axes of the same system.** A corrosio
 
 ### What is true after the fixes
 
+Full strength is now **`METER_FULL = 100`** — ONE knob in `gen_weapon_template.py`, with every
+family and blend expressed as a fraction of it (`_m(0.75)`, `_m(0.35)`, …) instead of 13
+hand-divided numbers. At 100 the race is **ratio 0.500 on both meters**: full effect with half the
+target's life still ahead of it, comfortably inside the 0.75 bar.
+
 | mechanism | bindings | reach full effect before 25% HP |
 |---|--:|--:|
-| Temperature, damage-scaled | 177 | **177** |
-| Corrosion, damage-scaled | 33 | **33** |
-| Temperature, discrete apply | 144 | 4 |
-| Temperature (cryo), discrete apply | 22 | 9 |
-| **total** | **376** | **223 (59.3%)** |
+| damage-scaled (heat + corrosion) | 527 | **527 (100%)** |
+| discrete apply (cryo) | 22 | 7 |
+| **total** | **549** | **534 (97.3%)** |
 
-⚠ **`meters_filling_before_death` = 223.** The earlier 1 and 124 were measured with the wrong
-formula and are void.
+⚠ **`meters_filling_before_death` = 534 of 549.** The earlier 1, 124 and 223 were measured on
+smaller populations and/or the wrong formula. `423bb5b07` converted the legacy discrete
+`ApplyPhysicalState` warheads to the damage-scaled mechanism, which is why the count jumped: the
+166-weapon gap that dominated every previous census is essentially closed.
 
-⚠⚠ **The 100 → 300 constant (`354ed5ad3`) was calibrated against that wrong formula.** At the
-original `Scale: 100` the ratio was **0.50** — already inside the 0.75 bar. The only meter that
-appeared to fail was Corrosion (ratio 1.00), and that was D1's artifact, not a real shortfall.
-**300 is therefore a 3× faster fill than the bar needs, on every axis** — and the 1.25× ceiling
-cannot charge for it, because 100 and 300 both sit at full delivery. Keeping or dropping it to
-150/100 is a **maintainer call**; nothing has been reverted, because reverting is a balance change.
-
-✅ **The legacy flame/chemical `ApplyPhysicalState` warheads were converted to the damage-scaled
-mechanism** (2026-08-18). `^LightFlameWeapon`/`^MediumFlameWeapon`/`^HeavyFlameWeapon` and their
-chemical counterparts now use `PhysicalStateName`/`PhysicalStateScale` on `AreaDamage` and
-`AreaDamagePercentage` warheads, with friendly fire baked into the main. 34 YAML weapon files and
-all concrete overrides of these family keys were updated; `audit_physical_state_warheads` PASS.
-
-⛔ **43 non-flame/chemical `ApplyPhysicalState` warheads remain** (mostly cryo upgrades on inherited
-non-family mains like `155mmCryo` and the `^CryoMissileProjectile` family). These need the dual-warhead
-armament-swap pattern (§3b) or a per-child copy of the parent main to attach a signed `PhysicalStateScale`
-to damage; they cannot be bulk-converted safely without a maintainer ruling on the `PhysicalStateScale`
-to use.
+⚠⚠ **Why 300 became 100.** The 100 → 300 change (`354ed5ad3`) was calibrated against the wrong
+formula: `Scale: 100` had ratio **0.50** all along and always cleared the bar, and the Corrosion
+"failure" that appeared to justify 300 was D1's artifact. 300 was a 3× faster fill than anything
+needed, and the 1.25× ceiling cannot charge for it. Maintainer 2026-08-18: *"test it in game first
+for 100"* — so 100 is shipped for playtest, propagated to all 694 live bindings.
 
 ### The effect curve — now one curve for all three axes
 
@@ -128,17 +120,17 @@ multiplier = 1 + 0.25 × weight
 
 `delivery` is the mean effect share over the target's remaining life. The reference is a weapon
 that exactly meets the maintainer's bar on a fully-exposed meter, so **meeting the bar pays exactly
-1.25×** and filling faster is never charged more than the ruling allows. Over 376 bindings:
-**190 pay the full 1.25×, 174 partially, 12 nothing**; per actor **+15.7%** across 276 actors.
+1.25×** and filling faster is never charged more than the ruling allows. Over 549 bindings:
+**328 pay the full 1.25×, 221 partially, 0 nothing**; per actor **+21.9%** across 337 actors.
+Wired into the ledger by `01f1820b8` (`derived.physical_state_multiplier`).
 
 | axis | mechanism | bindings | median ratio | median × |
 |---|---|--:|--:|--:|
-| heat | scaled | 177 | 0.167 | **1.250** |
-| corrosion | scaled | 33 | 0.167 | **1.165** |
+| heat | scaled | 321 | 0.500 | **1.250** |
+| corrosion | scaled | 206 | 0.500 | **1.135** |
 | cryo | apply | 22 | 0.519 | **1.250** |
-| heat | apply | 144 | 15.104 | **1.013** |
 
-⚠ Corrosion caps at 1.165 with an identical meter and an identical fill rate — **exposure alone**
+⚠ Corrosion caps at 1.135 with an identical meter and an identical fill rate — **exposure alone**
 holds it there. That is what separates Flame from Chemical now.
 
 ℹ Relaxation between shots is deliberately **outside** the priced ratio: `RelaxationDelay: 25`

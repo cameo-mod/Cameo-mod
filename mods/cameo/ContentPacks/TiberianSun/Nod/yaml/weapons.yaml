@@ -86,11 +86,11 @@ TSProton:
 		FriendlyFireSpread: 50
 		Damage: 30000
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 15
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 30000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
@@ -112,11 +112,11 @@ TSTibBazooka:
 		FriendlyFireSpread: 50
 		Damage: 6000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@LightMissile: SpreadDamage
 		Damage: 24000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -201,12 +201,12 @@ TSStankTibTusk:
 		Damage: 10000
 		ValidTargets: Ground, Water, Air
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		ValidTargets: Ground, Water, Air
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@CannonHE_Medium:
 		Damage: 10000
 		ValidTargets: Ground, Water, Air

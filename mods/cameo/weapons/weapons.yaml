@@ -1490,7 +1490,7 @@
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 250
@@ -1517,7 +1517,7 @@
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		Chance: 15
@@ -1586,7 +1586,7 @@
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 375
@@ -1613,7 +1613,7 @@
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall
@@ -1680,7 +1680,7 @@
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 500
@@ -1708,7 +1708,7 @@
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall
@@ -1777,7 +1777,7 @@
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 175
@@ -1804,7 +1804,7 @@
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	#Warhead@Smudge: LeaveSmudge
 	#	SmudgeType: Scorch
 	#	InvalidTargets: Vehicle, Structure, wall
@@ -1861,7 +1861,7 @@
 			Fighter: 25
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 350
@@ -1888,7 +1888,7 @@
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	#Warhead@Smudge: LeaveSmudge
 	#	SmudgeType: Scorch
 	#	InvalidTargets: Vehicle, Structure, wall
@@ -1948,7 +1948,7 @@
 			Fighter: 40
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 525
@@ -1975,7 +1975,7 @@
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	#Warhead@Smudge: LeaveSmudge
 	#	SmudgeType: Scorch
 	#	InvalidTargets: Vehicle, Structure, wall
@@ -4360,7 +4360,7 @@ DefuseKit:
 			Heroic: 58
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 225
+		PhysicalStateScale: 75
 	Warhead@Laser_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
@@ -4453,7 +4453,7 @@ DefuseKit:
 			Heroic: 32
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 225
+		PhysicalStateScale: 75
 	Warhead@Laser_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
@@ -4546,7 +4546,7 @@ DefuseKit:
 			Heroic: 45
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 225
+		PhysicalStateScale: 75
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
@@ -4827,7 +4827,7 @@ DefuseKit:
 			Spaceship: 39
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
-		PhysicalStateScale: -300
+		PhysicalStateScale: -100
 	Warhead@Cryo_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 50
@@ -4853,7 +4853,7 @@ DefuseKit:
 			Spaceship: 1
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
-		PhysicalStateScale: -300
+		PhysicalStateScale: -100
 
 ^Warhead_Cryo_Medium:
 	ValidTargets: Ground, Water
@@ -4893,7 +4893,7 @@ DefuseKit:
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
-		PhysicalStateScale: -300
+		PhysicalStateScale: -100
 	Warhead@Cryo_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 50
@@ -4919,7 +4919,7 @@ DefuseKit:
 			Spaceship: 5
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
-		PhysicalStateScale: -300
+		PhysicalStateScale: -100
 
 ^Warhead_Cryo_Heavy:
 	ValidTargets: Ground, Water
@@ -4959,7 +4959,7 @@ DefuseKit:
 			Spaceship: 68
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
-		PhysicalStateScale: -300
+		PhysicalStateScale: -100
 	Warhead@Cryo_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 50
@@ -4985,7 +4985,7 @@ DefuseKit:
 			Spaceship: 10
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
-		PhysicalStateScale: -300
+		PhysicalStateScale: -100
 
 ###### Flame: INF+BLD > VEH > AIR (light, air=False) ######
 ^Warhead_Flame_Light:
@@ -5026,7 +5026,7 @@ DefuseKit:
 			Spaceship: 46
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -5052,7 +5052,7 @@ DefuseKit:
 			Spaceship: 1
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 
 ^Warhead_Flame_Medium:
 	ValidTargets: Ground, Water
@@ -5092,7 +5092,7 @@ DefuseKit:
 			Spaceship: 51
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -5118,7 +5118,7 @@ DefuseKit:
 			Spaceship: 5
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 
 ^Warhead_Flame_Heavy:
 	ValidTargets: Ground, Water
@@ -5158,7 +5158,7 @@ DefuseKit:
 			Spaceship: 44
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -5184,7 +5184,7 @@ DefuseKit:
 			Spaceship: 10
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 
 ###### Chemical: INF+VEH > BLD > AIR (heavy, air=False) ######
 ^Warhead_Chemical_Light:
@@ -5225,7 +5225,7 @@ DefuseKit:
 			Fighter: 48
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -5251,7 +5251,7 @@ DefuseKit:
 			Fighter: 1
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 
 ^Warhead_Chemical_Medium:
 	ValidTargets: Ground, Water
@@ -5291,7 +5291,7 @@ DefuseKit:
 			Fighter: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -5317,7 +5317,7 @@ DefuseKit:
 			Fighter: 5
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 
 ^Warhead_Chemical_Heavy:
 	ValidTargets: Ground, Water
@@ -5357,7 +5357,7 @@ DefuseKit:
 			Fighter: 49
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -5383,7 +5383,7 @@ DefuseKit:
 			Fighter: 10
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 
 
 ###### Toxic: INF > BLD > VEH > AIR (light, air=True) ######
@@ -5621,8 +5621,8 @@ DefuseKit:
 			Spaceship: 39
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Temperature: 150
-			Corrosion: 150
+			Temperature: 50
+			Corrosion: 50
 	Warhead@Plasma_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -5686,8 +5686,8 @@ DefuseKit:
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Temperature: 150
-			Corrosion: 150
+			Temperature: 50
+			Corrosion: 50
 	Warhead@Plasma_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -5751,8 +5751,8 @@ DefuseKit:
 			Spaceship: 47
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Temperature: 150
-			Corrosion: 150
+			Temperature: 50
+			Corrosion: 50
 	Warhead@Plasma_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -5817,7 +5817,7 @@ DefuseKit:
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Temperature: 100
+			Temperature: 33
 	Warhead@Thermobaric_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -5881,7 +5881,7 @@ DefuseKit:
 			Spaceship: 46
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Temperature: 100
+			Temperature: 33
 	Warhead@Thermobaric_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -5945,7 +5945,7 @@ DefuseKit:
 			Spaceship: 54
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Temperature: 100
+			Temperature: 33
 	Warhead@Thermobaric_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -6010,7 +6010,7 @@ DefuseKit:
 			Fighter: 61
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStates:
-			Temperature: 75
+			Temperature: 25
 		IntegrityScale: 33
 	Warhead@Quantum_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -6077,7 +6077,7 @@ DefuseKit:
 			Fighter: 39
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStates:
-			Temperature: 75
+			Temperature: 25
 		IntegrityScale: 33
 	Warhead@Quantum_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -6144,7 +6144,7 @@ DefuseKit:
 			Heroic: 47
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 		PhysicalStates:
-			Temperature: 75
+			Temperature: 25
 		IntegrityScale: 33
 	Warhead@Quantum_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -6213,8 +6213,8 @@ DefuseKit:
 			Fighter: 56
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Temperature: 105
-			Corrosion: 60
+			Temperature: 35
+			Corrosion: 20
 	Warhead@Waveforce_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -6278,8 +6278,8 @@ DefuseKit:
 			Fighter: 39
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Temperature: 105
-			Corrosion: 60
+			Temperature: 35
+			Corrosion: 20
 	Warhead@Waveforce_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -6343,8 +6343,8 @@ DefuseKit:
 			Fighter: 49
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Temperature: 105
-			Corrosion: 60
+			Temperature: 35
+			Corrosion: 20
 	Warhead@Waveforce_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -6595,7 +6595,7 @@ DefuseKit:
 			Spaceship: 50
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Temperature: 150
+			Temperature: 50
 	Warhead@FireMissile_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -6659,7 +6659,7 @@ DefuseKit:
 			Heroic: 44
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Temperature: 150
+			Temperature: 50
 	Warhead@FireMissile_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
@@ -6723,7 +6723,7 @@ DefuseKit:
 			Spaceship: 59
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Temperature: 150
+			Temperature: 50
 	Warhead@FireMissile_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
@@ -6788,7 +6788,7 @@ DefuseKit:
 			Wood: 66
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Corrosion: 150
+			Corrosion: 50
 	Warhead@ChemMissile_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -6852,7 +6852,7 @@ DefuseKit:
 			Wood: 53
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Corrosion: 150
+			Corrosion: 50
 	Warhead@ChemMissile_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
@@ -6916,7 +6916,7 @@ DefuseKit:
 			Fighter: 58
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Corrosion: 150
+			Corrosion: 50
 	Warhead@ChemMissile_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
@@ -6981,7 +6981,7 @@ DefuseKit:
 			Fighter: 59
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Corrosion: 150
+			Corrosion: 50
 	Warhead@ChemCannon_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -7045,7 +7045,7 @@ DefuseKit:
 			Fighter: 41
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Corrosion: 150
+			Corrosion: 50
 	Warhead@ChemCannon_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -7109,7 +7109,7 @@ DefuseKit:
 			Fighter: 49
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Corrosion: 150
+			Corrosion: 50
 	Warhead@ChemCannon_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -7435,7 +7435,7 @@ DefuseKit:
 			Spaceship: 35
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Temperature: 150
+			Temperature: 50
 	Warhead@FireCannon_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -7499,7 +7499,7 @@ DefuseKit:
 			Spaceship: 39
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Temperature: 150
+			Temperature: 50
 	Warhead@FireCannon_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -7563,7 +7563,7 @@ DefuseKit:
 			Spaceship: 58
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
-			Temperature: 150
+			Temperature: 50
 	Warhead@FireCannon_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -12358,11 +12358,11 @@ TSTurretLaserFire:
 		FriendlyFireSpread: 50
 		Damage: 1000
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 1000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
@@ -13352,7 +13352,7 @@ generic_bullet_casing:
 			Spaceship: 39
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Inferno_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 50
@@ -13378,7 +13378,7 @@ generic_bullet_casing:
 			Spaceship: 1
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 
 ^Warhead_Inferno_Medium:
 	ValidTargets: Ground, Water
@@ -13418,7 +13418,7 @@ generic_bullet_casing:
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Inferno_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 50
@@ -13444,7 +13444,7 @@ generic_bullet_casing:
 			Spaceship: 5
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 
 ^Warhead_Inferno_Heavy:
 	ValidTargets: Ground, Water
@@ -13484,7 +13484,7 @@ generic_bullet_casing:
 			Spaceship: 68
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100
 	Warhead@Inferno_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 50
@@ -13510,4 +13510,4 @@ generic_bullet_casing:
 			Spaceship: 10
 		UpdatesUnitStatistics: false
 		PhysicalStateName: Temperature
-		PhysicalStateScale: 300
+		PhysicalStateScale: 100

@@ -1452,31 +1452,38 @@ def at(seq, index):
 # Flame and Chemical also emit meter-aware AreaDamagePercentage twins so their percentage damage
 # contributes to the same meter. The _ExtraDamage chip remains excluded.
 # Cryo is a separate thin child of Prism (Temperature -100), not listed here.
-# ⭐ FULL STRENGTH IS 300, NOT 100 (maintainer 2026-08-18) — and the number is derived, not taste.
+# ⭐ FULL STRENGTH IS ONE KNOB — `METER_FULL`. Everything below is a FRACTION of it, so the
+# maintainer can move the whole system with a single edit instead of 13 hand-divided numbers.
 #
-# A meter only earns its price if it reaches FULL EFFECT while the target is still alive
-# ("cryo is as strong as fire IF it can completely freeze a unit BEFORE it dies"). With
-# `PhysicalState MaxValue: 20000` and `RelativeToHealth: true`, the race works out to
+# The race, corrected 2026-08-18 (`tools/balance/physical_state_price.py` owns the arithmetic):
 #
-#     hits_to_fill / hits_to_kill  =  MaxValue / (scale x 100)  =  200 / scale
+#     hits_to_fill / hits_to_kill = MaxValue x 100 / (Scale x range) = 50 / Scale
 #
-# — the target's HP and the weapon's damage BOTH cancel, so the scale alone decides it. At the old
-# 100 that ratio is exactly 2.0: every flamethrower in the mod filled its meter twice as slowly as
-# it killed, so the effect it was about to be priced for never landed (measured: 1 of 367 weapons
-# reached full effect in time). The bar "full by 25% HP remaining" needs scale >= 267; the
-# maintainer rounded it to 300, which lands full effect at ~33% HP left. See
-# PHYSICAL_STATE_SYSTEM.md and the `meters_filling_before_death` claim.
+# `range = MaxValue - MinValue` = 40000 on BOTH meters now that Corrosion is signed like
+# Temperature. The target's HP and the weapon's damage BOTH cancel, so the constant alone decides
+# it, and the bar ("full effect while 25% HP remains") is ratio <= 0.75.
 #
-# ⚠ Everything below is a FRACTION OF FULL, so all of it scales together — a blend that is half
-# thermal still delivers half a meter, which is the honest reading of a blend and is why blends do
-# NOT all clear the bar. Pricing must follow delivery, not the family name.
+# ⚠ A previous revision here claimed the ratio was `200 / scale`, concluded that every
+# flamethrower filled its meter twice as slowly as it killed, and had the maintainer raise the
+# constant to 300 to fix it. That derivation trusted `PhysicalStateInfo.RelativeToHealth`'s stale
+# [Desc] ("divided by HP/10000") instead of `ScaleChangeToHealth`, and was wrong by 4x.
+# **METER_FULL = 100 already gives ratio 0.50** — full effect with half the target's life left,
+# comfortably inside the bar. 300 was a 3x faster fill than anything needed it to be.
+METER_FULL = 100
+
+
+def _m(fraction: float) -> int:
+    """A meter strength expressed as a share of full. Keeps the per-parent-average rule exact."""
+    return int(round(METER_FULL * fraction))
+
+
 FAMILY_PHYSICAL_STATE = {
-    "Flame":    ("Temperature", 300),   # heat -> overheat/pop
-    "Laser":    ("Temperature", 225),   # laser overheats (main only, chip excluded)
-    "Chemical": ("Corrosion", 300),     # acid -> corrosion meter
-    "Cryo":     ("Temperature", -300),  # prism beam that freezes
-    "Inferno":  ("Temperature", 300),   # prism beam that burns
-    # Plasma (Temperature 150 + Corrosion 150) needs two states on one warhead -> handled at family build.
+    "Flame":    ("Temperature", _m(1.00)),   # heat -> overheat/pop
+    "Laser":    ("Temperature", _m(0.75)),   # laser overheats (main only, chip excluded)
+    "Chemical": ("Corrosion", _m(1.00)),     # acid -> corrosion meter
+    "Cryo":     ("Temperature", _m(-1.00)),  # prism beam that freezes
+    "Inferno":  ("Temperature", _m(1.00)),   # prism beam that burns
+    # Plasma (Temperature + Corrosion) needs two states on one warhead -> handled at family build.
 }
 
 # Per-family Integrity ELECTRONICS auto-scale: the C# AreaDamage.IntegrityScale drains the victim's
@@ -1559,8 +1566,8 @@ def emit_condition(tag, cname, duration, rng, vt):
 # warhead to add a PhysicalState (e.g. Cryo = Prism's anti-LIGHT beam + cold). Keeps the parent's Versus
 # + warhead key. {name: (parent, PhysicalStateName, PhysicalStateScale, levels)}.
 INHERIT_FAMILIES = {
-    "Cryo":    ("Prism", "Temperature", -300, L3),   # a prism beam that also freezes (its "utility")
-    "Inferno": ("Prism", "Temperature", +300, L3),   # a prism beam that also burns (heat ray)
+    "Cryo":    ("Prism", "Temperature", _m(-1.00), L3),   # a prism beam that also freezes (its "utility")
+    "Inferno": ("Prism", "Temperature", _m(1.00), L3),   # a prism beam that also burns (heat ray)
 }
 
 
@@ -1578,23 +1585,23 @@ def emit_inherit_family(name, parent, psn, pss, levels):
 # multi-state. Plasma = Flame x Chemical Versus + Temperature 150 + Corrosion 150 ("as close as possible
 # to the flame + chemical combo"). {name: (parents, {StateName: Scale}, levels)}.
 BLEND_FAMILIES = {
-    "Plasma": (["Flame", "Chemical"], {"Temperature": 150, "Corrosion": 150}, L3),
+    "Plasma": (["Flame", "Chemical"], {"Temperature": _m(0.50), "Corrosion": _m(0.50)}, L3),
     # Thermobaric = fuel-air incendiary blast: the per-armor AVERAGE of Demolition + Concussion +
     # Flame ("demolition + concussion + fire"). Heat = Flame 300 / 3 parents = 100 (per-parent-average
     # rule, Plasma-consistent). Collapses the thermobaric frankenstein weapons onto one warhead.
-    "Thermobaric": (["Demolition", "Concussion", "Flame"], {"Temperature": 100}, L3),
+    "Thermobaric": (["Demolition", "Concussion", "Flame"], {"Temperature": _m(1 / 3)}, L3),
     # Quantum = high-tech energy blend: per-armor AVERAGE of Railgun + Laser + Tesla (Heavy-only
     # parents extrapolated to L/M via the level step). Heat = Laser's 225 / 3 parents = 75 (only Laser
     # contributes a meter; Plasma-consistent per-parent averaging). EMP auto-scales via IntegrityScale
     # 33 (Tesla = 1/3 parents, FAMILY_INTEGRITY_SCALE); the ExtraDamage chip stays per-weapon.
-    "Quantum": (["Railgun", "Laser", "Tesla"], {"Temperature": 75}, L3),
+    "Quantum": (["Railgun", "Laser", "Tesla"], {"Temperature": _m(0.25)}, L3),
     # Element + delivery blends (maintainer 2026-08-10): per-armor AVERAGE of the element family and the
     # delivery family + the element's meter / 2 parents (150). FIRE = anti-light -> pairs with HE delivery
     # (better vs infantry/buildings); CHEMICAL = anti-armor -> pairs with AP delivery (better vs armor).
-    "FireCannon":  (["Flame", "CannonHE"],    {"Temperature": 150}, L3),
-    "FireMissile": (["Flame", "MissileHE"],   {"Temperature": 150}, L3),
-    "ChemCannon":  (["Chemical", "CannonAP"], {"Corrosion": 150}, L3),
-    "ChemMissile": (["Chemical", "MissileAP"],{"Corrosion": 150}, L3),
+    "FireCannon":  (["Flame", "CannonHE"],    {"Temperature": _m(0.50)}, L3),
+    "FireMissile": (["Flame", "MissileHE"],   {"Temperature": _m(0.50)}, L3),
+    "ChemCannon":  (["Chemical", "CannonAP"], {"Corrosion": _m(0.50)}, L3),
+    "ChemMissile": (["Chemical", "MissileAP"],{"Corrosion": _m(0.50)}, L3),
     # Waveforce = a resonant energy weapon: "a bit like a mix of the plasma warhead and the
     # quantum warheads" (maintainer 2026-08-16), adopted for the Japanese energy rifles —
     # which inherit `^WaveforceBulletWarhead` and were never railguns — and for the Protoss
@@ -1610,7 +1617,7 @@ BLEND_FAMILIES = {
     # Meters follow the documented per-parent-average rule, same as Quantum's comment above:
     # Temperature = (Flame 300 + Laser 225) / 5 parents = 105; Corrosion = (Chemical 300) / 5 = 60.
     "Waveforce": (["Flame", "Chemical", "Railgun", "Laser", "Tesla"],
-                  {"Temperature": 105, "Corrosion": 60}, L3),
+                  {"Temperature": _m(0.35), "Corrosion": _m(0.20)}, L3),
     # PhotonCannon = the maintainer's 3-way — Waveforce 25% / CannonHE 25% / MissileAA 50% — and
     # DELIBERATELY WITHOUT METERS (2026-08-18: *"a Waveforce x ... combo but without the physical
     # states"* … *"use a 3 way: waveforce x cannonHE x MissileAA"* … *"the photon cannon should
