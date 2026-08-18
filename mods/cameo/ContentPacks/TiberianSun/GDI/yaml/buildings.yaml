@@ -751,3 +751,27 @@ ts_gdi_upgradecenter:
 		Prerequisite: tsionc
 	RenderSprites:
 		PlayerPalette: playerra2
+ts_gdi_navalyard:
+	Inherits: ^RA2Building
+	Inherits@shipyard: ^IsShipyard
+	Inherits@shape: ^3x3Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
+	Tooltip:
+		Name: GDI Naval Yard
+	Buildable:
+		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_barracks, ~globalnaval
+	Building:
+		Footprint: =+= +++ =+=
+		Dimensions: 3,3
+		TerrainTypes: Water
+	-GivesBuildableArea:
+	WithResupplyAnimation:
+		Sequence: repair
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	Targetable:
+		TargetTypes: Ground, Water, C4, Structure
+	RenderSprites:
+		PlayerPalette: player_rgba

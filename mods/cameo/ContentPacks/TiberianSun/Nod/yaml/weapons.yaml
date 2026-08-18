@@ -141,6 +141,31 @@ TSStankTusk:
 	Warhead@CannonHE_Medium_Percentage:
 		Damage: 5
 		ValidTargets: Ground, Water, Air
+TSSBoatTusk:
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@wh2: ^Warhead_MissileHE_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_MissileHE_Medium
+	Range: 6385
+	Burst: 2
+	BurstDelays: 4
+	ReloadDelay: 60
+	Report: misl1.aud
+	Projectile: Missile
+		MinimumLaunchAngle: 75
+		MaximumLaunchAngle: 75
+	Warhead@MissileHE_Medium:
+		Damage: 9000
+		ValidTargets: Ground, Water, Air
+	Warhead@MissileHE_Medium_Percentage:
+		Damage: 5
+		ValidTargets: Ground, Water, Air
+	Warhead@CannonHE_Medium:
+		Damage: 9000
+		ValidTargets: Ground, Water, Air
+	Warhead@CannonHE_Medium_Percentage:
+		Damage: 5
+		ValidTargets: Ground, Water, Air
 
 TSStankTibTusk:
 	Inherits: ^Warhead_CannonHE_Medium

@@ -570,6 +570,44 @@ TSHoverMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
+TSDestroyerMissiles:
+	Inherits: ^FlakWeapon
+	Inherits: ^MediumMissile
+	Inherits: ^ShrapnelWeapon
+	ValidTargets: Ground, Water, Air
+	Report: missile6.aud
+	ReloadDelay: 60
+	Burst: 4
+	BurstDelays: 4
+	Range: 8159
+	Report: hovrmis1.aud
+	Projectile: Missile
+		RangeLimit: 22c512
+		HorizontalRateOfTurn: 20
+		Inaccuracy: 32
+		VerticalRateOfTurn: 20
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+
 TSMammothTusk2:
 	Inherits@glow: ^ImpactGlow
 	Inherits@wh: ^Warhead_MissileAP_Heavy
