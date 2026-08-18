@@ -232,16 +232,17 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 1
+    value: 124
     tolerance: 0
     what: >
       Fired weapons whose status meter reaches FULL effect while the target still has 25% HP —
       the maintainer's condition for pricing a meter at all ("it is able to completely freeze a
-      unit BEFORE it dies"). Currently 1 of 367. The ratio is independent of target HP:
-      `2 x damage / Amount` for a discrete apply, `200 / scale` for a damage-scaled meter, so
-      `scale: 100` pins it at exactly 2.0 — the target dies with the meter half full. Raising
-      scale to 267, or lowering PhysicalState MaxValue from 20000 to 7500, is what moves this
-      number; E2's 1.25x multiplier must not be applied until it does.
+      unit BEFORE it dies"). Was 1 of 367; the maintainer set full strength to 300 (2026-08-18)
+      and it is now 124 of 372. The ratio is independent of target HP AND of damage:
+      `2 x damage / Amount` for a discrete apply, `200 / scale` for a damage-scaled meter.
+      ⚠ The remaining failures are the 166 discrete `ApplyPhysicalState` weapons, which the
+      scale ruling does not touch — they need `Amount >= 2.67 x damage per shot` or conversion
+      to the scaled mechanism. E2's 1.25x may only price weapons that clear the bar.
     docs: [docs/design/PHYSICAL_STATE_SYSTEM.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
     measure: |
       import sys, pathlib
@@ -278,6 +279,10 @@ claims:
                       binding = ('apply', abs(num(wh.get('Amount'))))
                   else:
                       binding = ('scaled', abs(num(wh.get('PhysicalStateScale'))))
+              multi = next((x for x in wh.children if x.key == 'PhysicalStates'), None)
+              if multi is not None and binding is None:
+                  best = max((abs(num(s.value)) for s in multi.children), default=0)
+                  if best > 0: binding = ('scaled', best)
           if binding is None or dmg <= 0 or binding[1] <= 0: continue
           kind, amt = binding
           ratio = (MAXV * dmg / (amt * 10000)) if kind == 'apply' else (MAXV / (amt * 100))
@@ -285,14 +290,14 @@ claims:
       print(n)
 
   - id: physical_state_fired_weapons
-    value: 367
+    value: 372
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
-      at ZERO for it — E2. Counts BOTH mechanisms: a discrete `ApplyPhysicalState` warhead and a
-      damage-scaled `PhysicalStateScale` riding on an AreaDamage warhead. Counting only the first
-      is how the docs carried "~89 bindings" for weeks. Drops to 0 relevance once `extract_stats`
-      reads a state term.
+      at ZERO for it — E2. Counts all THREE shapes: a discrete `ApplyPhysicalState` warhead, a
+      damage-scaled `PhysicalStateScale`, and a BLEND's `PhysicalStates:` dict — which carries no
+      `PhysicalStateName` at all, so keying on that name misses every blend family. Counting one
+      shape is how the docs carried "~89 bindings"; counting two gave 367.
     docs: [docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md, docs/design/BALANCE_PROGRAM_PLAN.md]
     measure: |
       import sys, pathlib
@@ -319,6 +324,12 @@ claims:
               if 'Ally' in rel and 'Enemy' not in rel: continue
               n += 1
               break
+          else:
+              for wh in node.children:
+                  if not wh.key.startswith('Warhead'): continue
+                  if any(x.key == 'PhysicalStates' for x in wh.children):
+                      n += 1
+                      break
       print(n)
 
   - id: plating_row_ties

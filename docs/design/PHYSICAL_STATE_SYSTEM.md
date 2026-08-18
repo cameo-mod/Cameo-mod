@@ -14,8 +14,33 @@ Companion: `AREADAMAGE_WARHEAD_REBALANCE.md`, `SPREAD_FALLOFF_PLAN.md`; memory `
 dies, and so goes also the saying about Flame and Corrosion — they can reach their full effect
 before a unit dies at around 25% HP left, right? You need to make sure this works!"*
 
-**It does not work.** Of the **367** fired weapons carrying a meter, **1** reaches full effect
-while the target still has 25% HP. One. `SheridanMissilesCryo`, which carries `Amount: 48000`.
+**It did not work.** Of the fired weapons carrying a meter, **1** reached full effect while the
+target still had 25% HP. One — `SheridanMissilesCryo`, which carries `Amount: 48000`.
+
+## ✅ FIXED — full strength is now 300 (maintainer, 2026-08-18)
+
+*"just make it 300 for a round nice number"* — 300 gives `200/300 = 0.667`, so full effect lands
+with **~33% HP** left, inside the 25% bar with margin. Applied in `gen_weapon_template.py`
+(`FAMILY_PHYSICAL_STATE` and every blend, ×3 so the per-parent-average rule stays exact) and
+spliced into the 94 templates.
+
+```
+                       before          after
+weapons clearing the bar     1 / 367      124 / 372   (33%)
+Temperature scaled   median ratio 2.00     0.67   ✅
+Corrosion   scaled   median ratio 2.00     0.67   ✅
+Temperature apply    median ratio 59.6     59.6   ⛔ untouched
+```
+
+⛔ **The 166 discrete `ApplyPhysicalState` weapons are NOT fixed by this**, because they carry an
+absolute `Amount`, not a scale. They need `Amount ≥ 2.67 × damage per shot` each, or conversion to
+the damage-scaled mechanism — the second is one rule instead of 166 numbers, and it auto-tracks
+post-armor damage the way `PhysicalStateScale` already does. That is the next decision.
+
+⚠ **Blends deliberately do NOT all clear the bar.** A Plasma is half thermal and delivers
+`Temperature 150` → ratio 1.33; Waveforce 105 → 1.90; Quantum 75 → 2.67. That is the honest
+reading of a blend, and it means **E2's 1.25× must follow DELIVERY, not the family name** — price
+the weapons that actually reach full effect, and price a partial meter partially.
 
 ### Why — and ⭐ the target's HP cancels out entirely
 
