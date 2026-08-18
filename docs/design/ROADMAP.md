@@ -459,12 +459,12 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   verifier or confirm it's upgrade-reachable; (d) 5 buildable vehicles sit in the
   infantry section (leech/bmwbike/antitankcannon/noidharvester/engineeringarmor) —
   handle in the vehicle pass.
-- [ ] **Populate design.special (K) + design.tech_tier** across the roster:
-  the formula APPLIES them when set (verified: madcap K=1.25, ghost tier=0.75 are
-  used) but most units are untagged → default 1.0, so specials/high-tech are
-  under-counted. The huge SF-pollutant deltas (ghost SUM 130000, specter 260000)
-  are dominated by MAX-era hot damage, not missing modifiers, but the modifiers
-  still need populating (ties into the catch-all-specials audit).
+- [x] **Computed tech-tier from prerequisite building chains** (done): new
+  `tools/balance/tier_chain.py` resolves each buildable actor's chain cost `C`
+  using only its own ContentPack leaf + the same game's Shared pack, computes
+  `f(C) = 1 / (1 + (C - 9500) / 8250)`, and writes `tier_chain_cost` +
+  `tier_multiplier` to the derived sidecar. Manual `design.tech_tier` values are
+  preserved as overrides.
 - [ ] Build `tools/balance/rebalance_classes.py` dispatcher: SUM price →
   2000-grid warheads → 1%-step FP-mult → range-solve to band (mult-of-10) →
   uniqueness within broad TYPE → Δ (goal ≤1). Consolidates the scout/
@@ -491,15 +491,12 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
 - [x] Fix the 4 anchor units to grid (shotgunner/fanatic 4000→2000×2, reload
   75→70; japan 12000→4000×3; lunar 24000→8000×3) via ledger→apply_balance→boot
   gate. Verified Δ0: anchors price to cost0, verifiers to 2.5×cost0. (2026-07-22)
-- [ ] **Tech-tier is applied ABSOLUTE, must be RELATIVE to the anchor's tier**
-  (found 2026-07-22 during the 4-anchor restat): `class_baseline_price` multiplies
-  by `design.tech_tier` (default 1.0). Closecombat is documented T3 (0.75) but no
-  unit is tagged, so all price at tier 1.0 and the anchor lands on cost0 — correct
-  BY ACCIDENT. The moment any closecombat unit is tagged T4, it would get absolute
-  0.5 instead of 0.5/0.75 (relative). FIX: effective tier = unit_tier / anchor_tier
-  so the anchor always cancels to 1.0 (matches the "verifier shares tier so it
-  cancels" law). Until fixed, do NOT tag class members with a tech_tier ≠ the
-  anchor's.
+- [x] **Tech-tier is applied RELATIVE to the anchor's tier** (done 2026-08-17):
+  `propose_class_rebalance.py`, `build_workbook.py`, and `check_band.py` now pass
+  `f(C_unit) / f(C_anchor)` to `class_baseline_price`; `fit_class.py` and the
+  `class_anchor_price` path still use the absolute multiplier because the anchor
+  cancels. The `TechTier` workbook column is absolute so a maintainer override is
+  readable; the class-baseline formulas divide by the anchor's absolute tier.
 - [~] Reconvert the ~20 MAX-era-hot closecombat+SF members (each warhead was
   set = intended total → 2–3× hot under SUM). BLOCKED on membership cleanup
   first — the current subtype rosters pull in snipers/casters/spies/core-combat

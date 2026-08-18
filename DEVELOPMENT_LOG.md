@@ -1,5 +1,42 @@
 # Development Log
 
+## 2026-08-20 — Computed prerequisite-chain tech tier
+
+- Added `tools/balance/tier_chain.py` with `TierChain(model)` resolving buildable
+  prerequisites to a total building-chain cost `C`, restricted to the actor's
+  own ContentPack leaf plus the same game's `Shared` pack. Cheapest valid provider
+  selected per token; buildings deduplicated across branches; cycles are broken.
+- `TierChain` indexes `Building` actors with `Valued.Cost` and both their actor
+  name and `ProvidesPrerequisite` tokens as providers.
+- `tools/balance/formula.py` now exports `TIER_B` (9500.0), `TIER_S` (8250.0),
+  and `tier_multiplier(C)`. Docstrings updated to distinguish absolute
+  (`class_anchor_price`) and relative (`class_baseline_price`) usage.
+- `tools/balance/extract_stats.py` attaches `tier_chain_cost` and `tier_multiplier`
+  to each buildable actor's `_derived` blob; manual `design.tech_tier` values are
+  never overwritten.
+- `tools/balance/fit_class.py` uses the absolute tier in `unit_inputs()`, preferring
+  a manual `design.tech_tier` and falling back to the derived `tier_multiplier`.
+- `tools/balance/propose_class_rebalance.py` computes per-class relative tier
+  `f(C)/f(C_anchor)` for `class_baseline_price`; the anchor's manual `tech_tier`
+  is used as the denominator when present.
+- `tools/balance/build_workbook.py` writes the absolute `TechTier` to the
+  spreadsheet and divides by the anchor's absolute tier inside the class-baseline
+  `Price` and `RangeSolve` formulas.
+- `tools/balance/check_band.py` loads derived sidecars, computes absolute unit
+  tier, and uses the relative tier for `class_baseline_price` while keeping the
+  absolute tier for `class_anchor_price`.
+- Regenerated all 32 raw ledgers and 32 derived sidecars with `extract_stats.py`.
+- Verified: `td_nod_lasertrooper` → `tier_chain_cost = 27000.0`, `tier_multiplier =
+  0.3204`; its closure contains only Nod and Shared buildings (no GDI).
+- `extract_stats.py --check` reports 0 drifted; `audit_balance_drift.py` is clean.
+- `build_workbook.py` and `propose_class_rebalance.py --class mbt` run without
+  errors; `fit_class.py --class scout --anchor naxis_naxiriflesoldier` produces
+  a candidate and was reverted so `class_anchors.json` is unchanged.
+- Updated `docs/design/tier_chain_validation.md`, `docs/design/ROADMAP.md`, and this log.
+- Building-plug addons (`Plug:` trait) are not counted as separate actor-name
+  providers, so `wc2_orcs_deathknight` resolves to $15,000 (Great Hall +
+  Temple of the Damned) rather than double-counting the Fortress upgrade plug.
+
 ## 2026-08-19 — Delivery-weighted physical-state price multiplier wired into fit_class
 
 - `tools/balance/extract_stats.py` now imports `physical_state_price` and calls

@@ -29,6 +29,7 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/balance"))
 import formula  # noqa: E402
+import tier_chain  # noqa: E402
 
 LEDGER = ROOT / "docs/balance"
 ANCHORS = LEDGER / "class_anchors.json"
@@ -118,9 +119,14 @@ def unit_inputs(u, du=None, use_k=False):
     total_dps *= fp   # apply the actor-level FirepowerMultiplier to effective DPS
     if hp is None or speed is None or total_dps == 0:
         return None, 0
+    # Tech tier: manual design.tech_tier is the maintainer override;
+    # otherwise fall back to the derived sidecar's computed f(C).
+    tech_tier = tier_chain.effective_tier(d.get("tech_tier"),
+                                          (du or {}).get("tier_multiplier"),
+                                          default=1.0)
     return ((hp, speed, best_range, total_dps,
              fnum(d.get("special")) or 1.0, fnum(d.get("unit_class")) or 1.0,
-             fnum(d.get("tech_tier")) or 1.0), fallbacks)
+             tech_tier), fallbacks)
 
 
 def physical_state_weight(u, du=None) -> float:

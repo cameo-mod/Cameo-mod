@@ -38,6 +38,7 @@ import sys
 import openpyxl
 from openpyxl.comments import Comment
 from openpyxl.formatting.rule import ColorScaleRule
+import tier_chain
 from openpyxl.styles import Alignment, Font, PatternFill, Protection
 from openpyxl.utils import get_column_letter
 
@@ -132,7 +133,9 @@ def unit_rows(ws, theme, aid, u, section, row):
     ws.cell(row=row, column=COL["HP"], value=hp)
     ws.cell(row=row, column=COL["Speed"], value=speed)
     ws.cell(row=row, column=COL["Armor"], value=armor)
-    ws.cell(row=row, column=COL["TechTier"], value=d.get("tech_tier") or 1)
+    tech_tier = getattr(build, "_tier_map", {}).get(aid,
+                                                    fnum(d.get("tech_tier")) or 1.0)
+    ws.cell(row=row, column=COL["TechTier"], value=tech_tier)
     ws.cell(row=row, column=COL["UnitClass"], value=d.get("unit_class") or 1)
     ws.cell(row=row, column=COL["Special"], value=d.get("special") or 1)
     fp_raw = fnum((u.get("firepower_multiplier") or {}).get("v"))
@@ -232,11 +235,15 @@ def unit_rows(ws, theme, aid, u, section, row):
             sd = f"({S_}/{sp0})"
             d = f"({DPS_}/{dps0})"
             rn = f"(({L('Range(wd)')}{r}/{rng0})*{K_})"
+            anchor_tier = getattr(build, "_anchor_tier_map", {}).get(cls, 1.0)
+            # TechTier column is absolute f(C); class-baseline needs relative
+            # f(C)/f(C_anchor), so divide by the anchor's absolute tier here.
+            T_REL = f"({T_}/{anchor_tier})"
             price = (f"=(({h}+{sd}+{d}+{rn})*{c0}/4"
                      f"+(({h}*{sd})+({rn}*{d}))*{c0}/2"
-                     f"+({h}*{sd}*{rn}*{d})*{c0})*{T_}/3")
-            A = f"(({h}+{sd}+{d})*{c0}/4+({h}*{sd})*{c0}/2)*{T_}"
-            B = f"({c0}/4+({d})*{c0}/2+({h}*{sd}*{d})*{c0})*{T_}"
+                     f"+({h}*{sd}*{rn}*{d})*{c0})*{T_REL}/3")
+            A = f"(({h}+{sd}+{d})*{c0}/4+({h}*{sd})*{c0}/2)*{T_REL}"
+            B = f"({c0}/4+({d})*{c0}/2+({h}*{sd}*{d})*{c0})*{T_REL}"
             rs = (f"=IFERROR(ROUND(((3*{L('Cost')}{r}-{A})/{B}*{rng0})"
                    f"/{K_},-1),\"\")")
             ws.cell(row=r, column=COL["Price"], value=price)
@@ -437,6 +444,38 @@ def load_ledgers():
                                          doc["ledger"]))
 
 
+def load_tier_map(docs):
+    """{(actor): absolute tier multiplier} from raw design + derived sidecar."""
+    tier_map = {}
+    for doc in docs:
+        dfile = LEDGER / "derived" / f"{doc['ledger']}.json"
+        try:
+            ddoc = json.loads(dfile.read_text(encoding="utf-8")) if dfile.is_file() else {}
+        except Exception:
+            ddoc = {}
+        dsec = ddoc.get("sections") or {}
+        for section, sec in doc["sections"].items():
+            du_sec = dsec.get(section) or {}
+            for actor, u in sec.items():
+                design = u.get("design") or {}
+                du = du_sec.get(actor) or {}
+                tier_map[actor] = tier_chain.effective_tier(
+                    design.get("tech_tier"), du.get("tier_multiplier"), default=1.0)
+    return tier_map
+
+
+def load_anchor_tiers(anchors, tier_map):
+    """{class: absolute anchor tier multiplier}."""
+    out = {}
+    for cls, a in anchors.items():
+        anchor_actor = a.get("anchor_actor")
+        if anchor_actor and anchor_actor in tier_map:
+            out[cls] = tier_map[anchor_actor]
+        else:
+            out[cls] = fnum(a.get("tech_tier")) or 1.0
+    return out
+
+
 def write_faction_workbook(docs):
     wb = openpyxl.Workbook()
     add_constants_sheet(wb, "cameo_balance_by_faction")
@@ -562,6 +601,8 @@ def build(docs=None):
         anchors_file.read_text(encoding="utf-8")) if anchors_file.exists()
         else {}).items() if isinstance(v, dict)}
     docs = docs if docs is not None else load_ledgers()
+    build._tier_map = load_tier_map(docs)
+    build._anchor_tier_map = load_anchor_tiers(build._anchors, build._tier_map)
     OUTFILE.parent.mkdir(parents=True, exist_ok=True)
     write_faction_workbook(docs)
     write_type_workbook(docs)
