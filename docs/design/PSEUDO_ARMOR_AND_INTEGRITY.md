@@ -614,7 +614,7 @@ Measured against `formula.py`, `weapon_efficiency.py` and `target_model.py`.
 | # | gap | why it matters | severity |
 |---|---|---|---|
 | **E1** | ✅ **FIXED 2026-08-17 (both halves).** Weapon side: `armor_weights()` now carries a 17th `Shield` row at its measured damage share, and `weighted_versus` iterates the weights instead of `ARMORS`. Unit side: `extract_stats.survivability()` publishes `effective_hp` for actors that SPAWN with a pool. | ⚠ **The "51% of the roster" figure was wrong** — it counted the 1592 actors carrying `Shielded`, but 1318 of those hold an EMPTY capacity behind `shieldgen >= 1`. Only **58** spawn with a pool, so baseline Shield exposure is **1.432%**, and the weapon-side correction is +0.65% (Bullet) to +3.47% (Tesla), not a repricing. The real hole is the unit side: those 58 carry **+57.8% effective HP at zero cost**. Report: `audit_survivability_pricing.py`. | ~~high~~ **done** |
-| **E2** | `PhysicalState` (heat / cold / corrosion) is priced at zero — `extract_stats` reads no such field. | ~89 live bindings deliver a real effect for free. Design work exists (`cameo-physical-state-pricing`), the extractor does not. | **high** |
+| **E2** | `PhysicalState` (heat / cold / corrosion) is priced at zero — `extract_stats` contains **0** references to it. | ⚠ **"~89 live bindings" was wrong by 8×. Measured 2026-08-18: 722 bindings on 453 weapons, of which 367 are actually FIRED, carried by 578 armaments** — roughly a quarter of the damaging roster delivers a status meter for free. It is also TWO mechanisms, not one (see below), and the earlier count saw only part of one. Design work exists (`cameo-physical-state-pricing`), the extractor does not. | **high** |
 | **E3** | `IntegrityScale` is priced at zero. | 1233 actors carry the pool; a disable at 50% HP is worth real money. | medium |
 | **E4** | ✅ **FIXED 2026-08-17 — `K` was not damage-independent.** The `%`-twin's damage is a share of the TARGET's max HP, so it does not scale with the weapon's flat `Damage` — yet `k` folded it in as `share = ref_hp × pct_damage / 100 / flat_total`, putting `flat_total` in a DENOMINATOR. | Not a mis-price of anything shipped: `effective_per_shot = damage_total × k_context` is exact at the current Damage, and `propose_class_rebalance` never routes through K (it sums flat warheads, twins excluded). It was a **documented wrong recipe** — the inversion `Damage_required = target_dps × eff_reload / (burst × FP × K)` was stated in 6 places and is only correct at λ=1. Fix: the affine split `k_flat_context` + `pct_absolute_context`, `required_damage()`, and `dps_floor` in the ledger. Guard: `audit_k_linearity.py`. | ~~high~~ **done** |
 | **E5** | Upgrades are priced at zero — there is no ΔP report, so a weapon swap is free. | The maintainer has already flagged this; it is the whole upgrade-rebalance prerequisite. | high (deferred by design) |
@@ -628,6 +628,75 @@ Measured against `formula.py`, `weapon_efficiency.py` and `target_model.py`.
 rather than for one weapon. Both turned out to be a different size than this table first
 claimed, in opposite directions, and the corrections are recorded below rather than quietly
 edited away — a severity estimate that moves by 30x is itself a finding.
+
+### E2 measured — and it is TWO mechanisms, which is why the old count was small
+
+```
+Temperature, damage-SCALED   396 bindings   PhysicalStateName + PhysicalStateScale on an AreaDamage warhead
+Temperature, discrete APPLY  242 bindings   Warhead@X: ApplyPhysicalState + Amount
+Corrosion,   damage-SCALED    84 bindings
+                             ---
+                             722 bindings on 453 weapons — 367 of them FIRED, on 578 armaments
+```
+
+⚠ **Counting only one mechanism is how "~89" happened, and I repeated the mistake mid-measurement**
+— a first pass that looked only for `ApplyPhysicalState` reported 242, which is also wrong. The
+damage-scaled meters (`PhysicalStateScale`, the larger half) ride on the *damage* warhead and
+carry no `ApplyPhysicalState` marker at all.
+
+Two consequences for the fix:
+
+* **The scale units are NOT comparable across mechanisms.** `Amount` is an absolute meter delta
+  per hit (`800`, `1200`, `-30000` for cryo — the sign is the direction, heat vs cold), while
+  `PhysicalStateScale` is a PERCENTAGE of the damage dealt (`100`, `75`). A pricing term has to
+  normalise them before it can add them up.
+* **Only two states are live: Temperature and Corrosion.** Everything else in
+  `PHYSICAL_STATE_SYSTEM.md` (Sonic, ArmorBreach, Hex, Knockback) is design, not shipped content,
+  so E2's scope is exactly these two.
+
+⛔ **What is still owed before the extractor can price it: what a meter is WORTH.** Recording the
+bindings is mechanical and needs no ruling; converting them into a `state_w` term does — the
+existing note (`cameo-physical-state-pricing`) has cryo at 0.75× as an empirical measurement, and
+nothing equivalent exists for heat or corrosion. Claim: `physical_state_fired_weapons`.
+
+### ✅ E2 ANSWERED (2026-08-18) — `tools/balance/physical_state_price.py`
+
+The maintainer's ruling supplies the worth: **1.25× cost, but only for delivery** — *"Cryo seems as
+strong as Fire IF it is able to completely freeze a unit BEFORE it dies"*. Built as
+
+```
+weight     = clamp01( exposure × delivery(ratio, effect curve) / delivery(bar, cryo curve) )
+multiplier = 1 + 0.25 × weight            formula.physical_state_price_multiplier
+```
+
+with all three inputs measured from the resolved tree, never assumed. Full derivation in
+`PHYSICAL_STATE_SYSTEM.md`; the three findings that matter here:
+
+Building it uncovered **three defects that made the axes behave differently** — all fixed in
+`defaults.yaml` on maintainer order (*"the absolute maximum and minimum values are the same!"*):
+
+* ⛔ **D1 — one `Scale` meant two fill rates.** The engine divides by the meter's `range`
+  (`MaxValue − MinValue`), not by the `10000` its own `[Desc]` advertises. `Corrosion` shipped
+  `MinValue: 0`, so its range was half `Temperature`'s and the same Scale filled heat **twice as
+  fast**. Fixed by making Corrosion signed. Corrected count: **223 of 376 bindings** reach full
+  effect, not the 124 or the 1 this document previously carried — both were wrong-formula values;
+* ⛔ **D2 — corrosion delivered nothing below HALF the meter** (`Corroding: LowerValue 10000`)
+  while heat opened at 1%: a 50× gate difference inside one system. Now both open at 1%;
+* ⛔ **D3 — every DoT opened at half strength**, because
+  `ChangesHealthProportionalToPhysicalState` normalises over the full *signed* range with no
+  deviation option. `DamageAtMinimum: -DamageAtMaximum` puts the zero back at a relaxed meter;
+* ⭐ **exposure is now the ONLY thing separating the axes** — `Corrosion` sits on **45.0%** of
+  priced actors against `Temperature`'s 98.6%, so a corrosion weapon caps at **1.165×** where a
+  flame weapon reaches 1.25× despite an identical meter and an identical fill rate. That is what
+  separates Flame from Chemical, and nothing in the price model saw it before.
+
+Result: 190 bindings pay the full 1.25×, 174 partially, 12 nothing; **+15.7%** across 276 actors.
+Guards: `tools/tests/test_physical_state_price.py` (17 tests) + claims
+`meters_filling_before_death`, `corrosion_meter_actors`, `physical_state_fired_weapons`.
+
+⛔ **Still owed by the maintainer:** whether `PhysicalStateScale` stays at **300**. It was chosen
+against the wrong arithmetic — `Scale: 100` already cleared the bar at ratio 0.50 — so 300 is a 3×
+faster fill that the 1.25× ceiling cannot charge for.
 
 ### E1, as measured and fixed (2026-08-17)
 

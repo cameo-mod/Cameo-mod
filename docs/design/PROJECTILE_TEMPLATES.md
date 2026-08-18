@@ -54,8 +54,26 @@ Inaccuracy = InaccuracyPercentage% of the weapon's Range      (cannons: 1%)
 Speed      = ProjectileSpeedPercentage% of the weapon's Range  (cannons: 10%, artillery: 2%)
 ```
 
-Sanity check against what ships: a 5000-range cannon → Speed 500. **The existing Shell templates
-are `Speed: 500`, so 10% is already the de-facto convention** and baking it in changes nothing.
+⚠ **CORRECTION (measured 2026-08-17).** This document said *"the existing Shell templates are
+`Speed: 500`, so 10% is already the de-facto convention and baking it in changes nothing."* That
+was arithmetic on one hypothetical 5000-range cannon, not a measurement. Across the **145 weapons**
+that actually inherit a `^Projectile_Shell_*` template:
+
+| | today | derived at 10% of Range |
+|---|---|---|
+| Speed | flat **500** for all 145 | **300 … 1400** — `0.60×` to `2.80×`, and exactly ONE weapon lands on 500 |
+| Inaccuracy | 150 / 300 / 450 by template | **30 … 140** — `3.2×` to `11.8×` tighter |
+
+So deriving Speed is a real change: most cannons get a *faster* shell (the bulk land 540–700) and
+the longest-ranged get 2.8×. Deriving Inaccuracy is a large accuracy buff, and E6 prices
+inaccuracy at zero, so it would be free until E6 lands. Both go through the pipeline.
+
+⭐ **The measurement also settles the collapse question.** The Light/Medium/Heavy assignment does
+not correlate with range at all — `120mm_cobra` sits on `Shell_Light` at Range 7640 while `105mm`
+sits on `Shell_Medium` at 5469. The three templates differ ONLY in a hand-written `Inaccuracy`, and
+once that number is derived from each weapon's own Range there is nothing left to distinguish them
+(same `Image`, same speed rule, same shadow) except two sounds that are moving onto the weapons
+anyway. **The three-way split is not carrying an axis; the data says collapse it.**
 
 ⚠ **Inaccuracy is NOT already at 1%.** Current Shell values on a 5000-range cannon are
 150 / 300 / 450 = **3% / 6% / 9%**. Adopting 1% makes cannons **3–9× more accurate** — a real
@@ -79,7 +97,38 @@ are `PerCellIncrement`, and the **rocket's per-cell increment is larger**. Speed
 way: a rocket accelerates, so its `ProjectileSpeedPercentage` is lower than a shell's off the
 line.
 
-## 4. Implementation — a mod-side shadow, no engine change
+## 4. ✅ IMPLEMENTED — `ScaledBullet`, and it is NOT a shadow
+
+Shipped as `OpenRA.Mods.Cameo/Projectiles/ScaledBullet.cs`. Three findings changed the plan this
+document originally set out:
+
+* ⭐ **No shadow, and no 367-line copy.** `Ruleset.cs:70` calls `RulesetLoaded` on the projectile
+  info with the firing `WeaponInfo` — so `ScaledBulletInfo : BulletInfo, IRulesetLoaded<WeaponInfo>`
+  reads `Range` at LOAD time and derives both values once, inheriting every existing field
+  (`Image`, `Sequences`, `Shadow`, `TrailImage`, `InaccuracyType`, …) for free.
+* **Deliberately a NEW type rather than a `Bullet` shadow.** This document warned that shadowing
+  `Bullet` silently changes every weapon that says `Projectile: Bullet` — the most-used projectile
+  in the mod. A separate name means a template opts in and nothing else moves.
+* The derived values are written through the same reflection FieldLoader itself uses on
+  `public readonly` fields, which is why no engine change is needed.
+
+```
+InaccuracyPercentage: 1        # of the weapon's Range; 0 disables
+ProjectileSpeedPercentage: 10  # of the weapon's Range, in WDist/tick; 0 disables
+```
+
+⚠ **An explicit `Inaccuracy` / `Speed` in yaml still WINS**, so this is a default, never a
+constraint. "Explicit" is detected as *differs from `BulletInfo`'s own default*, because
+FieldLoader does not report which keys the yaml contained — so a weapon that deliberately writes
+`Inaccuracy: 0` or `Speed: 17` **and** sets a percentage gets the derived value instead. Set the
+percentage to 0 there.
+
+The three Shell templates now say `Projectile: ScaledBullet` and carry both percentages **with
+their explicit `Speed` / `Inaccuracy` kept**, so behaviour today is byte-identical and the boot
+proves the type and its Cameo-only fields load (an unknown field throws at load). Deleting the
+explicit lines is what activates the rules — and that is the balance change measured above.
+
+## 5. The original plan — a mod-side shadow (superseded by §4)
 
 `ProjectileArgs` carries the firing `WeaponInfo`, so the projectile can read `Range` at creation
 and compute both defaults. That means a Cameo-side `Bullet` (and `Missile`) with two new fields:

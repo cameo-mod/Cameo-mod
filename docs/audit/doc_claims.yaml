@@ -1,4 +1,4 @@
-# doc_claims.yaml — every NUMERIC claim the design docs make, and how to re-measure it.
+﻿# doc_claims.yaml â€” every NUMERIC claim the design docs make, and how to re-measure it.
 #
 # Maintainer 2026-08-17: *"the documentations are starting to explode in size ... regularly
 # review everything for discrepancies and contradictions and then make design decisions
@@ -205,6 +205,174 @@ claims:
           try: n += p.read_text(encoding='utf-8', errors='replace').count('PercentageDenominator')
           except OSError: pass
       print(n)
+
+  - id: unmigrated_scout_damage_multiplier
+    value: 16
+    tolerance: 0
+    what: >
+      Scouts still resolving `DamageMultiplier@ScoutInfantryBuff: 50` — i.e. taking HALF damage,
+      double effective HP, unpriced. FORMULA_V2 says the 2x-health bake "replaced" this; it
+      replaced it for 19 of 35. The 19 migrated actors CANCEL the template with a local
+      `Modifier: 100`, which is exactly why those overrides look like deletable no-ops and are
+      NOT — deleting them restores the 50% reduction. Goes to 0 when the bake is finished.
+    docs: [docs/design/FORMULA_V2.md, docs/design/ROADMAP.md, docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from cameo_model import Model
+      m = Model(); rs = m.rs; n = 0
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          res = rs.resolve(name)
+          if res is None: continue
+          for c in res.children:
+              if c.key == 'DamageMultiplier@ScoutInfantryBuff':
+                  if (c.get('Modifier') or '').strip() == '50': n += 1
+                  break
+      print(n)
+
+  - id: meters_filling_before_death
+    value: 223
+    tolerance: 0
+    what: >
+      Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
+      still has 25% HP left — the maintainer's condition for pricing a meter at all ("it is
+      able to completely freeze a unit BEFORE it dies"). 223 of 376 bindings on 372 weapons.
+      ⛔ THE EARLIER VALUES (1, then 124) WERE MEASURED WITH A WRONG FORMULA and are void.
+      `PhysicalState.ApplyChange` health-scales through `ScaleChangeToHealth`, which divides by
+      MaxHP and multiplies by the meter's RANGE (`MaxValue - MinValue`) — NOT by the 10000
+      that `PhysicalStateInfo`'s own [Desc] still advertises ("divided by HP/10000"), which is
+      what the old derivation trusted. `Temperature` is SIGNED so its range is 40000, while
+      `Corrosion` shipped `MinValue: 0` — so one Scale meant TWO fill rates, heat filling twice
+      as fast as corrosion. Fixed 2026-08-18 by making Corrosion signed too (maintainer: *"the
+      absolute maximum and minimum values are the same!"*), so
+      `ratio = MaxValue x 100 / (Scale x range)` = **50/Scale on both meters**, 4x faster than
+      the docs claimed. Target HP and weapon damage both cancel. The formula now lives ONLY in
+      `tools/balance/physical_state_price.py`, which this measure imports, so the two can no
+      longer disagree.
+      ⚠ The failures are the discrete `ApplyPhysicalState` weapons (13 of 166 pass); the
+      damage-scaled ones pass 210/210, and 177 of them already passed at the ORIGINAL Scale 100.
+    docs: [docs/design/PHYSICAL_STATE_SYSTEM.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
+    measure: |
+      import sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from cameo_model import Model
+      import physical_state_price as psp
+      rows, _ref, _geom, _exp, _curves = psp.scan(Model().rs)
+      print(sum(1 for r in rows
+                if r['ratio'] is not None and r['ratio'] <= psp.FULL_EFFECT_BAR))
+
+  - id: corrosion_meter_actors
+    value: 724
+    tolerance: 0
+    what: >
+      Actors carrying the `Corrosion` meter — 45.0% of the 1609 priced (Health + Valued)
+      actors, against `Temperature`'s 1592 (98.6%). This asymmetry is an EXPOSURE term in E2
+      pricing: a corrosion weapon does nothing at all to 55% of the roster, so it cannot earn
+      the same status surcharge as a flame weapon even when its meter fills faster. Nothing in
+      the price model saw this before 2026-08-18.
+    docs: [docs/design/PHYSICAL_STATE_SYSTEM.md]
+    measure: |
+      import sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from cameo_model import Model
+      rs = Model().rs
+      n = 0
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          node = rs.resolve(name)
+          if node is None: continue
+          for c in node.children:
+              if (c.key == 'PhysicalState' or c.key.startswith('PhysicalState@')) \
+                      and (c.get('Name') or '').strip() == 'Corrosion':
+                  n += 1
+                  break
+      print(n)
+  - id: physical_state_fired_weapons
+    value: 372
+    tolerance: 0
+    what: >
+      FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
+      at ZERO for it — E2. Counts all THREE shapes: a discrete `ApplyPhysicalState` warhead, a
+      damage-scaled `PhysicalStateScale`, and a BLEND's `PhysicalStates:` dict — which carries no
+      `PhysicalStateName` at all, so keying on that name misses every blend family. Counting one
+      shape is how the docs carried "~89 bindings"; counting two gave 367.
+    docs: [docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md, docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from cameo_model import Model
+      m = Model(); rs = m.rs
+      fired = set()
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          node = rs.resolve(name)
+          if node is None: continue
+          for c in node.children:
+              if c.key == 'Armament' or c.key.startswith('Armament@'):
+                  w = (c.get('Weapon') or '').strip()
+                  if w: fired.add(w)
+      n = 0
+      for w in sorted(fired):
+          node = rs.resolve_weapon(w)
+          if node is None: continue
+          for wh in node.children:
+              if not wh.key.startswith('Warhead'): continue
+              if not (wh.get('PhysicalStateName') or '').strip(): continue
+              rel = (wh.get('ValidRelationships') or '').strip()
+              if 'Ally' in rel and 'Enemy' not in rel: continue
+              n += 1
+              break
+          else:
+              for wh in node.children:
+                  if not wh.key.startswith('Warhead'): continue
+                  if any(x.key == 'PhysicalStates' for x in wh.children):
+                      n += 1
+                      break
+      print(n)
+
+  - id: plating_row_ties
+    value: 0
+    tolerance: 0
+    what: >
+      Emitted families sharing a plating row with another family (ARMOR excluded — it is flat by
+      design). The maintainer's uniqueness law: *"don't put 3 energy weapons exactly on the same
+      versus value"*. Four groups tied before e7fa2d57b. A tie may ONLY be fixed by moving mass
+      across a group boundary onto a second real defeat mechanism — never by fabricated noise.
+    docs: [docs/design/PLATING_COMPOSITION_REFINEMENT.md, docs/design/PLATING_COMBINATION.md]
+    measure: |
+      import sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import gen_weapon_template as gen
+      fams = []
+      for nm, (_b, _d, _a, lv) in gen.WEAPONS.items():
+          if nm not in gen.HAND_TUNED:
+              fams += [nm] * len(lv)
+      for nm, (_p, _n, _s, lv) in gen.INHERIT_FAMILIES.items():
+          fams += [nm] * len(lv)
+      for nm, (_p, _s, lv) in gen.BLEND_FAMILIES.items():
+          fams += [nm] * len(lv)
+      fams += ['Storm'] * len(gen.STORM_LEVELS)
+      cols = [p for p in gen.PLATING_CYCLE if p != 'ARMOR']
+      names = sorted(set(fams))
+      rows = [tuple(dict(gen.plating_rows(f))[c] for c in cols) for f in names]
+      print(len(names) - len(set(rows)))
+
+  - id: plating_families
+    value: 32
+    tolerance: 0
+    what: >
+      Families the generator emits a plating row for. The row count of the matrix in
+      PLATING_COMPOSITION_REFINEMENT.md — so adding a family without updating that table, or
+      dropping one, goes red instead of silently making the document wrong.
+    docs: [docs/design/PLATING_COMPOSITION_REFINEMENT.md]
+    measure: |
+      import sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import gen_weapon_template as gen
+      fams = {nm for nm in gen.WEAPONS if nm not in gen.HAND_TUNED}
+      fams |= set(gen.INHERIT_FAMILIES) | set(gen.BLEND_FAMILIES) | {'Storm'}
+      print(len(fams))
 
   - id: signed_off_class_anchors
     value: 0

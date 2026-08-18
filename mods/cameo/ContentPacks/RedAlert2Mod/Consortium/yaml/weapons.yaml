@@ -1360,6 +1360,7 @@ SteelQuantumTurretRail_EMP:
 
 SteelInspectorIonCannon:
 	Inherits: SteelInspectorIonCannonDamage
+	Report: tesla1.aud
 	ValidTargets: Ground, Water
 	AirThreshold: 10000
 	Range: 2500
@@ -1383,6 +1384,7 @@ SteelInspectorIonCannonDamage:
 	Inherits@2: ^Warhead_Tesla_Super
 	Inherits@3: ^Projectile_Lightning_Super
 	Inherits@4: ^Effect_Tesla_Super
+	Report: tesla1.aud
 	ValidTargets: Ground, Water
 	AirThreshold: 10000
 	Warhead@Tesla_Super:

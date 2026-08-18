@@ -140,6 +140,41 @@ shield is the FIELD SHAPE (`MaxStrength + MaxPercentageStrength`). Corrected 202
 
 ---
 
+## `Parent type X was already inherited` — the crash class nothing but the boot could see (2026-08-17)
+
+The engine refuses to load a node that reaches the **same parent twice along one ancestor chain**
+(`engine/OpenRA.Game/MiniYaml.cs` → `ResolveInherits`; `inherited.Add(name, loc)` throws). The RA2
+effect-template refactor produced **30** of these at once — a weapon inheriting `^Effect_X_Heavy`
+directly *and* a new `^Effect_*_RA2` wrapper that inherits the same parent.
+
+Three properties, each counter-intuitive enough to have cost real time:
+
+* ⛔ **The `@suffix` does NOT make it legal.** The guard is keyed on the parent **TYPE**. The
+  crashing lines were `Inherits@4:` and `Inherits@fx:` — both suffixed. A previous handoff of mine
+  claimed the suffix "is what makes repeated inherits legal"; that is **false**, and it sent
+  another agent hunting for bare `Inherits:` lines — a search that finds nothing while 30
+  collisions are live. **Grep is not a test for this class.**
+* **A diamond is legal.** Two sibling parents that each inherit a common grandparent are fine:
+  the accumulated set is passed BY VALUE, so additions inside one sibling's recursion do not escape.
+* ⚠ **It is ORDER-DEPENDENT.** `Inherits: A` then `Inherits@2: B` where `B` inherits `A` crashes;
+  the same two lines swapped load fine. **Reordering an inherit block can break a working weapon**
+  — a direct hazard for W24's inherit collapse.
+
+Two process lessons on top of the engine one:
+
+1. **The boot is a terrible detector for a class it can only report ONE instance of.** It throws on
+   the first collision and stops, so N collisions cost N launch cycles (~40 s each plus diagnosis).
+   `audit_duplicate_inherits.py` (in `run_all.sh`) reports all of them in one pass: **D1** the crash,
+   **D2** a redundant parent that only line ORDER is saving, **D3** a dangling target.
+2. **A MiniYaml load failure can leave a zero-length `perf.log` and no obvious window.** The
+   exception log does appear, but the fast path to the diagnosis is running the engine binary
+   directly and reading **stderr** — `launch-game.cmd` swallows it behind `pause`.
+
+**Fix:** delete the redundant DIRECT inherit (the other parent already provides it). Reordering
+also silences the crash but leaves the redundancy behind as a D2.
+
+---
+
 ## 3-way split retrofits: two recurring child-weapon bugs (2026-08-08)
 
 Discovered during a deep review of conversion commits made 2026-08-07/08.

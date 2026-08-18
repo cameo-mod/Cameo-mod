@@ -19,7 +19,6 @@
 		ValidTargets: Ground, Ship
 
 ^Projectile_Sonic_Shell:
-	Report: 120mmf.aud
 	Projectile: Bullet
 		Speed: 896
 		Image: BOMB
@@ -37,7 +36,6 @@
 		ValidTargets: Ground, Ship
 
 ^Projectile_TS_Missile_Medium:
-	Report: bazook1.aud
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -65,7 +63,6 @@
 		PointDefenseTypes: Missile
 
 ^Projectile_TS_Missile_Heavy:
-	Report: missile6.aud
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -184,6 +181,7 @@ TS90mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
+	Report: tnkfire6.aud
 	ReloadDelay: 26
 	Range: 5319
 	Warhead@CannonHE_Medium:
@@ -193,6 +191,7 @@ TS90mm:
 
 TS90mmDep:
 	Inherits: TS90mm
+	Report: tnkfire6.aud
 	ReloadDelay: 22
 	Range: 6679
 	Projectile: Bullet
@@ -230,6 +229,7 @@ TS120mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
+	Report: tnkfire6.aud
 	ReloadDelay: 44
 	Range: 6201
 	Projectile: Bullet
@@ -246,6 +246,7 @@ TS120mm_bluenuke:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
+	Report: tnkfire6.aud
 	ReloadDelay: 44
 	Range: 6201
 	Projectile: Bullet
@@ -601,7 +602,6 @@ TurretLaserFragment:
 	Inherits@3: ^Projectile_Laser_Heavy
 	Inherits@4: ^TSLaserEffect
 	Inherits@5: ^Effect_Laser_Heavy
-	-Report:
 	Range: 2500
 	Projectile: LaserZap
 		Width: 24
@@ -704,6 +704,7 @@ ObeliskLaserFragment:
 	Inherits@3: ^Projectile_Laser_Heavy
 	Inherits@4: ^TSLaserEffect
 	Inherits@5: ^Effect_Laser_Heavy
+	Report: obelray1.aud
 	Range: 4000
 	-Warhead@Effect:
 	-Warhead@EffectAir:

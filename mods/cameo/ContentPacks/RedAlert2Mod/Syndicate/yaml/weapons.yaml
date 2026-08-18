@@ -50,6 +50,7 @@ latinsyndicate_latinmilitia_molotov_elite:
 
 LatinTankKillerRocket:
 	Inherits: ^RA2LightMissile
+	Report: bazook1.aud
 	ReloadDelay: 66
 	Range: 6666
 	Projectile: Missile
@@ -64,6 +65,7 @@ LatinTankKillerRocket:
 
 LatinTankKillerRocket_elite:
 	Inherits: LatinTankKillerRocket
+	Report: bazook1.aud
 	Range: 7777
 	Warhead@MissileAP_Light:
 		Damage: 52000
@@ -726,6 +728,7 @@ DiabloCannon:
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^Chaingun
 	Inherits@4: ^RA2FlakWeapon
+	Report: aacanon3.aud
 	ReloadDelay: 16
 	Range: 6300
 	ValidTargets: Ground, Water
@@ -756,13 +759,14 @@ DiabloCannon:
 
 DiabloCannon_elite:
 	Inherits: DiabloCannon
+	Report: aacanon3.aud
 	Range: 7300
 	Burst: 2
 	BurstDelays: 3
 
 DiabloCannon_AA:
 	Inherits: DiabloCannon
-	Inherits@fx: ^Effect_Flak_Puff_RA2
+	Report: aacanon3.aud
 	ValidTargets: Air
 	Range: 9450
 	Warhead@EffectAir: CreateEffect
@@ -770,6 +774,7 @@ DiabloCannon_AA:
 
 DiabloCannonAAE_AA:
 	Inherits: DiabloCannon_AA
+	Report: aacanon3.aud
 	Range: 10450
 	Burst: 2
 	BurstDelays: 3
@@ -1084,7 +1089,7 @@ LatinAADefenderCannon:
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
 	Inherits@2: ^RA2FlakWeapon
-	Inherits@3: ^Effect_Flak_Puff_RA2
+	Report: aacanon3.aud
 	Range: 15000
 	ReloadDelay: 20
 	Burst: 2
@@ -1230,6 +1235,7 @@ RA2APCFlakCannon:
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^Chaingun
 	Inherits@4: ^RA2FlakWeapon
+	Report: aacanon3.aud
 	ReloadDelay: 12
 	Range: 5740
 	ValidTargets: Ground, Water
@@ -1260,13 +1266,14 @@ RA2APCFlakCannon:
 
 RA2APCFlakCannon_elite:
 	Inherits: RA2APCFlakCannon
+	Report: aacanon3.aud
 	Range: 6740
 	Burst: 2
 	BurstDelays: 3
 
 RA2APCFlakCannonAA:
 	Inherits: RA2APCFlakCannon
-	Inherits@fx: ^Effect_Flak_Puff_RA2
+	Report: aacanon3.aud
 	ValidTargets: Air
 	Range: 8610
 	Warhead@EffectAir: CreateEffect
@@ -1274,6 +1281,7 @@ RA2APCFlakCannonAA:
 
 RA2APCFlakCannonAA_elite:
 	Inherits: RA2APCFlakCannonAA
+	Report: aacanon3.aud
 	Range: 9610
 	Burst: 2
 	BurstDelays: 3

@@ -871,6 +871,7 @@
 
 RA2GIRocketsG:
 	Inherits: ^RA2LightMissile
+	Report: bazook1.aud
 	ReloadDelay: 45
 	Range: 6567
 	Projectile: Missile
@@ -887,6 +888,7 @@ RA2GIRocketsG:
 
 RA2GIRocketsG_elite:
 	Inherits: RA2GIRocketsG
+	Report: bazook1.aud
 	Range: 7567
 	Warhead@MissileAP_Light:
 		Damage: 48000
@@ -934,6 +936,7 @@ RA2105mm_elite:
 
 RA2sabot:
 	Inherits: ^RA2TankDestroyerCannon
+	Report: cannon1.aud
 	ReloadDelay: 160
 	Range: 7040
 	Projectile: Bullet
@@ -946,6 +949,7 @@ RA2sabot:
 RA2sabot_elite:
 	Inherits: RA2sabot
 	Inherits@Elite: ^RA2EliteEffects
+	Report: cannon1.aud
 	Range: 8040
 	Warhead@CannonAP_Light:
 		Damage: 160000
@@ -1038,6 +1042,7 @@ RA2ThunderboltMissile:
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
+	Report: bazook1.aud
 	Projectile: Missile
 		Speed: 800
 		Arm: 2
@@ -1057,6 +1062,7 @@ RA2ThunderboltMissile:
 RA2ThunderboltMissile_elite:
 	Inherits: RA2ThunderboltMissile
 	Inherits@fx: ^Effect_Grey_Explosion_Medium_RA2
+	Report: bazook1.aud
 	Range: 6760
 	Burst: 4
 	Projectile: Missile
@@ -1067,11 +1073,13 @@ RA2ThunderboltMissile_elite:
 
 RA2ThunderboltMissile_AA:
 	Inherits: RA2ThunderboltMissile
+	Report: bazook1.aud
 	ValidTargets: Air
 	Range: 8640
 
 RA2ThunderboltMissile_AA_elite:
 	Inherits: RA2ThunderboltMissile_elite
+	Report: bazook1.aud
 	ValidTargets: Air
 	Range: 9640
 
@@ -1123,6 +1131,7 @@ RA2MultiThunderboltMissile:
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
+	Report: bazook1.aud
 	Projectile: Missile
 		Speed: 800
 		Arm: 2
@@ -1142,6 +1151,7 @@ RA2MultiThunderboltMissile:
 RA2MultiThunderboltMissile_elite:
 	Inherits: RA2MultiThunderboltMissile
 	Inherits@fx: ^Effect_Grey_Explosion_Medium_RA2
+	Report: bazook1.aud
 	Range: 7170
 	Burst: 4
 	Projectile: Missile
@@ -1152,11 +1162,13 @@ RA2MultiThunderboltMissile_elite:
 
 RA2MultiThunderboltMissile_AA:
 	Inherits: RA2MultiThunderboltMissile
+	Report: bazook1.aud
 	ValidTargets: Air
 	Range: 9255
 
 RA2MultiThunderboltMissile_AA_elite:
 	Inherits: RA2MultiThunderboltMissile_elite
+	Report: bazook1.aud
 	ValidTargets: Air
 	Range: 10255
 
@@ -1599,6 +1611,7 @@ TeslaFragmentLarge:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
+	Report: tesla1.aud
 	Range: 3333
 	Warhead@Tesla_Super:
 		Damage: 16000
@@ -1656,6 +1669,7 @@ TeslaArmorDischargeDummy:
 	Inherits@2: ^Warhead_Tesla_Heavy
 	Inherits@3: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Impact_RA2
+	Report: tesla1.aud
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 1
 	Range: 4500
@@ -1691,6 +1705,7 @@ TeslaArmorDischargeDummy:
 
 TeslaArmorDischargeArc:
 	Inherits: TeslaArmorDischargeDummy
+	Report: tesla1.aud
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -1718,6 +1733,7 @@ TeslaArmorDischargeArc:
 
 TeslaArmorDischargeFragment1:
 	Inherits: TeslaArmorDischargeArc
+	Report: tesla1.aud
 	Range: 2250
 	Warhead@LightMissile: SpreadDamage
 		Damage: 6000
@@ -1737,6 +1753,7 @@ TeslaArmorDischargeFragment1:
 
 TeslaArmorDischargeFragment2:
 	Inherits: TeslaArmorDischargeFragment1
+	Report: tesla1.aud
 	Range: 1500
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
@@ -1793,6 +1810,7 @@ TeslaFragment:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
+	Report: tesla1.aud
 	Range: 2074
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@Tesla_Heavy:
@@ -1810,6 +1828,7 @@ TeslaFragment2:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
+	Report: tesla1.aud
 	Range: 3111
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@Tesla_Heavy:
@@ -2262,7 +2281,6 @@ RA2SCUD:
 	ReloadDelay: 125
 	Range: 20000
 	MinRange: 4000
-	-Report:
 	TargetActorCenter: true
 	ValidTargets: Ground, Water
 	Projectile: Missile
@@ -2405,7 +2423,6 @@ YRBoomerSCUD:
 	Inherits: ^RA2Grenade
 	Inherits@2: ^RA2HeavyMissile
 	Inherits@fx: ^Effect_Watersplash_Large_RA2
-	-Report:
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Speed: 200
@@ -2944,7 +2961,6 @@ RA2Terrorist:
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Terrorist_Explosion_RA2
 	Inherits@3: ^Projectile_Grenade_Light
-	-Report:
 	Warhead@Concussion_Medium:
 		Damage: 50000
 	Warhead@Concussion_Medium_Percentage:
@@ -3122,7 +3138,6 @@ LightningBolt:
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	Projectile: InstantHit
-	-Report:
 	ValidTargets: Ground, Water, Air
 	Warhead@Storm_Super:
 		Spread: 1000
@@ -3184,6 +3199,7 @@ IvanBomb:
 	Inherits@wh3: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Heavy
+	Report: M203.aud
 	Warhead@Demolition_Light:
 		Damage: 30000
 	Warhead@Demolition_Light_Percentage:
@@ -3226,6 +3242,7 @@ TanyaBomb:
 	Inherits@wh3: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
+	Report: tnkfire6.aud
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
@@ -3276,6 +3293,7 @@ SEALAttach:
 
 SealBomb:
 	Inherits: TanyaBomb
+	Report: tnkfire6.aud
 	Warhead@CannonAP_Light: AreaDamage
 		Damage: 20000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage

@@ -1,5 +1,6 @@
 RA2TURRETFLAKAA:
 	Inherits: ^RA2FlakWeapon
+	Report: aacanon3.aud
 	Range: 12936
 	ReloadDelay: 15
 	ValidTargets: Air
@@ -10,6 +11,7 @@ RA2TURRETFLAKAA:
 
 SeaScorpion_AA:
 	Inherits: ^RA2FlakWeapon
+	Report: aacanon3.aud
 	Range: 13500
 	ReloadDelay: 17
 	ValidTargets: Air
@@ -536,6 +538,7 @@ TeslaFragmentWeak:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
+	Report: tesla1.aud
 	Range: 1555
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@Tesla_Heavy:
@@ -591,6 +594,7 @@ TeslaTankFragment:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
+	Report: tesla1.aud
 	Range: 2500
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@Tesla_Heavy:
@@ -608,6 +612,7 @@ TeslaTankFragment2:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
+	Report: tesla1.aud
 	Range: 3750
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@Tesla_Heavy:
@@ -741,6 +746,7 @@ RA2CRFlakGuyGun_elite:
 
 RA2FLAKAA:
 	Inherits: ^RA2FlakWeapon
+	Report: aacanon3.aud
 	ReloadDelay: 26
 	Range: 7834
 	ValidTargets: Air
@@ -753,6 +759,7 @@ RA2FLAKAA:
 
 RA2FLAKAA_elite:
 	Inherits: RA2FLAKAA
+	Report: aacanon3.aud
 	Range: 8834
 	Burst: 2
 	BurstDelays: 3
@@ -765,10 +772,15 @@ RA2FlakTrackGun_elite:
 
 RA2FlakTrackAAGun:
 	Inherits: RA2FlakTrackGun
-	Inherits@2: ^RA2FlakWeapon
+	ReloadDelay: 25
+	Report: aacanon3.aud
 	ValidTargets: Air
 	Range: 8292
 	Projectile: Bullet
+		Image: 50CAL
+		Speed: 10000
+		Inaccuracy: 250
+		Blockable: false
 		-LaunchAngle:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
@@ -804,6 +816,7 @@ IvanAttachAir:
 
 IvanBombAir:
 	Inherits: IvanBomb
+	Report: M203.aud
 	Warhead@Demolition_Light:
 		ValidTargets: Aircraft
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage

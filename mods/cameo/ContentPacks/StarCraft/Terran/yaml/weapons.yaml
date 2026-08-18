@@ -8,7 +8,6 @@ MarineMG:
 	Range: 6105
 	Burst: 3
 	BurstDelays: 2
-	-Report:
 	ValidTargets: Ground, Water, Air
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -390,6 +389,7 @@ ReaperPistols:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
 	Inherits@fx: ^Effect_Sniper_Light
+	Report: ramgun2.aud
 	ValidTargets: Infantry, Vehicle, Ship, Monster, Garrisoned
 	ReloadDelay: 22
 	Range: 4375
@@ -1734,6 +1734,7 @@ ScienceVessel_EMP:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
+	Report: tesla1.aud
 	ValidTargets: Vehicle
 	InvalidTargets: lockdowned
 	Range: 7500

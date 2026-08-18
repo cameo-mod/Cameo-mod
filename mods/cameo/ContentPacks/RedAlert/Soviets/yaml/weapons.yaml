@@ -2169,6 +2169,7 @@ HammerTankCannon:
 	Inherits@wh2: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
+	Report: tnkfire6.aud
 	ReloadDelay: 85
 	Range: 6825
 	Burst: 2
@@ -2193,6 +2194,7 @@ HammerTankCannonThermobaric:
 	Inherits@3: ^Projectile_Flame_Medium
 	Inherits@4: ^Effect_Flame_Medium
 	Inherits@3: HammerTankCannon
+	Report: tnkfire6.aud
 	Warhead@Demolition_Heavy:
 		Damage: 4000
 	Warhead@Demolition_Heavy_Percentage:
@@ -2269,6 +2271,7 @@ KotinCannon:
 	Inherits@wh2: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
+	Report: tnkfire6.aud
 	ReloadDelay: 96
 	Range: 6427
 	Burst: 2
@@ -2300,6 +2303,7 @@ KotinCannonThermobaric:
 	Inherits@3: ^Projectile_Flame_Medium
 	Inherits@4: ^Effect_Flame_Medium
 	Inherits@3: KotinCannon
+	Report: tnkfire6.aud
 	Warhead@Demolition_Heavy:
 		Damage: 4000
 	Warhead@Demolition_Heavy_Percentage:
@@ -2849,6 +2853,7 @@ MonsterTankTusk:
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileHE_Heavy
+	Report: missile6.aud
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 125
 	Burst: 4
@@ -3094,6 +3099,7 @@ VolkovMagneticWeaponTesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@2: ^Effect_Tesla_Impact_RA2
+	Report: tesla1.aud
 	ReloadDelay: 30
 	Range: 5660
 	Burst: 2

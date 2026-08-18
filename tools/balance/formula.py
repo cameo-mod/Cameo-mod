@@ -259,6 +259,36 @@ def charge_price_multiplier(charge, reload_fallback: float | None = None) -> flo
     return min(1.0, max(CHARGE_UP_PRICE_MULTIPLIER, scaled))
 
 
+# E2 — the physical-state (heat / cold / corrosion) meters, maintainer 2026-08-18:
+# *"Cryo seems as strong as Fire IF it is able to completely freeze a unit BEFORE it dies
+# ... Then they can be priced the same way with a 1.25x cost multiplier"*. The ruling is
+# CONDITIONAL, so the constant is a ceiling reached only by full delivery, not a flat rate
+# every flame weapon collects.
+#
+# The direction is the OPPOSITE of the charge-up discount above and the asymmetry is
+# deliberate: a charge-up is a weakness DPS cannot see, so it pays the unit back; a status
+# meter is a strength DPS cannot see, so it charges the unit more.
+PHYSICAL_STATE_PRICE_MULTIPLIER = 1.25
+
+
+def physical_state_price_multiplier(weight: float) -> float:
+    """Price surcharge for a weapon that fills a status meter, scaled by DELIVERY.
+
+    `weight` is the 0..1 delivery weight from `physical_state_price.delivery_weight`:
+    exposure (does the target carry the meter at all?) x how much of the axis's effect the
+    meter actually delivers before the target dies, measured against a weapon that exactly
+    meets the maintainer's bar.
+
+    Kept here rather than in `physical_state_price` so every price constant lives in one
+    file — the charge-up multiplier next door is the precedent, and splitting them is how a
+    second, contradicting rate gets introduced by accident.
+    """
+    if not weight or weight <= 0:
+        return 1.0
+    w = min(1.0, max(0.0, float(weight)))
+    return 1.0 + (PHYSICAL_STATE_PRICE_MULTIPLIER - 1.0) * w
+
+
 # Twin warheads — NEVER main / NEVER in the damage total (DESIGN.md):
 #   *ExtraDamage   Tesla/Nuclear shield chip — ALWAYS excluded from damage
 #   *FriendlyFire  own-side splash (50% twin)

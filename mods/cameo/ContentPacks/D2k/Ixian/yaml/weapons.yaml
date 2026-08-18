@@ -550,6 +550,7 @@ IxianDisable_EMP:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
+	Report: tesla1.aud
 	ReloadDelay: 4
 	Range: 20000
 	ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
@@ -580,6 +581,7 @@ d2k_munitions_explosion:
 	Inherits@wh: ^Warhead_Magic_Heavy
 	Inherits@proj: ^Projectile_Magic_Heavy
 	Inherits@fx: ^Effect_Magic_Heavy
+	Report: 2100rotlsr.wav
 	Warhead@Magic_Heavy:
 		Delay: 20
 		Damage: 40000
@@ -698,7 +700,6 @@ RaiderGuns:
 	Burst: 4
 	BurstDelays: 2
 	Range: 6400
-	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Light:
@@ -720,6 +721,7 @@ RaiderGuns_upgrade:
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	Inherits: RaiderGuns
 	Inherits@2: ^HeavyMachineGunProjectile
+	Report: tnkfire6.aud
 	Projectile: Bullet
 		Inaccuracy: 120
 	ValidTargets: Ground, Water, Air
@@ -751,7 +753,6 @@ HMG_turret:
 	Burst: 4
 	BurstDelays: 2
 	Range: 7394
-	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water
 	Warhead@Bullet_Light:
@@ -773,6 +774,7 @@ HMG_turret_upgrade:
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	Inherits: HMG_turret
 	Inherits@2: ^HeavyMachineGunProjectile
+	Report: tnkfire6.aud
 	ReloadDelay: 33
 	Burst: 4
 	BurstDelays: 3
@@ -1005,6 +1007,7 @@ D2K_ShockGunInf:
 	Inherits@wh: ^Warhead_Storm_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	ReloadDelay: 45
 	Range: 5818
 	Projectile: Railgun
@@ -1026,6 +1029,7 @@ D2K_StormGunInf:
 	Inherits@wh: ^Warhead_Storm_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	ReloadDelay: 66
 	Range: 6275
 	Projectile: Railgun
@@ -1056,6 +1060,7 @@ D2K_StormGunCymek:
 	Inherits@wh: ^Warhead_Storm_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	Range: 6787
 	ReloadDelay: 66
 	Burst: 2
@@ -1173,6 +1178,7 @@ d2k_air_drone_guns_upgrade:
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	Inherits: d2k_air_drone_guns
 	Inherits@2: ^HeavyMachineGunProjectile
+	Report: tnkfire6.aud
 	ValidTargets: Ground, Water, Air
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -1198,6 +1204,7 @@ d2k_laser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
+	Report: obelray1.aud
 	ReloadDelay: 25
 	Range: 7500
 	Burst: 5

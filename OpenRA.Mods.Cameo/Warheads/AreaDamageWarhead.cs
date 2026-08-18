@@ -38,17 +38,22 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 	public class AreaDamageWarhead : DamageWarhead, IRulesetLoaded<WeaponInfo>
 	{
-		[Desc("How a victim's MULTIPLE enabled Armor types combine into one Versus value.",
+		[Desc("How a victim's MULTIPLE enabled CLASS armors combine into one Versus value.",
+			"⚠ This governs the CLASS armors only. A PLATING is a separate layer and always",
+			"MULTIPLIES on top of the result (maintainer 2026-08-17: \"the hybrid armors ... should",
+			"be averaged while the armor layer on top should be multiplied ... That gives both",
+			"their own game mechanic\"). Two rules in one field, which is why the plating set is",
+			"matched by NAME below.",
 			"Only affects actors wearing more than one armor (armor-plated units and the legacy",
 			"dual-armor cyborgs and droids) — over a single armor every rule returns that armor,",
 			"which is why a SHIELDED unit is unaffected: its body armor is gated off while the",
 			"shield holds, so only the Shield row is ever read (W21 R5).",
-			"Average: the Cameo law. 40% and 30% -> 35%, so the plating and the body meet in the",
-			"  middle — anti-infantry fire is never useless against a plated cyborg and AP fire is",
+			"Average: the Cameo law. 40% and 30% -> 35%, so the two bodies meet in the middle —",
+			"  anti-infantry fire is never useless against a dual-armor cyborg and AP fire is",
 			"  never oppressive against one.",
 			"Multiply: the ENGINE's rule, and the reason this field exists. 40% x 30% = 12%, so a",
 			"  second armor does not average a weapon's profile, it SQUARES it — a 17:1 weapon",
-			"  becomes ~289:1 against these units.",
+			"  becomes ~289:1 against these units. Never use it for CLASS armors.",
 			"Lowest / Highest: the unit is as tough as its best / worst protected aspect.",
 			"⚠ Only warheads that ROUTE THROUGH AreaDamage obey this. The ~878 legacy warhead",
 			"nodes still declaring inline Versus on SpreadDamage keep multiplying until they are",
@@ -192,9 +197,6 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 		protected override int DamageVersus(Actor victim, HitShape shape, WarheadArgs args)
 		{
-			if (MultiArmorCombination == ArmorCombination.Multiply)
-				return base.DamageVersus(victim, shape, args);
-
 			if (Versus.Count == 0)
 				return 100;
 
@@ -205,29 +207,51 @@ namespace OpenRA.Mods.Cameo.Warheads
 					(shape.Info.ArmorTypes.IsEmpty || shape.Info.ArmorTypes.Contains(a.Info.Type)))
 				.ToList();
 
-			// A plating outranks the class armor: it is the outermost layer, so it is what got hit.
-			// If several are somehow active at once, the most protective wins rather than an
-			// average — stacking platings must never be worse than wearing one.
+			// A PLATING is a LAYER, not an armor class: it sits on top of whatever the unit already
+			// is. If several are somehow active at once the most protective wins rather than an
+			// average — stacking platings must never be worse than wearing one. (`X1` in
+			// audit_plating_exclusivity keeps it to one in practice.)
 			var plating = matched
 				.Where(a => PlatingArmors.Contains(a.Info.Type))
 				.Select(a => Versus[a.Info.Type])
 				.ToList();
-			if (plating.Count > 0)
-				return plating.Min();
 
-			var armor = matched.Select(a => Versus[a.Info.Type]).ToList();
+			var armor = matched
+				.Where(a => !PlatingArmors.Contains(a.Info.Type))
+				.Select(a => Versus[a.Info.Type])
+				.ToList();
 
-			// No matching armor means no modifier, exactly as the base's empty product does.
-			if (armor.Count == 0)
-				return 100;
+			// No matching class armor means no class modifier, exactly as the base's empty product
+			// does — the plating (if any) then applies alone.
+			var classRow = armor.Count == 0
+				? 100
+				: MultiArmorCombination switch
+				{
+					ArmorCombination.Average => armor.Sum() / armor.Count,
+					ArmorCombination.Lowest => armor.Min(),
+					ArmorCombination.Highest => armor.Max(),
+					_ => Util.ApplyPercentageModifiers(100, armor),
+				};
 
-			return MultiArmorCombination switch
-			{
-				ArmorCombination.Average => armor.Sum() / armor.Count,
-				ArmorCombination.Lowest => armor.Min(),
-				ArmorCombination.Highest => armor.Max(),
-				_ => Util.ApplyPercentageModifiers(100, armor),
-			};
+			// ⭐ THE LAYER RULE (maintainer 2026-08-17). The plating MULTIPLIES the class row
+			// instead of REPLACING it. Selection erased the class armor outright, so installing an
+			// upgrade switched off the unit-class ladder — a plated Heroic stopped being Heroic and
+			// a Superheavy tank took the same damage as a Scout car wearing the same plate. Both
+			// axes now stay live.
+			//
+			// Safe here in a way the engine's blanket Multiply is not: a plating row is a SHALLOW
+			// modifier (35..106, mean 70), not a second full ladder, so the compounded spread is
+			// 5.32:1 — inside the documented 2-8x band — where multiplying two CLASS ladders is
+			// W20's squaring bug (40% x 30% = 12%). That is exactly why the class armors keep
+			// combining by MultiArmorCombination above and only the layer multiplies.
+			//
+			// ⚠ Deliberately NO clamp at 100. The five cells that exceed it (Arrow/Concussion 106,
+			// Prism 103, Bullet/Toxic 102) ARE the closed cycle's weaknesses; clamping would make
+			// every plating a strict upgrade, which is the "free upgrade" the cycle exists to
+			// prevent. A +6% penalty against your counter-weapon is a trade a player can read.
+			return plating.Count > 0
+				? classRow * plating.Min() / 100
+				: classRow;
 		}
 
 		protected override void DoImpact(WPos pos, Actor firedBy, WarheadArgs args)

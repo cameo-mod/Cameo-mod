@@ -127,6 +127,7 @@ BigTiberiumExplosion:
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Chem_Heavy
+	Report: flamer2.aud
 	Warhead@Chemical_Heavy:
 		Damage: 50000
 	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
@@ -417,6 +418,7 @@ HeliMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
+	Report: bazook1.aud
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Burst: 4
@@ -511,6 +513,7 @@ LaserObelisk:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
+	Report: obelray1.aud
 	ReloadDelay: 96
 	Range: 9600
 	Projectile: LaserZap
@@ -541,6 +544,7 @@ LaserObelisk:
 LaserObeliskBurning:
 	Inherits: LaserObelisk
 	Inherits@inferno: ^Warhead_Inferno_Heavy
+	Report: obelray1.aud
 	ReloadDelay: 96
 	Range: 9600
 	ValidTargets: Ground, Water
@@ -1509,6 +1513,7 @@ CorvetteLaserObelisk:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
+	Report: obelray1.aud
 	ReloadDelay: 90
 	Range: 9550
 	Warhead@Laser_Heavy:

@@ -469,6 +469,7 @@ TKMAATurretCannon:
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
+	Report: aacanon3.aud
 	ReloadDelay: 5
 	Range: 11604
 	ValidTargets: Air
@@ -786,7 +787,6 @@ tkmkatyushalalauncherrockets:
 tkmkatyushalalauncherrocketscryo:
 	Inherits: ^CryoMissileProjectile
 	Inherits@2: tkmkatyushalalauncherrockets
-	Inherits@fx: ^Effect_Clsn_Medium_RA2
 	Report: vintatta.wav
 	Range: 14000
 tkmkatyushalalauncherrocketsfire:
@@ -794,7 +794,6 @@ tkmkatyushalalauncherrocketsfire:
 	Inherits@2: ^Warhead_Flame_Light
 	Inherits@3: ^Effect_Flame_Light
 	Inherits@3: tkmkatyushalalauncherrockets
-	Inherits@fx: ^Effect_Clsn_Medium_RA2
 	Report: vintatta.wav
 	Range: 14000
 	Projectile: Bullet
