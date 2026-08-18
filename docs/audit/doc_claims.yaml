@@ -231,6 +231,43 @@ claims:
                   break
       print(n)
 
+  - id: physical_state_fired_weapons
+    value: 367
+    tolerance: 0
+    what: >
+      FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
+      at ZERO for it — E2. Counts BOTH mechanisms: a discrete `ApplyPhysicalState` warhead and a
+      damage-scaled `PhysicalStateScale` riding on an AreaDamage warhead. Counting only the first
+      is how the docs carried "~89 bindings" for weeks. Drops to 0 relevance once `extract_stats`
+      reads a state term.
+    docs: [docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md, docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from cameo_model import Model
+      m = Model(); rs = m.rs
+      fired = set()
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          node = rs.resolve(name)
+          if node is None: continue
+          for c in node.children:
+              if c.key == 'Armament' or c.key.startswith('Armament@'):
+                  w = (c.get('Weapon') or '').strip()
+                  if w: fired.add(w)
+      n = 0
+      for w in sorted(fired):
+          node = rs.resolve_weapon(w)
+          if node is None: continue
+          for wh in node.children:
+              if not wh.key.startswith('Warhead'): continue
+              if not (wh.get('PhysicalStateName') or '').strip(): continue
+              rel = (wh.get('ValidRelationships') or '').strip()
+              if 'Ally' in rel and 'Enemy' not in rel: continue
+              n += 1
+              break
+      print(n)
+
   - id: plating_row_ties
     value: 0
     tolerance: 0
