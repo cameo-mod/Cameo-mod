@@ -33,7 +33,6 @@ HighV:
 	Range: 6720
 	Burst: 4
 	BurstDelays: 2
-	-Report:
 	StartBurstReport: gun8.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
@@ -44,6 +43,7 @@ GrenadeExplode:
 	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Projectile_Grenade_Light
 	Inherits@3: ^Effect_Demolition_Light
+	Report: M203.aud
 	Warhead@Demolition_Light:
 		Damage: 8000
 	Warhead@Demolition_Light_Percentage:
@@ -1269,6 +1269,7 @@ ExosuitRailgun:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	ReloadDelay: 75
 	BurstDelays: 5
 	Range: 6806
@@ -1440,6 +1441,7 @@ GDIRigRailgun:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	ValidTargets: Ground, Water, Air
 	ValidRelationships: Enemy, Neutral
 	ReloadDelay: 95
@@ -1546,6 +1548,7 @@ CommandoRocketLauncher:
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
+	Report: bazook1.aud
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: Structure
 	ReloadDelay: 100
@@ -1732,6 +1735,7 @@ GDIBattleshipRailgun:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	ReloadDelay: 100
 	Range: 10000
 	Warhead@Railgun_Heavy:
@@ -1840,6 +1844,7 @@ TDIonBeam:
 
 TDIonCannonDamage:
 	Inherits: IonCannon
+	Report: tesla1.aud
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		Spread: 300
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage

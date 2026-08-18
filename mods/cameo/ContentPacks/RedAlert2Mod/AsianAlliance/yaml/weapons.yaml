@@ -82,6 +82,7 @@ asianalliance_asianmilitia_grenade_elite:
 
 AsianTankKillerRocket:
 	Inherits: ^RA2LightMissile
+	Report: bazook1.aud
 	ReloadDelay: 75
 	Range: 6460
 	Projectile: Missile
@@ -96,6 +97,7 @@ AsianTankKillerRocket:
 
 AsianTankKillerRocket_upgrade:
 	Inherits: AsianTankKillerRocket
+	Report: bazook1.aud
 	Projectile: Missile
 		Image: d2k_missile2
 		Palette: d2keffect
@@ -111,6 +113,7 @@ AsianTankKillerRocket_upgrade:
 
 AsianTankKillerRocket_elite:
 	Inherits: AsianTankKillerRocket
+	Report: bazook1.aud
 	Range: 7460
 	Warhead@MissileAP_Light:
 		Damage: 68000
@@ -127,6 +130,7 @@ AsianTankKillerRocket_elite:
 
 AsianTankKillerRocket_upgrade_elite:
 	Inherits: AsianTankKillerRocket_elite
+	Report: bazook1.aud
 	Projectile: Missile
 		Image: d2k_missile2
 		Palette: d2keffect
@@ -1403,7 +1407,6 @@ AAHyperionMagnet:
 	ReloadDelay: 200
 	Burst: 100
 	BurstDelays: 1
-	-Report:
 	StartBurstReport: vmagatta.wav
 	TargetActorCenter: true
 	Projectile: LaserZap
@@ -1432,6 +1435,7 @@ AAHyperionMagnet:
 
 AsianTSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 	Inherits: IonCannon
+	Report: tesla1.aud
 	Range: 12288
 	AirThreshold: 8c0
 	ValidTargets: Ground, Water, Air
@@ -1520,6 +1524,7 @@ AsianTSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 
 AsianIonBeamMiniStart:
 	Inherits: ^AsianIonBeam
+	Report: tesla1.aud
 	Projectile: SpriteAthenaLaser
 		StayTicks: 21
 		Sequence: ionbeamstart
@@ -1527,6 +1532,7 @@ AsianIonBeamMiniStart:
 
 AsianIonBeamMini:
 	Inherits: ^AsianIonBeam
+	Report: tesla1.aud
 	Range: 4864
 	AirThreshold: 8c0
 	Projectile: SpriteAthenaLaser
@@ -1542,6 +1548,7 @@ AsianIonBeamMini:
 
 AsianIonbeam:
 	Inherits: ^AsianIonBeam
+	Report: tesla1.aud
 	Projectile: SpriteAthenaLaser
 		Image: explosion
 		Sequence: ionbeam
@@ -1609,6 +1616,7 @@ AsianMineSpawner2:
 AsianTankMine:
 	Inherits: ^RA2TankDestroyerCannon
 	Inherits@fx: ^Effect_Elite_Explosion_RA2
+	Report: cannon1.aud
 	Projectile: InstantExplode
 	Warhead@CannonAP_Light:
 		Spread: 1250
@@ -1627,6 +1635,7 @@ AsianChaosMine:
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Chem_Heavy
+	Report: flamer2.aud
 	Warhead@Chemical_Heavy:
 		Spread: 1250
 		Falloff: 125, 100, 75, 50, 25
@@ -1798,6 +1807,7 @@ AsianSubmarineBomb:
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@2: ^RA2Grenade
 	Inherits@3: ^Effect_Twlt_Large_RA2
+	Report: M203.aud
 	Range: 2500
 	ReloadDelay: 100
 	Projectile: InstantExplode
@@ -1942,6 +1952,7 @@ ASDFKamikazeExplosion:
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@3: ^Projectile_Grenade_Light
+	Report: M203.aud
 	Warhead@Demolition_Heavy:
 		Damage: 10000
 	Warhead@Demolition_Heavy_Percentage:

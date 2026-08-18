@@ -892,6 +892,7 @@ Future_Wheel_MG:
 Future_Wheel_MG_elite:
 	Inherits: Future_Wheel_MG
 	Inherits@2: ^SteelChaingun
+	Report: gun8.aud
 	Range: 6806
 	Burst: 8
 
@@ -940,6 +941,7 @@ ShotgunAttackRobotGun:
 ShotgunAttackRobotGun_elite:
 	Inherits: ShotgunAttackRobotGun
 	Inherits@2: ^SteelChaingun
+	Report: gun8.aud
 	Range: 5110
 	Burst: 2
 	BurstDelays: 3

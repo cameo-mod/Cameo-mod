@@ -9398,7 +9398,6 @@ DefuseKit:
 # edit rows. Additive/0-usage until the weapon retrofit inherits them.
 ####################################################################
 ^Projectile_Arrow_Light:
-	Report: dune2smalllaser.aud
 	Projectile: Missile
 		Inaccuracy: 0
 		HorizontalRateOfTurn: 40
@@ -9406,7 +9405,6 @@ DefuseKit:
 		PointDefenseTypes: Missile
 
 ^Projectile_Bullet_Light:
-	Report: gun8.aud
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailZOffset: 4000
@@ -9420,7 +9418,6 @@ DefuseKit:
 		Inaccuracy: 100
 
 ^Projectile_Bullet_Medium:
-	Report: gun8.aud
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailZOffset: 4000
@@ -9434,22 +9431,18 @@ DefuseKit:
 		Inaccuracy: 200
 
 ^Projectile_Chem_Light:
-	Report: flamer2.aud
 	Projectile: Bullet
 		Speed: 3500
 
 ^Projectile_Chem_Medium:
-	Report: flamer2.aud
 	Projectile: Bullet
 		Speed: 3500
 
 ^Projectile_Chem_Heavy:
-	Report: flamer2.aud
 	Projectile: Bullet
 		Speed: 3500
 
 ^Projectile_Flak_Medium:
-	Report: aacanon3.aud
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailZOffset: 4000
@@ -9463,7 +9456,6 @@ DefuseKit:
 		Inaccuracy: 250
 
 ^Projectile_Flak_Heavy:
-	Report: aacanon3.aud
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailZOffset: 4000
@@ -9489,7 +9481,6 @@ DefuseKit:
 		Speed: 3000
 
 ^Projectile_Grenade_Light:
-	Report: M203.aud
 	Projectile: Bullet
 		Speed: 150
 		Blockable: false
@@ -9498,7 +9489,6 @@ DefuseKit:
 		Image: BOMB
 
 ^Projectile_Laser_Heavy:
-	Report: obelray1.aud
 	Projectile: LaserZap
 		Width: 100
 		HitAnim: laserfire
@@ -9510,16 +9500,13 @@ DefuseKit:
 		Blockable: false
 
 ^Projectile_Lightning_Heavy:
-	Report: tesla1.aud
 	Projectile: LightningZap
 
 ^Projectile_Lightning_Super:
-	Report: tesla1.aud
 	Projectile: LightningZap
 		Image: litning2
 
 ^Projectile_Magic_Heavy:
-	Report: 2100rotlsr.wav
 	Projectile: Missile
 		HorizontalRateOfTurn: 33
 		VerticalRateOfTurn: 33
@@ -9543,7 +9530,6 @@ DefuseKit:
 	Projectile: InstantHit
 
 ^Projectile_Missile_Light:
-	Report: bazook1.aud
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -9566,7 +9552,6 @@ DefuseKit:
 		PointDefenseTypes: Missile
 
 ^Projectile_Missile_Medium:
-	Report: bazook1.aud
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -9589,7 +9574,6 @@ DefuseKit:
 		PointDefenseTypes: Missile
 
 ^Projectile_Missile_Heavy:
-	Report: missile6.aud
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -9612,7 +9596,6 @@ DefuseKit:
 		PointDefenseTypes: Missile
 
 ^Projectile_Missile_AA:
-	Report: rocket2.aud
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -9635,7 +9618,6 @@ DefuseKit:
 		PointDefenseTypes: Missile
 
 ^Projectile_Railgun_Heavy:
-	Report: bigggun1.aud
 	Projectile: Railgun
 		Duration: 16
 		Inaccuracy: 100
@@ -9651,7 +9633,6 @@ DefuseKit:
 # `Speed:` activates the 10%-of-Range rule and deleting `Inaccuracy:` activates the 1% rule; both
 # are balance changes and go through the pipeline, not through a refactor.
 ^Projectile_Shell_Light:
-	Report: cannon1.aud
 	Projectile: ScaledBullet
 		Image: 120MM
 		Speed: 500
@@ -9661,7 +9642,6 @@ DefuseKit:
 		Shadow: true
 
 ^Projectile_Shell_Medium:
-	Report: tnkfire6.aud
 	Projectile: ScaledBullet
 		Image: 120MM
 		Speed: 500
@@ -9671,7 +9651,6 @@ DefuseKit:
 		Shadow: true
 
 ^Projectile_Shell_Heavy:
-	Report: tnkfire6.aud
 	Projectile: ScaledBullet
 		Image: 120MM
 		Speed: 500
@@ -9681,7 +9660,6 @@ DefuseKit:
 		Shadow: true
 
 ^Projectile_Sniper_Light:
-	Report: ramgun2.aud
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailZOffset: 4000
@@ -11153,7 +11131,6 @@ DefuseKit:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Light
-	-Report:
 	ValidTargets: Ground, Water, Air
 	Warhead@Demolition_Light:
 		Damage: 20000
@@ -11775,6 +11752,7 @@ IonCannon:
 	Inherits@2: ^Warhead_Tesla_Super
 	Inherits@3: ^Projectile_Lightning_Super
 	Inherits@4: ^Effect_Tesla_Super
+	Report: tesla1.aud
 	ValidTargets: Ground, Water, Air
 	Warhead@Tesla_Super:
 		ValidTargets: Shielded

@@ -108,6 +108,7 @@ TiberiumExplosion:
 	Inherits@wh: ^Warhead_Chemical_Medium
 	Inherits@proj: ^Projectile_Chem_Medium
 	Inherits@fx: ^Effect_Chem_Medium
+	Report: flamer2.aud
 	Warhead@Chemical_Medium:
 		Damage: 40000
 	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
@@ -120,6 +121,7 @@ ra1_allies_alliedsniper:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
 	Inherits@fx: ^Effect_Sniper_Light
+	Report: ramgun2.aud
 	ReloadDelay: 25
 	Range: 8086
 	Warhead@Sniper_Light:
@@ -256,7 +258,6 @@ HighVAP:
 	Burst: 4
 	BurstDelays: 2
 	Range: 6720
-	-Report:
 	StartBurstReport: gun8.aud
 	Warhead@Bullet_Medium:
 		Damage: 4000

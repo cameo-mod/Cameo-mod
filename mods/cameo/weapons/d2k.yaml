@@ -1238,6 +1238,7 @@ PlasmaExplosion:
 
 d2k_munitions_explosion_h:
 	Inherits: d2k_munitions_explosion
+	Report: 2100rotlsr.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 52500
 		Spread: 3c0
@@ -2007,6 +2008,7 @@ d2k_kwny_fighter:
 	MinRange: 920
 d2k_laser_aa:
 	Inherits: d2k_laser
+	Report: obelray1.aud
 	Range: 8192
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -2014,6 +2016,7 @@ d2k_laser_aa:
 
 d2k_laser_qafza:
 	Inherits: d2k_laser
+	Report: obelray1.aud
 	StartBurstReport: d2k_laser.wav
 	Burst: 1
 	ReloadDelay: 12
@@ -2030,6 +2033,7 @@ d2k_laser_qafza:
 
 d2k_laser_qafza_aa:
 	Inherits: d2k_laser_qafza
+	Report: obelray1.aud
 	Range: 8192
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
