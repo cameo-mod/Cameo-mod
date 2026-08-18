@@ -1,5 +1,27 @@
 # Development Log
 
+## 2026-08-21 — Cryo/Inferno promoted to blend families (package 3)
+
+- `tools/balance/gen_weapon_template.py`:
+  - Removed `Cryo` / `Inferno` from `INHERIT_FAMILIES`.
+  - Added `Cryo` = Laser×Prism and `Inferno` = Flame×Prism to `BLEND_FAMILIES`.
+  - Updated `COMPOSITION` (`Cryo` energy 0.55 / thermo 0.25 / kinetic 0.20) and
+    `COMPOSITION_OVERRIDE` (`Inferno` thermo 0.65 / energy 0.35).
+  - Updated `PHYSICS_RANK` (`Cryo` 0.75, `Inferno` 0.57) and the blend-header comment.
+  - Fixed blend header to print `no PhysicalStates` for empty state maps.
+- Regenerated all 97 `^Warhead_*` templates in `mods/cameo/weapons/weapons.yaml`
+  via `splice_templates.py --all`; `verify_generator_sync.py` reports drift = 1
+  (the pre-existing hand-authored `^Warhead_Sniper_Light` only).
+- Regenerated 32 balance ledgers and derived sidecars with `extract_stats.py`.
+- Updated `docs/design/PHYSICAL_STATE_SYSTEM.md`, `docs/design/PLATING_COMPOSITION_REFINEMENT.md`,
+  and `docs/design/BALANCE_PROGRAM_PLAN.md` to reflect the new family model.
+- Verification: `extract_stats.py --check` 0 drift; `audit_balance_drift.py` clean;
+  `audit_physical_state_warheads.py` PASS; `audit_armor_upgrade_harm.py` clean;
+  `test_plating_composition.py` 10/10; `test_physical_state_price.py` 17/17;
+  `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs.
+- Boot-gate: `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`,
+  `exception-*.log` count 183 → 183 (no new exceptions).
+
 ## 2026-08-20 — Computed prerequisite-chain tech tier
 
 - Added `tools/balance/tier_chain.py` with `TierChain(model)` resolving buildable

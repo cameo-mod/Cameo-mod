@@ -259,15 +259,14 @@ PHYSICS_RANK = {
     # direct electrical / EM — current couples straight into the field; the shield IS the conductor
     "Tesla": 1.00, "Storm": 0.95,
     # coherent energy — delivers energy the emitter must absorb; scales with coherence
-    "Quantum": 0.82, "Railgun": 0.78, "Prism": 0.76, "Laser": 0.74,
+    "Quantum": 0.82, "Railgun": 0.78, "Prism": 0.76, "Cryo": 0.75,
+    # Cryo = Laser×Prism coldray: coherent energy with freeze-kinetic. 0.75 sits between its parents.
+    "Laser": 0.74,
     # blended energy — part field-coupling, part thermal
-    "Waveforce": 0.70, "Plasma": 0.68, "Inferno": 0.64,
-    # PhotonCannon = Waveforce 25% + CannonHE 25% + MissileAA 50%, so its shield coupling is the
-    # weighted mean: 0.25 x 0.70 + 0.25 x 0.33 + 0.50 x 0.34 = 0.43. A quarter of it is a resonant
-    # beam that couples to a field; the rest is ordnance, which is what a shield is built to stop.
-    "PhotonCannon": 0.43,
+    "Waveforce": 0.70, "Plasma": 0.68,
     # exotic / field-adjacent
-    "Sonic": 0.60, "Magic": 0.58, "Nuclear": 0.56,
+    "Sonic": 0.60, "Magic": 0.58, "Inferno": 0.57, "Nuclear": 0.56,
+    # Inferno = Flame×Prism heatray: thermo-led but still some field-coupling.
     # thermal / chemical — a shield stops heat and reagents well; little field coupling
     "FireCannon": 0.52, "FireMissile": 0.52, "Flame": 0.50, "ChemCannon": 0.50,
     "ChemMissile": 0.50, "Chemical": 0.48, "Toxic": 0.46, "Thermobaric": 0.44,
@@ -276,7 +275,7 @@ PHYSICS_RANK = {
     "MissileAA": 0.34, "CannonHE": 0.33, "MissileHE": 0.33, "CannonAP": 0.32,
     "MissileAP": 0.32, "Sniper": 0.30,
     # physical contact — the canonical thing a shield stops
-    "Arrow": 0.24, "Melee": 0.22, "Cryo": 0.66,
+    "Arrow": 0.24, "Melee": 0.22,
 }
 # A shield is an ENERGY BUDGET, so a bigger discharge depletes proportionally more of it.
 SHIELD_LEVEL = {"Trace": 0.80, "Light": 0.90, "Medium": 1.00, "Heavy": 1.12, "Super": 1.25}
@@ -559,12 +558,10 @@ COMPOSITION = {
     # chemically INERT where steel and reactive armour are not, so `COMPOSITE` earns a real
     # (partial) answer to it and that is what separates it from flame.
     "Chemical":    {"thermo": 0.75, "shaped": 0.25},
-    # ⚠ Cryo is a PRISM CHASSIS (see INHERIT_FAMILIES: "a prism beam that also freezes") ranked
-    # 0.66 by PHYSICS_RANK — i.e. the shield table has always called it a focused-energy
-    # weapon while its composition said pure thermo. Same drift `Inferno` shipped with. The
-    # kinetic share is cryogenic EMBRITTLEMENT: what actually breaks is frozen material
-    # fracturing, a mechanical failure mode a ceramic matrix partly answers.
-    "Cryo":        {"thermo": 0.65, "energy": 0.25, "kinetic": 0.10},
+    # Cryo is a Laser×Prism coldray: coherent energy delivery that freezes, so the shield
+    # sees mostly field coupling (energy). The thermal load is still real (insulation stops it),
+    # and the kill has a small kinetic share from cryogenic embrittlement of frozen material.
+    "Cryo":        {"energy": 0.55, "thermo": 0.25, "kinetic": 0.20},   # Laser×Prism coldray: energy-led with embrittlement
     "Nuclear":     {"thermo": 0.50, "blast": 0.40, "energy": 0.10},
     # --- ENERGY: radiated or conducted, defeated by REFLECTING or ablating it away.
     #
@@ -587,19 +584,9 @@ COMPOSITION = {
 COMPOSITION_OVERRIDE = {
     # Flame + Chemical gives Plasma a pure thermo reading, but plasma is ionised and radiates.
     "Plasma": {"thermo": 0.55, "energy": 0.45},
-    # Inferno is a PRISM CHASSIS THAT BURNS — a heat ray (`HeatRayBeam1/2`), not a flamethrower.
-    # Maintainer 2026-08-17: *"Inferno which is a heatray so it is kind of both thermal and
-    # energy but MOSTLY THERMAL"*, and earlier: *"shouldn't it be reduced by both hazmat and
-    # reflector armor then? But maybe more by hazmat"*. Both hold here — HAZMAT 49, REFLECTOR 75.
-    #
-    # ⚠ CORRECTION to what this comment used to claim. It said energy had to EXCEED thermo or
-    # "a 50/50 blend CANCELS ... at 50/50 REFLECTOR would sit at exactly 100", which is true of
-    # the RAW row and FALSE of the shipped one: every column is then pinned to
-    # PLATING_TARGET_MEAN, so with the mean at 70 a shipped value only stops being a benefit
-    # above ~143 raw. A thermo-LED heat ray still gets a real reflector benefit (75 < 100). The
-    # ruling that dropped the column mean to 70 is what made the maintainer's reading available;
-    # under the old mean of 100 a 50/50 really did land on ~97, i.e. nothing.
-    "Inferno": {"thermo": 0.60, "energy": 0.40},
+    # Inferno is a Flame×Prism heatray: thermo-led, but delivered as a coherent beam so both
+    # HAZMAT (sealed/insulated) and REFLECTOR (mirror) reduce it, with HAZMAT doing more.
+    "Inferno": {"thermo": 0.65, "energy": 0.35},   # Flame×Prism heatray: thermo-led with field coupling
 }
 
 # The PHYSICS_RANK band boundary, read OFF that table rather than chosen: everything at or below
@@ -1563,11 +1550,10 @@ def emit_condition(tag, cname, duration, rng, vt):
 
 
 # Inheriting families: a thin child that inherits a parent family template and overrides ONLY the main
-# warhead to add a PhysicalState (e.g. Cryo = Prism's anti-LIGHT beam + cold). Keeps the parent's Versus
-# + warhead key. {name: (parent, PhysicalStateName, PhysicalStateScale, levels)}.
+# warhead to add a PhysicalState. Keeps the parent's Versus + warhead key.
+# {name: (parent, PhysicalStateName, PhysicalStateScale, levels)}.
+# Cryo and Inferno were promoted to BLEND_FAMILIES below so they get their own Versus averages.
 INHERIT_FAMILIES = {
-    "Cryo":    ("Prism", "Temperature", _m(-1.00), L3),   # a prism beam that also freezes (its "utility")
-    "Inferno": ("Prism", "Temperature", _m(1.00), L3),   # a prism beam that also burns (heat ray)
 }
 
 
@@ -1644,6 +1630,13 @@ BLEND_FAMILIES = {
     # — see Waveforce above).
     "PhotonCannon": (["Flame", "Chemical", "Railgun", "Laser", "Tesla"]
                      + ["CannonHE"] * 5 + ["MissileAA"] * 10, {}, L3),
+    # Inferno = a Flame×Prism heatray: thermo-led (mostly fire), but delivered as a coherent
+    # energy beam so REFLECTOR still helps. Ground-only, thin spread, FireDeath.
+    "Inferno": (["Flame", "Prism"], {}, L3),
+    # Cryo = a Laser×Prism coldray: coherent energy delivery that freezes. Mostly energy-field
+    # coupling, some thermal load, and a small kinetic share from cryogenic embrittlement.
+    # Air-capable (Laser parent), thin spread, negative Temperature scaling.
+    "Cryo": (["Laser", "Prism"], {}, L3),
 }
 # Fixed emission order for a blend (it has no single light/heavy direction).
 BLEND_ARMOR_ORDER = ["None", "Flak", "Plate", "Heroic", "Scout", "Light", "Medium", "Heavy",
@@ -1780,7 +1773,8 @@ def _generate():
                      if parents else 0)
         vt = valid_targets(air_share >= 1 / 3)
         dt = FAMILY_DAMAGE_TYPES.get(nm)
-        print(f"###### {nm}: blend of {'+'.join(parents)} + PhysicalStates {states} ######")
+        states_note = f"+ PhysicalStates {states}" if states else "no PhysicalStates"
+        print(f"###### {nm}: blend of {'+'.join(parents)} + {states_note} ######")
         print(family(nm, None, vt, lv, versus_override=blend_versus(parents), physical_states=states,
                      **({"damage_types": dt} if dt else {})))
         print()

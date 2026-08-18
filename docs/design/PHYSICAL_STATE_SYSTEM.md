@@ -245,7 +245,8 @@ Then wire Chemical/Plasma to it via §1's field.
 | Flame (L/M/H) | Temperature | **+100** | + GroundFire linger |
 | Laser (Heavy) | Temperature | **+75** | overheat→pop; main-damage only (chip excluded by placement) |
 | **Prism (L/M/H)** | – | – | anti-LIGHT scatter beam, Versus LOCKED (`Scout 100 › None 94 › … › Superheavy 34`), ground-only, thin spread, no chip. **NO cryo by default** — Prism Tank / Athena Cannon are pure prism. |
-| **Cryo (L/M/H)** — NEW | Temperature | **−100** | **inherits `^Warhead_Prism_<Level>`** and ONLY adds the cold scaling = "a prism beam that also freezes". Reuses Prism's anti-light Versus + scatter + thin spread; freeze/shatter uses the existing cold side. (So there IS a Cryo family, but it's a thin Prism child, not a from-scratch family.) |
+| **Inferno (L/M/H)** — NEW | Temperature | **+100** | **Flame×Prism** heatray blend, ground-only, thin spread, FireDeath; mostly thermal with some field coupling, so both HAZMAT and REFLECTOR reduce it. |
+| **Cryo (L/M/H)** — NEW | Temperature | **−100** | **Laser×Prism** coldray blend, air-capable, thin spread; coherent energy delivery with freeze-kinetic, so the damage profile is anti-heavy-ish and REFLECTOR helps more than HAZMAT. Reuses the existing cold/freeze/shatter side. |
 | Chemical (L/M/H) | Corrosion | **+100** | pure corrosion |
 | **Plasma (L/M/H)** — NEW | Temperature **+50** & Corrosion **+50** | | flagship Flame×Chem blend Versus |
 | Tesla | (EMP, separate) | – | keeps existing EMP |
@@ -260,14 +261,14 @@ original warhead **and adds the real Cryo warhead** — both at ~50% damage:
 ```
 DemoArtilleryCryo:
     Inherits: DemoArtillery              # keeps Warhead@Demolition_Heavy (its Versus)
-    Inherits@cryo: ^Warhead_Cryo_Heavy   # adds the Cryo warhead (anti-LIGHT Versus + Temperature -100)
+    Inherits@cryo: ^Warhead_Cryo_Heavy   # adds the Cryo warhead (Laser×Prism anti-heavy/air Versus + Temperature -100)
     Warhead@Demolition_Heavy: { Damage: <50%>, PhysicalStateName: Temperature, PhysicalStateScale: -100 }
     Warhead@Cryo_Heavy:       { Damage: <50%> }   # freeze via the family's baked -100
 ```
 Rationale (maintainer): the point is NOT just to freeze — it's to **change the damage profile** so the
-upgraded weapon feels unique (demo blast + cryo's anti-light Versus + freeze). The added Cryo warhead's
-Versus is the real value (temperature alone would be redundant). Both warheads carry the −100 scaling so
-the whole weapon freezes. → this makes the **Cryo family a prerequisite** (BUILD 2b).
+upgraded weapon feels unique (demo blast + cryo's Laser×Prism anti-heavy/air Versus + freeze). The added
+Cryo warhead's Versus is the real value (temperature alone would be redundant). Both warheads carry the
+−100 scaling so the whole weapon freezes. → this makes the **Cryo family a prerequisite** (BUILD 2b).
 
 ⚠ **Combined weapons stack it further (maintainer 2026-08-09):** artillery is being reworked to
 **CannonHE + Demolition** (the slow big-blast combo), so a cryo upgrade makes Cryo the **THIRD** warhead

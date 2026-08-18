@@ -1066,8 +1066,9 @@ the sources contain no derived armor, and clamping would break §12.0b).
 
 **Two bugs this flushed out**, both silent fall-throughs to the even ramp:
 - `^Warhead_Cryo_*` / `^Warhead_Inferno_*` looked their profile up under their OWN name. They
-  are INHERITING families whose entire premise is reusing Prism's ladder, so they split off
-  from the parent and shipped at 10x. Fixed with `family(..., profile_family=parent)`.
+  are now BLEND_FAMILIES (Cryo = Laser×Prism, Inferno = Flame×Prism) with their own averaged
+  Versus and their own PHYSICS_RANK/COMPOSITION values, so the `profile_family=parent` fix was
+  replaced by promoting them to proper blends.
 - `^Warhead_Tesla_Super` had no measured tier (the export only walked Light/Medium/Heavy) and
   kept the even ramp at 1.8x while every other Tesla level was rebuilt. The export now walks
   the levels the GENERATOR emits; `Tesla/Super` measures n=29 / 7 mods.
