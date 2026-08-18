@@ -80,16 +80,17 @@ TSProton:
 		Shadow: false
 		Image: tstorpedo
 		RangeLimit: 12c0
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 30000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 15000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 300
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 15
-	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
-		Amount: 30000
-	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
-		Amount: 15000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 300
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 30000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
@@ -105,12 +106,17 @@ TSTibBazooka:
 	Range: 6694
 	Projectile: Missile
 		TrailImage: spittrail
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 6000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 300
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 3
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 300
 	Warhead@LightMissile: SpreadDamage
 		Damage: 24000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -188,15 +194,19 @@ TSStankTibTusk:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 5
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 10000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-		ValidTargets: Ground, Water, Air
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 300
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		ValidTargets: Ground, Water, Air
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 300
 	Warhead@CannonHE_Medium:
 		Damage: 10000
 		ValidTargets: Ground, Water, Air

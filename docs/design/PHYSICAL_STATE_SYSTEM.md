@@ -80,10 +80,17 @@ appeared to fail was Corrosion (ratio 1.00), and that was D1's artifact, not a r
 cannot charge for it, because 100 and 300 both sit at full delivery. Keeping or dropping it to
 150/100 is a **maintainer call**; nothing has been reverted, because reverting is a balance change.
 
-⛔ **The discrete `ApplyPhysicalState` weapons are the remaining gap** (13 of 166 pass). They carry
-an absolute `Amount` against damage in the tens of thousands, so damage does NOT cancel and a heavy
-gun outruns its own meter — `FutureTankCannons` needs **313×** its target's lifetime to fill one.
-Converting them to the damage-scaled mechanism is one rule instead of 166 numbers.
+✅ **The legacy flame/chemical `ApplyPhysicalState` warheads were converted to the damage-scaled
+mechanism** (2026-08-18). `^LightFlameWeapon`/`^MediumFlameWeapon`/`^HeavyFlameWeapon` and their
+chemical counterparts now use `PhysicalStateName`/`PhysicalStateScale` on `AreaDamage` and
+`AreaDamagePercentage` warheads, with friendly fire baked into the main. 34 YAML weapon files and
+all concrete overrides of these family keys were updated; `audit_physical_state_warheads` PASS.
+
+⛔ **43 non-flame/chemical `ApplyPhysicalState` warheads remain** (mostly cryo upgrades on inherited
+non-family mains like `155mmCryo` and the `^CryoMissileProjectile` family). These need the dual-warhead
+armament-swap pattern (§3b) or a per-child copy of the parent main to attach a signed `PhysicalStateScale`
+to damage; they cannot be bulk-converted safely without a maintainer ruling on the `PhysicalStateScale`
+to use.
 
 ### The effect curve — now one curve for all three axes
 
@@ -351,9 +358,11 @@ reference an image+sequence, so the yaml wires with placeholders and the art dro
   `INHERIT_FAMILIES`) — `f97a3b77c`
 - ✅ Plasma family = avg(Flame,Chemical) Versus + Temperature 50 + Corrosion 50 (generator `BLEND_FAMILIES`
   + `versus_override`/`physical_states`) — `2e6d6968a`. Inert until a weapon adopts `^Warhead_Plasma_*`.
-- ✅ Flame/Chemical `_Percentage` twins use `AreaDamagePercentage` and feed the matching meter; active
-  fixed `ApplyPhysicalState` duplicates were removed, with `audit_physical_state_warheads` preventing
-  regressions (static-audited; runtime test pending).
+- ✅ Flame/Chemical `_Percentage` twins use `AreaDamagePercentage` and feed the matching meter.
+- ✅ Legacy `^*FlameWeapon`/`^*ChemicalWeapon` templates and all concrete overrides converted to
+  damage-scaled `PhysicalStateName`/`PhysicalStateScale` on `AreaDamage`/`AreaDamagePercentage`;
+  fixed `ApplyPhysicalState` duplicates and separate FriendlyFire twins removed. `audit_physical_state_warheads`
+  PASS, boot-gated (2026-08-18). 43 non-family (mostly cryo) `ApplyPhysicalState` warheads remain.
 - ✅ **BUILD 3 — Sonic mark** — global rename `CommandoDebuff → SonicDebuff` (29 lines / 8 yaml files:
   `^SonicDebuff` in defaults.yaml + the condition, `Warhead@` keys and both `Inherits@`; the
   `2100commandodebuff` **asset**, its sequences and its palette keep their own names) + the mark BAKED

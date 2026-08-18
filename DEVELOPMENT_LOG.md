@@ -1,5 +1,39 @@
 # Development Log
 
+## 2026-08-18 — ApplyPhysicalState → damage-scaled conversion (flame/chemical, boot-gated)
+
+- Implemented `tools/balance/convert_apply_to_scaled_v2.py` (dry-run by default,
+  `--apply` required, block-aware/line-based, no regex, preserves BOM/line endings,
+  reports standalone cases).
+- Converted legacy templates `^LightFlameWeapon`, `^MediumFlameWeapon`,
+  `^HeavyFlameWeapon`, `^LightChemicalWeapon`, `^MediumChemicalWeapon`,
+  `^HeavyChemicalWeapon` and all concrete overrides in 34 YAML weapon files:
+  - `SpreadDamage` → `AreaDamage`
+  - `HealthPercentageDamage` → `AreaDamagePercentage`
+  - removed `Range:` from inside converted warheads
+  - main warhead: `ValidRelationships: Ally, Neutral, Enemy`,
+    `FriendlyFireDamage: 50`, `FriendlyFireSpread: 50`
+  - main + percentage warheads: `PhysicalStateName` / `PhysicalStateScale`
+    (`Temperature`/`300` for flame, `Corrosion`/`300` for chemical)
+  - removed associated FriendlyFire twins and fixed `ApplyPhysicalState` warheads.
+- Removed two stale `-Warhead@PhysicalStateMediumFlameWeapon*` removal lines in
+  `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` that became invalid
+  after the template physical-state warheads were removed.
+- Verification:
+  - `python tools/audit/audit_physical_state_warheads.py` PASS
+  - `python tools/audit/find_empty_warhead.py` = 0
+  - `utility.cmd cameo --check-yaml` completed without fatal YAML exceptions
+    (pre-existing actor/condition warnings unrelated to this change)
+  - `launch-game.cmd` reached the main menu (`MenuPostProcessEffect.PostWorldLoaded`
+    in `%APPDATA%/OpenRA/Logs/perf.log`; no new `exception-*.log` after the run).
+- Standalone `ApplyPhysicalState` cases left untouched: 43 non-target (cryo/non-family)
+  blocks reported by the conversion script; flame/chemical `ApplyPhysicalState`
+  warheads were removed.
+- Note: `tools/audit/audit_physical_state_warheads.py` already expects
+  `PhysicalStateScale: 300` in the working tree; do not commit without reviewing
+  that diff.
+
+
 ## 2026-08-17 — RA2 effect-template final sweep (Shared/Allies/Yuri/redalert2mod/AsianAlliance/Syndicate, boot-gated)
 
 - Completed the final `ra2_*` inline-effect sweep in the loaded RA2 tree

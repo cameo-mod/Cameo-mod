@@ -17,8 +17,8 @@ from miniyaml import Ruleset, find_repo_root
 
 
 EXPECTED_PERCENTAGE_STATES = {
-	"Flame": ("Temperature", "100"),
-	"Chemical": ("Corrosion", "100"),
+	"Flame": ("Temperature", "300"),
+	"Chemical": ("Corrosion", "300"),
 }
 LEVELS = ("Light", "Medium", "Heavy")
 PERCENTAGE_KEY = re.compile(r"Warhead@(Flame|Chemical)_(Light|Medium|Heavy)_Percentage$")

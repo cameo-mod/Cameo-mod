@@ -52,21 +52,12 @@ committed: `^MissileVehicleTemplate` + 10 reassignments (missile-MLRS family + N
 removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
 
 **Queue (priority order):**
-- **[🔴 P1 BUG — 77 live weapons deal NO flame damage] `^LightFlameWeapon` is a dead
-  warhead.** `mods/cameo/weapons/weapons.yaml` `^LightFlameWeapon` sets
-  `Warhead@LightFlameWeapon: SpreadDamage` with `Spread: 500` **and** `Range: 500` — a
-  SINGLE `Range` value. The engine (`AreaDamageWarhead.cs` + upstream
-  `SpreadDamageWarhead.cs`) then sets `effectiveRange = [500]`, and `GetDamageFalloff`
-  loops `for (i = 1; i < effectiveRange.Length; i++)` — which never runs — and
-  **returns 0**. So `Damage: 1000` is delivered as **zero at every distance**, silently:
-  load-time validation accepts `Range.Length == 1`. 77 live weapons inherit it
-  (`NodTurretLaser`, `HonestJohn`, `VenomLaser`, `FireRockets*`, `SiegeMortar*`,
-  `HeatRayBeam*`, …); one more weapon has the same shape on `Warhead@2`
-  (`Range: 5000`, `Falloff: 100, 100`). **Fix = delete the `Range: 500` line** so
-  `Spread: 500` defines the geometry as intended. That is a warhead change (CLAUDE.md
-  rule 4/5) → needs an explicit maintainer order, and it will make 77 weapons suddenly
-  start dealing their flame damage, so it wants a balance pass with it. Detected by the
-  engine-fidelity fix in [`EFFECTIVE_DAMAGE.md`](EFFECTIVE_DAMAGE.md) §4.
+- [x] **P1 BUG — 77 live weapons deal NO flame damage] `^LightFlameWeapon` dead warhead
+  RESOLVED** (2026-08-18). The `ApplyPhysicalState` → damage-scaled conversion replaced
+  `^LightFlameWeapon`'s `SpreadDamage` with `AreaDamage`, which also removed the `Range: 500`
+  footgun, and propagated the same fix to all `^*FlameWeapon`/`^*ChemicalWeapon` concrete
+  overrides (34 YAML files). `audit_physical_state_warheads` PASS, `find_empty_warhead.py = 0`,
+  boot-gated. The one `Range: 5000` / `Falloff: 100, 100` shape is unaffected.
 - **[DECISION NEEDED] `effective_damage`: two open rulings.** (a) Do
   `*_ExtraDamage` chips count? `formula.spread_damage_sum` excludes them (they are paid
   for by K / charge delay); the metric includes them — both cannot be right once the
