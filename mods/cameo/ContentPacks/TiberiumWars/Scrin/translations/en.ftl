@@ -130,3 +130,18 @@ actor_scrin_annihilator_tripod =
 
 actor_scrin_reaper_tripod =
    .name = Scrin Reaper Tripod
+
+actor_scrin_stormrider =
+   .name = Scrin Stormrider
+
+actor_scrin_devastator_warship =
+   .name = Scrin Devastator Warship
+
+actor_scrin_planetary_assault_carrier =
+   .name = Scrin Planetary Assault Carrier
+
+actor_scrin_invader_fighter =
+   .name = Scrin Invader Fighter
+
+actor_scrin_mothership =
+   .name = Scrin Mothership

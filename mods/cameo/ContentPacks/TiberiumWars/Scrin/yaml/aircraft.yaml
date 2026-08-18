@@ -1,5 +1,23 @@
-# Map/editor-ready Scrin Construction Yard deployment actor. The broader
-# aircraft roster remains deferred until its gameplay roles are implemented.
+# Map/editor-ready Scrin aircraft visuals. Gameplay roles, weapons, carrier
+# logic, costs, prerequisites, and final balance remain deferred.
+
+^ScrinAircraftVisual:
+	Inherits: ^Helicopter
+	Health:
+		HP: 100000
+	Armor:
+		Type: Heavy
+	Selectable:
+		Bounds: 1024, 1024
+	Aircraft:
+		Speed: 100
+		TurnSpeed: 20
+		AltitudeVelocity: 100
+		CanForceLand: false
+		Repulsable: false
+	-AttackAircraft:
+	-SpawnActorOnDeath:
+	-Voiced:
 
 scrin_drone_ship:
 	Inherits: ^Helicopter
@@ -31,3 +49,44 @@ scrin_drone_ship:
 	-Voiced:
 	RenderSprites:
 		PlayerPalette: player_rgba
+
+scrin_stormrider:
+	Inherits: ^ScrinAircraftVisual
+	Tooltip:
+		Name: actor_scrin_stormrider.name
+	RenderSprites:
+		PlayerPalette: scrin_stormrider_player
+
+scrin_devastator_warship:
+	Inherits: ^ScrinAircraftVisual
+	Tooltip:
+		Name: actor_scrin_devastator_warship.name
+	Selectable:
+		Bounds: 2048, 2048
+	RenderSprites:
+		PlayerPalette: scrin_devastator_warship_player
+
+scrin_planetary_assault_carrier:
+	Inherits: ^ScrinAircraftVisual
+	Tooltip:
+		Name: actor_scrin_planetary_assault_carrier.name
+	Selectable:
+		Bounds: 2048, 2048
+	RenderSprites:
+		PlayerPalette: scrin_planetary_assault_carrier_player
+
+scrin_invader_fighter:
+	Inherits: ^ScrinAircraftVisual
+	Tooltip:
+		Name: actor_scrin_invader_fighter.name
+	RenderSprites:
+		PlayerPalette: scrin_invader_fighter_player
+
+scrin_mothership:
+	Inherits: ^ScrinAircraftVisual
+	Tooltip:
+		Name: actor_scrin_mothership.name
+	Selectable:
+		Bounds: 3072, 3072
+	RenderSprites:
+		PlayerPalette: scrin_mothership_player

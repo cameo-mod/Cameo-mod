@@ -2,11 +2,11 @@
 
 This is a map/editor-ready visual foundation for the future Scrin faction, now
 covering its approved structures, defenses, Eradicator Hexapod, and initial
-infantry and vehicle rosters. It is not a playable roster yet, and the faction
+infantry, vehicle, and aircraft rosters. It is not a playable roster yet, and the faction
 remains hidden from the lobby. The map/editor-ready Drone Ship now lands and
 transforms into the Drone Platform, which plays its genuine deployment cycle.
 
-The pack contains 42 approved map/editor-ready actors. All sheets pair their
+The pack contains 47 approved map/editor-ready actors. All sheets pair their
 body art with separate, model-derived ground shadows. The structures use
 Cameo's dynamic `player_rgba` palette. Reactor and Signal Transmitter remain
 static; Extractor, Growth Accelerator, and Storm Column have 16-frame idle
@@ -60,6 +60,13 @@ mobile-unit facing is locked to an authored body/rig pivot, with the same
 per-facing correction applied to its complete body and native shadow group.
 This prevents asymmetric hulls, barrels, tentacles, and lifted legs from making
 the model orbit its cell while turning without suppressing real walk motion.
+
+The initial aircraft roster contains the Drone Ship, Stormrider, Devastator
+Warship, Planetary Assault Carrier, Invader Fighter, and Mothership. Their
+approved 32-facing spacecraft renders use fixed authored pivots, native ground
+shadows, and bright player-color ramps. The PAC idle visual carries its full
+complement of eight docked Invader Fighters. Carrier launch/recovery behavior
+remains deferred.
 
 The actors currently expose only the shared building behavior, turret rigs,
 and provisional unit locomotion needed by maps and the editor. Production roles,
