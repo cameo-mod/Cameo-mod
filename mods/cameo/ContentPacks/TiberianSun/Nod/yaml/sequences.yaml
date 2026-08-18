@@ -215,6 +215,17 @@ ts_nod_submarine:
 		Filename: ts_nod_submarine_icon.png
 
 
+ts_nod_hover:
+	Defaults:
+		Filename: tsnod_hover.png
+	idle:
+		Facings: 64
+		Scale: 0.8
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	icon:
+		Filename: ts_nod_hover_icon.png
 ts_nod_navalyard:
 	Defaults:
 		Offset: 0,-12

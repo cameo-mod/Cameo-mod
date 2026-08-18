@@ -1,3 +1,47 @@
+ts_nod_hover:
+	Inherits: ^BoatUnit
+	Inherits@cargo: ^CargoVehicle
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^NodRankDecoration
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Transport Hovercraft
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ts_nod_navalyard
+		Queue: Naval, RANaval
+		Description: Naval Transport, indefense
+	Mobile:
+		Speed: 60
+		TurnSpeed: 12
+		Locomotor: hover
+		RequiresCondition: !notmobile && !disabled
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7500
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 12
+		PassengerFacing: 0
+	Hovers:
+	Targetable@Hover:
+		TargetTypes: Water, Ship
+	Voiced:
+		VoiceSet: TSVehicle
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+
 ts_nod_cruiser:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ArtilleryShipTemplate

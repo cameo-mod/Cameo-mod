@@ -1317,4 +1317,16 @@ ts_gdi_destroyer:
 		Length: *
 	icon:
 		Filename: ts_gdi_destroyer_icon.png
+ts_gdi_hover:
+	Defaults:
+		Filename: tsgdi_hover.png
+	idle:
+		Facings: 64
+		Scale: 0.8
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	icon:
+		Filename: ts_gdi_hover_icon.png
+
 
