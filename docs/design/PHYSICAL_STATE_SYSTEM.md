@@ -8,79 +8,142 @@ Companion: `AREADAMAGE_WARHEAD_REBALANCE.md`, `SPREAD_FALLOFF_PLAN.md`; memory `
 
 ---
 
-## ⛔ THE METER NEVER FILLS IN TIME — measured 2026-08-18, and it blocks E2's pricing
+## ⛔⭐ THE FILL-RACE ARITHMETIC WAS WRONG BY 2–4× — corrected 2026-08-18
 
 **Maintainer:** *"Cryo seems as strong as Fire IF it is able to completely freeze a unit BEFORE it
 dies, and so goes also the saying about Flame and Corrosion — they can reach their full effect
 before a unit dies at around 25% HP left, right? You need to make sure this works!"*
 
-**It did not work.** Of the fired weapons carrying a meter, **1** reached full effect while the
-target still had 25% HP. One — `SheridanMissilesCryo`, which carries `Amount: 48000`.
+**Everything this section said on 2026-08-18 about the meter "never filling in time" was
+arithmetic, not measurement, and the arithmetic was wrong.** The corrected model and its guards
+live in **`tools/balance/physical_state_price.py`** + `tools/tests/test_physical_state_price.py`.
 
-## ✅ FIXED — full strength is now 300 (maintainer, 2026-08-18)
+### The mistake, exactly
 
-*"just make it 300 for a round nice number"* — 300 gives `200/300 = 0.667`, so full effect lands
-with **~33% HP** left, inside the 25% bar with margin. Applied in `gen_weapon_template.py`
-(`FAMILY_PHYSICAL_STATE` and every blend, ×3 so the per-parent-average rule stays exact) and
-spliced into the 94 templates.
+`PhysicalState.ApplyChange` health-scales every incoming change through `ScaleChangeToHealth`:
 
-```
-                       before          after
-weapons clearing the bar     1 / 367      124 / 372   (33%)
-Temperature scaled   median ratio 2.00     0.67   ✅
-Corrosion   scaled   median ratio 2.00     0.67   ✅
-Temperature apply    median ratio 59.6     59.6   ⛔ untouched
+```csharp
+range = Info.MaxValue - Info.MinValue;                    // Created()
+return (int)((long)amount * range / health.MaxHP);        // ScaleChangeToHealth()
 ```
 
-⛔ **The 166 discrete `ApplyPhysicalState` weapons are NOT fixed by this**, because they carry an
-absolute `Amount`, not a scale. They need `Amount ≥ 2.67 × damage per shot` each, or conversion to
-the damage-scaled mechanism — the second is one rule instead of 166 numbers, and it auto-tracks
-post-armor damage the way `PhysicalStateScale` already does. That is the next decision.
+The divisor is the meter's **own range**. But `PhysicalStateInfo.RelativeToHealth` still carries
+this `[Desc]`:
 
-⚠ **Blends deliberately do NOT all clear the bar.** A Plasma is half thermal and delivers
-`Temperature 150` → ratio 1.33; Waveforce 105 → 1.90; Quantum 75 → 2.67. That is the honest
-reading of a blend, and it means **E2's 1.25× must follow DELIVERY, not the family name** — price
-the weapons that actually reach full effect, and price a partial meter partially.
+> *"Whether incoming value changes should be scaled relative to unit health (divided by HP/10000)."*
 
-### Why — and ⭐ the target's HP cancels out entirely
-
-Live config (`defaults.yaml`, on 1592 actors): `MaxValue: 20000`, `RelativeToHealth: true` — so an
-incoming change lands as `Amount × 10000 / HP` — with relaxation 5–10 linear + 50–100 health-scaled
-per tick after a 25-tick delay.
+⛔ **That Desc is stale, and trusting it instead of the code is the whole error.** 10000 is not
+`range` for either meter. Worse, the two meters do not even share a range — **`Temperature` is
+SIGNED (−20000…20000) so its range is 40000, while `Corrosion` is 0…20000** — so a single formula
+for both was never going to be right:
 
 ```
-discrete `ApplyPhysicalState`      hits_to_fill = MaxValue × HP / (Amount × 10000)
-                                   hits_to_kill = HP / damage
-                                   ratio        = 2 × damage / Amount
-
-damage-scaled `PhysicalStateScale` ratio        = MaxValue / (scale × 100) = 200 / scale
+damage-scaled   ratio = MaxValue × 100 / (Scale × range)   →  Temperature   50 / Scale
+                                                              Corrosion    100 / Scale
+discrete apply  ratio = MaxValue × damage / (Amount × range) → Temperature  damage / (2 × Amount)
+                                                              Corrosion    damage / Amount
 ```
 
-Both ratios are **independent of the target's HP**, which is why this is a structural property of
-the constants rather than a per-unit balance issue. The bar is `ratio ≤ 0.75`. Measured:
+⭐ In the damage-scaled form the target's **MaxHP and the weapon's damage BOTH cancel** — the race
+is a property of the constant alone. That is real, and it is why one constant moved every weapon at
+once. The `200 / scale` and `2 × damage / Amount` in the old text were **4× (Temperature) and 2×
+(Corrosion) too pessimistic**.
 
-| mechanism | n | median ratio | best | reading |
-|---|--:|--:|--:|---|
-| Temperature, damage-scaled | 168 | **2.00** | 2.00 | every flamethrower fills its meter exactly **twice as slowly as it kills** |
-| Corrosion, damage-scaled | 33 | **2.00** | 2.00 | same, by construction |
-| Temperature, discrete apply | 166 | **59.6** | 0.67 | `Amount: 1200` against damage in the tens of thousands |
+### What is actually true
 
-⚠ **`scale: 100` pins the ratio at exactly 2.0 no matter what the weapon does** — damage cancels
-too. So a flame unit reliably kills its target with the meter around half full, and the "full
-effect" the pricing would pay for is never delivered. The relaxation makes the real figure *worse*
-than these numbers, which ignore decay between shots.
+| mechanism | bindings | reach full effect before 25% HP |
+|---|--:|--:|
+| Temperature, damage-scaled | 177 | **177 (100%)** |
+| Corrosion, damage-scaled | 33 | **33 (100%)** |
+| Temperature, discrete apply | 144 | 4 |
+| Temperature (cryo), discrete apply | 22 | 9 |
+| **total** | **376** | **223 (59.3%)** |
 
-### What makes it work — one constant, three ways to spend it
+⚠ **`meters_filling_before_death` = 223, not 124 and not 1.** Both earlier values are void.
 
-| fix | value | note |
-|---|---|---|
-| raise `PhysicalStateScale` | 100 → **267** | the meter then fills at 75% of the way to death |
-| lower `MaxValue` | 20000 → **7500** | same effect, one number, applies to every axis at once |
-| raise discrete `Amount` | ≥ **2.67 × damage per shot** | per weapon, so only for the `ApplyPhysicalState` set |
+⚠⚠ **The 100 → 300 constant (`354ed5ad3`) was calibrated against the wrong formula.** At the
+ORIGINAL `Scale: 100`, Temperature's ratio was **0.50** — already inside the 0.75 bar, on all 177
+damage-scaled bindings. Only `Corrosion` genuinely failed (ratio exactly **1.00**, full at the
+moment of death), and `150` would have fixed it (0.667). What 300 actually bought:
 
-⛔ **E2's 1.25× cost multiplier cannot be applied before one of these lands** — it would charge for
-an effect the unit does not actually deliver. Fix the constant, re-measure this table, then price.
-Claim: `meters_filling_before_death`.
+| axis | Scale 100 | Scale 300 | effect delivered per kill |
+|---|--:|--:|---|
+| heat | ratio 0.50 | ratio 0.167 | 0.686 → 0.896 = **+31%**, uncharged |
+| corrosion | ratio 1.00 ⛔ | ratio 0.333 | 0.375 → 0.792 = **+111%**, the real fix |
+
+**A 3× faster fill is a buff the 1.25× ceiling cannot price**, because both scales already sit at
+full delivery. ⛔ **Open for the maintainer:** keep 300 (a deliberate, now-explicit buff), or drop
+to **150**, the smallest round constant that clears the bar on *both* meters. Reverting is a
+balance change and needs an order — nothing has been reverted.
+
+⛔ **The discrete `ApplyPhysicalState` weapons are still the real gap** (13 of 166 pass). They
+carry an absolute `Amount` against damage in the tens of thousands, so damage does NOT cancel and a
+heavy gun outruns its own meter — `FutureTankCannons` needs **313×** its lifetime to fill one.
+Converting them to the damage-scaled mechanism is one rule instead of 166 numbers.
+
+### ⭐ A partial meter is not worth nothing — and the two axes differ completely
+
+The delivery weight cannot be a step function at the bar, because **the effects are graded** and
+their gates are an order of magnitude apart. Measured from the consumer traits on `^CryoFreezable`
+and `^Corrodible`:
+
+| axis | gate | share of the axis delivered at 5% / 25% / 50% / 75% / 100% fill |
+|---|--:|---|
+| heat | 1% | 0.26 · 0.31 · 0.38 · 0.44 · 1.00 |
+| cryo | 1% | 0.05 · 0.25 · 0.50 · 0.75 · 1.00 |
+| corrosion | **50%** | 0.00 · 0.00 · 0.50 · 0.75 · 1.00 |
+
+* **`Corroding` is gated at `LowerValue: 10000` of 20000** — every corrosion effect (DoT, slow,
+  damage amplification) needs the meter at **half** before *anything* happens. A corrosion weapon
+  that 49%-fills the meter has done literally nothing.
+* **`Overheating` opens at 200 of 20000 = 1%**, and ⚠ `ChangesHealthProportionalToPhysicalState`
+  normalises over the FULL signed range (`(v − MinValue) / range`) with no
+  `UseDeviationFromRelaxed` option — so on the signed Temperature meter **the burn DoT opens at
+  half strength**, not at zero. That floor is why a heat weapon that never fills is still worth
+  something, and it is almost certainly not intended: a target one point above the deadzone burns
+  at 50% of maximum. ⛔ **Fixable in yaml alone** — `DamageAtMinimum: -150` makes the line cross
+  zero at a relaxed meter — but it is a balance number, so it needs an order.
+* **cryo is honestly proportional**: `SlowsProportionalToPhysicalState` and
+  `DamageMultiplierProportionalToPhysicalState` both use `UseDeviationFromRelaxed`, so half a
+  freeze is half a slow. The maintainer's mental model is exactly right for this axis.
+
+### ⭐ EXPOSURE — the term nothing in the price model saw
+
+A meter the target does not carry delivers **nothing**, and the two meters are not equally present:
+
+| meter | actors | share of the 1609 priced (Health + Valued) actors |
+|---|--:|--:|
+| `Temperature` | 1592 | **98.6%** |
+| `Corrosion` | 724 | **45.0%** |
+
+A corrosion weapon does nothing at all to 55% of the roster. Claim: `corrosion_meter_actors`.
+
+### E2 pricing — the rule as built
+
+```
+weight     = clamp01( exposure × delivery(ratio, curve) / delivery(0.75, cryo curve) )
+multiplier = 1 + 0.25 × weight
+```
+
+`delivery` is the mean effect share over the target's remaining life. The reference is a weapon
+that exactly meets the maintainer's bar on a fully-exposed meter, so **meeting the bar pays exactly
+1.25×** and filling faster is never charged more than the ruling allows. Result over 376 bindings:
+**190 pay the full 1.25×, 176 pay partially, 10 pay nothing.**
+
+| axis | mechanism | bindings | median ratio | median × |
+|---|---|--:|--:|--:|
+| heat | scaled | 177 | 0.167 | **1.250** |
+| corrosion | scaled | 33 | 0.333 | **1.143** |
+| cryo | apply | 22 | 0.519 | **1.250** |
+| heat | apply | 144 | 15.104 | **1.087** |
+
+⚠ Corrosion tops out at 1.143 even though its meter fills three times over — **exposure**, not the
+race, is what holds it down. That is the term that separates Flame from Chemical.
+
+ℹ Relaxation between shots is deliberately **outside** the priced ratio: `RelaxationDelay: 25`
+means a weapon reloading faster than 25 ticks loses nothing, and the linear term would reintroduce
+a MaxHP dependence that destroys the cancellation above. It costs a slow artillery piece ~36% of a
+shot's gain and a normal gun ~5%.
 
 ## 0. WHAT ALREADY EXISTS (verified 2026-08-09)
 

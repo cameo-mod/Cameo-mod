@@ -659,6 +659,39 @@ bindings is mechanical and needs no ruling; converting them into a `state_w` ter
 existing note (`cameo-physical-state-pricing`) has cryo at 0.75× as an empirical measurement, and
 nothing equivalent exists for heat or corrosion. Claim: `physical_state_fired_weapons`.
 
+### ✅ E2 ANSWERED (2026-08-18) — `tools/balance/physical_state_price.py`
+
+The maintainer's ruling supplies the worth: **1.25× cost, but only for delivery** — *"Cryo seems as
+strong as Fire IF it is able to completely freeze a unit BEFORE it dies"*. Built as
+
+```
+weight     = clamp01( exposure × delivery(ratio, effect curve) / delivery(bar, cryo curve) )
+multiplier = 1 + 0.25 × weight            formula.physical_state_price_multiplier
+```
+
+with all three inputs measured from the resolved tree, never assumed. Full derivation in
+`PHYSICAL_STATE_SYSTEM.md`; the three findings that matter here:
+
+* ⛔ **the fill-race formula this document and that one both carried was wrong by 2–4×** — the
+  engine divides by the meter's `range` (`MaxValue − MinValue`), not by the `10000` its own
+  `[Desc]` advertises, and `Temperature` is signed so its range is double `Corrosion`'s. Corrected
+  count: **223 of 376 bindings** reach full effect before the target dies, not 124 and not 1;
+* ⭐ **exposure is a first-class term** — `Corrosion` sits on **45.0%** of priced actors against
+  `Temperature`'s 98.6%, so a corrosion weapon caps at **1.143×** where a flame weapon reaches
+  1.25×. This is the term that separates Flame from Chemical, and nothing in the price model saw
+  it before;
+* ⭐ **a partial meter is priced partially, on a per-axis curve** — every corrosion effect is gated
+  at **half** the meter (`Corroding: LowerValue 10000`), while heat opens at 1% and its DoT opens
+  at *half strength* because the trait normalises over the full signed range.
+
+Result: 190 bindings pay the full 1.25×, 176 pay partially, 10 pay nothing. Guards:
+`tools/tests/test_physical_state_price.py` (17 tests) + claims `meters_filling_before_death`,
+`corrosion_meter_actors`, `physical_state_fired_weapons`.
+
+⛔ **Still owed by the maintainer:** whether `PhysicalStateScale` stays at **300**. It was chosen
+against the wrong arithmetic; **150** is the smallest round constant that clears the bar on both
+meters, and 300 is a 3× faster fill that the 1.25× ceiling cannot charge for.
+
 ### E1, as measured and fixed (2026-08-17)
 
 **The premise was wrong, and checking it was the whole job.** "Tesla's `Shield: 400` is free

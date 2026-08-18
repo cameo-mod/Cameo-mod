@@ -24,7 +24,7 @@
 #  * `tolerance` is fractional (0.02 = 2%). Counts that must be exact use 0.
 #  * When a claim legitimately changes, update `value` IN THE SAME COMMIT as the doc. That is
 #    the whole point: the audit forces doc and reality to move together.
-#  * `docs` lists every file repeating the claim â€” so a change updates ALL of them, which is
+#  * `docs` lists every file repeating the claim — so a change updates ALL of them, which is
 #    how the `Shield = top + floor` duplication survived for weeks.
 
 claims:
@@ -67,7 +67,7 @@ claims:
     value: 58
     tolerance: 0
     what: >
-      Actors that SPAWN with a shield pool and no positive gate â€” the only ones E1 prices.
+      Actors that SPAWN with a shield pool and no positive gate — the only ones E1 prices.
       1318 more carry an empty capacity behind `shieldgen`; ~216 are upgrade-gated.
     docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
     measure: |
@@ -141,7 +141,7 @@ claims:
       DamageMultiplier declarations in LIVE files (mod.yaml's Rules list). The tree holds 683;
       314 sit in dead files such as rules/wh40k.yaml, which is why a plain grep misleads.
       Was 369 until the shield-150% block and its two Consortium dependents were deleted
-      (W26, 2026-08-17) â€” this claim FAILED on the audit's very first run and is the intended
+      (W26, 2026-08-17) — this claim FAILED on the audit's very first run and is the intended
       demonstration: the count moved with the work and the document had not.
     docs: [docs/design/BALANCE_PROGRAM_PLAN.md]
     measure: |
@@ -161,7 +161,7 @@ claims:
     value: 973
     tolerance: 0
     what: >
-      Fired weapons carrying MORE THAN ONE damage main â€” W24's scope, and the reason pricing
+      Fired weapons carrying MORE THAN ONE damage main — W24's scope, and the reason pricing
       must wait for the weapon rebuild (their K is still going to move).
     docs: [docs/design/BALANCE_PROGRAM_PLAN.md]
     measure: |
@@ -210,11 +210,11 @@ claims:
     value: 16
     tolerance: 0
     what: >
-      Scouts still resolving `DamageMultiplier@ScoutInfantryBuff: 50` â€” i.e. taking HALF damage,
+      Scouts still resolving `DamageMultiplier@ScoutInfantryBuff: 50` — i.e. taking HALF damage,
       double effective HP, unpriced. FORMULA_V2 says the 2x-health bake "replaced" this; it
       replaced it for 19 of 35. The 19 migrated actors CANCEL the template with a local
       `Modifier: 100`, which is exactly why those overrides look like deletable no-ops and are
-      NOT â€” deleting them restores the 50% reduction. Goes to 0 when the bake is finished.
+      NOT — deleting them restores the 50% reduction. Goes to 0 when the bake is finished.
     docs: [docs/design/FORMULA_V2.md, docs/design/ROADMAP.md, docs/design/BALANCE_PROGRAM_PLAN.md]
     measure: |
       import sys, pathlib
@@ -232,70 +232,67 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 124
+    value: 223
     tolerance: 0
     what: >
-      Fired weapons whose status meter reaches FULL effect while the target still has 25% HP â€”
-      the maintainer's condition for pricing a meter at all ("it is able to completely freeze a
-      unit BEFORE it dies"). Was 1 of 367; the maintainer set full strength to 300 (2026-08-18)
-      and it is now 124 of 372. The ratio is independent of target HP AND of damage:
-      `2 x damage / Amount` for a discrete apply, `200 / scale` for a damage-scaled meter.
-      âš  The remaining failures are the 166 discrete `ApplyPhysicalState` weapons, which the
-      scale ruling does not touch â€” they need `Amount >= 2.67 x damage per shot` or conversion
-      to the scaled mechanism. E2's 1.25x may only price weapons that clear the bar.
+      Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
+      still has 25% HP left — the maintainer's condition for pricing a meter at all ("it is
+      able to completely freeze a unit BEFORE it dies"). 223 of 376 bindings on 372 weapons.
+      ⛔ THE EARLIER VALUES (1, then 124) WERE MEASURED WITH A WRONG FORMULA and are void.
+      `PhysicalState.ApplyChange` health-scales through `ScaleChangeToHealth`, which divides by
+      MaxHP and multiplies by the meter's RANGE (`MaxValue - MinValue`) — NOT by the 10000
+      that `PhysicalStateInfo`'s own [Desc] still advertises ("divided by HP/10000"), which is
+      what the old derivation trusted. `Temperature` is SIGNED so its range is 40000 while
+      `Corrosion`'s is 20000: the two meters do not even share a formula.
+      `ratio = MaxValue x 100 / (Scale x range)` gives Temperature 50/Scale, Corrosion
+      100/Scale — 2x to 4x faster than the docs claimed. Target HP and weapon damage both
+      cancel. The formula now lives ONLY in `tools/balance/physical_state_price.py`, which this
+      measure imports, so the two can no longer disagree.
+      ⚠ The failures are the discrete `ApplyPhysicalState` weapons (13 of 166 pass); the
+      damage-scaled ones pass 210/210, and 177 of them already passed at the ORIGINAL Scale 100.
     docs: [docs/design/PHYSICAL_STATE_SYSTEM.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
     measure: |
       import sys, pathlib
       sys.path[:0] = ['tools/audit', 'tools/balance']
       from cameo_model import Model
-      MAXV, BAR = 20000, 0.75
-      m = Model(); rs = m.rs
-      def num(v, d=0.0):
-          try: return float(str(v).strip())
-          except (TypeError, ValueError): return d
-      fired = set()
-      for a in rs.actors:
-          if a.startswith('^'): continue
-          node = rs.resolve(a)
+      import physical_state_price as psp
+      rows, _ref, _geom, _exp, _curves = psp.scan(Model().rs)
+      print(sum(1 for r in rows
+                if r['ratio'] is not None and r['ratio'] <= psp.FULL_EFFECT_BAR))
+
+  - id: corrosion_meter_actors
+    value: 724
+    tolerance: 0
+    what: >
+      Actors carrying the `Corrosion` meter — 45.0% of the 1609 priced (Health + Valued)
+      actors, against `Temperature`'s 1592 (98.6%). This asymmetry is an EXPOSURE term in E2
+      pricing: a corrosion weapon does nothing at all to 55% of the roster, so it cannot earn
+      the same status surcharge as a flame weapon even when its meter fills faster. Nothing in
+      the price model saw this before 2026-08-18.
+    docs: [docs/design/PHYSICAL_STATE_SYSTEM.md]
+    measure: |
+      import sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from cameo_model import Model
+      rs = Model().rs
+      n = 0
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          node = rs.resolve(name)
           if node is None: continue
           for c in node.children:
-              if c.key == 'Armament' or c.key.startswith('Armament@'):
-                  w = (c.get('Weapon') or '').strip()
-                  if w: fired.add(w)
-      n = 0
-      for w in sorted(fired):
-          node = rs.resolve_weapon(w)
-          if node is None: continue
-          dmg = 0.0; binding = None
-          for wh in node.children:
-              if not wh.key.startswith('Warhead'): continue
-              rel = (wh.get('ValidRelationships') or '').strip()
-              if 'Ally' in rel and 'Enemy' not in rel: continue
-              d = num(wh.get('Damage'))
-              if d > 0 and 'Percentage' not in wh.key: dmg += d
-              st = (wh.get('PhysicalStateName') or '').strip()
-              if st and binding is None:
-                  if (wh.value or '').strip() == 'ApplyPhysicalState':
-                      binding = ('apply', abs(num(wh.get('Amount'))))
-                  else:
-                      binding = ('scaled', abs(num(wh.get('PhysicalStateScale'))))
-              multi = next((x for x in wh.children if x.key == 'PhysicalStates'), None)
-              if multi is not None and binding is None:
-                  best = max((abs(num(s.value)) for s in multi.children), default=0)
-                  if best > 0: binding = ('scaled', best)
-          if binding is None or dmg <= 0 or binding[1] <= 0: continue
-          kind, amt = binding
-          ratio = (MAXV * dmg / (amt * 10000)) if kind == 'apply' else (MAXV / (amt * 100))
-          if ratio <= BAR: n += 1
+              if (c.key == 'PhysicalState' or c.key.startswith('PhysicalState@')) \
+                      and (c.get('Name') or '').strip() == 'Corrosion':
+                  n += 1
+                  break
       print(n)
-
   - id: physical_state_fired_weapons
     value: 372
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
-      at ZERO for it â€” E2. Counts all THREE shapes: a discrete `ApplyPhysicalState` warhead, a
-      damage-scaled `PhysicalStateScale`, and a BLEND's `PhysicalStates:` dict â€” which carries no
+      at ZERO for it — E2. Counts all THREE shapes: a discrete `ApplyPhysicalState` warhead, a
+      damage-scaled `PhysicalStateScale`, and a BLEND's `PhysicalStates:` dict — which carries no
       `PhysicalStateName` at all, so keying on that name misses every blend family. Counting one
       shape is how the docs carried "~89 bindings"; counting two gave 367.
     docs: [docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md, docs/design/BALANCE_PROGRAM_PLAN.md]
@@ -336,10 +333,10 @@ claims:
     value: 0
     tolerance: 0
     what: >
-      Emitted families sharing a plating row with another family (ARMOR excluded â€” it is flat by
+      Emitted families sharing a plating row with another family (ARMOR excluded — it is flat by
       design). The maintainer's uniqueness law: *"don't put 3 energy weapons exactly on the same
       versus value"*. Four groups tied before e7fa2d57b. A tie may ONLY be fixed by moving mass
-      across a group boundary onto a second real defeat mechanism â€” never by fabricated noise.
+      across a group boundary onto a second real defeat mechanism — never by fabricated noise.
     docs: [docs/design/PLATING_COMPOSITION_REFINEMENT.md, docs/design/PLATING_COMBINATION.md]
     measure: |
       import sys
@@ -364,7 +361,7 @@ claims:
     tolerance: 0
     what: >
       Families the generator emits a plating row for. The row count of the matrix in
-      PLATING_COMPOSITION_REFINEMENT.md â€” so adding a family without updating that table, or
+      PLATING_COMPOSITION_REFINEMENT.md — so adding a family without updating that table, or
       dropping one, goes red instead of silently making the document wrong.
     docs: [docs/design/PLATING_COMPOSITION_REFINEMENT.md]
     measure: |
