@@ -9632,32 +9632,34 @@ DefuseKit:
 # they are kept deliberately, so switching these templates over changes NOTHING today. Deleting
 # `Speed:` activates the 10%-of-Range rule and deleting `Inaccuracy:` activates the 1% rule; both
 # are balance changes and go through the pipeline, not through a refactor.
-^Projectile_Shell_Light:
+# ONE shell, three accuracies. After the sound moved onto the weapons, the L/M/H templates
+# differed by a single field, so the flight body lives here once and each level states only what
+# makes it a level. ⚠ The three cannot merge YET: `Inaccuracy` is the one axis they still carry,
+# and replacing it with the 1%-of-Range rule is a balance change (3.2x-11.8x tighter, measured in
+# PROJECTILE_TEMPLATES.md) awaiting a maintainer order. When that lands, deleting the three
+# `Inaccuracy:` lines below IS the collapse — every weapon can then inherit `^Projectile_Shell`.
+^Projectile_Shell:
 	Projectile: ScaledBullet
 		Image: 120MM
 		Speed: 500
-		Inaccuracy: 150
 		InaccuracyPercentage: 1
 		ProjectileSpeedPercentage: 10
 		Shadow: true
+
+^Projectile_Shell_Light:
+	Inherits: ^Projectile_Shell
+	Projectile: ScaledBullet
+		Inaccuracy: 150
 
 ^Projectile_Shell_Medium:
+	Inherits: ^Projectile_Shell
 	Projectile: ScaledBullet
-		Image: 120MM
-		Speed: 500
 		Inaccuracy: 300
-		InaccuracyPercentage: 1
-		ProjectileSpeedPercentage: 10
-		Shadow: true
 
 ^Projectile_Shell_Heavy:
+	Inherits: ^Projectile_Shell
 	Projectile: ScaledBullet
-		Image: 120MM
-		Speed: 500
 		Inaccuracy: 450
-		InaccuracyPercentage: 1
-		ProjectileSpeedPercentage: 10
-		Shadow: true
 
 ^Projectile_Sniper_Light:
 	Projectile: Bullet
