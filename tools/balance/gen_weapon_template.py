@@ -262,6 +262,10 @@ PHYSICS_RANK = {
     "Quantum": 0.82, "Railgun": 0.78, "Prism": 0.76, "Laser": 0.74,
     # blended energy — part field-coupling, part thermal
     "Waveforce": 0.70, "Plasma": 0.68, "Inferno": 0.64,
+    # PhotonCannon = 1/3 Waveforce + 2/3 MissileAA, so its shield coupling is the weighted mean:
+    # (0.70 + 2 x 0.34) / 3 = 0.46. One third of it is a resonant beam that couples to a field;
+    # the rest is ordnance, which is what a shield is built to stop.
+    "PhotonCannon": 0.46,
     # exotic / field-adjacent
     "Sonic": 0.60, "Magic": 0.58, "Nuclear": 0.56,
     # thermal / chemical — a shield stops heat and reagents well; little field coupling
@@ -624,7 +628,14 @@ def rank_composition_conflicts():
         energy = composition(fam)["energy"]
         if rank >= ENERGY_COUPLING_RANK and energy <= 0:
             bad.append((fam, rank, energy, "ranked field-coupling, but no energy share"))
-        elif rank < ENERGY_COUPLING_RANK and energy > 0:
+        elif rank < ENERGY_COUPLING_RANK and energy > 0 and fam not in BLEND_FAMILIES:
+            # ⚠ The converse holds for PRIMITIVES only. A blend's rank is the MEAN of its
+            # parents', so a mostly-ordnance blend can sit below the band boundary while still
+            # carrying a real energy share from one parent — `PhotonCannon` (rank 0.46, one
+            # third Waveforce) is the case that proved it. Applying the converse there would
+            # forbid a legitimate family rather than catch drift, which is the opposite of what
+            # this guard is for: the drift it exists to catch (`Inferno`, `Cryo`) was in the
+            # PRIMITIVE table both times.
             bad.append((fam, rank, energy, "ranked thermal/kinetic, but has an energy share"))
     return bad
 
@@ -1600,6 +1611,30 @@ BLEND_FAMILIES = {
     # Temperature = (Flame 300 + Laser 225) / 5 parents = 105; Corrosion = (Chemical 300) / 5 = 60.
     "Waveforce": (["Flame", "Chemical", "Railgun", "Laser", "Tesla"],
                   {"Temperature": 105, "Corrosion": 60}, L3),
+    # PhotonCannon = Waveforce x MissileAA at ONE THIRD / TWO THIRDS, and DELIBERATELY WITHOUT
+    # METERS (maintainer 2026-08-18: *"a Waveforce x ... combo but without the physical states"*
+    # + *"the photon cannons also need to be very good against air"*). The resonant third gives
+    # anti-shield coupling and anti-infantry reach; the AA two-thirds are why it is the faction's
+    # air defence. It neither burns nor corrodes, so no Temperature and no Corrosion — which also
+    # makes it the first family whose price is pure damage, with nothing for E2 to weight.
+    #
+    # ⛔ `CannonHE` WAS TRIED AS A THIRD PARENT AND MEASURED OUT. The idea was to protect the
+    # ground half, but CannonHE is specifically anti-air-HOSTILE (Fighter 79, Helicopter 51,
+    # Spaceship 43), so it cancelled the AA parent outright: the 3-way landed at air/ground 0.88
+    # — an anti-armour gun that is BAD against aircraft, the exact opposite of the brief.
+    #
+    # ⚠ AND A TRUE 50/50 IS NOT ENOUGH EITHER: it puts Fighter at 95, still below baseline,
+    # because Waveforce's own ladder leans to ground and infantry. Two thirds AA is the point
+    # where the air rows actually clear the ground ones (air/ground 1.11: Fighter 115,
+    # Helicopter 130, Spaceship 134, while Heavy 119 / Superheavy 121 keep the punch).
+    #
+    # ⭐ THE REPEATED PARENTS ARE THE WEIGHTING, not a typo. `blend_versus` averages over the
+    # LIST, so 5 Waveforce primitives against 10 `MissileAA` entries is exactly one third to two
+    # thirds — a weighted blend of a blend and a primitive, which the machinery cannot express
+    # any other way (it averages PARENT FAMILIES, and a blend-of-blends would need the parents
+    # built first — see Waveforce above).
+    "PhotonCannon": (["Flame", "Chemical", "Railgun", "Laser", "Tesla"]
+                     + ["MissileAA"] * 10, {}, L3),
 }
 # Fixed emission order for a blend (it has no single light/heavy direction).
 BLEND_ARMOR_ORDER = ["None", "Flak", "Plate", "Heroic", "Scout", "Light", "Medium", "Heavy",
@@ -1722,7 +1757,19 @@ def _generate():
     for nm, (parents, states, lv) in BLEND_FAMILIES.items():
         if wanted and nm.lower() not in wanted:
             continue
-        vt = valid_targets(False)  # plasma is a ground weapon (like flame/chem)
+        # ⚠ Air capability is INHERITED FROM THE PARENTS, not assumed. This used to be a flat
+        # `valid_targets(False)` with the note "plasma is a ground weapon (like flame/chem)" —
+        # true of Plasma and false as a rule: `PhotonCannon` exists precisely to be the Protoss
+        # AIR defence, and a hardcoded ground-only target list would have shipped an AA family
+        # that cannot shoot at aircraft.
+        #
+        # The test is a WEIGHTED SHARE, not "any parent": a blend can engage air when at least a
+        # third of what it is made of can. "Any" would have promoted `Waveforce` on the strength
+        # of one Laser in five parents — an unrelated family silently gaining AA. A third is also
+        # exactly what the repeated-parent weighting expresses, so it reads off the list directly.
+        air_share = (sum(1 for p in parents if p in WEAPONS and WEAPONS[p][2]) / len(parents)
+                     if parents else 0)
+        vt = valid_targets(air_share >= 1 / 3)
         dt = FAMILY_DAMAGE_TYPES.get(nm)
         print(f"###### {nm}: blend of {'+'.join(parents)} + PhysicalStates {states} ######")
         print(family(nm, None, vt, lv, versus_override=blend_versus(parents), physical_states=states,
