@@ -34,6 +34,7 @@ sys.path.insert(0, str(ROOT / "tools/balance"))
 from cameo_model import Model  # noqa: E402
 import effective_damage as effmod  # noqa: E402
 import formula  # noqa: E402
+import physical_state_price as psp  # noqa: E402
 import target_model as tm  # noqa: E402
 import weapon_efficiency as we  # noqa: E402
 
@@ -765,7 +766,8 @@ def _is_balance_buildable(buildable) -> bool:
     return not (toks & _DISABLING_PREREQS)
 
 
-def extract_actor(rs, key: str, section: str) -> dict | None:
+def extract_actor(rs, key: str, section: str,
+                  ps_map: dict[str, dict] | None = None) -> dict | None:
     resolved = rs.resolve(key)
     if resolved is None:
         return None
@@ -869,8 +871,15 @@ def extract_actor(rs, key: str, section: str) -> dict | None:
         for arm in arms:
             arm["design_weapon_class"] = 1.0
     surv = survivability(u, resolved)
-    if surv:
-        u[DERIVED_KEY] = surv
+    ps = (ps_map or {}).get(key)
+    if surv or ps:
+        derived: dict = u.setdefault(DERIVED_KEY, {})
+        if surv:
+            derived.update(surv)
+        if ps:
+            derived["physical_state_weight"] = round(ps["weight"], 4)
+            derived["physical_state_multiplier"] = round(ps["multiplier"], 4)
+            derived["physical_state_weapon"] = ps["weapon"]
     return u
 
 
@@ -947,6 +956,9 @@ def build_both(model: Model, only: str | None = None) -> tuple[dict[str, dict],
     rs = model.rs
     tm.use_ruleset(rs)          # reuse the built tree for the armor census (~8s saved)
     we.use_ruleset(rs)          # ... and for the median-weapon-range yardstick
+    # E2 — one physical-state pricing pass; the actor record lives in the derived
+    # sidecar so it cannot fall out of step with the raw ledger.
+    ps_map = {r["actor"]: r for r in psp.actor_multipliers(rs)}
     ledgers: dict[str, dict] = {}
     sidecars: dict[str, dict] = {}
     for ledger, info in sorted(pack_rosters().items()):
@@ -957,7 +969,7 @@ def build_both(model: Model, only: str | None = None) -> tuple[dict[str, dict],
         for section, actors in sorted(info["sections"].items()):
             sec: dict = {}
             for a in sorted(set(actors)):
-                u = extract_actor(rs, a, section)
+                u = extract_actor(rs, a, section, ps_map)
                 if u is not None:
                     if a in keep_design:
                         u["design"].update(keep_design[a])

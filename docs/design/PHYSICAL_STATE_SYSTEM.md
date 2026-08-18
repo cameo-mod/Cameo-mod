@@ -146,6 +146,19 @@ means a weapon reloading faster than 25 ticks loses nothing, and the linear term
 a MaxHP dependence that destroys the cancellation above. It costs a slow artillery piece ~36% of a
 shot's gain and a normal gun ~5%.
 
+### E2 pricing — pipeline wiring
+
+The delivery-weighted multiplier is now wired into `tools/balance/fit_class.py`:
+
+* `tools/balance/extract_stats.py` computes the per-actor `physical_state_weight`,
+  `physical_state_multiplier`, and `physical_state_weapon` via
+  `physical_state_price.actor_multipliers()` and stores them in the derived sidecar
+  (`docs/balance/derived/*.json`), so they cannot desync from the raw ledger.
+* `fit_class.price_unit()` applies `formula.physical_state_price_multiplier(weight)`
+  on top of the charge-up discount. A unit with full delivery (e.g. `td_nod_flametank`)
+  prices at the full 1.25× ceiling; a unit with partial delivery or no physical-state
+  weapon prices at the corresponding lower multiplier or 1.0.
+
 ## 0. WHAT ALREADY EXISTS (verified 2026-08-09)
 
 **Engine traits** (`engine/OpenRA.Mods.Common/Traits/`): `PhysicalState`, `PhysicalStateBar`,

@@ -426,6 +426,11 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
 - **RevealsShroud per class = baseline range, floored to 5000** for
   scout/closecombat/melee (helps snipers scout). Apply to each `^…Template`.
 - **Melee range IS priced** (FORMULA_V2 §6b corrected).
+- [x] **Physical-state delivery surcharge (E2)** — 1.25× ceiling scaled by delivery
+  weight; computed by `physical_state_price.actor_multipliers()`, stored in the
+  derived sidecar (`docs/balance/derived/*.json`), and applied by `fit_class.price_unit()`
+  after the charge-up discount. Flame/chemical units now pay the surcharge; cryo and
+  non-state units price at 1.0.
 
 **To do (in order):**
 - [x] **BUILDABILITY LAW** (maintainer 2026-07-22): a unit is balance-relevant

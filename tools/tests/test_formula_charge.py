@@ -178,7 +178,7 @@ class ChargedUnitPricingTest(unittest.TestCase):
 
     def _price(self, unit):
         o0, p0, q0 = formula.estimators(*self.INPUTS)
-        return fit_class.price_unit(unit, self.INPUTS, o0, p0, q0, 800)
+        return fit_class.price_unit(unit, None, self.INPUTS, o0, p0, q0, 800)
 
     def test_charged_actor_prices_three_quarters_of_an_identical_one(self):
         plain = self._price({})

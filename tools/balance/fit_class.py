@@ -123,18 +123,42 @@ def unit_inputs(u, du=None, use_k=False):
              fnum(d.get("tech_tier")) or 1.0), fallbacks)
 
 
-def price_unit(u, inp, o0, p0, q0, cost0) -> float:
+def physical_state_weight(u, du=None) -> float:
+    """Delivery weight for the physical-state price multiplier, or 0.
+
+    The value is read from the derived sidecar first (the canonical place after
+    `extract_stats.split_derived`), then from a still-attached `_derived` blob,
+    then from a raw top-level field, so the helper works whether the caller has
+    already merged the sidecar or not.
+    """
+    for src in (u.get("_derived") if isinstance(u, dict) else None,
+                du or {},
+                u if isinstance(u, dict) else {}):
+        if src and "physical_state_weight" in src:
+            return float(src["physical_state_weight"])
+    return 0.0
+
+
+def price_unit(u, du, inp, o0, p0, q0, cost0) -> float:
     """Formula-v2 price for one ledger unit, including the actor-level modifiers.
 
     The charge-up discount is applied to the PRICE, after the estimators, not to
     DPS: O/P/Q are degree 1/2/3 in their inputs, so scaling DPS would not produce
     a clean 0.75x on the result. Charging is an ACTOR property (W4) — the delay
     inflates the effective reload AND the unit is helpless while it winds up.
+
+    The physical-state surcharge (E2) is also an actor-level price multiplier:
+    it is proportional to delivery, so a heat/chemical unit that does not fill
+    the meter pays less than the 1.25x ceiling. The weight comes from the derived
+    sidecar so it cannot desync from the raw ledger.
     """
     o, p, q = formula.estimators(*inp)
     v2 = formula.class_anchor_price(o, p, q, o0, p0, q0, cost0)
-    return v2 * formula.charge_price_multiplier(u.get("charge_up"),
-                                                charge_cycle_fallback(u))
+    return (v2
+            * formula.charge_price_multiplier(u.get("charge_up"),
+                                              charge_cycle_fallback(u))
+            * formula.physical_state_price_multiplier(
+                physical_state_weight(u, du)))
 
 
 def charge_cycle_fallback(u) -> float | None:
@@ -320,7 +344,7 @@ def main() -> int:
             if inp is None or cost is None:
                 rws.append((actor, cost, None, None))
                 continue
-            v2 = price_unit(u, inp, *e0, c0)
+            v2 = price_unit(u, derived.get(actor), inp, *e0, c0)
             rws.append((actor, cost, v2, (v2 - cost) / cost if cost else None))
         return (args.anchor, c0) + e0 + (rws, fb)
 

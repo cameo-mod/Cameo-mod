@@ -1,5 +1,23 @@
 # Development Log
 
+## 2026-08-19 — Delivery-weighted physical-state price multiplier wired into fit_class
+
+- `tools/balance/extract_stats.py` now imports `physical_state_price` and calls
+  `physical_state_price.actor_multipliers(rs)` once per extraction pass. The resulting
+  per-actor record (`physical_state_weight`, `physical_state_multiplier`,
+  `physical_state_weapon`) is attached to the actor's `_derived` blob and lifted into
+  `docs/balance/derived/*.json` by `split_derived()`.
+- `tools/balance/fit_class.py` now applies `formula.physical_state_price_multiplier()`
+  in `price_unit()`, using the derived sidecar weight. The helper `physical_state_weight()`
+  checks `u["_derived"]`, then the sidecar `du`, then the raw unit, defaulting to 0.
+- Regenerated all 32 ledgers and derived sidecars (`extract_stats.py`).
+- Verified with `fit_class.py --class line_breaker --anchor td_nod_flametank --use-k`:
+  the anchor prices at **1000** against an actual cost of **800** (+25%), matching the
+  full E2 ceiling. Non-state anchors (e.g. `mbt` / `tiger.nax`) price at cost0 with no
+  surcharge.
+- `find_empty_warhead.py` = 0; `audit_physical_state_warheads.py` PASS.
+- Updated `docs/design/PHYSICAL_STATE_SYSTEM.md` and `docs/design/ROADMAP.md`.
+
 ## 2026-08-18 — ApplyPhysicalState → damage-scaled conversion (flame/chemical, boot-gated)
 
 - Implemented `tools/balance/convert_apply_to_scaled_v2.py` (dry-run by default,
