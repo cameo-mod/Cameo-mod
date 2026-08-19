@@ -233,6 +233,11 @@ scrin_rift_generator:
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba
+	WithIdleOverlay@ORB:
+		Image: scrin_rift_generator_orb
+		Sequence: idle
+		Palette: effect
+		RequiresCondition: !build-incomplete
 
 scrin_lightning_spike:
 	Inherits: ^Building
