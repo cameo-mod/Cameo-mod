@@ -1,5 +1,28 @@
 # Development Log
 
+## 2026-08-22 — W24 cluster 2 + weapon-family corrections (boot-gated)
+
+- Corrected `wc2cannontowerFire` to `CannonHE_Heavy` and `wc2dragonFireVisible` to
+  `Flame_Heavy` after maintainer review; preserved resolved projectile/effect behaviour.
+- Converted W24 cluster: `SporemawShoot`, `wc2demolitionsquadExplode`,
+  `wc2mageFireballVisible`/`wc2mageFireballExplosion`, and child `wc2ogremageRunes_Hit`
+  to `^Warhead_CannonAP_Light` with one warhead, one projectile, and one effect inherit.
+- Moved Protoss `Inherits@corr: ^Corrodible` into `^LargeProtoss` and removed six
+  redundant per-unit corrosion inherits (dragoon/archon now covered).
+- Lowered `BROADCAST_BASELINE` in `tools/audit/audit_warhead_split.py` from 981 to 977.
+- Regenerated balance ledgers and derived sidecars for affected factions.
+- Updated `docs/design/BALANCE_PROGRAM_PLAN.md` W24 status line.
+- Verification:
+  - `find_empty_warhead.py` = 0
+  - `find_orphan_old_keys.py` = 0 real bugs
+  - `audit_warhead_split.py` at/below baseline (977)
+  - `audit_balance_drift.py` clean
+  - `review_resolve_diff.py` OK for all cluster weapons; `wc2ogremageRunes_Hit` intentionally
+    collapsed from 10 inherited damage warheads + 1 child warhead to a single `Damage: 11250`
+    main (expected Damage multiset flag).
+  - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded` with no new
+    `exception-*.log`.
+
 ## 2026-08-21 — Cryo/Inferno promoted to blend families (package 3)
 
 - `tools/balance/gen_weapon_template.py`:

@@ -539,107 +539,75 @@ GuardianShoot:
 		ExplosionPalette: ra_temperat
 
 SporemawShoot:
-	Inherits: ^TankDestroyerCannon
-	Inherits@2: ^MediumCannon
-	Inherits@3: ^HeavyCannon
-	Inherits@4: ^Grenade
-	Inherits@5: ^ShrapnelWeapon
-	Inherits@6: ^HeavyBomb
-	Inherits@7: ^MediumMissile
-	Inherits@8: ^Chaingun
-	Inherits@9: ^FlakWeapon
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 40
 	Range: 7740
 	Report: zlufir00.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Image: scspore
+		Speed: 600
+		Inaccuracy: 125
+		InaccuracyType: PerCellIncrement
+		Shadow: true
+		Blockable: False
+		LaunchAngle: 66
+		Arm: 0
+		AllowSnapping: true
+		HorizontalRateOfTurn: 200
+		VerticalRateOfTurn: 30
+		TrailImage: sczhsplash
+		TrailInterval: 1
+		ContrailLength: 5
+		ContrailZOffset: 4000
 		ContrailStartColor: 88FF4488
 		ContrailEndColor: FFFFFF44
 		ContrailStartWidth: 25
 		ContrailEndWidth: 75
-		ContrailLength: 5
-		HorizontalRateOfTurn: 200
-		Inaccuracy: 125
-		InaccuracyType: PerCellIncrement
-		Speed: 600
-		Jammable: False
-		Blockable: False
-		AllowSnapping: true
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
 		CloseEnough: 600
-		TrailImage: sczhsplash
-	Warhead@TankDestroyerCannon: SpreadDamage
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+		Jammable: False
+	FirstBurstTargetOffset: 3072,0,0
+	Warhead@CannonAP_Light:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 18000
+	Warhead@CannonAP_Light_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@MediumCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	-Warhead@Effect1:
-	-Warhead@Effect2:
+		Damage: 9
 	Warhead@Effect: CreateEffect
 		Explosions: chemball
 		ImpactSounds: firebl3.aud
 		ValidTargets: Ground, Water, Air
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 	Warhead@EffectAir: CreateEffect
 		Explosions: d2k_med_explosion
 		ImpactSounds: zguhit00.aud
 		ExplosionPalette: ra_temperat
 		ValidTargets: Ground, Water, Air
-
+		ImpactActors: false
+	Warhead@Glow: GlowImpact
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 5
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
 HermitExplode:
 	Inherits: ReactorNuke
 	Warhead@Effect: CreateEffect
