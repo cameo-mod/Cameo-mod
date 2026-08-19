@@ -69,14 +69,41 @@ target's life still ahead of it, comfortably inside the 0.75 bar.
 
 | mechanism | bindings | reach full effect before 25% HP |
 |---|--:|--:|
-| damage-scaled (heat + corrosion) | 527 | **527 (100%)** |
+| damage-scaled (heat + corrosion) | 527 | **111** |
 | discrete apply (cryo) | 22 | 7 |
-| **total** | **549** | **534 (97.3%)** |
+| **total** | **549** | **118 (21.5%)** |
 
-⚠ **`meters_filling_before_death` = 534 of 549.** The earlier 1, 124 and 223 were measured on
-smaller populations and/or the wrong formula. `423bb5b07` converted the legacy discrete
-`ApplyPhysicalState` warheads to the damage-scaled mechanism, which is why the count jumped: the
-166-weapon gap that dominated every previous census is essentially closed.
+⛔ **`meters_filling_before_death` = 118 of 549 — NOT the 534 (97.3%) this section claimed until
+2026-08-19.** The correction is one term, and it is W24's term. Everything above assumes the
+damage that FILLS the meter is the damage that KILLS the target. It is not: a damage-scaled
+binding fills from the ONE warhead carrying `PhysicalStateName`, while the target dies to every
+main warhead the weapon fires.
+
+    ratio = 50 / Scale / fed_share            fed_share = fed damage / total main damage
+
+Only **41 of 427** damage-scaled metered weapons have `fed_share == 1`. The median is **0.398**,
+so the typical metered weapon fills ~2.5× slower than modelled and misses the 0.75 bar outright.
+The worst are 12-main EMP weapons at **4%** (`eden_EMP`, `edenTiger_EMP`, `plymouth_EMP`, …).
+
+⚠ **How this was found, and why nothing here found it.** The maintainer playtested a Chemical
+Stealth Tank against a harvester and the corrosion bar never filled. The weapon fires Shrapnel
+5500 + Missile 9000 + Chemical 9000 vs Heavy: it kills on **27175**/shot and fills on **10350**
+(38%). Every guard in this tree passed — `doc_claims` counted bindings, the unit tests pinned the
+arithmetic, the boot gate proved it loads. None of them asked whether the two damage figures were
+the same damage. That gap is structural: a census of *what exists* cannot see a defect in *how the
+parts relate*.
+
+⛔ **This is why `BALANCE_PROGRAM_PLAN` §0a puts weapon STRUCTURE before pricing** — restated by
+the maintainer 2026-08-19: *"that's exactly why I said you should finish the 3 way weapon split
+first!"* Pricing a weapon whose structure is wrong measures the wrong object. The burn-down is
+pinned as `w24_multi_main_fed` (386, ratchet-down-only).
+
+⚠ **RELAXATION is still excluded** and moves this number down further: `RelaxationDelay 25` +
+`RelaxationLinear 5` + `RelaxationScaled 50` bleeds ~642 meter/shot at `ReloadDelay 60` (23% of
+the gain in the Stealth Tank case), and it bites hardest on SLOW, LOW-damage weapons against
+ARMOURED targets — precisely where chemical weapons are supposed to work. Add it AFTER W24: it is
+a second term on the same corrected base, and stacking two corrections at once is how the first
+census ended up three times revised.
 
 ⚠⚠ **Why 300 became 100.** The 100 → 300 change (`354ed5ad3`) was calibrated against the wrong
 formula: `Scale: 100` had ratio **0.50** all along and always cleared the bar, and the Corrosion

@@ -205,5 +205,54 @@ class Scan(unittest.TestCase):
         self.assertTrue(bindings, "blend PhysicalStates dict was not picked up")
 
 
+class FedDamageShare(unittest.TestCase):
+    """W24. The term that made every earlier delivery number wrong.
+
+    The maintainer found it by PLAYTEST, not by any guard in this tree: a Chemical Stealth
+    Tank kills a harvester but never fills its corrosion bar, because the weapon fires three
+    main warheads and only one carries the meter. Nothing here checked whether the damage
+    FEEDING the meter is the damage doing the KILLING — doc_claims counts bindings, T1-T3 pin
+    arithmetic, the boot gate proves it loads. So these pin the term itself.
+    """
+
+    def test_t15_ratio_scales_inversely_with_fed_share(self):
+        geom = {"max": 20000, "min": -20000, "range": 40000}
+        full = psp.fill_ratio("scaled", 100, 9000, geom, fed_share=1.0)
+        third = psp.fill_ratio("scaled", 100, 9000, geom, fed_share=1 / 3)
+        self.assertAlmostEqual(full, 0.5, places=6)
+        self.assertAlmostEqual(third, 1.5, places=6,
+                               msg="one of three mains feeding = 3x the hits to fill")
+        self.assertAlmostEqual(third, full * 3, places=6)
+
+    def test_t15b_a_weapon_whose_meter_warhead_deals_no_damage_cannot_fill(self):
+        geom = {"max": 20000, "min": -20000, "range": 40000}
+        self.assertIsNone(psp.fill_ratio("scaled", 100, 9000, geom, fed_share=0.0))
+
+    def test_t16_apply_is_exempt_because_a_flat_Amount_lands_per_hit(self):
+        # A discrete ApplyPhysicalState warhead does not read damage at all, so splitting the
+        # damage across mains cannot dilute it. Pricing it down would be a second error.
+        geom = {"max": 20000, "min": -20000, "range": 40000}
+        a = psp.fill_ratio("apply", 4000, 9000, geom, fed_share=1.0)
+        b = psp.fill_ratio("apply", 4000, 9000, geom, fed_share=0.25)
+        self.assertEqual(a, b)
+
+    def test_t17_damage_split_matches_weapon_bindings_exclusions(self):
+        # Friendly-fire twins and Percentage warheads must be excluded on BOTH sides or the
+        # share is computed against a denominator the binding census never saw.
+        rs = model().rs
+        total, fed = psp.damage_split(rs, "ChemicalStealthTankMissiles")
+        self.assertGreater(total, 0)
+        self.assertGreater(total, fed, "this weapon is the reported multi-main case")
+        self.assertLess(fed / total, 0.75)
+
+    def test_t18_the_single_warhead_cancellation_still_holds_where_it_applies(self):
+        # T3 asserts HP and damage cancel. That is TRUE — but only at fed_share == 1.0, which
+        # is what the old signature silently assumed for every weapon.
+        geom = {"max": 20000, "min": -20000, "range": 40000}
+        for damage in (2000, 9000, 40000):
+            self.assertAlmostEqual(
+                psp.fill_ratio("scaled", 100, damage, geom, fed_share=1.0), 0.5, places=6)
+
+
 if __name__ == "__main__":
     unittest.main()
