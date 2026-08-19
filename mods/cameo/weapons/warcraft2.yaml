@@ -676,9 +676,9 @@ wc2_tower_axe:
 ####################################################################################################
 
 wc2cannontowerFire:
-	Inherits@wh: ^Warhead_Flame_Light
-	Inherits@proj: ^Projectile_Flame_Light
-	Inherits@fx: ^Effect_Flame_Light
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
 	ReloadDelay: 90
 	Range: 10500
 	MinRange: 2100
@@ -693,14 +693,10 @@ wc2cannontowerFire:
 		TrailImage: smokey
 		ContrailStartColor: FF884400
 		ContrailEndColor: 000000FF
-	Warhead@Flame_Light:
+	Warhead@CannonHE_Heavy:
 		Damage: 60000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@Flame_Light_Percentage:
+	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 30
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Image: wc2_cannon_impact
 		Explosions: idle

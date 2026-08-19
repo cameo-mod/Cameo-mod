@@ -1147,21 +1147,21 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
-        "tag": "Flame_Light",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Flame_Light_Percentage",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.25,
       "minrange": "2100",
       "pricing": true,
       "range": "10500",
@@ -1169,12 +1169,12 @@
       "requires": "cannon",
       "slot": "Armament@cannon",
       "versus_templates": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "wc2cannontowerFire",
       "weapon_class_source": "template"
@@ -1306,21 +1306,21 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
-        "tag": "Flame_Light",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Flame_Light_Percentage",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.25,
       "minrange": "2100",
       "pricing": true,
       "range": "10500",
@@ -1328,12 +1328,12 @@
       "requires": "cannon",
       "slot": "Armament@cannon",
       "versus_templates": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "wc2cannontowerFire",
       "weapon_class_source": "template"
@@ -1465,21 +1465,21 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
-        "tag": "Flame_Light",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Flame_Light_Percentage",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.25,
       "minrange": "2100",
       "pricing": true,
       "range": "10500",
@@ -1487,12 +1487,12 @@
       "requires": "cannon",
       "slot": "Armament@cannon",
       "versus_templates": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "wc2cannontowerFire",
       "weapon_class_source": "template"

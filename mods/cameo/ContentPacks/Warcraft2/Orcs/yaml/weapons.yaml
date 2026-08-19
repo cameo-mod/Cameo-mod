@@ -494,9 +494,9 @@ wc2deathanddecaySuper_Spread:
 		Footprint: x
 
 wc2dragonFireVisible:
-	Inherits@wh: ^Warhead_Flame_Light
-	Inherits@proj: ^Projectile_Flame_Light
-	Inherits@fx: ^Effect_Flame_Light
+	Inherits@wh: ^Warhead_Flame_Heavy
+	Inherits@proj: ^Projectile_Flame_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	Range: 5010
 	ReloadDelay: 120
 	Burst: 2
@@ -511,12 +511,12 @@ wc2dragonFireVisible:
 		TrailImage: smokey
 		ContrailStartColor: FF884400
 		ContrailEndColor: 000000FF
-	Warhead@Flame_Light:
+	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 30000
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@Flame_Light_Percentage:
+	Warhead@Flame_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 15
 		PhysicalStateName: Temperature
@@ -525,6 +525,16 @@ wc2dragonFireVisible:
 		Explosions: wc2_building_collapse
 		ImpactSounds: explode.aud
 		ValidTargets: Ground, Water, Air
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 wc2dragonFireExplosion:
 	Inherits: wc2dragonFireVisible
 	Projectile: Bullet

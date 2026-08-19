@@ -97,7 +97,6 @@ protoss_dragoon:
 
 protoss_manifold:
 	Inherits: ^LargeProtoss
-	Inherits@corr: ^Corrodible
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@Template: ^SupportVehicleTemplate
@@ -173,7 +172,6 @@ protoss_manifold:
 
 protoss_analogue:
 	Inherits: ^LargeProtoss
-	Inherits@corr: ^Corrodible
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@Template: ^SupportVehicleTemplate
@@ -256,7 +254,6 @@ protoss_analogue:
 
 protoss_idol:
 	Inherits: ^LargeProtoss
-	Inherits@corr: ^Corrodible
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@Template: ^EpicVehicleTemplate
@@ -353,7 +350,6 @@ protoss_idol:
 
 protoss_reaver:
 	Inherits: ^LargeProtoss
-	Inherits@corr: ^Corrodible
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@Template: ^FireSupportTemplate
@@ -538,7 +534,6 @@ protoss_mobilenexus:
 
 protoss_atreus:
 	Inherits: ^LargeProtoss
-	Inherits@corr: ^Corrodible
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@Template: ^HighTechTankTemplate
@@ -605,7 +600,6 @@ protoss_atreus:
 
 protoss_positron:
 	Inherits: ^LargeProtoss
-	Inherits@corr: ^Corrodible
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
