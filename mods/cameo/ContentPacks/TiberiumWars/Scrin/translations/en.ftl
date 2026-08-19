@@ -26,6 +26,9 @@ actor_scrin_portal =
 actor_scrin_warp_gate =
    .name = Scrin Warp Gate
 
+actor_scrin_gravity_stabilizer =
+   .name = Scrin Gravity Stabilizer
+
 actor_scrin_nerve_center =
    .name = Scrin Nerve Center
 

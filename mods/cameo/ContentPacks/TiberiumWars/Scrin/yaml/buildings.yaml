@@ -102,6 +102,23 @@ scrin_warp_gate:
 		Palette: effect
 		RequiresCondition: !build-incomplete
 
+scrin_gravity_stabilizer:
+	Inherits: ^Building
+	Inherits@shape: ^3x2Shape
+	Tooltip:
+		Name: actor_scrin_gravity_stabilizer.name
+	Building:
+		Dimensions: 3,2
+		Footprint: xxx xxx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithIdleOverlay@CORE:
+		Image: scrin_warp_gate_core
+		Sequence: idle
+		Palette: effect
+		RequiresCondition: !build-incomplete
+
 scrin_nerve_center:
 	Inherits: ^Building
 	Inherits@shape: ^2x1Shape

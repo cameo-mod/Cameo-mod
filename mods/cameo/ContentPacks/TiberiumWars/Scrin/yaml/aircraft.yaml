@@ -15,6 +15,8 @@
 		AltitudeVelocity: 100
 		CanForceLand: false
 		Repulsable: false
+	-WithShadow:
+	-Hovers@CRUISING:
 	-AttackAircraft:
 	-SpawnActorOnDeath:
 	-Voiced:
@@ -39,6 +41,7 @@ scrin_drone_ship:
 		CanForceLand: false
 		Repulsable: false
 	-WithShadow:
+	-Hovers@CRUISING:
 	Transforms:
 		IntoActor: scrin_drone_platform
 		Offset: -1,-1
@@ -54,6 +57,12 @@ scrin_stormrider:
 	Inherits: ^ScrinAircraftVisual
 	Tooltip:
 		Name: actor_scrin_stormrider.name
+	Selectable:
+		Bounds: 1024, 1024, 0, -576
+	Aircraft:
+		CanHover: false
+		CanSlide: false
+		VTOL: false
 	RenderSprites:
 		PlayerPalette: scrin_stormrider_player
 
@@ -62,7 +71,7 @@ scrin_devastator_warship:
 	Tooltip:
 		Name: actor_scrin_devastator_warship.name
 	Selectable:
-		Bounds: 2048, 2048
+		Bounds: 2048, 2048, 0, -768
 	RenderSprites:
 		PlayerPalette: scrin_devastator_warship_player
 
@@ -71,7 +80,7 @@ scrin_planetary_assault_carrier:
 	Tooltip:
 		Name: actor_scrin_planetary_assault_carrier.name
 	Selectable:
-		Bounds: 2048, 2048
+		Bounds: 2048, 2048, 0, -704
 	RenderSprites:
 		PlayerPalette: scrin_planetary_assault_carrier_player
 
@@ -79,6 +88,8 @@ scrin_invader_fighter:
 	Inherits: ^ScrinAircraftVisual
 	Tooltip:
 		Name: actor_scrin_invader_fighter.name
+	Selectable:
+		Bounds: 1024, 1024, 0, -448
 	RenderSprites:
 		PlayerPalette: scrin_invader_fighter_player
 
@@ -87,6 +98,6 @@ scrin_mothership:
 	Tooltip:
 		Name: actor_scrin_mothership.name
 	Selectable:
-		Bounds: 3072, 3072
+		Bounds: 3072, 3072, 0, -1280
 	RenderSprites:
 		PlayerPalette: scrin_mothership_player
