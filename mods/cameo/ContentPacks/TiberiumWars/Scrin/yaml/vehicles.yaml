@@ -29,8 +29,16 @@ scrin_explorer:
 
 scrin_harvester:
 	Inherits: ^ScrinHoverVisual
+	Inherits@harvester: ^Harvester
 	Tooltip:
 		Name: actor_scrin_harvester.name
+	Harvester:
+		HarvestFacings: 32
+	StoresResources:
+		Capacity: 50
+	Mobile:
+		Speed: 60
+		TurnSpeed: 12
 	RenderSprites:
 		PlayerPalette: scrin_harvester_player
 

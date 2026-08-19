@@ -188,6 +188,15 @@ scrin_growth_accelerator:
 		ShadowZOffset: -5
 		Offset: -4.000,-8.000
 
+scrin_growth_stimulator:
+	idle:
+		Filename: scrin_sprites|scrin_growth_stimulator.png
+		Start: 0
+		Length: 1
+		ShadowStart: 1
+		ShadowZOffset: -5
+		Offset: 0.000,-12.000
+
 scrin_storm_column:
 	idle:
 		Filename: scrin_sprites|scrin_storm_column.png
@@ -242,7 +251,7 @@ scrin_warp_chasm:
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,-16.000
-		Scale: 0.923077
+		Scale: 1.076923
 
 scrin_warp_chasm_core:
 	idle:
@@ -292,6 +301,24 @@ scrin_phase_generator:
 		ShadowZOffset: -5
 		Offset: 4.000,-20.000
 		Scale: 0.60
+
+scrin_lifeform_recycling_plant:
+	idle:
+		Filename: scrin_sprites|scrin_lifeform_recycling_plant.png
+		Start: 0
+		Length: 1
+		ShadowStart: 1
+		ShadowZOffset: -5
+		Offset: 0.000,-24.000
+
+scrin_terraforming_nexus:
+	idle:
+		Filename: scrin_sprites|scrin_terraforming_nexus.png
+		Start: 0
+		Length: 1
+		ShadowStart: 1
+		ShadowZOffset: -5
+		Offset: 4.000,4.000
 
 scrin_eradicator_hexapod:
 	idle:

@@ -60,9 +60,24 @@ scrin_extractor:
 	Building:
 		Dimensions: 4,3
 		Footprint: =xx= xxxx =xx=
-		LocalCenterOffset: 0,0,0
+		LocalCenterOffset: 0,-512,0
 	RenderSprites:
 		PlayerPalette: player_rgba
+	Refinery:
+		TickRate: 15
+		PlayerExperienceModifier: 20
+	StoresPlayerResources:
+		Capacity: 4000
+	DockHost:
+		Type: Unload
+		DockAngle: 896
+		# Park in the southwest passable footprint cell, then tractor-drag
+		# inward into the extraction socket.
+		DockOffset: -1c512, 1c512, 0
+		IsDragRequired: True
+		DragOffset: -879, 1118, 0
+		DragLength: 15
+		MaxQueueLength: 5
 
 scrin_portal:
 	Inherits: ^Building
@@ -227,6 +242,21 @@ scrin_growth_accelerator:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
+# Reaper-17's enhanced Growth Accelerator. This visual uses the authentic
+# additional Tiberium extraction pods, but gameplay income/regrowth behavior
+# remains deferred with the playable faction rules.
+scrin_growth_stimulator:
+	Inherits: ^Building
+	Inherits@shape: ^2x1Shape
+	Tooltip:
+		Name: actor_scrin_growth_stimulator.name
+	Building:
+		Dimensions: 2,1
+		Footprint: xx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
 scrin_storm_column:
 	Inherits: ^Building
 	Inherits@shape: ^1x1Shape
@@ -282,12 +312,12 @@ scrin_tiberium_hive:
 
 scrin_warp_chasm:
 	Inherits: ^Building
-	Inherits@shape: ^4x4Shape
+	Inherits@shape: ^4x2Shape
 	Tooltip:
 		Name: actor_scrin_warp_chasm.name
 	Building:
-		Dimensions: 4,4
-		Footprint: xxxx xxxx xxxx xxxx
+		Dimensions: 4,2
+		Footprint: xxxx xxxx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba
@@ -341,6 +371,32 @@ scrin_phase_generator:
 	Building:
 		Dimensions: 2,2
 		Footprint: xx xx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+# Kane's Wrath Global Conquest strategic structures. They remain map/editor
+# actors; their metagame operations are not part of this visual foundation.
+scrin_lifeform_recycling_plant:
+	Inherits: ^Building
+	Inherits@shape: ^2x1Shape
+	Tooltip:
+		Name: actor_scrin_lifeform_recycling_plant.name
+	Building:
+		Dimensions: 2,1
+		Footprint: xx
+		LocalCenterOffset: 0,0,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+scrin_terraforming_nexus:
+	Inherits: ^Building
+	Inherits@shape: ^3x2Shape
+	Tooltip:
+		Name: actor_scrin_terraforming_nexus.name
+	Building:
+		Dimensions: 3,2
+		Footprint: xxx xxx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
 		PlayerPalette: player_rgba

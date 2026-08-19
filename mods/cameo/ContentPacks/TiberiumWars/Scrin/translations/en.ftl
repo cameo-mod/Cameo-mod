@@ -53,6 +53,9 @@ actor_scrin_plasma_missile_battery =
 actor_scrin_growth_accelerator =
    .name = Scrin Growth Accelerator
 
+actor_scrin_growth_stimulator =
+   .name = Scrin Growth Stimulator
+
 actor_scrin_storm_column =
    .name = Scrin Storm Column
 
@@ -79,6 +82,12 @@ actor_scrin_control_node =
 
 actor_scrin_phase_generator =
    .name = Scrin Phase Generator
+
+actor_scrin_lifeform_recycling_plant =
+   .name = Scrin Lifeform Recycling Plant
+
+actor_scrin_terraforming_nexus =
+   .name = Scrin Terraforming Nexus
 
 actor_scrin_eradicator_hexapod =
    .name = Scrin Eradicator Hexapod

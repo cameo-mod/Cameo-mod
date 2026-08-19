@@ -6,7 +6,7 @@ infantry, vehicle, and aircraft rosters. It is not a playable roster yet, and th
 remains hidden from the lobby. The map/editor-ready Drone Ship now lands and
 transforms into the Drone Platform, which plays its genuine deployment cycle.
 
-The pack contains 47 approved map/editor-ready actors. All sheets pair their
+The pack contains 51 approved map/editor-ready actors. All sheets pair their
 body art with separate, model-derived ground shadows. The structures use
 Cameo's dynamic `player_rgba` palette. Reactor and Signal Transmitter remain
 static; Extractor, Growth Accelerator, and Storm Column have 16-frame idle
@@ -19,6 +19,11 @@ approximately three seconds.
 Portal, Warp Gate, and Warp Chasm cores use RGBA animation sheets so their
 authored soft transparency survives the runtime sprite loader. Alternate linked
 portal colors remain deferred until the gameplay mode is implemented.
+
+The Reaper-17 Growth Stimulator uses its distinct Growth Accelerator-derived
+body with four Tiberium extraction pods. The Global Conquest Lifeform Recycling
+Plant and Terraforming Nexus are included as map/editor actors; their strategic
+operations remain outside the current faction foundation.
 
 ## Top-priority todo
 
