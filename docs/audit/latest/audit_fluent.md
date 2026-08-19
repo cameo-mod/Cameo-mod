@@ -1,13 +1,13 @@
 # audit_fluent — localization drift (B12)
 
-Fluent messages loaded: **5213** — unresolved fluent refs in rules: **1**, orphaned actor-* messages: **526**
+Fluent messages loaded: **5230** — unresolved fluent refs in rules: **1**, orphaned actor-* messages: **526**
 
 
 ## F1 — rules reference fluent keys that don't exist (shows raw key in-game)
 
 | actor | field | missing key |
 |---|---|---|
-| forgotten_scarabapc | Tooltip.Name | actor_forgotten_scarabapc.name |
+| td_nod_upgrade_burninglasers | Buildable.Description | upgrade_burninglasers.description |
 
 
 ## F2 — fluent actor-* messages for actors that no longer exist
@@ -566,7 +566,7 @@ Fluent messages loaded: **5213** — unresolved fluent refs in rules: **1**, orp
 | schwarzermond | 0/62 | 0% |
 | steelconsortium | 0/63 | 0% |
 | td_gdi | 1/69 | 1% |
-| td_nod | 3/73 | 4% |
+| td_nod | 3/74 | 4% |
 | terran | 0/79 | 0% |
 | tkm | 1/75 | 1% |
 | ts_gdi | 0/69 | 0% |

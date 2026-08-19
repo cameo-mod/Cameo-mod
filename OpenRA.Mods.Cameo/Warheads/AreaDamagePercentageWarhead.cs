@@ -28,10 +28,12 @@ namespace OpenRA.Mods.Cameo.Warheads
 			"IntegrityScale / PhysicalStateScale fields it sits next to, which scale UP).",
 			"100 = Damage is a whole percent of max health, the engine convention and the",
 			"default, so existing weapons are unaffected.",
-			"1000 = Damage is per-mille, i.e. 0.1% steps: Damage 80 removes 8.0% of max health.",
+			"10000 = Damage is in BASIS POINTS, i.e. 0.01% steps: Damage 160 removes 1.60%",
+			"of max health.",
 			"The finer unit exists so a percentage twin can track its weapon's flat Damage",
-			"exactly instead of rounding to the nearest whole percent — on the 200-damage grid",
-			"one flat step is worth exactly one per-mille step (200 damage = 0.1%).")]
+			"exactly instead of rounding: on the 100-damage grid one flat step is worth",
+			"exactly one basis point (100 flat damage = 0.01% of max health), and the",
+			"percentage warhead's Versus values move in clean steps of 5.")]
 		public readonly int PercentageDenominator = 100;
 
 		// Extends the BASE class's validation through its hook. Implementing
@@ -42,7 +44,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 		{
 			if (PercentageDenominator <= 0)
 				throw new YamlException("PercentageDenominator must be positive: 100 = Damage is "
-					+ "a whole percent of max health, 1000 = per-mille (0.1% steps).");
+					+ "a whole percent of max health, 10000 = basis points (0.01% steps).");
 		}
 
 		protected override void InflictDamage(Actor victim, Actor firedBy, HitShape shape, WarheadArgs args)

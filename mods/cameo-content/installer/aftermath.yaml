@@ -1,0 +1,230 @@
+aftermath: Aftermath Expansion Disc (English)
+	IDFiles:
+		README.TXT: 9902fb74c019df1b76ff5634e68f0371d790b5e0
+		SETUP/INSTALL/PATCH.RTP: 5bce93f834f9322ddaa7233242e5b6c7fea0bf17
+	Install:
+		extract-raw: SETUP/INSTALL/PATCH.RTP
+			^SupportDir|Content/cameo/expand/expand2.mix:
+				Offset: 4712984
+				Length: 469922
+			^SupportDir|Content/cameo/expand/hires1.mix:
+				Offset: 5182981
+				Length: 90264
+			^SupportDir|Content/cameo/expand/lores1.mix:
+				Offset: 5273320
+				Length: 57076
+		extract-raw@2: MAIN.MIX
+			^SupportDir|Content/cameo/expand/await.aud:
+				Offset: 158698809
+				Length: 2972788
+			^SupportDir|Content/cameo/expand/bog.aud:
+				Offset: 244351833
+				Length: 2386955
+			^SupportDir|Content/cameo/expand/float_v2.aud:
+				Offset: 246738788
+				Length: 3090115
+			^SupportDir|Content/cameo/expand/gloom_ra.aud: gloom.aud
+				Offset: 249828903
+				Length: 2662851
+			^SupportDir|Content/cameo/expand/grndwire.aud:
+				Offset: 252491754
+				Length: 2573611
+			^SupportDir|Content/cameo/expand/rpt.aud:
+				Offset: 255065365
+				Length: 3092259
+			^SupportDir|Content/cameo/expand/search.aud:
+				Offset: 258157624
+				Length: 3104091
+			^SupportDir|Content/cameo/expand/traction.aud:
+				Offset: 261261715
+				Length: 2668003
+			^SupportDir|Content/cameo/expand/wastelnd.aud:
+				Offset: 263929718
+				Length: 2721563
+			^SupportDir|Content/cameo/expand/chrotnk1.aud:
+				Offset: 267714446
+				Length: 22900
+			^SupportDir|Content/cameo/expand/fixit1.aud:
+				Offset: 267959424
+				Length: 10707
+			^SupportDir|Content/cameo/expand/jburn1.aud:
+				Offset: 268105462
+				Length: 23091
+			^SupportDir|Content/cameo/expand/jchrge1.aud:
+				Offset: 268128553
+				Length: 14219
+			^SupportDir|Content/cameo/expand/jcrisp1.aud:
+				Offset: 268142772
+				Length: 18211
+			^SupportDir|Content/cameo/expand/jdance1.aud:
+				Offset: 268160983
+				Length: 14315
+			^SupportDir|Content/cameo/expand/jjuice1.aud:
+				Offset: 268175298
+				Length: 9699
+			^SupportDir|Content/cameo/expand/jjump1.aud:
+				Offset: 268184997
+				Length: 8219
+			^SupportDir|Content/cameo/expand/jlight1.aud:
+				Offset: 268193216
+				Length: 9875
+			^SupportDir|Content/cameo/expand/jpower1.aud:
+				Offset: 268203091
+				Length: 13571
+			^SupportDir|Content/cameo/expand/jshock1.aud:
+				Offset: 268216662
+				Length: 14771
+			^SupportDir|Content/cameo/expand/jyes1.aud:
+				Offset: 268231433
+				Length: 13795
+			^SupportDir|Content/cameo/expand/madchrg2.aud:
+				Offset: 268361344
+				Length: 19782
+			^SupportDir|Content/cameo/expand/madexplo.aud:
+				Offset: 268381126
+				Length: 26572
+			^SupportDir|Content/cameo/expand/mboss1.aud:
+				Offset: 268413174
+				Length: 20147
+			^SupportDir|Content/cameo/expand/mhear1.aud:
+				Offset: 268438509
+				Length: 6714
+			^SupportDir|Content/cameo/expand/mhotdig1.aud:
+				Offset: 268445223
+				Length: 10674
+			^SupportDir|Content/cameo/expand/mhowdy1.aud:
+				Offset: 268455897
+				Length: 6714
+			^SupportDir|Content/cameo/expand/mhuh1.aud:
+				Offset: 268462611
+				Length: 4117
+			^SupportDir|Content/cameo/expand/mlaff1.aud:
+				Offset: 268527415
+				Length: 24133
+			^SupportDir|Content/cameo/expand/mrise1.aud:
+				Offset: 268564948
+				Length: 13523
+			^SupportDir|Content/cameo/expand/mwrench1.aud:
+				Offset: 268578471
+				Length: 10780
+			^SupportDir|Content/cameo/expand/myeehaw1.aud:
+				Offset: 268589251
+				Length: 18912
+			^SupportDir|Content/cameo/expand/myes1.aud:
+				Offset: 268608163
+				Length: 9073
+aftermath-linux: Aftermath Expansion Disc (English)
+	IDFiles:
+		readme.txt: 9902fb74c019df1b76ff5634e68f0371d790b5e0
+		setup/install/patch.rtp: 5bce93f834f9322ddaa7233242e5b6c7fea0bf17
+	Install:
+		extract-raw: setup/install/patch.rtp
+			^SupportDir|Content/cameo/expand/expand2.mix:
+				Offset: 4712984
+				Length: 469922
+			^SupportDir|Content/cameo/expand/hires1.mix:
+				Offset: 5182981
+				Length: 90264
+			^SupportDir|Content/cameo/expand/lores1.mix:
+				Offset: 5273320
+				Length: 57076
+		extract-raw@2: main.mix
+			^SupportDir|Content/cameo/expand/await.aud:
+				Offset: 158698809
+				Length: 2972788
+			^SupportDir|Content/cameo/expand/bog.aud:
+				Offset: 244351833
+				Length: 2386955
+			^SupportDir|Content/cameo/expand/float_v2.aud:
+				Offset: 246738788
+				Length: 3090115
+			^SupportDir|Content/cameo/expand/gloom_ra.aud: gloom.aud
+				Offset: 249828903
+				Length: 2662851
+			^SupportDir|Content/cameo/expand/grndwire.aud:
+				Offset: 252491754
+				Length: 2573611
+			^SupportDir|Content/cameo/expand/rpt.aud:
+				Offset: 255065365
+				Length: 3092259
+			^SupportDir|Content/cameo/expand/search.aud:
+				Offset: 258157624
+				Length: 3104091
+			^SupportDir|Content/cameo/expand/traction.aud:
+				Offset: 261261715
+				Length: 2668003
+			^SupportDir|Content/cameo/expand/wastelnd.aud:
+				Offset: 263929718
+				Length: 2721563
+			^SupportDir|Content/cameo/expand/chrotnk1.aud:
+				Offset: 267714446
+				Length: 22900
+			^SupportDir|Content/cameo/expand/fixit1.aud:
+				Offset: 267959424
+				Length: 10707
+			^SupportDir|Content/cameo/expand/jburn1.aud:
+				Offset: 268105462
+				Length: 23091
+			^SupportDir|Content/cameo/expand/jchrge1.aud:
+				Offset: 268128553
+				Length: 14219
+			^SupportDir|Content/cameo/expand/jcrisp1.aud:
+				Offset: 268142772
+				Length: 18211
+			^SupportDir|Content/cameo/expand/jdance1.aud:
+				Offset: 268160983
+				Length: 14315
+			^SupportDir|Content/cameo/expand/jjuice1.aud:
+				Offset: 268175298
+				Length: 9699
+			^SupportDir|Content/cameo/expand/jjump1.aud:
+				Offset: 268184997
+				Length: 8219
+			^SupportDir|Content/cameo/expand/jlight1.aud:
+				Offset: 268193216
+				Length: 9875
+			^SupportDir|Content/cameo/expand/jpower1.aud:
+				Offset: 268203091
+				Length: 13571
+			^SupportDir|Content/cameo/expand/jshock1.aud:
+				Offset: 268216662
+				Length: 14771
+			^SupportDir|Content/cameo/expand/jyes1.aud:
+				Offset: 268231433
+				Length: 13795
+			^SupportDir|Content/cameo/expand/madchrg2.aud:
+				Offset: 268361344
+				Length: 19782
+			^SupportDir|Content/cameo/expand/madexplo.aud:
+				Offset: 268381126
+				Length: 26572
+			^SupportDir|Content/cameo/expand/mboss1.aud:
+				Offset: 268413174
+				Length: 20147
+			^SupportDir|Content/cameo/expand/mhear1.aud:
+				Offset: 268438509
+				Length: 6714
+			^SupportDir|Content/cameo/expand/mhotdig1.aud:
+				Offset: 268445223
+				Length: 10674
+			^SupportDir|Content/cameo/expand/mhowdy1.aud:
+				Offset: 268455897
+				Length: 6714
+			^SupportDir|Content/cameo/expand/mhuh1.aud:
+				Offset: 268462611
+				Length: 4117
+			^SupportDir|Content/cameo/expand/mlaff1.aud:
+				Offset: 268527415
+				Length: 24133
+			^SupportDir|Content/cameo/expand/mrise1.aud:
+				Offset: 268564948
+				Length: 13523
+			^SupportDir|Content/cameo/expand/mwrench1.aud:
+				Offset: 268578471
+				Length: 10780
+			^SupportDir|Content/cameo/expand/myeehaw1.aud:
+				Offset: 268589251
+				Length: 18912
+			^SupportDir|Content/cameo/expand/myes1.aud:
+				Offset: 268608163
+				Length: 9073

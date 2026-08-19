@@ -1,0 +1,792 @@
+{
+  "_generated_by": "tools/reference/propose_family_profiles.py --json",
+  "_aggregation": "blend",
+  "_normalisation": "each source profile normalised so its MEDIAN is 100; values above 100 are legal up to 200 (K prices the profile, so a 200 is paid for rather than free)",
+  "_pipeline": "reference rows at the family's PLATFORM tier -> aggregate -> ordering law (gen_weapon_template.build_order) -> shape law (LEVEL_FLOOR, min gap 2) -> derived armors -> no-ties",
+  "_level_floor": {
+    "Light": 25,
+    "Medium": 20,
+    "Heavy": 15,
+    "Super": 10
+  },
+  "_ship_thresholds": {
+    "min_rows": 8,
+    "min_mods": 3
+  },
+  "_derived_armors": {
+    "Heroic": [
+      "Plate",
+      "Scout"
+    ],
+    "Airborne": [
+      "Helicopter",
+      "Scout"
+    ]
+  },
+  "families": {
+    "Bullet": {
+      "Light": {
+        "origin": "measured",
+        "n": 89,
+        "mods": 7,
+        "profile": {
+          "Airborne": 33.9,
+          "Bomber": 55.5,
+          "Concrete": 47.2,
+          "Fighter": 89.2,
+          "Flak": 146.9,
+          "Heavy": 43.8,
+          "Helicopter": 49.2,
+          "Heroic": 92.3,
+          "Light": 81.5,
+          "Medium": 50.4,
+          "None": 161.9,
+          "Plate": 134.0,
+          "Scout": 111.5,
+          "Spaceship": 41.8,
+          "Steel": 52.4,
+          "Superheavy": 37.4,
+          "Wood": 87.2
+        }
+      },
+      "Medium": {
+        "origin": "measured",
+        "n": 28,
+        "mods": 6,
+        "profile": {
+          "Airborne": 22.2,
+          "Bomber": 54.6,
+          "Concrete": 36.0,
+          "Fighter": 81.4,
+          "Flak": 177.7,
+          "Heavy": 34.0,
+          "Helicopter": 38.0,
+          "Heroic": 97.4,
+          "Light": 77.1,
+          "Medium": 40.0,
+          "None": 183.2,
+          "Plate": 166.5,
+          "Scout": 107.2,
+          "Spaceship": 32.0,
+          "Steel": 42.0,
+          "Superheavy": 30.0,
+          "Wood": 79.1
+        }
+      },
+      "Heavy": {
+        "origin": "inherited:Medium",
+        "n": 1,
+        "mods": 1,
+        "profile": {
+          "Airborne": 22.6,
+          "Bomber": 54.7,
+          "Concrete": 36.3,
+          "Fighter": 81.1,
+          "Flak": 174.9,
+          "Heavy": 34.3,
+          "Helicopter": 38.3,
+          "Heroic": 96.7,
+          "Light": 76.8,
+          "Medium": 40.3,
+          "None": 180.3,
+          "Plate": 164.1,
+          "Scout": 106.3,
+          "Spaceship": 32.3,
+          "Steel": 42.2,
+          "Superheavy": 30.3,
+          "Wood": 78.8
+        }
+      }
+    },
+    "CannonHE": {
+      "Light": {
+        "origin": "measured",
+        "n": 151,
+        "mods": 8,
+        "profile": {
+          "Airborne": 43.2,
+          "Bomber": 47.8,
+          "Concrete": 89.6,
+          "Fighter": 49.8,
+          "Flak": 62.6,
+          "Heavy": 89.4,
+          "Helicopter": 45.2,
+          "Heroic": 60.3,
+          "Light": 114.9,
+          "Medium": 91.6,
+          "None": 67.7,
+          "Plate": 62.3,
+          "Scout": 144.0,
+          "Spaceship": 33.9,
+          "Steel": 105.8,
+          "Superheavy": 69.7,
+          "Wood": 119.0
+        }
+      },
+      "Medium": {
+        "origin": "measured",
+        "n": 118,
+        "mods": 6,
+        "profile": {
+          "Airborne": 49.3,
+          "Bomber": 78.4,
+          "Concrete": 96.0,
+          "Fighter": 80.4,
+          "Flak": 87.7,
+          "Heavy": 94.0,
+          "Helicopter": 51.3,
+          "Heroic": 80.5,
+          "Light": 109.3,
+          "Medium": 99.5,
+          "None": 89.7,
+          "Plate": 82.5,
+          "Scout": 133.2,
+          "Spaceship": 43.3,
+          "Steel": 103.9,
+          "Superheavy": 93.8,
+          "Wood": 111.3
+        }
+      },
+      "Heavy": {
+        "origin": "measured",
+        "n": 87,
+        "mods": 7,
+        "profile": {
+          "Airborne": 51.1,
+          "Bomber": 59.2,
+          "Concrete": 92.2,
+          "Fighter": 77.1,
+          "Flak": 84.4,
+          "Heavy": 90.2,
+          "Helicopter": 53.1,
+          "Heroic": 80.3,
+          "Light": 98.0,
+          "Medium": 94.2,
+          "None": 86.4,
+          "Plate": 82.3,
+          "Scout": 106.9,
+          "Spaceship": 44.2,
+          "Steel": 96.0,
+          "Superheavy": 88.4,
+          "Wood": 106.7
+        }
+      }
+    },
+    "CannonAP": {
+      "Light": {
+        "origin": "measured",
+        "n": 71,
+        "mods": 8,
+        "profile": {
+          "Airborne": 53.8,
+          "Bomber": 59.8,
+          "Concrete": 83.2,
+          "Fighter": 52.8,
+          "Flak": 73.2,
+          "Heavy": 101.4,
+          "Helicopter": 66.7,
+          "Heroic": 60.7,
+          "Light": 87.2,
+          "Medium": 94.1,
+          "None": 71.2,
+          "Plate": 75.2,
+          "Scout": 85.2,
+          "Spaceship": 70.2,
+          "Steel": 81.2,
+          "Superheavy": 105.6,
+          "Wood": 79.2
+        }
+      },
+      "Medium": {
+        "origin": "measured",
+        "n": 42,
+        "mods": 6,
+        "profile": {
+          "Airborne": 59.0,
+          "Bomber": 51.7,
+          "Concrete": 118.1,
+          "Fighter": 47.3,
+          "Flak": 74.4,
+          "Heavy": 122.8,
+          "Helicopter": 61.3,
+          "Heroic": 74.0,
+          "Light": 120.5,
+          "Medium": 122.5,
+          "None": 69.4,
+          "Plate": 76.9,
+          "Scout": 120.1,
+          "Spaceship": 61.5,
+          "Steel": 112.1,
+          "Superheavy": 124.8,
+          "Wood": 110.1
+        }
+      },
+      "Heavy": {
+        "origin": "measured",
+        "n": 70,
+        "mods": 7,
+        "profile": {
+          "Airborne": 55.6,
+          "Bomber": 55.9,
+          "Concrete": 89.9,
+          "Fighter": 49.3,
+          "Flak": 74.1,
+          "Heavy": 97.9,
+          "Helicopter": 60.4,
+          "Heroic": 76.4,
+          "Light": 93.9,
+          "Medium": 95.9,
+          "None": 73.9,
+          "Plate": 83.1,
+          "Scout": 91.9,
+          "Spaceship": 73.8,
+          "Steel": 87.9,
+          "Superheavy": 99.9,
+          "Wood": 85.9
+        }
+      }
+    },
+    "MissileHE": {
+      "Light": {
+        "origin": "measured",
+        "n": 65,
+        "mods": 7,
+        "profile": {
+          "Airborne": 74.6,
+          "Bomber": 78.6,
+          "Concrete": 101.1,
+          "Fighter": 88.2,
+          "Flak": 64.3,
+          "Heavy": 99.1,
+          "Helicopter": 76.6,
+          "Heroic": 43.4,
+          "Light": 131.9,
+          "Medium": 103.3,
+          "None": 71.2,
+          "Plate": 45.4,
+          "Scout": 152.5,
+          "Spaceship": 72.6,
+          "Steel": 105.3,
+          "Superheavy": 88.6,
+          "Wood": 133.9
+        }
+      },
+      "Medium": {
+        "origin": "measured",
+        "n": 43,
+        "mods": 6,
+        "profile": {
+          "Airborne": 76.0,
+          "Bomber": 87.6,
+          "Concrete": 98.1,
+          "Fighter": 89.6,
+          "Flak": 69.4,
+          "Heavy": 96.1,
+          "Helicopter": 78.0,
+          "Heroic": 47.5,
+          "Light": 116.6,
+          "Medium": 99.9,
+          "None": 72.0,
+          "Plate": 49.5,
+          "Scout": 143.2,
+          "Spaceship": 74.0,
+          "Steel": 109.9,
+          "Superheavy": 91.6,
+          "Wood": 118.6
+        }
+      },
+      "Heavy": {
+        "origin": "measured",
+        "n": 28,
+        "mods": 4,
+        "profile": {
+          "Airborne": 71.9,
+          "Bomber": 75.9,
+          "Concrete": 87.3,
+          "Fighter": 77.9,
+          "Flak": 63.1,
+          "Heavy": 85.3,
+          "Helicopter": 73.9,
+          "Heroic": 51.6,
+          "Light": 115.8,
+          "Medium": 95.2,
+          "None": 64.4,
+          "Plate": 53.6,
+          "Scout": 131.5,
+          "Spaceship": 69.9,
+          "Steel": 97.2,
+          "Superheavy": 79.9,
+          "Wood": 117.8
+        }
+      }
+    },
+    "MissileAP": {
+      "Light": {
+        "origin": "measured",
+        "n": 36,
+        "mods": 6,
+        "profile": {
+          "Airborne": 115.4,
+          "Bomber": 129.4,
+          "Concrete": 80.3,
+          "Fighter": 112.1,
+          "Flak": 47.3,
+          "Heavy": 170.1,
+          "Helicopter": 131.4,
+          "Heroic": 41.8,
+          "Light": 165.5,
+          "Medium": 167.5,
+          "None": 41.6,
+          "Plate": 47.6,
+          "Scout": 151.2,
+          "Spaceship": 149.2,
+          "Steel": 65.1,
+          "Superheavy": 172.1,
+          "Wood": 62.5
+        }
+      },
+      "Medium": {
+        "origin": "measured",
+        "n": 38,
+        "mods": 6,
+        "profile": {
+          "Airborne": 95.1,
+          "Bomber": 120.1,
+          "Concrete": 71.3,
+          "Fighter": 96.6,
+          "Flak": 55.6,
+          "Heavy": 185.2,
+          "Helicopter": 122.1,
+          "Heroic": 43.7,
+          "Light": 168.8,
+          "Medium": 170.8,
+          "None": 42.1,
+          "Plate": 56.1,
+          "Scout": 145.8,
+          "Spaceship": 143.8,
+          "Steel": 70.2,
+          "Superheavy": 187.2,
+          "Wood": 67.8
+        }
+      },
+      "Heavy": {
+        "origin": "measured",
+        "n": 15,
+        "mods": 3,
+        "profile": {
+          "Airborne": 91.9,
+          "Bomber": 96.5,
+          "Concrete": 77.5,
+          "Fighter": 83.6,
+          "Flak": 67.5,
+          "Heavy": 117.0,
+          "Helicopter": 98.5,
+          "Heroic": 63.5,
+          "Light": 113.0,
+          "Medium": 115.0,
+          "None": 59.5,
+          "Plate": 68.1,
+          "Scout": 111.0,
+          "Spaceship": 109.0,
+          "Steel": 74.7,
+          "Superheavy": 119.0,
+          "Wood": 73.9
+        }
+      }
+    },
+    "MissileAA": {
+      "Light": {
+        "origin": "measured",
+        "n": 36,
+        "mods": 6,
+        "profile": {
+          "Airborne": 110.8,
+          "Bomber": 167.5,
+          "Concrete": 80.3,
+          "Fighter": 165.5,
+          "Flak": 47.3,
+          "Heavy": 149.2,
+          "Helicopter": 170.1,
+          "Heroic": 31.0,
+          "Light": 129.4,
+          "Medium": 131.4,
+          "None": 41.6,
+          "Plate": 47.6,
+          "Scout": 112.1,
+          "Spaceship": 172.1,
+          "Steel": 65.1,
+          "Superheavy": 151.2,
+          "Wood": 62.5
+        }
+      },
+      "Medium": {
+        "origin": "measured",
+        "n": 38,
+        "mods": 6,
+        "profile": {
+          "Airborne": 95.6,
+          "Bomber": 170.8,
+          "Concrete": 71.3,
+          "Fighter": 168.8,
+          "Flak": 55.6,
+          "Heavy": 143.8,
+          "Helicopter": 185.2,
+          "Heroic": 28.9,
+          "Light": 120.1,
+          "Medium": 122.1,
+          "None": 42.1,
+          "Plate": 56.1,
+          "Scout": 96.6,
+          "Spaceship": 187.2,
+          "Steel": 70.2,
+          "Superheavy": 145.8,
+          "Wood": 67.8
+        }
+      },
+      "Heavy": {
+        "origin": "measured",
+        "n": 15,
+        "mods": 3,
+        "profile": {
+          "Airborne": 82.2,
+          "Bomber": 115.0,
+          "Concrete": 77.5,
+          "Fighter": 113.0,
+          "Flak": 67.5,
+          "Heavy": 109.0,
+          "Helicopter": 117.0,
+          "Heroic": 47.8,
+          "Light": 96.5,
+          "Medium": 98.5,
+          "None": 59.5,
+          "Plate": 68.1,
+          "Scout": 83.6,
+          "Spaceship": 119.0,
+          "Steel": 74.7,
+          "Superheavy": 111.0,
+          "Wood": 73.9
+        }
+      }
+    },
+    "Laser": {
+      "Light": {
+        "origin": "measured",
+        "n": 72,
+        "mods": 7,
+        "profile": {
+          "Airborne": 27.1,
+          "Bomber": 62.4,
+          "Concrete": 80.3,
+          "Fighter": 41.8,
+          "Flak": 64.4,
+          "Heavy": 74.4,
+          "Helicopter": 70.4,
+          "Heroic": 27.9,
+          "Light": 58.4,
+          "Medium": 66.4,
+          "None": 41.9,
+          "Plate": 72.4,
+          "Scout": 41.3,
+          "Spaceship": 81.2,
+          "Steel": 68.4,
+          "Superheavy": 107.2,
+          "Wood": 60.4
+        }
+      },
+      "Medium": {
+        "origin": "measured",
+        "n": 36,
+        "mods": 6,
+        "profile": {
+          "Airborne": 23.5,
+          "Bomber": 62.2,
+          "Concrete": 89.5,
+          "Fighter": 28.9,
+          "Flak": 77.5,
+          "Heavy": 87.5,
+          "Helicopter": 83.5,
+          "Heroic": 24.1,
+          "Light": 61.8,
+          "Medium": 79.5,
+          "None": 30.9,
+          "Plate": 85.5,
+          "Scout": 26.9,
+          "Spaceship": 91.5,
+          "Steel": 81.5,
+          "Superheavy": 95.5,
+          "Wood": 62.0
+        }
+      },
+      "Heavy": {
+        "origin": "measured",
+        "n": 55,
+        "mods": 6,
+        "profile": {
+          "Airborne": 36.7,
+          "Bomber": 65.4,
+          "Concrete": 79.4,
+          "Fighter": 57.2,
+          "Flak": 67.4,
+          "Heavy": 77.4,
+          "Helicopter": 73.4,
+          "Heroic": 37.7,
+          "Light": 61.4,
+          "Medium": 69.4,
+          "None": 59.4,
+          "Plate": 75.4,
+          "Scout": 45.5,
+          "Spaceship": 81.4,
+          "Steel": 71.4,
+          "Superheavy": 91.0,
+          "Wood": 63.4
+        }
+      }
+    },
+    "Prism": {
+      "Light": {
+        "origin": "measured",
+        "n": 137,
+        "mods": 6,
+        "profile": {
+          "Airborne": 36.1,
+          "Bomber": 38.5,
+          "Concrete": 62.9,
+          "Fighter": 57.1,
+          "Flak": 83.4,
+          "Heavy": 60.9,
+          "Helicopter": 38.1,
+          "Heroic": 64.9,
+          "Light": 90.9,
+          "Medium": 75.5,
+          "None": 95.4,
+          "Plate": 66.9,
+          "Scout": 114.8,
+          "Spaceship": 34.1,
+          "Steel": 77.5,
+          "Superheavy": 59.1,
+          "Wood": 93.2
+        }
+      },
+      "Medium": {
+        "origin": "measured",
+        "n": 66,
+        "mods": 6,
+        "profile": {
+          "Airborne": 39.7,
+          "Bomber": 43.5,
+          "Concrete": 86.3,
+          "Fighter": 76.9,
+          "Flak": 94.5,
+          "Heavy": 84.3,
+          "Helicopter": 41.7,
+          "Heroic": 88.3,
+          "Light": 98.3,
+          "Medium": 92.3,
+          "None": 105.5,
+          "Plate": 90.3,
+          "Scout": 114.7,
+          "Spaceship": 37.7,
+          "Steel": 92.5,
+          "Superheavy": 80.4,
+          "Wood": 100.3
+        }
+      },
+      "Heavy": {
+        "origin": "measured",
+        "n": 110,
+        "mods": 6,
+        "profile": {
+          "Airborne": 65.3,
+          "Bomber": 67.9,
+          "Concrete": 78.2,
+          "Fighter": 69.9,
+          "Flak": 92.7,
+          "Heavy": 76.2,
+          "Helicopter": 67.3,
+          "Heroic": 80.2,
+          "Light": 94.7,
+          "Medium": 84.2,
+          "None": 107.0,
+          "Plate": 82.2,
+          "Scout": 124.0,
+          "Spaceship": 62.0,
+          "Steel": 86.2,
+          "Superheavy": 74.2,
+          "Wood": 95.4
+        }
+      }
+    },
+    "Flame": {
+      "Light": {
+        "origin": "measured",
+        "n": 41,
+        "mods": 7,
+        "profile": {
+          "Airborne": 17.1,
+          "Bomber": 34.8,
+          "Concrete": 83.0,
+          "Fighter": 39.5,
+          "Flak": 145.6,
+          "Heavy": 44.0,
+          "Helicopter": 34.6,
+          "Heroic": 49.9,
+          "Light": 54.2,
+          "Medium": 46.0,
+          "None": 153.3,
+          "Plate": 101.0,
+          "Scout": 75.7,
+          "Spaceship": 32.6,
+          "Steel": 143.6,
+          "Superheavy": 41.5,
+          "Wood": 147.3
+        }
+      },
+      "Medium": {
+        "origin": "measured",
+        "n": 27,
+        "mods": 4,
+        "profile": {
+          "Airborne": 18.8,
+          "Bomber": 43.9,
+          "Concrete": 91.7,
+          "Fighter": 45.9,
+          "Flak": 190.9,
+          "Heavy": 48.6,
+          "Helicopter": 41.6,
+          "Heroic": 57.4,
+          "Light": 74.2,
+          "Medium": 58.1,
+          "None": 196.9,
+          "Plate": 127.0,
+          "Scout": 89.0,
+          "Spaceship": 39.6,
+          "Steel": 187.5,
+          "Superheavy": 46.6,
+          "Wood": 193.9
+        }
+      },
+      "Heavy": {
+        "origin": "inherited:Medium",
+        "n": 15,
+        "mods": 2,
+        "profile": {
+          "Airborne": 22.0,
+          "Bomber": 46.6,
+          "Concrete": 89.4,
+          "Fighter": 48.4,
+          "Flak": 171.0,
+          "Heavy": 50.9,
+          "Helicopter": 44.4,
+          "Heroic": 59.0,
+          "Light": 74.1,
+          "Medium": 59.7,
+          "None": 175.8,
+          "Plate": 119.2,
+          "Scout": 87.0,
+          "Spaceship": 42.5,
+          "Steel": 168.3,
+          "Superheavy": 49.1,
+          "Wood": 173.4
+        }
+      }
+    },
+    "Tesla": {
+      "Light": {
+        "origin": "measured",
+        "n": 46,
+        "mods": 9,
+        "profile": {
+          "Airborne": 34.5,
+          "Bomber": 41.4,
+          "Concrete": 65.4,
+          "Fighter": 39.4,
+          "Flak": 72.7,
+          "Heavy": 78.7,
+          "Helicopter": 42.8,
+          "Heroic": 61.9,
+          "Light": 70.7,
+          "Medium": 74.7,
+          "None": 68.7,
+          "Plate": 76.7,
+          "Scout": 66.7,
+          "Spaceship": 52.3,
+          "Steel": 63.4,
+          "Superheavy": 82.7,
+          "Wood": 61.4
+        }
+      },
+      "Medium": {
+        "origin": "measured",
+        "n": 23,
+        "mods": 5,
+        "profile": {
+          "Airborne": 41.1,
+          "Bomber": 44.9,
+          "Concrete": 91.0,
+          "Fighter": 44.4,
+          "Flak": 99.0,
+          "Heavy": 103.1,
+          "Helicopter": 46.8,
+          "Heroic": 89.1,
+          "Light": 97.0,
+          "Medium": 101.0,
+          "None": 95.0,
+          "Plate": 101.6,
+          "Scout": 93.0,
+          "Spaceship": 77.5,
+          "Steel": 88.4,
+          "Superheavy": 106.0,
+          "Wood": 86.4
+        }
+      },
+      "Heavy": {
+        "origin": "measured",
+        "n": 41,
+        "mods": 7,
+        "profile": {
+          "Airborne": 40.7,
+          "Bomber": 45.8,
+          "Concrete": 88.0,
+          "Fighter": 45.2,
+          "Flak": 96.0,
+          "Heavy": 102.0,
+          "Helicopter": 47.9,
+          "Heroic": 84.9,
+          "Light": 94.0,
+          "Medium": 98.0,
+          "None": 92.0,
+          "Plate": 100.0,
+          "Scout": 90.0,
+          "Spaceship": 68.0,
+          "Steel": 86.0,
+          "Superheavy": 106.0,
+          "Wood": 84.0
+        }
+      },
+      "Super": {
+        "origin": "measured",
+        "n": 29,
+        "mods": 7,
+        "profile": {
+          "Airborne": 44.2,
+          "Bomber": 47.6,
+          "Concrete": 94.8,
+          "Fighter": 46.9,
+          "Flak": 103.0,
+          "Heavy": 107.6,
+          "Helicopter": 51.9,
+          "Heroic": 89.8,
+          "Light": 100.8,
+          "Medium": 103.4,
+          "None": 98.8,
+          "Plate": 105.4,
+          "Scout": 96.8,
+          "Spaceship": 68.0,
+          "Steel": 87.2,
+          "Superheavy": 113.6,
+          "Wood": 85.2
+        }
+      }
+    }
+  }
+}

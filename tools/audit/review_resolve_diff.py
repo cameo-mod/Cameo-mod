@@ -7,6 +7,7 @@ compares the behavioural invariants a 3-way-split retrofit must NOT change:
   - the multiset of offensive-warhead Damage values (the "Damage verbatim" law)
   - projectile behavioural fields (Speed, TrailImage, Inaccuracy, Contrail*)
   - whether a Report survives
+  - resolved CreateEffect behaviour, including impact audio and target filters
 
 Intended changes (warhead type SpreadDamage->AreaDamage, warhead-key renames,
 inherit repoints, new-template Versus tables) are NOT flagged. Anything else is.
@@ -40,7 +41,8 @@ def summarize(node):
          "Reload": cval(node, "ReloadDelay"), "Burst": cval(node, "Burst"),
          "Inherits": sorted(c.value for c in node.children
                             if c.key == "Inherits" or c.key.startswith("Inherits@")),
-         "warheads": [], "dmgs": [], "Report": cval(node, "Report")}
+         "warheads": [], "dmgs": [], "effects": [],
+         "Report": cval(node, "Report")}
     p = cnode(node, "Projectile")
     d["Proj"] = None if p is None else {
         "type": p.value, "Speed": cval(p, "Speed"), "Trail": cval(p, "TrailImage"),
@@ -57,7 +59,23 @@ def summarize(node):
                     d["dmgs"].append(int(dmg))
                 except ValueError:
                     pass
+            if c.value == "CreateEffect":
+                # Compare the resolved behaviour rather than the keyed-warhead
+                # name: retrofits routinely rename keys without intending to
+                # alter what players see or hear.
+                d["effects"].append(tuple(
+                    (k, cval(c, k)) for k in (
+                        "Explosions", "Image", "ExplosionPalette",
+                        "UsePlayerPalette", "ForceDisplayAtGroundLevel",
+                        "ImpactSounds", "ImpactSoundChance", "ImpactActors",
+                        "Inaccuracy", "AudibleThroughFog", "Volume",
+                        "GlowColor", "GlowScale", "GlowFadeFrames",
+                        "GlowFadeInFrames", "ValidTargets", "InvalidTargets",
+                        "ValidRelationships", "InvalidRelationships", "Delay",
+                        "AirThreshold", "AffectsParent")
+                    if cval(c, k) is not None))
     d["dmgs"].sort()
+    d["effects"].sort(key=repr)
     return d
 
 
@@ -86,18 +104,26 @@ def show(w, b, h):
                 flags.append(f"Proj.{k} {pb[k]} -> {ph[k]}")
     if b["Report"] and not h["Report"]:
         flags.append(f"Report dropped ({b['Report']})")
+    if b["effects"] != h["effects"]:
+        flags.append("CreateEffect behaviour changed")
     print(f"  INH  base={b['Inherits']}")
     print(f"       head={h['Inherits']}")
     print(f"  WH   base={[(k, t, dm) for k, t, dm in b['warheads']]}")
     print(f"       head={[(k, t, dm) for k, t, dm in h['warheads']]}")
     print(f"  PROJ base={pb}")
     print(f"       head={ph}")
+    if b["effects"] != h["effects"]:
+        print(f"  FX   base={b['effects']}")
+        print(f"       head={h['effects']}")
     print("  >> " + ("OK (behavioural invariants preserved)" if not flags else "FLAGS:"))
     for f in flags:
         print(f"       - {f}")
 
 
 def main():
+    if len(sys.argv) < 4:
+        raise SystemExit(
+            "Usage: review_resolve_diff.py <base_root> <head_root> W1 [W2 ...]")
     base_root, head_root = sys.argv[1], sys.argv[2]
     weapons = sys.argv[3:]
     rb = miniyaml.Ruleset(base_root)

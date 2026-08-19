@@ -181,6 +181,7 @@ HeavyPlasmaFlamer:
 	Inherits@wh2: ^Warhead_Flame_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
+	Report: flamer2.aud
 	ReloadDelay: 60
 	Burst: 30
 	BurstDelays: 1
@@ -1592,6 +1593,7 @@ WaveforceCannon:
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	ReloadDelay: 60
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -1779,6 +1781,7 @@ OIPlasmaFlamer:
 	Inherits@wh2: ^Warhead_Flame_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
+	Report: flamer2.aud
 	ReloadDelay: 60
 	Burst: 20
 	BurstDelays: 1
@@ -1957,7 +1960,6 @@ JHighV:
 	Burst: 5
 	BurstDelays: 5
 	Range: 6696
-	-Report:
 	StartBurstReport: gun8.aud
 	Warhead@Bullet_Light:
 		Damage: 4000
@@ -1972,6 +1974,7 @@ JHighVWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JHighV
 	Inherits@3: ^WaveforceBulletProjectile
+	Report: bigggun1.aud
 	Warhead@Railgun_Heavy:
 		Damage: 4000
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
@@ -2076,6 +2079,7 @@ NanoArtilleryAG:
 
 NanoReturnHeal:
 	Inherits: NanoReturn
+	Inherits@fx: ^Effect_Emp_Fx_RA2
 	Warhead@Heal: SpreadDamage
 		AffectsParent: true
 		Spread: 1000
@@ -2083,9 +2087,6 @@ NanoReturnHeal:
 		Damage: -10000
 		ValidRelationships: Ally
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_emp_fx
-		ExplosionPalette: ra2effect
-		#ValidTargets: Vehicle
 		ImpactSounds: vifvrepa.wav
 
 NanoSmokeAG:

@@ -32,6 +32,18 @@ Current: **W1 ✅ done** (K coefficient + target model, `f8421d345`) · **W2 ⬜
 Devin** (`^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*`) · **W3–W5 ⬜ ready,
 owner Claude** (ledger split, retire weapon-class K, the five missing metrics).
 
+## ▶ ACTIVE — CAMEO CONTENT INSTALLER
+
+- [x] **Manage Content downloads:** hidden `cameo-content` installer mod,
+  Cameo switched to `ContentInstallerFileSystem`, `ContentPackages:` empty so
+  installation stays opt-in; disc-source outputs corrected from `Content/ca/`
+  to `Content/cameo/` (PR #260).
+- [ ] **Disc-source gaps surfaced by the installer going live:** `tsmusic` /
+  `fsmusic` `TestFiles` are not produced by their declared disc sources
+  (Firestorm writes `scores01.mix`), and `Content/cameo/{cnc/desert.mix,
+  ra2/theme.mix, ra2/thememd.mix, expand/*}` are written by disc installs but
+  not mounted by `mods/cameo/mod.yaml`.
+
 ## ▶ ACTIVE — VEHICLE BALANCE APPLY + BACKLOG (2026-07-31)
 
 **Vehicle ladder DESIGN is being re-tuned** — latest table = `docs/balance/anchor_decisions_log.md`
@@ -234,9 +246,28 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    later; resolution = inline (cross-pack/one-off) or hoist to `^Template` (same-pack). Memory:
    [[cameo-no-actor-inheritance]]. Audit cmd in the memory. Don't stop pipeline work for it.
 
-**ENGINE workflow (Blackrobe 2026-07-31):** `cameo-mod/engine` is a git **submodule (a working clone of `origin Cameo-mod/OpenRA`)**, whose **main branch is `cameo-engine`** — i.e. the "cameo-engine dev clone" referenced in `.windsurf/rules/start-protocol.md`. Engine updates: branch off `cameo-engine`;
-**MIRROR changes both ways** (`cameo-engine` ↔ `cameo-mod/engine`); rebuild before the boot gate. Memory:
-`cameo-engine-submodule`.
+**ENGINE workflow.** ⚠ **CORRECTED 2026-08-15 — `engine/` is NOT a submodule of this repo.**
+Verified: no `.gitmodules`, no `engine/.git`, `.gitignore` lists `engine`/`engine*`, and
+`git ls-files engine` returns **0 tracked files**. `git` run from inside `engine/` silently
+operates on the PARENT repo, which is what made it look like a submodule on `master`.
+**Editing `engine/**` from this repo produces work that cannot be committed and is wiped by
+the next `make all`.** (The earlier wording here — "submodule … MIRROR changes both ways" —
+cost a session's worth of planning before anyone checked.)
+
+The engine is a **SEPARATE clone** of `https://github.com/cameo-mod/OpenRA`, branch
+`cameo-engine`. The binding, step-by-step procedure is
+**`docs/LESSONS_LEARNED.md` → "The canonical engine update pipeline"**: edit + push there →
+`git rev-parse cameo-engine` for the full 40-char hash → `ENGINE_VERSION` in **`mod.config`**
+(not `mod.yaml`) → `make.cmd all` → verify `engine/VERSION` and recreate `engine/glsl/`
+shaders → boot-gate → commit `mod.config`. Also in `CLAUDE.md` and the SessionStart hook.
+
+⭐ **Check for a mod-side SHADOW first** — it avoids the whole round trip.
+`ObjectCreator.FindType` returns the first assembly in `mod.yaml`'s `Assemblies` list holding
+the type name, and that order is AS, CA, **Cameo**, Cnc, D2k, Common, so an
+`OpenRA.Mods.Cameo` class of the same name replaces the engine's with **zero yaml changes**.
+Precedent: `ColorPickerColorShift`, `PlayerColorShift`, and `SelectionDecorations`
+(`57685c3a3`). Prove it with a Cameo-only field — `--docs` lists both types and proves nothing.
+Memory: `cameo-engine-submodule`.
 
 ---
 
@@ -248,6 +279,97 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
   `LockFaction` values. Also fixed invalid fluent key `bot-campaign-ai.name` →
   `CampaignAI` in delivery/deliverycoop rules.yaml and added missing
   `bot_ai.campaign` fluent key to en.ftl.
+
+## ❓ OPEN DESIGN — Schwarzer Mond team upgrade + faction lore pass (2026-08-15)
+
+Two maintainer questions raised while reworking the SM upgrades (`d58cd8603`).
+
+### 1. Does Moon Propaganda become SM's team upgrade?
+
+Every faction is eventually meant to have one; SM has none. The maintainer's own
+difficulty is real: *"it's very hard to make something unique that is also
+teamwide."*
+
+**~~Recommendation: split Moon Propaganda, fanaticism goes team-wide.~~ REJECTED
+by the maintainer, 2026-08-15 — and rightly:**
+
+> *"Schwarzer Mond is more high tech and more about vehicles and aircraft than
+> infantry so I think the team upgrade should also reflect that a bit."*
+
+Fanaticism is an INFANTRY-morale effect on a faction that is not infantry-focused.
+It fits the Asian Alliance — whose Banzai upgrade already **is** that effect,
+faction-only — or the Naxis. The mistake was reasoning from an available mechanic
+instead of from faction identity; that is now a binding rule in
+[`DESIGN.md` §6](../DESIGN.md), together with the measured
+**team ≈ half of faction** magnitude law.
+
+**Moon Propaganda therefore STAYS a normal faction upgrade** (fanaticism +
+defection, shipped in `d58cd8603`). SM's team upgrade is a SEPARATE, still
+unbuilt upgrade, and it must be **high-tech, vehicles and aircraft**.
+
+**Candidates (maintainer's pick outstanding):**
+
+| # | upgrade | effect | why it fits |
+|---|---|---|---|
+| **A** | **Anti-Gravity Plating** *(recommended)* | allied **vehicles + aircraft** get an `ArmorPlating` bar worth **10% of health** | SM's lunar alloys and anti-grav tech, exactly HALF of SM's own Lunar Alloys (20%) so the team-is-weaker law is visible in the number; reuses the additive plating pool, so an SM ally already carrying plating sees ONE bigger bar rather than a second one |
+| **B** | **Helium-3 Distribution** | allied vehicles + aircraft **+10% speed/turn**, allied power plants **+15% output** | SM already mines Helium-3 for fusion reactors and propulsion; sharing the fuel IS what a team upgrade is, and it is literally half of SM's own Helium-3 (+25% speed, +50% power) |
+| **C** | **Die Glocke Resonance** | allied vehicles + aircraft **resist disabling** (shorter EMP/disable) | the most distinct option — every existing team upgrade in the tree is a ± multiplier, this one is utility; needs a check of what EMP/disable traits support first |
+
+**A** is the pick: it is a NEW effect for allies rather than a diluted copy of an
+SM upgrade, it produces a visible BAR instead of another invisible percentage
+(the maintainer's standing complaint about generic upgrades), and it demonstrates
+the additive one-pool law. **B** expresses the weaker-shared-version law most
+legibly but is a stat multiplier. **C** is the most interesting and the least
+scoped.
+
+**Cost of building, once picked:** `^TeamUpgradeTemplate` (cost 10000) + an
+`up_<name>_proxy_actor.schwarzermond` + an effects template gated on the proxy's
+condition, inherited by allied vehicles/aircraft via `^GlobalBuffs`. No new C#
+for A or B.
+
+### 2. Magic-the-Gathering-style lore for every unit and upgrade
+
+Maintainer, 2026-08-15: *"I want each unit and upgrade to have their own unique
+lore behind them, like the Magic the Gathering cards … But yeah that's more like
+a thing for the future maybe?"* — recorded as a FUTURE pass, not queued now.
+
+Shape when it happens: descriptions already carry a mechanical line plus a
+flavour line (see `schwarzermond_upgrade_cryptofascism`, whose flavour text is
+the MoonCoin rug-pull). That two-line split IS the MTG card layout — rules text
+then italic flavour — so the CONTENT pass is a sweep over existing
+`Description:` fields rather than a new system.
+
+**ESTIMATE (2026-08-15), split into the cheap half and the expensive half:**
+
+*Styling mechanism — small, and doable MOD-SIDE.* Checked:
+- **No inline markup exists today.** Zero `.ftl` files use colour/style tags, and
+  OpenRA's `LabelWidget` has no per-span styling — colour is a per-WIDGET
+  property. So "italic flavour" cannot be a tag inside one string; the tooltip
+  has to render **two labels**, one per style.
+- **No italic font is registered.** `mod.yaml` `Fonts:` declares Regular and Bold
+  variants of JudouSansHans only. Italics need an italic TTF added (or the
+  flavour text distinguished by COLOUR/dimming instead, which costs nothing).
+- **The tooltip logic can be shadowed** rather than forked into the engine:
+  chrome `Logic:` classes resolve through `ObjectCreator` exactly like traits, so
+  a Cameo `ProductionTooltipLogic` overrides Common's with no engine round trip
+  (same trick as `SelectionDecorations`, `57685c3a3`). This matters because the
+  widget lives in `engine/`, which **cannot be committed from this repo**.
+- Data model: add a second fluent key per actor (`.flavor` next to
+  `.description`) rather than a separator convention inside one string, so
+  translators and audits can treat them independently.
+
+*Content pass — this is the real cost.* **2021 `Description:` fields** in
+ContentPacks alone: **1159 already fluent keys**, **853 still inline prose**.
+Flavour text is a new line for each, and it is writing, not scripting — there is
+no way to generate it. Sequence it AFTER the balance program: the rules line
+states final numbers, so writing it earlier means writing it twice. The 853
+inline ones should migrate to `.ftl` first (DESIGN.md §7 already requires that),
+which makes the flavour pass a pure `.ftl` job checked by `audit_display_text` +
+`audit_fluent`.
+
+**Recommendation:** build the styling mechanism whenever it is wanted (it is
+self-contained and improves every existing description immediately), but do the
+flavour-writing in faction-sized batches after balance settles.
 
 ## ★ MAJOR PROGRAM (2026-07-25): mod-synthesis balance overhaul — see [`BALANCE_SYNTHESIS.md`](BALANCE_SYNTHESIS.md)
 
@@ -365,6 +487,9 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   locomotor but no TurnSpeed) stay step-1. Foot infantry also get a Speed±1
   fine-tune as a Δ lever (maintainer 2026-07-22). `VEHICLE_TYPE_CLASSES` still
   forces the class default where every member is a vehicle (mbt).
+- [x] Between-cell movement responsiveness: `^DefaultInfantry` opts in; infantry
+  with a defined `Mobile.TurnSpeed` opt out through `^VehicleTurnRateInfantry`,
+  preserving the documented vehicle-turn-rate marker.
 - [x] Apply **closecombat ReloadDelay 75→70** (anchor DPS 250 / verifier 500) —
   done as part of the 4-anchor restat below.
 - [x] Fix the 4 anchor units to grid (shotgunner/fanatic 4000→2000×2, reload
@@ -1121,6 +1246,11 @@ pin revert (never committed). **RESOLVED: `make.cmd all` fetched b89ae60 and reb
 Maintainer picked the scout class first; proposed anchor 20000 HP /
 50 Speed / 5.0 Range / 4000 Damage / 50 Reload / Cost 100 with the
 2x-health bake replacing the ScoutInfantryBuff damage reduction.
+⚠ **The bake is HALF APPLIED (measured 2026-08-17): 19 of 35 scouts
+cancel the template's `DamageMultiplier@ScoutInfantryBuff: 50` with a
+local `Modifier: 100`; 16 still resolve to 50 and are therefore twice
+as durable as their price. Finishing this class means finishing that
+migration, not just setting the anchor** — W26 / FORMULA_V2.md.
 Assessment + simulation: docs/balance/formula_v2_scout.md — anchor
 structure confirmed, speed 60 recommended over 50, bake endorsed;
 BLOCKED ON: (1) garrisoned/pricing armament flag in the extractor,

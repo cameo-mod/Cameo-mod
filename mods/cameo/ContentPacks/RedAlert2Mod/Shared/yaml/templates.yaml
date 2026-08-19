@@ -707,6 +707,15 @@
 		Interval: 25
 		Amount: 1
 		RequiresCondition: schwarzermond_upgrade_cryptofascism
+	# MOONCOIN BULL RUN — every kill mints. GivesBounty (on the victim) pays whichever
+	# killer carries a TakesBounty whose ValidTypes contain the victim's bounty Type, so a
+	# private `MoonCoin` type means these units collect from the tree-wide MoonCoin bounty
+	# while nobody else in the game is affected and the existing `global-bounty` game
+	# option keeps its own separate `Bounty` type.
+	TakesBounty@mooncoin:
+		RequiresCondition: schwarzermond_upgrade_cryptofascism
+		ValidTypes: MoonCoin
+		Percentage: 25
 	ActorStatValues:
 		Upgrades: schwarzermond_upgrade_cryptofascism
 
@@ -714,9 +723,17 @@
 	GrantConditionOnPrerequisite@schwarzermond_upgrade_lunaralloys:
 		Condition: schwarzermond_upgrade_lunaralloys
 		Prerequisites: schwarzermond_upgrade_lunaralloys
-	DamageMultiplier@schwarzermond_upgrade_lunaralloys:
+	# W21 R1: the old `DamageMultiplier: 90` is gone — a 10% damage reduction was an
+	# INVISIBLE stat that quietly redefined what 1 HP is worth. The alloys now bolt a
+	# real ARMOR PLATING bar onto the unit instead: same idea, on screen, and it stacks
+	# additively with any plating the unit already carries (the noid walkers) rather
+	# than adding a second bar.
+	ArmorPlating@schwarzermond_upgrade_lunaralloys:
 		RequiresCondition: schwarzermond_upgrade_lunaralloys
-		Modifier: 90
+		MaxPercentageStrength: 20
+		PercentageRegenAmount: 1
+		RegenInterval: 25
+		RampTicks: 125
 	ActorStatValues:
 		Upgrades: schwarzermond_upgrade_lunaralloys
 
@@ -727,24 +744,97 @@
 	FirepowerMultiplier@schwarzermond_upgrade_moonpropaganda:
 		RequiresCondition: schwarzermond_upgrade_moonpropaganda
 		Modifier: 110
+	# FANATICISM — the propaganda works best on the dying. Below half health a Schwarzer
+	# Mond soldier fights HARDER instead of worse, which is the opposite of how damage
+	# normally feels and pairs directly with the Vril shield: the shield pops, the soldier
+	# goes berserk. MaxHP is a PERCENTAGE (GrantConditionOnHealth), so one number covers
+	# every unit whatever its health.
+	GrantConditionOnHealth@moonpropaganda_fanatic:
+		Condition: moonpropaganda_fanatic
+		MaxHP: 50
+	FirepowerMultiplier@moonpropaganda_fanatic:
+		RequiresCondition: schwarzermond_upgrade_moonpropaganda && moonpropaganda_fanatic
+		Modifier: 150
+	# DEFECTION — enemy infantry who die to the broadcasts get up again on the Reich's
+	# side. The one effect in the faction that converts the enemy's losses into your gains
+	# rather than buffing a number, and the reason this upgrade is worth researching.
+	# ⚠ Deliberately spawns a Schwarzer Mond unit rather than reusing the Naxis
+	# corpse.nax -> undead.nax revive chain: a `.nax` actor here would make SchwarzerMond
+	# depend on the Naxis pack, against the self-contained ContentPack goal.
+	SpawnsActorsOnKill@moonpropaganda_defection:
+		RequiresCondition: schwarzermond_upgrade_moonpropaganda
+		Actor: schwarzermond_lunarsoldier
+		Probability: 15
+		ValidTargets: Infantry
 	ActorStatValues:
 		Upgrades: schwarzermond_upgrade_moonpropaganda
 
+# ============================================================================
+# HELIUM-3 ENRICHMENT — Schwarzer Mond's TEAM upgrade (maintainer 2026-08-15).
+#
+# SM is high tech, vehicles and aircraft, so the team upgrade reflects that
+# rather than the infantry-morale effect first proposed (DESIGN.md 6: a team
+# upgrade must fit the faction's identity).
+#
+# Calibration against RA1 Soviets' Reactor Overload, the other power team
+# upgrade: that one has ONE effect and doubles power (PowerMultiplier: 200).
+# This has THREE, so each is deliberately weaker — power +50% instead of +100%,
+# and the mobile buff drops from SM's old faction-only +25% speed to +15%.
+# That is the team-is-half-of-faction law in DESIGN.md 6, visible in the number.
+#
+# ...and unlike every other team upgrade in the tree, it has a REAL DRAWBACK:
+# fuelled vehicles and aircraft detonate when killed, friendly fire included, so
+# a dense allied armour ball can chain-react. Sharing the Reich's fusion fuel
+# with the whole team is not supposed to be free.
+# ============================================================================
+
+# The condition itself. Inherited by anything that should KNOW about the
+# upgrade; the effects live in the two templates below.
+# ⚠ No `ActorStatValues: Upgrades:` here any more. DESIGN.md 6: the stat widget
+# lists FACTION upgrades only, never team upgrades — and this is now a team one.
 ^NaxiHelium3:
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_helium3:
+		Condition: schwarzermond_upgrade_helium3
+		Prerequisites: schwarzermond_upgrade_helium3
+
+# POWER half — inherited by ^Power in defaults.yaml, exactly as RA1's
+# ^ReactorOverloadTeamUpgradeRA1 is, so it reaches EVERY team member's plants.
+# ⚠ These two must NOT `Inherits: ^NaxiHelium3`. OpenRA rejects the same parent
+# appearing twice in one tree ("Parent type was already inherited"), and 22 SM
+# actors already inherit ^NaxiHelium3 DIRECTLY while also reaching these through
+# ^Power / ^VehicleBuffs / ^AircraftBuffs. Restating the grant node instead is
+# safe: it is the same key with the same values, so it merges into one trait.
+^Helium3TeamUpgradePower:
 	GrantConditionOnPrerequisite@schwarzermond_upgrade_helium3:
 		Condition: schwarzermond_upgrade_helium3
 		Prerequisites: schwarzermond_upgrade_helium3
 	PowerMultiplier@schwarzermond_upgrade_helium3:
 		RequiresCondition: schwarzermond_upgrade_helium3
 		Modifier: 150
+
+# MOBILE half — inherited by ^VehicleBuffs and ^AircraftBuffs, so it reaches
+# every team member's vehicles and aircraft and nothing else. Infantry are
+# deliberately untouched: this is fuel, not propaganda.
+^Helium3TeamUpgradeMobile:
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_helium3:
+		Condition: schwarzermond_upgrade_helium3
+		Prerequisites: schwarzermond_upgrade_helium3
 	SpeedMultiplier@schwarzermond_upgrade_helium3:
 		RequiresCondition: schwarzermond_upgrade_helium3
-		Modifier: 125
+		Modifier: 115
 	TurnSpeedMultiplier@schwarzermond_upgrade_helium3:
 		RequiresCondition: schwarzermond_upgrade_helium3
-		Modifier: 125
-	ActorStatValues:
-		Upgrades: schwarzermond_upgrade_helium3
+		Modifier: 115
+	FirepowerMultiplier@schwarzermond_upgrade_helium3:
+		RequiresCondition: schwarzermond_upgrade_helium3
+		Modifier: 115
+	# THE DRAWBACK. EmptyWeapon must be set too, or the engine falls back to its
+	# own default `UnitExplode` for the not-loaded case and a transport would
+	# quietly detonate with a different, weaker weapon than everything else.
+	FireWarheadsOnDeath@schwarzermond_upgrade_helium3:
+		RequiresCondition: schwarzermond_upgrade_helium3
+		Weapon: UnitExplodeBig
+		EmptyWeapon: UnitExplodeBig
 
 ^NaxiVrilInfusion:
 	GrantConditionOnPrerequisite@schwarzermond_upgrade_vrilinfusion:
@@ -759,9 +849,45 @@
 	TurnSpeedMultiplier@schwarzermond_upgrade_vrilinfusion:
 		RequiresCondition: schwarzermond_upgrade_vrilinfusion
 		Modifier: 125
-	DamageMultiplier@schwarzermond_upgrade_vrilinfusion:
+	# W21 R1: the old `DamageMultiplier: 85` is gone. Vril rewrites the soldier, so the
+	# 15% damage reduction becomes a visible VRIL SHIELD — the outermost layer of the
+	# stack, regenerating fast (R7 ramp 250) and, per R5, replacing the body armor with
+	# `Shield` while it holds. That is the profile Tesla/Storm/EMP tear through and
+	# Sonic barely scratches, so the upgrade changes which weapons counter this faction
+	# rather than just making everything take less damage.
+	# ⚠ NEVER add a second `Shielded` trait. ^BasicUnit -> ^ShieldedShieldable already
+	# gives EVERY unit one, with capacity 100% of HP and starting empty, plus the
+	# `Armor RequiresCondition: !shielded` / `Armor@shielded: Shield` swap that R5 wants.
+	# A second Shielded compiles, lints and BOOTS fine, then throws the moment the actor
+	# is produced, because ChangesShield resolves it with .Trait<Shielded>().
+	# GrantsShield, not ChangesShield: shield grants must be ADDITIVE. ChangesShield's
+	# StartIfBelow is a CAP, so two upgrades of 25% would both stop at 25% and the second
+	# would be worth nothing. GrantsShield sums instead — two of these give ONE bar
+	# holding 50%, never two bars of 25%.
+	GrantsShield@schwarzermond_upgrade_vrilinfusion:
 		RequiresCondition: schwarzermond_upgrade_vrilinfusion
-		Modifier: 85
+		PercentageStrength: 25
+		PercentageRegenAmount: 2
+		RegenInterval: 25
+		DamageCooldown: 250
+	# The shared Shielded is GATED, and `Shielded.Regenerate` returns early while the trait
+	# is disabled — so without naming this upgrade in the gate, Vril would silently grant
+	# NOTHING. Every shield-granting faction template in the mod states the same shape
+	# (D2K Ordos/Ixian, Japan stealth suits, Yuri), so Vril states it too.
+	# ⚠ `-RequiresCondition:` does NOT work here: the removal idiom only applies where the
+	# field already exists in the node being merged, and this template declares its own
+	# fresh `Shielded` node — the engine throws "no elements with key to remove" at BOOT.
+	Shielded:
+		RequiresCondition: !disabled && (schwarzermond_upgrade_vrilinfusion || shieldgen || shielded)
+	# `shieldpermanent` is the mod's marker for an INNATE shield rather than a generator
+	# field (D2K Ordos, Japan stealth suits, Yuri all use it), which Vril is. It buys two
+	# things from ^ShieldedShieldable that this upgrade would otherwise be punished by:
+	# ChangesShield@shielddischarge stops draining 1% per second, and
+	# DamageMultiplier@shielded stops applying 150% damage — a generator field makes you
+	# fragile while it holds, but a shield grown into the soldier's own cells should not.
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_vrilinfusion_permanent:
+		Condition: shieldpermanent
+		Prerequisites: schwarzermond_upgrade_vrilinfusion
 	ActorStatValues:
 		Upgrades: schwarzermond_upgrade_vrilinfusion
 

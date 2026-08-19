@@ -104,9 +104,17 @@ def charge_up(resolved, local):
     helpless while it winds up, neither of which a weapon's own stats show.
     `formula.charge_price_multiplier` turns this into the 0.75x price discount.
 
-    Recorded for EVERY charge trait, including `AttackTesla`, which formula
-    deliberately excludes from the discount — the data should show what the tree
-    actually has, and the pricing decision belongs in one place, not two.
+    Recorded for EVERY charge trait — the data should show what the tree actually
+    has, and the pricing decision belongs in one place, not two.
+
+    W16 also records the MEASURED wind-up so the discount can scale with it:
+      ticks — how long the actor spends charging
+      cycle — the reload the trait itself governs, when it has one
+
+    ⚠ Both read the ENGINE DEFAULT when the key is absent from the yaml. An absent
+    key means default, never zero: the RA2 Tesla Coil writes no
+    `InitialChargeDelay`, and reading that as "no charge" made it look like the
+    LOWEST-charge Tesla when the engine's default 22 makes it the highest.
     """
     known = formula.CHARGE_UP_TRAITS | formula.CHARGE_UP_EXCLUDED_TRAITS
     for c in resolved.children:
@@ -115,7 +123,35 @@ def charge_up(resolved, local):
             continue
         lt = child(local, c.key) if local is not None else None
         src = f"{rel(lt.file)}#{c.key}" if lt is not None else "inherited"
-        return {"v": base, "src": src}
+        rec = {"v": base, "src": src}
+
+        spec = formula.CHARGE_FIELDS.get(base)
+        if spec:
+            def num(pair, fallback=None):
+                if not pair:
+                    return fallback
+                key, default = pair
+                n = child(c, key)
+                if n is None or n.value in (None, ""):
+                    return default
+                try:                       # ChargeLevel may be a LIST (CA's frontal
+                    return float(str(n.value).split(",")[0].strip())   # variant)
+                except (TypeError, ValueError):
+                    return default
+
+            ticks = num(spec.get("charge"))
+            rate = num(spec.get("rate"), 1) or 1
+            rec["ticks"] = round(ticks / rate, 2)
+
+            # RAW trait fields only. The cycle is NOT precomputed here because it
+            # needs the weapon's reload as its burst delay, and combining the two is
+            # the formula's job — the ledger stores what the yaml says, one law in
+            # one place (formula.charge_attack_cycle).
+            cycle_reload = num(spec.get("cycle_reload"))
+            if cycle_reload:
+                rec["cycle_reload"] = round(cycle_reload, 2)
+                rec["burst"] = int(num(spec.get("burst"), 1) or 1)
+        return rec
     return None
 
 
@@ -387,7 +423,11 @@ def model_constants() -> dict:
                          "ENGAGEMENT": dict(tm.ENGAGEMENT),
                          "reference_hp": tm.reference_hp(),
                          "reference_hp_measured": tm.measured_reference_hp(),
-                         "armor_census": tm.armor_census()},
+                         "armor_census": tm.armor_census(),
+                         # E1 — MEASURED off the live Versus rows, never frozen: the
+                         # Shield ladder is regenerated and moved twice in one day.
+                         "shield_versus_mean": round(tm.pseudo_armor_mean("Shield"), 2),
+                         "shield_hp_factor": round(tm.shield_hp_factor(), 4)},
     }
 
 
@@ -399,9 +439,12 @@ def derived_metrics(resolved, raw: dict) -> dict | None:
 
     * `effective_damage` / `footprint` / `reliability` / `sigma` — the area-integrated
       per-shot metric.
-    * `k` / `effective_per_shot` / `effective_dps` — the W1 pricing coefficient. K is
-      independent of the Damage magnitude, which is what makes pricing invertible:
-      `Damage_required = target_dps x eff_reload / (burst x FP x K)`.
+    * `k` / `effective_per_shot` / `effective_dps` — the W1 pricing coefficient.
+      ⚠ **`k` and `k_context` measure correctly but MUST NOT BE INVERTED** (E4): a
+      %-of-max-HP twin's damage does not scale with the flat Damage, so `k` carries
+      `flat_total` in a denominator and moves when Damage moves. Invert the AFFINE pair:
+      `Damage_required = (target_per_shot - pct_absolute_context) / k_flat_context`,
+      and treat a target below `dps_floor` as unreachable rather than rounding it.
 
     `effective_dps` is the WEAPON's number. `FirepowerMultiplier` is an actor
     property, so it is deliberately NOT baked in here — the caller applies it.
@@ -425,6 +468,14 @@ def derived_metrics(resolved, raw: dict) -> dict | None:
         shares = sum(p["share"] for p in flat) or 1.0
         out["k"] = round(res["k"], 4)
         out["k_context"] = round(res["k_context"], 4)
+        # E4 — the AFFINE pair. `k`/`k_context` measure correctly but must NEVER be
+        # inverted (they carry the %-twin's absolute damage divided by the current flat
+        # Damage, so they move when Damage moves). These two are the invertible form:
+        #     Damage_required = (target_per_shot - pct_absolute_context) / k_flat_context
+        out["k_flat"] = round(res["k_flat"], 4)
+        out["k_flat_context"] = round(res["k_flat_context"], 4)
+        out["pct_absolute"] = round(res["pct_absolute"], 2)
+        out["pct_absolute_context"] = round(res["pct_absolute_context"], 2)
         out["avg_versus"] = round(
             sum(p["share"] * p["versus"] for p in flat) / shares, 4)
         # W5 factors, each its own column so a price move can be traced to ONE of
@@ -441,6 +492,12 @@ def derived_metrics(resolved, raw: dict) -> dict | None:
             out["eff_reload"] = round(eff, 2)
             out["effective_dps"] = round(
                 res["k_context"] * damage_total * burst / eff, 2)
+            # The DPS this weapon still delivers at `Damage: 0` — its %-twin floor. A
+            # pricing target below it is unreachable by lowering flat Damage, so it has to
+            # be visible in the ledger rather than discovered as a wrong prescription.
+            if res["pct_absolute_context"] > 0:
+                out["dps_floor"] = round(
+                    res["pct_absolute_context"] * burst / eff, 2)
     return out or None
 
 
@@ -448,10 +505,148 @@ def fnum(v):
     """First number in a raw ledger value ("15, 15" -> 15.0), else None."""
     if v is None:
         return None
+    if isinstance(v, dict):          # a provenance cell {"v": ..., "src": ...}
+        v = v.get("v")
+    if v is None:
+        return None
     try:
         return float(str(v).split(",")[0].strip())
     except (TypeError, ValueError):
         return None
+
+
+_COND_TOKEN = re.compile(r"[A-Za-z_][A-Za-z0-9_.]*")
+
+
+def condition_is_gate(cond) -> bool:
+    """True when satisfying `cond` needs something GRANTED (an upgrade, prereq, aura).
+
+    ⚠ **A `RequiresCondition` is not automatically a gate.** `!disabled` is the standard
+    not-EMP'd / not-captured guard and is TRUE on a healthy unit. Counting it as a gate put
+    every Protoss unit (`InitialPercentageStrength: 100`, `RequiresCondition: !disabled`)
+    in the "needs an upgrade" bucket and made the roster look like it had NO always-on
+    shields at all — contradicting the maintainer, who was right. Only a POSITIVE token is
+    a real gate; negated terms are satisfied by default.
+    """
+    if isinstance(cond, dict):
+        cond = cond.get("v")
+    for term in re.split(r"&&|\|\|", str(cond or "")):
+        t = term.strip().strip("()").strip()
+        if t and not t.startswith("!") and _COND_TOKEN.match(t):
+            return True
+    return False
+
+
+def shield_damage_multiplier(resolved) -> float:
+    """Product of every `DamageMultiplier` that is active EXACTLY WHILE THE SHIELD IS UP.
+
+    ⚠ **Found 2026-08-17, after the first version of `survivability()` shipped without it.**
+    Every Protoss unit carries
+
+        DamageMultiplier@shielded:
+            RequiresCondition: shielded && !shieldpermanent
+            Modifier: 150
+
+    so while the shield holds the unit takes **150% damage** — the deliberate counterweight
+    the maintainer described (*"it has a 100% shield but also a 150% damage multiplier ... and
+    that makes it very fragile somehow"*). Ignoring it over-credits the shield by 1.5x: a
+    dragoon's 75 000 shield points are worth ~0.36 HP each, not 0.540.
+
+    Only multipliers gated on the shield-up condition count. An UNCONDITIONAL
+    `DamageMultiplier` applies to the health phase too, so it is not a shield property — it is
+    the separate "fold baseline armor into HP" job.
+
+    ⚠ **The shield-up token must be the ONLY positive gate.** A first version multiplied every
+    match and returned 0.9 for the dragoon — because it also swallowed
+    `protoss_upgrade_plasmashields && shielded` (80) and
+    `steelconsortium_upgrade_shieldresistance && shielded` (75). Both need an UPGRADE, so at
+    baseline they are inactive, and counting them turned a 1.5x penalty into a 0.9x bonus:
+    the sign flipped. This is the same baseline-vs-upgrade rule the shield itself obeys, and
+    those two belong to E5 with the rest of the upgrade power.
+    """
+    factor = 1.0
+    up = shield_up_condition(resolved)
+    if not up:
+        return factor
+    for c in resolved.children:
+        if c.key.split("@")[0] != "DamageMultiplier":
+            continue
+        gates = _positive_tokens(str(c.get("RequiresCondition") or ""))
+        if gates != [up]:
+            continue          # unconditional, or needs something else granted first
+        mod = fnum(c.get("Modifier"))
+        if mod is not None and mod > 0:
+            factor *= mod / 100.0
+    return factor
+
+
+def shield_up_condition(resolved) -> str | None:
+    """The condition token the `Shielded` trait publishes while the pool holds."""
+    for c in resolved.children:
+        if c.key.split("@")[0] == "Shielded":
+            v = c.get("ShieldsUpCondition")
+            return str(v).strip() if v else None
+    return None
+
+
+def _positive_tokens(cond: str) -> list[str]:
+    """Tokens that must be TRUE — negated terms are satisfied by default, so never a gate."""
+    out = []
+    for term in re.split(r"&&|\|\|", str(cond or "")):
+        t = term.strip().strip("()").strip()
+        if t and not t.startswith("!"):
+            m = _COND_TOKEN.match(t)
+            if m:
+                out.append(m.group(0))
+    return out
+
+
+def survivability(u: dict, resolved=None) -> dict | None:
+    """E1 — the shield pool as HP-equivalent, for actors that actually spawn with one.
+
+    Maintainer: *"shielded units and armored units need to have a price! it is like extra
+    survivability ... since everything deals more damage to shields you can count the 200%
+    shield strength like an extra 100% HP"* — and, crucially, *"that's only if the unit
+    already has armor or shield included in them"*. That qualifier is the whole rule:
+
+      * a shield the unit SPAWNS with is baseline durability -> price it into the cost;
+      * a shield (or armor plating) granted by an UPGRADE is not baseline -> it belongs to
+        the upgrade-pricing gap E5, and charging the base cost for it would make every
+        un-upgraded unit overpriced.
+
+    Measured 2026-08-17 across the 58 always-on actors: 12 872 500 HP is really 20 316 495
+    effective HP, **+57.8% priced at zero**. At a 200% pool the multiplier is x2.080, so the
+    maintainer's "like an extra 100% HP" was right to 8%.
+
+    ⚠ `Integrity` is deliberately absent — it absorbs NOTHING (see `target_model`), so it
+    buys no survivability and belongs to E3, not here.
+    """
+    hp = fnum(u.get("hp"))
+    if not hp or hp <= 0:
+        return None
+    pool_flat = fnum(u.get("shield_flat")) or 0.0
+    pool_pct = fnum(u.get("shield_pct")) or 0.0
+    if pool_flat + pool_pct <= 0:
+        return None
+    init = (fnum(u.get("shield_init_flat")) or 0.0) \
+        + (fnum(u.get("shield_init_pct")) or 0.0)
+    gated = condition_is_gate(u.get("shield_condition"))
+    always_on = init > 0 and not gated
+    pool = pool_flat + pool_pct * hp / 100.0
+    out = {"shield_pool": round(pool, 1),
+           "shield_always_on": always_on,
+           "shield_gated_on_upgrade": gated}
+    if always_on:
+        # A multiplier active only while the shield holds scales the shield's worth, NOT the
+        # health behind it — so it divides the pool term and never touches `hp`.
+        dm = shield_damage_multiplier(resolved) if resolved is not None else 1.0
+        eff = hp + (tm.effective_hp(hp, pool_flat, pool_pct) - hp) / (dm or 1.0)
+        out["effective_hp"] = round(eff, 1)
+        out["effective_hp_ratio"] = round(eff / hp, 4)
+        if abs(dm - 1.0) > 1e-9:
+            out["shield_damage_multiplier"] = round(dm, 4)
+            out["shield_hp_per_point"] = round(tm.shield_hp_factor() / dm, 4)
+    return out
 
 
 def split_derived(doc: dict) -> tuple[dict, dict]:
@@ -470,8 +665,15 @@ def split_derived(doc: dict) -> tuple[dict, dict]:
                 if metrics:
                     arms.append({"slot": arm.get("slot"),
                                  "weapon": arm.get("weapon"), **metrics})
-            if arms:
-                sec[actor] = {"armaments": arms}
+            # Actor-level derived metrics (E1 survivability) sit beside the armament
+            # rows rather than inside them: a shield belongs to the UNIT, not a weapon.
+            actor_metrics = unit.pop(DERIVED_KEY, None)
+            if arms or actor_metrics:
+                sec[actor] = {}
+                if actor_metrics:
+                    sec[actor].update(actor_metrics)
+                if arms:
+                    sec[actor]["armaments"] = arms
         if sec:
             sections[section] = sec
     derived = {"schema": doc["schema"], "ledger": doc["ledger"],
@@ -587,6 +789,27 @@ def extract_actor(rs, key: str, section: str) -> dict | None:
             ("build_limit", "Buildable", "BuildLimit"),
             ("build_duration", "Buildable", "BuildDuration"),
             ("self_heal_step", "ChangesHealth", "Step"),
+            # --- THE SURVIVABILITY LAYERS (E1, 2026-08-16) ---------------------------- #
+            # Maintainer: *"shielded units and armored units need to have a price! it is
+            # like extra survivability ... Extra shields and extra armor platings just make
+            # the units a lot more durable so they need to be included in the balance
+            # formula."*  Read as RAW fields here; `derived_actor_metrics` turns them into
+            # effective HP. Nothing read them before, so 1592 shielded and 1233
+            # EMP-pooled actors carried their whole extra layer for free.
+            ("shield_flat", "Shielded", "MaxStrength"),
+            ("shield_pct", "Shielded", "MaxPercentageStrength"),
+            # ⚠ A POOL IS NOT A SHIELD. `^ShieldedShieldable` (defaults.yaml:7230) gives
+            # 1592 actors `MaxPercentageStrength: 100` with `InitialStrength: 0`, i.e. a
+            # CAPACITY that starts empty and only fills behind `shieldgen >= 1`. Measured
+            # 2026-08-17: only **58** actors spawn with a pool AND no positive gate on the
+            # trait; 82.8% are empty capacity and the rest wait on an upgrade. Pricing the
+            # capacity would charge 76% of the roster for durability it does not have, so
+            # these three fields are what separates the 58 from the 1534.
+            ("shield_init_flat", "Shielded", "InitialStrength"),
+            ("shield_init_pct", "Shielded", "InitialPercentageStrength"),
+            ("shield_condition", "Shielded", "RequiresCondition"),
+            ("integrity_flat", "Integrity", "MaxStrength"),
+            ("integrity_pct", "Integrity", "MaxPercentageStrength"),
     ):
         s = stat(resolved, local, trait, field)
         if s is not None:
@@ -645,6 +868,9 @@ def extract_actor(rs, key: str, section: str) -> dict | None:
     if sub == "SpecialForcesInfantry":
         for arm in arms:
             arm["design_weapon_class"] = 1.0
+    surv = survivability(u, resolved)
+    if surv:
+        u[DERIVED_KEY] = surv
     return u
 
 
@@ -835,6 +1061,20 @@ def main() -> int:
                                              encoding="utf-8", newline="\n")
     print(f"wrote {len(ledgers)} ledgers, {total} actors -> {rel(OUT)}")
     print(f"wrote {len(sidecars)} derived sidecars -> {rel(DERIVED_OUT)}")
+
+    # `_model.json` above is GLOBAL — its armor census and weights are measured
+    # across the whole roster — but a filtered run only rewrites the sidecars it
+    # was asked for. So a --faction run can move the model for everyone while
+    # leaving 31 factions' derived numbers computed against the old one, and
+    # nothing catches it: audit_balance_drift compares raw yaml to the RAW ledger
+    # and never looks at derived. That is exactly how avg_versus/k/effective_dps
+    # went quietly stale across 30 files in 2026-08-15.
+    if args.faction:
+        print("\n⚠ FILTERED RUN — `_model.json` is global and has been rewritten, but only "
+              f"the sidecar(s) matching `{args.faction}` were regenerated.\n"
+              "  Every OTHER faction's derived numbers (avg_versus, k, effective_dps) may "
+              "now be stale.\n"
+              "  Re-run without --faction before trusting or committing derived data.")
     return 0
 
 

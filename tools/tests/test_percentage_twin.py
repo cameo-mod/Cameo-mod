@@ -37,20 +37,19 @@ def _wh(tag, dmg, typ="SpreadDamage"):
 class PercentageTwinTest(unittest.TestCase):
     """`formula.percentage_twin` — the W15 fix itself."""
 
-    def test_design_ratio_is_unchanged(self):
-        """1 point per 2000 damage; DESIGN.md's worked example still holds."""
-        self.assertEqual(formula.percentage_twin(2000), 1)
-        self.assertEqual(formula.percentage_twin(16000), 8)
-
     def test_off_grid_damage_never_zeroes_the_twin(self):
-        """THE bug. 1999 // 2000 == 0 == the warhead does nothing at all."""
-        self.assertEqual(formula.percentage_twin(1999), 1)
+        """THE bug. Integer division floored small values to 0 — not "a little
+        damage" but hard immunity, in either unit."""
         self.assertEqual(formula.percentage_twin(1), 1)
+        self.assertEqual(formula.percentage_twin(1, formula.BASIS_POINT_DENOMINATOR), 1)
+        self.assertEqual(formula.percentage_twin(1999), 1)
 
     def test_twin_keeps_tracking_damage_between_grid_points(self):
-        """The old floor gave 2000 and 3500 the SAME twin; rounding does not."""
-        self.assertEqual(formula.percentage_twin(3500), 2)
-        self.assertGreater(formula.percentage_twin(3500), formula.percentage_twin(2000))
+        """The old floor gave 2000 and 3500 the SAME twin; the basis-point twin
+        separates every single flat step."""
+        bp = formula.BASIS_POINT_DENOMINATOR
+        self.assertEqual(formula.percentage_twin(2000, bp), 20)
+        self.assertEqual(formula.percentage_twin(3500, bp), 35)
 
     def test_no_main_damage_means_no_twin(self):
         """A floor of 1 must not conjure a twin out of nothing."""
@@ -67,42 +66,58 @@ class PercentageTwinTest(unittest.TestCase):
             previous = twin
 
     def test_rounding_is_half_up_not_bankers(self):
-        """`round()` would send 5000 -> 2 but 7000 -> 4: both .5 cases, rounded in
+        """`round()` would send 25000 -> 2 but 35000 -> 4: both .5 cases, rounded in
         opposite directions. Half-up keeps the twin a function of size alone."""
-        self.assertEqual(formula.percentage_twin(5000), 3)   # 2.5 -> 3
-        self.assertEqual(formula.percentage_twin(7000), 4)   # 3.5 -> 4
+        self.assertEqual(formula.percentage_twin(25000), 3)   # 2.5 -> 3, not 2
+        self.assertEqual(formula.percentage_twin(35000), 4)   # 3.5 -> 4
+        bp = formula.BASIS_POINT_DENOMINATOR
+        self.assertEqual(formula.percentage_twin(250, bp), 3)  # 2.5 -> 3, not 2
 
 
 class PercentageGranularityTest(unittest.TestCase):
-    """The 10x-finer units (maintainer 2026-08-11): flat damage in steps of 200,
-    percentage damage in steps of 0.1 — the SAME ratio, ten times the resolution."""
+    """The 20x regrid (maintainer 2026-08-11/12): flat damage in steps of 100,
+    percentage damage in basis points, and one sentence tying them together —
+    **100 flat damage == 0.01% of max health**."""
 
-    def test_the_two_grids_are_in_lockstep(self):
-        """The property the whole change rests on: one flat step IS one per-mille
-        step, so the twin can track Damage exactly instead of rounding."""
-        self.assertEqual(formula.DAMAGE_STEP, 200)
+    def test_the_law_in_one_line(self):
+        """One flat step IS one basis point, so the twin is literally Damage/100
+        and can never drift from the weapon it belongs to."""
+        self.assertEqual(formula.DAMAGE_STEP, 100)
         self.assertEqual(
-            formula.percentage_twin(formula.DAMAGE_STEP, formula.PERMILLE_DENOMINATOR), 1)
+            formula.percentage_twin(formula.DAMAGE_STEP, formula.BASIS_POINT_DENOMINATOR), 1)
+        for damage in (100, 2500, 16000, 123_400):
+            with self.subTest(damage=damage):
+                self.assertEqual(
+                    formula.percentage_twin(damage, formula.BASIS_POINT_DENOMINATOR),
+                    damage // 100)
 
-    def test_the_design_ratio_survives_the_unit_change(self):
-        """16000 damage is 8% of max health in EITHER unit — 8 vs 80 per-mille."""
-        self.assertEqual(formula.percentage_twin(16000), 8)
+    def test_basis_points_resolve_what_whole_percent_cannot(self):
+        """15000 and 17000 damage are both "2%" in whole percent; basis points tell
+        them apart (1.50% vs 1.70%). That is the granularity that was asked for."""
+        self.assertEqual(formula.percentage_twin(15000), formula.percentage_twin(17000))
         self.assertEqual(
-            formula.percentage_twin(16000, formula.PERMILLE_DENOMINATOR), 80)
+            formula.percentage_twin(15000, formula.BASIS_POINT_DENOMINATOR), 150)
+        self.assertEqual(
+            formula.percentage_twin(17000, formula.BASIS_POINT_DENOMINATOR), 170)
 
-    def test_per_mille_resolves_what_whole_percent_cannot(self):
-        """3000 and 3400 damage are the same 2% in whole percent; per-mille tells
-        them apart (1.5% vs 1.7%). That is the granularity that was asked for."""
-        self.assertEqual(formula.percentage_twin(3000), formula.percentage_twin(3400))
-        self.assertNotEqual(
-            formula.percentage_twin(3000, formula.PERMILLE_DENOMINATOR),
-            formula.percentage_twin(3400, formula.PERMILLE_DENOMINATOR))
+    def test_versus_band_is_multiples_of_five(self):
+        """The x5 rebase of the old 1..17 band. Which 17-step window a family uses
+        (5..85 preserves today's balance, 20..100 is the generalist band) is a W13
+        profile decision — the STEP is the law."""
+        self.assertEqual(formula.PERCENTAGE_VERSUS_STEP, 5)
+        low, high = formula.PERCENTAGE_VERSUS_BOUNDS
+        self.assertEqual((low, high), (5, 100))
+        for band_start in (5, 10, 15, 20):
+            band = [band_start + i * formula.PERCENTAGE_VERSUS_STEP for i in range(17)]
+            with self.subTest(band=f"{band[0]}..{band[-1]}"):
+                self.assertLessEqual(band[-1], high)
+                self.assertGreaterEqual(band[0], low)
 
     def test_denominator_comes_from_the_node_not_a_guess(self):
         """A wrong denominator is a silent 10x error, so it is threaded explicitly."""
         self.assertEqual(formula.twin_denominator({}), 100)
-        self.assertEqual(formula.twin_denominator({"percentage_denominator": 1000}), 1000)
-        self.assertEqual(formula.twin_denominator({"percentage_denominator": "1000"}), 1000)
+        self.assertEqual(formula.twin_denominator({"percentage_denominator": 10000}), 10000)
+        self.assertEqual(formula.twin_denominator({"percentage_denominator": "10000"}), 10000)
 
     def test_a_broken_denominator_falls_back_to_whole_percent(self):
         """0 would divide by zero and a negative would invert the twin; the safe
@@ -117,18 +132,20 @@ class DistributeDamageTwinTest(unittest.TestCase):
     """The twin as `distribute_damage` writes it — the path yaml actually takes."""
 
     def test_distribute_uses_the_continuous_twin(self):
-        whs = [_wh("m", 4000), _wh("mpercentage", 1, "HealthPercentageDamage")]
-        self.assertEqual(formula.distribute_damage(16000, whs)["mpercentage"], 8)
+        whs = [_wh("m", 4000), _wh("mpercentage", 1, "AreaDamagePercentage")]
+        whs[1]["percentage_denominator"] = formula.BASIS_POINT_DENOMINATOR
+        self.assertEqual(formula.distribute_damage(16000, whs)["mpercentage"], 160)
 
     def test_distribute_writes_each_twin_in_its_own_unit(self):
-        """A per-mille node and a whole-percent node in the same weapon must each get
-        the value THEY read as 8% — the ledger carries the unit per warhead."""
+        """A basis-point node and a whole-percent node in the same weapon each get the
+        value THEY read as 1.60% — the ledger carries the unit per warhead, and the
+        coarse one can only manage 2%."""
         stock = _wh("apercentage", 1, "HealthPercentageDamage")
         fine = _wh("bpercentage", 1, "AreaDamagePercentage")
-        fine["percentage_denominator"] = 1000
+        fine["percentage_denominator"] = formula.BASIS_POINT_DENOMINATOR
         result = formula.distribute_damage(16000, [_wh("m", 4000), stock, fine])
-        self.assertEqual(result["apercentage"], 8)
-        self.assertEqual(result["bpercentage"], 80)
+        self.assertEqual(result["apercentage"], 2)
+        self.assertEqual(result["bpercentage"], 160)
 
     def test_distribute_never_writes_a_zero_twin_for_a_live_warhead(self):
         """Post-W17 a main can legally be small; the twin must survive it."""

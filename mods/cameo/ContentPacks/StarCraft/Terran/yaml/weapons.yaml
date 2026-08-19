@@ -8,7 +8,6 @@ MarineMG:
 	Range: 6105
 	Burst: 3
 	BurstDelays: 2
-	-Report:
 	ValidTargets: Ground, Water, Air
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -339,6 +338,7 @@ SCTyrAA:
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^HeavyMissile
 	Inherits@4: ^RA2MediumMissile
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 84
 	Burst: 4
 	BurstDelays: 2
@@ -384,14 +384,12 @@ SCTyrAA:
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 
 ReaperPistols:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
 	Inherits@fx: ^Effect_Sniper_Light
+	Report: ramgun2.aud
 	ValidTargets: Infantry, Vehicle, Ship, Monster, Garrisoned
 	ReloadDelay: 22
 	Range: 4375
@@ -1736,6 +1734,7 @@ ScienceVessel_EMP:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
+	Report: tesla1.aud
 	ValidTargets: Vehicle
 	InvalidTargets: lockdowned
 	Range: 7500

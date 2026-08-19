@@ -44,6 +44,7 @@ AUDITS = [
 EXTRAS = [
     ("createeffect_image", ROOT / "tools" / "audit_createeffect_image.py"),
     ("ce_image_usage", ROOT / "tools" / "audit_ce_image_usage.py"),
+    ("effect_audio", ROOT / "tools" / "audit" / "check_effect_audio.py"),
 ]
 
 

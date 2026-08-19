@@ -873,6 +873,7 @@ yuri_boomersubmarine:
 		Filename: yuri_boomersubmarine_icon.shp
 
 yuri_floatingdisk:
+	Inherits: ^RA2DiskMuzzle
 	Defaults:
 		Filename: yuri_floatingdisk_ra2_disk.shp
 	idle:
@@ -881,8 +882,7 @@ yuri_floatingdisk:
 	move:
 		Length: 32
 		Tick: 25
-	muzzle:
-		Filename: diskray.shp
+	ra2_diskray:
 		Scale: 0.9
 		Offset: 0,35
 		Length: 4

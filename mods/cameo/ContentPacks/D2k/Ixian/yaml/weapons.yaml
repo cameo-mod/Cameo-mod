@@ -550,6 +550,7 @@ IxianDisable_EMP:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
+	Report: tesla1.aud
 	ReloadDelay: 4
 	Range: 20000
 	ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
@@ -580,6 +581,7 @@ d2k_munitions_explosion:
 	Inherits@wh: ^Warhead_Magic_Heavy
 	Inherits@proj: ^Projectile_Magic_Heavy
 	Inherits@fx: ^Effect_Magic_Heavy
+	Report: 2100rotlsr.wav
 	Warhead@Magic_Heavy:
 		Delay: 20
 		Damage: 40000
@@ -698,7 +700,6 @@ RaiderGuns:
 	Burst: 4
 	BurstDelays: 2
 	Range: 6400
-	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Light:
@@ -720,6 +721,7 @@ RaiderGuns_upgrade:
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	Inherits: RaiderGuns
 	Inherits@2: ^HeavyMachineGunProjectile
+	Report: tnkfire6.aud
 	Projectile: Bullet
 		Inaccuracy: 120
 	ValidTargets: Ground, Water, Air
@@ -751,7 +753,6 @@ HMG_turret:
 	Burst: 4
 	BurstDelays: 2
 	Range: 7394
-	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water
 	Warhead@Bullet_Light:
@@ -773,6 +774,7 @@ HMG_turret_upgrade:
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	Inherits: HMG_turret
 	Inherits@2: ^HeavyMachineGunProjectile
+	Report: tnkfire6.aud
 	ReloadDelay: 33
 	Burst: 4
 	BurstDelays: 3
@@ -1005,6 +1007,7 @@ D2K_ShockGunInf:
 	Inherits@wh: ^Warhead_Storm_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	ReloadDelay: 45
 	Range: 5818
 	Projectile: Railgun
@@ -1026,6 +1029,7 @@ D2K_StormGunInf:
 	Inherits@wh: ^Warhead_Storm_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	ReloadDelay: 66
 	Range: 6275
 	Projectile: Railgun
@@ -1056,6 +1060,7 @@ D2K_StormGunCymek:
 	Inherits@wh: ^Warhead_Storm_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	Range: 6787
 	ReloadDelay: 66
 	Burst: 2
@@ -1087,6 +1092,7 @@ D2K_RocketsCymek:
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^HeavyMissile
 	Inherits@4: ^RA2MediumMissile
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 60
 	Burst: 4
 	BurstDelays: 2
@@ -1132,9 +1138,6 @@ D2K_RocketsCymek:
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 
 d2k_air_drone_guns:
 	Inherits: ^D2KMissile
@@ -1175,6 +1178,7 @@ d2k_air_drone_guns_upgrade:
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	Inherits: d2k_air_drone_guns
 	Inherits@2: ^HeavyMachineGunProjectile
+	Report: tnkfire6.aud
 	ValidTargets: Ground, Water, Air
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -1200,6 +1204,7 @@ d2k_laser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
+	Report: obelray1.aud
 	ReloadDelay: 25
 	Range: 7500
 	Burst: 5
@@ -1325,129 +1330,63 @@ d2k_farasha_aa:
 		ValidTargets: Air
 
 farasha_drone_ixian:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: d2k_laser
+	Inherits@wh: ^Warhead_Inferno_Light
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 25
 	Range: 2500
 	Report: d2k_alfayrus.wav
 	ValidTargets: Ground, Water, Air
-	Warhead@LightFlameWeapon: SpreadDamage
+	Projectile: LaserZap
+		Width: 50
+		ZOffset: 2047
+		Color: FF0000
+	Warhead@Inferno_Light:
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 6000
+	Warhead@Inferno_Light_Percentage:
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Air
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@Laser_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
-		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	-Warhead@PhysicalStateLightFlameWeapon:
-	-Warhead@PhysicalStateLightFlameWeaponFriendlyFire:
+		Damage: 3
 
 d2k_basq:
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^LightFlameWeapon
-	Inherits@5: ^MediumChemicalWeapon
-	Inherits@6: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Light
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Light
 	ReloadDelay: 25
 	Range: 3333
 	Report: zhyfir00.aud
 	TargetActorCenter: true
 	ValidTargets: Ground, Water
 	Projectile: Bullet
+		-Image:
+		ContrailStartColor: 00FF4400
 		Speed: 3333
 		Inaccuracy: 333
-		ContrailStartColor: 00FF4400
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@Flak_Light:
 		ValidTargets: Ground, Water
-		Damage: 8000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 32000
+	Warhead@Flak_Light_Percentage:
 		ValidTargets: Ground, Water
-		Damage: 4000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 4
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 8000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 4000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 4
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 8000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 4
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water
-		Damage: 8000
-	Warhead@CannonHE_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 4
+		Damage: 16
 	Warhead@Effect: CreateEffect
 		Explosions: sczhsplash
+		ImpactSounds: EXPLSML4.WAV
+		ExplosionPalette: effect75alpha
 		ImpactActors: false
-		ValidTargets: Ground, Air
+		ValidTargets: Ground
 
 d2k_basq_AA:
 	Inherits: d2k_basq
 	ValidTargets: Air
 	Range: 6666
-	Warhead@LightFlameWeapon: SpreadDamage
+	-Warhead@EffectAir:
+	Warhead@Flak_Light:
 		ValidTargets: Air
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+	Warhead@Flak_Light_Percentage:
 		ValidTargets: Air
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Air
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		ValidTargets: Air
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Air
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Air
-	Warhead@CannonHE_Heavy: AreaDamage
-		ValidTargets: Air
-	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Effect: CreateEffect
 		ValidTargets: Air
 
 # d2k_guild_teleport:

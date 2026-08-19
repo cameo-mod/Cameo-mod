@@ -95,9 +95,11 @@
 	GrantConditionOnPrerequisite@forgotten_upgrade_junkarmor:
 		Condition: forgotten_upgrade_junkarmor
 		Prerequisites: forgotten_upgrade_junkarmor
-	DamageMultiplier@forgotten_upgrade_junkarmor:
+	# Salvaged plate — the GENERIC plating, exactly as Yuri's scrap armor. Flat against
+	# everything, replaces the class armor, no counter-play to express. Flat 85 retired.
+	Armor@ARMOR:
+		Type: ARMOR
 		RequiresCondition: forgotten_upgrade_junkarmor
-		Modifier: 85
 	SpeedMultiplier@forgotten_upgrade_junkarmor:
 		RequiresCondition: forgotten_upgrade_junkarmor
 		Modifier: 115

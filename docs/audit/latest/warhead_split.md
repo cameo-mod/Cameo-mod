@@ -1,4 +1,4 @@
-# Warhead-split guard (multi-warhead over-damage)
+﻿# Warhead-split guard (multi-warhead over-damage)
 
 
 ## FAIL 1 — broadcast fingerprint (4)
@@ -18,7 +18,60 @@ Every SpreadDamage warhead (mains + sides) shares one identical value — the 20
 None. ✅
 
 
-## Review — high uniform stacks (informational, 250)
+## FAIL 3 — every MAIN identical, on a ratchet (982 vs baseline 982)
+
+This is the fingerprint FAIL 1 *describes* but cannot catch: FAIL 1 also requires a SIDE warhead, which is why it reports 4 where the fingerprint is on 982.
+
+_at or below baseline_ — pre-existing **W24** debt (982 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
+
+| weapon | mains | per_warhead | total |
+|---|---|---|---|
+| 105mmThermobaric | 2 | 6000 | 12000 |
+| 110mm_Gun | 3 | 10000 | 30000 |
+| 120mm_cobra | 4 | 30000 | 120000 |
+| 120mm_cobra_deploy | 4 | 30000 | 120000 |
+| 120mm_python | 4 | 30000 | 120000 |
+| 120mm_python_deploy | 4 | 30000 | 120000 |
+| 120mm_td | 4 | 14000 | 56000 |
+| 12MissilesSpawnerScud | 4 | 24000 | 96000 |
+| 155mm | 3 | 10000 | 30000 |
+| 155mmBastion | 3 | 10000 | 30000 |
+| 155mmBastionCryo | 3 | 10000 | 30000 |
+| 155mmCryo | 3 | 10000 | 30000 |
+| 227mm | 4 | 2000 | 8000 |
+| 227mmAMT | 4 | 2000 | 8000 |
+| 25mm | 6 | 2000 | 12000 |
+| 25mmWaveforce | 7 | 2000 | 14000 |
+| 8Inch | 2 | 40000 | 80000 |
+| ACV_Machinegun | 2 | 2000 | 4000 |
+| APCGun | 2 | 2000 | 4000 |
+| APCGunAllies | 2 | 2000 | 4000 |
+| APCGunAllies_AA | 2 | 2000 | 4000 |
+| APCGun_AA | 2 | 2000 | 4000 |
+| APTusk | 4 | 4000 | 16000 |
+| APTuskCryo | 4 | 4000 | 16000 |
+| ASDFGun | 2 | 2000 | 4000 |
+| ASDFGun2 | 3 | 2000 | 6000 |
+| ASDFKamikazeExplosion | 2 | 10000 | 20000 |
+| AlliedTankDestroyerCannon | 2 | 12000 | 24000 |
+| AphidCryo_AA | 2 | 8000 | 16000 |
+| Aphid_AA | 2 | 8000 | 16000 |
+| ArbiterCannon | 4 | 10000 | 40000 |
+| ArcherArtilleryShell | 5 | 14000 | 70000 |
+| ArmoredCarMG | 8 | 2000 | 16000 |
+| ArtilleryExplode | 3 | 10000 | 30000 |
+| ArtilleryShell | 2 | 16000 | 32000 |
+| ArtilleryShellUpgrade | 6 | 6000 | 36000 |
+| AsianChaosMine | 2 | 125000 | 250000 |
+| AsianChemical | 6 | 4000 | 24000 |
+| AsianChemicalBombs | 2 | 2000 | 4000 |
+| AsianChemical_elite | 6 | 4000 | 24000 |
+
+
+_... and 942 more._
+
+
+## Review — high uniform stacks (informational, 246)
 
 Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (not flattening residue).
 

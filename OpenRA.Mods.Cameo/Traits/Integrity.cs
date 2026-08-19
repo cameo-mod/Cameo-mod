@@ -17,44 +17,56 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits
 {
-	[Desc("Grants a shield with its own health pool. Main health pool is unaffected by damage until the shield is broken.")]
+	[Desc("An ELECTRONICS pool — an actor's resistance to electrical / EMP attack. NOT a shield.",
+		"Unlike a shield it is SELECTIVE: it only absorbs the damage types listed in",
+		"AffectedByDamageTypes (Cameo's defaults use Tesla), and every other damage type goes",
+		"straight to health as if this trait were not there. It pairs with the EMP condition bar",
+		"and is what a warhead's IntegrityScale drains.",
+		"⚠ Do not confuse this with OpenRA.Mods.AS's `Shielded` trait, which IS the general",
+		"protective shield layer that absorbs everything. The two are separate systems: an actor",
+		"can carry both, and roughly twice as many actors use Shielded as use this.",
+		"(This file's descriptions were copied verbatim from Shielded and called this a shield",
+		"for a long time — corrected 2026-08-12.)")]
 	public class IntegrityInfo : PausableConditionalTraitInfo
 	{
-		[Desc("The strength of the shield (amount of damage it will absorb).")]
+		[Desc("Electronics pool as a FLAT amount of damage absorbed. Added to MaxPercentageStrength.")]
 		public readonly int MaxStrength = 0;
 
-		[Desc("The strength of the shield (amount of damage it will absorb) in percentage of health.")]
+		[Desc("Electronics pool as a PERCENTAGE of the actor's max health. Added to MaxStrength.")]
 		public readonly int MaxPercentageStrength = 100;
 
-		[Desc("Strength of the shield when the trait is enabled.")]
+		[Desc("Flat pool the actor starts with when the trait is enabled.")]
 		public readonly int InitialStrength = 0;
 
-		[Desc("The strength of the shield (amount of damage it will absorb).")]
+		[Desc("Starting pool as a PERCENTAGE of the maximum, when the trait is enabled.")]
 		public readonly int InitialPercentageStrength = 100;
 
-		[Desc("Delay in ticks before shield regenerate for the first time after trait is enabled.")]
+		[Desc("Delay in ticks before the pool recharges for the first time after the trait is enabled.")]
 		public readonly int InitialRegenDelay = 0;
 
-		[Desc("Delay in ticks after absorbing damage before the shield will regenerate.")]
+		[Desc("Delay in ticks after absorbing damage before the pool starts recharging again.")]
 		public readonly int DamageRegenDelay = 0;
 
-		[Desc("Amount to recharge at each interval.")]
+		[Desc("FLAT amount recharged each interval. Applied IN ADDITION to PercentageRegenAmount,",
+			"not instead of it — set one of the two to 0 unless both are wanted.")]
 		public readonly int RegenAmount = 0;
 
-		[Desc("Amount to recharge at each interval.")]
+		[Desc("Percentage OF THE MAXIMUM pool recharged each interval. Applied IN ADDITION to",
+			"RegenAmount (see above).")]
 		public readonly int PercentageRegenAmount = 1;
 
-		[Desc("Number of ticks between recharging.")]
+		[Desc("Number of ticks between recharge steps.")]
 		public readonly int RegenInterval = 25;
 
-		[Desc("Damage types that affect this shield.")]
+		[Desc("The ONLY damage types this pool absorbs. Everything else bypasses it entirely and",
+			"hits health directly — this is what makes it electronics rather than a shield.")]
 		public readonly BitSet<DamageType> AffectedByDamageTypes = default;
 
 		[GrantedConditionReference]
-		[Desc("Condition to grant when shields are active.")]
+		[Desc("Condition to grant while the electronics pool still has strength left.")]
 		public readonly string ActiveCondition = null;
 
-		[Desc("Hides selection bar when shield is at max strength.")]
+		[Desc("Hides the selection bar while the pool is at full strength.")]
 		public readonly bool HideBarWhenFull = true;
 
 		public readonly bool ShowSelectionBar = true;

@@ -174,6 +174,96 @@ ts_nod_laserfence:
 		Filename: ts_nod_laserfence_icon.shp
 		Offset: 0, 0
 
+
+ts_nod_cruiser:
+	Defaults:
+		Filename: tsnod_cruiser.png
+	idle:
+		Facings: 64
+		Scale: 0.8
+	turret:
+		Filename: tsnod_cruiser_turret.png
+		Facings: 64
+		Scale: 0.55
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	icon:
+		Filename: ts_nod_cruiser_icon.png
+ts_nod_rayboat:
+	Defaults:
+		Filename: tsnod_rayboat.png
+	idle:
+		Facings: 64
+		Scale: 0.8
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	icon:
+		Filename: ts_nod_rayboat_icon.png
+
+ts_nod_submarine:
+	Defaults:
+		Filename: tsnod_submarine.png
+	idle:
+		Facings: 64
+		Scale: 0.8
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	icon:
+		Filename: ts_nod_submarine_icon.png
+
+
+ts_nod_hover:
+	Defaults:
+		Filename: tsnod_hover.png
+	idle:
+		Facings: 64
+		Scale: 0.8
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	icon:
+		Filename: ts_nod_hover_icon.png
+ts_nod_navalyard:
+	Defaults:
+		Offset: 0,-12
+	idle:
+		Filename: tsnod_navalyard.png
+		Start: 33
+	damaged-idle:
+		Filename: tsnod_navalyard.png
+		Start: 33
+	idle-waves:
+		Filename: ra2_ngyard_c.shp
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	damaged-idle-waves:
+		Filename: ra2_ngyard_c.shp
+		Start: 30
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	repair:
+		Filename: tsnod_navalyard.png
+		Length: 15
+		Start: 33
+	damaged-repair:
+		Filename: tsnod_navalyard.png
+		Length: 15
+		Start: 33
+	make:
+		Filename: tsnod_navalyard.png
+		Length: 32
+	dead:
+		Filename: tsnod_navalyard.png
+		Start: 33
+	icon:
+		Filename: ts_nod_navalyard_icon.png
+		Offset: 0,0
+
 # ts_nod_laserfence_segment:
 # 	Defaults: tsntfence
 # 	idle:

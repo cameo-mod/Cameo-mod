@@ -1222,3 +1222,111 @@ ts_gdi_upgrade_seekercontrol:
 	Inherits: ts_gdi_upgradecenter
 	icon:
 		Filename: tsseekcontrolicon.shp
+
+ts_gdi_navalyard:
+	Defaults:
+		Offset: 0,-12
+	idle:
+		Filename: tsgdi_navalyard.png
+		Start: 33
+	damaged-idle:
+		Filename: tsgdi_navalyard.png
+		Start: 33
+	idle-waves:
+		Filename: ra2_ngyard_c.shp
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	damaged-idle-waves:
+		Filename: ra2_ngyard_c.shp
+		Start: 30
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	repair:
+		Filename: tsgdi_navalyard.png
+		Length: 15
+		Start: 33
+	damaged-repair:
+		Filename: tsgdi_navalyard.png
+		Length: 15
+		Start: 33
+	make:
+		Filename: tsgdi_navalyard.png
+		Length: 32
+	dead:
+		Filename: tsgdi_navalyard.png
+		Start: 33
+	icon:
+		Filename: ts_gdi_navalyard_icon.png
+		Offset: 0,0
+
+ts_gdi_cruiser:
+	Defaults:
+		Filename: tsgdi_cruiser.png
+	idle:
+		Facings: 64
+		Scale: 0.6
+	turret:
+		Filename: tsnod_cruiser_turret.png
+		Facings: 64
+		Scale: 0.5
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	icon:
+		Filename: ts_gdi_cruiser_icon.png
+
+
+ts_gdi_carrier:
+	Defaults:
+		Filename: tsgdi_carrier.png
+	idle:
+		Facings: 64
+		Scale: 0.6
+	turret:
+		Filename: tsnod_cruiser_turret.png
+		Facings: 64
+		Scale: 0.5
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	icon:
+		Filename: ts_gdi_carrier_icon.png
+
+ts_gdi_strike_orca:
+	Defaults:
+		Filename: tsgdi_strike_orca.png
+	idle:
+		Facings: 64
+		Scale: 0.8
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	icon:
+		Filename: ts_gdi_strike_orca_icon.png
+
+ts_gdi_destroyer:
+	Defaults:
+		Filename: tsgdi_destroyer.png
+	idle:
+		Facings: 64
+		Scale: 0.8
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	icon:
+		Filename: ts_gdi_destroyer_icon.png
+ts_gdi_hover:
+	Defaults:
+		Filename: tsgdi_hover.png
+	idle:
+		Facings: 64
+		Scale: 0.8
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	icon:
+		Filename: ts_gdi_hover_icon.png
+
+

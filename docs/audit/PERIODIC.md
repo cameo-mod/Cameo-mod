@@ -107,3 +107,26 @@ Cadence 14 d · `python tools/audit/audit_security.py`
    curl -sSL -o /tmp/p.zip <url> && sha1sum /tmp/p.zip
    ```
 4. Paste the results into the evidence file and stamp the run.
+
+## armor-exposure
+
+Cadence 30 d · `python tools/balance/armor_exposure.py`
+
+Exposure is not a fixed property of an armor type — it is a property of the
+WEAPON ROSTER, so it moves every time a weapon is added, retuned or repointed
+onto a different `^Warhead_*` family. A number derived from it (the effective-HP
+factor in the price formula) is therefore stale the moment the roster changes,
+and stale in a direction nobody notices, because nothing else in the pipeline
+reads `Versus` in aggregate.
+
+1. Run the script; write the output to `docs/audit/latest/armor_exposure.md`.
+2. Compare the `EXPOSURE` column with the previous run. A shift of more than
+   ~10% on any armor means a weapon change moved the balance of the whole
+   roster against that armor — worth understanding before it is priced on.
+3. Sanity-check the two factors separately. **coverage** should only move when
+   weapons gain or lose `ValidTargets` (the air classes sit near 45%, ground
+   near 80%); **intensity** moves with every `Versus` edit. If coverage moved
+   and no `ValidTargets` was touched, something is resolving differently.
+4. Re-run it immediately after the W13 warhead rebuild lands, and again before
+   any price factor is derived from it — the current numbers describe the
+   profiles W13 replaces.

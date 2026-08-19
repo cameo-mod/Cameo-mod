@@ -5,7 +5,7 @@
 AsianHowitzerSplash:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@fx: ^Effect_Twlt_VeryLarge_RA2
 	Projectile: InstantExplode
 	Warhead@Concussion_Medium:
 		Damage: 20000
@@ -15,16 +15,11 @@ AsianHowitzerSplash:
 		Damage: 20000
 	Warhead@Demolition_Heavy_Percentage:
 		Damage: 10
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_verylarge_twlt
-		ExplosionPalette: ra2effect
-		ImpactSounds: expnew09.wav
-		ValidTargets: Ground, Water, Air
 
 AsianFlameFragment:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
-	Inherits@fx: ^Effect_Flame_Light
+	Inherits@fx: ^Effect_Init_Fire_RA2
 	ReloadDelay: 20
 	Range: 2000
 	Warhead@Flame_Light:
@@ -36,11 +31,6 @@ AsianFlameFragment:
 		Amount: 1
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_initfire
-		ExplosionPalette: ra2effect
-		-ImpactSounds:
-		ValidTargets: Ground, Water
 
 AsianFlameFragment2:
 	Inherits: AsianFlameFragment
@@ -79,7 +69,7 @@ AsianOilBombFragments:
 AsianFlamerTurret:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
-	Inherits@fx: ^Effect_Flame_Light
+	Inherits@fx: ^Effect_Init_Fire_RA2
 	ValidTargets: Ground, Water
 	ReloadDelay: 30
 	Burst: 6
@@ -95,11 +85,6 @@ AsianFlamerTurret:
 		Damage: 4000
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_initfire
-		ExplosionPalette: ra2effect
-		-ImpactSounds:
-		ValidTargets: Ground, Water
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
 		Amount: 2
@@ -142,6 +127,7 @@ AsianChaosSuperweapon:
 AsianSmallTorpedo:
 	Inherits: ^RA2Grenade
 	Inherits@2: ^RA2HeavyMissile
+	Inherits@fx: ^Effect_Watersplash_Large_RA2
 	ReloadDelay: 120
 	Range: 12000
 	Burst: 2
@@ -180,10 +166,6 @@ AsianSmallTorpedo:
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir:
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
 
 ^SteelSmallArms:
 	Inherits: ^RA2SmallArms
@@ -344,6 +326,7 @@ SteelIonCannonBeam2:
 
 SteelIonCannonDamage:
 	Inherits: IonCannon
+	Report: tesla1.aud
 	AirThreshold: 8c0
 	Warhead@3Smu_area: LeaveSmudge
 		SmudgeType: Scorch
@@ -353,6 +336,7 @@ SteelIonCannonDamage:
 
 SteelHoverMissile_elite:
 	Inherits: SteelHoverMissile
+	Inherits@fx: ^Effect_Grey_Explosion_Medium_RA2
 	Range: 7000
 	Burst: 4
 	Projectile: Missile
@@ -366,9 +350,6 @@ SteelHoverMissile_elite:
 		Damage: 8000
 	Warhead@MissileAP_Light:
 		Damage: 8000
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_grey_explosion
-		ImpactSounds: gexp15a.wav
 
 SteelTwisterMissiles:
 	Inherits: ^Grenade
@@ -850,8 +831,6 @@ NaxZombieSupportWeaponTanks:
 NaxTorpTube:
 	Inherits: RA2TorpTube
 	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ExplosionPalette: ra2effect
 		ImpactSounds: nax_submissileexp.wav
 
 Nax120mmCorrosion:
@@ -865,10 +844,12 @@ Nax120mmCorrosion_elite:
 NaxiHetzerDestroyerCorrosion:
 	Inherits: NaxiHetzerDestroyer
 	Inherits@Corrosion: ^NaxOxidationShells
+	Report: cannon1.aud
 
 NaxiJadgDestroyerCorrosion:
 	Inherits: NaxiJadgDestroyer
 	Inherits@Corrosion: ^NaxOxidationShells
+	Report: cannon1.aud
 
 NaxiAntiTankCannonCorrosion:
 	Inherits: NaxiAntiTankCannon
@@ -996,6 +977,7 @@ NaxiMeteor:
 	Inherits@3: ^ShrapnelWeapon
 	Inherits@4: ^HeavyBomb
 	Inherits@5: ^NuclearWarhead
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	Report: vaegatta.wav, vaegattb.wav
 	Range: 10000
 	Projectile: NukeLaunch
@@ -1066,9 +1048,6 @@ NaxiMeteor:
 		Damage: 5
 		Spread: 1000
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 		GlowScale: 9.0
 		GlowFadeFrames: 300
 		GlowFadeInFrames: 12
@@ -1082,7 +1061,7 @@ NaxiMeteor:
 MeteorFlameFragment:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
-	Inherits@fx: ^Effect_Flame_Light
+	Inherits@fx: ^Effect_Init_Fire_RA2
 	ReloadDelay: 20
 	Range: 2000
 	Warhead@Flame_Light:
@@ -1095,15 +1074,10 @@ MeteorFlameFragment:
 		Range: 12
 		FallRate: 100
 		ValidTargets: Ground, Water, Air
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_initfire
-		ExplosionPalette: ra2effect
-		-ImpactSounds:
-		ValidTargets: Ground, Water
 
 NaxisBlackBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@fx: ^Effect_Twlt_Large_RA2
 	Range: 2000
 	ReloadDelay: 100
 	Projectile: InstantExplode
@@ -1117,10 +1091,6 @@ NaxisBlackBomb:
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 50
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-	Warhead@2Eff: CreateEffect
-		Explosions: ra2_large_twlt
-		ExplosionPalette: ra2effect
-		ImpactSounds: expnew09.wav
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: NaxisBlackBombSmaller
 		Amount: 3
@@ -1131,6 +1101,7 @@ NaxisBlackBombSmaller:
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^RA2MediumCannon
+	Report: tnkfire6.aud
 	ReloadDelay: 141
 	Range: 6666
 	MinRange: 1335
@@ -1238,10 +1209,9 @@ SyndicateFireballLauncher:
 	Warhead@Flame_Heavy_Percentage:
 		Damage: 1
 RA2RTruckRocket:
-	Inherits: ^RA2Grenade
-	Inherits@2: ^LightFlameWeapon
-	Inherits@3: ^ShrapnelWeapon
-	Inherits@4: ^RA2MediumMissile
+	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 108
 	Burst: 8
 	BurstDelays: 3
@@ -1249,56 +1219,20 @@ RA2RTruckRocket:
 	MinRange: 1555
 	Report: vintatta.wav
 	ValidTargets: Ground, Water
-	Projectile: Bullet
-		Speed: 333
-		Inaccuracy: 777
-		Image: d2k_missile2
-		Palette: d2keffect
-		TrailImage: large_trail
-		LaunchAngle: 77
-	Warhead@Demolition_Light:
+	Warhead@MissileHE_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+		Damage: 8000
+	Warhead@MissileHE_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@LightFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
-		ValidTargets: Ground, Water, Air
+		Damage: 4
 
 LatinBuggyRocket:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@3: ^SteelLightMissile
 	Inherits@4: ^RA2MediumMissile
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 55
 	Range: 6000
 	Report: vintatta.wav
@@ -1341,10 +1275,6 @@ LatinBuggyRocket:
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 
 LatinBuggyRocket_elite:
 	Inherits: LatinBuggyRocket
@@ -1430,6 +1360,7 @@ LatinBuggyRocket_elite:
 	Inherits@4: ^Effect_Flame_Medium
 	Inherits@3: ^RA2Grenade
 	Inherits@4: ^RA2HeavyMissile
+	Inherits@fx2: ^Effect_Demolition_Heavy
 	Report: vaegatta.wav, vaegattb.wav
 	Range: 10000
 	Projectile: NukeLaunch

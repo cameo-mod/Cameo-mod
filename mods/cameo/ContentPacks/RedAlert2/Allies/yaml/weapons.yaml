@@ -18,6 +18,10 @@ RA2PatriotThunderboltMissile:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_AA
 	Inherits@fx: ^Effect_MissileAP_Heavy
+	Warhead@Effect:
+		ImpactSounds: xplos.aud
+	Warhead@EffectAir:
+		ImpactSounds: xplos.aud
 	Report: vifvatta.wav
 	ReloadDelay: 30
 	Range: 14150
@@ -513,6 +517,7 @@ RA2GrandCannonWeapon:
 	Inherits@6: ^ShrapnelWeapon
 	Inherits@7: ^LightChemicalWeapon
 	Inherits@8: ^RA2Grenade
+	Inherits@fx: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 200
 	Report: bgraatta.wav
 	Range: 11800
@@ -565,10 +570,6 @@ RA2GrandCannonWeapon:
 		Explosions: large_splash
 		ImpactSounds: gexpwasa.wav
 		ValidTargets: Water, Underwater
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
 
 RA2MirageGun_elite:
 	Inherits: RA2MirageGun
@@ -582,6 +583,7 @@ RA2HeavyMirageGun:
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumChemicalWeapon
 	Inherits@4: ^RA2TankDestroyerCannon
+	Inherits@fx: ^Effect_Iron_Fx_RA2
 	ReloadDelay: 51
 	Range: 6112
 	Report: vmiratta.wav
@@ -616,9 +618,6 @@ RA2HeavyMirageGun:
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_iron_fx
-		ImpactSounds:
 
 RA2HeavyMirageGun_elite:
 	Inherits: RA2HeavyMirageGun
@@ -842,4 +841,3 @@ ra2roktgun:
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 	-Warhead@EffectAir:
-

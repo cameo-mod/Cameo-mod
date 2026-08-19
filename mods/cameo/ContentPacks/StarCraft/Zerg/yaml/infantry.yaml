@@ -112,6 +112,7 @@ zerg_hydralisk:
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Inherits@weapon: ^ZergMissileWeaponUpgrades
 	Inherits@range: ^GroovedSpinesUpgrade
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Tooltip:
 		Name: Hydralisk
 	Valued:
@@ -532,6 +533,7 @@ zerg_ultralisk:
 	Inherits@ZergBurrow: ^ZergBurrow
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Tooltip:
 		Name: Ultralisk
 	Valued:
@@ -640,6 +642,7 @@ zerg_defiler:
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Inherits@weapon: ^ZergMissileWeaponUpgrades
 	Inherits@bot: ^BotAutoDeployTimedAbility
+	Inherits@VehicleTurnRateInfantry: ^VehicleTurnRateInfantry
 	Tooltip:
 		Name: Defiler
 	Valued:

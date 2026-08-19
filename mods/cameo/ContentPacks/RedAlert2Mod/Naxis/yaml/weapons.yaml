@@ -429,6 +429,7 @@ NaxiSniper:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
 	Inherits@fx: ^Effect_Sniper_Light
+	Report: ramgun2.aud
 	ReloadDelay: 120
 	Range: 7777
 	Warhead@Sniper_Light:
@@ -440,6 +441,7 @@ NaxiSniper:
 
 NaxiSniper_elite:
 	Inherits: NaxiSniper
+	Report: ramgun2.aud
 	Range: 8888
 	Burst: 2
 	BurstDelays: 3
@@ -451,6 +453,7 @@ NaxiShrek:
 	Inherits@4: ^TankDestroyerCannon
 	Inherits@5: ^MediumChemicalWeapon
 	Inherits@6: ^RA2MediumMissile
+	Report: bazook1.aud
 	ReloadDelay: 124
 	Range: 6805
 	ValidTargets: Ground, Water
@@ -513,6 +516,7 @@ NaxiShrek:
 
 NaxiShrek_elite:
 	Inherits: NaxiShrek
+	Report: bazook1.aud
 	Range: 7805
 	Burst: 2
 	BurstDelays: 3
@@ -532,6 +536,7 @@ NaxiShrekCons:
 	Inherits@4: ^TankDestroyerCannon
 	Inherits@5: ^MediumChemicalWeapon
 	Inherits@6: ^RA2MediumMissile
+	Report: bazook1.aud
 	ReloadDelay: 135
 	Range: 5512
 	ValidTargets: Ground, Water
@@ -594,6 +599,7 @@ NaxiShrekCons:
 
 NaxiShrekCons_elite:
 	Inherits: NaxiShrekCons
+	Report: bazook1.aud
 	Range: 6512
 	Burst: 2
 	BurstDelays: 3
@@ -611,6 +617,7 @@ NaxiHetzerDestroyer:
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
 	Inherits@4: ^RA2TankDestroyerCannon
+	Report: cannon1.aud
 	ReloadDelay: 80
 	Range: 7132
 	Projectile: Bullet
@@ -627,6 +634,7 @@ NaxiHetzerDestroyer:
 NaxiHetzerDestroyer_elite:
 	Inherits: NaxiHetzerDestroyer
 	Inherits@Elite: ^RA2EliteEffects
+	Report: cannon1.aud
 	Range: 6000
 	Burst: 2
 	BurstDelays: 3
@@ -638,6 +646,7 @@ NaxiJadgDestroyer:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@5: ^RA2TankDestroyerCannon
+	Report: cannon1.aud
 	ReloadDelay: 90
 	Range: 7396
 	Projectile: Bullet
@@ -658,6 +667,7 @@ NaxiJadgDestroyer:
 NaxiJadgDestroyer_elite:
 	Inherits: NaxiJadgDestroyer
 	Inherits@Elite: ^RA2EliteEffects
+	Report: cannon1.aud
 	Range: 8396
 	Burst: 2
 	BurstDelays: 3
@@ -870,8 +880,6 @@ NaxQuadCannon_AA:
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
 NaxQuadCannon_AA_elite:
@@ -1065,9 +1073,10 @@ NaxiInterceptorGun:
 
 NaxShoeRocket:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@2: ^RA2Grenade
 	Inherits@3: ^RA2MediumMissile
+	Inherits@4: ^Effect_Terrorist_Explosion_RA2
+	-Warhead@Effect1:
 	Report: vaegatta.wav, vaegattb.wav
 	ReloadDelay: 250
 	Range: 12000
@@ -1087,8 +1096,6 @@ NaxShoeRocket:
 		TrailInterval: 1
 		Inaccuracy: 15000
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_terrorist_explosion
-		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
@@ -1251,4 +1258,3 @@ NaxisSarubianTarget:
 	MinRange: 1560
 	Projectile: InstantHit
 		Inaccuracy: 1000
-

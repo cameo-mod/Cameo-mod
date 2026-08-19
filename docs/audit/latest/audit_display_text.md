@@ -1,20 +1,16 @@
 # audit_display_text — internal ids leaked into UI prose
 
-Active findings: **1**; dormant findings: **1**; technical references: **1**; comments for inspection: **0**
+Active findings: **0**; dormant findings: **0**; technical references: **1**; comments for inspection: **0**
 
 
-## D1 — active display text containing actor ids (1) — BLOCKING
+## D1 — active display text containing actor ids (0) — BLOCKING
 
-| location | field | internal id | value |
-|---|---|---|---|
-| mods/cameo/fluent/rules/missing_keys_en.ftl:54 | FluentValue | ra1_soviets_attackdog | ra1_soviets_attackdog |
+_none found_
 
 
-## D2 — dormant display text containing actor ids (1)
+## D2 — dormant display text containing actor ids (0)
 
-| location | field | internal id | value |
-|---|---|---|---|
-| mods/cameo/rules/classicdoom.yaml:867 | Name | ra1_soviets_submarine | ra1_soviets_submarine |
+_none found_
 
 
 ## D0 — technical references in display-named fields (1) — INFORMATIONAL

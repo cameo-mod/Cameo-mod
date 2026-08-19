@@ -3,6 +3,7 @@ TS70mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
+	Report: tnkfire6.aud
 	ReloadDelay: 24
 	Range: 5566
 	Warhead@CannonHE_Medium:
@@ -47,6 +48,7 @@ TS70mmTur:
 	Inherits@5: ^Warhead_CannonAP_Light
 	Inherits@6: ^Projectile_Shell_Light
 	Inherits@7: ^Effect_CannonAP_Light
+	Report: cannon1.aud
 	ReloadDelay: 10
 	Range: 6574
 	Projectile: Bullet
@@ -163,6 +165,7 @@ TSScoopDual:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
+	Report: tnkfire6.aud
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 2
@@ -270,6 +273,7 @@ TSHighVelocity:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
+	Report: cannon1.aud
 	ReloadDelay: 90
 	Range: 7701
 	Projectile: Bullet
@@ -313,6 +317,7 @@ TSHighVelocity2:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
+	Report: cannon1.aud
 	ReloadDelay: 55
 	Range: 8207
 	Projectile: Bullet
@@ -356,6 +361,7 @@ TSHighVelocityTur:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_CannonAP_Light
+	Report: cannon1.aud
 	ReloadDelay: 30
 	Range: 9483
 	Projectile: Bullet
@@ -475,6 +481,7 @@ TSInfantryMortarChem:
 	Inherits@wh: ^Warhead_Chemical_Medium
 	Inherits@proj: ^Projectile_Chem_Medium
 	Inherits@fx: ^Effect_Chem_Medium
+	Report: flamer2.aud
 	Range: 10830
 	ReloadDelay: 88
 	Warhead@Chemical_Medium:
@@ -1623,6 +1630,7 @@ TSChemspray:
 	Inherits@wh: ^Warhead_Chemical_Light
 	Inherits@proj: ^Projectile_Chem_Light
 	Inherits@fx: ^Effect_Chem_Light
+	Report: flamer2.aud
 	ReloadDelay: 55
 	Range: 3183
 	Warhead@Chemical_Light:
@@ -1668,6 +1676,7 @@ TSVisceroidSpray:
 	Inherits@wh: ^Warhead_Chemical_Light
 	Inherits@proj: ^Projectile_Chem_Light
 	Inherits@fx: ^Effect_Chem_Light
+	Report: flamer2.aud
 	ReloadDelay: 25
 	Range: 1618
 	Warhead@Chemical_Light:
@@ -1944,6 +1953,7 @@ TSMutApcCannon:
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
+	Report: aacanon3.aud
 	ReloadDelay: 12
 	Range: 6147
 	ValidTargets: Ground, Water, Air

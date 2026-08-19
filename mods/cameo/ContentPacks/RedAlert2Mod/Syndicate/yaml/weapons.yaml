@@ -50,6 +50,7 @@ latinsyndicate_latinmilitia_molotov_elite:
 
 LatinTankKillerRocket:
 	Inherits: ^RA2LightMissile
+	Report: bazook1.aud
 	ReloadDelay: 66
 	Range: 6666
 	Projectile: Missile
@@ -64,6 +65,7 @@ LatinTankKillerRocket:
 
 LatinTankKillerRocket_elite:
 	Inherits: LatinTankKillerRocket
+	Report: bazook1.aud
 	Range: 7777
 	Warhead@MissileAP_Light:
 		Damage: 52000
@@ -185,6 +187,7 @@ RA2FreedomAK47:
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^Chaingun
 	Inherits@5: ^SniperWeapon
+	Inherits@fx: ^Effect_Bullet_Light_RA2
 	ReloadDelay: 42
 	Range: 7130
 	Burst: 5
@@ -218,10 +221,6 @@ RA2FreedomAK47:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 3
 		Spread: 30
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_piffs
-	Warhead@Effect1: CreateEffect
-		Explosions: ra2_piff
 
 RA2FreedomAK47_elite:
 	Inherits: RA2FreedomAK47
@@ -421,6 +420,7 @@ RA2RBurritoRocket:
 	Inherits@3: ^MediumFlameWeapon
 	Inherits@4: ^HeavyBomb
 	Inherits@5: ^RA2HeavyMissile
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 122
 	Burst: 8
 	BurstDelays: 4
@@ -473,10 +473,6 @@ RA2RBurritoRocket:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	-Warhead@Effect1:
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 	Warhead@FireShrapnel: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: AsianFlameFragment
@@ -490,6 +486,7 @@ RA2LarsRocket:
 	Inherits@3: ^LightMissile
 	Inherits@4: ^TankDestroyerCannon
 	Inherits@5: ^RA2MediumMissile
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 139
 	Burst: 10
 	BurstDelays: 4
@@ -540,10 +537,6 @@ RA2LarsRocket:
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 
 RA2Gren60mm:
 	Inherits: ^RA2HeavyCannon
@@ -735,6 +728,7 @@ DiabloCannon:
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^Chaingun
 	Inherits@4: ^RA2FlakWeapon
+	Report: aacanon3.aud
 	ReloadDelay: 16
 	Range: 6300
 	ValidTargets: Ground, Water
@@ -765,21 +759,22 @@ DiabloCannon:
 
 DiabloCannon_elite:
 	Inherits: DiabloCannon
+	Report: aacanon3.aud
 	Range: 7300
 	Burst: 2
 	BurstDelays: 3
 
 DiabloCannon_AA:
 	Inherits: DiabloCannon
+	Report: aacanon3.aud
 	ValidTargets: Air
 	Range: 9450
 	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
 DiabloCannonAAE_AA:
 	Inherits: DiabloCannon_AA
+	Report: aacanon3.aud
 	Range: 10450
 	Burst: 2
 	BurstDelays: 3
@@ -793,6 +788,7 @@ RA2MortarBike:
 	Inherits@6: ^HeavyBomb
 	Inherits@7: ^LightFlameWeapon
 	Inherits@8: ^MediumChemicalWeapon
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 67
 	Range: 7500
 	MinRange: 1500
@@ -857,8 +853,6 @@ RA2MortarBike:
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
 
 RA2MortarBike_elite:
@@ -1095,6 +1089,7 @@ LatinAADefenderCannon:
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
 	Inherits@2: ^RA2FlakWeapon
+	Report: aacanon3.aud
 	Range: 15000
 	ReloadDelay: 20
 	Burst: 2
@@ -1118,8 +1113,6 @@ LatinAADefenderCannon:
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
 RA2TOPOLCubaTarget:
@@ -1242,6 +1235,7 @@ RA2APCFlakCannon:
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^Chaingun
 	Inherits@4: ^RA2FlakWeapon
+	Report: aacanon3.aud
 	ReloadDelay: 12
 	Range: 5740
 	ValidTargets: Ground, Water
@@ -1272,21 +1266,22 @@ RA2APCFlakCannon:
 
 RA2APCFlakCannon_elite:
 	Inherits: RA2APCFlakCannon
+	Report: aacanon3.aud
 	Range: 6740
 	Burst: 2
 	BurstDelays: 3
 
 RA2APCFlakCannonAA:
 	Inherits: RA2APCFlakCannon
+	Report: aacanon3.aud
 	ValidTargets: Air
 	Range: 8610
 	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
 RA2APCFlakCannonAA_elite:
 	Inherits: RA2APCFlakCannonAA
+	Report: aacanon3.aud
 	Range: 9610
 	Burst: 2
 	BurstDelays: 3
@@ -1345,6 +1340,7 @@ RA2APCRocket:
 	Inherits@2: ^HeavyAAWeapon
 	Inherits@3: ^FlakWeapon
 	Inherits@4: ^RA2MediumMissile
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 53
 	Burst: 4
 	BurstDelays: 3
@@ -1389,9 +1385,6 @@ RA2APCRocket:
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 		ValidTargets: Ground, Water, Air
 
 RA2APCRocket_elite:
@@ -1434,10 +1427,11 @@ SMLLauncher:
 
 RA2AkulaRockets:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@2: ^RA2Grenade
 	Inherits@3: ^RA2MediumMissile
 	Inherits@rad: ^RA2RadShell
+	Inherits@4: ^Effect_Terrorist_Explosion_RA2
+	-Warhead@Effect1:
 	Report: vaegatta.wav, vaegattb.wav
 	ReloadDelay: 500
 	Burst: 8
@@ -1459,8 +1453,6 @@ RA2AkulaRockets:
 		TrailInterval: 1
 		Inaccuracy: 15000
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_terrorist_explosion
-		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
 	Warhead@Radiation: CreateTintedCells
 		Spread: 1200

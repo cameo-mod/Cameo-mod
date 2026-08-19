@@ -1,4 +1,4 @@
-# audit_template_conformance — template values are law (2026-07-19)
+﻿# audit_template_conformance — template values are law (2026-07-19)
 
 ## T1 — conyards must use the template Power (100)
 

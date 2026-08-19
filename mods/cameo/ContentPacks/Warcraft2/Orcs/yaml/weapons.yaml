@@ -336,40 +336,20 @@ wc2deathknightDeathAndDecay_Spread:
 		Footprint: x
 
 wc2deathknightDeathAndDecay_Hit:
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^MediumChemicalWeapon
-	Inherits@5: ^LightFlameWeapon
+	Inherits@wh: ^Warhead_Inferno_Heavy
+	Inherits@proj: ^Projectile_Inferno_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	ValidTargets: Ground, Water, Air
 	Projectile: InstantHit
 		Speed: 0c512
 		Image: wc2_effect_blizzard
 		Sequences: idle1, idle2
-	Warhead@CannonHE_Heavy:
+	Warhead@Inferno_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@CannonHE_Heavy_Percentage:
+		Damage: 24000
+	Warhead@Inferno_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 4
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-	Warhead@LightFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 12
 	Warhead@Effect: CreateEffect
 		Image: wc2_effect_death_and_decay
 		Explosions: idle

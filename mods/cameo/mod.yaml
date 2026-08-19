@@ -5,8 +5,9 @@ Metadata:
 	WebIcon32: https://raw.githubusercontent.com/Zeruel87/Cameo-mod/master/packaging/artwork/icon_32x32.png
 	WindowTitle: mod_windowtitle
 PackageFormats: Mix, AudioBag, D2kSoundResources
-FileSystem: DefaultFileSystem
-	Packages:
+FileSystem: ContentInstallerFileSystem
+	ContentInstallerMod: cameo-content
+	SystemPackages:
 		~^SupportDir|Content/cameo/: game
 		^EngineDir
 		$cameo: cameo
@@ -17,6 +18,13 @@ FileSystem: DefaultFileSystem
 		~^SupportDir|Content/cameo/theme
 		^EngineDir|mods/common: common
 		~^SupportDir|Content/cameo/music
+		~^SupportDir|Content/cameo/ra: cameo_ra
+		~cameo_ra|scores.mix
+		~^SupportDir|Content/cameo/cnc: cameo_cnc
+		~cameo_cnc|scores.mix
+		~^SupportDir|Content/cameo/ts: cameo_ts
+		~cameo_ts|scores.mix
+		~^SupportDir|Content/cameo/firestorm
 		~cameo|ContentPacks/TiberianSun/CABAL/files/icons: cabal_icons
 		~cameo|ContentPacks/TiberianSun/CABAL/files/sprites: cabal_sprites
 		~cameo|ContentPacks/TiberianSun/CABAL/files/voxels: cabal_voxels
@@ -111,6 +119,7 @@ FileSystem: DefaultFileSystem
 		~common|/mods/cnc/bits/jungle
 		~common|/mods/cnc/bits/desert
 		~SOUND.RS
+	ContentPackages:
 MapFolders:
 	cameo|maps: System
 	~^SupportDir|maps/cameo/{DEV_VERSION}: User

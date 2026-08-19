@@ -77,6 +77,15 @@ SOURCES = [
     # ruleset ("Mental Omega 3.3.6 RULES CONTROL FILE", 751 Verses) lives inside
     # expandmo99.mix; extract it with tools/reference/extract_mix_ini.py.
     ("mental_omega", "YR", "ini", BACKUP / "MentalOmega/extracted/rulesmd_MO336.ini", "yr"),
+    # Added 2026-08-15 on 333ggg's recommendation. Both hide their real rules inside a
+    # MIX exactly like Mental Omega, so both are extracted with extract_mix_ini.py first:
+    #   Red Resurrection : rr_update_2213/expandmd99.mix          -> 499 Verses
+    #   RA2 Reborn       : .../Resources/INI.mix                  -> 359 Verses
+    # The blob names are CRC-derived, not meaningful; the sniffer picks the rules blob.
+    ("red_resurrection", "YR", "ini",
+     DOWNLOADS / "_extracted_rr/expandmd99_8218f9f4.ini", "yr"),
+    ("ra2_reborn", "YR", "ini",
+     DOWNLOADS / "_extracted_reborn/INI_c5d7f6ce.ini", "yr"),
     # DTA ships its live balance in the injected GlobalCode, NOT in Rules.ini — every
     # `Verses=` in Rules.ini/Enhance.ini is commented out (186 of them, kept as design
     # history). "Classic" and "Enhanced" are two rule sets and both are wanted.

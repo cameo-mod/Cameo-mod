@@ -1,6 +1,6 @@
-# audit_multiplier_modifiers — *Multiplier Modifier integer percent check
+﻿# audit_multiplier_modifiers — *Multiplier Modifier integer percent check
 
-*Multiplier trait families seen: 1878
+*Multiplier trait families seen: 1823
 
 | trait family |
 |---|
@@ -125,7 +125,6 @@
 | `DamageMultiplier@CEMENTFACTORY` |
 | `DamageMultiplier@COMMANDOCALL` |
 | `DamageMultiplier@CloseCombatInfantryBuff` |
-| `DamageMultiplier@Concrete` |
 | `DamageMultiplier@D2K_Og_Buff` |
 | `DamageMultiplier@DARKSWARM` |
 | `DamageMultiplier@DamageReduction` |
@@ -135,23 +134,11 @@
 | `DamageMultiplier@FORCESHIELD` |
 | `DamageMultiplier@FighterBuff` |
 | `DamageMultiplier@FireActorBuffs` |
-| `DamageMultiplier@FlyingInfantry` |
 | `DamageMultiplier@Freed` |
-| `DamageMultiplier@GattlingSpeed1` |
-| `DamageMultiplier@GattlingSpeed10` |
-| `DamageMultiplier@GattlingSpeed2` |
-| `DamageMultiplier@GattlingSpeed3` |
-| `DamageMultiplier@GattlingSpeed4` |
-| `DamageMultiplier@GattlingSpeed5` |
-| `DamageMultiplier@GattlingSpeed6` |
-| `DamageMultiplier@GattlingSpeed7` |
-| `DamageMultiplier@GattlingSpeed8` |
-| `DamageMultiplier@GattlingSpeed9` |
 | `DamageMultiplier@GlobalBuffs` |
 | `DamageMultiplier@HNavySUpg` |
 | `DamageMultiplier@HNavySUpg2` |
 | `DamageMultiplier@HarvesterBuff` |
-| `DamageMultiplier@Heavy` |
 | `DamageMultiplier@HeavyInfantryBuff` |
 | `DamageMultiplier@HelicopterBuff` |
 | `DamageMultiplier@HeroBuff` |
@@ -163,10 +150,8 @@
 | `DamageMultiplier@InfantryBuff` |
 | `DamageMultiplier@KamikazeCritical` |
 | `DamageMultiplier@KamikazeHeavy` |
-| `DamageMultiplier@Light` |
 | `DamageMultiplier@MAYORCALL` |
 | `DamageMultiplier@METALFACTORY` |
-| `DamageMultiplier@Medium` |
 | `DamageMultiplier@MeleeBuff` |
 | `DamageMultiplier@OMUpg` |
 | `DamageMultiplier@ONavySUpg` |
@@ -189,7 +174,6 @@
 | `DamageMultiplier@SIEGEMAMMOTHPARITY` |
 | `DamageMultiplier@SONICDEBUFF` |
 | `DamageMultiplier@Salvaged1` |
-| `DamageMultiplier@Scout` |
 | `DamageMultiplier@ScoutInfantryBuff` |
 | `DamageMultiplier@Secondary` |
 | `DamageMultiplier@Shield` |
@@ -270,7 +254,6 @@
 | `DamageMultiplier@firing4` |
 | `DamageMultiplier@forcefield` |
 | `DamageMultiplier@forgotten_upgrade_genomemapping` |
-| `DamageMultiplier@forgotten_upgrade_junkarmor` |
 | `DamageMultiplier@global_conscription_buff` |
 | `DamageMultiplier@grimmpower1` |
 | `DamageMultiplier@hive` |
@@ -366,8 +349,6 @@
 | `DamageMultiplier@rv` |
 | `DamageMultiplier@samipower1` |
 | `DamageMultiplier@sargentarmor` |
-| `DamageMultiplier@schwarzermond_upgrade_lunaralloys` |
-| `DamageMultiplier@schwarzermond_upgrade_vrilinfusion` |
 | `DamageMultiplier@scrap1` |
 | `DamageMultiplier@scrap2` |
 | `DamageMultiplier@scrap_bonus` |
@@ -488,7 +469,6 @@
 | `DamageMultiplier@yuri_doctrine_psionicelite` |
 | `DamageMultiplier@yuri_doctrine_psionicfanatics` |
 | `DamageMultiplier@yuri_doctrine_psionicvehicleshields` |
-| `DamageMultiplier@yuri_doctrine_scrapvehiclearmor` |
 | `DamageMultiplier@yuri_upgrade_brutestrengthmutations` |
 | `DamageMultiplier@yuri_upgrade_geneticmodificationboost` |
 | `DamageMultiplier@yuri_upgrade_gravitondrive` |
@@ -740,6 +720,7 @@
 | `FirepowerMultiplier@mana` |
 | `FirepowerMultiplier@maxpower1` |
 | `FirepowerMultiplier@maxpower2` |
+| `FirepowerMultiplier@moonpropaganda_fanatic` |
 | `FirepowerMultiplier@naxis_beerfactory` |
 | `FirepowerMultiplier@naxis_naxiriflerecruit` |
 | `FirepowerMultiplier@naxis_naxiriflesoldier` |
@@ -799,6 +780,7 @@
 | `FirepowerMultiplier@samipower2` |
 | `FirepowerMultiplier@sargent` |
 | `FirepowerMultiplier@schwarzermond_lunarsoldier` |
+| `FirepowerMultiplier@schwarzermond_upgrade_helium3` |
 | `FirepowerMultiplier@schwarzermond_upgrade_moonpropaganda` |
 | `FirepowerMultiplier@schwarzermond_upgrade_vrilinfusion` |
 | `FirepowerMultiplier@schwarzermond_upgrade_vrilpoweredweapons` |
@@ -1192,15 +1174,8 @@
 | `RangeMultiplier@GatlingBuff` |
 | `RangeMultiplier@GattlingSpeed` |
 | `RangeMultiplier@GattlingSpeed1` |
-| `RangeMultiplier@GattlingSpeed10` |
 | `RangeMultiplier@GattlingSpeed2` |
 | `RangeMultiplier@GattlingSpeed3` |
-| `RangeMultiplier@GattlingSpeed4` |
-| `RangeMultiplier@GattlingSpeed5` |
-| `RangeMultiplier@GattlingSpeed6` |
-| `RangeMultiplier@GattlingSpeed7` |
-| `RangeMultiplier@GattlingSpeed8` |
-| `RangeMultiplier@GattlingSpeed9` |
 | `RangeMultiplier@GravityGenerator1` |
 | `RangeMultiplier@GravityGenerator10` |
 | `RangeMultiplier@GravityGenerator2` |
@@ -1607,16 +1582,6 @@
 | `SpeedMultiplier@DamagedSlow` |
 | `SpeedMultiplier@Empty` |
 | `SpeedMultiplier@Freed` |
-| `SpeedMultiplier@GattlingSpeed1` |
-| `SpeedMultiplier@GattlingSpeed10` |
-| `SpeedMultiplier@GattlingSpeed2` |
-| `SpeedMultiplier@GattlingSpeed3` |
-| `SpeedMultiplier@GattlingSpeed4` |
-| `SpeedMultiplier@GattlingSpeed5` |
-| `SpeedMultiplier@GattlingSpeed6` |
-| `SpeedMultiplier@GattlingSpeed7` |
-| `SpeedMultiplier@GattlingSpeed8` |
-| `SpeedMultiplier@GattlingSpeed9` |
 | `SpeedMultiplier@Generic` |
 | `SpeedMultiplier@GravityGenerator1` |
 | `SpeedMultiplier@GravityGenerator10` |
@@ -1849,16 +1814,6 @@
 | `SpeedMultiplier@yuri_upgrade_toxicengines` |
 | `SpeedMultiplier@zerg_upgrade_metabolicboost` |
 | `SpeedMultiplier@zerg_upgrade_pneumatizedcarapace` |
-| `TurnSpeedMultiplier@GattlingSpeed1` |
-| `TurnSpeedMultiplier@GattlingSpeed10` |
-| `TurnSpeedMultiplier@GattlingSpeed2` |
-| `TurnSpeedMultiplier@GattlingSpeed3` |
-| `TurnSpeedMultiplier@GattlingSpeed4` |
-| `TurnSpeedMultiplier@GattlingSpeed5` |
-| `TurnSpeedMultiplier@GattlingSpeed6` |
-| `TurnSpeedMultiplier@GattlingSpeed7` |
-| `TurnSpeedMultiplier@GattlingSpeed8` |
-| `TurnSpeedMultiplier@GattlingSpeed9` |
 | `TurnSpeedMultiplier@cabal_upgrade_overchargedservos` |
 | `TurnSpeedMultiplier@firing` |
 | `TurnSpeedMultiplier@firing1` |
@@ -1868,16 +1823,6 @@
 | `TurnSpeedMultiplier@ordos_upgrade_hoverdrive` |
 | `TurnSpeedMultiplier@schwarzermond_upgrade_helium3` |
 | `TurnSpeedMultiplier@schwarzermond_upgrade_vrilinfusion` |
-| `TurretTurnSpeedMultiplier@GattlingSpeed1` |
-| `TurretTurnSpeedMultiplier@GattlingSpeed10` |
-| `TurretTurnSpeedMultiplier@GattlingSpeed2` |
-| `TurretTurnSpeedMultiplier@GattlingSpeed3` |
-| `TurretTurnSpeedMultiplier@GattlingSpeed4` |
-| `TurretTurnSpeedMultiplier@GattlingSpeed5` |
-| `TurretTurnSpeedMultiplier@GattlingSpeed6` |
-| `TurretTurnSpeedMultiplier@GattlingSpeed7` |
-| `TurretTurnSpeedMultiplier@GattlingSpeed8` |
-| `TurretTurnSpeedMultiplier@GattlingSpeed9` |
 | `TurretTurnSpeedMultiplier@firing` |
 | `TurretTurnSpeedMultiplier@firing1` |
 | `TurretTurnSpeedMultiplier@firing2` |

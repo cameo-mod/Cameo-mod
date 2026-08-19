@@ -530,8 +530,14 @@
 	SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor2:
 		Modifier: 115
 		RequiresCondition: ra2_soviets_doctrine_tesladischargearmor && !EnemyInProximity
+	# Tesla-discharge plating is an ENERGY skin, so it reads the REFLECTOR row: strong
+	# against beams and bolts, weak against fire and chemicals. Modifier 85 -> 90 to match
+	# the sibling reactive-armor branch, since the type now carries the bulk of the value.
+	Armor@REFLECTOR:
+		Type: REFLECTOR
+		RequiresCondition: ra2_soviets_doctrine_tesladischargearmor
 	DamageMultiplier@ra2_soviets_doctrine_tesladischargearmor:
-		Modifier: 85
+		Modifier: 90
 		RequiresCondition: ra2_soviets_doctrine_tesladischargearmor
 	FireWarheads@Tesla:
 		Weapons: TeslaArmorDischargeDummy

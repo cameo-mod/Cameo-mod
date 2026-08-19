@@ -4,7 +4,7 @@ latinsyndicate_hindtransport:
 	Inherits@cargo: ^CargoAircraft
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Inherits@uprecover: ^LatinCashrecover
 	Valued:
 		Cost: 2500
@@ -88,7 +88,7 @@ latinsyndicate_yakovlev:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	# Inherits@turnanimation: ^RA2PlanewithTurnAnimation
 	Inherits@uprecover: ^LatinCashrecover
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Selectable:
 	Tooltip:
 		Name: Yakovlev

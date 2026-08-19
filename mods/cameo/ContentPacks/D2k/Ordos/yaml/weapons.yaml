@@ -914,7 +914,6 @@ HMGo:
 	Burst: 9
 	BurstDelays: 2
 	Range: 6000
-	-Report:
 	StartBurstReport: hmgo1.wav, hmgo2.wav
 	ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Light:
@@ -963,7 +962,6 @@ d2kChainGun:
 	Burst: 5
 	BurstDelays: 2
 	Range: 6184
-	-Report:
 	StartBurstReport: MGUN2.WAV
 	Warhead@Bullet_Medium:
 		Damage: 4000
@@ -996,7 +994,6 @@ HMGstealth:
 	Burst: 4
 	BurstDelays: 2
 	Range: 4857
-	-Report:
 	StartBurstReport: hmgo1.wav, hmgo2.wav
 	ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Light:
@@ -1022,7 +1019,6 @@ ordos_autogunturret:
 	Burst: 4
 	BurstDelays: 2
 	Range: 7700
-	-Report:
 	StartBurstReport: autoguntrt.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
@@ -1146,6 +1142,7 @@ d2kCarryallChainGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
+	Report: gun8.aud
 	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 1

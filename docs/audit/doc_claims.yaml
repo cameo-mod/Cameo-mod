@@ -1,0 +1,388 @@
+﻿# doc_claims.yaml â€” every NUMERIC claim the design docs make, and how to re-measure it.
+#
+# Maintainer 2026-08-17: *"the documentations are starting to explode in size ... regularly
+# review everything for discrepancies and contradictions and then make design decisions
+# together ... Right now a lot of information and design decisions are maybe outdated and
+# contradict newer decisions?"*
+#
+# The problem is real and it is structural: prose cannot be checked, so a number written into a
+# document is true only on the day it is written. This session alone found five:
+#
+#   * "Shield is free against 51% of the roster"  -> actually 1.4%  (35x wrong)
+#   * "Shield = top + floor" stated as law       -> retired weeks earlier, still in 2 docs
+#   * "apply_balance --confirm is the last step"  -> it is a NO-OP
+#   * R1 "veterancy grants HP"                   -> contradicted by advice I gave and it was accepted
+#   * "805 of 2053 weapons comply (39%)"         -> 522 of 1495 FIRED weapons (34.9%)
+#
+# THE FIX: a claim that matters gets an entry here with a `measure` command. `audit_doc_claims.py`
+# runs each one and fails when reality and the document disagree. A doc sentence then becomes
+# checkable, and going stale becomes a red audit instead of a future misunderstanding.
+#
+# RULES
+#  * One entry per claim that a DECISION would rest on. Not every number in every doc.
+#  * `measure` must print ONE number to stdout and nothing else.
+#  * `tolerance` is fractional (0.02 = 2%). Counts that must be exact use 0.
+#  * When a claim legitimately changes, update `value` IN THE SAME COMMIT as the doc. That is
+#    the whole point: the audit forces doc and reality to move together.
+#  * `docs` lists every file repeating the claim — so a change updates ALL of them, which is
+#    how the `Shield = top + floor` duplication survived for weeks.
+
+claims:
+  - id: shield_versus_mean
+    value: 185.25
+    tolerance: 0.01
+    what: Mean Versus-vs-Shield across all main flat warheads. Drives shield_hp_factor.
+    docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md, docs/design/SUPERWEAPON_LAYER_DAMAGE.md]
+    measure: |
+      import sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import target_model as tm
+      print(tm.pseudo_armor_mean('Shield'))
+
+  - id: shield_hp_factor
+    value: 0.5398
+    tolerance: 0.01
+    what: What one shield point is worth as HP (100 / mean Versus vs Shield).
+    docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
+    measure: |
+      import sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import target_model as tm
+      print(tm.shield_hp_factor())
+
+  - id: shield_damage_share
+    value: 0.01432
+    tolerance: 0.05
+    what: >
+      Fraction of roster raw damage landing on the Shield row at BASELINE. The claim that
+      replaced "51% of the roster", which counted empty shield CAPACITY as a shield.
+    docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
+    measure: |
+      import sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import target_model as tm
+      print(tm.shield_damage_share())
+
+  - id: always_on_shield_actors
+    value: 58
+    tolerance: 0
+    what: >
+      Actors that SPAWN with a shield pool and no positive gate — the only ones E1 prices.
+      1318 more carry an empty capacity behind `shieldgen`; ~216 are upgrade-gated.
+    docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
+    measure: |
+      import re, sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from miniyaml import Ruleset
+      TOK = re.compile(r'[A-Za-z_][A-Za-z0-9_.]*')
+      def num(v, d=0.0):
+          try: return float(str(v).strip())
+          except (TypeError, ValueError): return d
+      def gated(cond):
+          for t in re.split(r'&&|\|\|', str(cond or '')):
+              t = t.strip().strip('()').strip()
+              if t and not t.startswith('!') and TOK.match(t): return True
+          return False
+      rs = Ruleset(pathlib.Path('.').resolve()); n = 0
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          node = rs.resolve(name)
+          if node is None: continue
+          for c in node.children:
+              if c.key.split('@')[0] != 'Shielded': continue
+              pool = num(c.get('MaxStrength')) + num(c.get('MaxPercentageStrength'))
+              init = num(c.get('InitialStrength')) + num(c.get('InitialPercentageStrength'))
+              if pool > 0 and init > 0 and not gated(c.get('RequiresCondition')): n += 1
+              break
+      print(n)
+
+  - id: always_on_shielded_buildings
+    value: 16
+    tolerance: 0
+    what: >
+      Buildings with an always-on shield. ALL are Protoss. Corrects an analysis that measured
+      all 1016 unarmed buildings and reported a 19x shift in the Shield column's weight.
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import re, sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from miniyaml import Ruleset
+      TOK = re.compile(r'[A-Za-z_][A-Za-z0-9_.]*')
+      def num(v, d=0.0):
+          try: return float(str(v).strip())
+          except (TypeError, ValueError): return d
+      def gated(cond):
+          for t in re.split(r'&&|\|\|', str(cond or '')):
+              t = t.strip().strip('()').strip()
+              if t and not t.startswith('!') and TOK.match(t): return True
+          return False
+      rs = Ruleset(pathlib.Path('.').resolve()); n = 0
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          node = rs.resolve(name)
+          if node is None: continue
+          sh = None; is_bld = False; armor = None
+          for c in node.children:
+              k = c.key.split('@')[0]
+              if k == 'Shielded' and sh is None: sh = c
+              elif k in ('Building', 'LineBuild'): is_bld = True
+              elif k == 'Armor' and armor is None: armor = (c.get('Type') or '').strip()
+          if sh is None: continue
+          if not (is_bld or armor in ('Wood', 'Steel', 'Concrete')): continue
+          pool = num(sh.get('MaxStrength')) + num(sh.get('MaxPercentageStrength'))
+          init = num(sh.get('InitialStrength')) + num(sh.get('InitialPercentageStrength'))
+          if pool > 0 and init > 0 and not gated(sh.get('RequiresCondition')): n += 1
+      print(n)
+
+  - id: live_damage_multipliers
+    value: 366
+    tolerance: 0
+    what: >
+      DamageMultiplier declarations in LIVE files (mod.yaml's Rules list). The tree holds 683;
+      314 sit in dead files such as rules/wh40k.yaml, which is why a plain grep misleads.
+      Was 369 until the shield-150% block and its two Consortium dependents were deleted
+      (W26, 2026-08-17) — this claim FAILED on the audit's very first run and is the intended
+      demonstration: the count moved with the work and the document had not.
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import re, sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from miniyaml import Ruleset
+      rs = Ruleset(pathlib.Path('.').resolve())
+      pat = re.compile(r'^\tDamageMultiplier(@[\w.]+)?:\s*$')
+      n = 0
+      for p in sorted({q.resolve() for q in rs.manifest.rules}):
+          try: lines = p.read_text(encoding='utf-8', errors='replace').split('\n')
+          except OSError: continue
+          n += sum(1 for ln in lines if pat.match(ln))
+      print(n)
+
+  - id: multi_main_fired_weapons
+    value: 973
+    tolerance: 0
+    what: >
+      Fired weapons carrying MORE THAN ONE damage main — W24's scope, and the reason pricing
+      must wait for the weapon rebuild (their K is still going to move).
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import collections, sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import effective_damage as ed
+      from miniyaml import Ruleset
+      rs = Ruleset(pathlib.Path('.').resolve())
+      fired = collections.Counter()
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          node = rs.resolve(name)
+          if node is None: continue
+          for c in node.children:
+              if c.key == 'Armament' or c.key.startswith('Armament@'):
+                  w = c.get('Weapon')
+                  if w: fired[str(w).strip()] += 1
+      n = 0
+      for w in fired:
+          node = rs.resolve_weapon(w)
+          if node is None: continue
+          mains = [t for t, _wt, _b, _nd in ed.flat_damage_warheads(node)
+                   if 'ExtraDamage' not in t]
+          if len(mains) > 1: n += 1
+      print(n)
+
+  - id: percentage_denominator_unset
+    value: 0
+    tolerance: 0
+    what: >
+      W18 has NOT landed. Any nonzero here means the basis-point rebase shipped and every
+      pct_absolute / dps_floor figure in the docs is stale.
+    docs: [docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md, docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import pathlib, sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from miniyaml import Ruleset
+      rs = Ruleset(pathlib.Path('.').resolve())
+      n = 0
+      for p in sorted({q.resolve() for q in rs.manifest.weapons}):
+          try: n += p.read_text(encoding='utf-8', errors='replace').count('PercentageDenominator')
+          except OSError: pass
+      print(n)
+
+  - id: unmigrated_scout_damage_multiplier
+    value: 16
+    tolerance: 0
+    what: >
+      Scouts still resolving `DamageMultiplier@ScoutInfantryBuff: 50` — i.e. taking HALF damage,
+      double effective HP, unpriced. FORMULA_V2 says the 2x-health bake "replaced" this; it
+      replaced it for 19 of 35. The 19 migrated actors CANCEL the template with a local
+      `Modifier: 100`, which is exactly why those overrides look like deletable no-ops and are
+      NOT — deleting them restores the 50% reduction. Goes to 0 when the bake is finished.
+    docs: [docs/design/FORMULA_V2.md, docs/design/ROADMAP.md, docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from cameo_model import Model
+      m = Model(); rs = m.rs; n = 0
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          res = rs.resolve(name)
+          if res is None: continue
+          for c in res.children:
+              if c.key == 'DamageMultiplier@ScoutInfantryBuff':
+                  if (c.get('Modifier') or '').strip() == '50': n += 1
+                  break
+      print(n)
+
+  - id: meters_filling_before_death
+    value: 223
+    tolerance: 0
+    what: >
+      Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
+      still has 25% HP left — the maintainer's condition for pricing a meter at all ("it is
+      able to completely freeze a unit BEFORE it dies"). 223 of 376 bindings on 372 weapons.
+      ⛔ THE EARLIER VALUES (1, then 124) WERE MEASURED WITH A WRONG FORMULA and are void.
+      `PhysicalState.ApplyChange` health-scales through `ScaleChangeToHealth`, which divides by
+      MaxHP and multiplies by the meter's RANGE (`MaxValue - MinValue`) — NOT by the 10000
+      that `PhysicalStateInfo`'s own [Desc] still advertises ("divided by HP/10000"), which is
+      what the old derivation trusted. `Temperature` is SIGNED so its range is 40000, while
+      `Corrosion` shipped `MinValue: 0` — so one Scale meant TWO fill rates, heat filling twice
+      as fast as corrosion. Fixed 2026-08-18 by making Corrosion signed too (maintainer: *"the
+      absolute maximum and minimum values are the same!"*), so
+      `ratio = MaxValue x 100 / (Scale x range)` = **50/Scale on both meters**, 4x faster than
+      the docs claimed. Target HP and weapon damage both cancel. The formula now lives ONLY in
+      `tools/balance/physical_state_price.py`, which this measure imports, so the two can no
+      longer disagree.
+      ⚠ The failures are the discrete `ApplyPhysicalState` weapons (13 of 166 pass); the
+      damage-scaled ones pass 210/210, and 177 of them already passed at the ORIGINAL Scale 100.
+    docs: [docs/design/PHYSICAL_STATE_SYSTEM.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
+    measure: |
+      import sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from cameo_model import Model
+      import physical_state_price as psp
+      rows, _ref, _geom, _exp, _curves = psp.scan(Model().rs)
+      print(sum(1 for r in rows
+                if r['ratio'] is not None and r['ratio'] <= psp.FULL_EFFECT_BAR))
+
+  - id: corrosion_meter_actors
+    value: 724
+    tolerance: 0
+    what: >
+      Actors carrying the `Corrosion` meter — 45.0% of the 1609 priced (Health + Valued)
+      actors, against `Temperature`'s 1592 (98.6%). This asymmetry is an EXPOSURE term in E2
+      pricing: a corrosion weapon does nothing at all to 55% of the roster, so it cannot earn
+      the same status surcharge as a flame weapon even when its meter fills faster. Nothing in
+      the price model saw this before 2026-08-18.
+    docs: [docs/design/PHYSICAL_STATE_SYSTEM.md]
+    measure: |
+      import sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from cameo_model import Model
+      rs = Model().rs
+      n = 0
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          node = rs.resolve(name)
+          if node is None: continue
+          for c in node.children:
+              if (c.key == 'PhysicalState' or c.key.startswith('PhysicalState@')) \
+                      and (c.get('Name') or '').strip() == 'Corrosion':
+                  n += 1
+                  break
+      print(n)
+  - id: physical_state_fired_weapons
+    value: 372
+    tolerance: 0
+    what: >
+      FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
+      at ZERO for it — E2. Counts all THREE shapes: a discrete `ApplyPhysicalState` warhead, a
+      damage-scaled `PhysicalStateScale`, and a BLEND's `PhysicalStates:` dict — which carries no
+      `PhysicalStateName` at all, so keying on that name misses every blend family. Counting one
+      shape is how the docs carried "~89 bindings"; counting two gave 367.
+    docs: [docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md, docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import sys, pathlib
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from cameo_model import Model
+      m = Model(); rs = m.rs
+      fired = set()
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          node = rs.resolve(name)
+          if node is None: continue
+          for c in node.children:
+              if c.key == 'Armament' or c.key.startswith('Armament@'):
+                  w = (c.get('Weapon') or '').strip()
+                  if w: fired.add(w)
+      n = 0
+      for w in sorted(fired):
+          node = rs.resolve_weapon(w)
+          if node is None: continue
+          for wh in node.children:
+              if not wh.key.startswith('Warhead'): continue
+              if not (wh.get('PhysicalStateName') or '').strip(): continue
+              rel = (wh.get('ValidRelationships') or '').strip()
+              if 'Ally' in rel and 'Enemy' not in rel: continue
+              n += 1
+              break
+          else:
+              for wh in node.children:
+                  if not wh.key.startswith('Warhead'): continue
+                  if any(x.key == 'PhysicalStates' for x in wh.children):
+                      n += 1
+                      break
+      print(n)
+
+  - id: plating_row_ties
+    value: 0
+    tolerance: 0
+    what: >
+      Emitted families sharing a plating row with another family (ARMOR excluded — it is flat by
+      design). The maintainer's uniqueness law: *"don't put 3 energy weapons exactly on the same
+      versus value"*. Four groups tied before e7fa2d57b. A tie may ONLY be fixed by moving mass
+      across a group boundary onto a second real defeat mechanism — never by fabricated noise.
+    docs: [docs/design/PLATING_COMPOSITION_REFINEMENT.md, docs/design/PLATING_COMBINATION.md]
+    measure: |
+      import sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import gen_weapon_template as gen
+      fams = []
+      for nm, (_b, _d, _a, lv) in gen.WEAPONS.items():
+          if nm not in gen.HAND_TUNED:
+              fams += [nm] * len(lv)
+      for nm, (_p, _n, _s, lv) in gen.INHERIT_FAMILIES.items():
+          fams += [nm] * len(lv)
+      for nm, (_p, _s, lv) in gen.BLEND_FAMILIES.items():
+          fams += [nm] * len(lv)
+      fams += ['Storm'] * len(gen.STORM_LEVELS)
+      cols = [p for p in gen.PLATING_CYCLE if p != 'ARMOR']
+      names = sorted(set(fams))
+      rows = [tuple(dict(gen.plating_rows(f))[c] for c in cols) for f in names]
+      print(len(names) - len(set(rows)))
+
+  - id: plating_families
+    value: 32
+    tolerance: 0
+    what: >
+      Families the generator emits a plating row for. The row count of the matrix in
+      PLATING_COMPOSITION_REFINEMENT.md — so adding a family without updating that table, or
+      dropping one, goes red instead of silently making the document wrong.
+    docs: [docs/design/PLATING_COMPOSITION_REFINEMENT.md]
+    measure: |
+      import sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      import gen_weapon_template as gen
+      fams = {nm for nm in gen.WEAPONS if nm not in gen.HAND_TUNED}
+      fams |= set(gen.INHERIT_FAMILIES) | set(gen.BLEND_FAMILIES) | {'Storm'}
+      print(len(fams))
+
+  - id: signed_off_class_anchors
+    value: 0
+    tolerance: 0
+    what: >
+      Class anchors the maintainer has signed off (W11). While this is 0, NO price is final and
+      apply_balance --confirm has nothing correct to apply.
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md]
+    measure: |
+      import json, pathlib
+      d = json.loads(pathlib.Path('docs/balance/class_anchors.json').read_text(encoding='utf-8'))
+      print(sum(1 for v in d.values()
+                if isinstance(v, dict) and 'spec' in v and v.get('signed_off')))

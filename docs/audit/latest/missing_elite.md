@@ -64,12 +64,12 @@ Buildable actors with ^GainsExperienceRA2 but NO Armament@*ELITE*: **197**
 | ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml | 383 | ra2_soviets_transportkirov | RedAlert2/Soviets |
 | ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml | 534 | ra2_soviets_warminer | RedAlert2/Soviets |
 | ContentPacks/RedAlert2/Yuri/yaml/naval.yaml | 1 | yuri_boomersubmarine | RedAlert2/Yuri |
-| ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml | 381 | yuri_chaosdrone | RedAlert2/Yuri |
+| ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml | 379 | yuri_chaosdrone | RedAlert2/Yuri |
 | ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml | 283 | yuri_clone | RedAlert2/Yuri |
 | ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml | 708 | yuri_cosmonaut | RedAlert2/Yuri |
-| ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml | 123 | yuri_gatlingtank | RedAlert2/Yuri |
+| ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml | 121 | yuri_gatlingtank | RedAlert2/Yuri |
 | ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml | 544 | yuri_gatlingtrooper | RedAlert2/Yuri |
-| ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml | 447 | yuri_mastermind | RedAlert2/Yuri |
+| ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml | 445 | yuri_mastermind | RedAlert2/Yuri |
 | ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml | 32 | yuri_slaveminer | RedAlert2/Yuri |
 | ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml | 377 | yuri_yurix | RedAlert2/Yuri |
 | ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml | 653 | asianalliance_asdf | RedAlert2Mod/AsianAlliance |
@@ -148,7 +148,7 @@ Buildable actors with ^GainsExperienceRA2 but NO Armament@*ELITE*: **197**
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 558 | schwarzermond_corruptorpiercer | RedAlert2Mod/SchwarzerMond |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 644 | schwarzermond_dieglocke | RedAlert2Mod/SchwarzerMond |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 1 | schwarzermond_drone | RedAlert2Mod/SchwarzerMond |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 297 | schwarzermond_engineeringarmor | RedAlert2Mod/SchwarzerMond |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 325 | schwarzermond_engineeringarmor | RedAlert2Mod/SchwarzerMond |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 901 | schwarzermond_gravitycoretank | RedAlert2Mod/SchwarzerMond |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 708 | schwarzermond_komet | RedAlert2Mod/SchwarzerMond |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 84 | schwarzermond_laserbeetle | RedAlert2Mod/SchwarzerMond |
@@ -203,7 +203,7 @@ Buildable actors with ^GainsExperienceRA2 but NO Armament@*ELITE*: **197**
 | ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml | 341 | tkm_zaza | RedAlert2Mod/TKM |
 | ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml | 974 | tkmvan | RedAlert2Mod/TKM |
 | ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml | 856 | tkmworker | RedAlert2Mod/TKM |
-| ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml | 931 | cabal_eliminator800 | TiberianSun/CABAL |
+| ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml | 940 | cabal_eliminator800 | TiberianSun/CABAL |
 | ContentPacks/TiberianSun/CABAL/yaml/naval.yaml | 1 | cabal_lcraft | TiberianSun/CABAL |
 | ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml | 252 | cabal_pillbox | TiberianSun/CABAL |
 | ContentPacks/TiberianSun/Forgotten/yaml/naval.yaml | 1 | forgotten_lcraft | TiberianSun/Forgotten |

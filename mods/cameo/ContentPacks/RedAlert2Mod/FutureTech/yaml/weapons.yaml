@@ -303,6 +303,7 @@ CryoLegionnaireAttack:
 FutureMicrotorpedos:
 	Inherits: ^RA2Grenade
 	Inherits@2: ^RA2HeavyMissile
+	Inherits@fx: ^Effect_Watersplash_Large_RA2
 	ReloadDelay: 240
 	Range: 12000
 	Burst: 4
@@ -341,10 +342,6 @@ FutureMicrotorpedos:
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir:
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
 
 AthenaLaser:
 	Inherits: ^LightMissile
@@ -544,6 +541,7 @@ Future_CoilerFriendFrag2:
 Future_MultiMissile:
 	Inherits: ^Warhead_Arrow_Light
 	Inherits@2: ^RA2LightMissile
+	Inherits@fx: ^Effect_Grey_Explosion_Small_RA2
 	ReloadDelay: 24
 	Burst: 3
 	BurstDelays: 4
@@ -557,9 +555,6 @@ Future_MultiMissile:
 		Damage: 4000
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_small_grey_explosion
-		ImpactSounds: gexpifva.wav
 
 Future_MultiMissile_Javelin:
 	Inherits: ^LightMissile
@@ -617,6 +612,7 @@ Future_MultiMissile_Frag:
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^LightChemicalWeapon
 	Inherits@4: ^LightMissile
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 56
 	Burst: 3
 	BurstDelays: 4
@@ -665,10 +661,6 @@ Future_MultiMissile_Frag:
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 	Warhead@FireShrapnel: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: AsianFlameFragment
@@ -900,6 +892,7 @@ Future_Wheel_MG:
 Future_Wheel_MG_elite:
 	Inherits: Future_Wheel_MG
 	Inherits@2: ^SteelChaingun
+	Report: gun8.aud
 	Range: 6806
 	Burst: 8
 
@@ -948,6 +941,7 @@ ShotgunAttackRobotGun:
 ShotgunAttackRobotGun_elite:
 	Inherits: ShotgunAttackRobotGun
 	Inherits@2: ^SteelChaingun
+	Report: gun8.aud
 	Range: 5110
 	Burst: 2
 	BurstDelays: 3
@@ -995,6 +989,7 @@ MissileAttackRobotGun:
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
 	Inherits@2: ^SteelLightMissile
+	Inherits@3: ^Effect_Grey_Explosion_Small_RA2
 	Range: 8000
 	ReloadDelay: 65
 	Burst: 2
@@ -1008,12 +1003,10 @@ MissileAttackRobotGun:
 		Damage: 12000
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_small_grey_explosion
-		ImpactSounds: gexpifva.wav
 
 MissileAttackRobotGun_elite:
 	Inherits: MissileAttackRobotGun
+	Inherits@fx: ^Effect_Grey_Explosion_Medium_RA2
 	Range: 9000
 	Burst: 4
 	Projectile: Missile
@@ -1021,9 +1014,6 @@ MissileAttackRobotGun_elite:
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_grey_explosion
-		ImpactSounds: gexp15a.wav
 
 FutureMechGatling:
 	Inherits: ^TankDestroyerCannon
@@ -1405,6 +1395,7 @@ OrionRailgun:
 	Inherits@2: ^Projectile_Railgun_Heavy
 	Inherits@3: ^Effect_Railgun_Heavy
 	Inherits@4: ^RA2HeavyCannon
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	Range: 7500
 	ReloadDelay: 60
 	Report: AUFTank_neutImpaSmaa.wav, AUFTank_neutImpaSmab.wav, AUFTank_neutImpaSmac.wav, AUFTank_neutImpaSmad.wav, AUFTank_neutImpaSmae.wav
@@ -1426,8 +1417,6 @@ OrionRailgun:
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
 
 OrionRailgun_elite:

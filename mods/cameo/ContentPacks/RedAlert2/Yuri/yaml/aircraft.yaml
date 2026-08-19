@@ -92,13 +92,13 @@ yuri_floatingdisk:
 	Armament@SECOND:
 		Name: secondary
 		Weapon: RA2DiskDrain
-		MuzzleSequence: muzzle
+		MuzzleSequence: ra2_diskray
 		MuzzlePalette: ra2effect
 		RequiresCondition: yuri_upgrade_disksiphonattack
 	Armament@Steal:
 		Name: secondary
 		Weapon: RA2DiskSteal
-		MuzzleSequence: muzzle
+		MuzzleSequence: ra2_diskray
 		MuzzlePalette: ra2effect
 		Voice: Steal
 	GrantConditionOnPrerequisite@yuri_upgrade_disksiphonattack:

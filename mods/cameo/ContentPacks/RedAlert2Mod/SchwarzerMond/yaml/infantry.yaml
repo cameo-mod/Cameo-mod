@@ -176,8 +176,21 @@ schwarzermond_noidmgarmor:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 50
-	Armor:
+	# W21 layer stack, R5: while the plating holds, BOTH armors are enabled and the
+	# warhead AVERAGES them (AreaDamage.MultiArmorCombination) — so anti-infantry fire
+	# is never useless against a plated walker and AP fire is never oppressive. Once
+	# the bar is stripped only the body armor is left. NEVER let two armors multiply.
+	Armor:                      # body — always on
+		Type: Plate
+	Armor@Plating:              # averaged with the body while the plating bar holds
 		Type: Superheavy
+		RequiresCondition: plating_up && !shielded
+	ArmorPlating:
+		MaxPercentageStrength: 50
+		PercentageRegenAmount: 1
+		RegenInterval: 25
+		RampTicks: 125
+		FullCondition: plating_up
 	Armament@PRIMARY:
 		Weapon: NaxiMP40Laser
 		LocalOffset: 500,0,400
@@ -254,8 +267,23 @@ schwarzermond_noidharvester:
 		HpPerStep: 3750
 	ChangesHealth@SelfHealing:
 		Step: 30
-	Armor:
+	# W21 layer stack, R5: while the plating holds, BOTH armors are enabled and the
+	# warhead AVERAGES them (AreaDamage.MultiArmorCombination) — so anti-infantry fire
+	# is never useless against a plated walker and AP fire is never oppressive. Once
+	# the bar is stripped only the body armor is left. NEVER let two armors multiply.
+	Armor:                      # body — always on
 		Type: Plate
+		OccupancyCostModifier: 0
+	Armor@Plating:              # averaged with the body while the plating bar holds
+		Type: Heavy
+		OccupancyCostModifier: 0
+		RequiresCondition: plating_up
+	ArmorPlating:
+		MaxPercentageStrength: 50
+		PercentageRegenAmount: 1
+		RegenInterval: 25
+		RampTicks: 125
+		FullCondition: plating_up
 	Armament@PRIMARY:
 		Weapon: NaxiMP40Laser
 		LocalOffset: 500,0,400
@@ -329,8 +357,21 @@ schwarzermond_engineeringarmor:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armor:
+	# W21 layer stack, R5: while the plating holds, BOTH armors are enabled and the
+	# warhead AVERAGES them (AreaDamage.MultiArmorCombination) — so anti-infantry fire
+	# is never useless against a plated walker and AP fire is never oppressive. Once
+	# the bar is stripped only the body armor is left. NEVER let two armors multiply.
+	Armor:                      # body — always on
 		Type: Plate
+	Armor@Plating:              # averaged with the body while the plating bar holds
+		Type: Heavy
+		RequiresCondition: plating_up && !shielded
+	ArmorPlating:
+		MaxPercentageStrength: 50
+		PercentageRegenAmount: 1
+		RegenInterval: 25
+		RampTicks: 125
+		FullCondition: plating_up
 	Armament:
 		Name: primary
 		Weapon: RA2IFVRepair
@@ -385,6 +426,13 @@ schwarzermond_lunarsoldier:
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@VrilInfusion: ^NaxiVrilInfusion
+	# ^NaxiVrilInfusion is inherited LAST, so its Shielded gate would overwrite the
+	# stealth-suit term this unit alone gets from ^RA2YuriStealthSuits and quietly kill
+	# that shield. RequiresCondition is a scalar — it cannot be appended to — so the only
+	# way to keep both paths is to restate the whole expression here, on the actor, where
+	# it wins over every template.
+	Shielded:
+		RequiresCondition: !disabled && (schwarzermond_upgrade_vrilinfusion || yuri_upgrade_infantrystealthsuits || shieldgen || shielded)
 	# SPECIAL-FORCES VERIFIER (Formula v2, maintainer 2026-07-20): the
 	# Tier-1 clean tripwire (no tech penalty, no specials — the moon-
 	# propaganda is a RECEIVED upgrade buff, not an aura). Exactly 2x the

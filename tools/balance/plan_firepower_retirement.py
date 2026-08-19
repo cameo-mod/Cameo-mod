@@ -1,0 +1,199 @@
+#!/usr/bin/env python3
+"""W17 — the worklist for retiring `FirepowerMultiplier` as a fine-tuning knob.
+
+The TOOLING half of W17 is shipped: the pipeline no longer solves for an FP
+residual (`propose_class_rebalance.decompose_dps` returns 1.0) and no longer
+writes one (`apply_balance.RETIRED_UNIT_FIELDS`). The CONTENT half — folding the
+multipliers that already sit in yaml into the weapons' `Damage` — edits
+`mods/cameo/weapons/**`, which is **set B** and belongs to Devin while W2 runs.
+
+This script produces the worklist that half will execute, and answers the only
+question that decides whether it is safe: **how much does each actor's damage
+move when its multiplier is folded in and snapped back to the flat grid?**
+
+    python tools/balance/plan_firepower_retirement.py            # summary
+    python tools/balance/plan_firepower_retirement.py --write    # + markdown
+
+Two things the report separates, because they are not the same job:
+
+* a **trim** (0.93, 1.07, …) is what the knob was invented for; the grid is 20x
+  finer than when the knob was added, so folding it in is nearly exact.
+* a **scale** (0.09, 0.12, 0.5, 2.0 …) is not fine-tuning at all — it is a
+  different weapon wearing another weapon's numbers. Those are the ones the
+  grid cannot absorb cleanly, and they need a real damage decision, not a fold.
+
+Reading `docs/balance/*.json` only: the ledger IS the extracted yaml state, and
+this script writes nothing into the game.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import pathlib
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools/balance"))
+import formula  # noqa: E402
+
+LEDGER_DIR = ROOT / "docs/balance"
+OUT = LEDGER_DIR / "firepower_retirement.md"
+
+# Above this relative error a fold is no longer behaviour-preserving and the
+# actor needs a damage decision instead. 1% is the trim/scale line: it is the
+# step the retired knob itself moved in, so anything the grid holds to within
+# one old FP step is, by definition, no worse than the knob it replaces.
+FOLD_TOLERANCE = 0.01
+
+TWIN_SUFFIXES = ("friendlyfire", "extradamage", "percentage")
+
+
+def is_main(warhead: dict) -> bool:
+    return not (warhead.get("tag") or "").lower().endswith(TWIN_SUFFIXES)
+
+
+def collect() -> list[dict]:
+    """One row per (actor, weapon, main warhead) carrying an unconditional FP."""
+    rows: list[dict] = []
+    for jf in sorted(LEDGER_DIR.glob("*.json")):
+        if jf.name == "class_anchors.json":
+            continue
+        doc = json.loads(jf.read_text(encoding="utf-8"))
+        if "sections" not in doc:
+            continue
+        for section in doc["sections"].values():
+            for actor, unit in section.items():
+                slot = unit.get("firepower_multiplier") or {}
+                fp = slot.get("v")
+                if fp is None:
+                    continue
+                fp = float(fp)
+                if abs(fp - 1.0) <= 1e-9:      # a 100% multiplier is already a no-op
+                    continue
+                for arm in unit.get("armaments", []):
+                    if not arm.get("pricing"):
+                        continue
+                    for wh in arm.get("damage_warheads", []):
+                        if not is_main(wh):
+                            continue
+                        try:
+                            damage = int(str(wh.get("damage")))
+                        except (TypeError, ValueError):
+                            continue
+                        if damage <= 0:
+                            continue
+                        exact = damage * fp
+                        folded = formula.snap_damage_step(exact)
+                        rows.append({
+                            "ledger": doc["ledger"],
+                            "actor": actor,
+                            "weapon": arm.get("weapon"),
+                            "file": arm.get("defined_in"),
+                            "tag": wh.get("tag"),
+                            "fp": fp,
+                            "damage": damage,
+                            "exact": exact,
+                            "folded": folded,
+                            "error": abs(folded - exact) / exact,
+                            "trait_src": slot.get("src", ""),
+                        })
+    return rows
+
+
+def summarise(rows: list[dict]) -> dict:
+    actors = {r["actor"] for r in rows}
+    clean = [r for r in rows if r["error"] <= FOLD_TOLERANCE]
+    dirty = [r for r in rows if r["error"] > FOLD_TOLERANCE]
+    return {
+        "rows": len(rows),
+        "actors": len(actors),
+        "clean": len(clean),
+        "dirty": len(dirty),
+        "dirty_actors": sorted({r["actor"] for r in dirty}),
+        "files": sorted({r["file"] for r in rows if r["file"]}),
+        "exact": sum(1 for r in rows if r["error"] == 0),
+    }
+
+
+def render(rows: list[dict], s: dict) -> str:
+    out = [
+        "# W17 — FirepowerMultiplier retirement worklist",
+        "",
+        "Generated by `tools/balance/plan_firepower_retirement.py`. The tooling half",
+        "of W17 has shipped; this is the CONTENT half, which edits **set B**",
+        "(`mods/cameo/weapons/**`) and waits on W2.",
+        "",
+        "**The fold:** for every main warhead of an actor carrying an unconditional",
+        f"`FirepowerMultiplier`, write `Damage x FP` snapped to the {formula.DAMAGE_STEP}",
+        "grid, then DELETE the trait. Conditional (upgrade) FP traits are design and",
+        "are not touched.",
+        "",
+        f"- main warheads to restate: **{s['rows']}** across **{s['actors']}** actors",
+        f"  in {len(s['files'])} weapon files",
+        f"- land on the grid exactly: **{s['exact']}**",
+        f"- fold within {FOLD_TOLERANCE:.0%}: **{s['clean']}** — behaviour-preserving",
+        f"- need a damage DECISION: **{s['dirty']}** "
+        f"({', '.join(s['dirty_actors']) or 'none'})",
+        "",
+        "## Needs a decision (fold error > "
+        f"{FOLD_TOLERANCE:.0%})",
+        "",
+        "These are not trims. A multiplier this far from 1.0 means the actor is",
+        "firing another unit's weapon at a fraction of its written damage, and the",
+        "grid cannot express the result — pick the real damage instead of folding.",
+        "",
+        "| actor | weapon | FP | Damage | exact | folded | error | file |",
+        "|---|---|--:|--:|--:|--:|--:|---|",
+    ]
+    for r in sorted(rows, key=lambda r: -r["error"]):
+        if r["error"] <= FOLD_TOLERANCE:
+            continue
+        out.append(
+            f"| `{r['actor']}` | `{r['weapon']}` | {r['fp']:.2f} | {r['damage']} | "
+            f"{r['exact']:.0f} | {r['folded']} | {r['error']:.1%} | {r['file']} |")
+    out += [
+        "",
+        "## Behaviour-preserving folds",
+        "",
+        "| actor | weapon | warhead | FP | Damage | → | error |",
+        "|---|---|---|--:|--:|--:|--:|",
+    ]
+    for r in sorted(rows, key=lambda r: (r["actor"], r["weapon"] or "")):
+        if r["error"] > FOLD_TOLERANCE:
+            continue
+        out.append(
+            f"| `{r['actor']}` | `{r['weapon']}` | `{r['tag']}` | {r['fp']:.2f} | "
+            f"{r['damage']} | **{r['folded']}** | {r['error']:.2%} |")
+    return "\n".join(out) + "\n"
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--write", action="store_true",
+                    help=f"write {OUT.relative_to(ROOT)}")
+    args = ap.parse_args()
+
+    rows = collect()
+    if not rows:
+        print("no actor carries an unconditional FirepowerMultiplier — W17 content "
+              "half is complete")
+        return 0
+    s = summarise(rows)
+    print(f"grid step {formula.DAMAGE_STEP}: {s['rows']} main warheads on "
+          f"{s['actors']} actors carry an unconditional FirepowerMultiplier")
+    print(f"  exact on the grid          : {s['exact']}")
+    print(f"  fold within {FOLD_TOLERANCE:.0%}            : {s['clean']}")
+    print(f"  need a damage decision     : {s['dirty']}")
+    for actor in s["dirty_actors"]:
+        worst = max(r["error"] for r in rows if r["actor"] == actor)
+        fp = next(r["fp"] for r in rows if r["actor"] == actor)
+        print(f"    - {actor:32} FP {fp:.2f}  worst {worst:.1%}")
+    if args.write:
+        OUT.write_text(render(rows, s), encoding="utf-8")
+        print(f"wrote {OUT.relative_to(ROOT)}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -22,6 +22,23 @@ is provided for convenience; if it disagrees with README.md, README.md wins.
 
 Do not modify rules, assets, or balance numbers until these documents are in context. When this document and `DESIGN.md` conflict with code or old notes, the repository documents win unless an audit baseline explicitly defers the fix.
 
+## Content installer and music filesystem plumbing (2026-08-11)
+
+- Mounting `^SupportDir|Content/cameo/` does not recursively mount nested
+  packages. A nested `scores.mix` must be mounted explicitly, while the
+  Firestorm directory can be mounted because its `.aud` files are direct
+  children.
+- `Music:` in `mods/cameo/mod.yaml` loads `mods/cameo/music.yaml`; the
+  similarly named `mods/cameo/audio/music.yaml` is not loaded automatically.
+- `ModContent.TestFiles` must match the exact extraction destinations in the
+  download manifest, including every file required for a complete package.
+- Keep `ContentPackages:` empty and omit `RequiredContentFiles:` when content
+  installation must remain opt-in through Manage Content. Installer package
+  `Required` flags do not replace those filesystem-loader checks.
+- `cameo-content` is deliberately hyphenated to match the engine's
+  `*-content` mod convention; it is an explicit exception to Cameo's
+  underscore-only in-mod naming rule.
+
 ## Contents
 
 - [Latest lessons from the July 2026 infantry rebalance pass](#latest-lessons-from-the-july-2026-infantry-rebalance-pass)
@@ -37,6 +54,124 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - [Loose-extracted .oramap maps must always be repacked before finishing a task (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
 - [Empty warhead type = boot NRE; check-yaml does not catch it (2026-08-04)](#empty-warhead-type--boot-nre-check-yaml-does-not-catch-it-2026-08-04)
 - [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
+
+---
+
+## Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)
+
+All five were **invisible to every gate we run** — valid yaml, values inside the window, the
+resolver happy, `find_empty_warhead` 0, and the game booting to the menu. A boot gate cannot
+see a number that is merely WRONG. Each now has a guard, because each was found by accident.
+
+### 1. A PSEUDO-ARMOR ROW DRIVING A WINDOW SCALE (the worst one)
+
+`finish_blend` scaled a blend back into `[10, 200]` with `max(values.values())` — which
+included **`Shield`**, a row deliberately OUTSIDE the window in both directions. So the
+shield value, not the armor ladder, set the scale for the whole profile. A quiet ~2x crush
+while Shield ran 100..400; **catastrophic** once Shield began being emitted in centi-units:
+`Quantum_Light` scaled by `200/18535 = 0.011`, every armor rounded to 0 or 1, and
+`distinct_ints`' floor-repair pass then **FABRICATED the entire ladder** from the emit order.
+
+It hid because `mean_normalise` runs afterwards and scaled the garbage back to a mean of 100.
+The profiles looked plausible and passed every check. The only trace was "23 non-monotone
+ladders", which read like a cosmetic ordering issue and was actually a ladder that had
+stopped carrying data.
+
+**Rule: any statistic over a Versus node must state which rows it excludes.** Use
+`NON_ARMOR_ROWS`, never `max(values)`.
+
+### 2. FILTERING BY NAME WHERE THE TYPE IS AUTHORITATIVE
+
+Excluding %-twins by an `endswith("_Percentage")` KEY suffix silently let ~50 legacy
+templates through — they name theirs `Warhead@SmallArmsPercentage`, no underscore. Their
+`Versus` is a MAGNITUDE (17, 25), so a mean came out 157 instead of 209: a **34% error**.
+
+**Rule: filter warheads on the TYPE (`"Percentage" in child.value`), never on the key name.**
+A naming convention is not an invariant; the type is.
+
+### 3. SCANNING DEAD FILES
+
+`mods/cameo/**/*.yaml` includes files mod.yaml does NOT load — `rules/redalert2.yaml` and
+siblings are dead copies ("now loaded via include-only wrapper packs … not loaded here to
+avoid duplicate keys", mod.yaml:176). A new audit reported a stale flat modifier on a
+template whose LIVE copy had already been fixed.
+
+**Rule: audits read `Ruleset(ROOT).manifest.rules`, not a glob.** A dead file is not
+evidence about what ships.
+
+### 4. A COMBINATION RULE THAT MADE AN UPGRADE HARMFUL
+
+W21 flipped multiple armors from MULTIPLY to AVERAGE and **nobody restated the values**.
+Under multiplication a row of 50 meant "half the damage", target-independent; averaged it
+gives `(base+50)/2` — at base 100 a **25%** cut, not 50%. So every overlay's effect was
+silently halved, and worse, `(base + plating)/2 > base` whenever the plating row exceeded the
+class row: **98 of 1152 cells took MORE damage for wearing armor**, worst 1.84x, hitting
+HEAVY units hardest because they have the low class rows.
+
+**Rule: AN ARMOR UPGRADE MUST NEVER INCREASE INCOMING DAMAGE** (DESIGN §12.0e law 4).
+Guard: `audit_armor_upgrade_harm.py`. And when a combination rule changes, re-derive every
+value that was authored against the old one.
+
+### 5. A MISSING ROW IS NOT "NO OPINION"
+
+Both the engine and Cameo's `DamageVersus` select armors with `Versus.ContainsKey(type)`, and
+an EMPTY match list `return 100`. So for a LAYER-SELECTED armor, omitting a row does not mean
+"this weapon ignores the plating" — it means the plated unit **loses its armor entirely**. A
+superheavy tank would take 100% from bullets instead of ~20%. I wrote this warning and then
+made the exact mistake in my own code by skipping the flat families.
+
+**Rule: every plating gets a row in EVERY template, no exceptions.** Guard:
+`audit_armor_upgrade_harm.py` I1.
+
+### And a process slip worth its own line
+
+`audit_balance_drift` went RED with all 32 ledgers drifted, because seven yaml commits landed
+without re-running `extract_stats`. CLAUDE.md requires committing **yaml and ledger
+TOGETHER**. Re-extract before every commit that moves a balance number, not at the end of a
+session.
+
+### The naming trap that keeps recurring: Integrity is NOT a shield
+
+`Integrity.cs` shipped for months with every `[Desc]` copied verbatim from `Shielded.cs`, and
+the wrong word spread into the warhead's `[Desc]`, the generator's comments and a handoff doc.
+**`Integrity` absorbs NOTHING** — `INotifyDamage` runs after the damage has landed on health —
+so it buys no survivability and only gates the EMP disable. The only thing it shares with a
+shield is the FIELD SHAPE (`MaxStrength + MaxPercentageStrength`). Corrected 2026-08-17.
+
+---
+
+## `Parent type X was already inherited` — the crash class nothing but the boot could see (2026-08-17)
+
+The engine refuses to load a node that reaches the **same parent twice along one ancestor chain**
+(`engine/OpenRA.Game/MiniYaml.cs` → `ResolveInherits`; `inherited.Add(name, loc)` throws). The RA2
+effect-template refactor produced **30** of these at once — a weapon inheriting `^Effect_X_Heavy`
+directly *and* a new `^Effect_*_RA2` wrapper that inherits the same parent.
+
+Three properties, each counter-intuitive enough to have cost real time:
+
+* ⛔ **The `@suffix` does NOT make it legal.** The guard is keyed on the parent **TYPE**. The
+  crashing lines were `Inherits@4:` and `Inherits@fx:` — both suffixed. A previous handoff of mine
+  claimed the suffix "is what makes repeated inherits legal"; that is **false**, and it sent
+  another agent hunting for bare `Inherits:` lines — a search that finds nothing while 30
+  collisions are live. **Grep is not a test for this class.**
+* **A diamond is legal.** Two sibling parents that each inherit a common grandparent are fine:
+  the accumulated set is passed BY VALUE, so additions inside one sibling's recursion do not escape.
+* ⚠ **It is ORDER-DEPENDENT.** `Inherits: A` then `Inherits@2: B` where `B` inherits `A` crashes;
+  the same two lines swapped load fine. **Reordering an inherit block can break a working weapon**
+  — a direct hazard for W24's inherit collapse.
+
+Two process lessons on top of the engine one:
+
+1. **The boot is a terrible detector for a class it can only report ONE instance of.** It throws on
+   the first collision and stops, so N collisions cost N launch cycles (~40 s each plus diagnosis).
+   `audit_duplicate_inherits.py` (in `run_all.sh`) reports all of them in one pass: **D1** the crash,
+   **D2** a redundant parent that only line ORDER is saving, **D3** a dangling target.
+2. **A MiniYaml load failure can leave a zero-length `perf.log` and no obvious window.** The
+   exception log does appear, but the fast path to the diagnosis is running the engine binary
+   directly and reading **stderr** — `launch-game.cmd` swallows it behind `pause`.
+
+**Fix:** delete the redundant DIRECT inherit (the other parent already provides it). Reordering
+also silences the crash but leaves the redundancy behind as a D2.
 
 ---
 
@@ -489,3 +624,40 @@ A `Warhead@X:` line with **no value** is a boot crash, not a lint warning. `Weap
 ## Weapon 3-way split: projectile family naming (2026-08-07)
 
 - **The new projectile family for cannons is `Shell_`, not `Cannon_`.** `^Projectile_Shell_Light/Medium/Heavy` exists; `^Projectile_Cannon*` does not. `CannonHE_Heavy` and `CannonAP_*` weapons use `^Projectile_Shell_*` for delivery and `^Effect_CannonHE_*` / `^Effect_CannonAP_*` for impact.
+
+## Between-cell movement responsiveness (2026-08-11)
+
+- `^DefaultInfantry` enables `ResponsiveBetweenCells` for responsive foot infantry.
+- A defined `Mobile.TurnSpeed` remains the documented marker for infantry that deliberately turn like vehicles; those actors inherit `^VehicleTurnRateInfantry`, which only sets `Mobile.ResponsiveBetweenCells: false` so their balance values and movement tuning remain unchanged.
+
+## `Inherits` POSITION is semantic, not cosmetic (2026-08-16)
+
+**The last node wins, and `Inherits` is a node.** `MiniYaml` walks a definition's children
+in document order; when it reaches an `Inherits`/`Inherits@X` line it splices the parent's
+resolved children in **at that point**, and anything later overrides anything earlier
+(`tools/audit/miniyaml.py` `_resolve_generic` reproduces this faithfully). Therefore:
+
+- `Inherits` at the **TOP** → the definition's own nodes win over the parent. This is what
+  almost every definition intends, and it is the tree's convention.
+- `Inherits` at the **BOTTOM** → **the parent silently overrides the definition's own values.**
+
+**How it bit us.** The W23 retrofit appended `Inherits@wh: ^Warhead_<Family>_<Level>` after
+the *last* existing `Inherits`. `^HeavyCannon`, `^MediumCannon` and `^TankDestroyerCannon`
+each already carried `Inherits@glow: ^ImpactGlow` near the END of their block (~line 81)
+while their warheads sit at line 9 — so the family inherit landed *below* the warheads and
+the family's `Damage: 2000`, `Spread: 250` and `Falloff` overrode the template's own
+carefully rescaled `Damage: 838` and its preserved geometry.
+
+**Nothing catches this.** It lints clean under `--check-yaml`, it boots to the menu, and
+`find_empty_warhead` stays 0. The only signal is a before/after resolve diff
+(`tools/balance/verify_retrofit.py`). Cost: a full debugging round, during which the yaml
+was reverted twice.
+
+**Rules:**
+1. Any tool that ADDS an `Inherits` line must insert it at the TOP of the block, never
+   append it after existing ones, unless the parent is deliberately meant to win.
+2. When a definition's own value mysteriously "doesn't apply", check where its `Inherits`
+   lines sit relative to that value BEFORE suspecting the merge engine.
+3. A weapon whose own `Warhead@X` is declared ABOVE its `Inherits` lines is already relying
+   on the parent to win — e.g. `japan_imperialscoutsman_rifle_waveforce` declares
+   `Warhead@Railgun_Heavy` at line 0 and three `Inherits` at lines 2-4.

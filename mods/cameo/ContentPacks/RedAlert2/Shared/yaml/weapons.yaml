@@ -36,6 +36,731 @@
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect
 
+
+####################################################################################################
+#		Red Alert 2 Effect-Name-Based Template Library
+####################################################################################################
+
+^Effect_Apoc_Explosion_RA2:
+	Inherits: ^Effect_Demolition_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_apoc_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpapoa.wav
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Building_Explosion_RA2:
+	Inherits: ^Effect_Demolition_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_building, ra2_large_bang, ra2_large_brnl, ra2_verylarge_clsn, ra2_large_tumu
+		ExplosionPalette: ra2effect
+		ImpactSounds: expnew13.wav
+		ValidTargets: Ground, Air, Water
+	-Warhead@EffectWater:
+
+^Effect_Chrono_Fd_RA2:
+	Inherits: ^Effect_Demolition_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_chronofd
+		ExplosionPalette: ra2effect
+		ImpactSounds: schrmov.wav
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Chrono_Sk_RA2:
+	Inherits: ^Effect_Demolition_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_chronosk
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Elite_Explosion_RA2:
+	Inherits: ^Effect_MissileAP_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_elite_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpapoa.wav
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwala.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Emp_Fx_RA2:
+	Inherits: ^Effect_Flak_Medium
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_emp_fx
+		ExplosionPalette: ra2effect
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Flak_Explosion_Air_RA2:
+	Inherits: ^Effect_Flak_Medium
+	-Warhead@Effect:
+	-Warhead@EffectWater:
+	Warhead@EffectAir: CreateEffect
+		Explosions: ra2_flak_explosion_air
+		ExplosionPalette: ra2effect
+		ImpactSounds: bflaattc.wav, bflaattd.wav, bflaattb.wav, bflaatta.wav
+		ValidTargets: Air
+
+^Effect_Flak_Explosion_Ground_RA2:
+	Inherits: ^Effect_Flak_Medium
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_flak_explosion_ground
+		ExplosionPalette: ra2unit
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Flak_Puff_RA2:
+	Inherits: ^Effect_Flak_Medium
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_flak_puff
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: ra2_flak_puff_AA
+		ExplosionPalette: ra2effect
+		ValidTargets: Air
+
+^Effect_Watersplash_Huge_RA2:
+	Inherits: ^Effect_MissileAP_Heavy
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_huge_watersplash
+		ExplosionPalette: ra2effect
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Init_Fire_RA2:
+	Inherits: ^Effect_Flame_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_initfire
+		ExplosionPalette: ra2effect
+		-ImpactSounds:
+		ValidTargets: Ground, Water
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Ion_Ring_RA2:
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_ionring
+		ExplosionPalette: ra2effect
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Iron_Fx_RA2:
+	Inherits: ^Effect_CannonAP_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_iron_fx
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Iron_Blast_RA2:
+	Inherits: ^Effect_Demolition_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_ironblast
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Kirov_Tesla_RA2:
+	Inherits: ^Effect_Demolition_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_kirovtesla
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpapoa.wav
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Bang_Large_RA2:
+	Inherits: ^Effect_Demolition_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_large_bang
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Brnl_Large_RA2:
+	Inherits: ^Effect_Concussion_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_large_brnl
+		ExplosionPalette: ra2effect
+		ImpactSounds: expnew13.wav
+		ValidTargets: Ground, Air, Water
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Clsn_Large_RA2:
+	Inherits: ^Effect_MissileAP_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_large_clsn
+		ExplosionPalette: tseffect
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_huge_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Explosion_Large_RA2:
+	Inherits: ^Effect_MissileHE_Medium
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_large_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
+		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Grey_Explosion_Large_RA2:
+	Inherits: ^Effect_CannonHE_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_large_grey_explosion
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Tumu_Large_RA2:
+	Inherits: ^Effect_Concussion_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_large_tumu
+		ExplosionPalette: ra2effect
+		ImpactSounds: expnew13.wav
+		ValidTargets: Ground, Air, Water
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Twlt_Large_RA2:
+	Inherits: ^Effect_Concussion_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_large_twlt
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp11a.wav, gexp14b.wav, gexp14c.wav, gexp14d.wav, expnew13.wav
+		ValidTargets: Ground, Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Watersplash_Large_RA2:
+	Inherits: ^Effect_MissileHE_Medium
+	-Warhead@Effect:
+	-Warhead@EffectAir:
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Bang_Medium_RA2:
+	Inherits: ^Effect_Demolition_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_medium_bang
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp06a.wav, gexp07a.wav, expnew13.wav
+		ValidTargets: Ground, Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Brnl_Medium_RA2:
+	Inherits: ^Effect_Concussion_Medium
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_medium_brnl
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp11a.wav, gexp14b.wav, gexp14c.wav, gexp14d.wav, expnew09.wav
+		ValidTargets: Ground, Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Clsn_Medium_RA2:
+	Inherits: ^Effect_MissileAP_Medium
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_medium_clsn
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Explosion_Medium_RA2:
+	Inherits: ^Effect_CannonHE_Medium
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_medium_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Grey_Explosion_Medium_RA2:
+	Inherits: ^Effect_MissileHE_Medium
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_medium_grey_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp15a.wav
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Tumu_Medium_RA2:
+	Inherits: ^Effect_Concussion_Medium
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_medium_tumu
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Twlt_Medium_RA2:
+	Inherits: ^Effect_Concussion_Medium
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_medium_twlt
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Nuke_Ball_RA2:
+	Inherits: ^Effect_Nuclear_Super
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_nuke_ball
+		ExplosionPalette: ra2effect
+		ImpactSounds: snukexpl.wav
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Psi_Wave_RA2:
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_psi_wave
+		ExplosionPalette: ra2effect
+		ImpactActors: false
+		AffectsParent: true
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Bang_Small_RA2:
+	Inherits: ^Effect_Railgun_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_small_bang
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Brnl_Small_RA2:
+	Inherits: ^Effect_Concussion_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_small_brnl
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Clsn_Small_RA2:
+	Inherits: ^Effect_MissileAP_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_small_clsn
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Explosion_Small_RA2:
+	Inherits: ^Effect_CannonAP_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_small_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Grey_Explosion_Small_RA2:
+	Inherits: ^Effect_CannonHE_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_small_grey_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpifva.wav
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Depth_Charge_RA2:
+	Inherits: ^Effect_Grey_Explosion_Small_RA2
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_small_grey_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpifva.wav
+		ValidTargets: Submarine, Ship
+		InvalidTargets: Underwater
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ImpactActors: false
+		ValidTargets: Water, Underwater
+
+^Effect_Tumu_Small_RA2:
+	Inherits: ^Effect_Concussion_Medium
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_small_tumu
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Twlt_Small_RA2:
+	Inherits: ^Effect_Concussion_Medium
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_small_twlt
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Watersplash_Small_RA2:
+	Inherits: ^Effect_Demolition_Light
+	-Warhead@Effect:
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Terrorist_Explosion_RA2:
+	Inherits: ^Effect_Demolition_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_terrorist_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpapoa.wav
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Tesla_Impact_RA2:
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidRelationships: Neutral, Enemy
+		Damage: 1000
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_tesla_impact
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: ra2_tesla_impact
+		ExplosionPalette: ra2effect
+		ValidTargets: Air
+
+^Effect_Bang_Tiny_RA2:
+	Inherits: ^Effect_Demolition_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_tiny_bang
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp07a.wav
+		ValidTargets: Ground, Air
+		InvalidTargets: Water
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Brnl_Tiny_RA2:
+	Inherits: ^Effect_Concussion_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_tiny_brnl
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Clsn_Tiny_RA2:
+	Inherits: ^Effect_MissileAP_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_tiny_clsn
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Grey_Explosion_Tiny_RA2:
+	Inherits: ^Effect_CannonHE_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_tiny_grey_explosion
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Tumu_Tiny_RA2:
+	Inherits: ^Effect_Concussion_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_tiny_tumu
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Twlt_Tiny_RA2:
+	Inherits: ^Effect_Concussion_Light
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_tiny_twlt
+		ExplosionPalette: ra2effect
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Clsn_VeryLarge_RA2:
+	Inherits: ^Effect_MissileAP_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_verylarge_clsn
+		ExplosionPalette: ra2effect
+		ImpactSounds: expnew13.wav
+		ValidTargets: Ground, Air, Water
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+^Effect_Twlt_VeryLarge_RA2:
+	Inherits: ^Effect_Demolition_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_verylarge_twlt
+		ExplosionPalette: ra2effect
+		ImpactSounds: expnew09.wav
+		ValidTargets: Ground, Water, Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_large_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
 ^RA2SmallArms:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -50,139 +775,68 @@
 ^RA2FlakWeapon:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
-	Inherits@fx: ^Effect_Flak_Medium
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_flak_explosion_ground
-		ExplosionPalette: ra2unit
-		-ImpactSounds:
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_explosion_air
-		ExplosionPalette: ra2effect
-		ValidTargets: Air
-		ImpactSounds: bflaattc.wav, bflaattd.wav, bflaattb.wav, bflaatta.wav
+	Inherits@fx: ^Effect_Flak_Puff_RA2
 
 ^RA2LightMissile:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_MissileAP_Light
+	Inherits@fx: ^Effect_Clsn_Small_RA2
 	Projectile: Missile
 		Image: ra2_dragon
 		-TrailImage:
 		ContrailLength: 25
 		ContrailStartWidth: 25
 		ContrailEndWidth: 1
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_small_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
 
 ^RA2MediumMissile:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileAP_Medium
+	Inherits@fx: ^Effect_Clsn_Medium_RA2
 	Projectile: Missile
 		Image: patriot
 		-TrailImage:
 		ContrailLength: 33
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+
+^Projectile_ArtilleryRocket_Medium:
+	Projectile: Bullet
+		Speed: 333
+		Inaccuracy: 777
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		LaunchAngle: 77
 
 ^RA2HeavyMissile:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_clsn
-		ExplosionPalette: tseffect
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: tseffect
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@fx: ^Effect_Clsn_Large_RA2
 
 ^RA2TankDestroyerCannon:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light
-	Inherits@fx: ^Effect_CannonAP_Light
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_small_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
+	Inherits@fx: ^Effect_Explosion_Small_RA2
 
 ^RA2MediumCannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
+	Inherits@fx: ^Effect_Explosion_Medium_RA2
 
 ^RA2HeavyCannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
-	Inherits@fx: ^Effect_CannonHE_Heavy
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
+	Inherits@fx: ^Effect_Grey_Explosion_Large_RA2
 
 ^RA2Grenade:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Demolition_Light
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_bang
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
+	Inherits@fx: ^Effect_Bang_Large_RA2
+
 ^RA2TeslaWeapon:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
-	Inherits@fx: ^Effect_Tesla_Heavy
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_tesla_impact
-		ExplosionPalette: ra2effect
+	Inherits@fx: ^Effect_Tesla_Impact_RA2
 
 ^RA2LaserWeapon:
 	Inherits@wh: ^Warhead_Laser_Heavy
@@ -193,26 +847,10 @@
 ^RA2RailgunWeapon:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
-	Inherits@fx: ^Effect_Railgun_Heavy
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_small_bang
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
+	Inherits@fx: ^Effect_Bang_Small_RA2
 
 ^RA2EliteEffects:
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_elite_explosion
-		ImpactSounds: gexpapoa.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ImpactSounds: gexpwala.wav
+	Inherits: ^Effect_Elite_Explosion_RA2
 
 ^RA2RadShell:
 	Warhead@Effect: CreateEffect
@@ -233,6 +871,7 @@
 
 RA2GIRocketsG:
 	Inherits: ^RA2LightMissile
+	Report: bazook1.aud
 	ReloadDelay: 45
 	Range: 6567
 	Projectile: Missile
@@ -249,6 +888,7 @@ RA2GIRocketsG:
 
 RA2GIRocketsG_elite:
 	Inherits: RA2GIRocketsG
+	Report: bazook1.aud
 	Range: 7567
 	Warhead@MissileAP_Light:
 		Damage: 48000
@@ -296,6 +936,7 @@ RA2105mm_elite:
 
 RA2sabot:
 	Inherits: ^RA2TankDestroyerCannon
+	Report: cannon1.aud
 	ReloadDelay: 160
 	Range: 7040
 	Projectile: Bullet
@@ -308,6 +949,7 @@ RA2sabot:
 RA2sabot_elite:
 	Inherits: RA2sabot
 	Inherits@Elite: ^RA2EliteEffects
+	Report: cannon1.aud
 	Range: 8040
 	Warhead@CannonAP_Light:
 		Damage: 160000
@@ -318,6 +960,7 @@ RA2MirageGun:
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^RA2TankDestroyerCannon
+	Inherits@fx: ^Effect_Iron_Fx_RA2
 	ReloadDelay: 39
 	Range: 6031
 	Report: vmiratta.wav
@@ -343,13 +986,11 @@ RA2MirageGun:
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_iron_fx
-		-ImpactSounds:
 
 RA2HoverMissile:
 	Inherits: ^Warhead_Arrow_Light
 	Inherits@2: ^RA2LightMissile
+	Inherits@fx: ^Effect_Grey_Explosion_Small_RA2
 	Range: 5760
 	ReloadDelay: 28
 	Burst: 2
@@ -373,11 +1014,11 @@ RA2HoverMissile:
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_small_grey_explosion
-		ImpactSounds: gexpifva.wav
+		-ImpactSounds:
 
 RA2HoverMissile_elite:
 	Inherits: RA2HoverMissile
+	Inherits@fx: ^Effect_Grey_Explosion_Medium_RA2
 	Range: 6760
 	Burst: 4
 	Projectile: Missile
@@ -385,9 +1026,6 @@ RA2HoverMissile_elite:
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_grey_explosion
-		ImpactSounds: gexp15a.wav
 
 RA2HoverMissile_AA:
 	Inherits: RA2HoverMissile
@@ -404,6 +1042,7 @@ RA2ThunderboltMissile:
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
+	Report: bazook1.aud
 	Projectile: Missile
 		Speed: 800
 		Arm: 2
@@ -422,6 +1061,8 @@ RA2ThunderboltMissile:
 
 RA2ThunderboltMissile_elite:
 	Inherits: RA2ThunderboltMissile
+	Inherits@fx: ^Effect_Grey_Explosion_Medium_RA2
+	Report: bazook1.aud
 	Range: 6760
 	Burst: 4
 	Projectile: Missile
@@ -429,17 +1070,16 @@ RA2ThunderboltMissile_elite:
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_grey_explosion
-		ImpactSounds: gexp15a.wav
 
 RA2ThunderboltMissile_AA:
 	Inherits: RA2ThunderboltMissile
+	Report: bazook1.aud
 	ValidTargets: Air
 	Range: 8640
 
 RA2ThunderboltMissile_AA_elite:
 	Inherits: RA2ThunderboltMissile_elite
+	Report: bazook1.aud
 	ValidTargets: Air
 	Range: 9640
 
@@ -467,6 +1107,7 @@ RA2MultiHoverMissile:
 
 RA2MultiHoverMissile_elite:
 	Inherits: RA2MultiHoverMissile
+	Inherits@fx: ^Effect_Grey_Explosion_Medium_RA2
 	Range: 7170
 	Burst: 4
 	Projectile: Missile
@@ -474,9 +1115,6 @@ RA2MultiHoverMissile_elite:
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_grey_explosion
-		ImpactSounds: gexp15a.wav
 
 RA2MultiHoverMissile_AA:
 	Inherits: RA2MultiHoverMissile
@@ -493,6 +1131,7 @@ RA2MultiThunderboltMissile:
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
+	Report: bazook1.aud
 	Projectile: Missile
 		Speed: 800
 		Arm: 2
@@ -511,6 +1150,8 @@ RA2MultiThunderboltMissile:
 
 RA2MultiThunderboltMissile_elite:
 	Inherits: RA2MultiThunderboltMissile
+	Inherits@fx: ^Effect_Grey_Explosion_Medium_RA2
+	Report: bazook1.aud
 	Range: 7170
 	Burst: 4
 	Projectile: Missile
@@ -518,22 +1159,22 @@ RA2MultiThunderboltMissile_elite:
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_grey_explosion
-		ImpactSounds: gexp15a.wav
 
 RA2MultiThunderboltMissile_AA:
 	Inherits: RA2MultiThunderboltMissile
+	Report: bazook1.aud
 	ValidTargets: Air
 	Range: 9255
 
 RA2MultiThunderboltMissile_AA_elite:
 	Inherits: RA2MultiThunderboltMissile_elite
+	Report: bazook1.aud
 	ValidTargets: Air
 	Range: 10255
 
 RA2DepthCharge:
 	Inherits: DepthCharge
+	Inherits@fx: ^Effect_Depth_Charge_RA2
 	Report: vospatta.wav
 	ReloadDelay: 25
 	Range: 3000
@@ -546,18 +1187,6 @@ RA2DepthCharge:
 		ContrailLength: 25
 		ContrailStartWidth: 25
 		ContrailEndWidth: 1
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-		ImpactActors: false
-		ValidTargets: Water, Underwater
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_small_grey_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpifva.wav
-		ValidTargets: Submarine, Ship
-		InvalidTargets: Underwater
 
 RA2IMPAA:
 	Inherits: RA2IMP
@@ -982,6 +1611,7 @@ TeslaFragmentLarge:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
+	Report: tesla1.aud
 	Range: 3333
 	Warhead@Tesla_Super:
 		Damage: 16000
@@ -1038,7 +1668,8 @@ TeslaArmorDischargeDummy:
 	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Tesla_Heavy
 	Inherits@3: ^Projectile_Lightning_Heavy
-	Inherits@4: ^Effect_Tesla_Heavy
+	Inherits@fx: ^Effect_Tesla_Impact_RA2
+	Report: tesla1.aud
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 1
 	Range: 4500
@@ -1071,15 +1702,10 @@ TeslaArmorDischargeDummy:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_tesla_impact
-		ExplosionPalette: ra2effect
-	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_tesla_impact
-		ExplosionPalette: ra2effect
 
 TeslaArmorDischargeArc:
 	Inherits: TeslaArmorDischargeDummy
+	Report: tesla1.aud
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -1107,6 +1733,7 @@ TeslaArmorDischargeArc:
 
 TeslaArmorDischargeFragment1:
 	Inherits: TeslaArmorDischargeArc
+	Report: tesla1.aud
 	Range: 2250
 	Warhead@LightMissile: SpreadDamage
 		Damage: 6000
@@ -1126,6 +1753,7 @@ TeslaArmorDischargeFragment1:
 
 TeslaArmorDischargeFragment2:
 	Inherits: TeslaArmorDischargeFragment1
+	Report: tesla1.aud
 	Range: 1500
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
@@ -1182,6 +1810,7 @@ TeslaFragment:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
+	Report: tesla1.aud
 	Range: 2074
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@Tesla_Heavy:
@@ -1199,6 +1828,7 @@ TeslaFragment2:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
+	Report: tesla1.aud
 	Range: 3111
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@Tesla_Heavy:
@@ -1219,12 +1849,10 @@ TeslaFragment2:
 		AimTargetStances: Enemy, Neutral
 
 RA2DroneSparks:
+	Inherits@fx: ^Effect_Emp_Fx_RA2
 	Range: 1
 	ReloadDelay: 25
 	Projectile: InstantExplode
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_emp_fx
-		ExplosionPalette: ra2effect
 
 RA2BrutePunch:
 	Inherits@wh: ^Warhead_Melee_Medium
@@ -1275,12 +1903,10 @@ RA2Shovel:
 		Damage: 1
 
 IonPulseDischarge:
+	Inherits@fx: ^Effect_Emp_Fx_RA2
 	Range: 4000
 	ReloadDelay: 40
 	Projectile: InstantExplode
-	Warhead@Effect1: CreateEffect
-		Explosions: ra2_emp_fx
-		ExplosionPalette: ra2effect
 	Warhead@Effect2: CreateEffect
 		Explosions: mobileemp_small
 		ExplosionPalette: ra2unit
@@ -1423,6 +2049,7 @@ RA2HornetMissile:
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@3: ^RA2MediumMissile
+	-Warhead@Effect1:
 	ReloadDelay: 3
 	Range: 5000
 	MinRange: 1000
@@ -1468,6 +2095,7 @@ MigMissiles:
 	Inherits@2: ^HeavyAAWeapon
 	Inherits@3: ^FlakWeapon
 	Inherits@4: ^RA2MediumMissile
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 50
 	Burst: 4
 	BurstDelays: 2
@@ -1506,10 +2134,6 @@ MigMissiles:
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 	-Warhead@Effect1:
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 
 MigMissiles_rad:
 	Inherits@wh: ^Warhead_Chemical_Medium
@@ -1538,15 +2162,13 @@ MigMissiles_rad:
 
 MigMissiles_fire:
 	Inherits: MigMissiles
+	Inherits@fx: ^Effect_Terrorist_Explosion_RA2
 	Projectile: Missile
 		TrailImage: red_smokey
 		TrailPalette: effect
 		ContrailStartColor: EE0000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_terrorist_explosion
-		ImpactSounds: gexpapoa.wav
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
 		Amount: 8
@@ -1555,16 +2177,13 @@ MigMissiles_fire:
 
 MigMissiles_tesla:
 	Inherits: MigMissiles
+	Inherits@fx: ^Effect_Kirov_Tesla_RA2
 	Projectile: Missile
 		TrailImage: blue_smokey
 		TrailPalette: effect
 		ContrailStartColor: 0000EE
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_kirovtesla
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpapoa.wav
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: TeslaFragment
 		Amount: 4
@@ -1662,7 +2281,6 @@ RA2SCUD:
 	ReloadDelay: 125
 	Range: 20000
 	MinRange: 4000
-	-Report:
 	TargetActorCenter: true
 	ValidTargets: Ground, Water
 	Projectile: Missile
@@ -1762,7 +2380,7 @@ RA2SCUD_tesla:
 
 RA2SCUDELITE:
 	Inherits@wh: ^Warhead_Nuclear_Super
-	Inherits@fx: ^Effect_Nuclear_Super
+	Inherits@fx: ^Effect_Terrorist_Explosion_RA2
 	Inherits: RA2SCUD
 	ReloadDelay: 160
 	Range: 24000
@@ -1772,12 +2390,6 @@ RA2SCUDELITE:
 	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 15
-	Warhead@Effect: CreateEffect
-		Delay: 0
-		Explosions: ra2_terrorist_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpapoa.wav
-		ValidTargets: Ground, Ship
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
 		Spread: 600
@@ -1803,20 +2415,14 @@ V3Explode:
 
 DredMissile:
 	Inherits: RA2SCUD
-	Warhead@Effect: CreateEffect
-		ValidTargets: Ground, Air
+	Inherits@fx: ^Effect_Watersplash_Large_RA2
 	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwala.wav
 		ImpactActors: false
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
 
 YRBoomerSCUD:
 	Inherits: ^RA2Grenade
 	Inherits@2: ^RA2HeavyMissile
-	-Report:
+	Inherits@fx: ^Effect_Watersplash_Large_RA2
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Speed: 200
@@ -1838,14 +2444,12 @@ YRBoomerSCUD:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Air
 	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ExplosionPalette: ra2effect
 		ImpactActors: false
-		ImpactSounds: gexpwala.wav
 
 RA2TorpTube:
 	Inherits: ^RA2Grenade
 	Inherits@2: ^RA2HeavyMissile
+	Inherits@fx: ^Effect_Watersplash_Large_RA2
 	ReloadDelay: 90
 	Range: 9000
 	Report: vbooat2a.wav
@@ -1882,10 +2486,6 @@ RA2TorpTube:
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir:
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
 
 RA2TorpTube_elite:
 	Inherits: RA2TorpTube
@@ -2223,13 +2823,10 @@ RA2Cloud:
 
 RA2CloudSafe:
 	Inherits: ^ToxicWeapon
-	Warhead@ToxicWeapon: SpreadDamage
+	Warhead@Toxic_Light:
 		ValidRelationships: Neutral, Enemy
 		AffectsParent: False
-	Warhead@ToxicWeaponFriendlyFire: SpreadDamage
-		ValidRelationships: Neutral, Enemy
-		AffectsParent: False
-	Warhead@ToxicWeaponPercentage: HealthPercentageDamage
+	Warhead@Toxic_Light_Percentage:
 		ValidRelationships: Neutral, Enemy
 		AffectsParent: False
 
@@ -2362,9 +2959,8 @@ RA2DemoBomb:
 RA2Terrorist:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium
-	Inherits@fx: ^Effect_Concussion_Medium
+	Inherits@fx: ^Effect_Terrorist_Explosion_RA2
 	Inherits@3: ^Projectile_Grenade_Light
-	-Report:
 	Warhead@Concussion_Medium:
 		Damage: 50000
 	Warhead@Concussion_Medium_Percentage:
@@ -2373,10 +2969,6 @@ RA2Terrorist:
 		Damage: 50000
 	Warhead@Demolition_Heavy_Percentage:
 		Damage: 25
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_terrorist_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpapoa.wav
 
 2100Tanktrap:
 	Warhead@1Dam: SpreadDamage
@@ -2390,13 +2982,10 @@ RA2Terrorist:
 
 RA2Atomic:
 	Inherits: Atomic
+	Inherits@fx: ^Effect_Nuke_Ball_RA2
 	Report: snuklaun.wav
 	Warhead@Nuclear_Super:
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath, Incendiary
-	Warhead@Effect: CreateEffect
-		Explosions: ra2nuke
-		ExplosionPalette: ra2effect
-		ImpactSounds: snukexpl.wav
 	Warhead@14Radiation: CreateTintedCells
 		Spread: 2c512
 		Falloff: 100, 90, 80, 60, 30, 15
@@ -2430,6 +3019,7 @@ LightningStorm:
 		ImpactActors: false
 
 LightningStormDamage:
+	Inherits@fx: ^Effect_Ion_Ring_RA2
 	Projectile: SupportPowerInstantExplode
 	AirThreshold: 11c0
 	ReloadDelay: 1
@@ -2548,7 +3138,6 @@ LightningBolt:
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
 	Projectile: InstantHit
-	-Report:
 	ValidTargets: Ground, Water, Air
 	Warhead@Storm_Super:
 		Spread: 1000
@@ -2610,6 +3199,7 @@ IvanBomb:
 	Inherits@wh3: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Heavy
+	Report: M203.aud
 	Warhead@Demolition_Light:
 		Damage: 30000
 	Warhead@Demolition_Light_Percentage:
@@ -2652,6 +3242,7 @@ TanyaBomb:
 	Inherits@wh3: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
+	Report: tnkfire6.aud
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
@@ -2702,6 +3293,7 @@ SEALAttach:
 
 SealBomb:
 	Inherits: TanyaBomb
+	Report: tnkfire6.aud
 	Warhead@CannonAP_Light: AreaDamage
 		Damage: 20000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
@@ -2759,12 +3351,7 @@ WarpawayEffect:
 		ValidTargets: Ground, Water, Air
 
 ChronoshiftImpact:
-	Warhead@1: CreateEffect
-		Explosions: ra2_chronofd
-		ExplosionPalette: ra2effect
-		ImpactSounds: schrmov.wav
-		ImpactActors: false
-		ValidTargets: Ground, Water, Air
+	Inherits@fx: ^Effect_Chrono_Fd_RA2
 	Warhead@Distort: HeatDistortion
 		Scale: 1.2
 		FadeFrames: 90
@@ -2854,47 +3441,20 @@ RA2SpiderSlice:
 		DamageTypes: DefaultDeath
 
 RA2UnitExplode:
-	Inherits: UnitExplode
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_brnl
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp11a.wav, gexp14b.wav, gexp14c.wav, gexp14d.wav, expnew09.wav
-		ValidTargets: Ground, Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water
+	Inherits: ^DamagingExplosion
+	Inherits@fx: ^Effect_Brnl_Medium_RA2
 
 RA2UnitExplodeBig:
-	Inherits: UnitExplodeBig
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_twlt
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp11a.wav, gexp14b.wav, gexp14c.wav, gexp14d.wav, expnew13.wav
-		ValidTargets: Ground, Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water
+	Inherits: ^DamagingExplosionHE
+	Inherits@fx: ^Effect_Twlt_Large_RA2
 
 RA2BuildingExplode:
 	Inherits: BuildingExplode
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_building, ra2_large_bang, ra2_large_brnl, ra2_verylarge_clsn, ra2_large_tumu
-		ExplosionPalette: ra2effect
-		ImpactSounds: expnew13.wav #expnew03.wav, expnew06.wav, expnew09.wav, expnew11.wav, expnew12.wav, expnew13.wav, expnew14.wav, expnew15.wav
-		ValidTargets: Ground, Air, Water
-	-Warhead@EffectWater:
+	Inherits@fx: ^Effect_Building_Explosion_RA2
 
 KirovExplode:
 	Inherits: RA2KirovBomb
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_verylarge_twlt
-		ExplosionPalette: ra2effect
-		ImpactSounds: expnew09.wav
-		ValidTargets: Ground, Water, Air
+	Inherits@fx: ^Effect_Twlt_VeryLarge_RA2
 
 RA2CorpseSpawner:
 	#Projectile: InstantExplode
@@ -2923,19 +3483,9 @@ RA2Debris:
 
 RA2LargeDebris:
 	Inherits: RA2Debris
+	Inherits@fx: ^Effect_Bang_Tiny_RA2
 	Projectile: BulletAS
 		Sequences: large1, large2, large3, large4, large5, large6, large7, large8, large9, large10
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_tiny_bang
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp07a.wav
-		InvalidTargets: Water
-		ValidTargets: Ground, Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water
 
 RA2FlyingBody:
 	Inherits: RA2Debris
@@ -2950,4 +3500,3 @@ RA2FlyingBody:
 		ExplosionPalette: ra2effect
 		ValidTargets: Ground
 		Delay: 0
-
