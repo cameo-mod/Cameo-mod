@@ -507,6 +507,10 @@ wc2dragonFireVisible:
 	Projectile: Missile
 		Speed: 384
 		Image: wc2_fireball
+		Inaccuracy: 250
+		TrailImage: smokey
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 30000
@@ -530,3 +534,7 @@ wc2dragonFireExplosion:
 	FollowingBurstTargetOffset: 1024,0,0
 	Projectile:
 		Image: wc2_fireball
+		Inaccuracy: 250
+		TrailImage: smokey
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF

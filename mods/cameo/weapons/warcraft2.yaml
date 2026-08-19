@@ -689,6 +689,10 @@ wc2cannontowerFire:
 		Speed: 512
 		Image: wc2_cannon_projectile_medium
 		Blockable: false
+		Inaccuracy: 250
+		TrailImage: smokey
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
 	Warhead@Flame_Light:
 		Damage: 60000
 		PhysicalStateName: Temperature
