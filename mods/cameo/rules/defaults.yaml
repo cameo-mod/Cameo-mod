@@ -2842,6 +2842,7 @@
 ^AirstrikePlane:
 	Inherits@1: ^BasicUnit
 	Inherits@SHADOWS: ^Shadows
+	Inherits@corr: ^Corrodible
 	Armor:
 		Type: Light
 	AppearsOnRadar:

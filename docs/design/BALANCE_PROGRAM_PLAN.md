@@ -37,7 +37,7 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured 2026-08-17 |
 |---|---|
-| W24 — fired weapons with **more than one** damage main | **973 of 1495 = 65.1%** (histogram runs out to 15 mains) |
+| W24 — fired weapons with **more than one** damage main | **975 of 1495 = 65.2%** (histogram runs out to 15 mains) |
 | armament slots whose `K` moves when those collapse | **1 584** |
 | fired weapons that reach a `^Warhead_*` family at all | **639 of 1620 = 39%** — the rest still route through legacy templates (`audit_unconverted_templates`: 47 templates, 1343 inheritors) |
 
@@ -255,7 +255,7 @@ and every base assault becomes a shield fight.
 
 Measured before touching anything, and the finding changes the plan.
 
-### What the 973 actually are
+### What the 975 actually are
 
 | shape | count | note |
 |---|--:|---|
@@ -279,7 +279,7 @@ from the other end.
 
 ### ⚠ The finding that changes the collapse rule: 90% are BROADCAST
 
-**874 of the 973 (90%) have EVERY main at the identical damage.** The worst pileups are all one
+**874 of the 975 (89.6%) have EVERY main at the identical damage.** The worst pileups are all one
 value repeated:
 
 | weapon | mains | each | sum |

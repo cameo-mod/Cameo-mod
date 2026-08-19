@@ -136,7 +136,7 @@ the axes:
 | `Temperature` | 1592 | **98.6%** |
 | `Corrosion` | 724 | **45.0%** |
 
-A corrosion weapon does nothing at all to 55% of the roster. Claim: `corrosion_meter_actors`.
+A corrosion weapon does nothing at all to 51.3% of the roster. Claim: `corrosion_meter_actors`.
 
 ### E2 pricing — the rule as built
 

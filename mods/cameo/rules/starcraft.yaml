@@ -926,6 +926,7 @@ SCSTARSHIPSOVEREIGN.Husk:
 ^BasicZerg:
 	Inherits: ^DefaultSoldier
 	Inherits@botmicro: ^BotMicromanageable
+	Inherits@corr: ^Corrodible
 	WithDeathAnimation:
 		UseDeathTypeSuffix: false
 		CrushedSequence: die
