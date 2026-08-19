@@ -557,56 +557,76 @@ Future_MultiMissile:
 		Damage: 2
 
 Future_MultiMissile_Javelin:
-	Inherits: ^LightMissile
-	Inherits@2: ^FlakWeapon
-	Inherits@3: ^MediumMissile
-	Inherits@4: ^ShrapnelWeapon
-	Inherits@5: ^D2KRocket
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileAP_Light
 	ReloadDelay: 32
+	Range: 9000
 	Burst: 3
 	BurstDelays: 4
-	Range: 9000
+	Report: ROCKET1.WAV
+	ValidTargets: Ground, Water, Air
 	Projectile: Missile
-		Acceleration: 6
-		Speed: 900
-		MaximumLaunchSpeed: 300
-		MinimumLaunchSpeed: 300
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		Image: d2k_RPG
+		Shadow: true
 		HorizontalRateOfTurn: 30
 		VerticalRateOfTurn: 30
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		ContrailLength: 0
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		Speed: 900
+		CloseEnough: 400
+		Acceleration: 6
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+		LaunchAngle: 125
+		Palette: d2keffect
+	Warhead@MissileAP_Light:
+		Damage: 10000
+	Warhead@MissileAP_Light_Percentage:
+		Damage: 5
+	Warhead@Smudge: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_tiny_explosion
+		ImpactSounds: xplobig4.aud
+		ExplosionPalette: effect75alpha
+		ValidTargets: Ground, Air
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ValidTargets: Air
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 12
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 240
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
 Future_MultiMissile_Frag:
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^MediumFlameWeapon
@@ -816,70 +836,87 @@ FutureEnforcerShotgunDeployed_elite:
 	BurstDelays: 3
 
 FutureJavelinRockets:
-	Inherits: ^LightMissile
-	Inherits@2: ^FlakWeapon
-	Inherits@3: ^MediumMissile
-	Inherits@4: ^ShrapnelWeapon
-	Inherits@5: ^D2KRocket
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileAP_Light
 	ReloadDelay: 25
 	Range: 6000
+	Report: ROCKET1.WAV
+	ValidTargets: Ground, Water, Air
 	Projectile: Missile
-		Acceleration: 6
-		Speed: 600
-		MaximumLaunchSpeed: 300
-		MinimumLaunchSpeed: 300
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		Image: d2k_RPG
+		Shadow: true
 		HorizontalRateOfTurn: 30
 		VerticalRateOfTurn: 30
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		ContrailLength: 0
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		Speed: 600
+		CloseEnough: 400
+		Acceleration: 6
+		HomingActivationDelay: 3
+		RangeLimit: 30000
+		PointDefenseTypes: Missile
+		LaunchAngle: 125
+		Palette: d2keffect
+	Warhead@MissileAP_Light:
+		Damage: 10000
+	Warhead@MissileAP_Light_Percentage:
+		Damage: 5
+	Warhead@Smudge: LeaveSmudge
+		InvalidTargets: Vehicle, Structure
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_tiny_explosion
+		ImpactSounds: xplobig4.aud
+		ExplosionPalette: effect75alpha
+		ValidTargets: Ground, Air
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ValidTargets: Air
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 12
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 240
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
 FutureJavelinRockets_elite:
 	Inherits: FutureJavelinRockets
 	Range: 7000
 	Burst: 2
 	BurstDelays: 3
-
 FutureJavelinRocketsDeployed:
 	Inherits: FutureJavelinRockets
 	Range: 7500
-
 FutureJavelinRocketsDeployed_elite:
 	Inherits: FutureJavelinRocketsDeployed
 	Range: 8500
 	Burst: 2
 	BurstDelays: 3
-
 Future_Wheel_MG:
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun

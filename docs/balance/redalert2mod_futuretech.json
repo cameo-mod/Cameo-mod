@@ -1641,99 +1641,34 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
+        "damage": "10000",
+        "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "5",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "32",
       "requires": "ifv-miss",
       "slot": "Armament@MISS",
       "versus_templates": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon",
-       "^D2KRocket"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileAP_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "Future_MultiMissile_Javelin",
       "weapon_class_source": "template"
@@ -3962,99 +3897,34 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
+        "damage": "10000",
+        "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "5",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
       "requires": "!deployed && !rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^LightMissile",
-       "^FlakWeapon",
-       "^MediumMissile",
-       "^ShrapnelWeapon",
-       "^D2KRocket"
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileAP_Light"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "FutureJavelinRockets",
       "weapon_class_source": "template"
@@ -4063,85 +3933,22 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
+        "damage": "10000",
+        "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "5",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "25",
@@ -4151,7 +3958,7 @@
        "FutureJavelinRockets"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "FutureJavelinRocketsDeployed",
       "weapon_class_source": "template"
@@ -4160,85 +3967,22 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
+        "damage": "10000",
+        "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "5",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "7500",
       "reloaddelay": "25",
@@ -4248,7 +3992,7 @@
        "FutureJavelinRockets"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "FutureJavelinRocketsDeployed",
       "weapon_class_source": "template"
@@ -4258,85 +4002,22 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
+        "damage": "10000",
+        "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "5",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "25",
@@ -4346,7 +4027,7 @@
        "FutureJavelinRockets"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "FutureJavelinRockets_elite",
       "weapon_class_source": "template"
@@ -4357,85 +4038,22 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
+        "damage": "10000",
+        "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "5",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8500",
       "reloaddelay": "25",
@@ -4445,7 +4063,7 @@
        "FutureJavelinRocketsDeployed"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "FutureJavelinRocketsDeployed_elite",
       "weapon_class_source": "template"
@@ -4456,85 +4074,22 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
+        "damage": "10000",
+        "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "damage": "5",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "8500",
       "reloaddelay": "25",
@@ -4544,7 +4099,7 @@
        "FutureJavelinRocketsDeployed"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAP_Light"
       ],
       "weapon": "FutureJavelinRocketsDeployed_elite",
       "weapon_class_source": "template"

@@ -1,5 +1,26 @@
 # Development Log
 
+## 2026-08-22 — W24 cluster 3: FutureTech missile javelins (boot-gated)
+
+- Converted `FutureJavelinRockets`, its children (`_elite`, `Deployed`, `Deployed_elite`),
+  and `Future_MultiMissile_Javelin` to `^Warhead_MissileAP_Light` with the 3-way split.
+  Removed old `^LightMissile`, `^FlakWeapon`, `^MediumMissile`, `^ShrapnelWeapon`, and
+  `^D2KRocket` inherits. Preserved resolved `d2k_RPG` projectile image/trail, `ROCKET1.WAV`
+  report, ranges, reload delays, burst offsets, and all impact effects.
+- Collapsed five duplicate damage warheads per weapon into one `Damage: 10000` main and a
+  single `Damage: 5` percentage warhead.
+- Lowered `BROADCAST_BASELINE` in `tools/audit/audit_warhead_split.py` from 977 to 972.
+- Regenerated balance ledgers and derived sidecars for affected factions.
+- Updated `docs/design/BALANCE_PROGRAM_PLAN.md` W24 status line.
+- Verification:
+  - `find_empty_warhead.py` = 0
+  - `find_orphan_old_keys.py` = 0 real bugs
+  - `audit_warhead_split.py` at/below baseline
+  - `audit_balance_drift.py` clean
+  - `review_resolve_diff.py` OK for all five weapons
+  - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new
+    `exception-*.log`.
+
 ## 2026-08-22 — W24 cluster 2 + weapon-family corrections (boot-gated)
 
 - Corrected `wc2cannontowerFire` to `CannonHE_Heavy` and `wc2dragonFireVisible` to
