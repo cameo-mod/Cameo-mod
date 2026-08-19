@@ -676,21 +676,9 @@ wc2_tower_axe:
 ####################################################################################################
 
 wc2cannontowerFire:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^LightChemicalWeapon
-	Inherits@3: ^MediumFlameWeapon
-	Inherits@4: ^MediumChemicalWeapon
-	Inherits@5: ^HeavyFlameWeapon
-	Inherits@6: ^HeavyChemicalWeapon
-	Inherits@7: ^TankDestroyerCannon
-	Inherits@8: ^MediumCannon
-	Inherits@9: ^HeavyCannon
-	Inherits@10: ^Grenade
-	Inherits@11: ^ShrapnelWeapon
-	Inherits@12: ^HeavyBomb
-	Inherits@13: ^MediumMissile
-	Inherits@14: ^Chaingun
-	Inherits@15: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 90
 	Range: 10500
 	MinRange: 2100
@@ -701,151 +689,18 @@ wc2cannontowerFire:
 		Speed: 512
 		Image: wc2_cannon_projectile_medium
 		Blockable: false
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+	Warhead@Flame_Light:
+		Damage: 60000
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
+	Warhead@Flame_Light_Percentage:
+		Damage: 30
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@MediumCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
 	Warhead@Effect: CreateEffect
 		Image: wc2_cannon_impact
 		Explosions: idle
 		ImpactSounds: explode.aud
-
-# 2-35 WC2 damage. 35 Base, 0 Pierce.
-
 wc2lightshipFire:
 	ReloadDelay: 70
 	Range: 5120

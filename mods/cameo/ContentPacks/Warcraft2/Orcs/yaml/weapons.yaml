@@ -494,175 +494,33 @@ wc2deathanddecaySuper_Spread:
 		Footprint: x
 
 wc2dragonFireVisible:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^LightChemicalWeapon
-	Inherits@3: ^MediumFlameWeapon
-	Inherits@4: ^MediumChemicalWeapon
-	Inherits@5: ^HeavyFlameWeapon
-	Inherits@6: ^HeavyChemicalWeapon
-	Inherits@7: ^TankDestroyerCannon
-	Inherits@8: ^MediumCannon
-	Inherits@9: ^HeavyCannon
-	Inherits@10: ^Grenade
-	Inherits@11: ^ShrapnelWeapon
-	Inherits@12: ^HeavyBomb
-	Inherits@13: ^MediumMissile
-	Inherits@14: ^Chaingun
-	Inherits@15: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flame_Light
+	Inherits@proj: ^Projectile_Flame_Light
+	Inherits@fx: ^Effect_Flame_Light
 	Range: 5010
 	ReloadDelay: 120
 	Burst: 2
 	BurstDelays: 0
 	Report: wc2_axe.aud
 	ValidTargets: Ground, Water, Air
+	InvalidTargets: wall
 	Projectile: Missile
 		Speed: 384
 		Image: wc2_fireball
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
+	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 30000
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+	Warhead@Flame_Light_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 15
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@MediumCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: wc2_building_collapse
 		ImpactSounds: explode.aud
 		ValidTargets: Ground, Water, Air
-
 wc2dragonFireExplosion:
 	Inherits: wc2dragonFireVisible
 	Projectile: Bullet
