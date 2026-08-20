@@ -1,5 +1,55 @@
 # Development Log
 
+## 2026-08-23 — D2K Rocket Trooper family 3-way split (boot-gated)
+
+- Converted `D2K_Rocket_Trooper` (`mods/cameo/weapons/d2k.yaml`),
+  `D2K_Rocket_Trooper1`/`D2K_Rocket_Trooper2` (`mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml`),
+  and `D2K_Rocket_Trooper_AA`/`D2K_Rocket_Trooper_AGOnly` (`mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml`)
+  from the old `Inherits: ^D2KRocket` / `Inherits: ^D2K_Cannon` full-stack pattern to explicit
+  `Inherits@wh` / `Inherits@proj` / `Inherits@fx`.
+- Removed legacy full-stack inherits (`^D2KRocket`, `^D2K_Cannon`). The triple-warhead
+  Rocket Troopers were added to the `docs/design/WEAPON_3WAY_SPLIT.md` exception
+  allow-list because their resolved damage identity requires three warhead layers.
+- Added six D2K Shared templates in `mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml`:
+  `^Projectile_Missile_Medium_D2K_Rocket_Trooper`,
+  `^Projectile_Missile_Light_D2K_Rocket_Trooper1`,
+  `^Projectile_Missile_Light_D2K_Rocket_Trooper_AA`,
+  `^Projectile_Grenade_Light_D2K_Rocket_Trooper2`,
+  `^Projectile_Grenade_Light_D2K_Rocket_Trooper_AGOnly`,
+  and `^Effect_MissileAP_Heavy_D2K_Rocket_Trooper`.
+- Preserved `Damage`, `Versus`, `Spread`, `ReloadDelay`, `Range`, `Report`, `ValidTargets`,
+  `Projectile` visuals/turn behaviour, `Concrete`, glow, smudges, shield-hit, air/water
+  effects, and the mixed Demolition/Railgun/Cannon warhead contribution on Trooper2/AGOnly.
+- Verification:
+  - `tools/audit/review_resolve_diff.py` OK for all five weapons
+  - `tools/audit/effect_audit.py` → 0 duplicate `DamagesConcrete`
+  - `tools/audit/find_empty_warhead.py` → 0 empty warheads
+  - `tools/audit/find_orphan_old_keys.py` → 0 real bugs
+  - `tools/audit/audit_balance_drift.py` → 32 ledgers clean (re-extracted via `extract_stats.py`)
+  - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`
+
+## 2026-08-23 — Documentation review + doc_claims reconciliation
+
+- Completed a full discrepancy review of design/instruction/audit documents
+  (`docs/research/doc_review.md` generated for inspection).
+- Reconciled `docs/audit/doc_claims.yaml` with live measurements:
+  `multi_main_fired_weapons` 975→939, `meters_filling_before_death` 118→122,
+  `corrosion_meter_actors` 783→785, `w24_multi_main_fed` 386→385,
+  `physical_state_fired_weapons` 449→450.
+- `python tools/audit/audit_doc_claims.py` now passes (16/16 claims clean).
+- Updated `docs/design/ROADMAP.md` to reflect live W2 status (`^LightFlameWeapon`
+  still has 28 inheritors, not ready/done) and current generator drift
+  (`verify_generator_sync.py` reports drift = 10 + `^Warhead_Sniper_Light` not emitted).
+- Identified next D2K 3-way split targets after `DevBullet`/`PlasBullet`:
+  `D2K_Rocket_Trooper` family (in progress by subagent) and Ixian giant multi
+  (`D2K_TowerMissile`, `mtank_pri2` in
+  `mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml`).
+- Outstanding cross-cutting drift (not D2K): `tools/balance/verify_generator_sync.py`
+  reports 9 chemical warhead blocks out of sync with `gen_weapon_template.py`
+  (`PhysicalStates` vs `PhysicalStateName`, `Corrosion` scale, `TiberiumDeath`
+  vs `ExplosionDeath`). Pending maintainer/generator alignment before splicing.
+
+
 ## 2026-08-20 — D2K Devastator/Plasma cannon 3-way split (boot-gated)
 
 - Converted `DevBullet` and `PlasBullet` in `mods/cameo/weapons/d2k.yaml` from the old

@@ -468,3 +468,106 @@
 		ExplosionPalette: effect75alpha
 	Warhead@Concrete: DamagesConcrete
 		Damage: 7500
+
+## D2K per-game PROJECTILE and EFFECT templates for the Rocket Trooper family.
+## These preserve the resolved d2k_RPG projectile and the tiny napalm/sand-rock smudge FX.
+
+^Projectile_Missile_Medium_D2K_Rocket_Trooper:
+	Inherits: ^Projectile_Missile_Medium
+	Projectile: Missile
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		Speed: 666
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		LaunchAngle: 125
+		MaximumLaunchSpeed: 222
+		MinimumLaunchSpeed: 222
+		HorizontalRateOfTurn: 22
+		VerticalRateOfTurn: 22
+		Acceleration: 6
+
+^Projectile_Missile_Light_D2K_Rocket_Trooper1:
+	Inherits: ^Projectile_Missile_Light
+	Projectile: Missile
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		Speed: 666
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		LaunchAngle: 125
+		MaximumLaunchSpeed: 222
+		MinimumLaunchSpeed: 222
+		HorizontalRateOfTurn: 22
+		VerticalRateOfTurn: 22
+		Acceleration: 6
+
+^Projectile_Missile_Light_D2K_Rocket_Trooper_AA:
+	Inherits: ^Projectile_Missile_Light
+	Projectile: Missile
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		Speed: 888
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		LaunchAngle: 125
+		MaximumLaunchSpeed: 222
+		MinimumLaunchSpeed: 222
+		HorizontalRateOfTurn: 22
+		VerticalRateOfTurn: 22
+		Acceleration: 8
+
+^Projectile_Grenade_Light_D2K_Rocket_Trooper2:
+	Inherits: ^Projectile_Grenade_Light
+	Projectile: Bullet
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		Speed: 333
+		Inaccuracy: 33
+		InaccuracyType: PerCellIncrement
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		LaunchAngle: 66
+		Shadow: true
+
+^Projectile_Grenade_Light_D2K_Rocket_Trooper_AGOnly:
+	Inherits: ^Projectile_Grenade_Light
+	Projectile: Missile
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		Speed: 333
+		Inaccuracy: 11
+		InaccuracyType: PerCellIncrement
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		LaunchAngle: 66
+		Shadow: true
+
+^Effect_MissileAP_Heavy_D2K_Rocket_Trooper:
+	Inherits: ^Effect_MissileAP_Heavy
+	-Warhead@Concrete
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_tiny_explosion
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+		ValidTargets: Ground, Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 240

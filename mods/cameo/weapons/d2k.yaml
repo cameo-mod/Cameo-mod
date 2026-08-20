@@ -267,18 +267,13 @@ D2K_Rocket_Buggy:
 D2K_Rocket_Trooper:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@wh2: ^Warhead_MissileAP_Medium
-	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileAP_Medium
-	Inherits: ^D2KRocket
+	Inherits@wh3: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Medium_D2K_Rocket_Trooper
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
 	ReloadDelay: 64
 	Range: 6185
-	Projectile: Missile
-		Acceleration: 6
-		Speed: 666
-		MaximumLaunchSpeed: 222
-		MinimumLaunchSpeed: 222
-		HorizontalRateOfTurn: 22
-		VerticalRateOfTurn: 22
+	Report: ROCKET1.WAV
+	ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000

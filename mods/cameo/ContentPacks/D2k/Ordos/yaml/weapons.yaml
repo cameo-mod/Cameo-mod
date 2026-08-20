@@ -300,23 +300,13 @@ Dune_SiegeMortar:
 D2K_Rocket_Trooper_AGOnly:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Railgun_Heavy
-	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Demolition_Light
-	Inherits@3: ^D2K_Cannon
+	Inherits@wh3: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Grenade_Light_D2K_Rocket_Trooper_AGOnly
+	Inherits@fx: ^Effect_CannonHE_Medium_D2K
 	ReloadDelay: 50
 	Range: 6252
 	Report: ROCKET1.WAV
 	ValidTargets: Ground, Water
-	Projectile: Missile
-		Blockable: false
-		Speed: 333
-		Inaccuracy: 11
-		InaccuracyType: PerCellIncrement
-		Image: d2k_RPG
-		Palette: d2keffect
-		TrailImage: bazooka_trail2
-		TrailPalette: effect75alpha
-		TrailInterval: 1
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 10000
@@ -337,19 +327,13 @@ D2K_Rocket_Trooper_AGOnly:
 D2K_Rocket_Trooper_AA:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_MissileAP_Light
-	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_MissileAP_Light
-	Inherits: ^D2KRocket
+	Inherits@wh3: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Light_D2K_Rocket_Trooper_AA
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
 	ReloadDelay: 75
 	Range: 9716
+	Report: ROCKET1.WAV
 	ValidTargets: Air
-	Projectile: Missile
-		Acceleration: 8
-		Speed: 888
-		MaximumLaunchSpeed: 222
-		MinimumLaunchSpeed: 222
-		HorizontalRateOfTurn: 22
-		VerticalRateOfTurn: 22
 	Warhead@MissileAP_Light:
 		ValidTargets: Air
 		Damage: 10000

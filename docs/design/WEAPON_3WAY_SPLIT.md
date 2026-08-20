@@ -114,6 +114,14 @@ must NOT strip these. Known so far (more to be defined; confirm each before keep
 - **Dune combat tanks** — Ixian combat tank / Koda tank / Ordos combat tank / **any D2k
   combat tank** = **3 cannon warheads** (Cannon Light + Medium + Heavy), their signature
   (vs the single Medium cannon of other medium tanks).
+- **D2K Rocket Trooper family** (`D2K_Rocket_Trooper`, `D2K_Rocket_Trooper1`,
+  `D2K_Rocket_Trooper2`, `D2K_Rocket_Trooper_AA`, `D2K_Rocket_Trooper_AGOnly`) —
+  the resolved damage identity requires **three warhead layers** (Light/Medium/Heavy
+  missile AP for the base and AA variants; Demolition + Railgun + Cannon for the
+  Ixian/Ordos demolition variants). The 3-way split keeps these separate `Inherits@wh`
+  entries; new per-weapon `^Projectile_*_D2K_Rocket_Trooper*` and
+  `^Effect_MissileAP_Heavy_D2K_Rocket_Trooper` templates preserve the d2k_RPG
+  projectile and Dune smudge/effect behaviour.
 - **Terran Siege Tank** (`SiegeTankSiegeCannon`) + **Warcraft Siege Engine**
   (`SiegeEngineCannon`) = keep ALL AoE warheads + others combined = a unique shared explosion.
 

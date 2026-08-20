@@ -28,8 +28,9 @@ one `VERIFY` command each, file-set ownership so two agents can run in parallel,
 universal commit gate. Any agent resuming after a compaction reads §0 of that file first.
 Do not duplicate its status here — this ROADMAP links to it on purpose.
 
-Current: **W1 ✅ done** (K coefficient + target model, `f8421d345`) · **W2 ⬜ ready, owner
-Devin** (`^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*`) · **W3–W5 ⬜ ready,
+Current: **W1 ✅ done** (K coefficient + target model, `f8421d345`) · **W2 🔵 in progress,
+owner Devin** (`^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*`; `^LightFlameWeapon`
+still has **28** concrete inheritors) · **W3–W5 ⬜ ready,
 owner Claude** (ledger split, retire weapon-class K, the five missing metrics).
 
 ## ▶ ACTIVE — CAMEO CONTENT INSTALLER
@@ -80,7 +81,7 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
   `^CommandoCall`/`^CommandoCallable` untouched) and the mark baked into all three
   `^Warhead_Sonic_*` levels by `gen_weapon_template.py` (`FAMILY_CONDITION` → a zero-damage
   `Warhead@<tag>_Debuff: GrantExternalCondition`; `Duration = 2 × ReloadDelay` = 50 ticks,
-  `Range = 2 × Spread` = 800/1200/1600, Enemy/Neutral only). Generator drift stays 1, empty-warhead 0,
+  `Range = 2 × Spread` = 800/1200/1600, Enemy/Neutral only). `verify_generator_sync.py` reports drift = 9 (`Chemical`/`ChemCannon`/`ChemMissile` blocks; `^Warhead_Sniper_Light` and `^Warhead_Nuclear_Super` are hand-tuned and now skipped by the audit), empty-warhead 0,
   `audit_physical_state_warheads` PASS. Boot-gated, `5a14355e6`. Spec: `PHYSICAL_STATE_SYSTEM.md` §5.
 - **[RESOLVED 2026-08-10, Devin] Upgraded Tesla weapons drained integrity at the same ratio as their
   un-upgraded base** — RA1 Tesla Doctrine (`PortaTesla_EMP`/`TTankZap_EMP`/`TTankZap2_EMP`/
@@ -1645,6 +1646,17 @@ window.
   projectile, effect, concrete, glow, and merged the duplicate ground
   `d2k_small_napalm` + `d2k_shockwave` effects into a single `d2k_shockwave`
   impact; `audit_balance_drift` clean, boot-gated with no new exception log.
+- [x] **D2K Rocket Trooper family 3-way split** (2026-08-23) —
+  converted the five `D2K_Rocket_Trooper*` weapons in `mods/cameo/weapons/d2k.yaml`,
+  `ContentPacks/D2k/Ixian/yaml/weapons.yaml`, and `ContentPacks/D2k/Ordos/yaml/weapons.yaml`
+  to explicit `Inherits@wh/@proj/@fx`; removed `Inherits: ^D2KRocket` and
+  `Inherits: ^D2K_Cannon`; added per-weapon `^Projectile_*_D2K_Rocket_Trooper*`
+  templates and `^Effect_MissileAP_Heavy_D2K_Rocket_Trooper` in D2K Shared.
+  Preserved triple warhead damage (Light/Medium/Heavy missile AP and
+  Demolition/Railgun/Cannon mixes), d2k_RPG projectile visuals, and Dune
+  smudge/glow/shield/concrete effects; `review_resolve_diff.py` OK, all
+  targeted audits clean, ledgers re-extracted and `audit_balance_drift` clean,
+  boot-gated with no new exception log.
 - Note: 7 Ordos armor-rework files are the maintainer's live WIP — leave.
 
 ---
