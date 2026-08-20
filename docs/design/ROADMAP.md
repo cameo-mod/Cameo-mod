@@ -81,7 +81,7 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
   `^CommandoCall`/`^CommandoCallable` untouched) and the mark baked into all three
   `^Warhead_Sonic_*` levels by `gen_weapon_template.py` (`FAMILY_CONDITION` → a zero-damage
   `Warhead@<tag>_Debuff: GrantExternalCondition`; `Duration = 2 × ReloadDelay` = 50 ticks,
-  `Range = 2 × Spread` = 800/1200/1600, Enemy/Neutral only). `verify_generator_sync.py` reports drift = 9 (`Chemical`/`ChemCannon`/`ChemMissile` blocks; `^Warhead_Sniper_Light` and `^Warhead_Nuclear_Super` are hand-tuned and now skipped by the audit), empty-warhead 0,
+  `Range = 2 × Spread` = 800/1200/1600, Enemy/Neutral only). `verify_generator_sync.py` reports drift = 0 (`^Warhead_Sniper_Light` and `^Warhead_Nuclear_Super` are hand-tuned and skipped by the audit), empty-warhead 0,
   `audit_physical_state_warheads` PASS. Boot-gated, `5a14355e6`. Spec: `PHYSICAL_STATE_SYSTEM.md` §5.
 - **[RESOLVED 2026-08-10, Devin] Upgraded Tesla weapons drained integrity at the same ratio as their
   un-upgraded base** — RA1 Tesla Doctrine (`PortaTesla_EMP`/`TTankZap_EMP`/`TTankZap2_EMP`/

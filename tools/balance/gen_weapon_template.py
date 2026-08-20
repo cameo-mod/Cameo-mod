@@ -1338,11 +1338,17 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
              emit_versus(main),
              f"\t\tDamageTypes: {damage_types}"]
         if name in FAMILY_PHYSICAL_STATE:  # heat/cold/corrosion meter, scaled by main damage
-            psn, pss = FAMILY_PHYSICAL_STATE[name]
-            main_wh += [f"\t\tPhysicalStateName: {psn}", f"\t\tPhysicalStateScale: {pss}"]
+            ps = FAMILY_PHYSICAL_STATE[name]
+            if isinstance(ps, dict):
+                main_wh.append("\t\tPhysicalStates:")
+                main_wh += [f"\t\t\t{k}: {v}" for k, v in _physical_states_for_level(ps, level).items()]
+            else:
+                psn, pss = ps
+                main_wh += [f"\t\tPhysicalStateName: {psn}", f"\t\tPhysicalStateScale: {pss}"]
         if physical_states:  # multi-state blend (e.g. Plasma: Temperature 50 + Corrosion 50)
+            resolved = _physical_states_for_level(physical_states, level)
             main_wh.append("\t\tPhysicalStates:")
-            main_wh += [f"\t\t\t{k}: {v}" for k, v in physical_states.items()]
+            main_wh += [f"\t\t\t{k}: {v}" for k, v in resolved.items()]
         integ = FAMILY_INTEGRITY_SCALE.get(name)  # ELECTRONICS (EMP) auto-drain — NOT a shield
         if integ:
             main_wh.append(f"\t\tIntegrityScale: {integ}")
@@ -1367,8 +1373,12 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
             pct_wh.append(f"\t\tIntegrityScale: {integ}")
         pct_wh.append(f"\t\tUpdatesUnitStatistics: false")
         if percentage_state:
-            psn, pss = percentage_state
-            pct_wh += [f"\t\tPhysicalStateName: {psn}", f"\t\tPhysicalStateScale: {pss}"]
+            if isinstance(percentage_state, dict):
+                pct_wh += ["\t\tPhysicalStates:"]
+                pct_wh += [f"\t\t\t{k}: {v}" for k, v in _physical_states_for_level(percentage_state, level).items()]
+            else:
+                psn, pss = percentage_state
+                pct_wh += [f"\t\tPhysicalStateName: {psn}", f"\t\tPhysicalStateScale: {pss}"]
         parts = main_wh + pct_wh
         if name in CHIPS:  # paid-for ExtraDamage chip (energy families only)
             parts.append(emit_chip(tag, name, damage, vt, level=level))
@@ -1464,10 +1474,27 @@ def _m(fraction: float) -> int:
     return int(round(METER_FULL * fraction))
 
 
+def _physical_states_for_level(states, level):
+    """Resolve a physical-states spec to the current level.
+
+    Supports level-scaled dicts like {"Corrosion": {"Light": 20, "Medium": 33, "Heavy": 50}}
+    alongside plain constants like {"Corrosion": 50}.  Missing levels fall back to Heavy.
+    """
+    if not states:
+        return {}
+    resolved = {}
+    for k, v in states.items():
+        if isinstance(v, dict):
+            resolved[k] = v.get(level, v.get("Heavy", v.get("Light", 0)))
+        else:
+            resolved[k] = v
+    return resolved
+
+
 FAMILY_PHYSICAL_STATE = {
     "Flame":    ("Temperature", _m(1.00)),   # heat -> overheat/pop
     "Laser":    ("Temperature", _m(0.75)),   # laser overheats (main only, chip excluded)
-    "Chemical": ("Corrosion", _m(1.00)),     # acid -> corrosion meter
+    "Chemical": {"Corrosion": _m(1.00)},     # acid -> corrosion meter (mapping form)
     "Cryo":     ("Temperature", _m(-1.00)),  # prism beam that freezes
     "Inferno":  ("Temperature", _m(1.00)),   # prism beam that burns
     # Plasma (Temperature + Corrosion) needs two states on one warhead -> handled at family build.
@@ -1510,9 +1537,11 @@ FAMILY_INTEGRITY_SCALE = {
 # values already account for the passive drain stacking. `ElectricityDeath` = tesla death animation.
 # Families NOT listed use the default (Prone75Percent, TriggerProne, ExplosionDeath).
 FAMILY_DAMAGE_TYPES = {
-    "Tesla":   "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
-    "Quantum": "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
-    "Inferno": "Prone75Percent, TriggerProne, FireDeath, Incendiary",
+    "Tesla":      "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
+    "Quantum":    "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
+    "Inferno":    "Prone75Percent, TriggerProne, FireDeath, Incendiary",
+    "ChemCannon": "Prone75Percent, TriggerProne, TiberiumDeath",
+    "ChemMissile":"Prone75Percent, TriggerProne, TiberiumDeath",
     # Storm is handled at its own call site (Prone100Percent + Tesla).
 }
 
@@ -1586,8 +1615,8 @@ BLEND_FAMILIES = {
     # (better vs infantry/buildings); CHEMICAL = anti-armor -> pairs with AP delivery (better vs armor).
     "FireCannon":  (["Flame", "CannonHE"],    {"Temperature": _m(0.50)}, L3),
     "FireMissile": (["Flame", "MissileHE"],   {"Temperature": _m(0.50)}, L3),
-    "ChemCannon":  (["Chemical", "CannonAP"], {"Corrosion": _m(0.50)}, L3),
-    "ChemMissile": (["Chemical", "MissileAP"],{"Corrosion": _m(0.50)}, L3),
+    "ChemCannon":  (["Chemical", "CannonAP"], {"Corrosion": {"Light": 20, "Medium": 33, "Heavy": 50}}, L3),
+    "ChemMissile": (["Chemical", "MissileAP"],{"Corrosion": {"Light": 20, "Medium": 33, "Heavy": 50}}, L3),
     # Waveforce = a resonant energy weapon: "a bit like a mix of the plasma warhead and the
     # quantum warheads" (maintainer 2026-08-16), adopted for the Japanese energy rifles —
     # which inherit `^WaveforceBulletWarhead` and were never railguns — and for the Protoss
