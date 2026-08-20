@@ -160,3 +160,29 @@
 	ReloadDelay: 60
 	Range: 5500
 	MinRange: 1100
+
+## D2K per-game PROJECTILE and EFFECT templates for the debris/grenade family.
+
+^Projectile_Grenade_Light_D2K_Debris:
+	Inherits: ^Projectile_Grenade_Light
+	Projectile: Bullet
+		Speed: 32, 64
+		LaunchAngle: 128, 192
+		Inaccuracy: 1c256
+		Image: shrapnel
+		Palette: d2keffect
+		Shadow: true
+		BounceCount: 3
+		BounceRangeModifier: 20
+
+^Effect_Demolition_Light_D2K:
+	Inherits: ^Effect_Demolition_Light
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_tiny_explosion
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+	Warhead@Concrete: DamagesConcrete
+		Damage: 300

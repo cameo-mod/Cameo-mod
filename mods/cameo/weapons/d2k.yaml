@@ -27,36 +27,17 @@
 
 Debris:
 	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light_D2K_Debris
+	Inherits@fx: ^Effect_Demolition_Light_D2K
 	ReloadDelay: 60
 	Range: 2816
 	Report: d2khc.wav
-	Projectile: Bullet
-		Speed: 32, 64
-		Blockable: false
-		LaunchAngle: 128, 192
-		Inaccuracy: 1c256
-		Image: shrapnel
-		Palette: d2keffect
-		Shadow: true
-		BounceCount: 3
-		BounceRangeModifier: 20
 	Warhead@Demolition_Light:
 		Damage: 16000
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 8
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_tiny_explosion
-		ImpactActors: false
-		ExplosionPalette: effect75alpha
-	Warhead@4Concrete: DamagesConcrete
-		Damage: 300
 
 Debris2:
 	Inherits@wh: ^Warhead_Flame_Light
