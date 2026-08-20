@@ -329,3 +329,57 @@
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLMD2.WAV
 		ExplosionPalette: effect75alpha
+
+## D2K per-game PROJECTILE and WARHEAD/EFFECT templates for the Ornithopter bomb.
+
+^Projectile_GravityBomb_D2K:
+	Projectile: GravityBomb
+		Image: d2k_bombs
+		Palette: d2keffect
+		Velocity: 0, 0, -64
+		Acceleration: 0, 0, 0
+		Shadow: true
+
+^Warhead_Demolition_Heavy_D2K_Orni:
+	Inherits: ^Warhead_Demolition_Heavy
+	-ValidTargets
+	-TargetActorCenter
+	-Warhead@Demolition_Heavy_Percentage
+	-Warhead@Demolition_Heavy
+	Warhead@Demolition_Heavy: SpreadDamage
+		Spread: 1250
+		Falloff: 100, 50, 25, 0
+		Damage: 7500
+		Versus:
+			None: 175
+			Wood: 75
+			Light: 150
+			Medium: 125
+			Heavy: 100
+			Concrete: 50
+		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
+		DamageCalculationType: ClosestTargetablePosition
+
+^Effect_Demolition_Heavy_D2K_Orni:
+	Inherits: ^Effect_Demolition_Heavy
+	-Warhead@Glow
+	-Warhead@Smudge1
+	-Warhead@RA2Crater
+	-Warhead@Smudge2
+	-Warhead@Smudge2RA2
+	-Warhead@Effect1
+	-Warhead@Effect2
+	-Warhead@EffectWater
+	-Warhead@ShieldHit
+	-Warhead@ShieldHitEffect
+	-Warhead@Concrete
+	Warhead@2Smu: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure
+	Warhead@3Eff: CreateEffect
+		Explosions: d2k_large_explosion
+		ImpactSounds: EXPLSML4.WAV
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+	Warhead@4Concrete: DamagesConcrete
+		Damage: 7500

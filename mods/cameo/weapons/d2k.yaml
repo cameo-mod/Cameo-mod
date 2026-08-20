@@ -736,43 +736,17 @@ WormSwallow:
 		InvalidTargets: Structure, Air, DevourImmune
 
 OrniBomb:
+	Inherits@wh: ^Warhead_Demolition_Heavy_D2K_Orni
+	Inherits@proj: ^Projectile_GravityBomb_D2K
+	Inherits@fx: ^Effect_Demolition_Heavy_D2K_Orni
 	ReloadDelay: 25
 	Burst: 5
 	BurstDelays: 5
 	Range: 2500
-	Projectile: GravityBomb
-		Image: d2k_bombs
-		Palette: d2keffect
-		Velocity: 0, 0, -64
-		Acceleration: 0, 0, 0
-		Shadow: true
-	Warhead@1Dam: SpreadDamage
-		Damage: 7500 #400 in original, reduce when bombers can do multiple passes
-		Spread: 1250
-		Falloff: 100, 50, 25, 0
-		Versus:
-			None: 175
-			Wood: 75
-			Light: 150
-			Medium: 125
-			Heavy: 100
-			Concrete: 50
-		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@2Smu: LeaveSmudge
-		SmudgeType: SandCrater, RockCrater
-		InvalidTargets: Vehicle, Structure
-	Warhead@3Eff: CreateEffect
-		Explosions: d2k_large_explosion
-		ImpactSounds: EXPLSML4.WAV
-		ImpactActors: false
-		ExplosionPalette: effect75alpha
-	Warhead@4Concrete: DamagesConcrete
-		Damage: 7500
 
 OrniBombC:
 	Inherits: OrniBomb
-		Range: 3333
+	Range: 2500
 
 OrniMissile:
 	Inherits: PhoenixRocket
