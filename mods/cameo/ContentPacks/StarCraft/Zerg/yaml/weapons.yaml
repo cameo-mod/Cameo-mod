@@ -539,25 +539,23 @@ GuardianShoot:
 		ExplosionPalette: ra_temperat
 
 SporemawShoot:
-	Inherits@wh: ^Warhead_CannonAP_Light
-	Inherits@proj: ^Projectile_Shell_Light
-	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Concussion_Medium
 	ReloadDelay: 40
 	Range: 7740
 	Report: zlufir00.aud
-	ValidTargets: Ground, Water, Air
-	Projectile: Missile
+	ValidTargets: Ground, Water
+	Projectile: Bullet
 		Image: scspore
 		Speed: 600
-		Inaccuracy: 125
+		Inaccuracy: 830
 		InaccuracyType: PerCellIncrement
 		Shadow: true
-		Blockable: False
-		LaunchAngle: 66
-		Arm: 0
+		Blockable: false
+		LaunchAngle: 165
+		Arm: 2
 		AllowSnapping: true
-		HorizontalRateOfTurn: 200
-		VerticalRateOfTurn: 30
 		TrailImage: sczhsplash
 		TrailInterval: 1
 		ContrailLength: 5
@@ -566,37 +564,21 @@ SporemawShoot:
 		ContrailEndColor: FFFFFF44
 		ContrailStartWidth: 25
 		ContrailEndWidth: 75
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
-		CloseEnough: 600
-		Acceleration: 3
-		HomingActivationDelay: 2
-		RangeLimit: 25000
-		PointDefenseTypes: Missile
-		Jammable: False
 	FirstBurstTargetOffset: 3072,0,0
-	Warhead@CannonAP_Light:
-		ValidTargets: Ground, Water, Air
+	Warhead@Concussion_Medium:
 		Damage: 18000
-	Warhead@CannonAP_Light_Percentage:
-		ValidTargets: Ground, Water, Air
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 9
 	Warhead@Effect: CreateEffect
 		Explosions: chemball
 		ImpactSounds: firebl3.aud
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		ImpactActors: false
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: gexpwasa.wav
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: d2k_med_explosion
-		ImpactSounds: zguhit00.aud
-		ExplosionPalette: ra_temperat
-		ValidTargets: Ground, Water, Air
-		ImpactActors: false
 	Warhead@Glow: GlowImpact
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit

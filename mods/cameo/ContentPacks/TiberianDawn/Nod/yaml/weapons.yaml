@@ -488,8 +488,8 @@ TurretGunBlackMarket:
 
 Dragon:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
-	Inherits@proj: ^Projectile_Flak_Heavy
-	Inherits@fx: ^Effect_Flak_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_MissileHE_Heavy
 	ReloadDelay: 40
 	Range: 12193
 	Report: rocket2.aud

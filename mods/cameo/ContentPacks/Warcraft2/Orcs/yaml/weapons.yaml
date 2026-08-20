@@ -525,16 +525,6 @@ wc2dragonFireVisible:
 		Explosions: wc2_building_collapse
 		ImpactSounds: explode.aud
 		ValidTargets: Ground, Water, Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: small_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-		InvalidTargets: Ship, Structure, Bridge
 wc2dragonFireExplosion:
 	Inherits: wc2dragonFireVisible
 	Projectile: Bullet

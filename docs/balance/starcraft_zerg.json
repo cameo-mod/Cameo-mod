@@ -5303,32 +5303,32 @@
       "damage_warheads": [
        {
         "damage": "18000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
-        "tag": "CannonAP_Light",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "9",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "CannonAP_Light_Percentage",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7740",
       "reloaddelay": "40",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_CannonAP_Light",
-       "^Projectile_Shell_Light",
-       "^Effect_CannonAP_Light"
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Grenade_Light",
+       "^Effect_Concussion_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light"
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "SporemawShoot",
       "weapon_class_source": "template"
@@ -5338,32 +5338,32 @@
       "damage_warheads": [
        {
         "damage": "18000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
-        "tag": "CannonAP_Light",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "9",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "CannonAP_Light_Percentage",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "7740",
       "reloaddelay": "40",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_CannonAP_Light",
-       "^Projectile_Shell_Light",
-       "^Effect_CannonAP_Light"
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Grenade_Light",
+       "^Effect_Concussion_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light"
+       "^Warhead_Concussion_Medium"
       ],
       "weapon": "SporemawShoot",
       "weapon_class_source": "template"

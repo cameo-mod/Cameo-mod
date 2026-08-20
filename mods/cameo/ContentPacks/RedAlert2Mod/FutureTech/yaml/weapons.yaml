@@ -557,9 +557,9 @@ Future_MultiMissile:
 		Damage: 2
 
 Future_MultiMissile_Javelin:
-	Inherits@wh: ^Warhead_MissileAP_Light
-	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_MissileAP_Light
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	ReloadDelay: 32
 	Range: 9000
 	Burst: 3
@@ -595,9 +595,9 @@ Future_MultiMissile_Javelin:
 		PointDefenseTypes: Missile
 		LaunchAngle: 125
 		Palette: d2keffect
-	Warhead@MissileAP_Light:
+	Warhead@MissileAP_Heavy:
 		Damage: 10000
-	Warhead@MissileAP_Light_Percentage:
+	Warhead@MissileAP_Heavy_Percentage:
 		Damage: 5
 	Warhead@Smudge: LeaveSmudge
 		InvalidTargets: Vehicle, Structure
@@ -628,11 +628,9 @@ Future_MultiMissile_Javelin:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 Future_MultiMissile_Frag:
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^MediumFlameWeapon
-	Inherits@3: ^LightChemicalWeapon
-	Inherits@4: ^LightMissile
-	Inherits@fx: ^Effect_Explosion_Large_RA2
+	Inherits@wh: ^Warhead_Concussion_Heavy
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Concussion_Heavy
 	ReloadDelay: 56
 	Burst: 3
 	BurstDelays: 4
@@ -648,47 +646,17 @@ Future_MultiMissile_Frag:
 		Palette: d2keffect
 		TrailImage: large_trail
 		LaunchAngle: 83
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
+	Warhead@Concussion_Heavy:
+		Damage: 16000
+		FriendlyFireDamage: 62
+		PhysicalStates:
+			Temperature: 25
+			Corrosion: 25
+	Warhead@Concussion_Heavy_Percentage:
+		Damage: 8
+		PhysicalStates:
+			Temperature: 25
+			Corrosion: 25
 	Warhead@FireShrapnel: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: AsianFlameFragment
@@ -836,9 +804,9 @@ FutureEnforcerShotgunDeployed_elite:
 	BurstDelays: 3
 
 FutureJavelinRockets:
-	Inherits@wh: ^Warhead_MissileAP_Light
-	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_MissileAP_Light
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
 	ReloadDelay: 25
 	Range: 6000
 	Report: ROCKET1.WAV
@@ -872,9 +840,9 @@ FutureJavelinRockets:
 		PointDefenseTypes: Missile
 		LaunchAngle: 125
 		Palette: d2keffect
-	Warhead@MissileAP_Light:
+	Warhead@MissileAP_Medium:
 		Damage: 10000
-	Warhead@MissileAP_Light_Percentage:
+	Warhead@MissileAP_Medium_Percentage:
 		Damage: 5
 	Warhead@Smudge: LeaveSmudge
 		InvalidTargets: Vehicle, Structure

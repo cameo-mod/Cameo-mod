@@ -659,8 +659,8 @@ TSBoatcannon:
 		Damage: 8
 		Spread: 400
 TSChemJuggerboat90mm:
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	ReloadDelay: 69
 	Range: 12834
 	MinRange: 2565
@@ -674,23 +674,29 @@ TSChemJuggerboat90mm:
 		Inaccuracy: 1c0
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 20000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 15
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 10000
+	Warhead@Concussion_Medium:
+		Damage: 30000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 6
+		PhysicalStateScale: 33
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+		Damage: 21
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStateScale: 33
+	Warhead@Effect: CreateEffect
+		Explosions: med_tibnapalm
+		ImpactSounds: xplobig6.aud
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 8
+		Range: 1250
+		ValidTargets: Shielded
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 TSChemBoatcannon:
@@ -729,7 +735,7 @@ TSChemBoatcannon:
 ####################################################################################################
 
 TSChemBazooka:
-	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@wh: ^Warhead_ChemMissile_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Light
 	Report: rketinf1.aud
@@ -738,16 +744,16 @@ TSChemBazooka:
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		TrailImage: spittrail
-	Warhead@MissileAP_Light:
+	Warhead@ChemMissile_Light:
 		Damage: 30000
 		FriendlyFireDamage: 90
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 20
-	Warhead@MissileAP_Light_Percentage:
+		PhysicalStates:
+			Corrosion: 20
+	Warhead@ChemMissile_Light_Percentage:
 		Damage: 15
 		FriendlyFireDamage: 90
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 20
+		PhysicalStates:
+			Corrosion: 20
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -802,8 +808,8 @@ TSVanMissile:
 		Damage: 12
 
 TSChemVanMissile:
-	Inherits: ^MediumChemicalWeapon
-	Inherits@2: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	ValidTargets: Ground, Water
 	Report: missile6.aud
 	ReloadDelay: 32
@@ -819,23 +825,22 @@ TSChemVanMissile:
 		Palette: d2keffect
 		TrailImage: large_trail
 		LaunchAngle: 60
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 24000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 12000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 12
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 12000
+	Warhead@Concussion_Medium:
+		Damage: 36000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 6
+		PhysicalStateScale: 33
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+		Damage: 18
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStateScale: 33
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactSounds: xplos.aud
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ImpactActors: false
+		ValidTargets: Ground, Ship
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50
@@ -867,14 +872,12 @@ TSMLRSMissile:
 		LaunchAngle: 165
 	Warhead@Concussion_Medium:
 		Damage: 24000
-	WWarhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 12000
 	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 12
 
 TSChemMLRSMissile:
-	Inherits: ^MediumChemicalWeapon
-	Inherits@2: ^ShrapnelWeapon
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
 	ValidTargets: Ground, Water
 	Report: missile6.aud
 	ReloadDelay: 34
@@ -890,23 +893,22 @@ TSChemMLRSMissile:
 		Palette: d2keffect
 		TrailImage: large_trail
 		LaunchAngle: 165
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 24000
-	WWarhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 12000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 12
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 12000
+	Warhead@Concussion_Medium:
+		Damage: 36000
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 6
+		PhysicalStateScale: 33
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+		Damage: 18
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStateScale: 33
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactSounds: xplos.aud
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ImpactActors: false
+		ValidTargets: Ground, Ship
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50

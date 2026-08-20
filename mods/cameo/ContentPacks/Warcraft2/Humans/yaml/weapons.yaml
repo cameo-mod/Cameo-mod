@@ -446,9 +446,9 @@ wc2gryphonFireVisible:
 # 5-9 WC2 damage. 0 Base, 9 Pierce.
 
 wc2mageFireballVisible:
-	Inherits@wh: ^Warhead_CannonAP_Light
-	Inherits@proj: ^Projectile_Shell_Light
-	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@wh: ^Warhead_Flame_Heavy
+	Inherits@proj: ^Projectile_Flame_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	ReloadDelay: 80
 	Range: 8000
 	Report: aacanon3.aud
@@ -480,11 +480,9 @@ wc2mageFireballVisible:
 		HomingActivationDelay: 2
 		RangeLimit: 25000
 		PointDefenseTypes: Missile
-	Warhead@CannonAP_Light:
-		ValidTargets: Ground, Water, Air
+	Warhead@Flame_Heavy:
 		Damage: 18000
-	Warhead@CannonAP_Light_Percentage:
-		ValidTargets: Ground, Water, Air
+	Warhead@Flame_Heavy_Percentage:
 		Damage: 9
 	Warhead@Effect: CreateEffect
 		Explosions: wc2_building_collapse

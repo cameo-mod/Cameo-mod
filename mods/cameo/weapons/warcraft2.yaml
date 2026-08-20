@@ -312,9 +312,8 @@ wc2demolitionsquadTrigger:
 		Footprint: XXX XXX XXX
 
 wc2demolitionsquadExplode:
-	Inherits@wh: ^Warhead_CannonAP_Light
-	Inherits@proj: ^Projectile_Shell_Light
-	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
 	ValidTargets: Ground, Water
 	Report: aacanon3.aud
 	Projectile: InstantHit
@@ -343,13 +342,11 @@ wc2demolitionsquadExplode:
 		HomingActivationDelay: 2
 		RangeLimit: 25000
 		PointDefenseTypes: Missile
-	Warhead@CannonAP_Light:
-		ValidTargets: Ground, Water, Air
+	Warhead@Demolition_Heavy:
 		Damage: 90000
-	Warhead@CannonAP_Light_Percentage:
-		ValidTargets: Ground, Water, Air
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 45
-	Warhead@Effect: CreateEffect
+	Warhead@Effect1: CreateEffect
 		Explosions: wc2_building_collapse
 		ImpactSounds: explode.aud
 		ValidTargets: Ground, Ship
@@ -367,11 +364,8 @@ wc2demolitionsquadExplode:
 		ImpactSounds: gexpwasa.wav
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
-	Warhead@EffectAir: CreateEffect
-		Explosions: small_explosion_air
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
 	Warhead@Glow: GlowImpact
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
@@ -645,9 +639,9 @@ wc2gruntslice:
 
 wc2ogremageRunes_Hit:
 	Inherits: wc2demolitionsquadExplode
-	Warhead@CannonAP_Light:
+	Warhead@Demolition_Heavy:
 		Damage: 11250
-	Warhead@CannonAP_Light_Percentage:
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 11
 wc2skeletonpunch:
 	Inherits: wc2footmanslice
