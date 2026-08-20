@@ -203,16 +203,14 @@ D2K_155mm3:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@wh3: ^Warhead_Concussion_Medium
-	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
+	Inherits@fx: ^Effect_Demolition_Heavy_D2K_155mm
 	ReloadDelay: 80
 	Range: 8686
 	Report: MORTAR1.WAV
 	TargetActorCenter: true
 	Projectile: Bullet
 		Speed: 240
-		Blockable: false
-		Shadow: true
 		LaunchAngle: 80
 		ContrailLength: 12
 		Inaccuracy: 80
@@ -236,10 +234,6 @@ D2K_155mm3:
 		Damage: 8000
 	Warhead@Demolition_Heavy_Percentage:
 		Damage: 4
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_med_explosion
-		ImpactSounds: EXPLMD2.WAV
-		ExplosionPalette: effect75alpha
 
 D2K_Bazooka2:
 	Inherits: ^D2KMissile

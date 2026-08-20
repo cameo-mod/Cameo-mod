@@ -186,3 +186,24 @@
 		ImpactActors: false
 	Warhead@Concrete: DamagesConcrete
 		Damage: 300
+
+## D2K per-game PROJECTILE and EFFECT templates for the 155mm family.
+## These centralize the shared d2k_155mm grenade projectile and d2k_med_explosion effect.
+
+^Projectile_Grenade_Light_D2K_155mm:
+	Inherits: ^Projectile_Grenade_Light
+	Projectile: Bullet
+		Image: d2k_155mm
+		Palette: d2keffect
+		Blockable: false
+		Shadow: true
+		LaunchAngle: 62
+		ContrailLength: 20
+		Speed: 192
+
+^Effect_Demolition_Heavy_D2K_155mm:
+	Inherits: ^Effect_Demolition_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_med_explosion
+		ImpactSounds: EXPLMD2.WAV
+		ExplosionPalette: effect75alpha

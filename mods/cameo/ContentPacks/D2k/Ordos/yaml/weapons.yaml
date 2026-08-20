@@ -238,20 +238,14 @@ D2K_155mm_turret:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@wh3: ^Warhead_Concussion_Medium
-	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
+	Inherits@fx: ^Effect_Demolition_Heavy_D2K_155mm
 	Inherits@4: ^D2K_Cannon
 	ReloadDelay: 74
 	Range: 10000
 	Report: MORTAR1.WAV
 	Projectile: Bullet
 		Speed: 228
-		Blockable: false
-		Shadow: true
-		LaunchAngle: 62
-		ContrailLength: 20
-		Image: d2k_155mm
-		Palette: d2keffect
 	Warhead@Demolition_Light:
 		Damage: 12000
 	Warhead@Demolition_Light_Percentage:
@@ -270,10 +264,6 @@ D2K_155mm_turret:
 		Damage: 6
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 5625
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_med_explosion
-		ImpactSounds: EXPLMD2.WAV
-		ExplosionPalette: effect75alpha
 
 Dune_SiegeMortar:
 	Inherits@wh: ^Warhead_Demolition_Light

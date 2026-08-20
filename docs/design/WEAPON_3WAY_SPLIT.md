@@ -280,7 +280,10 @@ followed by `^D2K_Cannon` repointed to the per-game `^Projectile_Shell_Medium_D2
 then `^D2KRocket` and `^D2KMissile` migrated into the same D2K Shared pack as AP 3-way
 split intermediates using `^Effect_MissileAP_Heavy_D2K` / `^Effect_MissileAP_Heavy_D2K_Rocket`;
 finally the D2K `Debris` family moved its shrapnel bounce and demolition-effect overrides
-into `^Projectile_Grenade_Light_D2K_Debris` and `^Effect_Demolition_Light_D2K`.
+into `^Projectile_Grenade_Light_D2K_Debris` and `^Effect_Demolition_Light_D2K`;
+then the D2K 155mm family (D2K_155mm, D2K_155mm_turret, D2K_155mm3) moved its shared
+`d2k_155mm` projectile and `d2k_med_explosion` effect into
+`^Projectile_Grenade_Light_D2K_155mm` and `^Effect_Demolition_Heavy_D2K_155mm`.
 
 **RESUME — Phase 2 remaining families** (one commit each: `--old <names>` → self-check → boot → commit):
 `LightMissile,MediumMissile,HeavyMissile` + `FlakWeapon,HeavyAAWeapon` → then
