@@ -37,9 +37,9 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured 2026-08-17 |
 |---|---|
-| W24 — fired weapons with **more than one** damage main | **975 of 1495 = 65.2%** (histogram runs out to 15 mains) |
-| armament slots whose `K` moves when those collapse | **1 584** |
-| fired weapons that reach a `^Warhead_*` family at all | **639 of 1620 = 39%** — the rest still route through legacy templates (`audit_unconverted_templates`: 47 templates, 1343 inheritors) |
+| W24 — fired weapons with **more than one** damage main | **939 of 1622 = 57.9%** (histogram runs out to 15 mains) |
+| armament slots whose `K` moves when those collapse | **1 547** |
+| fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1196 inheritors) |
 
 Collapsing N mains into 1 preserves the damage SUM (`formula.spread_damage_sum`) but **not
 `K`** — `K` is share-weighted over each warhead's armor profile, so picking ONE family changes
@@ -95,8 +95,8 @@ nothing and informs the anchor choice. What must wait is WRITING targets and app
 | **W20** | Multi-armor combination rule (engine MULTIPLIES → squares the profile); mechanism + switch | ⬜ MECHANISM DONE, rule = maintainer | Claude | — |
 | **W21** | Layered health Shield → Integrity → Armor → Health, layer-aware armor (solves W20 structurally) | ✅ BUILT + LIVE `ab467fe52` | Claude | — |
 | **W22** | Roster census: liveness classifier + per-credit weighting (552/1977 armored actors are not buildable) | ⬜ PROPOSED | — | — |
-| **W23** | Retrofit the 47 legacy templates into the `^Warhead_*` family system | 🔵 MACHINERY DONE + verified; content ⛔ on the 33-collision ruling | Claude | W13 |
-| **W24** | Collapse every weapon to ONE damage warhead (3-way split, damage half) — 61% of weapons carry 2+, worst case 15 | ✅ ninth cluster (GoliathRockets_AA/WraithRockets_AA/SunDogRockets/MissileTurret/ScoutRockets_AA/HeavyOrdosCombatTankRockets) reparented to ^Warhead_MissileAA_Heavy (Goliath/Wraith/Scout/MissileTurret) and ^Warhead_MissileAP_Heavy (SunDog) + ^Projectile_Missile_Heavy_D2K + ^Effect_MissileHE_Heavy_D2K (one main + percentage twin); removed ^D2KRocket full-stack inherit and created ContentPacks/D2k/Shared/yaml/weapons.yaml with D2K-specific missile/rocket projectile and effect templates; removed ^Chaingun/^FlakWeapon/^LightMissile/^MediumMissile inherits and their warheads; preserved per-shot totals (30000/10000/10000/20000/10000/10000) and percentage twins (15/5/5/10/5/5); preserved local projectile overrides (Speed, Inaccuracy, launch angles, contrail colors) and restored flak-bullet contrail visual fields (ContrailZOffset/ContrailStartColor/ContrailEndColor/ContrailStartWidth/ContrailEndWidth) as local overrides because ^D2KRocket's ^Projectile_Missile_Heavy drops them; added local Warhead@EffectWater (small_splash) because the ^Effect_MissileAP_Heavy family does not define one; children resolve cleanly; review_resolve_diff clean; find_empty_warhead 0, find_orphan_old_keys 0, audit_warhead_split baseline 958→952, audit_physical_state_warheads PASS, audit_balance_drift clean, boot-gated; then ^D2K_Cannon repointed to ^Projectile_Shell_Medium_D2K + ^Effect_CannonHE_Medium_D2K in ContentPacks/D2k/Shared/yaml/weapons.yaml (preserving d2k_120mm, d2k_small_napalm, 8000 main + percentage twin, Sand/Rock smudge, 1000 concrete), boot-gated; then ^D2KRocket and ^D2KMissile moved into ContentPacks/D2k/Shared/yaml/weapons.yaml as AP 3-way split intermediates (^Warhead_MissileAP_Heavy + ^Projectile_Missile_Heavy_D2K[_Rocket] + ^Effect_MissileAP_Heavy_D2K[_Rocket]) so all D2K rocket/missile users resolve without empty warheads, boot-gated; then Debris repointed to ^Projectile_Grenade_Light_D2K_Debris + ^Effect_Demolition_Light_D2K (preserving shrapnel bounce, d2k_tiny_explosion, Scorch smudge, 300 concrete), boot-gated; then D2K_155mm family repointed to ^Projectile_Grenade_Light_D2K_155mm + ^Effect_Demolition_Heavy_D2K_155mm (preserving d2k_155mm, d2k_med_explosion, multi-warhead structure, MORTAR1.WAV), boot-gated; then Dune_SiegeMortar repointed to ^Projectile_Shell_Light_D2K_Mortar + ^Effect_CannonAP_Light_D2K_Mortar (preserving d2k_155mm / effect palette, d2k_large_explosion, four-warhead structure), boot-gated; then D2K_Rocket and Fremen_RPG repointed to D2K Shared blast effect layers (^Effect_MissileAP_Heavy_D2K_Rocket_Blast / ^Effect_MissileAP_Heavy_D2K_Missile_Blast) preserving d2k_rocket_explosion and per-weapon concrete, boot-gated; then oRocket repointed to ^Effect_MissileAP_Heavy_D2K_Rocket_Blast preserving SpreadDamage warhead and 625 concrete, boot-gated; then D2K_155mm2 repointed to ^Projectile_Grenade_Light_D2K_155mm + ^Effect_Demolition_Heavy_D2K_155mm2 preserving multi-warhead grenade/flame/shrapnel/bomb stack, d2k_155mm image, d2k_large_explosion, boot-gated; seventh cluster (TSChemJuggerboat90mm/TSChemVanMissile/TSChemMLRSMissile/TSChemBazooka/TSTibBazooka/TSChemApacheMissile/TSChemCobraMissile) reparented to chemical cannon/missile families with PhysicalStates moved into ^Warhead_Chem*/^Warhead_ChemCannon*/^Warhead_ChemMissile* templates; added global ^Projectile_ArtilleryShell_Medium and ^Projectile_ArtilleryRocket_Medium, consolidated the redundant ContentPacks/RedAlert2/Shared copy into the global template, and switched Future_MultiMissile_Frag to the artillery-rocket family; audit_physical_state_warheads updated to resolve PhysicalStates maps as well as direct PhysicalStateName/PhysicalStateScale; eighth cluster (227mm/GDIRigMissilePod/MammothTusk) reparented to ^Warhead_MissileHE_Medium/^Warhead_MissileHE_Heavy with ^Projectile_Missile_Medium/^Projectile_Missile_Heavy and ^Effect_MissileHE_Medium/^Effect_MissileHE_Heavy; preserved resolved per-shot totals 8000/32000/24000, local projectile overrides (Speed, Inaccuracy, launch angles), impact/water effects, ImpactActors, and the legacy flak-bullet contrail colors (ContrailStartColor/ContrailEndColor restored on the three non-AMT projectiles); children 227mmAMT, GDIRigMissilePodAMT, MammothTuskTargetingComputer resolve cleanly; review_resolve_diff clean; find_empty_warhead 0, audit_warhead_split broadcast baseline lowered 965→958, audit_balance_drift clean, boot-gated; then ^ORocket/^OMissile and children (oBazooka/oRocket/oTowerMissile/omtank_pri/oDeviatorMissile) converted to 3-way split with D2K Shared ^Warhead_MissileAP_Heavy_D2K_ORocket, ^Projectile_Missile_Heavy_D2K_ORocket/^Projectile_Missile_Heavy_D2K_OMissile, ^Effect_MissileAP_Heavy_D2K_ORocket/^Effect_MissileAP_Heavy_D2K_OMissile in ContentPacks/D2k/Shared/yaml/weapons.yaml; preserved legacy SpreadDamage, Versus, falloff, projectile fields, d2k_tiny/small/deviator explosions, concrete 240/720/625/900/1000, smudge invalid targets; review_resolve_diff OK; find_empty_warhead 0, find_orphan_old_keys 0, audit_warhead_split 952, boot-gated; then OrniBomb and OrniBombC converted to 3-way split using D2K Shared ^Projectile_GravityBomb_D2K, ^Warhead_Demolition_Heavy_D2K_Orni, and ^Effect_Demolition_Heavy_D2K_Orni; preserved 7500 SpreadDamage, d2k_bombs GravityBomb, Sand/Rock smudge, d2k_large_explosion, and 7500 concrete; OrniBombC inherits OrniBomb with Range 2500 (its original Range 3333 was mis-indented and ignored by the resolver); review_resolve_diff OK; find_empty_warhead 0, find_orphan_old_keys 0, audit_warhead_split 952, boot-gated | Claude | — |
+| **W23** | Retrofit the 45 legacy templates into the `^Warhead_*` family system | 🔵 MACHINERY DONE + verified; content ⛔ on the 33-collision ruling | Claude | W13 |
+| **W24** | Collapse every weapon to ONE damage warhead (3-way split, damage half) — 57.9% of weapons carry 2+, worst case 15 | ✅ ninth cluster (GoliathRockets_AA/WraithRockets_AA/SunDogRockets/MissileTurret/ScoutRockets_AA/HeavyOrdosCombatTankRockets) reparented to ^Warhead_MissileAA_Heavy (Goliath/Wraith/Scout/MissileTurret) and ^Warhead_MissileAP_Heavy (SunDog) + ^Projectile_Missile_Heavy_D2K + ^Effect_MissileHE_Heavy_D2K (one main + percentage twin); removed ^D2KRocket full-stack inherit and created ContentPacks/D2k/Shared/yaml/weapons.yaml with D2K-specific missile/rocket projectile and effect templates; removed ^Chaingun/^FlakWeapon/^LightMissile/^MediumMissile inherits and their warheads; preserved per-shot totals (30000/10000/10000/20000/10000/10000) and percentage twins (15/5/5/10/5/5); preserved local projectile overrides (Speed, Inaccuracy, launch angles, contrail colors) and restored flak-bullet contrail visual fields (ContrailZOffset/ContrailStartColor/ContrailEndColor/ContrailStartWidth/ContrailEndWidth) as local overrides because ^D2KRocket's ^Projectile_Missile_Heavy drops them; added local Warhead@EffectWater (small_splash) because the ^Effect_MissileAP_Heavy family does not define one; children resolve cleanly; review_resolve_diff clean; find_empty_warhead 0, find_orphan_old_keys 0, audit_warhead_split baseline 958→952, audit_physical_state_warheads PASS, audit_balance_drift clean, boot-gated; then ^D2K_Cannon repointed to ^Projectile_Shell_Medium_D2K + ^Effect_CannonHE_Medium_D2K in ContentPacks/D2k/Shared/yaml/weapons.yaml (preserving d2k_120mm, d2k_small_napalm, 8000 main + percentage twin, Sand/Rock smudge, 1000 concrete), boot-gated; then ^D2KRocket and ^D2KMissile moved into ContentPacks/D2k/Shared/yaml/weapons.yaml as AP 3-way split intermediates (^Warhead_MissileAP_Heavy + ^Projectile_Missile_Heavy_D2K[_Rocket] + ^Effect_MissileAP_Heavy_D2K[_Rocket]) so all D2K rocket/missile users resolve without empty warheads, boot-gated; then Debris repointed to ^Projectile_Grenade_Light_D2K_Debris + ^Effect_Demolition_Light_D2K (preserving shrapnel bounce, d2k_tiny_explosion, Scorch smudge, 300 concrete), boot-gated; then D2K_155mm family repointed to ^Projectile_Grenade_Light_D2K_155mm + ^Effect_Demolition_Heavy_D2K_155mm (preserving d2k_155mm, d2k_med_explosion, multi-warhead structure, MORTAR1.WAV), boot-gated; then Dune_SiegeMortar repointed to ^Projectile_Shell_Light_D2K_Mortar + ^Effect_CannonAP_Light_D2K_Mortar (preserving d2k_155mm / effect palette, d2k_large_explosion, four-warhead structure), boot-gated; then D2K_Rocket and Fremen_RPG repointed to D2K Shared blast effect layers (^Effect_MissileAP_Heavy_D2K_Rocket_Blast / ^Effect_MissileAP_Heavy_D2K_Missile_Blast) preserving d2k_rocket_explosion and per-weapon concrete, boot-gated; then oRocket repointed to ^Effect_MissileAP_Heavy_D2K_Rocket_Blast preserving SpreadDamage warhead and 625 concrete, boot-gated; then D2K_155mm2 repointed to ^Projectile_Grenade_Light_D2K_155mm + ^Effect_Demolition_Heavy_D2K_155mm2 preserving multi-warhead grenade/flame/shrapnel/bomb stack, d2k_155mm image, d2k_large_explosion, boot-gated; seventh cluster (TSChemJuggerboat90mm/TSChemVanMissile/TSChemMLRSMissile/TSChemBazooka/TSTibBazooka/TSChemApacheMissile/TSChemCobraMissile) reparented to chemical cannon/missile families with PhysicalStates moved into ^Warhead_Chem*/^Warhead_ChemCannon*/^Warhead_ChemMissile* templates; added global ^Projectile_ArtilleryShell_Medium and ^Projectile_ArtilleryRocket_Medium, consolidated the redundant ContentPacks/RedAlert2/Shared copy into the global template, and switched Future_MultiMissile_Frag to the artillery-rocket family; audit_physical_state_warheads updated to resolve PhysicalStates maps as well as direct PhysicalStateName/PhysicalStateScale; eighth cluster (227mm/GDIRigMissilePod/MammothTusk) reparented to ^Warhead_MissileHE_Medium/^Warhead_MissileHE_Heavy with ^Projectile_Missile_Medium/^Projectile_Missile_Heavy and ^Effect_MissileHE_Medium/^Effect_MissileHE_Heavy; preserved resolved per-shot totals 8000/32000/24000, local projectile overrides (Speed, Inaccuracy, launch angles), impact/water effects, ImpactActors, and the legacy flak-bullet contrail colors (ContrailStartColor/ContrailEndColor restored on the three non-AMT projectiles); children 227mmAMT, GDIRigMissilePodAMT, MammothTuskTargetingComputer resolve cleanly; review_resolve_diff clean; find_empty_warhead 0, audit_warhead_split broadcast baseline lowered 965→958, audit_balance_drift clean, boot-gated; then ^ORocket/^OMissile and children (oBazooka/oRocket/oTowerMissile/omtank_pri/oDeviatorMissile) converted to 3-way split with D2K Shared ^Warhead_MissileAP_Heavy_D2K_ORocket, ^Projectile_Missile_Heavy_D2K_ORocket/^Projectile_Missile_Heavy_D2K_OMissile, ^Effect_MissileAP_Heavy_D2K_ORocket/^Effect_MissileAP_Heavy_D2K_OMissile in ContentPacks/D2k/Shared/yaml/weapons.yaml; preserved legacy SpreadDamage, Versus, falloff, projectile fields, d2k_tiny/small/deviator explosions, concrete 240/720/625/900/1000, smudge invalid targets; review_resolve_diff OK; find_empty_warhead 0, find_orphan_old_keys 0, audit_warhead_split 952, boot-gated; then OrniBomb and OrniBombC converted to 3-way split using D2K Shared ^Projectile_GravityBomb_D2K, ^Warhead_Demolition_Heavy_D2K_Orni, and ^Effect_Demolition_Heavy_D2K_Orni; preserved 7500 SpreadDamage, d2k_bombs GravityBomb, Sand/Rock smudge, d2k_large_explosion, and 7500 concrete; OrniBombC inherits OrniBomb with Range 2500 (its original Range 3333 was mis-indented and ignored by the resolver); review_resolve_diff OK; find_empty_warhead 0, find_orphan_old_keys 0, audit_warhead_split 952, boot-gated | Claude | — |
 | **W25** | Versus mean-normalisation to 100 + class tilt + Shield rebuild + the ARMOR-PLATING LAYER | ✅ S1–S4 SHIPPED 2026-08-16/17 (`78568a36d`..`99deed28d`). **E1 + E4 FIXED** (`30ead6d4b`, `761e79ed9`). ⛔ **S5 is NOT "run `--confirm`" — see the correction below: `--confirm` is a NO-OP until targets are written into the ledger, and that needs W11's sign-off.** | Claude | — |
 
 | **W26** | **Retire `DamageMultiplier` (R1) — case by case, 369 live declarations** | 🔵 STARTED 2026-08-17: the shield 150% is DELETED. Inventory + rules below. | Claude | — |
@@ -255,13 +255,14 @@ and every base assault becomes a shield fight.
 
 Measured before touching anything, and the finding changes the plan.
 
-### What the 975 actually are
+### What the 939 actually are
 
 | shape | count | note |
 |---|--:|---|
-| **inheritance PILEUP** — ≥3 legacy templates inherited, no `^Warhead_*` family | **221** | the sum is an artifact |
-| carries a `^Warhead_*` family inherit | 341 | real multi-warhead designs |
-| 1–2 legacy inherits, no family | 411 | mostly the same disease, milder |
+| **inheritance PILEUP** — ≥3 legacy templates inherited, no `^Warhead_*` family | **202** | the sum is an artifact |
+| carries a `^Warhead_*` family inherit | 339 | real multi-warhead designs |
+| 1–2 legacy inherits, no family | 118 | mostly the same disease, milder |
+|| other (no legacy / no family, still multi-main) | 280 | mixed new-family or local warheads |
 
 `wc2dragonFireVisible` — a dragon's fire breath — inherits **fifteen** legacy weapon templates:
 
@@ -274,12 +275,12 @@ Measured before touching anything, and the finding changes the plan.
 A dragon does not fire a tank-destroyer cannon or drop a heavy bomb. Each template contributes a
 damage warhead, so this is accumulated copy-paste, not design. The templates most often pulled in
 this way: `^ShrapnelWeapon` (100 weapons), `^Grenade` (96), `^FlakWeapon` (91), `^MediumMissile`
-(85). **This is the same debt as W23/A5** — 47 legacy templates with 1343 inheritors — showing up
+(85). **This is the same debt as W23/A5** — 45 legacy templates with 1196 inheritors — showing up
 from the other end.
 
 ### ⚠ The finding that changes the collapse rule: 90% are BROADCAST
 
-**874 of the 975 (89.6%) have EVERY main at the identical damage.** The worst pileups are all one
+**847 of the 939 (90.2%) have EVERY main at the identical damage.** The worst pileups are all one
 value repeated:
 
 | weapon | mains | each | sum |
@@ -1209,10 +1210,10 @@ that that were not converted yet?"*) — `tools/audit/audit_unconverted_template
 inheriting no `^Warhead_*` parent has not been converted, and is simultaneously a live
 violation of "Versus lives ONLY in `^Warhead_*` templates".
 
-**47 unconverted templates, 1343 direct inheritors.** Biggest: `^ShrapnelWeapon` (105) →
-Concussion · `^Grenade` (100) → Demolition/Concussion · `^FlakWeapon` (97) → Flak ·
-`^MediumMissile` (88) · `^MediumChemicalWeapon` (80) · `^TankDestroyerCannon` (78) → CannonAP ·
-`^Chaingun` (71) → Bullet. Every target family already EXISTS, so these are retrofits, not
+**45 unconverted templates, 1196 direct inheritors.** Biggest: `^ShrapnelWeapon` (90) →
+Concussion · `^Grenade` (87) → Demolition/Concussion · `^FlakWeapon` (82) → Flak ·
+`^MediumChemicalWeapon` (73) · `^MediumMissile` (68) · `^TankDestroyerCannon` (68) → CannonAP ·
+`^MediumFlameWeapon` (66) · `^Chaingun` (60) → Bullet. Every target family already EXISTS, so these are retrofits, not
 design. `^SniperWeapon` / `^HealingWeapon` / `^RepairWeapon` stay out by design.
 
 ---
@@ -2144,10 +2145,10 @@ Constants added by W5: `TARGETS_FLOOR 0.5` · `RANGE_WEIGHT 0.25` ·
 
 ---
 
-## W23 — Retrofit the 47 legacy templates into the `^Warhead_*` family system 🔵 MACHINERY DONE, content BLOCKED on one ruling
+## W23 — Retrofit the 45 legacy templates into the `^Warhead_*` family system 🔵 MACHINERY DONE, content BLOCKED on one ruling
 
 **Why.** DESIGN.md §12 is explicit that **`Versus` lives ONLY in `^Warhead_*` templates**. 47
-templates still declare their own and **1343 weapons inherit them**, so every one is both a
+templates still declare their own and **1196 weapons inherit them**, so every one is both a
 migration target and a live rule violation — and their ladders pollute the Versus census that
 W1's K coefficient, `armor_exposure.py` and the family surveys are all built on.
 
@@ -2155,7 +2156,7 @@ W1's K coefficient, `armor_exposure.py` and the family surveys are all built on.
 
 | tool | what it answers |
 |---|---|
-| `tools/audit/audit_unconverted_templates.py` | which templates are still outside the system (47 / 1343) |
+| `tools/audit/audit_unconverted_templates.py` | which templates are still outside the system (45 / 1196) |
 | `tools/balance/measure_retrofit_gap.py` | how far each legacy ladder sits from its target family, and **which** family by rank correlation |
 | `tools/balance/retrofit_legacy_template.py` | performs one conversion, template + all descendants |
 | `tools/balance/verify_retrofit.py` | proves resolved behaviour survived (mean output held, no orphans, no geometry drift) |
