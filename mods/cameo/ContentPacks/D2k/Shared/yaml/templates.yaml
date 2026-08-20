@@ -136,6 +136,12 @@
 		Upgrades: ixian_upgrade_generalpurposearmor
 
 ^D2K_AdvancedIxianTechnology:
+	WithIdleOverlay@shield1:
+		Palette: ixianhexshield25
+		IsPlayerPalette: false
+	WithIdleOverlay@shield_damage:
+		Palette: ixianhexshield50
+		IsPlayerPalette: false
 	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
 		Condition: ixian_upgrade_advancedixiantechnology
 		Prerequisites: ixian_upgrade_advancedixiantechnology

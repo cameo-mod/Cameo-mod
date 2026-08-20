@@ -39,7 +39,7 @@ for a in inherits duplicate_inherits faction_leaks upgrades upgrade_coverage ai 
          template_conformance multiplier_modifiers nuclear_flash_bindings \
          ts_death_palette warhead_split physical_state_warheads \
          unique_traits armor_upgrade_harm plating_exclusivity k_linearity \
-         survivability_pricing doc_claims; do
+         survivability_pricing doc_claims hex_shield_routing; do
   echo "== audit_$a"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" \
     || failed=1
