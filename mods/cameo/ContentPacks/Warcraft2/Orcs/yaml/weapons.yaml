@@ -343,7 +343,7 @@ wc2deathknightDeathAndDecay_Spread:
 wc2deathknightDeathAndDecay_Hit:
 	Inherits@wh: ^Warhead_Inferno_Heavy
 	Inherits@proj: ^Projectile_Inferno_Heavy
-	Inherits@fx: ^Effect_Flame_Heavy_Glow
+	Inherits@fx: ^Effect_Flame_Heavy
 	ValidTargets: Ground, Water, Air
 	Projectile: InstantHit
 		Speed: 0c512
@@ -496,7 +496,7 @@ wc2deathanddecaySuper_Spread:
 wc2dragonFireVisible:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
-	Inherits@fx: ^Effect_Flame_Light_Glow
+	Inherits@fx: ^Effect_Flame_Light
 	Range: 5010
 	ReloadDelay: 120
 	Burst: 2

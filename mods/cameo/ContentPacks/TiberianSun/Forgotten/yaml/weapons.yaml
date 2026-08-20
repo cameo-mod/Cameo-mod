@@ -968,7 +968,7 @@ TSMammothTuskChem:
 TSMammothTusk:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy_Glow
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Speed: 500

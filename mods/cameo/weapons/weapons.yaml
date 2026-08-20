@@ -766,6 +766,19 @@
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
+^ImpactGlow_Light:
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.3
+		FadeFrames: 6
+
+^ImpactGlow_Medium:
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+
+# Heavy impact glow and the legacy inline-glow compatibility template.
 ^ImpactGlow:
 	Warhead@Glow: GlowImpact
 		Color: FFB84D
@@ -9704,6 +9717,7 @@ DefuseKit:
 # tools/audit/check_effect_audio.py guards the mappings changed by those splits.
 ####################################################################
 ^Effect_Arrow_Light:
+	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -9724,6 +9738,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Arrow_Medium:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -9744,6 +9759,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Arrow_Heavy:
+	Inherits@glow: ^ImpactGlow
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -9764,6 +9780,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Bullet_Light:
+	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Effect: CreateEffect
 		Explosions: piff
 		ValidTargets: Ground, Ship, Air
@@ -9781,6 +9798,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Bullet_Medium:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ValidTargets: Ground, Ship, Air
@@ -9800,6 +9818,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Bullet_Heavy:
+	Inherits@glow: ^ImpactGlow
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -9821,7 +9840,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_CannonAP_Light:
-	Inherits@glow: ^ImpactGlow
+	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -9860,6 +9879,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_CannonAP_Medium:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -9898,6 +9918,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_CannonAP_Heavy:
+	Inherits@glow: ^ImpactGlow
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -9936,6 +9957,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_MissileAP_Light:
+	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -9969,6 +9991,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_MissileAP_Medium:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10002,6 +10025,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_MissileAP_Heavy:
+	Inherits@glow: ^ImpactGlow
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10035,6 +10059,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_CannonHE_Light:
+	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10073,7 +10098,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_CannonHE_Medium:
-	Inherits@glow: ^ImpactGlow
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10110,10 +10135,6 @@ DefuseKit:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
-
-^Effect_CannonHE_Medium_NoGlow:
-	Inherits@fx: ^Effect_CannonHE_Medium
-	-Warhead@Glow:
 
 ^Effect_CannonHE_Heavy:
 	Inherits@glow: ^ImpactGlow
@@ -10155,6 +10176,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Chem_Light:
+	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Effect: CreateEffect
 		Explosions: chemball
 		ImpactSounds: firebl3.aud
@@ -10170,6 +10192,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Chem_Medium:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: med_tibnapalm
 		ImpactSounds: xplobig6.aud
@@ -10188,6 +10211,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Chem_Heavy:
+	Inherits@glow: ^ImpactGlow
 	Warhead@Effect: CreateEffect
 		Explosions: big_tibnapalm
 		ImpactSounds: xplobig6.aud
@@ -10206,6 +10230,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Demolition_Light:
+	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10237,6 +10262,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Demolition_Light_RA2:
+	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: RA2Scorch
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10261,6 +10287,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Demolition_Medium:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10292,6 +10319,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Demolition_Heavy:
+	Inherits@glow: ^ImpactGlow
 	Warhead@Smudge1: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10337,6 +10365,7 @@ DefuseKit:
 		Damage: 250
 
 ^Effect_Concussion_Light:
+	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10368,6 +10397,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Concussion_Medium:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10399,6 +10429,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Concussion_Heavy:
+	Inherits@glow: ^ImpactGlow
 	Warhead@Smudge1: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10444,6 +10475,7 @@ DefuseKit:
 		Damage: 250
 
 ^Effect_Flak_Light:
+	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Effect: CreateEffect
 		Explosions: flak_explosion_ground
 		ImpactSounds: xplos.aud
@@ -10468,6 +10500,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Flak_Medium:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: flak_explosion_ground
 		ImpactSounds: xplos.aud
@@ -10492,6 +10525,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Flak_Heavy:
+	Inherits@glow: ^ImpactGlow
 	Warhead@Effect: CreateEffect
 		Explosions: flak_explosion_ground
 		ImpactSounds: xplos.aud
@@ -10515,12 +10549,8 @@ DefuseKit:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-# Dragon is the only legacy ^HeavyAAWeapon consumer that had ^ImpactGlow.
-^Effect_Flak_Heavy_Glow:
-	Inherits@fx: ^Effect_Flak_Heavy
-	Inherits@glow: ^ImpactGlow
-
 ^Effect_Flame_Light:
+	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		Chance: 15
@@ -10549,6 +10579,7 @@ DefuseKit:
 		InternalOwner: Neutral
 
 ^Effect_Flame_Medium:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall
@@ -10578,6 +10609,7 @@ DefuseKit:
 		InternalOwner: Neutral
 
 ^Effect_Flame_Heavy:
+	Inherits@glow: ^ImpactGlow
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall
@@ -10607,6 +10639,7 @@ DefuseKit:
 		InternalOwner: Neutral
 
 ^Effect_Laser_Heavy:
+	Inherits@glow: ^ImpactGlow
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10634,6 +10667,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Magic_Light:
+	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10652,6 +10686,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Magic_Medium:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10670,6 +10705,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Magic_Heavy:
+	Inherits@glow: ^ImpactGlow
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10688,6 +10724,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Sonic_Light:
+	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Effect: CreateEffect
 		Explosions: blue_small_fire
 		ImpactActors: false
@@ -10702,6 +10739,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Sonic_Medium:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building_napalm
 		ImpactSounds: xplos.aud
@@ -10717,6 +10755,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Sonic_Heavy:
+	Inherits@glow: ^ImpactGlow
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building
 		ImpactSounds: xplos.aud
@@ -10744,6 +10783,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_MissileHE_Light:
+	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10777,6 +10817,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_MissileHE_Medium:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10810,6 +10851,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_MissileHE_Heavy:
+	Inherits@glow: ^ImpactGlow
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -10843,6 +10885,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Nuclear_Super:
+	Inherits@glow: ^ImpactGlow
 	Warhead@Smudge1: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall
@@ -10874,6 +10917,7 @@ DefuseKit:
 		Damage: 1000
 
 ^Effect_Railgun_Heavy:
+	Inherits@glow: ^ImpactGlow
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
@@ -10915,6 +10959,7 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Sniper_Light:
+	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ValidTargets: Ground, Ship, Air
@@ -10930,71 +10975,6 @@ DefuseKit:
 	Warhead@ShieldHitEffect: CreateEffect
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
-
-# Selective variants for weapons that had ^ImpactGlow before the 3-way split.
-^Effect_Flak_Light_Glow:
-	Inherits@fx: ^Effect_Flak_Light
-	Inherits@glow: ^ImpactGlow
-
-^Effect_Flak_Medium_Glow:
-	Inherits@fx: ^Effect_Flak_Medium
-	Inherits@glow: ^ImpactGlow
-
-^Effect_Flame_Light_Glow:
-	Inherits@fx: ^Effect_Flame_Light
-	Inherits@glow: ^ImpactGlow
-
-^Effect_Flame_Heavy_Glow:
-	Inherits@fx: ^Effect_Flame_Heavy
-	Inherits@glow: ^ImpactGlow
-
-^Effect_Concussion_Medium_Glow:
-	Inherits@fx: ^Effect_Concussion_Medium
-	Inherits@glow: ^ImpactGlow
-
-^Effect_Demolition_Heavy_Glow:
-	Inherits@fx: ^Effect_Demolition_Heavy
-	Inherits@glow: ^ImpactGlow
-
-^Effect_Laser_Heavy_Glow:
-	Inherits@fx: ^Effect_Laser_Heavy
-	Inherits@glow: ^ImpactGlow
-
-^Effect_Magic_Heavy_Glow:
-	Inherits@fx: ^Effect_Magic_Heavy
-	Inherits@glow: ^ImpactGlow
-
-^Effect_MissileAP_Medium_Glow:
-	Inherits@fx: ^Effect_MissileAP_Medium
-	Inherits@glow: ^ImpactGlow
-
-^Effect_MissileAP_Heavy_Glow:
-	Inherits@fx: ^Effect_MissileAP_Heavy
-	Inherits@glow: ^ImpactGlow
-
-^Effect_MissileHE_Light_Glow:
-	Inherits@fx: ^Effect_MissileHE_Light
-	Inherits@glow: ^ImpactGlow
-
-^Effect_MissileHE_Medium_Glow:
-	Inherits@fx: ^Effect_MissileHE_Medium
-	Inherits@glow: ^ImpactGlow
-
-^Effect_MissileHE_Heavy_Glow:
-	Inherits@fx: ^Effect_MissileHE_Heavy
-	Inherits@glow: ^ImpactGlow
-
-^Effect_Railgun_Heavy_Glow:
-	Inherits@fx: ^Effect_Railgun_Heavy
-	Inherits@glow: ^ImpactGlow
-
-^Effect_Sonic_Medium_Glow:
-	Inherits@fx: ^Effect_Sonic_Medium
-	Inherits@glow: ^ImpactGlow
-
-^Effect_Sonic_Heavy_Glow:
-	Inherits@fx: ^Effect_Sonic_Heavy
-	Inherits@glow: ^ImpactGlow
 
 ################################
 # DO NOT INHERIT BELOW THIS LINE

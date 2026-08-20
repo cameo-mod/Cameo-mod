@@ -595,7 +595,7 @@ HueyCryoMissiles:
 	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@wh3: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileAP_Medium_Glow
+	Inherits@fx: ^Effect_MissileAP_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5528
@@ -643,7 +643,7 @@ HueyTwinMissiles:
 	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@wh3: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
-	Inherits@fx: ^Effect_MissileAP_Medium_Glow
+	Inherits@fx: ^Effect_MissileAP_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Burst: 2

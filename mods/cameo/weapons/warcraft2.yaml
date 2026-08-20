@@ -678,7 +678,7 @@ wc2_tower_axe:
 wc2cannontowerFire:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
-	Inherits@fx: ^Effect_Flame_Light_Glow
+	Inherits@fx: ^Effect_Flame_Light
 	ReloadDelay: 90
 	Range: 10500
 	MinRange: 2100

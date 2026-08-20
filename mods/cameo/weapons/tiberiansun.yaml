@@ -29,15 +29,12 @@
 		ContrailEndColor: FFFFFF22
 
 ^Effect_Sonic_Shell:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
 		ValidTargets: Ground, Ship
-
-^Effect_Sonic_Shell_Glow:
-	Inherits@fx: ^Effect_Sonic_Shell
-	Inherits@glow: ^ImpactGlow
 
 ^Projectile_TS_Missile_Medium:
 	Projectile: Missile
@@ -403,7 +400,7 @@ TSGrenadeSonic:
 	Inherits@wh: ^Warhead_Concussion_Light
 	Inherits@wh2: ^Warhead_Sonic_Light
 	Inherits@proj: ^Projectile_Sonic_Shell
-	Inherits@fx: ^Effect_Sonic_Shell_Glow
+	Inherits@fx: ^Effect_Sonic_Shell
 	ReloadDelay: 50
 	Range: 6151
 	Report: toss1.aud
@@ -631,7 +628,7 @@ TSObeliskLaserFire:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
-	Inherits@fx: ^Effect_Laser_Heavy_Glow
+	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@3: ^TSLaserEffect
 	ReloadDelay: 60
 	Range: 10199
@@ -668,7 +665,7 @@ TSLaserObeliskLaserFire:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
-	Inherits@fx: ^Effect_Laser_Heavy_Glow
+	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@3: ^TSLaserEffect
 	ReloadDelay: 32
 	Projectile: LaserZap

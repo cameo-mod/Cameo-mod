@@ -568,7 +568,7 @@ CorsairFlash:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Flak_Medium
-	Inherits@fx: ^Effect_Flak_Medium_Glow
+	Inherits@fx: ^Effect_Flak_Medium
 	Report: sc_corsair_attack.aud
 	ValidTargets: Air
 	Range: 5500
@@ -881,7 +881,7 @@ ScoutMG:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Flak_Medium
-	Inherits@fx: ^Effect_Flak_Medium_Glow
+	Inherits@fx: ^Effect_Flak_Medium
 	Report: blastgn2.aud
 	ValidTargets: Ground, Water
 	Range: 4500

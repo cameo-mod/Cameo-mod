@@ -185,6 +185,7 @@
 		InvalidTargets: Ship, Structure, Bridge
 
 ^Effect_Ion_Ring_RA2:
+	Inherits@glow: ^ImpactGlow
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
@@ -413,10 +414,6 @@
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 
-^Effect_Explosion_Medium_RA2_NoGlow:
-	Inherits@fx: ^Effect_Explosion_Medium_RA2
-	-Warhead@Glow:
-
 ^Effect_Grey_Explosion_Medium_RA2:
 	Inherits: ^Effect_MissileHE_Medium
 	Warhead@Effect: CreateEffect
@@ -472,6 +469,7 @@
 		InvalidTargets: Ship, Structure, Bridge
 
 ^Effect_Psi_Wave_RA2:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
@@ -631,6 +629,7 @@
 		InvalidTargets: Ship, Structure, Bridge
 
 ^Effect_Tesla_Impact_RA2:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
@@ -1096,7 +1095,7 @@ RA2MultiHoverMissile:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_MissileHE_Light_Glow
+	Inherits@fx: ^Effect_MissileHE_Light
 	Range: 6170
 	ReloadDelay: 20
 	Burst: 4
@@ -1139,7 +1138,7 @@ RA2MultiThunderboltMissile:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_MissileHE_Light_Glow
+	Inherits@fx: ^Effect_MissileHE_Light
 	Report: bazook1.aud
 	Projectile: Missile
 		Speed: 800

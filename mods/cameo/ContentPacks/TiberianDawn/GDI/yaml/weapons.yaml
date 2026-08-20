@@ -409,7 +409,7 @@ M1A1MachineGun:
 MammothMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy_Glow
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	ReloadDelay: 68
 	Burst: 2
 	BurstDelays: 12
@@ -587,7 +587,7 @@ NapalmA10Carrier:
 A10CarrierMissiles_AA:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy_Glow
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	ValidTargets: Air
 	ReloadDelay: 100
 	Range: 5000
@@ -1260,7 +1260,7 @@ MammothTank3CannonsHV:
 MammothTank3Missiles:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy_Glow
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	ReloadDelay: 98
 	Burst: 2
 	BurstDelays: 12
@@ -1658,7 +1658,7 @@ CommandoM16:
 FirehawkMissiles_AA:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy_Glow
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	ValidTargets: Air
 	ReloadDelay: 50
 	Range: 12500

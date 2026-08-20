@@ -89,7 +89,7 @@ TankBusterBeamCannon:
 TankBusterBeamCannonCharged:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
-	Inherits@fx: ^Effect_Laser_Heavy_Glow
+	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 96
 	Range: 5190
 	Report: JUTankB_weapFire1a.wav, JUTankB_weapFire1b.wav, JUTankB_weapFire1c.wav, JUTankB_weapFire1d.wav, JUTankB_weapFire1e.wav, JUTankB_weapFire1f.wav, JUTankB_weapFire1g.wav, JUTankB_weapFire1h.wav
@@ -1596,7 +1596,7 @@ ShrineTankCannon:
 	# Shrine Minitank weapon — weaker version of Exorcist. Pure Magic (2026-08-10).
 	# Was Tesla 4k + Railgun 4k + Magic 4k + Cannon 4k + Chem 4k + Flame 4k = 24k total → single 24k Magic.
 	Inherits@wh: ^Warhead_Magic_Heavy
-	Inherits@fx: ^Effect_Magic_Heavy_Glow
+	Inherits@fx: ^Effect_Magic_Heavy
 	ReloadDelay: 50
 	Range: 6370
 	Report: thattack1.wav, thattack2.wav, thattack3.wav
@@ -1929,7 +1929,7 @@ BuggyPlasmaGrenade:
 
 JapaneseHeavyBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy_Glow
+	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 100
 	Burst: 4
 	BurstDelays: 3

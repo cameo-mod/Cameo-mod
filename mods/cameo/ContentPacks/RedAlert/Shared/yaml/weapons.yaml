@@ -968,7 +968,7 @@ MammothTusk:
 ParaBomb:
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Heavy
-	Inherits@3: ^Effect_Flame_Heavy_Glow
+	Inherits@3: ^Effect_Flame_Heavy
 	ReloadDelay: 8
 	Range: 5000
 	Report: chute1.aud
@@ -1921,7 +1921,7 @@ DepthCharge:
 Stinger:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy_Glow
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	ReloadDelay: 27
 	Range: 8000
 	Report: missile6.aud
