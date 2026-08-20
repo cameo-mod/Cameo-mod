@@ -1,8 +1,17 @@
 # Map/editor-ready Scrin aircraft visuals. Gameplay roles, weapons, carrier
 # logic, costs, prerequisites, and final balance remain deferred.
 
+^ScrinAircraftShieldAlignment:
+	WithIdleOverlay@shield1:
+		FollowBodySpriteOffset: true
+		Offset: 0,0,427
+	WithIdleOverlay@shield_damage:
+		FollowBodySpriteOffset: true
+		Offset: 0,0,427
+
 ^ScrinAircraftVisual:
 	Inherits: ^Helicopter
+	Inherits@shieldalignment: ^ScrinAircraftShieldAlignment
 	Health:
 		HP: 100000
 	Armor:
@@ -23,6 +32,12 @@
 
 scrin_drone_ship:
 	Inherits: ^Helicopter
+	Inherits@shieldalignment: ^ScrinAircraftShieldAlignment
+	WithIdleOverlay@shield1:
+		Sequence: colossal-mobile-west
+		StartSequence: colossal-mobile-west
+	WithIdleOverlay@shield_damage:
+		Sequence: colossal-mobile-west
 	Tooltip:
 		Name: actor_scrin_drone_ship.name
 	Valued:
@@ -68,6 +83,13 @@ scrin_stormrider:
 
 scrin_devastator_warship:
 	Inherits: ^ScrinAircraftVisual
+	WithIdleOverlay@shield1:
+		Image: hexshield_directional_oval
+		Sequence: aircraft-large-west
+		StartSequence: aircraft-large-west
+	WithIdleOverlay@shield_damage:
+		Image: hexshield_directional_oval
+		Sequence: aircraft-large-west
 	Tooltip:
 		Name: actor_scrin_devastator_warship.name
 	Selectable:
@@ -77,6 +99,13 @@ scrin_devastator_warship:
 
 scrin_planetary_assault_carrier:
 	Inherits: ^ScrinAircraftVisual
+	WithIdleOverlay@shield1:
+		Image: hexshield_directional_oval
+		Sequence: aircraft-colossal
+		StartSequence: aircraft-colossal
+	WithIdleOverlay@shield_damage:
+		Image: hexshield_directional_oval
+		Sequence: aircraft-colossal
 	Tooltip:
 		Name: actor_scrin_planetary_assault_carrier.name
 	Selectable:
@@ -95,6 +124,13 @@ scrin_invader_fighter:
 
 scrin_mothership:
 	Inherits: ^ScrinAircraftVisual
+	WithIdleOverlay@shield1:
+		Sequence: colossal-mobile-standard
+		StartSequence: colossal-mobile-standard
+		Offset: 0,0,853
+	WithIdleOverlay@shield_damage:
+		Sequence: colossal-mobile-standard
+		Offset: 0,0,853
 	Tooltip:
 		Name: actor_scrin_mothership.name
 	Selectable:
