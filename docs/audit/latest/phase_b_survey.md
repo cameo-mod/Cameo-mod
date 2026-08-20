@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 308
+Total concrete weapons on old families: 307
 Single old-family with new inherits (Phase B completion): 2
 Pure single old-family (mechanical Phase A candidates): 20
-Mixed old-family (Phase B maintainer sign-off): 286 in 213 groups
+Mixed old-family (Phase B maintainer sign-off): 285 in 212 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `AsianChemicalBombs` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | old: HeavyChemicalWeapon | HeavyChemicalWeapon=2000, HeavyChemicalWeaponPercentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, Effect=0, Cloud=0
@@ -479,9 +479,6 @@ Mixed old-family (Phase B maintainer sign-off): 286 in 213 groups
 
 ### Chaingun, RailgunWeapon, SwordWeapon (1 weapons)
 - `Tentacle` (ContentPacks\StarCraft\Zerg\yaml\weapons.yaml) | dominant: RailgunWeapon(6000) | RailgunWeapon=6000, RailgunWeaponPercentage=3, Chaingun=6000, ChaingunPercentage=3, CannonHE_Heavy=6000, CannonHE_Heavy_Percentage=3, SwordWeapon=6000, SwordWeaponFriendlyFire=3000, SwordWeaponPercentage=3, Effect=0 | → collapse to RailgunWeapon
-
-### FlakWeapon, Grenade, MediumFlameWeapon (1 weapons)
-- `D2K_TowerMissile` (ContentPacks\D2k\Ixian\yaml\weapons.yaml) | dominant: Grenade(4000) | Grenade=4000, GrenadeFriendlyFire=2000, GrenadePercentage=2, MediumFlameWeapon=4000, MediumFlameWeaponPercentage=2, FlakWeapon=4000, FlakWeaponPercentage=2, MissileAP_Heavy=4000, MissileAP_Heavy_Percentage=2 | → collapse to Grenade
 
 ### FlakWeapon, Grenade, MediumMissile (1 weapons)
 - `AtreusMG` (ContentPacks\StarCraft\Protoss\yaml\weapons.yaml) | dominant: Grenade(2000) | Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, CannonHE_Heavy=2000, CannonHE_Heavy_Percentage=1, MediumMissile=2000, MediumMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, Bullet_Medium=2000, Bullet_Medium_Percentage=1, Effect=0 | → collapse to Grenade

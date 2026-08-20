@@ -31,7 +31,7 @@ and PRESERVES the weapon's existing on-grid value verbatim; it invents NO number
 2000-grid re-quantise + per-actor FirepowerMultiplier are the **restat's** job (the
 balance pipeline: `extract_stats` → workbook → `apply_balance --confirm`).
 
-- **Layer 1 WARHEAD** = the 55-template library (`gen_weapon_template.py`, committed
+- **Layer 1 WARHEAD** = the 99-template library (`gen_weapon_template.py`, committed
   `fa0947ae5`/`956cf1ecb`) — pure Versus/damage/%/FF, FX/projectile-agnostic by design.
   FF twin (AoE) done; ExtraDamage twin (energy) handled per-weapon in the energy retrofit.
 - **Layer 2 PROJECTILE** = the `Projectile:` block only.
@@ -43,9 +43,11 @@ Why: the OLD central templates (^SmallArms/^Grenade/…) are FULL-STACK and weap
 their warheads BY THE OLD KEY NAME + rely on their bundled FX, so a bare reparent breaks
 them. The split lets a weapon pick its damage identity independently of look/delivery.
 
-## Layer 2 — PROJECTILE templates (proposed `^Proj*`)
+## Layer 2 — PROJECTILE templates
 
-Derived from the 30 old templates' `Projectile:` blocks (catalog 2026-08-02).
+> **Naming resolved 2026-08-02:** the shipped prefix is `^Projectile_*` (not the early `^Proj*`
+> proposal below). Derived from the 30 old templates' `Projectile:` blocks
+> (catalog 2026-08-02; current `weapons.yaml` has 30 `^Projectile_*` + 48 `^Effect_*` + 99 `^Warhead_*`).
 
 | Proposed | Projectile | Signature | From (old templates) |
 |---|---|---|---|
@@ -95,15 +97,17 @@ The **ExtraDamage** twin (Laser/Railgun/Tesla/Magic/Sniper — an OpenToppedDama
 
 ## Build plan (incremental, each boot-gated)
 
-1. **[additive, 0-usage]** Generate the `^Proj*` + `^Fx*` libraries into weapons.yaml above the
+1. **[additive, 0-usage]** Generate the `^Projectile_*` + `^Effect_*` libraries into weapons.yaml above the
    divider (same low-risk pattern as the warhead splice). Boot-gate + commit. Nothing inherits
    them yet → no behavior change.
 2. **[warhead layer]** Extend `gen_weapon_template.py`: FF twin for AoE families, ExtraDamage
    twin for energy families. Re-splice the warhead library. Boot-gate.
 3. **[retrofit — the big batch]** Family-by-family, convert weapons from the old full-stack
-   inherit to the 4-inherit model (warhead+proj+fx), rewriting `Warhead@<Old>` override keys to
-   the new warhead key. Start with the 437 single-inherit; then the 609 mixed (each collapsed to
-   ≤2 warheads — the "kill warhead-mixing" pass). Resolver-diff + boot-gate per family.
+   inherit to the 3-inherit model (`Inherits@wh`/`Inherits@proj`/`Inherits@fx`), rewriting
+   `Warhead@<Old>` override keys to the new warhead key. Single-inherit mechanical families are
+   done (`retrofit_weapon_family.py` reports 0 remaining); the rest is **285 mixed weapons in
+   212 groups** (see `phase_b_survey.py`) collapsed to ≤2 warheads by dominant-damage choice.
+   Resolver-diff + boot-gate per group.
 4. **[cleanup]** Delete the 30 orphaned old templates; drop their `weapon_classes.yaml` rows.
 
 ## The 2-warhead cap + its EXCEPTION allow-list (maintainer 2026-08-02)
@@ -318,10 +322,14 @@ warhead, projectile fields, effect stacks, concrete values, and smudge behaviour
 
 then `OrniBomb` and `OrniBombC` converted to 3-way split using D2K Shared `^Projectile_GravityBomb_D2K`, `^Warhead_Demolition_Heavy_D2K_Orni`, and `^Effect_Demolition_Heavy_D2K_Orni` (preserving the 7500 SpreadDamage warhead, d2k_bombs GravityBomb, Sand/Rock smudge, d2k_large_explosion, and 7500 concrete);
 then `HeatRayBeam1/2/3/4` were fully 3-way split with `^Warhead_Inferno_Heavy` + `^Projectile_Inferno_Heavy_HeatRayBeam` + `^Effect_Inferno_Heavy` (per-weapon RadBeam projectile, small_napalm effect override preserved); resolver diff identical; boot-gated;
-**RESUME — Phase 2 remaining families** (one commit each: `--old <names>` → self-check → boot → commit):
-`LightMissile,MediumMissile,HeavyMissile` + `FlakWeapon,HeavyAAWeapon` → then
-`LightFlameWeapon,MediumFlameWeapon,HeavyFlameWeapon` + `LightChemicalWeapon,MediumChemicalWeapon,HeavyChemicalWeapon`
-→ `Grenade,ShrapnelWeapon,HeavyBomb` → `SwordWeapon,ArrowWeapon,MagicWeapon` → `NuclearWarhead` →
+**RESUME — Phase 2 complete; Phase B mixed-weapon collapse remaining** (one commit each, maintainer-directed dominant-family choice):
+`LightMissile,MediumMissile,HeavyMissile` + `FlakWeapon,HeavyAAWeapon` + `LightFlameWeapon,MediumFlameWeapon,HeavyFlameWeapon`
++ `LightChemicalWeapon,MediumChemicalWeapon,HeavyChemicalWeapon` + `Grenade,ShrapnelWeapon,HeavyBomb` +
+`SwordWeapon,ArrowWeapon,MagicWeapon` + `NuclearWarhead` are now down to **zero single-inherit candidates**;
+`retrofit_weapon_family.py` reports 285 mixed (Phase B) weapons in 212 groups. Use
+`tools/audit/phase_b_survey.py` for the live work-list; the next group is at the top of
+`docs/audit/latest/phase_b_survey.md`.
+
 **ENERGY LAST** (Laser/Railgun/Tesla/TeslaCharged — BLOCKED on the ExtraDamage decision below).
 Standard self-check after each: 0 orphaned old keys, 0 layer conflicts, 0 Damage changes, boots.
 

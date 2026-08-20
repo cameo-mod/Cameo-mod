@@ -33,8 +33,7 @@ IntegrityScale so its bonus EMP also scales).
 ### 1b. All %-twins unified on `AreaDamagePercentage`
 Was 80 `HealthPercentageDamage` + 8 `AreaDamagePercentage`; now **all 85 families** use the Cameo
 `AreaDamagePercentage`. Behaviour-preserving drop-in (fields ⊆ HealthPercentageDamage, no
-`ValidRelationships: Ally` ⇒ no new friendly fire). `verify_generator_sync` drift = 1 (only the
-hand-authored `^Warhead_Sniper_Light`, expected). 4 `HealthPercentageDamage` remain: Sniper template +
+`ValidRelationships: Ally` ⇒ no new friendly fire). `verify_generator_sync` drift = 0. 4 `HealthPercentageDamage` remain: Sniper template +
 3 concrete Demolition weapons that restate the type — harmless.
 
 ### 1c. Storm collapses (Ixian faction-signature wiring, finished)

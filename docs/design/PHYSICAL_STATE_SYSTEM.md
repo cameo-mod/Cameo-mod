@@ -402,7 +402,7 @@ reference an image+sequence, so the yaml wires with placeholders and the art dro
   into all three `^Warhead_Sonic_*` levels by the generator (`FAMILY_CONDITION` → a
   `Warhead@<tag>_Debuff: GrantExternalCondition`, both numbers DERIVED: `Duration = 2 × ReloadDelay` = 50
   ticks, `Range = 2 × Spread` = 800/1200/1600 = the half-damage radius). Zero damage → price-neutral,
-  drift stays 1. The predator laser / waveforce / IonPulse keep their own hand-tuned grants, now of the
+  drift stays 0. The predator laser / waveforce / IonPulse keep their own hand-tuned grants, now of the
   renamed condition. `5a14355e6`
 - (Temperature axis + framework were ALREADY built — see §0.)
 
@@ -429,8 +429,8 @@ reference an image+sequence, so the yaml wires with placeholders and the art dro
    curves, Railgun charge-delay, resume Phase B mixed-weapon collapse (~350, behavior-preserving).
 
 **Guardrails to keep:** boot-gate every commit (kill lingering OpenRA before a C# rebuild — it locks
-`engine/bin`); `verify_generator_sync` drift stays **1** (pre-existing `^Warhead_Sniper_Light`, not the
-generator's); scoped `git add`; family PhysicalState goes on the main and percentage warheads (chip excluded).
+`engine/bin`); `verify_generator_sync` drift stays **0** (regenerated `^Warhead_Sniper_Light` now matches the
+generator); scoped `git add`; family PhysicalState goes on the main and percentage warheads (chip excluded).
 
 ## 6. Decisions (maintainer 2026-08-09) + what's still open
 DECIDED:
