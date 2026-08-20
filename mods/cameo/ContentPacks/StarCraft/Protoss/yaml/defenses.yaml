@@ -42,6 +42,10 @@ protoss_photoncannon:
 		PauseOnCondition: disabled
 	BodyOrientation:
 		QuantizedFacings: 16
+	WithIdleOverlay@shield1:
+		RequiresCondition: !disabled && shielded && !shieldhit && !build-incomplete
+	WithIdleOverlay@shield_damage:
+		RequiresCondition: !disabled && shielded && shieldhit && !build-incomplete
 	-WithSpriteBody:
 	-WithDeathAnimation:
 	DamageMultiplier@2x2Shape:
