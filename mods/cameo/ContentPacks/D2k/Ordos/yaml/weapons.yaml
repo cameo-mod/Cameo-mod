@@ -21,7 +21,9 @@ HeavyOrdosCombatTankCannon:
 		Damage: 5
 
 HeavyOrdosCombatTankRockets:
-	Inherits: ^D2KRocket
+	Inherits@wh: ^Warhead_MissileHE_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy_D2K
+	Inherits@fx: ^Effect_MissileHE_Heavy_D2K
 	ReloadDelay: 70
 	Range: 6000
 	Burst: 2
@@ -44,9 +46,9 @@ HeavyOrdosCombatTankRockets:
 		ContrailEndColor: 000000FF
 		ContrailStartWidth: 50
 		ContrailEndWidth: 100
-	Warhead@MissileAP_Heavy:
+	Warhead@MissileHE_Heavy:
 		Damage: 10000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 
 	Warhead@EffectWater: CreateEffect

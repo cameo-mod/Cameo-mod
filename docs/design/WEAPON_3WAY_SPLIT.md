@@ -272,6 +272,10 @@ for the collision). Memory: `cameo-multi-agent-repo`, `cameo-weapon-structure-ru
 ORDER-INDEPENDENT mixed-detection (closure seeded with NEW warheads so A+B mixes stay Phase B),
 BOM-safe, Report in the PROJECTILE layer, damage always preserved.
 
+D2K heavy missile/rocket HE 3-way split: created `ContentPacks/D2k/Shared/yaml/weapons.yaml`
+with the per-game `^Projectile_Missile_Heavy_D2K` and `^Effect_MissileHE_Heavy_D2K` layers,
+reparented the six D2K rocket cluster weapons to `^Warhead_MissileHE_Heavy`, and boot-gated.
+
 **RESUME — Phase 2 remaining families** (one commit each: `--old <names>` → self-check → boot → commit):
 `LightMissile,MediumMissile,HeavyMissile` + `FlakWeapon,HeavyAAWeapon` → then
 `LightFlameWeapon,MediumFlameWeapon,HeavyFlameWeapon` + `LightChemicalWeapon,MediumChemicalWeapon,HeavyChemicalWeapon`
