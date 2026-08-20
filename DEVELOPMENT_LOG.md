@@ -1,5 +1,41 @@
 # Development Log
 
+## 2026-08-24 — Ixian D2K missile correction (boot-gated)
+
+- Corrected `D2K_TowerMissile` and `mtank_pri2` in
+  `mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml` from the previous
+  `Inherits@wh/@wh2/@wh3` (and `@wh4` for the tower) multi-warhead composition to a
+  single `Inherits: ^D2KMissile` with custom D2K projectile/effect overrides.
+- Removed the 7 per-weapon `^Warhead_*_D2K_TowerMissile` /
+  `^Warhead_*_D2K_mtank_pri2` templates from
+  `mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml`; the weapons now use the
+  existing `^Warhead_MissileAP_Heavy` family via `^D2KMissile` with local `Damage`
+  overrides (Tower 4000/percentage 2; tank 8000/percentage 4).
+- Preserved D2K heavy missile projectile visuals, smudge/glow/shield/concrete
+  effects, `Range`, `ReloadDelay`, `MinRange`, `Report`, `ValidTargets`, `TargetActorCenter`,
+  and `Burst`/`BurstDelays`.
+- Updated `docs/design/WEAPON_3WAY_SPLIT.md` to remove the Ixian multi-warhead
+  exception from the allow-list.
+- Updated `docs/design/BALANCE_PROGRAM_PLAN.md` W24 counts (937 multi-main fired,
+  579 broadcast / 61.8%), `docs/design/PHYSICAL_STATE_SYSTEM.md`
+  (`w24_multi_main_fed` 386→383), `docs/audit/doc_claims.yaml`
+  (`multi_main_fired_weapons` 939→937, `w24_multi_main_fed` 385→383,
+  `physical_state_fired_weapons` 450→448), `tools/audit/audit_warhead_split.py`
+  baseline (952→950), and `docs/design/ROADMAP.md`.
+- Re-extracted balance ledgers (`python tools/balance/extract_stats.py`) and
+  verified `audit_balance_drift` clean.
+- Verification:
+  - `scratchpad/ixian_*_before.json` vs `scratchpad/ixian_*_after.json`: extra
+    Demolition/Flame/Flak warheads removed; MissileAP main/percentage `Damage`
+    and `Projectile`/`Effect` layers preserved.
+  - `tools/audit/find_empty_warhead.py` → 0
+  - `tools/audit/effect_audit.py` → 0 duplicate `DamagesConcrete`
+  - `tools/audit/audit_warhead_split.py` at/below baseline (950)
+  - `tools/audit/audit_physical_state_warheads.py` PASS
+  - `tools/audit/audit_doc_claims.py` PASS
+  - `tools/balance/verify_generator_sync.py` drift 0
+  - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`
+
 ## 2026-08-21 — HeatRayBeam1-4 Inferno 3-way split + doc claim sync (boot-gated)
 
 - Converted `HeatRayBeam1/2/3/4` in

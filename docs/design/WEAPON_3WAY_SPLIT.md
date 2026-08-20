@@ -122,19 +122,12 @@ must NOT strip these. Known so far (more to be defined; confirm each before keep
   entries; new per-weapon `^Projectile_*_D2K_Rocket_Trooper*` and
   `^Effect_MissileAP_Heavy_D2K_Rocket_Trooper` templates preserve the d2k_RPG
   projectile and Dune smudge/effect behaviour.
-- **Ixian giant multi-warhead weapons** (`D2K_TowerMissile`, `mtank_pri2`) —
-  preserve their **giant multi-warhead** identity (`D2K_TowerMissile` keeps
-  Demolition + Flame + Flak + MissileAP; `mtank_pri2` keeps Demolition + Flame +
-  MissileAP). New per-weapon `^Warhead_Demolition_Light_D2K_TowerMissile`,
-  `^Warhead_Flame_Medium_D2K_TowerMissile`, `^Warhead_Flak_Medium_D2K_TowerMissile`,
-  `^Warhead_MissileAP_Heavy_D2K_TowerMissile`, `^Warhead_Demolition_Light_D2K_mtank_pri2`,
-  `^Warhead_Flame_Medium_D2K_mtank_pri2`, and `^Warhead_MissileAP_Heavy_D2K_mtank_pri2`
-  in D2K Shared hold all per-weapon `Versus`/warhead data; the weapon nodes use only
-  `Inherits@wh`/`Inherits@wh2`/`Inherits@wh3` (and `@wh4` for the tower) plus
-  `@proj`/`@fx`. New per-weapon `^Projectile_Missile_Heavy_D2K_TowerMissile`,
+- **Ixian D2K missile weapons** (`D2K_TowerMissile`, `mtank_pri2`) — collapsed to a
+  single `^D2KMissile` warhead identity with `Damage` overrides for the missile main
+  and percentage twin; only the D2K-specific `^Projectile_Missile_Heavy_D2K_TowerMissile`,
   `^Projectile_Missile_Heavy_D2K_mtank_pri2`, `^Effect_MissileAP_Heavy_D2K_TowerMissile`,
-  and `^Effect_MissileAP_Heavy_D2K_mtank_pri2` templates preserve the D2K missile
-  projectile visuals and the resolved smudge/effect behaviour.
+  and `^Effect_MissileAP_Heavy_D2K_mtank_pri2` templates remain as custom projectile/
+  effect layers.
 - **Terran Siege Tank** (`SiegeTankSiegeCannon`) + **Warcraft Siege Engine**
   (`SiegeEngineCannon`) = keep ALL AoE warheads + others combined = a unique shared explosion.
 
@@ -180,8 +173,8 @@ authoritative path. One canonical retrofit tool; one family per commit; every st
 1. **Structural only.** A retrofit renames inherits + warhead keys; it PRESERVES every existing
    on-grid `Damage` verbatim and invents no numbers. (2000-grid + FirepowerMultiplier = the restat.)
 2. **≤2 warhead inherits** per weapon (the cap is on warheads). Direct-fire = 1; energy/upgrade = 2;
-   the **exception allow-list** (Dune 3-cannon combat tanks; Ixian `D2K_TowerMissile` and
-   `mtank_pri2`; Terran Siege Tank + WC Siege Engine) is the ONLY place >2 is allowed.
+   the **exception allow-list** (Dune 3-cannon combat tanks; Terran Siege Tank + WC Siege Engine)
+   is the ONLY place >2 is allowed.
 3. **Exactly one** `@proj` and one `@fx` per weapon (except bombs = no `@proj`). >1 = the v1 bug.
 4. **Single-inherit first; mixed weapons are Phase B** (per-weapon collapse, maintainer-directed).
 5. Resolver-diff (structural) + audits + **boot-gate** + scoped commit **per family**.

@@ -307,10 +307,7 @@ D2K_Rocket_Trooper1:
 		Damage: 4
 
 D2K_TowerMissile:
-	Inherits@wh: ^Warhead_Demolition_Light_D2K_TowerMissile
-	Inherits@wh2: ^Warhead_Flame_Medium_D2K_TowerMissile
-	Inherits@wh3: ^Warhead_Flak_Medium_D2K_TowerMissile
-	Inherits@wh4: ^Warhead_MissileAP_Heavy_D2K_TowerMissile
+	Inherits: ^D2KMissile
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K_TowerMissile
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_TowerMissile
 	ValidTargets: Ground, Water, Air
@@ -322,11 +319,13 @@ D2K_TowerMissile:
 	MinRange: 2135
 	Burst: 2
 	BurstDelays: 5
+	Warhead@MissileAP_Heavy:
+		Damage: 4000
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+		Damage: 2
 
 mtank_pri2:
-	Inherits@wh: ^Warhead_Demolition_Light_D2K_mtank_pri2
-	Inherits@wh2: ^Warhead_Flame_Medium_D2K_mtank_pri2
-	Inherits@wh3: ^Warhead_MissileAP_Heavy_D2K_mtank_pri2
+	Inherits: ^D2KMissile
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K_mtank_pri2
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_mtank_pri2
 	ValidTargets: Ground, Water, Air
@@ -335,6 +334,10 @@ mtank_pri2:
 	TargetActorCenter: true
 	MinRange: 2010
 	Report: ROCKET1.WAV
+	Warhead@MissileAP_Heavy:
+		Damage: 8000
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+		Damage: 4
 
 IxRailgunDroneBullet:
 	Inherits: ^FlakWeapon

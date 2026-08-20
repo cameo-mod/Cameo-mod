@@ -37,7 +37,7 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured 2026-08-17 |
 |---|---|
-| W24 — fired weapons with **more than one** damage main | **939 of 1622 = 57.9%** (histogram runs out to 15 mains) |
+| W24 — fired weapons with **more than one** damage main | **937 of 1622 = 57.8%** (histogram runs out to 15 mains) |
 | armament slots whose `K` moves when those collapse | **1 547** |
 | fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1196 inheritors) |
 
@@ -255,14 +255,14 @@ and every base assault becomes a shield fight.
 
 Measured before touching anything, and the finding changes the plan.
 
-### What the 939 actually are
+### What the 937 actually are
 
 | shape | count | note |
 |---|--:|---|
 | **inheritance PILEUP** — ≥3 legacy templates inherited, no `^Warhead_*` family | **202** | the sum is an artifact |
 | carries a `^Warhead_*` family inherit | 339 | real multi-warhead designs |
 | 1–2 legacy inherits, no family | 118 | mostly the same disease, milder |
-|| other (no legacy / no family, still multi-main) | 280 | mixed new-family or local warheads |
+|| other (no legacy / no family, still multi-main) | 278 | mixed new-family or local warheads |
 
 `wc2dragonFireVisible` — a dragon's fire breath — inherits **fifteen** legacy weapon templates:
 
@@ -275,12 +275,12 @@ Measured before touching anything, and the finding changes the plan.
 A dragon does not fire a tank-destroyer cannon or drop a heavy bomb. Each template contributes a
 damage warhead, so this is accumulated copy-paste, not design. The templates most often pulled in
 this way: `^ShrapnelWeapon` (100 weapons), `^Grenade` (96), `^FlakWeapon` (91), `^MediumMissile`
-(85). **This is the same debt as W23/A5** — 45 legacy templates with 1196 inheritors — showing up
+(85). **This is the same debt as W23/A5** — 45 legacy templates with 1193 inheritors — showing up
 from the other end.
 
 ### ⚠ The finding that changes the collapse rule: 90% are BROADCAST
 
-**847 of the 939 (90.2%) have EVERY main at the identical damage.** The worst pileups are all one
+**579 of the 937 (61.8%) have EVERY main at the identical damage.** The worst pileups are all one
 value repeated:
 
 | weapon | mains | each | sum |
@@ -314,7 +314,7 @@ Expect, and do not be alarmed by, large `Damage` moves for these weapons when pr
 
 `audit_warhead_split` FAIL 1 requires *"≥2 MAIN warheads **AND ≥1 side warhead** where every
 warhead has the identical damage"*. The side-warhead requirement is why it reports **4** while the
-fingerprint is present on **874**; its informational list adds 246 more but only at ≥8000 damage
+fingerprint is present on **950**; its informational list adds 242 more but only at ≥8000 damage
 per main. The type filter is fine (it counts `AreaDamage` as well as `SpreadDamage`, line 53).
 **Widen FAIL 1 to "all mains identical" and drop the side-warhead precondition** — otherwise the
 guard cannot see the thing W24 is cleaning up.
