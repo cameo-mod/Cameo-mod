@@ -324,6 +324,7 @@ and `^Effect_MissileAP_Heavy_D2K_OMissile`, preserving the old `SpreadDamage`
 warhead, projectile fields, effect stacks, concrete values, and smudge behaviour.
 
 then `OrniBomb` and `OrniBombC` converted to 3-way split using D2K Shared `^Projectile_GravityBomb_D2K`, `^Warhead_Demolition_Heavy_D2K_Orni`, and `^Effect_Demolition_Heavy_D2K_Orni` (preserving the 7500 SpreadDamage warhead, d2k_bombs GravityBomb, Sand/Rock smudge, d2k_large_explosion, and 7500 concrete);
+then `HeatRayBeam1/2/3/4` were fully 3-way split with `^Warhead_Inferno_Heavy` + `^Projectile_Inferno_Heavy_HeatRayBeam` + `^Effect_Inferno_Heavy` (per-weapon RadBeam projectile, small_napalm effect override preserved); resolver diff identical; boot-gated;
 **RESUME — Phase 2 remaining families** (one commit each: `--old <names>` → self-check → boot → commit):
 `LightMissile,MediumMissile,HeavyMissile` + `FlakWeapon,HeavyAAWeapon` → then
 `LightFlameWeapon,MediumFlameWeapon,HeavyFlameWeapon` + `LightChemicalWeapon,MediumChemicalWeapon,HeavyChemicalWeapon`

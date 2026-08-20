@@ -10654,6 +10654,9 @@ DefuseKit:
 		OwnerType: InternalName
 		InternalOwner: Neutral
 
+^Effect_Inferno_Heavy:
+	Inherits: ^Effect_Flame_Heavy
+
 ^Effect_Laser_Heavy:
 	Inherits@glow: ^ImpactGlow
 	Warhead@Smudge: LeaveSmudge

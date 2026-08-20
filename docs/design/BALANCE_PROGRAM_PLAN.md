@@ -74,7 +74,7 @@ nothing and informs the anchor choice. What must wait is WRITING targets and app
 | id | work item | status | owner | needs |
 |---|---|---|---|---|
 | **W1** | K coefficient + target model (measured Versus weights, capped density) | ✅ DONE `f8421d345` | Claude | — |
-| **W2** | `^LightFlameWeapon` → 3-way split + new `^Warhead_Inferno_*` family | ⚠ **ABANDONED by Devin (30 live weapons left); LOCK RELEASED by the maintainer 2026-08-15 — set B is FREE** | Claude | — |
+| **W2** | `^LightFlameWeapon` → 3-way split + new `^Warhead_Inferno_*` family | 🔵 **IN PROGRESS (Devin, 2026-08-21); HeatRayBeam1-4 3-way split done; 31 matches remain** | Devin | — |
 | **W3** | Ledger split: raw stays, derived moves to `docs/balance/derived/` | ✅ DONE | Claude | W1 |
 | **W4** | Retire weapon-class K; charge-up becomes an ACTOR property | ✅ DONE | Claude | W1 |
 | **W5** | Missing metrics: overkill/TTK, range advantage, ValidTargets, MinRange, AttackDelay | ✅ DONE | Claude | W1 |
@@ -494,7 +494,7 @@ correct measurements. Spec: `EFFECTIVE_DAMAGE.md`.
 
 ---
 
-### W2 — `^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*` 🔵 IN PROGRESS (Devin, 2026-08-11) · owner **Devin**
+### W2 — `^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*` 🔵 IN PROGRESS (Devin, 2026-08-21) · owner **Devin**
 
 **Why:** `^LightFlameWeapon` sets `Spread: 500` **and** `Range: 500`. A single-value
 `Range` makes `effectiveRange` length 1, so `GetDamageFalloff`'s loop never runs and it
@@ -510,7 +510,7 @@ effect inherit), which removes the dead template entirely.
 | `SiegeMortar*`, **V2 rocket** | `^Warhead_Thermobaric_Heavy` |
 | `VenomLaser`, `NodTurretLaser` | `^Warhead_Laser_Medium` |
 | `LaserBuggy2`, laser rifle infantry | `^Warhead_Laser_Light` |
-| `HeatRayBeam1/2` | `^Warhead_Inferno_Heavy` (new) |
+| `HeatRayBeam1/2/3/4` | `^Warhead_Inferno_Heavy` (new) ✅ 3-way split |
 | `25mmWaveforce`, `TankBusterBeamCannonCharged` | **ASK the maintainer** |
 
 **New family** — three lines in `tools/balance/gen_weapon_template.py`:
@@ -528,7 +528,8 @@ non-beam flame weapons can use it later (same reason `Cryo` keeps its name).
 - [x] Every weapon in the explicit mapping table above inherits exactly ONE `^Warhead_*`,
       ONE `^Projectile_*`, ONE `^Effect_*`.
 - [ ] `^LightFlameWeapon` has zero remaining inheritors, then is deleted
-      (38 matches remain, almost all multi-family mixed weapons or human-live/ASK files).
+      (31 matches remain, almost all multi-family mixed weapons or human-live/ASK files).
+  - `HeatRayBeam1/2/3/4` now fully 3-way split with `^Warhead_Inferno_Heavy` + `^Projectile_Inferno_Heavy_HeatRayBeam` + `^Effect_Inferno_Heavy`; resolver diff identical; boot-gated.
 - [x] `tools/audit/review_resolve_diff.py` run before/after on a sample of ≥10 of the
       77 — the ONLY expected change is that flame damage now lands (verified on 10).
 - [x] `find_empty_warhead.py` = 0.

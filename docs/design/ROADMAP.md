@@ -30,7 +30,7 @@ Do not duplicate its status here — this ROADMAP links to it on purpose.
 
 Current: **W1 ✅ done** (K coefficient + target model, `f8421d345`) · **W2 🔵 in progress,
 owner Devin** (`^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*`; `^LightFlameWeapon`
-still has **28** concrete inheritors) · **W3–W5 ⬜ ready,
+still has **31** matches, including `HeatRayBeam1/2/3/4` now fully split) · **W3–W5 ⬜ ready,
 owner Claude** (ledger split, retire weapon-class K, the five missing metrics).
 
 ## ▶ ACTIVE — CAMEO CONTENT INSTALLER

@@ -9,7 +9,7 @@ questions and became the plating layer. What is LIVE, with the binding summary i
 | 5 platings `HAZMAT` `COMPOSITE` `BLAST` `REFLECTOR` `ARMOR`, ALL CAPS, full columns in all 94 templates | §D-bis, §G, §H |
 | LAYER SELECTION — a plating replaces the class armor | `AreaDamageWarhead.DamageVersus` |
 | the column law: every plating averages **70** | §I |
-| `effective_HP = HP + shield x 0.540`, measured live | §I |
+| `effective_HP = HP + shield x 0.546`, measured live | §I |
 | 4 upgrades retagged; the generic ones stay multipliers | §G |
 | guards `audit_armor_upgrade_harm.py` + `audit_plating_exclusivity.py` | §F, run_all.sh |
 | `Waveforce` IntegrityScale deleted (could never fire) | §B, §D-bis |
@@ -570,13 +570,13 @@ Two families were credited to the wrong counter in the first draft:
 
 | layer | column mean | 1 point is worth | maintainer's estimate |
 |---|--:|--:|---|
-| `Shield` | **210.2** | **0.476 HP** | "200% shield ≈ 100% extra HP" — i.e. 0.5. **Confirmed to 5%.** |
+| `Shield` | **183.26** | **0.546 HP** | "200% shield ≈ 100% extra HP" — i.e. 0.5. **Confirmed to 9%.** |
 | all five platings | **100.0** | **1.000 HP** | "it evens out" — **confirmed exactly**, by construction |
 
 So the pricing rule is:
 
 ```
-effective_HP = HP + shield_strength x (100 / mean_versus_shield)      # x0.476 today
+effective_HP = HP + shield_strength x (100 / mean_versus_shield)      # x0.546 today
 ```
 
 and a plating contributes **nothing** to effective HP on average — it redistributes only.

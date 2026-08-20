@@ -1,5 +1,37 @@
 # Development Log
 
+## 2026-08-21 — HeatRayBeam1-4 Inferno 3-way split + doc claim sync (boot-gated)
+
+- Converted `HeatRayBeam1/2/3/4` in
+  `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` from a partial
+  3-way split (`Inherits@wh` + `Inherits@fx` + inline `Projectile`) to a clean
+  `Inherits@wh` / `Inherits@proj` / `Inherits@fx` split.
+- Added `^Projectile_Inferno_Heavy_HeatRayBeam` in the same file, holding the
+  per-weapon `RadBeam` projectile fields (`Color`, `Amplitude`, `WaveLength`,
+  `BeamDuration`, `Thickness`, `QuantizationCount`).
+- Added `^Effect_Inferno_Heavy` in `mods/cameo/weapons/weapons.yaml` as an alias
+  of `^Effect_Flame_Heavy` so the family has its own effect layer; `HeatRayBeam1`
+  keeps its local `small_napalm` / `Volume: 0.25` effect override.
+- Preserved resolved `Damage`, `Spread`, `Falloff`, `DamageTypes`, `ValidTargets`,
+  `Range`, `ReloadDelay`, `Report`, `SoundVolume`, `Projectile` visuals, and all
+  `HeatRayBeam2/3/4` beam colour/thickness overrides.
+- Fixed stale shield survivability numbers in `docs/DESIGN.md` and
+  `docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md` and updated `docs/audit/doc_claims.yaml`
+  so `audit_doc_claims.py` passes again (`shield_versus_mean` 183.26, `shield_hp_factor` 0.5457).
+- Reconciled W2 status across `docs/design/BALANCE_PROGRAM_PLAN.md` and
+  `docs/design/ROADMAP.md` (back in progress, owner Devin, 31 `^LightFlameWeapon`
+  matches remain, `HeatRayBeam1-4` 3-way split done).
+- Updated `docs/design/WEAPON_3WAY_SPLIT.md` progress log.
+- Verification:
+  - `scratchpad/heatray_*.json` before/after: all four weapons **identical**
+  - `tools/audit/find_empty_warhead.py` → 0
+  - `tools/audit/effect_audit.py` → 0 duplicate `DamagesConcrete`
+  - `tools/audit/audit_warhead_split.py` at/below baseline (952)
+  - `tools/audit/audit_physical_state_warheads.py` PASS
+  - `tools/audit/audit_doc_claims.py` PASS
+  - `tools/balance/verify_generator_sync.py` drift 0
+  - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`
+
 ## 2026-08-23 — Ixian giant multi-warhead 3-way split (boot-gated)
 
 - Converted `D2K_TowerMissile` and `mtank_pri2` in

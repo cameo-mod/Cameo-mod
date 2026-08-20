@@ -29,7 +29,7 @@
 
 claims:
   - id: shield_versus_mean
-    value: 185.25
+    value: 183.26
     tolerance: 0.01
     what: Mean Versus-vs-Shield across all main flat warheads. Drives shield_hp_factor.
     docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md, docs/design/SUPERWEAPON_LAYER_DAMAGE.md]
@@ -40,7 +40,7 @@ claims:
       print(tm.pseudo_armor_mean('Shield'))
 
   - id: shield_hp_factor
-    value: 0.5398
+    value: 0.5457
     tolerance: 0.01
     what: What one shield point is worth as HP (100 / mean Versus vs Shield).
     docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]

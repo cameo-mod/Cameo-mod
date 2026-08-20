@@ -652,13 +652,7 @@ TeslaZapArcTeslaFragment2_EMP:
 		Damage: 4000
 	-Warhead@TeslaArc:
 
-HeatRayBeam1:
-	Inherits@wh: ^Warhead_Inferno_Heavy
-	Inherits@fx: ^Effect_Flame_Heavy
-	Range: 8212
-	ReloadDelay: 8
-	Report: idesat1a.wav
-	SoundVolume: 0.25
+^Projectile_Inferno_Heavy_HeatRayBeam:
 	Projectile: RadBeam
 		Color: FFDD77CC
 		Amplitude: 160
@@ -666,6 +660,15 @@ HeatRayBeam1:
 		BeamDuration: 16
 		Thickness: 32
 		QuantizationCount: 16
+
+HeatRayBeam1:
+	Inherits@wh: ^Warhead_Inferno_Heavy
+	Inherits@proj: ^Projectile_Inferno_Heavy_HeatRayBeam
+	Inherits@fx: ^Effect_Inferno_Heavy
+	Range: 8212
+	ReloadDelay: 8
+	Report: idesat1a.wav
+	SoundVolume: 0.25
 	Warhead@Inferno_Heavy:
 		Damage: 6000
 		Spread: 500
