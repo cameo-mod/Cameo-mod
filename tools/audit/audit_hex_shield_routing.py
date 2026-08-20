@@ -32,11 +32,11 @@ SHAPE_SEQUENCES = {
 ALLOWED_ROUTES.update(("hexshield_dome", sequence) for sequence in SHAPE_SEQUENCES.values())
 
 ALLOWED_PALETTES = {
-    ("hexshield25", "hexshield50"),
-    ("protosshexshield25", "protosshexshield50"),
-    ("ixianhexshield25", "ixianhexshield50"),
-    ("yurihexshield25", "yurihexshield50"),
-    ("consortiumhexshield25", "consortiumhexshield50"),
+    ("hexshield25", "hexshield75"),
+    ("protosshexshield25", "protosshexshield75"),
+    ("ixianhexshield25", "ixianhexshield75"),
+    ("yurihexshield25", "yurihexshield75"),
+    ("consortiumhexshield25", "consortiumhexshield75"),
 }
 
 

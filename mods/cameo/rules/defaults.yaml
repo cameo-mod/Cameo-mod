@@ -2495,7 +2495,7 @@
 	WithIdleOverlay@shield_damage:
 		Image: hexshield_sphere
 		Sequence: vehicle-standard
-		Palette: hexshield50
+		Palette: hexshield75
 		IsPlayerPalette: false
 	# Muzzle-flash glow for every ground vehicle; gated per-armament by MuzzleSequence, so only
 	# td_nod_gunturret/MG units flash (harvesters, MCVs, transports without a muzzle stay dark). Ships opt out
@@ -2843,7 +2843,7 @@
 	WithIdleOverlay@shield_damage:
 		Image: hexshield_sphere
 		Sequence: aircraft-standard
-		Palette: hexshield50
+		Palette: hexshield75
 		IsPlayerPalette: false
 	Inherits@ext: ^ExternalConditions
 	Inherits@IC: ^IronCurtainable
@@ -3459,7 +3459,7 @@
 	WithIdleOverlay@shield_damage:
 		Image: hexshield_infantry
 		Sequence: infantry-standard
-		Palette: hexshield50
+		Palette: hexshield75
 		IsPlayerPalette: false
 	WithIdleOverlay@shrouded:
 		Image: shrouded_overlay_small
@@ -7467,7 +7467,7 @@ CPQDEBUGDUMMY:
 		IsDecoration: True
 	WithIdleOverlay@shield_damage:
 		RequiresCondition: !disabled && shielded && shieldhit
-		Palette: hexshield50
+		Palette: hexshield75
 		IsPlayerPalette: false
 		IsDecoration: True
 	Targetable@Shielded:

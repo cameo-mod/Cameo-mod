@@ -12,7 +12,7 @@ The retained visual decisions are:
 - camera-correct dome for buildings and defenses;
 - directional oval as an explicit geometry opt-in for elongated aircraft;
 - fixed faction colors: default/Protoss blue, Ixian silver, Yuri indigo, Consortium cyan;
-- Indexed8 art with transparent index 0 and 25% idle / 50% hit palettes.
+- Indexed8 art with transparent index 0 and 25% idle / 75% hit palettes.
 
 Actor-specific shield sizing is forbidden. Concrete actors must not define `Sequence` or
 `StartSequence` on the shield overlays. A concrete actor may override only `Image` when it
