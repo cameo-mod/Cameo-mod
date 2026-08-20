@@ -25,22 +25,41 @@ body with four Tiberium extraction pods. The Global Conquest Lifeform Recycling
 Plant and Terraforming Nexus are included as map/editor actors; their strategic
 operations remain outside the current faction foundation.
 
-## Top-priority todo
+## Current gameplay pilot
 
-These are the most desirable next features for the Scrin faction, in priority
-order:
+Reactor is available from Drone Platform as the first production test. It uses
+the authentic 56-frame CNC3 `ObjectsAlienBuildup` expanding-hole dissolve with
+its structure-shaped aurora on a separately synchronized overlay. Stock
+building sale behavior plays both layers in exact reverse. The independent
+fade-white/bottom-to-top materialization prototype remains available as a
+faction-neutral effect for future structures, but Reactor no longer uses it.
 
-1. **Engine-supported Scrin building materialization.** Add a reusable,
-   configurable construction effect. On creation, the actor sprite first fades
-   in as a white silhouette over a configurable interval. A jagged electric
-   boundary then travels from bottom to top, progressively replacing the white
-   silhouette with the actor's actual sprite. Timing, electric-band appearance,
-   and affected sprite bodies must be configurable; the result must not require
-   a separately baked make animation for every structure.
+All Scrin structures inherit the standard base-building placement, repair,
+capture, and sale lifecycle. Their shared placement sound is the authentic
+Tiberium Wars `ALI_Building_Placed` asset (`ABBuild_placea`). Reactor remains
+the only newly buildable structure until the planned production graph below is
+wired and balanced. Materialization and reverse-sale behavior still require a
+final in-game review.
 
 The earlier Tiberium-creep visual pilot was rejected and is deliberately not
 part of this checkpoint. A replacement ground-field concept remains deferred
 until it has a stronger visual direction.
+
+## Planned production graph
+
+- Drone Platform initially constructs Reactor and Extractor.
+- Reactor unlocks Portal.
+- Reactor plus Extractor unlock Warp Gate, Nerve Center, and Gravity Stabilizer.
+- Nerve Center unlocks Technology Assembler and Foundry.
+- Portal plus Nerve Center unlock Stasis Chamber.
+- Technology Assembler unlocks Warp Chasm, Signal Transmitter, Control Node,
+  and Phase Generator.
+- Portal trains all Scrin infantry.
+- Warp Gate produces all Scrin vehicles except Eradicator Hexapod.
+- Warp Chasm produces all Scrin vehicles including Eradicator Hexapod, plus
+  Devastator Warship, Planetary Assault Carrier, Mothership, and the remaining
+  Scrin aircraft roster.
+- Gravity Stabilizer produces Stormriders.
 
 The Eradicator Hexapod uses the approved AIDA frame 65 static pose and the
 corrected WLKA cycle sampled to 12 frames across 32 facings. Its indexed source

@@ -13,6 +13,7 @@ actor_scrin_drone_ship =
 
 actor_scrin_reactor =
    .name = Scrin Reactor
+   .description = Provides power for Scrin structures.
 
 actor_scrin_fusion_reactor =
    .name = Scrin Fusion Reactor

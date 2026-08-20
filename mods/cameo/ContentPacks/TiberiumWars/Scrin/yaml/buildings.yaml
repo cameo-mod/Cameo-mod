@@ -11,8 +11,28 @@
 	Selectable:
 		Bounds: 3072, 1024
 
+# Standard base-building lifecycle without borrowing faction-specific TD/RA art.
+# Scrin structures can be placed, repaired, captured, and sold like other bases;
+# procedural materialization replaces baked make/deconstruction sequences.
+^ScrinBuilding:
+	Inherits: ^BaseBuilding
+	-WithMakeAnimation:
+	-WithDeathAnimation:
+	-WithBuildingRepairDecoration:
+	Building:
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune
+		BuildSounds: scrin_building_placed.wav
+
+^ScrinAuthenticBuildup:
+	WithMakeAnimation:
+		Condition: build-incomplete
+	WithMakeOverlay@AURORA:
+		Sequence: aurora-make
+		Palette: effect
+
 scrin_drone_platform:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@CPQ: ^CPQCondition
 	Inherits@shape: ^3x3Shape
 	Tooltip:
 		Name: actor_scrin_drone_platform.name
@@ -24,6 +44,34 @@ scrin_drone_platform:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	WithMakeAnimation:
+	BaseBuilding:
+	BaseProvider:
+		Range: 15c0
+	Production@NORMAL:
+		Produces: Building
+		RequiresCondition: !(classicproductionqueues || hybridproductionqueues)
+	Production@CLASSICPRODUCTIONQUEUES:
+		Produces: RABuilding
+		RequiresCondition: classicproductionqueues || hybridproductionqueues
+	ProductionQueue@Building:
+		Type: Building
+		DisplayOrder: 0
+		Group: Building
+		LowPowerModifier: 200
+		ReadyAudio: ConstructionComplete
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Building
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		InfiniteBuildLimit: 10
+	ProductionBar@BUILDING:
+		ProductionType: Building
+		RequiresCondition: !(classicproductionqueues || hybridproductionqueues)
+	ProductionBar@RABUILDING:
+		ProductionType: RABuilding
+		RequiresCondition: classicproductionqueues || hybridproductionqueues
+	ProvidesPrerequisite@buildingname:
 	Transforms:
 		IntoActor: scrin_drone_ship
 		Offset: 1,1
@@ -31,21 +79,42 @@ scrin_drone_platform:
 		NoTransformNotification: BuildingCannotPlaceAudio
 
 scrin_reactor:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
 		Name: actor_scrin_reactor.name
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 10
+		Prerequisites: ~scrin_drone_platform
+		Icon: icon
+		IconPalette: player_rgba
+		IconPaletteIsPlayerPalette: true
+		Description: actor_scrin_reactor.description
+	Valued:
+		Cost: 500
+	Power:
+		Amount: 100
 	Building:
 		Dimensions: 2,2
 		Footprint: xx xx
 		LocalCenterOffset: 0,0,0
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_reactor_player
+	WithMakeAnimation:
+		Condition: build-incomplete
+	WithMakeOverlay@AURORA:
+		Sequence: aurora-make
+		Palette: effect
 
 # Map/editor-ready upgraded Reactor visual. The Nerve Center research and
 # production-menu replacement are deferred with the playable Scrin economy.
 scrin_fusion_reactor:
 	Inherits: scrin_reactor
+	-Buildable:
+	-WithMakeAnimation:
+	-WithMakeOverlay@AURORA:
 	Tooltip:
 		Name: actor_scrin_fusion_reactor.name
 	RenderSprites:
@@ -53,7 +122,8 @@ scrin_fusion_reactor:
 		PlayerPalette: player_rgba
 
 scrin_extractor:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^4x3Shape
 	Tooltip:
 		Name: actor_scrin_extractor.name
@@ -62,7 +132,7 @@ scrin_extractor:
 		Footprint: =xx= xxxx =xx=
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_extractor_player
 	Refinery:
 		TickRate: 15
 		PlayerExperienceModifier: 20
@@ -80,7 +150,8 @@ scrin_extractor:
 		MaxQueueLength: 5
 
 scrin_portal:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^Scrin3x1Shape
 	Tooltip:
 		Name: actor_scrin_portal.name
@@ -89,7 +160,7 @@ scrin_portal:
 		Footprint: xxx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_portal_player
 	WithIdleOverlay@CORE:
 		Image: scrin_portal_core
 		Sequence: idle
@@ -98,10 +169,13 @@ scrin_portal:
 	WithIdleOverlay@FOREGROUND:
 		Image: scrin_portal_foreground
 		Sequence: idle
+		Palette: player_rgba
+		IsPlayerPalette: true
 		RequiresCondition: !build-incomplete
 
 scrin_warp_gate:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^4x2Shape
 	Tooltip:
 		Name: actor_scrin_warp_gate.name
@@ -110,7 +184,7 @@ scrin_warp_gate:
 		Footprint: x==x x==x
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_warp_gate_player
 	WithIdleOverlay@CORE:
 		Image: scrin_warp_gate_core
 		Sequence: idle
@@ -118,7 +192,8 @@ scrin_warp_gate:
 		RequiresCondition: !build-incomplete
 
 scrin_gravity_stabilizer:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^3x2Shape
 	Tooltip:
 		Name: actor_scrin_gravity_stabilizer.name
@@ -127,7 +202,7 @@ scrin_gravity_stabilizer:
 		Footprint: xxx xxx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_gravity_stabilizer_player
 	WithIdleOverlay@CORE:
 		Image: scrin_warp_gate_core
 		Sequence: idle
@@ -135,7 +210,8 @@ scrin_gravity_stabilizer:
 		RequiresCondition: !build-incomplete
 
 scrin_nerve_center:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^2x1Shape
 	Tooltip:
 		Name: actor_scrin_nerve_center.name
@@ -144,10 +220,11 @@ scrin_nerve_center:
 		Footprint: xx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_nerve_center_player
 
 scrin_stasis_chamber:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x2Shape
 	Tooltip:
 		Name: actor_scrin_stasis_chamber.name
@@ -156,10 +233,11 @@ scrin_stasis_chamber:
 		Footprint: x x
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_stasis_chamber_player
 
 scrin_technology_assembler:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^3x3Shape
 	Tooltip:
 		Name: actor_scrin_technology_assembler.name
@@ -168,10 +246,11 @@ scrin_technology_assembler:
 		Footprint: xx_ xxx _xx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_technology_assembler_player
 
 scrin_signal_transmitter:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^2x2Shape
 	Tooltip:
 		Name: actor_scrin_signal_transmitter.name
@@ -180,10 +259,11 @@ scrin_signal_transmitter:
 		Footprint: =x x=
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_signal_transmitter_player
 
 scrin_buzzer_hive:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x1Shape
 	Tooltip:
 		Name: actor_scrin_buzzer_hive.name
@@ -192,10 +272,11 @@ scrin_buzzer_hive:
 		Footprint: x
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_buzzer_hive_player
 
 scrin_photon_cannon:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x1Shape
 	Tooltip:
 		Name: actor_scrin_photon_cannon.name
@@ -210,10 +291,11 @@ scrin_photon_cannon:
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_photon_cannon_player
 
 scrin_plasma_missile_battery:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x1Shape
 	Tooltip:
 		Name: actor_scrin_plasma_missile_battery.name
@@ -228,10 +310,11 @@ scrin_plasma_missile_battery:
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_plasma_missile_battery_player
 
 scrin_growth_accelerator:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^2x1Shape
 	Tooltip:
 		Name: actor_scrin_growth_accelerator.name
@@ -240,13 +323,14 @@ scrin_growth_accelerator:
 		Footprint: xx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_growth_accelerator_player
 
 # Reaper-17's enhanced Growth Accelerator. This visual uses the authentic
 # additional Tiberium extraction pods, but gameplay income/regrowth behavior
 # remains deferred with the playable faction rules.
 scrin_growth_stimulator:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^2x1Shape
 	Tooltip:
 		Name: actor_scrin_growth_stimulator.name
@@ -255,10 +339,11 @@ scrin_growth_stimulator:
 		Footprint: xx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_growth_stimulator_player
 
 scrin_storm_column:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x1Shape
 	Tooltip:
 		Name: actor_scrin_storm_column.name
@@ -267,10 +352,11 @@ scrin_storm_column:
 		Footprint: x
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_storm_column_player
 
 scrin_rift_generator:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^3x3Shape
 	Tooltip:
 		Name: actor_scrin_rift_generator.name
@@ -279,7 +365,7 @@ scrin_rift_generator:
 		Footprint: xxx xxx xxx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_rift_generator_player
 	WithIdleOverlay@ORB:
 		Image: scrin_rift_generator_orb
 		Sequence: idle
@@ -287,7 +373,8 @@ scrin_rift_generator:
 		RequiresCondition: !build-incomplete
 
 scrin_lightning_spike:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x1Shape
 	Tooltip:
 		Name: actor_scrin_lightning_spike.name
@@ -296,10 +383,11 @@ scrin_lightning_spike:
 		Footprint: x
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_lightning_spike_player
 
 scrin_tiberium_hive:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x1Shape
 	Tooltip:
 		Name: actor_scrin_tiberium_hive.name
@@ -308,10 +396,11 @@ scrin_tiberium_hive:
 		Footprint: x
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_tiberium_hive_player
 
 scrin_warp_chasm:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^4x2Shape
 	Tooltip:
 		Name: actor_scrin_warp_chasm.name
@@ -320,7 +409,7 @@ scrin_warp_chasm:
 		Footprint: xxxx xxxx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_warp_chasm_player
 	WithIdleOverlay@CORE:
 		Image: scrin_warp_chasm_core
 		Sequence: idle
@@ -328,7 +417,8 @@ scrin_warp_chasm:
 		RequiresCondition: !build-incomplete
 
 scrin_foundry:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^2x1Shape
 	Tooltip:
 		Name: actor_scrin_foundry.name
@@ -337,10 +427,11 @@ scrin_foundry:
 		Footprint: xx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_foundry_player
 
 scrin_outpost:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^1x1Shape
 	Tooltip:
 		Name: actor_scrin_outpost.name
@@ -349,10 +440,11 @@ scrin_outpost:
 		Footprint: x
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_outpost_player
 
 scrin_control_node:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^4x3Shape
 	Tooltip:
 		Name: actor_scrin_control_node.name
@@ -361,10 +453,11 @@ scrin_control_node:
 		Footprint: xxxx xxxx xxxx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_control_node_player
 
 scrin_phase_generator:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^2x2Shape
 	Tooltip:
 		Name: actor_scrin_phase_generator.name
@@ -373,12 +466,13 @@ scrin_phase_generator:
 		Footprint: xx xx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_phase_generator_player
 
 # Kane's Wrath Global Conquest strategic structures. They remain map/editor
 # actors; their metagame operations are not part of this visual foundation.
 scrin_lifeform_recycling_plant:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^2x1Shape
 	Tooltip:
 		Name: actor_scrin_lifeform_recycling_plant.name
@@ -387,10 +481,11 @@ scrin_lifeform_recycling_plant:
 		Footprint: xx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_lifeform_recycling_plant_player
 
 scrin_terraforming_nexus:
-	Inherits: ^Building
+	Inherits: ^ScrinBuilding
+	Inherits@buildup: ^ScrinAuthenticBuildup
 	Inherits@shape: ^3x2Shape
 	Tooltip:
 		Name: actor_scrin_terraforming_nexus.name
@@ -399,4 +494,4 @@ scrin_terraforming_nexus:
 		Footprint: xxx xxx
 		LocalCenterOffset: 0,0,0
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: scrin_terraforming_nexus_player

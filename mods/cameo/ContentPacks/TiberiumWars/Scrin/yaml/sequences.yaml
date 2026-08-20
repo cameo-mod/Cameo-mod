@@ -27,13 +27,35 @@ scrin_drone_ship:
 
 scrin_reactor:
 	idle:
-		Filename: scrin_sprites|scrin_reactor.png
+		Filename: scrin_sprites|scrin_reactor_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 12
 		ShadowZOffset: -5
 		Offset: 2.000,3.000
 		Scale: 0.60
+	make:
+		Filename: scrin_sprites|scrin_reactor_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 2.000,3.000
+		Scale: 0.60
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 2.000,-93.000
+		Scale: 0.60
+		ZOffset: 1024
+		IgnoreWorldTint: true
+	icon:
+		Filename: scrin_sprites|scrin_reactor_icon.png
+		Start: 0
+		Length: 1
 
 scrin_fusion_reactor:
 	idle:
@@ -47,7 +69,7 @@ scrin_fusion_reactor:
 
 scrin_extractor:
 	idle:
-		Filename: scrin_sprites|scrin_extractor.png
+		Filename: scrin_sprites|scrin_extractor_indexed8.png
 		Start: 0
 		Length: 16
 		Tick: 100
@@ -55,16 +77,52 @@ scrin_extractor:
 		ShadowZOffset: -5
 		Offset: 2.000,-1.000
 		Scale: 0.60
+	make:
+		Filename: scrin_sprites|scrin_extractor_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 2.000,-1.000
+		Scale: 0.60
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 1.472,-136.233
+		Scale: 0.988642
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_portal:
 	idle:
-		Filename: scrin_sprites|scrin_portal.png
+		Filename: scrin_sprites|scrin_portal_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,-4.000
 		Scale: 0.923077
+	make:
+		Filename: scrin_sprites|scrin_portal_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 4.000,-4.000
+		Scale: 0.923077
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 1.710,-104.951
+		Scale: 0.561051
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_portal_core:
 	idle:
@@ -85,13 +143,31 @@ scrin_portal_foreground:
 
 scrin_warp_gate:
 	idle:
-		Filename: scrin_sprites|scrin_warp_gate.png
+		Filename: scrin_sprites|scrin_warp_gate_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,-4.000
 		Scale: 0.923077
+	make:
+		Filename: scrin_sprites|scrin_warp_gate_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 0.000,-4.000
+		Scale: 0.923077
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 2.235,-161.773
+		Scale: 0.894164
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_warp_gate_core:
 	idle:
@@ -104,118 +180,327 @@ scrin_warp_gate_core:
 
 scrin_gravity_stabilizer:
 	idle:
-		Filename: scrin_sprites|scrin_gravity_stabilizer.png
+		Filename: scrin_sprites|scrin_gravity_stabilizer_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,-8.000
+	make:
+		Filename: scrin_sprites|scrin_gravity_stabilizer_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 4.000,-8.000
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 1.653,-150.662
+		Scale: 0.861336
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_nerve_center:
 	idle:
-		Filename: scrin_sprites|scrin_nerve_center.png
+		Filename: scrin_sprites|scrin_nerve_center_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,-24.000
 		Scale: 0.923077
+	make:
+		Filename: scrin_sprites|scrin_nerve_center_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 0.000,-24.000
+		Scale: 0.923077
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 1.604,-86.662
+		Scale: 0.456979
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_stasis_chamber:
 	idle:
-		Filename: scrin_sprites|scrin_stasis_chamber.png
+		Filename: scrin_sprites|scrin_stasis_chamber_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,8.000
 		Scale: 0.923077
+	make:
+		Filename: scrin_sprites|scrin_stasis_chamber_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 4.000,8.000
+		Scale: 0.923077
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 1.199,-39.368
+		Scale: 0.356631
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_technology_assembler:
 	idle:
-		Filename: scrin_sprites|scrin_technology_assembler.png
+		Filename: scrin_sprites|scrin_technology_assembler_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,0.000
 		Scale: 0.923077
+	make:
+		Filename: scrin_sprites|scrin_technology_assembler_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 0.000,0.000
+		Scale: 0.923077
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 2.235,-130.994
+		Scale: 0.894120
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_signal_transmitter:
 	idle:
-		Filename: scrin_sprites|scrin_signal_transmitter.png
+		Filename: scrin_sprites|scrin_signal_transmitter_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,4.000
 		Scale: 0.923077
+	make:
+		Filename: scrin_sprites|scrin_signal_transmitter_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 4.000,4.000
+		Scale: 0.923077
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 2.294,-96.955
+		Scale: 0.610079
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_buzzer_hive:
 	idle:
-		Filename: scrin_sprites|scrin_buzzer_hive.png
+		Filename: scrin_sprites|scrin_buzzer_hive_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,-4.000
+	make:
+		Filename: scrin_sprites|scrin_buzzer_hive_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 0.000,-4.000
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 0.750,-47.800
+		Scale: 0.300000
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_photon_cannon:
 	idle:
-		Filename: scrin_sprites|scrin_photon_cannon.png
+		Filename: scrin_sprites|scrin_photon_cannon_indexed8.png
 		Start: 0
 		Facings: 32
 		ShadowStart: 32
 		ShadowZOffset: -5
 		Offset: 0.000,4.000
+	make:
+		Filename: scrin_sprites|scrin_photon_cannon_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 0.000,4.000
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 5.266,-49.263
+		Scale: 0.306473
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_plasma_missile_battery:
 	idle:
-		Filename: scrin_sprites|scrin_plasma_missile_battery.png
+		Filename: scrin_sprites|scrin_plasma_missile_battery_indexed8.png
 		Start: 0
 		Facings: 32
 		ShadowStart: 32
 		ShadowZOffset: -5
 		Offset: 4.000,-4.000
+	make:
+		Filename: scrin_sprites|scrin_plasma_missile_battery_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 4.000,-4.000
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 0.769,-49.552
+		Scale: 0.307751
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_growth_accelerator:
 	idle:
-		Filename: scrin_sprites|scrin_growth_accelerator.png
+		Filename: scrin_sprites|scrin_growth_accelerator_indexed8.png
 		Start: 0
 		Length: 16
 		Tick: 100
 		ShadowStart: 16
 		ShadowZOffset: -5
 		Offset: -4.000,-8.000
+	make:
+		Filename: scrin_sprites|scrin_growth_accelerator_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: -4.000,-8.000
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 0.584,-77.965
+		Scale: 0.433472
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_growth_stimulator:
 	idle:
-		Filename: scrin_sprites|scrin_growth_stimulator.png
+		Filename: scrin_sprites|scrin_growth_stimulator_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,-12.000
+	make:
+		Filename: scrin_sprites|scrin_growth_stimulator_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 0.000,-12.000
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 1.754,-93.359
+		Scale: 0.501590
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_storm_column:
 	idle:
-		Filename: scrin_sprites|scrin_storm_column.png
+		Filename: scrin_sprites|scrin_storm_column_indexed8.png
 		Start: 0
 		Length: 16
 		Tick: 200
 		ShadowStart: 16
 		ShadowZOffset: -5
 		Offset: 8.000,-24.000
+	make:
+		Filename: scrin_sprites|scrin_storm_column_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 8.000,-24.000
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 1.226,-90.804
+		Scale: 0.490282
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_rift_generator:
 	idle:
-		Filename: scrin_sprites|scrin_rift_generator.png
+		Filename: scrin_sprites|scrin_rift_generator_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,-32.000
 		Scale: 1.0
+	make:
+		Filename: scrin_sprites|scrin_rift_generator_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 0.000,-32.000
+		Scale: 1.0
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 2.556,-175.106
+		Scale: 1.022592
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_rift_generator_orb:
 	idle:
@@ -227,31 +512,83 @@ scrin_rift_generator_orb:
 
 scrin_lightning_spike:
 	idle:
-		Filename: scrin_sprites|scrin_lightning_spike.png
+		Filename: scrin_sprites|scrin_lightning_spike_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,-8.000
+	make:
+		Filename: scrin_sprites|scrin_lightning_spike_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 4.000,-8.000
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 0.783,-50.828
+		Scale: 0.313398
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_tiberium_hive:
 	idle:
-		Filename: scrin_sprites|scrin_tiberium_hive.png
+		Filename: scrin_sprites|scrin_tiberium_hive_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,-4.000
+	make:
+		Filename: scrin_sprites|scrin_tiberium_hive_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 0.000,-4.000
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 0.840,-55.967
+		Scale: 0.336137
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_warp_chasm:
 	idle:
-		Filename: scrin_sprites|scrin_warp_chasm.png
+		Filename: scrin_sprites|scrin_warp_chasm_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,-16.000
 		Scale: 1.076923
+	make:
+		Filename: scrin_sprites|scrin_warp_chasm_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 0.000,-16.000
+		Scale: 1.076923
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 2.333,-206.623
+		Scale: 1.148436
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_warp_chasm_core:
 	idle:
@@ -264,61 +601,167 @@ scrin_warp_chasm_core:
 
 scrin_foundry:
 	idle:
-		Filename: scrin_sprites|scrin_foundry.png
+		Filename: scrin_sprites|scrin_foundry_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,-8.000
 		Scale: 0.923077
+	make:
+		Filename: scrin_sprites|scrin_foundry_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 0.000,-8.000
+		Scale: 0.923077
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 0.932,-66.408
+		Scale: 0.372805
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_outpost:
 	idle:
-		Filename: scrin_sprites|scrin_outpost.png
+		Filename: scrin_sprites|scrin_outpost_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,8.000
 		Scale: 0.923077
+	make:
+		Filename: scrin_sprites|scrin_outpost_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 4.000,8.000
+		Scale: 0.923077
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 1.058,-46.877
+		Scale: 0.300000
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_control_node:
 	idle:
-		Filename: scrin_sprites|scrin_control_node.png
+		Filename: scrin_sprites|scrin_control_node_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,-24.000
 		Scale: 0.923077
+	make:
+		Filename: scrin_sprites|scrin_control_node_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 4.000,-24.000
+		Scale: 0.923077
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 8.285,-313.501
+		Scale: 1.713923
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_phase_generator:
 	idle:
-		Filename: scrin_sprites|scrin_phase_generator.png
+		Filename: scrin_sprites|scrin_phase_generator_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,-20.000
 		Scale: 0.60
+	make:
+		Filename: scrin_sprites|scrin_phase_generator_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 4.000,-20.000
+		Scale: 0.60
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 3.026,-91.745
+		Scale: 0.450201
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_lifeform_recycling_plant:
 	idle:
-		Filename: scrin_sprites|scrin_lifeform_recycling_plant.png
+		Filename: scrin_sprites|scrin_lifeform_recycling_plant_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 0.000,-24.000
+	make:
+		Filename: scrin_sprites|scrin_lifeform_recycling_plant_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 0.000,-24.000
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 1.888,-105.443
+		Scale: 0.555055
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_terraforming_nexus:
 	idle:
-		Filename: scrin_sprites|scrin_terraforming_nexus.png
+		Filename: scrin_sprites|scrin_terraforming_nexus_indexed8.png
 		Start: 0
 		Length: 1
 		ShadowStart: 1
 		ShadowZOffset: -5
 		Offset: 4.000,4.000
+	make:
+		Filename: scrin_sprites|scrin_terraforming_nexus_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 4.000,4.000
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 2.427,-130.238
+		Scale: 0.770965
+		ZOffset: 1024
+		IgnoreWorldTint: true
 
 scrin_eradicator_hexapod:
 	idle:
