@@ -729,28 +729,45 @@ TSChemBoatcannon:
 ####################################################################################################
 
 TSChemBazooka:
-	Inherits: ^LightChemicalWeapon
-	Inherits@2: ^LightMissile
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileAP_Light
 	Report: rketinf1.aud
 	ReloadDelay: 52
 	Range: 6694
+	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		TrailImage: spittrail
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 6000
+	Warhead@MissileAP_Light:
+		Damage: 30000
+		FriendlyFireDamage: 90
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 3
+		PhysicalStateScale: 20
+	Warhead@MissileAP_Light_Percentage:
+		Damage: 15
+		FriendlyFireDamage: 90
 		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightMissile: SpreadDamage
-		Damage: 24000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 12
+		PhysicalStateScale: 20
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Water
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: xplos.aud
+		ValidTargets: Air
+		ImpactActors: false
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 6
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
@@ -761,7 +778,6 @@ TSChemBazooka:
 		Palette: player
 		Weapon: TSSmoke
 		InvalidTargets: Water
-
 TSVanMissile:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium

@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 329
+Total concrete weapons on old families: 328
 Single old-family with new inherits (Phase B completion): 2
 Pure single old-family (mechanical Phase A candidates): 20
-Mixed old-family (Phase B maintainer sign-off): 307 in 220 groups
+Mixed old-family (Phase B maintainer sign-off): 306 in 219 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `AsianChemicalBombs` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | old: HeavyChemicalWeapon | HeavyChemicalWeapon=2000, HeavyChemicalWeaponPercentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, Effect=0, Cloud=0
@@ -704,9 +704,6 @@ Mixed old-family (Phase B maintainer sign-off): 307 in 220 groups
 
 ### Grenade, TankDestroyerCannon (1 weapons)
 - `GoliathMk2MG` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | dominant: Grenade(2000) | Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, CannonHE_Heavy=2000, CannonHE_Heavy_Percentage=1, TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, Bullet_Medium=2000, Bullet_Medium_Percentage=1 | → collapse to Grenade
-
-### HeavyAAWeapon, HeavyMissile (1 weapons)
-- `Dragon` (ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml) | dominant: HeavyAAWeapon(6000) | HeavyAAWeapon=6000, HeavyAAWeaponPercentage=3, HeavyMissile=6000, HeavyMissilePercentage=3, EffectAir=0 | → collapse to HeavyAAWeapon
 
 ### HeavyBomb, HeavyCannon (1 weapons)
 - `TurretGunBlackMarket` (ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml) | dominant: HeavyBomb(6000) | HeavyBomb=6000, HeavyBombPercentage=3, HeavyCannon=6000, HeavyCannonPercentage=3 | → collapse to HeavyBomb

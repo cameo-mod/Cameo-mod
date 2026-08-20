@@ -1,5 +1,34 @@
 # Development Log
 
+## 2026-08-22 — W24 cluster 5: Tiberian Sun tiberium bazookas (boot-gated)
+
+- Converted `TSTibBazooka` (Nod) and `TSChemBazooka` (Forgotten) to the 3-way split
+  using `^Warhead_MissileAP_Light`, `^Projectile_Missile_Light`, `^Effect_MissileAP_Light`.
+- Removed old `^LightChemicalWeapon` and `^LightMissile` inherits.
+- Collapsed `6000` chemical + `24000` missile damage into one `Damage: 30000` main and
+  `3` + `12` percentage into a single `Damage: 15` percentage warhead.
+- Preserved the `Corrosion` physical state by keeping `PhysicalStateName: Corrosion` and
+  scaling the amount to the merged warhead (`PhysicalStateScale: 20`) so the post-armor
+  corrosion matches the old 6000-damage chemical contribution.
+- Preserved ally-damage proportion with `FriendlyFireDamage: 90` on both main and
+  percentage warheads.
+- Preserved `spittrail` missile trail, `small_poof` ground effect, `med_explosion_air`
+  air effect, `Concrete: 100`, shield-hit duration 6, and all smudges.
+- Kept `TSChemBazooka`'s `SpawnSmokeParticle` cloud warhead.
+- Fixed an attempted `-Warhead@EffectWater:` removal that failed because
+  `^Effect_MissileAP_Light` does not define that key.
+- Regenerated balance ledgers and derived sidecars for affected factions.
+- Updated `docs/design/BALANCE_PROGRAM_PLAN.md` W24 status line.
+- Verification:
+  - `find_empty_warhead.py` = 0
+  - `find_orphan_old_keys.py` = 0 real bugs
+  - `audit_warhead_split.py` at/below baseline
+  - `audit_physical_state_warheads.py` PASS
+  - `audit_balance_drift.py` clean
+  - `review_resolve_diff.py` OK for both weapons
+  - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new
+    `exception-*.log` after the fix.
+
 ## 2026-08-22 — W24 cluster 4: Dragon SAM (boot-gated)
 
 - Converted `Dragon` in `mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml` to the
