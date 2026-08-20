@@ -109,3 +109,19 @@ Three more always-active `FirepowerMultiplier` instances were found and fixed (`
 **Impact before fix**: Conscription gave +10% firepower permanently (not just while the doctrine was active); the same permanent-always-on behaviour applied to `global_conscription_buff` and Advance Wars CO Colin's firepower debuff.
 
 **Sweep method**: scanned every `*.yaml` under `mods/cameo` for a `Prerequisites:` line whose parent block is any `*Multiplier@` trait other than `Production*` — 0 remaining instances after the fixes. The UK-economy / France-siege / RA2 commando-doctrine templates from the earlier audit notes are not present on this branch; nothing else was actionable here.
+
+## W24 cluster 8 — 227mm / GDIRigMissilePod / MammothTusk (2026-08-20)
+
+**Converted** three legacy mixed-stack missile weapons to the 3-way split (one warhead, one projectile, one effect):
+
+- `227mm` (`mods/cameo/weapons/tiberiandawn.yaml`) → `^Warhead_MissileHE_Medium` + `^Projectile_Missile_Medium` + `^Effect_MissileHE_Medium`.
+- `GDIRigMissilePod` (`mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml`) → `^Warhead_MissileHE_Heavy` + `^Projectile_Missile_Medium` + `^Effect_MissileHE_Medium`.
+- `MammothTusk` (`mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml`) → `^Warhead_MissileHE_Heavy` + `^Projectile_Missile_Heavy` + `^Effect_MissileHE_Heavy`.
+
+**Preserved:** resolved per-shot damage totals (8000/32000/24000), percentage twins, `Range`, `ReloadDelay`, `Burst`, `ValidTargets`, local `Projectile` overrides (`Speed`, `Inaccuracy`, launch angles), impact sounds, target filters, and `ImpactActors`. Added local `Warhead@EffectWater` because the new `^Effect_MissileHE_*` templates do not provide one.
+
+**Resolver diff:** `tools/audit/review_resolve_diff.py` clean. The flak bullet contrail colors (`ContrailStartColor: FF884400`, `ContrailEndColor: 000000FF`) were restored to the three non-AMT parent projectiles as a resolved-behaviour preserve.
+
+**Audits:** `find_empty_warhead.py` 0; `audit_warhead_split` broadcast count 958, baseline lowered 965→958; `audit_physical_state_warheads` PASS; `audit_balance_drift` clean; `audit_duplicate_inherits` no new findings for the cluster; `utility --check-yaml` pre-existing errors/warnings unchanged.
+
+**Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log` after the run.

@@ -227,6 +227,14 @@ type" cases). Re-run the detector after any future conversion batch;
 it exits 0 candidates when clean. Bug B is now CLOSED across the
 codebase.
 
+### Effect/water preservation when moving to ^Effect_MissileHE_*
+
+The new `^Effect_MissileHE_Light/Medium/Heavy` templates do **not** include `Warhead@EffectWater`. A weapon that previously resolved with a water splash (via `^FlakWeapon`, `^Grenade`, `^MediumMissile`, `^HeavyMissile`, etc.) will silently lose it unless a local `Warhead@EffectWater: CreateEffect` is kept. `review_resolve_diff.py` compares resolved `CreateEffect` fields, but `EffectWater` is a separate node; always inspect the full resolved FX dump for both `Effect` and `EffectWater` blocks.
+
+Likewise, `ImpactActors: false` on `Warhead@Effect` can come from an old full-stack family (`^Grenade` sets it). The new `^Effect_MissileHE_*` templates do not, so the resolved effect must carry a local `ImpactActors: false` override where the old stack had it.
+
+**Rule:** after reparenting a weapon, run `review_resolve_diff.py` and explicitly verify `EffectWater` and `ImpactActors` against the pre-conversion baseline; add local overrides when the new effect family drops them.
+
 ---
 
 ## Latest lessons from the July 2026 infantry rebalance pass
@@ -660,4 +668,18 @@ was reverted twice.
    lines sit relative to that value BEFORE suspecting the merge engine.
 3. A weapon whose own `Warhead@X` is declared ABOVE its `Inherits` lines is already relying
    on the parent to win — e.g. `japan_imperialscoutsman_rifle_waveforce` declares
-   `Warhead@Railgun_Heavy` at line 0 and three `Inherits` at lines 2-4.\n## Template location and PhysicalStates forms (2026-08-20)\n\nTwo resolver/tooling gotchas from the chemical-weapon and artillery-projectile pass:\n\n1. **Do not duplicate a ^Projectile_* template across weapons/weapons.yaml and a ContentPack Shared pack.** mod.yaml loads weapons/weapons.yaml after the ContentPack Weapons list, so the global copy silently shadows the pack copy and any weapon that only inherited the pack copy changes behaviour. If a template needs to be global, put it in weapons/weapons.yaml and remove the pack copy; if it needs pack-local defaults, use a pack-scoped name.\n\n2. **Chemical percentage warheads can declare physical-state meters in two forms:** a direct PhysicalStateName / PhysicalStateScale pair, OR a nested PhysicalStates: map (e.g. Corrosion: 100). 	ools/audit/audit_physical_state_warheads.py now resolves both forms; any future audit touching physical states must do the same or it will falsely report that Corrosion is not being fed.\n
+   `Warhead@Railgun_Heavy` at line 0 and three `Inherits` at lines 2-4.
+
+## Template location and PhysicalStates forms (2026-08-20)
+
+Two resolver/tooling gotchas from the chemical-weapon and artillery-projectile pass:
+
+1. **Do not duplicate a ^Projectile_* template across weapons/weapons.yaml and a ContentPack Shared pack.** mod.yaml loads weapons/weapons.yaml after the ContentPack Weapons list, so the global copy silently shadows the pack copy and any weapon that only inherited the pack copy changes behaviour. If a template needs to be global, put it in weapons/weapons.yaml and remove the pack copy; if it needs pack-local defaults, use a pack-scoped name.
+
+2. **Chemical percentage warheads can declare physical-state meters in two forms:** a direct PhysicalStateName / PhysicalStateScale pair, OR a nested PhysicalStates: map (e.g. Corrosion: 100). tools/audit/audit_physical_state_warheads.py now resolves both forms; any future audit touching physical states must do the same or it will falsely report that Corrosion is not being fed.
+
+## Contrail fields are projectile, not warhead, and can survive a projectile type swap (2026-08-20)
+
+The legacy mixed-stack missile weapons (`227mm`, `GDIRigMissilePod`, `MammothTusk`) inherited `^FlakWeapon` — a `Bullet` projectile with `ContrailStartColor: FF884400` and `ContrailEndColor: 000000FF` — and then a `^*Missile` template that switched the projectile to `Missile`. Because `ContrailStartColor`/`ContrailEndColor` were not re-declared in the missile template, the resolved `Projectile: Missile` still carried the flak bullet colors.
+
+A naive 3-way split onto `^Projectile_Missile_*` drops those colors and `review_resolve_diff.py` flags `Proj.CStart`/`Proj.CEnd`. Preserve them as local `Projectile:` overrides on the concrete weapon whenever the resolved baseline had them and the new family does not.
