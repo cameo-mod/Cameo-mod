@@ -21,11 +21,7 @@ HeavyOrdosCombatTankCannon:
 		Damage: 5
 
 HeavyOrdosCombatTankRockets:
-	Inherits: ^Chaingun
-	Inherits@2: ^FlakWeapon
-	Inherits@3: ^LightMissile
-	Inherits@4: ^MediumMissile
-	Inherits@5: ^D2KRocket
+	Inherits: ^D2KRocket
 	ReloadDelay: 70
 	Range: 6000
 	Burst: 2
@@ -43,27 +39,20 @@ HeavyOrdosCombatTankRockets:
 		MaximumLaunchAngle: 75
 		CloseEnough: 500
 		AllowSnapping: true
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@LightMissile: SpreadDamage
-		Damage: 2000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 1
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
 	Warhead@MissileAP_Heavy:
-		Damage: 2000
+		Damage: 10000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
-		Damage: 1
+		Damage: 5
 
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 120mm_td:
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^LightChemicalWeapon

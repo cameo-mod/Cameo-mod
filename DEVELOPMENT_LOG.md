@@ -1,5 +1,26 @@
 # Development Log
 
+## 2026-08-22 — W24 cluster 9: D2K-rocket six-weapon split (boot-gated)
+
+- Converted `GoliathRockets_AA`, `WraithRockets_AA`, `SunDogRockets`, `MissileTurret` (`mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml`), `ScoutRockets_AA` (`mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml`), and `HeavyOrdosCombatTankRockets` (`mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml`) to the single `^D2KRocket` archetype.
+- Removed `^Chaingun`, `^FlakWeapon`, `^LightMissile`, `^MediumMissile` inherits and their old main/percentage warheads.
+- Collapsed five identical damage warheads per weapon into one `Warhead@MissileAP_Heavy` with totals 30000/10000/10000/20000/10000/10000 and percentage twins 15/5/5/10/5/5.
+- Preserved `Range`, `ReloadDelay`, `Report`, `ValidTargets`, `Burst`/`BurstDelays`, local `Projectile` overrides (including Wraith/HeavyOrdos `ContrailStartColor`/`ContrailEndColor` and launch angles), and restored the flak-bullet contrail visual fields (`ContrailZOffset`, `ContrailStartColor`, `ContrailEndColor`, `ContrailStartWidth`, `ContrailEndWidth`) as local overrides because `^Projectile_Missile_Heavy` drops them.
+- Added local `Warhead@EffectWater: CreateEffect` (`Explosions: small_splash`) on all six because `^D2KRocket` (via `^Effect_MissileAP_Heavy`) does not define a water effect.
+- Lowered `BROADCAST_BASELINE` in `tools/audit/audit_warhead_split.py` from 958 to 952.
+- Regenerated balance ledgers and derived sidecars for affected factions (`d2k_ordos`, `starcraft_protoss`, `starcraft_terran`).
+- Regenerated `docs/audit/latest/phase_b_survey.md`.
+- Verification:
+  - `tools/audit/review_resolve_diff.py` OK for all six
+  - `find_empty_warhead.py` = 0
+  - `find_orphan_old_keys.py` = 0 real bugs
+  - `audit_warhead_split.py` at/below baseline (952)
+  - `audit_physical_state_warheads.py` PASS
+  - `audit_balance_drift.py` clean
+  - `sweep_areadamage.py` dry-run no cluster changes
+  - `extract_stats.py` clean
+  - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`
+
 ## 2026-08-22 — W24 cluster 5: Tiberian Sun tiberium bazookas (boot-gated)
 
 - Converted `TSTibBazooka` (Nod) and `TSChemBazooka` (Forgotten) to the 3-way split

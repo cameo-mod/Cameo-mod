@@ -125,3 +125,26 @@ Three more always-active `FirepowerMultiplier` instances were found and fixed (`
 **Audits:** `find_empty_warhead.py` 0; `audit_warhead_split` broadcast count 958, baseline lowered 965→958; `audit_physical_state_warheads` PASS; `audit_balance_drift` clean; `audit_duplicate_inherits` no new findings for the cluster; `utility --check-yaml` pre-existing errors/warnings unchanged.
 
 **Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log` after the run.
+
+## W24 cluster 9 — D2K rocket family (GoliathRockets_AA, WraithRockets_AA, SunDogRockets, MissileTurret, ScoutRockets_AA, HeavyOrdosCombatTankRockets) (2026-08-22)
+
+**Converted** six mixed-stack D2K-rocket weapons to a single `^D2KRocket` archetype (one `^Warhead_MissileAP_Heavy` main + `^Warhead_MissileAP_Heavy_Percentage` twin):
+
+- `GoliathRockets_AA` (`mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml`) → 5×6000 + 5×3 = `Damage: 30000` / `Damage: 15`.
+- `WraithRockets_AA` (`mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml`) → 5×2000 + 5×1 = `Damage: 10000` / `Damage: 5`.
+- `SunDogRockets` (`mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml`) → 5×2000 + 5×1 = `Damage: 10000` / `Damage: 5`.
+- `MissileTurret` (`mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml`) → 5×4000 + 5×2 = `Damage: 20000` / `Damage: 10`.
+- `ScoutRockets_AA` (`mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml`) → 5×2000 + 5×1 = `Damage: 10000` / `Damage: 5`.
+- `HeavyOrdosCombatTankRockets` (`mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml`) → 5×2000 + 5×1 = `Damage: 10000` / `Damage: 5`.
+
+**Removed:** `^Chaingun`, `^FlakWeapon`, `^LightMissile`, `^MediumMissile` inherits and their `Warhead@Chaingun`, `Warhead@FlakWeapon`, `Warhead@LightMissile`, `Warhead@MediumMissile` main/percentage blocks.
+
+**Preserved:** `Range`, `ReloadDelay`, `Burst`, `BurstDelays`, `ValidTargets`, `Report`, local `Projectile` overrides (`Speed`, `Inaccuracy`, launch angles, Wraith/HeavyOrdos `ContrailStartColor`/`ContrailEndColor`), and resolved water-splash behaviour by adding a local `Warhead@EffectWater: CreateEffect` (`Explosions: small_splash`, `ValidTargets: Water, Underwater`, `InvalidTargets: Ship, Structure, Bridge`) because `^D2KRocket` (via `^Effect_MissileAP_Heavy`) does not define one. Also restored the flak-bullet contrail visual fields (`ContrailZOffset`, `ContrailStartColor`, `ContrailEndColor`, `ContrailStartWidth`, `ContrailEndWidth`) as local `Projectile` overrides because `^Projectile_Missile_Heavy` drops them.
+
+**Key finding:** `^D2KRocket` weapons that previously resolved through `^FlakWeapon` need explicit local `ContrailStartColor`/`ContrailEndColor`/`ContrailZOffset`/`ContrailStartWidth`/`ContrailEndWidth` overrides to preserve the resolved old projectile appearance, and a local `Warhead@EffectWater` to keep the water splash.
+
+**Resolver diff:** `tools/audit/review_resolve_diff.py` OK (behavioural invariants preserved) for all six, with no CreateEffect changes; the only resolved delta is the damage-warhead multiset collapsing to one warhead whose sum equals the old total.
+
+**Audits:** `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs; `audit_warhead_split` broadcast count 952, baseline lowered 958→952; `audit_physical_state_warheads` PASS; `audit_balance_drift` clean; `sweep_areadamage.py` dry-run no changes in cluster; `extract_stats` regenerated ledgers; `run_all.py` has pre-existing unrelated failures (`audit_inherits`, `audit_upgrades`, `audit_sequences`, `audit_fluent`, `audit_basebuilder_crates`, `audit_buildable_order`, `audit_weapon_suffixes`) unchanged.
+
+**Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.

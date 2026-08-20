@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 317
+Total concrete weapons on old families: 308
 Single old-family with new inherits (Phase B completion): 2
 Pure single old-family (mechanical Phase A candidates): 20
-Mixed old-family (Phase B maintainer sign-off): 295 in 215 groups
+Mixed old-family (Phase B maintainer sign-off): 286 in 213 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `AsianChemicalBombs` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | old: HeavyChemicalWeapon | HeavyChemicalWeapon=2000, HeavyChemicalWeaponPercentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, Effect=0, Cloud=0
@@ -227,14 +227,6 @@ Mixed old-family (Phase B maintainer sign-off): 295 in 215 groups
 ### MediumChemicalWeapon, MediumFlameWeapon, MediumMissile, ShrapnelWeapon, TeslaWeapon (1 weapons)
 - `JapanMaidenBowEnergized` (ContentPacks\RedAlert\Japan\yaml\weapons.yaml) | dominant: EMPUnit(14000) | Arrow_Light=6000, Arrow_Light_Percentage=3, MediumMissile=6000, MediumMissilePercentage=3, CannonHE_Medium=6000, CannonHE_Medium_Percentage=3, MediumChemicalWeapon=6000, MediumChemicalWeaponPercentage=3, MediumFlameWeapon=6000, MediumFlameWeaponPercentage=3, ShrapnelWeapon=6000, ShrapnelWeaponFriendlyFire=3000, ShrapnelWeaponPercentage=3, TeslaWeapon=6000, TeslaExtraDamage=3000, TeslaWeaponPercentage=3, EMPUnit=14000, Effect=0, EffectAir=0 | → collapse to EMPUnit
 
-### Chaingun, FlakWeapon, LightMissile, MediumMissile (6 weapons)
-- `GoliathRockets_AA` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | dominant: Chaingun(6000) | Chaingun=6000, ChaingunPercentage=3, FlakWeapon=6000, FlakWeaponPercentage=3, LightMissile=6000, LightMissilePercentage=3, MediumMissile=6000, MediumMissilePercentage=3, MissileAP_Heavy=6000, MissileAP_Heavy_Percentage=3 | → collapse to Chaingun
-- `HeavyOrdosCombatTankRockets` (ContentPacks\D2k\Ordos\yaml\weapons.yaml) | dominant: Chaingun(2000) | Chaingun=2000, ChaingunPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, LightMissile=2000, LightMissilePercentage=1, MediumMissile=2000, MediumMissilePercentage=1, MissileAP_Heavy=2000, MissileAP_Heavy_Percentage=1 | → collapse to Chaingun
-- `MissileTurret` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | dominant: Chaingun(4000) | Chaingun=4000, ChaingunPercentage=2, FlakWeapon=4000, FlakWeaponPercentage=2, LightMissile=4000, LightMissilePercentage=2, MediumMissile=4000, MediumMissilePercentage=2, MissileAP_Heavy=4000, MissileAP_Heavy_Percentage=2 | → collapse to Chaingun
-- `ScoutRockets_AA` (ContentPacks\StarCraft\Protoss\yaml\weapons.yaml) | dominant: Chaingun(2000) | Chaingun=2000, ChaingunPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, LightMissile=2000, LightMissilePercentage=1, MediumMissile=2000, MediumMissilePercentage=1, MissileAP_Heavy=2000, MissileAP_Heavy_Percentage=1 | → collapse to Chaingun
-- `SunDogRockets` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | dominant: Chaingun(2000) | Chaingun=2000, ChaingunPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, LightMissile=2000, LightMissilePercentage=1, MediumMissile=2000, MediumMissilePercentage=1, MissileAP_Heavy=2000, MissileAP_Heavy_Percentage=1 | → collapse to Chaingun
-- `WraithRockets_AA` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | dominant: Chaingun(2000) | Chaingun=2000, ChaingunPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, LightMissile=2000, LightMissilePercentage=1, MediumMissile=2000, MediumMissilePercentage=1, MissileAP_Heavy=2000, MissileAP_Heavy_Percentage=1 | → collapse to Chaingun
-
 ### Chaingun, FlakWeapon, LightMissile, SmallArms (4 weapons)
 - `HeavyAATankCannonAG` (ContentPacks\RedAlert\Allies\yaml\weapons.yaml) | dominant: LightMissile(2000) | LightMissile=2000, LightMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1 | → collapse to LightMissile
 - `HeavyAATankCannontkm` (ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml) | dominant: LightMissile(2000) | LightMissile=2000, LightMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1 | → collapse to LightMissile
@@ -252,11 +244,6 @@ Mixed old-family (Phase B maintainer sign-off): 295 in 215 groups
 - `NaxLaserT` (weapons\redalert2mod.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to SmallArms
 - `NaxiBeetleLaser_elite` (ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to SmallArms
 - `NaxiTank2Laser` (ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to SmallArms
-
-### FlakWeapon, Grenade, HeavyMissile, MediumMissile (3 weapons)
-- `227mm` (weapons\tiberiandawn.yaml) | dominant: Grenade(2000) | Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, HeavyMissile=2000, HeavyMissilePercentage=1, MediumMissile=2000, MediumMissilePercentage=1, Effect=0 | → collapse to Grenade
-- `GDIRigMissilePod` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: Grenade(8000) | Grenade=8000, GrenadeFriendlyFire=4000, GrenadePercentage=4, FlakWeapon=8000, FlakWeaponPercentage=4, HeavyMissile=8000, HeavyMissilePercentage=4, MediumMissile=8000, MediumMissilePercentage=4, Effect=0 | → collapse to Grenade
-- `MammothTusk` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | dominant: Grenade(6000) | Grenade=6000, GrenadeFriendlyFire=3000, GrenadePercentage=3, FlakWeapon=6000, FlakWeaponPercentage=3, MediumMissile=6000, MediumMissilePercentage=3, HeavyMissile=6000, HeavyMissilePercentage=3, Effect=0 | → collapse to Grenade
 
 ### Chaingun, FlakWeapon, Grenade, SmallArms (2 weapons)
 - `ChainGunMH60` (ContentPacks\RedAlert\Allies\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, Chaingun=2000, ChaingunPercentage=1 | → collapse to SmallArms

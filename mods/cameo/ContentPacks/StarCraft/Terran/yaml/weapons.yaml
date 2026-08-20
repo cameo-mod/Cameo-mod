@@ -1004,11 +1004,7 @@ GoliathMG:
 		Damage: 1
 
 GoliathRockets_AA:
-	Inherits: ^Chaingun
-	Inherits@2: ^FlakWeapon
-	Inherits@3: ^LightMissile
-	Inherits@4: ^MediumMissile
-	Inherits@5: ^D2KRocket
+	Inherits: ^D2KRocket
 	Range: 6000
 	ReloadDelay: 33
 	Report: HKMISSLE.aud
@@ -1023,27 +1019,20 @@ GoliathRockets_AA:
 		Acceleration: 5
 		CloseEnough: 500
 		AllowSnapping: true
-	Warhead@Chaingun: SpreadDamage
-		Damage: 6000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 3
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 6000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 3
-	Warhead@LightMissile: SpreadDamage
-		Damage: 6000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 3
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 6000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 3
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
 	Warhead@MissileAP_Heavy:
-		Damage: 6000
+		Damage: 30000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
-		Damage: 3
+		Damage: 15
 
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 GoliathMk2MG:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -1122,11 +1111,7 @@ GoliathMk2Rockets:
 		Damage: 4
 
 WraithRockets_AA:
-	Inherits: ^Chaingun
-	Inherits@2: ^FlakWeapon
-	Inherits@3: ^LightMissile
-	Inherits@4: ^MediumMissile
-	Inherits@5: ^D2KRocket
+	Inherits: ^D2KRocket
 	Report: TPhFi200.aud
 	ReloadDelay: 24
 	Range: 5076
@@ -1143,27 +1128,18 @@ WraithRockets_AA:
 		AllowSnapping: true
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: 88BBFF44
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@LightMissile: SpreadDamage
-		Damage: 2000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 1
+		ContrailZOffset: 4000
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
 	Warhead@MissileAP_Heavy:
-		Damage: 2000
+		Damage: 10000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
-		Damage: 1
+		Damage: 5
 
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 WraithLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -1184,11 +1160,7 @@ WraithLaser:
 		Damage: 8
 
 SunDogRockets:
-	Inherits: ^Chaingun
-	Inherits@2: ^FlakWeapon
-	Inherits@3: ^LightMissile
-	Inherits@4: ^MediumMissile
-	Inherits@5: ^D2KRocket
+	Inherits: ^D2KRocket
 	Report: TPhFi200.aud
 	ReloadDelay: 39
 	Range: 6060
@@ -1203,27 +1175,20 @@ SunDogRockets:
 		Acceleration: 5
 		CloseEnough: 500
 		AllowSnapping: true
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@LightMissile: SpreadDamage
-		Damage: 2000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 1
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
 	Warhead@MissileAP_Heavy:
-		Damage: 2000
+		Damage: 10000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
-		Damage: 1
+		Damage: 5
 
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 SunDogLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -1621,11 +1586,7 @@ PhobosLaser:
 		ValidTargets: Air
 
 MissileTurret:
-	Inherits: ^Chaingun
-	Inherits@2: ^FlakWeapon
-	Inherits@3: ^LightMissile
-	Inherits@4: ^MediumMissile
-	Inherits@5: ^D2KRocket
+	Inherits: ^D2KRocket
 	Report: TPhFi200.aud
 	ReloadDelay: 30
 	Range: 11626
@@ -1640,27 +1601,20 @@ MissileTurret:
 		Acceleration: 5
 		CloseEnough: 500
 		AllowSnapping: true
-	Warhead@Chaingun: SpreadDamage
-		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@LightMissile: SpreadDamage
-		Damage: 4000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 4000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 2
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
 	Warhead@MissileAP_Heavy:
-		Damage: 4000
+		Damage: 20000
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
-		Damage: 2
+		Damage: 10
 
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 SCVULTURESUMMON:
 	ReloadDelay: 5
 	Projectile: InstantExplode

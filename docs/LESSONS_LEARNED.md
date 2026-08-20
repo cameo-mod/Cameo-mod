@@ -235,6 +235,12 @@ Likewise, `ImpactActors: false` on `Warhead@Effect` can come from an old full-st
 
 **Rule:** after reparenting a weapon, run `review_resolve_diff.py` and explicitly verify `EffectWater` and `ImpactActors` against the pre-conversion baseline; add local overrides when the new effect family drops them.
 
+### D2KRocket contrail visuals also need preserving
+
+The `^D2KRocket` archetype inherits `^Projectile_Missile_Heavy`, which does **not** carry the flak-bullet contrail visual fields (`ContrailZOffset`, `ContrailStartColor`, `ContrailEndColor`, `ContrailStartWidth`, `ContrailEndWidth`) that the old `^Chaingun`/`^FlakWeapon` stack contributed. A weapon that previously resolved with those colours will revert to no contrail visuals unless they are added as local `Projectile` overrides. `review_resolve_diff.py` checks `Proj.CStart`/`CEnd`, so the loss is caught, but `ContrailZOffset`/`StartWidth`/`EndWidth` must be inspected manually.
+
+**Rule:** when collapsing a mixed-stack weapon to `^D2KRocket`, dump the resolved `Projectile` block before and after, and copy any missing visual fields into the local `Projectile` override.
+
 ---
 
 ## Latest lessons from the July 2026 infantry rebalance pass
