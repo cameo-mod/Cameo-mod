@@ -81,3 +81,29 @@
 	-Warhead@EffectAir:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 240
+
+## D2K per-game PROJECTILE templates for the cannon/shell family.
+
+^Projectile_Shell_Medium_D2K:
+	Inherits: ^Projectile_Shell
+	Projectile: Bullet
+		Speed: 640
+		Inaccuracy: 16
+		InaccuracyType: PerCellIncrement
+		Image: d2k_120mm
+		Palette: d2keffect
+
+## D2K per-game EFFECT templates for the cannon/shell family.
+
+^Effect_CannonHE_Medium_D2K:
+	Inherits: ^Effect_CannonHE_Medium
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_napalm
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1000

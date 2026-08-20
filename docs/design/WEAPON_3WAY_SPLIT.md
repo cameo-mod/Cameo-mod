@@ -274,7 +274,9 @@ BOM-safe, Report in the PROJECTILE layer, damage always preserved.
 
 D2K heavy missile/rocket HE 3-way split: created `ContentPacks/D2k/Shared/yaml/weapons.yaml`
 with the per-game `^Projectile_Missile_Heavy_D2K` and `^Effect_MissileHE_Heavy_D2K` layers,
-reparented the six D2K rocket cluster weapons to `^Warhead_MissileHE_Heavy`, and boot-gated.
+reparented the six D2K rocket cluster weapons to `^Warhead_MissileHE_Heavy`, and boot-gated;
+followed by `^D2K_Cannon` repointed to the per-game `^Projectile_Shell_Medium_D2K` and
+`^Effect_CannonHE_Medium_D2K` layers (preserving the d2k_120mm and d2k_small_napalm visuals).
 
 **RESUME — Phase 2 remaining families** (one commit each: `--old <names>` → self-check → boot → commit):
 `LightMissile,MediumMissile,HeavyMissile` + `FlakWeapon,HeavyAAWeapon` → then

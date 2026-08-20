@@ -112,24 +112,9 @@ Debris4:
 
 ^D2K_Cannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
-	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium_D2K
+	Inherits@fx: ^Effect_CannonHE_Medium_D2K
 	Report: MEDTANK1.WAV
-	Projectile: Bullet
-		Speed: 640
-		Inaccuracy: 16
-		InaccuracyType: PerCellIncrement
-		Image: d2k_120mm
-		Palette: d2keffect
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: SandCrater, RockCrater
-		InvalidTargets: Vehicle, Structure
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_small_napalm
-		ImpactActors: false
-		ExplosionPalette: effect75alpha
-	Warhead@Concrete: DamagesConcrete
-		Damage: 1000
 	Warhead@CannonHE_Medium:
 		Damage: 8000
 
