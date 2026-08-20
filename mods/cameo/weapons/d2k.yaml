@@ -61,7 +61,7 @@ Debris2:
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_small_napalm
 		ExplosionPalette: effect75alpha
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 2250
 
 Debris3:
@@ -77,7 +77,7 @@ Debris3:
 		Damage: 8000
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1350
 
 Debris4:
@@ -182,7 +182,7 @@ DevBullet:
 		ValidTargets: Ground, Water
 		Spread: 666
 		Damage: 5
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 3333
 	Warhead@3Eff: CreateEffect
 		Explosions: d2k_shockwave
@@ -229,7 +229,7 @@ D2K_155mm:
 		Damage: 12000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 5625
 
 D2K_SiegeQuad:
@@ -352,7 +352,7 @@ mtank_pri:
 	Warhead@1Dam: SpreadDamage
 		Damage: 15000
 		ValidTargets: Ground, Air
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1000
 
 	MinRange: 2050
@@ -619,7 +619,7 @@ Sound:
 			Heavy: 99
 			Concrete: 77
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
-	Warhead@3Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1500
 
 Sound2:
@@ -634,7 +634,7 @@ Sound2:
 		Damage: 4000
 	Warhead@2Dam: SpreadDamage
 		Damage: 400
-	Warhead@3Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 800
 
 Combat_Tank_F_Sound:
@@ -834,7 +834,7 @@ DeathHandCluster:
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLSML4.WAV
 		ExplosionPalette: effect75alpha
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 4500
 
 # SardaukarDroppodSpawner:
@@ -1015,7 +1015,7 @@ CrateExplosion:
 		ImpactSounds: EXPLSML4.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
-	Warhead@2Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 4500
 
 D2KUnitExplodeSmall:
@@ -1087,7 +1087,7 @@ SardDeath:
 		ImpactSounds: EXPLSML2.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 450
 
 PlasmaExplosion:
@@ -1110,7 +1110,7 @@ PlasmaExplosion:
 		Explosions: devastator
 		ImpactSounds: EXPLLG2.WAV
 		ExplosionPalette: effect75alpha
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 20000
 
 d2k_munitions_explosion_h:
@@ -1390,7 +1390,7 @@ Fremen_RPG:
 			Medium: 85
 			Heavy: 70
 			Concrete: 35
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 625
 
 	MinRange: 975
@@ -1411,7 +1411,7 @@ HMG:
 			Medium: 15
 			Heavy: 10
 			Concrete: 15
-	Warhead@3Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1800
 
 HMG_fremen:
@@ -1493,7 +1493,7 @@ OrniGun:
 		Explosions: d2k_piffs
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
-	Warhead@3Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1250
 
 OrniGunC:
@@ -1667,7 +1667,7 @@ d2kFlamegun:
 	Warhead@2Eff: CreateEffect
 		Explosions: flame
 		ExplosionPalette: effect75alpha
-	Warhead@3Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 100
 
 d2kFlameTurret:
@@ -1741,7 +1741,7 @@ PhoenixRocket:
 		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 		ExplosionPalette: effect
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1250
 	Warhead@Shrapnel: FireShrapnel
 		Weapon: PhoenixRocketShrapnel
@@ -2114,7 +2114,7 @@ d2k_sard_crossbow:
 		Explosions: d2k_small_napalm
 		ExplosionPalette: effect75alpha
 		ImpactActors: false
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 540
 
 o110mm_Gun:
@@ -2127,7 +2127,7 @@ o110mm_Gun:
 		Blockable: false
 	Warhead@1Dam: SpreadDamage
 		Damage: 2900
-	Warhead@2Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 2900
 
 o80mm_A:
@@ -2161,7 +2161,7 @@ oDevBullet:
 			invulnerable: 0
 			Concrete: 40
 			harvester: 100
-	Warhead@2Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 3250
 	Warhead@3Eff: CreateEffect
 		Explosions: d2k_shockwave
@@ -2196,7 +2196,7 @@ o155mm:
 			Concrete: 20
 			harvester: 25
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-	Warhead@2Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 5625
 	Warhead@3Eff: CreateEffect
 		Explosions: d2k_med_explosion
@@ -2255,7 +2255,7 @@ oRocket:
 			Concrete: 20
 			harvester: 50
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
-	Warhead@2Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 625
 
 oTowerMissile:
@@ -2284,7 +2284,7 @@ omtank_pri:
 	Warhead@MissileAP_Heavy:
 		Damage: 6000
 		ValidTargets: Ground, Air
-	Warhead@2Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 900
 
 oDeviatorMissile:
@@ -2319,7 +2319,7 @@ oDeviatorMissile:
 		Range: 750
 		Duration: 250
 		InvalidTargets: Infantry, Structure
-	Warhead@5Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1000
 
 oSound:
@@ -2364,7 +2364,7 @@ oSound:
 			Heavy: 99
 			Concrete: 77
 		DamageTypes: Prone50Percent, TriggerProne, SoundDeath
-	Warhead@3Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1720
 
 oOrniBomb:
@@ -2400,7 +2400,7 @@ oOrniBomb:
 		ImpactSounds: EXPLSML4.WAV
 		ExplosionPalette: effect75alpha
 		ImpactActors: false
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 6750
 
 oCrush:
@@ -2465,7 +2465,7 @@ oDeathHandCluster:
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLSML4.WAV
 		ExplosionPalette: effect75alpha
-	Warhead@2Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 4500
 
 oUnitExplodeSmall:
@@ -2534,7 +2534,7 @@ ogrenade:
 		ImpactSounds: EXPLMD2.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1875
 
 oGrenDeath:
@@ -2558,7 +2558,7 @@ oGrenDeath:
 		ImpactSounds: EXPLSML4.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1875
 
 oSardDeath:
@@ -2582,7 +2582,7 @@ oSardDeath:
 		ImpactSounds: EXPLSML2.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 450
 
 oPlasmaExplosion:
@@ -2602,7 +2602,7 @@ oPlasmaExplosion:
 	Warhead@3Eff: CreateEffect
 		Explosions: devastator
 		ExplosionPalette: effect75alpha
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 20000
 
 ^OMG:
@@ -2627,7 +2627,7 @@ oPlasmaExplosion:
 		Explosions: d2k_piffs
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
-	Warhead@3Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1250
 
 oLMG:
@@ -2666,7 +2666,7 @@ oM_HMG:
 			invulnerable: 0
 			Concrete: 20
 			harvester: 50
-	Warhead@2Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 625
 
 oM_HMG_H:
@@ -2690,7 +2690,7 @@ oHMG:
 		Spread: 160
 		Falloff: 100, 60, 30, 0
 		Damage: 1800
-	Warhead@2Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1800
 
 oHMGo:
@@ -2743,7 +2743,7 @@ oDebris:
 		Explosions: d2k_tiny_explosion
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 300
 
 oDebris2:
@@ -2768,7 +2768,7 @@ oDebris2:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@3Eff: CreateEffect
 		Explosions: d2k_small_napalm
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 2250
 
 oDebris3:
@@ -2778,7 +2778,7 @@ oDebris3:
 		TrailImage: small_trail2
 	Warhead@1Dam: SpreadDamage
 		Damage: 1500
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1350
 
 oDebris4:

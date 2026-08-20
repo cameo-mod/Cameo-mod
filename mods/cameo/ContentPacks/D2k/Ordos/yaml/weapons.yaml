@@ -231,7 +231,7 @@ eye_bomberguy:
 		ImpactSounds: EXPLSML4.WAV
 		ExplosionPalette: effect75alpha
 		ImpactActors: false
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1875
 
 D2K_155mm_turret:
@@ -262,7 +262,7 @@ D2K_155mm_turret:
 		Damage: 12000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 5625
 
 Dune_SiegeMortar:
@@ -630,7 +630,7 @@ d2k_grenade:
 		ImpactSounds: EXPLMD2.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1875
 
 Laboratory_Bioball:
@@ -714,7 +714,7 @@ Laboratory_Bioball:
 		UsePlayerPalette: true
 		ImpactSounds: bioball_impact.wav
 		ImpactActors: false
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1875
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 2
@@ -894,7 +894,7 @@ GrenDeath:
 		ImpactSounds: EXPLSML4.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 1875
 
 SaboDeath:

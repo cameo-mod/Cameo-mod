@@ -52,6 +52,7 @@
 	-Warhead@DuneRock:
 	-Warhead@DuneSand:
 	-Warhead@RA2Crater:
+	-Warhead@Concrete
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -69,6 +70,7 @@
 	-Warhead@DuneRock:
 	-Warhead@DuneSand:
 	-Warhead@RA2Crater:
+	-Warhead@Concrete
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -87,6 +89,7 @@
 	-Warhead@DuneRock:
 	-Warhead@DuneSand:
 	-Warhead@RA2Crater:
+	-Warhead@Concrete
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -104,6 +107,7 @@
 	-Warhead@DuneRock:
 	-Warhead@DuneSand:
 	-Warhead@RA2Crater:
+	-Warhead@Concrete
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
@@ -119,14 +123,34 @@
 ## while keeping the D2K AP rocket/missile smudge and concrete.
 
 ^Effect_MissileAP_Heavy_D2K_Rocket_Blast:
-	Inherits: ^Effect_MissileAP_Heavy_D2K_Rocket
+	Inherits: ^Effect_MissileAP_Heavy
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
+	-Warhead@Concrete
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_rocket_explosion
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+		ValidTargets: Ground, Air
 
 ^Effect_MissileAP_Heavy_D2K_Missile_Blast:
-	Inherits: ^Effect_MissileAP_Heavy_D2K
+	Inherits: ^Effect_MissileAP_Heavy
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
+	-Warhead@Concrete
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_rocket_explosion
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+		ValidTargets: Ground, Air
 
 ## D2K per-game PROJECTILE templates for the cannon/shell family.
 
@@ -143,6 +167,7 @@
 
 ^Effect_CannonHE_Medium_D2K:
 	Inherits: ^Effect_CannonHE_Medium
+	-Warhead@Concrete
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure
@@ -167,12 +192,13 @@
 	Report: ROCKET1.WAV
 
 ^D2KMissile:
-	Inherits: ^D2KRocket
+	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K
 	ReloadDelay: 60
 	Range: 5500
 	MinRange: 1100
+	Report: ROCKET1.WAV
 
 ## D2K old full-stack ^ORocket and ^OMissile 3-way split templates.
 ## These preserve the old SpreadDamage warheads, projectiles, and effect stacks
@@ -237,19 +263,26 @@
 		ExplosionPalette: effect75alpha
 		ImpactActors: false
 		ValidTargets: Ground, Air
-	Warhead@3Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 240
 
 ^Effect_MissileAP_Heavy_D2K_OMissile:
-	Inherits: ^Effect_MissileAP_Heavy_D2K_ORocket
-	Warhead@2Concrete: DamagesConcrete
-		Damage: 720
+	Inherits: ^Effect_MissileAP_Heavy
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
+	-Warhead@Concrete
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: d2k_small_explosion
 		ImpactSounds: EXPLSML1.WAV
 		ExplosionPalette: effect75alpha
 		ImpactActors: false
 		ValidTargets: Ground, Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 720
 
 ## D2K per-game PROJECTILE and EFFECT templates for the debris/grenade family.
 
@@ -293,6 +326,10 @@
 
 ^Effect_Demolition_Heavy_D2K_155mm:
 	Inherits: ^Effect_Demolition_Heavy
+	-Warhead@Concrete
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_med_explosion
 		ImpactSounds: EXPLMD2.WAV
@@ -300,6 +337,7 @@
 
 ^Effect_Demolition_Heavy_D2K_155mm2:
 	Inherits: ^Effect_Demolition_Heavy
+	-Warhead@Concrete
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLMD2.WAV
@@ -381,5 +419,5 @@
 		ImpactSounds: EXPLSML4.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 7500

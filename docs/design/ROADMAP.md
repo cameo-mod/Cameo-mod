@@ -1632,6 +1632,12 @@ window.
   references in any D2k ContentPack yaml. All hyphens found are
   engine-defined conditions/sequence names (build-incomplete, damaged-idle,
   etc.) which are engine-owned and stay as-is per DESIGN.md §1.
+- [x] **D2K shared effect-template concrete cleanup** (2026-08-20) —
+  resolved duplicate `DamagesConcrete` warheads across the D2K rocket/missile/
+  155mm effect families, fixed `^D2KMissile`/`^D2KRocket`/`^ORocket`/`^OMissile`
+  3-way split inheritance, `effect_audit` reports 0 duplicate concrete warheads,
+  boot-gated with `MenuPostProcessEffect.PostWorldLoaded` and no new
+  exception log.
 - Note: 7 Ordos armor-rework files are the maintainer's live WIP — leave.
 
 ---

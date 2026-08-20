@@ -39,6 +39,22 @@ Do not modify rules, assets, or balance numbers until these documents are in con
   `*-content` mod convention; it is an explicit exception to Cameo's
   underscore-only in-mod naming rule.
 
+## Weapon effect-layer `DamagesConcrete` handling (2026-08-20)
+
+- `DamagesConcrete` is a separate warhead trait. It is NOT automatically
+  redundant with `SpreadDamage` or `AreaDamage`; it must be preserved unless the
+  source behavior proves it is accidental or duplicate.
+- When a weapon inherits multiple effect templates (e.g. old full-stack or
+  3-way-split intermediates), the same `DamagesConcrete` node can be inherited
+  more than once. Use `tools/audit/effect_audit.py` (or `scratchpad/`) to scan
+  all resolved weapons; the target is **0 weapons with >1 `DamagesConcrete`**.
+- Effect templates should remove inherited generic concrete with
+  `-Warhead@Concrete` and re-add a single `Warhead@Concrete: DamagesConcrete`
+  with the intended local value when the effect is meant to be standalone.
+- Weapon children that need a different concrete value should override with a
+  single `Warhead@Concrete:` key; matching keys merge, so only the last value
+  survives.
+
 ## Contents
 
 - [Latest lessons from the July 2026 infantry rebalance pass](#latest-lessons-from-the-july-2026-infantry-rebalance-pass)
