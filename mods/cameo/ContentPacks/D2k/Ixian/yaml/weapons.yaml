@@ -143,6 +143,8 @@ D2K_155mm2:
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^ShrapnelWeapon
 	Inherits@4: ^HeavyBomb
+	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
+	Inherits@fx: ^Effect_Demolition_Heavy_D2K_155mm2
 	Range: 12000
 	Burst: 3
 	BurstDelays: 12
@@ -151,8 +153,6 @@ D2K_155mm2:
 	TargetActorCenter: true
 	Projectile: Bullet
 		Speed: 120
-		Blockable: false
-		Shadow: true
 		LaunchAngle: 120
 		ContrailLength: 24
 		Inaccuracy: 120
@@ -162,8 +162,6 @@ D2K_155mm2:
 		ContrailStartWidth: 120
 		ContrailEndWidth: 24
 		InaccuracyType: PerCellIncrement
-		Image: d2k_155mm
-		Palette: d2keffect
 	Warhead@Grenade: SpreadDamage
 		Damage: 12000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -193,11 +191,6 @@ D2K_155mm2:
 		Damage: 6
 	-Warhead@Effect1:
 	-Warhead@Effect2:
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_large_explosion
-		ImpactSounds: EXPLMD2.WAV
-		ExplosionPalette: effect75alpha
-		ImpactActors: false
 
 D2K_155mm3:
 	Inherits@wh: ^Warhead_Demolition_Light

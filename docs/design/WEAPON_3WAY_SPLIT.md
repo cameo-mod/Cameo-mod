@@ -290,7 +290,10 @@ then `D2K_Rocket` and `Fremen_RPG` moved their `d2k_rocket_explosion` effect
 into `^Effect_MissileAP_Heavy_D2K_Rocket_Blast` and
 `^Effect_MissileAP_Heavy_D2K_Missile_Blast` while keeping their custom
 concrete and warhead stacks; then `oRocket` moved its `d2k_rocket_explosion`
-effect into `^Effect_MissileAP_Heavy_D2K_Rocket_Blast`.
+effect into `^Effect_MissileAP_Heavy_D2K_Rocket_Blast`;
+then `D2K_155mm2` moved its `d2k_155mm` grenade projectile and
+`d2k_large_explosion` effect into `^Projectile_Grenade_Light_D2K_155mm`
+and `^Effect_Demolition_Heavy_D2K_155mm2`.
 
 **RESUME — Phase 2 remaining families** (one commit each: `--old <names>` → self-check → boot → commit):
 `LightMissile,MediumMissile,HeavyMissile` + `FlakWeapon,HeavyAAWeapon` → then
