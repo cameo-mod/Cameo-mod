@@ -115,6 +115,19 @@
 	Warhead@Concrete: DamagesConcrete
 		Damage: 240
 
+## D2K per-game EFFECT templates for weapons that use the larger d2k_rocket_explosion
+## while keeping the D2K AP rocket/missile smudge and concrete.
+
+^Effect_MissileAP_Heavy_D2K_Rocket_Blast:
+	Inherits: ^Effect_MissileAP_Heavy_D2K_Rocket
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_rocket_explosion
+
+^Effect_MissileAP_Heavy_D2K_Missile_Blast:
+	Inherits: ^Effect_MissileAP_Heavy_D2K
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_rocket_explosion
+
 ## D2K per-game PROJECTILE templates for the cannon/shell family.
 
 ^Projectile_Shell_Medium_D2K:

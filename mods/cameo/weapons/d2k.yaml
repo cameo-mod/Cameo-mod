@@ -250,15 +250,13 @@ D2K_Bazooka:
 
 D2K_Rocket:
 	Inherits: ^D2KRocket
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Blast
 	ReloadDelay: 30
 	Range: 4608
 	Projectile: Bullet
 		Speed: 400
 	Warhead@Concrete: DamagesConcrete
 		Damage: 625
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_rocket_explosion
-		ExplosionPalette: effect75alpha
 
 D2K_Rocket_AA:
 	Inherits: ^D2KMissile
@@ -1399,6 +1397,7 @@ Arrakis_Tanya_Guns:
 
 Fremen_RPG:
 	Inherits: ^D2KMissile
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Missile_Blast
 	ReloadDelay: 45
 	Range: 4864
 	ValidTargets: Air, Vehicle, Structure
@@ -1419,9 +1418,6 @@ Fremen_RPG:
 			Concrete: 35
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 625
-	Warhead@3Eff: CreateEffect
-		Explosions: d2k_rocket_explosion
-		ExplosionPalette: effect75alpha
 
 	MinRange: 975
 HMG:
