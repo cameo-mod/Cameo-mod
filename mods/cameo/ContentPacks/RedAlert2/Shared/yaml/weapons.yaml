@@ -413,6 +413,10 @@
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 
+^Effect_Explosion_Medium_RA2_NoGlow:
+	Inherits@fx: ^Effect_Explosion_Medium_RA2
+	-Warhead@Glow:
+
 ^Effect_Grey_Explosion_Medium_RA2:
 	Inherits: ^Effect_MissileHE_Medium
 	Warhead@Effect: CreateEffect
@@ -959,7 +963,8 @@ RA2sabot_elite:
 RA2MirageGun:
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^RA2TankDestroyerCannon
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_Iron_Fx_RA2
 	ReloadDelay: 39
 	Range: 6031
@@ -1091,7 +1096,7 @@ RA2MultiHoverMissile:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_MissileHE_Light
+	Inherits@fx: ^Effect_MissileHE_Light_Glow
 	Range: 6170
 	ReloadDelay: 20
 	Burst: 4
@@ -1134,7 +1139,7 @@ RA2MultiThunderboltMissile:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
-	Inherits@fx: ^Effect_MissileHE_Light
+	Inherits@fx: ^Effect_MissileHE_Light_Glow
 	Report: bazook1.aud
 	Projectile: Missile
 		Speed: 800

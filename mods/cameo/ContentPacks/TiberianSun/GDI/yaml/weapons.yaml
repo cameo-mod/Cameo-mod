@@ -48,7 +48,7 @@ TS120mmRail:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
-	Inherits@fx: ^Effect_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy_Glow
 	Report: bigggun1.aud
 	ReloadDelay: 44
 	Range: 6201
@@ -83,7 +83,7 @@ TS120mmTalRail:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
-	Inherits@fx: ^Effect_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy_Glow
 	Report: bigggun1.aud
 	ReloadDelay: 50
 	Range: 6201
@@ -256,7 +256,7 @@ KodiakCannonSonic:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@wh2: ^Warhead_Sonic_Heavy
 	Inherits@proj: ^Projectile_Sonic_Shell
-	Inherits@fx: ^Effect_Sonic_Shell
+	Inherits@fx: ^Effect_Sonic_Shell_Glow
 	Range: 9165
 	ReloadDelay: 86
 	Burst: 3
@@ -617,10 +617,9 @@ TSDestroyerMissiles:
 		Damage: 2
 
 TSMammothTusk2:
-	Inherits@glow: ^ImpactGlow
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy_Glow
 	ValidTargets: Air
 	Projectile: Missile
 		Speed: 500
@@ -646,10 +645,9 @@ TSMammothTusk2:
 		Explosions: small_building
 
 TSMammothTusk2II_AA:
-	Inherits@glow: ^ImpactGlow
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy_Glow
 	ValidTargets: Air
 	Projectile: Missile
 		Speed: 500
@@ -679,7 +677,7 @@ TSMammothTusk2II_AA:
 TSHellfireSonic:
 	Inherits@wh: ^Warhead_Sonic_Medium
 	Inherits@proj: ^Projectile_TS_Missile_Medium
-	Inherits@fx: ^Effect_Sonic_Medium
+	Inherits@fx: ^Effect_Sonic_Medium_Glow
 	ReloadDelay: 60
 	Range: 6144
 	Report: orcamis1.aud
@@ -710,7 +708,7 @@ TSZoneHellfireSonic:
 	Inherits: TSHellfireSonic
 	Inherits@wh: ^Warhead_Sonic_Heavy
 	Inherits@proj: ^Projectile_TS_Missile_Heavy
-	Inherits@fx: ^Effect_Sonic_Heavy
+	Inherits@fx: ^Effect_Sonic_Heavy_Glow
 	ReloadDelay: 28
 	Range: 6138
 	Report: orcamis1.aud
