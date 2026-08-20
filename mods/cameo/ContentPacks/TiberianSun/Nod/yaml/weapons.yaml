@@ -111,13 +111,9 @@ TSTibBazooka:
 	Warhead@ChemMissile_Light:
 		Damage: 30000
 		FriendlyFireDamage: 90
-		PhysicalStates:
-			Corrosion: 20
 	Warhead@ChemMissile_Light_Percentage:
 		Damage: 15
 		FriendlyFireDamage: 90
-		PhysicalStates:
-			Corrosion: 20
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud

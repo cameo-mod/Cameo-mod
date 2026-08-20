@@ -1776,8 +1776,8 @@
 			Bomber: 16
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStates:
+			Corrosion: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 175
@@ -1803,8 +1803,8 @@
 			Fighter: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStates:
+			Corrosion: 100
 	#Warhead@Smudge: LeaveSmudge
 	#	SmudgeType: Scorch
 	#	InvalidTargets: Vehicle, Structure, wall
@@ -1860,8 +1860,8 @@
 			Bomber: 30
 			Fighter: 25
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStates:
+			Corrosion: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 350
@@ -1887,8 +1887,8 @@
 			Fighter: 5
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStates:
+			Corrosion: 100
 	#Warhead@Smudge: LeaveSmudge
 	#	SmudgeType: Scorch
 	#	InvalidTargets: Vehicle, Structure, wall
@@ -1947,8 +1947,8 @@
 			Bomber: 44
 			Fighter: 40
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStates:
+			Corrosion: 100
 	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 525
@@ -1974,8 +1974,8 @@
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		UpdatesUnitStatistics: false
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStates:
+			Corrosion: 100
 	#Warhead@Smudge: LeaveSmudge
 	#	SmudgeType: Scorch
 	#	InvalidTargets: Vehicle, Structure, wall
@@ -5224,8 +5224,8 @@ DefuseKit:
 			Bomber: 50
 			Fighter: 48
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStates:
+			Corrosion: 100
 	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -5250,8 +5250,8 @@ DefuseKit:
 			Bomber: 2
 			Fighter: 1
 		UpdatesUnitStatistics: false
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStates:
+			Corrosion: 100
 
 ^Warhead_Chemical_Medium:
 	ValidTargets: Ground, Water
@@ -5290,8 +5290,8 @@ DefuseKit:
 			Bomber: 48
 			Fighter: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStates:
+			Corrosion: 100
 	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -5316,8 +5316,8 @@ DefuseKit:
 			Bomber: 6
 			Fighter: 5
 		UpdatesUnitStatistics: false
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStates:
+			Corrosion: 100
 
 ^Warhead_Chemical_Heavy:
 	ValidTargets: Ground, Water
@@ -5356,8 +5356,8 @@ DefuseKit:
 			Bomber: 58
 			Fighter: 49
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStates:
+			Corrosion: 100
 	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
@@ -5382,8 +5382,8 @@ DefuseKit:
 			Bomber: 11
 			Fighter: 10
 		UpdatesUnitStatistics: false
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStates:
+			Corrosion: 100
 
 
 ###### Toxic: INF > BLD > VEH > AIR (light, air=True) ######
@@ -6786,9 +6786,9 @@ DefuseKit:
 			Heroic: 73
 			Steel: 68
 			Wood: 66
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
-			Corrosion: 50
+			Corrosion: 20
 	Warhead@ChemMissile_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
@@ -6850,9 +6850,9 @@ DefuseKit:
 			Heroic: 63
 			Fighter: 58
 			Wood: 53
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
-			Corrosion: 50
+			Corrosion: 33
 	Warhead@ChemMissile_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
@@ -6914,7 +6914,7 @@ DefuseKit:
 			Heroic: 68
 			Wood: 59
 			Fighter: 58
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 50
 	Warhead@ChemMissile_Heavy_Percentage: AreaDamagePercentage
@@ -6979,9 +6979,9 @@ DefuseKit:
 			Helicopter: 66
 			Bomber: 64
 			Fighter: 59
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
-			Corrosion: 50
+			Corrosion: 20
 	Warhead@ChemCannon_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
@@ -7043,9 +7043,9 @@ DefuseKit:
 			Helicopter: 59
 			Bomber: 53
 			Fighter: 41
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
-			Corrosion: 50
+			Corrosion: 33
 	Warhead@ChemCannon_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
@@ -7107,7 +7107,7 @@ DefuseKit:
 			Wood: 72
 			Bomber: 61
 			Fighter: 49
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 50
 	Warhead@ChemCannon_Heavy_Percentage: AreaDamagePercentage
@@ -9682,6 +9682,28 @@ DefuseKit:
 	Inherits: ^Projectile_Shell
 	Projectile: ScaledBullet
 		Inaccuracy: 450
+
+^Projectile_ArtilleryShell_Medium:
+	Projectile: Bullet
+		Image: 120MM
+		Speed: 300
+		Blockable: false
+		LaunchAngle: 165
+		Inaccuracy: 1c0
+		Shadow: true
+		ContrailLength: 10
+		ContrailWidth: 0c32
+
+^Projectile_ArtilleryRocket_Medium:
+	Projectile: Bullet
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		Speed: 333
+		Inaccuracy: 777
+		LaunchAngle: 77
+		Blockable: false
+		Shadow: true
 
 ^Projectile_Sniper_Light:
 	Projectile: Bullet

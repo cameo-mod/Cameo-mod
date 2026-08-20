@@ -157,3 +157,13 @@ and proves nothing (LESSONS_LEARNED).
    resolved behaviour is preserved verbatim.
 3. **Then** the C# defaults, family by family, starting with cannons.
 4. **Separately, through the pipeline:** the 3% → 1% inaccuracy decision, which is balance.
+
+## 6. ✅ IMPLEMENTED — dedicated artillery projectile families
+
+Global `^Projectile_ArtilleryShell_Medium` and `^Projectile_ArtilleryRocket_Medium` now live in
+`mods/cameo/weapons/weapons.yaml`. The rocket family was previously duplicated in
+`mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`; that copy was removed so the global
+family is the single source of truth. `RA2RTruckRocket`, `TSChemVanMissile`, `TSChemMLRSMissile`,
+and `Future_MultiMissile_Frag` all inherit the rocket family and keep their weapon-local
+`Speed` / `Inaccuracy` / `LaunchAngle` / `Arm` overrides. The shell family is used by
+`TSChemJuggerboat90mm`. Both families keep `Blockable: false` and `Shadow: true` by default.

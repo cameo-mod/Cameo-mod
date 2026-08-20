@@ -1443,6 +1443,9 @@ Versus tables live ONLY in the class templates of the central
 warhead-only families (`^Bullet_Light`, `^Bullet_Medium`, `^CannonAP_Light`,
 …) plus 24 projectile templates (`^ProjectileBullet_Light`, …) and 27
 effect templates (`^EffectBullet_Light`, …), for a total of ~85+ templates.
+New dedicated artillery families `^Projectile_ArtilleryShell_Medium` and
+`^Projectile_ArtilleryRocket_Medium` live in `weapons/weapons.yaml`; the
+latter replaces an earlier copy in `ContentPacks/RedAlert2/Shared`.
 All templates are **never modified without an explicit design order**.
 
 **Old 2-inherit model (still valid for unretrofitted weapons):**

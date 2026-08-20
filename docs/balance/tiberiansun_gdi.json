@@ -662,102 +662,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "24000",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "800",
-        "tag": "CannonHE_Heavy",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "12",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -768,17 +684,12 @@
       "requires": "!ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
-       "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy",
-       "^TankDestroyerCannon",
-       "^ShrapnelWeapon",
-       "^Grenade",
-       "^HeavyMissile",
-       "^MediumMissile"
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "TSHellfire",
       "weapon_class_source": "template"
@@ -879,102 +790,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "24000",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "800",
-        "tag": "CannonHE_Heavy",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "12",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
@@ -988,7 +815,7 @@
        "TSHellfire"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "TSZoneHellfire",
       "weapon_class_source": "template"
@@ -5262,102 +5089,18 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "24000",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "800",
-        "tag": "CannonHE_Heavy",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "12",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
@@ -5370,7 +5113,7 @@
        "TSHellfire"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "TSZoneHellfire",
       "weapon_class_source": "template"
@@ -5431,102 +5174,18 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "24000",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "800",
-        "tag": "CannonHE_Heavy",
+        "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "12",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
+        "tag": "MissileAP_Heavy_Percentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
@@ -5539,7 +5198,7 @@
        "TSHellfire"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "TSZoneHellfire",
       "weapon_class_source": "template"

@@ -37,6 +37,19 @@ def scaled_states(warhead):
 	return states
 
 
+def state_scale(warhead, state):
+	if warhead.get("PhysicalStateName") == state:
+		return warhead.get("PhysicalStateScale")
+
+	multiple = warhead.child("PhysicalStates")
+	if multiple:
+		child = multiple.child(state)
+		if child:
+			return child.value
+
+	return None
+
+
 def main() -> int:
 	rs = Ruleset(find_repo_root())
 	problems = []
@@ -54,10 +67,10 @@ def main() -> int:
 			if percentage.value != "AreaDamagePercentage":
 				problems.append(
 					f"{template_name}: percentage warhead is {percentage.value}, expected AreaDamagePercentage")
-			if percentage.get("PhysicalStateName") != expected_state:
+			if expected_state not in scaled_states(percentage):
 				problems.append(
 					f"{template_name}: percentage warhead does not apply {expected_state}")
-			if percentage.get("PhysicalStateScale") != expected_scale:
+			if state_scale(percentage, expected_state) != expected_scale:
 				problems.append(
 					f"{template_name}: percentage warhead scale is not {expected_scale}")
 
@@ -77,8 +90,8 @@ def main() -> int:
 				family = match.group(1)
 				expected_state, expected_scale = EXPECTED_PERCENTAGE_STATES[family]
 				if (warhead.value != "AreaDamagePercentage"
-						or warhead.get("PhysicalStateName") != expected_state
-						or warhead.get("PhysicalStateScale") != expected_scale):
+						or expected_state not in scaled_states(warhead)
+						or state_scale(warhead, expected_state) != expected_scale):
 					problems.append(
 						f"{weapon_name}: {warhead.key} does not feed {expected_state} through AreaDamagePercentage")
 

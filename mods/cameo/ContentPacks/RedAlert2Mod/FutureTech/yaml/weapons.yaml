@@ -629,7 +629,7 @@ Future_MultiMissile_Javelin:
 		ValidTargets: Shielded
 Future_MultiMissile_Frag:
 	Inherits@wh: ^Warhead_Concussion_Heavy
-	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
 	Inherits@fx: ^Effect_Concussion_Heavy
 	ReloadDelay: 56
 	Burst: 3

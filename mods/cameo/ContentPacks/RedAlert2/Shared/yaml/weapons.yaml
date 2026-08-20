@@ -799,15 +799,6 @@
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
 
-^Projectile_ArtilleryRocket_Medium:
-	Projectile: Bullet
-		Speed: 333
-		Inaccuracy: 777
-		Image: d2k_missile2
-		Palette: d2keffect
-		TrailImage: large_trail
-		LaunchAngle: 77
-
 ^RA2HeavyMissile:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
