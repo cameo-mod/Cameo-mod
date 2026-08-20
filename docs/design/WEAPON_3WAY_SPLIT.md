@@ -293,7 +293,14 @@ concrete and warhead stacks; then `oRocket` moved its `d2k_rocket_explosion`
 effect into `^Effect_MissileAP_Heavy_D2K_Rocket_Blast`;
 then `D2K_155mm2` moved its `d2k_155mm` grenade projectile and
 `d2k_large_explosion` effect into `^Projectile_Grenade_Light_D2K_155mm`
-and `^Effect_Demolition_Heavy_D2K_155mm2`.
+and `^Effect_Demolition_Heavy_D2K_155mm2`;
+then the legacy `^ORocket`/`^OMissile` intermediates and their children
+(`oBazooka`, `oRocket`, `oTowerMissile`, `omtank_pri`, `oDeviatorMissile`)
+were converted to 3-way split using new D2K Shared
+`^Warhead_MissileAP_Heavy_D2K_ORocket`, `^Projectile_Missile_Heavy_D2K_ORocket`,
+`^Projectile_Missile_Heavy_D2K_OMissile`, `^Effect_MissileAP_Heavy_D2K_ORocket`,
+and `^Effect_MissileAP_Heavy_D2K_OMissile`, preserving the old `SpreadDamage`
+warhead, projectile fields, effect stacks, concrete values, and smudge behaviour.
 
 **RESUME — Phase 2 remaining families** (one commit each: `--old <names>` → self-check → boot → commit):
 `LightMissile,MediumMissile,HeavyMissile` + `FlakWeapon,HeavyAAWeapon` → then

@@ -2230,60 +2230,22 @@ o155mm:
 		ExplosionPalette: effect75alpha
 
 ^ORocket:
+	Inherits@wh: ^Warhead_MissileAP_Heavy_D2K_ORocket
+	Inherits@proj: ^Projectile_Missile_Heavy_D2K_ORocket
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_ORocket
 	ReloadDelay: 40
 	Range: 3072
 	Report: ROCKET1.WAV
-	Projectile: Bullet
-		Blockable: false
-		Speed: 281
-		Inaccuracy: 256
-		Image: d2k_RPG
-		Palette: d2keffect
-		TrailImage: bazooka_trail2
-		TrailPalette: effect75alpha
-		TrailInterval: 1
-	Warhead@1Dam: SpreadDamage
-		Spread: 192
-		Falloff: 100, 50, 25, 0
-		Damage: 3000
-		Versus:
-			None: 8
-			wall: 75
-			Wood: 45
-			Light: 70
-			Heavy: 100
-			invulnerable: 0
-			Concrete: 20
-			harvester: 50
-		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
-	Warhead@2Smu: LeaveSmudge
-		SmudgeType: SandCrater, RockCrater
-		InvalidTargets: Vehicle, Structure
-	Warhead@3Eff: CreateEffect
-		Explosions: d2k_tiny_explosion
-		ImpactActors: false
-		ValidTargets: Ground, Air
-		ExplosionPalette: effect75alpha
-	Warhead@3Concrete: DamagesConcrete
-		Damage: 240
 
 ^OMissile:
-	Inherits: ^ORocket
+	Inherits@wh: ^Warhead_MissileAP_Heavy_D2K_ORocket
+	Inherits@proj: ^Projectile_Missile_Heavy_D2K_OMissile
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_OMissile
 	ReloadDelay: 60
 	Range: 5500
 	MinRange: 1100
-	Projectile: Missile
-		Shadow: true
-		HorizontalRateOfTurn: 12
-		RangeLimit: 6c614
-		Inaccuracy: 384
-		CruiseAltitude: 1c0
-		MinimumLaunchAngle: 64
-		VerticalRateOfTurn: 40
-		Image: d2k_missile2
-		TrailImage: large_trail
-		Speed: 288
-	Warhead@1Dam: SpreadDamage
+	Report: ROCKET1.WAV
+	Warhead@MissileAP_Heavy:
 		Spread: 256
 		Damage: 4800
 		Versus:
@@ -2295,12 +2257,6 @@ o155mm:
 			invulnerable: 0
 			Concrete: 30
 			harvester: 50
-	Warhead@2Concrete: DamagesConcrete
-		Damage: 720
-	Warhead@3Eff: CreateEffect
-		Explosions: d2k_small_explosion
-		ExplosionPalette: effect75alpha
-		ImpactSounds: EXPLSML1.WAV
 
 oBazooka:
 	Inherits: ^ORocket
@@ -2312,7 +2268,7 @@ oRocket:
 	Range: 3584
 	Projectile: Bullet
 		Speed: 352
-	Warhead@1Dam: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Spread: 160
 		Damage: 2500
 		Versus:
@@ -2324,6 +2280,7 @@ oRocket:
 			invulnerable: 0
 			Concrete: 20
 			harvester: 50
+		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Concrete: DamagesConcrete
 		Damage: 625
 
@@ -2335,7 +2292,7 @@ oTowerMissile:
 	ValidTargets: Ground, Air
 	Projectile: Missile
 		HorizontalRateOfTurn: 4
-	Warhead@1Dam: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Air
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 
@@ -2346,20 +2303,21 @@ omtank_pri:
 	BurstDelays: 115
 	Range: 6144
 	ValidTargets: Ground, Air
+	MinRange: 1230
 	Projectile: Missile
 		Inaccuracy: 96
 		RangeLimit: 7c204
-	Warhead@1Dam: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 6000
 		ValidTargets: Ground, Air
 	Warhead@2Concrete: DamagesConcrete
 		Damage: 900
 
-	MinRange: 1230
 oDeviatorMissile:
 	Inherits: ^OMissile
 	ReloadDelay: 160
 	Range: 5120
+	MinRange: 1025
 	Report: MISSLE1.WAV
 	Projectile: Missile
 		RangeLimit: 6c0
@@ -2367,7 +2325,7 @@ oDeviatorMissile:
 		TrailImage: deviator_trail
 		TrailPalette: deviatorgas
 		TrailUsePlayerPalette: true
-	Warhead@1Dam: SpreadDamage
+	Warhead@MissileAP_Heavy:
 		Damage: 1000
 		Versus:
 			None: 100
@@ -2390,7 +2348,6 @@ oDeviatorMissile:
 	Warhead@5Concrete: DamagesConcrete
 		Damage: 1000
 
-	MinRange: 1025
 oSound:
 	ReloadDelay: 90
 	Range: 5120
