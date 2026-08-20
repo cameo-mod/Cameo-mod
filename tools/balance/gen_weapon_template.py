@@ -259,15 +259,14 @@ PHYSICS_RANK = {
     # direct electrical / EM — current couples straight into the field; the shield IS the conductor
     "Tesla": 1.00, "Storm": 0.95,
     # coherent energy — delivers energy the emitter must absorb; scales with coherence
-    "Quantum": 0.82, "Railgun": 0.78, "Prism": 0.76, "Laser": 0.74,
+    "Quantum": 0.82, "Railgun": 0.78, "Prism": 0.76, "Cryo": 0.75,
+    # Cryo = Laser×Prism coldray: coherent energy with freeze-kinetic. 0.75 sits between its parents.
+    "Laser": 0.74,
     # blended energy — part field-coupling, part thermal
-    "Waveforce": 0.70, "Plasma": 0.68, "Inferno": 0.64,
-    # PhotonCannon = Waveforce 25% + CannonHE 25% + MissileAA 50%, so its shield coupling is the
-    # weighted mean: 0.25 x 0.70 + 0.25 x 0.33 + 0.50 x 0.34 = 0.43. A quarter of it is a resonant
-    # beam that couples to a field; the rest is ordnance, which is what a shield is built to stop.
-    "PhotonCannon": 0.43,
+    "Waveforce": 0.70, "Plasma": 0.68,
     # exotic / field-adjacent
-    "Sonic": 0.60, "Magic": 0.58, "Nuclear": 0.56,
+    "Sonic": 0.60, "Magic": 0.58, "Inferno": 0.57, "Nuclear": 0.56,
+    # Inferno = Flame×Prism heatray: thermo-led but still some field-coupling.
     # thermal / chemical — a shield stops heat and reagents well; little field coupling
     "FireCannon": 0.52, "FireMissile": 0.52, "Flame": 0.50, "ChemCannon": 0.50,
     "ChemMissile": 0.50, "Chemical": 0.48, "Toxic": 0.46, "Thermobaric": 0.44,
@@ -276,7 +275,7 @@ PHYSICS_RANK = {
     "MissileAA": 0.34, "CannonHE": 0.33, "MissileHE": 0.33, "CannonAP": 0.32,
     "MissileAP": 0.32, "Sniper": 0.30,
     # physical contact — the canonical thing a shield stops
-    "Arrow": 0.24, "Melee": 0.22, "Cryo": 0.66,
+    "Arrow": 0.24, "Melee": 0.22,
 }
 # A shield is an ENERGY BUDGET, so a bigger discharge depletes proportionally more of it.
 SHIELD_LEVEL = {"Trace": 0.80, "Light": 0.90, "Medium": 1.00, "Heavy": 1.12, "Super": 1.25}
@@ -559,12 +558,10 @@ COMPOSITION = {
     # chemically INERT where steel and reactive armour are not, so `COMPOSITE` earns a real
     # (partial) answer to it and that is what separates it from flame.
     "Chemical":    {"thermo": 0.75, "shaped": 0.25},
-    # ⚠ Cryo is a PRISM CHASSIS (see INHERIT_FAMILIES: "a prism beam that also freezes") ranked
-    # 0.66 by PHYSICS_RANK — i.e. the shield table has always called it a focused-energy
-    # weapon while its composition said pure thermo. Same drift `Inferno` shipped with. The
-    # kinetic share is cryogenic EMBRITTLEMENT: what actually breaks is frozen material
-    # fracturing, a mechanical failure mode a ceramic matrix partly answers.
-    "Cryo":        {"thermo": 0.65, "energy": 0.25, "kinetic": 0.10},
+    # Cryo is a Laser×Prism coldray: coherent energy delivery that freezes, so the shield
+    # sees mostly field coupling (energy). The thermal load is still real (insulation stops it),
+    # and the kill has a small kinetic share from cryogenic embrittlement of frozen material.
+    "Cryo":        {"energy": 0.55, "thermo": 0.25, "kinetic": 0.20},   # Laser×Prism coldray: energy-led with embrittlement
     "Nuclear":     {"thermo": 0.50, "blast": 0.40, "energy": 0.10},
     # --- ENERGY: radiated or conducted, defeated by REFLECTING or ablating it away.
     #
@@ -587,19 +584,9 @@ COMPOSITION = {
 COMPOSITION_OVERRIDE = {
     # Flame + Chemical gives Plasma a pure thermo reading, but plasma is ionised and radiates.
     "Plasma": {"thermo": 0.55, "energy": 0.45},
-    # Inferno is a PRISM CHASSIS THAT BURNS — a heat ray (`HeatRayBeam1/2`), not a flamethrower.
-    # Maintainer 2026-08-17: *"Inferno which is a heatray so it is kind of both thermal and
-    # energy but MOSTLY THERMAL"*, and earlier: *"shouldn't it be reduced by both hazmat and
-    # reflector armor then? But maybe more by hazmat"*. Both hold here — HAZMAT 49, REFLECTOR 75.
-    #
-    # ⚠ CORRECTION to what this comment used to claim. It said energy had to EXCEED thermo or
-    # "a 50/50 blend CANCELS ... at 50/50 REFLECTOR would sit at exactly 100", which is true of
-    # the RAW row and FALSE of the shipped one: every column is then pinned to
-    # PLATING_TARGET_MEAN, so with the mean at 70 a shipped value only stops being a benefit
-    # above ~143 raw. A thermo-LED heat ray still gets a real reflector benefit (75 < 100). The
-    # ruling that dropped the column mean to 70 is what made the maintainer's reading available;
-    # under the old mean of 100 a 50/50 really did land on ~97, i.e. nothing.
-    "Inferno": {"thermo": 0.60, "energy": 0.40},
+    # Inferno is a Flame×Prism heatray: thermo-led, but delivered as a coherent beam so both
+    # HAZMAT (sealed/insulated) and REFLECTOR (mirror) reduce it, with HAZMAT doing more.
+    "Inferno": {"thermo": 0.65, "energy": 0.35},   # Flame×Prism heatray: thermo-led with field coupling
 }
 
 # The PHYSICS_RANK band boundary, read OFF that table rather than chosen: everything at or below
@@ -1452,31 +1439,38 @@ def at(seq, index):
 # Flame and Chemical also emit meter-aware AreaDamagePercentage twins so their percentage damage
 # contributes to the same meter. The _ExtraDamage chip remains excluded.
 # Cryo is a separate thin child of Prism (Temperature -100), not listed here.
-# ⭐ FULL STRENGTH IS 300, NOT 100 (maintainer 2026-08-18) — and the number is derived, not taste.
+# ⭐ FULL STRENGTH IS ONE KNOB — `METER_FULL`. Everything below is a FRACTION of it, so the
+# maintainer can move the whole system with a single edit instead of 13 hand-divided numbers.
 #
-# A meter only earns its price if it reaches FULL EFFECT while the target is still alive
-# ("cryo is as strong as fire IF it can completely freeze a unit BEFORE it dies"). With
-# `PhysicalState MaxValue: 20000` and `RelativeToHealth: true`, the race works out to
+# The race, corrected 2026-08-18 (`tools/balance/physical_state_price.py` owns the arithmetic):
 #
-#     hits_to_fill / hits_to_kill  =  MaxValue / (scale x 100)  =  200 / scale
+#     hits_to_fill / hits_to_kill = MaxValue x 100 / (Scale x range) = 50 / Scale
 #
-# — the target's HP and the weapon's damage BOTH cancel, so the scale alone decides it. At the old
-# 100 that ratio is exactly 2.0: every flamethrower in the mod filled its meter twice as slowly as
-# it killed, so the effect it was about to be priced for never landed (measured: 1 of 367 weapons
-# reached full effect in time). The bar "full by 25% HP remaining" needs scale >= 267; the
-# maintainer rounded it to 300, which lands full effect at ~33% HP left. See
-# PHYSICAL_STATE_SYSTEM.md and the `meters_filling_before_death` claim.
+# `range = MaxValue - MinValue` = 40000 on BOTH meters now that Corrosion is signed like
+# Temperature. The target's HP and the weapon's damage BOTH cancel, so the constant alone decides
+# it, and the bar ("full effect while 25% HP remains") is ratio <= 0.75.
 #
-# ⚠ Everything below is a FRACTION OF FULL, so all of it scales together — a blend that is half
-# thermal still delivers half a meter, which is the honest reading of a blend and is why blends do
-# NOT all clear the bar. Pricing must follow delivery, not the family name.
+# ⚠ A previous revision here claimed the ratio was `200 / scale`, concluded that every
+# flamethrower filled its meter twice as slowly as it killed, and had the maintainer raise the
+# constant to 300 to fix it. That derivation trusted `PhysicalStateInfo.RelativeToHealth`'s stale
+# [Desc] ("divided by HP/10000") instead of `ScaleChangeToHealth`, and was wrong by 4x.
+# **METER_FULL = 100 already gives ratio 0.50** — full effect with half the target's life left,
+# comfortably inside the bar. 300 was a 3x faster fill than anything needed it to be.
+METER_FULL = 100
+
+
+def _m(fraction: float) -> int:
+    """A meter strength expressed as a share of full. Keeps the per-parent-average rule exact."""
+    return int(round(METER_FULL * fraction))
+
+
 FAMILY_PHYSICAL_STATE = {
-    "Flame":    ("Temperature", 300),   # heat -> overheat/pop
-    "Laser":    ("Temperature", 225),   # laser overheats (main only, chip excluded)
-    "Chemical": ("Corrosion", 300),     # acid -> corrosion meter
-    "Cryo":     ("Temperature", -300),  # prism beam that freezes
-    "Inferno":  ("Temperature", 300),   # prism beam that burns
-    # Plasma (Temperature 150 + Corrosion 150) needs two states on one warhead -> handled at family build.
+    "Flame":    ("Temperature", _m(1.00)),   # heat -> overheat/pop
+    "Laser":    ("Temperature", _m(0.75)),   # laser overheats (main only, chip excluded)
+    "Chemical": ("Corrosion", _m(1.00)),     # acid -> corrosion meter
+    "Cryo":     ("Temperature", _m(-1.00)),  # prism beam that freezes
+    "Inferno":  ("Temperature", _m(1.00)),   # prism beam that burns
+    # Plasma (Temperature + Corrosion) needs two states on one warhead -> handled at family build.
 }
 
 # Per-family Integrity ELECTRONICS auto-scale: the C# AreaDamage.IntegrityScale drains the victim's
@@ -1556,11 +1550,10 @@ def emit_condition(tag, cname, duration, rng, vt):
 
 
 # Inheriting families: a thin child that inherits a parent family template and overrides ONLY the main
-# warhead to add a PhysicalState (e.g. Cryo = Prism's anti-LIGHT beam + cold). Keeps the parent's Versus
-# + warhead key. {name: (parent, PhysicalStateName, PhysicalStateScale, levels)}.
+# warhead to add a PhysicalState. Keeps the parent's Versus + warhead key.
+# {name: (parent, PhysicalStateName, PhysicalStateScale, levels)}.
+# Cryo and Inferno were promoted to BLEND_FAMILIES below so they get their own Versus averages.
 INHERIT_FAMILIES = {
-    "Cryo":    ("Prism", "Temperature", -300, L3),   # a prism beam that also freezes (its "utility")
-    "Inferno": ("Prism", "Temperature", +300, L3),   # a prism beam that also burns (heat ray)
 }
 
 
@@ -1578,23 +1571,23 @@ def emit_inherit_family(name, parent, psn, pss, levels):
 # multi-state. Plasma = Flame x Chemical Versus + Temperature 150 + Corrosion 150 ("as close as possible
 # to the flame + chemical combo"). {name: (parents, {StateName: Scale}, levels)}.
 BLEND_FAMILIES = {
-    "Plasma": (["Flame", "Chemical"], {"Temperature": 150, "Corrosion": 150}, L3),
+    "Plasma": (["Flame", "Chemical"], {"Temperature": _m(0.50), "Corrosion": _m(0.50)}, L3),
     # Thermobaric = fuel-air incendiary blast: the per-armor AVERAGE of Demolition + Concussion +
     # Flame ("demolition + concussion + fire"). Heat = Flame 300 / 3 parents = 100 (per-parent-average
     # rule, Plasma-consistent). Collapses the thermobaric frankenstein weapons onto one warhead.
-    "Thermobaric": (["Demolition", "Concussion", "Flame"], {"Temperature": 100}, L3),
+    "Thermobaric": (["Demolition", "Concussion", "Flame"], {"Temperature": _m(1 / 3)}, L3),
     # Quantum = high-tech energy blend: per-armor AVERAGE of Railgun + Laser + Tesla (Heavy-only
     # parents extrapolated to L/M via the level step). Heat = Laser's 225 / 3 parents = 75 (only Laser
     # contributes a meter; Plasma-consistent per-parent averaging). EMP auto-scales via IntegrityScale
     # 33 (Tesla = 1/3 parents, FAMILY_INTEGRITY_SCALE); the ExtraDamage chip stays per-weapon.
-    "Quantum": (["Railgun", "Laser", "Tesla"], {"Temperature": 75}, L3),
+    "Quantum": (["Railgun", "Laser", "Tesla"], {"Temperature": _m(0.25)}, L3),
     # Element + delivery blends (maintainer 2026-08-10): per-armor AVERAGE of the element family and the
     # delivery family + the element's meter / 2 parents (150). FIRE = anti-light -> pairs with HE delivery
     # (better vs infantry/buildings); CHEMICAL = anti-armor -> pairs with AP delivery (better vs armor).
-    "FireCannon":  (["Flame", "CannonHE"],    {"Temperature": 150}, L3),
-    "FireMissile": (["Flame", "MissileHE"],   {"Temperature": 150}, L3),
-    "ChemCannon":  (["Chemical", "CannonAP"], {"Corrosion": 150}, L3),
-    "ChemMissile": (["Chemical", "MissileAP"],{"Corrosion": 150}, L3),
+    "FireCannon":  (["Flame", "CannonHE"],    {"Temperature": _m(0.50)}, L3),
+    "FireMissile": (["Flame", "MissileHE"],   {"Temperature": _m(0.50)}, L3),
+    "ChemCannon":  (["Chemical", "CannonAP"], {"Corrosion": _m(0.50)}, L3),
+    "ChemMissile": (["Chemical", "MissileAP"],{"Corrosion": _m(0.50)}, L3),
     # Waveforce = a resonant energy weapon: "a bit like a mix of the plasma warhead and the
     # quantum warheads" (maintainer 2026-08-16), adopted for the Japanese energy rifles —
     # which inherit `^WaveforceBulletWarhead` and were never railguns — and for the Protoss
@@ -1610,7 +1603,7 @@ BLEND_FAMILIES = {
     # Meters follow the documented per-parent-average rule, same as Quantum's comment above:
     # Temperature = (Flame 300 + Laser 225) / 5 parents = 105; Corrosion = (Chemical 300) / 5 = 60.
     "Waveforce": (["Flame", "Chemical", "Railgun", "Laser", "Tesla"],
-                  {"Temperature": 105, "Corrosion": 60}, L3),
+                  {"Temperature": _m(0.35), "Corrosion": _m(0.20)}, L3),
     # PhotonCannon = the maintainer's 3-way — Waveforce 25% / CannonHE 25% / MissileAA 50% — and
     # DELIBERATELY WITHOUT METERS (2026-08-18: *"a Waveforce x ... combo but without the physical
     # states"* … *"use a 3 way: waveforce x cannonHE x MissileAA"* … *"the photon cannon should
@@ -1637,6 +1630,13 @@ BLEND_FAMILIES = {
     # — see Waveforce above).
     "PhotonCannon": (["Flame", "Chemical", "Railgun", "Laser", "Tesla"]
                      + ["CannonHE"] * 5 + ["MissileAA"] * 10, {}, L3),
+    # Inferno = a Flame×Prism heatray: thermo-led (mostly fire), but delivered as a coherent
+    # energy beam so REFLECTOR still helps. Ground-only, thin spread, FireDeath.
+    "Inferno": (["Flame", "Prism"], {}, L3),
+    # Cryo = a Laser×Prism coldray: coherent energy delivery that freezes. Mostly energy-field
+    # coupling, some thermal load, and a small kinetic share from cryogenic embrittlement.
+    # Air-capable (Laser parent), thin spread, negative Temperature scaling.
+    "Cryo": (["Laser", "Prism"], {}, L3),
 }
 # Fixed emission order for a blend (it has no single light/heavy direction).
 BLEND_ARMOR_ORDER = ["None", "Flak", "Plate", "Heroic", "Scout", "Light", "Medium", "Heavy",
@@ -1773,7 +1773,8 @@ def _generate():
                      if parents else 0)
         vt = valid_targets(air_share >= 1 / 3)
         dt = FAMILY_DAMAGE_TYPES.get(nm)
-        print(f"###### {nm}: blend of {'+'.join(parents)} + PhysicalStates {states} ######")
+        states_note = f"+ PhysicalStates {states}" if states else "no PhysicalStates"
+        print(f"###### {nm}: blend of {'+'.join(parents)} + {states_note} ######")
         print(family(nm, None, vt, lv, versus_override=blend_versus(parents), physical_states=states,
                      **({"damage_types": dt} if dt else {})))
         print()

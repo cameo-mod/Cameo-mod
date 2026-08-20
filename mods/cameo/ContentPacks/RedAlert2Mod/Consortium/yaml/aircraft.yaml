@@ -335,11 +335,6 @@ steelconsortium_empressstation:
 		VoiceSet: SteelEmpressVoice
 	RenderSprites:
 		PlayerPalette: playerra2
-	WithIdleOverlay@shield1:
-		Sequence: shield-complete-big
-		StartSequence: shield-starts-big
-	WithIdleOverlay@shield_damage:
-		Sequence: shield-complete-big
 	ActorStatValues:
 		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
@@ -513,11 +508,11 @@ steelconsortium_cloudbreaker:
 		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: SteelEmpressVoice
+	# Geometry-only exception; size and timing stay on the shared aircraft-standard sequence.
 	WithIdleOverlay@shield1:
-		Sequence: shield-complete-big
-		StartSequence: shield-starts-big
+		Image: hexshield_directional_oval
 	WithIdleOverlay@shield_damage:
-		Sequence: shield-complete-big
+		Image: hexshield_directional_oval
 	CarrierMaster:
 		Actors: cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel
 		RearmTicks: 25

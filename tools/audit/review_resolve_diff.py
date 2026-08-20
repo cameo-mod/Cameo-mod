@@ -87,7 +87,11 @@ def show(w, b, h):
     flags = []
     if b["VT"] != h["VT"]:
         flags.append(f"ValidTargets {b['VT']} -> {h['VT']}")
-    if b["dmgs"] != h["dmgs"]:
+    # W24 collapses multiple identical-damage mains into one warhead whose
+    # Damage is the preserved SUM. That changes the multiset but not total damage.
+    if b["dmgs"] != h["dmgs"] and not (
+        sum(b["dmgs"]) == sum(h["dmgs"]) and len(h["dmgs"]) == 1
+    ):
         flags.append(f"Damage multiset {b['dmgs']} -> {h['dmgs']}")
     if b["Range"] != h["Range"]:
         flags.append(f"Range {b['Range']} -> {h['Range']}")

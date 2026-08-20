@@ -736,11 +736,6 @@ steelconsortium_bfg10000:
 		PlayerPalette: player_rgba
 	WithDeathAnimation:
 		PlayerPalette: player_rgba
-	WithIdleOverlay@shield1:
-		Sequence: shield-complete-big
-		StartSequence: shield-starts-big
-	WithIdleOverlay@shield_damage:
-		Sequence: shield-complete-big
 	DamageMultiplier@4x4Shape:
 		Modifier: 25
 	Power:

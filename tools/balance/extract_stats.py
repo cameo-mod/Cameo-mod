@@ -34,7 +34,9 @@ sys.path.insert(0, str(ROOT / "tools/balance"))
 from cameo_model import Model  # noqa: E402
 import effective_damage as effmod  # noqa: E402
 import formula  # noqa: E402
+import physical_state_price as psp  # noqa: E402
 import target_model as tm  # noqa: E402
+import tier_chain  # noqa: E402
 import weapon_efficiency as we  # noqa: E402
 
 OUT = ROOT / "docs/balance"
@@ -765,7 +767,9 @@ def _is_balance_buildable(buildable) -> bool:
     return not (toks & _DISABLING_PREREQS)
 
 
-def extract_actor(rs, key: str, section: str) -> dict | None:
+def extract_actor(rs, key: str, section: str,
+                  ps_map: dict[str, dict] | None = None,
+                  chain_map: dict[str, float | None] | None = None) -> dict | None:
     resolved = rs.resolve(key)
     if resolved is None:
         return None
@@ -869,8 +873,22 @@ def extract_actor(rs, key: str, section: str) -> dict | None:
         for arm in arms:
             arm["design_weapon_class"] = 1.0
     surv = survivability(u, resolved)
+    ps = (ps_map or {}).get(key)
+    derived: dict = u.setdefault(DERIVED_KEY, {})
     if surv:
-        u[DERIVED_KEY] = surv
+        derived.update(surv)
+    if ps:
+        derived["physical_state_weight"] = round(ps["weight"], 4)
+        derived["physical_state_multiplier"] = round(ps["multiplier"], 4)
+        derived["physical_state_weapon"] = ps["weapon"]
+    # Tier-chain metadata: computed C and f(C).  Kept in the derived sidecar
+    # so the raw ledger is not contaminated, and never overwriting a manual
+    # design.tech_tier judgment.
+    if u.get("buildable") and chain_map is not None:
+        C = chain_map.get(key)
+        if C is not None:
+            derived["tier_chain_cost"] = round(C, 2)
+            derived["tier_multiplier"] = round(tier_chain.tier_multiplier(C), 4)
     return u
 
 
@@ -947,9 +965,20 @@ def build_both(model: Model, only: str | None = None) -> tuple[dict[str, dict],
     rs = model.rs
     tm.use_ruleset(rs)          # reuse the built tree for the armor census (~8s saved)
     we.use_ruleset(rs)          # ... and for the median-weapon-range yardstick
+    # E2 — one physical-state pricing pass; the actor record lives in the derived
+    # sidecar so it cannot fall out of step with the raw ledger.
+    ps_map = {r["actor"]: r for r in psp.actor_multipliers(rs)}
+    # Tier-chain C and f(C) are derived metrics, computed once per Model and
+    # attached to the derived sidecar.  The raw ledger's design.tech_tier is
+    # intentionally left untouched so manual overrides are preserved.
+    roster_docs = pack_rosters()
+    all_actors = {a for info in roster_docs.values()
+                  for actors in info["sections"].values() for a in actors}
+    tc = tier_chain.TierChain(model)
+    chain_map = tc.chain_cost_map(all_actors)
     ledgers: dict[str, dict] = {}
     sidecars: dict[str, dict] = {}
-    for ledger, info in sorted(pack_rosters().items()):
+    for ledger, info in sorted(roster_docs.items()):
         if only and only not in ledger:
             continue
         keep_design, keep_wc = load_existing_design(ledger)
@@ -957,7 +986,7 @@ def build_both(model: Model, only: str | None = None) -> tuple[dict[str, dict],
         for section, actors in sorted(info["sections"].items()):
             sec: dict = {}
             for a in sorted(set(actors)):
-                u = extract_actor(rs, a, section)
+                u = extract_actor(rs, a, section, ps_map, chain_map)
                 if u is not None:
                     if a in keep_design:
                         u["design"].update(keep_design[a])

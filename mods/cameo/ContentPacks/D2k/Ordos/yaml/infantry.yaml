@@ -766,6 +766,7 @@ ordos_contaminator:
 
 ordos_leech:
 	Inherits: ^D2KInfantry
+	Inherits@corr: ^Corrodible
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA

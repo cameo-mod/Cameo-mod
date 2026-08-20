@@ -19,6 +19,7 @@ import argparse, json, pathlib, sys
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/balance"))
 import formula  # noqa: E402
+import tier_chain  # noqa: E402
 
 LEDGER = ROOT / "docs/balance"
 ANCHORS = LEDGER / "class_anchors.json"
@@ -31,11 +32,12 @@ def fnum(v):
     except (TypeError, ValueError): return None
 
 
-def unit_inputs(u):
+def unit_inputs(u, du=None):
     """(hp, speed, range_wdist, dps, special, unit_class, tech_tier) or None."""
     hp = fnum((u.get("hp") or {}).get("v"))
     speed = fnum((u.get("speed") or {}).get("v") or (u.get("speed_air") or {}).get("v"))
     d = u.get("design") or {}
+    du = du or {}
     total_dps, best_range = 0.0, 0.0
     for arm in u.get("armaments", []):
         if not arm.get("pricing", True):
@@ -54,23 +56,28 @@ def unit_inputs(u):
         best_range = max(best_range, rng)
     if hp is None or speed is None or total_dps == 0:
         return None
+    tech_tier = tier_chain.effective_tier(
+        d.get("tech_tier"), du.get("tier_multiplier"), default=1.0)
     return (hp, speed, best_range, total_dps,
             fnum(d.get("special")) or 1.0, fnum(d.get("unit_class")) or 1.0,
-            fnum(d.get("tech_tier")) or 1.0)
+            tech_tier)
 
 
-def price_for(cls, anchor, inp):
+def price_for(cls, anchor, inp, anchor_tier: float = 1.0):
     """Price a unit under its class anchor. Handles both anchor forms."""
     hp, speed, rng, dps_v, special, uclass, tier = inp
     spec = anchor.get("spec")
     if spec:  # class-baseline form (infantry classes)
         if not spec.get("range0_wdist") or not spec.get("dps0"):
             return None  # ability-priced class (e.g. support) — not formula-priced
+        # class_baseline_price receives the RELATIVE multiplier.
+        rel_tier = tier / anchor_tier if anchor_tier else tier
         return formula.class_baseline_price(
             hp, speed, rng, dps_v,
             spec["hp0"], spec["speed0"], spec["range0_wdist"], spec["dps0"], spec["cost0"],
-            special=special, tech_tier=tier)
+            special=special, tech_tier=rel_tier)
     if all(k in anchor for k in ("o0", "p0", "q0", "cost0")):  # o/p/q form (mbt)
+        # class_anchor_price cancels the anchor's own absolute tier.
         o, p, q = formula.estimators(hp, speed, rng, dps_v, special, uclass, tier)
         return formula.class_anchor_price(o, p, q, anchor["o0"], anchor["p0"], anchor["q0"], anchor["cost0"])
     return None
@@ -80,7 +87,7 @@ def cost0_of(anchor):
     return (anchor.get("spec") or {}).get("cost0") or anchor.get("cost0")
 
 
-def collect():
+def collect(tier_map):
     for jf in sorted(LEDGER.glob("*.json")):
         if jf.name == "class_anchors.json":
             continue
@@ -89,7 +96,7 @@ def collect():
             continue
         for sec in doc["sections"].values():
             for actor, u in sec.items():
-                yield jf.name, actor, u
+                yield jf.name, actor, u, tier_map.get(actor, {})
 
 
 def main() -> int:
@@ -97,10 +104,20 @@ def main() -> int:
     ap.add_argument("--class", dest="cls")
     ap.add_argument("--md")
     args = ap.parse_args()
-    anchors = json.loads(ANCHORS.read_text(encoding="utf-8"))
+    anchors = {k: v for k, v in json.loads(ANCHORS.read_text(encoding="utf-8")).items()
+               if isinstance(v, dict)}
+    tier_map = tier_chain.load_derived_map(LEDGER)
+    anchor_tiers = {}
+    for cls, a in anchors.items():
+        if not isinstance(a, dict):
+            continue
+        if a.get("anchor_actor") and a["anchor_actor"] in tier_map:
+            anchor_tiers[cls] = tier_map[a["anchor_actor"]].get("tier_multiplier", 1.0)
+        else:
+            anchor_tiers[cls] = fnum(a.get("tech_tier")) or 1.0
 
     per_class = {}
-    for fname, actor, u in collect():
+    for fname, actor, u, du in collect(tier_map):
         d = u.get("design") or {}
         cls = d.get("class_anchor")
         if not cls or (args.cls and cls != args.cls) or cls not in anchors:
@@ -108,10 +125,10 @@ def main() -> int:
         anchor = anchors[cls]; c0 = cost0_of(anchor)
         if not c0:
             continue
-        inp = unit_inputs(u)
+        inp = unit_inputs(u, du)
         if inp is None:
             continue
-        pr = price_for(cls, anchor, inp)
+        pr = price_for(cls, anchor, inp, anchor_tiers.get(cls, 1.0))
         if pr is None:
             continue
         epic = bool(u.get("build_limit"))

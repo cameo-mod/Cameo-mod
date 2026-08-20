@@ -158,7 +158,7 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 973
+    value: 975
     tolerance: 0
     what: >
       Fired weapons carrying MORE THAN ONE damage main — W24's scope, and the reason pricing
@@ -232,26 +232,36 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 223
+    value: 118
     tolerance: 0
     what: >
       Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
       still has 25% HP left — the maintainer's condition for pricing a meter at all ("it is
-      able to completely freeze a unit BEFORE it dies"). 223 of 376 bindings on 372 weapons.
-      ⛔ THE EARLIER VALUES (1, then 124) WERE MEASURED WITH A WRONG FORMULA and are void.
-      `PhysicalState.ApplyChange` health-scales through `ScaleChangeToHealth`, which divides by
-      MaxHP and multiplies by the meter's RANGE (`MaxValue - MinValue`) — NOT by the 10000
-      that `PhysicalStateInfo`'s own [Desc] still advertises ("divided by HP/10000"), which is
-      what the old derivation trusted. `Temperature` is SIGNED so its range is 40000, while
-      `Corrosion` shipped `MinValue: 0` — so one Scale meant TWO fill rates, heat filling twice
-      as fast as corrosion. Fixed 2026-08-18 by making Corrosion signed too (maintainer: *"the
-      absolute maximum and minimum values are the same!"*), so
-      `ratio = MaxValue x 100 / (Scale x range)` = **50/Scale on both meters**, 4x faster than
-      the docs claimed. Target HP and weapon damage both cancel. The formula now lives ONLY in
-      `tools/balance/physical_state_price.py`, which this measure imports, so the two can no
-      longer disagree.
-      ⚠ The failures are the discrete `ApplyPhysicalState` weapons (13 of 166 pass); the
-      damage-scaled ones pass 210/210, and 177 of them already passed at the ORIGINAL Scale 100.
+      able to completely freeze a unit BEFORE it dies"). **118 of 549.**
+      ⛔ THE EARLIER VALUES (1, 124, 223, 534) ARE ALL VOID, for TWO different reasons, and the
+      second one is the important one.
+      (a) ARITHMETIC. `PhysicalState.ApplyChange` health-scales through `ScaleChangeToHealth`,
+      which divides by MaxHP and multiplies by the meter's RANGE (`MaxValue - MinValue`) — NOT
+      by the 10000 that `PhysicalStateInfo`'s own [Desc] still advertises. Fixed 2026-08-18,
+      together with `Corrosion`'s unsigned `MinValue` (maintainer: *"the absolute maximum and
+      minimum values are the same!"*), giving `ratio = 50/Scale` on both meters.
+      (b) ⛔ STRUCTURE — W24, and no guard in this tree could see it. The clean form assumes
+      the damage that FILLS the meter is the damage that KILLS the target. That is true for
+      **41 of 427** damage-scaled weapons. The rest are multi-main Frankenstein weapons: a
+      Chemical Stealth Tank fires Shrapnel 5500 + Missile 9000 + Chemical 9000 and only the
+      Chemical warhead carries `PhysicalStateName`, so it kills on 27175/shot and fills on
+      10350. `ratio = 50/Scale / fed_share`, and the MEDIAN fed_share across the tree is
+      **0.398** — so the typical metered weapon fills ~2.5x slower than modelled and misses
+      the bar entirely. 534 -> 118 is that one term.
+      ⚠ THE MAINTAINER FOUND THIS BY PLAYTESTING A HARVESTER, not by any check here. This
+      claim counted bindings, the unit tests pinned arithmetic, the boot gate proved it loads;
+      none asked whether the two damage figures were the same damage. See `w24_multi_main_fed`
+      for the work list that closes it.
+      ⚠ RELAXATION IS STILL EXCLUDED and pushes this number DOWN further: `RelaxationDelay 25`
+      + `RelaxationLinear 5` + `RelaxationScaled 50` bleeds ~642 meter/shot at `ReloadDelay 60`.
+      Add it after W24, not before — it is a second term on the same corrected base.
+      The formula lives ONLY in `tools/balance/physical_state_price.py`, which this measure
+      imports, so the two can no longer disagree.
     docs: [docs/design/PHYSICAL_STATE_SYSTEM.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
     measure: |
       import sys, pathlib
@@ -263,10 +273,10 @@ claims:
                 if r['ratio'] is not None and r['ratio'] <= psp.FULL_EFFECT_BAR))
 
   - id: corrosion_meter_actors
-    value: 724
+    value: 783
     tolerance: 0
     what: >
-      Actors carrying the `Corrosion` meter — 45.0% of the 1609 priced (Health + Valued)
+      Actors carrying the `Corrosion` meter — 48.7% of the 1609 priced (Health + Valued)
       actors, against `Temperature`'s 1592 (98.6%). This asymmetry is an EXPOSURE term in E2
       pricing: a corrosion weapon does nothing at all to 55% of the roster, so it cannot earn
       the same status surcharge as a flame weapon even when its meter fills faster. Nothing in
@@ -288,8 +298,39 @@ claims:
                   n += 1
                   break
       print(n)
+  - id: w24_multi_main_fed
+    value: 386
+    tolerance: 0
+    what: >
+      RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their
+      main damage (W24, the 3-way weapon split). 386 of 427; median fed share 0.398; the worst
+      are 12-main EMP weapons at 4%. Each one is a weapon where the status effect the player
+      was promised cannot arrive before the target dies.
+      ⛔ THIS NUMBER MUST ONLY EVER GO DOWN. It is the W24 burn-down: splitting a weapon so a
+      single main warhead carries both the damage and the meter removes it from the count.
+      A rise means a new multi-main weapon shipped with a meter on only part of its damage.
+      Ordering, from `BALANCE_PROGRAM_PLAN` §0a and restated by the maintainer 2026-08-19
+      (*"that's exactly why I said you should finish the 3 way weapon split first!"*): weapon
+      STRUCTURE before pricing. Pricing a weapon whose structure is wrong measures the wrong
+      object — that is exactly how `meters_filling_before_death` came to claim 534.
+    docs: [docs/design/WEAPON_3WAY_SPLIT.md, docs/design/PHYSICAL_STATE_SYSTEM.md]
+    measure: |
+      import sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from cameo_model import Model
+      import physical_state_price as psp
+      rs = Model().rs
+      n = 0
+      for w in psp.fired_weapons(rs):
+          _d, binds = psp.weapon_bindings(rs, w)
+          if not any(k == 'scaled' for _m, k, _g in binds):
+              continue
+          total, fed = psp.damage_split(rs, w)
+          if total > 0 and fed / total < 0.999:
+              n += 1
+      print(n)
   - id: physical_state_fired_weapons
-    value: 372
+    value: 449
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced

@@ -37,7 +37,7 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured 2026-08-17 |
 |---|---|
-| W24 — fired weapons with **more than one** damage main | **973 of 1495 = 65.1%** (histogram runs out to 15 mains) |
+| W24 — fired weapons with **more than one** damage main | **975 of 1495 = 65.2%** (histogram runs out to 15 mains) |
 | armament slots whose `K` moves when those collapse | **1 584** |
 | fired weapons that reach a `^Warhead_*` family at all | **639 of 1620 = 39%** — the rest still route through legacy templates (`audit_unconverted_templates`: 47 templates, 1343 inheritors) |
 
@@ -96,7 +96,7 @@ nothing and informs the anchor choice. What must wait is WRITING targets and app
 | **W21** | Layered health Shield → Integrity → Armor → Health, layer-aware armor (solves W20 structurally) | ✅ BUILT + LIVE `ab467fe52` | Claude | — |
 | **W22** | Roster census: liveness classifier + per-credit weighting (552/1977 armored actors are not buildable) | ⬜ PROPOSED | — | — |
 | **W23** | Retrofit the 47 legacy templates into the `^Warhead_*` family system | 🔵 MACHINERY DONE + verified; content ⛔ on the 33-collision ruling | Claude | W13 |
-| **W24** | Collapse every weapon to ONE damage warhead (3-way split, damage half) — 61% of weapons carry 2+, worst case 15 | ⬜ READY, blocks W23 content | Claude | — |
+| **W24** | Collapse every weapon to ONE damage warhead (3-way split, damage half) — 61% of weapons carry 2+, worst case 15 | 🔵 STARTED: first cluster collapsed (`wc2cannontowerFire` + `wc2dragonFireVisible`) to `^Warhead_Flame_Light`; broadcast baseline lowered to 981 | Claude | — |
 | **W25** | Versus mean-normalisation to 100 + class tilt + Shield rebuild + the ARMOR-PLATING LAYER | ✅ S1–S4 SHIPPED 2026-08-16/17 (`78568a36d`..`99deed28d`). **E1 + E4 FIXED** (`30ead6d4b`, `761e79ed9`). ⛔ **S5 is NOT "run `--confirm`" — see the correction below: `--confirm` is a NO-OP until targets are written into the ledger, and that needs W11's sign-off.** | Claude | — |
 
 | **W26** | **Retire `DamageMultiplier` (R1) — case by case, 369 live declarations** | 🔵 STARTED 2026-08-17: the shield 150% is DELETED. Inventory + rules below. | Claude | — |
@@ -255,7 +255,7 @@ and every base assault becomes a shield fight.
 
 Measured before touching anything, and the finding changes the plan.
 
-### What the 973 actually are
+### What the 975 actually are
 
 | shape | count | note |
 |---|--:|---|
@@ -279,7 +279,7 @@ from the other end.
 
 ### ⚠ The finding that changes the collapse rule: 90% are BROADCAST
 
-**874 of the 973 (90%) have EVERY main at the identical damage.** The worst pileups are all one
+**874 of the 975 (89.6%) have EVERY main at the identical damage.** The worst pileups are all one
 value repeated:
 
 | weapon | mains | each | sum |
@@ -1066,8 +1066,9 @@ the sources contain no derived armor, and clamping would break §12.0b).
 
 **Two bugs this flushed out**, both silent fall-throughs to the even ramp:
 - `^Warhead_Cryo_*` / `^Warhead_Inferno_*` looked their profile up under their OWN name. They
-  are INHERITING families whose entire premise is reusing Prism's ladder, so they split off
-  from the parent and shipped at 10x. Fixed with `family(..., profile_family=parent)`.
+  are now BLEND_FAMILIES (Cryo = Laser×Prism, Inferno = Flame×Prism) with their own averaged
+  Versus and their own PHYSICS_RANK/COMPOSITION values, so the `profile_family=parent` fix was
+  replaced by promoting them to proper blends.
 - `^Warhead_Tesla_Super` had no measured tier (the export only walked Light/Medium/Heavy) and
   kept the even ramp at 1.8x while every other Tesla level was rebuilt. The export now walks
   the levels the GENERATOR emits; `Tesla/Super` measures n=29 / 7 mods.

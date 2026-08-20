@@ -107,17 +107,34 @@ def _int(v, default=0) -> int:
         return default
 
 
-def fill_ratio(kind: str, magnitude: float, damage: float, geom: dict) -> float | None:
+def fill_ratio(kind: str, magnitude: float, damage: float, geom: dict,
+               fed_share: float = 1.0) -> float | None:
     """hits_to_fill / hits_to_kill. <= 0.75 means the meter is full while 25% HP remains.
 
     `kind` is 'scaled' (PhysicalStateScale / a blend's PhysicalStates entry) or 'apply'
     (a discrete ApplyPhysicalState Amount). Returns None when the binding cannot fill.
+
+    ⛔ `fed_share` IS THE TERM THAT MAKES THIS HONEST (W24, maintainer playtest 2026-08-19).
+    A 'scaled' binding fills from ONE warhead's damage but the target dies to ALL of them:
+
+        meter/shot = fed x (Scale/100) x range / MaxHP        hits_to_fill = MaxValue / that
+        HP/shot    = total                                    hits_to_kill = MaxHP / total
+
+        ratio = MaxValue x 100 / (Scale x range) x (total / fed) = 50/Scale / fed_share
+
+    MaxHP still cancels; weapon damage NO LONGER DOES. The old form silently assumed
+    fed == total, i.e. ONE damage warhead — true for 41 of 427 damage-scaled weapons. The
+    maintainer found it by playtest: a Chemical Stealth Tank kills a harvester on Shrapnel +
+    Missile + Chemical but fills the bar on Chemical alone, so the bar never finishes.
+    `apply` is exempt: a flat `Amount` lands per HIT, whatever the damage split is.
     """
     if magnitude <= 0 or geom["range"] <= 0:
         return None
     top = max(abs(geom["max"]), abs(geom["min"]))
     if kind == "scaled":
-        return top * 100.0 / (magnitude * geom["range"])
+        if fed_share <= 0:
+            return None
+        return top * 100.0 / (magnitude * geom["range"] * fed_share)
     if damage <= 0:
         return None
     return top * damage / (magnitude * geom["range"])
@@ -375,6 +392,33 @@ def _float(v, default=0.0) -> float:
         return default
 
 
+def damage_split(rs, weapon: str) -> tuple[float, float]:
+    """(total main damage, damage carried by warheads that ALSO feed a meter).
+
+    Friendly-fire twins and `Percentage` warheads are excluded on both sides, matching
+    `weapon_bindings`. The ratio of the two is `fed_share` — see `fill_ratio`.
+    """
+    node = rs.resolve_weapon(weapon)
+    if node is None:
+        return 0.0, 0.0
+    total = fed = 0.0
+    for wh in node.children:
+        if not wh.key.startswith("Warhead"):
+            continue
+        rel = (wh.get("ValidRelationships") or "").strip()
+        if "Ally" in rel and "Enemy" not in rel:
+            continue
+        d = _float(wh.get("Damage"))
+        if not (d > 0 and "Percentage" not in wh.key):
+            continue
+        total += d
+        named = (wh.get("PhysicalStateName") or "").strip()
+        scaled = (named and (wh.value or "").strip() != "ApplyPhysicalState")             or any(x.key == "PhysicalStates" for x in wh.children)
+        if scaled:
+            fed += d
+    return total, fed
+
+
 def scan(rs) -> list[dict]:
     """One record per (weapon, meter, mechanism), with the strongest magnitude of each."""
     geom = meter_geometry(rs)
@@ -388,6 +432,8 @@ def scan(rs) -> list[dict]:
     out = []
     for weapon in sorted(fired_weapons(rs)):
         damage, bindings = weapon_bindings(rs, weapon)
+        total_dmg, fed_dmg = damage_split(rs, weapon)
+        share = (fed_dmg / total_dmg) if total_dmg > 0 else 1.0
         strongest: dict[tuple, float] = {}
         for meter, kind, mag in bindings:
             key = (meter, kind, mag > 0)
@@ -396,11 +442,13 @@ def scan(rs) -> list[dict]:
         for (meter, kind, positive), mag in strongest.items():
             if meter not in geom:
                 continue
-            ratio = fill_ratio(kind, abs(mag), damage, geom[meter])
+            ratio = fill_ratio(kind, abs(mag), damage, geom[meter],
+                               fed_share=share if kind == "scaled" else 1.0)
             curve = curves[(meter, positive)]
             weight = delivery_weight(ratio, curve, exp.get(meter, 0.0), reference)
             out.append({"weapon": weapon, "meter": meter, "kind": kind,
                         "magnitude": mag, "damage": damage, "ratio": ratio,
+                        "fed_share": share if kind == "scaled" else 1.0,
                         "delivery": delivery(ratio, curve), "weight": weight,
                         "multiplier": 1.0 + 0.25 * weight,
                         "axis": ("heat" if positive else "cryo") if meter == "Temperature"

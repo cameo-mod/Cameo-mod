@@ -474,15 +474,19 @@ NaxiShrek:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
@@ -498,15 +502,19 @@ NaxiShrek:
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@MissileAP_Medium:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
@@ -557,15 +565,19 @@ NaxiShrekCons:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
@@ -581,15 +593,19 @@ NaxiShrekCons:
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@MissileAP_Medium:
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
@@ -727,18 +743,28 @@ NaxMausCannon:
 		ContrailStartWidth: 111
 		ContrailEndWidth: 22
 		TrailInterval: 1
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 10000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
-	Warhead@HeavyFlameWeapon: SpreadDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 10000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 5
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 10000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
@@ -789,12 +815,17 @@ NaxRatteCannon:
 		ContrailStartWidth: 100
 		ContrailEndWidth: 20
 		TrailInterval: 1
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 50000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 50000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage

@@ -62,28 +62,54 @@ difference in the opening gate between two axes of the same system.** A corrosio
 
 ### What is true after the fixes
 
+Full strength is now **`METER_FULL = 100`** — ONE knob in `gen_weapon_template.py`, with every
+family and blend expressed as a fraction of it (`_m(0.75)`, `_m(0.35)`, …) instead of 13
+hand-divided numbers. At 100 the race is **ratio 0.500 on both meters**: full effect with half the
+target's life still ahead of it, comfortably inside the 0.75 bar.
+
 | mechanism | bindings | reach full effect before 25% HP |
 |---|--:|--:|
-| Temperature, damage-scaled | 177 | **177** |
-| Corrosion, damage-scaled | 33 | **33** |
-| Temperature, discrete apply | 144 | 4 |
-| Temperature (cryo), discrete apply | 22 | 9 |
-| **total** | **376** | **223 (59.3%)** |
+| damage-scaled (heat + corrosion) | 527 | **111** |
+| discrete apply (cryo) | 22 | 7 |
+| **total** | **549** | **118 (21.5%)** |
 
-⚠ **`meters_filling_before_death` = 223.** The earlier 1 and 124 were measured with the wrong
-formula and are void.
+⛔ **`meters_filling_before_death` = 118 of 549 — NOT the 534 (97.3%) this section claimed until
+2026-08-19.** The correction is one term, and it is W24's term. Everything above assumes the
+damage that FILLS the meter is the damage that KILLS the target. It is not: a damage-scaled
+binding fills from the ONE warhead carrying `PhysicalStateName`, while the target dies to every
+main warhead the weapon fires.
 
-⚠⚠ **The 100 → 300 constant (`354ed5ad3`) was calibrated against that wrong formula.** At the
-original `Scale: 100` the ratio was **0.50** — already inside the 0.75 bar. The only meter that
-appeared to fail was Corrosion (ratio 1.00), and that was D1's artifact, not a real shortfall.
-**300 is therefore a 3× faster fill than the bar needs, on every axis** — and the 1.25× ceiling
-cannot charge for it, because 100 and 300 both sit at full delivery. Keeping or dropping it to
-150/100 is a **maintainer call**; nothing has been reverted, because reverting is a balance change.
+    ratio = 50 / Scale / fed_share            fed_share = fed damage / total main damage
 
-⛔ **The discrete `ApplyPhysicalState` weapons are the remaining gap** (13 of 166 pass). They carry
-an absolute `Amount` against damage in the tens of thousands, so damage does NOT cancel and a heavy
-gun outruns its own meter — `FutureTankCannons` needs **313×** its target's lifetime to fill one.
-Converting them to the damage-scaled mechanism is one rule instead of 166 numbers.
+Only **41 of 427** damage-scaled metered weapons have `fed_share == 1`. The median is **0.398**,
+so the typical metered weapon fills ~2.5× slower than modelled and misses the 0.75 bar outright.
+The worst are 12-main EMP weapons at **4%** (`eden_EMP`, `edenTiger_EMP`, `plymouth_EMP`, …).
+
+⚠ **How this was found, and why nothing here found it.** The maintainer playtested a Chemical
+Stealth Tank against a harvester and the corrosion bar never filled. The weapon fires Shrapnel
+5500 + Missile 9000 + Chemical 9000 vs Heavy: it kills on **27175**/shot and fills on **10350**
+(38%). Every guard in this tree passed — `doc_claims` counted bindings, the unit tests pinned the
+arithmetic, the boot gate proved it loads. None of them asked whether the two damage figures were
+the same damage. That gap is structural: a census of *what exists* cannot see a defect in *how the
+parts relate*.
+
+⛔ **This is why `BALANCE_PROGRAM_PLAN` §0a puts weapon STRUCTURE before pricing** — restated by
+the maintainer 2026-08-19: *"that's exactly why I said you should finish the 3 way weapon split
+first!"* Pricing a weapon whose structure is wrong measures the wrong object. The burn-down is
+pinned as `w24_multi_main_fed` (386, ratchet-down-only).
+
+⚠ **RELAXATION is still excluded** and moves this number down further: `RelaxationDelay 25` +
+`RelaxationLinear 5` + `RelaxationScaled 50` bleeds ~642 meter/shot at `ReloadDelay 60` (23% of
+the gain in the Stealth Tank case), and it bites hardest on SLOW, LOW-damage weapons against
+ARMOURED targets — precisely where chemical weapons are supposed to work. Add it AFTER W24: it is
+a second term on the same corrected base, and stacking two corrections at once is how the first
+census ended up three times revised.
+
+⚠⚠ **Why 300 became 100.** The 100 → 300 change (`354ed5ad3`) was calibrated against the wrong
+formula: `Scale: 100` had ratio **0.50** all along and always cleared the bar, and the Corrosion
+"failure" that appeared to justify 300 was D1's artifact. 300 was a 3× faster fill than anything
+needed, and the 1.25× ceiling cannot charge for it. Maintainer 2026-08-18: *"test it in game first
+for 100"* — so 100 is shipped for playtest, propagated to all 694 live bindings.
 
 ### The effect curve — now one curve for all three axes
 
@@ -110,7 +136,7 @@ the axes:
 | `Temperature` | 1592 | **98.6%** |
 | `Corrosion` | 724 | **45.0%** |
 
-A corrosion weapon does nothing at all to 55% of the roster. Claim: `corrosion_meter_actors`.
+A corrosion weapon does nothing at all to 51.3% of the roster. Claim: `corrosion_meter_actors`.
 
 ### E2 pricing — the rule as built
 
@@ -121,23 +147,36 @@ multiplier = 1 + 0.25 × weight
 
 `delivery` is the mean effect share over the target's remaining life. The reference is a weapon
 that exactly meets the maintainer's bar on a fully-exposed meter, so **meeting the bar pays exactly
-1.25×** and filling faster is never charged more than the ruling allows. Over 376 bindings:
-**190 pay the full 1.25×, 174 partially, 12 nothing**; per actor **+15.7%** across 276 actors.
+1.25×** and filling faster is never charged more than the ruling allows. Over 549 bindings:
+**328 pay the full 1.25×, 221 partially, 0 nothing**; per actor **+21.9%** across 337 actors.
+Wired into the ledger by `01f1820b8` (`derived.physical_state_multiplier`).
 
 | axis | mechanism | bindings | median ratio | median × |
 |---|---|--:|--:|--:|
-| heat | scaled | 177 | 0.167 | **1.250** |
-| corrosion | scaled | 33 | 0.167 | **1.165** |
+| heat | scaled | 321 | 0.500 | **1.250** |
+| corrosion | scaled | 206 | 0.500 | **1.135** |
 | cryo | apply | 22 | 0.519 | **1.250** |
-| heat | apply | 144 | 15.104 | **1.013** |
 
-⚠ Corrosion caps at 1.165 with an identical meter and an identical fill rate — **exposure alone**
+⚠ Corrosion caps at 1.135 with an identical meter and an identical fill rate — **exposure alone**
 holds it there. That is what separates Flame from Chemical now.
 
 ℹ Relaxation between shots is deliberately **outside** the priced ratio: `RelaxationDelay: 25`
 means a weapon reloading faster than 25 ticks loses nothing, and the linear term would reintroduce
 a MaxHP dependence that destroys the cancellation above. It costs a slow artillery piece ~36% of a
 shot's gain and a normal gun ~5%.
+
+### E2 pricing — pipeline wiring
+
+The delivery-weighted multiplier is now wired into `tools/balance/fit_class.py`:
+
+* `tools/balance/extract_stats.py` computes the per-actor `physical_state_weight`,
+  `physical_state_multiplier`, and `physical_state_weapon` via
+  `physical_state_price.actor_multipliers()` and stores them in the derived sidecar
+  (`docs/balance/derived/*.json`), so they cannot desync from the raw ledger.
+* `fit_class.price_unit()` applies `formula.physical_state_price_multiplier(weight)`
+  on top of the charge-up discount. A unit with full delivery (e.g. `td_nod_flametank`)
+  prices at the full 1.25× ceiling; a unit with partial delivery or no physical-state
+  weapon prices at the corresponding lower multiplier or 1.0.
 
 ## 0. WHAT ALREADY EXISTS (verified 2026-08-09)
 
@@ -233,7 +272,8 @@ Then wire Chemical/Plasma to it via §1's field.
 | Flame (L/M/H) | Temperature | **+100** | + GroundFire linger |
 | Laser (Heavy) | Temperature | **+75** | overheat→pop; main-damage only (chip excluded by placement) |
 | **Prism (L/M/H)** | – | – | anti-LIGHT scatter beam, Versus LOCKED (`Scout 100 › None 94 › … › Superheavy 34`), ground-only, thin spread, no chip. **NO cryo by default** — Prism Tank / Athena Cannon are pure prism. |
-| **Cryo (L/M/H)** — NEW | Temperature | **−100** | **inherits `^Warhead_Prism_<Level>`** and ONLY adds the cold scaling = "a prism beam that also freezes". Reuses Prism's anti-light Versus + scatter + thin spread; freeze/shatter uses the existing cold side. (So there IS a Cryo family, but it's a thin Prism child, not a from-scratch family.) |
+| **Inferno (L/M/H)** — NEW | Temperature | **+100** | **Flame×Prism** heatray blend, ground-only, thin spread, FireDeath; mostly thermal with some field coupling, so both HAZMAT and REFLECTOR reduce it. |
+| **Cryo (L/M/H)** — NEW | Temperature | **−100** | **Laser×Prism** coldray blend, air-capable, thin spread; coherent energy delivery with freeze-kinetic, so the damage profile is anti-heavy-ish and REFLECTOR helps more than HAZMAT. Reuses the existing cold/freeze/shatter side. |
 | Chemical (L/M/H) | Corrosion | **+100** | pure corrosion |
 | **Plasma (L/M/H)** — NEW | Temperature **+50** & Corrosion **+50** | | flagship Flame×Chem blend Versus |
 | Tesla | (EMP, separate) | – | keeps existing EMP |
@@ -248,14 +288,14 @@ original warhead **and adds the real Cryo warhead** — both at ~50% damage:
 ```
 DemoArtilleryCryo:
     Inherits: DemoArtillery              # keeps Warhead@Demolition_Heavy (its Versus)
-    Inherits@cryo: ^Warhead_Cryo_Heavy   # adds the Cryo warhead (anti-LIGHT Versus + Temperature -100)
+    Inherits@cryo: ^Warhead_Cryo_Heavy   # adds the Cryo warhead (Laser×Prism anti-heavy/air Versus + Temperature -100)
     Warhead@Demolition_Heavy: { Damage: <50%>, PhysicalStateName: Temperature, PhysicalStateScale: -100 }
     Warhead@Cryo_Heavy:       { Damage: <50%> }   # freeze via the family's baked -100
 ```
 Rationale (maintainer): the point is NOT just to freeze — it's to **change the damage profile** so the
-upgraded weapon feels unique (demo blast + cryo's anti-light Versus + freeze). The added Cryo warhead's
-Versus is the real value (temperature alone would be redundant). Both warheads carry the −100 scaling so
-the whole weapon freezes. → this makes the **Cryo family a prerequisite** (BUILD 2b).
+upgraded weapon feels unique (demo blast + cryo's Laser×Prism anti-heavy/air Versus + freeze). The added
+Cryo warhead's Versus is the real value (temperature alone would be redundant). Both warheads carry the
+−100 scaling so the whole weapon freezes. → this makes the **Cryo family a prerequisite** (BUILD 2b).
 
 ⚠ **Combined weapons stack it further (maintainer 2026-08-09):** artillery is being reworked to
 **CannonHE + Demolition** (the slow big-blast combo), so a cryo upgrade makes Cryo the **THIRD** warhead
@@ -351,9 +391,11 @@ reference an image+sequence, so the yaml wires with placeholders and the art dro
   `INHERIT_FAMILIES`) — `f97a3b77c`
 - ✅ Plasma family = avg(Flame,Chemical) Versus + Temperature 50 + Corrosion 50 (generator `BLEND_FAMILIES`
   + `versus_override`/`physical_states`) — `2e6d6968a`. Inert until a weapon adopts `^Warhead_Plasma_*`.
-- ✅ Flame/Chemical `_Percentage` twins use `AreaDamagePercentage` and feed the matching meter; active
-  fixed `ApplyPhysicalState` duplicates were removed, with `audit_physical_state_warheads` preventing
-  regressions (static-audited; runtime test pending).
+- ✅ Flame/Chemical `_Percentage` twins use `AreaDamagePercentage` and feed the matching meter.
+- ✅ Legacy `^*FlameWeapon`/`^*ChemicalWeapon` templates and all concrete overrides converted to
+  damage-scaled `PhysicalStateName`/`PhysicalStateScale` on `AreaDamage`/`AreaDamagePercentage`;
+  fixed `ApplyPhysicalState` duplicates and separate FriendlyFire twins removed. `audit_physical_state_warheads`
+  PASS, boot-gated (2026-08-18). 43 non-family (mostly cryo) `ApplyPhysicalState` warheads remain.
 - ✅ **BUILD 3 — Sonic mark** — global rename `CommandoDebuff → SonicDebuff` (29 lines / 8 yaml files:
   `^SonicDebuff` in defaults.yaml + the condition, `Warhead@` keys and both `Inherits@`; the
   `2100commandodebuff` **asset**, its sequences and its palette keep their own names) + the mark BAKED

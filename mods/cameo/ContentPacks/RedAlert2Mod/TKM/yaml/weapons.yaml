@@ -1477,10 +1477,12 @@ HueyFireMissiles:
 		Damage: 2000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -1498,8 +1500,6 @@ HueyFireMissiles:
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 500
 
 TKMDroneExplode:
 	Inherits@wh: ^Warhead_Concussion_Medium

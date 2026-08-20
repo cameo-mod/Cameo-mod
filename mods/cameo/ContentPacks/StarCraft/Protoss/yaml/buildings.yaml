@@ -21,6 +21,10 @@ protoss_nexus:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: pshbld03.aud
+	WithIdleOverlay@shield1:
+		RequiresCondition: !disabled && shielded && !shieldhit && !build-incomplete
+	WithIdleOverlay@shield_damage:
+		RequiresCondition: !disabled && shielded && shieldhit && !build-incomplete
 	Production@INFANTRY:
 		Produces: Infantry
 		PauseOnCondition: disabled

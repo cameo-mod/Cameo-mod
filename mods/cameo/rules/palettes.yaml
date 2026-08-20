@@ -147,6 +147,74 @@
 		Name: shield30
 		BasePalette: shield100
 		Alpha: 0.25
+	PaletteFromFile@playershieldbase:
+		Name: playershieldbase
+		Filename: shield_remap.pal
+	FixedColorPalette@hexshield:
+		Base: playershieldbase
+		Name: hexshield
+		Color: 469BFF
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PaletteFromPaletteWithAlpha@hexshield25:
+		Name: hexshield25
+		BasePalette: hexshield
+		Alpha: 0.25
+	PaletteFromPaletteWithAlpha@hexshield75:
+		Name: hexshield75
+		BasePalette: hexshield
+		Alpha: 0.75
+	FixedColorPalette@protosshexshield:
+		Base: playershieldbase
+		Name: protosshexshield
+		Color: 469BFF
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PaletteFromPaletteWithAlpha@protosshexshield25:
+		Name: protosshexshield25
+		BasePalette: protosshexshield
+		Alpha: 0.25
+	PaletteFromPaletteWithAlpha@protosshexshield75:
+		Name: protosshexshield75
+		BasePalette: protosshexshield
+		Alpha: 0.75
+	FixedColorPalette@ixianhexshield:
+		Base: playershieldbase
+		Name: ixianhexshield
+		Color: D7E6EE
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PaletteFromPaletteWithAlpha@ixianhexshield25:
+		Name: ixianhexshield25
+		BasePalette: ixianhexshield
+		Alpha: 0.25
+	PaletteFromPaletteWithAlpha@ixianhexshield75:
+		Name: ixianhexshield75
+		BasePalette: ixianhexshield
+		Alpha: 0.75
+	FixedColorPalette@consortiumhexshield:
+		Base: playershieldbase
+		Name: consortiumhexshield
+		Color: 2DE1FF
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PaletteFromPaletteWithAlpha@consortiumhexshield25:
+		Name: consortiumhexshield25
+		BasePalette: consortiumhexshield
+		Alpha: 0.25
+	PaletteFromPaletteWithAlpha@consortiumhexshield75:
+		Name: consortiumhexshield75
+		BasePalette: consortiumhexshield
+		Alpha: 0.75
+	FixedColorPalette@yurihexshield:
+		Base: playershieldbase
+		Name: yurihexshield
+		Color: 665CFF
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PaletteFromPaletteWithAlpha@yurihexshield25:
+		Name: yurihexshield25
+		BasePalette: yurihexshield
+		Alpha: 0.25
+	PaletteFromPaletteWithAlpha@yurihexshield75:
+		Name: yurihexshield75
+		BasePalette: yurihexshield
+		Alpha: 0.75
 	PaletteFromFile@staticterrain-jungle:
 		Name: staticterrain
 		Tileset: JUNGLE

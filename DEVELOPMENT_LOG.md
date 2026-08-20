@@ -1,5 +1,116 @@
 # Development Log
 
+## 2026-08-21 — Cryo/Inferno promoted to blend families (package 3)
+
+- `tools/balance/gen_weapon_template.py`:
+  - Removed `Cryo` / `Inferno` from `INHERIT_FAMILIES`.
+  - Added `Cryo` = Laser×Prism and `Inferno` = Flame×Prism to `BLEND_FAMILIES`.
+  - Updated `COMPOSITION` (`Cryo` energy 0.55 / thermo 0.25 / kinetic 0.20) and
+    `COMPOSITION_OVERRIDE` (`Inferno` thermo 0.65 / energy 0.35).
+  - Updated `PHYSICS_RANK` (`Cryo` 0.75, `Inferno` 0.57) and the blend-header comment.
+  - Fixed blend header to print `no PhysicalStates` for empty state maps.
+- Regenerated all 97 `^Warhead_*` templates in `mods/cameo/weapons/weapons.yaml`
+  via `splice_templates.py --all`; `verify_generator_sync.py` reports drift = 1
+  (the pre-existing hand-authored `^Warhead_Sniper_Light` only).
+- Regenerated 32 balance ledgers and derived sidecars with `extract_stats.py`.
+- Updated `docs/design/PHYSICAL_STATE_SYSTEM.md`, `docs/design/PLATING_COMPOSITION_REFINEMENT.md`,
+  and `docs/design/BALANCE_PROGRAM_PLAN.md` to reflect the new family model.
+- Verification: `extract_stats.py --check` 0 drift; `audit_balance_drift.py` clean;
+  `audit_physical_state_warheads.py` PASS; `audit_armor_upgrade_harm.py` clean;
+  `test_plating_composition.py` 10/10; `test_physical_state_price.py` 17/17;
+  `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs.
+- Boot-gate: `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`,
+  `exception-*.log` count 183 → 183 (no new exceptions).
+
+## 2026-08-20 — Computed prerequisite-chain tech tier
+
+- Added `tools/balance/tier_chain.py` with `TierChain(model)` resolving buildable
+  prerequisites to a total building-chain cost `C`, restricted to the actor's
+  own ContentPack leaf plus the same game's `Shared` pack. Cheapest valid provider
+  selected per token; buildings deduplicated across branches; cycles are broken.
+- `TierChain` indexes `Building` actors with `Valued.Cost` and both their actor
+  name and `ProvidesPrerequisite` tokens as providers.
+- `tools/balance/formula.py` now exports `TIER_B` (9500.0), `TIER_S` (8250.0),
+  and `tier_multiplier(C)`. Docstrings updated to distinguish absolute
+  (`class_anchor_price`) and relative (`class_baseline_price`) usage.
+- `tools/balance/extract_stats.py` attaches `tier_chain_cost` and `tier_multiplier`
+  to each buildable actor's `_derived` blob; manual `design.tech_tier` values are
+  never overwritten.
+- `tools/balance/fit_class.py` uses the absolute tier in `unit_inputs()`, preferring
+  a manual `design.tech_tier` and falling back to the derived `tier_multiplier`.
+- `tools/balance/propose_class_rebalance.py` computes per-class relative tier
+  `f(C)/f(C_anchor)` for `class_baseline_price`; the anchor's manual `tech_tier`
+  is used as the denominator when present.
+- `tools/balance/build_workbook.py` writes the absolute `TechTier` to the
+  spreadsheet and divides by the anchor's absolute tier inside the class-baseline
+  `Price` and `RangeSolve` formulas.
+- `tools/balance/check_band.py` loads derived sidecars, computes absolute unit
+  tier, and uses the relative tier for `class_baseline_price` while keeping the
+  absolute tier for `class_anchor_price`.
+- Regenerated all 32 raw ledgers and 32 derived sidecars with `extract_stats.py`.
+- Verified: `td_nod_lasertrooper` → `tier_chain_cost = 27000.0`, `tier_multiplier =
+  0.3204`; its closure contains only Nod and Shared buildings (no GDI).
+- `extract_stats.py --check` reports 0 drifted; `audit_balance_drift.py` is clean.
+- `build_workbook.py` and `propose_class_rebalance.py --class mbt` run without
+  errors; `fit_class.py --class scout --anchor naxis_naxiriflesoldier` produces
+  a candidate and was reverted so `class_anchors.json` is unchanged.
+- Updated `docs/design/tier_chain_validation.md`, `docs/design/ROADMAP.md`, and this log.
+- Building-plug addons (`Plug:` trait) are not counted as separate actor-name
+  providers, so `wc2_orcs_deathknight` resolves to $15,000 (Great Hall +
+  Temple of the Damned) rather than double-counting the Fortress upgrade plug.
+
+## 2026-08-19 — Delivery-weighted physical-state price multiplier wired into fit_class
+
+- `tools/balance/extract_stats.py` now imports `physical_state_price` and calls
+  `physical_state_price.actor_multipliers(rs)` once per extraction pass. The resulting
+  per-actor record (`physical_state_weight`, `physical_state_multiplier`,
+  `physical_state_weapon`) is attached to the actor's `_derived` blob and lifted into
+  `docs/balance/derived/*.json` by `split_derived()`.
+- `tools/balance/fit_class.py` now applies `formula.physical_state_price_multiplier()`
+  in `price_unit()`, using the derived sidecar weight. The helper `physical_state_weight()`
+  checks `u["_derived"]`, then the sidecar `du`, then the raw unit, defaulting to 0.
+- Regenerated all 32 ledgers and derived sidecars (`extract_stats.py`).
+- Verified with `fit_class.py --class line_breaker --anchor td_nod_flametank --use-k`:
+  the anchor prices at **1000** against an actual cost of **800** (+25%), matching the
+  full E2 ceiling. Non-state anchors (e.g. `mbt` / `tiger.nax`) price at cost0 with no
+  surcharge.
+- `find_empty_warhead.py` = 0; `audit_physical_state_warheads.py` PASS.
+- Updated `docs/design/PHYSICAL_STATE_SYSTEM.md` and `docs/design/ROADMAP.md`.
+
+## 2026-08-18 — ApplyPhysicalState → damage-scaled conversion (flame/chemical, boot-gated)
+
+- Implemented `tools/balance/convert_apply_to_scaled_v2.py` (dry-run by default,
+  `--apply` required, block-aware/line-based, no regex, preserves BOM/line endings,
+  reports standalone cases).
+- Converted legacy templates `^LightFlameWeapon`, `^MediumFlameWeapon`,
+  `^HeavyFlameWeapon`, `^LightChemicalWeapon`, `^MediumChemicalWeapon`,
+  `^HeavyChemicalWeapon` and all concrete overrides in 34 YAML weapon files:
+  - `SpreadDamage` → `AreaDamage`
+  - `HealthPercentageDamage` → `AreaDamagePercentage`
+  - removed `Range:` from inside converted warheads
+  - main warhead: `ValidRelationships: Ally, Neutral, Enemy`,
+    `FriendlyFireDamage: 50`, `FriendlyFireSpread: 50`
+  - main + percentage warheads: `PhysicalStateName` / `PhysicalStateScale`
+    (`Temperature`/`300` for flame, `Corrosion`/`300` for chemical)
+  - removed associated FriendlyFire twins and fixed `ApplyPhysicalState` warheads.
+- Removed two stale `-Warhead@PhysicalStateMediumFlameWeapon*` removal lines in
+  `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` that became invalid
+  after the template physical-state warheads were removed.
+- Verification:
+  - `python tools/audit/audit_physical_state_warheads.py` PASS
+  - `python tools/audit/find_empty_warhead.py` = 0
+  - `utility.cmd cameo --check-yaml` completed without fatal YAML exceptions
+    (pre-existing actor/condition warnings unrelated to this change)
+  - `launch-game.cmd` reached the main menu (`MenuPostProcessEffect.PostWorldLoaded`
+    in `%APPDATA%/OpenRA/Logs/perf.log`; no new `exception-*.log` after the run).
+- Standalone `ApplyPhysicalState` cases left untouched: 43 non-target (cryo/non-family)
+  blocks reported by the conversion script; flame/chemical `ApplyPhysicalState`
+  warheads were removed.
+- Note: `tools/audit/audit_physical_state_warheads.py` already expects
+  `PhysicalStateScale: 300` in the working tree; do not commit without reviewing
+  that diff.
+
+
 ## 2026-08-17 — RA2 effect-template final sweep (Shared/Allies/Yuri/redalert2mod/AsianAlliance/Syndicate, boot-gated)
 
 - Completed the final `ra2_*` inline-effect sweep in the loaded RA2 tree

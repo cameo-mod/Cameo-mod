@@ -294,6 +294,30 @@ Extrapolation:
 - T2 radar now lands at ~0.80, not the old fixed-ladder 1.0, confirming radar is a real tier.
 - The rational form and the power law still agree within ~0.02 at every measured tier; the rational form is simpler to explain and calibrate.
 
+## Implementation
+
+The resolver now lives in `tools/balance/tier_chain.py`:
+
+- `TierChain(model)` builds a provider index over resolved `Building` actors that have `Valued.Cost`.
+- Building-plug addons (`Plug:` trait) are not counted as separate actor-name providers; their tokens are provided by the host building, so chain costs do not double-count upgrades such as the Warcraft 2 Fortress plug.
+- Provider search is restricted to the actor's own ContentPack leaf plus the same game's `Shared` pack, preventing the Nod/GDI cross-factor bug.
+- Recursive prerequisite closure deduplicates buildings and breaks cycles.
+- `TierChain.chain_cost(actor)` returns `C`, the total cost of the unique building chain.
+- `tier_chain.tier_multiplier(C)` implements `f(C) = 1 / (1 + (C - B) / S)` with `B = 9500`, `S = 8250`, clamped to `[0, 1]` and returning `1.0` for `C <= B`.
+- `tier_chain.effective_tier(design, derived, default=1.0)` preserves manually authored `design.tech_tier` values as overrides; the computed `tier_multiplier` from the derived sidecar is the fallback.
+
+`tools/balance/extract_stats.py` now computes `tier_chain_cost` and `tier_multiplier` for every buildable actor and stores them in the derived sidecar (`docs/balance/derived/*.json`). The raw ledger's `design.tech_tier` is never overwritten, so maintainer overrides remain intact.
+
+Consumers updated to the new semantics:
+
+- `fit_class.py` — reads `design.tech_tier` first, then the derived `tier_multiplier`, for absolute tier in `estimators()`.
+- `propose_class_rebalance.py` — class-baseline prices now use the relative multiplier `f(C)/f(C_anchor)`. Manual anchor `design.tech_tier` is used as the denominator when present, otherwise the computed anchor multiplier is used.
+- `build_workbook.py` — the `TechTier` workbook column shows the absolute multiplier; the class-baseline `Price` and `RangeSolve` formulas divide by the anchor's absolute tier.
+- `check_band.py` — band validator uses the relative tier for `class_baseline_price` and absolute tier for `class_anchor_price`.
+- `formula.py` — documents the difference between absolute (`estimators`/`class_anchor_price`) and relative (`class_baseline_price`) usage and exposes `formula.tier_multiplier` with the canonical `B` and `S` constants.
+
+Verified: `td_nod_lasertrooper` resolves to `C = $27,000` and `f(C) = 0.3204` with no GDI buildings in its closure. `wc2_orcs_deathknight` resolves to `C = $15,000` (Great Hall + Temple of the Damned) and `devastator` to `C = $18,000`.
+
 ## Recommendation
 
 Adopt the rational form `f(C) = 1 / (1 + (C - B) / S)` with B = T1 median chain and S = (T4 median chain - B). Use the corrected medians above for the next `tier` term calibration.

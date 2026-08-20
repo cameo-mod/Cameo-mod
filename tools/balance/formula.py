@@ -181,6 +181,42 @@ CHARGE_FIELDS = {
 # retuning that one building must not silently re-price every charging actor.
 CHARGE_ANCHOR_SHARE = 1 / 3
 
+# --------------------------------------------------------------------------- #
+# Rational tech-tier curve (BALANCE_PIPELINE §7, tier_chain_validation.md)
+# --------------------------------------------------------------------------- #
+# B = T1 median prerequisite-building-chain cost.
+# S = (T4 median chain cost) - B.
+TIER_B = 9500.0
+TIER_S = 8250.0
+
+
+def tier_multiplier(C: float | None, B: float = TIER_B, S: float = TIER_S) -> float:
+    """Rational tech-tier multiplier f(C) = 1 / (1 + (C - B) / S).
+
+    C is the total Valued.Cost of an actor's prerequisite building chain.  The
+    curve is clamped to [0, 1] and returns 1.0 for C <= B, giving a clean T1/T2
+    plateau.  Approximate reference points:
+
+        C =  9,500 (B)          -> 1.000   (T1)
+        C = 11,600              -> 0.797   (T2)
+        C = 15,000              -> 0.600   (T3)
+        C = 17,750              -> 0.500   (T4)
+
+    Callers that price with ``class_anchor_price`` should pass the ABSOLUTE
+    multiplier f(C): the anchor's own multiplier cancels in the ratio.
+    Callers that price with ``class_baseline_price`` should pass the RELATIVE
+    multiplier f(C) / f(C_anchor), because ``cost0`` is the anchor's absolute
+    price and the formula is not self-normalising.
+    """
+    if C is None:
+        return 1.0
+    if C <= B:
+        return 1.0
+    denom = 1.0 + (C - B) / S
+    if denom <= 0.0:
+        return 0.0
+    return min(1.0, max(0.0, 1.0 / denom))
+
 
 def charge_share(ticks: float | None, cycle: float | None) -> float:
     """Fraction of an attack cycle the actor spends winding up. 0.0 when unknown."""
@@ -495,7 +531,14 @@ def estimators(hp: float, speed: float, range_wdist: float, dps_value: float,
                special: float = 1.0, unit_class: float = 1.0,
                tech_tier: float = 1.0) -> tuple[float, float, float]:
     """The legacy O/P/Q price estimators (recovered from the workbook
-    cells 2026-07-18), on raw units (range in wdist)."""
+    cells 2026-07-18), on raw units (range in wdist).
+
+    ``tech_tier`` is an ABSOLUTE multiplier (e.g. the raw f(C) from
+    ``tier_multiplier``).  It is appropriate for ``class_anchor_price`` and the
+    global ``price()``/``estimators()`` form, where the anchor's own multiplier
+    cancels or where no anchor is used.  For ``class_baseline_price`` callers
+    must first divide by the anchor's f(C_anchor) and pass the RELATIVE value.
+    """
     r = range_wdist / 1000.0
     o = (hp / 100000 + speed / 100 + r * special / 5 + dps_value / 200) \
         * 200 * unit_class * tech_tier
@@ -534,7 +577,13 @@ def solve_range(cost: float, hp: float, speed: float, dps_value: float,
 
 def class_anchor_price(o, p, q, o0, p0, q0, cost0) -> float:
     """Formula v2 draft form (superseded by class_baseline_price):
-    normalized deviation from the class anchor. Exact at the anchor."""
+    normalized deviation from the class anchor. Exact at the anchor.
+
+    ``o, p, q`` are normally produced by ``estimators()``, which accepts an
+    ABSOLUTE ``tech_tier`` multiplier.  The anchor's own multiplier appears in
+    both the numerator (unit O/P/Q) and the denominator (o0/p0/q0), so it
+    cancels and the price is invariant to the anchor's tier.
+    """
     return cost0 * (o / o0 + p / p0 + q / q0) / 3
 
 
@@ -545,7 +594,13 @@ def class_baseline_estimators(hp, speed, range_wdist, dps_value,
     normalization against the class baseline unit, so that at the
     baseline O = P = Q = cost0 EXACTLY — the rule that must always hold
     for any baseline unit. The global Tiger formula is precisely this
-    construction with (100000, 100, 5000, 200, 800) plugged in."""
+    construction with (100000, 100, 5000, 200, 800) plugged in.
+
+    ``tech_tier`` must be RELATIVE to the anchor: f(C_unit) / f(C_anchor).
+    The anchor's price is ``cost0``, an absolute value, so scaling by the
+    anchor's own f(C_anchor) would under- or over-price the baseline.  Use
+    ``tier_multiplier`` for the unit and divide by the anchor's multiplier.
+    """
     h = hp / hp0
     s = speed / speed0
     r = (range_wdist / range0_wdist) * special
@@ -559,6 +614,11 @@ def class_baseline_estimators(hp, speed, range_wdist, dps_value,
 def class_baseline_price(hp, speed, range_wdist, dps_value,
                          hp0, speed0, range0_wdist, dps0, cost0,
                          special=1.0, tech_tier=1.0) -> float:
+    """Class-baseline unit price.  ``tech_tier`` is RELATIVE: f(C)/f(C_anchor).
+
+    Pass 1.0 for the anchor itself (or any unit whose chain cost equals the
+    anchor's).  A unit with a higher building chain receives a multiplier < 1.0.
+    """
     o, p, q = class_baseline_estimators(hp, speed, range_wdist, dps_value,
                                         hp0, speed0, range0_wdist, dps0,
                                         cost0, special, tech_tier)
@@ -574,6 +634,8 @@ def class_baseline_estimators_3(hp, range_wdist, dps_value,
     MEANS of THREE normalized ratios, so all three terms apply the SAME logic
     (degree 1 / degree 2 / degree 3) and O = P = Q = cost0 EXACTLY at the
     baseline (maintainer rule 2026-07-26):
+
+    ``tech_tier`` is the RELATIVE tier multiplier f(C_unit) / f(C_anchor).
 
         h = hp / hp0 ; r = (range / range0) * special ; d = dps / dps0
         O = (h + r + d) / 3           * cost0   # degree 1: mean of the singles
@@ -595,6 +657,7 @@ def class_baseline_estimators_3(hp, range_wdist, dps_value,
 def class_baseline_price_3(hp, range_wdist, dps_value,
                            hp0, range0_wdist, dps0, cost0,
                            special=1.0, tech_tier=1.0) -> float:
+    """3-input (static) class-baseline price.  ``tech_tier`` is RELATIVE."""
     o, p, q = class_baseline_estimators_3(hp, range_wdist, dps_value,
                                           hp0, range0_wdist, dps0,
                                           cost0, special, tech_tier)
