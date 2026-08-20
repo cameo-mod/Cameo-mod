@@ -207,3 +207,27 @@
 		Explosions: d2k_med_explosion
 		ImpactSounds: EXPLMD2.WAV
 		ExplosionPalette: effect75alpha
+
+## D2K per-game PROJECTILE and EFFECT templates for the Dune siege mortar.
+
+^Projectile_Shell_Light_D2K_Mortar:
+	Inherits: ^Projectile_Shell_Light
+	Projectile: Bullet
+		Speed: 175
+		Inaccuracy: 75
+		LaunchAngle: 125
+		ContrailLength: 30
+		ContrailStartWidth: 60
+		ContrailEndWidth: 15
+		ContrailStartColor: FEDCBA98
+		ContrailEndColor: 87654321
+		InaccuracyType: PerCellIncrement
+		Image: d2k_155mm
+		Palette: effect
+
+^Effect_CannonAP_Light_D2K_Mortar:
+	Inherits: ^Effect_CannonAP_Light
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_large_explosion
+		ImpactSounds: EXPLMD2.WAV
+		ExplosionPalette: effect75alpha

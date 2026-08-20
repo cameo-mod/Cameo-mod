@@ -283,7 +283,9 @@ finally the D2K `Debris` family moved its shrapnel bounce and demolition-effect 
 into `^Projectile_Grenade_Light_D2K_Debris` and `^Effect_Demolition_Light_D2K`;
 then the D2K 155mm family (D2K_155mm, D2K_155mm_turret, D2K_155mm3) moved its shared
 `d2k_155mm` projectile and `d2k_med_explosion` effect into
-`^Projectile_Grenade_Light_D2K_155mm` and `^Effect_Demolition_Heavy_D2K_155mm`.
+`^Projectile_Grenade_Light_D2K_155mm` and `^Effect_Demolition_Heavy_D2K_155mm`;
+then Dune_SiegeMortar moved its `d2k_155mm` Bullet and `d2k_large_explosion`
+into `^Projectile_Shell_Light_D2K_Mortar` and `^Effect_CannonAP_Light_D2K_Mortar`.
 
 **RESUME — Phase 2 remaining families** (one commit each: `--old <names>` → self-check → boot → commit):
 `LightMissile,MediumMissile,HeavyMissile` + `FlakWeapon,HeavyAAWeapon` → then
