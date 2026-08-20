@@ -1308,7 +1308,6 @@ SpecterArtilleryShell:
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Concussion_Medium
-	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 78
 	Range: 12640
 	MinRange: 2530
@@ -1619,7 +1618,6 @@ CorvetteDragon:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
-	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 35
 	Range: 9550
 	Report: rocket2.aud

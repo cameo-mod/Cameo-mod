@@ -29,6 +29,7 @@
 		ContrailEndColor: FFFFFF22
 
 ^Effect_Sonic_Shell:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud

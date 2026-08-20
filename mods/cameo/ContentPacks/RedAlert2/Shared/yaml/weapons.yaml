@@ -185,6 +185,7 @@
 		InvalidTargets: Ship, Structure, Bridge
 
 ^Effect_Ion_Ring_RA2:
+	Inherits@glow: ^ImpactGlow
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
@@ -468,6 +469,7 @@
 		InvalidTargets: Ship, Structure, Bridge
 
 ^Effect_Psi_Wave_RA2:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
@@ -627,6 +629,7 @@
 		InvalidTargets: Ship, Structure, Bridge
 
 ^Effect_Tesla_Impact_RA2:
+	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidRelationships: Neutral, Enemy
 		Damage: 1000
@@ -950,7 +953,8 @@ RA2sabot_elite:
 RA2MirageGun:
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^RA2TankDestroyerCannon
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_Iron_Fx_RA2
 	ReloadDelay: 39
 	Range: 6031

@@ -594,7 +594,8 @@ RA2HeavyMirageGun:
 	Inherits: ^RailgunWeapon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumChemicalWeapon
-	Inherits@4: ^RA2TankDestroyerCannon
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_Iron_Fx_RA2
 	ReloadDelay: 51
 	Range: 6112
