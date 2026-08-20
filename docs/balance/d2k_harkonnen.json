@@ -1159,28 +1159,31 @@
         "damage": "80000",
         "falloff": null,
         "spread": "666",
-        "tag": "1Dam",
+        "tag": "CannonHE_Heavy_D2K_DevBullet",
         "type": "SpreadDamage"
        },
        {
         "damage": "5",
         "falloff": null,
         "spread": "666",
-        "tag": "HealthPercentage",
+        "tag": "CannonHE_Heavy_D2K_DevBullet_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "100",
       "slot": "Armament",
       "versus_templates": [
-       "^D2K_Cannon"
+       "^Warhead_CannonHE_Heavy_D2K_DevBullet",
+       "^Projectile_Shell_Heavy_D2K_DevBullet",
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonHE_Heavy_D2K_DevBullet",
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "DevBullet",
       "weapon_class_source": "template"

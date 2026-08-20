@@ -1,5 +1,30 @@
 # Development Log
 
+## 2026-08-20 — D2K Devastator/Plasma cannon 3-way split (boot-gated)
+
+- Converted `DevBullet` and `PlasBullet` in `mods/cameo/weapons/d2k.yaml` from the old
+  `Inherits: ^D2K_Cannon` / `Inherits: DevBullet` pattern to explicit
+  `Inherits@wh` / `Inherits@proj` / `Inherits@fx`.
+- Added `^Warhead_CannonHE_Heavy_D2K_DevBullet`, `^Projectile_Shell_Heavy_D2K_DevBullet`,
+  and `^Effect_CannonHE_Heavy_D2K_DevBullet` in
+  `mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml`.
+- Preserved `Spread: 666`, `Damage: 80000`, `Versus`, `DamageTypes`, `HealthPercentageDamage`,
+  `Concrete: 3333`, `Glow`, `d2k_shockwave` impact sound/animation, `Projectile` speed/image,
+  `Range`, `ReloadDelay`, `Report`, and all `EffectAir`/`EffectWater`/shield/smudges.
+- Fixed the duplicate ground effect: the old `Warhead@3Eff: d2k_shockwave` and inherited
+  `Warhead@Effect: d2k_small_napalm` were merged into a single `Warhead@Effect: d2k_shockwave`
+  with `ValidTargets: Ground, Ship`.
+- `PlasBullet` now shares the same three D2K Shared layers, overriding `ReloadDelay`,
+  `Projectile` speed/image, and main warhead `Damage`/`Spread` only.
+- Regenerated `d2k_harkonnen` balance ledger and derived sidecar.
+- Verification:
+  - `tools/audit/effect_audit.py` → 0 duplicate `DamagesConcrete`
+  - `tools/audit/find_empty_warhead.py` → 0 empty warheads
+  - `tools/audit/find_orphan_old_keys.py` → 0 real bugs
+  - `tools/audit/audit_balance_drift.py` → 32 ledgers clean
+  - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new
+    `exception-*.log`
+
 ## 2026-08-22 — W24 cluster 9: D2K-rocket six-weapon split (boot-gated)
 
 - Converted `GoliathRockets_AA`, `WraithRockets_AA`, `SunDogRockets`, `MissileTurret` (`mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml`), `ScoutRockets_AA` (`mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml`), and `HeavyOrdosCombatTankRockets` (`mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml`) to the single `^D2KRocket` archetype.

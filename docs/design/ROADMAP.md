@@ -1638,6 +1638,13 @@ window.
   3-way split inheritance, `effect_audit` reports 0 duplicate concrete warheads,
   boot-gated with `MenuPostProcessEffect.PostWorldLoaded` and no new
   exception log.
+- [x] **D2K Devastator/Plasma cannon 3-way split** (2026-08-20) —
+  converted `DevBullet`/`PlasBullet` to explicit `Inherits@wh/@proj/@fx` using
+  new `^Warhead_CannonHE_Heavy_D2K_DevBullet`, `^Projectile_Shell_Heavy_D2K_DevBullet`,
+  and `^Effect_CannonHE_Heavy_D2K_DevBullet` in D2K Shared; preserved damage,
+  projectile, effect, concrete, glow, and merged the duplicate ground
+  `d2k_small_napalm` + `d2k_shockwave` effects into a single `d2k_shockwave`
+  impact; `audit_balance_drift` clean, boot-gated with no new exception log.
 - Note: 7 Ordos armor-rework files are the maintainer's live WIP — leave.
 
 ---

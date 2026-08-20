@@ -157,9 +157,9 @@ Emperor_Sardaukar_E:
 			Concrete: 60
 
 DevBullet:
-	Inherits: ^D2K_Cannon
-	-Warhead@CannonHE_Medium:
-	-Warhead@CannonHE_Medium_Percentage:
+	Inherits@wh: ^Warhead_CannonHE_Heavy_D2K_DevBullet
+	Inherits@proj: ^Projectile_Shell_Heavy_D2K_DevBullet
+	Inherits@fx: ^Effect_CannonHE_Heavy_D2K_DevBullet
 	ReloadDelay: 100
 	Range: 6666
 	Report: TANKHVY1.WAV
@@ -167,39 +167,18 @@ DevBullet:
 		Speed: 333
 		Image: doubleblastbullet
 		Palette: d2keffect
-	Warhead@1Dam: SpreadDamage
-		Damage: 80000
-		Spread: 666
-		Versus:
-			None: 70
-			Wood: 60
-			Light: 100
-			Medium: 90
-			Heavy: 90
-			Superheavy: 80
-			Concrete: 50
-	Warhead@HealthPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Spread: 666
-		Damage: 5
-	Warhead@Concrete: DamagesConcrete
-		Damage: 3333
-	Warhead@3Eff: CreateEffect
-		Explosions: d2k_shockwave
-		ImpactSounds: EXPLMD4.WAV
-		ExplosionPalette: effect75alpha
-	Warhead@Glow: GlowImpact
-		Color: A060E8
-		Scale: 1.4
-		FadeFrames: 60
 
 PlasBullet:
-	Inherits: DevBullet
+	Inherits@wh: ^Warhead_CannonHE_Heavy_D2K_DevBullet
+	Inherits@proj: ^Projectile_Shell_Heavy_D2K_DevBullet
+	Inherits@fx: ^Effect_CannonHE_Heavy_D2K_DevBullet
 	ReloadDelay: 75
+	Range: 6666
+	Report: TANKHVY1.WAV
 	Projectile: Bullet
 		Speed: 250
 		Image: oneblastbullet
-	Warhead@1Dam: SpreadDamage
+	Warhead@CannonHE_Heavy_D2K_DevBullet:
 		Damage: 12500
 		Spread: 250
 
