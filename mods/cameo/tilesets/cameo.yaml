@@ -1,8 +1,9 @@
 General:
-	Name: Cameo
+	Name: Cameo (experimental, blank)
 	Id: CAMEO
+	TileSize: 48,48
 	SheetSize: 4096
-	EditorTemplateOrder: Terrain, Act Terrain, Act Water, Har Terrain, Har Cliffs, Har Buildings, Ze3 Terrain, Ze3 Cliffs, Ze3 Kakariko, Ze3 Decoration, Ze3 Water & Bridge, Terrain, T&W Debris, T&W Road, T&W Cliffs, T&W Beach, T&W River, T&W Bridge, T&W RA Debris, T&W RA Water Cliffs, T&W RA Bridge, J&S&D Debris, J&S&D Road, J&S&D Cliffs, J&S&D Beach, J&S&D River, J&S&D Bridge, J&S&D RA Debris, J&S&D RA Water Cliffs, J&S&D RA Bridge, Int Floor, Int Wall, Zeruel87 Urban
+	EditorTemplateOrder: Terrain, Act Terrain, Act Water, Har Terrain, Har Cliffs, Har Buildings, Ze3 Terrain, Ze3 Cliffs, Ze3 Kakariko, Ze3 Decoration, Ze3 Water & Bridge, Terrain, T&W Debris, T&W Road, T&W Cliffs, T&W Beach, T&W River, T&W Bridge, T&W RA Debris, T&W RA Water Cliffs, T&W RA Bridge, J&S&D Debris, J&S&D Road, J&S&D Cliffs, J&S&D Beach, J&S&D River, J&S&D Bridge, J&S&D RA Debris, J&S&D RA Water Cliffs, J&S&D RA Bridge, Int Floor, Int wall, Zeruel87 Urban
 	HeightDebugColors: AA0000
 
 Terrain:
@@ -88,8 +89,8 @@ Terrain:
 		Type: Tree
 		TargetTypes: Ground
 		Color: 2D7300 #1C2024
-	TerrainType@Wall:
-		Type: Wall
+	TerrainType@wall:
+		Type: wall
 		TargetTypes: Ground
 		AcceptsSmudgeType: Crater, Scorch
 		Color: 000000 #D0C0A0
@@ -97,6 +98,26 @@ Terrain:
 		Type: Water
 		TargetTypes: Water
 		Color: 5C74C6 #5C74A4
+	TerrainType@RA2Copper:
+		Type: RA2Copper
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 804020
+	TerrainType@RA2Silver:
+		Type: RA2Silver
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: C0C0C0
+	TerrainType@RA2Ore:
+		Type: RA2Ore
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 808000
+	TerrainType@RA2Gems:
+		Type: RA2Gems
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 8040C0
 	TerrainType@Ore:
 		Type: Ore
 		TargetTypes: Ground
@@ -2504,7 +2525,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: wall
 	Template@150:
 		Id: 150
 		Images: p02.tem
@@ -2512,7 +2533,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: wall
 	Template@151:
 		Id: 151
 		Images: p03.tem
@@ -2520,7 +2541,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: wall
 	Template@152:
 		Id: 152
 		Images: p04.tem
@@ -2528,7 +2549,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: wall
 	Template@153:
 		Id: 153
 		Images: p07.tem
@@ -2564,12 +2585,12 @@ Templates:
 		Size: 3,2
 		Categories: Debris
 		Tiles:
-			0: Wall
-			1: Wall
-			2: Wall
-			3: Wall
+			0: wall
+			1: wall
+			2: wall
+			3: wall
 			4: ClearTemperat
-			5: Wall
+			5: wall
 	Template@156:
 		Id: 156
 		Images: p14.tem
@@ -2577,8 +2598,8 @@ Templates:
 		Size: 2,1
 		Categories: Debris
 		Tiles:
-			0: Wall
-			1: Wall
+			0: wall
+			1: wall
 	Template@157:
 		Id: 157
 		Images: b1.tem
@@ -2958,7 +2979,7 @@ Templates:
 			5: Road
 			6: Road
 			7: ClearTemperat
-			10: Wall
+			10: wall
 			11: Road
 	Template@173:
 		Id: 173
@@ -2970,7 +2991,7 @@ Templates:
 			1: ClearTemperat
 			2: Road
 			3: ClearTemperat
-			4: Wall
+			4: wall
 			5: Road
 			6: Road
 			7: Road
@@ -3005,7 +3026,7 @@ Templates:
 			5: Road
 			6: Road
 			7: ClearTemperat
-			8: Wall
+			8: wall
 	Template@176:
 		Id: 176
 		Images: d17.tem
@@ -3034,7 +3055,7 @@ Templates:
 			5: ClearTemperat
 			6: ClearTemperat
 			7: Road
-			8: Wall
+			8: wall
 	Template@178:
 		Id: 178
 		Images: d19.tem
@@ -3296,7 +3317,7 @@ Templates:
 		Size: 2,2
 		Categories: Road
 		Tiles:
-			0: Wall
+			0: wall
 			2: Road
 			3: ClearTemperat
 	Template@201:
@@ -3354,7 +3375,7 @@ Templates:
 			12: River
 			13: Rock
 			14: River
-			16: Wall
+			16: wall
 			17: ClearTemperat
 	Template@236:
 		Id: 236
@@ -3403,7 +3424,7 @@ Templates:
 		Size: 4,4
 		Categories: River
 		Tiles:
-			2: Wall
+			2: wall
 			3: ClearTemperat
 			5: ClearTemperat
 			6: River
@@ -4025,12 +4046,12 @@ Templates:
 			2: ClearTemperat
 			3: Road
 			4: River
-			5: Wall
+			5: wall
 			6: Bridge
-			7: Wall
+			7: wall
 			8: River
 			9: Bridge
-			10: Wall
+			10: wall
 			11: River
 			12: Road
 			13: ClearTemperat
@@ -4046,9 +4067,9 @@ Templates:
 			2: ClearTemperat
 			3: Road
 			4: River
-			5: Wall
-			6: Wall
-			7: Wall
+			5: wall
+			6: wall
+			7: wall
 			8: River
 			9: River
 			10: River
@@ -4068,15 +4089,15 @@ Templates:
 			1: ClearTemperat
 			2: ClearTemperat
 			4: ClearTemperat
-			5: Wall
+			5: wall
 			6: Bridge
-			7: Wall
+			7: wall
 			8: River
 			9: River
 			10: River
-			11: Wall
+			11: wall
 			12: Bridge
-			13: Wall
+			13: wall
 			14: ClearTemperat
 			15: River
 			16: ClearTemperat
@@ -4096,8 +4117,8 @@ Templates:
 			1: ClearTemperat
 			2: ClearTemperat
 			4: ClearTemperat
-			5: Wall
-			6: Wall
+			5: wall
+			6: wall
 			7: River
 			8: River
 			9: River
@@ -5796,12 +5817,12 @@ Templates:
 		Size: 3,2
 		Categories: Debris
 		Tiles:
-			0: Wall
-			1: Wall
-			2: Wall
-			3: Wall
+			0: wall
+			1: wall
+			2: wall
+			3: wall
 			4: ClearWinter
-			5: Wall
+			5: wall
 	Template@53080:
 		Id: 53080
 		Images: p14.win
@@ -5809,8 +5830,8 @@ Templates:
 		Size: 2,1
 		Categories: Debris
 		Tiles:
-			0: Wall
-			1: Wall
+			0: wall
+			1: wall
 	Template@53081:
 		Id: 53081
 		Images: p15win.shp
@@ -6075,7 +6096,7 @@ Templates:
 			5: Road
 			6: Road
 			7: ClearWinter
-			10: Wall
+			10: wall
 			11: Road
 	Template@53106:
 		Id: 53106
@@ -6087,7 +6108,7 @@ Templates:
 			1: ClearWinter
 			2: Road
 			3: ClearWinter
-			4: Wall
+			4: wall
 			5: Road
 			6: Road
 			7: Road
@@ -6122,7 +6143,7 @@ Templates:
 			5: Road
 			6: Road
 			7: ClearWinter
-			8: Wall
+			8: wall
 	Template@53109:
 		Id: 53109
 		Images: d17.win
@@ -6151,7 +6172,7 @@ Templates:
 			5: ClearWinter
 			6: ClearWinter
 			7: Road
-			8: Wall
+			8: wall
 	Template@53111:
 		Id: 53111
 		Images: d19.win
@@ -6413,7 +6434,7 @@ Templates:
 		Size: 2,2
 		Categories: Road
 		Tiles:
-			0: Wall
+			0: wall
 			2: Road
 			3: ClearWinter
 	Template@53134:
@@ -6471,7 +6492,7 @@ Templates:
 			12: River
 			13: Rock
 			14: River
-			16: Wall
+			16: wall
 			17: ClearWinter
 	Template@53137:
 		Id: 53137
@@ -6520,7 +6541,7 @@ Templates:
 		Size: 4,4
 		Categories: River
 		Tiles:
-			2: Wall
+			2: wall
 			3: ClearWinter
 			5: ClearWinter
 			6: River
@@ -6718,12 +6739,12 @@ Templates:
 			2: ClearWinter
 			3: Road
 			4: River
-			5: Wall
+			5: wall
 			6: Bridge
-			7: Wall
+			7: wall
 			8: River
 			9: Bridge
-			10: Wall
+			10: wall
 			11: River
 			12: Road
 			13: ClearWinter
@@ -6739,9 +6760,9 @@ Templates:
 			2: ClearWinter
 			3: Road
 			4: River
-			5: Wall
-			6: Wall
-			7: Wall
+			5: wall
+			6: wall
+			7: wall
 			8: River
 			9: River
 			10: River
@@ -6761,15 +6782,15 @@ Templates:
 			1: ClearWinter
 			2: ClearWinter
 			4: ClearWinter
-			5: Wall
+			5: wall
 			6: Bridge
-			7: Wall
+			7: wall
 			8: River
 			9: River
 			10: River
-			11: Wall
+			11: wall
 			12: Bridge
-			13: Wall
+			13: wall
 			14: ClearWinter
 			15: River
 			16: ClearWinter
@@ -6789,8 +6810,8 @@ Templates:
 			1: ClearWinter
 			2: ClearWinter
 			4: ClearWinter
-			5: Wall
-			6: Wall
+			5: wall
+			6: wall
 			7: River
 			8: River
 			9: River
@@ -8215,7 +8236,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: wall
 	Template@54068:
 		Id: 54068
 		Images: p02.jun
@@ -8223,7 +8244,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: wall
 	Template@54069:
 		Id: 54069
 		Images: p03.jun
@@ -8231,7 +8252,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: wall
 	Template@54070:
 		Id: 54070
 		Images: p04.jun
@@ -8239,7 +8260,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: wall
 	Template@54073:
 		Id: 54073
 		Images: p07.jun
@@ -8275,12 +8296,12 @@ Templates:
 		Size: 3,2
 		Categories: Debris
 		Tiles:
-			0: Wall
-			1: Wall
-			2: Wall
-			3: Wall
+			0: wall
+			1: wall
+			2: wall
+			3: wall
 			4: ClearJungle
-			5: Wall
+			5: wall
 	Template@54080:
 		Id: 54080
 		Images: p14.jun
@@ -8288,8 +8309,8 @@ Templates:
 		Size: 2,1
 		Categories: Debris
 		Tiles:
-			0: Wall
-			1: Wall
+			0: wall
+			1: wall
 	Template@54082:
 		Id: 54082
 		Images: b1.jun
@@ -8472,7 +8493,7 @@ Templates:
 			5: Road
 			6: Road
 			7: ClearJungle
-			10: Wall
+			10: wall
 			11: Road
 	Template@54106:
 		Id: 54106
@@ -8484,7 +8505,7 @@ Templates:
 			1: ClearJungle
 			2: Road
 			3: ClearJungle
-			4: Wall
+			4: wall
 			5: Road
 			6: Road
 			7: Road
@@ -8519,7 +8540,7 @@ Templates:
 			5: Road
 			6: Road
 			7: ClearJungle
-			8: Wall
+			8: wall
 	Template@54109:
 		Id: 54109
 		Images: d17.jun
@@ -8548,7 +8569,7 @@ Templates:
 			5: ClearJungle
 			6: ClearJungle
 			7: Road
-			8: Wall
+			8: wall
 	Template@54111:
 		Id: 54111
 		Images: d19.jun
@@ -8810,7 +8831,7 @@ Templates:
 		Size: 2,2
 		Categories: Road
 		Tiles:
-			0: Wall
+			0: wall
 			2: Road
 			3: ClearJungle
 	Template@54134:
@@ -8852,7 +8873,7 @@ Templates:
 			12: River
 			13: Rock
 			14: River
-			16: Wall
+			16: wall
 			17: ClearJungle
 	Template@54137:
 		Id: 54137
@@ -8901,7 +8922,7 @@ Templates:
 		Size: 4,4
 		Categories: River
 		Tiles:
-			2: Wall
+			2: wall
 			3: ClearJungle
 			5: ClearJungle
 			6: River
@@ -9099,12 +9120,12 @@ Templates:
 			2: Clear
 			3: Road
 			4: River
-			5: Wall
+			5: wall
 			6: Bridge
-			7: Wall
+			7: wall
 			8: River
 			9: Bridge
-			10: Wall
+			10: wall
 			11: River
 			12: Road
 			13: Clear
@@ -9120,9 +9141,9 @@ Templates:
 			2: Clear
 			3: Road
 			4: River
-			5: Wall
-			6: Wall
-			7: Wall
+			5: wall
+			6: wall
+			7: wall
 			8: River
 			9: River
 			10: River
@@ -9142,15 +9163,15 @@ Templates:
 			1: Clear
 			2: Clear
 			4: Clear
-			5: Wall
+			5: wall
 			6: Bridge
-			7: Wall
+			7: wall
 			8: River
 			9: River
 			10: River
-			11: Wall
+			11: wall
 			12: Bridge
-			13: Wall
+			13: wall
 			14: Clear
 			15: River
 			16: Clear
@@ -9170,8 +9191,8 @@ Templates:
 			1: Clear
 			2: Clear
 			4: Clear
-			5: Wall
-			6: Wall
+			5: wall
+			6: wall
 			7: River
 			8: River
 			9: River
@@ -9796,7 +9817,7 @@ Templates:
 	# 	Size: 1,1
 	# 	Categories: J&S&D Debris
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@55068:
 	# 	Id: 55068
 	# 	Images: p02.sno
@@ -9804,7 +9825,7 @@ Templates:
 	# 	Size: 1,1
 	# 	Categories: J&S&D Debris
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@55069:
 	# 	Id: 55069
 	# 	Images: p03.sno
@@ -9812,7 +9833,7 @@ Templates:
 	# 	Size: 1,1
 	# 	Categories: J&S&D Debris
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@55070:
 	# 	Id: 55070
 	# 	Images: p04.sno
@@ -9820,7 +9841,7 @@ Templates:
 	# 	Size: 1,1
 	# 	Categories: J&S&D Debris
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@55073:
 	# 	Id: 55073
 	# 	Images: p07.sno
@@ -9891,12 +9912,12 @@ Templates:
 	# 	Size: 3,2
 	# 	Categories: J&S&D Debris
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		2: Wall
-	# 		3: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		2: wall
+	# 		3: wall
 	# 		4: ClearSnow
-	# 		5: Wall
+	# 		5: wall
 	# Template@55080:
 	# 	Id: 55080
 	# 	Images: p14.sno
@@ -9904,8 +9925,8 @@ Templates:
 	# 	Size: 2,1
 	# 	Categories: J&S&D Debris
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
+	# 		0: wall
+	# 		1: wall
 	# Template@55082:
 	# 	Id: 55082
 	# 	Images: b1.sno
@@ -10158,7 +10179,7 @@ Templates:
 	# 		5: Road
 	# 		6: Road
 	# 		7: ClearSnow
-	# 		10: Wall
+	# 		10: wall
 	# 		11: Road
 	# Template@55106:
 	# 	Id: 55106
@@ -10170,7 +10191,7 @@ Templates:
 	# 		1: ClearSnow
 	# 		2: Road
 	# 		3: ClearSnow
-	# 		4: Wall
+	# 		4: wall
 	# 		5: Road
 	# 		6: Road
 	# 		7: Road
@@ -10205,7 +10226,7 @@ Templates:
 	# 		5: Road
 	# 		6: Road
 	# 		7: ClearSnow
-	# 		8: Wall
+	# 		8: wall
 	# Template@55109:
 	# 	Id: 55109
 	# 	Images: d17.sno
@@ -10234,7 +10255,7 @@ Templates:
 	# 		5: ClearSnow
 	# 		6: ClearSnow
 	# 		7: Road
-	# 		8: Wall
+	# 		8: wall
 	# Template@55111:
 	# 	Id: 55111
 	# 	Images: d19.sno
@@ -10496,7 +10517,7 @@ Templates:
 	# 	Size: 2,2
 	# 	Categories: J&S&D Road
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# 		2: Road
 	# 		3: ClearSnow
 	# Template@55134:
@@ -10538,7 +10559,7 @@ Templates:
 	# 		12: River
 	# 		13: Rock
 	# 		14: River
-	# 		16: Wall
+	# 		16: wall
 	# 		17: ClearSnow
 	# Template@55137:
 	# 	Id: 55137
@@ -10587,7 +10608,7 @@ Templates:
 	# 	Size: 4,4
 	# 	Categories: J&S&D River
 	# 	Tiles:
-	# 		2: Wall
+	# 		2: wall
 	# 		3: ClearSnow
 	# 		5: ClearSnow
 	# 		6: River
@@ -10796,12 +10817,12 @@ Templates:
 	# 		2: ClearSnow
 	# 		3: Road
 	# 		4: River
-	# 		5: Wall
+	# 		5: wall
 	# 		6: Bridge
-	# 		7: Wall
+	# 		7: wall
 	# 		8: River
 	# 		9: Bridge
-	# 		10: Wall
+	# 		10: wall
 	# 		11: River
 	# 		12: Road
 	# 		13: ClearSnow
@@ -10817,9 +10838,9 @@ Templates:
 	# 		2: ClearSnow
 	# 		3: Road
 	# 		4: River
-	# 		5: Wall
-	# 		6: Wall
-	# 		7: Wall
+	# 		5: wall
+	# 		6: wall
+	# 		7: wall
 	# 		8: River
 	# 		9: River
 	# 		10: River
@@ -10839,15 +10860,15 @@ Templates:
 	# 		1: ClearSnow
 	# 		2: ClearSnow
 	# 		4: ClearSnow
-	# 		5: Wall
+	# 		5: wall
 	# 		6: Bridge
-	# 		7: Wall
+	# 		7: wall
 	# 		8: River
 	# 		9: River
 	# 		10: River
-	# 		11: Wall
+	# 		11: wall
 	# 		12: Bridge
-	# 		13: Wall
+	# 		13: wall
 	# 		14: ClearSnow
 	# 		15: River
 	# 		16: ClearSnow
@@ -10867,8 +10888,8 @@ Templates:
 	# 		1: ClearSnow
 	# 		2: ClearSnow
 	# 		4: ClearSnow
-	# 		5: Wall
-	# 		6: Wall
+	# 		5: wall
+	# 		6: wall
 	# 		7: River
 	# 		8: River
 	# 		9: River
@@ -12707,7 +12728,7 @@ Templates:
 	# 	Size: 1,1
 	# 	Categories: J&S&D Debris
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@57068:
 	# 	Id: 57068
 	# 	Images: p02.des
@@ -12715,7 +12736,7 @@ Templates:
 	# 	Size: 1,1
 	# 	Categories: J&S&D Debris
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@57069:
 	# 	Id: 57069
 	# 	Images: p03.des
@@ -12723,7 +12744,7 @@ Templates:
 	# 	Size: 1,1
 	# 	Categories: J&S&D Debris
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@57070:
 	# 	Id: 57070
 	# 	Images: p04.des
@@ -12731,7 +12752,7 @@ Templates:
 	# 	Size: 1,1
 	# 	Categories: J&S&D Debris
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@57071:
 	# 	Id: 57071
 	# 	Images: p05.des
@@ -13009,7 +13030,7 @@ Templates:
 	# 		5: Road
 	# 		6: Road
 	# 		7: ClearDesert
-	# 		10: Wall
+	# 		10: wall
 	# 		11: Road
 	# Template@57106:
 	# 	Id: 57106
@@ -13021,7 +13042,7 @@ Templates:
 	# 		1: ClearDesert
 	# 		2: Road
 	# 		3: ClearDesert
-	# 		4: Wall
+	# 		4: wall
 	# 		5: Road
 	# 		6: Road
 	# 		7: Road
@@ -13056,7 +13077,7 @@ Templates:
 	# 		5: Road
 	# 		6: Road
 	# 		7: ClearDesert
-	# 		8: Wall
+	# 		8: wall
 	# Template@57109:
 	# 	Id: 57109
 	# 	Images: d17.des
@@ -13085,7 +13106,7 @@ Templates:
 	# 		5: ClearDesert
 	# 		6: ClearDesert
 	# 		7: Road
-	# 		8: Wall
+	# 		8: wall
 	# Template@57111:
 	# 	Id: 57111
 	# 	Images: d19.des
@@ -13347,7 +13368,7 @@ Templates:
 	# 	Size: 2,2
 	# 	Categories: J&S&D Road
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# 		2: Road
 	# 		3: ClearDesert
 	# Template@57134:
@@ -13715,14 +13736,14 @@ Templates:
 	# 		4: Road
 	# 		6: ClearDesert
 	# 		7: Rock
-	# 		8: Wall
+	# 		8: wall
 	# 		9: Bridge
-	# 		10: Wall
+	# 		10: wall
 	# 		11: ClearDesert
 	# 		12: River
 	# 		13: River
 	# 		14: Bridge
-	# 		15: Wall
+	# 		15: wall
 	# 		16: Rock
 	# 		17: Rock
 	# 		18: Rock
@@ -13745,8 +13766,8 @@ Templates:
 	# 		6: ClearDesert
 	# 		7: Rock
 	# 		8: Rock
-	# 		9: Wall
-	# 		10: Wall
+	# 		9: wall
+	# 		10: wall
 	# 		11: ClearDesert
 	# 		12: River
 	# 		13: River
@@ -13775,16 +13796,16 @@ Templates:
 	# 		4: Rock
 	# 		5: ClearDesert
 	# 		6: ClearDesert
-	# 		7: Wall
+	# 		7: wall
 	# 		8: Bridge
-	# 		9: Wall
+	# 		9: wall
 	# 		10: River
 	# 		11: River
 	# 		12: Rock
 	# 		13: River
-	# 		14: Wall
+	# 		14: wall
 	# 		15: Bridge
-	# 		16: Wall
+	# 		16: wall
 	# 		17: Rock
 	# 		18: River
 	# 		19: River
@@ -13804,8 +13825,8 @@ Templates:
 	# 		4: Rock
 	# 		5: ClearDesert
 	# 		6: ClearDesert
-	# 		7: Wall
-	# 		8: Wall
+	# 		7: wall
+	# 		8: wall
 	# 		9: River
 	# 		10: River
 	# 		11: River
@@ -13813,7 +13834,7 @@ Templates:
 	# 		13: River
 	# 		14: River
 	# 		15: River
-	# 		16: Wall
+	# 		16: wall
 	# 		17: Rock
 	# 		18: River
 	# 		19: River
@@ -15699,459 +15720,459 @@ Templates:
 	# 	Images: wall0001.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59330:
 	# 	Id: 59330
 	# 	Images: wall0002.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59331:
 	# 	Id: 59331
 	# 	Images: wall0003.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59332:
 	# 	Id: 59332
 	# 	Images: wall0004.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59333:
 	# 	Id: 59333
 	# 	Images: wall0005.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59334:
 	# 	Id: 59334
 	# 	Images: wall0006.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59335:
 	# 	Id: 59335
 	# 	Images: wall0007.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59336:
 	# 	Id: 59336
 	# 	Images: wall0008.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59337:
 	# 	Id: 59337
 	# 	Images: wall0009.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59338:
 	# 	Id: 59338
 	# 	Images: wall0010.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59339:
 	# 	Id: 59339
 	# 	Images: wall0011.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59340:
 	# 	Id: 59340
 	# 	Images: wall0012.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59341:
 	# 	Id: 59341
 	# 	Images: wall0013.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59342:
 	# 	Id: 59342
 	# 	Images: wall0014.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59343:
 	# 	Id: 59343
 	# 	Images: wall0015.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59344:
 	# 	Id: 59344
 	# 	Images: wall0016.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59345:
 	# 	Id: 59345
 	# 	Images: wall0017.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59346:
 	# 	Id: 59346
 	# 	Images: wall0018.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59347:
 	# 	Id: 59347
 	# 	Images: wall0019.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59348:
 	# 	Id: 59348
 	# 	Images: wall0020.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59349:
 	# 	Id: 59349
 	# 	Images: wall0021.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59350:
 	# 	Id: 59350
 	# 	Images: wall0022.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59351:
 	# 	Id: 59351
 	# 	Images: wall0023.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		2: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		2: wall
 	# Template@59352:
 	# 	Id: 59352
 	# 	Images: wall0024.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		2: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		2: wall
 	# Template@59353:
 	# 	Id: 59353
 	# 	Images: wall0025.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		2: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		2: wall
 	# Template@59354:
 	# 	Id: 59354
 	# 	Images: wall0026.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		2: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		2: wall
 	# Template@59355:
 	# 	Id: 59355
 	# 	Images: wall0027.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		3: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		3: wall
 	# Template@59356:
 	# 	Id: 59356
 	# 	Images: wall0028.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		3: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		3: wall
 	# Template@59357:
 	# 	Id: 59357
 	# 	Images: wall0029.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		3: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		3: wall
 	# Template@59358:
 	# 	Id: 59358
 	# 	Images: wall0030.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		3: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		3: wall
 	# Template@59359:
 	# 	Id: 59359
 	# 	Images: wall0031.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		2: Wall
-	# 		3: Wall
+	# 		0: wall
+	# 		2: wall
+	# 		3: wall
 	# Template@59360:
 	# 	Id: 59360
 	# 	Images: wall0032.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		2: Wall
-	# 		3: Wall
+	# 		0: wall
+	# 		2: wall
+	# 		3: wall
 	# Template@59361:
 	# 	Id: 59361
 	# 	Images: wall0033.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		2: Wall
-	# 		3: Wall
+	# 		0: wall
+	# 		2: wall
+	# 		3: wall
 	# Template@59362:
 	# 	Id: 59362
 	# 	Images: wall0034.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		2: Wall
-	# 		3: Wall
+	# 		0: wall
+	# 		2: wall
+	# 		3: wall
 	# Template@59363:
 	# 	Id: 59363
 	# 	Images: wall0035.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		1: Wall
-	# 		2: Wall
-	# 		3: Wall
+	# 		1: wall
+	# 		2: wall
+	# 		3: wall
 	# Template@59364:
 	# 	Id: 59364
 	# 	Images: wall0036.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		1: Wall
-	# 		2: Wall
-	# 		3: Wall
+	# 		1: wall
+	# 		2: wall
+	# 		3: wall
 	# Template@59365:
 	# 	Id: 59365
 	# 	Images: wall0037.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		1: Wall
-	# 		2: Wall
-	# 		3: Wall
+	# 		1: wall
+	# 		2: wall
+	# 		3: wall
 	# Template@59366:
 	# 	Id: 59366
 	# 	Images: wall0038.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		1: Wall
-	# 		2: Wall
-	# 		3: Wall
+	# 		1: wall
+	# 		2: wall
+	# 		3: wall
 	# Template@59367:
 	# 	Id: 59367
 	# 	Images: wall0039.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,3
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		2: Wall
-	# 		3: Wall
-	# 		4: Wall
+	# 		0: wall
+	# 		2: wall
+	# 		3: wall
+	# 		4: wall
 	# Template@59368:
 	# 	Id: 59368
 	# 	Images: wall0040.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,3
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		2: Wall
-	# 		3: Wall
-	# 		4: Wall
+	# 		0: wall
+	# 		2: wall
+	# 		3: wall
+	# 		4: wall
 	# Template@59369:
 	# 	Id: 59369
 	# 	Images: wall0041.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,3
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		1: Wall
-	# 		2: Wall
-	# 		3: Wall
-	# 		5: Wall
+	# 		1: wall
+	# 		2: wall
+	# 		3: wall
+	# 		5: wall
 	# Template@59370:
 	# 	Id: 59370
 	# 	Images: wall0042.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,3
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		1: Wall
-	# 		2: Wall
-	# 		3: Wall
-	# 		5: Wall
+	# 		1: wall
+	# 		2: wall
+	# 		3: wall
+	# 		5: wall
 	# Template@59371:
 	# 	Id: 59371
 	# 	Images: wall0043.int
 	# 	Palette: cameo-interior
 	# 	Size: 3,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		1: Wall
-	# 		3: Wall
-	# 		4: Wall
-	# 		5: Wall
+	# 		1: wall
+	# 		3: wall
+	# 		4: wall
+	# 		5: wall
 	# Template@59372:
 	# 	Id: 59372
 	# 	Images: wall0044.int
 	# 	Palette: cameo-interior
 	# 	Size: 3,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		1: Wall
-	# 		3: Wall
-	# 		4: Wall
-	# 		5: Wall
+	# 		1: wall
+	# 		3: wall
+	# 		4: wall
+	# 		5: wall
 	# Template@59373:
 	# 	Id: 59373
 	# 	Images: wall0045.int
 	# 	Palette: cameo-interior
 	# 	Size: 3,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		1: Wall
-	# 		3: Wall
-	# 		4: Wall
-	# 		5: Wall
+	# 		1: wall
+	# 		3: wall
+	# 		4: wall
+	# 		5: wall
 	# Template@59374:
 	# 	Id: 59374
 	# 	Images: wall0046.int
 	# 	Palette: cameo-interior
 	# 	Size: 3,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		1: Wall
-	# 		3: Wall
-	# 		4: Wall
-	# 		5: Wall
+	# 		1: wall
+	# 		3: wall
+	# 		4: wall
+	# 		5: wall
 	# Template@59375:
 	# 	Id: 59375
 	# 	Images: wall0047.int
 	# 	Palette: cameo-interior
 	# 	Size: 3,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		2: Wall
-	# 		4: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		2: wall
+	# 		4: wall
 	# Template@59376:
 	# 	Id: 59376
 	# 	Images: wall0048.int
 	# 	Palette: cameo-interior
 	# 	Size: 3,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		2: Wall
-	# 		4: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		2: wall
+	# 		4: wall
 	# Template@59377:
 	# 	Id: 59377
 	# 	Images: wall0049.int
 	# 	Palette: cameo-interior
 	# 	Size: 3,3
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		1: Wall
-	# 		3: Wall
-	# 		4: Wall
-	# 		5: Wall
-	# 		7: Wall
+	# 		1: wall
+	# 		3: wall
+	# 		4: wall
+	# 		5: wall
+	# 		7: wall
 	# Template@59268:
 	# 	Id: 59268
 	# 	Images: flor0001.int
@@ -16297,120 +16318,120 @@ Templates:
 	# 	Images: xtra0001.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59385:
 	# 	Id: 59385
 	# 	Images: xtra0002.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# 		1: ClearInterior
 	# Template@59386:
 	# 	Id: 59386
 	# 	Images: xtra0003.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59387:
 	# 	Id: 59387
 	# 	Images: xtra0004.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# 		1: ClearInterior
 	# Template@59388:
 	# 	Id: 59388
 	# 	Images: xtra0005.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59389:
 	# 	Id: 59389
 	# 	Images: xtra0006.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# 		1: ClearInterior
 	# Template@59390:
 	# 	Id: 59390
 	# 	Images: xtra0007.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59391:
 	# 	Id: 59391
 	# 	Images: xtra0008.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# 		1: ClearInterior
 	# Template@59392:
 	# 	Id: 59392
 	# 	Images: xtra0009.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59393:
 	# 	Id: 59393
 	# 	Images: xtra0010.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59394:
 	# 	Id: 59394
 	# 	Images: xtra0011.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59395:
 	# 	Id: 59395
 	# 	Images: xtra0012.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# 		1: ClearInterior
 	# Template@59396:
 	# 	Id: 59396
 	# 	Images: xtra0013.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# 		1: ClearInterior
 	# Template@59397:
 	# 	Id: 59397
 	# 	Images: xtra0014.int
 	# 	Palette: cameo-interior
 	# 	Size: 3,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
 	# 		0: ClearInterior
-	# 		1: Wall
+	# 		1: wall
 	# 		2: ClearInterior
 	# 		3: ClearInterior
 	# 		4: ClearInterior
@@ -16420,29 +16441,29 @@ Templates:
 	# 	Images: xtra0015.int
 	# 	Palette: cameo-interior
 	# 	Size: 3,2
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		2: Wall
-	# 		3: Wall
-	# 		4: Wall
-	# 		5: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		2: wall
+	# 		3: wall
+	# 		4: wall
+	# 		5: wall
 	# Template@59399:
 	# 	Id: 59399
 	# 	Images: xtra0016.int
 	# 	Palette: cameo-interior
 	# 	Size: 2,4
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		2: Wall
-	# 		3: Wall
-	# 		4: Wall
-	# 		5: Wall
-	# 		6: Wall
-	# 		7: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		2: wall
+	# 		3: wall
+	# 		4: wall
+	# 		5: wall
+	# 		6: wall
+	# 		7: wall
 	# Template@59318:
 	# 	Id: 59318
 	# 	Images: strp0001.int
@@ -16910,238 +16931,238 @@ Templates:
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
 	# 	PickAny: True
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		2: Wall
-	# 		3: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		2: wall
+	# 		3: wall
 	# Template@59292:
 	# 	Id: 59292
 	# 	Images: lwal0002.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
 	# 	PickAny: True
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		2: Wall
-	# 		3: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		2: wall
+	# 		3: wall
 	# Template@59293:
 	# 	Id: 59293
 	# 	Images: lwal0003.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
 	# 	PickAny: True
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		2: Wall
-	# 		3: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		2: wall
+	# 		3: wall
 	# Template@59294:
 	# 	Id: 59294
 	# 	Images: lwal0004.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
 	# 	PickAny: True
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		2: Wall
-	# 		3: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		2: wall
+	# 		3: wall
 	# Template@59295:
 	# 	Id: 59295
 	# 	Images: lwal0005.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
 	# 	PickAny: True
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
-	# 		1: Wall
-	# 		2: Wall
-	# 		3: Wall
-	# 		4: Wall
-	# 		5: Wall
+	# 		0: wall
+	# 		1: wall
+	# 		2: wall
+	# 		3: wall
+	# 		4: wall
+	# 		5: wall
 	# Template@59296:
 	# 	Id: 59296
 	# 	Images: lwal0006.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59297:
 	# 	Id: 59297
 	# 	Images: lwal0007.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59298:
 	# 	Id: 59298
 	# 	Images: lwal0008.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59299:
 	# 	Id: 59299
 	# 	Images: lwal0009.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59300:
 	# 	Id: 59300
 	# 	Images: lwal0010.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59301:
 	# 	Id: 59301
 	# 	Images: lwal0011.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59302:
 	# 	Id: 59302
 	# 	Images: lwal0012.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59303:
 	# 	Id: 59303
 	# 	Images: lwal0013.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59304:
 	# 	Id: 59304
 	# 	Images: lwal0014.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59305:
 	# 	Id: 59305
 	# 	Images: lwal0015.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59306:
 	# 	Id: 59306
 	# 	Images: lwal0016.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59307:
 	# 	Id: 59307
 	# 	Images: lwal0017.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59308:
 	# 	Id: 59308
 	# 	Images: lwal0018.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59309:
 	# 	Id: 59309
 	# 	Images: lwal0019.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59310:
 	# 	Id: 59310
 	# 	Images: lwal0020.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59311:
 	# 	Id: 59311
 	# 	Images: lwal0021.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59312:
 	# 	Id: 59312
 	# 	Images: lwal0022.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59313:
 	# 	Id: 59313
 	# 	Images: lwal0023.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59314:
 	# 	Id: 59314
 	# 	Images: lwal0024.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59315:
 	# 	Id: 59315
 	# 	Images: lwal0025.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59316:
 	# 	Id: 59316
 	# 	Images: lwal0026.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	# Template@59317:
 	# 	Id: 59317
 	# 	Images: lwal0027.int
 	# 	Palette: cameo-interior
 	# 	Size: 1,1
-	# 	Categories: Int Wall
+	# 	Categories: Int wall
 	# 	Tiles:
-	# 		0: Wall
+	# 		0: wall
 	Template@856:
 		Id: 856
 		Images: d2kconcrete.png

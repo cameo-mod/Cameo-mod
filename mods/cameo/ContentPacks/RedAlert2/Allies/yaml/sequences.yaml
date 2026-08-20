@@ -1,0 +1,1274 @@
+ra2_allies_alliedconstructionyard:
+	Defaults:
+		Offset: 2,-26
+	idle:
+		Filename: ra2_allies_alliedconstructionyard_ggcnst.shp
+		ShadowStart: 3
+	make:
+		Filename: ra2_allies_alliedconstructionyard_make.shp
+		Length: 29
+		ShadowStart: 29
+	dead:
+		Filename: ra2_allies_alliedconstructionyard_ggcnst.shp
+	build:
+		Filename: invisibleitem.shp
+	damaged-idle:
+		Filename: ra2_allies_alliedconstructionyard_ggcnst.shp
+		Start: 1
+		ShadowStart: 4
+	idle-fans:
+		Filename: ra2_allies_alliedconstructionyard_ggcnst_a.shp
+		Length: 6
+		Tick: 150
+	damaged-idle-fans:
+		Filename: ra2_allies_alliedconstructionyard_ggcnst_a.shp
+		Start: 5
+		Length: 6
+		Tick: 150
+	crane-overlay:
+		Filename: ra2_allies_alliedconstructionyard_ggcnst_b.shp
+		Length: 20
+		Tick: 150
+	damaged-crane-overlay:
+		Filename: ra2_allies_alliedconstructionyard_ggcnst_b.shp
+		Start: 20
+		Length: 20
+		Tick: 150
+	dead:
+		Filename: ra2_allies_alliedconstructionyard_ggcnstdm.shp
+		Length: 30
+		ShadowStart: 30
+		Tick: 90
+	icon:
+		Filename: ra2_allies_alliedconstructionyard_icon.png
+		Offset: 0,0
+
+ra2_allies_alliedbarracks:
+	Defaults:
+		Offset: -15,10
+	build:
+		Filename: invisibleitem.shp
+	idle:
+		Filename: ra2_allies_alliedbarracks_ggpile.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ra2_allies_alliedbarracks_ggpile.shp
+		Start: 1
+		ShadowStart: 4
+	idle-flag:
+		Filename: ra2_allies_alliedbarracks_ggpile_a.shp
+		Length: 16
+	damaged-idle-flag:
+		Filename: ra2_allies_alliedbarracks_ggpile_a.shp
+		Start: 16
+		Length: 16
+		ShadowStart: 48
+	make:
+		Filename: ra2_allies_alliedbarracks_make.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: ra2_allies_alliedbarracks_ggpiledm.shp # SHP broken & unused
+		Length: 25
+		ShadowStart: 25
+		Tick: 75
+		Offset: 10,15
+	icon:
+		Filename: ra2_allies_alliedbarracks_icon.shp
+		Offset: 0,0
+
+ra2_allies_alliedpowerplant:
+	Defaults:
+		Offset: 0,-2
+	idle:
+		Filename: ra2_allies_alliedpowerplant_ggpowr.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ra2_allies_alliedpowerplant_ggpowr.shp
+		Start: 1
+		ShadowStart: 4
+	idle-glow:
+		Filename: ra2_allies_alliedpowerplant_ggpowr_a.shp
+		Length: 8
+		ShadowStart: 16
+		Tick: 150
+	damaged-idle-glow:
+		Filename: ra2_allies_alliedpowerplant_ggpowr_a.shp
+		Start: 8
+		Length: 8
+		ShadowStart: 24
+		Tick: 150
+	make:
+		Filename: ra2_allies_alliedpowerplant_make.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: ra2_allies_alliedpowerplant_ggpowr.shp
+		Start: 1
+	icon:
+		Filename: ra2_allies_alliedpowerplant_icon.shp
+		Offset: 0,0
+
+ra2_allies_alliedorerefinery:
+	Defaults:
+		Offset: -10,-26
+	idle:
+		Filename: ra2_allies_alliedorerefinery_ggrefn.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ra2_allies_alliedorerefinery_ggrefn.shp
+		Start: 1
+		ShadowStart: 4
+	make:
+		Filename: ra2_allies_alliedorerefinery_make.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: ra2_allies_alliedorerefinery_ggrefn.shp
+		Start: 1
+	idle-drill:
+		Filename: ra2_allies_alliedorerefinery_ggrefnl1.shp
+		Length: 6
+		Tick: 1500
+	idle-bib:
+		Filename: ra2_allies_alliedorerefinery_bib.shp
+		ShadowStart: 2
+		ZOffset: -512
+	damaged-idle-bib:
+		Filename: ra2_allies_alliedorerefinery_bib.shp
+		Start: 1
+		ShadowStart: 3
+		ZOffset: -512
+	docking-overlay:
+		Filename: ra2_allies_alliedorerefinery_ggrefnor.shp
+		Length: 20
+		ShadowStart: 20
+	icon:
+		Filename: ra2_allies_alliedorerefinery_icon.shp
+		Offset: 0,0
+
+ra2_allies_airforcecommandhq:
+	Defaults:
+		Offset: -12,-22 #12
+	idle:
+		Filename: ra2_allies_airforcecommandhq_ggairc.shp
+		Length: 1
+	damaged-idle:
+		Filename: ra2_allies_airforcecommandhq_ggairc.shp
+		Start: 1
+		Length: 2
+	idle-top:
+		Filename: ra2_allies_airforcecommandhq_ggairc_c.shp
+		Length: 16
+		ShadowStart: 16
+		Tick: 150
+	idle-bottom:
+		Filename: ra2_allies_airforcecommandhq_bib.shp
+		Length: 1
+		ZOffset: -1c512
+	damaged-idle-bottom:
+		Filename: ra2_allies_airforcecommandhq_bib.shp
+		Start: 1
+		Length: 1
+		ZOffset: -1c512
+	idle-dish:
+		Filename: ra2_allies_airforcecommandhq_ggairc_a.shp
+		Length: 4
+		Tick: 120
+		ZOffset: -512
+	damaged-idle-dish:
+		Filename: ra2_allies_airforcecommandhq_ggairc_a.shp
+		Start: 5
+		Length: 4
+		Tick: 120
+		ZOffset: -512
+	idle-mid:
+		Filename: ra2_allies_airforcecommandhq_ggairc_b.shp
+		Length: 6
+		Tick: 120
+		ZOffset: -1c512
+	damaged-idle-mid:
+		Filename: ra2_allies_airforcecommandhq_ggairc_b.shp
+		Start: 7
+		Length: 6
+		Tick: 120
+		ZOffset: -1c512
+	make:
+		Filename: ra2_allies_airforcecommandhq_make.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: ra2_allies_airforcecommandhq_ggairc.shp
+		Start: 1
+		Length: 2
+	icon:
+		Filename: ra2_allies_airforcecommandhq_icon.shp
+		Offset: 0,0
+	icon2:
+		Filename: ra2_allies_airforcecommandhq_p_airborne.shp
+		Offset: 0,0
+
+ra2_allies_alliedwarfactory:
+	Defaults:
+		Offset: -18,-28
+	idle:
+		Filename: ra2_allies_alliedwarfactory_ggweap.shp
+		ShadowStart: 3
+		ZOffset: -1024
+	damaged-idle:
+		Filename: ra2_allies_alliedwarfactory_ggweap.shp
+		Start: 1
+		ShadowStart: 4
+		ZOffset: -1024
+	build-door:
+		Filename: ra2_allies_alliedwarfactory_ggweap_1.shp
+		ShadowStart: 2
+	damaged-build-door:
+		Filename: ra2_allies_alliedwarfactory_ggweap_1.shp
+		Start: 1
+		ShadowStart: 3
+	build-top:
+		Filename: ra2_allies_alliedwarfactory_ggweap_2.shp
+		ShadowStart: 2
+		ZOffset: 1024
+	damaged-build-top:
+		Filename: ra2_allies_alliedwarfactory_ggweap_2.shp
+		Start: 1
+		ShadowStart: 3
+		ZOffset: 1024
+	#TODO: ggweap_3 and ggweap_4 are used for producing flying actors
+	build-air-open:
+		Filename: ra2_allies_alliedwarfactory_ggweap_3.shp
+		ShadowStart: 2
+	damaged-air-open:
+		Filename: ra2_allies_alliedwarfactory_ggweap_3.shp
+		Start: 1
+		ShadowStart: 3
+	build-air-inside:
+		Filename: ra2_allies_alliedwarfactory_ggweap_4.shp
+		ShadowStart: 2
+	damaged-air-inside:
+		Filename: ra2_allies_alliedwarfactory_ggweap_4.shp
+		Start: 1
+		ShadowStart: 3
+	bib:
+		Filename: ra2_allies_alliedwarfactory_bib.shp
+		ShadowStart: 2
+		ZOffset: -1024
+	damaged-bib:
+		Filename: ra2_allies_alliedwarfactory_bib.shp
+		Start: 1
+		ShadowStart: 3
+		ZOffset: -1024
+	idle-flag:
+		Filename: ra2_allies_alliedwarfactory_ggweap_a.shp
+		Length: 14
+		ShadowStart: 31
+	damaged-idle-flag:
+		Filename: ra2_allies_alliedwarfactory_ggweap_a.shp
+		Start: 15
+		Length: 14
+		ShadowStart: 45
+	overlay-fan:
+		Filename: ra2_allies_alliedwarfactory_ggweap_b.shp
+		Length: 5
+		ShadowStart: 6
+	make:
+		Filename: ra2_allies_alliedwarfactory_make.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: ra2_allies_alliedwarfactory_ggweap.shp
+		Start: 1
+		ZOffset: -1024
+	icon:
+		Filename: ra2_allies_alliedwarfactory_icon.shp
+		Offset: 0,0
+
+ra2_allies_orepurifier:
+	Defaults:
+		Offset: 4,-18
+	idle:
+		Filename: ra2_allies_orepurifier_ggorep.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ra2_allies_orepurifier_ggorep.shp
+		Start: 1
+		ShadowStart: 4
+	idle-glow:
+		Filename: ra2_allies_orepurifier_ggorep_a.shp
+		Length: 8
+		ShadowStart: 16
+		Tick: 180
+	damaged-idle-glow:
+		Filename: ra2_allies_orepurifier_ggorep_a.shp
+		Start: 8
+		Length: 8
+		ShadowStart: 24
+		Tick: 180
+	make:
+		Filename: ra2_allies_orepurifier_make.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: ra2_allies_orepurifier_ggorep.shp
+		Start: 1
+	icon:
+		Filename: ra2_allies_orepurifier_icon.shp
+		Offset: 0,0
+
+ra2_allies_alliedservicedepot:
+	Defaults:
+		Offset: 0,-24
+	idle:
+		Filename: ra2_allies_alliedservicedepot_ggdept_d.shp
+		ShadowStart: 2
+	damaged-idle:
+		Filename: ra2_allies_alliedservicedepot_ggdept_d.shp
+		Start: 1
+		ShadowStart: 3
+	idle-side:
+		Filename: ra2_allies_alliedservicedepot_ggdept.shp
+		ShadowStart: 3
+	damaged-idle-side:
+		Filename: ra2_allies_alliedservicedepot_ggdept.shp
+		Start: 1
+		Length: 2
+		ShadowStart: 4
+	bib:
+		Filename: ra2_allies_alliedservicedepot_bib.shp
+		ShadowStart: 3
+		ZOffset: -512
+	make:
+		Filename: ra2_allies_alliedservicedepot_make.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: ra2_allies_alliedservicedepot_ggdept_d.shp
+		Start: 1
+	repair:
+		Filename: ra2_allies_alliedservicedepot_ggdept_c.shp
+		Length: 10
+		ShadowStart: 20
+		Tick: 180
+	damaged-repair:
+		Filename: ra2_allies_alliedservicedepot_ggdept_c.shp
+		Start: 10
+		Length: 10
+		ShadowStart: 30
+		Tick: 180
+	icon:
+		Filename: ra2_allies_alliedservicedepot_icon.shp
+		Offset: 0,0
+
+ra2_allies_pillbox:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Offset: 0,-6
+	idle:
+		Filename: ra2_allies_pillbox_ggpill.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ra2_allies_pillbox_ggpill.shp
+		Start: 1
+		ShadowStart: 4
+	critical-idle:
+		Filename: ra2_allies_pillbox_ggpill.shp
+		Start: 2
+	make:
+		Filename: ra2_allies_pillbox_make.shp
+		Length: 8
+		ShadowStart: 8
+	dead:
+		Filename: ra2_allies_pillbox_ggpill.shp
+		Start: 1
+	icon:
+		Filename: ra2_allies_pillbox_icon.shp
+		Offset: 0,0
+
+ra2_allies_patriotmissilesystem:
+	Defaults:
+		Offset: 0,6
+	idle:
+		Filename: ra2_allies_patriotmissilesystem_ngsam.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ra2_allies_patriotmissilesystem_ngsam.shp
+		Start: 1
+		ShadowStart: 4
+	critical-idle:
+		Filename: ra2_allies_patriotmissilesystem_ngsam.shp
+		Start: 2
+	make:
+		Filename: invisibleitem.shp
+	dead:
+		Filename: ra2_allies_patriotmissilesystem_ngsam.shp
+		Start: 1
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: ra2_allies_patriotmissilesystem_icon.shp
+		Offset: 0,0
+
+ra2_allies_grandcannon:
+	Defaults:
+		Offset: 0,6
+	idle:
+		Filename: ra2_allies_grandcannon_gggcan.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ra2_allies_grandcannon_gggcan.shp
+		Start: 1
+		ShadowStart: 4
+	critical-idle:
+		Filename: ra2_allies_grandcannon_gggcan.shp
+		Start: 2
+	make:
+		Filename: ra2_allies_grandcannon_make.shp
+		Length: 12
+		ShadowStart: 12
+		Tick: 25
+	dead:
+		Filename: ra2_allies_grandcannon_gggcan.shp
+		Start: 1
+	icon:
+		Filename: ra2_allies_grandcannon_icon.shp
+		Offset: 0,0
+
+ra2_allies_prismtower:
+	Defaults:
+		Offset: 0,-3
+	idle-normal:
+		Filename: ra2_allies_prismtower_ggpris.shp
+		ShadowStart: 3
+	damaged-idle-normal:
+		Filename: ra2_allies_prismtower_ggpris.shp
+		Start: 1
+		ShadowStart: 4
+	idle:
+		Filename: ra2_allies_prismtower_ggpris_b.shp
+		Length: 9
+		Tick: 100
+		ShadowStart: 18
+		ZOffset: 2048
+	damaged-idle:
+		Filename: ra2_allies_prismtower_ggpris_b.shp
+		Start: 9
+		Length: 9
+		Tick: 180
+		ShadowStart: 27
+		ZOffset: 2048
+	active:
+		Filename: ra2_allies_prismtower_ggpris_a.shp
+		Length: 10
+		Tick: 100
+		ShadowStart: 20
+		ZOffset: 3000
+	damaged-active:
+		Filename: ra2_allies_prismtower_ggpris_a.shp
+		Start: 10
+		Length: 10
+		Tick: 100
+		ShadowStart: 30
+		ZOffset: 3000
+	make:
+		Filename: ra2_allies_prismtower_make.shp
+		Length: 8
+		ShadowStart: 8
+		Tick: 100
+	dead:
+		Filename: ra2_allies_prismtower_ggprisdm.shp
+		Length: 21
+		ShadowStart: 21
+		Tick: 63
+	icon:
+		Filename: ra2_allies_prismtower_icon.shp
+		Offset: 0,0
+
+ra2_allies_alliedbattlelab:
+	Defaults:
+		Offset: -8,-14
+	idle:
+		Filename: ra2_allies_alliedbattlelab_ggtech.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ra2_allies_alliedbattlelab_ggtech.shp
+		Start: 1
+		ShadowStart: 4
+	idle-lights:
+		Filename: ra2_allies_alliedbattlelab_ggtech_a.shp
+		Length: 12
+		ShadowStart: 24
+	damaged-idle-lights:
+		Filename: ra2_allies_alliedbattlelab_ggtech_a.shp
+		Start: 12
+		Length: 12
+		ShadowStart: 36
+	make:
+		Filename: ra2_allies_alliedbattlelab_make.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: ra2_allies_alliedbattlelab_ggtech.shp
+		Start: 1
+	icon:
+		Filename: ra2_allies_alliedbattlelab_icon.shp
+		Offset: 0,0
+
+ra2_allies_spysatelliteuplink:
+	Defaults:
+		Offset: 2,0
+	idle:
+		Filename: ra2_allies_spysatelliteuplink_ggspst.shp
+		ShadowStart: 3
+		Tick: 180
+	damaged-idle:
+		Filename: ra2_allies_spysatelliteuplink_ggspst.shp
+		Start: 1
+		ShadowStart: 4
+		Tick: 180
+	idle-dish:
+		Filename: ra2_allies_spysatelliteuplink_ggspst_a.shp
+		Length: 16
+		Tick: 180
+	damaged-idle-dish:
+		Filename: ra2_allies_spysatelliteuplink_ggspst_a.shp
+		Start: 16
+		Length: 16
+		Tick: 180
+	make:
+		Filename: ra2_allies_spysatelliteuplink_make.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: ra2_allies_spysatelliteuplink_ggspst.shp
+		Start: 1
+		Tick: 180
+	icon:
+		Filename: ra2_allies_spysatelliteuplink_icon.shp
+		Offset: 0,0
+
+ra2_allies_gapgenerator:
+	idle:
+		Filename: ra2_allies_gapgenerator_gggap.shp
+		Length: 1
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ra2_allies_gapgenerator_gggap.shp
+		Start: 2
+		Length: 1
+		ShadowStart: 4
+	make:
+		Filename: ra2_allies_gapgenerator_make.shp
+		Length: 9
+		ShadowStart: 9
+	dead:
+		Filename: ra2_allies_gapgenerator_gggap.shp
+		Start: 2
+		Length: 1
+	gapfield:
+		Filename: ra1_allies_mobilegapgenerator_gapgeneratoranimation.shp
+		Length: *
+		BlendMode: LowAdditive
+		ZOffset: 1023
+		Alpha: 0.25
+		Scale: 2.25
+		Tick: 32
+	icon:
+		Filename: ra2_allies_gapgenerator_icon.shp
+		Offset: 0,0
+
+ra2_allies_weathercontrolcenter:
+	Defaults:
+		Offset: -0,-12
+	idle:
+		Filename: ra2_allies_weathercontrolcenter_ggweth.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ra2_allies_weathercontrolcenter_ggweth.shp
+		Start: 1
+		ShadowStart: 4
+	make:
+		Filename: ra2_allies_weathercontrolcenter_make.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: ra2_allies_weathercontrolcenter_ggweth.shp
+		Start: 1
+	icon:
+		Filename: ra2_allies_weathercontrolcenter_icon.shp
+		Offset: 0,0
+
+ra2_allies_chronosphere:
+	Defaults:
+		Offset: -6,-24
+	idle:
+		Filename: ra2_allies_chronosphere_ggcsph.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ra2_allies_chronosphere_ggcsph.shp
+		Start: 1
+		ShadowStart: 4
+	idle-dome:
+		Filename: ra2_allies_chronosphere_ggcsph_e.shp
+		ShadowStart: 2
+	damaged-idle-dome:
+		Filename: ra2_allies_chronosphere_ggcsph_e.shp
+		Start: 1
+		ShadowStart: 3
+	make:
+		Filename: ra2_allies_chronosphere_make.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: ra2_allies_chronosphere_ggcsphdm.shp
+		Length: 25
+		ShadowStart: 25
+		Tick: 75
+	icon:
+		Filename: ra2_allies_chronosphere_icon.shp
+		Offset: 0,0
+	icon2:
+		Filename: ra2_allies_chronosphere_chronoshift.shp
+		Offset: 0,0
+
+ra2_allies_concretebarrier:
+	Defaults:
+		Filename: ra2_allies_concretebarrier.shp
+	idle:
+		Length: 16
+	scratched-idle:
+		Start: 16
+		Length: 16
+	damaged-idle:
+		Start: 32
+		Length: 16
+	icon:
+		Filename: ra2_allies_concretebarrier_icon.png
+
+ra2_allies_gi:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_allies_gi.shp
+	dot:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	run:
+		Tick: 120
+	deployed:
+		Start: 292
+		Facings: 8
+	deploy:
+		Start: 300
+		Length: 15
+	shoot-deployed:
+		Start: 315
+		Length: 6
+		Facings: 8
+	paradrop:
+		Start: 363
+	cheer:
+		Start: 364
+	icon:
+		Filename: ra2_allies_gi_icon.shp
+
+ra2_allies_guardiangi:
+	Inherits: ^RA2ArmedInfantry
+	Defaults:
+		Filename: ra2_allies_guardiangi_yr_ggi.shp
+	dot:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	run:
+		Tick: 120
+	shoot:
+		Start: 204
+		Length: 6
+		Facings: 8
+	prone-shoot:
+		Start: 252
+		Length: 6
+		Facings: 8
+	deployed:
+		Start: 315
+		Facings: 8
+	deploy:
+		Start: 300
+		Length: 15
+	shoot-deployed:
+		Start: 323
+		Length: 6
+		Facings: 8
+	undeploy:
+		Start: 180
+		Length: 2
+		Facings: 2
+	paradrop:
+		Start: 371
+	cheer:
+		Start: 196
+	icon:
+		Filename: ra2_allies_guardiangi_icon.shp
+
+ra2_allies_sniper:
+	Inherits: ^RA2ArmedInfantry
+	Defaults:
+		Filename: ra2_allies_sniper.shp
+	paradrop:
+		Start: 292
+	icon:
+		Filename: ra2_allies_sniper_icon.shp
+
+ra2_allies_tanyaii:
+	Inherits: ^RA2ArmedInfantry
+	Defaults:
+		Filename: ra2_allies_tanyaii.shp
+	run:
+		Tick: 120
+	swim-stand:
+		Start: 410
+		Facings: 8
+		Length: 6
+		Tick: 160
+	swim-idle1:
+		Start: 292
+		Length: 15
+		Tick: 160
+	swim-idle2:
+		Start: 307
+		Length: 15
+		Tick: 160
+	swim-run:
+		Start: 506
+		Facings: 8
+		Length: 6
+		Tick: 120
+	swim-die1:
+		Start: 323
+		Length: 19
+	swim-die2:
+		Start: 342
+		Length: 20
+	swim-shoot:
+		Start: 554
+		Length: 6
+		Facings: 8
+		Tick: 80
+	cheer:
+		Start: 603
+	swim-cheer:
+		Start: 611
+		Length: 8
+		Tick: 120
+	paradrop:
+		Start: 602
+	die:
+		Start: 134
+		Length: 15
+	icon_gun:
+		Filename: ra2_allies_tanyaii_tanyamodes.shp
+		Start: 0
+	icon_c4:
+		Filename: ra2_allies_tanyaii_tanyamodes.shp
+		Start: 1
+	icon:
+		Filename: ra2_allies_tanyaii_icon.shp
+	iconchrono: ra2htanyaicon.shp
+
+ra2_allies_engineer:
+	Inherits: ^RA2Infantry
+	Defaults:
+		Filename: ra2_allies_engineer.shp
+	paradrop:
+		Start: 244
+	icon:
+		Filename: ra2_allies_engineer_icon.shp
+
+ra2_allies_attackdog:
+	Inherits: ^RA2BasicInfantry
+	Defaults:
+		Filename: ra2_allies_attackdog_adog.shp
+	jump:
+		Start: 166
+		Length: 6
+		Facings: 8
+	shoot:
+		Filename: ra2_allies_attackdog_adogp.shp
+		Length: 1
+		Facings: 32
+	die1:
+		Start: 87
+		Length: 14
+	die2:
+		Start: 102
+		Length: 14
+	icon:
+		Filename: ra2_allies_attackdog_icon.shp
+
+ra2_allies_ra2spy:
+	Inherits: ^RA2Infantry
+	Defaults:
+		Filename: ra2_allies_ra2spy.shp
+	liedown:
+		Start: 164
+	standup:
+		Start: 180
+	cheer:
+		Start: 196
+	icon:
+		Filename: ra2_allies_ra2spy_icon.shp
+
+ra2_allies_seal: # TODO: seala on SNOW
+	Inherits: ^RA2ArmedInfantry
+	Defaults:
+		Filename: ra2_allies_seal.shp
+	run:
+		Tick: 120
+	idle1:
+	idle2:
+	idle3:
+	idle4:
+	swim-stand:
+		Start: 340
+		Facings: 8
+		Length: 6
+		Tick: 160
+	swim-idle1:
+		Start: 484
+		Length: 15
+		Tick: 160
+	swim-idle2:
+		Start: 499
+		Length: 15
+		Tick: 160
+	swim-run:
+		Start: 388
+		Facings: 8
+		Length: 6
+		Tick: 120
+	swim-die1:
+		Start: 512
+		Length: 22
+	swim-die2:
+		Start: 534
+		Length: 20
+	swim-shoot:
+		Start: 436
+		Length: 6
+		Facings: 8
+		Tick: 80
+	cheer:
+		Start: 603
+	swim-cheer:
+		Start: 611
+		Length: 8
+		Tick: 120
+	paradrop:
+		Start: 602
+	icon:
+		Filename: ra2_allies_seal_icon.shp
+
+ra2_allies_chronolegionnaire:
+	Inherits: ^RA2BasicInfantry
+	Defaults:
+		Filename: ra2_allies_chronolegionnaire_cleg.shp
+	run:
+		Start: 117
+	shoot:
+		Start: 68
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 8
+	idle2:
+		Start: 23
+	die1:
+		Start: 38
+	die2:
+		Start: 53
+	paradrop:
+		Start: 116
+	cheer:
+		Start: 165
+	icon:
+		Filename: ra2_allies_chronolegionnaire_icon.shp
+
+ra2_allies_grizzlytank:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: ra2_allies_grizzlytank_ra2grizzly.shp
+	idle:
+		Scale: 0.75
+		Facings: 64
+		Offset: 0,5
+	turret:
+		Scale: 0.75
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: ra2_allies_grizzlytank_icon.shp
+
+ra2_allies_tankdestroyer:
+	Defaults:
+		Filename: ra2_allies_tankdestroyer.shp
+		Scale: 0.9
+	idle:
+		Facings: 64
+	icon:
+		Filename: ra2_allies_tankdestroyer_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ra2_allies_ifv:
+	Defaults:
+		Filename: ra2_allies_ifv_repair_ra2ifv.shp
+		Scale: 0.8
+	idle:
+		Facings: 64
+	turret-missile:
+		Start: 64
+		Facings: 64
+	turret-mg:
+		Start: 128
+		Facings: 64
+	turret-repair:
+		Start: 192
+		Facings: 64
+	turret-hitech:
+		Start: 256
+		Facings: 64
+	turret-bomb:
+		Start: 128
+		Facings: 64
+	turret-tesla:
+		Start: 128
+		Facings: 64
+	turret-flame:
+		Start: 384
+		Facings: 64
+	muzzlemg:
+		Combine:
+			0:
+				Filename: ra2_mgun_n.shp
+				Length: 6
+			1:
+				Filename: ra2_mgun_nw.shp
+				Length: 6
+			2:
+				Filename: ra2_mgun_w.shp
+				Length: 6
+			3:
+				Filename: ra2_mgun_sw.shp
+				Length: 6
+			4:
+				Filename: ra2_mgun_s.shp
+				Length: 6
+			5:
+				Filename: ra2_mgun_se.shp
+				Length: 6
+			6:
+				Filename: ra2_mgun_e.shp
+				Length: 6
+			7:
+				Filename: ra2_mgun_ne.shp
+				Length: 6
+		Facings: 8
+		Length: 6
+		Offset: 0, 0
+	muzzlefl:
+		Filename: ra2_gunfire.shp
+		Length: 2
+	muzzlemm:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzlefa:
+		IgnoreWorldTint: true
+		Combine:
+			flame_n:
+				Filename: flame_n.shp
+				Length: *
+				Offset: 3,6
+			flame_nw:
+				Filename: flame_nw.shp
+				Length: *
+				Offset: 8,7
+			flame_w:
+				Filename: flame_w.shp
+				Length: *
+				Offset: 8,2
+			flame_sw:
+				Filename: flame_sw.shp
+				Length: *
+				Offset: 7,-2
+			flame_s:
+				Filename: flame_s.shp
+				Length: *
+				Offset: 3,-2
+			flame_se:
+				Filename: flame_se.shp
+				Length: *
+				Offset: -5,-2
+			flame_e:
+				Filename: flame_e.shp
+				Length: *
+				Offset: -7,2
+			flame_ne:
+				Filename: flame_ne.shp
+				Length: *
+				Offset: -7,8
+		Facings: 8
+		Length: 13
+	icon:
+		Filename: ra2_allies_ifv_repair_icon.shp
+
+ra2_allies_miragetank:
+	Defaults:
+		Filename: ra2_allies_miragetank_ra2mirage.shp
+	idle:
+		Scale: 0.75
+		Facings: 64
+	turret:
+		Scale: 0.75
+		Start: 64
+		Facings: 64
+	icon:
+		Filename: ra2_allies_miragetank_icon.shp
+	muzzle:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+ra2_allies_heavymiragetank:
+	Defaults:
+		Scale: 0.8
+	idle:
+		Scale: 1
+		Facings: 64
+		Filename: ra2_allies_heavymiragetank_neomiragetankchassis.png
+	turret:
+		Scale: 1
+		Facings: 64
+		Filename: ra2_allies_heavymiragetank_neomiragetankturret.png
+	muzzle:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+	icon:
+		Filename: ra2_allies_heavymiragetank_icon.png
+
+ra2_allies_prismtank:
+	Defaults:
+		Filename: ra2_allies_prismtank_ra2prismtank.shp
+	idle:
+		Facings: 64
+	turret:
+		Start: 64
+		Facings: 64
+	icon:
+		Filename: ra2_allies_prismtank_icon.shp
+
+ra2_allies_battlefortress:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_allies_battlefortress_chrono_ra2btlefort.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: ra2_allies_battlefortress_chrono_icon.shp
+
+ra2_allies_alliedmobileconstructionvehicle:
+	Defaults:
+		Filename: ra2_allies_alliedmobileconstructionvehicle_ra2mcv.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: ra2_allies_alliedmobileconstructionvehicle_icon.shp
+
+ra2_allies_aegiscruiser:
+	idle:
+		Filename: invisibleitem.shp
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	icon:
+		Filename: ra2_allies_aegiscruiser_icon.shp
+
+ra2_allies_harrier:
+	idle:
+		Filename: ra2_allies_harrier.shp
+		Facings: 64
+	move:
+		Filename: ra2_allies_harrier.shp
+		Facings: 64
+	icon:
+		Filename: ra2_allies_harrier_icon.shp
+
+ra2_allies_nighthawk:
+	Inherits: ^RA2MachineGunMuzzle
+	idle:
+		Filename: ra2_allies_nighthawk_shad.shp
+		Facings: 64
+	rotor:
+		Filename: ra2_allies_nighthawk_shad_rotor.shp
+		Length: 24
+		Tick: 4
+	slow-rotor:
+		Filename: ra2_allies_nighthawk_shad_rotor.shp
+		Length: 24
+		Tick: 64
+	icon:
+		Filename: ra2_allies_nighthawk_icon.shp
+
+ra2_allies_blackeagle:
+	Defaults:
+		Filename: ra2_allies_blackeagle.shp
+		Scale: 0.75
+	idle:
+		Facings: 64
+		Offset: 0,20
+	move:
+		Facings: 64
+		Offset: 0,20
+	icon:
+		Filename: ra2_allies_blackeagle_icon.shp
+
+ra2_allies_rocketeer:
+	Defaults:
+		Filename: ra2_allies_rocketeer.shp
+		Length: 6
+		Facings: 8
+	stand:
+		Length: 1
+	run:
+		Start: 8
+		Tick: 120
+	idle1:
+		Start: 56
+		Length: 15
+		Facings: 1
+		Tick: 100
+	idle2:
+		Start: 71
+		Length: 15
+		Facings: 1
+		Tick: 100
+	prone-stand:
+		Frames: 86, 92, 98, 104, 110, 116, 122, 128
+		Length: 1
+		Facings: 8
+	prone-run:
+		Start: 86
+		Tick: 100
+	die1: # copied from die-air
+		# Start: 134
+		# Length: 14
+		Start: 340
+		Length: 15
+		Facings: 2
+		Tick: 80
+	die2: # copied from die-air
+		# Start: 149
+		# Length: 14
+		Start: 340
+		Length: 15
+		Facings: 2
+		Tick: 80
+	shoot:
+		Start: 164
+		Tick: 80
+	prone-shoot:
+		Start: 212
+		Tick: 80
+	fly:
+		Start: 292
+		Tick: 100
+	die-air:
+		Start: 340
+		Length: 16
+		Facings: 2
+		Tick: 80
+	shoot-air:
+		Start: 370
+		Tick: 80
+	idle-air:
+		Start: 418
+		Length: 9
+		Facings: 1
+		Tick: 100
+	idle:
+		Start: 418
+		Length: 9
+		Facings: 1
+		Tick: 100
+	shadow:
+		Filename: parach_shadow.shp
+		Length: 1
+		Facings: 1
+	icon:
+		Filename: ra2_allies_rocketeer_icon.shp
+		Length: 1
+		Facings: 1
+
+ra2_allies_upgrade_assaultsquadtraining:
+	icon:
+		Filename: ra2_allies_upgrade_assaultsquadtraining_icon.png
+
+ra2_allies_upgrade_vanguardtraining:
+	icon:
+		Filename: ra2_allies_upgrade_vanguardtraining_icon.png
+
+ra2_allies_upgrade_infiltratorstraining:
+	icon:
+		Filename: ra2_allies_upgrade_infiltratorstraining_icon.png
+
+ra2_allies_upgrade_compositearmorplating:
+	icon:
+		Filename: ra2_allies_upgrade_compositearmorplating_icon.png
+
+ra2_allies_upgrade_reflectivearmorplating:
+	icon:
+		Filename: ra2_allies_upgrade_reflectivearmorplating_icon.png
+
+ra2_allies_upgrade_ionpulseplating:
+	icon:
+		Filename: ra2_allies_upgrade_ionpulseplating_icon.png
+
+ra2_allies_upgrade_elitegi:
+	icon:
+		Filename: ra2_allies_upgrade_elitegi_icon.png
+
+ra2_allies_upgrade_eliterocketeer:
+	icon:
+		Filename: ra2_allies_upgrade_eliterocketeer_icon.png
+
+ra2_allies_upgrade_prismlinking:
+	icon:
+		Filename: ra2_allies_upgrade_prismlinking_icon.png
+
+ra2_allies_upgrade_advancedaeronautics:
+	icon:
+		Filename: ra2_allies_upgrade_advancedaeronautics_icon.png
+
+ra2_allies_upgrade_thunderboltmissiles:
+	icon:
+		Filename: ra2_allies_upgrade_thunderboltmissiles_icon.png
+
+ra2_allies_upgrade_tanklasertargeting:
+	icon:
+		Filename: ra2_allies_upgrade_tanklasertargeting_icon.png
+
+ra2_allies_upgrade_intensifiedprismbeams:
+	icon:
+		Filename: ra2_allies_upgrade_intensifiedprismbeams_icon.png
+
+ra2_allies_upgrade_prismaticbarrier:
+	icon:
+		Filename: ra2_allies_upgrade_prismaticbarrier_icon.png
+
+ra2_allies_upgrade_chronoengine:
+	icon:
+		Filename: ra2_allies_upgrade_chronoengine_icon.png
+
+### Yuri Upgrades

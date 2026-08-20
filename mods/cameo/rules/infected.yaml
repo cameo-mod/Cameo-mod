@@ -24,8 +24,6 @@ World:
 		BaseActor: bio
 		SupportActors: civzombie.infect, civzombie.infect, civzombie.infect, civzombie.infect, civzombie.infect, zombie1.infect, zombie1.infect, zombie1.infect, zombie1.infect, civzombie.infect, civzombie.infect, zombie1.infect, zombie2.infect, zombie2.infect, zombie1.infect, zombie1.infect, zombie2.infect, zombie2.infect, zombie2.infect
 
-
-
 Player:
 	ExternalCondition@ZombieHordesOwned:
 		Condition: ZombieHordesOwned
@@ -230,7 +228,7 @@ zbio:
 		TurnSpeed: 120
 		InitialFacing: 0
 	Armament@AA:
-		Weapon: SpitAA
+		Weapon: Spit_AA
 		LocalOffset: 384,0,0
 	RenderRangeCircle:
 	DetectCloaked:
@@ -298,11 +296,11 @@ zombie.squad:
 	Valued:
 		Cost: 10000
 	Buildable:
+		Prerequisites:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 1
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites:
 		BuildLimit: 8
 	Health:
 		HP: 100
@@ -359,10 +357,10 @@ zombie.squad:
 		AggregateHealth: false
 		InitialActorCount: 0
 		RequiresCondition: upzmsquad3
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	AttackTurreted:
 		PersistentTargeting: false
 	Turreted:
@@ -624,12 +622,12 @@ zombie8.horde:
 	-Passenger:
 
 upzombiemutate1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mutate DNA
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +20% more hp.
 		Prerequisites: ~!upzombiemutate1
 		BuildDuration: 500
@@ -641,12 +639,12 @@ upzombiemutate1:
 	ProvidesPrerequisite:
 		Prerequisite: upzombiemutate1
 upzombiemutate2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mutate DNA 2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +20% more hp.
 		Prerequisites: ~!upzombiemutate2, upzombiemutate1
 		BuildDuration: 1000
@@ -658,12 +656,12 @@ upzombiemutate2:
 	ProvidesPrerequisite:
 		Prerequisite: upzombiemutate2
 upzombiemutate3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mutate DNA 3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +20% more hp.
 		Prerequisites: ~!upzombiemutate3, upzombiemutate2
 		BuildDuration: 1500
@@ -675,12 +673,12 @@ upzombiemutate3:
 	ProvidesPrerequisite:
 		Prerequisite: upzombiemutate3
 upzombiemutate4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Super Mutate 1
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +10% more hp.
 		Prerequisites: ~!upzombiemutate4, upzintelligence3, upzombiemutate3
 		BuildDuration: 2000
@@ -692,12 +690,12 @@ upzombiemutate4:
 	ProvidesPrerequisite:
 		Prerequisite: upzombiemutate4
 upzombiemutate5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Super Mutate 2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +10% more hp.
 		Prerequisites: ~!upzombiemutate5, upzombiemutate4
 		BuildDuration: 2500
@@ -709,12 +707,12 @@ upzombiemutate5:
 	ProvidesPrerequisite:
 		Prerequisite: upzombiemutate5
 upzombiemutate6:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Super Mutate 3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +10% more hp.
 		Prerequisites: ~!upzombiemutate6, upzombiemutate5
 		BuildDuration: 3000
@@ -726,12 +724,12 @@ upzombiemutate6:
 	ProvidesPrerequisite:
 		Prerequisite: upzombiemutate6
 upzintelligence1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mutate Intelligence
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +10% more speed.
 		Prerequisites: ~!upzintelligence1, upzombiemutate1
 		BuildDuration: 1500
@@ -743,12 +741,12 @@ upzintelligence1:
 	ProvidesPrerequisite:
 		Prerequisite: upzintelligence1
 upzintelligence2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mutate Intelligence 2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +10% more speed.
 		Prerequisites: ~!upzintelligence2, upzintelligence1
 		BuildDuration: 1500
@@ -760,12 +758,12 @@ upzintelligence2:
 	ProvidesPrerequisite:
 		Prerequisite: upzintelligence2
 upzintelligence3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mutate Intelligence 3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +10% more speed.
 		Prerequisites: ~!upzintelligence3, upzintelligence2
 		BuildDuration: 1500
@@ -778,12 +776,12 @@ upzintelligence3:
 		Prerequisite: upzintelligence3
 
 upzmsquad1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bigger Horde 1
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Gain Squad Nembers.
 		Prerequisites: ~!upzmsquad1, upzintelligence1, upzombiemutate2
 		BuildDuration: 1500
@@ -798,12 +796,12 @@ upzmsquad1:
 		Prerequisite: Greater Spire
 
 upzmsquad2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bigger Horde 2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Gain Squad Nembers.
 		Prerequisites: ~!upzmsquad2, upzmsquad1, upzintelligence2, upzombiemutate4
 		BuildDuration: 3000
@@ -816,12 +814,12 @@ upzmsquad2:
 		Prerequisite: upzmsquad2
 
 upzmsquad3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bigger Horde 3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Gain Squad Nembers.
 		Prerequisites: ~!upzmsquad3, upzmsquad2, upzintelligence3, upzombiemutate6
 		BuildDuration: 4500
@@ -873,14 +871,11 @@ tnkzombie.infect:
 		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: BruteVoice
-	DeliversCash:
-		Payload: 250
 	Cloneable:
 		Types: NormalInfantry
 	Passenger:
-		Weight: 2
 	-TakeCover:
-	Targetable@dog:
+	Targetable@DogImmune:
 		TargetTypes: DogImmune
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
@@ -949,7 +944,7 @@ zmutant.infect:
 	Armament:
 		Weapon: ZMutantPunch
 	Armament@AA:
-		Weapon: ZBruteRock
+		Weapon: ZBruteRock_AA
 	RenderSprites:
 		Image: tnkzombie
 		
@@ -1074,12 +1069,12 @@ spitter:
 		Weapon: Spit
 		LocalOffset: 384,0,0
 	Armament@AA:
-		Weapon: SpitAA
+		Weapon: Spit_AA
 		LocalOffset: 384,0,0
 	-WithMuzzleOverlay:
 	-DamagedByTerrain:
 	Selectable:
-		Bounds: 25472, 25472
+		Bounds: 597, 597
 	RenderSprites:
 
 ANT2:
@@ -1101,8 +1096,7 @@ ANT2:
 		ScanRadius: 25
 		InitialStance: AttackAnything
 	Selectable:
-		Bounds: 43690, 43690, 0, -9088
-		DecorationBounds: 54613, 54613, 0, -3626
+		Bounds: 1280, 1280, 0, -85
 	SelectionDecorations:
 	Health:
 		HP: 50000 #75000

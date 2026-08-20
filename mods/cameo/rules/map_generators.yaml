@@ -1,0 +1,919 @@
+^MapGenerators:
+	ClassicMapGenerator@classic:
+		Type: classic
+		Name: map-generator-classic
+		Tilesets: RA_TEMPERAT, RA_SNOW, RA_DESERT, JUNGLE, BARREN, VOLCANIC
+		Settings:
+			MultiChoiceOption@hidden_defaults:
+				Choice@hidden_defaults:
+					Settings:
+						TerrainFeatureSize: 20480
+						ForestFeatureSize: 20480
+						ResourceFeatureSize: 20480
+						CivilianBuildingsFeatureSize: 10240
+						Water: 200
+						Mountains: 100
+						Forests: 25
+						ForestCutout: 2
+						MaximumCutoutSpacing: 12
+						TerrainSmoothing: 4
+						SmoothingThreshold: 833
+						MinimumCoastStraight: 1
+						MinimumLandSeaThickness: 5
+						MinimumMountainThickness: 5
+						MaximumAltitude: 8
+						RoughnessRadius: 5
+						Roughness: 500
+						WaterRoughness: 200
+						MinimumTerrainContourSpacing: 5
+						MinimumBeachLength: 10
+						MinimumWaterCliffLength: 10
+						MinimumCliffLength: 10
+						ForestClumpiness: 1
+						DenyWalledAreas: True
+						EnforceSymmetry: 0
+						Roads: True
+						RoadSpacing: 5
+						RoadShrink: 0
+						CreateEntities: True
+						CentralSpawnReservationFraction: 250
+						ResourceSpawnReservation: 8
+						SpawnRegionSize: 12
+						SpawnBuildSize: 8
+						MinimumSpawnRadius: 5
+						SpawnResourceSpawns: 3
+						SpawnReservation: 16
+						SpawnResourceBias: 500
+						ResourcesPerPlayer: 50000
+						OreUniformity: 250
+						OreClumpiness: 2
+						MaximumExpansionResourceSpawns: 5
+						MaximumResourceSpawnsPerExpansion: 2
+						MinimumExpansionSize: 2
+						MaximumExpansionSize: 12
+						ExpansionInner: 2
+						ExpansionBorder: 1
+						CivilianBuildings: 125
+						CivilianBuildingDensity: 500
+						MinimumCivilianBuildingDensity: 90
+						CivilianBuildingDensityRadius: 3
+						DefaultResource: Ore
+						ResourceSpawnSeeds:
+							mine: Ore
+							gmine: Gems
+							split2: Tiberium
+							splitblue: BlueTiberium
+							splitred: RedTiberium
+							splitgold: GoldTiberium
+						ClearTerrain: Clear
+						PlayableTerrain: Beach,Bridge,Clear,Gems,Ore,Road,Rough,wall,Water
+						DominantTerrain: River,Rock,Tree,Water
+						ZoneableTerrain: Clear,Road
+						ClearSegmentTypes: Clear
+						BeachSegmentTypes: Beach
+						CliffSegmentTypes: Cliff
+						WaterCliffSegmentTypes: WaterCliff
+						RoadSegmentTypes: Road
+						ForestObstacles: Trees
+						UnplayableObstacles: Obstructions
+						CivilianBuildingsObstacles: CivilianBuildings
+						Mirror: None
+						Rotations: 1
+			MultiChoiceOption@hidden_tileset_overrides:
+				Choice@ra_desert:
+					Tileset: RA_DESERT
+					Settings:
+						MinimumBeachLength: 15
+						MinimumCoastStraight: 3
+						LandTile: 255
+						WaterTile: 256
+				Choice@ra_temperat:
+					Tileset: RA_TEMPERAT
+					Settings:
+						LandTile: 255
+						WaterTile: 1
+				Choice@ra_snow:
+					Tileset: RA_SNOW
+					Settings:
+						LandTile: 255
+						WaterTile: 1
+				Choice@jungle:
+					Tileset: JUNGLE
+					Settings:
+						LandTile: 255
+						WaterTile: 1
+				Choice@barren:
+					Tileset: BARREN
+					Settings:
+						LandTile: 255
+						WaterTile: 1
+				Choice@volcanic:
+					Tileset: VOLCANIC
+					Settings:
+						LandTile: 255
+						WaterTile: 1
+			IntegerOption@Seed:
+				Label: label_ra_map_generator_option_seed
+				Parameter: Seed
+				Default: 0
+			MultiChoiceOption@TerrainType:
+				Label: label_ra_map_generator_option_terrain_type
+				Priority: 2
+				Default: Plots
+				Choice@Lakes:
+					Label: label_ra_map_generator_choice_terrain_type_lakes
+					Settings:
+				Choice@Puddles:
+					Label: label_ra_map_generator_choice_terrain_type_puddles
+					Settings:
+						Water: 100
+				Choice@Gardens:
+					Label: label_ra_map_generator_choice_terrain_type_gardens
+					Settings:
+						Water: 50
+						Forests: 300
+						ForestCutout: 3
+						EnforceSymmetry: 2
+						RoadSpacing: 3
+						RoadShrink: 4
+				Choice@Plots:
+					Label: label_ra_map_generator_choice_terrain_type_plots
+					Settings:
+						TerrainFeatureSize: 10240
+						ForestFeatureSize: 10240
+						ResourceFeatureSize: 10240
+						Water: 100
+						Forests: 300
+						ForestCutout: 5
+						EnforceSymmetry: 2
+						Mountains: 400
+						MinimumTerrainContourSpacing: 8
+						MinimumCliffLength: 8
+						Roughness: 125
+						RoadShrink: 4
+						CivilianBuildings: 100
+				Choice@Plains:
+					Label: label_ra_map_generator_choice_terrain_type_plains
+					Settings:
+						Water: 0
+						CivilianBuildings: 100
+				Choice@Parks:
+					Label: label_ra_map_generator_choice_terrain_type_parks
+					Settings:
+						Water: 0
+						Forests: 100
+						CivilianBuildings: 100
+				Choice@Woodlands:
+					Label: label_ra_map_generator_choice_terrain_type_woodlands
+					Settings:
+						Water: 0
+						Forests: 400
+						ForestCutout: 3
+						EnforceSymmetry: 2
+						RoadSpacing: 3
+						RoadShrink: 4
+				Choice@Overgrown:
+					Label: label_ra_map_generator_choice_terrain_type_overgrown
+					Settings:
+						Water: 0
+						Forests: 500
+						EnforceSymmetry: 2
+						Mountains: 500
+						Roughness: 250
+				Choice@Rocky:
+					Label: label_ra_map_generator_choice_terrain_type_rocky
+					Settings:
+						Water: 0
+						Forests: 300
+						ForestCutout: 3
+						EnforceSymmetry: 2
+						Mountains: 500
+						Roughness: 250
+						RoadSpacing: 3
+						RoadShrink: 4
+				Choice@Mountains:
+					Label: label_ra_map_generator_choice_terrain_type_mountains
+					Settings:
+						Water: 0
+						Mountains: 900
+						Roughness: 600
+				Choice@MountainLakes:
+					Label: label_ra_map_generator_choice_terrain_type_mountain_lakes
+					Settings:
+						Water: 200
+						Mountains: 900
+						Roughness: 850
+				Choice@Oceanic:
+					Label: label_ra_map_generator_choice_terrain_type_oceanic
+					Settings:
+						Water: 800
+						Forests: 0
+						MinimumSpawnRadius: 4
+				Choice@LargeIslands:
+					Label: label_ra_map_generator_choice_terrain_type_large_islands
+					Settings:
+						Water: 750
+						TerrainFeatureSize: 51200
+						Forests: 0
+				Choice@Continents:
+					Label: label_ra_map_generator_choice_terrain_type_continents
+					Settings:
+						Water: 500
+						TerrainFeatureSize: 102400
+				Choice@Wetlands:
+					Label: label_ra_map_generator_choice_terrain_type_wetlands
+					Settings:
+						Water: 500
+				Choice@NarrowWetlands:
+					Label: label_ra_map_generator_choice_terrain_type_narrow_wetlands
+					Settings:
+						Water: 500
+						TerrainFeatureSize: 5120
+						Forests: 0
+						SpawnBuildSize: 6
+						MinimumSpawnRadius: 4
+			MultiChoiceOption@Shape:
+				Label: label_ra_map_generator_option_shape
+				Default: Square
+				Priority: 1
+				Choice@Square:
+					Label: label_ra_map_generator_choice_shape_square
+					Settings:
+						ExternalCircularBias: 0
+				Choice@CircleMountain:
+					Label: label_ra_map_generator_choice_shape_circle_mountain
+					Settings:
+						ExternalCircularBias: 1
+				Choice@CircleWater:
+					Label: label_ra_map_generator_choice_shape_circle_water
+					Settings:
+						ExternalCircularBias: -1
+			MultiIntegerChoiceOption@Players:
+				Label: label_ra_map_generator_option_players
+				Parameter: Players
+				Choices: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+				Default: 2
+				Priority: 1
+			MultiChoiceOption@Symmetry:
+				Label: label_ra_map_generator_option_symmetry
+				Default: 2Rotations
+				Priority: 1
+				Choice@None:
+					Label: label_ra_map_generator_choice_mirror_none
+					Settings:
+						Mirror: None
+				Choice@LeftMatchesRight:
+					Label: label_ra_map_generator_choice_symmetry_mirror_horizontal
+					Players: 2, 4, 6, 8, 10, 12, 14, 16
+					Settings:
+						Mirror: LeftMatchesRight
+				Choice@TopLeftMatchesBottomRight:
+					Label: label_ra_map_generator_choice_symmetry_mirror_diagonal_tl
+					Players: 2, 4, 6, 8, 10, 12, 14, 16
+					Settings:
+						Mirror: TopLeftMatchesBottomRight
+				Choice@TopMatchesBottom:
+					Label: label_ra_map_generator_choice_symmetry_mirror_vertical
+					Players: 2, 4, 6, 8, 10, 12, 14, 16
+					Settings:
+						Mirror: TopMatchesBottom
+				Choice@TopRightMatchesBottomLeft:
+					Label: label_ra_map_generator_choice_symmetry_mirror_diagonal_tr
+					Players: 2, 4, 6, 8, 10, 12, 14, 16
+					Settings:
+						Mirror: TopRightMatchesBottomLeft
+				Choice@2Rotations:
+					Label: label_ra_map_generator_choice_symmetry_mirror_2_rotations
+					Players: 2, 4, 6, 8, 10, 12, 14, 16
+					Settings:
+						Rotations: 2
+				Choice@3Rotations:
+					Label: label_ra_map_generator_choice_symmetry_mirror_3_rotations
+					Players: 3, 6, 9, 12, 15
+					Settings:
+						Rotations: 3
+				Choice@4Rotations:
+					Label: label_ra_map_generator_choice_symmetry_mirror_4_rotations
+					Players: 4, 8, 12, 16
+					Settings:
+						Rotations: 4
+				Choice@5Rotations:
+					Label: label_ra_map_generator_choice_symmetry_mirror_5_rotations
+					Players: 5, 10, 15
+					Settings:
+						Rotations: 5
+				Choice@6Rotations:
+					Label: label_ra_map_generator_choice_symmetry_mirror_6_rotations
+					Players: 6, 12
+					Settings:
+						Rotations: 6
+				Choice@7Rotations:
+					Label: label_ra_map_generator_choice_symmetry_mirror_7_rotations
+					Players: 7, 14
+					Settings:
+						Rotations: 7
+				Choice@8Rotations:
+					Label: label_ra_map_generator_choice_symmetry_mirror_8_rotations
+					Players: 8, 16
+					Settings:
+						Rotations: 8
+			MultiChoiceOption@Resources:
+				Label: label_ra_map_generator_option_resources
+				Default: Medium
+				Choice@None:
+					Label: label_ra_map_generator_choice_resources_none
+					Settings:
+						SpawnResourceSpawns: 0
+						ResourcesPerPlayer: 0
+						ResourceSpawnWeights:
+						ExpansionResourceSpawnWeights:
+						MaximumExpansionResourceSpawns: 0
+						MaximumResourceSpawnsPerExpansion: 1
+				Choice@Low:
+					Label: label_ra_map_generator_choice_resources_low
+					Settings:
+						SpawnResourceSpawns: 2
+						ResourcesPerPlayer: 18750
+						ResourceSpawnWeights:
+							mine: 50
+							split2: 50
+						ExpansionResourceSpawnWeights:
+							splitblue: 40
+							splitred: 30
+							splitgold: 20
+							gmine: 10
+						MaximumExpansionResourceSpawns: 3
+						MaximumResourceSpawnsPerExpansion: 1
+				Choice@Medium:
+					Label: label_ra_map_generator_choice_resources_medium
+					Settings:
+						SpawnResourceSpawns: 3
+						ResourcesPerPlayer: 37500
+						ResourceSpawnWeights:
+							mine: 50
+							split2: 50
+						ExpansionResourceSpawnWeights:
+							splitblue: 40
+							splitred: 30
+							splitgold: 20
+							gmine: 10
+						MaximumExpansionResourceSpawns: 5
+						MaximumResourceSpawnsPerExpansion: 2
+				Choice@High:
+					Label: label_ra_map_generator_choice_resources_high
+					Settings:
+						SpawnResourceSpawns: 3
+						ResourcesPerPlayer: 56250
+						ResourceSpawnWeights:
+							mine: 40
+							split2: 60
+						ExpansionResourceSpawnWeights:
+							splitblue: 35
+							splitred: 25
+							splitgold: 20
+							gmine: 20
+						MaximumExpansionResourceSpawns: 8
+						MaximumResourceSpawnsPerExpansion: 3
+				Choice@VeryHigh:
+					Label: label_ra_map_generator_choice_resources_very_high
+					Settings:
+						SpawnResourceSpawns: 4
+						ResourcesPerPlayer: 75000
+						ResourceSpawnWeights:
+							mine: 40
+							split2: 60
+						ExpansionResourceSpawnWeights:
+							splitblue: 35
+							splitred: 25
+							splitgold: 20
+							gmine: 20
+						MaximumExpansionResourceSpawns: 10
+						MaximumResourceSpawnsPerExpansion: 3
+				Choice@Full:
+					Label: label_ra_map_generator_choice_resources_full
+					Settings:
+						SpawnResourceSpawns: 0
+						ResourcesPerPlayer: 1000000000
+						ResourceSpawnWeights:
+						ExpansionResourceSpawnWeights:
+						MaximumExpansionResourceSpawns: 0
+						MaximumResourceSpawnsPerExpansion: 1
+			MultiChoiceOption@Buildings:
+				Label: label_ra_map_generator_option_buildings
+				Default: Standard
+				Choice@None:
+					Label: label_ra_map_generator_choice_buildings_none
+					Settings:
+						MinimumBuildings: 0
+						MaximumBuildings: 0
+						BuildingWeights:
+				Choice@Standard:
+					Label: label_ra_map_generator_choice_buildings_standard
+					Settings:
+						MinimumBuildings: 0
+						MaximumBuildings: 3
+						BuildingWeights:
+							hosp: 2
+							miss: 1
+							oilb: 9
+				Choice@Extra:
+					Label: label_ra_map_generator_choice_buildings_extra
+					Settings:
+						MinimumBuildings: 3
+						MaximumBuildings: 6
+						BuildingWeights:
+							fcom: 3
+							hosp: 2
+							miss: 1
+							oilb: 9
+				Choice@OilOnly:
+					Label: label_ra_map_generator_choice_buildings_oil_only
+					Settings:
+						MinimumBuildings: 0
+						MaximumBuildings: 3
+						BuildingWeights:
+							oilb: 1
+				Choice@OilRush:
+					Label: label_ra_map_generator_choice_buildings_oil_rush
+					Settings:
+						MinimumBuildings: 8
+						MaximumBuildings: 10
+						BuildingWeights:
+							oilb: 1
+			MultiChoiceOption@Density:
+				Label: label_ra_map_generator_option_density
+				Default: Players
+				Priority: 1
+				Choice@Players:
+					Label: label_ra_map_generator_choice_density_players
+					Settings:
+						AreaEntityBonus: 0
+						PlayerCountEntityBonus: 1000000
+				Choice@AreaAndPlayers:
+					Label: label_ra_map_generator_choice_density_area_and_players
+					Settings:
+						AreaEntityBonus: 200
+						PlayerCountEntityBonus: 500000
+				Choice@AreaVeryLow:
+					Label: label_ra_map_generator_choice_density_area_very_low
+					Settings:
+						AreaEntityBonus: 100
+						PlayerCountEntityBonus: 0
+				Choice@AreaLow:
+					Label: label_ra_map_generator_choice_density_area_low
+					Settings:
+						AreaEntityBonus: 200
+						PlayerCountEntityBonus: 0
+				Choice@AreaMedium:
+					Label: label_ra_map_generator_choice_density_area_medium
+					Settings:
+						AreaEntityBonus: 400
+						PlayerCountEntityBonus: 0
+				Choice@AreaHigh:
+					Label: label_ra_map_generator_choice_density_area_high
+					Settings:
+						AreaEntityBonus: 600
+						PlayerCountEntityBonus: 0
+				Choice@AreaVeryHigh:
+					Label: label_ra_map_generator_choice_density_area_very_high
+					Settings:
+						AreaEntityBonus: 800
+						PlayerCountEntityBonus: 0
+			MultiChoiceOption@CivilianDensity:
+				Label: label_ra_map_generator_option_civilian_density
+				Default: Default
+				Priority: 3
+				Choice@Default:
+					Label: label_ra_map_generator_choice_civilian_density_default
+					Settings:
+				Choice@None:
+					Label: label_ra_map_generator_choice_civilian_density_none
+					Settings:
+						CivilianBuildings: 0
+				Choice@Low:
+					Label: label_ra_map_generator_choice_civilian_density_low
+					Settings:
+						CivilianBuildings: 75
+				Choice@Medium:
+					Label: label_ra_map_generator_choice_civilian_density_medium
+					Settings:
+						CivilianBuildings: 125
+				Choice@High:
+					Label: label_ra_map_generator_choice_civilian_density_high
+					Settings:
+						CivilianBuildings: 250
+				Choice@VeryHigh:
+					Label: label_ra_map_generator_choice_civilian_density_very_high
+					Settings:
+						CivilianBuildings: 500
+				Choice@Max:
+					Label: label_ra_map_generator_choice_civilian_density_max
+					Settings:
+						CivilianBuildings: 1000
+			BooleanOption@DenyWalledArea:
+				Label: label_ra_map_generator_option_deny_walled_areas
+				Parameter: DenyWalledAreas
+				Default: True
+				Priority: 1
+			BooleanOption@Roads:
+				Label: label_ra_map_generator_option_roads
+				Parameter: Roads
+				Default: False
+				Priority: 1
+	D2kMapGenerator@d2k:
+		Type: d2k
+		Name: map-generator-d2k
+		Tilesets: ARRAKIS
+		Settings:
+			MultiChoiceOption@hidden_defaults:
+				Choice@hidden_defaults:
+					Settings:
+						Rotations: 1
+						Mirror: None
+						TerrainFeatureSize: 10240
+						SandDetailFeatureSize: 10240
+						DuneFeatureSize: 10240
+						ResourceFeatureSize: 20480
+						TerrainSmoothing: 4
+						DuneSmoothing: 2
+						SmoothingThreshold: 833
+						RockRoughness: 350
+						SandRoughness: 500
+						RoughnessRadius: 5
+						Rock: 350
+						SandCliffs: 500
+						Dunes: 200
+						MinimumRockStraight: 3
+						MinimumSandCliffStraight: 1
+						MinimumRockSandThickness: 6
+						MinimumSandCliffThickness: 5
+						MinimumDuneThickness: 2
+						MinimumRockSmoothLength: 6
+						MinimumSandRockCliffLength: 6
+						MinimumSandSandCliffLength: 6
+						MinimumSandLength: 2
+						SandContourSpacing: 5
+						DuneContourSpacing: 2
+						SandDetail: 200
+						SandDetailClumpiness: 1
+						SandDetailCutout: 2
+						MaximumSandDetailCutoutSpacing: 12
+						#
+						CreateEntities: True
+						AreaEntityBonus: 0
+						PlayerCountEntityBonus: 1000000
+						MinimumSpawnRockArea: 150
+						CentralSpawnReservationFraction: 250
+						SpawnRegionSize: 12
+						MinimumSpawnRadius: 3
+						SpawnReservation: 16
+						BiasedResourceSpawns: 2
+						ResourceSpawnSpacing: 2
+						UnbiasedResourceSpawns: 5
+						ResourceSpawnReservation: 8
+						ResourcesPerPlayer: 125000
+						ResourceUniformity: 250
+						ResourceClumpiness: 2
+						ResourceSpawn: spicebloom.spawnpoint
+						Resource: Spice
+						WormSpawn: wormspawner
+						WormSpawns: 1
+						WormSpawnReservation: 12
+						#
+						SandTile: 0
+						RockTile: 266
+						# Cameo's arrakis tileset renames the d2k terrain types: Rock -> ClearDune, Rough -> RoughDune.
+						PlayableTerrain: Clear,Concrete,Dune,ClearDune,RoughDune,Sand,Spice,SpiceSand,Transition
+						RockZoneableTerrain: ClearDune
+						SandZoneableTerrain: SpiceSand
+						RockSmoothSegmentType: RockSmooth
+						SandRockCliffSegmentType: SandRockCliff
+						SandSandCliffSegmentType: SandSandCliff
+						SandSegmentType: Sand
+						DuneSegmentType: Dune
+						SandDetailBrushes: Rough-Sand-Detail
+						DuneBrushes: Dune
+			IntegerOption@Seed:
+				Label: label_d2k_map_generator_option_seed
+				Parameter: Seed
+				Default: 0
+			MultiChoiceOption@TerrainType:
+				Label: label_d2k_map_generator_option_terrain_type
+				Priority: 2
+				Default: Rocky
+				Choice@Rocky:
+					Label: label_d2k_map_generator_choice_terrain_type_rocky
+					Settings:
+						TerrainFeatureSize: 10240
+						SandDetailFeatureSize: 10240
+						DuneFeatureSize: 10240
+						RockRoughness: 350
+						SandRoughness: 500
+						Rock: 350
+						SandCliffs: 500
+						Dunes: 200
+						SandDetail: 200
+				Choice@Rough:
+					Label: label_d2k_map_generator_choice_terrain_type_rough
+					Settings:
+						TerrainFeatureSize: 10240
+						SandDetailFeatureSize: 10240
+						DuneFeatureSize: 10240
+						RockRoughness: 300
+						SandRoughness: 300
+						Rock: 300
+						SandCliffs: 500
+						Dunes: 200
+						SandDetail: 200
+				Choice@Flat:
+					Label: label_d2k_map_generator_choice_terrain_type_flat
+					Settings:
+						TerrainFeatureSize: 10240
+						SandDetailFeatureSize: 10240
+						DuneFeatureSize: 10240
+						RockRoughness: 0
+						SandRoughness: 0
+						Rock: 250
+						SandCliffs: 0
+						Dunes: 200
+						SandDetail: 50
+				Choice@Pockets:
+					Label: label_d2k_map_generator_choice_terrain_type_pockets
+					Settings:
+						TerrainFeatureSize: 10240
+						SandDetailFeatureSize: 10240
+						DuneFeatureSize: 10240
+						RockRoughness: 300
+						SandRoughness: 250
+						Rock: 650
+						SandCliffs: 500
+						Dunes: 0
+						SandDetail: 50
+			MultiIntegerChoiceOption@Players:
+				Label: label_d2k_map_generator_option_players
+				Parameter: Players
+				Choices: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+				Default: 2
+				Priority: 1
+			MultiChoiceOption@Symmetry:
+				Label: label_d2k_map_generator_option_symmetry
+				Default: 2Rotations
+				Priority: 1
+				Choice@None:
+					Label: label_d2k_map_generator_choice_mirror_none
+					Settings:
+						Mirror: None
+				Choice@LeftMatchesRight:
+					Label: label_d2k_map_generator_choice_symmetry_mirror_horizontal
+					Players: 2, 4, 6, 8, 10, 12, 14, 16
+					Settings:
+						Mirror: LeftMatchesRight
+				Choice@TopLeftMatchesBottomRight:
+					Label: label_d2k_map_generator_choice_symmetry_mirror_diagonal_tl
+					Players: 2, 4, 6, 8, 10, 12, 14, 16
+					Settings:
+						Mirror: TopLeftMatchesBottomRight
+				Choice@TopMatchesBottom:
+					Label: label_d2k_map_generator_choice_symmetry_mirror_vertical
+					Players: 2, 4, 6, 8, 10, 12, 14, 16
+					Settings:
+						Mirror: TopMatchesBottom
+				Choice@TopRightMatchesBottomLeft:
+					Label: label_d2k_map_generator_choice_symmetry_mirror_diagonal_tr
+					Players: 2, 4, 6, 8, 10, 12, 14, 16
+					Settings:
+						Mirror: TopRightMatchesBottomLeft
+				Choice@2Rotations:
+					Label: label_d2k_map_generator_choice_symmetry_mirror_2_rotations
+					Players: 2, 4, 6, 8, 10, 12, 14, 16
+					Settings:
+						Rotations: 2
+				Choice@3Rotations:
+					Label: label_d2k_map_generator_choice_symmetry_mirror_3_rotations
+					Players: 3, 6, 9, 12, 15
+					Settings:
+						Rotations: 3
+				Choice@4Rotations:
+					Label: label_d2k_map_generator_choice_symmetry_mirror_4_rotations
+					Players: 4, 8, 12, 16
+					Settings:
+						Rotations: 4
+				Choice@5Rotations:
+					Label: label_d2k_map_generator_choice_symmetry_mirror_5_rotations
+					Players: 5, 10, 15
+					Settings:
+						Rotations: 5
+				Choice@6Rotations:
+					Label: label_d2k_map_generator_choice_symmetry_mirror_6_rotations
+					Players: 6, 12
+					Settings:
+						Rotations: 6
+				Choice@7Rotations:
+					Label: label_d2k_map_generator_choice_symmetry_mirror_7_rotations
+					Players: 7, 14
+					Settings:
+						Rotations: 7
+				Choice@8Rotations:
+					Label: label_d2k_map_generator_choice_symmetry_mirror_8_rotations
+					Players: 8, 16
+					Settings:
+						Rotations: 8
+			MultiChoiceOption@Resources:
+				Label: label_d2k_map_generator_option_resources
+				Default: Medium
+				Choice@None:
+					Label: label_d2k_map_generator_choice_resources_none
+					Settings:
+						BiasedResourceSpawns: 0
+						UnbiasedResourceSpawns: 0
+						ResourcesPerPlayer: 0
+				Choice@Low:
+					Label: label_d2k_map_generator_choice_resources_low
+					Settings:
+						BiasedResourceSpawns: 1
+						UnbiasedResourceSpawns: 2
+						ResourcesPerPlayer: 75000
+				Choice@Medium:
+					Label: label_d2k_map_generator_choice_resources_medium
+					Settings:
+						BiasedResourceSpawns: 2
+						UnbiasedResourceSpawns: 4
+						ResourcesPerPlayer: 125000
+				Choice@High:
+					Label: label_d2k_map_generator_choice_resources_high
+					Settings:
+						BiasedResourceSpawns: 3
+						UnbiasedResourceSpawns: 6
+						ResourcesPerPlayer: 150000
+				Choice@VeryHigh:
+					Label: label_d2k_map_generator_choice_resources_very_high
+					Settings:
+						BiasedResourceSpawns: 4
+						UnbiasedResourceSpawns: 8
+						ResourcesPerPlayer: 200000
+				Choice@Full:
+					Label: label_d2k_map_generator_choice_resources_full
+					Settings:
+						BiasedResourceSpawns: 1
+						UnbiasedResourceSpawns: 1000000
+						ResourcesPerPlayer: 1000000000
+			MultiChoiceOption@Worms:
+				Label: label_d2k_map_generator_option_worms
+				Default: Low
+				Choice@None:
+					Label: label_d2k_map_generator_choice_worms_none
+					Settings:
+						WormSpawns: 0
+				Choice@Low:
+					Label: label_d2k_map_generator_choice_worms_low
+					Settings:
+						WormSpawns: 1
+				Choice@Medium:
+					Label: label_d2k_map_generator_choice_worms_medium
+					Settings:
+						WormSpawns: 2
+				Choice@High:
+					Label: label_d2k_map_generator_choice_worms_high
+					Settings:
+						WormSpawns: 4
+			MultiChoiceOption@Density:
+				Label: label_d2k_map_generator_option_density
+				Default: Players
+				Priority: 1
+				Choice@Players:
+					Label: label_d2k_map_generator_choice_density_players
+					Settings:
+						AreaEntityBonus: 0
+						PlayerCountEntityBonus: 1000000
+				Choice@AreaAndPlayers:
+					Label: label_d2k_map_generator_choice_density_area_and_players
+					Settings:
+						AreaEntityBonus: 200
+						PlayerCountEntityBonus: 500000
+				Choice@AreaVeryLow:
+					Label: label_d2k_map_generator_choice_density_area_very_low
+					Settings:
+						AreaEntityBonus: 100
+						PlayerCountEntityBonus: 0
+				Choice@AreaLow:
+					Label: label_d2k_map_generator_choice_density_area_low
+					Settings:
+						AreaEntityBonus: 200
+						PlayerCountEntityBonus: 0
+				Choice@AreaMedium:
+					Label: label_d2k_map_generator_choice_density_area_medium
+					Settings:
+						AreaEntityBonus: 400
+						PlayerCountEntityBonus: 0
+				Choice@AreaHigh:
+					Label: label_d2k_map_generator_choice_density_area_high
+					Settings:
+						AreaEntityBonus: 600
+						PlayerCountEntityBonus: 0
+				Choice@AreaVeryHigh:
+					Label: label_d2k_map_generator_choice_density_area_very_high
+					Settings:
+						AreaEntityBonus: 800
+						PlayerCountEntityBonus: 0
+	ClearMapGenerator@clear:
+		Type: clear
+		Name: map-generator-clear
+		Tilesets: RA_TEMPERAT, RA_SNOW, RA_DESERT, RA_INTERIOR, ARRAKIS, TEMPERAT, DESERT, VOLCANIC
+		Settings:
+			MultiChoiceOption@Tile:
+				Label: label_clear_map_generator_option_tile
+				Choice@DesertClear:
+					Label: label_clear_map_generator_choice_tile_clear
+					Tileset: RA_DESERT
+					Settings:
+						Tile: 255
+				Choice@DesertWater:
+					Label: label_clear_map_generator_choice_tile_water
+					Tileset: RA_DESERT
+					Settings:
+						Tile: 256
+				Choice@SnowClear:
+					Label: label_clear_map_generator_choice_tile_clear
+					Tileset: RA_SNOW
+					Settings:
+						Tile: 255
+				Choice@SnowWater:
+					Label: label_clear_map_generator_choice_tile_water
+					Tileset: RA_SNOW
+					Settings:
+						Tile: 1
+				Choice@TemperatClear:
+					Label: label_clear_map_generator_choice_tile_clear
+					Tileset: RA_TEMPERAT
+					Settings:
+						Tile: 255
+				Choice@TemperatWater:
+					Label: label_clear_map_generator_choice_tile_water
+					Tileset: RA_TEMPERAT
+					Settings:
+						Tile: 1
+				Choice@InteriorClear:
+					Label: label_clear_map_generator_choice_tile_clear
+					Tileset: RA_INTERIOR
+					Settings:
+						Tile: 275
+				Choice@InteriorEmpty:
+					Label: label_clear_map_generator_choice_tile_empty
+					Tileset: RA_INTERIOR
+					Settings:
+						Tile: 255
+				Choice@TemperatTDClear:
+					Label: label_clear_map_generator_choice_tile_clear
+					Tileset: TEMPERAT
+					Settings:
+						Tile: 255
+				Choice@TemperatTDWater:
+					Label: label_clear_map_generator_choice_tile_water
+					Tileset: TEMPERAT
+					Settings:
+						Tile: 1
+				Choice@DesertTDClear:
+					Label: label_clear_map_generator_choice_tile_clear
+					Tileset: DESERT
+					Settings:
+						Tile: 255
+				Choice@DesertTDWater:
+					Label: label_clear_map_generator_choice_tile_water
+					Tileset: DESERT
+					Settings:
+						Tile: 1
+				Choice@VolcanicClear:
+					Label: label_clear_map_generator_choice_tile_clear
+					Tileset: VOLCANIC
+					Settings:
+						Tile: 255
+				Choice@VolcanicLava:
+					Label: label_clear_map_generator_choice_tile_water
+					Tileset: VOLCANIC
+					Settings:
+						Tile: 1
+				Choice@ArrakisSand:
+					Label: label_clear_map_generator_choice_tile_sand
+					Tileset: ARRAKIS
+					Settings:
+						Tile: 0
+				Choice@ArrakisConcrete:
+					Label: label_clear_map_generator_choice_tile_concrete
+					Tileset: ARRAKIS
+					Settings:
+						Tile: 88
+				Choice@ArrakisDune:
+					Label: label_clear_map_generator_choice_tile_dune
+					Tileset: ARRAKIS
+					Settings:
+						Tile: 241
+				Choice@ArrakisRock:
+					Label: label_clear_map_generator_choice_tile_rock
+					Tileset: ARRAKIS
+					Settings:
+						Tile: 266
+				Choice@ArrakisPlatform:
+					Label: label_clear_map_generator_choice_tile_platform
+					Tileset: ARRAKIS
+					Settings:
+						Tile: 1017

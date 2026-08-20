@@ -160,7 +160,7 @@ Player:
 	#Production@CLASSICPRODUCTIONQUEUES:
 	#	PauseOnCondition: lowpower
 
-^wc_h_str_sword:
+^WCHumansStrSword:
 	GrantConditionOnPrerequisite@upgrade:
 		Condition: sword_upg
 		Prerequisites: wc_h_str_sword || wc_o_str_axe
@@ -174,7 +174,7 @@ Player:
 		Modifier: 130
 		RequiresCondition: sword_upg2
 
-^wc_h_str_shield:
+^WCHumansStrShield:
 	GrantConditionOnPrerequisite@supgrade:
 		Condition: shield_upg
 		Prerequisites: wc_h_str_shield || wc_o_str_shield
@@ -187,7 +187,7 @@ Player:
 	DamageMultiplier@upgrade2:
 		Modifier: 75
 		RequiresCondition: shield_upg2
-^wc_h_str_arrow:
+^WCHumansStrArrow:
 	GrantConditionOnPrerequisite@upgrade:
 		Condition: arrow_upg
 		Prerequisites: wc_h_str_arrow || wc_o_str_spear
@@ -200,7 +200,7 @@ Player:
 	FirepowerMultiplier@upgrade2:
 		Modifier: 140
 		Condition: arrow_upg2
-^wc_h_horses:
+^WCHumansHorses:
 	GrantConditionOnPrerequisite@spupgrade:
 		Condition: horses_upg
 		Prerequisites: wc_h_horses || wc_o_wolves
@@ -227,7 +227,7 @@ wc_h_townhall:
 	Inherits@ai: ^AIConyardCash
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -346,7 +346,7 @@ wc_h_farm:
 	Inherits@shape: ^2x2Shape
 	Inherits@BURNABLE: ^WC1Building
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	HitShape:
 		TargetableOffsets: 630,299,0
 	StoresResources:
@@ -414,9 +414,9 @@ wc_h_guard_tower:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@shape: ^2x2Shape
 	Inherits@BURNABLE: ^WC1Building
-	Inherits@upgrade_arrows: ^wc_h_str_arrow
+	Inherits@upgrade_arrows: ^WCHumansStrArrow
 	Selectable:
-		Bounds: 72789, 72789
+		Bounds: 1706, 1706
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -543,7 +543,7 @@ wc_h_barracks:
 	ProvidesPrerequisite@barracks:
 		Prerequisite: barracks
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 	Voiced:
 		VoiceSet: humanbarracksvoice
 
@@ -584,9 +584,9 @@ wc_h_lumbermill:
 	RevealsShroud:
 		Range: 6c0
 	Production@NORMAL:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar@NORMAL:
-		ProductionType: Upgrades
+		ProductionType: Research
 	Refinery:
 		DockAngle: 448
 		DockOffset: 0,2
@@ -597,7 +597,7 @@ wc_h_lumbermill:
 	StoresResources:
 		Capacity: 1000
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	CustomSellValue:
 		Value: 500
 	FreeActor:
@@ -627,7 +627,7 @@ wc_h_blacksmith:
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQCondition
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -636,9 +636,9 @@ wc_h_blacksmith:
 		Name: Blacksmith
 	ProvidesPrerequisite:
 	Production@NORMAL:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar@NORMAL:
-		ProductionType: Upgrades
+		ProductionType: Research
 	Buildable:
 		BuildPaletteOrder: 14
 		Prerequisites: wc_h_barracks
@@ -677,7 +677,7 @@ wc_h_church:
 	Inherits@wcprod: ^WCUnitProduction
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -748,7 +748,7 @@ wc_h_stable:
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQCondition
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -756,9 +756,9 @@ wc_h_stable:
 	Tooltip:
 		Name: Stable
 	Production@NORMAL:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar@NORMAL:
-		ProductionType: Upgrades
+		ProductionType: Research
 	ProvidesPrerequisite:
 	Buildable:
 		BuildPaletteOrder: 16
@@ -792,7 +792,7 @@ wc_h_tower:
 	Inherits@wcprod: ^WCUnitProduction
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -867,7 +867,7 @@ wc_h_stormwind:
 	Inherits@shape: ^2x2Shape
 	Inherits@SW: ^PrimarySuperweapon
 	Selectable:
-		Bounds: 174762, 174762
+		Bounds: 4096, 4096
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -1023,7 +1023,7 @@ wc_o_guard_tower:
 	Buildable:
 		Prerequisites: wc_o_barracks
 		Queue: Defence, RADefence
-		IconPalette: chrome
+		IconPalette: cameo
 	Voiced:
 		VoiceSet: orcguardtowervoice
 
@@ -1054,13 +1054,13 @@ wc_o_lumbermill:
 		Prerequisites: wc_o_farm
 		Queue: Building, RABuilding
 		Description: Dropoff point for gold. (Tiberium)\nCan store up to 1000 resource\nProduces spears enabling Spearmen\nProvides spear upgrades for spearmen and Guard towers
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionQueue@Upgrades:
+	Production@Research:
+		Produces: Research
+	ProductionQueue@Research:
 		Type: Upgrades
 		Group: Upgrade
 	ProductionBar@NORMAL:
-		ProductionType: Upgrades
+		ProductionType: Research
 	FreeActor:
 		Actor: wc_o_peon
 	SpawnActorsOnSell:
@@ -1070,13 +1070,13 @@ wc_o_lumbermill:
 
 wc_o_blacksmith:
 	Inherits@wc_h_blacksmith: wc_h_blacksmith
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionQueue@Upgrades:
+	Production@Research:
+		Produces: Research
+	ProductionQueue@Research:
 		Type: Upgrades
 		Group: Upgrade
 	ProductionBar@NORMAL:
-		ProductionType: Upgrades
+		ProductionType: Research
 	Buildable:
 		Prerequisites: wc_o_barracks
 		Queue: Building, RABuilding
@@ -1114,13 +1114,13 @@ wc_o_kennel:
 	Inherits@wc_h_stable: wc_h_stable
 	Tooltip:
 		Name: Kennels
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionQueue@Upgrades:
+	Production@Research:
+		Produces: Research
+	ProductionQueue@Research:
 		Type: Upgrades
 		Group: Upgrade
 	ProductionBar@NORMAL:
-		ProductionType: Upgrades
+		ProductionType: Research
 	Buildable:
 		Prerequisites: wc_o_barracks
 		Queue: Building, RABuilding
@@ -1231,7 +1231,7 @@ wc_h_peasant:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@upgrade_shields: ^wc_h_str_shield
+	Inherits@upgrade_shields: ^WCHumansStrShield
 	AutoTargetPriority@Repair:
 		ValidTargets: Repair, Repairing
 		ValidRelationships: Ally
@@ -1290,7 +1290,7 @@ wc_h_peasant_engineer:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@upgrade_shields: ^wc_h_str_shield
+	Inherits@upgrade_shields: ^WCHumansStrShield
 	Inherits@engineer: ^EngineerDefaultWeapons
 	Inherits@isengineer: ^IsEngineer
 	AutoTargetPriority@Repair:
@@ -1379,7 +1379,6 @@ wc_h_mcv:
 		Name: Mobile Construction Peasant (Human)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 95
 	DamageMultiplier@DamageReduction:
@@ -1410,9 +1409,10 @@ wc_h_mcv:
 wc_h_mcv.bot:
 	Inherits: wc_h_mcv
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: ~techlevel.medium, ~botplayer, allowsMCV
+		Prerequisites: ~botplayer, allowsMCV
 	RenderSprites:
 		Image: wc_h_peasant
 
@@ -1441,8 +1441,8 @@ wc_h_footman:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@upgrade_swords: ^wc_h_str_sword
-	Inherits@upgrade_shields: ^wc_h_str_shield
+	Inherits@upgrade_swords: ^WCHumansStrSword
+	Inherits@upgrade_shields: ^WCHumansStrShield
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -1491,7 +1491,7 @@ wc_o_mcv.bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: ~techlevel.medium, ~botplayer, allowsMCV
+		Prerequisites: ~botplayer, allowsMCV
 	RenderSprites:
 		Image: wc_o_peon
 
@@ -1501,8 +1501,8 @@ wc_h_archer:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@upgrade_shields: ^wc_h_str_shield
-	Inherits@upgrade_arrows: ^wc_h_str_arrow
+	Inherits@upgrade_shields: ^WCHumansStrShield
+	Inherits@upgrade_arrows: ^WCHumansStrArrow
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -1537,7 +1537,7 @@ wc_h_archer:
 	Armament:
 		Weapon: bowFire
 	Armament@aa:
-		Weapon: bowFireAA
+		Weapon: bowFire_AA
 	WithDeathAnimation:
 		UseDeathTypeSuffix: false
 	WithInfantryBody:
@@ -1552,9 +1552,9 @@ wc_h_knight:
 	Inherits@WC1Infantry: ^WC1Infantry
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
-	Inherits@upgrade_shields: ^wc_h_str_shield
-	Inherits@upgrade_swords: ^wc_h_str_sword
-	Inherits@upgrade_horses: ^wc_h_horses
+	Inherits@upgrade_shields: ^WCHumansStrShield
+	Inherits@upgrade_swords: ^WCHumansStrSword
+	Inherits@upgrade_horses: ^WCHumansHorses
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -1660,7 +1660,7 @@ wc_h_conjurer:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@upgrade_shields: ^wc_h_str_shield
+	Inherits@upgrade_shields: ^WCHumansStrShield
 	Inherits@MC: ^MCImmune
 	Valued:
 		Cost: 1600
@@ -1713,7 +1713,7 @@ wc_h_cleric:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@upgrade_shields: ^wc_h_str_shield
+	Inherits@upgrade_shields: ^WCHumansStrShield
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -1780,7 +1780,7 @@ wc_h_scorpion:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Queue: Aircraft, RAAircraft
 		Description: Lesser Spawn.
 	Mobile:
@@ -1885,7 +1885,6 @@ wc_n_waterelemental:
 	Buildable:
 		Queue: Infantry
 		Description: Will make you wet your pants\nLiterally\nCannot be hurt by fire
-		Prerequisites:
 	Valued:
 		Cost: 1600
 	DamageMultiplier@DamageReduction:
@@ -1907,6 +1906,7 @@ wc_n_fireelemental:
 	Tooltip:
 		Name: Fire Elemental
 	Buildable:
+		Prerequisites:
 		Description: Don't play with fire.\nExtremely vulnerable against Water\nCannot be hurt by fire
 	DamageMultiplier@DamageReduction:
 		Modifier: 85
@@ -1993,7 +1993,7 @@ wc_goldmine:
 	Inherits@Bot: ^BotMicromanageable
 	Inherits@XP: ^GainsExperienceCity
 	Selectable:
-		Bounds: 72789, 72789
+		Bounds: 1706, 1706
 	Valued:
 		Cost: 3000
 	Tooltip:
@@ -2321,8 +2321,8 @@ wc_n_spider:
 
 wc_o_skeleton:
 	Inherits@wc_h_scorpion: wc_h_scorpion
-	Inherits@upgrade_shields: ^wc_h_str_shield
-	Inherits@upgrade_swords: ^wc_h_str_sword
+	Inherits@upgrade_shields: ^WCHumansStrShield
+	Inherits@upgrade_swords: ^WCHumansStrSword
 	Inherits@MC: ^MCImmune
 	-Buildable:
 	Tooltip:
@@ -2365,7 +2365,7 @@ wc_o_demon:
 		InitialStance: AttackAnything
 		ScanRadius: 6
 	Selectable:
-		Bounds: 58240, 58240, 0, 0
+		Bounds: 1365, 1365, 0, 0
 
 wc_n_demon:
 	Inherits: wc_o_demon
@@ -2558,7 +2558,6 @@ wc_n_slime:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites:
 		Queue: Infantry
 		Description: Slow Booger-like creature with jump attack that splits into more upon death
 		BuildDuration: 400
@@ -2593,7 +2592,7 @@ wc_n_slime:
 		VoiceSet: AntVoice
 	-Crushable:
 	Selectable:
-		Bounds: 65536, 65536
+		Bounds: 1536, 1536
 	SpawnActorOnDeath@1:
 		Actor: wc_n_slime_b
 	SpawnActorOnDeath@2:
@@ -2647,12 +2646,12 @@ wc_n_slime_c:
 #######################################################
 
 wc_h_str_arrow:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Arrow Strength
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Arrow Damage dealt by Archers and Guard Towers by 40%
@@ -2664,12 +2663,12 @@ wc_h_str_arrow:
 	ProvidesPrerequisite:
 
 wc_h_str_arrow2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Arrow Strength
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Arrow Damage by Archers and Guard Towers by further 40%
@@ -2681,12 +2680,12 @@ wc_h_str_arrow2:
 	ProvidesPrerequisite:
 
 wc_h_str_sword:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sword Strength
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Sword Damage by 30%
@@ -2698,12 +2697,12 @@ wc_h_str_sword:
 	ProvidesPrerequisite:
 
 wc_h_str_sword2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sword Strength II
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Sword Damage by further 30%
@@ -2715,12 +2714,12 @@ wc_h_str_sword2:
 	ProvidesPrerequisite:
 
 wc_h_str_shield:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Shield Strength
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Shield Resistance of all units by 25%
@@ -2732,12 +2731,12 @@ wc_h_str_shield:
 	ProvidesPrerequisite:
 
 wc_h_str_shield2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Shield Strength II
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Shield Resistance of all units by further 25%
@@ -2749,12 +2748,12 @@ wc_h_str_shield2:
 	ProvidesPrerequisite:
 
 wc_h_horses:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Breed Faster Horses
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Horses speed by 20%
@@ -2766,12 +2765,12 @@ wc_h_horses:
 	ProvidesPrerequisite:
 
 wc_h_horses2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Breed Faster Horses II
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Horses speed by further 20%
@@ -2787,7 +2786,7 @@ wc_o_str_spear:
 	Tooltip:
 		Name: Spear Strength
 	Buildable:
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Spear Damage dealt by Spearmen and Guard Towers by 35%
 		Prerequisites: ~!wc_o_str_spear
 	RenderSprites:
@@ -2798,7 +2797,7 @@ wc_o_str_spear2:
 	Tooltip:
 		Name: Spear Strength II
 	Buildable:
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Spear Damage dealt by Spearmen and Guard Towers by further 35%
 		Prerequisites: ~!wc_o_str_spear2, ~wc_o_str_spear
 	RenderSprites:
@@ -2809,7 +2808,7 @@ wc_o_str_axe:
 	Tooltip:
 		Name: Axe Strength
 	Buildable:
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Axe Damage by 30%
 		Prerequisites: ~!wc_o_str_axe2
 	Valued:
@@ -2822,7 +2821,7 @@ wc_o_str_axe2:
 	Tooltip:
 		Name: Axe Strength II
 	Buildable:
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Axe Damage by further 30%
 		Prerequisites: ~!wc_o_str_axe2, ~wc_o_str_axe
 	RenderSprites:
@@ -2831,7 +2830,7 @@ wc_o_str_axe2:
 wc_o_str_shield:
 	Inherits@shld: wc_h_str_shield
 	Buildable:
-		Queue: Upgrades
+		Queue: Research
 		Prerequisites: ~!wc_o_str_shield
 	RenderSprites:
 		Image: wc_o_str_shield
@@ -2839,7 +2838,7 @@ wc_o_str_shield:
 wc_o_str_shield2:
 	Inherits@shld: wc_h_str_shield2
 	Buildable:
-		Queue: Upgrades
+		Queue: Research
 		Prerequisites: ~!wc_o_str_shield2, ~wc_o_str_shield
 	RenderSprites:
 		Image: wc_o_str_shield2
@@ -2850,7 +2849,7 @@ wc_o_wolves:
 		Name: Breed Faster Wolves
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Wolves speed by 20%
 		Prerequisites: ~!wc_o_wolves
 	RenderSprites:
@@ -2862,7 +2861,7 @@ wc_o_wolves2:
 		Name: Breed Faster Wolves II
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Wolves speed by further 20%
 		Prerequisites: ~!wc_o_wolves2, ~wc_o_wolves
 	RenderSprites:
@@ -2883,7 +2882,6 @@ wc_h_upgradefarm:
 	RenderSprites:
 		Image: wc_h_farm
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 

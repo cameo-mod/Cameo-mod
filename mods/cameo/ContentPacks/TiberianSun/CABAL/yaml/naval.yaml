@@ -1,0 +1,234 @@
+cabal_lcraft:
+	Inherits: ^BoatUnit
+	Inherits@cargo: ^CargoVehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Landing Craft
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~cabal_navalyard
+		Queue: Naval, RANaval
+		Description: Naval Transport, indefense
+	Mobile:
+		Speed: 60
+		TurnSpeed: 12
+		Locomotor: hover
+		RequiresCondition: !notmobile && !disabled
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7500
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 12
+		PassengerFacing: 0
+	Hovers:
+	Targetable@Hover:
+		TargetTypes: Water, Ship
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+cabal_lazerboat:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiAir: ^PrioritizeAir
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~cabal_navalyard
+		Queue: Naval, RANaval
+		Description: Light hydroboat, high firepower, can shoot air and ground units
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Laser Hydroboat
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 110
+		TurnSpeed: 16
+		Locomotor: hover
+		RequiresCondition: !notmobile && !disabled
+	Turreted:
+		TurnSpeed: 24
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Weapon: CabalLaserBoatLaser
+		LocalOffset: 350,-5,10, 350,5,10
+		Recoil: 64
+		RecoilRecovery: 26
+	Armament@AA:
+		Weapon: CabalLaserBoatLaserAA
+		LocalOffset: 350,-5,10, 350,5,10
+		Recoil: 64
+		RecoilRecovery: 26
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: DepthCharge
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 5
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		Image: cabal_lazerboat
+		PlayerPalette: player_rgba
+	Hovers:
+	Targetable@Hover:
+		TargetTypes: Water, Ship
+
+cabal_plasmasub:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@sub: ^Submarine
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Plasma Submarine
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~cabal_navalyard, cabal_radar
+		Queue: Naval, RANaval
+		Description: Heavy Siege Submarine, shoots plasma and only attacks ground
+	Mobile:
+		Speed: 60
+		TurnSpeed: 24
+	Health:
+		HP: 200000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Armor:
+		Type: Medium
+	Armament:
+		Weapon: CabalSubmarinePlasma
+		LocalOffset: 800,200,0, 800,-200,0
+	WithMuzzleOverlay:
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine
+	AttackFrontal:
+		FacingTolerance: 0
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Cloak@underwater:
+		CloakDelay: 100
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	FirepowerMultiplier@BallisticMissileSubBuff:
+		Modifier: 200
+	FireWarheadsOnDeath:
+		Weapon: ArtilleryShell
+	AmmoPool:
+		Ammo: 2
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 110
+		Count: 1
+	RenderSprites:
+		Image: cabal_plasmasub
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: naxis_upgrade_wunderwaffe
+
+cabal_radar_cruiser:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~cabal_navalyard, cabal_techcenter
+		Queue: Naval, RANaval
+		Description: Can hacks other Navy units and capture and buildings
+		Cost: 2500
+	Tooltip:
+		Name: CABAL Hacker Cruiser
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 200000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 60
+		TurnSpeed: 24
+	Turreted:
+		TurnSpeed: 24
+		Offset: 512,0,0
+	Armament@Anim:
+		Weapon: TSCABALCharge_EMP
+		RequiresCondition: end_disable == 0
+		LocalOffset: -128,0,256
+	Armament@End:
+		Weapon: TSCABALDisable_EMP
+		RequiresCondition: end_disable >= 1
+		LocalOffset: -128,0,256
+	GrantConditionOnAttack@End:
+		Condition: end_disable
+		RequiredShotsPerInstance: 25
+		MaximumInstances: 1
+		RevokeDelay: 10
+		RevokeAll: false
+		IsCyclic: false
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 5
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		Image: cabal_radar_cruiser
+		PlayerPalette: player_rgba
+	MindControllerCA:
+		ArmamentNames: primary
+		ExperienceFromControl: 100
+		TicksToControl: 125
+		TicksToRevoke: 25
+		Capacity: 8
+		RequiresCondition: !disabled
+		ControllingCondition: controlling
+	WithRangeCircle@MC:
+		Range: 8000
+		Type: mindcontrol
+		Color: 663399b0
+####################################################################################################
+#		BUILDINGS
+####################################################################################################

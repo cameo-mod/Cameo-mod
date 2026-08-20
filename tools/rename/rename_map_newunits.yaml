@@ -1,0 +1,13 @@
+# rename_map_newunits.yaml — curated (DESIGN.md §1)
+# 333ggg's mortarman + shadow team: ids derive from their Tooltip names
+# (Mutant Mortarman / Shadow Team); glider variant takes the _air suffix.
+actors:
+	forgotten_mortarman: forgotten_mutantmortarman
+	ts_nod_shadteam.air: ts_nod_shadowteam_air
+	ts_nod_shadteam: ts_nod_shadowteam
+files:
+	forgotten_mortarman.shp: forgotten_mutantmortarman.shp
+	forgotten_mortarmanicon.shp: forgotten_mutantmortarman_icon.shp
+	ts_nod_shadteam.shp: ts_nod_shadowteam.shp
+	ts_nod_shadteamair.shp: ts_nod_shadowteam_air.shp
+	ts_nod_shadteamicon.shp: ts_nod_shadowteam_icon.shp

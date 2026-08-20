@@ -593,7 +593,7 @@ GLAHole2x2Defense:
 	RenderSprites:
 		Image: glhole
 upgecapture:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Capture Building
 	Buildable:
@@ -612,7 +612,7 @@ GENE6:
 	Inherits: E6
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Queue: Infantry, RAInfantry
 	RenderSprites:
 		Image: E6
@@ -677,7 +677,7 @@ GENE6:
 	# 	StartFullyCharged: true
 	SupportPowerChargeBar:
 
-^usa_switchable_upgrades:
+^USASwitchableUpgrades:
 	GrantConditionOnPrerequisite@usabombardmentc:
 		Condition: usabombardmentc
 		Prerequisites: usabombardmentc
@@ -804,7 +804,7 @@ GENE6:
 		UnitType: usabomber
 		SquadSize: 4
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 	ClassicAirstrikePower@Spectre:
@@ -832,7 +832,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		Strikes: 4
 		CircleDelay: 20
@@ -857,7 +857,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upusafuelbomb
@@ -903,7 +903,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upusaleaflet
@@ -926,7 +926,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upusaa101, !upusaa102, !upusaa103
@@ -949,7 +949,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upusaa101, upusaa102, !upusaa103
@@ -972,7 +972,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upusaa101, upusaa102, upusaa103
@@ -997,7 +997,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upanthraxbomb
@@ -1184,7 +1184,7 @@ GENE6:
 		UnitType: usabomber
 		SquadSize: 1
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 	ParatroopersPower@minigunnerdrop:
@@ -1209,7 +1209,7 @@ GENE6:
 		UnitType: usabomber
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 	# DetonateWeaponPower@ArtilleryBarrage:
@@ -1287,7 +1287,7 @@ GENE6:
 		Prerequisites: upcarpetbomb
 		StartFullyCharged: true
 	AirstrikePower@EMP:
-		OrderName: CHEMPBomb
+		OrderName: CH_EMP_Bomb
 		Icon: chemp
 		ChargeInterval: 6000
 		Name: EM Pulse
@@ -1327,7 +1327,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upchminebomb, !upschneutronclustermine
@@ -1382,9 +1382,8 @@ GENE6:
 	# 	Prerequisites: upfrenzy3
 	# 	StartFullyCharged: true
 
-
 upemergencyrepair1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Emergency Repair
 	Buildable:
@@ -1398,7 +1397,7 @@ upemergencyrepair1:
 		Prerequisite: upemergencyrepair1
 
 upemergencyrepair2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Emergency Repair 2
 	Buildable:
@@ -1412,7 +1411,7 @@ upemergencyrepair2:
 		Prerequisite: upemergencyrepair2
 
 upemergencyrepair3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Emergency Repair 3
 	Buildable:
@@ -1426,7 +1425,7 @@ upemergencyrepair3:
 		Prerequisite: upemergencyrepair3
 
 usabomber:
-	Inherits: BADR
+	Inherits: ra1_badger
 	Tooltip:
 		Name: Cargo Plane
 	SpawnActorOnDeath:
@@ -1486,7 +1485,7 @@ usabomber.carpet:
 		RequiresSelection: True
 
 usabomber.carpet2:
-	Inherits: BADR.Bomber
+	Inherits: ra1_badger_bomber
 	Aircraft:
 		Speed: 223
 	AttackBomber:
@@ -1563,7 +1562,7 @@ usabomber.emp:
 		PauseOnCondition: !ammo
 		FacingTolerance: 8
 	Armament:
-		Weapon: CHEMPBomb
+		Weapon: CH_EMP_Bomb
 	AmmoPool:
 		Ammo: 1
 	Tooltip:
@@ -1611,7 +1610,7 @@ usabomber.leaflet:
 		RequiresSelection: True
 
 a10generals:
-	Inherits: BADR.Bomber
+	Inherits: ra1_badger_bomber
 	Armament:
 		Weapon: USAA10MG
 		LocalOffset: 1024,0,-85
@@ -1661,7 +1660,7 @@ a10generals.Husk:
 		Image: a10
 
 usabomber.motherbomb:
-	Inherits: BADR.Bomber
+	Inherits: ra1_badger_bomber
 	Aircraft:
 		Speed: 223
 	Armament:
@@ -1688,7 +1687,7 @@ usabomber.motherbomb:
 ##################################################
 
 selectglanormal:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Normal General
 	Buildable:
@@ -1705,7 +1704,7 @@ selectglanormal:
 		Prerequisite: selectglanormal
 
 selectglatoxin:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Toxin General
 	Buildable:
@@ -1726,7 +1725,7 @@ selectglatoxin:
 		Prerequisite: upantraxbeta
 
 selectglademo:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Demolition General
 	Buildable:
@@ -1745,7 +1744,7 @@ selectglademo:
 		Prerequisite: upglatrap
 
 selectglacamo:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Stealth General
 	Buildable:
@@ -1773,7 +1772,6 @@ selectglacamo:
 	ProvidesPrerequisite@8:
 		Prerequisite: uprebelcamo
 
-
 ##################################################
 #	GLA Common
 ##################################################
@@ -1788,7 +1786,7 @@ GLAMCV:
 		Name: Mobile Construction Vehicle (GLA)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: glpalace, ~techlevel.high, ~glaselected
+		Prerequisites: glpalace, ~glaselected
 		Queue: Building, RABuilding
 		Description: Builds structures and provides radar.
 		BuildDuration: 1500
@@ -1825,15 +1823,14 @@ GLAMCV.bot:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: glpalace, ~techlevel.high, ~glaselected, ~botplayer, allowsMCV
+		Prerequisites: glpalace, ~glaselected, ~botplayer, allowsMCV
 	RenderSprites:
 		Image: glmcv
 	Voiced:
 		VoiceSet: WorkerVoice
 
-
 GLA.Paradrop:
-	Inherits: BADR
+	Inherits: ra1_badger
 	Tooltip:
 		Name: GLA Cargo Plane
 	RenderSprites:
@@ -2052,7 +2049,6 @@ glanthraxbomber:
 		RequiresSelection: True
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
-
 
 glscrapcrate:
 	Inherits: ^Crate
@@ -2328,7 +2324,7 @@ glpalace:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@camo: ^BuildingCamoLevel2
 	Inherits@fort: ^GLAFortifiable
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -2367,10 +2363,10 @@ glpalace:
 		QuantizedFacings: 8
 	RangeMultiplier@Extrarange:
 		Modifier: 175
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	DetectCloaked:
 		Range: 2c0
 	-RenderDetectionCircle:
@@ -2410,7 +2406,7 @@ glstorm:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: glpalace, ~techlevel.high, !scudstorm, ~normalscudstorm
+		Prerequisites: glpalace, !scudstorm, ~normalscudstorm
 		Queue: Building, RABuilding
 		Description: Provides Scud Storm support power.\nRequires power to operate.
 	Building:
@@ -2493,7 +2489,6 @@ glstorm:
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: scudstorm
 
-
 glstorm.hole:
 	Inherits: GLAHole4x3
 	TransformOnCondition@buildingrebirth:
@@ -2552,10 +2547,10 @@ glblackmarket:
 		Interval: 25
 		Amount: 25
 	UpdatesDerrickCount:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Voiced:
 		VoiceSet: GLBlackMarketVoice
 	SpawnActorOnDeath@hole:
@@ -2584,12 +2579,11 @@ glsite:
 		Name: Stinger Site
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: glbarracks, ~techlevel.medium, ~glstingerprereq
+		Prerequisites: glbarracks, ~glstingerprereq
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 2048, 2048, 0, -512
+		Bounds: 2048, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 85000
@@ -2700,7 +2694,7 @@ gltunnel:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@shape: ^2x2Shape
 	Inherits@camo: ^BuildingCamoLevel1
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@fort: ^GLAFortifiable
 	Inherits@AP: ^APBulletUpgrade
 	Inherits@demo: ^DemolitionUpgrade
@@ -2710,7 +2704,7 @@ gltunnel:
 		Name: Tunnel Network
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~wip-content #glbarracks, ~techlevel.low, ~glaselected, ~!selectglatoxin
+		Prerequisites: ~disabled #glbarracks, ~techlevel.low, ~glaselected, ~!selectglatoxin
 		Queue: Defence, RADefence
 		Description: Anti-Infantry defensive structure.\nCan protect and transport units.\n  Strong vs Infantry\n  Weak vs Tanks
 	Selectable:
@@ -2772,7 +2766,7 @@ gltunneltoxin:
 		Name: Toxin Network
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~wip-content #glbarracks, ~techlevel.low, ~glaselected, ~selectglatoxin
+		Prerequisites: ~disabled #glbarracks, ~techlevel.low, ~glaselected, ~selectglatoxin
 	Armament@PRIMARY:
 		Weapon: GLTunnelToxinWeapon
 	RenderSprites:
@@ -2873,7 +2867,7 @@ glamob:
 		BuildPaletteOrder: 30
 		Queue: Infantry, RAInfantry
 		Description: Large armed crowd, armed with pistols and Molotovs.\n  Strong vs Buildings, Infantry\n  Weak vs Vehicles, Aircraft
-		Prerequisites: glpalace, ~techlevel.medium, ~!anysgla
+		Prerequisites: glpalace, ~!anysgla
 	Tooltip:
 		Name: Angry Mob
 	UpdatesPlayerStatistics:
@@ -2919,7 +2913,7 @@ glamob:
 	RenderSprites:
 		Image: glamob
 
-^default.angry_mob:
+^DefaultAngryMob:
 	Inherits: E1
 	Inherits@MC: ^MCImmune
 	Inherits@vo: ^AttackFrontalVoice
@@ -2959,7 +2953,7 @@ glamob:
 	-Armament@PRIMARY: ##########
 
 angrymob1:
-	Inherits: ^default.angry_mob
+	Inherits: ^DefaultAngryMob
 	AttackFrontal:
 		FacingTolerance: 0
 	GrantConditionOnPrerequisite@uparmthemob:
@@ -2973,7 +2967,7 @@ angrymob1:
 		PauseOnCondition: !ak47upgrade
 
 angrymob2:
-	Inherits: ^default.angry_mob
+	Inherits: ^DefaultAngryMob
 	AttackFrontal:
 		FacingTolerance: 0
 	GrantConditionOnPrerequisite@uparmthemob:
@@ -2995,7 +2989,7 @@ angrymob2:
 		Modifier: 125
 
 angrymob3:
-	Inherits: ^default.angry_mob
+	Inherits: ^DefaultAngryMob
 	Armament:
 		Weapon: GLAngryMobMolotov
 		LocalOffset: 0,0,555
@@ -3114,7 +3108,7 @@ GLE1toxin:
 		VoiceSet: ToxinRebelVoice
 
 upglatrap:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Booby Traps
 	Buildable:
@@ -3551,7 +3545,7 @@ glbggy:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: glweap, glpalace, ~techlevel.medium, ~glaselected
+		Prerequisites: glweap, glpalace, ~glaselected
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 500
 		BuildDurationModifier: 100
@@ -3689,7 +3683,6 @@ glbbus:
 		Except: Unload, Stop
 		RequiresCondition: damagedslow
 	Passenger:
-		Weight: 6
 	Health:
 		HP: 75000
 	Repairable:
@@ -3793,7 +3786,7 @@ glscorpion:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: glweap, ~techlevel.medium, ~glscorpionprereq
+		Prerequisites: glweap, ~glscorpionprereq
 		Queue: Vehicle, RAVehicle
 		Description: Fast, light tank.\nCan be upgraded with missiles.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Mobile:
@@ -3917,7 +3910,7 @@ glmaura:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: glweap, upmarauder, ~techlevel.medium, ~glmarauderprereq
+		Prerequisites: glweap, upmarauder, ~glmarauderprereq
 		Queue: Vehicle, RAVehicle
 		Description: Medium tank.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Mobile:
@@ -4045,7 +4038,7 @@ gltractor:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: glweap, ~techlevel.medium, ~gltractorprereq
+		Prerequisites: glweap, ~gltractorprereq
 		Queue: Vehicle, RAVehicle
 		Description: Vehicle armed with toxins.\nCan deploy to contaminate an area.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Mobile:
@@ -4528,7 +4521,7 @@ glquad:
 		MuzzleSequence: muzzle
 		LocalOffset: 128,128,200, 128,-128,200, 128,-128,43, 128,128,43
 	Armament@2AA:
-		Weapon: GLQuadCannonAir
+		Weapon: GLQuadCannonAir_AA
 		MuzzleSequence: muzzle
 		LocalOffset: 128,128,200, 128,-128,200, 128,-128,43, 128,128,43
 	AttackTurreted:
@@ -4592,7 +4585,7 @@ GLSCUD:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: upscudlauncher, glpalace, ~techlevel.medium, ~!selectglademo, ~!selectglatoxin, ~normalscudlauncher
+		Prerequisites: upscudlauncher, glpalace, ~!selectglademo, ~!selectglatoxin, ~normalscudlauncher
 		Description: Long-range ballistic missile launcher.\n  Strong vs ground targets\n  Weak vs Aircraft
 	Valued:
 		Cost: 1200
@@ -4675,7 +4668,7 @@ GLSCUD:
 glscud.exp:
 	Inherits: GLSCUD
 	Buildable:
-		Prerequisites: upscudlauncher, glpalace, ~techlevel.medium, ~selectglademo, ~!selectglatoxin, ~normalscudlauncher
+		Prerequisites: upscudlauncher, glpalace, ~selectglademo, ~!selectglatoxin, ~normalscudlauncher
 	MissileSpawnerMaster@1:
 		-RequiresCondition:
 	-MissileSpawnerMaster@2:
@@ -4691,7 +4684,7 @@ glscud.exp:
 glscud.tox:
 	Inherits: GLSCUD
 	Buildable:
-		Prerequisites: upscudlauncher, glpalace, ~techlevel.medium, ~!selectglademo, ~selectglatoxin, ~normalscudlauncher
+		Prerequisites: upscudlauncher, glpalace, ~!selectglademo, ~selectglatoxin, ~normalscudlauncher
 	MissileSpawnerMaster@2:
 		-RequiresCondition:
 	-MissileSpawnerMaster@1:
@@ -4761,7 +4754,7 @@ glbombtruck:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: glweap, ~techlevel.medium, ~!sgla_toxin, ~!sgla_demo
+		Prerequisites: glweap, ~!sgla_toxin, ~!sgla_demo
 		Description: Suicide vehicle.\nCan be upgraded with different explosives.\n  Strong vs Infantry, Vehicles\n  Weak vs Aircraft
 	Health:
 		HP: 8000
@@ -4868,7 +4861,6 @@ pscglbtruck2:
 	RenderSprites:
 		Image: glbombtruck
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -4885,7 +4877,6 @@ pscglbtruck3:
 	RenderSprites:
 		Image: glbombtruck
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -4936,8 +4927,6 @@ glworker:
 		IdleSequences: idle
 		DefaultAttackSequence: shoot
 	WithDockingAnimation:
-	DeliversCash:
-		Payload: 60
 	Cloneable:
 		Types: NormalInfantry
 	-DamagedByTerrain:
@@ -4986,12 +4975,12 @@ glworker:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 upscorpionrocket:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Scorpion Rocket
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allows Scorpion Tanks to launch rockets.
 		Prerequisites: ~!upscorpionrocket, ~!selectglacamo
 	Valued:
@@ -5002,12 +4991,12 @@ upscorpionrocket:
 		Prerequisite: upscorpionrocket
 
 uparmthemob:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Arm the Mob
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Arm Angry Mob members with assault rifles and molotovs.
 		Prerequisites: ~!uparmthemob
 	Valued:
@@ -5018,12 +5007,12 @@ uparmthemob:
 		Prerequisite: upscorpionrocket
 
 uprebelcamo:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Camouflage
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allow Rebels to cloak when stationary.
 		Prerequisites: ~!uprebelcamo, ~!selectglatoxin, ~!selectglademo, ~!selectglacamo, ~!sgla
 	Valued:
@@ -5034,12 +5023,12 @@ uprebelcamo:
 		Prerequisite: uprebelcamo
 
 upcamonetting:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Camo Netting
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Cloaks defensive structures.
 		Prerequisites: ~!upcamonetting, ~upcamonettingprereq
 	Valued:
@@ -5050,12 +5039,12 @@ upcamonetting:
 		Prerequisite: upcamonetting
 
 upcamonetting2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Camo Netting
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Cloaks all structures.
 		Prerequisites: ~!upcamonetting2, ~selectglacamo
 	Valued:
@@ -5068,12 +5057,12 @@ upcamonetting2:
 		Prerequisite: upcamonetting2
 
 upglfort:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Fortified Structure
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases durability of all buildings.
 		Prerequisites: ~!upglfort
 	Valued:
@@ -5084,12 +5073,12 @@ upglfort:
 		Prerequisite: upglfort
 
 uparmorpiercingrocket:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Armor-Piercing Rockets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: All GLA rocket units attack with 25% more damage.
 		Prerequisites: ~!uparmorpiercingrocket
 	Valued:
@@ -5100,12 +5089,12 @@ uparmorpiercingrocket:
 		Prerequisite: uparmorpiercingrocket
 
 uparmorpiercingbullet:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Armor-Piercing Bullets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: All GLA MG units attack with 25% more damage.
 		Prerequisites: ~!uparmorpiercingbullet
 	Valued:
@@ -5116,12 +5105,12 @@ uparmorpiercingbullet:
 		Prerequisite: uparmorpiercingbullet
 
 upjunkrepair:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Junk Repair
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allow all GLA vehicles to self-repair.
 		Prerequisites: ~!upjunkrepair
 	Valued:
@@ -5132,12 +5121,12 @@ upjunkrepair:
 		Prerequisite: upjunkrepair
 
 uptoxinshells:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Toxin Shells
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allow tanks to fire toxin shells.
 		Prerequisites: ~!uptoxinshells, ~!selectglacamo, ~!sgla_camo, ~!sgla_toxin, ~!sgla_demo
 	Valued:
@@ -5148,12 +5137,12 @@ uptoxinshells:
 		Prerequisite: uptoxinshells
 
 upantraxbeta:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Anthrax Beta
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases effectiveness of toxin weapons.
 		Prerequisites: ~!upantraxbeta
 	Valued:
@@ -5164,12 +5153,12 @@ upantraxbeta:
 		Prerequisite: upantraxbeta
 
 updemolition:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Demolition
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: All GLA units and defenses explode on death.
 		Prerequisites: ~!updemolition, ~selectglademo
 	Valued:
@@ -5180,12 +5169,12 @@ updemolition:
 		Prerequisite: updemolition
 
 upnewshoes:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Worker Shoes
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases speed of Workers.
 		Prerequisites: ~!upnewshoes
 	Valued:
@@ -5196,12 +5185,12 @@ upnewshoes:
 		Prerequisite: upnewshoes
 
 upbuggyammo:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Buggy Ammo
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Doubles rockets fired by Rocket Buggies.
 		Prerequisites: ~!upbuggyammo
 	Valued:
@@ -5212,12 +5201,12 @@ upbuggyammo:
 		Prerequisite: upbuggyammo
 
 upantraxgamma:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Anthrax Gamma
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases effectiveness of toxin weapons.
 		Prerequisites: ~upantraxbeta, ~!upantraxgamma, ~selectglatoxin
 	Valued:
@@ -5228,12 +5217,12 @@ upantraxgamma:
 		Prerequisite: upantraxgamma
 
 upradarvanscan:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Radar Van Scan
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allow Radar Vans to reveal areas of the map.
 		Prerequisites: ~!upradarvanscan
 		Icon: radarvan
@@ -5245,7 +5234,7 @@ upradarvanscan:
 		Prerequisite: upradarvanscan
 
 upmarauder:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Marauder Tank
 	Buildable:
@@ -5259,7 +5248,7 @@ upmarauder:
 		Prerequisite: upmarauder
 
 uptechnical:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Technical Training
 	Buildable:
@@ -5273,7 +5262,7 @@ uptechnical:
 		Prerequisite: uptechnical
 
 upscudlauncher:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Scud Launcher
 	Buildable:
@@ -5287,7 +5276,7 @@ upscudlauncher:
 		Prerequisite: upscudlauncher
 
 uphijack:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hijacker
 	Buildable:
@@ -5301,7 +5290,7 @@ uphijack:
 		Prerequisite: uphijacker
 
 uprebelambush1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Rebel Ambush 1
 	Buildable:
@@ -5315,7 +5304,7 @@ uprebelambush1:
 		Prerequisite: uprebelambush1
 
 uprebelambush2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Rebel Ambush 2
 	Buildable:
@@ -5329,7 +5318,7 @@ uprebelambush2:
 		Prerequisite: uprebelambush2
 
 uprebelambush3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Rebel Ambush
 	Buildable:
@@ -5343,7 +5332,7 @@ uprebelambush3:
 		Prerequisite: uprebelambush3
 
 upglabounty1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cash Bounty 1
 	Buildable:
@@ -5357,7 +5346,7 @@ upglabounty1:
 		Prerequisite: upglabounty1
 
 upglabounty2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cash Bounty 2
 	Buildable:
@@ -5371,7 +5360,7 @@ upglabounty2:
 		Prerequisite: upglabounty2
 
 upglabounty3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cash Bounty
 	Buildable:
@@ -5385,7 +5374,7 @@ upglabounty3:
 		Prerequisite: upglabounty3
 
 upanthraxbomb:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Anthrax Bomb
 	Buildable:
@@ -5399,21 +5388,21 @@ upanthraxbomb:
 		Prerequisite: upanthraxbomb
 
 upsneakattack:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sneak Attack
 	Buildable:
 		BuildPaletteOrder: 250
 		Queue: Promotions
 		Description: Enables Sneak Attacks.
-		Prerequisites: ~wip-content #glpalace, !upsneakattack, rank5, rank1
+		Prerequisites: ~disabled #glpalace, !upsneakattack, rank5, rank1
 	RenderSprites:
 		Image: upsneakattackicon
 	ProvidesPrerequisite:
 		Prerequisite: upsneakattack
 
 upgpscram:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: GPS Scrambler
 	Buildable:
@@ -5427,7 +5416,7 @@ upgpscram:
 		Prerequisite: upgpscram
 
 GLSYRD:
-	Inherits: RA1SYRD
+	Inherits: ra1_allies_alliednavalyard
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: glsupply, ~glaselected
@@ -5451,7 +5440,7 @@ GLSYRD:
 	GivesBuildableArea: ##########
 		AreaTypes: building, cityi
 	RenderSprites:
-		Image: ra1syrd
+		Image: ra1_allies_alliednavalyard
 	-ProductionBar@NAVALALLIES:
 	-ProductionBar@RANAVALALLIES:
 	Power:
@@ -5517,8 +5506,6 @@ glgunboat:
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
-	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: ScorpionTankVoice
 	Production:
@@ -5561,7 +5548,6 @@ pscglgunboat1:
 	RenderSprites:
 		Image: gle1toxin
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -5578,7 +5564,6 @@ pscglgunboat2:
 	RenderSprites:
 		Image: glbggy
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -5600,7 +5585,7 @@ GLTRUK:
 ##################################################
 
 selectchnormal:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Normal China
 	Buildable:
@@ -5617,7 +5602,7 @@ selectchnormal:
 		Prerequisite: selectchnormal
 
 selectchtanks:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tank General
 	Buildable:
@@ -5636,7 +5621,7 @@ selectchtanks:
 		Prerequisite: canselectrepair
 
 selectchinf:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Infantry General
 	Buildable:
@@ -5655,7 +5640,7 @@ selectchinf:
 		Prerequisite: canselectfrenzy
 
 selectchatomic:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Nuke General
 	Buildable:
@@ -5694,7 +5679,7 @@ CHNMCV:
 		Name: Mobile Construction Vehicle (China)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: chpropaganda, ~techlevel.high, ~chselected
+		Prerequisites: chpropaganda, ~chselected
 		Queue: Building, RABuilding
 		Description: Builds structures and provides radar.
 		BuildDuration: 1500
@@ -5735,7 +5720,7 @@ CHNMCV.bot:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: chpropaganda, ~techlevel.high, ~chselected, ~botplayer, allowsMCV
+		Prerequisites: chpropaganda, ~chselected, ~botplayer, allowsMCV
 	RenderSprites:
 		Image: chmcv
 	Voiced:
@@ -5859,8 +5844,7 @@ chpower:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 3072, 2048
-		DecorationBounds: 3072, 2901, 0, -426
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -5922,6 +5906,8 @@ chpower2:
 		Amount: 500
 	RenderSprites:
 		Image: chpower2
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: chpower
 
 chbarracks:
 	Inherits: ^BaseBuilding
@@ -5991,7 +5977,7 @@ chgattling:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@chaingun: ^ChaingunUpgrade
 	Inherits@mines: ^MinefieldUpgrade
 	Valued:
@@ -6027,7 +6013,7 @@ chgattling:
 		Recoil: 10
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: CHGattlingTurretAA
+		Weapon: CHGattlingTurret_AA
 		LocalOffset: -85,120,340, -85,-120,340
 		LocalYaw: -100, 100
 		Recoil: 10
@@ -6054,12 +6040,11 @@ chgattling:
 	Voiced:
 		VoiceSet: CHGatlingCannonVoice
 
-
 chbunker:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Inherits@mines: ^MinefieldUpgrade
 	Tooltip:
 		Name: Bunker
@@ -6338,21 +6323,22 @@ chpropaganda:
 	LaysMinefield@minefield:
 		Locations: 0,-1, 1,-1, 2,-1, 3,-1, -1,0, -1,1, 4,0, 4,1, 0,2, 1,2, 2,2, 3,2
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Power:
 		Amount: -40
 	Voiced:
 		VoiceSet: CHPropagandaCenterVoice
-	ProximityExternalCondition@PROPAGANDA:
-		Range: 6c0
-		Condition: propaganda
-		RequiresCondition: !disabled
-	WithRangeCircle:
-		Range: 6c0
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 6000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 6000
 		Type: propaganda
+		Color: 55BBFF
 		RequiresCondition: !disabled
 
 chpropagandatower:
@@ -6380,15 +6366,15 @@ chpropagandatower:
 	WithBuildingBib:
 		HasMinibib: true
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 1024, 2048, 0, -512
-	ProximityExternalCondition@PROPAGANDA:
-		Range: 6c0
-		Condition: propaganda
-		RequiresCondition: !disabled && !lowpower
-	WithRangeCircle:
-		Range: 6c0
+		Bounds: 1024, 2048, 0, -512
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 6000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 6000
 		Type: propaganda
+		Color: 55BBFF
 		RequiresCondition: !disabled
 	Voiced:
 		VoiceSet: CHSpeakerTowerVoice
@@ -6426,10 +6412,10 @@ chinternetcenter:
 	LaysMinefield@minefield:
 		Locations: 0,0, 1,0, 2,0, 3,0, -1,1, -1,2, 4,1, 4,2, 0,3, 1,3, 2,3, 3,3
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Power:
 		Amount: -80
 	Cargo:
@@ -6441,7 +6427,7 @@ chinternetcenter:
 		LoadedCondition: cond_loaded
 	RevealActorsPower@SATHACK:
 		CameraActor: camera.sathack
-		TargetActors: fact.gdi, fact.nod, rafact.allies, rafact.soviet, ra2nacnst, ra2gacnst, yrnacnst, tsgtcnstgdi, tsgtcnstnod, tsgtcnstmutant, tsgtcnstcabal, 2100hq.alpha, 2100hq.scavenger, sccommandcenter, scnexus, schatchery, citymayor, cfact, xfact, glcommand, chcommand, usacommand, leangcommand
+		TargetActors: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_alliedconstructionyard, ra1_soviets_constructionyard, ra2_soviets_constructionyard, ra2_allies_alliedconstructionyard, yuri_constructionyard, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, 2100hq.alpha, 2100hq.scavenger, terran_commandcenter, protoss_nexus, zerg_hatchery, citymayor, cfact, xfact, glcommand, chcommand, usacommand, leangcommand
 		LifeTime: 500
 		OrderName: satellitehack1
 		Icon: sathack1
@@ -6651,7 +6637,6 @@ chinternetcenter2:
 	Cargo:
 		InitialUnits: chhacker, chhacker, chhacker, chhacker, chhacker, chhacker, chhacker, chhacker
 
-
 chsilo:
 	Inherits: ^BaseBuilding
 	Inherits@IDISABLE: ^DisabledOverlay
@@ -6666,7 +6651,7 @@ chsilo:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 135
-		Prerequisites: chpropaganda, ~techlevel.high, ~chselected, !chinanuke
+		Prerequisites: chpropaganda, ~chselected, !chinanuke
 		Queue: Building, RABuilding
 		Description: Provides Nuclear Strike support power.\nRequires power to operate.
 	Building:
@@ -6683,10 +6668,10 @@ chsilo:
 	DetectCloaked:
 		Range: 5c0
 		RequiresCondition: !lowpower
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	NukePower@unlimited:
 		AllowMultiple: True
 		Prerequisites: ~techlevel.superweapons
@@ -6745,7 +6730,7 @@ chairport:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 130
-		Prerequisites: chsupply, ~techlevel.medium, ~chselected, chweap
+		Prerequisites: chsupply, ~chselected, chweap
 		Description: Produces and reloads aircraft
 	Valued:
 		Cost: 1000
@@ -7038,8 +7023,6 @@ CHHACKER:
 	-TakeCover:
 	Voiced:
 		VoiceSet: CHHackerVoice
-	DeliversCash:
-		Payload: 250
 	ExperienceTrickler:
 		Interval: 60
 		Amount: 300
@@ -7109,8 +7092,6 @@ CHHACKER2:
 		Image: chhacker
 	Voiced:
 		VoiceSet: SuperHackerVoice
-
-
 
 chlotus:
 	Inherits: ^Soldier
@@ -7237,7 +7218,7 @@ chbattle:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@EMP: ^TurretEMP #
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@upschnucleartanks: ^upschnucleartanks
+	Inherits@upschnucleartanks: ^UPSCHNuclearTanks
 	Inherits@upschreactivearmor: ^ReactiveArmorUpgrade
 	Valued:
 		Cost: 800
@@ -7247,7 +7228,7 @@ chbattle:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: chweap, ~techlevel.medium, ~!selectchinf
+		Prerequisites: chweap, ~!selectchinf
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 375
 		BuildDurationModifier: 100
@@ -7372,7 +7353,7 @@ charty:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: chweap, ~!selectchtanks, ~techlevel.medium, ~!anyschina
+		Prerequisites: chweap, ~!selectchtanks, ~!anyschina
 		Queue: Vehicle, RAVehicle
 		Description: Long-range artillery.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -7447,7 +7428,7 @@ choverlord:
 	Inherits@crush: ^VehicleCrusher
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@cargo: ^CargoVehicle
-	Inherits@upschnucleartanks: ^upschnucleartanks
+	Inherits@upschnucleartanks: ^UPSCHNuclearTanks
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -7466,14 +7447,13 @@ choverlord:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: chpropaganda, ~techlevel.high, ~genoverlordprereq
+		Prerequisites: chpropaganda, ~genoverlordprereq
 		Queue: Vehicle, RAVehicle
 		Description: Heavy Chinese tank.\nCan be upgraded with addon towers.\n  Strong vs Vehicles
 	Mobile:
 		Locomotor: heavytracked
 		Speed: 55
 	Passenger:
-		Weight: 6
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
@@ -7556,7 +7536,7 @@ choverlord:
 		RequiresCondition: addongattling
 	Armament@GATTLINGAA:
 		Name: secondary
-		Weapon: CHGattlingTurretAA
+		Weapon: CHGattlingTurret_AA
 		LocalOffset: -85,120,340, -85,-120,340
 		LocalYaw: -100, 100
 		Recoil: 10
@@ -7604,9 +7584,15 @@ choverlord:
 		LocalOffset: -85,120,340, -85,-120,340
 		MuzzleSequence: muzzle
 		RequiresCondition: addonbunker && loaded >= 5
-	ProximityExternalCondition@PROPAGANDA:
-		Range: 6c0
-		Condition: propaganda
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 6000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 6000
+		Type: propaganda
+		Color: 55BBFF
+		RequiresCondition: !disabled
 		RequiresCondition: addonpropaganda
 	WithSpriteTurret:
 		RequiresCondition: !addonpropaganda && !addonbunker && !addongattling
@@ -7644,7 +7630,7 @@ choverlord2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: chpropaganda, ~techlevel.high, ~genoverlord2prereq
+		Prerequisites: chpropaganda, ~genoverlord2prereq
 		Queue: Vehicle, RAVehicle
 	Health:
 		HP: 150000
@@ -7693,7 +7679,6 @@ pscchoverlord1:
 	RenderSprites:
 		Image: choverlordaddon1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -7710,7 +7695,6 @@ pscchoverlord2:
 	RenderSprites:
 		Image: choverlordaddon2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -7727,7 +7711,6 @@ pscchoverlord3:
 	RenderSprites:
 		Image: choverlordaddon3
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -7755,8 +7738,8 @@ chdragon:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 40
-		Prerequisites: ~techlevel.medium
 		Queue: Vehicle, RAVehicle
 		Description: Flame tank.\nCan deploy to create a fire wall.\n  Strong vs Infantry\n  Weak vs Tanks
 	Mobile:
@@ -8011,7 +7994,7 @@ choutpost:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: chweap, chpropaganda, ~techlevel.medium, ~genlisteningoutpostprereq
+		Prerequisites: chweap, chpropaganda, ~genlisteningoutpostprereq
 		Queue: Vehicle, RAVehicle
 		Description: Detects cloaked units and buildings.\nGarrisoned by 2 Tank Hunters.
 	Mobile:
@@ -8073,7 +8056,7 @@ choutpost2:
 		Name: Attack Outpost
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: chweap, chpropaganda, ~techlevel.medium, ~genminigunnerprereq
+		Prerequisites: chweap, chpropaganda, ~genminigunnerprereq
 		Queue: Vehicle, RAVehicle
 		Description: Detects cloaked units and buildings.\nMounted with a propaganda speaker.\nHas space for up to 8 garrisoned infantry.\nGarrisoned by 3 Tank Hunters.
 	Health:
@@ -8083,13 +8066,14 @@ choutpost2:
 		MaxWeight: 8
 		EjectOnDeath: false #desync
 		InitialUnits: che3, che3, che3
-	ProximityExternalCondition@PROPAGANDA:
-		Range: 6c0
-		Condition: propaganda
-		RequiresCondition: !disabled
-	WithRangeCircle:
-		Range: 6c0
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 6000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 6000
 		Type: propaganda
+		Color: 55BBFF
 		RequiresCondition: !disabled
 	RenderSprites:
 		Image: choutpost
@@ -8114,7 +8098,7 @@ checm:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: chweap, chpropaganda, ~techlevel.medium, ~!schina_tank
+		Prerequisites: chweap, chpropaganda, ~!schina_tank
 		Queue: Vehicle, RAVehicle
 		Description: Disables vehicles and jams incoming missiles.
 	Mobile:
@@ -8238,7 +8222,6 @@ chcrawl2:
 	Mobile:
 		Speed: 125
 	Passenger:
-		Weight: 6
 	Health:
 		HP: 45000
 	Repairable:
@@ -8293,7 +8276,7 @@ chnukecann:
 		Name: Nuke Cannon
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: chpropaganda, ~techlevel.high, upnukecann, ~!selectchtanks, ~!selectchinf
+		Prerequisites: chpropaganda, upnukecann, ~!selectchtanks, ~!selectchinf
 		Queue: Vehicle, RAVehicle
 		Description: Slow heavy artillery.\n Strong vs ground targets\n Weak vs Aircraft
 	Mobile:
@@ -8388,7 +8371,7 @@ chnukecann.Husk:
 		Image: chnukecann
 
 upredguard:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Red Guard Training
 	Buildable:
@@ -8402,7 +8385,7 @@ upredguard:
 		Prerequisite: upredguard
 
 upcharty:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Artillery Training
 	Buildable:
@@ -8416,7 +8399,7 @@ upcharty:
 		Prerequisite: upcharty
 
 upbattlemaster:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Battlemaster Training
 	Buildable:
@@ -8430,21 +8413,21 @@ upbattlemaster:
 		Prerequisite: upbattlemaster
 
 upnukecann:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Nuke Cannon
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions
 		Description: Allows production of the Nuke Cannon.
-		Prerequisites: !upnukecann, ~techlevel.high, ~!selectchtanks, ~!selectchinf, rank1
+		Prerequisites: !upnukecann, ~!selectchtanks, ~!selectchinf, rank1
 	RenderSprites:
 		Image: chnukecann
 	ProvidesPrerequisite:
 		Prerequisite: upnukecann
 
 upcashhack:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cash Hack
 	Buildable:
@@ -8458,7 +8441,7 @@ upcashhack:
 		Prerequisite: upcashhack
 
 uptankdrop:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tank Drop
 	Buildable:
@@ -8472,7 +8455,7 @@ uptankdrop:
 		Prerequisite: uptankdrop
 
 upminigunnerdrop:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Infantry Paradrop
 	Buildable:
@@ -8486,7 +8469,7 @@ upminigunnerdrop:
 		Prerequisite: upminigunnerdrop
 
 upartybarrage1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Artillery Barrage 1
 	Buildable:
@@ -8500,7 +8483,7 @@ upartybarrage1:
 		Prerequisite: upartybarrage1
 
 upartybarrage2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Artillery Barrage 2
 	Buildable:
@@ -8514,7 +8497,7 @@ upartybarrage2:
 		Prerequisite: upartybarrage2
 
 upartybarrage3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Artillery Barrage
 	Buildable:
@@ -8528,7 +8511,7 @@ upartybarrage3:
 		Prerequisite: upartybarrage3
 
 upfrenzy1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Frenzy
 	Buildable:
@@ -8542,7 +8525,7 @@ upfrenzy1:
 		Prerequisite: upfrenzy1
 
 upfrenzy2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Frenzy 2
 	Buildable:
@@ -8556,7 +8539,7 @@ upfrenzy2:
 		Prerequisite: upfrenzy2
 
 upfrenzy3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Frenzy 3
 	Buildable:
@@ -8570,12 +8553,12 @@ upfrenzy3:
 		Prerequisite: upfrenzy3
 
 upchaingun:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Chainguns
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases firing rate of units using Gattling weapons.
 		Prerequisites: ~!upchaingun
 	Valued:
@@ -8589,12 +8572,12 @@ upchaingun:
 		Prerequisites: selectchatomic
 
 upnationalism:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Nationalism
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases effect of the Horde Bonus.
 		Prerequisites: ~!upnationalism, ~gennationalismprereq
 	Valued:
@@ -8608,12 +8591,12 @@ upnationalism:
 		Prerequisites: selectchatomic
 
 upuraniumshell:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Uranium Shells
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Battlemaster and Overlord damage.
 		Prerequisites: ~!upuraniumshell, ~gennationalismprereq
 	Valued:
@@ -8624,12 +8607,12 @@ upuraniumshell:
 		Prerequisite: upuraniumshell
 
 upatomictank:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Nuclear Tanks
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Battlemaster and Overlord speed.
 		Prerequisites: ~!upatomictank, ~genatomictanksprereq
 	Valued:
@@ -8640,12 +8623,12 @@ upatomictank:
 		Prerequisite: upatomictank
 
 upisotopestability:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Isotope Stability
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Nuclear tank explosions do not damage friendly units\nor leave radiation.
 		Prerequisites: ~!upisotopestability, ~selectchatomic
 	Valued:
@@ -8656,12 +8639,12 @@ upisotopestability:
 		Prerequisite: isotopestability
 
 upbluefire:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Black Napalm
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases effectiveness of incendiary weapons.
 		Prerequisites: ~!upbluefire
 	Valued:
@@ -8675,12 +8658,12 @@ upbluefire:
 		Prerequisites: selectchatomic
 
 upneutronshell:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Neutron Shells
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Gives Nuke Cannons neutron munitions.\nCan kill vehicle passengers and drivers, allowing them\nto be captured.
 		Prerequisites: upnukecann, ~!upneutronshell, ~genneutronshellsprereq
 	Valued:
@@ -8691,12 +8674,12 @@ upneutronshell:
 		Prerequisite: upneutronshell
 
 upmigarmor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: MiG Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases durability of MiGs.
 		Prerequisites: ~!upmigarmor, ~!schina_tank, ~!schina_nuke
 	Valued:
@@ -8707,12 +8690,12 @@ upmigarmor:
 		Prerequisite: upmigarmor
 
 upautoload:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Auto Loader
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases firing rate of Battlemasters.
 		Prerequisites: ~!upautoload, ~selectchtanks
 	Valued:
@@ -8723,12 +8706,12 @@ upautoload:
 		Prerequisite: upautoload
 
 upsubliminal:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Subliminal Messaging
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases effectiveness of propaganda.
 		Prerequisites: ~!upsubliminal
 	Valued:
@@ -8743,12 +8726,12 @@ upsubliminal:
 		Queue: Infantry, RAInfantry
 
 upmignuke:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tactical Nuke MiG
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allows MiGs to use nuclear missiles.
 		Prerequisites: ~!upmignuke, ~selectchatomic
 	Valued:
@@ -8759,12 +8742,12 @@ upmignuke:
 		Prerequisite: upmignuke
 
 upsathack:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Satellite Hack 1
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Reveals all command centers.
 		Prerequisites: ~!upsathack
 	Valued:
@@ -8775,12 +8758,12 @@ upsathack:
 		Prerequisite: upsathack
 
 upsathack2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Satellite Hack 2
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Reveals all buildings and troop movements.
 		Prerequisites: ~!upsathack2, upsathack
 	Valued:
@@ -8800,7 +8783,7 @@ CHMIG:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: chairport, ~techlevel.medium, ~genmigprereq
+		Prerequisites: chairport, ~genmigprereq
 		Description: Fighter armed with napalm missiles.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
 	Valued:
 		Cost: 1200
@@ -8857,8 +8840,7 @@ CHMIG:
 		Delay: 25
 		Count: 1
 	Selectable:
-		Bounds: 1536, 1194, 0, 85
-		DecorationBounds: 1706, 1237, 0, 42
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -8910,7 +8892,7 @@ CHMIG2:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: chairport, ~techlevel.medium, ~selectchatomic
+		Prerequisites: chairport, ~selectchatomic
 		Description: Fighter jet, can be upgraded with nuclear missiles.\n  Strong vs ground targets\n  Weak vs Aircraft
 	Valued:
 		Cost: 1000
@@ -8956,8 +8938,7 @@ CHMIG2:
 		Count: 2
 		RequiresCondition: !upmignuke
 	Selectable:
-		Bounds: 1536, 1194, 0, 85
-		DecorationBounds: 1706, 1237, 0, 42
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -9026,7 +9007,7 @@ chhelix:
 	Inherits@heliarmorupgrade: ^HeliArmorUpgrade
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: chairport, ~techlevel.medium, ~genhelixprereq
+		Prerequisites: chairport, ~genhelixprereq
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship upgradeable with addons.\n  Strong vs Infantry\n  Weak vs Aircraft
 	Valued:
@@ -9128,7 +9109,7 @@ chhelix:
 		PauseOnCondition: !ammo
 		RequiresCondition: gattlingaddon
 	Armament@GATTLINGAA:
-		Weapon: CHGattlingTurretAA
+		Weapon: CHGattlingTurret_AA
 		LocalOffset: 85,-213,-85, 85,213,-85
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
@@ -9197,9 +9178,14 @@ chhelix:
 	GrantConditionOnProduction@speaker:
 		Condition: speakeraddon
 		Actors: pscchhelix4
-	ProximityExternalCondition@PROPAGANDA:
-		Range: 6c0
-		Condition: propaganda
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 6000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 6000
+		Type: propaganda
+		Color: 55BBFF
 		RequiresCondition: speakeraddon && !disabled
 	DetectCloaked:
 		RequiresCondition: !disabled && gattlingaddon
@@ -9230,7 +9216,6 @@ pscchhelix1:
 	RenderSprites:
 		Image: chhelix
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -9247,7 +9232,6 @@ pscchhelix2:
 	RenderSprites:
 		Image: chhelix
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -9264,7 +9248,6 @@ pscchhelix3:
 	RenderSprites:
 		Image: chhelix
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -9281,7 +9264,6 @@ pscchhelix4:
 	RenderSprites:
 		Image: chhelix
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -9306,7 +9288,7 @@ chhelix.husk:
 		Image: chhelix
 
 CHSYRD:
-	Inherits: RA1SYRD
+	Inherits: ra1_allies_alliednavalyard
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: chsupply, ~chselected
@@ -9330,7 +9312,7 @@ CHSYRD:
 	GivesBuildableArea: ##########
 		AreaTypes: building, cityi
 	RenderSprites:
-		Image: ra1syrd
+		Image: ra1_allies_alliednavalyard
 	-ProductionBar@NAVALALLIES:
 	-ProductionBar@RANAVALALLIES:
 	Power:
@@ -9383,8 +9365,6 @@ chflameboat:
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
-	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: CHDragonTankVoice
 	GrantConditionOnPrerequisite@upbluefire:
@@ -9423,7 +9403,7 @@ chasub:
 	Armament@PRIMARY:
 		Weapon: CHAtomicTorpTube
 		LocalOffset: 208,0,48
-	Armament@Arty:
+	Armament@td_nod_artillery:
 		Weapon: CHSubMortarShell
 		LocalOffset: 0,-100,28, 0,100,28, 50,-100,28, 50,100,28, -50,-100,28, -50,100,28
 	Targetable:
@@ -9437,8 +9417,6 @@ chasub:
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
-	DeliversCash:
-		Payload: 475
 	Cloak@underwater:
 		DetectionTypes: Underwater
 		InitialDelay: 0
@@ -9458,12 +9436,12 @@ chasub:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 chmnly:
-	Inherits: MNLY
+	Inherits: ra1_allies_minelayer
 	Inherits@GeneralsVehicle: ^GeneralsVehicle
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 100
-		Prerequisites: ~wip-content #anypower, ~techlevel.medium, ~chselected
+		Prerequisites: ~disabled #anypower, ~chselected
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -9514,12 +9492,12 @@ chminv.minefield:
 		RequiresCondition: neutronmines
 
 uplandmines:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Land Mines
 	Buildable:
 		BuildPaletteOrder: 190
-		Queue: Upgrades
+		Queue: Research
 		Description: Protects buildings with landmines.
 		Prerequisites: ~!uplandmines
 	Valued:
@@ -9530,12 +9508,12 @@ uplandmines:
 		Prerequisite: uplandmines
 
 upneutronmines:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Neutron Mines
 	Buildable:
 		BuildPaletteOrder: 190
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades landmines to Neutron Mines.\nKills infantry and vehicle passengers.
 		Prerequisites: uplandmines, ~!upneutronmines, chsilo
 	Valued:
@@ -9546,7 +9524,7 @@ upneutronmines:
 		Prerequisite: upneutronmines
 
 upcarpetbomb:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Carpet Bombing
 	Buildable:
@@ -9560,7 +9538,7 @@ upcarpetbomb:
 		Prerequisite: upcarpetbomb
 
 upchemp:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: EMP Strike
 	Buildable:
@@ -9574,7 +9552,7 @@ upchemp:
 		Prerequisite: upchemp
 
 upchminebomb:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cluster Mines
 	Buildable:
@@ -9592,7 +9570,7 @@ upchminebomb:
 ##################################################
 
 selectusanormal:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Normal USA
 	Buildable:
@@ -9609,7 +9587,7 @@ selectusanormal:
 		Prerequisite: selectusanormal
 
 selectusaairforce:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Airforce General
 	Buildable:
@@ -9630,7 +9608,7 @@ selectusaairforce:
 		Prerequisite: canselectrepair
 
 selectusalaser:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Laser General
 	Buildable:
@@ -9647,7 +9625,7 @@ selectusalaser:
 		Prerequisite: selectusalaser
 
 selectusasuper:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Super Weapons General
 	Buildable:
@@ -9702,7 +9680,7 @@ USAE1:
 	Inherits@cap: ^BuildingCaptureUpgrade
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
@@ -9758,8 +9736,8 @@ USAE3:
 	Inherits@USAInfantry: ^GeneralsUSAInfantry
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -9822,7 +9800,7 @@ usapath:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@USAInfantry: ^GeneralsUSAInfantry
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
@@ -9870,7 +9848,7 @@ usaburton:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@USAInfantry: ^GeneralsUSAInfantry
 	Inherits@MC: ^MCImmune
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Inherits@bot: ^BotMicromanageable
 	Valued:
 		Cost: 1500
@@ -9881,7 +9859,7 @@ usaburton:
 	Buildable:
 		BuildPaletteOrder: 50
 		BuildLimit: 1
-		Prerequisites: usastrategy, ~techlevel.high, ~!anysusa, ~!botplayer
+		Prerequisites: usastrategy, ~!anysusa, ~!botplayer
 		Queue: Infantry, RAInfantry
 		Description: Elite commando.\nCan switch between close and long range modes\n  Strong vs Infantry, Buildings, Vehicles\n  Weak vs Air
 	Mobile:
@@ -9959,7 +9937,7 @@ usaburton:
 usaburton.bot:
 	Inherits: usaburton
 	Buildable:
-		Prerequisites: usastrategy, ~techlevel.high, ~!anysusa, ~botplayer
+		Prerequisites: usastrategy, ~!anysusa, ~botplayer
 	Armament@PRIMARY:
 		Weapon: USABurtonMG_AI
 		-RequiresCondition:
@@ -9976,7 +9954,7 @@ usapilot:
 	Inherits@EXP: ^GainsExperience
 	Inherits@EXT: ^ExternalConditions
 	Inherits@USAInfantry: ^GeneralsUSAInfantry
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 100
 	Tooltip:
@@ -10040,8 +10018,8 @@ usajeep:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@cargo: ^CargoVehicle
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -10227,16 +10205,15 @@ pscdrones1:
 	Tooltip:
 		Name: Battle Drone
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 10
 		Queue: Drones.USA
 		Description: Deploys a drone armed with a machine-gun.
-		Prerequisites:
 	Valued:
 		Cost: 300
 	RenderSprites:
 		Image: usadrone
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -10244,16 +10221,15 @@ pscdrones2:
 	Tooltip:
 		Name: Hellfire Drone
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 10
 		Queue: Drones.USA
 		Description: Deploys a drone that fires anti-tank missiles.
-		Prerequisites:
 	Valued:
 		Cost: 500
 	RenderSprites:
 		Image: usahellfire
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -10261,24 +10237,23 @@ pscdrones3:
 	Tooltip:
 		Name: Spy Drone
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 10
 		Queue: Drones.USA
 		Description: Deploys a drone that provides vision\nand detects cloaked units.
-		Prerequisites:
 	Valued:
 		Cost: 500
 	RenderSprites:
 		Image: usaspydrone
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
-^generalsdrone:
+^GeneralsDrone:
 	Inherits: ^RANeutralPlane
 	Inherits@PLD: ^PointLaserDefenseSystem
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	-Selectable:
 	Interactable:
 	RevealsShroud:
@@ -10321,7 +10296,7 @@ pscdrones3:
 		Condition: haspointdefense
 		Prerequisites: susaupdronepointdefense
 usadrone:
-	Inherits: ^generalsdrone
+	Inherits: ^GeneralsDrone
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -10335,7 +10310,7 @@ usadrone:
 		Armaments: primary, pointdefense
 
 usahellfire:
-	Inherits: ^generalsdrone
+	Inherits: ^GeneralsDrone
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -10347,7 +10322,7 @@ usahellfire:
 		Armaments: primary, pointdefense
 
 usaspydrone:
-	Inherits: ^generalsdrone
+	Inherits: ^GeneralsDrone
 	Inherits@2: ^GenericAirDetector
 	Valued:
 		Cost: 100
@@ -10372,8 +10347,8 @@ usattnk:
 	Inherits@EMP: ^TurretEMP
 	Inherits@Announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 1100
 	Tooltip:
@@ -10382,7 +10357,7 @@ usattnk:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usaweap, usastrategy, ~techlevel.medium, ~!selectusalaser, ~!anysusa
+		Prerequisites: usaweap, usastrategy, ~!selectusalaser, ~!anysusa
 		Queue: Vehicle, RAVehicle
 		Description: USA siege weapon.\n Strong vs Vehicles, Buildings\n Weak vs Aircraft
 	Mobile:
@@ -10455,8 +10430,8 @@ usacrusader:
 	Inherits@training: ^AdvancedTrainingUpgrade
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -10465,7 +10440,7 @@ usacrusader:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usaweap, ~techlevel.medium, ~!selectusalaser, ~!selectusaairforce, ~!selectusasuper, ~!susa_super, ~!susa_laser, ~!susa_armor, ~!susa_air
+		Prerequisites: usaweap, ~!selectusalaser, ~!selectusaairforce, ~!selectusasuper, ~!susa_super, ~!susa_laser, ~!susa_armor, ~!susa_air
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 750
 		BuildDurationModifier: 100
@@ -10505,14 +10480,14 @@ usacrusader:
 usacrusader2:
 	Inherits: usacrusader
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	Valued:
 		Cost: 900
 	Tooltip:
 		Name: Laser Crusader
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usaweap, ~techlevel.medium, ~selectusalaser
+		Prerequisites: usaweap, ~selectusalaser
 		Queue: Vehicle, RAVehicle
 		Description: General-purpose USA tank.\nRequires power to operate.\n  Strong vs Vehicles and Infantry
 	Mobile:
@@ -10546,8 +10521,8 @@ usapala:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@PLD: ^PointLaserDefenseSystem
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -10556,13 +10531,12 @@ usapala:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usaweap, ~techlevel.medium, upusapala, ~!selectusalaser, ~!selectusaairforce, ~!selectusasuper, ~!anysusa
+		Prerequisites: usaweap, upusapala, ~!selectusalaser, ~!selectusaairforce, ~!selectusasuper, ~!anysusa
 		Queue: Vehicle, RAVehicle
 		Description: Heavy USA tank.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Mobile:
 		Speed: 60
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 100000
 	Repairable:
@@ -10613,8 +10587,8 @@ usasentry:
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@snipe: ^DriverKillImmune
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -10623,7 +10597,7 @@ usasentry:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usaweap, ~techlevel.medium, ~!susa_armor
+		Prerequisites: usaweap, ~!susa_armor
 		Queue: Vehicle, RAVehicle
 		Description: Cloaked scout and detector robot.\nCan be upgraded with a machinegun\n Strong vs Infantry when upgraded
 	Mobile:
@@ -10703,9 +10677,9 @@ usaavenger:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	AutoTargetPriority@AA:
 		ValidTargets: Missile, Air
 		Priority: 2
@@ -10717,7 +10691,7 @@ usaavenger:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: usaweap, ~techlevel.high, usastrategy, ~!susa_armor
+		Prerequisites: usaweap, usastrategy, ~!susa_armor
 		Queue: Vehicle, RAVehicle
 		Description: Laser-based air defense system.\nIncreases accuracy and firepower of nearby units.\nDazzles ground targets.\n Strong vs Aircraft
 	Mobile:
@@ -10789,8 +10763,8 @@ usaambulan:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@cargo: ^CargoVehicle
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -10855,8 +10829,8 @@ usamicro:
 	Inherits@emp: ^TurretEMP
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -10865,7 +10839,7 @@ usamicro:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usaweap, ~techlevel.high, usastrategy, ~!susa_laser, ~!susa_armor
+		Prerequisites: usaweap, usastrategy, ~!susa_laser, ~!susa_armor
 		Queue: Vehicle, RAVehicle
 		Description: Support vehicle able to disable buildings and fry infantry.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Mobile:
@@ -10918,15 +10892,15 @@ USAMCV:
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@mcv: ^MCV
 	Inherits@conyard: ^Conyard
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 3000
 	Tooltip:
 		Name: Mobile Construction Vehicle (USA)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: usastrategy, ~techlevel.medium, ~usaselected
+		Prerequisites: usastrategy, ~usaselected
 		Queue: Building, RABuilding
 		Description: Builds structures and provides radar.
 		BuildDuration: 1500
@@ -10965,7 +10939,7 @@ USAMCV.bot:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: usastrategy, ~techlevel.medium, ~usaselected, ~botplayer, allowsMCV
+		Prerequisites: usastrategy, ~usaselected, ~botplayer, allowsMCV
 	RenderSprites:
 		Image: usamcv
 	Voiced:
@@ -11102,8 +11076,7 @@ usapower:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 3072, 2048
-		DecorationBounds: 3072, 2901, 0, -426
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 90000
@@ -11182,7 +11155,6 @@ pscusapower:
 	RenderSprites:
 		Image: usacontrolrodicon
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -11199,7 +11171,6 @@ pscusapower2:
 	RenderSprites:
 		Image: usacontrolrodicon2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -11269,7 +11240,7 @@ usapatriot:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gensound: ^GeneralsDamageBuilding
 	Valued:
 		Cost: 1500
@@ -11347,9 +11318,9 @@ usapatriot2:
 	Buildable:
 		Prerequisites: usabarracks, ~techlevel.low, ~selectusasuper
 	Armament@NORMAL:
-		Weapon: USAEMPPatriotMissAG
+		Weapon: USA_EMP_PatriotMissAG
 	Armament@AA:
-		Weapon: USAEMPPatriotMissAA
+		Weapon: USA_EMP_PatriotMissAA
 	RenderSprites:
 		Image: usapatriot
 
@@ -11357,9 +11328,9 @@ usalasertur:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gensound: ^GeneralsDamageBuilding
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -11391,7 +11362,7 @@ usalasertur:
 		Recoil: 10
 		RequiresCondition: !upsusafocusingcrystal
 	Armament@AA:
-		Weapon: USALaserCannonAA
+		Weapon: USALaserCannon_AA
 		LocalOffset: 500,120,340, 500,-120,340
 		LocalYaw: -100, 100
 		Recoil: 10
@@ -11403,7 +11374,7 @@ usalasertur:
 		Recoil: 10
 		RequiresCondition: upsusafocusingcrystal
 	Armament@AAUP:
-		Weapon: SUSALaserCannonAAUp
+		Weapon: SUSALaserCannonAAUp_AA
 		LocalOffset: 500,120,340, 500,-120,340
 		LocalYaw: -100, 100
 		Recoil: 10
@@ -11485,7 +11456,7 @@ usahook:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@CM: ^CountermeasuresUpgrade
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Inherits@SHADOWS: ^Shadows
 	Targetable@helicopter:
 		TargetTypes: Helicopter
@@ -11608,7 +11579,7 @@ usahook.husk:
 
 usacombathook:
 	Inherits: usahook
-	Inherits@heli: ^Helicopter
+	Inherits@td_nod_apacheattackhelicopter: ^Helicopter
 	Tooltip:
 		Name: Combat Chinook
 	Valued:
@@ -11775,10 +11746,10 @@ usastrategy:
 		Range: 5c0
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Power:
 		Amount: -50
 	Voiced:
@@ -11842,7 +11813,7 @@ usaairport:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 130
-		Prerequisites: usasupply, ~techlevel.medium, ~usaselected, usaweap
+		Prerequisites: usasupply, ~usaselected, usaweap
 		Description: Produces and reloads aircraft
 		BuildDuration: 500
 		BuildDurationModifier: 100
@@ -11970,7 +11941,7 @@ usacannon:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: usastrategy, ~techlevel.high, !particlecannon, ~usaselected
+		Prerequisites: usastrategy, !particlecannon, ~usaselected
 		Queue: Building, RABuilding
 		Description: Provides Particle Cannon support power.\nRequires power to operate.
 	Building:
@@ -12028,7 +11999,7 @@ usacannon.beam:
 	Inherits@2: ^SpriteActor
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@bot: ^BotMicromanageable
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	-UpdatesPlayerStatistics:
 	RenderSprites:
 	-QuantizeFacingsFromSequence:
@@ -12265,11 +12236,11 @@ usaraptor:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@CM: ^CountermeasuresUpgrade
 	Inherits@LGM: ^LaserMissilesUpgrade
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: usaairport, ~techlevel.high, ~!selectusaairforce, ~!anysusa
+		Prerequisites: usaairport, ~!selectusaairforce, ~!anysusa
 		Description: Multirole fighter.\n  Strong vs Aircraft, Vehicles
 	Valued:
 		Cost: 1400
@@ -12288,7 +12259,7 @@ usaraptor:
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
 	Armament@AA:
-		Weapon: USARaptorMissileAA
+		Weapon: USARaptorMissile_AA
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
@@ -12312,8 +12283,7 @@ usaraptor:
 		Delay: 25
 		Count: 1
 	Selectable:
-		Bounds: 1536, 1194, 0, 85
-		DecorationBounds: 1706, 1237, 0, 42
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -12354,7 +12324,7 @@ usaraptor2:
 	Inherits@PLD: ^PointLaserDefenseSystem
 	Inherits@detect: ^GenericAirDetector
 	Buildable:
-		Prerequisites: usaairport, ~techlevel.high, ~selectusaairforce, ~!anysusa
+		Prerequisites: usaairport, ~selectusaairforce, ~!anysusa
 	Valued:
 		Cost: 950
 	Tooltip:
@@ -12417,11 +12387,11 @@ usastealth:
 	Inherits@CM: ^CountermeasuresUpgrade
 	Inherits@LGM: ^LaserMissilesUpgrade
 	Inherits@PLD: ^PointLaserDefenseSystem
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: usaairport, ~techlevel.high, upusastealth, ~!anysusa
+		Prerequisites: usaairport, upusastealth, ~!anysusa
 		Description: Cloaked bomber.\n  Strong vs Buildings, Vehicles\n  Weak vs Aircraft
 	Valued:
 		Cost: 1600
@@ -12466,8 +12436,7 @@ usastealth:
 		Ammo: 4
 		AmmoCondition: ammo
 	Selectable:
-		Bounds: 1536, 1194, 0, 85
-		DecorationBounds: 1706, 1237, 0, 42
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -12548,7 +12517,7 @@ usaaurora:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@CM: ^CountermeasuresUpgrade
 	Inherits@PLD: ^PointLaserDefenseSystem
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
@@ -12605,8 +12574,7 @@ usaaurora:
 		Delay: 250
 		Count: 1
 	Selectable:
-		Bounds: 1536, 1194, 0, 85
-		DecorationBounds: 1706, 1237, 0, 42
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -12708,7 +12676,7 @@ usacomanche:
 	Inherits@training: ^AdvancedTrainingUpgrade
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@CM: ^CountermeasuresUpgrade
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -12720,7 +12688,7 @@ usacomanche:
 		BuildPaletteOrder: 50
 		BuildDuration: 375
 		BuildDurationModifier: 100
-		Prerequisites: usaairport, ~techlevel.high, ~!anysusa
+		Prerequisites: usaairport, ~!anysusa
 		Description: Helicopter gunship.\n  Strong vs Infantry, Light vehicles\n  Weak vs Aircraft
 	Aircraft:
 		TurnSpeed: 7
@@ -12832,7 +12800,7 @@ usafirebase:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gar: ^ClearableGarrison
 	Inherits@gensound: ^GeneralsDamageBuilding
 	Tooltip:
@@ -12846,7 +12814,7 @@ usafirebase:
 		Dimensions: 2, 2
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usabarracks, ~techlevel.medium, ~usaselected, ~!susa_laser
+		Prerequisites: usabarracks, ~usaselected, ~!susa_laser
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Garrisonable defensive structure.\n  Strong vs ground targets\n  Weak vs Aircraft
@@ -12871,8 +12839,8 @@ usafirebase:
 			gle3: ifv-miss
 			che3: ifv-miss
 			e3: ifv-miss
-			rae3: ifv-miss
-			yrggi: ifv-miss
+			ra1_allies_alliedrocketsoldier: ifv-miss
+			ra2_allies_guardiangi: ifv-miss
 			tse3: ifv-miss
 	Armament@Passenger1:
 		Weapon: USARangerMGGarrison
@@ -12942,7 +12910,7 @@ usafirebase:
 usafirebase.e1:
 	Inherits: usafirebase
 	Buildable:
-		Prerequisites: usabarracks, ~techlevel.medium, ~botplayer
+		Prerequisites: usabarracks, ~botplayer
 	Valued:
 		Cost: 1300
 	Cargo:
@@ -12951,19 +12919,19 @@ usafirebase.e1:
 usafirebase.e3:
 	Inherits: usafirebase
 	Buildable:
-		Prerequisites: usabarracks, ~techlevel.medium, ~botplayer
+		Prerequisites: usabarracks, ~botplayer
 	Valued:
 		Cost: 1600
 	Cargo:
 		InitialUnits: usae1, usae1, usae1, usae3
 
 usaupgrenade:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Flash-bang grenades
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allow Rangers to use flashbangs.\nFlashbangs stuns infantry and damages garrisoned soldiers
 		Prerequisites: ~!usaupgrenade, ~!susa_armor
 	Valued:
@@ -12974,12 +12942,12 @@ usaupgrenade:
 		Prerequisite: usaupgrenade
 
 usauptowmiss:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: TOW Missile
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Equips Humvees with TOW missiles.
 		Prerequisites: ~!usauptowmiss, ~!susa_super, ~!susa_laser, ~!susa_armor
 	Valued:
@@ -12990,12 +12958,12 @@ usauptowmiss:
 		Prerequisite: usauptowmiss
 
 usaupdronegun:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sentry Drone Gun
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Arms the Sentry Drone with a machine gun.
 		Prerequisites: ~!usaupdronegun, ~!susa_armor
 	Valued:
@@ -13006,12 +12974,12 @@ usaupdronegun:
 		Prerequisite: usaupdronegun
 
 usaupchemsuit:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Chemical Suit
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Makes infantry immune to lingering toxin weapons.
 		Prerequisites: ~!usaupchemsuit
 	Valued:
@@ -13022,12 +12990,12 @@ usaupchemsuit:
 		Prerequisite: usaupchemsuit
 
 usauparmor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Composite Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases durability of all ground vehicles.
 		Prerequisites: ~!usauparmor, ~!susa_laser, ~!susa_air
 	Valued:
@@ -13038,12 +13006,12 @@ usauparmor:
 		Prerequisite: usauparmor
 
 usauplasmiss:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Laser-Guided Missiles
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases damage done by aircraft by 25%.
 		Prerequisites: ~!usauplasmiss, ~!susa_laser
 	Valued:
@@ -13054,12 +13022,12 @@ usauplasmiss:
 		Prerequisite: usauplasmiss
 
 usaupsupplylines:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Supply lines
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases income from Supply Drops and Chinooks.
 		Prerequisites: ~!usaupsupplylines
 	Valued:
@@ -13070,12 +13038,12 @@ usaupsupplylines:
 		Prerequisite: usaupsupplylines
 
 usabombardament:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bombardment (Battle Plan)
 	Buildable:
 		BuildPaletteOrder: 10
-		Queue: Upgrades
+		Queue: Research
 		Description: All units deal 25% more damage\nAllows Strategy Centers to use bombardment\n\nUpgrading this will disable other Battle Plans
 		Prerequisites: ~!usabombardmentc, ~!usasearchndestroyc, ~!usaholdthelinec
 		BuildDuration: 250
@@ -13086,14 +13054,14 @@ usabombardament:
 		Prerequisite: usabombardmentc
 
 usasearchndestroy:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Search and Destroy (Battle Plan)
 	Buildable:
 		BuildPaletteOrder: 10
 		BuildDuration: 250
 		BuildDurationModifier: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: All units have 25% more range\n\nUpgrading this will disable other Battle Plans
 		Prerequisites: ~!usabombardmentc, ~!usasearchndestroyc, ~!usaholdthelinec
 	RenderSprites:
@@ -13102,12 +13070,12 @@ usasearchndestroy:
 		Prerequisite: usasearchndestroyc
 
 usaholdtheline:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hold the Line (Battle Plan)
 	Buildable:
 		BuildPaletteOrder: 10
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 250
 		BuildDurationModifier: 100
 		Description: All units take 20% less damage\n\nUpgrading this will disable other Battle Plans
@@ -13118,12 +13086,12 @@ usaholdtheline:
 		Prerequisite: usaholdthelinec
 
 usaupbunkerbuster:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bunker Busters
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allow Stealth Fighters to clear out garrisons.
 		Prerequisites: ~!usaupbunkerbuster
 	Valued:
@@ -13132,12 +13100,12 @@ usaupbunkerbuster:
 		Image: usabunkerbustericon
 
 usaupcounter:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Countermeasures
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases durability of aircraft.
 		Prerequisites: ~!usaupcounter, ~!susa_laser, !susa_air
 	Valued:
@@ -13148,12 +13116,12 @@ usaupcounter:
 		Prerequisite: usaupcounter
 
 usauptraining:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Advanced Training
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: All ground units gain experience faster.
 		Prerequisites: ~!usauptraining
 	Valued:
@@ -13164,12 +13132,12 @@ usauptraining:
 		Prerequisite: usauptraining
 
 usaupdronearmor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Drone Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases durability of drones.
 		Prerequisites: ~!usaupdronearmor
 	Valued:
@@ -13183,12 +13151,12 @@ usaupdronearmor:
 		Prerequisites: selectusaairforce
 
 upstealthcomanche:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Stealth Comanche
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Cloaks Comanches.
 		Prerequisites: ~!upstealthcomanche, ~selectusaairforce
 		BuildDuration: 1500
@@ -13201,7 +13169,7 @@ upstealthcomanche:
 		Prerequisite: upstealthcomanche
 
 USASYRD:
-	Inherits: RA1SYRD
+	Inherits: ra1_allies_alliednavalyard
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: usasupply, ~usaselected
@@ -13225,7 +13193,7 @@ USASYRD:
 	GivesBuildableArea: ##########
 		AreaTypes: building, cityi
 	RenderSprites:
-		Image: ra1syrd
+		Image: ra1_allies_alliednavalyard
 	-ProductionBar@NAVALALLIES:
 	-ProductionBar@RANAVALALLIES:
 	Power:
@@ -13236,7 +13204,7 @@ usagunboat:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -13279,8 +13247,6 @@ usagunboat:
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
-	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: USAPaladinTankVoice
 	RenderSprites:
@@ -13298,7 +13264,7 @@ usabattleship:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 4000
 	Tooltip:
@@ -13359,8 +13325,6 @@ usabattleship:
 		Turret: primary
 	WithSpriteTurret@SECONDARY:
 		Turret: secondary
-	DeliversCash:
-		Payload: 500
 	Voiced:
 		VoiceSet: USAPaladinTankVoice
 	GainsExperience:
@@ -13370,7 +13334,7 @@ usacarrier:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 6000
 	Tooltip:
@@ -13431,8 +13395,6 @@ usacarrier:
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
-	DeliversCash:
-		Payload: 500
 	Voiced:
 		VoiceSet: AlliesNavalVoice
 	RenderSprites:
@@ -13475,7 +13437,7 @@ usaraptorcarrier:
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 	Armament@AA:
-		Weapon: USARaptorMissileAA
+		Weapon: USARaptorMissile_AA
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 	AttackAircraft:
@@ -13527,63 +13489,63 @@ usauwusupply:
 		RequiresSelection: true
 
 upusapath:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Pathfinder
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions
 		Description: Allows training of Pathfinders.
-		Prerequisites: !upusapath, ~techlevel.medium, ~!susa_armor, rank3, rank1
+		Prerequisites: !upusapath, ~!susa_armor, rank3, rank1
 	RenderSprites:
 		Image: usapath
 	ProvidesPrerequisite:
 		Prerequisite: upusapath
 
 upusapala:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Paladin Tank
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions
 		Description: Allows production of the Paladin Tank.
-		Prerequisites: !upusapala, ~techlevel.medium, ~!selectusalaser, ~!selectusaairforce, ~!selectusasuper, rank1, ~!susa_super, ~!susa_laser, ~!susa_air, ~!susa_armor
+		Prerequisites: !upusapala, ~!selectusalaser, ~!selectusaairforce, ~!selectusasuper, rank1, ~!susa_super, ~!susa_laser, ~!susa_air, ~!susa_armor
 	RenderSprites:
 		Image: usapala
 	ProvidesPrerequisite:
 		Prerequisite: upusapala
 
 upusastealth:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Stealth Fighter
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions
 		Description: Allows production of the Stealth Fighter.
-		Prerequisites: !upusastealth, ~techlevel.medium, rank1, ~!selectusaairforce, ~!anysusa
+		Prerequisites: !upusastealth, rank1, ~!selectusaairforce, ~!anysusa
 	RenderSprites:
 		Image: usastealth
 	ProvidesPrerequisite:
 		Prerequisite: upusastealth
 
 upusaspydrone:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Spy Drone
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions
 		Description: Enables the deployment of Spy Drones.
-		Prerequisites: !upusaspydrone, ~techlevel.medium, rank1
+		Prerequisites: !upusaspydrone, rank1
 	RenderSprites:
 		Image: usaspydrone
 	ProvidesPrerequisite:
 		Prerequisite: upusaspydrone
 
 upusaparadrop1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Paradrop 1
 	Buildable:
@@ -13597,7 +13559,7 @@ upusaparadrop1:
 		Prerequisite: upusaparadrop1
 
 upusaparadrop2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Paradrop 2
 	Buildable:
@@ -13611,7 +13573,7 @@ upusaparadrop2:
 		Prerequisite: upusaparadrop2
 
 upusaparadrop3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Paradrop
 	Buildable:
@@ -13625,7 +13587,7 @@ upusaparadrop3:
 		Prerequisite: upusaparadrop3
 
 upusaa101:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: A10 Strike 1
 	Buildable:
@@ -13639,7 +13601,7 @@ upusaa101:
 		Prerequisite: upusaa101
 
 upusaa102:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: A10 Strike 2
 	Buildable:
@@ -13653,7 +13615,7 @@ upusaa102:
 		Prerequisite: upusaa102
 
 upusaa103:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: A10 Strike 3
 	Buildable:
@@ -13667,7 +13629,7 @@ upusaa103:
 		Prerequisite: upusaa103
 
 upusagunship:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Spectre Gunship
 	Buildable:
@@ -13681,7 +13643,7 @@ upusagunship:
 		Prerequisite: upusagunship
 
 upusaleaflet:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Leaflet Drop
 	Buildable:
@@ -13700,7 +13662,7 @@ upusaleaflet_1:
 		Prerequisites: !upusaleaflet, rank3, rank1, ~susa_super
 
 upusafuelbomb:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Fuel Air Bomb
 	Buildable:
@@ -13714,12 +13676,12 @@ upusafuelbomb:
 		Prerequisite: upusafuelbomb
 
 upusamotherbomb:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mother Of All Bombs
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allows use of MOAB strikes.
 		Prerequisites: ~upusafuelbomb, ~!upusamotherbomb
 	Valued:
@@ -13730,7 +13692,7 @@ upusamotherbomb:
 		Prerequisite: upusamotherbomb
 
 usaupmisspod:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Rocket Pods
 	Buildable:
@@ -13762,7 +13724,7 @@ leangmcv:
 		Name: Mobile Construction Vehicle (Boss)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: chpropaganda, ~techlevel.high
+		Prerequisites: chpropaganda
 		Queue: Building, RABuilding
 		Description: Builds structures and provides radar.
 		BuildDuration: 1500
@@ -13803,7 +13765,7 @@ leangmcv.bot:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: chpropaganda, ~techlevel.high, ~botplayer, allowsMCV
+		Prerequisites: chpropaganda, ~botplayer, allowsMCV
 	RenderSprites:
 		Image: chmcv
 	Voiced:
@@ -13871,7 +13833,7 @@ leangcommand:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		Strikes: 4
 		CircleDelay: 20
@@ -13955,7 +13917,7 @@ leangairport:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 130
-		Prerequisites: leangsupply, ~techlevel.medium
+		Prerequisites: leangsupply
 	Production@NORMAL:
 		Produces: Aircraft
 	Production@CLASSICPRODUCTIONQUEUES:
@@ -13984,7 +13946,7 @@ leangpropagandatower:
 leangtunnel:
 	Inherits: gltunnel
 	Buildable:
-		Prerequisites: ~wip-content #leangbarracks, ~techlevel.low
+		Prerequisites: ~disabled #leangbarracks, ~techlevel.low
 		Queue: Defence, RADefence
 	RenderSprites:
 		Image: gltunnel
@@ -14018,10 +13980,10 @@ leangbunker:
 
 leangstorm:
 	Inherits: glstorm
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: chairport, leangweap, ~techlevel.superweapons, !scudstorm
@@ -14033,23 +13995,23 @@ leangstorm:
 
 leangsilo:
 	Inherits: chsilo
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: chairport, leangweap, ~techlevel.high, !chinanuke
+		Prerequisites: chairport, leangweap, !chinanuke
 		Queue: Building, RABuilding
 	RenderSprites:
 		Image: chsilo
 
 leangcannon:
 	Inherits: usacannon
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: chairport, leangweap, ~techlevel.superweapons, !particlecannon
@@ -14062,7 +14024,7 @@ leangraptor:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: chairport, ~techlevel.high
+		Prerequisites: chairport
 	RenderSprites:
 		Image: usaraptor2
 	GrantConditionOnPrerequisite@upmigarmor:
@@ -14077,7 +14039,7 @@ leangmig:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 40
-		Prerequisites: chairport, ~techlevel.high
+		Prerequisites: chairport
 	RenderSprites:
 		Image: chmig
 
@@ -14086,7 +14048,7 @@ leanghelix:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: chairport, ~techlevel.high
+		Prerequisites: chairport
 	RenderSprites:
 		Image: chhelix
 
@@ -14095,7 +14057,7 @@ leangaurora:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
-		Prerequisites: chairport, ~techlevel.high
+		Prerequisites: chairport
 	RenderSprites:
 		Image: usaaurora
 	GrantConditionOnPrerequisite@upmigarmor:
@@ -14167,7 +14129,7 @@ leangkell:
 	Inherits@2: ^GeneralsUSAInfantry
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: leangstorm, ~techlevel.high
+		Prerequisites: leangstorm
 	RenderSprites:
 		Image: glkell
 
@@ -14176,7 +14138,7 @@ leanglotus:
 	Inherits@2: ^GeneralsUSAInfantry
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: leangsilo, ~techlevel.high
+		Prerequisites: leangsilo
 	RenderSprites:
 		Image: chlotus
 
@@ -14184,7 +14146,7 @@ leangburton:
 	Inherits: usaburton
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: leangcannon, ~techlevel.high
+		Prerequisites: leangcannon
 	RenderSprites:
 		Image: usaburton
 
@@ -14202,7 +14164,7 @@ leangttnk:
 		Cost: 1100
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: leangweap, ~techlevel.medium
+		Prerequisites: leangweap
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: usattnk
@@ -14211,7 +14173,7 @@ leangpala:
 	Inherits: usapala
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: leangweap, upusapala, ~techlevel.medium
+		Prerequisites: leangweap, upusapala
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: usapala
@@ -14220,7 +14182,7 @@ leangsentry:
 	Inherits: usasentry
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: leangweap, ~techlevel.medium
+		Prerequisites: leangweap
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: usasentry
@@ -14229,7 +14191,7 @@ leangavenger:
 	Inherits: usaavenger
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: leangweap, ~techlevel.medium
+		Prerequisites: leangweap
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: usaavenger
@@ -14237,8 +14199,8 @@ leangavenger:
 leangdragon:
 	Inherits: chdragon
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 40
-		Prerequisites: ~techlevel.medium
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: chdragon
@@ -14266,7 +14228,7 @@ leanggtnk:
 leangoverlord:
 	Inherits: choverlord
 	Buildable:
-		Prerequisites: ~techlevel.high
+		Prerequisites:
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: choverlord
@@ -14280,7 +14242,7 @@ leangoverlord:
 leangbggy:
 	Inherits: glbggy
 	Buildable:
-		Prerequisites: ~techlevel.high
+		Prerequisites:
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: glbggy
@@ -14294,7 +14256,7 @@ leangbggy:
 leangbiker:
 	Inherits: glbiker
 	Buildable:
-		Prerequisites: ~techlevel.high
+		Prerequisites:
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: glbiker
@@ -14309,7 +14271,7 @@ leangsneakattack:
 	Inherits: upsneakattack
 	Buildable:
 		Queue: Promotions
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 
 leangartybarrage1:
 	Inherits: upartybarrage1
@@ -14361,7 +14323,7 @@ leangcarpetbomb:
 		Queue: Promotions
 
 leangsyrd:
-	Inherits: RA1SYRD
+	Inherits: ra1_allies_alliednavalyard
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: leangsupply
@@ -14385,7 +14347,7 @@ leangsyrd:
 	GivesBuildableArea: ##########
 		AreaTypes: building, cityi
 	RenderSprites:
-		Image: ra1syrd
+		Image: ra1_allies_alliednavalyard
 	-ProductionBar@NAVALALLIES:
 	-ProductionBar@RANAVALALLIES:
 	Power:

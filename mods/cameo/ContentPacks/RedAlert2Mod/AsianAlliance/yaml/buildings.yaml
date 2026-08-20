@@ -1,0 +1,1191 @@
+asianalliance_asianconstructionyard:
+	Inherits: ^RA2Building
+	Inherits@conyard: ^Conyard
+	Inherits@shape: ^4x3Shape
+	Inherits@sell: ^AASpawnActorsOnSell
+	Tooltip:
+		Name: Asian Construction Yard
+	Building:
+		Footprint: xxxx xxxx xxxx
+		Dimensions: 4,3
+	Transforms:
+		IntoActor: asianalliance_asianmobileconstructionvehicle
+		Offset: 1,1
+		Facing: 432
+	WithBuildingPlacedOverlay:
+	WithIdleOverlay@fans:
+		Sequence: idle-fans
+	Exit@1:
+		SpawnOffset: 213,-128,0
+		ExitCell: 1,2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2buildinghack
+	Voiced:
+		VoiceSet: PRCCommandCenterVoice
+	ProvidesPrerequisite@ra2oilderrick:
+		Prerequisite: ra2oilderrick
+	ProvidesPrerequisite@asianalliancebarrier:
+		Prerequisite: asianalliancebarrier
+	Targetable@TechStealerInfiltrate:
+		TargetTypes: TechStealerInfiltrate
+	InfiltrateForSupportPower:
+		Proxy: cgcnst_infiltrated.asian
+		Types: TechStealerInfiltrate
+
+asianalliance_asianpetrolplant:
+	Inherits: ^RA2Building
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Asian Petrol Plant
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Building, RABuilding
+		Description: template_power.description
+		Prerequisites: ~asianalliance_asianconstructionyard
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 175000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: 225
+	ScalePowerWithHealth:
+	WithIdleOverlay@glow:
+		Sequence: idle-glow
+	ProvidesPrerequisite@buildingname:
+
+asianalliance_asianbarracks:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Tooltip:
+		Name: Asian Barracks
+	Buildable:
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianpetrolplant
+		Description: Trains infantry units.
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		ExitCell: 0,1
+	Exit@2:
+		ExitCell: 1,1
+	SelectionDecorations:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithDeathAnimation:
+		DeathSequencePalette: ra2buildinghack
+	Voiced:
+		VoiceSet: PRCBarracksVoice
+
+asianalliance_asianorerefinery:
+	Inherits: ^RA2Building
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@ref: ^Refinery
+	Inherits@shape: ^4x3Shape
+	Tooltip:
+		Name: Asian Ore Refinery
+	Buildable:
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianpetrolplant
+		Description: Processes ore into credits.
+	Building:
+		Footprint: xxx= xxx= xxx=
+		Dimensions: 4,3
+	Refinery:
+	DockHost:
+		Type: Unload
+		DockAngle: 640
+		DockOffset: 1086,1086,0
+		MaxQueueLength: 15
+	DrawLineToTarget:
+	FreeActor@1:
+		Actor: asianalliance_droneminer
+		SpawnOffset: 2,2
+		Facing: 256
+	FreeActor@2:
+		Actor: asianalliance_droneminer
+		SpawnOffset: 2,2
+		Facing: 256
+	FreeActor@3:
+		Actor: asianalliance_droneminer
+		SpawnOffset: 2,2
+		Facing: 256
+	FreeActor@4:
+		Actor: asianalliance_droneminer
+		SpawnOffset: 2,2
+		Facing: 256
+	SelectionDecorations:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithIdleOverlay@bib:
+		Sequence: idle-bib
+	Voiced:
+		VoiceSet: PRCSupplyVoice
+
+asianalliance_asianwarfactory:
+	Inherits: ^RA2DefaultWeap
+	Inherits@sell: ^AASpawnActorsOnSell
+	Tooltip:
+		Name: Asian War Factory
+	Buildable:
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianorerefinery
+		Description: Produces vehicles.
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@bib:
+		Sequence: bib
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@ramp:
+		Sequence: build-ramp
+		RequiresCondition: !build-incomplete
+	Voiced:
+		VoiceSet: PRCWarFactoryVoice
+
+asianalliance_asianservicedepot:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	HitShape:
+		TargetableOffsets: 840,0,0, 598,-640,0, 598,640,0, -1060,0,0, -768,-640,0, -768,640,0
+		Type: Polygon
+			Points: -1536,-256, -341,-940, 341,-940, 1536,-256, 1536,341, 341,1110, -341,1110, -1536,341
+	Tooltip:
+		Name: Asian Service Depot
+	Buildable:
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianwarfactory
+		Description: Repairs nearby vehicles.
+	Building:
+		Footprint: Xx_ === _=_
+		Dimensions: 3,3
+	SelectionDecorations:
+	Reservable:
+	RallyPoint:
+	WithIdleOverlay@side:
+		Sequence: idle-side
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@bib:
+		Sequence: bib
+		RequiresCondition: !build-incomplete
+	WithResupplyAnimation:
+		Sequence: repair
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+
+asianalliance_asianradar:
+	Inherits: ^RA2Building
+	Inherits@radar: ^RadarBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^AASpawnActorsOnSell
+	Selectable:
+		Bounds: 2048, 2560, 0, -256
+	SelectionDecorations:
+	Tooltip:
+		Name: Asian Radar
+	ProvidesPrerequisite:
+		Prerequisite: anyhq
+	Buildable:
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianorerefinery
+		Description: Provides radar coverage of the battlefield.
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	WithSpriteBody:
+		PauseOnCondition: disabled
+	RenderDetectionCircle:
+	WithIdleOverlay@dish:
+		Sequence: idle-dish
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+	SupportPowerChargeBar:
+	Voiced:
+		VoiceSet: CHSpeakerTowerVoice
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+
+asianalliance_asianbattlelab:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Selectable:
+		Bounds: 3072, 2048, 0, 0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 140
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianradar
+		Description: template_tech_center.description
+	Tooltip:
+		Name: Asian Battle Lab
+	Building:
+		Footprint: xx xx xx
+		Dimensions: 3,2
+	ProvidesPrerequisite:
+		Prerequisite: ra2tek
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+	Production@Research:
+		Produces: Research
+
+asianalliance_militaryacademy:
+	Inherits: ^RA2Building
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@CPQWP: ^CPQConditionWithPrimary
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 140
+		BuildLimit: 1
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianbattlelab, derricklimit
+		Description: Upgrades the Veterancy of Troops.
+	Tooltip:
+		Name: Military Academy
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -500,750,0
+		ExitCell: 1,2
+	Exit@2:
+		SpawnOffset: -750,500,0
+		ExitCell: 2,1
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+	Production@NORMAL:
+		Produces: Infantry
+		RequiresCondition: !classicproductionqueues
+		PauseOnCondition: disabled
+	Production@CLASSICPRODUCTIONQUEUES:
+		Produces: RAInfantry
+		RequiresCondition: classicproductionqueues
+		PauseOnCondition: disabled
+	ParallelProductionQueue@INFANTRY:
+		Type: Infantry
+		DisplayOrder: 2
+		Group: Infantry
+		LowPowerModifier: 300
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		InfiniteBuildLimit: 10
+		BuildDurationModifier: 25
+	ProductionBar@INFANTRY:
+		ProductionType: Infantry
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAINFANTRY:
+		ProductionType: RAInfantry
+		RequiresCondition: classicproductionqueues
+	ProvidesPrerequisite@infantry:
+		Prerequisite: infantry.upgraded
+	ProvidesPrerequisite@aircraft:
+		Prerequisite: aircraft.upgraded
+	ProvidesPrerequisite@vehicles:
+		Prerequisite: vehicles.upgraded
+	ProvidesPrerequisite@ships:
+		Prerequisite: ships.upgraded
+	Voiced:
+		VoiceSet: CHPropagandaCenterVoice
+
+asianalliance_asianairforcecommand:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@hpad: ^IsAircraftFactory
+	Buildable:
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianradar
+		Description: Produces and repairs aircraft.
+	Tooltip:
+		Name: Asian Airforce Command
+	Building:
+		Footprint: x== ===
+		Dimensions: 3,2
+	Exit@1:
+		ExitCell: 1,1
+		Facing: 768
+	RallyPoint:
+	Reservable:
+	SpawnNeighboringActors:
+		ActorTypes: dummy_dock
+		Locations: 2,1, 1,0
+		KillOnRemove: false
+	AirstrikePower@cluster:
+		OrderName: AAClusterBomb
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: asianalliance_upgrade_clusterbombs
+			2: asianalliance_upgrade_chaosbombs
+		IconImage: tankmine.asian
+		Icons:
+			1: icon
+			2: icon2
+		ChargeInterval: 7500
+		Names:
+			1: Anti Tank Mines
+			2: Chaos Mines
+		Descriptions:
+			1: A stealth bomber deploys cluster mines at the target.
+			2: A group of stealth bombers deploy chaos mines at the target.
+		SelectTargetSpeechNotification: SelectTarget
+		CameraActor: camera
+		CameraRemoveDelay: 150
+		UnitTypes:
+			1: bomber_minebomb.asian
+			2: bomber_minebomb2.asian
+		QuantizedFacings: 16
+		DisplayBeacon: true
+		BeaconPosters:
+			1: airstrike
+			2: airstrike
+		SquadSizes:
+			1: 1
+			2: 3
+		SquadOffset: 1792,1792,0
+		ArrowSequence: arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		SupportPowerPaletteOrder: 40
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+	ParatroopersPower@aaparatroopers:
+		OrderName: aaparatroopers
+		PauseOnCondition: disabled
+			1: asianalliance_upgrade_massparadrop
+			2: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic
+			3: asianalliance_upgrade_massparadrop, asianalliance_promotion_plasmatrooper
+			4: asianalliance_upgrade_massparadrop, asianalliance_promotion_samurai
+			5: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic, asianalliance_promotion_plasmatrooper
+			6: asianalliance_upgrade_massparadrop, asianalliance_promotion_plasmatrooper, asianalliance_promotion_samurai
+			7: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic, asianalliance_promotion_samurai
+			8: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic, asianalliance_promotion_plasmatrooper, asianalliance_promotion_samurai
+			9: asianalliance_upgrade_massparadrop, asianalliance_promotion_plasmatrooper, asianalliance_promotion_samurai, asianalliance_promotion_veteranarchers
+			10: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic, asianalliance_promotion_samurai, asianalliance_promotion_veteranarchers
+			11: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic, asianalliance_promotion_plasmatrooper, asianalliance_promotion_samurai, asianalliance_promotion_veteranarchers
+			12: asianalliance_upgrade_massparadrop, asianalliance_promotion_plasmatrooper, asianalliance_promotion_samurai, asianalliance_promotion_veteranarchers, asianalliance_promotion_asdf
+			13: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic, asianalliance_promotion_samurai, asianalliance_promotion_veteranarchers, asianalliance_promotion_asdf
+			14: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic, asianalliance_promotion_plasmatrooper, asianalliance_promotion_samurai, asianalliance_promotion_veteranarchers, asianalliance_promotion_asdf
+		Icons:
+			1: paratroopers
+			2: paratroopers
+			3: paratroopers
+			4: paratroopers
+			5: paratroopers
+			6: paratroopers
+			7: paratroopers
+			8: paratroopers
+			9: paratroopers
+			10: paratroopers
+			11: paratroopers
+			12: paratroopers
+			13: paratroopers
+			14: paratroopers
+		ChargeInterval: 7500
+		Names:
+			1: Mass Paradrop: Asian Vanguard Strike
+			2: Mass Paradrop: Fanatic Incursion
+			3: Mass Paradrop: Plasma Siege Force
+			4: Mass Paradrop: Samurai Blade Squad
+			5: Mass Paradrop: Plasma Fanatic Strike
+			6: Mass Paradrop: Plasma Samurai Division
+			7: Mass Paradrop: Fanatic Samurai Guard
+			8: Mass Paradrop: Imperial Vanguard
+			9: Mass Paradrop: Celestial Archer Guard
+			10: Mass Paradrop: Sacred Archer Vanguard
+			11: Mass Paradrop: Sovereign Archer Phalanx
+			12: Mass Paradrop: ASDF Plasma Siege
+			13: Mass Paradrop: ASDF Fanatic Assault
+			14: Mass Paradrop: ASDF Supreme Alliance Drop
+		Descriptions:
+			1: Deploys 3 squads of Alligators, Militias, Tank Killers, and Flame Troopers.
+			2: Deploys 3 squads of base infantry bolstered by Fanatics for aggressive frontline support.
+			3: Deploys 3 squads of base infantry with Plasma Troopers for heavy anti-armor capabilities.
+			4: Deploys 3 squads of base infantry including Samurai for elite melee protection.
+			5: Deploys 3 squads of base infantry supported by both Fanatics and Plasma Troopers.
+			6: Deploys 3 squads of base infantry supported by Plasma Troopers and Samurai.
+			7: Deploys 3 squads of base infantry supported by Fanatics and Samurai.
+			8: Deploys 3 elite squads featuring Fanatics, Plasma Troopers, and Samurai.
+			9: Deploys 3 tactical squads including Plasma Troopers, Samurai, and Veteran Archers.
+			10: Deploys 3 spiritual squads including Fanatics, Samurai, and Veteran Archers.
+			11: Deploys 3 heavy squads featuring Fanatics, Plasma Troopers, Samurai, and Veteran Archers.
+			12: Deploys 3 ultimate squads including Plasma Troopers, Samurai, Archers, and the ASDF specialist.
+			13: Deploys 3 ultimate squads including Fanatics, Samurai, Archers, and the ASDF specialist.
+			14: Deploys 3 supreme squads featuring the full might of the Alliance, including the ASDF specialist.
+		DropItems:
+			1: asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper
+			2: asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic
+			3: asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_plasmatrooper,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_plasmatrooper,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_plasmatrooper
+			4: asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_japanesesamurai,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_japanesesamurai,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_japanesesamurai
+			5: asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_plasmatrooper,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_plasmatrooper,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_plasmatrooper
+			6: asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_plasmatrooper,asianalliance_japanesesamurai
+			7: asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_japanesesamurai,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_japanesesamurai,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_japanesesamurai
+			8: asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_plasmatrooper,asianalliance_japanesesamurai
+			9: asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_veteranarcher,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_veteranarcher,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_veteranarcher
+			10: asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_japanesesamurai,asianalliance_veteranarcher,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_japanesesamurai,asianalliance_veteranarcher,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_japanesesamurai,asianalliance_veteranarcher
+			11: asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_veteranarcher,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_veteranarcher,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_veteranarcher
+			12: asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_veteranarcher,asianalliance_asdf,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_veteranarcher,asianalliance_asdf,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_veteranarcher,asianalliance_asdf
+			13: asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_japanesesamurai,asianalliance_veteranarcher,asianalliance_asdf,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_japanesesamurai,asianalliance_veteranarcher,asianalliance_asdf,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_japanesesamurai,asianalliance_veteranarcher,asianalliance_asdf
+			14: asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_veteranarcher,asianalliance_asdf,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_veteranarcher,asianalliance_asdf,asianalliance_alligator,asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_plasmatrooper,asianalliance_japanesesamurai,asianalliance_veteranarcher,asianalliance_asdf
+		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
+		SelectTargetSpeechNotification: SelectTarget
+		IncomingSpeechNotification: EnemyUnitsApproaching
+		AllowImpassableCells: false
+		QuantizedFacings: 64
+		CameraActor: camera.paradrop
+		DisplayBeacon: true
+		BeaconPosters:
+			1: pinficon
+			2: pinficon
+			3: pinficon
+			4: pinficon
+			5: pinficon
+			6: pinficon
+			7: pinficon
+			8: pinficon
+			9: pinficon
+			10: pinficon
+			11: pinficon
+			12: pinficon
+			13: pinficon
+			14: pinficon
+		UnitTypes:
+			1: ra2cplane
+			2: ra2cplane
+			3: ra2cplane
+			4: ra2cplane
+			5: ra2cplane
+			6: ra2cplane
+			7: ra2cplane
+			8: ra2cplane
+			9: ra2cplane
+			10: ra2cplane
+			11: ra2cplane
+			12: ra2cplane
+			13: ra2cplane
+			14: ra2cplane
+		SquadSizes:
+			1: 3
+			2: 4
+			3: 4
+			4: 4
+			5: 5
+			6: 5
+			7: 5
+			8: 6
+			9: 6
+			10: 6
+			11: 7
+			12: 7
+			13: 7
+			14: 8
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+	SupportPowerChargeBar:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithIdleOverlay@bottom:
+		Sequence: idlebottom
+		PauseOnCondition: lowpower
+	WithIdleOverlay@mid:
+		Sequence: idle-mid
+		PauseOnCondition: lowpower
+	WithIdleOverlay@dish:
+		Sequence: idle-dish
+		PauseOnCondition: lowpower
+	Voiced:
+		VoiceSet: PRCAirfieldVoice
+
+asianalliance_asiansentryflamer:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@FireActor: ^FireActor
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianbarracks
+		Description: template_anti_infantry_defense.description
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Asian Sentry Flamer
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 71000
+	Selectable:
+		Bounds: 1024, 1024
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: -1,1,1
+	AttackTurreted:
+		Voice: Attack
+	Armament:
+		Weapon: AsianFlamerTurret
+		LocalOffset: 500,128,100, 500,-128,100
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	WithMuzzleOverlay:
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	AutoTarget:
+	Power:
+		Amount: -25
+	RevealsShroud:
+		Range: 6666
+	ProvidesPrerequisite@buildingname:
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_dragonfire
+
+cgpnch.asian:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@CelestialPowerUpgrades: ^CelestialPowerUpgrades
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~cgyard.asian
+		Description: actor_cgpnch.description
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Punisher
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+		TerrainTypes: Water
+	Health:
+		HP: 140000
+	Selectable:
+		Bounds: 1024, 1024
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: -1,1,1
+	AttackTurreted:
+		Voice: Attack
+	Armament:
+		Weapon: AsianPunisherAG
+		LocalOffset: 350,22,100, 350,-22,100
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !asianalliance_upgrade_celestialpower
+	Armament@Upgrade:
+		Weapon: AsianPunisherAG_EMP
+		LocalOffset: 350,22,100, 350,-22,100
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: asianalliance_upgrade_celestialpower
+	WithMuzzleOverlay:
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	AutoTarget:
+	Power:
+		Amount: -60
+	RevealsShroud:
+		Range: 12000
+	Targetable@Water:
+		TargetTypes: Water
+	DetectCloaked:
+		DetectionTypes: Underwater
+		Range: 6000
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_celestialpower
+
+asianalliance_pulsar:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@CelestialPowerUpgrades: ^CelestialPowerUpgrades
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 70
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianradar
+		Description: template_anti_aircraft_power_defense.description
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Pulsar
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 80000
+	WithSpriteBody:
+		PauseOnCondition: disabled
+	Armament:
+		Weapon: AsianPhotonCannon
+		LocalOffset: 0,0,400
+		RequiresCondition: !asianalliance_upgrade_celestialpower
+	Armament@Upgrade:
+		Weapon: AsianPhotonCannon_EMP
+		LocalOffset: 0,0,400
+		RequiresCondition: asianalliance_upgrade_celestialpower
+	AttackTurreted:
+	Turreted:
+	Sellable:
+	WithIdleOverlay@normal:
+		Sequence: idle-normal
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+	WithMakeAnimation:
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+	Power:
+		Amount: -45
+	RevealsShroud:
+		Range: 14000
+	DetectCloaked:
+		Range: 7000
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_celestialpower
+
+asianalliance_railtower:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@CelestialPowerUpgrades: ^CelestialPowerUpgrades
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 80
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianbattlelab
+		Description: template_anti_vehicle_defense.description
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Rail Tower
+	Selectable:
+		Bounds: 1024, 2304, 0, -640
+	SelectionDecorations:
+	Health:
+		HP: 125000
+	WithSpriteBody:
+		PauseOnCondition: disabled
+	Armament:
+		Weapon: AsianRailgun
+		LocalOffset: 0,0,1280
+		PauseOnCondition: !ammo
+		AmmoUsage: 1
+	AttackTesla:
+		MaxCharges: 5
+		ReloadDelay: 120
+		InitialChargeDelay: 12
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+	WithTeslaChargeAnimation:
+	Turreted:
+		RealignDelay: -1
+	WithIdleOverlay@normal:
+		Sequence: idle-normal
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+	WithMakeAnimation:
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+	AmmoPool:
+		Ammo: 5
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 120
+		Count: 5
+		ResetOnFire: True
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		FullSequence: pip-red
+	Power:
+		Amount: -125
+	RevealsShroud:
+		Range: 9600
+	DetectCloaked:
+		Range: 4800
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_celestialpower
+
+asianalliance_chaostower:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 80
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_militaryacademy
+		Description: actor_cgchtw.description
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Chaos Tower
+	Selectable:
+		Bounds: 1024, 2304, 0, -640
+	SelectionDecorations:
+	Health:
+		HP: 100000
+	WithSpriteBody:
+		PauseOnCondition: disabled
+	Selectable:
+		Bounds: 1024, 1024
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: -1,1,1
+	AttackTurreted:
+		Voice: Attack
+	Armament:
+		Weapon: AsianChaosTurret
+	Cloak:
+		InitialDelay: 125
+		CloakDelay: 75
+		CloakSound: trans1.aud
+		UncloakSound: appear1.aud
+	WithMuzzleOverlay:
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	AutoTarget:
+	Power:
+		Amount: -50
+	RevealsShroud:
+		Range: 5000
+	DetectCloaked:
+		Range: 2500
+
+asianalliance_plasmacannon:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@shape: ^2x2Shape
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 50
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_militaryacademy
+		Description: actor_cgplas.description
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Plasma Cannon
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 300000
+	Selectable:
+		Bounds: 2048, 2048
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 896
+		Offset: -1,1,1
+	AttackTurreted:
+		Voice: Attack
+	Armament:
+		Weapon: AsianTurretPlasma
+		LocalOffset: 1666,333,333, 1666,-333,333
+		MuzzleSequence: muzzle
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	WithRangeCircle:
+	AutoTarget:
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	Power:
+		Amount: -200
+	RevealsShroud:
+		Range: 14000
+	DetectCloaked:
+		Range: 7000
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_dragonfire
+
+asianalliance_hyperionprojector:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@CelestialPowerUpgrades: ^CelestialPowerUpgrades
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_militaryacademy
+		Description: actor_cghype.description
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Hyperion Projector
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 100000
+	Selectable:
+		Bounds: 1024, 1024
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: -1,1,1
+	AttackTurreted:
+		Voice: Attack
+	Armament@Normal:
+		Name: primary
+		Weapon: AAHyperionMagnet
+	WithMuzzleOverlay:
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	AutoTarget:
+	Power:
+		Amount: -50
+	RevealsShroud:
+		Range: 9000
+	DetectCloaked:
+		Range: 4500
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_celestialpower
+
+asianalliance_spitfire:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@shape: ^2x2Shape
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 50
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_militaryacademy
+		Description: actor_asianalliance_spitfire.description
+		IconPalette: ra2cameo
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Spitfire
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 100000
+	Selectable:
+		Bounds: 2048, 2048
+	Turreted:
+		TurnSpeed: 24
+		InitialFacing: 896
+		Offset: -1,1,1
+	AttackTurreted:
+		Voice: Attack
+	Armament:
+		Weapon: AsianSpitfireRockets
+		LocalOffset: 888,333,333, 888,-333,333
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	WithRangeCircle:
+	AutoTarget:
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	Power:
+		Amount: -100
+	RevealsShroud:
+		Range: 14000
+	DetectCloaked:
+		Range: 7000
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_dragonfire
+
+asianalliance_tankreactor:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Inherits@gar: ^ClearableGarrison
+	Selectable:
+		Bounds: 3072, 2048, 0, -256
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Tank Reactor
+	ProvidesPrerequisite:
+		Prerequisite: asianalliance_tankreactor
+	Buildable:
+		BuildPaletteOrder: 60
+		Queue: Building, RABuilding
+		Description: actor_cgtnkr.description
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianbattlelab
+	Building:
+		Footprint: xxx =x=
+		Dimensions: 3,2
+	Health:
+		HP: 350000
+	Armor:
+		Type: Concrete
+	RevealsShroud:
+		Range: 5c0
+	Cargo:
+		Types: OilTruck
+		MaxWeight: 12
+		EjectOnDeath: false
+		LoadedCondition: PowerLoad
+	Power@0:
+		Amount: 450
+		RequiresCondition: PowerLoad == 0
+	Power@1:
+		Amount: 900
+		RequiresCondition: PowerLoad == 1
+	Power@2:
+		Amount: 1350
+		RequiresCondition: PowerLoad == 2
+	Power@3:
+		Amount: 1800
+		RequiresCondition: PowerLoad == 3
+	Power@4:
+		Amount: 2250
+		RequiresCondition: PowerLoad == 4
+	Power@5:
+		Amount: 2700
+		RequiresCondition: PowerLoad >= 5
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+
+asianalliance_advancedcommunicationcenter:
+	Inherits: ^RA2Building
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^AASpawnActorsOnSell
+	Buildable:
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianbattlelab, !asianalliance_advancedcommunicationcenter, ~techlevel.superweapons
+		Description: actor_cgionc.description
+	Tooltip:
+		Name: Advanced Communication Center
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+	IonCannonPower:
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		IconImage: asianalliance_advancedcommunicationcenter
+		Icons:
+			1: icon2
+		Cursor: ioncannon
+		ChargeInterval: 7500
+		WeaponDelay: 0
+		Weapon: AsianTSIonCannon
+		Effect: tsioncannon
+		EffectSequence: targeting
+		EffectPalette: ra2effect
+		Names:
+			1: power_ioncannon.name
+		Descriptions:
+			1: power_ioncannon.description
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		EndChargeTextNotification: Ion Cannon ready.
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayRadarPing: True
+		CameraRange: 6000
+		CameraRemoveDelay: 125
+		CameraActor: CAMERA.small
+		SupportPowerPaletteOrder: 20
+		TargetCircleRanges:
+			1: 6000
+		TargetCircleColor: ff000080
+	SupportPowerChargeBar:
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: asianalliance_advancedcommunicationcenter
+
+asianalliance_chaosstorminductor:
+	Inherits: ^RA2Building
+	Inherits@sell: ^AASpawnActorsOnSell
+	Inherits@SW: ^Superweapon
+	Inherits@shape: ^3x3Shape
+	SelectionDecorations:
+	Tooltip:
+		Name: Chaos Storm Inductor
+	Buildable:
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianbattlelab, ~techlevel.superweapons
+		Description: actor_cgchao.description
+	Building:
+		Footprint: =x= xxx xxx
+		Dimensions: 3,3
+	WithSpriteBody:
+		PauseOnCondition: lowpower
+	DetonateWeaponPower@Chaos:
+		OrderName: AsianChaosSuperweapon
+		PauseOnCondition: disabled
+			1: ~techlevel.superweapons
+		IconImage: asianalliance_chaosstorminductor
+		Icons:
+			1: icon2
+		Cursor: ioncannon
+		ChargeInterval: 7500
+		ActivationDelay: 25
+		ActivationSequence:
+		Names:
+			1: power_chaos.name
+		Weapons:
+			1: AsianChaosSuperweapon
+		Descriptions:
+			1: power_chaos.description
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		EndChargeSound: sgenopen.wav
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		DisplayRadarPing: True
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraRange: 6000
+		CameraRemoveDelay: 125
+		CameraActor: camera.small
+		TargetCircleRanges:
+			1: 6000
+		TargetCircleColor: ff000080
+		LaunchSound: sgenopen.wav
+		IncomingSound: sgenopen.wav
+	SupportPowerChargeBar:
+
+cgyard.asian:
+	Inherits: ^RA2Building
+	Inherits@shipyard: ^IsShipyard
+	Inherits@shape: ^3x3Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
+	Tooltip:
+		Name: Asian Naval Yard
+	Buildable:
+		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianorerefinery, ~globalnaval
+	Building:
+		Footprint: =+= +++ =+=
+		Dimensions: 3,3
+		TerrainTypes: Water
+	-GivesBuildableArea:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithIdleOverlay@crane:
+		Sequence: idle-crane
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: !build-incomplete
+	Targetable:
+		TargetTypes: Ground, Water, C4, Structure
+
+asianalliance_concretebarrier:
+	Inherits: ^Wall
+	Valued:
+		Cost: 200
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Concrete Barrier
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~asianalliancebarrier
+		Queue: Defence, RADefence
+		Description: Provides flat building foundation.
+	Health:
+		HP: 100000
+	Armor:
+		Type: Concrete
+	BlocksProjectiles:
+	Crushable:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSounds: crumble.aud
+	LineBuild:
+		NodeTypes: concrete
+	LineBuildNode:
+		Types: concrete
+	RenderSprites:
+		Image: asianalliance_concretebarrier
+		Palette: ra2
+		PlayerPalette: playerra2
+	WithWallSpriteBody:
+		IsPlayerPalette: True
+		Palette: playerra2
+		PlayerPalette: playerra2
+		Type: asianalliance_concretebarrier
+
+##############################################
+##############################################
+#   Red Alert 2 Asian Infantry
+##############################################

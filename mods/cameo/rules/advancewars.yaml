@@ -442,7 +442,7 @@ World:
 		Factions: rubinelle, awwill, awlin, awbrenner, awisabella
 		BaseActor: mcv.rubinelle
 		SupportActors: awe1rb, awe1rb, awe1rb, awe1rb, awe1rb, awe1rb, awe1rb, awe1rb, awrecon, awaa, awltnk, awltnk
-		
+
 	StartingUnits@mcvonlyids:
 		Class: none
 		ClassName: MCV Only
@@ -528,7 +528,7 @@ World:
 		Factions: flaites
 		BaseActor: mcv.flaite
 		SupportActors: 315rtroop, 315rtroop, 315rtroop, 315rtroop, 315rtroop2, 315rtroop2, 315htrak, 315vulk, 315mtnk, 315mtnk
-		
+
 Player:
 	ExternalCondition@BuildingsOwned:
 		Condition: BuildingsOwned
@@ -1148,7 +1148,7 @@ Player:
 		Modifier: 120
 	ProducibleWithLevel@selectjess:
 		Prerequisites: selectjess
-		InitialLevels: 1	
+		InitialLevels: 1
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -1387,7 +1387,7 @@ Player:
 
 ########################################################
 #	MCV Market
-########################################################  
+########################################################
 
 MMAWORANGEMCV:
 	Inherits@MCV: mcv.orange
@@ -1396,7 +1396,7 @@ MMAWORANGEMCV:
 	Buildable:
 		BuildPaletteOrder: 200
 		Prerequisites: !mmorangestar
-	
+
 MMAWBLUEMOON:
 	Inherits@MCV: mcv.bluemoon
 	Tooltip:
@@ -1412,7 +1412,7 @@ MMAWYELLOWCOMET:
 	Buildable:
 		BuildPaletteOrder: 220
 		Prerequisites: !mmyellowcomet
-	
+
 MMAWGREENEARTH:
 	Inherits@MCV: mcv.greenearth
 	Tooltip:
@@ -1420,7 +1420,7 @@ MMAWGREENEARTH:
 	Buildable:
 		BuildPaletteOrder: 230
 		Prerequisites: !mmgreenearth
-	
+
 MMAWBLACKHOLE:
 	Inherits@MCV: mcv.blackhole
 	Tooltip:
@@ -1431,10 +1431,10 @@ MMAWBLACKHOLE:
 
 ########################################################
 #	AW Commanders
-########################################################                                                                                
-#	Orange Star             
+########################################################
+#	Orange Star
 selectandy:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Andy
 	Buildable:
@@ -1456,7 +1456,7 @@ selectandy:
 	ProvidesPrerequisite@4:
 		Prerequisite: unlockawrepairtnk
 selectmax:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Max
 	Buildable:
@@ -1476,7 +1476,7 @@ selectmax:
 	ProvidesPrerequisite@3:
 		Prerequisite: awcarrierunlock
 selectsami:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sami
 	Buildable:
@@ -1498,7 +1498,7 @@ selectsami:
 	ProvidesPrerequisite@4:
 		Prerequisite: unlockawifv
 selectnell:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Nell
 	Buildable:
@@ -1518,7 +1518,7 @@ selectnell:
 	ProvidesPrerequisite@3:
 		Prerequisite: awcarrierunlock
 selecthachi:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hachi
 	Buildable:
@@ -1538,7 +1538,7 @@ selecthachi:
 	ProvidesPrerequisite@3:
 		Prerequisite: awcarrierunlock
 selectjake:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Jake
 	Buildable:
@@ -1558,7 +1558,7 @@ selectjake:
 	ProvidesPrerequisite@3:
 		Prerequisite: awcarrierunlock
 selectrachel:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Rachel
 	Buildable:
@@ -1578,7 +1578,7 @@ selectrachel:
 	ProvidesPrerequisite@3:
 		Prerequisite: awcarrierunlock
 selectredstar:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Red Star
 	Buildable:
@@ -1597,9 +1597,9 @@ selectredstar:
 		Prerequisite: selectredstar
 	ProvidesPrerequisite@3:
 		Prerequisite: awclassicunit
-#	Blue Moon           
+#	Blue Moon
 selectolaf:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Olaf
 	Buildable:
@@ -1619,7 +1619,7 @@ selectolaf:
 	ProvidesPrerequisite@3:
 		Prerequisite: unlockawfrost
 selectgrit:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Grit
 	Buildable:
@@ -1639,7 +1639,7 @@ selectgrit:
 	ProvidesPrerequisite@3:
 		Prerequisite: unlockawsiege
 selectcolin:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Colin
 	Buildable:
@@ -1657,7 +1657,7 @@ selectcolin:
 	ProvidesPrerequisite@2:
 		Prerequisite: selectcolin
 selectsasha:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sasha
 	Buildable:
@@ -1675,7 +1675,7 @@ selectsasha:
 	ProvidesPrerequisite@2:
 		Prerequisite: selectsasha
 selectwhitemoon:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: White Moon
 	Buildable:
@@ -1704,9 +1704,9 @@ selectwhitemoon:
 		Prerequisite: awbcopter2unlock
 	ProvidesPrerequisite@8:
 		Prerequisite: unlockawbggy
-#	Yellow Comet              
+#	Yellow Comet
 selectkanbei:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Kanbei
 	Buildable:
@@ -1724,7 +1724,7 @@ selectkanbei:
 	ProvidesPrerequisite@2:
 		Prerequisite: selectkanbei
 selectsonja:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sonja
 	Buildable:
@@ -1746,7 +1746,7 @@ selectsonja:
 	ProvidesPrerequisite@4:
 		Prerequisite: unlockawradarvan
 selectsensei:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sensei
 	Buildable:
@@ -1766,7 +1766,7 @@ selectsensei:
 	ProvidesPrerequisite@3:
 		Prerequisite: awbcopter2unlock
 selectgrimm:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Grimm
 	Buildable:
@@ -1783,9 +1783,9 @@ selectgrimm:
 		Prerequisite: awselected
 	ProvidesPrerequisite@2:
 		Prerequisite: selectgrimm
-#	Green Earth            
+#	Green Earth
 selecteagle:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Eagle
 	Buildable:
@@ -1809,7 +1809,7 @@ selecteagle:
 	ProvidesPrerequisite@5:
 		Prerequisite: awbcopter2unlock
 selectdrake:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Drake
 	Buildable:
@@ -1829,7 +1829,7 @@ selectdrake:
 	ProvidesPrerequisite@3:
 		Prerequisite: awss2unlock
 selectjess:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Jess
 	Buildable:
@@ -1847,7 +1847,7 @@ selectjess:
 	ProvidesPrerequisite@2:
 		Prerequisite: selectjess
 selectjavier:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Javier
 	Buildable:
@@ -1864,9 +1864,9 @@ selectjavier:
 		Prerequisite: awselected
 	ProvidesPrerequisite@2:
 		Prerequisite: selectjavier
-#	Black Hole & Bolt Guard                         
+#	Black Hole & Bolt Guard
 selectflak:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Flak
 	Buildable:
@@ -1886,7 +1886,7 @@ selectflak:
 	ProvidesPrerequisite@3:
 		Prerequisite: classicblackhole
 selectlash:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Lash
 	Buildable:
@@ -1908,7 +1908,7 @@ selectlash:
 	ProvidesPrerequisite@4:
 		Prerequisite: unlockawspider
 selectadder:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Adder
 	Buildable:
@@ -1928,7 +1928,7 @@ selectadder:
 	ProvidesPrerequisite@3:
 		Prerequisite: classicblackhole
 selecthawke:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hawke
 	Buildable:
@@ -1948,7 +1948,7 @@ selecthawke:
 	ProvidesPrerequisite@3:
 		Prerequisite: classicblackhole
 selectjugger:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Jugger
 	Buildable:
@@ -1970,7 +1970,7 @@ selectjugger:
 	ProvidesPrerequisite@4:
 		Prerequisite: unlockawaitank
 selectkoal:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Koal
 	Buildable:
@@ -1992,7 +1992,7 @@ selectkoal:
 	ProvidesPrerequisite@4:
 		Prerequisite: unlockawflametank
 selectkindle:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Kindle
 	Buildable:
@@ -2012,7 +2012,7 @@ selectkindle:
 	ProvidesPrerequisite@3:
 		Prerequisite: boltguard
 selectsturm:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sturm
 	Buildable:
@@ -2032,7 +2032,7 @@ selectsturm:
 	ProvidesPrerequisite@3:
 		Prerequisite: classicblackhole
 selectbolt:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Von Bolt
 	Buildable:
@@ -2054,7 +2054,7 @@ selectbolt:
 #	Rubinelle
 #	Rubinelle
 selectwill:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Will
 	Buildable:
@@ -2072,7 +2072,7 @@ selectwill:
 	ProvidesPrerequisite@2:
 		Prerequisite: selectwill
 selectlin:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Lin
 	Buildable:
@@ -2092,7 +2092,7 @@ selectlin:
 	ProvidesPrerequisite@3:
 		Prerequisite: unlockawradarvan
 selectbrenner:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Brenner
 	Buildable:
@@ -2112,7 +2112,7 @@ selectbrenner:
 	ProvidesPrerequisite@3:
 		Prerequisite: unlockawrepairtnk
 selectisabella:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Isabella
 	Buildable:
@@ -2133,7 +2133,7 @@ selectisabella:
 		Prerequisite: unlockawdevastator2
 #	Lazurian
 selectforsythe:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Forsythe
 	Buildable:
@@ -2151,7 +2151,7 @@ selectforsythe:
 	ProvidesPrerequisite@2:
 		Prerequisite: selectforsythe
 selecttasha:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tasha
 	Buildable:
@@ -2169,7 +2169,7 @@ selecttasha:
 	ProvidesPrerequisite@2:
 		Prerequisite: selecttasha
 selectgage:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Gage
 	Buildable:
@@ -2190,7 +2190,7 @@ selectgage:
 		Prerequisite: unlockawsiege
 #	NRA
 selectgreyfield:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Greyfield
 	Buildable:
@@ -2208,7 +2208,7 @@ selectgreyfield:
 	ProvidesPrerequisite@2:
 		Prerequisite: selectgreyfield
 selectdavis:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Davis
 	Buildable:
@@ -2228,7 +2228,7 @@ selectdavis:
 	ProvidesPrerequisite@devast:
 		Prerequisite: unlockawdevastator2
 selectwaylon:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Waylon
 	Buildable:
@@ -2247,7 +2247,7 @@ selectwaylon:
 		Prerequisite: selectwaylon
 #	IDS
 selectpenny:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Penny
 	Buildable:
@@ -2267,7 +2267,7 @@ selectpenny:
 	ProvidesPrerequisite@3:
 		Prerequisite: unlockawfrost
 selectbeast:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: The Beast
 	Buildable:
@@ -2287,7 +2287,7 @@ selectbeast:
 	ProvidesPrerequisite@3:
 		Prerequisite: unlockawbggy
 selecttabitha:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tabitha
 	Buildable:
@@ -2307,7 +2307,7 @@ selecttabitha:
 	ProvidesPrerequisite@devast:
 		Prerequisite: unlockawdevastator2
 selectcaulder:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Caulder
 	Buildable:
@@ -2330,7 +2330,7 @@ selectcaulder:
 		Prerequisite: unlockawdevastator2
 ########################################################
 #	AW HQ & MCV
-########################################################          
+########################################################
 hq.orange:
 	GrantExternalConditionToOwner@BuildingsOwned:
 		Condition: BuildingsOwned
@@ -2386,13 +2386,13 @@ hq.orange:
 		QueuedAudio: Building
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionQueue@Upgrades:
+	Production@Research:
+		Produces: Research
+	ProductionQueue@Research:
 		Type: Upgrades
 		Group: Upgrade
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	ProvidesRadar:
 	BaseBuilding:
 	ProductionBar@BuildingGDI:
@@ -2420,7 +2420,7 @@ hq.orange:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmorangestar
@@ -4397,7 +4397,7 @@ mcv.orange:
 		Name: Mobile Construction Vehicle (Orange Star)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, ~awselected
+		Prerequisites: awlab, ~awselected
 		Queue: Vehicle, RAVehicle
 		Description: Builds structures and provides radar. \n Limit of 5
 		BuildDuration: 1500
@@ -4405,7 +4405,6 @@ mcv.orange:
 		BuildLimit: 1
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 250000
@@ -4490,7 +4489,7 @@ mcv.bluemoon:
 		Name: Mobile Construction Vehicle (Blue Moon)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.bluemoon
@@ -4504,7 +4503,7 @@ mcv.yellowcomet:
 		Name: Mobile Construction Vehicle (Yellow Comet)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.yellowcomet
@@ -4518,7 +4517,7 @@ mcv.greenearth:
 		Name: Mobile Construction Vehicle (Green Earth)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.greenearth
@@ -4532,7 +4531,7 @@ mcv.blackhole:
 		Name: Mobile Construction Vehicle (Black Hole)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.blackhole
@@ -4546,7 +4545,7 @@ mcv.rubinelle:
 		Name: Mobile Construction Vehicle (Days of Ruins)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.rubinelle
@@ -4558,7 +4557,7 @@ mcv.ids:
 		Name: Mobile Construction Vehicle (Days of Ruins)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.ids
@@ -4570,7 +4569,7 @@ mcv.newrubinelle:
 		Name: Mobile Construction Vehicle (Days of Ruins)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.newrubinelle
@@ -4582,7 +4581,7 @@ mcv.lazurian:
 		Name: Mobile Construction Vehicle (Days of Ruins)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.lazurian
@@ -4594,7 +4593,7 @@ mcv.alliedn:
 		Name: Mobile Construction Vehicle (Days of Ruins)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.alliedn
@@ -4602,7 +4601,7 @@ mcv.alliedn:
 		Image: awapc
 ########################################################
 #	AW Cities
-########################################################       
+########################################################
 awcity:
 	GrantExternalConditionToOwner@CitiesOwned:
 		Condition: CitiesOwned
@@ -4735,7 +4734,7 @@ awcity:
 		DockAngle: 256
 		DockOffset: 1,2
 	StoresResources:
-		Capacity: 5000 #2000                     
+		Capacity: 5000 #2000
 	GrantConditionOnPrerequisite@numberofcities2:
 		Prerequisites: numberofcities2
 		Condition: numberofcities2
@@ -4821,10 +4820,9 @@ awupgradecity:
 	RenderSprites:
 		Image: awcity
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: True
-		
+
 awcitybm:
 	Inherits: awcity
 	Buildable:
@@ -4857,7 +4855,7 @@ awcityids:
 		Image: awcityids
 ########################################################
 #	AW Defence
-########################################################            
+########################################################
 awpipe:
 	Inherits: ^Wall
 	Valued:
@@ -4899,11 +4897,11 @@ awpipe:
 	DamageMultiplier@awupwall:
 		Modifier: 25
 		RequiresCondition: awupwall
-		
+
 awminicannon:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@lowpower: ^DisabledOverlay
 	Valued:
 		Cost: 1500
@@ -4935,7 +4933,7 @@ awminicannon:
 		LocalOffset: 512,0,112
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: AWArtilleryAA
+		Weapon: AWArtillery_AA
 		LocalOffset: 512,0,112
 		MuzzleSequence: muzzle
 	AttackTurreted:
@@ -4948,7 +4946,7 @@ awminicannon:
 awlaserbunk:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@lowpower: ^DisabledOverlay
 	Valued:
 		Cost: 3000
@@ -4988,7 +4986,7 @@ awtalon:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@shape: ^3x2Shape
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@lowpower: ^DisabledOverlay
 	Valued:
 		Cost: 3000
@@ -5021,7 +5019,7 @@ awtalon:
 		LocalOffset: 0,0,0
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: AWTalonGunAA
+		Weapon: AWTalonGun_AA
 		LocalOffset: 0,0,0
 		MuzzleSequence: muzzle
 	Armament@2:
@@ -5029,7 +5027,7 @@ awtalon:
 		LocalOffset: 0,0,0
 		MuzzleSequence: muzzle2
 	Armament@AA2:
-		Weapon: AWTalonGunAA
+		Weapon: AWTalonGun_AA
 		LocalOffset: 0,0,0
 		MuzzleSequence: muzzle2
 	AttackTurreted:
@@ -5104,7 +5102,7 @@ awtower.javier:
 awfortress:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@lowpower: ^DisabledOverlay
 	Valued:
 		Cost: 4000
@@ -5136,7 +5134,7 @@ awfortress:
 		LocalOffset: -500,500,112, -500,-500,112, 500,-500,112, 500,500,112
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: AWArtilleryAA
+		Weapon: AWArtillery_AA
 		LocalOffset: 500,500,112, 500,500,112, 500,500,112, 500,500,112
 		MuzzleSequence: muzzle
 	AttackTurreted:
@@ -5865,7 +5863,7 @@ awyard.lazurian:
 		Image: awyard
 ########################################################
 #	AW Hi Tech Buildings
-########################################################                        
+########################################################
 awlab:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
@@ -5874,7 +5872,7 @@ awlab:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
-		Prerequisites: vehicleproduction, ~techlevel.high
+		Prerequisites: vehicleproduction
 		Description: Provides advanced technologies.
 	Valued:
 		Cost: 2000
@@ -5919,7 +5917,7 @@ awlab:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 	AirstrikePower@A10NRA:
@@ -5944,7 +5942,7 @@ awlab:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 	AirstrikePower@TheOwl:
@@ -5966,7 +5964,7 @@ awlab:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 	ClassicAirstrikePower@Duster:
@@ -6015,7 +6013,7 @@ awlab:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		Strikes: 4
 		CircleDelay: 20
@@ -6040,7 +6038,7 @@ awsilo:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, !awsilol, ~techlevel.high
+		Prerequisites: awlab, !awsilol
 		Description: Provides Tactical Missiles
 	Valued:
 		Cost: 2500
@@ -6112,7 +6110,7 @@ awvolcano:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, !awvolcanol, ~techlevel.high
+		Prerequisites: awlab, !awvolcanol
 		Description: Provides Tactical Missiles
 	Valued:
 		Cost: 5000
@@ -6166,7 +6164,7 @@ awsupermissile:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, !awsupermissile1, ~techlevel.high, ~classicblackhole
+		Prerequisites: awlab, !awsupermissile1, ~classicblackhole
 		Description: Provides Tactical Missiles
 	Valued:
 		Cost: 5000
@@ -6231,7 +6229,7 @@ awbigcrystal:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, !awbigcrystal1, ~techlevel.high, ~boltguard
+		Prerequisites: awlab, !awbigcrystal1, ~boltguard
 		Description: Provides Tactical Missiles
 	Valued:
 		Cost: 5000
@@ -6280,7 +6278,7 @@ blackonyx.beam:
 	-WithMakeAnimation@4:
 	-WithDeathAnimation@3:
 	-WithDeathAnimation@4:
-	
+
 awstabilizer:
 	Inherits: ^BaseBuilding
 	HitShape:
@@ -6314,7 +6312,7 @@ awstabilizer:
 
 ########################################################
 #	AW Ground Units
-########################################################                                
+########################################################
 awdozer:
 	Inherits: ^Tank
 	Inherits@selection: ^SelectableEconomicUnit
@@ -6411,7 +6409,6 @@ awconvoy:
 		Except: Unload, Stop
 		RequiresCondition: damagedslow
 	Passenger:
-		Weight: 6
 	Health:
 		HP: 11000
 	Repairable:
@@ -7007,7 +7004,7 @@ awmtnk2:
 			awtasha: awmtnkids
 			awforsythe: awmtnkids
 			awgage: awmtnkids
-				
+
 awctnk:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -7286,7 +7283,7 @@ awdevastator:
 		DecorationBounds: 1280, 1280
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########              
+		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: AWTrackedVoiced
 	ProductionCostMultiplier@rubinelle:
@@ -7496,21 +7493,21 @@ awifv:
 		LoadingCondition: notmobile
 		PassengerConditions:
 			e1: ifv-mg
-			rae1: ifv-mg
-			rare1: ifv-mg
-			ra2e1: ifv-mg
-			ra2e2: ifv-mg
+			ra1_allies_rifleinfantry: ifv-mg
+			ra1_soviets_rifleinfantry: ifv-mg
+			ra2_allies_gi: ifv-mg
+			ra2_soviets_conscript: ifv-mg
 			2100scav: ifv-mg
 			2100scav2: ifv-mg
-			scmarine: ifv-mg
+			terran_marine: ifv-mg
 			tse1: ifv-mg
-			tse1.nod: ifv-mg
+			ts_nod_lightinfantry: ifv-mg
 			tse1para: ifv-mg
-			tscyborg: ifv-mg
+			cabal_cyborginfantry: ifv-mg
 			tscyborgc: ifv-mg
-			tsmutant: ifv-mg
-			tsmwmn: ifv-mg
-			sczergling: ifv-mg
+			forgotten_mutant: ifv-mg
+			forgotten_mutantsoldier: ifv-mg
+			zerg_zergling: ifv-mg
 			gle1: ifv-mg
 			che1: ifv-mg
 			usae1: ifv-mg
@@ -7521,24 +7518,24 @@ awifv:
 			awe1greenearth: ifv-mg
 			awe1blackhole: ifv-mg
 			awe1sensei: ifv-mg
-			e2: ifv-cannon
-			rae2: ifv-cannon
-			tse2: ifv-cannon
+			td_gdi_grenadier: ifv-cannon
+			ra1_soviets_grenadier: ifv-cannon
+			ts_gdi_discthrower: ifv-cannon
 			tse2para: ifv-cannon
-			tsmutant3: ifv-cannon
+			forgotten_mutantsergeant: ifv-cannon
 			che2: ifv-cannon
 			leange2: ifv-cannon
 			e6: ifv-repair
-			rae6: ifv-repair
-			mech: ifv-repair
-			scscv: ifv-repair
-			ra2engineer: ifv-repair
-			ra2engineer.soviet: ifv-repair
-			ra2engineer.yuri: ifv-repair
+			ra1_engineer: ifv-repair
+			ra1_allies_mechanic: ifv-repair
+			terran_scv: ifv-repair
+			ra2_allies_engineer: ifv-repair
+			ra2_soviets_engineer: ifv-repair
+			yuri_engineer: ifv-repair
 			yrslav: ifv-repair
 			tsengineer: ifv-repair
-			tsengineer2: ifv-repair
-			tsmhijack: ifv-repair
+			ts_nod_engineer: ifv-repair
+			forgotten_mutanthijacker: ifv-repair
 			rathf: ifv-repair
 			glhijack: ifv-repair
 			chhacker: ifv-repair
@@ -7547,9 +7544,9 @@ awifv:
 			leanghacker: ifv-repair
 			leanglotus: ifv-repair
 			e3: ifv-miss
-			rae3: ifv-miss
-			rare3: ifv-miss
-			yrggi: ifv-miss
+			ra1_allies_alliedrocketsoldier: ifv-miss
+			ra1_soviets_rocketsoldier: ifv-miss
+			ra2_allies_guardiangi: ifv-miss
 			tse3: ifv-miss
 			gle3: ifv-miss
 			che3: ifv-miss
@@ -7561,45 +7558,45 @@ awifv:
 			awe3greenearth: ifv-miss
 			awe3blackhole: ifv-miss
 			awe3sensei: ifv-miss
-			ra2flakt: ifv-flak
-			shok: ifv-tesla
-			ra2shk: ifv-tesla
-			e4: ifv-fire
-			rae4: ifv-fire
-			yrinit: ifv-fire
-			scfirebat: ifv-fire
-			e5: ifv-chem
-			ra2deso: ifv-chem
-			tsweedguy: ifv-chem
+			ra2_soviets_flaktrooper: ifv-flak
+			ra1_soviets_shocktrooper: ifv-tesla
+			ra2_soviets_teslatrooper: ifv-tesla
+			td_nod_flamethrower: ifv-fire
+			ra1_soviets_flamethrower: ifv-fire
+			yuri_initiate: ifv-fire
+			terran_firebat: ifv-fire
+			td_nod_chemicalwarrior: ifv-chem
+			ra2_soviets_desolator: ifv-chem
+			forgotten_chemsprayinfantry: ifv-chem
 			gle1toxin: ifv-chem
 			rmbo: ifv-hero
-			e7: ifv-hero
-			ra2tany: ifv-hero
+			ra1_allies_tanya: ifv-hero
+			ra2_allies_tanyaii: ifv-hero
 			cityswat: ifv-hero
-			yrboris: ifv-hero
-			ra2seal: ifv-hero
-			tscyc2: ifv-hero
+			ra2_soviets_boris: ifv-hero
+			ra2_allies_seal: ifv-hero
+			cabal_cyborgcommando: ifv-hero
 			tscyc2.cabal: ifv-hero
-			tsghost: ifv-hero
+			forgotten_ghoststalker: ifv-hero
 			tsghost.mutant: ifv-hero
 			usaburton: ifv-hero
 			leangburton: ifv-hero
-			scghost: ifv-sniper
-			ra2snipe: ifv-sniper
-			yrvirus: ifv-sniper
-			raspy: ifv-sniper
-			ra2spy: ifv-sniper
-			tschamspy: ifv-sniper
-			tsumagon: ifv-sniper
-			glkell: ifv-sniper
-			leangkell: ifv-sniper
-			glsabo: ifv-sniper
-			usapath: ifv-sniper
-			leangpath: ifv-sniper
-			ra2cleg: ifv-chrono
-			ra2ivan: ifv-demo
+			terran_ghost: ifv-ra1_allies_alliedsniper
+			ra2_allies_sniper: ifv-ra1_allies_alliedsniper
+			yuri_virus: ifv-ra1_allies_alliedsniper
+			ra1_allies_raspy: ifv-ra1_allies_alliedsniper
+			ra2_allies_ra2spy: ifv-ra1_allies_alliedsniper
+			ts_nod_chameleonspy: ifv-ra1_allies_alliedsniper
+			forgotten_mutantsniper: ifv-ra1_allies_alliedsniper
+			glkell: ifv-ra1_allies_alliedsniper
+			leangkell: ifv-ra1_allies_alliedsniper
+			glsabo: ifv-ra1_allies_alliedsniper
+			usapath: ifv-ra1_allies_alliedsniper
+			leangpath: ifv-ra1_allies_alliedsniper
+			ra2_allies_chronolegionnaire: ifv-chrono
+			ra2_soviets_crazyivan: ifv-demo
 			ra2terror: ifv-demo
-			scinfestedterran: ifv-demo
+			zerg_infestedterranbomber: ifv-demo
 			glterror: ifv-demo
 	###################
 	#	Armament
@@ -7607,7 +7604,7 @@ awifv:
 	Armament@primary:
 		Weapon: AWRA2HoverMissile
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
+		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
 	Armament@mg:
 		Weapon: AWMachinegunIFV
 		LocalOffset: 171,0,255
@@ -7619,11 +7616,11 @@ awifv:
 		RequiresCondition: ifv-repair
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
-	Armament@sniper:
+	Armament@ra1_allies_alliedsniper:
 		Weapon: GENAWP
 		LocalOffset: 171,0,255
 		MuzzleSequence: muzzlemg
-		RequiresCondition: ifv-sniper
+		RequiresCondition: ifv-ra1_allies_alliedsniper
 	Armament@hero:
 		Weapon: BorisAKM
 		LocalOffset: 171,0,255
@@ -7682,12 +7679,12 @@ awifv:
 		IdleSequences: stand
 		StandSequences: stand
 		MoveSequence: run
-		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
+		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
 	WithInfantryBody@mg:
 		IdleSequences: stand2
 		StandSequences: stand2
 		MoveSequence: run2
-		RequiresCondition: ifv-mg || ifv-sniper || ifv-flak || ifv-hero || ifv-cannon || ifv-chem || ifv-fire
+		RequiresCondition: ifv-mg || ifv-ra1_allies_alliedsniper || ifv-flak || ifv-hero || ifv-cannon || ifv-chem || ifv-fire
 	WithInfantryBody@hitech:
 		IdleSequences: stand3
 		StandSequences: stand3
@@ -8192,7 +8189,7 @@ awaa:
 		RequiresCondition: rank-veteran >= 4
 	FreeActor@Srank:
 		RequiresCondition: rank-veteran >= 4
-		Actor: awhaa	
+		Actor: awhaa
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -8209,7 +8206,7 @@ awhaa:
 		AddToArmyValue: True
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Submerged anti-ship unit\narmed with torpedoes.\nCan detect other submarines.\n  Strong vs Naval units\n  Weak vs Ground units, Aircraft
 	RenderSprites:
 		Image: awhaa
@@ -8358,7 +8355,7 @@ awapc:
 			awforsythe: awapcids
 			awgage: awapcids
 	Voiced:
-		VoiceSet: AWTrackedVoiced	
+		VoiceSet: AWTrackedVoiced
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -8366,7 +8363,6 @@ awapc:
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
-
 
 awarty:
 	Inherits: ^Tank
@@ -8603,7 +8599,7 @@ awaaarty2:
 	RevealsShroud:
 		Range: 5c0
 	Armament:
-		Weapon: AWArtilleryAA
+		Weapon: AWArtillery_AA
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
@@ -8646,7 +8642,7 @@ awaaarty2.famicon:
 		Prerequisites: ~selectredstar
 	RenderSprites:
 		Image: awaaarty2
-		
+
 awrocketl:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -8762,7 +8758,7 @@ awrocketl:
 			awforsythe: awrocketlids
 			awgage: awrocketlids
 	Voiced:
-		VoiceSet: AWWheeledVoiced	
+		VoiceSet: AWWheeledVoiced
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -8863,12 +8859,11 @@ awaaarty:
 			awkindle: awaaartybh
 			awkoal: awaaartybh
 	Voiced:
-		VoiceSet: AWWheeledVoiced	
+		VoiceSet: AWWheeledVoiced
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 6
-
 
 awntnk:
 	Inherits: ^Tank
@@ -9180,7 +9175,7 @@ awftnk:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Voiced:
-		VoiceSet: AWTrackedVoiced	
+		VoiceSet: AWTrackedVoiced
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -9289,7 +9284,6 @@ awradarvan:
 		Except: Unload, Stop
 		RequiresCondition: damagedslow
 	Passenger:
-		Weight: 6
 	Health:
 		HP: 24000
 	Repairable:
@@ -9514,7 +9508,7 @@ awrepairtnk:
 	RenderSprites:
 		Image: awrepairtnk
 	Voiced:
-		VoiceSet: AWTrackedVoiced	
+		VoiceSet: AWTrackedVoiced
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -9772,9 +9766,9 @@ awbombercozero:
 		Image: awbomber
 	Armament:
 		Weapon: GLToxinBombPurple
-########################################################     
+########################################################
 #	AW Infantry
-########################################################               
+########################################################
 awe1:
 	Inherits: ^Soldier
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -10078,7 +10072,7 @@ awmob:
 		BuildPaletteOrder: 30
 		Queue: Vehicle, RAVehicle
 		Description: Large armed crowd, armed with pistols and Molotovs.\n  Strong vs Buildings, Infantry\n  Weak vs Vehicles, Aircraft
-		Prerequisites: ~selectkindle, ~techlevel.medium
+		Prerequisites: ~selectkindle
 	Tooltip:
 		Name: Urban Blight
 	UpdatesPlayerStatistics:
@@ -10121,13 +10115,13 @@ awmob:
 	RenderSprites:
 		Image: awe1terr
 
-^default.angry_mob.aw:
-	Inherits: ^default.angry_mob
+^DefaultAngryMobAW:
+	Inherits: ^DefaultAngryMob
 	RenderSprites:
 		Image: awe1terr
 
 awangrymob1:
-	Inherits: ^default.angry_mob.aw
+	Inherits: ^DefaultAngryMobAW
 	AttackFrontal:
 		FacingTolerance: 0
 	GrantConditionOnPrerequisite@uparmthemob:
@@ -10141,7 +10135,7 @@ awangrymob1:
 		PauseOnCondition: !ak47upgrade
 
 awangrymob2:
-	Inherits: ^default.angry_mob.aw
+	Inherits: ^DefaultAngryMobAW
 	AttackFrontal:
 		FacingTolerance: 0
 	GrantConditionOnPrerequisite@uparmthemob:
@@ -10155,7 +10149,7 @@ awangrymob2:
 		PauseOnCondition: !ak47upgrade
 
 awangrymob3:
-	Inherits: ^default.angry_mob.aw
+	Inherits: ^DefaultAngryMobAW
 	Armament:
 		Weapon: AWBuggyGrenade
 		LocalOffset: 0,0,555
@@ -10167,7 +10161,7 @@ awangrymob3:
 
 ########################################################
 #	AW Aircraft
-########################################################            
+########################################################
 awduster:
 	Inherits: ^RAPlane
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -10273,7 +10267,7 @@ awduster:
 		CargoType: AWCarrier
 	ProductionCostMultiplier@selectbeast:
 		Multiplier: 80
-		Prerequisites: selectbeast	
+		Prerequisites: selectbeast
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -10394,9 +10388,9 @@ awhydro:
 			awtasha: awhydroids
 			awforsythe: awhydroids
 			awgage: awhydroids
-			
+
 	Passenger:
-		CargoType: AWCarrier	
+		CargoType: AWCarrier
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -10447,7 +10441,7 @@ awfighter:
 		Range: 7c0
 		Type: GroundPosition
 	Armament:
-		Weapon: AWFighterMissileAA
+		Weapon: AWFighterMissile_AA
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
@@ -10545,7 +10539,7 @@ awfighter:
 			awforsythe: awfighterids
 			awgage: awfighterids
 	Passenger:
-		CargoType: AWCarrier	
+		CargoType: AWCarrier
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -10584,7 +10578,7 @@ awfighter2:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 	Valued:
 		Cost: 4000
 	Tooltip:
@@ -10636,7 +10630,7 @@ awattacker:
 		Range: 7c0
 		Type: GroundPosition
 	Armament:
-		Weapon: AWFighterMissileAA
+		Weapon: AWFighterMissile_AA
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
@@ -10687,7 +10681,7 @@ awattacker:
 			orangestar: awattacker
 			bluemoon: awattackerbm
 	Passenger:
-		CargoType: AWCarrier	
+		CargoType: AWCarrier
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -10850,14 +10844,13 @@ awbomber:
 			awgage: awbomberids
 	ProducibleWithLevel:
 		Prerequisites: selecteagle
-		InitialLevels: 1	
+		InitialLevels: 1
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 4
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
-
 
 awbomber.husk:
 	Inherits: ^PlaneHusk
@@ -10961,14 +10954,13 @@ awblackbomb:
 	Explodes:
 		Weapon: AWBlackBombExplode
 		EmptyWeapon: AWBlackBombExplode
-		RequiresCondition: !frozen	
+		RequiresCondition: !frozen
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 4
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
-
 
 awstealth:
 	Inherits: ^RAPlane
@@ -10993,7 +10985,7 @@ awstealth:
 		Range: 7c0
 		Type: GroundPosition
 	Armament:
-		Weapon: AWFighterMissileAA
+		Weapon: AWFighterMissile_AA
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
@@ -11046,13 +11038,12 @@ awstealth:
 		PauseOnCondition: cloak-force-disabled || base-reveal
 		IsPlayerPalette: True
 	Passenger:
-		CargoType: AWCarrier	
+		CargoType: AWCarrier
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
-
 
 awstealth.husk:
 	Inherits: ^PlaneHusk
@@ -11218,7 +11209,7 @@ awbcopter2:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Helicopter gunship.\n  Strong vs Infantry, Light vehicles\n  Weak vs Aircraft
 awkirov:
 	Inherits: ^Helicopter
@@ -11292,7 +11283,6 @@ awkirov:
 			awwaylon: awkirovnra
 			awdavis: awkirovnra
 
-
 awtcopter:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -11331,7 +11321,7 @@ awtcopter:
 	SelectionDecorations:
 	Selectable:
 		Class: tran
-		DecorationBounds: 74624, 74624
+		DecorationBounds: 1749, 1749
 	RenderSprites:
 		Image: awtcopter
 		FactionImages:
@@ -11396,7 +11386,7 @@ awtcopter:
 		RequiresSelection: True
 ########################################################
 #	AW Naval
-########################################################          
+########################################################
 awcruiser:
 	Inherits: ^BoatUnit
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -11437,10 +11427,8 @@ awcruiser:
 		DetectionTypes: Underwater
 	RenderDetectionCircle:
 	Selectable:
-		DecorationBounds: 69162, 69162
+		DecorationBounds: 1621, 1621
 	Inherits@EXT: ^ExternalConditions
-	DeliversCash:
-		Payload: 500
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
@@ -11495,8 +11483,6 @@ awss:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Inherits@EXT: ^ExternalConditions
-	DeliversCash:
-		Payload: 475
 	DetectCloaked:
 		DetectionTypes: Underwater
 		Range: 2c0
@@ -11575,7 +11561,7 @@ awss2:
 		AddToArmyValue: True
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Queue: Naval, RANaval
 		Description: Submerged anti-ship unit\narmed with torpedoes.\nCan detect other submarines.\n  Strong vs Naval units\n  Weak vs Ground units, Aircraft
 	RenderSprites:
@@ -11613,7 +11599,7 @@ awss3:
 		Weapon: AWRockets
 		LocalOffset: 208,120,48
 	Armament@SECONDARY:
-		Weapon: AWFighterMissileAA
+		Weapon: AWFighterMissile_AA
 		LocalOffset: 208,-120,48
 	Targetable:
 		TargetTypes: Ground, Water, Ship, Submarine, Repair
@@ -11623,8 +11609,6 @@ awss3:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Inherits@EXT: ^ExternalConditions
-	DeliversCash:
-		Payload: 475
 	DetectCloaked:
 		DetectionTypes: Underwater
 		Range: 2c0
@@ -11664,10 +11648,8 @@ awbattleship:
 	AttackFrontal:
 		FacingTolerance: 0
 	Selectable:
-		DecorationBounds: 69162, 69162
+		DecorationBounds: 1621, 1621
 	Inherits@EXT: ^ExternalConditions
-	DeliversCash:
-		Payload: 500
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
@@ -11839,8 +11821,6 @@ awcarrier:
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
-	DeliversCash:
-		Payload: 500
 	Voiced:
 		VoiceSet: AlliesNavalVoice
 	RenderSprites:
@@ -11989,14 +11969,14 @@ awpiperunner:
 
 ########################################################
 #	AW Upgrades
-########################################################            
+########################################################
 awupduster:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Duster Bombs
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: The Duster will drop mini bombs.
 		Prerequisites: ~!awupduster, awlab
 	Valued:
@@ -12006,12 +11986,12 @@ awupduster:
 	ProvidesPrerequisite:
 		Prerequisite: awupduster
 awupcapture:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Capture Building
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allow anti-personnel infantry to capture base buildings.\nAlt-click to capture enemy base buildings.
 		Prerequisites: ~!upgecapture
 	Valued:
@@ -12022,12 +12002,12 @@ awupcapture:
 		Prerequisite: upgecapture
 
 awupsystem1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Software Update 1
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock new units.
 		Prerequisites: ~!awupsystem1
 	Valued:
@@ -12037,12 +12017,12 @@ awupsystem1:
 	ProvidesPrerequisite:
 		Prerequisite: awupsystem1
 awupsystem2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Software Update 2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock new units.
 		Prerequisites: ~!awupsystem2, awupsystem1
 	Valued:
@@ -12052,12 +12032,12 @@ awupsystem2:
 	ProvidesPrerequisite:
 		Prerequisite: awupsystem2
 awuptiberium:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tiberium Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: The Black Hole Investigates Tiberium weaponry.
 		Prerequisites: ~!awuptiberium, awlab, ~disabled
 	Valued:
@@ -12068,12 +12048,12 @@ awuptiberium:
 		Prerequisite: awuptiberium
 
 awupwall:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Durable Wall Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Improves walls durability
 		Prerequisites: ~!awupwall
 	Valued:
@@ -12095,7 +12075,7 @@ awtcopter.e3:
 		InitialUnits: awe3, awe3, awe3, awe3, awe3
 		LoadedCondition: loaded
 	Armament:
-		Weapon: deploytargeting.5c0
+		Weapon: deploytargeting_5c0
 		RequiresCondition: botmicro && loaded
 	AutoDeployer:
 		DeployChance: 100
@@ -12328,7 +12308,7 @@ awifv.e3:
 #	AW Support Lab Powers
 ########################################################
 awhydrosupport:
-	Inherits: BADR.Bomber
+	Inherits: ra1_badger_bomber
 	Armament:
 		Weapon: AWDusterMG
 		LocalOffset: 1024,0,-85
@@ -12352,7 +12332,7 @@ awhydrosupport:
 		Position: BottomLeft
 		RequiresSelection: True
 awdustersupport:
-	Inherits: BADR.Bomber
+	Inherits: ra1_badger_bomber
 	Armament:
 		Weapon: AWDusterMG
 		LocalOffset: 1024,0,-85
@@ -12376,7 +12356,7 @@ awdustersupport:
 		Position: BottomLeft
 		RequiresSelection: True
 awtheowlsupport:
-	Inherits: BADR
+	Inherits: ra1_badger
 	AttackBomber:
 		FacingTolerance: 32
 	Armament:

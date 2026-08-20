@@ -1,0 +1,331 @@
+ixian_lightinfantry:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@NeedleGuns: ^D2K_NeedleGuns
+	# Re-inherit last: the Scout/Anti-Tank templates pull in ^RA2YuriStealthSuits,
+	# which redefines the shield traits keyed to its own upgrade and overwrites the
+	# Personal Shield condition. Re-applying ^D2KPersonalShield here restores it.
+	Inherits@personalshield: ^D2KPersonalShield
+	Tooltip:
+		Name: Ixian Light Infantry
+	Valued:
+		Cost: 150
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Infantry, RAInfantry
+		Description: actor_ixian_lightinfantry.description
+		IconPalette: d2kunit
+		Prerequisites: ~ixian_barracks
+	Health:
+		HP: 32000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ixian_lightinfantry:
+		Modifier: 113
+	Mobile:
+		Speed: 56
+	Armament@PRIMARY: ##########
+		Weapon: light_inf_lmg
+		LocalOffset: 128,0,256
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
+	Armament@Upgrade: ##########
+		Weapon: light_inf_lmg_upgrade
+		LocalOffset: 128,0,256
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: light_inf_lmg
+		MuzzleSequence: garrison-muzzle
+		MuzzlePalette: d2keffect
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: light_inf_lmg_upgrade
+		MuzzleSequence: garrison-muzzle
+		MuzzlePalette: d2keffect
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
+	WithInfantryBody:
+		IdleSequences: idle1,idle2,idle3,idle4
+		DefaultAttackSequence: shoot
+	Parachutable:
+	RenderSprites:
+		Image: light_inf
+	ActorStatValues:
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
+
+ixian_rockettrooper:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
+	# Re-inherit last: ^AntiTankAntiAirInfantryTemplate pulls in ^RA2YuriStealthSuits,
+	# which overwrites the shield traits with its own upgrade condition. Re-applying
+	# ^D2KPersonalShield here restores the Personal Shield condition.
+	Inherits@personalshield: ^D2KPersonalShield
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 20
+		Prerequisites: ~ixian_barracks, ~!ixian_upgrade_twinbazooka
+		Description: actor_ixian_rockettrooper.description
+		IconPalette: d2kunit
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Ixian Rocket Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 12000
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Mobile:
+		Speed: 48
+	Armament:
+		Weapon: D2K_Rocket_Trooper
+		LocalOffset: 128,0,256
+	Armament@garrisoned:
+		Name: garrisoned
+		Weapon: D2K_Rocket_Trooper
+	TakeCover:
+		ProneOffset: 320,0,-128
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	RenderSprites:
+		Image: trooper
+	ActorStatValues:
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_heavymissiles, ixian_upgrade_advancedixiantechnology
+
+ixian_twinrockettrooper:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
+	# Re-inherit last: ^AntiTankAntiAirInfantryTemplate pulls in ^RA2YuriStealthSuits,
+	# which overwrites the shield traits with its own upgrade condition. Re-applying
+	# ^D2KPersonalShield here restores the Personal Shield condition.
+	Inherits@personalshield: ^D2KPersonalShield
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 20
+		Prerequisites: ~ixian_barracks, ~ixian_upgrade_twinbazooka
+		Description: template_antitank_antiair_infantry.description
+		IconPalette: d2kunit
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Twin Rocket Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 24000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Mobile:
+		Speed: 48
+	Armament:
+		Weapon: D2K_Rocket_Trooper1
+		LocalOffset: 128,0,256
+	Armament@SECONDARY:
+		Weapon: D2K_Rocket_Trooper2
+		LocalOffset: 128,0,256
+	Armament@garrisoned:
+		Name: garrisoned
+		Weapon: D2K_Rocket_Trooper1
+	Armament@SECONDARYgarrisoned:
+		Name: garrisoned
+		Weapon: D2K_Rocket_Trooper2
+	TakeCover:
+		ProneOffset: 320,0,-128
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	ActorStatValues:
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_heavymissiles, ixian_upgrade_advancedixiantechnology
+
+ixian_shockinfantry:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Shock Infantry
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Infantry, RAInfantry
+		Description: actor_shock_infantry.description
+		IconPalette: d2kunit
+		Prerequisites: ~ixian_barracks, ixian_ixresearchcenter, ~!ixian_promotion_storminfantry
+	Health:
+		HP: 36000
+	ChangesHealth@SelfHealing:
+		Step: 36
+	Mobile:
+		Speed: 45
+	Armament@PRIMARY: ##########
+		Weapon: D2K_ShockGunInf
+		LocalOffset: 135,0,200
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: D2K_ShockGunInf
+		MuzzleSequence: garrison-muzzle
+		MuzzlePalette: d2keffect
+	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
+		Modifier: 200
+		RequiresCondition: ixian_upgrade_advancedixiantechnology
+	WithInfantryBody:
+		-IdleSequences: idle1,idle2
+		DefaultAttackSequence: shoot
+	Parachutable:
+	Voiced:
+		VoiceSet: D2KGenericVoice
+	RenderSprites:
+		Image: shockgunner
+		PlayerPalette: player
+	ActorStatValues:
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
+
+ixian_storminfantry:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Storm Infantry
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Infantry, RAInfantry
+		Description: actor_shock_infantry.description
+		IconPalette: d2kunit
+		Prerequisites: ~ixian_barracks, ixian_ixresearchcenter, ~ixian_promotion_storminfantry
+	Mobile:
+		Speed: 44
+	Health:
+		HP: 44000
+	ChangesHealth@SelfHealing:
+		Step: 44
+	Armament@PRIMARY: ##########
+		Weapon: D2K_StormGunInf
+		LocalOffset: 135,0,200
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: D2K_StormGunInf
+		MuzzleSequence: garrison-muzzle
+		MuzzlePalette: d2keffect
+	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
+		Modifier: 200
+		RequiresCondition: ixian_upgrade_advancedixiantechnology
+	WithInfantryBody:
+		-IdleSequences: idle1,idle2
+		DefaultAttackSequence: shoot
+	Parachutable:
+	Voiced:
+		VoiceSet: D2KGenericVoice
+	RenderSprites:
+		PlayerPalette: player
+	ActorStatValues:
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
+
+heavy_inf.ixian:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@NeedleGuns: ^D2K_NeedleGuns
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Rashidan
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+		IconPalette: d2kunit
+		Prerequisites: ~ixian_barracks, ~ixian_promotion_rashidan
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 32000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Armament@PRIMARY: ##########
+		Weapon: RashidanGun
+		LocalOffset: 128,0,256
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
+		MuzzlePalette: d2keffect
+	Armament@Upgrade: ##########
+		Weapon: RashidanGun_upgrade
+		LocalOffset: 128,0,256
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
+		MuzzlePalette: d2keffect
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: RashidanGun
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
+		MuzzlePalette: d2keffect
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: RashidanGun_upgrade
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
+		MuzzlePalette: d2keffect
+	WithInfantryBody:
+		IdleSequences: idle1,idle2,idle3,idle4,idle5,idle6,idle7,idle8
+		DefaultAttackSequence: shoot
+	TakeCover:
+		ProneOffset: 300,0,-200
+	Parachutable:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	ActorStatValues:
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology

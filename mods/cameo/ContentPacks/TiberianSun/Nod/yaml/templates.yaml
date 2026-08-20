@@ -1,0 +1,63 @@
+^SubterraneanVoxelVehicle:
+	RevealsShroud:
+		RequiresCondition: !submerged
+	WithVoxelBody:
+		RequiresCondition: !submerged
+	Targetable:
+		RequiresCondition: !submerged && !chronobeamed
+	Targetable@UNDERGROUND:
+		TargetTypes: Underground
+		RequiresCondition: submerged
+	GrantConditionOnSubterraneanLayer:
+		Condition: submerged
+		SubterraneanTransitionPalette: tseffect
+		SubterraneanTransitionImage: tsdig
+		SubterraneanTransitionSequence: idle
+		SubterraneanTransitionSound: subdril1.aud
+	WithDecoration@UNDERGROUND:
+		RequiresCondition: submerged
+		Position: Center
+		Image: gpsdot
+		Sequence: Vehicle
+		RequiresSelection: false
+		Palette: player
+		IsPlayerPalette: true
+	AnnounceOnSeen@subterranean:
+		PingRadar: true
+		Notification: SubterraneanUnitDetected
+	GrantCondition@untargetable:
+		Condition: untargetable
+		RequiresCondition: chronobeamed || invulnerability || submerged
+
+#######################################
+# TS GDI Vehicles
+#######################################
+
+^InfiltrationKit:
+	GrantConditionOnPrerequisite@ts_nod_upgrade_infiltrationkit:
+		Condition: ts_nod_upgrade_infiltrationkit
+		Prerequisites: ts_nod_upgrade_infiltrationkit
+	SpeedMultiplier@ts_nod_upgrade_infiltrationkit:
+		RequiresCondition: ts_nod_upgrade_infiltrationkit
+		Modifier: 125
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_infiltrationkit
+	Cloak@ts_nod_upgrade_infiltrationkit:
+		DetectionTypes: GroundCloak
+		InitialDelay: 125
+		CloakDelay: 75
+		CloakSound: cloak5.aud
+		UncloakSound: cloak5.aud
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
+		IsPlayerPalette: true
+		RequiresCondition: ts_nod_upgrade_infiltrationkit
+
+^StealthFieldsImprovements:
+	GrantConditionOnPrerequisite@ts_nod_upgrade_stealthfieldsimprovements:
+		Condition: ts_nod_upgrade_stealthfieldsimprovements
+		Prerequisites: ts_nod_upgrade_stealthfieldsimprovements
+	DamageMultiplier@ts_nod_upgrade_stealthfieldsimprovements:
+		RequiresCondition: ts_nod_upgrade_stealthfieldsimprovements
+		Modifier: 80
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_stealthfieldsimprovements

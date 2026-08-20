@@ -1,0 +1,175 @@
+####################################################################################################
+#		Upgrades Asian Alliance
+####################################################################################################
+
+cgcnst_infiltrated.asian:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Stolen Asian Buildings Plans
+	Buildable:
+		Description:
+	RenderSprites:
+		Image: asianalliance_asianconstructionyard
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: asianalliance_asianconstructionyard
+asianalliance_doctrine_modernizedinfantryequipment:
+	Inherits: ^DoctrineTemplate
+	Tooltip:
+		Name: Modernized Infantry Equipment
+	Buildable:
+		Description: asian_upgrade_infantryspec.description
+		Prerequisites: ~asianalliance_asianradar, !asianalliance_doctrine_modernizedinfantryequipment
+	RenderSprites:
+		Image: asianalliance_doctrine_modernizedinfantryequipment
+
+asianalliance_doctrine_heavypulverizerweapons:
+	Inherits: ^DoctrineTemplate
+	Tooltip:
+		Name: Heavy Pulverizer Weapons
+	Buildable:
+		Description: asian_upgrade_pulverizer.description
+		Prerequisites: ~asianalliance_asianradar, !asianalliance_doctrine_heavypulverizerweapons
+	RenderSprites:
+		Image: asianalliance_doctrine_heavypulverizerweapons
+
+asianalliance_doctrine_asianphalanx:
+	Inherits: ^DoctrineTemplate
+	Tooltip:
+		Name: Asian Phalanx
+	Buildable:
+		Description: asian_upgrade_phalanx.description
+		Prerequisites: ~asianalliance_asianradar, !asianalliance_doctrine_asianphalanx
+	RenderSprites:
+		Image: asianalliance_doctrine_asianphalanx
+	ProvidesPrerequisite:
+
+asianalliance_upgrade_massparadrop:
+	Inherits: ^UnitUpgradeTemplate
+	Tooltip:
+		Name: Unlock Mass Paradrop
+	Buildable:
+		# Sequence: icon
+		Icon: paratroopers
+		Description: Allows the use of the Mass Paradrop support power from the Asian Alliance Airfield.
+		Prerequisites: ~asianalliance_asianradar, !asianalliance_upgrade_massparadrop
+	RenderSprites:
+		Image: icon
+	ProvidesPrerequisite:
+
+asianalliance_upgrade_clusterbombs:
+	Inherits: ^UnitUpgradeTemplate
+	Tooltip:
+		Name: Unlock Cluster Bombs
+	Buildable:
+		# Sequence: icon
+		Icon: icon
+		Description: Allows the use of the Cluster Bombs support power from the Asian Alliance Airfield.
+		Prerequisites: ~asianalliance_asianradar, !asianalliance_upgrade_clusterbombs
+	RenderSprites:
+		Image: tankmine.asian
+	ProvidesPrerequisite:
+
+asianalliance_upgrade_chaosbombs:
+	Inherits: ^UnitUpgradeTemplate
+	Tooltip:
+		Name: Unlock Chaos Bombs
+	Buildable:
+		# Sequence: icon
+		Icon: icon2
+		Description: Allows the use of the Chaos Bombs support power from the Asian Alliance Airfield.
+		Prerequisites: ~asianalliance_asianradar, asianalliance_militaryacademy, asianalliance_upgrade_clusterbombs, !asianalliance_upgrade_chaosbombs
+	RenderSprites:
+		Image: tankmine.asian
+	ProvidesPrerequisite:
+
+up_tsunami.asian:
+	Inherits: ^UnitUpgradeTemplate
+	Tooltip:
+		Name: Tsunami Carrier Upgrade
+	Buildable:
+		Description: Upgrades Kamikaze Carrier to Tsunami Carrier.
+		Prerequisites: ~asianalliance_militaryacademy, ~cgyard.asian, !up_tsunami.asian
+	RenderSprites:
+		Image: tsun.asian
+	ProvidesPrerequisite:
+
+asianalliance_upgrade_dragonfire:
+	Inherits: ^TechUpgradeTemplate
+	Tooltip:
+		Name: Dragon Fire
+	Buildable:
+		Description: asian_upgrade_dragonfire.description
+		Prerequisites: ~asianalliance_asianbattlelab, !asianalliance_upgrade_dragonfire
+	RenderSprites:
+		Image: asianalliance_upgrade_dragonfire
+	ProvidesPrerequisite:
+
+asianalliance_upgrade_celestialpower:
+	Inherits: ^TechUpgradeTemplate
+	Tooltip:
+		Name: Celestial Power
+	Buildable:
+		Description: asian_upgrade_celestialpower.description
+		Prerequisites: ~asianalliance_asianbattlelab, !asianalliance_upgrade_celestialpower
+	RenderSprites:
+		Image: asianalliance_upgrade_celestialpower
+	ProvidesPrerequisite:
+
+asianalliance_upgrade_banzaimode:
+	Inherits: ^TechUpgradeTemplate
+	Tooltip:
+		Name: Banzai Mode
+	Buildable:
+		Description: asian_upgrade_banzai.description
+		Prerequisites: ~asianalliance_asianbattlelab, asianalliance_militaryacademy, !asianalliance_upgrade_banzaimode
+	RenderSprites:
+		Image: asianalliance_upgrade_banzaimode
+	ProvidesPrerequisite:
+
+asianalliance_upgrade_wayofthedragon:
+	Inherits: ^TeamUpgradeTemplate
+	Tooltip:
+		Name: Way of the Dragon
+	Buildable:
+		Description: asian_team_upgrade_dragonway.description
+		Prerequisites: ~asianalliance_asianbattlelab, asianalliance_militaryacademy, !asianalliance_upgrade_wayofthedragon
+	RenderSprites:
+		Image: asianalliance_upgrade_wayofthedragon
+	ProvidesTeamProxyActor:
+		Actor: up_dragonway_proxy_actor.asian
+
+up_dragonway_proxy_actor.asian:
+	Inherits: ^TeamUpgradeProxyActor
+	Tooltip:
+		Name: Way of the Dragon
+	Buildable:
+		Description: asian_team_upgrade_dragonway.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: asianalliance_upgrade_wayofthedragon
+	ProvidesPrerequisite:
+		Prerequisite: asianalliance_upgrade_wayofthedragon
+
+asianalliance_upgrade_asiandiplomacy:
+	Inherits: ^TeamUpgradeTemplate
+	Tooltip:
+		Name: Asian Diplomacy
+	Buildable:
+		Description: asian_team_upgrade_diplomacy.description
+		Prerequisites: ~asianalliance_asianbattlelab, asianalliance_militaryacademy, !asianalliance_upgrade_asiandiplomacy
+	RenderSprites:
+		Image: asianalliance_upgrade_asiandiplomacy
+	ProvidesTeamProxyActor:
+		Actor: up_team_diplomacy_proxy_actor.asian
+
+up_team_diplomacy_proxy_actor.asian:
+	Inherits: ^TeamUpgradeProxyActor
+	Tooltip:
+		Name: Asian Diplomacy
+	Buildable:
+		Description: asian_team_upgrade_diplomacy.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: asianalliance_upgrade_asiandiplomacy
+	ProvidesPrerequisite:
+		Prerequisite: asianalliance_upgrade_asiandiplomacy

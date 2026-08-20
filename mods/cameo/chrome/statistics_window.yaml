@@ -1,0 +1,446 @@
+Container@STATISTICS_PANEL:
+	Width: WINDOW_WIDTH
+	Height: WINDOW_HEIGHT
+	Logic: StatisticsWindowLogic
+	Children:
+		ClickMask@MASK:
+			Width: WINDOW_WIDTH
+			Height: WINDOW_HEIGHT
+			Color: 00000099
+		Container@WINDOW:
+			X: (WINDOW_WIDTH - WIDTH) / 2
+			Y: (WINDOW_HEIGHT - HEIGHT) / 2
+			Width: 900
+			Height: 680
+			Children:
+				ColorBlock@WINDOW_BG:
+					Width: PARENT_WIDTH
+					Height: PARENT_HEIGHT
+					Color: 101520F2
+				Label@TITLE:
+					Y: 14
+					Width: PARENT_WIDTH
+					Height: 26
+					Align: Center
+					Font: Bold
+					Text: statistics.title
+				Button@CLOSE_BUTTON:
+					X: PARENT_WIDTH - 38
+					Y: 12
+					Width: 28
+					Height: 28
+					Key: escape
+					Background: button
+					Children:
+						Label@TEXT:
+							Width: PARENT_WIDTH
+							Height: PARENT_HEIGHT
+							Align: Center
+							VAlign: Middle
+							Font: Bold
+							Text: X
+
+				# Global career totals
+				Label@GAMES_PLAYED:
+					X: 24
+					Y: 50
+					Width: 270
+					Height: 22
+					Text: statistics.games-played
+				Label@GAMES_PLAYED_VALUE:
+					X: 302
+					Y: 50
+					Width: 120
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@GAMES_WON:
+					X: 24
+					Y: 74
+					Width: 270
+					Height: 22
+					Text: statistics.games-won
+				Label@GAMES_WON_VALUE:
+					X: 302
+					Y: 74
+					Width: 120
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@GAMES_LOST:
+					X: 24
+					Y: 98
+					Width: 270
+					Height: 22
+					Text: statistics.games-lost
+				Label@GAMES_LOST_VALUE:
+					X: 302
+					Y: 98
+					Width: 120
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@FACTIONS_PLAYED:
+					X: 24
+					Y: 122
+					Width: 270
+					Height: 22
+					Text: statistics.factions-played
+				Label@FACTIONS_PLAYED_VALUE:
+					X: 302
+					Y: 122
+					Width: 120
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@MEDIAN_GAME_LENGTH:
+					X: 24
+					Y: 146
+					Width: 270
+					Height: 22
+					Text: statistics.median-game-length-all
+				Label@MEDIAN_GAME_LENGTH_VALUE:
+					X: 302
+					Y: 146
+					Width: 120
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@AVERAGE_GAME_LENGTH:
+					X: 24
+					Y: 170
+					Width: 270
+					Height: 22
+					Text: statistics.average-game-length-all
+				Label@AVERAGE_GAME_LENGTH_VALUE:
+					X: 302
+					Y: 170
+					Width: 120
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@RESOURCES_COLLECTED:
+					X: 24
+					Y: 194
+					Width: 270
+					Height: 22
+					Text: statistics.resources-collected
+				Label@RESOURCES_COLLECTED_VALUE:
+					X: 302
+					Y: 194
+					Width: 120
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@RESOURCES_SPENT:
+					X: 24
+					Y: 218
+					Width: 270
+					Height: 22
+					Text: statistics.resources-spent
+				Label@RESOURCES_SPENT_VALUE:
+					X: 302
+					Y: 218
+					Width: 120
+					Height: 22
+					Align: Right
+					Font: Bold
+
+				Label@UNITS_KILLED:
+					X: 452
+					Y: 50
+					Width: 300
+					Height: 22
+					Text: statistics.units-killed
+				Label@UNITS_KILLED_VALUE:
+					X: 760
+					Y: 50
+					Width: 116
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@UNITS_LOST:
+					X: 452
+					Y: 74
+					Width: 300
+					Height: 22
+					Text: statistics.units-lost
+				Label@UNITS_LOST_VALUE:
+					X: 760
+					Y: 74
+					Width: 116
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@BUILDINGS_DESTROYED:
+					X: 452
+					Y: 98
+					Width: 300
+					Height: 22
+					Text: statistics.buildings-destroyed
+				Label@BUILDINGS_DESTROYED_VALUE:
+					X: 760
+					Y: 98
+					Width: 116
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@BUILDINGS_LOST:
+					X: 452
+					Y: 122
+					Width: 300
+					Height: 22
+					Text: statistics.buildings-lost
+				Label@BUILDINGS_LOST_VALUE:
+					X: 760
+					Y: 122
+					Width: 116
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@ENEMY_ASSETS_DESTROYED:
+					X: 452
+					Y: 146
+					Width: 300
+					Height: 22
+					Text: statistics.enemy-assets-destroyed
+				Label@ENEMY_ASSETS_DESTROYED_VALUE:
+					X: 760
+					Y: 146
+					Width: 116
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@ASSETS_OWNED:
+					X: 452
+					Y: 170
+					Width: 300
+					Height: 22
+					Text: statistics.assets-owned
+				Label@ASSETS_OWNED_VALUE:
+					X: 760
+					Y: 170
+					Width: 116
+					Height: 22
+					Align: Right
+					Font: Bold
+
+				# Most-played maps
+				Label@TOP_MAPS_TITLE:
+					X: 24
+					Y: 258
+					Width: 280
+					Height: 22
+					Font: Bold
+					Text: statistics.top-maps
+				Label@MAP_GAMES_HEADER:
+					X: 312
+					Y: 258
+					Width: 80
+					Height: 22
+					Align: Center
+					Font: Bold
+					Text: statistics.col-games
+				ScrollPanel@MAP_LIST:
+					X: 16
+					Y: 282
+					Width: 400
+					Height: 374
+					Children:
+						ScrollItem@MAP_TEMPLATE:
+							Width: PARENT_WIDTH - 27
+							Height: 28
+							X: 2
+							Visible: false
+							EnableChildMouseOver: True
+							Children:
+								Label@MAP:
+									X: 8
+									Width: 278
+									Height: 28
+									VAlign: Middle
+								Label@MAP_GAMES:
+									X: 292
+									Width: 60
+									Height: 28
+									Align: Center
+									VAlign: Middle
+
+				# Select a faction to view its complete counterpart statistics.
+				Label@FACTION_STATISTICS_TITLE:
+					X: 440
+					Y: 258
+					Width: 436
+					Height: 22
+					Font: Bold
+					Text: statistics.faction-statistics
+				ScrollPanel@FACTION_LIST:
+					X: 432
+					Y: 282
+					Width: 176
+					Height: 374
+					Children:
+						ScrollItem@FACTION_TEMPLATE:
+							Width: PARENT_WIDTH - 27
+							Height: 28
+							X: 2
+							Visible: false
+							EnableChildMouseOver: True
+							Children:
+								Label@FACTION:
+									X: 8
+									Width: PARENT_WIDTH - 16
+									Height: 28
+									VAlign: Middle
+				Label@FACTION_NAME:
+					X: 628
+					Y: 282
+					Width: 248
+					Height: 24
+					Align: Center
+					Font: Bold
+				Label@FACTION_GAMES_PLAYED:
+					X: 628
+					Y: 314
+					Width: 174
+					Height: 22
+					Text: statistics.games-played
+				Label@FACTION_GAMES_PLAYED_VALUE:
+					X: 806
+					Y: 314
+					Width: 70
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@FACTION_GAMES_WON:
+					X: 628
+					Y: 338
+					Width: 174
+					Height: 22
+					Text: statistics.games-won
+				Label@FACTION_GAMES_WON_VALUE:
+					X: 806
+					Y: 338
+					Width: 70
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@FACTION_GAMES_LOST:
+					X: 628
+					Y: 362
+					Width: 174
+					Height: 22
+					Text: statistics.games-lost
+				Label@FACTION_GAMES_LOST_VALUE:
+					X: 806
+					Y: 362
+					Width: 70
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@FACTION_UNITS_KILLED:
+					X: 628
+					Y: 386
+					Width: 174
+					Height: 22
+					Text: statistics.units-killed
+				Label@FACTION_UNITS_KILLED_VALUE:
+					X: 806
+					Y: 386
+					Width: 70
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@FACTION_UNITS_LOST:
+					X: 628
+					Y: 410
+					Width: 174
+					Height: 22
+					Text: statistics.units-lost
+				Label@FACTION_UNITS_LOST_VALUE:
+					X: 806
+					Y: 410
+					Width: 70
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@FACTION_BUILDINGS_DESTROYED:
+					X: 628
+					Y: 434
+					Width: 174
+					Height: 22
+					Text: statistics.buildings-destroyed
+				Label@FACTION_BUILDINGS_DESTROYED_VALUE:
+					X: 806
+					Y: 434
+					Width: 70
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@FACTION_BUILDINGS_LOST:
+					X: 628
+					Y: 458
+					Width: 174
+					Height: 22
+					Text: statistics.buildings-lost
+				Label@FACTION_BUILDINGS_LOST_VALUE:
+					X: 806
+					Y: 458
+					Width: 70
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@FACTION_MEDIAN_GAME_LENGTH:
+					X: 628
+					Y: 482
+					Width: 174
+					Height: 22
+					Text: statistics.median-game-length
+				Label@FACTION_MEDIAN_GAME_LENGTH_VALUE:
+					X: 806
+					Y: 482
+					Width: 70
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@FACTION_AVERAGE_GAME_LENGTH:
+					X: 628
+					Y: 506
+					Width: 174
+					Height: 22
+					Text: statistics.average-game-length
+				Label@FACTION_AVERAGE_GAME_LENGTH_VALUE:
+					X: 806
+					Y: 506
+					Width: 70
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@FACTION_ENEMY_ASSETS_DESTROYED:
+					X: 628
+					Y: 530
+					Width: 174
+					Height: 42
+					Text: statistics.enemy-assets-destroyed
+					WordWrap: True
+				Label@FACTION_ENEMY_ASSETS_DESTROYED_VALUE:
+					X: 806
+					Y: 542
+					Width: 70
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@FACTION_ASSETS_OWNED:
+					X: 628
+					Y: 578
+					Width: 174
+					Height: 42
+					Text: statistics.assets-owned
+					WordWrap: True
+				Label@FACTION_ASSETS_OWNED_VALUE:
+					X: 806
+					Y: 590
+					Width: 70
+					Height: 22
+					Align: Right
+					Font: Bold

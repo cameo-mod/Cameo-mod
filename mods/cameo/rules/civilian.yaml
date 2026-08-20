@@ -468,7 +468,7 @@ BRIDGE1:
 		Actor: bridgehut
 		SpawnOffset: 0,2
 	Interactable:
-		Bounds: 174762, 174762
+		Bounds: 4096, 4096
 
 BRIDGE2:
 	Inherits: ^Bridge
@@ -485,7 +485,7 @@ BRIDGE2:
 		Actor: bridgehut
 		SpawnOffset: 2,2
 	Interactable:
-		Bounds: 218453, 218453
+		Bounds: 5120, 5120
 
 BRIDGE3:
 	Inherits: ^Bridge
@@ -502,7 +502,7 @@ BRIDGE3:
 		Actor: bridgehut
 		SpawnOffset: 1,2
 	Interactable:
-		Bounds: 262144, 218453
+		Bounds: 6144, 5120
 
 BRIDGE4:
 	Inherits: ^Bridge
@@ -519,10 +519,9 @@ BRIDGE4:
 		Actor: bridgehut
 		SpawnOffset: 3,2
 	Interactable:
-		Bounds: 262144, 174762
+		Bounds: 6144, 4096
 
 BRIDGEHUT:
-	AlwaysVisible:
 	Building:
 		Footprint: __ __
 		Dimensions: 2,2
@@ -579,7 +578,7 @@ C10:
 	Inherits: ^CivInfantry
 	Inherits@armed: ^ArmedCivilian
 
-DELPHI:
+ra1_agentdelphi:
 	Inherits: ^CivInfantry
 	Inherits@armed: ^ArmedCivilian
 	-Wanders:
@@ -817,7 +816,6 @@ SBRIDGE4:
 		Dimensions: 4,2
 
 BRIDGEHUT.small:
-	AlwaysVisible:
 	Building:
 		Footprint: _
 		Dimensions: 1,1

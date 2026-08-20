@@ -1,0 +1,281 @@
+japan_japaneseconstructionyard:
+	Inherits: ^RAFACT
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Tooltip:
+		Name: Japanese Construction Yard
+	Transforms:
+		IntoActor: japan_japanesemobileconstructionvehicle
+	-ProvidesPrerequisite@rafact:
+	WithDeathAnimation:
+		DeathSequencePalette: player
+	RenderSprites:
+		Image: rafactj
+		PlayerPalette: player
+	ProvidesPrerequisite@chainlinkfence:
+		Prerequisite: chainlinkfence
+
+japan_waveforcereactor:
+	Inherits: ^BaseBuilding
+	Inherits@power: ^PowerPlant
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@shape: ^2x2Shape
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 640,-384,0, 640,512,0, -710,-512,0, -710,512,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 10
+		Prerequisites: ~japan_japaneseconstructionyard
+		Description: actor_nuke.description
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Waveforce Reactor
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 175000 #40000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c512
+	WithBuildingBib:
+	Power:
+		Amount: 225
+	ScalePowerWithHealth:
+	WithDeathAnimation:
+		DeathSequence: dead
+		UseDeathTypeSuffix: false
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+
+japan_japanesebarracks:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Buildable:
+		Prerequisites: ~japan_japaneseconstructionyard, japan_waveforcereactor
+		Description: Trains infantry units.
+	Tooltip:
+		Name: Japanese Barracks
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -42,810,0
+		ExitCell: 1,2
+	Exit@2:
+		SpawnOffset: -725,640,0
+		ExitCell: 0,2
+	ProvidesPrerequisite:
+		Prerequisite: rabarracks
+	RenderSprites:
+		Image: modjbarr
+		PlayerPalette: player
+	WithDeathAnimation:
+		DeathSequencePalette: player
+
+japan_japaneseorerefinery:
+	Inherits: ^RAPROC
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	FreeActor:
+		Actor: japan_japaneseoretruck
+		SpawnOffset: 1,2
+		Facing: 256
+	Tooltip:
+		Name: Japanese Ore Refinery
+	Buildable:
+		Prerequisites: ~japan_japaneseconstructionyard, japan_waveforcereactor
+		Description: Processes ore into credits.
+	-WithIdleOverlay@TOP:
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		PlayerPalette: player
+
+japan_japanesewarfactory:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Buildable:
+		Queue: Building, RABuilding
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseorerefinery
+		Description: Produces vehicles.
+	Tooltip:
+		Name: Japanese War Factory
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	WithProductionDoorOverlay:
+		RequiresCondition: !build-incomplete
+		Sequence: build-top
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 213,-128,0
+		ExitCell: 1,2
+	ProvidesPrerequisite:
+		Prerequisite: vehicleproduction
+	RenderSprites:
+		Image: jweap
+		PlayerPalette: player
+	WithDeathAnimation:
+		DeathSequencePalette: player
+	ProvidesPrerequisite@buildingname:
+
+japan_japaneseradararray:
+	Inherits: ^BaseBuilding
+	Inherits@radar: ^RadarBuilding
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@dome: ^Dome
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Tooltip:
+		Name: Japanese Radar Array
+	Buildable:
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseorerefinery
+		Description: Provides radar coverage of the battlefield.
+	RenderSprites:
+		Image: jdome
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+
+japan_japaneseairfield:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@spy: ^InfiltrateForSupportPowerReset
+	Inherits@hpad: ^IsAircraftFactory
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Buildable:
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseradararray
+		Description: Produces and repairs aircraft.
+	Tooltip:
+		Name: Japanese Airfield
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Exit@1:
+		ExitCell: 1,1
+		Facing: 768
+	Reservable:
+	AirstrikePower@JapanSuperBomber:
+		OrderName: JapanSuperBomber
+		Prerequisites:
+			1: ~techlevel.superweapons, japan_upgrade_divinewindprotocol
+		Icons:
+			1: airstrike
+		ChargeInterval: 7500
+		Names:
+			1: power_super_bombers.name
+		Descriptions:
+			1: power_super_bombers.description
+		SelectTargetSpeechNotification: SelectTarget
+		CameraActor: camera
+		CameraRemoveDelay: 150
+		UnitTypes:
+			1: japan_japanesesuperbomber
+		QuantizedFacings: 64
+		DisplayBeacon: true
+		BeaconPosters:
+			1: airstrike
+		SquadSizes:
+			1: 5
+		SquadOffset: 1792,1792,0
+		ArrowSequence: arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		SupportPowerPaletteOrder: 40
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+	ParatroopersPower@paratroopers:
+		OrderName: japanparatroopers
+			1: japan_upgrade_bushidodiscipline
+			2: japan_upgrade_bushidodiscipline, japan_promotion_samurai
+			3: japan_upgrade_bushidodiscipline, japan_promotion_archermaiden
+			4: ~disabled
+		Icons:
+			1: paratroopers
+			2: paratroopers
+			3: paratroopers
+		Names:
+			1: power_paratroopers.name
+			2: power_paratroopers.name
+			3: power_paratroopers.name
+		ChargeInterval: 6000
+		Descriptions:
+			1: power_paratroopers.description
+			2: power_paratroopers.description
+			3: power_paratroopers.description
+		DropItems:
+			1: japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower
+			2: japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_samurai, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_samurai, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_samurai
+			3: japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_archermaiden, japan_samurai, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_archermaiden, japan_samurai, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_archermaiden, japan_samurai
+		UnitTypes:
+			1: japan_badger
+			2: japan_badger
+			3: japan_badger
+		SquadSizes:
+			1: 1
+			2: 1
+			3: 1
+		SquadOffset: 1792,1792,0
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		Image: jraafld
+		PlayerPalette: player
+
+japan_japanesetechcenter:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	HitShape:
+		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	Buildable:
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseradararray
+		Description: Unlocks advanced technology.
+	Tooltip:
+		Name: Japanese Tech Center
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 3072, 3072, 0, -512
+	WithBuildingBib:
+	ProvidesPrerequisite@techcenter:
+		Prerequisite: techcenter
+
+japan_japaneseservicedepot:
+	Inherits: ^RAFIX
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Tooltip:
+		Name: Japanese Service Depot
+	Buildable:
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japanesewarfactory
+		Description: Repairs nearby vehicles.
+	RenderSprites:
+		Image: rafixj

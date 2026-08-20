@@ -1,0 +1,594 @@
+td_nod_minigunner:
+	Inherits: ^E1
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	# Formula v2 scout conversion (2026-07-19): unique classic-rifle
+	# character at the original cost 100; O/P/Q priced via the scout
+	# anchor; class knobs neutralized (2x-health bake); burst flavor
+	# trimmed to formula DPS by the unit-named multiplier.
+	Mobile:
+		Speed: 66
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@td_nod_minigunner:
+		Modifier: 29
+	Tooltip:
+		Name: Nod Minigunner
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~td_nod_handofnod
+		Queue: Infantry, RAInfantry
+		Description: actor_e1.description
+	Armament@PRIMARY: ##########
+		Weapon: td_nod_minigunner_minigun
+		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: td_nod_minigunner_minigun
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
+	Armament@Upgrade: ##########
+		Weapon: td_nod_minigunner_minigun_laser
+		LocalOffset: 300,0,200
+		FireDelay: 5
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: td_nod_minigunner_minigun_laser
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_blackmarketupgrades, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
+
+td_nod_rocketsoldier:
+	Inherits: ^E3
+	Tooltip:
+		Name: Nod Rocket Soldier
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
+	Inherits@decoration: ^NodRankDecoration
+	Buildable:
+		Prerequisites: ~td_nod_handofnod, ~!td_nod_promotion_chemicalrocketsoldier
+		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
+
+td_nod_flamethrower:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@ElementalWarfare: ^ElementalWarfare
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
+	Inherits@decoration: ^NodRankDecoration
+	Tooltip:
+		Name: Nod Flamethrower
+	Valued:
+		Cost: 200
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~td_nod_handofnod, td_nod_communicationscenter, ~!td_nod_promotion_blackhandflamer
+		Queue: Infantry, RAInfantry
+		Description: actor_e4.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 20000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament:
+		Weapon: Flamethrower
+		LocalOffset: 341,0,256
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: Flamethrower
+		MuzzleSequence: muzzle
+	FireWarheadsOnDeath:
+		Weapon: FlamethrowerExplode
+	TakeCover:
+		ProneOffset: 190,0,-198
+	WithMuzzleOverlay:
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	RenderSprites:
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
+
+td_nod_chemicalwarrior:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@ElementalWarfare: ^ElementalWarfare
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
+	Inherits@decoration: ^NodRankDecoration
+	Tooltip:
+		Name: Chemical Warrior
+	Valued:
+		Cost: 500
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~td_nod_handofnod, td_nod_templeofnod
+		Queue: Infantry, RAInfantry
+		Description: actor_e5.description
+	Mobile:
+		Speed: 48
+		Locomotor: chem
+	-DamagedByTerrain:
+	Health:
+		HP: 48000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Armament:
+		Weapon: Chemspray
+		LocalOffset: 341,0,256
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: Chemspray
+		MuzzleSequence: muzzle
+	FireWarheadsOnDeath:
+		Weapon: SmallTiberiumExplosion
+	TakeCover:
+		ProneOffset: 190,0,-190
+	WithMuzzleOverlay:
+	Targetable@Immune:
+		TargetTypes: ToxinImmune
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		IdleSequences: idle1,idle2,idle3,idle4
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	RenderSprites:
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
+	GrantExternalConditionToTransport:
+		Condition: ifv-chem
+
+td_nod_commando:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@MC: ^MCImmune
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
+	Inherits@decoration: ^NodRankDecoration
+	Tooltip:
+		Name: Nod Commando
+	Valued:
+		Cost: 3000
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 50
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~td_nod_handofnod, td_nod_templeofnod, ~!td_nod_promotion_upgradeupnodvenomname
+		Description: Elite commando unit.\n  Strong vs Infantry, Buildings\n  Can detect cloaked units
+	Mobile:
+		Speed: 65
+		Voice: Move
+	Guard:
+		Voice: Move
+	Health:
+		HP: 80000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Passenger:
+		Voice: Move
+	Armament@c4:
+		Weapon: TanyaAttach
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+		Voice: Demolish
+	Armament@c4building:
+		Weapon: GenericC4
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+		Voice: Demolish
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	AttackMove:
+		Voice: Attack
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+		IdleSequences: idle1,idle2,idle3
+	AnnounceOnKill:
+	Voiced:
+		VoiceSet: CommandoVoice
+	RenderSprites:
+		Image: rmbo
+	Armament:
+		Weapon: td_gdi_commando_sniper
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: td_gdi_commando_sniper
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
+
+td_nod_chemicalrocketsoldier:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@ElementalWarfare: ^ElementalWarfare
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
+	Inherits@decoration: ^NodRankDecoration
+	Tooltip:
+		Name: Chemical Rocket Soldier
+	Valued:
+		Cost: 400
+	Health:
+		HP: 18000
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Mobile:
+		Speed: 60
+		Locomotor: chem
+	-DamagedByTerrain:
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~td_nod_handofnod, ~td_nod_promotion_chemicalrocketsoldier
+		Queue: Infantry, RAInfantry
+		Description: actor_cheme3.description
+	Armament@PRIMARY: ##########
+		Weapon: ChemRockets
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: ChemRockets
+	FireWarheadsOnDeath:
+		Weapon: ChemRocketsExplosion
+	Targetable@Immune:
+		TargetTypes: ToxinImmune
+	TakeCover:
+		ProneOffset: 180,0,-200
+	WithInfantryBody:
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	RenderSprites:
+		Image: e3chem
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
+
+td_nod_lasertrooper:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^SpecialForcesInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@EliteCapacitors: ^EliteCapacitors
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
+	Inherits@decoration: ^NodRankDecoration
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 100
+		Prerequisites: ~td_nod_handofnod, td_nod_templeprime, ~td_nod_promotion_lasertrooper
+		Description: actor_blackhandlaser.description
+	# SPECIAL-FORCES — Tier 4 heavy trooper (Formula v2, maintainer
+	# 2026-07-20): 4x the SF baseline — 60000 HP (4x 15000), 50 speed &
+	# 6000 range (same), CannonAP+Flak+Laser triad 24000 @ reload 50 = 480
+	# DPS (4x 120). Temple-prime T4 gate applies the 0.5x tech factor, so
+	# 4x/4x prices to 750 (1500 x 0.5) — close to its original 700. (Briefly
+	# considered as the verifier, but T4's tier factor breaks the clean 2x
+	# identity, so the T1 SM lunar soldier is the verifier instead.)
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Laser Trooper
+	Health:
+		HP: 59000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Mobile:
+		Speed: 51
+	FirepowerMultiplier@PromotionUnit:
+		Modifier: 108
+	Armament@PRIMARY:
+		Weapon: BlackHandLaser
+		LocalOffset: 600,0,450
+		FireDelay: 5
+	Armament@Garrison:
+		Name: garrisoned
+		Weapon: BlackHandLaser
+	WithInfantryBody:
+		IdleSequences: idle1,idle2
+	AttackFrontal:
+		FacingTolerance: 0
+	WithSplitAttackPaletteInfantryBody:
+		DefaultAttackSequence: shoot
+	-WithInfantryBody:
+	RenderSprites:
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elitecapacitors, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
+
+td_nod_blackhandflamer:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@ElementalWarfare: ^ElementalWarfare
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
+	Inherits@decoration: ^NodRankDecoration
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 100
+		Prerequisites: ~td_nod_handofnod, td_nod_communicationscenter, ~td_nod_promotion_blackhandflamer
+		Description: actor_blackhandflamer.description
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Black Hand Flamer
+	Health:
+		HP: 36000
+	ChangesHealth@SelfHealing:
+		Step: 36
+	Mobile:
+		Speed: 66
+	Armament@PRIMARY:
+		Weapon: BlackHandFlamer
+		LocalOffset: 384,0,256
+		FireDelay: 5
+	Armament@Garrison:
+		Name: garrisoned
+		Weapon: BlackHandFlamer
+	WithInfantryBody:
+		IdleSequences: idle1,idle2
+	AttackFrontal:
+		FacingTolerance: 0
+	WithSplitAttackPaletteInfantryBody:
+		DefaultAttackSequence: attack
+	-WithInfantryBody:
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+	FireWarheadsOnDeath:
+		Weapon: BlackHandFlamerExplode
+	Cloak:
+		UncloakOn: Attack, Damage
+		CloakSound: trans1.aud
+		UncloakSound: trans1.aud
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
+
+td_nod_stealthsoldier:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
+	Inherits@decoration: ^NodRankDecoration
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 100
+		Prerequisites: ~td_nod_handofnod, td_nod_templeofnod, ~td_nod_promotion_upgradeupnodstealthname
+		Description: actor_stealthsoldier.description
+	Valued:
+		Cost: 753
+	Tooltip:
+		Name: Stealth Soldier
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 25
+	Mobile:
+		Speed: 72
+	Armament@PRIMARY:
+		Weapon: BHRedDarts
+		LocalOffset: 450,0,350
+		FireDelay: 5
+	Armament@Garrison:
+		Name: garrisoned
+		Weapon: BHRedDarts
+	-Targetable@ParachuteAir:
+	WithInfantryBody:
+		IdleSequences: idle1,idle2
+	AttackFrontal:
+		FacingTolerance: 0
+	WithSplitAttackPaletteInfantryBody:
+		DefaultAttackSequence: shoot
+	-WithInfantryBody:
+	RenderSprites:
+	Cloak:
+		UncloakOn: Attack, Damage
+		CloakSound: trans1.aud
+		UncloakSound: trans1.aud
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
+
+	FirepowerMultiplier:
+		Modifier: 81
+td_nod_lasercommando:
+	Inherits: ^Soldier
+	Inherits@deathanim: ^RA2InfantryDeathAnimations
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@MC: ^MCImmune
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@PD: ^PointLaserDefenseSystem
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@EliteCapacitors: ^EliteCapacitors
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Laser Commando
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 50
+		Prerequisites: ~td_nod_handofnod, td_nod_templeprime, ~td_nod_promotion_upgradeupnodvenomname
+		Queue: Infantry, RAInfantry
+		Description: actor_lasercommando.description
+	RenderSprites:
+		PlayerPalette: playerra2
+	Mobile:
+		Speed: 79
+		Voice: Move
+	Guard:
+		Voice: Move
+	Health:
+		HP: 57000
+	ChangesHealth@SelfHealing:
+		Step: 57
+	Passenger:
+		Voice: Move
+	AttackMove:
+		Voice: Action
+	RenderRangeCircle:
+		RangeCircleType: pointdefense
+		Color: FF000088
+	ProducibleWithLevel:
+		InitialLevels: 1
+	Cloak:
+		UncloakOn: Attack, Damage
+	Armament:
+		Name: primary
+		Weapon: NodCommandoLaser
+		LocalOffset: 256,64,512
+		PauseOnCondition: !pdammo
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NodCommandoLaser
+	Armament@c4:
+		Weapon: GenericC4
+		Cursor: c4
+		OutsideRangeCursor: c4
+		Voice: Demolish
+	PointDefense:
+	Armament@pointdefense:
+		Weapon: NodCommandoLaser
+	AmmoPool@pld:
+		Ammo: 24
+		Armaments: primary, pointdefense
+	ReloadAmmoPool@pld:
+		Delay: 16
+		Count: 1
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		IdleSequences: idle1,idle2,idle3
+	AnnounceOnKill:
+	Voiced:
+		VoiceSet: LaserCommandoVoice
+		Volume: 1.5
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		FullSequence: pip-red
+		PipCount: 8
+	ReloadAmmoDelayMultiplier@td_nod_upgrade_elitecapacitors:
+		Modifier: 85
+		RequiresCondition: td_nod_upgrade_elitecapacitors
+	GrantCondition@gatling:
+		Condition: cloak-force-disabled
+		RequiresCondition: gatling
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elitecapacitors, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
+
+	####################################################################################################
+	#		Upgrades GDI
+	####################################################################################################

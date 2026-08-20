@@ -1,0 +1,309 @@
+wc2_humans_humanscouttower:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	-WithTurretSearchlight:
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@EXPERIENCE: ^GainsExperienceBuildings
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: Human Scout Tower
+		RequiresCondition: !guard && !cannon
+	Tooltip@2:
+		Name: Human Guard Tower
+		RequiresCondition: guard
+	Tooltip@3:
+		Name: Human Cannon Tower
+		RequiresCondition: cannon
+	Valued:
+		Cost: 1200
+	ProductionCostMultiplier@guardtower:
+		Multiplier: 50
+	ProductionTimeMultiplier@guardtower:
+		Multiplier: 50
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_barracks
+		Queue: Defence, RADefence
+		Description: Can be upgraded to Guard or Cannon Tower.
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: wc2_constrct.aud
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil ##########
+	Health:
+		HP: 100000
+	Armor:
+		Type: Wood
+		RequiresCondition: !(guard || cannon)
+	Armor@Upgrade:
+		Type: Concrete
+		RequiresCondition: guard || cannon
+	DamageMultiplier@evo:
+		Modifier: 50
+		RequiresCondition: guard || cannon
+	ProvidesPrerequisite@guard:
+		Prerequisite: guard
+		RequiresCondition: guard
+	ProvidesPrerequisite@cannon:
+		Prerequisite: cannon
+		RequiresCondition: cannon
+	ProvidesPrerequisite@scouttowerupgradeavailable:
+		Prerequisite: scouttowerupgradeavailable
+		RequiresCondition: !guard && !cannon
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			wcscouttower: guard
+		Requirements:
+			wcscouttower: !guard && !cannon
+	Pluggable@2:
+		Offset: 0,0
+		Conditions:
+			wcscouttower2: cannon
+		Requirements:
+			wcscouttower2: !guard && !cannon
+	Sellable:
+	-WithDeathAnimation:
+	##########
+	WithSpriteBody:
+		RequiresCondition: !guard && !cannon
+	WithSpriteBody@guard:
+		Sequence: guard
+		Name: guard
+		RequiresCondition: guard && !cannon
+	WithSpriteBody@cannon:
+		Sequence: cannon
+		Name: cannon
+		RequiresCondition: cannon && !guard
+	-WithMakeAnimation:
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithSpriteTurret:
+	Turreted:
+		TurnSpeed: 1023
+		RealignDelay: -1
+	AttackTurreted:
+		Armaments: primary, cannon, guard
+		PauseOnCondition: disabled
+	Armament@guard:
+		Weapon: wc2_tower_arrow
+		RequiresCondition: guard
+		LocalOffset: 0,0,500
+	Armament@cannon:
+		Name: cannon
+		Weapon: wc2cannontowerFire
+		RequiresCondition: cannon
+	RevealOnFire:
+		ArmamentNames: primary, cannon
+	RevealsShroud:
+		Range: 5000
+		RequiresCondition: !(guard || cannon)
+	RevealsShroud@upgraded:
+		Range: 10000
+		RequiresCondition: guard || cannon
+	DetectCloaked@cannon:
+		Range: 5000
+		RequiresCondition: (guard || cannon) && !disabled
+	Selectable:
+		Bounds: 2048, 2048
+	GrantConditionOnPrerequisite@WC2ArrowUpg:
+		Condition: wc2arrow_upg
+		Prerequisites: wc2_humans_upgrade_arrowstrength
+	GrantConditionOnPrerequisite@WC2ArrowUpg2:
+		Condition: wc2arrow_upg2
+		Prerequisites: wc2_humans_upgrade_arrowstrengthii
+	FirepowerMultiplier@WC2ArrowUpg:
+		Modifier: 125
+		RequiresCondition: wc2arrow_upg && guard
+	FirepowerMultiplier@WC2ArrowUpg2:
+		Modifier: 125
+		RequiresCondition: wc2arrow_upg2 && guard
+	GrantConditionOnPrerequisite@HCannonUpg:
+		Condition: hcannon_upg
+		Prerequisites: wc2_humans_upgrade_cannondamage
+	GrantConditionOnPrerequisite@HCannonUpg2:
+		Condition: hcannon_upg2
+		Prerequisites: wc2_humans_upgrade_cannondamageii
+	FirepowerMultiplier@HCannonUpg:
+		Modifier: 125
+		RequiresCondition: hcannon_upg && cannon
+	FirepowerMultiplier@HCannonUpg2:
+		Modifier: 125
+		RequiresCondition: hcannon_upg2 && cannon
+	ActorStatValues:
+		Upgrades: wc2_humans_upgrade_arrowstrength, wc2_humans_upgrade_arrowstrengthii, wc2_humans_upgrade_cannondamage, wc2_humans_upgrade_cannondamageii, wc2_humans_upgrade_armorstrength, wc2_humans_upgrade_armorstrengthii
+
+wc2_humans_guardtower:
+	Inherits: wc2_humans_humanscouttower
+	-ProductionCostMultiplier@guardtower:
+	Tooltip:
+		Name: Guard Tower
+	Valued:
+		Cost: 1500
+	Buildable:
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_elvenlumbermill
+		Description: Guard tower, attacks land, sea, and air with fast arrows.
+	GrantCondition:
+		Condition: guard
+	Selectable:
+		Class: wc2_humans_humanscouttower
+	RenderSprites:
+		Image: wc2_humans_guardtower
+
+wc2_humans_cannontower:
+	Inherits: wc2_humans_humanscouttower
+	-ProductionCostMultiplier@guardtower:
+	Tooltip:
+		Name: Cannon Tower
+	Valued:
+		Cost: 1500
+	Buildable:
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_blacksmith
+		Description: Cannon tower, attacks land. Has huge splash damage.
+	GrantCondition:
+		Condition: cannon
+	Selectable:
+		Class: wc2_humans_humanscouttower
+	RenderSprites:
+		Image: wc2_humans_cannontower
+
+# wc2_humans_humanscouttower:
+# 	Inherits@WC2BUILDING: ^WC2HumanDefense
+# 	Inherits@wc2_watch_tower: ^WC2WatchTower
+# 	# Don't declare AutoTarget stuff before AttackBase stuff or an annoying bug with WithSpriteBody will occur.
+# 	#Inherits@AUTOTARGET: ^AutoTargetAll
+# 	Tooltip:
+# 		Name: Scout Tower
+# 	Buildable:
+# 		Prerequisites: ~wc2_humans_barracks
+# 		Queue: Defence, RADefence
+# 		Description: Upgradable defense building\nDetector
+# 	Voiced:
+# 		VoiceSet: humanguardtowervoice
+# 	Armament@guardtower:
+# 		Weapon: wc2_tower_arrow
+# 		RequiresCondition: humanguardtowerupg
+# 	Armament@guardtoweraa:
+# 		Weapon: wc2_tower_arrow_aa
+# 		RequiresCondition: humanguardtowerupg
+# 	Armament@cannontower:
+# 		Weapon: wc2cannontowerFire
+# 		RequiresCondition: humancannontowerupg
+# 	WithRangeCircle:
+# 		Range: 3072
+# 		RequiresCondition: humancannontowerupg
+# 	Inherits@AUTOTARGET: ^AutoTargetAll
+# 	### Upgrade stuff ###
+# 	Production:
+# 		Produces: Towerupgrade.wc2_humans
+# 		RequiresCondition: !humanguardtowerupg && !humancannontowerupg
+# 	ProductionBar:
+# 		ProductionType: Towerupgrade.wc2_humans
+# 	ProductionQueue:
+# 		Type: Towerupgrade.wc2_humans
+# 		DisplayOrder: 0
+# 		Group: Addon
+# 		LowPowerModifier: 200
+# 		QueueLimit: 1
+# 		ItemLimit: 1
+# 	GrantConditionOnProduction@guardtower:
+# 		Condition: humanguardtowerupg
+# 		Actors: wc2_humans_guardtower
+# 	GrantConditionOnProduction@cannontower:
+# 		Condition: humancannontowerupg
+# 		Actors: wc2_humans_cannontower
+# 	WithSpriteBody:
+# 		RequiresCondition: !humanguardtowerupg && !humancannontowerupg
+# 	WithSpriteBody@guardtower:
+# 		Sequence: wc2_humans_guardtower
+# 		RequiresCondition: humanguardtowerupg
+# 	WithSpriteBody@cannontower:
+# 		Sequence: wc2_humans_cannontower
+# 		RequiresCondition: humancannontowerupg
+# 	DamageMultiplier@guardtower:
+# 		Modifier: 75
+# 		RequiresCondition: humanguardtowerupg
+# 	DamageMultiplier@cannontower:
+# 		Modifier: 67
+# 		RequiresCondition: humancannontowerupg
+
+# wc2_humans_guardtower:
+# 	Tooltip:
+# 		Name: Guard Tower
+# 	Buildable:
+# 		BuildPaletteOrder: 1
+# 		Prerequisites: ~wc2_humans_elvenlumbermill
+# 		Queue: Towerupgrade.wc2_humans
+# 		BuildDuration: 3500
+# 		BuildDurationModifier: 12
+# 		Description: Guard tower, attacks land, sea, and air.
+# 	Valued:
+# 		Cost: 800
+# 	Interactable:
+# 	AlwaysVisible:
+# 	KillsSelf:
+# 		RemoveInstead: true
+# 	RenderSprites:
+
+# wc2_humans_cannontower:
+# 	Tooltip:
+# 		Name: Cannon Tower
+# 	Buildable:
+# 		BuildPaletteOrder: 1
+# 		Prerequisites: ~wc2_humans_blacksmith
+# 		Queue: Towerupgrade.wc2_humans
+# 		BuildDuration: 4750
+# 		BuildDurationModifier: 12
+# 		Description: Cannon tower, attacks land.
+# 	Valued:
+# 		Cost: 1600
+# 	Interactable:
+# 	AlwaysVisible:
+# 	KillsSelf:
+# 		RemoveInstead: true
+# 	RenderSprites:
+
+wc2_humans_wall:
+	Inherits: ^Wall
+	Valued:
+		Cost: 300
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Wall
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~wc2_humans_townhall
+		Queue: Defence, RADefence
+		Description: Stops infantry and most tanks.\nBlocks some projectiles.
+	Health:
+		HP: 25000
+	Armor:
+		Type: Heavy
+	BlocksProjectiles:
+	Crushable:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSounds: crumble.aud
+	# WithMakeAnimation:
+	# 	Condition: build-incomplete
+	LineBuild:
+		NodeTypes: wc2_humans_wall
+	LineBuildNode:
+		Types: wc2_humans_wall
+	WithWallSpriteBody:
+		Type: wc2_humans_wall
+		RequiresCondition: !cond_timer
+	WithIdleOverlay@wc2walltimer:
+		Sequence: make
+		RequiresCondition: cond_timer
+	GrantTimedCondition@wc2walltimer:
+		Condition: cond_timer
+		Duration: 30
+	RenderSprites:
+		Palette: player

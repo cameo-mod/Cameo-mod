@@ -105,10 +105,10 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly Actor self;
 		readonly PlayerPromotionsInfo Info;
 
-		[Sync]
+		[VerifySync]
 		public int Experience { get; private set; }
 
-		[Sync]
+		[VerifySync]
 		public int Points;
 
 		List<int> PointsPerRank;

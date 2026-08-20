@@ -1,0 +1,1303 @@
+forgotten_mutantsniper:
+	Inherits: ^TSBasicInfantry
+	Inherits@attack: ^TSBasicInfantryAttack
+	Defaults:
+		Filename: forgotten_mutantsniper.shp
+	icon:
+		Filename: forgotten_mutantsniper_icon.shp
+
+forgotten_ghoststalker:
+	Inherits: ^TSBasicInfantry
+	Inherits@attack: ^TSBasicInfantryAttack
+	Defaults:
+		Filename: forgotten_promotion_ghoststalker_tsghost.shp
+	icon:
+		Filename: ra2_allies_upgrade_paratroopers_tsghosticon.shp
+
+forgotten_mutanthijacker:
+	Inherits: ^TSBasicInfantry
+	Defaults:
+		Filename: forgotten_promotion_ghoststalker_tsghost.shp
+	icon:
+		Filename: forgotten_mutanthijacker_icon.png
+
+forgotten_mutant:
+	Inherits: ^TSBasicInfantry
+	Inherits@attack: ^TSBasicInfantryAttack
+	Defaults:
+		Filename: forgotten_mutant_tsmutant.shp
+	icon:
+		Filename: forgotten_mutant_icon.png
+
+forgotten_mutantsoldier:
+	Inherits: ^TSBasicInfantry
+	Inherits@attack: ^TSBasicInfantryAttack
+	Defaults:
+		Filename: forgotten_mutantsoldier_tsmutant3.shp
+	icon:
+		Filename: forgotten_mutantsoldier_icon.png
+
+forgotten_mutantsergeant:
+	Inherits: ^TSBasicInfantry
+	Inherits@attack: ^TSBasicInfantryAttack
+	Defaults:
+		Filename: forgotten_mutantsoldier_tsmutant3.shp
+	icon:
+		Filename: forgotten_mutantsergeant_icon.png
+
+forgotten_chemsprayinfantry:
+	Defaults:
+		Filename: forgotten_chemsprayinfantry.shp
+		Scale: 1.25
+		Tick: 80
+		Offset: 0, 0, 16
+	stand:
+		Facings: 8
+		ShadowStart: 202
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		ShadowStart: 210
+	prone-shoot:
+		Start: 56
+		Facings: 8
+		ShadowStart: 258
+	prone-shoot:
+		Start: 64
+		Facings: 8
+		Stride: 6
+		ShadowStart: 288
+	standup:
+		Start: 112
+		Length: 2
+		Facings: 8
+		ShadowStart: 314
+	prone-run:
+		Start: 86
+		Length: 6
+		Facings: 8
+		ShadowStart: 288
+	prone-stand:
+		Start: 86
+		Facings: 8
+		Stride: 6
+		ShadowStart: 288
+	idle1:
+		Start: 128
+		Length: 8
+		ShadowStart: 330
+	idle2:
+		Start: 136
+		Length: 16
+		ShadowStart: 338
+	die1:
+		Start: 152
+		Length: 8
+		ShadowStart: 354
+	die2:
+		Start: 160
+		Length: 6
+		ShadowStart: 362
+	die4:
+		Start: 166
+		Length: 11
+		ShadowStart: 368
+	die5:
+		Start: 177
+		Length: 20
+		ShadowStart: 379
+	die7:
+		Filename: shared_sprites|electro.shp
+		Length: *
+	die-crushed:
+		Start: 174
+		Length: 3
+		ShadowStart: 376
+		Tick: 1000
+	muzzle:
+		Combine:
+			chem_n:
+				Filename: shared_sprites|chem_n.shp
+				Length: *
+				Offset: 1,2
+			chem_nw:
+				Filename: shared_sprites|chem_nw.shp
+				Length: *
+				Offset: 8,2
+			chem_w:
+				Filename: shared_sprites|chem_w.shp
+				Length: *
+				Offset: 8,-3
+			chem_sw:
+				Filename: shared_sprites|chem_sw.shp
+				Length: *
+				Offset: 7,-6
+			chem_s:
+				Filename: shared_sprites|chem_s.shp
+				Length: *
+				Offset: 1,-6
+			chem_se:
+				Filename: shared_sprites|chem_se.shp
+				Length: *
+				Offset: -5,-6
+			chem_e:
+				Filename: shared_sprites|chem_e.shp
+				Length: *
+				Offset: -7,-3
+			chem_ne:
+				Filename: shared_sprites|chem_ne.shp
+				Length: *
+				Offset: -3,2
+		Facings: 8
+		Length: 13
+	icon:
+		Offset: 0,0
+		Filename: forgotten_chemsprayinfantry_icon.shp
+
+forgotten_tiberianfiend:
+	Defaults:
+		Filename: forgotten_tiberianfiend.shp
+		Scale: 1.25
+		Tick: 80
+		Offset: 0, 0, 16
+	stand:
+		Facings: 8
+		ShadowStart: 119
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		ShadowStart: 127
+	attack:
+		Start: 56
+		Length: 4
+		Facings: 8
+		ShadowStart: 175
+	laydown:
+		Start: 88
+		Length: 2
+		ShadowStart: 207
+	hide:
+		Start: 90
+		ShadowStart: 209
+	idle1:
+		Start: 91
+		Length: 8
+		ShadowStart: 210
+	idle2:
+		Start: 91
+		Length: 8
+		ShadowStart: 210
+	die:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die1:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die2:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die3:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die4:
+		Filename: ts_shared_sprites|frag3.shp
+		Length: *
+	die-crushed:
+		Start: 105
+		Length: 4
+		ShadowStart: 224
+		Tick: 800
+		ZOffset: -511
+	die5:
+		Start: 109
+		Length: 10
+		ShadowStart: 228
+	die6:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die7:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	icon:
+		Offset: 0,0
+		Filename: forgotten_tiberianfiend_icon.png
+
+forgotten_viniferafiend:
+	Defaults:
+		Filename: forgotten_promotion_viniferafiend.shp
+		Scale: 1.25
+		Tick: 80
+		Offset: 0, 0, 16
+	stand:
+		Facings: 8
+		ShadowStart: 119
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		ShadowStart: 127
+	attack:
+		Start: 56
+		Length: 4
+		Facings: 8
+		ShadowStart: 175
+	laydown:
+		Start: 88
+		Length: 2
+		ShadowStart: 207
+	hide:
+		Start: 90
+		ShadowStart: 209
+	idle1:
+		Start: 91
+		Length: 8
+		ShadowStart: 210
+	idle2:
+		Start: 91
+		Length: 8
+		ShadowStart: 210
+	die:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die1:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die2:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die3:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die4:
+		Filename: ts_shared_sprites|frag3.shp
+		Length: *
+	die-crushed:
+		Start: 105
+		Length: 4
+		ShadowStart: 224
+		Tick: 800
+		ZOffset: -511
+	die5:
+		Start: 109
+		Length: 10
+		ShadowStart: 228
+	die6:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die7:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	icon:
+		Offset: 0,0
+		Filename: forgotten_promotion_viniferafiend_icon.png
+
+forgotten_zombiemutant:
+	Inherits: ^TSBasicInfantry
+	Inherits@attack: ^TSBasicInfantryAttack
+	Defaults:
+		Filename: forgotten_zombiemutant.shp
+		Tick: 80
+		Offset: 0, 0, 16
+		Scale: 1.1
+	stand:
+		Facings: 8
+		ShadowStart: 368
+	run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		ShadowStart: 376
+	attack:
+		Start: 128
+		Length: 10
+		Facings: 8
+		ShadowStart: 496
+	prone-attack:
+		Start: 128
+		Length: 10
+		Facings: 8
+		ShadowStart: 496
+	standup:
+		Start: 112
+		Length: 2
+		Facings: 8
+		ShadowStart: 314
+	prone-run:
+		Start: 268
+		Length: 10
+		Facings: 8
+		ShadowStart: 536
+	prone-stand:
+		Start: 268
+		Facings: 8
+		Stride: 10
+		ShadowStart: 536
+	idle1:
+		Start: 88
+		Length: 20
+		ShadowStart: 456
+	idle2:
+		Start: 108
+		Length: 20
+		ShadowStart: 476
+	die1:
+		Start: 208
+		Length: 20
+		ShadowStart: 576
+	die2:
+		Start: 208
+		Length: 20
+		ShadowStart: 576
+	die6:
+		Start: 208
+		Length: 20
+		ShadowStart: 576
+	die-crushed:
+		Start: 159
+		Length: 5
+		ShadowStart: 451
+		Tick: 800
+		ZOffset: -511
+	standup:
+		Start: 260
+		Length: 2
+		Facings: 8
+		ShadowStart: 552
+	cheer:
+		Start: 208
+		Length: 20
+		ShadowStart: 576
+	die-crushed:
+		Start: 208
+		Length: 20
+		ShadowStart: 576
+	die7: tss_bang34
+		Length: *
+	chrono-overlay: chronofade_small
+		Length: *
+		BlendMode: Additive
+		Offset: 0, 0
+		UseTilesetCode: false
+		ZOffset: 512
+		Tick: 80
+	mind-overlay: mindanim
+		Length: *
+		Tick: 200
+		BlendMode: Alpha
+		Offset: 0, 0
+	icon:
+		Offset: 0,0
+		Filename: forgotten_zombiemutant_icon.png
+
+forgotten_runnershotgal:
+	Inherits: ^TSBasicInfantry
+	Inherits@attack: ^TSBasicInfantryAttack
+	Defaults:
+		Filename: forgotten_promotion_runnershotgal.shp
+	icon:
+		Filename: forgotten_promotion_runnershotgal_icon.png
+
+forgotten_mutantmortarman:
+	Inherits: ^TSBasicInfantry
+	Inherits@attack: ^TSBasicInfantryAttack
+	Defaults:
+		Filename: forgotten_mutantmortarman.shp
+		Tick: 80
+	stand:
+		Start: 126
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 268
+	liedown:
+		Start: 126
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 268
+	cheer:
+		Start: 126
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 268
+	run:
+		Start: 0
+		Length: 6
+		Facings: 8
+		ShadowStart: 142
+	idle1:
+		Start: 127
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 269
+		Tick: 500
+	idle2:
+		Start: 126
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 268
+		Tick: 500
+	prone-run:
+		Start: 48
+		Length: 6
+		Facings: 8
+		ShadowStart: 190
+	prone-stand:
+		Start: 127
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 269
+	prone-stand2:
+		Start: 127
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 269
+	die1:
+		Start: 96
+		Length: 15
+		ShadowStart: 238
+	die2:
+		Start: 111
+		Length: 15
+		ShadowStart: 253
+	die6:
+		Start: 111
+		Length: 15
+		ShadowStart: 253
+	die-crushed:
+		Start: 122
+		Length: 4
+		ShadowStart: 264
+		Tick: 1000
+		ZOffset: -511
+	shoot:
+		Start: 127
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 269
+		Tick: 300
+		IgnoreWorldTint: true
+	prone-shoot:
+		Start: 127
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 269
+		Tick: 300
+		IgnoreWorldTint: true
+	standup:
+		Start: 126
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 268
+	icon:
+		Filename: forgotten_mutantmortarman_icon.shp
+
+# tsweed:
+# 	idle: invisibleitem
+# 	dock: invisibleitem
+# 	dock-loop: invisibleitem
+# 	warpout: invisibleitem
+# 	icon: tsweedeatericon.shp
+
+forgotten_rattytank:
+	idle:
+		Filename: forgotten_brokenrattytankturret_rattytank.png
+		Facings: 64
+		Scale: 1
+	turret:
+		Filename: forgotten_brokenrattytankturret_rattytank.png
+		Start: 64
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgotten_rattytank_icon.png
+
+forgotten_closhtank:
+	idle:
+		Filename: forgotten_closhtank.png
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgotten_closhtank_icon.png
+
+forgotten_thumperbus:
+	idle:
+		Filename: forgotten_thumperbus.png
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgotten_thumperbus_icon.png
+	turret:
+		Filename: shared_sprites|invisibleitem.shp
+
+forgotten_nomadbarracks:
+	idle:
+		Filename: forgotten_nomadbarracks.png
+		Facings: 64
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgotten_nomadbarracks_icon.png
+	turret:
+		Filename: shared_sprites|invisibleitem.shp
+
+forgotten_tankkiller:
+	idle:
+		Filename: forgotten_tankkiller.png
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgotten_tankkiller_icon.png
+
+forgotten_missilevan:
+	Defaults:
+		Filename: shared_sprites|invisibleitem.shp
+	idle:
+		Filename: forgotten_missilevan.png
+		Facings: 64
+		Scale: 1
+	turret:
+		Filename: forgotten_missilevan.png
+		Start: 64
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgotten_missilevan_icon.png
+
+forgotten_raidercar:
+	idle:
+		Filename: forgotten_raidercar.png
+		Facings: 64
+		Scale: 1
+	turret:
+		Filename: forgotten_raidercar.png
+		Start: 64
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgotten_raidercar_icon.png
+
+forgotten_bowler:
+	idle:
+		Filename: forgotten_promotion_bowler.png
+		Facings: 64
+		Scale: 1
+	turret:
+		Filename: forgotten_promotion_bowler.png
+		Start: 64
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgotten_promotion_bowler_icon.png
+
+forgotten_ruiner:
+	idle:
+		Filename: forgotten_ruiner.png
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgotten_ruiner_icon.png
+
+forgotten_warriortank:
+	idle:
+		Filename: forgotten_promotion_warriortank.png
+		Facings: 64
+		Scale: 1
+	turret:
+		Filename: forgotten_promotion_warriortank.png
+		Start: 64
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgotten_promotion_warriortank_icon.png
+
+forgotten_scoopertank:
+	idle:
+		Filename: forgotten_promotion_scoopertank.png
+		Facings: 64
+		Scale: 1
+	turret:
+		Filename: forgotten_promotion_scoopertank.png
+		Start: 64
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgotten_promotion_scoopertank_icon.png
+
+forgotten_flametank:
+	idle:
+		Filename: forgotten_promotion_flametank.png
+		Facings: 64
+		Scale: 0.5
+	muzzle:
+		IgnoreWorldTint: true
+		Combine:
+			flame_n:
+				Filename: shared_sprites|flame_n.shp
+				Length: *
+				Offset: 3,6
+			flame_nw:
+				Filename: shared_sprites|flame_nw.shp
+				Length: *
+				Offset: 8,7
+			flame_w:
+				Filename: shared_sprites|flame_w.shp
+				Length: *
+				Offset: 8,2
+			flame_sw:
+				Filename: shared_sprites|flame_sw.shp
+				Length: *
+				Offset: 7,-2
+			flame_s:
+				Filename: shared_sprites|flame_s.shp
+				Length: *
+				Offset: 3,-2
+			flame_se:
+				Filename: shared_sprites|flame_se.shp
+				Length: *
+				Offset: -5,-2
+			flame_e:
+				Filename: shared_sprites|flame_e.shp
+				Length: *
+				Offset: -7,2
+			flame_ne:
+				Filename: shared_sprites|flame_ne.shp
+				Length: *
+				Offset: -7,8
+	icon:
+		Filename: forgotten_promotion_flametank_icon.png
+
+forgotten_experimentalmammothtank:
+	Defaults:
+		Filename: forgotten_promotion_experimentalmammothtank.png
+	idle:
+		Facings: 64
+		Scale: 1
+	turret:
+		Start: 64
+		Facings: 64
+		Scale: 1
+	icon:
+		Filename: forgotten_promotion_experimentalmammothtank_icon.png
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+
+forgotten_chemicalmammothtank:
+	Defaults:
+		Filename: forgotten_promotion_chemicalmammothtank.png
+	idle:
+		Facings: 64
+		Scale: 1
+	turret:
+		Start: 64
+		Facings: 64
+		Scale: 1
+	icon:
+		Filename: forgotten_promotion_chemicalmammothtank_icon.png
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+
+forgotten_mlrs:
+	Defaults:
+		Filename: forgotten_promotion_mlrs.png
+		Scale: 1.25
+	idle:
+		Facings: 64
+		Scale: 1
+	turret:
+		Start: 64
+		Facings: 64
+		Scale: 1
+	empty-aim:
+		Start: 128
+		Facings: 64
+		Scale: 1
+	aim:
+		Start: 128
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgotten_promotion_mlrs_icon.png
+
+forgotten_m113adats:
+	Defaults:
+		Filename: forgotten_m113adats.png
+	idle:
+		Facings: 64
+		Scale: 1
+	turret:
+		Start: 64
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgotten_m113adats_icon.png
+
+forgotten_apctruck:
+	Defaults:
+		Filename: forgotten_apctruck.png
+	idle:
+		Facings: 64
+		Scale: 1
+	turret:
+		Filename: forgotten_raidercar.png
+		Start: 64
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgotten_apctruck_icon.png
+
+forgotten_crystalpowerextractor:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Scale: 1.25
+		Offset: 0, -12, 24
+	idle:
+		Filename: tampowr.shp
+		ShadowStart: 2
+	damaged-idle:
+		Filename: tampowr.shp
+		Start: 1
+		ShadowStart: 2
+	dead:
+		Filename: tampowr.shp
+		Start: 2
+		ShadowStart: 3
+		Tick: 400
+	idle-cycle:
+		Filename: tampowr_a.shp
+		Length: 31
+		Tick: 200
+	damaged-idle-cycle:
+		Filename: tampowr_a.shp
+		Length: 31
+		Tick: 200
+	make:
+		Filename: tampowrmake.shp
+	icon:
+		Filename: tsnpwricon.shp
+		Offset: 0, 0, 25
+		UseTilesetCode: false
+
+forgotten_barracks:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Scale: 1.25
+		Offset: -12, -15, 30
+	idle:
+		Filename: tambar.shp
+		ShadowStart: 2
+	damaged-idle:
+		Filename: tambar.shp
+		Start: 1
+		ShadowStart: 3
+	dead:
+		Filename: tambar.shp
+		Start: 2
+		ShadowStart: 3
+		Tick: 400
+	idle-light:
+		Filename: tambar_a.shp
+		Length: *
+		Tick: 100
+		ZOffset: 1023
+	damaged-idle-light:
+		Filename: tambar_a.shp
+		Length: *
+		Tick: 100
+		ZOffset: 1023
+	idle-lights:
+		Filename: tambar_b.shp
+		Length: *
+		Tick: 200
+	damaged-idle-lights:
+		Filename: tambar_b.shp
+		Length: *
+		Tick: 200
+	make:
+		Filename: tambarmake.shp
+	icon:
+		Filename: ts_shared_icons|ts_nod_handof_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+forgotten_radar:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Scale: 1.25
+		Filename: tamradr.shp
+		Offset: 0, -12, 12
+	idle:
+		Filename: tamradr.shp
+		ShadowStart: 2
+	damaged-idle:
+		Filename: tamradr.shp
+		Start: 1
+		ShadowStart: 3
+	dead:
+		Filename: tamradr.shp
+		Start: 1
+		ShadowStart: 3
+		Tick: 400
+	idle-dish:
+		Filename: tamradr_a.shp
+		Length: *
+		Tick: 200
+	damaged-idle-dish:
+		Filename: tamradr_a.shp
+		Length: *
+		Tick: 240
+	make:
+		Filename: tamradrmake.shp
+		Length: 17
+	icon:
+		Filename: ts_shared_icons|ts_gdi_radar_icon.shp
+		Offset: 0, 0
+
+forgotten_church:
+	Defaults:
+		Filename: tamtech.shp
+		Offset: -12, -30, 30
+	idle:
+		Filename: tamtech.shp
+		ShadowStart: 2
+	damaged-idle:
+		Filename: tamtech.shp
+		Start: 1
+		ShadowStart: 2
+	dead:
+		Filename: tamtech.shp
+		Start: 2
+		ShadowStart: 2
+		Tick: 400
+	idle-lights:
+		Filename:  tamtech_a.shp
+		Length: *
+		Tick: 200
+	damaged-idle-lights:
+		Filename:  tamtech_a.shp
+		Length: *
+		Tick: 240
+	make:
+		Filename: tamtechmake.shp
+	icon:
+		Filename:  ts_shared_icons|ts_gdi_techcenter_icon.png
+		Offset: 0, 0
+
+forgotten_refinery:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Scale: 1.25
+		Filename: tamref.shp
+		Offset: -12, -21, 20
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	make:
+		Filename: tamrefmake.shp
+	unload-overlay:
+		Filename: tamref_bib.shp
+		Length: *
+		ZOffset: 1024
+	idle-redlights:
+		Filename: tamref_c.shp
+		Length: 16
+		Tick: 120
+		Reverses: True
+	damaged-idle-redlights:
+		Filename: tamref_c.shp
+		Length: 16
+		Tick: 120
+		Reverses: True
+	bib2:
+		Scale: 1
+		Filename: tamref_bib.shp
+		Length: 1
+		ZOffset: -1024
+		Offset: -12, -21, 5
+		ZRamp: 1
+	damaged-bib2:
+		Scale: 1
+		Filename: tamref_bib.shp
+		Start: 1
+		ZOffset: -1024
+		Offset: -12, -21, 5
+		ZRamp: 1
+	dead-bib2:
+		Scale: 1
+		Filename: tamref_bib.shp
+		Start: 2
+		ZOffset: -1024
+		Offset: -12, -21, 5
+	icon:
+		Filename: ts_shared_icons|ts_gdi_tiberiumrefinery_icon.shp
+		Offset: 0, 0
+
+forgotten_cobracopter:
+	idle:
+		Filename: forgotten_promotion_cobracopter.png
+		Facings: 64
+		Scale: 1
+	icon:
+		Filename: forgotten_promotion_cobracopter_icon.png
+	rotor:
+		Filename: shared_sprites|lrotor.shp
+		Length: 4
+	slow-rotor:
+		Filename: shared_sprites|lrotor.shp
+		Start: 4
+		Length: 8
+
+forgotten_apache:
+	idle:
+		Filename: shared_sprites|invisibleitem.shp
+	icon:
+		Filename: ts_nod_harpy_icon.shp
+	rotor:
+		Filename: shared_sprites|lrotor.shp
+		Length: 4
+	slow-rotor:
+		Filename: shared_sprites|lrotor.shp
+		Start: 4
+		Length: 8
+
+forgotten_wasp:
+	idle:
+		Filename: forgotten_wasp.png
+		Facings: 64
+		Scale: 1
+	icon:
+		Filename: forgotten_wasp_icon.png
+
+forgotten_locustbomber:
+	idle:
+		Filename: forgotten_promotion_locustbomber.png
+		Facings: 64
+		Scale: 1
+	icon:
+		Filename: forgotten_promotion_locustbomber_icon.png
+
+forgotten_cropplane:
+	idle:
+		Filename: forgotten_cropplane.png
+		Facings: 64
+		Scale: 1
+	icon:
+		Filename: forgotten_cropplane_icon.png
+
+forgotten_chemicalplant:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Scale: 1.25
+	idle:
+		Filename: forgotten_chemicalplant.png
+		Start: 40
+		Length: 20
+	damaged-idle:
+		Filename: forgotten_chemicalplant.png
+		Start: 61
+		Length: 20
+	dead:
+		Filename: forgotten_chemicalplant.png
+		Start: 61
+		Length: 20
+	make:
+		Filename: forgotten_chemicalplant.png
+		Length: 40
+	icon:
+		Filename: forgotten_chemicalplant_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+forgotten_veinhole:
+	idle:
+		Filename: forgotten_veinhole.shp
+	recoil:
+		Filename: forgotten_veinhole.shp
+		Length: 12
+	damaged-idle:
+		Filename: forgotten_veinhole.shp
+	damaged-recoil:
+		Filename: forgotten_veinhole.shp
+		Length: 12
+	make:
+		Filename: shared_sprites|td_nod_gunturret_make.shp
+		Length: *
+		Tick: 80
+	muzzle:
+		Filename: napalm2.shp
+		Length: *
+	icon:
+		Filename: forgotten_veinhole_icon.tem
+
+forgotten_machineguntower:
+	Defaults:
+		Scale: 1.25
+		Filename: shared_sprites|invisibleitem.shp
+	idle:
+		Filename: shared_sprites|invisibleitem.shp
+	damaged-idle:
+		Filename: shared_sprites|invisibleitem.shp
+	critical-idle:
+		Filename: shared_sprites|invisibleitem.shp
+	turret:
+		Filename: forgotten_machineguntower.png
+		Facings: 64
+		Start: 64
+		Offset: 0,0
+	make:
+		Filename: forgotten_machineguntower.png
+		Length: 64
+	dead:
+		Filename: shared_sprites|invisibleitem.shp
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Tick: 80
+		Length: *
+	icon:
+		Filename: forgotten_machineguntower_icon.png
+		Offset: 0,0
+
+forgotten_brokenwarriortankturret:
+	Defaults:
+		Filename: forgotten_brokenwarriortankturret.png
+	idle:
+		Filename: forgotten_brokenwarriortankturret.png
+		Start: 63
+	damaged-idle:
+		Filename: forgotten_brokenwarriortankturret.png
+		Start: 63
+	critical-idle:
+		Filename: forgotten_brokenwarriortankturret.png
+		Start: 63
+	turret:
+		Filename: forgotten_promotion_warriortank.png
+		Start: 64
+		Facings: 64
+		Scale: 1
+	make:
+		Filename: forgotten_brokenwarriortankturret.png
+		Length: 64
+	dead:
+		Filename: shared_sprites|invisibleitem.shp
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Tick: 80
+		Length: *
+	icon:
+		Filename: forgotten_brokenwarriortankturret_icon.png
+		Offset: 0,0
+
+forgotten_brokenrattytankturret:
+	Defaults:
+		Filename: forgotten_brokenrattytankturret.png
+	idle:
+		Filename: forgotten_brokenrattytankturret.png
+		Start: 63
+	damaged-idle:
+		Filename: forgotten_brokenrattytankturret.png
+		Start: 63
+	critical-idle:
+		Filename: forgotten_brokenrattytankturret.png
+		Start: 63
+	turret:
+		Filename: forgotten_brokenrattytankturret_rattytank.png
+		Start: 64
+		Facings: 64
+		Scale: 1
+	make:
+		Filename: forgotten_brokenrattytankturret.png
+		Length: 64
+	dead:
+		Filename: shared_sprites|invisibleitem.shp
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Tick: 80
+		Length: *
+	icon:
+		Filename: forgotten_brokenrattytankturret_icon.png
+		Offset: 0,0
+
+forgotten_brokenscoopertankturret:
+	Defaults:
+		Filename: forgotten_brokenwarriortankturret.png
+	idle:
+		Filename: forgotten_brokenwarriortankturret.png
+		Start: 63
+	damaged-idle:
+		Filename: forgotten_brokenwarriortankturret.png
+		Start: 63
+	critical-idle:
+		Filename: forgotten_brokenwarriortankturret.png
+		Start: 63
+	turret:
+		Filename: forgotten_promotion_scoopertank.png
+		Start: 64
+		Facings: 64
+		Scale: 1
+	make:
+		Filename: forgotten_brokenwarriortankturret.png
+		Length: 64
+	dead:
+		Filename: shared_sprites|invisibleitem.shp
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Tick: 80
+		Length: *
+	icon:
+		Filename: forgotten_brokenscoopertankturret_icon.png
+		Offset: 0,0
+forgotten_juggerboat:
+	idle:
+		Filename: forgot_juggerboat.png
+		Facings: 64
+		Scale: 0.8
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgot_juggerboat_icon.png
+forgotten_cannonboat:
+	idle:
+		Filename: forgot_cannonboat.png
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgot_cannonboat_icon.png
+forgotten_lcraft:
+	idle:
+		Filename: forgot_lcraft.png
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgot_lcraft_icon.png
+
+
+forgotten_navalyard:
+	Defaults:
+		Offset: 0,-12
+	idle:
+		Filename: forgot_navyyard.png
+		Start: 33
+	damaged-idle:
+		Filename: forgot_navyyard.png
+		Start: 33
+	idle-waves:
+		Filename: ra2_ngyard_c.shp
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	damaged-idle-waves:
+		Filename: ra2_ngyard_c.shp
+		Start: 30
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	repair:
+		Filename: forgot_navyyard.png
+		Length: 15
+		Start: 33
+	damaged-repair:
+		Filename: forgot_navyyard.png
+		Length: 15
+		Start: 33
+	make:
+		Filename: forgot_navyyard.png
+		Length: 32
+	dead:
+		Filename: forgot_navyyard.png
+		Start: 33
+	icon:
+		Filename: forgot_navyyard_icon.png
+		Offset: 0,0
+# tstacticalmissile:
+# 	Defaults:
+# 		ZOffset: 1023
+# 	up: mltimisl_placeholder # TODO: use voxel
+# 	down: mltimisl_placeholder # TODO: use voxel
+# 		Start: 1
+
+# tschemtacticalmissile:
+# 	Defaults:
+# 		ZOffset: 1023
+# 	up: mltimisl_placeholder # TODO: use voxel
+# 	down: mltimisl_placeholder # TODO: use voxel
+# 		Start: 1
+
+# invisibleplane:
+# 	idle: invisibleitem

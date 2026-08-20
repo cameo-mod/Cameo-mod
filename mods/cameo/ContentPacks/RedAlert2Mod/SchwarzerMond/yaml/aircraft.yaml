@@ -1,0 +1,742 @@
+schwarzermond_drone:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Valued:
+		Cost: 120
+	Tooltip:
+		Name: Drone
+	Buildable:
+		Description: template_carrier_slave.description
+	Aircraft:
+		AltitudeVelocity: 150
+		InitialFacing: 768
+		TurnSpeed: 15
+		Speed: 150
+		Repulsable: false
+		MaximumPitch: 50
+		TakeUpCellWhenLand: false
+		VTOL: true
+	Health:
+		HP: 7500
+	ChangesHealth@SelfHealing:
+		Step: 3
+	RevealsShroud:
+		Range: 7500
+		Type: GroundPosition
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: LunarNaxiDroneLaser
+		LocalOffset: 400,-200,-200, 400,200,-200
+		PauseOnCondition: !ammo
+	Armament@Rockets:
+		Name: primary
+		Weapon: LunarNaxiDroneMissile
+		LocalOffset: 425,-350,-225, 425,350,-225
+		LocalYaw: 50, -50, 25, -25
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 6
+		AmmoCondition: ammo
+	SpawnActorOnDeath:
+		Actor: schwarzermond_drone_husk
+	WithMoveAnimation:
+		MoveSequence: move
+	AttackAircraft:
+		FacingTolerance: 40
+		PersistentTargeting: false
+		RequiresCondition: ammo
+	CarrierSlave:
+		LandingDistance: 8000
+	AutoTarget:
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	HasParent:
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-MapEditorData:
+	RejectsOrders:
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 6
+	RenderSprites:
+		PlayerPalette: playerra2
+	GrantConditionOnMovement@Turn:
+		Condition: Aircraft-Turning
+		ValidMovementTypes: Turn
+	GrantConditionOnMovement@H:
+		ValidMovementTypes: Horizontal
+		Condition: Aircraft-Horizontal
+	GrantConditionOnMovement@V:
+		ValidMovementTypes: Vertical
+		Condition: Aircraft-Vertical
+	WithMoveAnimation@Turn-L:
+		MoveSequence: move-l
+		RequiresCondition: Aircraft-Turning && Aircraft-Horizontal
+	WithMoveAnimation@Turn-R:
+		MoveSequence: move-r
+		RequiresCondition: Aircraft-Turning && Aircraft-Vertical
+	WithMoveAnimation:
+		MoveSequence: move
+		Condition: !Aircraft-Turning
+	Contrail:
+		Offset: -500,0,250
+		TrailLength: 15
+	-Voiced:
+
+schwarzermond_drone_husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Drone
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 1
+		Image: smokey
+		StationaryInterval: 1
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: schwarzermond_drone
+		PlayerPalette: playerra2
+schwarzermond_spacezeppelin:
+	Inherits: ^Helicopter
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@bot: ^BotAutoDeployTransport
+	Inherits@LUpgrade: ^NaxiCrystalLens
+	Inherits@LUpgrade2: ^NaxiAmplifiedLens
+	Inherits@Helium3: ^NaxiHelium3
+	Valued:
+		Cost: 6000
+	Tooltip:
+		Name: Space Zeppelin
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: naxis_transportzeppelin
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~schwarzermond_warfactory, schwarzermond_airfield, schwarzermond_radar
+		Queue: Aircraft, RAAircraft, Vehicle
+		Description: actor_shad.description
+	Aircraft:
+		TurnSpeed: 35
+		Speed: 35
+		AltitudeVelocity: 0c50
+		RepulsionSpeed: 15
+	Health:
+		HP: 1350000
+	Repairable:
+		HpPerStep: 2625
+	ChangesHealth@SelfHealing:
+		Step: 21
+	Armament:
+		Name: primary
+		Weapon: NaxiBeetleLaser_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@elite:
+		Name: primary
+		Weapon: NaxiBeetleLaser_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@AA:
+		Name: primary
+		Weapon: NaxiBeetleLaser_AA_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@eliteAA:
+		Name: primary
+		Weapon: NaxiBeetleLaser_AA_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@UP:
+		Name: primary
+		Weapon: Lunar_YellowBeetleLaser
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@eliteUP:
+		Name: primary
+		Weapon: Lunar_YellowBeetleLaser
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@AA_UP:
+		Name: primary
+		Weapon: Lunar_YellowBeetleLaser_AA
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@eliteAA_UP:
+		Name: primary
+		Weapon: Lunar_YellowBeetleLaser_AA
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@AMP:
+		Name: primary
+		Weapon: Lunar_AmplifiedBeetleLaser
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
+	Armament@eliteAMP:
+		Name: primary
+		Weapon: Lunar_AmplifiedBeetleLaser
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
+	Armament@AA_AMP:
+		Name: primary
+		Weapon: Lunar_AmplifiedBeetleLaser_AA
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
+	Armament@eliteAA_AMP:
+		Name: primary
+		Weapon: Lunar_AmplifiedBeetleLaser_AA
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
+	WithMuzzleOverlay:
+	Cargo:
+		InitialUnits: schwarzermond_lunarsoldier, schwarzermond_lunarsoldier, schwarzermond_lunarsoldier, schwarzermond_lunarsoldier, schwarzermond_lunarrocket, schwarzermond_lunarrocket, schwarzermond_lunarpanzer, schwarzermond_lunarpanzer, schwarzermond_lunarpanzer, schwarzermond_lunarpanzer
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 12
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: zep_husk.nax2
+	SelectionDecorations:
+	Selectable:
+		Class: ra2_allies_nighthawk
+		DecorationBounds: 1280, 1024
+	RenderSprites:
+		Image: schwarzermond_spacezeppelin
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	FirepowerMultiplier@FirerateCompensation:
+		Modifier: 50
+
+zep_husk.nax2:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Transport Zeppelin
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 40
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: schwarzermond_spacezeppelin
+		PlayerPalette: playerra2
+	ShakeOnDeath:
+	FallsToEarth:
+		Moves: false
+		Velocity: 43
+		Explosion: KirovExplode
+	WithShadow:
+schwarzermond_blackbomb:
+	Inherits: ^RANeutralPlane
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
+	Inherits@Template: ^FighterTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@turnanimation: ^RA2PlanewithTurnAnimation
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@Helium3: ^NaxiHelium3
+	Selectable:
+	Tooltip:
+		Name: Black Bomb
+	Valued:
+		Cost: 3500
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~schwarzermond_airfield, schwarzermond_techcenter
+		Queue: Aircraft, RAAircraft
+		Description: actor_nax_piercer.description
+	Health:
+		HP: 37500
+	ChangesHealth@SelfHealing:
+		Step: 7
+	HitShape:
+	Voiced:
+		VoiceSet: NaxiPiercerUFOVoice
+	Aircraft:
+		TurnSpeed: 10
+		Speed: 75
+		IdleTurnSpeed: 8
+		IdleSpeed: 120
+		RepulsionSpeed: 30
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 100
+	GrantConditionOnAttack:
+		Condition: triggered
+	GrantConditionOnDeploy:
+		DeployedCondition: triggered
+		PauseOnCondition: disabled
+		ExclusiveDeploy: true
+		DeployType: Detonate
+	KillsSelf:
+		RequiresCondition: !disabled && triggered
+	Armament@PRIMARY:
+		Weapon: DemoTruckTargeting
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: AttackAnything
+		ScanRadius: 10
+	SpawnActorOnDeath:
+		Actor: bbomb_husk.nax2
+		Offset: 0,0
+	SpawnActorOnDeath@1:
+		Actor: bbomb2_husk.nax2
+		Offset: 48,48
+	SpawnActorOnDeath@2:
+		Actor: bbomb3_husk.nax2
+		Offset: -48,-48
+	RenderSprites:
+		Image: schwarzermond_blackbomb
+		PlayerPalette: playerra2
+	EjectOnDeath:
+		PilotActor: alien.nax
+
+bbomb_husk.nax2:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Black Bomb
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+	RenderSprites:
+		Image: miniv2.nax
+		PlayerPalette: playerra2
+	ShakeOnDeath:
+	FallsToEarth:
+		Moves: false
+		Velocity: 80
+		Explosion: NaxisBlackBomb
+	WithShadow:
+bbomb2_husk.nax2:
+	Inherits: bbomb_husk.nax2
+	Tooltip:
+		Name: Black Bomb
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 125
+	FallsToEarth:
+		Velocity: 90
+
+bbomb3_husk.nax2:
+	Inherits: bbomb_husk.nax2
+	Tooltip:
+		Name: Black Bomb
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 100
+	FallsToEarth:
+		Velocity: 100
+####################################################################################################
+#		Red Alert 2 Future Structures
+####################################################################################################
+schwarzermond_haunebuii:
+	Inherits: ^Helicopter
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericAirDetector
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@Helium3: ^NaxiHelium3
+	Valued:
+		Cost: 3200
+	Tooltip:
+		Name: Haunebu II
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~schwarzermond_airfield, ~!schwarzermond_promotion_haunebuiii
+		Queue: Aircraft, RAAircraft
+		Description: actor_nax_haunebu.description
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 66
+		Speed: 66
+		RepulsionSpeed: 66
+		IdealSeparation: 2222
+	Health:
+		HP: 250000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: NaxHaenebuQuadCannon
+		LocalOffset: 800,800,0, -800,800,0, -800,-800,0, 800,-800,0, 800,0,0, 0,800,0, -800,0,0, 0,-800,0
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Name: primary
+		Weapon: NaxHaenebuQuadCannon_elite
+		LocalOffset: 800,800,0, -800,800,0, -800,-800,0, 800,-800,0, 800,0,0, 0,800,0, -800,0,0, 0,-800,0
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	AttackAircraft:
+		Voice: Attack
+		AttackType: Hover
+		FacingTolerance: 512
+	AmmoPool:
+		Armaments: primary
+		Ammo: 8
+		AmmoCondition: ammo
+	WithShadow:
+	WithMoveAnimation:
+		MoveSequence: move
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	ReloadAmmoPool:
+		Delay: 22
+		Count: 1
+	Selectable:
+		DecorationBounds: 1280, 1024
+	SpawnActorOnDeath:
+		Actor: haunebu_husk.nax2
+	Turreted:
+	Voiced:
+		VoiceSet: NaxiUFOVoice
+	RenderRangeCircle:
+		RangeCircleType: aircraft
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	RenderSprites:
+		PlayerPalette: playerra2
+	EjectOnDeath:
+		PilotActor: alien.nax
+
+haunebu_husk.nax2:
+	Inherits: ^LargeHelicopterHusk
+	Tooltip:
+		Name: Haunebu II
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 100
+	RenderSprites:
+		Image: schwarzermond_haunebuii
+		PlayerPalette: playerra2
+schwarzermond_haunebuiii:
+	Inherits: ^Helicopter
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericAirDetector
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@Helium3: ^NaxiHelium3
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Haunebu III
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~schwarzermond_airfield, schwarzermond_techcenter, ~schwarzermond_promotion_haunebuiii
+		Queue: Aircraft, RAAircraft
+		Description: actor_nax_haunebu2.description
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 55
+		Speed: 55
+		RepulsionSpeed: 55
+		IdealSeparation: 2222
+	Health:
+		HP: 375000
+	ChangesHealth@SelfHealing:
+		Step: 150
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: NaxHaenebuQuadCannon
+		LocalOffset: 800,800,0, -800,800,0, -800,-800,0, 800,-800,0, 800,0,0, 0,800,0, -800,0,0, 0,-800,0
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Name: primary
+		Weapon: NaxHaenebuQuadCannon_elite
+		LocalOffset: 800,800,0, -800,800,0, -800,-800,0, 800,-800,0, 800,0,0, 0,800,0, -800,0,0, 0,-800,0
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	Armament@SECOND:
+		Name: secondary
+		Weapon: NaxiCowDrop
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	AttackAircraft:
+		Voice: Attack
+		AttackType: Hover
+		FacingTolerance: 512
+	AmmoPool:
+		Armaments: primary
+		Ammo: 8
+		AmmoCondition: ammo
+	WithShadow:
+	WithMoveAnimation:
+		MoveSequence: move
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	ReloadAmmoPool:
+		Delay: 11
+		Count: 1
+	Selectable:
+		DecorationBounds: 1280, 1024
+	SpawnActorOnDeath:
+		Actor: haunebu2_husk.nax2
+	Turreted:
+	Voiced:
+		VoiceSet: NaxiUFOVoice
+	RenderRangeCircle:
+		RangeCircleType: aircraft
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	RenderSprites:
+		PlayerPalette: playerra2
+	EjectOnDeath:
+		PilotActor: alien.nax
+
+haunebu2_husk.nax2:
+	Inherits: ^LargeHelicopterHusk
+	Tooltip:
+		Name: Haunebu III
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 100
+	RenderSprites:
+		Image: schwarzermond_haunebuiii
+		PlayerPalette: playerra2
+schwarzermond_corruptorpiercer:
+	Inherits: ^RANeutralPlane
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
+	Inherits@Template: ^FighterTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@turnanimation: ^RA2PlanewithTurnAnimation
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@Helium3: ^NaxiHelium3
+	Selectable:
+	Tooltip:
+		Name: Corruptor Piercer
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~schwarzermond_airfield, schwarzermond_techcenter, ~schwarzermond_promotion_piercer
+		Queue: Aircraft, RAAircraft
+		Description: actor_nax_piercer.description
+	Health:
+		HP: 37500
+	ChangesHealth@SelfHealing:
+		Step: 7
+	HitShape:
+	Voiced:
+		VoiceSet: NaxiPiercerUFOVoice
+	Aircraft:
+		TurnSpeed: 10
+		Speed: 150
+		IdleTurnSpeed: 8
+		IdleSpeed: 120
+		RepulsionSpeed: 30
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 100
+	Armament:
+		Name: primary
+		Weapon: NaxCorrosionRocket
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 6
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 60
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	WithMuzzleOverlay:
+	Contrail@1:
+		Offset: -640,171,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -640,-171,0
+		TrailLength: 15
+	SpawnActorOnDeath:
+		Actor: piercer_husk.nax2
+	RenderSprites:
+		Image: schwarzermond_corruptorpiercer
+		PlayerPalette: playerra2
+	EjectOnDeath:
+		PilotActor: alien.nax
+
+piercer_husk.nax2:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Corruptor Piercer
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 1
+		Image: smokey
+		StationaryInterval: 1
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: schwarzermond_corruptorpiercer
+		PlayerPalette: playerra2
+schwarzermond_dieglocke:
+	Inherits: ^Helicopter
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericAirDetector
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@Helium3: ^NaxiHelium3
+	Valued:
+		Cost: 15000
+	Tooltip:
+		Name: Die Glocke
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~schwarzermond_airfield, schwarzermond_techcenter, ~schwarzermond_promotion_dieglocke
+		BuildLimit: 1
+		Queue: Aircraft, RAAircraft
+		Description: actor_nax_dieglocke.description
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 40
+		Speed: 40
+		RepulsionSpeed: 40
+	Health:
+		HP: 3750000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: NaxDieGlocke
+		LocalOffset: 800,0,0
+		PauseOnCondition: !ammo
+	AttackAircraft:
+		Voice: Attack
+		AttackType: Hover
+		FacingTolerance: 512
+	AmmoPool:
+		Armaments: primary
+		Ammo: 8
+		AmmoCondition: ammo
+	WithShadow:
+	WithMoveAnimation:
+		MoveSequence: move
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	ReloadAmmoPool:
+		Delay: 50
+		Count: 4
+	Selectable:
+		DecorationBounds: 1280, 1024
+	SpawnActorOnDeath:
+		Actor: dieglocke_husk.nax2
+	Turreted:
+	Voiced:
+		VoiceSet: NaxiUFOBigVoice
+	RenderRangeCircle:
+		RangeCircleType: aircraft
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	AmbientSound@Steal:
+		SoundFiles: vflolo5a.wav, vflolo5b.wav
+		Volume: 1.5
+		RequiresCondition: stealing
+	SoundAnnouncement@StealEnd:
+		SoundFiles: vflolo6a.wav
+		Volume: 1.5
+		RequiresCondition: !stealing
+	GrantConditionOnAttack:
+		Condition: stealing
+		RevokeDelay: 5
+		ArmamentNames: secondary
+	DamageMultiplier@stealing:
+		Modifier: 50
+		RequiresCondition: stealing
+	ChangesHealth@stealing:
+		Step: 100
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: stealing
+	RenderSprites:
+		PlayerPalette: playerra2
+
+dieglocke_husk.nax2:
+	Inherits: ^LargeHelicopterHusk
+	Tooltip:
+		Name: Die Glocke
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 100
+	RenderSprites:
+		Image: schwarzermond_dieglocke
+		PlayerPalette: playerra2

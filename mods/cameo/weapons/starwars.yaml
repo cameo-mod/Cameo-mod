@@ -15,7 +15,7 @@ SWLaserClone:
 SWLaserCloneG:
 	Inherits: SWLaserClone
 	ReloadDelay: 30
-	Range: 6c0
+	Range: 6144
 	Burst: 6
 
 SWLaserClonePhase2:
@@ -28,7 +28,7 @@ SWLaserClonePhase2G:
 
 SWLaserJetpack:
 	Inherits: SWLaserClone
-	Range: 6c0
+	Range: 6144
 	Burst: 2
 
 SWLaserJetpackAA:
@@ -39,7 +39,7 @@ SWTuskLaser:
 	Inherits: SWLaser
 	Burst: 6
 	ReloadDelay: 25
-	Range: 6c0
+	Range: 6144
 	Report: swramgun2.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 3000
@@ -47,7 +47,7 @@ SWTuskLaser:
 SWLaserV:
 	Inherits: SWLaser
 	ReloadDelay: 24
-	Range: 10c0
+	Range: 10240
 	Burst: 6
 	Warhead@1Dam: SpreadDamage
 		Spread: 100
@@ -59,11 +59,11 @@ SWLaserV:
 			Medium: 80
 			Heavy: 70
 			Concrete: 50
-			
+
 SWLaserR:
 	Inherits: SWLaserV
 	ReloadDelay: 16
-	Range: 6c0
+	Range: 6144
 	Burst: 4
 	Warhead@1Dam: SpreadDamage
 		Spread: 100
@@ -81,8 +81,8 @@ SWAWingGun:
 	ReloadDelay: 16
 	Burst: 2
 	BurstDelays: 2
-	Range: 4c0
-	MinRange: 0c768
+	Range: 4096
+	MinRange: 768
 	Report: swramgun2.aud
 	Projectile: Bullet
 		Blockable: false
@@ -99,7 +99,7 @@ SWAWingGun:
 			Concrete: 25
 		DamageTypes: Prone80Percent, TriggerProne, RippedApartDeath
 
-SWAWingGunAA:
+SWAWingGun_AA:
 	Inherits: SWAWingGun
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -109,29 +109,29 @@ SWXWingGun:
 	Inherits: SWAWingGun
 	Report: swxwinglaser.wav
 	Burst: 4
-	Range: 6c5
+	Range: 6149
 
-SWXWingGunAA:
-	Inherits: SWAWingGunAA
+SWXWingGun_AA:
+	Inherits: SWAWingGun_AA
 	Burst: 4
-	Range: 6c5
+	Range: 6149
 
 SWJediStarFighterGun:
 	Inherits: SWXWingGun
 	Report: swxwinglaser.wav
 	Burst: 8
-	Range: 7c5
+	Range: 7173
 
-SWJediStarFighterGunAA:
-	Inherits: SWXWingGunAA
+SWJediStarFighterGun_AA:
+	Inherits: SWXWingGun_AA
 	Burst: 8
-	Range: 7c5
-		
+	Range: 7173
+
 SWMonCalamariGun:
 	Inherits: SWTB2BlaserAA
 	ReloadDelay: 60
 	Burst: 4
-	Range: 7c0
+	Range: 7168
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Speed: 500
@@ -150,17 +150,17 @@ SWMonCalamariGun:
 			Heavy: 40
 			Concrete: 10
 
-SWMonCalamariGunAA:
+SWMonCalamariGun_AA:
 	Inherits: SWMonCalamariGun
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
-	
+
 SWAclamatorGun:
 	Inherits: SWMonCalamariGun
 	ReloadDelay: 80
 	Burst: 4
-	Range: 7c5
+	Range: 7173
 	Projectile: Bullet
 		Speed: 500
 		Blockable: false
@@ -169,17 +169,17 @@ SWAclamatorGun:
 		Damage: 4000
 		Spread: 400
 
-SWAclamatorGunAA:
+SWAclamatorGun_AA:
 	Inherits: SWAclamatorGun
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
-			
+
 SWStarDestroyerGun:
 	Inherits: SWMonCalamariGun
 	ReloadDelay: 100
 	Burst: 4
-	Range: 8c0
+	Range: 8192
 	Projectile: Bullet
 		Speed: 500
 		Blockable: false
@@ -188,7 +188,7 @@ SWStarDestroyerGun:
 		Damage: 5000
 		Spread: 500
 
-SWStarDestroyerGunAA:
+SWStarDestroyerGun_AA:
 	Inherits: SWStarDestroyerGun
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -207,7 +207,7 @@ SWTieCrawlLaser:
 	Warhead@1Dam: SpreadDamage
 		Versus:
 			Light: 90
-			
+
 SWBikeLaserSalvage:
 	Inherits: SWLaser
 	Burst: 5
@@ -219,7 +219,7 @@ SWBikeLaserSalvage:
 
 SWBikeLaserShell:
 	Inherits: SWSkySpeederLaser
-	Range: 6c0
+	Range: 6144
 	ReloadDelay: 35
 	Burst: 5
 	Projectile:
@@ -268,7 +268,7 @@ SWBikeLaserMissile:
 SWTB2BlaserAG:
 	Inherits: SWLaser
 	ReloadDelay: 3
-	Range: 3c768
+	Range: 3840
 	Warhead@1Dam: SpreadDamage
 		Damage: 1200
 		Versus:
@@ -282,14 +282,14 @@ SWTB2BlaserAG:
 SWTB2BlaserAA:
 	Inherits: SWTB2BlaserAG
 	ReloadDelay: 3
-	Range: 8c768
+	Range: 8960
 	ValidTargets: Air
 	Projectile: Bullet
 		Blockable: false
 	Warhead@1Dam: SpreadDamage
 		Damage: 500
 		ValidTargets: Air
-		
+
 SWCloneBazooka:
 	Inherits: ^MissileWeapon
 	Projectile: MissileCA
@@ -308,14 +308,14 @@ SWCloneBazooka:
 SWCloneBazookaG:
 	Inherits: SWCloneBazooka
 	ReloadDelay: 75
-	Range: 7c0
-	
+	Range: 7168
+
 SWPatriot:
-	Inherits: SWDroidRocketsAA
+	Inherits: SWDroidRockets_AA
 	ReloadDelay: 50
 	Burst: 5
 	BurstDelays: 5
-	Range: 10c0
+	Range: 10240
 	Report: swrocket1.aud
 	ValidTargets: Air
 	Projectile: MissileCA
@@ -334,15 +334,15 @@ SWPatriot:
 		ContrailColor: FFAA44
 		ContrailWidth: 0c128
 		HorizontalRateOfTurn: 60
-	
+
 SWOrcaAGMissiles:
 	Inherits: SWGreenLaser
 	Report: swtielaser.wav
 	ReloadDelay: 44
 	Burst: 2
 	BurstDelays: 7
-	Range: 7c512
-	MinRange: 1c256
+	Range: 7680
+	MinRange: 1280
 	ValidTargets: Ground
 	Projectile: MissileCA
 		Arm: 1
@@ -387,7 +387,7 @@ SWTriFighterAAMissiles:
 SWTowerMissile:
 	Inherits: SWGreenLaser
 	ReloadDelay: 25
-	Range: 10c0
+	Range: 10240
 	Report: swrocket1.aud
 	ValidTargets: Ground
 	Projectile: MissileCA
@@ -416,7 +416,7 @@ SWTowerMissile:
 SWTowerAAMissile:
 	Inherits: SWGreenLaser
 	ReloadDelay: 22
-	Range: 10c0
+	Range: 10240
 	Report: rocket2.aud
 	ValidTargets: Air
 	Projectile: MissileCA
@@ -438,12 +438,12 @@ SWTowerAAMissile:
 	-Warhead@2Smu:
 	Warhead@4EffAir: CreateEffect
 		Explosions: small_building
-		
+
 SWAclamatorMissile:
 	Inherits: SWTowerAAMissile
 	ValidTargets: Ground, Water
 	ReloadDelay: 150
-	Range: 7c5
+	Range: 7173
 	Burst: 4
 	Report: rocket2.aud
 	Projectile: MissileCA
@@ -469,16 +469,16 @@ SWAclamatorMissile:
 	Warhead@4EffAir: CreateEffect
 		Explosions: small_building
 
-SWAclamatorMissileAA:
+SWAclamatorMissile_AA:
 	Inherits: SWAclamatorMissile
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
-		
+
 SWStarDestroyerMissile:
 	Inherits: SWAclamatorMissile
 	ReloadDelay: 160
-	Range: 8c0
+	Range: 8192
 	Burst: 4
 	Report: rocket2.aud
 	Projectile: MissileCA
@@ -496,7 +496,7 @@ SWStarDestroyerMissile:
 	Warhead@4EffAir: CreateEffect
 		Explosions: small_building
 
-SWStarDestroyerMissileAA:
+SWStarDestroyerMissile_AA:
 	Inherits: SWStarDestroyerMissile
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -506,7 +506,7 @@ SWTurretGun:
 	Inherits: SWGreenLaser
 	ReloadDelay: 20
 	Burst: 2
-	Range: 8c0
+	Range: 8192
 	Projectile: Bullet
 		Speed: 1000
 	Warhead@1Dam: SpreadDamage
@@ -521,7 +521,9 @@ SWTurretGun:
 			Concrete: 50
 
 SWGrenade:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	Projectile: Bullet
 		Image: 2100rocket
 	Warhead@3Eff: CreateEffect
@@ -530,12 +532,12 @@ SWGrenade:
 		Condition: empdisable
 		ValidTargets: Vehicle, Cyborg
 		Duration: 125
-		Range: 0c341
+		Range: 341
 
 SWSkySpeederLaser:
 	Inherits: SWDDroidLaser
 	ReloadDelay: 24
-	Range: 6c0
+	Range: 6144
 	Burst: 6
 	Report: swlaser2.aud
 	Projectile: Bullet
@@ -568,7 +570,7 @@ SWDDroidLaser:
 	ReloadDelay: 25
 	Burst: 8
 	BurstDelays: 2
-	Range: 4c0
+	Range: 4096
 	Warhead@1Dam: SpreadDamage
 		Spread: 25
 		Damage: 2500
@@ -590,7 +592,7 @@ SWDDroidLaser:
 		ValidTargets: Ground, Water, Air
 SWT2BMissle:
 	Inherits: ^MissileWeapon
-	Range: 6c0
+	Range: 6144
 	Projectile: MissileCA
 		Arm: 1
 		HorizontalRateOfTurn: 20
@@ -614,7 +616,7 @@ SWATSTLaser:
 	Inherits: SWGreenLaser
 	Report: swtnkfire4.aud
 	ReloadDelay: 75
-	Range: 5c0
+	Range: 5120
 	Burst: 2
 	Warhead@1Dam: SpreadDamage
 		Spread: 250
@@ -624,7 +626,7 @@ SWATATLaser:
 	Inherits: SWGreenLaser
 	ReloadDelay: 33
 	Report: swtnkfire4.aud
-	Range: 8c256
+	Range: 8448
 	Projectile: MissileCA
 		HorizontalRateOfTurn: 20
 		Speed: 512
@@ -635,28 +637,28 @@ SWATATLaser:
 		Spread: 128
 		Damage: 12345
 
-deploytargeting.10c0:
-	Inherits: deploytargeting.5c0
-	Range: 10c0
+deploytargeting_10c0:
+	Inherits: deploytargeting_5c0
+	Range: 10240
 
 InterceptorLauncherMonCalamari:
 	Inherits: InterceptorLauncher
-	Range: 7c0
+	Range: 7168
 
 InterceptorLauncherAclamator:
 	Inherits: InterceptorLauncher
-	Range: 7c5
+	Range: 7173
 
 InterceptorLauncherStarDestroyer:
 	Inherits: InterceptorLauncher
-	Range: 8c0
+	Range: 8192
 
 SWMonCalamariLaser:
 	Inherits: SWXWingGun
 	ValidTargets: Ground, Water
 	ReloadDelay: 80
 	Report: swxwinglaser.wav
-	Range: 7c0
+	Range: 7168
 	Projectile: MissileCA
 		HorizontalRateOfTurn: 20
 		Speed: 400
@@ -672,7 +674,7 @@ SWMonCalamariLaser:
 		Spread: 400
 		Damage: 4000
 
-SWMonCalamariLaserAA:
+SWMonCalamariLaser_AA:
 	Inherits: SWMonCalamariLaser
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -682,7 +684,7 @@ SWAclamatorLaser:
 	Inherits: SWMonCalamariLaser
 	ReloadDelay: 100
 	Report: swtnkfire4.aud
-	Range: 7c5
+	Range: 7173
 	Projectile:
 		HorizontalRateOfTurn: 20
 		Speed: 400
@@ -693,7 +695,7 @@ SWAclamatorLaser:
 		Spread: 500
 		Damage: 5000
 
-SWAclamatorLaserAA:
+SWAclamatorLaser_AA:
 	Inherits: SWAclamatorLaser
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -703,7 +705,7 @@ SWStarDestroyerLaser:
 	Inherits: SWMonCalamariLaser
 	ReloadDelay: 120
 	Report: swtnkfire4.aud
-	Range: 8c0
+	Range: 8192
 	Projectile:
 		HorizontalRateOfTurn: 20
 		Speed: 400
@@ -714,19 +716,19 @@ SWStarDestroyerLaser:
 		Spread: 600
 		Damage: 6000
 
-SWStarDestroyerLaserAA:
+SWStarDestroyerLaser_AA:
 	Inherits: SWStarDestroyerLaser
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
-		
+
 SWATTELaser:
 	Inherits: SWATATLaser
 	Burst: 1
-	Range: 7c786
+	Range: 7954
 
 SWWalkerDisable:
-	Range: 7c0
+	Range: 7168
 	ValidTargets: WalkerMech
 	InvalidTargets: Air
 	ReloadDelay: 120
@@ -758,11 +760,11 @@ SWWalkerDisable2:
 	Warhead@2Con: GrantExternalCondition
 		Condition: disableswwalker
 		Duration: 120
-		Range: 0c172
+		Range: 172
 		ValidTargets: WalkerMech
 SWBomb:
 	ReloadDelay: 80
-	Range: 1c512
+	Range: 1536
 	Projectile: Missile #Bullet
 		Speed: 270
 		Image: scphotonbullet
@@ -784,11 +786,11 @@ SWBomb:
 		Explosions: blueartexp
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, wall, Husk
 SWArtilleryShell:
 	Inherits: ArtilleryShell
 	Report: swgrenade.aud
-	Range: 10c0
+	Range: 10240
 	Projectile: Bullet
 		Speed: 250
 		Image: scphotonbullet
@@ -803,15 +805,15 @@ SWArtilleryShell:
 		Range: 250
 SWArtilleryShell2:
 	Inherits: SWArtilleryShell
-	Range: 12c512
+	Range: 12800
 SWArtilleryShell3:
 	Inherits: SWArtilleryShell
-	Range: 15c0
+	Range: 15360
 SWNapalm:
 	ReloadDelay: 10
 	Burst: 3
-	BurstDelay: 1
-	Range: 3c0
+	BurstDelays: 1
+	Range: 3072
 	Inherits: Napalm
 	Burst: 3
 	Projectile: GravityBomb
@@ -824,7 +826,7 @@ SWNapalm:
 		Condition: empdisable
 		ValidTargets: Vehicle, Cyborg, Structure
 		Duration: 333
-		Range: 3c333
+		Range: 3405
 	Warhead@1Dam: SpreadDamage
 		Spread: 500
 		Damage: 5000
@@ -839,8 +841,8 @@ SWNapalm:
 SWNapalm2:
 	ReloadDelay: 10
 	Burst: 5
-	BurstDelay: 1
-	Range: 5c0
+	BurstDelays: 1
+	Range: 5120
 	Inherits: Napalm
 	Burst: 5
 	Projectile: GravityBomb
@@ -863,8 +865,8 @@ SWNapalm2:
 SWNapalm3:
 	ReloadDelay: 10
 	Burst: 4
-	BurstDelay: 1
-	Range: 4c0
+	BurstDelays: 1
+	Range: 4096
 	Inherits: Napalm
 	Burst: 4
 	Report: swmgun11.aud
@@ -887,7 +889,7 @@ SWNapalm3:
 SWAtomic:
 	Inherits: Atomic
 	Report: swnukemisl.aud
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: swatomsfx
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
@@ -897,13 +899,13 @@ SWDeathStar:
 	Warhead@1Dam_impact: SpreadDamage
 		Range: 1c1, 3c1, 4c1, 5c1
 		Damage: 15000
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: nukexplo.aud
 SWLAATMissile:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 12
-	Range: 5c0
-	MinRange: 1c256
+	Range: 5120
+	MinRange: 1280
 	Projectile: MissileCA
 		Arm: 1
 		HorizontalRateOfTurn: 20
@@ -927,13 +929,13 @@ SWLAATMissile:
 		Condition: empdisable
 		ValidTargets: Vehicle, Cyborg
 		Duration: 25
-		Range: 0c341
-		
+		Range: 341
+
 SWDroidRockets:
 	Inherits: ^AntiGroundMissile
 	ReloadDelay: 48
-	Range: 12c512
-	MinRange: 1c256
+	Range: 12800
+	MinRange: 1280
 	Burst: 8
 	BurstDelays: 2
 	Report: vrocweaa.wav, vrocweab.wav, vrocweac.wav, vrocwead.wav, vrocweae.wav, vrocweaf.wav
@@ -972,8 +974,8 @@ SWDroidRockets:
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: swlaser.aud
 		Explosions: drlaserexp
-		
-SWDroidRocketsAA:
+
+SWDroidRockets_AA:
 	Inherits: SWDroidRockets
 	ValidTargets: Air
 	Projectile: MissileCA
@@ -985,8 +987,8 @@ SWXwingRocket:
 	Inherits: SWDroidRockets
 	Report: swrocket1.aud
 	ReloadDelay: 50
-	Range: 10c0
-	MinRange: 1c256
+	Range: 10240
+	MinRange: 1280
 	Burst: 2
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
@@ -999,8 +1001,8 @@ SWStarFighterRocket:
 	Inherits: SWXwingRocket
 	Report: swrocket1.aud
 	ReloadDelay: 50
-	Range: 8c0
-	MinRange: 1c256
+	Range: 8192
+	MinRange: 1280
 	Burst: 4
 	Projectile:
 		ContrailColor: FFAA44
@@ -1035,11 +1037,11 @@ SWYWingShell:
 		Condition: empdisable
 		ValidTargets: Vehicle, Cyborg, Structure
 		Duration: 200
-		Range: 2c0
+		Range: 2048
 SWJediSword:
 	Inherits: ^TSLaser
 	ReloadDelay: 6
-	Range: 1c512
+	Range: 1536
 	Report: swsaber.wav, swsaber2.wav, swsaber2.wav, swsaber3.wav, swsaber4.wav, swsaber5.wav, swsaber6.wav, swsaberfight1.wav, swsaberfight2.wav, swsaberfight1.wav, swsaberfight2.wav, swsaberfight1.wav, swsaberfight2.wav, swsaberfight1.wav, swsaberfight2.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 3000
@@ -1048,16 +1050,18 @@ SWJediSword:
 SWSithSword:
 	Inherits: ^TSLaser
 	ReloadDelay: 6
-	Range: 1c512
+	Range: 1536
 	Report: swsaber.wav, swsaber2.wav, swsaber2.wav, swsaber3.wav, swsaber4.wav, swsaber5.wav, swsaber6.wav, swsaberfight1.wav, swsaberfight2.wav, swsaberfight1.wav, swsaberfight2.wav, swsaberfight1.wav, swsaberfight2.wav, swsaberfight1.wav, swsaberfight2.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 3000
 	Projectile: LaserZap
 		Color: BF0000
 SWR2D2Tesla:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ReloadDelay: 70
-	Range: 1c0
+	Range: 1024
 	Warhead@1Dam: SpreadDamage
 		Damage: 5250
 		Versus:
@@ -1065,7 +1069,7 @@ SWR2D2Tesla:
 			Heavy: 60
 SWExecutorLaser:
 	Inherits: SWATATLaser
-	Range: 9c768
+	Range: 9984
 	Burst: 16
 SWRandomMin:
 	Inherits: ^DamagingExplosionHE
@@ -1098,12 +1102,12 @@ SWRandomCarbon:
 SWPummel:
 	Inherits: ^TSLaser
 	ReloadDelay: 4
-	Range: 1c512
+	Range: 1536
 	Report: swpummel.wav
-	ValidTargets: Structure, Wall
+	ValidTargets: Structure, wall
 	Warhead@1Dam: SpreadDamage
 		Damage: 2000
-		ValidTargets: Structure, Wall
+		ValidTargets: Structure, wall
 	Projectile: LaserZap
 		Color: 83FF33
 SWPummelVehicle:

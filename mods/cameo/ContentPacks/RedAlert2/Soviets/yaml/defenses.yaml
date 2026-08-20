@@ -1,0 +1,442 @@
+ra2_soviets_concretebarrier:
+	Inherits: ^Wall
+	Valued:
+		Cost: 200
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Concrete Barrier
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~ra2_soviets_constructionyard
+		Queue: Defence, RADefence
+		Description: Provides flat building foundation.
+	Health:
+		HP: 100000
+	Armor:
+		Type: Concrete
+	BlocksProjectiles:
+	Crushable:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSounds: crumble.aud
+	LineBuild:
+		NodeTypes: concrete
+	LineBuildNode:
+		Types: concrete
+	RenderSprites:
+		Image: ra2_soviets_concretebarrier
+		Palette: ra2
+		PlayerPalette: playerra2
+	WithWallSpriteBody:
+		IsPlayerPalette: True
+		Palette: playerra2
+		PlayerPalette: playerra2
+		Type: ra2_soviets_concretebarrier
+
+ra2_soviets_nuclearmissilesilo:
+	Inherits: ^RA2Building
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Tooltip:
+		Name: Nuclear Missile Silo
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_battlelab, !ra2nuke, ~techlevel.superweapons
+		Queue: Defence, RADefence
+		Description: actor_namisl.description
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+	SelectionDecorations:
+	NukePowerCA:
+		OrderName: NukePowerInfoOrder
+		AllowMultiple: true
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		IconImage: ra2_soviets_nuclearmissilesilo
+		Icons:
+			1: icon2
+		Cursor: nuke
+		ChargeInterval: 10500
+		Names:
+			1: power_ra2nuke.name
+		Descriptions:
+			1: power_ra2nuke.description
+		EndChargeSound: snukread.wav
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		EndChargeTextNotification: Nuclear Missile ready.
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		LaunchTextNotification: Warning: Nuclear Missile launched.
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Warning: Nuclear Missile launched.
+		LaunchSound: snuksire.wav
+		IncomingSound: snuksire.wav
+		MissileWeapons:
+			1: ra2atomic
+		MissileDelay: 45
+		MissilePalette: playerra2
+		IsPlayerPalette: true
+		SpawnOffset: 3c0,0,-1c512
+		DisplayBeacon: True
+		BeaconPosters:
+			1: atomic
+		BeaconPosterPalette: beaconposter
+		DisplayRadarPing: True
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraRange: 10000
+		CameraRemoveDelay: 125
+		CircleRanges:
+			1: 10000
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		MissileImage: ra2atomic
+		BeaconActor: BLASTRADIUS.atomic
+	SupportPowerChargeBar:
+	WithSupportPowerActivationAnimation:
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: ra2nuke
+
+ra2_soviets_ironcurtain:
+	Inherits: ^RA2Building
+	Inherits@SW: ^Superweapon
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Buildable:
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_battlelab, ~techlevel.superweapons
+		Description: actor_iron.description
+	Tooltip:
+		Name: Iron Curtain
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+	WithSpriteBody:
+		PauseOnCondition: disabled
+	SelectionDecorations:
+	GrantExternalConditionPower@IRONCURTAIN:
+		OrderName: IronCurtain
+		PauseOnCondition: disabled
+			1: ~techlevel.superweapons
+		IconImage: ra2_soviets_ironcurtain
+		Icons:
+			1: icon2
+		ChargeInterval: 4500
+		Names:
+			1: Invulnerability
+		Descriptions:
+			1: Makes a group of units temporarily invulnerable.
+		Durations:
+			1: 500
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		#BeginChargeSpeechNotification: IronCurtainCharging
+		#EndChargeSpeechNotification: IronCurtainReady
+		EndChargeSound: siroread.wav
+		DisplayRadarPing: True
+		Conditions:
+			1: invulnerability
+		OnFireSound: siroon.wav
+		IncomingSound: siroon.wav
+		EffectImage: explosion
+		EffectSequence: ra2_ironblast
+		EffectPalette: ra2effect
+		Dimensions:
+			1: 5, 5
+		Footprints:
+			1: __x__ _xxx_ xxxxx _xxx_ __x__
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		BlockedCursor: move-blocked
+	SupportPowerChargeBar:
+	MustBeDestroyed:
+		RequiredForShortGame: false
+
+ra2_soviets_battlebunker:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^BunkerTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@shape: ^2x2Shape
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@gar: ^ClearableGarrison
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@ra2sovietsConscription: ^RA2SovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^RA2SovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^RA2SovietsShockTrooperTraining
+	Tooltip:
+		Name: Battle Bunker
+	Building:
+		Footprint: xx xx
+		Dimensions: 2, 2
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 40
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_barracks
+		Description: actor_nabnkr.description
+	Valued:
+		Cost: 800
+	Health:
+		HP: 80000
+	Turreted:
+		TurnSpeed: 1023
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Selectable:
+		Bounds: 1792, 1792, 0, 0
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 6
+		#InitialUnits: ra2_soviets_conscript
+	WithSpriteBody:
+	WithIdleOverlay@Bunkered:
+		Sequence: idle-bunkered
+		RequiresCondition: loaded && !build-incomplete
+	AttackOpenTopped:
+		Armaments: garrisoned
+		PortOffsets: 768,0,128, 448,-682,128, -448,-682,128, -768,0,128, -448,682,128, 448,682,128
+		PauseOnCondition: chronobeamed
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	RevealsShroud:
+		Range: 6666
+	Selectable:
+		Class: ra2_soviets_battlebunker
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_conscription, ra2_soviets_doctrine_harshenvironmentinfantryconditioning, ra2_soviets_doctrine_shocktroopertraining
+
+ra2_soviets_sentrygun:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@RenderVoxel: ^RenderVoxel
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@ra2sovietsConscription: ^RA2SovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^RA2SovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^RA2SovietsShockTrooperTraining
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_barracks
+		Description: template_anti_infantry_defense.description
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Sentry Gun
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 57000
+	Selectable:
+		Bounds: 1024, 1024
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: -250,1,1
+	AttackTurreted:
+		Voice: Attack
+	Armament:
+		Weapon: RA2vulcan
+		LocalOffset: 350,128,400, 350,-128,400
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 175,128,400, 175,-128,400
+		CasingTargetOffset: 0,728,0, 0,-728,0
+	WithMuzzleOverlay:
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithVoxelTurret:
+		RequiresCondition: !build-incomplete
+	AutoTarget:
+	-WithVoxelBody:
+	-Cloak@TDcloak:
+	Power:
+		Amount: -25
+	RevealsShroud:
+		Range: 6577
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_conscription, ra2_soviets_doctrine_harshenvironmentinfantryconditioning, ra2_soviets_doctrine_shocktroopertraining
+
+ra2_soviets_flakcannon:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@RenderVoxel: ^RenderVoxel
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 40
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_radar
+		Description: actor_agun.description
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Flak Cannon
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 60000
+	Selectable:
+		Bounds: 1024, 1024
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: -250,1,1
+	AttackTurreted:
+		Voice: Attack
+	Armament:
+		Weapon: RA2TURRETFLAKAA
+		LocalOffset: 500,0,550
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithVoxelTurret:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	AutoTarget:
+	-WithVoxelBody:
+	-Cloak@TDcloak:
+	Power:
+		Amount: -35
+	RevealsShroud:
+		Range: 12936
+	DetectCloaked:
+		Range: 6468
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavycannons
+
+ra2_soviets_teslacoil:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Inherits@TeslaTargeting: ^PrioritizeTesla
+	Inherits@arc: ^RA2TeslaOverload
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 80
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_battlelab
+		Description: actor_ra2tesla.description
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Tesla Coil
+	Selectable:
+		Bounds: 1024, 2048, 0, -512
+	SelectionDecorations:
+	Health:
+		HP: 120000
+	WithTeslaChargeOverlay:
+	Armament:
+		Weapon: RA2CoilBolt
+		LocalOffset: 120,0,1100
+		RequiresCondition: ((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && (!ra2_soviets_upgrade_teslaoverload && !rank-elite)
+	Armament@2:
+		Weapon: RA2CoilBolt2
+		LocalOffset: 120,0,1100
+		RequiresCondition: ((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)
+	Armament@3:
+		Weapon: RA2CoilBolt3
+		LocalOffset: 120,0,1100
+		RequiresCondition: ((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && rank-elite)
+	Armament@Charged1:
+		Weapon: RA2OPCoilBolt1
+		LocalOffset: 120,0,1100
+		RequiresCondition: ((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && (!ra2_soviets_upgrade_teslaoverload && !rank-elite)
+	Armament@Charged2:
+		Weapon: RA2OPCoilBolt2
+		LocalOffset: 120,0,1100
+		RequiresCondition: ((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)
+	Armament@Charged3:
+		Weapon: RA2OPCoilBolt3
+		LocalOffset: 120,0,1100
+		RequiresCondition: ((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && rank-elite)
+	AttackTesla:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+		ChargeAudio: btespow.wav
+		MaxCharges: 1
+		ReloadDelay: 75
+		# Maintainer 2026-08-15: RA1 charges 25, RA2 charges 20. Written OUT rather
+		# than left to the engine's default of 22 — an absent key silently pinned
+		# this coil's charge to whatever the engine ships, and W16 prices the
+		# charge share, so the number has to be a decision rather than a leftover.
+		InitialChargeDelay: 20
+	WithMakeAnimation:
+	WithIdleOverlay@powered:
+		Sequence: idle-powered
+		RequiresCondition: !disabled && !build-incomplete
+	GrantCondition@power:
+		Condition: unpowered
+		RequiresCondition: lowpower || powerdown
+	GrantCondition@disable:
+		RequiresCondition: ((empdisable || chronobeamed || diskdrain || being-captured) && !invulnerability) || (unpowered && !TeslaCoilCharge) || build-incomplete
+	Targetable@TeslaCoil:
+		TargetTypes: TeslaCoil
+		RequiresCondition: !build-incomplete && !chronobeamed
+	ExternalCondition@TeslaCoilCharge:
+		Condition: TeslaCoilCharge
+		SourceCap: 1
+	RangeMultiplier@Charge2:
+		Modifier: 110
+		RequiresCondition: (TeslaCoilCharge == 2 && !unpowered) || (TeslaCoilCharge == 3 && unpowered)
+	RangeMultiplier@Charge3:
+		Modifier: 120
+		RequiresCondition: (TeslaCoilCharge == 3 && !unpowered) || TeslaCoilCharge > 3
+	FirepowerMultiplier@Charge2:
+		Modifier: 125
+		RequiresCondition: (TeslaCoilCharge == 2 && !unpowered) || (TeslaCoilCharge == 3 && unpowered)
+	FirepowerMultiplier@Charge3:
+		Modifier: 150
+		RequiresCondition: (TeslaCoilCharge == 3 && !unpowered) || TeslaCoilCharge > 3
+	DroneSpawnerMasterCA:
+		Actors: ra2shk.bot, ra2shk.bot, ra2shk.bot
+		SpawnOffset: 511,1c0,0, -511,-1c0,0, -1c0,1c0,0
+		RespawnTicks: 250
+		InitialActorCount: 0
+		SlavesTargetSelf: true
+		SlaveDisposalOnKill: DoNothing
+		SlaveDisposalOnOwnerChange: DoNothing
+		LoadedCondition: TeslaCoilCharge
+		PauseOnCondition: !teslaChargeUpgrade
+	Production:
+		Produces: ra2tesla.upgrade
+		RequiresCondition: !teslaChargeUpgrade
+	ProductionBar:
+		ProductionType: ra2tesla.upgrade
+	ProductionQueue:
+		Type: ra2tesla.upgrade
+		DisplayOrder: 0
+		Group: Addon
+		LowPowerModifier: 200
+		QueueLimit: 1
+		ItemLimit: 1
+	GrantConditionOnPrerequisite@teslaChargeUpgrade:
+		Condition: teslaChargeUpgrade
+		Prerequisites: ra2_soviets_upgrade_teslacoilchargers
+	Power:
+		Amount: -100
+	RevealsShroud:
+		Range: 10000
+	DetectCloaked:
+		Range: 5000
+		RequiresCondition: !disabled
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_teslaoverload, ra2_soviets_upgrade_teslacoilchargers

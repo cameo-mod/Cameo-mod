@@ -1,0 +1,297 @@
+light_inf:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@NeedleGuns: ^D2K_NeedleGuns
+	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
+	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	# Re-inherit last: the Scout/Anti-Tank templates pull in ^RA2YuriStealthSuits,
+	# which redefines the shield traits keyed to its own upgrade and overwrites the
+	# Personal Shield condition. Re-applying ^D2KPersonalShield here restores it.
+	Inherits@personalshield: ^D2KPersonalShield
+	Tooltip:
+		Name: Light Infantry
+	Valued:
+		Cost: 150
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+		IconPalette: d2kunit
+		Prerequisites: ~d2k_barracks, ~!ordos_barracks, ~!ixian_barracks
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@light_inf:
+		Modifier: 91
+	Mobile:
+		Speed: 54
+	Armament@PRIMARY: ##########
+		Weapon: light_inf_lmg
+		LocalOffset: 128,0,256
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
+	Armament@Upgrade: ##########
+		Weapon: light_inf_lmg_upgrade
+		LocalOffset: 128,0,256
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: light_inf_lmg
+		MuzzleSequence: garrison-muzzle
+		MuzzlePalette: d2keffect
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: light_inf_lmg_upgrade
+		MuzzleSequence: garrison-muzzle
+		MuzzlePalette: d2keffect
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
+	WithInfantryBody:
+		IdleSequences: idle1,idle2,idle3,idle4
+		DefaultAttackSequence: shoot
+	Parachutable:
+	ActorStatValues:
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
+
+trooper:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
+	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
+	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	# Re-inherit last: ^AntiTankAntiAirInfantryTemplate pulls in ^RA2YuriStealthSuits,
+	# which overwrites the shield traits with its own upgrade condition. Re-applying
+	# ^D2KPersonalShield here restores the Personal Shield condition.
+	Inherits@personalshield: ^D2KPersonalShield
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 20
+		Prerequisites: ~d2k_barracks, ~!ordos_upgrade_antiairtrooper, ~!ixian_upgrade_twinbazooka, ~!ordos_barracks, ~!ixian_barracks
+		Description: template_antitank_antiair_infantry.description
+		IconPalette: d2kunit
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Rocket Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 12000
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Mobile:
+		Speed: 48
+	Armament:
+		Weapon: D2K_Rocket_Trooper
+		LocalOffset: 128,0,256
+	Armament@garrisoned:
+		Name: garrisoned
+		Weapon: D2K_Rocket_Trooper
+	TakeCover:
+		ProneOffset: 320,0,-128
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	ActorStatValues:
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_heavymissiles, ixian_upgrade_advancedixiantechnology
+
+fremen_creep:
+	Inherits: ^D2KInfantry
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@bot: ^BotMicromanageable
+	Tooltip:
+		Name: Fremen Warrior
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Mobile:
+		Speed: 50
+	Valued:
+		Cost: 500
+	Health:
+		HP: 25000
+	RevealsShroud:
+		Range: 10000
+	AutoTarget:
+		ScanRadius: 10
+	Armament@PRIMARY:
+		Weapon: HMG_fremen
+	Armament@SECONDARY:
+		Weapon: Fremen_RPG
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	-MustBeDestroyed:
+	Voiced:
+		VoiceSet: D2KFremenVoice
+	DetectCloaked:
+		Range: 5000
+	Passenger:
+		CargoType: Fremen
+	RenderSprites:
+		Image: fremen
+	RequiresSpecificOwners:
+		ValidOwnerNames: Creeps
+	MobSpawnerSlave:
+	-RevealsShroud@base-reveal:
+	-GrantConditionOnPrerequisite@base-reveal:
+
+engineer:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@engineer: ^EngineerDefaultWeapons
+	Inherits@isengineer: ^IsEngineer
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
+	Inherits@BulletImmune: ^BulletImmune
+	Inherits@personalshield: ^D2KPersonalShield
+	Inherits@D2Kanim: ^D2KPaletteRenderInfantry
+	Tooltip:
+		Name: Engineer
+	Valued:
+		Cost: 500
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~d2k_barracks
+		Queue: Infantry, RAInfantry
+		Description: Captures and repairs structures.\n  Unarmed
+		IconPalette: d2kunit
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 5000
+	Passenger:
+		CustomPipType: engineer
+	Garrisoner:
+		CustomPipType: engineer
+	InstantlyRepairs:
+		Types: building
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	InstantlyRepairs@Tech:
+		Types: tech
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	InstantlyRepairs@Civ:
+		Types: civ
+		ValidRelationships: Ally, Neutral
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	RepairsBridges:
+		EnterBehaviour: Exit
+	CaptureManager:
+	GrantConditionOnPrerequisite@GLOBALREUSABLEENGINEER:
+		Condition: global-reusable-engineers
+		Prerequisites: global-reusable-engineers
+	Captures:
+		RequiresCondition: !global-reusable-engineers
+		CaptureTypes: building, defense, tech
+		PlayerExperience: 500
+		ConsumedByCapture: True
+	Captures@REUSABLE:
+		RequiresCondition: global-reusable-engineers
+		CaptureTypes: building, defense, tech
+		PlayerExperience: 500
+		CaptureDelay: 375
+		ConsumedByCapture: False
+		EnterCursor: ability
+		EnterBlockedCursor: move-blocked
+	Selectable:
+		Priority: 5
+		Class: e6
+	Voiced:
+		VoiceSet: D2KEngineerVoice
+	AttackFrontal:
+		FacingTolerance: 0
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	RenderSprites:
+		Image: engineer
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Stats: Armor, Sight, Speed
+	ActorStatValues:
+		Upgrades: td_gdi_upgrade_longrangesensors, td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
+
+# submachinegunner:
+# 	Inherits: light_inf
+# 	Valued:
+# 		Cost: 60
+# 	Tooltip:
+# 		Name: Mercenary
+# 	Buildable:
+# 		BuildPaletteOrder: 10
+# 		Queue: Infantry, RAInfantry
+# 		Description: General-purpose infantry equipped with SMG\nDeals burst damage.\nShort Range\n  Strong vs Infantry, Vehicles\n  Weak vs Siege
+# 		Prerequisites: ~faction.mercenary
+# 		BuildDuration: 80
+# 		BuildDurationModifier: 100
+# 		Icon: icon_merc
+# 	Mobile:
+# 		Speed: 48
+# 	Health:
+# 		HP: 7200
+# 	Armament@PRIMARY: ##########
+# 		Weapon: LMG_burst
+# 	RenderSprites:
+# 		Image: light_inf
+# 	Voiced:
+# 		VoiceSet: D2KTrooper
+
+# shotgunner:
+# 	Inherits: light_inf
+# 	Valued:
+# 		Cost: 80
+# 	Tooltip:
+# 		Name: Shotgunner
+# 	Buildable:
+# 		BuildPaletteOrder: 10
+# 		Queue: Infantry, RAInfantry
+# 		Description: General-purpose infantry equipped with shotgun\nDeals massive damage up front.\nVery Short Range\n  Strong vs Infantry, Vehicles\n  Weak vs Siege
+# 		Prerequisites: ~faction.smugglers
+# 		BuildDuration: 90
+# 		BuildDurationModifier: 100
+# 	WithInfantryBody:
+# 		-IdleSequences: idle1,idle2
+# 		DefaultAttackSequence: shoot
+# 	Armament@PRIMARY: ##########
+# 		Weapon: d2k_shotgun
+# 		LocalOffset: 0,0,50
+# 	Health:
+# 		HP: 6000
+# 	Mobile:
+# 		Speed: 48
+# 		Voice: Move
+# 	RenderSprites:
+# 		Image: shotgunner
+# 		PlayerPalette: player
+# 	Voiced:
+# 		VoiceSet: D2KShotgunner

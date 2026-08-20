@@ -1,7 +1,7 @@
 Skunkspray:
 	Inherits: ^FlameWeapon
 	ReloadDelay: 65
-	Range: 3c0
+	Range: 3072
 	Report: skunkSpray.wav
 	InvalidTargets:
 	Warhead@1Dam: SpreadDamage
@@ -20,17 +20,17 @@ Skunkspray:
 
 DemoTruckTargeting:
 	ValidTargets: Structure, Infantry, Vehicle
-	Range: 2c0
+	Range: 2048
 	Projectile: InstantHit
 	Warhead@1Dam: TargetDamage
 		
 SheepExplode:
-	ValidTargets: Ground, Trees, Water, Underwater, Air
+	ValidTargets: Ground, Water, Underwater, Air
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 1c0
 		Damage: 2000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Trees, Water, Air
+		ValidTargets: Ground, Water, Air
 		Versus:
 			Wood: 25
 			Concrete: 25
@@ -38,7 +38,7 @@ SheepExplode:
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@2Res_impact: DestroyResource
 		Size: 1
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke_explosion
 		ImpactSounds: kaboom1.aud
 		ImpactActors: false
@@ -47,7 +47,7 @@ SheepExplode:
 		Damage: 2000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 5
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		Versus:
 			Wood: 50
 			Concrete: 25
@@ -56,7 +56,7 @@ SheepExplode:
 	Warhead@5Res_areanuke1: DestroyResource
 		Size: 2
 		Delay: 5
-	Warhead@6Eff_areanuke1: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: kaboom22.aud
 		Delay: 5
 		ImpactActors: false
@@ -76,7 +76,7 @@ SheepExplode:
 		Damage: 1000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 10
-		ValidTargets: Trees
+		ValidTargets: Ground
 		DamageTypes: Incendiary
 	Warhead@9Res_areanuke2: DestroyResource
 		Size: 3
@@ -96,21 +96,21 @@ SheepExplode:
 		Damage: 1000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 15
-		ValidTargets: Trees
+		ValidTargets: Ground
 		DamageTypes: Incendiary
 	Warhead@12Res_areanuke3: DestroyResource
 		Size: 4
 		Delay: 15
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Trees
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 4
 		Delay: 15
 		
 Flamingsheep:
 	Inherits: ^FlameWeapon
 	ReloadDelay: 4
-	Range: 2c0
+	Range: 2048
 	Burst: 2
 	BurstDelays: 2
 	-Projectile:
@@ -133,7 +133,7 @@ WormsChronoAI:
 	Warhead@1Actor: SpawnActor
 		Actors: wtank, wtank, wtank, wtank, skunk, wormbuggy, wormbuggy, wtank, skunk
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
@@ -145,7 +145,7 @@ WormsRockets:
 	Projectile: MissileCA
 		Image: wormrocket
 		ContrailLength: 1
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: wormexplode.wav, wormexplode2.wav
 		Explosions: wormexp2
 	Warhead@2DamExtra: SpreadDamage
@@ -159,10 +159,12 @@ WormsRockets:
 			Heavy: 34
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 WormsGrenade:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	Projectile: Bullet
 		Image: wormgrenadeshp
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: wormexplode.wav, wormexplode2.wav
 		Explosions: wormexp2
 	Warhead@2DamExtra: SpreadDamage
@@ -178,23 +180,23 @@ WormsGrenade:
 WormsPirateCannon:
 	Inherits: WormsGrenade
 	Report: tnkfire3.aud
-	Range: 8c0
+	Range: 8192
 	Warhead@2DamExtra: SpreadDamage
 		Spread: 341
 		Damage: 7500
 WormsMoaiRock:
 	Inherits: WormsGrenade
-	Range: 8c0
+	Range: 8192
 	Projectile: Bullet
 		Image: worms_moai_rock
 
 SheepExplode:
-	ValidTargets: Ground, Trees, Water, Underwater, Air
+	ValidTargets: Ground, Water, Underwater, Air
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 1c0
 		Damage: 2000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Trees, Water, Air
+		ValidTargets: Ground, Water, Air
 		Versus:
 			Wood: 25
 			Concrete: 25
@@ -202,7 +204,7 @@ SheepExplode:
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@2Res_impact: DestroyResource
 		Size: 1
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke_explosion
 		ImpactSounds: kaboom1.aud
 		ImpactActors: false
@@ -211,7 +213,7 @@ SheepExplode:
 		Damage: 2000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 5
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		Versus:
 			Wood: 50
 			Concrete: 25
@@ -220,7 +222,7 @@ SheepExplode:
 	Warhead@5Res_areanuke1: DestroyResource
 		Size: 2
 		Delay: 5
-	Warhead@6Eff_areanuke1: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: kaboom22.aud
 		Delay: 5
 		ImpactActors: false
@@ -240,7 +242,7 @@ SheepExplode:
 		Damage: 1000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 10
-		ValidTargets: Trees
+		ValidTargets: Ground
 		DamageTypes: Incendiary
 	Warhead@9Res_areanuke2: DestroyResource
 		Size: 3
@@ -260,21 +262,21 @@ SheepExplode:
 		Damage: 1000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 15
-		ValidTargets: Trees
+		ValidTargets: Ground
 		DamageTypes: Incendiary
 	Warhead@12Res_areanuke3: DestroyResource
 		Size: 4
 		Delay: 15
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Trees
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 4
 		Delay: 15
 		
 Flamingsheep:
 	Inherits: ^FlameWeapon
 	ReloadDelay: 4
-	Range: 2c0
+	Range: 2048
 	Burst: 2
 	BurstDelays: 2
 	-Projectile:
@@ -292,13 +294,13 @@ Flamingsheep:
 		Explosions: med_napalm
 
 Atomicdonkey:
-	ValidTargets: Ground, Air, Trees
+	ValidTargets: Ground, Air
 	Report: nukemisl.aud
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 1c0
 		Damage: 15000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Air, Trees
+		ValidTargets: Ground, Air
 		AffectsParent: True
 		Versus:
 			None: 100
@@ -306,7 +308,7 @@ Atomicdonkey:
 			Light: 60
 			Heavy: 50
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke_explosion
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
@@ -328,10 +330,10 @@ Atomicdonkey:
 		Delay: 3
 	Warhead@5Smu_areanukea: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 3
 		Delay: 3
-	Warhead@6Eff_areanukea: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: xplobig4.aud
 		Delay: 3
 		ImpactActors: false
@@ -340,7 +342,7 @@ Atomicdonkey:
 		Damage: 5000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 6
-		ValidTargets: Ground, Air, Trees
+		ValidTargets: Ground, Air
 		AffectsParent: True
 		Versus:
 			None: 100
@@ -353,7 +355,7 @@ Atomicdonkey:
 		Delay: 6
 	Warhead@9Smu_areanukeb: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 4
 		Delay: 6
 	Warhead@10Dam_areanukec: SpreadDamage
@@ -361,7 +363,7 @@ Atomicdonkey:
 		Damage: 2000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 9
-		ValidTargets: Ground, Air, Trees
+		ValidTargets: Ground, Air
 		AffectsParent: True
 		Versus:
 			None: 100
@@ -374,7 +376,7 @@ Atomicdonkey:
 		Delay: 9
 	Warhead@12Smu_areanukec: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 5
 		Delay: 9
 	Warhead@13Shake: ShakeScreen
@@ -386,7 +388,7 @@ Worms227mm:
 	Projectile: Bullet
 		Image: wormsmissile
 		ContrailLength: 1
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: wormexplode.wav, wormexplode2.wav
 		Explosions: wormexp2
 	Warhead@2DamExtra: SpreadDamage
@@ -431,7 +433,7 @@ WormsUZI:
 	Report: wormsuzi.wav
 	Warhead@2Eff: CreateEffect
 		Explosions: wormspiff
-	Warhead@Ricochet: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: wormsricochet.wav
 		ImpactSoundChance: 25
 		Delay: 2
@@ -440,7 +442,7 @@ WormsVulcan:
 	Report: wormsuzi.wav
 	Warhead@2Eff: CreateEffect
 		Explosions: wormspiff
-	Warhead@Ricochet: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: wormsricochet.wav
 		ImpactSoundChance: 10
 		Delay: 2
@@ -448,7 +450,7 @@ WormsFireballLauncher:
 	Inherits: FireballLauncher
 	Burst: 2
 	BurstDelays: 20
-	Range: 6c0
+	Range: 6144
 	Projectile: Bullet
 		Speed: 250
 		TrailImage: fb2
@@ -466,10 +468,10 @@ WormsShotGun:
 			Light: 70
 	Warhead@2Eff: CreateEffect
 		Explosions: wormspiff
-	Warhead@Reload: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: wormsshotgunr.wav
 		Delay: 10
-	Warhead@Ricochet: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: wormsricochet.wav
 		ImpactSoundChance: 50
 		Delay: 2

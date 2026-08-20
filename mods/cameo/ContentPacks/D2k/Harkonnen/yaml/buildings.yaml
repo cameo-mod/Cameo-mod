@@ -1,0 +1,558 @@
+harkonnen_constructionyard:
+	Inherits: ^ConstructionYard
+	Tooltip:
+		Name: Harkonnen Construction Yard
+	Transforms:
+		IntoActor: harkonnen_mobileconstructionvehicle
+		Offset: 1,1
+		Facing: 432
+	RenderSprites:
+		Image: conyard.harkonnen
+
+harkonnen_windtrap:
+	Inherits: ^WindTrap
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard
+	RenderSprites:
+		Image: power.harkonnen
+
+harkonnen_barracks:
+	Inherits: ^D2KBuilding
+	Inherits@UPGRADEABLE: ^D2kUpgradeable
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Inherits@shape: ^2x2Shape
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_windtrap
+	Tooltip:
+		Name: Harkonnen Barracks
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 352,576,0
+		ExitCell: 0,2
+	Exit@2:
+		SpawnOffset: 512,480,0
+		ExitCell: 1,2
+	RenderSprites:
+		Image: barracks.harkonnen
+	ProvidesPrerequisite@d2kbarracks:
+		Prerequisite: d2k_barracks
+	ProvidesPrerequisite@barracks:
+		Prerequisite: barracks
+	ProvidesPrerequisite@factionbarracks:
+		Prerequisite: harkonnen_barracks
+	GrantConditionOnPrerequisite@UPGRADEABLE:
+		Prerequisites: upgrade_barracks
+	ActorStatValues:
+		Upgrades: upgrade_barracks
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 1, 2
+		Range: 1c512, 2c768
+
+harkonnen_refinery:
+	Inherits: ^D2KRefinery
+	Tooltip:
+		Name: Refinery
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_windtrap
+		Description: Processes spice into credits.
+	RenderSprites:
+		Image: refinery.harkonnen
+
+harkonnen_storagesilo:
+	Inherits: ^D2KSilo
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_refinery
+		Description: Stores excess spice.
+	RenderSprites:
+		Image: silo.harkonnen
+
+harkonnen_lightfactory:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^3x3Shape
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_refinery
+	Tooltip:
+		Name: Harkonnen Light Factory
+	Building:
+		Footprint: xxx xx= ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Valued:
+		Cost: 1000
+	Health:
+		HP: 200000
+	ProductionQueue@VEHICLE:
+		BuildDurationModifier: 200
+	WithIdleOverlay@TOP:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-top
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Vehicle
+		Sequence: production-welding
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 544,-224,0
+		ExitCell: 2,1
+	RenderSprites:
+		Image: light.harkonnen
+	ProductionTimeMultiplier@light:
+		Multiplier: 50
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	ProvidesPrerequisite@light_factory:
+		Prerequisite: light_factory
+	-WithDeathAnimation:
+
+harkonnen_heavyfactory:
+	Inherits: ^D2KBuilding
+	Inherits@UPGRADEABLE: ^D2kUpgradeable
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^3x3Shape
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_refinery
+	Tooltip:
+		Name: Harkonnen Heavy Factory
+	Building:
+		Footprint: _x_ xxx =xX ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	HitShape:
+		TargetableOffsets: -1155,-704,0, -1365,832,0
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 1536
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -512, -1536
+			BottomRight: 512, -512
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 256,192,0
+		ExitCell: 0,2
+	ProvidesPrerequisite@atreides:
+		Prerequisite: heavy.atreides
+	ProvidesPrerequisite@ordos:
+		Prerequisite: heavy.ordos
+	ProvidesPrerequisite@harkonnen:
+		Prerequisite: heavy.harkonnen
+	RenderSprites:
+		Image: heavy.harkonnen
+	WithIdleOverlay@TOP:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-top
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Vehicle, RAVehicle
+		Sequence: production-welding
+	ProvidesPrerequisite@heavy_factory:
+		Prerequisite: heavy_factory
+	ProvidesPrerequisite@vehicle_production:
+		Prerequisite: harkonnen_vehicle_production
+	ProductionBar@upgrade:
+		ProductionType: Upgrades
+	GrantConditionOnPrerequisite@UPGRADEABLE:
+		Condition: upgrade_heavy
+		Prerequisites: upgrade_heavy
+	DamageMultiplier@upgrade_heavy:
+		RequiresCondition: upgrade_heavy
+		Modifier: 75
+	ActorStatValues:
+		Upgrades: upgrade_heavy
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 6, 9
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	SpawnActorOnDeath@death3:
+		Actor: trooper
+	SpawnActorOnDeath@death4:
+		Actor: trooper
+	Production@upgrade:
+		Produces: Addons
+	ProvidesPrerequisite@harkonnen_combat:
+		Prerequisite: heavy.harkonnen_combat
+	ProvidesPrerequisite@missile_tank:
+		Prerequisite: heavy.missile_tank
+
+harkonnen_repairpad:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^3x3Shape
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_heavyfactory
+	Tooltip:
+		Name: Harkonnen Repair Pad
+	Building:
+		Footprint: === =+= ===
+		Dimensions: 3,3
+	Reservable:
+	RallyPoint:
+	RenderSprites:
+		Image: repair_pad.harkonnen
+	WithRepairOverlay:
+		RequiresCondition: !build-incomplete
+		Palette: effect75alpha
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 4, 6
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	ProvidesPrerequisite@repair_pad:
+		Prerequisite: harkonnen_repairpad
+	ProvidesPrerequisite@mcv_production:
+		Prerequisite: harkonnen_mcv_production
+
+harkonnen_outpost:
+	Inherits: ^D2KBuilding
+	Inherits@radar: ^RadarBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^3x3Shape
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_refinery
+	Tooltip:
+		Name: Harkonnen Outpost
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	RenderSprites:
+		Image: outpost.harkonnen
+	WithIdleOverlay@DISH:
+		RequiresCondition: !build-incomplete && !severe-damaged
+		Sequence: idle-dish
+		PauseOnCondition: disabled
+	GrantConditionOnDamageState@STOPDISH:
+		Condition: severe-damaged
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 5, 9
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	ProvidesPrerequisite@outpost:
+		Prerequisite: outpost.d2k
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+
+harkonnen_autogunturret:
+	Inherits: ^D2KDefense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@muzzleglow: ^MuzzleGlowCannon
+	Inherits@detect: ^GenericAllDetector
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^1x1Shape
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	# W8 pilot actor (2026-08-15): first user of the meter-based spin-up. Reproduces
+	# the twenty-multiplier ladder's exact end-points (60% reload, 122% range) with
+	# three traits, and is the concrete instantiation W6 required.
+	Inherits@gat: ^GatlingSpinUpTurretBehavior
+	Armor:
+		Type: Concrete
+	Tooltip:
+		Name: Harkonnen Autogun Turret
+	Valued:
+		Cost: 1100
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_barracks
+	Health:
+		HP: 75000
+	Armament:
+		Weapon: harkonnen_autogunturret
+		LocalOffset: 600,-100,500, 600,100,500
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 100,-100,500, 100,100,500
+		CasingTargetOffset: -900,-100,0, -900,100,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+	WithSpriteTurret:
+		Palette: player
+		IsPlayerPalette: True
+		RequiresCondition: !build-incomplete
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	-WithDeathAnimation:
+	BodyOrientation:
+		QuantizedFacings: 32
+	WithMuzzleOverlay:
+	WithMuzzleSmoke:
+		Weapons: harkonnen_autogunturret
+	WithSpriteBody:
+		Name: make
+		Sequence: invisible
+	WithMakeAnimation:
+		Condition: build-incomplete
+		BodyNames: make
+	Turreted:
+		TurnSpeed: 16
+		InitialFacing: 2048
+	Replacement:
+		ReplaceableTypes: Tower
+	WithWallSpriteBody:
+		RequiresCondition: !build-incomplete
+	RenderSprites:
+		Image: ordos_autogunturret
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 2, 4
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	Power:
+		Amount: -55
+	RevealsShroud:
+		Range: 7710
+	DetectCloaked:
+		Range: 3855
+
+harkonnen_flameturret:
+	Inherits: ^D2KDefense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@muzzleglow: ^MuzzleGlowCannon
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@shape: ^1x1Shape
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@Barrel: ^D2K_ReinforcedBarrel
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Tooltip:
+		Name: Harkonnen Flame Turret
+	Valued:
+		Cost: 1200
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_barracks
+		BuildPaletteOrder: 575
+		Description: Spews a sustained stream of fire.\nStrong against infantry.\nAverage against vehicles.
+		IconPalette: d2kunit
+	Health:
+		HP: 125000
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithSpriteBody:
+		Name: make
+		Sequence: invisible
+	WithMakeAnimation:
+		Condition: build-incomplete
+		BodyNames: make
+	Turreted:
+		TurnSpeed: 16
+		InitialFacing: 2048
+	Armament:
+		Weapon: HarkonnenFlameTurret
+		LocalOffset: 700,0,512
+	Replacement:
+		ReplaceableTypes: Tower
+	WithWallSpriteBody:
+		RequiresCondition: !build-incomplete
+	WithSpriteTurret:
+		Palette: player_rgba
+		IsPlayerPalette: true
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 2, 4
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	RenderSprites:
+		Image: harkonnen_flameturret
+	Power:
+		Amount: -50
+	RevealsShroud:
+		Range: 7979
+	ActorStatValues:
+		Upgrades:
+	AutoTargetPriority@INFANTRY:
+		Priority: 50
+	-WithMuzzleGlow:
+
+harkonnen_rocketturret:
+	Inherits: ^D2KDefense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@detect: ^GenericAllDetector
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@shape: ^1x1Shape
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Armor:
+		Type: Concrete
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_outpost
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Harkonnen Rocket Turret
+	Health:
+		HP: 150000
+	BodyOrientation:
+		QuantizedFacings: 32
+	Armament@PRIMARY:
+		Weapon: D2K_TowerMissile
+		LocalOffset: 256,384,768, 256,-384,768
+	Turreted:
+		TurnSpeed: 32
+		InitialFacing: 2048
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithWallSpriteBody:
+		RequiresCondition: !build-incomplete
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	WithSpriteBody:
+		Name: make
+		Sequence: invisible
+	WithMakeAnimation:
+		Condition: build-incomplete
+		BodyNames: make
+	Replacement:
+		ReplaceableTypes: Tower
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 3, 5
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	Power:
+		Amount: -75
+	RevealsShroud:
+		Range: 10684
+	DetectCloaked:
+		Range: 5342
+	RenderSprites:
+		Image: ixian_rocketturret
+
+harkonnen_hightechfactory:
+	Inherits: ^HighTechFactory
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_outpost
+	RenderSprites:
+		Image: hightech.harkonnen
+
+harkonnen_ixresearchcenter:
+	Inherits: ^ResearchCentre
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_outpost
+	RenderSprites:
+		Image: research.harkonnen
+
+harkonnen_starport:
+	Inherits: ^Starport
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_ixresearchcenter, derricklimit
+	RenderSprites:
+		Image: starport.harkonnen
+	ProvidesPrerequisite@starport_harkonnen:
+		Prerequisite: heavy.harkonnen
+	ProvidesPrerequisite@starport_harkonnen_combat:
+		Prerequisite: heavy.harkonnen_combat
+	ProvidesPrerequisite@starport_missile_tank:
+		Prerequisite: heavy.missile_tank
+	ProvidesPrerequisite@starport_mcv_production:
+		Prerequisite: harkonnen_mcv_production
+	ProvidesPrerequisite@starport_vehicle_production:
+		Prerequisite: harkonnen_vehicle_production
+
+harkonnen_palace:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@CPQ: ^CPQCondition
+	Inherits@shape: ^3x3Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_ixresearchcenter, !opalace, ~techlevel.superweapons
+	Tooltip:
+		Name: Harkonnen Palace
+	Building:
+		Footprint: xxx xxx XXX
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	HitShape:
+		TargetableOffsets: -1574,-158,0, -1050,-1024,0, -1155,960,0
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 1536
+	HitShape@TOP:
+		TargetableOffsets: 1312,0,0
+		Type: Rectangle
+			TopLeft: -512, -1536
+			BottomRight: 512, -512
+	RenderSprites:
+		Image: palace.harkonnen
+	ProvidesPrerequisite@palace:
+		Prerequisite: palace
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 8, 12
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	SpawnActorOnDeath@death3:
+		Actor: light_inf
+	SpawnActorOnDeath@death4:
+		Actor: trooper
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: opalace
+	SupportPowerChargeBar:
+	Exit@1:
+		SpawnOffset: -704,768,0
+		ExitCell: -1,2
+	Exit@2:
+		SpawnOffset: -704,768,0
+		ExitCell: -1,3
+	Exit@3:
+		SpawnOffset: -704,768,0
+		ExitCell: 0,3
+	RallyPoint:

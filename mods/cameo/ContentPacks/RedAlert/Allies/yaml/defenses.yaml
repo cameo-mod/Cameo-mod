@@ -1,0 +1,529 @@
+ra1_allies_chronosphere:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Inherits@sell: ^RASpawnActorsOnSell
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~ra1_allies_alliedtechcenter, ~techlevel.superweapons, !ra1_allies_chronosphere
+		Description: actor_pdox.description
+	Tooltip:
+		Name: Chronosphere
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: placbldg.aud, build5.aud
+	WithBuildingBib:
+		HasMinibib: true
+	RA2ChronoshiftPower@chronoshift:
+		OrderName: Chronoshift
+		Prerequisites:
+			1: !botplayer, ~techlevel.superweapons
+		PauseOnCondition: disabled
+		Icons:
+			1: chrono
+		ChargeInterval: 4500
+		Names:
+			1: power_chronoshift.name
+		Descriptions:
+			1: power_chronoshift.description
+		Dimensions:
+			1: 5,5
+		Footprints:
+			1: __x__ _xxx_ xxxxx _xxx_ __x__
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		#BeginChargeSpeechNotification: ChronosphereCharging
+		#EndChargeSpeechNotification: ChronosphereReady
+		EndChargeSound: schropen.wav
+		Durations:
+			1: -1
+		KillCargo: False
+		AllowImpassable: true
+		DisplayRadarPing: True
+		SelectionCursor: ability
+		TargetCursor: ability
+		LaunchSound: schrmov.wav
+		IncomingSound: schrmov.wav
+		Range: 4000
+		ShowTargetCircle: true
+		TargetCircleColor: b6f4ff
+		ImpactWeapon: ChronoshiftImpact
+		TeleportWeapon: ChronoshiftImpact
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+	DetonateWeaponPower@ChronoReinforcements:
+		OrderName: ChronoReinforcements
+		Cost: 1000
+			1: ra1_allies_upgrade_chronoarmor, ~techlevel.superweapons
+		PauseOnCondition: disabled
+		Icons:
+			1: chronoreinforcements
+		Cursor: ability
+		ChargeInterval: 6000
+		Names:
+			1: Chrono Reinforcements
+		ActivationDelay: 25
+		ActivationSequence:
+		Descriptions:
+			1: Teleports a small taskforce to a specified location.
+		Weapons:
+			1: ChronoAI
+		CameraActor: camera.placeholderhack
+		CameraRemoveDelay: 0
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		DisplayRadarPing: True
+		LaunchSound: chrono2.aud
+		IncomingSound: chrono2.aud
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+	DetonateWeaponPowerCA@ra1_allies_chronovortex:
+		AllowMultiple: true
+		OrderName: ra1_allies_chronovortex
+			1: ~techlevel.superweapons
+		IconImage: ra1_allies_chronosphere
+		Icons:
+			1: ra1_allies_chronovortex
+		Cursor: ability
+		ChargeInterval: 10500
+		Names:
+			1: Chrono Vortex
+		ActivationDelay: 100
+		Descriptions:
+			1: Initiate a Chrono Vortex which deals heavy damage over time to a large area.
+		Weapons:
+			1: ChronoVortexInit
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		EndChargeTextNotification: Chrono Vortex ready.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Chrono Vortex activated.
+		IncomingSound: Chrono.aud
+		LaunchSound: Chrono.aud
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		PauseOnCondition: disabled
+		DisplayBeacon: True
+		DisplayRadarPing: True
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		CameraRemoveDelay: 500
+		Duration: 500
+		ActiveCondition: active
+		BeaconPosters:
+			1: chronovortexicon
+		TargetCircleRanges:
+			1: 12345
+		TargetCircleColors: ff000080
+		BeaconActor: BLASTRADIUS.super
+		CameraRange: 12345
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: ra1_allies_chronosphere
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+ra1_allies_pillbox:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@cargo: ^ClearableGarrison
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Tooltip:
+		Name: Pillbox
+	Building:
+		BuildSounds: placbldg.aud, build5.aud
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 40
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedbarracks, ~!ra1_allies_promotion_camopillbox
+		Description: actor_pbox.description
+	Valued:
+		Cost: 400
+	Health:
+		HP: 90000
+	WithBuildingBib:
+		HasMinibib: true
+	Turreted:
+		TurnSpeed: 1023
+		RealignDelay: -1
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 1
+		InitialUnits: ra1_allies_machinegunner
+	AttackGarrisoned:
+		RequiresCondition: !build-incomplete
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
+		PortYaws: 0, 176, 341, 512, 682, 853
+		PortCones: 88, 88, 88, 88, 88, 88
+		PauseOnCondition: disabled
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	Power:
+		Amount: -20
+	RevealsShroud:
+		Range: 6570
+	ActorStatValues:
+		Damage: 200
+		ReloadDelay: 48
+		Range: 6570
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_alliedgunturret:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@muzzleglow: ^MuzzleGlowCannon
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@AntiTank: ^PrioritizeVehicle
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 70
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedbarracks
+		Description: actor_gun.description
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Allied Gun Turret
+	Building:
+		BuildSounds: placbldg.aud, build5.aud
+	Health:
+		HP: 100000
+	WithBuildingBib:
+		HasMinibib: true
+	Turreted:
+		TurnSpeed: 48
+		InitialFacing: 224
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: RATurretGun
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 256,0,112
+		CasingTargetOffset: 0,-600,0
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	Power:
+		Amount: -40
+	RevealsShroud:
+		Range: 8683
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_alliedaagun:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 90
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedradardome
+		Description: actor_agun.description
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Allied AA Gun
+	Selectable:
+		Bounds: 1024, 1440, 0, -240
+	SelectionDecorations:
+	Health:
+		HP: 62500
+	WithBuildingBib:
+		HasMinibib: true
+	Turreted:
+		TurnSpeed: 30
+		InitialFacing: 896
+		RealignDelay: -1
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: zsu_23
+		LocalOffset: 520,150,450, 520,-150,450
+		MuzzleSequence: muzzle
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 260,150,450, 260,-150,450
+		CasingTargetOffset: 0,750,0, 0,-750,0
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+	WithMuzzleOverlay:
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	Power:
+		Amount: -25
+	RevealsShroud:
+		Range: 11412
+	DetectCloaked:
+		Range: 5706
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_camopillbox:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@cargo: ^ClearableGarrison
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Tooltip:
+		Name: Camo Pillbox
+	Building:
+		BuildSounds: placbldg.aud, build5.aud
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 50
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ~ra1_allies_promotion_camopillbox
+		Description: actor_hbox.description
+	Valued:
+		Cost: 1300
+	Health:
+		HP: 122500
+	Cloak:
+		InitialDelay: 125
+		CloakDelay: 75
+	-WithTurretSearchlight:
+	Turreted:
+		TurnSpeed: 1023
+		RealignDelay: -1
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 2
+		InitialUnits: ra1_allies_machinegunner, ra1_allies_alliedrocketsoldier
+	AttackGarrisoned:
+		RequiresCondition: !build-incomplete
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
+		PortYaws: 0, 176, 341, 512, 682, 853
+		PortCones: 88, 88, 88, 88, 88, 88
+		PauseOnCondition: chronobeamed
+	-MustBeDestroyed:
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	Power:
+		Amount: -65
+	RevealsShroud:
+		Range: 7640
+	DetectCloaked:
+		Range: 3820
+	ActorStatValues:
+		Damage: 200
+		ReloadDelay: 50
+		Range: 7640
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_bastionartillerybunker:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@shape: ^2x2Shape
+	Inherits@gar: ^ClearableGarrison
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@CryoMissiles: ^CryoMissiles
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 90
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ~ra1_allies_promotion_bastion
+		Description: actor_bastion.description
+	-WithTurretSearchlight:
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Bastion Artillery Bunker
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 350000
+	WithBuildingBib:
+	Turreted:
+		TurnSpeed: 1000
+		Offset: 0,0,100
+		RealignDelay: -1
+		Turret: primary
+	Turreted@cannon:
+		TurnSpeed: 10
+		Offset: 0,0,200
+		RealignDelay: -1
+		Turret: cannon
+		RequiresCondition: !disabled && !lowpower
+	Armament:
+		Weapon: 155mmBastion
+		LocalOffset: 1000,0,900
+		MuzzleSequence: muzzle
+		Turret: cannon
+		Name: cannon
+		RequiresCondition: !disabled && !lowpower && !ra1_allies_upgrade_cryomissiles
+	Armament@Upgrade: ##########
+		Weapon: 155mmBastionCryo
+		LocalOffset: 1000,0,900
+		MuzzleSequence: muzzle
+		Turret: cannon
+		Name: cannon
+		RequiresCondition: !disabled && !lowpower && ra1_allies_upgrade_cryomissiles
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+	AttackTurreted:
+		Turrets: primary, cannon
+		Armaments: primary, cannon
+		RequiresCondition: !build-incomplete
+	AttackGarrisoned:
+		Armaments: garrisoned
+		PortOffsets: 768,0,256, 448,-682,256, -448,-682,256, -768,0,256, -448,682,256, 448,682,256
+		PortYaws: 0, 176, 341, 512, 682, 853
+		PortCones: 88, 88, 88, 88, 88, 88
+		PauseOnCondition: disabled
+	RenderRangeCircle:
+	WithMuzzleOverlay:
+	WithSpriteTurret@cannon:
+		Turret: cannon
+	RenderSprites:
+		Image: ra1_allies_bastionartillerybunker
+		PlayerPalette: player_rgba
+	-WithDeathAnimation:
+	#WithRangeCircle:
+	#	Color: FFFF0088
+	#	Range: 13333
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	Power:
+		Amount: -100
+	RevealsShroud:
+		Range: 10184
+	DetectCloaked:
+		Range: 5092
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_gapgenerator:
+	Inherits: ^Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@shape: ^1x1Shape
+	Inherits@detect: ^GenericAllDetector
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	-AutoTarget:
+	-RenderRangeCircle:
+	-ExternalCondition@shrouded:
+	-ExternalCondition@lockon:
+	-RangeMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-RevealsShroudMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-DetectCloakedMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-InaccuracyMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-GrantConditionOnPrerequisite@ra1_allies_upgrade_gpssatellitesupport:
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Gap Generator
+	Building:
+		BuildSounds: placbldg.aud, build5.aud
+	Buildable:
+		BuildLimit: 1
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Queue: Defence, RADefence
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_gapgeneratorandradarjammer
+		Description: actor_gap.description
+	Selectable:
+		Bounds: 1024, 2048, 0, -512
+	SelectionDecorations:
+	WithSpriteBody:
+		PauseOnCondition: lowpower || disabled
+	Health:
+		HP: 50000
+	RevealsShroud:
+		Range: 10000
+	DetectCloaked:
+		Range: 10000
+		RequiresCondition: !lowpower && !disabled
+	CreatesShroud:
+		Range: 10000
+		RequiresCondition: !lowpower && !disabled
+	ProximityExternalCondition@shrouded:
+		Range: 10000
+		ValidRelationships: Ally
+		Condition: ra1_allies_gapgenerator-shroud
+		RequiresCondition: !lowpower && !disabled
+	-RenderDetectionCircle:
+	RenderShroudCircle:
+		RequiresCondition: !lowpower && !disabled
+	RevealsShroud@SWReveal:
+		Range: 2000
+		ValidRelationships: Neutral, Enemy
+	WithBuildingBib:
+		HasMinibib: true
+	WithIdleOverlay@gapfield:
+		Sequence: gapfield
+		RequiresCondition: !lowpower && !disabled
+		IsDecoration: True
+	Targetable@Epic:
+		TargetTypes: Epic
+	TooltipExtras@Epic:
+		Description: Epic
+	Power:
+		Amount: -250
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	FireWarheadsOnDeath:
+		Weapon: BuildingExplode
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_reinforcedstructures

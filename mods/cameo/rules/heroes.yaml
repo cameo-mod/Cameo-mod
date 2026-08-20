@@ -95,7 +95,7 @@ LINK:
 		RequiresCondition: bottledfairy && !herohealblock
 	WithDecoration@bottledfairy:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		Offsets:
 			bottledfairy: -4,0
@@ -206,7 +206,7 @@ LINK:
 		RequiresCondition: mail2 && mail3
 
 LinkSword2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Master Sword
 	Buildable:
@@ -222,7 +222,7 @@ LinkSword2:
 		Prerequisite: linksword2
 
 LinkSword3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tempered Sword
 	Buildable:
@@ -238,7 +238,7 @@ LinkSword3:
 		Prerequisite: linksword3
 
 LinkSword4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Golden Sword
 	Buildable:
@@ -254,7 +254,7 @@ LinkSword4:
 		Prerequisite: linksword4
 
 Pegasusboots:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Pegasus Boots
 	Buildable:
@@ -270,7 +270,7 @@ Pegasusboots:
 		Prerequisite: pegasusboots
 
 Mail2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Blue Mail
 	Buildable:
@@ -286,7 +286,7 @@ Mail2:
 		Prerequisite: mail2
 
 Mail3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Red Mail
 	Buildable:
@@ -302,7 +302,7 @@ Mail3:
 		Prerequisite: mail3
 
 Bottledfairy:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Fairy in a Bottle
 	Buildable:
@@ -366,7 +366,7 @@ BLAZER:
 		RequiresCondition: blazermh && !herohealblock
 	WithDecoration@blazermh:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		Offsets:
 			blazermh: -4,0
@@ -457,7 +457,7 @@ BLAZER:
 		RequiresCondition: blazerarmor2 && blazerarmor3 && blazerarmor4
 
 BlazerSword2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Zantetsu Sword
 	Buildable:
@@ -473,7 +473,7 @@ BlazerSword2:
 		Prerequisite: blazersword2
 
 BlazerSword3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Spirit Sword
 	Buildable:
@@ -489,7 +489,7 @@ BlazerSword3:
 		Prerequisite: blazersword3
 
 BlazerSword4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Soul Sword
 	Buildable:
@@ -505,7 +505,7 @@ BlazerSword4:
 		Prerequisite: blazersword4
 
 BlazerArmor2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mystic Armor
 	Buildable:
@@ -521,7 +521,7 @@ BlazerArmor2:
 		Prerequisite: blazerarmor2
 
 BlazerArmor3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Light Armor
 	Buildable:
@@ -537,7 +537,7 @@ BlazerArmor3:
 		Prerequisite: blazerarmor3
 
 BlazerArmor4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Soul Armor
 	Buildable:
@@ -553,7 +553,7 @@ BlazerArmor4:
 		Prerequisite: blazerarmor4
 
 BlazerMH:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Medical Herb
 	Buildable:
@@ -578,7 +578,6 @@ giegue:
 		BuildPaletteOrder: 20
 		Description: Also known as Giygas, is Alien with Powerful Long Range Psychic Attacks.\nCan float over any terrain\nCan be targetted by both ground and air\nTerrain observation superiority
 		IconPalette: ra2
-		Prerequisites:
 	Mobile:
 		Speed: 80
 		Locomotor: fakeaircraft
@@ -615,7 +614,6 @@ giegue:
 		ControllingCondition: controlling
 	Selectable:
 		Bounds: 1365, 2048, 0, -682
-		DecorationBounds: 1365, 2048, 0, -682
 	-Production:
 	-ProductionQueue:
 	WithDecoration@psi:
@@ -635,9 +633,10 @@ volkovcc:
 	Selectable:
 		Bounds: 2048, 2048
 	Buildable:
+		Prerequisites:
 		Queue: Heroes
 		BuildPaletteOrder: 140
-		Prerequisites: ra2naweap, ra2natech, ~techlevel.high, ~anysovietsallra, !1hero
+		Prerequisites: ra2_soviets_warfactory, ra2_soviets_battlelab, ~anysovietsallra, !1hero
 		Description: Controls and provides Volkov\nBuilding must be sold and rebuilt for another Volkov to appear
 		IconPalette: ra2
 		BuildLimit: 1
@@ -665,19 +664,19 @@ volkovcc:
 	-WithMakeAnimation:
 	-WithDeathAnimation:
 	FreeActor:
-		Actor: VOLKOV
+		Actor: ra1_soviets_volkov
 		RequiresCondition: novolkov
 	CustomSellValue:
 		Value: 100
-	GrantConditionOnPrerequisite@volkov:
-		Prerequisites: !volkov
+	GrantConditionOnPrerequisite@ra1_soviets_volkov:
+		Prerequisites: !ra1_soviets_volkov
 		Condition: novolkov
 	ProvidesPrerequisite@hero:
 		Prerequisite: 1hero
 		
-VOLKOV:
+ra1_soviets_volkov:
 	Inherits@HEROES: ^Heroes
-	Inherits: GNRL
+	Inherits: ra1_general
 	-Buildable:
 	Tooltip:
 		Name: Volkov
@@ -687,8 +686,8 @@ VOLKOV:
 		HP: 500000
 	Armor:
 		Type: Concrete
-	ProvidesPrerequisite@volkov:
-		Prerequisite: volkov
+	ProvidesPrerequisite@ra1_soviets_volkov:
+		Prerequisite: ra1_soviets_volkov
 	Mobile:
 		Speed: 44
 		PauseOnCondition: nocc
@@ -699,13 +698,13 @@ VOLKOV:
 		PauseOnCondition: nocc
 		FacingTolerance: 0
 	RenderSprites:
-		Image: gnrl
+		Image: ra1_general
 	WithColoredOverlay@IDISABLE:
 		RequiresCondition: nocc
 	GrantConditionOnPrerequisite@poweroff:
 		Prerequisites: !volkovcontrol
 		Condition: nocc
-	MobSpawnerMaster@dog:
+	MobSpawnerMaster@ra1_soviets_attackdog:
 		Actors: CHITZKOI
 		Offset: 0,0,0
 		RespawnTicks: 5000
@@ -724,7 +723,7 @@ VOLKOV:
 		Range: 5c0
 		
 CHITZKOI:
-	Inherits: RA2DOG
+	Inherits: ra2_soviets_attackdog
 	-Buildable:
 	-DeliversCash:
 	-Cloneable:
@@ -740,7 +739,7 @@ CHITZKOI:
 	Health:
 		HP: 7200
 	RenderSprites:
-		Image: ra2dog
+		Image: ra2_soviets_attackdog
 	MobSpawnerSlave:
 	WithColoredOverlay@IDISABLE:
 		RequiresCondition: nocc
@@ -749,12 +748,12 @@ CHITZKOI:
 		Condition: nocc
 		
 RA2HTANY:
-	Inherits: RA2TANY
+	Inherits: ra2_allies_tanyaii
 	Inherits@HEROES: ^Heroes
 	Buildable:
 		Queue: Heroes
 		BuildPaletteOrder: 120
-		Prerequisites: ra2gatech, ~anyalliesallra, !1hero
+		Prerequisites: ra2_allies_alliedbattlelab, ~anyalliesallra, !1hero
 		BuildLimit: 1
 		Description: Elite amphibious commando infantry with dual laser guns, C4 and Knife.\nCan plant timed bombs on vehicles\nCan demolish buildings with C4\nCan use Chrono teleportation\nMaximum 1 can be trained\n Strong vs Infantry, Buildings, Vehicles\n Weak vs Aircraft\n\nTip:\nClick or use F key to switch weaponry\nUse Alt+Click for chrono teleportation
 		Icon: iconchrono
@@ -792,7 +791,7 @@ RA2HTANY:
 		Armaments: primary, c4
 		FacingTolerance: 0
 	RenderSprites:
-		Image: RA2TANY
+		Image: ra2_allies_tanyaii
 	Cloak:
 		InitialDelay: 40
 		CloakDelay: 40
@@ -814,7 +813,7 @@ RA2HTANY:
 
 TSMCNEAL:
 	Inherits@HEROES: ^Heroes
-	Inherits: GNRL
+	Inherits: ra1_general
 	Inherits@EXPERIENCE: ^GainsExperience
 	Buildable:
 		Queue: Heroes
@@ -969,7 +968,7 @@ TSMCNEALMECH:
 		RequiresSelection: true
 TSNASHWA:
 	Inherits@HEROES: ^Heroes
-	Inherits: GNRL
+	Inherits: ra1_general
 	Inherits@EXPERIENCE: ^GainsExperience
 	Buildable:
 		Queue: Heroes
@@ -1116,7 +1115,7 @@ TSNASHWABIKE:
 		RequiresCondition: !rank-elite
 		LocalOffset: -153,-204,509, -153,204,509
 	Armament@ELITE:
-		Weapon: TSBikeMissileNashwaElite
+		Weapon: TSBikeMissileNashwa_elite
 		RequiresCondition: rank-elite
 		LocalOffset: -153,-204,509, -153,204,509
 	AttackFrontal:
@@ -1157,7 +1156,7 @@ TSNASHWABIKE.cd:
 		StartIfBelow: 101
 		Delay: 8
 SCDVA:
-	Inherits: SCGOLIATH
+	Inherits: terran_goliath
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -1205,7 +1204,7 @@ SCDVA:
 		RequiresCondition: overload
 		GrantsCondition: meltdown
 	FreeActor@soldier:
-		Actor: scmedic
+		Actor: terran_medic
 		SpawnOffset: 0,0
 		RequiresCondition: overload
 ancientvisceroid:
@@ -1217,7 +1216,7 @@ ancientvisceroid:
 	Buildable:
 		BuildPaletteOrder: 20
 		Description: Reforms into primitive form upon death\nWill reform back after a while\n45s cooldown between deaths
-		Prerequisites: ~faction.forgotten, !1hero
+		Prerequisites: !1hero
 		IconPalette: ra2
 		BuildLimit: 1
 	Valued:
@@ -1324,12 +1323,12 @@ spawnedvisceroid:
 
 mutantseverus:
 	Inherits@HEROES: ^Heroes
-	Inherits: GNRL
+	Inherits: ra1_general
 	Inherits@EXPERIENCE: ^GainsExperience
 	Buildable:
 		Queue: Heroes
 		BuildPaletteOrder: 120
-		Prerequisites: !1hero, ~faction.forgotten
+		Prerequisites: !1hero
 		Description: Unable to use his left hand and full of hatred - he is equipped with Tiberium Flachette SMG and\npowerful aura that spreads radiation which hurts enemies but heals allies
 		IconPalette: ra2
 		BuildDuration: 500
@@ -1411,12 +1410,12 @@ mutantseverus:
 	
 severuscabal:
 	Inherits@HEROES: ^Heroes
-	Inherits: GNRL
+	Inherits: ra1_general
 	Inherits@EXPERIENCE: ^GainsExperience
 	Buildable:
 		Queue: Heroes
 		BuildPaletteOrder: 120
-		Prerequisites: !1hero, ~faction.cabal
+		Prerequisites: !1hero
 		Description: Unable to use his left hand and full of hatred - he is equipped with Super Shotgun and\npowerful aura that spreads radiation which hurts enemies but heals allies
 		BuildDuration: 500
 		BuildDurationModifier: 100
@@ -1885,7 +1884,7 @@ ShippingboxBot:
 		RequiresCondition: !jacknearby
 
 Hammer2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Golden Hammer
 	Buildable:
@@ -1901,7 +1900,7 @@ Hammer2:
 		Prerequisite: hammer2
 
 Axe2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Golden Axe
 	Buildable:
@@ -1917,7 +1916,7 @@ Axe2:
 		Prerequisite: axe2
 
 Powerberry:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Power Berry
 	Buildable:
@@ -1933,7 +1932,7 @@ Powerberry:
 		Prerequisite: powerberry
 
 Turnipseeds:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Turnip Seeds
 	#Buildable:
@@ -1949,7 +1948,7 @@ Turnipseeds:
 		Prerequisite: turnipseeds
 
 Potatoseeds:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Potato Seeds
 	#Buildable:
@@ -2008,7 +2007,7 @@ VICVIPER:
 		RequiresCondition: vvup && !herohealblock
 	WithDecoration@vvup:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		Offsets:
 			vvup: -4,0
@@ -2081,7 +2080,7 @@ VICVIPER:
 	-Voiced:
 
 Vvspeedup:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Speed Up
 	Buildable:
@@ -2097,7 +2096,7 @@ Vvspeedup:
 		Prerequisite: vvsu
 
 Vvmissile:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Missile
 	Buildable:
@@ -2113,7 +2112,7 @@ Vvmissile:
 		Prerequisite: vvmi
 
 Vvlaser:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Laser
 	Buildable:
@@ -2129,7 +2128,7 @@ Vvlaser:
 		Prerequisite: vvla
 
 Vvforcefield:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Force Field
 	Buildable:
@@ -2145,7 +2144,7 @@ Vvforcefield:
 		Prerequisite: vvff
 
 Vvup:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: 1UP
 	Buildable:
@@ -2198,7 +2197,7 @@ AXELAY:
 		RequiresCondition: axelayup && !herohealblock
 	WithDecoration@axelayup:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		Offsets:
 			axelayup: -4,0
@@ -2289,7 +2288,7 @@ AXELAY:
 	-Voiced:
 
 Axelaysl:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Straight Laser
 	Buildable:
@@ -2305,7 +2304,7 @@ Axelaysl:
 		Prerequisite: axelaysl
 
 Axelaymm:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Macro Missile
 	Buildable:
@@ -2321,7 +2320,7 @@ Axelaymm:
 		Prerequisite: axelaymm
 
 Axelayup:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: 1UP
 	Buildable:
@@ -2337,7 +2336,7 @@ Axelayup:
 		Prerequisite: axelayup
 
 Axelayrv:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Round Vulcan
 	Buildable:
@@ -2353,7 +2352,7 @@ Axelayrv:
 		Prerequisite: Axelayrv
 
 Axelayms:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Morning Star
 	Buildable:
@@ -2426,7 +2425,6 @@ House:
 	Inherits@exp: ^AngelExperience
 	Selectable:
 		Bounds: 1024, 1024
-		DecorationBounds: 1024, 1024
 	Buildable:
 		Queue: Upgrade.Angel
 		BuildPaletteOrder: 10
@@ -2709,7 +2707,7 @@ TempleBot:
 	-MapEditorData:
 
 Bowupgrade:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bow Upgrade
 	Buildable:
@@ -2770,7 +2768,7 @@ SMASH:
 		RequiresCondition: bonuslife && !herohealblock
 	WithDecoration@bonuslife:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		Offsets:
 			bonuslife: -4,0
@@ -2838,7 +2836,7 @@ SMASH:
 		RequiresCondition: forcefield
 
 Rockets:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: High power missile launcher
 	Buildable:
@@ -2854,7 +2852,7 @@ Rockets:
 		Prerequisite: rockets
 
 Spreader:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Multi-direction photon gun
 	Buildable:
@@ -2870,7 +2868,7 @@ Spreader:
 		Prerequisite: spreader
 
 Grenades:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Rapid fire grenade launcher
 	Buildable:
@@ -2886,7 +2884,7 @@ Grenades:
 		Prerequisite: grenades
 
 Bonuslife:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bonus Life
 	Buildable:
@@ -2902,7 +2900,7 @@ Bonuslife:
 		Prerequisite: bonuslife
 
 Speedboost:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Speed boost
 	Buildable:
@@ -2918,7 +2916,7 @@ Speedboost:
 		Prerequisite: speedboost
 
 Orb:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Machine gun firing remote
 	Buildable:
@@ -2934,7 +2932,7 @@ Orb:
 		Prerequisite: orb
 
 Forcefield:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mobile forcefield
 	Buildable:
@@ -3056,8 +3054,6 @@ mdkkurt:
 		DeployChance: 100
 		DeployTicks: 450
 		DeployTrigger: Attack
-	DeliversCash:
-		Payload: 75
 	ReloadDelayMultiplier@eliteplus:
 		Modifier: 80
 		RequiresCondition: rank-elite
@@ -3085,7 +3081,7 @@ mdkkurt:
 		Group: Heroes
 
 mdkgrenade:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Grenades
 	Buildable:
@@ -3101,7 +3097,7 @@ mdkgrenade:
 		Prerequisite: mdkgrenade
 
 mdkchaingun:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: AP Bullets
 	Buildable:
@@ -3117,7 +3113,7 @@ mdkchaingun:
 		Prerequisite: mdkchaingun
 
 mdkmortar:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mortar Sniper
 	Buildable:
@@ -3132,7 +3128,7 @@ mdkmortar:
 	ProvidesPrerequisite:
 		Prerequisite: mdkmortar
 mdkmissile:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mortar Sniper
 	Buildable:
@@ -3178,7 +3174,6 @@ mdkmissile:
 		FacingTolerance: 0
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
-	WithDeathAnimation:
 	AttackMove:
 	DrawLineToTarget:
 	HiddenUnderFog:
@@ -3192,7 +3187,6 @@ mdkmissile:
 	ProvidesPrerequisite@hero:
 		Prerequisite: 1hero
 	Selectable:
-		DecorationBounds: 1024, 1024
 		Bounds: 1024, 1024
 	Exit:
 		ExitCell: 0,1
@@ -3220,7 +3214,6 @@ mdkmissile:
 		FacingTolerance: 80
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 1024, 1024
 		Bounds: 1024, 1024
 	Exit:
 		ExitCell: 0,1
@@ -3241,7 +3234,7 @@ mdkmissile:
 		RequiresCondition: !herohealblock
 	WithDecoration@healdefault:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		RequiresCondition: !herohealblock
 	GrantConditionOnAttack@herohealblock:

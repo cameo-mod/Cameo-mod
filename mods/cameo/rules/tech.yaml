@@ -3,13 +3,18 @@ V19:
 	Inherits@2: ^CashTricklerMultipliers
 	Inherits@shape: ^1x1Shape
 	CashTrickler:
+		Interval: 100
+		Amount: 25
+	CashTricklerBar:
+	GivesCashOnCapture:
+		Amount: 250
 	Building:
 		Footprint: x
 		Dimensions: 1,1
 	Health:
-		HP: 80000
+		HP: 100000
 	Tooltip:
-		Name: Oil Derrick
+		Name: Small Oil Derrick
 	TooltipDescription@ally:
 		Description: Provides additional funds.
 		ValidRelationships: Ally
@@ -27,6 +32,7 @@ V19:
 		Palette: playerra2
 		IsPlayerPalette: true
 		Image: ra2caairp
+
 V19.Husk:
 	Inherits: ^TechBuildingHusk
 	Inherits@shape: ^1x1Shape
@@ -38,7 +44,7 @@ V19.Husk:
 		Footprint: x
 		Dimensions: 1,1
 	Tooltip:
-		Name: Oil Derrick (Destroyed)
+		Name: Small Oil Derrick (Destroyed)
 	TransformOnCapture:
 		IntoActor: V19
 	GpsDot:
@@ -101,11 +107,11 @@ HOSP.Husk:
 		Image: ra2caoild
 
 hosp.proxy:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	ProvidesPrerequisite:
 		Prerequisite: hosp
 	RenderSprites:
-		Image: medi
+		Image: ra1_allies_medic
 	Tooltip:
 		Name: Tech Hospital
 	Buildable:
@@ -359,7 +365,7 @@ OILB:
 		Footprint: xx xx
 		Dimensions: 2,2
 	Health:
-		HP: 80000
+		HP: 200000
 	RevealsShroud:
 		Range: 4c0
 	CaptureManager:
@@ -367,10 +373,13 @@ OILB:
 		Types: building
 	InstantlyRepairable:
 	CashTrickler:
-		Interval: 375
-		Amount: 100
+		Interval: 250
+		Amount: 125
+	CashTricklerBar:
+	GivesCashOnCapture:
+		Amount: 500
 	Tooltip:
-		Name: Oil Derrick
+		Name: Large Oil Derrick
 	TooltipDescription@ally:
 		Description: Provides additional funds.
 		ValidRelationships: Ally
@@ -381,8 +390,6 @@ OILB:
 		Weapon: BarrelExplode
 	GpsDot:
 		String: Oil
-	GivesCashOnCapture:
-		Amount: 100
 	UpdatesDerrickCount:
 	SpawnActorOnDeath:
 		Actor: OILB.Husk
@@ -392,6 +399,7 @@ OILB:
 		Palette: playerra2
 		IsPlayerPalette: true
 		Image: ra2caoild
+
 OILB.Husk:
 	Inherits: ^TechBuildingHusk
 	Inherits@shape: ^2x2Shape
@@ -399,7 +407,7 @@ OILB.Husk:
 		Footprint: xx xx
 		Dimensions: 2,2
 	Tooltip:
-		Name: Oil Derrick (Destroyed)
+		Name: Large Oil Derrick (Destroyed)
 	TransformOnCapture:
 		IntoActor: OILB
 	GpsDot:
@@ -432,6 +440,7 @@ MAMMOTHBUNKER:
 		Range: 3c0
 	Turreted:
 		TurnSpeed: 8
+		RealignDelay: -1
 	AutoTarget:
 		InitialStance: AttackAnything
 	Armament@PRIMARY:
@@ -477,6 +486,7 @@ mammothbunker.husk:
 		Image: ra2caoild
 	WithSpriteTurret:
 	Turreted:
+		RealignDelay: -1
 C2KNUKE:
 	Inherits: ^TechBuilding
 	Inherits@shape: ^5x3Shape
@@ -522,6 +532,7 @@ C2KFIREDEPARTMENT:
 		HP: 180000 #90000
 	AttackTurreted:
 	Turreted:
+		RealignDelay: -1
 	RevealsShroud:
 		Range: 7c0 #7c0
 	GpsDot:
@@ -624,6 +635,7 @@ TECHBCANNON:
 	Turreted:
 		TurnSpeed: 28
 		InitialFacing: 224
+		RealignDelay: -1
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	AttackTurreted:
@@ -661,6 +673,7 @@ TECHBCANNON2:
 		Name: Bomb Bowling Cannon
 	Turreted:
 		TurnSpeed: 32
+		RealignDelay: -1
 	Power:
 		Amount: -1000
 	Health:

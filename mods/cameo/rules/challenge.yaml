@@ -287,7 +287,7 @@ XFACT:
 	-Demolishable:
 
 XPYLE:
-	Inherits: PYLE
+	Inherits: td_gdi_barracks
 	Inherits@pre: ^Xprerequisite
 	Valued:
 		Cost: 5000
@@ -327,9 +327,9 @@ XPYLE:
 	-ProductionBar@RAINFANTRYGDI:
 
 XWEAP:
-	Inherits: WEAP
+	Inherits: td_gdi_weaponsfactory
 	Inherits@pre: ^Xprerequisite
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -367,7 +367,7 @@ XWEAP:
 	-ProductionBar@RAVEHICLEGDI:
 
 XHPAD:
-	Inherits: HPAD.GDI
+	Inherits: td_gdi_helipad
 	Inherits@pre: ^Xprerequisite
 	Valued:
 		Cost: 5000
@@ -572,7 +572,7 @@ debugdummy:
 	Tooltip:
 		Name: Debug Dummy
 	Buildable:
-		Prerequisites: ~wip-content, ~NOT AVAILABLE
+		Prerequisites: ~disabled, ~NOT AVAILABLE
 		Description: Debug Dummy
 		Queue: none
 	RenderSprites:

@@ -1,0 +1,502 @@
+wc2_orcs_grunt:
+	Inherits@WC2INFANTRY: ^WC2Infantry
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@WC2AxeUpg: ^WC2OrcsUpgradeAxeStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Tooltip:
+		Name: Grunt
+	Valued:
+		Cost: 600
+	Power:
+		Amount: -30
+	Health:
+		HP: 65000
+	ChangesHealth@SelfHealing:
+		Step: 65
+	Mobile:
+		Speed: 65
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~wc2_orcs_barracks, ~!wc2_orcs_upgrade_warcraft3grunt
+		Queue: Infantry, RAInfantry
+		Description: Basic melee infantry. Slow but can take some damage. Lok'tar!
+	Armament:
+		Weapon: wc2gruntslice
+		FireDelay: 5
+	Targetable@ra1_soviets_attackdog:
+		TargetTypes: DogImmune
+	Voiced:
+		VoiceSet: wc2voiceorcpeongrunt
+	FirepowerMultiplier@WC2AxeUpg:
+		Modifier: 130
+	FirepowerMultiplier@WC2AxeUpg2:
+		Modifier: 170
+	DamageMultiplier@WC2OShieldUpg:
+		Modifier: 85
+	DamageMultiplier@WC2OShieldUpg2:
+		Modifier: 70
+	ActorStatValues:
+		Upgrades: wc2_orcs_upgrade_axestrength, wc2_orcs_upgrade_axestrengthii, wc2_orcs_upgrade_armorstrength, wc2_orcs_upgrade_armorstrengthii
+
+wc2_orcs_warcraft3grunt:
+	Inherits@WC2INFANTRY: ^WC2Infantry
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@WC2AxeUpg: ^WC2OrcsUpgradeAxeStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Tooltip:
+		Name: Warcraft 3 Grunt
+	Valued:
+		Cost: 1100
+	Power:
+		Amount: -55
+	Health:
+		HP: 120000
+	ChangesHealth@SelfHealing:
+		Step: 120
+	Mobile:
+		Speed: 70
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~wc2_orcs_upgrade_warcraft3grunt
+		Queue: Infantry, RAInfantry
+		Description: Basic melee infantry. Slow but can take some damage. Lok'tar!
+	Armament:
+		Weapon: wc2gruntslice2
+		FireDelay: 5
+	Targetable@ra1_soviets_attackdog:
+		TargetTypes: DogImmune
+	Voiced:
+		VoiceSet: wc2voiceorcpeongrunt
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	FirepowerMultiplier@WC2AxeUpg:
+		Modifier: 130
+	FirepowerMultiplier@WC2AxeUpg2:
+		Modifier: 170
+	DamageMultiplier@WC2OShieldUpg:
+		Modifier: 85
+	DamageMultiplier@WC2OShieldUpg2:
+		Modifier: 70
+	ActorStatValues:
+		Upgrades: wc2_orcs_upgrade_axestrength, wc2_orcs_upgrade_axestrengthii, wc2_orcs_upgrade_armorstrength, wc2_orcs_upgrade_armorstrengthii
+
+# Axethrower also has built-in berserker stuff so that berserker's upgrades and spells will be applied to already-built axethrwoers, just as in WC2.
+
+wc2_orcs_trollaxethrower:
+	Inherits@WC2INFANTRY: ^WC2Infantry
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@TAxeUpg: ^WC2OrcsUpgradeThrowingAxeStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Inherits@BLighterUpg: ^WC2OrcsUpgradeBerserkerLightAxes
+	Inherits@BScoutUpg: ^WC2OrcsUpgradeBerserkerScouting
+	Inherits@BRegenUpg: ^WC2OrcsUpgradeBerserkerRegeneration
+	Inherits@BerserkerUpg: ^WC2OrcsUpgradeBerserker
+	Tooltip:
+		Name: Troll Axethrower
+	Valued:
+		Cost: 500
+	Power:
+		Amount: -25
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Mobile:
+		Speed: 60
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~wc2_orcs_trolllumbermill, ~!wc2_orcs_upgrade_berserker
+		Queue: Infantry, RAInfantry
+		Description: Basic ranged infantry.\nNot as durable as Grunt.\nCan attack air.
+	Armament:
+		Weapon: wc2axeFire
+		FireDelay: 7
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: wc2axeFire
+	Voiced:
+		VoiceSet: wc2voiceorctrollaxethrower
+	# Animation and upgrade stuff
+	# Axethrower body
+	WithInfantryBody:
+		RequiresCondition: !berserker_upg
+	# Berserker body
+	WithInfantryBody@Berserker:
+		IdleSequences: idle-berserker
+		StandSequences: idle-berserker
+		MoveSequence: run-berserker
+		DefaultAttackSequence: shoot-berserker
+		RequiresCondition: berserker_upg
+	ActorStatValues:
+		Upgrades: wc2_orcs_upgrade_throwingaxestrength, wc2_orcs_upgrade_throwingaxestrengthii, wc2_orcs_upgrade_armorstrength, wc2_orcs_upgrade_armorstrengthii, wc2_orcs_upgrade_berserker, wc2_orcs_upgrade_berserkerlightaxes, wc2_orcs_upgrade_berserkerscouting
+
+# Separate actor for berserker because otherwise we can't change the build icon (cameo) or tooltip.
+
+wc2_orcs_trollberserker:
+	Inherits@wc2_orcs_trollaxethrower: wc2_orcs_trollaxethrower
+	Tooltip:
+		Name: Troll Berserker
+	Buildable:
+		Prerequisites: ~wc2_orcs_trolllumbermill, ~wc2_orcs_upgrade_berserker, ~!wc2_orcs_upgrade_trollheadhunter
+		Description: Elite ranged infantry.\nNot as durable as Grunt.\nCan attack air.
+	Selectable:
+		Class: wc2_orcs_trollaxethrower
+	-WithInfantryBody@Berserker:
+	WithInfantryBody:
+		-RequiresCondition:
+	# Berserker should always be considered to have the ranger upgrade researched.
+	GrantCondition@Berserker:
+		Condition: berserker_upg
+
+wc2_orcs_trollheadhunter:
+	Inherits@WC2INFANTRY: ^WC2Infantry
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@TAxeUpg: ^WC2OrcsUpgradeThrowingAxeStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Inherits@BLighterUpg: ^WC2OrcsUpgradeBerserkerLightAxes
+	Inherits@BScoutUpg: ^WC2OrcsUpgradeBerserkerScouting
+	Inherits@BRegenUpg: ^WC2OrcsUpgradeBerserkerRegeneration
+	Inherits@BerserkerUpg: ^WC2OrcsUpgradeBerserker
+	Tooltip:
+		Name: Troll Headhunter
+	Valued:
+		Cost: 1000
+	Power:
+		Amount: -50
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Mobile:
+		Speed: 75
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~wc2_orcs_upgrade_trollheadhunter
+		Queue: Infantry, RAInfantry
+		Description: Basic ranged infantry.\nNot as durable as Grunt.\nCan attack air.
+	Armament:
+		Weapon: wc2axeFirespear
+		FireDelay: 7
+		LocalOffset: 0,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: wc2axeFirespear
+	Voiced:
+		VoiceSet: wc2voiceorctrollaxethrower
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+# Axethrower also has built-in berserker stuff so that berserker's upgrades and spells will be applied to already-built axethrwoers, just as in WC2.
+
+wc2_orcs_kodobeast:
+	Inherits@WC2VEHICLE: ^WC2Vehicle
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@TAxeUpg: ^WC2OrcsUpgradeThrowingAxeStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Inherits@BLighterUpg: ^WC2OrcsUpgradeBerserkerLightAxes
+	Inherits@BScoutUpg: ^WC2OrcsUpgradeBerserkerScouting
+	Inherits@BRegenUpg: ^WC2OrcsUpgradeBerserkerRegeneration
+	Inherits@BerserkerUpg: ^WC2OrcsUpgradeBerserker
+	-ExternalCondition@PropagandaEffect:
+	Tooltip:
+		Name: Kodo Beast
+	Valued:
+		Cost: 1000
+	Power:
+		Amount: -50
+	Health:
+		HP: 125000
+	ChangesHealth@SelfHealing:
+		Step: 125
+	Mobile:
+		Speed: 60
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~wc2_orcs_trolllumbermill
+		Queue: Infantry, RAInfantry
+		Description: Basic ranged infantry.\nNot as durable as Grunt.\nCan attack air.
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 5000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 5000
+		Type: propaganda
+		Color: 55BBFF
+		RequiresCondition: !disabled
+	Armament:
+		Weapon: wc2axeFire
+		FireDelay: 7
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: wc2axeFire
+	Voiced:
+		VoiceSet: wc2voiceorctrollaxethrower
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	ActorStatValues:
+		Upgrades: wc2_orcs_upgrade_throwingaxestrength, wc2_orcs_upgrade_throwingaxestrengthii, wc2_orcs_upgrade_armorstrength, wc2_orcs_upgrade_armorstrengthii, wc2_orcs_upgrade_berserker, wc2_orcs_upgrade_berserkerlightaxes, wc2_orcs_upgrade_berserkerscouting
+
+# Ogre also has built-in ogremage stuff so that ogremage's upgrades and spells will be applied to already-built ogres, just as in WC2.
+
+wc2_orcs_ogre:
+	Inherits@WC2VEHICLE: ^WC2Vehicle
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@WC2AxeUpg: ^WC2OrcsUpgradeAxeStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Inherits@FOURSTATEDEPLOY: ^WC2FourStateDeploy
+	Inherits@OgremageUpg: ^WC2OrcsUpgradeOgreMage
+	Inherits@ogremage_bloodlust_upgrade: ^WC2OrcsOgreMageBloodlust
+	Inherits@ogremage_runes_upgrade: ^WC2OrcsOgreMageRunes
+	Tooltip:
+		Name: Ogre
+	Valued:
+		Cost: 1800
+	Power:
+		Amount: -90
+	Health:
+		HP: 200000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Mobile:
+		Speed: 85
+		TurnSpeed: 68
+		Locomotor: tracked
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~wc2_orcs_ogremound, ~!wc2_orcs_upgrade_ogremage
+		Queue: Infantry, RAInfantry
+		Description: Improved melee infantry.\nStinky, fast, dumb and dangerous!
+	Voiced:
+		VoiceSet: wc2voiceorcogre
+	# Animation and upgrade stuff
+	-Integrity:
+	-GrantCondition@electronics:
+	-WithFacingSpriteBody:
+	-WithMoveAnimation:
+	-WithAttackAnimation:
+	WithInfantryBody:
+		IdleSequences: idle-n, idle-ne, idle-e, idle-se, idle-s, idle-sw, idle-w, idle-nw
+		StandSequences: idle
+		MoveSequence: run
+		DefaultAttackSequence: shoot
+		RequiresCondition: !ogremage_upg
+	WithInfantryBody@Ogremage:
+		IdleSequences: idle-ogremage-n, idle-ogremage-ne, idle-ogremage-e, idle-ogremage-se, idle-ogremage-s, idle-ogremage-sw, idle-ogremage-w, idle-ogremage-nw
+		StandSequences: idle-ogremage
+		MoveSequence: run-ogremage
+		DefaultAttackSequence: shoot-ogremage
+		RequiresCondition: ogremage_upg
+	WithDeathAnimation:
+		RequiresCondition: !ogremage_upg
+	WithDeathAnimation@Ogremage:
+		DeathSequence: die-ogremage
+		CrushedSequence: die-crushed-ogremage
+		CrushedSequencePalette: player
+		CrushedPaletteIsPlayerPalette: true
+		UseDeathTypeSuffix: false
+		RequiresCondition: ogremage_upg
+	Targetable:
+		TargetTypes: Ground, Vehicle, Monster
+	#Weapons
+	Inherits@attacks_and_spells: ^WC2OgreOgreMageAttacksSpells
+	ActorStatValues:
+		Upgrades: wc2_orcs_upgrade_axestrength, wc2_orcs_upgrade_axestrengthii, wc2_orcs_upgrade_armorstrength, wc2_orcs_upgrade_armorstrengthii, wc2_orcs_upgrade_ogremage, wc2_orcs_upgrade_bloodlust, wc2_orcs_upgrade_runes
+
+# Separate actor for ogremage because otherwise we can't change the build icon (cameo) or tooltip.
+
+wc2_orcs_deathknight:
+	Inherits@WC2Infantry: ^WC2Infantry
+	Inherits@WC2Template: ^WC2Mage
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Inherits@wc2_o_deathknight_haste: ^WC2OrcsDeathKnightHaste
+	Inherits@wc2_o_deathknight_deathanddecay: ^WC2OrcsDeathKnightDeathAndDecay
+	Inherits@wc2_o_deathknight_raisedead: ^WC2OrcsDeathKnightRaiseDead
+	Tooltip:
+		Name: Death Knight
+	Buildable:
+		Prerequisites: ~wc2_orcs_templeofthedamned
+		Queue: Infantry, RAInfantry
+		Description: Powerful undead spell caster.\nCan attack Air.\nDetector
+	Voiced:
+		VoiceSet: wc2voiceorcdeathknight
+	# Undead target type
+	Targetable@UNDEAD:
+		TargetTypes: undeadtarget
+	#Weapons
+	AttackFrontal:
+		Armaments: primary, deathcoil, haste, deathanddecay, raisedead
+		FacingTolerance: 0
+	AutoTargetPriority@DEFAULT:
+		RequiresCondition: !stance-attackanything && !assault-move && !FSD_cond_2
+	AutoTargetPriority@ATTACKANYTHING:
+		RequiresCondition: (stance-attackanything || assault-move) && !FSD_cond_2
+	AutoTargetPriority@ATTACKANYTHING_HASTE:
+		RequiresCondition: (stance-attackanything || assault-move) && FSD_cond_2
+		ValidTargets: haste_target
+		InvalidTargets: NoAutoTarget
+	ChangesHealth@DEATHCOILHEAL:
+		PercentageStep: 83
+		Delay: 0
+		StartIfBelow: 110
+		RequiresCondition: cond_deathcoil_drain
+	Armament:
+		Weapon: wc2deathknightFire
+		FireDelay: 7
+		RequiresCondition: (FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_2 && !deathknighthaste_upg) || (FSD_cond_3 && !deathknightdeathanddecay_upg) || (FSD_cond_4 && !deathknightraisedead_upg)
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: wc2deathknightFire
+	Armament@DEATHCOIL:
+		Name: deathcoil
+		Weapon: wc2deathknightDeathCoil
+		FireDelay: 7
+		RequiresCondition: (FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)
+		PauseOnCondition: mana < 100
+	Armament@DEATHCOILSCATTER1:
+		Weapon: wc2deathknightDeathCoilScatter_Left
+		FireDelay: 7
+		RequiresCondition: (FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)
+		PauseOnCondition: mana < 100
+	Armament@DEATHCOILSCATTER2:
+		Weapon: wc2deathknightDeathCoilScatter_Right
+		FireDelay: 7
+		RequiresCondition: (FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)
+		PauseOnCondition: mana < 100
+	Armament@HASTE:
+		Name: haste
+		Weapon: wc2deathknightHaste
+		FireDelay: 7
+		TargetRelationships: Ally
+		RequiresCondition: FSD_cond_2 && deathknighthaste_upg
+		PauseOnCondition: mana < 50
+	Armament@DEATHANDDECAY:
+		Name: deathanddecay
+		Weapon: wc2deathknightDeathAndDecay
+		FireDelay: 7
+		RequiresCondition: FSD_cond_3 && deathknightdeathanddecay_upg
+		PauseOnCondition: mana < 25
+	Armament@RAISEDEAD:
+		Name: raisedead
+		Weapon: wc2deathknightRaiseDead
+		FireDelay: 7
+		RequiresCondition: FSD_cond_4 && deathknightraisedead_upg
+		PauseOnCondition: mana < 50
+	# "Mana" (ammopool)
+	GrantConditionOnAttack@DEATHCOIL:
+		Condition: cond_deathcoil_drain
+		ArmamentNames: deathcoil
+		MaximumInstances: 1
+		RevokeDelay: 2
+	GrantConditionOnAttack@HASTE:
+		Condition: cond_haste_drain
+		ArmamentNames: haste
+		MaximumInstances: 1
+		RevokeDelay: 2
+	GrantConditionOnAttack@DEATHANDDECAY:
+		Condition: cond_deathanddecay_drain
+		ArmamentNames: deathanddecay
+		MaximumInstances: 1
+		RevokeDelay: 2
+	GrantConditionOnAttack@RAISEDEAD:
+		Condition: cond_raisedead_drain
+		ArmamentNames: raisedead
+		MaximumInstances: 1
+		RevokeDelay: 2
+	AmmoPool:
+		Armaments:
+		Ammo: 255
+		AmmoCondition: mana
+	ReloadAmmoPoolCA@PassiveRegen:
+		Delay: 10
+		Count: 1
+		ShowSelectionBar: false
+	ReloadAmmoPoolCA@DEATHCOIL:
+		Delay: 1
+		Count: -100
+		RequiresCondition: cond_deathcoil_drain
+	ReloadAmmoPoolCA@HASTE:
+		Delay: 1
+		Count: -50
+		RequiresCondition: cond_haste_drain
+	ReloadAmmoPoolCA@DEATHANDDECAY:
+		Delay: 1
+		Count: -25
+		RequiresCondition: cond_deathanddecay_drain
+	ReloadAmmoPoolCA@RAISEDEAD:
+		Delay: 1
+		Count: -50
+		RequiresCondition: cond_raisedead_drain
+	ActorStatValues:
+		Upgrades: wc2_orcs_upgrade_armorstrength, wc2_orcs_upgrade_armorstrengthii, wc2_orcs_upgrade_haste, wc2_orcs_upgrade_deathanddecay, wc2_orcs_upgrade_raisedead
+
+	### Visual indicator of mode ###
+	WithDecoration@Mode_Deathcoil:
+		Sequence: deathcoil_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_1
+	WithDecoration@Mode_Haste:
+		Sequence: haste_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_2 && deathknighthaste_upg
+	WithDecoration@Mode_Haste_Locked:
+		Sequence: locked_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_2 && !deathknighthaste_upg
+	WithDecoration@Mode_DeathAndDecay:
+		Sequence: deathanddecay_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_3 && deathknightdeathanddecay_upg
+	WithDecoration@Mode_DeathAndDecay_Locked:
+		Sequence: locked_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_3 && !deathknightdeathanddecay_upg
+	WithDecoration@Mode_RaiseDead:
+		Sequence: raisedead_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_4 && deathknightraisedead_upg
+	WithDecoration@Mode_RaiseDead_Locked:
+		Sequence: locked_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_4 && !deathknightraisedead_upg
+
+	### Starting spell randomizer for AI.
+	GrantConditionOnBotOwner@wc2magebotcontrol:
+		Condition: wc2_cond_bot_owner
+		Bots: easiest, easy, medium, hard, brutal, challenger, unbeatable, cameogod, airforce, defenseai
+	GrantRandomCondition@wc2magebotcontrol:
+		Conditions: FSD_cond_1_AI, FSD_cond_2_AI, FSD_cond_3_AI, FSD_cond_4_AI
+	# FSD_Cond_1 is always granted at start due to the four state deploy.
+	GrantCondition@Cond2AI:
+		Condition: FSD_cond_2
+		RequiresCondition: wc2_cond_bot_owner && FSD_cond_2_AI
+	GrantCondition@Cond3AI:
+		Condition: FSD_cond_3
+		RequiresCondition: wc2_cond_bot_owner && FSD_cond_3_AI
+	GrantCondition@Cond4AI:
+		Condition: FSD_cond_4
+		RequiresCondition: wc2_cond_bot_owner && FSD_cond_4_AI
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 10

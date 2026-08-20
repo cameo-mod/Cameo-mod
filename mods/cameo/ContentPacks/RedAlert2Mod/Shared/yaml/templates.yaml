@@ -1,0 +1,1011 @@
+^Palettes:
+	PaletteFromFile@ra2rotunits:
+		Name: ra2rotunit
+		Filename: steelunittem.pal
+		ShadowIndex: 1, 4
+	PlayerColorPalette@ra2rotunits:
+		BasePalette: ra2rotunit
+		BaseName: playerra2rot
+		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+	PaletteFromFile@ra2consunits:
+		Name: ra2consunit
+		Filename: steelfedutem.pal
+		ShadowIndex: 1, 4
+	PlayerColorPalette@ra2consunits:
+		BasePalette: ra2consunit
+		BaseName: playerra2cons
+		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+	PaletteFromFile@ra2future1:
+		Name: ra2future1
+		Filename: eapal1tem.pal
+		ShadowIndex: 1, 4
+	PlayerColorPalette@ra2future1:
+		BasePalette: ra2future1
+		BaseName: playerra2future1
+		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+	PaletteFromFile@ra2future2:
+		Name: ra2future2
+		Filename: eapal2tem.pal
+		ShadowIndex: 1, 4
+	PlayerColorPalette@ra2future2:
+		BasePalette: ra2future2
+		BaseName: playerra2future2
+		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+
+##############################################
+#   Red Alert 2 Asian Structures
+##############################################
+^AASpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: asianalliance_engineer, asianalliance_asianmilitia, asianalliance_asianmilitia, asianalliance_asiantankkiller
+
+^InfantrySpecUpgrade:
+	DamageMultiplier@asianalliance_doctrine_modernizedinfantryequipment:
+		Modifier: 95
+		RequiresCondition: asianalliance_doctrine_modernizedinfantryequipment
+	FirepowerMultiplier@asianalliance_doctrine_modernizedinfantryequipment:
+		Modifier: 105
+		RequiresCondition: asianalliance_doctrine_modernizedinfantryequipment
+	RangeMultiplier@asianalliance_doctrine_modernizedinfantryequipment:
+		Modifier: 105
+		RequiresCondition: asianalliance_doctrine_modernizedinfantryequipment
+	GrantConditionOnPrerequisite@asianalliance_doctrine_modernizedinfantryequipment:
+		Condition: asianalliance_doctrine_modernizedinfantryequipment
+		Prerequisites: asianalliance_doctrine_modernizedinfantryequipment
+	ActorStatValues:
+		Upgrades: asianalliance_doctrine_modernizedinfantryequipment
+
+^PulverizerUpgrades:
+	FirepowerMultiplier@asianalliance_doctrine_heavypulverizerweapons:
+		Modifier: 75
+		RequiresCondition: asianalliance_doctrine_heavypulverizerweapons
+	RangeMultiplier@asianalliance_doctrine_heavypulverizerweapons:
+		Modifier: 115
+		RequiresCondition: asianalliance_doctrine_heavypulverizerweapons
+	GrantConditionOnPrerequisite@asianalliance_doctrine_heavypulverizerweapons:
+		Condition: asianalliance_doctrine_heavypulverizerweapons
+		Prerequisites: asianalliance_doctrine_heavypulverizerweapons
+	ActorStatValues:
+		Upgrades: asianalliance_doctrine_heavypulverizerweapons
+
+^AsianPhalanxUpgrade:
+	ExternalCondition@AsianPhalanx:
+		Condition: AsianPhalanx
+	DamageMultiplier@AsianPhalanx1:
+		Modifier: 95
+		RequiresCondition: AsianPhalanx == 1
+	DamageMultiplier@AsianPhalanx2:
+		Modifier: 90
+		RequiresCondition: AsianPhalanx == 2
+	DamageMultiplier@AsianPhalanx3:
+		Modifier: 85
+		RequiresCondition: AsianPhalanx == 3
+	DamageMultiplier@AsianPhalanx4:
+		Modifier: 80
+		RequiresCondition: AsianPhalanx == 4
+	DamageMultiplier@AsianPhalanx5:
+		Modifier: 75
+		RequiresCondition: AsianPhalanx >= 5
+	SpeedMultiplier@AsianPhalanx1:
+		Modifier: 95
+		RequiresCondition: AsianPhalanx == 1
+	SpeedMultiplier@AsianPhalanx2:
+		Modifier: 90
+		RequiresCondition: AsianPhalanx == 2
+	SpeedMultiplier@AsianPhalanx3:
+		Modifier: 85
+		RequiresCondition: AsianPhalanx == 3
+	SpeedMultiplier@AsianPhalanx4:
+		Modifier: 80
+		RequiresCondition: AsianPhalanx == 4
+	SpeedMultiplier@AsianPhalanx5:
+		Modifier: 75
+		RequiresCondition: AsianPhalanx >= 5
+	WithColoredOverlay@AsianPhalanx1:
+		Color: 44444408
+		RequiresCondition: AsianPhalanx == 1
+	WithColoredOverlay@AsianPhalanx2:
+		Color: 55555516
+		RequiresCondition: AsianPhalanx == 2
+	WithColoredOverlay@AsianPhalanx3:
+		Color: 66666624
+		RequiresCondition: AsianPhalanx == 3
+	WithColoredOverlay@AsianPhalanx4:
+		Color: 77777732
+		RequiresCondition: AsianPhalanx == 4
+	WithColoredOverlay@AsianPhalanx5:
+		Color: 88888840
+		RequiresCondition: AsianPhalanx >= 5
+	DamageMultiplier@asianalliance_doctrine_asianphalanx:
+		Modifier: 90
+		RequiresCondition: asianalliance_doctrine_asianphalanx
+	GrantConditionOnPrerequisite@asianalliance_doctrine_asianphalanx:
+		Condition: asianalliance_doctrine_asianphalanx
+		Prerequisites: asianalliance_doctrine_asianphalanx
+	ActorStatValues:
+		Upgrades: asianalliance_doctrine_asianphalanx
+
+^DragonFireUpgrades:
+	FirepowerMultiplier@asianalliance_upgrade_dragonfire:
+		Modifier: 150
+		RequiresCondition: asianalliance_upgrade_dragonfire
+	GrantConditionOnPrerequisite@asianalliance_upgrade_dragonfire:
+		Condition: asianalliance_upgrade_dragonfire
+		Prerequisites: asianalliance_upgrade_dragonfire
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_dragonfire
+
+^CelestialPowerUpgrades:
+	FirepowerMultiplier@asianalliance_upgrade_celestialpower:
+		Modifier: 125
+		RequiresCondition: asianalliance_upgrade_celestialpower
+	RangeMultiplier@asianalliance_upgrade_celestialpower:
+		Modifier: 125
+		RequiresCondition: asianalliance_upgrade_celestialpower
+	GrantConditionOnPrerequisite@asianalliance_upgrade_celestialpower:
+		Condition: asianalliance_upgrade_celestialpower
+		Prerequisites: asianalliance_upgrade_celestialpower
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_celestialpower
+
+^KamikazeMode:
+	GrantConditionOnPrerequisite@asianalliance_upgrade_banzaimode:
+		Condition: asianalliance_upgrade_banzaimode
+		Prerequisites: asianalliance_upgrade_banzaimode
+	GrantConditionOnDamageState@BanzaiHeavy:
+		ValidDamageStates: Heavy
+		Condition: BanzaiHeavy
+		RequiresCondition: asianalliance_upgrade_banzaimode
+	GrantCondition@KamikazeHeavy:
+		Condition: KamikazeHeavy
+		RequiresCondition: BanzaiHeavy && asianalliance_upgrade_banzaimode
+	DamageMultiplier@KamikazeHeavy:
+		Modifier: 75
+		RequiresCondition: KamikazeHeavy
+	RangeMultiplier@KamikazeHeavy:
+		Modifier: 75
+		RequiresCondition: KamikazeHeavy
+	ReloadDelayMultiplier@KamikazeHeavy:
+		Modifier: 75
+		RequiresCondition: KamikazeHeavy
+	FirepowerMultiplier@KamikazeHeavy:
+		Modifier: 125
+		RequiresCondition: KamikazeHeavy
+	SpeedMultiplier@KamikazeHeavy:
+		Modifier: 125
+		RequiresCondition: KamikazeHeavy
+	ChangesHealth@KamikazeHeavy:
+		Step: 10
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: KamikazeHeavy
+	WithDecoration@KamikazeHeavy:
+		Image: aa_banzai
+		Sequence: idle
+		Position: TopRight
+		BlinkInterval: 32
+		BlinkPattern: On, On, On, On
+		RequiresCondition: KamikazeHeavy
+	GrantConditionOnDamageState@BanzaiCritical:
+		ValidDamageStates: Critical
+		Condition: BanzaiCritical
+		RequiresCondition: asianalliance_upgrade_banzaimode
+	GrantCondition@KamikazeCritical:
+		Condition: KamikazeCritical
+		RequiresCondition: BanzaiCritical && asianalliance_upgrade_banzaimode
+	DamageMultiplier@KamikazeCritical:
+		Modifier: 50
+		RequiresCondition: KamikazeCritical
+	RangeMultiplier@KamikazeCritical:
+		Modifier: 50
+		RequiresCondition: KamikazeCritical
+	ReloadDelayMultiplier@KamikazeCritical:
+		Modifier: 50
+		RequiresCondition: KamikazeCritical
+	FirepowerMultiplier@KamikazeCritical:
+		Modifier: 150
+		RequiresCondition: KamikazeCritical
+	SpeedMultiplier@KamikazeCritical:
+		Modifier: 150
+		RequiresCondition: KamikazeCritical
+	ChangesHealth@KamikazeCritical:
+		Step: 20
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: KamikazeCritical
+	WithDecoration@KamikazeCritical:
+		Image: aa_banzai2
+		Sequence: idle
+		Position: TopRight
+		BlinkInterval: 32
+		BlinkPattern: On, On, On, On
+		RequiresCondition: KamikazeCritical
+	#RejectsOrders@KamikazeCritical:
+	#	RequiresCondition: KamikazeCritical
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_banzaimode
+
+^WayOfTheDragon:
+	DamageMultiplier@dragonwaydamage:
+		RequiresCondition: dragonwaydamage
+		Modifier: 95
+	FirepowerMultiplier@dragonwaydamage:
+		RequiresCondition: dragonwaydamage
+		Modifier: 105
+	SpeedMultiplier@dragonwaydamage:
+		RequiresCondition: dragonwaydamage
+		Modifier: 105
+	GrantConditionOnDamage@asianalliance_upgrade_wayofthedragon:
+		RequiresCondition: asianalliance_upgrade_wayofthedragon
+		Condition: dragonwaydamage
+		Duration: 25
+		PlayerRelationship: Ally, Neutral, Enemy
+	DamageMultiplier@asianalliance_upgrade_wayofthedragon:
+		Modifier: 95
+		RequiresCondition: asianalliance_upgrade_wayofthedragon
+	FirepowerMultiplier@asianalliance_upgrade_wayofthedragon:
+		Modifier: 105
+		RequiresCondition: asianalliance_upgrade_wayofthedragon
+	SpeedMultiplier@asianalliance_upgrade_wayofthedragon:
+		Modifier: 105
+		RequiresCondition: asianalliance_upgrade_wayofthedragon
+	GrantConditionOnPrerequisite@asianalliance_upgrade_wayofthedragon:
+		Condition: asianalliance_upgrade_wayofthedragon
+		Prerequisites: asianalliance_upgrade_wayofthedragon
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_wayofthedragon
+
+^SyndicateSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: latinsyndicate_engineer, latinsyndicate_latinmilitia, latinsyndicate_latinmilitia, latinsyndicate_grenademonkey
+
+^LatinEliteGuerillas:
+	DamageMultiplier@latinsyndicate_doctrine_eliteguerillas:
+		Modifier: 75
+		RequiresCondition: latinsyndicate_doctrine_eliteguerillas
+	FirepowerMultiplier@latinsyndicate_doctrine_eliteguerillas:
+		Modifier: 125
+		RequiresCondition: latinsyndicate_doctrine_eliteguerillas
+	ChangesHealth@latinsyndicate_doctrine_eliteguerillas:
+		Step: 10
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: latinsyndicate_doctrine_eliteguerillas
+	GrantConditionOnPrerequisite@latinsyndicate_doctrine_eliteguerillas:
+		Condition: latinsyndicate_doctrine_eliteguerillas
+		Prerequisites: latinsyndicate_doctrine_eliteguerillas
+	ActorStatValues:
+		Upgrades: latinsyndicate_doctrine_eliteguerillas
+
+^CartelRocketsUpgrade:
+	RangeMultiplier@latinsyndicate_doctrine_cartelrockets:
+		Modifier: 125
+		RequiresCondition: latinsyndicate_doctrine_cartelrockets
+	FirepowerMultiplier@latinsyndicate_doctrine_cartelrockets:
+		Modifier: 125
+		RequiresCondition: latinsyndicate_doctrine_cartelrockets
+	GrantConditionOnPrerequisite@latinsyndicate_doctrine_cartelrockets:
+		Condition: latinsyndicate_doctrine_cartelrockets
+		Prerequisites: latinsyndicate_doctrine_cartelrockets
+	ActorStatValues:
+		Upgrades: latinsyndicate_doctrine_cartelrockets
+
+^LightPosts:
+	DamageMultiplier@latinsyndicate_doctrine_lightposts:
+		Modifier: 70
+		RequiresCondition: latinsyndicate_doctrine_lightposts
+	RevealsShroudMultiplier@latinsyndicate_doctrine_lightposts:
+		Modifier: 130
+		RequiresCondition: latinsyndicate_doctrine_lightposts
+	GrantConditionOnPrerequisite@latinsyndicate_doctrine_lightposts:
+		Condition: latinsyndicate_doctrine_lightposts
+		Prerequisites: latinsyndicate_doctrine_lightposts
+	ActorStatValues:
+		Upgrades: latinsyndicate_doctrine_lightposts
+
+^LatinFlameUpgrades:
+	FirepowerMultiplier@latinsyndicate_upgrade_asianalliancestolentechhotfire:
+		Modifier: 125
+		RequiresCondition: latinsyndicate_upgrade_asianalliancestolentechhotfire
+	ReloadDelayMultiplier@latinsyndicate_upgrade_asianalliancestolentechhotfire:
+		Modifier: 75
+		RequiresCondition: latinsyndicate_upgrade_asianalliancestolentechhotfire
+	GrantConditionOnPrerequisite@latinsyndicate_upgrade_asianalliancestolentechhotfire:
+		Condition: latinsyndicate_upgrade_asianalliancestolentechhotfire
+		Prerequisites: latinsyndicate_upgrade_asianalliancestolentechhotfire
+	ActorStatValues:
+		Upgrades: latinsyndicate_upgrade_asianalliancestolentechhotfire
+
+^LatinCashrecover:
+	DamageMultiplier@latinsyndicate_upgrade_sovietstolentechindustrialmethods:
+		Modifier: 80
+		RequiresCondition: latinsyndicate_upgrade_sovietstolentechindustrialmethods
+	SpeedMultiplier@latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging:
+		Modifier: 125
+		RequiresCondition: latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging
+	RangeMultiplier@latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging:
+		Modifier: 105
+		RequiresCondition: latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging
+	GrantConditionOnPrerequisite@latinsyndicate_upgrade_sovietstolentechindustrialmethods:
+		Condition: latinsyndicate_upgrade_sovietstolentechindustrialmethods
+		Prerequisites: latinsyndicate_upgrade_sovietstolentechindustrialmethods
+	GrantConditionOnPrerequisite@latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging:
+		Condition: latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging
+		Prerequisites: latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging
+	ActorStatValues:
+		Upgrades: latinsyndicate_upgrade_cashrecovery, latinsyndicate_upgrade_sovietstolentechindustrialmethods, latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging
+
+##############################################
+#   Red Alert 2 Consortium Structure
+##############################################
+^ConsortiumSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: steelconsortium_engineer, steelconsortium_clonetrooper, steelconsortium_clonetrooper, steelconsortium_quantummissiletrooper
+		RequiresCondition: !in_water
+
+^SteelUnderwaterStructure:
+	Inherits@sell: ^ConsortiumSpawnActorsOnSell
+	Cloak@underwater:
+		DetectionTypes: Underwater, GroundCloak, Cloak
+		InitialDelay: 0
+		CloakDelay: 75
+		CloakedCondition: underwater
+		PauseOnCondition: disabled
+		IsPlayerPalette: true
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
+		RequiresCondition: in_water
+	Targetable@water:
+		TargetTypes: Water, Ship, Submarine
+		RequiresCondition: in_water
+	Building:
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,Water ##########
+	SpawnActorsOnSell@in_water:
+		ActorTypes: steelconsortium_hoverboardgrenadier, steelconsortium_hoverboardgrenadier, steelconsortium_manta
+		RequiresCondition: in_water
+	GrantConditionOnTerrain@Water:
+		TerrainTypes: Water
+		Condition: in_water
+
+^ScalpelDrones:
+	Armament@DroneTargeting:
+		Name: secondary
+		Weapon: GLStingerTargeting
+		RequiresCondition: steelconsortium_upgrade_scalpeldefenders
+	RenderRangeCircleCA@targeting:
+		Armaments: secondary
+		Color: FF0000
+		#RequiresCondition: steelconsortium_upgrade_scalpeldefenders
+	DroneSpawnerMaster@steel_scalpel:
+		Actors: scalpelMG.steel
+		ArmamentNames: secondary
+		RespawnTicks: 500
+		PauseOnCondition: disabled || !steelconsortium_upgrade_scalpeldefenders
+		RequiresCondition: steelconsortium_upgrade_scalpeldefenders
+		FollowAfterAttackDelay: 25
+		ShouldSpawnInitialLoad: false
+	GrantConditionOnPrerequisite@steelconsortium_upgrade_scalpeldefenders:
+		Condition: steelconsortium_upgrade_scalpeldefenders
+		Prerequisites: steelconsortium_upgrade_scalpeldefenders
+	ActorStatValues:
+		Upgrades: steelconsortium_upgrade_scalpeldefenders
+
+^SteelUnderwaterTransit:
+	Cloak@underwater:
+		DetectionTypes: Underwater, GroundCloak, Cloak
+		InitialDelay: 0
+		CloakDelay: 25
+		CloakedCondition: underwater
+		PauseOnCondition: disabled
+		RequiresCondition: !cloak-force-disabled && !underbridge && inwater
+		IsPlayerPalette: true
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
+	GrantConditionOnTerrain:
+		Condition: inwater
+		TerrainTypes: Water
+	Targetable@water:
+		TargetTypes: Water, Ship, Submarine
+		RequiresCondition: inwater
+
+^SteelDefensiveDrones:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	Selectable:
+	#Interactable:
+	Buildable:
+		Description: template_drone_slave.description
+	RevealsShroud:
+		Range: 5000
+		Type: CenterPosition
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Aircraft:
+		CruiseAltitude: 1200
+		InitialFacing: 192
+		IdleTurnSpeed: 8
+		TurnSpeed: 32
+		Speed: 80
+		RepulsionSpeed: 40
+		MaximumPitch: 40
+		CanForceLand: false
+		VTOL: true
+	AttackAircraft:
+		AttackType: Hover
+		PersistentTargeting: false
+		FacingTolerance: 10
+	-SpawnActorOnDeath:
+	-ActorLostNotification:
+	-UpdatesPlayerStatistics:
+	DroneSpawnerSlave:
+		AttackCallBackDistance: 15000
+		MovingCallBackCellDistance: 1000
+		GrantConditionWhenMasterIsDisabled: notenabled
+		GrantConditionWhenMasterIsPaused: paused
+	KillsSelf@masterdisabled:
+		RequiresCondition: paused
+	RejectsOrders:
+	-MapEditorData:
+	RenderSprites:
+		PlayerPalette: playerra2rot
+		Image: steel_scalpel
+	ActorStatValues:
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
+
+^SteelConsortiumPulseWeapons:
+	FirepowerMultiplier@steelconsortium_upgrade_pulseweapons:
+		RequiresCondition: steelconsortium_upgrade_pulseweapons
+		Modifier: 130
+	RangeMultiplier@steelconsortium_upgrade_pulseweapons:
+		RequiresCondition: steelconsortium_upgrade_pulseweapons
+		Modifier: 115
+	GrantConditionOnPrerequisite@steelconsortium_upgrade_pulseweapons:
+		Condition: steelconsortium_upgrade_pulseweapons
+		Prerequisites: steelconsortium_upgrade_pulseweapons
+	ActorStatValues:
+		Upgrades: steelconsortium_upgrade_pulseweapons
+
+^SteelConsortiumNaniteInfusion:
+	WithIdleOverlay@shield1:
+		Palette: consortiumhexshield25
+		IsPlayerPalette: false
+	WithIdleOverlay@shield_damage:
+		Palette: consortiumhexshield75
+		IsPlayerPalette: false
+	DamageMultiplier@steelconsortium_upgrade_naniteinfusion:
+		RequiresCondition: steelconsortium_upgrade_naniteinfusion
+		Modifier: 95
+	ChangesHealth@steelconsortium_upgrade_naniteinfusion:
+		PercentageStep: 1
+		Delay: 80
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: steelconsortium_upgrade_naniteinfusion
+	ChangesHealth@steelconsortium_upgrade_naniteinfusion:
+		Step: 25
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: steelconsortium_upgrade_naniteinfusion
+	GrantConditionOnPrerequisite@steelconsortium_upgrade_naniteinfusion:
+		Condition: steelconsortium_upgrade_naniteinfusion
+		Prerequisites: steelconsortium_upgrade_naniteinfusion
+	ActorStatValues:
+		Upgrades: steelconsortium_upgrade_naniteinfusion
+
+^SteelConsortiumNaniteInfusionInfantry:
+	Inherits: ^SteelConsortiumNaniteInfusion
+	DamageMultiplier@steelconsortium_upgrade_naniteinfusion:
+		Modifier: 90
+	ChangesHealth@steelconsortium_upgrade_naniteinfusion:
+		Delay: 40
+	ChangesHealth@steelconsortium_upgrade_naniteinfusion:
+		Step: 50
+
+^SteelConsortiumFerrocrete:
+	DamageMultiplier@steelconsortium_upgrade_ferrocretecurtain:
+		RequiresCondition: steelconsortium_upgrade_ferrocretecurtain
+		Modifier: 85
+	GrantConditionOnPrerequisite@steelconsortium_upgrade_ferrocretecurtain:
+		Condition: steelconsortium_upgrade_ferrocretecurtain
+		Prerequisites: steelconsortium_upgrade_ferrocretecurtain
+	ActorStatValues:
+		Upgrades: steelconsortium_upgrade_ferrocretecurtain
+
+^SteelConsortiumResonanceAmmo:
+	FirepowerMultiplier@steelconsortium_upgrade_resonanceammo:
+		RequiresCondition: steelconsortium_upgrade_resonanceammo
+		Modifier: 50
+	RangeMultiplier@steelconsortium_upgrade_resonanceammo:
+		RequiresCondition: steelconsortium_upgrade_resonanceammo
+		Modifier: 110
+	GrantConditionOnPrerequisite@steelconsortium_upgrade_resonanceammo:
+		Condition: steelconsortium_upgrade_resonanceammo
+		Prerequisites: steelconsortium_upgrade_resonanceammo
+	ActorStatValues:
+		Upgrades: steelconsortium_upgrade_resonanceammo
+
+^QuantumWeaponsEMP:
+	GrantConditionOnPrerequisite@steelconsortium_upgrade_quantumweaponpower:
+		Condition: steelconsortium_upgrade_quantumweaponpower
+		Prerequisites: steelconsortium_upgrade_quantumweaponpower
+	ActorStatValues:
+		Upgrades: steelconsortium_upgrade_quantumweaponpower
+
+^NaxisSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: naxis_naxiriflesoldier, naxis_naxiriflesoldier, naxis_naxiriflesoldier, naxis_panzerfausttrooper, naxis_naxiriflerecruit, naxis_naxiriflerecruit, naxis_naxiriflerecruit
+		RequiresCondition: !in_water
+^SpaceNaxisSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: schwarzermond_lunarsoldier, schwarzermond_lunarsoldier, schwarzermond_lunarsoldier, schwarzermond_lunarrocket
+		RequiresCondition: !in_water
+
+^NaxiUndeadRevive:
+	GrantConditionOnPrerequisite@NaxiRevive:
+		Condition: nax_revive
+		Prerequisites: up_resurrection.nax
+	SpawnActorOnDeath@NaxiRevive1: #TODO: Multiple death types support for SpawnActorOnDeath
+		Actor: corpse.nax
+		Probability: 100
+		DeathType: BulletDeath
+		SpawnAfterDefeat: false
+		RequiresCondition: nax_revive && !chronobeamed
+	FireWarheadsOnDeath@Corpse:
+		DeathTypes: BulletDeath
+		Weapon: RA2CorpseSpawner
+		EmptyWeapon: RA2CorpseSpawner
+		RequiresCondition: !chronobeamed && !nax_revive
+
+^NaxiUndeadReviveBig:
+	Inherits: ^NaxiUndeadRevive
+	SpawnActorOnDeath@NaxiRevive1:
+		Actor: corpse_big.nax
+
+^OstfrontExperience:
+	DamageMultiplier@naxis_upgrade_ostfrontexperience:
+		RequiresCondition: naxis_upgrade_ostfrontexperience
+		Modifier: 85
+	FirepowerMultiplier@naxis_upgrade_ostfrontexperience:
+		RequiresCondition: naxis_upgrade_ostfrontexperience
+		Modifier: 115
+	SpeedMultiplier@naxis_upgrade_ostfrontexperience:
+		RequiresCondition: naxis_upgrade_ostfrontexperience
+		Modifier: 115
+	GrantConditionOnPrerequisite@naxis_upgrade_ostfrontexperience:
+		Condition: naxis_upgrade_ostfrontexperience
+		Prerequisites: naxis_upgrade_ostfrontexperience
+	FirepowerMultiplier@naxis_beerfactory:
+		RequiresCondition: naxis_beerfactory
+		Modifier: 125
+	GrantConditionOnPrerequisite@naxis_beerfactory:
+		Condition: naxis_beerfactory
+		Prerequisites: naxis_beerfactory
+	DamageMultiplier@naxis_sausagefactory:
+		RequiresCondition: naxis_sausagefactory
+		Modifier: 80
+	GrantConditionOnPrerequisite@naxis_sausagefactory:
+		Condition: naxis_sausagefactory
+		Prerequisites: naxis_sausagefactory
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience
+
+^Atlantikwall:
+	DamageMultiplier@naxis_upgrade_atlantikwall:
+		RequiresCondition: naxis_upgrade_atlantikwall
+		Modifier: 80
+	ChangesHealth@up_atlantikwall1:
+		PercentageStep: 1
+		Delay: 40
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: naxis_upgrade_atlantikwall
+	ChangesHealth@up_atlantikwall2:
+		Step: 50
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: naxis_upgrade_atlantikwall
+	GrantConditionOnPrerequisite@naxis_upgrade_atlantikwall:
+		Condition: naxis_upgrade_atlantikwall
+		Prerequisites: naxis_upgrade_atlantikwall
+	ActorStatValues:
+		Upgrades: naxis_upgrade_atlantikwall
+
+^TankArsenalRenovation:
+	DamageMultiplier@naxis_upgrade_tankarsenalrenovation:
+		RequiresCondition: naxis_upgrade_tankarsenalrenovation
+		Modifier: 85
+	FirepowerMultiplier@naxis_upgrade_tankarsenalrenovation:
+		RequiresCondition: naxis_upgrade_tankarsenalrenovation
+		Modifier: 115
+	ReloadDelayMultiplier@naxis_upgrade_tankarsenalrenovation:
+		RequiresCondition: naxis_upgrade_tankarsenalrenovation
+		Modifier: 85
+	SpeedMultiplier@naxis_upgrade_tankarsenalrenovation:
+		RequiresCondition: naxis_upgrade_tankarsenalrenovation
+		Modifier: 115
+	GrantConditionOnPrerequisite@naxis_upgrade_tankarsenalrenovation:
+		Condition: naxis_upgrade_tankarsenalrenovation
+		Prerequisites: naxis_upgrade_tankarsenalrenovation
+	ActorStatValues:
+		Upgrades: naxis_upgrade_tankarsenalrenovation
+
+^MassOpticsIntegration:
+	RevealsShroudMultiplier@naxis_upgrade_massopticsintegration:
+		RequiresCondition: naxis_upgrade_massopticsintegration
+		Modifier: 125
+	DetectCloakedMultiplier@naxis_upgrade_massopticsintegration:
+		RequiresCondition: naxis_upgrade_massopticsintegration
+		Modifier: 125
+	InaccuracyMultiplier@naxis_upgrade_massopticsintegration:
+		RequiresCondition: naxis_upgrade_massopticsintegration
+		Modifier: 75
+	RangeMultiplier@naxis_upgrade_massopticsintegration:
+		RequiresCondition: naxis_upgrade_massopticsintegration
+		Modifier: 125
+	GrantConditionOnPrerequisite@naxis_upgrade_massopticsintegration:
+		Condition: naxis_upgrade_massopticsintegration
+		Prerequisites: naxis_upgrade_massopticsintegration
+	ActorStatValues:
+		Upgrades: naxis_upgrade_massopticsintegration
+
+^Wunderwaffe:
+	DamageMultiplier@naxis_upgrade_wunderwaffe:
+		RequiresCondition: naxis_upgrade_wunderwaffe
+		Modifier: 80
+	FirepowerMultiplier@up_wunderwaffee:
+		RequiresCondition: naxis_upgrade_wunderwaffe
+		Modifier: 120
+	ReloadDelayMultiplier@naxis_upgrade_wunderwaffe:
+		RequiresCondition: naxis_upgrade_wunderwaffe
+		Modifier: 80
+	GrantConditionOnPrerequisite@naxis_upgrade_wunderwaffe:
+		Condition: naxis_upgrade_wunderwaffe
+		Prerequisites: naxis_upgrade_wunderwaffe
+	ActorStatValues:
+		Upgrades: naxis_upgrade_wunderwaffe
+
+^Blitzkrieg:
+	GrantConditionOnPrerequisite@naxis_upgrade_blitzkrieg:
+		Condition: naxis_upgrade_blitzkrieg
+		Prerequisites: naxis_upgrade_blitzkrieg
+	SpeedMultiplier@naxis_upgrade_blitzkrieg:
+		RequiresCondition: naxis_upgrade_blitzkrieg
+		Modifier: 125
+	ActorStatValues:
+		Upgrades: naxis_upgrade_blitzkrieg
+
+##############################################
+#   Red Alert 2 Lunar Naxis Upgrades
+##############################################
+
+^NaxiCrystalLens:
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_crystallens:
+		Condition: schwarzermond_upgrade_crystallens
+		Prerequisites: schwarzermond_upgrade_crystallens
+
+^NaxiAmplifiedLens:
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_amplifiedlens:
+		Condition: schwarzermond_upgrade_amplifiedlens
+		Prerequisites: schwarzermond_upgrade_amplifiedlens
+
+^NaxiVrilPoweredWeapons:
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_vrilpoweredweapons:
+		Condition: schwarzermond_upgrade_vrilpoweredweapons
+		Prerequisites: schwarzermond_upgrade_vrilpoweredweapons
+	FirepowerMultiplier@schwarzermond_upgrade_vrilpoweredweapons:
+		RequiresCondition: schwarzermond_upgrade_vrilpoweredweapons
+		Modifier: 125
+
+^NaxiCryptofascism:
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_cryptofascism:
+		Condition: schwarzermond_upgrade_cryptofascism
+		Prerequisites: schwarzermond_upgrade_cryptofascism
+	CashTrickler@cryptofascism:
+		Interval: 25
+		Amount: 1
+		RequiresCondition: schwarzermond_upgrade_cryptofascism
+	# MOONCOIN BULL RUN — every kill mints. GivesBounty (on the victim) pays whichever
+	# killer carries a TakesBounty whose ValidTypes contain the victim's bounty Type, so a
+	# private `MoonCoin` type means these units collect from the tree-wide MoonCoin bounty
+	# while nobody else in the game is affected and the existing `global-bounty` game
+	# option keeps its own separate `Bounty` type.
+	TakesBounty@mooncoin:
+		RequiresCondition: schwarzermond_upgrade_cryptofascism
+		ValidTypes: MoonCoin
+		Percentage: 25
+	ActorStatValues:
+		Upgrades: schwarzermond_upgrade_cryptofascism
+
+^NaxiLunarAlloys:
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_lunaralloys:
+		Condition: schwarzermond_upgrade_lunaralloys
+		Prerequisites: schwarzermond_upgrade_lunaralloys
+	# W21 R1: the old `DamageMultiplier: 90` is gone — a 10% damage reduction was an
+	# INVISIBLE stat that quietly redefined what 1 HP is worth. The alloys now bolt a
+	# real ARMOR PLATING bar onto the unit instead: same idea, on screen, and it stacks
+	# additively with any plating the unit already carries (the noid walkers) rather
+	# than adding a second bar.
+	ArmorPlating@schwarzermond_upgrade_lunaralloys:
+		RequiresCondition: schwarzermond_upgrade_lunaralloys
+		MaxPercentageStrength: 20
+		PercentageRegenAmount: 1
+		RegenInterval: 25
+		RampTicks: 125
+	ActorStatValues:
+		Upgrades: schwarzermond_upgrade_lunaralloys
+
+^NaxiMoonPropaganda:
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_moonpropaganda:
+		Condition: schwarzermond_upgrade_moonpropaganda
+		Prerequisites: schwarzermond_upgrade_moonpropaganda
+	FirepowerMultiplier@schwarzermond_upgrade_moonpropaganda:
+		RequiresCondition: schwarzermond_upgrade_moonpropaganda
+		Modifier: 110
+	# FANATICISM — the propaganda works best on the dying. Below half health a Schwarzer
+	# Mond soldier fights HARDER instead of worse, which is the opposite of how damage
+	# normally feels and pairs directly with the Vril shield: the shield pops, the soldier
+	# goes berserk. MaxHP is a PERCENTAGE (GrantConditionOnHealth), so one number covers
+	# every unit whatever its health.
+	GrantConditionOnHealth@moonpropaganda_fanatic:
+		Condition: moonpropaganda_fanatic
+		MaxHP: 50
+	FirepowerMultiplier@moonpropaganda_fanatic:
+		RequiresCondition: schwarzermond_upgrade_moonpropaganda && moonpropaganda_fanatic
+		Modifier: 150
+	# DEFECTION — enemy infantry who die to the broadcasts get up again on the Reich's
+	# side. The one effect in the faction that converts the enemy's losses into your gains
+	# rather than buffing a number, and the reason this upgrade is worth researching.
+	# ⚠ Deliberately spawns a Schwarzer Mond unit rather than reusing the Naxis
+	# corpse.nax -> undead.nax revive chain: a `.nax` actor here would make SchwarzerMond
+	# depend on the Naxis pack, against the self-contained ContentPack goal.
+	SpawnsActorsOnKill@moonpropaganda_defection:
+		RequiresCondition: schwarzermond_upgrade_moonpropaganda
+		Actor: schwarzermond_lunarsoldier
+		Probability: 15
+		ValidTargets: Infantry
+	ActorStatValues:
+		Upgrades: schwarzermond_upgrade_moonpropaganda
+
+# ============================================================================
+# HELIUM-3 ENRICHMENT — Schwarzer Mond's TEAM upgrade (maintainer 2026-08-15).
+#
+# SM is high tech, vehicles and aircraft, so the team upgrade reflects that
+# rather than the infantry-morale effect first proposed (DESIGN.md 6: a team
+# upgrade must fit the faction's identity).
+#
+# Calibration against RA1 Soviets' Reactor Overload, the other power team
+# upgrade: that one has ONE effect and doubles power (PowerMultiplier: 200).
+# This has THREE, so each is deliberately weaker — power +50% instead of +100%,
+# and the mobile buff drops from SM's old faction-only +25% speed to +15%.
+# That is the team-is-half-of-faction law in DESIGN.md 6, visible in the number.
+#
+# ...and unlike every other team upgrade in the tree, it has a REAL DRAWBACK:
+# fuelled vehicles and aircraft detonate when killed, friendly fire included, so
+# a dense allied armour ball can chain-react. Sharing the Reich's fusion fuel
+# with the whole team is not supposed to be free.
+# ============================================================================
+
+# The condition itself. Inherited by anything that should KNOW about the
+# upgrade; the effects live in the two templates below.
+# ⚠ No `ActorStatValues: Upgrades:` here any more. DESIGN.md 6: the stat widget
+# lists FACTION upgrades only, never team upgrades — and this is now a team one.
+^NaxiHelium3:
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_helium3:
+		Condition: schwarzermond_upgrade_helium3
+		Prerequisites: schwarzermond_upgrade_helium3
+
+# POWER half — inherited by ^Power in defaults.yaml, exactly as RA1's
+# ^ReactorOverloadTeamUpgradeRA1 is, so it reaches EVERY team member's plants.
+# ⚠ These two must NOT `Inherits: ^NaxiHelium3`. OpenRA rejects the same parent
+# appearing twice in one tree ("Parent type was already inherited"), and 22 SM
+# actors already inherit ^NaxiHelium3 DIRECTLY while also reaching these through
+# ^Power / ^VehicleBuffs / ^AircraftBuffs. Restating the grant node instead is
+# safe: it is the same key with the same values, so it merges into one trait.
+^Helium3TeamUpgradePower:
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_helium3:
+		Condition: schwarzermond_upgrade_helium3
+		Prerequisites: schwarzermond_upgrade_helium3
+	PowerMultiplier@schwarzermond_upgrade_helium3:
+		RequiresCondition: schwarzermond_upgrade_helium3
+		Modifier: 150
+
+# MOBILE half — inherited by ^VehicleBuffs and ^AircraftBuffs, so it reaches
+# every team member's vehicles and aircraft and nothing else. Infantry are
+# deliberately untouched: this is fuel, not propaganda.
+^Helium3TeamUpgradeMobile:
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_helium3:
+		Condition: schwarzermond_upgrade_helium3
+		Prerequisites: schwarzermond_upgrade_helium3
+	SpeedMultiplier@schwarzermond_upgrade_helium3:
+		RequiresCondition: schwarzermond_upgrade_helium3
+		Modifier: 115
+	TurnSpeedMultiplier@schwarzermond_upgrade_helium3:
+		RequiresCondition: schwarzermond_upgrade_helium3
+		Modifier: 115
+	FirepowerMultiplier@schwarzermond_upgrade_helium3:
+		RequiresCondition: schwarzermond_upgrade_helium3
+		Modifier: 115
+	# THE DRAWBACK. EmptyWeapon must be set too, or the engine falls back to its
+	# own default `UnitExplode` for the not-loaded case and a transport would
+	# quietly detonate with a different, weaker weapon than everything else.
+	FireWarheadsOnDeath@schwarzermond_upgrade_helium3:
+		RequiresCondition: schwarzermond_upgrade_helium3
+		Weapon: UnitExplodeBig
+		EmptyWeapon: UnitExplodeBig
+
+^NaxiVrilInfusion:
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_vrilinfusion:
+		Condition: schwarzermond_upgrade_vrilinfusion
+		Prerequisites: schwarzermond_upgrade_vrilinfusion
+	FirepowerMultiplier@schwarzermond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzermond_upgrade_vrilinfusion
+		Modifier: 125
+	SpeedMultiplier@schwarzermond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzermond_upgrade_vrilinfusion
+		Modifier: 125
+	TurnSpeedMultiplier@schwarzermond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzermond_upgrade_vrilinfusion
+		Modifier: 125
+	# W21 R1: the old `DamageMultiplier: 85` is gone. Vril rewrites the soldier, so the
+	# 15% damage reduction becomes a visible VRIL SHIELD — the outermost layer of the
+	# stack, regenerating fast (R7 ramp 250) and, per R5, replacing the body armor with
+	# `Shield` while it holds. That is the profile Tesla/Storm/EMP tear through and
+	# Sonic barely scratches, so the upgrade changes which weapons counter this faction
+	# rather than just making everything take less damage.
+	# ⚠ NEVER add a second `Shielded` trait. ^BasicUnit -> ^ShieldedShieldable already
+	# gives EVERY unit one, with capacity 100% of HP and starting empty, plus the
+	# `Armor RequiresCondition: !shielded` / `Armor@shielded: Shield` swap that R5 wants.
+	# A second Shielded compiles, lints and BOOTS fine, then throws the moment the actor
+	# is produced, because ChangesShield resolves it with .Trait<Shielded>().
+	# GrantsShield, not ChangesShield: shield grants must be ADDITIVE. ChangesShield's
+	# StartIfBelow is a CAP, so two upgrades of 25% would both stop at 25% and the second
+	# would be worth nothing. GrantsShield sums instead — two of these give ONE bar
+	# holding 50%, never two bars of 25%.
+	GrantsShield@schwarzermond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzermond_upgrade_vrilinfusion
+		PercentageStrength: 25
+		PercentageRegenAmount: 2
+		RegenInterval: 25
+		DamageCooldown: 250
+	# The shared Shielded is GATED, and `Shielded.Regenerate` returns early while the trait
+	# is disabled — so without naming this upgrade in the gate, Vril would silently grant
+	# NOTHING. Every shield-granting faction template in the mod states the same shape
+	# (D2K Ordos/Ixian, Japan stealth suits, Yuri), so Vril states it too.
+	# ⚠ `-RequiresCondition:` does NOT work here: the removal idiom only applies where the
+	# field already exists in the node being merged, and this template declares its own
+	# fresh `Shielded` node — the engine throws "no elements with key to remove" at BOOT.
+	Shielded:
+		RequiresCondition: !disabled && (schwarzermond_upgrade_vrilinfusion || shieldgen || shielded)
+	# `shieldpermanent` is the mod's marker for an INNATE shield rather than a generator
+	# field (D2K Ordos, Japan stealth suits, Yuri all use it), which Vril is. It buys two
+	# things from ^ShieldedShieldable that this upgrade would otherwise be punished by:
+	# ChangesShield@shielddischarge stops draining 1% per second, and
+	# DamageMultiplier@shielded stops applying 150% damage — a generator field makes you
+	# fragile while it holds, but a shield grown into the soldier's own cells should not.
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_vrilinfusion_permanent:
+		Condition: shieldpermanent
+		Prerequisites: schwarzermond_upgrade_vrilinfusion
+	ActorStatValues:
+		Upgrades: schwarzermond_upgrade_vrilinfusion
+
+^FutureTechSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: futuretech_engineer, futuretech_enforcer, futuretech_enforcer, futuretech_javelinsoldier
+
+^FutureRobotEnergizable:
+	Inherits@RobotControllable: ^RobotControllable
+	Targetable@RobotEnergizable:
+		TargetTypes: RobotEnergizable
+		RequiresCondition: RobotEnergizable <= 5 && !untargetable
+	ExternalCondition@RobotEnergizable:
+		Condition: RobotEnergizable
+		TotalCap: 5
+	SpeedMultiplier@RobotEnergizable1:
+		Modifier: 120
+		RequiresCondition: RobotEnergizable == 1
+	SpeedMultiplier@RobotEnergizable2:
+		Modifier: 140
+		RequiresCondition: RobotEnergizable == 2
+	SpeedMultiplier@RobotEnergizable3:
+		Modifier: 160
+		RequiresCondition: RobotEnergizable == 3
+	SpeedMultiplier@RobotEnergizable4:
+		Modifier: 180
+		RequiresCondition: RobotEnergizable == 4
+	SpeedMultiplier@RobotEnergizable5:
+		Modifier: 200
+		RequiresCondition: RobotEnergizable >= 5
+	ReloadDelayMultiplier@RobotEnergizable1:
+		Modifier: 90
+		RequiresCondition: RobotEnergizable == 1
+	ReloadDelayMultiplier@RobotEnergizable2:
+		Modifier: 80
+		RequiresCondition: RobotEnergizable == 2
+	ReloadDelayMultiplier@RobotEnergizable3:
+		Modifier: 70
+		RequiresCondition: RobotEnergizable == 3
+	ReloadDelayMultiplier@RobotEnergizable4:
+		Modifier: 60
+		RequiresCondition: RobotEnergizable == 4
+	ReloadDelayMultiplier@RobotEnergizable5:
+		Modifier: 50
+		RequiresCondition: RobotEnergizable >= 5
+
+^RobotControllable:
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Mobile:
+		PauseOnCondition: !robotcontrol || disabled
+	Capturable:
+		Types: thiefproof
+	GrantConditionOnPrerequisite:
+		Condition: robotcontrol
+		Prerequisites: robotcontrol
+	WithColoredOverlay@disabled:
+		Color: 000000b4
+		RequiresCondition: disabled && !chronodisabled || !robotcontrol
+	FirepowerMultiplier@RobotControllable:
+		Modifier: 110
+	DamageMultiplier@RobotControllable:
+		Modifier: 90
+	ReloadDelayMultiplier@RobotControllable:
+		Modifier: 90
+	SpeedMultiplier@RobotControllable:
+		Modifier: 105
+	RangeMultiplier@RobotControllable:
+		Modifier: 105
+	RevealsShroudMultiplier@RobotControllable:
+		Modifier: 105
+	DetectCloakedMultiplier@RobotControllable:
+		Modifier: 105
+	InaccuracyMultiplier@RobotControllable:
+		Modifier: 90
+
+^FutureTechEqualizerUpgrades:
+	FirepowerMultiplier@futuretech_doctrine_equalizerx1:
+		Modifier: 110
+		RequiresCondition: futuretech_doctrine_equalizerx1
+	ReloadDelayMultiplier@futuretech_doctrine_equalizerx1:
+		Modifier: 90
+		RequiresCondition: futuretech_doctrine_equalizerx1
+	RangeMultiplier@futuretech_doctrine_equalizerx1:
+		Modifier: 105
+		RequiresCondition: futuretech_doctrine_equalizerx1
+	GrantConditionOnPrerequisite@futuretech_doctrine_equalizerx1:
+		Condition: futuretech_doctrine_equalizerx1
+		Prerequisites: futuretech_doctrine_equalizerx1
+	FirepowerMultiplier@futuretech_doctrine_equalizerx2:
+		Modifier: 110
+		RequiresCondition: futuretech_doctrine_equalizerx2
+	ReloadDelayMultiplier@futuretech_doctrine_equalizerx2:
+		Modifier: 90
+		RequiresCondition: futuretech_doctrine_equalizerx2
+	RangeMultiplier@futuretech_doctrine_equalizerx2:
+		Modifier: 105
+		RequiresCondition: futuretech_doctrine_equalizerx2
+	GrantConditionOnPrerequisite@futuretech_doctrine_equalizerx2:
+		Condition: futuretech_doctrine_equalizerx2
+		Prerequisites: futuretech_doctrine_equalizerx2
+	FirepowerMultiplier@futuretech_doctrine_equalizerx3:
+		Modifier: 110
+		RequiresCondition: futuretech_doctrine_equalizerx3
+	ReloadDelayMultiplier@futuretech_doctrine_equalizerx3:
+		Modifier: 90
+		RequiresCondition: futuretech_doctrine_equalizerx3
+	RangeMultiplier@futuretech_doctrine_equalizerx3:
+		Modifier: 105
+		RequiresCondition: futuretech_doctrine_equalizerx3
+	GrantConditionOnPrerequisite@futuretech_doctrine_equalizerx3:
+		Condition: futuretech_doctrine_equalizerx3
+		Prerequisites: futuretech_doctrine_equalizerx3
+	ActorStatValues:
+		Upgrades: futuretech_doctrine_equalizerx1, futuretech_doctrine_equalizerx2, futuretech_doctrine_equalizerx3

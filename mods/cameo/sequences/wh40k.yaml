@@ -736,7 +736,7 @@ wh40kbolterturret2c:
 	icon: wh40kbolterturicon2
 
 wh40kguard:
-	Inherits: ra2seal
+	Inherits: ra2_allies_seal
 	Defaults: wh40kguard
 	icon: wh40kguardicon.shp
 		AddExtension: False
@@ -1171,28 +1171,28 @@ wh40kmarineflamer:
 	icon: wh40kmarineflamericon
 	muzzle:
 		Combine:
-			flame-n:
+			flame_n:
 				Length: *
 				Offset: 1,6
-			flame-nw:
+			flame_nw:
 				Length: *
 				Offset: 8,7
-			flame-w:
+			flame_w:
 				Length: *
 				Offset: 8,2
-			flame-sw:
+			flame_sw:
 				Length: *
 				Offset: 7,-2
-			flame-s:
+			flame_s:
 				Length: *
 				Offset: 1,-2
-			flame-se:
+			flame_se:
 				Length: *
 				Offset: -5,-2
-			flame-e:
+			flame_e:
 				Length: *
 				Offset: -7,2
-			flame-ne:
+			flame_ne:
 				Length: *
 				Offset: -7,8
 		Facings: 8
@@ -1514,28 +1514,28 @@ wh40kraptor2:
 	icon: wh40kflamerchaosicon
 	muzzle:
 		Combine:
-			flame-n:
+			flame_n:
 				Length: *
 				Offset: 1,6
-			flame-nw:
+			flame_nw:
 				Length: *
 				Offset: 8,7
-			flame-w:
+			flame_w:
 				Length: *
 				Offset: 8,2
-			flame-sw:
+			flame_sw:
 				Length: *
 				Offset: 7,-2
-			flame-s:
+			flame_s:
 				Length: *
 				Offset: 1,-2
-			flame-se:
+			flame_se:
 				Length: *
 				Offset: -5,-2
-			flame-e:
+			flame_e:
 				Length: *
 				Offset: -7,2
-			flame-ne:
+			flame_ne:
 				Length: *
 				Offset: -7,8
 		Facings: 8
@@ -1844,28 +1844,28 @@ wh40kscoutflamer:
 	icon: wh40kmarineflamericon
 	muzzle:
 		Combine:
-			flame-n:
+			flame_n:
 				Length: *
 				Offset: 1,6
-			flame-nw:
+			flame_nw:
 				Length: *
 				Offset: 8,7
-			flame-w:
+			flame_w:
 				Length: *
 				Offset: 8,2
-			flame-sw:
+			flame_sw:
 				Length: *
 				Offset: 7,-2
-			flame-s:
+			flame_s:
 				Length: *
 				Offset: 1,-2
-			flame-se:
+			flame_se:
 				Length: *
 				Offset: -5,-2
-			flame-e:
+			flame_e:
 				Length: *
 				Offset: -7,2
-			flame-ne:
+			flame_ne:
 				Length: *
 				Offset: -7,8
 		Facings: 8
@@ -2759,28 +2759,28 @@ wh40kterminator4:
 	icon: wh40kterminatorflameicon
 	muzzle:
 		Combine:
-			flame-n:
+			flame_n:
 				Length: *
 				Offset: 1,6
-			flame-nw:
+			flame_nw:
 				Length: *
 				Offset: 8,7
-			flame-w:
+			flame_w:
 				Length: *
 				Offset: 8,2
-			flame-sw:
+			flame_sw:
 				Length: *
 				Offset: 7,-2
-			flame-s:
+			flame_s:
 				Length: *
 				Offset: 1,-2
-			flame-se:
+			flame_se:
 				Length: *
 				Offset: -5,-2
-			flame-e:
+			flame_e:
 				Length: *
 				Offset: -7,2
-			flame-ne:
+			flame_ne:
 				Length: *
 				Offset: -7,8
 		Facings: 8
@@ -2836,7 +2836,7 @@ wh40kbigguns3:
 		Scale: 1.2
 	icon: wh40kautocannon
 wh40kcommisair:
-	Inherits: ra2e2
+	Inherits: ra2_soviets_conscript
 	Defaults: wh40kcommisair
 	icon: wh40kcommisairicon.shp
 		AddExtension: False
@@ -2862,7 +2862,7 @@ wh40kcommisair:
 		Length: 1
 		Facings: 8
 wh40kguardsargent:
-	Inherits: ra2seal
+	Inherits: ra2_allies_seal
 	Defaults: wh40kguard
 	icon: wh40ksargenticon.shp
 		AddExtension: False
@@ -2879,7 +2879,7 @@ wh40kogrynsargent:
 	Defaults: wh40kogryn
 	icon: wh40kogrynsargenticon
 wh40kgrenade:
-	Inherits: ra2flakt
+	Inherits: ra2_soviets_flaktrooper
 	Defaults: wh40kgrenade
 	icon: wh40kgrenadeicon.shp
 		AddExtension: False
@@ -2889,7 +2889,7 @@ wh40kgrenade:
 		Facings: 8
 
 wh40kguardplasma:
-	Inherits: ra2seal
+	Inherits: ra2_allies_seal
 	Defaults: wh40kguard
 	icon: wh40kplasmaicon.shp
 		AddExtension: False
@@ -3611,28 +3611,28 @@ wh40ksentinel:
 		Length: *
 	muzzlefa:
 		Combine:
-			flame-n:
+			flame_n:
 				Length: *
 				Offset: 3,6
-			flame-nw:
+			flame_nw:
 				Length: *
 				Offset: 8,7
-			flame-w:
+			flame_w:
 				Length: *
 				Offset: 8,2
-			flame-sw:
+			flame_sw:
 				Length: *
 				Offset: 7,-2
-			flame-s:
+			flame_s:
 				Length: *
 				Offset: 3,-2
-			flame-se:
+			flame_se:
 				Length: *
 				Offset: -5,-2
-			flame-e:
+			flame_e:
 				Length: *
 				Offset: -7,2
-			flame-ne:
+			flame_ne:
 				Length: *
 				Offset: -7,8
 		Facings: 8
@@ -3662,7 +3662,7 @@ wh40kwartrakk:
 	icon: wh40kwartrakkicon
 lemanruss:
 	idle: invisibleitem
-	icon: ra2mtnkicon.shp
+	icon: ra2_allies_grizzlytank_icon.shp
 		AddExtension: False
 	muzzle: gunfire2
 		Length: 5
@@ -3830,7 +3830,7 @@ wh40kitems:
 		Start: 7
 	powerclaw:
 		Start: 8
-	sniper:
+	lightsniper:
 		Start: 9
 	assaultmg:
 		Start: 10
@@ -4829,28 +4829,28 @@ wh40kburna:
 		Facings: 8
 	muzzle:
 		Combine:
-			flame-n:
+			flame_n:
 				Length: *
 				Offset: 1,6
-			flame-nw:
+			flame_nw:
 				Length: *
 				Offset: 8,7
-			flame-w:
+			flame_w:
 				Length: *
 				Offset: 8,2
-			flame-sw:
+			flame_sw:
 				Length: *
 				Offset: 7,-2
-			flame-s:
+			flame_s:
 				Length: *
 				Offset: 1,-2
-			flame-se:
+			flame_se:
 				Length: *
 				Offset: -5,-2
-			flame-e:
+			flame_e:
 				Length: *
 				Offset: -7,2
-			flame-ne:
+			flame_ne:
 				Length: *
 				Offset: -7,8
 		Facings: 8

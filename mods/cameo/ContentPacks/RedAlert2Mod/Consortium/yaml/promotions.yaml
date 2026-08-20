@@ -1,0 +1,159 @@
+steelconsortium_promotion_supportlvl1:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Support LVL1
+	Buildable:
+		BuildPaletteOrder: 109
+		Queue: Promotions
+		Description: Teleports in a small group of Federation units to support the Consortium. Includes Cougars and Hummers.
+		Prerequisites: ~steelconsortium_consortiumconstructionyard, !steelconsortium_promotion_supportlvl1, rank1
+	RenderSprites:
+		Image: cougar.steel
+	ProvidesPrerequisite:
+
+steelconsortium_promotion_supportlvl2:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Support LVL2
+	Buildable:
+		BuildPaletteOrder: 112
+		Queue: Promotions
+		Description: Teleports in a medium group of Federation units to support the Consortium. Includes Cougars, Hummers and a Beta Quantum Tank.
+		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_promotion_supportlvl1, !steelconsortium_promotion_supportlvl2, rank1
+	RenderSprites:
+		Image: hummer.steel
+	ProvidesPrerequisite:
+
+steelconsortium_promotion_supportlvl3:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Support LVL3
+	Buildable:
+		BuildPaletteOrder: 115
+		Queue: Promotions
+		Description: Teleports in a big group of Federation units to support the Consortium. Includes Cougars, Hummers and two Beta Quantum Tanks.
+		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_promotion_supportlvl2, !steelconsortium_promotion_supportlvl3, rank1
+	RenderSprites:
+		Image: oldqtnk.steel
+	ProvidesPrerequisite:
+
+steelconsortium_promotion_supportlvl4:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Support LVL4
+	Buildable:
+		BuildPaletteOrder: 118
+		Queue: Promotions
+		Description: Teleports in a large group of Federation units to support the Consortium. Includes Cougars, Hummers, two Beta Quantum Tanks and a Cobra.
+		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_promotion_supportlvl3, !steelconsortium_promotion_supportlvl4, rank1
+	RenderSprites:
+		Image: cobra.steel
+	ProvidesPrerequisite:
+
+### Military tree
+
+steelconsortium_promotion_barracuda:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Barracuda
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Promotions
+		Description: Enables construction of Mantas Hunters.
+		Prerequisites: ~steelconsortium_consortiumconstructionyard, !steelconsortium_promotion_barracuda, rank1
+	RenderSprites:
+		Image: steelconsortium_barracuda
+	ProvidesPrerequisite:
+
+steelconsortium_promotion_daggerartillery:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Dagger Artillery
+	Buildable:
+		BuildPaletteOrder: 113
+		Queue: Promotions
+		Description: Enables construction of Daggers.
+		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_promotion_barracuda, !steelconsortium_promotion_daggerartillery, rank1
+	RenderSprites:
+		Image: steelconsortium_dagger
+	ProvidesPrerequisite:
+
+steelconsortium_promotion_katytank:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Katy Tank
+	Buildable:
+		BuildPaletteOrder: 116
+		Queue: Promotions
+		Description: Unlocks Katy Tank.
+		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_promotion_daggerartillery, !steelconsortium_promotion_katytank, rank1
+	RenderSprites:
+		Image: steelconsortium_katytank
+	ProvidesPrerequisite:
+
+steelconsortium_promotion_whiterabbit:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock White Rabbit
+	Buildable:
+		BuildPaletteOrder: 119
+		Queue: Promotions
+		Description: Enables construction of the White Rabbit.
+		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_promotion_katytank, !steelconsortium_promotion_whiterabbit, rank1
+	RenderSprites:
+		Image: steelconsortium_whiterabbit
+	ProvidesPrerequisite:
+
+### Unisoft tree
+
+steelconsortium_promotion_quantumtank:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Quantum Tank
+	Buildable:
+		BuildPaletteOrder: 111
+		Queue: Promotions
+		Description: Enables construction of Quantum Tanks.
+		Prerequisites: ~steelconsortium_consortiumconstructionyard, !steelconsortium_promotion_quantumtank, rank1
+	RenderSprites:
+		Image: steelconsortium_quantumtank
+	ProvidesPrerequisite:
+
+steelconsortium_promotion_defenderbot:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Defender Bot
+	Buildable:
+		BuildPaletteOrder: 114
+		Queue: Promotions
+		Description: Enables construction of Defender Bots.
+		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_promotion_quantumtank, !steelconsortium_promotion_defenderbot, rank1
+	RenderSprites:
+		Image: steelconsortium_defenderbot
+	ProvidesPrerequisite:
+
+steelconsortium_promotion_stalker:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Stalker
+	Buildable:
+		BuildPaletteOrder: 117
+		Queue: Promotions
+		Description: Enables construction of Stalkers.
+		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_promotion_defenderbot, !steelconsortium_promotion_stalker, rank1
+	RenderSprites:
+		Image: steelconsortium_stalker
+	ProvidesPrerequisite:
+
+steelconsortium_promotion_cloudbreaker:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Cloud Breaker
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Promotions
+		Description: Enables construction of Cloud Breakers.
+		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_promotion_stalker, !steelconsortium_promotion_cloudbreaker, rank1
+	RenderSprites:
+		Image: steelconsortium_cloudbreaker
+	ProvidesPrerequisite:

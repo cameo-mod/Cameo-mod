@@ -1,0 +1,6207 @@
+{
+ "ledger": "tiberiansun_nod",
+ "pack": "mods/cameo/ContentPacks/TiberianSun/Nod",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "ts_nod_bansheefighter": {
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "30000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5414",
+      "reloaddelay": "50",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^TSEnergyBlast",
+       "^MediumFlameWeapon",
+       "^LaserWeapon"
+      ],
+      "warheads": [],
+      "weapon": "TSProton",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2400"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Bomber",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/aircraft.yaml#Health.HP",
+     "v": "60000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Banshee Fighter",
+    "prerequisites": [
+     "~ts_nod_helipad",
+     "ts_nod_techcenter",
+     "ts_nod_radar"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "180"
+    }
+   },
+   "ts_nod_harpy": {
+    "armaments": [
+     {
+      "burst": "5",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 0",
+        "spread": "300",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "4882",
+      "reloaddelay": "24",
+      "requires": "!ts_nod_upgrade_tiberiumlenses && !ts_nod_upgrade_auxiliaryweapon",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "TSHarpyClaw",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "0",
+        "falloff": "100, 0",
+        "spread": "300",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "4882",
+      "reloaddelay": "24",
+      "requires": "!ts_nod_upgrade_tiberiumlenses && ts_nod_upgrade_auxiliaryweapon",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "TSHarpyClaw"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "TSHarpyMultiClaw",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "5",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 25",
+        "spread": "300",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 25",
+        "spread": "300",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "4882",
+      "reloaddelay": "24",
+      "requires": "!ts_nod_upgrade_tiberiumlenses && ts_nod_upgrade_auxiliaryweapon",
+      "slot": "Armament@PRIMARYAOE",
+      "versus_templates": [
+       "TSHarpyClaw"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "TSHarpyAOEClaw",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 0",
+        "spread": "300",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "pricing": true,
+      "range": "4969",
+      "reloaddelay": "25",
+      "requires": "ts_nod_upgrade_tiberiumlenses && !ts_nod_upgrade_auxiliaryweapon",
+      "slot": "Armament@UPGRADE",
+      "versus_templates": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^TSLaserEffect",
+       "^Effect_Laser_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "TSLaserHarpyClaw",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "0",
+        "falloff": "100, 0",
+        "spread": "300",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "0",
+        "falloff": null,
+        "spread": null,
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "0",
+        "falloff": null,
+        "spread": null,
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "pricing": true,
+      "range": "4969",
+      "reloaddelay": "25",
+      "requires": "ts_nod_upgrade_tiberiumlenses && ts_nod_upgrade_auxiliaryweapon",
+      "slot": "Armament@SECONDARYUPGRADE",
+      "versus_templates": [
+       "TSLaserHarpyClaw"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "TSLaserHarpyMultiClaw",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 25",
+        "spread": "300",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 25",
+        "spread": "300",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "pricing": true,
+      "range": "4969",
+      "reloaddelay": "25",
+      "requires": "ts_nod_upgrade_tiberiumlenses && ts_nod_upgrade_auxiliaryweapon",
+      "slot": "Armament@UPGRADEAOE",
+      "versus_templates": [
+       "TSLaserHarpyClaw"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "TSLaserHarpyAOEClaw",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1800"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Helicopter",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/aircraft.yaml#Health.HP",
+     "v": "50000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Harpy",
+    "prerequisites": [
+     "~ts_nod_helipad"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "140"
+    }
+   }
+  },
+  "buildings": {
+   "ts_nod_advancedpowerplant": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Health.HP",
+     "v": "240000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Nod Advanced Power Plant",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_radar"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "5c0"
+    }
+   },
+   "ts_nod_constructionyard": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Health.HP",
+     "v": "1000000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Construction Yard (Nod)",
+    "prerequisites": [
+     "~disabled"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ts_nod_handof": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "200000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Hand of Nod",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_powerplant"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "ts_nod_helipad": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "375"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Nod Helipad",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_radar"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "ts_nod_navalyard": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "600000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Nod Sub Pen",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_handof",
+     "~globalnaval"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "12000"
+    }
+   },
+   "ts_nod_powerplant": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Health.HP",
+     "v": "120000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Nod Power Plant",
+    "prerequisites": [
+     "~ts_nod_constructionyard"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "ts_nod_radar": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Radar",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_tiberiumrefinery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ts_nod_servicedepot": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Service Depot",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_warfactory"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "ts_nod_techcenter": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Nod Tech Center",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_radar"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ts_nod_tiberiumrefinery": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Tiberium Refinery",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_powerplant"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "ts_nod_tiberiumwastefacility": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Health.HP",
+     "v": "100000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Tiberium Waste Facility",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_techcenter",
+     "ts_nod_upgrade_advancedtiberiumrefinement"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "ts_nod_warfactory": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Nod War Factory",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_tiberiumrefinery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    }
+   }
+  },
+  "defenses": {
+   "ts_nod_laserfence": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Armor.Type",
+     "v": "Concrete"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Valued.Cost",
+     "v": "200"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Defense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Health.HP",
+     "v": "30000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Laser Fence",
+    "prerequisites": [
+     "~tslaserfence"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "ts_nod_laserturret": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 0",
+        "spread": "300",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 1.125,
+      "pricing": true,
+      "range": "6487",
+      "reloaddelay": "25",
+      "requires": "!ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^TSLaserEffect",
+       "^Effect_Laser_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "TSTurretLaser",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8",
+        "falloff": "100, 0",
+        "spread": "300",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "16000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 1.125,
+      "pricing": true,
+      "range": "6992",
+      "reloaddelay": "20",
+      "requires": "ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@UPGRADE",
+      "versus_templates": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^TSLaserEffect",
+       "^Effect_Laser_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Medium",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "TSLaserTurretLaser",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "BasicDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Health.HP",
+     "v": "60000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Laser Turret",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_handof"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "7c0"
+    }
+   },
+   "ts_nod_missilesilo": {
+    "armaments": [
+     {
+      "armament_name": "superweapon",
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "minrange": "3072",
+      "pricing": false,
+      "range": "10238976",
+      "reloaddelay": "50",
+      "requires": "!ts_nod_tiberiumwastefacility",
+      "slot": "Armament@superweapon1",
+      "versus_templates": [
+       "^TSDefaultMissile"
+      ],
+      "warheads": [],
+      "weapon": "TSTacticalMissile",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "superweapon",
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "minrange": "3072",
+      "pricing": false,
+      "range": "10238976",
+      "reloaddelay": "50",
+      "requires": "ts_nod_tiberiumwastefacility",
+      "slot": "Armament@superweapon2",
+      "versus_templates": [
+       "TSTacticalMissile"
+      ],
+      "warheads": [],
+      "weapon": "TSTacticalChemMissile",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Defense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Missile Silo",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_techcenter",
+     "!ts_nod_missilesilo",
+     "~techlevel.superweapons"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "5c0"
+    }
+   },
+   "ts_nod_obeliskoflight": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "52000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "CannonAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "26",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "CannonAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "52000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "26",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "10199",
+      "reloaddelay": "60",
+      "requires": "!ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_CannonAP_Light",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy",
+       "^TSLaserEffect"
+      ],
+      "warheads": [
+       "^Warhead_CannonAP_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "TSObeliskLaserFire",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "80000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "CannonAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "40",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "CannonAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "80000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "40",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "10435",
+      "reloaddelay": "32",
+      "requires": "ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@UPGRADE",
+      "versus_templates": [
+       "^Warhead_CannonAP_Light",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy",
+       "^TSLaserEffect"
+      ],
+      "warheads": [
+       "^Warhead_CannonAP_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "TSLaserObeliskLaserFire",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Steel"
+    },
+    "buildable": true,
+    "charge_up": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#AttackCharges",
+     "ticks": 50.0,
+     "v": "AttackCharges"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Valued.Cost",
+     "v": "2200"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "AdvancedDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Health.HP",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Obelisk of Light",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_techcenter"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "7c0"
+    }
+   },
+   "ts_nod_samsite": {
+    "armaments": [
+     {
+      "burst": "3",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "500",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "500",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "13176",
+      "reloaddelay": "50",
+      "requires": "!ts_nod_upgrade_tiberiumcoremissiles",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Heavy",
+       "^Effect_MissileAP_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "TSNODRedEye",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "18000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "500",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "9",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "500",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "13176",
+      "reloaddelay": "50",
+      "requires": "ts_nod_upgrade_tiberiumcoremissiles",
+      "slot": "Armament@UPGRADE",
+      "versus_templates": [
+       "TSNODRedEye"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "TSNODTibRedEye",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "AntiAirDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Health.HP",
+     "v": "100000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "SAM Site",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_radar"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "13176"
+    }
+   },
+   "ts_nod_silo": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Valued.Cost",
+     "v": "150"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Defense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Health.HP",
+     "v": "100000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Silo",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_tiberiumrefinery"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "ts_nod_stealthgenerator": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Armor.Type",
+     "v": "Concrete"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Defense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#Health.HP",
+     "v": "100000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Stealth Generator",
+    "prerequisites": [
+     "~ts_nod_constructionyard",
+     "ts_nod_techcenter"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "6c0"
+    }
+   }
+  },
+  "infantry": {
+   "ts_nod_chameleonspy": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "50000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "25",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "5",
+        "tag": "Sniper_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "1538",
+      "reloaddelay": "52",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
+      ],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
+      "weapon": "ChamBlade",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "MeleeInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Health.HP",
+     "v": "30000"
+    },
+    "name": "Chameleon Spy",
+    "prerequisites": [
+     "~ts_nod_handof",
+     "ts_nod_radar"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Mobile.Speed",
+     "v": "90"
+    }
+   },
+   "ts_nod_elitecadre": {
+    "armaments": [
+     {
+      "burst": "5",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 0",
+        "spread": "200",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 0",
+        "spread": "300",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "6217",
+      "reloaddelay": "52",
+      "requires": "!ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "elitecadregun",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "5",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "50",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6677",
+      "reloaddelay": "50",
+      "requires": "ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@UPGRADE",
+      "versus_templates": [
+       "^SmallArms",
+       "^Chaingun",
+       "^LaserWeapon",
+       "^TSLaserEffect"
+      ],
+      "warheads": [],
+      "weapon": "laserelitecadregun",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "5",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 0",
+        "spread": "200",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 0",
+        "spread": "300",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": false,
+      "range": "6217",
+      "reloaddelay": "52",
+      "requires": "!ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Bullet_Medium"
+      ],
+      "weapon": "elitecadregun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "5",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "50",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "6677",
+      "reloaddelay": "50",
+      "requires": "ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "versus_templates": [
+       "^SmallArms",
+       "^Chaingun",
+       "^LaserWeapon",
+       "^TSLaserEffect"
+      ],
+      "warheads": [],
+      "weapon": "laserelitecadregun",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "36000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "18",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6623",
+      "reloaddelay": "124",
+      "requires": "ts_nod_upgrade_auxiliaryweapon",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "TSCadreGrenade",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "36000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "18",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "6623",
+      "reloaddelay": "124",
+      "requires": "ts_nod_upgrade_auxiliaryweapon",
+      "slot": "Armament@GARRISONEDSECONDARY",
+      "versus_templates": [
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "TSCadreGrenade",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Valued.Cost",
+     "v": "435"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": "special_forces",
+     "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": 0.75,
+     "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+     "trait": "FirepowerMultiplier",
+     "v": 0.93
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Health.HP",
+     "v": "21000"
+    },
+    "name": "Elite Cadre",
+    "prerequisites": [
+     "~ts_nod_handof",
+     "ts_nod_radar"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Mobile.Speed",
+     "v": "55"
+    }
+   },
+   "ts_nod_engineer": {
+    "armaments": [
+     {
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "1536",
+      "reloaddelay": "20",
+      "slot": "Armament@defuse",
+      "versus_templates": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ],
+      "warheads": [],
+      "weapon": "DefuseKit",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "1536",
+      "reloaddelay": "100",
+      "slot": "Armament@leechdisinfect",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "LeechDisinfect",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "5",
+        "tag": "Sniper_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "4303",
+      "reloaddelay": "25",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
+      ],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
+      "weapon": "TSEngineerPistol",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "5",
+        "tag": "Sniper_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "4303",
+      "reloaddelay": "25",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
+      ],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
+      "weapon": "TSEngineerPistol",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "600"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": "support",
+     "special": null,
+     "subtype": "SniperInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "name": "Engineer",
+    "prerequisites": [
+     "~ts_nod_handof"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "55"
+    }
+   },
+   "ts_nod_lightinfantry": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 0",
+        "spread": "200",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "4062",
+      "reloaddelay": "12",
+      "requires": "!ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "TSMinigun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 0",
+        "spread": "200",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "4062",
+      "reloaddelay": "12",
+      "requires": "!ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "TSMinigun",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 0",
+        "spread": "200",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "4062",
+      "reloaddelay": "18",
+      "requires": "ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@UPGRADE",
+      "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy",
+       "^TSLaserEffect"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "TSLasergun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 0",
+        "spread": "200",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "4062",
+      "reloaddelay": "18",
+      "requires": "ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@UPGRADEGARRISONED",
+      "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy",
+       "^TSLaserEffect"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "TSLasergun",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "120"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ScoutInfantry",
+     "tech_tier": null,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "16000"
+    },
+    "name": "Light Infantry",
+    "prerequisites": [
+     "~ts_nod_handof"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "60"
+    }
+   },
+   "ts_nod_rocketinfantry": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "24000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "12",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6694",
+      "reloaddelay": "52",
+      "requires": "!ts_nod_upgrade_tiberiumcoremissiles",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileAP_Light"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "TSBazooka",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "24000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "12",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "MissileAP_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "6694",
+      "reloaddelay": "52",
+      "requires": "!ts_nod_upgrade_tiberiumcoremissiles",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_MissileAP_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileAP_Light"
+      ],
+      "warheads": [
+       "^Warhead_MissileAP_Light"
+      ],
+      "weapon": "TSBazooka",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "ChemMissile_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "ChemMissile_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "6694",
+      "reloaddelay": "52",
+      "requires": "ts_nod_upgrade_tiberiumcoremissiles",
+      "slot": "Armament@UPGRADE",
+      "versus_templates": [
+       "^Warhead_ChemMissile_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileAP_Light"
+      ],
+      "warheads": [
+       "^Warhead_ChemMissile_Light"
+      ],
+      "weapon": "TSTibBazooka",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "ChemMissile_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "ChemMissile_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "6694",
+      "reloaddelay": "52",
+      "requires": "ts_nod_upgrade_tiberiumcoremissiles",
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "versus_templates": [
+       "^Warhead_ChemMissile_Light",
+       "^Projectile_Missile_Light",
+       "^Effect_MissileAP_Light"
+      ],
+      "warheads": [
+       "^Warhead_ChemMissile_Light"
+      ],
+      "weapon": "TSTibBazooka",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "300"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "12000"
+    },
+    "name": "Rocket Infantry",
+    "prerequisites": [
+     "~ts_nod_handof"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "50"
+    }
+   },
+   "ts_nod_shadowteam": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "7000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "5",
+        "tag": "Sniper_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "12",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
+      ],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
+      "weapon": "TSShadowTeamPistols",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "7000",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "10",
+        "tag": "Sniper_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 75, 50, 25, 0",
+        "spread": "5",
+        "tag": "Sniper_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "8000",
+      "reloaddelay": "12",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Sniper_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Sniper_Light"
+      ],
+      "warheads": [
+       "^Warhead_Sniper_Light"
+      ],
+      "weapon": "TSShadowTeamPistols",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "2000",
+      "reloaddelay": "20",
+      "slot": "Armament@C4",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "TSShadowTeamAttach",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "MeleeInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Health.HP",
+     "v": "30000"
+    },
+    "name": "actor_ts_nod_shadowteam.name",
+    "prerequisites": [
+     "~ts_nod_handof",
+     "ts_nod_techcenter"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "ts_nod_shadowteam_air": {
+    "armaments": [
+     {
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "12000",
+      "reloaddelay": "500",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "TSShadowTeamTargeting",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "FlyingInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Health.HP",
+     "v": "30000"
+    },
+    "name": "actor_ts_nod_shadowteam.name",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Aircraft.Speed",
+     "v": "150"
+    }
+   },
+   "ts_nod_shotguncommando": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "50",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "4146",
+      "reloaddelay": "20",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^TankDestroyerCannon",
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "TSCommandoShotgun",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "50",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "4146",
+      "reloaddelay": "20",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^TankDestroyerCannon",
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "TSCommandoShotgun",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heroic"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Valued.Cost",
+     "v": "3000"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "HeroInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Shotgun Commando",
+    "prerequisites": [
+     "~ts_nod_handof",
+     "ts_nod_techcenter"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Mobile.Speed",
+     "v": "80"
+    }
+   },
+   "ts_nod_toxintrooper": {
+    "armaments": [
+     {
+      "burst": "3",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "16000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Chemical_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Chemical_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "10293",
+      "reloaddelay": "54",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
+      ],
+      "warheads": [
+       "^Warhead_Chemical_Light"
+      ],
+      "weapon": "TSToxinRifle",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "16000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Chemical_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Chemical_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "10293",
+      "reloaddelay": "54",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light"
+      ],
+      "warheads": [
+       "^Warhead_Chemical_Light"
+      ],
+      "weapon": "TSToxinRifle",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Valued.Cost",
+     "v": "850"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "HeavyInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Health.HP",
+     "v": "30000"
+    },
+    "name": "Toxin Trooper",
+    "prerequisites": [
+     "~ts_nod_handof",
+     "ts_nod_techcenter"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/infantry.yaml#Mobile.Speed",
+     "v": "55"
+    }
+   }
+  },
+  "naval": {
+   "ts_nod_cruiser": {
+    "armaments": [
+     {
+      "burst": "2",
+      "damage_warheads": [
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Demolition_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "3000",
+      "pricing": true,
+      "range": "15000",
+      "reloaddelay": "250",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "8Inch",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "damage_warheads": [
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Demolition_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "3000",
+      "pricing": true,
+      "range": "15000",
+      "reloaddelay": "250",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "8Inch",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "damage_warheads": [
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Demolition_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "3000",
+      "pricing": true,
+      "range": "15000",
+      "reloaddelay": "250",
+      "slot": "Armament@TERCERA",
+      "versus_templates": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "8Inch",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "damage_warheads": [
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Demolition_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "3000",
+      "pricing": true,
+      "range": "15000",
+      "reloaddelay": "250",
+      "slot": "Armament@CUARTA",
+      "versus_templates": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "8Inch",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "damage_warheads": [
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Demolition_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "3000",
+      "pricing": true,
+      "range": "15000",
+      "reloaddelay": "250",
+      "slot": "Armament@QUINTA",
+      "versus_templates": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "8Inch",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Armor.Type",
+     "v": "Superheavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Valued.Cost",
+     "v": "4000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ArtilleryShip",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Health.HP",
+     "v": "350000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Nod Battleship",
+    "prerequisites": [
+     "~ts_nod_navalyard",
+     "ts_nod_techcenter"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Mobile.Speed",
+     "v": "40"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "8"
+    }
+   },
+   "ts_nod_hover": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Ship",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Health.HP",
+     "v": "100000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Transport Hovercraft",
+    "prerequisites": [
+     "~ts_nod_navalyard"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#RevealsShroud.Range",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "12"
+    }
+   },
+   "ts_nod_rayboat": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "4",
+      "damage_warheads": [
+       {
+        "damage": "9000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "9000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "MissileHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6385",
+      "reloaddelay": "60",
+      "requires": "!rank-elite",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileHE_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileHE_Medium"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileHE_Medium"
+      ],
+      "weapon": "TSSBoatTusk",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "200",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5000",
+        "falloff": null,
+        "spread": null,
+        "tag": "MediumCannonFriendlyFire",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6385",
+      "reloaddelay": "60",
+      "requires": "rank-elite",
+      "slot": "Armament@ELITE",
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
+       "^MediumChemicalWeapon",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "TSStankTibTusk",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Valued.Cost",
+     "v": "1300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ScoutShip",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Health.HP",
+     "v": "80000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Stingray",
+    "prerequisites": [
+     "~ts_nod_navalyard"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Mobile.Speed",
+     "v": "110"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "45"
+    }
+   },
+   "ts_nod_submarine": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "18000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "9",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "18000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "9",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "9000",
+      "reloaddelay": "90",
+      "requires": "!rank-elite",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RA2Grenade",
+       "^RA2HeavyMissile",
+       "^Effect_Watersplash_Large_RA2"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "RA2TorpTube",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "18000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "9",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "18000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "9",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "90",
+      "requires": "rank-elite",
+      "slot": "Armament@ELITE",
+      "versus_templates": [
+       "RA2TorpTube"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_MissileAP_Heavy"
+      ],
+      "weapon": "RA2TorpTube_elite",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ScoutShip",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Health.HP",
+     "v": "140000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Strike Submarine",
+    "prerequisites": [
+     "~ts_nod_navalyard"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Mobile.Speed",
+     "v": "90"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "36"
+    }
+   }
+  },
+  "upgrades": {
+   "ts_nod_upgrade_advancedtiberiumrefinement": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Advanced Tiberium Refinement",
+    "prerequisites": [
+     "~ts_nod_techcenter",
+     "!ts_nod_upgrade_advancedtiberiumrefinement"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ts_nod_upgrade_auxiliaryweapon": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "4000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Auxiliary Weapon",
+    "prerequisites": [
+     "~ts_nod_radar",
+     "!ts_nod_upgrade_auxiliaryweapon"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ts_nod_upgrade_infiltrationkit": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Infiltration Kit",
+    "prerequisites": [
+     "~ts_nod_radar",
+     "!ts_nod_upgrade_infiltrationkit"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ts_nod_upgrade_mobilityspecialization": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "3500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Mobility Specialization",
+    "prerequisites": [
+     "~ts_nod_radar",
+     "!ts_nod_upgrade_mobilityspecialization"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ts_nod_upgrade_stealthfieldsimprovements": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Stealth Fields Improvements",
+    "prerequisites": [
+     "~ts_nod_techcenter",
+     "!ts_nod_upgrade_stealthfieldsimprovements"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ts_nod_upgrade_tiberiumcoremissiles": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Tiberium Core Missiles",
+    "prerequisites": [
+     "~ts_nod_techcenter",
+     "!ts_nod_upgrade_tiberiumcoremissiles"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ts_nod_upgrade_tiberiumlenses": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Tiberium Lenses",
+    "prerequisites": [
+     "~ts_nod_techcenter",
+     "!ts_nod_upgrade_tiberiumlenses"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ts_nod_upgrade_willofkane": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "8000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Will of Kane",
+    "prerequisites": [
+     "~ts_nod_techcenter",
+     "!ts_nod_upgrade_willofkane"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ts_nod_upgrade_willofkane_proxy_actor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": false,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Will of Kane (Team Upgrade)"
+   }
+  },
+  "vehicles": {
+   "ts_nod_artillery": {
+    "armaments": [
+     {
+      "armament_name": "dummy",
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "minrange": "2615",
+      "pricing": false,
+      "range": "13083",
+      "reloaddelay": "33",
+      "requires": "!deployed",
+      "slot": "Armament@Dummy",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "TSArtyTargeting",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "deployed",
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "30000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 1.125,
+      "minrange": "2615",
+      "pricing": true,
+      "range": "13083",
+      "reloaddelay": "135",
+      "requires": "(deployed || undeployed) && !ts_nod_upgrade_auxiliaryweapon",
+      "slot": "Armament@Deployed",
+      "versus_templates": [
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Demolition_Heavy",
+       "^Effect_Demolition_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Demolition_Heavy"
+      ],
+      "weapon": "TS155mm",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "30000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "minrange": "2615",
+      "pricing": true,
+      "range": "13083",
+      "reloaddelay": "135",
+      "requires": "(deployed || undeployed) && ts_nod_upgrade_auxiliaryweapon",
+      "slot": "Armament@DeployedUpgrade",
+      "versus_templates": [
+       "TS155mm"
+      ],
+      "warheads": [
+       "^Warhead_Concussion_Medium",
+       "^Warhead_Demolition_Heavy"
+      ],
+      "weapon": "TSAux155mm",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1300"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "artillery_tank",
+     "special": null,
+     "subtype": "ArtilleryTank",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "30000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Artillery",
+    "prerequisites": [
+     "~ts_nod_warfactory",
+     "ts_nod_radar"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "24"
+    }
+   },
+   "ts_nod_attackbuggy": {
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 0",
+        "spread": "200",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "4787",
+      "reloaddelay": "20",
+      "requires": "!ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Bullet_Light"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light"
+      ],
+      "weapon": "TSRaiderCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "400",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 0",
+        "spread": "200",
+        "tag": "Bullet_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "100",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "50",
+        "tag": "Laser_Heavy_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "200",
+        "tag": "Laser_Heavy_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "4964",
+      "reloaddelay": "20",
+      "requires": "ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@UPGRADE",
+      "versus_templates": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy",
+       "^Projectile_Laser_Heavy",
+       "^Effect_Laser_Heavy",
+       "^TSLaserEffect"
+      ],
+      "warheads": [
+       "^Warhead_Bullet_Light",
+       "^Warhead_Laser_Heavy"
+      ],
+      "weapon": "TSLaserRaiderCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "36000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "18",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Demolition_Light_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "4787",
+      "reloaddelay": "52",
+      "requires": "ts_nod_upgrade_auxiliaryweapon",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^Warhead_Demolition_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Light"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light"
+      ],
+      "weapon": "TSRaiderGrenade",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "450"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "scout_vehicle",
+     "special": 1.0,
+     "subtype": "ScoutVehicle",
+     "tech_tier": 1.0,
+     "unit_class": 0.333
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "30000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Attack Buggy",
+    "prerequisites": [
+     "~ts_nod_warfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "160"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "64"
+    }
+   },
+   "ts_nod_attackcycle": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "MissileHE_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "MissileHE_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "MissileHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 0.875,
+      "pricing": true,
+      "range": "6554",
+      "reloaddelay": "40",
+      "requires": "!ts_nod_upgrade_tiberiumcoremissiles",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_MissileHE_Light",
+       "^Warhead_MissileHE_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileHE_Medium"
+      ],
+      "warheads": [
+       "^Warhead_MissileHE_Light",
+       "^Warhead_MissileHE_Medium"
+      ],
+      "weapon": "TSBikeMissile",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "LightChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "42",
+        "falloff": null,
+        "spread": "100",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "200",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6554",
+      "reloaddelay": "40",
+      "requires": "ts_nod_upgrade_tiberiumcoremissiles",
+      "slot": "Armament@UPGRADE",
+      "versus_templates": [
+       "^LightChemicalWeapon",
+       "^MediumChemicalWeapon",
+       "^LightMissile",
+       "^MediumMissile"
+      ],
+      "warheads": [],
+      "weapon": "TSBikeTibMissile",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "550"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "missile_vehicle",
+     "special": 1.0,
+     "subtype": "MissileVehicle",
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "20000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Attack Cycle",
+    "prerequisites": [
+     "~ts_nod_warfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "170"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "68"
+    }
+   },
+   "ts_nod_devilstongue": {
+    "armaments": [
+     {
+      "burst": "5",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flame_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Flame_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "4250",
+      "reloaddelay": "52",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Flame_Medium",
+       "^Projectile_Flame_Medium",
+       "^Effect_Flame_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Flame_Medium"
+      ],
+      "weapon": "TSFireballLauncher",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Superheavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1150"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "line_breaker",
+     "special": null,
+     "subtype": "LineBreaker",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "100000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Devil's Tongue",
+    "prerequisites": [
+     "~ts_nod_warfactory",
+     "ts_nod_techcenter"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "70"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "28"
+    }
+   },
+   "ts_nod_mobileconstructionvehicle": {
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SupportVehicle",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Nod Mobile Construction Vehicle",
+    "prerequisites": [
+     "~ts_nod_warfactory",
+     "ts_nod_servicedepot"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
+    }
+   },
+   "ts_nod_mobilerepairvehicle": {
+    "armaments": [
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "-2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "RepairWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "100",
+        "tag": "ExtraRepair",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "falloff": "100",
+        "spread": "1000",
+        "tag": "RepairWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5000",
+      "reloaddelay": "50",
+      "slot": "Armament",
+      "versus_templates": [
+       "RA2IFVRepair"
+      ],
+      "warheads": [],
+      "weapon": "ts_nod_mobilerepairvehicle",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Vehicle",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "50000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Mobile Repair Vehicle",
+    "prerequisites": [
+     "~ts_nod_warfactory",
+     "ts_nod_servicedepot"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "30"
+    }
+   },
+   "ts_nod_mobilestealthgenerator": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Vehicle",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "20000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Mobile Stealth Generator",
+    "prerequisites": [
+     "~ts_nod_warfactory",
+     "ts_nod_stealthgenerator"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "56"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "40"
+    }
+   },
+   "ts_nod_stealthtank": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "MissileHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "MissileHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6385",
+      "reloaddelay": "60",
+      "requires": "!ts_nod_upgrade_tiberiumcoremissiles",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileHE_Medium",
+       "^Projectile_Missile_Medium",
+       "^Effect_MissileHE_Medium"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_MissileHE_Medium"
+      ],
+      "weapon": "TSStankTusk",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "200",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "5000",
+        "falloff": null,
+        "spread": null,
+        "tag": "MediumCannonFriendlyFire",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6385",
+      "reloaddelay": "60",
+      "requires": "ts_nod_upgrade_tiberiumcoremissiles",
+      "slot": "Armament@UPGRADE",
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
+       "^MediumChemicalWeapon",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "TSStankTibTusk",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Superheavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1750"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "high_tech_tank",
+     "special": null,
+     "subtype": "HighTechTank",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "80000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Stealth Tank",
+    "prerequisites": [
+     "~ts_nod_warfactory",
+     "ts_nod_techcenter"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "100"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "40"
+    }
+   },
+   "ts_nod_subterraneanapc": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "100",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5300",
+      "reloaddelay": "18",
+      "requires": "!ts_nod_upgrade_tiberiumcoremissiles",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Grenade",
+       "^LightMissile"
+      ],
+      "warheads": [],
+      "weapon": "TSSAPCMissiles",
+      "weapon_class_source": "none"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Chemical_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Chemical_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "100",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "5300",
+      "reloaddelay": "18",
+      "requires": "ts_nod_upgrade_tiberiumcoremissiles",
+      "slot": "Armament@UPGRADE",
+      "versus_templates": [
+       "^Warhead_Chemical_Light",
+       "^Projectile_Chem_Light",
+       "^Effect_Chem_Light",
+       "TSSAPCMissiles"
+      ],
+      "warheads": [
+       "^Warhead_Chemical_Light"
+      ],
+      "weapon": "TSSAPCCoreMissiles",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1410"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SupportVehicle",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "17500"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Subterranean APC",
+    "prerequisites": [
+     "~ts_nod_warfactory",
+     "ts_nod_radar"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "5c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "40"
+    }
+   },
+   "ts_nod_tiberiumharvester": {
+    "armor": {
+     "src": "inherited",
+     "v": "Heavy"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Harvester",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "150000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Tiberium Harvester",
+    "prerequisites": [
+     "~ts_nod_warfactory",
+     "ts_nod_tiberiumrefinery"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "12"
+    }
+   },
+   "ts_nod_ticktank": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5319",
+      "reloaddelay": "26",
+      "requires": "undeployed && !ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^TSCannonEffect",
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "TS90mm",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5423",
+      "reloaddelay": "32",
+      "requires": "undeployed && ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@UPGRADE",
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
+       "^LaserWeapon",
+       "^TSLaserEffect"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "TSLaser90mm",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6679",
+      "reloaddelay": "22",
+      "requires": "deployed && !ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@deployed",
+      "versus_templates": [
+       "TS90mm"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "TS90mmDep",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6754",
+      "reloaddelay": "26",
+      "requires": "deployed && ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@UPGRADEdeployed",
+      "versus_templates": [
+       "TSLaser90mm"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "TSLaser90mmDep",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Flak_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Flak_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6679",
+      "reloaddelay": "8",
+      "requires": "deployed && ts_nod_upgrade_auxiliaryweapon && !ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Flak_Medium"
+      ],
+      "weapon": "TS25mmDep",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deployed",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6679",
+      "reloaddelay": "8",
+      "requires": "deployed && ts_nod_upgrade_auxiliaryweapon && ts_nod_upgrade_tiberiumlenses",
+      "slot": "Armament@UPGRADESECONDARY",
+      "versus_templates": [
+       "^FlakWeapon",
+       "^LaserWeapon",
+       "^TSLaserEffect"
+      ],
+      "warheads": [],
+      "weapon": "TSLaser25mmDep",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "mbt",
+     "special": null,
+     "subtype": "MainBattleTank",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "100000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Tick Tank",
+    "prerequisites": [
+     "~ts_nod_warfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "90"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "32"
+    }
+   }
+  }
+ }
+}

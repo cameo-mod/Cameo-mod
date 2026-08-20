@@ -25,7 +25,7 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		[ActorReference(typeof(AircraftInfo))]
 		[Desc("Cargo aircraft used. Must have Aircraft trait.")]
-		public readonly string ActorType = "badr";
+		public readonly string ActorType = "ra1_badger";
 
 		[Desc("How the spawn location/direction is calculated for the delivering actor.",
 			"Standard: Spawn 1/2 map distance east, in line with the destination.",
@@ -195,7 +195,7 @@ namespace OpenRA.Mods.CA.Traits
 					foreach (var cargo in self.TraitsImplementing<INotifyDelivery>())
 						cargo.Delivered(self);
 
-					self.World.AddFrameEndTask(ww => DoProduction(self, producee, exit?.Info, productionType, inits));
+					self.World.AddFrameEndTask(ww => ProduceActors(self, producee, productionType, inits, exit?.Info));
 					Game.Sound.Play(SoundType.World, info.ChuteSound, self.CenterPosition);
 					Game.Sound.PlayNotification(self.World.Map.Rules, self.Owner, "Speech", info.ReadyAudio, self.Owner.Faction.InternalName);
 					TextNotificationsManager.AddTransientLine(self.Owner, info.ReadyTextNotification);

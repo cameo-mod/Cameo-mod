@@ -1,0 +1,241 @@
+protoss_upgrade_singularitycharge:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Singularity Charge
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_updragoonrange.description
+		Prerequisites: ~protoss_cyberneticscore, ~!protoss_upgrade_singularitycharge
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: protoss_upgrade_singularitycharge
+	ProvidesPrerequisite:
+		Prerequisite: protoss_upgrade_singularitycharge
+
+protoss_upgrade_resonatingglaves:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Resonating Glaves
+	Buildable:
+		BuildPaletteOrder: 85
+		Queue: Upgrades
+		Description: actor_updragoonrange.description
+		Prerequisites: ~protoss_citadelofadun, ~!protoss_upgrade_resonatingglaves
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: protoss_upgrade_resonatingglaves
+	ProvidesPrerequisite:
+		Prerequisite: protoss_upgrade_resonatingglaves
+
+protoss_upgrade_upgradepylonlevel1:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Upgrade Pylon Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_uppylon1.description
+		Prerequisites: ~protoss_forge, ~!protoss_upgrade_upgradepylonlevel1
+	RenderSprites:
+		Image: protoss_pylon
+	ProvidesPrerequisite:
+
+protoss_upgrade_upgradepylonlevel2:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Upgrade Pylon Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_uppylon2.description
+		Prerequisites: ~protoss_cyberneticscore, ~protoss_upgrade_upgradepylonlevel1, ~!protoss_upgrade_upgradepylonlevel2
+	RenderSprites:
+		Image: protoss_pylon
+	ProvidesPrerequisite:
+
+protoss_upgrade_plasmashields:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Plasma Shields
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_upplasmashield.description
+		Prerequisites: ~protoss_cyberneticscore, ~!protoss_upgrade_plasmashields
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: protoss_upgrade_plasmashields
+	ProvidesPrerequisite:
+		Prerequisite: protoss_upgrade_plasmashields
+
+protoss_upgrade_reavercapacity:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Reaver Capacity
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_upreavercapacity.description
+		Prerequisites: ~protoss_roboticssupportbay
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: protoss_upgrade_reavercapacity
+	ProvidesPrerequisite:
+		Prerequisite: protoss_upgrade_reavercapacity
+
+protoss_upgrade_graviticpropulsion:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Gravitic Propulsion
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_upairspeed.description
+		Prerequisites: ~protoss_roboticssupportbay, ~!protoss_upgrade_graviticpropulsion
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: protoss_upgrade_graviticpropulsion
+	ProvidesPrerequisite:
+		Prerequisite: protoss_upgrade_graviticpropulsion
+
+protoss_upgrade_groundweaponslevel1:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Ground Weapons Level 1
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_upgroundweapons.description
+		Prerequisites: ~protoss_forge, ~!protoss_upgrade_groundweaponslevel1
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: protoss_upgrade_groundweaponslevel1
+	ProvidesPrerequisite:
+		Prerequisite: protoss_upgrade_groundweaponslevel1
+
+protoss_upgrade_groundweaponslevel2:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Ground Weapons Level 2
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor_upgroundweapons2.description
+		Prerequisites: ~protoss_templararchives, ~protoss_upgrade_groundweaponslevel1, ~!protoss_upgrade_groundweaponslevel2
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: protoss_upgrade_groundweaponslevel1
+	ProvidesPrerequisite:
+		Prerequisite: protoss_upgrade_groundweaponslevel2
+
+protoss_upgrade_groundarmorlevel1:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Ground Armor Level 1
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_upgroundarmor.description
+		Prerequisites: ~protoss_forge, ~!protoss_upgrade_groundarmorlevel1
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: protoss_upgrade_groundarmorlevel1
+	ProvidesPrerequisite:
+		Prerequisite: protoss_upgrade_groundarmorlevel1
+
+protoss_upgrade_groundarmorlevel2:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Ground Armor Level 2
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor_upgroundarmor2.description
+		Prerequisites: ~protoss_templararchives, ~protoss_upgrade_groundarmorlevel1, ~!protoss_upgrade_groundarmorlevel2
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: protoss_upgrade_groundarmorlevel1
+	ProvidesPrerequisite:
+		Prerequisite: protoss_upgrade_groundarmorlevel2
+
+protoss_upgrade_airweaponslevel1:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Air Weapons Level 1
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_upairweapons.description
+		Prerequisites: ~protoss_cyberneticscore, ~!protoss_upgrade_airweaponslevel1
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: protoss_upgrade_airweaponslevel1
+	ProvidesPrerequisite:
+		Prerequisite: protoss_upgrade_airweaponslevel1
+
+protoss_upgrade_airweaponslevel2:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Air Weapons Level 2
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor_upairweapons2.description
+		Prerequisites: ~protoss_fleetbeacon, ~protoss_upgrade_airweaponslevel1, ~!protoss_upgrade_airweaponslevel2
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: protoss_upgrade_airweaponslevel1
+	ProvidesPrerequisite:
+		Prerequisite: protoss_upgrade_airweaponslevel2
+
+protoss_upgrade_airarmorlevel1:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Air Armor Level 1
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_upairarmor.description
+		Prerequisites: ~protoss_cyberneticscore, ~!protoss_upgrade_airarmorlevel1
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: protoss_upgrade_airarmorlevel1
+	ProvidesPrerequisite:
+		Prerequisite: protoss_upgrade_airarmorlevel1
+
+protoss_upgrade_airarmorlevel2:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Air Armor Level 2
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor_upairarmor2.description
+		Prerequisites: ~protoss_fleetbeacon, ~protoss_upgrade_airarmorlevel1, ~!protoss_upgrade_airarmorlevel2
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: protoss_upgrade_airarmorlevel1
+	ProvidesPrerequisite:
+		Prerequisite: protoss_upgrade_airarmorlevel2
+
+	####################################################################################################
+	#		Upgrades Terrans
+	####################################################################################################

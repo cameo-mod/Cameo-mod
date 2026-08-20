@@ -1,5 +1,6 @@
 ^TSBasicInfantry:
 	Defaults:
+		Scale: 1.25
 		Tick: 80
 		Offset: 0, 0, 16
 	stand:
@@ -44,6 +45,10 @@
 		Start: 149
 		Length: 15
 		ShadowStart: 441
+	die6:
+		Start: 149
+		Length: 15
+		ShadowStart: 441
 	die4:
 		Filename: frag3.shp
 		Length: *
@@ -80,352 +85,51 @@
 		Facings: 8
 		ShadowStart: 504
 
-tse1.gdi:
-	Inherits: ^TSBasicInfantry
-	Inherits@attack: ^TSBasicInfantryAttack
-	Defaults:
-		Filename: tse1.shp
-	icon:
-		Filename: tse1gicon.png
-		AddExtension: False
-
-tse1.nod:
-	Inherits: ^TSBasicInfantry
-	Inherits@attack: ^TSBasicInfantryAttack
-	Defaults:
-		Filename: altnode1.shp
-	icon:
-		Filename: tse1gicon.png
-		AddExtension: False
-
-tsmedic:
-	Defaults:
-		Filename: tsmedic.shp
-		Tick: 80
-		Offset: 0, 0, 16
-	stand:
-		Facings: 8
-		ShadowStart: 307
-	idle:
-		Facings: 8
-		ShadowStart: 307
-	run:
-		Start: 8
-		Length: 6
-		Facings: 8
-		ShadowStart: 315
-	idle1:
-		Start: 56
-		Length: 15
-		ShadowStart: 363
-	idle2:
-		Start: 71
-		Length: 15
-		ShadowStart: 378
-	prone-run:
-		Start: 86
-		Length: 6
-		Facings: 8
-		ShadowStart: 393
-	prone-stand:
-		Start: 86
-		Facings: 8
-		Stride: 6
-		ShadowStart: 393
-	die1:
-		Start: 134
-		Length: 15
-		ShadowStart: 441
-	die2:
-		Start: 149
-		Length: 15
-		ShadowStart: 455
-	die4:
-		Filename: frag3.shp
-		Length: *
-	die-crushed:
-		Start: 159
-		Length: 5
-		ShadowStart: 451
-		Tick: 800
-		ZOffset: -511
-	standup:
-		Start: 260
-		Length: 2
-		Facings: 8
-		ShadowStart: 567
-	die7:
-		Filename: electro.shp
-		Length: *
-	die5: e1
-		Start: 418
-		Length: 18
-		Tick: 80
-	shoot:
-		Start: 292
-		Length: 14
-		ShadowStart: 599
-	prone-shoot:
-		Start: 292
-		Length: 14
-		ShadowStart: 599
-	icon:
-		Filename: tsmediicon.png
-
 tsengineer:
 	Inherits: ^TSBasicInfantry
 	Defaults:
-		Filename: altgdie1.shp
+		Filename: ts_gdi_engineer_tsengineer.shp
+	die3:
+		Start: 149
+		Length: 15
+		ShadowStart: 441
 	icon:
-		Filename: tsenggicon.shp
+		Filename: ts_gdi_engineer_icon.shp
 
 altengi:
 	Inherits: ^TSBasicInfantry
 	Defaults:
-		Filename: altengi.shp
+		Filename: ts_nod_engineer_altengi.shp
 	icon:
-		Filename: tsenggicon.shp
-
-tse2:
-	Inherits: ^TSBasicInfantry
-	Inherits@attack: ^TSBasicInfantryAttack
-	Defaults:
-		Filename: alte2.shp
-	icon:
-		Filename: tse2icon.png
-		AddExtension: False
+		Filename: ts_gdi_engineer_icon.shp
 
 tse3:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: alte3.shp
+		Filename: ts_nod_rocketinfantry_alte3.shp
 	icon:
-		Filename: tse3icon.png
-		AddExtension: False
-
-tsumagon:
-	Inherits: ^TSBasicInfantry
-	Inherits@attack: ^TSBasicInfantryAttack
-	Defaults:
-		Filename: tsumagon.shp
-	icon:
-		Filename: tsumagonicon.shp
-		AddExtension: False
-
-tsghost:
-	Inherits: ^TSBasicInfantry
-	Inherits@attack: ^TSBasicInfantryAttack
-	Defaults:
-		Filename: tsghost.shp
-	icon:
-		Filename: tsghosticon.shp
-
-tsmhijack:
-	Inherits: ^TSBasicInfantry
-	Defaults:
-		Filename: tsghost.shp
-	icon:
-		Filename: tshijackicon.shp
-
-tschamspy:
-	Inherits: ^TSBasicInfantry
-	Defaults:
-		Filename: tse1.shp
-	icon:
-		Filename: tsspyicon.shp
-
-tsmutant:
-	Inherits: ^TSBasicInfantry
-	Inherits@attack: ^TSBasicInfantryAttack
-	Defaults:
-		Filename: tsmutant.shp
-	icon:
-		Filename: tsmutanticon.shp
-
-tsmwmn:
-	Inherits: ^TSBasicInfantry
-	Inherits@attack: ^TSBasicInfantryAttack
-	Defaults:
-		Filename: tsmutant3.shp
-	icon:
-		Filename: tsmutant2icon.shp
-
-tsmutant3:
-	Inherits: ^TSBasicInfantry
-	Inherits@attack: ^TSBasicInfantryAttack
-	Defaults:
-		Filename: tsmutant3.shp
-	icon:
-		Filename: tsmutant3icon.shp
+		Filename: ts_nod_rocketinfantry_icon.png
 
 tstratos:
 	Inherits: ^TSBasicInfantry
 	Defaults:
-		Filename: tsmutant.shp
+		Filename: forgotten_mutant_tsmutant.shp
 	icon:
-		Filename: tsmutcicon.shp
+		Filename: forgot_tratos_icon.png
 
-tsweedguy:
+tse3mut:
+	Inherits: ^TSBasicInfantry
+	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: tsweed.shp
-		Tick: 80
-		Offset: 0, 0, 16
-	stand:
-		Facings: 8
-		ShadowStart: 202
-	run:
-		Start: 8
-		Length: 6
-		Facings: 8
-		ShadowStart: 210
-	prone-shoot:
-		Start: 56
-		Facings: 8
-		ShadowStart: 258
-	prone-shoot:
-		Start: 64
-		Facings: 8
-		Stride: 6
-		ShadowStart: 288
-	standup:
-		Start: 112
-		Length: 2
-		Facings: 8
-		ShadowStart: 314
-	prone-run:
-		Start: 86
-		Length: 6
-		Facings: 8
-		ShadowStart: 288
-	prone-stand:
-		Start: 86
-		Facings: 8
-		Stride: 6
-		ShadowStart: 288
-	idle1:
-		Start: 128
-		Length: 8
-		ShadowStart: 330
-	idle2:
-		Start: 136
-		Length: 16
-		ShadowStart: 338
-	die1:
-		Start: 152
-		Length: 8
-		ShadowStart: 354
-	die2:
-		Start: 160
-		Length: 6
-		ShadowStart: 362
-	die4:
-		Start: 166
-		Length: 11
-		ShadowStart: 368
-	die5:
-		Start: 177
-		Length: 20
-		ShadowStart: 379
-	die7:
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Start: 174
-		Length: 3
-		ShadowStart: 376
-		Tick: 1000
-	muzzle:
-		Combine:
-			chem-n:
-				Filename: chem-n.shp
-				Length: *
-				Offset: 1,2
-			chem-nw:
-				Filename: chem-nw.shp
-				Length: *
-				Offset: 8,2
-			chem-w:
-				Filename: chem-w.shp
-				Length: *
-				Offset: 8,-3
-			chem-sw:
-				Filename: chem-sw.shp
-				Length: *
-				Offset: 7,-6
-			chem-s:
-				Filename: chem-s.shp
-				Length: *
-				Offset: 1,-6
-			chem-se:
-				Filename: chem-se.shp
-				Length: *
-				Offset: -5,-6
-			chem-e:
-				Filename: chem-e.shp
-				Length: *
-				Offset: -7,-3
-			chem-ne:
-				Filename: chem-ne.shp
-				Length: *
-				Offset: -3,2
-		Facings: 8
-		Length: 13
+		Filename: ts_nod_rocketinfantry_alte3.shp
 	icon:
-		Filename: tstoxinicon.shp
-
-tsdoggie:
-	Defaults:
-		Filename: tsdoggie.shp
-		Tick: 80
-		Offset: 0, 0, 16
-	stand:
-		Facings: 8
-		ShadowStart: 119
-	run:
-		Start: 8
-		Length: 6
-		Facings: 8
-		ShadowStart: 127
-	attack:
-		Start: 56
-		Length: 4
-		Facings: 8
-		ShadowStart: 175
-	laydown:
-		Start: 88
-		Length: 2
-		ShadowStart: 207
-	hide:
-		Start: 90
-		ShadowStart: 209
-	idle1:
-		Start: 91
-		Length: 8
-		ShadowStart: 210
-	die:
-		Start: 99
-		Length: 10
-		ShadowStart: 218
-	die4:
-		Filename: frag3.shp
-		Length: *
-	die-crushed:
-		Start: 105
-		Length: 4
-		ShadowStart: 224
-		Tick: 800
-		ZOffset: -511
-	die5:
-		Start: 109
-		Length: 10
-		ShadowStart: 228
-	icon:
-		Filename: tsdoggieicon.shp
+		Filename: forgotten_rocketinfantry_icon.png
 
 tsfloater:
 	idle:
 		Filename: tsfloater.shp
+		Scale: 1.25
 		Length: 16
 		ShadowStart: 32
 	icon:
@@ -434,6 +138,7 @@ tsfloater:
 tsvislrg:
 	idle:
 		Filename: tsvislrg.shp
+		Scale: 1.25
 		Length: 16
 		ShadowStart: 32
 	icon:
@@ -442,261 +147,15 @@ tsvislrg:
 tsvissml:
 	idle:
 		Filename: tsvissml.shp
+		Scale: 1.25
 		Length: 16
 		ShadowStart: 32
 	icon:
 		Filename: viceicnh.shp
 
-tscyborg:
-	Inherits: ^TSBasicInfantry
-	Defaults:
-		Tick: 80
-		Offset: 0, 0, 16
-		Filename: altcyborg.shp
-	stand:
-		Facings: 8
-		ShadowStart: 370
-	run:
-		Start: 8
-		Length: 6
-		Facings: 8
-		ShadowStart: 378
-	idle1:
-		Start: 56
-		Length: 15
-		ShadowStart: 426
-	idle2:
-		Start: 71
-		Length: 15
-		ShadowStart: 441
-	crippled-run:
-		Start: 86
-		Length: 6
-		Facings: 8
-		ShadowStart: 456
-	crippled-stand:
-		Start: 86
-		Facings: 8
-		Stride: 6
-		ShadowStart: 456
-	attack:
-		Start: 164
-		Length: 6
-		Facings: 8
-		ShadowStart: 534
-	crippled-attack:
-		Start: 212
-		Length: 6
-		Facings: 8
-		ShadowStart: 582
-	icon:
-		Filename: tscyborgicon.shp
-		AddExtension: False
-
-elitcadre:
-	Inherits: ^TSBasicInfantry
-	Defaults:
-		Filename: elitcadre.shp
-		Tick: 80
-		Offset: 0, 0, 16
-	stand:
-		Facings: 8
-		ShadowStart: 292
-	run:
-		Start: 8
-		Length: 6
-		Facings: 8
-		ShadowStart: 300
-	idle1:
-		Start: 56
-		Length: 15
-		ShadowStart: 348
-	idle2:
-		Start: 71
-		Length: 15
-		ShadowStart: 363
-	crippled-run:
-		Start: 86
-		Length: 6
-		Facings: 8
-		ShadowStart: 378
-	crippled-stand:
-		Start: 86
-		Facings: 8
-		Stride: 6
-		ShadowStart: 456
-	attack:
-		Start: 164
-		Length: 6
-		Facings: 8
-		ShadowStart: 456
-	crippled-attack:
-		Start: 212
-		Length: 6
-		Facings: 8
-		ShadowStart: 504
-	icon:
-		Filename: elitcadreicon.shp
-		AddExtension: False
-
-tscyc2:
-	Inherits: ^TSBasicInfantry
-	Defaults:
-		Filename: tscyc2.shp
-		Offset: 0, 0, 16
-	stand:
-		Facings: 8
-		ShadowStart: 308
-		Offset: 0, 0, 16
-	run:
-		Start: 8
-		Length: 9
-		Facings: 8
-		ShadowStart: 316
-	idle1:
-		Start: 80
-		Length: 15
-		ShadowStart: 388
-	idle2:
-		Start: 95
-		Length: 15
-		ShadowStart: 403
-	crippled-run:
-		Start: 110
-		Length: 9
-		Facings: 8
-		ShadowStart: 418
-	crippled-stand:
-		Start: 110
-		Facings: 8
-		Stride: 9
-		ShadowStart: 418
-	attack:
-		Start: 212
-		Length: 6
-		Facings: 8
-		ShadowStart: 520
-	crippled-attack:
-		Start: 260
-		Length: 6
-		Facings: 8
-		ShadowStart: 568
-	icon:
-		Filename: tscycommicon.shp
-
-tsdefender:
-	Defaults:
-		Filename: tsdefender.shp
-	idle:
-		Filename: invisibleitem.shp
-	stand:
-		Filename: tsdefender.shp
-		Facings: -8
-		ShadowStart: 168
-	stand2:
-		Filename: tsdefender.shp
-		Facings: -8
-		ShadowStart: 168
-	run:
-		Filename: tsdefender.shp
-		Start: 8
-		Length: 8
-		Facings: -8
-		ShadowStart: 176
-		Tick: 100
-	attack:
-		Filename: tsdefender.shp
-		Facings: -8
-		Length: 12
-		Start: 72
-		ShadowStart: 168
-	die:
-		Filename:  defd_exp.shp
-		Length: *
-		Tick: 100
-	icon:
-		Filename: tsdefendericon.shp
-
-tsreaper:
-	Defaults:
-		Filename: tsreaper.shp
-	idle:
-		Filename: tsreaper.shp
-		Facings: -8
-		ShadowStart: 117
-	stand:
-		Filename: tsreaper.shp
-		Facings: -8
-		ShadowStart: 168
-	run:
-		Filename: tsreaper.shp
-		Start: 8
-		Length: 12
-		Facings: -8
-		ShadowStart: 125
-	shoot:
-		Filename: tsreaper.shp
-		Facings: -8
-		ShadowStart: 117
-	die:
-		Filename: tsreaper.shp
-		Start: 104
-		Length: 12
-		ShadowStart: 221
-	icon:
-		Filename: tsreapericon.shp
-
-tsmmch:
-	idle:
-		Filename: tsmmch.shp
-		Facings: -8
-		Stride: 15
-		ShadowStart: 152
-		Offset: 0, 0, 12
-	icon:
-		Filename: tstitanicon.shp
-		AddExtension: False
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-	stand:
-		Filename: tsmmch.shp
-		Facings: -8
-		Stride: 15
-		ShadowStart: 152
-		Offset: 0, 0, 12
-	walk:
-		Filename: tsmmch.shp
-		Length: 15
-		Facings: -8
-		ShadowStart: 152
-		Offset: 0, 0, 12
-		Tick: 60
-	turret:
-		Filename: tsmmch.shp
-		Start: 120
-		Facings: -32
-		Offset: 0, 0, 12
-
-tsharv:
-	Defaults:
-		Scale: 1.5
-	idle:
-		Filename: invisibleitem.shp
-	dock:
-		Filename: invisibleitem.shp
-	dock-loop:
-		Filename: invisibleitem.shp
-	warpout:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tsharvestericon.shp
-		AddExtension: False
-
-
 dtruck:
 	Defaults:
-		Scale: 1.5
+		Scale: 1.25
 	idle:
 		Filename: invisibleitem.shp
 	dock:
@@ -705,165 +164,29 @@ dtruck:
 		Filename: invisibleitem.shp
 	warpout:
 		Filename: invisibleitem.shp
+	harvesting:
+		Filename: ra2_oregath.shp
+		Length: 15
+		Facings: 8
 	icon:
-		Filename: tsharvestericon.shp
-		AddExtension: False
+		Filename: ts_gdi_tiberiumharvester_icon.shp
 
-
-# tsweed:
-# 	idle: invisibleitem
-# 	dock: invisibleitem
-# 	dock-loop: invisibleitem
-# 	warpout: invisibleitem
-# 	icon: tsweedeatericon.shp
-# 		AddExtension: False
-
-tsapc:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tsaphapcicon.shp
-		AddExtension: False
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-
-# tsprobe:
-# 	idle: tsgghunt
-# 	shadow: tsgghunt
-# 		Start: 8
-# 		ZOffset: -511
-# 	icon: tshunterseekersicon
-# 	muzzle: gunfire2
-# 		Length: 5
-
-tssgen:
+tsprobe:
 	Defaults:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tsmovstealthicon.shp
+		Filename: tsgghunt.shp
 	idle:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-
-tslpst:
-	Defaults:
-		Filename: invisibleitem.shp
-	idle:
-		Filename: invisibleitem.shp
+	shadow:
+		Start: 8
+		ZOffset: -511
 	icon:
-		Filename: tslpsticon.shp
-
-tsmemp:
-	Defaults:
-		Filename: invisibleitem.shp
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tsmempicon.png
-
-ts1tnk:
-	idle:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-	icon:
-		Filename: tsltnkicon.shp
-
-tswini2:
-	Defaults:
-		Filename: invisibleitem.shp
-	idle:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-	icon:
-		Filename: tswini2icon.shp
-
-tscar2:
-	idle:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-	icon:
-		Filename: tsraidcaricon.shp
-
-ts2tnk:
-	idle:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-	icon:
-		Filename: tsmtnkicon.png
-
-ts3tnk:
-	idle:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-	icon:
-		Filename: tshtnkicon.shp
-
-tsftnk:
-	idle:
-		Filename: invisibleitem.shp
-	muzzle:
-		Combine:
-			flame-n:
-				Filename: flame-n.shp
-				Length: *
-				Offset: 3,6
-			flame-nw:
-				Filename: flame-nw.shp
-				Length: *
-				Offset: 8,7
-			flame-w:
-				Filename: flame-w.shp
-				Length: *
-				Offset: 8,2
-			flame-sw:
-				Filename: flame-sw.shp
-				Length: *
-				Offset: 7,-2
-			flame-s:
-				Filename: flame-s.shp
-				Length: *
-				Offset: 3,-2
-			flame-se:
-				Filename: flame-se.shp
-				Length: *
-				Offset: -5,-2
-			flame-e:
-				Filename: flame-e.shp
-				Length: *
-				Offset: -7,2
-			flame-ne:
-				Filename: flame-ne.shp
-				Length: *
-				Offset: -7,8
-	icon:
-		Filename: tsftnkicon.png
-
-tshvr:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tshvricon.shp
-		AddExtension: False
+		Filename: ra2_allies_upgrade_paratroopers_tshunterseekersicon.shp
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 
 tsldrone:
 	Defaults:
-		Filename: tsdlimpmk.shp
+		Filename: tsdlimpmake.shp
 	idle:
 		ShadowStart: 42
 	make:
@@ -875,282 +198,57 @@ tsldrone:
 	icon:
 		Filename: tsldroneicon.shp
 
-# tsdlimpmk:
+# tsdlimpmake:
 # 	idle:
 # 		Start: 41
 # 	icon: jmin
 
-tssmech:
-	idle:
-		Filename: invisibleitem.shp
+ts_nod_attackcycle:
 	Defaults:
-		Filename: tssmech.shp
-		Offset: 0,0,8
-		Scale: 1.5
-	stand:
-		Filename: tssmech.shp
-		Start: 96
-		Facings: -8
-		ShadowStart: 232
-	walk:
-		Filename: tssmech.shp
-		Facings: -8
-		Length: 12
-		ShadowStart: 136
-	shoot:
-		Filename: tssmech.shp
-		Start: 104
-		Length: 4
-		Facings: -8
-		ShadowStart: 240
-		Tick: 100
-	icon:
-		Filename: tswolverineicon.shp
-		AddExtension: False
-
-tshmec:
+		Filename: ts_nod_attackcycle.shp
+		Scale: 1.25
 	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tsmammothmk2icon.shp
-		AddExtension: False
-	muzzle2:
-		Filename: lightbluelasermuzzle.shp
-		Length: 3
-	muzzle1:
-		Filename: gunfire2.shp
-		Length: 5
-
-tsjugg:
-	Defaults:
-		Scale: 1.35
-	idle:
-		Filename: tsjugger.shp
-		Facings: -8
-		Stride: 15
-		ShadowStart: 120
-		Offset: 0, 0, 12
-	walk:
-		Filename: tsjugger.shp
-		Length: 15
-		Facings: -8
-		ShadowStart: 120
-		Offset: 0, 0, 12
-		Tick: 60
-	turret:
-		Filename: tsdjugg_a.shp
-		Facings: 32
-		Offset: -4, 0, 12
-	barrel:
-		Filename: tsjuggerbarl.shp
-		Facings: 32
-		Offset: -4, 0, 12
-		Scale: 0.5
-	barrelup:
-		Filename: tsjuggerbarlup.shp
-		Facings: 32
-		Offset: -4, 0, 12
-		Scale: 0.5
-	idletur:
-		Filename: tsdjugg.shp
-		ShadowStart: 3
-		Offset: 0, -12, 12
-	damaged-idletur:
-		Filename: tsdjugg.shp
-		Start: 1
-		ShadowStart: 4
-		Offset: 0, -12, 12
-	make:
-		Filename: tsdjuggmk.shp
-		Length: 18
-		ShadowStart: 18
-		Offset: 0, -12, 12
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 2
-	icon:
-		Filename: tsjuggicon.png
-
-tssonic:
-	Defaults:
-		Filename: invisibleitem.shp
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tsdisruptoricon.shp
-		AddExtension: False
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-
-tsbggy:
-	Defaults:
-		Filename: tsbggy.shp
-	idle:
-		Filename: tsbggy.shp
+		Filename: ts_nod_attackcycle.shp
 		Facings: 32
 		UseClassicFacings: True
 	icon:
-		Filename: tsbuggyicon.shp
-		AddExtension: False
+		Filename: ts_nod_attackcycle_icon.shp
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 
-tsbike:
+ts_nod_ticktank:
 	Defaults:
-		Filename: tsbike.shp
-	idle:
-		Filename: tsbike.shp
-		Facings: 32
-		UseClassicFacings: True
-	icon:
-		Filename: tsbikeicon.shp
-		AddExtension: False
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-
-tsnapost:
-	Defaults:
-		Filename: tspost.shp
-	idle:
-		Start: 0
-	damaged-idle:
-		Start: 1
-	lights-bright:
-		Filename: napost_b.shp
-		Frames: 0,1,2,2,2,2,2,2,1,1,1,1,0,0,0
-		Length: 15
-		Tick: 90
-	damaged-lights-bright:
-		Filename: napost_b.shp
-		Frames: 0,1,2,2,2,2,2,2,1,1,1,1,0,0,0
-		Length: 15
-		Tick: 90
-	chainoflights:
-		Filename: napost_a.shp
-		Frames: 0,1,2,3,7,7,7,7,7,7,7,7,7,4,5,6,7,7,7,7
-		Length: 20
-		Tick: 120
-	chainoflights-bright:
-		Filename: napost_a.shp
-		Frames: 0,1,2,3,7,7,7,7,7,7,7,7,7,4,5,6,7,7,7,7
-		Length: 20
-		Tick: 120
-	damaged-chainoflights:
-		Filename: napost_a.shp
-		Frames: 0,1,2,3,7,7,7,7,7,7,7,7,7,4,5,6,7,7,7,7
-		Length: 20
-		Tick: 120
-	damaged-chainoflights-bright:
-		Filename: napost_a.shp
-		Frames: 0,1,2,3,7,7,7,7,7,7,7,7,7,4,5,6,7,7,7,7
-		Length: 20
-		Tick: 120
-	dead:
-		Start: 2
-		Tick: 400
-	make:
-		Filename: tspostmk.shp
-		Start: 0
-		Length: 2
-		Tick: 160
-	icon:
-		Filename: tslaserfenceicon.shp
-		Offset: 0, 0
-
-# tsnafnce:
-# 	Defaults: tsntfence
-# 	idle:
-# 		Length: 1
-# 	disabled-x:
-# 		Start: 8
-# 		Length: 1
-# 	disabled-y:
-# 		Start: 12
-# 		Length: 1
-# 	enabled-x:
-# 		Frames: 3,3,1,1,3,3,1,1,2,2,0,0,2,2,0,0
-# 		Length: 16
-# 	enabled-x-bright:
-# 		Frames: 3,3,1,1,3,3,1,1,2,2,0,0,2,2,0,0
-# 		Length: 16
-# 	enabled-y:
-# 		Frames: 7,5,7,5,6,4,6,4,7,5,7,5,6,4,6,4
-# 		Length: 16
-# 	enabled-y-bright:
-# 		Frames: 7,5,7,5,6,4,6,4,7,5,7,5,6,4,6,4
-# 		Length: 16
-# 	#emp-overlay: emp_fx01
-# 	#	Length: *
-# 	#	Offset: 0, 0, 13
-# 	#	ZOffset: 512
-# 	#	BlendMode: Additive
-# 	icon: tslaserfenceicon
-# 		Offset: 0, 0
-
-tsttnk:
+		Scale: 1.25
 	idle:
 		Filename: invisibleitem.shp
 	deploy-idle:
-		Filename: tsgttick.shp
+		Filename: ts_nod_ticktank_tsgttick.shp
 		Offset: 0, -20, 0
 		ShadowStart: 3
 	make:
-		Filename: tsgttickmk.shp
+		Filename: ts_nod_ticktank_make.shp
 		Length: 24
 		ShadowStart: 25
 		Offset: 0, -10, 0
 		Tick: 10
 	dead:
-		Filename: tsgttick.shp
+		Filename: ts_nod_ticktank_tsgttick.shp
 		Offset: 0, -20, 0
 	icon:
-		Filename: tstickicon.png
+		Filename: ts_nod_ticktank_icon.png
 		Offset: 0,0
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 
-tsstnk:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tsstnkicon.png
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-
-tsrepair:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tsmovrepairicon.shp
-		AddExtension: False
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-
-tsart2:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tsmartyicon.shp
-		AddExtension: False
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-	deploy:
-		Filename: tsgtarty.shp
-		ShadowStart: 3
-		Offset: 0, -12, 12
-
 tsmcv:
+	Defaults:
+		Scale: 1.25
 	idle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: tssmcvicon.shp
+		Filename: ts_gdi_mobileconstructionvehicle_icon.shp
 
 # tsart2turret:
 # 	idle: tsgtarty
@@ -1160,7 +258,7 @@ tsmcv:
 # 		Start: 1
 # 		ShadowStart: 4
 # 		Offset: 0, -12, 12
-# 	make: tsgtartymk
+# 	make: tsgtartymake
 # 		Length: 16
 # 		ShadowStart: 16
 # 		Offset: 0, -12, 12
@@ -1174,98 +272,85 @@ tsmcv:
 # 	icon: ra2sgunicon
 # 		Offset: 0,0
 
-tssubtank:
+tsartspid:
 	idle:
-		Filename: invisibleitem.shp
+		Filename: cabal_artilleryspider.png
+		Facings: 64
+		Start: 64
 	icon:
-		Filename: tsdeviltongueicon.shp
-		AddExtension: False
+		Filename: cabal_artilleryspider_icon.png
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
+	stand:
+		Filename: cabal_artilleryspider.png
+		Facings: 64
+		Start: 64
+	walk:
+		Filename: cabal_artilleryspider.png
+		Length: 8
+		Facings: 8
+		Tick: 60
 
-tssapc:
+tstnkspid:
 	idle:
-		Filename: invisibleitem.shp
+		Filename: cabal_tarantula.png
+		Facings: 64
+		Start: 64
 	icon:
-		Filename: tssubapcicon.shp
+		Filename: cabal_tarantula_icon.png
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
-
-ts4tnk:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: ts4tnkicon.png
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-
-tsmlrs:
-	idle:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-	icon:
-		Filename: msamicnh.tem
-		AddExtension: False
-
-tsarty:
-	idle:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-	icon:
-		Filename: artyicnh.tem
-		AddExtension: False
-
-tsm113:
-	idle:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-	icon:
-		Filename: apcicnh.tem
-		AddExtension: False
+	stand:
+		Filename: cabal_tarantula.png
+		Facings: 64
+		Start: 64
+	walk:
+		Filename: cabal_tarantula.png
+		Length: 8
+		Facings: 8
+		Tick: 60
+	turret:
+		Filename: cabal_tarantula.png
+		Start: 128
+		Facings: 64
+		Offset: 0, 0, 12
 
 tsgtcnst:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Scale: 1.5
-		Offset: 0, -20, 20
+		Scale: 1.25
+		Offset: -8, -20, 20
 	idle:
-		Filename: tsgtcnst.shp
+		Filename: ts_gdi_constructionyard_cabal.shp
 		ShadowStart: 3
 	build:
-		Filename: tsgtcnst.shp
+		Filename: ts_gdi_constructionyard_cabal.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: tsgtcnst.shp
+		Filename: ts_gdi_constructionyard_cabal.shp
 		Start: 1
 		ShadowStart: 4
 	dead:
-		Filename: tsgtcnst.shp
+		Filename: ts_gdi_constructionyard_cabal.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
 	make:
-		Filename: tsgtcnstmk.shp
+		Filename: ts_gdi_constructionyard_cabal_make.shp
 		Length: 24
 		ShadowStart: 24
 	crane-overlay:
-		Filename: tsgtcnst_d.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_d.shp
 		Length: 20
 		ZOffset: 1023
 	damaged-crane-overlay:
-		Filename: tsgtcnst_d.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_d.shp
 		Length: 20
 		ZOffset: 1023
 	critical-crane-overlay:
-		Filename: tsgtcnst_d.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_d.shp
 		Start: 20
 		Length: 20
 		ZOffset: 1023
@@ -1274,82 +359,21 @@ tsgtcnst:
 	damaged-idle-top:
 		Filename: invisibleitem.shp
 	idle-side:
-		Filename: tsgtcnst_a.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_a.shp
 		Length: 10
 	damaged-idle-side:
-		Filename: tsgtcnst_a.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_a.shp
 		Start: 10
 		Length: 10
 	idle-front:
-		Filename: tsgtcnst_b.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_b.shp
 		Length: 10
 	damaged-idle-front:
-		Filename: tsgtcnst_b.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_b.shp
 		Length: 10
 	icon:
-		Filename: tsfacticon.shp
+		Filename: ts_gdi_constructionyard_icon.png
 		Offset: 0,0
-
-tsgtpowr:
-	Inherits: ^WithBuildingBib3
-	Defaults:
-		Scale: 1.5
-		Offset: 0, -12, 24
-		Filename: tsgtpowr.shp
-	idle:
-		ShadowStart: 3
-		Filename: tsgtpowr.shp
-	damaged-idle:
-		Filename: tsgtpowr.shp
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Filename: tsgtpowr.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	idle-lights:
-		Filename: tsgtpowr_a.shp
-		Length: 12
-		Tick: 200
-	damaged-idle-lights:
-		Filename: tsgtpowr_a.shp
-		Start: 12
-		Length: 12
-		Tick: 200
-	idle-plug:
-		Filename: tsgtpowr_b.shp
-		Length: 12
-		Tick: 200
-	damaged-idle-plug:
-		Filename: tsgtpowr_b.shp
-		Length: 12
-		Tick: 200
-	idle-powrupa:
-		Filename: tsgtpowr_b.shp
-		Length: 12
-		Tick: 200
-		Offset: -30, -12, 24
-	damaged-idle-powrupa:
-		Filename: tsgtpowr_b.shp
-		Length: 12
-		Tick: 200
-		Offset: -30, -12, 24
-	idle-powrupb:
-		Filename: tsgtpowr_b.shp
-		Length: 12
-		Tick: 200
-		Offset: -16, -6, 24
-	damaged-idle-powrupb:
-		Filename: tsgtpowr_b.shp
-		Length: 12
-		Tick: 200
-		Offset: -16, -6, 24
-	make:
-	icon:
-		Filename: tspowerplanticon.png
-		Offset: 0, 0
-		UseTilesetCode: false
 
 drplasma2:
 	Defaults:
@@ -1358,471 +382,23 @@ drplasma2:
 		Facings: 16
 		ZOffset: 1023
 
-# tsgtpowrup:
-# 	Inherits: tsgtpowr
-# 	Defaults: tsgtpowr
+tstorpedo:
+	Defaults:
+		Filename: tstorpedo.png
+		Scale: 1.6
+	idle:
+		Length: 3
+		Tick: 2
+
+# ts_gdi_powerturbine:
+# 	Inherits: ts_gdi_powerplant
+# 	Defaults: ts_gdi_powerplant
 # 	icon: tsturbicon
-
-tsgtpile:
-	Inherits: ^WithBuildingBib3
-	Defaults:
-		Filename: tsgtpile.shp
-		Offset: 0, -12, 24
-	idle:
-		Filename: tsgtpile.shp
-		ShadowStart: 3
-	damaged-idle:
-		Filename: tsgtpile.shp
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Filename: tsgtpile.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	idle-lights:
-		Filename: tsgtpile_a.shp
-		Length: 7
-		Tick: 200
-		ZOffset: 1023
-	damaged-idle-lights:
-		Filename: tsgtpile_a.shp
-		Start: 7
-		Length: 7
-		Tick: 200
-		ZOffset: 1023
-	idle-light:
-		Filename: tsgtpile_b.shp
-		Length: 7
-		Tick: 200
-	damaged-idle-light:
-		Filename: tsgtpile_b.shp
-		Start: 7
-		Length: 7
-		Tick: 200
-	idle-flag:
-		Filename: tsgtpile_c.shp
-		Length: 7
-		Tick: 100
-	damaged-idle-flag:
-		Filename: tsgtpile_c.shp
-		Start: 7
-		Length: 7
-		Tick: 100
-	make:
-		Filename: tsgtpile.shp
-	icon:
-		Filename: tsbarracksicon.shp
-		Offset: 0, 0
-		UseTilesetCode: false
-
-tsgtweap:
-	Inherits: ^WithBuildingBib2
-	Defaults:
-		Filename: tsgtweap.shp
-		Offset: -12, -21, 22
-	idle:
-		Filename: tsgtweap_1.shp
-		ShadowStart: 2
-		ZOffset: -1024
-		Offset: -12, -21, 0
-	damaged-idle:
-		Filename: tsgtweap_1.shp
-		Start: 1
-		ShadowStart: 3
-		ZOffset: -1024
-		Offset: -12, -21, 0
-	idle-roof:
-		Filename: tsgtweap_2.shp
-		ShadowStart: 2
-	damaged-idle-roof:
-		Filename: tsgtweap_2.shp
-		Start: 1
-		ShadowStart: 3
-	dead:
-		Filename: tsgtweap.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	idle-lights-white:
-		Filename: tsgtweap_a.shp
-		Length: 16
-		Tick: 100
-		ZOffset: 2048
-	idle-lights-red:
-		Filename: tsgtweap_b.shp
-		Length: 8
-		Tick: 120
-		ZOffset: 2048
-	idle-turbines:
-		Filename: tsgtweap_c.shp
-		Length: 4
-		Tick: 80
-		ZOffset: 2048
-	damaged-idle-turbines:
-		Filename: tsgtweap_c.shp
-		Length: 4
-		Tick: 80
-		ZOffset: 2048
-	build-door:
-		Filename: tsgtweap_d.shp
-		Length: 9
-		ShadowStart: 9
-	damaged-build-door:
-		Filename: tsgtweap_d.shp
-		Length: 9
-		ShadowStart: 9
-	make:
-		Filename: tsgtweapmk.shp
-	bib2:
-		Filename: tsgtweapbb.shp
-		Length: 1
-		ZOffset: -1024
-		Offset: -12, -21, 0
-		ZRamp: 1
-	damaged-bib2:
-		Filename: tsgtweapbb.shp
-		Start: 1
-		Length: 1
-		ZOffset: -1024
-		Offset: -12, -21, 0
-		ZRamp: 1
-	dead-bib2:
-		Filename: tsgtweapbb.shp
-		Start: 2
-		Length: 1
-		ZOffset: -1024
-		Offset: -12, -21, 0
-		ZRamp: 1
-	icon:
-		Filename: tsweapicon.png
-		Offset: 0, 0
-		UseTilesetCode: false
-
-tsntpowr:
-	Inherits: ^WithBuildingBib3
-	Defaults:
-		Scale: 1.5
-		Offset: 0, -12, 24
-	idle:
-		Filename: tsntpowr.shp
-		ShadowStart: 3
-	damaged-idle:
-		Filename: tsntpowr.shp
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Filename: tsntpowr.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	idle-lights:
-		Filename: tsntpowr_a.shp
-		Length: 9
-		Tick: 200
-	damaged-idle-lights:
-		Filename: tsntpowr_a.shp
-		Start: 9
-		Length: 9
-		Tick: 200
-	make:
-		Filename: tsntpowrmk.shp
-	icon:
-		Filename: tsnpwricon.shp
-		Offset: 0, 0, 25
-		UseTilesetCode: false
-
-tsntpowrmutant:
-	Inherits: ^WithBuildingBib3
-	Defaults:
-		Scale: 1.5
-		Offset: 0, -12, 24
-	idle:
-		Filename: tampowr.shp
-		ShadowStart: 2
-	damaged-idle:
-		Filename: tampowr.shp
-		Start: 1
-		ShadowStart: 2
-	dead:
-		Filename: tampowr.shp
-		Start: 2
-		ShadowStart: 3
-		Tick: 400
-	idle-cycle:
-		Filename: tampowr_a.shp
-		Length: 31
-		Tick: 200
-	damaged-idle-cycle:
-		Filename: tampowr_a.shp
-		Length: 31
-		Tick: 200
-	make:
-		Filename: tampowrmk.shp
-	icon:
-		Filename: tsnpwricon.shp
-		Offset: 0, 0, 25
-		UseTilesetCode: false
-
-tsntapwr:
-	Inherits: ^WithBuildingBib3
-	Defaults:
-		Offset: 12, -15, 30
-	idle:
-		Filename: tsntapwr.shp
-		ShadowStart: 3
-	damaged-idle:
-		Filename: tsntapwr.shp
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Filename: tsntapwr.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	idle-lights:
-		Filename: tsntapwr_a.shp
-		Length: 9
-		Tick: 200
-	damaged-idle-lights:
-		Filename: tsntapwr_a.shp
-		Start: 9
-		Length: 9
-		Tick: 200
-	make:
-		Filename: tsntapwrmk.shp
-	icon:
-		Filename: tsapwricon.shp
-		Offset: 0, 0
-		UseTilesetCode: false
-
-tsnthand:
-	Inherits: ^WithBuildingBib3
-	Defaults:
-		Offset: -12, -15, 30
-	idle:
-		Filename: tsnthand.shp
-		ShadowStart: 3
-	damaged-idle:
-		Filename: tsnthand.shp
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Filename: tsnthand.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	idle-light:
-		Filename: tsnthand_a.shp
-		Length: 5
-		Tick: 100
-		ZOffset: 1023
-	damaged-idle-light:
-		Filename: tsnthand_a.shp
-		Start: 5
-		Length: 5
-		Tick: 100
-		ZOffset: 1023
-	idle-lights:
-		Filename: tsnthand_b.shp
-		Length: 12
-		Tick: 200
-	damaged-idle-lights:
-		Filename: tsnthand_b.shp
-		Start: 12
-		Length: 12
-		Tick: 200
-	make:
-		Filename: tsnthandmk.shp
-	icon:
-		Filename: tshandicon.png
-		Offset: 0, 0
-		UseTilesetCode: false
-	iconcabal:
-		Filename: tshandofcabalicon.png
-		Offset: 0, 0
-
-tsgtpile2:
-	Inherits: ^WithBuildingBib3
-	Defaults:
-		Offset: -12, -15, 30
-	idle:
-		Filename: tambar.shp
-		ShadowStart: 2
-	damaged-idle:
-		Filename: tambar.shp
-		Start: 1
-		ShadowStart: 3
-	dead:
-		Filename: tambar.shp
-		Start: 2
-		ShadowStart: 3
-		Tick: 400
-	idle-light:
-		Filename: tambar_a.shp
-		Length: *
-		Tick: 100
-		ZOffset: 1023
-	damaged-idle-light:
-		Filename: tambar_a.shp
-		Length: *
-		Tick: 100
-		ZOffset: 1023
-	idle-lights:
-		Filename: tambar_b.shp
-		Length: *
-		Tick: 200
-	damaged-idle-lights:
-		Filename: tambar_b.shp
-		Length: *
-		Tick: 200
-	make:
-		Filename: tambarmk.shp
-	icon:
-		Filename: tshandicon.png
-		Offset: 0, 0
-		UseTilesetCode: false
-
-tsntweap:
-	Inherits: ^WithBuildingBib2
-	Defaults:
-		Offset: -12, -21, 30
-	idle:
-		Filename: tsntweap.shp
-		ShadowStart: 2
-		ZOffset: -1024
-		Offset: -12, -21, 1
-	damaged-idle:
-		Filename: tsntweap.shp
-		Start: 1
-		ShadowStart: 3
-		ZOffset: -1024
-		Offset: -12, -21, 1
-	idle-roof:
-		Filename: tsntweap_2.shp
-		ShadowStart: 2
-		ZOffset: 512
-	damaged-idle-roof:
-		Filename: tsntweap_2.shp
-		Start: 1
-		ShadowStart: 3
-		ZOffset: 512
-	dead:
-		Filename: tsntweap.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	idle-lights:
-		Filename: tsntweap_a.shp
-		Length: 16
-		Tick: 100
-		ZOffset: 2048
-	damaged-idle-lights:
-		Filename: tsntweap_a.shp
-		Start: 16
-		Length: 16
-		Tick: 100
-		ZOffset: 2048
-	build-door:
-		Filename: tsntweap_b.shp
-		Length: 10
-		ShadowStart: 10
-		ZOffset: 512
-	damaged-build-door:
-		Filename: tsntweap_b.shp
-		Start: 10
-		Length: 10
-		ShadowStart: 20
-		ZOffset: 512
-	make:
-		Filename: tsntweapmk.shp
-	bib2:
-		Filename: tsntweapbb.shp
-		ZOffset: -1024
-		Offset: -12, -21, 1
-	damaged-bib2:
-		Filename: tsntweapbb.shp
-		Start: 1
-		ZOffset: -1024
-		Offset: -12, -21, 1
-	dead-bib2:
-		Filename: tsntweapbb.shp
-		Start: 2
-		ZOffset: -1024
-		Offset: -12, -21, 1
-	icon:
-		Filename: tsnwepicon.shp
-		Offset: 0, 0
-		UseTilesetCode: false
-
-tsntradr:
-	Inherits: ^WithBuildingBib3
-	Defaults:
-		Filename: tsntradr.shp
-		Offset: 0, -12, 12
-	idle:
-		Filename: tsntradr.shp
-		ShadowStart: 3
-	damaged-idle:
-		Filename: tsntradr.shp
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Filename: tsntradr.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	idle-dish:
-		Filename: tsntradr_a.shp
-		Length: 24
-		Tick: 120
-	active:
-		Filename: invisibleitem.shp
-	damaged-idle-dish:
-		Filename: tsntradr_a.shp
-		Start: 24
-		Length: 24
-		Tick: 120
-	make:
-		Filename: tsntradrmk.shp
-	icon:
-		Filename: tsnodradaricon.shp
-		Offset: 0, 0
-
-tsnttech:
-	Inherits: ^WithBuildingBib3
-	Defaults:
-		Filename: tsnttech.shp
-		Offset: 0, -24, 24
-	idle:
-		Filename: tsnttech.shp
-		ShadowStart: 3
-	damaged-idle:
-		Filename: tsnttech.shp
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Filename: tsnttech.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	idle-lights:
-		Filename: tsnttech_a.shp
-		Length: 9
-		Tick: 120
-	damaged-idle-lights:
-		Filename: tsnttech_a.shp
-		Length: 9
-		Tick: 120
-	make:
-		Filename: tsnttechmk.shp
-	icon:
-		Filename: tsntchicon.shp
-		Offset: 0, 0
 
 tsnttmpl:
 	Inherits: ^WithBuildingBib2
 	Defaults:
+		Scale: 1.25
 		Filename: tsnttmpl.shp
 		Offset: -12,-42, 42
 	idle:
@@ -1847,7 +423,7 @@ tsnttmpl:
 		Length: 16
 		Tick: 120
 	make:
-		Filename: tsnttmplmk.shp
+		Filename: tsnttmplmake.shp
 	active:
 		Filename: invisibleitem.shp
 	smoke:
@@ -1862,73 +438,10 @@ tsnttmpl:
 		Filename: tsnodtempleicon.shp
 		Offset: 0, 0
 
-tscore:
-	Inherits: ^WithBuildingBib2
-	Defaults:
-		Filename: tscore.shp
-		Offset: -1,-21, 42
-	idle:
-		Filename: tscore.shp
-		ShadowStart: 3
-	damaged-idle:
-		Filename: tscore.shp
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Filename: tscore.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	idle-lights:
-		Filename: tscore_a.shp
-		Length: 60
-		Tick: 120
-	damaged-idle-lights:
-		Filename: tscore_a.shp
-		Start: 60
-		Length: 60
-		Tick: 120
-	idle-lights2:
-		Filename: tscore_b.shp
-		Length: 20
-		Tick: 120
-	damaged-idle-lights2:
-		Filename: tscore_b.shp
-		Start: 20
-		Length: 20
-		Tick: 120
-	idle-lights3:
-		Filename: tscore_c.shp
-		Length: 30
-		Tick: 120
-		ZOffset: -2
-	damaged-idle-lights3:
-		Filename: tscore_c.shp
-		Start: 30
-		Length: 30
-		Tick: 120
-		ZOffset: -2
-	make:
-		Filename: tscoremk.shp
-		Length: 18
-		ShadowStart: 18
-	active:
-		Filename: invisibleitem.shp
-	smoke:
-		Filename: invisibleitem.shp
-	damaged-active:
-		Filename: invisibleitem.shp
-	up:
-		Filename: invisibleitem.shp
-	down:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tscabalcoreicon.shp
-		Offset: 0, 0
-
 tsctarmr:
 	Inherits: ^WithBuildingBib2
 	Defaults:
+		Scale: 1.25
 		Filename: tsctarmr.shp
 	idle:
 		Filename: tsctarmr.shp
@@ -1946,938 +459,73 @@ tsctarmr:
 		Filename: tstmplicon.shp
 		Offset: 0, 0
 
-tsgtradr:
-	Inherits: ^WithBuildingBib3
+tsnthpadmut:
 	Defaults:
-		Filename: tsgtradr.shp
-		Offset: 0, -12, 12
-	idle:
-		Filename: tsgtradr.shp
-		ShadowStart: 3
-	damaged-idle:
-		Filename: tsgtradr.shp
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Filename: tsgtradr.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	idle-dish:
-		Filename: tsgtradr_a.shp
-		Length: 15
-		Reverses: True
-		Tick: 200
-	damaged-idle-dish:
-		Filename: tsgtradr_a.shp
-		Start: 15
-		Length: 15
-		Reverses: True
-		Tick: 240
-	make:
-		Filename: tsgtcommmk.shp
-		Length: 20
-		ShadowStart: 20
-	icon:
-		Filename: tsgdiradaricon.shp
-		Offset: 0, 0
-
-tsgtradrmutant:
-	Inherits: ^WithBuildingBib3
-	Defaults:
-		Filename: tamradr.shp
-		Offset: 0, -12, 12
-	idle:
-		Filename: tamradr.shp
-		ShadowStart: 2
-	damaged-idle:
-		Filename: tamradr.shp
-		Start: 1
-		ShadowStart: 3
-	dead:
-		Filename: tamradr.shp
-		Start: 1
-		ShadowStart: 3
-		Tick: 400
-	idle-dish:
-		Filename: tamradr_a.shp
-		Length: *
-		Tick: 200
-	damaged-idle-dish:
-		Filename: tamradr_a.shp
-		Length: *
-		Tick: 240
-	make:
-		Filename: tamradrmk.shp
-		Length: 17
-	icon:
-		Filename: tsgdiradaricon.shp
-		Offset: 0, 0
-
-tsgttech:
-	Inherits: ^WithBuildingBib2
-	Defaults:
-		Filename: tsgttech.shp
-		Offset: -12, -30, 30
-	idle:
-		Filename: tsgttech.shp
-		ShadowStart: 3
-	damaged-idle:
-		Filename: tsgttech.shp
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Filename: tsgttech.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	idle-lights:
-		Filename:  tsgttech_a.shp
-		Length: 8
-		Tick: 200
-	damaged-idle-lights:
-		Filename:  tsgttech_a.shp
-		Start: 8
-		Length: 8
-		Tick: 240
-	make:
-		Filename: tsgttechmk.shp
-	icon:
-		Filename:  tstechicon.png
-		Offset: 0, 0
-
-tsfgttech:
-	Inherits: ^WithBuildingBib2
-	Defaults:
-		Filename: tamtech.shp
-		Offset: -12, -30, 30
-	idle:
-		Filename: tamtech.shp
-		ShadowStart: 2
-	damaged-idle:
-		Filename: tamtech.shp
-		Start: 1
-		ShadowStart: 2
-	dead:
-		Filename: tamtech.shp
-		Start: 2
-		ShadowStart: 2
-		Tick: 400
-	idle-lights:
-		Filename:  tamtech_a.shp
-		Length: *
-		Tick: 200
-	damaged-idle-lights:
-		Filename:  tamtech_a.shp
-		Length: *
-		Tick: 240
-	make:
-		Filename: tamtechmk.shp
-	icon:
-		Filename:  tstechicon.png
-		Offset: 0, 0
-
-# gtsand:
-# 	Defaults:
-# 		Offset: 0, -12, 12
-# 		UseTilesetCode: true
-# 		DepthSprite: isodepth.shp
-# 	idle:
-# 		Length: 16
-# 		ShadowStart: 32
-# 	damaged-idle:
-# 		Start: 16
-# 		Length: 16
-# 		ShadowStart: 48
-# 	icon: sbagicon
-# 		Offset: 0, 0
-# 		UseTilesetCode: false
-# 		-DepthSprite:
-
-# gtwall:
-# 	Defaults:
-# 		Offset: 0, -12, 12
-# 		UseTilesetCode: true
-# 		DepthSprite: isodepth.shp
-# 	idle:
-# 		Length: 16
-# 		ShadowStart: 48
-# 	damaged-idle:
-# 		Start: 16
-# 		Length: 16
-# 		ShadowStart: 64
-# 	critical-idle:
-# 		Start: 32
-# 		Length: 16
-# 		ShadowStart: 80
-# 	icon: wallicon
-# 		Offset: 0, 0
-# 		UseTilesetCode: false
-# 		-DepthSprite:
-
-# gtgtte_a:
-# 	Defaults:
-# 		Offset: -24, -24, 24
-# 		DepthSpriteOffset: -24, 0
-# 		UseTilesetCode: true
-# 		DepthSprite: isodepth.shp
-# 	idle:
-# 		Length: 10
-# 		ShadowStart: 21
-# 	open:
-# 		Start: 9
-# 		ShadowStart: 30
-# 		Offset: -24, -24, 1
-# 		ZRamp: 1
-# 		-DepthSprite:
-# 	damaged-idle:
-# 		Start: 10
-# 		Length: 10
-# 		ShadowStart: 31
-# 	damaged-open:
-# 		Start: 19
-# 		ShadowStart: 40
-# 		Offset: -24, -24, 1
-# 		ZRamp: 1
-# 		-DepthSprite:
-# 	dead:
-# 		Start: 20
-# 		Tick: 400
-# 		ShadowStart: 41
-# 	emp-overlay: emp_fx01
-# 		Length: *
-# 		Offset: 0, 0, 25
-# 		UseTilesetCode: false
-# 		ZOffset: 512
-# 		BlendMode: Additive
-# 		-DepthSprite:
-# 	icon: gtteicon
-# 		Offset: 0, 0
-# 		UseTilesetCode: false
-# 		-DepthSprite:
-
-# gtgtte_b:
-# 	Defaults:
-# 		Offset: 24, -24, 24
-# 		DepthSpriteOffset: 24, 0
-# 		UseTilesetCode: true
-# 		DepthSprite: isodepth.shp
-# 	idle:
-# 		Length: 10
-# 		ShadowStart: 21
-# 	open:
-# 		Start: 9
-# 		ShadowStart: 30
-# 		Offset: 24, -24, 1
-# 		ZRamp: 1
-# 		-DepthSprite:
-# 	damaged-idle:
-# 		Start: 10
-# 		Length: 10
-# 		ShadowStart: 31
-# 	damaged-open:
-# 		Start: 19
-# 		ShadowStart: 40
-# 		Offset: 24, -24, 1
-# 		ZRamp: 1
-# 		-DepthSprite:
-# 	dead:
-# 		Start: 20
-# 		Tick: 400
-# 		ShadowStart: 41
-# 	emp-overlay: emp_fx01
-# 		Length: *
-# 		Offset: 0, 0, 25
-# 		UseTilesetCode: false
-# 		ZOffset: 512
-# 		BlendMode: Additive
-# 		-DepthSprite:
-# 	icon: gtt2icon
-# 		Offset: 0, 0
-# 		UseTilesetCode: false
-# 		-DepthSprite:
-
-# ntgtte_a:
-# 	Defaults:
-# 		Offset: -24, -24, 24
-# 		DepthSpriteOffset: -24, 0
-# 		UseTilesetCode: true
-# 		Tick: 80
-# 		DepthSprite: isodepth.shp
-# 	idle:
-# 		Length: 7
-# 		ShadowStart: 15
-# 	damaged-idle:
-# 		Start: 7
-# 		Length: 7
-# 		ShadowStart: 22
-# 	open:
-# 		Start: 6
-# 		ShadowStart: 21
-# 		Offset: -24, -24, 1
-# 		ZRamp: 1
-# 		-DepthSprite:
-# 	damaged-idle:
-# 		Start: 7
-# 		Length: 7
-# 		ShadowStart: 22
-# 	damaged-open:
-# 		Start: 13
-# 		ShadowStart: 28
-# 		Offset: -24, -24, 1
-# 		ZRamp: 1
-# 		-DepthSprite:
-# 	dead:
-# 		Start: 14
-# 		Tick: 400
-# 		ShadowStart: 29
-# 	emp-overlay: emp_fx01
-# 		Length: *
-# 		Offset: 0, 0, 25
-# 		UseTilesetCode: false
-# 		ZOffset: 512
-# 		BlendMode: Additive
-# 		-DepthSprite:
-# 	icon: ngtticon
-# 		Offset: 0, 0
-# 		UseTilesetCode: false
-# 		-DepthSprite:
-
-# ntgtte_b:
-# 	Defaults:
-# 		Offset: 24, -24, 24
-# 		DepthSpriteOffset: 24, 0
-# 		UseTilesetCode: true
-# 		DepthSprite: isodepth.shp
-# 		Tick: 80
-# 	idle:
-# 		Length: 7
-# 		ShadowStart: 15
-# 	open:
-# 		Start: 6
-# 		ShadowStart: 21
-# 		Offset: 24, -24, 1
-# 		ZRamp: 1
-# 		-DepthSprite:
-# 	damaged-idle:
-# 		Start: 7
-# 		Length: 7
-# 		ShadowStart: 22
-# 	damaged-open:
-# 		Start: 13
-# 		ShadowStart: 28
-# 		Offset: 24, -24, 1
-# 		ZRamp: 1
-# 		-DepthSprite:
-# 	dead:
-# 		Start: 14
-# 		Tick: 400
-# 		ShadowStart: 29
-# 	emp-overlay: emp_fx01
-# 		Length: *
-# 		Offset: 0, 0, 25
-# 		UseTilesetCode: false
-# 		ZOffset: 512
-# 		BlendMode: Additive
-# 		-DepthSprite:
-# 	icon: ngt2icon
-# 		Offset: 0, 0
-# 		UseTilesetCode: false
-# 		-DepthSprite:
-
-# ntpost:
-# 	Defaults:
-# 		Offset: 0, -12, 13
-# 		UseTilesetCode: true
-# 		DepthSprite: isodepth.shp
-# 	idle:
-# 		Start: 0
-# 		ShadowStart: 3
-# 	damaged-idle:
-# 		Start: 1
-# 		ShadowStart: 4
-# 	lights: ntpost_b
-# 		Start: 0
-# 		Length: 7
-# 		ShadowStart: 14
-# 		Tick: 80
-# 	damaged-lights: ntpost_b
-# 		Start: 7
-# 		Length: 7
-# 		ShadowStart: 21
-# 		Tick: 80
-# 	chainoflights: ntpost_a
-# 		Start: 0
-# 		Length: 12
-# 		Tick: 80
-# 	damaged-chainoflights: ntpost_a
-# 		Start: 12
-# 		Length: 12
-# 		Tick: 80
-# 	dead:
-# 		Start: 2
-# 		Tick: 400
-# 		ShadowStart: 5
-# 	make: ntpostmk
-# 		Start: 0
-# 		Length: 12
-# 		ShadowStart: 12
-# 	emp-overlay: emp_fx01
-# 		Length: *
-# 		Offset: 0, 0, 25
-# 		UseTilesetCode: false
-# 		ZOffset: 512
-# 		BlendMode: Additive
-# 		-DepthSprite:
-# 	icon: lasricon
-# 		Offset: 0, 0
-# 		UseTilesetCode: false
-# 		-DepthSprite:
-
-# ntfnce:
-# 	Defaults:
-# 		Offset: 0, -12, 13
-# 		UseTilesetCode: true
-# 		DepthSprite: isodepth.shp
-# 	idle:
-# 		Length: 1
-# 	disabled-x:
-# 		Start: 8
-# 		Length: 1
-# 		Offset: 0, -12, 1
-# 		ZRamp: 1
-# 		-DepthSprite:
-# 	disabled-y:
-# 		Start: 12
-# 		Length: 1
-# 		Offset: 0, -12, 1
-# 		ZRamp: 1
-# 		-DepthSprite:
-# 	entbled-x:
-# 		Frames: 3,3,1,1,3,3,1,1,2,2,0,0,2,2,0,0
-# 		Length: 16
-# 	entbled-y:
-# 		Frames: 7,5,7,5,6,4,6,4,7,5,7,5,6,4,6,4
-# 		Length: 16
-# 	emp-overlay: emp_fx01
-# 		Length: *
-# 		Offset: 0, 0, 25
-# 		UseTilesetCode: false
-# 		ZOffset: 512
-# 		BlendMode: Additive
-# 		-DepthSprite:
-
-# ntwall:
-# 	Defaults:
-# 		Offset: 0, -12, 12
-# 		UseTilesetCode: true
-# 		DepthSprite: isodepth.shp
-# 	idle:
-# 		Length: 16
-# 		ShadowStart: 48
-# 	damaged-idle:
-# 		Start: 16
-# 		Length: 16
-# 		ShadowStart: 64
-# 	critical-idle:
-# 		Start: 32
-# 		Length: 16
-# 		ShadowStart: 80
-# 	icon: nwalicon
-# 		Offset: 0, 0
-# 		UseTilesetCode: false
-# 		-DepthSprite:
-
-# gticbm:
-# 	Defaults:
-# 		Offset: 0, -12, 12
-# 		UseTilesetCode: true
-# 		DepthSprite: isodepth.shp
-# 		DepthSpriteOffset: -12, 6
-# 	idle:
-# 		ShadowStart: 3
-# 	damaged-idle:
-# 		Start: 1
-# 		ShadowStart: 4
-# 	emp-overlay: emp_fx01
-# 		Length: *
-# 		Offset: 0, 0, 13
-# 		UseTilesetCode: false
-# 		ZOffset: 512
-# 		BlendMode: Additive
-# 		-DepthSprite:
-# 	make: gticbmmk
-# 		Length: 30
-# 		ShadowStart: 30
-
-tsntobel:
-	Defaults:
-		Filename: tsntobel.shp
-		Offset: 0, -24, 24
-	idle:
-		Filename: tsntobel.shp
-		ShadowStart: 3
-	damaged-idle:
-		Filename: tsntobel.shp
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Filename: tsntobel.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	active:
-		Filename: tsntobel_b.shp
-		Length: 12
-		Tick: 200
-		ZOffset: 2
-	idle-lights:
-		Filename: tsntobel_a.shp
-		Length: 12
-		Tick: 80
-	make:
-		Filename: tsntobelmk.shp
-	icon: obliicnh.tem
-		AddExtension: False
-		Offset: 0,0
-
-# ntlasr:
-# 	Defaults:
-# 		Offset: 0, -12, 12
-# 		UseTilesetCode: true
-# 		DepthSprite: isodepth.shp
-# 	idle:
-# 		ShadowStart: 3
-# 	damaged-idle:
-# 		Start: 1
-# 		ShadowStart: 4
-# 	dead:
-# 		Start: 2
-# 		ShadowStart: 5
-# 		Tick: 400
-# 	make: ntlasrmk
-# 		Length: 21
-# 		ShadowStart: 21
-# 	emp-overlay: emp_fx01
-# 		Length: *
-# 		Offset: 0, 0, 13
-# 		UseTilesetCode: false
-# 		ZOffset: 512
-# 		BlendMode: Additive
-# 		-DepthSprite:
-# 	icon: plticon
-# 		Offset: 0, 0
-# 		UseTilesetCode: false
-# 		-DepthSprite:
-
-# ntsam:
-# 	Defaults:
-# 		Offset: 0, -12, 1
-# 		UseTilesetCode: true
-# 	idle:
-# 		ShadowStart: 3
-# 		ZRamp: 1
-# 	damaged-idle:
-# 		Start: 1
-# 		ShadowStart: 4
-# 		ZRamp: 1
-# 	dead:
-# 		Start: 2
-# 		ShadowStart: 5
-# 		Tick: 400
-# 		DepthSprite: isodepth.shp
-# 	turret: gtctwr_d
-# 		Facings: 32
-# 		DepthSprite: isodepth.shp
-# 		Offset: 0, 0, -12
-# 	make: ntsammk
-# 		Length: 8
-# 		ShadowStart: 8
-# 		DepthSprite: isodepth.shp
-# 		Offset: 0, -12, 12
-# 	emp-overlay: emp_fx01
-# 		Length: *
-# 		Offset: 0, 0, 2
-# 		UseTilesetCode: false
-# 		ZOffset: 512
-# 		BlendMode: Additive
-# 	icon: tssam2icon
-# 		Offset: 0, 0
-# 		UseTilesetCode: false
-
-# ntpuls.gdi:
-# 	Defaults: ntpuls
-# 		Offset: 0, -24, 24
-# 		UseTilesetCode: true
-# 		DepthSprite: isodepth.shp
-# 	idle:
-# 		ShadowStart: 3
-# 	damaged-idle:
-# 		Start: 1
-# 		ShadowStart: 4
-# 	dead:
-# 		Start: 2
-# 		ShadowStart: 5
-# 		Tick: 400
-# 	turret: ntpuls_a
-# 		Facings: 32
-# 	make: ntpulsmk
-# 		Length: 20
-# 		ShadowStart: 20
-# 	emp-overlay: emp_fx01
-# 		Length: *
-# 		Offset: 0, 0, 25
-# 		UseTilesetCode: false
-# 		ZOffset: 512
-# 		BlendMode: Additive
-# 		-DepthSprite:
-# 	icon: sidebar-gdi|empicon
-# 		Offset: 0, 0
-# 		UseTilesetCode: false
-# 		-DepthSprite:
-
-# ntpuls.nod:
-# 	Defaults: ntpuls
-# 		Offset: 0, -24, 24
-# 		UseTilesetCode: true
-# 		DepthSprite: isodepth.shp
-# 	idle:
-# 		ShadowStart: 3
-# 	damaged-idle:
-# 		Start: 1
-# 		ShadowStart: 4
-# 	dead:
-# 		Start: 2
-# 		ShadowStart: 5
-# 		Tick: 400
-# 	turret: ntpuls_a
-# 		Facings: 32
-# 	make: ntpulsmk
-# 		Length: 20
-# 		ShadowStart: 20
-# 	emp-overlay: emp_fx01
-# 		Length: *
-# 		Offset: 0, 0, 25
-# 		UseTilesetCode: false
-# 		ZOffset: 512
-# 		BlendMode: Additive
-# 		-DepthSprite:
-# 	icon: sidebar-nod|empicon
-# 		Offset: 0, 0
-# 		UseTilesetCode: false
-# 		-DepthSprite:
-
-tsntstlh:
-	Defaults:
-		Filename: tsntstlh.shp
-	idle:
-		Filename: tsntstlh.shp
-		ShadowStart: 3
-	damaged-idle:
-		Filename: tsntstlh.shp
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Filename: tsntstlh.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	pulse:
-		Filename: tsntstlh_a.shp
-		Length: 4
-		Tick: 480
-	damaged-pulse:
-		Filename: tsntstlh_a.shp
-		Start: 4
-		Length: 4
-		Tick: 480
-	make:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: clckicon.shp
-		Offset: 0, 0
-		UseTilesetCode: false
-
-tsgthpad:
-	Defaults:
-		Filename: tsgthpad.shp
-		Offset: 0, -24, 1
-	idle:
-		Filename: tsgthpad.shp
-		ShadowStart: 3
-		ZOffset: -1c511
-		Offset: 0, -24, 8
-	damaged-idle:
-		Filename: tsgthpad.shp
-		Start: 1
-		ShadowStart: 4
-		ZOffset: -1c511
-		Offset: 0, -24, 8
-	dead:
-		Filename: tsgthpad.shp
-		Start: 2
-		ShadowStart: 5
-		ZOffset: -1c511
-		Tick: 400
-		Offset: 0, -24, 8
-	idle-platform:
-		Filename: tsgthpadbb.shp
-		ShadowStart: 3
-		ZOffset: -1c511
-	damaged-idle-platform:
-		Filename: tsgthpadbb.shp
-		Start: 1
-		ShadowStart: 4
-		ZOffset: -1c511
-	dead-platform:
-		Filename: tsgthpadbb.shp
-		Start: 2
-		ShadowStart: 5
-		ZOffset: -1c511
-		Tick: 400
-	idle-lights:
-		Filename: tsgthpad_a.shp
-		Length: 8
-		Tick: 100
-		Offset: 0, -36
-		ZOffset: -1c511
-	damaged-idle-lights:
-		Filename: tsgthpad_a.shp
-		Start: 8
-		Length: 8
-		Tick: 100
-		Offset: 0, -36
-		ZOffset: -1c511
-	make:
-		Filename: tsgthpadmk.shp
-	icon:
-		Filename: tshpadicon.shp
-		Offset: 0, 0
-		UseTilesetCode: false
-
-tsnthpad:
-	Defaults:
-		Filename: tsnthpad.shp
+		Scale: 1.25
+		Filename: forgotten_helipad.shp
 		Offset: 0, -24, 0
 	idle:
-		Filename: tsnthpad.shp
+		Filename: forgotten_helipad.shp
+		ShadowStart: 2
+		ZOffset: -1c511
+		# Offset: 0, -24, 3
+	damaged-idle:
+		Filename: forgotten_helipad.shp
+		Start: 1
 		ShadowStart: 3
 		ZOffset: -1c511
-		Offset: 0, -24, 3
-	damaged-idle:
-		Filename: tsnthpad.shp
-		Start: 1
-		ShadowStart: 4
-		ZOffset: -1c511
-		Offset: 0, -24, 3
+		# Offset: 0, -24, 3
 	dead:
-		Filename: tsnthpad.shp
-		Start: 2
-		ShadowStart: 5
+		Filename: forgotten_helipad.shp
+		Start: 1
+		ShadowStart: 3
 		ZOffset: -1c511
 		Tick: 400
-		Offset: 0, -24, 3
+		# Offset: 0, -24, 3
 	idle-platform:
-		Filename: tsnthpadbb.shp
+		Scale: 1
+		Filename: ts_nod_helipad_bib.shp
 		ShadowStart: 3
 		ZOffset: -1c511
 	damaged-idle-platform:
-		Filename: tsnthpadbb.shp
-		Start: 1
-		ShadowStart: 4
-		ZOffset: -1c511
-	dead-platform:
-		Filename: tsnthpadbb.shp
-		Start: 2
-		ShadowStart: 5
-		ZOffset: -1c511
-		Tick: 400
-	idle-lights:
-		Filename: tsnthpad_a.shp
-		Length: 46
-		ZOffset: -1c511
-		Tick: 100
-	damaged-idle-lights:
-		Filename: tsnthpad_a.shp
-		Start: 46
-		Length: 46
-		Tick: 100
-		ZOffset: -1c511
-	make:
-		Filename: tsnthpadmk.shp
-	icon:
-		Filename: tshpad2icon.shp
-		Offset: 0, 0
-		UseTilesetCode: false
-
-tsproc.gdi:
-	Inherits: ^WithBuildingBib2
-	Defaults:
-		Scale: 1.5
-		Filename: tsntrefn.shp
-		Offset: -12, -21, 20
-	idle:
-		ShadowStart: 3
-	damaged-idle:
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	make:
-	unload-overlay:
-		Filename: tsntrefn_a.shp
-		Length: *
-		ZOffset: 1024
-	idle-redlights:
-		Filename: tsntrefn_c.shp
-		Length: 16
-		Tick: 120
-	damaged-idle-redlights:
-		Filename: tsntrefn_c.shp
-		Length: 16
-		Tick: 120
-	bib2:
-		Filename: tsntrefnbb.shp
-		Length: 1
-		ZOffset: -1024
-		Offset: -12, -21, 5
-		ZRamp: 1
-	damaged-bib2:
-		Filename: tsntrefnbb.shp
-		Start: 1
-		ZOffset: -1024
-		Offset: -12, -21, 5
-		ZRamp: 1
-	dead-bib2:
-		Filename: tsntrefnbb.shp
-		Start: 2
-		ZOffset: -1024
-		Offset: -12, -21, 5
-	icon:
-		Filename: tsrefineryicon.shp
-		Offset: 0, 0
-
-tsprocmutant:
-	Inherits: ^WithBuildingBib2
-	Defaults:
-		Scale: 1.5
-		Filename: tamref.shp
-		Offset: -12, -21, 20
-	idle:
-		ShadowStart: 3
-	damaged-idle:
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	make:
-		Filename: tamrefmk.shp
-	unload-overlay:
-		Filename: tamrefbb.shp
-		Length: *
-		ZOffset: 1024
-	idle-redlights:
-		Filename: tamref_c.shp
-		Length: 16
-		Tick: 120
-		Reverses: True
-	damaged-idle-redlights:
-		Filename: tamref_c.shp
-		Length: 16
-		Tick: 120
-		Reverses: True
-	bib2:
-		Filename: tamref_bb.shp
-		Length: 1
-		ZOffset: -1024
-		Offset: -12, -21, 5
-		ZRamp: 1
-	damaged-bib2:
-		Filename: tamref_bb.shp
-		Start: 1
-		ZOffset: -1024
-		Offset: -12, -21, 5
-		ZRamp: 1
-	dead-bib2:
-		Filename: tamref_bb.shp
-		Start: 2
-		ZOffset: -1024
-		Offset: -12, -21, 5
-	icon:
-		Filename: tsrefineryicon.shp
-		Offset: 0, 0
-
-tsproc.nod:
-	Inherits: tsproc.gdi
-	icon:
-		Filename: tsrefineryicon2.shp
-		Offset: 0, 0
-
-tsntwast:
-	Inherits: ^WithBuildingBib2
-	Defaults:
-		Filename: tsntwast.shp
-		Offset: 0, -36, 24
-	idle:
-		ShadowStart: 3
-	damaged-idle:
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	make:
-	idle-glow:
-		Filename: tsntwast_a.shp
-		Length: 20
-		ShadowStart: 40
-		Tick: 120
-	damaged-idle-glow:
-		Filename: tsntwast_a.shp
-		Start: 20
-		Length: 20
-		ShadowStart: 60
-		Tick: 120
-	idle-lights:
-		Filename: tsntwast_b.shp
-		Length: 16
-		Tick: 120
-	damaged-idle-lights:
-		Filename: tsntwast_b.shp
-		Start: 16
-		Length: 16
-		Tick: 120
-	bibb:
-		Filename: tsntwastbb.shp
-		ZOffset: -1024
-		Offset: 0, -36, 3
-	damaged-bibb:
-		Filename: tsntwastbb.shp
-		Start: 1
-		ZOffset: -1024
-		Offset: 0, -36, 3
-	dead-bibb:
-		Filename: tsntwastbb.shp
-		Start: 2
-		ZOffset: -1024
-		Offset: 0, -36, 3
-	unload-overlay:
+		Scale: 1
 		Filename: invisibleitem.shp
+	dead-platform:
+		Scale: 1
+		Filename: invisibleitem.shp
+	idle-lights:
+		Filename: forgotten_helipad_b.shp
+		Start: 8
+		Tick: 100
+		ZOffset: -1c511
+	active:
+		Filename: forgotten_helipad_a.shp
+		Length: 28
+		ZOffset: -1c511
+		Tick: 100
+	damaged-active:
+		Filename: forgotten_helipad_a.shp
+		Length: 28
+		ZOffset: -1c511
+		Tick: 100
+	damaged-idle-lights:
+		Filename: forgotten_helipad_b.shp
+		Start: 8
+		Tick: 100
+		ZOffset: -1c511
+	make:
+		Filename: ts_nod_helipad_make.shp
 	icon:
-		Filename: tstibwasticon.shp
+		Filename: forgotten_helipad_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
 tsgtsilo.gdi:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: tsgtsilo.shp
-		Offset: 0, -12, 24
+		Scale: 1.25
+		Filename: ts_nod_silo_tsgtsilo.shp
+		Offset: 4, -24, 24
 	idle:
 		Filename: tsgtsilo_a.shp
 	damaged-idle:
@@ -2891,16 +539,18 @@ tsgtsilo.gdi:
 		Start: 4
 		Length: 4
 	idle-underlay:
-		Filename: tsgtsilo.shp
+		Scale: 1
+		Filename: ts_nod_silo_tsgtsilo.shp
 		ShadowStart: 3
 		ZOffset: -512
 	damaged-idle-underlay:
-		Filename: tsgtsilo.shp
+		Scale: 1
+		Filename: ts_nod_silo_tsgtsilo.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -512
 	dead:
-		Filename: tsgtsilo.shp
+		Filename: ts_nod_silo_tsgtsilo.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -512
@@ -2915,145 +565,172 @@ tsgtsilo.gdi:
 		Length: 16
 		Tick: 120
 	make:
-		Filename: tsgtsilo.shp
+		Filename: ts_nod_silo_tsgtsilo.shp
 	icon:
 		Filename: tssilo2icon.shp
 		Offset: 0, 0
 		UseTilesetCode: false
 
+#Alternative Silo for Nod, Pyramid
+
 tsgtsilo.nod:
-	Inherits: tsgtsilo.gdi
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Scale: 1.25
+		Filename: ts_nod_silo_tsgtsilo.shp
+		Offset: 4, -24, 24
+	idle:
+		Filename: ts_nod_silo.shp
+	damaged-idle:
+		Filename: ts_nod_silo.shp
+		Start: 1
+	stages:
+		Filename: ts_nod_silo_s.shp
+		Length: 4
+	damaged-stages:
+		Filename: ts_nod_silo_sd.shp
+		Length: 4
+	idle-underlay:
+		Scale: 1
+		Filename: ts_nod_silo_b.shp
+		Length: 20
+		ZOffset: -512
+	damaged-idle-underlay:
+		Scale: 1
+		Filename: ts_nod_silo_b.shp
+		Length: 20
+		ZOffset: -512
+	dead:
+		Filename: ts_nod_silo.shp
+		Start: 2
+		ShadowStart: 5
+		ZOffset: -512
+		Tick: 400
+	idle-lights:
+		Filename: ts_nod_silo_a.shp
+		Length: 20
+		Tick: 120
+	damaged-idle-lights:
+		Filename: ts_nod_silo_ad.shp
+		Length: 20
+		Tick: 120
+	idle-window:
+		Filename: ts_nod_silo_w.shp
+		Length: 3
+		Tick: 120
+	damaged-idle-window:
+		Filename: ts_nod_silo_wd.shp
+		Length: 3
+		Tick: 120
+	make:
+		Filename: ts_nod_silo_make.shp
 	icon:
-		Filename: tssiloicon.shp
+		Filename: ts_nod_silo_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
+#Classic Silo of Nod fits better in CABAL, because no logo
+
 tsgtdept:
 	Defaults:
-		Filename: tsgtdept.shp
-		Offset: 0, -16, 1
+		Scale: 1.5
+		Filename: ts_gdi_servicedepot_cabal.shp
+		Offset: 8, -32, 1
 	idle:
-		Filename: tsgtdept.shp
+		Filename: ts_gdi_servicedepot_cabal.shp
 		ShadowStart: 3
-		Offset: 0, -16, 12
+		# Offset: 0, -16, 12
 	damaged-idle:
-		Filename: tsgtdept.shp
+		Filename: ts_gdi_servicedepot_cabal.shp
 		Start: 1
 		ShadowStart: 4
-		Offset: 0, -16, 12
+		# Offset: 0, -16, 12
 	dead:
-		Filename: tsgtdept.shp
+		Filename: ts_gdi_servicedepot_cabal.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
-		Offset: 0, -16, 12
+		# Offset: 0, -16, 12
 	ground:
-		Filename: tsgtdeptbb.shp
+		Scale: 1
+		Filename: ts_gdi_servicedepot_cabal_bib.shp
 		ShadowStart: 3
 		ZOffset: -1c611
 	damaged-ground:
-		Filename: tsgtdeptbb.shp
+		Scale: 1
+		Filename: ts_gdi_servicedepot_cabal_bib.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1c611
 	dead-ground:
-		Filename: tsgtdeptbb.shp
+		Scale: 1
+		Filename: ts_gdi_servicedepot_cabal_bib.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -1c611
 		Tick: 400
 	idle-light:
-		Filename: tsgtdept_b.shp
+		Filename: ts_gdi_servicedepot_cabal_b.shp
 		Length: 7
 		Tick: 120
 	damaged-idle-light:
-		Filename: tsgtdept_b.shp
+		Filename: ts_gdi_servicedepot_cabal_b.shp
 		Start: 7
 		Length: 7
 		Tick: 120
 	circuits:
-		Filename: tsgtdept_a.shp
+		Filename: ts_gdi_servicedepot_cabal_a.shp
 		Length: 5
 		ZOffset: -1c511
 		Tick: 120
 	damaged-circuits:
-		Filename: tsgtdept_a.shp
+		Filename: ts_gdi_servicedepot_cabal_a.shp
 		Start: 5
 		Length: 5
 		ZOffset: -1c511
 		Tick: 120
 	crane-start:
-		Filename: tsgtdept_c.shp
+		Filename: ts_gdi_servicedepot_cabal_c.shp
 		Length: 6
-		Offset: 0, -16, 12
+		# Offset: 0, -16, 12
 		Tick: 60
 	crane-loop:
-		Filename: tsgtdept_c.shp
+		Filename: ts_gdi_servicedepot_cabal_c.shp
 		Start: 6
 		Length: 5
-		Offset: 0, -16, 12
+		# Offset: 0, -16, 12
+		Tick: 60
+	active:
+		Filename: ts_gdi_servicedepot_cabal_c.shp
+		Start: 6
+		Length: 5
+		# Offset: 0, -16, 12
+		Tick: 60
+	damaged-active:
+		Filename: ts_gdi_servicedepot_cabal_c.shp
+		Start: 6
+		Length: 5
+		# Offset: 0, -16, 12
 		Tick: 60
 	crane-end:
-		Filename: tsgtdept_c.shp
+		Filename: ts_gdi_servicedepot_cabal_c.shp
 		Start: 10
 		Length: 6
-		Offset: 0, -16, 12
+		# Offset: 0, -16, 12
 		Tick: 60
 	platform:
-		Filename: tsgtdept_d.shp
+		Scale: 1
+		Filename: ts_gdi_servicedepot_cabal_d.shp
 		ZOffset: -1c511
 	damaged-platform:
-		Filename: tsgtdept_d.shp
+		Scale: 1
+		Filename: ts_gdi_servicedepot_cabal_d.shp
 		Start: 2
 		ZOffset: -1c511
 	make:
-		Filename: tsgtdeptmk.shp
+		Filename: ts_gdi_servicedepot_cabal_make.shp
 	icon:
-		Filename: tsdepticon.png
-		Offset: 0, 0
-
-tsntmisl:
-	Inherits: ^WithBuildingBib3
-	Defaults:
-		Filename: tsntmisl.shp
-		Offset: 0, -24, 24
-	idle:
-		Filename: tsntmisl.shp
-	damaged-idle:
-		Filename: tsntmisl.shp
-		Start: 1
-	dead:
-		Filename: tsntmisl.shp
-		Start: 2
-		Tick: 400
-	idle-lights:
-		Filename: tsntmisl_b.shp
-		Length: 10
-		Tick: 120
-	damaged-idle-lights:
-		Filename: tsntmisl_b.shp
-		Start: 10
-		Length: 10
-		Tick: 120
-	make:
-		Filename: tsntmislmk.shp
-	active:
-		Filename: tsntmisl_a.shp
-		Length: 10
-		Tick: 80
-	damaged-active:
-		Filename: tsntmisl_a.shp
-		Start: 10
-		Length: 10
-		Tick: 80
-	smoke:
-		Filename: invisibleitem.shp
-	up:
-		Filename: invisibleitem.shp
-	down:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tsmissilesiloicon.shp
+		Filename: ts_gdi_servicedepot_icon.png
 		Offset: 0, 0
 
 tsnodmmsil:
@@ -3061,117 +738,11 @@ tsnodmmsil:
 		Filename: glgadfly_missile.shp
 		Facings: -32
 
-tsgtplug:
-	Inherits: ^WithBuildingBib3
-	Defaults:
-		Filename: tsgtplug.shp
-		Offset: 6,-21, 15
-	idle:
-		Filename: tsgtplug.shp
-		ShadowStart: 3
-	damaged-idle:
-		Filename: tsgtplug.shp
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Filename: tsgtplug.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	idle-dish:
-		Filename: tsgtplug_a.shp
-		Length: 20
-		Tick: 120
-	damaged-idle-dish:
-		Filename: tsgtplug_a.shp
-		Start: 20
-		Length: 20
-		Tick: 120
-	idle-lights:
-		Filename: tsgtplug_b.shp
-		Length: 20
-		Tick: 120
-	damaged-idle-lights:
-		Filename: tsgtplug_b.shp
-		Start: 20
-		Length: 20
-		Tick: 120
-	idle-strip:
-		Filename: tsgtplug_c.shp
-		Length: 8
-		Tick: 120
-	damaged-idle-strip:
-		Filename: tsgtplug_c.shp
-		Start: 8
-		Length: 8
-		Tick: 120
-	idle-ioncannona:
-		Filename: tsgtplug_f.shp
-		Length: 15
-		Tick: 120
-		Reverses: true
-		Offset: -12, -21, 15
-	idle-ioncannonb:
-		Filename: tsgtplug_f.shp
-		Length: 15
-		Reverses: true
-		Tick: 120
-	idle-hunterseekera:
-		Filename: tsgtplug_e.shp
-		Length: 15
-		Tick: 120
-		Reverses: true
-		Offset: -12, -21, 15
-	idle-hunterseekerb:
-		Filename: tsgtplug_e.shp
-		Length: 15
-		Reverses: true
-		Tick: 120
-	make:
-		Filename: tsgtplugmk.shp
-	icon:
-		Filename: tsupgradecentericon.shp
-		Offset: 0, 0
-
-tsgtplug2:
-	Inherits: tsgtplug
-	icon:
-		Filename: tsioncannonuplinkicon.shp
-
-tsgtplug3:
-	Inherits: tsgtplug
-	icon:
-		Filename: tsseekcontrolicon.shp
-
-tsorca:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tsorcaicon.png
-
-tsorcab:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tsorca2icon.shp
-
-tstrnsport:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tsotrnicon.png
-
-tsscrin:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tsbansheeicon.shp
-
 tsapache:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: tsharpyicon.shp
+		Filename: ts_nod_harpy_icon.shp
 	rotor:
 		Filename: lrotor.shp
 		Length: 4
@@ -3180,33 +751,15 @@ tsapache:
 		Start: 4
 		Length: 8
 
-tsheli:
+tsfsmoker:
 	idle:
-		Filename: invisibleitem.shp
+		Filename: forgot_smoker.png
+		Facings: 64
+		Scale: 1
 	icon:
-		Filename: tsharpyicon.shp
-	rotor:
-		Filename: lrotor.shp
-		Length: 4
-	slow-rotor:
-		Filename: lrotor.shp
-		Start: 4
-		Length: 8
+		Filename: forgot_smoker_icon.png
 
-tshind:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tsharpyicon.shp
-	rotor:
-		Filename: lrotor.shp
-		Length: 4
-	slow-rotor:
-		Filename: lrotor.shp
-		Start: 4
-		Length: 8
-
-tstran:
+forgotten_chinook:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
@@ -3228,7 +781,7 @@ tstran:
 
 tsjumpjet:
 	Defaults:
-		Filename: altjumpjet.shp
+		Filename: ts_gdi_jumpjetinfantry_altjumpjet.shp
 		Tick: 80
 		Offset: 0, 0, 16
 	idle:
@@ -3327,9 +880,283 @@ tsjumpjet:
 		Tick: 80
 	# Fly through air squish on ground
 	icon:
-		Filename: tsjumpjeticon.shp
+		Offset: 0,0
+		Filename: ts_gdi_jumpjetinfantry_icon.shp
 
-# tsjumpjet2:
+forgot_conyard:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Scale: 1.25
+		Filename: forgotten_constructionyard.png
+		Offset: 0, -20, 20
+	idle:
+		Start: 64
+		Length: 8
+		Tick: 160
+	build:
+		Start: 32
+		Length: 16
+		Tick: 120
+	damaged-idle:
+		Start: 72
+		Length: 8
+		Tick: 160
+	damaged-build:
+		Start: 48
+		Length: 16
+		Tick: 120
+	dead:
+		Start: 72
+		Length: 8
+	make:
+		Length: 32
+	crane-overlay:
+		Filename: ts_gdi_constructionyard_tsgtcnst_d.shp
+		Length: 20
+		ZOffset: 1023
+	damaged-crane-overlay:
+		Filename: ts_gdi_constructionyard_tsgtcnst_d.shp
+		Length: 20
+		ZOffset: 1023
+	critical-crane-overlay:
+		Filename: ts_gdi_constructionyard_tsgtcnst_d.shp
+		Start: 20
+		Length: 20
+		ZOffset: 1023
+	idle-top:
+		Filename: invisibleitem.shp
+	damaged-idle-top:
+		Filename: invisibleitem.shp
+	idle-side:
+		Filename: ts_gdi_constructionyard_tsgtcnst_a.shp
+		Length: 10
+	damaged-idle-side:
+		Filename: ts_gdi_constructionyard_tsgtcnst_a.shp
+		Start: 10
+		Length: 10
+	idle-front:
+		Filename: ts_gdi_constructionyard_tsgtcnst_b.shp
+		Length: 10
+	damaged-idle-front:
+		Filename: ts_gdi_constructionyard_tsgtcnst_b.shp
+		Length: 10
+	icon:
+		Filename: forgotten_constructionyard_icon.png
+		Offset: 0,0
+
+forgot_power:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Scale: 1.25
+		Filename: forgotten_crystalpowerextractor.png
+	idle:
+		Start: 32
+		Length: 8
+		Tick: 160
+	damaged-idle:
+		Start: 40
+		Length: 8
+		Tick: 160
+	dead:
+		Start: 40
+		Length: 8
+		Tick: 160
+	make:
+		Length: 32
+	icon:
+		Filename: forgotten_crystalpowerextractor_icon.png
+		Offset: 0, 0, 25
+		UseTilesetCode: false
+
+forgot_barracks:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Scale: 1.25
+	idle:
+		Filename: forgotten_barracks.png
+		Start: 32
+		Length: 16
+	damaged-idle:
+		Filename: forgotten_barracks.png
+		Start: 48
+		Length: 16
+	dead:
+		Filename: forgotten_barracks.png
+		Start: 48
+		Length: 16
+	make:
+		Filename: forgotten_barracks.png
+		Length: 16
+	icon:
+		Filename: forgotten_barracks_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+forgot_refin:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Scale: 1.25
+		Offset: 0,-12
+	idle:
+		Filename: forgotten_refinery.png
+		Start: 32
+		Length: 16
+	damaged-idle:
+		Filename: forgotten_refinery.png
+		Start: 48
+		Length: 16
+	dead:
+		Filename: forgotten_refinery.png
+		Start: 48
+		Length: 16
+	make:
+		Filename: forgotten_refinery.png
+		Length: 16
+	icon:
+		Filename: forgotten_refinery_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+forgot_radar:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Scale: 1.25
+	idle:
+		Filename: forgotten_radar.png
+		Start: 32
+		Length: 16
+	damaged-idle:
+		Filename: forgotten_radar.png
+		Start: 48
+		Length: 16
+	dead:
+		Filename: forgotten_radar.png
+		Start: 48
+		Length: 16
+	make:
+		Filename: forgotten_radar.png
+		Length: 16
+	icon:
+		Filename: forgotten_radar_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+forgot_church:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Scale: 1.25
+	idle:
+		Filename: forgotten_church.png
+		Start: 32
+		Length: 16
+	damaged-idle:
+		Filename: forgotten_church.png
+		Start: 48
+		Length: 16
+	dead:
+		Filename: forgotten_church.png
+		Start: 48
+		Length: 16
+	make:
+		Filename: forgotten_church.png
+		Length: 16
+	icon:
+		Filename: forgotten_church_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+forgot_weap:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Scale: 1.25
+	idle:
+		Filename: invisibleitem.shp
+	damaged-idle:
+		Filename: invisibleitem.shp
+	idle-roof:
+		Filename: forgotten_warfactory_top.png
+		Length: 16
+		ZOffset: 512
+	damaged-idle-roof:
+		Filename: forgotten_warfactory_top.png
+		Start: 16
+		Length: 16
+		ZOffset: 512
+	dead:
+		Filename: forgotten_warfactory_bottom.png
+		Start: 1
+		ZOffset: -1024
+	build-door:
+		Filename: forgotten_warfactory_door.png
+		Length: 16
+		ZOffset: 512
+	damaged-build-door:
+		Filename: forgotten_warfactory_door.png
+		Start: 16
+		Length: 16
+		ZOffset: 512
+	make:
+		Filename: forgotten_warfactory_buildup.png
+		Length: 32
+	bib2:
+		Scale: 1
+		Filename: forgotten_warfactory_bottom.png
+		ZOffset: -1024
+	damaged-bib2:
+		Scale: 1
+		Filename: forgotten_warfactory_bottom.png
+		Start: 1
+		ZOffset: -1024
+	dead-bib2:
+		Scale: 1
+		Filename: forgotten_warfactory_bottom.png
+		Start: 1
+		ZOffset: -1024
+	icon:
+		Filename: forgotten_warfactory_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+forgot_silo:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Scale: 1.25
+		Filename: forgotten_silo.png
+	idle:
+		Filename: forgotten_silo.png
+		Start: 32
+	damaged-idle:
+		Filename: invisibleitem.shp
+	stages:
+		Filename: forgotten_silo.png
+		Start: 32
+		Length: 12
+	damaged-stages:
+		Filename: forgotten_silo.png
+		Start: 45
+		Length: 12
+	idle-underlay:
+		Scale: 1
+		Filename: forgotten_silo.png
+		Start: 32
+		ZOffset: -512
+	damaged-idle-underlay:
+		Scale: 1
+		Filename: forgotten_silo.png
+		Start: 45
+		ZOffset: -512
+	dead:
+		Filename: forgotten_silo.png
+		Start: 45
+		ZOffset: -512
+	make:
+		Filename: forgotten_silo.png
+		Length: 32
+	icon:
+		Filename: forgotten_silo_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+# ts_gdi_jumpjetinfantry:
 # 	idle: tsjumpjet
 # 		Facings: 8
 # 		Length: 6
@@ -3340,166 +1167,36 @@ tsjumpjet:
 # 		Length: 6
 # 	icon: tsjumpjeticon
 
-tsveinhole:
-	Inherits: ^WithBuildingBib3
-	idle:
-		Filename: tsveinhole.shp
-	recoil:
-		Filename: tsveinhole.shp
-		Length: 12
-	damaged-idle:
-		Filename: tsveinhole.shp
-	damaged-recoil:
-		Filename: tsveinhole.shp
-		Length: 12
-	make:
-		Filename: gunmake.shp
-		Length: *
-		Tick: 80
-	muzzle:
-		Filename: napalm2.shp
-		Length: *
-	icon:
-		Filename: gunicnh.tem
-
 tsveinsmoke:
 	idle:
 		Filename: chemball.shp
 		Length: 2
 
-tsntlasr:
-	Defaults:
-		Filename: tsntlasr.shp
-	idle:
-		Filename: tsntlasr.shp
-	damaged-idle:
-		Filename: tsntlasr.shp
-		Start: 1
-	critical-idle:
-		Filename: tsntlasr.shp
-		Start: 2
-	make:
-		Filename: invisibleitem.shp
-	dead:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: tslaserturret.shp
-		Offset: 0,0
-
-tsgtctwrmg:
-	Defaults:
-		Filename: tsgtctwr.shp
-	idle:
-		Filename: tsgtctwr.shp
-	damaged-idle:
-		Filename: tsgtctwr.shp
-		Start: 1
-	critical-idle:
-		Filename: tsgtctwr.shp
-		Start: 2
-	turret:
-		Filename: tsgtctwr_b.shp
-		Facings: 32
-		UseClassicFacings: True
-		Offset: 0,0
-	make:
-		Filename: tsgtctwrmk.shp
-		Length: 11
-		ShadowStart: 11
-	dead:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Tick: 80
-		Length: *
-	icon:
-		Filename: tsvulkturicon.shp
-		Offset: 0,0
-
-tsgtctwrrpg:
-	Defaults:
-		Filename: tsgtctwr.shp
-	idle:
-		Filename: tsgtctwr.shp
-	damaged-idle:
-		Filename: tsgtctwr.shp
-		Start: 1
-	critical-idle:
-		Filename: tsgtctwr.shp
-		Start: 2
-	turret:
-		Filename: tsgtctwr_c.shp
-		Facings: 32
-		UseClassicFacings: True
-		Offset: 0,0
-	make:
-		Filename: tsgtctwrmk.shp
-		Length: 11
-		ShadowStart: 11
-	dead:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Tick: 80
-		Length: *
-	icon:
-		Filename: tsrpgturreticon.shp
-		Offset: 0,0
-
-tsgtctwrsam:
-	Defaults:
-		Filename: tsgtctwr.shp
-	idle:
-		Filename: tsgtctwr.shp
-	damaged-idle:
-		Filename: tsgtctwr.shp
-		Start: 1
-	critical-idle:
-		Filename: tsgtctwr.shp
-		Start: 2
-	turret:
-		Filename: tsgtctwr_d.shp
-		Facings: 32
-		UseClassicFacings: True
-		Offset: 0,0
-	make:
-		Filename: tsgtctwrmk.shp
-		Length: 11
-		ShadowStart: 11
-	dead:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Tick: 80
-		Length: *
-	icon:
-		Filename: tssamturreticon.shp
-		Offset: 0,0
-
 tsntpuls:
-	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: tsntpuls.shp
+		Scale: 1.25
+		Filename: ts_gdi_empulsecannon.shp
+		Offset: 0,-12
 	idle:
-		Filename: tsntpuls.shp
+		Filename: ts_gdi_empulsecannon.shp
 	damaged-idle:
-		Filename: tsntpuls.shp
+		Filename: ts_gdi_empulsecannon.shp
 		Start: 1
 	critical-idle:
-		Filename: tsntpuls.shp
+		Filename: ts_gdi_empulsecannon.shp
 		Start: 2
 	turret:
-		Filename: tsntpuls_a.shp
+		Filename: ts_gdi_empulsecannon_a.shp
 		Facings: 32
-		Offset: 0,0
+		Offset: 0,-12
 	damaged-turret:
-		Filename: tsntpuls_a.shp
+		Filename: ts_gdi_empulsecannon_a.shp
 		Facings: 32
-		Offset: 0,0
+		Offset: 0,-12
 	critical-turret:
-		Filename: tsntpuls_a.shp
+		Filename: ts_gdi_empulsecannon_a.shp
 		Facings: 32
-		Offset: 0,0
+		Offset: 0,-12
 	make:
 		Filename: invisibleitem.shp
 	dead:
@@ -3511,27 +1208,29 @@ tsntpuls:
 	damaged-active:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: tsemcannonicon.shp
+		Filename: ts_gdi_empulsecannon_icon.shp
+		Offset: 0,0
+	icon2:
+		Filename: steelconsortium_upgrade_empcannon_icon.shp
 		Offset: 0,0
 
-tsntsam:
+forgot_juggerflak:
 	Defaults:
-		Filename: tsntsam.shp
-	idle:
-		Filename: tsntsam.shp
-	damaged-idle:
-		Filename: tsntsam.shp
-		Start: 1
-	critical-idle:
-		Filename: tsntsam.shp
-		Start: 2
-	turret:
-		Filename: tsgtctwr_d.shp
-		Facings: 32
-		UseClassicFacings: True
-		Offset: 0,16
-	make:
 		Filename: invisibleitem.shp
+	idle:
+		Filename: invisibleitem.shp
+	damaged-idle:
+		Filename: invisibleitem.shp
+	critical-idle:
+		Filename: invisibleitem.shp
+	turret:
+		Filename: forgotten_juggerflakwall.png
+		Facings: 64
+		Start: 64
+		Offset: 0,0
+	make:
+		Filename: forgotten_juggerflakwall.png
+		Length: 64
 	dead:
 		Filename: invisibleitem.shp
 	muzzle:
@@ -3539,25 +1238,8 @@ tsntsam:
 		Tick: 80
 		Length: *
 	icon:
-		Filename: tssam2icon.shp
+		Filename: forgotten_juggerflakwall_icon.png
 		Offset: 0,0
-
-# tstacticalmissile:
-# 	Defaults:
-# 		ZOffset: 1023
-# 	up: mltimisl-placeholder # TODO: use voxel
-# 	down: mltimisl-placeholder # TODO: use voxel
-# 		Start: 1
-
-# tschemtacticalmissile:
-# 	Defaults:
-# 		ZOffset: 1023
-# 	up: mltimisl-placeholder # TODO: use voxel
-# 	down: mltimisl-placeholder # TODO: use voxel
-# 		Start: 1
-
-# invisibleplane:
-# 	idle: invisibleitem
 
 tsdig:
 	idle:
@@ -3566,36 +1248,27 @@ tsdig:
 		ZOffset: 511
 		Offset: 0, 0, 24
 
-tspulsball:
-	idle:
-		Filename: tspulsball.shp
-		Length: *
-		ZOffset: 1023
-		Offset: 0, 0, 24
-
-tscloud1:
- 	idle:
-		Filename: tscloud1.shp
- 		Length: *
- 		ZOffset: 256
- 		Offset: 0, 0, 24
- 	die:
-		Filename: tscloud1d.shp
- 		Length: *
- 		ZOffset: 256
- 		Offset: 0, 0, 24
-
 # tscloud2:
 # 	Inherits: tscloud1
 # 	die: tscloud2d
 
-flameall:
+tsdroppod:
 	idle:
-		Filename: tsflameall.shp
-		Length: 19
-		Facings: -8
-		Tick: 160
-		ZOffset: 1023
+		Filename: ra2_pod.shp
+		Length: 1
+		Facing: 2
+	fade1:
+		Filename: ra2_droppod2.shp
+		Length: *
+		Tick: 200
+	fade2:
+		Filename: ra2_droppod.shp
+		Length: *
+		Tick: 200
+	ring:
+		Filename: ra2_podring.shp
+		Length: *
+		ZOffset: 256
 
 # tsdroppod:
 # 	idle:
@@ -3607,261 +1280,11 @@ flameall:
 # 		Length: *
 # 		ZOffset: 256
 
-tsobl2:
-	Defaults:
-		Filename: obl2.shp
-		Offset: 15, 0, 0
-	idle:
-		Filename: obl2.shp
-		ShadowStart: 3
-	damaged-idle:
-		Filename: obl2.shp
-		Start: 1
-		ShadowStart: 4
-	dead:
-		Filename: obl2.shp
-		Start: 2
-		ShadowStart: 5
-		Tick: 400
-	idle-overlay:
-		Filename: obl2_b.shp
-		Length: 24
-		Tick: 200
-	damaged-idle-overlay:
-		Filename: obl2_b.shp
-		Start: 24
-		Length: 24
-		Tick: 200
-	active:
-		Filename: obl2_c.shp
-		Length: 24
-		Tick: 200
-		ZOffset: 3
-	damaged-active:
-		Filename: obl2_c.shp
-		Start: 24
-		Length: 24
-		Tick: 200
-		ZOffset: 3
-	idle-lights:
-		Filename: obl2_a.shp
-		Length: 12
-		Tick: 80
-	make:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: obl2icon.shp
-		Offset: 0,0
-
-# tscrate:
-# 	idle:
-# 		ShadowStart: 1
-# 		Offset: 0, -10, 10
-
-tsdissolver:
-	stand:
-		Filename: tsdissolver.shp
-		Facings: -8
-	run:
-		Filename: tsdissolver.shp
-		Start: 8
-		Facings: -8
-		Length: 4
-		Tick: 110
-	turret:
-		Filename: tsdissolver.shp
-		Start: 40
-		Facings: -32
-	shoot:
-		Filename: tsdissolver.shp
-		Start: 72
-		Facings: -32
-	icon:
-		Filename: tsdissolvericon.shp
-
 tsdissolvereffect:
 	idle:
-		Filename: tsdissolver-weapon.shp
+		Filename: cabal_dissolver_weapon.shp
 		Length: *
 		Tick: 90
-
-tst1000:
-	Defaults:
-		Filename: tst1000.shp
-		Tick: 80
-		Offset: 0, 0, 16
-	stand:
-		Facings: -8
-		Scale: 1.5
-	liedown:
-		Facings: -8
-		Scale: 1.5
-	run:
-		Start: 8
-		Length: 8
-		Facings: 8
-		Scale: 1.5
-	idle1:
-		Start: 8
-		Length: 9
-		Facings: 8
-		Scale: 1.5
-	idle2:
-		Start: 8
-		Length: 9
-		Facings: 8
-		Scale: 1.5
-	prone-run:
-		Start: 8
-		Length: 8
-		Facings: 8
-		Scale: 1.5
-	prone-stand:
-		Facings: -8
-		Scale: 1.5
-	prone-stand2:
-		Facings: -8
-		Scale: 1.5
-	die1:
-		Filename: blue_frag3.shp
-		Length: *
-		Scale: 1.5
-	die2:
-		Filename: blue_frag3.shp
-		Length: *
-		Scale: 1.5
-	die4:
-		Filename: blue_frag3.shp
-		Length: *
-		Scale: 1.5
-	die-crushed:
-		Filename: blue_frag3.shp
-		Length: *
-		Scale: 1.5
-	standup:
-		Facings: -8
-		Scale: 1.5
-	cheer:
-		Facings: -8
-		Scale: 1.5
-	die7:
-		Filename: electro.shp
-		Length: *
-		Scale: 1.5
-	die5:
-		Filename: blue_frag3.shp
-		Length: *
-		Scale: 1.5
-	crippled-run:
-		Start: 208
-		Length: 8
-		Facings: 8
-		Tick: 333
-		Scale: 1.5
-	crippled-stand:
-		Start: 144
-		Facings: 8
-		Length: 7
-		Tick: 9999
-		Scale: 1.5
-	attack:
-		Start: 72
-		Length: 9
-		Facings: 8
-		Scale: 1.5
-	crippled-attack:
-		Start: 144
-		Length: 7
-		Facings: 8
-		Scale: 1.5
-	icon:
-		Filename: tst1000icon.shp
-
-tsarnd:
-	Inherits: ^RA2ArmedInfantry
-	Defaults:
-		Filename: arnd.shp
-	run:
-		Tick: 120
-	paradrop:
-		Start: 363
-	cheer:
-		Start: 364
-	die3:
-		Filename: blue_frag3.shp
-		Length: *
-	die:
-		Filename: blue_frag3.shp
-		Length: *
-	icon:
-		Filename: tseliminatoricon.shp
-
-
-tsioncannon:
-	Defaults:
-		Length: *
-		ZOffset: 2047
-		Tick: 35
-		IgnoreWorldTint: true
-		ZRamp: 1
-	targeting:
-		Filename: ra2_ring.shp
-	ionring:
-		Filename: tsring1.shp
-		Alpha: 0.75
-		Tick: 50
-		Scale: 1.5
-	ionbeam:
-		Filename: tsionbeam.shp
-		Offset: 0, -60, 60
-		Alpha: 0.75
-		Tick: 40
-	ionbeamstart:
-		Filename: tsionbeamstart.shp
-		Offset: 0, -60, 60
-		Alpha: 0.75
-		Tick: 30
-	ringmini2:
-		Filename: tsringmini2.shp
-		Alpha: 0.75
-		Offset: 0,-6
-		Tick: 5
-		Scale: 0.8
-
-# tsreinca:
-# 	Defaults: reinca
-# 	run:
-# 		Facings: 8
-# 		Length: 15
-# 		Tick: 120
-# 		ShadowStart: 250
-# 	stand:
-# 		Start: 120
-# 		Facings: 8
-# 		ShadowStart: 370
-# 	shoot:
-# 		Start: 130
-# 		Facings: 8
-# 		Length: 15
-# 		Tick: 115
-# 		ShadowStart: 380
-# 	muzzle: minigun
-# 		Length: 6
-# 		Facings: 8
-# 	circle: c12_circle.png
-# 		AddExtension: false
-# 		Frames: 0,0,0,0,0,0,0,0,0,1
-# 		Tick: 12
-# 		Length: 10
-# 	circle_buffed: c12_circle.png
-# 		AddExtension: false
-# 		Frames: 0,0,0,0,0,0,0,1,2,3,4,5,4,3,2,1
-# 		Length: 16
-# 		Tick: 10
-# 	icon: c12_icon
-# icon:
-# 	Defaults:
-# 		AddExtension: False
 
 tibpump:
 	Defaults:
@@ -3881,40 +1304,12 @@ tibpump:
 		Tick: 100
 	dead:
 	icon:
-		Filename: ra2caoildicon.shp
+		Filename: ts_tiberiumpump_icon.png
 		Offset: 0, 0
-		UseTilesetCode: false
 
 tibdrill:
-	# idle:
-	# 	Length: 164
-	# 	Offset: 0,0, 60
-	# 	Tick: 60
-	# 	ShadowStart: 330
-	# damaged-idle:
-	# 	Start: 164
-	# 	Length: 165
-	# 	Offset: 0,0, 60
-	# 	Tick: 60
-	# 	ShadowStart: 494
-	# anim:
-	# 	Filename: tibdrill_b.shp
-	# 	Length: 164
-	# 	Offset: 0,0, 60
-	# 	Tick: 60
-	# damaged-anim:
-	# 	Filename: tibdrill_b.shp
-	# 	Start: 164
-	# 	Length: 165
-	# 	Offset: 0,0, 60
-	# 	Tick: 60
-	# dead:
-	# 	Offset: 0,0, 60
-	# icon:
-	# 	Filename: tibdrillicon.shp
-	# 	Offset: 0, 0
 	Defaults:
-		Filename: tibdrill_a.shp
+		Filename: forgotten_tiberiumspike_a.shp
 	idle:
 		Length: 164
 		Offset: 0,0, 60
@@ -3927,12 +1322,12 @@ tibdrill:
 		Tick: 60
 		ShadowStart: 494
 	anim:
-		Filename: tibdrill_b.shp
+		Filename: forgotten_tiberiumspike_b.shp
 		Length: 164
 		Offset: 0,0, 60
 		Tick: 60
 	damaged-anim:
-		Filename: tibdrill_b.shp
+		Filename: forgotten_tiberiumspike_b.shp
 		Start: 164
 		Length: 165
 		Offset: 0,0, 60
@@ -3940,6 +1335,233 @@ tibdrill:
 	dead:
 		Offset: 0,0, 60
 	icon:
-		Filename: ra2caoildicon.shp
+		Filename: forgotten_tiberiumspike_icon.png
 		Offset: 0, 0
-		UseTilesetCode: false
+
+tsbomb:
+	idle:
+		Filename: tsbomb.shp
+		Facings: 2
+		Frames: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0
+ 		Length: 14
+ 		ZOffset: 256
+
+
+# Upgrades:
+
+seretrainingicon:
+	icon:
+		Filename: ts_gdi_upgrade_seretraining_icon.png
+
+sonicweaponryicon:
+	icon:
+		Filename: ts_gdi_upgrade_sonicweaponry_icon.png
+
+tsprojectileimprovementsicon:
+	icon:
+		Filename: ts_gdi_upgrade_projectileimprovements_icon.png
+
+fieldmaintenanceicon:
+	icon:
+		Filename: ts_gdi_upgrade_fieldmaintenance_icon.png
+
+railgunweaponryicon:
+	icon:
+		Filename: ts_gdi_upgrade_railgunweaponry_icon.png
+
+mechengineeringicon:
+	icon:
+		Filename: ts_gdi_upgrade_mechengineering_icon.shp
+
+ceramicarmoricon:
+	icon:
+		Filename: ts_gdi_upgrade_ceramicarmor_icon.png
+
+modernfirecontrolsystemsicon:
+	icon:
+		Filename: ts_gdi_upgrade_modernfirecontrolsystems_icon.png
+
+
+
+# Upgrades CABAL
+
+ts_sedan:
+	Inherits: ^RA2MachineGunMuzzle
+		Scale: 1
+	Defaults:
+		Filename: ts_sedan.png
+		Scale: 0.5
+	idle:
+		Scale: 1
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ts_trucka:
+	Inherits: ^RA2MachineGunMuzzle
+		Scale: 1
+	Defaults:
+		Filename: ts_trucka.png
+		Scale: 0.64
+	idle:
+		Scale: 1
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ts_truckb:
+	Inherits: ^RA2MachineGunMuzzle
+		Scale: 1
+	Defaults:
+		Filename: ts_truckb.png
+		Scale: 0.64
+	idle:
+		Scale: 1
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ts_bus:
+	Inherits: ^RA2MachineGunMuzzle
+		Scale: 1
+	Defaults:
+		Filename: ts_bus.png
+		Scale: 0.64
+	idle:
+		Scale: 1
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ts_pickup:
+	Inherits: ^RA2MachineGunMuzzle
+		Scale: 1
+	Defaults:
+		Filename: ts_pickup.png
+		Scale: 0.64
+	idle:
+		Scale: 1
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ts_pickupb:
+	Inherits: ^RA2MachineGunMuzzle
+		Scale: 1
+	Defaults:
+		Filename: ts_pickupb.png
+		Scale: 0.64
+	idle:
+		Scale: 1
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ts_wini:
+	Inherits: ^RA2MachineGunMuzzle
+		Scale: 1
+	Defaults:
+		Filename: ts_wini.png
+		Scale: 0.64
+	idle:
+		Scale: 1
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+mobilityspecializationicon:
+	icon:
+		Filename: ts_nod_upgrade_mobilityspecialization_icon.png
+
+tstiberiumlensesicon:
+	icon:
+		Filename: ts_nod_upgrade_tiberiumlenses_icon.png
+
+tstiberiumcoremissilesicon:
+	icon:
+		Filename: ts_nod_upgrade_tiberiumcoremissiles_icon.png
+
+tsauxiliaryweaponicon:
+	icon:
+		Filename: ts_nod_upgrade_auxiliaryweapon_icon.png
+
+infiltrationkiticon:
+	icon:
+		Filename: ts_nod_upgrade_infiltrationkit_icon.png
+
+stealthfieldsimprovementsicon:
+	icon:
+		Filename: ts_nod_upgrade_stealthfieldsimprovements_icon.png
+
+advancedtiberiumrefinementicon:
+	icon:
+		Filename: ts_nod_upgrade_advancedtiberiumrefinement_icon.png
+
+willofkaneicon:
+	icon:
+		Filename: ts_nod_upgrade_willofkane_icon.png
+
+tsgdidummyicon:
+	icon:
+		Filename: tsgdidummyicon.png
+
+genomemappingicon:
+	icon:
+		Filename: forgotten_upgrade_genomemapping_icon.png
+
+chemicalfuelicon:
+	icon:
+		Filename: forgotten_upgrade_chemicalfuel_icon.png
+
+mypeticon:
+	icon:
+		Filename: forgotten_upgrade_friendlywildlife_icon.png
+
+junkarmoricon:
+	icon:
+		Filename: forgotten_upgrade_junkarmor_icon.png
+
+tiberiumboostersicon:
+	icon:
+		Filename: forgotten_upgrade_tiberiumboosters_icon.png
+
+unityicon:
+	icon:
+		Filename: forgotten_upgrade_unity_icon.png
+
+chemicalweaponsicon:
+	icon:
+		Filename: forgotten_upgrade_chemicalweapons_icon.png
+
+tiberiumadaptabilityicon:
+	icon:
+		Filename: forgotten_upgrade_tiberiumadaptability_icon.png
+
+invisibleplane:
+	idle:
+		Filename: invisibleitem.shp
+
+ts_nod_laserfence_segment:
+	Defaults:
+		Scale: 1.25
+		Filename: tsntfence.shp
+	idle:
+		Length: 1
+	disabled-x:
+		Start: 8
+		Length: 1
+	disabled-y:
+		Start: 12
+		Length: 1
+	enabled-x:
+		Frames: 3,3,1,1,3,3,1,1,2,2,0,0,2,2,0,0
+		Length: 16
+	enabled-x-bright:
+		Frames: 3,3,1,1,3,3,1,1,2,2,0,0,2,2,0,0
+		Length: 16
+	enabled-y:
+		Frames: 7,5,7,5,6,4,6,4,7,5,7,5,6,4,6,4
+		Length: 16
+	enabled-y-bright:
+		Frames: 7,5,7,5,6,4,6,4,7,5,7,5,6,4,6,4
+		Length: 16

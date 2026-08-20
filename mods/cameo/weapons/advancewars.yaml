@@ -20,13 +20,13 @@ AWOoziumExplode:
 		Delay: 25
 		Explosions: awexplosion
 		ImpactSounds: AWExplosion2.wav
-	Warhead@6Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: corpse
 		ImpactSounds: AWSLIME3.wav
 
 AWSupport:
 	Inherits: Heal
-	Range: 2c0
+	Range: 2048
 	Report: AWCash.wav
 	ValidTargets: APCReload, Repair
 	Warhead@1Dam: SpreadDamage
@@ -39,7 +39,7 @@ AWSupport:
 	Warhead@2Con: GrantExternalCondition
 		Condition: apcreload
 		Duration: 80
-		Range: 1c0
+		Range: 1024
 		ValidRelationships: Ally
 AWSuperSupport:
 	Inherits: AWSupport
@@ -49,7 +49,7 @@ AWSuperSupport:
 
 ^AWBallisticWeapon:
 	ReloadDelay: 120
-	Range: 4c0
+	Range: 4096
 	Report: AWCannon1.wav, AWCannon2.wav
 	ValidTargets: Ground
 	InvalidTargets: Infantry
@@ -64,7 +64,7 @@ AWSuperSupport:
 			Wood: 72
 			Light: 100
 			Heavy: 80
-		ValidTargets: Vehicle, Wall
+		ValidTargets: Vehicle, wall
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Dam: SpreadDamage
 		Damage: 5000
@@ -81,7 +81,7 @@ AWSuperSupport:
 			Light: 100
 			Heavy: 80
 		ValidTargets: Ground
-		InvalidTargets: Vehicle, Wall
+		InvalidTargets: Vehicle, wall
 	Warhead@2Eff: CreateEffect
 		Explosions: awexplosion2
 		ValidTargets: Ground, Water, Air
@@ -118,7 +118,7 @@ AWFlareShell:
 
 AWBattleShipArtillery:
 	Inherits: AWArtilleryShell
-	Range: 15c0
+	Range: 15360
 	Burst: 5
 	BurstDelays: 4
 AWMinicannon:
@@ -126,7 +126,7 @@ AWMinicannon:
 	Report: AWMinicannon.wav
 	ValidTargets: Ground
 	InvalidTargets: Air
-	Range: 12c0
+	Range: 12288
 	Warhead@1Dam: SpreadDamage
 		Damage: 34000
 		Spread: 341
@@ -138,17 +138,17 @@ AWAntiTank:
 	Report: AWMegaCannon.wav
 	ValidTargets: Ground
 	InvalidTargets: Air
-	Range: 10c0
+	Range: 10240
 	Warhead@1Dam: SpreadDamage
 		Damage: 34000
 		Spread: 341
 	Warhead@2Dam: SpreadDamage
-AWArtilleryAA:
+AWArtillery_AA:
 	Inherits: AWLightCannon
 	Report: AWMinicannon.wav
 	ValidTargets: Air
 	InvalidTargets: Ground
-	Range: 10c0
+	Range: 10240
 	Warhead@1Dam: SpreadDamage
 		Damage: 34000
 		Spread: 341
@@ -164,8 +164,8 @@ AWRockets:
 	Report: AWMissile1.wav, AWMissile2.wav
 	Burst: 2
 	ReloadDelay: 100
-	Range: 18c0
-	MinRange: 6c0
+	Range: 18432
+	MinRange: 6144
 	TargetActorCenter: true
 	Projectile: MissileCA
 		MinimumLaunchAngle: 62
@@ -209,7 +209,7 @@ AWMegaTankCannon:
 AWMachinegunGeneral:
 	Inherits: M16
 	ReloadDelay: 18
-	Range: 4c0
+	Range: 4096
 	Burst: 4
 	BurstDelays: 4
 	Report: AWGun1.wav, AWGun2.wav, AWGun3.wav, AWGun4.wav
@@ -226,7 +226,7 @@ AWMachinegunYC:
 	Inherits: AWMachinegunGeneral
 	ReloadDelay: 40
 	BurstDelays: 8
-	Range: 5c0
+	Range: 5120
 	Report: AWDustergun.wav
 	ValidTargets: Ground, Helicopter
 	Warhead@1Dam: SpreadDamage
@@ -238,7 +238,7 @@ AWMachinegunIFV:
 	Inherits: AWMachinegunYC
 	ReloadDelay: 15
 	BurstDelays: 2
-	Range: 6c0
+	Range: 6144
 	Report: AWDustergun.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 3000
@@ -250,7 +250,7 @@ AWMobGuns:
 AWGarrisonMG:
 	Inherits: ^RA2MG
 	ReloadDelay: 26
-	Range: 6c0
+	Range: 6144
 	Burst: 1
 	BurstDelays: 4
 	Report: AWDustergun.wav
@@ -264,7 +264,7 @@ AWGarrisonMG:
 AWSamiMG:
 	Inherits: AWMachinegunGeneral
 	ReloadDelay: 6
-	Range: 7c0
+	Range: 7168
 	Burst: 5
 	BurstDelays: 2
 	Report: AWDustergun.wav
@@ -277,7 +277,7 @@ AWDusterMG:
 	Burst: 8
 	BurstDelays: 2
 	ReloadDelay: 12
-	Range: 5c0
+	Range: 5120
 	Report: AWDustergun.wav
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
@@ -289,7 +289,7 @@ AWDusterMG:
 AWEatOozium:
 	Inherits: M16
 	ReloadDelay: 18
-	Range: 1c0
+	Range: 1024
 	Burst: 2
 	BurstDelays: 1
 	Report: AWSLIME2.wav
@@ -321,7 +321,7 @@ AWMachinegunTankHeavy:
 		ValidTargets: Vehicle, Building, Structure
 AWFlakCannon:
 	Inherits: AWMachinegunGeneral
-	Range: 6c0
+	Range: 6144
 	ValidTargets: Ground, Air
 	Report: AWFlak1.wav, AWFlak2.wav
 	Warhead@1Dam: SpreadDamage
@@ -337,7 +337,7 @@ AWFlakCannonLow:
 	Burst: 2
 AWLaserFlakCannon:
 	Inherits: AWFlakCannon
-	Range: 6c0
+	Range: 6144
 	ValidTargets: Ground, Air
 	Projectile: LaserZap
 		Width: 60
@@ -351,7 +351,7 @@ AWLaserFlakCannonLow:
 	Inherits: AWLaserFlakCannon
 	ReloadDelay: 40
 	Burst: 2
-AWFighterMissileAA:
+AWFighterMissile_AA:
 	Inherits: Dragon
 	Report: AWFighterMiss.wav
 	Projectile: MissileCA
@@ -440,8 +440,8 @@ AWAttackerMissileAG:
 AWAARockets:
 	Inherits: Dragon
 	Burst: 2
-	Range: 18c0
-	MinRange: 6c0
+	Range: 18432
+	MinRange: 6144
 	Projectile: MissileCA
 		RangeLimit: 19c0
 		Image: awmissile3
@@ -470,13 +470,13 @@ AWMechMissile:
 
 AWMechMissileG:
 	Inherits: AWMechMissile
-	Range: 7c0
+	Range: 7168
 
 AWHydroMissile:
 	Inherits: ^AntiGroundMissile
 	Report: AWMissile1.wav, AWMissile2.wav
 	ReloadDelay: 60
-	Range: 7c512
+	Range: 7680
 	Burst: 3
 	BurstDelays: 0
 	ValidTargets: Ground, Air, Underwater
@@ -553,7 +553,7 @@ AWCruiserMissile:
 		ImpactSounds: AWExplosion1.wav
 AWCruiserFlakCannon:
 	Inherits: AWMachinegunGeneral
-	Range: 6c0
+	Range: 6144
 	ValidTargets: Air
 	Report: AWFlak1.wav, AWFlak2.wav
 	Warhead@1Dam: SpreadDamage
@@ -566,7 +566,7 @@ AWGravityBombs:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 50
 	Burst: 4
-	Range: 4c0
+	Range: 4096
 	Report: vkiratta.wav
 	Projectile: Bullet
 		Speed: 125
@@ -593,7 +593,7 @@ AWKirovBomb:
 	Inherits: AWGravityBombs
 	ReloadDelay: 40
 	Burst: 1
-	Range: 1c0
+	Range: 1024
 
 AWDusterBomb:
 	Inherits: ^BallisticWeapon
@@ -619,7 +619,7 @@ AWBuggyGrenade:
 AWVolcanoLavaSpawner:
 	Projectile: InstantExplode
 	Warhead@Dam: TargetDamage
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		AudibleThroughFog: true
 		ImpactSounds: AWEruption.wav
 	Warhead@1: FireShrapnel
@@ -659,7 +659,7 @@ AWVolcanoLavaSpawner:
 		Delay: 100
 
 AWVolcanoLavaCloud:
-	Range: 7c0
+	Range: 7168
 	ReloadDelay: 8
 	Projectile: AthenaProjectile
 		Altitude: 5c0
@@ -696,12 +696,12 @@ AWTorpTube:
 AWOlafFreeze1:
 	Projectile: InstantHit
 	Report: plsecan2.aud
-	Range: 8c512
-	MinRange: 4c512
+	Range: 8704
+	MinRange: 4608
 	ReloadDelay: 360
 	ValidTargets: Chronobeamable, Air
 	Warhead@1Con: GrantExternalCondition
-		Range: 8c0
+		Range: 8192
 		Condition: chronobeamed
 		Duration: 150
 		ValidRelationships: Enemy, Neutral
@@ -721,7 +721,7 @@ AWOlafFreeze2:
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@1Con: GrantExternalCondition
-		Range: 12c0
+		Range: 12288
 		Condition: chronobeamed
 		Duration: 300
 		ValidRelationships: Enemy, Neutral
@@ -747,7 +747,7 @@ AWOlafFreeze2:
 		Amount: 8
 		Delay: 400
 AWSnowCloud:
-	Range: 22c0
+	Range: 22528
 	ReloadDelay: 8
 	Projectile: AthenaProjectile
 		Altitude: 5c0
@@ -760,7 +760,7 @@ AWSnowCloud:
 AWSnowEffect:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 50
-	Range: 22c0
+	Range: 22528
 	-Report:
 	Projectile: Bullet
 		Speed: 25
@@ -781,7 +781,7 @@ AWSnowEffect:
 	-Warhead@3Eff: CreateEffect
 	-Warhead@4EffWater: CreateEffect
 	Warhead@1Con: GrantExternalCondition
-		Range: 3c0
+		Range: 3072
 		Condition: chronobeamed
 		Duration: 150
 		ValidRelationships: Enemy, Neutral
@@ -790,8 +790,8 @@ AWSnowEffect:
 AWDrakeTsunami:
 	Projectile: InstantHit
 	Report: plsecan2.aud
-	Range: 8c512
-	MinRange: 4c512
+	Range: 8704
+	MinRange: 4608
 	ReloadDelay: 360
 	Warhead@1s: FireShrapnel
 		Weapon: AWTsunamiCloud
@@ -873,7 +873,7 @@ AWDrakeTsunami2:
 		Amount: 8
 		Delay: 350
 AWTsunamiCloud:
-	Range: 11c0
+	Range: 11264
 	ReloadDelay: 8
 	Projectile: AthenaProjectile
 		Altitude: 5c0
@@ -892,7 +892,7 @@ AWTsunamiWater:
 	Warhead@1Dam: SpreadDamage
 		Spread: 426
 		Damage: 15000
-		InvalidTargets: Wall, Building, Structure
+		InvalidTargets: wall, Building, Structure
 	Warhead@2Dam: SpreadDamage
 		Spread: 400
 		Damage: 1500
@@ -901,7 +901,7 @@ AWTsunamiWater:
 		ImpactSounds: splash9.aud, vnavupa.wav, AWLava.wav, gexpwasa.wav, gexpifva.wav, vbooat2a.wav
 
 AWTsunamiCloud2:
-	Range: 5c0
+	Range: 5120
 	ReloadDelay: 8
 	Projectile: AthenaProjectile
 		Altitude: 5c0
@@ -920,7 +920,7 @@ AWTsunamiWater2:
 	Warhead@1Dam: SpreadDamage
 		Spread: 400
 		Damage: 7000
-		InvalidTargets: Wall, Building, Structure
+		InvalidTargets: wall, Building, Structure
 	Warhead@2Dam: SpreadDamage
 		Spread: 400
 		Damage: 1500
@@ -930,12 +930,12 @@ AWTsunamiWater2:
 AWEaglePower1:
 	Projectile: InstantHit
 	Report: plsecan2.aud
-	Range: 8c512
-	MinRange: 4c512
+	Range: 8704
+	MinRange: 4608
 	ReloadDelay: 360
 	ValidTargets: Air
 	Warhead@1: GrantExternalCondition
-		Range: 40c0
+		Range: 40960
 		Condition: eaglepower1
 		Duration: 1000
 		ValidRelationships: Ally
@@ -943,12 +943,12 @@ AWEaglePower1:
 AWEaglePower2:
 	Projectile: InstantHit
 	Report: plsecan2.aud
-	Range: 8c512
-	MinRange: 4c512
+	Range: 8704
+	MinRange: 4608
 	ReloadDelay: 360
 	ValidTargets: Air, Vehicle
 	Warhead@1: GrantExternalCondition
-		Range: 40c0
+		Range: 40960
 		Condition: eaglepower2
 		Duration: 1000
 		ValidRelationships: Ally
@@ -1065,9 +1065,9 @@ AWE3BHHuskCluster:
 AWTeslaCrystal:
 	Inherits: RA2PortaTesla
 	Burst: 4
-	Range: 6c0
+	Range: 6144
 	Report: itesat2a.wav, itesat2b.wav
-	Range: 5c0
+	Range: 5120
 	Warhead@2: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: TeslaFragment
@@ -1078,13 +1078,13 @@ AWTeslaCrystal:
 		Weapon: RemovableDebuffDummy
 		Type: lockdown
 		TriggerTime: 90
-		Range: 0c768
+		Range: 768
 		ValidTargets: Vehicle
 AWMeteor:
 	Inherits: Atomic
 AWBlackBombExplode:
 	Inherits: MiniNuke
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: awblackbombfx
 		ImpactSounds: kaboom1.aud
 		ImpactActors: false
@@ -1103,7 +1103,7 @@ AWTalonGun:
 	Inherits: ^AWBallisticWeapon
 	ValidTargets: Ground
 	InvalidTargets: Air
-	Range: 8c0
+	Range: 8192
 	Report: AWMegaCannon.wav
 	Burst: 12
 	BurstDelays: 0
@@ -1112,11 +1112,11 @@ AWTalonGun:
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
 
-AWTalonGunAA:
+AWTalonGun_AA:
 	Inherits: ^AWBallisticWeapon
 	ValidTargets: Air
 	InvalidTargets: Ground
-	Range: 8c0
+	Range: 8192
 	Report: AWMegaCannon.wav
 	Burst: 12
 	BurstDelays: 0
@@ -1129,7 +1129,7 @@ AWLaserTurretRailgun:
 	Inherits: TSMechRailgun
 	ReloadDelay: 240
 	InvalidTargets: Building, Structure
-	Range: 24c0
+	Range: 24576
 	Report: railuse5.aud
 	Projectile: Railgun
 		BeamColor: FFC551
@@ -1147,8 +1147,8 @@ AWLaserTurretRailgun:
 			
 AWKindleMobCloudMaker:
 	Projectile: InstantHit
-	Range: 8c512
-	MinRange: 4c512
+	Range: 8704
+	MinRange: 4608
 	ReloadDelay: 360
 	ValidTargets: Ground
 	Warhead@1s: FireShrapnel
@@ -1167,7 +1167,7 @@ AWKindleMobCloudMaker:
 		Amount: 16
 		Delay: 3
 AWKindleMobCloud:
-	Range: 22c0
+	Range: 22528
 	ReloadDelay: 8
 	Projectile: AthenaProjectile
 		Altitude: 5c0
@@ -1180,7 +1180,7 @@ AWKindleMobCloud:
 AWKindleSelectBuilding:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 50
-	Range: 33c0
+	Range: 33792
 	-Report:
 	Projectile: Bullet
 		Speed: 999
@@ -1204,10 +1204,10 @@ AWKindleSelectBuilding:
 		Weapon: AWKindleMobSpawn
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Building, Structure
-		InvalidTargets: Wall, Defense
+		InvalidTargets: wall, Defense
 
 AWKindleMobSpawn:
-	Range: 3c0
+	Range: 3072
 	Projectile: InstantHit
 	Warhead@2: SpawnActor
 		Actors: awmob
@@ -1216,8 +1216,8 @@ AWKindleMobSpawn:
 AWHawkeTsunami:
 	Projectile: InstantHit
 	Report: plsecan2.aud
-	Range: 8c512
-	MinRange: 4c512
+	Range: 8704
+	MinRange: 4608
 	ReloadDelay: 360
 	Warhead@1s: FireShrapnel
 		InvalidTargets: FireImmune
@@ -1261,7 +1261,7 @@ AWHawkeTsunami:
 		Delay: 124
 
 AWHawkeCloud:
-	Range: 11c0
+	Range: 11264
 	ReloadDelay: 8
 	Projectile: AthenaProjectile
 		Altitude: 5c0
@@ -1280,7 +1280,7 @@ AWHawkeWater:
 	Warhead@1Dam: SpreadDamage
 		Spread: 426
 		Damage: 15000
-		InvalidTargets: Wall, Building, Structure
+		InvalidTargets: wall, Building, Structure
 		ValidRelationships: Enemy, Neutral
 	Warhead@2Dam: SpreadDamage
 		Spread: 400
@@ -1293,7 +1293,7 @@ AWHawkeWater:
 		ValidTargets: Repair
 		ValidRelationships: Ally
 AWHawkeCloudB:
-	Range: 5c0
+	Range: 5120
 	ReloadDelay: 8
 	Projectile: AthenaProjectile
 		Altitude: 5c0
@@ -1312,7 +1312,7 @@ AWHawkeWaterB:
 	Warhead@1Dam: SpreadDamage
 		Spread: 400
 		Damage: 7000
-		InvalidTargets: Wall, Building, Structure
+		InvalidTargets: wall, Building, Structure
 		ValidRelationships: Enemy, Neutral
 	Warhead@2Dam: SpreadDamage
 		Spread: 400
@@ -1328,8 +1328,8 @@ AWHawkeWaterB:
 AWHawkeTsunami2:
 	Projectile: InstantHit
 	Report: plsecan2.aud
-	Range: 8c512
-	MinRange: 4c512
+	Range: 8704
+	MinRange: 4608
 	ReloadDelay: 360
 	Warhead@1s: FireShrapnel
 		InvalidTargets: FireImmune
@@ -1373,7 +1373,7 @@ AWHawkeTsunami2:
 		Delay: 124
 
 AWHawkeCloud2:
-	Range: 11c0
+	Range: 11264
 	ReloadDelay: 8
 	Projectile: AthenaProjectile
 		Altitude: 5c0
@@ -1392,7 +1392,7 @@ AWHawkeWater2:
 	Warhead@1Dam: SpreadDamage
 		Spread: 426
 		Damage: 25000
-		InvalidTargets: Wall, Building, Structure
+		InvalidTargets: wall, Building, Structure
 		ValidRelationships: Enemy, Neutral
 	Warhead@2Dam: SpreadDamage
 		Spread: 400
@@ -1405,7 +1405,7 @@ AWHawkeWater2:
 		ValidTargets: Repair
 		ValidRelationships: Ally
 AWHawkeCloudB2:
-	Range: 5c0
+	Range: 5120
 	ReloadDelay: 8
 	Projectile: AthenaProjectile
 		Altitude: 5c0
@@ -1424,7 +1424,7 @@ AWHawkeWaterB2:
 	Warhead@1Dam: SpreadDamage
 		Spread: 400
 		Damage: 14000
-		InvalidTargets: Wall, Building, Structure
+		InvalidTargets: wall, Building, Structure
 		ValidRelationships: Enemy, Neutral
 	Warhead@2Dam: SpreadDamage
 		Spread: 400
@@ -1446,13 +1446,13 @@ AWExmachina:
 	Warhead@2Con: GrantExternalCondition
 		Condition: empdisable
 		Duration: 360
-		Range: 6c0
+		Range: 6144
 AWNukeCannon:
 	Inherits: ArtilleryShell
 	Inherits@Explosion: CHAtomicWeapon
 	ReloadDelay: 330
-	Range: 18c0
-	MinRange: 5c0
+	Range: 18432
+	MinRange: 5120
 	Report: vnukweaa.wav
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -1464,7 +1464,7 @@ AWNukeCannon:
 AWFrostWeapon:
 	Inherits: TSSonicZap
 	ReloadDelay: 60
-	Range: 6c0
+	Range: 6144
 	Report: sonic4.aud
 	Projectile: AreaBeam
 		Speed: 0c256
@@ -1502,7 +1502,7 @@ AWFrostWeapon:
 			Wood: 60
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@1Con: GrantExternalCondition
-		Range: 1c0
+		Range: 1024
 		Condition: chronobeamed
 		Duration: 75
 		ValidRelationships: Enemy, Neutral

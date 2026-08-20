@@ -1,0 +1,982 @@
+schwarzermond_drone:
+	Defaults:
+		Scale: 0.5
+	idle:
+		Filename: schwarzermond_drone.shp
+		Facings: 64
+	move:
+		Filename: schwarzermond_drone.shp
+		Facings: 64
+	move-l:
+		Filename: schwarzermond_drone.shp
+		Facings: 64
+		Start: 64
+	move-r:
+		Filename: schwarzermond_drone.shp
+		Facings: 64
+		Start: 128
+	icon:
+		Filename: schwarzermond_drone_icon.png
+
+schwarzermond_constructionyard:
+	Defaults:
+		Offset: -8,8
+	idle:
+		Filename: schwarzermond_constructionyard_nax2_conyard.shp
+		Start: 32
+	make:
+		Filename: schwarzermond_constructionyard_nax2_conyard.shp
+		Length: 32
+	build:
+		Filename: shared_sprites|invisibleitem.shp
+	damaged-idle:
+		Filename: schwarzermond_constructionyard_nax2_conyard.shp
+		Start: 63
+	idle-fans:
+		Filename: shared_sprites|invisibleitem.shp
+	damaged-idle-fans:
+		Filename: shared_sprites|invisibleitem.shp
+	crane-overlay:
+		Filename: schwarzermond_constructionyard_nax2_conyard.shp
+		Start: 32
+		Length: 30
+	damaged-crane-overlay:
+		Filename: schwarzermond_constructionyard_nax2_conyard.shp
+		Start: 63
+		Length: 30
+	dead:
+		Filename: schwarzermond_constructionyard_nax2_conyard.shp
+		Start: 63
+	icon:
+		Filename: schwarzermond_constructionyard_icon.png
+		Offset: 0,0
+
+schwarzermond_warfactory:
+	Defaults:
+		Offset: -16,16
+	idle:
+		Filename: schwarzermond_warfactory_nax2_weap.shp
+		Length: 16
+		ZOffset: 1024
+	damaged-idle:
+		Filename: schwarzermond_warfactory_nax2_weap.shp
+		Length: 16
+		ZOffset: 1024
+	build-ramp:
+		Filename: shared_sprites|invisibleitem.shp
+	damaged-build-ramp:
+		Filename: shared_sprites|invisibleitem.shp
+	build-top:
+		Filename: schwarzermond_warfactory_nax2_weap.shp
+		Length: 16
+		ZOffset: 1024
+	damaged-build-top:
+		Filename: schwarzermond_warfactory_nax2_weap.shp
+		Length: 16
+		ZOffset: 1024
+	build-door:
+		Filename: shared_sprites|invisibleitem.shp
+	damaged-build-door:
+		Filename: shared_sprites|invisibleitem.shp
+	#TODO: ggweap_3 and ggweap_4 are used for producing flying actors
+	build-air-open:
+		Filename: shared_sprites|invisibleitem.shp
+	damaged-air-open:
+		Filename: shared_sprites|invisibleitem.shp
+	build-air-inside:
+		Filename: shared_sprites|invisibleitem.shp
+	damaged-air-inside:
+		Filename: shared_sprites|invisibleitem.shp
+	bib:
+		Filename: schwarzermond_warfactory_nax2_weap_bottom.shp
+		ZOffset: -1024
+	damaged-bib:
+		Filename: schwarzermond_warfactory_nax2_weap_bottom.shp
+		ZOffset: -1024
+	idle-flag:
+		Filename: shared_sprites|invisibleitem.shp
+	damaged-idle-flag:
+		Filename: shared_sprites|invisibleitem.shp
+	overlay-fan:
+		Filename: shared_sprites|invisibleitem.shp
+	make:
+		Filename: schwarzermond_warfactory_nax2_weap_make.shp
+		Length: 56
+	dead:
+		Filename: shared_sprites|invisibleitem.shp
+	icon:
+		Filename: schwarzermond_warfactory_icon.png
+		Offset: 0,0
+
+schwarzermond_hydrogenplant:
+	Defaults:
+		Offset: 0,-2
+	idle:
+		Filename: schwarzermond_hydrogenplant_nax2_powr.shp
+		Start: 33
+	damaged-idle:
+		Filename: schwarzermond_hydrogenplant_nax2_powr.shp
+		Start: 33
+	make:
+		Filename: schwarzermond_hydrogenplant_nax2_powr.shp
+		Length: 32
+	dead:
+		Filename: schwarzermond_hydrogenplant_nax2_powr.shp
+		Start: 33
+	icon:
+		Filename: schwarzermond_hydrogenplant_icon.png
+		Offset: 0,0
+
+schwarzermond_barracks:
+	Defaults:
+		Offset: -16,20
+	idle:
+		Filename: schwarzermond_barracks_nax2_barr.shp
+		Start: 33
+	damaged-idle:
+		Filename: schwarzermond_barracks_nax2_barr.shp
+		Start: 33
+	dead:
+		Filename: schwarzermond_barracks_nax2_barr.shp
+		Start: 33
+	make:
+		Filename: schwarzermond_barracks_nax2_barr.shp
+		Length: 32
+	icon:
+		Filename: schwarzermond_barracks_icon.png
+		Offset: 0,0
+
+schwarzermond_orerefinery:
+	Defaults:
+		Offset: -1,-6
+	idle:
+		Filename: shared_sprites|invisibleitem.shp
+	damaged-idle:
+		Filename: shared_sprites|invisibleitem.shp
+	make:
+		Filename: schwarzermond_orerefinery_nax2_refin.shp
+		Length: 32
+	idle-bib:
+		Filename: schwarzermond_orerefinery_nax2_refin.shp
+		Start: 33
+	damaged-idle-bib:
+		Filename: schwarzermond_orerefinery_nax2_refin.shp
+		Start: 64
+	dead:
+		Filename: schwarzermond_orerefinery_nax2_refin.shp
+		Start: 64
+	resources:
+		Filename: shared_sprites|invisibleitem.shp
+	icon:
+		Filename: schwarzermond_orerefinery_icon.png
+		Offset: 0,0
+
+schwarzermond_radar:
+	Defaults:
+		Offset: 6,12
+	idle:
+		Filename: schwarzermond_radar_nax2.shp
+		Start: 16
+		Length: 16
+	damaged-idle:
+		Filename: schwarzermond_radar_nax2.shp
+		Start: 32
+		Length: 16
+	make:
+		Filename: schwarzermond_radar_nax2.shp
+		Length: 16
+	dead:
+		Filename: schwarzermond_radar_nax2.shp
+		Start: 32
+	icon:
+		Filename: schwarzermond_radar_icon.png
+		Offset: 0,0
+
+schwarzermond_airfield:
+	Defaults:
+		Offset: 2, 8
+	idle:
+		Filename: schwarzermond_airfield_nax2.shp
+		Start: 16
+		Length: 16
+	damaged-idle:
+		Filename: schwarzermond_airfield_nax2.shp
+		Start: 32
+		Length: 16
+	make:
+		Filename: schwarzermond_airfield_nax2.shp
+		Length: 16
+	dead:
+		Filename: schwarzermond_airfield_nax2.shp
+		Start: 32
+	icon:
+		Filename: schwarzermond_airfield_icon.png
+		Offset: 0,0
+
+schwarzermond_techcenter:
+	Defaults:
+		Offset: 2, 6
+	idle:
+		Filename: schwarzermond_techcenter_nax2_tech.shp
+		Start: 16
+		Length: 16
+	damaged-idle:
+		Filename: schwarzermond_techcenter_nax2_tech.shp
+		Start: 32
+		Length: 16
+	make:
+		Filename: schwarzermond_techcenter_nax2_tech.shp
+		Length: 16
+	dead:
+		Filename: schwarzermond_techcenter_nax2_tech.shp
+		Start: 32
+	icon:
+		Filename: schwarzermond_techcenter_icon.png
+		Offset: 0,0
+
+schwarzermond_gravitycore:
+	Defaults:
+		Offset: -8,16
+	idle:
+		Filename: schwarzermond_gravitycore_nax2_gcore.shp
+		Start: 32
+		Length: 32
+	damaged-idle:
+		Filename: schwarzermond_gravitycore_nax2_gcore.shp
+		Start: 32
+		Length: 32
+	make:
+		Filename: schwarzermond_gravitycore_nax2_gcore.shp
+		Length: 32
+	dead:
+		Filename: schwarzermond_gravitycore_nax2_gcore.shp
+		Start: 32
+	icon:
+		Filename: schwarzermond_gravitycore_icon.png
+		Offset: 0,0
+
+schwarzermond_moondairyfarm:
+	Defaults:
+		Offset: 0,-2
+	idle:
+		Filename: schwarzermond_moondairyfarm_nax2_dairy.shp
+		Start: 32
+		Length: 32
+	damaged-idle:
+		Filename: schwarzermond_moondairyfarm_nax2_dairy.shp
+		Start: 32
+		Length: 32
+	make:
+		Filename: schwarzermond_moondairyfarm_nax2_dairy.shp
+		Length: 32
+	dead:
+		Filename: schwarzermond_moondairyfarm_nax2_dairy.shp
+		Start: 33
+	icon:
+		Filename: schwarzermond_moondairyfarm_icon.png
+		Offset: 0,0
+
+schwarzermond_meteortractionray:
+	Defaults:
+		Offset: 0,-10
+		Filename: schwarzermond_meteortractionray_nax2_meteorray.shp
+	idle:
+		Start: 52
+		Length: 14
+	damaged-idle:
+		Start: 52
+		Length: 14
+	bib:
+		Start: 16
+	damaged-bib:
+		Start: 16
+	critical-idle:
+		Start: 16
+	up:
+		Filename: shared_sprites|invisibleitem.shp
+	active:
+		Start: 52
+		Length: 28
+	make:
+		Length: 16
+	dead:
+		Filename: shared_sprites|invisibleitem.shp
+	icon:
+		Filename: schwarzermond_meteortractionray_icon.png
+		Offset: 0,0
+
+schwarzermond_lasertower:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Offset: 0,2
+	idle:
+		Filename: schwarzermond_lasertower_nax2_twr.shp
+		Length: 16
+		Start: 16
+	damaged-idle:
+		Filename: schwarzermond_lasertower_nax2_twr.shp
+		Length: 16
+		Start: 32
+	critical-idle:
+		Filename: schwarzermond_lasertower_nax2_twr.shp
+		Length: 16
+		Start: 16
+	make:
+		Filename: schwarzermond_lasertower_nax2_twr.shp
+		Length: 16
+	dead:
+		Filename: shared_sprites|invisibleitem.shp
+	turret:
+		Filename: shared_sprites|invisibleitem.shp
+	icon:
+		Filename: schwarzermond_lasertower_icon.png
+		Offset: 0,0
+
+schwarzermond_sturmcannon:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Offset: 0,-8
+		Scale: 0.8
+	idle:
+		Filename: shared_sprites|invisibleitem.shp
+	damaged-idle:
+		Filename: shared_sprites|invisibleitem.shp
+	critical-idle:
+		Filename: shared_sprites|invisibleitem.shp
+	make:
+		Filename: schwarzermond_sturmcannon_nax2_make.shp
+		Length: 64
+	dead:
+		Filename: shared_sprites|invisibleitem.shp
+	turret:
+		Filename: schwarzermond_sturmcannon_nax2_sturmcann.shp
+		Facings: 64
+	icon:
+		Filename: schwarzermond_sturmcannon_icon.png
+		Offset: 0,0
+
+schwarzermond_parzival:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: schwarzermond_parzival_nax2_parzi.shp
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: schwarzermond_parzival_icon.png
+
+schwarzermond_dalek:
+	Defaults:
+		Filename: schwarzermond_dalek_nax2.png
+	idle:
+		Facings: 64
+		Offset: 0, 24
+	icon:
+		Filename: schwarzermond_dalek_icon.png
+
+schwarzermond_naxismobileconstructionvehicle:
+	Defaults:
+		Filename: schwarzermond_naxismobileconstructionvehicle_nax2_mcv.shp
+		Scale: 0.7
+	idle:
+		Facings: 64
+	icon:
+		Filename: schwarzermond_naxismobileconstructionvehicle_icon.png
+
+schwarzermond_lunarpanzer:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: schwarzermond_lunarpanzer_nax2_panzer.shp
+		Scale: 0.75
+		Offset: 0,24
+	idle:
+		Facings: 64
+	turret:
+		Start: 64
+		Facings: 64
+	icon:
+		Filename: schwarzermond_lunarpanzer_icon.png
+		Offset: 0,0
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+schwarzermond_lunartiger:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: schwarzermond_lunartiger_nax2_tiger.shp
+		Scale: 0.8
+		Offset: 0,24
+	idle:
+		Facings: 64
+	turret:
+		Start: 64
+		Facings: 64
+	icon:
+		Filename: schwarzermond_lunartiger_icon.png
+		Offset: 0,0
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+schwarzermond_lunargrille:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: schwarzermond_lunargrille_nax2_grille.shp
+		Scale: 0.8
+		Offset: 0,24
+	idle:
+		Filename: shared_sprites|invisibleitem.shp
+	turret:
+		Facings: 64
+	icon:
+		Filename: schwarzermond_lunargrille_icon.png
+		Offset: 0,0
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+schwarzermond_neojagdpanzer:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: schwarzermond_neojagdpanzer_nax2_jager.shp
+		Scale: 0.9
+	idle:
+		Filename: shared_sprites|invisibleitem.shp
+	turret:
+		Facings: 64
+	icon:
+		Filename: schwarzermond_neojagdpanzer_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+schwarzermond_crystaltank:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: schwarzermond_crystaltank_nax2_crystal.shp
+		Scale: 0.9
+	idle:
+		Filename: shared_sprites|invisibleitem.shp
+	turret:
+		Facings: 64
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+	icon:
+		Filename: schwarzermond_crystaltank_icon.png
+
+schwarzermond_gravitycoretank:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: schwarzermond_gravitycoretank_nax_gravity.shp
+		Scale: 0.9
+		Offset: 0,24
+	idle:
+		Facings: 64
+	icon:
+		Filename: schwarzermond_gravitycoretank_icon.png
+		Offset: 0,0
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+hole_small.nax2:
+	Defaults:
+		Filename: nax_hole.shp
+		Tick: 64
+		IgnoreWorldTint: true
+		Scale: 1.3
+	idle:
+		Length: 64
+	stand:
+		Length: 64
+	run:
+		Length: 64
+	die:
+		Length: 64
+		Tick: 8
+
+hole.nax2:
+	Defaults:
+		Filename: nax_hole.shp
+		Tick: 80
+		IgnoreWorldTint: true
+		Scale: 2
+	idle:
+		Length: 64
+	stand:
+		Length: 64
+	run:
+		Length: 64
+	die:
+		Length: 64
+
+schwarzermond_haunebuii:
+	Defaults:
+		Filename: schwarzermond_haunebuii_nax_haunebu.shp
+	idle:
+		Length: 64
+		Tick: 20
+	move:
+		Length: 64
+		Tick: 10
+	muzzle:
+		Filename: shared_sprites|diskray.shp
+		Scale: 0.9
+		Offset: 0,35
+		Length: 4
+		Tick: 100
+	icon:
+		Filename: schwarzermond_haunebuii_icon.png
+
+schwarzermond_haunebuiii:
+	Defaults:
+		Filename: schwarzermond_haunebuiii_nax_ufox.shp
+		Offset: 0, 16
+	idle:
+		Length: 32
+		Tick: 40
+	move:
+		Length: 32
+		Tick: 20
+	muzzle:
+		Filename: shared_sprites|diskray.shp
+		Scale: 0.9
+		Offset: 0,35
+		Length: 4
+		Tick: 100
+	icon:
+		Filename: schwarzermond_haunebuiii_icon.png
+		Offset: 0, 0
+
+schwarzermond_dieglocke:
+	Defaults:
+		Filename: schwarzermond_dieglocke_nax.shp
+	idle:
+		Length: 64
+		Tick: 20
+	move:
+		Length: 64
+		Tick: 10
+	muzzle:
+		Filename: shared_sprites|diskray.shp
+		Scale: 0.9
+		Offset: 0,35
+		Length: 4
+		Tick: 100
+	icon:
+		Filename: schwarzermond_dieglocke_icon.png
+
+schwarzermond_spacezeppelin:
+	Defaults:
+		Filename: schwarzermond_spacezeppelin_nax2_zep.shp
+		Scale: 1
+	idle:
+		Facings: 64
+		Offset: 0,0
+	move:
+		Facings: 64
+		Offset: 0,0
+	icon:
+		Filename: schwarzermond_spacezeppelin_icon.png
+
+schwarzermond_corruptorpiercer:
+	Defaults:
+		Scale: 0.8
+	idle:
+		Filename: schwarzermond_corruptorpiercer_nax_piercer.shp
+		Facings: 64
+	move:
+		Filename: schwarzermond_corruptorpiercer_nax_piercer.shp
+		Facings: 64
+	move-l:
+		Filename: schwarzermond_corruptorpiercer_nax_piercer.shp
+		Facings: 64
+		Start: 64
+	move-r:
+		Filename: schwarzermond_corruptorpiercer_nax_piercer.shp
+		Facings: 64
+		Start: 128
+	icon:
+		Filename: schwarzermond_corruptorpiercer_icon.png
+
+schwarzermond_mars:
+	Inherits: ^RA2GatlingMuzzle
+	Defaults:
+		Filename: schwarzermond_mars_nax2_bradley.shp
+		Scale: 1
+	idle:
+		Filename: shared_sprites|invisibleitem.shp
+	turret:
+		Facings: 64
+		Offset: 0,20
+		Length: 1
+	empty-turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,20
+	icon:
+		Filename: schwarzermond_mars_icon.png
+
+schwarzermond_komet:
+	Inherits: ^RA2GatlingMuzzle
+	Defaults:
+		Filename: schwarzermond_komet_nax2_aatank.shp
+		Scale: 0.8
+	idle:
+		Filename: shared_sprites|invisibleitem.shp
+	turret:
+		Facings: 64
+		Offset: 0,20
+	empty-turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,20
+	icon:
+		Filename: schwarzermond_komet_icon.png
+
+schwarzermond_noidmgarmor:
+	Defaults:
+		Filename: schwarzermond_noidmgarmor_nax2_armor_mg.shp
+		Scale: 0.9
+	idle1:
+		Facings: 32
+	idle2:
+		Facings: 32
+	stand:
+		Facings: 32
+	run:
+		Start: 33
+		Length: 8
+		Facings: 8
+		Tick: 110
+	shoot:
+		Start: 98
+		Length: 8
+		Facings: 8
+		Tick: 80
+	icon:
+		Filename: schwarzermond_noidmgarmor_icon.png
+		Offset: 0,0
+
+schwarzermond_engineeringarmor:
+	Defaults:
+		Filename: schwarzermond_engineeringarmor_nax2_engi.shp
+		Scale: 0.9
+	idle1:
+		Facings: 32
+	idle2:
+		Facings: 32
+	stand:
+		Facings: 32
+	run:
+		Start: 33
+		Length: 8
+		Facings: 8
+		Tick: 110
+	shoot:
+		Facings: 32
+	icon:
+		Filename: schwarzermond_engineeringarmor_icon.png
+		Offset: 0,0
+
+schwarzermond_korruptesbiest:
+	Defaults:
+		Filename: schwarzermond_korruptesbiest_nax2_giant_rk.shp
+		Scale: 0.9
+	idle1:
+		Facings: 32
+	idle2:
+		Facings: 32
+	stand:
+		Facings: 32
+	run:
+		Start: 33
+		Length: 8
+		Facings: 8
+		Tick: 110
+	shoot:
+		Start: 98
+		Length: 8
+		Facings: 8
+		Tick: 80
+	icon:
+		Filename: schwarzermond_korruptesbiest_icon.png
+		Offset: 0,0
+
+schwarzermond_noidharvester:
+	Defaults:
+		Filename: schwarzermond_noidharvester_nax2_armor_harv.shp
+		Scale: 0.9
+	idle1:
+		Facings: 32
+	idle2:
+		Facings: 32
+	stand:
+		Facings: 32
+	run:
+		Start: 33
+		Length: 8
+		Facings: 8
+		Tick: 110
+	shoot:
+		Start: 98
+		Length: 8
+		Facings: 8
+		Tick: 80
+	dock:
+		Facings: 32
+	dock-loop:
+		Facings: 32
+	harvesting:
+		Filename: shared_sprites|ra2_oregath.shp
+		Length: 15
+		Facings: 8
+	icon:
+		Filename: schwarzermond_noidharvester_icon.png
+		Offset: 0,0
+
+schwarzermond_laserbeetle:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: schwarzermond_laserbeetle_nax2_beetle.shp
+		Scale: 0.8
+	idle:
+		Facings: 64
+		Offset: 0,5
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: schwarzermond_laserbeetle_icon.png
+
+schwarzermond_lasertank:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: schwarzermond_lasertank_nax2_lasert.shp
+		Scale: 0.8
+		Offset: 0,24
+	idle:
+		Facings: 64
+	turret:
+		Start: 64
+		Facings: 64
+	icon:
+		Filename: schwarzermond_lasertank_icon.png
+		Offset: 0,0
+
+schwarzermond_lunarsoldier:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: schwarzermond_lunarsoldier_nax_lunar.shp
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: schwarzermond_lunarsoldier_icon.png
+
+schwarzermond_lunarrocket:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: schwarzermond_lunarrocket_nax_lunar2.shp
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: schwarzermond_lunarrocket_icon.png
+
+schwarzermond_ubermensch:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: schwarzermond_ubermensch_nax2_uber.shp
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: schwarzermond_ubermensch_icon.png
+
+schwarzermond_blackbomb:
+	Defaults:
+		Scale: 0.8
+	idle:
+		Filename: schwarzermond_blackbomb_nax2_bbomb.shp
+		Facings: 64
+	move:
+		Filename: schwarzermond_blackbomb_nax2_bbomb.shp
+		Facings: 64
+	move-l:
+		Filename: schwarzermond_blackbomb_nax2_bbomb.shp
+		Facings: 64
+	move-r:
+		Filename: schwarzermond_blackbomb_nax2_bbomb.shp
+		Facings: 64
+	icon:
+		Filename: schwarzermond_blackbomb_icon.png
+
+schwarzermond_upgrade_crystallens:
+	icon:
+		Filename: schwarzermond_upgrade_crystallens_icon.png
+
+schwarzermond_upgrade_amplifiedlens:
+	icon:
+		Filename: schwarzermond_upgrade_amplifiedlens_icon.png
+
+schwarzermond_upgrade_vrilpoweredweapons:
+	icon:
+		Filename: schwarzermond_upgrade_vrilpoweredweapons_icon.png
+
+schwarzermond_upgrade_lunaralloys:
+	icon:
+		Filename: schwarzermond_upgrade_lunaralloys_icon.png
+
+schwarzermond_upgrade_moonpropaganda:
+	icon:
+		Filename: schwarzermond_upgrade_moonpropaganda_icon.png
+
+schwarzermond_upgrade_helium3:
+	icon:
+		Filename: schwarzermond_upgrade_helium3_icon.png
+
+schwarzermond_upgrade_vrilinfusion:
+	icon:
+		Filename: schwarzermond_upgrade_vrilinfusion_icon.png
+
+schwarzermond_upgrade_cryptofascism:
+	icon:
+		Filename: schwarzermond_upgrade_cryptofascism_icon.png
+
+##############################################
+#   Red Alert 2 Future Tech
+##############################################

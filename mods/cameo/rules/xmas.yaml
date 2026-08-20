@@ -450,7 +450,7 @@ xmas_santas_house:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: xmas_elf_workshop, ~techlevel.high, !satanclawzhouse
+		Prerequisites: xmas_elf_workshop, !satanclawzhouse
 		Queue: Building, RABuilding
 		Description: House of Satan Clawz himself.
 		IconPalette: ra2
@@ -861,9 +861,6 @@ xmas_reindeer:
 		Range: 5c0
 	AttackFrontal:
 		FacingTolerance: 0
-	AttractsWorms:
-		Intensity: 300
-		RequiresCondition: !airborne
 	Targetable:
 		RequiresCondition: !airborne && !chronobeamed
 	Targetable@AIRBORNE:
@@ -1083,7 +1080,7 @@ xmas_artillery:
 		Name: Snowball Artillery
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: xmas_elf_workshop, ~techlevel.medium
+		Prerequisites: xmas_elf_workshop
 		Queue: Infantry, RAInfantry
 		Description: Long Range Artillery\n  Weak vs Infantry, Aircraft
 		IconPalette: ra2
@@ -1136,7 +1133,7 @@ xmas_rocket_sledge:
 		Name: Spike Sledge
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: xmas_elf_workshop, ~techlevel.medium
+		Prerequisites: xmas_elf_workshop
 		Queue: Infantry, RAInfantry
 		Description: Fast vehicle armed with Ice Spikes\n\n  Strong vs Infantry, Air\n  Weak vs Tanks
 		IconPalette: ra2
@@ -1193,7 +1190,7 @@ xmas_main_battle_sledge:
 		Name: Main Battle Sledge
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: xmas_elf_workshop, ~techlevel.medium
+		Prerequisites: xmas_elf_workshop
 		Queue: Infantry, RAInfantry
 		Description: Quick vehicle with snowball cannon\n\n  Strong vs Vehicles, Tanks\n  Weak vs Infantry, Aircraft
 		IconPalette: ra2
@@ -1313,7 +1310,7 @@ xmas_snowman_cannon:
 		Name: Powder
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: xmas_elf_workshop, ~techlevel.medium
+		Prerequisites: xmas_elf_workshop
 		Queue: Defence, RADefence
 		BuildDurationModifier: 50
 		Description: Long Range Anti-Ground Defense with high area of effect.\nStarts melting when power is low\nDetector\n\n  Strong vs Vehicles, Tanks\n  Weak vs Air
@@ -1379,7 +1376,7 @@ xmas_snowman_elite:
 		Name: Avalanche
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: xmas_elf_workshop, ~techlevel.medium
+		Prerequisites: xmas_elf_workshop
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Anti-Air and Infantry Defense.\nStarts melting when power is low\nDetector\n\n  Strong vs Infantry, Vehicles, Air\n  Weak vs Tanks

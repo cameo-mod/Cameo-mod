@@ -1,0 +1,650 @@
+ixian_airdrone:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@detect: ^GenericAllDetector
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@CLOAK: ^CloakedAircraft
+	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@NeedleGuns: ^D2K_NeedleGuns
+	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
+	Inherits@eject: ^AircraftEjectOnDeath
+	Valued:
+		Cost: 1800
+	Tooltip:
+		Name: Ixian Air Drone
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 10
+		Prerequisites: ~ixian_launchpad
+		Description: actor_air_drone.description
+		IconPalette: windows256
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 62500
+	Repairable:
+		HpPerStep: 3125
+	ChangesHealth@SelfHealing:
+		Step: 25
+	Shielded:
+		RegenAmount: 50
+	AmmoPool:
+		Name: primary
+		Ammo: 8
+		ReloadDelay: 25
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	AttackAircraft:
+		FacingTolerance: 64
+	Armament:
+		Weapon: ixian_airdrone
+		LocalOffset: 0,-256,0, 0,256,0
+		LocalYaw: 64, -64
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+		PauseOnCondition: !ammo
+	Armament@PRIMARY: ##########
+		Weapon: d2k_air_drone_guns
+		LocalOffset: 0,-256,0, 0,256,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
+		PauseOnCondition: !ammo
+	Armament@Upgrade: ##########
+		Weapon: d2k_air_drone_guns_upgrade
+		LocalOffset: 0,-256,0, 0,256,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
+		PauseOnCondition: !ammo
+	Aircraft:
+		CruiseAltitude: 1800
+		Speed: 165
+		RepulsionSpeed: 50
+		MaximumPitch: 50
+		Repulsable: true
+		CanHover: false
+		TurnSpeed: 11
+	WithFacingSpriteBody:
+	Selectable:
+		Bounds: 1536, 1280, 0, 0
+	SpawnActorOnDeath:
+		Actor: air_drone_husk.ixian
+	EjectOnDeath:
+		PilotActor: ixian_shockinfantry
+	Voiced:
+		VoiceSet: D2KVehicleVoice
+	RenderSprites:
+		Image: ixian_airdrone
+	MapEditorData:
+		Categories: Aircraft
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 1, 2
+		Range: 1c0, 3c0
+	Cloak:
+		CloakSound: appear1.aud
+		UncloakSound: trans1.aud
+		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
+	ActorStatValues:
+		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_generalpurposearmor, ixian_upgrade_tungstenneedleguns, ixian_upgrade_advancedixiantechnology
+
+air_drone_husk.ixian:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Air Drone
+	Aircraft:
+		TurnSpeed: 8
+		Speed: 165
+	RenderSprites:
+		Image: ixian_airdrone
+	FallsToEarth:
+		Explosion: D2KUnitExplodeSmall
+
+# phoenix:
+# 	Inherits: ^RANeutralPlane
+# 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+# 	Inherits@GAINSEXPERIENCE: ^GainsExperience
+# 	Inherits@AntiBuil: ^PrioritizeBuilding
+# 	AutoTarget:
+# 		InitialStance: ReturnFire
+# 	Valued:
+# 		Cost: 800
+# 	Buildable:
+# 		Queue: Aircraft, RAAircraft
+# 		BuildPaletteOrder: 40
+# 		Prerequisites: outpost, ~du_gunship
+# 		BuildDuration: 512
+# 		BuildDurationModifier: 100
+# 		Description: Medium Plane armed with dual Air-To-Ground flame rockets.\n Strong vs Buildings, Vehicles, Infantry
+# 	Tooltip:
+# 		Name: Gunship
+# 	UpdatesPlayerStatistics:
+# 		AddToArmyValue: true
+# 	Health:
+# 		HP: 25000
+# 	Armor:
+# 		Type: Medium
+# 	RevealsShroud:
+# 		Range: 4c512
+# 		Type: GroundPosition
+# 	AmmoPool:
+# 		Ammo: 3
+# 		AmmoCondition: ammo
+# 	ReloadAmmoPool:
+# 		Delay: 200
+# 		Count: 1
+# 		ResetOnFire: true
+# 	AttackAircraft:
+# 		FacingTolerance: 320
+# 	Armament:
+# 		Weapon: PhoenixRocket
+# 		LocalOffset: 0,-640,0, 0,640,0
+# 		LocalYaw: -40, 24
+# 		PauseOnCondition: !ammo
+# 	Aircraft:
+# 		CruiseAltitude: 1920
+# 		Speed: 154
+# 		TurnSpeed: 32
+# 		RepulsionSpeed: 40
+# 		MaximumPitch: 56
+# 		CanHover: false
+# 	Guard:
+# 		Voice: Guard
+# 	Guardable:
+# 	Targetable:
+# 		TargetTypes: Air, Plane
+# 	SpawnActorOnDeath:
+# 		Actor: phoenix.husk
+# 	Selectable:
+# 		Class: phoenix
+# 		Bounds: 1536, 1280, 0, 128
+# 	SelectionDecorations:
+# 	Voiced:
+# 		VoiceSet: D2KVehicleVoice
+# 	RenderSprites:
+# 		Image: d2k_gunship
+# 	ThrowsShrapnel:
+# 		Weapons: Debris2, Debris3
+# 		Pieces: 2, 3
+# 		Range: 2c0, 4c0
+
+ixian_railgundrone:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@cloak: ^CloakedAircraft
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@NeedleGuns: ^D2K_NeedleGuns
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@Barrel: ^D2K_ReinforcedBarrel
+	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Ixian Railgun Drone
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ixian_promotion_ixrailgundrone, ~ixian_hightechfactory
+		Queue: Aircraft, RAAircraft
+		Description: actor_venom.description
+	Aircraft:
+		TurnSpeed: 34
+		Speed: 170
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Shielded:
+		RegenAmount: 24
+	Armament@PRIMARY:
+		Weapon: IxRailgunDroneBullet
+		LocalOffset: 750,0,-250
+		PauseOnCondition: !ammo
+	AttackAircraft:
+		FacingTolerance: 10
+		OpportunityFire: false
+		PersistentTargeting: false
+		AttackType: Hover
+	AmmoPool:
+		Ammo: 5
+		AmmoCondition: ammo
+	SpawnActorOnDeath:
+		Actor: drone_husk.ixian
+	EjectOnDeath:
+		PilotActor: heavy_inf.ixian
+	SelectionDecorations:
+	ReloadAmmoPool:
+		Delay: 48
+		Count: 1
+	Selectable:
+		DecorationBounds: 1280, 1024
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+	Cloak:
+		UncloakOn: Attack, Damage
+		CloakStyle: Alpha
+	ActorStatValues:
+		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
+	WithAttackAnimation:
+		Sequence: shoot
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+drone_husk.ixian:
+	Inherits: ^SmallHelicopterHusk
+	Tooltip:
+		Name: Ix Railgun Drone
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 186
+	RenderSprites:
+		Image: ixian_railgundrone
+		PlayerPalette: player_rgba
+
+ixian_empbomber:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@cloak: ^CloakedAircraft
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
+	Valued:
+		Cost: 2400
+	Tooltip:
+		Name: Ixian EMP Bomber
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ixian_promotion_ixianempbomber, ~ixian_launchpad, ixian_ixresearchcenter
+		Queue: Aircraft, RAAircraft
+		Description: actor_venom.description
+	Aircraft:
+		TurnSpeed: 10
+		Speed: 145
+	Health:
+		HP: 111000
+	Repairable:
+		HpPerStep: 5555
+	ChangesHealth@SelfHealing:
+		Step: 44
+	Shielded:
+		RegenAmount: 76
+	Armament@PRIMARY:
+		Weapon: IxianBomb_EMP
+		LocalOffset: 250,0,-250
+		PauseOnCondition: !ammo
+	AttackAircraft:
+		FacingTolerance: 512
+		OpportunityFire: false
+		PersistentTargeting: false
+	AmmoPool:
+		Ammo: 1
+		ReloadDelay: 200
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	SpawnActorOnDeath:
+		Actor: heavydrone_husk.ixian
+	EjectOnDeath:
+		PilotActor: heavy_inf.ixian
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Cloak:
+		UncloakOn: Attack, Damage
+		CloakStyle: Alpha
+	ActorStatValues:
+		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+ixian_resonancedrone:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AutoRepair: ^PrioritizeRepair
+	Inherits@cloak: ^CloakedAircraft
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@AntiInf: ^D2K_NeedleGuns
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@Barrel: ^D2K_ReinforcedBarrel
+	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
+	-ExternalCondition@PropagandaEffect:
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Ixian Resonance Drone
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ixian_promotion_ixresonancedrone, ~ixian_hightechfactory, ixian_ixresearchcenter
+		Queue: Aircraft, RAAircraft
+		Description: actor_venom.description
+	Aircraft:
+		TurnSpeed: 25
+		Speed: 125
+	Health:
+		HP: 25000
+	Repairable:
+		HpPerStep: 1250
+	ChangesHealth@SelfHealing:
+		Step: 10
+	ProximityExternalCondition@shieldgen:
+		Range: 6000
+		ValidRelationships: Ally
+		Condition: shieldgen
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 6000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 6000
+		Type: heal
+		Color: 55BBFF
+		RequiresCondition: !disabled
+	WithDecoration@Carryall:
+		Image: d2k_pips
+		Sequence: pickup-indicator
+		ValidRelationships: Ally, Enemy, Neutral
+	Shielded:
+		RegenAmount: 20
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	Armament@repair:
+		Weapon: ResonanceDroneRepair
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		LocalOffset: 900,0,-100
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 10
+		Count: 1
+		ResetOnFire: true
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+	AttackAircraft:
+		FacingTolerance: 10
+		OpportunityFire: false
+		PersistentTargeting: false
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: resonance_drone_husk.ixian
+	EjectOnDeath:
+		PilotActor: light_inf
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Cloak:
+		UncloakOn: Attack, Damage
+		CloakStyle: Alpha
+	ActorStatValues:
+		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
+	WithAttackAnimation:
+		Sequence: shoot
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+resonance_drone_husk.ixian:
+	Inherits: ^SmallHelicopterHusk
+	Tooltip:
+		Name: Ix Resonance Drone
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 186
+	RenderSprites:
+		Image: ixian_resonancedrone
+		PlayerPalette: player_rgba
+
+ixian_farasha:
+	Inherits: ^Helicopter
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@Epic: ^EpicAirUnitTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@detect: ^GenericAllDetector
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@MC: ^MCImmune
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
+	#Inherits@guildtele: ^Guild_teleport
+	Inherits@eject: ^AircraftEjectOnDeath
+	Valued:
+		Cost: 6000
+	Tooltip:
+		Name: Farasha
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 180
+		Prerequisites: ~ixian_promotion_farasha, ~ixian_hightechfactory, ixian_ixresearchcenter
+		BuildLimit: 1
+		Queue: Aircraft, RAAircraft
+		Description: actor_farasha.description
+		IconPalette: ra2
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 16
+		Speed: 40
+		IdealSeparation: 2500
+		RepulsionSpeed: 32
+	CarrierMaster:
+		ArmamentNames: primary
+		Actors: farasha_drone_ixian, farasha_drone_ixian, farasha_drone_ixian, farasha_drone_ixian, farasha_drone_ixian
+		RearmTicks: 25
+		RespawnTicks: 75
+		InstaRepair: true
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: false
+	Health:
+		HP: 250000
+	Repairable:
+		HpPerStep: 12500
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Shielded:
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		RegenAmount: 200
+	Armament@drones:
+		Name: primary
+		Weapon: d2k_dronelauncher
+	Armament@charge:
+		Name: charge
+		Weapon: d2k_farasha_charge
+		LocalOffset: 1500,0,-250
+		PauseOnCondition: discharged
+	Armament:
+		Name: secondary
+		Weapon: ixian_farasha
+		LocalOffset: 1500,0,-250
+		PauseOnCondition: !charged
+		ReloadingCondition: discharged
+	Armament@AA:
+		Name: secondary
+		Weapon: d2k_farasha_aa
+		LocalOffset: 1500,0,-250
+		PauseOnCondition: !charged
+		ReloadingCondition: discharged
+	AmmoPool:
+		Armaments: secondary
+		Ammo: 100
+		InitialAmmo: 0
+		AmmoCondition: charged
+	ReloadAmmoPoolCA@charged:
+		Count: 100
+		Delay: 50
+		RequiresCondition: charging
+	ReloadAmmoPoolCA@discharge:
+		Count: -1
+		Delay: 1
+		RequiresCondition: charged && !charging
+	GrantConditionOnAttack@charged:
+		Condition: charging
+		RequiredShotsPerInstance: 1
+		ArmamentNames: charge
+		RevokeDelay: 50
+		#MaximumInstances: 50
+		RevokeOnNewTarget: true
+	WithAmmoPipsDecoration:
+		PipCount: 10
+		FullSequence: pip-red
+		Position: BottomLeft
+		RequiresSelection: true
+	Turreted:
+	AttackAircraft:
+		Armaments: primary, secondary, charge
+		FacingTolerance: 40
+	RenderRangeCircle:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2048, 2048
+	Voiced:
+		VoiceSet: D2KVehicleVoice
+	SpawnActorOnDeath:
+		Actor: farasha_husk.ixian
+		OwnerType: InternalName
+		EffectiveOwnerFromOwner: true
+	EjectOnDeath:
+		PilotActor: heavy_inf.ixian
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris2, Debris3, Debris4
+		Pieces: 6, 10
+		Range: 3c0, 6c0
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
+
+farasha_husk.ixian:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Farasha
+	Aircraft:
+		TurnSpeed: 15
+		Speed: 40
+	RenderSprites:
+		Image: ixian_farasha
+		PlayerPalette: player_rgba
+	FallsToEarth:
+		Explosion: D2KUnitExplodeLarge
+
+heavydrone_husk.ixian:
+	Inherits: ^SmallHelicopterHusk
+	Tooltip:
+		Name: Ix Heavy Drone
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 186
+	RenderSprites:
+		Image: ixian_empbomber
+		PlayerPalette: player_rgba
+
+farasha_drone_ixian:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
+	Valued:
+		Cost: 240
+	Tooltip:
+		Name: Alfayrus
+	Buildable:
+		Description: template_carrier_slave.description
+	Hovers:
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 32
+		Speed: 215
+		Repulsable: false
+		VTOL: false
+		CruiseAltitude: 1c256
+		TakeUpCellWhenLand: false
+	Targetable:
+		TargetTypes: Air
+	CarrierSlave:
+		LandingDistance: 6400
+	HasParent:
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Shielded:
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		RegenAmount: 20
+	Armament@PRIMARY:
+		Weapon: farasha_drone_ixian
+		LocalOffset: 150,0,0
+	AttackAircraft:
+		FacingTolerance: 40
+	Voiced:
+		VoiceSet: D2KVehicleVoice
+	RejectsOrders:
+	-ActorLostNotification:
+	-UpdatesPlayerStatistics:
+	HitShape:
+	-MapEditorData:
+	SpawnActorOnDeath:
+		Actor: farasha_drone_husk.ixian
+		OwnerType: InternalName
+		EffectiveOwnerFromOwner: true
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris2
+		Pieces: 1, 2
+		Range: 1c0, 3c0
+	ActorStatValues:
+		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
+
+farasha_drone_husk.ixian:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Alfayrus
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 260
+	RenderSprites:
+		Image: farasha_drone_ixian
+	FallsToEarth:
+		Explosion: D2KUnitExplodeSmall

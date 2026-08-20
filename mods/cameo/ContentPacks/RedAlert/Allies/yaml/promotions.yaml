@@ -1,0 +1,171 @@
+ra1_allies_promotion_machinegunner:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Machine Gunner
+	Buildable:
+		BuildPaletteOrder: 25
+		Queue: Promotions
+		Description: Allows training of Machine Gunners.
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_machinegunner, rank1
+	RenderSprites:
+		Image: ra1_allies_machinegunner
+	ProvidesPrerequisite:
+		Prerequisite: ra1_allies_promotion_machinegunner
+
+ra1_allies_promotion_sheridan:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Sheridan
+	Buildable:
+		BuildPaletteOrder: 28
+		Queue: Promotions
+		Description: Allows construction of the Sheridan Light Tank.
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_sheridan, ra1_allies_promotion_machinegunner, rank1
+	RenderSprites:
+		Image: ra1_allies_sheridanassaulttank
+	ProvidesPrerequisite:
+		Prerequisite: ra1_allies_promotion_sheridan
+
+ra1_allies_promotion_rapierjumpjet:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Rapier Jumpjet
+	Buildable:
+		BuildPaletteOrder: 31
+		Queue: Promotions
+		Description: Allows construction of the Rapier Jumpjet.
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_rapierjumpjet, ra1_allies_promotion_sheridan, rank1
+	RenderSprites:
+		Image: ra1_allies_rapierjumpjet
+	ProvidesPrerequisite:
+		Prerequisite: ra1_allies_promotion_rapierjumpjet
+
+ra1_allies_promotion_reinforcementpad:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Reinforcement Pad
+	Buildable:
+		BuildPaletteOrder: 34
+		Queue: Promotions
+		Description: Allows construction of the Reinforcement Pad.
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_reinforcementpad, ra1_allies_promotion_rapierjumpjet, rank1
+	RenderSprites:
+		Image: ra1_allies_reinforcementpad
+	ProvidesPrerequisite:
+		Prerequisite: ra1_allies_promotion_reinforcementpad
+
+ra1_allies_promotion_reconranger:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Recon Ranger.
+	Buildable:
+		BuildPaletteOrder: 26
+		Queue: Promotions
+		Description: Allows construction of the Recon Ranger.
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_reconranger, rank1
+	RenderSprites:
+		Image: ra1_allies_reconranger
+	ProvidesPrerequisite:
+		Prerequisite: ra1_allies_promotion_reconranger
+
+ra1_allies_promotion_tigerheavytank:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Tiger Heavy Tank
+	Buildable:
+		BuildPaletteOrder: 29
+		Queue: Promotions
+		Description: Allows construction of the Tiger Heavy Tank.
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_tigerheavytank, ra1_allies_promotion_reconranger, rank1
+	RenderSprites:
+		Image: alliedtiger
+	ProvidesPrerequisite:
+		Prerequisite: ra1_allies_promotion_tigerheavytank
+
+ra1_allies_promotion_tankdestroyer:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Tank Destroyer
+	Buildable:
+		BuildPaletteOrder: 32
+		Queue: Promotions
+		Description: Allows construction of the Tank Destroyer.
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_tankdestroyer, ra1_allies_promotion_tigerheavytank, rank1
+	RenderSprites:
+		Image: modtnkd2
+	ProvidesPrerequisite:
+		Prerequisite: ra1_allies_promotion_tankdestroyer
+
+ra1_allies_promotion_chronotank:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Chrono Tank
+	Buildable:
+		BuildPaletteOrder: 35
+		Queue: Promotions
+		Description: Allows construction of the Chrono Tank.
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_chronotank, ra1_allies_promotion_tankdestroyer, rank1
+	RenderSprites:
+		Image: ra1_allies_chronotank
+	ProvidesPrerequisite:
+		Prerequisite: ra1_allies_promotion_chronotank
+
+ra1_allies_promotion_camopillbox:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Camo Pillbox
+	Buildable:
+		BuildPaletteOrder: 27
+		Queue: Promotions
+		Description: Allows construction of the Camo Pillbox.
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_camopillbox, rank1
+	RenderSprites:
+		Image: ra1_allies_camopillbox
+	ProvidesPrerequisite:
+		Prerequisite: ra1_allies_promotion_camopillbox
+
+ra1_allies_promotion_phasetransport:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Phase Transport
+	Buildable:
+		BuildPaletteOrder: 30
+		Queue: Promotions
+		Description: Allows construction of Phase Transports.
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_phasetransport, ra1_allies_promotion_camopillbox, rank1
+	RenderSprites:
+		Image: ra1_allies_phasetransport
+	ProvidesPrerequisite:
+		Prerequisite: ra1_allies_promotion_phasetransport
+
+ra1_allies_promotion_bastion:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Bastion
+	Buildable:
+		BuildPaletteOrder: 33
+		Queue: Promotions
+		Description: Allows construction of Bastion Artillery Bunkers.
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_bastion, ra1_allies_promotion_phasetransport, rank1
+	RenderSprites:
+		Image: ra1_allies_bastionartillerybunker
+	ProvidesPrerequisite:
+		Prerequisite: ra1_allies_promotion_bastion
+
+ra1_allies_promotion_gapgeneratorandradarjammer:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Gap Generator and Radar Jammer
+	Buildable:
+		BuildPaletteOrder: 36
+		Queue: Promotions
+		Description: Allows construction of the Gap Generator and Mobile Radar Jammer.
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_gapgeneratorandradarjammer, ra1_allies_promotion_bastion, rank1
+	RenderSprites:
+		Image: gapgeneratorradarjammer
+	ProvidesPrerequisite:
+		Prerequisite: ra1_allies_promotion_gapgeneratorandradarjammer
+
+	####################################################################################################
+	#		Promotion Units Allies
+	####################################################################################################

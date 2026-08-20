@@ -296,6 +296,35 @@ $modID = $env:MOD_ID
 $env:MOD_SEARCH_PATHS = "./mods,$env:ENGINE_DIRECTORY/mods"
 $env:ENGINE_DIR = ".." # Set to potentially be used by the Utility and different than $env:ENGINE_DIRECTORY, which is for the script.
 
+function Invoke-EngineMake([string[]] $engineArguments)
+{
+	if (!(Test-Path -LiteralPath $env:ENGINE_DIRECTORY -PathType Container))
+	{
+		throw "Engine directory '$env:ENGINE_DIRECTORY' was not found. Aborting."
+	}
+
+	$engineMake = Join-Path $env:ENGINE_DIRECTORY "make.cmd"
+	if (!(Test-Path -LiteralPath $engineMake -PathType Leaf))
+	{
+		throw "Engine build script '$engineMake' was not found. Aborting."
+	}
+	$engineMake = (Resolve-Path -LiteralPath $engineMake -ErrorAction Stop).Path
+
+	Push-Location $env:ENGINE_DIRECTORY
+	try
+	{
+		& $engineMake @engineArguments 2>&1 | Write-Output
+		if ($LASTEXITCODE -ne 0)
+		{
+			throw "Engine command '$($engineArguments -join ' ')' failed with exit code $LASTEXITCODE."
+		}
+	}
+	finally
+	{
+		Pop-Location
+	}
+}
+
 # Fetch the engine if required
 if ($command -eq "all" -or $command -eq "clean" -or $command -eq "check")
 {
@@ -310,10 +339,8 @@ if ($command -eq "all" -or $command -eq "clean" -or $command -eq "check")
 
 	if ($currentEngine -ne "" -and $currentEngine -eq $env:ENGINE_VERSION)
 	{
-		cd $env:ENGINE_DIRECTORY
-		Invoke-Expression ".\make.cmd $command"
+		Invoke-EngineMake @($command)
 		Write-Host ""
-		cd $templateDir
 	}
 	elseif ($env:AUTOMATIC_ENGINE_MANAGEMENT -ne "True")
 	{
@@ -324,20 +351,6 @@ if ($command -eq "all" -or $command -eq "clean" -or $command -eq "check")
 	else
 	{
 		Write-Host "OpenRA engine version $env:ENGINE_VERSION is required."
-
-		if (Test-Path $env:ENGINE_DIRECTORY)
-		{
-			if ($currentEngine -ne "")
-			{
-				Write-Host "Deleting engine version $currentEngine."
-			}
-			else
-			{
-				Write-Host "Deleting existing engine (unknown version)."
-			}
-
-			rm $env:ENGINE_DIRECTORY -r
-		}
 
 		Write-Host "Downloading engine..."
 
@@ -353,25 +366,69 @@ if ($command -eq "all" -or $command -eq "clean" -or $command -eq "check")
 		$dlPath = Join-Path $pwd (Split-Path -leaf $env:AUTOMATIC_ENGINE_EXTRACT_DIRECTORY)
 		$dlPath = Join-Path $dlPath (Split-Path -leaf $env:AUTOMATIC_ENGINE_TEMP_ARCHIVE_NAME)
 
-		$client = new-object System.Net.WebClient
-		[Net.ServicePointManager]::SecurityProtocol = 'Tls12'
-		$client.DownloadFile($url, $dlPath)
+		try
+		{
+			$client = new-object System.Net.WebClient
+			[Net.ServicePointManager]::SecurityProtocol = 'Tls12'
+			$client.DownloadFile($url, $dlPath)
 
-		Add-Type -assembly "system.io.compression.filesystem"
-		[io.compression.zipfile]::ExtractToDirectory($dlPath, $env:AUTOMATIC_ENGINE_EXTRACT_DIRECTORY)
-		rm $dlPath
+			Add-Type -assembly "system.io.compression.filesystem"
+			[io.compression.zipfile]::ExtractToDirectory($dlPath, $env:AUTOMATIC_ENGINE_EXTRACT_DIRECTORY)
 
-		$extractedDir = Get-ChildItem $env:AUTOMATIC_ENGINE_EXTRACT_DIRECTORY -Recurse | ?{ $_.PSIsContainer } | Select-Object -First 1
-		Move-Item $extractedDir.FullName -Destination $templateDir
-		Rename-Item $extractedDir.Name (Split-Path -leaf $env:ENGINE_DIRECTORY)
+			$extractedRoots = @(Get-ChildItem -LiteralPath $env:AUTOMATIC_ENGINE_EXTRACT_DIRECTORY -Directory)
+			if ($extractedRoots.Count -ne 1)
+			{
+				throw "Engine archive contained $($extractedRoots.Count) top-level directories; expected exactly one."
+			}
 
-		rm $env:AUTOMATIC_ENGINE_EXTRACT_DIRECTORY -r
+			$extractedDir = $extractedRoots[0]
+			$requiredFiles = @("make.cmd", "OpenRA.Game/OpenRA.Game.csproj")
+			foreach ($requiredFile in $requiredFiles)
+			{
+				if (!(Test-Path -LiteralPath (Join-Path $extractedDir.FullName $requiredFile) -PathType Leaf))
+				{
+					throw "Downloaded engine is incomplete: '$requiredFile' was not found."
+				}
+			}
 
-		cd $env:ENGINE_DIRECTORY
-		Invoke-Expression ".\make.cmd version $env:ENGINE_VERSION"
-		Invoke-Expression ".\make.cmd $command"
+			# Only replace the working engine after the new archive has downloaded, extracted, and validated.
+			if (Test-Path -LiteralPath $env:ENGINE_DIRECTORY)
+			{
+				if ($currentEngine -ne "")
+				{
+					Write-Host "Replacing engine version $currentEngine."
+				}
+				else
+				{
+					Write-Host "Replacing existing engine (unknown version)."
+				}
+
+				Remove-Item -LiteralPath $env:ENGINE_DIRECTORY -Recurse -Force -ErrorAction Stop
+			}
+
+			Move-Item -LiteralPath $extractedDir.FullName -Destination $env:ENGINE_DIRECTORY -ErrorAction Stop
+		}
+		catch
+		{
+			Write-Error "Unable to install OpenRA engine ${env:ENGINE_VERSION}: $_"
+			exit 1
+		}
+		finally
+		{
+			if (Test-Path -LiteralPath $dlPath)
+			{
+				Remove-Item -LiteralPath $dlPath -Force
+			}
+
+			if (Test-Path -LiteralPath $env:AUTOMATIC_ENGINE_EXTRACT_DIRECTORY)
+			{
+				Remove-Item -LiteralPath $env:AUTOMATIC_ENGINE_EXTRACT_DIRECTORY -Recurse -Force
+			}
+		}
+
+		Invoke-EngineMake @("version", $env:ENGINE_VERSION)
+		Invoke-EngineMake @($command)
 		Write-Host ""
-		cd $templateDir
 	}
 }
 

@@ -1,0 +1,777 @@
+yuri_engineer:
+	Inherits: ^Soldier
+	Inherits@anim: ^RA2Infantry
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@engineer: ^EngineerDefaultWeapons
+	Inherits@isengineer: ^IsEngineer
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
+	Inherits@vo: ^AttackVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Tooltip:
+		Name: Engineer
+	Valued:
+		Cost: 500
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~yuri_barracks
+		Queue: Infantry, RAInfantry
+		Description: Captures and repairs structures.\n  Unarmed
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 5000
+	Passenger:
+		CustomPipType: engineer
+	Garrisoner:
+		CustomPipType: engineer
+	InstantlyRepairs:
+		Types: building
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	InstantlyRepairs@Tech:
+		Types: tech
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	InstantlyRepairs@Civ:
+		Types: civ
+		ValidRelationships: Ally, Neutral
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	RepairsBridges:
+		EnterBehaviour: Exit
+	CaptureManager:
+	GrantConditionOnPrerequisite@GLOBALREUSABLEENGINEER:
+		Condition: global-reusable-engineers
+		Prerequisites: global-reusable-engineers
+	Captures:
+		RequiresCondition: !global-reusable-engineers
+		CaptureTypes: building, defense, tech
+		PlayerExperience: 500
+		ConsumedByCapture: True
+	Captures@REUSABLE:
+		RequiresCondition: global-reusable-engineers
+		CaptureTypes: building, defense, tech
+		PlayerExperience: 500
+		CaptureDelay: 375
+		ConsumedByCapture: False
+		EnterCursor: ability
+		EnterBlockedCursor: move-blocked
+	Selectable:
+		Priority: 5
+		Class: e6
+	Voiced:
+		VoiceSet: YuriEngineer
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	RenderSprites:
+		Image: ra2_allies_engineer
+
+yuri_initiate:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Inherits@RA2YuriPsionicArmor: ^RA2YuriPsionicArmor
+	Inherits@RA2YuriStealthSuits: ^RA2YuriStealthSuits
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: Yuri Initiate
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~yuri_barracks
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 66
+	Health:
+		HP: 24000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	AutoTarget:
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: RA2PsychicJab
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2PsychicJab
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: RA2PsychicJab_elite
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2PsychicJab_elite
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@SplashCompensation:
+		Modifier: 50
+	FirepowerMultiplier@yuri_upgrade_initiatepowersurge:
+		Modifier: 150
+		RequiresCondition: yuri_upgrade_initiatepowersurge
+	RangeMultiplier@yuri_upgrade_initiatepowersurge:
+		Modifier: 115
+		RequiresCondition: yuri_upgrade_initiatepowersurge
+	ReloadDelayMultiplier@yuri_upgrade_initiatepowersurge:
+		Modifier: 85
+		RequiresCondition: yuri_upgrade_initiatepowersurge
+	GrantConditionOnPrerequisite@yuri_upgrade_initiatepowersurge:
+		Condition: yuri_upgrade_initiatepowersurge
+		Prerequisites: yuri_upgrade_initiatepowersurge
+	AttackFrontal:
+		FacingTolerance: 0
+	AcceptsDeliveredExperience:
+		ValidTypes: infantry
+	Voiced:
+		VoiceSet: InitiateVoice
+	ActorStatValues:
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_psionicarmor, yuri_upgrade_infantrystealthsuits, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_initiatepowersurge
+
+yuri_brute:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Brute
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~yuri_barracks
+		Queue: Infantry, RAInfantry
+		Description: actor_brute.description
+	Mobile:
+		Speed: 80
+	Health:
+		HP: 45000
+	ChangesHealth@SelfHealing:
+		Step: 45
+	Armament@PRIMARY:
+		Weapon: RA2BrutePunch
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2BrutePunch_elite
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: BruteVoice
+	Passenger:
+	-TakeCover:
+	Targetable@ra1_soviets_attackdog:
+		TargetTypes: DogImmune
+	FirepowerMultiplier@yuri_upgrade_brutestrengthmutations:
+		Modifier: 140
+		RequiresCondition: yuri_upgrade_brutestrengthmutations
+	SpeedMultiplier@yuri_upgrade_brutestrengthmutations:
+		Modifier: 120
+		RequiresCondition: yuri_upgrade_brutestrengthmutations
+	DamageMultiplier@yuri_upgrade_brutestrengthmutations:
+		Modifier: 80
+		RequiresCondition: yuri_upgrade_brutestrengthmutations
+	GrantConditionOnPrerequisite@yuri_upgrade_brutestrengthmutations:
+		Condition: yuri_upgrade_brutestrengthmutations
+		Prerequisites: yuri_upgrade_brutestrengthmutations
+	ActorStatValues:
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_brutestrengthmutations
+
+yuri_virus:
+	Inherits: ^Soldier
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Virus
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~yuri_psychicsensor
+		Queue: Infantry, RAInfantry
+		Description: actor_virus.description
+	Mobile:
+		Speed: 52
+	Health:
+		HP: 12000
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: RA2Virusgun
+		LocalOffset: 0,0,427
+		RequiresCondition: !rank-elite && !yuri_upgrade_meltingvirus
+	Armament@PRIMARY2:
+		Weapon: RA2Virusgun2
+		LocalOffset: 0,0,427
+		RequiresCondition: !rank-elite && yuri_upgrade_meltingvirus && !yuri_upgrade_corrosiveammo
+	Armament@PRIMARY3:
+		Weapon: RA2Virusgun3
+		LocalOffset: 0,0,427
+		RequiresCondition: !rank-elite && yuri_upgrade_corrosiveammo
+	Armament@ELITE:
+		Weapon: RA2Virusgun_elite
+		LocalOffset: 0,0,427
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2Virusgun
+		RequiresCondition: !rank-elite && !yuri_upgrade_meltingvirus
+	Armament@GARRISONED2:
+		Name: garrisoned
+		Weapon: RA2Virusgun2
+		RequiresCondition: !rank-elite && yuri_upgrade_meltingvirus && !yuri_upgrade_corrosiveammo
+	Armament@GARRISONED3:
+		Name: garrisoned
+		Weapon: RA2Virusgun3
+		RequiresCondition: !rank-elite && yuri_upgrade_corrosiveammo
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2Virusgun_elite
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	AutoTargetPriority:
+		ValidTargets: Infantry
+	Voiced:
+		VoiceSet: VirusVoice
+	GrantConditionOnPrerequisite@viruscloud:
+		Condition: yuri_upgrade_meltingvirus
+		Prerequisites: yuri_upgrade_meltingvirus
+	ActorStatValues:
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_meltingvirus, yuri_upgrade_corrosiveammo
+
+yuri_clone:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@MC: ^MCImmune
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@bot: ^BotAutoDeployOnLowHealth
+	Inherits@pip: ^WithSpecialCargoPip
+	Inherits@RA2YuriMindControlCap: ^RA2YuriMindControlCap
+	Inherits@RA2YuriPsychicRange: ^RA2YuriPsychicRange
+	Inherits@RA2YuriPsionicArmor: ^RA2YuriPsionicArmor
+	Inherits@RA2YuriPsychicVision: ^RA2YuriPsychicVision
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Yuri Clone
+	Buildable:
+		BuildPaletteOrder: 45
+		Prerequisites: ~yuri_psychicsensor
+		Queue: Infantry, RAInfantry
+		Description: actor_yuri.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 5000
+	ChangesHealth@SelfHealing:
+		Step: 5
+	Armament@CONTROL:
+		Name: primary
+		Weapon: RA2MindControl
+	#Armament@GARRISONED:
+	#	Name: garrisoned
+	#	Weapon: RA2MindControl
+	Passenger:
+	MindControllerCA:
+		ArmamentNames: primary
+		ExperienceFromControl: 100
+		TicksToControl: 30
+		Capacity: 1
+		RequiresCondition: !disabled
+		ControllingCondition: controlling
+	ReloadArmamentsBar:
+	AutoTarget:
+		RequiresCondition: (!controlling && !yuri_upgrade_domination) || (controlling < 3 && yuri_upgrade_domination)
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		RequiresCondition: !deployed && !deploying
+	WithSpriteBody@deployed:
+		Sequence: deployed
+		RequiresCondition: deployed || deploying
+	PeriodicExplosion:
+		Weapon: PsiWave
+		RequiresCondition: deployed && !disabled
+	GrantTimedConditionOnDeploy:
+		DeployedTicks: 125
+		CooldownTicks: 0
+		Facing: 96
+		DeployedCondition: deployed
+		DeployingCondition: deploying
+		DeployAnimation: deploy
+		UndeployAnimation: undeploy
+		ShowSelectionBar: false
+		Voice: Attack
+		PauseOnCondition: disabled
+	WithRangeCircle@PsiWave:
+		Range: 2500
+		Type: psiwave
+		Color: ff0000b0
+	WithRangeCircle@MC:
+		Range: 6000
+		Type: mindcontrol
+		Color: 663399b0
+	RangedGpsProvider@yuri_upgrade_psychicvision:
+		Range: 15000
+		RequiresCondition: yuri_upgrade_psychicvision
+	Voiced:
+		VoiceSet: YuriVoice
+	ProximityCaptor@MC:
+		Types: Infantry
+	IgnoresDisguise:
+	KeepsDistance:
+	RenderSprites:
+		Image: RA2YURI
+	ActorStatValues:
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_domination, yuri_upgrade_psychicrange, yuri_upgrade_psionicarmor
+
+yuri_yurix:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@MC: ^MCImmune
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@bot: ^BotAutoDeployOnLowHealth
+	Inherits@RA2YuriMindControlCap: ^RA2YuriMindControlCap
+	Inherits@RA2YuriPsychicRange: ^RA2YuriPsychicRange
+	Inherits@RA2YuriPsionicArmor: ^RA2YuriPsionicArmor
+	Inherits@RA2YuriPsychicVision: ^RA2YuriPsychicVision
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Selectable:
+		DecorationBounds: 512, 1440, 0, -512
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: actor_yurix.name
+	Buildable:
+		BuildPaletteOrder: 150
+		Prerequisites: ~yuri_barracks, yuri_lunarcommandcenter
+		Queue: Infantry, RAInfantry
+		BuildLimit: 1
+		Description: actor_yurix.description
+	Mobile:
+		Speed: 100
+		Locomotor: hover
+	Health:
+		HP: 20000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY:
+		Weapon: RA2XMindControl
+		ReloadingCondition: reload-structure
+		PauseOnCondition: reload-splash
+	Armament@Splash:
+		Weapon: RA2XMindControlSplash
+		Name: secondary
+		ReloadingCondition: reload-splash
+		PauseOnCondition: reload-structure
+		RequiresCondition: !yuri_upgrade_domination
+	Armament@Splash2:
+		Weapon: RA2XMindControlSplash2
+		Name: secondary
+		ReloadingCondition: reload-splash
+		PauseOnCondition: reload-structure
+		RequiresCondition: yuri_upgrade_domination
+	MindControllerCA:
+		ArmamentNames: primary
+		ExperienceFromControl: 100
+		TicksToControl: 30
+		Capacity: 0
+		RequiresCondition: !disabled
+		ControllingCondition: controlling
+	SpeedMultiplier@MC1:
+		Modifier: 90
+		RequiresCondition: controlling == 1
+	SpeedMultiplier@MC2:
+		Modifier: 80
+		RequiresCondition: controlling == 2
+	SpeedMultiplier@MC3:
+		Modifier: 70
+		RequiresCondition: controlling == 3
+	SpeedMultiplier@MC4:
+		Modifier: 60
+		RequiresCondition: controlling == 4
+	SpeedMultiplier@MC5:
+		Modifier: 50
+		RequiresCondition: controlling == 5
+	SpeedMultiplier@MC6:
+		Modifier: 40
+		RequiresCondition: controlling == 6
+	SpeedMultiplier@MC7:
+		Modifier: 30
+		RequiresCondition: controlling == 7
+	SpeedMultiplier@MC8:
+		Modifier: 20
+		RequiresCondition: controlling == 8
+	SpeedMultiplier@MC9:
+		Modifier: 10
+		RequiresCondition: controlling == 9
+	SpeedMultiplier@MC10:
+		Modifier: 0
+		RequiresCondition: controlling >= 10
+	ReloadDelayMultiplier@MC1:
+		Modifier: 120
+		RequiresCondition: controlling == 1
+	ReloadDelayMultiplier@MC2:
+		Modifier: 140
+		RequiresCondition: controlling == 2
+	ReloadDelayMultiplier@MC3:
+		Modifier: 160
+		RequiresCondition: controlling == 3
+	ReloadDelayMultiplier@MC4:
+		Modifier: 180
+		RequiresCondition: controlling == 4
+	ReloadDelayMultiplier@MC5:
+		Modifier: 200
+		RequiresCondition: controlling == 5
+	ReloadDelayMultiplier@MC6:
+		Modifier: 220
+		RequiresCondition: controlling == 6
+	ReloadDelayMultiplier@MC7:
+		Modifier: 240
+		RequiresCondition: controlling == 7
+	ReloadDelayMultiplier@MC8:
+		Modifier: 260
+		RequiresCondition: controlling == 8
+	ReloadDelayMultiplier@MC9:
+		Modifier: 280
+		RequiresCondition: controlling == 9
+	ReloadDelayMultiplier@MC10:
+		Modifier: 300
+		RequiresCondition: controlling == 10
+	ReloadArmamentsBar:
+	AutoTarget:
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		RequiresCondition: !deployed && !deploying
+	WithSpriteBody@deployed:
+		Sequence: deployed
+		RequiresCondition: deployed || deploying
+	PeriodicExplosion:
+		Weapon: PsiWaveX
+		RequiresCondition: deployed && !disabled
+	GrantTimedConditionOnDeploy:
+		DeployedTicks: 250
+		CooldownTicks: 0
+		Facing: 96
+		DeployedCondition: deployed
+		DeployingCondition: deploying
+		DeployAnimation: deploy
+		UndeployAnimation: undeploy
+		ShowSelectionBar: false
+		Voice: Attack
+		PauseOnCondition: disabled || (controlling >= 10)
+	WithRangeCircle@PsiWave:
+		Range: 5000
+		Type: psiwave
+		Color: ff0000b0
+	WithRangeCircle@MC:
+		Range: 8000
+		Type: mindcontrol
+		Color: 663399bb
+	RangedGpsProvider@yuri_upgrade_psychicvision:
+		Range: 30000
+		RequiresCondition: yuri_upgrade_psychicvision
+	AcceptsDeliveredExperience:
+		ValidTypes: infantry
+	Voiced:
+		VoiceSet: YuriVoice
+	IgnoresDisguise:
+	-DamagedByTerrain:
+	#-Cloneable:
+	KeepsDistance:
+	ActorStatValues:
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_domination, yuri_upgrade_psychicrange, yuri_upgrade_psionicarmor
+
+yuri_gatlingtrooper:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2YuriGatlingPower: ^RA2YuriGatlingPower
+	Inherits@RA2YuriGatlingSpeed: ^RA2YuriGatlingSpeed
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Valued:
+		Cost: 431
+	Tooltip:
+		Name: Gatling Trooper
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~yuri_barracks, yuri_battlelab
+		Queue: Infantry, RAInfantry
+		IconPalette: ra2cameo
+		Description: actor_gtrp.description
+	Mobile:
+		Speed: 45
+	Health:
+		HP: 36000
+	ChangesHealth@SelfHealing:
+		Step: 36
+	AutoTarget:
+	Armament@PRIMARY:
+		Weapon: RA2GattlingInf
+		LocalOffset: 544,100,256
+	Armament@GARRISONED:
+		Weapon: RA2GattlingInf
+		Name: garrisoned
+	ReloadDelayMultiplier@GattlingSpeed1:
+		RequiresCondition: gatling >= 1
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed2:
+		RequiresCondition: gatling >= 2
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed3:
+		RequiresCondition: gatling >= 3
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed4:
+		RequiresCondition: gatling >= 4
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed5:
+		RequiresCondition: gatling >= 5
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed6:
+		RequiresCondition: gatling >= 6
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed7:
+		RequiresCondition: gatling >= 7
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed8:
+		RequiresCondition: gatling >= 8
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed9:
+		RequiresCondition: gatling >= 9
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed10:
+		RequiresCondition: gatling >= 10
+		Modifier: 90
+	GrantConditionOnAttack@gatling:
+		Condition: gatling
+		RequiredShotsPerInstance: 1,2,3,4,5,6,7,8,9,10
+		RevokeDelay: 80
+		MaximumInstances: 10
+	GrantConditionOnAttack@elitegatling:
+		Condition: gatling
+		RequiredShotsPerInstance: 1,1,1,1,1,1,1,1,1,1
+		RevokeDelay: 40
+		MaximumInstances: 10
+	AttackFrontal:
+		FacingTolerance: 2
+	Voiced:
+		VoiceSet: ArnoldVoice
+	RenderSprites:
+		Image: yrarnd
+	ActorStatValues:
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_gatlingfirepowerupgrade, yuri_upgrade_gatlingspeedupgrade
+
+	FirepowerMultiplier:
+		Modifier: 108
+yuri_biotrooper:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 100
+		Prerequisites: ~yuri_barracks, yuri_cloningvats
+		Description: actor_biot.description
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Bio Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 96000
+	ChangesHealth@SelfHealing:
+		Step: 96
+	Mobile:
+		Speed: 64
+	Armament@PRIMARY:
+		Weapon: RA2Chemspray
+		LocalOffset: 600,0,512
+		FireDelay: 5
+		RequiresCondition: !rank-elite && !yuri_upgrade_corrosiveammo
+	Armament@Upgrade:
+		Weapon: RA2Chemspray2
+		LocalOffset: 0,0,427
+		RequiresCondition: !rank-elite && yuri_upgrade_corrosiveammo
+	Armament@ELITE:
+		Weapon: RA2Chemspray_elite
+		LocalOffset: 0,0,427
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2Chemspray
+		RequiresCondition: !rank-elite && !yuri_upgrade_corrosiveammo
+	Armament@GARRISONEDUpgrade:
+		Name: garrisoned
+		Weapon: RA2Chemspray2
+		RequiresCondition: !rank-elite && yuri_upgrade_corrosiveammo
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2Chemspray_elite
+		RequiresCondition: rank-elite
+	WithInfantryBody:
+	AttackFrontal:
+	Voiced:
+		VoiceSet: RA2DesolatorVoice
+	Selectable:
+		DecorationBounds: 768, 900, 0, -256
+	-DamagedByTerrain:
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	ActorStatValues:
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_corrosiveammo
+	GrantExternalConditionToTransport:
+		Condition: ifv-chem
+
+##############################################
+#   Red Alert 2 Allies Vehicles
+##############################################
+
+yuri_cosmonaut:
+	Inherits: ^JumpjetInfantry
+	Inherits@Template: ^FlyingInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericAirDetector
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Inherits@RA2YuriGravitonDrive: ^RA2YuriGravitonDrive
+	Inherits@RA2YuriPsionicPlasmaBeams: ^RA2YuriPsionicPlasmaBeams
+	Tooltip:
+		Name: Cosmonaut
+	Valued:
+		Cost: 1100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Aircraft, RAAircraft
+		Prerequisites: ~yuri_lunarcommandcenter
+		Description: actor_ra2rock.description
+	Aircraft:
+		TurnSpeed: 33
+		Speed: 165
+		Voice: Move
+	Health:
+		HP: 28000
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Armament@PRIMARY:
+		Weapon: RA2CosmonautLaser
+		LocalOffset: 128,196,128, 128,-196,128
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: yrlunr.husk
+	Voiced:
+		VoiceSet: CosmonautVoice
+	DeathSounds:
+	-WithShadow:
+	WithInfantryBody@Air:
+		StandSequences: fly
+		MoveSequence: fly
+		DefaultAttackSequence: shoot-air
+		IdleSequences: idle-air
+		RequiresCondition: airborne
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		DefaultAttackSequence: shoot
+		RequiresCondition: !airborne
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	Selectable:
+		Bounds: 512, 768
+	WithSpriteBody@shadow:
+		Name: shadow
+		Sequence: shadow
+		ForceToGround: true
+		RequiresCondition: airborne
+	FirepowerMultiplier@FirerateCompensation:
+		Modifier: 50
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_gravitondrive, yuri_upgrade_psionicplasmabeams

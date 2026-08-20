@@ -1,0 +1,178 @@
+ts_nod_bansheefighter:
+	Inherits: ^Helicopter
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@MobilitySpecialization: ^MobilitySpecialization
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Valued:
+		Cost: 2400
+	Tooltip:
+		Name: Banshee Fighter
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ts_nod_helipad, ts_nod_techcenter, ts_nod_radar
+		Queue: Aircraft, RAAircraft
+		Description: Advanced fighter-bomber craft\nwith twin plasma cannons.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 12
+		Speed: 180
+		AirborneCondition: airborne
+		TakeoffSounds: dropup1.aud
+		LandingSounds: dropdwn1.aud
+		CanHover: false
+		CanSlide: false
+	Health:
+		HP: 60000
+	Repairable:
+		HpPerStep: 3000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Armament@PRIMARY:
+		Weapon: TSProton
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+		PersistentTargeting: false
+		PauseOnCondition: disabled
+	-WithShadow:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Voiced:
+		VoiceSet: TSScrin
+	AmmoPool:
+		Ammo: 4
+		ReloadCount: 4
+		AmmoCondition: ammo
+	# ReloadAmmoPool:
+	# 	Delay: 25
+	# 	Count: 1
+	DeathSounds:
+		VolumeMultiplier: 2
+	SpawnActorOnDeath:
+		Actor: ts_nod_bansheefighter_husk
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_advancedtiberiumrefinement
+
+ts_nod_harpy:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@MobilitySpecialization: ^MobilitySpecialization
+	Inherits@TiberiumLenses: ^TiberiumLenses
+	Inherits@AuxiliaryWeapon: ^AuxiliaryWeapon
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Valued:
+		Cost: 1800
+	Tooltip:
+		Name: Harpy
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ts_nod_helipad
+		Queue: Aircraft, RAAircraft
+		Description: Anti-personnel support gunship\narmed with dual chain guns.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
+	Aircraft:
+		TurnSpeed: 56
+		Speed: 140
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY:
+		Weapon: TSHarpyClaw
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		AmmoUsage: 5
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses && !ts_nod_upgrade_auxiliaryweapon
+	Armament@SECONDARY:
+		Weapon: TSHarpyMultiClaw
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		AmmoUsage: 0
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses && ts_nod_upgrade_auxiliaryweapon
+	Armament@PRIMARYAOE:
+		Weapon: TSHarpyAOEClaw
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		AmmoUsage: 5
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses && ts_nod_upgrade_auxiliaryweapon
+	Armament@UPGRADE:
+		Weapon: TSLaserHarpyClaw
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		AmmoUsage: 4
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses && !ts_nod_upgrade_auxiliaryweapon
+	Armament@SECONDARYUPGRADE:
+		Weapon: TSLaserHarpyMultiClaw
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		AmmoUsage: 0
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses && ts_nod_upgrade_auxiliaryweapon
+	Armament@UPGRADEAOE:
+		Weapon: TSLaserHarpyAOEClaw
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		AmmoUsage: 4
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses && ts_nod_upgrade_auxiliaryweapon
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		Voice: Attack
+		PauseOnCondition: disabled
+		AttackType: Hover
+	-WithShadow:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSScrin
+	AmmoPool:
+		Ammo: 80
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 32
+		Count: 20
+	SpawnActorOnDeath:
+		Actor: ts_nod_harpy_husk
+	WithIdleOverlay@ROTORAIR:
+		Offset: 42,0,300
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTORGROUND:
+		Offset: 42,0,300
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	RenderVoxels:
+		Scale: 15
+		Image: tsapache
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	RenderSprites:
+		Image: tsapache
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_tiberiumlenses, ts_nod_upgrade_auxiliaryweapon, ts_nod_upgrade_advancedtiberiumrefinement

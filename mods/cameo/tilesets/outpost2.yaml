@@ -1,6 +1,7 @@
 General:
 	Name: OUTPOST2
 	Id: OUTPOST2
+	TileSize: 48,48
 	EditorTemplateOrder: Terrain
 	SheetSize: 1024
 
@@ -21,10 +22,10 @@ Terrain:
 		Type: ClearDune
 		Color: 3B3B3A
 		TargetTypes: Ground
-	TerrainType@Wall:
-		Type: Wall
+	TerrainType@wall:
+		Type: wall
 		Color: 353535
-		TargetTypes: Wall
+		TargetTypes: wall
 	TerrainType@Water:
 		Type: Water
 		Color: EF3108
@@ -53,6 +54,26 @@ Terrain:
 		Type: Plant
 		Color: 056C49
 		TargetTypes: Plant
+	TerrainType@RA2Copper:
+		Type: RA2Copper
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 804020
+	TerrainType@RA2Silver:
+		Type: RA2Silver
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: C0C0C0
+	TerrainType@RA2Ore:
+		Type: RA2Ore
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 808000
+	TerrainType@RA2Gems:
+		Type: RA2Gems
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 8040C0
 	TerrainType@Ore:
 		Type: Ore
 		Color: FFFFFF

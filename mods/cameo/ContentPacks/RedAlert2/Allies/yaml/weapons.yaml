@@ -1,0 +1,860 @@
+RA2Patriot:
+	Inherits: ^RA2MediumMissile
+	ReloadDelay: 30
+	Range: 14150
+	Burst: 2
+	BurstDelays: 6
+	ValidTargets: Air
+	Report: vifvatta.wav
+	Projectile: Missile
+		Speed: 600
+		MinimumLaunchAngle: 60
+	Warhead@MissileAP_Medium:
+		Damage: 10000
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+		Damage: 5
+
+RA2PatriotThunderboltMissile:
+	Inherits@wh: ^Warhead_MissileAA_Heavy
+	Inherits@proj: ^Projectile_Missile_AA
+	Inherits@fx: ^Effect_MissileAP_Heavy
+	Warhead@Effect:
+		ImpactSounds: xplos.aud
+	Warhead@EffectAir:
+		ImpactSounds: xplos.aud
+	Report: vifvatta.wav
+	ReloadDelay: 30
+	Range: 14150
+	Burst: 2
+	BurstDelays: 6
+	ValidTargets: Air
+	Projectile: Missile
+		Speed: 800
+		Arm: 2
+		Inaccuracy: 400
+		RangeLimit: 16000
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		MinimumLaunchAngle: 25
+		MaximumLaunchAngle: 125
+		MaximumLaunchSpeed: 400
+		MinimumLaunchSpeed: 400
+		Acceleration: 10
+		ContrailStartColor: EEEE00
+		ContrailEndColor: FFFFFF
+
+HarrierMissiles:
+	Inherits: ^LightFlameWeapon
+	Inherits@2: ^Grenade
+	Inherits@3: ^HeavyChemicalWeapon
+	Inherits@4: ^HeavyAAWeapon
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^RA2MediumMissile
+	ReloadDelay: 104
+	Burst: 4
+	BurstDelays: 2
+	Range: 5555
+	MinRange: 1110
+	Report: vintatta.wav
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Inaccuracy: 333
+		Speed: 555
+	Warhead@LightFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyAAWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MissileAP_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+
+HarrierMissiles_elite:
+	Inherits: HarrierMissiles
+	Burst: 8
+	Range: 6666
+	Projectile: Missile
+		Inaccuracy: 444
+		Speed: 666
+		Image: red_dragon
+		TrailImage: red_smokey
+		ContrailColor: e60000
+		ContrailStartColor: E60000
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+
+BlackEagleMissiles:
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Demolition_Heavy
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@3: ^RA2MediumMissile
+	ReloadDelay: 50
+	Burst: 4
+	BurstDelays: 2
+	Range: 9000
+	Report: vbleatta.wav, vbleattb.wav
+	ValidTargets: Ground, Water, Air
+	TargetActorCenter: true
+	Projectile: Missile
+		Speed: 400
+		Arm: 2
+		Inaccuracy: 2000
+		RangeLimit: 20000
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		MinimumLaunchAngle: 200
+		MaximumLaunchAngle: 200
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Acceleration: 10
+	Warhead@Demolition_Light:
+		Damage: 16000
+		ValidTargets: Ground, Water, Air
+	Warhead@Demolition_Light_Percentage:
+		Damage: 8
+		ValidTargets: Ground, Water, Air
+	Warhead@Demolition_Heavy:
+		Damage: 16000
+		ValidTargets: Ground, Water, Air
+	Warhead@Demolition_Heavy_Percentage:
+		Damage: 8
+		ValidTargets: Ground, Water, Air
+	Warhead@MissileAP_Medium:
+		Damage: 16000
+		ValidTargets: Ground, Water, Air
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+		Damage: 8
+		ValidTargets: Ground, Water, Air
+
+BlackEagleMissiles_elite:
+	Inherits: BlackEagleMissiles
+	Range: 10000
+	Burst: 8
+	Projectile: Missile
+		Image: red_dragon
+		TrailImage: red_smokey
+		ContrailColor: e60000
+		ContrailStartColor: E60000
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+
+BlackEagleThunderboltMissiles:
+	Inherits: ^Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^HeavyMissile
+	Inherits@5: ^HeavyAAWeapon
+	Inherits@6: ^MediumMissile
+	Inherits@7: ^FlakWeapon
+	Inherits@8: ^ArrowWeapon
+	Inherits@9: ^RA2LightMissile
+	ReloadDelay: 50
+	Burst: 4
+	BurstDelays: 2
+	Range: 9000
+	Report: vbleatta.wav, vbleattb.wav
+	ValidTargets: Ground, Water, Air
+	TargetActorCenter: true
+	Projectile: Missile
+		Speed: 400
+		Arm: 2
+		Inaccuracy: 2000
+		RangeLimit: 20000
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		MinimumLaunchAngle: 200
+		MaximumLaunchAngle: 200
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Acceleration: 10
+		ContrailStartColor: EEEE00
+		ContrailEndColor: FFFFFF
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 3000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 3000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyAAWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ArrowWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MissileAP_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+
+BlackEagleThunderboltMissiles_elite:
+	Inherits: BlackEagleThunderboltMissiles
+	Range: 10000
+	Burst: 8
+	Projectile: Missile
+		Image: red_dragon
+		TrailImage: red_smokey
+		ContrailColor: e60000
+		ContrailStartColor: E60000
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+
+PrismCharge:
+	ReloadDelay: 3
+	Range: 9630
+	ValidTargets: Ground, Water, Air
+	Report: bpriat1a.wav
+	Projectile: PlasmaBeam
+		Width: 75
+		Duration: 50
+		ZOffset: 2047
+		UsePlayerColor: true
+		SecondaryBeamWidth: 50
+		SecondaryBeamZOffset: 2047
+		Colors: 88888888
+		CenterBeam: true
+		CenterBeamWidth: 50
+		CenterBeamColor: CCCCCCCC
+		SecondaryCenterBeam: true
+		SecondaryCenterBeamColor: FFFFFFFF
+		# Distortion: 10
+		# DistortionAnimation: 10
+		# DistortionAnimation: 10
+	Warhead@1Dum: Dummy
+
+PrismTankCharge:
+	Inherits: PrismCharge
+	ReloadDelay: 100
+	Range: 10000
+	ValidTargets: PrismTowerChargeable
+	Projectile: PlasmaBeam
+		StartOffset: -256,0,1408
+		TargetActorCenter: false
+	Warhead@charge: GrantExternalCondition
+		Range: 256
+		Duration: 100
+		Condition: powercharged
+		ValidRelationships: Ally
+		ValidTargets: PrismTowerChargeable
+
+PrismTankCharge_elite:
+	Inherits: PrismTankCharge
+	Range: 11111
+
+RA2PrismBeam:
+	ReloadDelay: 3
+	Range: 9630
+	Projectile: LaserZapCA
+		Width: 128
+		Duration: 48
+		ZOffset: 2047
+		Color: FFFFFF55
+		UsePlayerColor: true
+		SecondaryBeam: true
+		SecondaryBeamWidth: 64
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFFFF
+		SecondaryBeamUsePlayerColor: false
+
+RA2Prism:
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	Inherits@Effects: RA2PrismBeam
+	Report: bpriat1a.wav
+	Warhead@Laser_Heavy:
+		Damage: 32000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		Damage: 16
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@3: FireShrapnel
+		Weapon: PrismScatter
+		Amount: 4
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+
+PrismScatter:
+	Inherits: RA2Prism
+	Range: 3333
+	-Report:
+	Projectile: LaserZap
+		Width: 96
+		SecondaryBeamWidth: 48
+		Duration: 24
+		-HitAnim:
+	Warhead@Laser_Heavy:
+		Damage: 4000
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@3: FireShrapnel
+		Weapon: PrismScatter2
+		Amount: 3
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+
+PrismScatter2:
+	Inherits: PrismScatter
+	Range: 2500
+	Projectile: LaserZap
+		Width: 64
+		SecondaryBeamWidth: 32
+		Duration: 12
+	Warhead@Laser_Heavy:
+		Damage: 2000
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		Damage: 1
+	-Warhead@3:
+
+PrismScatterE:
+	Inherits: PrismScatter
+	Range: 5000
+	Warhead@Laser_Heavy:
+		Damage: 6000
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@3: FireShrapnel
+		Weapon: PrismScatter2
+		Amount: 4
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+
+RA2Comet:
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Flame_Medium
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Light
+	Inherits@3: ^RA2LaserWeapon
+	InvalidTargets: PrismTowerChargeable
+	ReloadDelay: 125
+	Range: 11111
+	Report: vpriatta.wav
+	Projectile: LaserZapCA
+		Width: 128
+		Duration: 48
+		ZOffset: 2047
+		Color: FFFFFF55
+		UsePlayerColor: true
+		SecondaryBeam: true
+		SecondaryBeamWidth: 64
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFFFF
+		SecondaryBeamUsePlayerColor: false
+	Warhead@Demolition_Light:
+		Damage: 20000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+		Damage: 10
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@Flame_Medium:
+		Damage: 20000
+	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
+		Damage: 10
+	Warhead@Laser_Heavy:
+		Damage: 20000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		Damage: 10
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@3: FireShrapnel
+		InvalidTargets: FireImmune
+		Weapon: PrismScatter
+		Amount: 4
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+
+RA2Comet_elite:
+	Inherits: RA2Comet
+	Range: 12345
+	Projectile: LaserZap
+		Color: E60000
+	Warhead@3: FireShrapnel
+		InvalidTargets: FireImmune
+		Weapon: PrismScatterE
+		Amount: 5
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+
+RA2GrandCannonWeapon:
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^HeavyBomb
+	Inherits@5: ^MediumFlameWeapon
+	Inherits@6: ^ShrapnelWeapon
+	Inherits@7: ^LightChemicalWeapon
+	Inherits@8: ^RA2Grenade
+	Inherits@fx: ^Effect_Clsn_Medium_RA2
+	ReloadDelay: 200
+	Report: bgraatta.wav
+	Range: 11800
+	MinRange: 2360
+	Projectile: Bullet
+		Blockable: false
+		Speed: 500
+		ContrailLength: 50
+		LaunchAngle: 50
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
+		ContrailStartColor: FFAA44
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailDelay: 0
+		ContrailStartWidth: 75
+		ContrailEndWidth: 25
+		TrailInterval: 1
+	Warhead@CannonHE_Heavy:
+		Damage: 50000
+	Warhead@CannonHE_Heavy_Percentage:
+		Damage: 25
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 50000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 50000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		Damage: 25
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 25000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 50000
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 25
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@Demolition_Light:
+		Damage: 50000
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+
+RA2MirageGun_elite:
+	Inherits: RA2MirageGun
+	Inherits@Elite: ^RA2EliteEffects
+	Range: 7031
+	Burst: 2
+	BurstDelays: 3
+
+RA2HeavyMirageGun:
+	Inherits: ^RailgunWeapon
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Iron_Fx_RA2
+	ReloadDelay: 51
+	Range: 6112
+	Report: vmiratta.wav
+	Projectile: InstantHit
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@CannonAP_Light:
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+
+RA2HeavyMirageGun_elite:
+	Inherits: RA2HeavyMirageGun
+	Inherits@Elite: ^RA2EliteEffects
+	Range: 7112
+	Burst: 2
+	BurstDelays: 3
+
+ChronoBeam_elite:
+	Inherits: ChronoBeam
+	Projectile: LaserZap
+		Width: 75
+		Duration: 15
+		Color: AADDFF
+		SecondaryBeam: true
+		SecondaryBeamWidth: 25
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF80
+	Warhead@Damage: WarpDamage
+		Damage: 400
+		Spread: 1
+		DamageTypes: ElectricityDeath
+		ValidTargets: Chronobeamable
+
+RA2Medusa_AA:
+	Inherits: ^RA2MediumMissile
+	ReloadDelay: 100
+	Range: 13500
+	Report: vaegatta.wav, vaegattb.wav
+	Burst: 3
+	BurstDelays: 13
+	ValidTargets: Air
+	Projectile: Missile
+		Speed: 600
+		MinimumLaunchAngle: 60
+		ContrailLength: 35
+	Warhead@MissileAP_Medium:
+		ValidTargets: Air
+		Damage: 30000
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Air
+		Damage: 15
+
+RA2MedusaAG:
+	Inherits: RA2Medusa_AA
+	Range: 9000
+	InvalidTargets: Underwater, Submarine
+	ValidTargets: Ground, Water
+	Warhead@MissileAP_Medium:
+		ValidTargets: Ground, Water
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+
+RA2M60:
+	Inherits: ^RA2SmallArms
+	ReloadDelay: 15
+	Range: 3854
+	Burst: 3
+	BurstDelays: 2
+	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
+	Warhead@Bullet_Light:
+		Damage: 2000
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		Damage: 1
+
+ra2_allies_gi_mg:
+	Inherits: ^RA2SmallArms
+	ReloadDelay: 15
+	Range: 4680
+	Burst: 3
+	BurstDelays: 2
+	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
+	Warhead@Bullet_Light:
+		Damage: 2000
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		Damage: 1
+
+ra2_allies_gi_para:
+	Inherits: ^RA2Chaingun
+	ValidTargets: Ground, Water
+	ReloadDelay: 19
+	Range: 5500
+	Burst: 3
+	BurstDelays: 3
+	Report: igiat2a.wav, igiat2b.wav, igiat2c.wav, igiat2d.wav
+	Warhead@Bullet_Medium:
+		Damage: 2000
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		Damage: 1
+
+RA2vulcan2:
+	Inherits: GuardianGIMG
+	ReloadDelay: 25
+	Range: 5724
+	Report: bpilatta.wav, bpilattb.wav, bpilattc.wav, bpilattd.wav, bpilattc.wav
+
+GuardianGIMG:
+	Inherits: ^RA2SmallArms
+	Inherits@2: ^RA2Chaingun
+	ValidTargets: Ground, Water
+	ReloadDelay: 20
+	Range: 4762
+	Burst: 3
+	BurstDelays: 2
+	Report: vblhatta.wav, vblhattb.wav
+	Warhead@Bullet_Light:
+		Damage: 2000
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Bullet_Medium:
+		Damage: 2000
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		Damage: 1
+
+RA2para:
+	Inherits: ^RA2Chaingun
+	ValidTargets: Ground, Water
+	ReloadDelay: 19
+	Range: 4750
+	Burst: 3
+	BurstDelays: 3
+	Report: igiat2a.wav, igiat2b.wav, igiat2c.wav, igiat2d.wav
+	Warhead@Bullet_Medium:
+		Damage: 2000
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		Damage: 1
+
+GuardianGIMG2:
+	Inherits: RA2para
+	Warhead@Bullet_Medium:
+		Damage: 4000
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		Damage: 2
+
+GuardianGIMG_elite:
+	Inherits: GuardianGIMG
+	Range: 5762
+	Burst: 6
+
+GuardianGIMG2_elite:
+	Inherits: GuardianGIMG2
+	Range: 5750
+	Burst: 6
+
+RA2DoublePistols_elite:
+	Inherits: RA2DoublePistols
+	Range: 9000
+	Burst: 4
+
+RA2AWP_elite:
+	Inherits: RA2AWP
+	Range: 12345
+	Projectile: Bullet
+		ContrailStartColor: FF0000FF
+	Warhead@Sniper_Light:
+		Damage: 88000
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Damage: 88000
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
+		Damage: 44
+
+RA2MP5:
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
+	Report: iseaatta.wav, iseaattb.wav
+	ReloadDelay: 10
+	Range: 6386
+	Burst: 4
+	BurstDelays: 3
+	Projectile: Bullet
+		ContrailStartColor: 77777777
+		ContrailEndColor: 33333333
+		ContrailStartWidth: 33
+		ContrailEndWidth: 77
+		ContrailLength: 7
+		ContrailEndColorUsePlayerColor: false
+	Warhead@Sniper_Light:
+		Damage: 4000
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		Damage: 2000
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
+		Damage: 1
+
+RA2MP5_elite:
+	Inherits: RA2MP5
+	Range: 6000
+	Burst: 8
+
+ra2roktgun:
+	Inherits: ^LightMissile
+	Inherits@2: ^SmallArms
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^RA2Chaingun
+	ReloadDelay: 14
+	Range: 5000
+	Report: irocatta.wav
+	ValidTargets: Ground, Water, Air
+	Warhead@LightMissile: SpreadDamage
+		ValidTargets: Ground, Air, Water
+		Damage: 2000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Air, Water
+		Damage: 1
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Ground, Air, Water
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Air, Water
+		Damage: 1
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Air, Water
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Air, Water
+		Damage: 1
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Air, Water
+		Damage: 2000
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Air, Water
+		Damage: 1
+	-Warhead@EffectAir:

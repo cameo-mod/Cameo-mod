@@ -1,7 +1,7 @@
 WH40KLemanCannon:
 	Inherits: RATurretGun
 	ReloadDelay: 70
-	Range: 9c0
+	Range: 9216
 	Report: wh40kexpifva.aud, wh40kzexpifvb.aud, wh40kzexpifvc.aud
 	Projectile: Bullet
 		Speed: 1c512
@@ -11,7 +11,7 @@ WH40KLemanCannon:
 WH40KBanebladeCannon:
 	Inherits: RATurretGun
 	ReloadDelay: 70
-	Range: 9c0
+	Range: 9216
 	Report: wh40kexpifva.aud, wh40kzexpifvb.aud, wh40kzexpifvc.aud
 	Projectile: Bullet
 		Speed: 1c512
@@ -38,7 +38,7 @@ WH40KBanebladeCannon:
 WH40KLemanMG:
 	Inherits: MachineGun
 	Inherits@Laserzap: ^WH40KMGs
-	Range: 7c0
+	Range: 7168
 	Report: mgbar1.aud
 	Projectile: LaserZap
 		Width: 25
@@ -52,7 +52,7 @@ WH40KLemanMG:
 WH40KOgrynPunch:
 	ReloadDelay: 60
 	Report: galiatta.aud, galiattb.aud
-	Range: 1c0
+	Range: 1024
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Damage: 10000
@@ -68,7 +68,7 @@ WH40KOgrynGun:
 	Inherits: WH40KPlasmapistol
 	Report: wh40kbiggun.aud
 	ReloadDelay: 10
-	Range: 7c0
+	Range: 7168
 	Burst: 2
 	BurstDelays: 8
 	ValidTargets: Air, Ground
@@ -82,7 +82,7 @@ WH40KImperialGuardMG:
 	Inherits: M16
 	Inherits@Laserzap: ^WH40KMGs
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Burst: 6
 	BurstDelays: 6
 	Report: wh40klaser1.aud, wh40klaser2.aud, wh40k_lasgun_fire3.aud, wh40k_lasgun_fire2.aud, wh40k_lasgun_fire1.aud
@@ -96,12 +96,12 @@ WH40KImperialGuardMG:
 WH40KImperialGuardMGG:
 	Inherits: WH40KImperialGuardMG
 	ReloadDelay: 20
-	Range: 7c0
+	Range: 7168
 	Warhead@1Dam: SpreadDamage
 		Damage: 150
 WH40KKasrkinMG:
 	Inherits: WH40KImperialGuardMG
-	Range: 6c0
+	Range: 6144
 	Warhead@1Dam: SpreadDamage
 		Damage: 300
 	Projectile: LaserZap
@@ -109,7 +109,7 @@ WH40KKasrkinMG:
 WH40KKasrkinMGG:
 	Inherits: WH40KKasrkinMG
 	ReloadDelay: 15
-	Range: 8c0
+	Range: 8192
 	Warhead@1Dam: SpreadDamage
 		Damage: 500
 WH40KTechpriestGun:
@@ -118,13 +118,13 @@ WH40KTechpriestGun:
 WH40KChimeraMGG:
 	Inherits: WH40KImperialGuardMG
 	ReloadDelay: 15
-	Range: 7c0
+	Range: 7168
 	Warhead@1Dam: SpreadDamage
 		Damage: 1500
 	Projectile: LaserZap
 		Width: 44
 WH40KBaneBeamWeapon:
-	Range: 7c0
+	Range: 7168
 	ReloadDelay: 15
 	Burst: 6
 	Report: idesat1a.aud, wh40klaser1.aud, wh40klaser2.aud, wh40k_lasgun_fire3.aud, wh40k_lasgun_fire2.aud, wh40k_lasgun_fire1.aud, idesat1a.aud
@@ -145,26 +145,26 @@ WH40KHeavyBolterMG:
 	Inherits: WH40KImperialGuardMG
 	Report: wh40kturretmg.aud
 	ReloadDelay: 6
-	Range: 7c0
+	Range: 7168
 	Warhead@1Dam: SpreadDamage
 		Damage: 1000
 WH40KHeavyBolterMG2:
 	Inherits: MachineGun
 	Report: wh40kturretmg.aud
 	ReloadDelay: 6
-	Range: 7c0
+	Range: 7168
 WH40KHeavyBolterMG3:
 	Inherits: WH40KImperialGuardMG
 	Report: wh40kturretmg.aud
 	ReloadDelay: 2
-	Range: 7c0
+	Range: 7168
 	Warhead@1Dam: SpreadDamage
 		Damage: 1100
 WH40KHeavyBolterMG4:
 	Inherits: WH40KImperialGuardMG
 	Report: wh40kturretmg.aud
 	ReloadDelay: 12
-	Range: 7c0
+	Range: 7168
 	Warhead@1Dam: SpreadDamage
 		Damage: 1500
 
@@ -172,13 +172,13 @@ WH40KHeavyBolterLandRaider:
 	Inherits: WH40KImperialGuardMG
 	Report: wh40kturretmg.aud
 	ReloadDelay: 8
-	Range: 7c0
+	Range: 7168
 	Warhead@1Dam: SpreadDamage
 		Damage: 7600
 WH40KPlasmapistol:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 50
-	Range: 5c0
+	Range: 5120
 	Burst: 3
 	BurstDelays: 5
 	Report: whPlasmaBlaster.aud
@@ -198,7 +198,7 @@ WH40KPlasmapistol:
 WH40KPlasmapistolG:
 	Inherits: WH40KPlasmapistol
 	ReloadDelay: 20
-	Range: 7c0
+	Range: 7168
 	Burst: 4
 	BurstDelays: 4
 	Warhead@1Dam: SpreadDamage
@@ -207,7 +207,7 @@ WH40KPlasmapistolG:
 WH40KGrenadeLauncher:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 80
-	Range: 6c0
+	Range: 6144
 	Report: bazook1.aud
 	Projectile: Bullet
 		Speed: 500
@@ -231,7 +231,7 @@ WH40KGrenadeLauncher:
 WH40KHeavyMissileLauncher:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 50
-	Range: 8c0
+	Range: 8192
 	Report: rocket1.aud
 	Burst: 2
 	BurstDelays: 15
@@ -260,18 +260,18 @@ WH40KHeavyMissileLauncher:
 WH40KGrenadeLauncherG:
 	Inherits: WH40KGrenadeLauncher
 	ReloadDelay: 70
-	Range: 7c0
+	Range: 7168
 WH40KCommissarPistol:
 	Inherits: M16
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: iredweaa.aud, iredweab.aud, iredweac.aud, iredwead.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 4000
 WH40KCowardKill:
 	Inherits: M16
 	ReloadDelay: 350
-	Range: 5c0
+	Range: 5120
 	ValidTargets: CowardTarget
 	Report: ijarwe2a.aud
 	Warhead@1Dam: SpreadDamage
@@ -281,12 +281,12 @@ WH40KCowardKill:
 	Warhead@2Con: GrantExternalCondition
 		Condition: externalcowardkill
 		Duration: 350
-		Range: 5c0
+		Range: 5120
 		ValidRelationships: Ally
 
 WH40KHellhoundFlamer:
 	Inherits: ^FireWeapon
-	Range: 6c0
+	Range: 6144
 	ReloadDelay: 4
 	Burst: 2
 	BurstDelays: 3
@@ -310,11 +310,11 @@ WH40KHellhoundFlamer:
 	-Warhead@2Smu:
 
 WH40KBasiliskGun:
-	Inherits: ^sow_siege
+	Inherits: ^SowSiege
 	ReloadDelay: 70
 	Burst: 1
-	Range: 16c512
-	MinRange: 1c0
+	Range: 16896
+	MinRange: 1024
 	Report: wh40kartblast.aud
 	Projectile: Bullet
 		Speed: 325
@@ -333,7 +333,7 @@ WH40KBasiliskGun:
 		Damage: 18470
 WH40KSentinelCannon:
 	Inherits: RA2sabot
-	Range: 7c0
+	Range: 7168
 	Report: TTaFir00.aud
 	Projectile: LaserZap
 		Width: 96
@@ -347,7 +347,7 @@ WH40KSentinelCannon:
 WH40KShootaBoyzGun:
 	Inherits: M16
 	ReloadDelay: 9
-	Range: 5c0
+	Range: 5120
 	Burst: 3
 	BurstDelays: 3
 	Report: irebweaa.wav, irebweab.wav, irebweac.wav, irebwead.wav, irebweae.wav, irebweaf.wav, irebweag.wav
@@ -362,11 +362,11 @@ WH40KShootaBoyzGun:
 WH40KBigShoota:
 	Inherits: WH40KShootaBoyzGun
 	ReloadDelay: 3
-	Range: 6c0
+	Range: 6144
 
 WH40KOrkBuildingDakka:
 	Inherits: WH40KShootaBoyzGun
-	Range: 7c0
+	Range: 7168
 	Warhead@1Dam: SpreadDamage
 		Versus:
 			Light: 24
@@ -377,8 +377,8 @@ WH40KPsykerTesla:
 	Inherits: RA2PortaTesla
 	ReloadDelay: 400
 	Report: wh40kpsykergun1.aud
-	Range: 7c0
-	Warhead@2: FireShrapnel
+	Range: 7168
+	Warhead@FireShrapnel: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: TeslaFragment
 		Amount: 5
@@ -386,7 +386,7 @@ WH40KPsykerTesla:
 		AimTargetStances: Enemy, Neutral
 WH40KSmoke:
 	ReloadDelay: 2
-	Range: 5c0
+	Range: 5120
 	ValidTargets: Ground, Infantry
 	Projectile: Bullet
 		Speed: 74
@@ -418,19 +418,19 @@ WH40KMarineMGG:
 	Inherits: ^LightMG
 	Report: bolter_1.aud, bolter_2.aud, bolter_3.aud
 	Burst: 4
-	Range: 7c0
+	Range: 7168
 WH40KMarineMGGH:
 	Inherits: ^LightMG
 	Report: bolter_1.aud, bolter_2.aud, bolter_3.aud
 	Burst: 6
-	Range: 7c0
+	Range: 7168
 
 WH40KHeavyBolterPortable:
 	Inherits: ^LightMG
 	Report: bolter_1.aud, bolter_2.aud, bolter_3.aud
 	ReloadDelay: 40
 	Burst: 16
-	Range: 7c0
+	Range: 7168
 	Warhead@1Dam: SpreadDamage
 		Spread: 128
 		Damage: 1200
@@ -439,16 +439,16 @@ WH40KHeavyBolterPortableG:
 	Report: bolter_1.aud, bolter_2.aud, bolter_3.aud
 	ReloadDelay: 30
 	Burst: 16
-	Range: 7c0
+	Range: 7168
 	Warhead@1Dam: SpreadDamage
 		Spread: 128
 		Damage: 1300
 WH40KWhirlWindAA:
 	Inherits: WH40KHeavyMissileLauncher
-	Range: 12c0
+	Range: 12288
 	Burst: 1
 	ValidTargets: Air
-	Report: wh40kwhirmiss-01.aud, wh40kwhirmiss-02.aud
+	Report: wh40kwhirmiss_01.aud, wh40kwhirmiss_02.aud
 	Projectile: MissileCA
 		HorizontalRateOfTurn: 20
 		Speed: 341
@@ -458,9 +458,9 @@ WH40KWhirlWindAA:
 WH40KWhirlWindAG:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 40
-	Range: 12c0
-	MinRange: 3c0
-	Report: wh40kwhirmiss-01.aud, wh40kwhirmiss-02.aud
+	Range: 12288
+	MinRange: 3072
+	Report: wh40kwhirmiss_01.aud, wh40kwhirmiss_02.aud
 	TargetActorCenter: true
 	Projectile: Bullet
 		Speed: 360
@@ -489,7 +489,7 @@ WH40KWhirlWindAG:
 WH40KDreadPunch:
 	ReloadDelay: 30
 	Report: galiatta.aud, galiattb.aud
-	Range: 1c0
+	Range: 1024
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Damage: 12000
@@ -505,7 +505,7 @@ WH40KDreadPunch:
 WH40KPredatorLasgun:
 	Inherits: RA2sabot
 	ReloadDelay: 30
-	Range: 7c0
+	Range: 7168
 	Report: TTaFir00.aud
 	Projectile: LaserZap
 		Width: 96
@@ -524,7 +524,7 @@ WH40KPredatorLasgun:
 WH40KPredatorLasgunSmall:
 	Inherits: RA2sabot
 	ReloadDelay: 30
-	Range: 7c0
+	Range: 7168
 	Report: TTaFir00.aud
 	Projectile: LaserZap
 		Width: 47
@@ -551,7 +551,7 @@ WH40KPredatorLasgunSmallChaos:
 WH40KPredatorCannon:
 	Inherits: 70mm
 	ReloadDelay: 70
-	Range: 9c0
+	Range: 9216
 	Report: tnkfire3.aud
 	Projectile: Bullet
 		Speed: 1c512
@@ -559,7 +559,7 @@ WH40KPredatorCannon:
 		Damage: 5500
 WH40KTankbustaMissile:
 	Inherits: WH40KHeavyMissileLauncher
-	Range: 7c0
+	Range: 7168
 	Burst: 1
 	Warhead@1Dam: SpreadDamage
 		Spread: 300
@@ -567,21 +567,23 @@ WH40KTankbustaMissile:
 
 WH40KTankbustaMissileG:
 	Inherits: WH40KTankbustaMissile
-	Range: 8c0
+	Range: 8192
 	Warhead@1Dam: SpreadDamage
 		Damage: 8000
 
 WH40KWartrakkMissile:
 	Inherits: WH40KTankbustaMissile
-	Range: 9c0
+	Range: 9216
 	Warhead@1Dam: SpreadDamage
 		Damage: 10000
 WH40KBigmekTankZzap:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ValidTargets: Vehicle
 	InvalidTargets: Infantry
 	ReloadDelay: 200
-	Range: 3c0
+	Range: 3072
 	Report: shktrop1.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 4500
@@ -589,7 +591,7 @@ WH40KBigmekTankZzap:
 		Condition: empdisable
 		ValidTargets: Vehicle
 		Duration: 70
-		Range: 0c768
+		Range: 768
 		AffectsParent: true
 	Warhead@3Eff: CreateEffect
 		Explosions: pulse_explosion_small
@@ -598,7 +600,7 @@ WH40KBigmekTankZzap:
 		ImpactActors: false
 
 WH40KSneakAttack:
-	Range: 3c0
+	Range: 3072
 	Projectile: InstantHit
 	Warhead@1: CreateEffect
 		Image: tsdig
@@ -615,7 +617,7 @@ MadDokAttach:
 	TargetActorCenter: true
 	Report: icraatta.aud
 	ReloadDelay: 25
-	Range: 2c512
+	Range: 2560
 	ValidTargets: ivanattachable
 	InvalidTargets: ivanattached, Aircraft
 	Warhead@1: AttachDelayedWeapon
@@ -638,8 +640,8 @@ WH40KBommaBomb:
 	Inherits: TankKiller
 	Burst: 1
 	ReloadDelay: 180
-	Range: 7c0
-	MinRange: 1c0
+	Range: 7168
+	MinRange: 1024
 	Report: vkiratta.aud
 	Projectile: MissileCA
 		Image: scorpionrocket
@@ -648,7 +650,7 @@ WH40KBommaBomb:
 		Spread: 341
 		Damage: 4500
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 90
 			Wood: 75
@@ -665,8 +667,8 @@ WH40KBommaBomb:
 		Explosions: large_splash
 Wh40kMarineGrenade:
 	ReloadDelay: 150
-	Range: 6c256
-	MinRange: 1c0
+	Range: 6400
+	MinRange: 1024
 	Report: grenadepin.wav
 	Projectile: Bullet
 		Speed: 190
@@ -702,7 +704,7 @@ Wh40kMarineGrenade:
 
 Wh40kFragMissiles:
 	Inherits: WH40KHeavyMissileLauncher
-	Range: 8c0
+	Range: 8192
 	Burst: 4
 	BurstDelays: 2
 	Warhead@1Dam: SpreadDamage
@@ -724,7 +726,7 @@ Wh40kFragMissiles:
 
 Wh40kKrakMissiles:
 	Inherits: WH40KHeavyMissileLauncher
-	Range: 8c0
+	Range: 8192
 	Burst: 4
 	BurstDelays: 2
 	Warhead@1Dam: SpreadDamage
@@ -742,11 +744,13 @@ Wh40kKrakMissiles:
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
 WH40KSkullprobeZap:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	ValidTargets: Vehicle
 	InvalidTargets: Infantry
 	ReloadDelay: 200
-	Range: 3c0
+	Range: 3072
 	Report: shktrop1.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 500
@@ -754,7 +758,7 @@ WH40KSkullprobeZap:
 		Condition: empdisable
 		ValidTargets: Vehicle
 		Duration: 70
-		Range: 0c768
+		Range: 768
 		AffectsParent: true
 	Warhead@3Eff: CreateEffect
 		Explosions: pulse_explosion_small
@@ -764,18 +768,18 @@ WH40KSkullprobeZap:
 
 WH40KInquisitionIonCannon:
 	Inherits: IonCannon
-	ValidTargets: Ground, Air, Trees
+	ValidTargets: Ground, Air
 	Warhead@1Dam_impact: SpreadDamage
 		Range: 0, 1c1, 2c1, 2c512
 		Damage: 8000
 		Falloff: 1000, 1000, 250, 100
-		ValidTargets: Ground, Air, Trees
+		ValidTargets: Ground, Air
 		InvalidTargets: Structure, Building
 		AffectsParent: True
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
 WH40KDemonFire:
 	ReloadDelay: 75
-	Range: 6c0
+	Range: 6144
 	Report: dsfirsht.aud
 	Projectile: Bullet
 		Speed: 250
@@ -785,7 +789,7 @@ WH40KDemonFire:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 308
 		Damage: 8000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 30
 			Wood: 40
@@ -795,13 +799,13 @@ WH40KDemonFire:
 			Concrete: 30
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: dsfirxpl.aud
 DefilerQuadcannon:
 	Inherits: APCGun
 	ReloadDelay: 3
-	Range: 6c768
+	Range: 6912
 	Report: vquaweaa.wav, vquaweab.wav, vquaweac.wav, vquawead.wav, vquaweae.wav, vquaweaf.wav, vquaweag.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 1200
@@ -818,7 +822,7 @@ DefilerQuadcannon:
 		ValidTargets: Ground, Water, Air
 WH40KHereticRepair:
 	ReloadDelay: 5
-	Range: 1c512
+	Range: 1536
 	ValidTargets: Repairing, Repair
 	Projectile: LaserZap
 		Color: E057B0
@@ -837,8 +841,10 @@ WH40KTeleportHorrors:
 	Warhead@1Actor: SpawnActor
 		Actors: wh40kdemon, wh40kdemon, wh40kdemon, wh40kdemon, wh40kdemon, wh40kdemon, wh40kdemon, wh40kdemon
 WH40KHelltalonToxins:
-	Inherits: Grenade
-	Range: 3c0
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
+	Range: 3072
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c0
 		Damage: 1000
@@ -865,7 +871,7 @@ WH40KHelltalonToxins:
 		Duration: 240
 WH40KBloodthirsterAxe:
 	ReloadDelay: 40
-	Range: 2c0
+	Range: 2048
 	Report: dinoatk1.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -886,7 +892,7 @@ WH40KTauPlasmarifle:
 	Report: blastgn2.aud
 	ValidTargets: Ground
 	ReloadDelay: 40
-	Range: 7c0
+	Range: 7168
 	Warhead@1Dam: SpreadDamage
 		Spread: 42
 		Damage: 3000
@@ -903,7 +909,7 @@ WH40KXV15rifle:
 	Report: blastgn2.aud
 	ValidTargets: Ground, Air
 	ReloadDelay: 30
-	Range: 5c0
+	Range: 5120
 	Warhead@1Dam: SpreadDamage
 		Spread: 42
 		Damage: 2200
@@ -913,7 +919,7 @@ WH40KTauDronerifle:
 	Report: blastgn2.aud
 	ValidTargets: Ground
 	ReloadDelay: 10
-	Range: 4c0
+	Range: 4096
 	Warhead@1Dam: SpreadDamage
 		Spread: 42
 		Damage: 1600
@@ -928,7 +934,7 @@ WH40KTauDronerifle:
 WH40KDevilfishgun:
 	Inherits: WH40KPlasmapistol
 	ReloadDelay: 20
-	Range: 6c0
+	Range: 6144
 	Burst: 4
 	BurstDelays: 4
 	Warhead@1Dam: SpreadDamage
@@ -939,7 +945,7 @@ WH40KDevilfishgun:
 WH40KShavreRifle:
 	Inherits: WH40KPlasmapistol
 	ReloadDelay: 30
-	Range: 6c0
+	Range: 6144
 	Burst: 2
 	BurstDelays: 0
 	Projectile: Bullet
@@ -952,13 +958,13 @@ WH40KShavreRifle:
 WH40KSkyraygun:
 	Inherits: WH40KDevilfishgun
 	ReloadDelay: 20
-	Range: 11c0
+	Range: 11264
 
 WH40KSkyray227mm:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 100
-	Range: 11c0
-	MinRange: 3c0
+	Range: 11264
+	MinRange: 3072
 	Burst: 8
 	BurstDelays: 4
 	Report: rocket1.aud
@@ -990,7 +996,7 @@ WH40KSkyray227mm:
 WH40KHammerheadLasgun:
 	Inherits: RA2sabot
 	ReloadDelay: 2
-	Range: 7c0
+	Range: 7168
 	Report: TTaFir00.aud
 	Projectile: LaserZap
 		Width: 96
@@ -1009,7 +1015,7 @@ WH40KEldarGuardianRifle:
 	Report: blastgn2.aud
 	ValidTargets: Ground
 	ReloadDelay: 10
-	Range: 4c0
+	Range: 4096
 	Warhead@1Dam: SpreadDamage
 		Spread: 42
 		Damage: 1000
@@ -1025,14 +1031,14 @@ WH40KEldarGuardianRifle:
 ## Deep Strikes
 Wh40kDeepStrikeSpawnerE1:
 	Projectile: InstantExplode
-	Range: 4c0
+	Range: 4096
 	Warhead@1: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: Wh40kDeepStrikeE1
 		Amount: 1
 
 Wh40kDeepStrikeE1:
-	Range: 1c0
+	Range: 1024
 	Projectile: AthenaProjectile
 		Altitude: 8000
 	Warhead@Dam: TargetDamage
@@ -1041,7 +1047,7 @@ Wh40kDeepStrikeE1:
 		RandomClusterCount: 1
 		Dimensions: 1,1
 		Footprint: x
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: meteor1.aud, meteor2.aud
 		ValidTargets: Ground, Air, Water
 
@@ -1061,12 +1067,12 @@ Wh40kDeepStrikeE1Units:
 		Explosions: small_frag
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Air, Water
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Image: tspodring
 		Explosions: idle
 		ExplosionPalette: tseffect
 		ValidTargets: Ground, Air, Water
-	Warhead@5Eff: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Image: wh40kcapsule
 		Explosions: idle
 		ExplosionPalette: tseffect

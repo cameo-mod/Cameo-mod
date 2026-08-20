@@ -1,0 +1,65 @@
+atreides_constructionyard:
+	Inherits: ^ConstructionYard
+	Tooltip:
+		Name: Atreides Construction Yard
+	Transforms:
+		IntoActor: atreides_mobileconstructionvehicle
+	RenderSprites:
+		Image: conyard.atreides
+
+wind_trap.atreides:
+	Inherits: ^WindTrap
+	Buildable:
+		Prerequisites: ~atreides_constructionyard
+		Description: Provides power to the base.
+	RenderSprites:
+		Image: power.atreides
+
+refinery.atreides:
+	Inherits: ^D2KRefinery
+	Buildable:
+		Prerequisites: ~atreides_constructionyard, wind_trap.atreides
+		Description: Processes spice into credits.
+	FreeActor:
+		Actor: ixian_spiceharvester
+		SpawnOffset: 0,2
+		Facing: 160
+	FreeActorWithDelivery@1:
+		Actor: ixian_spiceharvester
+		DeliveryOffset: 2,2
+		DeliveringActor: carryall.reinforce
+		Facing: 160
+	# FreeActorWithDelivery@2:
+	# 	Actor: ixian_spiceharvester
+	# 	DeliveryOffset: 0,2
+	# 	DeliveringActor: carryall.reinforce
+	# 	Facing: 160
+	RenderSprites:
+		Image: refinery.atreides
+
+d2k_silo.atreides:
+	Inherits: ^D2KSilo
+	Buildable:
+		Prerequisites: ~atreides_constructionyard, refinery.atreides
+		Description: Stores excess spice.
+	RenderSprites:
+		Image: silo.atreides
+
+atreides_heavyfactory:
+	Inherits: ^HeavyFactory
+	Tooltip:
+		Name: Atreides Heavy Factory
+	RenderSprites:
+		Image: heavy.atreides
+	Buildable:
+		Prerequisites: ~atreides_constructionyard, refinery.atreides
+		Description: template_factory.description
+		IconPalette: player
+	ProvidesPrerequisite@vehicle_production:
+		Prerequisite: atreides_vehicle_production
+	ProvidesPrerequisite@atreides_combat:
+		Prerequisite: heavy.atreides_combat
+	ProvidesPrerequisite@missile_tank:
+		Prerequisite: heavy.missile_tank
+	ProvidesPrerequisite@mcv_production:
+		Prerequisite: atreides_mcv_production

@@ -1,0 +1,147 @@
+####################################################################################################
+#		Upgrades Consortium
+####################################################################################################
+
+qacst_infiltrated.steel:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Stolen Consortium Buildings Plans
+	Buildable:
+		Description:
+	RenderSprites:
+		Image: steelconsortium_consortiumconstructionyard
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: steelconsortium_consortiumconstructionyard
+steelconsortium_upgrade_pulseweapons:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Pulse Weapons
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Upgrades
+		Description: Increases Firepower of all bullet based weapons by 30% and Range by 15%. Clone Troopers gain 60% more Firepower and 30% more Range instead.
+		Prerequisites: ~steelconsortium_consortiumradar, !steelconsortium_upgrade_pulseweapons
+	RenderSprites:
+		Image: steelconsortium_upgrade_pulseweapons
+	ProvidesPrerequisite:
+
+steelconsortium_upgrade_naniteinfusion:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Nanite Infusion
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Upgrades
+		Description: Infuses all Units and Buildings with nanites that regenerate them faster and take 5% less damage. Double effect for Infantry.
+		Prerequisites: ~steelconsortium_consortiumradar, !steelconsortium_upgrade_naniteinfusion
+	RenderSprites:
+		Image: steelconsortium_upgrade_naniteinfusion
+	ProvidesPrerequisite:
+
+steelconsortium_upgrade_ferrocretecurtain:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Ferrocrete Curtain
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Upgrades
+		Description: Increases Damage Resistance of all Vehicles and Buildings by 15%.
+		Prerequisites: ~steelconsortium_consortiumradar, !steelconsortium_upgrade_ferrocretecurtain
+	RenderSprites:
+		Image: steelconsortium_upgrade_ferrocretecurtain
+	ProvidesPrerequisite:
+
+steelconsortium_upgrade_empcannon:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Unlock Emp Cannon
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Icon: icon2
+		Description: Allows the use of the EMP cannon support power from the Consortium Battle Lab.
+		Prerequisites: ~steelconsortium_consortiumbattlelab, !steelconsortium_upgrade_empcannon
+	RenderSprites:
+		Image: steelconsortium_consortiumbattlelab
+	ProvidesPrerequisite:
+
+steelconsortium_upgrade_scalpeldefenders:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Scalpel Defenders
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: Spawns Scalpel defense drones for your defensive structures.
+		Prerequisites: ~steelconsortium_consortiumbattlelab, !steelconsortium_upgrade_scalpeldefenders
+	RenderSprites:
+		Image: steel_scalpel
+	ProvidesPrerequisite:
+
+steelconsortium_upgrade_resonanceammo:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Resonance Ammo
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: All Bullets ricochet between targets, dealing additional damage! Increases Range by all bullets by 10%.
+		Prerequisites: ~steelconsortium_consortiumbattlelab, !steelconsortium_upgrade_resonanceammo
+	RenderSprites:
+		Image: steelconsortium_upgrade_resonanceammo
+	ProvidesPrerequisite:
+
+steelconsortium_upgrade_quantumweaponpower:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Quantum Weapon Power
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: Increases damage and adds a powerful EMP effect to all Quantum Weapons. Effective against armored vehicles and aircraft.
+		Prerequisites: ~steelconsortium_consortiumbattlelab, !steelconsortium_upgrade_quantumweaponpower
+	RenderSprites:
+		Image: steelconsortium_upgrade_quantumweaponpower
+	ProvidesPrerequisite:
+
+steelconsortium_upgrade_shieldresistance:
+	Inherits: ^UpgradeTemplate
+	Tooltip:
+		Name: Shield Resistance
+	Valued:
+		Cost: 12500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: Increases the amount of damage shields can take by 25%.
+		Prerequisites: ~steelconsortium_consortiumbattlelab, !steelconsortium_upgrade_shieldresistance
+	RenderSprites:
+		Image: steelconsortium_upgrade_shieldresistance
+	ProvidesTeamProxyActor:
+		Actor: up_team_shielresistance.steel
+
+up_team_shielresistance.steel:
+	Inherits: ^ResearchedUpgradeTemplate
+	ProvidesPrerequisite:
+		Prerequisite: steelconsortium_upgrade_shieldresistance
+	RenderSprites:
+		Image: steelconsortium_upgrade_shieldresistance
+	Tooltip:
+		Name: Shield Resistance
+	Buildable:
+		Description: Increases the amount of damage shields can take.
+	PlayerDisplayUpgrade:

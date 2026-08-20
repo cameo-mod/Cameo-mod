@@ -1,229 +1,13 @@
-MCV.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Mobile Construction Vehicle (Destroyed)
-	TransformOnCapture:
-		IntoActor: mcv
-	RenderSprites:
-		Image: mcv.destroyed
-
-HARV.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Harvester (Destroyed)
-	TransformOnCapture:
-		IntoActor: harv
-	RenderSprites:
-		Image: harv.destroyed
-
-APC.Husk:
-	Inherits: ^LightHusk
-	Tooltip:
-		Name: APC (Destroyed)
-	TransformOnCapture:
-		IntoActor: apc
-	RenderSprites:
-		Image: apc.destroyed
-
-FTNK.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Flame Tank (Destroyed)
-	TransformOnCapture:
-		IntoActor: ftnk
-	RenderSprites:
-		Image: ftnk.destroyed
-
-ARTY.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Artillery (Destroyed)
-	TransformOnCapture:
-		IntoActor: arty
-	RenderSprites:
-		Image: arty.destroyed
-
-BGGY.Husk:
-	Inherits: ^LightHusk
-	Tooltip:
-		Name: Nod Buggy (Destroyed)
-	TransformOnCapture:
-		IntoActor: bggy
-	RenderSprites:
-		Image: bggy.destroyed
-
-BIKE.Husk:
-	Inherits: ^LightHusk
-	Tooltip:
-		Name: Recon Bike (Destroyed)
-	TransformOnCapture:
-		IntoActor: bike
-	RenderSprites:
-		Image: bike.destroyed
-
-JEEP.Husk:
-	Inherits: ^LightHusk
-	Tooltip:
-		Name: Hum-Vee (Destroyed)
-	TransformOnCapture:
-		IntoActor: jeep
-	RenderSprites:
-		Image: jeep.destroyed
-
-LTNK.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Light Tank (Destroyed)
-	ThrowsParticle@turret:
-		Anim: turret
-	TransformOnCapture:
-		IntoActor: ltnk
-	RenderSprites:
-		Image: ltnk.destroyed
-
-MTNK.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Medium Tank (Destroyed)
-	ThrowsParticle@turret:
-		Anim: turret
-	TransformOnCapture:
-		IntoActor: mtnk
-	RenderSprites:
-		Image: mtnk.destroyed
-
-HTNK.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Mammoth Tank (Destroyed)
-	ThrowsParticle@turret:
-		Anim: turret
-	TransformOnCapture:
-		IntoActor: htnk
-	RenderSprites:
-		Image: htnk.destroyed
-
-MSAM.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Rocket Launcher (Destroyed)
-	ThrowsParticle@turret:
-		Anim: turret
-	TransformOnCapture:
-		IntoActor: msam
-	RenderSprites:
-		Image: msam.destroyed
-
-MLRS.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Mobile S.A.M. (Destroyed)
-	ThrowsParticle@turret:
-		Anim: turret
-	TransformOnCapture:
-		IntoActor: mlrs
-	RenderSprites:
-		Image: mlrs.destroyed
-
-STNK.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Stealth Tank (Destroyed)
-	TransformOnCapture:
-		IntoActor: stnk
-	RenderSprites:
-		Image: stnk.destroyed
-
-TRUCK.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Supply Truck (Destroyed)
-	TransformOnCapture:
-		IntoActor: truck
-	RenderSprites:
-		Image: truck.destroyed
-
 ####################################################################################################
 #		RA
 ####################################################################################################
-
-1TNK.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Husk (Light Tank)
-	ThrowsParticle@turret:
-		Anim: turret
-	TransformOnCapture:
-		IntoActor: 1tnk
-	RenderSprites:
-		Image: 1tnk.destroyed
-
-2TNK.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Husk (Medium Tank)
-	ThrowsParticle@turret:
-		Anim: turret
-	TransformOnCapture:
-		IntoActor: 2tnk
-	RenderSprites:
-		Image: 2tnk.destroyed
-
-3TNK.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Husk (Heavy Tank)
-	ThrowsParticle@turret:
-		Anim: turret
-	TransformOnCapture:
-		IntoActor: 3tnk
-	RenderSprites:
-		Image: 3tnk.destroyed
-
-4TNK.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Husk (Mammoth Tank)
-	ThrowsParticle@turret:
-		Anim: turret
-	TransformOnCapture:
-		IntoActor: 4tnk
-	RenderSprites:
-		Image: 4tnk.destroyed
-
-HARV.FullHusk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Husk (Ore Truck)
-	TransformOnCapture:
-		IntoActor: harv
-	RenderSprites:
-		Image: hhusk
-
-HARV.EmptyHusk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Husk (Ore Truck)
-	TransformOnCapture:
-		IntoActor: harv
-	RenderSprites:
-		Image: hhusk2
-
-RAMCV.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Husk (Mobile Construction Vehicle)
-	TransformOnCapture:
-		IntoActor: mcv
-	RenderSprites:
-		Image: ramcvhusk
 
 TRAN.Husk1:
 	Inherits: ^Husk
 	Tooltip:
 		Name: Husk (Chinook)
 	RenderSprites:
-		Image: tran1husk
+		Image: tran
 	-Capturable:
 	-TransformOnCapture:
 
@@ -232,7 +16,7 @@ TRAN.Husk2:
 	Tooltip:
 		Name: Husk (Chinook)
 	RenderSprites:
-		Image: tran2husk
+		Image: tran
 	-Capturable:
 	-TransformOnCapture:
 
@@ -260,14 +44,14 @@ BADR.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: badr
+		Image: ra1_badger
 		PlayerPalette: raplayer
 	-RevealOnDeath:
 
 jsuperbomber.Husk:
 	Inherits: BADR.Husk
 	RenderSprites:
-		Image: jsuperbomber
+		Image: japan_japanesesuperbomber
 		PlayerPalette: player
 
 MIG.Husk:
@@ -290,7 +74,7 @@ MIG.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: mig
+		Image: ra1_soviets_migattackbomber
 		PlayerPalette: raplayer
 
 su57.Husk:
@@ -313,7 +97,7 @@ su57.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: su57
+		Image: ra1_soviets_su57attackbomber
 		PlayerPalette: raplayer
 
 YAK.Husk:
@@ -334,13 +118,25 @@ YAK.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: yak
+		Image: ra1_soviets_yakscoutplane
 		PlayerPalette: raplayer
+
+yaktesla.Husk:
+	Inherits: YAK.Husk
+	RenderSprites:
+		Image: ra1_soviets_teslayak
+		PlayerPalette: player_rgba
+
+yakarmored.Husk:
+	Inherits: YAK.Husk
+	RenderSprites:
+		Image: ra1_soviets_armoredyak
+		PlayerPalette: player_rgba
 
 modkami.Husk:
 	Inherits: YAK.Husk
 	RenderSprites:
-		Image: modkami
+		Image: japan_zerofighter
 		PlayerPalette: player
 
 modkamimini.Husk:
@@ -352,7 +148,7 @@ modkamimini.Husk:
 modbomber.Husk:
 	Inherits: YAK.Husk
 	RenderSprites:
-		Image: modbomber
+		Image: japan_japanesebomber
 		PlayerPalette: player
 
 A10.Husk:
@@ -399,7 +195,7 @@ HELI.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: heli
+		Image: td_nod_apacheattackhelicopter
 
 HIND.Husk:
 	Inherits: ^LargeHelicopterHusk
@@ -419,8 +215,29 @@ HIND.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: hind
+		Image: ra1_soviets_hindattackhelicopter
 		PlayerPalette: raplayer
+
+ra_kamov.Husk:
+	Inherits: ^LargeHelicopterHusk
+	Tooltip:
+		Name: Hind
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 112
+	WithIdleOverlay:
+		Sequence: rotor
+	LeavesTrails:
+		Offsets: -427,0,0
+		Image: smokey
+		MovingInterval: 3
+		StationaryInterval: 3
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra1_soviets_kamovattackhelicopter
+		PlayerPalette: player_rgba
 
 JHIND.Husk:
 	Inherits: ^LargeHelicopterHusk
@@ -438,7 +255,7 @@ JHIND.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: jhind
+		Image: japan_skyhawk
 		PlayerPalette: skyhawkplayer
 
 U2.Husk:
@@ -461,7 +278,7 @@ U2.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: u2
+		Image: ra1_soviets_spyplane
 		PlayerPalette: raplayer
 
 MH60.Husk:
@@ -482,7 +299,7 @@ MH60.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: MH60
+		Image: ra1_allies_blackhawk
 
 C17.Husk:
 	Inherits: ^PlaneHusk

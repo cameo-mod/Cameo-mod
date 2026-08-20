@@ -1,14 +1,28 @@
 ^BasePlayer:
-	AlwaysVisible:
 	Shroud:
+		ShroudUpdateInterval: 2
+
+# Inherits@AlwaysShow: ^AlwaysShowForFactionsList
+^AlwaysShowForFactionsList:
+	AlwaysShowForFactions: td_gdi, td_nod, ra1_allies, ra1_soviets, japan, ts_gdi, ts_nod, forgotten, cabal, ra2_allies, ra2_soviets, yuri, asianalliance, steelconsortium, latinsyndicate, naxis, schwarzermond, futuretech, atreides, harkonnen, ordos, corrino, ixian, terran, protoss, zerg, wc2_humans, wc2_orcs, tkm
+
+# Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
+^StandardBuildTimeSpeedReduction:
+	BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
 
 EditorPlayer:
 	Inherits: ^BasePlayer
 
 Player:
 	Inherits: ^BasePlayer
+	CameoCareerRecorder:
+	QuotaProductionManager:
+	NewConstructionOptionsNotification:
+		Notification: NewOptions
 	PlaceBuilding:
 		NewOptionsNotification: NewOptions
+		NewOptionsNotificationDelay: 5 # in game ticks
+		NewOptionsTextNotification: New construction option(s) are now available.
 		CannotPlaceNotification: BuildingCannotPlaceAudio
 		ToggleVariantKey: V
 	CustomFormationsModOptions:
@@ -54,12 +68,16 @@ Player:
 	ConquestVictoryConditions:
 	PowerManager:
 		SpeechNotification: LowPower
-	AutoDeployManager:
+		TextNotification: The base is low on power.
+		AdviceInterval: 30000
 	AllyRepair:
 	PlayerResources:
 		DefaultCash: 12345
 		CashTickUpNotification: CashTickUp
 		CashTickDownNotification: CashTickDown
+		InsufficientFundsNotification: InsufficientFunds
+		InsufficientFundsTextNotification: Not enough funds to continue.
+		InsufficientFundsNotificationInterval: 300000
 		SelectableCash: 5000, 6666, 9001, 10000, 12345, 15000, 20000, 25000, 33333, 50000, 100000
 		ResourceValues:
 			Tiberium: 30
@@ -68,6 +86,10 @@ Player:
 			GoldTiberium: 45
 			Ore: 25
 			Gems: 50
+			RA2Copper: 20
+			RA2Silver: 30
+			RA2Ore: 40
+			RA2Gems: 50
 			SCMinerals: 25
 			Veins: 15
 			GESupplies: 50
@@ -78,7 +100,7 @@ Player:
 			SWCNova: 50
 			SWPMin: 50
 			SWCMin: 50
-			Spice: 20
+			Spice: 75
 			SCGas: 20
 			SCGas2: 20
 			SCGas3: 20
@@ -91,15 +113,22 @@ Player:
 			SWFarms: 25
 			OP2Ore: 33
 			OP2Ore2: 67
-			RA2Ore: 40
-			RA2Gems: 50
-			RA2Silver: 30
-			RA2Copper: 20
 	DeveloperMode:
 		CheckboxDisplayOrder: 20
-	BaseAttackNotifier:
+	DamageNotifier:
+		ValidTargets: Structure
+		Notification: BaseAttack
+		TextNotification: Structure under attack.
+		FlashTextNotification: true
 		AllyNotification: OurAllyIsUnderAttack
+		AllyTextNotification: Ally under attack.
 	HarvesterAttackNotifier:
+		ExcludeDamageTypes: SpiceExplosion
+		TextNotification: Resource collector is under attack.
+	CriticalUnitAttackNotifier:
+		NotifyInterval: 3000
+		TextNotification: Our MCV unit is under attack.
+		FlashTextNotification: true
 	EnemyWatcher:
 	Shroud:
 		FogCheckboxDisplayOrder: 3
@@ -130,11 +159,12 @@ Player:
 		Label: Queue Type
 		Description: Type of queue used
 		DisplayOrder: 4
-		Default: multipleproductionqueues
+		Default: hybridproductionqueues
 		Values:
 			classicproductionqueues: Single
 			multipleproductionqueues: Multi
-			scaledproductionqueues: Competitive
+			hybridproductionqueues: Hybrid
+			scaledproductionqueues: Scaled
 	LobbyPrerequisiteDropdown@derricklimit_is:
 		ID: derricklimit_is
 		Label: Passive Income Limit
@@ -155,7 +185,7 @@ Player:
 		ID: freeradar
 		Label: Free Minimap
 		Description: Minimap is always available for all players. Disables some game specific features like radar jamming.
-		Enabled: true
+		Enabled: false
 		DisplayOrder: 5
 		Prerequisites: global-freeminimap
 	GrantConditionOnPrerequisite@FREEMINIMAP:
@@ -168,13 +198,6 @@ Player:
 		Enabled: True
 		DisplayOrder: 14
 		Prerequisites: base-reveal
-	LobbyPrerequisiteCheckbox@SWLIMIT:
-		ID: swlimit
-		Label: Limit Super Weapons
-		Description: Only 1 of each primary superweapon can be built by a player
-		Enabled: True
-		DisplayOrder: 15
-		Prerequisites: global-swlimit
 	LobbyPrerequisiteCheckbox@SWREVEAL:
 		ID: swreveal
 		Label: Reveal Super Weapons
@@ -182,20 +205,6 @@ Player:
 		Enabled: True
 		DisplayOrder: 16
 		Prerequisites: global-swreveal
-	LobbyPrerequisiteCheckbox@REGENTURRETS:
-		ID: regenturrets
-		Label: Regular Maintenance
-		Enabled: False
-		Description: Damaged turrets are slowly regenerated
-		DisplayOrder: 18
-		Prerequisites: regen-turrets
-	LobbyPrerequisiteCheckbox@WIPCONTENT:
-		ID: wipcontent
-		Label: WIP Content
-		Description: Provides access to content that is heavily in progress. WARNING: Prone to crashes
-		Enabled: False
-		DisplayOrder: 25
-		Prerequisites: wip-content
 	LobbyPrerequisiteCheckbox@SHADOW:
 		ID: shadows
 		Label: Generated Shadows
@@ -209,26 +218,21 @@ Player:
 	FrozenActorLayer:
 	PlaceBeacon:
 	ProvidesTechPrerequisite@none:
-		Name: Limited
-		Id: nopowers
-	ProvidesTechPrerequisite@low:
-		Name: Low
-		Prerequisites: techlevel.low
-		Id: lowpowers
-	ProvidesTechPrerequisite@medium:
-		Name: Medium
-		Prerequisites: techlevel.low, techlevel.medium
-		Id: medpowers
-	ProvidesTechPrerequisite@nosuper:
-		Name: High
-		Prerequisites: techlevel.low, techlevel.medium, techlevel.high
-		Id: highpowers
-	ProvidesTechPrerequisite@all:
-		Name: Unrestricted
-		Prerequisites: techlevel.low, techlevel.medium, techlevel.high, techlevel.superweapons
+		Name: No Superweapons
+		Prerequisites: global-swlimit
+		Id: no-superweapons
+	ProvidesTechPrerequisite@limited-sw:
+		Name: Limited Superweapons
+		Prerequisites: techlevel.superweapons, global-swlimit
+		Id: superweapons
+	ProvidesTechPrerequisite@unlimited-sw:
+		Name: Unlimited Superweapons
+		Prerequisites: techlevel.superweapons
 		Id: unrestricted
 	GrantConditionOnPrerequisiteManager:
 	ResourceStorageWarning:
+		AdviceInterval: 60000
+		TextNotification: Resource storage is reaching its capacity.
 	PlayerExperience:
 	GameSaveViewportManager:
 	PlayerRadarTerrain:
@@ -237,7 +241,7 @@ Player:
 	TeleportNetworkManager:
 		Type: nydus
 	GrantConditionOnPrerequisite@enable-secondaryinsurance:
-		Condition: enablesecondaryinsurance
+		Condition: nobase
 		Prerequisites: !conyard
 	BotInsurance@secondaryinsurance:
 		Condition: secondaryinsurance
@@ -247,7 +251,7 @@ Player:
 		Interval: 1
 		Amount: 1
 		ShowTicks: False
-		RequiresCondition: secondaryinsurance && enablesecondaryinsurance
+		RequiresCondition: secondaryinsurance && nobase
 	GrantConditionOnPlayerTotalCash:
 		Condition: nocomeback
 		Threshold: 999
@@ -299,32 +303,37 @@ Player:
 	#		ClassicProductionQueue
 	####################################################################################################
 	ClassicProductionQueue@BUILDING:
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: RABuilding
 		DisplayOrder: 0
 		Group: Building
 		LowPowerModifier: 200
 		ReadyAudio: ConstructionComplete
+		ReadyTextNotification: Construction complete.
 		BlockedAudio: NoBuild
 		LimitedAudio: BuildingInProgress
-		QueuedAudio: Training
+		QueuedAudio: Building
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 		SpeedUp: True
-		BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
+		InfiniteBuildLimit: 10
 	ClassicProductionQueue@DEFENCE:
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: RADefence
 		DisplayOrder: 1
 		Group: Defence
 		LowPowerModifier: 300
 		ReadyAudio: ConstructionComplete
+		ReadyTextNotification: Defense construction complete.
 		BlockedAudio: NoBuild
 		LimitedAudio: BuildingInProgress
-		QueuedAudio: Training
+		QueuedAudio: Building
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 		SpeedUp: True
-		BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
+		InfiniteBuildLimit: 10
 	ClassicProductionQueue@INFANTRY:
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: RAInfantry
 		DisplayOrder: 2
 		Group: Infantry
@@ -336,8 +345,9 @@ Player:
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 		SpeedUp: True
-		BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
+		InfiniteBuildLimit: 10
 	ClassicProductionQueue@VEHICLE:
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: RAVehicle
 		DisplayOrder: 3
 		Group: Vehicle
@@ -349,8 +359,9 @@ Player:
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 		SpeedUp: True
-		BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
+		InfiniteBuildLimit: 10
 	ClassicProductionQueue@AIRCRAFT:
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: RAAircraft
 		DisplayOrder: 4
 		Group: Aircraft
@@ -362,8 +373,9 @@ Player:
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 		SpeedUp: True
-		BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
+		InfiniteBuildLimit: 10
 	ClassicProductionQueue@NAVAL:
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: RANaval
 		DisplayOrder: 5
 		Group: Ship
@@ -375,23 +387,63 @@ Player:
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 		SpeedUp: True
-		BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
+		InfiniteBuildLimit: 10
+	# ClassicParallelProductionQueue@ADDON:
 	ClassicProductionQueue@ADDON:
 		Type: Addons
 		DisplayOrder: 10
 		Group: Addon
-		SpeedUp: False
-		LowPowerModifier: 100
-	ClassicProductionQueue@UPGRADE:
+		SpeedUp: True
+		LowPowerModifier: 200
+		BuildTimeSpeedReduction: 125, 100, 80, 66, 50, 40, 33, 25
+		BuildingCountBuildTimeMultipliers: 125, 100, 80, 66, 50, 40, 33, 25
+		ParallelPenaltyBuildTimeMultipliers: 100, 63, 50, 44, 40, 38, 36, 34, 33, 32
+		ReadyAudio: NewOptions
+		ReadyTextNotification: New upgrade has been deployed.
+		QueuedAudio: Upgrading
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ClassicProductionQueue@BuildingAddons:
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
+		Type: BuildingAddons
+		DisplayOrder: 11
+		Group: Addon
+		SpeedUp: True
+		LowPowerModifier: 400
+		ReadyAudio: ConstructionComplete
+		ReadyTextNotification: Addon is ready for placement.
+		QueuedAudio: Upgrading
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ClassicProductionQueue@UPGRADES:
+		Inherits@AlwaysShow: ^AlwaysShowForFactionsList
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: Upgrades
-		DisplayOrder: 10
+		DisplayOrder: 11
 		Group: Upgrade
 		SpeedUp: True
 		LowPowerModifier: 400
-		BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
-	ExternalCondition@barr:
+		ReadyAudio: NewOptions
+		ReadyTextNotification: New upgrade has been deployed.
+		QueuedAudio: Upgrading
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ClassicProductionQueue@RESEARCH:
+		Inherits@AlwaysShow: ^AlwaysShowForFactionsList
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
+		Type: Research
+		DisplayOrder: 12
+		Group: Upgrade
+		SpeedUp: True
+		LowPowerModifier: 400
+		ReadyAudio: NewOptions
+		ReadyTextNotification: New technology has been researched.
+		QueuedAudio: Upgrading
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ExternalCondition@ra1_soviets_barracks:
 		Condition: ownsbarr
-	ExternalCondition@weap:
+	ExternalCondition@td_gdi_weaponsfactory:
 		Condition: ownsweap
 	ExternalCondition@air:
 		Condition: ownsair

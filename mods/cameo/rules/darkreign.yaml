@@ -299,8 +299,7 @@ drwaterl.imperium:
 		Dimensions: 3,4
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 91008, 0, 21845
-		DecorationBounds: 131072, 127402, 0, -3626
+		Bounds: 3072, 2986, 0, -85
 	SelectionDecorations:
 	Targetable:
 		TargetTypes: Ground, Structure, C4, DetonateAttack, SpyInfiltrate
@@ -364,14 +363,14 @@ drwaterl.freedom:
 		Actor: drfrigth.freedom
 drwaterextract.freedomguard:
 	Inherits: OILB.Building
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@2: ^CashTricklerMultipliers
 	Inherits@shape: ^2x2Shape
 	Inherits@lowpower: ^DisabledOverlay
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
-		Prerequisites: drfghq3, ~techlevel.medium
+		Prerequisites: drfghq3
 		Description: Provides Passive income
 	Valued:
 		Cost: 5000
@@ -379,8 +378,8 @@ drwaterextract.freedomguard:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-300,0, 420,512,0, -420,-512,0, -630,300,0
 	Selectable:
-		Priority: 0
 		Bounds: 2048, 2048
+		Priority: 0
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -409,7 +408,7 @@ drwaterextract.imperium:
 	Inherits: drwaterextract.freedomguard
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: drihq3, ~techlevel.medium
+		Prerequisites: drihq3
 		Queue: Building, RABuilding
 		Description: Provides Passive income
 	RenderSprites:
@@ -540,7 +539,7 @@ drspy.freedom:
 		StandSequences: stand,stand2
 	WithDecoration@disguise:
 		Image: pips
-		Sequence: pip-disguise
+		Sequence: pip_disguise
 		Palette: effect
 		Position: TopRight
 		RequiresCondition: disguise
@@ -566,7 +565,7 @@ drspy.imperium:
 drcamera:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@DRShadow: ^InfantryShadows
 	Valued:
 		Cost: 500
@@ -826,7 +825,7 @@ drcamera:
 	Inherits@aicash: ^AIConyardCash
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Health:
@@ -854,7 +853,7 @@ drwall1:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 50
 	Tooltip:
@@ -879,7 +878,7 @@ drwall2:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 50
 	Tooltip:
@@ -929,13 +928,12 @@ mcv.imperium:
 		Name: Construction Rig (Imperium)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -963,7 +961,6 @@ mcv.imperium:
 	Voiced:
 		VoiceSet: DRIRigVoice
 	Passenger:
-		Weight: 1
 drihq.imperium:
 	Inherits: ^DRHQStats
 	Tooltip:
@@ -1014,7 +1011,7 @@ drihq.imperium:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmimperium
@@ -1034,7 +1031,6 @@ pscdrihq2:
 	RenderSprites:
 		Image: drihq2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -1051,7 +1047,6 @@ pscdrihq3:
 	RenderSprites:
 		Image: drihq3
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -1060,7 +1055,7 @@ dribarr.imperium:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -1082,8 +1077,7 @@ dribarr.imperium:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -1153,7 +1147,6 @@ pscdribarr:
 	RenderSprites:
 		Image: dribarr2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -1183,8 +1176,7 @@ driweap.imperium:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 140000
@@ -1235,7 +1227,6 @@ pscdriweap:
 	RenderSprites:
 		Image: driweap2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 drihelipad.imperium:
@@ -1365,7 +1356,7 @@ dririft.imperium:
 		Name: Rift Generator
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: driportal.imperium, ~techlevel.high, ~!drriftlimit
+		Prerequisites: driportal.imperium, ~!drriftlimit
 		Queue: Building, RABuilding
 		Description: Provides radar and Orbital Ion Cannon support power.\nRequires power to operate.
 	Building:
@@ -1373,8 +1364,7 @@ dririft.imperium:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -1420,7 +1410,7 @@ dririft.imperium:
 drplastur1:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 600
@@ -1465,7 +1455,7 @@ drneutronturret:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 3000
@@ -1515,7 +1505,7 @@ driaaturret:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 1300
@@ -1579,8 +1569,7 @@ drirep:
 		Footprint: x+_ +++ _+x
 		Dimensions: 3,3
 	Selectable:
-		Bounds: 116480, 61866, 0, 5461
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	SelectionDecorations:
 	Health:
 		HP: 90000
@@ -1621,8 +1610,7 @@ drihosp:
 		Footprint: x+_ +++ _+x
 		Dimensions: 3,3
 	Selectable:
-		Bounds: 116480, 61866, 0, 5461
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	SelectionDecorations:
 	Health:
 		HP: 90000
@@ -1838,7 +1826,7 @@ drptnk:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: vehicleproduction, ~techlevel.medium
+		Prerequisites: vehicleproduction
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 1020
 		BuildDurationModifier: 40
@@ -1984,7 +1972,7 @@ dramp:
 		Name: Amper
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: vehicleproduction, drihosp, ~techlevel.medium
+		Prerequisites: vehicleproduction, drihosp
 		Queue: Vehicle, RAVehicle
 		Description: The Imperium’s version of first aid, this lunatic\ncyborg fires darts into dying infantry units that boost the target’s\nhealth to full, but leave the unit poisoned so that its health will steadily decrease\nuntil the unit dies. The Amper can also be used as an offensive weapon,\nbringing slow death to enemy infantry.\n\nType: Walker\nSpeed: Slow\nWeapon: Serum\nRange: Short\nArmor: Light
 	Mobile:
@@ -2018,12 +2006,11 @@ dramp:
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Infantry, plagued
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
 		VoiceSet: DRAmperVoice
-	InaccuracyMultiplier@Sniper:
+	InaccuracyMultiplier@lightsniper:
 		Modifier: 50
 
 drshreder:
@@ -2040,7 +2027,7 @@ drshreder:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: vehicleproduction, ~techlevel.medium
+		Prerequisites: vehicleproduction
 		Queue: Vehicle, RAVehicle
 		Description: A huge, hovering nightmare, the Shredder tears through infantry like a runaway saw.\nAlthough it has no ranged attack, it is fast, heavily armoured, and inflicts severe damage on any\ninfantry units foolish enough to get near it.\n\nType: Hover\nSpeed: Medium\nWeapon: Blades\nRange: Contact\nArmor: Medium
 		BuildDuration: 250
@@ -2084,7 +2071,7 @@ drttnk:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: driweap2, ~techlevel.medium
+		Prerequisites: driweap2
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 100
 		BuildDuration: 1125
@@ -2146,7 +2133,7 @@ drmad:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: driweap2, ~techlevel.medium
+		Prerequisites: driweap2
 		Queue: Vehicle, RAVehicle
 		Description: The M.A.D. fires bladed orbs at enemy air units.\nLike the Freedom Guard Flak Jack, it cannot fire at ground units and\nshould be defended against land attack\n\nType: Hover\nSpeed: Medium\nWeapon: Bladed Orbs\nRange: Long\nArmor: Light
 	Mobile:
@@ -2192,7 +2179,7 @@ drscarab:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: driweap2, ~techlevel.medium
+		Prerequisites: driweap2
 		Queue: Vehicle, RAVehicle
 		Description: This long range weapon fires a fragmenting projectile that breaks\ninto numerous burning particles over its target. This vehicle is slow and lightly\narmoured, but it can enclose itself in a retractable armoured exoskeleton when it gets in trouble.\nThe unit cannot fire while this armour is engaged, but can weather a considerable beating while waiting for reinforcements.\n\nType: Hover\nSpeed: Slow\nWeapon: Artillery\nRange: Extrme\nArmor: Medium
 	Mobile:
@@ -2312,7 +2299,6 @@ drhostage:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 1
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -2346,7 +2332,7 @@ drptnkfake:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: vehicleproduction, ~techlevel.medium
+		Prerequisites: vehicleproduction
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 350
 		Description: Dummy unit that is used to immitate real one
@@ -2441,7 +2427,7 @@ drshrederfake:
 		Name: Fake Shredder
 	Buildable:
 		BuildPaletteOrder: 1000
-		Prerequisites: vehicleproduction, ~techlevel.medium
+		Prerequisites: vehicleproduction
 		Queue: Vehicle, RAVehicle
 		Description: Dummy unit that is used to immitate real one
 	Mobile:
@@ -2481,7 +2467,7 @@ drttnkfake:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 1020
-		Prerequisites: driweap2, ~techlevel.medium
+		Prerequisites: driweap2
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Dummy unit that is used to immitate real one
@@ -2527,7 +2513,7 @@ drmadfake:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 1000
-		Prerequisites: driweap2, ~techlevel.medium
+		Prerequisites: driweap2
 		Queue: Vehicle, RAVehicle
 		Description: Dummy unit that is used to immitate real one
 	Mobile:
@@ -2564,7 +2550,7 @@ drscarabfake:
 		Name: Fake S.C.A.R.A.B.
 	Buildable:
 		BuildPaletteOrder: 1000
-		Prerequisites: driweap2, ~techlevel.medium
+		Prerequisites: driweap2
 		Queue: Vehicle, RAVehicle
 		Description: Dummy unit that is used to immitate real one
 	Mobile:
@@ -2605,7 +2591,7 @@ drcyclone:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: driweap2, drihelipad, ~techlevel.medium
+		Prerequisites: driweap2, drihelipad
 		Queue: Vehicle, RAVehicle
 		Description: The Cyclone embodies the core of the Imperium aerial force.\nThe unit is fairly rugged and can engage both air and ground units.\nHowever, the Cyclone’s neutron cannon has a limited energy source and must\nrecharge at the Re-Arming Deck.\n\nType: Flyer\nSpeed: Fast\nWeapon: Neutron Cannon\nRange: Medium\nArmor: Medium
 	Aircraft:
@@ -2655,7 +2641,7 @@ drskyfort:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 130
-		Prerequisites: driweap2, drihelipad, ~techlevel.medium
+		Prerequisites: driweap2, drihelipad
 		Queue: Vehicle, RAVehicle
 		Description: Death from above. This floating platform of wreckage houses the largest\nplasma cannon known to humanity. It’s slow to recharge but makes a lasting impact.\n\nType: Flyer\nSpeed: Slow\nWeapon: Pulse Plasma Cannon\nRange: Contact\nArmor: Heavy
 	Aircraft:
@@ -2709,7 +2695,7 @@ drdrone:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Vehicle, RAVehicle
 		Description: This small unmanned drone is lightly armoured and has\nno offensive capability. It is used solely to scout enemy targets.\n\nType: Flyer\nSpeed: Medium\nWeapon: None\nRange: N/A\nArmor: Light
 	Aircraft:
@@ -2734,7 +2720,6 @@ drdrone:
 	DeathSounds:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 43690, 43690
 	Voiced:
 		VoiceSet: DRDroneVoice
 	Wanders:
@@ -2763,13 +2748,12 @@ mcv.freedomguard:
 		Name: Construction Rig (FreedomGuard)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drfghq2, ~techlevel.medium
+		Prerequisites: drfghq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -2797,7 +2781,6 @@ mcv.freedomguard:
 	Voiced:
 		VoiceSet: DRFGRigVoice
 	Passenger:
-		Weight: 1
 drfghq.freedomguard:
 	Inherits: ^DRHQStats
 	Tooltip:
@@ -2845,7 +2828,7 @@ drfghq.freedomguard:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmfreedomguard
@@ -2883,7 +2866,6 @@ pscdrfghq2:
 	RenderSprites:
 		Image: drfghq2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -2900,7 +2882,6 @@ pscdrfghq3:
 	RenderSprites:
 		Image: drfghq3
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -2909,7 +2890,7 @@ drfgbarr.freedomguard:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -2931,8 +2912,7 @@ drfgbarr.freedomguard:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -3014,7 +2994,6 @@ pscdrfgbarr:
 	RenderSprites:
 		Image: drfgbarr2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 drfgweap.freedomguard:
@@ -3022,7 +3001,7 @@ drfgweap.freedomguard:
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -3044,8 +3023,7 @@ drfgweap.freedomguard:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 140000
@@ -3108,7 +3086,6 @@ pscdrfgweap:
 	RenderSprites:
 		Image: drfgweap2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 drfghelipad.freedomguard:
@@ -3318,7 +3295,7 @@ drpplant1.freedomguard:
 	Inherits@tech: ^IsTechnoBuilding
 	Inherits@AIDifficulties: ^AIDifficulties
 	Selectable:
-		Bounds: 131072, 131072
+		Bounds: 3072, 3072
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
@@ -3401,7 +3378,6 @@ pscdrpplant2:
 	RenderSprites:
 		Image: drpplant2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 drfgrep:
@@ -3423,8 +3399,7 @@ drfgrep:
 		Footprint: x+_ +++ _+x
 		Dimensions: 3,3
 	Selectable:
-		Bounds: 116480, 61866, 0, 5461
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	SelectionDecorations:
 	Health:
 		HP: 90000
@@ -3465,8 +3440,7 @@ drfghosp:
 		Footprint: _+x +++ x+_
 		Dimensions: 3,3
 	Selectable:
-		Bounds: 116480, 61866, 0, 5461
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	SelectionDecorations:
 	Health:
 		HP: 90000
@@ -3498,7 +3472,7 @@ drnavyard.freedomguard:
 			TopLeft: -1536, -1536
 			BottomRight: 1536, 1536
 	Selectable:
-		Bounds: 131072, 131072
+		Bounds: 3072, 3072
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
@@ -3911,7 +3885,7 @@ drmech:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: drfgrep, ~techlevel.medium
+		Prerequisites: drfgrep
 		Description: The Mechanic functions similarly to the Field Medic\nrepairing damaged vehicles in the field. The Mechanic has no attack capability\n\nType: Walker\nSpeed: Slow\nWeapon: None\nRange: N/A\nArmor: Light
 	Valued:
 		Cost: 300
@@ -3958,7 +3932,7 @@ drmedi:
 	Inherits@DRShadow: ^InfantryShadows
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: drfghosp, ~techlevel.medium
+		Prerequisites: drfghosp
 		BuildPaletteOrder: 110
 		Description: The Field Medic can restore the health of\nwounded infantry units and administer an antitoxin to\ncounteract the effects of the Amper. The Field Medic will\nautomatically heal damaged units that are nearby or can\nbe directed to heal a specific unit. The Field Medic has no\nattack capability and does not wear body armour.\n\nType: Walker\nSpeed: Slow\nWeapon: None\nRange: N/A\nArmor: Light
 	Valued:
@@ -4073,7 +4047,6 @@ drspid:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 1
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -4186,7 +4159,7 @@ drrtnk:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: drfgweap2, ~techlevel.high
+		Prerequisites: drfgweap2
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 100
 		BuildDuration: 1500
@@ -4234,7 +4207,7 @@ drarty:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: drfgweap2, ~techlevel.medium
+		Prerequisites: drfgweap2
 		Queue: Vehicle, RAVehicle
 		Description: The Hellstorm Artillery fires a longrange, area-effect explosive. Its range is more than four\ntimes longer than any other unit. A battery of Artillery is\ncapable of single-handedly destroying an enemy base, but,\nthe vehicle is slow and lightly armoured, so undefended\nArtillery is fodder in close combat.\n\nType: Tracked\nSpeed: Slow\nWeapon: Artillery\nRange: Extreme\nArmor: Medium
 	Mobile:
@@ -4305,7 +4278,6 @@ drtnkh:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 1
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -4347,7 +4319,6 @@ drphasetnk:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -4372,7 +4343,7 @@ drphasetran:
 	Tooltip:
 		Name: Phase Transport
 	UpdatesPlayerStatistics:
-		OverrideActor: tssapc
+		OverrideActor: ts_nod_subterraneanapc
 	Mobile:
 		Locomotor: subterranean
 		PauseOnCondition: loading || being-captured || disabled
@@ -4397,8 +4368,6 @@ drphasetran:
 		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: DRPhaseVoice
-	DeliversCash:
-		Payload: 0
 	Cargo:
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 10
@@ -4428,7 +4397,7 @@ drphasetran.easybot:
 		DeployChance: 100
 		DeployTicks: 0
 	UpdatesPlayerStatistics:
-		OverrideActor: tssapc
+		OverrideActor: ts_nod_subterraneanapc
 	MobSpawnerSlave:
 
 drphasetran.normalbot:
@@ -4441,7 +4410,7 @@ drphasetran.normalbot:
 		DeployChance: 100
 		DeployTicks: 0
 	UpdatesPlayerStatistics:
-		OverrideActor: tssapc
+		OverrideActor: ts_nod_subterraneanapc
 	MobSpawnerSlave:
 drphasetran.hardbot:
 	Inherits: drphasetran
@@ -4453,7 +4422,7 @@ drphasetran.hardbot:
 		DeployChance: 100
 		DeployTicks: 0
 	UpdatesPlayerStatistics:
-		OverrideActor: tssapc
+		OverrideActor: ts_nod_subterraneanapc
 	MobSpawnerSlave:
 drphasetran.brutalbot:
 	Inherits: drphasetran
@@ -4465,7 +4434,7 @@ drphasetran.brutalbot:
 		DeployChance: 100
 		DeployTicks: 0
 	UpdatesPlayerStatistics:
-		OverrideActor: tssapc
+		OverrideActor: ts_nod_subterraneanapc
 	MobSpawnerSlave:
 drjack:
 	Inherits: ^Soldier
@@ -4481,7 +4450,7 @@ drjack:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: drfgweap2, ~techlevel.medium
+		Prerequisites: drfgweap2
 		Queue: Vehicle, RAVehicle
 		Description: A revamped Construction Rig outfitted with two\nshoulder mounted particle launchers. The Flak Jack\nsalvages metal from the battlefield and converts it into\nmicroscopic metallic particles that it fires in clouds which\ncause sustained damage to air units. The unit has no\ndefensive capability against ground attack, and should be\nprotected at all times\n\nType: Walker\nSpeed: Slow\nWeapon: Chaff\nRange: Long\nArmor: Light
 	Mobile:
@@ -4509,7 +4478,6 @@ drjack:
 		VoiceSet: DRFlakJackVoice
 	Passenger:
 		CargoType: Infantry
-		Weight: 2
 drquake:
 	Inherits: ^Vehicle
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -4612,7 +4580,7 @@ drskybike:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: drfgweap2, drfghelipad, ~techlevel.medium
+		Prerequisites: drfgweap2, drfghelipad
 		Queue: Vehicle, RAVehicle
 		Description: Using a modified Spider Bike chassis, the\nFreedom Guard were able to produce cheap, fast aerial\nunits which could attack enemy ground troops and other\nflyers. Although quicker than the Imperium Cyclone, the\nSky Bike is not as heavily armoured and is outgunned in\neven combat. The speed of the Sky Bike, however, allows\nit to dictate the circumstance of conflict. This unit fires\nhigh-velocity mini-missiles and, like the Outrider, must rearm at the Re-Arming Deck\n\nType: Flyer\nSpeed: Fast\nWeapon: Mini Missiles\nRange: Short\nArmor: Light
 	Aircraft:
@@ -4651,7 +4619,6 @@ drskybike:
 		RequiresSelection: True
 		PipCount: 5
 
-
 droutrider:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -4665,7 +4632,7 @@ droutrider:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: drfgweap2, drfghelipad, ~techlevel.medium
+		Prerequisites: drfgweap2, drfghelipad
 		Queue: Vehicle, RAVehicle
 		Description: This ground attack aerial unit is slower and less\nmanoeuvrable than the Sky Bike, but considerably tougher\nand fires air to ground missiles. Deadly effective against\nImperium armour, it cannot engage other air units and\nshould be escorted by air defence units. The Outrider has\nlimited ammunition and must re-arm at the Re-Arming Deck\n\nType: Flyer\nSpeed: Fast\nWeapon: Guided Missile\nRange: Long\nArmor: Heavy
 	Aircraft:
@@ -4717,13 +4684,12 @@ drfgmcv:
 		Name: Base Mover
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Null
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -4854,8 +4820,6 @@ drfanboat:
 	RenderDetectionCircle:
 	Selectable:
 		DecorationBounds: 1536, 1536
-	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
@@ -4879,13 +4843,12 @@ mcv.shadowhand:
 		Name: Construction Rig (Shadowhand)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -4917,7 +4880,6 @@ mcv.shadowhand:
 	Voiced:
 		VoiceSet: DRIRigVoice
 	Passenger:
-		Weight: 1
 drihq.shadowhand:
 	Inherits: ^DRHQStats
 	Tooltip:
@@ -4970,7 +4932,7 @@ drihq.shadowhand:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmshadowhand
@@ -4982,7 +4944,7 @@ dribarr.shadowhand:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -5004,8 +4966,7 @@ dribarr.shadowhand:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -5088,8 +5049,7 @@ driweap.shadowhand:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 140000
@@ -5132,7 +5092,7 @@ drmadrix.shadowhand:
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 131072
+		Bounds: 3072, 3072
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
@@ -5252,7 +5212,7 @@ drgemenis1:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: vehicleproduction, ~techlevel.medium, drmadrix.shadowhand
+		Prerequisites: vehicleproduction, drmadrix.shadowhand
 		Queue: Vehicle, RAVehicle
 		Description: Fast, light tank.\n  Strong vs Vehicles, Tanks\n  Weak vs Infantry, Aircraft
 	Mobile:
@@ -5323,7 +5283,7 @@ drfury:
 		Name: Fury
 	Buildable:
 		BuildPaletteOrder: 61
-		Prerequisites: driweap2, ~techlevel.medium, drmadrix.shadowhand
+		Prerequisites: driweap2, drmadrix.shadowhand
 		Queue: Vehicle, RAVehicle
 		Description: Speedy, heavy mech.\n  Powerful Firepower.\n  Strong vs Ground Units\n  Weak vs Aircraft
 	Mobile:
@@ -5348,7 +5308,6 @@ drfury:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 3
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -5382,7 +5341,7 @@ drshadowblade:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: vehicleproduction, ~techlevel.medium
+		Prerequisites: vehicleproduction
 		Queue: Vehicle, RAVehicle
 		Description: Sadic Anti Infantry, armed with\n Blades.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -5424,7 +5383,7 @@ drhades:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: driweap2, drihelipad, ~techlevel.medium
+		Prerequisites: driweap2, drihelipad
 		Queue: Vehicle, RAVehicle
 		Description: Helicopter Gunship with Chainguns.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -5474,7 +5433,7 @@ drempdisable:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 130
-		Prerequisites: driweap2, drihelipad, ~techlevel.medium
+		Prerequisites: driweap2, drihelipad
 		Queue: Vehicle, RAVehicle
 		Description: Base Disable Unit.\n  Place it in the enemy's central building\n  Weak vs AA
 	Aircraft:
@@ -5488,7 +5447,7 @@ drempdisable:
 		Range: 7c0
 		Type: GroundPosition
 	Armament@PRIMARY:
-		Weapon: DREMPDevice
+		Weapon: DR_EMP_Device
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
@@ -5536,13 +5495,12 @@ mcv.xenite:
 		Name: Construction Rig (Xenite)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drfghq2, ~techlevel.medium
+		Prerequisites: drfghq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -5570,7 +5528,6 @@ mcv.xenite:
 	Voiced:
 		VoiceSet: DRFGRigVoice
 	Passenger:
-		Weight: 1
 drfghq.xenite:
 	Inherits: ^DRHQStats
 	Tooltip:
@@ -5620,7 +5577,7 @@ drfghq.xenite:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmxenite
@@ -5632,7 +5589,7 @@ drbiocom.xenite:
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -5654,8 +5611,7 @@ drbiocom.xenite:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -5726,7 +5682,6 @@ pscbiocom2:
 	RenderSprites:
 		Image: drbiocom2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -5756,8 +5711,7 @@ drfgweap.xenite:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 140000
@@ -5914,7 +5868,6 @@ drgant:
 		Delay: 12
 		Count: 1
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	Wanders:
@@ -5936,7 +5889,6 @@ drgant:
 		VoiceSet: DRGantVoice
 	Selectable:
 		Bounds: 1024, 1024
-
 
 drgrendel:
 	Inherits@Test: ^Infantry
@@ -5983,7 +5935,6 @@ drgrendel:
 		Delay: 12
 		Count: 1
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	Wanders:
@@ -6005,8 +5956,6 @@ drgrendel:
 		VoiceSet: DRGrendelVoice
 	Selectable:
 		Bounds: 1024, 1024
-		DecorationBounds: 1280, 1280
-
 
 drgrider:
 	Inherits@Test: ^Infantry
@@ -6055,7 +6004,6 @@ drgrider:
 		Delay: 12
 		Count: 1
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	ChangesHealth:
@@ -6074,8 +6022,6 @@ drgrider:
 		Range: 7c0
 	Selectable:
 		Bounds: 1024, 1024
-		DecorationBounds: 1280, 1280
-
 
 #Vehicle
 drrat2:
@@ -6283,13 +6229,12 @@ mcv.togran:
 		Name: Construction Rig (Tograns)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -6317,7 +6262,6 @@ mcv.togran:
 	Voiced:
 		VoiceSet: DRIRigVoice
 	Passenger:
-		Weight: 1
 drihq.togran:
 	Inherits: ^DRHQStats
 	Tooltip:
@@ -6370,7 +6314,7 @@ drihq.togran:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmtogran
@@ -6382,8 +6326,8 @@ dribarr.togran:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
-	Inherits@barr: ^IsBarrack
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -6405,8 +6349,7 @@ dribarr.togran:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -6470,8 +6413,7 @@ driweap.togran:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 140000
@@ -6706,7 +6648,7 @@ drtmissile:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 1600
@@ -6753,7 +6695,7 @@ drtmissile:
 		RecoilRecovery: 34
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: DRTNissileTurretAA
+		Weapon: DRTNissileTurret_AA
 		Recoil: 171
 		RecoilRecovery: 34
 		MuzzleSequence: muzzle
@@ -6899,7 +6841,7 @@ drphasemine:
 		Name: Phase Mine
 	Buildable:
 		BuildPaletteOrder: 61
-		Prerequisites: vehicleproduction, ~techlevel.medium
+		Prerequisites: vehicleproduction
 		Queue: Infantry, RAInfantry
 		Description: Speedy, heavy mech.\n  Powerful Firepower.\n  Strong vs Ground Units\n  Weak vs Aircraft
 	Mobile:
@@ -6921,7 +6863,6 @@ drphasemine:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 1
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -7227,7 +7168,7 @@ drsonic:
 		Name: Sonic Thumper
 	Buildable:
 		BuildPaletteOrder: 61
-		Prerequisites: driweap2, ~techlevel.medium
+		Prerequisites: driweap2
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 1125
 		BuildDurationModifier: 100
@@ -7248,7 +7189,6 @@ drsonic:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 3
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -7260,8 +7200,7 @@ drihq.togran.m:
 	Tooltip:
 		Name: HQ Ship
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 105557, 0, -21845
+		Bounds: 3072, 2474, 0, -512
 	Health:
 		HP: 210000
 	Armor:
@@ -7358,13 +7297,12 @@ mcv.aterrorist:
 		Name: Construction Crane (Terrorist)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drfghq2, ~techlevel.medium, drterrep
+		Prerequisites: drfghq2, drterrep
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Armed With Lasers\n  Better than an Construction Biot\n Special for Large Travels
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 100
 		Locomotor: heavywheeled
@@ -7415,13 +7353,12 @@ mcv2.aterrorist:
 		Name: Construction Biot (Terrorist)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drterrep, ~techlevel.medium
+		Prerequisites: drterrep
 		Queue: Infantry, RAInfantry
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed.\n Are a Lite Construction Rig are\n Cheaper but Slower
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 25
 		Locomotor: heavywheeled
@@ -7449,7 +7386,6 @@ mcv2.aterrorist:
 	Voiced:
 		VoiceSet: DRConstructionBiotVoice
 	Passenger:
-		Weight: 1
 drterpower:
 	Inherits: drtpower
 	Buildable:
@@ -7527,7 +7463,7 @@ drterhq.terror:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmxenite
@@ -7547,7 +7483,6 @@ pscdrterhq2:
 	RenderSprites:
 		Image: drfghq2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -7564,7 +7499,6 @@ pscdrterhq3:
 	RenderSprites:
 		Image: drfghq3
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -7594,8 +7528,7 @@ drterweap.terror:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 240000
@@ -7644,7 +7577,7 @@ drwaterextract.terror:
 	Inherits: drwaterextract.freedomguard
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: drfghq3, ~techlevel.medium
+		Prerequisites: drfghq3
 		Queue: Building, RABuilding
 		Description: Provides Passive income
 	RenderSprites:
@@ -7679,8 +7612,7 @@ drterrep:
 		Footprint: +x+ x+x +x+
 		Dimensions: 3,3
 	Selectable:
-		Bounds: 116480, 61866, 0, 5461
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	SelectionDecorations:
 	Health:
 		HP: 90000
@@ -7717,7 +7649,6 @@ pscdrterrep:
 	RenderSprites:
 		Image: drterrep
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 drterhosp:
@@ -7739,8 +7670,7 @@ drterhosp:
 		Footprint: xxx ++x ++x
 		Dimensions: 3,3
 	Selectable:
-		Bounds: 116480, 61866, 0, 5461
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	SelectionDecorations:
 	Health:
 		HP: 90000
@@ -7772,7 +7702,7 @@ drnavyard.terror:
 			TopLeft: -1536, -1536
 			BottomRight: 1536, 1536
 	Selectable:
-		Bounds: 131072, 131072
+		Bounds: 3072, 3072
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
@@ -7853,7 +7783,7 @@ drnavyard.terror:
 drterrturret:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 600
@@ -8301,7 +8231,7 @@ drtarty:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: drfghq2, ~techlevel.medium
+		Prerequisites: drfghq2
 		Queue: Vehicle, RAVehicle
 		Description: Long-range artillery.\n  Strong vs Infantry, Vehicles and Buildings
 	Mobile:
@@ -8378,7 +8308,7 @@ drmtnk:
 		Weapon: DRMissileTankAG
 		LocalOffset: 200,2,170, 200,-2,170
 	Armament@G2:
-		Weapon: DRMissileTankAA
+		Weapon: DRMissileTank_AA
 		LocalOffset: 200,2,170, 200,-2,170
 	AttackTurreted:
 	WithSpriteTurret:
@@ -8413,7 +8343,7 @@ drspiner:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: drterrep2, ~techlevel.medium
+		Prerequisites: drterrep2
 		Queue: Vehicle, RAVehicle
 		Description: Helicopter\n\nType: Flyer\nSpeed: Fast\nWeapon: Guided Missile\nRange: Long\nArmor: Heavy
 	Aircraft:
@@ -8466,7 +8396,7 @@ drtertran:
 		OverrideActor: tran
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: drterrep2, ~techlevel.medium
+		Prerequisites: drterrep2
 		Queue: Vehicle, RAVehicle
 		Description: Fast Infantry Transport Helicopter.\n  Unarmed
 	Aircraft:
@@ -8490,7 +8420,7 @@ drtertran:
 	SelectionDecorations:
 	Selectable:
 		Class: drtertran
-		DecorationBounds: 74624, 74624
+		DecorationBounds: 1749, 1749
 	RenderSprites:
 		Image: drtertran
 	Voiced:
@@ -8545,8 +8475,6 @@ drghazi:
 	RenderDetectionCircle:
 	Selectable:
 		DecorationBounds: 1536, 1536
-	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: DRGhaziVoice
 	RenderSprites:
@@ -8592,8 +8520,6 @@ drphunisher:
 	RenderDetectionCircle:
 	Selectable:
 		DecorationBounds: 1536, 1536
-	DeliversCash:
-		Payload: 250
 	Voiced:
 		VoiceSet: DRPunisherVoice
 	RenderSprites:
@@ -8615,13 +8541,12 @@ mcv.eodalien:
 		Name: Construction Gloth (Aliens)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -8660,13 +8585,12 @@ mcv2.eodalien:
 		Name: Armed Gloth (Aliens)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -8706,7 +8630,7 @@ drahq.eodalien:
 	Inherits@aicash: ^AIConyardCash
 	Inherits: ^Conyard
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -8772,7 +8696,7 @@ drahq.eodalien:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmdralien
@@ -8867,8 +8791,7 @@ draweap.eodalien:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 140000
@@ -8911,8 +8834,8 @@ drabarr.eodalien:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
-	Inherits@barr: ^IsBarrack
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -8934,8 +8857,7 @@ drabarr.eodalien:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -8989,8 +8911,7 @@ drlife.eodalien:
 		Dimensions: 3,4
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 91008, 0, 21845
-		DecorationBounds: 131072, 127402, 0, -3626
+		Bounds: 3072, 2986, 0, -85
 	SelectionDecorations:
 	Targetable:
 		TargetTypes: Ground, Structure, C4, DetonateAttack, SpyInfiltrate
@@ -9044,7 +8965,7 @@ drlife.eodalien:
 draplastur:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 600
@@ -9088,7 +9009,7 @@ drbattery:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 1600
@@ -9135,7 +9056,7 @@ drbattery:
 		RecoilRecovery: 34
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: DRTNissileTurretAA
+		Weapon: DRTNissileTurret_AA
 		Recoil: 171
 		RecoilRecovery: 34
 		MuzzleSequence: muzzle
@@ -9198,7 +9119,7 @@ drnavyard.eodalien:
 			TopLeft: -1536, -1536
 			BottomRight: 1536, 1536
 	Selectable:
-		Bounds: 131072, 131072
+		Bounds: 3072, 3072
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
@@ -9428,7 +9349,6 @@ drsalamander:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	ChangesHealth:
@@ -9477,7 +9397,6 @@ drassimilator:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	ChangesHealth:
@@ -9625,7 +9544,7 @@ drmole:
 		Weapon: DRMoleGun
 		LocalOffset: 200,1,170, 200,-1,170
 	Armament@G2:
-		Weapon: DRMoleGun.AA
+		Weapon: DRMoleGun_AA
 		LocalOffset: 200,1,170, 200,-1,170
 	AttackTurreted:
 	WithSpriteTurret:
@@ -9764,7 +9683,6 @@ drrouter:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 1
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -9803,7 +9721,6 @@ drmecha:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 1
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -10065,7 +9982,6 @@ drblazer:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 5
-
 
 drbomber:
 	Inherits: ^Helicopter
@@ -10369,13 +10285,12 @@ mcv.descendants:
 		Name: Construction Rig (Descendants)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drfghq2, ~techlevel.medium
+		Prerequisites: drfghq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -10403,7 +10318,6 @@ mcv.descendants:
 	Voiced:
 		VoiceSet: DRFGRigVoice
 	Passenger:
-		Weight: 1
 drfghq.descendants:
 	Inherits: ^DRHQStats
 	Tooltip:
@@ -10455,7 +10369,7 @@ drfghq.descendants:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmxenite
@@ -10490,8 +10404,7 @@ drdweap.descendants:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 140000
@@ -10537,7 +10450,7 @@ drdcamp.descendants:
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -10559,8 +10472,7 @@ drdcamp.descendants:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -10718,7 +10630,7 @@ drptnkd:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: driscrap, ~techlevel.medium
+		Prerequisites: driscrap
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 1020
 		BuildDurationModifier: 40
@@ -10739,7 +10651,7 @@ drmadd:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: driscrap, ~techlevel.medium
+		Prerequisites: driscrap
 		Queue: Vehicle, RAVehicle
 		Description: The M.A.D. fires bladed orbs at enemy air units.\nLike the Freedom Guard Flak Jack, it cannot fire at ground units and\nshould be defended against land attack\n\nType: Hover\nSpeed: Medium\nWeapon: Bladed Orbs\nRange: Long\nArmor: Light
 	Voiced:
@@ -10762,7 +10674,7 @@ drmechd:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: drdsupport, ~techlevel.medium
+		Prerequisites: drdsupport
 		Description: The Mechanic functions similarly to the Field Medic\nrepairing damaged vehicles in the field. The Mechanic has no attack capability\n\nType: Walker\nSpeed: Slow\nWeapon: None\nRange: N/A\nArmor: Light
 	RenderSprites:
 		Image: drmech
@@ -10861,7 +10773,6 @@ drdissecator:
 		Sequence: smoke
 	SupportPowerChargeBar:
 
-
 drwaterextract:
 	Inherits: ^TechBuilding
 	Inherits@shape: ^3x2Shape
@@ -10898,7 +10809,6 @@ drwaterextract:
 		Amount: 3000
 	GivesCashOnCapture:
 		Amount: 3000
-
 
 drcivplant:
 	Inherits: ^TechBuilding
@@ -10937,7 +10847,6 @@ drcivplant:
 		Amount: 10
 	Power:
 		Amount: 250
-
 
 drshelter:
 	Inherits: ^CivBuilding
@@ -11355,12 +11264,11 @@ drsubterrean:
 		Palette: terrain
 	RenderSprites:
 
-
 drfarm:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -11376,12 +11284,11 @@ drfarm:
 	GivesCashOnCapture:
 		Amount: 5
 
-
 drfarm2:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
@@ -11397,12 +11304,11 @@ drfarm2:
 	GivesCashOnCapture:
 		Amount: 5
 
-
 drfarm3:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
@@ -11418,12 +11324,11 @@ drfarm3:
 	GivesCashOnCapture:
 		Amount: 5
 
-
 drrural:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
@@ -11434,12 +11339,11 @@ drrural:
 		Palette: terrain
 	RenderSprites:
 
-
 drcomercial:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
@@ -11450,12 +11354,11 @@ drcomercial:
 		Palette: terrain
 	RenderSprites:
 
-
 drctech:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
@@ -11466,12 +11369,11 @@ drctech:
 		Palette: terrain
 	RenderSprites:
 
-
 drconcessionaire:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -11482,12 +11384,11 @@ drconcessionaire:
 		Palette: terrain
 	RenderSprites:
 
-
 drtents:
 	Inherits: ^CivBuilding
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
@@ -11497,7 +11398,6 @@ drtents:
 	RenderSprites:
 		Palette: terrain
 	RenderSprites:
-
 
 drfgweap2:
 	Tooltip:

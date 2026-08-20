@@ -1,0 +1,91 @@
+forgotten_cobracopter_husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Cobra Copter
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 150
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: forgotten_cobracopter
+		PlayerPalette: player_rgba
+
+forgotten_apache_husk:
+	Inherits: ^HelicopterHusk
+	Inherits@Voxel: ^TSRenderVoxel
+	Tooltip:
+		Name: Apache
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 140
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: forgotten_apache
+	RenderVoxels:
+		Image: forgotten_apache
+		Scale: 15
+	-WithShadow:
+	-Cloak@TDcloak:
+	-Cloak@TScloak:
+
+forgotten_wasp_husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Wasp
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 120
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: forgotten_wasp
+		PlayerPalette: player_rgba
+forgotten_cropplane_husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Crop Plane
+	Aircraft:
+		TurnSpeed: 40
+		Speed: 96
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: forgotten_locustbomber
+		PlayerPalette: player_rgba
+
+forgotten_locustbomber_husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Locust Bomber
+	Aircraft:
+		TurnSpeed: 40
+		Speed: 96
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: forgotten_locustbomber
+		PlayerPalette: player_rgba
+
+forgotten_chinook_husk:
+	Inherits: ^HelicopterHusk
+	Inherits@Voxel: ^TSRenderVoxel
+	Tooltip:
+		Name: Chinook
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 223
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: forgotten_chinook
+	RenderVoxels:
+		Image: forgotten_chinook
+		Scale: 15

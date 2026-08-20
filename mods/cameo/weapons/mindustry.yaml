@@ -1,7 +1,7 @@
 CMindustry_Single:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 20
-	Range: 7c0
+	Range: 7168
 	Report: mindclass_shoot.wav
 	Projectile: Bullet
 		Speed: 853
@@ -25,7 +25,7 @@ CMindustry_SingleAA:
 CMindustry_Double:
 	Inherits: CMindustry_Single
 	ReloadDelay: 10
-	Range: 6c0
+	Range: 6144
 
 CMindustry_DoubleAA:
 	Inherits: CMindustry_Double
@@ -38,7 +38,7 @@ CMindustry_DoubleAA:
 CMindustry_Gattling:
 	Inherits: CMindustry_Single
 	ReloadDelay: 10
-	Range: 7c0
+	Range: 7168
 	Warhead@1Dam: SpreadDamage
 		Damage: 1500
 
@@ -53,7 +53,7 @@ CMindustry_GattlingAA:
 CMindustry_Splitter:
 	Inherits: CMindustry_Single
 	ReloadDelay: 5
-	Range: 6c0
+	Range: 6144
 	Warhead@1Dam: SpreadDamage
 		Damage: 1500
 
@@ -68,7 +68,7 @@ CMindustry_SplitterAA:
 CMindustry_Flamer:
 	Inherits: ^FireWeapon
 	ReloadDelay: 30
-	Range: 6c0
+	Range: 6144
 	Burst: 15
 	BurstDelays: 1
 	Projectile: Bullet
@@ -94,7 +94,7 @@ CMindustry_Flamer:
 CMindustry_Railgun:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 65
-	Range: 14c0
+	Range: 14336
 	Report: mindclass_shoot.wav
 	Projectile: Bullet
 		Speed: 853
@@ -113,7 +113,7 @@ CMindustry_Railgun:
 CMindustry_Railgun_AA:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 15
-	Range: 14c0
+	Range: 14336
 	Report: mindclass_shoot.wav
 	ValidTargets: Air
 	Projectile: MissileCA

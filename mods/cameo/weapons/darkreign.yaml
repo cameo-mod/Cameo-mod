@@ -1,8 +1,8 @@
 ^DRLightLaser:
 	Inherits: ^HeavyMG
 	ReloadDelay: 15
-	Range: 4c0
-	InvalidTargets: Wall
+	Range: 4096
+	InvalidTargets: wall
 	Report: drgxlgnwc0.wav
 	Projectile: Bullet
 		Image: drsmalllaser
@@ -33,7 +33,7 @@
 DRPhaseTankWeapon:
 	Inherits: ^DRLightLaser
 	ReloadDelay: 18
-	Range: 6c0
+	Range: 6144
 	Report: gxphtwc0.wav
 	Projectile: Bullet
 		Image: drbigtwinlaser
@@ -44,7 +44,7 @@ DRPhaseTankWeapon:
 
 DRScoutTankWeapon:
 	Inherits: ^DRLightLaser
-	Range: 6c0
+	Range: 6144
 	ReloadDelay: 28
 	Report: drgxsttwc0.wav
 	Projectile: Bullet
@@ -55,13 +55,13 @@ DRScoutTankWeapon:
 DRLaserPistol:
 	Inherits: ^DRLightLaser
 	ReloadDelay: 11
-	Range: 5c0
+	Range: 5120
 	Warhead@1Dam: SpreadDamage
 		Damage: 900
 DRLaserPistolG:
 	Inherits: ^DRLightLaser
 	ReloadDelay: 6
-	Range: 7c0
+	Range: 7168
 	Warhead@1Dam: SpreadDamage
 		Damage: 2500
 DRLaserSkater:
@@ -78,7 +78,7 @@ DRShokPistol:
 		Image: drneutron
 	Report: drtelectro.wav
 	ReloadDelay: 11
-	Range: 4c0
+	Range: 4096
 	Warhead@1Dam: SpreadDamage
 		Spread: 42
 		Damage: 1200
@@ -104,13 +104,13 @@ DRShokPistol:
 DRShokPistolG:
 	Inherits: DRShokPistol
 	ReloadDelay: 6
-	Range: 6c0
+	Range: 6144
 	Warhead@1Dam: SpreadDamage
 		Damage: 4500
 DRShokScout:
 	Inherits: DRShokPistol
 	ReloadDelay: 8
-	Range: 5c0
+	Range: 5120
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
 		Spread: 42
@@ -121,7 +121,7 @@ DRSniperRifle:
 	Inherits: ^DRLightLaser
 	ReloadDelay: 44
 	Report: gxsnpwc0.wav
-	Range: 9c0
+	Range: 9216
 	Projectile: Bullet
 		Speed: 5c682
 	Warhead@1Dam: SpreadDamage
@@ -137,7 +137,7 @@ DRJebRadecRifle:
 	Inherits: ^DRLightLaser
 	ReloadDelay: 9
 	Report: gxsnpwc0.wav
-	Range: 9c0
+	Range: 9216
 	Projectile: Bullet
 		Speed: 5c682
 	Warhead@1Dam: SpreadDamage
@@ -145,7 +145,7 @@ DRJebRadecRifle:
 
 DRLaserShotgun:
 	Inherits: ^DRLightLaser
-	Range: 3c0
+	Range: 3072
 	Report: gxsnpwc0.wav
 	ReloadDelay: 30
 	Warhead@1Dam: SpreadDamage
@@ -154,7 +154,7 @@ DRLaserShotgun:
 DRLaserTurret:
 	Inherits: ^DRLightLaser
 	ValidTargets: Ground, Air
-	Range: 5c0
+	Range: 5120
 	ReloadDelay: 4
 	Report: gxfgtwc0.wav
 	Projectile: Bullet
@@ -166,7 +166,7 @@ DRLaserTurret:
 DRGeminisMediumLaser:
 	Inherits: ^DRLightLaser
 	ReloadDelay: 4
-	Range: 5c0
+	Range: 5120
 	Report: gxigtwc0.wav
 	Projectile: Bullet
 		Image: drtwinlaser
@@ -177,11 +177,11 @@ DRGeminisMediumLaser:
 DRGeminisLightLaser:
 	Inherits: DRGeminisMediumLaser
 	ReloadDelay: 8
-	Range: 5c0
+	Range: 5120
 DRBioConntrolEnergy:
 	Inherits: DRGeminisLightLaser
 	ReloadDelay: 8
-	Range: 6c0
+	Range: 6144
 	Projectile: Bullet
 		Image: drenergybullet
 	Warhead@2Eff: CreateEffect
@@ -199,7 +199,7 @@ DRTickTankLaser:
 	Inherits: DRGeminisLightLaser
 	ReloadDelay: 30
 	Report: gxspbwc0.wav
-	Range: 6c0
+	Range: 6144
 	Projectile: Bullet
 		Image: drticktanklaser
 	Warhead@2Eff: CreateEffect
@@ -219,7 +219,7 @@ DRTickTankLaserAA:
 DRSpinnerLaser:
 	Inherits: DRGeminisLightLaser
 	ReloadDelay: 5
-	Range: 6c0
+	Range: 6144
 	Projectile: Bullet
 		Image: drticktanklaser
 	Warhead@2Eff: CreateEffect
@@ -239,7 +239,7 @@ DRSpinnerLaserAA:
 DRAACannon:
 	Inherits: ^DRLightLaser
 	ValidTargets: Air
-	Range: 10c0
+	Range: 10240
 	ReloadDelay: 10
 	Report: gxfaawc0.wav
 	Projectile: Bullet
@@ -255,7 +255,7 @@ DRAACannon:
 ^DRNeutronRay:
 	Inherits: ^DRLightLaser
 	ReloadDelay: 70
-	Range: 8c512
+	Range: 8704
 	Report: drgxneuwc0.wav
 	Projectile: Bullet
 		Image: drneutron
@@ -284,7 +284,7 @@ DRAACannon:
 DRReaperWeapon:
 	Inherits: ^DRNeutronRay
 	ReloadDelay: 50
-	Range: 5c512
+	Range: 5632
 	Warhead@1Dam: SpreadDamage
 		Damage: 4800
 	Warhead@1DamBuildings: SpreadDamage
@@ -292,7 +292,7 @@ DRReaperWeapon:
 
 DRNeutronTurret:
 	Inherits: ^DRNeutronRay
-	Range: 9c0
+	Range: 9216
 	ReloadDelay: 23
 	Projectile: Bullet
 		Image: drneutron
@@ -304,7 +304,7 @@ Warhead@1Dam: SpreadDamage
 DRCycloneNeutron:
 	Inherits: ^DRNeutronRay
 	ReloadDelay: 14
-	Range: 6c0
+	Range: 6144
 	Report: gxcycwc0.wav
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
@@ -314,10 +314,12 @@ DRCycloneNeutron:
 		Explosions: drneutronexp
 
 DRTankHunterRay:
-	Inherits: ^TeslaWeapon
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
 	Report: gxthnwc0.wav
 	ReloadDelay: 28
-	Range: 3c0
+	Range: 3072
 	Projectile: Bullet
 		Image: drelectrobullet
 		Speed: 700
@@ -349,7 +351,7 @@ DRGrendelRay:
 	Inherits: DRTankHunterRay
 	Report: gxgebwc0.wav
 	ReloadDelay: 60
-	Range: 7c0
+	Range: 7168
 	Warhead@1Dam: SpreadDamage
 		Spread: 42
 		Damage: 4500
@@ -373,7 +375,7 @@ DRGrendelRay:
 DRBionWeapon:
 	Inherits: ^DRPlasmaWeapon
 	ReloadDelay: 13
-	Range: 4c0
+	Range: 4096
 	Report: drgxbonwc0.wav
 	Projectile: Bullet
 		Image: drplasma2
@@ -390,7 +392,7 @@ DRPlasmaTurret:
 	Warhead@2Eff: CreateEffect
 		Explosions: drplasmaex
 	ValidTargets: Ground, Air
-	Range: 5c0
+	Range: 5120
 	ReloadDelay: 4
 	Report: gxigtwc0.wav
 	Projectile: Bullet
@@ -403,7 +405,7 @@ DRBionWeaponAA:
 	Inherits: DRBionWeapon
 	ReloadDelay: 11
 	ValidTargets: Air
-	Range: 3c0
+	Range: 3072
 	Warhead@1Dam: SpreadDamage
 		Damage: 1600
 		ValidTargets: Air
@@ -420,12 +422,12 @@ DRPlasmaReaperWeapon:
 
 DRPlasmaReaperWeaponG:
 	Inherits: DRPlasmaReaperWeapon
-	Range: 7c0
+	Range: 7168
 
 DRSkyFortressWeapon:
 	Inherits: ^DRPlasmaWeapon
 	ReloadDelay: 28
-	Range: 7c0
+	Range: 7168
 	Report: gxskywc0.wav
 	Projectile: Bullet
 		Speed: 1493
@@ -440,7 +442,7 @@ DRSkyFortressWeapon:
 DRTachyonTankWeapon:
 	Inherits: ^DRPlasmaWeapon
 	ReloadDelay: 28
-	Range: 10c0
+	Range: 10240
 	Report: drgxtctwc0.wav
 	Projectile: Bullet
 		Image: drtachbullet
@@ -503,7 +505,7 @@ DRFuryWeapon:
 
 DRFuryLaser:
 	Inherits: DRScoutTankWeapon
-	Range: 2c0
+	Range: 2048
 	Report: gxfgtwc0.wav
 	ReloadDelay: 1
 	Warhead@1Dam: SpreadDamage
@@ -514,7 +516,7 @@ DRFuryLaser:
 DRPolyGrenade:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 28
-	Range: 5c0
+	Range: 5120
 	Report: drgxextwc1.wav
 	Projectile: Bullet
 		Speed: 140
@@ -548,8 +550,8 @@ DRPolyGrenade:
 DRScarabShell:
 	Inherits: ArtilleryShell
 	ReloadDelay: 75
-	Range: 20c0
-	MinRange: 3c0
+	Range: 20480
+	MinRange: 3072
 	Report: drgxfarwc0.wav
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -570,8 +572,8 @@ DRScarabShell:
 DRArtilleryShell:
 	Inherits: ArtilleryShell
 	ReloadDelay: 70
-	Range: 21c0
-	MinRange: 3c0
+	Range: 21504
+	MinRange: 3072
 	Report: drgxfarwc0.wav
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -620,7 +622,7 @@ DRTwinArtilleryShell:
 
 ^DRRailgun:
 	ReloadDelay: 10
-	Range: 5c0
+	Range: 5120
 	Report: gxmrcwc0.wav
 	ValidTargets: Ground
 	Projectile: Bullet
@@ -644,12 +646,12 @@ DRTwinArtilleryShell:
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@2Eff: CreateEffect
 		Explosions: drrailexp
-		ValidTargets: Air, Ground, Water, Trees
+		ValidTargets: Air, Ground, Water
 
 DRPortableRailgun:
 	Inherits: ^DRRailgun
 	ReloadDelay: 15
-	Range: 5c0
+	Range: 5120
 	Warhead@1Dam: SpreadDamage
 		Spread: 333
 		Damage: 3333
@@ -657,7 +659,7 @@ DRPortableRailgun:
 DRTripleRail:
 	Inherits: ^DRRailgun
 	ReloadDelay: 25
-	Range: 10c0
+	Range: 10240
 	Report: drgxtrtwc0.wav
 	Projectile: Bullet
 		Blockable: true
@@ -668,7 +670,7 @@ DRTripleRail:
 DRRailTower:
 	Inherits: ^DRRailgun
 	ReloadDelay: 25
-	Range: 8c0
+	Range: 8192
 	Burst: 2
 	BurstDelays: 5
 	Report: gxfagwc0.wav
@@ -681,7 +683,7 @@ DRRailTower:
 DRSpiderBikeRailgun:
 	Inherits: ^DRRailgun
 	ReloadDelay: 18
-	Range: 5c0
+	Range: 5120
 	Report: gxspbwc0.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 3000
@@ -694,7 +696,7 @@ DRSkirmishMissile:
 	Inherits: BikeRockets
 	Report: drgxsktwc0.wav
 	ReloadDelay: 28
-	Range: 6c0
+	Range: 6144
 	Burst: 2
 	ValidTargets: Ground, Air
 	BurstDelays: 9
@@ -727,7 +729,7 @@ DRSkirmishMissile:
 DRMetalFragments:
 	Inherits: ^AACannon
 	ReloadDelay: 6
-	Range: 5c0
+	Range: 5120
 	Report: gxflkwc0.wav
 	ValidTargets: Air
 	Projectile: Bullet
@@ -742,7 +744,7 @@ DRMetalFragments:
 			Heavy: 80
 	Warhead@2Eff: CreateEffect
 		Explosions: poof
-		ValidTargets: Air, Ground, Water, Trees
+		ValidTargets: Air, Ground, Water
 
 DRGantClaws:
 	Inherits: MandibleHeavy
@@ -776,7 +778,7 @@ DRSatanClawzMG:
 	Report: santal1.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 4000
-		InvalidTargets: Wall
+		InvalidTargets: wall
 		Versus:
 			Light: 50
 			Heavy: 25
@@ -784,10 +786,10 @@ DRSatanClawzMG:
 DRAMPInjection:
 	Report: gxampwc0.wav
 	ValidTargets: Heal, plagued
-	InvalidTargets: Vehicle, Water, Structure, Wall, Husk, poisoned
+	InvalidTargets: Vehicle, Water, Structure, wall, Husk, poisoned
 	ValidStances: Ally
 	ReloadDelay: 40
-	Range: 4c0
+	Range: 4096
 	Projectile: Bullet
 		Speed: 5c682
 	Warhead@1Dam: HealthPercentageDamage
@@ -798,7 +800,7 @@ DRAMPInjection:
 	Warhead@1Con: GrantExternalCondition
 		Condition: poisoned
 		Duration: 1000
-		Range: 0c60
+		Range: 60
 
 DRAMPInjectionEnemy:
 	Inherits: DRAMPInjection
@@ -846,8 +848,8 @@ DRAAMadTurret:
 DRHadesBomb:
 	Inherits: DRScarabShell
 	ReloadDelay: 15
-	Range: 4c0
-	MinRange: 3c0
+	Range: 4096
+	MinRange: 3072
 	Report: gxnpbwc0.wav
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -865,7 +867,7 @@ DRHadesBomb:
 DRShredderKnifes:
 	ValidTargets: Infantry
 	ReloadDelay: 1
-	Range: 2c0
+	Range: 2048
 	TargetActorCenter: true
 	Projectile: InstantHit
 	Warhead@1Dam: TargetDamage
@@ -875,7 +877,7 @@ DRShredderKnifes:
 
 DRShokWaveQuake:
 	ReloadDelay: 30
-	Range: 16c0
+	Range: 16384
 	Burst: 10
 	BurstDelays: 0
 	Projectile: LinearPulse
@@ -909,7 +911,7 @@ DRShokWaveQuakeBot:
 DRTrainerAnimalControl:
 	ReloadDelay: 370
 	Report: iyurat2a.wav
-	Range: 6c0
+	Range: 6144
 	TargetActorCenter: true
 	ValidTargets: Creep, Monster, Creature
 	InvalidTargets: Hero
@@ -920,7 +922,7 @@ DRTrainerAnimalControl:
 		Damage: 0
 	Warhead@2Own: ChangeOwner
 		Duration: 400
-		Range: 0c86
+		Range: 86
 		ValidTargets: Creep, Monster, Creature
 		InvalidTargets: Hero
 
@@ -949,7 +951,7 @@ DRAvengerBomb:
 	Inherits: DROutriderMissiles
 	ReloadDelay: 50
 	Report: gxphtwc2.wav
-	Range: 5c0
+	Range: 5120
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c0
 		Damage: 65000
@@ -958,17 +960,17 @@ DRSuicideBomb:
 	Inherits: SCUD
 	ReloadDelay: 1
 	Report: gxmtrwc0.wav
-	Range: 1c0
-	MinRange: 0c0
+	Range: 1024
+	MinRange: 0
 
 DRDissecator:
-	ValidTargets: Ground, Air, Trees
+	ValidTargets: Ground, Air
 	Report: nukemisl.aud
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 15c0
 		Damage: 35000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Air, Trees
+		ValidTargets: Ground, Air
 		AffectsParent: True
 		Versus:
 			None: 100
@@ -976,7 +978,7 @@ DRDissecator:
 			Light: 60
 			Heavy: 50
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke_explosion
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
@@ -998,10 +1000,10 @@ DRDissecator:
 		Delay: 3
 	Warhead@5Smu_areanukea: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 3
 		Delay: 3
-	Warhead@6Eff_areanukea: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: xplobig4.aud
 		Delay: 3
 		ImpactActors: false
@@ -1010,7 +1012,7 @@ DRDissecator:
 		Damage: 15000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 6
-		ValidTargets: Ground, Air, Trees
+		ValidTargets: Ground, Air
 		AffectsParent: True
 		Versus:
 			None: 100
@@ -1023,7 +1025,7 @@ DRDissecator:
 		Delay: 6
 	Warhead@9Smu_areanukeb: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 4
 		Delay: 6
 	Warhead@10Dam_areanukec: SpreadDamage
@@ -1031,7 +1033,7 @@ DRDissecator:
 		Damage: 5000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 9
-		ValidTargets: Ground, Air, Trees
+		ValidTargets: Ground, Air
 		AffectsParent: True
 		Versus:
 			None: 100
@@ -1044,7 +1046,7 @@ DRDissecator:
 		Delay: 9
 	Warhead@12Smu_areanukec: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 5
 		Delay: 9
 
@@ -1077,7 +1079,7 @@ DRRiftBlackholeDamage:
 		DamageTypes: Prone100Percent, DefaultDeath
 DRHeal:
 	ReloadDelay: 160
-	Range: 2c0
+	Range: 2048
 	Report: gxheaoc0.wav
 	ValidTargets: Heal, plagued
 	Projectile: InstantExplode
@@ -1112,7 +1114,7 @@ DRFireballLauncher:
 	Inherits: ^FireWeapon
 	Burst: 1
 	BurstDelays: 10
-	Range: 6c0
+	Range: 6144
 	Projectile: Bullet
 		Speed: 250
 		TrailImage: drflamerflame
@@ -1129,7 +1131,7 @@ DRFireballLauncher:
 DRGattlingTachyon:
 	Inherits: DRTachyonTankWeapon
 	ReloadDelay: 11
-	Range: 10c256
+	Range: 10496
 	Report: drgxfrtwc0.wav
 	Burst: 2
 	Warhead@1Dam: SpreadDamage
@@ -1142,8 +1144,8 @@ DRGattlingTachyon:
 DRTNissileTurretAG:
 	Inherits: ^AntiGroundMissile
 	ReloadDelay: 240
-	Range: 9c0
-	MinRange: 4c0
+	Range: 9216
+	MinRange: 4096
 	Burst: 3
 	BurstDelays: 20
 	Report: drmsllnch.wav
@@ -1160,7 +1162,7 @@ DRTNissileTurretAG:
 		Spread: 341
 		Damage: 5500
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 90
 			Wood: 75
@@ -1175,10 +1177,10 @@ DRTNissileTurretAG:
 	Warhead@4EffWater: CreateEffect
 		Explosions: large_splash
 
-DRTNissileTurretAA:
+DRTNissileTurret_AA:
 	Inherits: DRMadWeapon
 	ReloadDelay: 240
-	Range: 9c0
+	Range: 9216
 	Burst: 3
 	Report: drmsllnch.wav
 	Projectile: Missile
@@ -1196,25 +1198,25 @@ DRFatSoldierArtillery:
 DRMissileTankAG:
 	Inherits: DRTNissileTurretAG
 	ReloadDelay: 170
-	Range: 7c0
-	MinRange: 1c0
+	Range: 7168
+	MinRange: 1024
 	Burst: 1
 	BurstDelays: 20
 	Warhead@1Dam: SpreadDamage
 		Spread: 341
 		Damage: 3900
 
-DRMissileTankAA:
-	Inherits: DRTNissileTurretAA
+DRMissileTank_AA:
+	Inherits: DRTNissileTurret_AA
 	ReloadDelay: 180
-	Range: 7c0
+	Range: 7168
 	Burst: 1
 DRHostageTake:
 	ValidTargets: Infantry
-	InvalidTargets: Vehicle, Water, Structure, Wall, Husk
+	InvalidTargets: Vehicle, Water, Structure, wall, Husk
 	ValidStances: Neutral, Enemy
 	ReloadDelay: 150
-	Range: 1c0
+	Range: 1024
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Damage: 500000
@@ -1227,7 +1229,7 @@ DRNullWeapon:
 	ValidTargets: NullTarget
 	InvalidTargets: Ground
 	ReloadDelay: 2999
-	Range: 1c0
+	Range: 1024
 	Projectile: Bullet
 		Speed: 5c682
 	Warhead@1Dam: SpreadDamage
@@ -1238,7 +1240,7 @@ DRNullWeapon:
 DRRastaGrenade:
 	Inherits: DRPolyGrenade
 	ReloadDelay: 40
-	Range: 6c0
+	Range: 6144
 	Report: drgrenlnc.wav
 	Warhead@1Dam: SpreadDamage
 		Spread: 192
@@ -1253,7 +1255,7 @@ DRRastaGrenade:
 DRRastaLaser:
 	Inherits: ^DRLightLaser
 	ReloadDelay: 11
-	Range: 6c0
+	Range: 6144
 	Report: drshortbst.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 1750
@@ -1261,7 +1263,7 @@ DRRastaLaser:
 DRRastaLaser2:
 	Inherits: ^DRLightLaser
 	ReloadDelay: 11
-	Range: 6c0
+	Range: 6144
 	Report: drfastgun.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 2500
@@ -1269,7 +1271,7 @@ DRRastaLaser2:
 DRShokWaveSonic:
 	ReloadDelay: 70
 	Report: gxshkoc0.wav
-	Range: 12c0
+	Range: 12288
 	Burst: 1
 	BurstDelays: 0
 	Projectile: LinearPulse
@@ -1292,7 +1294,7 @@ DRVortexTankBlackHoleMaker:
 	Inherits: DRGrendelRay
 	Report: gxgebwc0.wav
 	ReloadDelay: 800
-	Range: 12c0
+	Range: 12288
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 200
@@ -1319,11 +1321,11 @@ DRVortexTankBlackholeDamage:
 			Wood: 100
 			Concrete: 100
 		DamageTypes: Prone100Percent, DefaultDeath
-DREMPDevice:
+DR_EMP_Device:
 	Inherits: DRGrendelRay
 	Report: gxgebwc0.wav
 	ReloadDelay: 800
-	Range: 3c0
+	Range: 3072
 	ValidTargets: MainHQ
 	Warhead@3Eff: CreateEffect
 		Explosions: pulse_explosion
@@ -1333,7 +1335,7 @@ DREMPDevice:
 	Warhead@2Con: GrantExternalCondition
 		Condition: empdisable
 		Duration: 360
-		Range: 22c0
+		Range: 22528
 		ValidRelationships: Enemy
 
 DRSabouteurAttach:
@@ -1341,7 +1343,7 @@ DRSabouteurAttach:
 	ReloadDelay: 40
 	ValidTargets: demolishable
 	InvalidTargets: ivanattached
-	Range: 1c512
+	Range: 1536
 	Warhead@1: AttachDelayedWeapon
 		Weapon: DRSaboteurBomb
 		TriggerTime: 40
@@ -1355,10 +1357,10 @@ DRSaboteurBomb:
 DRAssimilatorEat:
 	ReloadDelay: 20
 	Report: drassmweap.wav
-	Range: 1c512
+	Range: 1536
 	Projectile: InstantHit
 	ValidTargets: Ground, Infantry
-	InvalidTargets: Vehicle, Water, Structure, Wall, Husk
+	InvalidTargets: Vehicle, Water, Structure, wall, Husk
 	Warhead@1Dam: SpreadDamage
 		Damage: 6000
 		Versus:
@@ -1373,7 +1375,7 @@ DRAssimilatorEat:
 DRAssimilatorAcid:
 	Inherits: DRPolyGrenade
 	ReloadDelay: 50
-	Range: 1c512
+	Range: 1536
 	Projectile: Bullet
 		Speed: 200
 	Warhead@1Dam: SpreadDamage
@@ -1399,9 +1401,9 @@ DRMoleGun:
 			Heavy: 35
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 
-DRMoleGun.AA:
+DRMoleGun_AA:
 	Inherits: DRMoleGun
-	Range: 6c0
+	Range: 6144
 	ValidTargets: Air
 	Projectile: Bullet
 		Speed: 2c0

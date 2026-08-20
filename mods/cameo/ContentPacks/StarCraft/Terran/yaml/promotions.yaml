@@ -1,0 +1,165 @@
+terran_promotion_madcap:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Madcap
+	Buildable:
+		BuildPaletteOrder: 8033
+		Queue: Promotions
+		Description: actor_upmadcap.description
+		Prerequisites: ~terran_commandcenter, !terran_promotion_madcap, rank1
+	RenderSprites:
+		Image: terran_madcap
+	ProvidesPrerequisite:
+
+terran_promotion_harakan:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Harakan
+	Buildable:
+		BuildPaletteOrder: 8036
+		Queue: Promotions
+		Description: actor_upharakan.description
+		Prerequisites: ~terran_commandcenter, terran_promotion_madcap, !terran_promotion_harakan, rank1
+	RenderSprites:
+		Image: terran_harakan
+	ProvidesPrerequisite:
+
+terran_promotion_spectreandmedivac:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Spectre and Medivac
+	Buildable:
+		BuildPaletteOrder: 8039
+		Queue: Promotions
+		Description: actor_upsilvertongue.description
+		Prerequisites: ~terran_commandcenter, terran_promotion_harakan, !terran_promotion_spectreandmedivac, rank1
+	RenderSprites:
+		Image: terran_specter
+	ProvidesPrerequisite:
+
+terran_promotion_pythean:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Pythean
+	Buildable:
+		BuildPaletteOrder: 8042
+		Queue: Promotions
+		Description: actor_uppythean.description
+		Prerequisites: ~terran_commandcenter, terran_promotion_spectreandmedivac, !terran_promotion_pythean, rank1
+	RenderSprites:
+		Image: terran_pythean
+	ProvidesPrerequisite:
+
+### ra1_allies_mechanic Tree
+
+terran_promotion_matador:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Matador
+	Buildable:
+		BuildPaletteOrder: 8034
+		Queue: Promotions
+		Description: actor_upmatador.description
+		Prerequisites: ~terran_commandcenter, !terran_promotion_matador, rank1
+	RenderSprites:
+		Image: terran_matador
+	ProvidesPrerequisite:
+
+terran_promotion_cyclone:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Cyclone
+	Buildable:
+		BuildPaletteOrder: 8037
+		Queue: Promotions
+		Description: actor_upsccyclone.description
+		Prerequisites: ~terran_commandcenter, terran_promotion_matador, !terran_promotion_cyclone, rank1
+	RenderSprites:
+		Image: terran_cyclone
+	ProvidesPrerequisite:
+
+terran_promotion_goliathmk2:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Goliath Mk2
+	Buildable:
+		BuildPaletteOrder: 8040
+		Queue: Promotions
+		Description: actor_upgoliathmk2.description
+		Prerequisites: ~terran_commandcenter, terran_promotion_cyclone, !terran_promotion_goliathmk2, rank1
+	RenderSprites:
+		Image: terran_goliathmk2
+	ProvidesPrerequisite:
+
+terran_promotion_warhound:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Warhound
+	Buildable:
+		BuildPaletteOrder: 8043
+		Queue: Promotions
+		Description: actor_upwarhound.description
+		Prerequisites: ~terran_commandcenter, terran_promotion_goliathmk2, !terran_promotion_warhound, rank1
+	RenderSprites:
+		Image: terran_warhound
+	ProvidesPrerequisite:
+
+### Ship Tree
+
+terran_promotion_sundog:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Sundog
+	Buildable:
+		BuildPaletteOrder: 8035
+		Queue: Promotions
+		Description: actor_upsundog.description
+		Prerequisites: ~terran_commandcenter, !terran_promotion_sundog, rank1
+	RenderSprites:
+		Image: terran_sundog
+	ProvidesPrerequisite:
+
+terran_promotion_raven:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Raven
+	Buildable:
+		BuildPaletteOrder: 8038
+		Queue: Promotions
+		Description: actor_upraven.description
+		Prerequisites: ~terran_commandcenter, terran_promotion_sundog, !terran_promotion_raven, rank1
+	RenderSprites:
+		Image: terran_raven
+	ProvidesPrerequisite:
+
+terran_promotion_wyvern:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Wyvern
+	Buildable:
+		BuildPaletteOrder: 8041
+		Queue: Promotions
+		Description: actor_upwyvern.description
+		Prerequisites: ~terran_commandcenter, terran_promotion_raven, !terran_promotion_wyvern, rank1
+	RenderSprites:
+		Image: terran_wyvern
+	ProvidesPrerequisite:
+
+terran_promotion_phobos:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Phobos
+	Buildable:
+		BuildPaletteOrder: 8044
+		Queue: Promotions
+		Description: actor_upphobos.description
+		Prerequisites: ~terran_commandcenter, terran_promotion_wyvern, !terran_promotion_phobos, rank1
+	RenderSprites:
+		Image: terran_phobos
+	ProvidesPrerequisite:
+
+####################################################################################################
+#		Zerg Promotions
+####################################################################################################
+
+### Assault Tree

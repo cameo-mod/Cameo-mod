@@ -1,9 +1,12 @@
 Cursors:
-	chrono-select.png: cursor
-		chrono-select:
+	chrono_select.png: cursor
+		chrono_select:
 			Start: 0
 			Length: *
-	chrono-target.png: cursor
+	chrono_target.png: cursor
+		chrono_target:
+			Start: 0
+			Length: *
 		chrono-target:
 			Start: 0
 			Length: *
@@ -89,6 +92,9 @@ Cursors:
 			Start: 140
 			Length: 8
 		enter:
+			Start: 119
+			Length: 3
+		enter-multi:
 			Start: 119
 			Length: 3
 		enter-minimap:

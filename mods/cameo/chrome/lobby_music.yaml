@@ -1,0 +1,287 @@
+Container@LOBBY_MUSIC_BIN:
+	Logic: MusicPlayerLogic
+	Width: PARENT_WIDTH
+	Height: PARENT_HEIGHT
+	Children:
+		LogicTicker@SONG_WATCHER:
+		Container@LABEL_CONTAINER:
+			Y: 0
+			Width: PARENT_WIDTH
+			Children:
+				Label@MUSIC:
+					Width: 268
+					Height: 25
+					Text: label-music-title
+					Align: Center
+					Font: Bold
+				Label@TITLE:
+					X: 278
+					Width: 230
+					Height: 25
+					Text: label-container-title
+					Font: Bold
+				Label@LENGTH:
+					X: PARENT_WIDTH - 80
+					Height: 25
+					Width: 50
+					Text: label-music-controls-length
+					Font: Bold
+					Align: Right
+		Background@CONTROLS:
+			Background: dialog3
+			Width: 268
+			Height: 240
+			Children:
+				Label@MUTE_LABEL:
+					X: 45
+					Y: 220
+					Width: 300
+					Font: Small
+				Label@TITLE_LABEL:
+					Y: -44
+					Width: PARENT_WIDTH
+					Align: Center
+					Font: Bold
+				Label@TIME_LABEL:
+					Y: -24
+					Width: PARENT_WIDTH
+					Align: Center
+				Container@CUSTOM_FILTER_PANEL:
+					X: 15
+					Y: -58
+						Width: PARENT_WIDTH - 30
+						Height: 100
+						Children:
+							Label@CUSTOM_FILTER_LABEL:
+								Width: PARENT_WIDTH
+								Height: 16
+								Text: label-music-custom-title
+								Font: Bold
+							Checkbox@CUSTOM_FILTER_ALLIES:
+								Y: 20
+								Width: 110
+								Height: 18
+								Text: checkbox-music-custom-allies
+							Checkbox@CUSTOM_FILTER_SOVIET:
+								X: 120
+								Y: 20
+								Width: 110
+								Height: 18
+								Text: checkbox-music-custom-soviet
+							Checkbox@CUSTOM_FILTER_CHINA:
+								Y: 40
+								Width: 110
+								Height: 18
+								Text: checkbox-music-custom-china
+							Checkbox@CUSTOM_FILTER_GDI:
+								X: 120
+								Y: 40
+								Width: 110
+								Height: 18
+								Text: checkbox-music-custom-gdi
+							Checkbox@CUSTOM_FILTER_NOD:
+								Y: 60
+								Width: 110
+								Height: 18
+								Text: checkbox-music-custom-nod
+							Checkbox@CUSTOM_FILTER_SCRIN:
+								X: 120
+								Y: 60
+								Width: 110
+								Height: 18
+								Text: checkbox-music-custom-scrin
+							Checkbox@CUSTOM_FILTER_GENERIC:
+								Y: 80
+								Width: 110
+								Height: 18
+								Text: checkbox-music-custom-generic
+							Checkbox@CUSTOM_FILTER_OLDSCHOOL:
+								X: 120
+								Y: 80
+								Width: 110
+								Height: 18
+								Text: checkbox-music-custom-oldschool
+				Container@MODE_PANEL:
+					X: 15
+					Y: 10
+					Width: PARENT_WIDTH - 30
+					Height: 96
+					Children:
+						Label@MODE_LABEL:
+							Width: PARENT_WIDTH
+							Height: 16
+							Text: label-music-mode-title
+							Font: Bold
+						Button@MUSIC_MODE_MIX:
+							Y: 18
+							Width: 110
+							Height: 20
+							Text: button-music-mode-mix
+						Button@MUSIC_MODE_OLD:
+							X: 120
+							Y: 18
+							Width: 110
+							Height: 20
+							Text: button-music-mode-oldschool
+						Button@MUSIC_MODE_FACTION:
+							Y: 44
+							Width: 110
+							Height: 20
+							Text: button-music-mode-faction
+						Button@MUSIC_MODE_CUSTOM:
+							X: 120
+							Y: 44
+							Width: 110
+							Height: 20
+							Text: button-music-mode-custom
+						Button@MUSIC_MODE_PLAYLIST:
+							Y: 70
+							Width: 230
+							Height: 20
+							Text: button-music-mode-playlist
+
+				Container@BUTTONS:
+					X: (PARENT_WIDTH - WIDTH) / 2
+					Y: 116
+					Width: 131
+					Children:
+						Button@BUTTON_PREV:
+							Width: 26
+							Height: 26
+							IgnoreChildMouseOver: true
+							Children:
+								Image@IMAGE_PREV:
+									X: 5
+									Y: 5
+									ImageCollection: music
+									ImageName: prev
+						Button@BUTTON_PLAY:
+							X: 35
+							Width: 26
+							Height: 26
+							IgnoreChildMouseOver: true
+							Children:
+								Image@IMAGE_PLAY:
+									X: 5
+									Y: 5
+									ImageCollection: music
+									ImageName: play
+						Button@BUTTON_PAUSE:
+							Visible: false
+							X: 35
+							Width: 26
+							Height: 26
+							IgnoreChildMouseOver: true
+							Children:
+								Image@IMAGE_PAUSE:
+									X: 5
+									Y: 5
+									ImageCollection: music
+									ImageName: pause
+						Button@BUTTON_STOP:
+							X: 70
+							Width: 26
+							Height: 26
+							IgnoreChildMouseOver: true
+							Children:
+								Image@IMAGE_STOP:
+									X: 5
+									Y: 5
+									ImageCollection: music
+									ImageName: stop
+						Button@BUTTON_NEXT:
+							X: 105
+							Width: 26
+							Height: 26
+							IgnoreChildMouseOver: true
+							Children:
+								Image@IMAGE_NEXT:
+									X: 5
+									Y: 5
+									ImageCollection: music
+									ImageName: next
+				Checkbox@SHUFFLE:
+					X: 25
+					Y: 156
+					Width: 85
+					Height: 20
+					Font: Regular
+					Text: checkbox-music-controls-shuffle
+				Checkbox@REPEAT:
+					X: PARENT_WIDTH - 15 - WIDTH
+					Y: 156
+					Width: 70
+					Height: 20
+					Font: Regular
+					Text: checkbox-music-controls-loop
+				Label@VOLUME_LABEL:
+					Y: 190
+					Width: 65
+					Height: 25
+					Align: Right
+					Text: label-music-controls-volume
+				ExponentialSlider@MUSIC_SLIDER:
+					X: 70
+					Y: 190
+					Width: PARENT_WIDTH - 80
+					Height: 20
+					Ticks: 7
+		ScrollPanel@MUSIC_LIST:
+			X: 268
+			Y: 0
+			Width: PARENT_WIDTH - 268
+			Height: PARENT_HEIGHT
+			Children:
+				ScrollItem@MUSIC_TEMPLATE:
+					Width: PARENT_WIDTH - 27
+					Height: 25
+					X: 2
+					Visible: false
+					EnableChildMouseOver: True
+					Children:
+						LabelWithTooltip@TITLE:
+							X: 10
+							Width: PARENT_WIDTH - 50
+							Height: 25
+							TooltipContainer: TOOLTIP_CONTAINER
+							TooltipTemplate: SIMPLE_TOOLTIP
+						Label@LENGTH:
+							X: PARENT_WIDTH - 60
+							Width: 50
+							Height: 25
+							Align: Right
+		Label@NO_MATCHING_SONGS:
+			X: 268
+			Y: 310
+			Width: PARENT_WIDTH - 268
+			Height: 40
+			Align: Center
+			Font: Bold
+			Text: label-music-filter-empty
+			Visible: false
+
+		Container@NO_MUSIC_LABEL:
+			X: 568
+			Y: 310
+			Width: PARENT_WIDTH - 268
+			Visible: false
+			Children:
+				Label@TITLE:
+					Y: 76
+					Width: PARENT_WIDTH - 24
+					Height: 25
+					Font: Bold
+					Align: Center
+					Text: label-no-music-title
+				Label@DESCA:
+					Y: 96
+					Width: PARENT_WIDTH - 24
+					Height: 25
+					Align: Center
+					Text: label-no-music-desc-a
+				Label@DESCB:
+					Y: 116
+					Width: PARENT_WIDTH - 24
+					Height: 25
+					Align: Center
+					Text: label-no-music-desc-b

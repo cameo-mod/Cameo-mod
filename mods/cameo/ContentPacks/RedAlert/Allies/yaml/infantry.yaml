@@ -1,0 +1,361 @@
+ra1_allies_alliedsniper:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@CryoMissiles: ^CryoMissiles
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Allied Sniper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 80
+		Prerequisites: ~ra1_allies_alliedbarracks, ra1_allies_alliedradardome
+		Description: actor_rasniper.description
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Mobile:
+		Speed: 60
+	Passenger:
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Infantry
+	Armament@PRIMARY:
+		Weapon: LightSniper
+		LocalOffset: 128,0,256
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: LightSniper
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@Upgrade: ##########
+		Weapon: CryoLightSniper
+		LocalOffset: 128,0,256
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	Armament@UpgradeGARRISONED:
+		Name: garrisoned
+		Weapon: CryoLightSniper
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	Cloak:
+	RenderSprites:
+		Image: e1sniper
+		PlayerPalette: playerra
+	WithDeathAnimation:
+		DeathSequencePalette: playerra
+	-MustBeDestroyed:
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_tanya:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@MC: ^MCImmune
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 120
+		Prerequisites: ~ra1_allies_alliedbarracks, ra1_allies_alliedtechcenter
+		BuildLimit: 1
+		Description: template_commando.description
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Tanya
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 44000
+	ChangesHealth@SelfHealing:
+		Step: 44
+	Mobile:
+		Speed: 77
+		Voice: Move
+	Guard:
+		Voice: Move
+	Passenger:
+		Voice: Move
+	Armament@PRIMARY:
+		Weapon: Colt45
+		LocalOffset: 256,128,384, 256,-128,384
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: Colt45
+		LocalOffset: 256,128,384, 256,-128,384
+		MuzzleSequence: garrison-muzzle
+	Armament@c4:
+		Weapon: TanyaAttach
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+		Voice: Demolish
+	Armament@c4building:
+		Weapon: GenericC4
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+		Voice: Demolish
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+		StandSequences: stand
+	AnnounceOnKill:
+	Voiced:
+		VoiceSet: TanyaVoice
+	ProvidesPrerequisite:
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_medic:
+	Inherits: ^Soldier
+	Inherits@Template: ^MedicTemplate
+	Inherits@anim: ^TDRAInfantry
+	Inherits@pip: ^WithSpecialCargoPip
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
+	Inherits@Heal: ^PrioritizeHeal
+	Buildable:
+		Prerequisites: ~ra1_allies_alliedbarracks
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 25
+		Description: actor_medi.description
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Medic
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 10000
+	Mobile:
+		Speed: 50
+	Armament:
+		Weapon: Heal
+		#Cursor: heal
+		#OutsideRangeCursor: heal
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: Heal
+	RenderRangeCircleCA:
+		Armaments: primary
+		RangeCircleType: heal
+	WithInfantryBody:
+		IdleSequences: idle
+		StandSequences: stand
+		DefaultAttackSequence: heal
+	Voiced:
+		VoiceSet: MedicVoice
+	GuardsSelection:
+		ValidTargets: Infantry
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_gpssatellitesupport
+	GrantExternalConditionToTransport:
+		Condition: ifv-healer
+
+ra1_allies_mechanic:
+	Inherits: ^Soldier
+	Inherits@Template: ^MechanicTemplate
+	Inherits@anim: ^TDRAInfantry
+	Inherits@pip: ^WithSpecialCargoPip
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
+	Inherits@Heal: ^PrioritizeRepair
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 100
+		Prerequisites: ~ra1_allies_alliedbarracks, ra1_allies_alliedservicedepot
+		Description: actor_mech.description
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Mechanic
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 7500
+	Mobile:
+		Speed: 50
+		Voice: Move
+	RevealsShroud:
+		Range: 5000
+	Passenger:
+		Voice: Move
+	Armament:
+		Weapon: Repair
+		#Cursor: heal
+		#OutsideRangeCursor: heal
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: Repair
+	RenderRangeCircleCA:
+		Armaments: primary
+		RangeCircleType: repair
+	AttackFrontal:
+		Voice: Action
+		FacingTolerance: 0
+	CaptureManager:
+	Captures:
+		CaptureTypes: husk
+		PlayerExperience: 25
+	WithInfantryBody:
+		IdleSequences: idle
+		DefaultAttackSequence: repair
+		StandSequences: stand
+	Voiced:
+		VoiceSet: MechanicVoice
+	AutoTarget:
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Vehicle, lockdowned, ivanattached
+	GuardsSelection:
+		ValidTargets: Vehicle
+	KeepsDistance:
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_raspy:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@anim: ^TDRAInfantry
+	Inherits@template: ^ScoutInfantryTemplate
+	Inherits@disguise: ^SpyDisguise
+	Inherits@pip: ^WithSpecialCargoPip
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 25
+		Prerequisites: ~ra1_allies_alliedbarracks, ra1_allies_alliedradardome
+		Description: actor_spy.description
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Spy
+	DisguiseTooltip:
+		Name: actor_spy.disguisetooltip-name
+		GenericName: actor_spy.disguisetooltip-generic-name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	-Guard:
+	Health:
+		HP: 5000
+	Mobile:
+		Speed: 60
+		Voice: Move
+	RevealsShroud:
+		Range: 5000
+	Passenger:
+		Voice: Move
+	Infiltrates:
+		Types: SpyInfiltrate
+		Notification: BuildingInfiltrated
+		PlayerExperience: 50
+	AutoTarget:
+		InitialStance: HoldFire
+		InitialStanceAI: HoldFire
+		ScanRadius: 5
+	Disguise:
+	-WithInfantryBody:
+	WithDisguisingInfantryBody:
+		DefaultAttackSequence: shoot
+		IdleSequences: idle1,idle2
+		StandSequences: stand,stand2
+	IgnoresDisguise:
+	Armament:
+		Weapon: SilencedPPK
+	AttackMove:
+		Voice: Move
+	Voiced:
+		VoiceSet: SpyVoice
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_gpssatellitesupport
+	GrantExternalConditionToTransport:
+		Condition: ifv-spy
+
+ra1_allies_machinegunner:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Valued:
+		Cost: 557
+	Tooltip:
+		Name: Machine Gunner
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Infantry, RAInfantry
+		Description: actor_e1.description
+		Prerequisites: ~ra1_allies_alliedbarracks, ~ra1_allies_promotion_machinegunner
+	Mobile:
+		Speed: 49
+	Health:
+		HP: 19000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY:
+		Weapon: RAVulcan
+		LocalOffset: 128,0,256
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: RAVulcan
+		MuzzleSequence: garrison-muzzle
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		IdleSequences: idle1,idle2
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	RenderSprites:
+		Image: ra1_allies_machinegunner
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	Voiced:
+		VoiceSet: RAGenericVoice
+	Selectable:
+		Class: ra1_allies_rifleinfantry
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
+	GrantExternalConditionToTransport:
+		Condition: ifv-hmg
+
+	FirepowerMultiplier:
+		Modifier: 93

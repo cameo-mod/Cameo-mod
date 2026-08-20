@@ -1,0 +1,222 @@
+wc2_orcs_mobileconstructionvehicleorc:
+	Inherits@WC2INFANTRY: ^WC2Vehicle
+	Inherits@WC2Template: ^WC2MCV
+	Buildable:
+		Prerequisites: ~wc2_orcs_blacksmith
+		Description: Transforms into a Great Hall.
+	Tooltip:
+		Name: Mobile Construction Vehicle (Orc)
+	Transforms:
+		IntoActor: wc2_orcs_greathall
+		Offset: -1,-1
+		Facing: 432
+		TransformSounds:
+		NoTransformNotification: BuildingCannotPlaceAudio
+	Voiced:
+		VoiceSet: wc2voiceorcpeongrunt
+	# Animation stuff
+	-WithFacingSpriteBody:
+	-WithMoveAnimation:
+	-WithAttackAnimation:
+	WithInfantryBody:
+		IdleSequences: idle-n, idle-ne, idle-e, idle-se, idle-s, idle-sw, idle-w, idle-nw
+		StandSequences: idle
+		MoveSequence: run
+
+wc2_orcs_peon:
+	Inherits@WC2INFANTRY: ^WC2Infantry
+	Inherits@WC2Template: ^WC2Peasant
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Tooltip:
+		Name: Peon
+	Buildable:
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_trolllumbermill
+		Description: Harvester. Zug zug!
+	Armament:
+		Weapon: wc2peasantsmack
+		FireDelay: 7
+	-WithInfantryBody:
+	WithHarvesterSpriteBody:
+		ImageByFullness: wc2_orcs_peon, wc2_orc_peon_full
+	WithMoveAnimation:
+		MoveSequence: run
+	Voiced:
+		VoiceSet: wc2voiceorcpeongrunt
+	-DamagedByTerrain:
+	ActorStatValues:
+		Upgrades: wc2_orcs_upgrade_armorstrength, wc2_orcs_upgrade_armorstrengthii
+
+wc2_orcs_ogremage:
+	Inherits@wc2_orcs_ogre: wc2_orcs_ogre
+	Tooltip:
+		Name: Ogre-Mage
+	Buildable:
+		Prerequisites: ~wc2_orcs_upgrade_ogremage, wc2_orcs_ogremound, wc2_orcs_altarofstorms
+		Description: Improved magickal melee infantry.\nStinky, very fast, smart, and dangerous!
+	Voiced:
+		VoiceSet: wc2voiceorcogremage
+	Selectable:
+		Class: wc2_orcs_ogre
+	-WithInfantryBody@Ogremage:
+	WithInfantryBody:
+		-RequiresCondition:
+	WithDeathAnimation:
+		-RequiresCondition:
+	-WithDeathAnimation@Ogremage:
+	# Ogremage should always be considered to have the ogremage upgrade researched.
+	GrantCondition@Ogremage:
+		Condition: ogremage_upg
+	#Weapons
+	Inherits@attacks_and_spells: ^WC2OgreOgreMageAttacksSpells
+
+wc2_orcs_catapult:
+	Inherits@WC2VEHICLE: ^WC2Vehicle
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@CatUpg: ^WC2OrcsUpgradeCatapultStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Tooltip:
+		Name: Catapult
+	Valued:
+		Cost: 800
+	Power:
+		Amount: -40
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~wc2_orcs_blacksmith
+		Queue: Infantry, RAInfantry, Vehicle, RAVehicle
+		Description: Powerful long range siege unit.
+	AttackFrontal:
+		PauseOnCondition: disabled
+		FacingTolerance: 0
+	Armament:
+		Weapon: wc2catapultFire
+		FireDelay: 5
+	Voiced:
+		VoiceSet: wc2orccatapult
+	-Integrity:
+	-GrantCondition@electronics:
+	-WithDeathAnimation:
+	WithAttackAnimation@After:
+		Sequence: after-shoot
+		Delay: 11
+		DelayRelativeTo: Attack
+	FireWarheadsOnDeath:
+		Weapon: wc2visualexplode
+		EmptyWeapon: wc2visualexplode
+	GrantConditionOnAttack@CatapultCooldown:
+		Condition: cond_catapult_cooldown
+		RevokeDelay: 34
+	Mobile:
+		PauseOnCondition: cond_catapult_cooldown || disabled || notmobile
+	ActorStatValues:
+		Upgrades: wc2_orcs_upgrade_catapultstrength, wc2_orcs_upgrade_catapultstrengthii, wc2_orcs_upgrade_armorstrength, wc2_orcs_upgrade_armorstrengthii
+
+wc2_orcs_siegeengine:
+	Inherits@WC2VEHICLE: ^WC2Vehicle
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@CatUpg: ^WC2OrcsUpgradeCatapultStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Tooltip:
+		Name: Siege Engine
+	Valued:
+		Cost: 1800
+	Power:
+		Amount: -90
+	Health:
+		HP: 70000
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Mobile:
+		Speed: 70
+		TurnSpeed: 28
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_stronghold, wc2_orcs_blacksmith
+		Queue: Vehicle, RAVehicle
+		Description: Powerful long range siege unit.
+	-AttackFrontal:
+	AttackFrontalCharged:
+		PauseOnCondition: disabled
+		FacingTolerance: 20
+		ChargeLevel: 20, 40
+		ChargingCondition: cond_catapult_cooldown
+		ShowSelectionBar: true
+		LosesChargeWhileTurning: true
+	GrantTimedCondition@cond_catapult_cooldown:
+		RequiresCondition: cond_catapult_cooldown
+		PauseOnCondition: !cond_catapult_cooldown
+		Condition: catapult_cooldown
+		Duration: 40
+	DamageMultiplier@catapult_cooldown:
+		Modifier: 50
+		RequiresCondition: catapult_cooldown
+	SpeedMultiplier@catapult_cooldown:
+		Modifier: 25
+		RequiresCondition: catapult_cooldown
+	Armament:
+		Weapon: SiegeEngineCannon
+		FireDelay: 3
+	Voiced:
+		VoiceSet: wc2voicehumanballista
+	-Integrity:
+	-GrantCondition@electronics:
+	-WithDeathAnimation:
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	FireWarheadsOnDeath:
+		Weapon: wc2visualexplode
+		EmptyWeapon: wc2visualexplode
+	ActorStatValues:
+		Upgrades: wc2_orcs_upgrade_catapultstrength, wc2_orcs_upgrade_catapultstrengthii, wc2_orcs_upgrade_armorstrength, wc2_orcs_upgrade_armorstrengthii
+
+wc2_orcs_goblinsappers:
+	Inherits@WC2INFANTRY: ^WC2Infantry
+	Inherits@WC2Template: ^WC2Demolitioner
+	Inherits@CatUpg: ^WC2OrcsUpgradeCatapultStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Tooltip:
+		Name: Goblin Sappers
+	Buildable:
+		Prerequisites: ~wc2_orcs_golbinalchemist
+		Queue: Vehicle, RAVehicle
+		Description: Explosive suicide infantry. Can attack normally.
+	#Weapons and demolition
+	AttackFrontal:
+		Armaments: detonate, primary
+		FacingTolerance: 0
+	Armament:
+		Name: detonate
+		Weapon: wc2demolitionsquadTargeting
+		RequiresCondition: !cond_deployed
+	Armament@Melee:
+		Weapon: wc2demolitionsquadMelee
+		RequiresCondition: cond_deployed
+	GrantConditionOnAttack:
+		Condition: cond_detonate
+		ArmamentNames: detonate
+		RequiresCondition: !cond_deployed
+	FireWarheadsOnDeath:
+		Weapon: wc2demolitionsquadTrigger
+		EmptyWeapon: wc2demolitionsquadTrigger
+		RequiresCondition: !chronobeamed
+	GrantConditionOnDeploy:
+		DeployedCondition: cond_deployed
+	KillsSelf:
+		RequiresCondition: cond_detonate
+	Voiced:
+		VoiceSet: wc2voiceorcgoblinsappers
+	ActorStatValues:
+		Upgrades: wc2_orcs_upgrade_catapultstrength, wc2_orcs_upgrade_catapultstrengthii, wc2_orcs_upgrade_armorstrength, wc2_orcs_upgrade_armorstrengthii

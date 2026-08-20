@@ -1,5 +1,5 @@
 Container@MAINMENU:
-	Logic: MainMenuLogic
+	Logic: MainMenuLogic, CameoMainMenuLogic
 	Children:
 		LogicKeyListener@GLOBAL_KEYHANDLER:
 			Logic: MusicHotkeyLogic, ScreenshotHotkeyLogic, MuteHotkeyLogic
@@ -36,6 +36,7 @@ Container@MAINMENU:
 			Height: 320
 			Children:
 				Background@MAIN_MENU:
+					Background: cyberintel-panel
 					Width: PARENT_WIDTH
 					Height: PARENT_HEIGHT
 					Children:
@@ -43,53 +44,67 @@ Container@MAINMENU:
 							X: 0
 							Y: 22
 							Width: 200
-							Height: 30
+							Height: 34
 							Text: CAMEO
 							Align: Center
 							Font: Bold
+							TextColor: FFC088
 						Button@SINGLEPLAYER_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 60
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Singleplayer
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 						Button@MULTIPLAYER_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 100
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Multiplayer
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 						Button@SETTINGS_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 140
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Settings
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 						Button@EXTRAS_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 180
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Extras
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 						Button@CONTENT_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 220
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Manage Content
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 						Button@QUIT_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 260
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Quit
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 				Background@SINGLEPLAYER_MENU:
+					Background: cyberintel-panel
 					Width: PARENT_WIDTH
 					Height: PARENT_HEIGHT
 					Children:
@@ -97,40 +112,50 @@ Container@MAINMENU:
 							X: 0
 							Y: 20
 							Width: 200
-							Height: 30
+							Height: 34
 							Text: Singleplayer
 							Align: Center
 							Font: Bold
+							TextColor: FFC088
 						Button@SKIRMISH_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 60
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Skirmish
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 						Button@MISSIONS_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 100
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Missions
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 						Button@LOAD_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 140
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Load
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 						Button@BACK_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Key: escape
 							Y: 260
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Back
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 				Background@EXTRAS_MENU:
+					Background: cyberintel-panel
 					Width: PARENT_WIDTH
 					Height: PARENT_HEIGHT
 					Children:
@@ -138,54 +163,68 @@ Container@MAINMENU:
 							X: 0
 							Y: 20
 							Width: 200
-							Height: 30
+							Height: 34
 							Text: Extras
 							Align: Center
 							Font: Bold
+							TextColor: FFC088
 						Button@REPLAYS_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 60
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Replays
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 						Button@MUSIC_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 100
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Music
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 						Button@MAP_EDITOR_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 140
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Map Editor
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 						Button@ASSETBROWSER_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 180
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Asset Browser
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 						Button@CREDITS_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 220
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Credits
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 						Button@BACK_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Key: escape
 							Y: 260
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Back
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 				Background@MAP_EDITOR_MENU:
+					Background: cyberintel-panel
 					Width: PARENT_WIDTH
 					Height: PARENT_HEIGHT
 					Children:
@@ -193,32 +232,39 @@ Container@MAINMENU:
 							X: 0
 							Y: 20
 							Width: 200
-							Height: 30
+							Height: 34
 							Text: Map Editor
 							Align: Center
 							Font: Bold
+							TextColor: FFC088
 						Button@NEW_MAP_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 60
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: New Map
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 						Button@LOAD_MAP_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Y: 100
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Load Map
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 						Button@BACK_BUTTON:
 							X: PARENT_WIDTH / 2 - WIDTH / 2
 							Key: escape
 							Y: 260
 							Width: 140
-							Height: 30
+							Height: 34
 							Text: Back
 							Font: Bold
+							Background: cyberintel-button
+							TextColor: F0A46E
 		Container@PERFORMANCE_INFO:
 			Logic: PerfDebugLogic
 			Children:
@@ -253,7 +299,7 @@ Container@MAINMENU:
 					Y: 15
 					Width: 400
 					Height: 25
-					Text: Battlefield News
+					Text: Cameo News
 					Font: Bold
 		Container@UPDATE_NOTICE:
 			X: (WINDOW_WIDTH - WIDTH) / 2
@@ -274,5 +320,18 @@ Container@MAINMENU:
 					Shadow: true
 					Text: Download the latest version from www.openra.net
 		Container@PLAYER_PROFILE_CONTAINER:
+			Logic: LoadLocalPlayerProfileLogic
 			X: 25
 			Y: 25
+		# Detached top-right shortcut, mirroring the top-left player-profile card. Statistics
+		# are player-career data, so they get a persistent shell button rather than being buried
+		# in Extras. Sits clear of the centred news bar and above the right-td_nod_handofnod logo.
+		Button@STATISTICS_BUTTON:
+			X: WINDOW_WIDTH - WIDTH - 25
+			Y: 25
+			Width: 140
+			Height: 34
+			Text: Statistics (WIP)
+			Font: Bold
+			Background: cyberintel-button
+			TextColor: F0A46E

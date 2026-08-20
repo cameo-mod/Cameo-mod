@@ -8,58 +8,64 @@
  */
 #endregion
 
+using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
+using OpenRA.Mods.AS.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
-using OpenRA.Mods.AS.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
-using System;
 
 namespace OpenRA.Mods.CA.Traits
 {
+	[TraitLocation(SystemActors.Player)]
 	[Desc("Manages AI base construction.")]
-	public class BaseBuilderBotModuleCAInfo : ConditionalTraitInfo
+	public class BaseBuilderBotModuleCAInfo : ConditionalTraitInfo, NotBefore<ResourceMapBotModuleInfo>, NotBefore<IResourceLayerInfo>
 	{
 		[Desc("Tells the AI what building types are considered construction yards.")]
-		public readonly HashSet<string> ConstructionYardTypes = new HashSet<string>();
+		public readonly FrozenSet<string> ConstructionYardTypes = FrozenSet<string>.Empty;
 
 		[Desc("Tells the AI what building types are considered vehicle production facilities.")]
-		public readonly HashSet<string> VehiclesFactoryTypes = new HashSet<string>();
+		public readonly FrozenSet<string> VehiclesFactoryTypes = FrozenSet<string>.Empty;
 
 		[Desc("Tells the AI what building types are considered refineries.")]
-		public readonly HashSet<string> RefineryTypes = new HashSet<string>();
+		public readonly FrozenSet<string> RefineryTypes = FrozenSet<string>.Empty;
 
 		[Desc("Tells the AI what building types are considered power plants.")]
-		public readonly HashSet<string> PowerTypes = new HashSet<string>();
+		public readonly FrozenSet<string> PowerTypes = FrozenSet<string>.Empty;
 
 		[Desc("Tells the AI what building types are considered infantry production facilities.")]
-		public readonly HashSet<string> BarracksTypes = new HashSet<string>();
+		public readonly FrozenSet<string> BarracksTypes = FrozenSet<string>.Empty;
+
+		[Desc("Factions that may prioritize their first barracks before their first refinery when enabled by BotLimits.")]
+		public readonly FrozenSet<string> BarracksBeforeRefineryFactions = FrozenSet<string>.Empty;
 
 		[Desc("Tells the AI what building types are considered anti-air defenses.")]
-		public readonly HashSet<string> AntiAirTypes = new HashSet<string>();
+		public readonly FrozenSet<string> AntiAirTypes = FrozenSet<string>.Empty;
 
 		[Desc("Tells the AI what building types are considered defenses.")]
-		public readonly HashSet<string> DefenseTypes = new HashSet<string>();
+		public readonly FrozenSet<string> DefenseTypes = FrozenSet<string>.Empty;
 
 		[Desc("Tells the AI what building types are considered production facilities.")]
-		public readonly HashSet<string> ProductionTypes = new HashSet<string>();
+		public readonly FrozenSet<string> ProductionTypes = FrozenSet<string>.Empty;
 
 		[Desc("Tells the AI what building types are considered naval production facilities.")]
-		public readonly HashSet<string> NavalProductionTypes = new HashSet<string>();
+		public readonly FrozenSet<string> NavalProductionTypes = FrozenSet<string>.Empty;
 
 		[Desc("Tells the AI what building types are considered silos (resource storage).")]
-		public readonly HashSet<string> SiloTypes = new HashSet<string>();
+		public readonly FrozenSet<string> SiloTypes = FrozenSet<string>.Empty;
 
 		[Desc("Tells the AI what building types are considered fragile.")]
-		public readonly HashSet<string> FragileTypes = new HashSet<string>();
+		public readonly FrozenSet<string> FragileTypes = FrozenSet<string>.Empty;
 
 		[Desc("Production queues AI uses for buildings.")]
-		public readonly HashSet<string> BuildingQueues = new HashSet<string> { "Building" };
+		public readonly FrozenSet<string> BuildingQueues = new HashSet<string> { "Building" }.ToFrozenSet();
 
 		[Desc("Production queues AI uses for defenses.")]
-		public readonly HashSet<string> DefenseQueues = new HashSet<string> { "Defense" };
+		public readonly FrozenSet<string> DefenseQueues = new HashSet<string> { "Defense" }.ToFrozenSet();
 
 		[Desc("Minimum distance in cells from center of the base when checking for building placement.")]
 		public readonly int MinBaseRadius = 2;
@@ -85,11 +91,11 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Increase maintained excess power by ExcessPowerIncrement for every N base buildings.")]
 		public readonly int ExcessPowerIncreaseThreshold = 1;
 
-		[Desc("Minimum number of refineries to build before building a barracks and a factory.")]
-		public readonly int InitialMinimumRefineryCount = 1;
+		[Desc("Number of refineries to build before building any production building.")]
+		public readonly int InititalMinimumRefineryCount = 1;
 
-		[Desc("Minimum number of refineries to build after building a barracks and a factory.")]
-		public readonly int NormalMinimumRefineryCount = 2;
+		[Desc("Number of refineries to build additionally after building any production building.")]
+		public readonly int AdditionalMinimumRefineryCount = 1;
 
 		[Desc("Additional delay (in ticks) between structure production checks when there is no active production.",
 			"StructureProductionRandomBonusDelay is added to this.")]
@@ -133,9 +139,6 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Maximum range at which to build defensive structures near a combat hotspot.")]
 		public readonly int MaximumDefenseRadius = 20;
 
-		[Desc("Maximum range at which to build refineries from a resource patch.")]
-		public readonly int MaximumRefineryRadius = 12;
-
 		[Desc("Try to build another production building if there is too much cash.")]
 		public readonly int NewProductionCashThreshold = 10000;
 
@@ -154,19 +157,46 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly int CheckForWaterRadius = 8;
 
 		[Desc("Terrain types which are considered water for base building purposes.")]
-		public readonly HashSet<string> WaterTerrainTypes = new HashSet<string> { "Water" };
+		public readonly FrozenSet<string> WaterTerrainTypes = new HashSet<string> { "Water" }.ToFrozenSet();
 
 		[Desc("What buildings to the AI should build.", "What integer percentage of the total base must be this type of building.")]
-		public readonly Dictionary<string, int> BuildingFractions = null;
+		public readonly FrozenDictionary<string, int> BuildingFractions = null;
 
 		[Desc("What buildings should the AI have a maximum limit to build.")]
-		public readonly Dictionary<string, int> BuildingLimits = null;
+		public readonly FrozenDictionary<string, int> BuildingLimits = null;
 
 		[Desc("When should the AI start building specific buildings.")]
-		public readonly Dictionary<string, int> BuildingDelays = null;
+		public readonly FrozenDictionary<string, int> BuildingDelays = null;
 
 		[Desc("Minimum duration between building specific buildings.")]
-		public readonly Dictionary<string, int> BuildingIntervals = null;
+		public readonly FrozenDictionary<string, int> BuildingIntervals = null;
+
+		[Desc("Delay (in ticks) between reassigning rally points.")]
+		public readonly int AssignRallyPointsInterval = 100;
+
+		[Desc("Delay (in ticks) for finding a good resource to place a refinery next to.")]
+		public readonly int CheckBestResourceLocationInterval = 151;
+
+		[Desc("Interval (in ticks) between checking whether to sell a redundant refinery. Set to -1 to disable.")]
+		public readonly int SellRefineryInterval = 5000;
+
+		[Desc("Distance (in cells) for refineries finding redundant refineries.")]
+		public readonly int SellRefineryTooCloseCellDistance = 6;
+
+		[Desc("Maximum distance (in cells) from resources before refineries are eligible to be sold.")]
+		public readonly int SellRefineryNoResourceDistance = 12;
+
+		[Desc("Maximum refinery count per area. Area size is defined in " + nameof(ResourceMapBotModule) + ".")]
+		public readonly int MaxRefineryPerIndice = 2;
+
+		[Desc($"AI will move mcv when those numbers of refinery <= productions + tech - {nameof(ExpansionTolerate)}.")]
+		public readonly ImmutableArray<int> ExpansionTolerate = [0, 1];
+
+		[Desc($"AI will move the only mcv when those numbers of refinery <= productions + tech - {nameof(ForceExpansionTolerate)}.")]
+		public readonly ImmutableArray<int> ForceExpansionTolerate = [2, 3];
+
+		[Desc("Decrease the expansion tolerate by Cash / this. Used to prevent AI from expanding when it has enough cash.")]
+		public readonly int PerExpansionTolerateOnCash = 12000;
 
 		[Desc("Enemy building target types I can ignore construction distance from.")]
 		public readonly BitSet<TargetableType> IgnoredEnemyBuildingTargetTypes = default(BitSet<TargetableType>);
@@ -181,41 +211,115 @@ namespace OpenRA.Mods.CA.Traits
 	}
 
 	public class BaseBuilderBotModuleCA : ConditionalTrait<BaseBuilderBotModuleCAInfo>, IGameSaveTraitData,
-		IBotTick, IBotPositionsUpdated, IBotRespondToAttack, INotifyActorDisposing
+		IBotTick, IBotPositionsUpdated, IBotRespondToAttack, IBotRequestPauseUnitProduction, IBotSuggestRefineryProduction, INotifyActorDisposing
 	{
 		public CPos GetRandomBaseCenter()
 		{
-			var randomConstructionYard = constructionYardBuildings.Actors
+			var randomConstructionYard = ConstructionYardBuildings.Actors.Where(a => !a.IsDead)
 				.RandomOrDefault(world.LocalRandom);
 
 			return randomConstructionYard?.Location ?? initialBaseCenter;
 		}
 
-		public CPos DefenseCenter => defenseCenter;
+		// Resolves the exact construction yard actor type that this building's Prerequisites
+		// (after inheritance flattening) requires, or null if it doesn't require one specific
+		// construction yard type (e.g. faction-agnostic shared buildings like ra1_powerplant
+		// which use a generic "~rafact" token satisfied by any RA1 construction yard).
+		public string GetRequiredConstructionYardType(ActorInfo actorInfo)
+		{
+			var bi = actorInfo.TraitInfoOrDefault<BuildableInfo>();
+			if (bi == null)
+				return null;
+
+			foreach (var prereq in bi.Prerequisites)
+			{
+				var name = prereq.Replace("~", string.Empty).Replace("!", string.Empty);
+				if (Info.ConstructionYardTypes.Contains(name))
+					return name;
+			}
+
+			return null;
+		}
+
+		// Anchor placement/expansion checks on a construction yard belonging to the same
+		// faction as the building being placed, rather than a random construction yard from
+		// any faction. This matters when the player owns construction yards from multiple
+		// factions at once (e.g. a stray enemy MCV of a different faction deployed into an
+		// existing base) - otherwise a crowded main base can starve a smaller secondary base
+		// of the same faction from ever finding room to build, since GetRandomBaseCenter()
+		// might repeatedly anchor searches on the wrong (unrelated) faction's construction yard.
+		public CPos GetBaseCenterForActor(ActorInfo actorInfo)
+		{
+			var conyardType = GetRequiredConstructionYardType(actorInfo);
+			if (conyardType != null)
+			{
+				var matchingConstructionYard = ConstructionYardBuildings.Actors
+					.Where(a => !a.IsDead && a.Info.Name == conyardType)
+					.RandomOrDefault(world.LocalRandom);
+
+				if (matchingConstructionYard != null)
+					return matchingConstructionYard.Location;
+			}
+
+			return GetRandomBaseCenter();
+		}
+
+		public CPos GetDefenseBaseCenter()
+		{
+			var defenceConstructionYard = DefenseCenter != null ? ConstructionYardBuildings.Actors.OrderBy(a => (DefenseCenter.Value - a.Location).LengthSquared)
+				.FirstOrDefault(a => !a.IsDead) : null;
+
+			return defenceConstructionYard?.Location ?? GetRandomBaseCenter();
+		}
+
+		public CPos? DefenseCenter { get; private set; }
 
 		/// <Summary> Actor, ActorCount </Summary>
-		public Dictionary<string, int> BuildingsBeingProduced = null;
+		public Dictionary<string, int> BuildingsBeingProduced = [];
+		public IBotBaseExpansion[] BaseExpansionModules;
+		public ResourceMapBotModule ResourceMapModule;
+		public Actor RelocationHoldConyard { get; set; }
 
 		readonly World world;
 		readonly Player player;
-		PowerManager playerPower;
 		PlayerResources playerResources;
 		IResourceLayer resourceLayer;
+		IPathFinder pathFinder;
 		IBotPositionsUpdated[] positionsUpdatedModules;
 		CPos initialBaseCenter;
-		CPos defenseCenter;
+		public CPos? ResourceConyardCenter;
+		public Dictionary<Actor, (CPos ConyardLoc, CPos ResourceLoc)> RequestedRefineries = [];
+
+		readonly Stack<TraitPair<RallyPoint>> rallyPoints = [];
+		int assignRallyPointsTicks;
+		int checkBestResourceLocationTicks;
+		int sellRefineryTick;
+		bool firstTick = true;
+		bool openingBarracksPriorityCompleted;
+		bool openingStartingCashCaptured;
+		bool openingBarracksCostCommitted;
+		bool openingRefineryCostCommitted;
+		int openingStartingCash;
+		int openingPowerCommittedCost;
+		int openingBarracksCommittedCost;
+		int openingRefineryCommittedCost;
+		int openingDefenseCommittedCost;
 
 		readonly BaseBuilderQueueManagerCA[] builders;
 		int currentBuilderIndex = 0;
 
-		readonly ActorIndex.OwnerAndNamesAndTrait<RefineryInfo> refineryBuildings;
+		public readonly ActorIndex.OwnerAndNamesAndTrait<RefineryInfo> RefineryBuildings;
 		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> powerBuildings;
-		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> constructionYardBuildings;
+		public readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> ConstructionYardBuildings;
 		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> barracksBuildings;
 		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> factoryBuildings;
+		public readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> ProductionBuildings;
 
 		BotLimits botLimits;
 		int refineryLimit;
+
+		public PowerManager PlayerPower { get; private set; }
+		public int ExcessPower { get; private set; }
 
 		public BaseBuilderBotModuleCA(Actor self, BaseBuilderBotModuleCAInfo info)
 			: base(info)
@@ -223,11 +327,12 @@ namespace OpenRA.Mods.CA.Traits
 			world = self.World;
 			player = self.Owner;
 			builders = new BaseBuilderQueueManagerCA[info.BuildingQueues.Count + info.DefenseQueues.Count];
-			refineryBuildings = new ActorIndex.OwnerAndNamesAndTrait<RefineryInfo>(world, info.RefineryTypes, player);
+			RefineryBuildings = new ActorIndex.OwnerAndNamesAndTrait<RefineryInfo>(world, info.RefineryTypes, player);
 			powerBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.PowerTypes, player);
-			constructionYardBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.ConstructionYardTypes, player);
+			ConstructionYardBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.ConstructionYardTypes, player);
 			barracksBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.BarracksTypes, player);
 			factoryBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.VehiclesFactoryTypes, player);
+			ProductionBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.ProductionTypes, player);
 		}
 
 		// Use for proactive targeting.
@@ -251,33 +356,30 @@ namespace OpenRA.Mods.CA.Traits
 
 		protected override void Created(Actor self)
 		{
-			playerPower = self.Owner.PlayerActor.TraitOrDefault<PowerManager>();
+			PlayerPower = self.Owner.PlayerActor.TraitOrDefault<PowerManager>();
 			playerResources = self.Owner.PlayerActor.Trait<PlayerResources>();
 			resourceLayer = self.World.WorldActor.TraitOrDefault<IResourceLayer>();
+			pathFinder = self.World.WorldActor.TraitOrDefault<IPathFinder>();
 			positionsUpdatedModules = self.Owner.PlayerActor.TraitsImplementing<IBotPositionsUpdated>().ToArray();
+			BaseExpansionModules = self.Owner.PlayerActor.TraitsImplementing<IBotBaseExpansion>().ToArray();
+
+			var i = 0;
+
+			foreach (var building in Info.BuildingQueues)
+				builders[i++] = new BaseBuilderQueueManagerCA(this, building, player, PlayerPower, playerResources, resourceLayer);
+
+			foreach (var defense in Info.DefenseQueues)
+				builders[i++] = new BaseBuilderQueueManagerCA(this, defense, player, PlayerPower, playerResources, resourceLayer);
 		}
 
 		protected override void TraitEnabled(Actor self)
 		{
-			var i = 0;
+			RefreshBotLimits();
 
-			botLimits = self.Owner.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
-			if (botLimits != null)
-			{
-				refineryLimit = botLimits.Info.RefineryLimit;
-			}
-
-			foreach (var building in Info.BuildingQueues)
-			{
-				builders[i] = new BaseBuilderQueueManagerCA(this, building, player, playerPower, playerResources, resourceLayer);
-				i++;
-			}
-
-			foreach (var defense in Info.DefenseQueues)
-			{
-				builders[i] = new BaseBuilderQueueManagerCA(this, defense, player, playerPower, playerResources, resourceLayer);
-				i++;
-			}
+			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
+			assignRallyPointsTicks = world.LocalRandom.Next(0, Info.AssignRallyPointsInterval);
+			checkBestResourceLocationTicks = world.LocalRandom.Next(0, Info.CheckBestResourceLocationInterval);
+			sellRefineryTick = Info.SellRefineryInterval < 0 ? 0 : world.LocalRandom.Next(0, Info.SellRefineryInterval);
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation)
@@ -287,19 +389,104 @@ namespace OpenRA.Mods.CA.Traits
 
 		void IBotPositionsUpdated.UpdatedDefenseCenter(CPos newLocation)
 		{
-			defenseCenter = newLocation;
+			DefenseCenter = newLocation;
 		}
+
+		bool IBotRequestPauseUnitProduction.PauseUnitProduction => !IsTraitDisabled && !HasMinimalRefineryCount();
 
 		void IBotTick.BotTick(IBot bot)
 		{
-			// TODO: this causes pathfinding lag when AI's gets blocked in
-			SetRallyPointsForNewProductionBuildings(bot);
+			if (firstTick)
+			{
+				// Conditional traits are initialized after INotifyCreated, so resolve difficulty limits again here.
+				RefreshBotLimits();
+				if (!openingStartingCashCaptured)
+				{
+					openingStartingCash = playerResources.GetCashAndResources();
+					openingStartingCashCaptured = true;
+				}
 
-			BuildingsBeingProduced = new Dictionary<string, int>();
+				ResourceMapModule = bot.Player.PlayerActor.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
+				firstTick = false;
+			}
+
+			if (!openingBarracksPriorityCompleted && AIUtils.CountActorByCommonName(barracksBuildings) > 0)
+				openingBarracksPriorityCompleted = true;
+
+			if (RelocationHoldConyard != null &&
+				(!RelocationHoldConyard.IsInWorld || RelocationHoldConyard.IsDead ||
+				!BaseExpansionModules.Any(be => be.IsConyardRelocationPending(RelocationHoldConyard))))
+				RelocationHoldConyard = null;
+
+			if (--assignRallyPointsTicks <= 0)
+			{
+				assignRallyPointsTicks = Math.Max(2, Info.AssignRallyPointsInterval);
+				foreach (var rp in world.ActorsWithTrait<RallyPoint>().Where(rp => rp.Actor.Owner == player))
+					rallyPoints.Push(rp);
+			}
+			else
+			{
+				// PERF: Spread out rally point assignments updates across multiple ticks.
+				var updateCount = Exts.IntegerDivisionRoundingAwayFromZero(rallyPoints.Count, assignRallyPointsTicks);
+				for (var i = 0; i < updateCount; i++)
+				{
+					var rp = rallyPoints.Pop();
+					if (rp.Actor.Owner == player && !rp.Actor.Disposed)
+						SetRallyPoint(bot, rp);
+				}
+			}
+
+			if (--checkBestResourceLocationTicks <= 0 && resourceLayer != null)
+			{
+				checkBestResourceLocationTicks = Info.CheckBestResourceLocationInterval;
+
+				// Clear outdated refinery requests that add too many refinery to a map indice
+				if (ResourceMapModule != null)
+				{
+					foreach (var mcv in RequestedRefineries.Keys.ToList())
+					{
+						if (ResourceMapModule.FindClosestIndiceFromCPos(
+							RequestedRefineries[mcv].ResourceLoc).PlayerRefineryCount >= Info.MaxRefineryPerIndice)
+							RequestedRefineries.Remove(mcv);
+					}
+				}
+
+				Actor bestconyard = null;
+				var best = int.MinValue;
+
+				foreach (var conyard in ConstructionYardBuildings.Actors)
+				{
+					if (conyard.IsDead)
+						continue;
+
+					if (!world.Map.FindTilesInAnnulus(conyard.Location, Info.MinBaseRadius, Info.MaxBaseRadius)
+						.Any(c => ResourceMapModule != null
+						? ResourceMapModule.Info.ValuableResourceTypes.Contains(resourceLayer.GetResource(c).Type)
+						: resourceLayer.GetResource(c).Type != null))
+						continue;
+
+					var refs = world.FindActorsInCircle(conyard.CenterPosition, WDist.FromCells(Info.MaxBaseRadius))
+							.Count(a => a.Owner == player && Info.RefineryTypes.Contains(a.Info.Name));
+
+					var suitable = -world.FindActorsInCircle(conyard.CenterPosition, WDist.FromCells(Info.MaxBaseRadius))
+							.Count(a => a.Owner.RelationshipWith(player) == PlayerRelationship.Enemy) - refs;
+
+					if (suitable > best)
+					{
+						best = suitable;
+						bestconyard = conyard;
+					}
+				}
+
+				ResourceConyardCenter = bestconyard?.Location;
+			}
+
+			BuildingsBeingProduced.Clear();
 
 			// PERF: We tick only one type of valid queue at a time
 			// if AI gets enough cash, it can fill all of its queues with enough ticks
 			var findQueue = false;
+			ExcessPower = PlayerPower != null ? PlayerPower.ExcessPower : 0;
 			for (int i = 0, builderIndex = currentBuilderIndex; i < builders.Length; i++)
 			{
 				if (++builderIndex >= builders.Length)
@@ -316,21 +503,45 @@ namespace OpenRA.Mods.CA.Traits
 						findQueue = true;
 					}
 
-					foreach (var queue in queues)
+					// Record buildings being produced only when AI can produce,
+					// and record their power only when AI can produce
+					if (playerResources.GetCashAndResources() >= Info.BuildingProductionMinCashRequirement)
 					{
-						var producing = queue.AllQueued().FirstOrDefault();
-						if (producing == null)
-							continue;
+						foreach (var queue in queues)
+						{
+							// Record the number of the buildings.
+							var producing = queue.AllQueued().FirstOrDefault();
+							if (producing == null)
+								continue;
 
-						if (BuildingsBeingProduced.ContainsKey(producing.Item))
-							BuildingsBeingProduced[producing.Item] = BuildingsBeingProduced[producing.Item] + 1;
-						else
-							BuildingsBeingProduced.Add(producing.Item, 1);
+							if (BuildingsBeingProduced.TryGetValue(producing.Item, out var value))
+								BuildingsBeingProduced[producing.Item] = ++value;
+							else
+								BuildingsBeingProduced.Add(producing.Item, 1);
+
+							// Record the power of the building.
+							ExcessPower += producing.ActorInfo.TraitInfos<PowerInfo>().Where(p => p.EnabledByDefault).Sum(pi => pi.Amount);
+						}
 					}
 				}
 			}
 
 			builders[currentBuilderIndex].Tick(bot);
+
+			if (Info.SellRefineryInterval >= 0 && --sellRefineryTick <= 0)
+			{
+				SellUselessRefinery(bot);
+				sellRefineryTick = Info.SellRefineryInterval;
+			}
+		}
+
+		void RefreshBotLimits()
+		{
+			botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
+			refineryLimit = botLimits?.Info.RefineryLimit ?? 0;
+
+			foreach (var builder in builders)
+				builder.SetBotLimits(botLimits);
 		}
 
 		void IBotRespondToAttack.RespondToAttack(IBot bot, Actor self, AttackInfo e)
@@ -379,7 +590,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (self.World.LocalRandom.Next(100) < chanceThreshold)
 				return false;
 
-			if (Info.ConstructionYardTypes.Contains(self.Info.Name) && AIUtils.CountActorByCommonName(constructionYardBuildings) <= 1)
+			if (Info.ConstructionYardTypes.Contains(self.Info.Name) && AIUtils.CountActorByCommonName(ConstructionYardBuildings) <= 1)
 				return false;
 
 			if (Info.BarracksTypes.Contains(self.Info.Name) && AIUtils.CountActorByCommonName(barracksBuildings) <= 1)
@@ -401,30 +612,34 @@ namespace OpenRA.Mods.CA.Traits
 			return false;
 		}
 
-		void SetRallyPointsForNewProductionBuildings(IBot bot)
+		void SetRallyPoint(IBot bot, TraitPair<RallyPoint> rp)
 		{
-			foreach (var rp in world.ActorsWithTrait<RallyPoint>())
-			{
-				if (rp.Actor.Owner != player)
-					continue;
+			var needsRallyPoint = rp.Trait.Path.Count == 0;
 
-				if (rp.Trait.Path.Count == 0 || !IsRallyPointValid(rp.Trait.Path[0], rp.Actor.Info.TraitInfoOrDefault<BuildingInfo>()))
+			if (!needsRallyPoint)
+			{
+				var locomotors = LocomotorsForProducibles(rp.Actor);
+				needsRallyPoint = !IsRallyPointValid(rp.Actor.Location, rp.Trait.Path[0], locomotors, rp.Actor.Info.TraitInfoOrDefault<BuildingInfo>());
+			}
+
+			if (needsRallyPoint)
+			{
+				bot.QueueOrder(new Order("SetRallyPoint", rp.Actor, Target.FromCell(world, ChooseRallyLocationNear(rp.Actor)), false)
 				{
-					bot.QueueOrder(new Order("SetRallyPoint", rp.Actor, Target.FromCell(world, ChooseRallyLocationNear(rp.Actor)), false)
-					{
-						SuppressVisualFeedback = true
-					});
-				}
+					SuppressVisualFeedback = true
+				});
 			}
 		}
 
 		// Won't work for shipyards...
 		CPos ChooseRallyLocationNear(Actor producer)
 		{
+			var locomotors = LocomotorsForProducibles(producer);
 			var possibleRallyPoints = world.Map.FindTilesInCircle(producer.Location, Info.RallyPointScanRadius)
-				.Where(c => IsRallyPointValid(c, producer.Info.TraitInfoOrDefault<BuildingInfo>()));
+				.Where(c => IsRallyPointValid(producer.Location, c, locomotors, producer.Info.TraitInfoOrDefault<BuildingInfo>()))
+				.ToList();
 
-			if (!possibleRallyPoints.Any())
+			if (possibleRallyPoints.Count == 0)
 			{
 				AIUtils.BotDebug("{0} has no possible rallypoint near {1}", producer.Owner, producer.Location);
 				return producer.Location;
@@ -433,69 +648,217 @@ namespace OpenRA.Mods.CA.Traits
 			return possibleRallyPoints.Random(world.LocalRandom);
 		}
 
-		bool IsRallyPointValid(CPos x, BuildingInfo info)
+		Locomotor[] LocomotorsForProducibles(Actor producer)
 		{
-			return info != null && world.IsCellBuildable(x, x, null, info);
+			// Per-actor production
+			var productions = producer.TraitsImplementing<Production>();
+
+			// Player-wide production
+			if (!productions.Any())
+				productions = producer.World.ActorsWithTrait<Production>().Where(x => x.Actor.Owner != producer.Owner).Select(x => x.Trait);
+
+			var produces = productions.SelectMany(p => p.Info.Produces).ToHashSet();
+			var locomotors = Array.Empty<Locomotor>();
+			if (produces.Count > 0)
+			{
+				// Per-actor production
+				var productionQueues = producer.TraitsImplementing<ProductionQueue>();
+
+				// Player-wide production
+				if (!productionQueues.Any())
+					productionQueues = producer.Owner.PlayerActor.TraitsImplementing<ProductionQueue>();
+
+				productionQueues = productionQueues.Where(pq => produces.Contains(pq.Info.Type));
+
+				var producibles = productionQueues.SelectMany(pq => pq.BuildableItems());
+				var locomotorNames = producibles
+					.Select(p => p.TraitInfoOrDefault<MobileInfo>())
+					.Where(mi => mi != null)
+					.Select(mi => mi.Locomotor)
+					.ToHashSet();
+
+				if (locomotorNames.Count != 0)
+					locomotors = world.WorldActor.TraitsImplementing<Locomotor>()
+						.Where(l => locomotorNames.Contains(l.Info.Name))
+						.ToArray();
+			}
+
+			return locomotors;
 		}
 
-		public bool HasMaxRefineries
+		bool IsRallyPointValid(CPos producerLocation, CPos rallyPointLocation, Locomotor[] locomotors, BuildingInfo buildingInfo)
 		{
-			get
+			return
+				(pathFinder == null ||
+					locomotors.All(l => pathFinder.PathMightExistForLocomotorBlockedByImmovable(l, producerLocation, rallyPointLocation)))
+				&&
+				(buildingInfo == null ||
+					world.IsCellBuildable(rallyPointLocation, rallyPointLocation, null, buildingInfo));
+		}
+
+		// RefineryLimit (via BotLimits) is a single difficulty-scaled cap shared across every
+		// construction yard the player owns, regardless of faction. Without the candidate
+		// override below, a stray/secondary construction yard of a different faction than the
+		// player's main base could never get its own first refinery once the main base alone
+		// had already reached the global cap - starving that base's economy (and everything
+		// that depends on it) indefinitely. Passing the specific refinery actor being
+		// considered lets us always allow a faction's first refinery through.
+		public bool HasMaxRefineries => HasMaxRefineriesFor(null);
+
+		public bool HasMaxRefineriesFor(ActorInfo candidate)
+		{
+			if (candidate != null)
 			{
-				var currentRefineryCount = AIUtils.CountActorByCommonName(refineryBuildings);
-
-				if (refineryLimit != 0 && currentRefineryCount >= refineryLimit)
-					return true;
-
-				foreach (var r in Info.RefineryTypes)
+				var conyardType = GetRequiredConstructionYardType(candidate);
+				if (conyardType != null)
 				{
-					if (BuildingsBeingProduced != null && BuildingsBeingProduced.ContainsKey(r))
-						currentRefineryCount += BuildingsBeingProduced[r];
+					var factionHasRefinery = RefineryBuildings.Actors.Any(a => !a.IsDead
+						&& GetRequiredConstructionYardType(a.Info) == conyardType);
+
+					if (!factionHasRefinery)
+						return false;
+				}
+			}
+
+			var currentRefineryCount = AIUtils.CountActorByCommonName(RefineryBuildings);
+
+			if (refineryLimit != 0 && currentRefineryCount >= refineryLimit)
+				return true;
+
+			foreach (var r in Info.RefineryTypes)
+			{
+				if (BuildingsBeingProduced != null && BuildingsBeingProduced.ContainsKey(r))
+					currentRefineryCount += BuildingsBeingProduced[r];
+			}
+
+			return currentRefineryCount >= AIUtils.CountActorByCommonName(ConstructionYardBuildings) * Info.RefineriesPerBase + Info.MaxExtraRefineries;
+		}
+
+		// Require at least one refinery, unless we can't build it.
+		public bool HasAdequateRefineryCount() =>
+			Info.RefineryTypes.Count == 0 ||
+			AIUtils.CountActorByCommonName(RefineryBuildings) >= OptimalRefineryCount() ||
+			AIUtils.CountActorByCommonName(powerBuildings) == 0 ||
+			AIUtils.CountActorByCommonName(ConstructionYardBuildings) == 0;
+
+		int OptimalRefineryCount() =>
+			AIUtils.CountActorByCommonName(ProductionBuildings) > 0
+			? Info.InititalMinimumRefineryCount + Info.AdditionalMinimumRefineryCount + (AIUtils.CountActorByCommonName(ConstructionYardBuildings) - 1) * Info.RefineriesPerBase
+			: Info.InititalMinimumRefineryCount;
+
+		bool HasMinimalRefineryCount() =>
+			AIUtils.CountActorByCommonName(RefineryBuildings) >= Info.InititalMinimumRefineryCount;
+
+		public bool HasAdequateProductionCount() =>
+			Info.ProductionTypes.Count == 0 ||
+			AIUtils.CountActorByCommonName(ProductionBuildings) > 0;
+
+		public bool HasCompletedPowerPlant() => AIUtils.CountActorByCommonName(powerBuildings) > 0;
+
+		public bool OpeningBarracksPriorityCompleted => openingBarracksPriorityCompleted;
+
+		public bool HasBuiltOrQueuedBarracks() =>
+			AIUtils.CountActorByCommonName(barracksBuildings) > 0 || CountQueuedBuildings(Info.BarracksTypes) > 0;
+
+		public bool HasQueuedBarracks() => CountQueuedBuildings(Info.BarracksTypes) > 0;
+
+		public bool HasQueuedPowerPlant() => CountQueuedBuildings(Info.PowerTypes) > 0;
+
+		public bool CanTrainOpeningDefense =>
+			UsesBarracksFirstOpening && openingRefineryCostCommitted && !HasMinimalRefineryCount() && HasQueuedRefinery();
+
+		bool UsesBarracksFirstOpening => botLimits != null && botLimits.Info.PrioritizeBarracksBeforeRefinery
+			&& Info.BarracksBeforeRefineryFactions.Contains(player.Faction.InternalName);
+
+		bool HasQueuedRefinery() => CountQueuedBuildings(Info.RefineryTypes) > 0;
+
+		public void RecordOpeningStructureQueued(ProductionQueue queue, ActorInfo actorInfo)
+		{
+			if (!UsesBarracksFirstOpening || openingRefineryCostCommitted)
+				return;
+
+			var cost = queue.GetProductionCost(actorInfo);
+			if (Info.PowerTypes.Contains(actorInfo.Name))
+				openingPowerCommittedCost += cost;
+			else if (Info.BarracksTypes.Contains(actorInfo.Name) && !openingBarracksCostCommitted)
+			{
+				openingBarracksCommittedCost = cost;
+				openingBarracksCostCommitted = true;
+			}
+			else if (Info.RefineryTypes.Contains(actorInfo.Name) && openingBarracksPriorityCompleted)
+			{
+				// Custom maps may start with opening structures already present instead of producing them.
+				if (openingPowerCommittedCost == 0)
+					openingPowerCommittedCost = powerBuildings.Actors.Where(a => !a.IsDead)
+						.Sum(a => queue.GetProductionCost(a.Info));
+
+				if (!openingBarracksCostCommitted)
+				{
+					var barracks = barracksBuildings.Actors.FirstOrDefault(a => !a.IsDead);
+					if (barracks != null)
+					{
+						openingBarracksCommittedCost = queue.GetProductionCost(barracks.Info);
+						openingBarracksCostCommitted = true;
+					}
 				}
 
-				var currentConstructionYardCount = AIUtils.CountActorByCommonName(constructionYardBuildings);
-
-				return currentRefineryCount >= currentConstructionYardCount * Info.RefineriesPerBase + Info.MaxExtraRefineries;
+				openingRefineryCommittedCost = cost;
+				openingRefineryCostCommitted = true;
+				AIUtils.BotDebug("AI: {0} reserved {1} of {2} starting credits for the opening economy; {3} remain for early defense.",
+					player, OpeningStructureCommittedCost, openingStartingCash, OpeningDefenseBudget);
 			}
 		}
 
-		public bool HasAdequateRefineryCount
+		public bool TryCommitOpeningDefenseCost(int cost)
 		{
-			get
-			{
-				var desiredAmount = HasAdequateBarracksCount && HasAdequateFactoryCount ? Info.NormalMinimumRefineryCount : Info.InitialMinimumRefineryCount;
+			if (!CanTrainOpeningDefense || cost <= 0 || openingDefenseCommittedCost + cost > OpeningDefenseBudget)
+				return false;
 
-				if (refineryLimit != 0 && refineryLimit < desiredAmount)
-					desiredAmount = refineryLimit;
-
-				// Require at least one refinery, unless we can't build it.
-				return AIUtils.CountActorByCommonName(refineryBuildings) >= desiredAmount ||
-					AIUtils.CountActorByCommonName(powerBuildings) == 0 ||
-					AIUtils.CountActorByCommonName(constructionYardBuildings) == 0;
-			}
+			openingDefenseCommittedCost += cost;
+			return true;
 		}
 
-		public bool HasAdequateBarracksCount
-		{
-			get
-			{
-				// Require at least one barracks, unless we can't build it.
-				return AIUtils.CountActorByCommonName(barracksBuildings) >= 1 ||
-					AIUtils.CountActorByCommonName(powerBuildings) == 0 ||
-					AIUtils.CountActorByCommonName(refineryBuildings) == 0 ||
-					AIUtils.CountActorByCommonName(constructionYardBuildings) == 0;
-			}
-		}
+		int OpeningStructureCommittedCost =>
+			openingPowerCommittedCost + openingBarracksCommittedCost + openingRefineryCommittedCost;
 
-		public bool HasAdequateFactoryCount
+		int OpeningDefenseBudget => Math.Max(0, openingStartingCash - OpeningStructureCommittedCost);
+
+		int CountQueuedBuildings(IReadOnlySet<string> buildingTypes) =>
+			Info.BuildingQueues.Concat(Info.DefenseQueues)
+				.Distinct()
+				.SelectMany(category => AIUtils.FindQueues(player, category))
+				.Distinct()
+				.SelectMany(queue => queue.AllQueued())
+				.Count(item => buildingTypes.Contains(item.Item));
+
+		void SellUselessRefinery(IBot bot)
 		{
-			get
+			// Sell one refinery each time. Perserve at least one refinery
+			var refineries = world.ActorsHavingTrait<Refinery>().Where(a => a.Owner == player).ToArray();
+
+			if (refineries.Length <= Info.InititalMinimumRefineryCount + Info.AdditionalMinimumRefineryCount)
+				return;
+
+			for (var i = 0; i < refineries.Length; i++)
 			{
-				// Require at least one factory, unless we can't build it.
-				return AIUtils.CountActorByCommonName(factoryBuildings) >= 1 ||
-					AIUtils.CountActorByCommonName(powerBuildings) == 0 ||
-					AIUtils.CountActorByCommonName(refineryBuildings) == 0 ||
-					AIUtils.CountActorByCommonName(constructionYardBuildings) == 0;
+				for (var j = i + 1; j < refineries.Length; j++)
+				{
+					if ((refineries[i].Location - refineries[j].Location).LengthSquared <= Info.SellRefineryTooCloseCellDistance * Info.SellRefineryTooCloseCellDistance)
+					{
+						bot.QueueOrder(new Order("Sell", refineries[i], Target.FromActor(refineries[i]), false));
+						return;
+					}
+				}
+
+				if (ResourceMapModule != null &&
+					!world.Map.FindTilesInAnnulus(refineries[i].Location, 0, Info.SellRefineryNoResourceDistance)
+					.Any(c => ResourceMapModule.Info.ValuableResourceTypes.Contains(resourceLayer.GetResource(c).Type))
+					&& !world.FindActorsInCircle(refineries[i].CenterPosition, WDist.FromCells(Info.SellRefineryNoResourceDistance))
+					.Any(a => ResourceMapModule.Info.ResourceCreatorTypes.Contains(a.Info.Name)))
+				{
+					bot.QueueOrder(new Order("Sell", refineries[i], Target.FromActor(refineries[i]), false));
+					return;
+				}
 			}
 		}
 
@@ -507,7 +870,16 @@ namespace OpenRA.Mods.CA.Traits
 			return new List<MiniYamlNode>()
 			{
 				new("InitialBaseCenter", FieldSaver.FormatValue(initialBaseCenter)),
-				new("DefenseCenter", FieldSaver.FormatValue(DefenseCenter))
+				new("DefenseCenter", FieldSaver.FormatValue(DefenseCenter)),
+				new("OpeningBarracksPriorityCompleted", FieldSaver.FormatValue(openingBarracksPriorityCompleted)),
+				new("OpeningStartingCashCaptured", FieldSaver.FormatValue(openingStartingCashCaptured)),
+				new("OpeningStartingCash", FieldSaver.FormatValue(openingStartingCash)),
+				new("OpeningPowerCommittedCost", FieldSaver.FormatValue(openingPowerCommittedCost)),
+				new("OpeningBarracksCommittedCost", FieldSaver.FormatValue(openingBarracksCommittedCost)),
+				new("OpeningBarracksCostCommitted", FieldSaver.FormatValue(openingBarracksCostCommitted)),
+				new("OpeningRefineryCommittedCost", FieldSaver.FormatValue(openingRefineryCommittedCost)),
+				new("OpeningRefineryCostCommitted", FieldSaver.FormatValue(openingRefineryCostCommitted)),
+				new("OpeningDefenseCommittedCost", FieldSaver.FormatValue(openingDefenseCommittedCost))
 			};
 		}
 
@@ -522,15 +894,64 @@ namespace OpenRA.Mods.CA.Traits
 
 			var defenseCenterNode = data.NodeWithKeyOrDefault("DefenseCenter");
 			if (defenseCenterNode != null)
-				defenseCenter = FieldLoader.GetValue<CPos>("DefenseCenter", defenseCenterNode.Value.Value);
+				DefenseCenter = FieldLoader.GetValue<CPos>("DefenseCenter", defenseCenterNode.Value.Value);
+
+			var openingBarracksPriorityCompletedNode = data.NodeWithKeyOrDefault("OpeningBarracksPriorityCompleted");
+			if (openingBarracksPriorityCompletedNode != null)
+				openingBarracksPriorityCompleted = FieldLoader.GetValue<bool>("OpeningBarracksPriorityCompleted",
+					openingBarracksPriorityCompletedNode.Value.Value);
+
+			var openingStartingCashCapturedNode = data.NodeWithKeyOrDefault("OpeningStartingCashCaptured");
+			if (openingStartingCashCapturedNode != null)
+				openingStartingCashCaptured = FieldLoader.GetValue<bool>("OpeningStartingCashCaptured",
+					openingStartingCashCapturedNode.Value.Value);
+
+			var openingStartingCashNode = data.NodeWithKeyOrDefault("OpeningStartingCash");
+			if (openingStartingCashNode != null)
+				openingStartingCash = FieldLoader.GetValue<int>("OpeningStartingCash", openingStartingCashNode.Value.Value);
+
+			var openingPowerCommittedCostNode = data.NodeWithKeyOrDefault("OpeningPowerCommittedCost");
+			if (openingPowerCommittedCostNode != null)
+				openingPowerCommittedCost = FieldLoader.GetValue<int>("OpeningPowerCommittedCost", openingPowerCommittedCostNode.Value.Value);
+
+			var openingBarracksCommittedCostNode = data.NodeWithKeyOrDefault("OpeningBarracksCommittedCost");
+			if (openingBarracksCommittedCostNode != null)
+				openingBarracksCommittedCost = FieldLoader.GetValue<int>("OpeningBarracksCommittedCost",
+					openingBarracksCommittedCostNode.Value.Value);
+
+			var openingBarracksCostCommittedNode = data.NodeWithKeyOrDefault("OpeningBarracksCostCommitted");
+			if (openingBarracksCostCommittedNode != null)
+				openingBarracksCostCommitted = FieldLoader.GetValue<bool>("OpeningBarracksCostCommitted",
+					openingBarracksCostCommittedNode.Value.Value);
+
+			var openingRefineryCommittedCostNode = data.NodeWithKeyOrDefault("OpeningRefineryCommittedCost");
+			if (openingRefineryCommittedCostNode != null)
+				openingRefineryCommittedCost = FieldLoader.GetValue<int>("OpeningRefineryCommittedCost",
+					openingRefineryCommittedCostNode.Value.Value);
+
+			var openingRefineryCostCommittedNode = data.NodeWithKeyOrDefault("OpeningRefineryCostCommitted");
+			if (openingRefineryCostCommittedNode != null)
+				openingRefineryCostCommitted = FieldLoader.GetValue<bool>("OpeningRefineryCostCommitted",
+					openingRefineryCostCommittedNode.Value.Value);
+
+			var openingDefenseCommittedCostNode = data.NodeWithKeyOrDefault("OpeningDefenseCommittedCost");
+			if (openingDefenseCommittedCostNode != null)
+				openingDefenseCommittedCost = FieldLoader.GetValue<int>("OpeningDefenseCommittedCost",
+					openingDefenseCommittedCostNode.Value.Value);
 		}
 
 		void INotifyActorDisposing.Disposing(Actor self)
 		{
-			refineryBuildings.Dispose();
+			RefineryBuildings.Dispose();
 			powerBuildings.Dispose();
-			constructionYardBuildings.Dispose();
+			ConstructionYardBuildings.Dispose();
 			barracksBuildings.Dispose();
+		}
+
+		void IBotSuggestRefineryProduction.RequestLocation(CPos refineryLocation, CPos conyardLocation, Actor expandActor)
+		{
+			if (ResourceMapModule == null || ResourceMapModule.FindClosestIndiceFromCPos(refineryLocation).PlayerRefineryCount < Info.MaxRefineryPerIndice)
+				RequestedRefineries[expandActor] = (conyardLocation, refineryLocation);
 		}
 	}
 }

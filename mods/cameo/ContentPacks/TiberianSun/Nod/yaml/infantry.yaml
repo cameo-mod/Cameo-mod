@@ -1,0 +1,430 @@
+ts_nod_lightinfantry:
+	Inherits: TSE1
+	Inherits@TiberiumLenses: ^TiberiumLenses
+	Inherits@InfiltrationKit: ^InfiltrationKit
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~ts_nod_handof
+		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
+	Armament@PRIMARY:
+		Weapon: TSMinigun
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
+		LocalOffset: 128,0,256
+	Armament@UPGRADE:
+		Weapon: TSLasergun
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses
+		LocalOffset: 128,0,256
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSMinigun
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
+	Armament@UPGRADEGARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSLasergun
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: ts_nod_lightinfantry
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_tiberiumlenses, ts_nod_upgrade_infiltrationkit
+
+ts_nod_engineer:
+	Inherits: TSENGINEER
+	Inherits@MC: ^MCImmune
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~ts_nod_handof
+		Description: Captures and repairs structures.\n  Unarmed
+	Voiced:
+		VoiceSet: TSInfantry
+	-TemporaryOwnerManager:
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: altengi
+
+ts_nod_rocketinfantry:
+	Inherits: TSE3
+	Inherits@TiberiumCoreMissiles: ^TiberiumCoreMissiles
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ts_nod_handof
+		Queue: Infantry, RAInfantry
+		Description: Anti-tank/anti-aircraft infantry. \n  Strong vs Tanks, Aircraft\n  Weak vs Infantry
+	Armament@PRIMARY: ##########
+		Weapon: TSBazooka
+		LocalOffset: 256,43,341
+		FireDelay: 5
+		RequiresCondition: !ts_nod_upgrade_tiberiumcoremissiles
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSBazooka
+		RequiresCondition: !ts_nod_upgrade_tiberiumcoremissiles
+	Armament@UPGRADE: ##########
+		Weapon: TSTibBazooka
+		LocalOffset: 256,43,341
+		FireDelay: 5
+		RequiresCondition: ts_nod_upgrade_tiberiumcoremissiles
+	Armament@GARRISONEDUPGRADE: ##########
+		Name: garrisoned
+		Weapon: TSTibBazooka
+		RequiresCondition: ts_nod_upgrade_tiberiumcoremissiles
+	RenderSprites:
+		Image: TSE3
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_tiberiumcoremissiles
+
+ts_nod_elitecadre:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@TiberiumLenses: ^TiberiumLenses
+	Inherits@AuxiliaryWeapon: ^AuxiliaryWeapon
+	Valued:
+		Cost: 435
+	Tooltip:
+		Name: Elite Cadre
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~ts_nod_handof, ts_nod_radar
+		Queue: Infantry, RAInfantry
+		Description: Elite Infantry of NOD used to fight high technology enemies \n  Strong vs Infantry, Air, Vehicles\n  Weak vs Siege, Heavy armor
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 21000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY:
+		Weapon: elitecadregun
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
+		LocalOffset: 128,0,256
+	Armament@UPGRADE:
+		Weapon: laserelitecadregun
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses
+		LocalOffset: 128,0,256
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: elitecadregun
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
+	Armament@GARRISONEDUPGRADE: ##########
+		Name: garrisoned
+		Weapon: laserelitecadregun
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses
+	Armament@SECONDARY:
+		Weapon: TSCadreGrenade
+		RequiresCondition: ts_nod_upgrade_auxiliaryweapon
+		LocalOffset: 128,0,256
+	Armament@GARRISONEDSECONDARY: ##########
+		Name: garrisoned
+		Weapon: TSCadreGrenade
+		RequiresCondition: ts_nod_upgrade_auxiliaryweapon
+	TakeCover:
+		ProneOffset: 180,0,-200
+	Voiced:
+		VoiceSet: TSRocket
+	WithInfantryBody:
+		RequiresCondition: !cydamaged
+		DefaultAttackSequence: attack
+	WithInfantryBody@damaged:
+		MoveSequence: crippled-run
+		DefaultAttackSequence: crippled-attack
+		StandSequences: crippled-stand
+		RequiresCondition: cydamaged
+	GrantConditionOnDamageState@damaged:
+		Condition: cydamaged
+		ValidDamageStates: Critical
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		CrushedSequencePalette: ra2effect
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_tiberiumlenses, ts_nod_upgrade_auxiliaryweapon
+
+	FirepowerMultiplier:
+		Modifier: 93
+ts_nod_toxintrooper:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Valued:
+		Cost: 850
+	Tooltip:
+		Name: Toxin Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~ts_nod_handof, ts_nod_techcenter
+		Queue: Infantry, RAInfantry
+		Description: Elite Infantry of NOD used to fight high technology enemies \n  Strong vs Infantry, Vehicles\n  Weak vs Siege, Heavy armor
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: TSToxinRifle
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: TSToxinRifle
+	TakeCover:
+		ProneOffset: 180,0,-200
+	Voiced:
+		VoiceSet: TSRocket
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ts_nod_shadowteam:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@CLOAK: ^CloakedVehicle
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	#Inherits@vo: ^AttackFrontalVoice
+	Inherits@InfiltrationKit: ^InfiltrationKit
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: actor_ts_nod_shadowteam.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		IconPalette: tscameo
+		BuildPaletteOrder: 90
+		Prerequisites: ~ts_nod_handof, ts_nod_techcenter
+		Queue: Infantry, RAInfantry
+		Description: actor_ts_nod_shadowteam.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: TSShadowTeamPistols
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: TSShadowTeamPistols
+	Armament@C4:
+		Weapon: TSShadowTeamAttach
+		LocalOffset: 128,0,256
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+	TakeCover:
+		ProneOffset: 180,0,-200
+	Cloak:
+		UncloakOn: Attack, Damage
+		CloakSound: cloak5.aud
+		UncloakSound: cloak5.aud
+	Voiced:
+		VoiceSet: TSSpy
+	RenderSprites:
+		PlayerPalette: playerra2
+	-Cloak@ts_nod_upgrade_infiltrationkit: # has cloak on by default
+	Transforms:
+		IntoActor: ts_nod_shadowteam_air
+		RequiresCondition: ts_nod_upgrade_infiltrationkit
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_infiltrationkit
+
+ts_nod_shadowteam_air:
+	Inherits: ^JumpjetInfantry
+	Inherits@Template: ^FlyingInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@CLOAK: ^CloakedAircraft
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Tooltip:
+		Name: actor_ts_nod_shadowteam.name
+	Valued:
+		Cost: 900
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: ts_nod_shadowteam
+	Buildable:
+		IconPalette: tscameo
+		BuildPaletteOrder: 90
+		Description: actor_ts_nod_shadowteam.description
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+		VTOL: false
+		CanHover: false
+		CanForceLand: false
+	TakeOffOnMake:
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: TSShadowTeamTargeting
+		LocalOffset: 128,0,256
+		ReloadingCondition: reloading
+	ReloadArmamentsBar:
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Default
+		PersistentTargeting: false
+		OpportunityFire: false
+		RequiresCondition: !reloading
+	DeathSounds:
+	-WithShadow:
+	WithInfantryBody@Air:
+		StandSequences: fly
+		MoveSequence: fly
+		RequiresCondition: airborne
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		DefaultAttackSequence: shoot
+		RequiresCondition: !airborne
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	Selectable:
+		Bounds: 512, 768
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_infiltrationkit
+	WithSpriteBody@shadow:
+		Name: shadow
+		Sequence: shadow
+		ForceToGround: true
+		RequiresCondition: airborne
+	-SpawnActorOnDeath:
+	Voiced:
+		VoiceSet: TSSpy
+	Transforms:
+		IntoActor: ts_nod_shadowteam
+	RenderSprites:
+		Image: ts_nod_shadowteam
+		PlayerPalette: playerra2
+
+ts_nod_shotguncommando:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	# Inherits@announce: ^AnnounceGlobal
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@InfiltrationKit: ^InfiltrationKit
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Shotgun Commando
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~ts_nod_handof, ts_nod_techcenter
+		Queue: Infantry, RAInfantry
+		Description: Elite Infantry of NOD used to fight high technology enemies \n  Strong vs Infantry, Vehicles\n  Weak vs Siege, Heavy armor
+		BuildLimit: 1
+	Mobile:
+		Speed: 80
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armament@PRIMARY:
+		Weapon: TSCommandoShotgun
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: TSCommandoShotgun
+	TakeCover:
+		ProneOffset: 180,0,-200
+	Voiced:
+		VoiceSet: TSRocket
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_infiltrationkit
+
+ts_nod_chameleonspy:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@anim: ^TSInfantry
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@InfiltrationKit: ^InfiltrationKit
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 90
+		Prerequisites: ~ts_nod_handof, ts_nod_radar
+		Description: Cloaked spy that can infiltrate structures.
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Chameleon Spy
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	-Guard:
+	Health:
+		HP: 30000
+	Mobile:
+		Speed: 90
+		Voice: Move
+	DetectCloaked:
+		Range: 4000
+	RenderDetectionCircle:
+	Armament@PRIMARY:
+		Weapon: ChamBlade
+		LocalOffset: 128,0,256
+	Passenger:
+		CustomPipType: blue
+		Voice: Move
+	Infiltrates:
+		Types: SpyInfiltrate
+		Notification: BuildingInfiltrated
+		PlayerExperience: 50
+	IgnoresDisguise:
+	AttackMove:
+		Voice: Move
+	Voiced:
+		VoiceSet: TSSpy
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		CrushedSequencePalette: ra2effect
+	Cloak:
+		UncloakOn: Attack, Damage, Infiltrate
+		CloakSound: cloak5.aud
+		UncloakSound: cloak5.aud
+	-Cloak@ts_nod_upgrade_infiltrationkit: # has cloak on by default
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_infiltrationkit

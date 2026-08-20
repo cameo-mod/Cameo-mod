@@ -1,0 +1,1345 @@
+japanesesoldier:
+	Inherits: ^InfantryOverlays
+	Defaults:
+		Filename: japan_imperialscoutsman_redguard.shp
+		Scale: 1.38
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Facings: 8
+	run:
+		Start: 16
+		Length: 6
+		Facings: 8
+		Tick: 100
+	shoot:
+		Start: 64
+		Length: 16
+		Facings: 8
+	prone-stand:
+		Start: 208
+		Stride: 4
+		Facings: 8
+	prone-stand2:
+		Start: 208
+		Stride: 4
+		Facings: 8
+	prone-run:
+		Start: 208
+		Length: 4
+		Facings: 8
+		Tick: 100
+	liedown:
+		Start: 192
+		Length: 2
+		Facings: 8
+	standup:
+		Start: 240
+		Length: 2
+		Facings: 8
+	prone-shoot:
+		Start: 256
+		Length: 16
+		Facings: 8
+	idle1:
+		Start: 384
+		Length: 14
+		Tick: 120
+	idle2:
+		Start: 399
+		Length: 16
+		Tick: 120
+	idle3:
+		Start: 384
+		Length: 14
+		Tick: 120
+	idle4:
+		Start: 399
+		Length: 16
+		Tick: 120
+	die1:
+		Start: 416
+		Length: 8
+	die2:
+		Start: 424
+		Length: 8
+	die3:
+		Start: 432
+		Length: 8
+	die4:
+		Start: 440
+		Length: 12
+	die5:
+		Start: 452
+		Length: 18
+	die6:
+		Start: 452
+		Length: 18
+	die7:
+		Filename: electro.shp
+		Scale: 1
+		Length: *
+	die-crushed:
+		Filename: corpse1.shp
+		Scale: 1
+		Length: 6
+		Tick: 1600
+		ZOffset: -511
+	garrison-muzzle:
+		Filename: minigun.shp
+		Scale: 1
+		Length: 3
+		Stride: 6
+		Facings: 8
+	icon:
+		Filename: japan_imperialscoutsman_icon.png
+
+japan_tankbuster:
+	Inherits: ^RA2ArmedInfantryNoProneAnimation
+	Defaults:
+		Filename: japan_tankbuster_scybgm.shp
+		Scale: 0.69
+	stand:
+		Start: 160
+		Facings: 8
+	stand2:
+		Start: 160
+		Facings: 8
+	run:
+		Start: 168
+		Length: 12
+		Facings: 8
+		Tick: 120
+	shoot:
+		Start: 0
+		Length: 6
+		Facings: 8
+	prone-stand:
+		Start: 160
+		Facings: 8
+	prone-stand2:
+		Start: 160
+		Facings: 8
+	prone-run:
+		Start: 48
+		Length: 6
+		Facings: 8
+		Tick: 120
+	liedown:
+		Start: 160
+		Facings: 8
+	standup:
+		Start: 160
+		Facings: 8
+	prone-shoot:
+		Start: 0
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 96
+		Length: 12
+		Tick: 120
+	idle2:
+		Start: 132
+		Length: 16
+		Tick: 120
+	idle3:
+		Start: 148
+		Length: 16
+		Tick: 120
+	die1:
+		Start: 108
+		Length: 12
+	die2:
+		Start: 120
+		Length: 12
+	die3:
+		Start: 304
+		Length: 8
+	die-crushed:
+		Filename: corpse1.shp
+		Scale: 1
+		Length: 6
+		Tick: 1600
+		ZOffset: -511
+	garrison-muzzle:
+		Filename: minigun.shp
+		Scale: 1
+		Length: 3
+		Stride: 6
+		Facings: 8
+	icon:
+		Filename: japan_tankbuster_icon.png
+
+japan_samurai:
+	Defaults:
+		Filename: japan_promotion_samurai_rasamurai.shp
+		Scale: 0.5
+	Inherits: ^InfantryOverlays
+	stand:
+		Facings: 8
+	stand2:
+		Facings: 8
+	run:
+		Start: 24
+		Length: 6
+		Facings: 8
+		Tick: 120
+	shoot:
+		Start: 120
+		Length: 6
+		Facings: 8
+	prone-stand:
+		Start: 16
+		Facings: 8
+	prone-stand2:
+		Start: 16
+		Facings: 8
+	prone-run:
+		Start: 72
+		Length: 6
+		Facings: 8
+		Tick: 120
+	# stand -> prone transition
+	liedown:
+		Start: 4
+	# prone -> stand transition
+	standup:
+		Start: 4
+	prone-shoot:
+		Start: 168
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 24
+		Length: 6
+		Facings: 8
+		Tick: 120
+	idle2:
+		Start: 24
+		Length: 6
+		Facings: 8
+		Tick: 120
+	idle3:
+		Start: 24
+		Length: 6
+		Facings: 8
+		Tick: 120
+	cheer:
+		Start: 4
+	# Dancing
+	idle4:
+		Start: 24
+		Length: 6
+		Facings: 8
+		Tick: 120
+	# Shot
+	die1:
+		Start: 276
+		Length: 12
+		Tick: 80
+	# Explode
+	die2:
+		Start: 305
+		Length: 12
+		Tick: 80
+	# Fly and explode in air
+	die3:
+		Start: 330
+		Length: 12
+		Tick: 80
+	# Fly through air squish on ground
+	die4:
+		Start: 330
+		Length: 12
+		Tick: 80
+	# Burn
+	die5:
+		Start: 305
+		Length: 12
+		Tick: 80
+	# Tib
+	die6:
+		Start: 305
+		Length: 12
+		Tick: 80
+	# Electro
+	die7: ##########
+		Filename: electro.shp
+		Scale: 1
+		Length: *
+	die-crushed:
+		Filename: e1rot.shp
+		Start: 16
+		Length: 4
+		Tick: 1600
+		ZOffset: -511
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+	icon:
+		Filename: japan_promotion_samurai_icon.shp
+
+japan_archermaiden:
+	Defaults:
+		Filename: japan_promotion_archermaiden_ramaid.shp
+		Scale: 0.58
+	Inherits: ^InfantryOverlays
+	stand:
+		Facings: 8
+	stand2:
+		Facings: 8
+	run:
+		Start: 24
+		Length: 6
+		Facings: 8
+		Tick: 120
+	shoot:
+		Start: 120
+		Length: 6
+		Facings: 8
+	prone-stand:
+		Start: 16
+		Facings: 8
+	prone-stand2:
+		Start: 16
+		Facings: 8
+	prone-run:
+		Start: 72
+		Length: 6
+		Facings: 8
+		Tick: 120
+	# stand -> prone transition
+	liedown:
+		Start: 4
+	# prone -> stand transition
+	standup:
+		Start: 4
+	prone-shoot:
+		Start: 168
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 24
+		Length: 6
+		Facings: 8
+		Tick: 120
+	idle2:
+		Start: 24
+		Length: 6
+		Facings: 8
+		Tick: 120
+	idle3:
+		Start: 24
+		Length: 6
+		Facings: 8
+		Tick: 120
+	cheer:
+		Start: 4
+	# Dancing
+	idle4:
+		Start: 24
+		Length: 6
+		Facings: 8
+		Tick: 120
+	# Shot
+	die1:
+		Start: 276
+		Length: 12
+		Tick: 80
+	# Explode
+	die2:
+		Start: 305
+		Length: 12
+		Tick: 80
+	# Fly and explode in air
+	die3:
+		Start: 330
+		Length: 12
+		Tick: 80
+	# Fly through air squish on ground
+	die4:
+		Start: 330
+		Length: 12
+		Tick: 80
+	# Burn
+	die5:
+		Start: 305
+		Length: 12
+		Tick: 80
+	# Tib
+	die6:
+		Start: 305
+		Length: 12
+		Tick: 80
+	# Electro
+	die7: ##########
+		Filename: electro.shp
+		Scale: 1
+		Length: *
+	die-crushed:
+		Filename: e1rot.shp
+		Start: 16
+		Length: 4
+		Tick: 1600
+		ZOffset: -511
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+	icon:
+		Filename: japan_promotion_archermaiden_icon.shp
+
+####################################################################################################
+#		VEHICLES
+####################################################################################################
+
+japan_shogunexecutioner:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: japan_promotion_shogunexecutioner.shp
+		Scale: 2
+		Offset: 0, 18
+	idle:
+		Facings: -32
+	stand:
+		Facings: -32
+	shoot:
+		Start: 224
+		Facings: -32
+		Length: 9
+		Tick: 60
+	run:
+		Start: 32
+		Length: 6
+		Facings: -32
+		Tick: 144
+	die:
+		Start: 224
+		Facings: -32
+		Length: 9
+		Tick: 60
+	icon:
+		Filename: japan_promotion_shogunexecutioner_icon.png
+		Offset: 0,0
+
+ramcv:
+	Defaults:
+		Filename: ra1_allies_alliedmobileconstructionvehicle_ramcv.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+	icon:
+		Filename: ra1_allies_alliedmobileconstructionvehicle_icon.shp
+
+raharv:
+	Defaults:
+		Filename: ra1_allies_alliedoretruck_raharv.shp
+	idle:
+		Facings: 32
+		UseClassicFacings: True
+	harvest:
+		Start: 32
+		Length: 8
+		Facings: 8
+	dock:
+		Start: 96
+		Length: 8
+	dock-loop:
+		Start: 104
+		Length: 7
+	icon:
+		Start: 0
+		Filename: ra1_allies_alliedoretruck_icon.shp
+	cityicon:
+		Filename: ra1_allies_alliedoretruck_cityharvestericon.shp
+
+japan_scoutcar:
+	Defaults:
+		Filename: japan_scoutcar_jkubelwagen.shp
+	idle:
+		Facings: 64
+	turret:
+		Filename: ra1_allies_ranger.shp
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: japan_scoutcar_icon.shp
+
+japan_grenadebuggy:
+	Defaults:
+		Filename: japan_promotion_grenadebuggy_jbuggy.shp
+	idle:
+		Facings: 64
+	turret:
+		Start: 64
+		Facings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: japan_promotion_grenadebuggy_icon.shp
+
+japan_hovercrafttransport:
+	Defaults:
+		Filename: japan_hovercrafttransport_modhover_new.shp
+		Scale: 0.4
+	idle:
+		Facings: 64
+		Offset: 0,4
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,4
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: japan_hovercrafttransport_icon.shp
+
+japan_hovercraftflametank:
+	Defaults:
+		Filename: japan_promotion_hovercraftflametank_modhovert.shp
+		Scale: 0.8
+	idle:
+		Facings: 64
+		Offset: 0,8
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,8
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: japan_promotion_hovercraftflametank_icon.shp
+
+japan_oitank:
+	Defaults:
+		Filename: japan_oitank.shp
+		Offset: 0,12
+	idle:
+		Facings: 64
+	turret:
+		Facings: 64
+		Start: 64
+	turret2:
+		Facings: 64
+		Start: 128
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: japan_oitank_icon.shp
+		Offset: 0,0
+
+japan_exorcistoitank:
+	Defaults:
+		Filename: japan_oitank.shp
+		Offset: 0,12
+	idle:
+		Filename: japan_exorcistoitank.shp
+		Facings: 64
+	turret:
+		Facings: 64
+		Start: 64
+	turret2:
+		Facings: 64
+		Start: 128
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: japan_exorcistoitank_icon.shp
+		Offset: 0,0
+
+japan_corewarfactory:
+	Defaults:
+		Filename: japan_coretechcenter_modcore.shp
+		Scale: 2
+	idle:
+		Facings: -32
+	icon:
+		Filename: ra1_allies_alliedwarfactory_icon.png
+	icon1:
+		Filename: ra1_allies_alliedorerefinery_icon.png
+	icon2:
+		Filename: japan_coretechcenter_jappowerplanicon.shp
+	icon3:
+		Filename: japan_japanesebarracks_icon.shp
+	icon4:
+		Filename: japan_coretechcenter_jradardomeicon.png
+	icon5:
+		Filename: japan_japaneseairfield_icon.shp
+	icon6:
+		Filename: japan_coretechcenter_rafixicon.png
+	icon7:
+		Filename: japan_japanesetechcenter_icon.shp
+
+japan_waveforceartillery:
+	Defaults:
+		Filename: japan_promotion_waveforceartillery_modwave.shp
+		Scale: 0.8
+	idle:
+		Facings: 64
+		Offset: 0,8
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,8
+	muzzle:
+		Filename: japan_promotion_waveforceartillery_blueartexp.shp
+		Length: *
+	icon:
+		Filename: japan_promotion_waveforceartillery_icon.shp
+
+jharv:
+	Defaults:
+		Filename: japan_japaneseoretruck_jharv.shp
+		Scale: 0.8
+	idle:
+		Facings: 64
+	harvest:
+		Start: 64
+		Length: 16
+		Facings: 8
+	dock:
+		Facings: 64
+	dock-loop:
+		Facings: 64
+	icon:
+		Start: 0
+		Filename: japan_japaneseoretruck_jharvicon.shp
+	cityicon:
+		Filename: japan_japaneseoretruck_jharvicon.shp
+
+japan_ballista:
+	Defaults:
+		Filename: japan_ballista.shp
+		Scale: 0.8
+	idle:
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+	icon:
+		Filename: japan_ballista_icon.shp
+
+####################################################################################################
+#		BUILDINGS
+####################################################################################################
+
+dome:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: ra1_allies_alliedradardome.shp
+	idle:
+		Offset: 0,-8
+	damaged-idle:
+		Start: 1
+		Offset: 0,-8
+	make:
+		Filename: ra1_allies_alliedradardome_make.shp
+		Length: *
+		Offset: 0,-8
+	dead:
+	bib:
+	icon:
+		Filename: ra1_allies_alliedradardome_icon.png
+
+rafix:
+	Inherits: ^WithBuildingBibFix
+	Defaults:
+		Filename: rafix.shp
+	idle:
+		Offset: 0,2
+		ZOffset: -1c511
+	damaged-idle:
+		Start: 7
+		Offset: 0,2
+		ZOffset: -1c511
+	active:
+		Start: 1
+		Length: 6
+		Offset: 0,2
+		ZOffset: -1c511
+	damaged-active:
+		Start: 8
+		Length: 6
+		Offset: 0,2
+		ZOffset: -1c511
+	make:
+		Filename: rafixmake.shp
+		Length: *
+		Offset: 0,2
+	dead:
+	bib:
+		Offset: 0,-2
+	icon:
+		Filename: japan_coretechcenter_rafixicon.png
+
+rafixj:
+	Inherits: rafix
+	Defaults:
+		Filename: japan_japaneseservicedepot_rafixj.shp
+
+japan_waveforcereactor:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+	idle:
+		Filename: japan_waveforcereactor_japreactorundamagedidle.png
+		Length: *
+		Scale: 1
+	damaged-idle:
+		Filename: japan_waveforcereactor_japreactordamagedidle.png
+		Length: *
+		Scale: 1
+	make:
+		Filename: japan_waveforcereactor_japreactorbuildup.png
+		Length: *
+		Scale: 1
+	dead:
+		Filename: japan_waveforcereactor_japreactordamagedidle.png
+		Length: *
+		Tick: 13
+		Scale: 1
+	bib:
+	icon:
+		Filename: japan_coretechcenter_jappowerplanicon.shp
+
+japan_japaneseorerefinery:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: japan_japaneseorerefinery.shp
+	idle:
+		ZOffset: -1c512
+		Offset: 0, 14
+	damaged-idle:
+		ZOffset: -1c512
+		Offset: 0, 14
+		Start: 1
+	make:
+		Filename: japan_japaneseorerefinery_jprocmake.shp
+		Length: *
+	dead:
+		Filename: japan_japaneseorerefinery.shp
+		Start: 1
+	bib:
+		ZOffset: -1c512
+	icon:
+		Filename: japan_japaneseorerefinery_icon.png
+
+modjbarr:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: japan_japanesebarracks_modjdojo2.shp
+	idle:
+		Start: 32
+		Length: 15
+		#Offset: 0,-6
+	damaged-idle:
+		Start: 48
+		Length: 15
+		#Offset: 0,-6
+	make:
+		Filename: japan_japanesebarracks_modjdojo2.shp
+		Length: 32
+		#Offset: 0,-6
+	dead:
+		Start: 48
+	bib:
+	icon:
+		Filename: japan_japanesebarracks_icon.shp
+
+jweap:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: japan_japanesewarfactory_jweap_bottom.shp
+		Offset: 0,8
+	idle:
+	damaged-idle:
+		Start: 1
+	make:
+		Filename: japan_japanesewarfactory_jweap_make.shp
+		Length: *
+	build-top:
+		Filename: japan_japanesewarfactory_jweap_roof.shp
+		Length: 5
+	damaged-build-top:
+		Filename: japan_japanesewarfactory_jweap_roof.shp
+		Start: 5
+		Length: 5
+	customhack:
+		Filename: japan_japanesewarfactory_jweap_roof.shp
+		Length: 1
+	damaged-customhack:
+		Filename: japan_japanesewarfactory_jweap_roof.shp
+		Start: 5
+		Length: 1
+	dead:
+	bib:
+		Scale: 1
+		Offset: 0,0
+	icon:
+		Filename: japan_japanesewarfactory_icon.shp
+		Offset: 0,0
+
+jraafld:
+	Defaults:
+		Filename: japan_japaneseairfield_japflagairfield.shp
+	idle:
+		Start: 32
+		Length: 15
+		ZOffset: -1023
+		Offset: 0,2
+	damaged-idle:
+		Start: 48
+		Length: 15
+		ZOffset: -1023
+		Offset: 0,2
+	make:
+		Filename: japan_japaneseairfield_japflagairfield.shp
+		Length: 32
+		Offset: 0,2
+	dead:
+		Start: 48
+	icon:
+		Filename: japan_japaneseairfield_icon.shp
+
+jdome:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: japan_japaneseradararray_jradardome.png
+	idle:
+		Length: *
+		Offset: 0,10
+	damaged-idle:
+		Filename: japan_japaneseradararray_jradardomedamaged.png
+		Length: *
+		Offset: 0,10
+	make:
+		Filename: japan_japaneseradararray_jradardomebuildup.png
+		Length: *
+		Offset: 0,10
+		Tick: 150
+	dead:
+		Scale: 2
+	bib:
+	icon:
+		Filename: japan_coretechcenter_jradardomeicon.png
+
+japan_japanesetechcenter:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: japan_japanesetechcenter_modjtek2.shp
+		Scale: 1
+	idle:
+		Start: 32
+		Length: 15
+		#Offset: 0,-6
+	damaged-idle:
+		Start: 48
+		Length: 15
+		#Offset: 0,-6
+	make:
+		Filename: japan_japanesetechcenter_modjtek2.shp
+		Length: 32
+		#Offset: 0,-6
+	dead:
+		Start: 48
+	bib:
+		Scale: 1
+	icon:
+		Filename: japan_japanesetechcenter_icon.shp
+
+japan_japaneseshrine:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: japan_japaneseshrine_modjtek.shp
+		Scale: 3
+	idle:
+		Start: 0
+		Length: 1
+		#Offset: 0,-6
+	damaged-idle:
+		Start: 1
+		Length: 1
+		#Offset: 0,-6
+	make:
+		Filename: japan_japaneseshrine_modjtekmake.shp
+		Length: *
+		#Offset: 0,-6
+	dead:
+		Start: 2
+	bib:
+		Scale: 1
+	icon:
+		Filename: japan_japaneseshrine_icon.png
+	japanspellcard:
+		Filename: japan_japaneseshrine_japanspellcardicon.png
+
+####################################################################################################
+#		RA TECH
+####################################################################################################
+
+japan_skyhawk:
+	Defaults:
+		Filename: japan_skyhawk_wuzhia.shp
+	idle:
+		Facings: -32
+		Length: 21
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: japan_skyhawk_icon.png
+
+je4:
+	Inherits: td_nod_flamethrower
+	icon:
+		Filename: japan_japaneseflamethrower_icon.shp
+
+japan_japanesemgnest:
+	Inherits: ^WithBuildingBibFtur
+	Defaults:
+		Filename: japan_japanesemgnest_jmgnest_idle.shp
+	idle:
+		Offset: 0,-2
+		Facings: 64
+	make:
+		Filename: japan_japanesemgnest_jmgnest_make.shp
+		Length: *
+		Offset: 0,-2
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	dead:
+	bib:
+		Offset: 0,-5
+	icon:
+		Filename: japan_japanesemgnest_icon.shp
+
+japan_ballistatower:
+	Inherits: ^WithBuildingBibFtur
+	Defaults:
+		Filename: japan_ballistatower.shp
+		Scale: 0.8
+	idle:
+		Offset: 0,-2
+		Facings: 64
+	make:
+		Filename: japan_ballistatower.shp
+		Start: 64
+		Length: 12
+		Offset: 0,-2
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	dead:
+	bib:
+		Offset: 0,-5
+	icon:
+		Filename: japan_ballistatower_icon.shp
+
+japan_waveforceturret:
+	Inherits: ^WithBuildingBibIron
+	Defaults:
+		Filename: japan_waveforceturret_waveturret.shp
+		Offset: 0, 30
+	idle:
+		Facings: 64
+	damaged-idle:
+		Facings: 64
+		Start: 64
+	make:
+		Filename: japan_waveforceturret_make.shp
+		Length: *
+	dead:
+	muzzle:
+		Filename: japan_promotion_waveforceartillery_blueartexp.shp
+		Length: *
+		Offset: 0, 0
+	bib:
+		Offset: 0, 25
+	icon:
+		Filename: japan_waveforceturret_icon.shp
+		Offset: 0, 0
+
+japan_armoredcar:
+	Defaults:
+		Filename: japan_promotion_armoredcar_jarmoredcar.shp
+	idle:
+		Facings: 64
+	turret:
+		Scale: 0.8
+		Start: 64
+		Facings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: japan_promotion_armoredcar_icon.shp
+
+japan_zerofighter:
+	Defaults:
+		Filename: japan_zerofighter.shp
+	idle:
+		Facings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: japan_zerofighter_icon.shp
+
+japan_japanesebomber:
+	Defaults:
+		Filename: japan_japanesebomber.shp
+	idle:
+		Facings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: japan_japanesebomber_icon.shp
+
+japan_nanodronebuggy:
+	Defaults:
+		Filename: japan_nanodronebuggy_jnanoarty.shp
+	idle:
+		Facings: 64
+	turret:
+		Start: 64
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: japan_nanodronebuggy_icon.shp
+
+japan_exorcist:
+	Defaults:
+		Filename: japan_promotion_exorcist_hakurei.shp
+		Scale: 0.96
+	Inherits: ^InfantryOverlays
+	stand:
+		Start: 1
+		Facings: 8
+	stand2:
+		Start: 9
+		Facings: 8
+	run:
+		Start: 25
+		Length: 6
+		Facings: 8
+		Tick: 100
+	shoot:
+		Start: 121
+		Length: 6
+		Facings: 8
+	prone-stand:
+		Start: 17
+		Facings: 8
+	prone-stand2:
+		Start: 144
+		Stride: 4
+		Facings: 8
+	prone-run:
+		Start: 73
+		Length: 6
+		Facings: 8
+		Tick: 100
+	# stand -> prone transition
+	liedown:
+		Start: 217
+		Facings: 8
+	# prone -> stand transition
+	standup:
+		Start: 217
+		Facings: 8
+	prone-shoot:
+		Start: 169
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 225
+		Length: 8
+		Tick: 120
+	idle2:
+		Start: 234
+		Length: 2
+		Tick: 120
+	idle3:
+		Start: 250
+		Length: 12
+		Tick: 120
+	cheer:
+		Start: 217
+		Facings: 8
+	# Dancing
+	idle4:
+		Start: 262
+		Length: 12
+		Tick: 120
+	# Shot
+	die1:
+		Start: 278
+		Length: 16
+		Tick: 80
+	# Explode
+	die2:
+		Start: 331
+		Length: 8
+		Tick: 80
+	# Fly and explode in air
+	die3:
+		Start: 307
+		Length: 17
+		Tick: 80
+	# Fly through air squish on ground
+	die4:
+		Start: 331
+		Length: 8
+		Tick: 80
+	# Burn
+	die5:
+		Start: 331
+		Length: 8
+		Tick: 80
+	# Tib
+	die6:
+		Start: 331
+		Length: 8
+		Tick: 80
+	# Electro
+	die7: ##########
+		Filename: electro.shp
+		Length: *
+		Scale: 1
+	die-crushed:
+		Filename: e1rot.shp
+		Start: 16
+		Length: 4
+		Tick: 1600
+		ZOffset: -511
+		Scale: 1
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		Scale: 1
+	icon:
+		Filename: japan_promotion_exorcist_icon.shp
+
+japan_igomediumtank:
+	Defaults:
+		Filename: japan_igomediumtank_type89igo.shp
+	idle:
+		Facings: 64
+		Offset: 0, 5
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0, 5
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: japan_igomediumtank_icon.shp
+
+japan_chihaheavytank:
+	Defaults:
+		Scale: 1.2
+	idle:
+		Filename: japan_promotion_heavychihaheavytank_chihachass.shp
+		Facings: 64
+	turret:
+		Filename: japan_promotion_heavychihaheavytank_chihaturret.shp
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: japan_promotion_heavychihaheavytank_icon.shp
+
+japan_shrineminitank:
+	Defaults:
+		Filename: japan_promotion_shrinetank_minitank.png
+		Offset: 0, -8
+	idle:
+		Facings: 64
+	turret:
+		Start: 64
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: japan_promotion_shrinetank_icon.png
+		Offset: 0, 0
+
+japan_waveforcetank:
+	Defaults:
+		Filename: japan_waveforcetank.shp
+		Offset: 0,8
+	idle:
+		Facings: 64
+	turret:
+		Start: 64
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: japan_waveforcetank_icon.png
+		Offset: 0,0
+
+japan_rocketangel:
+	Defaults:
+		Filename: japan_promotion_rocketangel.shp
+		Scale: 0.8
+		Tick: 200
+		Offset: 0, 0, 16
+	stand:
+		Facings: 8
+	run:
+		Start: 70
+		Length: 10
+		Facings: 8
+		Tick: 200
+	idle:
+		Start: 8
+		Length: 31
+	idle1:
+		Start: 8
+		Length: 31
+	idle2:
+		Start: 39
+		Length: 31
+	prone-run:
+		Start: 86
+		Length: 6
+		Facings: 8
+	prone-stand:
+		Facings: 8
+	flying:
+		Start: 150
+		Length: 10
+		Facings: 8
+	die1: # TODO: animation for falling from sky starts at 436
+		Start: 470
+		Length: 20
+		Tick: 50
+	die-falling:
+		Start: 470
+		Length: 20
+		Tick: 40
+	die2: # TODO: animation for falling from sky starts at 436
+		Start: 470
+		Length: 20
+		Tick: 50
+	die3: # TODO: animation for falling from sky starts at 436
+		Start: 470
+		Length: 20
+		Tick: 50
+	die4: # TODO: animation for falling from sky starts at 436
+		Start: 470
+		Length: 20
+		Tick: 50
+	attack:
+		Start: 230
+		Length: 6
+		Facings: 8
+	flying-attack:
+		Start: 350
+		Facings: 8
+		Length: 15
+		Tick: 100
+	prone-attack:
+		Start: 212
+		Length: 6
+		Facings: 8
+	standup:
+		Start: 260
+		Length: 2
+		Facings: 8
+	cheer:
+		Facings: 8
+	# Burn
+	die5:
+		Filename: e1.shp
+		Scale: 1
+		Start: 324
+		Length: 18
+		Tick: 80
+	# Tib
+	die6:
+		Filename: e1.shp
+		Scale: 1
+		Start: 324
+		Length: 18
+		Tick: 80
+	die7:
+		Filename: electro.shp
+		Scale: 1
+		Length: *
+	die-crushed:
+		Filename: corpse1.shp
+		Scale: 1
+		Length: 6
+		Tick: 1600
+		ZOffset: -511
+	garrison-muzzle:
+		Filename: minigun.shp
+		Scale: 1
+		Length: 3
+		Stride: 6
+		Facings: 8
+	# Fly through air squish on ground
+	icon:
+		Offset: 0,0
+		Filename: japan_promotion_rocketangel_icon.png
+
+bushidodisciplineicon:
+	icon:
+		Filename: japan_upgrade_bushidodiscipline_icon.png
+
+waveforcebulletsicon:
+	icon:
+		Filename: japan_upgrade_waveforcebullets_icon.png
+
+divinewindprotocol:
+	icon:
+		Filename: japan_upgrade_divinewindprotocol_icon.png
+
+stealthsuitintegrationicon:
+	icon:
+		Filename: japan_upgrade_stealthsuitintegration_icon.png
+
+energizedarrowsicon:
+	icon:
+		Filename: japan_upgrade_energizedarrows_icon.png
+
+advancedplasmaweaponsicon:
+	icon:
+		Filename: japan_upgrade_advancedplasmaweapons_icon.png
+
+superiorwarenginesicon:
+	icon:
+		Filename: japan_upgrade_superiorwarengines_icon.png

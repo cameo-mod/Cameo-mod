@@ -1,0 +1,129 @@
+﻿^Conscription:
+	ProductionCostMultiplier@ra1_soviets_doctrine_conscription:
+		Prerequisites: ra1_soviets_doctrine_conscription
+		Multiplier: 75
+	ProductionTimeMultiplier@ra1_soviets_doctrine_conscription:
+		Prerequisites: ra1_soviets_doctrine_conscription
+		Multiplier: 75
+	FirepowerMultiplier@ra1_soviets_doctrine_conscription:
+		RequiresCondition: ra1_soviets_doctrine_conscription
+		Modifier: 110
+	DamageMultiplier@ra1_soviets_doctrine_conscription:
+		RequiresCondition: ra1_soviets_doctrine_conscription
+		Modifier: 90
+	GrantConditionOnPrerequisite@ra1_soviets_doctrine_conscription:
+		Condition: ra1_soviets_doctrine_conscription
+		Prerequisites: ra1_soviets_doctrine_conscription
+	ActorStatValues:
+		Upgrades: ra1_soviets_doctrine_conscription
+
+^ExperimentalTeslaWeaponry:
+	FirepowerMultiplier@ra1_soviets_doctrine_teslaandexperimentaltech:
+		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech
+		Modifier: 150
+	GrantConditionOnPrerequisite@ra1_soviets_doctrine_teslaandexperimentaltech:
+		Condition: ra1_soviets_doctrine_teslaandexperimentaltech
+		Prerequisites: ra1_soviets_doctrine_teslaandexperimentaltech
+	ActorStatValues:
+		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltech
+
+^TeslaExperimentalTechDoctrineRA1:
+	GrantConditionOnPrerequisite@ra1_soviets_doctrine_teslaandexperimentaltech:
+		Condition: ra1_soviets_doctrine_teslaandexperimentaltech
+		Prerequisites: ra1_soviets_doctrine_teslaandexperimentaltech
+	ActorStatValues:
+		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltech
+
+^NuclearWarDoctrineRA1:
+	FirepowerMultiplier@ra1_soviets_doctrine_nuclearwar:
+		RequiresCondition: ra1_soviets_doctrine_nuclearwar
+		Modifier: 110
+	SpeedMultiplier@ra1_soviets_doctrine_nuclearwar:
+		RequiresCondition: ra1_soviets_doctrine_nuclearwar
+		Modifier: 110
+	GrantConditionOnPrerequisite@ra1_soviets_doctrine_nuclearwar:
+		Condition: ra1_soviets_doctrine_nuclearwar
+		Prerequisites: ra1_soviets_doctrine_nuclearwar
+	ActorStatValues:
+		Upgrades: ra1_soviets_doctrine_nuclearwar
+
+####################################################################################################
+#		Upgrades Soviets
+####################################################################################################
+
+^IncendiaryBulletsUpgradeRA1:
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_incendiarybullets:
+		Condition: ra1_soviets_upgrade_incendiarybullets
+		Prerequisites: ra1_soviets_upgrade_incendiarybullets
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_incendiarybullets
+
+^ScorchedEarthTeamUpgradeRA1:
+	FirepowerMultiplier@ra1_soviets_upgrade_scorchedearth:
+		RequiresCondition: ra1_soviets_upgrade_scorchedearth
+		Modifier: 125
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_scorchedearth:
+		Condition: ra1_soviets_upgrade_scorchedearth
+		Prerequisites: ra1_soviets_upgrade_scorchedearth
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_scorchedearth
+
+#############################
+
+^TeslaArcingUpgradeRA1:
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_teslaarcing:
+		Condition: ra1_soviets_upgrade_teslaarcing
+		Prerequisites: ra1_soviets_upgrade_teslaarcing
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_teslaarcing
+
+^TeslaRocketsUpgradeRA1:
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_teslarockets:
+		Condition: ra1_soviets_upgrade_teslarockets
+		Prerequisites: ra1_soviets_upgrade_teslarockets
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_teslarockets
+
+^ReactorOverloadTeamUpgradeRA1:
+	PowerMultiplier@ra1_soviets_upgrade_reactoroverload:
+		RequiresCondition: ra1_soviets_upgrade_reactoroverload
+		Modifier: 200
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_reactoroverload:
+		Condition: ra1_soviets_upgrade_reactoroverload
+		Prerequisites: ra1_soviets_upgrade_reactoroverload
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_reactoroverload
+
+#############################
+
+^AutoloadersUpgradeRA1:
+	ReloadDelayMultiplier@ra1_soviets_upgrade_autoloaders:
+		RequiresCondition: ra1_soviets_upgrade_autoloaders
+		Modifier: 60
+	ReloadAmmoDelayMultiplier@ra1_soviets_upgrade_autoloaders:
+		RequiresCondition: ra1_soviets_upgrade_autoloaders
+		Modifier: 60
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_autoloaders:
+		Condition: ra1_soviets_upgrade_autoloaders
+		Prerequisites: ra1_soviets_upgrade_autoloaders
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_autoloaders
+
+^NuclearRocketsUpgradeRA1:
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_thermonuclearrockets:
+		Condition: ra1_soviets_upgrade_thermonuclearrockets
+		Prerequisites: ra1_soviets_upgrade_thermonuclearrockets
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_thermonuclearrockets
+
+^NuclearShellsTeamUpgradeRA1:
+	FirepowerMultiplier@ra1_soviets_upgrade_nucleartankshells:
+		RequiresCondition: ra1_soviets_upgrade_nucleartankshells
+		Modifier: 120
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_nucleartankshells:
+		Condition: ra1_soviets_upgrade_nucleartankshells
+		Prerequisites: ra1_soviets_upgrade_nucleartankshells
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_nucleartankshells
+
+#############################

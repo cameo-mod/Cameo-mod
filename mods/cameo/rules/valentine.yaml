@@ -240,7 +240,7 @@ valentines_mcv:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 250
-		Prerequisites: valentine_church_workshop, ~techlevel.medium
+		Prerequisites: valentine_church_workshop
 		BuildDuration: 750
 		BuildDurationModifier: 100
 		Description: Deploys into another Valentine Base.\n  Unarmed
@@ -278,7 +278,7 @@ valentines_mcv_bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: valentine_church_workshop, ~techlevel.medium, ~botplayer, allowsValMCV
+		Prerequisites: valentine_church_workshop, ~botplayer, allowsValMCV
 
 valentine_chocolate_refinery:
 	Inherits: ^BaseBuilding
@@ -592,7 +592,7 @@ valentine_airfield:
 		ExitCell: 3,0
 		ExitDelay: 3
 	RallyPoint:
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: AirUpgrades.Valentines
 	Production@NORMAL:
 		Produces: Vehicle
@@ -634,7 +634,7 @@ valentine_cupido_house:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: valentine_church_workshop, ~techlevel.high, !satanclawzhouse
+		Prerequisites: valentine_church_workshop, !satanclawzhouse
 		Queue: Building, RABuilding
 		Description: House of Cupido himself.
 		IconPalette: ra2
@@ -754,8 +754,8 @@ valentines_sc2kmarina:
 	Tooltip:
 		Name: Valentines Marina
 	Buildable:
-		BuildPaletteOrder: 57
 		Prerequisites:
+		BuildPaletteOrder: 57
 		Queue: Building, RABuilding
 		Description: Produces, and\nrepairs boats
 	Building:
@@ -844,9 +844,9 @@ valentines_netflix_n_chill:
 	ProvidesPrerequisite:
 		Prerequisite:
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 110
 		Queue: Defence, RADefence
-		Prerequisites:
 		Description: Provides passive income
 		BuildDuration: 1000
 		BuildDurationModifier: 100
@@ -983,9 +983,9 @@ valentines_silo:
 	ProvidesPrerequisite:
 		Prerequisite:
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 110
 		Queue: Defence, RADefence
-		Prerequisites:
 		Description: Provides lots of storage
 		BuildDurationModifier: 100
 	Building:
@@ -1018,8 +1018,8 @@ VAL_PBOX:
 	Tooltip:
 		Name: Sweet Hearts
 	Buildable:
-		BuildPaletteOrder: 5
 		Prerequisites:
+		BuildPaletteOrder: 5
 		Queue: Defence, RADefence
 		BuildDuration: 500
 		BuildDurationModifier: 100
@@ -1069,8 +1069,8 @@ VAL_AGUN:
 	Tooltip:
 		Name: Plan B
 	Buildable:
-		BuildPaletteOrder: 5
 		Prerequisites:
+		BuildPaletteOrder: 5
 		Queue: Defence, RADefence
 		BuildDuration: 750
 		BuildDurationModifier: 100
@@ -1115,14 +1115,14 @@ valentine_tower_ballista:
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 2000
 	Tooltip:
 		Name: Ballista Tower
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: valentine_chocolate_refinery, ~techlevel.medium
+		Prerequisites: valentine_chocolate_refinery
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Tanks
 		BuildDuration: 1000
@@ -1130,8 +1130,7 @@ valentine_tower_ballista:
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 938, 2048, 0, -512
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 75000
@@ -1148,7 +1147,7 @@ valentine_tower_ballista:
 	Armament:
 		Weapon: LovebowFireB
 	Armament@AA:
-		Weapon: LovebowFireAAB
+		Weapon: LovebowFireAAB_AA
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
@@ -1168,14 +1167,14 @@ valentine_tower_double:
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 3000
 	Tooltip:
 		Name: Double Lovelaser Tower
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: valentine_airfield, ~techlevel.medium
+		Prerequisites: valentine_airfield
 		Queue: Defence, RADefence
 		Description: Powerful Ground Defense.\n Strong vs everything.
 		BuildDuration: 1250
@@ -1183,8 +1182,7 @@ valentine_tower_double:
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 938, 2048, 0, -512
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 50000
@@ -1215,11 +1213,11 @@ valentine_tower_double:
 
 
 valentine_e7:
-	Inherits: E7
+	Inherits: ra1_allies_tanya
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: valentine_church_workshop, ~techlevel.high
+		Prerequisites: valentine_church_workshop
 		BuildLimit: 1
 		BuildDuration: 500
 		BuildDurationModifier: 100
@@ -1250,11 +1248,11 @@ valentine_e7:
 		EmptyWeapon: GLTerroristExplosive2
 
 valentine_ra2tany:
-	Inherits: RA2TANY
+	Inherits: ra2_allies_tanyaii
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: valentine_church_workshop, ~techlevel.high
+		Prerequisites: valentine_church_workshop
 		BuildLimit: 1
 		BuildDuration: 1000
 		BuildDurationModifier: 100
@@ -1305,7 +1303,7 @@ valentine_chlotus:
 		BuildPaletteOrder: 70
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: valentine_church_workshop, ~techlevel.high
+		Prerequisites: valentine_church_workshop
 		Queue: Infantry, RAInfantry
 		Description: Elite waifu.\n Can take control of buildings\n Can disable vehicles
 	Power:
@@ -1352,7 +1350,7 @@ valentine_315amanda:
 		BuildPaletteOrder: 120
 		BuildDuration: 3000
 		BuildDurationModifier: 100
-		Prerequisites: valentine_church_workshop, ~techlevel.high
+		Prerequisites: valentine_church_workshop
 		BuildLimit: 1
 	Mobile:
 		Speed: 100
@@ -1528,7 +1526,7 @@ loveballista:
 	RevealsShroud:
 		Range: 7c0
 	Armament:
-		Weapon: LovebowFireAAB
+		Weapon: LovebowFireAAB_AA
 		LocalOffset: -128, -170, 170, -128, 170, 170
 		LocalYaw: 100, -100
 	Armament@AA:
@@ -1567,7 +1565,7 @@ valovecraft:
 		BuildPaletteOrder: 50
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: valentine_airfield, ~techlevel.high
+		Prerequisites: valentine_airfield
 		Description: Aircraft that shoots powerful love arrows.\n
 	Valued:
 		Cost: 1500
@@ -1593,7 +1591,7 @@ valovecraft:
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
 	Armament@AA:
-		Weapon: LovebowFireAAB
+		Weapon: LovebowFireAAB_AA
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
@@ -1618,8 +1616,7 @@ valovecraft:
 		AmmoCondition: ammo
 		ReloadCount: 1
 	Selectable:
-		Bounds: 1536, 1194, 0, 85
-		DecorationBounds: 1706, 1237, 0, 42
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -1700,7 +1697,7 @@ loveletter:
 		BuildPaletteOrder: 50
 		BuildDurationModifier: 100
 		BuildDuration: 750
-		Prerequisites: valentine_airfield, ~techlevel.high
+		Prerequisites: valentine_airfield
 		Description: Letter from a loved one.\nWhat might be in it?\nBetter open it fast!
 	Tooltip:
 		Name: Love Letter
@@ -1742,7 +1739,7 @@ giantcupido:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: valentine_airfield, ~techlevel.high
+		Prerequisites: valentine_airfield
 		Description: Cupid himself. Don't mess with this one!
 		BuildDuration: 3000
 		BuildDurationModifier: 100
@@ -1771,7 +1768,7 @@ giantcupido:
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
 	Armament@AA:
-		Weapon: CupidoAK47AA
+		Weapon: CupidoAK47_AA
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
@@ -1794,8 +1791,7 @@ giantcupido:
 		AmmoCondition: ammo
 		ReloadCount: 1
 	Selectable:
-		Bounds: 1536, 1194, 0, 85
-		DecorationBounds: 1706, 1237, 0, 42
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -1882,7 +1878,7 @@ giantcupido.Husk:
 		EmptyWeapon: GLAnthraxLarge
 
 cute_kirov:
-	Inherits: RA2ZEP
+	Inherits: ra2_soviets_kirovairship
 	Tooltip:
 		Name: Cute Kirov
 	Health:
@@ -1901,11 +1897,10 @@ cute_kirov:
 	WithSpriteControlGroupDecoration:
 	Selectable:
 		Bounds: 8192, 8192
-		DecorationBounds: 8192, 8192
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: valentine_airfield, ~techlevel.high
+		Prerequisites: valentine_airfield
 		Description: From Russia with love!
 		BuildDuration: 4500
 		BuildDurationModifier: 100
@@ -1920,7 +1915,7 @@ cute_kirov:
 		LocalOffset: 0,0,0
 		RequiresCondition: !rank-elite
 	Armament@PRIMARYELITE:
-		Weapon: CuteKirovBombElite
+		Weapon: CuteKirovBomb_elite
 		LocalOffset: 0,0,0
 		RequiresCondition: rank-elite
 	ChangesHealth:
@@ -1951,7 +1946,7 @@ lovealienmob:
 		BuildPaletteOrder: 30
 		Queue: Infantry, RAInfantry
 		Description: Some would argue that to be a furry, \nyou must think and talk like one. \nEven if you go to conventions, wear a fursuit, \ndraw the art, writes the stories etc but don't talk \nusing furry lingo, you're not a furry.
-		Prerequisites: valentine_airfield, ~techlevel.medium
+		Prerequisites: valentine_airfield
 		BuildDuration: 750
 		BuildDurationModifier: 100
 		BuildLimit: 1
@@ -2011,7 +2006,7 @@ lovealienmob:
 		StartIfBelow: 100
 		DamageCooldown: 33
 
-^default.alien_mob:
+^DefaultAlienMob:
 	Inherits: E1
 	Inherits@MC: ^MCImmune
 	Inherits@vo: ^AttackFrontalVoice
@@ -2057,7 +2052,7 @@ lovealienmob:
 		DamageCooldown: 33
 
 svsmalien1:
-	Inherits: ^default.alien_mob
+	Inherits: ^DefaultAlienMob
 	AttackFrontal:
 		FacingTolerance: 0
 	Explodes:
@@ -2065,7 +2060,7 @@ svsmalien1:
 		EmptyWeapon: GLAnthraxGreen
 
 svsmalien2:
-	Inherits: ^default.alien_mob
+	Inherits: ^DefaultAlienMob
 	AttackFrontal:
 		FacingTolerance: 0
 	RenderSprites:
@@ -2075,7 +2070,7 @@ svsmalien2:
 		EmptyWeapon: GLAnthraxBlue
 
 svsmalien3:
-	Inherits: ^default.alien_mob
+	Inherits: ^DefaultAlienMob
 	AttackFrontal:
 		FacingTolerance: 0
 	RenderSprites:
@@ -2085,7 +2080,7 @@ svsmalien3:
 		EmptyWeapon: GLAnthraxPurple
 
 svsmalien4:
-	Inherits: ^default.alien_mob
+	Inherits: ^DefaultAlienMob
 	AttackFrontal:
 		FacingTolerance: 0
 	RenderSprites:
@@ -2095,7 +2090,7 @@ svsmalien4:
 		EmptyWeapon: GLAnthraxLarge
 
 svsmalien5:
-	Inherits: ^default.alien_mob
+	Inherits: ^DefaultAlienMob
 	AttackFrontal:
 		FacingTolerance: 0
 	RenderSprites:
@@ -2105,7 +2100,7 @@ svsmalien5:
 		EmptyWeapon: GLAnthraxBlueLarge
 
 svsmalien6:
-	Inherits: ^default.alien_mob
+	Inherits: ^DefaultAlienMob
 	AttackFrontal:
 		FacingTolerance: 0
 	RenderSprites:
@@ -2235,7 +2230,6 @@ mod4tnkgirl:
 		Speed: 55
 		Locomotor: heavytracked
 	Passenger:
-		Weight: 5
 	RevealsShroud:
 		Range: 6c0
 	Turreted:
@@ -2287,7 +2281,7 @@ valentine_mod4tnkgirl:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: valentine_church_workshop, ~techlevel.high
+		Prerequisites: valentine_church_workshop
 		Description: Mammoth Tank Girl fights "the Patriarchy" \nand those that body-shame sexy tanks like her
 		BuildDuration: 1500
 		BuildDurationModifier: 100
@@ -2321,7 +2315,6 @@ valentines_teletubby_po:
 		TargetableOffsets: 500,250,0
 	Selectable:
 		Bounds: 2133, 3200
-		DecorationBounds: 2133, 3200
 	Valued:
 		Cost: 10000
 	Tooltip:
@@ -2403,7 +2396,7 @@ valentines_white_knight:
 		Name: White Knight
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: valentine_church_workshop, ~techlevel.high
+		Prerequisites: valentine_church_workshop
 		Queue: Infantry, RAInfantry, Vehicle, RAVehicle
 		Description: A person with low self esteem who combats this \nwith a unwavering need to aid others \nwho may or may not need it
 		BuildLimit: 1
@@ -2454,7 +2447,7 @@ valentines_giga_chad:
 		Name: Giga Chad
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: valentine_church_workshop, ~techlevel.high
+		Prerequisites: valentine_church_workshop
 		Queue: Infantry.Valentines, RAInfantry.Valentines
 		Description: Jeezus cwrist!
 		BuildLimit: 1
@@ -2502,7 +2495,7 @@ valentines_giga_chad:
 
 
 valentines_dd:
-	Inherits: DD
+	Inherits: ra1_allies_destroyer
 	Tooltip:
 		Name: Heart Destroyer
 	Valued:
@@ -2538,7 +2531,7 @@ valentines_dd:
 		LocalYaw: 64, -64
 		PauseOnCondition: !ammo
 	Armament@AA:
-		Weapon: CupidoAK47AA
+		Weapon: CupidoAK47_AA
 		LocalOffset: 0,-100,0, 0,100,0
 		LocalYaw: 64, -64
 		PauseOnCondition: !ammo
@@ -2566,7 +2559,7 @@ valentines_dd:
 		RequiresSelection: true
 
 valentines_ca:
-	Inherits: CA
+	Inherits: ra1_allies_cruiser
 	Tooltip:
 		Name: Breakup Cruiser
 	Valued:
@@ -2643,7 +2636,7 @@ valentines_ca:
 		Amount: -50
 
 valentines_pt:
-	Inherits: PT
+	Inherits: ra1_allies_gunboat
 	Tooltip:
 		Name: Lovelaser Corvette
 	Valued:
@@ -2682,7 +2675,7 @@ valentines_pt:
 		Amount: -25
 
 valentines_lst:
-	Inherits: RALST
+	Inherits: ra1_navaltransport
 	Tooltip:
 		Name: Valentines Transport
 	Buildable:
@@ -2701,8 +2694,8 @@ valentines_swan:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EXT: ^ExternalConditions
 	Buildable:
-		BuildPaletteOrder: 4
 		Prerequisites:
+		BuildPaletteOrder: 4
 		Queue: Naval, RANaval
 		Description: Swan filled with explosives.
 		BuildDuration: 1250

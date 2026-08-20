@@ -1,0 +1,388 @@
+ra2_soviets_constructionyard:
+	Inherits: ^RA2Building
+	Inherits@conyard: ^Conyard
+	Inherits@shape: ^4x3Shape
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Tooltip:
+		Name: Soviet Construction Yard
+	Building:
+		Footprint: xxxx xxxx xxxx
+		Dimensions: 4,3
+	Transforms:
+		IntoActor: ra2_soviets_mobileconstructionvehicle
+		Offset: 1,1
+		Facing: 432
+	WithIdleOverlay@top:
+		Sequence: idle-top
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@normal:
+		Sequence: idle-normal
+		RequiresCondition: !build-incomplete
+	WithBuildingPlacedOverlay:
+		Sequence: build
+	Exit@1:
+		SpawnOffset: 213,-128,0
+		ExitCell: 1,2
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+	ProvidesPrerequisite@ra2oilderrick:
+		Prerequisite: ra2oilderrick
+	ProvidesPrerequisite@ra2swall:
+		Prerequisite: ra2swall
+	Targetable@TechStealerInfiltrate:
+		TargetTypes: TechStealerInfiltrate
+	InfiltrateForSupportPower:
+		Proxy: ra2nacnst.infiltrated
+		Types: TechStealerInfiltrate
+
+ra2_soviets_warfactory:
+	Inherits: ^RA2DefaultWeap
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Tooltip:
+		Name: Soviet War Factory
+	Buildable:
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_orerefinery
+		Description: Produces vehicles.
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@bib:
+		Sequence: bib
+
+ra2_soviets_teslareactor:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Tesla Reactor
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Building, RABuilding
+		Description: template_power.description
+		Prerequisites: ~ra2_soviets_constructionyard
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Health:
+		HP: 150000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: 200
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience:
+		ValidTypes: building
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete
+	ProvidesPrerequisite@buildingname:
+
+ra2_soviets_nuclearreactor:
+	Inherits: ^RA2Building
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Inherits@FS: ^AIForceShield
+	Inherits@shape: ^3x3Shape
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Nuclear Reactor
+	Buildable:
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_battlelab
+		BuildPaletteOrder: 200
+		Queue: Building, RABuilding
+		Description: actor_nanrct.description
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+	Health:
+		HP: 400000
+	Armor:
+		Type: Concrete
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: 2000
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience:
+		ValidTypes: building
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete
+	SoundOnDamageTransition:
+		DestroyedSounds: bpowdiea.wav, bpowdieb.wav
+	FireWarheadsOnDeath@1:
+		Weapon: ReactorNuke
+		RequiresCondition: !chronobeamed
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: ra2_soviets_teslareactor
+
+ra2_soviets_barracks:
+	Inherits: ^RA2Building
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Selectable:
+		Bounds: 2048, 2560, 0, -256
+	SelectionDecorations:
+	Tooltip:
+		Name: Soviet Barracks
+	ProvidesPrerequisite:
+		Prerequisite: RA2Barracks
+	Buildable:
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_teslareactor
+		Queue: Building, RABuilding
+		Description: Trains infantry units.
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+		Path: 1,2
+	Exit@1:
+		SpawnOffset: 512,1024,0
+		ExitCell: 1,2
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+
+ra2_soviets_orerefinery:
+	Inherits: ^RA2Building
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Inherits@ref: ^Refinery
+	Inherits@shape: ^4x3Shape
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Soviet Ore Refinery
+	Buildable:
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_teslareactor
+		Description: Processes ore into credits.
+	Building:
+		Footprint: xxx= xxx= xxx=
+		Dimensions: 4,3
+	Refinery:
+	DockHost:
+		Type: Unload
+		DockAngle: 640
+		DockOffset: 1086,1086,0
+	DrawLineToTarget:
+	FreeActor:
+		Actor: ra2_soviets_warminer
+		SpawnOffset: 2,2
+		Facing: 256
+	SelectionDecorations:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2_soviets_radar:
+	Inherits: ^RA2Building
+	Inherits@shape: ^2x2Shape
+	Inherits@radar: ^RadarBuilding
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Selectable:
+		Bounds: 2048, 2560, 0, -256
+	SelectionDecorations:
+	Tooltip:
+		Name: Soviet Radar
+	Buildable:
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_orerefinery
+		Description: Provides radar coverage of the battlefield.
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	WithSpriteBody:
+		PauseOnCondition: lowpower
+	WithIdleOverlay@dish:
+		Sequence: idle-dish
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+	AirstrikePower@spyplane:
+		PauseOnCondition: disabled
+		OrderName: SovietRA2SpyPlane
+		Prerequisites:
+			1: !RA2Psicorps, ~!RA2DOOM
+		IconImage: yrspyp
+		Icons:
+			1: icon
+		ChargeInterval: 4500
+		Names:
+			1: power_ra2spyplane.name
+		Descriptions:
+			1: power_ra2spyplane.description
+		SelectTargetSpeechNotification: SelectTarget
+		EndChargeSpeechNotification: SpyPlaneReady
+		InsufficientPowerSpeechNotification: InsufficientPower
+		UnitTypes:
+			1: yrspyp
+		SquadSizes:
+			1: 1
+		QuantizedFacings: 8
+		DisplayBeacon: true
+		BeaconPosters:
+			1: racamicon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		SupportPowerPaletteOrder: 10
+	SupportPowerChargeBar:
+
+ra2_soviets_servicedepot:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	HitShape:
+		TargetableOffsets: 840,0,0, 598,-640,0, 598,640,0, -1060,0,0, -768,-640,0, -768,640,0
+		Type: Polygon
+			Points: -1536,-256, -341,-940, 341,-940, 1536,-256, 1536,341, 341,1110, -341,1110, -1536,341
+	Tooltip:
+		Name: Soviet Service Depot
+	Buildable:
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_warfactory
+		Description: Repairs nearby vehicles.
+	Building:
+		Footprint: Xx_ === _=_
+		Dimensions: 3,3
+	SelectionDecorations:
+	Reservable:
+	RallyPoint:
+	WithIdleOverlay@normal:
+		Sequence: idle-normal
+	WithIdleOverlay@bib:
+		Sequence: bib
+	WithResupplyAnimation:
+		Sequence: repair
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+
+ra2_soviets_battlelab:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Buildable:
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_radar
+		Description: Unlocks advanced technology.
+	Tooltip:
+		Name: Soviet Battle Lab
+	ProvidesPrerequisite:
+		Prerequisite: ra2tek
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+	ParatroopersPower@ra2paratroopers:
+		OrderName: Allies2Paratroopers
+		IconImage: ra2_allies_airforcecommandhq
+		Icons:
+			1: icon2
+		ChargeInterval: 4500
+		Names:
+			1: Airborne
+		Descriptions:
+			1: power_paratroopers.description
+		DropItems:
+			1: ra2_soviets_conscript,ra2_soviets_flaktrooper,ra2_soviets_conscript,ra2_soviets_flaktrooper,ra2_soviets_conscript,ra2_soviets_flaktrooper,ra2_soviets_conscript,ra2_soviets_flaktrooper,ra2_soviets_conscript,ra2_soviets_flaktrooper,ra2_soviets_conscript,ra2_soviets_flaktrooper,ra2_soviets_conscript,ra2_soviets_flaktrooper,ra2_soviets_conscript,ra2_soviets_flaktrooper
+		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
+		SelectTargetSpeechNotification: SelectTarget
+		IncomingSpeechNotification: EnemyUnitsApproaching
+		AllowImpassableCells: false
+		QuantizedFacings: 8
+		CameraActor: camera.paradrop
+		DisplayBeacon: true
+		BeaconPosters:
+			1: pinficon
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		UnitTypes:
+			1: ra2cplanesov
+		#UseDirectionalTarget: True
+		SquadSizes:
+			1: 3
+		Prerequisites:
+			1:
+		DirectionArrowAnimation: airstrikedirection
+
+ra2_soviets_airfield:
+	Inherits: ^RA2Building
+	Inherits@shape: ^4x3Shape
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Inherits@hpad: ^IsAircraftFactory
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Soviet Airfield
+	Buildable:
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_radar
+		Queue: Building, RABuilding
+		Description: Produces aircraft.
+	Building:
+		Footprint: =xxx xxxx xxx=
+		Dimensions: 4,3
+	Health:
+		HP: 250000
+	Armor:
+		Type: Wood
+	Exit@1:
+		ExitCell: 1,1
+		Facing: 384
+	Reservable:
+	RevealsShroud:
+		Range: 7c0
+	Power:
+		Amount: -30
+	WithIdleOverlay@top:
+		Sequence: idle-top
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@bottom:
+		Sequence: idle-bottom
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+	ProvidesPrerequisite@buildingname:
+
+ra2_soviets_industrialplant:
+	Inherits: ^RA2Building
+	Inherits@shape: ^4x3Shape
+	Inherits@sell: ^RA2SSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@2: ^LargeCashTricklerWithExperience
+	Inherits@3: ^CashTricklerLimited
+	HitShape:
+		TargetableOffsets: 630,299,0
+	Tooltip:
+		Name: Industrial Plant
+	Buildable:
+		BuildPaletteOrder: 200
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_battlelab
+		Queue: Building, RABuilding
+		BuildLimit: 1
+		Description: Reduces cost of vehicles by 25%.
+	Building:
+		Footprint: xxxx xxxx xxxx
+		Dimensions: 4,3
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@processing:
+		Sequence: idle-processing
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete

@@ -1,0 +1,255 @@
+^WC2HumanDefense:
+	Inherits: ^Defense
+	Inherits@2: ^WC2Building
+	-WithDeathAnimation:
+	AmbientSound:
+		SoundFiles: pswrkdon.aud
+	-AutoTarget:
+
+^WC2HumansUpgradeSwordStrength:
+	GrantConditionOnPrerequisite@WC2SwordUpg:
+		Condition: wc2sword_upg
+		Prerequisites: wc2_humans_upgrade_swordstrength
+	GrantConditionOnPrerequisite@WC2SwordUpg2:
+		Condition: wc2sword_upg2
+		Prerequisites: wc2_humans_upgrade_swordstrengthii
+	FirepowerMultiplier@WC2SwordUpg:
+		Modifier: 115
+		RequiresCondition: wc2sword_upg && !wc2sword_upg2
+	FirepowerMultiplier@WC2SwordUpg2:
+		Modifier: 135
+		RequiresCondition: wc2sword_upg2
+
+^WC2HumansUpgradeArmorStrength:
+	GrantConditionOnPrerequisite@WC2HShieldUpg:
+		Condition: wc2hshield_upg
+		Prerequisites: wc2_humans_upgrade_armorstrength
+	GrantConditionOnPrerequisite@WC2HShieldUpg2:
+		Condition: wc2hshield_upg2
+		Prerequisites: wc2_humans_upgrade_armorstrengthii
+	DamageMultiplier@WC2HShieldUpg:
+		Modifier: 90
+		RequiresCondition: wc2hshield_upg && !wc2hshield_upg2
+	DamageMultiplier@WC2HShieldUpg2:
+		Modifier: 80
+		RequiresCondition: wc2hshield_upg2
+
+^WC2HumansUpgradeArrowStrength:
+	GrantConditionOnPrerequisite@WC2ArrowUpg:
+		Condition: wc2arrow_upg
+		Prerequisites: wc2_humans_upgrade_arrowstrength
+	GrantConditionOnPrerequisite@WC2ArrowUpg2:
+		Condition: wc2arrow_upg2
+		Prerequisites: wc2_humans_upgrade_arrowstrengthii
+	FirepowerMultiplier@WC2ArrowUpg:
+		Modifier: 115
+		RequiresCondition: wc2arrow_upg && !wc2arrow_upg2
+	FirepowerMultiplier@WC2ArrowUpg2:
+		Modifier: 135
+		RequiresCondition: wc2arrow_upg2
+
+^WC2HumansUpgradeBallistaStrength:
+	GrantConditionOnPrerequisite@BallUpg:
+		Condition: ballista_upg
+		Prerequisites: wc2_humans_upgrade_ballistastrength
+	GrantConditionOnPrerequisite@BallUpg2:
+		Condition: ballista_upg2
+		Prerequisites: wc2_humans_upgrade_ballistastrengthii
+	FirepowerMultiplier@BallUpg:
+		Modifier: 115
+		RequiresCondition: ballista_upg && !ballista_upg2
+	FirepowerMultiplier@BallUpg2:
+		Modifier: 135
+		RequiresCondition: ballista_upg2
+
+^WC2HumansUpgradeRanger:
+	GrantConditionOnPrerequisite@RangerUpg:
+		Condition: ranger_upg
+		Prerequisites: wc2_humans_upgrade_ranger
+	DamageMultiplier@RangerUpg:
+		Modifier: 80
+		RequiresCondition: ranger_upg
+
+^WC2HumansUpgradeRangerLongbow:
+	GrantConditionOnPrerequisite@RLongBowUpg:
+		Condition: rangerlb_upg
+		Prerequisites: wc2_humans_upgrade_rangerlongbow
+	RangeMultiplier@RLongBowUpg:
+		Modifier: 120
+		RequiresCondition: rangerlb_upg
+
+^WC2HumansUpgradeRangerScouting:
+	GrantConditionOnPrerequisite@RScoutUpg:
+		Condition: rangersc_upg
+		Prerequisites: wc2_humans_upgrade_rangerscouting
+	RevealsShroudMultiplier@RScoutUpg:
+		Modifier: 120
+		RequiresCondition: rangersc_upg
+
+^WC2HumansUpgradeRangerMarksman:
+	GrantConditionOnPrerequisite@RMarksmanUpg:
+		Condition: rangermm_upg
+		Prerequisites: wc2_humans_upgrade_rangermarksman
+	FirepowerMultiplier@RMarksmanUpg:
+		Modifier: 125
+		RequiresCondition: rangermm_upg
+
+^WC2HumansUpgradePaladin:
+	GrantConditionOnPrerequisite@PalUpg:
+		Condition: paladin_upg
+		Prerequisites: wc2_humans_upgrade_paladin
+	DamageMultiplier@PalUpg:
+		Modifier: 90
+		RequiresCondition: paladin_upg
+	FirepowerMultiplier@PalUpg:
+		Modifier: 115
+		RequiresCondition: paladin_upg
+	SpeedMultiplier@PalUpg:
+		Modifier: 120
+		RequiresCondition: paladin_upg
+
+^WC2HumansPaladinHealing:
+	GrantConditionOnPrerequisite@PHealingUpg:
+		Condition: paladinhealing_upg
+		Prerequisites: wc2_humans_upgrade_healing
+
+^WC2HumansPaladinExorcism:
+	GrantConditionOnPrerequisite@PExorcismUpg:
+		Condition: paladinexorcism_upg
+		Prerequisites: wc2_humans_upgrade_exorcism
+
+^WC2HumansMageSlow:
+	GrantConditionOnPrerequisite@MSlowUpg:
+		Condition: mageslow_upg
+		Prerequisites: wc2_humans_upgrade_slow
+
+^WC2HumansMagePolymorph:
+	GrantConditionOnPrerequisite@MPolymorphUpg:
+		Condition: magepolymorph_upg
+		Prerequisites: wc2_humans_upgrade_polymorph
+
+^WC2HumansMageBlizzard:
+	GrantConditionOnPrerequisite@MBlizzardUpg:
+		Condition: mageblizzard_upg
+		Prerequisites: wc2_humans_upgrade_blizzard
+
+###############################################################
+# WC2 ORC INHERITABLES
+###############################################################
+
+^WC2KnightPaladinAttacksSpells:
+	# Only the knight upgraded to a paladin, or the separate paladin actor should be able to deploy.
+	GrantConditionOnDeploy@Clock:
+		RequiresCondition: paladin_upg
+	AttackFrontal:
+		Armaments: primary, holyvision, healing, exorcism
+		FacingTolerance: 0
+	AutoTargetPriority@DEFAULT:
+		RequiresCondition: !stance-attackanything && !assault-move && !FSD_cond_2
+	AutoTargetPriority@ATTACKANYTHING:
+		RequiresCondition: (stance-attackanything || assault-move) && !FSD_cond_2
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	Armament:
+		Weapon: wc2knightslice
+		FireDelay: 7
+		RequiresCondition: (FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)
+	Armament@HOLYVISION:
+		Name: holyvision
+		Weapon: wc2paladinholyvision
+		FireDelay: 7
+		RequiresCondition: FSD_cond_2
+		PauseOnCondition: mana < 70
+	Armament@HEAL:
+		Name: healing
+		Weapon: wc2paladinhealing
+		FireDelay: 7
+		TargetRelationships: Ally
+		RequiresCondition: FSD_cond_3 && paladinhealing_upg
+		PauseOnCondition: mana < 60
+	Armament@EXORCISM:
+		Name: exorcism
+		Weapon: wc2paladinexorcism
+		FireDelay: 7
+		RequiresCondition: FSD_cond_4 && paladinexorcism_upg
+		PauseOnCondition: mana < 40
+	# "Mana" (ammopool)
+	GrantConditionOnAttack@HOLYVISION:
+		Condition: cond_holyvision_drain
+		ArmamentNames: holyvision
+		MaximumInstances: 1
+		RevokeDelay: 2
+	GrantConditionOnAttack@HEALING:
+		Condition: cond_healing_drain
+		ArmamentNames: healing
+		MaximumInstances: 1
+		RevokeDelay: 2
+	GrantConditionOnAttack@EXORCISM:
+		Condition: cond_exorcism_drain
+		ArmamentNames: exorcism
+		MaximumInstances: 1
+		RevokeDelay: 2
+	AmmoPool:
+		Armaments: holyvision, healing, exorcism
+		Ammo: 255
+		AmmoCondition: mana
+	ReloadAmmoPoolCA@PassiveRegen:
+		Delay: 10
+		Count: 1
+		ShowSelectionBar: false
+	ReloadAmmoPoolCA@HolyVision:
+		Delay: 1
+		Count: -70
+		RequiresCondition: cond_holyvision_drain
+	ReloadAmmoPoolCA@Healing:
+		Delay: 1
+		Count: -60
+		RequiresCondition: cond_healing_drain
+	ReloadAmmoPoolCA@Exorcism:
+		Delay: 1
+		Count: -40
+		RequiresCondition: cond_exorcism_drain
+
+	### Visual indicator of mode for four state deploy ###
+	WithDecoration@Mode_Holy_Vision:
+		Sequence: holyvision_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_2
+	WithDecoration@Mode_Healing:
+		Sequence: healing_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_3 && paladinhealing_upg
+	WithDecoration@Mode_Healing_Locked:
+		Sequence: locked_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_3 && !paladinhealing_upg
+	WithDecoration@Mode_Exorcism:
+		Sequence: exorcism_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_4 && paladinexorcism_upg
+	WithDecoration@Mode_Exorcism_Locked:
+		Sequence: locked_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_4 && !paladinexorcism_upg
+
+	### Starting spell randomizer for AI.
+	GrantConditionOnBotOwner@wc2magebotcontrol:
+		Condition: wc2_cond_bot_owner
+		Bots: easiest, easy, medium, hard, brutal, challenger, unbeatable, cameogod, airforce, defenseai
+	GrantRandomCondition@wc2magebotcontrol:
+		Conditions: FSD_cond_1_AI, FSD_cond_1_AI, FSD_cond_1_AI, FSD_cond_1_AI, FSD_cond_1_AI, FSD_cond_1_AI, FSD_cond_2_AI, FSD_cond_3_AI, FSD_cond_3_AI, FSD_cond_4_AI
+	# FSD_Cond_1 is always granted at start due to the four state deploy.
+	GrantCondition@Cond2AI:
+		Condition: FSD_cond_2
+		RequiresCondition: wc2_cond_bot_owner && FSD_cond_2_AI
+	GrantCondition@Cond3AI:
+		Condition: FSD_cond_3
+		RequiresCondition: wc2_cond_bot_owner && FSD_cond_3_AI
+	GrantCondition@Cond4AI:
+		Condition: FSD_cond_4
+		RequiresCondition: wc2_cond_bot_owner && FSD_cond_4_AI
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 10

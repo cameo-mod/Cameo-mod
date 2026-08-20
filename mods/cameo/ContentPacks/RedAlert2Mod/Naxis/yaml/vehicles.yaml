@@ -1,0 +1,1490 @@
+corpse.nax:
+	Inherits: ^SpriteActor
+	RenderSprites:
+		Palette: ra2effect
+	Interactable:
+		Bounds: 768, 768, 0, -256
+	WithSpriteBody:
+	WithMakeAnimation:
+	WithDeathAnimation:
+		DeathSequencePalette: ra2effect
+		DeathPaletteIsPlayerPalette: false
+		UseDeathTypeSuffix: false
+		RequiresCondition: !revive
+	HiddenUnderFog:
+	OwnerLostAction:
+		Action: Kill
+	Mine:
+		CrushClasses: mine
+		DetonateClasses: mine
+		BlockFriendly: false
+	Health:
+		HP: 75000
+		NotifyAppliedDamage: false
+	Armor:
+		Type: Light
+	Tooltip:
+		Name: Corpse
+	Targetable:
+		TargetTypes: Ground, Mine
+	Mobile:
+		Speed: 1
+		Locomotor: foot
+		PauseOnCondition: dontmove
+	GrantCondition:
+		Condition: dontmove
+	KillsSelf:
+		Delay: 500
+		DamageTypes: ZombieRevive
+		GrantsCondition: revive
+	SpawnActorOnDeath@NaxiRevive:
+		Actor: undead.nax
+		Probability: 100
+		DeathType: ZombieRevive
+		SpawnAfterDefeat: false
+	Voiced:
+		VoiceSet: NaxiZombie
+	DeathSounds:
+		Voice: Move
+		DeathTypes: ZombieRevive
+	RejectsOrders:
+	HitShape:
+	MapEditorData:
+		Categories: System
+
+corpse_big.nax:
+	Inherits: corpse.nax
+	Health:
+		HP: 150000
+	SpawnActorOnDeath@NaxiRevive:
+		Actor: frank.nax
+
+naxis_halftrack:
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@cargo: ^CargoVehicle
+	Inherits@bot: ^BotAutoDeployTransport
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Halftrack
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory
+		Queue: Vehicle, RAVehicle
+		Description: actor_apc.description
+	Mobile:
+		Locomotor: lighttracked
+		Speed: 115
+		TurnSpeed: 46
+	Health:
+		HP: 115000
+	Repairable:
+		HpPerStep: 5750
+	ChangesHealth@SelfHealing:
+		Step: 46
+	Armor:
+		Type: Medium
+	Armament@AG:
+		Weapon: NaxiWW2Machinegun
+		LocalOffset: 300,10,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@AA:
+		Weapon: NaxiWW2Machinegun_AA
+		LocalOffset: 300,10,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	AttackFrontal:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 10
+		InitialUnits: naxis_naxiriflerecruit, naxis_naxiriflerecruit, naxis_naxiriflerecruit, naxis_naxiriflerecruit, naxis_naxiflamer, naxis_naxiflamer, naxis_sssoldier, naxis_sssoldier, naxis_naximercenarysniper, naxis_panzerschreck
+	ActorStatValues:
+		Upgrades: naxis_upgrade_massopticsintegration
+
+naxis_kubelwagen:
+	Inherits: ^Tank
+	Inherits@Template: ^AntiAirVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@cargo: ^CargoVehicle
+	Inherits@bot: ^BotAutoDeployTransport
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 850
+	Tooltip:
+		Name: Kübelwagen
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory
+		Queue: Vehicle, RAVehicle
+		Description: actor_nax_kubel.description
+	Mobile:
+		Locomotor: lighttracked
+		Speed: 115
+		TurnSpeed: 23
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@AG:
+		Weapon: NaxiWW2KübelwagenMachinegun
+		LocalOffset: 300,10,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	AttackTurreted:
+	Turreted:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+		InitialUnits: naxis_naxiriflerecruit, naxis_naxiriflerecruit, naxis_naxiriflesoldier, naxis_naxiriflesoldier, naxis_sssoldier
+	ActorStatValues:
+		Upgrades: naxis_upgrade_massopticsintegration
+
+wirbelwind.nax:
+	Inherits: ^Tank
+	Inherits@Template: ^AntiAirVehicleTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 1800
+	Tooltip:
+		Name: Wirbelwind
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory, naxis_radar
+		Queue: Vehicle, RAVehicle
+		Description: actor_nax_wirbelwind.description
+	Mobile:
+		Speed: 85
+		TurnSpeed: 17
+	Health:
+		HP: 87500
+	Repairable:
+		HpPerStep: 4375
+	ChangesHealth@SelfHealing:
+		Step: 35
+	Turreted:
+		TurnSpeed: 34 #3
+		Offset: -4,0,5
+	Armament:
+		Name: primary
+		Weapon: NaxQuadCannon
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: NaxQuadCannon_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@AA:
+		Name: primary
+		Weapon: NaxQuadCannon_AA
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@eliteAA:
+		Name: primary
+		Weapon: NaxQuadCannon_AA_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: NaxiFlakVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: naxis_upgrade_tankarsenalrenovation, naxis_upgrade_massopticsintegration
+
+naxis_naximobileconstructionvehicle:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@mcv: ^MCV
+	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	Tooltip:
+		Name: Naxi Mobile Construction Vehicle
+	Buildable:
+		Prerequisites: ~naxis_warfactory, naxis_naxpetrolplant, naxis_academy
+		Description: Deploys into a Construction Yard.\n  Unarmed
+	Transforms:
+		IntoActor: naxis_constructionyard
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: uplace.wav
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: NaxiMCVVoice
+	ProvidesPrerequisite@faction:
+		Prerequisite: mmnaxis
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: naxis_upgrade_tankarsenalrenovation
+
+tiger.nax:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Tiger Heavy Tank
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory, ~!naxis_promotion_generationiitanks
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Speed: 100
+		TurnSpeed: 20
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Turreted:
+		TurnSpeed: 20 #3
+		Offset: -4,0,5
+	Armament:
+		Name: primary
+		Weapon: NaxTigerCannon
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: NaxTigerCannon_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: naxis_upgrade_tankarsenalrenovation
+
+naxis_kingtigerheavytank:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: King Tiger Heavy Tank
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory, ~naxis_promotion_generationiitanks
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Speed: 100
+		TurnSpeed: 20
+	Health:
+		HP: 200000
+	Repairable:
+		HpPerStep: 10000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Turreted:
+		TurnSpeed: 20 #3
+		Offset: -4,0,5
+	Armament:
+		Name: primary
+		Weapon: KingNaxTigerCannon
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: KingNaxTigerCannon_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: naxis_upgrade_tankarsenalrenovation
+
+naxis_maus:
+	Inherits: ^Tank
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@Wunderwaffe: ^Wunderwaffe
+	Valued:
+		Cost: 4200
+	Tooltip:
+		Name: Maus
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, ~naxis_promotion_heavyvehicles
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Speed: 60
+		TurnSpeed: 12
+	Health:
+		HP: 600000
+	Repairable:
+		HpPerStep: 30000
+	ChangesHealth@SelfHealing:
+		Step: 240
+	Turreted:
+		TurnSpeed: 12 #3
+		Offset: -160,0,5
+	Armament:
+		Name: primary
+		Weapon: NaxMausCannon
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 1500,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: NaxMausCannon_elite
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 1500,0,300
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: NaxiBigTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: naxis_upgrade_wunderwaffe
+
+naxis_ratte:
+	Inherits: ^Tank
+	Inherits@GAINSEXPERIENCE: ^EpicVehicleTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@Wunderwaffe: ^Wunderwaffe
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 8000
+	Tooltip:
+		Name: Ratte
+	Buildable:
+		BuildPaletteOrder: 150
+		BuildLimit: 1
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, ~naxis_promotion_theratte
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Speed: 35
+		TurnSpeed: 7
+		Locomotor: heavytracked
+	Health:
+		HP: 2000000
+	Repairable:
+		HpPerStep: 100000
+	ChangesHealth@SelfHealing:
+		Step: 800
+	Turreted:
+		TurnSpeed: 7
+		Offset: 100,0,5
+	Armament:
+		Name: primary
+		Weapon: NaxRatteCannon
+		Recoil: 250
+		RecoilRecovery: 50
+		LocalOffset: 2000,250,500, 2000,-250,500
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: NaxRatteCannon_elite
+		Recoil: 250
+		RecoilRecovery: 50
+		LocalOffset: 2000,250,500, 2000,-250,500
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@AA1:
+		Name: secondary
+		Weapon: NaxQuadCannon_AA_elite
+		Recoil: 50
+		RecoilRecovery: 20
+		LocalOffset: 1024,400,80, 1024,-400,80
+	Armament@AA2:
+		Name: secondary
+		Weapon: NaxQuadCannon_AA_elite
+		Recoil: 50
+		RecoilRecovery: 20
+		LocalOffset: 1024,-400,80, 1024,400,80
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 2048, 2048, 0, -256
+		DecorationBounds: 2048, 2048, 0, -256
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: NaxiBigTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	Passenger:
+	ActorStatValues:
+		Upgrades: naxis_upgrade_wunderwaffe, naxis_upgrade_massopticsintegration
+
+naxis_grille:
+	Inherits: ^Tank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Grille
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory, naxis_radar, ~!naxis_promotion_generationiitanks
+		Queue: Vehicle, RAVehicle
+		Description: actor_nax_grille.description
+	Mobile:
+		Locomotor: lighttracked
+		Speed: 80
+		TurnSpeed: 16
+	Health:
+		HP: 40000
+	Repairable:
+		HpPerStep: 2000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Armament@AG:
+		Weapon: NaxGrilleArty
+		LocalOffset: -400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Weapon: NaxGrilleArty_elite
+		LocalOffset: -400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		Image: naxis_grille
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiArtyVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_tankarsenalrenovation, naxis_upgrade_massopticsintegration
+
+naxis_brummbar:
+	Inherits: ^Tank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 1100
+	Tooltip:
+		Name: Brummbär
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory, naxis_radar, ~naxis_promotion_generationiitanks
+		Queue: Vehicle, RAVehicle
+		Description: actor_nax_brummbar.description
+	Mobile:
+		Locomotor: lighttracked
+		Speed: 60
+		TurnSpeed: 12
+	Health:
+		HP: 90000
+	Repairable:
+		HpPerStep: 4500
+	ChangesHealth@SelfHealing:
+		Step: 36
+	Armament@AG:
+		Weapon: NaxBrummbarArty
+		LocalOffset: -400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Weapon: NaxBrummbarArty_elite
+		LocalOffset: -400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiArtyVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_tankarsenalrenovation, naxis_upgrade_massopticsintegration
+
+naxis_sturmtiger:
+	Inherits: ^Tank
+	Inherits@Template: ^DreadnoughtTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@Wunderwaffe: ^Wunderwaffe
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Sturm Tiger
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, ~naxis_promotion_heavyvehicles
+		Queue: Vehicle, RAVehicle
+		Description: actor_nax_sturmtiger.description
+	Mobile:
+		Locomotor: lighttracked
+		Speed: 30
+		TurnSpeed: 6
+	Health:
+		HP: 250000
+	Repairable:
+		HpPerStep: 2000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armament@AG:
+		Weapon: NaxSturmArty
+		LocalOffset: -400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	AttackFrontal:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiArtyVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_wunderwaffe, naxis_upgrade_massopticsintegration
+
+naxis_hetzer:
+	Inherits: ^Tank
+	Inherits@Template: ^TankDestroyerTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 1300
+	Tooltip:
+		Name: Hetzer
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory, naxis_radar, ~!naxis_promotion_generationiitanks
+		Queue: Vehicle, RAVehicle
+		Description: actor_nax_hetzer.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 75
+		TurnSpeed: 30
+	Health:
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@AG:
+		Weapon: NaxiHetzerDestroyer
+		LocalOffset: 300,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Weapon: NaxiHetzerDestroyer_elite
+		LocalOffset: 300,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_tankarsenalrenovation, naxis_upgrade_massopticsintegration
+
+naxis_jagdpanzer:
+	Inherits: ^Tank
+	Inherits@Template: ^TankDestroyerTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Jagdpanzer
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory, naxis_radar, ~naxis_promotion_generationiitanks
+		Queue: Vehicle, RAVehicle
+		Description: actor_nax_jagdpanzer.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 50
+		TurnSpeed: 20
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armament@AG:
+		Weapon: NaxiJadgDestroyer
+		LocalOffset: 400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Weapon: NaxiJadgDestroyer_elite
+		LocalOffset: 400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_tankarsenalrenovation, naxis_upgrade_massopticsintegration
+
+naxis_engineeringtruck:
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Engineering Truck
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory, naxis_naxpetrolplant
+		Queue: Vehicle, RAVehicle
+		Description: actor_nax_eng.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Light
+	Turreted:
+		TurnSpeed: 15 #3
+		Offset: -100,0,5
+	Armament:
+		Name: primary
+		Weapon: RA2IFVRepair
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 10
+		Count: 1
+		ResetOnFire: true
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	GuardsSelection:
+		ValidTargets: Vehicle
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: NaxiEngVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	Captures:
+		CaptureTypes: building, tech
+		PlayerExperience: 500
+		CaptureDelay: 375
+		ConsumedByCapture: False
+		EnterCursor: ability
+		EnterBlockedCursor: move-blocked
+		Voice: Move
+
+naxis_donnerschlag:
+	Inherits: ^Vehicle
+	Inherits@anim: ^RA2Vehicle
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@Wunderwaffe: ^Wunderwaffe
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 80
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, ~naxis_promotion_donnerschlagmodelandotheradvancedmissiles
+		Description: actor_nax_brad.description
+	Valued:
+		Cost: 2300
+	Tooltip:
+		Name: Donnerschlag
+	Health:
+		HP: 80000
+	Repairable:
+		HpPerStep: 4000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+	MissileSpawnerMasterCA:
+		ArmamentNames: athena-beam
+		Actors: miniv2.nax, miniv2.nax, miniv2.nax, miniv2.nax
+		RespawnTicks: 45
+		SpawnAllAtOnce: false
+		SpawnOffset: 333,333,777, 333,-333,777, -333,333,777, -333,-333,777
+	FirepowerMultiplier@RANK-1:
+		Modifier: 125
+	FirepowerMultiplier@RANK-2:
+		Modifier: 150
+	FirepowerMultiplier@RANK-3:
+		Modifier: 175
+	FirepowerMultiplier@RANK-ELITE:
+		Modifier: 200
+	Armament:
+		Name: athena-beam
+		Weapon: NaxisDonnerschlagTarget
+		LocalOffset: 1000,333,1000, 1000,-333,1000, 1000,333,1000, 1000,-333,1000
+		MuzzleSequence: muzzle
+		RequiresCondition: athena-charged == 1
+	Armament@VISUAL:
+		Name: primary
+		Weapon: NaxisDonnerschlagTargetVisualLaser
+		LocalOffset: 600,0,300
+	AttackFrontal:
+		Armaments: primary, athena-beam
+	GrantConditionOnAttack@CHARGE:
+		Condition: athena-charged
+		ArmamentNames: primary
+		RequiredShotsPerInstance: 10
+		MaximumInstances: 1
+		RevokeDelay: 4
+		RevokeOnNewTarget: true
+		RevokeAll: true
+		ShowSelectionBar: true
+		SelectionBarColor: 83B9FC
+		RequiresCondition: !athena-recharging
+	GrantConditionOnAttackCA@RECHARGE:
+		Condition: athena-recharging
+		ArmamentNames: athena-beam
+		RequiredShotsPerInstance: 1
+		MaximumInstances: 1
+		RevokeDelay: 15
+	SelectionDecorations:
+	FireWarheadsOnDeath:
+		Weapon: V3Explode
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: NaxiArtyVoice
+	GrantConditionOnAttack:
+		Condition: firing
+		RevokeDelay: 12
+	WithFacingSpriteBody:
+		RequiresCondition: !firing
+		Sequence: idle
+		Name: loaded
+	WithFacingSpriteBody@EMPTY:
+		RequiresCondition: firing
+		Sequence: empty-idle
+		Name: reloading
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: naxis_upgrade_wunderwaffe, naxis_upgrade_massopticsintegration
+
+naxis_nop03sarubia:
+	Inherits: ^Tank
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@Wunderwaffe: ^Wunderwaffe
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 1400
+	Tooltip:
+		Name: Nop-03 Sarubia
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, ~naxis_promotion_sarubiamodel
+		Queue: Vehicle, RAVehicle
+		Description: actor_nax_sarubia.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 65
+		TurnSpeed: 26
+	Health:
+		HP: 62500
+	Repairable:
+		HpPerStep: 3125
+	Armament@AG:
+		Weapon: NaxisSarubianTarget
+		LocalOffset: 400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	MissileSpawnerMasterCA:
+		#ArmamentNames: primary
+		Actors: sarubia_bomb.nax
+		RespawnTicks: 25
+		SpawnAllAtOnce: true
+		SpawnOffset: 100,10,90
+	AttackFrontal:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_wunderwaffe, naxis_upgrade_massopticsintegration
+
+naxis_shoekarn:
+	Inherits: ^Tank
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@cargo: ^OpenToppedVehicle
+	Inherits@Wunderwaffe: ^Wunderwaffe
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Shoe Karn
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, ~naxis_promotion_shoekarnandking
+		Queue: Vehicle, RAVehicle
+		Description: actor_nax_shoe.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 30
+	Health:
+		HP: 150000
+	Repairable:
+		HpPerStep: 10000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Turreted:
+		TurnSpeed: 15 #3
+		Offset: -4,0,5
+	Armament:
+		Name: primary
+		Weapon: RA2120mm
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2120mm_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackTurreted:
+	AttackFrontal:
+		Voice: Attack
+		Armaments: secondary
+		PauseOnCondition: chronobeamed
+	Armament@mortar:
+		Name: secondary
+		Weapon: NaxGrilleArty
+		LocalOffset: 1024,200,80, 1024,-200,80
+	Armament@scud:
+		Name: secondary
+		Weapon: NaxShoeRocket
+		LocalOffset: -1024,0,80
+	Cargo:
+		UnloadVoice: Move
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 2
+		InitialUnits: naxis_naxiriflesoldier,naxis_naxiriflesoldier
+	AttackOpenTopped:
+		Voice: Attack
+		Armaments: garrisoned
+		PortOffsets: 1,-1024,80, 1,1024,80
+		PauseOnCondition: chronobeamed
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: NaxiBigTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: naxis_upgrade_wunderwaffe, naxis_upgrade_massopticsintegration
+
+naxis_nokana:
+	Inherits: ^Tank
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@cargo: ^OpenToppedVehicle
+	Inherits@Wunderwaffe: ^Wunderwaffe
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Nokana
+	Buildable:
+		BuildPaletteOrder: 80
+		BuildLimit: 1
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, ~naxis_promotion_bossestanks
+		Queue: Vehicle, RAVehicle
+		Description: actor_nax_nokana.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 60
+		TurnSpeed: 12
+	Health:
+		HP: 450000
+	Repairable:
+		HpPerStep: 3125
+	Armament@AG:
+		Weapon: NaxMausCannon
+		LocalOffset: 400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@RK:
+		Weapon: LatinBuggyRocket_elite
+		LocalOffset: 400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	AttackOpenTopped:
+		Voice: Attack
+		Armaments: primary, secondary, garrisoned
+		PortOffsets: 1,-1024,80, 1,1024,80
+		PauseOnCondition: chronobeamed
+	Cargo:
+		Types: Vehicle
+		MaxWeight: 10
+		LoadedCondition: loaded
+		PassengerFacing: 0
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	WithCargoSounds:
+		EnterSounds: btanupa.wav
+		ExitSounds: btandowa.wav
+	Armament@Flam:
+		Weapon: SyndicateFireballLauncher
+	AttackFrontal:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiBigTankVoice
+	Passenger:
+	ActorStatValues:
+		Upgrades: naxis_upgrade_wunderwaffe, naxis_upgrade_massopticsintegration
+
+naxis_oldtank:
+	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@cargo: ^OpenToppedVehicle
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Old Tank
+	UpdatesPlayerStatistics:
+		OverrideActor: naxis_oldtank
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory, naxis_radar
+		Queue: Vehicle, RAVehicle
+		Description: template_opentopped.description
+	Mobile:
+		Speed: 50
+		TurnSpeed: 12
+	Passenger:
+	Health:
+		HP: 110000
+	Repairable:
+		HpPerStep: 7875
+	ChangesHealth@SelfHealing:
+		Step: 63
+	#Turreted:
+	#	TurnSpeed: 1023
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 32
+	Armament:
+		Weapon: NaxiAntiTankCannon
+		MuzzleSequence: muzzle
+	RenderRangeCircle:
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 0
+	Cargo:
+		UnloadVoice: Move
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 4
+		InitialUnits: undead.nax,undead.nax,undead.nax,undead.nax
+		ExclusiveDeploy: true
+		DeployType: Battlefortress
+	AttackOpenTopped:
+		Voice: Attack
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, -384,0,128, 224,-341,128, -224,-341,128, 224,341,128, -224,341,128
+		PauseOnCondition: chronobeamed
+	RevealOnFire:
+		ArmamentNames: primary, garrisoned
+	AutoTarget:
+		AllowMovement: true
+	Selectable:
+		DecorationBounds: 1440, 1440, 0, -128
+		Class: naxis_oldtank
+	Voiced:
+		VoiceSet: NaxiZombieTank
+	RenderSprites:
+		Image: naxis_oldtank
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: naxis_upgrade_tankarsenalrenovation
+	#RenderVoxels:
+	#	Image: ra2_allies_battlefortress
+
+#		Valkirie Chronicles Imperial
+
+assault.nax:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Imperial Assault Tank
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory, ~disabled, ~naxis_promotion_generationiitanks
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Speed: 100
+		TurnSpeed: 18
+	Health:
+		HP: 130000
+	Repairable:
+		HpPerStep: 6500
+	ChangesHealth@SelfHealing:
+		Step: 52
+	Turreted:
+		TurnSpeed: 16 #3
+		Offset: -4,0,5
+	Armament:
+		Name: primary
+		Weapon: Nax120mmAssault
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: Nax120mmAssault_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@Flam:
+		Weapon: SyndicateFireballLauncher
+		LocalOffset: 1024,0,80
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	FirepowerMultiplier@tiger.nax:
+		Modifier: 120
+	ActorStatValues:
+		Upgrades: naxis_upgrade_tankarsenalrenovation
+
+naxis_imperialturbotank:
+	Inherits: ^Tank
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 950
+	Tooltip:
+		Name: Imperial Turbo Tank
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory, naxis_radar
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 110
+		TurnSpeed: 44
+	Health:
+		HP: 82500
+	Repairable:
+		HpPerStep: 3125
+	Armament@AG:
+		Weapon: NaxiJadgDestroyer
+		LocalOffset: 1024,100,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament:
+		Name: primary
+		Weapon: Nax120mmAssault
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,-100,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: Nax120mmAssault_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,-100,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_tankarsenalrenovation, naxis_upgrade_massopticsintegration
+
+#		Support Tanks
+
+panzer.nax:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^LightTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Panzer III
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~naxis_warfactory, ~disabled
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 100
+		TurnSpeed: 20
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Turreted:
+		TurnSpeed: 20 #3
+	Armament:
+		Name: primary
+		Weapon: RA2105mm
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1280,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2105mm_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1280,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: naxis_upgrade_tankarsenalrenovation
+
+car.nax:
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Combat Car
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_warfactory, naxis_radar, ~disabled
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Speed: 85
+		TurnSpeed: 17
+	Health:
+		HP: 47500
+	Repairable:
+		HpPerStep: 4375
+	ChangesHealth@SelfHealing:
+		Step: 35
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 34 #3
+		Offset: -4,0,5
+	Armament:
+		Name: primary
+		Weapon: NaxiWW2MachinegunTop
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,1,80, 512,-1,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@AA:
+		Name: primary
+		Weapon: NaxiWW2MachinegunTop_AA
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 512,1,80, 512,-1,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: NaxiFlakVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: naxis_upgrade_massopticsintegration
+
+####################################################################################################
+#		Naxis Ships
+####################################################################################################

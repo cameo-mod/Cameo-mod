@@ -1,4 +1,4 @@
-tech1:
+ra1_technician:
 	Inherits: c1
 
 rathf:
@@ -67,7 +67,7 @@ rnltnk:
 rnapc:
 	idle:
 		Facings: 16
-	turret: bggy
+	turret: td_nod_buggy
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -81,28 +81,28 @@ rnftnk:
 		Facings: 16
 	muzzle:
 		Combine:
-			flame-n:
+			flame_n:
 				Length: *
 				Offset: 3,6
-			flame-nw:
+			flame_nw:
 				Length: *
 				Offset: 8,7
-			flame-w:
+			flame_w:
 				Length: *
 				Offset: 8,2
-			flame-sw:
+			flame_sw:
 				Length: *
 				Offset: 7,-2
-			flame-s:
+			flame_s:
 				Length: *
 				Offset: 3,-2
-			flame-se:
+			flame_se:
 				Length: *
 				Offset: -5,-2
-			flame-e:
+			flame_e:
 				Length: *
 				Offset: -7,2
-			flame-ne:
+			flame_ne:
 				Length: *
 				Offset: -7,8
 		Facings: 8
@@ -156,7 +156,7 @@ nodbio.husk:
 	idle: bio
 		Start: 2
 
-e3flamer:
+ra1_soviets_firerocketsoldier:
 	Inherits: e3
 	-icon:
 	icon: te3ficon
@@ -172,28 +172,28 @@ chemtnk:
 		UseClassicFacings: True
 	muzzle:
 		Combine:
-			chem-n:
+			chem_n:
 				Length: *
 				Offset: 1,2
-			chem-nw:
+			chem_nw:
 				Length: *
 				Offset: 8,2
-			chem-w:
+			chem_w:
 				Length: *
 				Offset: 8,-3
-			chem-sw:
+			chem_sw:
 				Length: *
 				Offset: 7,-6
-			chem-s:
+			chem_s:
 				Length: *
 				Offset: 1,-6
-			chem-se:
+			chem_se:
 				Length: *
 				Offset: -5,-6
-			chem-e:
+			chem_e:
 				Length: *
 				Offset: -7,-3
-			chem-ne:
+			chem_ne:
 				Length: *
 				Offset: -3,2
 		Facings: 8
@@ -223,7 +223,7 @@ techbcannon:
 			CAMEO: TEMPERAT
 		Length: *
 		Offset: -1,-1
-	icon: gunicnh.tem
+	icon: forgotten_veinhole_icon.tem
 		AddExtension: False
 
 techbcannon2:
@@ -249,7 +249,7 @@ techbcannon2:
 			CAMEO: TEMPERAT
 		Length: *
 		Offset: -1,-1
-	icon: gunicnh.tem
+	icon: forgotten_veinhole_icon.tem
 		AddExtension: False
 
 techcanbomb:
@@ -338,7 +338,7 @@ techrctiger:
 315carru:
 	idle:
 		Facings: 16
-	turret: 1tnk
+	turret: ra1_allies_alliedlighttank
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -350,11 +350,11 @@ techrctiger:
 315cargotruck:
 	idle:
 		Facings: 16
-	turret1: 1tnk
+	turret1: ra1_allies_alliedlighttank
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
-	turret2: ftrk
+	turret2: ra1_soviets_flaktruck
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -370,12 +370,12 @@ techrctiger:
 		Facings: 16
 
 315shinobi:
-	Inherits: e2
+	Inherits: td_gdi_grenadier
 	icon: 315shinobiicon.shp
 		AddExtension: False
 
 315weichafe:
-	Inherits: e4
+	Inherits: td_nod_flamethrower
 	icon: e2icnh.tem
 		AddExtension: False
 
@@ -723,7 +723,7 @@ bhnuk2:
 
 bhbrik:
 	Inherits: brik
-	icon: brikicnh.tem
+	icon: futuretech_concretebarrier_icon.tem
 		AddExtension: False
 
 bhreddragon:
@@ -737,7 +737,7 @@ bhreddragonemp:
 		ZOffset: 1023
 		
 bhbike:
-	Inherits: bike
+	Inherits: td_nod_reconbike
 
 bhweap:
 	Defaults: nodweap
@@ -809,28 +809,28 @@ eaboss:
 		Length: *
 	muzzle:
 		Combine:
-			chem-n:
+			chem_n:
 				Length: *
 				Offset: 1,2
-			chem-nw:
+			chem_nw:
 				Length: *
 				Offset: 8,2
-			chem-w:
+			chem_w:
 				Length: *
 				Offset: 8,-3
-			chem-sw:
+			chem_sw:
 				Length: *
 				Offset: 7,-6
-			chem-s:
+			chem_s:
 				Length: *
 				Offset: 1,-6
-			chem-se:
+			chem_se:
 				Length: *
 				Offset: -5,-6
-			chem-e:
+			chem_e:
 				Length: *
 				Offset: -7,-3
-			chem-ne:
+			chem_ne:
 				Length: *
 				Offset: -3,2
 		Facings: 8
@@ -866,28 +866,28 @@ siloworker:
 	icon: swharvicnh.tem
 		AddExtension: False
 furry1:
-	Inherits: dog
+	Inherits: ra1_soviets_attackdog
 	icon: dogicon
 furry2:
-	Inherits: dog
+	Inherits: ra1_soviets_attackdog
 	icon: dogicon
 furry3:
-	Inherits: dog
+	Inherits: ra1_soviets_attackdog
 	icon: dogicon
 furryi:
-	Inherits: dog
+	Inherits: ra1_soviets_attackdog
 	icon: dogicon
 
 furryinf:
 	idle: furryinf
 	move: furryinf
-	icon: ra2kirovicon.shp
+	icon: ra2_soviets_kirovairship_icon.shp
 		AddExtension: False
 
 furryinf2:
 	idle: furryinf2
 	move: furryinf2
-	icon: ra2kirovicon.shp
+	icon: ra2_soviets_kirovairship_icon.shp
 		AddExtension: False
 furrysonic:
 	Inherits: ^InfantryOverlays
@@ -895,28 +895,28 @@ furrysonic:
 		Length: *
 	muzzle:
 		Combine:
-			chem-n:
+			chem_n:
 				Length: *
 				Offset: 1,2
-			chem-nw:
+			chem_nw:
 				Length: *
 				Offset: 8,2
-			chem-w:
+			chem_w:
 				Length: *
 				Offset: 8,-3
-			chem-sw:
+			chem_sw:
 				Length: *
 				Offset: 7,-6
-			chem-s:
+			chem_s:
 				Length: *
 				Offset: 1,-6
-			chem-se:
+			chem_se:
 				Length: *
 				Offset: -5,-6
-			chem-e:
+			chem_e:
 				Length: *
 				Offset: -7,-3
-			chem-ne:
+			chem_ne:
 				Length: *
 				Offset: -3,2
 		Facings: 8
@@ -1103,28 +1103,28 @@ digdugfigars:
 	Inherits: smbeetle
 	muzzle:
 		Combine:
-			flame-n:
+			flame_n:
 				Length: *
 				Offset: 1,6
-			flame-nw:
+			flame_nw:
 				Length: *
 				Offset: 8,7
-			flame-w:
+			flame_w:
 				Length: *
 				Offset: 8,2
-			flame-sw:
+			flame_sw:
 				Length: *
 				Offset: 7,-2
-			flame-s:
+			flame_s:
 				Length: *
 				Offset: 1,-2
-			flame-se:
+			flame_se:
 				Length: *
 				Offset: -5,-2
-			flame-e:
+			flame_e:
 				Length: *
 				Offset: -7,2
-			flame-ne:
+			flame_ne:
 				Length: *
 				Offset: -7,8
 		Facings: 8

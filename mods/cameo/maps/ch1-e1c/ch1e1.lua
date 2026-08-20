@@ -61,10 +61,10 @@ InitObjectives = function(player)
 	end)
 end
 
-ConstructionVehicle = {"ramcv.allies"}
-TaskForceOne = {"ra2fv", "ra2fv", "ra2mtnk", "ra2mtnk"}
-TaskForceTwo = {"rae1", "rae1", "rae1", "rae3", "rae3", "rae3", "raarty", "raarty"}
-Boats = {"dd", "dd"}
+ConstructionVehicle = {"ra1_allies_alliedmobileconstructionvehicle"}
+TaskForceOne = {"ra2_allies_ifv", "ra2_allies_ifv", "ra2_allies_grizzlytank", "ra2_allies_grizzlytank"}
+TaskForceTwo = {"ra1_allies_rifleinfantry", "ra1_allies_rifleinfantry", "ra1_allies_rifleinfantry", "ra1_allies_alliedrocketsoldier", "ra1_allies_alliedrocketsoldier", "ra1_allies_alliedrocketsoldier", "ra1_allies_alliedartillery", "ra1_allies_alliedartillery"}
+Boats = {"ra1_allies_destroyer", "ra1_allies_destroyer"}
 BeachheadOne = {Actor1, Actor6, Actor7, Actor11, Actor12, Actor79}
 BeachheadTwo = {Actor4, Actor5, Actor8, Actor9, Actor10, Actor80}
 

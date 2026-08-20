@@ -1,0 +1,718 @@
+zerg_overlord:
+	Inherits: ^AirZerg
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@storage: ^StoresResources
+	Inherits@bot: ^BotAutoDeployUnarmedAirTransport
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@armor: ^ZergFlyerArmorUpgrades
+	Tooltip:
+		Name: Zerg Overlord
+	Valued:
+		Cost: 500
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~zerg_hatchery
+		Queue: SCZergInfantry
+		Description: actor_scoverlord.description
+	Aircraft:
+		TurnSpeed: 6
+		Speed: 30
+		RepulsionSpeed: 6
+		AltitudeVelocity: 1500
+	EjectOnDeath:
+		PilotActor: SCBROODLING
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 8
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Power:
+		Amount: 200
+	StoresResources:
+		Capacity: 1000
+	PowerMultiplier@zerg_overmind:
+		Modifier: 200
+		RequiresCondition: zerg_overmind
+	GrantConditionOnPrerequisite@zerg_overmind:
+		Condition: zerg_overmind
+		Prerequisites: zerg_overmind
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+		Priority: 5
+		PriorityModifiers: Ctrl, Alt
+		Class: zerg_overlord
+	Voiced:
+		VoiceSet: SCOverlordVoice
+	Wanders:
+		WanderMoveRadius: 2
+		MinMoveDelay: 10
+		MaxMoveDelay: 40
+		RequiresCondition: botmicro
+	WithMoveAnimation:
+	-Targetable@infiltrate:
+	-AttackAircraft:
+	-AutoTarget:
+	-RenderRangeCircle:
+	ProductionTimeMultiplier@supplylimit:
+		Multiplier: 33
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	GrantConditionOnPrerequisite@zerg_upgrade_pneumatizedcarapace:
+		Condition: zerg_upgrade_pneumatizedcarapace
+		Prerequisites: zerg_upgrade_pneumatizedcarapace
+	SpeedMultiplier@zerg_upgrade_pneumatizedcarapace:
+		Modifier: 150
+		RequiresCondition: zerg_upgrade_pneumatizedcarapace
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	WithCargoSounds:
+		EnterSounds: scoverlordgetin.wav
+		ExitSounds: scoverlordgetout.wav
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2, zerg_upgrade_pneumatizedcarapace, zerg_overmind
+
+zerg_broodweaver:
+	Inherits: ^AirZerg
+	Inherits@Template: ^UnarmedTransportHelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@bot: ^BotAutoDeployUnarmedAirTransport
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@storage: ^StoresResources
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@armor: ^ZergFlyerArmorUpgrades
+	Inherits@Heal: ^PrioritizeHeal
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	-ExternalCondition@PropagandaEffect:
+	Tooltip:
+		Name: Broodweaver
+	Valued:
+		Cost: 2000
+	Power:
+		Amount: 200
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: zerg_overlord
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~zerg_hatchery, ~zerg_promotion_broodweaver
+		Queue: SCZergInfantry
+		Description: actor_scbroodweaver.description
+	Aircraft:
+		TurnSpeed: 9
+		Speed: 45
+		RepulsionSpeed: 9
+		AltitudeVelocity: 1500
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	-RenderRangeCircle:
+	Armament:
+		Weapon: BroodweaverLeech
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		LocalOffset: 512,0,256
+		FireDelay: 10
+	ProximityExternalCondition@HealingField:
+		Range: 6000
+		ValidRelationships: Ally
+		Condition: HealingField
+		RequiresCondition: attacking
+	ProximityExternalCondition@propaganda:
+		Range: 6000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+		RequiresCondition: !attacking
+	GrantConditionOnAttack:
+		Condition: attacking
+		RevokeDelay: 10
+	WithRangeCircle@heal:
+		Range: 6000
+		Type: heal
+		Color: 55BBFF
+		RequiresCondition: attacking
+	WithRangeCircle@idle:
+		Range: 6000
+		Type: heal
+		Color: FFBB55
+		RequiresCondition: !attacking
+	WithDecoration@Carryall:
+		Image: d2k_pips
+		Sequence: pickup-indicator
+		ValidRelationships: Ally, Enemy, Neutral
+	EjectOnDeath:
+		PilotActor: SCBROODLING
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 8
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	StoresResources:
+		Capacity: 1000
+	Selectable:
+		Class: zerg_overlord
+		DecorationBounds: 1280, 1280, 0, 0
+	Voiced:
+		VoiceSet: SCOverlordVoice
+	RenderSprites:
+		Image: zerg_broodweaver
+		PlayerPalette: player_rgba
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	WithCargoSounds:
+		EnterSounds: scoverlordgetin.wav
+		ExitSounds: scoverlordgetout.wav
+	GrantConditionOnPrerequisite@zerg_upgrade_pneumatizedcarapace:
+		Condition: zerg_upgrade_pneumatizedcarapace
+		Prerequisites: zerg_upgrade_pneumatizedcarapace
+	SpeedMultiplier@zerg_upgrade_pneumatizedcarapace:
+		Modifier: 150
+		RequiresCondition: zerg_upgrade_pneumatizedcarapace
+	ActorStatValues:
+		Upgrades: zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2, zerg_upgrade_pneumatizedcarapace, zerg_overmind
+
+zerg_dreadshroud:
+	Inherits: ^AirZerg
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@weapon: ^ZergFlyerWeaponUpgrades
+	Inherits@armor: ^ZergFlyerArmorUpgrades
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Tooltip:
+		Name: Dreadshroud
+	Valued:
+		Cost: 1200
+	Power:
+		Amount: -60
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~zerg_spire,, ~zerg_promotion_dreadshroud
+		Queue: SCZergInfantry
+		Description: actor_scdreadshroud.description
+	Aircraft:
+		Speed: 120
+		TurnSpeed: 24
+		RepulsionSpeed: 24
+		IdealSeparation: 1000
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Armament:
+		Weapon: DreadshroudSpore
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	-RenderRangeCircle:
+	-RenderDetectionCircle:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1024, 1024
+	Voiced:
+		VoiceSet: SCMutaliskVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
+
+zerg_corruptor:
+	Inherits: ^AirZerg
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@weapon: ^ZergFlyerWeaponUpgrades
+	Inherits@armor: ^ZergFlyerArmorUpgrades
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Tooltip:
+		Name: Corruptor
+	Valued:
+		Cost: 1500
+	Power:
+		Amount: -75
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~zerg_greaterspire, ~zerg_promotion_corruptor
+		Queue: SCZergInfantry
+		Description: actor_sccorruptor.description
+	Aircraft:
+		Speed: 100
+		TurnSpeed: 20
+		RepulsionSpeed: 20
+		IdealSeparation: 1000
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armament:
+		Weapon: CorruptorSpore
+		LocalOffset: 0,0,0
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	-RenderRangeCircle:
+	-RenderDetectionCircle:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1024, 1024
+	Voiced:
+		VoiceSet: SCMutaliskVoice
+	WithAttackAnimation:
+		Armament: primary
+		Sequence: shoot
+	WithMoveAnimation:
+		MoveSequence: move
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
+
+zerg_mutalisk:
+	Inherits: ^AirZerg
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@weapon: ^ZergFlyerWeaponUpgrades
+	Inherits@armor: ^ZergFlyerArmorUpgrades
+	Tooltip:
+		Name: Mutalisk
+	Valued:
+		Cost: 1000
+	Power:
+		Amount: -50
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~zerg_spire
+		Queue: SCZergInfantry
+		Description: actor_scmutalisk.description
+	Aircraft:
+		Speed: 160
+		TurnSpeed: 32
+		RepulsionSpeed: 32
+		IdealSeparation: 640
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Armament:
+		Weapon: MutaliskSpore
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+	FirepowerMultiplier@MultiWeapon:
+		Modifier: 25
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	-RenderRangeCircle:
+	-RenderDetectionCircle:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1024, 1024
+	Voiced:
+		VoiceSet: SCMutaliskVoice
+	AmmoPool:
+		Ammo: 6
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 40
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
+
+zerg_devourer:
+	Inherits: ^AirZerg
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@weapon: ^ZergFlyerWeaponUpgrades
+	Inherits@armor: ^ZergFlyerArmorUpgrades
+	Tooltip:
+		Name: Devourer
+	Valued:
+		Cost: 2000
+	Power:
+		Amount: -100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~zerg_greaterspire
+		Queue: SCZergInfantry
+		Description: actor_scdevourer.description
+	Aircraft:
+		Speed: 90
+		TurnSpeed: 18
+		RepulsionSpeed: 18
+	Health:
+		HP: 250000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armament:
+		Weapon: SCDevourerAA
+		LocalOffset: 0,0,0
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SelectionDecorations:
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1280, 1280, 0, 0
+	Voiced:
+		VoiceSet: SCDevourerVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
+
+zerg_scourge:
+	Inherits: ^AirZerg
+	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@Template: ^FighterTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@weapon: ^ZergFlyerWeaponUpgrades
+	Inherits@armor: ^ZergFlyerArmorUpgrades
+	SelectionDecorations:
+	Tooltip:
+		Name: Scourge
+	Valued:
+		Cost: 700
+	Power:
+		Amount: -35
+	Selectable:
+		Bounds: 640, 640
+		DecorationBounds: 640, 640, 0, 0
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~zerg_spire
+		Queue: SCZergInfantry
+		Description: actor_scscourge.description
+	Aircraft:
+		InitialFacing: 896
+		AltitudeVelocity: 128
+		TurnSpeed: 40
+		Speed: 200
+		Repulsable: false
+		IdealSeparation: 512
+		RepulsionSpeed: 40
+		CruiseAltitude: 1280
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	AttackAircraft:
+		FacingTolerance: 512
+	Armament@PRIMARY:
+		Weapon: ScourgeExplosion
+	GrantConditionOnAttack:
+		Condition: triggered
+	WithDeathAnimation:
+		UseDeathTypeSuffix: False
+	KillsSelf:
+		RequiresCondition: triggered
+	Voiced:
+		VoiceSet: SCScourgeVoice
+	FireWarheadsOnDeath:
+		Weapon: SCScourgeExplosion
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
+
+zerg_queen:
+	Inherits: ^AirZerg
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@weapon: ^ZergFlyerWeaponUpgrades
+	Inherits@armor: ^ZergFlyerArmorUpgrades
+	Inherits@bot: ^BotAutoDeployTimedAbility
+	Tooltip:
+		Name: Queen
+	Valued:
+		Cost: 1200
+	Power:
+		Amount: -60
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~zerg_queensnest
+		Queue: SCZergInfantry
+		Description: actor_scqueen.description
+	Aircraft:
+		Speed: 100
+		TurnSpeed: 20
+		RepulsionSpeed: 20
+	Health:
+		HP: 125000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SelectionDecorations:
+	Armament@Spines:
+		Weapon: QueenSpine
+		LocalOffset: 0,0,200
+		FireDelay: 2
+		MuzzleSequence: muzzle
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Voiced:
+		VoiceSet: SCQueenVoice
+	GrantTimedConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedTicks: 10
+		CooldownTicks: 620
+		DeployedCondition: summon
+		ShowSelectionBar: true
+		ExclusiveDeploy: true
+		DeployType: Summon
+		PauseOnCondition: disabled
+	PeriodicExplosion@projections:
+		Weapon: SCQUEENSUMMON
+		RequiresCondition: summon
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
+
+zerg_guardian:
+	Inherits: ^AirZerg
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@weapon: ^ZergFlyerWeaponUpgrades
+	Inherits@armor: ^ZergFlyerArmorUpgrades
+	Tooltip:
+		Name: Guardian
+	Valued:
+		Cost: 2200
+	Power:
+		Amount: -110
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Prerequisites: ~zerg_greaterspire
+		Queue: SCZergInfantry
+		Description: actor_scguardian.description
+	Aircraft:
+		Speed: 50
+		TurnSpeed: 10
+		RepulsionSpeed: 10
+	Health:
+		HP: 150000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Armament:
+		Weapon: GuardianShoot
+		LocalOffset: 400,0,0
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Voiced:
+		VoiceSet: SCGuardianVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
+
+zerg_gorekraken:
+	Inherits: ^AirZerg
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergFlyerArmorUpgrades
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Tooltip:
+		Name: Gorekraken
+	Valued:
+		Cost: 2000
+	Power:
+		Amount: -100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Prerequisites: ~zerg_greaterspire, ~zerg_promotion_gorekraken
+		Queue: SCZergInfantry
+		Description: actor_scgorekraken.description
+	Aircraft:
+		Speed: 70
+		TurnSpeed: 14
+		RepulsionSpeed: 14
+		IdealSeparation: 700
+	Health:
+		HP: 350000
+	ChangesHealth@SelfHealing:
+		Step: 150
+	Armament:
+		Weapon: GorekrakenClaw
+		LocalOffset: 400,0,0
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Voiced:
+		VoiceSet: SCGuardianVoice
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	WithAttackAnimation:
+		Armament: primary
+		Sequence: shoot
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
+
+zerg_behemoth:
+	Inherits: ^AirZerg
+	Inherits@2: ^Helicopter
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@Epic: ^EpicAirUnitTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@cargo: ^CargoAircraft
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@weapon: ^ZergFlyerWeaponUpgrades
+	Inherits@armor: ^ZergFlyerArmorUpgrades
+	Tooltip:
+		Name: Behemoth
+	Valued:
+		Cost: 7200
+	Power:
+		Amount: -360
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 20
+		Prerequisites: ~zerg_lair, ~zerg_promotion_behemoth
+		Queue: SCZergInfantry
+		Description: actor_scbehemoth.description
+	Aircraft:
+		Speed: 30
+		TurnSpeed: 12
+		RepulsionSpeed: 24
+	Health:
+		HP: 600000
+	Repairable:
+		HpPerStep: 30000
+	ChangesHealth@SelfHealing:
+		Step: 240
+	-Integrity:
+	-GrantCondition@electronics:
+	Cargo:
+		ExclusiveDeploy: true
+		DeployType: opentopped
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 12
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+		LoadedCondition: loaded
+		InitialUnits: zerg_spithid, zerg_hydralisk, zerg_hydralisk, zerg_spithid, zerg_spithid, zerg_hydralisk, zerg_hydralisk, zerg_spithid
+	AttackOpenTopped:
+		Voice: Attack
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, 224,-341,128, 224,341,128, 0,-341,128, 0,341,128, -224,-341,128, -224,341,128, -384,0,128
+		PauseOnCondition: chronobeamed
+	Armament:
+		Weapon: BehemothShoot
+		LocalOffset: 400,0,0
+	CarrierMaster:
+		Actors: scscourgedrone, scscourgedrone, scscourgedrone, scscourgedrone, scscourgedrone, scscourgedrone, scscourgedrone, scscourgedrone
+		RearmTicks: 125
+		RespawnTicks: 250
+		InstaRepair: true
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: false
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	EjectOnDeath:
+		PilotActor: zerg_hydralisk
+	SpawnActorOnDeath:
+		Actor: SCBEHEMOTH.Husk
+	Selectable:
+		Class: terran_dropship
+		DecorationBounds: 2048, 2048, 0, 0
+	Voiced:
+		VoiceSet: SCOverlordVoice
+	DeathSounds:
+	RenderSprites:
+		Image: zerg_behemoth
+		PlayerPalette: player_rgba
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	ActorStatValues:
+		Upgrades: terran_upgrade_shipplatinglevel1
+	WithCargoSounds:
+		EnterSounds: scoverlordgetin.wav
+		ExitSounds: scoverlordgetout.wav
+	ActorStatValues:
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2

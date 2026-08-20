@@ -12,13 +12,15 @@
 			RA_TEMPERAT: bib1.tem
 			RA2_TEMPERAT: bib1.tem
 			RA_DESERT: bib1.des
-			RA_INTERIOR: bib1.int
+			RA_INTERIOR: bib1.tem
 			ARRAKIS: bib1.des
 			ARRAKIS2: bib1.des
 			CARIBIC: bib1.jun
 			WC2SUNSET: bib1.tem
 			WC2SUMMER: bib1.tem
 			OUTPOST2: bib1.tem
+			VOLCANIC: bib1.vol
+			INTERIOR: bib1.tem
 		Length: *
 
 ^WithBuildingBib2:
@@ -35,13 +37,15 @@
 			RA_TEMPERAT: bib2.tem
 			RA2_TEMPERAT: bib2.tem
 			RA_DESERT: bib2.des
-			RA_INTERIOR: bib2.int
+			RA_INTERIOR: bib2.tem
 			ARRAKIS: bib2.des
 			ARRAKIS2: bib2.des
 			CARIBIC: bib2.jun
 			WC2SUNSET: bib2.tem
 			WC2SUMMER: bib2.tem
 			OUTPOST2: bib2.tem
+			VOLCANIC: bib2.vol
+			INTERIOR: bib2.tem
 		Length: *
 
 ^WithBuildingBib3:
@@ -58,13 +62,175 @@
 			RA_TEMPERAT: bib3.tem
 			RA2_TEMPERAT: bib3.tem
 			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
+			RA_INTERIOR: bib3.tem
 			ARRAKIS: bib3.des
 			ARRAKIS2: bib3.des
 			CARIBIC: bib3.jun
 			WC2SUNSET: bib3.tem
 			WC2SUMMER: bib3.tem
 			OUTPOST2: bib3.tem
+			VOLCANIC: bib3.vol
+			INTERIOR: bib3.tem
+		Length: *
+
+^WithBuildingBibGun:
+	bib:
+		Filename: mbGUN.tem
+		TilesetFilenames:
+			DESERT: mbGUN.des
+			WINTER: mbGUN.win
+			SNOW: mbGUN.sno
+			BARREN: mbGUN.bar
+			JUNGLE: mbGUN.jun
+			RA_SNOW: mbGUN.sno
+			RA_DESERT: mbGUN.des
+			RA_INTERIOR: mbGUN.int
+			ARRAKIS: mbGUN.des
+			ARRAKIS2: mbGUN.des
+		Length: *
+
+^WithBuildingBibFix:
+	bib:
+		Filename: mbFIX.tem
+		TilesetFilenames:
+			DESERT: mbFIX.des
+			WINTER: mbFIX.win
+			SNOW: mbFIX.sno
+			BARREN: mbFIX.bar
+			JUNGLE: mbFIX.jun
+			RA_SNOW: mbFIX.sno
+			RA_DESERT: mbFIX.des
+			RA_INTERIOR: mbFIX.int
+			ARRAKIS: mbFIX.des
+			ARRAKIS2: mbFIX.des
+		Length: *
+
+^WithBuildingBibSilo:
+	bib:
+		Filename: mbRASILO.tem
+		TilesetFilenames:
+			DESERT: mbRASILO.des
+			WINTER: mbRASILO.win
+			SNOW: mbRASILO.sno
+			BARREN: mbRASILO.bar
+			JUNGLE: mbRASILO.jun
+			RA_SNOW: mbRASILO.sno
+			RA_DESERT: mbRASILO.des
+			RA_INTERIOR: mbRASILO.int
+			ARRAKIS: mbRASILO.des
+			ARRAKIS2: mbRASILO.des
+		Length: *
+
+^WithBuildingBibIron:
+	bib:
+		Filename: mbIRON.tem
+		TilesetFilenames:
+			DESERT: mbIRON.des
+			WINTER: mbIRON.win
+			SNOW: mbIRON.sno
+			BARREN: mbIRON.des
+			JUNGLE: mbIRON.jun
+			RA_SNOW: mbIRON.sno
+			RA_DESERT: mbIRON.des
+			RA_INTERIOR: mbIRON.int
+			ARRAKIS: mbIRON.des
+			ARRAKIS2: mbIRON.des
+		Length: *
+
+^WithBuildingBibFtur:
+	bib:
+		Filename: mbFTUR.tem
+		TilesetFilenames:
+			DESERT: mbFTUR.des
+			WINTER: mbFTUR.win
+			SNOW: mbFTUR.sno
+			BARREN: mbFTUR.bar
+			JUNGLE: mbFTUR.jun
+			RA_SNOW: mbFTUR.sno
+			RA_DESERT: mbFTUR.des
+			RA_INTERIOR: mbFTUR.int
+			ARRAKIS: mbFTUR.des
+			ARRAKIS2: mbFTUR.des
+		Length: *
+
+^WithBuildingBibTsla:
+	bib:
+		Filename: mbTSLA.tem
+		TilesetFilenames:
+			DESERT: mbTSLA.des
+			WINTER: mbTSLA.win
+			SNOW: mbTSLA.sno
+			BARREN: mbTSLA.bar
+			JUNGLE: mbTSLA.jun
+			RA_SNOW: mbTSLA.sno
+			RA_DESERT: mbTSLA.des
+			RA_INTERIOR: mbTSLA.int
+			ARRAKIS: mbTSLA.des
+			ARRAKIS2: mbTSLA.des
+		Length: *
+
+^WithBuildingBibSam:
+	bib:
+		Filename: mbSAM.tem
+		TilesetFilenames:
+			DESERT: mbSAM.des
+			WINTER: mbSAM.win
+			SNOW: mbSAM.sno
+			BARREN: mbSAM.bar
+			JUNGLE: mbSAM.jun
+			RA_SNOW: mbSAM.sno
+			RA_DESERT: mbSAM.des
+			RA_INTERIOR: mbSAM.int
+			ARRAKIS: mbSAM.des
+			ARRAKIS2: mbSAM.des
+		Length: *
+
+^WithBuildingBibPbox:
+	bib:
+		Filename: mbPBOX.tem
+		TilesetFilenames:
+			DESERT: mbPBOX.des
+			WINTER: mbPBOX.win
+			SNOW: mbPBOX.sno
+			BARREN: mbPBOX.bar
+			JUNGLE: mbPBOX.jun
+			RA_SNOW: mbPBOX.sno
+			RA_DESERT: mbPBOX.des
+			RA_INTERIOR: mbPBOX.int
+			ARRAKIS: mbPBOX.des
+			ARRAKIS2: mbPBOX.des
+		Length: *
+
+^WithBuildingBibGap:
+	bib:
+		Filename: mbGAP.tem
+		TilesetFilenames:
+			DESERT: mbGAP.des
+			WINTER: mbGAP.win
+			SNOW: mbGAP.sno
+			BARREN: mbGAP.bar
+			JUNGLE: mbGAP.jun
+			RA_SNOW: mbGAP.sno
+			RA_DESERT: mbGAP.des
+			RA_INTERIOR: mbGAP.int
+			ARRAKIS: mbGAP.des
+			ARRAKIS2: mbGAP.des
+		Length: *
+
+^WithBuildingBibPdox:
+	bib:
+		Filename: mbPDOX.tem
+		TilesetFilenames:
+			DESERT: mbPDOX.des
+			WINTER: mbPDOX.win
+			SNOW: mbPDOX.sno
+			BARREN: mbPDOX.bar
+			JUNGLE: mbPDOX.jun
+			RA_SNOW: mbPDOX.sno
+			RA_DESERT: mbPDOX.des
+			RA_INTERIOR: mbPDOX.int
+			ARRAKIS: mbPDOX.des
+			ARRAKIS2: mbPDOX.des
 		Length: *
 
 resources:
@@ -408,7 +574,7 @@ resources:
 			RA_DESERT: rtib12.des
 			BARREN: rtib12.des
 	gold01:
-		Filename: gold01.shp
+		Filename: gold01.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gold01.tem
@@ -430,7 +596,7 @@ resources:
 			OUTPOST2: gold01.tem
 			RA2_TEMPERAT: gold01.tem
 	gold02:
-		Filename: gold02.shp
+		Filename: gold02.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gold02.tem
@@ -452,7 +618,7 @@ resources:
 			OUTPOST2: gold02.tem
 			RA2_TEMPERAT: gold02.tem
 	gold03:
-		Filename: gold03.shp
+		Filename: gold03.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gold03.tem
@@ -474,7 +640,7 @@ resources:
 			OUTPOST2: gold03.tem
 			RA2_TEMPERAT: gold03.tem
 	gold04:
-		Filename: gold04.shp
+		Filename: gold04.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gold04.tem
@@ -496,7 +662,7 @@ resources:
 			OUTPOST2: gold04.tem
 			RA2_TEMPERAT: gold04.tem
 	gem01:
-		Filename: gem01.shp
+		Filename: gem01.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gem01.tem
@@ -518,7 +684,7 @@ resources:
 			OUTPOST2: gem01.tem
 			RA2_TEMPERAT: gem01.tem
 	gem02:
-		Filename: gem02.shp
+		Filename: gem02.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gem02.tem
@@ -540,7 +706,7 @@ resources:
 			OUTPOST2: gem02.tem
 			RA2_TEMPERAT: gem02.tem
 	gem03:
-		Filename: gem03.shp
+		Filename: gem03.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gem03.tem
@@ -562,7 +728,7 @@ resources:
 			OUTPOST2: gem03.tem
 			RA2_TEMPERAT: gem03.tem
 	gem04:
-		Filename: gem04.shp
+		Filename: gem04.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gem04.tem
@@ -585,414 +751,311 @@ resources:
 			RA2_TEMPERAT: gem04.tem
 	scmin01:
 		Filename: sc_mineral_1.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scmin01_off1:
-		Offset: -8,-8
+		Offset: -4,-4
 		Filename: sc_mineral_1.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scmin01_off2:
-		Offset: 8,-8
+		Offset: 4,-4
 		Filename: sc_mineral_1.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scmin01_off3:
-		Offset: 8,8
+		Offset: 4,4
 		Filename: sc_mineral_1.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scmin01_off4:
-		Offset: -8,8
+		Offset: -4,4
 		Filename: sc_mineral_1.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scmin02:
 		Filename: sc_mineral_2.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scmin02_off1:
-		Offset: -8,-8
+		Offset: -4,-4
 		Filename: sc_mineral_2.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scmin02_off2:
-		Offset: 8,-8
+		Offset: 4,-4
 		Filename: sc_mineral_2.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scmin02_off3:
-		Offset: 8,8
+		Offset: 4,4
 		Filename: sc_mineral_2.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scmin02_off4:
-		Offset: -8,8
+		Offset: -4,4
 		Filename: sc_mineral_2.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scmin03:
 		Filename: sc_mineral_3.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scmin03_off1:
-		Offset: -8,-8
+		Offset: -4,-4
 		Filename: sc_mineral_3.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scmin03_off2:
-		Offset: 8,-8
+		Offset: 4,-4
 		Filename: sc_mineral_3.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scmin03_off3:
-		Offset: 8,8
+		Offset: 4,4
 		Filename: sc_mineral_3.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scmin03_off4:
-		Offset: -8,8
+		Offset: -4,4
 		Filename: sc_mineral_3.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	tsveins:
 		Filename: tsveins.shp
-		UseTilesetExtension: false
 	gencrate1:
 		Filename: gencrate1.shp
-		UseTilesetExtension: false
 	gencrate2:
 		Filename: gencrate2.shp
-		UseTilesetExtension: false
 	gencrate3:
 		Filename: gencrate3.shp
-		UseTilesetExtension: false
 	gencrate4:
 		Filename: gencrate4.shp
-		UseTilesetExtension: false
 	gencrate5:
 		Filename: gencrate5.shp
-		UseTilesetExtension: false
 	gencrate6:
 		Filename: gencrate6.shp
-		UseTilesetExtension: false
 	gencrate7:
 		Filename: gencrate7.shp
-		UseTilesetExtension: false
 	gencrate8:
 		Filename: gencrate8.shp
-		UseTilesetExtension: false
 	gencrate9:
 		Filename: gencrate9.shp
-		UseTilesetExtension: false
 	gencrate10:
 		Filename: gencrate10.shp
-		UseTilesetExtension: false
 	gencrate11:
 		Filename: gencrate11.shp
-		UseTilesetExtension: false
 	gencrate12:
 		Filename: gencrate12.shp
-		UseTilesetExtension: false
 	gencrate13:
 		Filename: gencrate13.shp
-		UseTilesetExtension: false
 	gencrate14:
 		Filename: gencrate14.shp
-		UseTilesetExtension: false
 	gencrate15:
 		Filename: gencrate15.shp
-		UseTilesetExtension: false
 	gencrate16:
 		Filename: gencrate16.shp
-		UseTilesetExtension: false
 	gencrate17:
 		Filename: gencrate17.shp
-		UseTilesetExtension: false
 	gencrate18:
 		Filename: gencrate18.shp
-		UseTilesetExtension: false
 	swpcarbon1:
 		Filename: swpilledcarbon1.shp
-		UseTilesetExtension: false
 	swpcarbon2:
 		Filename: swpilledcarbon2.shp
-		UseTilesetExtension: false
 	swpcarbon3:
 		Filename: swpilledcarbon3.shp
-		UseTilesetExtension: false
 	swpcarbon4:
 		Filename: swpilledcarbon4.shp
-		UseTilesetExtension: false
 	swpcarbon5:
 		Filename: swpilledcarbon5.shp
-		UseTilesetExtension: false
 	swpcarbon6:
 		Filename: swpilledcarbon6.shp
-		UseTilesetExtension: false
 	swpcarbon7:
 		Filename: swpilledcarbon7.shp
-		UseTilesetExtension: false
 	swrcarbon1:
 		Filename: swrcarbon_000.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swrcarbon2:
 		Filename: swrcarbon_001.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swrcarbon3:
 		Filename: swrcarbon_002.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swrcarbon4:
 		Filename: swrcarbon_003.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swrcarbon5:
 		Filename: swrcarbon_004.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swrcarbon6:
 		Filename: swrcarbon_005.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swrcarbon7:
 		Filename: swrcarbon_006.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swrcarbon8:
 		Filename: swrcarbon_007.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swrcarbon9:
 		Filename: swrcarbon_008.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swrcarbon10:
 		Filename: swrcarbon_009.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swrcarbon11:
 		Filename: swrcarbon_010.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swrcarbon12:
 		Filename: swrcarbon_011.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swdcarbon1:
 		Filename: swdcarbon_000.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swdcarbon2:
 		Filename: swdcarbon_001.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swdcarbon3:
 		Filename: swdcarbon_002.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swdcarbon4:
 		Filename: swdcarbon_003.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swdcarbon5:
 		Filename: swdcarbon_004.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swdcarbon6:
 		Filename: swdcarbon_005.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swdcarbon7:
 		Filename: swdcarbon_006.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swdcarbon8:
 		Filename: swdcarbon_007.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swdcarbon9:
 		Filename: swdcarbon_008.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swdcarbon10:
 		Filename: swdcarbon_009.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swdcarbon11:
 		Filename: swdcarbon_010.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swdcarbon12:
 		Filename: swdcarbon_011.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swpnova1:
 		Filename: swpillednova1.shp
-		UseTilesetExtension: false
 	swpnova2:
 		Filename: swpillednova2.shp
-		UseTilesetExtension: false
 	swpnova3:
 		Filename: swpillednova3.shp
-		UseTilesetExtension: false
 	swpnova4:
 		Filename: swpillednova4.shp
-		UseTilesetExtension: false
 	swpnova5:
 		Filename: swpillednova5.shp
-		UseTilesetExtension: false
 	swpnova6:
 		Filename: swpillednova6.shp
-		UseTilesetExtension: false
 	swpnova7:
 		Filename: swpillednova7.shp
-		UseTilesetExtension: false
 	swpnova8:
 		Filename: swpillednova8.shp
-		UseTilesetExtension: false
 	swpnova9:
 		Filename: swpillednova9.shp
-		UseTilesetExtension: false
 	swpnova10:
 		Filename: swpillednova10.shp
-		UseTilesetExtension: false
 	swcnova1:
 		Filename: swcrystalnova1.shp
-		UseTilesetExtension: false
 	swcnova2:
 		Filename: swcrystalnova2.shp
-		UseTilesetExtension: false
 	swcnova3:
 		Filename: swcrystalnova3.shp
-		UseTilesetExtension: false
 	swcnova4:
 		Filename: swcrystalnova4.shp
-		UseTilesetExtension: false
 	swcnova5:
 		Filename: swcrystalnova5.shp
-		UseTilesetExtension: false
 	swcnova6:
 		Filename: swcrystalnova6.shp
-		UseTilesetExtension: false
 	swcnova7:
 		Filename: swcrystalnova7.shp
-		UseTilesetExtension: false
 	swcnova8:
 		Filename: swcrystalnova8.shp
-		UseTilesetExtension: false
 	swcnova9:
 		Filename: swcrystalnova9.shp
-		UseTilesetExtension: false
 	swcnova10:
 		Filename: swcrystalnova10.shp
-		UseTilesetExtension: false
 	swpmin1:
 		Filename: swpmin_000.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swpmin2:
 		Filename: swpmin_001.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swpmin3:
 		Filename: swpmin_002.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swpmin4:
 		Filename: swpmin_003.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swpmin5:
 		Filename: swpmin_004.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swpmin6:
 		Filename: swpmin_005.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swpmin7:
 		Filename: swpmin_006.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swpmin8:
 		Filename: swpmin_007.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swpmin9:
 		Filename: swpmin_008.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swpmin10:
 		Filename:swpmin_009.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swpmin11:
 		Filename:swpmin_010.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swpmin12:
 		Filename:swpmin_011.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swmin1:
 		Filename: swmin_000.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swmin2:
 		Filename: swmin_001.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swmin3:
 		Filename: swmin_002.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swmin4:
 		Filename: swmin_003.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swmin5:
 		Filename: swmin_004.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swmin6:
 		Filename: swmin_005.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swmin7:
 		Filename: swmin_006.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swmin8:
 		Filename: swmin_006.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swmin9:
 		Filename: swmin_008.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	swmin10:
 		Filename:swmin_009.png
-		UseTilesetExtension: false
-		Scale: 0.7
+		Scale: 1
 	spicea:
+		Scale: 1.5 # Spice
 		Filename: BLOXBASE.R8
 		Frames: 748, 300, 750, 751, 752, 753, 754, 755, 756, 757, 760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799, 300
 		Length: *
 		Offset: -16,-16
 	spiceb:
+		Scale: 1.5 # Spice
 		Filename: BLOXBASE.R8
 		Frames: 749, 301, 750, 751, 752, 753, 754, 755, 756, 757, 760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799, 301
 		Length: *
 		Offset: -16,-16
 	spicec:
+		Scale: 1.5 # Spice
 		Filename: BLOXBASE.R8
 		Frames: 793, 320, 750, 751, 752, 753, 754, 755, 756, 757, 760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799, 320
 		Length: *
 		Offset: -16,-16
 	spiced:
+		Scale: 1.5 # Spice
 		Filename: BLOXBASE.R8
 		Frames: 748, 321, 750, 751, 752, 753, 754, 755, 756, 757, 760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799, 321
 		Length: *
@@ -1056,79 +1119,63 @@ resources:
 		Offset: -5,5
 	scminchunk:
 		Filename: scminchunk.shp
-		UseTilesetExtension: false
 	scrmin01:
 		Filename: sc_rmineral_1.png
-		UseTilesetExtension: false
-		Scale: 0.5
+		Scale: 0.9434
 	scrmin01_off1:
-		Offset: -8,-8
+		Offset: -4,-4
 		Filename: sc_rmineral_1.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scrmin01_off2:
-		Offset: 8,-8
+		Offset: 4,-4
 		Filename: sc_rmineral_1.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scrmin01_off3:
-		Offset: 8,8
+		Offset: 4,4
 		Filename: sc_rmineral_1.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scrmin01_off4:
-		Offset: -8,8
+		Offset: -4,4
 		Filename: sc_rmineral_1.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scrmin02:
 		Filename: sc_rmineral_2.png
-		UseTilesetExtension: false
-		Scale: 0.5
+		Scale: 0.9434
 	scrmin02_off1:
-		Offset: -8,-8
+		Offset: -4,-4
 		Filename: sc_rmineral_2.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scrmin02_off2:
-		Offset: 8,-8
+		Offset: 4,-4
 		Filename: sc_rmineral_2.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scrmin02_off3:
-		Offset: 8,8
+		Offset: 4,4
 		Filename: sc_rmineral_2.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scrmin02_off4:
-		Offset: -8,8
+		Offset: -4,4
 		Filename: sc_rmineral_2.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scrmin03:
 		Filename: sc_rmineral_3.png
-		UseTilesetExtension: false
-		Scale: 0.5
+		Scale: 0.9434
 	scrmin03_off1:
-		Offset: -8,-8
+		Offset: -4,-4
 		Filename: sc_rmineral_3.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scrmin03_off2:
-		Offset: 8,-8
+		Offset: 4,-4
 		Filename: sc_rmineral_3.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scrmin03_off3:
-		Offset: 8,8
+		Offset: 4,4
 		Filename: sc_rmineral_3.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	scrmin03_off4:
-		Offset: -8,8
+		Offset: -4,4
 		Filename: sc_rmineral_3.png
-		UseTilesetExtension: false
-		Scale: 0.53
+		Scale: 1
 	drtaelon:
 		Filename: dr_taelon.png
 		Scale: 1.2
@@ -1163,20 +1210,18 @@ resources:
 			BARREN: dr_water_des.png
 	dune2spice:
 		Filename: dune2spice.shp
-		UseTilesetExtension: false
 	swfarm01:
 		Filename: swfarm01.shp
-		UseTilesetExtension: false
 	op2minerals:
+		Scale: 1.5
 		Filename: op2minerals.shp
 		Frames: 0, 1, 2, 3
 		Length: 4
-		UseTilesetExtension: false
 	op2minerals2:
+		Scale: 1.5
 		Filename: op2minerals.shp
 		Frames: 4, 5, 6, 7
 		Length: 4
-		UseTilesetExtension: false
 	ra2gold01:
 		Filename: ra2_tib01.tem
 		Scale: 1.3
@@ -1637,6 +1682,9 @@ fb4:
 		ZOffset: 1023
 
 fire:
+	# Flames must read as fire regardless of terrain brightness or weather tint, so ignore world tint.
+	Defaults:
+		IgnoreWorldTint: true
 	1:
 		Filename: fire1.shp
 		Length: *
@@ -1658,9 +1706,63 @@ fire:
 		Offset: 0,-3
 		ZOffset: 1023
 
-burn-l:
+# Same art as `fire` but ZOffset 0, so ground fire sorts by position and mobile units draw over it
+# when passing. The shared `fire` keeps ZOffset 1023 for husk/building burns (must sit on top of
+# their own body sprite). Used by the groundfire actor.
+groundfire_flame:
 	Defaults:
-		Filename: burn-l.shp
+		IgnoreWorldTint: true
+	1:
+		Filename: fire1.shp
+		Length: *
+		Offset: 0,-3
+	2:
+		Filename: fire2.shp
+		Length: *
+		Offset: 0,-3
+	3:
+		Filename: fire3.shp
+		Length: *
+		Offset: 0,-3
+	4:
+		Filename: fire4.shp
+		Length: *
+		Offset: 0,-3
+
+# Same art as `fire` but scaled 1.5x for building critical-fire (a bigger, more engulfing blaze).
+# Kept separate so husk/ground fire stay native size. SHP scales blocky past ~2x, so don't push higher.
+fire_building:
+	Defaults:
+		IgnoreWorldTint: true
+	1:
+		Filename: fire1.shp
+		Length: *
+		Offset: 0,-3
+		ZOffset: 1023
+		Scale: 1.5
+	2:
+		Filename: fire2.shp
+		Length: *
+		Offset: 0,-3
+		ZOffset: 1023
+		Scale: 1.5
+	3:
+		Filename: fire3.shp
+		Length: *
+		Offset: 0,-3
+		ZOffset: 1023
+		Scale: 1.5
+	4:
+		Filename: fire4.shp
+		Length: *
+		Offset: 0,-3
+		ZOffset: 1023
+		Scale: 1.5
+
+burn_l:
+	Defaults:
+		Filename: burn_l.shp
+		IgnoreWorldTint: true
 	idle:
 		Length: *
 		ZOffset: 512
@@ -1673,9 +1775,10 @@ burn-l:
 		Length: 6
 		ZOffset: 512
 
-burn-m:
+burn_m:
 	Defaults:
-		Filename: burn-m.shp
+		Filename: burn_m.shp
+		IgnoreWorldTint: true
 	idle:
 		Length: *
 		ZOffset: 512
@@ -1688,9 +1791,10 @@ burn-m:
 		Length: 6
 		ZOffset: 512
 
-burn-s:
+burn_s:
 	Defaults:
-		Filename: burn-s.shp
+		Filename: burn_s.shp
+		IgnoreWorldTint: true
 	idle:
 		Length: *
 		ZOffset: 512
@@ -1733,7 +1837,7 @@ smoke_m:
 
 laserfire:
 	idle:
-		Filename: veh-hit3.shp
+		Filename: veh_hit3.shp
 		Length: *
 		ZOffset: 511
 
@@ -1772,6 +1876,172 @@ smokey:
 		Length: *
 		ZOffset: 1023
 
+ts_small_smoke_trail:
+	Defaults:
+		AlphaFade: true
+	idle:
+		Filename: tssmokey2.shp
+		Length: *
+		ZOffset: 1023
+		IgnoreWorldTint: true
+
+ts_large_smoke_trail:
+	idle:
+		Filename: tssmokey.shp
+		Length: *
+		ZOffset: 1023
+		IgnoreWorldTint: true
+
+ts_tiny_clsn:
+	idle:
+		Filename: tss_clsn16.shp
+		Length: *
+		ZOffset: 1023
+
+ts_small_clsn:
+	idle:
+		Filename: tss_clsn22.shp
+		Length: *
+		ZOffset: 1023
+
+ts_medium_clsn:
+	idle:
+		Filename: tss_clsn30.shp
+		Length: *
+		ZOffset: 1023
+
+ts_large_clsn:
+	idle:
+		Filename: tss_clsn42.shp
+		Length: *
+		ZOffset: 1023
+
+ts_verylarge_clsn:
+	idle:
+		Filename: tss_clsn58.shp
+		Length: *
+		ZOffset: 1023
+
+ts_tiny_twlt:
+	idle:
+		Filename: tstwlt026.shp
+		Length: *
+		ZOffset: 1023
+
+ts_small_twlt:
+	idle:
+		Filename: tstwlt036.shp
+		Length: *
+		ZOffset: 1023
+
+ts_medium_twlt:
+	idle:
+		Filename: tstwlt050.shp
+		Length: *
+		ZOffset: 1023
+
+ts_large_twlt:
+	idle:
+		Filename: tstwlt070.shp
+		Length: *
+		ZOffset: 1023
+
+ts_verylarge_twlt:
+	idle:
+		Filename: tstwlt100.shp
+		Length: *
+		ZOffset: 1023
+
+ts_small_explosion:
+	idle:
+		Filename: tsexplosml.shp
+		Length: *
+		ZOffset: 1023
+
+ts_medium_explosion:
+	idle:
+		Filename: tsexplomed.shp
+		Length: *
+		ZOffset: 1023
+
+ts_large_explosion:
+	idle:
+		Filename: tsexplolrg.shp
+		Length: *
+		ZOffset: 1023
+
+ts_tiny_bang:
+	idle:
+		Filename: tss_bang16.shp
+		Length: *
+		ZOffset: 1023
+
+ts_small_bang:
+	idle:
+		Filename: tss_bang24.shp
+		Length: *
+		ZOffset: 1023
+
+ts_medium_bang:
+	idle:
+		Filename: tss_bang34.shp
+		Length: *
+		ZOffset: 1023
+
+ts_large_bang:
+	idle:
+		Filename: tss_bang48.shp
+		Length: *
+		ZOffset: 1023
+
+ts_tiny_brnl:
+	idle:
+		Filename: tss_brnl20.shp
+		Length: *
+		ZOffset: 1023
+
+ts_small_brnl:
+	idle:
+		Filename: tss_brnl30.shp
+		Length: *
+		ZOffset: 1023
+
+ts_medium_brnl:
+	idle:
+		Filename: tss_brnl40.shp
+		Length: *
+		ZOffset: 1023
+
+ts_large_brnl:
+	idle:
+		Filename: tss_brnl58.shp
+		Length: *
+		ZOffset: 1023
+
+ts_tiny_tumu:
+	idle:
+		Filename: tss_tumu22.shp
+		Length: *
+		ZOffset: 1023
+
+ts_small_tumu:
+	idle:
+		Filename: tss_tumu30.shp
+		Length: *
+		ZOffset: 1023
+
+ts_medium_tumu:
+	idle:
+		Filename: tss_tumu42.shp
+		Length: *
+		ZOffset: 1023
+
+ts_large_tumu:
+	idle:
+		Filename: tss_tumu60.shp
+		Length: *
+		ZOffset: 1023
+
 red_smokey:
 	idle:
 		Filename: red_smokey.shp
@@ -1783,6 +2053,73 @@ black_smokey:
 		Filename: black_smokey.shp
 		Length: *
 		ZOffset: 1023
+
+# Procedural RGBA dark-smoke puff (tools/gen_smoke.py). 32-frame birth->grow->dissipate
+# lifecycle; per-pixel alpha. Played once over the particle's lifetime (Tick * 32 ~= Duration).
+smoke_dark:
+	idle:
+		Filename: smoke_dark.png
+		Length: *
+		Tick: 80
+		ZOffset: 1023
+
+# Small detached cannon-muzzle puff. Generated by tools/gen_muzzle_smoke.py.
+muzzle_smoke:
+	idle:
+		Filename: muzzle_smoke.png
+		Length: *
+		Tick: 50
+		ZOffset: 1024
+
+# Procedural RGBA cryo "chill fog" puff (tools/gen_cryo_fog.py). Same 32-frame play-once
+# timing as smoke_dark; light cyan, lightly transparent. Drifts sideways via CryoFogEmitter.
+smoke_cryo:
+	idle:
+		Filename: smoke_cryo.png
+		Length: *
+		Tick: 80
+		ZOffset: 1023
+
+# Procedural light-cyan snowflake particle (tools/gen_snowflake.py). 32-frame rotate + fade,
+# played once over the particle's lifetime (same emitter mechanism as the chill fog).
+snowflake:
+	idle:
+		Filename: snowflake.png
+		Length: *
+		Tick: 80
+		ZOffset: 1023
+
+# Procedural RGBA fire-lit smoke puff (tools/gen_fire_smoke_glow.py). Same 32-frame
+# timing as smoke_dark, but with a subtle baked amber glow at the base for groundfire.
+smoke_fire_glow:
+	# Fire-lit glow puff of ground fire â€” emissive, must read as fire regardless of terrain
+	# brightness or weather tint.
+	idle:
+		Filename: smoke_fire_glow.png
+		Length: *
+		Tick: 80
+		ZOffset: 1023
+		IgnoreWorldTint: true
+
+# Procedural RGBA black smoke puff (tools/gen_smoke.py): 1.5x size (96px), same alpha as the grey
+# variant (opacity 0.55 + top-fade), so it reads as a rising plume not an opaque blob. Buildings only.
+smoke_building:
+	idle:
+		Filename: smoke_building.png
+		Length: *
+		Tick: 80
+		ZOffset: 1023
+
+# Procedural RGBA black building-smoke puff with an early baked fire-lit base
+# (tools/gen_fire_smoke_glow.py, 96px frames). Buildings only.
+smoke_building_fire_glow:
+	# Fire-lit base of burning-building smoke â€” emissive glow, ignore terrain/weather tint.
+	idle:
+		Filename: smoke_building_fire_glow.png
+		Length: *
+		Tick: 80
+		ZOffset: 1023
+		IgnoreWorldTint: true
 
 green_smokey:
 	idle:
@@ -1864,6 +2201,10 @@ advancedtargeting_icon:
 	idle:
 		Filename: advancedtargeting_overlay.png
 
+lockon_icon:
+	idle:
+		Filename: lockon_overlay.png
+
 shrouded_overlay:
 	idle:
 		Filename: shrouded_overlay.png
@@ -1901,9 +2242,13 @@ nanodrone_overlay_big:
 		BlendMode: Subtractive
 
 explosion:
+	# Weapon explosions/impacts/napalm should read at full brightness regardless of terrain
+	# brightness or weather tint. The Defaults flag covers every sub-sequence below, including
+	# any added later, so new explosion effects stay untinted automatically.
 	Defaults:
 		Length: *
 		ZOffset: 2047
+		IgnoreWorldTint: true
 	nuke_explosion:
 		Filename: atomsfx.shp
 	dt_nuke_explosion:
@@ -1922,133 +2267,116 @@ explosion:
 	ra2_piffs:
 		Filename: ra2_piffpiff.shp
 	d2k_piff:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3879
 		Length: 5
-		AddExtension: false
 		BlendMode: Additive
 		Tick: 80
 	d2k_piffs:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3682
 		Length: 4
-		AddExtension: false
 		BlendMode: Additive
 		Tick: 80
 	d2k_small_explosion:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3656
 		Length: 15
-		AddExtension: false
 		BlendMode: Additive
 		Tick: 80
 	d2k_med_explosion:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3643
 		Length: 12
-		AddExtension: false
 		BlendMode: Additive
 		Tick: 80
 	d2k_tiny_explosion:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3639
 		Length: 4
-		AddExtension: false
 		BlendMode: Additive
 		Tick: 80
 	d2k_nuke:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4218
 		Length: 14
-		AddExtension: false
 		BlendMode: Additive
 		Tick: 80
 	d2k_self_destruct:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3686
 		Length: 15
-		AddExtension: false
 		BlendMode: Additive
 		Tick: 80
 	d2k_building:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3701
 		Length: 22
-		AddExtension: false
 		BlendMode: Additive
 		Tick: 80
 	d2k_large_explosion:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4241
 		Length: 22
-		AddExtension: false
 		BlendMode: Additive
 		Tick: 80
 	d2k_small_napalm:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3674
 		Length: 8
-		AddExtension: false
 		BlendMode: Additive
 		Tick: 80
 	d2k_rocket_explosion:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3634
 		Length: 5
-		AddExtension: false
 		BlendMode: Additive
 		Tick: 80
 	d2k_shockwave:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3940
 		Length: 6
-		AddExtension: false
 		BlendMode: Additive
 		Tick: 80
 	deviator:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3765
 		Length: 23
 		Offset: 12, -10
-		AddExtension: false
 		BlendMode: Additive
 		Tick: 80
 	d2k_wall_explosion:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4130
 		Length: 8
-		AddExtension: false
 		BlendMode: Additive
 		Tick: 80
 	d2k_munitions_explosion:
 		Filename: d2k_munitions_explosion.shp
 		Scale: 2
 		Length: 18
-		AddExtension: false
 	d2k_munitions_explosion_small:
 		Filename: d2k_munitions_explosion.shp
 		Length: 18
-		AddExtension: false
 	devastator:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3947
 		Length: 17
-		AddExtension: false
 		BlendMode: Additive
 		Tick: 80
 	d2k_chaos_lightning:
@@ -2064,21 +2392,21 @@ explosion:
 	big_napalm:
 		Filename: napalm3.shp
 	med_tibnapalm:
-		Filename: chemball2.shp
+		Filename: td_nod_promotion_chemicalattackbike_chemball2.shp
 	big_tibnapalm:
 		Filename: chemball3.shp
 	small_frag: #light cannon
-		Filename: veh-hit3.shp
+		Filename: veh_hit3.shp
 	med_frag:
 		Filename: frag1.shp
 	big_frag:
 		Filename: frag3.shp
 	small_poof:
-		Filename: veh-hit2.shp
+		Filename: veh_hit2.shp
 	poof:
-		Filename: art-exp1.shp
+		Filename: art_exp1.shp
 	small_building:
-		Filename: veh-hit1.shp
+		Filename: veh_hit1.shp
 	building:
 		Filename: fball1.shp
 	building_napalm:
@@ -2091,17 +2419,17 @@ explosion:
 	water_piffs:
 		Filename: wpifpif.shp
 	small_explosion:
-		Filename: veh-hit3.shp
+		Filename: veh_hit3.shp
 	med_explosion:
-		Filename: veh-hit2.shp
+		Filename: veh_hit2.shp
 	flak_explosion_ground:
 		Filename: flak.shp
 	small_explosion_air:
 		Filename: flak.shp # only used by AA weapons, so a high ZOffset to overlay buildings isn't needed
 	med_explosion_air:
-		Filename: veh-hit2.shp # only used by AA weapons, so a high ZOffset to overlay buildings isn't needed
+		Filename: veh_hit2.shp # only used by AA weapons, so a high ZOffset to overlay buildings isn't needed
 	big_explosion_air:
-		Filename: veh-hit1.shp # only used by AA weapons, so a high ZOffset to overlay buildings isn't needed
+		Filename: veh_hit1.shp # only used by AA weapons, so a high ZOffset to overlay buildings isn't needed
 	ra2_flak_explosion_ground:
 		Filename: ra2_flak.shp
 	ra2_flak_explosion_air:
@@ -2113,15 +2441,15 @@ explosion:
 	med_splash:
 		Filename: h2o_exp2.shp
 	self_destruct:
-		Filename: art-exp1.shp
+		Filename: art_exp1.shp
 	artillery_explosion:
-		Filename: art-exp1.shp
+		Filename: art_exp1.shp
 	small_splash:
 		Filename: h2o_exp3.shp
 	large_explosion:
 		Filename: frag1.shp
 		Offset: -2,0
-	offset_napalm: # Used for E4 Explosion
+	offset_napalm: # Used for td_nod_flamethrower Explosion
 		Filename: napalm1.shp
 		Offset: 0, -6
 	large_napalm:
@@ -2129,7 +2457,7 @@ explosion:
 	cryo_blast:
 		Filename: cryo_blast1.shp
 	cryo_artillery:
-		Filename: cryo_art-exp1.shp
+		Filename: cryo_art_exp1.shp
 	corpse:
 		Filename: corpse1.tem
 		TilesetFilenames:
@@ -2162,19 +2490,18 @@ explosion:
 		Scale: 2
 	scplague:
 		Filename: defplague.png
-		AddExtension: false
 	drplasmaex:
 		Filename: drplasmaex.shp
 	purple_plasma:
 		Filename: purple_plasma.shp
 	blueartexp:
-		Filename: blueartexp.shp
+		Filename: japan_promotion_waveforceartillery_blueartexp.shp
 	blue_small_napalm:
 		Filename: blue_napalm1.shp
 	blue_small_fire:
 		Filename: blue_napalm.shp
 	blue_poof:
-		Filename: blue_art-exp1.shp
+		Filename: blue_art_exp1.shp
 	blue_building:
 		Filename: blue_fball1.shp
 	blue_building_napalm:
@@ -2183,7 +2510,7 @@ explosion:
 	blue_med_frag:
 		Filename: blue_frag1.shp
 	blue_small_building:
-		Filename: blue_veh-hit1.shp
+		Filename: blue_veh_hit1.shp
 	blue_big_frag:
 		Filename: blue_frag3.shp
 	green_small_fire:
@@ -2330,7 +2657,7 @@ explosion:
 		Offset: -0, 80
 		Tick: 80
 	wclbolt1:
-		Filename: ra2_wclbolt1.shp
+		Filename: ixian_promotion_stormraider_ra2_wclbolt1.shp
 		Offset: 0, 20
 		Tick: 40
 	wclbolt2:
@@ -2345,8 +2672,10 @@ explosion:
 		Filename: tspulsefx2.shp
 		Scale: 2
 	pulse_explosion_small:
-		Filename: genemp.shp
-		Scale: 2
+		Filename: tspulsefx2.shp
+	mobileemp_small:
+		Filename: tsmempfx.shp
+		Tick: 60
 	mobileemp:
 		Filename: tsmempfx.shp
 		Scale: 2
@@ -2354,15 +2683,16 @@ explosion:
 	mutate:
 		Filename: gendeath.shp
 	virus:
-		Filename: yr_virusd.shp
+		Filename: futuretech_promotion_cryolegionnaire_yr_virusd.shp
 		Length: *
 		Tick: 80
 	virusreversed:
-		Filename: yr_virusd.shp
+		Filename: futuretech_promotion_cryolegionnaire_yr_virusd.shp
 		Frames: 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
 		Tick: 105
 	chaosgas:
 		Filename: cdgas.shp
+		Alpha: 0.8
 	warpout:
 		Filename: ra2_warpout.shp
 	warpaway:
@@ -2507,12 +2837,11 @@ explosion:
 		Filename: modflakex.shp
 		Scale: 2
 	flame:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3965
 		Length: 10
 		Offset: 0, -16
-		AddExtension: false
 	drlaserexpbluh:
 		Filename: drlaserexpbluh.shp
 	poisoncloud:
@@ -2521,7 +2850,6 @@ explosion:
 		Start: 0
 		Length: 4
 		Tick: 100
-		AddExtension: False
 	catapult_impact:
 		Filename: catapulti_rof_mpact.shp
 		Scale: 2
@@ -2543,18 +2871,15 @@ explosion:
 		Filename: rllketchup.shp
 		ZOffset: -2047
 		Tick: 120
-	d2k_personal_shield:
+	ixian_personal_shield:
 		Filename: d2k_personal_shield.png
 		Scale: 2
-		AddExtension: false
-	d2k_personal_shield_sard:
+	ixian_personal_shield_sard:
 		Filename: d2k_personal_shield_sard.png
 		Scale: 2
-		AddExtension: false
-	d2k_personal_shield_heavy:
+	ixian_personal_shield_heavy:
 		Filename: d2k_personal_shield_heavy.png
 		Scale: 2
-		AddExtension: false
 	ra2_building:
 		Filename: ra2_twlt070.shp
 	ra2_ionring:
@@ -2629,6 +2954,9 @@ explosion:
 		Scale: 2
 	ra2nuke:
 		Filename: ra2_nukeanim.shp
+	ra2nukesmall:
+		Filename: ra2_nukeanim.shp
+		Scale: 0.5
 	ra2_nuke_ball:
 		Filename: ra2_nukeball.shp
 	demotruck_explosion:
@@ -2683,10 +3011,58 @@ explosion:
 		Scale: 0.4
 	scsiegetanksiegeexplosion:
 		Filename: scsiegetanksiegeexplosion.png
-		Frames: 0, 1, 2, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 10, 10, 11, 11		
+		Frames: 0, 1, 2, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 10, 10, 11, 11
 	scblueexplosion:
 		Filename: scblueexplosion.png
 		Length: *
+	magicnuke:
+		Filename: magicnuke.png
+		Scale: 1
+		Length: 64
+		Tick: 80
+	magicnuke_med:
+		Filename: magicnuke.png
+		Scale: 0.5
+		Length: 64
+		Tick: 40
+	magicnuke_small:
+		Filename: magicnuke.png
+		Scale: 0.25
+		Length: 64
+		Tick: 20
+	magicnuke_micro:
+		Filename: magicnuke.png
+		Scale: 0.2
+		Length: 64
+		Tick: 16
+	cabal_greenplasmaimpact:
+		Filename: cabal_greenplasmaimpact.png
+		Length: 10
+		Tick: 30
+	cabal_missileexplosion:
+		Filename: cabal_missileexplosion.png
+		Length: 12
+		Tick: 30
+	cabal_laserimpact_s:
+		Filename: cabal_laserimpact_s.png
+		Length: 8
+		Tick: 30
+	cabal_laserimpact_m:
+		Filename: cabal_laserimpact_m.png
+		Length: 10
+		Tick: 30
+	cabal_laserimpact_l:
+		Filename: cabal_laserimpact_l.png
+		Length: 12
+		Tick: 30
+	cabal_dissolveimpact:
+		Filename: cabal_dissolveimpact.png
+		Length: 10
+		Tick: 40
+	wc2_building_collapse:
+		Filename: wc2_orcs_goblinzeppelin_wc2_building_collapse.shp
+		Length: *
+		Tick: 80
 
 rank:
 	Defaults:
@@ -2742,9 +3118,61 @@ nodrank:
 		Start: 3
 		Offset: 1, 3
 
+cabalrank:
+	Defaults:
+		Filename: cabalranks.png
+		Offset: 0, 3
+	rank-veteran-1:
+	rank-veteran-2:
+		Start: 1
+	rank-veteran-3:
+		Start: 2
+	rank-elite:
+		Start: 3
+		Offset: 1, 3
+
+forgotrank:
+	Defaults:
+		Filename: forgotranks.png
+		Offset: 0, 3
+	rank-veteran-1:
+	rank-veteran-2:
+		Start: 1
+	rank-veteran-3:
+		Start: 2
+	rank-elite:
+		Start: 3
+		Offset: 1, 3
+
 alienrank:
 	Defaults:
 		Filename: alienranks.png
+		Offset: 0, 3
+	rank-veteran-1:
+	rank-veteran-2:
+		Start: 1
+	rank-veteran-3:
+		Start: 2
+	rank-elite:
+		Start: 3
+		Offset: 1, 3
+
+protossrank:
+	Defaults:
+		Filename: protossranks.png
+		Offset: 0, 3
+	rank-veteran-1:
+	rank-veteran-2:
+		Start: 1
+	rank-veteran-3:
+		Start: 2
+	rank-elite:
+		Start: 3
+		Offset: 1, 3
+
+terranrank:
+	Defaults:
+		Filename: terranranks.png
 		Offset: 0, 3
 	rank-veteran-1:
 	rank-veteran-2:
@@ -2783,6 +3211,21 @@ ra2rank:
 		Start: 4
 		Offset: 1, 3
 
+schwarzermondrank:
+	Defaults:
+		Filename: ra2rank.shp
+		Offset: 0, 3
+	rank-veteran-1:
+	rank-veteran-2:
+		Start: 1
+	rank-veteran-3:
+		Start: 2
+	rank-veteran-4:
+		Start: 3
+	rank-elite:
+		Start: 4
+		Offset: 1, 3
+
 rallypoint:
 	flag:
 		Filename: flagfly.shp
@@ -2790,7 +3233,7 @@ rallypoint:
 		Offset: 10,-5
 		ZOffset: 2535
 	circles:
-		Filename: fpls.shp
+		Filename: ra2_allies_upgrade_paratroopers_fpls.shp
 		Length: *
 		ZOffset: 2047
 
@@ -2803,7 +3246,7 @@ beacon:
 		Start: 5
 		Offset: 1,-12
 	circles:
-		Filename: fpls.shp
+		Filename: ra2_allies_upgrade_paratroopers_fpls.shp
 		Length: *
 		ZOffset: 2047
 	airstrike:
@@ -2814,7 +3257,7 @@ beacon:
 		Length: *
 		Offset: 0,-42
 	clock:
-		Filename: beaconclock.shp
+		Filename: ra2_allies_upgrade_paratroopers_beaconclock.shp
 		Length: *
 		Offset: 0,-42
 	clocklarge:
@@ -2822,15 +3265,15 @@ beacon:
 		Length: *
 		Offset: 0,-42
 	chronovortexicon:
-		Filename: chronovortexicon.png
+		Filename: ra1_allies_chronosphere_chronovortexicon.png
 		Length: *
 		Offset: 0,-42
 	japanspellcardicon:
-		Filename: japanspellcardicon.png
+		Filename: japan_japaneseshrine_japanspellcardicon.png
 		Length: *
 		Offset: 0,-42
 	pbmbicon:
-		Filename: pbmbicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_pbmbicon.shp
 		Length: *
 		Offset: 0,-42
 	camicon:
@@ -2838,7 +3281,7 @@ beacon:
 		Length: *
 		Offset: 0,-42
 	pinficon:
-		Filename: pinficon.shp
+		Filename: ra2_allies_upgrade_paratroopers_pinficon.shp
 		Length: *
 		Offset: 0,-42
 	rapinficon:
@@ -2858,13 +3301,13 @@ beacon:
 		Length: *
 		Offset: 0,-42
 	hunterseeker:
-		Filename: tshunterseekersicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tshunterseekersicon.shp
 		Offset: 0,-42
 	chemicalmiss:
-		Filename: tschemicalmissicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tschemicalmissicon.shp
 		Offset: 0,-42
 	multimiss:
-		Filename: tsmultimissicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tsmultimissicon.shp
 		Offset: 0,-42
 
 select:
@@ -2881,7 +3324,7 @@ allyrepair:
 
 crate:
 	idle:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 102
 		ZOffset: -511
@@ -2923,23 +3366,27 @@ ts_crate:
 
 xcratea:
 	idle:
+		Scale: 2
 		Filename: xcrate.shp
 		ZOffset: -511
 
 xcrateb:
 	idle:
+		Scale: 2
 		Filename: xcrate.shp
 		Start: 1
 		ZOffset: -511
 
 xcratec:
 	idle:
+		Scale: 2
 		Filename: xcrate.shp
 		Start: 2
 		ZOffset: -511
 
 xcrated:
 	idle:
+		Scale: 2
 		Filename: xcrate.shp
 		Start: 3
 		ZOffset: -511
@@ -3033,7 +3480,7 @@ ionsfx:
 		Offset: 0, 0
 		Start: 10
 		Alpha: 0.2
-		Length: *		
+		Length: *
 
 bomblet:
 	idle:
@@ -3084,16 +3531,19 @@ pips:
 		Start: 4
 	pip-blue:
 		Start: 5
-	pip-heal:
-		Filename: pip-heal.shp
+	pip_heal:
+		Filename: pip_heal.shp
 		Offset: -1, 1
 	groups:
 		Filename: pdigits.shp
 		Length: *
 		Offset: 9, 5
 		Frames: 1, 2, 3, 4, 5, 6, 7, 8, 9, 0
-	pip-hazmat:
-		Filename: pip-hazmat.shp
+	pip_hazmat:
+		Filename: pip_hazmat.png
+		Offset: -3, 0
+	pip_reflectivearmor:
+		Filename: pip_reflectivearmor.png
 		Offset: -3, 0
 	tag-primary:
 		Filename: rapips.shp
@@ -3103,8 +3553,8 @@ pips:
 		Filename: rapips.shp
 		Start: 18
 		Offset: 0, 2
-	pip-disguise:
-		Filename: pip-disguise.shp
+	pip_disguise:
+		Filename: pip_disguise.shp
 		Length: *
 		Tick: 300
 		Offset: 0, -6
@@ -3164,193 +3614,190 @@ poweroff:
 
 icon:
 	Defaults:
-		AddExtension: False
-	supernova_missile_super_icon: 
-		Filename: cameo_plymouth_supernova_missile.shp
 	hunterseeker:
-		Filename: tshunterseekersicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tshunterseekersicon.shp
 	chemicalmiss:
-		Filename: tschemicalmissicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tschemicalmissicon.shp
 	multimiss:
-		Filename: tsmultimissicon.shp
-	droppod:
-		Filename: tspodsicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tsmultimissicon.shp
 	mutcommando:
-		Filename: tsghosticon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tsghosticon.shp
 	mutwildlife:
-		Filename: tsdoggieicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tsdoggieicon.shp
 	emp:
-		Filename: tspulsicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tspulsicon.shp
 	airstrike:
-		Filename: bombicnh.tem
+		Filename: ra2_allies_upgrade_paratroopers_bombicnh.tem
 	ioncannon:
-		Filename: ionicnh.tem
+		Filename: ra2_allies_upgrade_paratroopers_ionicnh.tem
 	abomb:
-		Filename: atomicnh.tem
+		Filename: ra2_allies_upgrade_paratroopers_atomicnh.tem
 	invuln:
-		Filename: infxicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_infxicon.shp
 	chrono:
-		Filename: warpicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_warpicon.shp
 	chronoreinforcements:
-		Filename: ctnkicon.shp
+		Filename: ra1_allies_promotion_chronotank_icon.shp
 	spyplane:
-		Filename: smigicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_smigicon.shp
 	paratroopers:
-		Filename: pinficon.shp
+		Filename: ra2_allies_upgrade_paratroopers_pinficon.shp
 	gps:
-		Filename: gpssicon.shp
+		Filename: ra1_allies_upgrade_gpssatellitesupport_icon.shp
 	parabombs:
-		Filename: pbmbicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_pbmbicon.shp
 	sonar:
-		Filename: sonricon.shp
+		Filename: ra2_allies_upgrade_paratroopers_sonricon.shp
 	#abomb: atomicon.shp
 	bolticon:
-		Filename: bolticon.shp
+		Filename: ra2_allies_upgrade_paratroopers_bolticon.shp
 	mercenary_1_icon:
-		Filename: d2k_mercenary_inf_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_d2k_mercenary_inf_icon.shp
 	sardaukar_icon:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4276
 		Offset: -30,-24
 	sardaukar_elite_icon:
-		Filename: d2k_sardaukar_elite_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_d2k_sardaukar_elite_icon.shp
 	ornistrike:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4292
 		Offset: -30,-24
 	fremen:
-		Filename: fremenwarrioricon.shp
+		Filename: ra2_allies_upgrade_paratroopers_fremenwarrioricon.shp
 	fremeng:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4293
 		Offset: -30,-24
 	saboteur:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4295
 		Offset: -30,-24
 	deathhand:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4296
 		Offset: -30,-24
 	d2k_chaos_lightning_icon:
-		Filename: d2k_chaos_lightning_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_d2k_chaos_lightning_icon.shp
 	wormicon:
-		Filename: d2k_sandworm_tower_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_d2k_sandworm_tower_icon.shp
 	rainoffire_icon:
-		Filename: rainoffire_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_rainoffire_icon.shp
 	poisoncloud_icon:
-		Filename: poisoncloud_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_poisoncloud_icon.shp
 	wc_far_seeing:
-		Filename: wc_support_power_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_wc_support_power_icon.shp
 		Start: 0
 	wc_dark_vision:
-		Filename: wc_support_power_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_wc_support_power_icon.shp
 		Start: 1
 	ra2psirev:
-		Filename: ra2revealicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_ra2revealicon.shp
 	ra2domin:
-		Filename: ra2dominateicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_ra2dominateicon.shp
 	ra2mutate:
-		Filename: ra2mutateicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_ra2mutateicon.shp
 	forceshield:
-		Filename: ra2forcicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_ra2forcicon.shp
 	scstimpack:
-		Filename: scstimpack.shp
+		Filename: ra2_allies_upgrade_paratroopers_scstimpack.shp
 	glambush1:
-		Filename: uprebelambush1icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_uprebelambush1icon.shp
 	glambush2:
-		Filename: uprebelambush2icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_uprebelambush2icon.shp
 	glambush3:
-		Filename: uprebelambush3icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_uprebelambush3icon.shp
 	glsneakatk:
-		Filename: glsneakattackicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_glsneakattackicon.shp
 	glanthraxbomb:
-		Filename: glanthraxbombicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_glanthraxbombicon.shp
 	glscudstorm:
-		Filename: glscudstormicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_glscudstormicon.shp
 	gerepair1:
-		Filename: upemergencyrepair1icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upemergencyrepair1icon.shp
 	gerepair2:
-		Filename: upemergencyrepair2icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upemergencyrepair2icon.shp
 	gerepair3:
-		Filename: upemergencyrepair3icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upemergencyrepair3icon.shp
 	glgpscram:
-		Filename: glgpscram.shp
+		Filename: ra2_allies_upgrade_paratroopers_glgpscram.shp
 	chartybarr1:
-		Filename: upartybarrage1icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upartybarrage1icon.shp
 	chartybarr2:
-		Filename: upartybarrage2icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upartybarrage2icon.shp
 	chartybarr3:
-		Filename: upartybarrage3icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upartybarrage3icon.shp
 	chfrenzy1:
-		Filename: upfrenzy1icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upfrenzy1icon.shp
 	chfrenzy2:
-		Filename: upfrenzy2icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upfrenzy2icon.shp
 	chfrenzy3:
-		Filename: upfrenzy3icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upfrenzy3icon.shp
 	chnuclear:
-		Filename: chnuclear.shp
+		Filename: ra2_allies_upgrade_paratroopers_chnuclear.shp
 	chcarpet:
-		Filename: chcarpetbombicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_chcarpetbombicon.shp
 	chemp:
-		Filename: empicon.png
+		Filename: ra2_allies_upgrade_paratroopers_empicon.png
 	chclustermines:
-		Filename: chclustermines.shp
+		Filename: ra2_allies_upgrade_paratroopers_chclustermines.shp
 	usagunshipicon:
-		Filename: usagunshipicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_usagunshipicon.shp
 	usaparadrop1:
-		Filename: usaparadrop1.shp
+		Filename: ra2_allies_upgrade_paratroopers_usaparadrop1.shp
 	usaparadrop2:
-		Filename: usaparadrop2.shp
+		Filename: ra2_allies_upgrade_paratroopers_usaparadrop2.shp
 	usaparadrop3:
-		Filename: usaparadrop3.shp
+		Filename: ra2_allies_upgrade_paratroopers_usaparadrop3.shp
 	usaa101:
-		Filename: usaa101.shp
+		Filename: ra2_allies_upgrade_paratroopers_usaa101.shp
 	usaa102:
-		Filename: usaa102.shp
+		Filename: ra2_allies_upgrade_paratroopers_usaa102.shp
 	usaa103:
-		Filename: usaa103.shp
+		Filename: ra2_allies_upgrade_paratroopers_usaa103.shp
 	usaleaflet:
-		Filename: usaleafleticon.shp
+		Filename: ra2_allies_upgrade_paratroopers_usaleafleticon.shp
 	usafuelbomb:
-		Filename: usafuelbombicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_usafuelbombicon.shp
 	usamotherbomb:
-		Filename: usamotherbombicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_usamotherbombicon.shp
 	usaspydrone:
-		Filename: usascoutdroneicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_usascoutdroneicon.shp
 	usacarpet:
-		Filename: usacarpeticon.shp
+		Filename: ra2_allies_upgrade_paratroopers_usacarpeticon.shp
 	radarvan:
-		Filename: glradarscan.shp
+		Filename: ra2_allies_upgrade_paratroopers_glradarscan.shp
 	glabounty1:
-		Filename: upglabounty1icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upglabounty1icon.shp
 	glabounty2:
-		Filename: upglabounty2icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upglabounty2icon.shp
 	glabounty3:
-		Filename: upglabounty3icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upglabounty3icon.shp
 	cashhack:
-		Filename: cashhackicon.png
+		Filename: ra2_allies_upgrade_paratroopers_cashhackicon.png
 	sathack1:
-		Filename: sathack1icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_sathack1icon.shp
 	sathack2:
-		Filename: sathack2icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_sathack2icon.shp
 	conssupp1:
-		Filename: steel_cougar_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_steel_cougar_icon.shp
 	conssupp2:
-		Filename: steel_hummer_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_steel_hummer_icon.shp
 	conssupp3:
-		Filename: steel_oldqtnk_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_steel_oldqtnk_icon.shp
 	conssupp4:
-		Filename: steel_cobra_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_steel_cobra_icon.shp
 	emptyicon:
 		Filename: invisibleitem.shp
 	xxicon:
 		Filename: invisibleitem.shp
+	supernova_missile_super_icon:
+		Filename: ra2_allies_upgrade_paratroopers_cameo_plymouth_supernova_missile.shp
 
 moveflsh:
 	idle:
@@ -3385,7 +3832,6 @@ shroud:
 # the index that is mapped to them in maps
 scorches:
 	Defaults:
-		UseTilesetExtension: true
 		Length: *
 		Filename: sc1.tem
 	sc1:
@@ -3457,33 +3903,30 @@ scorches:
 
 rockcraters:
 	Defaults:
-		UseTilesetExtension: true
 		Scale: 1.4
-	rockcrater1: DATA.R8
+	rockcrater1: ra2_allies_upgrade_paratroopers_data.r8
 		Start: 114
 		Length: 16
 		Offset: -16,-16
-	rockcrater2: DATA.R8
+	rockcrater2: ra2_allies_upgrade_paratroopers_data.r8
 		Start: 130
 		Length: 16
 		Offset: -16,-16
 
 sandcraters:
 	Defaults:
-		UseTilesetExtension: true
 		Scale: 1.4
-	sandcrater1: DATA.R8
+	sandcrater1: ra2_allies_upgrade_paratroopers_data.r8
 		Start: 146
 		Length: 16
 		Offset: -16,-16
-	sandcrater2: DATA.R8
+	sandcrater2: ra2_allies_upgrade_paratroopers_data.r8
 		Start: 162
 		Length: 16
 		Offset: -16,-16
 
 craters:
 	Defaults:
-		UseTilesetExtension: true
 		Length: *
 		Filename: cr1.tem
 	cr1:
@@ -3711,8 +4154,8 @@ rapips:
 	pip-blue:
 		Filename: pips2.shp
 		Start: 5
-	pip-disguise:
-		Filename: pip-disguise.shp
+	pip_disguise:
+		Filename: pip_disguise.shp
 		Length: *
 		Tick: 300
 		Offset: 0, -6
@@ -3726,6 +4169,9 @@ litning:
 	dim:
 		Start: 4
 		Length: 4
+		ZOffset: 1023
+	idle:
+		Length: *
 		ZOffset: 1023
 
 litning2:
@@ -3844,6 +4290,12 @@ purple_fb4:
 		Length: *
 		ZOffset: 1023
 
+blue_small_napalm:
+	idle:
+		Filename: blue_napalm1.shp
+		Length: *
+		ZOffset: 1023
+
 minp:
 	idle:
 		Filename: minp.shp
@@ -3878,9 +4330,9 @@ ra2parach:
 		Start: 40
 		Length: 30
 
-parach-shadow:
+parach_shadow:
 	idle:
-		Filename: parach-shadow.shp
+		Filename: parach_shadow.shp
 		Length: *
 
 mine:
@@ -3923,7 +4375,6 @@ op2_commonore_beacon_3bar:
 
 wormspawner:
 	Defaults:
-		AddExtension: false
 	idle:
 		Filename: wormspawner.shp
 		Scale: 2
@@ -4042,6 +4493,18 @@ hakureiring:
 	idle2:
 		Filename: hakureiring2.shp
 
+hakureiringspecial:
+	Defaults:
+		ZOffset: 1023
+		Length: *
+		IgnoreWorldTint: True
+		Filename: ra_japan_exorcistspecialattack.png
+	bullet:
+		Frames: 0, 1
+	trail:
+		Frames: 2, 3, 4, 5, 6
+		Alpha: 1, 0.85, 0.7, 0.55, 0.4
+
 hakurei_tailsman:
 	Defaults:
 		ZOffset: 1023
@@ -4072,9 +4535,13 @@ hakurei_giphy:
 		IgnoreWorldTint: True
 	idle:
 	fades:
-		Alpha: 0.1		
+		Alpha: 0.1
 
 scorch_flames:
+	# Animated flames spawned on Scorch smudges by flame weapons â€” must read as fire regardless
+	# of terrain brightness or weather tint.
+	Defaults:
+		IgnoreWorldTint: true
 	large_flame:
 		Length: *
 		Combine:
@@ -4286,6 +4753,19 @@ scorch_flames:
 				Offset: 2, -5
 				Scale: 0.2
 
+stealthfade:
+	Defaults:
+		Filename: stealthfade.shp
+		Scale: 0.4
+		Length: *
+		Tick: 40
+		Offset: 0, 0, 30
+		ZOffset: 3c128
+		BlendMode: Additive
+	idle:
+	reversed:
+		Frames: 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+
 cftilemarkers:
 	Defaults:
 		Filename: cftilemarkers.shp
@@ -4412,3 +4892,15 @@ energyshields:
 		Scale: 0.45
 		Tick: 50
 		Offset: 0,-20
+
+sparkle:
+	plus:
+		Filename: sparkle.png
+		Frames: 0,1,2,3,4
+		Length: 5
+		Tick: 130
+	cross:
+		Filename: sparkle.png
+		Frames: 5,6,7,8,9
+		Length: 5
+		Tick: 130

@@ -1,0 +1,257 @@
+tkm_bunker:
+	Inherits: ^Defense
+	Inherits@Template: ^BunkerTemplate
+	Inherits@exp: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@shape: ^1x1Shape
+	Inherits@gar: ^ClearableGarrison
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: TKM Bunker
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~tkm_constructionyard, tkm_barracks
+		Queue: Defence, RADefence
+		Description: template_anti_infantry_defense.description
+	Building:
+	Health:
+		HP: 120000
+	WithBuildingBib:
+		HasMinibib: true
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 4
+		EjectOnDeath: false
+	Armament:
+		Weapon: tkmbunkmg
+		LocalOffset: 256,0,256
+		MuzzleSequence: muzzle
+		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
+	Armament@Upgrade:
+		Weapon: HighVAP
+		LocalOffset: 256,0,256
+		MuzzleSequence: muzzle
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
+	AttackOpenTopped:
+		Armaments: garrisoned
+		PortOffsets: 300,400,200, -400,500,200, 300,-400,200, -400,-500,200
+		PauseOnCondition: chronobeamed
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	BodyOrientation:
+		QuantizedFacings: 8
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	WithMuzzleOverlay:
+	Turreted:
+		TurnSpeed: 1023
+	RevealsShroud:
+		Range: 7496
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+tkm_quadturretbunker:
+	Inherits: ^Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@exp: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@shape: ^1x1Shape
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: TKM Quad Turret Bunker
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~tkm_constructionyard, tkm_observationvan
+		Queue: Defence, RADefence
+		Description: template_anti_infantry_defense.description
+	Building:
+	Health:
+		HP: 85000
+	WithBuildingBib:
+		HasMinibib: true
+	# Armament@AG:
+	# 	Weapon: TKMGatlingTankCannon
+	# 	Recoil: 85
+	# 	LocalOffset: 500,100,450, 500,-100,450
+	# 	MuzzleSequence: muzzle
+	Armament@AA:
+		Weapon: TKMAATurretCannon
+		Recoil: 43
+		LocalOffset: 500,100,450, 500,-100,450
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	BodyOrientation:
+		QuantizedFacings: 8
+	WithMuzzleOverlay:
+	Turreted:
+		TurnSpeed: 30
+		Offset: 0,0,200
+	Power:
+		Amount: -25
+	WithSpriteTurret:
+	RevealsShroud:
+		Range: 6720
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: tkm_quadturretbunker
+
+tkm_tankturretbunker:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@exp: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@shape: ^1x1Shape
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: TKM Tank Turret Bunker
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~tkm_constructionyard, tkm_barracks
+		Queue: Defence, RADefence
+		Description: template_anti_infantry_defense.description
+	Building:
+	Health:
+		HP: 100000
+	WithBuildingBib:
+		HasMinibib: true
+	Armament:
+		Weapon: tkmturretcannon
+		LocalOffset: 256,0,256
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	BodyOrientation:
+		QuantizedFacings: 8
+	WithMuzzleOverlay:
+	Turreted:
+		TurnSpeed: 30
+		Offset: 0,0,300
+	Power:
+		Amount: -25
+	WithSpriteTurret:
+	RevealsShroud:
+		Range: 8683
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: tkm_tankturretbunker
+
+#######################################
+# TKM Infantry Reporting!
+#######################################
+
+tkmtrenchtankdeployed:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@exp: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@shape: ^1x1Shape
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: TKM Trench Tank (Deployed)
+	-Buildable:
+	Building:
+	Health:
+		HP: 200000
+	WithBuildingBib:
+		HasMinibib: true
+	Armament:
+		Weapon: tkmtrenchdepcannon
+		LocalOffset: 256,0,256
+		MuzzleSequence: muzzle
+	Armor:
+		Type: Heavy
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	BodyOrientation:
+		QuantizedFacings: 8
+	WithMuzzleOverlay:
+	Turreted:
+		TurnSpeed: 30
+		Offset: 0,0,300
+		InitialFacing: 640
+	WithSpriteTurret:
+	RevealsShroud:
+		Range: 6720
+	GivesBuildableArea:
+		AreaTypes: building
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: tkmtrenchtankdeployed
+
+tkmratflakdeployed:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@exp: ^GainsExperienceRA2
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@shape: ^1x1Shape
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Flak Bus (Deployed)
+	-Buildable:
+	Building:
+	Health:
+		HP: 120000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	WithBuildingBib:
+		HasMinibib: true
+	Armament:
+		Weapon: FlakbusAA
+		LocalOffset: 256,0,256
+		MuzzleSequence: muzzle
+	Transforms:
+		IntoActor: tkm_flakbus
+		Offset: 0,0
+		TransformSounds: tsplace2.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+		Facing: 100
+	Armor:
+		Type: Heavy
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+	BodyOrientation:
+		QuantizedFacings: 8
+	WithMuzzleOverlay:
+	WithMakeAnimation:
+	Turreted:
+		TurnSpeed: 40
+		Offset: 0,445,-15
+		InitialFacing: 640
+	WithSpriteBody:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	ActorStatValues:
+		Upgrades: tkm_upgrade_heavytitanplating
+	DamageMultiplier:
+		Modifier: 75
+		RequiresCondition: tkm_upgrade_heavytitanplating
+	GrantConditionOnPrerequisite@tkm_upgrade_titanarsenalupgrade:
+		Condition: tkm_upgrade_heavytitanplating
+		Prerequisites: tkm_upgrade_heavytitanplating
+	RevealsShroud:
+		Range: 6720
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: tkmratflakdeployed

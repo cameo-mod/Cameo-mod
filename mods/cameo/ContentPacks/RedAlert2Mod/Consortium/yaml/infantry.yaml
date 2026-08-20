@@ -1,0 +1,481 @@
+steelconsortium_clonetrooper:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@SteelConsortiumPulseWeapons: ^SteelConsortiumPulseWeapons
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusionInfantry
+	Inherits@SteelConsortiumResonanceAmmo: ^SteelConsortiumResonanceAmmo
+	Valued:
+		Cost: 143
+	Tooltip:
+		Name: Clone Trooper
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~steelconsortium_steelbarracks
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 57
+	Health:
+		HP: 17000
+	ChangesHealth@SelfHealing:
+		Step: 17
+	Armament@PRIMARY:
+		Weapon: SteelCloneGun
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: SteelCloneGun_elite
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: SteelCloneGun
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: SteelCloneGun_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@UpgradePRIMARY:
+		Weapon: SteelCloneGunResonance
+		RequiresCondition: !rank-elite && steelconsortium_upgrade_resonanceammo
+	Armament@UpgradeELITE:
+		Weapon: SteelCloneGunResonance_elite
+		RequiresCondition: rank-elite && steelconsortium_upgrade_resonanceammo
+	Armament@UpgradeGARRISONED:
+		Name: garrisoned
+		Weapon: SteelCloneGunResonance
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && steelconsortium_upgrade_resonanceammo
+	Armament@UpgradeGARRISONEDELITE:
+		Name: garrisoned
+		Weapon: SteelCloneGunResonance_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && steelconsortium_upgrade_resonanceammo
+	FirepowerMultiplier@steelconsortium_upgrade_pulseweapons:
+		Modifier: 91
+	RangeMultiplier@steelconsortium_upgrade_pulseweapons:
+		Modifier: 130
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: SteelCloneVoice
+	RenderSprites:
+		PlayerPalette: playerra2cons
+	ActorStatValues:
+		Upgrades: steelconsortium_upgrade_pulseweapons, steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_resonanceammo, steelconsortium_upgrade_shieldresistance
+
+steelconsortium_hoverboardgrenadier:
+	Inherits: ^Soldier
+	Inherits@Template: ^GrenadierInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusionInfantry
+	Inherits@quantum: ^QuantumWeaponsEMP
+	Valued:
+		Cost: 650
+	Tooltip:
+		Name: Hover Board Grenadier
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~steelconsortium_steelbarracks, steelconsortium_consortiumradar
+		Queue: Infantry, RAInfantry
+		Description: actor_steel_board_inf.description
+	Mobile:
+		Locomotor: hover
+		Speed: 130
+	Hovers:
+	Targetable@Hover:
+		TargetTypes: Water, Ship
+	Health:
+		HP: 22000
+	ChangesHealth@SelfHealing:
+		Step: 22
+	Armament@PRIMARY:
+		Weapon: SteelMakoGun
+		LocalOffset: 300,200,800
+		RequiresCondition: !rank-elite && !steelconsortium_upgrade_quantumweaponpower
+	Armament@ELITE:
+		Weapon: SteelMakoGun_elite
+		LocalOffset: 300,200,800
+		RequiresCondition: rank-elite && !steelconsortium_upgrade_quantumweaponpower
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: SteelMakoGun
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && !steelconsortium_upgrade_quantumweaponpower
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: SteelMakoGun_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && !steelconsortium_upgrade_quantumweaponpower
+	Armament@UpgradePRIMARY:
+		Weapon: SteelMakoGun_EMP
+		LocalOffset: 300,200,800
+		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
+	Armament@UpgradeELITE:
+		Weapon: SteelMakoGun_EMP_elite
+		LocalOffset: 300,200,800
+		RequiresCondition: rank-elite && steelconsortium_upgrade_quantumweaponpower
+	Armament@UpgradeGARRISONED:
+		Name: garrisoned
+		Weapon: SteelMakoGun_EMP
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
+	Armament@UpgradeGARRISONEDELITE:
+		Name: garrisoned
+		Weapon: SteelMakoGun_EMP_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && steelconsortium_upgrade_quantumweaponpower
+	FirepowerMultiplier@Freed:
+		Modifier: 550
+	ReloadDelayMultiplier@Freed:
+		Modifier: 200
+	AttackFrontal:
+		FacingTolerance: 0
+	-TakeCover:
+	Voiced:
+		VoiceSet: SteelSkaterVoice
+	RenderSprites:
+		PlayerPalette: playerra2cons
+	ActorStatValues:
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance
+
+steelconsortium_quantummissiletrooper:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@editorhack: ^DeployableInfantryEditor
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@bot: ^SiegeMode
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusionInfantry
+	Inherits@quantum: ^QuantumWeaponsEMP
+	Valued:
+		Cost: 1150
+	Tooltip:
+		Name: Quantum Missile Trooper
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~steelconsortium_steelbarracks, steelconsortium_consortiumbattlelab
+		Queue: Infantry, RAInfantry
+		Description: actor_ggi.description
+	Mobile:
+		Speed: 48
+	Health:
+		HP: 64000
+	ChangesHealth@SelfHealing:
+		Step: 64
+	RangeMultiplier@deployed:
+		Modifier: 125
+		RequiresCondition: deployed
+	RevealsShroudMultiplier@shrouded:
+		Modifier: 125
+		RequiresCondition: deployed
+	DamageMultiplier@deployed:
+		Modifier: 75
+		RequiresCondition: deployed
+	RenderRangeCircle:
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	Armament@PRIMARY:
+		Weapon: SteelInfRailgun
+		LocalOffset: 384,64,384
+		RequiresCondition: !deployed && !rank-elite && !steelconsortium_upgrade_quantumweaponpower
+	Armament@PRIMARYELITE:
+		Weapon: SteelInfRailgun_elite
+		LocalOffset: 384,64,384
+		RequiresCondition: !deployed && rank-elite && !steelconsortium_upgrade_quantumweaponpower
+	Armament@UpgradePRIMARY:
+		Weapon: SteelInfRailgun_EMP
+		LocalOffset: 384,64,384
+		RequiresCondition: !deployed && !rank-elite && steelconsortium_upgrade_quantumweaponpower
+	Armament@UpgradePRIMARYELITE:
+		Weapon: SteelInfRailgun_EMP_elite
+		LocalOffset: 384,64,384
+		RequiresCondition: !deployed && rank-elite && steelconsortium_upgrade_quantumweaponpower
+	Armament@BOTAA:
+		Weapon: aadeploytargeting_8c0_AA
+		Name: targeting
+		RequiresCondition: botmicro
+	Armament@DEPLOYED:
+		Name: deployed
+		Weapon: SteelInfRailgun
+		Turret: deploy
+		LocalOffset: 384,64,384
+		RequiresCondition: deployed && !rank-elite && !steelconsortium_upgrade_quantumweaponpower
+	Armament@DEPLOYEDELITE:
+		Name: deployed
+		Weapon: SteelInfRailgun_elite
+		Turret: deploy
+		LocalOffset: 384,64,384
+		RequiresCondition: deployed && rank-elite && !steelconsortium_upgrade_quantumweaponpower
+	Armament@UpgradeDEPLOYED:
+		Name: deployed
+		Weapon: SteelInfRailgun_EMP
+		Turret: deploy
+		LocalOffset: 384,64,384
+		RequiresCondition: deployed && !rank-elite && steelconsortium_upgrade_quantumweaponpower
+	Armament@UpgradeDEPLOYEDELITE:
+		Name: deployed
+		Weapon: SteelInfRailgun_EMP_elite
+		Turret: deploy
+		LocalOffset: 384,64,384
+		RequiresCondition: deployed && rank-elite && steelconsortium_upgrade_quantumweaponpower
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: SteelInfRailgun
+		RequiresCondition: !rank-elite && !steelconsortium_upgrade_quantumweaponpower
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: SteelInfRailgun_elite
+		RequiresCondition: rank-elite && !steelconsortium_upgrade_quantumweaponpower
+	Armament@UpgradeGARRISONED:
+		Name: garrisoned
+		Weapon: SteelInfRailgun_EMP
+		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
+	Armament@UpgradeGARRISONEDELITE:
+		Name: garrisoned
+		Weapon: SteelInfRailgun_EMP_elite
+		RequiresCondition: rank-elite && steelconsortium_upgrade_quantumweaponpower
+	AttackFrontal:
+		Armaments: primary, targeting
+		RequiresCondition: undeployed
+		FacingTolerance: 2
+	AttackTurreted@deployed:
+		Armaments: deployed
+		Turrets: deploy
+		PauseOnCondition: disabled
+		RequiresCondition: deployed
+		Voice: Attack
+	Turreted:
+		Turret: deploy
+		RealignDelay: -1
+		TurnSpeed: 1023
+		InitialFacing: 368
+	WithSpriteTurret@idle:
+		Turret: deploy
+		Sequence: deployed
+		RequiresCondition: deployed && !animate-turret
+	WithSpriteTurret@animated:
+		Turret: deploy
+		Sequence: shoot-deployed
+		RequiresCondition: deployed && animate-turret
+	WithSpriteBody:
+		Sequence: dot
+		Name: dot
+		RequiresCondition: !undeployed
+	GrantConditionOnAttack:
+		Condition: animate-turret
+		RevokeDelay: 5
+		ArmamentNames: deployed
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+		RequiresCondition: undeployed
+	WithMakeAnimation:
+		Sequence: deploy
+		BodyNames: dot
+	GrantConditionOnDeploy:
+		Facing: 384
+		DeploySounds: iggidepa.wav
+		UndeploySounds: iggidepa.wav
+		RequiresCondition: !parachute
+		Voice: Deploy
+	Crushable:
+		RequiresCondition: undeployed
+	Crushable@deployed:
+		CrushClasses: vehicle
+		RequiresCondition: !undeployed
+	Voiced:
+		VoiceSet: SteelSentinelVoice
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	RenderSprites:
+		PlayerPalette: playerra2cons
+	ActorStatValues:
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance
+
+steelconsortium_engineer:
+	Inherits: ^Soldier
+	Inherits@anim: ^RA2Infantry
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@engineer: ^EngineerDefaultWeapons
+	Inherits@isengineer: ^IsEngineer
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
+	Inherits@vo: ^AttackVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusionInfantry
+	Tooltip:
+		Name: Engineer
+	Valued:
+		Cost: 500
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~steelconsortium_steelbarracks
+		Queue: Infantry, RAInfantry
+		Description: Captures and repairs structures.\n  Unarmed
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 5000
+	Passenger:
+		CustomPipType: engineer
+	Garrisoner:
+		CustomPipType: engineer
+	InstantlyRepairs:
+		Types: building
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	InstantlyRepairs@Tech:
+		Types: tech
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	InstantlyRepairs@Civ:
+		Types: civ
+		ValidRelationships: Ally, Neutral
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	RepairsBridges:
+		EnterBehaviour: Exit
+	CaptureManager:
+	GrantConditionOnPrerequisite@GLOBALREUSABLEENGINEER:
+		Condition: global-reusable-engineers
+		Prerequisites: global-reusable-engineers
+	Captures:
+		RequiresCondition: !global-reusable-engineers
+		CaptureTypes: building, defense, tech
+		PlayerExperience: 500
+		ConsumedByCapture: True
+	Captures@REUSABLE:
+		RequiresCondition: global-reusable-engineers
+		CaptureTypes: building, defense, tech
+		PlayerExperience: 500
+		CaptureDelay: 375
+		ConsumedByCapture: False
+		EnterCursor: ability
+		EnterBlockedCursor: move-blocked
+	Selectable:
+		Priority: 5
+		Class: e6
+	Voiced:
+		VoiceSet: SteelEngVoice
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	RenderSprites:
+		Image: steelconsortium_engineer
+	-TakeCover:
+	ActorStatValues:
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_shieldresistance
+
+steelconsortium_steelrunner:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@anim: ^RA2Infantry
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MC: ^MCImmune
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusionInfantry
+	Inherits@SteelConsortiumResonanceAmmo: ^SteelConsortiumResonanceAmmo
+	Tooltip:
+		Name: Steel Runner
+	Valued:
+		Cost: 3000
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 120
+		Prerequisites: ~steelconsortium_steelbarracks, steelconsortium_consortiumbattlelab
+		BuildLimit: 1
+		Description: template_commando.description
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Mobile:
+		Speed: 90
+	Passenger:
+	Armament@PRIMARY:
+		Weapon: SteelRunnerPistols
+		RequiresCondition: !rank-elite
+		LocalOffset: 128,0,256
+	Armament@ELITE:
+		Weapon: SteelRunnerPistols_elite
+		RequiresCondition: rank-elite
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: SteelRunnerPistols
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: SteelRunnerPistols_elite
+		RequiresCondition: rank-elite
+	Armament@UpgradePRIMARY:
+		Weapon: SteelRunnerPistolsResonance
+		RequiresCondition: !rank-elite && steelconsortium_upgrade_resonanceammo
+	Armament@UpgradeELITE:
+		Weapon: SteelRunnerPistolsResonance_elite
+		RequiresCondition: rank-elite && steelconsortium_upgrade_resonanceammo
+	Armament@UpgradeGARRISONED:
+		Name: garrisoned
+		Weapon: SteelRunnerPistolsResonance
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && steelconsortium_upgrade_resonanceammo
+	Armament@UpgradeGARRISONEDELITE:
+		Name: garrisoned
+		Weapon: SteelRunnerPistolsResonance_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && steelconsortium_upgrade_resonanceammo
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+		StandSequences: stand
+	Voiced:
+		VoiceSet: RA2TanyaVoice
+	ProvidesPrerequisite:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: steelconsortium_upgrade_pulseweapons, steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_resonanceammo, steelconsortium_upgrade_shieldresistance

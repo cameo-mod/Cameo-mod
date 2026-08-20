@@ -1,8 +1,8 @@
 Halloween_ClownBalloon:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 40
-	Range: 6c0
-	MinRange: 0c512
+	Range: 6144
+	MinRange: 512
 	Report: halloween_clown_balloninflate2.wav
 	ValidTargets: Ground, Air
 	Projectile: MissileCA
@@ -19,7 +19,7 @@ Halloween_ClownBalloon:
 			None: 55
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: halloween_clown_ballonexplode.wav
 	Warhead@4EffAir: CreateEffect
@@ -32,18 +32,22 @@ Halloween_ClownHammer:
 		ImpactSounds: halloween_clown_hammer.wav
 
 Halloween_SmallRock:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ReloadDelay: 25
-	Range: 4c0
+	Range: 4096
 	Report: toss1.aud
 	Warhead@1Dam: SpreadDamage
 		Spread: 341
 		Damage: 2500
 
 Halloween_BigRock:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ReloadDelay: 35
-	Range: 8c0
+	Range: 8192
 	Report: toss1.aud
 	Warhead@1Dam: SpreadDamage
 		Spread: 341
@@ -72,7 +76,7 @@ halloween_ghost_spawner_bigunit:
 
 halloween_bat_blood:
 	ReloadDelay: 20
-	Range: 4c0
+	Range: 4096
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Speed: 1c682
@@ -106,10 +110,9 @@ halloween_bat_blood_AA:
 		ValidTargets: Air
 
 halloween_skeleton_roasting:
-	Range: 3c0
+	Range: 3072
 	Projectile: InstantHit
 	Warhead@1: CreateEffect
-		Image: explosion
 		Explosions: halloween_roast
 		ImpactSounds: halloween_roasting.wav
 		ImpactActors: false
@@ -129,8 +132,6 @@ halloween_bullethell:
 		LaunchAngle: 75
 		Inaccuracy: 5555
 		Image: halloween_bullethell_blue
-		MinimumLaunchAngle: 50
-		MaximumLaunchAngle: 100
 		MinimumLaunchSpeed: 50
 		MaximumLaunchSpeed: 100
 	Warhead@1Dam: SpreadDamage
@@ -165,8 +166,6 @@ halloween_bullethell2:
 		LaunchAngle: 50
 		Inaccuracy: 7777
 		Image: halloween_bullethell_red
-		MinimumLaunchAngle: 25
-		MaximumLaunchAngle: 75
 		MinimumLaunchSpeed: 100
 		MaximumLaunchSpeed: 150
 	Warhead@1Dam: SpreadDamage
@@ -201,8 +200,6 @@ halloween_bullethell3:
 		LaunchAngle: 25
 		Inaccuracy: 12345
 		Image: halloween_bullethell_red
-		MinimumLaunchAngle: 0
-		MaximumLaunchAngle: 50
 		MinimumLaunchSpeed: 50
 		MaximumLaunchSpeed: 150
 	Warhead@1Dam: SpreadDamage
@@ -271,7 +268,7 @@ halloween_SlimeChomp:
 		ImpactSounds: halloween_chomp.wav
 halloween_blob_debris:
 	ReloadDelay: 50
-	Range: 2c768
+	Range: 2816
 	Projectile: Bullet
 		Speed: 32, 64
 		Blockable: false

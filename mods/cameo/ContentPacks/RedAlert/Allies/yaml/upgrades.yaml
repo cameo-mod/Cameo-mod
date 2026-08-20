@@ -1,0 +1,121 @@
+ra1_allies_upgrade_advancedradarsystems:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Advanced Radar Systems
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade_advancedradarsystems.description
+		Prerequisites: ~ra1_allies_alliedradardome, !ra1_allies_upgrade_advancedradarsystems
+	RenderSprites:
+		Image: advancedradarsystemicon
+	ProvidesPrerequisite:
+
+ra1_allies_upgrade_infantryarmorplating:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Infantry Armor Plating
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade_infantryarmorplating.description
+		Prerequisites: ~ra1_allies_alliedradardome, !ra1_allies_upgrade_infantryarmorplating
+	RenderSprites:
+		Image: infantryarmorplatingicon
+	ProvidesPrerequisite:
+
+ra1_allies_upgrade_reinforcedstructures:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Reinforced Structures
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade_reinforcedstructures.description
+		Prerequisites: ~ra1_allies_alliedradardome, !ra1_allies_upgrade_reinforcedstructures
+	RenderSprites:
+		Image: reinforcedstructuresicon
+	ProvidesPrerequisite:
+
+ra1_allies_upgrade_airsuperioritydoctrine:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Air Superiority Doctrine
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_airsuperioritydoctrine.description
+		Prerequisites: ~ra1_allies_alliedtechcenter, !ra1_allies_upgrade_airsuperioritydoctrine
+	RenderSprites:
+		Image: airsuperiorityicon
+	ProvidesPrerequisite:
+
+ra1_allies_upgrade_lasertargetingsystems:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Laser Targeting Systems
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_lasertargetingsystems.description
+		Prerequisites: ~ra1_allies_alliedtechcenter, !ra1_allies_upgrade_lasertargetingsystems
+	RenderSprites:
+		Image: lasertargetingsystemicon
+	ProvidesPrerequisite:
+
+ra1_allies_upgrade_chronoarmor:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Chrono Armor
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_chronoarmor.description
+		Prerequisites: ~ra1_allies_alliedtechcenter, !ra1_allies_upgrade_chronoarmor
+	RenderSprites:
+		Image: chronoarmoricon
+	ProvidesPrerequisite:
+
+ra1_allies_upgrade_cryomissiles:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Cryo Missiles
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_cryomissiles.description
+		Prerequisites: ~ra1_allies_alliedtechcenter, !ra1_allies_upgrade_cryomissiles
+	RenderSprites:
+		Image: cryomissilesicon
+	ProvidesPrerequisite:
+
+ra1_allies_upgrade_gpssatellitesupport:
+	Inherits: ^UpgradeTemplate
+	Tooltip:
+		Name: GPS Satellite Support
+	Valued:
+		Cost: 12500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_gpssatellitesupport.description
+		Prerequisites: ~ra1_allies_alliedtechcenter, ra1_allies_upgrade_advancedradarsystems, !ra1_allies_upgrade_gpssatellitesupport
+	RenderSprites:
+		Image: gpssatellitesupporticon
+	#ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: ra1_allies_upgrade_gpssatellitesupport_proxy_actor

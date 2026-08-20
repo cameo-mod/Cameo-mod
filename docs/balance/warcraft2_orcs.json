@@ -1,0 +1,4962 @@
+{
+ "ledger": "warcraft2_orcs",
+ "pack": "mods/cameo/ContentPacks/Warcraft2/Orcs",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "wc2_orcs_dragon": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "5010",
+      "reloaddelay": "120",
+      "slot": "Armament@VISIBLE",
+      "versus_templates": [
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
+      "weapon": "wc2dragonFireVisible",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "3",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "5010",
+      "reloaddelay": "120",
+      "slot": "Armament@EXPLOSIONS",
+      "versus_templates": [
+       "wc2dragonFireVisible"
+      ],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
+      "weapon": "wc2dragonFireExplosion",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Spaceship"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": 1.25,
+     "subtype": "Spaceship",
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/aircraft.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "Dragon",
+    "prerequisites": [
+     "~wc2_orcs_dragonroost"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "12345"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "125"
+    }
+   },
+   "wc2_orcs_goblinzeppelin": {
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "350"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Helicopter",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "25000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Goblin Zeppelin",
+    "prerequisites": [
+     "~wc2_orcs_golbinalchemist"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "165"
+    }
+   }
+  },
+  "buildings": {
+   "wc2_orcs_altarofstorms": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Altar of Storms",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_fortress"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "wc2_orcs_barracks": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "200000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Barracks",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_pigfarm"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "wc2_orcs_blacksmith": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Blacksmith",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_barracks"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "wc2_orcs_cannontower_plug": {
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Upgraded Cannon Tower",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_blacksmith",
+     "scouttowerupgradeavailable"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "wc2_orcs_dragonroost": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "375"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Dragon Roost",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_fortress"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "wc2_orcs_fortress": {
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Fortress",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_stronghold",
+     "fortressupgradeavailable",
+     "wc2_orcs_golbinalchemist",
+     "wc2_orcs_ogremound"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "wc2_orcs_golbinalchemist": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Golbin Alchemist",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_stronghold"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    }
+   },
+   "wc2_orcs_greathall": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Great Hall",
+    "prerequisites": [
+     "~disabled"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "wc2_orcs_guardtower_plug": {
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Upgraded Guard Tower",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_trolllumbermill",
+     "scouttowerupgradeavailable"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "wc2_orcs_ogremound": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Ogre Mound",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_stronghold"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "wc2_orcs_orcgoldmine": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Orc Gold Mine",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_blacksmith",
+     "derricklimit"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "wc2_orcs_orcgoldmine_bot": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml#Valued.Cost",
+     "v": "15000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Orc Gold Mine",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_blacksmith",
+     "derricklimit",
+     "~botplayer"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "wc2_orcs_pigfarm": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml#Health.HP",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Pigfarm",
+    "prerequisites": [
+     "~wc2_orcs_greathall"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "4c0"
+    }
+   },
+   "wc2_orcs_stronghold": {
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Stronghold",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "strongholdupgradeavailable",
+     "wc2_orcs_blacksmith"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "wc2_orcs_templeofthedamned": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Temple of the Damned",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_fortress"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "wc2_orcs_trolllumbermill": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Troll Lumbermill",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_pigfarm"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   }
+  },
+  "defenses": {
+   "wc2_orcs_cannontower": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8750",
+      "reloaddelay": "34",
+      "requires": "guard",
+      "slot": "Armament@guard",
+      "versus_templates": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^ArrowWeapon"
+      ],
+      "warheads": [],
+      "weapon": "wc2_tower_arrow",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "cannon",
+      "damage_warheads": [
+       {
+        "damage": "60000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "30",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2100",
+      "pricing": true,
+      "range": "10500",
+      "reloaddelay": "90",
+      "requires": "cannon",
+      "slot": "Armament@cannon",
+      "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "wc2cannontowerFire",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "BasicDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "100000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Cannon Tower",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_blacksmith"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "wc2_orcs_guardtower": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8750",
+      "reloaddelay": "34",
+      "requires": "guard",
+      "slot": "Armament@guard",
+      "versus_templates": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^ArrowWeapon"
+      ],
+      "warheads": [],
+      "weapon": "wc2_tower_arrow",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "cannon",
+      "damage_warheads": [
+       {
+        "damage": "60000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "30",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2100",
+      "pricing": true,
+      "range": "10500",
+      "reloaddelay": "90",
+      "requires": "cannon",
+      "slot": "Armament@cannon",
+      "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "wc2cannontowerFire",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "BasicDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "100000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Guard Tower",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_trolllumbermill"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "wc2_orcs_orcwatchtower": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8750",
+      "reloaddelay": "34",
+      "requires": "guard",
+      "slot": "Armament@guard",
+      "versus_templates": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^ArrowWeapon"
+      ],
+      "warheads": [],
+      "weapon": "wc2_tower_arrow",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "cannon",
+      "damage_warheads": [
+       {
+        "damage": "60000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "30",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2100",
+      "pricing": true,
+      "range": "10500",
+      "reloaddelay": "90",
+      "requires": "cannon",
+      "slot": "Armament@cannon",
+      "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "wc2cannontowerFire",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "BasicDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Health.HP",
+     "v": "100000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Orc Watch Tower",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "5000"
+    }
+   },
+   "wc2_orcs_wall": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Valued.Cost",
+     "v": "300"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Defense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Wall",
+    "prerequisites": [
+     "~wc2_orcs_greathall"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ]
+   }
+  },
+  "infantry": {
+   "wc2_orcs_deathknight": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "200",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "100",
+        "tag": "Tesla_Super_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "40",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_2 && !deathknighthaste_upg) || (FSD_cond_3 && !deathknightdeathanddecay_upg) || (FSD_cond_4 && !deathknightraisedead_upg)",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy",
+       "wc2mageFire"
+      ],
+      "warheads": [
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Tesla_Super"
+      ],
+      "weapon": "wc2deathknightFire",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "200",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "100",
+        "tag": "Tesla_Super_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": false,
+      "range": "8000",
+      "reloaddelay": "40",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy",
+       "wc2mageFire"
+      ],
+      "warheads": [
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Tesla_Super"
+      ],
+      "weapon": "wc2deathknightFire",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "deathcoil",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "200",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "100",
+        "tag": "Tesla_Super_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "80",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
+      "slot": "Armament@DEATHCOIL",
+      "versus_templates": [
+       "wc2deathknightFire"
+      ],
+      "warheads": [
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Tesla_Super"
+      ],
+      "weapon": "wc2deathknightDeathCoil",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "200",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "100",
+        "tag": "Tesla_Super_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "80",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
+      "slot": "Armament@DEATHCOILSCATTER1",
+      "versus_templates": [
+       "wc2deathknightDeathCoil"
+      ],
+      "warheads": [
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Tesla_Super"
+      ],
+      "weapon": "wc2deathknightDeathCoilScatter_Left",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "200",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "100",
+        "tag": "Tesla_Super_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "80",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
+      "slot": "Armament@DEATHCOILSCATTER2",
+      "versus_templates": [
+       "wc2deathknightDeathCoilScatter_Left"
+      ],
+      "warheads": [
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Tesla_Super"
+      ],
+      "weapon": "wc2deathknightDeathCoilScatter_Right",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "haste",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "0c1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_2 && deathknighthaste_upg",
+      "slot": "Armament@HASTE",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2deathknightHaste",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "deathanddecay",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "0c1",
+        "tag": "1Dam_impact",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "50",
+      "requires": "FSD_cond_3 && deathknightdeathanddecay_upg",
+      "slot": "Armament@DEATHANDDECAY",
+      "versus_templates": [
+       "wc2mageBlizzard"
+      ],
+      "warheads": [],
+      "weapon": "wc2deathknightDeathAndDecay",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "raisedead",
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "falloff": null,
+        "spread": "1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_4 && deathknightraisedead_upg",
+      "slot": "Armament@RAISEDEAD",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2deathknightRaiseDead",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SniperInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "50000"
+    },
+    "name": "Death Knight",
+    "prerequisites": [
+     "~wc2_orcs_templeofthedamned"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "65"
+    }
+   },
+   "wc2_orcs_grunt": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "16000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1555",
+      "reloaddelay": "18",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2gruntslice",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": 1.0,
+     "subtype": "MeleeInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 0.75
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#FirepowerMultiplier@WC2AxeUpg.Modifier",
+     "trait": "FirepowerMultiplier@WC2AxeUpg",
+     "v": 1.3
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Health.HP",
+     "v": "65000"
+    },
+    "name": "Grunt",
+    "prerequisites": [
+     "~wc2_orcs_barracks",
+     "~!wc2_orcs_upgrade_warcraft3grunt"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Mobile.Speed",
+     "v": "65"
+    }
+   },
+   "wc2_orcs_kodobeast": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6445",
+      "reloaddelay": "38",
+      "slot": "Armament",
+      "versus_templates": [
+       "wc2arrowFire"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "wc2axeFire",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "6445",
+      "reloaddelay": "38",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "wc2arrowFire"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "wc2axeFire",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": 1.25,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Health.HP",
+     "v": "125000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Kodo Beast",
+    "prerequisites": [
+     "~wc2_orcs_trolllumbermill"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "25"
+    }
+   },
+   "wc2_orcs_ogre": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1660",
+      "reloaddelay": "20",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !ogremagebloodlust_upg) || (FSD_cond_4 && !ogremagerunes_upg)",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2ogrepunch",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "eyeofkilrogg",
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "falloff": null,
+        "spread": "1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_2",
+      "slot": "Armament@EYEOFKILROGG",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2ogremageEyeOfKilrogg",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "bloodlust",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "0c1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_3 && ogremagebloodlust_upg",
+      "slot": "Armament@BLOODLUST",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2ogremageBloodlust",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "runes",
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "falloff": null,
+        "spread": "1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_4 && ogremagerunes_upg",
+      "slot": "Armament@RUNES",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2ogremageRunes",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Superheavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Valued.Cost",
+     "v": "1800"
+    },
+    "design": {
+     "category": "Tanks",
+     "class_anchor": null,
+     "special": 1.0,
+     "subtype": "LineBreaker",
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "Ogre",
+    "prerequisites": [
+     "~wc2_orcs_ogremound",
+     "~!wc2_orcs_upgrade_ogremage"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Mobile.Speed",
+     "v": "85"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "68"
+    }
+   },
+   "wc2_orcs_trollaxethrower": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6445",
+      "reloaddelay": "38",
+      "slot": "Armament",
+      "versus_templates": [
+       "wc2arrowFire"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "wc2axeFire",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "6445",
+      "reloaddelay": "38",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "wc2arrowFire"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "wc2axeFire",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": 1.0,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Health.HP",
+     "v": "30000"
+    },
+    "name": "Troll Axethrower",
+    "prerequisites": [
+     "~wc2_orcs_trolllumbermill",
+     "~!wc2_orcs_upgrade_berserker"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "wc2_orcs_trollberserker": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6445",
+      "reloaddelay": "38",
+      "slot": "Armament",
+      "versus_templates": [
+       "wc2arrowFire"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "wc2axeFire",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "6445",
+      "reloaddelay": "38",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "wc2arrowFire"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "wc2axeFire",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "30000"
+    },
+    "name": "Troll Berserker",
+    "prerequisites": [
+     "~wc2_orcs_trolllumbermill",
+     "~wc2_orcs_upgrade_berserker",
+     "~!wc2_orcs_upgrade_trollheadhunter"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "60"
+    }
+   },
+   "wc2_orcs_trollheadhunter": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "250",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "7711",
+      "reloaddelay": "40",
+      "slot": "Armament",
+      "versus_templates": [
+       "wc2highArrowFire"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "wc2axeFirespear",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "250",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "7711",
+      "reloaddelay": "40",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "wc2highArrowFire"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "wc2axeFirespear",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Health.HP",
+     "v": "40000"
+    },
+    "name": "Troll Headhunter",
+    "prerequisites": [
+     "~wc2_orcs_upgrade_trollheadhunter"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Mobile.Speed",
+     "v": "75"
+    }
+   },
+   "wc2_orcs_warcraft3grunt": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "24000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "12",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1600",
+      "reloaddelay": "18",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2gruntslice2",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Valued.Cost",
+     "v": "1100"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "MeleeInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#FirepowerMultiplier@WC2AxeUpg.Modifier",
+     "trait": "FirepowerMultiplier@WC2AxeUpg",
+     "v": 1.3
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Health.HP",
+     "v": "120000"
+    },
+    "name": "Warcraft 3 Grunt",
+    "prerequisites": [
+     "~wc2_orcs_upgrade_warcraft3grunt"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Mobile.Speed",
+     "v": "70"
+    }
+   }
+  },
+  "upgrades": {
+   "wc2_orcs_upgrade_armorstrength": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Armor Strength",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_armorstrength",
+     "~wc2_orcs_blacksmith"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_armorstrengthii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Armor Strength II",
+    "prerequisites": [
+     "!wc2_orcs_upgrade_armorstrengthii",
+     "~wc2_orcs_upgrade_armorstrength",
+     "~wc2_orcs_blacksmith",
+     "wc2_orcs_fortress"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_axestrength": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Axe Strength",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_axestrength",
+     "~wc2_orcs_blacksmith"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_axestrengthii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Axe Strength II",
+    "prerequisites": [
+     "!wc2_orcs_upgrade_axestrengthii",
+     "~wc2_orcs_upgrade_axestrength",
+     "~wc2_orcs_blacksmith",
+     "wc2_orcs_fortress"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_berserker": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Berserker",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_berserker",
+     "~wc2_orcs_blacksmith"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_berserkerlightaxes": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Berserker Light Axes",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_berserkerlightaxes",
+     "~wc2_orcs_upgrade_berserker",
+     "~wc2_orcs_blacksmith",
+     "wc2_orcs_fortress"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_berserkerregeneration": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Berserker Regeneration",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_berserkerregeneration",
+     "~wc2_orcs_upgrade_berserker",
+     "~wc2_orcs_blacksmith",
+     "wc2_orcs_stronghold"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_berserkerscouting": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Berserker Scouting",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_berserkerscouting",
+     "~wc2_orcs_upgrade_berserker",
+     "~wc2_orcs_blacksmith"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_bestfarm": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Best Farm",
+    "prerequisites": [
+     "~wc2_orcs_upgrade_betterfarm",
+     "~wc2_orcs_pigfarm",
+     "wc2_orcs_fortress"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_betterfarm": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Better Farm",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_betterfarm",
+     "~wc2_orcs_pigfarm",
+     "wc2_orcs_stronghold"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_bloodlust": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Bloodlust",
+    "prerequisites": [
+     "~wc2_orcs_upgrade_ogremage",
+     "~!wc2_orcs_upgrade_bloodlust",
+     "~wc2_orcs_blacksmith",
+     "wc2_orcs_altarofstorms"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_cannondamage": {
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Cannon Damage",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_cannondamage",
+     "~wc2_orcs_blacksmith"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_cannondamageii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Cannon Damage II",
+    "prerequisites": [
+     "!wc2_orcs_upgrade_cannondamageii",
+     "~wc2_orcs_upgrade_cannondamage",
+     "~wc2_orcs_blacksmith",
+     "wc2_orcs_fortress"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_catapultstrength": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Catapult Strength",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_catapultstrength",
+     "~wc2_orcs_blacksmith"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_catapultstrengthii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Catapult Strength II",
+    "prerequisites": [
+     "!wc2_orcs_upgrade_catapultstrengthii",
+     "~wc2_orcs_upgrade_catapultstrength",
+     "~wc2_orcs_blacksmith",
+     "wc2_orcs_fortress"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_deathanddecay": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Death and Decay",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_deathanddecay",
+     "~wc2_orcs_blacksmith",
+     "wc2_orcs_templeofthedamned"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_haste": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Haste",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_haste",
+     "~wc2_orcs_blacksmith",
+     "wc2_orcs_templeofthedamned"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_ogremage": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Ogre-Mage",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_ogremage",
+     "~wc2_orcs_blacksmith",
+     "wc2_orcs_altarofstorms"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_raisedead": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Raise Dead",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_raisedead",
+     "~wc2_orcs_blacksmith",
+     "wc2_orcs_templeofthedamned"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_runes": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Runes",
+    "prerequisites": [
+     "~wc2_orcs_upgrade_ogremage",
+     "~!wc2_orcs_upgrade_runes",
+     "~wc2_orcs_blacksmith",
+     "wc2_orcs_altarofstorms"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_throwingaxestrength": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Throwing Axe Strength",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_throwingaxestrength",
+     "~wc2_orcs_blacksmith"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_throwingaxestrengthii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Throwing Axe Strength II",
+    "prerequisites": [
+     "!wc2_orcs_upgrade_throwingaxestrengthii",
+     "~wc2_orcs_upgrade_throwingaxestrength",
+     "~wc2_orcs_blacksmith",
+     "wc2_orcs_fortress"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_trollheadhunter": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "UnitUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Troll Headhunter",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_trollheadhunter",
+     "~wc2_orcs_blacksmith",
+     "wc2_orcs_upgrade_berserker",
+     "wc2_orcs_fortress"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_orcs_upgrade_warcraft3grunt": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "UnitUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Warcraft 3 Grunt",
+    "prerequisites": [
+     "~!wc2_orcs_upgrade_warcraft3grunt",
+     "~wc2_orcs_blacksmith",
+     "wc2_orcs_fortress"
+    ],
+    "queue": [
+     "Research"
+    ]
+   }
+  },
+  "vehicles": {
+   "wc2_orcs_catapult": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "30000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "2680",
+      "pricing": true,
+      "range": "13400",
+      "reloaddelay": "240",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon",
+       "^HeavyBomb"
+      ],
+      "warheads": [],
+      "weapon": "wc2catapultFire",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "artillery",
+     "special": 1.0,
+     "subtype": "Artillery",
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Health.HP",
+     "v": "40000"
+    },
+    "name": "Catapult",
+    "prerequisites": [
+     "~wc2_orcs_blacksmith"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry",
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "40"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "16"
+    }
+   },
+   "wc2_orcs_goblinsappers": {
+    "armaments": [
+     {
+      "armament_name": "detonate",
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "1536",
+      "requires": "!cond_deployed",
+      "slot": "Armament",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2demolitionsquadTargeting",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1333",
+      "reloaddelay": "15",
+      "requires": "cond_deployed",
+      "slot": "Armament@Melee",
+      "versus_templates": [
+       "wc2footmanslice"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2demolitionsquadMelee",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Superheavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "800"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "line_breaker",
+     "special": null,
+     "subtype": "LineBreaker",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "40000"
+    },
+    "name": "Goblin Sappers",
+    "prerequisites": [
+     "~wc2_orcs_golbinalchemist"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "80"
+    }
+   },
+   "wc2_orcs_mobileconstructionvehicleorc": {
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SupportVehicle",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Mobile Construction Vehicle (Orc)",
+    "prerequisites": [
+     "~wc2_orcs_blacksmith"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
+    }
+   },
+   "wc2_orcs_ogremage": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1660",
+      "reloaddelay": "20",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !ogremagebloodlust_upg) || (FSD_cond_4 && !ogremagerunes_upg)",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2ogrepunch",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "eyeofkilrogg",
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "falloff": null,
+        "spread": "1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_2",
+      "slot": "Armament@EYEOFKILROGG",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2ogremageEyeOfKilrogg",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "bloodlust",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "0c1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_3 && ogremagebloodlust_upg",
+      "slot": "Armament@BLOODLUST",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2ogremageBloodlust",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "runes",
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "falloff": null,
+        "spread": "1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_4 && ogremagerunes_upg",
+      "slot": "Armament@RUNES",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2ogremageRunes",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Superheavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1800"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "line_breaker",
+     "special": null,
+     "subtype": "LineBreaker",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "200000"
+    },
+    "name": "Ogre-Mage",
+    "prerequisites": [
+     "~wc2_orcs_upgrade_ogremage",
+     "wc2_orcs_ogremound",
+     "wc2_orcs_altarofstorms"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "85"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "68"
+    }
+   },
+   "wc2_orcs_peon": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1333",
+      "reloaddelay": "15",
+      "slot": "Armament",
+      "versus_templates": [
+       "wc2footmanslice"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2peasantsmack",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Harvester",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "40000"
+    },
+    "name": "Peon",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_trolllumbermill"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "80"
+    }
+   },
+   "wc2_orcs_siegeengine": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "1000",
+        "tag": "NuclearWarhead",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "500",
+        "tag": "NuclearWarheadPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "100",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "LightChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "99, 66, 33",
+        "spread": "1050",
+        "tag": "HeavyChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "99, 66, 33",
+        "spread": "525",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "LightFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "111, 33, 11, 3",
+        "spread": "250",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "1000",
+        "tag": "HeavyFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "450",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "225",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "300",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "150",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "minrange": "2240",
+      "pricing": true,
+      "range": "11200",
+      "reloaddelay": "100",
+      "slot": "Armament",
+      "versus_templates": [
+       "^NuclearWarhead",
+       "^LightMissile",
+       "^LightChemicalWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyChemicalWeapon",
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^HeavyCannon",
+       "^MediumCannon",
+       "^TankDestroyerCannon"
+      ],
+      "warheads": [],
+      "weapon": "SiegeEngineCannon",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "buildable": true,
+    "charge_up": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#AttackFrontalCharged",
+     "ticks": 20.0,
+     "v": "AttackFrontalCharged"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1800"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "artillery",
+     "special": null,
+     "subtype": "Artillery",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Health.HP",
+     "v": "70000"
+    },
+    "name": "Siege Engine",
+    "prerequisites": [
+     "~wc2_orcs_greathall",
+     "wc2_orcs_stronghold",
+     "wc2_orcs_blacksmith"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "70"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "28"
+    }
+   }
+  }
+ }
+}

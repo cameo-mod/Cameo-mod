@@ -63,7 +63,7 @@ namespace OpenRA.Mods.Cameo.Orders
 			var target = OrderGeneratorHelpers.TargetForInput(world, cell, worldPixel, mi);
 
 			bool useSelect;
-			if (Game.Settings.Game.UseClassicMouseStyle && !OrderGeneratorHelpers.InputOverridesSelection(world, worldPixel, mi))
+			if (Game.Settings.Game.MouseControlStyle == MouseControlStyle.Classic && !OrderGeneratorHelpers.InputOverridesSelection(world, worldPixel, mi))
 				useSelect = target.Type == TargetType.Actor && target.Actor.Info.HasTraitInfo<ISelectableInfo>();
 			else
 			{

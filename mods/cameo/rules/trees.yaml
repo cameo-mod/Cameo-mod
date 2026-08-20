@@ -44,47 +44,39 @@ ROCK7:
 T01:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T01.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T01.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T02:
 	Inherits: ^Tree
 	Inherits@2: ^MirageTarget
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T02.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T02.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T03:
 	Inherits: ^Tree
 	Inherits@2: ^MirageTarget
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T03.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T03.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T04:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T04.Husk
 	RenderSprites:
 		Palette: terrain
 
@@ -98,38 +90,32 @@ T04.Husk:
 T05:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T05.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T05.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T06:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T06.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T06.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T07:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T07.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T07.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T08:
 	Inherits: ^Tree
@@ -137,14 +123,16 @@ T08:
 	Building:
 		Footprint: x_
 		Dimensions: 2,1
-	SpawnActorOnDeath:
-		Actor: T08.Husk
+	MapEditorData:
+		ExcludeTilesets: VOLCANIC
 
 T08.Husk:
 	Inherits: ^TreeHusk
 	Building:
 		Footprint: x_
 		Dimensions: 2,1
+	MapEditorData:
+		ExcludeTilesets: VOLCANIC
 
 T09:
 	Inherits: ^Tree
@@ -153,8 +141,6 @@ T09:
 		Dimensions: 2,1
 	MapEditorData:
 		RequireTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T09.Husk
 	RenderSprites:
 		Palette: terrain
 
@@ -174,70 +160,60 @@ T10:
 	Building:
 		Footprint: __ xx
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T10.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T10.Husk:
 	Inherits: ^TreeHusk
 	Building:
 		Footprint: __ xx
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T11:
 	Inherits: ^Tree
 	Building:
 		Footprint: __ xx
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T11.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T11.Husk:
 	Inherits: ^TreeHusk
 	Building:
 		Footprint: __ xx
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T12:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T12.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T12.Husk:
 	Inherits: ^TreeHusk
 	Building:
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T13:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T13.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T13.Husk:
 	Inherits: ^TreeHusk
 	Building:
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T14:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T14.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T14.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T15:
 	Inherits: ^Tree
@@ -245,9 +221,7 @@ T15:
 		Footprint: ___ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T15.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T15.Husk:
 	Inherits: ^TreeHusk
@@ -255,31 +229,27 @@ T15.Husk:
 		Footprint: ___ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T16:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T16.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T16.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T17:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T17.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T17.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T18:
 	Inherits: ^Tree
@@ -287,8 +257,6 @@ T18:
 		RequireTilesets: DESERT
 	RenderSprites:
 		Palette: terrain
-	SpawnActorOnDeath:
-		Actor: T18.Husk
 
 T18.Husk:
 	Inherits: ^TreeHusk
@@ -303,9 +271,7 @@ TC01:
 		Footprint: ___ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: TC01.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC01.Husk:
 	Inherits: ^TreeHusk
@@ -313,7 +279,7 @@ TC01.Husk:
 		Footprint: ___ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC02:
 	Inherits: ^Tree
@@ -321,9 +287,7 @@ TC02:
 		Footprint: _x_ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: TC02.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC02.Husk:
 	Inherits: ^TreeHusk
@@ -331,7 +295,7 @@ TC02.Husk:
 		Footprint: _x_ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC03:
 	Inherits: ^Tree
@@ -339,9 +303,7 @@ TC03:
 		Footprint: _x_ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: TC03.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC03.Husk:
 	Inherits: ^TreeHusk
@@ -349,47 +311,212 @@ TC03.Husk:
 		Footprint: _x_ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC04:
 	Inherits: ^Tree
 	Inherits@shape: ^4x3Shape
+	-Selectable:
 	Building:
 		Footprint: ____ xxx_ x___
 		Dimensions: 4,3
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	# SpawnActorOnDeath:
-	# 	Actor: TC04.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC04.Husk:
 	Inherits: ^TreeHusk
 	Inherits@shape: ^4x3Shape
+	-Selectable:
 	Building:
 		Footprint: ____ xxx_ x___
 		Dimensions: 4,3
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC05:
 	Inherits: ^Tree
 	Inherits@shape: ^4x3Shape
+	-Selectable:
 	Building:
 		Footprint: __x_ xxx_ _xx_
 		Dimensions: 4,3
 	MapEditorData:
-		ExcludeTilesets: DESERT
-	# SpawnActorOnDeath:
-	# 	Actor: TC05.Husk
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC05.Husk:
 	Inherits: ^TreeHusk
 	Inherits@shape: ^4x3Shape
+	-Selectable:
 	Building:
 		Footprint: __x_ xxx_ _xx_
 		Dimensions: 4,3
 	MapEditorData:
+		ExcludeTilesets: DESERT, VOLCANIC
+
+^VolcanicBasaltFormation:
+	Inherits: ^Tree
+	RenderSprites:
+		Palette: terrain
+	Tooltip:
+		Name: Basalt Formation
+		ShowOwnerRow: false
+	Armor:
+		Type: Concrete
+	RadarColorFromTerrain:
+		Terrain: Rock
+	AppearsOnMapPreview:
+		Terrain: Rock
+	# Reuses the D2k wind-trap explosion art and sound without damage or smudge warheads.
+	FireWarheadsOnDeath@VOLCANIC:
+		Type: Footprint
+		Weapon: VolcanicBasaltExplode
+		EmptyWeapon: VolcanicBasaltExplode
+	-WithDamageOverlay@SmallBurn:
+	-WithDamageOverlay@MediumBurn:
+	-WithDamageOverlay@LargeBurn:
+	MapEditorData:
 		ExcludeTilesets: DESERT
+		RequireTilesets: VOLCANIC
+		Categories: Basalt Formations
+
+VT01:
+	Inherits: T01
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t01
+
+VT02:
+	Inherits: T02
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t02
+	-MirageTarget:
+
+VT03:
+	Inherits: T03
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t03
+	-MirageTarget:
+
+VT05:
+	Inherits: T05
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t05
+
+VT06:
+	Inherits: T06
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t06
+
+VT07:
+	Inherits: T07
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t07
+
+VT08:
+	Inherits: T08
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t08
+	-MirageTarget:
+
+VT10:
+	Inherits: T10
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t10
+	-MirageTarget:
+
+VT11:
+	Inherits: T11
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t11
+
+VT12:
+	Inherits: T12
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t12
+
+VT13:
+	Inherits: T13
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t13
+
+VT14:
+	Inherits: T14
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t14
+
+VT15:
+	Inherits: T15
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t15
+
+VT16:
+	Inherits: T16
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t16
+
+VT17:
+	Inherits: T17
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t17
+
+VTC01:
+	Inherits: TC01
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: tc01
+	Building:
+		Footprint: ___ xx_
+		Dimensions: 3,2
+
+VTC02:
+	Inherits: TC02
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: tc02
+	Building:
+		Footprint: _x_ xx_
+		Dimensions: 3,2
+
+VTC03:
+	Inherits: TC03
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: tc03
+	Building:
+		Footprint: _x_ xx_
+		Dimensions: 3,2
+
+VTC04:
+	Inherits: TC04
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: tc04
+	Building:
+		Footprint: ____ xxx_ x___
+		Dimensions: 4,3
+
+VTC05:
+	Inherits: TC05
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: tc05
+	Building:
+		Footprint: __x_ xxx_ _xx_
+		Dimensions: 4,3
 
 ####################################################################################################
 #	RA
@@ -487,6 +614,8 @@ UTILPOL1:
 		Palette: ra_snow
 	Tooltip:
 		Name: Utility Pole
+	Targetable:
+		TargetTypes: Ground, Obstacle
 	MapEditorData:
 		Categories: Decoration
 
@@ -496,6 +625,8 @@ UTILPOL2:
 		Palette: ra_snow
 	Tooltip:
 		Name: Utility Pole
+	Targetable:
+		TargetTypes: Ground, Obstacle
 	MapEditorData:
 		Categories: Decoration
 
@@ -573,7 +704,6 @@ LHUS:
 		Name: Lighthouse
 	Selectable:
 		Bounds: 1024, 1536, 0, -512
-		DecorationBounds: 1024, 1536, 0, -512
 	Building:
 		Footprint: x
 		Dimensions: 1,1
@@ -587,8 +717,7 @@ WINDMILL:
 	MapEditorData:
 		RequireTilesets: RA_TEMPERAT
 	Selectable:
-		Bounds: 1024, 1024, 0, -512
-		DecorationBounds: 1536, 1536, 0, -512
+		Bounds: 1536, 1536, 0, -512
 	SelectionDecorations:
 	Tooltip:
 		Name: Windmill
@@ -604,8 +733,6 @@ T01TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T01TEM.Husk
 
 T01TEM.Husk:
 	Inherits: ^TreeHusk
@@ -616,8 +743,6 @@ T02TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T02TEM.Husk
 
 T02TEM.Husk:
 	Inherits: ^TreeHusk
@@ -628,8 +753,6 @@ T03TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T03TEM.Husk
 
 T03TEM.Husk:
 	Inherits: ^TreeHusk
@@ -640,8 +763,6 @@ T05TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T05TEM.Husk
 
 T05TEM.Husk:
 	Inherits: ^TreeHusk
@@ -652,8 +773,6 @@ T06TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T06TEM.Husk
 
 T06TEM.Husk:
 	Inherits: ^TreeHusk
@@ -664,8 +783,6 @@ T07TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T07TEM.Husk
 
 T07TEM.Husk:
 	Inherits: ^TreeHusk
@@ -679,8 +796,6 @@ T08TEM:
 		Dimensions: 2,1
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T08TEM.Husk
 
 T08TEM.Husk:
 	Inherits: ^TreeHusk
@@ -696,8 +811,6 @@ T10TEM:
 		Footprint: __ xx
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T10TEM.Husk
 
 T10TEM.Husk:
 	Inherits: ^TreeHusk
@@ -712,8 +825,6 @@ T11TEM:
 		Footprint: __ xx
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T11TEM.Husk
 
 T11TEM.Husk:
 	Inherits: ^TreeHusk
@@ -726,8 +837,6 @@ T12TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T12TEM.Husk
 
 T12TEM.Husk:
 	Inherits: ^TreeHusk
@@ -739,8 +848,6 @@ T13TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T13TEM.Husk
 
 T13TEM.Husk:
 	Inherits: ^TreeHusk
@@ -752,8 +859,6 @@ T14TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T14TEM.Husk
 
 T14TEM.Husk:
 	Inherits: ^TreeHusk
@@ -767,8 +872,6 @@ T15TEM:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T15TEM.Husk
 
 T15TEM.Husk:
 	Inherits: ^TreeHusk
@@ -782,8 +885,6 @@ T16TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T16TEM.Husk
 
 T16TEM.Husk:
 	Inherits: ^TreeHusk
@@ -794,8 +895,6 @@ T17TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T17TEM.Husk
 
 T17TEM.Husk:
 	Inherits: ^TreeHusk
@@ -809,8 +908,6 @@ TC01TEM:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC01TEM.Husk
 
 TC01TEM.Husk:
 	Inherits: ^TreeHusk
@@ -827,8 +924,6 @@ TC02TEM:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC02TEM.Husk
 
 TC02TEM.Husk:
 	Inherits: ^TreeHusk
@@ -845,8 +940,6 @@ TC03TEM:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC03TEM.Husk
 
 TC03TEM.Husk:
 	Inherits: ^TreeHusk
@@ -863,8 +956,6 @@ TC04TEM:
 		Dimensions: 4,3
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC04TEM.Husk
 
 TC04TEM.Husk:
 	Inherits: ^TreeHusk
@@ -881,8 +972,6 @@ TC05TEM:
 		Dimensions: 4,3
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC05TEM.Husk
 
 TC05TEM.Husk:
 	Inherits: ^TreeHusk
@@ -896,8 +985,6 @@ T01JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T01JUN.Husk
 
 T01JUN.Husk:
 	Inherits: ^TreeHusk
@@ -908,8 +995,6 @@ T02JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T02JUN.Husk
 
 T02JUN.Husk:
 	Inherits: ^TreeHusk
@@ -920,8 +1005,6 @@ T03JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T03JUN.Husk
 
 T03JUN.Husk:
 	Inherits: ^TreeHusk
@@ -932,8 +1015,6 @@ T05JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T05JUN.Husk
 
 T05JUN.Husk:
 	Inherits: ^TreeHusk
@@ -944,8 +1025,6 @@ T06JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T06JUN.Husk
 
 T06JUN.Husk:
 	Inherits: ^TreeHusk
@@ -956,8 +1035,6 @@ T07JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T07JUN.Husk
 
 T07JUN.Husk:
 	Inherits: ^TreeHusk
@@ -971,8 +1048,6 @@ T08JUN:
 		Dimensions: 2,1
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T08JUN.Husk
 
 T08JUN.Husk:
 	Inherits: ^TreeHusk
@@ -988,8 +1063,6 @@ T10JUN:
 		Footprint: __ xx
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T10JUN.Husk
 
 T10JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1004,8 +1077,6 @@ T11JUN:
 		Footprint: __ xx
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T11JUN.Husk
 
 T11JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1018,8 +1089,6 @@ T12JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T12JUN.Husk
 
 T12JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1031,8 +1100,6 @@ T13JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T13JUN.Husk
 
 T13JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1044,8 +1111,6 @@ T14JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T14JUN.Husk
 
 T14JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1059,8 +1124,6 @@ T15JUN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T15JUN.Husk
 
 T15JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1074,8 +1137,6 @@ T16JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T16JUN.Husk
 
 T16JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1086,8 +1147,6 @@ T17JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T17JUN.Husk
 
 T17JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1101,8 +1160,6 @@ TC01JUN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC01JUN.Husk
 
 TC01JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1119,8 +1176,6 @@ TC02JUN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC02JUN.Husk
 
 TC02JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1137,8 +1192,6 @@ TC03JUN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC03JUN.Husk
 
 TC03JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1155,8 +1208,6 @@ TC04JUN:
 		Dimensions: 4,3
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC04JUN.Husk
 
 TC04JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1173,8 +1224,6 @@ TC05JUN:
 		Dimensions: 4,3
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC05JUN.Husk
 
 TC05JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1188,8 +1237,6 @@ T01WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T01WIN.Husk
 
 T01WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1200,8 +1247,6 @@ T02WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T02WIN.Husk
 
 T02WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1212,8 +1257,6 @@ T03WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T03WIN.Husk
 
 T03WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1224,8 +1267,6 @@ T05WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T05WIN.Husk
 
 T05WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1236,8 +1277,6 @@ T06WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T06WIN.Husk
 
 T06WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1248,8 +1287,6 @@ T07WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T07WIN.Husk
 
 T07WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1263,8 +1300,6 @@ T08WIN:
 		Dimensions: 2,1
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T08WIN.Husk
 
 T08WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1280,8 +1315,6 @@ T10WIN:
 		Footprint: __ xx
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T10WIN.Husk
 
 T10WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1296,8 +1329,6 @@ T11WIN:
 		Footprint: __ xx
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T11WIN.Husk
 
 T11WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1310,8 +1341,6 @@ T12WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T12WIN.Husk
 
 T12WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1323,8 +1352,6 @@ T13WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T13WIN.Husk
 
 T13WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1336,8 +1363,6 @@ T14WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T14WIN.Husk
 
 T14WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1351,8 +1376,6 @@ T15WIN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T15WIN.Husk
 
 T15WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1366,8 +1389,6 @@ T16WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T16WIN.Husk
 
 T16WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1378,8 +1399,6 @@ T17WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T17WIN.Husk
 
 T17WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1393,8 +1412,6 @@ TC01WIN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC01WIN.Husk
 
 TC01WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1411,8 +1428,6 @@ TC02WIN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC02WIN.Husk
 
 TC02WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1429,8 +1444,6 @@ TC03WIN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC03WIN.Husk
 
 TC03WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1447,8 +1460,6 @@ TC04WIN:
 		Dimensions: 4,3
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC04WIN.Husk
 
 TC04WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1465,8 +1476,6 @@ TC05WIN:
 		Dimensions: 4,3
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC05WIN.Husk
 
 TC05WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1480,8 +1489,6 @@ T04DES:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T04DES.Husk
 	RenderSprites:
 		Palette: cameo-desert
 
@@ -1499,8 +1506,6 @@ T08DES:
 		Dimensions: 2,1
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T08DES.Husk
 	RenderSprites:
 		Palette: cameo-desert
 
@@ -1521,8 +1526,6 @@ T09DES:
 		Dimensions: 2,1
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T09DES.Husk
 	RenderSprites:
 		Palette: cameo-desert
 
@@ -1540,8 +1543,6 @@ T18DES:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T18DES.Husk
 	RenderSprites:
 		Palette: cameo-desert
 
@@ -1551,718 +1552,3 @@ T18DES.Husk:
 		RequireTilesets: CAMEO
 	RenderSprites:
 		Palette: cameo-desert
-
-####################################################################################################
-#	CAMEO TILESET
-####################################################################################################
-
-ACTTREE01:
-	Inherits: ^HeroTree
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTTREE02:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-		LocalCenterOffset: 0,-512,0
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTTREE02-2:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: __ x_
-		Dimensions: 2,2
-		LocalCenterOffset: 0,-512,0
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTTREE03:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTTREE03-2:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: __ x_
-		Dimensions: 2,2
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTTREE04:
-	Inherits: ^HeroTree
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTROCK01:
-	Inherits: ^HeroRock
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTROCK02:
-	Inherits: ^HeroRock
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTROCK03:
-	Inherits: ^HeroRock
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTROCK04:
-	Inherits: ^HeroRock
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTROCK05:
-	Inherits: ^HeroRock
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTROCK06:
-	Inherits: ^HeroRock
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTDUNGEON01:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx
-		Dimensions: 2,2
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTDUNGEON02:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx
-		Dimensions: 2,2
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTDUNGEON03:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx
-		Dimensions: 2,2
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTMOUNTAIN01:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: _xx_ xxxx xxxx xxxx
-		Dimensions: 4,4
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTMOUNTAIN02:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: __xx__ _xxxx_ xxxxxx xxxxxx xxxxxx xxxxxx
-		Dimensions: 6,6
-	MapEditorData:
-		Categories: *Actraiser
-
-ACTMOUNTAIN03:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: __xx__ _xxxx_ xxxxxx xxxxxx xxxxxx xxxxxx
-		Dimensions: 6,6
-	MapEditorData:
-		Categories: *Actraiser
-
-HARBUSH:
-	Inherits: ^HeroTree
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARSTUMP:
-	Inherits: ^HeroTree
-	Building:
-		Footprint: xx xx
-		Dimensions: 2,2
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARSTONE:
-	Inherits: ^HeroRock
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARBOULDER:
-	Inherits: ^HeroRock
-	Building:
-		Footprint: xx xx
-		Dimensions: 2,2
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARFENCE:
-	Inherits: ^HeroTree
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARSIGN:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARLOGBIN:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx xx
-		Dimensions: 2,3
-		LocalCenterOffset: 0,0,0
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARSTABLE:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx xx xx
-		Dimensions: 2,4
-		LocalCenterOffset: 0,0,0
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARTREE:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx xx xx
-		Dimensions: 2,4
-		LocalCenterOffset: 0,0,0
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARBARN:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxxxx xxxxx xxxxx xxxxx xxxxx
-		Dimensions: 5,5
-		LocalCenterOffset: 0,0,0
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARSILO:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxxx xxxx xxxx xxxx xxxx xxxx xxxx
-		Dimensions: 4,7
-		LocalCenterOffset: 0,0,0
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARCHICKENCOOP:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxxx xxxx xxxx xxxx xxxx
-		Dimensions: 4,5
-		LocalCenterOffset: 0,0,0
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARWELL:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxx xxx xxx
-		Dimensions: 3,3
-		LocalCenterOffset: 0,0,0
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARSHED:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxxxx xxxxx xxxxx xxxxx xxxxx
-		Dimensions: 5,5
-		LocalCenterOffset: 0,0,0
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARBARN01:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxxx _xxx xxxx _xxx xxxx _xxx xxxx
-		Dimensions: 4,7
-		LocalCenterOffset: 0,-256,0
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARBARN02:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxxx xxx_ xxxx xxx_ xxxx xxx_ xxxx
-		Dimensions: 4,7
-		LocalCenterOffset: 0,-256,0
-	MapEditorData:
-		Categories: *HarvestMoon
-
-HARCOOP:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxxxxxxxxxxxxx xxxxxxxxxxxxxx xxxxxxxxxxxxxx
-		Dimensions: 14,3
-		LocalCenterOffset: 0,0,0
-	MapEditorData:
-		Categories: *HarvestMoon
-
-ZE3BUSH01:
-	Inherits: ^HeroTree
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3BUSH02:
-	Inherits: ^HeroTree
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3SIGN01:
-	Inherits: ^HeroTree
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3POST01:
-	Inherits: ^HeroTree
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3ROCK01:
-	Inherits: ^HeroRock
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3ROCK02:
-	Inherits: ^HeroRock
-	Building:
-		Footprint: x
-		Dimensions: 1,1
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3KAKARIKOWALL:
-	Inherits@1: ^ExistsInWorld
-	Inherits: ^Wall
-	Valued:
-		Cost: 200
-	Tooltip:
-		Name: Kakariko Wall (destructible)
-	Buildable:
-		BuildPaletteOrder: 10
-		Queue: Defence.Link
-		Description: Basic defensive structure.\n Can be attacked by all Units.
-	Health:
-		HP: 40000 #80000
-	Armor:
-		Type: Light #Heavy
-	RequiresBuildableArea:
-		AreaTypes: building
-		Adjacent: 9
-	LineBuild:
-		Range: 11
-		NodeTypes: KakarikoWall
-	LineBuildNode:
-		Types: KakarikoWall
-	Sellable:
-		RefundPercent: 10
-		SellSounds: cashturn.aud
-	BlocksProjectiles:
-	Selectable:
-	Targetable:
-		TargetTypes: Ground, C4, Structure
-	SelectionDecorations:
-	RenderSprites:
-		-Palette: staticterrain
-	RepairableBuilding:
-		RepairPercent: 40
-		RepairStep: 1400
-		PlayerExperience: 15
-		RepairingNotification: Repairing
-	WithBuildingRepairDecoration:
-		Image: allyrepair
-		Sequence: repair
-		Position: Center
-		Palette: player
-		IsPlayerPalette: True
-	Selectable:
-		Priority: 1
-	Targetable@REPAIRING:
-		RequiresCondition: damaged
-		TargetTypes: Repairing
-	GrantConditionOnDamageState@DAMAGED:
-		Condition: damaged
-		ValidDamageStates: Light, Medium, Heavy, Critical
-	MapEditorData:
-		Categories: *Zelda3
-		ExcludeTilesets: TEMPERAT, DESERT, SNOW, WINTER, JUNGLE
-	-Crushable:
-	-Interactable:
-
-ZE3BOULDER01:
-	Inherits: ^HeroRock
-	Building:
-		Footprint: xx xx
-		Dimensions: 2,2
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3BOULDER02:
-	Inherits: ^HeroRock
-	Building:
-		Footprint: xx xx
-		Dimensions: 2,2
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3ROCKS01:
-	Inherits: ^HeroRock
-	Building:
-		Footprint: xx xx
-		Dimensions: 2,2
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3KPOD:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: x x
-		Dimensions: 1,2
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3KPOST:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: x x
-		Dimensions: 1,2
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3KBENCH:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx
-		Dimensions: 2,1
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3KWATER:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx
-		Dimensions: 2,2
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3FLOWER01:
-	Inherits: ^HeroTree
-	Tooltip:
-		Name: Flower (destructible & crushable)
-	Crushable:
-	Building:
-		Footprint: x
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3FLOWER02:
-	Inherits: ^HeroTree
-	Tooltip:
-		Name: Flowers (destructible & crushable)
-	Crushable:
-	Building:
-		Footprint: x
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3KSIGN:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: ====== ====== xx==xx
-		Dimensions: 6,3
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE01:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxxx xxxx xxxx xxxx xxxx
-		Dimensions: 4,5
-		LocalCenterOffset: -512,0,0
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE01l:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx xx xx xx
-		Dimensions: 2,5
-		LocalCenterOffset: -512,0,0
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE01m:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxx xxx xxx xxx xxx
-		Dimensions: 3,5
-		LocalCenterOffset: -512,0,0
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE01r:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx xx xx xx
-		Dimensions: 2,5
-		LocalCenterOffset: -512,0,0
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE01/2:
-	RenderSprites:
-		Image: ze3tree01
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxxx xxxx xxxx xxxx xxxx
-		Dimensions: 4,5
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE01l/2:
-	RenderSprites:
-		Image: ze3tree01l
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx xx xx xx
-		Dimensions: 2,5
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE01m/2:
-	RenderSprites:
-		Image: ze3tree01m
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxx xxx xxx xxx xxx
-		Dimensions: 3,5
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE01r/2:
-	RenderSprites:
-		Image: ze3tree01r
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx xx xx xx
-		Dimensions: 2,5
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE02:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxxx xxxx xxxx xxxx xxxx
-		Dimensions: 4,5
-		LocalCenterOffset: -512,0,0
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE02l:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx xx xx xx
-		Dimensions: 2,5
-		LocalCenterOffset: -512,0,0
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE02m:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxx xxx xxx xxx xxx
-		Dimensions: 3,5
-		LocalCenterOffset: -512,0,0
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE02r:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx xx xx xx
-		Dimensions: 2,5
-		LocalCenterOffset: -512,0,0
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE02/2:
-	RenderSprites:
-		Image: ze3tree02
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxxx xxxx xxxx xxxx xxxx
-		Dimensions: 4,5
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE012/2:
-	RenderSprites:
-		Image: ze3tree02l
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx xx xx xx
-		Dimensions: 2,5
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE02m/2:
-	RenderSprites:
-		Image: ze3tree02m
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxx xxx xxx xxx xxx
-		Dimensions: 3,5
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE02r/2:
-	RenderSprites:
-		Image: ze3tree02r
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx xx xx xx
-		Dimensions: 2,5
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE03:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxxx xxxx xxxx xxxx xxxx
-		Dimensions: 4,5
-		LocalCenterOffset: -512,0,0
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE03l:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx xx xx xx
-		Dimensions: 2,5
-		LocalCenterOffset: -512,0,0
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE03m:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxx xxx xxx xxx xxx
-		Dimensions: 3,5
-		LocalCenterOffset: -512,0,0
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE03r:
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx xx xx xx
-		Dimensions: 2,5
-		LocalCenterOffset: -512,0,0
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE03/2:
-	RenderSprites:
-		Image: ze3tree03
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxxx xxxx xxxx xxxx xxxx
-		Dimensions: 4,5
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE03l/2:
-	RenderSprites:
-		Image: ze3tree03l
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx xx xx xx
-		Dimensions: 2,5
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE03m/2:
-	RenderSprites:
-		Image: ze3tree03m
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xxx xxx xxx xxx xxx
-		Dimensions: 3,5
-	MapEditorData:
-		Categories: *Zelda3
-
-ZE3TREE03r/2:
-	RenderSprites:
-		Image: ze3tree03r
-	Inherits: ^HeroIndestructible
-	Building:
-		Footprint: xx xx xx xx xx
-		Dimensions: 2,5
-	MapEditorData:
-		Categories: *Zelda3

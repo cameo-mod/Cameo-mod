@@ -1,0 +1,428 @@
+Background@MUSIC_PANEL:
+	Logic: MusicPlayerLogic
+	X: (WINDOW_WIDTH - WIDTH) / 2
+	Y: (WINDOW_HEIGHT - HEIGHT) / 2
+	Width: 410
+	Height: 500
+	Children:
+		LogicTicker@SONG_WATCHER:
+
+		# ── Mode buttons ──────────────────────────────────────────────────
+		Container@MODE_PANEL:
+			X: 20
+			Y: 16
+			Width: PARENT_WIDTH - 40
+			Height: 116
+			Children:
+				Label@MODE_LABEL:
+					Width: PARENT_WIDTH
+					Height: 16
+					Text: label-music-mode-title
+					Font: Bold
+				Button@MUSIC_MODE_MIX:
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 20
+					Y: 26
+					Text: button-music-mode-mix
+				Button@MUSIC_MODE_OLD:
+					X: (PARENT_WIDTH - 10) / 2 + 10
+					Y: 26
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 20
+					Text: button-music-mode-oldschool
+				Button@MUSIC_MODE_FACTION:
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 20
+					Y: 52
+					Text: button-music-mode-faction
+				Button@MUSIC_MODE_CUSTOM:
+					X: (PARENT_WIDTH - 10) / 2 + 10
+					Y: 52
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 20
+					Text: button-music-mode-custom
+				Button@MUSIC_MODE_PLAYLIST:
+					Width: PARENT_WIDTH
+					Height: 20
+					Y: 78
+					Text: button-music-mode-playlist
+
+		# ── Custom filter panel (Custom mode only) ────────────────────────
+		Container@CUSTOM_FILTER_PANEL:
+			X: 20
+			Y: 136
+			Width: PARENT_WIDTH - 40
+			Height: 130
+			Children:
+				Label@CUSTOM_FILTER_LABEL:
+					Width: PARENT_WIDTH
+					Height: 16
+					Text: label-music-custom-title
+					Font: Bold
+				Checkbox@CUSTOM_FILTER_ALLIES:
+					Y: 28
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 20
+					Text: checkbox-music-custom-allies
+				Checkbox@CUSTOM_FILTER_SOVIET:
+					X: (PARENT_WIDTH - 10) / 2 + 10
+					Y: 28
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 20
+					Text: checkbox-music-custom-soviet
+				Checkbox@CUSTOM_FILTER_CHINA:
+					Y: 52
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 20
+					Text: checkbox-music-custom-china
+				Checkbox@CUSTOM_FILTER_GDI:
+					X: (PARENT_WIDTH - 10) / 2 + 10
+					Y: 52
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 20
+					Text: checkbox-music-custom-gdi
+				Checkbox@CUSTOM_FILTER_NOD:
+					Y: 76
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 20
+					Text: checkbox-music-custom-nod
+				Checkbox@CUSTOM_FILTER_SCRIN:
+					X: (PARENT_WIDTH - 10) / 2 + 10
+					Y: 76
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 20
+					Text: checkbox-music-custom-scrin
+				Checkbox@CUSTOM_FILTER_GENERIC:
+					Y: 100
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 20
+					Text: checkbox-music-custom-generic
+				Checkbox@CUSTOM_FILTER_OLDSCHOOL:
+					X: (PARENT_WIDTH - 10) / 2 + 10
+					Y: 100
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 20
+					Text: checkbox-music-custom-oldschool
+
+		# ── Track/Length column headers (non-Playlist modes) ─────────────
+		Container@LABEL_CONTAINER:
+			X: 20
+			Y: 136
+			Width: PARENT_WIDTH - 40
+			Children:
+				Label@TITLE:
+					Width: 100
+					Height: 25
+					Text: label-container-title
+					Align: Center
+					Font: Bold
+				Label@TYPE:
+					X: PARENT_WIDTH - WIDTH
+					Height: 25
+					Width: 95
+					Text: label-music-controls-length
+					Align: Center
+					Font: Bold
+
+		# ── Single track list (non-Playlist modes) ────────────────────────
+		ScrollPanel@MUSIC_LIST:
+			X: 20
+			Y: 162
+			Width: PARENT_WIDTH - 40
+			Height: 188
+			Children:
+				ScrollItem@MUSIC_TEMPLATE:
+					Width: PARENT_WIDTH - 27
+					Height: 25
+					X: 2
+					Y: 0
+					Visible: false
+					EnableChildMouseOver: True
+					Children:
+						LabelWithTooltip@TITLE:
+							X: 10
+							Width: PARENT_WIDTH - 50
+							Height: 25
+							TooltipContainer: MUSIC_TOOLTIP_CONTAINER
+							TooltipTemplate: SIMPLE_TOOLTIP
+						Label@LENGTH:
+							Width: 50
+							X: PARENT_WIDTH - 60
+							Align: Right
+							Height: 25
+
+		Label@NO_MATCHING_SONGS:
+			X: 20
+			Y: 260
+			Width: PARENT_WIDTH - 40
+			Height: 40
+			Align: Center
+			Font: Bold
+			Text: label-music-filter-empty
+			Visible: false
+
+		# ── Preset row (Playlist mode only) ──────────────────────────────
+		Container@PRESET_ROW:
+			X: 20
+			Y: 136
+			Width: PARENT_WIDTH - 40
+			Height: 26
+			Children:
+				DropDownButton@LOAD_PRESET:
+					Width: (PARENT_WIDTH - 20) / 3
+					Height: 26
+				Button@SAVE_PRESET:
+					X: (PARENT_WIDTH - 20) / 3 + 10
+					Width: (PARENT_WIDTH - 20) / 3
+					Height: 26
+					Text: button-save-preset
+				Button@DELETE_PRESET:
+					X: 2 * ((PARENT_WIDTH - 20) / 3) + 20
+					Width: (PARENT_WIDTH - 20) / 3
+					Height: 26
+					Text: button-delete-preset
+
+		# ── Dual panel (Playlist mode only) ──────────────────────────────
+		Container@DUAL_PANEL_CONTENT:
+			X: 20
+			Y: 168
+			Width: PARENT_WIDTH - 40
+			Height: 389
+			Children:
+
+				# Left column – Available Tracks
+				Label@AVAILABLE_HEADER:
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 20
+					Font: Bold
+
+				ScrollPanel@AVAILABLE_LIST:
+					Y: 24
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 339
+					Children:
+						ScrollItem@AVAILABLE_TEMPLATE:
+							Width: PARENT_WIDTH - 27
+							Height: 25
+							X: 2
+							Y: 0
+							Visible: false
+							EnableChildMouseOver: True
+							Children:
+								LabelWithTooltip@TITLE:
+									X: 10
+									Width: PARENT_WIDTH - 50
+									Height: 25
+									TooltipContainer: MUSIC_TOOLTIP_CONTAINER
+									TooltipTemplate: SIMPLE_TOOLTIP
+								Label@LENGTH:
+									Width: 50
+									X: PARENT_WIDTH - 60
+									Align: Right
+									Height: 25
+
+				Button@ADD_TRACK:
+					Y: 367
+					Width: (PARENT_WIDTH - 20) / 2
+					Height: 22
+					Text: button-add-track
+
+				Button@ADD_ALL:
+					X: (PARENT_WIDTH - 10) / 2 + 10
+					Y: 367
+					Width: (PARENT_WIDTH - 20) / 2 - 10
+					Height: 22
+					Text: button-add-all
+
+				# Right column – Playlist
+				Label@PLAYLIST_TRACK_HEADER:
+					X: (PARENT_WIDTH - 10) / 2 + 10
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 20
+					Font: Bold
+
+				ScrollPanel@PLAYLIST_TRACK_LIST:
+					X: (PARENT_WIDTH - 10) / 2 + 10
+					Y: 24
+					Width: (PARENT_WIDTH - 10) / 2
+					Height: 339
+					Children:
+						ScrollItem@PLAYLIST_TRACK_TEMPLATE:
+							Width: PARENT_WIDTH - 27
+							Height: 25
+							X: 2
+							Y: 0
+							Visible: false
+							EnableChildMouseOver: True
+							Children:
+								LabelWithTooltip@TITLE:
+									X: 10
+									Width: PARENT_WIDTH - 50
+									Height: 25
+									TooltipContainer: MUSIC_TOOLTIP_CONTAINER
+									TooltipTemplate: SIMPLE_TOOLTIP
+								Label@LENGTH:
+									Width: 50
+									X: PARENT_WIDTH - 60
+									Align: Right
+									Height: 25
+
+				Button@REMOVE_TRACK:
+					X: (PARENT_WIDTH - 10) / 2 + 10
+					Y: 367
+					Width: (PARENT_WIDTH - 20) / 2 - 10
+					Height: 22
+					Text: button-remove-track
+
+				Button@REMOVE_ALL:
+					X: PARENT_WIDTH - (PARENT_WIDTH - 20) / 2 + 10
+					Y: 367
+					Width: (PARENT_WIDTH - 20) / 2 - 10
+					Height: 22
+					Text: button-remove-all
+
+		# ── Now playing (fixed Y, shifted by C# in Playlist mode) ─────────
+		Label@TITLE_LABEL:
+			X: 20
+			Y: 358
+			Width: PARENT_WIDTH - 40
+			Height: 25
+			Align: Center
+			Font: Bold
+
+		Label@TIME_LABEL:
+			X: (PARENT_WIDTH - 140) / 2
+			Y: 387
+			Width: 140
+			Height: 25
+			Align: Center
+			Font: Bold
+
+		# ── Playback controls ─────────────────────────────────────────────
+		Container@BUTTONS:
+			X: 20
+			Y: 416
+			Width: PARENT_WIDTH - 40
+			Children:
+				Button@BUTTON_PREV:
+					Width: 26
+					Height: 26
+					IgnoreChildMouseOver: true
+					Children:
+						Image@IMAGE_PREV:
+							X: 5
+							Y: 5
+							ImageCollection: music
+							ImageName: prev
+				Button@BUTTON_PLAY:
+					X: 35
+					Width: 26
+					Height: 26
+					IgnoreChildMouseOver: true
+					Children:
+						Image@IMAGE_PLAY:
+							X: 5
+							Y: 5
+							ImageCollection: music
+							ImageName: play
+				Button@BUTTON_PAUSE:
+					Visible: false
+					X: 35
+					Width: 26
+					Height: 26
+					IgnoreChildMouseOver: true
+					Children:
+						Image@IMAGE_PAUSE:
+							X: 5
+							Y: 5
+							ImageCollection: music
+							ImageName: pause
+				Button@BUTTON_STOP:
+					X: 70
+					Width: 26
+					Height: 26
+					IgnoreChildMouseOver: true
+					Children:
+						Image@IMAGE_STOP:
+							X: 5
+							Y: 5
+							ImageCollection: music
+							ImageName: stop
+				Button@BUTTON_NEXT:
+					X: 105
+					Width: 26
+					Height: 26
+					IgnoreChildMouseOver: true
+					Children:
+						Image@IMAGE_NEXT:
+							X: 5
+							Y: 5
+							ImageCollection: music
+							ImageName: next
+				ExponentialSlider@MUSIC_SLIDER:
+					X: 140
+					Y: 3
+					Width: PARENT_WIDTH - 140
+					Height: 20
+					Ticks: 7
+
+		# ── Shuffle / Loop ────────────────────────────────────────────────
+		Checkbox@SHUFFLE:
+			X: 20
+			Y: 446
+			Width: 85
+			Height: 20
+			Text: checkbox-music-controls-shuffle
+
+		Checkbox@REPEAT:
+			X: PARENT_WIDTH - 15 - 70
+			Y: 446
+			Width: 70
+			Height: 20
+			Text: checkbox-music-controls-loop
+
+		# ── No music notice ───────────────────────────────────────────────
+		Container@NO_MUSIC_LABEL:
+			X: 20
+			Y: 180
+			Width: PARENT_WIDTH - 40
+			Height: 75
+			Visible: false
+			Children:
+				Label@TITLE:
+					Width: PARENT_WIDTH - 24
+					Height: 25
+					Font: Bold
+					Align: Center
+					Text: label-no-music-title
+				Label@DESCA:
+					Y: 20
+					Width: PARENT_WIDTH - 24
+					Height: 25
+					Align: Center
+					Text: label-no-music-desc-a
+				Label@DESCB:
+					Y: 40
+					Width: PARENT_WIDTH - 24
+					Height: 25
+					Align: Center
+					Text: label-no-music-desc-b
+
+		# ── Back / Mute ───────────────────────────────────────────────────
+		Button@BACK_BUTTON:
+			X: (PARENT_WIDTH - 160) / 2
+			Y: 467
+			Width: 160
+			Height: 20
+			Text: button-back
+			Font: Bold
+			Key: escape
+
+		Label@MUTE_LABEL:
+			X: 25
+			Y: 453
+			Width: 150
+			Height: 20
+			Font: Small
+
+		TooltipContainer@MUSIC_TOOLTIP_CONTAINER:

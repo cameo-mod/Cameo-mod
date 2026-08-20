@@ -1,0 +1,847 @@
+^WC2OrcDefense:
+	Inherits: ^Defense
+	Inherits@2: ^WC2Building
+	-WithDeathAnimation:
+	AmbientSound:
+		SoundFiles: owrkdone.aud
+	-AutoTarget:
+
+^WC2Vehicle:
+	Inherits: ^Vehicle
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@ANNOUNCE: ^AnnounceOnBuild
+	Inherits@EXT: ^ExternalConditions
+	Mobile:
+		TurnSpeed: 25
+	DeathSounds:
+	-FireWarheadsOnDeath:
+	AttackFrontal:
+		FacingTolerance: 0
+	WithMoveAnimation:
+		MoveSequence: run
+	WithAttackAnimation:
+		Sequence: shoot
+	WithDeathAnimation:
+		DeathSequence: die
+		UseDeathTypeSuffix: false
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	RenderSprites:
+		PlayerPalette: player
+	Inherits@WC2BLOODLUST: ^WC2OrcsBloodlustStatus
+	Inherits@WC2HASTE: ^WC2OrcsHasteStatus
+	Inherits@WC2SLOW: ^WC2HumansSlowStatus
+	Inherits@WC2POLYMORPH: ^WC2HumansPolymorphStatus
+	Inherits@WC2INVISIBILITY: ^WC2HumansInvisibilityStatus
+
+^WC2OrcsUpgradeThrowingAxeStrength:
+	GrantConditionOnPrerequisite@TAxeUpg:
+		Condition: throwaxe_upg
+		Prerequisites: wc2_orcs_upgrade_throwingaxestrength
+	GrantConditionOnPrerequisite@TAxeUpg2:
+		Condition: throwaxe_upg2
+		Prerequisites: wc2_orcs_upgrade_throwingaxestrengthii
+	FirepowerMultiplier@TAxeUpg:
+		Modifier: 115
+		RequiresCondition: throwaxe_upg && !throwaxe_upg2
+	FirepowerMultiplier@TAxeUpg2:
+		Modifier: 135
+		RequiresCondition: throwaxe_upg2
+
+^WC2OrcsUpgradeCatapultStrength:
+	GrantConditionOnPrerequisite@CatUpg:
+		Condition: cat_upg
+		Prerequisites: wc2_orcs_upgrade_catapultstrength
+	GrantConditionOnPrerequisite@CatUpg2:
+		Condition: cat_upg2
+		Prerequisites: wc2_orcs_upgrade_catapultstrengthii
+	FirepowerMultiplier@CatUpg:
+		Modifier: 115
+		RequiresCondition: cat_upg && !cat_upg2
+	FirepowerMultiplier@CatUpg2:
+		Modifier: 135
+		RequiresCondition: cat_upg2
+
+^WC2OrcsUpgradeBerserker:
+	GrantConditionOnPrerequisite@BerserkerUpg:
+		Condition: berserker_upg
+		Prerequisites: wc2_orcs_upgrade_berserker
+	DamageMultiplier@BerserkerUpg:
+		Modifier: 80
+		RequiresCondition: berserker_upg
+
+^WC2OrcsUpgradeBerserkerLightAxes:
+	GrantConditionOnPrerequisite@BLighterUpg:
+		Condition: berserkerla_upg
+		Prerequisites: wc2_orcs_upgrade_berserkerlightaxes
+	RangeMultiplier@BLighterUpg:
+		Modifier: 120
+		RequiresCondition: berserkerla_upg
+
+^WC2OrcsUpgradeBerserkerScouting:
+	GrantConditionOnPrerequisite@BScoutUpg:
+		Condition: berserkersc_upg
+		Prerequisites: wc2_orcs_upgrade_berserkerscouting
+	RevealsShroudMultiplier@BScoutUpg:
+		Modifier: 120
+		RequiresCondition: berserkersc_upg
+
+^WC2OrcsUpgradeBerserkerRegeneration:
+	GrantConditionOnPrerequisite@BRegenUpg:
+		Condition: berserkerregen_upg
+		Prerequisites: wc2_orcs_upgrade_berserkerregeneration
+	DamageMultiplier@BRegenUpg:
+		Modifier: 80
+		RequiresCondition: berserkerregen_upg
+	ChangesHealth@BRegenUpg:
+		PercentageStep: 1
+		Delay: 5
+		StartIfBelow: 100
+		DamageCooldown: 5
+		RequiresCondition: berserkerregen_upg
+
+^WC2OrcsUpgradeOgreMage:
+	GrantConditionOnPrerequisite@OMUpg:
+		Condition: ogremage_upg
+		Prerequisites: wc2_orcs_upgrade_ogremage
+	DamageMultiplier@OMUpg:
+		Modifier: 90
+		RequiresCondition: ogremage_upg
+	FirepowerMultiplier@OMUpg:
+		Modifier: 115
+		RequiresCondition: ogremage_upg
+	RangeMultiplier@OMUpg:
+		Modifier: 120
+		RequiresCondition: ogremage_upg
+
+^WC2OrcsOgreMageBloodlust:
+	GrantConditionOnPrerequisite@OBloodlustUpg:
+		Condition: ogremagebloodlust_upg
+		Prerequisites: wc2_orcs_upgrade_bloodlust
+
+^WC2OrcsOgreMageRunes:
+	GrantConditionOnPrerequisite@ORunesUpg:
+		Condition: ogremagerunes_upg
+		Prerequisites: wc2_orcs_upgrade_runes
+
+^WC2OrcsDeathKnightHaste:
+	GrantConditionOnPrerequisite@DHasteUpg:
+		Condition: deathknighthaste_upg
+		Prerequisites: wc2_orcs_upgrade_haste
+
+^WC2OrcsDeathKnightDeathAndDecay:
+	GrantConditionOnPrerequisite@DDeathAndDecayUpg:
+		Condition: deathknightdeathanddecay_upg
+		Prerequisites: wc2_orcs_upgrade_deathanddecay
+
+^WC2OrcsDeathKnightRaiseDead:
+	GrantConditionOnPrerequisite@DRaiseDeadUpg:
+		Condition: deathknightraisedead_upg
+		Prerequisites: wc2_orcs_upgrade_raisedead
+
+###################################################################################################
+# WC2 SPELL/STATUS EFFECT INHERITABLES
+###################################################################################################
+
+^WC2Farm:
+	Inherits@power: ^PowerPlant
+	Inherits@storage: ^StoresResources
+	Inherits@shape: ^2x2Shape
+	Buildable:
+		BuildPaletteOrder: 11
+		Description: Provides 125 Food (Power)\nCan store up to 500 resources.
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,0,0
+	RevealsShroud:
+		Range: 4c0
+	ScalePowerWithHealth:
+	ProvidesPrerequisite@buildingname:
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 5
+
+^WC2Barracks:
+	Inherits@shape: ^3x3Shape
+	Inherits@exits: ^WC2Exits_3x3
+	Inherits@wcprod: ^WCUnitProduction
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Buildable:
+		Description: Trains infantry units.
+		BuildPaletteOrder: 12
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+		LocalCenterOffset: -32,-32,0
+	RallyPoint:
+	GrantExternalConditionToProduced:
+		Condition: produced
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@barracks:
+		Prerequisite: barracks
+	ProductionQueue@INFANTRY:
+		LowPowerModifier: 10000
+	ProductionCostMultiplier@wc2:
+		Multiplier: 120
+	ProductionTimeMultiplier@wc2:
+		Multiplier: 120
+	DamageMultiplier@wc2:
+		Modifier: 80
+
+^WC2LumberMill:
+	Inherits@ref: ^Refinery
+	Inherits@shape: ^2x2Shape
+	Inherits@CPQWP: ^CPQCondition
+	Buildable:
+		Description: Enables ranged unit upgrades and production.
+		BuildPaletteOrder: 13
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,0,0
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	FreeActor@CPQDEBUGDUMMY:
+		Actor: CPQDEBUGDUMMY
+	Power:
+		Amount: 0
+	Refinery:
+		DockAngle: 448
+		DockOffset: 0,2
+		IsDragRequired: False
+		DragOffset: -554,512,0
+		DragLength: 12
+		TickRate: 15
+	ProvidesPrerequisite:
+		Prerequisite: Refinery
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	FreeActor@1:
+		SpawnOffset: 1,2
+		Facing: 256
+	FreeActor@2:
+		SpawnOffset: 1,2
+		Facing: 256
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+
+^WC2Blacksmith:
+	Inherits@shape: ^3x3Shape
+	Inherits@CPQWP: ^CPQCondition
+	Valued:
+		Cost: 2500
+	Health:
+		HP: 250000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	Buildable:
+		Description: Enables weapon and armor upgrades.
+		BuildPaletteOrder: 14
+		BuildDuration: 750
+		BuildDurationModifier: 100
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,0,0
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	FreeActor@CPQDEBUGDUMMY:
+		Actor: CPQDEBUGDUMMY
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@blacksmith:
+		Prerequisite: wc_blacksmith
+
+^WC2Inventor:
+	Inherits@shape: ^3x3Shape
+	Inherits@exits: ^WC2Exits_3x3
+	Inherits@wcprod: ^WCUnitProduction
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	Buildable:
+		Description: Provides radar and trains sapper units.
+		BuildPaletteOrder: 16
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+		LocalCenterOffset: 0,0,0
+	RallyPoint:
+	Power:
+		Amount: 0
+	ProvidesRadar:
+	ProvidesPrerequisite@buildingname:
+	GrantExternalConditionToProduced:
+		Condition: produced
+	ProductionQueue@VEHICLE:
+		LowPowerModifier: 10000
+	ProductionCostMultiplier@wc2:
+		Multiplier: 120
+	ProductionTimeMultiplier@wc2:
+		Multiplier: 120
+	DamageMultiplier@wc2:
+		Modifier: 80
+
+^WC2Stables:
+	Inherits@shape: ^3x3Shape
+	Inherits@CPQWP: ^CPQCondition
+	Valued:
+		Cost: 2500
+	Health:
+		HP: 250000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	Buildable:
+		Description: Trains mounted cavalry units.
+		BuildPaletteOrder: 15
+		BuildDuration: 750
+		BuildDurationModifier: 100
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,0,0
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	FreeActor@CPQDEBUGDUMMY:
+		Actor: CPQDEBUGDUMMY
+	Health:
+		HP: 250000
+	RevealsShroud:
+		Range: 5000
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+
+^WC2Church:
+	Inherits@shape: ^3x3Shape
+	Inherits@CPQWP: ^CPQCondition
+	Valued:
+		Cost: 2500
+	Health:
+		HP: 250000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	Buildable:
+		Description: Enables spell caster upgrades and training.
+		BuildPaletteOrder: 17
+		BuildDuration: 750
+		BuildDurationModifier: 100
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+		LocalCenterOffset: 0,0,0
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	FreeActor@CPQDEBUGDUMMY:
+		Actor: CPQDEBUGDUMMY
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+
+^WC2Temple:
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@shape: ^3x3Shape
+	Inherits@exits: ^WC2Exits_3x3
+	Inherits@wcprod: ^WCUnitProduction
+	Buildable:
+		Description: Enables spell caster upgrades and training.
+		BuildPaletteOrder: 18
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+		LocalCenterOffset: 0,0,0
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	FreeActor@CPQDEBUGDUMMY:
+		Actor: CPQDEBUGDUMMY
+	RallyPoint:
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	GrantExternalConditionToProduced:
+		Condition: produced
+	ProvidesPrerequisite@barracks:
+		Prerequisite: barracks
+	ProductionQueue@INFANTRY:
+		LowPowerModifier: 10000
+
+^WC2Nest:
+	Inherits@shape: ^3x3Shape
+	Inherits@exits: ^WC2Exits_3x3
+	Inherits@wcprod: ^WCUnitProduction
+	Inherits@hpad: ^IsAircraftFactory
+	Buildable:
+		Description: Produces flying units.
+		BuildPaletteOrder: 19
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+		LocalCenterOffset: 0,0,0
+	RallyPoint:
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	GrantExternalConditionToProduced:
+		Condition: produced
+	ProductionQueue@AIRCRAFT:
+		LowPowerModifier: 10000
+	ProductionCostMultiplier@wc2:
+		Multiplier: 120
+	ProductionTimeMultiplier@wc2:
+		Multiplier: 120
+	DamageMultiplier@wc2:
+		Modifier: 80
+
+^WC2WatchTower:
+	Inherits: ^Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	-WithTurretSearchlight:
+	Inherits@detect: ^GenericAllDetector
+	Inherits@shape: ^2x2Shape
+	Valued:
+		Cost: 800
+	Buildable:
+		Description: Observation tower. Can be upgraded to guard or cannon tower.
+		BuildPaletteOrder: 20
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 250000
+	ProvidesPrerequisite@buildingname:
+	AttackTurreted:
+		Voice:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: chronobeamed
+	Turreted:
+		TurnSpeed: 24
+		InitialFacing: 224
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	Power:
+		Amount: 0
+	RevealsShroud:
+		Range: 10000
+	DetectCloaked:
+		Range: 5000
+
+^WC2Goldmine:
+	Inherits@shape: ^3x3Shape
+	Inherits@Bot: ^BotMicromanageable
+	Inherits@2: ^GainsExperienceCity
+	Inherits: ^CashTricklerMultipliers
+	Valued:
+		Cost: 10000
+	Health:
+		HP: 1000000
+	Power:
+		Amount: 0
+	Armor:
+		Type: Concrete
+	Buildable:
+		BuildLimit: 1
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 20
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Description: actor_oilb.description
+	Building:
+		BuildLimit: 1
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+	ProvidesPrerequisite@buildingname:
+	Cargo:
+		MaxWeight: 10
+		Types: Worker
+		LoadedCondition: cond_loaded
+	WithSpriteBody:
+		RequiresCondition: !cond_loaded
+	WithSpriteBody@Loaded:
+		Sequence: idle-loaded
+		RequiresCondition: cond_loaded
+	WithMakeAnimation:
+	WithDeathAnimation:
+	RevealsShroud:
+		Range: 10000
+	CashTricklerBar:
+	CashTrickler:
+		Interval: 250
+		Amount: 500
+		PauseOnCondition: disabled
+	CashTricklerMultiplier@1:
+		Modifier: 110
+		RequiresCondition: cond_loaded == 1
+	CashTricklerMultiplier@2:
+		Modifier: 120
+		RequiresCondition: cond_loaded == 2
+	CashTricklerMultiplier@3:
+		Modifier: 130
+		RequiresCondition: cond_loaded == 3
+	CashTricklerMultiplier@4:
+		Modifier: 140
+		RequiresCondition: cond_loaded == 4
+	CashTricklerMultiplier@5:
+		Modifier: 150
+		RequiresCondition: cond_loaded == 5
+	CashTricklerMultiplier@6:
+		Modifier: 160
+		RequiresCondition: cond_loaded == 6
+	CashTricklerMultiplier@7:
+		Modifier: 170
+		RequiresCondition: cond_loaded == 7
+	CashTricklerMultiplier@8:
+		Modifier: 180
+		RequiresCondition: cond_loaded == 8
+	CashTricklerMultiplier@9:
+		Modifier: 190
+		RequiresCondition: cond_loaded == 9
+	CashTricklerMultiplier@10:
+		Modifier: 200
+		RequiresCondition: cond_loaded == 10
+	CashTricklerMultiplier@BOT: #necessary because the loaded condition doesn't work for InitialUnits
+		Modifier: 200
+		RequiresCondition: botmicro
+	CashTricklerMultiplier@RANK-1:
+		Modifier: 125
+		RequiresCondition: city-veteran == 1 && !city-elite
+	CashTricklerMultiplier@RANK-2:
+		Modifier: 150
+		RequiresCondition: city-veteran == 2 && !city-elite
+	CashTricklerMultiplier@RANK-3:
+		Modifier: 175
+		RequiresCondition: city-veteran == 3 && !city-elite
+	CashTricklerMultiplier@RANK-4:
+		Modifier: 200
+		RequiresCondition: city-elite
+	ExperienceTrickler@1:
+		Amount: 100
+		Interval: 1
+		InitialDelay: 1
+		PauseOnCondition: disabled || lowpower
+		RequiresCondition: city-veteran <= 3 && cond_loaded == 1 && !botmicro
+	ExperienceTrickler@2:
+		Amount: 200
+		Interval: 1
+		InitialDelay: 1
+		PauseOnCondition: disabled || lowpower
+		RequiresCondition: city-veteran <= 3 && cond_loaded == 2 && !botmicro
+	ExperienceTrickler@3:
+		Amount: 300
+		Interval: 1
+		InitialDelay: 1
+		PauseOnCondition: disabled || lowpower
+		RequiresCondition: city-veteran <= 3 && cond_loaded == 3 && !botmicro
+	ExperienceTrickler@4:
+		Amount: 400
+		Interval: 1
+		InitialDelay: 1
+		PauseOnCondition: disabled || lowpower
+		RequiresCondition: city-veteran <= 3 && cond_loaded == 4 && !botmicro
+	ExperienceTrickler@5:
+		Amount: 500
+		Interval: 1
+		InitialDelay: 1
+		PauseOnCondition: disabled || lowpower
+		RequiresCondition: city-veteran <= 3 && cond_loaded == 5 && !botmicro
+	ExperienceTrickler@6:
+		Amount: 600
+		Interval: 1
+		InitialDelay: 1
+		PauseOnCondition: disabled || lowpower
+		RequiresCondition: city-veteran <= 3 && cond_loaded == 6 && !botmicro
+	ExperienceTrickler@7:
+		Amount: 700
+		Interval: 1
+		InitialDelay: 1
+		PauseOnCondition: disabled || lowpower
+		RequiresCondition: city-veteran <= 3 && cond_loaded == 7 && !botmicro
+	ExperienceTrickler@8:
+		Amount: 800
+		Interval: 1
+		InitialDelay: 1
+		PauseOnCondition: disabled || lowpower
+		RequiresCondition: city-veteran <= 3 && cond_loaded == 8 && !botmicro
+	ExperienceTrickler@9:
+		Amount: 900
+		Interval: 1
+		InitialDelay: 1
+		PauseOnCondition: disabled || lowpower
+		RequiresCondition: city-veteran <= 3 && cond_loaded == 9 && !botmicro
+	ExperienceTrickler@10:
+		Amount: 1000
+		Interval: 1
+		InitialDelay: 1
+		PauseOnCondition: disabled || lowpower
+		RequiresCondition: city-veteran <= 3 && cond_loaded == 10 && !botmicro
+	ExperienceTrickler@BOT: #necessary because the bot version is more expensive
+		Amount: 1500
+		Interval: 1
+		InitialDelay: 1
+		PauseOnCondition: disabled || lowpower
+		RequiresCondition: city-veteran <= 3 && botmicro
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	ActorStatValues:
+		Stats: Armor, Sight, CashTrickler, Power, Experience
+
+####################################################################################################
+# WC2 UNIT TEMPLATES
+####################################################################################################
+
+^WC2MCV:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@mcv: ^MCV
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Description: Deploys into a Construction Yard.\n  Unarmed
+	Armor:
+		Type: Plate
+	#Food
+	Power:
+		Amount: -80
+
+^WC2Peasant:
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@worker: ^WC2Worker
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AutoRepair: ^PrioritizeRepair
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Description: Worker unit. Gathers resources and constructs buildings.\n  Unarmed
+	#Food
+
+^WC2Demolitioner:
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 800
+	Power:
+		Amount: -40
+	Buildable:
+		Description: Demolition expert. Destroys buildings and obstacles.
+		BuildPaletteOrder: 20
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Mobile:
+		Speed: 80
+	#Food
+
+^WC2Mage:
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@FOURSTATEDEPLOY: ^WC2FourStateDeploy
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@MC: ^MCImmune
+	Valued:
+		Cost: 1000
+	Power:
+		Amount: -50
+	Buildable:
+		Description: Spell caster with multiple magical abilities.
+		BuildPaletteOrder: 10
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Mobile:
+		Speed: 65
+	#Food
+
+^WC2AirScout:
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@explode: ^HeliExplodeProtoss
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@bot: ^BotMicromanageable
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 350
+	Buildable:
+		Description: Flying scout unit.\n  Detector
+		BuildPaletteOrder: 10
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 28
+		Speed: 165
+		IdealSeparation: 1c0
+		RepulsionSpeed: 10
+	Health:
+		HP: 25000
+	Repairable:
+		HpPerStep: 1250
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Power:
+		Amount: -10
+	RevealsShroud:
+		Range: 10000
+	DetectCloaked:
+		Range: 10000
+		DetectionTypes: Cloak, AirCloak, GroundCloak, Underwater, Hijacker
+	RangedGpsProvider:
+		Range: 20000
+	RenderDetectionCircle:
+	WithRangeCircle:
+		Range: 20000
+		Color: FF000088
+	Wanders:
+		WanderMoveRadius: 6
+		MinMoveDelay: 20
+		MaxMoveDelay: 80
+		RequiresCondition: botmicro
+
+####################################################################################################
+# WC2 HUMAN BUILDINGS
+####################################################################################################
+
+^WC2OgreOgreMageAttacksSpells:
+	# Only the ogre upgraded to an ogremage, or the separate ogremage actor should be able to deploy.
+	GrantConditionOnDeploy@Clock:
+		RequiresCondition: ogremage_upg
+	AttackFrontal:
+		Armaments: primary, eyeofkilrogg, bloodlust, runes
+		FacingTolerance: 0
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		RequiresCondition: !stance-attackanything && !assault-move && !FSD_cond_3
+	AutoTargetPriority@ATTACKANYTHING:
+		RequiresCondition: (stance-attackanything || assault-move) && !FSD_cond_3
+	AutoTargetPriority@ATTACKANYTHING_HASTE:
+		RequiresCondition: (stance-attackanything || assault-move) && FSD_cond_3
+		ValidTargets: bloodlust_target
+		InvalidTargets: NoAutoTarget
+	Armament:
+		Weapon: wc2ogrepunch
+		FireDelay: 7
+		RequiresCondition: (FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !ogremagebloodlust_upg) || (FSD_cond_4 && !ogremagerunes_upg)
+	Armament@EYEOFKILROGG:
+		Name: eyeofkilrogg
+		Weapon: wc2ogremageEyeOfKilrogg
+		FireDelay: 7
+		RequiresCondition: FSD_cond_2
+		PauseOnCondition: mana < 70
+	Armament@BLOODLUST:
+		Name: bloodlust
+		Weapon: wc2ogremageBloodlust
+		FireDelay: 7
+		TargetRelationships: Ally
+		RequiresCondition: FSD_cond_3 && ogremagebloodlust_upg
+		PauseOnCondition: mana < 50
+	Armament@RUNES:
+		Name: runes
+		Weapon: wc2ogremageRunes
+		FireDelay: 7
+		RequiresCondition: FSD_cond_4 && ogremagerunes_upg
+		PauseOnCondition: mana < 200
+	# "Mana" (ammopool)
+	GrantConditionOnAttack@EYEOFKILROGG:
+		Condition: cond_eyeofkilrogg_drain
+		ArmamentNames: eyeofkilrogg
+		MaximumInstances: 1
+		RevokeDelay: 2
+	GrantConditionOnAttack@BLOODLUST:
+		Condition: cond_bloodlust_drain
+		ArmamentNames: bloodlust
+		MaximumInstances: 1
+		RevokeDelay: 2
+	GrantConditionOnAttack@EXORCISM:
+		Condition: cond_runes_drain
+		ArmamentNames: runes
+		MaximumInstances: 1
+		RevokeDelay: 2
+	AmmoPool:
+		Armaments: eyeofkilrogg, bloodlust, runes
+		Ammo: 255
+		AmmoCondition: mana
+	ReloadAmmoPoolCA@PassiveRegen:
+		Delay: 10
+		Count: 1
+		ShowSelectionBar: false
+	ReloadAmmoPoolCA@EyeOfKilrogg:
+		Delay: 1
+		Count: -70
+		RequiresCondition: cond_eyeofkilrogg_drain
+	ReloadAmmoPoolCA@Bloodlust:
+		Delay: 1
+		Count: -50
+		RequiresCondition: cond_bloodlust_drain
+	ReloadAmmoPoolCA@Runes:
+		Delay: 1
+		Count: -200
+		RequiresCondition: cond_runes_drain
+	### Visual indicator of mode for four state deploy ###
+	WithDecoration@Mode_Eye_Of_Kilrogg:
+		Sequence: eyeofkilrogg_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_2
+	WithDecoration@Mode_Bloodlust:
+		Sequence: bloodlust_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_3 && ogremagebloodlust_upg
+	WithDecoration@Mode_Bloodlust_Locked:
+		Sequence: locked_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_3 && !ogremagebloodlust_upg
+	WithDecoration@Mode_Runes:
+		Sequence: runes_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_4 && ogremagerunes_upg
+	WithDecoration@Mode_Runes_Locked:
+		Sequence: locked_status_icon
+		Position: BottomRight
+		RequiresCondition: FSD_cond_4 && !ogremagerunes_upg
+
+	### Starting spell randomizer for AI.
+	GrantConditionOnBotOwner@wc2magebotcontrol:
+		Condition: wc2_cond_bot_owner
+		Bots: easiest, easy, medium, hard, brutal, challenger, unbeatable, cameogod, airforce, defenseai
+	GrantRandomCondition@wc2magebotcontrol:
+		Conditions: FSD_cond_1_AI, FSD_cond_1_AI, FSD_cond_1_AI, FSD_cond_1_AI, FSD_cond_1_AI, FSD_cond_1_AI, FSD_cond_2_AI, FSD_cond_3_AI, FSD_cond_3_AI, FSD_cond_4_AI
+	# FSD_Cond_1 is always granted at start due to the four state deploy.
+	GrantCondition@Cond2AI:
+		Condition: FSD_cond_2
+		RequiresCondition: wc2_cond_bot_owner && FSD_cond_2_AI
+	GrantCondition@Cond3AI:
+		Condition: FSD_cond_3
+		RequiresCondition: wc2_cond_bot_owner && FSD_cond_3_AI
+	GrantCondition@Cond4AI:
+		Condition: FSD_cond_4
+		RequiresCondition: wc2_cond_bot_owner && FSD_cond_4_AI
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 10

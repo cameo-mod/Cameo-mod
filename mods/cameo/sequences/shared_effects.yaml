@@ -1,0 +1,340 @@
+####################################################################################################
+#	Shared effects (overlays, trails, debris, corpses) relocated here so they are always loaded,
+#	independent of which faction art bundles a match loads.
+####################################################################################################
+
+generic_bullet_casing:
+	Defaults:
+	idle:
+		Filename: generic_bullet_casing.png
+		Length: 4
+		Tick: 80
+		Scale: 1
+		Offset: -1,-1,0
+		ZOffset: 1023
+
+# from redalert2.yaml
+ra2_allies_chronominer:
+	Defaults:
+		Filename: ra2_allies_chronominer.shp
+	idle:
+		Facings: 64
+	dock:
+		Start: 64
+		Facings: 64
+	dock-loop:
+		Start: 64
+		Facings: 64
+	warpout:
+		Filename: ra2_allies_chronominer_warpout.shp
+		Length: *
+	harvesting:
+		Filename: ra2_oregath.shp
+		Length: 15
+		Facings: 8
+	icon:
+		Filename: ra2_allies_chronominer_icon.shp
+
+ra2txgasg:
+	idle:
+		Filename: txgasg.shp
+		Length: *
+
+yuricntl:
+	overlay:
+		Filename: yuri_yurix_yuricntl.shp
+		Length: *
+		Offset: 0, -24, 24
+
+ra2debris:
+	Defaults:
+		Length: *
+	small1:
+		Filename: ra2_dbris1sm.shp
+	small2:
+		Filename: ra2_dbris2sm.shp
+	small3:
+		Filename: ra2_dbris3sm.shp
+	small4:
+		Filename: ra2_dbris4sm.shp
+	small5:
+		Filename: ra2_dbris5sm.shp
+	small6:
+		Filename: ra2_dbris6sm.shp
+	small7:
+		Filename: ra2_dbris7sm.shp
+	small8:
+		Filename: ra2_dbris8sm.shp
+	small9:
+		Filename: ra2_dbris9sm.shp
+	large1:
+		Filename: ra2_dbris1lg.shp
+	large2:
+		Filename: ra2_dbris2lg.shp
+	large3:
+		Filename: ra2_dbris3lg.shp
+	large4:
+		Filename: ra2_dbris4lg.shp
+	large5:
+		Filename: ra2_dbris5lg.shp
+	large6:
+		Filename: ra2_dbris6lg.shp
+	large7:
+		Filename: ra2_dbris7lg.shp
+	large8:
+		Filename: ra2_dbris8lg.shp
+	large9:
+		Filename: ra2_dbris9lg.shp
+	large10:
+		Filename: ra2_dbrs10lg.shp
+	rock1:
+		Filename: ra2_dbri_wm1.shp
+	rock2:
+		Filename: ra2_dbri_wm2.shp
+	rock3:
+		Filename: ra2_dbri_wm3.shp
+	# was unused in vRA2
+	flyingbody:
+		Filename: ra2_dbrs10sm.shp
+
+chronoshift:
+	Defaults:
+		Filename: ra2_chronoar.shp
+		ZOffset: 1536
+		IgnoreWorldTint: true
+	start:
+		Length: 10
+	loop:
+		Start: 11
+		Length: 7
+	end:
+		Start: 18
+		Length: 4
+	warpin:
+		Length: *
+	target:
+		Filename: ra2_chronotg.shp
+		Length: *
+
+ra2_chronosk:
+	Defaults:
+		Filename: ra2_chronosk.shp
+	idle:
+		Length: 13
+		Offset: 0,24
+		ZOffset: 1023
+
+ra2_initfire:
+	# Burning-actor flame overlay (PhysicalState Overheating) must read as fire regardless of
+	# terrain brightness or weather tint.
+	Defaults:
+		Filename: ra2_fire01.shp
+		IgnoreWorldTint: true
+	idle:
+		Length: *
+		ZOffset: 1023
+
+# from d2k.yaml
+large_trail:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Start: 4126
+		Length: 4
+		Tick: 120
+		BlendMode: Additive
+		ZOffset: 1023
+
+bazooka_trail2:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Start: 3797
+		Length: 4
+		Tick: 80
+		ZOffset: 1023
+
+d2k_pips:
+	Defaults:
+	groups:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 17
+		Length: 10
+		Offset: 3, 3
+	pickup-indicator:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 112
+		Offset: -9, -9
+	pip-empty:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 15
+	pip-green:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 16
+	tag-upgraded:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 110
+		Offset: -8,-8
+
+d2k_155mm:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3329
+		ZOffset: 1023
+
+d2k_missile2:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Start: 3554
+		Facings: -32
+		ZOffset: 1023
+
+d2k_grenade:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3618
+		Length: 4
+		Tick: 80
+		ZOffset: 1023
+
+shrapnel:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3538
+		Length: 4
+		ZOffset: 1023
+
+tscloud1:
+ 	idle:
+		Filename: tscloud1.shp
+ 		Length: *
+ 		ZOffset: 256
+ 		Offset: 0, 0, 24
+ 	die:
+		Filename: tscloud1d.shp
+ 		Length: *
+ 		ZOffset: 256
+ 		Offset: 0, 0, 24
+
+tsflameall:
+	# Flamethrower projectile trail (nozzle-to-target flame) must read as fire regardless of
+	# terrain brightness or weather tint.
+	idle:
+		Filename: tsflameall.shp
+		Scale: 0.5
+		Length: 19
+		Facings: -8
+		Tick: 114
+		ZOffset: 1023
+		IgnoreWorldTint: true
+
+tsioncannon:
+	Defaults:
+		Length: *
+		ZOffset: 2047
+		Tick: 35
+		IgnoreWorldTint: true
+		ZRamp: 1
+	targeting:
+		Filename: ra2_ring.shp
+	ionring:
+		Filename: tsring1.shp
+		Alpha: 0.75
+		Tick: 50
+		Scale: 1.25
+	ionbeam:
+		Filename: tsionbeam.shp
+		Offset: 0, -60, 60
+		Alpha: 0.75
+		Tick: 40
+	ionbeamstart:
+		Filename: tsionbeamstart.shp
+		Offset: 0, -60, 60
+		Alpha: 0.75
+		Tick: 30
+	ringmini2:
+		Filename: tsringmini2.shp
+		Alpha: 0.75
+		Offset: 0,-6
+		Tick: 5
+		Scale: 0.8
+
+# from redalert2mod.yaml
+aa_plasgree:
+	idle:
+		Filename: aa_plasgree.shp
+		ZOffset: 1023
+
+# from starcraft.yaml
+plagueunit:
+	overlay:
+		Filename: plagueoverlay.png
+		Length: *
+		Tick: 150
+		ZOffset: 1024
+
+scdragoonprojectile:
+	idle:
+		Filename: scdragoonprojectile.png
+		Length: 31
+
+scsmalldragoonprojectile:
+	idle:
+		Scale: 0.8
+		Filename: scdragoonprojectile.png
+		Length: 31
+
+# from warcraft1.yaml
+spearfire:
+	idle:
+		Start: 40
+		Facings: -8
+		Filename: wc1projectiles.shp
+
+# from tiberiandawn.yaml
+spittrail:
+	Defaults:
+		Filename: spittrail.shp
+	idle:
+		Length: *
+		ZOffset: 1023
+
+# from redalert.yaml
+fb2:
+	Defaults:
+		Filename: fb2.shp
+	idle:
+		Length: *
+		ZOffset: 1023
+
+# from tiberiandawn.yaml
+bhreddragon:
+	idle:
+		Filename: bhreddragon.shp
+		Facings: 32
+		InterpolatedFacings: 64
+		ZOffset: 1023
+

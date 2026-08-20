@@ -102,7 +102,7 @@ namespace OpenRA.Mods.CA.Traits
 		readonly Actor self;
 		readonly ActorInfo[] targetTypes;
 
-		[Sync]
+		[VerifySync]
 		int remainingTime;
 
 		bool isDocking;

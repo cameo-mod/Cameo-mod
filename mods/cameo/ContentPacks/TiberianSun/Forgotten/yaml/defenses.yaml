@@ -1,0 +1,421 @@
+forgotten_silo:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Selectable:
+		Bounds: 2048, 2048
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: actor_forgotten_silo.name
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Defence, RADefence
+		Description: actor_forgotten_silo.description
+		Prerequisites: ~forgotten_constructionyard, forgotten_refinery
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 200000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -10
+	SelectionDecorations:
+	StoresResources:
+		Capacity: 3000
+	WithResourceLevelOverlay@FILLSTAGE:
+		RequiresCondition: !build-incomplete
+		Sequence: stages
+	WithSpriteBody:
+		Sequence: idle-underlay
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 8
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: forgot_silo
+forgotten_veinhole:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^2x2Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Selectable:
+		Bounds: 2048, 2048
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Buildable:
+		Description: actor_forgotten_veinhole.description
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 140
+		Prerequisites: ~forgotten_constructionyard, forgotten_church, ~techlevel.superweapons, !forgotten_veinhole
+	Tooltip:
+		Name: actor_forgotten_veinhole.name
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 5c0
+	Power:
+		Amount: -150
+	AttackFollow:
+	# Armament@superweapon:
+	# 	Name: superweapon
+	# 	Weapon: TSTacticalMissile
+	NukePowerCA:
+		OrderName: NukePowerInfoOrder
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Cursor: nuke
+		Icons:
+			1: abomb
+		ChargeInterval: 10500
+		Names:
+			1: power_nuke.raname
+		Descriptions:
+			1: power_nuke.description
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		EndChargeTextNotification: Nuclear Missile ready.
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		LaunchTextNotification: Warning: Nuclear Missile launched.
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Warning: Nuclear Missile launched.
+		MissileWeapons:
+			1: raatomic
+		MissileDelay: 5
+		SpawnOffset: 1c0,427,0
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayBeacon: True
+		DisplayRadarPing: True
+		BeaconPosters:
+			1: atomic
+		CameraRange: 10000
+		CameraRemoveDelay: 125
+		CircleRanges:
+			1: 10000
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		SupportPowerPaletteOrder: 70
+		MissileImage: scatomic
+		MissilePalette: greyscale
+		BeaconActor: BLASTRADIUS.atomic
+	# WithSupportPowerActivationOverlay@1:
+	# 	RequiresCondition: !build-incomplete
+	# 	Sequence: active
+	# WithSupportPowerActivationOverlay@2:
+	# 	RequiresCondition: !build-incomplete
+	# 	Sequence: smoke
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: forgotten_veinhole
+	SupportPowerChargeBar:
+	RenderSprites:
+		PlayerPalette: player
+	# RevealsShroud:
+	# 	Range: 6c0
+	# 	HasMinibib: True
+	# Turreted:
+	# 	TurnSpeed: 396
+	# 	InitialFacing: 224
+	# -WithSpriteBody:
+	# WithEmbeddedTurretSpriteBody:
+	# AttackTurreted:
+	# 	RequiresCondition: !build-incomplete
+	-WithDeathAnimation:
+	# BodyOrientation:
+	# Armament:
+	# 	Weapon: TSVeinholeSmoke
+	# 	LocalOffset: 1024,0,448
+	# MapEditorData:
+	# 	Categories: Resource spawn
+	# OwnerLostAction:
+	# 	Action: ChangeOwner
+	# CaptureManager:
+	# Capturable:
+	# 	Types: nada
+	# SeedsResource:
+	# 	ResourceType: Veins
+	# 	Interval: 50
+
+forgotten_machineguntower:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: actor_forgotten_machineguntower.name
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~forgotten_constructionyard, forgotten_barracks
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: actor_forgotten_machineguntower.description
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 80000
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament@PRIMARY:
+		Weapon: TSMutVulcanTurret
+		LocalOffset: 300,60,600
+	AttackTurreted:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	DetectCloaked:
+		Range: 3c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: -20
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+forgotten_juggerflakwall:
+	Inherits: ^Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: actor_forgotten_juggerflakwall.name
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~forgotten_constructionyard, forgotten_radar
+		Queue: Defence, RADefence
+		Description: actor_forgotten_juggerflakwall.description
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 75000
+	RevealsShroud:
+		Range: 11234
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament:
+		Weapon: TSJuggerFlakAA
+		LocalOffset: 250,0,750
+	AttackTurreted:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	DetectCloaked:
+		Range: 4c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: -40
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: forgot_juggerflak
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_tiberiumboosters
+
+forgotten_brokenrattytankturret:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@JunkArmor: ^JunkArmor
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: actor_forgotten_brokenrattytankturret.name
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~forgotten_constructionyard, forgotten_barracks
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: actor_forgotten_brokenrattytankturret.description
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 90000
+	# Repairable:
+	# 	HpPerStep: 4500 #20
+	# ChangesHealth@SelfHealing:
+	# 	Step: 36 #2500
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament@PRIMARY:
+		Weapon: TS70mmTur
+		LocalOffset: 300,60,600
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TS70mmTurChem
+		LocalOffset: 300,60,600
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	AttackTurreted:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	DetectCloaked:
+		Range: 3c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: 0
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters
+
+forgotten_brokenwarriortankturret:
+	Inherits: ^Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	# Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@JunkArmor: ^JunkArmor
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: actor_forgotten_brokenwarriortankturret.name
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~forgotten_constructionyard, forgotten_church
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: actor_forgotten_brokenwarriortankturret.description
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 125000
+	# Repairable:
+	# 	HpPerStep: 6250 #20
+	# ChangesHealth@SelfHealing:
+	# 	Step: 50 #2500
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament@PRIMARY:
+		Weapon: TSHighVelocityTur
+		LocalOffset: 300,60,600
+	# 	RequiresCondition: !forgotten_upgrade_chemicalweapons
+	# Armament@UPGRADE:
+	# 	Weapon: TSHighVelocityTurChem
+	# 	LocalOffset: 300,60,600
+	# 	RequiresCondition: forgotten_upgrade_chemicalweapons
+	AttackTurreted:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	DetectCloaked:
+		Range: 3c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: 0
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, #forgotten_upgrade_chemicalweapons
+
+forgotten_brokenscoopertankturret:
+	Inherits: ^Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@JunkArmor: ^JunkArmor
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
+	Valued:
+		Cost: 1750
+	Tooltip:
+		Name: actor_forgotten_brokenscoopertankturret.name
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~forgotten_constructionyard, forgotten_church
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: actor_forgotten_brokenscoopertankturret.description
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 200000
+	# Repairable:
+	# 	HpPerStep: 10000 #20
+	# ChangesHealth@SelfHealing:
+	# 	Step: 80 #2500
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament@PRIMARY:
+		Weapon: TSScoopDualTur
+		LocalOffset: 300,60,600
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TSScoopDualTurChem
+		LocalOffset: 300,60,600
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	AttackTurreted:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	DetectCloaked:
+		Range: 3c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: 0
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters

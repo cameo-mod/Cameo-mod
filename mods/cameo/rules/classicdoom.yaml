@@ -53,7 +53,7 @@ RAMCV.WOLF:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Valued:
@@ -62,7 +62,6 @@ RAMCV.WOLF:
 		Name: Mobile Construction Vehicle (Wolfenstein)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 60000
@@ -174,7 +173,7 @@ WOLFBARR:
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 490,-470,0, 355,512,0, -355,-512,0, -630,512,0
@@ -257,7 +256,7 @@ WOLFKENN:
 		Amount: -10
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite:
-		Prerequisite: kenn
+		Prerequisite: ra1_soviets_kennel
 	WithBuildingBib:
 		HasMinibib: true
 
@@ -271,7 +270,7 @@ WOLFDOME:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 90
-		Prerequisites: wolfproc, ~techlevel.medium
+		Prerequisites: wolfproc
 		Description: Provides an overview\nof the battlefield.\nCan detect cloaked units.\nRequires power to operate.
 	Valued:
 		Cost: 1800
@@ -356,11 +355,11 @@ WOLFPBOX:
 WOLFGUN:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 70
-		Prerequisites: wolfbarr, ~techlevel.medium
+		Prerequisites: wolfbarr
 		Description: Anti-Armor base defense.\nCan detect cloaked units.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Valued:
 		Cost: 800
@@ -507,7 +506,7 @@ WOLFAPWR:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 800 #500
@@ -533,6 +532,8 @@ WOLFAPWR:
 		UseDeathTypeSuffix: false
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: building ##########
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: WOLFPOWR
 	WithIdleOverlay@BOX:
 		Sequence: box-overlay
 	WithIdleOverlay@BOX2:
@@ -542,7 +543,7 @@ WOLFWEAP:
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 80
@@ -667,7 +668,7 @@ WOLFSTEK:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
-		Prerequisites: vehicleproduction, anyhq, ~techlevel.high
+		Prerequisites: vehicleproduction, anyhq
 		Description: Provides advanced technologies.
 	Valued:
 		Cost: 1500
@@ -689,8 +690,8 @@ WOLFSTEK:
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite:
 		Prerequisite: tek
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 
 WOLFSTATUE:
 	Inherits: ^WolfBuildingBig
@@ -701,7 +702,7 @@ WOLFSTATUE:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
-		Prerequisites: wolfstek, ~techlevel.high
+		Prerequisites: wolfstek
 		Description: Provides advanced technologies.
 	Valued:
 		Cost: 2000
@@ -750,7 +751,7 @@ WOLFSPEAR:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
-		Prerequisites: wolfstek, ~techlevel.medium
+		Prerequisites: wolfstek
 		Description: Advanced base defense.\nRequires power to operate.\nCan detect cloaked units.\n  Strong vs Vehicles, Infantry\n  Weak vs Aircraft
 		BuildLimit: 1
 	Valued:
@@ -863,7 +864,7 @@ wolfe2:
 	Valued:
 		Cost: 250
 	Tooltip:
-		Name: SS
+		Name: SS Guard
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -1038,13 +1039,13 @@ wolfdog:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
-		Prerequisites: kenn
+		Prerequisites: ra1_soviets_kennel
 		Description: Anti-infantry unit.\nCan detect cloaked units and spies.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
 	Valued:
 		Cost: 200
 	Tooltip:
 		Name: Attack Dog
-		GenericName: Dog
+		GenericName: ra1_soviets_attackdog
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	SelectionDecorations:
@@ -1106,7 +1107,7 @@ wolfdog:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA1
 	RenderSprites:
-		Image: dog
+		Image: ra1_soviets_attackdog
 	GrantConditionOnPrerequisite@wolfupdogfood:
 		Condition: wolfupdogfood
 		Prerequisites: wolfupdogfood
@@ -1228,10 +1229,10 @@ wolfotto:
 	AutoTarget:
 		ScanRadius: 4
 	Armament@PRIMARY: ##########
-		Weapon: 227mm.stnk
+		Weapon: 227mm_stnk
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: 227mm.stnk
+		Weapon: 227mm_stnk
 		MuzzleSequence: garrison-muzzle
 	WithInfantryBody:
 		IdleSequences: idle1,idle2,idle3,idle4
@@ -1279,10 +1280,10 @@ wolfgasps:
 		Weapon: WolfenGrooseMinigun
 		MuzzleSequence: garrison-muzzle
 	Armament@PRIMARYPISTOL: ##########
-		Weapon: 227mm.stnk
+		Weapon: 227mm_stnk
 	Armament@GARRISONEDPISTOL: ##########
 		Name: garrisoned
-		Weapon: 227mm.stnk
+		Weapon: 227mm_stnk
 		MuzzleSequence: garrison-muzzle
 	WithInfantryBody:
 		IdleSequences: idle1,idle2,idle3,idle4
@@ -1679,7 +1680,7 @@ wolfflak:
 		Name: Flak-88 Truck
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: ftrk
+		OverrideActor: ra1_soviets_flaktruck
 	Health:
 		HP: 15000
 	Armor:
@@ -1710,7 +1711,7 @@ wolfflak:
 	ProducibleWithLevel:
 		Prerequisites: vehicles.upgraded
 	Selectable:
-		Class: ftrk
+		Class: ra1_soviets_flaktruck
 		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: GerVehicleVoice
@@ -1735,7 +1736,7 @@ wolfftrk:
 		Name: Halftrack Transport
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: ftrk
+		OverrideActor: ra1_soviets_flaktruck
 	Health:
 		HP: 15000
 	Armor:
@@ -1765,7 +1766,7 @@ wolfftrk:
 	ProducibleWithLevel:
 		Prerequisites: vehicles.upgraded
 	Selectable:
-		Class: ftrk
+		Class: ra1_soviets_flaktruck
 		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: GerVehicleVoice
@@ -1780,7 +1781,7 @@ wolfharv:
 	Inherits: ^Tank
 	Inherits@selection: ^SelectableEconomicUnit
 	Inherits@harv: ^Harvester
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
@@ -1879,12 +1880,12 @@ wolfrobot:
 #	Wolfenstein Upgrades
 ########################################################
 wolfupdogfood:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Dog Food
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Dogs HP.
 		Prerequisites: ~!wolfupdogfood
 	Valued:
@@ -1894,12 +1895,12 @@ wolfupdogfood:
 	ProvidesPrerequisite:
 		Prerequisite: wolfupdogfood
 wolfupfood:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Food
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Infantry HP.
 		Prerequisites: ~!wolfupfood
 	Valued:
@@ -1909,12 +1910,12 @@ wolfupfood:
 	ProvidesPrerequisite:
 		Prerequisite: wolfupfood
 wolfupmedikit:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Food
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Infantry HP.
 		Prerequisites: ~!wolfupmedikit
 	Valued:
@@ -1924,12 +1925,12 @@ wolfupmedikit:
 	ProvidesPrerequisite:
 		Prerequisite: wolfupmedikit
 wolfupmonition:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Food
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Infantry Reload.
 		Prerequisites: ~!wolfupmonition
 	Valued:
@@ -1939,12 +1940,12 @@ wolfupmonition:
 	ProvidesPrerequisite:
 		Prerequisite: wolfupmonition
 wolfupguns:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Food
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Infantry Damage.
 		Prerequisites: ~!wolfupguns
 	Valued:
@@ -1954,12 +1955,12 @@ wolfupguns:
 	ProvidesPrerequisite:
 		Prerequisite: wolfupguns
 wolfuptreasure1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Valuable Treasures 1
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Treasure Vaults generate money.
 		Prerequisites: ~!wolfuptreasure1
 	Valued:
@@ -1970,12 +1971,12 @@ wolfuptreasure1:
 		Prerequisite: wolfuptreasure1
 
 wolfuptreasure2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Valuable Treasures 2
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Treasure Vaults generate money.
 		Prerequisites: ~!wolfuptreasure2, wolfuptreasure1
 	Valued:
@@ -1986,12 +1987,12 @@ wolfuptreasure2:
 		Prerequisite: wolfuptreasure2
 
 wolfuptreasure3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Valuable Treasures 3
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Treasure Vaults generate money.
 		Prerequisites: ~!wolfuptreasure3, wolfuptreasure2
 	Valued:
@@ -2002,12 +2003,12 @@ wolfuptreasure3:
 		Prerequisite: wolfuptreasure3
 
 wolfuptreasure4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Valuable Treasures 4
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Treasure Vaults generate money.
 		Prerequisites: ~!wolfuptreasure4, wolfuptreasure3
 	Valued:
@@ -2150,7 +2151,7 @@ IMP:
 		Queue: Vehicle
 		BuildAtProductionType: Vehicle
 		BuildPaletteOrder: 210
-		Prerequisites: fix, atek, ~vehicles.allies, ~techlevel.high, ~bio
+		Prerequisites: fix, ra1_allies_alliedtechcenter, ~vehicles.allies, ~bio
 		Description: A Demon that shoots salvo of plasma balls.\nStrong vs buildings vs vehicles
 	BodyOrientation:
 	Valued:
@@ -2166,7 +2167,7 @@ IMP:
 		Volume: 3
 	Selectable:
 		Voice: Select
-		Bounds: 36394, 58240, 0, -18176
+		Bounds: 853, 1365, 0, -426
 	AnnounceOnKill:
 		Voice: Kill
 	Mobile:

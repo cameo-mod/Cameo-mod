@@ -1,0 +1,259 @@
+^HunterSeekersPower:
+	FireArmamentPower@HunterSeeker:
+		Names:
+			1: Data Worm
+		Descriptions:
+			1: A self-replicating data worm hijacks a Hunter-Seeker droid and launches it at a designated target.\n  Instantly kills mobile targets\n  Splash damage strong vs Vehicles, Buildings\n  Requires line of sight to target
+		Icons:
+			1: icon
+		IconImage: cabal_upgrade_dataworm
+		PauseOnCondition: lowpower || disabled
+		Prerequisites:
+			1: cabal_upgrade_dataworm
+		ChargeInterval: 4500
+		ArmamentName: superweapon
+		ValidRelationships: Enemy, Neutral, Ally
+		EndChargeSpeechNotification: AirstrikeReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		IncomingSpeechNotification: EnemyPlanesApproaching
+		IncomingSound: hunter2.aud
+		LaunchSound: hunter2.aud
+		TargetMustBeVisible: true
+		TargetActors: true
+		ShowSelectionBoxes: true
+		TargetCircleRange: 1c512
+		OrderName: HunterSeekerSpawn
+		SupportPowerPaletteOrder: 20
+	Exit@1:
+		ExitCell: 1,0
+	Exit@2:
+		ExitCell: 1,1
+	Exit@3:
+		ExitCell: 2,1
+	Exit@4:
+		ExitCell: 2,0
+	Turreted:
+	AttackTurreted:
+	Armament@HunterSeeker:
+		Weapon: TSHSeekerLaunch
+		Name: superweapon
+	CarrierMaster@HunterSeeker:
+		ArmamentNames: superweapon
+		Actors: tsprobe
+		SpawnIsMissile: true
+		UseArmamentTurretFacing: true
+		SlaveDisposalOnKill: DoNothing
+
+^CABALRankDecoration:
+	WithDecoration@RANK-1:
+		Image: cabalrank
+		Sequence: rank-veteran-1
+		Palette: greyscale
+	WithDecoration@RANK-2:
+		Image: cabalrank
+		Sequence: rank-veteran-2
+		Palette: greyscale
+	WithDecoration@RANK-3:
+		Image: cabalrank
+		Sequence: rank-veteran-3
+		Palette: greyscale
+	WithDecoration@RANK-ELITE:
+		Image: cabalrank
+		Sequence: rank-elite
+		Palette: greyscale
+	GrantConditionOnPrerequisite@cabal_upgrade_firewallprotocol:
+		Condition: cabal_upgrade_firewallprotocol
+		Prerequisites: cabal_upgrade_firewallprotocol
+	Targetable@FIREWALLPROTOCOL:
+		TargetTypes: MCImmune
+		RequiresCondition: cabal_upgrade_firewallprotocol
+	GrantConditionOnPrerequisite@cabal_upgrade_fullassimilation:
+		Condition: cabal_upgrade_fullassimilation
+		Prerequisites: cabal_upgrade_fullassimilation
+	RevealsShroudMultiplier@FULLASSIMILATION:
+		RequiresCondition: cabal_upgrade_fullassimilation
+		Modifier: 120
+	DetectCloakedMultiplier@FULLASSIMILATION:
+		RequiresCondition: cabal_upgrade_fullassimilation
+		Modifier: 120
+	GrantConditionOnPrerequisite@cabal_upgrade_networkedcombatprotocols:
+		Condition: cabal_upgrade_networkedcombatprotocols
+		Prerequisites: cabal_upgrade_networkedcombatprotocols
+	FirepowerMultiplier@NETWORKPROTOCOLS:
+		RequiresCondition: cabal_upgrade_networkedcombatprotocols
+		Modifier: 108
+	ReloadDelayMultiplier@NETWORKPROTOCOLS:
+		RequiresCondition: cabal_upgrade_networkedcombatprotocols
+		Modifier: 95
+
+^TSCyborgDualArmorHeavy:
+	Armor:
+		Type: Heavy
+	Armor@Secondary:
+		Type: Shield
+
+^TSCyborgs:
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@EMP: ^UnitDisable
+	Mobile:
+		Locomotor: chem
+	DamagedByTerrain@TiberiumHeal:
+		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
+		Damage: -20
+		DamageInterval: 1
+	WithInfantryBody:
+		RequiresCondition: !cydamaged
+		DefaultAttackSequence: attack
+	WithInfantryBody@damaged:
+		MoveSequence: crippled-run
+		DefaultAttackSequence: crippled-attack
+		StandSequences: crippled-stand
+		RequiresCondition: cydamaged
+	Crushable:
+		CrushClasses: vehicle
+	ExternalCondition@EMP:
+		TotalCap: 1
+		Condition: empdisable
+	TimedConditionBar@EMP:
+		Condition: empdisable
+		Color: FFFFFF
+	GrantCondition@disable:
+		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
+	WithColoredOverlay@leaflet:
+		RequiresCondition: leaflet || empdisable
+	Targetable@HEAL:
+		TargetTypes: Heal, Repair, Healing
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+
+^CabalUpgradeMobilityMatrix:
+	GrantConditionOnPrerequisite@cabal_upgrade_mobilitymatrix:
+		Condition: cabal_upgrade_mobilitymatrix
+		Prerequisites: cabal_upgrade_mobilitymatrix
+	SpeedMultiplier@cabal_upgrade_mobilitymatrix:
+		RequiresCondition: cabal_upgrade_mobilitymatrix
+		Modifier: 125
+	DamageMultiplier@cabal_upgrade_mobilitymatrix:
+		RequiresCondition: cabal_upgrade_mobilitymatrix
+		Modifier: 90
+	ActorStatValues:
+		Upgrades: cabal_upgrade_mobilitymatrix
+
+^CabalUpgradeDarkArmament:
+	GrantConditionOnPrerequisite@cabal_upgrade_darkarmament:
+		Condition: cabal_upgrade_darkarmament
+		Prerequisites: cabal_upgrade_darkarmament
+	ActorStatValues:
+		Upgrades: cabal_upgrade_darkarmament
+	ReloadDelayMultiplier@cabal_upgrade_darkarmament:
+		RequiresCondition: cabal_upgrade_darkarmament
+		Modifier: 90
+
+^CabalUpgradeNeutronNuclearCatalyst:
+	GrantConditionOnPrerequisite@cabal_upgrade_neutronnuclearcatalyst:
+		Condition: cabal_upgrade_neutronnuclearcatalyst
+		Prerequisites: cabal_upgrade_neutronnuclearcatalyst
+	ActorStatValues:
+		Upgrades: cabal_upgrade_neutronnuclearcatalyst
+
+^CabalUpgradeBackupSystems:
+	GrantConditionOnPrerequisite@cabal_upgrade_backupsystems:
+		Condition: cabal_upgrade_backupsystems
+		Prerequisites: cabal_upgrade_backupsystems
+	ActorStatValues:
+		Upgrades: cabal_upgrade_backupsystems
+
+^CabalUpgradeHandOf:
+	GrantConditionOnPrerequisite@cabal_upgrade_handof:
+		Condition: cabal_upgrade_handof
+		Prerequisites: cabal_upgrade_handof
+	ActorStatValues:
+		Upgrades: cabal_upgrade_handof
+
+^CabalUpgradeCyberneticPlating:
+	GrantConditionOnPrerequisite@cabal_upgrade_cyberneticplating:
+		Condition: armored
+		Prerequisites: cabal_upgrade_cyberneticplating
+	DamageMultiplier@cabal_upgrade_cyberneticplating:
+		RequiresCondition: armored
+		Modifier: 75
+	DamageMultiplier@Secondary:
+		RequiresCondition: !armored
+		Modifier: 200
+	Armor@Shielded:
+		Type: Shield
+		RequiresCondition: armored
+	ActorStatValues:
+		Upgrades: cabal_upgrade_cyberneticplating
+
+^CabalUpgradeReinforcedChassis:
+	GrantConditionOnPrerequisite@cabal_upgrade_reinforcedchassis:
+		Condition: cabal_upgrade_reinforcedchassis
+		Prerequisites: cabal_upgrade_reinforcedchassis
+	DamageMultiplier@cabal_upgrade_reinforcedchassis:
+		RequiresCondition: cabal_upgrade_reinforcedchassis
+		Modifier: 85
+	ActorStatValues:
+		Upgrades: cabal_upgrade_reinforcedchassis
+
+^CabalUpgradeOverchargedServos:
+	GrantConditionOnPrerequisite@cabal_upgrade_overchargedservos:
+		Condition: cabal_upgrade_overchargedservos
+		Prerequisites: cabal_upgrade_overchargedservos
+	SpeedMultiplier@cabal_upgrade_overchargedservos:
+		RequiresCondition: cabal_upgrade_overchargedservos
+		Modifier: 140
+	TurnSpeedMultiplier@cabal_upgrade_overchargedservos:
+		RequiresCondition: cabal_upgrade_overchargedservos
+		Modifier: 140
+	ReloadDelayMultiplier@cabal_upgrade_overchargedservos:
+		RequiresCondition: cabal_upgrade_overchargedservos
+		Modifier: 70
+	ActorStatValues:
+		Upgrades: cabal_upgrade_overchargedservos
+
+^CabalUpgradeOverchargedServosVehicle:
+	GrantConditionOnPrerequisite@cabal_upgrade_overchargedservos:
+		Condition: cabal_upgrade_overchargedservos
+		Prerequisites: cabal_upgrade_overchargedservos
+	SpeedMultiplier@cabal_upgrade_overchargedservos:
+		RequiresCondition: cabal_upgrade_overchargedservos
+		Modifier: 120
+	TurnSpeedMultiplier@cabal_upgrade_overchargedservos:
+		RequiresCondition: cabal_upgrade_overchargedservos
+		Modifier: 120
+	ReloadDelayMultiplier@cabal_upgrade_overchargedservos:
+		RequiresCondition: cabal_upgrade_overchargedservos
+		Modifier: 85
+	ActorStatValues:
+		Upgrades: cabal_upgrade_overchargedservos
+^CabalUpgradeNeuralUplink:
+	GrantConditionOnPrerequisite@cabal_upgrade_neuraluplink:
+		Condition: cabal_upgrade_neuraluplink
+		Prerequisites: cabal_upgrade_neuraluplink
+	ReloadDelayMultiplier@cabal_upgrade_neuraluplink:
+		RequiresCondition: cabal_upgrade_neuraluplink
+		Modifier: 80
+	ActorStatValues:
+		Upgrades: cabal_upgrade_neuraluplink
+
+^CabalUpgradeReclamationProtocols:
+	GrantConditionOnPrerequisite@cabal_upgrade_reclamationprotocols:
+		Condition: cabal_upgrade_reclamationprotocols
+		Prerequisites: cabal_upgrade_reclamationprotocols
+	ChangesHealth@RECLAMATION:
+		Step: 10
+		RequiresCondition: cabal_upgrade_reclamationprotocols
+	ActorStatValues:
+		Upgrades: cabal_upgrade_reclamationprotocols
+
+^CABALSpawnActorsOnSell:
+	Inherits: ^TSSpawnActorsOnSell
+	SpawnActorsOnSell:
+		ActorTypes: cabal_cyborginfantry

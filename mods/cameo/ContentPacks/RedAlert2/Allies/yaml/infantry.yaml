@@ -1,0 +1,896 @@
+ra2_allies_attackdog:
+	Inherits: ^DefaultInfantry
+	Inherits@2: ^AffectedByTiberium
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@Template: ^DogTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@MC: ^MCImmune
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 29
+		Prerequisites: ~ra2_allies_alliedbarracks
+		Description: actor_dog.description
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: Attack Dog
+		GenericName: ra1_soviets_attackdog
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Selectable:
+		Bounds: 512, 768, -48, -172
+	SelectionDecorations:
+	Health:
+		HP: 5000
+	ChangesHealth@SelfHealing:
+		Step: 2
+	Armor:
+		Type: None
+	Mobile:
+		Speed: 100
+		Voice: Move
+		RequiresCondition: !attack-cooldown && !eating
+	Guard:
+		Voice: Move
+	Passenger:
+		Voice: Move
+	DetectCloaked:
+		Range: 6000
+		RequiresCondition: !disabled
+		DetectionTypes: Cloak, Hijacker
+	Armament:
+		Weapon: DogJaw
+		ReloadingCondition: attack-cooldown
+	RenderSprites:
+		PlayerPalette: playerra2
+	Crushable:
+		CrushSound: igensqua.wav
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathTypes:
+			DefaultDeath: 1
+			BruteMutate: 1
+			BulletDeath: 1
+			RippedApartDeath: 2
+			SmallExplosionDeath: 2
+			ExplosionDeath: 2
+			FireDeath: 2
+			PsychicDeath: 1
+			TiberiumDeath: 1
+			RadiationDeath: 1
+			RA2VirusDeath: 1
+			ElectricityDeath: 2
+			ContaminatorMutate: 1
+			QuestionMutate: 1
+	AttackLeap:
+		Voice: Attack
+		PauseOnCondition: attacking || attack-cooldown
+	AttackMove:
+		Voice: Move
+	GrantConditionOnAttack:
+		Condition: eating
+		RevokeDelay: 25
+	GrantConditionWhileAiming:
+		Condition: run
+	AutoTarget:
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Infantry
+	Targetable:
+		TargetTypes: Ground, Infantry
+	WithInfantryBody:
+		MoveSequence: walk
+		IdleSequences: idle1, idle2
+		StandSequences: stand
+		DefaultAttackSequence: eat
+		RequiresCondition: !run
+	WithInfantryBody@RUN:
+		MoveSequence: run
+		RequiresCondition: run
+	SpeedMultiplier:
+		Modifier: 150
+		RequiresCondition: run
+	DamageMultiplier:
+		Modifier: 50
+		RequiresCondition: run
+	IgnoresDisguise:
+	-Targetable@disguise:
+	-InaccuracyMultiplier@artilleryjammer:
+	Voiced:
+		VoiceSet: RA2DogVoice
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining
+
+ra2_allies_gi:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@editorhack: ^DeployableInfantryEditor
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@bot: ^SiegeMode
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Tooltip:
+		Name: G.I.
+	Valued:
+		Cost: 200
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~ra2_allies_alliedbarracks
+		Queue: Infantry, RAInfantry
+		Description: actor_ra2e1.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ra2_allies_gi:
+		Modifier: 25
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	RenderRangeCircle:
+		RequiresCondition: deployed
+	GrantConditionOnPrerequisite@upgrade:
+		Condition: ra2_allies_upgrade_elitegi
+		Prerequisites: ra2_allies_upgrade_elitegi
+	Armament@PRIMARY:
+		Weapon: ra2_allies_gi_mg
+		RequiresCondition: !deployed && !ra2_allies_upgrade_elitegi
+		LocalOffset: 128,0,256
+	Armament@PRIMARY2:
+		Weapon: ra2_allies_gi_para
+		RequiresCondition: !deployed && ra2_allies_upgrade_elitegi
+		LocalOffset: 128,0,256
+	Armament@DEPLOYED:
+		Name: deployed
+		Weapon: ra2_allies_gi_para
+		LocalOffset: 128,0,128
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2vulcan2
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	AttackFrontal:
+		Armaments: primary
+		RequiresCondition: undeployed
+		FacingTolerance: 0
+	AttackTurreted@deployed:
+		Armaments: deployed
+		Turrets: deploy
+		PauseOnCondition: disabled
+		RequiresCondition: deployed
+		Voice: Attack
+	RangeMultiplier@deployed:
+		Modifier: 125
+		RequiresCondition: deployed
+	DamageMultiplier@deployed:
+		Modifier: 75
+		RequiresCondition: deployed
+	DamageMultiplier@ra2_allies_upgrade_elitegi:
+		Modifier: 75
+		RequiresCondition: deployed && ra2_allies_upgrade_elitegi
+	Turreted:
+		Turret: deploy
+		RealignDelay: -1
+		TurnSpeed: 1023
+		InitialFacing: 368
+	WithSpriteTurret@idle:
+		Turret: deploy
+		Sequence: deployed
+		RequiresCondition: deployed && !animate-turret
+	WithSpriteTurret@animated:
+		Turret: deploy
+		Sequence: shoot-deployed
+		RequiresCondition: deployed && animate-turret
+	WithSpriteBody:
+		Sequence: dot
+		Name: dot
+		RequiresCondition: !undeployed
+	GrantConditionOnAttack:
+		Condition: animate-turret
+		RevokeDelay: 10
+		ArmamentNames: deployed
+	WithInfantryBody:
+		RequiresCondition: undeployed
+	WithMakeAnimation:
+		Sequence: deploy
+		BodyNames: dot
+	GrantConditionOnDeploy:
+		DeploySounds: igidepa.wav,igidepb.wav
+		UndeploySounds: igidepa.wav,igidepb.wav
+		Facing: 384
+		RequiresCondition: !parachute
+		PauseOnCondition: disabled
+		Voice: Deploy
+	TakeCover:
+		RequiresCondition: undeployed
+	Crushable:
+		RequiresCondition: undeployed || (deployed && !ra2_allies_upgrade_elitegi)
+	Crushable@deployed:
+		CrushClasses: vehicle
+		RequiresCondition: !undeployed && ra2_allies_upgrade_elitegi
+	Voiced:
+		VoiceSet: GIVoice
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_elitegi
+
+ra2_allies_guardiangi:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@editorhack: ^DeployableInfantryEditor
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@bot: ^SiegeMode
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Inherits@RA2AlliedThunderboltMissiles: ^RA2AlliedThunderboltMissiles
+	Tooltip:
+		Name: Guardian G.I.
+	Valued:
+		Cost: 400
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2_allies_alliedbarracks
+		Queue: Infantry, RAInfantry
+		Description: actor_ggi.description
+	Mobile:
+		Speed: 45
+	Health:
+		HP: 45000
+	ChangesHealth@SelfHealing:
+		Step: 45
+	RenderRangeCircle:
+		RequiresCondition: deployed
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	GrantConditionOnPrerequisite@upgrade:
+		Condition: ra2_allies_upgrade_elitegi
+		Prerequisites: ra2_allies_upgrade_elitegi
+	Armament@PRIMARY:
+		Weapon: GuardianGIMG
+		RequiresCondition: !deployed && !rank-elite && !ra2_allies_upgrade_elitegi
+		LocalOffset: 128,0,256
+	Armament@PRIMARY2:
+		Weapon: GuardianGIMG2
+		RequiresCondition: !deployed && !rank-elite && ra2_allies_upgrade_elitegi
+		LocalOffset: 128,0,256
+	Armament@ELITE:
+		Weapon: GuardianGIMG_elite
+		RequiresCondition: !deployed && rank-elite && !ra2_allies_upgrade_elitegi
+		LocalOffset: 128,0,256
+	Armament@ELITE2:
+		Weapon: GuardianGIMG2_elite
+		RequiresCondition: !deployed && rank-elite && ra2_allies_upgrade_elitegi
+		LocalOffset: 128,0,256
+	Armament@BOTAA:
+		Weapon: aadeploytargeting_8c0_AA
+		Name: targeting
+		RequiresCondition: botmicro
+	Armament@DEPLOYED:
+		Name: deployed
+		Weapon: RA2GIRocketsG
+		Turret: deploy
+		LocalOffset: 384,64,384
+		RequiresCondition: !rank-elite && deployed
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2GIRocketsG
+		RequiresCondition: !rank-elite
+	Armament@DEPLOYEDELITE:
+		Name: deployed
+		Weapon: RA2GIRocketsG_elite
+		Turret: deploy
+		LocalOffset: 384,64,384
+		RequiresCondition: rank-elite && deployed
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2GIRocketsG_elite
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		Armaments: primary, targeting
+		RequiresCondition: undeployed
+		FacingTolerance: 2
+	AttackTurreted@deployed:
+		Armaments: deployed
+		Turrets: deploy
+		PauseOnCondition: disabled
+		RequiresCondition: deployed
+		Voice: Attack
+	Turreted:
+		Turret: deploy
+		RealignDelay: -1
+		TurnSpeed: 1023
+		InitialFacing: 368
+	WithSpriteTurret@idle:
+		Turret: deploy
+		Sequence: deployed
+		RequiresCondition: deployed && !animate-turret
+	WithSpriteTurret@animated:
+		Turret: deploy
+		Sequence: shoot-deployed
+		RequiresCondition: deployed && animate-turret
+	WithSpriteBody:
+		Sequence: dot
+		Name: dot
+		RequiresCondition: !undeployed
+	GrantConditionOnAttack:
+		Condition: animate-turret
+		RevokeDelay: 5
+		ArmamentNames: deployed
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+		RequiresCondition: undeployed
+	WithMakeAnimation:
+		Sequence: deploy
+		BodyNames: dot
+	GrantConditionOnDeploy:
+		Facing: 384
+		DeploySounds: iggidepa.wav
+		UndeploySounds: iggidepa.wav
+		RequiresCondition: !parachute
+		Voice: Deploy
+	TakeCover:
+		RequiresCondition: undeployed
+	Crushable:
+		RequiresCondition: undeployed
+	Crushable@deployed:
+		CrushClasses: vehicle
+		RequiresCondition: !undeployed
+	DamageMultiplier@deployed:
+		Modifier: 60
+		RequiresCondition: deployed
+	DamageMultiplier@ra2_allies_upgrade_elitegi:
+		Modifier: 60
+		RequiresCondition: deployed && ra2_allies_upgrade_elitegi
+	Voiced:
+		VoiceSet: GGIVoice
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_elitegi
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_elitegi, ra2_allies_upgrade_thunderboltmissiles
+
+ra2_allies_chronolegionnaire:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Chrono Legionnaire
+	Buildable:
+		BuildPaletteOrder: 140
+		Prerequisites: ~ra2_allies_alliedbarracks, ra2_allies_alliedbattlelab
+		Queue: Infantry, RAInfantry
+		Description: actor_cleg.description
+	Mobile:
+		Speed: 35
+	Health:
+		HP: 35000
+	ChangesHealth@SelfHealing:
+		Step: 35
+	Passenger:
+	Armament@sound:
+		Weapon: RA2ChronoTele
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: ChronoBeam
+		LocalOffset: 256,43,256
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Name: primary
+		Weapon: ChronoBeam_elite
+		LocalOffset: 256,43,256
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: ChronoBeam
+		LocalOffset: 256,43,256
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: ChronoBeam_elite
+		LocalOffset: 256,43,256
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	RA2PortableChrono:
+		TeleportType: PortableChrono
+		Voice: Move
+		ChargeDelay: 250
+		MaxTeleportDistance: 50
+		PauseOnCondition: disabled
+	WithRangeCircle@Chrono:
+		Range: 50c0
+		Color: BBEEFF
+		Type: Teleport
+	ExplodeWeaponTeleportEffect:
+		TeleportType: PortableChrono
+		ImpactWeapon: PortableChronoImpact
+		TeleportWeapon: PortableChronoTeleport
+	GrantTimedConditionOnTeleport@Portable:
+		TeleportTypes: PortableChrono
+		Condition: teleported
+		Duration: 75
+	GrantCondition@chrono:
+		Condition: chronodisabled
+		RequiresCondition: chronobeamed || teleported
+	Voiced:
+		VoiceSet: ChronoLegionnaireVoice
+	GrantExternalConditionToTransport:
+		Condition: ifv-chrono
+	-TakeCover:
+	IssueOrderToBot@AI: ## teleport
+		OrderName: PortableChronoTeleport
+		OrderTrigger: Damage
+		OrderChance: 100
+		OrderInterval: 80
+		TargetRangeInCell: 50
+		ValidTargets: Ground
+		ValidRelationships: Ally
+		TargetDistance: Furthest
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining
+
+ra2_allies_sniper:
+	Inherits: ^Soldier
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Sniper
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~ra2_allies_alliedbarracks, ra2_allies_alliedbattlelab
+		Queue: Infantry, RAInfantry
+		Description: actor_ra2snipe.description
+	Mobile:
+		Speed: 56
+	Health:
+		HP: 22000
+	ChangesHealth@SelfHealing:
+		Step: 22
+	Armament@PRIMARY:
+		Weapon: RA2AWP
+		LocalOffset: 0,0,427
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2AWP_elite
+		LocalOffset: 0,0,427
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2AWP
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2AWP_elite
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 200
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	ReloadDelayMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 50
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: RA2SniperVoice
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining
+
+ra2_allies_engineer:
+	Inherits: ^Soldier
+	Inherits@anim: ^RA2Infantry
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@engineer: ^EngineerDefaultWeapons
+	Inherits@isengineer: ^IsEngineer
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
+	Inherits@vo: ^AttackVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Tooltip:
+		Name: Engineer
+	Valued:
+		Cost: 500
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra2_allies_alliedbarracks
+		Queue: Infantry, RAInfantry
+		Description: Captures and repairs structures.\n  Unarmed
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 5000
+	Passenger:
+		CustomPipType: engineer
+	Garrisoner:
+		CustomPipType: engineer
+	InstantlyRepairs:
+		Types: building
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	InstantlyRepairs@Tech:
+		Types: tech
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	InstantlyRepairs@Civ:
+		Types: civ
+		ValidRelationships: Ally, Neutral
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	RepairsBridges:
+		EnterBehaviour: Exit
+	CaptureManager:
+	GrantConditionOnPrerequisite@GLOBALREUSABLEENGINEER:
+		Condition: global-reusable-engineers
+		Prerequisites: global-reusable-engineers
+	Captures:
+		RequiresCondition: !global-reusable-engineers
+		CaptureTypes: building, defense, tech
+		PlayerExperience: 500
+		ConsumedByCapture: True
+	Captures@REUSABLE:
+		RequiresCondition: global-reusable-engineers
+		CaptureTypes: building, defense, tech
+		PlayerExperience: 500
+		CaptureDelay: 375
+		ConsumedByCapture: False
+		EnterCursor: ability
+		EnterBlockedCursor: move-blocked
+	Selectable:
+		Priority: 5
+		Class: e6
+	Voiced:
+		VoiceSet: AlliesEngineer
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+
+ra2_allies_tanyaii:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@anim: ^RA2Infantry
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MC: ^MCImmune
+	Inherits@swim: ^WithSwimsuit
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 120
+		Prerequisites: ~ra2_allies_alliedbarracks, ra2_allies_alliedbattlelab
+		BuildLimit: 1
+		Description: template_commando.description
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Tanya II
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Mobile:
+		Speed: 75
+	Passenger:
+	Armament@PRIMARY:
+		Weapon: RA2DoublePistols
+		RequiresCondition: !rank-elite
+		LocalOffset: 128,0,256
+	Armament@ELITE:
+		Weapon: RA2DoublePistols_elite
+		RequiresCondition: rank-elite
+		LocalOffset: 128,0,256
+	Armament@c4:
+		Weapon: TanyaAttach
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+		Voice: Demolish
+	Armament@c4building:
+		Weapon: GenericC4
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+		Voice: Demolish
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2DoublePistols
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2DoublePistols_elite
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 200
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	ReloadDelayMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 50
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+		StandSequences: stand
+	Voiced:
+		VoiceSet: RA2TanyaVoice
+	ProvidesPrerequisite:
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining
+
+ra2_allies_seal:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@anim: ^RA2Infantry
+	Inherits@swim: ^WithSwimsuit
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Valued:
+		Cost: 1162
+	Health:
+		HP: 31000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Mobile:
+		Speed: 59
+	Tooltip:
+		Name: SEAL
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 120
+		Prerequisites: ~ra2_allies_airforcecommandhq
+		Description: actor_seal.description
+	Armament@PRIMARY:
+		Weapon: RA2MP5
+		RequiresCondition: !rank-elite
+		LocalOffset: 128,0,256
+	Armament@ELITE:
+		Weapon: RA2MP5_elite
+		RequiresCondition: rank-elite
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2MP5
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2MP5_elite
+		RequiresCondition: rank-elite
+	Armament@shipc4:
+		Weapon: SEALAttach
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+		Voice: Demolish
+	FirepowerMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 200
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	ReloadDelayMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 50
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	FirepowerMultiplier@Elite:
+		Modifier: 93
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	AttackMove:
+		Voice: Attack
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+	Voiced:
+		VoiceSet: SealVoice
+	GrantExternalConditionToTransport:
+		Condition: ifv-hmg
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining
+
+ra2_allies_ra2spy:
+	Inherits: ^Soldier
+	Inherits@anim: ^RA2Infantry
+	Inherits@template: ^ScoutInfantryTemplate
+	Inherits@disguise: ^SpyDisguise
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@pip: ^WithSpecialCargoPip
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 90
+		Prerequisites: ~ra2_allies_airforcecommandhq
+		Description: actor_ra2spy.description
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Spy
+	DisguiseTooltip:
+		Name: Spy
+		GenericName: Soldier
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	-Guard:
+	Health:
+		HP: 5000
+	Mobile:
+		Speed: 60
+	Passenger:
+	Disguise:
+	-WithInfantryBody:
+	WithDisguisingInfantryBody:
+		StandSequences: stand
+		DefaultAttackSequence: shoot
+		IdleSequences: idle1,idle2
+	Infiltrates:
+		Types: SpyInfiltrate
+		Notification: BuildingInfiltrated
+		PlayerExperience: 50
+	-AttackFrontal:
+	IgnoresDisguise:
+	Voiced:
+		VoiceSet: RA2SpyVoice
+	GrantExternalConditionToTransport:
+		Condition: ifv-spy
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining
+
+##############################################
+#   Red Alert 2 Soviet Infantry
+##############################################
+
+ra2_allies_rocketeer:
+	Inherits: ^JumpjetInfantry
+	Inherits@Template: ^FlyingInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericAirDetector
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Tooltip:
+		Name: Rocketeer
+	Valued:
+		Cost: 600
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2_allies_airforcecommandhq
+		Queue: Infantry, RAInfantry
+		Description: actor_ra2rock.description
+	Aircraft:
+		TurnSpeed: 36
+		Speed: 180
+		Voice: Move
+	Health:
+		HP: 18000
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Armament@PRIMARY:
+		Weapon: ra2roktgun
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: ra2rock.husk
+	Voiced:
+		VoiceSet: RocketeerVoice
+	DeathSounds:
+	-WithShadow:
+	WithInfantryBody@Air:
+		StandSequences: fly
+		MoveSequence: fly
+		DefaultAttackSequence: shoot-air
+		IdleSequences: idle-air
+		RequiresCondition: airborne
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		DefaultAttackSequence: shoot
+		RequiresCondition: !airborne
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	Selectable:
+		Bounds: 512, 768
+	WithSpriteBody@shadow:
+		Name: shadow
+		Sequence: shadow
+		ForceToGround: true
+		RequiresCondition: airborne
+	FirepowerMultiplier@FirerateCompensation:
+		Modifier: 50
+	RenderSprites:
+		PlayerPalette: playerra2
+	FirepowerMultiplier@ra2_allies_upgrade_eliterocketeer:
+		Modifier: 115
+		RequiresCondition: ra2_allies_upgrade_eliterocketeer
+	ReloadDelayMultiplier@upgrade:
+		Modifier: 85
+		RequiresCondition: ra2_allies_upgrade_eliterocketeer
+	DamageMultiplier@upgrade:
+		Modifier: 85
+		RequiresCondition: ra2_allies_upgrade_eliterocketeer
+	SpeedMultiplier@ra2_allies_upgrade_eliterocketeer:
+		Modifier: 110
+		RequiresCondition: ra2_allies_upgrade_eliterocketeer
+	RangeMultiplier@ra2_allies_upgrade_eliterocketeer:
+		Modifier: 110
+		RequiresCondition: ra2_allies_upgrade_eliterocketeer
+	GrantConditionOnPrerequisite@Upgrade:
+		Condition: ra2_allies_upgrade_eliterocketeer
+		Prerequisites: ra2_allies_upgrade_eliterocketeer
+	ProducibleWithLevel@spyinfantry:
+		Prerequisites: infantry.upgraded
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_eliterocketeer

@@ -1,0 +1,1147 @@
+ordos_swarmerdrone:
+	Inherits: ^RANeutralPlane
+	Inherits@LaserGuns: ^Ordos_LaserGuns
+	Inherits@Template: ^FighterTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
+	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	Tooltip:
+		Name: Swarmer Drone
+	Valued:
+		Cost: 800
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 30
+		Prerequisites: ~ordos_hightechfactory
+		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 20000
+	Repairable:
+		HpPerStep: 1000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Shielded:
+		RegenAmount: 40
+	AttackAircraft:
+		FacingTolerance: 320
+	Armament@PRIMARY:
+		Weapon: d2kChainGun
+		LocalOffset: 256,-213,0, 256,213,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		PauseOnCondition: !ammo
+		RequiresCondition: !ordos_upgrade_lasercartridges
+	Armament@PRIMARYLaser:
+		Weapon: d2kChainGun_upgrade
+		LocalOffset: 256,-213,0, 256,213,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		PauseOnCondition: !ammo
+		RequiresCondition: ordos_upgrade_lasercartridges
+	Aircraft:
+		CruiseAltitude: 1920
+		Speed: 260
+		TurnSpeed: 17
+	Guard:
+		Voice: Guard
+	Guardable:
+	WithMuzzleOverlay:
+	Targetable:
+		TargetTypes: Air, Plane
+	SpawnActorOnDeath:
+		Actor: swarmer_husk.ordos
+	Selectable:
+		Bounds: 1280, 1024, 0, 0
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: EBFDAAMine
+	RenderSprites:
+		PlayerPalette: player_rgba
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 24
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 10
+	ActorStatValues:
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband, ordos_upgrade_lasercartridges
+
+ordos_airmine:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@Cloak: ^CloakedAircraft
+	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	AutoTarget:
+		InitialStance: ReturnFire
+	Valued:
+		Cost: 500
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 30
+		Prerequisites: ~ordos_hightechfactory
+		Description: Slowly Flying Mine that hurls missiles upon contact with enemy airplane before exploding\nIn higher numbers can take down entire squadron
+	Tooltip:
+		Name: Air Mine
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 25000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 5c0
+		Type: GroundPosition
+	FireWarheadsOnDeath:
+		Weapon: D2KAAMineExplosion
+		EmptyWeapon: D2KAAMineExplosion
+	RangeMultiplier@mine:
+		Modifier: 1000
+		RequiresCondition: attack
+	RejectsOrders@mine:
+		RequiresCondition: attack
+	KillsSelf@mine:
+		RequiresCondition: attack
+		Delay: 20
+	GrantConditionOnAttack:
+		Condition: attack
+	AttackAircraft:
+		FacingTolerance: 512
+	Armament@PRIMARY:
+		Weapon: ordos_airmine
+		LocalOffset: -250,-300,300, -250,300,300
+		LocalYaw: -100,100
+	Aircraft:
+		CruiseAltitude: 1920
+		Speed: 35
+		TurnSpeed: 8
+		RepulsionSpeed: 40
+		MaximumPitch: 56
+		CanHover: true
+	Targetable:
+		TargetTypes: Air, Plane, Mine
+	Selectable:
+		Bounds: 1280, 1024, 0, 0
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: EBFDAAMine
+	AutoTarget:
+		InitialStance: AttackAnything
+	Cloak:
+		UncloakOn: Damage
+		IsPlayerPalette: true
+	Hovers:
+	-SpawnActorOnDeath:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ordos_upgrade_contraband
+
+ordos_eyeinthesky:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
+	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	Tooltip:
+		Name: Eye In The Sky
+	Valued:
+		Cost: 2500
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 30
+		Prerequisites: ~ordos_hightechfactory, ordos_ixresearchcenter
+		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
+	Health:
+		HP: 150000
+	Repairable:
+		HpPerStep: 7500
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Shielded:
+		RegenAmount: 120
+	AttackAircraft:
+		FacingTolerance: 320
+	Armament@PRIMARY:
+		Weapon: eye_bomberguy
+		LocalOffset: 256,-213,0, 256,213,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Aircraft:
+		CruiseAltitude: 1920
+		Speed: 180
+		TurnSpeed: 12
+	Guard:
+		Voice: Guard
+	Guardable:
+	WithMuzzleOverlay:
+	Targetable:
+		TargetTypes: Air, Plane
+	SpawnActorOnDeath:
+		Actor: eye_husk.ordos
+	Selectable:
+		Bounds: 1280, 1024, 0, 0
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: EBFDEyeonSky
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
+
+ordos_banshee:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
+	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
+	Tooltip:
+		Name: Banshee
+	Valued:
+		Cost: 2250
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 30
+		Prerequisites: ~ordos_hightechfactory, ~ordos_promotion_banshees, ordos_ixresearchcenter
+		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
+	Health:
+		HP: 37500
+	Repairable:
+		HpPerStep: 1875
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Shielded:
+		RegenAmount: 30
+	AttackAircraft:
+		FacingTolerance: 10
+	Armament:
+		Weapon: Laboratory_Bioball
+		LocalOffset: 256,-213,0, 256,213,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		AmmoUsage: 2
+		PauseOnCondition: ammo < 2
+	Armament@aa1:
+		Weapon: D2K_APC_Rocket_AA
+		LocalOffset: 256,256,256
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		PauseOnCondition: !ammo
+	Armament@aa2:
+		Weapon: D2K_APC_Rocket_AA
+		LocalOffset: 256,-256,256
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		PauseOnCondition: !ammo
+	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+		RequiresCondition: ordos_upgrade_biologicalwarfare
+		Modifier: 150
+	Aircraft:
+		Speed: 165
+		TurnSpeed: 33
+	Guard:
+		Voice: Guard
+	Guardable:
+	WithMuzzleOverlay:
+	Targetable:
+		TargetTypes: Air, Plane
+	SpawnActorOnDeath:
+		Actor: banshee_husk.ordos
+	Selectable:
+		Bounds: 1280, 1024, 0, 0
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: EBFDAAMine
+	RenderSprites:
+		PlayerPalette: player_rgba
+	AmmoPool:
+		Ammo: 6
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 42
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	WithMoveAnimation:
+		MoveSequence: move
+	ActorStatValues:
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_biologicalwarfare
+
+ordos_wraith:
+	Inherits: ^Helicopter
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@Epic: ^EpicAirUnitTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
+	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
+	Valued:
+		Cost: 7000
+	Tooltip:
+		Name: Wraith
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~ordos_hightechfactory, ~ordos_promotion_wraith, ordos_palace
+		BuildLimit: 1
+		Queue: Aircraft, RAAircraft
+		Description: actor_nax_dieglocke.description
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 45
+		Speed: 45
+		RepulsionSpeed: 45
+	Health:
+		HP: 375000
+	Repairable:
+		HpPerStep: 18750
+	ChangesHealth@SelfHealing:
+		Step: 150
+	Shielded:
+		RegenAmount: 300
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: Wraith_ToxinMissiles
+		LocalOffset: 800,0,0, 0,800,0, -800,0,0, 0,-800,0
+	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+		RequiresCondition: ordos_upgrade_biologicalwarfare
+		Modifier: 150
+	AttackAircraft:
+		Voice: Attack
+		AttackType: Hover
+		FacingTolerance: 1024
+	WithShadow:
+	# WithMoveAnimation:
+	# 	MoveSequence: move
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	SpawnActorOnDeath:
+		Actor: wraith_husk.ordos
+	Turreted:
+	Voiced:
+		VoiceSet: EBFDAAMine
+	RenderRangeCircle:
+		RangeCircleType: aircraft
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_biologicalwarfare
+
+wraith_husk.ordos:
+	Inherits: ^LargeHelicopterHusk
+	Tooltip:
+		Name: Wraith
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 100
+	RenderSprites:
+		Image: ordos_wraith
+		PlayerPalette: player_rgba
+
+# ^Ornithopter_Missiles:
+# 	GrantConditionOnPrerequisite@orniupg:
+# 		Condition: d2k_ornithopter_upgrade
+# 		Prerequisites: d2k_ornithopter_upgrade
+# 	Armament@bombs:
+# 		RequiresCondition: !d2k_ornithopter_upgrade
+# 	Armament@missiles:
+# 		Name: secondary
+# 		Weapon: OrniMissile
+# 		RequiresCondition: d2k_ornithopter_upgrade
+
+# ornithopter:
+# 	Inherits@D2KSprite: ^D2KPaletteRender
+# 	Inherits@EXT: ^ExternalConditions
+# 	Inherits: ^RANeutralPlane
+# 	Inherits@ornimiss: ^Ornithopter_Missiles
+# 	Inherits@AntiBuil: ^PrioritizeBuilding
+# 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+# 	AttackBomber:
+# 		#FacingTolerance: 0
+# 		FacingTolerance: 32
+# 	Armament@bombs:
+# 		Name: secondary
+# 		Weapon: OrniBomb
+# 		RequiresCondition: !d2k_ornithopter_upgrade
+# 	Armament@guns:
+# 		Name: primary
+# 		Weapon: OrniGun
+# 		LocalOffset: 0,128,0, 0,-128,0
+# 		MuzzleSequence: muzzle
+# 		MuzzlePalette: d2keffect
+# 	Health:
+# 		HP: 45000
+# 	Armor:
+# 		Type: Medium
+# 	WithMuzzleOverlay:
+# 	Aircraft:
+# 		Speed: 224
+# 		TurnSpeed: 8
+# 		Repulsable: False
+# 		CruiseAltitude: 1920
+# 	AmmoPool:
+# 		Ammo: 6
+# 	Tooltip:
+# 		Name: Ornithopter
+# 	SpawnActorOnDeath:
+# 		Actor: ornithopter_husk.atreides
+# 	RejectsOrders:
+# 	RevealOnFire:
+# 	Targetable@AIRBORNE:
+# 		TargetTypes: Air
+# 	HitShape:
+# 		Type: Circle
+# 			Radius: 256
+# 	-MapEditorData:
+
+
+# ornithopter.controllable:
+# 	Inherits@D2KSprite: ^D2KPaletteRender
+# 	Inherits: ^RANeutralPlane
+# 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+# 	Inherits@GAINSEXPERIENCE: ^GainsExperience
+# 	Inherits@ornimiss: ^Ornithopter_Missiles
+# 	Inherits@AntiBuil: ^PrioritizeBuilding
+# 	AutoTarget:
+# 		InitialStance: ReturnFire
+# 	Valued:
+# 		Cost: 1250
+# 	Tooltip:
+# 		Name: Ornithopter
+# 	Buildable:
+# 		Queue: Aircraft, RAAircraft
+# 		BuildPaletteOrder: 40
+# 		Prerequisites: ~du_ornithopter, outpost
+# 		BuildDuration: 600
+# 		BuildDurationModifier: 100
+# 		Description: Powerful Aircraft armed with dual Heavy Machine Guns and Bombs.\n Strong vs Everything
+# 		IconPalette: d2kunit
+# 	UpdatesPlayerStatistics:
+# 		AddToArmyValue: true
+# 	Health:
+# 		HP: 32000
+# 	AmmoPool:
+# 		Name: primary
+# 		Ammo: 6
+# 		AmmoCondition: ammo
+# 	ReloadAmmoPool:
+# 		Delay: 250
+# 		Count: 6
+# 		ResetOnFire: false
+# 	AttackAircraft:
+# 		AttackType: Strafe
+# 		Armaments: primary, guns
+# 		StrafeRunLength: 7c0
+# 		PersistentTargeting: False
+# 		FacingTolerance: 40
+# 	Armament@guns:
+# 		Name: guns
+# 		Weapon: OrniGunC
+# 		LocalOffset: 0,128,0, 0,-128,0
+# 		MuzzleSequence: muzzle
+# 		MuzzlePalette: d2keffect
+# 	Armament@bombs:
+# 		Name: primary
+# 		Weapon: OrniBombC
+# 		PauseOnCondition: !ammo
+# 	Armament@missiles:
+# 		Name: primary
+# 		PauseOnCondition: !ammo
+# 	Aircraft:
+# 		CruiseAltitude: 1920
+# 		Speed: 184
+# 		RepulsionSpeed: 40
+# 		MaximumPitch: 56
+# 		Repulsable: true
+# 		CanHover: false
+# 		AirborneCondition: airborne
+# 		TurnSpeed: 40
+# 	RevealsShroud:
+# 		Range: 4c0
+# 		Type: GroundPosition
+# 	WithMuzzleOverlay:
+# 	Guard:
+# 		Voice: Guard
+# 	Guardable:
+# 	Targetable:
+# 		TargetTypes: Air, Plane
+# 	WithFacingSpriteBody:
+# 		RequiresCondition: airborne
+# 	WithFacingSpriteBody@LANDED:
+# 		Sequence: idle-landed
+# 		RequiresCondition: !airborne
+# 	Selectable:
+# 		Class: ornithopter.controllable
+# 		Bounds: 1536, 1280, 0, 0
+# 	SelectionDecorations:
+# 	SpawnActorOnDeath:
+# 		Actor: ornithopter.controllable.husk
+# 	Voiced:
+# 		VoiceSet: D2KVehicleVoice
+# 	RenderSprites:
+# 		Image: ornithopter
+# 	MapEditorData:
+# 		Categories: Aircraft
+
+
+# ornithopter.controllable.husk:
+# 	Inherits: ornithopter_husk.atreides
+# 	Aircraft:
+# 		Speed: 156
+
+swarmer_husk.ordos:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Swarmer
+	Aircraft:
+		TurnSpeed: 8
+		Speed: 172
+	FallsToEarth:
+		Explosion: D2KUnitExplodeSmall
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: ordos_swarmerdrone
+
+banshee_husk.ordos:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Banshee
+	Aircraft:
+		TurnSpeed: 8
+		Speed: 172
+	FallsToEarth:
+		Explosion: D2KUnitExplodeSmall
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: ordos_banshee
+
+eye_husk.ordos:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Eye on the Sky
+	Aircraft:
+		TurnSpeed: 8
+		Speed: 65
+	FallsToEarth:
+		Explosion: D2KUnitExplodeMed
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: ordos_eyeinthesky
+
+# phoenix.husk:
+# 	Inherits: ^PlaneHusk
+# 	Tooltip:
+# 		Name: Gunship
+# 	Aircraft:
+# 		TurnSpeed: 8
+# 		Speed: 172
+# 	RenderSprites:
+# 		Image: d2k_gunship.husk
+# 	FallsToEarth:
+# 		Explosion: D2KUnitExplodeMed
+
+# d2k_combat_fleet:
+# 	Inherits: ^Helicopter
+# 	Inherits@EXPERIENCE: ^GainsExperience
+# 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+# 	Inherits@MC: ^MCImmune
+# 	Inherits@guildtele: ^Guild_teleport
+# 	Valued:
+# 		Cost: 1500
+# 	Tooltip:
+# 		Name: Combat Fleet
+# 	UpdatesPlayerStatistics:
+# 		AddToArmyValue: true
+# 	Buildable:
+# 		BuildPaletteOrder: 40
+# 		Prerequisites: high_tech_factory, research_centre, ~faction.guild
+# 		Queue: Aircraft, RAAircraft
+# 		Description: Heavy fleet which fires multiple unguided rockets at its targets.\n Strong vs Ground targets
+# 		IconPalette: ra2
+# 	Aircraft:
+# 		InitialFacing: 896
+# 		TurnSpeed: 24
+# 		Speed: 45
+# 		IdealSeparation: 1c0
+# 		RepulsionSpeed: 10
+# 	Health:
+# 		HP: 80000
+# 	RevealsShroud:
+# 		Range: 7c0
+# 		Type: GroundPosition
+# 	Armor:
+# 		Type: Heavy
+# 	Armament:
+# 		Weapon: D2K_Combat_Fleet
+# 		LocalOffset: 1200,-600,0,1200,600,0
+# 	Turreted:
+# 	AttackAircraft:
+# 		FacingTolerance: 160
+# 	SelectionDecorations:
+# 	Selectable:
+# 		DecorationBounds: 2048, 2048
+# 	Voiced:
+# 		VoiceSet: D2KVehicleVoice
+# 	RenderSprites:
+# 	SpawnActorOnDeath:
+# 		Actor: d2k_combat_fleet.husk
+# 		OwnerType: InternalName
+# 		EffectiveOwnerFromOwner: true
+# 	ThrowsShrapnel:
+# 		Weapons: Debris, Debris2, Debris3, Debris4
+# 		Pieces: 3, 5
+# 		Range: 2c0, 5c0
+
+# d2k_combat_fleet.husk:
+# 	Inherits: ^PlaneHusk
+# 	Tooltip:
+# 		Name: Combat Fleet
+# 	Aircraft:
+# 		TurnSpeed: 20
+# 		Speed: 80
+# 	RenderSprites:
+# 		Image: d2k_combat_fleet
+# 	FallsToEarth:
+# 		Explosion: D2KUnitExplodeLarge
+
+# d2k_kwny_fighter:
+# 	Inherits: ^Helicopter
+# 	Inherits@EXPERIENCE: ^GainsExperience
+# 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+# 	Inherits@MC: ^MCImmune
+# 	Inherits@guildtele: ^Guild_teleport
+# 	Valued:
+# 		Cost: 1200
+# 	Tooltip:
+# 		Name: Kwny Fighter
+# 	UpdatesPlayerStatistics:
+# 		AddToArmyValue: true
+# 	Buildable:
+# 		BuildPaletteOrder: 10
+# 		Prerequisites: high_tech_factory, ~faction.guild
+# 		Queue: Aircraft, RAAircraft
+# 		Description: Fast Spaceship fighter used for aerial combat. Equipped with guided missiles\nStrong vs Everything
+# 		IconPalette: ra2
+# 	Aircraft:
+# 		InitialFacing: 896
+# 		TurnSpeed: 24
+# 		Speed: 90
+# 		IdealSeparation: 1c0
+# 		RepulsionSpeed: 10
+# 	Health:
+# 		HP: 35000
+# 	RevealsShroud:
+# 		Range: 7c0
+# 		Type: GroundPosition
+# 	Armor:
+# 		Type: Medium
+# 	Armament:
+# 		Weapon: d2k_kwny_fighter
+# 		LocalOffset: 1200,-400,0,1200,400,0
+# 	Turreted:
+# 	AttackAircraft:
+# 		FacingTolerance: 160
+# 	SelectionDecorations:
+# 	Selectable:
+# 		DecorationBounds: 2048, 2048
+# 	Voiced:
+# 		VoiceSet: D2KVehicleVoice
+# 	SpawnActorOnDeath:
+# 		Actor: d2k_kwny_fighter.husk
+# 		OwnerType: InternalName
+# 		EffectiveOwnerFromOwner: true
+# 	ThrowsShrapnel:
+# 		Weapons: Debris, Debris2, Debris3, Debris4
+# 		Pieces: 3, 5
+# 		Range: 2c0, 5c0
+
+# d2k_kwny_fighter.husk:
+# 	Inherits: ^PlaneHusk
+# 	Tooltip:
+# 		Name: Kwny Fighter
+# 	Aircraft:
+# 		TurnSpeed: 20
+# 		Speed: 200
+# 	RenderSprites:
+# 		Image: d2k_kwny_fighter
+# 	FallsToEarth:
+# 		Explosion: D2KUnitExplodeMed
+
+# d2k_airdefenseplatform:
+# 	Inherits: ^Helicopter
+# 	Inherits@EXPERIENCE: ^GainsExperience
+# 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+# 	Valued:
+# 		Cost: 1500
+# 	Tooltip:
+# 		Name: Air Defense Platform
+# 	Hovers:
+# 	UpdatesPlayerStatistics:
+# 		AddToArmyValue: true
+# 	Buildable:
+# 		BuildPaletteOrder: 180
+# 		Prerequisites: high_tech_factory, research_centre, ~anyharkonnen
+# 		Queue: Aircraft, RAAircraft
+# 		Description: Base Defense equipped with Dual High Calibre Machinegun
+# 		IconPalette: ra2
+# 		BuildDuration: 625
+# 		BuildDurationModifier: 100
+# 	Aircraft:
+# 		InitialFacing: 896
+# 		TurnSpeed: 16
+# 		Speed: 28
+# 		IdealSeparation: 1c0
+# 		RepulsionSpeed: 10
+# 	Health:
+# 		HP: 75000
+# 	RevealsShroud:
+# 		Range: 7c0
+# 		Type: GroundPosition
+# 	Armor:
+# 		Type: Heavy
+# 	Armament:
+# 		Weapon: d2k_airdefenseplatform
+# 		LocalOffset: -250,0,-200
+# 		MuzzleSequence: muzzle
+# 		MuzzlePalette: d2keffect
+# 	Turreted:
+# 	AttackAircraft:
+# 		FacingTolerance: 80
+# 	SelectionDecorations:
+# 	Selectable:
+# 		DecorationBounds: 2048, 2048
+# 	WithMuzzleOverlay:
+# 	Voiced:
+# 		VoiceSet: D2KVehicleVoice
+# 	SpawnActorOnDeath:
+# 		Actor: d2k_airdefenseplatform.husk
+# 		OwnerType: InternalName
+# 		EffectiveOwnerFromOwner: true
+# 	RenderSprites:
+# 	ThrowsShrapnel:
+# 		Weapons: Debris, Debris2
+# 		Pieces: 2, 3
+# 		Range: 1c0, 3c0
+
+# d2k_airdefenseplatform.husk:
+# 	Inherits: ^PlaneHusk
+# 	Tooltip:
+# 		Name: Farasha
+# 	Aircraft:
+# 		TurnSpeed: 20
+# 		Speed: 35
+# 	RenderSprites:
+# 		Image: d2k_airdefenseplatform
+# 	FallsToEarth:
+# 		Explosion: D2KUnitExplodeLarge
+
+carryall_reinforce.ordos:
+	Inherits: ^AirstrikePlane
+	Inherits@CLOAK: ^CloakedAircraft
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@LaserGuns: ^Ordos_LaserGuns
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Tooltip:
+		Name: Advanced Carryall
+	Valued:
+		Cost: 5000
+	Health:
+		HP: 500000
+	Armor:
+		Type: Bomber
+	Aircraft:
+		CruiseAltitude: 2160
+		CruisingCondition: cruising
+		InitialFacing: 0
+		Speed: 156
+		TurnSpeed: 24
+		Repulsable: False
+		CanSlide: True
+		VTOL: True
+		IdleTurnSpeed: 4
+	-SpawnActorOnDeath:
+	SpawnActorOnDeath@CRUISING:
+		Actor: carryall_husk.ordos
+		RequiresCondition: cruising
+	SpawnActorOnDeath@LANDING:
+		Actor: carryall_huskvtol.ordos
+		RequiresCondition: !cruising
+	Carryall:
+		BeforeLoadDelay: 10
+		BeforeUnloadDelay: 15
+		LocalOffset: 0, 0, -128
+	RenderSprites:
+		Image: ordos_advancedcarryall
+		PlayerPalette: player_rgba
+	ChangesHealth:
+		Step: 50
+		Delay: 3
+		StartIfBelow: 75
+	Buildable:
+		Description: actor_carryall.description
+		IconPalette: d2kunit
+		BuildLimit: 10
+	HitShape:
+		Type: Circle
+			Radius: 256
+	RejectsOrders:
+	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+		Condition: ixian_upgrade_advancedixiantechnology
+		Prerequisites: ixian_upgrade_advancedixiantechnology
+	Cloak:
+		InitialDelay: 80
+		CloakDelay: 80
+		RequiresCondition: ixian_upgrade_advancedixiantechnology
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris2, Debris3, Debris4
+		Pieces: 3, 6
+		Range: 1c512, 2c512
+	AttackAircraft:
+		FacingTolerance: 10
+	Armament@PRIMARY:
+		Weapon: d2kCarryallChainGun
+		LocalOffset: 128,-213,-85, 128,213,-85
+		RequiresCondition: !ordos_upgrade_lasercartridges
+	Armament@PRIMARYLaser:
+		Weapon: d2kCarryallChainGun_upgrade
+		LocalOffset: 128,-213,-85, 128,213,-85
+		RequiresCondition: ordos_upgrade_lasercartridges
+	ActorStatValues:
+		Upgrades: ordos_upgrade_lasercartridges
+ordos_advancedcarryall:
+	Inherits: ^AirstrikePlane
+	Inherits@CLOAK: ^CloakedAircraft
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@LaserGuns: ^Ordos_LaserGuns
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 120
+		Prerequisites: ~ordos_hightechfactory
+		Description: Aircraft that picks up and carries vehicles.\n  Unarmed
+	Tooltip:
+		Name: Advanced Carryall
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 200000
+	Armor:
+		Type: Bomber
+	Aircraft:
+		CruiseAltitude: 2160
+		CruisingCondition: cruising
+		InitialFacing: 0
+		Speed: 156
+		TurnSpeed: 24
+		Repulsable: False
+		CanSlide: True
+		VTOL: True
+		IdleTurnSpeed: 4
+		MinAirborneAltitude: 400
+	-SpawnActorOnDeath:
+	SpawnActorOnDeath@CRUISING:
+		Actor: carryall_husk.ordos
+		RequiresCondition: cruising
+	SpawnActorOnDeath@LANDING:
+		Actor: carryall_huskvtol.ordos
+		RequiresCondition: !cruising
+	AutoCarryall:
+		BeforeLoadDelay: 10
+		BeforeUnloadDelay: 15
+		LocalOffset: 0, 0, -128
+	RenderSprites:
+		Image: ordos_advancedcarryall
+		PlayerPalette: player_rgba
+	ChangesHealth:
+		Step: 50
+		Delay: 3
+		StartIfBelow: 75
+	HitShape:
+		Type: Circle
+			Radius: 256
+	RejectsOrders:
+	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+		Condition: ixian_upgrade_advancedixiantechnology
+		Prerequisites: ixian_upgrade_advancedixiantechnology
+	Cloak:
+		InitialDelay: 80
+		CloakDelay: 80
+		RequiresCondition: ixian_upgrade_advancedixiantechnology
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris2, Debris3, Debris4
+		Pieces: 3, 6
+		Range: 1c512, 2c512
+	RevealsShroud@lifting_low:
+		Range: 2c512
+		Type: GroundPosition
+		RequiresCondition: !airborne
+	RevealsShroud@lifting_high:
+		Range: 1c256
+		Type: GroundPosition
+		RequiresCondition: !cruising
+	AttackAircraft:
+		FacingTolerance: 10
+	Armament@PRIMARY:
+		Weapon: d2kCarryallChainGun
+		LocalOffset: 128,-213,-85, 128,213,-85
+		RequiresCondition: !ordos_upgrade_lasercartridges
+	Armament@PRIMARYLaser:
+		Weapon: d2kCarryallChainGun_upgrade
+		LocalOffset: 128,-213,-85, 128,213,-85
+		RequiresCondition: ordos_upgrade_lasercartridges
+	ActorStatValues:
+		Upgrades: ordos_upgrade_lasercartridges
+carryall_husk.ordos:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Advanced Carryall
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 144
+		CanSlide: True
+		VTOL: true
+	RenderSprites:
+		Image: ordos_advancedcarryall
+		PlayerPalette: player_rgba
+	FallsToEarth:
+		Explosion: D2KUnitExplodeLarge
+
+carryall_huskvtol.ordos:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Advanced Carryall
+	FallsToEarth:
+		Moves: False
+		Velocity: 0c128
+	Aircraft:
+		TurnSpeed: 16
+		CanSlide: True
+		VTOL: true
+	RenderSprites:
+		Image: ordos_advancedcarryall
+		PlayerPalette: player_rgba
+	FallsToEarth:
+		Explosion: D2KUnitExplodeLarge
+
+# d2k_emperor_worm:
+# 	Inherits: ^DINO
+# 	Inherits@ND: ^NotDevourable
+# 	Inherits@MC: ^MCImmune
+# 	Tooltip:
+# 		Name: Emperor Worm
+# 	Armament:
+# 		Weapon: teeth
+# 	Armament@2:
+# 		Weapon: teeth
+# 	Armament@elec:
+# 		Weapon: d2k_sandworm_electricity
+# 		LocalOffset: 1200,0,0
+# 	Selectable:
+# 		Bounds: 2048, 1560, 128, 64
+# 	SelectionDecorations:
+# 	Buildable:
+# 		Queue: Vehicle, RAVehicle
+# 		BuildPaletteOrder: 130
+# 		Prerequisites: ~faction.tleilaxu, d2k_tleilaxu_tech, upgrade.emperorworm
+# 		Description: Giant Sandworm
+# 		BuildLimit: 1
+# 	Inherits@EXT: ^ExternalConditions ##########
+# 	Valued:
+# 		Cost: 5000
+# 	Health:
+# 		HP: 700000
+# 	Mobile:
+# 		Locomotor: heavytracked
+# 		Speed: 77
+# 		TurnSpeed: 12
+# 	Hovers:
+# 	AnnounceOnSeen:
+# 		Notification: WormSign
+# 		PingRadar: True
+# 		AnnounceNeutrals: True
+# 	AmbientSound:
+# 		SoundFiles: WRMSIGN1.WAV
+# 		Interval: 160
+# 		RequiresCondition: !attacking
+# 	WithIdleOverlay@light:
+# 		Interval: 160
+# 		Sequence: lightninga
+# 		RequiresCondition: !attacking
+# 		Palette: d2keffect
+# 	LeavesTrails:
+# 		Image: sandtrail
+# 		Sequences: traila, trailb, trailc
+# 		Palette: d2keffect
+# 		Type: CenterPosition
+# 		TerrainTypes: Clear, ClearTemperat, ClearWinter, ClearJungle, ClearSnow, ClearDesert, ClearInterior, Rough, Road, Beach, Tiberium, BlueTiberium, RedTiberium, GoldTiberium, Ore, Gems, SCMinerals, ClearDune, Dune, Sand, SpiceSand, Spice
+# 		MovingInterval: 3
+# 		RequiresCondition: !attacking
+# 	GrantConditionOnTerrain@sandspeed:
+# 		TerrainTypes: Beach, ClearDune, Dune, Sand, SpiceSand, Spice
+# 		Condition: sandspeed
+# 	SpeedMultiplier@sandspeed:
+# 		Modifier: 145
+# 		RequiresCondition: sandspeed
+
+# d2k_rider_worm:
+# 	Inherits: ^DINO
+# 	Inherits@ND: ^NotDevourable
+# 	Inherits@MC: ^MCImmune
+# 	Tooltip:
+# 		Name: Worm Rider
+# 	Armament:
+# 		Weapon: teeth
+# 	Armament@elec:
+# 		Weapon: d2k_sandworm_electricity
+# 		LocalOffset: 1200,0,0
+# 	Selectable:
+# 		Bounds: 2560, 2048, 128, 64
+# 	SelectionDecorations:
+# 	Buildable:
+# 		Queue: Infantry, RAInfantry
+# 		BuildPaletteOrder: 130
+# 		Prerequisites: ~faction.fremen, high_tech_factory, upgrade_barracks
+# 		Description: Giant Sandworm
+# 		BuildLimit: 5
+# 	Inherits@EXT: ^ExternalConditions ##########
+# 	Valued:
+# 		Cost: 2000
+# 	Health:
+# 		HP: 210000
+# 	Mobile:
+# 		Locomotor: heavytracked
+# 		Speed: 72
+# 		TurnSpeed: 12
+# 	Hovers:
+# 	AnnounceOnSeen:
+# 		Notification: WormSign
+# 		PingRadar: True
+# 		AnnounceNeutrals: True
+# 	ReloadDelayMultiplier@nerfworm:
+# 		Modifier: 140
+# 	AmbientSound:
+# 		SoundFiles: WRMSIGN1.WAV
+# 		Interval: 160
+# 		RequiresCondition: !attacking
+# 	WithIdleOverlay@light:
+# 		Interval: 160
+# 		Sequence: lightninga
+# 		RequiresCondition: !attacking
+# 		Palette: d2keffect
+# 	LeavesTrails:
+# 		Image: sandtrail
+# 		Sequences: traila, trailb, trailc
+# 		Palette: d2keffect
+# 		Type: CenterPosition
+# 		TerrainTypes: Clear, ClearTemperat, ClearWinter, ClearJungle, ClearSnow, ClearDesert, ClearInterior, Rough, Road, Beach, Tiberium, BlueTiberium, RedTiberium, GoldTiberium, Ore, Gems, SCMinerals, ClearDune, Dune, Sand, SpiceSand, Spice
+# 		MovingInterval: 3
+# 		RequiresCondition: !attacking
+# 	WithCargo:
+# 		DisplayTypes: Infantry, Hacker, Fremen, Vehicle
+# 		LocalOffset: 390,-256,256, 390,256,256, 0,0,256, -390,-256,256, -390,256,256
+# 	Cargo:
+# 		Types: Infantry, Hacker, Fremen
+# 		MaxWeight: 5
+# 		PassengerFacing: 0
+# 		LoadingCondition: notmobile
+# 	GrantConditionOnTerrain@sandspeed:
+# 		TerrainTypes: Beach, ClearDune, Dune, Sand, SpiceSand, Spice
+# 		Condition: sandspeed
+# 	SpeedMultiplier@sandspeed:
+# 		Modifier: 155
+# 		RequiresCondition: sandspeed
+# 	WithCargoPipsDecoration:
+# 		Position: BottomLeft
+# 		RequiresSelection: true
+###########################
+#   STARPORT
+###########################
+# devastator.starport:
+# 	Inherits: devastator
+# 	Buildable:
+# 		Queue: Vehicle, RAVehicle
+# 		Prerequisites: ~starport_smuggler
+# 	ProductionCostMultiplier:
+# 		Multiplier: 150
+# 	-MapEditorData:
+# 	RenderSprites:
+# 		Image: devastator
+# 	UpdatesPlayerStatistics:
+# 		OverrideActor: devastator
+
+# deviator.starport:
+# 	Inherits: ordos_deviatorartillery
+# 	Buildable:
+# 		Queue: Vehicle, RAVehicle
+# 		Prerequisites: ~starport_smuggler
+# 	ProductionCostMultiplier:
+# 		Multiplier: 150
+# 	-MapEditorData:
+# 	RenderSprites:
+# 		Image: ordos_deviatorartillery
+# 	UpdatesPlayerStatistics:
+# 		OverrideActor: ordos_deviatorartillery
+
+# sonic_tank.starport:
+# 	Inherits: sonic_tank
+# 	Buildable:
+# 		Queue: Vehicle, RAVehicle
+# 		Prerequisites: ~starport_smuggler
+# 	ProductionCostMultiplier:
+# 		Multiplier: 150
+# 	-MapEditorData:
+# 	RenderSprites:
+# 		Image: sonic_tank
+# 	UpdatesPlayerStatistics:
+# 		OverrideActor: sonic_tank
+
+# d2k_stealth_tank.starport:
+# 	Inherits: d2k_stealth_tank
+# 	Buildable:
+# 		Queue: Vehicle, RAVehicle
+# 		Prerequisites: ~starport_smuggler
+# 	ProductionCostMultiplier:
+# 		Multiplier: 150
+# 	-MapEditorData:
+# 	RenderSprites:
+# 		Image: d2k_stealth_tank
+# 	UpdatesPlayerStatistics:
+# 		OverrideActor: d2k_stealth_tank
+
+###########################
+#   UPGRADES
+###########################
+
+#   Common Buildings

@@ -1,0 +1,264 @@
+ra2_allies_harrier:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@upgrade: ^RA2AlliedAdvancedAeronautics
+	Inherits@RA2AlliedThunderboltMissiles: ^RA2AlliedThunderboltMissiles
+	Valued:
+		Cost: 2100
+	Tooltip:
+		Name: Harrier
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2_allies_airforcecommandhq
+		Queue: Aircraft, RAAircraft
+		Description: actor_falc.description
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 12
+		Speed: 180
+		IdleTurnSpeed: 10
+		IdleSpeed: 100
+		TakeoffSounds: vintupa.wav
+		LandingSounds: vintdna.wav
+		CanHover: false
+		CanSlide: false
+		VTOL: true
+		Voice: Move
+	Health:
+		HP: 72000
+	Repairable:
+		HpPerStep: 3600
+	ChangesHealth@SelfHealing:
+		Step: 72
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: HarrierMissiles
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 100, -100, 50, -50
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: HarrierMissiles_elite
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 100, -100, 50, -50
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@Harrier:
+		Modifier: 75
+	AmmoPool:
+		Ammo: 8
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 52
+		Count: 1
+	SpawnActorOnDeath:
+		Actor: RA2FALC.Husk
+	WithMoveAnimation:
+		MoveSequence: move
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Contrail@1:
+		Offset: -100,256,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -100,-256,0
+		TrailLength: 15
+	Voiced:
+		VoiceSet: HarrierVoice
+	DeathSounds:
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 8
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_advancedaeronautics, ra2_allies_upgrade_thunderboltmissiles
+
+ra2_allies_blackeagle:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@upgrade: ^RA2AlliedAdvancedAeronautics
+	Inherits@RA2AlliedThunderboltMissiles: ^RA2AlliedThunderboltMissiles
+	Tooltip:
+		Name: Black Eagle
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2_allies_airforcecommandhq, ra2_allies_alliedbattlelab
+		Queue: Aircraft, RAAircraft
+		Description: actor_beag.description
+	Valued:
+		Cost: 3000
+	Health:
+		HP: 85000
+	ChangesHealth@SelfHealing:
+		Step: 34
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 10
+		Speed: 150
+		IdleTurnSpeed: 8
+		IdleSpeed: 100
+		TakeoffSounds: vintupa.wav
+		LandingSounds: vintdna.wav
+		CanHover: false
+		CanSlide: false
+		VTOL: true
+		Voice: Move
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: BlackEagleMissiles
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: BlackEagleMissiles_elite
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@PRIMARYUPGRADE:
+		Name: primary
+		Weapon: BlackEagleThunderboltMissiles
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@PRIMARYELITEUpgrade:
+		Name: primary
+		Weapon: BlackEagleThunderboltMissiles_elite
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Selectable:
+		DecorationBounds: 1536, 1280
+	AmmoPool:
+		Ammo: 8
+		ReloadDelay: 25
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 4
+	SpawnActorOnDeath:
+		Actor: ra2beag.Husk
+	WithMoveAnimation:
+		MoveSequence: move
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Contrail@1:
+		Offset: -100,256,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -100,-256,0
+		TrailLength: 15
+	Voiced:
+		VoiceSet: BlackEagleVoice
+	DeathSounds:
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_advancedaeronautics, ra2_allies_upgrade_thunderboltmissiles
+
+ra2_allies_nighthawk:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@bot: ^BotAutoDeployTransport
+	Valued:
+		Cost: 2100
+	Tooltip:
+		Name: Night Hawk
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: ra2_allies_nighthawk
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2_allies_airforcecommandhq
+		Queue: Aircraft, RAAircraft
+		Description: actor_shad.description
+	Aircraft:
+		TurnSpeed: 24
+		Speed: 120
+		RepulsionSpeed: 24
+	Health:
+		HP: 87500
+	Repairable:
+		HpPerStep: 4375
+	ChangesHealth@SelfHealing:
+		Step: 35
+	Armament@PRIMARY:
+		Weapon: BlackHawkCannon
+		LocalOffset: 150,-200,-25, 150,200,-25
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	WithMuzzleOverlay:
+	WithIdleOverlay@ROTOR1AIR:
+		Offset: 197,0,180
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR1GROUND:
+		Offset: 197,0,180
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR2AIR:
+		Offset: -1097,0,200
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR2GROUND:
+		Offset: -1097,0,200
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	Cargo:
+		InitialUnits: ra2_allies_gi, ra2_allies_gi, ra2_allies_guardiangi, ra2_allies_guardiangi, ra2_allies_seal
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: ra2shad.Husk
+	SelectionDecorations:
+	Selectable:
+		Class: ra2_allies_nighthawk
+		DecorationBounds: 1280, 1024
+	RenderSprites:
+		Image: ra2_allies_nighthawk
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NighthawkVoice
+	DeathSounds:
+	FirepowerMultiplier@FirerateCompensation:
+		Modifier: 50

@@ -1,6 +1,6 @@
 xmas_pickaxe:
 	ReloadDelay: 14
-	Range: 1c512
+	Range: 1536
 	Report: sword1.aud,sword2.aud,sword3.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -16,8 +16,10 @@ xmas_pickaxe:
 		DamageTypes: DefaultDeath
 
 xmas_grenade:
-	Inherits: Grenade
-	Range: 7c0
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
+	Range: 7168
 	ReloadDelay: 60
 	Projectile: Bullet
 		Image: xmas_grenade
@@ -40,7 +42,7 @@ xmas_grenade_reindeer:
 	Inherits: xmas_grenade
 	ReloadDelay: 100
 	Burst: 3
-	Range: 6c0
+	Range: 6144
 	BurstDelays: 9
 	Projectile: Bullet
 		Speed: 300
@@ -64,7 +66,7 @@ xmas_suicide_big:
 		
 xmas_satan_bomb:
 	ReloadDelay: 8
-	Range: 3c256
+	Range: 3328
 	Report: vkiratta.wav
 	TargetActorCenter: true
 	Projectile: GravityBomb
@@ -84,11 +86,11 @@ xmas_satan_bomb:
 		DamageTypes: Prone100Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: napalm
 		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: large_splash
 		ImpactSounds: gexpwasa.wav
@@ -96,7 +98,7 @@ xmas_satan_bomb:
 		
 xmas_snowball_cannon:
 	ReloadDelay: 100
-	Range: 7c0
+	Range: 7168
 	Report: vpalweaa.wav, vpalweab.wav
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -105,7 +107,7 @@ xmas_snowball_cannon:
 	Warhead@3Eff: CreateEffect
 		Explosions: xmas_snowball
 		ImpactSounds: xmas_snowball_hit.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@1Dam: SpreadDamage
 		Damage: 9000
 		Spread: 0c512
@@ -118,7 +120,7 @@ xmas_snowball_cannon:
 		
 xmas_snowball_small:
 	ReloadDelay: 120
-	Range: 6c0
+	Range: 6144
 	Burst: 2
 	BurstDelays: 20
 	Report: vpalweaa.wav, vpalweab.wav
@@ -129,7 +131,7 @@ xmas_snowball_small:
 	Warhead@3Eff: CreateEffect
 		Explosions: xmas_snowball_small
 		ImpactSounds: xmas_snowball_hit.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@1Dam: SpreadDamage
 		Damage: 5000
 		Spread: 0c256
@@ -144,7 +146,7 @@ xmas_snowball_snowy:
 	Burst: 2
 	BurstDelays: 7
 	ReloadDelay: 14
-	Range: 5c0
+	Range: 5120
 	Report: vpalweaa.wav, vpalweab.wav
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -153,7 +155,7 @@ xmas_snowball_snowy:
 	Warhead@3Eff: CreateEffect
 		Explosions: xmas_snowball_small
 		ImpactSounds: xmas_snowball_hit.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@1Dam: SpreadDamage
 		Damage: 2000
 		Spread: 0c256
@@ -168,7 +170,7 @@ xmas_snowball_snowy:
 xmas_snowball_artillery:
 	Inherits: xmas_snowball_cannon
 	ReloadDelay: 200
-	Range: 12c0
+	Range: 12288
 	Report: vinfweaa.wav, vinfweab.wav, vinfweac.wav
 	Projectile: Bullet
 		Speed: 150
@@ -182,7 +184,7 @@ xmas_icespike:
 	ReloadDelay: 140
 	Burst: 2
 	BurstDelays: 6
-	Range: 8c0
+	Range: 8192
 	Report: rocket.aud
 	TargetActorCenter: true
 	Projectile: MissileCA
@@ -198,7 +200,7 @@ xmas_icespike:
 	Warhead@3Eff: CreateEffect
 		Explosions: xmas_icespike
 		ImpactSounds: xmas_icebreak.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@1Dam: SpreadDamage
 		Damage: 4500
 		Spread: 0c384
@@ -211,7 +213,7 @@ xmas_icespike:
 
 xmas_icespike_aa:
 	Inherits: xmas_icespike
-	Range: 10c0
+	Range: 10240
 	ValidTargets: Air
 	Projectile: MissileCA
 		Inaccuracy: 16
@@ -230,11 +232,11 @@ xmas_avalanche:
 	Burst: 2
 	BurstDelays: 3
 	ReloadDelay: 10
-	Range: 8c0
+	Range: 8192
 	Report: santal1.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 3500
-		InvalidTargets: Wall
+		InvalidTargets: wall
 		Versus:
 			Light: 75
 			Heavy: 25
@@ -244,7 +246,7 @@ xmas_avalanche_aa:
 	Burst: 2
 	BurstDelays: 3
 	ReloadDelay: 10
-	Range: 11c0
+	Range: 11264
 	Report: santal1.wav
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -260,7 +262,7 @@ DRSatanClawzMinionMG:
 	Warhead@1Dam: SpreadDamage
 		Damage: 1000
 		ValidTargets: Ground, Air
-		InvalidTargets: Wall
+		InvalidTargets: wall
 		Versus:
 			Light: 40
 			Heavy: 20

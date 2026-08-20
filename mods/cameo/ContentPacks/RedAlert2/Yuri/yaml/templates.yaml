@@ -1,0 +1,343 @@
+^RA2YSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: yuri_engineer, yuri_initiate, yuri_initiate, yuri_brute
+
+##############################################
+#   Red Alert 2 Allies Structures
+##############################################
+
+^RA2YuriScrapArmor:
+	SpeedMultiplier@yuri_doctrine_scrapvehiclearmor:
+		Modifier: 115
+		RequiresCondition: yuri_doctrine_scrapvehiclearmor
+	# Welded-on junk: the GENERIC plating, flat against everything. It is the honest type
+	# for scrap — uniform plate with no counter-play to express — and it deliberately
+	# REPLACES the vehicle's class armor, which is what makes it read as improvised rather
+	# than engineered. The flat 85 is retired: the type already averages ~30%.
+	Armor@ARMOR:
+		Type: ARMOR
+		RequiresCondition: yuri_doctrine_scrapvehiclearmor
+	GrantConditionOnPrerequisite@yuri_doctrine_scrapvehiclearmor:
+		Condition: yuri_doctrine_scrapvehiclearmor
+		Prerequisites: yuri_doctrine_scrapvehiclearmor
+	ActorStatValues:
+		Upgrades: yuri_doctrine_scrapvehiclearmor
+
+^RA2YuriChaosGasEmitters:
+	Inherits@EnemyInProximity: ^EnemyInProximity
+	SpeedMultiplier@ra2_yuri_upgrade_chaosgasemitters1:
+		Modifier: 110
+		RequiresCondition: yuri_doctrine_chaosgasemitters && EnemyInProximity
+	SpeedMultiplier@ra2_yuri_upgrade_chaosgasemitters2:
+		Modifier: 105
+		RequiresCondition: yuri_doctrine_chaosgasemitters && !EnemyInProximity
+	DamageMultiplier@ra2_yuri_upgrade_chaosgasemitters1:
+		Modifier: 90
+		RequiresCondition: yuri_doctrine_chaosgasemitters && EnemyInProximity
+	DamageMultiplier@ra2_yuri_upgrade_chaosgasemitters2:
+		Modifier: 95
+		RequiresCondition: yuri_doctrine_chaosgasemitters && !EnemyInProximity
+	FireWarheads@Tesla:
+		Weapons: RA2Dronegas
+		Interval: 1
+		RequiresCondition: chaosgasemitters && !chaosgasemitterscooldown && EnemyInMaxProximity
+	GrantTimedCondition@chaosgasemitterscooldown:
+		RequiresCondition: chaosgasemitters
+		PauseOnCondition: !chaosgasemitters
+		Condition: chaosgasemitterscooldown
+		Duration: 5
+	GrantConditionOnDamage@chaosgasemitters:
+		RequiresCondition: yuri_doctrine_chaosgasemitters && !disabled
+		Condition: chaosgasemitters
+		Duration: 10
+		PlayerRelationship: Ally, Neutral, Enemy
+	ChangesPhysicalState@chaosgasemitters:
+		PhysicalStateName: EnemyProximity
+		Amount: -10000
+		Delay: 1
+		RequiresCondition: chaosgasemitters && !chaosgasemitterscooldown && EnemyInMaxProximity
+	PhysicalStateBar@EnemyProximity:
+		RequiresCondition: yuri_doctrine_chaosgasemitters
+	WithPhysicalStateColoredOverlay@EnemyProximity:
+		RequiresCondition: yuri_doctrine_chaosgasemitters
+	GrantConditionOnPrerequisite@yuri_doctrine_chaosgasemitters:
+		Condition: yuri_doctrine_chaosgasemitters
+		Prerequisites: yuri_doctrine_chaosgasemitters
+	ActorStatValues:
+		Upgrades: yuri_doctrine_chaosgasemitters
+
+^RA2YuriPsionicShields:
+	Inherits@EnemyInProximity: ^EnemyInProximity
+	WithIdleOverlay@shield1:
+		Palette: yurihexshield25
+		IsPlayerPalette: false
+	WithIdleOverlay@shield_damage:
+		Palette: yurihexshield75
+		IsPlayerPalette: false
+	DamageMultiplier@yuri_doctrine_psionicvehicleshields:
+		Modifier: 75
+		RequiresCondition: yuri_doctrine_psionicvehicleshields
+	Armor@shielded:
+		Type: Shield
+		RequiresCondition: shielded
+	GrantCondition@shieldpermanent:
+		Condition: shieldpermanent
+		RequiresCondition: yuri_doctrine_psionicvehicleshields
+	Shielded:
+		DamageRegenDelay: 125
+		RegenAmount: 10
+		RegenInterval: 1
+		ShieldsUpCondition: shielded
+		SelectionBarColor: 8888FFFF
+		RequiresCondition: !disabled && ((yuri_doctrine_psionicvehicleshields && EnemyInProximity) || shieldgen || shielded)
+	ChangesShield@shielddischarge:
+		Delay: 10
+	GrantTimedCondition@supershielded:
+		Condition: supershielded
+		Duration: 40
+		RevokeAfterDurationOnly: true
+		RequiresCondition: AlliedShieldFull
+	ChangesPhysicalState@AlliedShieldDeplete:
+		PhysicalStateName: AlliedShield
+		Amount: -10000
+		Delay: 1
+		RequiresCondition: AlliedShieldFull && !supershielded
+	GrantConditionOnPhysicalState@AlliedShieldFull:
+		PhysicalStateName: AlliedShield
+		Condition: AlliedShieldFull
+		UpperValue: 10000
+		LowerValue: 10000
+	WithRangeCircle@psionicshielded:
+		Range: 5000
+		Color: 0000FF88
+		RequiresCondition: psionicshielded || supershielded
+	PhysicalStateAura@AlliedShield:
+		PhysicalStateName: AlliedShield
+		Range: 5000
+		AmountPerTick: 250
+		Interval: 1
+		ValidRelationships: Ally
+		RequiresCondition: yuri_doctrine_psionicvehicleshields && EnemyInProximity
+	PhysicalStateAura@psionicshielded:
+		PhysicalStateName: AlliedShield
+		Range: 5000
+		AmountPerTick: 500
+		Interval: 1
+		ValidRelationships: Ally
+		RequiresCondition: psionicshielded
+	GrantTimedCondition@shieldedcooldown:
+		Condition: shieldedcooldown
+		Duration: 40
+		RevokeAfterDurationOnly: true
+		RequiresCondition: psionicshields && !psionicshieldscooldown && EnemyInMaxProximity
+	GrantTimedCondition@psionicshielded:
+		Condition: psionicshielded
+		Duration: 40
+		RevokeAfterDurationOnly: true
+		RequiresCondition: psionicshields && !psionicshieldscooldown && !shieldedcooldown && EnemyInMaxProximity
+	GrantTimedCondition@psionicshieldscooldown:
+		RequiresCondition: psionicshields
+		PauseOnCondition: !psionicshields
+		Condition: psionicshieldscooldown
+		Duration: 5
+	GrantConditionOnDamage@psionicshields:
+		RequiresCondition: yuri_doctrine_psionicvehicleshields && !disabled
+		Condition: psionicshields
+		Duration: 10
+		PlayerRelationship: Ally, Neutral, Enemy
+	ChangesPhysicalState@psionicshields:
+		PhysicalStateName: EnemyProximity
+		Amount: -10000
+		Delay: 1
+		RequiresCondition: psionicshields && !psionicshieldscooldown && EnemyInMaxProximity
+	PhysicalStateBar@EnemyProximity:
+		RequiresCondition: yuri_doctrine_psionicvehicleshields
+	WithPhysicalStateColoredOverlay@EnemyProximity:
+		RequiresCondition: yuri_doctrine_psionicvehicleshields
+	GrantConditionOnPrerequisite@yuri_doctrine_psionicvehicleshields:
+		Condition: yuri_doctrine_psionicvehicleshields
+		Prerequisites: yuri_doctrine_psionicvehicleshields
+	ActorStatValues:
+		Upgrades: yuri_doctrine_psionicvehicleshields
+
+^RA2YuriGatlingPower:
+	GrantConditionOnAttack@gatling:
+		Condition: gatling
+		ArmamentNames: primary, garrisoned
+		RequiredShotsPerInstance: 12, 24
+		MaximumInstances: 2
+		RevokeDelay: 25
+		RevokeAll: false
+		IsCyclic: false
+		RevokeOnNewTarget: false
+		RequiresCondition: !rank-elite
+	GrantConditionOnAttack@elitegatling:
+		Condition: gatling
+		ArmamentNames: primary, garrisoned
+		RequiredShotsPerInstance: 6, 12
+		MaximumInstances: 2
+		RevokeDelay: 25
+		RevokeAll: false
+		IsCyclic: false
+		RevokeOnNewTarget: false
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@yuri_upgrade_gatlingfirepowerupgrade:
+		Modifier: 120
+		RequiresCondition: yuri_upgrade_gatlingfirepowerupgrade
+	RangeMultiplier@yuri_upgrade_gatlingfirepowerupgrade:
+		Modifier: 110
+		RequiresCondition: yuri_upgrade_gatlingfirepowerupgrade
+	GrantConditionOnPrerequisite@yuri_upgrade_gatlingfirepowerupgrade:
+		Condition: yuri_upgrade_gatlingfirepowerupgrade
+		Prerequisites: yuri_upgrade_gatlingfirepowerupgrade
+
+^RA2YuriMindControlCap:
+	MindControllerCapacityModifier@yuri_upgrade_domination:
+		Amount: 2
+		RequiresCondition: yuri_upgrade_domination
+	MindControllerDelayModifier@yuri_upgrade_domination:
+		Modifier: 50
+		RequiresCondition: yuri_upgrade_domination
+	GrantConditionOnPrerequisite@yuri_upgrade_domination:
+		Condition: yuri_upgrade_domination
+		Prerequisites: yuri_upgrade_domination
+	ActorStatValues:
+		Upgrades: yuri_upgrade_domination
+	Targetable@Psionic:
+		TargetTypes: Psionic
+
+^RA2YuriGatlingSpeed:
+	ReloadDelayMultiplier@yuri_upgrade_gatlingspeedupgrade:
+		Modifier: 70
+		RequiresCondition: yuri_upgrade_gatlingspeedupgrade
+	GrantConditionOnPrerequisite@yuri_upgrade_gatlingspeedupgrade:
+		Condition: yuri_upgrade_gatlingspeedupgrade
+		Prerequisites: yuri_upgrade_gatlingspeedupgrade
+
+^RA2YuriPsychicRange:
+	RangeMultiplier@yuri_upgrade_psychicrange:
+		Modifier: 115
+		RequiresCondition: yuri_upgrade_psychicrange
+	GrantConditionOnPrerequisite@yuri_upgrade_psychicrange:
+		Condition: yuri_upgrade_psychicrange
+		Prerequisites: yuri_upgrade_psychicrange
+
+### Battle Lab ###
+
+^RA2YuriPsionicArmor:
+	DamageMultiplier@yuri_upgrade_psionicarmor:
+		Modifier: 70
+		RequiresCondition: yuri_upgrade_psionicarmor
+	GrantConditionOnPrerequisite@yuri_upgrade_psionicarmor:
+		Condition: yuri_upgrade_psionicarmor
+		Prerequisites: yuri_upgrade_psionicarmor
+	ActorStatValues:
+		Upgrades: yuri_upgrade_psionicarmor
+
+^RA2YuriToxicEngines:
+	FireWarheads@yuri_upgrade_toxicengines:
+		Weapons: ToxicEngineCloudSpawner
+		Interval: 200
+		RequiresCondition: yuri_upgrade_toxicengines
+	DamageMultiplier@yuri_upgrade_toxicengines:
+		Modifier: 80
+		RequiresCondition: yuri_upgrade_toxicengines
+	SpeedMultiplier@yuri_upgrade_toxicengines:
+		Modifier: 120
+		RequiresCondition: yuri_upgrade_toxicengines
+	GrantConditionOnPrerequisite@yuri_upgrade_toxicengines:
+		Condition: yuri_upgrade_toxicengines
+		Prerequisites: yuri_upgrade_toxicengines
+	ActorStatValues:
+		Upgrades: yuri_upgrade_toxicengines
+
+^RA2YuriPsionicPlasmaBeams:
+	FirepowerMultiplier@yuri_upgrade_psionicplasmabeams:
+		Modifier: 140
+		RequiresCondition: yuri_upgrade_psionicplasmabeams
+	ReloadDelayMultiplier@yuri_upgrade_psionicplasmabeams:
+		Modifier: 80
+		RequiresCondition: yuri_upgrade_psionicplasmabeams
+	RangeMultiplier@yuri_upgrade_psionicplasmabeams:
+		Modifier: 110
+		RequiresCondition: yuri_upgrade_psionicplasmabeams
+	GrantConditionOnPrerequisite@yuri_upgrade_psionicplasmabeams:
+		Condition: yuri_upgrade_psionicplasmabeams
+		Prerequisites: yuri_upgrade_psionicplasmabeams
+	ActorStatValues:
+		Upgrades: yuri_upgrade_psionicplasmabeams
+
+^RA2YuriGravitonDrive:
+	SpeedMultiplier@yuri_upgrade_gravitondrive:
+		Modifier: 120
+		RequiresCondition: yuri_upgrade_gravitondrive
+	DamageMultiplier@yuri_upgrade_gravitondrive:
+		Modifier: 80
+		RequiresCondition: yuri_upgrade_gravitondrive
+	GrantConditionOnPrerequisite@yuri_upgrade_gravitondrive:
+		Condition: yuri_upgrade_gravitondrive
+		Prerequisites: yuri_upgrade_gravitondrive
+	ActorStatValues:
+		Upgrades: yuri_upgrade_gravitondrive
+
+^RA2YuriStealthSuits:
+	Cloak@yuri_upgrade_infantrystealthsuits:
+		InitialDelay: 125
+		CloakDelay: 75
+		CloakSound: appear1.aud
+		UncloakSound: trans1.aud
+		UncloakOn: Attack, Move, Damage, Heal, SelfHeal
+		RequiresCondition: yuri_upgrade_infantrystealthsuits
+	SpeedMultiplier@yuri_upgrade_infantrystealthsuits:
+		RequiresCondition: yuri_upgrade_infantrystealthsuits
+		Modifier: 110
+	DamageMultiplier@yuri_upgrade_infantrystealthsuits:
+		RequiresCondition: yuri_upgrade_infantrystealthsuits
+		Modifier: 90
+	Shielded:
+		DamageRegenDelay: 125
+		RegenInterval: 1
+		ShieldsUpCondition: shielded
+		RequiresCondition: !disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)
+		SelectionBarColor: 8888FFFF
+	GrantCondition@shieldpermanent:
+		Condition: shieldpermanent
+		RequiresCondition: yuri_upgrade_infantrystealthsuits
+	ChangesShield@personal_shield:
+		Step: 30
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 125
+		RequiresCondition: yuri_upgrade_infantrystealthsuits
+	Armor:
+		RequiresCondition: !shielded
+	Armor@shielded:
+		Type: Shield
+		RequiresCondition: shielded
+	DamageMultiplier@shielded:
+		RequiresCondition: shielded
+		Modifier: 90
+	ChangesShield@shielddischarge:
+		Delay: 10
+	GrantConditionOnPrerequisite@yuri_upgrade_infantrystealthsuits:
+		Condition: yuri_upgrade_infantrystealthsuits
+		Prerequisites: yuri_upgrade_infantrystealthsuits
+	ActorStatValues:
+		Upgrades: yuri_upgrade_infantrystealthsuits
+
+^RA2YuriPsychicVision:
+	RevealsShroudMultiplier@yuri_upgrade_psychicvision:
+		Modifier: 120
+		RequiresCondition: yuri_upgrade_psychicvision
+	DetectCloakedMultiplier@yuri_upgrade_psychicvision:
+		Modifier: 120
+		RequiresCondition: yuri_upgrade_psychicvision
+	GrantConditionOnPrerequisite@yuri_upgrade_psychicvision:
+		Condition: yuri_upgrade_psychicvision
+		Prerequisites: yuri_upgrade_psychicvision
+	ActorStatValues:
+		Upgrades: yuri_upgrade_psychicvision
+
+##############################################
+#   Red Alert 2 Civilian Vehicles
+##############################################

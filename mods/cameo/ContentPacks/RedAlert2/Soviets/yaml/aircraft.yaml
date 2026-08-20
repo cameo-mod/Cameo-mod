@@ -1,0 +1,448 @@
+ra2_soviets_kirovairship:
+	Inherits: ^Helicopter
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@priority: ^PrioritizeBuilding
+	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+	Inherits@ra2sovietsFireShells: ^RA2SovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^RA2SovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
+	Inherits@RA2KirovArmorPlatings: ^RA2KirovArmorPlatings
+	Inherits@RA2KirovGastroburners: ^RA2KirovGastroburners
+	Inherits@RA2KirovAtomicBombs: ^RA2KirovAtomicBombs
+	Tooltip:
+		Name: Kirov Airship
+	Valued:
+		Cost: 4000
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 99
+		Prerequisites: ~ra2_soviets_warfactory, ra2_soviets_battlelab
+		Queue: Vehicle, Aircraft, RAAircraft
+		Description: actor_zep.description
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 12
+		Speed: 30
+		RepulsionSpeed: 24
+		CanSlide: False
+	Health:
+		HP: 800000
+	ChangesHealth@SelfHealing:
+		Step: 320
+	Armament@PRIMARY:
+		Weapon: RA2KirovBomb
+		LocalOffset: 256,0,-512
+		RequiresCondition: !rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions && !ra2_soviets_upgrade_kirovatomicbombs
+	Armament@PRIMARYRad:
+		Weapon: RA2KirovBomb_rad
+		LocalOffset: 256,0,-512
+		RequiresCondition: !rank-elite && ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_upgrade_kirovatomicbombs
+	Armament@PRIMARYFire:
+		Weapon: RA2KirovBomb_fire
+		LocalOffset: 256,0,-512
+		RequiresCondition: !rank-elite && ra2_soviets_doctrine_firemunitions && !ra2_soviets_upgrade_kirovatomicbombs
+	Armament@PRIMARYTesla:
+		Weapon: RA2KirovBomb_tesla
+		LocalOffset: 256,0,-512
+		RequiresCondition: !rank-elite && ra2_soviets_doctrine_teslamunitions && !ra2_soviets_upgrade_kirovatomicbombs
+	Armament@PRIMARYNuclear:
+		Weapon: RA2KirovBomb_nuclear
+		LocalOffset: 256,0,-512
+		RequiresCondition: (rank-elite && !ra2_soviets_upgrade_kirovatomicbombs) || (!rank-elite && ra2_soviets_upgrade_kirovatomicbombs)
+	Armament@PRIMARYNuclearELITE:
+		Weapon: RA2KirovBomb_nuclear_elite
+		LocalOffset: 256,0,-512
+		RequiresCondition: rank-elite && ra2_soviets_upgrade_kirovatomicbombs
+	AttackAircraft:
+		Voice: Attack
+		AttackType: Strafe #Hover
+		#StrafeRunLength: 3333
+		#FacingTolerance: 20
+	WithShadow:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 2560, 2560
+	SpawnActorOnDeath:
+		Actor: RA2ZEP.Husk
+	Voiced:
+		VoiceSet: KirovVoice
+	DeathSounds:
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	-DamagedByTintedCells@tib:
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_tesladischargearmor, ra2_soviets_doctrine_nuclearmunitions, ra2_soviets_doctrine_firemunitions, ra2_soviets_doctrine_teslamunitions, ra2_soviets_upgrade_kirovarmorplatings, ra2_soviets_upgrade_gastroburners, ra2_soviets_upgrade_kirovatomicbombs
+
+ra2_soviets_siegechopper:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^RenderVoxel
+	Inherits@detect: ^GenericAirDetector
+	Inherits@bot: ^BotAutoDeploySwitchMode50
+	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+	Inherits@ra2sovietsFireShells: ^RA2SovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^RA2SovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Siege Chopper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 98
+		Prerequisites: ~ra2_soviets_radar
+		Queue: Vehicle, Aircraft, RAAircraft
+		Description: actor_schp.description
+	Aircraft:
+		TurnSpeed: 30
+		Speed: 150
+		RepulsionSpeed: 30
+		CanForceLand: false
+		#LandableTerrainTypes: Clear, ClearTemperat, ClearWinter, ClearJungle, ClearSnow, ClearDesert, ClearInterior, Rough, Road, Beach, Tiberium, BlueTiberium, RedTiberium, GoldTiberium, Ore, Gems, SCMinerals, ClearDune, Dune, Concrete, Sand, SpiceSand, Spice
+		VTOL: true
+		Voice: Move
+		PauseOnCondition: !undeployed || disabled
+	Health:
+		HP: 55000
+	ChangesHealth@SelfHealing:
+		Step: 22
+	Armament@PRIMARY:
+		Weapon: BlackHawkCannon
+		LocalOffset: 320,0,0
+		MuzzleSequence: muzzle
+		RequiresCondition: undeployed
+	WithMuzzleOverlay:
+	Armament@DeployTargeter:
+		Weapon: deploytargeting_5c0
+		RequiresCondition: botmicro
+	Armament@Deployed:
+		Name: deployed
+		Weapon: RA160mm
+		LocalOffset: 410,0,650
+		RequiresCondition: !rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions && deployed
+		Voice: DeployedAttack
+	Armament@DeployedRad:
+		Name: deployed
+		Weapon: RA160mm_rad
+		LocalOffset: 410,0,650
+		RequiresCondition: !rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed
+		Voice: DeployedAttack
+	Armament@DeployedFire:
+		Name: deployed
+		Weapon: RA160mm_fire
+		LocalOffset: 410,0,650
+		RequiresCondition: !rank-elite && ra2_soviets_doctrine_firemunitions && deployed
+		Voice: DeployedAttack
+	Armament@DeployedTesla:
+		Name: deployed
+		Weapon: RA160mm_tesla
+		LocalOffset: 410,0,650
+		RequiresCondition: !rank-elite && ra2_soviets_doctrine_teslamunitions && deployed
+		Voice: DeployedAttack
+	Armament@DeployedElite:
+		Name: deployed
+		Weapon: RA160mmE_elite
+		LocalOffset: 410,0,650
+		RequiresCondition: rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions && deployed
+		Voice: DeployedAttack
+	Armament@DeployedEliteRad:
+		Name: deployed
+		Weapon: RA160mmE_rad_elite
+		LocalOffset: 410,0,650
+		RequiresCondition: rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed
+		Voice: DeployedAttack
+	Armament@DeployedEliteFire:
+		Name: deployed
+		Weapon: RA160mmE_fire_elite
+		LocalOffset: 410,0,650
+		RequiresCondition: rank-elite && ra2_soviets_doctrine_firemunitions && deployed
+		Voice: DeployedAttack
+	Armament@DeployedEliteTesla:
+		Name: deployed
+		Weapon: RA160mmE_tesla_elite
+		LocalOffset: 410,0,650
+		RequiresCondition: rank-elite && ra2_soviets_doctrine_teslamunitions && deployed
+		Voice: DeployedAttack
+	FirepowerMultiplier@FirerateCompensation:
+		Modifier: 50
+	RenderRangeCircle:
+		RangeCircleType: vehicle
+		RequiresCondition: deployed && !airborne
+	Turreted:
+		TurnSpeed: 30
+	-AttackAircraft:
+	AttackTurreted:
+		Armaments: primary, deployed
+		Voice: Attack
+		PauseOnCondition: disabled
+	HeliGrantConditionOnDeploy:
+		DeployAnimation: deploy
+		DeployedCondition: deployed
+		UndeployedCondition: undeployed
+		DeploySound: vchodepa.wav
+		UndeploySound: vchodepa.wav
+		AllowedTerrainTypes: Clear, ClearTemperat, ClearWinter, ClearJungle, ClearSnow, ClearDesert, ClearInterior, Rough, Road, Beach, Tiberium, BlueTiberium, RedTiberium, GoldTiberium, Ore, Gems, SCMinerals, ClearDune, Dune, Concrete, Sand, SpiceSand, Spice, ZergSoil
+		DeployVoice: Deploy
+		UndeployVoice: Move
+		CanDeployOnRamps: true
+		SynchronizeDeployment: True
+		PauseOnCondition: disabled
+	RejectsOrders@deployment:
+		Reject: Move
+		RequiresCondition: !undeployed && !airborne
+	RejectsOrders@wierdtakeoff:
+		RequiresCondition: !undeployed && airborne
+	-WithShadow:
+	WithMoveAnimation:
+		MoveSequence: move
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	SpawnActorOnDeath:
+		Actor: yrschp.Husk
+	RenderSprites:
+		PlayerPalette: ra2buildinghack
+	WithVoxelBody:
+		Sequence: deployed
+		RequiresCondition: deployed && !airborne
+	WithVoxelTurret:
+		RequiresCondition: deployed && !airborne
+	WithVoxelHelicopterBody:
+		TickRate: 1
+		RequiresCondition: undeployed
+	Voiced:
+		VoiceSet: SiegeChopperVoice
+	DeathSounds:
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	-DamagedByTintedCells@tib:
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_tesladischargearmor, ra2_soviets_doctrine_nuclearmunitions, ra2_soviets_doctrine_firemunitions, ra2_soviets_doctrine_teslamunitions
+
+ra2_soviets_migbomber:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@turnanimation: ^RA2PlanewithTurnAnimation
+	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+	Inherits@ra2sovietsFireShells: ^RA2SovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^RA2SovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
+	Selectable:
+	Tooltip:
+		Name: MiG Bomber
+	Valued:
+		Cost: 2000
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~ra2_soviets_airfield, ra2_soviets_battlelab
+		Queue: Aircraft, RAAircraft
+		Description: actor_bpln.description
+	Health:
+		HP: 57500
+	Repairable:
+		HpPerStep: 2875
+	ChangesHealth@SelfHealing:
+		Step: 23
+	HitShape:
+	Voiced:
+		VoiceSet: MiGVoice
+	DeathSounds:
+	Aircraft:
+		TurnSpeed: 14
+		Speed: 215
+		IdleTurnSpeed: 10
+		IdleSpeed: 150
+		RepulsionSpeed: 3
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 100
+	Armament:
+		Name: primary
+		Weapon: MigMissiles
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions
+	Armament@rad:
+		Name: primary
+		Weapon: MigMissiles_rad
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && ra2_soviets_doctrine_nuclearmunitions
+	Armament@fire:
+		Name: primary
+		Weapon: MigMissiles_fire
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && ra2_soviets_doctrine_firemunitions
+	Armament@tesla:
+		Name: primary
+		Weapon: MigMissiles_tesla
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && ra2_soviets_doctrine_teslamunitions
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: MigMissiles_elite
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite  && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions
+	Armament@PRIMARYELITERad:
+		Name: primary
+		Weapon: MigMissiles_rad_elite
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite && ra2_soviets_doctrine_nuclearmunitions
+	Armament@PRIMARYELITERad:
+		Name: primary
+		Weapon: MigMissiles_fire_elite
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite && ra2_soviets_doctrine_firemunitions
+	Armament@PRIMARYELITERad:
+		Name: primary
+		Weapon: MigMissiles_tesla_elite
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite && ra2_soviets_doctrine_teslamunitions
+	Armament@AA:
+		Name: secondary
+		Weapon: MigMissiles_AA
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@AAELITE:
+		Name: secondary
+		Weapon: MigMissiles_AA_elite
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	AmmoPool:
+		Ammo: 8
+		ReloadDelay: 25
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	WithMuzzleOverlay:
+	Contrail@1:
+		Offset: -640,171,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -640,-171,0
+		TrailLength: 15
+	SpawnActorOnDeath:
+		Actor: yrbpln.husk
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	-DamagedByTintedCells@tib:
+	RenderSprites:
+		Image: yrbpln
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_tesladischargearmor, ra2_soviets_doctrine_nuclearmunitions, ra2_soviets_doctrine_firemunitions, ra2_soviets_doctrine_teslamunitions
+
+ra2_soviets_transportkirov:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@bot: ^BotAutoDeployTransport
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
+	Inherits@RA2KirovArmorPlatings: ^RA2KirovArmorPlatings
+	Inherits@RA2KirovGastroburners: ^RA2KirovGastroburners
+	Valued:
+		Cost: 3600
+	Tooltip:
+		Name: Transport Kirov
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: ra2_soviets_transportkirov
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2_soviets_radar
+		Queue: Aircraft, RAAircraft, Vehicle
+		Description: actor_shad.description
+	Aircraft:
+		TurnSpeed: 14
+		Speed: 35
+		RepulsionSpeed: 14
+	Health:
+		HP: 265000
+	Repairable:
+		HpPerStep: 13250
+	ChangesHealth@SelfHealing:
+		Step: 106
+	Armament@PRIMARY:
+		Weapon: BlackHawkCannon
+		LocalOffset: 150,-200,-25, 150,200,-25
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	WithMuzzleOverlay:
+	Cargo:
+		InitialUnits: ra2_soviets_conscript, ra2_soviets_conscript, ra2_soviets_conscript, ra2_soviets_conscript, ra2_soviets_flaktrooper, ra2_soviets_flaktrooper, ra2_soviets_teslatrooper, ra2_soviets_teslatrooper, ra2_soviets_rhinoheavytank, ra2_soviets_rhinoheavytank
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 14
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: ra2_tzep.Husk
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	RenderSprites:
+		Image: ra2_soviets_transportkirov
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: KirovVoice
+	DeathSounds:
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	-DamagedByTintedCells@tib:
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_tesladischargearmor, ra2_soviets_upgrade_kirovarmorplatings, ra2_soviets_upgrade_gastroburners

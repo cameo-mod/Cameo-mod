@@ -1,0 +1,712 @@
+ra2_allies_alliedmobileconstructionvehicle:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@mcv: ^MCV
+	Inherits@SHADOWS: ^Shadows
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Tooltip:
+		Name: Allied Mobile Construction Vehicle
+	Buildable:
+		Prerequisites: ~ra2_allies_alliedwarfactory, ra2_allies_alliedservicedepot
+		Description: Deploys into a Construction Yard.\n  Unarmed
+	Transforms:
+		IntoActor: ra2_allies_alliedconstructionyard
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: uplace.wav
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: AlliedMCV
+	ProvidesPrerequisite@faction:
+		Prerequisite: mmalliesra2
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine
+
+ra2_allies_chronominer:
+	Inherits: ^Tank
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@SHADOWS: ^Shadows
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Chrono Miner
+	Harvester:
+		Voice: Harvest
+		PipCount: 10
+		BaleLoadDelay: 4
+		BaleUnloadDelay: 2
+		EmptyCondition: no-tiberium
+	StoresResources:
+		Capacity: 16
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 100
+		TurnSpeed: 20
+	Buildable:
+		Prerequisites: ~ra2_allies_alliedorerefinery
+		Queue: Vehicle, RAVehicle
+		Description: actor_cmin.description
+	WithHarvestAnimation:
+	WithDockingAnimation:
+	DockClientManager:
+		Voice: Deliver
+	ChronoResourceDelivery:
+		TeleportType: PortableChrono
+		RequiresCondition: !disabled
+	ExplodeWeaponTeleportEffect:
+		TeleportType: PortableChrono
+		ImpactWeapon: PortableChronoImpact
+		TeleportWeapon: ChronoMinerTeleportImpact
+	Voiced:
+		VoiceSet: ChronoMinerVoice
+	RenderSprites:
+		Image: ra2_allies_chronominer
+		PlayerPalette: playerra2
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine
+
+ra2_allies_grizzlytank:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Inherits@RA2AlliedTankLaserTargeting: ^RA2AlliedTankLaserTargeting
+	Tooltip:
+		Name: Grizzly Tank
+	Valued:
+		Cost: 750
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~ra2_allies_alliedwarfactory
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 95
+		TurnSpeed: 19
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Turreted:
+		TurnSpeed: 19
+	Armament:
+		Name: primary
+		Weapon: RA2105mm
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1280,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2105mm_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1280,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	RangeMultiplier@ra2_allies_upgrade_tanklasertargeting:
+		Modifier: 130
+	FirepowerMultiplier@ra2_allies_upgrade_tanklasertargeting:
+		Modifier: 160
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: RA2AlliesVehicleVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine, ra2_allies_upgrade_tanklasertargeting
+
+ra2_allies_tankdestroyer:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^TankDestroyerTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Inherits@RA2AlliedTankLaserTargeting: ^RA2AlliedTankLaserTargeting
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Tank Destroyer
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2_allies_airforcecommandhq
+		Queue: Vehicle, RAVehicle
+		Description: actor_ra2tnkd.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 65
+		TurnSpeed: 26
+	Health:
+		HP: 145000
+	Repairable:
+		HpPerStep: 7250
+	ChangesHealth@SelfHealing:
+		Step: 58
+	Armament:
+		Name: primary
+		Weapon: RA2sabot
+		RecoilRecovery: 38
+		LocalOffset: 750,0,80
+		MuzzleSequence: muzzle
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2sabot_elite
+		RecoilRecovery: 38
+		LocalOffset: 750,0,80
+		MuzzleSequence: muzzle
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	Voiced:
+		VoiceSet: TankDestroyerVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine, ra2_allies_upgrade_tanklasertargeting
+
+ra2_allies_ifv:
+	Inherits: ^IFVBase
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedThunderboltMissiles: ^RA2AlliedThunderboltMissiles
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Inherits@RA2AlliedTankLaserTargeting: ^RA2AlliedTankLaserTargeting
+	Buildable:
+		Prerequisites: ~ra2_allies_alliedwarfactory
+	FirepowerMultiplier@ra2_allies_upgrade_assaultsquadtraining:
+		Modifier: 110
+		RequiresCondition: ra2_allies_upgrade_assaultsquadtraining
+	ReloadDelayMultiplier@ra2_allies_upgrade_assaultsquadtraining:
+		Modifier: 90
+		RequiresCondition: ra2_allies_upgrade_assaultsquadtraining
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_assaultsquadtraining:
+		Condition: ra2_allies_upgrade_assaultsquadtraining
+		Prerequisites: ra2_allies_upgrade_assaultsquadtraining
+	ChangesHealth@ra2_allies_upgrade_vanguardtraining:
+		Step: 10
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: ra2_allies_upgrade_vanguardtraining
+	DamageMultiplier@ra2_allies_upgrade_vanguardtraining:
+		Modifier: 75
+		RequiresCondition: ra2_allies_upgrade_vanguardtraining
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_vanguardtraining:
+		Condition: ra2_allies_upgrade_vanguardtraining
+		Prerequisites: ra2_allies_upgrade_vanguardtraining
+	SpeedMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 110
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	RangeMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 110
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	RevealsShroudMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 120
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	DetectCloakedMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 120
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_infiltratorstraining:
+		Condition: ra2_allies_upgrade_infiltratorstraining
+		Prerequisites: ra2_allies_upgrade_infiltratorstraining
+	Selectable:
+		Class: ra2_allies_ifv
+	Voiced:
+		VoiceSet: IFVVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Cargo, Kills
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine, ra2_allies_upgrade_thunderboltmissiles, ra2_allies_upgrade_tanklasertargeting
+
+ra2_allies_ifv_mg:
+	Inherits: ra2_allies_ifv
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~botplayer, ra2_allies_alliedbarracks
+		Description: IFV with machine gun.\n  Strong vs Infantry\n  Weak vs Vehicles
+	UpdatesPlayerStatistics:
+		OverrideActor: ra2_allies_ifv
+	RenderSprites:
+		Image: ra2_allies_ifv
+	Cargo:
+		InitialUnits: ra2_allies_gi
+	ProductionCostMultiplier:
+		Multiplier: 140
+
+ra2_allies_ifv_missile:
+	Inherits: ra2_allies_ifv
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~botplayer, ra2_allies_alliedbarracks
+		Description: IFV with missile launcher.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+	UpdatesPlayerStatistics:
+		OverrideActor: ra2_allies_ifv
+	RenderSprites:
+		Image: ra2_allies_ifv
+	Cargo:
+		InitialUnits: ra2_allies_guardiangi
+	ProductionCostMultiplier:
+		Multiplier: 180
+
+ra2_allies_ifv_hmg:
+	Inherits: ra2_allies_ifv
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~botplayer, ra2_allies_alliedbarracks, ra2_allies_airforcecommandhq
+		Description: IFV with heavy machine gun.\n  Strong vs Infantry, Aircraft\n  Weak vs Vehicles
+	UpdatesPlayerStatistics:
+		OverrideActor: ra2_allies_ifv
+	RenderSprites:
+		Image: ra2_allies_ifv
+	Cargo:
+		InitialUnits: ra2_allies_seal
+	ProductionCostMultiplier:
+		Multiplier: 280
+
+ra2_allies_ifv_repair:
+	Inherits: ra2_allies_ifv_mg
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~botplayer, ra2_allies_alliedbarracks, ra2_allies_alliedservicedepot
+		Description: IFV repair variant. Repairs nearby vehicles.\n  Unarmed
+	Cargo:
+		InitialUnits: ra2_allies_engineer
+	ProductionCostMultiplier:
+		Multiplier: 200
+
+ra2_allies_ifv_chrono:
+	Inherits: ra2_allies_ifv_mg
+	Buildable:
+		Prerequisites: ~botplayer, ra2_allies_alliedbarracks, ra2_allies_alliedbattlelab
+		Description: IFV with chrono weapon.\n  Strong vs Vehicles\n  Weak vs Infantry
+	Cargo:
+		InitialUnits: ra2_allies_chronolegionnaire
+	ProductionCostMultiplier:
+		Multiplier: 400
+
+ra2_allies_prismtank:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Inherits@RA2AlliedIntensifiedPrismBeams: ^RA2AlliedIntensifiedPrismBeams
+	AutoTargetPriority@TESLAAMOVE:
+		ValidTargets: PrismTowerChargeable
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Prism Tank
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~ra2_allies_alliedwarfactory, ra2_allies_alliedbattlelab
+		Queue: Vehicle, RAVehicle
+		Description: actor_sref.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 60
+		TurnSpeed: 12
+	Health:
+		HP: 60000
+	Repairable:
+		HpPerStep: 3000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Turreted:
+		TurnSpeed: 12 #3
+	Armament@Charge:
+		#Name: secondary
+		Weapon: PrismTankCharge
+		LocalOffset: 410,0,650
+		Recoil: 64
+		RecoilRecovery: 26
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		RequiresCondition: !rank-elite
+	Armament@EliteCharge:
+		#Name: secondary
+		Weapon: PrismTankCharge_elite
+		LocalOffset: 410,0,650
+		Recoil: 64
+		RecoilRecovery: 26
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		RequiresCondition: rank-elite
+	Armament:
+		#Name: primary
+		Weapon: RA2Comet
+		LocalOffset: 410,0,650
+		Recoil: 64
+		RecoilRecovery: 26
+		TargetRelationships: Enemy
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		#Name: primary
+		Weapon: RA2Comet_elite
+		LocalOffset: 410,0,650
+		Recoil: 64
+		RecoilRecovery: 26
+		TargetRelationships: Enemy
+		RequiresCondition: rank-elite
+	AttackTurreted:
+		TargetFrozenActors: True
+	RenderRangeCircle:
+	SelectionDecorations:
+	Selectable:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: PrismTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine, ra2_allies_upgrade_intensifiedprismbeams
+
+ra2_allies_miragetank:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Inherits@RA2AlliedTankLaserTargeting: ^RA2AlliedTankLaserTargeting
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Mirage Tank
+		RequiresCondition: !tree
+	MirageTooltip@Tree:
+		Name: Mirage Tank
+		GenericName: Tree
+		GenericVisibility: Enemy, Neutral
+		RequiresCondition: tree
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2_allies_alliedwarfactory, ra2_allies_alliedbattlelab, ~!ra2_allies_upgrade_heavymiragetank
+		Queue: Vehicle, RAVehicle
+		Description: actor_mgtk.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 90
+		TurnSpeed: 18
+	Health:
+		HP: 120000
+	Repairable:
+		HpPerStep: 6000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Turreted:
+		TurnSpeed: 18
+	Armament:
+		Name: primary
+		Weapon: RA2MirageGun
+		LocalOffset: 512,0,128
+		Recoil: 64
+		RecoilRecovery: 26
+		RequiresCondition: !rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@elite:
+		Name: primary
+		Weapon: RA2MirageGun_elite
+		LocalOffset: 512,0,128
+		Recoil: 64
+		RecoilRecovery: 26
+		RequiresCondition: rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Mirage:
+		RequiresCondition: !disabled
+		InitialDelay: 25
+		RevealDelay: 25
+		RevealOn: Attack, Move
+		MirageCondition: tree
+		DefaultTargetTypes: t08, t10, t03, t02
+	WithMuzzleOverlay:
+	RenderSprites:
+		PlayerPalette: playerra2
+	AttackTurreted:
+	SelectionDecorations:
+	AutoTarget:
+	Selectable:
+	WithSpriteTurret:
+		RequiresCondition: !tree
+	WithFacingSpriteBody:
+		RequiresCondition: !tree
+	WithMirageSpriteBody:
+		Name: tree
+		RequiresCondition: tree
+		IsPlayerPalette: false
+		Palette: ra_temperat
+	Voiced:
+		VoiceSet: MirageTankVoice
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine, ra2_allies_upgrade_tanklasertargeting
+
+ra2_allies_heavymiragetank:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Inherits@RA2AlliedTankLaserTargeting: ^RA2AlliedTankLaserTargeting
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Heavy Mirage Tank
+		RequiresCondition: !tree
+	MirageTooltip@Tree:
+		Name: Heavy Mirage Tank
+		GenericName: Tree
+		GenericVisibility: Enemy, Neutral
+		RequiresCondition: tree
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2_allies_alliedwarfactory, ~ra2_allies_upgrade_heavymiragetank, ra2_allies_alliedbattlelab
+		Queue: Vehicle, RAVehicle
+		Description: actor_mgtk.description
+	Mobile:
+		Speed: 60
+		TurnSpeed: 12
+	Health:
+		HP: 240000
+	Repairable:
+		HpPerStep: 12000
+	ChangesHealth@SelfHealing:
+		Step: 96
+	Turreted:
+		TurnSpeed: 12
+	Armament:
+		Name: primary
+		Weapon: RA2HeavyMirageGun
+		LocalOffset: 1024,0,128
+		Recoil: 64
+		RecoilRecovery: 16
+		RequiresCondition: !rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@elite:
+		Name: primary
+		Weapon: RA2HeavyMirageGun_elite
+		LocalOffset: 1024,0,128
+		Recoil: 64
+		RecoilRecovery: 16
+		RequiresCondition: rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Mirage:
+		RequiresCondition: !disabled
+		InitialDelay: 25
+		RevealDelay: 25
+		RevealOn: Attack, Move
+		MirageCondition: tree
+		DefaultTargetTypes: t08, t10, t03, t02
+	WithMuzzleOverlay:
+	AttackTurreted:
+	SelectionDecorations:
+	AutoTarget:
+	Selectable:
+	WithSpriteTurret:
+		RequiresCondition: !tree
+	WithFacingSpriteBody:
+		RequiresCondition: !tree
+	WithMirageSpriteBody:
+		Name: tree
+		RequiresCondition: tree
+		IsPlayerPalette: false
+		Palette: ra_temperat
+	RenderSprites:
+		PlayerPalette: player_rgba
+	Voiced:
+		VoiceSet: MirageTankVoice
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine, ra2_allies_upgrade_tanklasertargeting
+
+ra2_allies_battlefortress:
+	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@crush: ^VehicleCrusher
+	Inherits@cargo: ^OpenToppedVehicle
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Battle Fortress
+	UpdatesPlayerStatistics:
+		OverrideActor: ra2_allies_battlefortress
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2_allies_alliedwarfactory, ra2_allies_alliedbattlelab
+		Queue: Vehicle, RAVehicle
+		Description: template_opentopped.description
+	Mobile:
+		Speed: 60
+		TurnSpeed: 12
+	Passenger:
+	Health:
+		HP: 320000
+	Repairable:
+		HpPerStep: 16000
+	ChangesHealth@SelfHealing:
+		Step: 128
+	#Turreted:
+	#	TurnSpeed: 1023
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 32
+	Armament:
+		Weapon: RA220mmrapid
+		MuzzleSequence: muzzle
+	RenderRangeCircle:
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 0
+	Cargo:
+		UnloadVoice: Move
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 6
+		InitialUnits: ra2_allies_gi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_guardiangi,ra2_allies_guardiangi,ra2_allies_guardiangi
+		ExclusiveDeploy: true
+		DeployType: Battlefortress
+	AttackOpenTopped:
+		Voice: Attack
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, -384,0,128, 224,-341,128, -224,-341,128, 224,341,128, -224,341,128
+		PauseOnCondition: chronobeamed
+	RevealOnFire:
+		ArmamentNames: primary, garrisoned
+	AutoTarget:
+		AllowMovement: true
+	Selectable:
+		DecorationBounds: 1440, 1440, 0, -128
+		Class: ra2_allies_battlefortress
+	Voiced:
+		VoiceSet: BattleFortressVoice
+	RenderSprites:
+		Image: ra2_allies_battlefortress
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine
+	#RenderVoxels:
+	#	Image: ra2_allies_battlefortress
+
+ra2_allies_battlefortress_empty:
+	Inherits: ra2_allies_battlefortress
+	EditorOnlyTooltip:
+		Name: Battle Fortress (Empty)
+	Buildable:
+		Prerequisites: ra2_allies_alliedbattlelab, ~botplayer
+		Description: Heavy assault vehicle with garrisonable infantry compartment.
+	Cargo:
+		-InitialUnits:
+	ProductionCostMultiplier:
+		Multiplier: 50
+
+ra2_allies_battlefortress_chrono:
+	Inherits: ra2_allies_battlefortress
+	EditorOnlyTooltip:
+		Name: Chrono Battle Fortress
+	Buildable:
+		Prerequisites: ra2_allies_alliedbattlelab, ~botplayer
+		Description: Heavy assault vehicle with garrisonable infantry compartment.
+	Cargo:
+		InitialUnits: ra2_allies_chronolegionnaire,ra2_allies_chronolegionnaire,ra2_allies_chronolegionnaire,ra2_allies_chronolegionnaire,ra2_allies_chronolegionnaire,ra2_allies_chronolegionnaire
+	ProductionCostMultiplier:
+		Multiplier: 200
+
+##############################################
+#   Red Alert 2 Soviet Vehicles
+##############################################

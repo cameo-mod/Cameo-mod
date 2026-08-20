@@ -1,0 +1,95 @@
+#!/usr/bin/env python3
+"""gen_effects.py — legacy LAYER 3 bootstrap generator (see
+docs/design/WEAPON_3WAY_SPLIT.md).
+
+For each old full-stack central template, extracts ALL non-damage warheads —
+CreateEffect impact FX, LeaveSmudge craters, GrantExternalCondition shield-hit,
+and specials (AffectsIntegrity EMP / SpawnActor fire / ApplyPhysicalState /
+DamagesConcrete) — verbatim, and emits them under `^Effect<Family>_<Level>`.
+Damage warheads stay in the warhead layer; Projectile in layer 2; top-level
+fields (Range/ReloadDelay/Report) are per-weapon. Prints to stdout.
+
+This reproduces the original 2026-08-02 library only. Subsequent AP/HE and
+other family splits made the live library hand-maintained; do not overwrite it
+with this output. Run tools/audit/check_effect_audio.py after editing it.
+
+Usage: python tools/balance/gen_effects.py > legacy_effect_library.yaml
+"""
+from __future__ import annotations
+import os, re, sys
+
+WY = os.path.join(os.path.dirname(__file__), "..", "..", "mods", "cameo", "weapons", "weapons.yaml")
+
+EMAP = {
+    "SmallArms": ("Bullet", "Light"), "Chaingun": ("Bullet", "Medium"),
+    "FlakWeapon": ("Flak", "Medium"), "HeavyAAWeapon": ("Flak", "Heavy"),
+    "TankDestroyerCannon": ("Cannon", "Light"), "MediumCannon": ("Cannon", "Medium"), "HeavyCannon": ("Cannon", "Heavy"),
+    "LightMissile": ("Missile", "Light"), "MediumMissile": ("Missile", "Medium"), "HeavyMissile": ("Missile", "Heavy"),
+    "ArrowWeapon": ("Arrow", "Light"),
+    "LightFlameWeapon": ("Flame", "Light"), "MediumFlameWeapon": ("Flame", "Medium"), "HeavyFlameWeapon": ("Flame", "Heavy"),
+    "LightChemicalWeapon": ("Chem", "Light"), "MediumChemicalWeapon": ("Chem", "Medium"), "HeavyChemicalWeapon": ("Chem", "Heavy"),
+    "Grenade": ("Explosion", "Light"), "ShrapnelWeapon": ("Explosion", "Medium"), "HeavyBomb": ("Explosion", "Heavy"),
+    "LaserWeapon": ("Laser", "Heavy"), "RailgunWeapon": ("Railgun", "Heavy"),
+    "TeslaWeapon": ("Tesla", "Heavy"), "TeslaChargedWeapon": ("Tesla", "Super"),
+    "NuclearWarhead": ("Nuclear", "Super"), "SwordWeapon": ("Melee", "Medium"), "MagicWeapon": ("Magic", "Heavy"),
+}
+FX_TYPES = {"CreateEffect", "LeaveSmudge", "GrantExternalCondition", "AffectsIntegrity",
+            "SpawnActor", "ApplyPhysicalState", "DamagesConcrete"}
+LEVELORDER = {"Light": 0, "Medium": 1, "Heavy": 2, "Super": 3}
+
+
+def blocks_of(path):
+    lines = open(path, encoding="utf-8").read().split("\n")
+    out, cur = {}, None
+    for ln in lines:
+        m = re.match(r"^\^(\w+):\s*$", ln)
+        if m:
+            cur = m.group(1); out[cur] = []; continue
+        if re.match(r"^\S", ln) and not ln.startswith("^"):
+            cur = None
+        if cur is not None:
+            out[cur].append(ln)
+    return out
+
+
+def extract_fx(body):
+    out, i, n = [], 0, len(body)
+    while i < n:
+        m = re.match(r"^\tWarhead@(\w+):\s*(\w+)", body[i])
+        if m and m.group(2) in FX_TYPES:
+            out.append(body[i]); i += 1
+            while i < n and (re.match(r"^\t\t", body[i]) or body[i].strip() == ""):
+                out.append(body[i]); i += 1
+            while out and out[-1].strip() == "":
+                out.pop()
+        else:
+            i += 1
+    return out
+
+
+def main():
+    blocks = blocks_of(WY)
+    emitted, order = {}, []
+    for old, (fam, lvl) in EMAP.items():
+        b = blocks.get(old)
+        if not b:
+            continue
+        fx = extract_fx(b)
+        # Effect layer = IMPACT only (ImpactSounds live inside the CreateEffect warheads).
+        # The firing/launch sound (top-level Report) belongs to the PROJECTILE layer (gen_projectiles).
+        if not fx:
+            continue
+        name = f"Effect_{fam}_{lvl}"
+        emitted[name] = "\n".join([f"^{name}:"] + fx)
+        order.append(name)
+    order.sort(key=lambda x: (x.split("_")[1], LEVELORDER.get(x.split("_")[-1], 9)))
+    print("# LEGACY LAYER 3 bootstrap output. Do not overwrite the live effect library.")
+    print("# Source: tools/balance/gen_effects.py and the old full-stack templates.")
+    print()
+    for nm in order:
+        print(emitted[nm]); print()
+    print(f"# {len(order)} effect templates", file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()

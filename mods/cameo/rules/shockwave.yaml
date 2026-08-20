@@ -290,7 +290,7 @@ Player:
 #########################################
 #           INHERITABLES
 #########################################
-^upsusafocusingcrystal:
+^UPSUSAFocusingCrystal:
 	GrantConditionOnPrerequisite@upsusafocusingcrystal:
 		Condition: upsusafocusingcrystal
 		Prerequisites: upsusafocusingcrystal
@@ -304,7 +304,7 @@ Player:
 		Modifier: 85
 		RequiresCondition: upsusafocusingcrystal
 
-^walker_stomping:
+^WalkerStomping:
 	GrantConditionOnMovement@nomoving:
 		Condition: moving
 		ValidMovementTypes: Horizontal, Vertical, Turn
@@ -329,7 +329,7 @@ Player:
 		RequiresCondition: upschheliarmor
 		Modifier: 75
 
-^upschnucleartanks:
+^UPSCHNuclearTanks:
 	GrantConditionOnPrerequisite@upschnucleartanks:
 		Condition: upschnucleartanks
 		Prerequisites: upschnucleartanks
@@ -501,7 +501,7 @@ Player:
 		UnitType: usabomber
 		SquadSize: 1
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -527,7 +527,7 @@ Player:
 		UnitType: usabomber
 		SquadSize: 1
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -553,7 +553,7 @@ Player:
 		UnitType: usabomber
 		SquadSize: 1
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -579,7 +579,7 @@ Player:
 		UnitType: usabomber
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -605,7 +605,7 @@ Player:
 		UnitType: usabomber
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -631,7 +631,7 @@ Player:
 		UnitType: usabomber
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -657,7 +657,7 @@ Player:
 		UnitType: usabomber
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -683,7 +683,7 @@ Player:
 		UnitType: usabomber
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -709,7 +709,7 @@ Player:
 		UnitType: usabomber
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -735,7 +735,7 @@ Player:
 		UnitType: susahaloplane
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 	ParatroopersPower@susahalodrop2:
@@ -760,7 +760,7 @@ Player:
 		UnitType: susahaloplane
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 	ParatroopersPower@susahalodrop3:
@@ -785,7 +785,7 @@ Player:
 		UnitType: susahaloplane
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 	ParatroopersPower@bradleyparadrop1:
@@ -810,7 +810,7 @@ Player:
 		UnitType: usabomber
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -836,7 +836,7 @@ Player:
 		UnitType: usabomber
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -862,7 +862,7 @@ Player:
 		UnitType: usabomber
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -891,7 +891,7 @@ Player:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		Strikes: 6
 		CircleDelay: 20
@@ -923,7 +923,7 @@ Player:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		Strikes: 8
 		CircleDelay: 20
@@ -1138,7 +1138,7 @@ Player:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		Strikes: 1
 		CircleDelay: 20
@@ -1170,7 +1170,7 @@ Player:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		Strikes: 3
 		CircleDelay: 50
@@ -1205,7 +1205,7 @@ Player:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		Strikes: 3
 		CircleDelay: 50
@@ -1243,7 +1243,7 @@ Player:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		Strikes: 3
 		CircleDelay: 50
@@ -1270,7 +1270,7 @@ Player:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upsusab52cruise
@@ -1298,7 +1298,7 @@ Player:
 		LaunchSound: artbarragew1.wav
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 	ParatroopersPower@susaamdggrenade2:
@@ -1324,7 +1324,7 @@ Player:
 		LaunchSound: artbarragew1.wav
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 	ParatroopersPower@susaamdggrenade3:
@@ -1350,7 +1350,7 @@ Player:
 		UnitType: susaamdgvirtualplane
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 
@@ -1398,7 +1398,7 @@ Player:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upschnapalmstrike
@@ -1422,7 +1422,7 @@ Player:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upchminebomb, upschneutronclustermine
@@ -1449,7 +1449,7 @@ Player:
 		UnitType: usabomber
 		SquadSize: 1
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 	ParatroopersPower@tankdrop2:
@@ -1474,7 +1474,7 @@ Player:
 		UnitType: usabomber
 		SquadSize: 1
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 	ParatroopersPower@tankdrop3:
@@ -1499,7 +1499,7 @@ Player:
 		UnitType: usabomber
 		SquadSize: 1
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 ^ShockwaveGLASupportPowers:
@@ -1525,7 +1525,7 @@ Player:
 		UnitType: gla.paradrop
 		SquadSize: 1
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 	ParatroopersPower@scrapdrop2:
@@ -1550,7 +1550,7 @@ Player:
 		UnitType: gla.paradrop
 		SquadSize: 2
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 	ParatroopersPower@scrapdrop3:
@@ -1575,7 +1575,7 @@ Player:
 		UnitType: gla.paradrop
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 	AirstrikePower@blackmarketbomb:
@@ -1596,7 +1596,7 @@ Player:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upblackmarketbomb
@@ -1623,7 +1623,7 @@ Player:
 		UnitType: gla.paradrop
 		SquadSize: 1
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 	DetonateWeaponPower@SToxinAmbush:
@@ -1764,14 +1764,13 @@ shockwave_mcv:
 			eglatechnic: glmcv
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: susastrategy, ~techlevel.high, ~disabled
+		Prerequisites: susastrategy, ~disabled
 		Queue: Building, RABuilding
 		Description: Builds structures and provides radar.
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 200000
@@ -1798,7 +1797,7 @@ shockwave_mcv_usa:
 	Inherits: shockwave_mcv
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: susastrategy, ~techlevel.medium, ~anysusa
+		Prerequisites: susastrategy, ~anysusa
 	Voiced:
 		VoiceSet: USAMCCVoice
 
@@ -1807,7 +1806,7 @@ shockwave_mcv_usa.bot:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: susastrategy, ~techlevel.medium, ~anysusa, ~botplayer, allowsMCV
+		Prerequisites: susastrategy, ~anysusa, ~botplayer, allowsMCV
 	RenderSprites:
 		Image: usamcv
 	Voiced:
@@ -1817,7 +1816,7 @@ shockwave_mcv_china:
 	Inherits: shockwave_mcv
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: chpropaganda, ~techlevel.medium, ~anyschina
+		Prerequisites: chpropaganda, ~anyschina
 	Voiced:
 		VoiceSet: PRCMCCVoice
 
@@ -1826,7 +1825,7 @@ shockwave_mcv_china.bot:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: chpropaganda, ~techlevel.medium, ~anyschina, ~botplayer, allowsMCV
+		Prerequisites: chpropaganda, ~anyschina, ~botplayer, allowsMCV
 	RenderSprites:
 		Image: chmcv
 	Voiced:
@@ -1836,7 +1835,7 @@ shockwave_mcv_gla:
 	Inherits: shockwave_mcv
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: glpalace, ~techlevel.medium, ~anysgla
+		Prerequisites: glpalace, ~anysgla
 	Voiced:
 		VoiceSet: WorkerVoice
 
@@ -1845,7 +1844,7 @@ shockwave_mcv_gla.bot:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: glpalace, ~techlevel.medium, ~anysgla, ~botplayer, allowsMCV
+		Prerequisites: glpalace, ~anysgla, ~botplayer, allowsMCV
 	RenderSprites:
 		Image: glmcv
 	Voiced:
@@ -1980,7 +1979,6 @@ shockwave_conyard.radar:
 	RenderSprites:
 		Image: radarupgradeicon
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 #########################################
@@ -1988,7 +1986,7 @@ shockwave_conyard.radar:
 #########################################
 
 susaambulancerepair:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Ambulance Repair Crew
 	Buildable:
@@ -2019,7 +2017,7 @@ susattnk:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.medium, ~susa_regular
+		Prerequisites: susaweap, susastrategy, ~susa_regular
 		Description: USA siege weapon\nCan be upgraded with Waypoint Targetting to relay targets to other Tomahawks nearby.\n Strong vs Vehicles, Buildings\n Weak vs Aircraft
 	Health:
 		HP: 30000
@@ -2060,7 +2058,7 @@ susattnkp:
 		Cost: 1500
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.medium, ~susa_super
+		Prerequisites: susaweap, susastrategy, ~susa_super
 		Description: USA siege weapon with Plasma missile\nCan be upgraded with Waypoint Targetting to relay targets to other Tomahawks nearby.\n Strong vs Vehicles, Buildings\n Weak vs Aircraft
 		Icon: icon_plasma
 		IconPalette: ra2
@@ -2073,7 +2071,7 @@ susapala:
 	Inherits: usapala
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, upusapala, ~susa_regular
+		Prerequisites: susaweap, upusapala, ~susa_regular
 	Health:
 		HP: 55000
 	Repairable:
@@ -2221,14 +2219,14 @@ susafirebase:
 	Inherits: usafirebase
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~anysusa, susabarracks, ~!susa_laser, ~!susa_armor, ~!susa_super, ~techlevel.medium
+		Prerequisites: ~anysusa, susabarracks, ~!susa_laser, ~!susa_armor, ~!susa_super
 	RenderSprites:
 		Image: usafirebase
 
 susafirebase.e1:
 	Inherits: susafirebase
 	Buildable:
-		Prerequisites: ~anysusa, susabarracks, ~!susa_laser, ~!susa_armor, ~techlevel.medium, ~botplayer
+		Prerequisites: ~anysusa, susabarracks, ~!susa_laser, ~!susa_armor, ~botplayer
 	Valued:
 		Cost: 1300
 	Cargo:
@@ -2286,7 +2284,7 @@ susastrategy:
 	Buildable:
 		Queue: Building, RABuilding
 		Prerequisites: ~anysusa, usaweaporairport
-	Production@Upgrades:
+	Production@Research:
 		Produces: StrategyUpgrades.USA
 	Production@intelligence:
 		Produces: SpySatellite
@@ -2295,7 +2293,7 @@ susastrategy:
 	ProvidesPrerequisite@generals:
 		Prerequisite: usastrategy
 	ProvidesPrerequisite@intelligence:
-		Prerequisite: ra2gaspysat
+		Prerequisite: ra2_allies_spysatelliteuplink
 usaweaporairport:
 	Tooltip:
 		Name: Air Field or Factory
@@ -2314,7 +2312,7 @@ susacannon:
 	Inherits: usacannon
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~anysusa, usastrategy, ~techlevel.high, !particlecannon, ~!susa_super, ~!susa_laser, ~!susa_armor
+		Prerequisites: ~anysusa, usastrategy, !particlecannon, ~!susa_super, ~!susa_laser, ~!susa_armor
 	RenderSprites:
 		Image: usacannon
 
@@ -2326,7 +2324,7 @@ susacannon_super:
 		Cost: 4000
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~susa_super, usastrategy, ~techlevel.high, !particlecannon
+		Prerequisites: ~susa_super, usastrategy, !particlecannon
 		Description: Provides Particle Cannon support power.\nDeals more damage than regular Particle Cannon.\nRequires power to operate.
 		Icon: icon_super
 	RenderSprites:
@@ -2337,14 +2335,14 @@ susacannon_super:
 
 susacannon_laser:
 	Inherits: usacannon
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	Tooltip:
 		Name: Laser Uplink Cannon
 	Valued:
 		Cost: 5000
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~susa_laser, usastrategy, ~techlevel.high, !particlecannon
+		Prerequisites: ~susa_laser, usastrategy, !particlecannon
 		Description: Provides Laser Uplink Cannon support power.\nIt's very effective against Buildings\nRequires power to operate.
 	RenderSprites:
 		Image: usacannon
@@ -2380,7 +2378,7 @@ susalasertur:
 		Image: usalasertur
 
 susaburtonequipment:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Burton's Special Equipment
 	Buildable:
@@ -2404,7 +2402,7 @@ susaarmorburtonequipment:
 		Prerequisites: ~!susaburtonequipment, susastrategy, ~susa_armor
 
 susawptargetting:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Waypoint Targetting
 	Buildable:
@@ -2422,7 +2420,7 @@ susawptargetting:
 	ProvidesPrerequisite@upgradename:
 
 upsusagunship:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Spectre Gunship
 	Buildable:
@@ -2462,7 +2460,7 @@ upsusagunship3_1:
 		Prerequisites: ~!upsusagunship3, ~upsusagunship2, rank3, rank1, ~anysusa, ~!susa_armor, ~!susa_laser, ~!susa_regular
 
 upsusarodfromgod1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Rods from Gods 1
 	Buildable:
@@ -2494,7 +2492,7 @@ upsusarodfromgod3:
 		Prerequisite: upsusarodfromgod3
 
 upsusaf16sp:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Carrier Airstrike
 	Buildable:
@@ -2509,7 +2507,7 @@ upsusaf16sp:
 		Prerequisite: upsusaf16sp
 
 upsusaucav1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: UCAV Air Strike 1
 	Buildable:
@@ -2553,8 +2551,7 @@ susaranger:
 		IdleSequences: idle1, idle2
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -2616,8 +2613,7 @@ susamarine:
 		ZOffset: -512
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	RenderSprites:
 		Image: susamarine
 		PlayerPalette: playerra2
@@ -2639,8 +2635,7 @@ susamissiledefender:
 		PlayerPalette: playerra2
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -2679,8 +2674,7 @@ susapath:
 		ZOffset: -512
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 3626
-		DecorationBounds: 29098, 29098, 0, 3626
+		Bounds: 682, 682, 0, 85
 	TakeCover:
 		DamageModifiers:
 			Prone50Percent: 50
@@ -2702,7 +2696,7 @@ susaburton:
 	Inherits@SHADOWS: ^Shadows
 	Inherits@injured: ^InfantryInjuries
 	Buildable:
-		Prerequisites: susastrategy, ~techlevel.high, ~anysusa, ~!susa_laser, ~!susa_armor, ~!botplayer
+		Prerequisites: susastrategy, ~anysusa, ~!susa_laser, ~!susa_armor, ~!botplayer
 	Cloak:
 		Palette: ra2cloak
 		PauseOnCondition: cloak-force-disabled || base-reveal
@@ -2717,8 +2711,7 @@ susaburton:
 		DeathSequencePalette: playerra2
 	-TakeCover:
 	Selectable:
-		Bounds: 29098, 29098, 0, 3626
-		DecorationBounds: 29098, 29098, 0, 3626
+		Bounds: 682, 682, 0, 85
 	RenderSprites:
 		Image: susaburton
 		PlayerPalette: playerra2
@@ -2742,7 +2735,7 @@ susaburton:
 susaburton.bot:
 	Inherits: susaburton
 	Buildable:
-		Prerequisites: susastrategy, ~techlevel.high, ~anysusa, ~!susa_laser, ~botplayer
+		Prerequisites: susastrategy, ~anysusa, ~!susa_laser, ~botplayer
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: USABurtonMG_AI
@@ -2760,7 +2753,7 @@ susaarmorburton:
 	Tooltip:
 		Name: Armor Burton
 	Buildable:
-		Prerequisites: susastrategy, ~techlevel.high, ~susa_armor, ~!botplayer
+		Prerequisites: susastrategy, ~susa_armor, ~!botplayer
 		Description: Elite commando equipped with Sniper Rifle.\nCan switch between close and long range modes\n  Strong vs Infantry, Buildings, Vehicles\n  Weak vs Air
 	Armament@PRIMARY:
 		Weapon: SUSABurtonSniper
@@ -2781,7 +2774,7 @@ susaarmorburton:
 susaarmorburton.bot:
 	Inherits: susaarmorburton
 	Buildable:
-		Prerequisites: susastrategy, ~techlevel.high, ~susa_armor, ~botplayer
+		Prerequisites: susastrategy, ~susa_armor, ~botplayer
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: SUSABurtonSniper_AI
@@ -2797,7 +2790,7 @@ susaarmorburton.bot:
 	-WithDecoration@close:
 
 susahaloplane:
-	Inherits: BADR
+	Inherits: ra1_badger
 	Aircraft:
 		CruiseAltitude: 20c0
 	-AppearsOnRadar:
@@ -2823,7 +2816,7 @@ susapillbox:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Tooltip:
 		Name: Pillbox
 	Building:
@@ -2905,7 +2898,7 @@ susalosathumvee:
 		OverrideActor: susalosathumvee
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~susa_regular, susastrategy, ~techlevel.medium
+		Prerequisites: ~susa_regular, susastrategy
 		Description: Fast AT Humvee.\nFires long range kinetic missiles\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
 	Mobile:
@@ -2942,7 +2935,7 @@ susalittlebird:
 	Buildable:
 		BuildPaletteOrder: 50
 		BuildDuration: 300
-		Prerequisites: ~susa_regular, ~techlevel.medium
+		Prerequisites: ~susa_regular
 		Description: Attack Recon Helicopter with dual M134 miniguns.\nCan transport 2 soldiers who can shoot from inside\nCan be upgraded with Rocket pods\n  Strong vs Infantry, Light vehicles\n  Weak vs Aircraft, Anti-Air
 		IconPalette: ra2
 	Aircraft:
@@ -2967,8 +2960,8 @@ susalittlebird:
 			gle3: ifv-miss
 			che3: ifv-miss
 			e3: ifv-miss
-			rae3: ifv-miss
-			yrggi: ifv-miss
+			ra1_allies_alliedrocketsoldier: ifv-miss
+			ra2_allies_guardiangi: ifv-miss
 			tse3: ifv-miss
 	Armament@MG:
 		Weapon: SUSALittleBirdMG
@@ -2990,7 +2983,6 @@ susalittlebird:
 	SpawnActorOnDeath:
 		Actor: susalittlebird.husk
 	Selectable:
-		DecorationBounds: 43690, 43690
 	-GrantConditionOnPrerequisite@stealth:
 	-Cloak:
 	-ProductionCostMultiplier@selectusaairforce:
@@ -3047,7 +3039,7 @@ susalittlebird.husk:
 susalittlebird.USAE1:
 	Inherits: susalittlebird
 	Buildable:
-		Prerequisites: ~susa_regular, ~techlevel.medium, ~botplayer
+		Prerequisites: ~susa_regular, ~botplayer
 	Valued:
 		Cost: 1000
 	Cargo:
@@ -3064,7 +3056,7 @@ susalittlebird.USAE3:
 susacomanche:
 	Inherits: usacomanche
 	Buildable:
-		Prerequisites: susaairport, ~techlevel.high, ~anysusa, ~!susa_laser, ~!susa_air, ~!susa_armor
+		Prerequisites: susaairport, ~anysusa, ~!susa_laser, ~!susa_air, ~!susa_armor
 		IconPalette: ra2
 	Armament@MG:
 		LocalOffset: 950,0,-280
@@ -3077,7 +3069,7 @@ susacomanche:
 	WithIdleOverlay@ROTORGROUND:
 		Offset: 200,0,100
 	Selectable:
-		DecorationBounds: 65536, 50944
+		DecorationBounds: 1536, 1194
 	RenderSprites:
 		Image: usarah66
 	SpawnActorOnDeath:
@@ -3102,7 +3094,7 @@ susakingcomanche:
 	Armament@rockets:
 		Weapon: SUSAComancheRockets
 	Buildable:
-		Prerequisites: ~techlevel.high, ~susa_air
+		Prerequisites: ~susa_air
 		Queue: Aircraft, RAAircraft
 		Icon: icon_king
 		IconPalette: ra2
@@ -3131,8 +3123,8 @@ susadecoydrone:
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@snipe: ^DriverKillImmune
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Inherits@SHADOWS: ^Shadows
 	Valued:
 		Cost: 600
@@ -3142,7 +3134,7 @@ susadecoydrone:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_regular
+		Prerequisites: susaweap, ~susa_regular
 		Queue: Vehicle, RAVehicle
 		Description: Disguised and Cloaked scout and detector robot.\nCan be upgraded with a machinegun\n Strong vs Infantry when upgraded
 		IconPalette: ra2
@@ -3214,7 +3206,7 @@ susadecoydrone:
 #           USA SUPERWEAPON
 #########################################
 susaupcombatvest:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Combat Vest
 	Buildable:
@@ -3243,13 +3235,13 @@ susaempmissiledefender:
 		IconPalette: ra2
 		Description: Anti-tank/anti-aircraft infantry.\nHas to lock on to mobile targets before attacking.\nShots will disable vehicles hit\n  Strong vs Tanks, Aircraft\n  Weak vs Infantry
 	Armament@PRIMARY:
-		Weapon: SUSAEMPMissileDefenderAG
+		Weapon: SUSA_EMP_MissileDefenderAG
 	Armament@AntiStructure:
-		Weapon: SUSAEMPMissileDefenderStructure
+		Weapon: SUSA_EMP_MissileDefenderStructure
 	Armament@AA:
-		Weapon: SUSAEMPMissileDefenderAA
+		Weapon: SUSA_EMP_MissileDefender_AA
 	Armament@GARRISONED:
-		Weapon: SUSAEMPMissileDefenderGarrisoned
+		Weapon: SUSA_EMP_MissileDefenderGarrisoned
 
 susalasermissiledefender:
 	Inherits: susamissiledefender
@@ -3316,8 +3308,7 @@ susabiohazardtech:
 		ZOffset: -512
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	RenderSprites:
 		Image: susabiohazardtech
 		PlayerPalette: playerra2
@@ -3336,7 +3327,7 @@ susafortifiedfirebase:
 		Dimensions: 3, 2
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usabarracks, ~techlevel.medium, ~susa_super
+		Prerequisites: usabarracks, ~susa_super
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Heavily armored garrisonable defensive structure.\n  Strong vs ground targets\n  Weak vs Aircraft
@@ -3373,7 +3364,7 @@ susafortifiedfirebase:
 susafortifiedfirebase.e1:
 	Inherits: susafortifiedfirebase
 	Buildable:
-		Prerequisites: usabarracks, ~techlevel.medium, ~susa_super, ~botplayer
+		Prerequisites: usabarracks, ~susa_super, ~botplayer
 	Valued:
 		Cost: 1750
 	Cargo:
@@ -3453,7 +3444,7 @@ susapopuppatriot:
 susapopupturret.para:
 	Inherits: ^Vehicle
 	WithParachute:
-		ShadowImage: parach-shadow
+		ShadowImage: parach_shadow
 		ShadowSequence: idle
 		Image: parach
 		Sequence: idle
@@ -3557,7 +3548,7 @@ susarobottank:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_super
+		Prerequisites: susaweap, ~susa_super
 		Description: Armored Hover Drone equipped with AT Cannon\n Strong vs Tanks
 		IconPalette: ra2
 	Mobile:
@@ -3610,7 +3601,7 @@ susarobottank:
 susamortarhmmwv:
 	Inherits: usajeep
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 850
 	Tooltip:
@@ -3620,7 +3611,7 @@ susamortarhmmwv:
 		OverrideActor: susamortarhmmwv
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_super
+		Prerequisites: susaweap, ~susa_super
 		Description: Light Transport Vehicle equipped with mortar.\n  Strong vs Infantry, Vehicles, Buildings
 		IconPalette: ra2
 	Mobile:
@@ -3654,7 +3645,7 @@ susamortarhmmwv:
 susamortarhmmwv.e1:
 	Inherits: susamortarhmmwv
 	Buildable:
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_super, ~botplayer
+		Prerequisites: susaweap, ~susa_super, ~botplayer
 	Valued:
 		Cost: 1250
 	Cargo:
@@ -3692,7 +3683,7 @@ susaminigunhmmwv:
 susaminigunhmmwv.e1:
 	Inherits: susaminigunhmmwv
 	Buildable:
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_super, ~botplayer
+		Prerequisites: susaweap, ~susa_super, ~botplayer
 	Valued:
 		Cost: 1500
 	Cargo:
@@ -3715,7 +3706,7 @@ susamedicdrone:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_super
+		Prerequisites: susaweap, ~susa_super
 		Description: Drone that heals nearby infantry
 		IconPalette: ra2
 	RevealsShroud:
@@ -3765,7 +3756,7 @@ susaenforcerdrone:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.high, susastrategy, ~susa_super, upsusaenforcer
+		Prerequisites: susaweap, susastrategy, ~susa_super, upsusaenforcer
 		Description: Experimental Hover Drone Tank armed with Plasma Balls that can cause unstable effects\nif used in group. Vehicle can change fire modes between Plasma Pulse\nand Plasma Ball.\nImmune to toxic and radiation\nAmphibious
 		IconPalette: ra2
 	Mobile:
@@ -3892,8 +3883,8 @@ susalockdownmlrs:
 	Inherits@training: ^AdvancedTrainingUpgrade
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@PLD: ^PointLaserDefenseSystem
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 1600
 	Tooltip:
@@ -3902,14 +3893,13 @@ susalockdownmlrs:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.high, ~susa_super
+		Prerequisites: susaweap, susastrategy, ~susa_super
 		Queue: Vehicle, RAVehicle
 		Description: Racket Artillery.\Can swap between EMP and HE rounds\n  Strong vs Ground Targets\nWeak vs Everything
 		IconPalette: ra2
 	Mobile:
 		Speed: 68
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 35000
 	Repairable:
@@ -3922,7 +3912,7 @@ susalockdownmlrs:
 		TurnSpeed: 20
 		Offset: -50,0,200
 	Armament@EMP:
-		Weapon: SUSAMLRSEMP
+		Weapon: SUSAMLRS_EMP
 		Name: primary
 		Recoil: 128
 		RecoilRecovery: 26
@@ -3955,7 +3945,7 @@ susalockdownmlrs:
 		UndeployTicks: 200
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 1280, 1280, 0, 14549
+		DecorationBounds: 1280, 1280, 0, 341
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience:
 		ValidTypes: USAPilot
@@ -3993,7 +3983,7 @@ susashatterer:
 	Inherits@training: ^AdvancedTrainingUpgrade
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Inherits@shadow: ^InfantryShadows
 	Valued:
 		Cost: 1600
@@ -4003,7 +3993,7 @@ susashatterer:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.high, ~susa_super, upsusashatterer
+		Prerequisites: susaweap, ~susa_super, upsusashatterer
 		Queue: Vehicle, RAVehicle
 		Description: Experimental Hovercraft armed with sonic wave cannon that can damage multiple targets in a line.\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
@@ -4011,7 +4001,6 @@ susashatterer:
 		Speed: 95
 		Locomotor: hover
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 40000
 	Hovers:
@@ -4039,14 +4028,14 @@ susashatterer:
 	Inherits@ProducesDrones: ^ProducesDrones
 
 upsusashatterer:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Shatterer
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Shatterer
-		Prerequisites: !upsusashatterer, ~techlevel.high, ~susa_super, rank1
+		Prerequisites: !upsusashatterer, ~susa_super, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susashatterer
@@ -4054,14 +4043,14 @@ upsusashatterer:
 		Prerequisite: upsusashatterer
 
 upsusaenforcer:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Enforcer Drone
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Enforcer Drone
-		Prerequisites: !upsusaenforcer, ~techlevel.high, ~susa_super, rank1
+		Prerequisites: !upsusaenforcer, ~susa_super, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susaenforcerdrone
@@ -4069,14 +4058,14 @@ upsusaenforcer:
 		Prerequisite: upsusaenforcer
 
 upsusamammoth:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mammoth
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Mammoth
-		Prerequisites: !upsusamammoth, ~techlevel.high, ~susa_armor, rank1
+		Prerequisites: !upsusamammoth, ~susa_armor, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susamammoth
@@ -4092,8 +4081,8 @@ susamicrohumvee:
 	Inherits@emp: ^TurretEMP
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -4102,7 +4091,7 @@ susamicrohumvee:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.high, susastrategy, ~susa_super
+		Prerequisites: susaweap, susastrategy, ~susa_super
 		Queue: Vehicle, RAVehicle
 		Description: Combat Support Vehicle that can disable buildings around him, clears garrisons, kills any enemy infantry nearby.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 		IconPalette: ra2
@@ -4160,7 +4149,7 @@ susaexosuit:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@EMP: ^TurretEMP
 	Inherits@GAINSEXPERIENCE: ^GainsExperience
-	Inherits@stomping: ^walker_stomping
+	Inherits@stomping: ^WalkerStomping
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -4206,7 +4195,7 @@ susaexosuit:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 		Sequence: turret0
-		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-sniper && !ifv-hero && !ifv-tesla && !ifv-flak && !ifv-cannon && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-fire && !ifv-chem && !ifv-thrax && !ifv-miss && !ifv-chrono && !ifv-demo && !ifv-fremen && !ifv-sonic && !ifv-minigun
+		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-lightsniper && !ifv-hero && !ifv-tesla && !ifv-flak && !ifv-cannon && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-fire && !ifv-chem && !ifv-thrax && !ifv-miss && !ifv-chrono && !ifv-demo && !ifv-fremen && !ifv-sonic && !ifv-minigun
 	WithSpriteTurret@MG:
 		Sequence: turret2
 		RequiresCondition: ifv-mg
@@ -4225,11 +4214,10 @@ susaexosuit:
 	WithSpriteTurret@Siege:
 		Sequence: turret6
 		RequiresCondition: ifv-flak
-	WithSpriteTurret@Sniper:
+	WithSpriteTurret@lightsniper:
 		Sequence: turret7
-		RequiresCondition: ifv-sniper || ifv-hero || ifv-fremen
+		RequiresCondition: ifv-lightsniper || ifv-hero || ifv-fremen
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	Voiced:
 		VoiceSet: BattlemasterTankVoice
@@ -4275,7 +4263,7 @@ susasupportstealthfighter:
 	Inherits: usastealth
 	Buildable:
 		Queue: Aircraft, RAAircraft
-		Prerequisites: susaairport, ~techlevel.high, upusastealth, ~susa_super
+		Prerequisites: susaairport, upusastealth, ~susa_super
 		Description: Cloaked ground attack aircraft.\nHeals infantry units beneath\n  Strong vs Buildings, Vehicles\n  Weak vs Aircraft
 		IconPalette: ra2
 	Valued:
@@ -4290,8 +4278,7 @@ susasupportstealthfighter:
 	AmmoPool:
 		Ammo: 2
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -4365,11 +4352,11 @@ susaauroraalpha.husk:
 #########################################
 susapalalaser:
 	Inherits: susapala
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	Tooltip:
 		Name: Laser Paladin
 	Buildable:
-		Prerequisites: susaweap, susastrategy, ~techlevel.medium, ~susa_laser, upsusapalalaser
+		Prerequisites: susaweap, susastrategy, ~susa_laser, upsusapalalaser
 		BuildDurationModifier: 50
 		IconPalette: ra2
 	Health:
@@ -4441,10 +4428,9 @@ susapalalaser:
 		StartIfBelow: 100
 		DamageCooldown: 1
 
-
 susalaserranger:
 	Inherits: susaranger
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	Tooltip:
 		Name: Laser Ranger
 	Buildable:
@@ -4465,9 +4451,9 @@ susalaserranger:
 
 susalaserburton:
 	Inherits: susaburton
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	Buildable:
-		Prerequisites: susastrategy, ~techlevel.high, ~susa_laser, ~!botplayer
+		Prerequisites: susastrategy, ~susa_laser, ~!botplayer
 		Icon: icon_laser
 		IconPalette: ra2
 	Tooltip:
@@ -4486,7 +4472,7 @@ susalaserburton:
 susalaserburton.bot:
 	Inherits: susalaserburton
 	Buildable:
-		Prerequisites: susastrategy, ~techlevel.high, ~susa_laser, ~botplayer
+		Prerequisites: susastrategy, ~susa_laser, ~botplayer
 	Armament@PRIMARY:
 		Weapon: SUSALaserBurton_AI
 		-RequiresCondition:
@@ -4506,9 +4492,9 @@ susarailgunartillery:
 	Inherits@training: ^AdvancedTrainingUpgrade
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -4517,7 +4503,7 @@ susarailgunartillery:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.high, upsusarailgunartillery, ~susa_laser
+		Prerequisites: susaweap, susastrategy, upsusarailgunartillery, ~susa_laser
 		Queue: Vehicle, RAVehicle
 		Description: Long Range Artillery armed with Railgun that travels instantly\n  Strong vs Ground\nWeak vs Air
 		IconPalette: ra2
@@ -4525,7 +4511,6 @@ susarailgunartillery:
 	Mobile:
 		Speed: 50
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 25000
 	Repairable:
@@ -4545,7 +4530,7 @@ susarailgunartillery:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 65536, 50944
+		DecorationBounds: 1536, 1194
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience:
 		ValidTypes: USAPilot
@@ -4557,14 +4542,14 @@ susarailgunartillery:
 		Modifier: 50
 
 upsusarailgunartillery:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Railgun Artillery
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Railgun Artillery
-		Prerequisites: !upsusashatterer, ~techlevel.high, ~susa_laser, rank1
+		Prerequisites: !upsusashatterer, ~susa_laser, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susarailgunartillery
@@ -4572,7 +4557,7 @@ upsusarailgunartillery:
 		Prerequisite: upsusarailgunartillery
 
 upsusajeeplaser:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Humvee Laser
 	Buildable:
@@ -4589,7 +4574,7 @@ upsusajeeplaser:
 		Prerequisite: upsusajeeplaser
 
 susauppointdefense:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Laser Point Defense
 	Buildable:
@@ -4606,7 +4591,7 @@ susauppointdefense:
 		Prerequisite: susauppointdefense
 
 susaupdronepointdefense:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Battle Drone Laser Point Defense
 	Buildable:
@@ -4623,7 +4608,7 @@ susaupdronepointdefense:
 		Prerequisite: susaupdronepointdefense
 
 upsusafocusingcrystal:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Focusing Crystal
 	Buildable:
@@ -4642,7 +4627,7 @@ upsusafocusingcrystal:
 susalaserstealth:
 	Inherits: usastealth
 	Buildable:
-		Prerequisites: susaairport, ~techlevel.high, ~susa_laser
+		Prerequisites: susaairport, ~susa_laser
 		Description: Cloaked Ground Attack Aircraft armed with rapid fire Autocannons.\n  Strong vs Buildings, Vehicles\n  Weak vs Aircraft
 		IconPalette: ra2
 	Valued:
@@ -4658,8 +4643,7 @@ susalaserstealth:
 		ReloadCount: 25
 		AmmoCondition: ammo
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	RenderSprites:
 	SpawnActorOnDeath:
@@ -4674,7 +4658,6 @@ susalaserstealth:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 1
-
 
 susalaserstealth.husk:
 	Inherits: ^PlaneHusk
@@ -4766,9 +4749,9 @@ susafb22.husk:
 
 susalasercomanche:
 	Inherits: susacomanche
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	Buildable:
-		Prerequisites: susaairport, ~techlevel.high, ~susa_laser
+		Prerequisites: susaairport, ~susa_laser
 		Icon: laser_icon
 	AttackAircraft:
 		Armaments: primary, secondary, secondaryup
@@ -4799,7 +4782,7 @@ susalaserdesignatorbase:
 	Valued:
 		Cost: 2000
 	Buildable:
-		Prerequisites: susabarracks, ~techlevel.medium, ~susa_laser
+		Prerequisites: susabarracks, ~susa_laser
 		Queue: Defence, RADefence
 		BuildDurationModifier: 50
 		IconPalette: ra2
@@ -4817,7 +4800,7 @@ susalaserdesignatorbase:
 susalaserdesignatorbase.e1:
 	Inherits: susalaserdesignatorbase
 	Buildable:
-		Prerequisites: usabarracks, ~techlevel.medium, ~susa_laser, ~botplayer
+		Prerequisites: usabarracks, ~susa_laser, ~botplayer
 	Valued:
 		Cost: 2750
 	Cargo:
@@ -4846,7 +4829,6 @@ pscusapower3:
 	RenderSprites:
 		Image: usacontrolrodicon3
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -4861,12 +4843,12 @@ pscusapower4:
 susacrusader2:
 	Inherits: usacrusader2
 	Buildable:
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_laser
+		Prerequisites: susaweap, ~susa_laser
 	RenderSprites:
 		Image: usacrusader2
 
 susabomber.laser:
-	Inherits: BADR.Bomber
+	Inherits: ra1_badger_bomber
 	Aircraft:
 		Speed: 290
 	Armament:
@@ -4886,7 +4868,7 @@ susaadvancedmicro:
 		Name: Advanced Microwave Tank
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.high, susastrategy, ~susa_laser
+		Prerequisites: susaweap, susastrategy, ~susa_laser
 		Queue: Vehicle, RAVehicle
 		Description: Support vehicle able to disable buildings and fry infantry.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 		IconPalette: ra2
@@ -4926,7 +4908,7 @@ susasheridan:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_air
+		Prerequisites: susaweap, ~susa_air
 		Description: Light tank armed with high calibre 152mm Howitzer Cannon.\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
 	Mobile:
@@ -4955,7 +4937,6 @@ susasheridan:
 		LocalOffset: 768,0,90
 	-WithMuzzleOverlay:
 	Selectable:
-		DecorationBounds: 43690, 43690
 	Voiced:
 		VoiceSet: USACrusaderTankVoice
 	Inherits@ProducesDrones: ^ProducesDrones
@@ -4975,7 +4956,7 @@ susahurricane:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.high, ~susa_air
+		Prerequisites: susaweap, susastrategy, ~susa_air
 		Description: USA siege weapon armed with long range cluster\n Strong vs Vehicles, Buildings\n Weak vs Aircraft
 		IconPalette: ra2
 	WithSpriteTurret:
@@ -5003,7 +4984,7 @@ susahurricane:
 	-ProductionCostMultiplier@selectusaairforce:
 
 susashilleighat:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Shilleigh Anti-Tank Rockets
 	Buildable:
@@ -5024,7 +5005,7 @@ susaraptor:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: susaairport, ~techlevel.high, ~anysusa, ~!susa_air, ~!susa_armor
+		Prerequisites: susaairport, ~anysusa, ~!susa_air, ~!susa_armor
 		IconPalette: ra2
 	Health:
 		HP: 18000
@@ -5039,8 +5020,7 @@ susaraptor:
 		Ammo: 4
 		AmmoCondition: ammo
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
@@ -5060,7 +5040,7 @@ susaraptor2:
 	Inherits@PLD: ^PointLaserDefenseSystem
 	Inherits@detect: ^GenericAirDetector
 	Buildable:
-		Prerequisites: susaairport, ~techlevel.high, ~susa_air
+		Prerequisites: susaairport, ~susa_air
 	Tooltip:
 		Name: King Raptor
 	Valued:
@@ -5114,7 +5094,7 @@ susatornado:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: susaairport, susastrategy, upsusatornado, ~techlevel.high, ~susa_air
+		Prerequisites: susaairport, susastrategy, upsusatornado, ~susa_air
 		IconPalette: ra2
 		Description: Ground Attack Bomber armed with powerful Cluster Bomb
 	Valued:
@@ -5141,8 +5121,7 @@ susatornado:
 		Ammo: 1
 		AmmoCondition: ammo
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
@@ -5200,7 +5179,7 @@ susapavelow:
 	Health:
 		HP: 50000
 	Selectable:
-		Bounds: 72789, 65536, 0, -45482
+		Bounds: 1706, 1536, 0, -1066
 	Mobile:
 		Speed: 116
 		Locomotor: fakeaircraft
@@ -5284,7 +5263,7 @@ susahangar:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 130
-		Prerequisites: susasupply, ~techlevel.medium, ~susa_air
+		Prerequisites: susasupply, ~susa_air
 		Description: Builds advanced helicopters
 		BuildDuration: 300
 		BuildDurationModifier: 100
@@ -5304,15 +5283,14 @@ susahangar:
 		Range: 7c0
 		RevealGeneratedShroud: False
 	Selectable:
-		Bounds: 100096, 81920, 0, 43690
-		DecorationBounds: 116480, 81920, 0, 43690
+		Bounds: 2730, 1920, 0, 1024
 	Exit@1:
 		ExitCell: 1,1
 		Facing: 768
 	RallyPoint:
 	WithIdleOverlay@blink:
 		Sequence: landing-pad
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: AirUpgrades.USA
 	Production@NORMAL:
 		Produces: Aircraft
@@ -5366,8 +5344,8 @@ susaacolytedrone:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@GeneralsVehicle: ^GeneralsVehicle
 	Inherits@snipe: ^DriverKillImmune
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -5376,7 +5354,7 @@ susaacolytedrone:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_air
+		Prerequisites: susaweap, ~susa_air
 		Queue: Aircraft, RAAircraft
 		Description: Attack Drone armed with machinegun
 		IconPalette: ra2
@@ -5442,7 +5420,6 @@ susaacolytedrone:
 	SpawnActorOnDeath:
 		Actor: susaacolytedrone.husk
 
-
 susaacolytedrone.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -5470,7 +5447,7 @@ susamedivacblackhawk:
 	Inherits@training: ^AdvancedTrainingUpgrade
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@CM: ^CountermeasuresUpgrade
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 750
 	Tooltip:
@@ -5573,14 +5550,14 @@ susamedivacblackhawk.bot:
 		DeployChance: 100
 
 upsusatornado:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tornado
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Tornado
-		Prerequisites: !upsusatornado, ~techlevel.high, ~susa_air, rank1
+		Prerequisites: !upsusatornado, ~susa_air, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susatornado
@@ -5588,14 +5565,14 @@ upsusatornado:
 		Prerequisite: upsusatornado
 
 upsusaveteranair:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Pilot Training
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: All Airplanes are trained Veteran
-		Prerequisites: !upsusaveteranair, ~techlevel.high, ~susa_air, rank1
+		Prerequisites: !upsusaveteranair, ~susa_air, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susaveteranair
@@ -5603,14 +5580,14 @@ upsusaveteranair:
 		Prerequisite: upsusaveteranair
 
 upsusaarpetbombing:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Carpet Bombing
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Unlocks Carpet Bombing
-		Prerequisites: !upsusaveteranair, ~techlevel.high, ~susa_air, rank3, rank1
+		Prerequisites: !upsusaveteranair, ~susa_air, rank3, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: upsusaarpetbombing
@@ -5788,12 +5765,12 @@ susasupplytruck:
 
 susawraith:
 	Inherits: susapala
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	Inherits@shadow: ^InfantryShadows
 	Tooltip:
 		Name: Wraith
 	Buildable:
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_armor
+		Prerequisites: susaweap, ~susa_armor
 		IconPalette: ra2
 	Valued:
 		Cost: 1000
@@ -5819,8 +5796,7 @@ susawraith:
 		Condition: upsusasabremissiles
 		Prerequisites: upsusasabremissiles
 	Selectable:
-		Bounds: 72789, 72789, 0, 14549
-		DecorationBounds: 72789, 72789, 0, 14549
+		Bounds: 1706, 1706, 0, 341
 	RenderSprites:
 	-Turreted@pointdefense:
 	-Armament@pointdefense:
@@ -5839,7 +5815,7 @@ susabradleyifv:
 	Inherits@training: ^AdvancedTrainingUpgrade
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@emp: ^TurretEMP
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 850
 	Tooltip:
@@ -5848,7 +5824,7 @@ susabradleyifv:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_armor
+		Prerequisites: susaweap, ~susa_armor
 		Queue: Vehicle, RAVehicle
 		Description: Armored light infantry carrier with autocannon.\n  Strong vs Infantry\n  Weak vs Infantry
 		IconPalette: ra2
@@ -5859,7 +5835,6 @@ susabradleyifv:
 		Speed: 95
 		Locomotor: tracked
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 44000
 	Repairable:
@@ -5905,7 +5880,7 @@ susabradleyifv:
 susabradleyifv.bot:
 	Inherits: susabradleyifv
 	Buildable:
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_armor, ~botplayer
+		Prerequisites: susaweap, ~susa_armor, ~botplayer
 	Valued:
 		Cost: 1400
 	Cargo:
@@ -5922,7 +5897,7 @@ susastarlifter:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 10
-		Prerequisites: ~susa_armor, ~techlevel.medium, ~!botplayer
+		Prerequisites: ~susa_armor, ~!botplayer
 		Description: Heavy Lift Transport.\nCan Transport multiple vehicles at once\n  Unarmed
 	Valued:
 		Cost: 1000 #1100
@@ -5946,7 +5921,7 @@ susastarlifter:
 			VerticalBottomOffset: 1024
 		Turret: primary
 	Selectable:
-		Bounds: 72789, 65536, 0, -45482
+		Bounds: 1706, 1536, 0, -1066
 	Armor:
 		Type: Heavy
 	RevealsShroud:
@@ -5982,7 +5957,7 @@ susastarlifter:
 susastarlifter.bot1:
 	Inherits: susastarlifter
 	Buildable:
-		Prerequisites: ~susa_armor, ~techlevel.high, ~botplayer
+		Prerequisites: ~susa_armor, ~botplayer
 	Valued:
 		Cost: 4000
 	Cargo:
@@ -5995,7 +5970,7 @@ susastarlifter.bot1:
 susastarlifter.bot2:
 	Inherits: susastarlifter.bot1
 	Buildable:
-		Prerequisites: ~susa_armor, ~techlevel.medium, ~botplayer
+		Prerequisites: ~susa_armor, ~botplayer
 	Valued:
 		Cost: 5000
 	Cargo:
@@ -6052,7 +6027,7 @@ susamammoth:
 	Inherits@training: ^AdvancedTrainingUpgrade
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@emp: ^TurretEMP
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 1600
 	Tooltip:
@@ -6061,7 +6036,7 @@ susamammoth:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.high, ~susa_armor, upsusamammoth
+		Prerequisites: susaweap, susastrategy, ~susa_armor, upsusamammoth
 		Queue: Vehicle, RAVehicle
 		Description: Super heavy tank with dual cannon\n  Strong vs Ground\nWeak vs Air
 		IconPalette: ra2
@@ -6093,11 +6068,10 @@ susamammoth:
 		TurnSpeed: 20
 	Passenger:
 		CargoType: Vehicle
-		Weight: 12
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 87381, 87381
+		DecorationBounds: 2048, 2048
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience:
 		ValidTypes: USAPilot
@@ -6124,7 +6098,7 @@ susagladiator:
 	Inherits@training: ^AdvancedTrainingUpgrade
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@emp: ^TurretEMP
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -6133,7 +6107,7 @@ susagladiator:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.high, ~susa_armor
+		Prerequisites: susaweap, susastrategy, ~susa_armor
 		Queue: Vehicle, RAVehicle
 		Description: Anti-Air vehicle with Quad Auto Cannons\n  Strong vs Air, Infantry and Vehicles\nWeak vs Tanks
 		IconPalette: ra2
@@ -6189,7 +6163,7 @@ susatankdestroyer:
 	Tooltip:
 		Name: Tank Destroyer
 	Buildable:
-		Prerequisites: susaweap, susastrategy, ~techlevel.high, ~susa_armor, upsusatankdestroyer
+		Prerequisites: susaweap, susastrategy, ~susa_armor, upsusatankdestroyer
 		Queue: Vehicle, RAVehicle
 		Description: Anti-Tank Vehicle\nStrong vs Tanks
 		IconPalette: ra2
@@ -6223,14 +6197,14 @@ susatankdestroyer:
 		VoiceSet: BattlemasterTankVoice
 
 upsusatankdestroyer:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tank Destroyer
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Tank Destroyer
-		Prerequisites: !upsusatankdestroyer, ~techlevel.high, ~susa_armor, rank3, rank1
+		Prerequisites: !upsusatankdestroyer, ~susa_armor, rank3, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susatankdestroyer
@@ -6238,7 +6212,7 @@ upsusatankdestroyer:
 		Prerequisite: upsusatankdestroyer
 
 upsusamammothshield:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mammoth Energy Shields
 	Buildable:
@@ -6255,7 +6229,7 @@ upsusamammothshield:
 		Prerequisite: upsusamammothshield
 
 upsusasabremissiles:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sabre Missiles
 	Buildable:
@@ -6279,7 +6253,7 @@ susahowitzer:
 	Inherits@training: ^AdvancedTrainingUpgrade
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@emp: ^TurretEMP
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -6288,7 +6262,7 @@ susahowitzer:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.high, ~susa_armor, upsusahowitzer
+		Prerequisites: susaweap, susastrategy, ~susa_armor, upsusahowitzer
 		Queue: Vehicle, RAVehicle
 		Description: Long Range Artillery\n  Strong vs Ground\nWeak vs Air
 		IconPalette: ra2
@@ -6333,14 +6307,14 @@ susahowitzer:
 	Inherits@ProducesDrones: ^ProducesDrones
 
 upsusahowitzer:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Howitzer
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Howitzer
-		Prerequisites: !upsusahowitzer, ~techlevel.high, ~susa_armor, rank1
+		Prerequisites: !upsusahowitzer, ~susa_armor, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susahowitzer
@@ -6348,14 +6322,14 @@ upsusahowitzer:
 		Prerequisite: upsusahowitzer
 
 upsusapalalaser:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Howitzer
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Laser Paladin
-		Prerequisites: !upsusapalalaser, ~techlevel.high, ~susa_laser, rank1
+		Prerequisites: !upsusapalalaser, ~susa_laser, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susapalalaser
@@ -6363,14 +6337,14 @@ upsusapalalaser:
 		Prerequisite: upsusapalalaser
 
 upsusapopuppatriotsp1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Turret Paradrop 1
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Drops Pop-Up Turrets anywhere on map.\n\nRank 1: 1 Pop-Up Turret\nRank 2: 2 Pop-Up Turrets\nRank 3: 3 Pop-Up Turrets
-		Prerequisites: ~!upsusapopuppatriotsp1, ~techlevel.high, ~susa_super, rank1, rank3
+		Prerequisites: ~!upsusapopuppatriotsp1, ~susa_super, rank1, rank3
 		IconPalette: ra2
 	RenderSprites:
 		Image: susapopupturret
@@ -6396,14 +6370,14 @@ upsusapopuppatriotsp3:
 		Prerequisite: upsusapopuppatriotsp3
 
 upsusahypersonicbomb:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hyper Sonic Cruise Missile
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Launch Hyper Sonic Missile onto Target location
-		Prerequisites: !upsusahypersonicbomb, ~techlevel.high, ~susa_super, rank1, rank5
+		Prerequisites: !upsusahypersonicbomb, ~susa_super, rank1, rank5
 		IconPalette: ra2
 	RenderSprites:
 		Image: susahypersonicmissile
@@ -6433,7 +6407,7 @@ susastrykermedic:
 		Range: 4c0
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_armor
+		Prerequisites: susaweap, ~susa_armor
 		Queue: Vehicle, RAVehicle
 		Description: Support Vehicle that heals infantry units around\nSpews out chemicals that suffocates garrisons\nImmune to toxins and radiation\nCan transport infantry\n  Strong vs Garrisons
 		IconPalette: ra2
@@ -6441,7 +6415,6 @@ susastrykermedic:
 		Speed: 90
 		Locomotor: wheeled
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 50000
 	Repairable:
@@ -6488,7 +6461,7 @@ susastrykermedic:
 susastrykermedic.bot:
 	Inherits: susastrykermedic
 	Buildable:
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_armor, ~botplayer
+		Prerequisites: susaweap, ~susa_armor, ~botplayer
 	Valued:
 		Cost: 1000
 	Cargo:
@@ -6508,7 +6481,7 @@ susapredatordrone:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_armor
+		Prerequisites: susaweap, ~susa_armor
 		Description: Anti-Tank Drone\nImmune to toxic and radiation\nDetector
 		IconPalette: ra2
 	RevealsShroud:
@@ -6547,7 +6520,7 @@ susavulcantank:
 	Inherits@training: ^AdvancedTrainingUpgrade
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@emp: ^TurretEMP
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 950
 	Tooltip:
@@ -6556,7 +6529,7 @@ susavulcantank:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_armor
+		Prerequisites: susaweap, ~susa_armor
 		Queue: Vehicle, RAVehicle
 		Description: Anti-Personnel Vehicle equipped with minigun\n  Strong vs Air, Infantry and Vehicles\nWeak vs Tanks
 		IconPalette: ra2
@@ -6602,12 +6575,11 @@ susavulcantank:
 	ProducibleWithLevel:
 	Inherits@ProducesDrones: ^ProducesDrones
 
-
 susaphalynx:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Tooltip:
 		Name: Phalynx System
 	Building:
@@ -6615,7 +6587,7 @@ susaphalynx:
 		Dimensions: 2, 1
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~susa_armor, ~techlevel.medium, susaweap
+		Prerequisites: ~susa_armor, susaweap
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Anti-Air Turret.\n  Strong vs Infantry, Vehicles, Aircraft
@@ -6650,7 +6622,7 @@ susaphalynx:
 		Class: susaphalanx
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 87381, 58240, 0, 14549
+		DecorationBounds: 2048, 1365, 0, 341
 	AmmoPool:
 		Ammo: 5
 		AmmoCondition: ammo
@@ -6663,13 +6635,12 @@ susaphalynx:
 	-WithDeathAnimation:
 	-WithMakeAnimation:
 
-
 susablackwidow:
 	Inherits: usaraptor
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: susaairport, ~techlevel.high, ~susa_armor
+		Prerequisites: susaairport, ~susa_armor
 		Description: Ground Fighter Jet\n  Strong vs Ground
 		IconPalette: ra2
 	Valued:
@@ -6694,8 +6665,7 @@ susablackwidow:
 		Ammo: 6
 		AmmoCondition: ammo
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
@@ -6734,7 +6704,7 @@ susaf16xl:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: susaairport, susastrategy, ~techlevel.high, ~susa_armor
+		Prerequisites: susaairport, susastrategy, ~susa_armor
 		Description: Ground Attack Bomber.\n  Strong vs Buildings
 		IconPalette: ra2
 	Valued:
@@ -6759,8 +6729,7 @@ susaf16xl:
 		Ammo: 2
 		AmmoCondition: ammo
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
@@ -6795,7 +6764,7 @@ susaf16xl.husk:
 		Image: susablackwidow
 
 susaf16:
-	Inherits: BADR.Bomber
+	Inherits: ra1_badger_bomber
 	Armament:
 		Weapon: USAA10MG
 		LocalOffset: 1024,0,-85
@@ -6812,7 +6781,7 @@ susaf16:
 		Actor: susaf16xl.Husk
 	-AttackBomber:
 	AttackBomberCA:
-		Armaments: gun, bombs
+		Armaments: td_nod_gunturret, bombs
 		FacingTolerance: 128
 	Aircraft:
 		TurnSpeed: 16
@@ -6827,7 +6796,7 @@ susaconcreteslab:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Selectable:
-		Bounds: 80085, 80085
+		Bounds: 1877, 1877
 		Class: susaconcreteslab
 	Valued:
 		Cost: 300
@@ -6850,7 +6819,7 @@ susaconcreteslab:
 		BuildDuration: 250
 		BuildDurationModifier: 100
 		Queue: Defence, RADefence
-		Prerequisites: susabarracks, susastrategy, ~techlevel.medium, ~susa_armor
+		Prerequisites: susabarracks, susastrategy, ~susa_armor
 		Description: Can be upgraded with various defense systems
 		IconPalette: ra2
 	Building:
@@ -6954,7 +6923,6 @@ susavaporiser:
 	RenderSprites:
 		Image: susaconcreteslab
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -6976,7 +6944,6 @@ susaguardian:
 	RenderSprites:
 		Image: susaconcreteslab
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -6998,7 +6965,6 @@ susadetection:
 	RenderSprites:
 		Image: susaconcreteslab
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -7089,7 +7055,7 @@ susamissilesilo:
 	-WithDeathAnimation:
 
 upsusabradleyparadrop1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bradley Paradrop 1
 	Buildable:
@@ -7122,7 +7088,7 @@ upsusabradleyparadrop3:
 		Prerequisite: upsusabradleyparadrop3
 
 upsusaparadrop1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Para Drop 1
 	Buildable:
@@ -7155,7 +7121,7 @@ upsusaparadrop3:
 		Prerequisite: upsusaparadrop3
 
 upsusahalo1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HALO Drop 1
 	Buildable:
@@ -7205,7 +7171,7 @@ susabomber.b52:
 		Position: BottomLeft
 		RequiresSelection: True
 upsusab52cruise:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: B-52 Cruise Missile Strike
 	Buildable:
@@ -7231,7 +7197,7 @@ susaamdggrenade.para:
 		Sequence: idle-ground
 		RequiresCondition: !parachute
 	WithParachute:
-		ShadowImage: parach-shadow
+		ShadowImage: parach_shadow
 		ShadowSequence: idle
 		Image: parach
 		Sequence: idle
@@ -7278,7 +7244,7 @@ susaamdggrenade.para:
 	-ActorLostNotification:
 
 upsusaamdggrenadebarrage:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: AMDG Grenade Barrage
 	Buildable:
@@ -7315,7 +7281,7 @@ upsusaamdggrenadebarrage3:
 #########################################
 
 upsglksvk:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: KSVK Anti-Materiel Rifle
 	Buildable:
@@ -7354,7 +7320,7 @@ sglrebel:
 		DeathSequencePalette: playerra2
 		UseDeathTypeSuffix: false
 	Selectable:
-		DecorationBounds: 29098, 36394, 0, 0
+		DecorationBounds: 682, 853, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -7400,7 +7366,7 @@ sglworker:
 		Condition: moving
 		ValidMovementTypes: Horizontal, Vertical, Turn
 	Selectable:
-		DecorationBounds: 29098, 36394, 0, 7253
+		DecorationBounds: 682, 853, 0, 170
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -7426,7 +7392,7 @@ sglrpgtrooper:
 		DeathSequencePalette: playerra2
 		UseDeathTypeSuffix: false
 	Selectable:
-		DecorationBounds: 29098, 36394, 0, -3626
+		DecorationBounds: 682, 853, 0, -85
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -7441,7 +7407,7 @@ sglhijack:
 	WithInfantryBody:
 		IdleSequences: idle
 	Selectable:
-		DecorationBounds: 29098, 36394, 0, -3626
+		DecorationBounds: 682, 853, 0, -85
 	WithDeathAnimation:
 		DeathSequencePalette: playerra2
 		UseDeathTypeSuffix: false
@@ -7492,7 +7458,7 @@ sglkell:
 		DeathSequencePalette: playerra2
 		UseDeathTypeSuffix: false
 	Selectable:
-		DecorationBounds: 29098, 36394, 0, 0
+		DecorationBounds: 682, 853, 0, 0
 	WithMuzzleOverlay:
 	WithShadow:
 		Offset: 0, 96, 0
@@ -7501,7 +7467,7 @@ sglkell:
 sglamob:
 	Inherits@1: glamob
 	Buildable:
-		Prerequisites: sglpalace, ~techlevel.medium, ~sgla_regular
+		Prerequisites: sglpalace, ~sgla_regular
 	MobSpawnerMaster:
 		Actors: sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob2, sglaangrymob2, sglaangrymob2
 		ExitByBudding: false
@@ -7553,7 +7519,7 @@ sglaangrymob1:
 		UseDeathTypeSuffix: false
 		RequiresCondition: ak47upgrade
 	Selectable:
-		DecorationBounds: 21845, 29098, 0, -1792
+		DecorationBounds: 512, 682, 0, -42
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -7584,7 +7550,7 @@ sglaangrymob2:
 	WithInfantryBody:
 		IdleSequences: idle, idle2, idle3
 	Selectable:
-		DecorationBounds: 21845, 29098, 0, -1792
+		DecorationBounds: 512, 682, 0, -42
 	WithDeathAnimation:
 		DeathSequence: die
 		DeathSequencePalette: playerra2
@@ -7602,7 +7568,7 @@ sglaangrymob1_rocket:
 sglamob_demo:
 	Inherits@1: glamob
 	Buildable:
-		Prerequisites: sglpalace, ~techlevel.medium, ~sgla_demo
+		Prerequisites: sglpalace, ~sgla_demo
 	MobSpawnerMaster:
 		Actors: sglaangrymob1_rocket, sglaangrymob1_rocket, sglaangrymob1_rocket, sglaangrymob1_rocket, sglaangrymob1_rocket, sglaangrymob1_rocket, sglaangrymob1_rocket, sglaangrymob2, sglaangrymob2, sglaangrymob2
 		ExitByBudding: false
@@ -7788,7 +7754,7 @@ sglsite:
 	Inherits: glsite
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: sglbarracks, ~techlevel.medium, ~anysgla
+		Prerequisites: sglbarracks, ~anysgla
 	RenderSprites:
 		Image: glsite
 
@@ -7815,7 +7781,7 @@ sglairpad:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 130
-		Prerequisites: sglsupply, ~techlevel.medium, ~anysgla, ~!sgla_toxin, ~!sgla_demo, ~!sgla_camo
+		Prerequisites: sglsupply, ~anysgla, ~!sgla_toxin, ~!sgla_demo, ~!sgla_camo
 		Description: Builds Air units
 		BuildDuration: 300
 		BuildDurationModifier: 100
@@ -7835,14 +7801,13 @@ sglairpad:
 		Range: 7c0
 		RevealGeneratedShroud: False
 	Selectable:
-		Bounds: 100096, 81920, 0, 43690
-		DecorationBounds: 116480, 81920, 0, 43690
+		Bounds: 2730, 1920, 0, 1024
 	Exit@1:
 		ExitCell: 1,1
 		Facing: 768
 	-WithDeathAnimation:
 	RallyPoint:
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: AirUpgrades.GLA
 	Production@NORMAL:
 		Produces: Aircraft
@@ -7882,7 +7847,6 @@ sglairpad.hole:
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
 		IntoActor: sglairpad
-
 
 sglmoviledemo:
 	Inherits: ^Vehicle
@@ -8003,7 +7967,7 @@ sglchameleon:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_regular
+		Prerequisites: sglweap, ~sgla_regular
 		Queue: Vehicle, RAVehicle
 		Description: Light Tank Destroyer\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
@@ -8064,7 +8028,7 @@ sglchameleon:
 		LevelUpNotification: LevelUpRA2
 
 upsglreconvehicletraining:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Recon Vehicle Training
 	Buildable:
@@ -8124,7 +8088,7 @@ sglbggy:
 	Inherits: glbggy
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, sglpalace, ~anysgla, ~techlevel.medium
+		Prerequisites: sglweap, sglpalace, ~anysgla
 		Queue: Vehicle, RAVehicle
 	Armament@Toxin:
 		Weapon: GLRocketBuggyMissilesToxin
@@ -8172,7 +8136,7 @@ sglballoon:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~techlevel.medium, ~sglballoonprereq
+		Prerequisites: ~sglballoonprereq
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with AG Missiles.\n  Strong vs Buildings, Tanks\n  Weak vs Infantry
 	Aircraft:
@@ -8193,8 +8157,8 @@ sglballoon:
 			gle3: ifv-miss
 			che3: ifv-miss
 			e3: ifv-miss
-			rae3: ifv-miss
-			yrggi: ifv-miss
+			ra1_allies_alliedrocketsoldier: ifv-miss
+			ra2_allies_guardiangi: ifv-miss
 			tse3: ifv-miss
 		InitialUnits: gle3,gle3
 	Armament@Passenger1:
@@ -8260,7 +8224,7 @@ sglballoon.husk:
 		Image: sglballoon
 
 sglscrapboxdrop1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Scrap Box drop
 	Buildable:
@@ -8276,7 +8240,7 @@ sglscrapboxdrop1:
 		Prerequisite: sglscrapboxdrop1
 
 sglscrapboxdrop2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Scrap Box drop 2
 	Buildable:
@@ -8290,7 +8254,7 @@ sglscrapboxdrop2:
 		Prerequisite: sglscrapboxdrop2
 
 sglscrapboxdrop3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Scrap Box drop 3
 	Buildable:
@@ -8385,7 +8349,7 @@ sglkatyusha:
 		Position: BottomLeft
 		RequiresSelection: True
 upsglkatyusha:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Katyusha
 	Buildable:
@@ -8403,7 +8367,7 @@ sgldesertfly:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: ~techlevel.high, ~sgla_scrap
+		Prerequisites: ~sgla_scrap
 		Description: Heavy Attack Aircraft.\n  Strong vs Infantry, Vehicles, Buildings
 		IconPalette: ra2
 	Valued:
@@ -8435,8 +8399,7 @@ sgldesertfly:
 		Ammo: 3
 		AmmoCondition: ammo
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
@@ -8476,7 +8439,7 @@ sglhornetnest:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gensound: ^GeneralsDamageBuilding
 	Inherits@shape: ^2x2Shape
 	Valued:
@@ -8539,7 +8502,7 @@ sglsa2samsite:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gensound: ^GeneralsDamageBuilding
 	Inherits@shape: ^2x2Shape
 	Valued:
@@ -8636,7 +8599,7 @@ sglcombatbuggy:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_scrap
+		Prerequisites: sglweap, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		Description: Fast attack vehicle.\nTakes on the weapon of passenger\nCan travel through cliffs
 		IconPalette: ra2
@@ -8715,7 +8678,7 @@ sgllatrun:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: sglweap, ~techlevel.high, ~sgla_scrap
+		Prerequisites: sglweap, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		Description: Agile Artillery armed with Long Range Cannon\n  Strong vs Ground\nWeak vs Air
 		IconPalette: ra2
@@ -8771,7 +8734,7 @@ sgllatrun:
 	SelectionDecorations:
 	WithMuzzleOverlay:
 	Selectable:
-		DecorationBounds: 61866, 61866
+		DecorationBounds: 1450, 1450
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience:
 		ValidTypes: USAPilot
@@ -8808,7 +8771,7 @@ sglgadfly:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_scrap
+		Prerequisites: sglweap, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		IconPalette: ra2
 		Description: Anti-Air Artillery Vehicle.\nCannot move while firing
@@ -8934,7 +8897,7 @@ sglkrait:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_scrap
+		Prerequisites: sglweap, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		Description: APC armed with toxin gun and phosphorus rockets.\nCan carry 2 passengers.\n  Strong vs Infantry\n  Weak vs Vehicles
 		IconPalette: ra2
@@ -9010,7 +8973,7 @@ sglmobilesupplytruck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_scrap
+		Prerequisites: sglweap, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		Description: Mobile Drop off Point.
 		IconPalette: ra2
@@ -9115,7 +9078,7 @@ sglscarab:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_scrap
+		Prerequisites: sglweap, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		Description: Medium Tank.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Mobile:
@@ -9201,7 +9164,6 @@ sglscarab:
 		Delay: 300
 		Count: 4
 		Sound: t28reload.wav
-
 
 sglradartank:
 	Inherits: ^Vehicle
@@ -9410,7 +9372,7 @@ glsmaura:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_scrap
+		Prerequisites: sglweap, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		Description: Medium tank.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Mobile:
@@ -9522,14 +9484,14 @@ glsmaura:
 		LevelUpNotification: LevelUpRA2
 
 upsglbasilisk:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Basilisk
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.GLA
 		Description: Allows production of the Basilisk
-		Prerequisites: !upsglbasilisk, ~techlevel.high, ~sgla_scrap, rank1
+		Prerequisites: !upsglbasilisk, ~sgla_scrap, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: sglbasilisk
@@ -9555,7 +9517,7 @@ sglbasilisk:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, upsglbasilisk, ~techlevel.medium, ~sgla_scrap
+		Prerequisites: sglweap, upsglbasilisk, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		Description: Heavy tank destroyer.\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
@@ -9628,7 +9590,6 @@ sglbasilisk:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 
-
 sglhip:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -9637,7 +9598,7 @@ sglhip:
 	Inherits@detect: ^GenericAirDetector
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~techlevel.medium, ~sgla_scrap
+		Prerequisites: ~sgla_scrap
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship upgradeable with addons.\n  Strong vs Infantry\n  Weak vs Aircraft
 		IconPalette: ra2
@@ -9702,7 +9663,7 @@ sglhip:
 	ProducibleWithLevel:
 		Prerequisites: aircraft.upgraded
 	Selectable:
-		DecorationBounds: 69162, 58240
+		DecorationBounds: 1621, 1365
 	Voiced:
 		VoiceSet: CHHelixVoice
 	Production:
@@ -9765,7 +9726,6 @@ pscchhip1:
 	RenderSprites:
 		Image: sglhip
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -9782,7 +9742,6 @@ pscchhip2:
 	RenderSprites:
 		Image: sglhip
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -9799,7 +9758,6 @@ pscchhip3:
 	RenderSprites:
 		Image: sglhip
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -9939,8 +9897,6 @@ sglgrenadierterror:
 		RequiresCondition: triggered && !disabled
 	Voiced:
 		VoiceSet: GLATerroristVoice
-	DeliversCash:
-		Payload: 60
 	Cloneable:
 		Types: NormalInfantry
 	-TakeCover:
@@ -9985,7 +9941,7 @@ sglscrapcrate:
 		WaterCorpseSequence: small_splash
 		ParachutingCondition: parachute
 	WithParachute: ##########
-		ShadowImage: parach-shadow
+		ShadowImage: parach_shadow
 		ShadowSequence: idle
 		Image: parach
 		Sequence: idle
@@ -9993,7 +9949,6 @@ sglscrapcrate:
 		Offset: 0,0,427
 		RequiresCondition: parachute
 	Passenger:
-		Weight: 1
 		CargoType: Scrapcrate
 sglsilo:
 	Inherits: ^BaseBuilding
@@ -10008,7 +9963,7 @@ sglsilo:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 135
-		Prerequisites: sglpalace, ~techlevel.high, ~sgla_scrap, !sglnuke
+		Prerequisites: sglpalace, ~sgla_scrap, !sglnuke
 		Queue: Building, RABuilding
 		Description: Provides Nuclear Strike support power.\nRequires power to operate.
 	Building:
@@ -10111,7 +10066,7 @@ sglroach:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: sglpalace, ~techlevel.medium, ~sgla_demo
+		Prerequisites: sglpalace, ~sgla_demo
 		Description: Fire Support Vehicle with Long Range Missiles\Amphibious.\n  Strong vs ground and air
 		IconPalette: ra2
 	Valued:
@@ -10184,7 +10139,7 @@ sglmantis:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_demo
+		Prerequisites: sglweap, ~sgla_demo
 		Queue: Vehicle, RAVehicle
 		Description: Fast, light tank.\nCan be upgraded with missiles.\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
@@ -10289,7 +10244,7 @@ sglsparka:
 		MuzzleSequence: muzzle
 		LocalOffset: 600,64,0, 600,-64,0
 	Armament@2AA:
-		Weapon: SGLSparkaCannonAA
+		Weapon: SGLSparkaCannon_AA
 		MuzzleSequence: muzzle
 		LocalOffset: 600,64,200, 600,-64,200
 	AttackTurreted:
@@ -10330,7 +10285,7 @@ sgltopol:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: upsgltopol, sglpalace, ~techlevel.medium, ~sgla_demo
+		Prerequisites: upsgltopol, sglpalace, ~sgla_demo
 		Description: Long-range ballistic missile launcher.\n  Strong vs ground targets\n  Weak vs Aircraft
 		IconPalette: ra2
 	Valued:
@@ -10412,7 +10367,7 @@ sgltopol.missile:
 		EmptyWeapon: SGLATOPOL
 
 upsgltopol:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: TOPOL Launcher
 	Buildable:
@@ -10455,7 +10410,6 @@ sglbus:
 		Except: Unload, Stop
 		RequiresCondition: damagedslow
 	Passenger:
-		Weight: 6
 	Health:
 		HP: 75000
 	Repairable:
@@ -10511,7 +10465,7 @@ sglbus:
 		Ammo: 5
 		RearmSound: minelay1.aud
 	Rearmable:
-		RearmActors: fix,rafix,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,cra2nadept,cra2gadept,tsgtdept,chweap,usaweap,glweap,leangweap
+		RearmActors: fix,rafix,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,cra2nadept,cra2gadept,tsgtdept,chweap,usaweap,glweap,leangweap
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -10548,7 +10502,7 @@ sglcamel:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: upscudlauncher, sglpalace, ~techlevel.medium, ~sgla_demo
+		Prerequisites: upscudlauncher, sglpalace, ~sgla_demo
 		Description: Long-range ballistic missile launcher.\n  Strong vs ground targets\n  Weak vs Aircraft
 		IconPalette: ra2
 	Valued:
@@ -10593,8 +10547,6 @@ sglcamel:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 
-
-
 sgldemomaura:
 	Inherits: glmaura
 	Valued:
@@ -10603,7 +10555,7 @@ sgldemomaura:
 		Name: Demolition Marauder Tank
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: glweap, upmarauder, ~techlevel.medium, ~sgla_demo
+		Prerequisites: glweap, upmarauder, ~sgla_demo
 		Queue: Vehicle, RAVehicle
 		Description: Medium tank.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Mobile:
@@ -10665,7 +10617,7 @@ glanthraxbomber.nuke:
 	RenderSprites:
 		Image: glabomber
 upblackmarketbomb:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Black Market Nuke
 	Buildable:
@@ -10696,7 +10648,7 @@ sglbombtruck:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: glweap, ~techlevel.medium, ~sgla_demo
+		Prerequisites: glweap, ~sgla_demo
 		Description: Suicide vehicle.\nCan be upgraded with different explosives.\n  Strong vs Infantry, Vehicles\n  Weak vs Aircraft
 	Health:
 		HP: 8000
@@ -10770,7 +10722,6 @@ pscsglbombtruck1:
 	RenderSprites:
 		Image: sglblackmarketbomb
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -10796,7 +10747,7 @@ sgltrapdrop:
 		WaterCorpseSequence: small_splash
 		ParachutingCondition: parachute
 	WithParachute: ##########
-		ShadowImage: parach-shadow
+		ShadowImage: parach_shadow
 		ShadowSequence: idle
 		Image: parach
 		Sequence: idle
@@ -10804,14 +10755,13 @@ sgltrapdrop:
 		Offset: 0,0,427
 		RequiresCondition: parachute
 	Passenger:
-		Weight: 1
 		CargoType: Scrapcrate
 	WithCrateBody:
 		XmasImages: sgltrapdrop
 sglfanatic:
 	Inherits: sglrebel
 	Buildable:
-		Prerequisites: barracks, ~sgle1prereq, ~disable
+		Prerequisites: barracks, ~sgle1prereq, ~disabled
 	RenderSprites:
 		Image: sglfanatic
 		PlayerPalette: playerra2
@@ -10861,7 +10811,7 @@ sglstorm:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: glpalace, ~techlevel.high, ~sgla_demo, !sglscudstorm
+		Prerequisites: glpalace, ~sgla_demo, !sglscudstorm
 		Queue: Building, RABuilding
 		Description: Provides Scud Storm support power.\nRequires power to operate.
 	Building:
@@ -10927,7 +10877,6 @@ sglstorm:
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: sglscudstorm
 
-
 sglstorm.hole:
 	Inherits: GLAHole4x3
 	TransformOnCondition@buildingrebirth:
@@ -10960,12 +10909,12 @@ sgltoxinrebel:
 		DeathSequencePalette: playerra2
 		UseDeathTypeSuffix: false
 	Selectable:
-		DecorationBounds: 29098, 36394, 0, 0
+		DecorationBounds: 682, 853, 0, 0
 
 sgltoxinrebel_grey:
 	Inherits: sgltoxinrebel
 	Buildable:
-		Prerequisites: barracks, ~wip-content
+		Prerequisites: barracks, ~disabled
 	RenderSprites:
 		Image: sgltoxinrebelgrey
 
@@ -11015,7 +10964,7 @@ sgltarantula:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_toxin
+		Prerequisites: sglweap, ~sgla_toxin
 		Queue: Vehicle, RAVehicle
 		Description: APC armed with toxins.\nCan carry 2 passengers.\n  Strong vs Infantry\n  Weak vs Vehicles
 		IconPalette: ra2
@@ -11115,7 +11064,7 @@ sglscourge:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_toxin, upsglscourge
+		Prerequisites: sglweap, ~sgla_toxin, upsglscourge
 		Queue: Vehicle, RAVehicle
 		Description: Long-range artillery.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles, Aircraft
 		IconPalette: ra2
@@ -11173,7 +11122,7 @@ sglscourge:
 	RenderSprites:
 
 upsglscourge:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Scourge
 	Buildable:
@@ -11229,7 +11178,7 @@ sglpython:
 		MuzzleSequence: muzzle
 		LocalOffset: 600,0,0
 	Armament@2AA:
-		Weapon: SGLPythonAA
+		Weapon: SGLPython_AA
 		Name: secondary
 		MuzzleSequence: muzzle
 		LocalOffset: 600,0,225
@@ -11277,7 +11226,7 @@ sglbiotruck:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: glweap, ~techlevel.medium, ~sgla_toxin
+		Prerequisites: glweap, ~sgla_toxin
 		Description: Suicide vehicle.\nCan be upgraded with different explosives.\n  Strong vs Infantry, Vehicles\n  Weak vs Aircraft
 	Health:
 		HP: 8000
@@ -11323,7 +11272,7 @@ sglamobtoxin:
 	Tooltip:
 		Name: Toxin Angry Mob
 	Buildable:
-		Prerequisites: sglpalace, ~techlevel.medium, ~sgla_toxin
+		Prerequisites: sglpalace, ~sgla_toxin
 	MobSpawnerMaster:
 		Actors: sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob2_toxin, sglaangrymob2_toxin, sglaangrymob2_toxin, sglaangrymob2_toxin
 
@@ -11377,7 +11326,7 @@ sglfrogssm:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: glpalace, ~techlevel.medium, ~sgla_camo, ~upsglfrogssm
+		Prerequisites: glpalace, ~sgla_camo, ~upsglfrogssm
 		Description: Long-range ballistic missile launcher.\n  Strong vs ground targets\n  Weak vs Aircraft
 		IconPalette: ra2
 	Valued:
@@ -11487,9 +11436,8 @@ sglfrogssm.missiletox:
 		Weapon: GLASCUDTOXIN
 		EmptyWeapon: GLASCUDTOXIN
 
-
 upsglfrogssm:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Frog SSM Launcher
 	Buildable:
@@ -11611,7 +11559,7 @@ sglfundamentalist:
 	Tooltip:
 		Name: Fundamentalist
 	Buildable:
-		Prerequisites: sglpalace, ~techlevel.medium, ~sgla_camo
+		Prerequisites: sglpalace, ~sgla_camo
 		Description: Civilian fighters armed with variety of small-arms weapons
 		Icon: icon_fundamentalist
 		IconPalette: ra2
@@ -11652,7 +11600,7 @@ sglfundamentalist1:
 		UseDeathTypeSuffix: false
 		RequiresCondition: !ak47upgrade
 	Selectable:
-		DecorationBounds: 21845, 29098, 0, -1792
+		DecorationBounds: 512, 682, 0, -42
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -11686,7 +11634,7 @@ sglfundamentalist2:
 		DeathSequencePalette: playerra2
 		UseDeathTypeSuffix: false
 	Selectable:
-		DecorationBounds: 21845, 29098, 0, -1792
+		DecorationBounds: 512, 682, 0, -42
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -11723,7 +11671,7 @@ sglmgnest:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gensound: ^GeneralsDamageBuilding
 	Inherits@shape: ^2x2Shape
 	Valued:
@@ -11808,7 +11756,7 @@ sglcobra:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_camo
+		Prerequisites: sglweap, ~sgla_camo
 		Queue: Vehicle, RAVehicle
 		Description: Fast, light tank.\nCan be upgraded with missiles.\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
@@ -11887,7 +11835,6 @@ sglcobra:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 
-
 #########################################
 #           GLA Technical
 #########################################
@@ -11953,7 +11900,7 @@ eglpickupquad:
 		MuzzleSequence: muzzle
 		LocalOffset: 128,128,200, 128,-128,200, 128,-128,43, 128,128,43
 	Armament@2AA:
-		Weapon: GLQuadCannonAir
+		Weapon: GLQuadCannonAir_AA
 		MuzzleSequence: muzzle
 		LocalOffset: 128,128,200, 128,-128,200, 128,-128,43, 128,128,43
 	AttackTurreted:
@@ -12319,7 +12266,7 @@ eglpickuparty:
 		Position: BottomLeft
 		RequiresSelection: true
 eglrajeep:
-	Inherits: RAJEEP
+	Inherits: ra1_allies_ranger
 	Inherits@junk: ^JunkRepair
 	Buildable:
 		Queue: Vehicle, RAVehicle
@@ -12336,7 +12283,7 @@ eglrajeep:
 	SpawnActorOnDeath@Grenadier:
 		Actor: sglgrenadierterror
 	RenderSprites:
-		Image: rajeep
+		Image: ra1_allies_ranger
 	ExternalCondition@SCRAP_CREATE_BONUS:
 		Condition: scrap_create_bonus
 		TotalCap: 2
@@ -12530,8 +12477,7 @@ schpower3:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -12709,7 +12655,7 @@ schsilo:
 	Inherits: chsilo
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: schpropaganda, ~techlevel.high, ~anyschina, !chinanuke
+		Prerequisites: schpropaganda, ~anyschina, !chinanuke
 	RenderSprites:
 		Image: chsilo
 	ProvidesPrerequisite@generals:
@@ -12721,7 +12667,7 @@ schairport:
 	Inherits: chairport
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: schsupply, ~techlevel.medium, ~anyschina, schweap
+		Prerequisites: schsupply, ~anyschina, schweap
 	RenderSprites:
 		Image: chairport
 	ProvidesPrerequisite@generals:
@@ -12732,7 +12678,7 @@ schairport:
 scharty:
 	Inherits: charty
 	Buildable:
-		Prerequisites: schweap, ~techlevel.medium, ~anyschina, ~!schina_tank, ~!schina_nuke
+		Prerequisites: schweap, ~anyschina, ~!schina_tank, ~!schina_nuke
 	Armament@Normal:
 		RequiresCondition: !upschinfernoapupgrade || !deployed
 	Armament@AP:
@@ -12770,14 +12716,14 @@ scharty:
 #           CHINA REGULAR
 #########################################
 upschnapalmstrike:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Napalm Strike
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.CHINA
 		Description: Calls squadron of Iron Dragons to bombard an area with napalm rockets
-		Prerequisites: !upschnapalmstrike, ~techlevel.high, ~schina_regular, rank3, rank1
+		Prerequisites: !upschnapalmstrike, ~schina_regular, rank3, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: chnapalmstrikeicon
@@ -12837,8 +12783,7 @@ schredguard:
 		IdleSequences: idle1, idle2
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -12860,8 +12805,7 @@ schtankhunter:
 		IdleSequences: idle1, idle2
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -12966,7 +12910,7 @@ schsiegesoldier:
 		RequiresCondition: deployed
 		RequiresSelection: true
 	Selectable:
-		DecorationBounds: 29098, 29098, 0, 0
+		DecorationBounds: 682, 682, 0, 0
 
 schhacker:
 	Inherits: CHHACKER
@@ -12975,8 +12919,7 @@ schhacker:
 		Prerequisites: schbarracks, schpropaganda, ~anyschina, ~!schina_nuke
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -13024,8 +12967,7 @@ schlotus:
 	-ProductionCostMultiplier@selectchtanks:
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -13048,8 +12990,7 @@ schofficer:
 		IdleSequences: idle1, idle2
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -13112,7 +13053,7 @@ schflametower:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@chaingun: ^ChaingunUpgrade
 	Inherits@mines: ^MinefieldUpgrade
 	Valued:
@@ -13185,7 +13126,7 @@ schhackvan:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: schweap, schinternetcenter, ~techlevel.medium, ~shockwavehackvanprereq
+		Prerequisites: schweap, schinternetcenter, ~shockwavehackvanprereq
 		Queue: Vehicle, RAVehicle
 		Description: Secondary Economy vehicle.\nCan Shelter Hackers\nGarrisoned by 2 Hackers.
 		IconPalette: ra2
@@ -13224,13 +13165,13 @@ schhackvan:
 schhackvan.bot:
 	Inherits: schhackvan
 	Buildable:
-		Prerequisites: schweap, schinternetcenter, ~techlevel.medium, ~schina_regular, ~botplayer
+		Prerequisites: schweap, schinternetcenter, ~schina_regular, ~botplayer
 	Valued:
 		Cost: 3000
 	Cargo:
 		InitialUnits: CHHACKER, CHHACKER, CHHACKER, CHHACKER
 
-schempmig:
+SCH_EMP_Mig:
 	Inherits: ^RANeutralPlane
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -13240,7 +13181,7 @@ schempmig:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: schairport, ~techlevel.medium, ~schina_regular
+		Prerequisites: schairport, ~schina_regular
 		Description: Fighter armed with EMP Bombs.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
 		IconPalette: ra2
 	Valued:
@@ -13260,7 +13201,7 @@ schempmig:
 		Range: 7c0
 		Type: GroundPosition
 	Armament@1:
-		Weapon: SCHEMPMig
+		Weapon: SCH_EMP_Mig
 		LocalOffset: 0,-640,0, 0,640,0
 		LocalYaw: -40, 24
 		PauseOnCondition: !ammo
@@ -13284,15 +13225,14 @@ schempmig:
 		Delay: 25
 		Count: 1
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
 		Offset: -598,683,0
 	SpawnActorOnDeath:
-		Actor: schempmig.husk
+		Actor: SCH_EMP_Mig.husk
 	LeavesTrails:
 		Offsets: -853,0,171
 		MovingInterval: 2
@@ -13320,7 +13260,7 @@ schempmig:
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
 
-schempmig.husk:
+SCH_EMP_Mig.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: EMP MiG
@@ -13340,7 +13280,7 @@ schempmig.husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: schempmig
+		Image: SCH_EMP_Mig
 
 schtiger:
 	Inherits: ^Helicopter
@@ -13359,7 +13299,7 @@ schtiger:
 		BuildPaletteOrder: 50
 		BuildDuration: 350
 		BuildDurationModifier: 100
-		Prerequisites: schweap, ~techlevel.medium, ~schina_regular
+		Prerequisites: schweap, ~schina_regular
 		Description: Helicopter gunship.\nCan attack air\nResistant to EMP\n  Strong vs Infantry, Light vehicles\n  Weak vs Aircraft
 		IconPalette: ra2
 	Aircraft:
@@ -13380,7 +13320,7 @@ schtiger:
 		Weapon: SCHTigerGrenades
 		LocalOffset: 150,150,-150, 150,-150,-150
 	Armament@rockets:
-		Weapon: SCHTigerRockets
+		Weapon: SCHTigerRockets_AA
 		LocalOffset: 150,213,-120, 150,-213,-120
 	AutoTarget:
 		ScanRadius: 5
@@ -13448,7 +13388,7 @@ schtiger.husk:
 		Image: schtiger
 
 upschmigspeed:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: MiG Afterburner
 	Buildable:
@@ -13465,7 +13405,7 @@ upschmigspeed:
 		Prerequisite: upschmigspeed
 
 upschheliarmor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Helicopter Armor
 	Buildable:
@@ -13482,7 +13422,7 @@ upschheliarmor:
 		Prerequisite: upschheliarmor
 
 upschmassproduction:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Battlemaster Mass Production
 	Buildable:
@@ -13499,7 +13439,7 @@ upschmassproduction:
 		Prerequisite: upschmassproduction
 
 upschinfernoapupgrade:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Anti-Tank Shells
 	Buildable:
@@ -13573,7 +13513,7 @@ schpropagandatruck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: schweap, schpropaganda, ~techlevel.medium, ~schina_regular
+		Prerequisites: schweap, schpropaganda, ~schina_regular
 		Queue: Vehicle, RAVehicle
 		Description: Combat Support Vehicle that broadcasts Propaganda.\nCan transport infantry
 		IconPalette: ra2
@@ -13612,7 +13552,7 @@ schpropagandatruck:
 		RequiresSelection: true
 
 upschnucleartanks:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Nuclear Tanks
 	Buildable:
@@ -13660,8 +13600,7 @@ schlisteningpost:
 		Offset: 2200,0,0
 		RequiresCondition: !damaged
 	Selectable:
-		DecorationBounds: 1536, 1536
-		Bounds: 65536, 65536
+		Bounds: 1536, 1536
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -13685,7 +13624,7 @@ schlisteningpost.che3:
 		InitialUnits: schtankhunter, schtankhunter
 
 upschautoload:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Autoloader
 	Buildable:
@@ -13701,7 +13640,7 @@ upschautoload:
 		Prerequisite: upschautoload
 
 upschneutronbomb:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Neutron Bomb
 	Buildable:
@@ -13718,7 +13657,7 @@ upschneutronbomb:
 		Prerequisite: upschneutronbomb
 
 schirondragon:
-	Inherits: BADR
+	Inherits: ra1_badger
 	AttackBomber:
 		FacingTolerance: 32
 	Armament:
@@ -13770,7 +13709,7 @@ schneutronminv:
 		-RequiresCondition: neutronmines
 
 upschtankdrop1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tank Drop 1
 	Buildable:
@@ -13802,7 +13741,7 @@ upschtankdrop3:
 		Prerequisite: upschtankdrop3
 
 upschneutronclustermine:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Neutron Cluster Mines
 	Buildable:
@@ -13860,7 +13799,7 @@ schwarmaster:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_tank
+		Prerequisites: schweap, ~schina_tank
 		Queue: Vehicle, RAVehicle
 		Description: Chinese main battle tank.\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
@@ -13924,14 +13863,14 @@ schwarmaster:
 	RenderSprites:
 
 upschreaper:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Reaper
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.CHINA
 		Description: Allows production of the Reaper
-		Prerequisites: !upschreaper, ~techlevel.high, ~schina_tank, rank1
+		Prerequisites: !upschreaper, ~schina_tank, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: schreaper
@@ -13959,7 +13898,7 @@ schreaper:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.high, ~schina_tank, upschreaper
+		Prerequisites: schweap, ~schina_tank, upschreaper
 		Queue: Vehicle, RAVehicle
 		Description: Chinese Tank equipped with Dual AP Gattling Guns.\nCan crush smaller vehicles\n  Strong vs Vehicles, Tanks\n  Weak vs Aircraft
 		IconPalette: ra2
@@ -14019,7 +13958,7 @@ schramjet:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Tooltip:
 		Name: Ramjet Turret
 	Building:
@@ -14027,7 +13966,7 @@ schramjet:
 		Dimensions: 1, 1
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~schina_tank, ~techlevel.medium, schbarracks
+		Prerequisites: ~schina_tank, schbarracks
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Anti-Ground Turret.\n  Strong vs Infantry, Vehicles
@@ -14066,7 +14005,7 @@ schramjet:
 		Class: schramjet
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 87381, 58240, 0, 14549
+		DecorationBounds: 2048, 1365, 0, 341
 	-WithDeathAnimation:
 	-WithMakeAnimation:
 
@@ -14074,7 +14013,7 @@ schapgattling:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@chaingun: ^ChaingunUpgrade
 	Inherits@mines: ^MinefieldUpgrade
 	Valued:
@@ -14146,7 +14085,7 @@ schadvancedecm:
 		Name: Advanced ECM
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: schweap, schpropaganda, ~techlevel.medium, ~schina_tank
+		Prerequisites: schweap, schpropaganda, ~schina_tank
 		IconPalette: ra2
 	Mobile:
 		Speed: 105
@@ -14180,7 +14119,7 @@ schrazerbomber:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: schairport, ~techlevel.medium, ~schina_tank
+		Prerequisites: schairport, ~schina_tank
 		Description: Attack Bomber armed with Napalm Bombs.\nCreates napalm storms when grouped\n  Strong vs Buildings, Vehicles, Infantry\n  Weak vs Aircraft
 		IconPalette: ra2
 	Valued:
@@ -14226,8 +14165,7 @@ schrazerbomber:
 		Delay: 25
 		Count: 1
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -14301,7 +14239,7 @@ schtransporthelix:
 	Inherits@bot: ^BotMicromanageable
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: schairport, ~techlevel.medium, ~schina_tank
+		Prerequisites: schairport, ~schina_tank
 		Queue: Aircraft, RAAircraft
 		Description: Can transport infantry and vehicles\nShares propaganda and can be upgraded with Gattling
 		IconPalette: ra2
@@ -14374,7 +14312,7 @@ schtransporthelix:
 	ProducibleWithLevel:
 		Prerequisites: aircraft.upgraded
 	Selectable:
-		DecorationBounds: 69162, 58240
+		DecorationBounds: 1621, 1365
 	Voiced:
 		VoiceSet: CHHelixVoice
 	ReloadAmmoPool:
@@ -14405,7 +14343,7 @@ schtransporthelix:
 		RequiresCondition: gattlingaddon
 	Armament@GATTLINGAA:
 		Name: gattlingaa
-		Weapon: CHGattlingTurretAA
+		Weapon: CHGattlingTurret_AA
 		LocalOffset: 1200,0,-200
 		MuzzleSequence: muzzle
 		RequiresCondition: gattlingaddon
@@ -14459,7 +14397,7 @@ schtransporthelix.husk:
 schtransporthelix.e1:
 	Inherits: schtransporthelix
 	Buildable:
-		Prerequisites: schairport, ~techlevel.medium, ~schina_tank, ~botplayer
+		Prerequisites: schairport, ~schina_tank, ~botplayer
 	Valued:
 		Cost: 4500
 	Cargo:
@@ -14494,8 +14432,7 @@ schindustrialplant:
 		Dimensions: 4,3
 		LocalCenterOffset: 0,0,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 87381, 0, -18176
+		Bounds: 3072, 2048, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 120000
@@ -14519,18 +14456,18 @@ schindustrialplant:
 		Palette: placelinesegment
 		Offset: -2000,-1000,0
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 
 upschreactivearmor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Reactive Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Installs Explosive reactive armor panels on tanks increasing their armors by 25%\nInstalled on Battlemaster, Warmaster, Reaper and Emperor Overlord
 		Prerequisites: ~!upschreactivearmor, ~schina_tank
 		IconPalette: ra2
@@ -14542,12 +14479,12 @@ upschreactivearmor:
 		Prerequisite: upschreactivearmor
 
 upschadvancedautoloader:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Advanced Autoloader
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlocks 3-fire bursts for Battlemasters
 		Prerequisites: ~!upschadvancedautoloader, ~schina_tank
 		IconPalette: ra2
@@ -14559,7 +14496,7 @@ upschadvancedautoloader:
 		Prerequisite: upschadvancedautoloader
 
 upschrazerbomberarmor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Razer Bomber Armor
 	Buildable:
@@ -14583,7 +14520,7 @@ schminigunnersquad:
 	Inherits: glamob
 	Buildable:
 		Description: Squad of Minigunners and Officer.\n  Strong vs Infantry, Aircraft, Buildings\n  Weak vs Vehicles, Tanks
-		Prerequisites: schpropaganda, ~schina_inf, ~techlevel.medium
+		Prerequisites: schpropaganda, ~schina_inf
 		IconPalette: ra2
 		Queue: Infantry, RAInfantry
 		BuildDuration: 600
@@ -14604,7 +14541,7 @@ schtankhuntersquad:
 	Inherits: glamob
 	Buildable:
 		Description: Squad of Tank Hunters and Officer.\n  Strong vs Vehicles, Tanks, Aircraft\n  Weak vs Infantry, Turrets
-		Prerequisites: schpropaganda, ~schina_inf, ~techlevel.medium
+		Prerequisites: schpropaganda, ~schina_inf
 		IconPalette: ra2
 		Queue: Infantry, RAInfantry
 		BuildDuration: 600
@@ -14625,7 +14562,7 @@ schredguardsquad:
 	Inherits: glamob
 	Buildable:
 		Description: Squad of Red Guards and Officer.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Air, Tanks
-		Prerequisites: schpropaganda, ~schina_inf, ~techlevel.medium
+		Prerequisites: schpropaganda, ~schina_inf
 		IconPalette: ra2
 		Queue: Infantry, RAInfantry
 		BuildDuration: 600
@@ -14644,7 +14581,7 @@ schredguardsquad:
 
 SCHE1:
 	Inherits: schredguard
-	Inherits@mob: ^default.angry_mob
+	Inherits@mob: ^DefaultAngryMob
 	-Buildable:
 	Tooltip:
 		Name: Red Guard
@@ -14660,7 +14597,7 @@ SCHE1:
 
 SCHE2:
 	Inherits: CHE2
-	Inherits@mob: ^default.angry_mob
+	Inherits@mob: ^DefaultAngryMob
 	-Buildable:
 	Tooltip:
 		Name: Minigunner
@@ -14677,7 +14614,7 @@ SCHE2:
 
 SCHE3:
 	Inherits: schtankhunter
-	Inherits@mob: ^default.angry_mob
+	Inherits@mob: ^DefaultAngryMob
 	-Buildable:
 	Tooltip:
 		Name: Tank Hunter
@@ -14710,7 +14647,7 @@ schtigershark:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_inf
+		Prerequisites: schweap, ~schina_inf
 		Queue: Vehicle, RAVehicle
 		Description: Light Tank armed with Cannon.\nGains horde bonus\n  Strong vs Vehicles\n  Weak vs Tanks, Infantry
 		IconPalette: ra2
@@ -14762,7 +14699,7 @@ schtigershark:
 		LevelUpNotification: LevelUpRA2
 
 upschsharkpropaganda:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tiger Shark Propaganda
 	Buildable:
@@ -14794,7 +14731,7 @@ schberzerkermlrs:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, schpropaganda, ~techlevel.high, ~schina_inf, upschberzerkermlrs
+		Prerequisites: schweap, schpropaganda, ~schina_inf, upschberzerkermlrs
 		Queue: Vehicle, RAVehicle
 		Description: Advanced Missile Launcher\nCan fire continuously or release full salvo at once\n  Strong vs Static Targets
 		IconPalette: ra2
@@ -14869,14 +14806,14 @@ schberzerkermlrs:
 		PipCount: 5
 
 upschberzerkermlrs:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Berzerker MLRS
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.CHINA
 		Description: Allows production of the Berzerker MLRS
-		Prerequisites: !upschberzerkermlrs, ~techlevel.high, ~schina_inf, rank1
+		Prerequisites: !upschberzerkermlrs, ~schina_inf, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: schberzerkermlrs
@@ -14978,7 +14915,7 @@ schfortifiedgattling:
 		BuildDurationModifier: 40
 		IconPalette: ra2
 	Selectable:
-		Bounds: 47317, 47317
+		Bounds: 1109, 1109
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -15063,7 +15000,6 @@ schbattlefortress:
 	Mobile:
 		Speed: 42
 	Passenger:
-		Weight: 8
 	Health:
 		HP: 75000
 	Repairable:
@@ -15140,7 +15076,7 @@ schassaulthelix:
 	Inherits@bot: ^BotMicromanageable
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: schairport, ~techlevel.medium, ~schina_inf
+		Prerequisites: schairport, ~schina_inf
 		Queue: Aircraft, RAAircraft
 		Description: Can transport infantry and vehicles\nCan be upgraded with propaganda and napalm bombs
 		IconPalette: ra2
@@ -15202,7 +15138,7 @@ schassaulthelix:
 	ProducibleWithLevel:
 		Prerequisites: aircraft.upgraded
 	Selectable:
-		DecorationBounds: 69162, 58240
+		DecorationBounds: 1621, 1365
 	Voiced:
 		VoiceSet: CHHelixVoice
 	Production:
@@ -15375,7 +15311,7 @@ schnuclearbattlemaster:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_nuke
+		Prerequisites: schweap, ~schina_nuke
 		IconPalette: ra2
 	RevealsShroud:
 		Range: 6c0
@@ -15418,7 +15354,7 @@ schradtank:
 	Inherits@atom: ^AtomicTankUpgrade
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@upschnucleartanks: ^upschnucleartanks
+	Inherits@upschnucleartanks: ^UPSCHNuclearTanks
 	Inherits@upschreactivearmor: ^ReactiveArmorUpgrade
 	Inherits@FusionReactors: ^FusionReactors
 	Valued:
@@ -15429,7 +15365,7 @@ schradtank:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_nuke
+		Prerequisites: schweap, ~schina_nuke
 		IconPalette: ra2
 		Description: Anti-Personnel Tank.\nCan drop barrels
 		Queue: Vehicle, RAVehicle
@@ -15480,7 +15416,7 @@ schsiegecannon:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@upschnucleartanks: ^upschnucleartanks
+	Inherits@upschnucleartanks: ^UPSCHNuclearTanks
 	Inherits@upschreactivearmor: ^ReactiveArmorUpgrade
 	Inherits@weapongradeuraniumshells: ^WeaponGradeUraniumShells
 	Inherits@isotopestability: ^IsotopeStability
@@ -15493,7 +15429,7 @@ schsiegecannon:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_nuke, schnuclearresearchplant
+		Prerequisites: schweap, ~schina_nuke, schnuclearresearchplant
 		Queue: Vehicle, RAVehicle
 		IconPalette: ra2
 		Description: Mobile artillery.
@@ -15545,7 +15481,7 @@ schnuclearoverlord:
 		RequiresCondition: addontactical
 	-Tooltip@4:
 	Buildable:
-		Prerequisites: schpropaganda, ~techlevel.high, ~schina_nuke
+		Prerequisites: schpropaganda, ~schina_nuke
 		IconPalette: ra2
 	-Cargo:
 	Turreted:
@@ -15622,7 +15558,6 @@ psscchoverlord:
 	RenderSprites:
 		Image: choverlordaddon1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -15640,7 +15575,7 @@ schdevastator:
 	Inherits@FusionReactors: ^FusionReactors
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_nuke, upschdevastator, schnuclearresearchplant
+		Prerequisites: schweap, ~schina_nuke, upschdevastator, schnuclearresearchplant
 		Queue: Vehicle, RAVehicle
 		IconPalette: ra2
 		Description: Heavy tank fitted with Dual Nuclear cannons\nCan crush vehicles\nCan overheat its reactor to suicide
@@ -15689,21 +15624,19 @@ schdevastator:
 		Delay: 115
 		RequiresCondition: overload
 		GrantsCondition: meltdown
-	AttractsWorms:
-		Intensity: 600
 	Selectable:
 		DecorationBounds: 1280, 1280, 0, 0
 	RenderSprites:
 
 upschdevastator:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Devastator
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.CHINA
 		Description: Allows production of the Devastator
-		Prerequisites: !upschdevastator, ~techlevel.high, ~schina_nuke, rank1
+		Prerequisites: !upschdevastator, ~schina_nuke, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: schdevastator
@@ -15778,7 +15711,7 @@ schnukegattlingcannon:
 		Description: All-purpose defensive structure.\nDoes not need to spin to gain full speed\nCan work while powered off\nCan be powered off to conserve power\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 		IconPalette: ra2
 	Selectable:
-		Bounds: 47317, 47317
+		Bounds: 1109, 1109
 	SelectionDecorations:
 	Health:
 		HP: 44000
@@ -15850,10 +15783,10 @@ schnuclearresearchplant:
 	LaysMinefield@minefield:
 		Locations: 0,-1, 1,-1, 2,-1, 3,-1, -1,0, -1,1, 4,0, 4,1, 0,2, 1,2, 2,2, 3,2
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Power:
 		Amount: -50
 	Voiced:
@@ -15861,12 +15794,12 @@ schnuclearresearchplant:
 	RenderSprites:
 
 upschradiationsuits:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Radiation Suits
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Protects infantry from radiation, toxins and flames
 		Prerequisites: ~!upschradiationsuits
 		IconPalette: ra2
@@ -15878,12 +15811,12 @@ upschradiationsuits:
 		Prerequisite: upschradiationsuits
 
 upschradiationwarheads:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Radiation Warheads
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: All Infantry gets radiation tipped weapons
 		Prerequisites: ~!upschradiationwarheads
 		IconPalette: ra2
@@ -15895,12 +15828,12 @@ upschradiationwarheads:
 		Prerequisite: upschradiationwarheads
 
 upschweapongradeuraniumshells:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Weapons Grade Uranium Shells
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: 25% Bonus damage for Battlemasters, Devastators, Overlords and Siege Cannons
 		Prerequisites: ~!upschweapongradeuraniumshells
 		IconPalette: ra2
@@ -15912,12 +15845,12 @@ upschweapongradeuraniumshells:
 		Prerequisite: upschweapongradeuraniumshells
 
 upschisotopestability:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Isotope Stability
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Tanks gain fail-safe reactors which prevents nuclear engines from exploding violently
 		Prerequisites: ~!upschisotopestability
 	Valued:
@@ -15928,12 +15861,12 @@ upschisotopestability:
 		Prerequisite: upschisotopestability
 
 upschfusionreactor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Fusion Reactors
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: 25% Movement speed for Gattling Tanks, R.A.D. Tanks, Battlemasters, Devastators, Overlords and Siege Cannons.
 		Prerequisites: ~!upschfusionreactor
 	Valued:
@@ -15946,7 +15879,7 @@ upschfusionreactor:
 schnuclearmig:
 	Inherits: CHMIG
 	Buildable:
-		Prerequisites: schairport, ~techlevel.medium, ~schina_nuke
+		Prerequisites: schairport, ~schina_nuke
 		Description: Fighter armed with napalm missiles.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
 		Icon: icon_nuke
 		IconPalette: ra2
@@ -15985,7 +15918,7 @@ schravagetank:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_leang
+		Prerequisites: schweap, ~schina_leang
 	Mobile:
 		Speed: 120
 	Health:
@@ -16043,7 +15976,7 @@ schburatino:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_leang
+		Prerequisites: schweap, ~schina_leang
 		Queue: Vehicle, RAVehicle
 		IconPalette: ra2
 		Description: Mobile artillery.
@@ -16083,17 +16016,16 @@ schleanggattlingcannon:
 	RenderSprites:
 		Image: schnukegattlingcannon
 
-
 schleangtransporthelix:
 	Inherits: schtransporthelix
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: schairport, ~techlevel.medium, ~schina_leang
+		Prerequisites: schairport, ~schina_leang
 	RenderSprites:
 		Image: schtransporthelix
 
 CHE4:
-	Inherits: RAE4
+	Inherits: ra1_soviets_flamethrower
 	Inherits@horde: ^HordeBonus
 	Inherits@RadiationSuits: ^RadiationSuits
 	Buildable:
@@ -16101,7 +16033,7 @@ CHE4:
 		Prerequisites: barracks, ~schina_leang
 		Queue: Infantry, RAInfantry
 	RenderSprites:
-		Image: E4
+		Image: td_nod_flamethrower
 
 schhammercannon:
 	Inherits: ^Tank
@@ -16117,7 +16049,7 @@ schhammercannon:
 		Name: Hammer Cannon
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: schpropaganda, ~techlevel.high, upschhammercannon, ~schina_leang
+		Prerequisites: schpropaganda, upschhammercannon, ~schina_leang
 		Queue: Vehicle, RAVehicle
 		Description: Long range artillery with incredible dange.\n Strong vs ground targets\n Weak vs Aircraft
 		IconPalette: ra2
@@ -16146,7 +16078,7 @@ schhammercannon:
 		FacingTolerance: 0
 	SelectionDecorations:
 	Selectable:
-		Bounds: 2048, 2048, 0, 58240
+		Bounds: 48, 48, 0, 1365
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -16187,20 +16119,19 @@ schhammercannon:
 		RequiresSelection: True
 
 upschhammercannon:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hammer Cannon
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.CHINA
 		Description: Allows production of the Hammer Cannon
-		Prerequisites: !upschhammercannon, ~techlevel.high, ~schina_leang, rank3, rank1
+		Prerequisites: !upschhammercannon, ~schina_leang, rank3, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: schhammercannon
 	ProvidesPrerequisite:
 		Prerequisite: upschhammercannon
-
 
 schanviltank:
 	Inherits: ^Tank
@@ -16214,7 +16145,7 @@ schanviltank:
 		Name: Anvil Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: schpropaganda, ~techlevel.high, ~schina_leang
+		Prerequisites: schpropaganda, ~schina_leang
 		Queue: Vehicle, RAVehicle
 		Description: Heavy vehicle\nCan deploy to cause earthquakes.
 		IconPalette: ra2
@@ -16302,7 +16233,7 @@ schsupportcrawler:
 		Weapon: SCHSupportCrawlerMissile
 		LocalOffset: 400,-350,-100, 400,350,-100
 	Armament@AA:
-		Weapon: SCHSupportCrawlerMissileAA
+		Weapon: SCHSupportCrawlerMissile_AA
 		LocalOffset: 400,-350,-100, 400,350,-100
 	Turreted:
 		TurnSpeed: 36
@@ -16406,7 +16337,7 @@ schgrindercannon:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_leang
+		Prerequisites: schweap, ~schina_leang
 		Queue: Vehicle, RAVehicle
 		IconPalette: ra2
 		Description: Short range artillery that shoots Flachette Canisters which shrapnels before hitting ground\nCan swap fire mode to fire mines instead
@@ -16501,7 +16432,7 @@ schsupplyhelicopterleang:
 			VerticalBottomOffset: 1024
 		Turret: primary
 	Selectable:
-		Bounds: 72789, 65536, 0, -45482
+		Bounds: 1706, 1536, 0, -1066
 	Mobile:
 		Speed: 112
 		TurnSpeed: 16

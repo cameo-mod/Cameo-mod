@@ -1,0 +1,339 @@
+ra1_allies_alliedconstructionyard:
+	Inherits: ^RAFACT
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Tooltip:
+		Name: Allied Construction Yard
+	Transforms:
+		IntoActor: ra1_allies_alliedmobileconstructionvehicle
+	ProvidesPrerequisite@sandbagbarrier:
+		Prerequisite: sandbagbarrier
+
+ra1_allies_alliedbarracks:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^RASpawnActorsOnSell
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Buildable:
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_powerplant
+		Description: Trains infantry units.
+	Tooltip:
+		Name: Allied Barracks
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -42,810,0
+		ExitCell: 1,2
+	Exit@2:
+		SpawnOffset: -725,640,0
+		ExitCell: 0,2
+	ProvidesPrerequisite:
+		Prerequisite: rabarracks
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+ra1_allies_alliedorerefinery:
+	Inherits: ^RAPROC
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	FreeActor:
+		Actor: ra1_allies_alliedoretruck
+		SpawnOffset: 1,2
+		Facing: 256
+	Tooltip:
+		Name: Allied Ore Refinery
+	RenderSprites:
+		Image: raproc
+	Buildable:
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_powerplant
+		Description: Processes ore into credits.
+	ProvidesPrerequisite@buildingname:
+
+ra1_allies_alliedwarfactory:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^RASpawnActorsOnSell
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Buildable:
+		Queue: Building, RABuilding
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedorerefinery
+		Description: template_factory.description
+	Tooltip:
+		Name: Allied War Factory
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	SelectionDecorations:
+	WithBuildingBib:
+	WithProductionDoorOverlay:
+		RequiresCondition: !build-incomplete
+		Sequence: build-top
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 213,-128,0
+		ExitCell: 1,2
+	ProvidesPrerequisite:
+		Prerequisite: vehicleproduction
+	RenderSprites:
+		Image: ra1_soviets_warfactory
+		PlayerPalette: raplayer
+	ProvidesPrerequisite@inherits:
+		Prerequisite: ra1_allies_alliedwarfactory
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+ra1_allies_alliedradardome:
+	Inherits: ^BaseBuilding
+	Inherits@radar: ^RadarBuilding
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Inherits@dome: ^Dome
+	Buildable:
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedorerefinery
+		Description: Provides radar coverage of the battlefield.
+	Tooltip:
+		Name: Allied Radar Dome
+	RevealsShroudMultiplier@ra1_allies_upgrade_advancedradarsystems:
+		Modifier: 150
+	DetectCloakedMultiplier@ra1_allies_upgrade_advancedradarsystems:
+		Modifier: 150
+	RangedGpsProvider:
+		Range: 20000
+		RequiresCondition: !disabled && !ra1_allies_upgrade_advancedradarsystems
+	WithRangeCircle:
+		Range: 20000
+		Color: FF000088
+		RequiresCondition: !disabled && !ra1_allies_upgrade_advancedradarsystems
+	RangedGpsProvider@upgrade:
+		Range: 30000
+		RequiresCondition: !disabled && ra1_allies_upgrade_advancedradarsystems
+	WithRangeCircle@upgrade:
+		Range: 30000
+		Color: FF000088
+		RequiresCondition: !disabled && ra1_allies_upgrade_advancedradarsystems
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_reinforcedstructures
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+
+ra1_allies_alliedhelipad:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^RASpawnActorsOnSell
+	Inherits@hpad: ^IsAircraftFactory
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Buildable:
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedradardome
+		Description: Produces and repairs aircraft.
+	Tooltip:
+		Name: Allied Helipad
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Exit@1:
+		SpawnOffset: 0,-256,0
+	Reservable:
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+ra1_allies_alliedtechcenter:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^RASpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Inherits@GPSSatelliteSupport: ^GPSSatelliteSupport
+	Buildable:
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedradardome
+		Description: actor_atek.description
+	Tooltip:
+		Name: Allied Tech Center
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RenderDetectionCircle:
+	WithBuildingBib:
+	GpsPower:
+		DoorImage: ra1_allies_alliedtechcenter
+		Prerequisites:
+			1: ra1_allies_upgrade_gpssatellitesupport
+		Icons:
+			1: gps
+		OneShot: true
+		ChargeInterval: 0
+		Names:
+			1: power_gps.name
+		Descriptions:
+			1: power.gps-description
+		RevealDelay: 375
+		#LaunchSpeechNotification: SatelliteLaunched
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		PauseOnCondition: disabled
+		SupportPowerPaletteOrder: 90
+	SupportPowerChargeBar:
+	Power:
+		Amount: -200
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: tek
+	ProvidesPrerequisite@techcenter:
+		Prerequisite: techcenter
+	Production@Research:
+		Produces: Research
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_alliedservicedepot:
+	Inherits: ^RAFIX
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Tooltip:
+		Name: Allied Service Depot
+	Buildable:
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedwarfactory
+		Description: Repairs nearby vehicles.
+	RenderSprites:
+		Image: rafixa
+
+ra1_allies_reinforcementpad:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^5x3Shape
+	Inherits@CPQWP: ^CPQConditionWithPrimary
+	Inherits@sell: ^RASpawnActorsOnSell
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Buildable:
+		Queue: Building, RABuilding
+		BuildLimit: 1
+		BuildPaletteOrder: 150
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_reinforcementpad, derricklimit
+		Description: Dropzone for quick reinforcements, and passive income.
+	Building:
+		Footprint: XXXXX xxxx+ =====
+		Dimensions: 5,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		DecorationBounds: 5120, 4000, 0, -250
+	RenderSprites:
+		PlayerPalette: player_rgba
+	Tooltip:
+		Name: Reinforcement Pad
+	ProvidesPrerequisite@buildingname:
+	WithBuildingBib:
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -1024,1024,0
+		Facing: 640
+		ExitCell: 1,2
+	Exit@1b:
+		SpawnOffset: -1024,1024,0
+		Facing: 640
+		ExitCell: 2,1
+	Exit@1c:
+		SpawnOffset: -1024,1024,0
+		Facing: 640
+		ExitCell: 0,2
+	Exit@2:
+		SpawnOffset: 1024,1024,0
+		Facing: 896
+		ExitCell: 2,2
+	Exit@3:
+		SpawnOffset: -1024,-1024,0
+		Facing: 384
+		ExitCell: 0,0
+	Exit@4:
+		SpawnOffset: 1024,-1024,0
+		Facing: 128
+		ExitCell: 2,0
+	Exit@5:
+		SpawnOffset: 1024,-1024,0
+		Facing: 128
+		ExitCell: 1,0
+	Exit@6:
+		SpawnOffset: 1024,-1024,0
+		Facing: 128
+		ExitCell: 0,1
+	ProductionParadropCA@NORMAL:
+		ActorType: ra1_badger
+		Produces: Vehicle
+		SpawnType: ClosestEdgeToDestination
+		ProportionalSpeed: true
+		RequiresCondition: !classicproductionqueues
+	ProductionParadropCA@CLASSICPRODUCTIONQUEUES:
+		ActorType: ra1_badger
+		Produces: RAVehicle
+		SpawnType: ClosestEdgeToDestination
+		ProportionalSpeed: true
+		RequiresCondition: classicproductionqueues
+	ParallelProductionQueue@VEHICLE:
+		Type: Vehicle
+		DisplayOrder: 3
+		Group: Vehicle
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		BuildDurationModifier: 25
+		InfiniteBuildLimit: 10
+	ProductionBar@VEHICLE:
+		ProductionType: Vehicle
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAVEHICLE:
+		ProductionType: RAVehicle
+		RequiresCondition: classicproductionqueues
+	ProvidesPrerequisite:
+		Prerequisite: vehicleproduction
+	ParatroopersPower@paratroopers:
+		OrderName: rapidreinforcements
+		Icons:
+			1: paratroopers
+		Names:
+			1: power_reinforcements.name
+		Prerequisites:
+			1:
+		ChargeInterval: 7500
+		Descriptions:
+			1: power_reinforcements.description
+		DropItems:
+			1: ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier
+		SelectTargetSpeechNotification: SelectTarget
+		AllowImpassableCells: false
+		QuantizedFacings: 32
+		CameraActor: camera.paradrop
+		DisplayBeacon: true
+		BeaconPosters:
+			1: pinficon
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		UnitTypes:
+			1: ra1_allies_badger
+		SquadSizes:
+			1: 5
+		SquadOffset: 1792,1792,0
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+	SupportPowerChargeBar:

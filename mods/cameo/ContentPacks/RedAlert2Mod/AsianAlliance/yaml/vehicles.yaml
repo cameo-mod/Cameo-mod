@@ -1,0 +1,969 @@
+tankmine.asian:
+	Inherits: ^Mine
+	RenderSprites:
+		Image: tankmine.asian
+		PlayerPalette: playerra2
+	FireWarheadsOnDeath:
+		Weapon: RA2sabot_elite
+	Mine:
+		AvoidFriendly: true
+		BlockFriendly: false
+	-Immobile:
+	Mobile:
+		Locomotor: wheeled
+		Speed: 1
+		PauseOnCondition: dontmove
+	GrantCondition@dontmove:
+		Condition: dontmove
+	RejectsOrders:
+	Health:
+		HP: 20000
+
+chaomine.asian:
+	Inherits: ^Mine
+	RenderSprites:
+		Image: chaomine.asian
+		PlayerPalette: playerra2
+	FireWarheadsOnDeath:
+		Weapon: AsianChaosTurret
+	Mine:
+		AvoidFriendly: true
+		BlockFriendly: false
+	-Immobile:
+	Mobile:
+		Locomotor: wheeled
+		Speed: 1
+		PauseOnCondition: dontmove
+	GrantCondition@dontmove:
+		Condition: dontmove
+	RejectsOrders:
+	Health:
+		HP: 20000
+
+asianalliance_quasar:
+	Inherits: ^Tank
+	Inherits@Template: ^LightTankTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@CelestialPowerUpgrades: ^CelestialPowerUpgrades
+	Tooltip:
+		Name: Quasar
+	Valued:
+		Cost: 900
+	UpdatesPlayerStatistics:
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~asianalliance_asianwarfactory
+		Queue: Vehicle, RAVehicle
+		Description: actor_aaquas.description
+	Mobile:
+		Locomotor: lighttracked
+		Speed: 125
+		TurnSpeed: 50
+	Health:
+		HP: 55000
+	Repairable:
+		HpPerStep: 2750
+	ChangesHealth@SelfHealing:
+		Step: 22
+	Armament@AG:
+		Weapon: AsianQuasarAG
+		LocalOffset: -400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !asianalliance_upgrade_celestialpower
+	Armament@UpgradeAG:
+		Weapon: AsianQuasarAG_EMP
+		LocalOffset: -400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: asianalliance_upgrade_celestialpower
+	Armament@AA:
+		Weapon: AsianQuasar_AA
+		LocalOffset: -400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !asianalliance_upgrade_celestialpower
+	Armament@UpgradeAA:
+		Weapon: AsianQuasar_EMP_AA
+		LocalOffset: -400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: asianalliance_upgrade_celestialpower
+	AttackFrontal:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		Image: asianalliance_quasar
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: AsianQuasarVoice
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_celestialpower
+
+asianalliance_dragonfly:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@cargo: ^CargoVehicle
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Tooltip:
+		Name: Dragonfly
+	Valued:
+		Cost: 1200
+	UpdatesPlayerStatistics:
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~asianalliance_asianwarfactory
+		Queue: Vehicle, RAVehicle
+		Description: template_opentopped.description
+	Mobile:
+		Locomotor: hover
+		Speed: 100
+		TurnSpeed: 20
+	Health:
+		HP: 32500
+	Repairable:
+		HpPerStep: 1625
+	ChangesHealth@SelfHealing:
+		Step: 13
+	Armor:
+		Type: Light
+	Selectable:
+		DecorationBounds: 1280, 1280
+		Class: asianalliance_dragonfly
+	RenderSprites:
+		Image: asianalliance_dragonfly
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: TroopCrawlerVoice
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 4
+		InitialUnits: asianalliance_asianmilitia, asianalliance_asianmilitia, asianalliance_asiantankkiller, asianalliance_asiantankkiller
+		ExclusiveDeploy: true
+		DeployType: Battlefortress
+	AttackOpenTopped:
+		Voice: Attack
+		Armaments: garrisoned
+		PortOffsets: 224,-341,128, 224,341,128, -224,-341,128, -224,341,128
+		PauseOnCondition: chronobeamed
+	RenderRangeCircle:
+	Hovers:
+	Targetable@Hover:
+		TargetTypes: Water, Ship
+	ActorStatValues:
+		Upgrades: asianalliance_doctrine_asianphalanx
+
+asianalliance_lynxtank:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	-ExternalCondition@AsianPhalanx:
+	Tooltip:
+		Name: Lynx Tank
+	Valued:
+		Cost: 850
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~asianalliance_asianwarfactory
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 90
+		TurnSpeed: 18
+	Health:
+		HP: 120000
+	Repairable:
+		HpPerStep: 6000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Turreted:
+		TurnSpeed: 18
+	Voiced:
+		VoiceSet: AsianAllianceVehicleVoice
+	Armament:
+		Name: primary
+		Weapon: AsianLynxTankCannon
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1280,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: AsianLynxTankCannon_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1280,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@MG:
+		Weapon: AsianLynxMG
+		MuzzleSequence: muzzle-mg
+		MuzzlePalette: ra2effect
+		RequiresCondition: asianalliance_doctrine_asianphalanx && !rank-elite
+	Armament@MGelite:
+		Weapon: AsianLynxMG_elite
+		MuzzleSequence: muzzle-mg
+		MuzzlePalette: ra2effect
+		RequiresCondition: asianalliance_doctrine_asianphalanx && rank-elite
+	ProximityExternalCondition@AsianPhalanx:
+		Range: 7500
+		ValidRelationships: Ally
+		Condition: AsianPhalanx
+		RequiresCondition: asianalliance_doctrine_asianphalanx
+	WithRangeCircle@AsianPhalanx:
+		Range: 7500
+		Type: AsianPhalanx
+		Color: 88888888
+		RequiresCondition: asianalliance_doctrine_asianphalanx
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	WithSpriteTurret:
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: asianalliance_doctrine_asianphalanx
+
+asianalliance_oiltruck:
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@anim: ^RA2Vehicle
+	Inherits@vo: ^AttackFrontalVoice
+	#Inherits@announce: ^AnnounceGlobal
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
+	Health:
+		HP: 20000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 100
+	RevealsShroud:
+		Range: 5c0
+	AttackFrontal:
+		FacingTolerance: 512
+	Armament@PRIMARY:
+		Weapon: DemoTruckTargeting
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: AttackAnything
+		ScanRadius: 10
+	GrantConditionOnAttack:
+		Condition: triggered
+	GrantConditionOnDeploy:
+		DeployedCondition: triggered
+		PauseOnCondition: disabled
+		ExclusiveDeploy: true
+		DeployType: Detonate
+		Voice: Attack
+	KillsSelf:
+		RequiresCondition: !disabled && triggered
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 180
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianradar, asianalliance_tankreactor
+		Description: actor_aaoilt.description
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Oil Truck
+	Voiced:
+		VoiceSet: AsianAllianceOilTruckVoice
+	FireWarheadsOnDeath@bomb:
+		Weapon: AsianOilBomb
+		EmptyWeapon: AsianOilBomb
+	DeathSounds:
+		RequiresCondition: !chronobeamed
+	RenderSprites:
+		PlayerPalette: playerra2
+	Passenger:
+		CargoType: OilTruck
+		CustomPipType: red
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_dragonfire
+
+asianalliance_asianmobileconstructionvehicle:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@mcv: ^MCV
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Tooltip:
+		Name: Asian Mobile Construction Vehicle
+	Buildable:
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianservicedepot
+		Description: Deploys into a Construction Yard.\n  Unarmed
+	Transforms:
+		IntoActor: asianalliance_asianconstructionyard
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: uplace.wav
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: PRCMCCVoice
+	ProvidesPrerequisite@faction:
+		Prerequisite: mmalliance
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: asianalliance_doctrine_asianphalanx
+
+asianalliance_droneminer:
+	Inherits: ^Tank
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Selectable:
+		Bounds: 512, 512
+		DecorationBounds: 512, 512
+	Valued:
+		Cost: 250
+	Tooltip:
+		Name: Drone Miner
+	Buildable:
+		BuildDuration: 125
+		BuildDurationModifier: 100
+		Prerequisites: ~asianalliance_asianorerefinery
+		Queue: Vehicle, RAVehicle
+		Description: template_harvester.description
+	Health:
+		HP: 25000
+	Repairable:
+		HpPerStep: 1250
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armor:
+		Type: Plate
+	WithHarvestAnimation:
+	WithDockingAnimation:
+	Voiced:
+		VoiceSet: AsianDroneVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	Mobile:
+		Speed: 125
+		TurnSpeed: 25
+		Locomotor: chem
+	Harvester:
+		BaleLoadDelay: 4
+		BaleUnloadDelay: 4
+	DockClientManager:
+		OccupancyCostModifier: 0
+	StoresResources:
+		Capacity: 4
+	WithStoresResourcesPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 4
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+	ActorStatValues:
+		Upgrades: asianalliance_doctrine_asianphalanx
+
+asianalliance_pulverizer:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^AntiAirVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@UpGat: ^GatlingSpinUpUnitBehavior
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@PulverizerUpgrades: ^PulverizerUpgrades
+	Valued:
+		Cost: 1400
+	Tooltip:
+		Name: Pulverizer
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianradar, ~!asianalliance_promotion_pulverizermecha
+		Queue: Vehicle, RAVehicle
+		Description: actor_aapulv.description
+	Mobile:
+		Speed: 65
+		TurnSpeed: 13
+	Health:
+		HP: 85000
+	Repairable:
+		HpPerStep: 4250
+	ChangesHealth@SelfHealing:
+		Step: 34
+	Turreted:
+		TurnSpeed: 26
+	Armament@1:
+		Weapon: AsianPulverizerGatling
+		LocalOffset: 800,0,400
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@2:
+		FireDelay: 3
+		Weapon: AsianPulverizerGatling
+		LocalOffset: 800,0,400
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: asianalliance_doctrine_heavypulverizerweapons
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: CHGatlingTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_doctrine_heavypulverizerweapons
+
+ptnk.asian:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
+	Valued:
+		Cost: 2400
+	Tooltip:
+		Name: Plasma Tank
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~asianalliance_asianwarfactory, ~asianalliance_promotion_plasmatank, asianalliance_asianbattlelab
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Speed: 50
+		TurnSpeed: 10
+	Health:
+		HP: 130000
+	Repairable:
+		HpPerStep: 6500
+	ChangesHealth@SelfHealing:
+		Step: 52
+	Turreted:
+		TurnSpeed: 10
+	Armament@PRIMARY:
+		Weapon: AsianTwinPlasma
+		LocalOffset: 900,80,340, 900,-80,340
+		Recoil: 85
+		RecoilRecovery: 42
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: AsianTwinPlasma_elite
+		LocalOffset: 900,80,340, 900,-80,340
+		Recoil: 85
+		RecoilRecovery: 42
+		RequiresCondition: rank-elite
+	AttackTurreted:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderRangeCircle:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: AsianPlasmaVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_dragonfire
+
+asianalliance_viper:
+	Inherits: ^Tank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Viper
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianradar
+		Queue: Vehicle, RAVehicle
+		Description: actor_aaviper.description
+	Mobile:
+		Locomotor: hover
+		Speed: 125
+		TurnSpeed: 25
+	Health:
+		HP: 25000
+	Repairable:
+		HpPerStep: 1250
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament@PRIMARY:
+		Weapon: AsianChemical
+		LocalOffset: -400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: AsianChemical_elite
+		LocalOffset: -400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		Image: asianalliance_viper
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: AsianAllianceViperVoice
+	Hovers:
+	Targetable@Hover:
+		TargetTypes: Water, Ship
+	ActorStatValues:
+		Upgrades: asianalliance_doctrine_asianphalanx
+
+asianalliance_type89mlrs:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MissileVehicleTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXP: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@UpGat: ^GatlingSpinUpUnitBehavior
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Type 89 MLRS
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~asianalliance_asianwarfactory, ~asianalliance_promotion_mlrs, asianalliance_asianbattlelab
+		Queue: Vehicle, RAVehicle
+		Description: actor_mlrs.description
+	Mobile:
+		Speed: 80
+		TurnSpeed: 16
+	Health:
+		HP: 40000
+	Repairable:
+		HpPerStep: 2000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Turreted:
+		TurnSpeed: 16
+		Offset: -256,0,128
+	Armament@PRIMARY:
+		Weapon: AsianMLRS
+		LocalOffset: 200,128,350, 200,-64,350, 200,192,350, 200,-128,350, 200,64,350, 200,-192,350
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithSpriteTurret:
+	WithMuzzleOverlay:
+	RenderRangeCircle:
+	RenderSprites:
+		Image: asianalliance_type89mlrs
+		PlayerPalette: playerra2
+	WithTurretAimAnimation:
+		Sequence: aim
+	Voiced:
+		VoiceSet: AsianAllianceVehicleVoice
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_dragonfire
+
+asianalliance_howitzer:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^ArtilleryTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Howitzer
+	Buildable:
+		BuildPaletteOrder: 90
+		Prerequisites: ~asianalliance_asianwarfactory, ~asianalliance_promotion_howitzer, asianalliance_militaryacademy
+		Queue: Vehicle, RAVehicle
+		Description: actor_aahowi.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 60
+		TurnSpeed: 12
+	Health:
+		HP: 40000
+	Repairable:
+		HpPerStep: 2000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Turreted:
+		TurnSpeed: 12
+	Armament:
+		Name: primary
+		Weapon: AsianHowitzerCannon
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 720,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Name: primary
+		Weapon: AsianHowitzerCannon_elite
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 720,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackTurreted:
+		TargetFrozenActors: True
+	GrantConditionOnAttack:
+		Condition: firing
+		RevokeDelay: 80
+	SpeedMultiplier@firing:
+		RequiresCondition: firing
+		Modifier: 50
+	TurnSpeedMultiplier@firing:
+		RequiresCondition: firing
+		Modifier: 50
+	TurretTurnSpeedMultiplier@firing:
+		RequiresCondition: firing
+		Modifier: 50
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: AsianAllianceHotwizerVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_dragonfire
+
+asianalliance_asianflametank:
+	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@FireActor: ^FireActor
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
+	Valued:
+		Cost: 1300
+	Tooltip:
+		Name: Asian Flame Tank
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~asianalliance_asianwarfactory, ~asianalliance_promotion_flametank
+		Queue: Vehicle, RAVehicle
+		Description: actor_ftnk.description
+	Mobile:
+		Speed: 85
+		TurnSpeed: 34
+	Health:
+		HP: 85000
+	Repairable:
+		HpPerStep: 4250
+	ChangesHealth@SelfHealing:
+		Step: 34
+	Armament@AG:
+		Weapon: AsianFlamerTank
+		LocalOffset: 300,0,200
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: AsianFlamerTank_elite
+		LocalOffset: 300,0,200
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@MultiWeapon:
+		Modifier: 75
+	AttackFrontal:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: CHDragonTankVoice
+	FireWarheadsOnDeath@flame:
+		Weapon: AsianOilBombFragments
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_dragonfire
+
+asianalliance_pulverizermecha:
+	Inherits: ^Walker
+	Inherits@Template: ^DreadnoughtTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@UpGat: ^GatlingSpinUpUnitBehavior
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@PulverizerUpgrades: ^PulverizerUpgrades
+	Selectable:
+		Bounds: 1250, 1750, 0, -250
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Pulverizer Mecha
+	Buildable:
+		BuildPaletteOrder: 75
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianbattlelab, ~asianalliance_promotion_pulverizermecha
+		Queue: Vehicle, RAVehicle
+		Description: actor_aamecha.description
+	Mobile:
+		Speed: 55
+		TurnSpeed: 22
+	Health:
+		HP: 285000
+	Repairable:
+		HpPerStep: 14250
+	ChangesHealth@SelfHealing:
+		Step: 114
+	Armament@1:
+		Weapon: AsianPulverizerMechaGatling
+		LocalOffset: 800,300,600, 800,-300,600
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@2:
+		FireDelay: 2
+		Weapon: AsianPulverizerMechaGatling
+		LocalOffset: 800,-300,600, 800,300,600
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: asianalliance_doctrine_heavypulverizerweapons
+	AttackFrontal:
+		FacingTolerance: 20
+	GrantConditionOnAttack@attack-animation:
+		Condition: attack-animation
+		MaximumInstances: 1
+		RevokeDelay: 18
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 25
+		MaxIdleDelay: 75
+		RequiresCondition: !attack-animation
+	WithFacingSpriteBody@attack-animation:
+		Sequence: shoot
+		RequiresCondition: attack-animation
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
+		DeathSequencePalette: playerra2
+	Passenger:
+	Voiced:
+		VoiceSet: AsianAllianceRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_doctrine_heavypulverizerweapons
+
+asianalliance_railguntank:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@CelestialPowerUpgrades: ^CelestialPowerUpgrades
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Railgun Tank
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianbattlelab, ~!asianalliance_promotion_heavyrailguntank
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 65
+		TurnSpeed: 26
+	Health:
+		HP: 160000
+	Repairable:
+		HpPerStep: 8000
+	ChangesHealth@SelfHealing:
+		Step: 64
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: AsianRailTank
+		RecoilRecovery: 40
+		LocalOffset: 750,0,80
+		MuzzleSequence: muzzle
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Name: primary
+		Weapon: AsianRailTank2
+		RecoilRecovery: 50
+		LocalOffset: 750,0,80
+		MuzzleSequence: muzzle
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	RenderRangeCircle:
+	WithMuzzleOverlay:
+	Voiced:
+		VoiceSet: AsianAllianceVehicleVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_celestialpower
+
+asianalliance_heavyrailguntank:
+	Inherits: asianalliance_railguntank
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Valued:
+		Cost: 2200
+	Tooltip:
+		Name: Heavy Railgun Tank
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianbattlelab, ~asianalliance_promotion_heavyrailguntank
+		Queue: Vehicle, RAVehicle
+		Description: Heavy tank with railgun weapon.\n  Strong vs Vehicles, Tanks
+	Mobile:
+		Locomotor: tracked
+		Speed: 50
+		TurnSpeed: 10
+	Health:
+		HP: 250000
+	Repairable:
+		HpPerStep: 12500
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armament@PRIMARY:
+		Weapon: AsianRailTank2
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: AsianRailTank3
+		RequiresCondition: rank-elite
+
+asianalliance_warturtle:
+	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@cargo: ^OpenToppedVehicle
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@InfantrySpecUpgrade: ^InfantrySpecUpgrade
+	Inherits@kami: ^KamikazeMode
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: War Turtle
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~asianalliance_asianwarfactory, ~asianalliance_promotion_warturtle, asianalliance_militaryacademy
+		Queue: Vehicle, RAVehicle
+		Description: template_opentopped.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+		Locomotor: hover
+	Hovers:
+	Targetable@Hover:
+		TargetTypes: Water, Ship
+	Passenger:
+	Health:
+		HP: 250000
+	Repairable:
+		HpPerStep: 12500
+	ChangesHealth@SelfHealing:
+		Step: 100
+	#Turreted:
+	#	TurnSpeed: 1023
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 32
+	Armament:
+		Weapon: AsianGrenade
+	RenderRangeCircle:
+	AttackFrontal:
+		FacingTolerance: 0
+	Cargo:
+		UnloadVoice: Move
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 7
+		InitialUnits: asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_plasmatrooper,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_veteranarcher,asianalliance_asdf
+		ExclusiveDeploy: true
+		DeployType: Battlefortress
+	AttackOpenTopped:
+		Voice: Attack
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128, 0,0,128
+		PauseOnCondition: chronobeamed
+	RevealOnFire:
+		ArmamentNames: primary, garrisoned
+	AutoTarget:
+		AllowMovement: true
+	Selectable:
+		DecorationBounds: 1440, 1440, 0, -128
+		Class: asianalliance_warturtle
+	Voiced:
+		VoiceSet: AsianAllianceVehicleVoice
+	RenderSprites:
+		Image: asianalliance_warturtle
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_doctrine_modernizedinfantryequipment, asianalliance_upgrade_banzaimode

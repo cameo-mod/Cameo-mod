@@ -502,7 +502,6 @@ zhtnk:
 		Speed: 50
 		TurnSpeed: 32
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 100000
 	Repairable:
@@ -697,7 +696,7 @@ zmlrs:
 zgattlingcan:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiTank: ^PrioritizeInfantry
 	Selectable:
 		Bounds: 1024, 1024
@@ -750,7 +749,7 @@ zgattlingcan:
 zguncan:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiTank: ^PrioritizeInfantry
 	Selectable:
 		Bounds: 1024, 1024
@@ -799,7 +798,7 @@ zguncan:
 zhotwizer:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiTank: ^PrioritizeInfantry
 	Selectable:
 		Bounds: 1024, 1024
@@ -848,7 +847,7 @@ zhotwizer:
 zmissilecan:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiTank: ^PrioritizeInfantry
 	Selectable:
 		Bounds: 1024, 1024
@@ -958,7 +957,6 @@ zmcv:
 		BuildDuration: 4500
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -1006,7 +1004,7 @@ zfort:
 	Inherits@aicash: ^AIConyardCash
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 218453, 174762
+		Bounds: 5120, 4096
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -1076,7 +1074,7 @@ zfort:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite@factiongdi:
@@ -1241,7 +1239,6 @@ zfort.zgattlingcan:
 	RenderSprites:
 		Image: zgattlingcan
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 zfort.zguncan:
@@ -1259,7 +1256,6 @@ zfort.zguncan:
 	RenderSprites:
 		Image: zguncan
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 zfort.zhotwizer:
@@ -1277,7 +1273,6 @@ zfort.zhotwizer:
 	RenderSprites:
 		Image: zhotwizer
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 zfort.zmissilecan:
@@ -1295,7 +1290,6 @@ zfort.zmissilecan:
 	RenderSprites:
 		Image: zmissilecan
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 zbarracks:
@@ -1335,7 +1329,7 @@ zbarracks:
 	Exit@2:
 		SpawnOffset: 298,298,0
 		ExitCell: 1,1
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: InfantryUpgrades.ZROBOTS
 	Production@NORMAL:
 		Produces: Infantry
@@ -1403,7 +1397,7 @@ zweap:
 	Exit@2:
 		SpawnOffset: 298,298,0
 		ExitCell: 1,1
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: InfantryUpgrades.ZROBOTS
 	Production@NORMAL:
 		Produces: Vehicle
@@ -1497,8 +1491,7 @@ zfix:
 		Footprint: xxx x+x +++
 		Dimensions: 3,3
 	Selectable:
-		Bounds: 116480, 61866, 0, 5461
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	SelectionDecorations:
 	Health:
 		HP: 150000

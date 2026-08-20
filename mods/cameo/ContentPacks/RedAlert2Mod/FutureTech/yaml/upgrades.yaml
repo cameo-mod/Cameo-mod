@@ -1,0 +1,46 @@
+####################################################################################################
+#		Red Alert 2 Naxis Planes
+####################################################################################################
+
+egcnst_infiltrated.futu:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Stolen FutureTech Building Plans
+	Buildable:
+		Description:
+	RenderSprites:
+		Image: futuretech_constructionyard
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: futuretech_constructionyard
+futuretech_doctrine_equalizerx1:
+	Inherits: ^DoctrineTemplate
+	Tooltip:
+		Name: Equalizer X1
+	Buildable:
+		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
+		Prerequisites: ~futuretech_transmissioncenter, !futuretech_doctrine_equalizerx1
+	RenderSprites:
+		Image: futuretech_doctrine_equalizerx1
+	ProvidesPrerequisite:
+
+futuretech_doctrine_equalizerx2:
+	Inherits: ^DoctrineTemplate
+	Tooltip:
+		Name: Equalizer X2
+	Buildable:
+		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
+		Prerequisites: ~futuretech_transmissioncenter, futuretech_battlelab, futuretech_doctrine_equalizerx1, !futuretech_doctrine_equalizerx2
+	RenderSprites:
+		Image: futuretech_doctrine_equalizerx2
+	ProvidesPrerequisite:
+
+futuretech_doctrine_equalizerx3:
+	Inherits: ^DoctrineTemplate
+	Tooltip:
+		Name: Equalizer X3
+	Buildable:
+		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
+		Prerequisites: ~futuretech_transmissioncenter, futuretech_battlelab, futuretech_hypercore, futuretech_doctrine_equalizerx2, !futuretech_doctrine_equalizerx3
+	RenderSprites:
+		Image: futuretech_doctrine_equalizerx3
+	ProvidesPrerequisite:

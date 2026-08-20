@@ -52,7 +52,6 @@ QANT:
 		Name: Queen Ant
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 500000
@@ -265,7 +264,7 @@ modant3:
 		Amount: -25
 
 antdoggie:
-	Inherits: TSDOGGIE
+	Inherits: forgotten_tiberianfiend
 	Inherits@bounty: ^GlobalBounty ##########
 	Inherits@anim: ^TSInfantry
 	Inherits@autotarget: ^AutoTargetAllAssaultMove
@@ -292,7 +291,7 @@ antdoggie:
 		Prerequisites: evo
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: tsdoggie
+		Image: forgotten_tiberianfiend
 	Power:
 		Amount: -25
 
@@ -348,7 +347,7 @@ chant:
 		Weapon: Spit
 		LocalOffset: 384,0,0
 	Armament@AA:
-		Weapon: SpitAA
+		Weapon: Spit_AA
 		LocalOffset: 384,0,0
 	FirepowerMultiplier:
 		Modifier: 200
@@ -456,7 +455,7 @@ crab:
 #		BUILDINGS
 ####################################################################################################
 qnest:
-	Inherits: RAFACT.ALLIES
+	Inherits: ra1_allies_alliedconstructionyard
 	GrantExternalConditionToOwner@AntHillsOwned:
 		Condition: AntHillsOwned
 	Inherits@ref: ^Refinery
@@ -658,7 +657,7 @@ tinynest2:
 		Name: Defence Nest
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: tinynest, breednest, ~techlevel.medium
+		Prerequisites: tinynest, breednest
 		Queue: Building, RABuilding
 		BuildDurationModifier: 750
 		BuildDuration: 100
@@ -681,7 +680,7 @@ tinynest2:
 		LocalOffset: 384,0,0
 		PauseOnCondition: lowpower || disabled
 	Armament@AA:
-		Weapon: SpitAA
+		Weapon: Spit_AA
 		LocalOffset: 384,0,0
 		PauseOnCondition: lowpower || disabled
 	AttackTurreted:
@@ -819,7 +818,7 @@ flyant:
 		Weapon: Spit
 		LocalOffset: 384,0,0
 	Armament@AA:
-		Weapon: SpitAA
+		Weapon: Spit_AA
 		LocalOffset: 384,0,0
 	AutoTarget:
 		ScanRadius: 15

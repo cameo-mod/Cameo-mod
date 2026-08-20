@@ -1,0 +1,159 @@
+tkm_promotion_medictruck:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Medic Truck
+	Buildable:
+		BuildPaletteOrder: 8043
+		Queue: Promotions
+		Description: Unlocks the Medic Truck.
+		Prerequisites: ~tkm_constructionyard, !tkm_promotion_medictruck, rank1
+	RenderSprites:
+		Image: tkm_medictruck
+	ProvidesPrerequisite:
+
+tkm_promotion_juggernaut:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Juggernaut
+	Buildable:
+		BuildPaletteOrder: 8046
+		Queue: Promotions
+		Description: Allows training of the Juggernaut.
+		Prerequisites: ~tkm_constructionyard, tkm_promotion_medictruck, !tkm_promotion_juggernaut, rank1
+	RenderSprites:
+		Image: tkm_juggernaut
+	ProvidesPrerequisite:
+
+tkm_promotion_battlebus:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Battle Bus
+	Buildable:
+		BuildPaletteOrder: 8049
+		Queue: Promotions
+		Description: Unlocks the Battle Bus.
+		Prerequisites: ~tkm_constructionyard, tkm_promotion_juggernaut, !tkm_promotion_battlebus, rank1
+	RenderSprites:
+		Image: tkm_battlebus
+	ProvidesPrerequisite:
+
+tkm_promotion_thesandmarine:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock the Sand Marine
+	Buildable:
+		BuildPaletteOrder: 8052
+		Queue: Promotions
+		Description: Allows construction of the Sand Marine.
+		Prerequisites: ~tkm_constructionyard, tkm_promotion_battlebus, !tkm_promotion_thesandmarine, rank1
+	RenderSprites:
+		Image: tkm_sandmarine
+	ProvidesPrerequisite:
+
+### Titan Promotion Tree
+
+tkm_promotion_repairtruck:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Repair Truck
+	Buildable:
+		BuildPaletteOrder: 8044
+		Queue: Promotions
+		Description: Unlocks a Repair Truck.
+		Prerequisites: ~tkm_constructionyard, !tkm_promotion_repairtruck, rank1
+	RenderSprites:
+		Image: tkm_repairtruck
+	ProvidesPrerequisite:
+
+tkm_promotion_trenchtank:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Trench Tank
+	Buildable:
+		BuildPaletteOrder: 8047
+		Queue: Promotions
+		Description: Allows construction of the Trench Tank.
+		Prerequisites: ~tkm_constructionyard, tkm_promotion_repairtruck, !tkm_promotion_trenchtank, rank1
+	RenderSprites:
+		Image: tkm_trenchtank
+	ProvidesPrerequisite:
+
+tkm_promotion_flakbus:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Flak Bus
+	Buildable:
+		BuildPaletteOrder: 8050
+		Queue: Promotions
+		Description: Unlocks the Flak Bus
+		Prerequisites: ~tkm_constructionyard, tkm_promotion_trenchtank, !tkm_promotion_flakbus, rank1
+	RenderSprites:
+		Image: tkm_flakbus
+	ProvidesPrerequisite:
+
+tkm_promotion_thebigshiee:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock the Big Shiee
+	Buildable:
+		BuildPaletteOrder: 8053
+		Queue: Promotions
+		Description: Unlocks the Big Shiee.
+		Prerequisites: ~tkm_constructionyard, tkm_promotion_flakbus, !tkm_promotion_thebigshiee, rank1
+	RenderSprites:
+		Image: tkm_bigshiee
+	ProvidesPrerequisite:
+
+### NATO Promotion Tree
+
+tkm_promotion_radartruck:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Radar Truck
+	Buildable:
+		BuildPaletteOrder: 8045
+		Queue: Promotions
+		Description: Allows construction of Radar Trucks.
+		Prerequisites: ~tkm_constructionyard, !tkm_promotion_radartruck, rank1
+	RenderSprites:
+		Image: tkm_radartruck
+	ProvidesPrerequisite:
+
+tkm_promotion_viper:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Viper
+	Buildable:
+		BuildPaletteOrder: 8048
+		Queue: Promotions
+		Description: Allows construction of Vipers.
+		Prerequisites: ~tkm_constructionyard, tkm_promotion_radartruck, !tkm_promotion_viper, rank1
+	RenderSprites:
+		Image: tkm_viper
+	ProvidesPrerequisite:
+
+tkm_promotion_dronepodtruck:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock Drone Pod Truck
+	Buildable:
+		BuildPaletteOrder: 8051
+		Queue: Promotions
+		Description: Allows construction of Drone Pod Trucks.
+		Prerequisites: ~tkm_constructionyard, tkm_promotion_viper, !tkm_promotion_dronepodtruck, rank1
+	RenderSprites:
+		Image: tkm_dronepodtruck
+	ProvidesPrerequisite:
+
+tkm_promotion_t30:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Unlock T30
+	Buildable:
+		BuildPaletteOrder: 8054
+		Queue: Promotions
+		Description: Allows construction of the T30.
+		Prerequisites: ~tkm_constructionyard, tkm_promotion_dronepodtruck, !tkm_promotion_t30, rank1
+	RenderSprites:
+		Image: tkmt30
+	ProvidesPrerequisite:

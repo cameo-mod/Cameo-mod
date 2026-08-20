@@ -8,13 +8,12 @@ OILB.Building:
 		Footprint: xx xx
 		Dimensions: 2,2
 	Tooltip:
-		Name: actor-oilb.name
+		Name: actor_oilb.name
 	RenderSprites:
-		Image: OILB
-		PlayerPalette: playerra
+		Image: oilb2
+		PlayerPalette: player_rgba
 
 derricklimit:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: Less Than Passive Income Buildings Limit
@@ -24,7 +23,7 @@ DummyActor:
 	TeleportNetwork:
 		Type: nydus
 
-^usa_composite_armor_upgrade:
+^USACompositeArmorUpgrade:
 	GrantConditionOnPrerequisite@usauparmor:
 		Condition: usauparmor
 		Prerequisites: usauparmor

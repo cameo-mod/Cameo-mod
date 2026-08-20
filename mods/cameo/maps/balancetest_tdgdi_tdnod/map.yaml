@@ -1,0 +1,59 @@
+MapFormat: 12
+
+RequiresMod: cameo
+
+Title: Balance Test: TD GDI vs TD Nod
+
+Author: Cameo balance harness
+
+Tileset: RA_DESERT
+
+MapSize: 98,98
+
+Bounds: 1,1,96,96
+
+Visibility: MissionSelector
+
+Categories: Testing
+
+LockPreview: True
+
+Players:
+	PlayerReference@Neutral:
+		Name: Neutral
+		OwnsWorld: True
+		NonCombatant: True
+		Faction: Random
+	PlayerReference@Creeps:
+		Name: Creeps
+		NonCombatant: True
+		Faction: Random
+	PlayerReference@Player:
+		Name: Player
+		AllowBots: False
+		Playable: True
+		Required: True
+		LockFaction: True
+		Faction: td_gdi
+		LockColor: True
+		Color: F0E286
+		LockTeam: True
+		LockSpawn: True
+	PlayerReference@SideA:
+		Name: SideA
+		LockFaction: True
+		Faction: td_gdi
+		LockColor: True
+		Color: FFD700
+		Enemies: SideB
+	PlayerReference@SideB:
+		Name: SideB
+		LockFaction: True
+		Faction: td_nod
+		LockColor: True
+		Color: D30000
+		Enemies: SideA
+
+Actors:
+
+Rules: rules.yaml

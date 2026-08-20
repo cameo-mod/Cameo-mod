@@ -1,0 +1,83 @@
+####################################################################################################
+#		Dune 2000 Weapon Templates
+####################################################################################################
+
+## D2K per-game PROJECTILE templates for the heavy missile/rocket family.
+## These provide the D2K artwork/trail variants for the central ^Projectile_Missile_Heavy layer.
+
+^Projectile_Missile_Heavy_D2K:
+	Inherits: ^Projectile_Missile_Heavy
+	Projectile: Missile
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 150
+		Image: d2k_missile2
+		Palette: d2keffect
+		Shadow: true
+		HorizontalRateOfTurn: 80
+		VerticalRateOfTurn: 20
+		TrailImage: large_trail
+		TrailInterval: 1
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Speed: 666
+		CloseEnough: 400
+		Acceleration: 3
+		HomingActivationDelay: 3
+		RangeLimit: 33333
+		CruiseAltitude: 1000
+		MinimumLaunchAngle: 64
+		PointDefenseTypes: Missile
+
+^Projectile_Missile_Heavy_D2K_Rocket:
+	Projectile: Bullet
+		Blockable: false
+		Speed: 500
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		LaunchAngle: 125
+
+## D2K per-game EFFECT templates for the heavy missile/rocket family.
+## These inherit the central ^Effect_MissileHE_Heavy layer and swap in D2K impact visuals/sounds.
+
+^Effect_MissileHE_Heavy_D2K:
+	Inherits: ^Effect_MissileHE_Heavy
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_explosion
+		ImpactSounds: EXPLSML1.WAV
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+		ValidTargets: Ground, Air
+	-Warhead@EffectAir:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 750
+
+^Effect_MissileHE_Heavy_D2K_Rocket:
+	Inherits: ^Effect_MissileHE_Heavy
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_tiny_explosion
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+		ValidTargets: Ground, Air
+	-Warhead@EffectAir:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 240

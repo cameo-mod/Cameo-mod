@@ -111,10 +111,10 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly new PortableChronoCAInfo Info;
 		readonly IMove move;
 
-		[Sync]
+		[VerifySync]
 		int chargeTick = 0;
 
-		[Sync]
+		[VerifySync]
 		int conditionTicks = 0;
 		int cooldownTicks = 0;
 
@@ -352,12 +352,15 @@ namespace OpenRA.Mods.CA.Traits
 
 	class PortableChronoOrderGenerator : OrderGenerator
 	{
+		protected override MouseActionType ActionType => MouseActionType.SupportPower;
+
 		readonly Actor self;
 		readonly PortableChronoCA portableChrono;
 		readonly PortableChronoCAInfo info;
 		readonly IEnumerable<TraitPair<PortableChronoCA>> selectedWithAbility;
 
 		public PortableChronoOrderGenerator(Actor self, PortableChronoCA portableChrono)
+			: base(self.World)
 		{
 			this.self = self;
 			this.portableChrono = portableChrono;
@@ -370,7 +373,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		protected override IEnumerable<Order> OrderInner(World world, CPos cell, int2 worldPixel, MouseInput mi)
 		{
-			if (mi.Button == MouseButton.Right)
+			if (mi.Button == Game.Settings.Game.ResolveCancelButton(MouseActionType.SupportPower))
 			{
 				world.CancelInputMode();
 				yield break;

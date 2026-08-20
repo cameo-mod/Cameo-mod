@@ -1,0 +1,323 @@
+#!/usr/bin/env python3
+"""effective_damage.py — READ-ONLY area-integrated damage metric per weapon.
+
+Ranks weapons on ONE comparable axis so single-target energy warheads (laser /
+tesla / railgun + their extra-damage chips) sit next to wide-spread AoE warheads
+(HE / cannon / nuke). Integrates each flat-damage warhead over its spread+falloff
+curve, weights it by single-target hit reliability (accuracy + travel), and sums
+the main + every *_ExtraDamage chip.
+
+FORMULA (locked with maintainer 2026-08-11):
+  effective = SUM over(main + *_ExtraDamage)  base * ( reliability + SWARM_W * footprint_cells2 )
+    footprint   = 2*pi * INT (F(r)/100) * r dr  / CELL^2                 (cell^2, damage-weighted area)
+    reliability = average F over a scatter disc of radius sigma          (= 1.0 at sigma 0)
+    sigma       = Inaccuracy + LEAD * TARGET_SPEED * Range / min(Speed, SPEED_CAP)
+    clamps      : Spread >= MIN_SPREAD (100);  Falloff at least [100, 0]
+    instant hits (InstantHit / LaserZap / Railgun / no Speed) -> Speed = SPEED_CAP -> ~0 drift.
+
+Excludes the %-twin (AreaDamagePercentage / HealthPercentageDamage — a different
+currency), the baked *FriendlyFire twins, EMP (AffectsIntegrity) and effects.
+
+Writes/edits NOTHING. Usage:
+  python tools/balance/effective_damage.py                 # full table, sorted desc
+  python tools/balance/effective_damage.py --top 40        # only the top 40
+  python tools/balance/effective_damage.py NAME [NAME...]   # just these weapons, verbose
+"""
+from __future__ import annotations
+import math
+import pathlib
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools/audit"))
+from cameo_model import Model  # noqa: E402
+
+CELL = 1024.0
+SWARM_W = 0.25          # anti-swarm area weight (you rarely hit a full blob)
+LEAD = 0.20             # engine leads/tracks -> real miss is ~20% of raw displacement
+TARGET_SPEED = 100      # typical dodging vehicle speed (WDist/tick)
+SPEED_CAP = 10000       # ~10 cells/tick: at/above this a projectile is "basically instant"
+MIN_SPREAD = 100        # absolute floor: no weapon integrates below Spread 100 / Falloff 100,0
+# Instant hits ALWAYS hit center -> reliability 1.0 (maintainer 2026-08-11), no travel drift at any
+# range. A projectile with no Speed field is also instant (beams / support-power explosions). The
+# SPEED_CAP only tames actual moving projectiles.
+INSTANT_PROJECTILES = {"InstantHit", "LaserZap", "Railgun", "InstantHitLine", "InstantHitAS",
+                       "SupportPowerInstantExplode", "InstantExplode"}
+
+
+def parse_wdist(s) -> int:
+    s = str(s).strip()
+    if "," in s:                               # random range e.g. Speed "180, 240" -> average
+        vals = [parse_wdist(x) for x in s.split(",") if x.strip() != ""]
+        return sum(vals) // len(vals) if vals else 0
+    neg = s.startswith("-")
+    if neg:
+        s = s[1:]
+    if "c" in s:
+        a, _, b = s.partition("c")
+        v = int(a or 0) * 1024 + int(b or 0)
+    else:
+        v = int(float(s))
+    return -v if neg else v
+
+
+def parse_ints(s) -> list[int]:
+    return [int(float(x.strip())) for x in str(s).split(",") if x.strip() != ""]
+
+
+def falloff_and_radii(node, spread: int):
+    """(falloff percents, radii in WDist). Warhead Range overrides Spread geometry.
+
+    Mirrors AreaDamageWarhead/SpreadDamageWarhead EXACTLY, including the engine's
+    single-Range footgun (verified 2026-08-11 against
+    `OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs` and the upstream
+    `SpreadDamageWarhead.cs`, which behave identically):
+
+        if (Range != null) effectiveRange = Range;            // NO expansion
+        else effectiveRange = [i * Spread for i in Falloff];
+
+    and `GetDamageFalloff` walks `for (i = 1; i < effectiveRange.Length; i++)`,
+    returning 0 when the loop never runs. So a `Range:` with a SINGLE value and a
+    multi-step `Falloff` makes the warhead deal ZERO damage at every distance —
+    the metric must score that as zero rather than inventing a per-step grid, or
+    it silently over-values a broken weapon. `has_geometry` is False for that case
+    so callers can report it.
+    """
+    fo = node.get("Falloff")
+    fo = parse_ints(fo) if fo else [100, 0]
+    if len(fo) < 2:
+        fo = [100, 0]
+    rng = node.get("Range")
+    if rng:
+        radii = [parse_wdist(x) for x in str(rng).split(",") if x.strip() != ""]
+        if len(radii) < 2:                     # engine: falloff loop never runs -> 0 damage
+            return fo, radii, False
+        if len(radii) != len(fo):              # engine rejects this at load; be conservative
+            radii = [i * spread for i in range(len(fo))]
+    else:
+        radii = [i * spread for i in range(len(fo))]
+    return fo, radii, True
+
+
+def footprint_cells2(fo, radii) -> float:
+    """2*pi * INT (F/100) r dr over the piecewise-linear curve, in cell^2."""
+    tot = 0.0
+    for k in range(len(fo) - 1):
+        a, b = radii[k], radii[k + 1]
+        if b <= a:
+            continue
+        pa, pb = fo[k] / 100.0, fo[k + 1] / 100.0
+        m = (pb - pa) / (b - a)
+        tot += pa * (b * b - a * a) / 2 + m * ((b ** 3 - a ** 3) / 3 - a * (b * b - a * a) / 2)
+    return (2 * math.pi * tot) / (CELL * CELL)
+
+
+def _F(fo, radii, r) -> float:
+    if r >= radii[-1]:
+        return 0.0
+    for k in range(len(fo) - 1):
+        if radii[k] <= r < radii[k + 1]:
+            span = radii[k + 1] - radii[k]
+            return (fo[k] + (fo[k + 1] - fo[k]) * (r - radii[k]) / span) / 100.0 if span else fo[k] / 100.0
+    return 0.0
+
+
+def scatter_pdf(t: float) -> float:
+    """Radial density of the ENGINE's scatter at radius t*sigma, t in [0, sqrt(2)].
+
+    The engine does NOT scatter uniformly over a disc. `Bullet.cs`:
+
+        target += WVec.FromPDF(world.SharedRandom, 2) * maxInaccuracyOffset / 1024
+
+    and `WVec.FromPDF(r, 2)` draws EACH AXIS as `WDist.FromPDF(r, 2)` = the sum of
+    two uniforms = a TRIANGULAR density on [-sigma, sigma]. So hits cluster near
+    the aim point: mean radius 0.52*sigma (Monte-Carlo, 200k samples) versus
+    0.67*sigma for a uniform disc, and P(r < sigma/4) is 15.7% versus 6.2%.
+
+    Modelling it as a uniform disc therefore throws ~28% of the hits too far out
+    and systematically UNDER-values inaccurate/slow weapons. This returns the
+    radial density of |(X, Y)| with X, Y iid triangular, evaluated numerically
+    once and cached, so `reliability` integrates against the real distribution.
+    """
+    return _RADIAL_PDF(t)
+
+
+def _build_radial_pdf(bins: int = 256, samples: int = 400_000):
+    """Monte-Carlo the radial density of the engine's 2-axis triangular scatter."""
+    import random
+    rng = random.Random(20260811)             # fixed seed: the table must be reproducible
+    hi = math.sqrt(2.0)
+    hist = [0.0] * bins
+    for _ in range(samples):
+        x = (rng.uniform(-1, 1) + rng.uniform(-1, 1)) / 2
+        y = (rng.uniform(-1, 1) + rng.uniform(-1, 1)) / 2
+        b = int(math.hypot(x, y) / hi * bins)
+        if b < bins:
+            hist[b] += 1.0
+    total = sum(hist)
+    width = hi / bins
+    dens = [h / total / width for h in hist]  # normalised so INT dens dt = 1
+
+    def pdf(t: float) -> float:
+        if t < 0 or t >= hi:
+            return 0.0
+        return dens[int(t / hi * bins)]
+    return pdf
+
+
+_RADIAL_PDF = _build_radial_pdf()
+
+
+def reliability(fo, radii, sigma) -> float:
+    """Expected falloff at the impact point, over the engine's scatter (POINT target).
+
+    E[F(R)] where R is the miss distance. sigma = 0 (instant/perfect) -> 1.0.
+    """
+    if sigma <= 0:
+        return 1.0
+    n = 400
+    hi = math.sqrt(2.0)
+    acc = weight = 0.0
+    step = hi / n
+    for i in range(n):
+        t = (i + 0.5) * step
+        w = scatter_pdf(t) * step
+        acc += _F(fo, radii, t * sigma) * w
+        weight += w
+    return acc / weight if weight else 1.0
+
+
+def damage_value(raw):
+    """A warhead's `Damage` as an int, or None when the field is not numeric.
+
+    Non-numeric means an unresolved placeholder (an inherited value the resolver
+    could not fold), which this metric skips. Returning None keeps the reason
+    explicit instead of swallowing the parse error at the call site — see
+    `audit_error_handling.py` E2.
+    """
+    try:
+        return int(float(raw))
+    except (TypeError, ValueError):
+        return None
+
+
+def number(raw):
+    """`raw` as a float, or None when it is not numeric.
+
+    Same contract as `damage_value` for fields that must keep their fractional part
+    (Versus percentages, %-of-HP damage): the caller decides what a missing value
+    means instead of a handler quietly swallowing it — `audit_error_handling.py` E2.
+    """
+    try:
+        return float(str(raw).strip())
+    except (TypeError, ValueError):
+        return None
+
+
+def flat_damage_warheads(resolved):
+    """Main + extra-damage flat warheads (exclude %-twin, FriendlyFire, EMP, effects)."""
+    out = []
+    for c in resolved.children:
+        if not c.key.startswith("Warhead@"):
+            continue
+        tag = c.key.split("@", 1)[1]
+        if "FriendlyFire" in tag:
+            continue
+        if c.value not in ("AreaDamage", "SpreadDamage", "TargetDamage"):
+            continue
+        base = damage_value(c.get("Damage"))
+        if base is None or base <= 0:
+            continue
+        out.append((tag, c.value, base, c))
+    return out
+
+
+def weapon_reliability_ctx(resolved):
+    """(is_instant, sigma). Instant hits -> reliability forced to 1.0 by the caller (sigma unused)."""
+    proj = resolved.child("Projectile")
+    ptype = proj.value if proj is not None else None
+    speed = resolved.get("Projectile", "Speed")
+    if ptype in INSTANT_PROJECTILES or not speed:
+        return True, 0.0                       # instant hit -> always hits center
+    inacc = resolved.get("Projectile", "Inaccuracy")
+    inacc = parse_wdist(inacc) if inacc else 0
+    rng = resolved.get("Range")
+    rng = parse_wdist(rng) if rng else 0
+    eff_speed = max(min(parse_wdist(speed), SPEED_CAP), 1)
+    drift = LEAD * TARGET_SPEED * rng / eff_speed if rng else 0.0
+    return False, inacc + drift
+
+
+def effective_damage(resolved):
+    """Return (effective, base_total, footprint_total, avg_reliability) or None."""
+    whs = flat_damage_warheads(resolved)
+    if not whs:
+        return None
+    is_instant, sigma = weapon_reliability_ctx(resolved)
+    eff = base_total = foot_total = 0.0
+    rel_weighted = 0.0
+    for _tag, wtype, base, node in whs:
+        if wtype == "TargetDamage":
+            fo, radii, live = [100, 0], [0, MIN_SPREAD], True
+        else:
+            spread = node.get("Spread")
+            spread = max(parse_wdist(spread) if spread else MIN_SPREAD, MIN_SPREAD)
+            fo, radii, live = falloff_and_radii(node, spread)
+        if not live:
+            # Engine deals 0 damage here (single Range + multi-step Falloff).
+            # Count the base so the misconfiguration is visible as effective << base.
+            base_total += base
+            continue
+        fp = footprint_cells2(fo, radii)
+        rel = 1.0 if is_instant else reliability(fo, radii, sigma)
+        contrib = base * (rel + SWARM_W * fp)
+        eff += contrib
+        base_total += base
+        foot_total += fp
+        rel_weighted += rel * base
+    avg_rel = rel_weighted / base_total if base_total else 0.0
+    return eff, base_total, foot_total, avg_rel, sigma
+
+
+def main() -> int:
+    args = [a for a in sys.argv[1:]]
+    top = None
+    if "--top" in args:
+        i = args.index("--top")
+        top = int(args[i + 1])
+        del args[i:i + 2]
+    names = args
+    rs = Model().rs
+    verbose = bool(names)
+    targets = names if names else [n for n in rs.weapons if not n.startswith("^")]
+
+    rows = []
+    for wname in targets:
+        resolved = rs.resolve_weapon(wname)
+        if resolved is None:
+            if verbose:
+                print(f"{wname}: UNRESOLVED")
+            continue
+        r = effective_damage(resolved)
+        if r is None:
+            if verbose:
+                print(f"{wname}: no flat-damage warheads")
+            continue
+        eff, base_total, foot_total, avg_rel, sigma = r
+        rows.append((eff, wname, base_total, foot_total, avg_rel, sigma))
+
+    rows.sort(reverse=True)
+    if top:
+        rows = rows[:top]
+
+    print(f"# effective_damage  (SWARM_W={SWARM_W} LEAD={LEAD} TARGET_SPEED={TARGET_SPEED} "
+          f"SPEED_CAP={SPEED_CAP} MIN_SPREAD={MIN_SPREAD})  read-only")
+    print(f"# {'weapon':30} {'effective':>11} {'base':>9} {'reliab':>6} {'footprint':>9} {'sigma':>6}")
+    for eff, wname, base_total, foot_total, avg_rel, sigma in rows:
+        print(f"  {wname:30} {eff:11.0f} {base_total:9.0f} {avg_rel:6.2f} {foot_total:9.2f} {sigma:6.0f}")
+    print(f"# {len(rows)} weapons")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

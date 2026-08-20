@@ -1,28 +1,51 @@
-
 ####################################################################################################
 #		Red Alert 2 Weapon Templates
 ####################################################################################################
 
-^RA2SmallArms:
-	Inherits: ^SmallArms
-	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
+## RA2 per-game EFFECT templates (extracted from the inline explosions that used to
+## sit on the RA2 weapon bases). Each inherits the generic ^Effect_<fam> and swaps the
+## impact for the RA2 look (ra2_piff / ra2_piffs on ra2effect). RA2 bases inherit these
+## via @fx instead of inlining. Naming: ^Effect_<Fam>_<Level>_RA2 (game = last section).
+## PILOT: only Bullet_Light/Medium done here; the rest of the RA2 set follows once the
+## naming/shape is confirmed. Later these relocate to the RA2 Shared pack.
+^Effect_Bullet_Light_RA2:
+	Inherits: ^Effect_Bullet_Light
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piff
 		ExplosionPalette: ra2effect
+	Warhead@EffectAir: CreateEffect
+		Explosions: ra2_piff
+		ExplosionPalette: ra2effect
 
-^RA2Chaingun:
-	Inherits: ^Chaingun
+^Effect_Bullet_Medium_RA2:
+	Inherits: ^Effect_Bullet_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect
+	Warhead@EffectAir: CreateEffect
+		Explosions: ra2_piffs
+		ExplosionPalette: ra2effect
+
+^RA2SmallArms:
+	Inherits@wh: ^Warhead_Bullet_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Bullet_Light_RA2
+	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
+
+^RA2Chaingun:
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 
 ^RA2FlakWeapon:
-	Inherits: ^FlakWeapon
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_flak_explosion_ground
 		ExplosionPalette: ra2unit
 		-ImpactSounds:
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
@@ -34,7 +57,9 @@
 		ImpactSounds: bflaattc.wav, bflaattd.wav, bflaattb.wav, bflaatta.wav
 
 ^RA2LightMissile:
-	Inherits: ^LightMissile
+	Inherits@wh: ^Warhead_MissileAP_Light
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_MissileAP_Light
 	Projectile: Missile
 		Image: ra2_dragon
 		-TrailImage:
@@ -43,10 +68,10 @@
 		ContrailStartWidth: 25
 		ContrailEndWidth: 1
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
+		Explosions: ra2_small_clsn
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
@@ -55,7 +80,9 @@
 		InvalidTargets: Ship, Structure, Bridge
 
 ^RA2MediumMissile:
-	Inherits: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
 	Projectile: Missile
 		Image: patriot
 		-TrailImage:
@@ -67,7 +94,7 @@
 		Explosions: ra2_medium_clsn
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
@@ -76,23 +103,27 @@
 		InvalidTargets: Ship, Structure, Bridge
 
 ^RA2HeavyMissile:
-	Inherits: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
+		Explosions: ra2_large_clsn
+		ExplosionPalette: tseffect
 		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
+		ExplosionPalette: tseffect
 		ImpactSounds: gexpwasa.wav
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 
 ^RA2TankDestroyerCannon:
-	Inherits: ^TankDestroyerCannon
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
+		Explosions: ra2_small_explosion
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
 	Warhead@EffectWater: CreateEffect
@@ -101,9 +132,11 @@
 		ImpactSounds: gexpwasa.wav
 
 ^RA2MediumCannon:
-	Inherits: ^MediumCannon
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
+		Explosions: ra2_medium_explosion
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
 	Warhead@EffectWater: CreateEffect
@@ -112,9 +145,11 @@
 		ImpactSounds: gexpwasa.wav
 
 ^RA2HeavyCannon:
-	Inherits: ^HeavyCannon
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_explosion
+		Explosions: ra2_large_explosion
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
 	Warhead@EffectWater: CreateEffect
@@ -123,24 +158,40 @@
 		ImpactSounds: gexpwasa.wav
 
 ^RA2Grenade:
-	Inherits: ^Grenade
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Light
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
+		Explosions: ra2_large_bang
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpwasa.wav
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
+		Damage: 500
+
+^RA2TeslaWeapon:
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_tesla_impact
+		ExplosionPalette: ra2effect
 
 ^RA2LaserWeapon:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	-Warhead@Effect:
 
 ^RA2RailgunWeapon:
-	Inherits: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_explosion
+		Explosions: ra2_small_bang
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
 		ValidTargets: Ground, Ship
@@ -165,9 +216,10 @@
 		ExplosionPalette: ra2effect
 	Warhead@Radiation: CreateTintedCells
 		InvalidTargets: RadiationImmmune
-		Spread: 1000
-		Falloff: 100, 50, 25
-		Level: 20
+		#Falloff: 100, 75, 66, 50, 33, 25, 20, 10
+		Falloff: 100, 85, 70, 55, 40, 25, 10
+		Spread: 500
+		Level: 25
 		MaxLevel: 1000
 		LayerName: ra2radiation
 
@@ -182,18 +234,21 @@ RA2GIRocketsG:
 	Projectile: Missile
 		Speed: 500
 		MinimumLaunchAngle: 200
+		MaximumLaunchAngle: 200
+		HorizontalRateOfTurn: 128
+		VerticalRateOfTurn: 128
 		Acceleration: 5
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: AreaDamage
 		Damage: 24000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 12
 
 RA2GIRocketsG_elite:
 	Inherits: RA2GIRocketsG
 	Range: 7567
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: AreaDamage
 		Damage: 48000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		Damage: 24
 	Projectile: Missile
 		Image: red_dragon
@@ -203,209 +258,6 @@ RA2GIRocketsG_elite:
 		ContrailStartColor: E60000
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-
-RA2Patriot:
-	Inherits: ^RA2MediumMissile
-	ReloadDelay: 30
-	Range: 14150
-	Burst: 2
-	BurstDelays: 6
-	ValidTargets: Air
-	Report: vifvatta.wav
-	Projectile: Missile
-		Speed: 600
-		MinimumLaunchAngle: 60
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 10000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 5
-
-HarrierMissiles:
-	Inherits: ^Grenade
-	Inherits: ^HeavyMissile
-	Inherits: ^RA2MediumMissile
-	ReloadDelay: 50
-	Burst: 4
-	BurstDelays: 2
-	Range: 7000
-	Report: vintatta.wav
-	MinRange: 1000
-	ValidTargets: Ground, Water, Air, Trees
-	Projectile: Missile
-		Inaccuracy: 300
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
-		Damage: 2000
-		ValidRelationships: Neutral, Enemy
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
-		Damage: 1000
-		ValidRelationships: Neutral, Enemy
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
-		Damage: 1
-		ValidRelationships: Neutral, Enemy
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
-		Damage: 2000
-		ValidRelationships: Neutral, Enemy
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
-		Damage: 1
-		ValidRelationships: Neutral, Enemy
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
-		Damage: 2000
-		ValidRelationships: Neutral, Enemy
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
-		Damage: 1
-		ValidRelationships: Neutral, Enemy
-
-HarrierMissiles_elite:
-	Inherits: HarrierMissiles
-	Burst: 8
-	Range: 8000
-	Projectile: Missile
-		Inaccuracy: 600
-		Speed: 600
-		Image: red_dragon
-		TrailImage: red_smokey
-		ContrailColor: e60000
-		ContrailStartColor: E60000
-		ContrailEndColorUsePlayerColor: true
-		ContrailEndColor: FFFFFF
-
-BlackEagleMissiles:
-	Inherits: ^Grenade
-	Inherits: ^HeavyBomb
-	Inherits: ^RA2MediumMissile
-	ReloadDelay: 50
-	Burst: 4
-	BurstDelays: 2
-	Range: 9000
-	Report: vbleatta.wav, vbleattb.wav
-	ValidTargets: Ground, Water
-	TargetActorCenter: true
-	Projectile: Missile
-		Speed: 400
-		Arm: 2
-		Inaccuracy: 2000
-		RangeLimit: 20000
-		Image: d2k_missile2
-		Palette: d2keffect
-		TrailImage: large_trail
-		MinimumLaunchAngle: 200
-		MaximumLaunchAngle: 200
-		MaximumLaunchSpeed: 200
-		MinimumLaunchSpeed: 200
-		Acceleration: 10
-	Warhead@Grenade: SpreadDamage
-		Damage: 16000
-		ValidTargets: Ground, Water
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 8000
-		ValidTargets: Ground, Water
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 8
-		ValidTargets: Ground, Water
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 16000
-		ValidTargets: Ground, Water
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		Damage: 8
-		ValidTargets: Ground, Water
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 16000
-		ValidTargets: Ground, Water
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 8
-		ValidTargets: Ground, Water
-
-BlackEagleMissiles_elite:
-	Inherits: BlackEagleMissiles
-	Range: 10000
-	Burst: 8
-	Projectile: Missile
-		Image: red_dragon
-		TrailImage: red_smokey
-		ContrailColor: e60000
-		ContrailStartColor: E60000
-		ContrailEndColorUsePlayerColor: true
-		ContrailEndColor: FFFFFF
-
-PrismCharge:
-	ReloadDelay: 3
-	Range: 9630
-	ValidTargets: Ground, Water, Air
-	Report: bpriat1a.wav
-	Projectile: PlasmaBeam
-		Width: 75
-		Duration: 50
-		ZOffset: 2047
-		UsePlayerColor: true
-		SecondaryBeamWidth: 50
-		SecondaryBeamZOffset: 2047
-		Colors: 88888888
-		CenterBeam: true
-		CenterBeamWidth: 50
-		CenterBeamColor: CCCCCCCC
-		SecondaryCenterBeam: true
-		SecondaryCenterBeamColor: FFFFFFFF
-		# Distortion: 10
-		# DistortionAnimation: 10
-		# DistortionAnimation: 10
-	Warhead@1Dum: Dummy
-
-PrismTankCharge:
-	Inherits: PrismCharge
-	ReloadDelay: 100
-	Range: 10000
-	ValidTargets: PrismTowerChargeable
-	Projectile: PlasmaBeam
-		StartOffset: -256,0,1408
-		TargetActorCenter: false
-	Warhead@charge: GrantExternalCondition
-		Range: 256
-		Duration: 100
-		Condition: powercharged
-		ValidRelationships: Ally
-		ValidTargets: PrismTowerChargeable
-
-PrismTankChargeE:
-	Inherits: PrismTankCharge
-	Range: 11111
-
-RA2PrismBeam:
-	ReloadDelay: 3
-	Range: 9630
-	Projectile: LaserZapCA
-		Width: 128
-		Duration: 48
-		ZOffset: 2047
-		Color: FFFFFF55
-		UsePlayerColor: true
-		SecondaryBeam: true
-		SecondaryBeamWidth: 64
-		SecondaryBeamZOffset: 2047
-		SecondaryBeamColor: FFFFFFFF
-		SecondaryBeamUsePlayerColor: false
-
-RA2Prism:
-	Inherits: ^LaserWeapon
-	Inherits@Effects: RA2PrismBeam
-	Report: bpriat1a.wav
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 32000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 16
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@3: FireShrapnel
-		Weapon: PrismScatter
-		Amount: 4
-		AimChance: 50
-		AimTargetStances: Enemy, Neutral
 
 RA2PrismBeam2:
 	Inherits: RA2PrismBeam
@@ -419,303 +271,51 @@ RA2PrismBeam3:
 		Width: 256
 		SecondaryBeamWidth: 128
 
-PrismScatter:
-	Inherits: RA2Prism
-	Range: 3333
-	-Report:
-	Projectile: LaserZap
-		Width: 96
-		SecondaryBeamWidth: 48
-		Duration: 24
-		-HitAnim:
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@3: FireShrapnel
-		Weapon: PrismScatter2
-		Amount: 3
-		AimChance: 50
-		AimTargetStances: Enemy, Neutral
-
-PrismScatter2:
-	Inherits: PrismScatter
-	Range: 2500
-	Projectile: LaserZap
-		Width: 64
-		SecondaryBeamWidth: 32
-		Duration: 12
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	-Warhead@3:
-
-PrismScatterE:
-	Inherits: PrismScatter
-	Range: 5000
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 6000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 3
-	Warhead@3: FireShrapnel
-		Weapon: PrismScatter2
-		Amount: 4
-		AimChance: 50
-		AimTargetStances: Enemy, Neutral
-
-RA2Comet:
-	Inherits: ^Grenade
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^RA2LaserWeapon
-	InvalidTargets: PrismTowerChargeable
-	ReloadDelay: 125
-	Range: 11111
-	Report: vpriatta.wav
-	Projectile: LaserZapCA
-		Width: 128
-		Duration: 48
-		ZOffset: 2047
-		Color: FFFFFF55
-		UsePlayerColor: true
-		SecondaryBeam: true
-		SecondaryBeamWidth: 64
-		SecondaryBeamZOffset: 2047
-		SecondaryBeamColor: FFFFFFFF
-		SecondaryBeamUsePlayerColor: false
-	Warhead@Grenade: SpreadDamage
-		Damage: 20000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 10000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 10
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@MediumFlameWeapon: SpreadDamage
-		Damage: 20000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 10
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 20000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 10
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@3: FireShrapnel
-		InvalidTargets: FireImmune
-		Weapon: PrismScatter
-		Amount: 4
-		AimChance: 50
-		AimTargetStances: Enemy, Neutral
-
-RA2Comet_elite:
-	Inherits: RA2Comet
-	Range: 12345
-	Projectile: LaserZap
-		Color: E60000
-	Warhead@3: FireShrapnel
-		InvalidTargets: FireImmune
-		Weapon: PrismScatterE
-		Amount: 5
-		AimChance: 50
-		AimTargetStances: Enemy, Neutral
-
-RA2GrandCannonWeapon:
-	Inherits: ^HeavyCannon
-	Inherits: ^HeavyBomb
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^LightChemicalWeapon
-	Inherits: ^RA2Grenade
-	ReloadDelay: 200
-	Report: bgraatta.wav
-	Range: 11800
-	MinRange: 2950
-	Projectile: Bullet
-		Blockable: false
-		Speed: 500
-		ContrailLength: 50
-		LaunchAngle: 50
-		TrailImage: black_smokey
-		TrailPalette: effect75alpha
-		ContrailStartColor: FFAA44
-		ContrailEndColor: FFFFFF
-		ContrailEndColorUsePlayerColor: true
-		ContrailDelay: 0
-		ContrailStartWidth: 75
-		ContrailEndWidth: 25
-		TrailInterval: 1
-	Warhead@HeavyCannon: SpreadDamage
-		Damage: 50000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		Damage: 25
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 50000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		Damage: 25
-	Warhead@MediumFlameWeapon: SpreadDamage
-		Damage: 50000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 25
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 50000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 25
-	Warhead@LightChemicalWeapon: SpreadDamage
-		Damage: 50000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 25
-	Warhead@Grenade: SpreadDamage
-		Damage: 50000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 25
-	Warhead@EffectWater: CreateEffect
-		Explosions: large_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-
 RA2105mm:
 	Inherits: ^RA2MediumCannon
-	ReloadDelay: 70
-	Range: 5000
+	ReloadDelay: 45
+	Range: 5289
 	Report: vgriatta.wav, vgriattb.wav, vgriattc.wav
 	Projectile: Bullet
-		Speed: 500
-	Warhead@MediumCannon: SpreadDamage
+		Speed: 528
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 8000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 
 RA2105mm_elite:
 	Inherits: RA2105mm
 	Inherits@Elite: ^RA2EliteEffects
-	Range: 6000
+	Range: 6289
 	Burst: 2
 	BurstDelays: 3
 
 RA2sabot:
 	Inherits: ^RA2TankDestroyerCannon
-	ReloadDelay: 90
-	Range: 6187
+	ReloadDelay: 160
+	Range: 7040
 	Projectile: Bullet
-		Speed: 618
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 30000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		Damage: 15
+		Speed: 1408
+	Warhead@CannonAP_Light: AreaDamage
+		Damage: 80000
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+		Damage: 40
 
 RA2sabot_elite:
 	Inherits: RA2sabot
 	Inherits@Elite: ^RA2EliteEffects
-	Range: 7187
-	Burst: 2
-	BurstDelays: 5
-
-RA2Robotmm:
-	Inherits: ^TeslaWeapon
-	Inherits: ^LaserWeapon
-	Inherits: ^RA2RailgunWeapon
-	Range: 5130
-	ReloadDelay: 48
-	Report: vrobatta.wav
-	ValidTargets: Ground, Water, Trees, Air
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 8000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 4000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 4
-	Warhead@LaserWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 8000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 4
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 8000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 4
-
-RA2Robotmm_elite:
-	Inherits: RA2Robotmm
-	Range: 6130
-	Warhead@Effect: CreateEffect
-		Explosions: blue_building
-		ImpactSounds: psahit00.aud
-		ExplosionPalette: effect
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ImpactSounds: gexpwala.wav
-	Warhead@Scatter: FireShrapnel
-		Weapon: RA2Robotmm_eliteScatter
-		Amount: 3
-		AimChance: 50
-		AimTargetStances: Enemy, Neutral
-		ValidTargets: Ground, Water, Trees, Air
-
-RA2Robotmm_eliteScatter:
-	Inherits: RA2Robotmm_elite
-	Range: 2565
-	-Report:
-	Projectile: Railgun
-		-HitAnim:
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 2000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 2
-	Warhead@LaserWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 4000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 2
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 4000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 2
-	-Warhead@Scatter: FireShrapnel
-	Warhead@Effect: CreateEffect
-		Explosions: blue_med_frag
-		ImpactSounds: xplos.aud
-		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+	Range: 8040
+	Warhead@CannonAP_Light: AreaDamage
+		Damage: 160000
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+		Damage: 80
 
 RA2MirageGun:
 	Inherits: ^RailgunWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^RA2TankDestroyerCannon
-	ReloadDelay: 46
-	Range: 5913
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^RA2TankDestroyerCannon
+	ReloadDelay: 39
+	Range: 6031
 	Report: vmiratta.wav
 	Projectile: InstantHit
 	Warhead@RailgunWeapon: SpreadDamage
@@ -733,93 +333,39 @@ RA2MirageGun:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: AreaDamage
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@Effect:
+	Warhead@Effect: CreateEffect
 		Explosions: ra2_iron_fx
 		-ImpactSounds:
-	Warhead@EffectWater:
-
-RA2MirageGun_elite:
-	Inherits: RA2MirageGun
-	Inherits@Elite: ^RA2EliteEffects
-	Range: 6913
-	Burst: 2
-	BurstDelays: 3
-
-RA2HeavyMirageGun:
-	Inherits: ^RailgunWeapon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^RA2TankDestroyerCannon
-	ReloadDelay: 51
-	Range: 6112
-	Report: vmiratta.wav
-	Projectile: InstantHit
-	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 8000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		Damage: 4
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 8000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 4
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 8000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 4
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 8000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		Damage: 4
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@Effect:
-		Explosions: ra2_iron_fx
-		-ImpactSounds:
-	Warhead@EffectWater:
-
-RA2HeavyMirageGun_elite:
-	Inherits: RA2HeavyMirageGun
-	Inherits@Elite: ^RA2EliteEffects
-	Range: 7112
-	Burst: 2
-	BurstDelays: 3
 
 RA2HoverMissile:
-	Inherits: ^ArrowWeapon
-	Inherits: ^RA2LightMissile
+	Inherits: ^Warhead_Arrow_Light
+	Inherits@2: ^RA2LightMissile
 	Range: 5760
 	ReloadDelay: 28
 	Burst: 2
 	BurstDelays: 4
 	Report: vifvatta.wav
-	Warhead@ArrowWeapon: SpreadDamage
+	ValidTargets: Ground, Water
+	Warhead@Arrow_Light:
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@Arrow_Light_Percentage:
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: AreaDamage
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
@@ -839,9 +385,117 @@ RA2HoverMissile_elite:
 		Explosions: ra2_medium_grey_explosion
 		ImpactSounds: gexp15a.wav
 
+RA2HoverMissile_AA:
+	Inherits: RA2HoverMissile
+	ValidTargets: Air
+	Range: 8640
+
+RA2HoverMissile_AA_elite:
+	Inherits: RA2HoverMissile_elite
+	ValidTargets: Air
+	Range: 9640
+
+RA2ThunderboltMissile:
+	Inherits: ^HeavyMissile
+	Inherits@2: ^HeavyAAWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^FlakWeapon
+	Inherits@5: RA2HoverMissile
+	Projectile: Missile
+		Speed: 800
+		Arm: 2
+		Inaccuracy: 400
+		RangeLimit: 16000
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		MinimumLaunchAngle: 25
+		MaximumLaunchAngle: 125
+		MaximumLaunchSpeed: 400
+		MinimumLaunchSpeed: 400
+		Acceleration: 10
+		ContrailStartColor: EEEE00
+		ContrailEndColor: FFFFFF
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyAAWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ArrowWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MissileAP_Light: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+
+RA2ThunderboltMissile_elite:
+	Inherits: RA2ThunderboltMissile
+	Range: 6760
+	Burst: 4
+	Projectile: Missile
+		Image: red_dragon
+		Shadow: true
+		TrailImage: red_smokey
+		ContrailStartColor: e60000
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_medium_grey_explosion
+		ImpactSounds: gexp15a.wav
+
+RA2ThunderboltMissile_AA:
+	Inherits: RA2ThunderboltMissile
+	ValidTargets: Air
+	Range: 8640
+
+RA2ThunderboltMissile_AA_elite:
+	Inherits: RA2ThunderboltMissile_elite
+	ValidTargets: Air
+	Range: 9640
+
 RA2MultiHoverMissile:
-	Inherits: ^RA2MediumMissile
-	Inherits@2: RA2HoverMissile
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: RA2HoverMissile
+	Range: 6170
+	ReloadDelay: 20
 	Burst: 4
 	Report: vifvatta.wav
 	Projectile: Missile
@@ -856,40 +510,142 @@ RA2MultiHoverMissile:
 		MaximumLaunchSpeed: 64
 		MinimumLaunchSpeed: 128
 		Acceleration: 16
+	Warhead@ArrowWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MissileAP_Light: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@CannonHE_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@CannonHE_Medium_Percentage:
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+
+RA2MultiHoverMissile_elite:
+	Inherits: RA2MultiHoverMissile
+	Range: 7170
+	Burst: 4
+	Projectile: Missile
+		Image: red_dragon
+		Shadow: true
+		TrailImage: red_smokey
+		ContrailStartColor: e60000
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_medium_grey_explosion
+		ImpactSounds: gexp15a.wav
+
+RA2MultiHoverMissile_AA:
+	Inherits: RA2MultiHoverMissile
+	ValidTargets: Air
+	Range: 9255
+
+RA2MultiHoverMissile_AA_elite:
+	Inherits: RA2MultiHoverMissile_elite
+	ValidTargets: Air
+	Range: 10255
+
+RA2MultiThunderboltMissile:
+	Inherits: ^HeavyMissile
+	Inherits@2: ^HeavyAAWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^FlakWeapon
+	Inherits@5: RA2MultiHoverMissile
+	Projectile: Missile
+		Speed: 800
+		Arm: 2
+		Inaccuracy: 400
+		RangeLimit: 16000
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		MinimumLaunchAngle: 25
+		MaximumLaunchAngle: 125
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Acceleration: 10
+		ContrailStartColor: EEEE00
+		ContrailEndColor: FFFFFF
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyAAWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 6000
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 3
-
-RA2TURRETFLAKAA:
-	Inherits: ^RA2FlakWeapon
-	Range: 12936
-	ReloadDelay: 15
-	ValidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@FlakWeapon: SpreadDamage
-		Damage: 10000
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 5
-	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
-		ValidTargets: Air
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
-SeaScorpionAA:
-	Inherits: ^RA2FlakWeapon
-	Range: 13500
-	ReloadDelay: 17
+RA2MultiThunderboltMissile_elite:
+	Inherits: RA2MultiThunderboltMissile
+	Range: 7170
+	Burst: 4
+	Projectile: Missile
+		Image: red_dragon
+		Shadow: true
+		TrailImage: red_smokey
+		ContrailStartColor: e60000
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_medium_grey_explosion
+		ImpactSounds: gexp15a.wav
+
+RA2MultiThunderboltMissile_AA:
+	Inherits: RA2MultiThunderboltMissile
 	ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 8000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 4
-	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
-		ValidTargets: Air
+	Range: 9255
+
+RA2MultiThunderboltMissile_AA_elite:
+	Inherits: RA2MultiThunderboltMissile_elite
+	ValidTargets: Air
+	Range: 10255
 
 RA2DepthCharge:
 	Inherits: DepthCharge
@@ -918,126 +674,16 @@ RA2DepthCharge:
 		ValidTargets: Submarine, Ship
 		InvalidTargets: Underwater
 
-RA2KirovBomb:
-	Inherits: ^HeavyBomb
-	ReloadDelay: 50
-	Range: 2500
-	Report: vkiratta.wav
-	TargetActorCenter: true
-	Projectile: GravityBomb
-		Velocity: 0, 0, -50
-		Acceleration: 0, 0, -10
-		Image: ra2zbomb
-		Palette: playerra2
-		IsPlayerPalette: true
-		Shadow: True
-	Warhead@HeavyBomb: SpreadDamage
-		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Ship, Trees
-		Damage: 100000
-		Spread: 1000
-	Warhead@HeavyBombFriendlyFire: SpreadDamage
-		ValidRelationships: Ally
-		Damage: 50000
-		Spread: 500
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidRelationships: Neutral, Enemy
-		Damage: 50
-		Spread: 1000
-	Warhead@EffectWater: CreateEffect
-		Explosions: large_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	-Warhead@Effect1:
-	-Warhead@Effect2:
-
-RA2KirovBomb_rad:
-	Inherits: RA2KirovBomb
-	Inherits@rad: ^RA2RadShell
-	Warhead@Radiation: CreateTintedCells
-		Falloff: 100, 50, 33, 25, 20
-		Level: 150
-	Warhead@HeavyBomb: SpreadDamage
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyBombFriendlyFire: SpreadDamage
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-
-RA2KirovBombElite:
-	Inherits: ^TeslaWeapon
-	Inherits: RA2KirovBomb
-	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 100000
-		Spread: 1000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 50000
-		Spread: 2000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		Damage: 50
-		Spread: 1000
-	Warhead@HeavyBomb: SpreadDamage
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyBombFriendlyFire: SpreadDamage
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Effect1: CreateEffect
-		Delay: 0
-		Explosions: ra2_kirovtesla
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpapoa.wav
-		ValidTargets: Ground, Ship, Trees
-	Warhead@Shrapnel: FireShrapnel
-		InvalidTargets: FireImmune
-		Weapon: TeslaFragment
-		Amount: 3
-		AimChance: 100
-		AimTargetStances: Enemy, Neutral
-	#Warhead@Radiation: CreateTintedCells
-	#	Spread: 1c512
-	#	Falloff: 100, 66, 33
-	#	Level: 300
-	#	LayerName: ra2radiation
-
-RA2KirovBombElite_rad:
-	Inherits@rad: ^NuclearWarhead
-	Inherits: RA2KirovBomb_rad
-	Warhead@NuclearWarhead: SpreadDamage
-		Damage: 100000
-		Spread: 1000
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
-		Damage: 50
-		Spread: 1000
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Effect: CreateEffect
-		Delay: 0
-		Explosions: ra2_terrorist_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpapoa.wav
-		ValidTargets: Ground, Ship, Trees
-	Warhead@Radiation: CreateTintedCells
-		Spread: 1c512
-		Falloff: 100, 66, 33
-		Level: 300
-		LayerName: ra2radiation
-
 RA2IMPAA:
 	Inherits: RA2IMP
-	Range: 8c0
+	Range: 8192
 	ValidTargets: Air
 	Warhead@1Dam_impact: SpreadDamage
 		ValidTargets: Air
 
 RA2TRIPODLAZER:
 	ReloadDelay: 5
-	Range: 12c0
+	Range: 12288
 	Report: raycharge.aud
 	ValidTargets: Air
 	InvalidTargets: Ground
@@ -1062,7 +708,7 @@ RA2TRIPODLAZER:
 RA2TRIPODPLAZMA:
 	Inherits: ^AntiGroundMissile
 	ReloadDelay: 100
-	Range: 5c0
+	Range: 5120
 	BurstDelays: 2
 	Burst: 6
 	Report: dsplasma.aud
@@ -1075,7 +721,7 @@ RA2TRIPODPLAZMA:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 0c213
 		Damage: 5000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 20
 			Wood: 75
@@ -1084,13 +730,13 @@ RA2TRIPODPLAZMA:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
 
 RA2REVENANT:
 	ReloadDelay: 75
-	Range: 10c0
+	Range: 10240
 	Report: dsfirsht.aud
 	Projectile: Bullet
 		Speed: 270
@@ -1100,7 +746,7 @@ RA2REVENANT:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 0c308
 		Damage: 10000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 40
 			Wood: 40
@@ -1110,15 +756,15 @@ RA2REVENANT:
 			Concrete: 30
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: dsfirxpl.aud
 
 RA2REVENANTAA:
 	Inherits: ^AntiAirMissile
 	ReloadDelay: 75
-	Range: 10c0
-	MinRange: 0c512
+	Range: 10240
+	MinRange: 2050
 	Report: turret1.aud
 	Projectile: Missile
 		Arm: 3
@@ -1140,13 +786,13 @@ RA2REVENANTAA:
 			Medium: 70
 			Heavy: 100
 			Concrete: 50
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: dsfirxpl.aud
 
 RA2PINKY:
 	ReloadDelay: 150
-	Range: 12c0
+	Range: 12288
 	Report: DemonShoot.aud
 	Projectile: Bullet
 		Blockable: false
@@ -1159,7 +805,7 @@ RA2PINKY:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 0c512
 		Damage: 24000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 90
 			Wood: 75
@@ -1177,7 +823,7 @@ RA2PINKY:
 
 RA2ZEPDOOM:
 	Inherits: RA2PINKY
-	Range: 2c0
+	Range: 2048
 	ReloadDelay: 8
 	Projectile: Bullet
 		Velocity: 0, 0, -224
@@ -1190,7 +836,7 @@ RA2ZEPDOOM:
 
 RA2MUTA:
 	ReloadDelay: 60
-	Range: 3c0
+	Range: 3072
 	Report: DemonShoot.aud
 	ValidTargets: Ground, Air
 	Projectile: Bullet
@@ -1204,7 +850,7 @@ RA2MUTA:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 0c384
 		Damage: 8000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Versus:
 			None: 90
 			Wood: 75
@@ -1226,7 +872,7 @@ RA2MUTA:
 
 RA2FlameCluster:
 	Inherits: CHFlameRadiation
-	Range: 0c512
+	Range: 512
 	Projectile: Bullet
 		Speed: 255
 		Blockable: false
@@ -1242,10 +888,12 @@ RA2ThermobaricFlame:
 		Damage: 600
 		Versus:
 			Wood: 20
+	Warhead@Flame_Medium_FriendlyFire: SpreadDamage
+		Spread: 125
 
 RA2FLOATER:
 	ReloadDelay: 45
-	Range: 4c0
+	Range: 4096
 	Report: DemonShoot.aud
 	ValidTargets: Ground
 	Projectile: Bullet
@@ -1281,182 +929,20 @@ RA2FLOATER:
 
 RA2120mm:
 	Inherits: ^RA2MediumCannon
-	Range: 5142
+	Range: 5374
 	ReloadDelay: 54
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 	Projectile: Bullet
 		Speed: 514
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 10000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
-
-RA2120mm_rad:
-	Inherits: RA2120mm
-	Inherits@rad: ^RA2RadShell
 
 RA2120mm_elite:
 	Inherits: RA2120mm
 	Inherits@Elite: ^RA2EliteEffects
-	Range: 6200
-	Burst: 2
-	BurstDelays: 3
-
-RA2120mm_elite_rad:
-	Inherits: RA2120mm_elite
-	Inherits@rad: ^RA2RadShell
-
-RA160mm:
-	Inherits: ^RA2MediumCannon
-	Inherits: ^RA2Grenade
-	ReloadDelay: 90
-	Range: 11111
-	MinRange: 2222
-	Report: vdesatta.wav, vdesattb.wav
-	Projectile: Bullet
-		LaunchAngle: 111
-		Inaccuracy: 1111
-		Speed: 333
-		ContrailLength: 25
-		ContrailStartColor: BB8866
-		ContrailStartWidth: 55
-		ContrailEndColor: FFFFFF
-		ContrailEndColorUsePlayerColor: true
-	Warhead@Grenade: SpreadDamage
-		Damage: 40000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 20000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 20
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 40000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		Damage: 20
-
-RA160mm_rad:
-	Inherits: RA160mm
-	Inherits@rad: ^RA2RadShell
-
-RA160mmE_elite:
-	Inherits: RA160mm
-	Inherits@Elite: ^RA2EliteEffects
-	Range: 12345
-	Burst: 2
-	BurstDelays: 3
-
-RA160mmE_elite_rad:
-	Inherits: RA160mmE_elite
-	Inherits@rad: ^RA2RadShell
-
-RA2120xmm:
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2HeavyCannon
-	Range: 6992
-	ReloadDelay: 63
-	Burst: 2
-	BurstDelays: 5
-	Report: vapoat1a.wav
-	Projectile: Bullet
-		Speed: 699
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@HeavyCannon: SpreadDamage
-		Damage: 4000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_apoc_explosion
-		ImpactSounds: gexpapoa.wav
-
-RA2120xmm_rad:
-	Inherits: RA2120xmm
-	Inherits@rad: ^RA2RadShell
-
-RA2120xmm_elite:
-	Inherits: RA2120xmm
-	Inherits@Elite: ^RA2EliteEffects
-	Range: 7992
-	Burst: 4
-	BurstDelays: 3
-
-RA2120xmm_elite_rad:
-	Inherits: RA2120xmm_elite
-	Inherits@rad: ^RA2RadShell
-
-RA2Lashmm:
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^LightFlameWeapon
-	Inherits: ^MediumChemicalWeapon
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^RA2MediumCannon
-	ReloadDelay: 37
-	Range: 4904
-	Report: vlasatta.wav
-	Projectile: Bullet
-		Speed: 480
-	Warhead@Grenade: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightFlameWeapon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-
-RA2Lashmm_elite:
-	Inherits: RA2Lashmm
-	Inherits@Elite: ^RA2EliteEffects
-	Range: 5904
+	Range: 6374
 	Burst: 2
 	BurstDelays: 3
 
@@ -1470,10 +956,10 @@ RA2155mm:
 		Blockable: false
 		Speed: 800
 		ContrailLength: 8
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 16000
 		Spread: 400
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 8
 		Spread: 400
 
@@ -1486,15 +972,15 @@ RA2155mm_elite:
 
 RA28Inch:
 	Inherits: ^RA2HeavyCannon
-	MinRange: 1c0
+	MinRange: 615
 	ReloadDelay: 1
-	Range: 3c0
+	Range: 3072
 	Report: turret1.aud
 	TargetActorCenter: true
 	Projectile: Bullet
 		Inaccuracy: 1c938
 		ContrailLength: 30
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		Spread: 213
 		Damage: 1500
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
@@ -1502,150 +988,6 @@ RA28Inch:
 ####################################################################################################
 #		Laser and Zaps
 ####################################################################################################
-
-RA2DiskLaser:
-	Inherits: ^LaserWeapon
-	ReloadDelay: 60
-	Range: 6000
-	Report: vfloatta.wav
-	ValidTargets: Ground, Water, Air
-	InvalidTargets: DiskSteal
-	Projectile: LaserZap
-		Width: 50
-		Duration: 15
-		Color: aa7799
-		SecondaryBeam: true
-		SecondaryBeamWidth: 25
-		SecondaryBeamZOffset: 2047
-		SecondaryBeamColor: FFFFFF80
-		UsePlayerColor: false
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 24000
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 12
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-
-RA2DiskDrain:
-	Inherits: ^MagicWeapon
-	Inherits: ^TeslaWeapon
-	ReloadDelay: 5
-	Range: 125
-	MinRange: 1
-	Report: vflolo5a.wav, vflolo5b.wav
-	ValidTargets: Ground, Water
-	InvalidTargets: DiskSteal
-	TargetActorCenter: true
-	Projectile: InstantHit
-	Warhead@drain: GrantExternalCondition
-		ValidTargets: Ground, Water
-		Range: 250
-		Duration: 5
-		Condition: diskdrain
-	Warhead@MagicWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	-Warhead@Effect:
-
-RA2DiskSteal:
-	ReloadDelay: 5
-	Range: 0c256
-	MinRange: 0c1
-	TargetActorCenter: true
-	ValidTargets: DiskSteal
-	Projectile: InstantHit
-	Warhead@Steal: StealResource
-		Cash: 200
-		ValidTargets: DiskSteal
-		ValidRelationships: Neutral, Enemy
-	Warhead@2Dam: TargetDamage
-		ValidTargets: DiskSteal
-		ValidRelationships: Neutral, Enemy
-
-RA2Magnet:
-	Inherits: ^RA2LaserWeapon
-	Range: 7032
-	ValidTargets: Vehicle, Structure
-	ReloadDelay: 200
-	Burst: 100
-	BurstDelays: 1
-	-Report:
-	StartBurstReport: vmagatta.wav
-	TargetActorCenter: true
-	Projectile: LaserZap
-		Shape: Flat
-		Width: 350
-		Duration: 100
-		Color: FF55F505
-		-HitAnim:
-	Warhead@LaserWeapon: SpreadDamage
-		Range: 0, 32
-		Falloff: 100, 100
-		Damage: 2000
-		ValidTargets: Vehicle, Structure
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Range: 0, 32
-		Falloff: 100, 100
-		Damage: 1
-		ValidTargets: Vehicle, Structure
-	Warhead@Condition: GrantExternalCondition
-		Condition: Magnet
-		Duration: 100
-		Range: 500
-		ValidTargets: Vehicle
-	-Warhead@EffectAir:
-	-Warhead@Smudge:
-
-RA2MagnetAA:
-	Inherits: RA2Magnet
-	ValidTargets: Vehicle, Air, Structure
-	InvalidTargets: Paratrooper
-	Warhead@LaserWeapon: SpreadDamage
-		ValidTargets: Vehicle, Air, Structure
-		InvalidTargets: Paratrooper
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Vehicle, Air, Structure
-		InvalidTargets: Paratrooper
-	Warhead@Condition: GrantExternalCondition
-		ValidTargets: Vehicle, Air
-		InvalidTargets: Paratrooper
-
-RA2Magnet_elite:
-	Inherits: RA2Magnet
-	Range: 8032
-	Projectile: LaserZap
-		Color: e6000045
-
-RA2MagnetAA_elite:
-	Inherits: RA2Magnet_elite
-	ValidTargets: Vehicle, Air, Structure
-	InvalidTargets: Paratrooper
-	Warhead@LaserWeapon: SpreadDamage
-		ValidTargets: Vehicle, Air, Structure
-		InvalidTargets: Paratrooper
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Vehicle, Air, Structure
-		InvalidTargets: Paratrooper
-	Warhead@Condition: GrantExternalCondition
-		ValidTargets: Vehicle, Air
-		InvalidTargets: Paratrooper
 
 RA2ChronoTele:
 	ReloadDelay: 180
@@ -1676,22 +1018,6 @@ ChronoBeam:
 		DamageTypes: ChronoDeath
 		ValidTargets: Chronobeamable
 
-ChronoBeam_elite:
-	Inherits: ChronoBeam
-	Projectile: LaserZap
-		Width: 75
-		Duration: 15
-		Color: AADDFF
-		SecondaryBeam: true
-		SecondaryBeamWidth: 25
-		SecondaryBeamZOffset: 2047
-		SecondaryBeamColor: FFFFFF80
-	Warhead@Damage: WarpDamage
-		Damage: 400
-		Spread: 1
-		DamageTypes: ElectricityDeath
-		ValidTargets: Chronobeamable
-
 IFVChronoSound:
 	Inherits: RA2ChronoTele
 	Range: 8000
@@ -1703,7 +1029,9 @@ IFVChronoBeam:
 		Damage: 600
 
 SonicZap:
-	Inherits: ^MagicWeapon
+	Inherits@wh: ^Warhead_Magic_Heavy
+	Inherits@proj: ^Projectile_Magic_Heavy
+	Inherits@fx: ^Effect_Magic_Heavy
 	ReloadDelay: 60
 	Range: 6000
 	Report: vdolatta.wav
@@ -1718,7 +1046,7 @@ SonicZap:
 		BeyondTargetRange: 256
 		Blockable: true
 		Color: 55FFFF55
-	Warhead@MagicWeapon: SpreadDamage
+	Warhead@Magic_Heavy:
 		Range: 0, 32
 		Falloff: 100, 50
 		Damage: 2000
@@ -1726,7 +1054,7 @@ SonicZap:
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Water, Underwater
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+	Warhead@Magic_Heavy_Percentage: HealthPercentageDamage
 		Range: 0, 32
 		Falloff: 100, 50
 		Damage: 1
@@ -1767,80 +1095,18 @@ SonicZapFriendly:
 RA2IFVRepair:
 	Inherits: ^RepairWeapon
 	Range: 5000
-	ReloadDelay: 30
-
-RA2CoilBolt:
-	Inherits: ^TeslaWeapon
-	Range: 8842
-	ReloadDelay: 3
-	Report: btesat1a.wav
-	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 64000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 32000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		Damage: 32
-
-RA2CoilBolt2:
-	Inherits: RA2CoilBolt
-	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 64000
-
-RA2CoilBolt3:
-	Inherits: RA2CoilBolt2
-	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaFragment2
-		Amount: 1
-		AimChance: 100
-		AllowDirectHit: true
-		AimTargetStances: Enemy, Neutral
-
-RA2OPCoilBolt1:
-	Inherits: ^TeslaChargedWeapon
-	Range: 9284
-	ReloadDelay: 3
-	Report: btesat2a.wav
-	Warhead@TeslaChargedWeapon: SpreadDamage
-		Damage: 64000
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
-		Damage: 32000
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
-		Damage: 32
-	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaFragment
-		Amount: 1
-		AimChance: 100
-		AllowDirectHit: true
-		AimTargetStances: Enemy, Neutral
-
-RA2OPCoilBolt2:
-	Inherits: RA2OPCoilBolt1
-	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 128000
-	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaFragment2
-		Amount: 1
-		AimChance: 100
-		AllowDirectHit: true
-		AimTargetStances: Enemy, Neutral
-
-RA2OPCoilBolt3:
-	Inherits: RA2OPCoilBolt2
-	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaFragmentLarge
-		Amount: 1
-		AimChance: 100
-		AllowDirectHit: true
-		AimTargetStances: Enemy, Neutral
+	ReloadDelay: 50
 
 TeslaFragmentLarge:
-	Inherits: ^TeslaChargedWeapon
+	Inherits@wh: ^Warhead_Tesla_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
 	Range: 3333
-	Warhead@TeslaChargedWeapon: SpreadDamage
+	Warhead@Tesla_Super:
 		Damage: 16000
-	Warhead@TeslaChargedExtraDamage: SpreadDamage
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		Damage: 8000
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
@@ -1854,9 +1120,14 @@ TeslaFragmentLarge:
 RA2TeslaCoilCharge:
 	ReloadDelay: 25
 	Range: 3333
-	Report: iteschaa.wav
 	ValidTargets: TeslaCoil
-	Projectile: TeslaZap
+	Projectile: LightningZap
+		CoreWidth: 16
+		GlowWidth: 32
+		GlowAlpha: 80
+		GlowScale: 0
+		Branches: 0
+		NodeRadius: 0
 	Warhead@Con: GrantExternalCondition
 		Condition: TeslaCoilCharge
 		Duration: 75
@@ -1871,191 +1142,233 @@ RA2TeslaCoilCharge:
 RA2TeslaCoilCharge_cosmetic:
 	ReloadDelay: 100
 	Range: 3333
-	Report: iteschaa.wav
 	ValidTargets: TeslaCoil
-	Projectile: TeslaZap
+	Projectile: LightningZap
+		CoreWidth: 16
+		GlowWidth: 32
+		GlowAlpha: 80
+		GlowScale: 0
+		Branches: 0
+		NodeRadius: 0
 
-RA2PortaTesla:
-	Inherits: ^TeslaWeapon
-	Range: 5222
-	ReloadDelay: 100
-	Report: itesatta.wav
-	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 24000
+TeslaArmorDischargeDummy:
+	Inherits: ^Warhead_MissileAP_Light
+	Inherits@2: ^Warhead_Tesla_Heavy
+	Inherits@3: ^Projectile_Lightning_Heavy
+	Inherits@4: ^Effect_Tesla_Heavy
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 1
+	Range: 4500
+	Projectile: LightningZap
+	Warhead@MissileAP_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 0
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MissileAP_Light_Percentage:
+		ValidTargets: Ground, Water, Air
+		Damage: 0
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Tesla_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 0
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 12000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		Damage: 12
-
-RA2PortaTesla2:
-	Inherits: RA2PortaTesla
+		ValidTargets: Ground, Water, Air
+		Damage: 0
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Tesla_Heavy_Percentage:
+		ValidTargets: Ground, Water, Air
+		Damage: 0
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 24000
-
-RA2PortaTesla3:
-	Inherits: RA2PortaTesla2
+		Damage: 0
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaFragment
+		Weapon: TeslaArmorDischargeArc
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
+		ValidTargets: Ground, Water, Air
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_tesla_impact
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir: CreateEffect
+		Explosions: ra2_tesla_impact
+		ExplosionPalette: ra2effect
 
-RA2PortaTeslaE:
-	Inherits: RA2PortaTesla3
-	Range: 6222
-	Report: itesat2a.wav, itesat2b.wav
-	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaFragment2
-
-TeslaFragment:
-	Inherits: ^TeslaWeapon
-	Range: 2074
-	ValidTargets: Infantry, Vehicle, Ship, Structure, Wall
-	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 8000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 4000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		Damage: 4
-	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 8000
-
-TeslaFragment2:
-	Inherits: ^TeslaWeapon
-	Range: 3111
-	ValidTargets: Infantry, Vehicle, Ship, Structure, Wall
-	Warhead@TeslaWeapon: SpreadDamage
+TeslaArmorDischargeArc:
+	Inherits: TeslaArmorDischargeDummy
+	Warhead@LightMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
 		Damage: 12000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 6000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
 		Damage: 6
-	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 12000
-	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaFragment
-		Amount: 1
-		AimChance: 100
-		AllowDirectHit: true
-		AimTargetStances: Enemy, Neutral
-
-RA2TankBolt:
-	Inherits: ^TeslaWeapon
-	ReloadDelay: 55
-	Range: 7500
-	Burst: 2
-	BurstDelays: 5
-	Report: vtesatta.wav, vtesattb.wav
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
 		Damage: 12000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
 		Damage: 6
-
-RA2TankBolt2:
-	Inherits: RA2TankBolt
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 10000
-
-RA2TankBolt3:
-	Inherits: RA2TankBolt2
+		Damage: 12000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaTankFragment
-		Amount: 1
-		AimChance: 100
-		AllowDirectHit: true
-		AimTargetStances: Enemy, Neutral
+		Weapon: TeslaArmorDischargeFragment1
 
-RA2TankBoltE:
-	Inherits: RA2TankBolt3
-	Range: 8000
-	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaTankFragment2
-
-TeslaTankFragment:
-	Inherits: ^TeslaWeapon
-	Range: 2500
-	ValidTargets: Infantry, Vehicle, Ship, Structure, Wall
-	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 2000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 4000
-
-TeslaTankFragment2:
-	Inherits: ^TeslaWeapon
-	Range: 3750
-	ValidTargets: Infantry, Vehicle, Ship, Structure, Wall
+TeslaArmorDischargeFragment1:
+	Inherits: TeslaArmorDischargeArc
+	Range: 2250
+	Warhead@LightMissile: SpreadDamage
+		Damage: 6000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 3
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 6000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 3000
+		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 6000
 	Warhead@TeslaArc: FireShrapnel
-		Weapon: TeslaTankFragment
+		Weapon: TeslaArmorDischargeFragment2
+
+TeslaArmorDischargeFragment2:
+	Inherits: TeslaArmorDischargeFragment1
+	Range: 1500
+	Warhead@LightMissile: SpreadDamage
+		Damage: 4000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 2000
+		DamageTypes: Tesla
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 4000
+	-Warhead@TeslaArc: FireShrapnel
+
+RA2PortaTesla:
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Range: 5222
+	ReloadDelay: 100
+	Report: itesatta.wav
+	Warhead@Tesla_Heavy:
+		Damage: 24000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 12000
+		DamageTypes: Tesla
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+		Damage: 12
+
+RA2PortaTesla2:
+	Inherits: RA2PortaTesla
+	Range: 5777
+	Warhead@Tesla_Heavy:
+		IntegrityScale: 150
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 12000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: TeslaFragment
 		Amount: 1
 		AimChance: 100
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 
-####################################################################################################
-#		Melee
-####################################################################################################
+RA2PortaTesla3:
+	Inherits: RA2PortaTesla2
+	Range: 6222
+	Report: itesat2a.wav, itesat2b.wav
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 24000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: TeslaFragment2
 
-RA2DroneJump:
-	ValidTargets: TerrorDronable
-	InvalidTargets: Air
-	ReloadDelay: 40
-	Range: 4000
-	Report: vteratta.wav
-	TargetActorCenter: true
-	Projectile: InstantHit
-	Warhead@1Dam: TargetDamage
-		Damage: 100000
-		ValidTargets: Infantry
-		DamageTypes: DefaultDeath, DroneInfection
+TeslaFragment:
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Range: 2074
+	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
+	Warhead@Tesla_Heavy:
+		Damage: 8000
+		IntegrityScale: 150
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 4000
+		DamageTypes: Tesla
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 8000
 
-RA2DroneJumpE:
-	Inherits: RA2DroneJump
-	ReloadDelay: 10
+TeslaFragment2:
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Range: 3111
+	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
+	Warhead@Tesla_Heavy:
+		Damage: 12000
+		IntegrityScale: 150
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 6000
+		DamageTypes: Tesla
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 12000
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: TeslaFragment
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
 
 RA2DroneSparks:
 	Range: 1
 	ReloadDelay: 25
 	Projectile: InstantExplode
-	Warhead@Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: ra2_emp_fx
 		ExplosionPalette: ra2effect
 
 RA2BrutePunch:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 37
 	Report: ibruattb.wav, ibruattc.wav, ibruattd.wav, ibruatte.wav, ibruattf.wav #ibruatta.wav
 	Range: 1616
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 20000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		Damage: 10000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
 	-Warhead@Effect:
 
-RA2BrutePunchE:
+RA2BrutePunch_elite:
 	Inherits: RA2BrutePunch
 	Burst: 2
 	BurstDelays: 3
 
 SquidPunch:
 	ReloadDelay: 32
-	Range: 1c856
+	Range: 1880
 	Report: vsquat1a.wav
 	ValidTargets: Water, Underwater
 	InvalidTargets: SquidGrab, SquidGrabbed
@@ -2066,235 +1379,92 @@ SquidPunch:
 
 SquidGrab:
 	ReloadDelay: 32
-	Range: 1c856
+	Range: 1880
 	ValidTargets: SquidGrab
 	InvalidTargets: SquidGrabbed
 	Projectile: InstantHit
 
 RA2Shovel:
-	Inherits: ^SwordWeapon
+	Inherits@wh: ^Warhead_Melee_Medium
+	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 30
 	Report: isl1atta.wav
 	Range: 1500
-	Warhead@SwordWeapon: SpreadDamage
+	Warhead@Melee_Medium:
 		Damage: 2000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+	Warhead@Melee_Medium_FriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
+
+IonPulseDischarge:
+	Range: 4000
+	ReloadDelay: 40
+	Projectile: InstantExplode
+	Warhead@Effect1: CreateEffect
+		Explosions: ra2_emp_fx
+		ExplosionPalette: ra2effect
+	Warhead@Effect2: CreateEffect
+		Explosions: mobileemp_small
+		ExplosionPalette: ra2unit
+		ImpactSounds: mobemp1.aud
+		ImpactActors: false
+		AffectsParent: true
+		ValidTargets: Ground, Water, Air
+	Warhead@Condition1: GrantExternalCondition
+		Condition: SonicDebuff
+		Range: 10000
+		Duration: 10
+		Delay: 1
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
+	Warhead@Condition2: GrantExternalCondition
+		Condition: SonicDebuff
+		Range: 8000
+		Duration: 20
+		Delay: 2
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
+	Warhead@Condition3: GrantExternalCondition
+		Condition: SonicDebuff
+		Range: 6000
+		Duration: 30
+		Delay: 3
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
+	Warhead@Condition4: GrantExternalCondition
+		Condition: SonicDebuff
+		Range: 4000
+		Duration: 40
+		Delay: 4
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, wall
 
 
 ####################################################################################################
 #		Chemical and Flame Weapons
 ####################################################################################################
 
-RA2PsychicJab:
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^LightFlameWeapon
-	Inherits: ^FlakWeapon
-	ReloadDelay: 15
-	Range: 4440
-	Report: iiniatta.wav
-	Projectile: Bullet
-		Image: 50CAL
-		ContrailStartColor: FF884488
-		ContrailEndColor: FFFFFF44
-		ContrailWidth: 150
-		ContrailLength: 15
-		Speed: 4000
-		Width: 40
-	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_initfire
-		ExplosionPalette: ra2effect
-		-ImpactSounds:
-		ImpactActors: false
-		ValidTargets: Ground, Water
-
-RA2PsychicJab_elite:
-	Inherits: RA2PsychicJab
-	Range: 5440
-	Burst: 2
-	BurstDelays: 3
-
-RA2Dronegas:
-	ReloadDelay: 125
-	Range: 5000
-	Report: vchaatta.wav
-	ValidTargets: MindControl
-	InvalidTargets: Structure, MCImmune
-	Projectile: InstantExplode
-	Warhead@1: CreateEffect
-		Explosions: chaosgas
-		ExplosionPalette: ra2effect
-		ImpactActors: false
-	Warhead@2: SpreadDamage
-		Range: 5000
-		Falloff: 100, 100
-	Warhead@3: GrantExternalCondition
-		Range: 5000
-		Condition: chaosgas
-		Duration: 125
-		ValidTargets: MindControl
-		InvalidTargets: Hero, MCImmune
-		ValidRelationships: Enemy
-
 RA2RadBeamWeapon:
-	Inherits: ^MediumChemicalWeapon
-	Range: 6393
-	ReloadDelay: 46
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
+	Range: 6444
+	ReloadDelay: 45
 	Report: idesat1a.wav
 	Projectile: RadBeam
 		Amplitude: 120
 		WaveLength: 360
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@Chemical_Medium:
 		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, RadiationDeath
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
 		Damage: 15000
 		DamageTypes: Prone100Percent, TriggerProne, RadiationDeath
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
 		Damage: 15
 	-Warhead@Effect:
-
-RA2RadBeamWeaponE:
-	Inherits: RA2RadBeamWeapon
-	Range: 7393
-	Burst: 2
-	BurstDelays: 3
-	Projectile: RadBeam
-		Amplitude: 240
-		WaveLength: 720
-		Thickness: 32
-		Color: FF4400
-
-RA2RadEruptionWeapon:
-	ReloadDelay: 75
-	Report: idesat2a.wav
-	Warhead@1Radiation: CreateTintedCells
-		Spread: 1c512
-		Falloff: 100, 80, 60, 40, 20
-		Level: 50
-		MaxLevel: 500
-		LayerName: ra2radiation
-
-####################################################################################################
-#		Mind Control
-####################################################################################################
-
-RA2MindControl:
-	ReloadDelay: 75
-	Report: iyurat1a.wav
-	Range: 7000
-	TargetActorCenter: true
-	ValidTargets: MindControl
-	InvalidTargets: Hero, MCImmune
-	Projectile: InstantHit
-	Warhead@1Dam: TargetDamage
-		Damage: 0
-
-RA2SMindControl:
-	ReloadDelay: 50
-	Range: 6000
-	Inherits: RA2MindControl
-
-RA2TMindControl:
-	ReloadDelay: 100
-	Inherits: RA2MindControl
-	Range: 8000
-
-RA2XMindControl:
-	Inherits: RA2MindControl
-	ReloadDelay: 125
-	Range: 9000
-	ValidTargets: MindControlStructure
-
-RA2XMindControlSplash:
-	Inherits: RA2MindControl
-	Range: 9000
-	ReloadDelay: 125
-	ValidTargets: MindControl
-	Warhead@2Own: MindControl
-		Range: 1500
-		Delay: 25
-		ChangeOwnerValidRelationships: Neutral, Enemy
-		ChangeOwnerValidTargets: Infantry, Vehicle, Ship, Submarine
-		ChangeOwnerInvalidTargets: Structure, MCImmune
-
-RA2XMindControlSplash2:
-	Inherits: RA2XMindControlSplash
-	Warhead@2Own: MindControl
-		Delay: 15
-
-PsiWave:
-	ReloadDelay: 150
-	Range: 2500
-	Report: iyurat2a.wav
-	Warhead@1Dam: SpreadDamage
-		ValidRelationships: Neutral, Enemy
-		Spread: 1250
-		Damage: 25000
-		ValidTargets: Infantry
-		DamageTypes: PsychicDeath
-		Delay: 5
-	Warhead@2Eff: CreateEffect
-		ImpactActors: false
-		AffectsParent: true
-		Explosions: controlwave_small
-		ExplosionPalette: ra2effect
-
-PsiWaveX:
-	ReloadDelay: 300
-	Range: 5000
-	Report: iyurat2a.wav
-	Warhead@1Dam: SpreadDamage
-		ValidRelationships: Neutral, Enemy
-		Spread: 2500
-		Damage: 50000
-		ValidTargets: Infantry
-		DamageTypes: PsychicDeath
-		Delay: 5
-	Warhead@2Eff: CreateEffect
-		ImpactActors: false
-		AffectsParent: true
-		Explosions: controlwave
-		ExplosionPalette: ra2effect
 
 RA2CarrierTarget:
 	ReloadDelay: 50
@@ -2317,14 +1487,14 @@ RA2PSIAtomic:
 		ValidTargets: Ground, Water, Air
 		AirThreshold: 11c0
 		ImpactActors: false
-	Warhead@Yuri_effect: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: spsydom.wav
 		Explosions: yuriface
 		ExplosionPalette: ra2effect
 		AirThreshold: 11c0
 		ImpactActors: false
 		Delay: 10
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: iyurat2a.wav
 		Explosions: controlwave
 		AirThreshold: 11c0
@@ -2337,6 +1507,19 @@ RA2PSIAtomic:
 		Multiplier: 1,1
 		AirThreshold: 11c0
 		Delay: 50
+	Warhead@2Own: MindControl
+		Range: 5000
+		ChangeOwnerValidRelationships: Neutral, Enemy
+		ChangeOwnerValidTargets: Infantry, Vehicle, Ship, Submarine
+		ChangeOwnerInvalidTargets: Hero, MCImmune
+		Delay: 50
+		ValidTargets: Ground, Air, Water
+	Warhead@3Own: GrantExternalCondition
+		Duration: 0
+		Range: 5000
+		Condition: prevent-mindcontrol
+		Delay: 50
+		ValidRelationships: Ally
 
 RA2PSIAtomicDamage:
 	AirThreshold: 11c0
@@ -2352,35 +1535,24 @@ RA2PSIAtomicDamage:
 		Delay: 50
 	Warhead@2Smu_areanuke: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 5
 		AirThreshold: 11c0
 		Delay: 60
-	Warhead@2Own: MindControl
-		Range: 5000
-		ChangeOwnerValidRelationships: Neutral, Enemy
-		ChangeOwnerValidTargets: Infantry, Vehicle, Ship, Submarine
-		ChangeOwnerInvalidTargets: Hero, MCImmune
-		Delay: 50
-		ValidTargets: Ground, Air, Water
-	Warhead@3Own: GrantExternalCondition
-		Duration: 0
-		Range: 5000
-		Condition: prevent-mindcontrol
-		Delay: 50
-		ValidRelationships: Ally
 
 ####################################################################################################
 #		Missiles
 ####################################################################################################
 
 RA2HornetMissile:
-	Inherits: ^Grenade
-	Inherits: ^HeavyBomb
-	Inherits: ^RA2MediumMissile
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Demolition_Heavy
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@3: ^RA2MediumMissile
 	ReloadDelay: 3
 	Range: 5000
-	MinRange: 500
+	MinRange: 1000
 	Report: vospatta.wav
 	Projectile: Missile
 		Speed: 500
@@ -2389,29 +1561,24 @@ RA2HornetMissile:
 		ContrailLength: 25
 		ContrailStartWidth: 25
 		ContrailEndWidth: 1
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+	Warhead@Demolition_Light:
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+	Warhead@Demolition_Light_Percentage:
+		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 2000
-		ValidTargets: Ground, Water, Trees, Air
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 1
-		ValidTargets: Ground, Water, Trees, Air
-	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+	Warhead@MissileAP_Medium: AreaDamage
 		Damage: 2000
-		ValidTargets: Ground, Water, Trees, Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
-		ValidTargets: Ground, Water, Trees, Air
-	-Warhead@Effect1:
-	-Warhead@Effect2:
+		ValidTargets: Ground, Water, Air
 
 RA2GIRockets:
 	Inherits: ^RA2LightMissile
@@ -2420,45 +1587,18 @@ RA2GIRockets:
 		HorizontalRateOfTurn: 10
 		Speed: 400
 		Acceleration: 1
-	Warhead@LightMissile: SpreadDamage
+	Warhead@MissileAP_Light: AreaDamage
 		Damage: 3700
-
-RA2Medusa:
-	Inherits: ^RA2MediumMissile
-	ReloadDelay: 100
-	Range: 13500
-	Report: vaegatta.wav, vaegattb.wav
-	Burst: 3
-	BurstDelays: 13
-	ValidTargets: Air
-	Projectile: Missile
-		Speed: 600
-		MinimumLaunchAngle: 60
-		ContrailLength: 35
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Air
-		Damage: 30000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Air
-		Damage: 15
-
-RA2MedusaAG:
-	Inherits: RA2Medusa
-	Range: 9000
-	InvalidTargets: Underwater, Submarine
-	ValidTargets: Ground, Water, Trees
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
 
 MigMissiles:
 	Inherits: ^HeavyBomb
-	Inherits: ^RA2MediumMissile
+	Inherits@2: ^HeavyAAWeapon
+	Inherits@3: ^FlakWeapon
+	Inherits@4: ^RA2MediumMissile
 	ReloadDelay: 50
 	Burst: 4
 	BurstDelays: 2
-	Range: 7500
+	Range: 7600
 	Report: vmigatta.wav
 	ValidTargets: Ground, Water
 	Projectile: Missile
@@ -2474,23 +1614,114 @@ MigMissiles:
 		MaximumLaunchSpeed: 384
 		MinimumLaunchSpeed: 384
 		Acceleration: 10
+		ContrailStartColor: EEEE00
+		ContrailEndColor: FFFFFF
 	Warhead@HeavyBomb: SpreadDamage
-		Damage: 16000
-		ValidTargets: Ground, Water
+		Damage: 8000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		Damage: 8
-		ValidTargets: Ground, Water
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 16000
-		ValidTargets: Ground, Water
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 8
-		ValidTargets: Ground, Water
+		Damage: 4
+	Warhead@HeavyAAWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@MissileAP_Medium: AreaDamage
+		Damage: 8000
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+		Damage: 4
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_explosion
+		ExplosionPalette: ra2effect
 		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
+
+MigMissiles_rad:
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
+	Inherits@3: MigMissiles
+	Inherits@rad: ^RA2RadShell
+	Projectile: Missile
+		TrailImage: green_smokey
+		TrailPalette: effect
+		ContrailStartColor: 00EE00
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+	Warhead@Chemical_Medium: SpreadDamage
+		Damage: 4000
+	Warhead@Chemical_Medium_FriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@Chemical_Medium_Percentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@Radiation: CreateTintedCells
+		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
+		Spread: 200
+		Level: 50
+	Warhead@Effect: CreateEffect
+		Explosions: ra2radbang
+		ExplosionPalette: ra2effect
+		ImpactSounds: snukexpl.wav
+
+MigMissiles_fire:
+	Inherits: MigMissiles
+	Projectile: Missile
+		TrailImage: red_smokey
+		TrailPalette: effect
+		ContrailStartColor: EE0000
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_terrorist_explosion
+		ImpactSounds: gexpapoa.wav
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment
+		Amount: 8
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+
+MigMissiles_tesla:
+	Inherits: MigMissiles
+	Projectile: Missile
+		TrailImage: blue_smokey
+		TrailPalette: effect
+		ContrailStartColor: 0000EE
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_kirovtesla
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpapoa.wav
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: TeslaFragment
+		Amount: 4
+		AimChance: 100
+		AimTargetStances: Enemy, Neutral
+
+MigMissiles_elite:
+	Inherits: MigMissiles
+	Range: 8600
+	Burst: 8
+	Projectile: Missile
+		Image: red_dragon
+		TrailImage: red_smokey
+		ContrailColor: e60000
+		ContrailStartColor: E60000
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+
+MigMissiles_rad_elite:
+	Inherits: MigMissiles_rad
+	Range: 8600
+	Burst: 8
+
+MigMissiles_fire_elite:
+	Inherits: MigMissiles_fire
+	Range: 8600
+	Burst: 8
 
 MigMissiles_AA:
 	Inherits: MigMissiles
@@ -2500,57 +1731,48 @@ MigMissiles_AA:
 		Inaccuracy: 250
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Air
-		Damage: 16000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		ValidTargets: Air
-		Damage: 8
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@HeavyAAWeapon: SpreadDamage
 		ValidTargets: Air
-		Damage: 16000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
-		Damage: 8
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@MissileAP_Medium: AreaDamage
+		ValidTargets: Air
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Air
 
-MigMissiles_rad:
-	Inherits: MigMissiles
-	Inherits@rad: ^RA2RadShell
-	Warhead@Radiation: CreateTintedCells
-		Level: 250
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_terrorist_explosion
-		ImpactSounds: gexpapoa.wav
-
-RA2MammothTusk:
-	Inherits: ^RA2MediumMissile
+MigMissiles_AA_elite:
+	Inherits: MigMissiles_elite
 	ValidTargets: Air
-	Range: 6100
-	ReloadDelay: 68
-	Report: vapoat2a.wav, vapoat2b.wav, vapoat2c.wav
-	Burst: 2
-	Warhead@MediumMissile: SpreadDamage
+	Projectile: Missile
+		Speed: 500
+		Inaccuracy: 250
+	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Air
-		Damage: 16000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		ValidTargets: Air
-		Damage: 8
-
-RA2MammothTusk_elite:
-	Inherits: RA2MammothTusk
-	Range: 7100
-	Burst: 4
+	Warhead@HeavyAAWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@MissileAP_Medium: AreaDamage
+		ValidTargets: Air
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Air
 
 V3Launch:
 	ReloadDelay: 50
 	Range: 15000
-	MinRange: 5000
-	Projectile: InstantHit
-		Inaccuracy: 1000
-	Warhead@1Dam: TargetDamage
-
-V3LaunchElite:
-	ReloadDelay: 50
-	Range: 20000
-	MinRange: 5000
+	MinRange: 3000
 	Projectile: InstantHit
 		Inaccuracy: 1000
 	Warhead@1Dam: TargetDamage
@@ -2563,27 +1785,17 @@ DreadnoughtLaunch:
 	Range: 25000
 	MinRange: 5000
 
-BoomerLaunch:
-	Inherits: V3Launch
-	ValidTargets: Ground, Air
-	InvalidTargets: Ship, Underwater
-	ReloadDelay: 50
-	Range: 15000
-	MinRange: 5000
-	Burst: 2
-	BurstDelays: 8
-
 RA2SCUD:
 	Inherits: ^MediumFlameWeapon
-	Inherits: ^RA2Grenade
-	Inherits: ^RA2HeavyMissile
-	ReloadDelay: 250
-	Range: 16000
+	Inherits@2: ^RA2Grenade
+	Inherits@3: ^RA2HeavyMissile
+	ReloadDelay: 125
+	Range: 20000
 	MinRange: 4000
 	-Report:
 	-Projectile:
 	TargetActorCenter: true
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -2604,19 +1816,19 @@ RA2SCUD:
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 15
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 30000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 15000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 15
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 30000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 15
 	Warhead@Effect: CreateEffect
@@ -2624,20 +1836,76 @@ RA2SCUD:
 		ValidTargets: Ground, Air
 
 RA2SCUD_rad:
-	Inherits: RA2SCUD
+	Inherits: ^LightChemicalWeapon
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyChemicalWeapon
+	Inherits@4: RA2SCUD
 	Inherits@rad: ^RA2RadShell
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 18000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 9000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 9
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 18000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 9000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 9
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		Damage: 18000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 9000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 9
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 18000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 9000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 9
+	Warhead@Demolition_Light: AreaDamage
+		Damage: 18000
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
+		Damage: 9000
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+		Damage: 9
+	Warhead@MissileAP_Heavy: AreaDamage
+		Damage: 18000
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+		Damage: 9
 	Warhead@Radiation: CreateTintedCells
-		Level: 100
+		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
+		Spread: 540
+		Level: 540
+
+RA2SCUD_fire:
+	Inherits: RA2SCUD
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianOilBombFragments
+		Amount: 1
+		AimChance: 0
+		AimTargetStances: Enemy, Neutral
+
+RA2SCUD_tesla:
+	Inherits: RA2SCUD
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: TeslaFragmentLarge
+		Amount: 1
+		AimChance: 100
+		AimTargetStances: Enemy, Neutral
 
 RA2SCUDELITE:
-	Inherits: ^NuclearWarhead
+	Inherits@wh: ^Warhead_Nuclear_Super
+	Inherits@fx: ^Effect_Nuclear_Super
 	Inherits: RA2SCUD
-	ReloadDelay: 200
-	Range: 20000
-	Warhead@NuclearWarhead: SpreadDamage
+	ReloadDelay: 160
+	Range: 24000
+	Warhead@Nuclear_Super:
 		ValidTargets: Ground, Water, Air
 		Damage: 30000
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
+	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 15
 	Warhead@Effect: CreateEffect
@@ -2645,11 +1913,11 @@ RA2SCUDELITE:
 		Explosions: ra2_terrorist_explosion
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpapoa.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@Radiation: CreateTintedCells
-		Spread: 1c512
-		Falloff: 100, 66, 33
-		Level: 300
+		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
+		Spread: 600
+		Level: 600
 		LayerName: ra2radiation
 
 V3Explode:
@@ -2660,15 +1928,15 @@ V3Explode:
 		Damage: 5000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 10000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 5000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: AreaDamage
 		Damage: 10000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 
 DredMissile:
@@ -2685,7 +1953,7 @@ DredMissile:
 
 YRBoomerSCUD:
 	Inherits: ^RA2Grenade
-	Inherits: ^RA2HeavyMissile
+	Inherits@2: ^RA2HeavyMissile
 	-Report:
 	Range: 20000
 	ValidTargets: Ground, Water, Air
@@ -2694,19 +1962,19 @@ YRBoomerSCUD:
 		Image: MISSILE
 		TrailImage: bomb
 		RangeLimit: 20000
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 	Warhead@Effect: CreateEffect
@@ -2717,58 +1985,9 @@ YRBoomerSCUD:
 		ImpactActors: false
 		ImpactSounds: gexpwala.wav
 
-YRBoomerTorpedo:
-	Inherits: ^RA2Grenade
-	Inherits: ^RA2HeavyMissile
-	ReloadDelay: 176
-	Range: 15000
-	MinRange: 5000
-	Burst: 4
-	BurstDelays: 8
-	Report: vbooat2a.wav
-	ValidTargets: Water, Underwater, Bridge
-	-Projectile: Missile
-	Projectile: Missile
-		Image: Patriot
-		Arm: 5
-		TrailImage: bubbles
-		TrailDelay: 2
-		#EffectPalette: ra_temperat
-		MaximumLaunchSpeed: 100
-		MinimumLaunchSpeed: 100
-		Speed: 200
-		Acceleration: 1
-		HorizontalRateOfTurn: 5
-		RangeLimit: 20000
-		BoundToTerrainType: Water
-		Palette: cloak
-		MaximumLaunchAngle: 0
-		CruiseAltitude: 0
-	Warhead@Grenade: SpreadDamage
-		Damage: 20000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 10
-	Warhead@HeavyMissile: SpreadDamage
-		Damage: 20000
-		ValidTargets: Water, Underwater, Bridge, Structure
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		Damage: 10
-		ValidTargets: Water, Underwater, Bridge, Structure
-	-Warhead@Smudge: LeaveSmudge
-	Warhead@Effect: CreateEffect
-		ValidTargets: Ship, Structure, Bridge, Ground
-		ImpactActors: true
-	-Warhead@EffectAir: CreateEffect
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-
 RA2TorpTube:
 	Inherits: ^RA2Grenade
-	Inherits: ^RA2HeavyMissile
+	Inherits@2: ^RA2HeavyMissile
 	ReloadDelay: 90
 	Range: 9000
 	Report: vbooat2a.wav
@@ -2790,16 +2009,16 @@ RA2TorpTube:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light: AreaDamage
 		Damage: 18000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
 		Damage: 9000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 9
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Heavy: AreaDamage
 		Damage: 18000
 		ValidTargets: Water, Underwater, Bridge, Structure
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 9
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge: LeaveSmudge
@@ -2825,11 +2044,11 @@ RA2TorpTube_elite:
 ^RA2MG:
 	Inherits: ^RA2SmallArms
 	ReloadDelay: 20
-	Range: 4c0
+	Range: 4096
 	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
 	Projectile: InstantHit
 		Blockable: true
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		Spread: 200
 		Damage: 2000
 		Versus:
@@ -2840,105 +2059,21 @@ RA2TorpTube_elite:
 			Wood: 85
 			Concrete: 70
 
-RA2M60:
-	Inherits: ^RA2SmallArms
-	ReloadDelay: 15
-	Range: 3854
-	Burst: 3
-	BurstDelays: 2
-	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
-	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 1
-
-RA2para:
-	Inherits: ^RA2Chaingun
-	ValidTargets: Ground, Water, Trees
-	ReloadDelay: 19
-	Range: 4750
-	Burst: 3
-	BurstDelays: 3
-	Report: igiat2a.wav, igiat2b.wav, igiat2c.wav, igiat2d.wav
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 1
-
-RA2vulcan2:
-	Inherits: GuardianGIMG
-	ReloadDelay: 25
-	Range: 5724
-	Report: bpilatta.wav, bpilattb.wav, bpilattc.wav, bpilattd.wav, bpilattc.wav
-
-GuardianGIMG:
-	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
-	ValidTargets: Ground, Water, Trees
-	ReloadDelay: 20
-	Range: 4762
-	Burst: 3
-	BurstDelays: 2
-	Report: vblhatta.wav, vblhattb.wav
-	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 1
-
-GuardianGIMG2:
-	Inherits: RA2para
-	Warhead@Chaingun: SpreadDamage
-		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 2
-
-GuardianGIMGE:
-	Inherits: GuardianGIMG
-	Range: 5762
-	Burst: 6
-
-GuardianGIMG2E:
-	Inherits: GuardianGIMG2
-	Range: 5750
-	Burst: 6
-
-RA2M1Carbine:
+ra2_soviets_conscript_carbine:
 	Inherits: ^RA2SmallArms
 	ReloadDelay: 18
-	Range: 4434
+	Range: 4500
 	Report: iconatta.wav, iconattb.wav, iconattc.wav, iconattd.wav, iconatte.wav
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 1
 
-RA2M1CarbineE:
-	Inherits: RA2M1Carbine
-	Range: 5434
+ra2_soviets_conscript_carbine_elite:
+	Inherits: ra2_soviets_conscript_carbine
+	Range: 5500
 	Burst: 2
 	BurstDelays: 3
-
-RA2vulcan:
-	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
-	ValidTargets: Ground, Water, Trees
-	ReloadDelay: 14
-	Range: 6577
-	Burst: 3
-	BurstDelays: 3
-	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
-	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 1
 
 RA2vulcan3:
 	Inherits: RA2vulcan2
@@ -2947,7 +2082,7 @@ RA2vulcan3:
 
 BlackHawkCannon:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 3
 	ValidTargets: Ground, Air, Water
 	Range: 4750
@@ -2961,19 +2096,22 @@ BlackHawkCannon:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Air, Water
+		Damage: 1
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 
 RA2ZOMBIE:
 	ReloadDelay: 45
-	Range: 1c256
+	Range: 1280
 	Report: zulhit00.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -2990,7 +2128,7 @@ RA2ZOMBIE:
 
 RA2SKELETON:
 	ReloadDelay: 25
-	Range: 1c512
+	Range: 1536
 	Report: sword1.aud,sword2.aud,sword3.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -3007,24 +2145,65 @@ RA2SKELETON:
 
 RA2CRM60:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
-	ValidTargets: Ground, Water, Trees
-	ReloadDelay: 12
-	Burst: 3
+	Inherits@2: ^RA2Chaingun
+	ValidTargets: Ground, Water
+	ReloadDelay: 14
+	Burst: 4
 	BurstDelays: 2
-	Range: 6924
+	Range: 5660
 	Report: vifvat2a.wav, vifvat2b.wav, vifvat2c.wav
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Bullet_Light: AreaDamage
+		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+
+RA2CRM60H:
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@4: ^RA2Chaingun
+	Inherits@5: ^SniperWeapon
+	ValidTargets: Ground, Water, Air
+	Report: iseaatta.wav, iseaattb.wav
+	ReloadDelay: 10
+	Range: 4692
+	Burst: 6
+	BurstDelays: 2
+	Projectile: Bullet
+		ContrailStartColor: 77777777
+		ContrailEndColor: 33333333
+		ContrailStartWidth: 33
+		ContrailEndWidth: 77
+		ContrailLength: 7
+		ContrailEndColorUsePlayerColor: false
+	Warhead@CannonHE_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@CannonHE_Heavy_Percentage:
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@SniperWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 RA2FLAKAG:
@@ -3038,127 +2217,46 @@ RA2FLAKAG:
 		Image: BOMB
 	ValidTargets: Ground, Water
 
-RA2CRFlakGuyGun:
-	Inherits: RA2FLAKAG
-	ReloadDelay: 17
-	Range: 4900
-	ValidTargets: Ground, Water, Trees
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
-		Damage: 8000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
-		Damage: 4
-
-RA2CRFlakGuyGun_elite:
-	Inherits: RA2CRFlakGuyGun
-	Range: 5900
-	Burst: 2
-	BurstDelays: 3
-
-RA2FLAKAA:
-	Inherits: ^RA2FlakWeapon
-	ReloadDelay: 26
-	Range: 7834
-	Projectile: InstantHit
-	ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 8000
-		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 4
-		ValidTargets: Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
-		ValidTargets: Air
-
-RA2FLAKAA_elite:
-	Inherits: RA2FLAKAA
-	Range: 8834
-	Burst: 2
-	BurstDelays: 3
-
 RA2FlakTrackGun:
 	Inherits: ^SmallArms
-	Inherits: ^Grenade
-	Inherits: ^Chaingun
-	Inherits: RA2FLAKAG
+	Inherits@2: ^Grenade
+	Inherits@3: ^Chaingun
+	Inherits@4: RA2FLAKAG
 	ReloadDelay: 18
-	Range: 5614
-	ValidTargets: Ground, Water, Trees
+	Range: 5528
+	ValidTargets: Ground, Water
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Flak_Medium: AreaDamage
+		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
 		Damage: 1
-
-RA2FlakTrackGunE:
-	Inherits: RA2FlakTrackGun
-	Range: 6614
-	Burst: 2
-	BurstDelays: 3
-
-RA2FlakTrackAAGun:
-	Inherits: RA2FlakTrackGun
-	Inherits: ^RA2FlakWeapon
-	ValidTargets: Air
-	Range: 8421
-	Projectile: Bullet
-		-LaunchAngle:
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Air
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Air
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Air
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Air
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Air
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
-		ValidTargets: Air
-
-RA2FlakTrackAAGunE:
-	Inherits: RA2FlakTrackAAGun
-	Range: 9421
-	Burst: 2
-	BurstDelays: 3
 
 RA2DoublePistols:
-	Inherits: ^SniperWeapon
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
 	Report: itanatta.wav, itanattb.wav
 	ReloadDelay: 12
 	Burst: 2
@@ -3171,75 +2269,44 @@ RA2DoublePistols:
 		ContrailEndWidth: 77
 		ContrailLength: 7
 		ContrailEndColorUsePlayerColor: false
-	Warhead@SniperWeapon: SpreadDamage
+	Warhead@Sniper_Light: SpreadDamage
 		Damage: 14000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 14000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
 		Damage: 7
 
-RA2DoublePistolsE:
+RA2DoublePistolsIFV:
 	Inherits: RA2DoublePistols
-	Range: 9000
-	Burst: 4
+	ValidTargets: Ground, Water, Air
+	Warhead@Sniper_Light: SpreadDamage
+		ValidTargets: Ground, Water, Air
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
+		ValidTargets: Ground, Water, Air
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
 
 RA2AWP:
-	Inherits: ^SniperWeapon
-	ReloadDelay: 55
-	Range: 10038
+	Inherits@wh: ^Warhead_Sniper_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Sniper_Light
+	ReloadDelay: 54
+	Range: 10000
 	Report: isniatta.wav
-	Warhead@SniperWeapon: SpreadDamage
-		Damage: 22000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
-		Damage: 22000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
-		Damage: 11
-
-RA2AWPE:
-	Inherits: RA2AWP
-	Range: 12345
-	Projectile: Bullet
-		ContrailStartColor: FF0000FF
-	Warhead@SniperWeapon: SpreadDamage
+	Warhead@Sniper_Light: SpreadDamage
 		Damage: 44000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 44000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
 		Damage: 22
 
-RA2MP5:
-	Inherits: ^SniperWeapon
-	Report: iseaatta.wav, iseaattb.wav
-	ReloadDelay: 10
-	Range: 5000
-	Burst: 4
-	BurstDelays: 3
-	Projectile: Bullet
-		ContrailStartColor: 77777777
-		ContrailEndColor: 33333333
-		ContrailStartWidth: 33
-		ContrailEndWidth: 77
-		ContrailLength: 7
-		ContrailEndColorUsePlayerColor: false
-	Warhead@SniperWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
-		Damage: 2000
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-
-RA2MP5E:
-	Inherits: RA2MP5
-	Range: 6000
-	Burst: 8
-
 RA2GattlingMG1:
-	Inherits: ^SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits: ^Warhead_Bullet_Light
+	Inherits@2: ^RA2Chaingun
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 5000
 	ReloadDelay: 6
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailStartColor: FFAA44
@@ -3249,33 +2316,33 @@ RA2GattlingMG1:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Bullet_Light:
+		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Bullet_Light_Percentage:
+		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
 		Damage: 1
 
-RA2GattlingMG1AA:
+RA2GattlingMG1_AA:
 	Inherits: RA2GattlingMG1
 	Range: 6750
 	ValidTargets: Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 2
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 2
 
@@ -3285,151 +2352,48 @@ RA2GattlingMG2:
 	Report: vgatlo5a.wav, vgatlo5b.wav
 	ReloadDelay: 4
 
-RA2GattlingMG2AA:
+RA2GattlingMG2_AA:
 	Inherits: RA2GattlingMG2
 	Range: 7500
 	ValidTargets: Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 2
-	Warhead@Chaingun: SpreadDamage
+	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Air
-		Damage: 2
-
-RA2GattlingMG3:
-	Inherits: RA2GattlingMG1
-	Range: 5500
-	Report: vgatlo8a.wav, vgatlo8b.wav
-	ReloadDelay: 2
-
-RA2GattlingMG3AA:
-	Inherits: RA2GattlingMG3
-	Range: 8250
-	ValidTargets: Air
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Air
-		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Air
-		Damage: 2
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Air
-		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 2
 
-RA2GattlingInf:
-	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
-	ReloadDelay: 15
-	ValidTargets: Ground, Air, Water
-	Range: 5086
-	Report: iarnatta.wav, iarnattb.wav
-	Projectile: Bullet
-		Image: 50CAL
-		ContrailStartColor: FFAA44
-		ContrailStartWidth: 15
-		ContrailEndColor: FFFFFF
-		ContrailEndColorUsePlayerColor: true
-		ContrailLength: 5
-		Speed: 10000
-		Width: 75
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Air, Water
-		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Air, Water
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Air, Water
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Air, Water
-		Damage: 1
+RA2Cloud:
+	Inherits: ^ToxicWeapon
 
-RA2Virusgun:
-	Inherits: ^HeavyChemicalWeapon
-	Inherits: ^SniperWeapon
-	ReloadDelay: 74
-	Range: 9994
-	Report: iviratta.wav
-	ValidTargets: Infantry
-	Projectile: Bullet
-		Image: 50CAL
-		ContrailStartColor: FF9933
-		ContrailEndColor: 88FF4400
-		ContrailEndColorUsePlayerColor: false
-		ContrailWidth: 333
-		ContrailLength: 33
-		Speed: 3333
-		Width: 33
-	Warhead@SniperWeapon: SpreadDamage
-		ValidTargets: Infantry, Monster, Garrisoned
-		Damage: 12000
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
-		ValidTargets: Infantry, Monster, Garrisoned
-		Damage: 12000
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Infantry, Monster, Garrisoned
-		Damage: 6
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyChemicalWeapon: SpreadDamage
-		ValidTargets: Infantry, Monster, Garrisoned
-		Damage: 12000
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Infantry, Monster, Garrisoned
-		Damage: 6000
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Infantry, Monster, Garrisoned
-		Damage: 6
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@Effect: CreateEffect
-		Explosions: chemball
-		ImpactSounds: firebl3.aud
+RA2CloudSafe:
+	Inherits: ^ToxicWeapon
+	Warhead@Toxic_Light:
+		ValidRelationships: Neutral, Enemy
+		AffectsParent: False
+	Warhead@Toxic_Light_Percentage:
+		ValidRelationships: Neutral, Enemy
+		AffectsParent: False
+
+ToxicEngineCloudSpawner:
+	ReloadDelay: 200
+	Range: 0
 	Warhead@Cloud: SpawnSmokeParticle
-		Count: 1
-		Duration: 125
+		Count: 1, 2
+		Duration: 100
 		Speed: 4, 16
 		TurnRate: 10
 		Image: ra2txgasg
 		Sequences: idle
 		Palette: ra2effect
-		Weapon: RA2Cloud
+		Weapon: RA2CloudSafe
 		InvalidTargets: Water
-
-RA2Virusgun2:
-	Inherits: RA2Virusgun
-	ValidTargets: Ground, Ship, Garrisoned
-	-InvalidTargets:
-	Warhead@SniperWeapon: SpreadDamage
-		ValidTargets: Ground, Ship, Garrisoned
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
-		ValidTargets: Ground, Ship, Garrisoned
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Ship, Garrisoned
-	Warhead@HeavyChemicalWeapon: SpreadDamage
-		ValidTargets: Ground, Ship, Garrisoned
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Ship, Garrisoned
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Ship, Garrisoned
-
-RA2VirusgunE:
-	Inherits: RA2Virusgun2
-	Range: 11111
-	Warhead@Cloud: SpawnSmokeParticle
-		Count: 1, 3
 
 RA2VirusExplode:
 	ReloadDelay: 74
@@ -3452,119 +2416,24 @@ RA2VirusExplode:
 		Weapon: RA2Cloud
 		InvalidTargets: Water
 
-RA2Cloud:
-	Inherits: ^HeavyChemicalWeapon
-	ReloadDelay: 1
-	-Report:
-	Warhead@HeavyChemicalWeapon: SpreadDamage
-		Damage: 24
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 12
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 0
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	-Warhead@Effect:
-
-RA2Chemspray:
-	Inherits: ^MediumChemicalWeapon
-	ReloadDelay: 50
-	Burst: 6
-	BurstDelays: 4
-	Range: 4840
-	-Report:
-	StartBurstReport: flamtnk1.aud
-	Projectile: Bullet
-		Speed: 160
-		Image: ra2txgasg
-		Inaccuracy: 555
-		Palette: ra2effect
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	-Warhead@MediumChemicalWeaponFriendlyFire:
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	-Warhead@Effect:
-
-ra2roktgun:
-	Inherits: ^RA2SmallArms
-	Inherits: ^RA2FlakWeapon
-	Inherits: ^RA2Chaingun
-	ReloadDelay: 15
-	Range: 3500
-	MinRange: 1
-	Report: irocatta.wav
-	ValidTargets: Ground, Water, Air
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Air, Water
-		Damage: 2000
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Air, Water
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Air, Water
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Air, Water
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Air, Water
-		Damage: 1
-	-Warhead@EffectAir:
-
-RA2CosmonautLaser:
-	Inherits: ^LaserWeapon
-	Inherits: ra2roktgun
-	Report: ilasatta.wav
-	Projectile: LaserZap
-		HitAnim: laserfire
-		Width: 40
-		Duration: 5
-		SecondaryBeam: true
-		SecondaryBeamWidth: 25
-		SecondaryBeamZOffset: 2047
-		SecondaryBeamColor: FFFFFF80
-		UsePlayerColor: true
-	Warhead@SmallArms: SpreadDamage
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@FlakWeapon: SpreadDamage
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Chaingun: SpreadDamage
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	-Warhead@Effect:
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: Scorch
-		Chance: 15
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
-	-Warhead@EffectWater:
-
 RA220mmrapid:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
-	ValidTargets: Ground, Water, Trees
+	Inherits@2: ^RA2Chaingun
+	ValidTargets: Ground, Water
 	ReloadDelay: 15
 	Range: 5000
 	Report: vwaratta.wav, vwarattb.wav
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
+		ValidTargets: Ground, Air, Water
 		Damage: 4000
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Air, Water
+		Damage: 2
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Ground, Water
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
 		Damage: 2
 
 ####################################################################################################
@@ -3572,29 +2441,29 @@ RA220mmrapid:
 ####################################################################################################
 
 RA2Mutate:
-	ValidTargets: Ground, Air, Trees
+	ValidTargets: Ground, Air
 	Warhead@1Dam: HealthPercentageDamage
 		Spread: 4c0
 		Damage: 300
 		ValidTargets: Infantry
-		InvalidTargets: Vehicle, Structure, Wall, Husk, TerrorDrone
+		InvalidTargets: Vehicle, Structure, wall, Husk, TerrorDrone, Hero, MCImmune
 		AffectsParent: True
 		DamageTypes: BruteMutate
-	Warhead@2eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: controlwave
 		ExplosionPalette: ra2effect
 		ImpactSounds: sgenon.wav
 		ImpactActors: false
 
 MutateEffect:
-	Warhead@1eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: mutate
 		ExplosionPalette: playerra2
 		UsePlayerPalette: true
 		AffectsParent: true
 		ImpactActors: false
 	Warhead@2: SpawnActor
-		Actors: yrbrute
+		Actors: yuri_brute
 		Delay: 60
 
 ####################################################################################################
@@ -3608,9 +2477,9 @@ ReactorNuke:
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
 	Warhead@Radiation: CreateTintedCells
-		Spread: 1500
-		Falloff: 100, 66, 33
-		Level: 300
+		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
+		Spread: 750
+		Level: 375
 		LayerName: ra2radiation
 
 ReactorNukeWeak:
@@ -3618,8 +2487,8 @@ ReactorNukeWeak:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2radbang
 	Warhead@Radiation: CreateTintedCells
-		Spread: 1000
-		Level: 200
+		Spread: 500
+		Level: 250
 
 RA2DemoBomb:
 	Inherits: MiniNuke
@@ -3633,34 +2502,25 @@ RA2DemoBomb:
 		ExplosionPalette: ra2effect
 		ImpactSounds: vdemdiea.wav
 	Warhead@Radiation: CreateTintedCells
-		Spread: 1500
-		Falloff: 100, 75, 50, 25, 0
+		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
+		Spread: 1000
 		Level: 500
 		LayerName: ra2radiation
 
 RA2Terrorist:
-	Inherits: ^HeavyBomb
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^RA2Grenade
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
+	Inherits@3: ^Projectile_Grenade_Light
 	-Report:
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 50000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 25
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 50000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 25
-	Warhead@Grenade: SpreadDamage
-		Damage: 50000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 25
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_terrorist_explosion
 		ExplosionPalette: ra2effect
@@ -3674,12 +2534,12 @@ RA2Terrorist:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 	Warhead@Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Structure, Wall, Trees
+		InvalidTargets: Structure, wall
 
 RA2Atomic:
 	Inherits: Atomic
 	Report: snuklaun.wav
-	Warhead@1Dam_impact:
+	Warhead@1Dam_impact: SpreadDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath, Incendiary
 	Warhead@4Dam_areanuke1: SpreadDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath, Incendiary
@@ -3691,7 +2551,7 @@ RA2Atomic:
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath, Incendiary
 	Warhead@11Dam_areanuke3: SpreadDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath, Incendiary
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
@@ -3709,10 +2569,10 @@ RA2Atomic:
 RA2MODTrackMG:
 	Inherits: ^RA2MG
 	Burst: 4
-	Range: 5c512
+	Range: 5632
 	Report: vwaratta.wav, vwarattb.wav
 	ValidTargets: Ground, Air
-	Warhead@SmallArms: SpreadDamage
+	Warhead@Bullet_Light: AreaDamage
 		Damage: 3000
 		ValidTargets: Ground, Air
 		Versus:
@@ -3843,42 +2703,46 @@ StormCloud:
 		ValidTargets: Ground, Air, Water
 
 LightningBolt:
-	Inherits: ^TeslaChargedWeapon
+	Inherits@wh: ^Warhead_Tesla_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
 	Projectile: InstantHit
 	-Report:
 	Range: 1000
 	ValidTargets: Ground, Water, Air
-	Warhead@TeslaChargedWeapon: SpreadDamage
+	Warhead@Tesla_Super:
 		Spread: 1000
 		Falloff: 100, 75, 50, 25, 0
-		Damage: 12000
+		Damage: 24000
 		ValidTargets: Air, Ground, Water
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Spread: 2000
 		Falloff: 100, 75, 50, 25, 0
-		Damage: 6000
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+		Damage: 24000
+		DamageTypes: Tesla
+	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
 		ValidTargets: Air, Ground, Water
 		Damage: 6
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		ValidTargets: Shielded
 		Falloff: 100, 67, 33, 0
 		Spread: 3333
-		Damage: 33333
-	Warhead@4Eff: CreateEffect
+		Damage: 66666
+		DamageTypes: Tesla
+	Warhead@Effect: CreateEffect
 		Explosions: wclbolt1,wclbolt2,wclbolt3
 		ExplosionPalette: ra2effect
 		ImpactSounds: sweastra.wav,sweastrb.wav,sweastrc.wav,sweastrd.wav
 		ValidTargets: Ground, Air, Water
-	Warhead@5Eff: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Explosions: large_explosion
 		ValidTargets: Ground, Air, Water
 	Warhead@6Eff: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 psireveal:
-	Range: 1c0
+	Range: 1024
 	ReloadDelay: 25
 	Projectile: InstantExplode
 	ValidTargets: Ground, Water, Air
@@ -3887,7 +2751,7 @@ psireveal:
 		ForceGround: true
 		Range: 1
 		ValidTargets: Ground, Water, Air
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: scan
 		ExplosionPalette: tseffect
 		ImpactSounds: spsyreve.wav
@@ -3909,68 +2773,38 @@ IvanAttach:
 		Range: 1
 	Warhead@2: TargetDamage
 
-IvanAttachAir:
-	Inherits: IvanAttach
-	ValidTargets: Aircraft
-	InvalidTargets: ivanattached
-	Warhead@1: AttachDelayedWeapon
-		Weapon: IvanBombAir
-
 IvanBomb:
-	Inherits: ^Grenade
-	Inherits: ^ShrapnelWeapon
-	Inherits: ^HeavyBomb
-	Warhead@Grenade: SpreadDamage
+	Inherits@wh: ^Warhead_Demolition_Light
+	Inherits@wh2: ^Warhead_Demolition_Heavy
+	Inherits@wh3: ^Warhead_Concussion_Medium
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Demolition_Heavy
+	Warhead@Demolition_Light:
 		Damage: 30000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 15000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage:
 		Damage: 15
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 30000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 15000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage:
 		Damage: 15
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 30000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage:
 		Damage: 15
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: ivan_explosion
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpcraa.wav
-		ValidTargets: Ground, Air, Ship, Trees
+		ValidTargets: Ground, Air, Ship
 	Warhead@EffectWater: CreateEffect
 		Explosions: large_splash
 		ImpactSounds: gexpcraa.wav
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 
-IvanBombAir:
-	Inherits: IvanBomb
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Aircraft
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Aircraft
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Aircraft
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Aircraft
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Aircraft
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Aircraft
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Aircraft
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidTargets: Aircraft
-
 IFVAttach:
 	Inherits: IvanAttach
-	Range: 4c512
+	Range: 4608
 
 TanyaAttach:
 	Inherits: IvanAttach
@@ -3982,49 +2816,27 @@ TanyaAttach:
 
 TanyaBomb:
 	Inherits: IvanBomb
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumCannon
-	Inherits: ^HeavyCannon
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@wh2: ^Warhead_CannonHE_Medium
+	Inherits@wh3: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
+	Warhead@Demolition_Light:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 50
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 50
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 50
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 100000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 50000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 50
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 100000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 50000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 50
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 100000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 50
 	Warhead@Effect: CreateEffect
@@ -4032,6 +2844,24 @@ TanyaBomb:
 		ExplosionPalette: effect
 		ImpactSounds: gexpcraa.wav
 
+	Warhead@CannonHE_Heavy:
+		ValidTargets: Ground, Air, Water, Underwater
+		Damage: 100000
+	Warhead@CannonHE_Heavy_Percentage:
+		ValidTargets: Ground, Air, Water, Underwater
+		Damage: 50
+	Warhead@CannonHE_Medium:
+		ValidTargets: Ground, Air, Water, Underwater
+		Damage: 100000
+	Warhead@CannonHE_Medium_Percentage:
+		ValidTargets: Ground, Air, Water, Underwater
+		Damage: 50
+	Warhead@CannonAP_Light:
+		ValidTargets: Ground, Air, Water, Underwater
+		Damage: 100000
+	Warhead@CannonAP_Light_Percentage:
+		ValidTargets: Ground, Air, Water, Underwater
+		Damage: 50
 SEALAttach:
 	Inherits: TanyaAttach
 	ValidTargets: Vehicle, Ship, Submarine, demolishable
@@ -4041,89 +2871,53 @@ SEALAttach:
 
 SealBomb:
 	Inherits: TanyaBomb
-	Warhead@TankDestroyerCannon: SpreadDamage
+	Warhead@CannonAP_Light: AreaDamage
 		Damage: 20000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@MediumCannon: SpreadDamage
+	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 20000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@HeavyCannon: SpreadDamage
+	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 20000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@Grenade: SpreadDamage
+	Warhead@Demolition_Light:
 		Damage: 20000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Concussion_Medium:
 		Damage: 20000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy:
 		Damage: 20000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
 
 BorisAKM:
 	Inherits: ^RA2SmallArms
-	Inherits: ^RA2Chaingun
+	Inherits@2: ^RA2Chaingun
 	Report: iboratta.wav, iborattb.wav
 	ValidTargets: Ground, Water
-	InvalidTargets: Structure, Bridge, Wall
+	InvalidTargets: Structure, Bridge, wall
 	Range: 8167
 	ReloadDelay: 18
 	Burst: 4
 	BurstDelays: 2
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Ground, Water
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
 		Damage: 2
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Bullet_Light: AreaDamage
+		ValidTargets: Ground, Water
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
 		Damage: 2
-
-BorisAKME:
-	Inherits: BorisAKM
-	Range: 9167
-	Burst: 8
-
-BorisAKM2:
-	Inherits: BorisAKM
-	ValidTargets: Structure, Bridge, Wall
-	-InvalidTargets:
-	Range: 9167
-
-MigTarget:
-	ValidTargets: Structure, Bridge, Wall
-	Range: 9167
-	Burst: 3
-	BurstDelays: 15
-	ReloadDelay: 60
-	#StartBurstReport: iboraib.wav
-	TargetActorCenter: true
-	Projectile: LaserZap
-		Width: 36
-		Duration: 25
-		SecondaryBeamWidth: 96
-		SecondaryBeamColor: FF000030
-	Warhead@1: TargetDamage
-		ValidTargets: Structure
-	Warhead@2: GrantExternalCondition
-		ValidTargets: Structure
-		Range: 250
-		Duration: 250
-		Condition: BorisFlare
 
 WarpawayEffect:
 	ValidTargets: Ground, Water, Air
@@ -4140,6 +2934,20 @@ ChronoshiftImpact:
 		ImpactSounds: schrmov.wav
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
+	Warhead@Distort: HeatDistortion
+		Scale: 1.2
+		FadeFrames: 90
+		FadeInFrames: 0
+	Warhead@GlowPlayer: GlowImpact
+		UsePlayerColor: true
+		Scale: 3.5
+		FadeFrames: 90
+		FadeInFrames: 5
+	Warhead@GlowWhite: GlowImpact
+		Color: FFFFFF
+		Scale: 2.0
+		FadeFrames: 90
+		FadeInFrames: 5
 
 PortableChronoTeleport:
 	Warhead@1: CreateEffect
@@ -4172,7 +2980,7 @@ ChronoMinerTeleportImpact:
 		ValidTargets: Ground, Water, Air
 
 RA2SpyCamera:
-	Range: 12c0
+	Range: 12288
 	ReloadDelay: 25
 	Report: vspysnap.wav
 	Projectile: InstantExplode
@@ -4186,7 +2994,7 @@ RA2SpyCamera:
 RA2ChronoAI:
 	Inherits: ChronoAI
 	Warhead@1Actor: SpawnActor
-		Actors: yrrobo, ra2fv, ra2mtnk, ra2tnkd, ra2mgtk, ra2sref, yrbfrt
+		Actors: yrrobo, ra2_allies_ifv, ra2_allies_grizzlytank, ra2_allies_tankdestroyer, ra2_allies_miragetank, ra2_allies_prismtank, ra2_allies_battlefortress
 
 ForceShield:
 	ReloadDelay: 10
@@ -4199,7 +3007,7 @@ ForceShield:
 
 RA2SpiderSlice:
 	ReloadDelay: 15
-	Range: 1c0
+	Range: 1024
 	Report: sword1.aud,sword2.aud,sword3.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -4213,19 +3021,6 @@ RA2SpiderSlice:
 			Heavy: 60
 			Concrete: 75
 		DamageTypes: DefaultDeath
-
-RA2UnitExplodeSmall:
-	Inherits: UnitExplodeSmall
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_bang
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp06a.wav, gexp07a.wav, expnew13.wav
-		ValidTargets: Ground, Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water
 
 RA2UnitExplode:
 	Inherits: UnitExplode
@@ -4286,7 +3081,7 @@ RA2CorpseThrower:
 		Amount: 1
 
 RA2Debris:
-	Range: 3c512
+	Range: 3584
 	Projectile: BulletAS
 		Speed: 60, 120
 		LaunchAngle: 70, 190
@@ -4314,7 +3109,7 @@ RA2LargeDebris:
 RA2FlyingBody:
 	Inherits: RA2Debris
 	Inherits@2: RA2CorpseSpawner
-	Range: 3c0
+	Range: 3072
 	Projectile: BulletAS
 		Speed: 30, 90
 		Sequences: flyingbody
@@ -4324,3 +3119,4 @@ RA2FlyingBody:
 		ExplosionPalette: ra2effect
 		ValidTargets: Ground
 		Delay: 0
+

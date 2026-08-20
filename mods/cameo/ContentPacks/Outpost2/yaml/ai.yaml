@@ -1,0 +1,86 @@
+# ai.yaml — Dawn of the Tomorrow faction AI configuration
+#
+# ARCHITECTURE NOTE
+# =================
+# All AI bot modules (BaseBuilderBotModuleCA, UnitBuilderBotModuleCA,
+# SquadManagerBotModuleCA, SupportPowerBotASModule, etc.) are defined
+# as single trait instances on the Player: actor in the global
+# mods/cameo/ai/ai.yaml. Their sub-sections (BuildingLimits,
+# BuildingFractions, UnitsToBuild, UnitLimits) contain ALL faction
+# data in single dictionaries that CANNOT be split across files —
+# OpenRA's YAML merge replaces trait instances with the same @name,
+# it does not deep-merge their sub-sections.
+#
+# This file is loaded as a Rules: entry but contains no traits —
+# it is a placeholder ready for future per-faction bot module
+# splitting (see ROADMAP Phase E backlog).
+#
+# REFERENCE DATA (from global ai.yaml)
+# ====================================
+#
+# --- UnitsToBuild (9 entries for tomorrow) ---
+# 			mcvtomorrow.bot: 1
+# 			mtnk.tomorrow: 3
+# 			ftnk.tomorrow: 3
+# 			v2rl.tomorrow: 3
+# 			heli.tomorrow: 1
+# 			tran.tomorrow.e3: 1
+# 			tran.tomorrow.e4: 1
+# 			apc.tomorrow.e3: 1
+# 			apc.tomorrow.e4: 1
+
+# Player: actor — no traits defined yet.
+# When the engine supports per-faction bot conditions, move the
+# faction-specific BuildingLimits/BuildingFractions/UnitsToBuild
+# entries here as a BaseBuilderBotModuleCA@<faction> /
+# UnitBuilderBotModuleCA@<faction> trait with RequiresCondition.
+Player:
+#
+# --- Additional faction: GLA (gla) — UnitsToBuild (1 entries) ---
+# 			glamob: 1
+#
+# --- Additional faction: USA (usa) — BuildingLimits (6 entries) ---
+# 			usabarracks: 5
+# 			usastrategy: 1
+# 			usaweap: 7
+# 			usaairport: 3
+# 			usadropzone: 10
+# 			usacannon: 5
+#
+# --- Additional faction: USA (usa) — BuildingFractions (12 entries) ---
+# 			usasupply: 20
+# 			usabarracks: 5
+# 			usastrategy: 5
+# 			usaweap: 10
+# 			usapatriot: 10
+# 			usapatriot2: 10
+# 			usalasertur: 10
+# 			usaairport: 5
+# 			usacannon: 3
+# 			usadropzone: 20
+# 			usafirebase.e1: 5
+# 			usafirebase.e3: 10
+#
+# --- Additional faction: USA (usa) — UnitsToBuild (22 entries) ---
+# 			usapath: 15
+# 			usaburton.bot: 1
+# 			usaambulan: 1
+# 			usahook: 100
+# 			usaavenger: 10
+# 			usajeep: 10
+# 			usajeep.bot1: 10
+# 			usajeep.bot2: 20
+# 			usacrusader: 25
+# 			usacrusader2: 25
+# 			usasentry: 10
+# 			usattnk: 60
+# 			usamicro: 20
+# 			usapala: 50
+# 			usaraptor: 5
+# 			usaraptor2: 5
+# 			usaaurora: 5
+# 			usacomanche: 5
+# 			usagunboat: 10
+# 			usabattleship: 9
+# 			usacarrier: 5
+# 			usacombathook: 1

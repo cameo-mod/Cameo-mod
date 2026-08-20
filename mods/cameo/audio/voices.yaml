@@ -1,18 +1,37 @@
 GenericVoice:
+	Variants:
+		gdi: v01.aud,v03.aud
+		td_gdi: v01.aud,v03.aud
+		nod: v01.aud,v03.aud
+		td_nod: v01.aud,v03.aud
 	Voices:
-		Select: await1v01,readyv01,report1v01,yessir1v01,await1v03,readyv03,report1v03,yessir1v03
-		Action: acknov01,acknov03,affirm1v01,affirm1v03,noprobv01,noprobv03,ritawayv01,ritawayv03,rogerv01,rogerv03,ugotitv01,ugotitv03
+		Select: await1,ready,report1,yessir1
+		Action: ackno,affirm1,noprob,ritaway,roger,ugotit
 		Die: nuyell1,nuyell4,nuyell5,nuyell6
 		Burned: yell1
 		Zapped: nuyell3
 		Poisoned: nuyell12
+	DisableVariants: Die, Burned, Zapped, Poisoned
 
 VehicleVoice:
+	Variants:
+		gdi: v00.aud,v02.aud
+		td_gdi: v00.aud,v02.aud
+		nod: v00.aud,v02.aud
+		td_nod: v00.aud,v02.aud
+		asianalliance: v00.aud,v02.aud
+		syndicate: v00.aud,v02.aud
+		latinsyndicate: v00.aud,v02.aud
+		consortium: v00.aud,v02.aud
+		steelconsortium: v00.aud,v02.aud
+		naxis: v00.aud,v02.aud
+		schwarzermond: v00.aud,v02.aud
+		futuretech: v00.aud,v02.aud
 	Voices:
-		Select: vehic1v00,vehic1v02,yessir1v00,yessir1v02,report1v00,report1v02,await1v00,await1v02,unit1v00,unit1v02
-		Action: acknov00,acknov02,affirm1v00,affirm1v02,movout1v00,movout1v02
-		Attack: acknov00,acknov02,affirm1v00,affirm1v02,movout1v00,movout1v02
-		Unload: movout1v00,movout1v02
+		Select: vehic1,yessir1,report1,await1,unit1
+		Action: ackno,affirm1,movout1
+		Attack: ackno,affirm1,movout1
+		Unload: movout1
 
 CivilianMaleVoice:
 	Voices:
@@ -56,7 +75,7 @@ CommandoVoice:
 		Build: rokroll1
 		Kill: keepem1,laugh1,lefty1,tuffguy1
 
-LaserCommandoVoice:	
+LaserCommandoVoice:
 	DefaultVariant: .wav
 	Voices:
 		Select: NUComma_VoiSelecta, NUComma_VoiSelectb, NUComma_VoiSelectc, NUComma_VoiSelectd, NUComma_VoiSelecte, NUComma_VoiSelectf, NUComma_VoiSelectg, NUComma_VoiSelecth, NUComma_VoiSelecti, NUComma_VoiSelectj, NUComma_VoiSelectk, NUComma_VoiSelectl
@@ -71,7 +90,7 @@ LaserCommandoVoice:
 		Build: NUComma_VoiCreatea, NUComma_VoiCreateb
 		Kill: NUComma_VoiSelBata,NUComma_VoiSelBatb,NUComma_VoiSelBatc,NUComma_VoiSelBatd, NUComma_VoiSelBate, NUComma_VoiSelBatf
 
-RocketAngelVoice:	
+RocketAngelVoice:
 	DefaultVariant: .wav
 	Voices:
 		Select: IURocke_VoiSela, IURocke_VoiSelb, IURocke_VoiSelc, IURocke_VoiSeld, IURocke_VoiSele, IURocke_VoiSelf, IURocke_VoiSelg, IURocke_VoiSelh, IURocke_VoiSeli
@@ -97,7 +116,7 @@ JapaneseArcherVoice:
 		Burned: igenmela, igenmelb, igenmelc
 		Zapped: igenmela, igenmelb, igenmelc
 		Poisoned: igenmela, igenmelb, igenmelc
-        
+
 SamuraiVoice:
 	DefaultVariant: .wav
 	Voices:
@@ -124,46 +143,6 @@ ReimuVoice:
 		Poisoned: reimudamage, reimuheavydamage
 		Zapped: reimudamage, reimuheavydamage
 
-SCMarauderVoice:
-	DefaultVariant: .wav
-	Voices:
-		Build: Marauder_Ready00
-		Select: Marauder_What00, Marauder_What01, Marauder_What02, Marauder_What03, Marauder_What04, Marauder_What05
-		Move: Marauder_Yes00, Marauder_Yes01, Marauder_Yes02, Marauder_Yes03, Marauder_Yes04, Marauder_Yes05, Marauder_Yes06, Marauder_Yes07, Marauder_Yes08, Marauder_Yes09, Marauder_Yes10, Marauder_Yes11
-		Action: Marauder_Yes00, Marauder_Yes01, Marauder_Yes02, Marauder_Yes03, Marauder_Yes04, Marauder_Yes05, Marauder_Yes06, Marauder_Yes07, Marauder_Yes08, Marauder_Yes09, Marauder_Yes10, Marauder_Yes11
-		Attack: Marauder_Attack00, Marauder_Attack01, Marauder_Attack02, Marauder_Attack03, Marauder_Attack04, Marauder_Attack05,
-		Die: TFBDth00,TFBDth01,TFBDth02
-		Burned: TFBDth00,TFBDth01,TFBDth02
-		Zapped: TFBDth00,TFBDth01,TFBDth02
-		Poisoned: TFBDth00,TFBDth01,TFBDth02
-        
-SCTyrVoice:
-	DefaultVariant: .wav
-	Voices:
-		Build: Thor_Ready00
-		Select: Thor_What00, Thor_What01, Thor_What02, Thor_What03, Thor_What04, Thor_What05, Thor_What06, Thor_What07, Thor_What08
-		Move: Thor_Yes00, Thor_Yes01, Thor_Yes02, Thor_Yes03, Thor_Yes04, Thor_Yes05, Thor_Yes06, Thor_Yes07, Thor_Yes08, Thor_Yes09
-		Action: Thor_Yes00, Thor_Yes01, Thor_Yes02, Thor_Yes03, Thor_Yes04, Thor_Yes05, Thor_Yes06, Thor_Yes07, Thor_Yes08, Thor_Yes09
-		Attack: Thor_Attack00, Thor_Attack01, Thor_Attack02, Thor_Attack03, Thor_Attack04, Thor_Attack05
-		Die: TFBDth00,TFBDth01,TFBDth02
-		Burned: TFBDth00,TFBDth01,TFBDth02
-		Zapped: TFBDth00,TFBDth01,TFBDth02
-		Poisoned: TFBDth00,TFBDth01,TFBDth02
-
-SCCycloneVoice:
-	DefaultVariant: .wav
-	Voices:
-		Select: cyclone_what00, cyclone_what01, cyclone_what02, cyclone_what03, cyclone_what04, cyclone_what05, cyclone_what06
-		Move: cyclone_yes00, cyclone_yes01, cyclone_yes02, cyclone_yes03, cyclone_yes04, cyclone_yes05, cyclone_yes06
-		Action: cyclone_yes00, cyclone_yes01, cyclone_yes02, cyclone_yes03, cyclone_yes04, cyclone_yes05, cyclone_yes06
-		Attack: cyclone_attack00, cyclone_attack01, cyclone_attack02, cyclone_attack03, cyclone_attack04, cyclone_attack05, cyclone_attack06, cyclone_attack07
-		AttackMove: cyclone_yes00, cyclone_yes01, cyclone_yes02, cyclone_yes03, cyclone_yes04, cyclone_yes05, cyclone_yes06
-		Die:  TTaDth00
-		Burned:  TTaDth00
-		Zapped:  TTaDth00
-		Poisoned:  TTaDth00
-		Build: cyclone_ready00, cyclone_ready01
-
 DinoVoice:
 	Voices:
 		Select: dinoyes
@@ -180,18 +159,30 @@ DinoVoice:
 ####################################################################################################
 
 RAGenericVoice:
+	Variants:
+		allies: a01.aud,a03.aud
+		ra1_allies: a01.aud,a03.aud
+		ra2_allies: a01.aud,a03.aud
+		japan: a01.aud,a03.aud
 	Voices:
-		Select: await1a01,readya01,report1a01,yessir1a01,await1a03,readya03,report1a03,yessir1a03
-		Action: acknoa01,affirm1a01,noproba01,overouta01,ritawaya01,rogera01,ugotita01,acknoa03,affirm1a03,noproba03,overouta03,ritawaya03,rogera03,ugotita03
+		Select: await1,ready,report1,yessir1
+		Action: ackno,affirm1,noprob,overout,ritaway,roger,ugotit
 		Die: dedman1,dedman2,dedman3,dedman4,dedman5,dedman7,dedman8
 		Burned: dedman10
 		Zapped: dedman6
 		Poisoned: dedman1,dedman2,dedman3,dedman4,dedman5,dedman7,dedman8
+	DisableVariants: Die, Burned, Zapped, Poisoned
 
 RAVehicleVoice:
+	Variants:
+		allies: a00.aud,a02.aud
+		ra1_allies: a00.aud,a02.aud
+		ra2_allies: a00.aud,a02.aud
+		japan: a00.aud,a02.aud
+		tkm: a00.aud,a02.aud
 	Voices:
-		Select: vehic1a00,yessir1a00,report1a00,await1a00,vehic1a02,yessir1a02,report1a02,await1a02
-		Action: acknoa00,affirm1a00,acknoa02,affirm1a02
+		Select: vehic1,yessir1,report1,await1
+		Action: ackno,affirm1
 
 RussianVoice:
 	Voices:
@@ -203,9 +194,35 @@ RussianVoice:
 		Poisoned: dedman1,dedman2,dedman3,dedman4,dedman5,dedman7,dedman8
 
 RussianVehicleVoice:
+	Variants:
+		soviets: r00.aud,r02.aud
+		ra1_soviets: r00.aud,r02.aud
+		ra2_soviets: r00.aud,r02.aud
 	Voices:
-		Select: vehic1r00,yessir1r00,report1r00,await1r00,vehic1r02,yessir1r02,report1r02,await1r02
-		Action: acknor00,affirm1r00,acknor02,affirm1r02
+		Select: vehic1,yessir1,report1,await1
+		Action: ackno,affirm1
+
+RussianConscriptVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: srd9,srd10,srd11,srd12
+		Action: srd1,srd2,srd3,srd4,srd47a,srd47b,srd16,srd17
+		Attack: srd13a,srd13b,srd14,srd46,srd45,srd15,srd36,srd48,srd49,srd50,srd51,srd52
+		Die: dedman1,dedman2,dedman3,dedman4,dedman5,dedman7,dedman8
+		Burned: dedman10
+		Zapped: dedman6
+		Poisoned: dedman1,dedman2,dedman3,dedman4,dedman5,dedman7,dedman8
+
+RussianCommissarVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: CommissarSelect1,CommissarSelect2,CommissarSelect3,CommissarSelect4,CommissarSelect5,CommissarSelect6,CommissarSelect7
+		Action: CommissarMove1,CommissarMove2,CommissarMove3,CommissarMove4
+		Attack: CommissarAttack1,CommissarAttack2,CommissarAttack3
+		Die: dedman1,dedman2,dedman3,dedman4,dedman5,dedman7,dedman8
+		Burned: dedman10
+		Zapped: dedman6
+		Poisoned: dedman1,dedman2,dedman3,dedman4,dedman5,dedman7,dedman8
 
 MonsterTankVoice:
 	DefaultVariant: .wav
@@ -250,7 +267,7 @@ TanyaVoice:
 		Select: rayo1,rayes1,rayeah1
 		Move: raonit1,racmon1,rarokroll1
 		Action: ratuffguy1,rabombit1
-		Attack: ratuffguy1,rabombit1					  
+		Attack: ratuffguy1,rabombit1
 		Die: ratandeth1
 		Burned: ratandeth1
 		Zapped: ratandeth1
@@ -347,7 +364,7 @@ SCMarineVoice:
 		Zapped: TMaDth00,TMaDth01
 		Poisoned: TMaDth00,TMaDth01
 		Build: TMaRdy00
-		
+
 SCJimRaynorVoice:
 	DefaultVariant: .wav
 	Voices:
@@ -508,6 +525,47 @@ SCScienceVesselVoice:
 		Zapped: TPhDth00
 		Poisoned: TPhDth00
 		Build: sc_sciencevessel_ready
+
+SCMarauderVoice:
+	DefaultVariant: .wav
+	Voices:
+		Build: Marauder_Ready00
+		Select: Marauder_What00, Marauder_What01, Marauder_What02, Marauder_What03, Marauder_What04, Marauder_What05
+		Move: Marauder_Yes00, Marauder_Yes01, Marauder_Yes02, Marauder_Yes03, Marauder_Yes04, Marauder_Yes05, Marauder_Yes06, Marauder_Yes07, Marauder_Yes08, Marauder_Yes09, Marauder_Yes10, Marauder_Yes11
+		Action: Marauder_Yes00, Marauder_Yes01, Marauder_Yes02, Marauder_Yes03, Marauder_Yes04, Marauder_Yes05, Marauder_Yes06, Marauder_Yes07, Marauder_Yes08, Marauder_Yes09, Marauder_Yes10, Marauder_Yes11
+		Attack: Marauder_Attack00, Marauder_Attack01, Marauder_Attack02, Marauder_Attack03, Marauder_Attack04, Marauder_Attack05,
+		Die: TFBDth00,TFBDth01,TFBDth02
+		Burned: TFBDth00,TFBDth01,TFBDth02
+		Zapped: TFBDth00,TFBDth01,TFBDth02
+		Poisoned: TFBDth00,TFBDth01,TFBDth02
+
+SCTyrVoice:
+	DefaultVariant: .wav
+	Voices:
+		Build: Thor_Ready00
+		Select: Thor_What00, Thor_What01, Thor_What02, Thor_What03, Thor_What04, Thor_What05, Thor_What06, Thor_What07, Thor_What08
+		Move: Thor_Yes00, Thor_Yes01, Thor_Yes02, Thor_Yes03, Thor_Yes04, Thor_Yes05, Thor_Yes06, Thor_Yes07, Thor_Yes08, Thor_Yes09
+		Action: Thor_Yes00, Thor_Yes01, Thor_Yes02, Thor_Yes03, Thor_Yes04, Thor_Yes05, Thor_Yes06, Thor_Yes07, Thor_Yes08, Thor_Yes09
+		Attack: Thor_Attack00, Thor_Attack01, Thor_Attack02, Thor_Attack03, Thor_Attack04, Thor_Attack05
+		Die: TFBDth00,TFBDth01,TFBDth02
+		Burned: TFBDth00,TFBDth01,TFBDth02
+		Zapped: TFBDth00,TFBDth01,TFBDth02
+		Poisoned: TFBDth00,TFBDth01,TFBDth02
+
+SCCycloneVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: cyclone_what00, cyclone_what01, cyclone_what02, cyclone_what03, cyclone_what04, cyclone_what05, cyclone_what06
+		Move: cyclone_yes00, cyclone_yes01, cyclone_yes02, cyclone_yes03, cyclone_yes04, cyclone_yes05, cyclone_yes06
+		Action: cyclone_yes00, cyclone_yes01, cyclone_yes02, cyclone_yes03, cyclone_yes04, cyclone_yes05, cyclone_yes06
+		Attack: cyclone_attack00, cyclone_attack01, cyclone_attack02, cyclone_attack03, cyclone_attack04, cyclone_attack05, cyclone_attack06, cyclone_attack07
+		AttackMove: cyclone_yes00, cyclone_yes01, cyclone_yes02, cyclone_yes03, cyclone_yes04, cyclone_yes05, cyclone_yes06
+		Die:  TTaDth00
+		Burned:  TTaDth00
+		Zapped:  TTaDth00
+		Poisoned:  TTaDth00
+		Build: cyclone_ready00, cyclone_ready01
+
 SCSupplyCenterVoice:
 	DefaultVariant: .wav
 	Voices:
@@ -1113,7 +1171,7 @@ SWItsAtrapVoice:
 		Select: itsatrapsel1,itsatrapsel2
 		Action: itsatrapmov1, itsatrapmov2
 		Unload: itsatrapsel1,itsatrapsel2
-               
+
 GerGenericVoice:
 	Voices:
 		Select: gerawait1v01,gerreadyv01,gerreport1v01,geryessir1v01,gerawait1v03,gerreadyv03,gerreport1v03,geryessir1v03
@@ -1142,7 +1200,7 @@ GerCommandoVoice:
 		Poisoned: nuyell12
 		Build: gerrokroll1
 		Kill: gerkeepem1,gerlaugh1,gerlefty1,gertuffguy1
-        
+
 MemeSiloWorkerVoice:
 	DefaultVariant: .wav
 	Voices:
@@ -1178,7 +1236,7 @@ DigDugEnemyVoice:
 		Burned: digdugdeath
 		Zapped: digdugdeath
 		Poisoned: digdugdeath
-        
+
 ####################################################################################################
 #		RA & TD Custom from Renegade
 ####################################################################################################
@@ -1215,7 +1273,7 @@ TiberiumRefineryVoice:
 	DefaultVariant: .wav
 	Voices:
 		Select: tdrefineryvoice
-        
+
 HelipadVoice:
 	DefaultVariant: .wav
 	Voices:
@@ -1230,7 +1288,7 @@ WeaponFactoryVoice:
 	DefaultVariant: .wav
 	Voices:
 		Select: weapvoice
-        
+
 PowerPlantVoice:
 	DefaultVariant: .wav
 	Voices:
@@ -1238,7 +1296,7 @@ PowerPlantVoice:
 
 JapaneseVoice:
 	Voices:
-		Select: jawait1v01,jreadyv01,jreport1v01,jyessir1v01,jawait1v03,jreadyv03,jreport1v03,jyessir1v03
+		Select: jawait1v01,jreport1v01,jyessir1v01,jawait1v03,jreport1v03,jyessir1v03
 		Action: jacknov01,jacknov03,jaffirm1v01,jaffirm1v03,jnoprobv01,jnoprobv03,jritawayv01,jritawayv03,jrogerv01,jrogerv03,jugotitv01,jugotitv03
 		Die: dedman1,dedman2,dedman3,dedman4,dedman5,dedman7,dedman8
 		Burned: dedman10
@@ -1277,6 +1335,7 @@ MammothGirlVoice:
 		Burned: mammothgm1
 		Zapped: mammothgm1
 		Poisoned: mammothgm1
+
 SvsMAlienVoice:
 	Voices:
 		Attack: svsavoice1,svsavoice2
@@ -1293,5 +1352,10 @@ DalekVoice:
 	DefaultVariant: .wav
 	Voices:
 		Select: DalekAttack1
-		Action: DalekAttack1
 		Move: DalekAttack1
+		Action: DalekAttack1
+		Attack: DalekAttack1
+		Deploy: DalekAttack1
+		Build: DalekAttack1
+		Kill: DalekAttack1
+		Die: FEngiDiea, FEngiDieb

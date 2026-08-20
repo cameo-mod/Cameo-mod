@@ -17,14 +17,14 @@ World:
 		ClassName: Light Support
 		Factions: mindustryc
 		BaseActor: mindclass_core
-		SupportActors: rae1,rae1,rae1,rae3,rae3,rajeep,1tnk
+		SupportActors: ra1_allies_rifleinfantry,ra1_allies_rifleinfantry,ra1_allies_rifleinfantry,ra1_allies_alliedrocketsoldier,ra1_allies_alliedrocketsoldier,ra1_allies_ranger,ra1_allies_alliedlighttank
 
 	MPStartUnits@heavymindustryc:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: mindustryc
 		BaseActor: mindclass_core
-		SupportActors: rae1,rae1,rae1,rae3,rae3,rajeep,1tnk,2tnk,2tnk,2tnk
+		SupportActors: ra1_allies_rifleinfantry,ra1_allies_rifleinfantry,ra1_allies_rifleinfantry,ra1_allies_alliedrocketsoldier,ra1_allies_alliedrocketsoldier,ra1_allies_ranger,ra1_allies_alliedlighttank,ra1_allies_alliedmediumtank,ra1_allies_alliedmediumtank,ra1_allies_alliedmediumtank
 
 mindclass_core:
 	Inherits: ^BaseBuilding
@@ -103,7 +103,7 @@ mindclass_core:
 	Buildable:
 		Queue: Building.MindustryClassic, RABuilding.MindustryClassic
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmcmindustry
@@ -118,7 +118,7 @@ mindclass_core:
 mindclass_turret_1:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 200
 	Tooltip:
@@ -184,7 +184,7 @@ mindclass_turret_1:
 mindclass_turret_2:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -250,7 +250,7 @@ mindclass_turret_2:
 mindclass_turret_3:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 700
@@ -317,7 +317,7 @@ mindclass_turret_3:
 mindclass_turret_4:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 800
@@ -384,7 +384,7 @@ mindclass_turret_4:
 mindclass_turret_5:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 850
@@ -448,7 +448,7 @@ mindclass_turret_5:
 mindclass_turret_6:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 1200
@@ -609,7 +609,7 @@ mindclass_router:
 		BlinkPattern: On, Off, Off, Off, Off, Off, Off
 	WithDecoration@mind_drill2_conected:
 		Image: mindclass_items
-		Sequence: iron
+		Sequence: ra1_soviets_ironcurtain
 		ReferencePoint: center, center
 		RequiresCondition: mind_drill2_conected
 		ZOffset: 256

@@ -1,0 +1,462 @@
+protoss_zealot:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ProtossRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Tooltip:
+		Name: Zealot
+	Valued:
+		Cost: 300
+	Power:
+		Amount: -15
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~protoss_gateway, ~!protoss_promotion_legionnaire
+		Queue: Infantry, RAInfantry
+		Description: actor_sczealot.description
+	Mobile:
+		Speed: 70
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Shielded:
+		RegenAmount: 80
+	Armament:
+		Weapon: psi_blades
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+	Voiced:
+		VoiceSet: SCZealotVoice
+	ActorStatValues:
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_adept:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ProtossRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@bot: ^BotAutoDeployTimedAbility
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@ResonatingGlaves: ^ResonatingGlaves
+	Tooltip:
+		Name: Adept
+	Valued:
+		Cost: 650
+	Power:
+		Amount: -30
+	Buildable:
+		BuildPaletteOrder: 25
+		Prerequisites: ~protoss_gateway
+		Queue: Infantry, RAInfantry
+		Description: actor_scadept.description
+	Mobile:
+		Speed: 70
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Shielded:
+		RegenAmount: 60
+	Armament:
+		Weapon: GlaveCanon
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: GlaveCanon
+	AttackFrontal:
+		FacingTolerance: 0
+	GrantTimedConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedTicks: 175
+		CooldownTicks: 400
+		DeployedCondition: phase
+		ShowSelectionBar: true
+		PauseOnCondition: disabled
+		ExclusiveDeploy: true
+		DeployType: Detonate
+		Voice: Action
+	ShadeMaster:
+		Actors: scadept.shade
+		RespawnTicks: 175
+		TeleportType: SCShade
+		LoadedCondition: shade-ready
+		PauseOnCondition: !phase
+	Exit:
+		SpawnOffset: 768, 768, 0
+	WithInfantryBody:
+	Voiced:
+		VoiceSet: SCZealotVoice
+	ActorStatValues:
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_resonatingglaves
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_hightemplar:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ProtossRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Tooltip:
+		Name: High Templar
+	Valued:
+		Cost: 800
+	Power:
+		Amount: -40
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~protoss_templararchives
+		Queue: Infantry, RAInfantry
+		Description: actor_schightemplar.description
+	Mobile:
+		Speed: 70
+		Locomotor: hover
+	Health:
+		HP: 35000
+	ChangesHealth@SelfHealing:
+		Step: 35
+	Shielded:
+		RegenAmount: 70
+	Armament@Effect:
+		Weapon: PsiStormCosmetic
+		FireDelay: 0
+		AmmoUsage: 0
+		PauseOnCondition: ammo < 8
+	Armament@1:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 8
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	Armament@2:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 16
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	Armament@3:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 24
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	Armament@4:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 32
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	Armament@5:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 40
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	Armament@6:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 48
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	Armament@7:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 56
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	Armament@8:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 64
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	AmmoPool:
+		Ammo: 16
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 16
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+	ActorStatValues:
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
+	Voiced:
+		VoiceSet: SCHighTemplarVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_darktemplar:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ProtossRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Tooltip:
+		Name: Dark Templar
+	Valued:
+		Cost: 600
+	Power:
+		Amount: -30
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~protoss_citadelofadun, ~!protoss_promotion_amaranth
+		Queue: Infantry, RAInfantry
+		Description: actor_scdarktemplar.description
+	Mobile:
+		Speed: 75
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Shielded:
+		RegenAmount: 100
+	Armament:
+		Weapon: WarpBlade
+		FireDelay: 3
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+	Voiced:
+		VoiceSet: SCDarkTemplarVoice
+	Cloak:
+		CloakStyle: Alpha
+	ActorStatValues:
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_zeratul:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ProtossRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Tooltip:
+		Name: Zeratul
+	Valued:
+		Cost: 4000
+	Power:
+		Amount: -200
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~protoss_citadelofadun
+		Queue: Infantry, RAInfantry
+		Description: actor_sczeratul.description
+		BuildLimit: 1
+		IconPalette: ra2
+	Mobile:
+		Speed: 100
+	Health:
+		HP: 250000
+	ChangesHealth@SelfHealing:
+		Step: 250
+	Shielded:
+		RegenAmount: 500
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	Armament:
+		Weapon: ZeratulSlice
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+	Passenger:
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCZealotVoice
+	ActorStatValues:
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_amaranth:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ProtossRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@bot: ^BotAutoDeploySwitchMode
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Tooltip:
+		Name: Amaranth
+	Valued:
+		Cost: 1200
+	Power:
+		Amount: -60
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~protoss_citadelofadun, ~protoss_promotion_amaranth
+		Queue: Infantry, RAInfantry
+		Description: actor_scamaranth.description
+	Mobile:
+		Speed: 70
+	Health:
+		HP: 70000
+	ChangesHealth@SelfHealing:
+		Step: 70
+	Shielded:
+		RegenAmount: 140
+	Armament:
+		Weapon: WarpBladeAmaranth
+		FireDelay: 3
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+	# WithIdleOverlay@Shadow:
+		# Offset: 0,0,-360
+	Cloak:
+		InitialDelay: 50
+		CloakDelay: 50
+		UncloakOn: None
+		IsPlayerPalette: true
+		CloakStyle: Alpha
+	-Crushable:
+	Passenger:
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCDarkTemplarVoice
+	ActorStatValues:
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_legionnaire:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ProtossRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Tooltip:
+		Name: Legionnaire
+	Valued:
+		Cost: 700
+	Power:
+		Amount: -35
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~protoss_gateway, ~protoss_promotion_legionnaire
+		Queue: Infantry, RAInfantry
+		Description: actor_sclegionnaire.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Shielded:
+		RegenAmount: 120
+	Armament:
+		Weapon: psi_spear
+		FireDelay: 3
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+	Voiced:
+		VoiceSet: SCZealotVoice
+	ActorStatValues:
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_patriarch:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ProtossRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Tooltip:
+		Name: Patriarch
+	Valued:
+		Cost: 4000
+	Power:
+		Amount: -200
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~protoss_templararchives, ~protoss_promotion_patriarch
+		Queue: Infantry, RAInfantry
+		Description: actor_scpatriarch.description
+		BuildLimit: 1
+	Mobile:
+		Speed: 75
+	Health:
+		HP: 75000
+	ChangesHealth@SelfHealing:
+		Step: 75
+	Shielded:
+		RegenAmount: 150
+	Armament:
+		Weapon: PatriarchShoot
+		LocalOffset: 128,0,256
+	Armament@garrisoned:
+		Name: garrisoned
+		Weapon: PatriarchShoot
+	ReloadArmamentsBar:
+		Color: 0000FF
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		MinIdleDelay: 1
+		MaxIdleDelay: 2
+	-Crushable:
+	Passenger:
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCHighTemplarVoice
+	ActorStatValues:
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+####################################################################################################
+#		Protoss Promotions
+####################################################################################################
+
+### Assault Tree

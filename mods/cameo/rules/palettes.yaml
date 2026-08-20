@@ -32,7 +32,7 @@
 	PaletteFromFile@terrain-cameo: ##########
 		Name: terrain
 		Tileset: CAMEO
-		Filename: temperat.pal
+		Filename: ra_temperat.pal
 		ShadowIndex: 4
 	PaletteFromFile@terrain-outpost2:
 		Name: terrain
@@ -69,12 +69,12 @@
 		Tileset: CARIBIC
 		Filename: caribic.pal
 		ShadowIndex: 4
-	PaletteFromFile@terrain-ra_temperatt:
+	PaletteFromFile@terrain-ra_temperat:
 		Name: terrain
 		Tileset: RA_TEMPERAT
 		Filename: ra_temperat.pal
 		ShadowIndex: 4
-	PaletteFromFile@terrain-ra2_temperatt:
+	PaletteFromFile@terrain-ra2_temperat:
 		Name: terrain
 		Tileset: RA2_TEMPERAT
 		Filename: ra_temperat.pal
@@ -88,6 +88,11 @@
 		Name: terrain
 		Tileset: BARREN
 		Filename: barren.pal
+		ShadowIndex: 4
+	PaletteFromFile@terrain-volcanic:
+		Name: terrain
+		Tileset: VOLCANIC
+		Filename: volcanic.pal
 		ShadowIndex: 4
 	PaletteFromFile@player: ##########
 		Name: player
@@ -142,6 +147,74 @@
 		Name: shield30
 		BasePalette: shield100
 		Alpha: 0.25
+	PaletteFromFile@playershieldbase:
+		Name: playershieldbase
+		Filename: shield_remap.pal
+	FixedColorPalette@hexshield:
+		Base: playershieldbase
+		Name: hexshield
+		Color: 469BFF
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PaletteFromPaletteWithAlpha@hexshield25:
+		Name: hexshield25
+		BasePalette: hexshield
+		Alpha: 0.25
+	PaletteFromPaletteWithAlpha@hexshield75:
+		Name: hexshield75
+		BasePalette: hexshield
+		Alpha: 0.75
+	FixedColorPalette@protosshexshield:
+		Base: playershieldbase
+		Name: protosshexshield
+		Color: 469BFF
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PaletteFromPaletteWithAlpha@protosshexshield25:
+		Name: protosshexshield25
+		BasePalette: protosshexshield
+		Alpha: 0.25
+	PaletteFromPaletteWithAlpha@protosshexshield75:
+		Name: protosshexshield75
+		BasePalette: protosshexshield
+		Alpha: 0.75
+	FixedColorPalette@ixianhexshield:
+		Base: playershieldbase
+		Name: ixianhexshield
+		Color: D7E6EE
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PaletteFromPaletteWithAlpha@ixianhexshield25:
+		Name: ixianhexshield25
+		BasePalette: ixianhexshield
+		Alpha: 0.25
+	PaletteFromPaletteWithAlpha@ixianhexshield75:
+		Name: ixianhexshield75
+		BasePalette: ixianhexshield
+		Alpha: 0.75
+	FixedColorPalette@consortiumhexshield:
+		Base: playershieldbase
+		Name: consortiumhexshield
+		Color: 2DE1FF
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PaletteFromPaletteWithAlpha@consortiumhexshield25:
+		Name: consortiumhexshield25
+		BasePalette: consortiumhexshield
+		Alpha: 0.25
+	PaletteFromPaletteWithAlpha@consortiumhexshield75:
+		Name: consortiumhexshield75
+		BasePalette: consortiumhexshield
+		Alpha: 0.75
+	FixedColorPalette@yurihexshield:
+		Base: playershieldbase
+		Name: yurihexshield
+		Color: 665CFF
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
+	PaletteFromPaletteWithAlpha@yurihexshield25:
+		Name: yurihexshield25
+		BasePalette: yurihexshield
+		Alpha: 0.25
+	PaletteFromPaletteWithAlpha@yurihexshield75:
+		Name: yurihexshield75
+		BasePalette: yurihexshield
+		Alpha: 0.75
 	PaletteFromFile@staticterrain-jungle:
 		Name: staticterrain
 		Tileset: JUNGLE
@@ -150,7 +223,7 @@
 	PaletteFromFile@staticterrain-cameo: ##########
 		Name: staticterrain
 		Tileset: CAMEO
-		Filename: temperat.pal
+		Filename: ra_temperat.pal
 		ShadowIndex: 4
 	PaletteFromFile@staticterrain-outpost2: ##########
 		Name: staticterrain
@@ -197,6 +270,11 @@
 		Tileset: BARREN
 		Filename: barren.pal
 		ShadowIndex: 3, 4
+	PaletteFromFile@staticterrain-volcanic:
+		Name: staticterrain
+		Tileset: VOLCANIC
+		Filename: volcanic.pal
+		ShadowIndex: 3, 4
 	PaletteFromFile@staticterrain-caribic:
 		Name: staticterrain
 		Tileset: CARIBIC
@@ -206,6 +284,10 @@
 		Name: chrome
 		Filename: temperat.pal
 		ShadowIndex: 3
+		AllowModifiers: false
+	PaletteFromFile@cameo:
+		Name: cameo
+		Filename: temperat.pal
 		AllowModifiers: false
 	PaletteFromFile@cursor:
 		Name: cursor
@@ -287,25 +369,69 @@
 		BaseName: cloak
 		BasePalette: player
 		Alpha: 0.5
+	PaletteFromFile@greenspark:
+		Name: greenspark
+		Filename: greenspark.pal
+		AllowModifiers: false
+	PaletteFromPlayerPaletteWithAlpha@cloak_stealth:
+		BaseName: cloak_stealth
+		BasePalette: player
+		Alpha: 0.12
+		AllowModifiers: true
+		Premultiply: false
+	TAStealthTankCloakPaletteEffect@cloak_stealth:
+		AffectedPalette: cloak_stealth
+		UseBaseColors: true
+		BaseAlpha: 0.4
+		BasePremultiply: true
 	MenuPostProcessEffect:
 		MenuEffect: Desaturated
+	# Weather tints the world (terrain + units) via the terrain lighting rather than a fullscreen
+	# post-process, so weapon/flame visuals that set IgnoreWorldTint (and non-sprite visuals like
+	# beams and zaps) stay untinted by the weather.
+	ConditionalWorldTint@RAIN:
+		RequiresCondition: weather-rain
+		Red: 0.78
+		Green: 0.86
+		Blue: 1.05
+		Ambient: 0.78
+	ConditionalWorldTint@SANDSTORM:
+		RequiresCondition: weather-sandstorm
+		Red: 1.05
+		Green: 0.94
+		Blue: 0.72
+		Ambient: 0.82
+	ConditionalWorldTint@BLIZZARD:
+		RequiresCondition: weather-blizzard
+		Red: 0.82
+		Green: 0.90
+		Blue: 1.12
+		Ambient: 0.68
+	GlowRenderer:
+		GlowRadius: 25
+		GlowIntensity: 0.2
+	HeatDistortionRenderer:
+		DistortionRadius: 300
+		DistortionStrength: 8
+	ShockwaveDistortionRenderer:
+		MaxRadius: 500
+		RingThickness: 30
+		Strength: 20
 	CloakPaletteEffect:
 	FlashPostProcessEffect@Nuke:
 		Type: Nuke
-	FlashPostProcessEffect@PulseWeapon:
-		Type: PulseWeapon
-		Color: FF884488
+	NuclearFlashRenderer:
 	RotationPaletteEffect@water:
-		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, ra, player, terrain, staticterrain, windows256
+		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, ra, player, terrain, staticterrain, volcanic, windows256
 		RotationBase: 32
-		ExcludeTilesets: RA_SNOW, RA_TEMPERAT, RA_DESERT, ARRAKIS, BARREN, TEMPERAT, SNOW, WINTER, DESERT ##########
+		ExcludeTilesets: RA_SNOW, RA_TEMPERAT, RA_DESERT, ARRAKIS, BARREN, TEMPERAT, SNOW, WINTER, DESERT, RA_PLAINS ##########
 	RotationPaletteEffect@actorswater:
-		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, ra, player, terrain, staticterrain, windows256
+		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, ra, player, terrain, staticterrain, volcanic, windows256
 		RotationBase: 32
 		ExcludeTilesets: ARRAKIS, BARREN
 	RotationPaletteEffect@rawater:
-		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, player, terrain, staticterrain, td_temperat, windows256
-		Tilesets: RA_SNOW, RA_TEMPERAT, BARREN, TEMPERAT, SNOW, WINTER, JUNGLE, CAMEO
+		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, player, terrain, staticterrain, td_temperat, volcanic, windows256
+		Tilesets: RA_SNOW, RA_TEMPERAT, BARREN, TEMPERAT, SNOW, WINTER, JUNGLE, RA_PLAINS, RA_INHOSP, CAMEO
 	PaletteFromPaletteWithAlpha@placelinesegment:
 		Name: placelinesegment
 		BasePalette: terrain
@@ -468,6 +594,11 @@
 		Tileset: BARREN
 		Filename: barren.pal
 		ShadowIndex: 4
+	PaletteFromFile@volcanic:
+		Name: volcanic
+		Tileset: VOLCANIC
+		Filename: volcanic.pal
+		ShadowIndex: 4
 	PaletteFromFile@ra_snow:
 		Name: ra_snow
 		Filename: ra_snow.pal
@@ -495,6 +626,19 @@
 	PlayerColorPalette@temperatra:
 		BaseName: raplayer
 		BasePalette: ra
+		RemapIndex: 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
+	ColorPickerPalette@colorpickerra:
+		Name: colorpickerra
+		BasePalette: ra
+		RemapIndex: 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
+		AllowModifiers: false
+	PaletteFromFile@ra-noshadow:
+		Name: ra_noshadow
+		Filename: temperatra.pal
+		TransparentIndex: 0, 4
+	PlayerColorPalette@temperatra-noshadow:
+		BaseName: raplayer_noshadow
+		BasePalette: ra_noshadow
 		RemapIndex: 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
 	PaletteFromPlayerPaletteWithAlpha@racloak:
 		BaseName: racloak
@@ -532,6 +676,11 @@
 		BasePalette: ra2unit
 		BaseName: playerra2
 		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+	# Dummy palette to satisfy RenderVoxelsInfo lint check (engine bug: PlayerPalette uses [PaletteReference] instead of [PaletteReference(true)])
+	PaletteFromPaletteWithAlpha@playerra2dummy:
+		Name: playerra2
+		BasePalette: ra2unit
+		Alpha: 1.0
 	PaletteFromPlayerPaletteWithAlpha@voxelcloak:
 		BaseName: voxelcloak
 		BasePalette: playerra2
@@ -550,6 +699,9 @@
 	PaletteFromFile@tseffect:
 		Name: tseffect
 		Filename: tsanim.pal
+	PaletteFromFile@tscameo:
+		Name: tscameo
+		Filename: tscameo.pal
 	PaletteFromFile@ra2effect:
 		Name: ra2effect
 		Filename: ra2anim.pal

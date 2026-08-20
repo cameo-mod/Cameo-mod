@@ -1,0 +1,14 @@
+{
+  "PreToolUse": [
+    {
+      "matcher": "exec",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python tools/hooks/exec_guard.py",
+          "timeout": 15
+        }
+      ]
+    }
+  ]
+}

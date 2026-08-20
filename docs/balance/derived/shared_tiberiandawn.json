@@ -1,0 +1,62 @@
+{
+ "ledger": "shared_tiberiandawn",
+ "pack": "mods/cameo/ContentPacks/TiberianDawn/Shared",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "TRAN": {
+    "shield_always_on": false,
+    "shield_gated_on_upgrade": false,
+    "shield_pool": 100000.0
+   }
+  },
+  "buildings": {
+   "BRIK": {
+    "tier_chain_cost": 0.0,
+    "tier_multiplier": 1.0
+   },
+   "FENC": {
+    "tier_chain_cost": 0.0,
+    "tier_multiplier": 1.0
+   },
+   "NUK2": {
+    "shield_always_on": false,
+    "shield_gated_on_upgrade": false,
+    "shield_pool": 300000.0,
+    "tier_chain_cost": 0.0,
+    "tier_multiplier": 1.0
+   },
+   "NUKE": {
+    "shield_always_on": false,
+    "shield_gated_on_upgrade": false,
+    "shield_pool": 150000.0,
+    "tier_chain_cost": 0.0,
+    "tier_multiplier": 1.0
+   },
+   "SBAG": {
+    "tier_chain_cost": 0.0,
+    "tier_multiplier": 1.0
+   },
+   "SILO": {
+    "shield_always_on": false,
+    "shield_gated_on_upgrade": false,
+    "shield_pool": 100000.0,
+    "tier_chain_cost": 0.0,
+    "tier_multiplier": 1.0
+   },
+   "cycl": {
+    "tier_chain_cost": 0.0,
+    "tier_multiplier": 1.0
+   }
+  },
+  "infantry": {
+   "E6": {
+    "shield_always_on": false,
+    "shield_gated_on_upgrade": true,
+    "shield_pool": 5000.0,
+    "tier_chain_cost": 0.0,
+    "tier_multiplier": 1.0
+   }
+  }
+ }
+}

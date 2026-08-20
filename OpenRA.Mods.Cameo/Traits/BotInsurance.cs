@@ -43,7 +43,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		int conditionToken = Actor.InvalidConditionToken;
 
-		[Sync]
+		[VerifySync]
 		int ticks;
 
 		public BotInsurance(BotInsuranceInfo info)

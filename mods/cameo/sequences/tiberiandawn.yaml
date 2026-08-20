@@ -4,72 +4,52 @@
 
 mcv:
 	Defaults:
-		Filename: mcv.shp
+		Filename: td_nod_mobileconstructionvehicle_mcv.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
 	icon:
-		Filename: mcvicnh.shp
-		AddExtension: False
+		Filename: td_nod_mobileconstructionvehicle_icon.shp
 	idle-overlay:
 		Filename: customoverlay.shp
 
 mcv.destroyed:
 	idle:
-		Filename: mcv.shp
+		Filename: td_nod_mobileconstructionvehicle_mcv.shp
 		Facings: 32
 		InterpolatedFacings: 64
 		ZOffset: -512
 
 harv:
 	Defaults:
-		Filename: harv.shp
+		Filename: td_nod_tiberiumharvester.shp
 	idle:
 		Facings: 32
-		InterpolatedFacings: 64
+		UseClassicFacings: True
 	harvest:
 		Start: 32
 		Length: 4
 		Facings: 8
 		Tick: 60
 	dock:
-		Filename: harvdump.shp
+		Filename: td_nod_tiberiumharvester_harvdump.shp
 		Length: 7
 	dock-loop:
-		Filename: harvdump.shp
+		Filename: td_nod_tiberiumharvester_harvdump.shp
 		Start: 7
 	icon:
-		Filename: harvicnh.shp
-		AddExtension: False
+		Filename: td_nod_tiberiumharvester_icon.shp
 
 harv.destroyed:
 	idle:
-		Filename: harv.shp
+		Filename: td_nod_tiberiumharvester.shp
 		Facings: 32
-		InterpolatedFacings: 64
+		UseClassicFacings: True
 		ZOffset: -512
-
-bggy:
-	Defaults:
-		Filename: bggy.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	turret:
-		Start: 32
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	icon:
-		Filename: bggyicnh.shp
-		AddExtension: False
 
 bggy.destroyed:
 	Defaults:
-		Filename: bggy.shp
+		Filename: td_nod_promotion_buggymkii_bggy.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -79,31 +59,10 @@ bggy.destroyed:
 		Facings: 32
 		InterpolatedFacings: 64
 		ZOffset: -512
-
-mtnk:
-	Defaults:
-		Filename: mtnk.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	turret:
-		Start: 32
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	muzzle2:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	icon:
-		Filename: mtnkicnh.shp
-		AddExtension: False
 
 mtnk.destroyed:
 	Defaults:
-		Filename: mtnk.shp
+		Filename: td_gdi_battletank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -113,27 +72,10 @@ mtnk.destroyed:
 		Facings: 32
 		InterpolatedFacings: 64
 		ZOffset: -512
-
-ltnk:
-	Defaults:
-		Filename: ltnk.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	turret:
-		Start: 32
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: ltnkicnh.shp
-		AddExtension: False
 
 ltnk.destroyed:
 	Defaults:
-		Filename: ltnk.shp
+		Filename: td_nod_lighttank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -143,27 +85,10 @@ ltnk.destroyed:
 		Facings: 32
 		InterpolatedFacings: 64
 		ZOffset: -512
-
-htnk:
-	Defaults:
-		Filename: htnk.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	turret:
-		Start: 32
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: htnkicnh.shp
-		AddExtension: False
 
 htnk.destroyed:
 	Defaults:
-		Filename: htnk.shp
+		Filename: td_gdi_mammothtank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -173,28 +98,10 @@ htnk.destroyed:
 		Facings: 32
 		InterpolatedFacings: 64
 		ZOffset: -512
-
-jeep:
-	Defaults:
-		Filename: jeep.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	turret:
-		Start: 32
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	icon:
-		Filename: jeepicnh.shp
-		AddExtension: False
 
 jeep.destroyed:
 	Defaults:
-		Filename: jeep.shp
+		Filename: td_gdi_promotion_assaultapc_jeep.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -204,151 +111,26 @@ jeep.destroyed:
 		Facings: 32
 		InterpolatedFacings: 64
 		ZOffset: -512
-
-bike:
-	Defaults:
-		Filename: bike.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: bikeicnh.shp
-		AddExtension: False
 
 bike.destroyed:
 	Defaults:
-		Filename: bike.shp
+		Filename: td_nod_reconbike.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
 		ZOffset: -512
-
-ftnk:
-	Defaults:
-		Filename: ftnk.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Combine:
-			flame-n:
-				Filename: flame-n.shp
-				Length: *
-				Offset: 3,6
-			flame-nw:
-				Filename: flame-nw.shp
-				Length: *
-				Offset: 8,7
-			flame-w:
-				Filename: flame-w.shp
-				Length: *
-				Offset: 8,2
-			flame-sw:
-				Filename: flame-sw.shp
-				Length: *
-				Offset: 7,-2
-			flame-s:
-				Filename: flame-s.shp
-				Length: *
-				Offset: 3,-2
-			flame-se:
-				Filename: flame-se.shp
-				Length: *
-				Offset: -5,-2
-			flame-e:
-				Filename: flame-e.shp
-				Length: *
-				Offset: -7,2
-			flame-ne:
-				Filename: flame-ne.shp
-				Length: *
-				Offset: -7,8
-		Facings: 8
-		Length: 13
-	icon:
-		Filename: ftnkicnh.shp
-		AddExtension: False
 
 ftnk.destroyed:
 	Defaults:
-		Filename: ftnk.shp
+		Filename: td_nod_flametank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
 		ZOffset: -512
-
-msam:
-	Defaults:
-		Filename: msam.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	turret:
-		Start: 32
-		Facings: 32
-		InterpolatedFacings: 64
-	empty-aim:
-		Start: 64
-		Facings: 32
-		InterpolatedFacings: 64
-	aim:
-		Start: 64
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: msamicnh.shp
-		AddExtension: False
-
-gdiarcher:
-	Defaults:
-		Filename: gdiarcherchassis.png
-	idle:
-		Facings: 64
-		Offset: 0,10
-	turret:
-		Filename: gdiarchercannon.png
-		Facings: 64
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: gdiarchericon.png
-		AddExtension: False
-
-mlrs:
-	Defaults:
-		Filename: mlrs.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	turret:
-		Start: 32
-		Facings: 32
-		InterpolatedFacings: 64
-	turret1:
-		Start: 64
-		Facings: 32
-		InterpolatedFacings: 64
-	turret0:
-		Start: 96
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: mlrsicnh.shp
-		AddExtension: False
 
 mlrs.destroyed:
 	Defaults:
-		Filename: mlrs.shp
+		Filename: td_nod_ssmlauncher_mlrs.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -358,78 +140,26 @@ mlrs.destroyed:
 		Facings: 32
 		InterpolatedFacings: 64
 		ZOffset: -512
-
-stnk:
-	Defaults:
-		Filename: stnk.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: stnkicnh.shp
-		AddExtension: False
 
 stnk.destroyed:
 	Defaults:
-		Filename: stnk.shp
+		Filename: td_nod_stealthtank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
 		ZOffset: -512
-
-arty:
-	Defaults:
-		Filename: arty.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: artyicnh.shp
-		AddExtension: False
 
 arty.destroyed:
 	Defaults:
-		Filename: arty.shp
+		Filename: td_nod_artillery.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
 		ZOffset: -512
 
-apc:
-	Defaults:
-		Filename: apc.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	turret:
-		Filename: apctur.shp
-		Scale: 2.0
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: apcmuz.shp
-		Scale: 2.0
-		Length: 3
-		Stride: 6
-		Facings: 8
-	close:
-		Start: 32
-		Length: 3
-	unload:
-		Start: 32
-	icon:
-		Filename: apcicnh.shp
-		AddExtension: False
-
 apc.destroyed:
 	Defaults:
-		Filename: apc.shp
+		Filename: td_gdi_apc.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -469,7 +199,7 @@ c17:
 
 tran:
 	Defaults:
-		Filename: tran.shp
+		Filename: td_nod_chinooktransport.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -497,77 +227,7 @@ tran:
 	unload:
 		Start: 35
 	icon:
-		Filename: tranicnh.shp
-		AddExtension: False
-
-heli:
-	Defaults:
-		Filename: heli.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	rotor: lrotor
-		Filename: lrotor.shp
-		Scale: 1.25
-		Length: 4
-	slow-rotor:
-		Filename: lrotor.shp
-		Scale: 1.25
-		Start: 4
-		Length: 8
-	muzzle:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	icon:
-		Filename: heliicnh.shp
-		AddExtension: False
-
-orca:
-	Defaults:
-		Filename: orca.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	move:
-		Start: 32
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: orcaicnh.shp
-		AddExtension: False
-
-a10:
-	Defaults:
-		Filename: a10.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	icon:
-		Filename: a10icnh.shp
-		AddExtension: False
-
-a10carrier:
-	Defaults:
-		Filename: a10.shp
-		Scale: 0.5
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	icon:
-		Filename: a10icnh.shp
-		AddExtension: False
+		Filename: td_nod_chinooktransport_icon.shp
 
 fact:
 	Inherits: ^WithBuildingBib2
@@ -597,70 +257,7 @@ fact:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: facticnh.shp
-	idle-overlay:
-		Filename: customoverlay.shp
-
-nodfact:
-	Inherits: ^WithBuildingBib2
-	Defaults:
-		Filename: nodfact.shp
-	build:
-		Start: 4
-		Length: 20
-		Tick: 100
-	idle:
-		Length: 4
-		Tick: 100
-	damaged-idle:
-		Start: 24
-		Length: 4
-		Tick: 100
-	damaged-build:
-		Start: 28
-		Length: 20
-		Tick: 100
-	dead:
-		Start: 48
-		Tick: 800
-	make:
-		Filename: nodfactmake.shp
-		Length: *
-		Tick: 80
-		Offset: 0,-2
-	icon:
-		Filename: facticnh.shp
-	idle-overlay:
-		Filename: customoverlay.shp
-
-gdifact:
-	Inherits: ^WithBuildingBib2
-	Defaults:
-		Filename: gdifact.shp
-	build:
-		Start: 4
-		Length: 20
-		Tick: 100
-	idle:
-		Length: 4
-		Tick: 100
-	damaged-idle:
-		Start: 24
-		Length: 4
-		Tick: 100
-	damaged-build:
-		Start: 28
-		Length: 20
-		Tick: 100
-	dead:
-		Start: 48
-		Tick: 800
-	make:
-		Filename: gdifactmake.shp
-		Length: *
-		Tick: 80
-	icon:
-		Filename: facticnh.shp
+		Filename: td_nod_constructionyard_icon.shp
 	idle-overlay:
 		Filename: customoverlay.shp
 
@@ -684,12 +281,11 @@ nuke:
 		Tick: 80
 	icon:
 		Filename: nukeicnh.tem
-		AddExtension: False
 
 proc:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: proc.shp
+		Filename: td_nod_tiberiumrefinery_proc.shp
 	idle:
 		Length: 6
 		Tick: 120
@@ -704,7 +300,7 @@ proc:
 		Tick: 800
 		Offset: 4,8
 	make:
-		Filename: procmake.shp
+		Filename: td_nod_tiberiumrefinery_procmake.shp
 		Length: *
 		Tick: 80
 		Offset: 4,8
@@ -718,10 +314,10 @@ proc:
 		Length: 6
 		Offset: -60,-34
 	icon:
-		Filename: procicnh.shp
-		AddExtension: False
+		Filename: td_nod_tiberiumrefinery_icon.shp
 
 silo:
+	Inherits: ^WithBuildingBibIron
 	Defaults:
 		Filename: silo.shp
 	idle:
@@ -746,155 +342,14 @@ silo:
 		Tick: 80
 		Offset: 0,-1
 	bib:
-		Filename: mbIRON.tem
-		UseTilesetExtension: true
-		TilesetFilenames:
-			DESERT: mbIRON.des
-			WINTER: mbIRON.win
-			SNOW: mbIRON.sno
-			BARREN: mbIRON.des
-			JUNGLE: mbIRON.jun
-			RA_SNOW: mbIRON.sno
-			RA_DESERT: mbIRON.des
-			RA_INTERIOR: mbIRON.int
-			ARRAKIS: mbIRON.des
-			ARRAKIS2: mbIRON.des
-		Length: *
 		Offset: -1,6
 	icon:
 		Filename: siloicnh.shp
-		AddExtension: False
-
-hand:
-	Inherits: ^WithBuildingBib3
-	Defaults:
-		Filename: hand.shp
-		Offset: 0,-0
-	idle:
-	damaged-idle:
-		Start: 1
-	dead:
-		Start: 2
-		Tick: 800
-	make:
-		Filename: handmake.shp
-		Length: *
-		Tick: 80
-	icon:
-		Filename: handicnh.shp
-		AddExtension: False
-		Offset: 0,0
-
-pyle:
-	Inherits: ^WithBuildingBib3
-	Defaults:
-		Filename: pyle.shp
-	idle:
-		Length: 10
-		Tick: 100
-	damaged-idle:
-		Start: 10
-		Length: 10
-		Tick: 100
-	dead:
-		Start: 20
-		Tick: 800
-	make:
-		Filename: pylemake.shp
-		Length: *
-		Tick: 80
-	icon:
-		Filename: pyleicnh.shp
-		AddExtension: False
-
-weap:
-	Inherits: ^WithBuildingBib2
-	Defaults:
-		Filename: weap.shp
-		Offset: 0,-12
-	idle:
-		ZOffset: -511
-	damaged-idle:
-		Start: 1
-		ZOffset: -511
-	dead:
-		Start: 2
-		Tick: 800
-	build-top:
-		Filename: weap2.shp
-		Length: 10
-		ZOffset: -1024
-	damaged-build-top:
-		Filename: weap2.shp
-		Start: 10
-		Length: 10
-		ZOffset: -1024
-	customhack:
-		Filename: weap2.shp
-		Length: 1
-	damaged-customhack:
-		Filename: weap2.shp
-		Start: 10
-		Length: 1
-	place:
-		Filename: weapmake.shp
-		Start: 19
-	make:
-		Filename: weapmake.shp
-		Length: *
-		Tick: 80
-	bib:
-		Offset: 0,0
-	icon:
-		Filename: weapicnh.shp
-		AddExtension: False
-		Offset: 0,0
-
-afld:
-	Inherits: ^WithBuildingBib1
-	Defaults:
-		Filename: afld.shp
-	idle:
-		Tick: 120
-		ZOffset: -1023
-	damaged-idle:
-		Start: 16
-		Tick: 120
-		ZOffset: -1023
-	active:
-		Length: 16
-		Tick: 120
-		ZOffset: -1023
-	damaged-active:
-		Start: 16
-		Length: 16
-		Tick: 120
-		ZOffset: -1023
-	idle-dish:
-		Filename: afld_d.shp
-		Length: 16
-		Tick: 160
-	damaged-idle-dish:
-		Filename: afld_d.shp
-		Start: 16
-		Length: 16
-		Tick: 160
-	dead:
-		Start: 32
-		ZOffset: -1023
-		Tick: 800
-	make:
-		Filename: afldmake.shp
-		Length: *
-		Tick: 80
-	icon:
-		Filename: afldicnh.shp
-		AddExtension: False
 
 hq:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: hq.shp
+		Filename: td_nod_communicationscenter_hq.shp
 	idle:
 		Length: 16
 		Tick: 100
@@ -906,14 +361,14 @@ hq:
 		Start: 32
 		Tick: 800
 	make:
-		Filename: hqmake.shp
+		Filename: td_nod_communicationscenter_hqmake.shp
 		Length: *
 		Tick: 80
 	icon:
-		Filename: hqicnh.shp
-		AddExtension: False
+		Filename: td_nod_communicationscenter_icon.shp
 
 nuk2:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: nuk2.shp
 	idle:
@@ -931,431 +386,68 @@ nuk2:
 		Length: *
 		Tick: 80
 	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: nuk2icnh.shp
-		AddExtension: False
 
 hpad:
-	Defaults:
-		Filename: hpad.shp
-	idle:
-		ZOffset: -1023
-	damaged-idle:
-		Start: 7
-		ZOffset: -1023
-	active:
-		Start: 1
-		Length: 6
-		Tick: 100
-		ZOffset: -1023
-	damaged-active:
-		Start: 8
-		Length: 6
-		Tick: 100
-		ZOffset: -1023
-	dead:
-		Start: 14
-		ZOffset: -1023
-		Tick: 800
-	make:
-		Filename: hpadmake.shp
-		Length: *
-		Tick: 80
-	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		UseTilesetExtension: true
-		Length: *
-	icon:
-		Filename: hpadicnh.shp
-		AddExtension: False
-
-fix:
-	Defaults:
-		Filename: fix.shp
-	idle:
-		ZOffset: -1c511
-	damaged-idle:
-		Start: 7
-		ZOffset: -1c511
-	active:
-		Length: 7
-		ZOffset: -1c511
-	damaged-active:
-		Start: 7
-		Length: 7
-		ZOffset: -1c511
-	dead:
-		Start: 14
-		ZOffset: -1c511
-		Tick: 800
-	make:
-		Filename: fixmake.shp
-		Length: 14
-		Tick: 60
-	bib:
-		Filename: mbFIX.tem
-		TilesetFilenames:
-			DESERT: mbFIX.des
-			WINTER: mbFIX.win
-			SNOW: mbFIX.sno
-			BARREN: mbFIX.bar
-			JUNGLE: mbFIX.jun
-			RA_SNOW: mbFIX.sno
-			RA_DESERT: mbFIX.des
-			RA_INTERIOR: mbFIX.int
-			ARRAKIS: mbFIX.des
-			ARRAKIS2: mbFIX.des
-		Length: *
-		Offset: 0,-10
-	icon:
-		Filename: fixicnh.shp
-		AddExtension: False
-
-eye:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: eye.shp
+		Filename: td_nod_helipad_hpad.shp
 	idle:
-		Length: 16
-		Tick: 100
+		ZOffset: -1023
 	damaged-idle:
-		Start: 16
-		Length: 16
+		Start: 7
+		ZOffset: -1023
+	active:
+		Start: 1
+		Length: 6
 		Tick: 100
+		ZOffset: -1023
+	damaged-active:
+		Start: 8
+		Length: 6
+		Tick: 100
+		ZOffset: -1023
 	dead:
-		Start: 32
+		Start: 14
+		ZOffset: -1023
 		Tick: 800
 	make:
-		Filename: eyemake.shp
+		Filename: td_nod_helipad_make.shp
 		Length: *
 		Tick: 80
+	bib:
 	icon:
-		Filename: eyeicnh.shp
-		AddExtension: False
+		Filename: td_nod_helipad_icon.shp
 
-eye.ionc:
-	icon:
-		Filename: addon_ioncannon_icon.png
-		AddExtension: False
-		Offset: 0,0
-
-tmpl:
-	Inherits: ^WithBuildingBib2
+fix:
+	Inherits: ^WithBuildingBibFix
 	Defaults:
-		Filename: tmpl.shp
-		Offset: 0,-24
+		Filename: td_nod_repairfacility_fix.shp
 	idle:
+		ZOffset: -1c511
 	damaged-idle:
-		Start: 33
+		Start: 7
+		ZOffset: -1c511
 	active:
-		Length: 33
-		Tick: 200
-	smoke:
-		Filename: atomdoor.shp
-		Length: *
-		Offset: -2,-94
+		Length: 7
+		ZOffset: -1c511
 	damaged-active:
-		Start: 33
-		Length: 33
-		Tick: 200
+		Start: 7
+		Length: 7
+		ZOffset: -1c511
 	dead:
-		Start: 66
+		Start: 14
+		ZOffset: -1c511
 		Tick: 800
 	make:
-		Filename: tmplmake.shp
-		Length: *
+		Filename: td_nod_repairfacility_fixmake.shp
+		Length: 14
 		Tick: 60
 	bib:
-		Offset: 0,0
+		Offset: 0,-10
 	icon:
-		Filename: tmplicnh.shp
-		AddExtension: False
-		Offset: 0,0
-
-tmpl.nuke:
-	icon:
-		Filename: addon_nuketemple_icon.png
-		AddExtension: False
-		Offset: 0,0
-
-obli:
-	Defaults:
-		Filename: obli.shp
-		Offset: 0,-24
-	idle:
-	damaged-idle:
-		Start: 4
-	active:
-		Length: 4
-		Tick: 680
-	damaged-active:
-		Start: 4
-		Length: 4
-		Tick: 680
-	dead:
-		Start: 8
-		Tick: 800
-	make:
-		Filename: oblimake.shp
-		Length: 13
-		Tick: 80
-	bib:
-		Filename: mbTSLA.tem
-		TilesetFilenames:
-			DESERT: mbTSLA.des
-			WINTER: mbTSLA.win
-			SNOW: mbTSLA.sno
-			BARREN: mbTSLA.bar
-			JUNGLE: mbTSLA.jun
-			RA_SNOW: mbTSLA.sno
-			RA_DESERT: mbTSLA.des
-			RA_INTERIOR: mbTSLA.int
-			ARRAKIS: mbTSLA.des
-			ARRAKIS2: mbTSLA.des
-		Length: *
-		Offset: -5,-10
-	icon:
-		Filename: obliicnh.shp
-		AddExtension: False
-		Offset: 0,0
-
-gun:
-	Defaults:
-		Filename: gun.shp
-	idle:
-		Facings: 32
-	recoil:
-		Start: 32
-		Facings: 32
-	damaged-idle:
-		Start: 64
-		Facings: 32
-	damaged-recoil:
-		Start: 96
-		Facings: 32
-	make:
-		Filename: gunmake.shp
-		Length: *
-		Tick: 80
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	bib:
-		Filename: mbGUN.tem
-		TilesetFilenames:
-			DESERT: mbGUN.des
-			WINTER: mbGUN.win
-			SNOW: mbGUN.sno
-			BARREN: mbGUN.bar
-			JUNGLE: mbGUN.jun
-			RA_SNOW: mbGUN.sno
-			RA_DESERT: mbGUN.des
-			RA_INTERIOR: mbGUN.int
-			ARRAKIS: mbGUN.des
-			ARRAKIS2: mbGUN.des
-		Length: *
-		Offset: -1,-1
-	icon:
-		Filename: gunicnh.shp
-		AddExtension: False
-
-nodlaserturret:
-	Defaults:
-		Filename: NodTurretBuildupFiring.png
-	idle:
-		Start: 6
-		Facings: 64
-	damaged-idle:
-		Filename: NodTurretDamagedFiring.png
-		Facings: 64
-	make:
-		Length: 7
-		Tick: 80
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	bib:
-		Filename: mbGUN.tem
-		TilesetFilenames:
-			DESERT: mbGUN.des
-			WINTER: mbGUN.win
-			SNOW: mbGUN.sno
-			BARREN: mbGUN.bar
-			JUNGLE: mbGUN.jun
-			RA_SNOW: mbGUN.sno
-			RA_DESERT: mbGUN.des
-			RA_INTERIOR: mbGUN.int
-			ARRAKIS: mbGUN.des
-			ARRAKIS2: mbGUN.des
-		Length: *
-		Offset: -1,-1
-	icon:
-		Filename: NodLaserTurretIcon.png
-		AddExtension: False
-
-sam:
-	Defaults:
-		Filename: sam.shp
-	closed-idle:
-		Start: 0
-	opening:
-		Start: 1
-		Length: 16
-		Tick: 30
-	idle:
-		Start: 17
-		Facings: 32
-	closing:
-		Start: 50
-		Length: 14
-		Tick: 30
-	damaged-closed-idle:
-		Start: 64
-	damaged-opening:
-		Start: 65
-		Length: 16
-		Tick: 30
-	damaged-idle:
-		Start: 81
-		Facings: 32
-	damaged-closing:
-		Start: 114
-		Length: 14
-		Tick: 30
-	dead:
-		Start: 128
-		Tick: 800
-	place:
-		Start: 0
-	make:
-		Filename: sammake.shp
-		Length: 20
-		Tick: 30
-	muzzle:
-		Filename: rasamfire.shp
-		Length: 18
-		Facings: 8
-		Offset: 0,14
-	icon:
-		Filename: samicon.png
-		AddExtension: False
-
-gtwr:
-	Defaults:
-		Filename: gtwr.shp
-	idle:
-	damaged-idle:
-		Start: 1
-	dead:
-		Start: 2
-		Tick: 800
-	make:
-		Combine:
-			gtwrmake:
-				Filename: gtwrmake.shp
-				Length: 15
-		Length: 15
-		Tick: 80
-	muzzle:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	bib:
-		Filename: mbGUN.tem
-		TilesetFilenames:
-			DESERT: mbGUN.des
-			WINTER: mbGUN.win
-			SNOW: mbGUN.sno
-			BARREN: mbGUN.bar
-			JUNGLE: mbGUN.jun
-			RA_SNOW: mbGUN.sno
-			RA_DESERT: mbGUN.des
-			RA_INTERIOR: mbGUN.int
-			ARRAKIS: mbGUN.des
-			ARRAKIS2: mbGUN.des
-		Length: *
-		Offset: -1,-2
-	icon:
-		Filename: gtwricnh.shp
-		AddExtension: False
-
-atwr:
-	Defaults:
-		Filename: atwr.shp
-		Offset: 0,-26
-	idle:
-	damaged-idle:
-		Start: 1
-	dead:
-		Start: 2
-		Tick: 800
-	make:
-		Filename: atwrmake.shp
-		Length: *
-		Tick: 80
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-		Offset: 0,0
-	bib:
-		Filename: mbRASILO.tem
-		TilesetFilenames:
-			DESERT: mbRASILO.des
-			WINTER: mbRASILO.win
-			SNOW: mbRASILO.sno
-			BARREN: mbRASILO.bar
-			JUNGLE: mbRASILO.jun
-			RA_SNOW: mbRASILO.sno
-			RA_DESERT: mbRASILO.des
-			RA_INTERIOR: mbRASILO.int
-			ARRAKIS: mbRASILO.des
-			ARRAKIS2: mbRASILO.des
-		Length: *
-		Offset: -3,0
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: atwricnh.shp
-		AddExtension: False
-		Offset: 0,0
+		Filename: td_nod_repairfacility_icon.shp
 
 brik:
 	Defaults:
@@ -1370,7 +462,6 @@ brik:
 		Length: 16
 	icon:
 		Filename: brikicon.png
-		AddExtension: False
 
 sbag:
 	Defaults:
@@ -1379,7 +470,6 @@ sbag:
 		Length: 16
 	icon:
 		Filename: sbagicon.png
-		AddExtension: False
 
 cycl:
 	Defaults:
@@ -1391,7 +481,6 @@ cycl:
 		Length: 16
 	icon:
 		Filename: cyclicon.png
-		AddExtension: False
 
 barb:
 	Defaults:
@@ -1439,38 +528,58 @@ vice:
 	Inherits: ^InfantryOverlays
 	idle:
 		Length: *
+	idle1:
+		Length: *
+	idle2:
+		Length: *
+	die:
+		Length: *
+	die1:
+		Length: *
+	die2:
+		Length: *
+	die3:
+		Length: *
+	die4:
+		Length: *
+	die5:
+		Length: *
+	die6:
+		Length: *
+	die7:
+		Length: *
 	muzzle:
 		Combine:
-			chem-n:
-				Filename: chem-n.shp
+			chem_n:
+				Filename: chem_n.shp
 				Length: *
 				Offset: 1,2
-			chem-nw:
-				Filename: chem-nw.shp
+			chem_nw:
+				Filename: chem_nw.shp
 				Length: *
 				Offset: 8,2
-			chem-w:
-				Filename: chem-w.shp
+			chem_w:
+				Filename: chem_w.shp
 				Length: *
 				Offset: 8,-3
-			chem-sw:
-				Filename: chem-sw.shp
+			chem_sw:
+				Filename: chem_sw.shp
 				Length: *
 				Offset: 7,-6
-			chem-s:
-				Filename: chem-s.shp
+			chem_s:
+				Filename: chem_s.shp
 				Length: *
 				Offset: 1,-6
-			chem-se:
-				Filename: chem-se.shp
+			chem_se:
+				Filename: chem_se.shp
 				Length: *
 				Offset: -5,-6
-			chem-e:
-				Filename: chem-e.shp
+			chem_e:
+				Filename: chem_e.shp
 				Length: *
 				Offset: -7,-3
-			chem-ne:
-				Filename: chem-ne.shp
+			chem_ne:
+				Filename: chem_ne.shp
 				Length: *
 				Offset: -3,2
 		Facings: 8
@@ -1482,578 +591,6 @@ pvice:
 	Defaults:
 		Filename: pvice.shp
 	Inherits: vice
-
-e1:
-	Inherits: ^InfantryOverlays
-	Defaults:
-		Filename: e1.shp
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Facings: 8
-	run:
-		Start: 16
-		Length: 6
-		Facings: 8
-		Tick: 100
-	shoot:
-		Start: 64
-		Length: 8
-		Facings: 8
-	prone-stand:
-		Start: 144
-		Stride: 4
-		Facings: 8
-	prone-stand2:
-		Start: 144
-		Stride: 4
-		Facings: 8
-	prone-run:
-		Start: 144
-		Length: 4
-		Facings: 8
-		Tick: 100
-	# stand -> prone transition
-	liedown:
-		Start: 128
-		Length: 2
-		Facings: 8
-	# prone -> stand transition
-	standup:
-		Start: 176
-		Length: 2
-		Facings: 8
-	prone-shoot:
-		Start: 192
-		Length: 8
-		Facings: 8
-	idle1:
-		Start: 256
-		Length: 16
-		Tick: 120
-	idle2:
-		Start: 272
-		Length: 16
-		Tick: 120
-	parachute:
-		Start: 377
-	# Shot
-	die1:
-		Start: 288
-		Length: 8
-		Tick: 80
-	# Explode
-	die2:
-		Start: 296
-		Length: 8
-		Tick: 80
-	# Fly and explode in air
-	die3:
-		Start: 304
-		Length: 8
-		Tick: 80
-	# Fly through air squish on ground
-	die4:
-		Start: 312
-		Length: 12
-		Tick: 80
-	# Burn
-	die5:
-		Start: 324
-		Length: 18
-		Tick: 80
-	# Tib
-	die6:
-		Start: 296
-		Length: 8
-		Tick: 80
-	# Electro
-	die7: ##########
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: e1rot.shp
-		Start: 16
-		Length: 4
-		Tick: 1600
-		ZOffset: -511
-	garrison-muzzle:
-		Filename: minigun.shp
-		Length: 3
-		Stride: 6
-		Facings: 8
-	icon:
-		Filename: e1icnh.shp
-		AddExtension: False
-
-e2:
-	Inherits: ^InfantryOverlays
-	Defaults:
-		Filename: e2.shp
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Facings: 8
-	run:
-		Start: 16
-		Length: 6
-		Facings: 8
-		Tick: 100
-	throw:
-		Start: 64
-		Length: 20
-		Facings: 8
-	# stand -> prone transition
-	liedown:
-		Start: 224
-		Length: 2
-		Facings: 8
-	# prone -> stand transition
-	standup:
-		Start: 272
-		Length: 2
-		Facings: 8
-	prone-stand:
-		Start: 240
-		Stride: 4
-		Facings: 8
-	prone-stand2:
-		Start: 240
-		Stride: 4
-		Facings: 8
-	prone-run:
-		Start: 240
-		Length: 4
-		Facings: 8
-		Tick: 100
-	prone-throw:
-		Start: 288
-		Length: 12
-		Facings: 8
-	idle1:
-		Start: 384
-		Length: 16
-		Tick: 120
-	idle2:
-		Start: 399
-		Length: 16
-		Tick: 120
-	parachute:
-		Start: 505
-	die1:
-		Start: 416
-		Length: 8
-		Tick: 80
-	die2:
-		Start: 424
-		Length: 8
-		Tick: 80
-	die3:
-		Start: 432
-		Length: 8
-		Tick: 80
-	die4:
-		Start: 440
-		Length: 12
-		Tick: 80
-	die5:
-		Start: 452
-		Length: 18
-		Tick: 80
-	die6:
-		Start: 416
-		Length: 8
-		Tick: 80
-	# Electro
-	die7: ##########
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: e2rot.shp
-		Start: 16
-		Length: 4
-		Tick: 1600
-		ZOffset: -511
-	icon:
-		Filename: e2icnh.shp
-		AddExtension: False
-
-e3:
-	Inherits: ^InfantryOverlays
-	Defaults:
-		Filename: e3.shp
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Facings: 8
-	run:
-		Start: 16
-		Length: 6
-		Facings: 8
-		Tick: 100
-	shoot:
-		Start: 64
-		Length: 8
-		Facings: 8
-	# stand -> prone transition
-	liedown:
-		Start: 128
-		Length: 2
-		Facings: 8
-	# prone -> stand transition
-	standup:
-		Start: 176
-		Length: 2
-		Facings: 8
-	prone-stand:
-		Start: 144
-		Stride: 4
-		Facings: 8
-	prone-stand2:
-		Start: 144
-		Stride: 4
-		Facings: 8
-	prone-run:
-		Start: 144
-		Length: 4
-		Facings: 8
-		Tick: 100
-	prone-shoot:
-		Start: 192
-		Length: 10
-		Facings: 8
-	idle1:
-		Start: 272
-		Length: 14
-		Tick: 120
-	idle2:
-		Start: 286
-		Length: 18
-		Tick: 120
-	parachute:
-		Start: 393
-	# Shot
-	die1:
-		Start: 303
-		Length: 9
-		Tick: 80
-	# Explode
-	die2:
-		Start: 312
-		Length: 8
-		Tick: 80
-	# Fly and explode in air
-	die3:
-		Start: 320
-		Length: 8
-		Tick: 80
-	# Fly through air squish on ground
-	die4:
-		Start: 328
-		Length: 12
-		Tick: 80
-	# Burn
-	die5:
-		Start: 340
-		Length: 18
-		Tick: 80
-	# Tib
-	die6:
-		Start: 312
-		Length: 8
-		Tick: 80
-	# Electro
-	die7: ##########
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: e3rot.shp
-		Start: 16
-		Length: 4
-		Tick: 1600
-		ZOffset: -511
-	icon:
-		Filename: e3icnh.shp
-		AddExtension: False
-
-e4:
-	Inherits: ^InfantryOverlays
-	Defaults:
-		Filename: e4.shp
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Facings: 8
-	run:
-		Start: 16
-		Length: 6
-		Facings: 8
-		Tick: 100
-	shoot:
-		Start: 64
-		Length: 16
-		Facings: 8
-	# stand -> prone transition
-	liedown:
-		Start: 192
-		Length: 2
-		Facings: 8
-	# prone -> stand transition
-	standup:
-		Start: 240
-		Length: 2
-		Facings: 8
-	prone-stand:
-		Start: 208
-		Stride: 4
-		Facings: 8
-	prone-stand2:
-		Start: 208
-		Stride: 4
-		Facings: 8
-	prone-run:
-		Start: 208
-		Length: 4
-		Facings: 8
-		Tick: 100
-	prone-shoot:
-		Start: 256
-		Length: 16
-		Facings: 8
-	idle1:
-		Start: 384
-		Length: 16
-		Tick: 120
-	idle2:
-		Start: 400
-		Length: 16
-		Tick: 120
-	parachute:
-		Start: 528
-	# Shot
-	die1:
-		Start: 416
-		Length: 8
-		Tick: 80
-	# Explode
-	die2:
-		Start: 424
-		Length: 8
-		Tick: 80
-	# Fly and explode in air
-	die3:
-		Start: 432
-		Length: 8
-		Tick: 80
-	# Fly through air squish on ground
-	die4:
-		Start: 440
-		Length: 12
-		Tick: 80
-	# Burn
-	die5:
-		Start: 452
-		Length: 18
-		Tick: 80
-	# Tib
-	die6:
-		Start: 424
-		Length: 8
-		Tick: 80
-	# Electro
-	die7: ##########
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: e4rot.shp
-		Start: 16
-		Length: 4
-		Tick: 1600
-		ZOffset: -511
-	muzzle:
-		Combine:
-			flame-n:
-				Filename: flame-n.shp
-				Length: *
-				Offset: 1,6
-			flame-nw:
-				Filename: flame-nw.shp
-				Length: *
-				Offset: 8,7
-			flame-w:
-				Filename: flame-w.shp
-				Length: *
-				Offset: 8,2
-			flame-sw:
-				Filename: flame-sw.shp
-				Length: *
-				Offset: 7,-2
-			flame-s:
-				Filename: flame-s.shp
-				Length: *
-				Offset: 1,-2
-			flame-se:
-				Filename: flame-se.shp
-				Length: *
-				Offset: -5,-2
-			flame-e:
-				Filename: flame-e.shp
-				Length: *
-				Offset: -7,2
-			flame-ne:
-				Filename: flame-ne.shp
-				Length: *
-				Offset: -7,8
-		Facings: 8
-		Length: 13
-	icon:
-		Filename: e4icnh.shp
-		AddExtension: False
-
-e5:
-	Defaults:
-		Filename: e5.shp
-		Scale: 0.75
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Facings: 8
-	run:
-		Start: 16
-		Length: 6
-		Facings: 8
-		Tick: 100
-	shoot:
-		Start: 64
-		Length: 16
-		Facings: 8
-	# stand -> prone transition
-	liedown:
-		Start: 192
-		Length: 2
-		Facings: 8
-	# prone -> stand transition
-	standup:
-		Start: 240
-		Length: 2
-		Facings: 8
-	prone-stand:
-		Start: 208
-		Stride: 4
-		Facings: 8
-	prone-stand2:
-		Start: 208
-		Stride: 4
-		Facings: 8
-	prone-run:
-		Start: 208
-		Length: 4
-		Facings: 8
-		Tick: 100
-	prone-shoot:
-		Start: 256
-		Length: 16
-		Facings: 8
-	idle1:
-		Start: 384
-		Length: 16
-		Tick: 120
-	idle2:
-		Start: 400
-		Length: 18
-		Tick: 120
-	idle3:
-		Start: 418
-		Length: 18
-		Tick: 120
-	idle4:
-		Start: 458
-		Length: 25
-		Tick: 120
-	# Shot
-	die1:
-		Start: 509
-		Length: 9
-		Tick: 80
-	# Explode
-	die2:
-		Start: 518
-		Length: 8
-		Tick: 80
-	# Fly and explode in air
-	die3:
-		Start: 526
-		Length: 8
-		Tick: 80
-	# Fly through air squish on ground
-	die4:
-		Start: 534
-		Length: 12
-		Tick: 80
-	# Burn
-	die5:
-		Start: 546
-		Length: 18
-		Tick: 80
-	# Tib
-	die6:
-		Start: 494
-		Length: 10
-		Tick: 80
-	# Electro
-	die7: ##########
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: e4rot.shp
-		Start: 16
-		Length: 4
-		Tick: 1600
-		ZOffset: -511
-	muzzle:
-		Combine:
-			chem-n:
-				Filename: chem-n.shp
-				Length: *
-				Offset: 1,2
-			chem-nw:
-				Filename: chem-nw.shp
-				Length: *
-				Offset: 8,2
-			chem-w:
-				Filename: chem-w.shp
-				Length: *
-				Offset: 8,-3
-			chem-sw:
-				Filename: chem-sw.shp
-				Length: *
-				Offset: 7,-6
-			chem-s:
-				Filename: chem-s.shp
-				Length: *
-				Offset: 1,-6
-			chem-se:
-				Filename: chem-se.shp
-				Length: *
-				Offset: -5,-6
-			chem-e:
-				Filename: chem-e.shp
-				Length: *
-				Offset: -7,-3
-			chem-ne:
-				Filename: chem-ne.shp
-				Length: *
-				Offset: -3,2
-		Facings: 8
-		Length: 13
-	icon:
-		Filename: e5icnh.shp
-		Scale: 1
 
 e6:
 	Inherits: ^InfantryOverlays
@@ -2144,7 +681,6 @@ e6:
 		ZOffset: -511
 	icon:
 		Filename: e6icnh.shp
-		AddExtension: False
 	scicon:
 		Filename: sce6icon.shp
 	2100icon:
@@ -2252,8 +788,7 @@ rmbo:
 		Tick: 1600
 		ZOffset: -511
 	icon:
-		Filename: rmboicnh.shp
-		AddExtension: False
+		Filename: td_nod_commando_icon.shp
 
 ^BasicInfantryTibsun:
 	Defaults:
@@ -2368,23 +903,6 @@ rmbo:
 		Facings: 8
 		Scale: 2.0
 
-tsflameall:
-	idle:
-		Filename: tsflameall.shp
-		Scale: 0.5
-		Length: 19
-		#ShadowStart: 76
-		Facings: -8
-		Tick: 106
-		ZOffset: 1023
-
-bhreddragon:
-	idle:
-		Filename: bhreddragon.shp
-		Facings: 32
-		InterpolatedFacings: 64
-		ZOffset: 1023
-
 bhreddragonemp:
 	idle:
 		Filename: bhreddragonemp.shp
@@ -2396,266 +914,25 @@ tsblackhandlaser2:
 	Inherits: ^BasicInfantryTibsun
 	Inherits@attack: ^BasicInfantryAttackTibsun
 	Defaults:
+		Scale: 1.16
 		Filename: tsblackhandlaser.shp
 	icon:
-		Filename: tsblackhandlasericon.shp
-tsblackhandflamer:
-	Inherits: ^BasicInfantryTibsun
-	Inherits: ^InfantryOverlays
-	Inherits@attack: ^BasicInfantryAttackTibsun
-	Defaults:
-		Filename: tsblackhandflamer.shp
-		Scale: 1.333
-	icon:
-		Filename: tsblackhandflamericon.shp
+		Filename: td_nod_promotion_lasertrooper_icon.shp
+
 tsstealthsoldier2:
 	Inherits: ^BasicInfantryTibsun
 	Inherits@attack: ^BasicInfantryAttackTibsun
 	Defaults:
+		Scale: 1.05
 		Filename: tsstealthsoldier.shp
 	icon:
-		Filename: tsstealthsoldiericon.shp
-
-stealthtech:
-	icon:
-		Filename: stealth_tech_icon.shp
-
-tsstealthsoldier:
-	Defaults:
-		Filename: nodstealthsoldier.shp
-		Scale: 1.333
-	Inherits: ^InfantryOverlays
-	stand:
-		Start: 1
-		Facings: 8
-	stand2:
-		Start: 9
-		Facings: 8
-	run:
-		Start: 25
-		Length: 6
-		Facings: 8
-		Tick: 100
-	shoot:
-		Start: 121
-		Length: 6
-		Facings: 8
-	prone-stand:
-		Start: 17
-		Facings: 8
-	prone-stand2:
-		Start: 144
-		Stride: 4
-		Facings: 8
-	prone-run:
-		Start: 73
-		Length: 6
-		Facings: 8
-		Tick: 100
-	# stand -> prone transition
-	liedown:
-		Start: 217
-		Facings: 8
-	# prone -> stand transition
-	standup:
-		Start: 217
-		Facings: 8
-	prone-shoot:
-		Start: 169
-		Length: 6
-		Facings: 8
-	idle1:
-		Start: 225
-		Length: 8
-		Tick: 120
-	idle2:
-		Start: 234
-		Length: 2
-		Tick: 120
-	idle3:
-		Start: 250
-		Length: 12
-		Tick: 120
-	cheer:
-		Start: 217
-		Facings: 8
-	# Dancing
-	idle4:
-		Start: 262
-		Length: 12
-		Tick: 120
-	# Shot
-	die1:
-		Start: 278
-		Length: 16
-		Tick: 80
-	# Explode
-	die2:
-		Start: 331
-		Length: 8
-		Tick: 80
-	# Fly and explode in air
-	die3:
-		Start: 307
-		Length: 17
-		Tick: 80
-	# Fly through air squish on ground
-	die4:
-		Start: 331
-		Length: 8
-		Tick: 80
-	# Burn
-	die5:
-		Start: 278
-		Length: 16
-		Tick: 80
-	# Tib
-	die6:
-		Start: 331
-		Length: 8
-		Tick: 80
-	# Electro
-	die7: ##########
-		Filename: electro.shp
-		Length: *
-		Scale: 1.0
-	die-crushed:
-		Filename: e1rot.shp
-		Start: 16
-		Length: 4
-		Tick: 1600
-		ZOffset: -511
-		Scale: 1.0
-	garrison-muzzle:
-		Filename: minigun.shp
-		Length: 3
-		Stride: 6
-		Facings: 8
-		Scale: 1.0
-	icon:
-		Filename: tsstealthsoldiericon.shp
-		AddExtension: False
-
-tsblackhandlaser:
-	Defaults:
-		Filename: tdlasertroop.shp
-		Scale: 1.4
-	Inherits: ^InfantryOverlays
-	stand:
-		Start: 1
-		Facings: 8
-	stand2:
-		Start: 9
-		Facings: 8
-	run:
-		Start: 25
-		Length: 6
-		Facings: 8
-		Tick: 100
-	shoot:
-		Start: 121
-		Length: 6
-		Facings: 8
-	prone-stand:
-		Start: 17
-		Facings: 8
-	prone-stand2:
-		Start: 144
-		Stride: 4
-		Facings: 8
-	prone-run:
-		Start: 73
-		Length: 6
-		Facings: 8
-		Tick: 100
-	# stand -> prone transition
-	liedown:
-		Start: 217
-		Facings: 8
-	# prone -> stand transition
-	standup:
-		Start: 217
-		Facings: 8
-	prone-shoot:
-		Start: 169
-		Length: 6
-		Facings: 8
-	idle1:
-		Start: 225
-		Length: 8
-		Tick: 120
-	idle2:
-		Start: 234
-		Length: 2
-		Tick: 120
-	idle3:
-		Start: 250
-		Length: 12
-		Tick: 120
-	cheer:
-		Start: 217
-		Facings: 8
-	# Dancing
-	idle4:
-		Start: 262
-		Length: 12
-		Tick: 120
-	# Shot
-	die1:
-		Start: 278
-		Length: 16
-		Tick: 80
-	# Explode
-	die2:
-		Start: 331
-		Length: 8
-		Tick: 80
-	# Fly and explode in air
-	die3:
-		Start: 307
-		Length: 17
-		Tick: 80
-	# Fly through air squish on ground
-	die4:
-		Start: 331
-		Length: 8
-		Tick: 80
-	# Burn
-	die5:
-		Start: 331
-		Length: 8
-		Tick: 80
-	# Tib
-	die6:
-		Start: 331
-		Length: 8
-		Tick: 80
-	# Electro
-	die7: ##########
-		Filename: electro.shp
-		Length: *
-		Scale: 1.0
-	die-crushed:
-		Filename: e1rot.shp
-		Start: 16
-		Length: 4
-		Tick: 1600
-		ZOffset: -511
-		Scale: 1.0
-	garrison-muzzle:
-		Filename: minigun.shp
-		Length: 3
-		Stride: 6
-		Facings: 8
-		Scale: 1.0
-	icon:
-		Filename: tsblackhandlasericon.shp
+		Filename: td_nod_stealthsoldier_icon.shp
 
 mammothbunker:
 	Defaults:
 		Filename: mammothbunker.shp
 	idle:
-		Filename: pbox.shp
+		Filename: ra1_allies_pillbox.shp
 		Scale: 1.5
 	turret:
 		Filename: 4tnk.shp
@@ -2673,7 +950,7 @@ mammothbunker.husk:
 	Defaults:
 		Filename: mammothbunker.shp
 	idle:
-		Filename: pbox.shp
+		Filename: ra1_allies_pillbox.shp
 		Scale: 1.5
 		Start: 1
 	turret:
@@ -2716,6 +993,7 @@ c2knuke:
 	idle:
 
 techrpad:
+	Inherits: ^WithBuildingBib2
 	Defaults:
 		Offset: 0,-6
 		Filename: techrpad.shp
@@ -2724,103 +1002,15 @@ techrpad:
 	damaged-idle:
 	make:
 	bib:
-		Filename: bib2.tem
-		TilesetFilenames:
-			DESERT: bib2.des
-			WINTER: bib2.win
-			SNOW: bib2.sno
-			TEMPERAT: bib2.tem
-			JUNGLE: bib2.jun
-			BARREN: bib2.bar
-			RA_SNOW: bib2.sno
-			RA_TEMPERAT: bib2.tem
-			RA_DESERT: bib2.des
-			RA_INTERIOR: bib2.int
-			ARRAKIS: bib2.des
-			ARRAKIS2: bib2.des
-			CARIBIC: bib2.jun
-			WC2SUNSET: bib2.tem
-			WC2SUMMER: bib2.tem
-			OUTPOST2: bib2.tem
-		UseTilesetExtension: true
-		Length: *
 	icon:
+		Offset: 0,0
 		Filename: oilbicon.shp
-
-cncrss:
-	Defaults:
-		Filename: NodTransportSubmarineSpritesheet.png
-	idle:
-		Facings: 64
-	icon:
-		Filename: cncrssicon.shp
-
-cncpt:
-	Defaults:
-		Filename: cncpt.shp
-	idle:
-		Facings: 16
-		InterpolatedFacings: 64
-	turret:
-		Filename: ssam.shp
-		Facings: 32
-		InterpolatedFacings: 64
-	icon:
-		Filename: GDIMissileCruiserIcon.png
-
-gdicarrier:
-	Defaults:
-		Filename: gdicarrier.shp
-	idle:
-		Facings: 64
-		Offset: 0,32
-		Scale: 0.8
-	icon:
-		Filename: futurecarrier.png
-
-cncca:
-	Defaults:
-	idle:
-		Filename: GdiBattleshipSpritesheet.png
-		Scale: 1.25
-		Facings: 64
-	turret:
-		Filename: GdiBattleshipTurretSpritesheet.png
-		Facings: 64
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: RailgunBattleshipIcon.png
-
-ssmsub:
-	Defaults:
-		Filename: ssmsub.shp
-		Scale: 1.33
-	idle:
-		Facings: 64
-	idle-one:
-		Facings: 64
-		Start: 64
-	idle-empty:
-		Facings: 64
-		Start: 128
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: ssmsubIcon.png
-		AddExtension: False
-
-####################################################################################################
-#		MONSTERS
-####################################################################################################
 
 zombie:
 	Inherits: ^InfantryOverlays
 	Defaults:
 		Filename: zombie.shp
-		Scale: 2
+		Scale: 1.47
 	stand:
 		Facings: 8
 	stand2:
@@ -2865,10 +1055,6 @@ zombie:
 	#	Length: 6
 	#	Tick: 1600
 	#	ZOffset: -511
-	#	UseTilesetExtension: true
-	#	TilesetOverrides:
-	#		DESERT: TEMPERAT
-	#		INTERIOR: TEMPERAT
 	icon:
 		Filename: zombicon.shp
 
@@ -2983,8 +1169,7 @@ brik:
 		Start: 32
 		Length: 16
 	icon:
-		Filename: brikicnh.tem
-		AddExtension: False
+		Filename: brikicon.png
 
 sbag:
 	Defaults:
@@ -2993,7 +1178,6 @@ sbag:
 		Length: 16
 	icon:
 		Filename: sbagicnh.tem
-		AddExtension: False
 
 cycl:
 	Defaults:
@@ -3004,8 +1188,7 @@ cycl:
 		Start: 16
 		Length: 16
 	icon:
-		Filename: cyclicnh.tem
-		AddExtension: False
+		Filename: cyclicon.png
 
 barb:
 	Defaults:
@@ -3026,6 +1209,7 @@ wood:
 		Length: 16
 
 hosp:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: hosp.shp
 	idle:
@@ -3042,54 +1226,17 @@ hosp:
 		Tick: 80
 		Offset: 0,-2
 	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		Length: *
 		Offset: 0,2
 	icon:
 		Filename: hospicon.shp
 
 hosp.husk:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: hosp.shp
 	idle:
 		Start: 8
 	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		Length: *
 		Offset: 0,2
 
 miss:
@@ -3147,39 +1294,9 @@ spit:
 		Length: *
 		ZOffset: 1023
 
-spittrail:
-	Defaults:
-		Filename: spittrail.shp
-	idle:
-		Length: *
-		ZOffset: 1023
-
 ####################################################################################################
 #		TD Expansion
 ####################################################################################################
-gdiexosuit:
-	Defaults:
-		Filename: newegg.shp
-		Scale: 0.3
-		Offset: 0,-5
-	idle:
-		Facings: -8
-	stand:
-		Facings: -8
-	walk:
-		Start: 8
-		Facings: 8
-		Length: 8
-		Tick: 100
-	shoot:
-		Start: 56
-		Length: 3
-		Facings: 8
-		Tick: 100
-	icon:
-		Filename: exosuit_icon.shp
-		AddExtension: False
-		Offset: 0,0
 
 modegg:
 	Defaults:
@@ -3194,6 +1311,7 @@ modegg:
 		Facings: 8
 	icon:
 		Filename: modeggicon.shp
+
 modegg2:
 	Defaults:
 		Filename: modegg2.shp
@@ -3203,6 +1321,7 @@ modegg2:
 		Facings: -32
 	icon:
 		Filename: modegg2icon.shp
+
 newarty:
 	Defaults:
 		Filename: newarty.shp
@@ -3216,6 +1335,7 @@ newarty:
 		Length: *
 	icon:
 		Filename: newartyicon.shp
+
 hdtruck:
 	Defaults:
 		Filename: hdtruck.shp
@@ -3226,23 +1346,6 @@ hdtruck:
 		Scale: 0.4
 	icon:
 		Filename: truckicon.shp
-newhumvee:
-	Defaults:
-		Filename: newhumvee.shp
-	idle:
-		Facings: -64
-		Scale: 0.5
-	turret:
-		Filename: newhumvee2.shp
-		Offset: 0,10
-		Start: 64
-		Facings: 64
-	muzzle:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	icon:
-		Filename: newhumveeicon.shp
 
 chemtibatomic:
 	Defaults:
@@ -3254,121 +1357,12 @@ chemtibatomic:
 	down:
 		Filename: atomicdn.shp
 
-gdiofficer:
-	Inherits: ^InfantryOverlays
-	Defaults:
-		Filename: modofficer.shp
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Facings: 8
-	run:
-		Start: 24
-		Length: 6
-		Facings: 8
-		Tick: 100
-	shoot:
-		Start: 120
-		Length: 6
-		Facings: 8
-	prone-stand:
-		Start: 16
-		Facings: 8
-	prone-stand2:
-		Start: 16
-		Facings: 8
-	prone-run:
-		Start: 72
-		Length: 6
-		Facings: 8
-		Tick: 100
-	# stand -> prone transition
-	liedown:
-		Facings: 8
-	# prone -> stand transition
-	standup:
-		Facings: 8
-		Start: 216
-	prone-shoot:
-		Start: 168
-		Length: 6
-		Facings: 8
-	idle1:
-		Start: 224
-		Length: 10
-		Tick: 120
-	idle2:
-		Start: 240
-		Length: 2
-		Tick: 120
-	idle3:
-		Start: 250
-		Length: 10
-		Tick: 120
-	cheer:
-		Start: 8
-	# Dancing
-	idle4:
-		Start: 242
-		Length: 2
-		Tick: 120
-	# Shot
-	die1:
-		Start: 274
-		Length: 20
-		Tick: 80
-	# Explode
-	die2:
-		Start: 330
-		Length: 20
-		Tick: 80
-	# Fly and explode in air
-	die3:
-		Start: 305
-		Length: 20
-		Tick: 80
-	# Fly through air squish on ground
-	die4:
-		Start: 305
-		Length: 20
-		Tick: 80
-	# Burn
-	die5:
-		Start: 330
-		Length: 20
-		Tick: 80
-	# Tib
-	die6:
-		Start: 274
-		Length: 20
-		Tick: 80
-	# Electro
-	die7: ##########
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: e1rot.shp
-		Start: 16
-		Length: 4
-		Tick: 1600
-		ZOffset: -511
-	garrison-muzzle:
-		Filename: minigun.shp
-		Length: 3
-		Stride: 6
-		Facings: 8
-	icon:
-		Filename: gdiofficericon.shp
-		AddExtension: False
-
 modntech1:
 	Inherits: c1
-	Defaults: tech1
+	Defaults: ra1_technician
 		Filename: tech1.shp
 	icon:
 		Filename: modntech1icon.shp
-		AddExtension: False
 
 deadsixrmbo:
 	Inherits: rmbo
@@ -3376,62 +1370,66 @@ deadsixrmbo:
 		Filename: rmbo.shp
 	icon:
 		Filename: deadsixicon.shp
-		AddExtension: False
 	dot:
 		Filename: invisibleitem.shp
 	idle:
 		Facings: 8
+
 moddeadeye:
 	Inherits: rmbo
 	Defaults: moddeadeye
+		Scale: 2
 		Filename: moddeadeye.shp
 	icon:
 		Filename: deadsixicon.shp
-		AddExtension: False
 	dot:
 		Filename: invisibleitem.shp
 	idle:
 		Facings: 8
+
 modgunner:
 	Inherits: rmbo
 	Defaults: modgunner
+		Scale: 2
 		Filename: modgunner.shp
 	icon:
 		Filename: deadsixicon.shp
-		AddExtension: False
 	dot:
 		Filename: invisibleitem.shp
 	idle:
 		Facings: 8
+
 modhotwire:
 	Inherits: rmbo
 	Defaults: modhotwire
+		Scale: 2
 		Filename: modhotwire.shp
 	icon:
 		Filename: deadsixicon.shp
-		AddExtension: False
 	dot:
 		Filename: invisibleitem.shp
 	idle:
 		Facings: 8
+
 modrpatch:
 	Inherits: rmbo
 	Defaults: modrpatch
+		Scale: 2
 		Filename: modrpatch.shp
 	icon:
 		Filename: deadsixicon.shp
-		AddExtension: False
 	dot:
 		Filename: invisibleitem.shp
 	idle:
 		Facings: 8
+
 modsakura:
 	Inherits: rmbo
 	Defaults: modsakura
+		Scale: 2
 		Filename: modsakura.shp
 	icon:
 		Filename: deadsixicon.shp
-		AddExtension: False
 	dot:
 		Filename: invisibleitem.shp
 	idle:
@@ -3447,955 +1445,54 @@ explosion:
 	chem_nuke_explosion:
 		Filename: tibatomsfx.shp
 
-e3chem:
-	Inherits: e3
+gdirigtower:
 	Defaults:
-		Filename: e3chem.shp
-	icon:
-		Filename: e3chemicon.shp
-
-chembike:
-	Defaults:
-		Filename: chembike.shp
-	idle:
-		Facings: -32
-		Scale: 0.55
-	muzzle:
-		Filename: chemball2.shp
-		Length: *
-		Scale: 0.25
-	icon:
-		Filename: chembikeicon.shp
-
-nodspecter:
-	Defaults:
-		Filename: nodspecter.shp
-	idle:
-		Facings: -32
-		Scale: 0.55
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: nodspectericon.shp
-
-nodvenom:
-	Defaults:
-		Filename: nodvenom.shp
-	idle:
-		Facings: -32
-		Scale: 0.68
-	icon:
-		Filename: nodvenomicon.shp
-
-nodvenomlaser:
-	icon:
-		Filename: venom_laser_icon.shp
-
-chemstnk:
-	Defaults:
-		Filename: newstnk.shp
-	idle:
-		Facings: -32
-	turret:
-		Filename: newstnktur.shp
-		Facings: -32
-	muzzle:
-		Filename: chemball.shp
-		Length: *
-		Scale: 0.75
-	icon:
-		Filename: chemstnkicon.shp
-
-chemssm:
-	Defaults:
-		Filename: chemssm.shp
-	idle:
-		Start: 32
-		Facings: 32
-		InterpolatedFacings: 64
-	empty-idle:
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: chemball.shp
-		Length: *
-	icon:
-		Filename: chemssmicon.shp
-
-nodbuggy2:
-	Defaults:
-		Filename: nodbuggy2.shp
-	idle:
-		Facings: -64
-		Scale: 0.35
-		Offset: 0,-12
-	turret:
-		Filename: bggy.shp
-		Start: 32
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	icon:
-		Filename: nodbuggy2icon.shp
-
-nodltnk2:
-	Defaults:
-		Filename: renegade_ltnk.shp
+		Filename: td_gdi_promotion_gdidefenserig_gdirigtower.png
+		# Scale: 1.25
+		# Offset: 0,8
 	idle:
 		Facings: 64
-		Scale: 0.5
-	turret:
-		Filename: renegade_ltnk.shp
-		Facings: 64
-		Start: 64
-		Scale: 0.5
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: nodltnk2icon.shp
-
-nodftnk2:
-	Defaults:
-		Filename: renegadeflamer.shp
-	idle:
-		Facings: 64
-	turret:
-		Filename: renegadeflamer.shp
-		Start: 64
-		Facings: 64
-	muzzle:
-		Scale: 1.25
-		Combine:
-			flame-n:
-				Filename: flame-n.shp
-				Length: *
-				Offset: 3,6
-			flame-nw:
-				Filename: flame-nw.shp
-				Length: *
-				Offset: 8,7
-			flame-w:
-				Filename: flame-w.shp
-				Length: *
-				Offset: 8,2
-			flame-sw:
-				Filename: flame-sw.shp
-				Length: *
-				Offset: 7,-2
-			flame-s:
-				Filename: flame-s.shp
-				Length: *
-				Offset: 3,-2
-			flame-se:
-				Filename: flame-se.shp
-				Length: *
-				Offset: -5,-2
-			flame-e:
-				Filename: flame-e.shp
-				Length: *
-				Offset: -7,2
-			flame-ne:
-				Filename: flame-ne.shp
-				Length: *
-				Offset: -7,8
-		Facings: 8
-		Length: 13
-	icon:
-		Filename: nodftnk2icon.shp
-
-gdipredator:
-	Defaults:
-		Filename: gdipredator.shp
-	idle:
-		Facings: -64
-		Scale: 0.25
-	turret:
-		Facings: -64
-		Start: 64
-		Scale: 0.25
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-		Scale: 1.333
-	muzzle2:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	icon:
-		Filename: gdipredatoricon.shp
-
-gdimammoth3:
-	Defaults:
-		Filename: gdimammoth3.shp
-	idle:
-		Facings: -64
-		Scale: 0.25
-	turret:
-		Facings: -64
-		Start: 64
-		Scale: 0.25
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-		Scale: 1.333
-	icon:
-		Filename: gdimammoth3icon.shp
-
-gdimissilesoldier:
-	Inherits: e3
-	Defaults:
-		Filename: missile_soldier.shp
-	icon:
-		Filename: missile_soldier_icon.shp
-		AddExtension: False
-
-gdiempgrenadier:
-	Inherits: ^InfantryOverlays
-	Defaults:
-		Filename: tdempgrenadier.shp
-		Scale: 1.4
-	stand:
-		Start: 1
-		Facings: 8
-	stand2:
-		Start: 9
-		Facings: 8
-	run:
-		Start: 25
-		Length: 6
-		Facings: 8
-		Tick: 100
-	throw:
-		Start: 121
-		Length: 6
-		Facings: 8
-	prone-stand:
-		Start: 17
-		Facings: 8
-	prone-stand2:
-		Start: 17
-		Facings: 8
-	prone-run:
-		Start: 73
-		Length: 6
-		Facings: 8
-		Tick: 100
-	# stand -> prone transition
-	liedown:
-		Start: 217
-		Facings: 8
-	# prone -> stand transition
-	standup:
-		Start: 217
-		Facings: 8
-	prone-throw:
-		Start: 169
-		Length: 6
-		Facings: 8
-	idle1:
-		Start: 225
-		Length: 8
-		Tick: 120
-	idle2:
-		Start: 234
-		Length: 2
-		Tick: 120
-	idle3:
-		Start: 250
-		Length: 12
-		Tick: 120
-	cheer:
-		Start: 217
-		Facings: 8
-	# Dancing
-	idle4:
-		Start: 262
-		Length: 12
-		Tick: 120
-	# Shot
-	die1:
-		Start: 278
-		Length: 16
-		Tick: 80
-	# Explode
-	die2:
-		Start: 331
-		Length: 8
-		Tick: 80
-	# Fly and explode in air
-	die3:
-		Start: 307
-		Length: 17
-		Tick: 80
-	# Fly through air squish on ground
-	die4:
-		Start: 331
-		Length: 8
-		Tick: 80
-	# Burn
-	die5:
-		Start: 331
-		Length: 8
-		Tick: 80
-	# Tib
-	die6:
-		Start: 278
-		Length: 16
-		Tick: 80
-	# Electro
-	die7: ##########
-		Filename: electro.shp
-		Length: *
-		Scale: 1.0
-	die-crushed:
-		Filename: e1rot.shp
-		Start: 16
-		Length: 4
-		Tick: 1600
-		ZOffset: -511
-		Scale: 1.0
-	garrison-muzzle:
-		Filename: minigun.shp
-		Length: 3
-		Stride: 6
-		Facings: 8
-		Scale: 1.0
-	icon:
-		Filename: gdiempgrenadiericon.shp
-
-gdishotgunner:
-	Inherits: ^InfantryOverlays
-	Defaults:
-		Filename: tdshotgunner.shp
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Facings: 8
-	run:
-		Start: 16
-		Length: 6
-		Facings: 8
-		Tick: 100
-	shoot:
-		Start: 64
-		Length: 7
-		Facings: 8
-	prone-stand:
-		Start: 136
-		Stride: 4
-		Facings: 8
-	prone-stand2:
-		Start: 136
-		Stride: 4
-		Facings: 8
-	prone-run:
-		Start: 136
-		Length: 4
-		Facings: 8
-		Tick: 100
-	# stand -> prone transition
-	liedown:
-		Start: 120
-		Length: 2
-		Facings: 8
-	# prone -> stand transition
-	standup:
-		Start: 168
-		Length: 2
-		Facings: 8
-	prone-shoot:
-		Start: 184
-		Length: 7
-		Facings: 8
-	idle1:
-		Start: 240
-		Length: 15
-		Tick: 120
-	idle2:
-		Start: 256
-		Length: 15
-		Tick: 120
-	idle3:
-		Start: 240
-		Length: 15
-		Tick: 120
-	cheer:
-		Facings: 8
-	# Dancing
-	idle4:
-		Start: 256
-		Length: 15
-		Tick: 120
-	# Shot
-	die1:
-		Start: 272
-		Length: 8
-		Tick: 80
-	# Explode
-	die2:
-		Start: 280
-		Length: 8
-		Tick: 80
-	# Fly and explode in air
-	die3:
-		Start: 288
-		Length: 8
-		Tick: 80
-	# Fly through air squish on ground
-	die4:
-		Start: 296
-		Length: 12
-		Tick: 80
-	# Burn
-	die5:
-		Start: 308
-		Length: 18
-		Tick: 80
-	# Tib
-	die6:
-		Start: 272
-		Length: 8
-		Tick: 80
-	# Electro
-	die7: ##########
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: e1rot.shp
-		Start: 16
-		Length: 4
-		Tick: 1600
-		ZOffset: -511
-	garrison-muzzle:
-		Filename: minigun.shp
-		Length: 3
-		Stride: 6
-		Facings: 8
-	icon:
-		Filename: tdshotgunnericon.shp
-
-gdisniper:
-	Defaults:
-		Filename: gdisniper.shp
-		Scale: 1.4
-	Inherits: ^InfantryOverlays
-	stand:
-		Start: 1
-		Facings: 8
-	stand2:
-		Start: 9
-		Facings: 8
-	run:
-		Start: 25
-		Length: 6
-		Facings: 8
-		Tick: 100
-	shoot:
-		Start: 121
-		Length: 6
-		Facings: 8
-	prone-stand:
-		Start: 17
-		Facings: 8
-	prone-stand2:
-		Start: 144
-		Stride: 4
-		Facings: 8
-	prone-run:
-		Start: 73
-		Length: 6
-		Facings: 8
-		Tick: 100
-	# stand -> prone transition
-	liedown:
-		Start: 217
-		Facings: 8
-	# prone -> stand transition
-	standup:
-		Start: 217
-		Facings: 8
-	prone-shoot:
-		Start: 169
-		Length: 6
-		Facings: 8
-	idle1:
-		Start: 225
-		Length: 8
-		Tick: 120
-	idle2:
-		Start: 234
-		Length: 2
-		Tick: 120
-	idle3:
-		Start: 250
-		Length: 12
-		Tick: 120
-	cheer:
-		Start: 217
-		Facings: 8
-	# Dancing
-	idle4:
-		Start: 262
-		Length: 12
-		Tick: 120
-	# Shot
-	die1:
-		Start: 278
-		Length: 16
-		Tick: 80
-	# Explode
-	die2:
-		Start: 331
-		Length: 8
-		Tick: 80
-	# Fly and explode in air
-	die3:
-		Start: 307
-		Length: 17
-		Tick: 80
-	# Fly through air squish on ground
-	die4:
-		Start: 331
-		Length: 8
-		Tick: 80
-	# Burn
-	die5:
-		Start: 331
-		Length: 8
-		Tick: 80
-	# Tib
-	die6:
-		Start: 278
-		Length: 16
-		Tick: 80
-	# Electro
-	die7: ##########
-		Filename: electro.shp
-		Length: *
-		Scale: 1.0
-	die-crushed:
-		Filename: e1rot.shp
-		Start: 16
-		Length: 4
-		Tick: 1600
-		ZOffset: -511
-		Scale: 1.0
-	garrison-muzzle:
-		Filename: minigun.shp
-		Length: 3
-		Stride: 6
-		Facings: 8
-		Scale: 1.0
-	icon:
-		Filename: gdisnipericon.shp
-		AddExtension: False
-
-gdiassaultapc:
-	Defaults:
-		Filename: newapc.shp
-	idle:
-		Facings: -64
-		Scale: 0.4
-	turret:
-		Filename: jeep.shp
-		Scale: 2
-		Start: 32
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: minigun.shp
-		Scale: 2
-		Length: 6
-		Facings: 8
-	close:
-		Facings: -32
-	unload:
-		Facings: -32
-	icon:
-		Filename: gdiassaultapcicon.shp
-
-gdifirehawk:
-	Defaults:
-		Filename: Firehawk.shp
-		Scale: 2
-	idle:
-		Facings: 64
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: Firehawkicon.shp
-
-tanodharv:
-	Defaults:
-		Filename: tanodharv.shp
-		Scale: 0.4
-	idle:
-		Facings: -64
-	harvest:
-		Facings: -64
-	dock:
-		Facings: -64
-	dock-loop:
-		Facings: -64
-	harvesting:
-		Filename: ra2_oregath.shp
-		Scale: 1.25
-		Length: 15
-		Facings: 8
-	icon:
-		Filename: StealthHarvesterIcon.shp
-
-gdihavoc:
-	Inherits: ^InfantryOverlays
-	Inherits@2: ^RA2InfantryDeaths
-	Defaults:
-		Filename: havoc.shp
-		Scale: 1.333
-	stand:
-		Facings: 8
-	stand2:
-		Facings: 8
-	run:
-		Start: 8
-		Length: 10
-		Facings: 8
-		Tick: 50
-	shoot:
-		Start: 128
-		Length: 7
-		Facings: 8
-	# stand -> prone transition
-	liedown:
-		Start: 252
-		Length: 2
-		Facings: 8
-	# prone -> stand transition
-	standup:
-		Start: 268
-		Length: 2
-		Facings: 8
-	prone-stand:
-		Start: 244
-		Stride: 4
-		Facings: 8
-	prone-stand2:
-		Start: 112
-		Stride: 4
-		Facings: 8
-	prone-run:
-		Start: 284
-		Length: 10
-		Facings: 8
-		Tick: 50
-	prone-shoot:
-		Start: 364
-		Length: 7
-		Facings: 8
-	idle1:
-		Start: 88
-		Length: 20
-		Tick: 120
-	idle2:
-		Start: 108
-		Length: 20
-		Tick: 120
-	idle3:
-		Start: 224
-		Length: 20
-		Tick: 120
-	cheer:
-		Filename: rmbo.shp
-		Scale: 1
-		Start: 396
-		Length: 3
-		Facings: 8
-		Tick: 120
-	# Shot
-	die1:
-		Start: 184
-		Length: 20
-		Tick: 80
-	# Explode
-	die2:
-		Start: 204
-		Length: 20
-		Tick: 80
-	# Fly and explode in air
-	#die3:
-	#	Start: 500
-	#	Length: 20
-	#	Tick: 80
-	# Fly through air squish on ground
-	#die4:
-	#	Start: 500
-	#	Length: 20
-	#	Tick: 80
-	# Burn
-	#die5:
-	#	Filename: rmbo.shp
-	#	Scale: 1
-	#	Start: 354
-	#	Length: 18
-	#	Tick: 80
-	# Tib
-	#die6:
-	#	Filename: rmbo.shp
-	#	Scale: 1
-	#	Start: 308
-	#	Length: 4
-	#	Tick: 80
-	# Electro
-	die7: ##########
-		Filename: electro.shp
-		Scale: 1
-		Length: *
-	die-crushed:
-		Filename: e1rot.shp
-		Scale: 1
-		Start: 16
-		Length: 4
-		Tick: 1600
-		ZOffset: -511
-	icon:
-		Filename: havoc_icon.shp
-		AddExtension: False
-
-nodlasercommando:
-	Inherits: ^InfantryOverlays
-	Inherits@2: ^RA2InfantryDeaths
-	Defaults:
-		Filename: nodlasercommando.shp
-		Scale: 1.333
-	stand:
-		Facings: 8
-	stand2:
-		Facings: 8
-	run:
-		Start: 8
-		Length: 10
-		Facings: 8
-		Tick: 50
-	shoot:
-		Start: 128
-		Length: 10
-		Facings: 8
-	# stand -> prone transition
-	liedown:
-		Start: 284
-		Length: 2
-		Facings: 8
-	# prone -> stand transition
-	standup:
-		Start: 268
-		Length: 2
-		Facings: 8
-	prone-stand:
-		Start: 300
-		Stride: 4
-		Facings: 8
-	prone-stand2:
-		Start: 112
-		Stride: 4
-		Facings: 8
-	prone-run:
-		Start: 308
-		Length: 10
-		Facings: 8
-		Tick: 50
-	prone-shoot:
-		Start: 388
-		Length: 6
-		Facings: 8
-	idle1:
-		Start: 88
-		Length: 20
-		Tick: 120
-	idle2:
-		Start: 108
-		Length: 20
-		Tick: 120
-	idle3:
-		Start: 248
-		Length: 20
-		Tick: 120
-	cheer:
-		Filename: rmbo.shp
-		Scale: 1
-		Start: 396
-		Length: 3
-		Facings: 8
-		Tick: 120
-	# Shot
-	die1:
-		Start: 208
-		Length: 20
-		Tick: 80
-	# Explode
-	die2:
-		Start: 228
-		Length: 20
-		Tick: 80
-	# Fly and explode in air
-	die3:
-		Start: 208
-		Length: 20
-		Tick: 80
-	# Fly through air squish on ground
-	#die4:
-	#	Start: 228
-	#	Length: 20
-	#	Tick: 80
-	# Burn
-	#die5:
-	#	Filename: rmbo.shp
-	#	Scale: 1
-	#	Start: 354
-	#	Length: 18
-	#	Tick: 80
-	# Tib
-	#die6:
-	#	Filename: rmbo.shp
-	#	Scale: 1
-	#	Start: 308
-	#	Length: 4
-	#	Tick: 80
-	# Electro
-	die7: ##########
-		Filename: electro.shp
-		Scale: 1
-		Length: *
-	die-crushed:
-		Filename: e1rot.shp
-		Scale: 1
-		Start: 16
-		Length: 4
-		Tick: 1600
-		ZOffset: -511
-	icon:
-		Filename: tanodcommandoicon.shp
-		AddExtension: False
-
-cncss:
-	Defaults:
-		Filename: NodSubSpritesheet.png
-	idle:
-		Facings: 64
-		Offset: 0,-10
-	icon:
-		Filename: nodattacksubicon.png
-
-nodlasercorvette:
-	Defaults:
-	idle:
-		Filename: NodLaserCorvette.png
-		#Scale: 1.25
-		Facings: 64
-	turret:
-		Filename: rassam.shp
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: NodLaserCorvetteIcon.png
-
-cncspen:
-	Defaults:
-		Filename: NodNavalYardSpritesheet.png
-		Scale: 1.25
-	idle:
-		Start: 11
+		# Start: 71
+		# Length: 4
 	damaged-idle:
-		Start: 12
+		Facings: 64
+		# Start: 71
+		# Length: 4
+	dead:
+		Filename: td_gdi_promotion_gdidefenserig_gdirigmobile.png
+		Start: 70
+		Tick: 800
 	make:
+		Filename: td_gdi_promotion_gdidefenserig_gdirigmobile.png
+		Start: 64
 		Length: 11
-	dead:
-		Start: 12
-	icon:
-		Filename: NodNavalYardIcon.png
-
-cncsyrd:
-	Defaults:
-		Filename: GdiNavalYardUdSpritesheet.png
-		Scale: 1.25
-	idle:
-		Start: 13
-		Length: 6
-	damaged-idle:
-		Filename: GdiNavalYarddSpritesheet.png
+		Tick: 110
+	# turret:
+	# 	Filename: td_gdi_promotion_gdidefenserig_gdirigphalanx.png
+	# 	Facings: 64
+	# 	Scale: 1.25
+	# 	Offset: 0,32
+	# railgun:
+	# 	Filename: GDIRigRailgun.png
+	# 	Facings: 64
+	# 	Scale: 1.25
+	# 	Offset: -16,32
+	# missilepod:
+	# 	Filename: GDIRigMissilePod.png
+	# 	Facings: 64
+	# 	Scale: 1.25
+	# 	Offset: 16,32
+	muzzle:
+		Filename: gunfire2.shp
 		Length: *
-	make:
-		Length: 13
-	dead:
-		Filename: GdiNavalYarddSpritesheet.png
-		Length: 1
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
 	icon:
-		Filename: gdishipyardicon.png
+		Filename: td_gdi_advancedguardtower_icon.shp
+		Offset: 0,0
 
-guerillatacticsicon:
-	icon:
-		Filename: guerillatacticsicon.png
-
-tiberiuminfusionicon:
-	icon:
-		Filename: tiberiuminfusionicon.png
-
-improvedartilleriesicon:
-	icon:
-		Filename: improvedartilleriesicon.png
-
-elementalwarfareicon:
-	icon:
-		Filename: elementalwarfareicon.png
-
-elitecapacitorsicon:
-	icon:
-		Filename: elitecapacitorsicon.png
-
-cyberneticmodificationsicon:
-	icon:
-		Filename: cyberneticmodificationsicon.png
-
-blackmarketupgradesicon:
-	icon:
-		Filename: blackmarketupgradesicon.png
-
-advancedguerillatacticsicon:
-	icon:
-		Filename: advancedguerillatacticsicon.png
-
-longrangesensorsicon:
-	icon:
-		Filename: longrangesensorsicon.png
-
-armorpiercingbulletsicon:
-	icon:
-		Filename: armorpiercingbulletsicon.png
-
-aircraftarmorplatingicon:
-	icon:
-		Filename: aircraftarmorplatingicon.png
-
-advancedmissiletargetingicon:
-	icon:
-		Filename: advancedmissiletargetingicon.png
-
-cuttingedgeequipmenticon:
-	icon:
-		Filename: cuttingedgeequipmenticon.png
-
-highvelocitycannonsicon:
-	icon:
-		Filename: highvelocitycannonsicon.png
-
-lightweightarmorplatingicon:
-	icon:
-		Filename: lightweightarmorplatingicon.png
+msam.destroyed:
+	idle:
+		Filename: td_gdi_mlrs_msam.shp
+		ZOffset: -512

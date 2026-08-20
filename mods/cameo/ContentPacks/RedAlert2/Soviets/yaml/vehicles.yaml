@@ -1,0 +1,678 @@
+ra2_soviets_mobileconstructionvehicle:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@mcv: ^MCV
+	Inherits@SHADOWS: ^Shadows
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
+	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
+	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+	Tooltip:
+		Name: Soviet Mobile Construction Vehicle
+	Buildable:
+		Prerequisites: ~ra2_soviets_warfactory, ra2_soviets_servicedepot
+		Description: Deploys into a Construction Yard.\n  Unarmed
+	Transforms:
+		IntoActor: ra2_soviets_constructionyard
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: uplace.wav
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: SovietMCV
+	ProvidesPrerequisite@faction:
+		Prerequisite: mmsovietra2
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_tesladischargearmor, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+
+ra2_soviets_rhinoheavytank:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+	Inherits@ra2sovietsFireShells: ^RA2SovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^RA2SovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
+	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
+	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
+	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+	Tooltip:
+		Name: Rhino Heavy Tank
+	Valued:
+		Cost: 850
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2_soviets_warfactory
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Speed: 85
+		TurnSpeed: 17
+	Health:
+		HP: 130000
+	Repairable:
+		HpPerStep: 6500
+	ChangesHealth@SelfHealing:
+		Step: 52
+	Turreted:
+		TurnSpeed: 17
+		Offset: -100,0,5
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: RA2120mm
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions
+	Armament@PRIMARYRad:
+		Name: primary
+		Weapon: RA2120mm_rad
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && ra2_soviets_doctrine_nuclearmunitions
+	Armament@PRIMARYFire:
+		Name: primary
+		Weapon: RA2120mm_fire
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && ra2_soviets_doctrine_firemunitions
+	Armament@PRIMARYTesla:
+		Name: primary
+		Weapon: RA2120mm_tesla
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && ra2_soviets_doctrine_teslamunitions
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: RA2120mm_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite  && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions
+	Armament@PRIMARYELITERad:
+		Name: primary
+		Weapon: RA2120mm_rad_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && ra2_soviets_doctrine_nuclearmunitions
+	Armament@PRIMARYELITEFire:
+		Name: primary
+		Weapon: RA2120mm_fire_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && ra2_soviets_doctrine_firemunitions
+	Armament@PRIMARYELITETesla:
+		Name: primary
+		Weapon: RA2120mm_tesla_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && ra2_soviets_doctrine_teslamunitions
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: ra2sovietsVehicleVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_tesladischargearmor, ra2_soviets_doctrine_nuclearmunitions, ra2_soviets_doctrine_firemunitions, ra2_soviets_doctrine_teslamunitions, ra2_soviets_upgrade_heavycannons, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+
+ra2_soviets_flaktrack:
+	Inherits: ^Tank
+	Inherits@Template: ^AntiAirVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@cargo: ^CargoVehicle
+	Inherits@bot: ^BotAutoDeployTransport
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
+	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
+	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
+	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Flak Track
+	UpdatesPlayerStatistics:
+		OverrideActor: ra2_soviets_flaktrack
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2_soviets_warfactory
+		Queue: Vehicle, RAVehicle
+		Description: actor_htk.description
+	Mobile:
+		Locomotor: lighttracked
+		Speed: 95
+		TurnSpeed: 19
+	Health:
+		HP: 45000
+	Repairable:
+		HpPerStep: 2250
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Turreted:
+		TurnSpeed: 38
+		Offset: -150,0,100
+	Armament@AA:
+		Weapon: RA2FlakTrackAAGun
+		LocalOffset: 600,0,300
+		Recoil: 43
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@AG:
+		Weapon: RA2FlakTrackGun
+		LocalOffset: 600,0,300
+		Recoil: 43
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@AAE:
+		Weapon: RA2FlakTrackAAGun_elite
+		Recoil: 43
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@AGE:
+		Weapon: RA2FlakTrackGun_elite
+		Recoil: 43
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@MultiWeapon:
+		Modifier: 75
+	WithMuzzleOverlay:
+	AttackTurreted:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		Image: ra2_soviets_flaktrack
+		PlayerPalette: playerra2
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: FlakTrackVoice
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+		InitialUnits: ra2_soviets_conscript, ra2_soviets_conscript, ra2_soviets_conscript, ra2_soviets_flaktrooper, ra2_soviets_flaktrooper
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_tesladischargearmor, ra2_soviets_upgrade_heavycannons, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+
+ra2_soviets_apocalypsetank:
+	Inherits: ^Tank
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+	Inherits@ra2sovietsFireShells: ^RA2SovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^RA2SovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
+	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
+	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
+	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+	Tooltip:
+		Name: Apocalypse Tank
+	Valued:
+		Cost: 1750
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2_soviets_warfactory, ra2_soviets_battlelab
+		Queue: Vehicle, RAVehicle
+		Description: actor_htnk.description
+	Mobile:
+		Speed: 55
+		TurnSpeed: 11
+	Passenger:
+	Health:
+		HP: 350000
+	Repairable:
+		HpPerStep: 17500
+	ChangesHealth@SelfHealing:
+		Step: 140
+	Turreted:
+		TurnSpeed: 11
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: RA2120xmm
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions
+	Armament@PRIMARYRad:
+		Name: primary
+		Weapon: RA2120xmm_rad
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && ra2_soviets_doctrine_nuclearmunitions
+	Armament@PRIMARYFire:
+		Name: primary
+		Weapon: RA2120xmm_fire
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && ra2_soviets_doctrine_firemunitions
+	Armament@PRIMARYTesla:
+		Name: primary
+		Weapon: RA2120xmm_tesla
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && ra2_soviets_doctrine_teslamunitions
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: RA2MammothTusk_AA
+		LocalOffset: -85,90,340, -85,-90,340
+		LocalYaw: -100, 100
+		Recoil: 5
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: RA2120xmm_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite  && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions
+	Armament@PRIMARYELITERad:
+		Name: primary
+		Weapon: RA2120xmm_rad_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && ra2_soviets_doctrine_nuclearmunitions
+	Armament@PRIMARYELITEFire:
+		Name: primary
+		Weapon: RA2120xmm_fire_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && ra2_soviets_doctrine_firemunitions
+	Armament@PRIMARYELITETesla:
+		Name: primary
+		Weapon: RA2120xmm_tesla_elite
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && ra2_soviets_doctrine_teslamunitions
+	Armament@SECONDARYELITE:
+		Name: secondary
+		Weapon: RA2MammothTusk_AA_elite
+		LocalOffset: -85,90,340, -85,-90,340
+		LocalYaw: -100, 100
+		Recoil: 5
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@ra2_soviets_doctrine_nuclearmunitions:
+		Modifier: 125
+		Types: primary
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: ApocalypseTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_tesladischargearmor, ra2_soviets_doctrine_nuclearmunitions, ra2_soviets_doctrine_firemunitions, ra2_soviets_doctrine_teslamunitions, ra2_soviets_upgrade_heavycannons, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+
+ra2_soviets_v3rocketlauncher:
+	Inherits: ^Vehicle
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+	Inherits@ra2sovietsFireShells: ^RA2SovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^RA2SovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
+	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 80
+		Prerequisites: ~ra2_soviets_radar
+		Description: actor_v3.description
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: V3 Rocket Launcher
+	Health:
+		HP: 37500
+	Repairable:
+		HpPerStep: 1875
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Armament:
+		Weapon: V3Launch
+		LocalOffset: -1024,0,512
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Weapon: V3Launch_elite
+		LocalOffset: -1024,0,512
+		RequiresCondition: rank-elite
+	MissileSpawnerMasterCA@1:
+		Actors: ra2v3rocket
+		RespawnTicks: 125
+		LoadedCondition: ammo
+		RequiresCondition: !rank-elite
+		SpawnOffset: 0,640,300
+	MissileSpawnerMasterCA@2:
+		Actors: ra2v3rocketelite
+		RespawnTicks: 150
+		LoadedCondition: ammoelite
+		RequiresCondition: rank-elite
+		SpawnOffset: 0,640,300
+	FirepowerMultiplier@RANK-1:
+		Modifier: 125
+	FirepowerMultiplier@RANK-2:
+		Modifier: 150
+	FirepowerMultiplier@RANK-3:
+		Modifier: 175
+	FirepowerMultiplier@RANK-ELITE:
+		Modifier: 200
+	RangeMultiplier@ra2_soviets_upgrade_gastroburners:
+		Modifier: 115
+		RequiresCondition: ra2_soviets_upgrade_gastroburners
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_gastroburners:
+		Condition: ra2_soviets_upgrade_gastroburners
+		Prerequisites: ra2_soviets_upgrade_gastroburners
+	SelectionDecorations:
+	FireWarheadsOnDeath:
+		Weapon: V3Explode
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: V3LauncherVoice
+	WithFacingSpriteBody:
+		RequiresCondition: (ammo && !rank-elite) || (ammoelite && rank-elite) #ammo && ammoelite
+		Sequence: idle
+		Name: loaded
+	WithFacingSpriteBody@EMPTY:
+		RequiresCondition: (!ammo && !rank-elite) || (!ammoelite && rank-elite)
+		Sequence: empty-idle
+		Name: reloading
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_tesladischargearmor, ra2_soviets_doctrine_nuclearmunitions, ra2_soviets_doctrine_firemunitions, ra2_soviets_doctrine_teslamunitions, ra2_soviets_upgrade_terrordronesurprise, ra2_soviets_upgrade_kirovarmorplatings, ra2_soviets_upgrade_gastroburners
+
+ra2_soviets_teslatank:
+	Inherits: ^Tank
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@TeslaTargeting: ^PrioritizeTesla
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
+	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
+	Inherits@RA2TeslaOverload: ^RA2TeslaOverload
+	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+	Valued:
+		Cost: 1800
+	Tooltip:
+		Name: Tesla Tank
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2_soviets_radar
+		Queue: Vehicle, RAVehicle
+		Description: actor_ttnk.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Health:
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Turreted:
+		TurnSpeed: 15
+	Armament@PRIMARY:
+		Weapon: RA2TankBolt
+		LocalOffset: 600,200,200, 600,-200,200
+		Recoil: 88
+		RecoilRecovery: 35
+		RequiresCondition: (!ra2_soviets_upgrade_teslaoverload && !rank-elite)
+	Armament@PRIMARY2:
+		Weapon: RA2TankBolt2
+		LocalOffset: 600,200,200, 600,-200,200
+		Recoil: 88
+		RecoilRecovery: 35
+		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)
+	Armament@PRIMARY3:
+		Weapon: RA2TankBolt3
+		LocalOffset: 600,200,200, 600,-200,200
+		Recoil: 88
+		RecoilRecovery: 35
+		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && rank-elite)
+	AttackTurreted:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: Ra2TeslaTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_tesladischargearmor, ra2_soviets_upgrade_teslaoverload, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+
+ra2_soviets_warminer:
+	Inherits: ^Tank
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
+	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
+	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: War Miner
+	Buildable:
+		Prerequisites: ~ra2_soviets_warfactory
+		Queue: Vehicle, RAVehicle
+		Description: actor_ra2harv.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Harvester:
+		Voice: Harvest
+		BaleLoadDelay: 2
+		BaleUnloadDelay: 2
+		EmptyCondition: no-tiberium
+	StoresResources:
+		Capacity: 32
+	Turreted:
+		TurnSpeed: 15
+	Armament@PRIMARY:
+		Weapon: RA220mmrapid
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	WithMuzzleOverlay:
+	AttackTurreted:
+	WithSpriteTurret:
+	WithHarvestAnimation:
+	WithDockingAnimation:
+	Voiced:
+		VoiceSet: WarMinerVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Kills, Harvester
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_tesladischargearmor, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+
+ra2_soviets_terrordrone:
+	Inherits: ^Walker
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Terror Drone
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2_soviets_radar
+		Queue: Vehicle, RAVehicle
+		Description: actor_dron.description
+	Mobile:
+		Speed: 200
+		TurnSpeed: 200
+	Crushable:
+		CrushClasses: vehicle
+	RenderSprites:
+		PlayerPalette: playerra2
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 4
+	Passenger:
+		CargoType: Infantry
+	WithInfantryBody:
+		DefaultAttackSequence: jump
+		RequiresCondition: !jousting
+	WithFacingSpriteBody:
+		Sequence: shoot
+		RequiresCondition: jousting
+	#WithTextDecoration@jousting:
+	#	Text: Jousting
+	#	RequiresCondition: jousting
+	Armament:
+		Weapon: RA2DroneJump
+		RequiresCondition: !rank-elite
+	Armament@Elite:
+		Weapon: RA2DroneJump_elite
+		RequiresCondition: rank-elite
+	-InfectableCA:
+	AttackInfectCA:
+		Voice: Attack
+		Damage: 2000
+		DamageInterval: 1
+		DamageTypes: DroneInfection, BulletDeath
+		SurviveHostDamageTypes: DroneInfection
+		JoustRange: 2000
+		RequiresCondition: !disabled
+	RejectsOrders:
+		RequiresCondition: jousting
+	SpeedMultiplier@JOUSTING:
+		Modifier: 150
+		RequiresCondition: jousting
+	Targetable:
+		RequiresCondition: !parachute && !untargetable && !jousting
+	AutoTarget:
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: TerrorDronable
+	Voiced:
+		VoiceSet: TerrorDroneVoice
+	FireWarheadsOnDeath:
+		Weapon: RA2UnitExplodeSmall
+		EmptyWeapon: RA2UnitExplodeSmall
+	Targetable@vehicleexplodedamage:
+		TargetTypes: TerrorDrone
+	Targetable@ra1_soviets_attackdog:
+		TargetTypes: DogImmune
+	-TemporaryOwnerManager:
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_tesladischargearmor
+
+##############################################
+#   Red Alert 2 Yuri Vehicles
+##############################################

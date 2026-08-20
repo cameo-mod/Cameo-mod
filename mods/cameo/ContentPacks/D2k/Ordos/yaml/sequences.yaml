@@ -1,0 +1,1699 @@
+ordos_artilleryplatform:
+	Defaults:
+	invisible:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 38
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 2821, 2824, 2822, 2832, 2825, 2826, 2836, 2829, 2823, 2833, 2827, 2828, 2834, 2830, 2831, 2835
+		Length: 16
+		Offset: -24,16
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 2869, 2872, 2870, 2880, 2873, 2874, 2884, 2877, 2871, 2881, 2875, 2876, 2882, 2878, 2879, 2883
+		Length: 16
+		Offset: -24,16
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4577
+		Length: 8
+		Tick: 100
+		Offset: -16,16
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4585
+		Length: 7
+		Offset: -16,16
+	turret:
+		Filename: ordos_artilleryplatform_turret.shp
+		Facings: -32
+		Offset: 0,-16
+		Scale: 1.5
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3671
+		Length: 3
+		BlendMode: Additive
+	icon:
+		Filename: ordos_artilleryplatform_icon.shp
+		Offset: 0,-1
+
+ordos_autogunturret:
+	Defaults:
+	invisible:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 38
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 2821, 2824, 2822, 2832, 2825, 2826, 2836, 2829, 2823, 2833, 2827, 2828, 2834, 2830, 2831, 2835
+		Length: 16
+		Offset: -24,16
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 2869, 2872, 2870, 2880, 2873, 2874, 2884, 2877, 2871, 2881, 2875, 2876, 2882, 2878, 2879, 2883
+		Length: 16
+		Offset: -24,16
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4577
+		Length: 8
+		Offset: -16,16
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4585
+		Length: 7
+		Offset: -16,16
+	turret:
+		Filename: ordos_autogunturret_d2k_autogun_turret.shp
+		Facings: -32
+		Offset: 0,-16
+		Scale: 1.5
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3671
+		Length: 3
+		BlendMode: Additive
+	icon:
+		Filename: ordos_autogunturret_icon.shp
+
+ordos_repairpad:
+	Defaults:
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4634
+		Length: 10
+		Offset: -48,48
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4644
+		Length: 10
+		Offset: -48,48
+		Tick: 100
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3139
+		Offset: -48,48
+		ZOffset: -1c511
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3140
+		Offset: -48,48
+		ZOffset: -1c511
+	active:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 5010
+		Length: 14
+		Offset: -48,48
+		ZOffset: -1c511
+	damaged-active:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 5010
+		Length: 14
+		Tick: 60
+		Offset: -48,48
+		ZOffset: -1c511
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4362
+		Offset: -30,-24
+
+research.ordos:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3237
+		Offset: -48,80
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4655
+		Length: 10
+		Offset: -48,80
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4665
+		Length: 11
+		Offset: -48,80
+		Tick: 100
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3238
+		Offset: -48,80
+	idle-lights:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 5024
+		Length: 60
+		Tick: 80
+		Offset: -48,80
+	bib:
+		Filename: BLOXBASE.R8
+		Frames: 611, 612, 613, 631, 632, 633
+		Length: 6
+		Offset: -16,-16
+	bib-Concrete:
+		Filename: BLOXBASE.R8
+		Frames: 643, 644, 645, 663, 664, 665
+		Length: 6
+		Offset: -16,-16
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4365
+		Offset: -30,-24
+
+ordos_starport:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3239
+		Offset: -48,48
+		ZOffset: -1c511
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3240
+		Offset: -48,48
+		ZOffset: -1c511
+	active:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 5001
+		Length: 7
+		ZOffset: -1c511
+		Offset: -48,48
+		BlendMode: Additive
+		Tick: 200
+	damaged-active:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 5001
+		Length: 7
+		ZOffset: -1c511
+		Offset: -48,48
+		BlendMode: Additive
+		Tick: 200
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4611
+		Length: 11
+		Offset: -48,48
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4622
+		Length: 11
+		Offset: -48,48
+		Tick: 100
+	bib:
+		Filename: BLOXBASE.R8
+		Frames: 611, 612, 613, 631, 632, 633
+		Length: 6
+		Offset: -16,-16
+	bib-Concrete:
+		Filename: BLOXBASE.R8
+		Frames: 643, 644, 645, 663, 664, 665
+		Length: 6
+		Offset: -16,-16
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4358
+		Offset: -30,-24
+
+power.ordos:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3091
+		Offset: -32,64
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4415
+		Length: 12
+		Offset: -32,64
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4427
+		Length: 12
+		Offset: -32,64
+		Tick: 100
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3092
+		Offset: -32,64
+	idle-zaps:
+		Filename: ordos_windtrap_power_zaps.png
+		Length: 10
+		Scale: 1
+		Offset: 6,-5
+		Tick: 200
+	damaged-idle-zaps:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4781
+		Length: 5
+		Offset: -32,64
+		Tick: 200
+	bib:
+		Filename: BLOXBASE.R8
+		Frames: 617, 618, 637, 638
+		Length: 4
+		Offset: -16,-16
+	bib-Concrete:
+		Filename: BLOXBASE.R8
+		Frames: 649, 650, 669, 670
+		Length: 4
+		Offset: -16,-16
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4322
+		Offset: -30,-24
+
+ordos_outpost:
+	Defaults:
+		Scale: 1.5
+	idle:
+		Filename: DATA.R16
+		Remap: 54F94B
+		Start: 3089
+		Offset: -48,64
+	make:
+		Filename: DATA.R16
+		Remap: 54F94B
+		Start: 4518
+		Length: 9
+		Offset: -48,64
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Remap: 54F94B
+		Start: 4527
+		Length: 10
+		Offset: -48,64
+		Tick: 100
+		ZOffset: 1024
+	damaged-idle:
+		Filename: DATA.R16
+		Remap: 54F94B
+		Start: 3090
+		Offset: -48,64
+	idle-dish:
+		Filename: DATA.R16
+		Remap: 54F94B
+		Start: 4847
+		Length: 30
+		Offset: -48,64
+	bib:
+		Filename: BLOXBASE.R8
+		Frames: 611, 612, 613, 631, 632, 633
+		Length: 6
+		Offset: -16,-16
+	bib-Concrete:
+		Filename: BLOXBASE.R8
+		Frames: 643, 644, 645, 663, 664, 665
+		Length: 6
+		Offset: -16,-16
+	icon:
+		Filename: DATA.R16
+		Remap: 54F94B
+		Start: 4338
+		Offset: -30,-24
+
+ordos_refineryordos:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3129
+		Offset: -48,64
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4495
+		Length: 11
+		Offset: -48,64
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4505
+		Length: 12
+		Offset: -48,64
+		Tick: 100
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3129
+		Offset: -48,64
+	idle-top:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3130
+		Offset: -48,64
+	damaged-idle-top:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3131
+		Offset: -48,64
+	bib:
+		Filename: BLOXBASE.R8
+		Frames: 611, 612, 613, 631, 632, 633
+		Length: 6
+		Offset: -16,-16
+	bib-Concrete:
+		Filename: BLOXBASE.R8
+		Frames: 643, 644, 645, 663, 664, 665
+		Length: 6
+		Offset: -16,-16
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4332
+		Offset: -30,-24
+	smoke:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4138
+		Length: 14
+		Offset: 13,-16
+		Tick: 100
+		BlendMode: Additive
+	stages:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4138
+
+silo.ordos:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3134
+		Offset: -16,16
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3138
+		Offset: -16,16
+	stages:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3134
+		Length: 4
+		Offset: -16,16
+	damaged-stages:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3138
+		Offset: -16,16
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4577
+		Length: 7
+		Offset: -16,16
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4584
+		Length: 7
+		Offset: -16,16
+		ZOffset: 1024
+		Tick: 200
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4350
+		Offset: -30,-24
+
+hightech.ordos:
+	Defaults:
+	Defaults:
+		Offset: -48,80
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3132
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4538
+		Length: 10
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4548
+		Length: 10
+		Tick: 100
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3133
+	production-welding:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4898
+		Length: 10
+		Tick: 200
+		BlendMode: Additive
+		ZOffset: 1024
+	bib:
+		Filename: BLOXBASE.R8
+		Frames: 611, 612, 613, 631, 632, 633
+		Length: 6
+		Offset: -16,-16
+	bib-Concrete:
+		Filename: BLOXBASE.R8
+		Frames: 643, 644, 645, 663, 664, 665
+		Length: 6
+		Offset: -16,-16
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4344
+		Offset: -30,-24
+	active:
+		Filename: shared_sprites|invisibleitem.shp
+
+ordos_palace:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3244
+		Offset: -48,48
+	active:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3244
+		Offset: -48,48
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4677
+		Length: 11
+		Offset: -48,48
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4688
+		Length: 11
+		Offset: -48,48
+		Tick: 100
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3245
+		Offset: -48,48
+	bib:
+		Filename: BLOXBASE.R8
+		Frames: 631, 632, 633
+		Length: 3
+		Offset: -16,-16
+	bib-Concrete:
+		Filename: BLOXBASE.R8
+		Frames: 663, 664, 665
+		Length: 3
+		Offset: -16,-16
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4368
+		Offset: -30,-24
+
+light.ordos:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3241
+		Offset: -48,64
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4559
+		Length: 8
+		Offset: -48,64
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4567
+		Length: 9
+		Offset: -48,64
+		Tick: 100
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3241
+		Offset: -48,64
+	idle-top:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3242
+		Offset: -48,64
+		ZOffset: 896
+	damaged-idle-top:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3243
+		Offset: -48,64
+		ZOffset: 896
+	production-welding:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4928
+		Length: 10
+		Offset: -48,64
+		Tick: 200
+		BlendMode: Additive
+		ZOffset: 1024
+	bib:
+		Filename: BLOXBASE.R8
+		Frames: 611, 612, 613, 631, 632, 633
+		Length: 6
+		Offset: -16,-16
+	bib-Concrete:
+		Filename: BLOXBASE.R8
+		Frames: 643, 644, 645, 663, 664, 665
+		Length: 6
+		Offset: -16,-16
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4347
+		Offset: -30,-24
+
+chemtrooper:
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ordos_promotion_chemicaltrooper_chemtrooper.shp
+		Scale: 1.5
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Facings: 8
+	run:
+		Start: 16
+		Length: 6
+		Facings: 8
+		Tick: 120
+	shoot:
+		Start: 64
+		Length: 16
+		Facings: 8
+	idle1:
+		Start: 384
+		Length: 14
+		Tick: 120
+	idle2:
+		Start: 399
+		Length: 16
+		Tick: 120
+	die1:
+		Start: 416
+		Length: 8
+	die2:
+		Start: 424
+		Length: 8
+	die3:
+		Start: 432
+		Length: 8
+	die4:
+		Start: 440
+		Length: 12
+	die5:
+		Filename: shared_sprites|e1.shp
+		Start: 324
+		Length: 18
+		Tick: 80
+	die6:
+		Filename: shared_sprites|e1.shp
+		Start: 366
+		Length: 11
+		Tick: 80
+	die7:
+		Filename: shared_sprites|electro.shp
+		Length: *
+	die-crushed:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 2698, 2705, 2712, 2719, 2726, 2733, 2740, 2747
+		Tick: 800
+		ZOffset: -511
+	prone-stand:
+		Start: 208
+		Stride: 4
+		Facings: 8
+	prone-stand2:
+		Start: 208
+		Stride: 4
+		Facings: 8
+	prone-run:
+		Start: 208
+		Length: 4
+		Facings: 8
+		Tick: 120
+	prone-shoot:
+		Start: 256
+		Length: 16
+		Facings: 8
+	garrison-muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4028
+		Tick: 60
+		Facings: -32
+		BlendMode: Additive
+	icon:
+		Filename: ordos_promotion_chemicaltrooper_icon.shp
+		Offset: 0,-1
+
+ordos_saboteur:
+	Defaults:
+	stand:
+		Filename: DATA.R16
+		Scale: 2
+		Remap: 54F94B
+		Start: 2149
+		Facings: -8
+		Transpose: true
+	idle1:
+		Filename: DATA.R16
+		Scale: 2
+		Remap: 54F94B
+		Frames: 2330, 2337, 2344, 2351, 2358, 2365, 2372, 2379
+		Length: 8
+		Tick: 80
+	idle2:
+		Filename: DATA.R16
+		Scale: 2
+		Remap: 54F94B
+		Frames: 2331, 2338, 2345, 2352, 2359, 2366, 2373, 2380
+		Length: 8
+		Tick: 80
+	run:
+		Filename: DATA.R16
+		Scale: 2
+		Remap: 54F94B
+		Start: 2157
+		Length: 6
+		Facings: -8
+		Transpose: true
+		Tick: 120
+	prone-stand:
+		Filename: DATA.R16
+		Scale: 2
+		Remap: 54F94B
+		Start: 2253
+		Facings: -8
+		Transpose: true
+	prone-run:
+		Filename: DATA.R16
+		Scale: 2
+		Remap: 54F94B
+		Start: 2261
+		Length: 3
+		Facings: -8
+		Transpose: true
+		Tick: 120
+	standup:
+		Filename: DATA.R16
+		Scale: 2
+		Remap: 54F94B
+		Start: 2245
+		Facings: -8
+		Transpose: true
+		Tick: 120
+	die1:
+		Filename: DATA.R16
+		Scale: 2
+		Remap: 54F94B
+		Frames: 2325, 2332, 2339, 2346, 2353, 2360, 2367, 2374, 2381, 2383, 2385, 2387
+		Length: 12
+		Tick: 80
+	die2:
+		Filename: DATA.R16
+		Scale: 2
+		Remap: 54F94B
+		Frames: 2326, 2333, 2340, 2347, 2354, 2361, 2368, 2375, 2382, 2384, 2386, 2388
+		Length: 12
+		Tick: 80
+	die3:
+		Filename: DATA.R16
+		Scale: 2
+		Remap: 54F94B
+		Frames: 2327, 2334, 2341, 2348, 2355, 2362, 2369, 2376
+		Length: 8
+		Tick: 80
+	die4:
+		Filename: DATA.R16
+		Scale: 2
+		Remap: 54F94B
+		Frames: 2328, 2335, 2342, 2349, 2356, 2363, 2370, 2377
+		Length: 8
+		Tick: 80
+	die5:
+		Filename: shared_sprites|e1.shp
+		Start: 324
+		Length: 18
+		Tick: 80
+	die6:
+		Filename: shared_sprites|e1.shp
+		Start: 366
+		Length: 11
+		Tick: 80
+	die7:
+		Filename: shared_sprites|electro.shp
+		Length: *
+	die-crushed:
+		Filename: DATA.R16
+		Scale: 2
+		Remap: 54F94B
+		Frames: 2329, 2336, 2343, 2350, 2357, 2364, 2371, 2378
+		Length: 8
+		Tick: 800
+		ZOffset: -511
+	icon:
+		Filename: DATA.R16
+		Remap: 54F94B
+		Start: 4295
+		Offset: -30,-24
+
+ordos_leech:
+	stand:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Start: 64
+		Facings: 64
+		Scale: 1
+	run:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Length: 8
+		Facings: 8
+		Tick: 35
+		Scale: 1
+	jump:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Length: 8
+		Facings: 8
+		# Tick: 45
+		Scale: 1
+	shoot:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Start: 128
+		Length: 8
+		Facings: 8
+		Scale: 1
+	idle1:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Length: 8
+		Facings: 8
+		Tick: 45
+		Scale: 1
+	idle2:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Start: 128
+		Length: 8
+		Facings: 8
+		Scale: 1
+	die:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Start: 192
+		Tick: 70
+		Length: 8
+		Scale: 1
+	die1:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Start: 192
+		Tick: 70
+		Length: 8
+		Scale: 1
+	die2:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Start: 192
+		Tick: 70
+		Length: 8
+		Scale: 1
+	die3:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Start: 192
+		Tick: 70
+		Length: 8
+		Scale: 1
+	die4:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Start: 192
+		Tick: 70
+		Length: 8
+		Scale: 1
+	die5:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Start: 192
+		Tick: 70
+		Length: 8
+		Scale: 1
+	die6:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Start: 192
+		Tick: 70
+		Length: 8
+		Scale: 1
+	die7:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Start: 192
+		Tick: 70
+		Length: 8
+		Scale: 1
+	die4:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Start: 192
+		Tick: 70
+		Length: 8
+		Scale: 1
+	die-crushed:
+		Filename: ordos_promotion_leecher_tleilax_leech.png
+		Start: 192
+		Tick: 70
+		Length: 8
+		Scale: 1
+	icon:
+		Filename: ordos_promotion_leecher_icon.shp
+		Offset: 0,0
+
+ordos_facedancer:
+	Inherits: ^InfantryOverlays
+	Defaults:
+		Scale: 1.47
+		Filename: ordos_facedancer.shp
+	invisible:
+		Filename: DATA.R16
+		Scale: 1.4
+		Remap: 54F94B
+		Start: 38
+	idle:
+		Facings: 8
+		Scale: 1.4
+	stand:
+		Facings: 8
+		Scale: 1.4
+	run:
+		Start: 16
+		Length: 6
+		Facings: 8
+		Scale: 1.4
+	bite:
+		Start: 64
+		Length: 4
+		Facings: 8
+		Scale: 1.4
+	harvest:
+		Start: 64
+		Length: 4
+		Facings: 8
+		Scale: 1.4
+	dock:
+		Start: 64
+		Length: 4
+		Facings: 8
+		Scale: 1.4
+	dock-loop:
+		Start: 64
+		Length: 4
+		Facings: 8
+		Scale: 1.4
+	die1:
+		Start: 106
+		Length: 7
+		Scale: 1.4
+	die2:
+		Start: 106
+		Length: 7
+		Scale: 1.4
+	die3:
+		Start: 106
+		Length: 7
+		Scale: 1.4
+	die4:
+		Start: 106
+		Length: 7
+		Scale: 1.4
+	die5:
+		Filename: shared_sprites|e1.shp
+		Start: 324
+		Length: 18
+		Tick: 80
+	die6:
+		Filename: shared_sprites|e1.shp
+		Start: 366
+		Length: 11
+		Tick: 80
+	die7:
+		Filename: shared_sprites|electro.shp
+		Length: *
+	die-crushed:
+		Start: 106
+		Length: 7
+		Scale: 0.7
+	icon:
+		Filename: ordos_facedancer_icon.shp
+
+ordos_contaminator:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ordos_promotion_contaminator_tleilax_contaminator.png
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: ordos_promotion_contaminator_icon.shp
+
+ordos_antiairtrooper:
+	Inherits: ^RA2ArmedInfantry
+		Scale: 1
+	Inherits@2: ^RA2MachineGunMuzzle
+		Scale: 1
+	Defaults:
+		Scale: 0.76
+		Filename: ordos_upgrade_antiairtrooper_aatrooper.png
+	run:
+		Scale: 1
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Scale: 1
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+		Scale: 1
+	idle1:
+		Scale: 1
+		Start: 88
+	idle2:
+		Scale: 1
+		Start: 103
+	prone-stand:
+		Scale: 1
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Scale: 1
+		Start: 118
+	die1:
+		Scale: 1
+		Start: 166
+	die2:
+		Scale: 1
+		Start: 181
+	shoot:
+		Scale: 1
+		Start: 196
+	prone-shoot:
+		Scale: 1
+		Start: 244
+	paradrop:
+		Scale: 1
+		Start: 324
+	icon:
+		Filename: ordos_upgrade_antiairtrooper_icon.png
+
+ordos_mortartrooper:
+	Inherits: ^RA2ArmedInfantry
+		Scale: 1
+	Inherits@2: ^RA2MachineGunMuzzle
+		Scale: 1
+	Defaults:
+		Scale: 0.71
+		Filename: ordos_promotion_mortartroopers.png
+	run:
+		Scale: 1
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Scale: 1
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+		Scale: 1
+	idle1:
+		Scale: 1
+		Start: 88
+	idle2:
+		Scale: 1
+		Start: 103
+	prone-stand:
+		Scale: 1
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Scale: 1
+		Start: 118
+	die1:
+		Scale: 1
+		Start: 166
+	die2:
+		Scale: 1
+		Start: 181
+	shoot:
+		Scale: 1
+		Start: 196
+	prone-shoot:
+		Scale: 1
+		Start: 244
+	paradrop:
+		Scale: 1
+		Start: 324
+	icon:
+		Filename: ordos_promotion_mortartroopers_icon.png
+
+ordos_swarmerdrone:
+	Defaults:
+	idle:
+		Filename: ordos_swarmerdrone.png
+		Facings: 64
+		Scale: 1
+		Offset: 0,24
+	muzzle:
+		Filename: shared_sprites|minigun.shp
+		Length: 6
+		Facings: 8
+		Scale: 0.7
+	icon:
+		Filename: ordos_swarmerdrone_icon.png
+
+ordos_banshee:
+	Defaults:
+	idle:
+		Filename: ordos_promotion_banshees.png
+		Facings: 64
+		Scale: 1
+	move:
+		Filename: ordos_promotion_banshees.png
+		Facings: 64
+		Start: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|minigun.shp
+		Length: 6
+		Facings: 8
+		Scale: 0.7
+	icon:
+		Filename: ordos_promotion_banshees_icon.png
+
+ordos_wraith:
+	Defaults:
+		Filename: ordos_promotion_wraith.png
+	idle:
+		Length: 64
+		Tick: 64
+	move:
+		Length: 64
+		Tick: 64
+	muzzle:
+		Filename: shared_sprites|diskray.shp
+		Scale: 0.9
+		Offset: 0,35
+		Length: 4
+		Tick: 100
+	icon:
+		Filename: ordos_promotion_wraith_icon.png
+
+ordos_eyeinthesky:
+	Defaults:
+	idle:
+		Filename: ordos_eyeinthesky.png
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|minigun.shp
+		Length: 6
+		Facings: 8
+		Scale: 0.7
+	icon:
+		Filename: ordos_eyeinthesky_icon.png
+
+swarmer_husk.ordos:
+	Defaults:
+	idle:
+		Filename: swarmer.shp
+		ZOffset: -512
+		Facings: 32
+		Scale: 1.2
+
+ordos_spiceharvester:
+	Defaults:
+	idle:
+		Filename: ordos_spiceharvester.png
+		Scale: 1
+		Start: 64
+		Facings: 64
+	move:
+		Filename: ordos_spiceharvester.png
+		Length: 8
+		Facings: 8
+		Scale: 1
+	harvest:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3884
+		Length: 6
+		Facings: -8
+		Tick: 80
+		ZOffset: 1
+		BlendMode: Multiply
+	dock:
+		Filename: ordos_spiceharvester.png
+		Scale: 1
+		Start: 168
+		Facings: 1
+		Length: 6
+	dock-loop:
+		Filename: ordos_spiceharvester.png
+		Scale: 1
+		Start: 170
+		Facings: 1
+	icon:
+		Filename: ordos_spiceharvester_icon.png
+
+ordos_cobratank:
+	Defaults:
+		Filename: ordos_cobratank.png
+	idle:
+		Start: 64
+		Facings: 64
+	deploy:
+		Facings: 64
+	turret:
+		Facings: 64
+	make:
+		Start: 128
+		Length: 12
+	deploy-idle:
+		Filename: shared_sprites|invisibleitem.shp
+		ZOffset: -9999
+	icon:
+		Filename: ordos_cobratank_icon.png
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3671
+		Length: 3
+		BlendMode: Additive
+
+ordos_pythontank:
+	Defaults:
+		Filename: ordos_promotion_python.png
+	idle:
+		Start: 64
+		Facings: 64
+	deploy:
+		Facings: 64
+	turret:
+		Facings: 64
+	make:
+		Start: 128
+		Length: 12
+	deploy-idle:
+		Filename: shared_sprites|invisibleitem.shp
+		ZOffset: -9999
+	icon:
+		Filename: ordos_promotion_python_icon.png
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3671
+		Length: 3
+		BlendMode: Additive
+
+ordos_lasertank:
+	idle:
+		Filename: ordos_promotion_lasertank.png
+		Start: 0
+		Facings: 64
+		Scale: 1
+	turret:
+		Filename: ordos_promotion_lasertank.png
+		Start: 64
+		Facings: 64
+		Scale: 1
+	icon:
+		Filename: ordos_promotion_lasertank_icon.png
+
+ordos_deviatortank:
+	idle:
+		Filename: ordos_promotion_deviatortank_deviatormk2.png
+		Start: 0
+		Facings: 64
+		Scale: 1
+	turret:
+		Filename: ordos_promotion_deviatortank_deviatormk2.png
+		Start: 64
+		Facings: 64
+		Scale: 1
+	icon:
+		Filename: ordos_promotion_deviatortank_icon.png
+
+ordos_apc:
+	idle:
+		Filename: ordos_apc.png
+		Start: 0
+		Facings: 64
+		Scale: 1
+	turret:
+		Filename: ordos_apc.png
+		Start: 64
+		Facings: 64
+		Scale: 1
+	icon:
+		Filename: ordos_apc_icon.png
+
+ordos_laboratorycrawler:
+	idle:
+		Filename: ordos_promotion_laboratorycrawler_tleilax_labcrawl.png
+		Facings: 64
+		Scale: 1
+	icon:
+		Filename: ordos_promotion_laboratorycrawler_icon.png
+
+ordos_airmine:
+	idle:
+		Filename: ordos_airmine_aamine.png
+		Facings: 64
+		Scale: 1
+	icon:
+		Filename: ordos_airmine_icon.shp
+
+ordos_combattank:
+	Inherits: vordel_effect
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2453
+		Facings: -32
+	turret:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2485
+		Facings: -32
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4028
+		Tick: 60
+		Facings: -32
+		BlendMode: Additive
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4283
+		Offset: -30,-24
+
+ordos_combatautoguntank:
+	idle:
+		Filename: ordos_combatautoguntank_d2k_ct_striped.shp
+		Facings: -32
+		Scale: 1.5
+	turret:
+		Filename: ordos_autogunturret_d2k_autogun_turret.shp
+		Facings: -32
+		Offset: 0,-16
+		Scale: 1.5
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3671
+		Length: 3
+		BlendMode: Additive
+	icon:
+		Filename: ordos_combatautoguntank_icon.shp
+
+combat_tank_husk.ordos:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2453
+		Facings: -32
+		ZOffset: -512
+	turret:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2485
+		Facings: -32
+		ZOffset: -512
+
+d2k_ordos_stealth_tank:
+	idle:
+		Filename: ordos_tankdestroyer_tnkd.png
+		Scale: 1.25
+		Facings: 64
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.25
+		Remap: 54F94B
+		Start: 4028
+		Tick: 60
+		Facings: -32
+		BlendMode: Additive
+	icon:
+		Filename: ordos_tankdestroyer_icon.png
+
+ordos_raider:
+	Defaults:
+	idle:
+		Filename: ordos_raider_buggy.png
+		Scale: 1.5
+		Facings: -32
+		InterpolatedFacings: 64
+		Offset: 0, 4
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3996
+		Tick: 50
+		Facings: -32
+		BlendMode: Additive
+	icon:
+		Filename: ordos_raider_icon.png
+
+ordos_stealthraider:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2421
+		Facings: -32
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3996
+		Tick: 50
+		Facings: -32
+		BlendMode: Additive
+	turret:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2485
+		ZOffset: -1
+		Facings: -32
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4298
+		Offset: -30,-24
+
+ordos_dustdrone:
+	Defaults:
+	idle:
+		Filename: ordos_promotion_dustdrone_scoutdrone.png
+		Start: 64
+		Facings: 64
+		Scale: 1
+	move:
+		Filename: ordos_promotion_dustdrone_scoutdrone.png
+		Length: 8
+		Facings: 8
+		Scale: 1
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3996
+		Tick: 50
+		Facings: -32
+		BlendMode: Additive
+	icon:
+		Filename: ordos_promotion_dustdrone_icon.png
+
+ordos_heavyautoguntank:
+	idle:
+		Filename: ordos_upgrade_heavyautoguntank_d2k_autogun_tank.shp
+		Facings: -32
+		Scale: 1.75
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.875
+		Remap: 54F94B
+		Start: 3671
+		Length: 3
+		BlendMode: Additive
+	icon:
+		Filename: ordos_upgrade_heavyautoguntank_icon.png
+
+ordos_deviatorartillery:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2389
+		Facings: -32
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4286
+		Offset: -30,-24
+
+deviator_husk.ordos:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2389
+		Facings: -32
+		ZOffset: -512
+
+ordos_advancedcarryall:
+	Defaults:
+	idle:
+		Filename: ordos_advancedcarryall.png
+		Facings: 64
+	icon:
+		Filename: ordos_advancedcarryall_icon.png
+
+ordos_heavycombattank:
+	Defaults:
+		Scale: 1.5
+	idle:
+		Filename: ordos_upgrade_heavycombattank_d2k_chassis.png
+		Facings: -32
+		InterpolatedFacings: 64
+		Offset: 0, 4
+	turret:
+		Filename: ordos_upgrade_heavycombattank_d2k_turret.png
+		Facings: -32
+		InterpolatedFacings: 64
+		Offset: 0, -2
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4028
+		Tick: 60
+		Facings: -32
+		BlendMode: Additive
+	icon:
+		Filename: ordos_upgrade_heavycombattank_icon.png
+
+ordos_upgrade_biologicalwarfare:
+	icon:
+		Filename: ordos_upgrade_biologicalwarfare_icon.png
+		Offset: 0,0
+
+ordos_upgrade_shields:
+	icon:
+		Filename: ordos_upgrade_shields_icon.png
+		Offset: 0,0
+
+ordos_upgrade_rapidfirearmorpiercingbelts:
+	icon:
+		Filename: ordos_upgrade_rapidfirearmorpiercingbelts_icon.png
+		Offset: 0,0
+
+ordos_upgrade_hoverdrive:
+	icon:
+		Filename: ordos_upgrade_hoverdrive_icon.png
+		Offset: 0,0
+
+ordos_upgrade_lasercartridges:
+	icon:
+		Filename: ordos_upgrade_lasercartridges_icon.png
+		Offset: 0,0
+
+
+ordos_upgrade_para:
+	icon:
+		Filename: ordos_upgrade_contraband_icon.png
+		Offset: 0,0
+
+ordos_upgrade_heavycombattankrockets:
+	icon:
+		Filename: ordos_upgrade_heavycombattankrockets_icon.png

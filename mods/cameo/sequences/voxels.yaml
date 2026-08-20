@@ -1,8 +1,8 @@
 #
 # Red Alert 2
 #
-ra2aegis:
-	idle:
+ra2_allies_aegiscruiser:
+	idle: ra2aegis
 
 ra2asw:
 	idle:
@@ -22,42 +22,42 @@ ra2dred:
 	idle:
 	empty: ra2dredwo
 
-ra2naflak:
+ra2_soviets_flakcannon:
 	idle: ra2flaktur
 	turret: ra2flaktur
 
-ra2gtgcan:
+ra2_allies_grandcannon:
 	turret: ra2gtgcantur
 	barrel: ra2gtgcanbarl
 
 ra2hornet:
 	idle:
 
-ra2hyd: #Sea Scorpion
-	idle:
+ra2_soviets_seascorpion: #Sea Scorpion
+	idle: ra2hyd
 
-ra2nalasr:
+ra2_soviets_sentrygun:
 	turret: ra2laser
 	idle: ra2laser
 
 ra2lcrf: #Allies transport
 	idle:
 
-ra2caoutp: #Tech outpost sam
+ra2caoutp: #Tech outpost td_nod_samsite
 	turret: ra2outp
 
 ra2pdplane: #Paradrop plane
 	idle:
 
-ra2nasam:
+ra2_allies_patriotmissilesystem:
 	idle: sam
 	turret: sam
 
 ra2sapc:
 	idle:
 
-ra2shad: #Nighthawk
-	idle:
+ra2_allies_nighthawk: #Nighthawk
+	idle: ra2shad
 
 ra2sub: #Typhoon Attack Sub
 	idle:
@@ -65,47 +65,44 @@ ra2sub: #Typhoon Attack Sub
 ra2subt: #Sub Torpedo needs voxel projectiles
 	idle:
 
-ra2nasam:
-	turret: sam
-
 #
 # Yuri's Revenge
 #
-  
-yrbsub:
-	idle:
+
+yuri_boomersubmarine:
+	idle: yrbsub
 
 yrbsubmisl:
 	idle:
 
-yrcaos:
-	idle:
-    
+yuri_chaosdrone:
+	idle: yrcaos
+
 yrschd:
 	idle:
 	turret: yrschdtur
-    
-yrschp:
-	idle:
+
+ra2_soviets_siegechopper:
+	idle: yrschd
 	deployed: yrschd
 	turret: yrschdtur
-    
+
 yrspyp:
 	idle:
-    
-yrygggun:
+
+yuri_gatlingcannon:
 	idle: yryaggun
-	turret: yryaggun
-    
+	turret: yryaggun, yryaggun_centered
+
 #ycab:
 #	idle:
-#    
+#
 yrhovr:
 	idle:
 
 yryhvr:
 	idle:
-    
+
 yrbpln:
 	idle:
 
@@ -118,42 +115,45 @@ tsmcvgrey:
 tsmcvblack:
 	idle:
 
-tsharv:
+ts_gdi_tiberiumharvester:
 	idle:
 	unload: tshorv
 
-tsapc:
+ts_gdi_amphibiousapc:
 	idle:
 	water: tsapcw
 
-tsart2:
+ts_nod_artillery:
 	idle:
 	turret: tsart2tur
 	barrel: tsart2barl
 
-tsjugg:
+ts_gdi_juggernaut:
 	barrel: tsdjuggbar
 
-tssubtank:
+ts_nod_devilstongue:
 	idle:
 
-tsbggy:
+ts_nod_attackbuggy:
 	idle:
 
-tsntlasr:
+ts_nod_laserturret:
 	turret: tslaser
 
-tssapc:
+cabal_plasmaturret:
+	turret: tslaser
+
+ts_nod_subterraneanapc:
 	idle:
 
-tsbike:
-	idle:
+ts_nod_attackcycle:
+	idle: tsbike
 
 dtruck:
 	idle:
 
-tsttnk:
-	idle:
+ts_nod_ticktank:
+	idle: tsttnk
 	turret: tsttnktur
 	barrel: tsttnkbarl
 
@@ -161,57 +161,53 @@ tsttnkturret:
 	turret: tsttnktur
 	barrel: tsttnkbarl
 
-tsmmch:
+ts_gdi_titan:
 	barrel: tsmmchbarl
 
-tshmec:
+ts_gdi_mammothprototype:
 	idle:
 
-tshvr:
+ts_gdi_hovermlrs:
 	idle:
 	turret: tshvrtur
 
-tsstnk:
-	idle:
-	
-tsorca:
+ts_nod_stealthtank:
 	idle:
 
-tsorcab:
+ts_gdi_orcafighter:
+	idle:
+
+ts_gdi_orcabomber:
 	idle:
 
 tsorcatran:
 	idle:
 
-tstrnsport:
+ts_gdi_carryall:
 	idle:
 
-tsscrin:
+ts_nod_bansheefighter:
 	idle:
 
 tsapache:
 	idle:
 
-tsheli:
+forgotten_apache:
 	idle:
 
-tshind:
+forgotten_wasp:
 	idle:
 
-tstran:
+forgotten_chinook:
 	idle:
 
 tsdshp:
 	idle:
 
-ts4tnk:
+forgotten_experimentalmammothtank:
 	idle:
 	turret: ts4tnktur
 	barrel: ts4tnkbarl
-
-htnk:
-	idle:
-	turret: htnktur
 
 tstrucka:
 	idle:
@@ -219,13 +215,13 @@ tstrucka:
 tstruckb:
 	idle:
 
-tslpst:
+ts_gdi_mobilesensorarray:
 	idle:
 
 tsicbm:
 	idle:
 
-tsrepair:
+ts_nod_mobilerepairvehicle:
 	idle:
 
 tsweed:
@@ -245,14 +241,14 @@ tspick:
 tscar:
 	idle:
 
-tscar2:
+forgotten_raidercar:
 	idle: tscar
 	turret: tsm113tur
 
 tswini:
 	idle:
 
-tswini2:
+forgotten_missilevan:
 	idle: tswini
 	turret: tsmlrstur
 
@@ -265,7 +261,7 @@ tstraincar:
 tscargocar:
 	idle:
 
-tssonic:
+ts_gdi_disruptor:
 	idle:
 	turret: tssonictur
 
@@ -278,44 +274,44 @@ tssonic:
 #utnk: # TODO: unused alternative version of Devil's Tongue
 #	idle:
 
-#mrj: # TODO: unused
+#ra1_allies_mobileradarjammer: # TODO: unused
 #	idle:
 #	turret: mrjtur
 
-tsm113: # TODO: unused
+forgotten_m113adats: # TODO: unused
 	idle:
 	turret: tsm113tur
 
-tsmlrs: # TODO: unused
+forgotten_mlrs: # TODO: unused
 	idle:
 	turret: tsmlrstur
 
-tsarty: # TODO: unused
+forgotten_tankkiller: # TODO: unused
 	idle:
 	barrel: tsartybarl
 
-ts1tnk: # TODO: unused
+forgotten_rattytank: # TODO: unused
 	idle:
 	turret: ts1tnktur
 	barrel: ts1tnkbarl
 
-ts2tnk: # TODO: unused
+forgotten_warriortank: # TODO: unused
 	idle:
 	turret: ts2tnktur
 	barrel: ts2tnkbarl
 
-ts3tnk: # TODO: unused
+forgotten_scoopertank: # TODO: unused
 	idle:
 	turret: ts3tnktur
 	barrel: ts3tnkbarl
 
-tsftnk: # TODO: unused
+forgotten_flametank: # TODO: unused
 	idle:
 
-tkmmcv:
+charv2:
 	idle:
 
-stk:
+gharv:
 	idle:
 
 #tire: # TODO: unused debris
@@ -336,7 +332,7 @@ tsaegis:
 tsbsub:
 	idle:
 
-tssgen:
+ts_nod_mobilestealthgenerator:
 	idle:
 
 tsprobe:
@@ -344,3 +340,20 @@ tsprobe:
 
 tsm_emp:
 	idle:
+
+##FutureTech##
+
+futuretech_mbt:
+	idle: futuretech_mbt
+	turret: futuretech_mbttur
+
+futuretech_orion:
+	idle: futuretech_orion
+	turret: futuretech_oriontur
+
+futuretech_landcarr:
+	idle: futuretech_landcarr
+	turret:
+
+asianalliance_harbinger:
+	idle: asianalliance_harbinger

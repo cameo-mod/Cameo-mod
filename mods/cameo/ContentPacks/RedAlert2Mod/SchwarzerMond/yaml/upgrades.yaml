@@ -1,0 +1,151 @@
+conyard_infiltrated.nax2:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Stolen Schwarzer Mond Buildings Plans
+	Buildable:
+		Description:
+	RenderSprites:
+		Image: schwarzermond_constructionyard
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: schwarzermond_constructionyard
+schwarzermond_upgrade_crystallens:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Crystal Lens
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Upgrades
+		Description: Increases the burst of all yellow laser weapons by 1.
+		Prerequisites: ~schwarzermond_radar, !schwarzermond_upgrade_crystallens
+	RenderSprites:
+		Image: schwarzermond_upgrade_crystallens
+	ProvidesPrerequisite:
+
+schwarzermond_upgrade_amplifiedlens:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Amplified Lens
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 55
+		Queue: Research
+		Description: Further increases the burst of yellow laser weapons by 1.
+		Prerequisites: ~schwarzermond_techcenter, schwarzermond_upgrade_crystallens, !schwarzermond_upgrade_amplifiedlens
+	RenderSprites:
+		Image: schwarzermond_upgrade_amplifiedlens
+	ProvidesPrerequisite:
+
+schwarzermond_upgrade_vrilpoweredweapons:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Vril Powered Weapons
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 60
+		Queue: Research
+		Description: Infuses cannon shells with Vril energy from the Black Sun program.
+			Cannon vehicles deal 25% more damage and Tesla-type damage.
+		Prerequisites: ~schwarzermond_techcenter, !schwarzermond_upgrade_vrilpoweredweapons
+	RenderSprites:
+		Image: schwarzermond_upgrade_vrilpoweredweapons
+	ProvidesPrerequisite:
+
+# Schwarzer Mond's TEAM upgrade (maintainer 2026-08-15). Was a faction upgrade;
+# the effects moved to ^Helium3TeamUpgradePower / ^Helium3TeamUpgradeMobile, which
+# defaults.yaml hangs on ^Power, ^VehicleBuffs and ^AircraftBuffs so they reach
+# every team member. Weakened on the way (power 100->50%, speed 25->15%) per
+# DESIGN.md 6, and given a real drawback the other team upgrades do not have.
+schwarzermond_upgrade_helium3:
+	Inherits: ^TeamUpgradeTemplate
+	Tooltip:
+		Name: Helium-3 Enrichment
+	Buildable:
+		BuildPaletteOrder: 65
+		Description: Team Upgrade (Also affects units of your teammates)
+			Increases the power output of every Power Plant in your team by 50%, and gives every vehicle and aircraft in your team 15% more speed and firepower. Fuelled units detonate violently when destroyed.
+			Helium-3 mined from the lunar regolith fuels Fourth Reich fusion reactors and propulsion systems. High Command shares it freely with its allies, and mentions the stability problem only in the footnotes.
+		Prerequisites: ~schwarzermond_radar, !schwarzermond_upgrade_helium3
+	RenderSprites:
+		Image: schwarzermond_upgrade_helium3
+	ProvidesTeamProxyActor:
+		Actor: schwarzermond_upgrade_helium3_proxy_actor
+
+schwarzermond_upgrade_helium3_proxy_actor:
+	Inherits: ^TeamUpgradeProxyActor
+	Tooltip:
+		Name: Helium-3 Enrichment
+	Buildable:
+		Description: Team Upgrade (Also affects units of your teammates)
+			Increases the power output of every Power Plant in your team by 50%, and gives every vehicle and aircraft in your team 15% more speed and firepower. Fuelled units detonate violently when destroyed.
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: schwarzermond_upgrade_helium3
+	ProvidesPrerequisite:
+
+schwarzermond_upgrade_vrilinfusion:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Vril Infusion
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 67
+		Queue: Research
+		Description: All Schwarzer Mond infantry gain 25% firepower, 25% speed and a regenerating Vril shield worth 25% of their health.
+			Vril energy from the Black Sun program rewrites soldiers at the cellular level, creating true Übermenschen.
+		Prerequisites: ~schwarzermond_techcenter, !schwarzermond_upgrade_vrilinfusion
+	RenderSprites:
+		Image: schwarzermond_upgrade_vrilinfusion
+	ProvidesPrerequisite:
+
+schwarzermond_upgrade_lunaralloys:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Lunar Alloys
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 70
+		Queue: Upgrades
+		Description: All Schwarzer Mond units gain armor plating worth 20% of their health.
+			Regolith-smelted alloys are bolted over the hull, adding a repairing plate layer above the health bar.
+		Prerequisites: ~schwarzermond_radar, !schwarzermond_upgrade_lunaralloys
+	RenderSprites:
+		Image: schwarzermond_upgrade_lunaralloys
+	ProvidesPrerequisite:
+
+schwarzermond_upgrade_moonpropaganda:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Moon Propaganda
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: All Schwarzer Mond infantry deal 10% more damage, fight at 50% more firepower below half health, and 15% of the enemy infantry they kill rise again as Lunar Soldiers.
+			The broadcasts run day and night on every frequency the Moon can reach. They work best on the dying — and, it turns out, slightly after.
+		Prerequisites: ~schwarzermond_techcenter, !schwarzermond_upgrade_moonpropaganda
+	RenderSprites:
+		Image: schwarzermond_upgrade_moonpropaganda
+	ProvidesPrerequisite:
+
+schwarzermond_upgrade_cryptofascism:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Cryptofascism
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Every Schwarzer Mond unit generates 1 credit per second, and every enemy killed mints MoonCoin worth 25% of the victim's value.
+			The Reich pays its soldiers in MoonCoin, the official memecoin of the Reichsmark 2.0 blockchain. High Command holds 94% of the supply in a cold wallet labelled NOT A RUG, has announced that the chart only goes up, and reminds all personnel that selling is treason. Casualties are not losses, they are liquidity events.
+		Prerequisites: ~schwarzermond_techcenter, !schwarzermond_upgrade_cryptofascism
+	RenderSprites:
+		Image: schwarzermond_upgrade_cryptofascism
+	ProvidesPrerequisite:

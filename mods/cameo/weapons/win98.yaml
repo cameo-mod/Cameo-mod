@@ -1,12 +1,12 @@
 demodiskstrike:
 	ReloadDelay: 5
-	Range: 100c0
+	Range: 102400
 	Projectile: GravityBomb
 		Image: win98_cd
 		Velocity: 0, 0, -230
 		Acceleration: 0, 0, -40
 		Shadow: true
-	Warhead@1Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: large_explosion
 		ImpactSounds:
 		ImpactActors: false
@@ -33,10 +33,10 @@ demodiskstrike:
 
 redringofdeathweapon:
 	ReloadDelay: 2
-	Range: 100c0
+	Range: 102400
 	Projectile: InstantHit
 		Inaccuracy: 5c0
-	Warhead@1Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: win98_redringofdeath
 		ImpactActors: false
 	Warhead@1Dam: SpreadDamage
@@ -58,7 +58,7 @@ redringofdeathweapon:
 
 paintbrushfire:
 	ReloadDelay: 40
-	Range: 7c512
+	Range: 7680
 	Report: bowfire.aud
 	ValidTargets: Air
 	Projectile: Missile
@@ -84,7 +84,7 @@ paintbrushfire:
 
 win98_directx:
 	ReloadDelay: 40
-	Range: 5c0
+	Range: 5120
 	Report: bowfire.aud
 	ValidTargets: Ground
 	Projectile: Bullet
@@ -107,7 +107,7 @@ win98_directx:
 
 WIN98MINEDemolitionExplode:
 	ReloadDelay: 350
-	Range: 1c512
+	Range: 1536
 	Projectile: InstantExplode
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c768
@@ -126,13 +126,13 @@ WIN98MINEDemolitionExplode:
 		ImpactSounds: gexpmina.wav, gexpminb.wav
 	Warhead@3Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Trees
+		InvalidTargets: Vehicle, Structure, wall
 
 RegeditInterceptorLauncher:
 	ReloadDelay: 100
 	Burst: 5
 	BurstDelays: 15
-	Range: 8c0
+	Range: 8192
 	ValidTargets: Ground, Air, Water
 	Projectile: InstantHit
 	Warhead@1Dam: TargetDamage
@@ -140,7 +140,7 @@ RegeditInterceptorLauncher:
 
 RegeditInterceptorCannon:
 	ReloadDelay: 40
-	Range: 4c0
+	Range: 4096
 	Burst: 4
 	BurstDelays: 10
 	Report: blastcan.aud

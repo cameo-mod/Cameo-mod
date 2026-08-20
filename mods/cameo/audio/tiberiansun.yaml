@@ -13,127 +13,127 @@
 TSInfantry:
 	Inherits: ^TSDeath
 	Voices:
-		Select: 15-i000, 15-i004, 15-i012, 15-i032, 15-i048, 15-i002
-		Move: 15-i018, 15-i024, 15-i044, 15-i020, 15-i022
-		Action: 15-i018, 15-i024, 15-i044, 15-i020, 15-i022
-		Attack: 15-i044, 15-i050, 15-i044, 15-i046, 15-i016
-		#Feedback: 15-i058, 15-i064 # TODO
+		Select: 15_i000, 15_i004, 15_i012, 15_i032, 15_i048, 15_i002
+		Move: 15_i018, 15_i024, 15_i044, 15_i020, 15_i022
+		Action: 15_i018, 15_i024, 15_i044, 15_i020, 15_i022
+		Attack: 15_i044, 15_i050, 15_i044, 15_i046, 15_i016
+		#Feedback: 15_i058, 15_i064 # TODO
 
 TSRocket:
 	Inherits: TSInfantry
 	Voices:
-		Select: 15-i000, 15-i032, 15-i048
-		Move: 15-i008, 15-i014, 15-i026
-		Action: 15-i008, 15-i014, 15-i026
-		Attack: 15-i008, 15-i014, 15-i026, 15-i050, 15-i060
+		Select: 15_i000, 15_i032, 15_i048
+		Move: 15_i008, 15_i014, 15_i026
+		Action: 15_i008, 15_i014, 15_i026
+		Attack: 15_i008, 15_i014, 15_i026, 15_i050, 15_i060
 
 TSUmagon:
 	Inherits: TSCivilianFemale
 	Voices:
-		Select: 10-i000, 10-i002, 10-i004, 10-i006
-		Move: 10-i016, 10-i020, 10-i022
-		Action: 10-i016, 10-i020, 10-i022
-		Attack: 10-i024, 10-i026, 10-i028, 10-i030
+		Select: 10_i000, 10_i002, 10_i004, 10_i006
+		Move: 10_i016, 10_i020, 10_i022
+		Action: 10_i016, 10_i020, 10_i022
+		Attack: 10_i024, 10_i026, 10_i028, 10_i030
 
 TSGhost:
 	Inherits: ^TSDeath
 	Voices:
-		Select: 14-i000, 14-i002, 14-i004
-		Move: 14-i008, 14-i010, 14-i012, 14-i014
-		Action: 14-i008, 14-i010, 14-i012, 14-i014
-		Attack: 14-i008, 14-i010, 14-i014, 14-i016
+		Select: 14_i000, 14_i002, 14_i004
+		Move: 14_i008, 14_i010, 14_i012, 14_i014
+		Action: 14_i008, 14_i010, 14_i012, 14_i014
+		Attack: 14_i008, 14_i010, 14_i014, 14_i016
 
 TSMedic:
 	Inherits: ^TSDeath
 	Voices:
-		Select: 20-i000, 20-i004, 20-i006
-		Move: 20-i008, 20-i010, 20-i012
-		Action: 20-i008, 20-i010, 20-i012
-		Attack: 20-i016, 20-i018, 20-i020
+		Select: 20_i000, 20_i004, 20_i006
+		Move: 20_i008, 20_i010, 20_i012
+		Action: 20_i008, 20_i010, 20_i012
+		Attack: 20_i016, 20_i018, 20_i020
 
 TSEngineer:
 	Inherits: ^TSDeath
 	Voices:
-		Select: 19-i000, 19-i002, 19-i006
-		Move: 19-i010, 19-i016
-		Action: 19-i018, 19-i016
+		Select: 19_i000, 19_i002, 19_i006
+		Move: 19_i010, 19_i016
+		Action: 19_i018, 19_i016
 
 TSJumpJet:
 	Inherits: TSInfantry
 	Voices:
-		Select: 15-i000, 15-i004, 15-i012, 15-i048
-		Move: 15-i018, 15-i024, 15-i044
-		Attack: 15-i044, 15-i050, 15-i044, 15-i046
+		Select: 15_i000, 15_i004, 15_i012, 15_i048
+		Move: 15_i018, 15_i024, 15_i044
+		Attack: 15_i044, 15_i050, 15_i044, 15_i046
 
 TSWeed:
 	Inherits: TSInfantry
 	Voices:
-		Select: 15-i000, 15-i006, 15-i040, 15-i042
-		Move: 15-i024, 15-i044
-		Attack: 15-i006, 15-i046
+		Select: 15_i000, 15_i006, 15_i040, 15_i042
+		Move: 15_i024, 15_i044
+		Attack: 15_i006, 15_i046
 
 TSSpy:
 	Inherits: ^TSDeath
 	Voices:
-		Select: 21-i000, 21-i002, 21-i004
-		Move: 21-i010, 21-i012, 21-i016
-		Action: 21-i010, 21-i012, 21-i022
-		#Feedback: 21-i000, 21-i002 # TODO
+		Select: 21_i000, 21_i002, 21_i004
+		Move: 21_i010, 21_i012, 21_i016
+		Action: 21_i010, 21_i012, 21_i022
+		#Feedback: 21_i000, 21_i002 # TODO
 
 TSHijacker:
 	Inherits: ^TSDeath
 	Voices:
-		Select: 24-i000, 24-i002, 24-i004, 24-i006
-		Move: 24-i008, 24-i010, 24-i012, 24-i014
-		Action: 24-i016, 24-i018, 24-i020, 24-i022, 24-i024
+		Select: 24_i000, 24_i002, 24_i004, 24_i006
+		Move: 24_i008, 24_i010, 24_i012, 24_i014
+		Action: 24_i016, 24_i018, 24_i020, 24_i022, 24_i024
 
 TSCyborg:
 	Inherits: ^TSDeath
 	Voices:
-		Select: 22-i000, 22-i002, 22-i006
-		Move: 22-i008, 22-i010, 22-i014, 22-i016, 22-i020
-		Action: 22-i008, 22-i010, 22-i014, 22-i016, 22-i020
-		Attack: 22-i008, 22-i010, 22-i012, 22-i018
-		Die: 22-n104, 22-n106, 22-n108
-		Burned: 22-n104, 22-n106, 22-n108
-		Poisoned: 22-n104, 22-n106, 22-n108
+		Select: 22_i000, 22_i002, 22_i006
+		Move: 22_i008, 22_i010, 22_i014, 22_i016, 22_i020
+		Action: 22_i008, 22_i010, 22_i014, 22_i016, 22_i020
+		Attack: 22_i008, 22_i010, 22_i012, 22_i018
+		Die: 22_n104, 22_n106, 22_n108
+		Burned: 22_n104, 22_n106, 22_n108
+		Poisoned: 22_n104, 22_n106, 22_n108
 
 TSCyborgCommando:
 	Inherits: TSCyborg
 	Voices:
-		Select: 23-i000, 23-i002, 23-i004, 23-i006
-		Move: 23-i008, 23-i010, 23-i012, 23-i016
-		Action: 23-i008, 23-i010, 23-i012, 23-i016
-		Attack: 23-i014, 23-i018, 23-i020, 23-i022
-		CoreDefenderBuild: 99-n464
+		Select: 23_i000, 23_i002, 23_i004, 23_i006
+		Move: 23_i008, 23_i010, 23_i012, 23_i016
+		Action: 23_i008, 23_i010, 23_i012, 23_i016
+		Attack: 23_i014, 23_i018, 23_i020, 23_i022
+		CoreDefenderBuild: 99_n464
 
 TSMutant:
 	Inherits: TSInfantry
 	Voices:
-		Select: 15-i032, 15-i048
-		Move: 15-i008, 15-i014, 15-i026
-		Attack: 15-i008, 15-i014, 15-i026, 15-i050, 15-i060
+		Select: 15_i032, 15_i048
+		Move: 15_i008, 15_i014, 15_i026
+		Attack: 15_i008, 15_i014, 15_i026, 15_i050, 15_i060
 
 TSTratos:
 	Inherits: ^TSDeath
 	Voices:
-		Select: 13-i000, 13-i002, 13-i004, 13-i006
-		Move: 13-i008, 13-i010, 13-i012, 13-i014
-		Attack: 13-i016, 13-i018, 13-i020
+		Select: 13_i000, 13_i002, 13_i004, 13_i006
+		Move: 13_i008, 13_i010, 13_i012, 13_i014
+		Attack: 13_i016, 13_i018, 13_i020
 
 TSOxanna:
 	Inherits: TSCivilianFemale
 	Voices:
-		Select: 11-i000, 11-i002, 11-i004, 11-i006
-		Move: 11-i008, 11-i010, 11-i012
-		Attack: 11-i014, 11-i016, 11-i018
+		Select: 11_i000, 11_i002, 11_i004, 11_i006
+		Move: 11_i008, 11_i010, 11_i012
+		Attack: 11_i014, 11_i016, 11_i018
 
 TSSlavick:
 	Inherits: ^TSDeath
 	Voices:
-		Select: 12-i000, 12-i002, 12-i004
-		Move: 12-i006, 12-i008, 12-i010
-		Attack: 12-i012, 12-i014, 12-i016
+		Select: 12_i000, 12_i002, 12_i004
+		Move: 12_i006, 12_i008, 12_i010
+		Attack: 12_i012, 12_i014, 12_i016
 
 TSFiend:
 	Voices:
@@ -149,25 +149,25 @@ TSFiend:
 
 TSVehicle:
 	Voices:
-		Select: 25-i000, 25-i002, 25-i004, 25-i006
-		Move: 25-i012, 25-i014, 25-i016, 25-i018, 25-i022
-		Action: 25-i012, 25-i014, 25-i016, 25-i018, 25-i022
-		Attack: 25-i014, 25-i022, 25-i024, 25-i026
-		Unload: 25-i018
+		Select: 25_i000, 25_i002, 25_i004, 25_i006
+		Move: 25_i012, 25_i014, 25_i016, 25_i018, 25_i022
+		Action: 25_i012, 25_i014, 25_i016, 25_i018, 25_i022
+		Attack: 25_i014, 25_i022, 25_i024, 25_i026
+		Unload: 25_i018
 
 TSMech:
 	Voices:
-		Select: 15-i000, 15-i006, 15-i010, 15-i038, 15-i040, 15-i042
-		Move: 15-i024, 15-i044
-		Action: 15-i024, 15-i044
-		Attack: 15-i006, 15-i046
+		Select: 15_i000, 15_i006, 15_i010, 15_i038, 15_i040, 15_i042
+		Move: 15_i024, 15_i044
+		Action: 15_i024, 15_i044
+		Attack: 15_i006, 15_i046
 
 TSHeli:
 	Voices:
-		Select: 30-i000, 30-i002, 30-i004, 30-i006
-		Move: 30-i014, 30-i016, 30-i018, 30-i022
-		Attack: 30-i022, 30-i030, 30-i034, 30-i036
-		Action: 30-i014, 30-i016, 30-i018, 30-i022
+		Select: 30_i000, 30_i002, 30_i004, 30_i006
+		Move: 30_i014, 30_i016, 30_i018, 30_i022
+		Attack: 30_i022, 30_i030, 30_i034, 30_i036
+		Action: 30_i014, 30_i016, 30_i018, 30_i022
 
 TSCivilian:
 	Inherits: ^TSDeath
@@ -190,18 +190,99 @@ TSCivilianFemale: #can be used for female mutant as well
 
 TSScrin:
 	Voices:
-		Select: 32-i000
-		Move: 32-i002, 32-i004
-		Action: 32-i002, 32-i004
-		Attack: 32-i006
-		Die: 32-i008
+		Select: 32_i000
+		Move: 32_i002, 32_i004
+		Action: 32_i002, 32_i004
+		Attack: 32_i006
+		Die: 32_i008
 
 TSReaper:
 	Voices:
-		Select: 60-n100, 60-n102, 60-n104
-		Move: 60-n106, 60-n108, 60-n110
-		Action: 60-n106, 60-n108, 60-n110
-		Attack: 60-n112, 60-n114, 60-n116
+		Select: 60_n100, 60_n102, 60_n104
+		Move: 60_n106, 60_n108, 60_n110
+		Action: 60_n106, 60_n108, 60_n110
+		Attack: 60_n112, 60_n114, 60_n116
 		Die: spiddie1
-		Burned: 22-n104, 22-n106, 22-n108
+		Burned: 22_n104, 22_n106, 22_n108
 		Zapped: electro1
+
+TSCobra:
+	DefaultVariant: .wav
+	Voices:
+		Select: tscobrasel1, tscobrasel2
+		Move: tscobramov1, tscobramov2
+		Action: tscobramov1, tscobramov2
+		Attack: tscobraatk1, tscobraatk2, tscobraatk3
+		Unload: tscobramov1, tscobramov2
+		Die: ts_spider_dead
+		Burned: ts_spider_dead
+		Zapped: ts_spider_dead
+		Poisoned: ts_spider_dead
+
+TSCABALVehicles:
+	DefaultVariant: .wav
+	Voices:
+		Select: tscavalveh_04, tscavalveh_02
+		Move: tscavalveh_03, tscavalveh_06, tscavalveh_07
+		Action: tscavalveh_03, tscavalveh_06, tscavalveh_07
+		Attack: tscavalveh_05, tscavalveh_01
+		Unload: tscavalveh_03, tscavalveh_06, tscavalveh_07
+
+TSE800:
+	Inherits: ^TSDeath
+	DefaultVariant: .wav
+	Voices:
+		Select: ts_e800_01, ts_e800_02
+		Move: ts_e800_01, ts_e800_02, ts_e800_03
+		Action: ts_e800_01, ts_e800_02, ts_e800_03
+		Attack: ts_e800_01, ts_e800_02, ts_e800_03
+		Die: tsnewcybdie, tsnewcybdie2, tsnewcybdie3, tsnewcybdie4, tsnewcybdie5
+		Burned: tsnewcybdie, tsnewcybdie2, tsnewcybdie3, tsnewcybdie4, tsnewcybdie5
+		Poisoned: tsnewcybdie, tsnewcybdie2, tsnewcybdie3, tsnewcybdie4, tsnewcybdie5
+
+TSCABALCore:
+	DefaultVariant: .wav
+	Voices:
+		Select: core_defender_sel_01, core_defender_sel_02
+		Move: core_defender_mov_01, core_defender_mov_02
+		Action: core_defender_mov_01, core_defender_mov_02
+		Attack: core_defender_atk_01, core_defender_atk_02, core_defender_atk_03
+		Unload: core_defender_mov_01, core_defender_mov_02
+		Die: core_defender_die_01, core_defender_die_02, core_defender_die_03
+		Burned: core_defender_die_01, core_defender_die_02, core_defender_die_03
+		Zapped: core_defender_die_01, core_defender_die_02, core_defender_die_03
+		Poisoned: core_defender_die_01, core_defender_die_02, core_defender_die_03
+		Feedback: core_defender_feed_01, core_defender_feed_02
+		CoreDefenderBuild: 99_n464
+
+TSCABALCoreOld:
+	DefaultVariant: .wav
+	Voices:
+		Select: tscoresel1, tscoresel2
+		Move: tscore1, tscore2, tscore3, tscore4, tscore5, tscore6, tscore7
+		Action: tscore1, tscore2, tscore3, tscore4, tscore5, tscore6, tscore7
+		Attack: tscore1, tscore2, tscore3, tscore4, tscore5, tscore6, tscore7
+		Unload: tscore1, tscore2, tscore3, tscore4, tscore5, tscore6, tscore7
+		CoreDefenderBuild: 99_n464
+
+TSNewCyborgVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: tsnewcybsel2, tsnewcybsel3, tsnewcybsel4
+		Move: tsnewcybmov1, tsnewcybmov2, tsnewcybmov3, tsnewcybmov4, tsnewcybmov5
+		Action: tsnewcybmov1, tsnewcybmov2, tsnewcybmov3, tsnewcybmov4, tsnewcybmov5
+		Attack: tsnewcybatk1, tsnewcybatk2, tsnewcybatk3, tsnewcybatk4
+		Die: tsnewcybdie, tsnewcybdie2, tsnewcybdie3, tsnewcybdie4, tsnewcybdie5
+		Burned: tsnewcybdie, tsnewcybdie2, tsnewcybdie3, tsnewcybdie4, tsnewcybdie5
+		Poisoned: tsnewcybdie, tsnewcybdie2, tsnewcybdie3, tsnewcybdie4, tsnewcybdie5
+
+TSCyborgHeavy:
+	Inherits: ^TSDeath
+	Voices:
+		Select: cybass_sel1, cybass_sel2, cybass_sel3
+		Move: cybass_mov1, cybass_mov2, cybass_mov3, cybass_mov4, cybass_mov5
+		Action: cybass_mov1, cybass_mov2, cybass_mov3, cybass_mov4, cybass_mov5
+		Attack: cybass_atck1, cybass_atck2
+		Die: cybass_die1, cybass_die2, cybass_die3
+		Burned: cybass_die1, cybass_die2, cybass_die3
+		Poisoned: cybass_die1, cybass_die2, cybass_die3

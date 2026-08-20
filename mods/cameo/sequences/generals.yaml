@@ -30,7 +30,7 @@ glabomber:
 		Facings: 32
 
 gle1:
-	Inherits: sniper
+	Inherits: LightSniper
 	idle1:
 		Start: 384
 		Length: 14
@@ -72,8 +72,8 @@ gle1:
 	icon: gle1icon
 
 glsabo:
-	Inherits: raspy
-	Defaults: raspy
+	Inherits: ra1_allies_raspy
+	Defaults: ra1_allies_raspy
 	icon: glsaboicon
 
 glhijack:
@@ -81,7 +81,7 @@ glhijack:
 	icon: glhijackicon
 
 gle1toxin:
-	Inherits: e4
+	Inherits: td_nod_flamethrower
 	icon: gle1toxinicon.shp
 
 gle3:
@@ -652,7 +652,7 @@ gltractor:
 glpickup:
 	idle:
 		Facings: 16
-	turret: rajeep
+	turret: ra1_allies_ranger
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -672,7 +672,7 @@ glvan:
 		Facings: 32
 		UseClassicFacings: True
     Scale: 1.08
-	turret: rajeep
+	turret: ra1_allies_ranger
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -730,7 +730,7 @@ glgunboat:
 		Facings: 32
 		UseClassicFacings: True
 		Scale: 0.70
-	turret: rajeep
+	turret: ra1_allies_ranger
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -826,7 +826,7 @@ glscrapcar:
 		Facings: 32
 		UseClassicFacings: True
 		Scale: 0.83
-	turret: rajeep
+	turret: ra1_allies_ranger
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -1090,7 +1090,7 @@ chbunker:
 
 che1:
 	Inherits: gle1
-	Defaults: sniper
+	Defaults: LightSniper
 		Scale: 0.85
 	icon: che1icon
 	redstar: chhorde
@@ -1400,7 +1400,7 @@ upisotopestability:
 	icon: upisotopestabilityicon
 
 upcashhack:
-	icon: cashhackicon.png
+	icon: ra2_allies_upgrade_paratroopers_cashhackicon.png
 		AddExtension: false
 
 upsathack:
@@ -1488,7 +1488,7 @@ chcarpetbombicon:
 	icon: chcarpetbombicon
 
 chempicon:
-	icon: empicon.png
+	icon: ra2_allies_upgrade_paratroopers_empicon.png
 		AddExtension: False
 
 chclusterminesicon:
@@ -1724,7 +1724,7 @@ usalasertur:
 	icon: usalaserturicon
 
 usae1:
-	Inherits: ra2e1
+	Inherits: ra2_allies_gi
 	muzzle: minigun
 		Length: 6
 		Facings: 8
@@ -1846,15 +1846,15 @@ usapath:
 	icon: usapathicon
 
 usapilot:
-	Inherits: gnrl
-	Defaults: gnrl
+	Inherits: ra1_general
+	Defaults: ra1_general
 	icon: usarangericon
 
 usajeep:
 	idle: usajeep
 		Facings: 32
 		UseClassicFacings: True
-	turret: jeep
+	turret: td_gdi_humvee
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -1874,7 +1874,7 @@ usauwusupply:
 		Facings: 32
 		UseClassicFacings: True
 		Scale: 0.90
-	turret: jeep
+	turret: td_gdi_humvee
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -1889,7 +1889,7 @@ usaambulan:
 	idle: usaambulan
 		Facings: 32
 		UseClassicFacings: True
-	turret: jeep
+	turret: td_gdi_humvee
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -2036,28 +2036,28 @@ usamicro:
 	turret: invisibleitem
 	muzzle:
 		Combine:
-			flame-n:
+			flame_n:
 				Length: *
 				Offset: 1,6
-			flame-nw:
+			flame_nw:
 				Length: *
 				Offset: 8,7
-			flame-w:
+			flame_w:
 				Length: *
 				Offset: 8,2
-			flame-sw:
+			flame_sw:
 				Length: *
 				Offset: 7,-2
-			flame-s:
+			flame_s:
 				Length: *
 				Offset: 1,-2
-			flame-se:
+			flame_se:
 				Length: *
 				Offset: -5,-2
-			flame-e:
+			flame_e:
 				Length: *
 				Offset: -7,2
-			flame-ne:
+			flame_ne:
 				Length: *
 				Offset: -7,8
 		Scale: 0.87

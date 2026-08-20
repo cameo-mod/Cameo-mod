@@ -416,7 +416,7 @@ SC2KFACTORYSTRUCTURE:
 			TopLeft: -1792, -1536
 			BottomRight: 1792, 1536
 	Selectable:
-		Bounds: 174762, 174762
+		Bounds: 4096, 4096
 	Valued:
 		Cost: 3500
 	Tooltip:
@@ -779,7 +779,7 @@ SC2KFACTORYDISASTER:
 			TopLeft: -2730, -6181
 			BottomRight: 2730, 2181
 	Selectable:
-		Bounds: 233002, 349525
+		Bounds: 5461, 8192
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -889,8 +889,7 @@ SC2KRECYCLINGCENTER:
 	StoresResources:
 		Capacity: 1000
 	Selectable:
-		Bounds: 131072, 101930
-		DecorationBounds: 132864, 131072
+		Bounds: 3114, 3072
 	CustomSellValue:
 		Value: 500
 	FreeActor:
@@ -1010,7 +1009,7 @@ SC2KMARINA:
 			TopLeft: -1536, -1536
 			BottomRight: 1536, 1536
 	Selectable:
-		Bounds: 131072, 131072
+		Bounds: 3072, 3072
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
@@ -1522,7 +1521,6 @@ SC2KMCV:
 		Name: Mobile Construction Vehicle (SimCity 2000)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -1609,8 +1607,9 @@ SC2KTORNADO:
 		Type: Circle
 			Radius: 3c0
 	Selectable:
-		Bounds: 131072, 262144
+		Bounds: 3072, 6144
 	Buildable:
+		Prerequisites:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
 		Description: Sucks and eats everything in its way.
@@ -1700,7 +1699,7 @@ SC2K_THUNDERCLOUD_MAIN:
 		Type: Circle
 			Radius: 2c0
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
@@ -1954,7 +1953,6 @@ SC2KCARGOSHIP:
 	Inherits@EXT: ^ExternalConditions
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites:
 		Queue: Naval, RANaval
 		Description: Cargo ship filled with explosives.
 	Valued:
@@ -2151,8 +2149,7 @@ SC2KBEACONPOLICE:
 	Tooltip:
 		Name: Police Beacon
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 43690, 72789, 0, -14549
+		Bounds: 1024, 1706, 0, -341
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -2237,8 +2234,7 @@ SC2KBEACONFIRE:
 	Tooltip:
 		Name: Fire Beacon
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 43690, 72789, 0, -14549
+		Bounds: 1024, 1706, 0, -341
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -2305,8 +2301,7 @@ SC2KBEACONARMY:
 	Tooltip:
 		Name: Army Beacon
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 43690, 72789, 0, -14549
+		Bounds: 1024, 1706, 0, -341
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -2489,7 +2484,7 @@ sc2kglsite.defense:
 	-MapEditorData:
 	-ActorLostNotification:
 sc2ktank.defense:
-	Inherits: MTNK
+	Inherits: td_gdi_battletank
 	Inherits@MC: ^MCImmune
 	-ExternalCondition@TSCLOAK:
 	-Cloak@TScloak:
@@ -2506,7 +2501,7 @@ sc2ktank.defense:
 	Selectable:
 		Class: sc2kbeaconarmy
 	RenderSprites:
-		Image: mtnk
+		Image: td_gdi_battletank
 ####################################################################################################
 #		SC2K - ALTERNATIVE
 ####################################################################################################
@@ -3385,7 +3380,7 @@ SC2KFACTORYDISASTERA:
 			TopLeft: -2730, -6181
 			BottomRight: 2730, 2181
 	Selectable:
-		Bounds: 233002, 349525
+		Bounds: 5461, 8192
 	Valued:
 		Cost: 6000
 	Tooltip:
@@ -3535,7 +3530,7 @@ sc2kae3:
 		Image: e3
 
 sc2kajeep:
-	Inherits: JEEP
+	Inherits: td_gdi_humvee
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -3546,10 +3541,10 @@ sc2kajeep:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: sc2k_armyvehicle, ~selectsimcity2000a
 	RenderSprites:
-		Image: jeep
+		Image: td_gdi_humvee
 
 sc2kamtnk:
-	Inherits: MTNK
+	Inherits: td_gdi_battletank
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -3561,7 +3556,7 @@ sc2kamtnk:
 		Description: General-Purpose Tank.\n  Strong vs Tanks, Vehicles\n  Weak vs Infantry
 		Prerequisites: sc2k_armyvehicle, ~selectsimcity2000a
 	RenderSprites:
-		Image: mtnk
+		Image: td_gdi_battletank
 
 SC2KFIREA:
 	Inherits: SC2KFIRE
@@ -3611,7 +3606,7 @@ sc2k_ufo:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~disabled, ~techlevel.medium
+		Prerequisites: ~disabled
 		Queue: Infantry, RAInfantry
 		Description: Helicopter Gunship with AG Missiles.\n  Strong vs Buildings, Tanks\n  Weak vs Infantry
 	Aircraft:
@@ -3848,7 +3843,7 @@ sc2k_airhawk:
 		ValidTypes: vehicle ##########
 
 chromesc2kengine1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Small Engine
 	Buildable:
@@ -3864,7 +3859,7 @@ chromesc2kengine1:
 		Prerequisite: chromesc2kengine1
 
 chromesc2kengine2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Medium Engine
 	Buildable:
@@ -3880,7 +3875,7 @@ chromesc2kengine2:
 		Prerequisite: chromesc2kengine2
 
 chromesc2kengine3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Big Engine
 	Buildable:
@@ -3896,7 +3891,7 @@ chromesc2kengine3:
 		Prerequisite: chromesc2kengine3
 
 chromesc2karmor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Armor
 	Buildable:
@@ -3912,7 +3907,7 @@ chromesc2karmor:
 		Prerequisite: chromesc2karmor
 
 chromesc2kshield:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Shield
 	Buildable:
@@ -3928,7 +3923,7 @@ chromesc2kshield:
 		Prerequisite: chromesc2kshield
 
 chromesc2kmachinegun:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Machinegun
 	Buildable:
@@ -3944,7 +3939,7 @@ chromesc2kmachinegun:
 		Prerequisite: chromesc2kmachinegun
 
 chromesc2kmissile:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Missile
 	Buildable:

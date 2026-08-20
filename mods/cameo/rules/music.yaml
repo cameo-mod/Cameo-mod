@@ -1,0 +1,7 @@
+# Music playback settings for the Cameo mod jukebox.
+# This file patches the World actor's MusicPlaylist trait without
+# touching the official world.yaml.
+
+World:
+	MusicPlaylist:
+		StartingMusic: menu

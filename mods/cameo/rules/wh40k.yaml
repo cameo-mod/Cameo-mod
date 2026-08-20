@@ -343,7 +343,6 @@ pscwh40kstrategy1:
 	RenderSprites:
 		Image: pscwh40kstrategy1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -360,7 +359,6 @@ pscwh40kstrategy2:
 	RenderSprites:
 		Image: pscwh40kstrategy2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -377,7 +375,6 @@ pscwh40kstrategy3:
 	RenderSprites:
 		Image: pscwh40kstrategy3
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 wh40kstrategy.neutral:
@@ -446,7 +443,7 @@ wh40kstrategy:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
-		Prerequisites: anypower, ~techlevel.medium
+		Prerequisites: anypower
 		Description: Provides Passive income.\n Provides Base Area .\n Attacks when is Upgraded.\n  Upgradeable with Addons
 		BuildLimit: 5
 	Valued:
@@ -455,8 +452,8 @@ wh40kstrategy:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-300,0, 420,512,0, -420,-512,0, -630,300,0
 	Selectable:
-		Priority: 0
 		Bounds: 2048, 2048
+		Priority: 0
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -596,7 +593,7 @@ wh40kstrategyo:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
-		Prerequisites: anypower, ~techlevel.medium
+		Prerequisites: anypower
 		Description: Provides Passive income.\n Provides Base Area .\n Attacks when is Upgraded.\n  Upgradeable with Addons
 		BuildLimit: 5
 	Valued:
@@ -605,8 +602,8 @@ wh40kstrategyo:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-300,0, 420,512,0, -420,-512,0, -630,300,0
 	Selectable:
-		Priority: 0
 		Bounds: 2048, 2048
+		Priority: 0
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -754,7 +751,7 @@ wh40kstrategym:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
-		Prerequisites: anypower, ~techlevel.medium
+		Prerequisites: anypower
 		Description: Provides Passive income.\n Provides Base Area .\n Attacks when is Upgraded.\n  Upgradeable with Addons
 		BuildLimit: 5
 	Valued:
@@ -763,8 +760,8 @@ wh40kstrategym:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-300,0, 420,512,0, -420,-512,0, -630,300,0
 	Selectable:
-		Priority: 0
 		Bounds: 2048, 2048
+		Priority: 0
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -905,7 +902,7 @@ wh40kstrategyc:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
-		Prerequisites: anypower, ~techlevel.medium
+		Prerequisites: anypower
 		Description: Provides Passive income.\n Provides Base Area .\n Attacks when is Upgraded.\n  Upgradeable with Addons
 		BuildLimit: 5
 	Valued:
@@ -914,8 +911,8 @@ wh40kstrategyc:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-300,0, 420,512,0, -420,-512,0, -630,300,0
 	Selectable:
-		Priority: 0
 		Bounds: 2048, 2048
+		Priority: 0
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1057,7 +1054,7 @@ wh40kstrategyt:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
-		Prerequisites: anypower, ~techlevel.medium
+		Prerequisites: anypower
 		Description: Provides Passive income.\n Provides Base Area .\n Attacks when is Upgraded.\n  Upgradeable with Addons
 		BuildLimit: 5
 	Valued:
@@ -1066,8 +1063,8 @@ wh40kstrategyt:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-300,0, 420,512,0, -420,-512,0, -630,300,0
 	Selectable:
-		Priority: 0
 		Bounds: 2048, 2048
+		Priority: 0
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1244,7 +1241,7 @@ wh40kmcv:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 210
-		Prerequisites: wh40karmory, ~techlevel.medium
+		Prerequisites: wh40karmory
 		BuildDurationModifier: 40
 		Description: Deploys into another Field Command.\n  Unarmed
 	Valued:
@@ -1253,7 +1250,6 @@ wh40kmcv:
 		Name: Mobile Construction Vehicle (Imperial Guard)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 120000
@@ -1425,7 +1421,7 @@ wh40kfieldcommand:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 	FreeActor@wh40krankguards:
@@ -1635,8 +1631,8 @@ wh40karmory:
 		Range: 5c0
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	Power:
 		Amount: -25
 	RenderSprites:
@@ -1677,7 +1673,7 @@ wh40kweap:
 	Exit@2:
 		ExitCell: 2,1
 		ExitDelay: 3
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: VehicleUpgrades
 	Production@NORMAL:
 		Produces: Vehicle
@@ -1712,7 +1708,7 @@ wh40kheavybolt:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -1724,7 +1720,7 @@ wh40kheavybolt:
 		BuildDurationModifier: 40
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 	Selectable:
-		Bounds: 87381, 89173
+		Bounds: 2048, 2090
 	SelectionDecorations:
 	Health:
 		HP: 100000
@@ -1770,7 +1766,7 @@ wh40kheavybolt2:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -1782,7 +1778,7 @@ wh40kheavybolt2:
 		BuildDurationModifier: 40
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 	Selectable:
-		Bounds: 87381, 89173
+		Bounds: 2048, 2090
 	SelectionDecorations:
 	Health:
 		HP: 75000
@@ -1841,8 +1837,7 @@ wh40kproc:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	Selectable:
-		Bounds: 131072, 91008, 0, 21845
-		DecorationBounds: 131072, 127402, 0, -3626
+		Bounds: 3072, 2986, 0, -85
 	SelectionDecorations:
 	Power:
 		Amount: -30
@@ -1920,7 +1915,7 @@ wh40kmars:
 	Exit@2:
 		ExitCell: 2,1
 		ExitDelay: 3
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: VehicleUpgrades
 	Production@NORMAL:
 		Produces: Vehicle
@@ -2051,7 +2046,7 @@ wh40kproc.e1:
 		Condition: hordeeffect
 	WithDecoration@HordeEffect:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: TopRight
 		RequiresCondition: hordeeffect >= 5
 		BlinkInterval: 32
@@ -2112,7 +2107,7 @@ wh40kproc.e1:
 		Condition: wh40kupbattlecommand
 		Prerequisites: wh40kupbattlecommand
 	ProductionTimeMultiplier@wh40kupbattlecommand:
-		RequiresCondition: wh40kupbattlecommand
+		Prerequisites: wh40kupbattlecommand
 		Modifier: 90
 ^WH40KSargent:
 	DamageMultiplier@sargentarmor:
@@ -2140,12 +2135,12 @@ wh40kproc.e1:
 		Color: F2FF9180
 		RequiresCondition: priestupgradei
 wh40kuphonor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Death before Dishonor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Guardsmen health by 10%.
 		Prerequisites: ~!wh40kuphonor
 	Valued:
@@ -2156,12 +2151,12 @@ wh40kuphonor:
 		Prerequisite: wh40kuphonor
 
 wh40kupguardarmor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Battle Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Guardsmens to 15% of health.
 		Prerequisites: ~!wh40kupguardarmor
 	Valued:
@@ -2172,12 +2167,12 @@ wh40kupguardarmor:
 		Prerequisite: wh40kupguardarmor
 
 wh40kupguardemperor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Will of the Emperor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Guardsmens to 15% of health.
 		Prerequisites: ~!wh40kupguardemperor, wh40kupbattlecommand
 	Valued:
@@ -2188,12 +2183,12 @@ wh40kupguardemperor:
 		Prerequisite: wh40kupguardemperor
 
 wh40kupsateliterange:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Satellite Targeting Resolution
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Guardsmens to 20% of shoot range.
 		Prerequisites: ~!wh40kupsateliterange, wh40kupbattlecommand
 	Valued:
@@ -2204,12 +2199,12 @@ wh40kupsateliterange:
 		Prerequisite: wh40kupsateliterange
 
 wh40kupweapspecialization:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Weapon Specialization
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Infantry firepower by 15%.
 		Prerequisites: ~!wh40kupweapspecialization, wh40kupsateliterange
 	Valued:
@@ -2219,12 +2214,12 @@ wh40kupweapspecialization:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupweapspecialization
 wh40kuppoweredbayonets:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Powered Bayonets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Ogryn firepower by 15%.
 		Prerequisites: ~!wh40kuppoweredbayonets, wh40kupogrynquarters
 	Valued:
@@ -2235,12 +2230,12 @@ wh40kuppoweredbayonets:
 		Prerequisite: wh40kuppoweredbayonets
 
 wh40kupbattlecommand:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Battle Command
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Field Command to 25% of health, Unlock new Tech
 		Prerequisites: ~!wh40kupbattlecommand, barracks
 	Valued:
@@ -2250,12 +2245,12 @@ wh40kupbattlecommand:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupbattlecommand
 wh40kupregimentalcommand:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Regimental Command
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Field Command to 25% of health, Unlock new Tech
 		Prerequisites: ~!wh40kupregimentalcommand, wh40kupbattlecommand, vehicleproduction
 	Valued:
@@ -2266,12 +2261,12 @@ wh40kupregimentalcommand:
 		Prerequisite: wh40kupregimentalcommand
 
 wh40kupogrynquarters:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Ogryn Quarters
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Ogryns.
 		Prerequisites: ~!wh40kupogrynquarters, wh40kupregimentalcommand
 	Valued:
@@ -2281,12 +2276,12 @@ wh40kupogrynquarters:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupogrynquarters
 wh40kupkasrkinquarters:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Kasrkin Quarters
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Ogryns.
 		Prerequisites: ~!wh40kupkasrkinquarters, wh40kupregimentalcommand
 	Valued:
@@ -2296,12 +2291,12 @@ wh40kupkasrkinquarters:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupkasrkinquarters
 wh40kupsentineldepot:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sentinel Depot
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Sentinels.
 		Prerequisites: ~!wh40kupsentineldepot, wh40kupbattlecommand
 	Valued:
@@ -2311,12 +2306,12 @@ wh40kupsentineldepot:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupsentineldepot
 wh40kuphellhounddepot:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hellhound Depot
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Hellhounds.
 		Prerequisites: ~!wh40kuphellhounddepot, wh40kupbattlecommand
 	Valued:
@@ -2326,12 +2321,12 @@ wh40kuphellhounddepot:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kuphellhounddepot
 wh40kupbasiliskdepot:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Basilisk Depot
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Basilisks.
 		Prerequisites: ~!wh40kupbasiliskdepot, wh40kupbattlecommand
 	Valued:
@@ -2341,12 +2336,12 @@ wh40kupbasiliskdepot:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupbasiliskdepot
 wh40kupmarauderdepot:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Marauder Depot
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Marauder Bombers.
 		Prerequisites: ~!wh40kupmarauderdepot, wh40kupbattlecommand
 	Valued:
@@ -2357,12 +2352,12 @@ wh40kupmarauderdepot:
 		Prerequisite: wh40kupmarauderdepot
 
 wh40kuplemanrussdepot:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Leman Russ Depot
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Leman Russ.
 		Prerequisites: ~!wh40kuplemanrussdepot, wh40kupregimentalcommand, wh40kupfullscalewar
 	Valued:
@@ -2372,12 +2367,12 @@ wh40kuplemanrussdepot:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kuplemanrussdepot
 wh40kupfullscalewar:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Full Scale War
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Leman Russ.
 		Prerequisites: ~!wh40kupfullscalewar, wh40kupregimentalcommand
 	Valued:
@@ -2387,12 +2382,12 @@ wh40kupfullscalewar:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupfullscalewar
 wh40kupenergy1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Energy Upgrade 1
 	Buildable:
 		BuildPaletteOrder: 210
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Energy of Generators.
 		Prerequisites: ~!wh40kupenergy1
 	Valued:
@@ -2402,12 +2397,12 @@ wh40kupenergy1:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupenergy1
 wh40kupenergy2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Energy Upgrade 2
 	Buildable:
 		BuildPaletteOrder: 210
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Energy of Generators.
 		Prerequisites: ~!wh40kupenergy2, wh40kupenergy1
 	Valued:
@@ -2418,12 +2413,12 @@ wh40kupenergy2:
 		Prerequisite: wh40kupenergy2
 
 wh40kupgenenhancement:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Genetic Enhancement
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Kasrkin to 33% of speed.
 		Prerequisites: ~!wh40kupgenenhancement, wh40kupkasrkinquarters
 	Valued:
@@ -2433,12 +2428,12 @@ wh40kupgenenhancement:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupgenenhancement
 wh40kupkasrkinarmor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Kasrkin Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Kasrkin to 25% of health.
 		Prerequisites: ~!wh40kupkasrkinarmor, wh40kupkasrkinquarters
 	Valued:
@@ -2545,8 +2540,6 @@ wh40kgrenade:
 		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: WH40KImperialGuardVoice
-	DeliversCash:
-		Payload: 125
 	Cloneable:
 		Types: NormalInfantry
 	GainsExperience:
@@ -2722,7 +2715,6 @@ wh40kogryn:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 2
 	-TakeCover:
 	GrantConditionOnPrerequisite@wh40kuppoweredbayonets:
 		Condition: wh40kuppoweredbayonets
@@ -2844,8 +2836,6 @@ wh40kbigguns:
 		DeployTrigger: Attack
 	Voiced:
 		VoiceSet: WH40KBigGunsVoice
-	DeliversCash:
-		Payload: 75
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	RenderSprites:
@@ -2942,7 +2932,6 @@ wh40kkars:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -3082,7 +3071,6 @@ wh40ktechpriest:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GivesBuildableArea:
 		AreaTypes: building
@@ -3120,8 +3108,6 @@ wh40kpsyker:
 		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: WH40KPsykerVoice
-	DeliversCash:
-		Payload: 400
 	Cloneable:
 		Types: NormalInfantry
 	IgnoresDisguise:
@@ -3174,7 +3160,6 @@ wh40kpriest:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	ProximityExternalCondition@priestupgrade:
 		Range: 5c0
@@ -3376,7 +3361,6 @@ wh40kcommandsquad:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 wh40kcommandsquadtmobslave:
 	Inherits: wh40kcommandsquad
@@ -3576,7 +3560,6 @@ wh40kleman:
 		Speed: 72
 		TurnSpeed: 8
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 120000
 	Repairable:
@@ -3604,7 +3587,7 @@ wh40kleman:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -3638,7 +3621,6 @@ wh40kchime:
 		TurnSpeed: 12
 		PauseOnCondition: notmobile || disabled
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 75000
 	Repairable:
@@ -3665,7 +3647,7 @@ wh40kchime:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -3700,7 +3682,6 @@ wh40khellhound:
 		TurnSpeed: 12
 		RequireForceMoveCondition: deployed
 	Passenger:
-		Weight: 3
 		RequireForceMoveCondition: deployed
 	Health:
 		HP: 110000
@@ -3726,7 +3707,7 @@ wh40khellhound:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -3803,7 +3784,6 @@ wh40kbanewolf:
 		TurnSpeed: 12
 		RequireForceMoveCondition: deployed
 	Passenger:
-		Weight: 3
 		RequireForceMoveCondition: deployed
 	Health:
 		HP: 120000
@@ -3828,7 +3808,7 @@ wh40kbanewolf:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -3972,47 +3952,47 @@ wh40ksentinel:
 		LoadingCondition: notmobile
 		PassengerConditions:
 			e1: ifv-mg
-			rae1: ifv-mg
-			rare1: ifv-mg
-			ra2e1: ifv-mg
-			ra2e2: ifv-mg
+			ra1_allies_rifleinfantry: ifv-mg
+			ra1_soviets_rifleinfantry: ifv-mg
+			ra2_allies_gi: ifv-mg
+			ra2_soviets_conscript: ifv-mg
 			2100scav: ifv-mg
 			2100scav2: ifv-mg
-			scmarine: ifv-mg
+			terran_marine: ifv-mg
 			tse1: ifv-mg
-			tse1.nod: ifv-mg
+			ts_nod_lightinfantry: ifv-mg
 			tse1para: ifv-mg
-			tscyborg: ifv-mg
+			cabal_cyborginfantry: ifv-mg
 			tscyborgc: ifv-mg
-			tsmutant: ifv-mg
-			tsmwmn: ifv-mg
-			sczergling: ifv-mg
+			forgotten_mutant: ifv-mg
+			forgotten_mutantsoldier: ifv-mg
+			zerg_zergling: ifv-mg
 			gle1: ifv-mg
 			che1: ifv-mg
 			usae1: ifv-mg
 			leange1: ifv-mg
 			wh40kguard: ifv-mg
 			wh40kkars: ifv-mg
-			e2: ifv-cannon
-			rae2: ifv-cannon
-			tse2: ifv-cannon
+			td_gdi_grenadier: ifv-cannon
+			ra1_soviets_grenadier: ifv-cannon
+			ts_gdi_discthrower: ifv-cannon
 			tse2para: ifv-cannon
-			tsmutant3: ifv-cannon
+			forgotten_mutantsergeant: ifv-cannon
 			che2: ifv-cannon
 			leange2: ifv-cannon
 			wh40kgrenade: ifv-cannon
 			wh40kkarsgrenade: ifv-cannon
 			e6: ifv-repair
-			rae6: ifv-repair
-			mech: ifv-repair
-			scscv: ifv-repair
-			ra2engineer: ifv-repair
-			ra2engineer.soviet: ifv-repair
-			ra2engineer.yuri: ifv-repair
+			ra1_engineer: ifv-repair
+			ra1_allies_mechanic: ifv-repair
+			terran_scv: ifv-repair
+			ra2_allies_engineer: ifv-repair
+			ra2_soviets_engineer: ifv-repair
+			yuri_engineer: ifv-repair
 			yrslav: ifv-repair
 			tsengineer: ifv-repair
-			tsengineer2: ifv-repair
-			tsmhijack: ifv-repair
+			ts_nod_engineer: ifv-repair
+			forgotten_mutanthijacker: ifv-repair
 			rathf: ifv-repair
 			glhijack: ifv-repair
 			chhacker: ifv-repair
@@ -4022,57 +4002,57 @@ wh40ksentinel:
 			leanglotus: ifv-repair
 			wh40ktechpriest: ifv-repair
 			e3: ifv-miss
-			rae3: ifv-miss
-			rare3: ifv-miss
-			yrggi: ifv-miss
+			ra1_allies_alliedrocketsoldier: ifv-miss
+			ra1_soviets_rocketsoldier: ifv-miss
+			ra2_allies_guardiangi: ifv-miss
 			tse3: ifv-miss
 			gle3: ifv-miss
 			che3: ifv-miss
 			usae3: ifv-miss
 			leange3: ifv-miss
-			ra2flakt: ifv-flak
-			shok: ifv-tesla
-			ra2shk: ifv-tesla
+			ra2_soviets_flaktrooper: ifv-flak
+			ra1_soviets_shocktrooper: ifv-tesla
+			ra2_soviets_teslatrooper: ifv-tesla
 			wh40kguardplasma: ifv-tesla
 			wh40kkarsplasma: ifv-tesla
 			wh40kpsyker: ifv-tesla
-			e4: ifv-fire
-			rae4: ifv-fire
-			yrinit: ifv-fire
-			scfirebat: ifv-fire
-			e5: ifv-chem
-			ra2deso: ifv-chem
-			tsweedguy: ifv-chem
+			td_nod_flamethrower: ifv-fire
+			ra1_soviets_flamethrower: ifv-fire
+			yuri_initiate: ifv-fire
+			terran_firebat: ifv-fire
+			td_nod_chemicalwarrior: ifv-chem
+			ra2_soviets_desolator: ifv-chem
+			forgotten_chemsprayinfantry: ifv-chem
 			gle1toxin: ifv-chem
 			rmbo: ifv-hero
-			e7: ifv-hero
-			ra2tany: ifv-hero
+			ra1_allies_tanya: ifv-hero
+			ra2_allies_tanyaii: ifv-hero
 			cityswat: ifv-hero
-			yrboris: ifv-hero
-			ra2seal: ifv-hero
-			tscyc2: ifv-hero
+			ra2_soviets_boris: ifv-hero
+			ra2_allies_seal: ifv-hero
+			cabal_cyborgcommando: ifv-hero
 			tscyc2.cabal: ifv-hero
-			tsghost: ifv-hero
+			forgotten_ghoststalker: ifv-hero
 			tsghost.mutant: ifv-hero
 			usaburton: ifv-hero
 			leangburton: ifv-hero
-			scghost: ifv-sniper
-			ra2snipe: ifv-sniper
-			yrvirus: ifv-sniper
-			raspy: ifv-sniper
-			ra2spy: ifv-sniper
-			tschamspy: ifv-sniper
-			tsumagon: ifv-sniper
-			glkell: ifv-sniper
-			leangkell: ifv-sniper
-			glsabo: ifv-sniper
-			usapath: ifv-sniper
-			leangpath: ifv-sniper
-			wh40kcommisair: ifv-sniper
-			ra2cleg: ifv-chrono
-			ra2ivan: ifv-demo
+			terran_ghost: ifv-lightsniper
+			ra2_allies_sniper: ifv-lightsniper
+			yuri_virus: ifv-lightsniper
+			ra1_allies_raspy: ifv-lightsniper
+			ra2_allies_ra2spy: ifv-lightsniper
+			ts_nod_chameleonspy: ifv-lightsniper
+			forgotten_mutantsniper: ifv-lightsniper
+			glkell: ifv-lightsniper
+			leangkell: ifv-lightsniper
+			glsabo: ifv-lightsniper
+			usapath: ifv-lightsniper
+			leangpath: ifv-lightsniper
+			wh40kcommisair: ifv-lightsniper
+			ra2_allies_chronolegionnaire: ifv-chrono
+			ra2_soviets_crazyivan: ifv-demo
 			ra2terror: ifv-demo
-			scinfestedterran: ifv-demo
+			zerg_infestedterranbomber: ifv-demo
 			glterror: ifv-demo
 	###################
 	#	Armament
@@ -4083,7 +4063,7 @@ wh40ksentinel:
 		RecoilRecovery: 38
 		LocalOffset: 768,12,20, 768,-12,20
 		MuzzleSequence: muzzle
-		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
+		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-lightsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
 	Armament@MG1:
 		Weapon: WH40KHeavyBolterMG
 		Recoil: 128
@@ -4104,11 +4084,11 @@ wh40ksentinel:
 		RequiresCondition: ifv-repair
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
-	Armament@sniper:
+	Armament@lightsniper:
 		Weapon: WH40KSentinelCannon
 		LocalOffset: 171,0,255
 		MuzzleSequence: muzzlemg
-		RequiresCondition: ifv-sniper
+		RequiresCondition: ifv-lightsniper
 	Armament@hero:
 		Weapon: WH40KOgrynGun
 		LocalOffset: 171,0,255
@@ -4260,7 +4240,6 @@ wh40kbaneblade:
 		Speed: 68
 		TurnSpeed: 8
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 600000
 	Repairable:
@@ -4313,7 +4292,7 @@ wh40kbaneblade:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -4382,7 +4361,7 @@ wh40kmaurader.napalm:
 # Imperial Guard, Rank Bonus
 #######################################
 wh40krankguards:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Regimental Guards
 	Buildable:
@@ -4396,7 +4375,7 @@ wh40krankguards:
 		Prerequisite: wh40krankguards
 
 wh40krankcommisar:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Regimental Commissar
 	Buildable:
@@ -4410,7 +4389,7 @@ wh40krankcommisar:
 		Prerequisite: wh40krankcommisar
 
 wh40kranktechpriest:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Mars Techpriest Enginseer
 	Buildable:
@@ -4424,7 +4403,7 @@ wh40kranktechpriest:
 		Prerequisite: wh40kranktechpriest
 
 wh40krankpsyker:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Sanctioned Psyker
 	Buildable:
@@ -4438,7 +4417,7 @@ wh40krankpsyker:
 		Prerequisite: wh40krankpsyker
 
 wh40krankkars:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Veteran Kasrkin
 	Buildable:
@@ -4452,7 +4431,7 @@ wh40krankkars:
 		Prerequisite: wh40krankkars
 
 wh40krankogryn:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Bone'ead
 	Buildable:
@@ -4465,7 +4444,7 @@ wh40krankogryn:
 	ProvidesPrerequisite:
 		Prerequisite: wh40krankogryn
 wh40kranksentinel:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Sentinel
 	Buildable:
@@ -4583,7 +4562,6 @@ wh40kogrynmobslave_rank:
 		VoiceSet: WH40KOgrynVoice
 	Health:
 		HP: 15000
-
 
 wh40kcommisair_rank:
 	Inherits: wh40kcommisair
@@ -4907,8 +4885,8 @@ wh40karmorym:
 		Range: 5c0
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	Power:
 		Amount: -25
 	RenderSprites:
@@ -5291,7 +5269,7 @@ wh40kmachinecult:
 	Exit@2:
 		ExitCell: 2,1
 		ExitDelay: 3
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: VehicleUpgrades.SpaceMarines
 	ProductionQueue:
 		Type: Vehicle
@@ -5351,8 +5329,7 @@ wh40kprocm:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	Selectable:
-		Bounds: 131072, 91008, 0, 21845
-		DecorationBounds: 131072, 127402, 0, -3626
+		Bounds: 3072, 2986, 0, -85
 	SelectionDecorations:
 	Power:
 		Amount: -30
@@ -5401,7 +5378,7 @@ wh40kbolterturret:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -5413,7 +5390,7 @@ wh40kbolterturret:
 		BuildDurationModifier: 40
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 	Selectable:
-		Bounds: 87381, 89173
+		Bounds: 2048, 2090
 	SelectionDecorations:
 	Health:
 		HP: 160000
@@ -5459,7 +5436,7 @@ wh40kbolterturret2:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 1400
 	Tooltip:
@@ -5471,7 +5448,7 @@ wh40kbolterturret2:
 		BuildDurationModifier: 40
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 	Selectable:
-		Bounds: 87381, 89173
+		Bounds: 2048, 2090
 	SelectionDecorations:
 	Health:
 		HP: 150000
@@ -5563,7 +5540,6 @@ wh40kmarine:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -5723,7 +5699,6 @@ wh40kscout:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -5810,14 +5785,14 @@ wh40kscoutsniper:
 		Queue: Defence, RADefence
 		Description: Armed Long Ranged Weapon.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Armament@PRIMARY: ##########
-		Weapon: Sniper
+		Weapon: LightSniper
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: Sniper
+		Weapon: LightSniper
 		MuzzleSequence: garrison-muzzle
 	WithDecoration@addon:
 		Image: wh40kitems
-		Sequence: sniper
+		Sequence: lightsniper
 		Position: TopRight
 		BlinkInterval: 32
 		BlinkPattern: Off, On, Off, Off
@@ -5867,7 +5842,6 @@ wh40kforcecmd:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 
 wh40kchaptain:
@@ -5920,7 +5894,6 @@ wh40kchaptain:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 wh40klibrarian:
 	Inherits: ^Soldier
@@ -5969,7 +5942,6 @@ wh40klibrarian:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 
 wh40kterminator1:
@@ -6020,7 +5992,6 @@ wh40kterminator1:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	PortableChrono:
 		ChargeDelay: 250
@@ -6075,7 +6046,6 @@ wh40kterminator2:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	PortableChrono:
 		ChargeDelay: 250
@@ -6178,7 +6148,6 @@ wh40kservitor:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GivesBuildableArea:
 		AreaTypes: building
@@ -6234,7 +6203,6 @@ wh40kapotecary:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 
 wh40kgrayknight:
@@ -6284,7 +6252,6 @@ wh40kgrayknight:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GrantConditionOnPrerequisite@wh40kfuriuscharge:
 		Condition: wh40kfuriuscharge
@@ -6330,7 +6297,7 @@ wh40kmcvm:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 210
-		Prerequisites: wh40kupmonastery, ~techlevel.medium
+		Prerequisites: wh40kupmonastery
 		BuildDurationModifier: 40
 		Description: Deploys into another Field Command.\n  Unarmed
 	Valued:
@@ -6339,7 +6306,6 @@ wh40kmcvm:
 		Name: Stronghold Transporter (Space Marines)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 140000
@@ -6393,7 +6359,6 @@ wh40kpredator:
 		Speed: 92
 		TurnSpeed: 16
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 75000
 	Repairable:
@@ -6443,7 +6408,7 @@ wh40kpredator:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -6501,7 +6466,6 @@ pscwh40kpredator1:
 	RenderSprites:
 		Image: pscwh40kpredator1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 pscwh40kpredator2:
@@ -6517,7 +6481,6 @@ pscwh40kpredator2:
 	RenderSprites:
 		Image: pscwh40kpredator2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 wh40krhino:
@@ -6548,7 +6511,6 @@ wh40krhino:
 		TurnSpeed: 12
 		PauseOnCondition: notmobile || disabled
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 72000
 	Repairable:
@@ -6577,7 +6539,7 @@ wh40krhino:
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -6613,7 +6575,6 @@ wh40kwhirl:
 		Speed: 72
 		TurnSpeed: 12
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 80000
 	Repairable:
@@ -6642,7 +6603,7 @@ wh40kwhirl:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -6675,7 +6636,6 @@ wh40klandspeed:
 		TurnSpeed: 28
 		PauseOnCondition: notmobile || disabled
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 55000
 	Repairable:
@@ -6693,7 +6653,7 @@ wh40klandspeed:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -6818,7 +6778,6 @@ pscwh40klandspeed1:
 	RenderSprites:
 		Image: pscwh40klandspeed1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 pscwh40klandspeed2:
@@ -6834,7 +6793,6 @@ pscwh40klandspeed2:
 	RenderSprites:
 		Image: pscwh40klandspeed2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 wh40kdread:
@@ -6906,7 +6864,6 @@ wh40kdread:
 		Sequence: turret3
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 3
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -6960,7 +6917,6 @@ pscwh40kdread1:
 	RenderSprites:
 		Image: pscwh40kdread1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 pscwh40kdread2:
@@ -6976,7 +6932,6 @@ pscwh40kdread2:
 	RenderSprites:
 		Image: pscwh40kdread2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 wh40kdreadh:
@@ -7016,7 +6971,6 @@ wh40kdreadh:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 3
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -7119,7 +7073,6 @@ wh40klandraider:
 		Speed: 77
 		TurnSpeed: 8
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 500000
 	Repairable:
@@ -7172,7 +7125,7 @@ wh40klandraider:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -7292,7 +7245,7 @@ wh40krhino.e4:
 		Condition: wh40kupcapincrease
 		Prerequisites: wh40kupcapincrease
 	ProductionTimeMultiplier@wh40kupcapincrease:
-		RequiresCondition: wh40kupcapincrease
+		Prerequisites: wh40kupcapincrease
 		Modifier: 80
 	GrantConditionOnPrerequisite@wh40kupbionics:
 		Condition: wh40kupbionics
@@ -7360,10 +7313,10 @@ wh40krhino.e4:
 		Condition: wh40kupcapincrease2
 		Prerequisites: wh40kupcapincrease2
 	ProductionTimeMultiplier@wh40kupcapincrease2:
-		RequiresCondition: wh40kupcapincrease2
+		Prerequisites: wh40kupcapincrease2
 		Modifier: 70
 wh40kupmonastery:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Monastery
 	Buildable:
@@ -7378,7 +7331,7 @@ wh40kupmonastery:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupmonastery
 wh40kupmonastery2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Fortress Monastery
 	Buildable:
@@ -7394,7 +7347,7 @@ wh40kupmonastery2:
 		Prerequisite: wh40kupmonastery2
 
 wh40kupcapincrease:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Squad Cap Increase
 	Buildable:
@@ -7409,7 +7362,7 @@ wh40kupcapincrease:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupcapincrease
 wh40kupcapincrease2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Squad Cap Increase
 	Buildable:
@@ -7425,12 +7378,12 @@ wh40kupcapincrease2:
 		Prerequisite: wh40kupcapincrease2
 
 wh40kupbionics:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bionics
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Marine Health
 		Prerequisites: ~!wh40kupbionics, barracks
 	Valued:
@@ -7440,12 +7393,12 @@ wh40kupbionics:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupbionics
 wh40kupbionics2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bionics Level 2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Marine Health
 		Prerequisites: ~!wh40kupbionics2, wh40kupbionics
 	Valued:
@@ -7455,12 +7408,12 @@ wh40kupbionics2:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupbionics2
 wh40ktargetfinder1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Target Finders
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Marine Firepower and Range
 		Prerequisites: ~!wh40ktargetfinder1, barracks
 	Valued:
@@ -7470,12 +7423,12 @@ wh40ktargetfinder1:
 	ProvidesPrerequisite:
 		Prerequisite: wh40ktargetfinder1
 wh40ktargetfinder2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Enhanced Target Finders
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Marine Firepower and Range
 		Prerequisites: ~!wh40ktargetfinder2, wh40ktargetfinder1
 	Valued:
@@ -7485,12 +7438,12 @@ wh40ktargetfinder2:
 	ProvidesPrerequisite:
 		Prerequisite: wh40ktargetfinder2
 wh40kpowerswords:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Power Swords
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Sargent, Force Commander, Chaptain and Librarian Damage
 		Prerequisites: ~!wh40kpowerswords, barracks
 	Valued:
@@ -7500,12 +7453,12 @@ wh40kpowerswords:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kpowerswords
 wh40kpowerfists:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Power Fist
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Sargent, Force Commander, Chaptain and Librarian Damage
 		Prerequisites: ~!wh40kpowerfists, wh40kpowerswords
 	Valued:
@@ -7515,12 +7468,12 @@ wh40kpowerfists:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kpowerfists
 wh40kscoutinfiltration:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Scout Infiltration
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Now Scouts are Stealth
 		Prerequisites: ~!wh40kscoutinfiltration, wh40karmorym
 	Valued:
@@ -7530,12 +7483,12 @@ wh40kscoutinfiltration:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kscoutinfiltration
 wh40kskullprobestealth:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Scout Infiltration
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Now Skull Probes are Stealth
 		Prerequisites: ~!wh40kskullprobestealth, wh40karmorym
 	Valued:
@@ -7545,12 +7498,12 @@ wh40kskullprobestealth:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kskullprobestealth
 wh40kveteranupgrade1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Commander Veteran
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Add +1 veteran rank to Leaders, and add more Health
 		Prerequisites: ~!wh40kveteranupgrade1, barracks
 	Valued:
@@ -7560,12 +7513,12 @@ wh40kveteranupgrade1:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kveteranupgrade1
 wh40kveteranupgrade2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Commander Hero
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Add +1 veteran rank to Leaders, and add more Health
 		Prerequisites: ~!wh40kveteranupgrade2, wh40kveteranupgrade1
 	Valued:
@@ -7575,12 +7528,12 @@ wh40kveteranupgrade2:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kveteranupgrade2
 wh40kupmachineculticon:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Heavy Armor Deployment
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Field Command to 25% of health, Unlock new Tech
 		Prerequisites: ~!wh40kupmachineculticon, wh40kupmonastery2
 	Valued:
@@ -7590,12 +7543,12 @@ wh40kupmachineculticon:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupmachineculticon
 wh40kupfraggrenade:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Frag Grenades
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Enable the use of Grenades to Sargents
 		Prerequisites: ~!wh40kupfraggrenade, barracks
 	Valued:
@@ -7605,12 +7558,12 @@ wh40kupfraggrenade:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupfraggrenade
 wh40kfuriuscharge:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Furious Charge
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Speed of Gray Knights
 		Prerequisites: ~!wh40kfuriuscharge, barracks
 	Valued:
@@ -7621,12 +7574,12 @@ wh40kfuriuscharge:
 		Prerequisite: wh40kfuriuscharge
 
 wh40kpsyinquisition:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Psychic Inquisition
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Enable a Superweapon
 		Prerequisites: ~!wh40kpsyinquisition, wh40kfuriuscharge, wh40kupmonastery, ~techlevel.superweapons
 	Valued:
@@ -7639,7 +7592,7 @@ wh40kpsyinquisition:
 # Marine, Rank Bonus
 #######################################
 wh40krankmarine:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: First Company Veteran
 	Buildable:
@@ -7653,7 +7606,7 @@ wh40krankmarine:
 		Prerequisite: wh40krankmarine
 
 wh40krankscout:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Scout Marine Squad
 	Buildable:
@@ -7667,7 +7620,7 @@ wh40krankscout:
 		Prerequisite: wh40krankscout
 
 wh40kranklandspeeder:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Land Speeder
 	Buildable:
@@ -7681,7 +7634,7 @@ wh40kranklandspeeder:
 		Prerequisite: wh40kranklandspeeder
 
 wh40kranklibrarian:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Senior Librarian Saribander
 	Buildable:
@@ -7695,7 +7648,7 @@ wh40kranklibrarian:
 		Prerequisite: wh40kranklibrarian
 
 wh40krankassault:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Veteran Assault Marine
 	Buildable:
@@ -7709,7 +7662,7 @@ wh40krankassault:
 		Prerequisite: wh40krankassault
 
 wh40krankdread:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Dreadnought
 	Buildable:
@@ -7791,7 +7744,7 @@ wh40kmcvo:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 210
-		Prerequisites: wh40kweapo, ~techlevel.medium
+		Prerequisites: wh40kweapo
 		BuildDurationModifier: 40
 		Description: Deploys into another Field Command.\n  Unarmed
 	Valued:
@@ -7800,7 +7753,6 @@ wh40kmcvo:
 		Name: Da Konztruktion Vehicle (Orkz)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 120000
@@ -8137,7 +8089,7 @@ wh40kwhaaag:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@dakka: ^WH40KDakkaUpgrade
 	Valued:
 		Cost: 800
@@ -8150,7 +8102,7 @@ wh40kwhaaag:
 		BuildDurationModifier: 40
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 	Selectable:
-		Bounds: 87381, 89173
+		Bounds: 2048, 2090
 	SelectionDecorations:
 	Health:
 		HP: 50000
@@ -8301,7 +8253,6 @@ pscwh40kwhaaag1:
 	RenderSprites:
 		Image: pscwh40kwhaaag1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 pscwh40kwhaaag2:
@@ -8317,7 +8268,6 @@ pscwh40kwhaaag2:
 	RenderSprites:
 		Image: pscwh40kwhaaag2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 wh40kproco:
@@ -8340,8 +8290,7 @@ wh40kproco:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	Selectable:
-		Bounds: 131072, 91008, 0, 21845
-		DecorationBounds: 131072, 127402, 0, -3626
+		Bounds: 3072, 2986, 0, -85
 	SelectionDecorations:
 	Power:
 		Amount: -30
@@ -8441,8 +8390,8 @@ wh40karmoryo:
 		Range: 5c0
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	Power:
 		Amount: -25
 	RenderSprites:
@@ -8497,7 +8446,7 @@ wh40kweapo:
 	Exit@2:
 		ExitCell: 2,1
 		ExitDelay: 3
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: VehicleUpgrades.Orkz
 	Production@NORMAL:
 		Produces: Vehicle
@@ -8594,7 +8543,7 @@ wh40kgretchin:
 		RequiresCondition: ammo == 0
 		Modifier: 100
 	Armament:
-		Weapon: TSRepair
+		Weapon: ts_nod_mobilerepairvehicle
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
 	AutoTarget:
@@ -8623,7 +8572,6 @@ wh40kgretchin:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -8726,7 +8674,6 @@ wh40kslugga:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -8818,7 +8765,6 @@ wh40kstormboyz:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -8878,7 +8824,6 @@ wh40kburna:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -8961,7 +8906,6 @@ wh40kshoota:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -9064,7 +9008,6 @@ wh40knob:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -9152,7 +9095,6 @@ wh40kbigmek:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 2
 	-TakeCover:
 	Power:
 		Amount: -20
@@ -9207,7 +9149,6 @@ wh40ktankbusta:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -9275,7 +9216,6 @@ wh40kflash:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -9379,7 +9319,6 @@ wh40kmaddok:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -9466,7 +9405,6 @@ wh40kmeganobz:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 2
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -9510,7 +9448,7 @@ wh40kmeganobz:
 		DeployChance: 50
 		DeployTicks: 1000
 		UndeployTicks: 1000
-		RequiresCondition: upstimpack && !nostim	
+		RequiresCondition: terran_upgrade_stimpack && !nostim	
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -9590,7 +9528,6 @@ wh40kwarboss:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 2
 	-TakeCover:
 	Power:
 		Amount: -50
@@ -9818,14 +9755,14 @@ wh40ksluggamobslave:
 		DeployChance: 50
 		DeployTicks: 1000
 		UndeployTicks: 1000
-		RequiresCondition: upstimpack && !nostim
+		RequiresCondition: terran_upgrade_stimpack && !nostim
 wh40kuptankbusta:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tankbusta Ztealth
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Now Tankbusta kan Ztealth
 		Prerequisites: ~!wh40kuptankbusta, wh40karmoryo
 	Valued:
@@ -9836,12 +9773,12 @@ wh40kuptankbusta:
 		Prerequisite: wh40kuptankbusta
 
 wh40kupgretchin:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Gretchin Ztealth
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Now Gretchin kan Ztealth
 		Prerequisites: ~!wh40kupgretchin
 	Valued:
@@ -9851,12 +9788,12 @@ wh40kupgretchin:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupgretchin
 wh40kupblastier:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Blastier
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Dakka Boyz in 15%
 		Prerequisites: ~!wh40kupblastier
 	Valued:
@@ -9867,12 +9804,12 @@ wh40kupblastier:
 		Prerequisite: wh40kupblastier
 
 wh40kupdakka1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: More Dakka
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Dakka Gunz in 15%
 		Prerequisites: ~!wh40kupdakka1, wh40kupblastier
 	Valued:
@@ -9883,12 +9820,12 @@ wh40kupdakka1:
 		Prerequisite: wh40kupdakka1
 
 wh40kupdakka2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Even More Dakka
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Dakka Gunz in 15%
 		Prerequisites: ~!wh40kupdakka2, wh40kupdakka1, wh40kuporkyfort
 	Valued:
@@ -9899,12 +9836,12 @@ wh40kupdakka2:
 		Prerequisite: wh40kupdakka2
 
 wh40kupchoppy1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: More Choppy
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Melee Damage in 15%
 		Prerequisites: ~!wh40kupchoppy1
 	Valued:
@@ -9915,12 +9852,12 @@ wh40kupchoppy1:
 		Prerequisite: wh40kupchoppy1
 
 wh40kupchoppy2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Even More Choppy
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Melee Damage in 15%
 		Prerequisites: ~!wh40kupchoppy2, wh40kupchoppy1, wh40kuporkyfort
 	Valued:
@@ -9930,12 +9867,12 @@ wh40kupchoppy2:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupchoppy2
 wh40kupburny1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: More Burny
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Burna Damage in 15%
 		Prerequisites: ~!wh40kupburny1
 	Valued:
@@ -9946,12 +9883,12 @@ wh40kupburny1:
 		Prerequisite: wh40kupburny1
 
 wh40kupburny2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Even More Burny
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Burna Damage in 15%
 		Prerequisites: ~!wh40kupburny2, wh40kupburny1, wh40kuporkyfort
 	Valued:
@@ -9961,12 +9898,12 @@ wh40kupburny2:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupburny2
 wh40kupvboost:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Vehicle Speed Boost
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Vehicle Speed Boost in 30%
 		Prerequisites: ~!wh40kupvboost
 	Valued:
@@ -9977,12 +9914,12 @@ wh40kupvboost:
 		Prerequisite: wh40kupvboost
 
 wh40kupvextraarmor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Extra Vehicle Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Vehicle Armor in 15%
 		Prerequisites: ~!wh40kupvextraarmor, wh40kuporkyfort
 	Valued:
@@ -9993,12 +9930,12 @@ wh40kupvextraarmor:
 		Prerequisite: wh40kupvextraarmor
 
 wh40kmoresluggas:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: More Sluggas
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Make Sluggas more cheaper
 		Prerequisites: ~!wh40kmoresluggas, wh40kupvextraarmor
 	Valued:
@@ -10008,12 +9945,12 @@ wh40kmoresluggas:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kmoresluggas
 wh40kuporkyfort:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Orky Fort
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Make Sluggas more cheaper
 		Prerequisites: ~!wh40kuporkyfort, wh40karmoryo, whaaag3
 	Valued:
@@ -10023,12 +9960,12 @@ wh40kuporkyfort:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kuporkyfort
 wh40kuporkarmor1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: 'Eavy Boy Armour
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Boyz Armor in 15%
 		Prerequisites: ~!wh40kuporkarmor1
 	Valued:
@@ -10039,12 +9976,12 @@ wh40kuporkarmor1:
 		Prerequisite: wh40kuporkarmor1
 
 wh40kuporkarmor2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Super 'Eavy Boy Armour
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Boyz Armor in 15%
 		Prerequisites: ~!wh40kuporkarmor2, wh40kuporkarmor1, wh40kuporkyfort
 	Valued:
@@ -10054,12 +9991,12 @@ wh40kuporkarmor2:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kuporkarmor2
 wh40kupbigshooty1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Big Shooty Boss Weapons
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Bosses Damage in 15%
 		Prerequisites: ~!wh40kupbigshooty1, wh40kupblastier
 	Valued:
@@ -10070,12 +10007,12 @@ wh40kupbigshooty1:
 		Prerequisite: wh40kupbigshooty1
 
 wh40kuporkboss1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tougher Bosses
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Bosses Armor in 15%
 		Prerequisites: ~!wh40kuporkboss1, wh40kuporkarmor1
 	Valued:
@@ -10086,12 +10023,12 @@ wh40kuporkboss1:
 		Prerequisite: wh40kuporkboss1
 
 wh40kuporkboss2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Even Tougher Bosses
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Bosses Armor in 15%
 		Prerequisites: ~!wh40kuporkboss2, wh40kuporkarmor1, wh40kuporkyfort
 	Valued:
@@ -10101,12 +10038,12 @@ wh40kuporkboss2:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kuporkboss2
 wh40kupburnabomb:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Burna Bombs
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Mad Doks adkire the Ability to Plaze Bom to Enemys
 		Prerequisites: ~!wh40kupburnabomb, wh40kupburny1, wh40kuporkyfort
 	Valued:
@@ -10116,12 +10053,12 @@ wh40kupburnabomb:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupburnabomb
 wh40kupcombatjuice:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Combat Juice
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Da boyz can attack fasta with this
 		Prerequisites: ~!wh40kupcombatjuice, wh40kuporkyfort
 	Valued:
@@ -10162,7 +10099,6 @@ wh40kwartrukk:
 		TurnSpeed: 16
 		PauseOnCondition: notmobile || disabled
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 60000
 	Repairable:
@@ -10186,7 +10122,7 @@ wh40kwartrukk:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -10224,7 +10160,6 @@ wh40kwartrakk:
 		TurnSpeed: 16
 		PauseOnCondition: notmobile || disabled
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 65000
 	Repairable:
@@ -10248,7 +10183,7 @@ wh40kwartrakk:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -10297,7 +10232,6 @@ pscwh40kwartrakk1:
 	RenderSprites:
 		Image: pscwh40kwartrakk1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 wh40korcleman:
@@ -10327,7 +10261,6 @@ wh40korcleman:
 		Speed: 60
 		TurnSpeed: 8
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 120000
 	Repairable:
@@ -10355,7 +10288,7 @@ wh40korcleman:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -10418,7 +10351,6 @@ wh40kkillakan:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 3
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -10462,7 +10394,6 @@ pscwh40kkillakan1:
 	RenderSprites:
 		Image: pscwh40kwartrakk1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 wh40ksquiggoth:
@@ -10474,7 +10405,7 @@ wh40ksquiggoth:
 	Inherits@snipe: ^DriverKillImmune
 	Inherits@ND: ^NotDevourable
 	Inherits@cargo: ^CargoVehicle
-	Inherits@stomping: ^walker_stomping
+	Inherits@stomping: ^WalkerStomping
 	Inherits@boost: ^WH40KOrkVehicleUpgrades
 	Valued:
 		Cost: 5000
@@ -10533,7 +10464,6 @@ wh40ksquiggoth:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 5
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -10713,7 +10643,7 @@ wh40kmcvc:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 210
-		Prerequisites: wh40kupmonastery, ~techlevel.medium
+		Prerequisites: wh40kupmonastery
 		BuildDurationModifier: 40
 		Description: Deploys into another Field Command.\n  Unarmed
 	Valued:
@@ -10722,7 +10652,6 @@ wh40kmcvc:
 		Name: Stronghold Transporter (Space Marines)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 140000
@@ -10824,7 +10753,6 @@ wh40kchaospredator:
 		Speed: 92
 		TurnSpeed: 16
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 80000
 	Repairable:
@@ -10874,7 +10802,7 @@ wh40kchaospredator:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -10947,7 +10875,6 @@ wh40kchaosrhino:
 		TurnSpeed: 12
 		PauseOnCondition: notmobile || disabled
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 72000
 	Repairable:
@@ -10976,7 +10903,7 @@ wh40kchaosrhino:
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -11044,7 +10971,6 @@ wh40kdefiler:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 3
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -11187,8 +11113,6 @@ wh40kchaosrhino.e4:
 	RenderSprites:
 		Image: wh40kchaosrhino
 
-
-
 #######################################
 # Chaos Infantry
 #######################################
@@ -11240,7 +11164,6 @@ wh40kchaosmarine:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -11383,7 +11306,6 @@ wh40kcultist:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -11420,7 +11342,7 @@ wh40kcultist:
 		RequiresCondition: wh40kunholysight
 		Modifier: 110
 	SoundOnDamageTransition:
-		DamagedSounds: cultistcharge-02.aud, cultistcharge-01.aud, cultistpanic-01.aud, cultistpanic-02.aud, cultistpanic-03.aud, cultistpanic-04.aud	
+		DamagedSounds: cultistcharge_02.aud, cultistcharge_01.aud, cultistpanic_01.aud, cultistpanic_02.aud, cultistpanic_03.aud, cultistpanic_04.aud	
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -11520,7 +11442,6 @@ wh40kdemon:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GrantConditionOnPrerequisite@wh40kdaemonfire:
 		Condition: wh40kdaemonfire
@@ -11602,7 +11523,6 @@ wh40kpossessed:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 2
 	-TakeCover:
 	Power:
 		Amount: -30
@@ -11656,7 +11576,6 @@ wh40kheretic:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GivesBuildableArea:
 		AreaTypes: building
@@ -11693,7 +11612,7 @@ wh40kheretic:
 		DeployChance: 50
 		DeployTicks: 1000
 		UndeployTicks: 1000
-		RequiresCondition: upstimpack && !nostim
+		RequiresCondition: terran_upgrade_stimpack && !nostim
 
 wh40kraptor:
 	Inherits: ^Soldier
@@ -11764,7 +11683,6 @@ wh40kraptor:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -11813,13 +11731,11 @@ wh40kraptor2:
 		Name: garrisoned
 		Weapon: FirebatFBunker
 		LocalOffset: 341,120,128
-		FireDelay: 3
 		MuzzleSequence: muzzle
 	Armament@GARRISONED2:
 		Name: garrisoned
 		Weapon: FirebatFBunker
 		LocalOffset: 341,120,128
-		FireDelay: 3
 		MuzzleSequence: muzzle
 	WithDecoration@addon:
 		Image: wh40kitems
@@ -11904,7 +11820,6 @@ wh40koliberator:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 3
 	-TakeCover:
 	Power:
 		Amount: -50	
@@ -11961,7 +11876,6 @@ wh40kbloodthirster:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 15
 	-TakeCover:
 	Power:
 		Amount: -100
@@ -12014,7 +11928,6 @@ wh40kprincedemon:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 15
 	-TakeCover:
 	Power:
 		Amount: -150
@@ -12065,7 +11978,6 @@ wh40ksorcerer:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 
 wh40kchaoslord:
@@ -12114,7 +12026,6 @@ wh40kchaoslord:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GrantConditionOnPrerequisite@wh40kdemonstrength:
 		Condition: wh40kdemonstrength
@@ -12168,7 +12079,6 @@ wh40kberserk:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GrantConditionOnPrerequisite@wh40kfuriuschargechaos:
 		Condition: wh40kfuriuschargechaos
@@ -12303,14 +12213,14 @@ wh40kchaosmarinechamp:
 		Condition: wh40kupcapincrease
 		Prerequisites: wh40kupcapincrease
 	ProductionTimeMultiplier@wh40kupcapincrease:
-		RequiresCondition: wh40kupcapincrease
+		Prerequisites: wh40kupcapincrease
 		Modifier: 90
 ^WH40KSquadcapChaosVeh:
 	GrantConditionOnPrerequisite@wh40kupcapincrease2:
 		Condition: wh40kupcapincrease2
 		Prerequisites: wh40kupcapincrease2
 	ProductionTimeMultiplier@wh40kupcapincrease2:
-		RequiresCondition: wh40kupcapincrease2
+		Prerequisites: wh40kupcapincrease2
 		Modifier: 90
 	GrantConditionOnPrerequisite@wh40kchaosenergies:
 		Condition: wh40kchaosenergies
@@ -12319,12 +12229,12 @@ wh40kchaosmarinechamp:
 		RequiresCondition: wh40kchaosenergies
 		Modifier: 80
 wh40kcultiststealth:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cultist Stealth
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Enable the stealth to Cultists
 		Prerequisites: ~!wh40kcultiststealth
 	Valued:
@@ -12334,12 +12244,12 @@ wh40kcultiststealth:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kcultiststealth
 wh40kunholysight:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Unholy Sight
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Cultist has more view range
 		Prerequisites: ~!wh40kunholysight
 	Valued:
@@ -12349,12 +12259,12 @@ wh40kunholysight:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kunholysight
 wh40kchaosmarinestealth:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Chaos Marine Stealth
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Enable the stealth to Cultists
 		Prerequisites: ~!wh40kchaosmarinestealth
 	Valued:
@@ -12364,12 +12274,12 @@ wh40kchaosmarinestealth:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kchaosmarinestealth
 wh40kfuriuschargechaos:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Furius Charge
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Speed and Attack of Cultists and Marines
 		Prerequisites: ~!wh40kfuriuschargechaos
 	Valued:
@@ -12379,12 +12289,12 @@ wh40kfuriuschargechaos:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kfuriuschargechaos
 wh40kjetpackbooster:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Jetpack Booster
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Speed of Raptors
 		Prerequisites: ~!wh40kjetpackbooster
 	Valued:
@@ -12394,12 +12304,12 @@ wh40kjetpackbooster:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kjetpackbooster
 wh40kdaemonfire:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Daemonfire
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Demons firepower /n Replaces Possessed Claws with Demon Fire
 		Prerequisites: ~!wh40kdaemonfire
 	Valued:
@@ -12409,12 +12319,12 @@ wh40kdaemonfire:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kdaemonfire
 wh40kupmonasteryc:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Decreased Monastery
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Monastery to 25% of health, Unlock new Tech
 		Prerequisites: ~!wh40kupmonastery, barracks
 	Valued:
@@ -12424,12 +12334,12 @@ wh40kupmonasteryc:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupmonastery
 wh40kupmonastery2c:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Unholy Monastery
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Monastery to 25% of health, Unlock new Tech
 		Prerequisites: ~!wh40kupmonastery2, wh40kupmonastery, vehicleproduction
 	Valued:
@@ -12440,12 +12350,12 @@ wh40kupmonastery2c:
 		Prerequisite: wh40kupmonastery2
 
 wh40kupcapincreasec:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Squad Cap Increase
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Marine Production
 		Prerequisites: ~!wh40kupcapincrease, barracks
 	Valued:
@@ -12455,12 +12365,12 @@ wh40kupcapincreasec:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupcapincrease
 wh40kupcapincrease2c:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Squad Cap Increase
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Vehicle Production
 		Prerequisites: ~!wh40kupcapincrease2, vehicleproduction
 	Valued:
@@ -12471,12 +12381,12 @@ wh40kupcapincrease2c:
 		Prerequisite: wh40kupcapincrease2
 
 wh40kchaosenergies:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Chaos Energies
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Vehicle Armor in 15%
 		Prerequisites: ~!wh40kchaosenergies, wh40kupmonastery2
 	Valued:
@@ -12487,12 +12397,12 @@ wh40kchaosenergies:
 		Prerequisite: wh40kchaosenergies
 
 wh40kfraggrenadesc:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Frag Grenades
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Enable the use of Grenades to Sargents
 		Prerequisites: ~!wh40kupfraggrenade, barracks
 	Valued:
@@ -12502,12 +12412,12 @@ wh40kfraggrenadesc:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupfraggrenade
 wh40kveteranupgrade1c:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Commander Veteran
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Add +1 veteran rank to Leaders, and add more Health
 		Prerequisites: ~!wh40kveteranupgrade1, barracks
 	Valued:
@@ -12517,12 +12427,12 @@ wh40kveteranupgrade1c:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kveteranupgrade1
 wh40kveteranupgrade2c:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Commander Hero
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Add +1 veteran rank to Leaders, and add more Health
 		Prerequisites: ~!wh40kveteranupgrade2, wh40kveteranupgrade1
 	Valued:
@@ -12532,12 +12442,12 @@ wh40kveteranupgrade2c:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kveteranupgrade2
 wh40kdemonstrength:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Demon Strength
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Chaos Lord Damage
 		Prerequisites: ~!wh40kdemonstrength
 	Valued:
@@ -12680,7 +12590,7 @@ wh40kstrongholdc:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 
@@ -12868,8 +12778,8 @@ wh40karmoryc:
 		Range: 5c0
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	Power:
 		Amount: -25
 	RenderSprites:
@@ -12958,7 +12868,7 @@ wh40kmachinepit:
 	Exit@2:
 		ExitCell: 2,1
 		ExitDelay: 3
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: VehicleUpgrades.Chaos
 	ProductionQueue:
 		Type: Vehicle
@@ -13018,8 +12928,7 @@ wh40kprocc:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	Selectable:
-		Bounds: 131072, 91008, 0, 21845
-		DecorationBounds: 131072, 127402, 0, -3626
+		Bounds: 3072, 2986, 0, -85
 	SelectionDecorations:
 	Power:
 		Amount: -30
@@ -13065,7 +12974,7 @@ wh40kbolterturretc:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -13077,7 +12986,7 @@ wh40kbolterturretc:
 		BuildDurationModifier: 40
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 	Selectable:
-		Bounds: 87381, 89173
+		Bounds: 2048, 2090
 	SelectionDecorations:
 	Health:
 		HP: 160000
@@ -13123,7 +13032,7 @@ wh40kbolterturret2c:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 1400
 	Tooltip:
@@ -13135,7 +13044,7 @@ wh40kbolterturret2c:
 		BuildDurationModifier: 40
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 	Selectable:
-		Bounds: 87381, 89173
+		Bounds: 2048, 2090
 	SelectionDecorations:
 	Health:
 		HP: 150000
@@ -13213,7 +13122,7 @@ wh40kdaemonpit:
 	Exit@2:
 		ExitCell: 2,1
 		ExitDelay: 3
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: VehicleUpgrades.Chaos
 	Production@NORMAL:
 		Produces: Vehicle
@@ -13594,7 +13503,6 @@ wh40kguardian:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -13917,8 +13825,8 @@ wh40karmoryt:
 		Range: 5c0
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	Power:
 		Amount: -25
 	RenderSprites:
@@ -13958,7 +13866,7 @@ wh40kvehiclebeacon:
 	Exit@2:
 		ExitCell: 2,1
 		ExitDelay: 3
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: VehicleUpgrades.Tau
 	ProductionQueue:
 		Type: Vehicle
@@ -14111,8 +14019,7 @@ wh40kproct:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	Selectable:
-		Bounds: 131072, 91008, 0, 21845
-		DecorationBounds: 131072, 127402, 0, -3626
+		Bounds: 3072, 2986, 0, -85
 	SelectionDecorations:
 	Power:
 		Amount: -30
@@ -14203,7 +14110,6 @@ wh40kfirewarrior:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -14291,7 +14197,6 @@ wh40kkroot:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -14377,7 +14282,6 @@ wh40kxv15:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Captures:
 		CaptureTypes: building, tech
@@ -14577,7 +14481,6 @@ wh40khammerhead:
 		Speed: 100
 	Hovers:
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 120000
 	Repairable:
@@ -14605,7 +14508,7 @@ wh40khammerhead:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -14751,7 +14654,6 @@ wh40kdronehard:
 		Speed: 100
 	Hovers:
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 120000
 	Repairable:
@@ -14768,7 +14670,7 @@ wh40kdronehard:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########

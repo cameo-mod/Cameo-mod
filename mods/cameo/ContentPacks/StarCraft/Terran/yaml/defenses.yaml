@@ -1,0 +1,257 @@
+terran_bunker:
+	Inherits: ^Defense
+	Inherits@Template: ^BunkerTemplate
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@shape: ^2x2Shape
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@gar: ^ClearableGarrison
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Tooltip:
+		Name: Bunker
+	Power:
+		Amount: 0
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~terran_commandcenter, terran_barracks
+		Description: actor_scbunker.description
+	Valued:
+		Cost: 1200
+	Health:
+		HP: 240000
+	Turreted:
+		TurnSpeed: 1023
+		RealignDelay: -1
+	BodyOrientation:
+		QuantizedFacings: 8
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 4
+		EjectOnDeath: false
+		# InitialUnits: terran_marine, terran_firebat, terran_marauder, terran_marine
+	WithCargoSounds:
+		EnterSounds: tdrtra00.wav
+		ExitSounds: tdrtra00.wav
+	FireWarheadsOnDeath@healer:
+		Weapon: FakeHealtAPC
+	AttackOpenTopped:
+		Armaments: garrisoned
+		PortOffsets: 300,400,200, -400,500,200, 300,-400,200, -400,-500,200
+		PauseOnCondition: chronobeamed
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	RevealsShroud:
+		Range: 6666
+	-QuantizeFacingsFromSequence:
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	Voiced:
+		VoiceSet: SCGenericBuildingVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
+
+terran_missileturret:
+	Inherits: ^Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	-WithTurretSearchlight:
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@shape: ^2x2Shape
+	Inherits@POWERDOWN: ^DisableOnPowerDown
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Missile Turret
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~terran_commandcenter, terran_engineeringbay
+		Queue: Defence, RADefence
+		Description: actor_scmissileturret.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: tscupd00.aud
+	Health:
+		HP: 200000
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 0
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament@1:
+		Weapon: MissileTurret
+		LocalOffset: 200,-200,200
+	Armament@2:
+		Weapon: MissileTurret
+		LocalOffset: 200,200,200
+	AttackPopupTurreted:
+		CloseDelay: 25
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+	-ActorPreviewPlaceBuildingPreview:
+	SequencePlaceBuildingPreview:
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
+		Sequence: place
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	RevealsShroud:
+		Range: 11626
+	DetectCloaked:
+		Range: 5813
+	Power:
+		Amount: -60
+	Voiced:
+		VoiceSet: SCAATowerVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
+
+terran_sentinel:
+	Inherits: ^Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTDBuilding
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@detect: ^GenericAllDetector
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@POWERDOWN: ^DisableOnPowerDown
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~terran_commandcenter, terran_barracks
+		Description: template_anti_infantry_defense.description
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Sentinel
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+		BuildSounds: tscupd00.aud
+	Health:
+		HP: 160000
+	Selectable:
+		Bounds: 1024, 1024
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: -1,1,1
+	AttackTurreted:
+		Voice: Attack
+	Armament:
+		Weapon: NaxLaserT
+		LocalOffset: 600,0,600
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !schwarzermond_upgrade_crystallens
+	ProvidesPrerequisite@buildingname:
+	Transforms:
+		IntoActor: scsentinelm
+		Offset: 0,0
+		NoTransformNotification: BuildingCannotPlaceAudio
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	AutoTarget:
+	Power:
+		Amount: -40
+	RevealsShroud:
+		Range: 8181
+	DetectCloaked:
+		Range: 4090
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ProvidesPrerequisite@buildingname:
+	ActorStatValues:
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
+
+terran_missilesilo:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@POWERDOWN: ^DisableOnPowerDown
+	Tooltip:
+		Name: Terran Missile Silo
+	Power:
+		Amount: 0
+	Buildable:
+		Prerequisites: ~terran_commandcenter, terran_sciencefacility, ~techlevel.superweapons, !terran_missilesilo
+		Description: actor_mslo.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: tscupd00.aud
+	NukePowerCA:
+		OrderName: NukePowerInfoOrder
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Cursor: nuke
+		Icons:
+			1: abomb
+		ChargeInterval: 10500
+		Names:
+			1: power_nuke.raname
+		Descriptions:
+			1: power_nuke.description
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		EndChargeTextNotification: Nuclear Missile ready.
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		LaunchTextNotification: Warning: Nuclear Missile launched.
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Warning: Nuclear Missile launched.
+		MissileWeapons:
+			1: raatomic
+		MissileDelay: 5
+		SpawnOffset: 1c0,427,0
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayBeacon: True
+		DisplayRadarPing: True
+		BeaconPosters:
+			1: atomic
+		CameraRange: 10000
+		CameraRemoveDelay: 125
+		CircleRanges:
+			1: 10000
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		SupportPowerPaletteOrder: 70
+		MissileImage: scatomic
+		MissilePalette: greyscale
+		BeaconActor: BLASTRADIUS.atomic
+	WithBuildingBib:
+	# WithSupportPowerActivationAnimation:
+	# 	RequiresCondition: !build-incomplete
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: terran_missilesilo
+	Voiced:
+		VoiceSet: SCNuclearSiloVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+####################################################################################################
+#		BUILDING PROTOSS
+####################################################################################################

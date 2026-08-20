@@ -1,0 +1,1013 @@
+RA2LasherCannon:
+	Inherits: ^Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^LightFlameWeapon
+	Inherits@4: ^MediumChemicalWeapon
+	Inherits@5: ^TankDestroyerCannon
+	Inherits@6: ^RA2MediumCannon
+	ReloadDelay: 68
+	Range: 5201
+	Report: vlasatta.wav
+	Projectile: Bullet
+		Speed: 520
+	Warhead@Grenade: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 1000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@LightFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@CannonHE_Medium:
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+
+RA2LasherCannon_elite:
+	Inherits: RA2LasherCannon
+	Inherits@Elite: ^RA2EliteEffects
+	Range: 6201
+	Burst: 2
+	BurstDelays: 3
+
+RA2LasherToxicMortar:
+	Inherits: ^Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^HeavyBomb
+	Inherits@4: ^LightChemicalWeapon
+	Inherits@5: ^MediumChemicalWeapon
+	Inherits@6: ^HeavyChemicalWeapon
+	Inherits@7: ^TankDestroyerCannon
+	Inherits@8: ^MediumCannon
+	Inherits@9: ^HeavyCannon
+	ReloadDelay: 105
+	Range: 9000
+	Report: vlasatta.wav
+	Projectile: Bullet
+		Image: aa_plasgree
+		Palette: ra2effect
+		Blockable: false
+		Speed: 450
+		ContrailLength: 50
+		LaunchAngle: 75
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
+		ContrailStartColor: 88FF44
+		ContrailEndColor: DDEE55
+		ContrailEndColorUsePlayerColor: false
+		ContrailDelay: 0
+		ContrailStartWidth: 75
+		ContrailEndWidth: 25
+		TrailInterval: 1
+	Warhead@Grenade: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 1000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	-Warhead@Effect1:
+	Warhead@Effect: CreateEffect
+		Explosions: aa_plasgreeexp
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1, 3
+		Duration: 75
+		Speed: 4, 16
+		TurnRate: 10
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
+
+RA2LasherToxicMortar_elite:
+	Inherits: RA2LasherToxicMortar
+	Range: 10000
+	Warhead@Grenade: SpreadDamage
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 4000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 4000
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 2
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 4000
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 2
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 4000
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 2
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@CannonAP_Light: AreaDamage
+		Damage: 4000
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@CannonHE_Medium: AreaDamage
+		Damage: 4000
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@CannonHE_Heavy: AreaDamage
+		Damage: 4000
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@Effect: CreateEffect
+		Explosions: ra2radbang
+		ExplosionPalette: ra2effect
+		ImpactSounds: vdemdiea.wav
+
+RA2LasherLaser:
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Warhead_Laser_Heavy
+	Inherits@3: ^Projectile_Laser_Heavy
+	Inherits@4: ^Effect_Laser_Heavy
+	ReloadDelay: 81
+	Range: 7065
+	Report: vfloatta.wav
+	Projectile: LaserZap
+		Width: 48
+		Duration: 12
+		Color: AA7799
+		SecondaryBeam: true
+		SecondaryBeamWidth: 24
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF88
+		UsePlayerColor: false
+	Warhead@CannonHE_Medium:
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@CannonHE_Medium_Percentage:
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@Laser_Heavy:
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@Laser_Heavy_Percentage:
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+
+RA2LasherLaser_elite:
+	Inherits: RA2LasherLaser
+	Range: 8065
+	Projectile: LaserZap
+		Width: 72
+		Duration: 18
+		Color: BB88AA
+		SecondaryBeamWidth: 36
+	Warhead@CannonHE_Medium: AreaDamage
+		Damage: 16000
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 8
+
+RA2DiskLaser:
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	ReloadDelay: 40
+	Range: 6840
+	Report: vfloatta.wav
+	ValidTargets: Ground, Water, Air
+	InvalidTargets: DiskSteal
+	Projectile: LaserZap
+		Width: 60
+		Duration: 15
+		Color: AA7799
+		SecondaryBeam: true
+		SecondaryBeamWidth: 30
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF88
+		UsePlayerColor: false
+	Warhead@Laser_Heavy:
+		Damage: 24000
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		Damage: 12
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+
+RA2DiskLaser_elite:
+	Inherits: RA2DiskLaser
+	Range: 7840
+	Projectile: LaserZap
+		Width: 80
+		Duration: 20
+		Color: BB88AA
+		SecondaryBeamWidth: 40
+	Warhead@Laser_Heavy:
+		Damage: 48000
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		Damage: 24
+
+RA2DiskDrain:
+	Inherits: ^Warhead_Tesla_Heavy
+	Inherits@2: ^Warhead_Magic_Heavy
+	Inherits@3: ^Effect_Magic_Heavy
+	ReloadDelay: 5
+	Range: 125
+	Report: vflolo5a.wav, vflolo5b.wav
+	ValidTargets: Ground, Water
+	InvalidTargets: DiskSteal
+	TargetActorCenter: true
+	Projectile: InstantHit
+	Warhead@drain: GrantExternalCondition
+		ValidTargets: Ground, Water
+		Range: 250
+		Duration: 5
+		Condition: diskdrain
+	Warhead@Magic_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@Magic_Heavy_Percentage:
+		ValidTargets: Ground, Water
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@Tesla_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 1000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Tesla_Heavy_Percentage:
+		ValidTargets: Ground, Water
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+
+RA2DiskSteal:
+	ReloadDelay: 5
+	Range: 125
+	TargetActorCenter: true
+	ValidTargets: DiskSteal
+	Projectile: InstantHit
+	Warhead@Steal: StealResource
+		Cash: 200
+		ValidTargets: DiskSteal
+		ValidRelationships: Neutral, Enemy
+	Warhead@2Dam: TargetDamage
+		ValidTargets: DiskSteal
+		ValidRelationships: Neutral, Enemy
+
+RA2Magnet:
+	Inherits: ^RA2LaserWeapon
+	Range: 7032
+	ValidTargets: Vehicle, Structure
+	ReloadDelay: 200
+	Burst: 100
+	BurstDelays: 1
+	TargetActorCenter: true
+	Projectile: LaserZap
+		Shape: Flat
+		Width: 350
+		Duration: 100
+		Color: FF55F505
+		-HitAnim:
+	Warhead@Laser_Heavy:
+		Range: 0, 32
+		Falloff: 100, 100
+		Damage: 2000
+		ValidTargets: Vehicle, Structure
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		Range: 0, 32
+		Falloff: 100, 100
+		Damage: 1
+		ValidTargets: Vehicle, Structure
+	Warhead@Condition: GrantExternalCondition
+		Condition: Magnet
+		Duration: 100
+		Range: 500
+		ValidTargets: Vehicle
+	-Warhead@EffectAir:
+
+RA2MagnetAA:
+	Inherits: RA2Magnet
+	ValidTargets: Vehicle, Air, Structure
+	InvalidTargets: Paratrooper
+	Warhead@Laser_Heavy:
+		ValidTargets: Vehicle, Air, Structure
+		InvalidTargets: Paratrooper
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		ValidTargets: Vehicle, Air, Structure
+		InvalidTargets: Paratrooper
+	Warhead@Condition: GrantExternalCondition
+		ValidTargets: Vehicle, Air
+		InvalidTargets: Paratrooper
+
+RA2Magnet_elite:
+	Inherits: RA2Magnet
+	Range: 8032
+	Projectile: LaserZap
+		Color: e6000045
+
+RA2MagnetAA_elite:
+	Inherits: RA2Magnet_elite
+	ValidTargets: Vehicle, Air, Structure
+	InvalidTargets: Paratrooper
+	Warhead@Laser_Heavy:
+		ValidTargets: Vehicle, Air, Structure
+		InvalidTargets: Paratrooper
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		ValidTargets: Vehicle, Air, Structure
+		InvalidTargets: Paratrooper
+	Warhead@Condition: GrantExternalCondition
+		ValidTargets: Vehicle, Air
+		InvalidTargets: Paratrooper
+
+RA2PsychicJab:
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^LightFlameWeapon
+	Inherits@6: ^FlakWeapon
+	Inherits@fx: ^Effect_Init_Fire_RA2
+	ReloadDelay: 15
+	Range: 4440
+	Report: iiniatta.wav
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FF884488
+		ContrailEndColor: FFFFFF44
+		ContrailWidth: 150
+		ContrailLength: 15
+		Speed: 4000
+		Width: 40
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@CannonHE_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@CannonHE_Medium_Percentage:
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@LightFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+
+RA2PsychicJab_elite:
+	Inherits: RA2PsychicJab
+	Range: 5440
+	Burst: 2
+	BurstDelays: 3
+
+RA2Dronegas:
+	ReloadDelay: 125
+	Range: 5000
+	Report: vchaatta.wav
+	ValidTargets: MindControl
+	InvalidTargets: Structure, MCImmune
+	Projectile: InstantExplode
+	Warhead@1: CreateEffect
+		Explosions: chaosgas
+		ExplosionPalette: ra2effect
+		ImpactActors: false
+	Warhead@2: SpreadDamage
+		Range: 5000
+		Falloff: 100, 100
+	Warhead@chaosgas: GrantExternalCondition
+		Range: 5000
+		Condition: chaosgas
+		Duration: 125
+		ValidTargets: MindControl
+		InvalidTargets: Hero, MCImmune
+		ValidRelationships: Enemy
+	Warhead@PropagandaEffect: GrantExternalCondition
+		Range: 5000
+		Condition: PropagandaEffect
+		Duration: 125
+		ValidRelationships: Ally
+
+RA2MindControl:
+	ReloadDelay: 75
+	Report: iyurat1a.wav
+	Range: 7000
+	TargetActorCenter: true
+	ValidTargets: MindControl
+	InvalidTargets: Hero, MCImmune
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		Damage: 0
+
+RA2SMindControl:
+	ReloadDelay: 50
+	Range: 6000
+	Inherits: RA2MindControl
+
+RA2TMindControl:
+	ReloadDelay: 100
+	Inherits: RA2MindControl
+	Range: 8000
+
+RA2XMindControl:
+	Inherits: RA2MindControl
+	ReloadDelay: 125
+	Range: 9000
+	ValidTargets: MindControlStructure
+
+RA2XMindControlSplash:
+	Inherits: RA2MindControl
+	Range: 9000
+	ReloadDelay: 125
+	ValidTargets: MindControl
+	Warhead@2Own: MindControl
+		Range: 1500
+		Delay: 25
+		ChangeOwnerValidRelationships: Neutral, Enemy
+		ChangeOwnerValidTargets: Infantry, Vehicle, Ship, Submarine
+		ChangeOwnerInvalidTargets: Structure, MCImmune
+
+RA2XMindControlSplash2:
+	Inherits: RA2XMindControlSplash
+	Warhead@2Own: MindControl
+		Delay: 15
+
+PsiWave:
+	ReloadDelay: 150
+	Range: 2500
+	Report: iyurat2a.wav
+	Warhead@1Dam: SpreadDamage
+		ValidRelationships: Neutral, Enemy
+		Spread: 1250
+		Damage: 25000
+		ValidTargets: Infantry
+		DamageTypes: PsychicDeath
+		Delay: 5
+	Warhead@2Eff: CreateEffect
+		ImpactActors: false
+		AffectsParent: true
+		Explosions: controlwave_small
+		ExplosionPalette: ra2effect
+
+PsiWaveX:
+	Inherits@fx: ^Effect_Psi_Wave_RA2
+	ReloadDelay: 300
+	Range: 5000
+	Report: iyurat2a.wav
+	Warhead@1Dam: SpreadDamage
+		ValidRelationships: Neutral, Enemy
+		Spread: 2500
+		Damage: 50000
+		ValidTargets: Infantry
+		DamageTypes: PsychicDeath
+		Delay: 5
+
+BoomerLaunch:
+	Inherits: V3Launch
+	ValidTargets: Ground, Air
+	InvalidTargets: Ship, Underwater
+	ReloadDelay: 50
+	Range: 15000
+	MinRange: 3000
+	Burst: 2
+	BurstDelays: 8
+
+YRBoomerTorpedo:
+	Inherits: ^RA2Grenade
+	Inherits@2: ^RA2HeavyMissile
+	Inherits@fx: ^Effect_Watersplash_Large_RA2
+	ReloadDelay: 176
+	Range: 15000
+	MinRange: 3000
+	Burst: 4
+	BurstDelays: 8
+	Report: vbooat2a.wav
+	ValidTargets: Water, Underwater, Bridge
+	-Projectile:
+	Projectile: Missile
+		Image: Patriot
+		Arm: 5
+		TrailImage: bubbles
+		TrailDelay: 2
+		#EffectPalette: ra_temperat
+		MaximumLaunchSpeed: 100
+		MinimumLaunchSpeed: 100
+		Speed: 200
+		Acceleration: 1
+		HorizontalRateOfTurn: 5
+		RangeLimit: 20000
+		BoundToTerrainType: Water
+		Palette: cloak
+		MaximumLaunchAngle: 0
+		CruiseAltitude: 0
+	Warhead@Demolition_Light:
+		Damage: 20000
+	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+		Damage: 10
+	Warhead@MissileAP_Heavy:
+		Damage: 20000
+		ValidTargets: Water, Underwater, Bridge, Structure
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+		Damage: 10
+		ValidTargets: Water, Underwater, Bridge, Structure
+	-Warhead@Smudge:
+	Warhead@Effect: CreateEffect
+		ValidTargets: Ship, Structure, Bridge, Ground
+		ImpactActors: true
+	-Warhead@EffectAir:
+
+^YuriGatlingCannonProjectileStreak:
+	Projectile: Bullet
+		Image:
+		ProjectileStreakLength: 1536
+		ProjectileStreakLengthVariation: 384
+		ProjectileStreakWidth: 32
+		ProjectileStreakColor: FFA32B
+		ContrailLength: 0
+
+YuriGatlingCannonMG1:
+	Inherits: RA2GattlingMG1
+	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+
+YuriGatlingCannonMG1_AA:
+	Inherits: RA2GattlingMG1_AA
+	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+
+YuriGatlingCannonMG2:
+	Inherits: RA2GattlingMG2
+	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+
+YuriGatlingCannonMG2_AA:
+	Inherits: RA2GattlingMG2_AA
+	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+
+RA2GattlingMG3:
+	Inherits: RA2GattlingMG1
+	Range: 5500
+	Report: vgatlo8a.wav, vgatlo8b.wav
+	ReloadDelay: 2
+
+RA2GattlingMG3_AA:
+	Inherits: RA2GattlingMG3
+	Range: 8250
+	ValidTargets: Air
+	Warhead@Bullet_Light: AreaDamage
+		ValidTargets: Air
+		Damage: 4000
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Air
+		Damage: 2
+	Warhead@Bullet_Medium:
+		ValidTargets: Air
+		Damage: 4000
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Air
+		Damage: 2
+
+YuriGatlingCannonMG3:
+	Inherits: RA2GattlingMG3
+	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+
+YuriGatlingCannonMG3_AA:
+	Inherits: RA2GattlingMG3_AA
+	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
+
+RA2GattlingInf:
+	Inherits: ^RA2SmallArms
+	Inherits@2: ^RA2Chaingun
+	ReloadDelay: 15
+	ValidTargets: Ground, Air, Water
+	Range: 5531
+	Report: iarnatta.wav, iarnattb.wav
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FFAA44
+		ContrailStartWidth: 15
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailLength: 5
+		Speed: 10000
+		Width: 75
+	Warhead@Bullet_Light:
+		ValidTargets: Ground, Air, Water
+		Damage: 8000
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Air, Water
+		Damage: 1
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Air, Water
+		Damage: 8000
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Air, Water
+		Damage: 1
+
+RA2Virusgun:
+	Inherits: ^HeavyChemicalWeapon
+	Inherits@2: ^SniperWeapon
+	ReloadDelay: 74
+	Range: 9999
+	Report: iviratta.wav
+	ValidTargets: Infantry
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FF9933
+		ContrailEndColor: 88FF4400
+		ContrailEndColorUsePlayerColor: false
+		ContrailWidth: 333
+		ContrailLength: 33
+		Speed: 3333
+		Width: 33
+	Warhead@SniperWeapon: SpreadDamage
+		ValidTargets: Infantry, Monster, Garrisoned
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+		ValidTargets: Infantry, Monster, Garrisoned
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Infantry, Monster, Garrisoned
+		Damage: 6
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@HeavyChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Infantry, Monster, Garrisoned
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Infantry, Monster, Garrisoned
+		Damage: 6
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@Effect: CreateEffect
+		Explosions: chemball
+		ImpactSounds: firebl3.aud
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1, 2
+		Duration: 100
+		Speed: 4, 16
+		TurnRate: 10
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
+
+RA2Virusgun2:
+	Inherits@wh: ^Warhead_Flak_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Flak_Medium
+	Inherits: RA2Virusgun
+	ValidTargets: Ground, Ship, Garrisoned
+	-InvalidTargets:
+	Warhead@Flak_Medium:
+		ValidTargets: Infantry, Monster, Garrisoned
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Infantry, Monster, Garrisoned
+		Damage: 6
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@SniperWeapon: SpreadDamage
+		ValidTargets: Ground, Ship, Garrisoned
+	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+		ValidTargets: Ground, Ship, Garrisoned
+	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Ship, Garrisoned
+	Warhead@HeavyChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Ship, Garrisoned
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Ship, Garrisoned
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1, 3
+		Duration: 150
+
+RA2Virusgun3:
+	Inherits@wh: ^Warhead_MissileAP_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_MissileAP_Medium
+	Inherits: RA2Virusgun2
+	Projectile: Bullet
+		Image: bhreddragon
+		Palette: effect
+		TrailImage: green_smokey
+		TrailInterval: 1
+		TrailDelay: 1
+	Warhead@MissileAP_Medium:
+		ValidTargets: Infantry, Monster, Garrisoned
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Infantry, Monster, Garrisoned
+		Damage: 6
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@Condition: GrantExternalCondition
+		Range: 2000
+		Condition: corroded
+		Duration: 200
+		ValidTargets: corrodible
+		ValidRelationships: Enemy
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1, 4
+		Duration: 200
+
+RA2Virusgun_elite:
+	Inherits: RA2Virusgun3
+	Range: 11111
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1, 5
+		Duration: 250
+
+RA2Chemspray:
+	Inherits@wh: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Chem_Medium
+	ReloadDelay: 50
+	Burst: 6
+	BurstDelays: 4
+	Range: 4840
+	Projectile: Bullet
+		Speed: 160
+		Image: ra2txgasg
+		Inaccuracy: 555
+		Palette: ra2effect
+	Warhead@Chemical_Medium:
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
+		Damage: 2
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	-Warhead@Effect:
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1, 2
+		Duration: 100
+		Speed: 4, 16
+		TurnRate: 10
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
+
+RA2Chemspray2:
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@proj: ^Projectile_Chem_Heavy
+	Inherits@fx: ^Effect_Chem_Heavy
+	Inherits: RA2Chemspray
+	Report: flamer2.aud
+	Warhead@Chemical_Heavy:
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
+		Damage: 2
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@Condition: GrantExternalCondition
+		Range: 2000
+		Condition: corroded
+		Duration: 200
+		ValidTargets: corrodible
+		ValidRelationships: Enemy
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1, 4
+		Duration: 200
+
+RA2Chemspray_elite:
+	Inherits: RA2Chemspray2
+	Report: flamer2.aud
+	Range: 5840
+
+RA2CosmonautLaser:
+	Inherits: ^RailgunWeapon
+	Inherits@2: ^LaserWeapon
+	Inherits@3: ra2roktgun
+	Report: ilasatta.wav
+	ReloadDelay: 11
+	Range: 4750
+	Projectile: LaserZap
+		HitAnim: laserfire
+		Width: 40
+		Duration: 5
+		SecondaryBeam: true
+		SecondaryBeamWidth: 25
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF80
+		UsePlayerColor: true
+	Warhead@LightMissile: SpreadDamage
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@Bullet_Light: AreaDamage
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@FlakWeapon: SpreadDamage
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@Bullet_Medium:
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
+	-Warhead@Effect:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		Chance: 15
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	-Warhead@EffectWater:

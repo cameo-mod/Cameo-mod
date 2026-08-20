@@ -1,0 +1,1272 @@
+terran_commandcenter:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: terran_commandcenter.png
+		Scale: 1.25
+	build:
+		Start: 4
+		Length: 2
+		Tick: 120
+		ZOffset: 2048
+	idle:
+		Start: 4
+	dead:
+	make:
+		Length: 4
+		Tick: 120
+	icon:
+		Filename: terran_mobilecommandcenter_icon.png
+
+terran_supplydepot:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: terran_upgrade_upgradesupplydepotlevel2_scsupplydepotidle.png
+		Scale: 1.25
+	idle:
+		Length: 1
+		Tick: 80
+	fans:
+		Filename: terran_upgrade_upgradesupplydepotlevel2_scsupplydepotfan.png
+		Length: 6
+		Tick: 80
+	dead:
+	make:
+		Filename: terran_upgrade_upgradesupplydepotlevel2_scsupplydepotmake.png
+		Length: 5
+		Tick: 120
+	icon:
+		Filename: terran_upgrade_upgradesupplydepotlevel2_icon.png
+
+terran_refinery:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: terran_refinery.png
+		Scale: 1.25
+	idle:
+		Start: 4
+	dead:
+	make:
+		Start: 0
+		Length: 4
+		Tick: 80
+	smoke:
+		Filename: terran_refinery_geysersmoke.png
+		Scale: 3
+		Length: *
+		Tick: 160
+		Offset: 3,-24
+		ZOffset: 2048
+	icon:
+		Filename: terran_refinery_icon.png
+
+terran_barracks:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: terran_barracks.png
+		Scale: 1.25
+	idle:
+		Start: 4
+		Tick: 100
+	dead:
+	make:
+		Start: 0
+		Length: 4
+		Tick: 80
+	build:
+		Start: 5
+		Length: 2
+		Tick: 100
+	icon:
+		Filename: terran_barracks_icon.png
+
+terran_engineeringbay:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: terran_engineeringbay.png
+		Scale: 1.25
+	idle:
+		Start: 8
+	dead:
+	make:
+		Start: 0
+		Length: 9
+		Tick: 100
+	icon:
+		Filename: terran_engineeringbay_icon.png
+
+terran_missileturret:
+	Defaults:
+		Filename: terran_missileturret.png
+		Scale: 1.25
+		Offset: 0,6
+	closed-idle:
+		Start: 4
+		Length: 32
+		Tick: 400
+	opening:
+		Start: 4
+		Length: 1
+		Tick: 1
+	idle:
+		Filename: terran_missileturret_scmissileturretspin.png
+		Facings: -32
+	closing:
+		Start: 4
+		Length: 1
+		Tick: 100
+	damaged-closed-idle:
+		Start: 4
+		Length: 32
+		Tick: 400
+	damaged-opening:
+		Start: 4
+		Length: 1
+		Tick: 1
+	damaged-idle:
+		Filename: terran_missileturret_scmissileturretspin.png
+		Facings: -32
+	damaged-closing:
+		Start: 4
+		Length: 1
+		Tick: 100
+	dead:
+		Start: 4
+		Length: 1
+		Tick: 100
+	place:
+		Filename: terran_missileturret_scmissileturretspin.png
+		Start: 0
+	make:
+		Filename: terran_missileturret.png
+		Length: 4
+		Tick: 80
+	icon:
+		Filename: terran_missileturret_icon.png
+		Offset: 0,0
+
+terran_sentinel:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Offset: 0,0
+	idle:
+		Filename: terran_sentinel_scsentinelmake.png
+		Length: 1
+		Start: 3
+	damaged-idle:
+		Filename: terran_sentinel_scsentinelmake.png
+		Length: 1
+		Start: 3
+	critical-idle:
+		Filename: terran_sentinel_scsentinelmake.png
+		Length: 1
+		Start: 3
+	make:
+		Filename: terran_sentinel_scsentinelmake.png
+		Length: 4
+		Tick: 160
+	dead:
+		Filename: invisibleitem.shp
+	turret:
+		Filename: terran_sentinel_sentinelturretidle.png
+		Facings: -16
+	icon:
+		Filename: terran_sentinel_icon.png
+		Offset: 0,0
+
+terran_academy:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: terran_academy.png
+		Scale: 1.25
+		Offset: 0,12
+	idle:
+		Start: 4
+	dead:
+	make:
+		Start: 0
+		Length: 5
+		Tick: 100
+	icon:
+		Filename: terran_academy_icon.png
+		Offset: 0,0
+
+terran_bunker:
+	Defaults:
+		Filename: terran_bunker.png
+		Scale: 1.25
+		Offset: 0,12
+	idle:
+		Start: 4
+	dead:
+	make:
+		Start: 0
+		Length: 5
+		Tick: 100
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: terran_bunker_icon.png
+		Offset: 0,0
+
+terran_weaponsfactory:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: terran_weaponsfactory.png
+		Scale: 1.25
+	idle:
+		Start: 4
+	dead:
+	make:
+		Start: 0
+		Length: 5
+		Tick: 100
+	icon:
+		Filename: terran_weaponsfactory_icon.png
+
+terran_starport:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: terran_starport.png
+		Scale: 1.25
+	idle:
+		Start: 4
+	dead:
+	make:
+		Start: 0
+		Length: 5
+		Tick: 100
+	icon:
+		Filename: terran_starport_icon.png
+
+terran_sciencefacility:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: terran_sciencefacility.png
+		Scale: 1.25
+	idle:
+		Start: 4
+	dead:
+	make:
+		Start: 0
+		Length: 5
+		Tick: 100
+	active:
+		Length: 1
+		Tick: 200
+	smoke:
+		Filename: td_nod_templeofnod_atomdoor.shp
+		Length: *
+		Offset: -1,-47
+	icon:
+		Filename: terran_sciencefacility_icon.png
+
+terran_armory:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: terran_armory.png
+		Scale: 1.25
+		Offset: 0,12
+	idle:
+		Start: 4
+	dead:
+	make:
+		Start: 0
+		Length: 5
+		Tick: 100
+	icon:
+		Filename: terran_armory_icon.png
+		Offset: 0,0
+
+terran_missilesilo:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: terran_missilesilo_scnukesilo.png
+		Scale: 1.25
+		Offset: 0,6
+	idle:
+		Start: 4
+	dead:
+	make:
+		Start: 0
+		Length: 5
+		Tick: 100
+	icon:
+		Filename: terran_missilesilo_icon.png
+		Offset: 0,0
+
+####################################################################################################
+#		BUILDING PROTOSS
+####################################################################################################
+
+terran_scv:
+	Defaults:
+		Filename: terran_mobilecommandcenter_scscv.png
+		Offset: 0,-4
+	idle:
+		Length: 1
+		Facings: -16
+		Combine:
+			terran_scv-l:
+				Filename: terran_mobilecommandcenter_scscv.png
+				Length: 9
+			terran_scv-r:
+				Filename: terran_mobilecommandcenter_scscv.png
+				FlipX: True
+				Frames: 7, 6, 5, 4, 3, 2, 1, 0
+	move:
+		Length: 1
+		Facings: -16
+		Combine:
+			scscvrun-l:
+				Filename: scscvwalk.png
+				Length: 9
+			scscvrun-r:
+				Filename: scscvwalk.png
+				FlipX: True
+				Frames: 7, 6, 5, 4, 3, 2, 1, 0
+	shoot:
+		Length: 1
+		Facings: -16
+		Combine:
+			terran_scv-l:
+				Filename: terran_mobilecommandcenter_scscv.png
+				Start: 9
+				Length: 9
+			terran_scv-r:
+				Filename: terran_mobilecommandcenter_scscv.png
+				Start: 9
+				FlipX: True
+				Frames: 16, 15, 14, 13, 12, 11, 10, 9
+		Tick: 200
+	harvest:
+		Length: 1
+		Facings: -16
+		Combine:
+			terran_scv-l:
+				Filename: terran_mobilecommandcenter_scscv.png
+				Start: 9
+				Length: 9
+			terran_scv-r:
+				Filename: terran_mobilecommandcenter_scscv.png
+				Start: 9
+				FlipX: True
+				Frames: 16, 15, 14, 13, 12, 11, 10, 9
+		Tick: 200
+	dock:
+		Length: 1
+		Facings: -16
+		Combine:
+			terran_scv-l:
+				Filename: scscvfull.png
+				Length: 9
+			terran_scv-r:
+				Filename: scscvfull.png
+				FlipX: True
+				Frames: 7, 6, 5, 4, 3, 2, 1, 0
+	dock-loop:
+		Length: 1
+		Facings: -16
+		Combine:
+			terran_scv-l:
+				Filename: scscvfull.png
+				Length: 9
+			terran_scv-r:
+				Filename: scscvfull.png
+				FlipX: True
+				Frames: 7, 6, 5, 4, 3, 2, 1, 0
+	none:
+		Start: 1
+	icon:
+		Filename: terran_scv_icon.png
+		Offset: 0,0
+
+terran_marine:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: terran_promotion_madcap_scmarine.png
+		Offset: 0,-12
+	idle:
+		Facings: -8
+		Length: 1
+		Combine:
+			terran_marine-l:
+				Filename: terran_promotion_madcap_scmarine.png
+				Frames: 0, 2, 4, 6, 8
+			terran_marine-r:
+				Filename: terran_promotion_madcap_scmarine.png
+				FlipX: True
+				Frames: 6, 4, 3
+	stand:
+		Facings: -8
+		Combine:
+			terran_marine-l:
+				Filename: terran_promotion_madcap_scmarine.png
+				Frames: 0, 2, 4, 6, 8
+			terran_marine-r:
+				Filename: terran_promotion_madcap_scmarine.png
+				FlipX: True
+				Frames: 6, 4, 2
+	run:
+		Filename: terran_marine_scmarinewalk.png
+		Start: 0
+		Length: 9
+		Facings: -8
+		Tick: 80
+	shoot:
+		Filename: terran_marine_scmarineshoot.png
+		Length: 6
+		Facings: -8
+		Tick: 80
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: terran_marine_icon.png
+		Offset: 0,0
+
+terran_madcap:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: terran_promotion_madcap_scmarine.png
+		Offset: 0,-12
+	idle:
+		Filename: terran_promotion_madcap_scmadcapidle.png
+		Facings: 8
+		Length: 1
+
+	stand:
+		Filename: terran_promotion_madcap_scmadcapidle.png
+		Facings: 8
+		Length: 1
+
+	run:
+		Filename: terran_promotion_madcap_scmadcapwalk.png
+		Facings: -8
+		Length: 8
+		Tick: 80
+
+	shoot:
+		Filename: terran_promotion_madcap_scmadcapshoot.png
+		Facings: 8
+		Length: 6
+		Tick: 120
+
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: terran_promotion_madcap_icon.png
+		Offset: 0,0
+
+terran_firebat:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: terran_firebat_scfirebatidle.png
+		Offset: 0,-12
+	idle:
+		Filename: terran_firebat_scfirebatidle.png
+		Facings: -8
+	stand:
+		Filename: terran_firebat_scfirebatidle.png
+		Facings: -8
+	shoot:
+		Filename: terran_firebat_scfirebatshoot.png
+		Facings: -8
+		Tick: 120
+	run:
+		Filename: terran_firebat_scfirebatwalk.png
+		Length: 8
+		Facings: -8
+		Tick: 80
+	muzzle:
+		IgnoreWorldTint: true
+		Combine:
+			flame_n:
+				Filename: flame_n.shp
+				Length: *
+				Offset: 1,6
+			flame_nw:
+				Filename: flame_nw.shp
+				Length: *
+				Offset: 8,7
+			flame_w:
+				Filename: flame_w.shp
+				Length: *
+				Offset: 8,2
+			flame_sw:
+				Filename: flame_sw.shp
+				Length: *
+				Offset: 7,-2
+			flame_s:
+				Filename: flame_s.shp
+				Length: *
+				Offset: 1,-2
+			flame_se:
+				Filename: flame_se.shp
+				Length: *
+				Offset: -5,-2
+			flame_e:
+				Filename: flame_e.shp
+				Length: *
+				Offset: -7,2
+			flame_ne:
+				Filename: flame_ne.shp
+				Length: *
+				Offset: -7,8
+		Facings: 8
+		Length: 13
+	die:
+		Filename: napalm2.shp
+		Length: *
+	icon:
+		Filename: terran_firebat_icon.png
+		Offset: 0,0
+
+terran_harakan:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: terran_promotion_harakan_scharakanidle.png
+		Offset: 0,-12
+	idle:
+		Filename: terran_promotion_harakan_scharakanidle.png
+		Facings: -8
+	stand:
+		Filename: terran_promotion_harakan_scharakanidle.png
+		Facings: -8
+	shoot:
+		Filename: terran_promotion_harakan_scharakanshoot.png
+		Facings: -8
+		Tick: 120
+	run:
+		Filename: terran_promotion_harakan_scharakanwalk.png
+		Length: 8
+		Facings: -8
+		Tick: 80
+	muzzle:
+		IgnoreWorldTint: true
+		Combine:
+			flame_n:
+				Filename: flame_n.shp
+				Length: *
+				Offset: 1,6
+			flame_nw:
+				Filename: flame_nw.shp
+				Length: *
+				Offset: 8,7
+			flame_w:
+				Filename: flame_w.shp
+				Length: *
+				Offset: 8,2
+			flame_sw:
+				Filename: flame_sw.shp
+				Length: *
+				Offset: 7,-2
+			flame_s:
+				Filename: flame_s.shp
+				Length: *
+				Offset: 1,-2
+			flame_se:
+				Filename: flame_se.shp
+				Length: *
+				Offset: -5,-2
+			flame_e:
+				Filename: flame_e.shp
+				Length: *
+				Offset: -7,2
+			flame_ne:
+				Filename: flame_ne.shp
+				Length: *
+				Offset: -7,8
+		Facings: 8
+		Length: 13
+	die:
+		Filename: napalm2.shp
+		Length: *
+	icon:
+		Filename: terran_promotion_harakan_icon.png
+		Offset: 0,0
+
+terran_marauder:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: terran_promotion_warhound_terranmarauderspritesheet.png
+		Offset: 0,-15
+	idle:
+		Facings: 8
+	stand:
+		Facings: 8
+	shoot:
+		Start: 64
+		Facings: 8
+		Length: 3
+		Tick: 60
+	run:
+		Start: 8
+		Length: 7
+		Facings: 8
+		Tick: 120
+	die:
+		Start: 88
+		Length: 3
+	muzzle:
+		Scale: 1.25
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: terran_marauder_icon.png
+		Offset: 0,0
+
+terran_reaper:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: terran_reaper.png
+		Offset: 0,-15
+	idle:
+		Facings: 8
+	stand:
+		Facings: 8
+	shoot:
+		Start: 64
+		Facings: 8
+		Length: 8
+		Tick: 60
+	run:
+		Start: 8
+		Length: 7
+		Facings: 8
+		Tick: 120
+	die:
+		Start: 129
+		Length: 12
+	muzzle:
+		Scale: 1.25
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: terran_reaper_icon.png
+		Offset: 0,0
+
+terran_warhound:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: terran_promotion_warhound_tyridle.png
+		Scale: 1
+		Offset: 0,4
+	idle:
+		Filename: terran_promotion_warhound_tyridle.png
+		Facings: 8
+	stand:
+		Filename: terran_promotion_warhound_tyridle.png
+		Facings: 8
+	shoot:
+		Filename: terran_promotion_warhound_terrantyrarmfire.png
+		Facings: 8
+		Length: 9
+		Tick: 60
+	altshoot:
+		Filename: terran_promotion_warhound_tyrcannon.png
+		Facings: 8
+		Length: 9
+		Tick: 60
+	run:
+		Filename: terran_promotion_warhound_tyrwalk.png
+		Length: 14
+		Facings: 8
+		Tick: 168
+	hunker:
+		Filename: terran_promotion_warhound_tyrhunker.png
+		Frames: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 68, 67, 66, 65, 64, 63, 62, 61, 60, 59, 58, 57, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 82, 81, 80, 79, 78, 77, 76, 75, 74, 73, 72, 71, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 96, 95, 94, 93, 92, 91, 90, 89, 88, 87, 86, 85, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 110, 109, 108, 107, 106, 105, 104, 103, 102, 101, 100, 99
+		Length: 26
+		Facings: 8
+		Tick: 260
+	die:
+		Filename: terran_promotion_warhound_terranmarauderspritesheet.png
+		Start: 88
+		Length: 3
+	muzzle:
+		Scale: 1.25
+		Filename: gunfire2.shp
+		Length: *
+		Offset: 0,8
+	icon:
+		Filename: terran_promotion_warhound_icon.png
+		Offset: 0,0
+
+terran_ghost:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: terran_ghost.shp
+		Offset: 0,-12
+	idle:
+		Filename: terran_ghost_scghostidle.png
+		Facings: -8
+	stand:
+		Filename: terran_ghost_scghostidle.png
+		Facings: -8
+	shoot:
+		Filename: terran_ghost_scghostshoot.png
+		Facings: -8
+		Length: 3
+		Tick: 80
+	run:
+		Filename: terran_ghost_scghostwalk.png
+		Length: 9
+		Facings: -8
+		Tick: 100
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: terran_ghost_icon.png
+		Offset: 0,0
+
+terran_specter:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: terran_promotion_spectreandmedivac_scsilvertongueidle.png
+		Offset: 0,-12
+	idle:
+		Filename: terran_promotion_spectreandmedivac_scsilvertongueidle.png
+		Facings: -8
+	stand:
+		Filename: terran_promotion_spectreandmedivac_scsilvertongueidle.png
+		Facings: -8
+	shoot:
+		Filename: terran_promotion_spectreandmedivac_scsilvertongueshoot.png
+		Facings: -8
+		Length: 2
+		Tick: 80
+	run:
+		Filename: terran_promotion_spectreandmedivac_scsilvertonguewalk.png
+		Length: 9
+		Facings: -8
+		Tick: 100
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: terran_promotion_spectreandmedivac_icon.png
+		Offset: 0,0
+
+terran_medic:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: terran_medic_scmedicidle.png
+		Offset: 0,-12
+	idle:
+		Facings: -8
+	stand:
+		Facings: -8
+	shoot:
+		Filename: terran_medic_scmedicshoot.png
+		Length: 4
+		Facings: -8
+		Tick: 80
+	run:
+		Filename: terran_medic_scmedicwalk.png
+		Length: 7
+		Facings: -8
+		Tick: 100
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: terran_medic_icon.png
+		Offset: 0,0
+
+terran_jimraynor:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: terran_promotion_madcap_scmarine.png
+		Scale: 1.25
+		Offset: 0,-8
+	idle:
+		Facings: -8
+		Length: 1
+		Combine:
+			terran_marine-l:
+				Filename: terran_promotion_madcap_scmarine.png
+				Frames: 0, 2, 4, 6, 8
+			terran_marine-r:
+				Filename: terran_promotion_madcap_scmarine.png
+				FlipX: True
+				Frames: 6, 4, 3
+	stand:
+		Facings: -8
+		Combine:
+			terran_marine-l:
+				Filename: terran_promotion_madcap_scmarine.png
+				Frames: 0, 2, 4, 6, 8
+			terran_marine-r:
+				Filename: terran_promotion_madcap_scmarine.png
+				FlipX: True
+				Frames: 6, 4, 2
+	run:
+		Filename: terran_marine_scmarinewalk.png
+		Start: 0
+		Length: 9
+		Facings: -8
+		Tick: 80
+	Scale: 1.3
+	shoot:
+		Filename: terran_marine_scmarineshoot.png
+		Length: 6
+		Facings: -8
+		Tick: 80
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+		Scale: 1
+		Offset: 0,4
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: terran_jimraynor_icon.shp
+		Offset: 0,0
+
+terran_vulture:
+	Defaults:
+		Filename: terran_vulture.png
+	idle:
+		Length: 1
+		Facings: -16
+		Combine:
+			terran_vulture-l:
+				Filename: terran_vulture.png
+				Length: *
+			terran_vulture-r:
+				Filename: terran_vulture.png
+				FlipX: True
+				Frames: 7, 6, 5, 4, 3, 2, 1, 0
+	icon:
+		Filename: terran_vulture_icon.png
+
+terran_siegetank:
+	Defaults:
+		Filename: terran_siegetank_scsiegetankidle.png
+	idle:
+		Filename: terran_siegetank_scsiegetankidle.png
+		Length: 1
+		Facings: -16
+	run:
+		Filename: terran_siegetank_scsiegetankwalk.png
+		Length: 3
+		Facings: -16
+		Tick: 75
+	turret:
+		Filename: terran_siegetank_scsiegetankturret.png
+		Facings: -16
+	deployed:
+		Filename: terran_siegetank_scsiegetanksiege.png
+		Facings: -16
+	muzzle:
+		Filename: terran_siegetank_scsiegetanksiegeshoot.png
+		Scale: 1
+		Length: *
+	make:
+		Filename: terran_siegetank_scsiegetankdeploy.png
+		Length: *
+		Tick: 110
+	icon:
+		Filename: terran_siegetank_icon.png
+
+sccloak:
+	icon:
+		Filename: terran_upgrade_cloakupgrade_icon.png
+
+scsiegemode:
+	icon:
+		Filename: terran_upgrade_advancedsiegemode_icon.png
+
+scyamatocannon:
+	icon:
+		Filename: terran_upgrade_yamatocannonandtacticaljumpupgrade_icon.png
+
+terran_matador:
+	Defaults:
+		Filename: terran_promotion_matador_scmatadoridle.png
+	idle:
+		Filename: terran_promotion_matador_scmatadoridle.png
+		Length: 1
+		Facings: -32
+	run:
+		Filename: terran_promotion_matador_scmatadorwalk.png
+		Length: 7
+		Facings: -32
+		Tick: 100
+	turret:
+		Filename: terran_promotion_matador_scmatadorturret.png
+		Facings: -32
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	muzzleflame:
+		IgnoreWorldTint: true
+		Combine:
+			flame_n:
+				Filename: flame_n.shp
+				Length: *
+				Offset: 3,6
+			flame_nw:
+				Filename: flame_nw.shp
+				Length: *
+				Offset: 8,7
+			flame_w:
+				Filename: flame_w.shp
+				Length: *
+				Offset: 8,2
+			flame_sw:
+				Filename: flame_sw.shp
+				Length: *
+				Offset: 7,-2
+			flame_s:
+				Filename: flame_s.shp
+				Length: *
+				Offset: 3,-2
+			flame_se:
+				Filename: flame_se.shp
+				Length: *
+				Offset: -5,-2
+			flame_e:
+				Filename: flame_e.shp
+				Length: *
+				Offset: -7,2
+			flame_ne:
+				Filename: flame_ne.shp
+				Length: *
+				Offset: -7,8
+		Facings: 32
+		Length: 2
+	make:
+		Filename: terran_promotion_matador_scmatadormake.png
+		Facings: -16
+		Length: 7
+		Tick: 35
+	deployed:
+		Filename: terran_promotion_matador_scmatadordeployed.png
+		Facings: -32
+	icon:
+		Filename: terran_promotion_matador_icon.png
+
+terran_cyclone:
+	Defaults:
+		Filename: terran_promotion_cyclone_cyclonechassis.png
+		Scale: 0.75
+	idle:
+		Scale: 1
+		Filename: terran_promotion_cyclone_cyclonechassis.png
+		Frames: 0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124, 128
+		Facings: 32
+	move:
+		Scale: 1
+		Filename: terran_promotion_cyclone_cyclonechassis.png
+		Length: 4
+		Facings: 32
+		Tick: 16
+	turret:
+		Scale: 1
+		Filename: terran_promotion_cyclone_cycloneturret.png
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+		Scale: 1.25
+	icon:
+		Filename: terran_promotion_cyclone_icon.png
+
+terran_goliath:
+	Defaults:
+		Filename: terran_goliath_scgoliathidle.png
+	idle:
+		Facings: -8
+	stand:
+		Facings: -8
+	turret:
+		Filename: terran_goliath_scgoliathturret.png
+		Facings: -16
+	run:
+		Filename: terran_goliath_scgoliathwalk.png
+		Start: 0
+		Length: 10
+		Facings: -8
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: terran_goliath_icon.png
+
+terran_goliathmk2:
+	Defaults:
+		Filename: terran_promotion_goliathmk2_scgoliathmk2idle.png
+	idle:
+		Facings: -8
+	stand:
+		Facings: -8
+	turret:
+		Filename: terran_promotion_goliathmk2_scgoliathmk2turret.png
+		Facings: -32
+	run:
+		Filename: terran_promotion_goliathmk2_scgoliathmk2walk.png
+		Start: 0
+		Length: 12
+		Facings: -8
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: terran_promotion_goliathmk2_icon.png
+
+terran_wraith:
+	idle:
+		Length: 1
+		Facings: -32
+		Combine:
+			terran_wraith-l:
+				Filename: scwraith.png
+				Length: *
+			terran_wraith-r:
+				Filename: scwraith.png
+				FlipX: True
+				Frames: 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+	icon:
+		Filename: terran_wraith_icon.png
+
+terran_raven:
+	Defaults:
+		Filename: terran_promotion_raven_scraven.png
+	idle:
+		Length: 1
+		Facings: 64
+	icon:
+		Filename: terran_promotion_raven_icon.png
+
+terran_sundog:
+	idle:
+		Length: 1
+		Facings: -32
+		Filename: terran_promotion_sundog_sundogidle.png
+	icon:
+		Filename: terran_promotion_sundog_icon.png
+
+terran_wyvern:
+	idle:
+		Length: 1
+		Facings: -32
+		Filename: terran_promotion_wyvern_scwyvern.png
+	icon:
+		Filename: terran_promotion_wyvern_icon.png
+
+terran_valkyrie:
+	Defaults:
+		Filename: terran_valkyrie.png
+	idle:
+		Filename: terran_valkyrie.png
+		Length: 1
+		Facings: -32
+		Combine:
+			terran_valkyrie-l:
+				Filename: terran_valkyrie.png
+				Length: *
+			terran_valkyrie-r:
+				Filename: terran_valkyrie.png
+				FlipX: True
+				Frames: 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+	icon:
+		Filename: terran_valkyrie_icon.png
+
+terran_sciencevessel:
+	idle:
+		Filename: terran_sciencevessel.png
+	icon:
+		Filename: terran_sciencevessel_icon.png
+
+terran_dropship:
+	Defaults:
+		Filename: terran_dropship.png
+	idle:
+		Filename: terran_dropship.png
+		Length: 1
+		Facings: -32
+		Combine:
+			terran_valkyrie-l:
+				Filename: terran_dropship.png
+				Length: *
+			terran_valkyrie-r:
+				Filename: terran_dropship.png
+				FlipX: True
+				Frames: 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+	icon:
+		Filename: terran_dropship_icon.png
+
+terran_pythean:
+	Defaults:
+		Filename: terran_promotion_pythean_scpythean.png
+	idle:
+		Filename: terran_promotion_pythean_scpythean.png
+		Length: 1
+		Facings: -32
+	icon:
+		Filename: terran_promotion_pythean_icon.png
+
+terran_medivac:
+	Defaults:
+		Filename: terran_medivac.png
+	idle:
+		Filename: terran_medivac.png
+		Length: 1
+		Facings: -32
+	icon:
+		Filename: terran_medivac_icon.png
+
+terran_battlecruiser:
+	Defaults:
+		Filename: terran_battlecruiser.png
+	idle:
+		Filename: terran_battlecruiser.png
+		Length: 1
+		Facings: -32
+		Combine:
+			terran_battlecruiser-l:
+				Filename: terran_battlecruiser.png
+				Length: *
+			terran_battlecruiser-r:
+				Filename: terran_battlecruiser.png
+				FlipX: True
+				Frames: 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+	move:
+		Filename: terran_battlecruiser.png
+		Length: 1
+		Facings: -32
+		Combine:
+			scbattlecruiserrun-l:
+				Filename: scbattlecruiserwalk.png
+				Length: *
+			scbattlecruiserrun-r:
+				Filename: scbattlecruiserwalk.png
+				FlipX: True
+				Frames: 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+	shoot:
+		Length: 4
+		Facings: -32
+		Combine:
+			scbattlecruisershoot-l:
+				Filename: scbattlecruisershoot.png
+				Length: *
+			scbattlecruisershoot-r:
+				Filename: scbattlecruisershoot.png
+				FlipX: True
+				Frames: 63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: terran_battlecruiser_icon.png
+
+terran_phobos:
+	Defaults:
+		Filename: terran_promotion_phobos_scphobos.png
+	idle:
+		Filename: terran_promotion_phobos_scphobos.png
+		Length: 1
+		Facings: -32
+	move:
+		Filename: terran_promotion_phobos_scphobos.png
+		Length: 1
+		Facings: -32
+	icon:
+		Filename: terran_promotion_phobos_icon.png
+
+terran_mobilecommandcenter:
+	Defaults:
+		Filename: terran_mobilecommandcenter_scscv.png
+		Scale: 2
+		Offset: 0,-4
+	idle:
+		Length: 1
+		Facings: -16
+		Combine:
+			terran_scv-l:
+				Filename: terran_mobilecommandcenter_scscv.png
+				Length: 9
+			terran_scv-r:
+				Filename: terran_mobilecommandcenter_scscv.png
+				FlipX: True
+				Frames: 7, 6, 5, 4, 3, 2, 1, 0
+	die:
+	icon:
+		Offset: 0,0
+		Filename: terran_mobilecommandcenter_icon.png
+	mmicon:
+		Filename: terran_mobilecommandcenter_customicon.shp
+		Start: 9
+
+terran_upgrade_stimpack:
+	icon:
+		Filename: terran_upgrade_stimpack_icon.png
+
+terran_upgrade_u238shells:
+	icon:
+		Filename: terran_upgrade_u238shells_icon.png
+
+terran_upgrade_infantryweaponslevel1:
+	icon:
+		Filename: terran_upgrade_infantryweaponslevel2_icon.png
+
+terran_upgrade_vehicleweaponslevel1:
+	icon:
+		Filename: terran_upgrade_vehicleweaponslevel2_icon.png
+
+terran_upgrade_infantryarmorlevel1:
+	icon:
+		Filename: terran_upgrade_infantryarmorlevel2_icon.png
+
+terran_upgrade_vehicleplatinglevel1:
+	icon:
+		Filename: terran_upgrade_vehicleplatinglevel2_icon.png
+
+terran_upgrade_shipweaponslevel1:
+	icon:
+		Filename: terran_upgrade_shipweaponslevel2_icon.png
+
+terran_upgrade_shipplatinglevel1:
+	icon:
+		Filename: terran_upgrade_shipplatinglevel2_icon.png
+
+upscrefinery1:
+	icon:
+		Filename: terran_vespenegascollector_icon.shp

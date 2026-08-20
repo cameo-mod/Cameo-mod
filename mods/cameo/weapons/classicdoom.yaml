@@ -4,7 +4,7 @@
 DoomPistol:
 	Inherits: ^LightMG
 	ReloadDelay: 24
-	Range: 4c0
+	Range: 4096
 	Report: DSPISTOL.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 1300
@@ -12,7 +12,7 @@ DoomPistol:
 			None: 108
 DoomShotgun:
 	ReloadDelay: 28
-	Range: 4c0
+	Range: 4096
 	Report: DSSHOTGN.wav
 	Projectile: Bullet
 		Speed: 900
@@ -32,11 +32,11 @@ DoomShotgun:
 
 DoomShotgunGarrison:
 	Inherits: DoomShotgun
-	Range: 6c0
+	Range: 6144
 	ReloadDelay: 14
 DoomSuperShotgun:
 	ReloadDelay: 35
-	Range: 4c0
+	Range: 4096
 	Report: DSDSHTGN.wav
 	Projectile: Bullet
 		Speed: 950
@@ -65,7 +65,7 @@ WolfenSSPistol:
 WolfenMutantGun:
 	Inherits: WolfenPistol
 	ReloadDelay: 4
-	Range: 6c0
+	Range: 6144
 WolfenGrooseMinigun:
 	Inherits: WolfenPistol
 	Report: DSWMGUN.wav
@@ -78,7 +78,7 @@ WolfenGrooseMinigun:
 WolfenMadOttoPistol:
 	Inherits: ^LightMG
 	ReloadDelay: 20
-	Range: 7c0
+	Range: 7168
 	Report: WDSPISTOL.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 15000
@@ -86,7 +86,7 @@ WolfenMadOttoPistol:
 			None: 108
 WolfenMechaHetlerMinigun:
 	Inherits: WolfenGrooseMinigun
-	Range: 7c0
+	Range: 7168
 	Burst: 16
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
@@ -95,7 +95,7 @@ WolfenMechaHetlerMinigun:
 		Damage: 4500
 WolfenMechaHetlerMinigun2:
 	Inherits: WolfenGrooseMinigun
-	Range: 7c0
+	Range: 7168
 	Burst: 8
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
@@ -105,7 +105,7 @@ WolfenMechaHetlerMinigun2:
 DoomMinigun:
 	Inherits: DoomPistol
 	ReloadDelay: 4
-	Range: 5c0
+	Range: 5120
 	Report: DSPISTOL.wav
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
@@ -113,7 +113,7 @@ DoomMinigun:
 
 DoomGarrisonPistol:
 	ReloadDelay: 5
-	Range: 6c0
+	Range: 6144
 	Report: DSPISTOL.wav
 	Projectile: Bullet
 		Speed: 1c682
@@ -135,7 +135,7 @@ DoomGarrisonPistol:
 DoomGarrisonMinigun:
 	Inherits: DoomGarrisonPistol
 	ReloadDelay: 4
-	Range: 7c0
+	Range: 7168
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground, Air
@@ -176,17 +176,17 @@ DoomPlasma:
 		ValidTargets: Ground, Water, Air
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, wall, Husk
 
 DoomGarrisonPlasma:
 	Inherits: DoomPlasma
 	ReloadDelay: 25
-	Range: 7c0
+	Range: 7168
 
 WolfenOficialPistol:
 	Inherits: ^LightMG
 	ReloadDelay: 20
-	Range: 7c0
+	Range: 7168
 	Report: WDSPISTOL.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 6000
@@ -200,8 +200,8 @@ WolfenTigerGun:
 WolfenFlak88:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 32
-	Range: 11c0
-	MinRange: 3c0
+	Range: 11264
+	MinRange: 3072
 	Report: WDSBAREXP.wav
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -225,15 +225,15 @@ WolfenFlak88:
 		ImpactSounds: xplosml2.aud
 	Warhead@2Eff: CreateEffect
 		Explosions: flak_explosion_ground
-		ValidTargets: Air, Ground, Water, Trees
+		ValidTargets: Air, Ground, Water
 	Warhead@4EffWater: CreateEffect
 		Explosions: med_splash
 	
 WolfenFlak88AA:
 	Inherits: ^AACannon
 	ReloadDelay: 32
-	Range: 11c0
-	MinRange: 3c0
+	Range: 11264
+	MinRange: 3072
 	Report: WDSBAREXP.wav
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air, Ground, Water
@@ -249,9 +249,9 @@ WolfenSchabbsMutate:
 	Inherits: ^BallisticWeapon
 	Report: DSWBO3ATK.wav
 	ValidTargets: Ground, Infantry
-	InvalidTargets: Vehicle, Water, Structure, Wall, Husk
+	InvalidTargets: Vehicle, Water, Structure, wall, Husk
 	ReloadDelay: 30
-	Range: 4c0
+	Range: 4096
 	Report: tnkfire3.aud
 	Projectile: Bullet
 		Speed: 853
@@ -273,8 +273,10 @@ WolfenChronoDemons:
 		Actors: wolfdemon, wolfdemon, wolfdemon, wolfdemon, wolfdemon
 
 SpearofDestiny:
-	Inherits: ^TeslaWeapon
-	Range: 16c0
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Range: 16384
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
 		Versus:

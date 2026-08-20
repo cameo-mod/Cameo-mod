@@ -1,0 +1,131 @@
+Container@COMMANDER_TREE_OVERLAY:
+	Width: WINDOW_WIDTH
+	Height: WINDOW_HEIGHT
+	Logic: CommanderTreeWindowLogic
+	Children:
+		LogicKeyListener@HOTKEYS:
+		Container@COMMANDER_TREE_WINDOW:
+			Width: 400
+			Height: 350
+			X: -9999
+			Y: -9999
+			Children:
+				ColorBlock@WINDOW_BG:
+					Width: PARENT_WIDTH
+					Height: PARENT_HEIGHT
+					Color: 101520CC
+				DragHandle@DRAG_HANDLE:
+					Width: PARENT_WIDTH
+					Height: 148
+					Color: 00000000
+				Container@FACTION_INSIGNIA_FRAME:
+					X: -112
+					Y: 18
+					Width: 112
+					Height: 112
+					Children:
+						RoundedImage@FACTION_INSIGNIA:
+							Width: 112
+							Height: 112
+							CornerRadius: 22
+							RoundTopLeft: True
+							RoundBottomLeft: True
+							ImageCollection: sidebar
+							ImageName: insignia
+							Logic: AddFactionSuffixLogic
+				Label@TITLE:
+					X: 4
+					Y: 18
+					Font: Bold
+					Text: commander-tree.title
+				Container@HEADER_STATS:
+					X: 4
+					Y: 56
+					Width: PARENT_WIDTH - 8
+					Height: 72
+					Children:
+						Label@RANK_LABEL:
+							Width: 165
+							Font: Bold
+							Text: promotion-counter.rank
+						Label@RANK_VALUE:
+							X: 165
+							Width: PARENT_WIDTH - 165
+							Font: Bold
+						Label@POINTS_LABEL:
+							Y: 24
+							Width: 165
+							Font: Bold
+							Text: commander-tree.points-label
+						Label@POINTS_VALUE:
+							Y: 24
+							X: 165
+							Width: PARENT_WIDTH - 165
+							Font: Bold
+						Label@PROGRESS_LABEL:
+							Y: 48
+							Width: 165
+							Font: Bold
+							Text: promotion-counter.progress
+						Label@PROGRESS_VALUE:
+							Y: 48
+							X: 165
+							Width: PARENT_WIDTH - 165
+							Font: Bold
+				Button@CLOSE_BUTTON:
+					X: PARENT_WIDTH - WIDTH - 4
+					Y: 18
+					Width: 32
+					Height: 32
+					Background: button
+					TooltipText: commander-tree.close
+					Children:
+						Label@TEXT:
+							Width: PARENT_WIDTH
+							Height: PARENT_HEIGHT
+							Align: Center
+							VAlign: Middle
+							Font: Bold
+							Text: X
+				ScrollPanel@TREE_SCROLL:
+					X: 4
+					Y: 148
+					Width: PARENT_WIDTH - 16
+					Height: PARENT_HEIGHT - 172
+					ScrollBar: Hidden
+					BorderWidth: 0
+					Children:
+						CommanderTree@COMMANDER_TREE:
+							TooltipContainer: COMMANDER_TREE_TOOLTIP
+							IconWidth: 62
+							IconHeight: 46
+							HorizontalSpacing: 62
+							VerticalSpacing: 46
+							ContentPadding: 8
+							EdgeColor: FFFFFFFF
+							ArrowWidth: 2
+							ArrowHeadLength: 5
+							ArrowHeadWidth: 3
+							ArrowNodePadding: 4
+							OwnedBorderColor: 00CC44FF
+				Container@TREE_HSCROLL:
+					X: 4
+					Y: PARENT_HEIGHT - 24
+					Width: PARENT_WIDTH - 16
+					Height: 20
+					Visible: False
+					Children:
+						CommanderTreeDismiss@HSCROLL_TRACK:
+							Width: PARENT_WIDTH
+							Height: PARENT_HEIGHT
+							Color: 12161AFF
+						DragHandle@HSCROLL_THUMB:
+							Y: 2
+							Width: 60
+							Height: PARENT_HEIGHT - 4
+							Color: 505866FF
+				TooltipContainer@COMMANDER_TREE_TOOLTIP:
+					X: 0
+					Y: 0
+					Width: PARENT_WIDTH
+					Height: PARENT_HEIGHT

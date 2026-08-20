@@ -183,13 +183,13 @@ tsmcnealmech:
 	muzzle: minigun
 		Length: 6
 		Facings: 8
-	overload: DATA.R8
+	overload: ra2_allies_upgrade_paratroopers_data.r8
 		Start: 3839
 		Length: 14
 		Tick: 130
 		BlendMode: Additive
 		AddExtension: false
-	icon: tswolverineicon.shp
+	icon: ts_gdi_wolverine_icon.shp
 		AddExtension: False
 
 tsmcnealmechdrop:
@@ -410,6 +410,7 @@ angel:
 		Facings: 4
 		Tick: 80
 	icon:
+		Offset: 0,0
 		Start: 8
 
 house:

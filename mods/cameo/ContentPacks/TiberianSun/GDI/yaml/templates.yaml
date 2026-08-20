@@ -1,0 +1,61 @@
+^SERETraining:
+	GrantConditionOnPrerequisite@ts_gdi_upgrade_seretraining:
+		Condition: ts_gdi_upgrade_seretraining
+		Prerequisites: ts_gdi_upgrade_seretraining
+	SpeedMultiplier@ts_gdi_upgrade_seretraining:
+		RequiresCondition: ts_gdi_upgrade_seretraining
+		Modifier: 120
+	DamageMultiplier@ts_gdi_upgrade_seretraining:
+		RequiresCondition: ts_gdi_upgrade_seretraining
+		Modifier: 75
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_seretraining
+
+^CeramicArmor:
+	GrantConditionOnPrerequisite@ts_gdi_upgrade_ceramicarmor:
+		Condition: ts_gdi_upgrade_ceramicarmor
+		Prerequisites: ts_gdi_upgrade_ceramicarmor
+	DamageMultiplier@ts_gdi_upgrade_ceramicarmor:
+		RequiresCondition: ts_gdi_upgrade_ceramicarmor
+		Modifier: 75
+	SpeedMultiplier@ts_gdi_upgrade_ceramicarmor:
+		RequiresCondition: ts_gdi_upgrade_ceramicarmor
+		Modifier: 110
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_ceramicarmor
+
+^MechEngineering:
+	GrantConditionOnPrerequisite@ts_gdi_upgrade_mechengineering:
+		Condition: ts_gdi_upgrade_mechengineering
+		Prerequisites: ts_gdi_upgrade_mechengineering
+	DamageMultiplier@ts_gdi_upgrade_mechengineering:
+		RequiresCondition: ts_gdi_upgrade_mechengineering
+		Modifier: 80
+	SpeedMultiplier@ts_gdi_upgrade_mechengineering:
+		RequiresCondition: ts_gdi_upgrade_mechengineering
+		Modifier: 125
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechengineering
+
+^SonicWeaponry:
+	GrantConditionOnPrerequisite@ts_gdi_upgrade_sonicweaponry:
+		Condition: ts_gdi_upgrade_sonicweaponry
+		Prerequisites: ts_gdi_upgrade_sonicweaponry
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_sonicweaponry
+
+^RailgunWeaponry:
+	# FirepowerMultiplier@ts_gdi_upgrade_railgunweaponry:
+	# 	RequiresCondition: ts_gdi_upgrade_railgunweaponry
+	# 	Modifier: 125
+	# ReloadDelayMultiplier@ts_gdi_upgrade_railgunweaponry:
+	# 	RequiresCondition: ts_gdi_upgrade_railgunweaponry
+	# 	Modifier: 110
+	# InaccuracyMultiplier@ts_gdi_upgrade_railgunweaponry:
+	# 	RequiresCondition: ts_gdi_upgrade_railgunweaponry
+	# 	Modifier: 25
+	GrantConditionOnPrerequisite@ts_gdi_upgrade_railgunweaponry:
+		Condition: ts_gdi_upgrade_railgunweaponry
+		Prerequisites: ts_gdi_upgrade_railgunweaponry
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_railgunweaponry

@@ -1,0 +1,575 @@
+futuretech_constructionyard:
+	Inherits: ^RA2Building
+	Inherits@conyard: ^Conyard
+	Inherits@shape: ^5x3Shape
+	Inherits@sell: ^FutureTechSpawnActorsOnSell
+	Tooltip:
+		Name: FutureTech Construction Yard
+	Buildable:
+		Description: actor_futuretech_egcnst.description
+	Building:
+		Footprint: =xxx= xxxxx =xxx=
+		Dimensions: 5,3
+	Transforms:
+		IntoActor: futuretech_mobileconstructionvehicle
+		Offset: 1,1
+		Facing: 432
+	WithBuildingPlacedOverlay:
+	ProvidesPrerequisite@ra2awall:
+		Prerequisite: ra2awall
+	WithIdleOverlay@fans:
+		Sequence: idle-fans
+		RequiresCondition: !build-incomplete && !damaged
+	WithIdleOverlay@fans-damaged:
+		Sequence: damaged-idle-fans
+		RequiresCondition: !build-incomplete && damaged
+	Exit@1:
+		SpawnOffset: 213,-128,0
+		ExitCell: 1,2
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2future2
+	RenderSprites:
+		PlayerPalette: playerra2future2
+	Targetable@TechStealerInfiltrate:
+		TargetTypes: TechStealerInfiltrate
+	InfiltrateForSupportPower:
+		Proxy: egcnst_infiltrated.futu
+		Types: TechStealerInfiltrate
+
+futuretech_thermalpowerplant:
+	Inherits: ^RA2Building
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^FutureTechSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Thermal Power Plant
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Building, RABuilding
+		Description: template_power.description
+		Prerequisites: ~futuretech_constructionyard
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 200000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: 250
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience:
+		ValidTypes: building
+	WithIdleOverlay@glow:
+		Sequence: idle-glow
+		RequiresCondition: !build-incomplete && !damaged
+	WithIdleOverlay@glow-damaged:
+		Sequence: damaged-idle-glow
+		RequiresCondition: !build-incomplete && damaged
+	ProvidesPrerequisite@buildingname:
+
+futuretech_refinery:
+	Inherits: ^RA2Building
+	Inherits@sell: ^FutureTechSpawnActorsOnSell
+	Inherits@ref: ^Refinery
+	Inherits@shape: ^4x3Shape
+	Tooltip:
+		Name: FutureTech Refinery
+	Buildable:
+		Prerequisites: ~futuretech_constructionyard, futuretech_thermalpowerplant
+		Description: actor_futuretech_egrefn.description
+	Building:
+		Footprint: xxx= xxx= x+==
+		Dimensions: 4,3
+	DockHost:
+		Type: Unload
+		DockAngle: 640
+		DockOffset: 1086,1086,0
+	DrawLineToTarget:
+	FreeActor:
+		Actor: futuretech_prospector
+		SpawnOffset: 3,2
+		Facing: 128
+	SelectionDecorations:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithIdleOverlay@bib:
+		Sequence: idle-bib
+	WithIdleOverlay@drill:
+		Sequence: idle-drill
+	WithIdleOverlay@chim:
+		Sequence: idle-chim
+		RequiresCondition: !build-incomplete
+	RenderSprites:
+		PlayerPalette: playerra2future1
+
+futuretech_troopgate:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^FutureTechSpawnActorsOnSell
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Tooltip:
+		Name: Troop Gate
+	Buildable:
+		Prerequisites: ~futuretech_constructionyard, futuretech_thermalpowerplant
+		Description: actor_futuretech_egpile.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -700,800,0
+		ExitCell: 0,2
+	Exit@2:
+		SpawnOffset: 100,1200,0
+		ExitCell: 1,3
+	SelectionDecorations:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithIdleOverlay@light:
+		Sequence: idle-light
+		RequiresCondition: !build-incomplete
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2future1
+		DeathPaletteIsPlayerPalette: true
+	WithProductionDoorOverlay:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-tele
+	RenderSprites:
+		PlayerPalette: playerra2future1
+
+futuretech_warpgate:
+	Inherits: ^RA2DefaultWeap
+	Inherits@sell: ^FutureTechSpawnActorsOnSell
+	Tooltip:
+		Name: Warp Gate
+	Buildable:
+		Prerequisites: ~futuretech_constructionyard, futuretech_refinery
+		Description: actor_futuretech_egweap2.description
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@flag2:
+		Sequence: idle-flag2
+		RequiresCondition: !build-incomplete
+	WithProductionOverlay@fan:
+		Sequence: overlay-fan
+		RequiresCondition: !build-incomplete && !warp-producing
+	WithIdleOverlay@bib:
+		Sequence: bib
+	WithProductionDoorOverlay:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-tele
+	GrantConditionOnProduction@fan:
+		Condition: warp-producing
+		Duration: 68
+		ShowSelectionBar: false
+	RenderSprites:
+		PlayerPalette: playerra2future1
+
+futuretech_robotcontrolcenter:
+	Inherits: ^RA2Building
+	Inherits@radar: ^RadarBuilding
+	Inherits@shape: ^2x2Shape
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Inherits@sell: ^FutureTechSpawnActorsOnSell
+	Tooltip:
+		Name: Robot Control Center
+	Selectable:
+		Bounds: 2048, 2048
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 140
+		Prerequisites: ~futuretech_constructionyard, futuretech_warpgate
+		Description: actor_yrgarobo.description
+	Building:
+		Footprint: == xx
+		Dimensions: 2,2
+	WithSpriteBody:
+		PauseOnCondition: disabled
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@robotcontrol:
+		Prerequisite: robotcontrol
+		RequiresCondition: !disabled
+
+	RenderSprites:
+		Image: yrgarobo
+futuretech_transmissioncenter:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^FutureTechSpawnActorsOnSell
+	Inherits@radar: ^RadarBuilding
+	Tooltip:
+		Name: Transmission Center
+	Buildable:
+		Prerequisites: ~futuretech_constructionyard, futuretech_robotcontrolcenter
+		Description: actor_futuretech_egtf.description
+	Building:
+		Footprint: === xxx xxx
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	SelectionDecorations:
+	WithIdleOverlay@light:
+		Sequence: idle-light
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@light2:
+		Sequence: idle-light2
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@lighta:
+		Sequence: idle-lighta
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@lightb:
+		Sequence: idle-lightb
+		RequiresCondition: !build-incomplete
+	RenderSprites:
+		PlayerPalette: playerra2future2
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+
+futuretech_launchpad:
+	Inherits: ^RA2Building
+	Inherits@shape: ^5x3Shape
+	Inherits@sell: ^FutureTechSpawnActorsOnSell
+	Inherits@hpad: ^IsAircraftFactory
+	Buildable:
+		Queue: Building, RABuilding
+		Prerequisites: ~futuretech_constructionyard, futuretech_transmissioncenter
+		Description: actor_gaairc.description
+	Tooltip:
+		Name: FutureTech Launch Pad
+	Building:
+		Footprint: =xx== xxxxx ==xx=
+		Dimensions: 5,3
+	Exit@1:
+		ExitCell: 1,1
+		Facing: 768
+		ProductionTypes: Aircraft, RAAircraft
+	Exit@HARBINGER:
+		ExitCell: 1,1
+		Facing: 768
+		SpawnOffset: 0,0,4000
+		ProductionTypes: futuretech_harbingergunship
+	Production@NORMAL:
+		Produces: Aircraft, futuretech_harbingergunship
+	Production@CLASSICPRODUCTIONQUEUES:
+		Produces: RAAircraft, futuretech_harbingergunship
+	Reservable:
+	SpawnNeighboringActors:
+		ActorTypes: dummy_dock
+		Locations: 0,1, 2,1, 1,0
+		KillOnRemove: false
+	ParatroopersPower@ra2paratroopers:
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: futuretech_launchpad
+		OrderName: USA Paratroopers
+		IconImage: futuretech_launchpad
+		Icons:
+			1: icon2
+		ChargeInterval: 6000
+		Names:
+			1: Airborne
+		Descriptions:
+			1: power_paratroopers.description
+		DropItems:
+			1: futuretech_scoutdroid,futuretech_cannondroid,futuretech_scoutdroid,futuretech_missiledroid,futuretech_scoutdroid,futuretech_shotgundroid,futuretech_scoutdroid,futuretech_cannondroid,futuretech_scoutdroid,futuretech_missiledroid,futuretech_scoutdroid,futuretech_shotgundroid,futuretech_scoutdroid
+		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
+		SelectTargetSpeechNotification: SelectTarget
+		IncomingSpeechNotification: EnemyUnitsApproaching
+		AllowImpassableCells: false
+		QuantizedFacings: 8
+		CameraActor: camera.paradrop
+		DisplayBeacon: true
+		BeaconPosters:
+			1: pinficon
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		UnitTypes:
+			1: ra2cplane
+		SquadSizes:
+			1: 3
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+	SupportPowerChargeBar:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	# WithIdleOverlay@top:
+	# 	Sequence: idle-top
+	# 	PauseOnCondition: disabled
+	# 	RequiresCondition: !build-incomplete
+	WithIdleOverlay@bottom:
+		Sequence: idle-bottom
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@mid:
+		Sequence: idle-mid
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@dish:
+		Sequence: idle-dish
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+
+futuretech_battlelab:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^FutureTechSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Selectable:
+		Bounds: 3072, 2048, 0, -256
+	Buildable:
+		Prerequisites: ~futuretech_constructionyard, futuretech_transmissioncenter
+		Description: actor_futuretech_egtech.description
+	Tooltip:
+		Name: FutureTech Battle Lab
+	Building:
+		Footprint: === xxx xxx
+		Dimensions: 3,3
+	SupportPowerChargeBar:
+	ProvidesPrerequisite:
+		Prerequisite: ra2tek
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@lights2:
+		Sequence: idle-lights2
+		RequiresCondition: !build-incomplete
+	RenderSprites:
+		PlayerPalette: playerra2future1
+
+futuretech_hypercore:
+	Inherits: ^RA2Building
+	Inherits@sell: ^FutureTechSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Inherits@IDISABLE: ^DisabledOverlay
+	Inherits@shape: ^4x3Shape
+	Tooltip:
+		Name: Hypercore
+	Buildable:
+		BuildLimit: 1
+		Prerequisites: ~futuretech_constructionyard, futuretech_battlelab, derricklimit
+		BuildPaletteOrder: 999
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Queue: Building, RABuilding
+		Description: actor_futuretech_egshock.description
+	Selectable:
+		Bounds: 4096, 3072, 0, -256
+	Building:
+		Footprint: =xx= xxxx =xx=
+		Dimensions: 4,3
+	Valued:
+		Cost: 7500
+	Health:
+		HP: 750000
+	Power:
+		Amount: 750
+	CashTrickler:
+		Amount: 750
+	ExperienceTrickler@1:
+		Amount: 750
+	-ToggleConditionOnOrder:
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete
+	SoundOnDamageTransition:
+		DestroyedSounds: bpowdiea.wav, bpowdieb.wav
+	FireWarheadsOnDeath@1:
+		Weapon: ReactorNuke
+		RequiresCondition: !chronobeamed
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: futuretech_hypercore
+	RenderSprites:
+		PlayerPalette: playerra2future2
+
+futuretech_frostbiteturret:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@sell: ^FutureTechSpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~futuretech_constructionyard, futuretech_battlelab
+		Description: actor_futuretech_gggun.description
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Frostbite Turret
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 120000
+	Selectable:
+		Bounds: 1024, 1024
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: -1,1,1
+	AttackTurreted:
+		Voice: Attack
+	Armament:
+		Weapon: Future_Turret_Cryo
+		LocalOffset: 500,2,100, 500,-2,100
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	FirepowerMultiplier@Cryo:
+		Modifier: 48
+	WithMuzzleOverlay:
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	AutoTarget:
+	Power:
+		Amount: -75
+	RevealsShroud:
+		Range: 7124
+	DetectCloaked:
+		Range: 3562
+	ProvidesPrerequisite@buildingname:
+
+futuretech_multiturretsystem:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^FutureTechSpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@gar: ^ClearableGarrison
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~futuretech_constructionyard, futuretech_troopgate
+		Description: actor_futuretech_ggmlt.description
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Multi Turret System
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono
+	Tooltip@MISS:
+		Name: Javelin Turret System
+		RequiresCondition: ifv-miss || ifv-flak
+	Tooltip@FRAG:
+		Name: Frag Turret System
+		RequiresCondition: ifv-mg || ifv-hmg || ifv-repair || ifv-ra1_allies_alliedsniper || ifv-tesla || ifv-chem || ifv-fire || ifv-cannon || ifv-deso || ifv-demo || ifv-healer || ifv-chrono
+	Tooltip@Sigma:
+		Name: Sigma Turret System
+		RequiresCondition: ifv-hero
+	WithDecoration@COMMANDOSKULL:
+		RequiresCondition: ifv-hero
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 105000
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1024, 1024, 0, 0
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: -1,1,1
+	AttackTurreted:
+		Voice: Attack
+	ExternalCondition@mg:
+		Condition: ifv-mg
+	ExternalCondition@hmg:
+		Condition: ifv-hmg
+	ExternalCondition@cannon:
+		Condition: ifv-cannon
+	ExternalCondition@repair:
+		Condition: ifv-repair
+	ExternalCondition@thief:
+		Condition: ifv-thief
+	ExternalCondition@miss:
+		Condition: ifv-miss
+	ExternalCondition@flak:
+		Condition: ifv-flak
+	ExternalCondition@tesla:
+		Condition: ifv-tesla
+	ExternalCondition@fire:
+		Condition: ifv-fire
+	ExternalCondition@chem:
+		Condition: ifv-chem
+	ExternalCondition@hero:
+		Condition: ifv-hero
+	ExternalCondition@ra1_allies_alliedsniper:
+		Condition: ifv-ra1_allies_alliedsniper
+	ExternalCondition@spy:
+		Condition: ifv-spy
+	ExternalCondition@chrono:
+		Condition: ifv-chrono
+	ExternalCondition@demo:
+		Condition: ifv-demo
+	ExternalCondition@heal:
+		Condition: ifv-healer
+	WithCargoSounds:
+		EnterSounds: vifvtran.wav
+		ExitSounds: vifvtran.wav
+	Cargo:
+		EjectOnDeathDamage: 0
+		Types: Infantry
+		MaxWeight: 1
+		LoadedCondition: loaded
+	Armament@primary:
+		Name: primary
+		Weapon: Future_MultiMissile
+		LocalOffset: 600,100,300, 600,-100,300, 600,0,300
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono && !ifv-spy && !ifv-thief
+		MuzzleSequence: muzzle
+	Armament@MISS:
+		Name: primary
+		Weapon: Future_MultiMissile_Javelin
+		RequiresCondition: ifv-miss
+		LocalOffset: 600,100,300, 600,-100,300, 600,0,300
+		MuzzleSequence: muzzle
+	Armament@FRAG:
+		Name: primary
+		Weapon: Future_MultiMissile_Frag
+		RequiresCondition: ifv-mg || ifv-hmg || ifv-repair || ifv-ra1_allies_alliedsniper || ifv-flak || ifv-tesla || ifv-chem || ifv-fire || ifv-cannon || ifv-deso || ifv-demo || ifv-healer || ifv-chrono || ifv-spy || ifv-thief
+		LocalOffset: 600,100,300, 600,-100,300, 600,0,300
+		MuzzleSequence: muzzle
+	Armament@Sigma:
+		Name: primary
+		Weapon: Future_MultiMissile_Sigma
+		RequiresCondition: ifv-hero
+		LocalOffset: 600,100,300, 600,-100,300, 600,0,300
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	AutoTarget:
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Cargo, Kills
+	Power:
+		Amount: -40
+	RevealsShroud:
+		Range: 9000
+
+####################################################################################################
+#		Red Alert 2 Future Infantry
+####################################################################################################

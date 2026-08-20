@@ -1,0 +1,5428 @@
+{
+ "ledger": "starcraft_zerg",
+ "pack": "mods/cameo/ContentPacks/StarCraft/Zerg",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "zerg_behemoth": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "LightFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "250",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5230",
+      "reloaddelay": "60",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyMissile",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb"
+      ],
+      "warheads": [],
+      "weapon": "BehemothShoot",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Spaceship"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
+     "v": "7200"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": 1.25,
+     "subtype": "Spaceship",
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
+     "v": "600000"
+    },
+    "name": "Behemoth",
+    "prerequisites": [
+     "~zerg_lair",
+     "~zerg_promotion_behemoth"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "12345"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "30"
+    }
+   },
+   "zerg_broodweaver": {
+    "armaments": [
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "damage_warheads": [
+       {
+        "damage": "-2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "HealingWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "100",
+        "tag": "ExtraHealing",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "falloff": "100",
+        "spread": "1000",
+        "tag": "HealingWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "4500",
+      "reloaddelay": "60",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HealingWeapon"
+      ],
+      "warheads": [],
+      "weapon": "BroodweaverLeech",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": 2.0,
+     "subtype": "UnarmedTransportHelicopter",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Broodweaver",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "~zerg_promotion_broodweaver"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "45"
+    }
+   },
+   "zerg_corruptor": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Chemical_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Chemical_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6250",
+      "reloaddelay": "50",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Chemical_Medium",
+       "^Projectile_Chem_Medium",
+       "^Effect_Chem_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Chemical_Medium"
+      ],
+      "weapon": "CorruptorSpore",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": 2.0,
+     "subtype": "Helicopter",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Corruptor",
+    "prerequisites": [
+     "~zerg_greaterspire",
+     "~zerg_promotion_corruptor"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "100"
+    }
+   },
+   "zerg_devourer": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 50",
+        "spread": "320",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "50",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "4444",
+      "reloaddelay": "100",
+      "slot": "Armament",
+      "versus_templates": [
+       "TractorGLAnthraxPurple",
+       "MutaliskSpore"
+      ],
+      "warheads": [],
+      "weapon": "SCDevourerAA",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": 2.0,
+     "subtype": "Helicopter",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
+     "v": "250000"
+    },
+    "name": "Devourer",
+    "prerequisites": [
+     "~zerg_greaterspire"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "90"
+    }
+   },
+   "zerg_dreadshroud": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "LightFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "250",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "200",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5850",
+      "reloaddelay": "60",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^MediumMissile",
+       "^ShrapnelWeapon",
+       "^FlakWeapon",
+       "^MediumChemicalWeapon",
+       "^LaserWeapon"
+      ],
+      "warheads": [],
+      "weapon": "DreadshroudSpore",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": 2.0,
+     "subtype": "Helicopter",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
+     "v": "60000"
+    },
+    "name": "Dreadshroud",
+    "prerequisites": [
+     "~zerg_spire",
+     "~zerg_promotion_dreadshroud"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "120"
+    }
+   },
+   "zerg_gorekraken": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "14000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "7",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1448",
+      "reloaddelay": "15",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "GorekrakenClaw",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": 1.0,
+     "subtype": "Helicopter",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
+     "v": "350000"
+    },
+    "name": "Gorekraken",
+    "prerequisites": [
+     "~zerg_greaterspire",
+     "~zerg_promotion_gorekraken"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "70"
+    }
+   },
+   "zerg_guardian": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "10000",
+      "reloaddelay": "60",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb"
+      ],
+      "warheads": [],
+      "weapon": "GuardianShoot",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2200"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": 1.25,
+     "subtype": "Helicopter",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "Guardian",
+    "prerequisites": [
+     "~zerg_greaterspire"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "50"
+    }
+   },
+   "zerg_mutalisk": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 50",
+        "spread": "320",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "50",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "4444",
+      "reloaddelay": "20",
+      "slot": "Armament",
+      "versus_templates": [
+       "^SwordWeapon",
+       "^MediumChemicalWeapon",
+       "^SmallArms",
+       "^ArrowWeapon"
+      ],
+      "warheads": [],
+      "weapon": "MutaliskSpore",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": 1.25,
+     "subtype": "Helicopter",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
+     "trait": "FirepowerMultiplier@MultiWeapon",
+     "v": 0.25
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
+     "v": "40000"
+    },
+    "name": "Mutalisk",
+    "prerequisites": [
+     "~zerg_spire"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "160"
+    }
+   },
+   "zerg_overlord": {
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Helicopter",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Zerg Overlord",
+    "prerequisites": [
+     "~zerg_hatchery"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "30"
+    }
+   },
+   "zerg_queen": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5480",
+      "reloaddelay": "78",
+      "slot": "Armament@Spines",
+      "versus_templates": [
+       "^MediumChemicalWeapon",
+       "^ArrowWeapon"
+      ],
+      "warheads": [],
+      "weapon": "QueenSpine",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": 1.25,
+     "subtype": "Helicopter",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "Queen",
+    "prerequisites": [
+     "~zerg_queensnest"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "100"
+    }
+   },
+   "zerg_scourge": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "50000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "25",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "50000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "25",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
+      "pricing": true,
+      "range": "2000",
+      "reloaddelay": "25",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "SCScourgeExplosion"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium"
+      ],
+      "weapon": "ScourgeExplosion",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Fighter"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Valued.Cost",
+     "v": "700"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Fighter",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Scourge",
+    "prerequisites": [
+     "~zerg_spire"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "200"
+    }
+   }
+  },
+  "buildings": {
+   "zerg_defilermound": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
+     "v": "200000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Defiler Mound",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_hive"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "zerg_evolutionchamber": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "625"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
+     "v": "200000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Evolution Chamber",
+    "prerequisites": [
+     "~zerg_hatchery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "zerg_extractor": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Extractor",
+    "prerequisites": [
+     "~zerg_hatchery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "zerg_greaterspire": {
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Greater Spire",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_lair",
+     "greaterspireupgradeavailable"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "zerg_hatchery": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Hatchery",
+    "prerequisites": [
+     "~disabled"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "zerg_hive": {
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Hive",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_lair",
+     "hiveupgradeavailable"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "zerg_hydraliskden": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
+     "v": "150000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Hydralisk Den",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_spawningpool"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "zerg_infestedcommandcenter": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Infested Command Center",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_overmind"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    }
+   },
+   "zerg_lair": {
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
+     "v": "1400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Lair",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_spawningpool",
+     "lairupgradeavailable"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "zerg_nyduscanal": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
+     "v": "25000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Nydus Canal",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_hive"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "7c0"
+    }
+   },
+   "zerg_overmind": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Overmind",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_hive",
+     "derricklimit"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "zerg_queensnest": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
+     "v": "150000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Queen's Nest",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_lair"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "zerg_spawningpool": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "375"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
+     "v": "1250"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
+     "v": "125000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Spawning Pool",
+    "prerequisites": [
+     "~zerg_hatchery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "zerg_spire": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
+     "v": "150000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Spire",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_lair"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "zerg_sporecolony_defense": {
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Spore Colony",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "creepcolonyupgradeavailable"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "zerg_sunkencolony": {
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Sunken Colony",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "creepcolonyupgradeavailable"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "zerg_ultraliskcavern": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
+     "v": "200000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Ultralisk Cavern",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_hive"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "zerg_vespenegascollector": {
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Vespene Gas Collector",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "sczrefineryupgradeavailable"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   }
+  },
+  "defenses": {
+   "zerg_creepcolony": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50",
+        "spread": "320",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "7680",
+      "reloaddelay": "32",
+      "requires": "sunken",
+      "slot": "Armament@sunken",
+      "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^SwordWeapon"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "Tentacle",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "spore",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": null,
+        "spread": "200",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "10160",
+      "reloaddelay": "34",
+      "requires": "spore",
+      "slot": "Armament@spore",
+      "versus_templates": [
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ],
+      "warheads": [],
+      "weapon": "Spore_AA",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "BasicDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml#Health.HP",
+     "v": "80000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Creep Colony",
+    "prerequisites": [
+     "~zerg_hatchery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "5000"
+    }
+   },
+   "zerg_creepcolony_defense": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50",
+        "spread": "320",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "7680",
+      "reloaddelay": "32",
+      "requires": "sunken",
+      "slot": "Armament@sunken",
+      "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^SwordWeapon"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "Tentacle",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "spore",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": null,
+        "spread": "200",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "10160",
+      "reloaddelay": "34",
+      "requires": "spore",
+      "slot": "Armament@spore",
+      "versus_templates": [
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ],
+      "warheads": [],
+      "weapon": "Spore_AA",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "BasicDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "80000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Creep Colony",
+    "prerequisites": [
+     "~zerg_hatchery"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "zerg_sporecolony": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50",
+        "spread": "320",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "7680",
+      "reloaddelay": "32",
+      "requires": "sunken",
+      "slot": "Armament@sunken",
+      "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^SwordWeapon"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "Tentacle",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "spore",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": null,
+        "spread": "200",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "10160",
+      "reloaddelay": "34",
+      "requires": "spore",
+      "slot": "Armament@spore",
+      "versus_templates": [
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ],
+      "warheads": [],
+      "weapon": "Spore_AA",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml#Valued.Cost",
+     "v": "1250"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "BasicDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "80000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Spore Colony",
+    "prerequisites": [
+     "~zerg_hatchery"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "zerg_sunkencolony_defense": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50",
+        "spread": "320",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 50",
+        "spread": "160",
+        "tag": "SwordWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "7680",
+      "reloaddelay": "32",
+      "requires": "sunken",
+      "slot": "Armament@sunken",
+      "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy",
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^SwordWeapon"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "Tentacle",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "spore",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": null,
+        "spread": "200",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "10160",
+      "reloaddelay": "34",
+      "requires": "spore",
+      "slot": "Armament@spore",
+      "versus_templates": [
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ],
+      "warheads": [],
+      "weapon": "Spore_AA",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml#Valued.Cost",
+     "v": "1250"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "BasicDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "80000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Sunken Colony",
+    "prerequisites": [
+     "~zerg_hatchery"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   }
+  },
+  "infantry": {
+   "zerg_defiler": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Chemical_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Chemical_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "9000",
+      "reloaddelay": "175",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Chemical_Heavy",
+       "^Projectile_Chem_Heavy",
+       "^Effect_Chem_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Chemical_Heavy"
+      ],
+      "weapon": "DefilerPlague",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
+     "v": "1400"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "support",
+     "special": 1.25,
+     "subtype": "ScoutInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
+     "v": "80000"
+    },
+    "name": "Defiler",
+    "prerequisites": [
+     "~zerg_defilermound"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.Speed",
+     "v": "50"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "20"
+    }
+   },
+   "zerg_hydralisk": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "18000",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "LightChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "18000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "18000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "50",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "18000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5979",
+      "reloaddelay": "15",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LightChemicalWeapon",
+       "^LightMissile",
+       "^SmallArms",
+       "^ArrowWeapon"
+      ],
+      "warheads": [],
+      "weapon": "HydraSpit",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "18000",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "LightChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "18000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "18000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "50",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "18000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "5979",
+      "reloaddelay": "15",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^LightChemicalWeapon",
+       "^LightMissile",
+       "^SmallArms",
+       "^ArrowWeapon"
+      ],
+      "warheads": [],
+      "weapon": "HydraSpit",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
+     "v": "3314"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": 1.0,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+     "trait": "FirepowerMultiplier",
+     "v": 0.99
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
+     "v": "80000"
+    },
+    "name": "Hydralisk",
+    "prerequisites": [
+     "~zerg_hydraliskden"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.Speed",
+     "v": "76"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "30"
+    }
+   },
+   "zerg_infestedterranbomber": {
+    "armaments": [
+     {
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "2000",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
+     "v": "400"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "MeleeInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
+     "v": "60000"
+    },
+    "name": "Infested Terran Bomber",
+    "prerequisites": [
+     "~zerg_infestedcommandcenter"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.Speed",
+     "v": "90"
+    }
+   },
+   "zerg_kerrigan": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "2225",
+      "reloaddelay": "20",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "zerg_kerrigan",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heroic"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
+     "v": "4000"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": 1.25,
+     "subtype": "HeroInfantry",
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
+     "v": "300000"
+    },
+    "name": "Kerrigan",
+    "prerequisites": [
+     "~zerg_queensnest"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.Speed",
+     "v": "75"
+    }
+   },
+   "zerg_shriek": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1150",
+      "reloaddelay": "11",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "ShriekStinger",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": 2.0,
+     "subtype": "FlyingInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
+     "v": "14000"
+    },
+    "name": "Shriek",
+    "prerequisites": [
+     "~zerg_spire",
+     "~zerg_promotion_shriek"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Aircraft.Speed",
+     "v": "195"
+    }
+   },
+   "zerg_spithid": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "50",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "3855",
+      "reloaddelay": "15",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LightMissile",
+       "^SmallArms",
+       "^ArrowWeapon"
+      ],
+      "warheads": [],
+      "weapon": "SpithidSpit",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "100",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "50",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "3855",
+      "reloaddelay": "15",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^LightMissile",
+       "^SmallArms",
+       "^ArrowWeapon"
+      ],
+      "warheads": [],
+      "weapon": "SpithidSpit",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
+     "v": "300"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": 1.0,
+     "subtype": "ScoutInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
+     "v": "40000"
+    },
+    "name": "Spithid",
+    "prerequisites": [
+     "~zerg_hydraliskden",
+     "~zerg_promotion_spithid"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.Speed",
+     "v": "110"
+    }
+   },
+   "zerg_swarmling": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "200",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8561",
+      "reloaddelay": "80",
+      "slot": "Armament",
+      "versus_templates": [
+       "^MediumChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ],
+      "warheads": [],
+      "weapon": "SwarmlingShoot",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": 1.25,
+     "subtype": "FlyingInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
+     "v": "40000"
+    },
+    "name": "Swarmling",
+    "prerequisites": [
+     "zerg_greaterspire",
+     "~zerg_hive",
+     "~zerg_promotion_swarmling"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Aircraft.Speed",
+     "v": "80"
+    }
+   },
+   "zerg_talon": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1680",
+      "reloaddelay": "15",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "TalonClaw",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
+     "v": "300"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": 1.0,
+     "subtype": "MeleeInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 0.75
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
+     "v": "32000"
+    },
+    "name": "Talon",
+    "prerequisites": [
+     "~zerg_spawningpool",
+     "~zerg_promotion_talon"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.Speed",
+     "v": "160"
+    }
+   },
+   "zerg_ultralisk": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "40000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1600",
+      "reloaddelay": "15",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "UltraliskHusk",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
+     "v": "4400"
+    },
+    "design": {
+     "category": "Tanks",
+     "class_anchor": null,
+     "special": 1.0,
+     "subtype": "LineBreaker",
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
+     "v": "400000"
+    },
+    "name": "Ultralisk",
+    "prerequisites": [
+     "~zerg_ultraliskcavern"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.Speed",
+     "v": "80"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "32"
+    }
+   },
+   "zerg_zergling": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1350",
+      "reloaddelay": "11",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "ZerglingClaw",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
+     "v": "200"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": 1.0,
+     "subtype": "MeleeInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 0.75
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#FirepowerMultiplier@zergling.Modifier",
+     "trait": "FirepowerMultiplier@zergling",
+     "v": 1.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
+     "v": "11000"
+    },
+    "name": "Zergling",
+    "prerequisites": [
+     "~zerg_spawningpool",
+     "~!zerg_promotion_talon"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.Speed",
+     "v": "110"
+    }
+   }
+  },
+  "promotions": {
+   "zerg_promotion_behemoth": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Behemoth",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_promotion_dreadshroud",
+     "!zerg_promotion_behemoth",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "zerg_promotion_broodweaver": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Broodweaver",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "!zerg_promotion_broodweaver",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "zerg_promotion_corruptor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Corruptor",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_promotion_broodweaver",
+     "!zerg_promotion_corruptor",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "zerg_promotion_dreadshroud": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Dreadshroud",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_promotion_corruptor",
+     "!zerg_promotion_dreadshroud",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "zerg_promotion_gorekraken": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Gorekraken",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_promotion_goremaw",
+     "!zerg_promotion_gorekraken",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "zerg_promotion_goremaw": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Goremaw",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_promotion_sporemaw",
+     "!zerg_promotion_goremaw",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "zerg_promotion_hermit": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Hermit",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_promotion_gorekraken",
+     "!zerg_promotion_hermit",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "zerg_promotion_shriek": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Shriek",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_promotion_spithid",
+     "!zerg_promotion_shriek",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "zerg_promotion_spithid": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Spithid",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_promotion_talon",
+     "!zerg_promotion_spithid",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "zerg_promotion_sporemaw": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Sporemaw",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "!zerg_promotion_sporemaw",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "zerg_promotion_swarmling": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Swarmling",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "zerg_promotion_shriek",
+     "!zerg_promotion_swarmling",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "zerg_promotion_talon": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Talon",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "!zerg_promotion_talon",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   }
+  },
+  "upgrades": {
+   "zerg_upgrade_adrenalglands": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Adrenal Glands",
+    "prerequisites": [
+     "~zerg_evolutionchamber",
+     "~!zerg_upgrade_adrenalglands"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "zerg_upgrade_carapacelevel1": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Carapace Level 1",
+    "prerequisites": [
+     "~zerg_evolutionchamber",
+     "~!zerg_upgrade_carapacelevel1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "zerg_upgrade_carapacelevel2": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Carapace Level 2",
+    "prerequisites": [
+     "zerg_evolutionchamber",
+     "~zerg_hive",
+     "zerg_upgrade_carapacelevel1",
+     "~!zerg_upgrade_carapacelevel2"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "zerg_upgrade_flyerattackslevel1": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Flyer Attacks Level 1",
+    "prerequisites": [
+     "~zerg_spire",
+     "~!zerg_upgrade_flyerattackslevel1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "zerg_upgrade_flyerattackslevel2": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Flyer Attacks Level 2",
+    "prerequisites": [
+     "zerg_spire",
+     "~zerg_hive",
+     "zerg_upgrade_flyerattackslevel1",
+     "~!zerg_upgrade_flyerattackslevel2"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "zerg_upgrade_flyercarapacelevel1": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Flyer Carapace Level 1",
+    "prerequisites": [
+     "~zerg_spire",
+     "~!zerg_upgrade_flyercarapacelevel1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "zerg_upgrade_flyercarapacelevel2": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Flyer Carapace Level 2",
+    "prerequisites": [
+     "zerg_spire",
+     "~zerg_hive",
+     "zerg_upgrade_flyercarapacelevel1",
+     "~!zerg_upgrade_flyercarapacelevel2"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "zerg_upgrade_groovedspines": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Grooved Spines",
+    "prerequisites": [
+     "~zerg_hydraliskden",
+     "~!zerg_upgrade_groovedspines"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "zerg_upgrade_meleeattackslevel1": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Melee Attacks Level 1",
+    "prerequisites": [
+     "~zerg_evolutionchamber",
+     "~!zerg_upgrade_meleeattackslevel1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "zerg_upgrade_meleeattackslevel2": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Melee Attacks Level 2",
+    "prerequisites": [
+     "zerg_evolutionchamber",
+     "~zerg_hive",
+     "zerg_upgrade_meleeattackslevel1",
+     "~!zerg_upgrade_meleeattackslevel2"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "zerg_upgrade_metabolicboost": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Metabolic Boost",
+    "prerequisites": [
+     "~zerg_spawningpool",
+     "zerg_evolutionchamber",
+     "~!zerg_upgrade_metabolicboost"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "zerg_upgrade_missileattackslevel1": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Missile Attacks Level 1",
+    "prerequisites": [
+     "~zerg_evolutionchamber",
+     "~!zerg_upgrade_missileattackslevel1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "zerg_upgrade_missileattackslevel2": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Missile Attacks Level 2",
+    "prerequisites": [
+     "zerg_evolutionchamber",
+     "~zerg_hive",
+     "zerg_upgrade_missileattackslevel1",
+     "~!zerg_upgrade_missileattackslevel2"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "zerg_upgrade_pneumatizedcarapace": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Pneumatized Carapace",
+    "prerequisites": [
+     "~zerg_hatchery",
+     "~!zerg_upgrade_pneumatizedcarapace"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   }
+  },
+  "vehicles": {
+   "zerg_drone": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1500",
+      "reloaddelay": "25",
+      "slot": "Armament",
+      "versus_templates": [
+       "^WorkerAttack"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "DroneAttack",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Harvester",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "45000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Zerg Drone",
+    "prerequisites": [
+     "~zerg_extractor"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "100"
+    }
+   },
+   "zerg_goremaw": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1250",
+      "reloaddelay": "30",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "GoremawClaw",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Superheavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "category": "Tanks",
+     "class_anchor": "high_tech_tank",
+     "special": 1.25,
+     "subtype": "HighTechTank",
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "Goremaw",
+    "prerequisites": [
+     "zerg_ultraliskcavern",
+     "~zerg_hive",
+     "~zerg_promotion_goremaw"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "150"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "60"
+    }
+   },
+   "zerg_hatcherydrone": {
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SupportVehicle",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Zerg Hatchery Drone",
+    "prerequisites": [
+     "~zerg_evolutionchamber"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
+    }
+   },
+   "zerg_hermit": {
+    "armaments": [
+     {
+      "burst": "5",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "200",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "7120",
+      "reloaddelay": "30",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ],
+      "warheads": [],
+      "weapon": "HermitShoot",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Superheavy"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Valued.Cost",
+     "v": "6000"
+    },
+    "design": {
+     "category": "Tanks",
+     "class_anchor": "epic_vehicle",
+     "special": 1.0,
+     "subtype": "EpicVehicle",
+     "tech_tier": 0.75,
+     "unit_class": 0.4
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
+     "trait": "FirepowerMultiplier@MultiWeapon",
+     "v": 0.4
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Health.HP",
+     "v": "375000"
+    },
+    "name": "Hermit",
+    "prerequisites": [
+     "~zerg_ultraliskcavern",
+     "~zerg_promotion_hermit"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "50"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "20"
+    }
+   },
+   "zerg_lurker": {
+    "armaments": [
+     {
+      "armament_name": "dummy",
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "6666",
+      "reloaddelay": "33",
+      "requires": "!deployed",
+      "slot": "Armament@Dummy",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "LurkerTargeting",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "deployed",
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "6666",
+      "reloaddelay": "66",
+      "requires": "deployed || undeployed",
+      "slot": "Armament@Deployed",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "LurkerSpines",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1300"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "fire_support",
+     "special": 1.25,
+     "subtype": "FireSupport",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "Lurker",
+    "prerequisites": [
+     "zerg_hydraliskden",
+     "zerg_evolutionchamber",
+     "~zerg_lair"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "90"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "18"
+    }
+   },
+   "zerg_sporemaw": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "18000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "9",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "7740",
+      "reloaddelay": "40",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Grenade_Light",
+       "^Effect_Concussion_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Concussion_Medium"
+      ],
+      "weapon": "SporemawShoot",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "18000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "9",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "7740",
+      "reloaddelay": "40",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Grenade_Light",
+       "^Effect_Concussion_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Concussion_Medium"
+      ],
+      "weapon": "SporemawShoot",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "fire_support",
+     "special": 1.0,
+     "subtype": "FireSupport",
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Sporemaw",
+    "prerequisites": [
+     "~zerg_lair",
+     "~zerg_promotion_sporemaw"
+    ],
+    "queue": [
+     "SCZergInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "80"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "32"
+    }
+   }
+  }
+ }
+}

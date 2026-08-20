@@ -63,18 +63,6 @@ World:
 
 
 Player:
-	ProvidesPrerequisite@d2atreides:
-		Prerequisite: faction.d2atreides
-		Factions: d2atreides
-	ProvidesPrerequisite@d2harkonnen:
-		Prerequisite: faction.d2harkonnen
-		Factions: d2harkonnen
-	ProvidesPrerequisite@d2ordos:
-		Prerequisite: faction.d2ordos
-		Factions: d2ordos
-	ProvidesPrerequisite@d2corrino:
-		Prerequisite: faction.d2corrino
-		Factions: d2corrino
 
 ####################################################################################################
 #		Dune 2 Bonus
@@ -576,7 +564,7 @@ dunee5mobslave:
 	Voiced:
 		VoiceSet: Dune2InfantryVoice
 updunecapture:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Capture Building
 	Buildable:
@@ -605,13 +593,12 @@ dunemcv:
 		Name: Mobile Construction Vehicle (Dune 2)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -647,7 +634,7 @@ duneharv:
 		CarriedCondition: notmobile
 		ReservedCondition: carryall-reserved
 		LockedCondition: notmobile
-	WithDecoration@CARRYALL:
+	WithDecoration@Carryall:
 		Image: d2k_pips
 		Sequence: pickup-indicator
 		RequiresCondition: carryall-reserved
@@ -789,10 +776,8 @@ dunequad:
 		Range: 7c0
 	GrantConditionOnPrerequisite@corrino:
 		Condition: d2corrino
-		Prerequisites: faction.d2corrino
 	GrantConditionOnPrerequisite@hark:
 		Condition: d2harkonnen
-		Prerequisites: faction.d2harkonnen
 	Armament:
 		Weapon: Dune2QuadLaser
 		LocalOffset: -128, -170, 170, -128, 170, 170
@@ -903,7 +888,7 @@ dunertnk:
 		LocalOffset: 768,100,90, 768,-100,90
 		MuzzleSequence: muzzle
 	Armament@AA:
-		Weapon: Dune2MissileTankAA
+		Weapon: Dune2MissileTank_AA
 		Recoil: 128
 		RecoilRecovery: 26
 		LocalOffset: 768,100,90, 768,-100,90
@@ -1070,7 +1055,6 @@ dunehtnk:
 		Speed: 56
 		TurnSpeed: 32
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 100000
 	Repairable:
@@ -1100,7 +1084,7 @@ dunehtnk:
 		EmptyWeapon: UnitExplodeMech
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -1110,8 +1094,7 @@ dunehtnk:
 ####################################################################################################
 #		Dune 2 Structures
 ####################################################################################################
-^dune2concrete:
-	AlwaysVisible:
+^Dune2Concrete:
 	Interactable:
 	Building:
 		BuildSounds: dune2place.aud
@@ -1133,7 +1116,7 @@ dunehtnk:
 		Description: Provides a strong foundation that regenerates buildings on top of it.
 
 dune2concretea:
-	Inherits: ^dune2concrete
+	Inherits: ^Dune2Concrete
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1148,7 +1131,7 @@ dune2concretea:
 		Prerequisites: ~!selectatreides
 
 dune2concreteb:
-	Inherits: ^dune2concrete
+	Inherits: ^Dune2Concrete
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
@@ -1170,7 +1153,7 @@ duneconyard:
 	Inherits@conyard: ^Conyard
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -1263,7 +1246,7 @@ duneconyard:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmdune2
@@ -1361,8 +1344,7 @@ dunerefin:
 	StoresResources:
 		Capacity: 1000
 	Selectable:
-		Bounds: 131072, 101930
-		DecorationBounds: 132864, 131072
+		Bounds: 3114, 3072
 	CustomSellValue:
 		Value: 500
 	FreeActorWithDelivery@1:
@@ -1386,7 +1368,7 @@ dunebarr:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 840,-256,0, 840,512,0, 210,-512,0, -71,512,0
@@ -1450,13 +1432,13 @@ dunebarr:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 dunebarr2:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 840,-256,0, 840,512,0, 210,-512,0, -71,512,0
@@ -1520,13 +1502,13 @@ dunebarr2:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 dunelweap:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 840,-256,0, 840,512,0, 210,-512,0, -71,512,0
@@ -1590,7 +1572,7 @@ dunelweap:
 		Amount: -30
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 	ProvidesPrerequisite@d2unlocktrike:
 		Prerequisite: d2unlocktrike
 		Factions: d2atreides
@@ -1602,7 +1584,7 @@ dunehweap:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	Inherits@shape: ^3x2Shape
 	Valued:
 		Cost: 2000
@@ -1661,13 +1643,13 @@ dunehweap:
 		Amount: -40
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 dunehitech:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	Inherits@shape: ^3x2Shape
 	Valued:
 		Cost: 2000
@@ -1726,7 +1708,7 @@ dunehitech:
 		Amount: -40
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 
 duneradar:
 	Inherits: ^BaseBuilding
@@ -1745,7 +1727,7 @@ duneradar:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: dunerefin, ~techlevel.medium
+		Prerequisites: dunerefin
 		Queue: Building, RABuilding
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	Building:
@@ -1753,8 +1735,7 @@ duneradar:
 		Dimensions: 2,2
 		BuildSounds: dune2place.aud
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -1789,7 +1770,7 @@ duneixhouse:
 		Prerequisite: duneixhouse
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Building, RABuilding
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	Building:
@@ -1797,8 +1778,7 @@ duneixhouse:
 		Dimensions: 2,2
 		BuildSounds: dune2place.aud
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -1843,7 +1823,7 @@ dunetrade:
 duneturret:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Selectable:
 		Bounds: 1024, 1024
 	Valued:
@@ -1884,7 +1864,7 @@ duneturret:
 duneturret2:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Selectable:
 		Bounds: 1024, 1024
 	Valued:
@@ -1919,7 +1899,7 @@ duneturret2:
 		RecoilRecovery: 26
 		LocalOffset: 768,100,90, 768,-100,90
 	Armament@AA:
-		Weapon: Dune2MissileTankAA
+		Weapon: Dune2MissileTank_AA
 		Recoil: 128
 		RecoilRecovery: 26
 		LocalOffset: 768,100,90, 768,-100,90
@@ -1937,9 +1917,9 @@ dunespaceport:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Selectable:
-		Bounds: 174762, 87381
+		Bounds: 4096, 2048
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,-512,256, 0,-1451,384, 0,512,128, 0,1536,85
 		Type: Rectangle
@@ -2039,7 +2019,7 @@ dunepalace:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high, !dunepalacesw
+		Prerequisites: anyhq, !dunepalacesw
 		Queue: Building, RABuilding
 		Description: Provides Nuclear Strike support power.\nUnlocks Stealth Tank, Chem. Warrior and Obelisk of Light.\nRequires power to operate.
 	Building:
@@ -2047,8 +2027,7 @@ dunepalace:
 		Dimensions: 3,3
 		BuildSounds: dune2place.aud
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -21845
+		Bounds: 3072, 2901, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 210000
@@ -2235,24 +2214,6 @@ dunecarryall.reinforce:
 		Type: Circle
 			Radius: 256
 	RejectsOrders:
-	GrantConditionOnPrerequisite@ixianharv:
-		Prerequisites: faction.ixian
-		Condition: carryall_cloak
-	Cloak:
-		InitialDelay: 80
-		CloakDelay: 80
-		IsPlayerPalette: true
-		PauseOnCondition: cloak-force-disabled || base-reveal
-		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
-		Palette: d2kcloak
-		CloakedCondition: cloaked
-		RequiresCondition: carryall_cloak
-	SpeedMultiplier@ordos-stealth-bonus:
-		Modifier: 130
-		RequiresCondition: faction.guild
-	GrantConditionOnPrerequisite@ordos:
-		Prerequisites: faction.guild
-		Condition: faction.guild
 dunecarryall.buy:
 	Inherits: dunecarryall.reinforce
 	-Carryall:
@@ -2383,7 +2344,7 @@ duneorni:
 	ProducibleWithLevel:
 		Prerequisites: aircraft.upgraded
 	Selectable:
-		DecorationBounds: 54613, 50944, 0, 3626
+		DecorationBounds: 1280, 1194, 0, 85
 	Voiced:
 		VoiceSet: Dune2VehicleVoice
 	RenderSprites:
@@ -2474,7 +2435,6 @@ dunetrike3:
 ####################################################################################################
 
 d2_lbarrupgrade1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2494,7 +2454,6 @@ d2_lbarrupgrade1:
 	ProvidesPrerequisite@upgradename:
 
 d2_lbarrupgrade2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2514,7 +2473,6 @@ d2_lbarrupgrade2:
 	ProvidesPrerequisite@upgradename:
 
 d2_hbarrupgrade1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2534,7 +2492,6 @@ d2_hbarrupgrade1:
 	ProvidesPrerequisite@upgradename:
 
 d2_hbarrupgrade2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2554,7 +2511,6 @@ d2_hbarrupgrade2:
 	ProvidesPrerequisite@upgradename:
 
 d2_lweapupgrade:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2574,7 +2530,6 @@ d2_lweapupgrade:
 	ProvidesPrerequisite@upgradename:
 
 d2_hweapupgrade1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2594,7 +2549,6 @@ d2_hweapupgrade1:
 	ProvidesPrerequisite@upgradename:
 
 d2_hweapupgrade2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:

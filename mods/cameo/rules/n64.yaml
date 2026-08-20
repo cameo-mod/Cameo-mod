@@ -21,19 +21,19 @@ World:
 		ClassName: Light Support
 		Factions: n64gdi
 		BaseActor: mcv.n64gdi
-		SupportActors: e1,e1,e1,e1,e1,e3,e3,jeep
+		SupportActors: e1,e1,e1,e1,e1,e3,e3,td_gdi_humvee
 	StartingUnits@heavyn64gdia:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: n64gdi
 		BaseActor: mcv.n64gdi
-		SupportActors: e1,e1,e1,e1,e3,e3,jeep,mtnk,mtnk
+		SupportActors: e1,e1,e1,e1,e3,e3,td_gdi_humvee,td_gdi_battletank,td_gdi_battletank
 	StartingUnits@heavyn64gdib:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: n64gdi
 		BaseActor: mcv.n64gdi
-		SupportActors: e1,e1,e1,e1,e1,e2,e2,e2,e3,e3,apc,mtnk
+		SupportActors: e1,e1,e1,e1,e1,td_gdi_grenadier,td_gdi_grenadier,td_gdi_grenadier,e3,e3,td_gdi_apc,td_gdi_battletank
 	StartingUnits@mcvonlyn64nod:
 		Class: none
 		ClassName: MCV Only
@@ -44,19 +44,19 @@ World:
 		ClassName: Light Support
 		Factions: n64nod
 		BaseActor: mcv.n64nod
-		SupportActors: e1,e1,e1,e1,e1,e1,e3,e3,bggy
+		SupportActors: e1,e1,e1,e1,e1,e1,e3,e3,td_nod_buggy
 	StartingUnits@heavyn64noda:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: n64nod
 		BaseActor: mcv.n64nod
-		SupportActors: e1,e1,e1,e1,e3,e3,ltnk,ltnk,ftnk
+		SupportActors: e1,e1,e1,e1,e3,e3,td_nod_lighttank,td_nod_lighttank,td_nod_flametank
 	StartingUnits@heavyn64nodb:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: n64nod
 		BaseActor: mcv.n64nod
-		SupportActors: e1,e1,e1,e1,e1,e3,e3,e3,ftnk,ftnk
+		SupportActors: e1,e1,e1,e1,e1,e3,e3,e3,td_nod_flametank,td_nod_flametank
 
 ####################################################################################################
 #		N64 - STRUCTURES
@@ -69,7 +69,7 @@ FACTN64GDI:
 	Inherits@aicash: ^AIConyardCash
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -106,7 +106,7 @@ FACTN64GDI:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -172,7 +172,7 @@ FACTN64NOD:
 	Inherits@aicash: ^AIConyardCash
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -209,7 +209,7 @@ FACTN64NOD:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -376,8 +376,7 @@ N64PROCGDI:
 	StoresResources:
 		Capacity: 1000
 	Selectable:
-		Bounds: 131072, 101930
-		DecorationBounds: 132864, 131072
+		Bounds: 3114, 3072
 	CustomSellValue:
 		Value: 500
 	FreeActor:
@@ -438,8 +437,7 @@ N64PROCNOD:
 	StoresResources:
 		Capacity: 1000
 	Selectable:
-		Bounds: 131072, 101930
-		DecorationBounds: 132864, 131072
+		Bounds: 3114, 3072
 	CustomSellValue:
 		Value: 500
 	FreeActor:
@@ -527,7 +525,7 @@ N64PYLE:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 
 N64HAND:
 	Inherits: ^BaseBuilding
@@ -589,8 +587,7 @@ N64HAND:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 87381, 123776, 0, -18176
+		Bounds: 2048, 2901, 0, -426
 	SelectionDecorations:
 
 N64SILOGDI:
@@ -625,10 +622,10 @@ N64SILOGDI:
 	MustBeDestroyed:
 		RequiredForShortGame: false
 	SelectionDecorations:
+		Bounds: 2048, 1024
 	-AcceptsDeliveredCash:
 	Selectable:
-		Bounds: 87381, 43690
-		DecorationBounds: 89173, 54613
+		DecorationBounds: 2090, 1280
 		
 	WithResourceStoragePipsDecoration:
 		Position: BottomLeft
@@ -640,7 +637,7 @@ N64AFLD:
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Selectable:
-		Bounds: 174762, 87381
+		Bounds: 4096, 2048
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,-512,256, 0,-1451,384, 0,512,128, 0,1536,85
 		Type: Rectangle
@@ -738,8 +735,7 @@ N64WEAP:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 110000
@@ -932,7 +928,7 @@ N64HQGDI:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: n64procgdi, ~techlevel.medium
+		Prerequisites: n64procgdi
 		Queue: Building, RABuilding
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	Building:
@@ -940,8 +936,7 @@ N64HQGDI:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -978,7 +973,7 @@ N64HQGDI:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 	SupportPowerChargeBar:
@@ -1005,7 +1000,7 @@ N64HQNOD:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: n64procnod, ~techlevel.medium
+		Prerequisites: n64procnod
 		Queue: Building, RABuilding
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	Building:
@@ -1013,8 +1008,7 @@ N64HQNOD:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -1051,7 +1045,7 @@ N64HQNOD:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 	SupportPowerChargeBar:
@@ -1081,8 +1075,7 @@ N64FIXGDI:
 		Footprint: _+_ +++ _+_
 		Dimensions: 3,3
 	Selectable:
-		Bounds: 116480, 61866, 0, 5461
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -1125,8 +1118,7 @@ N64FIXNOD:
 		Footprint: _+_ +++ _+_
 		Dimensions: 3,3
 	Selectable:
-		Bounds: 116480, 61866, 0, 5461
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -1168,7 +1160,7 @@ N64EYE:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high, !ionc
+		Prerequisites: anyhq, !ionc
 		Queue: Building, RABuilding
 		Description: Provides radar and Orbital Ion Cannon support power.\nRequires power to operate.
 	Building:
@@ -1176,8 +1168,7 @@ N64EYE:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -1251,6 +1242,8 @@ N64NUK2GDI:
 	ScalePowerWithHealth:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: building ##########
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: N64NUKEGDI
 
 N64NUK2NOD:
 	Inherits: ^BaseBuilding
@@ -1302,7 +1295,7 @@ N64TMPL:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high, !nodnuke
+		Prerequisites: anyhq, !nodnuke
 		Queue: Building, RABuilding
 		Description: Provides Nuclear Strike support power.\nUnlocks Stealth Tank, Chem. Warrior and Obelisk of Light.\nRequires power to operate.
 	Building:
@@ -1310,8 +1303,7 @@ N64TMPL:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -21845
+		Bounds: 3072, 2901, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 210000
@@ -1368,7 +1360,7 @@ N64TMPL:
 N64GUN:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Selectable:
 		Bounds: 1024, 1024
 	Valued:
@@ -1463,8 +1455,7 @@ N64OBLI:
 		Queue: Defence, RADefence
 		Description: Advanced base defense.\nRequires power to operate.\n  Strong vs all Ground units\n  Cannot target Aircraft
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 80085, 0, -18176
+		Bounds: 938, 1877, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 75000
@@ -1498,7 +1489,7 @@ N64OBLI:
 N64GTWR:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Selectable:
 		Bounds: 1024, 1024
 	Valued:
@@ -1543,12 +1534,11 @@ N64ATWR:
 		Name: Advanced Guard Tower
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 87381, 0, -21845
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 55000
@@ -1753,7 +1743,6 @@ N64E2:
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: Grenade
-		FireDelay: 15
 	TakeCover:
 		ProneOffset: 300,0,-227
 	WithInfantryBody:
@@ -1778,8 +1767,8 @@ N64E3GDI:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 30
 		Prerequisites:
+		BuildPaletteOrder: 30
 		Queue: Infantry, RAInfantry
 		Description: Anti-tank/Anti-aircraft infantry. \n  Strong vs Tanks, Aircraft\n  Weak vs Infantry
 	Mobile:
@@ -1813,8 +1802,8 @@ N64E3NOD:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 30
 		Prerequisites:
+		BuildPaletteOrder: 30
 		Queue: Infantry, RAInfantry
 		Description: Anti-tank/Anti-aircraft infantry. \n  Strong vs Tanks, Aircraft\n  Weak vs Infantry
 	Mobile:
@@ -2094,8 +2083,8 @@ N64BGGY:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 20
 		Prerequisites:
+		BuildPaletteOrder: 20
 		Queue: Vehicle, RAVehicle
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry\n  Weak vs Tanks
 	Mobile:
@@ -2180,8 +2169,8 @@ N64FTNK:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 55
 		Prerequisites:
+		BuildPaletteOrder: 55
 		Queue: Vehicle, RAVehicle
 		Description: Heavily armored flame-throwing vehicle.\n  Strong vs Infantry, Buildings and Vehicles\n  Weak vs Tanks
 	Mobile:
@@ -2272,8 +2261,8 @@ N64STNK:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 90
 		Prerequisites:
+		BuildPaletteOrder: 90
 		Queue: Vehicle, RAVehicle
 		Description: Long-range missile tank that can cloak.\nCan attack Aircraft.\nHas weak armor. Can be spotted by infantry and defense structures.\n  Strong vs Vehicles, Tanks\n  Weak vs Infantry.
 	Mobile:
@@ -2298,7 +2287,7 @@ N64STNK:
 		Condition: cloak-force-disabled
 		ValidDamageStates: Critical
 	Armament:
-		Weapon: 227mm.stnk
+		Weapon: 227mm_stnk
 		LocalOffset: 213,43,128, 213,-43,128
 	AttackFrontal:
 		FacingTolerance: 0
@@ -2327,7 +2316,7 @@ N64APC:
 		Name: APC
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: apc
+		OverrideActor: td_gdi_apc
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: n64pyle
@@ -2378,7 +2367,7 @@ N64APC:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Selectable:
-		Class: apc
+		Class: td_gdi_apc
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -2544,7 +2533,6 @@ N64HTNK:
 		Speed: 56
 		TurnSpeed: 32
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 87000
 	Repairable:
@@ -2585,7 +2573,7 @@ N64HTNK:
 	#	EffectiveOwnerFromOwner: true
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -2660,7 +2648,6 @@ MCV.N64GDI:
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -2703,7 +2690,6 @@ MCV.N64NOD:
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -2747,7 +2733,7 @@ N64ORCA:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium
+		Prerequisites: hpad, anyhq
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with AG Missiles.\n  Strong vs Buildings, Tanks\n  Weak vs Infantry
 	Aircraft:
@@ -2803,8 +2789,8 @@ N64HELI:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 130
 		Prerequisites:
+		BuildPaletteOrder: 130
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with Chainguns.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -2861,4 +2847,3 @@ N64HELI:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 5
-

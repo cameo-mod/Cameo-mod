@@ -1,0 +1,219 @@
+ra1_soviets_spyplane:
+	Inherits: ^AirstrikePlane
+	Inherits@HeavyArmorDoctrineRA1: ^HeavyArmorDoctrineRA1
+	Inherits@Afterburners: ^AfterburnersUpgradeRA1
+	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	Tooltip:
+		Name: Spy Plane
+	Valued:
+		Cost: 5000
+	Health:
+		HP: 100000
+	Armor:
+		Type: Bomber
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 20
+		Speed: 300
+		Repulsable: False
+		MaximumPitch: 25
+	AttackBomber:
+		FacingTolerance: 32
+	Selectable:
+	SelectionDecorations:
+	# -Voiced:
+	# -Targetable@AIRBORNE:
+	Contrail@1:
+		Offset: -725,683,0
+	Contrail@2:
+		Offset: -725,-683,0
+	SpawnActorOnDeath:
+		Actor: U2.Husk
+	Armament:
+		Weapon: SpyPlaneTargeting
+	ParaDrop:
+		DropRange: 5c0
+		ChuteSound: chute1.aud
+	Cargo:
+		MaxWeight: 25
+	LeavesTrails:
+		Offsets: -1c43,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	RejectsOrders:
+	GivesExperience:
+	DynamicSpeedMultiplier:
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	RenderSprites:
+		Image: ra1_soviets_spyplane
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_afterburners, ra1_soviets_upgrade_stalinium
+
+ra1_soviets_superspyplane:
+	Inherits: ra1_soviets_spyplane
+	Armament:
+		Weapon: SpyPlaneTargeting2
+
+ra1_badger:
+	Inherits: ^AirstrikePlane
+	ParaDrop:
+		DropRange: 5c0
+		ChuteSound: chute1.aud
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Health:
+		HP: 150000
+	Armor:
+		Type: Bomber
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 20
+		Speed: 175
+		Repulsable: False
+		MaximumPitch: 56
+	Cargo:
+		MaxWeight: 10
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Badger
+	Contrail@1:
+		Offset: -432,560,0
+	Contrail@2:
+		Offset: -432,-560,0
+	SpawnActorOnDeath:
+		Actor: BADR.Husk
+	LeavesTrails@0:
+		Offsets: -432,560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	LeavesTrails@1:
+		Offsets: -432,-560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	RejectsOrders:
+	GivesExperience:
+	DynamicSpeedMultiplier:
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	RenderSprites:
+		PlayerPalette: raplayer
+
+ra1_soviets_badger:
+	Inherits: ra1_badger
+	Inherits@HeavyArmorDoctrineRA1: ^HeavyArmorDoctrineRA1
+	Inherits@Afterburners: ^AfterburnersUpgradeRA1
+	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	RenderSprites:
+		Image: ra1_badger
+	ActorStatValues:
+		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_afterburners, ra1_soviets_upgrade_stalinium
+
+ra1_badger_bomber:
+	Inherits: ra1_badger
+	AttackBomber:
+		FacingTolerance: 32
+	Armament:
+		Weapon: ParaBomb
+	RenderSprites:
+		Image: ra1_badger
+
+ra1_allies_badger:
+	Inherits: ra1_badger
+	Inherits@AirSuperiorityDoctrine: ^AirSuperiorityDoctrine
+	RenderSprites:
+		Image: ra1_badger
+
+japan_badger:
+	Inherits: ra1_badger
+	Inherits@DivineWindProtocol: ^DivineWindProtocol
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	RenderSprites:
+		Image: c17
+	SpawnActorOnDeath:
+		Actor: C17.Husk
+	ActorStatValues:
+		Upgrades: japan_upgrade_divinewindprotocol, japan_upgrade_nanotechrepairs
+
+ra1_allies_cargoplanebomber:
+	Inherits: ra1_badger_bomber
+	Tooltip:
+		Name: Cargo Plane
+	RenderSprites:
+		Image: c17
+	SpawnActorOnDeath:
+		Actor: C17.Husk
+
+ra1_allies_cargoplaneparadrop:
+	Inherits: ra1_badger
+	Tooltip:
+		Name: Cargo Plane
+	RenderSprites:
+		Image: c17
+	SpawnActorOnDeath:
+		Actor: C17.Husk
+
+japan_japanesesuperbomber:
+	Inherits: ra1_badger
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Tooltip:
+		Name: Japanese Super Bomber
+	Health:
+		HP: 125000
+	Aircraft:
+		Speed: 200
+	Valued:
+		Cost: 5000
+	Contrail@1:
+		Offset: -300,300,0
+	Contrail@2:
+		Offset: -300,-300,0
+	AttackBomber:
+		FacingTolerance: 32
+	Armament:
+		Weapon: JapanSuperBomb
+	RenderSprites:
+		Image: japan_japanesesuperbomber
+		PlayerPalette: player
+	SpawnActorOnDeath:
+		Actor: jsuperbomber.Husk
+
+ra1_allies_rapierjumpjet_husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Rapier Jumpjet
+	Contrail:
+		Offset: -1000,0,250
+	Aircraft:
+		TurnSpeed: 23
+		Speed: 184
+	LeavesTrails:
+		Offsets: -1000,0,250
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	RenderSprites:
+		Image: ra1_allies_rapierjumpjet
+		PlayerPalette: player_rgba
+

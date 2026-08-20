@@ -1,0 +1,255 @@
+td_nod_chinooktransport:
+	Inherits: ^Helicopter
+	Inherits@Template: ^UnarmedTransportHelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@bot: ^BotAutoDeployUnarmedAirTransport
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Valued:
+		Cost: 3100
+	Tooltip:
+		Name: Nod Chinook Transport
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~td_nod_helipad
+		Queue: Aircraft, RAAircraft
+		Description: actor_tran.description
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	EjectOnDeath:
+		PilotActor: td_nod_minigunner
+	WithIdleOverlay@ROTOR1AIR:
+		Offset: 597,0,85
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR1GROUND:
+		Offset: 597,0,85
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR2AIR:
+		Offset: -597,0,171
+		Sequence: rotor2
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR2GROUND:
+		Offset: -597,0,171
+		Sequence: slow-rotor2
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	Cargo:
+		UnloadVoice: Move
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 8
+		InitialUnits: td_nod_minigunner, td_nod_rocketsoldier, td_nod_flamethrower, td_nod_chemicalwarrior, td_nod_chemicalrocketsoldier, td_nod_lasertrooper, td_nod_stealthsoldier, td_nod_blackhandflamer
+	SpawnActorOnDeath:
+		Actor: TRAN.Husk
+	SelectionDecorations:
+	Selectable:
+		Class: tran
+		DecorationBounds: 1920, 1920
+	RenderSprites:
+		Image: tran
+		PlayerPalette: raplayer
+	FireWarheadsOnDeath:
+		Weapon: LargeHeliExplode
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics
+
+td_nod_apacheattackhelicopter:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@eject: ^AircraftEjectOnDeath
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Apache Attack Helicopter
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~td_nod_helipad
+		Queue: Aircraft, RAAircraft
+		Description: actor_heli.description
+	Aircraft:
+		Speed: 160
+		TurnSpeed: 32
+		RepulsionSpeed: 32
+	Health:
+		HP: 45000
+	Repairable:
+		HpPerStep: 2250
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Armament@PRIMARY:
+		Weapon: HeliGun
+		LocalOffset: 128,-213,-85, 128,213,-85
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+	Armament@Upgrade:
+		Weapon: HeliMissiles
+		LocalOffset: 100,-250,-100, 100,250,-100
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	WithIdleOverlay@ROTORAIR:
+		Offset: 0,0,85
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTORGROUND:
+		Offset: 0,0,85
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	WithMuzzleOverlay:
+	SpawnActorOnDeath:
+		Actor: HELI.Husk
+	EjectOnDeath:
+		PilotActor: td_nod_chemicalwarrior
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	AmmoPool:
+		Ammo: 4
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 8
+		Count: 1
+	ReloadAmmoDelayMultiplier@td_nod_upgrade_blackmarketupgrades:
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
+		Modifier: 50
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_blackmarketupgrades
+
+HELI.Husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Apache Attack Helicopter
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 186
+	WithIdleOverlay:
+		Offset: 0,0,85
+		Sequence: rotor
+	RenderSprites:
+		Image: td_nod_apacheattackhelicopter
+
+td_nod_venom:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@cloak: ^CloakedAircraft
+	Inherits@EliteCapacitors: ^EliteCapacitors
+	Inherits@BurningLasers: ^BurningLasers
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Venom
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~td_nod_helipad, td_nod_templeprime, ~td_nod_promotion_upgradeupnodvenomname
+		Queue: Aircraft, RAAircraft
+		Description: actor_venom.description
+	Aircraft:
+		TurnSpeed: 40
+		Speed: 200
+	Health:
+		HP: 27500
+	Repairable:
+		HpPerStep: 1375
+	ChangesHealth@SelfHealing:
+		Step: 11
+	Armament@Base:
+		Weapon: VenomLaser
+		LocalOffset: 750,0,-250
+		PauseOnCondition: !ammo
+		RequiresCondition: !td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
+	Armament@Elite:
+		Weapon: VenomLaserInferno
+		LocalOffset: 750,0,-250
+		PauseOnCondition: !ammo
+		RequiresCondition: td_nod_upgrade_elitecapacitors && !td_nod_upgrade_burninglasers
+	Armament@Burning:
+		Weapon: VenomLaserBurning
+		LocalOffset: 750,0,-250
+		PauseOnCondition: !ammo
+		RequiresCondition: td_nod_upgrade_burninglasers
+	AttackAircraft:
+		FacingTolerance: 80
+		OpportunityFire: false
+		PersistentTargeting: false
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: nodvenom.husk
+	EjectOnDeath:
+		PilotActor: td_nod_stealthsoldier
+	SelectionDecorations:
+	ReloadAmmoDelayMultiplier@td_nod_upgrade_elitecapacitors:
+		Modifier: 85
+		RequiresCondition: td_nod_upgrade_elitecapacitors
+	GrantCondition@gatling:
+		Condition: cloak-force-disabled
+		RequiresCondition: gatling
+	Selectable:
+		DecorationBounds: 1280, 1024
+	RenderSprites:
+		Image: td_nod_venom
+	AmmoPool:
+		Ammo: 7
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 36
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 7
+	Cloak:
+		UncloakOn: Attack, Damage
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elitecapacitors
+
+nodvenom.husk:
+	Inherits: ^SmallHelicopterHusk
+	Tooltip:
+		Name: Venom
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 186
+	RenderSprites:
+		Image: td_nod_venom

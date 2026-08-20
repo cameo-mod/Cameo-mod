@@ -1,0 +1,580 @@
+wc2_orcs_greathall:
+	Inherits: ^BaseBuilding
+	Inherits@ref: ^Refinery
+	Inherits@shape: ^3x2Shape
+	Inherits@bot: ^BotMicromanageable
+	Inherits@conyard: ^Conyard
+	Tooltip:
+		Name: Great Hall
+		RequiresCondition: !wc2_orcs_stronghold && !wc2_orcs_fortress
+	Tooltip@2:
+		Name: Stronghold
+		RequiresCondition: wc2_orcs_stronghold && !wc2_orcs_fortress
+	Tooltip@3:
+		Name: Fortress
+		RequiresCondition: wc2_orcs_fortress
+	Production@INFANTRY:
+		Produces: Infantry
+		PauseOnCondition: disabled
+	ProductionQueue@INFANTRY:
+		Type: Infantry
+		DisplayOrder: 2
+		Group: Infantry
+		LowPowerModifier: 300
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		InfiniteBuildLimit: 10
+	ProductionBar@INFANTRY:
+		ProductionType: Infantry
+	# Production@NORMAL:
+	# 	-RequiresCondition:
+	# -Production@CLASSICPRODUCTIONQUEUES:
+	# ProductionBar@BUILDING:
+	# 	-RequiresCondition:
+	# ProductionBar@DEFENCE:
+	# 	-RequiresCondition:
+	# -ProductionBar@RABUILDING:
+	# -ProductionBar@RADEFENCE:
+	ProductionQueue@Building:
+		LowPowerModifier: 100
+	ProductionQueue@Defense:
+		LowPowerModifier: 100
+	Selectable:
+		Bounds: 3072, 2048
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@wc2_orcs_stronghold:
+		Prerequisite: wc2_orcs_stronghold
+		RequiresCondition: wc2_orcs_stronghold
+	ProvidesPrerequisite@wc2_orcs_fortress:
+		Prerequisite: wc2_orcs_fortress
+		RequiresCondition: wc2_orcs_fortress
+	ProvidesPrerequisite@strongholdupgradeavailable:
+		Prerequisite: strongholdupgradeavailable
+		RequiresCondition: !wc2_orcs_stronghold
+	ProvidesPrerequisite@fortressupgradeavailable:
+		Prerequisite: fortressupgradeavailable
+		RequiresCondition: wc2_orcs_stronghold && !wc2_orcs_fortress
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			wc2_orcs_greathall: wc2_orcs_stronghold
+		Requirements:
+			wc2_orcs_greathall: !wc2_orcs_stronghold
+	Pluggable@2:
+		Offset: 0,0
+		Conditions:
+			wc2_orcs_stronghold: wc2_orcs_fortress
+		Requirements:
+			wc2_orcs_stronghold: wc2_orcs_stronghold && !wc2_orcs_fortress
+	WithSpriteBody:
+		RequiresCondition: !wc2_orcs_stronghold && !wc2_orcs_fortress
+	WithSpriteBody@keep:
+		Sequence: wc2_orcs_stronghold
+		Name: stronghold
+		RequiresCondition: wc2_orcs_stronghold && !wc2_orcs_fortress
+	WithSpriteBody@castle:
+		Sequence: wc2_orcs_fortress
+		Name: fortress
+		RequiresCondition: wc2_orcs_fortress
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: wc2_constrct.aud
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil ##########
+	DamageMultiplier@keep:
+		Modifier: 75
+		RequiresCondition: wc2_orcs_greathall && !wc2_orcs_fortress
+	DamageMultiplier@castle:
+		Modifier: 50
+		RequiresCondition: wc2_orcs_fortress
+	GrantConditionOnPowerState@supply:
+		Condition: lowpower
+		ValidPowerStates: Low, Critical
+	ProvidesPrerequisite@supplylimit:
+		Prerequisite: supplylimit
+		RequiresCondition: lowpower
+	RallyPoint: ##########
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0 #-1323,1280,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesRadar:
+		RequiresCondition: !jammed
+	ExternalCondition@JAMMED:
+		Condition: jammed
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi, hatchery
+	WithMakeAnimation:
+	-WithDeathAnimation:
+	Refinery:
+	DockHost:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 0, 1c512, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: -1c512, 1c512, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c512, 1c512, 0
+		MaxQueueLength: 10
+	Sellable:
+	Refinery:
+		DockOffset: 0,2
+	StoresResources:
+		Capacity: 1000
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	Transforms:
+		IntoActor: wc2_orcs_mobileconstructionvehicleorc
+
+wc2_orcs_stronghold:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Stronghold
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites:  ~wc2_orcs_greathall, strongholdupgradeavailable, wc2_orcs_blacksmith
+		Description: Unlocks more advanced buildings.
+	Plug:
+		Type: wc2_orcs_greathall
+
+wc2_orcs_fortress:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Fortress
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_stronghold, fortressupgradeavailable, wc2_orcs_golbinalchemist, wc2_orcs_ogremound
+		Description: Unlocks more advanced buildings.
+	Plug:
+		Type: wc2_orcs_stronghold
+
+wc2_orcs_pigfarm:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_farm: ^WC2Farm
+	Tooltip:
+		Name: Pigfarm
+	Valued:
+		Cost: 1000
+	Power:
+		Amount: 250
+	StoresResources:
+		Capacity: 5000
+	Health:
+		HP: 250000
+	Buildable:
+		Prerequisites: ~wc2_orcs_greathall
+		Queue: Building, RABuilding
+		Description: Provides food and supply for units.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orcs_grunt
+	Voiced:
+		VoiceSet: wc2orcfarmvoice
+	### Upgrade stuff ###
+	# Un upgraded sprite
+	WithSpriteBody:
+		RequiresCondition: !wc2_orcs_upgrade_betterfarm && !wc2_orcs_upgrade_bestfarm
+
+	# Better Farm Upgrade
+	GrantConditionOnPrerequisite@betterfarm:
+		Condition: wc2_orcs_upgrade_betterfarm
+		Prerequisites: wc2_orcs_upgrade_betterfarm
+	WithSpriteBody@betterfarm:
+		Sequence: wc2_orcs_upgrade_betterfarm
+		RequiresCondition: wc2_orcs_upgrade_betterfarm && !wc2_orcs_upgrade_bestfarm
+	PowerMultiplier@betterfarm:
+		Modifier: 150
+		RequiresCondition: wc2_orcs_upgrade_betterfarm && !wc2_orcs_upgrade_bestfarm
+	DamageMultiplier@betterfarm:
+		Modifier: 66
+		RequiresCondition: wc2_orcs_upgrade_betterfarm && !wc2_orcs_upgrade_bestfarm
+
+	# Best Farm Upgrade
+	GrantConditionOnPrerequisite@bestfarm:
+		Condition: wc2_orcs_upgrade_bestfarm
+		Prerequisites: wc2_orcs_upgrade_bestfarm
+	WithSpriteBody@bestfarm:
+		Sequence: wc2_orcs_upgrade_bestfarm
+		RequiresCondition: wc2_orcs_upgrade_bestfarm
+	PowerMultiplier@bestfarm:
+		Modifier: 200
+		RequiresCondition: wc2_orcs_upgrade_bestfarm
+	DamageMultiplier@bestfarm:
+		Modifier: 50
+		RequiresCondition: wc2_orcs_upgrade_bestfarm
+	SpawnActorsOnSell@bestfarm:
+		ActorTypes: wc2_critter_boar
+		ValuePercent: 4
+		RequiresCondition: wc2_orcs_upgrade_bestfarm
+
+wc2_orcs_barracks:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_barracks: ^WC2Barracks
+	Tooltip:
+		Name: Barracks
+	Buildable:
+		Queue: Building, RABuilding
+		Description: Warriors of the Horde live and train here.\nProduces many Orcish units.
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_pigfarm
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orcs_grunt
+	Voiced:
+		VoiceSet: orcbarracksvoice
+
+wc2_orcs_trolllumbermill:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_lumber_mill: ^WC2LumberMill
+	Tooltip:
+		Name: Troll Lumbermill
+	Buildable:
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_pigfarm
+		Queue: Building, RABuilding
+		Description: Dropoff point for gold. (Tiberium)\nCan store up to 1000 resource\nProduces axes enabling Axethrowers.\nProvides upgrades for Axethrowers.\nUnlocks Guard Tower upgrade.
+	FreeActor@1:
+		Actor: wc2_orcs_peon
+	FreeActor@2:
+		Actor: wc2_orcs_peon
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orcs_trollaxethrower
+	Refinery:
+	DockHost:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: -1c0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c0, 1c0, 0
+		MaxQueueLength: 10
+	Voiced:
+		VoiceSet: wc2orclumbermillvoice
+
+wc2_orcs_blacksmith:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_blacksmith: ^WC2Blacksmith
+	Inherits@addon: ^BuildingPlugProducer
+	Tooltip:
+		Name: Blacksmith
+	Buildable:
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_barracks
+		Queue: Building, RABuilding
+		Description: Enables Catapults and upgrading Scout Towers to Cannon Towers.\nEnables upgrades to units.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orcs_grunt
+	Voiced:
+		VoiceSet: wc2orcblacksmithvoice
+
+wc2_orcs_golbinalchemist:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_inventor: ^WC2Inventor
+	Tooltip:
+		Name: Golbin Alchemist
+	Buildable:
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_stronghold
+		Queue: Building, RABuilding
+		Description: Ingenious goblins dabble in alchemy and invention.\nProvides Radar.\nTrains Sappers & Zeppelins.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orcs_grunt
+	Voiced:
+		VoiceSet: wc2orcgoblinalchemist
+
+wc2_orcs_ogremound:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_stables: ^WC2Stables
+	Tooltip:
+		Name: Ogre Mound
+	Buildable:
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_stronghold
+		Queue: Building, RABuilding
+		Description: Unlocks production of Ogres.\nThis place smells bad!
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orcs_grunt
+	Voiced:
+		VoiceSet: wc2orcogremound
+
+wc2_orcs_altarofstorms:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_church: ^WC2Church
+	Tooltip:
+		Name: Altar of Storms
+	Buildable:
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_fortress
+		Queue: Building, RABuilding
+		Description: Teaches Ogres how to read and cast dark magicks.\nUnlocks Ogre Mage upgrade for Ogres.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orcs_grunt
+	Voiced:
+		VoiceSet: wc2orcaltarofstorms
+	# Support powers
+	# Spy of Kilrogg support power.
+	AirstrikePower@SPYOFKILROGG:
+		OrderName: wc2_spy_of_kilrogg
+		# Prerequisites:
+		# 	1: wc2_orcs_altarofstorms
+		# Icons:
+		# 	1: kilrogg
+		Icon: kilrogg
+		ChargeInterval: 3750
+		# Names:
+		# 	1: Spy of Kilrogg
+		# Descriptions:
+		# 	1: Reveals an area of the map\nand cloaked enemy units.
+		Name: Spy of Kilrogg
+		Description: Reveals an area of the map\nand cloaked enemy units.
+		SelectTargetSpeechNotification: SelectTarget
+		EndChargeSpeechNotification: SpyPlaneReady
+		CameraActor: camera.spyplane
+		CameraRemoveDelay: 150
+		SquadSizes:
+			1: 1
+		UnitTypes:
+			1: wc2_support_orc_eye_of_kilrogg
+		QuantizedFacings: 8
+		DisplayBeacon: true
+		BeaconImage: icon
+		BeaconPoster: kilrogg_beacon
+		ArrowSequence: wc2_arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: wc2_airstrikedirection
+		SupportPowerPaletteOrder: 10
+	# Bloodlust support power.
+	GrantExternalConditionPower@BLOODLUST:
+		OrderName: wc2_bloodlust
+		#PauseOnCondition: lowpower
+		# Prerequisites:
+		# 	1: wc2_orcs_altarofstorms
+		# Icons:
+		# 	1: bloodlust
+		Icon: bloodlust
+		ChargeInterval: 3000
+		# Names:
+		# 	1: Bloodlust
+		# Descriptions:
+		# 	1: Triples damage output of units.
+		Name: Bloodlust
+		Description: Triples damage output of units.
+		Durations:
+			1: 500
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		#BeginChargeSpeechNotification: IronCurtainCharging
+		#EndChargeSpeechNotification: IronCurtainReady
+		DisplayRadarPing: True
+		Conditions:
+			1: wc2_cond_bloodlust
+		OnFireSound: wc2_blodlust.aud
+		IncomingSound: ironcur9.aud
+		SupportPowerPaletteOrder: 20
+		ValidRelationships: Enemy, Neutral, Ally
+		Dimensions: 5, 5
+		Footprints:
+			1: __x__ _xxx_ xxxxx _xxx_ __x__
+	# Runes support power.
+	IonCannonPower@RUNES:
+		OrderName: wc2_runes
+		PauseOnCondition: lowpower
+		# Prerequisites:
+		# 	1: ~techlevel.superweapons
+		Prerequisites: ~techlevel.superweapons
+		# Icons:
+		# 	1: runes
+		Icon: runes
+		Cursor: ability
+		ChargeInterval: 4500
+		# Names:
+		# 	1: Runes
+		# Descriptions:
+		# 	1: Deploy OgreMage runes anywhere on the map.\nThese are land mines.\nUse with caution.\nDisappears after a while.
+		Name: Runes
+		Description: Deploy OgreMage runes anywhere on the map.\nThese are land mines.\nUse with caution.\nDisappears after a while.
+		EndChargeSpeechNotification: AirstrikeReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		OnFireSound: wc2_spell.aud
+		DisplayTimerRelationships: Ally, Neutral
+		DisplayRadarPing: True
+		CameraActor: camera.small
+		SupportPowerPaletteOrder: 30
+		Weapon: wc2runesSuper
+		WeaponDelay: 15
+		Effect: wc2_effect_sparkle
+		EffectSequence: idle-longer
+
+wc2_orcs_templeofthedamned:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_temple: ^WC2Temple
+	Tooltip:
+		Name: Temple of the Damned
+	Buildable:
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_fortress
+		Queue: Building, RABuilding
+		Description: Terrible rituals are performed here.\nTrains Death Knights and raise Skeletons.\nUnlocks Death & Decay superweapon.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orcs_grunt
+	Voiced:
+		VoiceSet: wc2orctempleofthedamnedvoice
+	# Support powers
+	# Haste
+	GrantExternalConditionPower@HASTE:
+		OrderName: wc2_haste
+		#PauseOnCondition: lowpower
+		# Prerequisites:
+		# 	1: wc2_orcs_templeofthedamned
+		# Icons:
+		# 	1: haste
+		Icon: haste
+		ChargeInterval: 3000
+		# Names:
+		# 	1: Haste
+		# Descriptions:
+		# 	1: Increases movement speed and attack rate.
+		Name: Haste
+		Description: Increases movement speed and attack rate.
+		Durations:
+			1: 500
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		#BeginChargeSpeechNotification: IronCurtainCharging
+		#EndChargeSpeechNotification: IronCurtainReady
+		DisplayRadarPing: True
+		Conditions:
+			1: wc2_cond_haste
+		OnFireSound: wc2_haste.aud
+		#IncomingSound: ironcur9.aud
+		SupportPowerPaletteOrder: 30
+		ValidRelationships: Enemy, Neutral, Ally
+		Dimensions: 5, 5
+		Footprints:
+			1: __x__ _xxx_ xxxxx _xxx_ __x__
+	# Death and decay super weapon
+	IonCannonPower@DEATHANDDECAY:
+		OrderName: wc2_deathanddecay
+		PauseOnCondition: lowpower
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Icons:
+			1: deathanddecay
+		Names:
+			1: Death and decay
+		Descriptions:
+			1: Rots and kills in a large area.
+		Cursor: ioncannon
+		ChargeInterval: 7500
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		OnFireSound: wc2_decay.aud
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayRadarPing: True
+		CameraActor: camera.small
+		SupportPowerPaletteOrder: 90
+		Weapon: wc2deathanddecaySuper
+		WeaponDelay: 0
+		TargetCircleRanges:
+			1: 7000
+		Effect: wc2_effect_death_and_decay
+		EffectSequence: idle
+
+wc2_orcs_dragonroost:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_nest: ^WC2Nest
+	Tooltip:
+		Name: Dragon Roost
+	Buildable:
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_fortress
+		Queue: Building, RABuilding
+		Description: A captured dragon is forced to lay eggs for the Horde.\nTrains mighty Dragons.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orcs_grunt
+	Voiced:
+		VoiceSet: wc2orcdragonroost
+
+wc2_orcs_guardtower_plug:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Upgraded Guard Tower
+	Valued:
+		Cost: 600
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_trolllumbermill, scouttowerupgradeavailable
+		Description: Ground base defense.
+	Plug:
+		Type: wcscouttower
+	RenderSprites:
+		Image: wc2_orcs_guardtower
+
+wc2_orcs_cannontower_plug:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Upgraded Cannon Tower
+	Valued:
+		Cost: 600
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_blacksmith, scouttowerupgradeavailable
+		Description: Anti-aircraft base defense.
+	Plug:
+		Type: wcscouttower2
+	RenderSprites:
+		Image: wc2_orcs_cannontower
+
+wc2_orcs_orcgoldmine:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_goldmine: ^WC2Goldmine
+	Tooltip:
+		Name: Orc Gold Mine
+	Buildable:
+		Queue: Building, RABuilding
+		Description: Send workers inside to provide passive income.\nMiners progressively get experience and work more efficiently.
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_blacksmith, derricklimit
+	Voiced:
+		VoiceSet: neutralgoldminevoice
+	RenderSprites:
+		Image: wc2_orcs_orcgoldmine
+
+wc2_orcs_orcgoldmine_bot:
+	Inherits@WC2BUILDING: wc2_orcs_orcgoldmine
+	Inherits@gar: ^ClearableGarrison
+	Valued:
+		Cost: 15000
+	Buildable:
+		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_blacksmith, derricklimit, ~botplayer
+		Description: Send workers inside to provide passive income.
+	Cargo:
+		InitialUnits: wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon
+	RenderSprites:
+		Image: wc2_orcs_orcgoldmine
+
+####################################################################################################
+# WC2 ORC UNITS
+####################################################################################################

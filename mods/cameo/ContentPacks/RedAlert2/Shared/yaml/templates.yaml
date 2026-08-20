@@ -1,0 +1,709 @@
+^RA2Parachutes:
+	WithParachute: ##########
+		ShadowImage: parach_shadow
+		ShadowSequence: idle
+		Image: ra2parach
+		Sequence: idle
+		OpeningSequence: open
+		ClosingSequence: disolve
+		Offset: 0,0,427
+		RequiresCondition: parachute
+		Palette: ra2infantry
+		IsPlayerPalette: true
+
+^GainsExperienceRA2:
+	GainsExperience:
+		LevelUpNotification: LevelUpRA2
+		Conditions:
+			100: rank-veteran
+			250: rank-veteran
+			450: rank-veteran
+			700: rank-veteran
+			1000: rank-veteran
+		LevelUpImage: crate-effects
+		LevelUpSequence: levelup-ra2
+		LevelUpPalette: ra2effect
+	ExternalCondition@rankveteran:
+		Condition: rank-veteran
+		TotalCap: 5
+	GrantCondition@RANK-ELITE:
+		RequiresCondition: rank-veteran >= 5
+		Condition: rank-elite
+	WithDecoration@RANK-1:
+		Image: ra2rank
+		Sequence: rank-veteran-1
+		Palette: effect
+		Position: BottomRight
+		Scale: 0.50
+		ScaleWithZoom: True
+		RequiresCondition: rank-veteran == 1 && !rank-elite
+	WithDecoration@RANK-2:
+		Image: ra2rank
+		Sequence: rank-veteran-2
+		Palette: effect
+		Position: BottomRight
+		Scale: 0.50
+		ScaleWithZoom: True
+		RequiresCondition: rank-veteran == 2 && !rank-elite
+	WithDecoration@RANK-3:
+		Image: ra2rank
+		Sequence: rank-veteran-3
+		Palette: effect
+		Position: BottomRight
+		Scale: 0.50
+		ScaleWithZoom: True
+		RequiresCondition: rank-veteran == 3 && !rank-elite
+	WithDecoration@RANK-4:
+		Image: ra2rank
+		Sequence: rank-veteran-4
+		Palette: effect
+		Position: BottomRight
+		Scale: 0.50
+		ScaleWithZoom: True
+		RequiresCondition: rank-veteran == 4 && !rank-elite
+	WithDecoration@RANK-ELITE:
+		Image: ra2rank
+		Sequence: rank-elite
+		Palette: effect
+		Position: BottomRight
+		Scale: 0.50
+		ScaleWithZoom: True
+		RequiresCondition: rank-elite
+	DamageMultiplier@RANK-1:
+		Modifier: 90
+	DamageMultiplier@RANK-2:
+		Modifier: 80
+	DamageMultiplier@RANK-3:
+		Modifier: 70
+	DamageMultiplier@RANK-4:
+		Modifier: 60
+		RequiresCondition: rank-veteran == 4
+	DamageMultiplier@RANK-ELITE:
+		RequiresCondition: rank-elite
+		Modifier: 50
+	FirepowerMultiplier@RANK-1:
+		Modifier: 120
+	FirepowerMultiplier@RANK-2:
+		Modifier: 140
+	FirepowerMultiplier@RANK-3:
+		Modifier: 160
+	FirepowerMultiplier@RANK-4:
+		RequiresCondition: rank-veteran == 4
+		Modifier: 180
+	FirepowerMultiplier@RANK-ELITE:
+		RequiresCondition: rank-elite
+		Modifier: 200
+	InaccuracyMultiplier@RANK-1:
+		Modifier: 95
+	InaccuracyMultiplier@RANK-2:
+		Modifier: 90
+	InaccuracyMultiplier@RANK-3:
+		Modifier: 85
+	InaccuracyMultiplier@RANK-4:
+		RequiresCondition: rank-veteran == 4
+		Modifier: 80
+	InaccuracyMultiplier@RANK-ELITE:
+		Modifier: 75
+	SpeedMultiplier@RANK-1:
+		Modifier: 105
+	SpeedMultiplier@RANK-2:
+		Modifier: 110
+	SpeedMultiplier@RANK-3:
+		Modifier: 115
+	SpeedMultiplier@RANK-4:
+		RequiresCondition: rank-veteran == 4
+		Modifier: 120
+	SpeedMultiplier@RANK-ELITE:
+		RequiresCondition: rank-elite
+		Modifier: 125
+	ReloadDelayMultiplier@RANK-1:
+		Modifier: 100
+	ReloadDelayMultiplier@RANK-2:
+		Modifier: 100
+	ReloadDelayMultiplier@RANK-3:
+		Modifier: 100
+	ReloadDelayMultiplier@RANK-ELITE:
+		Modifier: 100
+	RangeMultiplier@RANK-1:
+		Modifier: 100
+	RangeMultiplier@RANK-2:
+		Modifier: 100
+	RangeMultiplier@RANK-3:
+		Modifier: 100
+	RangeMultiplier@RANK-4:
+		RequiresCondition: rank-veteran == 4
+		Modifier: 100
+	RangeMultiplier@RANK-ELITE:
+		Modifier: 100
+	RevealsShroudMultiplier@RANK-1:
+		Modifier: 100
+	RevealsShroudMultiplier@RANK-2:
+		Modifier: 100
+	RevealsShroudMultiplier@RANK-3:
+		Modifier: 100
+	RevealsShroudMultiplier@RANK-4:
+		RequiresCondition: rank-veteran == 4
+		Modifier: 100
+	RevealsShroudMultiplier@RANK-ELITE:
+		Modifier: 110
+	DetectCloakedMultiplier@RANK-1:
+		Modifier: 100
+	DetectCloakedMultiplier@RANK-2:
+		Modifier: 100
+	DetectCloakedMultiplier@RANK-3:
+		Modifier: 100
+	DetectCloakedMultiplier@RANK-4:
+		RequiresCondition: rank-veteran == 4
+		Modifier: 100
+	DetectCloakedMultiplier@RANK-ELITE:
+		Modifier: 100
+	ChangesHealth@eliteplus:
+		RequiresCondition: rank-elite
+		PercentageStep: 1
+		Delay: 25
+		StartIfBelow: 100
+		DamageCooldown: 1
+
+^RA2InfantryShadow:
+	RenderSprites:
+		PlayerPalette: ra2infantry
+
+^RA2InfantryDeathAnimations:
+	WithDeathAnimation:
+		DeathSequencePalette: ra2infantry
+		DeathTypes:
+			DefaultDeath: 1
+			BulletDeath: 1
+			SmallExplosionDeath: 2
+			ExplosionDeath: 2
+			RippedApartDeath: 2
+	WithDeathAnimation@effect:
+		DeathSequencePalette: ra2effect
+		DeathPaletteIsPlayerPalette: False
+		DeathTypes:
+			RadiationDeath: 4
+			PsychicDeath: 5
+			TiberiumDeath: 7
+			ElectricityDeath: 6
+			#RA2VirusDeath: 7
+	SpawnActorOnDeath@Flameguy:
+		Probability: 100
+		Actor: RA2Flameguy
+		DeathType: FireDeath
+	FireWarheadsOnDeath@Corpse:
+		DeathTypes: DefaultDeath, BulletDeath, RippedApartDeath
+		Weapon: RA2CorpseSpawner
+		EmptyWeapon: RA2CorpseSpawner
+		RequiresCondition: !chronobeamed
+	#Explodes@CorpseThrow:
+	#	DeathTypes: ExplosionDeath
+	#	Weapon: RA2CorpseThrower
+	#	EmptyWeapon: RA2CorpseThrower
+	#	RequiresCondition: !chronobeamed
+
+^RA2Infantry:
+	Inherits@shadow: ^RA2InfantryDeathAnimations
+	Inherits@para: ^RA2Parachutes
+	RenderSprites:
+		PlayerPalette: ra2infantry
+	Crushable:
+		CrushSound: igensqua.wav
+	DeathSounds@NORMAL:
+		DeathTypes: DefaultDeath, BulletDeath, SmallExplosionDeath, ExplosionDeath, RippedApartDeath
+		RequiresCondition: !chronobeamed
+	DeathSounds@ZAPPED:
+		Voice: Zapped
+		DeathTypes: ElectricityDeath
+		RequiresCondition: !chronobeamed
+	DeathSounds@radiation:
+		Voice: Poisoned
+		DeathTypes: RadiationDeath, TiberiumDeath
+		RequiresCondition: !chronobeamed
+	#DeathSounds@psychic:
+	#	Voice: PsyCrush
+	#	DeathTypes: PsychicDeath
+	#	RequiresCondition: !chronobeamed
+	#DeathSounds@virus:
+	#	Voice: Virus
+	#	DeathTypes: RA2VirusDeath
+	#	RequiresCondition: !chronobeamed
+
+^RA2Building:
+	Inherits@BB: ^BaseBuilding
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+	Building:
+		BuildSounds: uplace.wav
+		UndeploySounds: uselbuil.wav
+	FireWarheadsOnDeath:
+		Weapon: RA2BuildingExplode
+		EmptyWeapon: RA2BuildingExplode
+		Sequences: ra2_building, ra2_large_bang, ra2_large_brnl, ra2_verylarge_clsn, ra2_large_tumu
+	FireProjectilesOnDeath:
+		Weapons: RA2LargeDebris
+		RequiresCondition: !chronobeamed
+	FireProjectilesOnDeath@body:
+		Weapons: RA2CorpseThrower
+		Pieces: 0, 2
+		RequiresCondition: !chronobeamed
+	SoundOnDamageTransition:
+		DamagedSounds: gdamag1a.wav, gdamag1b.wav, gdamag1c.wav, gdamag1d.wav, gdamag1e.wav
+		DestroyedSounds: bgendiea.wav, bgendieb.wav, bgendiec.wav, bgendied.wav, bgendiee.wav, bgendief.wav
+
+^RA2Vehicle:
+	Inherits@para: ^RA2Parachutes
+	FireWarheadsOnDeath:
+		Weapon: RA2UnitExplode
+		EmptyWeapon: RA2UnitExplode
+		RequiresCondition: !chronobeamed
+	FireProjectilesOnDeath:
+		Weapons: RA2Debris
+		RequiresCondition: !chronobeamed
+
+^RA2VehicleBig:
+	Inherits: ^RA2Vehicle
+	FireWarheadsOnDeath:
+		Weapon: RA2UnitExplodeBig
+		EmptyWeapon: RA2UnitExplodeBig
+
+^RenderVoxel:
+	BodyOrientation:
+		QuantizedFacings: 32
+		CameraPitch: 130
+		UseClassicPerspectiveFudge: false
+	RenderVoxels:
+		Scale: 12.0
+		NormalsPalette: normals
+		PlayerPalette: playerra2
+		LightYaw: 800
+		LightPitch: 150
+		LightAmbientColor: -0.5,-0.5,-0.5
+		LightDiffuseColor: 1.3,1.3,1.3
+	WithVoxelBody:
+		ShowShadow: true
+	Cloak@TDcloak:
+		IsPlayerPalette: true
+		RequiresCondition: cloak-crate-collected
+	Cloak@TScloak:
+		IsPlayerPalette: true
+		RequiresCondition: tscloak
+
+^CivVehicle:
+	Inherits: ^Vehicle
+	Inherits@Voxel: ^RenderVoxel
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Civilian Vehicle
+	Mobile:
+		Speed: 100
+	Health:
+		HP: 10000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 6c0
+	BodyOrientation:
+		QuantizedFacings: 32
+	Inherits@EXT: ^ExternalConditions
+	SelectionDecorations:
+	Selectable:
+	WithVoxelBody:
+	RenderVoxels:
+		Scale: 5.8
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+
+^RA2GarrisonBuilding:
+	Inherits: ^RA2CivBuilding
+
+^RA2PlanewithTurnAnimation:
+	GrantConditionOnMovement@Turn:
+		Condition: Aircraft-Turning
+		ValidMovementTypes: Turn
+	GrantConditionOnMovement@H:
+		ValidMovementTypes: Horizontal #we need a turn condition with left and right
+		Condition: Aircraft-Horizontal
+	GrantConditionOnMovement@V:
+		ValidMovementTypes: Vertical #we need a turn condition with left and right
+		Condition: Aircraft-Vertical
+	WithMoveAnimation@Turn-L:
+		MoveSequence: move-l
+		RequiresCondition: Aircraft-Turning #&& Aircraft-Vertical
+	# WithMoveAnimation@Turn-R:
+	# 	MoveSequence: move-r
+	# 	RequiresCondition: Aircraft-Turning && Aircraft-Horizontal
+	#WithMoveAnimation:
+	#	MoveSequence: move
+	#	Condition: !Aircraft-Turning
+#
+# Sell Actors
+#
+
+^RA2CivBuilding:
+	Inherits: ^CivBuilding
+	-RenderSprites:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+^RA21x1Garrison:
+	Inherits@2x2: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 50000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 2
+		EjectOnDeath: false
+
+^RA22x1Garrison:
+	Inherits@2x2: ^1x1Shape
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	Health:
+		HP: 100000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 4
+		EjectOnDeath: false
+
+^RA22x2Garrison:
+	Inherits@2x2: ^2x2Shape
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 200000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 8
+		EjectOnDeath: false
+
+^RA23x2Garrison:
+	Inherits@2x2: ^3x2Shape
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Health:
+		HP: 300000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 12
+		EjectOnDeath: false
+
+^RA23x3Garrison:
+	Inherits@2x2: ^3x3Shape
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+	Health:
+		HP: 450000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 18
+		EjectOnDeath: false
+
+^RA24x3Garrison:
+	Inherits@2x2: ^4x3Shape
+	Building:
+		Footprint: xxxx xxxx xxxx
+		Dimensions: 4,3
+	Health:
+		HP: 600000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 24
+		EjectOnDeath: false
+
+^RA25x3Garrison:
+	Inherits@2x2: ^5x3Shape
+	Building:
+		Footprint: _xxx_ xxxxx _xxx_
+		Dimensions: 5,3
+	Health:
+		HP: 800000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 30
+		EjectOnDeath: false
+
+^RA25x4Garrison:
+	Inherits@2x2: ^5x4Shape
+	Building:
+		Footprint: _xxx_ xxxxx xxxxx _xxx=
+		Dimensions: 5,4
+	Health:
+		HP: 1000000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 40
+		EjectOnDeath: false
+
+^RA2CivProp:
+	Inherits: ^Building
+	-CommandBarBlacklist:
+	Selectable:
+		-Bounds:
+		Class: civbuilding
+	Tooltip:
+		Name: Civilian Building
+		GenericName: Civilian Building
+		GenericStancePrefix: false
+		ShowOwnerRow: true
+	FrozenUnderFog:
+	MapEditorData:
+		Categories: Decoration
+	RenderSprites:
+		PlayerPalette: playerra2
+	Targetable:
+	FireProjectilesOnDeath:
+		Weapons: RA2Debris
+		RequiresCondition: !chronobeamed
+	Health:
+		HP: 5000
+	FireWarheadsOnDeath:
+		Weapon: RA2UnitExplode
+		EmptyWeapon: RA2UnitExplode
+		RequiresCondition: !chronobeamed
+
+^RA2Tree:
+	Inherits: ^Tree
+	RenderSprites:
+		Palette: ra2isotem
+
+^RA2TreeHusk:
+	Inherits: ^TreeHusk
+	RenderSprites:
+		Palette: ra2city
+
+^RA2SovietsArmorPlatings:
+	SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings:
+		Modifier: 90
+		RequiresCondition: ra2_soviets_doctrine_heavyarmorplatings
+	DamageMultiplier@ra2_soviets_doctrine_heavyarmorplatings:
+		Modifier: 70
+		RequiresCondition: ra2_soviets_doctrine_heavyarmorplatings
+	GrantConditionOnPrerequisite@ra2_soviets_doctrine_heavyarmorplatings:
+		Condition: ra2_soviets_doctrine_heavyarmorplatings
+		Prerequisites: ra2_soviets_doctrine_heavyarmorplatings
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings
+
+^RA2SovietsReactiveArmor:
+	Armor@HAZMAT:
+		Type: HAZMAT
+		RequiresCondition: ra2_soviets_doctrine_reactivearmor
+	DamagedByTintedCells@rad:
+		RequiresCondition: !ra2_soviets_doctrine_reactivearmor
+	DamagedByTintedCells@genrad:
+		RequiresCondition: !ra2_soviets_doctrine_reactivearmor
+	DamagedByTintedCells@tib:
+		RequiresCondition: !ra2_soviets_doctrine_reactivearmor
+	WithDecoration@HAZMAT:
+		Image: pips
+		Sequence: pip_hazmat
+		Position: BottomRight
+		RequiresCondition: ra2_soviets_doctrine_reactivearmor
+	SpeedMultiplier@ra2_soviets_doctrine_reactivearmor:
+		Modifier: 95
+		RequiresCondition: ra2_soviets_doctrine_reactivearmor
+	DamageMultiplier@ra2_soviets_doctrine_reactivearmor:
+		RequiresCondition: ra2_soviets_doctrine_reactivearmor
+		Modifier: 90
+	GrantConditionOnPrerequisite@ra2_soviets_doctrine_reactivearmor:
+		Condition: ra2_soviets_doctrine_reactivearmor
+		Prerequisites: ra2_soviets_doctrine_reactivearmor
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_reactivearmor
+
+^RA2SovietsTeslaDischargeArmor:
+	Inherits@EnemyInProximity: ^EnemyInProximity
+	SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1:
+		Modifier: 85
+		RequiresCondition: ra2_soviets_doctrine_tesladischargearmor && EnemyInProximity
+	SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor2:
+		Modifier: 115
+		RequiresCondition: ra2_soviets_doctrine_tesladischargearmor && !EnemyInProximity
+	# Tesla-discharge plating is an ENERGY skin, so it reads the REFLECTOR row: strong
+	# against beams and bolts, weak against fire and chemicals. Modifier 85 -> 90 to match
+	# the sibling reactive-armor branch, since the type now carries the bulk of the value.
+	Armor@REFLECTOR:
+		Type: REFLECTOR
+		RequiresCondition: ra2_soviets_doctrine_tesladischargearmor
+	DamageMultiplier@ra2_soviets_doctrine_tesladischargearmor:
+		Modifier: 90
+		RequiresCondition: ra2_soviets_doctrine_tesladischargearmor
+	FireWarheads@Tesla:
+		Weapons: TeslaArmorDischargeDummy
+		Interval: 1
+		RequiresCondition: tesladischargearmor && !tesladischargearmorcooldown && EnemyInMaxProximity
+	GrantTimedCondition@tesladischargearmorcooldown:
+		RequiresCondition: tesladischargearmor
+		PauseOnCondition: !tesladischargearmor
+		Condition: tesladischargearmorcooldown
+		Duration: 5
+	GrantConditionOnDamage@tesladischargearmor:
+		RequiresCondition: ra2_soviets_doctrine_tesladischargearmor && !disabled
+		Condition: tesladischargearmor
+		Duration: 10
+		PlayerRelationship: Ally, Neutral, Enemy
+	ChangesPhysicalState@tesladischargearmor:
+		PhysicalStateName: EnemyProximity
+		Amount: -10000
+		Delay: 1
+		RequiresCondition: tesladischargearmor && !tesladischargearmorcooldown && EnemyInMaxProximity
+	PhysicalStateBar@EnemyProximity:
+		RequiresCondition: ra2_soviets_doctrine_tesladischargearmor
+	WithPhysicalStateColoredOverlay@EnemyProximity:
+		RequiresCondition: ra2_soviets_doctrine_tesladischargearmor
+	GrantConditionOnPrerequisite@ra2_soviets_doctrine_tesladischargearmor:
+		Condition: ra2_soviets_doctrine_tesladischargearmor
+		Prerequisites: ra2_soviets_doctrine_tesladischargearmor
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_tesladischargearmor
+
+^RA2SovietsFireShells:
+	GrantConditionOnPrerequisite@ra2_soviets_doctrine_firemunitions:
+		Condition: ra2_soviets_doctrine_firemunitions
+		Prerequisites: ra2_soviets_doctrine_firemunitions
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_firemunitions
+
+^RA2SovietsRadShells:
+	GrantConditionOnPrerequisite@ra2_soviets_doctrine_nuclearmunitions:
+		Condition: ra2_soviets_doctrine_nuclearmunitions
+		Prerequisites: ra2_soviets_doctrine_nuclearmunitions
+	FirepowerMultiplier@ra2_soviets_doctrine_nuclearmunitions:
+		Modifier: 105
+		RequiresCondition: ra2_soviets_doctrine_nuclearmunitions
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_nuclearmunitions
+
+^RA2SovietsTeslaShells:
+	GrantConditionOnPrerequisite@ra2_soviets_doctrine_teslamunitions:
+		Condition: ra2_soviets_doctrine_teslamunitions
+		Prerequisites: ra2_soviets_doctrine_teslamunitions
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_teslamunitions
+
+^TerrorDroneSurprise:
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_terrordronesurprise:
+		Condition: ra2_soviets_upgrade_terrordronesurprise
+		Prerequisites: ra2_soviets_upgrade_terrordronesurprise
+	SpawnActorOnDeath@ra2_soviets_upgrade_terrordronesurprise:
+		Probability: 75
+		Actor: ra2_soviets_terrordrone
+		RequiresCondition: ra2_soviets_upgrade_terrordronesurprise && !chronobeamed
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_terrordronesurprise
+
+^RA2TeslaOverload:
+	FirepowerMultiplier@ra2_soviets_upgrade_teslaoverload:
+		RequiresCondition: ra2_soviets_upgrade_teslaoverload
+		Modifier: 125
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_teslaoverload:
+		Condition: ra2_soviets_upgrade_teslaoverload
+		Prerequisites: ra2_soviets_upgrade_teslaoverload
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_teslaoverload
+
+^RA2KirovArmorPlatings:
+	DamageMultiplier@ra2_soviets_upgrade_kirovarmorplatings:
+		Modifier: 75
+		RequiresCondition: ra2_soviets_upgrade_kirovarmorplatings
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_kirovarmorplatings:
+		Condition: ra2_soviets_upgrade_kirovarmorplatings
+		Prerequisites: ra2_soviets_upgrade_kirovarmorplatings
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_kirovarmorplatings
+
+^RA2AlliedAdvancedAeronautics:
+	SpeedMultiplier@ra2_allies_upgrade_advancedaeronautics:
+		Modifier: 125
+		RequiresCondition: ra2_allies_upgrade_advancedaeronautics
+	FirepowerMultiplier@ra2_allies_upgrade_advancedaeronautics:
+		Modifier: 125
+		RequiresCondition: ra2_allies_upgrade_advancedaeronautics
+	DamageMultiplier@ra2_allies_upgrade_advancedaeronautics:
+		Modifier: 75
+		RequiresCondition: ra2_allies_upgrade_advancedaeronautics
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_advancedaeronautics:
+		Condition: ra2_allies_upgrade_advancedaeronautics
+		Prerequisites: ra2_allies_upgrade_advancedaeronautics
+
+^RA2YuriPsionicLegion:
+	GrantConditionOnPrerequisite@yuri_doctrine_psioniclegion:
+		Condition: yuri_doctrine_psioniclegion
+		Prerequisites: yuri_doctrine_psioniclegion
+	ActorStatValues:
+		Upgrades: yuri_doctrine_psioniclegion
+
+^RA2YuriPsionicFanatics:
+	ChangesHealth@yuri_doctrine_psionicfanatics:
+		Step: 20
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: yuri_doctrine_psionicfanatics
+	DamageMultiplier@yuri_doctrine_psionicfanatics:
+		Modifier: 80
+		RequiresCondition: yuri_doctrine_psionicfanatics
+	ReloadDelayMultiplier@yuri_doctrine_psionicfanatics:
+		Modifier: 80
+		RequiresCondition: yuri_doctrine_psionicfanatics
+	SpeedMultiplier@yuri_doctrine_psionicfanatics:
+		Modifier: 120
+		RequiresCondition: yuri_doctrine_psionicfanatics
+	GrantConditionOnPrerequisite@yuri_doctrine_psionicfanatics:
+		Condition: yuri_doctrine_psionicfanatics
+		Prerequisites: yuri_doctrine_psionicfanatics
+	ActorStatValues:
+		Upgrades: yuri_doctrine_psionicfanatics
+
+^RA2YuriPsionicElite:
+	RangeMultiplier@yuri_doctrine_psionicelite:
+		Modifier: 110
+		RequiresCondition: yuri_doctrine_psionicelite
+	FirepowerMultiplier@yuri_doctrine_psionicelite:
+		Modifier: 110
+		RequiresCondition: yuri_doctrine_psionicelite
+	SpeedMultiplier@yuri_doctrine_psionicelite:
+		Modifier: 110
+		RequiresCondition: yuri_doctrine_psionicelite
+	ReloadDelayMultiplier@yuri_doctrine_psionicelite:
+		Modifier: 90
+		RequiresCondition: yuri_doctrine_psionicelite
+	DamageMultiplier@yuri_doctrine_psionicelite:
+		Modifier: 90
+		RequiresCondition: yuri_doctrine_psionicelite
+	GrantConditionOnPrerequisite@yuri_doctrine_psionicelite:
+		Condition: yuri_doctrine_psionicelite
+		Prerequisites: yuri_doctrine_psionicelite
+	ActorStatValues:
+		Upgrades: yuri_doctrine_psionicelite
+
+^RA2YuriGeneMod:
+	GrantConditionOnPrerequisite@yuri_upgrade_geneticmodificationboost:
+		Condition: yuri_upgrade_geneticmodificationboost
+		Prerequisites: yuri_upgrade_geneticmodificationboost
+	DamageMultiplier@yuri_upgrade_geneticmodificationboost:
+		Modifier: 80
+		RequiresCondition: yuri_upgrade_geneticmodificationboost
+	SpeedMultiplier@yuri_upgrade_geneticmodificationboost:
+		Modifier: 120
+		RequiresCondition: yuri_upgrade_geneticmodificationboost
+	ChangesHealth@yuri_upgrade_geneticmodificationboost:
+		PercentageStep: 1
+		Delay: 25
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: yuri_upgrade_geneticmodificationboost
+	ActorStatValues:
+		Upgrades: yuri_upgrade_geneticmodificationboost
+	ProvidesPrerequisite:

@@ -1,0 +1,30 @@
+{
+  "owner": "Codex basalt-columns session",
+  "status": "approved authoritative RGBA handoff; production conversion pending",
+  "approved_review": "reference/all-twelve-refit-ground-and-lava-thin-grid-review.png",
+  "master_canvas": [144, 144],
+  "production_tile_pixels": 48,
+  "authoring_tile_pixels": 24,
+  "production_lava_commit": "1ae1302818024d3871d4f54c17ca727414a26165",
+  "production_w1_sha256": "AE3A984C8DCDF6F5BD1E815D107140C41B46EFDD9D1B3F726D4DA0213AF68424",
+  "lighting": {
+    "global_direction": "due west",
+    "ground": "combined-ground with separate short due-east shadow baked beneath the refitted formation",
+    "offshore": "combined-lava with refitted formation, baked Soft Light bounce, crack-aware detached glow, and no ground shadow",
+    "automatic_mirroring": false
+  },
+  "variants": [
+    {"id":"1x1-a","tiles":[1,1],"legal_box_exclusive":[48,67,96,115],"directory":"variants/1x1-a"},
+    {"id":"1x1-b","tiles":[1,1],"legal_box_exclusive":[48,67,96,115],"directory":"variants/1x1-b"},
+    {"id":"2x1-a","tiles":[2,1],"legal_box_exclusive":[24,67,120,115],"directory":"variants/2x1-a"},
+    {"id":"2x1-b","tiles":[2,1],"legal_box_exclusive":[24,67,120,115],"directory":"variants/2x1-b"},
+    {"id":"2x2-a","tiles":[2,2],"legal_box_exclusive":[24,35,120,131],"directory":"variants/2x2-a"},
+    {"id":"2x2-b","tiles":[2,2],"legal_box_exclusive":[24,35,120,131],"directory":"variants/2x2-b"},
+    {"id":"1x2-a","tiles":[1,2],"legal_box_exclusive":[48,35,96,131],"directory":"variants/1x2-a"},
+    {"id":"1x2-b","tiles":[1,2],"legal_box_exclusive":[48,35,96,131],"directory":"variants/1x2-b"},
+    {"id":"2x3-a","tiles":[2,3],"legal_box_exclusive":[24,0,120,144],"directory":"variants/2x3-a"},
+    {"id":"2x3-b","tiles":[2,3],"legal_box_exclusive":[24,0,120,144],"directory":"variants/2x3-b"},
+    {"id":"3x2-a","tiles":[3,2],"legal_box_exclusive":[0,35,144,131],"directory":"variants/3x2-a"},
+    {"id":"3x2-b","tiles":[3,2],"legal_box_exclusive":[0,35,144,131],"directory":"variants/3x2-b"}
+  ]
+}

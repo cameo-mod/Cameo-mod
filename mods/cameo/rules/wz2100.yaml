@@ -164,7 +164,7 @@ Player:
 		Name: Command Center (2100)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: 2100RF, ~techlevel.high, ~littlebuilderenable
+		Prerequisites: 2100RF, ~littlebuilderenable
 		Queue: Building, RABuilding
 		Description: Builds structures and provides radar.
 	Building:
@@ -265,8 +265,7 @@ Player:
 		Dimensions: 3,2
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381, 0, 0
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	Health:
 		HP: 100000
 	RevealsShroud:
@@ -326,8 +325,8 @@ Player:
 		BuildDuration: 250
 		Description: Provides resources
 	Selectable:
-		Priority: 0
 		Bounds: 1024, 1024
+		Priority: 0
 	Health:
 		HP: 50000
 	RevealsShroud:
@@ -431,8 +430,7 @@ Player:
 		Queue: Building, RABuilding
 		Description: Heals nearby units.
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 87381, 87381, 0, -21845
+		Bounds: 2048, 2048, 0, -512
 	Health:
 		HP: 100000
 	RevealsShroud:
@@ -465,7 +463,7 @@ Player:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@AP: ^2100BuildingArmorUpgrades
 	HitShape:
 		UseTargetableCellsOffsets: true
@@ -628,7 +626,7 @@ Player:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@AP: ^2100BuildingArmorUpgrades
 	HitShape:
 		UseTargetableCellsOffsets: true
@@ -720,7 +718,7 @@ Player:
 		Prerequisite: 2100RF
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100OIL, ~techlevel.medium
+		Prerequisites: 2100OIL
 		Queue: Building, RABuilding
 		Description: Unlocks higher-tech units and buildings.
 	Building:
@@ -728,8 +726,7 @@ Player:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	Health:
 		HP: 120000
 	RevealsShroud:
@@ -741,9 +738,9 @@ Player:
 		Range: 5c0
 	-WithDeathAnimation:
 	Production:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar:
-		ProductionType: Upgrades
+		ProductionType: Research
 	ProvidesPrerequisite@alpha:
 		Prerequisite: bodies.alpha
 		Factions: alpha
@@ -767,7 +764,7 @@ Player:
 		Name: Command Relay Center
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100RF, ~techlevel.high
+		Prerequisites: 2100RF
 		Queue: Building, RABuilding
 		Description: \nUnlocks commander units
 	Building:
@@ -797,7 +794,7 @@ Player:
 		Name: Laser Satellite
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100RF, ~techlevel.high, !nasda, up2100upsypnaticdata4
+		Prerequisites: 2100RF, !nasda, up2100upsypnaticdata4
 		Queue: Building, RABuilding
 		Description: Provides Laser Satellite support power.\n
 	Building:
@@ -839,7 +836,7 @@ Player:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@AP: ^2100BuildingArmorUpgrades
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-512,0, 355,512,0, -281,-512,0, -630,512,0
@@ -892,15 +889,14 @@ Player:
 		RequiresCondition: classicproductionqueues
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 87381, 123776, 0, -18176
+		Bounds: 2048, 2901, 0, -426
 	SelectionDecorations:
 
 2100VFY1:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@AP: ^2100BuildingArmorUpgrades
 	HitShape:
 		UseTargetableCellsOffsets: true
@@ -1064,7 +1060,7 @@ Player:
 	Inherits@shape: ^1x1Shape
 	Inherits@AP: ^2100BuildingArmorUpgrades
 	Selectable:
-		Bounds: 50944, 50944
+		Bounds: 1194, 1194
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
@@ -1162,7 +1158,7 @@ Player:
 
 ^2100WallTurreted:
 	Inherits: ^Defense
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	WithWallSpriteBody:
 	BlocksProjectiles:
@@ -1275,7 +1271,7 @@ Player:
 2100MB:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -1315,7 +1311,7 @@ Player:
 2100FB:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 400
@@ -1358,7 +1354,7 @@ Player:
 2100MT:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 300
@@ -1366,14 +1362,13 @@ Player:
 		Name: Guard Tower
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy1, ~techlevel.medium
+		Prerequisites: 2100fy1
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Tanks
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 87381, 0, -21845
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 20000
@@ -1403,7 +1398,7 @@ Player:
 2100RADT:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 400
@@ -1411,14 +1406,13 @@ Player:
 		Name: Radar Tower
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy1, ~techlevel.medium
+		Prerequisites: 2100fy1
 		Queue: Defence, RADefence
 		Description: Reveals shroud.\n  Unarmed
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 87381, 0, -21845
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 20000
@@ -1447,7 +1441,7 @@ Player:
 2100RT:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 500
@@ -1455,14 +1449,13 @@ Player:
 		Name: Rocket Tower
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy1, ~techlevel.medium, ~up2100uplrk1
+		Prerequisites: 2100fy1, ~up2100uplrk1
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 87381, 0, -21845
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 30000
@@ -1486,7 +1479,7 @@ Player:
 2100TT:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 750
@@ -1494,14 +1487,13 @@ Player:
 		Name: Lancer Tower
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100RF, ~techlevel.high, ~up2100uplancer1
+		Prerequisites: 2100RF, ~up2100uplancer1
 		Queue: Defence, RADefence
 		Description: Anti-Tank base defense.\n  Strong vs Vehicles\n  Weak vs Infantry
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 87381, 0, -21845
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 30000
@@ -1526,7 +1518,7 @@ Player:
 2100MP:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 450
@@ -1559,7 +1551,7 @@ Player:
 2100PP:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 900
@@ -1567,7 +1559,7 @@ Player:
 		Name: Pepperpot Pit
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: up2100uppepper1, ~techlevel.high
+		Prerequisites: up2100uppepper1
 		Queue: Defence, RADefence
 		BuildDurationModifier: 20
 		Description: Long range defensive structure.\nFast-firing variant of the Mortar Pit.
@@ -1593,12 +1585,12 @@ Player:
 2100AA:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAir
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 110
-		Prerequisites: 2100FY1, ~techlevel.medium, ~up2100uphurricane1
+		Prerequisites: 2100FY1, ~up2100uphurricane1
 		Description: Anti-Air base defense.\n  Strong vs Aircraft\n  Unable to attack ground units
 	Valued:
 		Cost: 600
@@ -1651,7 +1643,6 @@ psc2100power:
 	RenderSprites:
 		Image: 2100uppowermodule
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 psc2100factory1:
@@ -1667,7 +1658,6 @@ psc2100factory1:
 	RenderSprites:
 		Image: 2100upfactorymodule
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 psc2100factory2:
@@ -1683,7 +1673,6 @@ psc2100factory2:
 	RenderSprites:
 		Image: 2100fy2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 ####################################################################################################
@@ -1709,7 +1698,7 @@ psc2100factory2:
 		Name: Command Center (Scavenger)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: 2100RF, ~techlevel.high, ~littlebuilderenable
+		Prerequisites: 2100RF, ~littlebuilderenable
 		Queue: Building, RABuilding
 		Description: Builds structures and provides radar.
 	Building:
@@ -1796,8 +1785,7 @@ psc2100factory2:
 		Dimensions: 3,2
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381, 0, 0
-		DecorationBounds: 131072, 87381, 0, 21845
+		Bounds: 3072, 2048, 0, 512
 	Health:
 		HP: 50000
 	RevealsShroud:
@@ -1833,7 +1821,7 @@ psc2100factory2:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@AP: ^2100BuildingArmorUpgrades
 	HitShape:
 		UseTargetableCellsOffsets: true
@@ -1862,8 +1850,7 @@ psc2100factory2:
 		LocalCenterOffset: 0,-512,0
 	SelectionDecorations:
 	Selectable:
-		Bounds: 131072, 87381, 0, 0
-		DecorationBounds: 131072, 87381, 0, 43690
+		Bounds: 3072, 2048, 0, 1024
 	Health:
 		HP: 110000
 	Armor:
@@ -1962,7 +1949,7 @@ psc2100factory2:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@AP: ^2100BuildingArmorUpgrades
 	HitShape:
 		UseTargetableCellsOffsets: true
@@ -1986,8 +1973,7 @@ psc2100factory2:
 		LocalCenterOffset: 0,-512,0
 	SelectionDecorations:
 	Selectable:
-		Bounds: 131072, 87381, 0, 0
-		DecorationBounds: 131072, 87381, 0, 43690
+		Bounds: 3072, 2048, 0, 1024
 	Health:
 		HP: 110000
 	Armor:
@@ -2050,7 +2036,7 @@ psc2100factory2:
 		Prerequisite: 2100RF
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: up2100upvtols1, ~techlevel.medium
+		Prerequisites: up2100upvtols1
 		Queue: Building, RABuilding
 		Description: Produces aircraft and unlocks higher-tech\nunits and buildings.
 	Building:
@@ -2058,8 +2044,7 @@ psc2100factory2:
 		Dimensions: 3,2
 		LocalCenterOffset: 0,-640,0
 	Selectable:
-		Bounds: 131072, 87381, 0, 0
-		DecorationBounds: 131072, 87381, 0, 21845
+		Bounds: 3072, 2048, 0, 512
 	Production@NORMAL:
 		Produces: Aircraft
 		RequiresCondition: !classicproductionqueues
@@ -2118,7 +2103,7 @@ psc2100factory2:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 	ParatroopersPower@paratroopers:
@@ -2139,7 +2124,7 @@ psc2100factory2:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 30
 	SupportPowerChargeBar:
@@ -2155,7 +2140,7 @@ psc2100factory2:
 		Name: Nuke Plant
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: up2100upsypnaticdata4, up2100uppowermodule1, ~techlevel.high, !scavnuke
+		Prerequisites: up2100upsypnaticdata4, up2100uppowermodule1, !scavnuke
 		Queue: Building, RABuilding
 		Description: Provides support powers.\nUnlocks higher-tech units and buildings.
 	Building:
@@ -2195,7 +2180,7 @@ psc2100factory2:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 20
 	ParatroopersPower@paratroopers2:
@@ -2217,7 +2202,7 @@ psc2100factory2:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 	NukePower:
@@ -2316,10 +2301,10 @@ psc2100factory2:
 2100SCAVTURRET:
 	Inherits@1: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Selectable:
-		Bounds: 43690, 65536
+		Bounds: 1024, 1536
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -2409,7 +2394,7 @@ psc2100factory2:
 2100SCAVRT:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 500
@@ -2417,7 +2402,7 @@ psc2100factory2:
 		Name: Rocket Turret
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: 2100ChopShop, ~techlevel.medium
+		Prerequisites: 2100ChopShop
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
 	RequiresBuildableArea:
@@ -2449,7 +2434,7 @@ psc2100factory2:
 2100SCAVMORT:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -2500,8 +2485,7 @@ psc2100factory2:
 		Dimensions: 3,2
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381, 0, 0
-		DecorationBounds: 131072, 87381, 0, 21845
+		Bounds: 3072, 2048, 0, 512
 	Health:
 		HP: 50000
 	RevealsShroud:
@@ -2509,9 +2493,9 @@ psc2100factory2:
 	StoresResources:
 		Capacity: 3750
 	Production:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar:
-		ProductionType: Upgrades
+		ProductionType: Research
 	WithResourceStoragePipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -2532,7 +2516,7 @@ psc2100factory2:
 2100SCAVFT:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 450
@@ -2540,14 +2524,13 @@ psc2100factory2:
 		Name: Flamer Guard Tower
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100chopshop, up2100upflamer1, ~techlevel.medium
+		Prerequisites: 2100chopshop, up2100upflamer1
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 87381, 0, -21845
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 25000
@@ -2579,7 +2562,7 @@ psc2100factory2:
 	Inherits: 2100RADT
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100chopshop, ~techlevel.medium
+		Prerequisites: 2100chopshop
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
 	RenderSprites:
@@ -2602,7 +2585,6 @@ psc2100chopshop1:
 	RenderSprites:
 		Image: 2100chopshop
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 psc2100chopshop2:
@@ -2618,7 +2600,6 @@ psc2100chopshop2:
 	RenderSprites:
 		Image: 2100chopshop
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 ####################################################################################################
@@ -3061,7 +3042,7 @@ psc2100chopshop2:
 	ProducibleWithLevel:
 		Prerequisites: aircraft.upgraded
 	Selectable:
-		DecorationBounds: 69162, 58240
+		DecorationBounds: 1621, 1365
 	SelectionDecorations:
 	ThrowsShrapnel:
 		Weapons: Debris2, Debris3
@@ -3548,7 +3529,7 @@ psc2100chopshop2:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	AutoTargetPriority@DEFAULT:
-		ValidTargets: Defence, Defense, Wall
+		ValidTargets: Defence, Defense, wall
 ^2100LightFlamer:
 	Inherits: ^2100VEHICLE
 	Inherits@@EXPERIENCE: ^GainsExperienceVehicle
@@ -4017,7 +3998,6 @@ psc2100chopshop2:
 	Inherits: E6
 	Buildable:
 		BuildPaletteOrder: 10000
-		Prerequisites:
 		Queue: Infantry, Vehicle, RAInfantry, RAVehicle
 		Icon: 2100icon
 	RenderSprites:
@@ -4134,8 +4114,9 @@ psc2100chopshop2:
 	Tooltip:
 		Name: MCV Python Tracks (Alpha)
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100RF, ~techlevel.medium, 2100RR
+		Prerequisites: 2100RF, 2100RR
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 35
 		Description: Deploys into another Construction Yard.\n  Automaticaly Repairs Structures in a 3 Tile Radius
@@ -4146,7 +4127,6 @@ psc2100chopshop2:
 		HP: 250000
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Transforms:
 		IntoActor: 2100hq.alpha
 		Offset: -1,-1
@@ -4301,7 +4281,7 @@ psc2100chopshop2:
 		Name: Lancer Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100upcobra1, up2100uplancer1
+		Prerequisites: 2100fy2, ~up2100upcobra1, up2100uplancer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100T2CH:
@@ -4313,7 +4293,7 @@ psc2100chopshop2:
 		Name: Tank Killer Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100upcobra1, up2100uptankkiller1
+		Prerequisites: 2100fy2, ~up2100upcobra1, up2100uptankkiller1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 
@@ -4326,7 +4306,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upcobra1, ~techlevel.medium, ~!2100oldtechdisabled2
+		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upcobra1, ~!2100oldtechdisabled2
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100MGCH:
@@ -4338,7 +4318,7 @@ psc2100chopshop2:
 		Name: Heavy MG Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upheavymg1, ~up2100upcobra1, ~techlevel.medium, ~!2100oldtechdisabled2
+		Prerequisites: 2100fy2, ~up2100upheavymg1, ~up2100upcobra1, ~!2100oldtechdisabled2
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100MOCH:
@@ -4350,7 +4330,7 @@ psc2100chopshop2:
 		Name: Mortar Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmortar1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upmortar1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100RACH:
@@ -4362,7 +4342,7 @@ psc2100chopshop2:
 		Name: Mini-Rocket Array Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100rkarray1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100rkarray1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 
@@ -4375,7 +4355,7 @@ psc2100chopshop2:
 		Name: Inferno Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AACH:
@@ -4387,7 +4367,7 @@ psc2100chopshop2:
 		Name: Hurricane AA Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uphurricane1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uphurricane1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HVCH:
@@ -4399,7 +4379,7 @@ psc2100chopshop2:
 		Name: Hyper Velocity Cannon Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100FLACH:
@@ -4411,7 +4391,7 @@ psc2100chopshop2:
 		Name: Flak AA Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100NEDCH:
@@ -4423,7 +4403,7 @@ psc2100chopshop2:
 		Name: Needle Gun Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100BNKCH:
@@ -4435,7 +4415,7 @@ psc2100chopshop2:
 		Name: Bunker Buster Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upbunkerbuster1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upbunkerbuster1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100BOMCH:
@@ -4447,7 +4427,7 @@ psc2100chopshop2:
 		Name: Bombard Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upbombard1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upbombard1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AARTCH:
@@ -4459,7 +4439,7 @@ psc2100chopshop2:
 		Name: Anti-Artillery Sensor Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upbombard1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upbombard1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100IMOCH:
@@ -4471,7 +4451,7 @@ psc2100chopshop2:
 		Name: Incendiary Mortar Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmortar1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upmortar1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100PEPPERCH:
@@ -4483,7 +4463,7 @@ psc2100chopshop2:
 		Name: Pepperpot Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Python
@@ -4496,7 +4476,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Python Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uptracks1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100A2PT:
@@ -4508,7 +4488,7 @@ psc2100chopshop2:
 		Name: Assault Gun Python Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~up2100upassaultmg1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uptracks1, ~up2100upassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HPT:
@@ -4520,7 +4500,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Python Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~up2100uphcannon1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uptracks1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100ACPT:
@@ -4532,7 +4512,7 @@ psc2100chopshop2:
 		Name: Assault Cannon Python Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~up2100upacannon1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uptracks1, ~up2100upacannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AC2PT:
@@ -4544,7 +4524,7 @@ psc2100chopshop2:
 		Name: Twin Assault Cannon Python Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100CPT:
@@ -4556,7 +4536,7 @@ psc2100chopshop2:
 		Name: Command Turret Python Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100CRC, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1
+		Prerequisites: 2100CRC, ~up2100uppython1, ~up2100uptracks1
 		Queue: Vehicle, RAVehicle
 		Description: Buffs nearby allies and debuffs targeted enemies.\n Unarmed
 
@@ -4592,7 +4572,7 @@ psc2100chopshop2:
 		Name: Ripple Rockets Python Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HOTPT:
@@ -4604,7 +4584,7 @@ psc2100chopshop2:
 		Name: Hotwizer Python Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~2100uphotwizer1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uptracks1, ~2100uphotwizer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Cobra Hovercraft
@@ -4617,7 +4597,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Cobra Hovercraft
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upcobra1, ~techlevel.medium, ~up2100uphover1
+		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upcobra1, ~up2100uphover1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Python Hovercraft
@@ -4630,7 +4610,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Python Hovercraft
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uphover1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uphover1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HPHOV:
@@ -4642,7 +4622,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Python Hovercraft
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uphover1, ~up2100uphcannon1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uphover1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 
@@ -4654,7 +4634,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LightMGVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplrk1, ~up2100upviper1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplrk1, ~up2100upviper1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith MH.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -4667,7 +4647,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100RocketPodVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplmg1, ~up2100upviper1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplmg1, ~up2100upviper1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith rocket pod.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -4679,7 +4659,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LitCannonVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplcannon1, ~up2100upcobra1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplcannon1, ~up2100upcobra1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith light cannon.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -4692,7 +4672,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LancerVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplancer1, ~up2100upcobra1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplancer1, ~up2100upcobra1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith lancer.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -4724,6 +4704,7 @@ psc2100chopshop2:
 	Tooltip:
 		Name: Heavy Gunner Cyborg
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 30
 		Queue: Infantry, RAInfantry
 		Description: Strong vs Vehicles
@@ -5015,7 +4996,7 @@ psc2100chopshop2:
 		Name: Lancer Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100upscorpion1, up2100uplancer1
+		Prerequisites: 2100fy2, ~up2100upscorpion1, up2100uplancer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100T2SCH:
@@ -5027,7 +5008,7 @@ psc2100chopshop2:
 		Name: Tank Killer Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100upscorpion1, up2100uptankkiller1
+		Prerequisites: 2100fy2, ~up2100upscorpion1, up2100uptankkiller1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 
@@ -5040,7 +5021,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upscorpion1, ~techlevel.medium, ~!2100oldtechdisabled2
+		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upscorpion1, ~!2100oldtechdisabled2
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100MGSCH:
@@ -5052,7 +5033,7 @@ psc2100chopshop2:
 		Name: Heavy MG Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upheavymg1, ~up2100upscorpion1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upheavymg1, ~up2100upscorpion1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100RSCH:
@@ -5064,7 +5045,7 @@ psc2100chopshop2:
 		Name: Mini-Rocket Pod Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100upscorpion1, ~up2100uplrk1
+		Prerequisites: 2100fy2, ~up2100upscorpion1, ~up2100uplrk1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100LCSCH:
@@ -5076,7 +5057,7 @@ psc2100chopshop2:
 		Name: Light Cannon Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100upscorpion1, ~up2100uplcannon1, ~!2100oldtechdisabled2
+		Prerequisites: 2100fy2, ~up2100upscorpion1, ~up2100uplcannon1, ~!2100oldtechdisabled2
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100MOSCH:
@@ -5088,7 +5069,7 @@ psc2100chopshop2:
 		Name: Mortar Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100upscorpion1, ~up2100upmortar1
+		Prerequisites: 2100fy2, ~up2100upscorpion1, ~up2100upmortar1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 
@@ -5101,7 +5082,7 @@ psc2100chopshop2:
 		Name: Inferno Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100upscorpion1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100upscorpion1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HVSCH:
@@ -5113,7 +5094,7 @@ psc2100chopshop2:
 		Name: Hyper Velocity Cannon Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100upscorpion1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100upscorpion1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100FLASCH:
@@ -5125,7 +5106,7 @@ psc2100chopshop2:
 		Name: Flak AA Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100upscorpion1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100upscorpion1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100NEDSCH:
@@ -5137,7 +5118,7 @@ psc2100chopshop2:
 		Name: Needle Gun Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100upscorpion1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100upscorpion1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100BNKSCH:
@@ -5149,7 +5130,7 @@ psc2100chopshop2:
 		Name: Bunker Buster Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upbunkerbuster1, ~up2100upscorpion1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upbunkerbuster1, ~up2100upscorpion1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100PEPPERCH:
@@ -5161,7 +5142,7 @@ psc2100chopshop2:
 		Name: Pepperpot Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100upscorpion1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100upscorpion1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Mantis
@@ -5174,7 +5155,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100A2MAT:
@@ -5186,7 +5167,7 @@ psc2100chopshop2:
 		Name: Assault Gun Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100upassaultmg1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~up2100upassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HMAT:
@@ -5198,7 +5179,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100uphcannon1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100ACMAT:
@@ -5210,7 +5191,7 @@ psc2100chopshop2:
 		Name: Assault Cannon Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100upacannon1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~up2100upacannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AC2MAT:
@@ -5222,7 +5203,7 @@ psc2100chopshop2:
 		Name: Twin Assault Cannon Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100CMAT:
@@ -5234,7 +5215,7 @@ psc2100chopshop2:
 		Name: Command Turret Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100CRC, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1
+		Prerequisites: 2100CRC, ~up2100upmantis1, ~up2100uptracks1
 		Queue: Vehicle, RAVehicle
 		Description: Buffs nearby allies and debuffs targeted enemies.\n Unarmed
 
@@ -5247,7 +5228,7 @@ psc2100chopshop2:
 		Name: Hurricane AA Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100uphurricane1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~up2100uphurricane1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Aircraft
 2100RIPMAT:
@@ -5259,7 +5240,7 @@ psc2100chopshop2:
 		Name: Ripple Rockets Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HOTMAT:
@@ -5271,7 +5252,7 @@ psc2100chopshop2:
 		Name: Hotwizer Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~2100uphotwizer1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~2100uphotwizer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Scorpion Hovercraft
@@ -5284,7 +5265,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Scorpion Hovercraft
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upcobra1, ~techlevel.medium, ~up2100uphover1
+		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upcobra1, ~up2100uphover1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Mantis Hovercraft
@@ -5297,7 +5278,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Mantis Hovercraft
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uphover1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uphover1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HMAHOV:
@@ -5309,7 +5290,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Mantis Hovercraft
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uphover1, ~up2100uphcannon1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uphover1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 ####################################################################################################
@@ -5388,7 +5369,6 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~techlevel.medium
 	RenderSprites:
 		Image: 2100bus
 
@@ -5409,7 +5389,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LightMGVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplrk1, ~up2100upbug1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplrk1, ~up2100upbug1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith MG.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -5422,7 +5402,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100RocketPodVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplmg1, ~up2100upbug1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplmg1, ~up2100upbug1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith rocket pod.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -5434,7 +5414,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LitCannonVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplcannon1, ~up2100upscorpion1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplcannon1, ~up2100upscorpion1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith light cannon.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -5447,7 +5427,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LancerVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplancer1, ~up2100upscorpion1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplancer1, ~up2100upscorpion1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith Lancer.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -5580,7 +5560,7 @@ psc2100chopshop2:
 		Name: Lancer Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100uppanther1, up2100uplancer1
+		Prerequisites: 2100fy2, ~up2100uppanther1, up2100uplancer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100T2PHH:
@@ -5592,7 +5572,7 @@ psc2100chopshop2:
 		Name: Tank Killer Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100uppanther1, up2100uptankkiller1
+		Prerequisites: 2100fy2, ~up2100uppanther1, up2100uptankkiller1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100MPHH:
@@ -5604,7 +5584,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100uppanther1, ~techlevel.medium, ~!2100oldtechdisabled2
+		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100uppanther1, ~!2100oldtechdisabled2
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100MGPHH:
@@ -5616,7 +5596,7 @@ psc2100chopshop2:
 		Name: Heavy MG Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upheavymg1, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upheavymg1, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100MOPHH:
@@ -5628,7 +5608,7 @@ psc2100chopshop2:
 		Name: Mortar Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmortar1, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upmortar1, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 
@@ -5641,7 +5621,7 @@ psc2100chopshop2:
 		Name: Inferno Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AAPHH:
@@ -5653,7 +5633,7 @@ psc2100chopshop2:
 		Name: Hurricane AA Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uphurricane1, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uphurricane1, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HVPHH:
@@ -5665,7 +5645,7 @@ psc2100chopshop2:
 		Name: Hyper Velocity Cannon Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100FLAPHH:
@@ -5677,7 +5657,7 @@ psc2100chopshop2:
 		Name: Flak AA Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100NEDPHH:
@@ -5689,7 +5669,7 @@ psc2100chopshop2:
 		Name: Needle Gun Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100BNKPHH:
@@ -5701,7 +5681,7 @@ psc2100chopshop2:
 		Name: Bunker Buster Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upbunkerbuster1, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upbunkerbuster1, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100PEPPERPHH:
@@ -5713,7 +5693,7 @@ psc2100chopshop2:
 		Name: Pepperpot Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Tiger
@@ -5726,7 +5706,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: 2100CRC, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~up2100uptwinassaultmg1
+		Prerequisites: 2100CRC, ~up2100uptiger1, ~up2100uptracks1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100A2TIT:
@@ -5738,7 +5718,7 @@ psc2100chopshop2:
 		Name: Assault Gun Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: 2100CRC, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~up2100upassaultmg1
+		Prerequisites: 2100CRC, ~up2100uptiger1, ~up2100uptracks1, ~up2100upassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HTIT:
@@ -5750,7 +5730,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: 2100CRC, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~up2100uphcannon1
+		Prerequisites: 2100CRC, ~up2100uptiger1, ~up2100uptracks1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100ACTIT:
@@ -5762,7 +5742,7 @@ psc2100chopshop2:
 		Name: Assault Cannon Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~up2100upacannon1
+		Prerequisites: ~2100fy3, ~up2100uptiger1, ~up2100uptracks1, ~up2100upacannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AC2TIT:
@@ -5774,7 +5754,7 @@ psc2100chopshop2:
 		Name: Twin Assault Cannon Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100uptiger1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100CTIT:
@@ -5786,7 +5766,7 @@ psc2100chopshop2:
 		Name: Command Turret Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100CRC, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1
+		Prerequisites: 2100CRC, ~up2100uptiger1, ~up2100uptracks1
 		Queue: Vehicle, RAVehicle
 		Description: Buffs nearby allies and debuffs targeted enemies.\n Unarmed
 2100RIPTIT:
@@ -5798,7 +5778,7 @@ psc2100chopshop2:
 		Name: Ripple Rockets Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100uptiger1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HOTTIT:
@@ -5810,7 +5790,7 @@ psc2100chopshop2:
 		Name: Hotwizer Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~2100uphotwizer1
+		Prerequisites: ~2100fy3, ~up2100uptiger1, ~up2100uptracks1, ~2100uphotwizer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Panther Hovercraft
@@ -5823,7 +5803,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Panther Hovercraft
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100uppanther1, ~techlevel.medium, ~up2100uphover1
+		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100uppanther1, ~up2100uphover1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Tiger Hovercraft
@@ -5836,7 +5816,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Tiger Hovercraft
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uptiger1, ~up2100uphover1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100uptiger1, ~up2100uphover1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HTIHOV:
@@ -5848,7 +5828,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Tiger Hovercraft
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uptiger1, ~up2100uphover1, ~up2100uphcannon1
+		Prerequisites: ~2100fy3, ~up2100uptiger1, ~up2100uphover1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 ####################################################################################################
@@ -5859,7 +5839,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LightMGVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplrk1, ~up2100upleopard1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplrk1, ~up2100upleopard1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -5872,7 +5852,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100RocketPodVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplmg1, ~up2100upleopard1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplmg1, ~up2100upleopard1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -5884,7 +5864,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LitCannonVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplcannon1, ~up2100uppanther1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplcannon1, ~up2100uppanther1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -5896,7 +5876,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LancerVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplancer1, ~up2100uppanther1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplancer1, ~up2100uppanther1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -6015,7 +5995,7 @@ psc2100chopshop2:
 		Name: Lancer Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~2100fy2, ~techlevel.medium, ~up2100upretribution1, up2100uplancer1
+		Prerequisites: ~2100fy2, ~up2100upretribution1, up2100uplancer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100T2RTH:
@@ -6027,7 +6007,7 @@ psc2100chopshop2:
 		Name: Tank Killer Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~2100fy2, ~techlevel.medium, ~up2100upretribution1, up2100uptankkiller1
+		Prerequisites: ~2100fy2, ~up2100upretribution1, up2100uptankkiller1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100MRTH:
@@ -6039,7 +6019,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~2100fy2, ~up2100upmcannon1, ~up2100upretribution1, ~techlevel.medium, ~!2100oldtechdisabled2
+		Prerequisites: ~2100fy2, ~up2100upmcannon1, ~up2100upretribution1, ~!2100oldtechdisabled2
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100MGRTH:
@@ -6051,7 +6031,7 @@ psc2100chopshop2:
 		Name: Heavy MG Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~2100fy2, ~up2100upheavymg1, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: ~2100fy2, ~up2100upheavymg1, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100MORTH:
@@ -6063,7 +6043,7 @@ psc2100chopshop2:
 		Name: Mortar Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~2100fy2, ~up2100upmortar1, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: ~2100fy2, ~up2100upmortar1, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100RARTH:
@@ -6075,7 +6055,7 @@ psc2100chopshop2:
 		Name: Mini-Rocket Array Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~2100fy2, ~up2100rkarray1, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: ~2100fy2, ~up2100rkarray1, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 
@@ -6088,7 +6068,7 @@ psc2100chopshop2:
 		Name: Inferno Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HVRTH:
@@ -6100,7 +6080,7 @@ psc2100chopshop2:
 		Name: Hyper Velocity Cannon Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100FLARTH:
@@ -6112,7 +6092,7 @@ psc2100chopshop2:
 		Name: Flak AA Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100NEDRTH:
@@ -6124,7 +6104,7 @@ psc2100chopshop2:
 		Name: Needle Gun Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100PEPPERRTH:
@@ -6136,7 +6116,7 @@ psc2100chopshop2:
 		Name: Pepperpot Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Vengeance
@@ -6149,7 +6129,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100A2VET:
@@ -6161,7 +6141,7 @@ psc2100chopshop2:
 		Name: Assault Gun Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upassaultmg1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HVET:
@@ -6173,7 +6153,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uphcannon1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 
@@ -6186,7 +6166,7 @@ psc2100chopshop2:
 		Name: Command Turret Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100CRC, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1
+		Prerequisites: 2100CRC, ~up2100upvengeance1, ~up2100uptracks1
 		Queue: Vehicle, RAVehicle
 		Description: Buffs nearby allies and debuffs targeted enemies.\n Unarmed
 2100ACVET:
@@ -6198,7 +6178,7 @@ psc2100chopshop2:
 		Name: Assault Cannon Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upacannon1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upacannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AC2VET:
@@ -6210,7 +6190,7 @@ psc2100chopshop2:
 		Name: Twin Assault Cannon Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AAVET:
@@ -6222,7 +6202,7 @@ psc2100chopshop2:
 		Name: Hurricane AA Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uphurricane1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uphurricane1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100NEXVET:
@@ -6234,7 +6214,7 @@ psc2100chopshop2:
 		Name: Nexus Link Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100RIPVET:
@@ -6246,7 +6226,7 @@ psc2100chopshop2:
 		Name: Ripple Rockets Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HOTTIT:
@@ -6258,7 +6238,7 @@ psc2100chopshop2:
 		Name: Hotwizer Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~2100uphotwizer1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~2100uphotwizer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Retribution Hovercraft
@@ -6271,7 +6251,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Retribution Hovercraft
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upretribution1, ~techlevel.medium, ~up2100uphover1
+		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upretribution1, ~up2100uphover1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Vengeance Hovercraft
@@ -6284,7 +6264,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Vengeance Hovercraft
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uphover1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uphover1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HVEHOV:
@@ -6296,7 +6276,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Vengeance Hovercraft
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uphover1, ~up2100uphcannon1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uphover1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 ####################################################################################################
@@ -6307,7 +6287,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LightMGVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplrk1, ~up2100upretaliaton1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplrk1, ~up2100upretaliaton1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -6320,7 +6300,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100RocketPodVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplmg1, ~up2100upretaliaton1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplmg1, ~up2100upretaliaton1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -6332,7 +6312,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LitCannonVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplcannon1, ~up2100upretribution1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplcannon1, ~up2100upretribution1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -6344,7 +6324,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LancerVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplancer1, ~up2100upretribution1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplancer1, ~up2100upretribution1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -6710,13 +6690,12 @@ psc2100chopshop2:
 		Name: Mobile Construction Vehicle (Scavenger)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100RF, ~techlevel.medium, 2100RR
+		Prerequisites: 2100RF, 2100RR
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 35
 		Description: Deploys into another Construction Yard.\n  Automaticaly Repairs Structures in a 3 Tile Radius
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 100
 	Health:
@@ -7111,7 +7090,7 @@ psc2100chopshop2:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Fast armed transport.\n  Strong vs light vehicles\n  Weak vs Infantry, Tanks\n Can transport 3 infantry
-		Prerequisites: up2100uparmor2, up2100uplcannon1, ~techlevel.medium, 2100chopshop2, ~!2100oldtechdisabled2
+		Prerequisites: up2100uparmor2, up2100uplcannon1, 2100chopshop2, ~!2100oldtechdisabled2
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -7128,7 +7107,7 @@ psc2100chopshop2:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Fast armed transport.\n  Strong vs light vehicles\n  Weak vs Infantry, Tanks\n Can transport 3 infantry
-		Prerequisites: up2100uparmor2, up2100uplrk1, ~techlevel.medium, 2100chopshop2, ~!2100oldtechdisabled2
+		Prerequisites: up2100uparmor2, up2100uplrk1, 2100chopshop2, ~!2100oldtechdisabled2
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -7145,7 +7124,7 @@ psc2100chopshop2:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Fast armed transport.\n  Strong vs light vehicles\n  Weak vs Infantry, Tanks\n Can transport 3 infantry
-		Prerequisites: up2100uparmor2, up2100upneedle, ~techlevel.medium, 2100chopshop2
+		Prerequisites: up2100uparmor2, up2100upneedle, 2100chopshop2
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -7162,7 +7141,7 @@ psc2100chopshop2:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Fast armed transport.\n  Strong vs light vehicles\n  Weak vs Infantry, Tanks\n Can transport 3 infantry
-		Prerequisites: up2100uparmor2, up2100uplcannon1, up2100uphover1, ~techlevel.medium, 2100chopshop2
+		Prerequisites: up2100uparmor2, up2100uplcannon1, up2100uphover1, 2100chopshop2
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -7179,7 +7158,7 @@ psc2100chopshop2:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Fast armed transport.\n  Strong vs light vehicles\n  Weak vs Infantry, Tanks\n Can transport 3 infantry
-		Prerequisites: up2100uparmor2, up2100uplrk1, up2100uphover1, ~techlevel.medium, 2100chopshop2
+		Prerequisites: up2100uparmor2, up2100uplrk1, up2100uphover1, 2100chopshop2
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -7230,7 +7209,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor3, up2100uplcannon1, ~techlevel.medium, 2100chopshop2, ~!2100oldtechdisabled2
+		Prerequisites: up2100uparmor3, up2100uplcannon1, 2100chopshop2, ~!2100oldtechdisabled2
 		Description: Large armored transport.\n  Strong vs light vehicles\n  Weak vs infantry, tanks\n Can transport 6 infantry
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7246,7 +7225,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor3, up2100upmcannon1, ~techlevel.medium, 2100chopshop2
+		Prerequisites: up2100uparmor3, up2100upmcannon1, 2100chopshop2
 		Description: Large armored transport.\n  Strong vs light vehicles\n  Weak vs infantry, tanks\n Can transport 6 infantry
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7262,7 +7241,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor3, up2100uphycannon, ~techlevel.medium, 2100chopshop2
+		Prerequisites: up2100uparmor3, up2100uphycannon, 2100chopshop2
 		Description: Large armored transport.\n  Strong vs light vehicles\n  Weak vs infantry, tanks\n Can transport 6 infantry
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7278,7 +7257,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor3, up2100uphycannon, ~techlevel.medium, 2100chopshop2, up2100upassaultmg1, ~!2100oldtechdisabled2
+		Prerequisites: up2100uparmor3, up2100uphycannon, 2100chopshop2, up2100upassaultmg1, ~!2100oldtechdisabled2
 		Description: Large armored transport.\n  Strong vs light vehicles\n  Weak vs infantry, tanks\n Can transport 6 infantry
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7294,7 +7273,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor3, up2100uphycannon, ~techlevel.medium, 2100chopshop2, up2100uptwinassaultmg1
+		Prerequisites: up2100uparmor3, up2100uphycannon, 2100chopshop2, up2100uptwinassaultmg1
 		Description: Large armored transport.\n  Strong vs light vehicles\n  Weak vs infantry, tanks\n Can transport 6 infantry
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7310,7 +7289,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor4, up2100uplancer1, ~techlevel.medium, 2100chopshop3
+		Prerequisites: up2100uparmor4, up2100uplancer1, 2100chopshop3
 		Description: Anti-tank missile vehicle\n  Strong vs ground targets
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7326,7 +7305,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor4, up2100upinferno1, ~techlevel.medium, 2100chopshop3
+		Prerequisites: up2100uparmor4, up2100upinferno1, 2100chopshop3
 		Description: Anti-tank missile vehicle\n  Strong vs ground targets
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7342,7 +7321,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor4, up2100upbunkerbuster1, ~techlevel.medium, 2100chopshop3
+		Prerequisites: up2100uparmor4, up2100upbunkerbuster1, 2100chopshop3
 		Description: Anti-tank missile vehicle\n  Strong vs ground targets
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7358,7 +7337,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor4, up2100uplancer1, ~techlevel.medium, 2100chopshop3, up2100uphover1
+		Prerequisites: up2100uparmor4, up2100uplancer1, 2100chopshop3, up2100uphover1
 		Description: Anti-tank missile vehicle\n  Strong vs ground targets
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7376,7 +7355,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor4, up2100upflamer1, up2100rkarray1, up2100uptankkiller1, ~techlevel.high, 2100chopshop3
+		Prerequisites: up2100uparmor4, up2100upflamer1, up2100rkarray1, up2100uptankkiller1, 2100chopshop3
 		Description: Converted heavy truck with numerous weapons.\n  Strong vs Everything
 	Mobile:
 		Speed: 97
@@ -7437,7 +7416,7 @@ psc2100chopshop2:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Selectable:
-		DecorationBounds: 54613, 54613
+		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: 2100ScavengerVoice2
 	RenderSprites:
@@ -7454,7 +7433,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor4, up2100upinferno1, ~techlevel.high, 2100chopshop3
+		Prerequisites: up2100uparmor4, up2100upinferno1, 2100chopshop3
 		Description: Converted heavy truck with numerous weapons.\n  Strong vs Everything
 	Mobile:
 		Speed: 97
@@ -7508,7 +7487,7 @@ psc2100chopshop2:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Selectable:
-		DecorationBounds: 54613, 54613
+		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: 2100ScavengerVoice2
 	RenderSprites:
@@ -7525,7 +7504,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor4, up2100uptwinassaultmg1, ~techlevel.high, 2100chopshop3
+		Prerequisites: up2100uparmor4, up2100uptwinassaultmg1, 2100chopshop3
 		Description: Converted heavy truck with numerous weapons.\n  Strong vs Everything
 	Mobile:
 		Speed: 97
@@ -7580,7 +7559,7 @@ psc2100chopshop2:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Selectable:
-		DecorationBounds: 54613, 54613
+		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: 2100ScavengerVoice2
 	RenderSprites:
@@ -7597,7 +7576,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 110
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor2, up2100upmortar1, ~techlevel.medium, 2100chopshop2
+		Prerequisites: up2100uparmor2, up2100upmortar1, 2100chopshop2
 		Description: Long-range self-propelled mortar.\n  Strong vs Infantry, Buildings
 	Mobile:
 		Speed: 85
@@ -7680,7 +7659,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor5, up2100uphcannon1, ~techlevel.medium, 2100chopshop3
+		Prerequisites: up2100uparmor5, up2100uphcannon1, 2100chopshop3
 		Description: Large armored transport.\n  Strong vs light vehicles\n  Weak vs infantry, tanks\n Can transport 6 infantry
 	Mobile:
 		Speed: 85
@@ -7729,7 +7708,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uptracks1, ~techlevel.medium, 2100CRC, 2100chopshop3
+		Prerequisites: up2100uptracks1, 2100CRC, 2100chopshop3
 		Description: Control Unit
 	AutoTarget:
 		ScanRadius: 25
@@ -7768,7 +7747,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 890
 	Buildable:
-		Prerequisites: 2100ChopShopAdv, ~techlevel.medium, ~botplayer
+		Prerequisites: 2100ChopShopAdv, ~botplayer
 	Cargo:
 		EjectOnDeath: false
 		InitialUnits: 2100scav,2100scav,2100scav
@@ -7790,7 +7769,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1100
 	Buildable:
-		Prerequisites: 2100ChopShopAdv, ~techlevel.medium, ~botplayer
+		Prerequisites: 2100ChopShopAdv, ~botplayer
 	Cargo:
 		EjectOnDeath: false
 		InitialUnits: 2100scav,2100scav,2100scav,2100scav,2100scav
@@ -7885,7 +7864,7 @@ psc2100chopshop2:
 		Name: Bp-200 Gun Chopper
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: 2100ChopShop, 2100RF, ~techlevel.medium
+		Prerequisites: 2100ChopShop, 2100RF
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with Chainguns.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -7962,7 +7941,7 @@ psc2100chopshop2:
 		Speed: 160
 		Repulsable: False
 	AttackBomber:
-		Armaments: gun
+		Armaments: td_nod_gunturret
 		FacingTolerance: 32
 	Armament@GUNS:
 		Name: gun
@@ -8048,7 +8027,7 @@ psc2100chopshop2:
 		Name: Bp-200 Police Chopper
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100ChopShop, 2100RF, ~techlevel.high
+		Prerequisites: 2100ChopShop, 2100RF
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with Rockets.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -8114,7 +8093,7 @@ psc2100chopshop2:
 		Speed: 170
 		Repulsable: False
 	AttackBomber:
-		Armaments: gun
+		Armaments: td_nod_gunturret
 		FacingTolerance: 32
 	Armament@GUNS:
 		Name: gun
@@ -8415,12 +8394,12 @@ psc2100chopshop2:
 		SelectionShares: 1
 		UseCashTick: true
 up2100uplmg1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Machinegun Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100uplmg1
 	Valued:
@@ -8430,12 +8409,12 @@ up2100uplmg1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplmg1
 up2100uptwinmg1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Twin Machinegun Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100uptwinmg1, ~up2100uplmg3
 	Valued:
@@ -8445,12 +8424,12 @@ up2100uptwinmg1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uptwinmg1
 up2100uphurricane1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hurricane AA Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Hurricane AA Weapon
 		Prerequisites: ~!2100uphurricane, ~up2100uptwinmg1
 	Valued:
@@ -8460,12 +8439,12 @@ up2100uphurricane1:
 	ProvidesPrerequisite:
 		Prerequisite: 2100uphurricane
 up2100upheavymg1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Heavy Machinegun Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upheavymg1, ~up2100uplmg4, ~up2100uptwinmg1
 	Valued:
@@ -8475,12 +8454,12 @@ up2100upheavymg1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upheavymg1
 up2100upassaultmg1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Assault Machinegun Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upassaultmg1, ~up2100uplmg7, ~up2100upheavymg1
 	Valued:
@@ -8490,12 +8469,12 @@ up2100upassaultmg1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upassaultmg1
 up2100uptwinassaultmg1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Twin Assault Machinegun Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100uptwinassaultmg1, ~up2100upsypnaticdata4, ~up2100upassaultmg1
 	Valued:
@@ -8505,12 +8484,12 @@ up2100uptwinassaultmg1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uptwinassaultmg1
 up2100upflamer1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Flamer Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upflamer1
 	Valued:
@@ -8521,12 +8500,12 @@ up2100upflamer1:
 		Prerequisite: up2100upflamer1
 
 up2100upflamer2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: High Temeperature Gel
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upflamer2, ~up2100upflamer1
 	Valued:
@@ -8536,12 +8515,12 @@ up2100upflamer2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upflamer2
 up2100upflamer3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: High Temeperature Gel MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upflamer3, ~up2100upflamer2
 	Valued:
@@ -8551,12 +8530,12 @@ up2100upflamer3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upflamer3
 up2100upflamer4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Flamer Autoloader
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upflamer4, ~up2100upflamer3
 	Valued:
@@ -8566,12 +8545,12 @@ up2100upflamer4:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upflamer4
 up2100upflamer5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: High Temeperature Gel MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upflamer5, ~up2100upflamer3
 	Valued:
@@ -8581,12 +8560,12 @@ up2100upflamer5:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upflamer5
 up2100upflamer6:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: SuperHot Gel
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upflamer6, ~up2100upflamer5
 	Valued:
@@ -8596,12 +8575,12 @@ up2100upflamer6:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upflamer6
 up2100upinferno1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Inferno Flamer Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Inferno Flamer Weapon
 		Prerequisites: ~!up2100upinferno1, ~up2100upflamer6
 	Valued:
@@ -8611,12 +8590,12 @@ up2100upinferno1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upinferno1
 up2100upinferno2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: SuperHot Gel MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upinferno2, ~up2100upinferno1
 	Valued:
@@ -8627,12 +8606,12 @@ up2100upinferno2:
 		Prerequisite: up2100upinferno2
 
 up2100upinferno3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: SuperHot Gel MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upinferno3, ~up2100upinferno2
 	Valued:
@@ -8642,12 +8621,12 @@ up2100upinferno3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upinferno3
 up2100uplmg2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hardened MG Bullets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: MG Weapons make 20% more damage
 		Prerequisites: ~!up2100uplmg2, ~up2100uplmg1
 	Valued:
@@ -8657,12 +8636,12 @@ up2100uplmg2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplmg2
 up2100uplmg3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: APDSB MG Bullets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: MG Weapons make 20% more damage
 		Prerequisites: ~!up2100uplmg3, ~up2100uplmg2
 	Valued:
@@ -8672,12 +8651,12 @@ up2100uplmg3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplmg3
 up2100uplmg4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: APDSB MG Bullets MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: MG Weapons make 20% more damage
 		Prerequisites: ~!up2100uplmg4, ~up2100uplmg3, ~up2100uptwinmg1
 	Valued:
@@ -8687,12 +8666,12 @@ up2100uplmg4:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplmg4
 up2100uplmg5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Chaingun Upgrade
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: MG Weapons make 20% more reload
 		Prerequisites: ~!up2100uplmg5, ~up2100uplmg4, ~up2100upengine1
 	Valued:
@@ -8702,12 +8681,12 @@ up2100uplmg5:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplmg5
 up2100uplmg6:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Rapid Fire Chaingun
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: MG Weapons make 20% more reload
 		Prerequisites: ~!up2100uplmg6, ~up2100uplmg5
 	Valued:
@@ -8717,12 +8696,12 @@ up2100uplmg6:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplmg6
 up2100uplmg7:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hiper Fire Chaingun
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: MG Weapons make 20% more reload
 		Prerequisites: ~!up2100uplmg7, ~up2100uplmg6
 	Valued:
@@ -8732,12 +8711,12 @@ up2100uplmg7:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplmg7
 up2100upengine1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Fuel Injection Engine
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100upengine1
 	Valued:
@@ -8747,12 +8726,12 @@ up2100upengine1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upengine1
 up2100upengine2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Fuel Injection Engine MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100upengine2, ~up2100upengine1
 	Valued:
@@ -8762,12 +8741,12 @@ up2100upengine2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upengine2
 up2100upengine3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Fuel Injection Engine MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100upengine3, ~up2100upengine2
 	Valued:
@@ -8777,12 +8756,12 @@ up2100upengine3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upengine3
 up2100upengine4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Turbo Charger Engine
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100upengine4, ~up2100upengine3
 	Valued:
@@ -8793,12 +8772,12 @@ up2100upengine4:
 		Prerequisite: up2100upengine4
 
 up2100uplrk1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mini-Rocket Pod Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplrk1, ~up2100upengine1
 	Valued:
@@ -8809,12 +8788,12 @@ up2100uplrk1:
 		Prerequisite: up2100uplrk1
 
 up2100uplrk2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HE Rockets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplrk2, ~up2100uplrk1
 	Valued:
@@ -8824,12 +8803,12 @@ up2100uplrk2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplrk2
 up2100uplrk3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HE Rockets MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplrk3, ~up2100uplrk2
 	Valued:
@@ -8839,12 +8818,12 @@ up2100uplrk3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplrk3
 up2100uplrk4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HE Rockets MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplrk4, ~up2100uplrk3
 	Valued:
@@ -8854,12 +8833,12 @@ up2100uplrk4:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplrk4
 up2100uplrk5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Stabilized Rockets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades the Target of Rockets
 		Prerequisites: ~!up2100uplrk5, ~up2100uplrk3
 	Valued:
@@ -8869,12 +8848,12 @@ up2100uplrk5:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplrk5
 up2100uplancer1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Lancer AT Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Lancer Weapons
 		Prerequisites: ~!up2100uplancer1, ~up2100uplrk4, ~up2100uplrk5
 	Valued:
@@ -8884,12 +8863,12 @@ up2100uplancer1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplancer1
 up2100uplancer2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAT Rocket Warhead
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplancer2, ~up2100uplancer1
 	Valued:
@@ -8899,12 +8878,12 @@ up2100uplancer2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplancer2
 up2100uplancer3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Improved Rocket Wire Guidance
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplancer3, ~up2100uplancer2
 	Valued:
@@ -8914,12 +8893,12 @@ up2100uplancer3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplancer3
 up2100uplancer4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAT Rocket Warhead MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplancer4, ~up2100uplancer2
 	Valued:
@@ -8929,12 +8908,12 @@ up2100uplancer4:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplancer4
 up2100uplancer5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAT Rocket Warhead MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplancer5, ~up2100uplancer4
 	Valued:
@@ -8944,12 +8923,12 @@ up2100uplancer5:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplancer5
 up2100upbunkerbuster1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Lancer AT Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Lancer Weapons
 		Prerequisites: ~!up2100upbunkerbuster1, ~up2100uplancer1
 	Valued:
@@ -8959,12 +8938,12 @@ up2100upbunkerbuster1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upbunkerbuster1
 up2100uptankkiller1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tank Killer Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Tank Killer Unlock
 		Prerequisites: ~!up2100uptankkiller1, ~up2100uplancer5
 	Valued:
@@ -8974,12 +8953,12 @@ up2100uptankkiller1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uptankkiller1
 up2100rkarray1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mini-Rockets Array Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Rockets Mini-Rockets Array
 		Prerequisites: ~!up2100rkarray1, ~up2100uplrk3
 	Valued:
@@ -8990,12 +8969,12 @@ up2100rkarray1:
 		Prerequisite: up2100rkarray1
 
 up2100uparmor1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Composite Alloys
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %10 more HP
 		Prerequisites: ~!up2100uparmor1
 	Valued:
@@ -9005,12 +8984,12 @@ up2100uparmor1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uparmor1
 up2100uparmor2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Composite Alloys MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %10 more HP
 		Prerequisites: ~!up2100uparmor2, ~up2100uparmor1, ~up2100upfactorymodule1
 	Valued:
@@ -9020,12 +8999,12 @@ up2100uparmor2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uparmor2
 up2100uparmor3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Composite Alloys MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %10 more HP
 		Prerequisites: ~!up2100uparmor3, ~up2100uparmor2
 	Valued:
@@ -9035,12 +9014,12 @@ up2100uparmor3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uparmor3
 up2100uparmor4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Dense Composite Alloys
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %10 more HP
 		Prerequisites: ~!up2100uparmor4, ~up2100uparmor3, ~up2100upsypnaticdata1
 	Valued:
@@ -9050,12 +9029,12 @@ up2100uparmor4:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uparmor4
 up2100uparmor5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Super Dense Composite Alloys
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %10 more HP
 		Prerequisites: ~!up2100uparmor5, ~up2100uparmor4, ~up2100upsypnaticdata4
 	Valued:
@@ -9065,12 +9044,12 @@ up2100uparmor5:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uparmor5
 up2100uparmor6:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Super Dense Composite Alloys MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %10 more HP
 		Prerequisites: ~!up2100uparmor6, ~up2100uparmor5
 	Valued:
@@ -9080,12 +9059,12 @@ up2100uparmor6:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uparmor6
 up2100uparmor7:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Super Dense Composite Alloys MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %10 more HP
 		Prerequisites: ~!up2100uparmor7, ~up2100uparmor6
 	Valued:
@@ -9095,12 +9074,12 @@ up2100uparmor7:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uparmor7
 up2100upengineer1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Improved Engineering
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Repairs Vehicles
 		Prerequisites: ~!up2100upengineer1, ~up2100upmortar4
 	Valued:
@@ -9110,12 +9089,12 @@ up2100upengineer1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upengineer1
 up2100upengineer2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Advanced Engineering
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Repairs Vehicles
 		Prerequisites: ~!up2100upengineer2, ~up2100upengineer1
 	Valued:
@@ -9125,12 +9104,12 @@ up2100upengineer2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upengineer2
 up2100upwall1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Wall Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Walls
 		Prerequisites: ~!up2100upwall1
 	Valued:
@@ -9140,12 +9119,12 @@ up2100upwall1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upwall1
 up2100upwall2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Improved Hardcrete
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Defences gains %10 more HP
 		Prerequisites: ~!up2100upwall2, ~up2100upwall1
 	Valued:
@@ -9155,12 +9134,12 @@ up2100upwall2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upwall2
 up2100upwall3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Improved Hardcrete MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Defences gains %10 more HP
 		Prerequisites: ~!up2100upwall3, ~up2100upwall2
 	Valued:
@@ -9170,12 +9149,12 @@ up2100upwall3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upwall3
 up2100upwall4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Improved Hardcrete MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Defences gains %10 more HP
 		Prerequisites: ~!up2100upwall4, ~up2100upwall3
 	Valued:
@@ -9185,12 +9164,12 @@ up2100upwall4:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upwall4
 up2100upwall5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Supercrete
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Defences gains %10 more HP
 		Prerequisites: ~!up2100upwall5, ~up2100upwall4, ~up2100upengineer1
 	Valued:
@@ -9201,12 +9180,12 @@ up2100upwall5:
 		Prerequisite: up2100upwall5
 
 up2100upwall6:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Supercrete MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Defences gains %10 more HP
 		Prerequisites: ~!up2100upwall6, ~up2100upwall5
 	Valued:
@@ -9217,12 +9196,12 @@ up2100upwall6:
 		Prerequisite: up2100upwall6
 
 up2100upwall7:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Supercrete MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Defences gains %10 more HP
 		Prerequisites: ~!up2100upwall6, ~up2100upwall7
 	Valued:
@@ -9232,12 +9211,12 @@ up2100upwall7:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upwall7
 up2100upstructure1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Reinforced Base Structure Materials
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Structures gains %10 more HP
 		Prerequisites: ~!up2100upstructure1, ~up2100upwall2
 	Valued:
@@ -9247,12 +9226,12 @@ up2100upstructure1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upstructure1
 up2100upstructure2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Reinforced Base Structure Materials MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Structures gains %10 more HP
 		Prerequisites: ~!up2100upstructure2, ~up2100upstructure1
 	Valued:
@@ -9262,12 +9241,12 @@ up2100upstructure2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upstructure2
 up2100upstructure3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Reinforced Base Structure Materials MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Structures gains %10 more HP
 		Prerequisites: ~!up2100upstructure3, ~up2100upstructure2
 	Valued:
@@ -9277,12 +9256,12 @@ up2100upstructure3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upstructure3
 up2100uplcannon1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Light Cannon Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Light Cannon Weapon
 		Prerequisites: ~!2100uplcannon1, ~up2100uplmg2
 	Valued:
@@ -9292,12 +9271,12 @@ up2100uplcannon1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplcannon1
 up2100uplcannon2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAT Cannon Shells
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: UUpgrade Cannons Weapons Firepower
 		Prerequisites: ~!up2100uplcannon2, ~up2100uplcannon1
 	Valued:
@@ -9307,12 +9286,12 @@ up2100uplcannon2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplcannon2
 up2100uplcannon3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAT Cannon Shells MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Cannons Weapons Firepower
 		Prerequisites: ~!up2100uplcannon3, ~up2100uplcannon2
 	Valued:
@@ -9322,12 +9301,12 @@ up2100uplcannon3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplcannon3
 up2100uplcannon4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAT Cannon Shells MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Cannons Weapons Firepower
 		Prerequisites: ~!up2100uplcannon4, ~up2100uplcannon3
 	Valued:
@@ -9337,12 +9316,12 @@ up2100uplcannon4:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplcannon4
 up2100uplcannon5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: APFSDS Cannon Rounds
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Cannons Weapons Firepower
 		Prerequisites: ~!up2100uplcannon5, ~up2100uplcannon4
 	Valued:
@@ -9352,12 +9331,12 @@ up2100uplcannon5:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplcannon5
 up2100uplcannon6:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: APFSDS Cannon Rounds MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Cannons Weapons Firepower
 		Prerequisites: ~!up2100uplcannon6, ~up2100uplcannon5
 	Valued:
@@ -9367,12 +9346,12 @@ up2100uplcannon6:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplcannon6
 up2100uplcannon7:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cannon Autoloader
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Cannons Weapons Firepower
 		Prerequisites: ~!up2100uplcannon7, ~up2100uplcannon5
 	Valued:
@@ -9382,12 +9361,12 @@ up2100uplcannon7:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplcannon7
 up2100upmcannon1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Medium Cannon Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Medium Cannon Weapon
 		Prerequisites: ~!up2100upmcannon1, ~up2100uplcannon2, ~up2100upfactorymodule1
 	Valued:
@@ -9397,12 +9376,12 @@ up2100upmcannon1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upmcannon1
 up2100uphcannon1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Heavy Cannon Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Heavy Cannon Weapon
 		Prerequisites: ~!up2100uphcannon1, ~up2100upmcannon1, ~up2100uparmor3
 	Valued:
@@ -9412,12 +9391,12 @@ up2100uphcannon1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uphcannon1
 up2100upacannon1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Assault Cannon Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Assault Cannon Weapon
 		Prerequisites: ~!up2100upacannon1, ~up2100uplcannon7, ~up2100upsypnaticdata3
 	Valued:
@@ -9428,12 +9407,12 @@ up2100upacannon1:
 		Prerequisite: up2100upacannon1
 
 up2100uphycannon:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hyper Velocity Cannon Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Hyper Velocity Cannon Weapon
 		Prerequisites: ~!up2100uphycannon, ~up2100uplcannon3, ~up2100upsypnaticdata1
 	Valued:
@@ -9443,12 +9422,12 @@ up2100uphycannon:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uphycannon
 up2100upneedle:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Needle Gun Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Needle Gun Weapon
 		Prerequisites: ~!up2100upneedle, ~up2100uplcannon6, ~up2100upsypnaticdata4
 	Valued:
@@ -9458,12 +9437,12 @@ up2100upneedle:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upneedle
 up2100upflak1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: AA Flak Cannon Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock AA Flak Weapon
 		Prerequisites: ~!up2100upflak, ~up2100uphycannon
 	Valued:
@@ -9473,12 +9452,12 @@ up2100upflak1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upflak
 up2100upa2cannon1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Twin Assault Cannon Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Twin Assault Cannon Weapon
 		Prerequisites: ~!up2100upa2cannon1, ~up2100upacannon1
 	Valued:
@@ -9488,12 +9467,12 @@ up2100upa2cannon1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upa2cannon1
 up2100upmortar1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mortar Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Mortar Weapon
 		Prerequisites: ~!up2100upmortar1, ~up2100uplcannon2, ~up2100upfactorymodule1
 	Valued:
@@ -9503,12 +9482,12 @@ up2100upmortar1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upmortar1
 up2100upmortar2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HE Mortar Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Mortar Firepower
 		Prerequisites: ~!up2100upmortar2, ~up2100upmortar1
 	Valued:
@@ -9519,12 +9498,12 @@ up2100upmortar2:
 		Prerequisite: up2100upmortar2
 
 up2100upmortar3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HE Mortar Research MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Mortar Firepower
 		Prerequisites: ~!up2100upmortar3, ~up2100upmortar2
 	Valued:
@@ -9535,12 +9514,12 @@ up2100upmortar3:
 		Prerequisite: up2100upmortar3
 
 up2100upmortar4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mortar Targeting Computer
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Mortar Target
 		Prerequisites: ~!up2100upmortar4, ~up2100upmortar2
 	Valued:
@@ -9551,12 +9530,12 @@ up2100upmortar4:
 		Prerequisite: up2100upmortar4
 
 up2100upmortar5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HE Mortar Research MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Mortar Firepower
 		Prerequisites: ~!up2100upmortar5, ~up2100upmortar3
 	Valued:
@@ -9566,12 +9545,12 @@ up2100upmortar5:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upmortar5
 up2100upmortar6:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mortar Autoloader
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Mortar Firepower
 		Prerequisites: ~!up2100upmortar6, ~up2100upmortar5
 	Valued:
@@ -9581,12 +9560,12 @@ up2100upmortar6:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upmortar6
 up2100upmortar7:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAP Mortar Shells
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Mortar Firepower
 		Prerequisites: ~!up2100upmortar7, ~up2100upmortar5
 	Valued:
@@ -9596,12 +9575,12 @@ up2100upmortar7:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upmortar7
 up2100upbombard1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bombard Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Bombard Weapon
 		Prerequisites: ~!up2100upbombard1, ~up2100upmortar3, ~up2100uparmor1
 	Valued:
@@ -9611,12 +9590,12 @@ up2100upbombard1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upbombard1
 up2100uppepper1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Pepperpot Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Bombard Weapon
 		Prerequisites: ~!up2100uppepper1, ~up2100upmortar2, ~up2100uparmor1
 	Valued:
@@ -9626,12 +9605,12 @@ up2100uppepper1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uppepper1
 2100uphotwizer1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hotwizer Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Bombard Weapon
 		Prerequisites: ~!2100uphotwizer1, ~up2100upmortar3, ~up2100uparmor1
 	Valued:
@@ -9641,12 +9620,12 @@ up2100uppepper1:
 	ProvidesPrerequisite:
 		Prerequisite: 2100uphotwizer1
 up2100uptracks1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tracks Propulsion Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Heavy Tracked Vehicles
 		Prerequisites: ~!up2100uptracks1, ~up2100upfactorymodule1, ~up2100uparmor2
 	Valued:
@@ -9656,12 +9635,12 @@ up2100uptracks1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uptracks1
 up2100uphover1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hover Propulsion Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Hovercraft Vehicles
 		Prerequisites: ~!up2100uphover1, ~up2100upfactorymodule1, ~up2100upengine2
 	Valued:
@@ -9671,12 +9650,12 @@ up2100uphover1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uphover1
 up2100upvtols1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Vtol Propulsion Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Vtols Vehicles
 		Prerequisites: ~!up2100upvtols1, ~up2100upfactorymodule1, ~up2100upengine3
 	Valued:
@@ -9686,12 +9665,12 @@ up2100upvtols1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upvtols1
 up2100upviper1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Viper Light Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Viper Vehicles
 		Prerequisites: ~!up2100upviper1, ~bodies.alpha
 	Valued:
@@ -9701,12 +9680,12 @@ up2100upviper1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upviper1
 up2100upbug1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bug Light Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Bug Vehicles
 		Prerequisites: ~!up2100upbug1, ~bodies.paradigm, ~up2100uparmor1
 	Valued:
@@ -9716,12 +9695,12 @@ up2100upbug1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upbug1
 up2100upcobra1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cobra Medium Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Cobra Vehicles
 		Prerequisites: ~!up2100upcobra1, ~up2100upviper1, ~bodies.alpha, ~up2100upfactorymodule1
 	Valued:
@@ -9731,12 +9710,12 @@ up2100upcobra1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upcobra1
 up2100uppython1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Python Heavy Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Python Vehicles
 		Prerequisites: ~!up2100uppython1, ~up2100upcobra1, ~bodies.alpha
 	Valued:
@@ -9746,12 +9725,12 @@ up2100uppython1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uppython1
 up2100upscorpion1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Scorpion Medium Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Scorpion Vehicles
 		Prerequisites: ~!up2100upscorpion1, ~up2100upbug1, ~bodies.paradigm, ~up2100uparmor2
 	Valued:
@@ -9761,12 +9740,12 @@ up2100upscorpion1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upscorpion1
 up2100upmantis1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mantis Heavy Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Mantis Vehicles
 		Prerequisites: ~!up2100upmantis1, ~up2100upscorpion1, ~bodies.paradigm, ~up2100upengine4, ~up2100upresearchmodule1
 	Valued:
@@ -9776,12 +9755,12 @@ up2100upmantis1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upmantis1
 up2100upleopard1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Leopard Light Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Leopard Vehicles
 		Prerequisites: ~!up2100upleopard1, ~bodies.collective, ~up2100uparmor4
 	Valued:
@@ -9791,12 +9770,12 @@ up2100upleopard1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upleopard1
 up2100uppanther1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Panther Medium Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Panther Vehicles
 		Prerequisites: ~!up2100uppanther1, ~up2100upleopard1, ~bodies.collective
 	Valued:
@@ -9806,12 +9785,12 @@ up2100uppanther1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uppanther1
 up2100uptiger1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tiger Heavy Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Tiger Vehicles
 		Prerequisites: ~!up2100uptiger1, ~up2100uppanther1, ~bodies.collective
 	Valued:
@@ -9822,12 +9801,12 @@ up2100uptiger1:
 		Prerequisite: up2100uptiger1
 
 up2100upretaliaton1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Retaliation Light Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Retaliation Vehicles
 		Prerequisites: ~!up2100upretaliaton1, ~bodies.nexus, ~up2100uparmor5
 	Valued:
@@ -9837,12 +9816,12 @@ up2100upretaliaton1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upretaliaton1
 up2100upretribution1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Retribution Medium Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Panther Vehicles
 		Prerequisites: ~!up2100upretribution1, ~up2100upretaliaton1, ~bodies.nexus, ~up2100uparmor6
 	Valued:
@@ -9852,12 +9831,12 @@ up2100upretribution1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upretribution1
 up2100upvengeance1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Vengeance Heavy Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Tiger Vehicles
 		Prerequisites: ~!up2100upvengeance1, ~up2100upretribution1, ~bodies.nexus, ~up2100uparmor7
 	Valued:
@@ -9867,12 +9846,12 @@ up2100upvengeance1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upvengeance1
 up2100uppowermodule1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Power Module Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Power Modules
 		Prerequisites: ~!up2100uppowermodule1, ~up2100upengine1
 	Valued:
@@ -9882,12 +9861,12 @@ up2100uppowermodule1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uppowermodule1
 up2100upfactorymodule1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Factory Module Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Factory Modules
 		Prerequisites: ~!up2100upfactorymodule1, ~up2100uppowermodule1
 	Valued:
@@ -9897,12 +9876,12 @@ up2100upfactorymodule1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upfactorymodule1
 up2100upresearchmodule1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Research Center Module Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Research Center Modules
 		Prerequisites: ~!up2100upresearchmodule1, ~up2100uppowermodule1
 	Valued:
@@ -9912,12 +9891,12 @@ up2100upresearchmodule1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upresearchmodule1
 up2100upsypnaticdata1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Synaptic Link Data Analysis
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Research Speed
 		Prerequisites: ~!up2100upsypnaticdata1, ~up2100upresearchmodule1
 	Valued:
@@ -9927,12 +9906,12 @@ up2100upsypnaticdata1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upsypnaticdata1
 up2100upsypnaticdata2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Synaptic Link Data Analysis Mk2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Research Speed
 		Prerequisites: ~!up2100upsypnaticdata2, ~up2100upsypnaticdata1
 	Valued:
@@ -9943,12 +9922,12 @@ up2100upsypnaticdata2:
 		Prerequisite: up2100upsypnaticdata2
 
 up2100upsypnaticdata3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Synaptic Link Data Analysis Mk3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Research Speed
 		Prerequisites: ~!up2100upsypnaticdata3, ~up2100upsypnaticdata2
 	Valued:
@@ -9959,12 +9938,12 @@ up2100upsypnaticdata3:
 		Prerequisite: up2100upsypnaticdata3
 
 up2100upsypnaticdata4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Neural Synapse Research Brain
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Research Speed
 		Prerequisites: ~!up2100upsypnaticdata4, ~up2100upsypnaticdata3
 	Valued:

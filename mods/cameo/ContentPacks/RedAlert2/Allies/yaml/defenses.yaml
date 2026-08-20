@@ -1,0 +1,521 @@
+ra2_allies_gapgenerator:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@shape: ^1x1Shape
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Inherits@detect: ^GenericAllDetector
+	-AutoTarget:
+	-RenderRangeCircle:
+	-ExternalCondition@shrouded:
+	-ExternalCondition@lockon:
+	-RangeMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-RevealsShroudMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-DetectCloakedMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-InaccuracyMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-GrantConditionOnPrerequisite@ra1_allies_upgrade_gpssatellitesupport:
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Gap Generator
+	Buildable:
+		BuildLimit: 1
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Queue: Defence, RADefence
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedbattlelab
+		Description: actor_gap.description
+	Selectable:
+		Bounds: 1024, 2048, 0, -512
+	SelectionDecorations:
+	WithSpriteBody:
+		PauseOnCondition: lowpower || disabled
+	Health:
+		HP: 50000
+	RevealsShroud:
+		Range: 10000
+	DetectCloaked:
+		Range: 10000
+		RequiresCondition: !lowpower && !disabled
+	CreatesShroud:
+		Range: 10000
+		RequiresCondition: !lowpower && !disabled
+	ProximityExternalCondition@shrouded:
+		Range: 10000
+		ValidRelationships: Ally
+		Condition: ra1_allies_gapgenerator-shroud
+		RequiresCondition: !lowpower && !disabled
+	-RenderDetectionCircle:
+	RenderShroudCircle:
+		RequiresCondition: !lowpower && !disabled
+	RevealsShroud@SWReveal:
+		Range: 2000
+		ValidRelationships: Neutral, Enemy
+	WithIdleOverlay@gapfield:
+		Sequence: gapfield
+		RequiresCondition: !lowpower && !disabled
+	Targetable@Epic:
+		TargetTypes: Epic
+	TooltipExtras@Epic:
+		Description: Epic
+	Power:
+		Amount: -250
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	FireWarheadsOnDeath:
+		Weapon: BuildingExplode
+	HitShape:
+		Type: Rectangle
+			TopLeft: -512, -512
+			BottomRight: 512, 512
+
+ra2_allies_weathercontrolcenter:
+	Inherits: ^RA2Building
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Buildable:
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedbattlelab, !weatherstorm, ~techlevel.superweapons
+		Description: actor_gaweat.description
+	Tooltip:
+		Name: Weather Control Center
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+	DetonateWeaponPowerCA:
+		AllowMultiple: true
+		OrderName: LightningStorm
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Icons:
+			1: bolticon
+		Cursor: ability
+		AirburstAltitude: 4c512
+		ChargeInterval: 7500
+		ActivationDelay: 50
+		ActivationSequence:
+		Names:
+			1: power_lightningstorm.name
+		Descriptions:
+			1: power_lightningstorm.description
+		Weapons:
+			1: LightningStorm
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		EndChargeTextNotification: Lightning Storm ready.
+		EndChargeSound: swearead.wav
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		LaunchTextNotification: Warning: Lightning Storm created.
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Warning: Lightning Storm created.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		DisplayRadarPing: True
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraRemoveDelay: 420
+		Duration: 420
+		ActiveCondition: active
+		TargetCircleRanges:
+			1: 10000
+		TargetCircleColors: ff000080
+		PostProcessEffectType: LightningStorm
+		LaunchSound: sweaintr.wav
+		IncomingSound: sweaintr.wav
+		BeaconActor: BLASTRADIUS.atomic
+		CameraRange: 10000
+	SupportPowerChargeBar:
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: weatherstorm
+
+ra2_allies_chronosphere:
+	Inherits: ^RA2Building
+	Inherits@SW: ^Superweapon
+	Inherits@shape: ^3x4Shape
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Buildable:
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedbattlelab, ~techlevel.superweapons
+		Description: actor_pdox.description
+	Tooltip:
+		Name: Chronosphere
+	Building:
+		Footprint: xxx xxx xxx xxx
+		Dimensions: 4,3
+	RA2ChronoshiftPower@chronoshift:
+		OrderName: Chronoshift
+		Prerequisites:
+			1: !botplayer, ~techlevel.superweapons
+		PauseOnCondition: disabled
+		IconImage: ra2_allies_chronosphere
+		Icons:
+			1: icon2
+		ChargeInterval: 4500
+		Names:
+			1: power_chronoshift.name
+		Descriptions:
+			1: power_chronoshift.description
+		Dimensions:
+			1: 5,5
+		Footprints:
+			1: __x__ _xxx_ xxxxx _xxx_ __x__
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		#BeginChargeSpeechNotification: ChronosphereCharging
+		#EndChargeSpeechNotification: ChronosphereReady
+		EndChargeSound: schropen.wav
+		Durations:
+			1: -1
+		KillCargo: False
+		AllowImpassable: true
+		DisplayRadarPing: True
+		SelectionCursor: ability
+		TargetCursor: ability
+		LaunchSound: schrmov.wav
+		IncomingSound: schrmov.wav
+		Range: 4000
+		ShowTargetCircle: true
+		TargetCircleColor: b6f4ff
+		ImpactWeapon: ChronoshiftImpact
+		TeleportWeapon: ChronoshiftImpact
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+	DetonateWeaponPower@aichrono:
+		OrderName: RA2ChronoshiftAI
+			1: botplayer, ~techlevel.superweapons
+		PauseOnCondition: disabled
+		IconImage: ra2_allies_chronosphere
+		Icons:
+			1: icon2
+		Cursor: ability
+		ChargeInterval: 6000
+		Names:
+			1: power_chronoshift.name
+		ActivationDelay: 25
+		ActivationSequence:
+		Descriptions:
+			1: power_chronoshift.description
+		Weapons:
+			1: RA2ChronoAI
+		CameraActor: camera.placeholderhack
+		CameraRemoveDelay: 0
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		EndChargeSound: schropen.wav
+		DisplayRadarPing: True
+		LaunchSound: schrmov.wav
+		IncomingSound: schrmov.wav
+	SupportPowerChargeBar:
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	WithIdleOverlay:
+		Sequence: idle-dome
+		RequiresCondition: !build-incomplete
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+
+ra2_allies_pillbox:
+	Inherits: ^RA2Defense
+	Inherits@cargo: ^ClearableGarrison
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Selectable:
+		Bounds: 1024, 1024
+	Tooltip:
+		Name: Pillbox
+	Building:
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 40
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedbarracks
+		Description: actor_pbox.description
+	Valued:
+		Cost: 500
+	Health:
+		HP: 100000
+	Turreted:
+		TurnSpeed: 1023
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Cargo:
+		Types: Infantry
+		MaxWeight: 1
+		InitialUnits: ra2_allies_gi
+	AttackGarrisoned:
+		RequiresCondition: !build-incomplete
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
+		PortYaws: 0, 176, 341, 512, 682, 853
+		PortCones: 88, 88, 88, 88, 88, 88
+		PauseOnCondition: disabled
+	Power:
+		Amount: -25
+	RevealsShroud:
+		Range: 6583
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	ActorStatValues:
+		Damage: 120
+		ReloadDelay: 24
+		Range: 6583
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining
+
+ra2_allies_patriotmissilesystem:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@RenderVoxel: ^RenderVoxel
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@RA2AlliedThunderboltMissiles: ^RA2AlliedThunderboltMissiles
+	Inherits@RA2AlliedTankLaserTargeting: ^RA2AlliedTankLaserTargeting
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 40
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_airforcecommandhq
+		Description: actor_sam.description
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Patriot Missile System
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 90000
+	Selectable:
+		Bounds: 1024, 1024
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: -200,25,10
+	AttackTurreted:
+		Voice: Attack
+	Armament:
+		Weapon: RA2Patriot
+		LocalOffset: 450,150,450, 450,-150,450
+		MuzzleSequence: muzzle
+		RequiresCondition: !ra2_allies_upgrade_thunderboltmissiles
+	Armament@missileeliteThunderbolt:
+		Weapon: RA2PatriotThunderboltMissile
+		LocalOffset: 450,150,450, 450,-150,450
+		MuzzleSequence: muzzle
+		RequiresCondition: ra2_allies_upgrade_thunderboltmissiles
+	BodyOrientation:
+		QuantizedFacings: 16
+	RenderVoxels:
+		NormalsPalette: ts-normals
+	WithVoxelTurret:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	AutoTarget:
+	-WithVoxelBody:
+	-Cloak@TDcloak:
+	Power:
+		Amount: -40
+	RevealsShroud:
+		Range: 14150
+	DetectCloaked:
+		Range: 7075
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_thunderboltmissiles, ra2_allies_upgrade_tanklasertargeting
+
+ra2_allies_prismtower:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Inherits@RA2AlliedIntensifiedPrismBeams: ^RA2AlliedIntensifiedPrismBeams
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 80
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedbattlelab
+		Description: actor_atesla.description
+	Valued:
+		Cost: 2200
+	Tooltip:
+		Name: Prism Tower
+	Selectable:
+		Bounds: 1024, 2304, 0, -640
+	SelectionDecorations:
+	Health:
+		HP: 135000
+	Targetable@PrismTower:
+		TargetTypes: PrismTower
+	WithSpriteBody:
+		PauseOnCondition: disabled
+	WithPrismChargeAnimation:
+		ChargeSequence: active
+	GrantConditionOnPrerequisite@prismcharge:
+		Condition: ra2_allies_upgrade_prismlinking
+		Prerequisites: ra2_allies_upgrade_prismlinking
+	Armament@Charge:
+		Name: support
+		Weapon: PrismCharge
+		LocalOffset: 0,0,1280
+		RequiresCondition: ra2_allies_upgrade_prismlinking
+	#Armament@beam1:
+	#	Weapon: RA2PrismBeam
+	#	LocalOffset: 0,0,1280
+	#	PauseOnCondition: prism-stack
+	#Armament@beam2:
+	#	Weapon: RA2PrismBeam2
+	#	LocalOffset: 0,0,1280
+	#	PauseOnCondition: !(prism-stack >= 1 || powercharged) || prism-stack <= 4
+	#Armament@beam3:
+	#	Weapon: RA2PrismBeam3
+	#	LocalOffset: 0,0,1280
+	#	PauseOnCondition: prism-stack < 4
+	Armament:
+		Weapon: RA2Prism
+		LocalOffset: 0,0,1280
+	AttackPrismSupportedCA:
+		MaxCharges: 1
+		MaxHops: 15
+		MaxSupportersPerAttacker: 50
+		ReloadDelay: 40
+		ReceiverOffset: 0,0,1280
+		ChargeAudio: bpripow.wav
+		SupportArmament: support
+		CanSupportAllies: true
+		BuffCondition: prism-stack
+		Modifier: 100
+		ChargingCondition: charging
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+	Targetable@POWERCHARGING:
+		TargetTypes: PrismTowerChargeable
+		RequiresCondition: charging && ra2_allies_upgrade_prismlinking
+	ExternalCondition@POWERCHARGED:
+		Condition: powercharged
+	FirepowerMultiplier@POWERCHARGED:
+		Modifier: 150
+		RequiresCondition: powercharged
+	Sellable:
+	WithIdleOverlay@normal:
+		Sequence: idle-normal
+		PauseOnCondition: lowpower
+		RequiresCondition: !build-incomplete
+	WithMakeAnimation:
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
+	#WithAmmoPipsDecoration:
+	#	Position: BottomLeft
+	#	RequiresSelection: true
+	#	FullSequence: pip-red
+	Power:
+		Amount: -110
+	RevealsShroud:
+		Range: 9630
+	DetectCloaked:
+		Range: 4815
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_prismlinking, ra2_allies_upgrade_intensifiedprismbeams
+
+ra2_allies_grandcannon:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@shape: ^2x2Shape
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@RenderVoxel: ^RenderVoxel
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@RA2AlliedTankLaserTargeting: ^RA2AlliedTankLaserTargeting
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 50
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedbattlelab
+		Description: actor_gtgcan.description
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Grand Cannon
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 250000
+	Selectable:
+		Bounds: 2048, 2048
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 896
+		Offset: -700,1,1
+	AttackTurreted:
+		Voice: Attack
+		PauseOnCondition: lowpower || disabled
+	Armament:
+		Weapon: RA2GrandCannonWeapon
+		LocalOffset: 1500,0,500
+	BodyOrientation:
+		QuantizedFacings: 16
+	RenderVoxels:
+		NormalsPalette: ts-normals
+	WithVoxelTurret:
+		RequiresCondition: !build-incomplete
+	WithVoxelBarrel:
+		RequiresCondition: !build-incomplete
+	AutoTarget:
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	Power:
+		Amount: -200
+	RevealsShroud:
+		Range: 11800
+	DetectCloaked:
+		Range: 5900
+	-WithVoxelBody:
+	-Cloak@TDcloak:
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_tanklasertargeting
+
+ra2_allies_concretebarrier:
+	Inherits: ^Wall
+	Valued:
+		Cost: 200
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Concrete Barrier
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~ra2_allies_alliedconstructionyard
+		Queue: Defence, RADefence
+		Description: Provides flat building foundation.
+	Health:
+		HP: 100000
+	Armor:
+		Type: Concrete
+	BlocksProjectiles:
+	Crushable:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSounds: crumble.aud
+	LineBuild:
+		NodeTypes: concrete
+	LineBuildNode:
+		Types: concrete
+	RenderSprites:
+		Image: ra2_allies_concretebarrier
+		Palette: ra2
+		PlayerPalette: playerra2
+	WithWallSpriteBody:
+		IsPlayerPalette: True
+		Palette: playerra2
+		PlayerPalette: playerra2
+		Type: ra2_allies_concretebarrier

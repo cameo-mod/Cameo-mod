@@ -1,0 +1,293 @@
+ra1_allies_rifleinfantry:
+	Inherits: ^RA1AlliesRifleInfantry
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@CryoMissiles: ^CryoMissiles
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	# Formula v2 scout conversion (2026-07-19): unique classic-rifle
+	# character at the original cost 100; O/P/Q priced via the scout
+	# anchor; class knobs neutralized (2x-health bake); burst flavor
+	# trimmed to formula DPS by the unit-named multiplier.
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 27000
+	ChangesHealth@SelfHealing:
+		Step: 28
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ra1_allies_rifleinfantry:
+		Modifier: 47
+	Buildable:
+		Prerequisites: ~ra1_allies_alliedbarracks
+		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
+	Armament@PRIMARY: ##########
+		Weapon: ra1_allies_rifleinfantry_carbine
+		LocalOffset: 128,0,256
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: ra1_allies_rifleinfantry_carbine
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@Upgrade: ##########
+		Weapon: ra1_allies_rifleinfantry_carbine_cryo
+		LocalOffset: 128,0,256
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: ra1_allies_rifleinfantry_carbine_cryo
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_soviets_molotovconscript:
+	Inherits: ^Soldier
+	Inherits@anim: ^RA2Infantry
+	Inherits@Template: ^GrenadierInfantryTemplate
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@VengeanceUpgradeRA1: ^VengeanceUpgradeRA1
+	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	Tooltip:
+		Name: Molotov Conscript
+	Valued:
+		Cost: 200
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 25
+		Prerequisites: ~disabled
+		Queue: Infantry, RAInfantry
+		Description: actor_e2.description
+	Mobile:
+		Speed: 67
+	Health:
+		HP: 11000
+	ChangesHealth@SelfHealing:
+		Step: 11
+	Armament:
+		Weapon: ConscriptMolotov
+		LocalOffset: 0,0,427
+		FireDelay: 7
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: ConscriptMolotov
+	TakeCover:
+		ProneOffset: 180,0,-200
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	FireWarheadsOnDeath:
+		Weapon: ConscriptMolotovExplode
+	FireWarheadsOnDeath@Vengeance1:
+		Weapon: VengeanceActivator1
+		RequiresCondition: !ra1_soviets_upgrade_vengeance
+	FireWarheadsOnDeath@Vengeance2:
+		Weapon: VengeanceActivator2
+		RequiresCondition: ra1_soviets_upgrade_vengeance && !upsubliminal2
+	FireWarheadsOnDeath@Vengeance3:
+		Weapon: VengeanceActivator3
+		RequiresCondition: ra1_soviets_upgrade_vengeance && upsubliminal2
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	Voiced:
+		VoiceSet: RussianConscriptVoice
+	AttackFrontal:
+		Voice: Attack
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscription, ra1_soviets_upgrade_vengeance, ra1_soviets_upgrade_menofsteel
+
+ra1_allies_alliedrocketsoldier:
+	Inherits: ^RA1AlliesAlliedRocketSoldier
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@CryoMissiles: ^CryoMissiles
+	Tooltip:
+		Name: Allied Rocket Soldier
+	Buildable:
+		Prerequisites: ~ra1_allies_alliedbarracks
+		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+	Armament@PRIMARY: ##########
+		Weapon: RocketsRA
+		LocalOffset: 256,43,341
+		FireDelay: 5
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: RocketsRA
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@Upgrade: ##########
+		Weapon: RocketsRACryo
+		LocalOffset: 256,43,341
+		FireDelay: 5
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: RocketsRACryo
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_engineer:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@engineer: ^EngineerDefaultWeapons
+	Inherits@isengineer: ^IsEngineer
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Engineer
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~rabarracks
+		Queue: Infantry, RAInfantry
+		Description: Captures and repairs structures.\n  Unarmed
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 5000
+	Passenger:
+		CustomPipType: engineer
+	Garrisoner:
+		CustomPipType: engineer
+	InstantlyRepairs:
+		Types: building
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	InstantlyRepairs@Tech:
+		Types: tech
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	InstantlyRepairs@Civ:
+		Types: civ
+		ValidRelationships: Ally, Neutral
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	RepairsBridges:
+		EnterBehaviour: Exit
+	CaptureManager:
+	GrantConditionOnPrerequisite@GLOBALREUSABLEENGINEER:
+		Condition: global-reusable-engineers
+		Prerequisites: global-reusable-engineers
+	Captures:
+		RequiresCondition: !global-reusable-engineers
+		CaptureTypes: building, defense, tech
+		PlayerExperience: 500
+		ConsumedByCapture: True
+	Captures@REUSABLE:
+		RequiresCondition: global-reusable-engineers
+		CaptureTypes: building, defense, tech
+		PlayerExperience: 500
+		CaptureDelay: 375
+		ConsumedByCapture: False
+		EnterCursor: ability
+		EnterBlockedCursor: move-blocked
+	Selectable:
+		Priority: 5
+		Class: e6
+	Voiced:
+		VoiceSet: EngineerVoice
+	AttackFrontal:
+		FacingTolerance: 0
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	RenderSprites:
+		Image: ra1_engineer
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Stats: Armor, Sight, Speed
+	ActorStatValues:
+		Upgrades: td_gdi_upgrade_longrangesensors, td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
+
+ra1_einstein:
+	Inherits: ^CivInfantry
+	RenderSprites:
+		Palette: ra_temperat
+	Tooltip:
+		Name: Prof. Einstein
+	Mobile:
+		Speed: 71
+	Voiced:
+		VoiceSet: EinsteinVoice
+
+ra1_agentdelphi:
+	Inherits: ^CivInfantry
+	RenderSprites:
+		Palette: ra_temperat
+	Tooltip:
+		Name: Agent Delphi
+	Mobile:
+		Speed: 71
+
+ra1_scientist:
+	Inherits: ^CivInfantry
+	Valued:
+		Cost: 500
+	Selectable:
+		Class: CHAN
+	Tooltip:
+		Name: Scientist
+
+ra1_general:
+	Inherits@1: ^CivInfantry
+	Inherits@2: ^ArmedCivilian
+	Tooltip:
+		Name: General
+	Selectable:
+		Class: ra1_general
+	Mobile:
+		Voice: Move
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	AttackMove:
+		Voice: Move
+	Passenger:
+		Voice: Move
+	Guard:
+		Voice: Move
+	Voiced:
+		VoiceSet: StavrosVoice
+	-ScaredyCat:
+	TakeCover:
+		DamageModifiers:
+			Prone50Percent: 50
+		DamageTriggers: TriggerProne
+	WithInfantryBody:
+		IdleSequences: idle1
+
+ra1_technician:
+	Inherits: ^CivInfantry
+	Inherits@armed: ^ArmedCivilian
+	Tooltip:
+		Name: Technician
+
+####################################################################################################
+#		VEHICLES
+####################################################################################################
+

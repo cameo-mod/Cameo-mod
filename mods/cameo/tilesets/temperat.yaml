@@ -1,6 +1,7 @@
 General:
-	Name: Temperate
+	Name: Temperate (TD, blank)
 	Id: TEMPERAT
+	TileSize: 48,48
 	SheetSize: 1024
 	EditorTemplateOrder: Terrain, Debris, Road, Cliffs, Beach, River, Bridge, RA Debris, RA Water Cliffs, RA Bridge, Zeruel87 Urban
 	HeightDebugColors: AA0000
@@ -61,8 +62,8 @@ Terrain:
 		Type: Tree
 		TargetTypes: Ground
 		Color: 1C2024
-	TerrainType@Wall:
-		Type: Wall
+	TerrainType@wall:
+		Type: wall
 		TargetTypes: Ground
 		AcceptsSmudgeType: Crater, Scorch
 		Color: D0C0A0
@@ -70,6 +71,26 @@ Terrain:
 		Type: Water
 		TargetTypes: Water
 		Color: 5C74A4
+	TerrainType@RA2Copper:
+		Type: RA2Copper
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 804020
+	TerrainType@RA2Silver:
+		Type: RA2Silver
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: C0C0C0
+	TerrainType@RA2Ore:
+		Type: RA2Ore
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 808000
+	TerrainType@RA2Gems:
+		Type: RA2Gems
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 8040C0
 	TerrainType@Gems: ##########
 		Type: Gems
 		TargetTypes: Ground
@@ -817,7 +838,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: wall
 	Template@68:
 		Id: 68
 		Images: p02.tem
@@ -825,7 +846,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: wall
 	Template@69:
 		Id: 69
 		Images: p03.tem
@@ -833,7 +854,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: wall
 	Template@70:
 		Id: 70
 		Images: p04.tem
@@ -841,7 +862,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: wall
 	Template@73:
 		Id: 73
 		Images: p07.tem
@@ -912,12 +933,12 @@ Templates:
 		Size: 3,2
 		Categories: Debris
 		Tiles:
-			0: Wall
-			1: Wall
-			2: Wall
-			3: Wall
+			0: wall
+			1: wall
+			2: wall
+			3: wall
 			4: Clear
-			5: Wall
+			5: wall
 	Template@80:
 		Id: 80
 		Images: p14.tem
@@ -925,8 +946,8 @@ Templates:
 		Size: 2,1
 		Categories: Debris
 		Tiles:
-			0: Wall
-			1: Wall
+			0: wall
+			1: wall
 	Template@82:
 		Id: 82
 		Images: b1.tem
@@ -1179,7 +1200,7 @@ Templates:
 			5: Road
 			6: Road
 			7: Clear
-			10: Wall
+			10: wall
 			11: Road
 	Template@106:
 		Id: 106
@@ -1191,7 +1212,7 @@ Templates:
 			1: Clear
 			2: Road
 			3: Clear
-			4: Wall
+			4: wall
 			5: Road
 			6: Road
 			7: Road
@@ -1226,7 +1247,7 @@ Templates:
 			5: Road
 			6: Road
 			7: Clear
-			8: Wall
+			8: wall
 	Template@109:
 		Id: 109
 		Images: d17.tem
@@ -1255,7 +1276,7 @@ Templates:
 			5: Clear
 			6: Clear
 			7: Road
-			8: Wall
+			8: wall
 	Template@111:
 		Id: 111
 		Images: d19.tem
@@ -1517,7 +1538,7 @@ Templates:
 		Size: 2,2
 		Categories: Road
 		Tiles:
-			0: Wall
+			0: wall
 			2: Road
 			3: Clear
 	Template@134:
@@ -1559,7 +1580,7 @@ Templates:
 			12: River
 			13: Rock
 			14: River
-			16: Wall
+			16: wall
 			17: Clear
 	Template@137:
 		Id: 137
@@ -1608,7 +1629,7 @@ Templates:
 		Size: 4,4
 		Categories: River
 		Tiles:
-			2: Wall
+			2: wall
 			3: Clear
 			5: Clear
 			6: River
@@ -1817,12 +1838,12 @@ Templates:
 			2: Clear
 			3: Road
 			4: River
-			5: Wall
+			5: wall
 			6: Bridge
-			7: Wall
+			7: wall
 			8: River
 			9: Bridge
-			10: Wall
+			10: wall
 			11: River
 			12: Road
 			13: Clear
@@ -1838,9 +1859,9 @@ Templates:
 			2: Clear
 			3: Road
 			4: River
-			5: Wall
-			6: Wall
-			7: Wall
+			5: wall
+			6: wall
+			7: wall
 			8: River
 			9: River
 			10: River
@@ -1860,15 +1881,15 @@ Templates:
 			1: Clear
 			2: Clear
 			4: Clear
-			5: Wall
+			5: wall
 			6: Bridge
-			7: Wall
+			7: wall
 			8: River
 			9: River
 			10: River
-			11: Wall
+			11: wall
 			12: Bridge
-			13: Wall
+			13: wall
 			14: Clear
 			15: River
 			16: Clear
@@ -1888,8 +1909,8 @@ Templates:
 			1: Clear
 			2: Clear
 			4: Clear
-			5: Wall
-			6: Wall
+			5: wall
+			6: wall
 			7: River
 			8: River
 			9: River

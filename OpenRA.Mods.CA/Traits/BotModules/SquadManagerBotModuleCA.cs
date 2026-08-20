@@ -132,6 +132,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Locomotor used by pathfinding leader for squads")]
 		public readonly HashSet<string> SuggestedNavyLeaderLocomotor = new();
 
+		[Desc("Percent chance that a regular assault squad will take an indirect (flanking) route instead of the most direct path. 0 to disable.")]
+		public readonly int IndirectRouteChance = 0;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
@@ -263,8 +266,8 @@ namespace OpenRA.Mods.CA.Traits
 			var map = self.World.Map;
 			var dangerRadius = Info.DangerScanRadius;
 
-			var columnCount = (map.MapSize.X + dangerRadius - 1) / dangerRadius;
-			var rowCount = (map.MapSize.Y + dangerRadius - 1) / dangerRadius;
+			var columnCount = (map.MapSize.Width + dangerRadius - 1) / dangerRadius;
+			var rowCount = (map.MapSize.Height + dangerRadius - 1) / dangerRadius;
 
 			var checkIndices = Exts.MakeArray(columnCount * rowCount, i => new MPos((i % columnCount) * dangerRadius + dangerRadius / 2, (i / columnCount) * dangerRadius + dangerRadius / 2).ToCPos(map));
 
@@ -305,7 +308,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal Actor FindClosestEnemy(Actor sourceActor)
 		{
-			var units = World.Actors.Where(IsPreferredEnemyUnit);
+			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
 			return units.Where(IsNotHiddenUnit).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
 		}
 
@@ -416,16 +419,16 @@ namespace OpenRA.Mods.CA.Traits
 			var newUnits = World.ActorsHavingTrait<IPositionable>()
 				.Where(a => a.Owner == Player &&
 					!Info.ExcludeFromSquadsTypes.Contains(a.Info.Name) &&
-					!activeUnits.Contains(a));
+					!activeUnits.Contains(a) && a.IsInWorld);
 
-			var guerrillaForce = GetSquadOfType(SquadCAType.Assault);
+			var guerrillaForce = GetSquadOfType(SquadCAType.Guerrilla);
 			var guerrillaUpdate = guerrillaForce == null || (guerrillaForce.Units.Count <= Info.MaxGuerrillaSize && (World.LocalRandom.Next(100) >= Info.JoinGuerrilla));
 
 			foreach (var a in newUnits)
 			{
 				if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaUpdate)
 				{
-					guerrillaForce ??= RegisterNewSquad(bot, SquadCAType.Assault);
+					guerrillaForce ??= RegisterNewSquad(bot, SquadCAType.Guerrilla);
 
 					guerrillaForce.Units.Add(new UnitWposWrapper(a));
 					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, guerrillaForce.Type);

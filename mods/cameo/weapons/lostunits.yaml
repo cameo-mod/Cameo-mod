@@ -3,7 +3,7 @@
 RoombaPistol:
 	Inherits: ^LightMG
 	ReloadDelay: 14
-	Range: 3c0
+	Range: 3072
 	Report: DSPISTOL.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 1000
@@ -23,7 +23,7 @@ RoombaChainsaw:
 RCTigerMG:
 	Inherits: RoombaPistol
 	Burst: 3
-	Range: 4c0
+	Range: 4096
 
 315PistolFlaite:
 	Inherits: ^LightMG
@@ -34,7 +34,9 @@ RCTigerMG:
 		Damage: 450
 
 315Molotov:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ReloadDelay: 40
 	Warhead@1Dam: SpreadDamage
 		Spread: 341
@@ -52,10 +54,12 @@ RCTigerMG:
 
 315MolotovG:
 	Inherits: 315Molotov
-	Range: 7c0
+	Range: 7168
 
 315Rocks:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ReloadDelay: 50
 	Burst: 3
 	Warhead@1Dam: SpreadDamage
@@ -69,7 +73,6 @@ RCTigerMG:
 			Heavy: 5
 			Concrete: 5
 		DamageTypes: Prone50Percent, TriggerProne
-	-Warhead@3Eff:
 
 315AAWeapon:
 	Inherits: ^LightMG
@@ -94,7 +97,7 @@ RCTigerMG:
 315Microwave:
 	ReloadDelay: 40
 	Burst: 3
-	Range: 3c0
+	Range: 3072
 	Report: 315microwave.wav
 	ValidTargets: Ground
 	Projectile: Bullet
@@ -128,7 +131,9 @@ RCTigerMG:
 		ValidTargets: Air
 
 315Waterjet:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ReloadDelay: 50
 	Burst: 6
 	Warhead@1Dam: SpreadDamage
@@ -148,8 +153,8 @@ RCTigerMG:
 
 BigDaddyMissile:
 	ReloadDelay: 30
-	Range: 6c0
-	MinRange: 3c0
+	Range: 6144
+	MinRange: 3072
 	Report: aoemissile1.wav, aoemissile2.wav, aoemissile4.wav, aoemissile3.wav
 	Projectile: Bullet
 		Blockable: false
@@ -164,7 +169,7 @@ BigDaddyMissile:
 		Spread: 512
 		Damage: 2300
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 100
 			Wood: 100
@@ -176,83 +181,83 @@ BigDaddyMissile:
 		Explosions: big_napalm
 		ImpactSounds: aoemissileimpact1.wav, aoemissileimpact2.wav, aoemissileimpact3.wav
 		ImpactActors: false
-		ValidTargets: Ground, Air, Ship, Trees
+		ValidTargets: Ground, Air, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: large_splash
 		ValidTargets: Water
 		InvalidTargets: Ship, Structure, Bridge
 DalekTeleport:
-	Range: 10c0
+	Range: 10240
 	ReloadDelay: 1
 	Projectile: InstantExplode
 		Inaccuracy: 14c256
 	Warhead@1Actor: SpawnActor
 		Actors: dalek, dalek, dalek, dalek
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
 	Warhead@2Flash: ChronoFlashEffect
 
 DalekTeleport2:
-	Range: 10c0
+	Range: 10240
 	ReloadDelay: 1
 	Projectile: InstantExplode
 		Inaccuracy: 14c256
 	Warhead@1Actor: SpawnActor
 		Actors: dalek, dalek, dalek2, dalek2
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
 	Warhead@2Flash: ChronoFlashEffect
 
 DalekTeleport3:
-	Range: 10c0
+	Range: 10240
 	ReloadDelay: 1
 	Projectile: InstantExplode
 		Inaccuracy: 14c256
 	Warhead@1Actor: SpawnActor
 		Actors: dalek3, dalek3, dalek3, dalek3
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
 	Warhead@2Flash: ChronoFlashEffect
 
 DalekTeleport4:
-	Range: 10c0
+	Range: 10240
 	ReloadDelay: 1
 	Projectile: InstantExplode
 		Inaccuracy: 14c256
 	Warhead@1Actor: SpawnActor
 		Actors: dalek3, dalek3, dalek4, dalek4
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
 	Warhead@2Flash: ChronoFlashEffect
 
 DalekTeleportU:
-	Range: 10c0
+	Range: 10240
 	ReloadDelay: 1
 	Projectile: InstantExplode
 		Inaccuracy: 14c256
 	Warhead@1Actor: SpawnActor
 		Actors: dalek3, dalek3, dalek4, dalek4, dalek3, dalek3, dalek, dalek, dalek2
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
 	Warhead@2Flash: ChronoFlashEffect
 	
 ####################################################################################################
-#		Black Hand
+#		Black td_nod_handofnod
 ####################################################################################################
 
 InfantryExplode:
@@ -282,9 +287,10 @@ InfantryExplode:
 		Footprint: _x_ x_x _x_
 
 InfantryExplodeMeat:
-	Inherits: Grenade
-	Range: 3c0
-	-Report:
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
+	Range: 3072
 	Projectile: Bullet
 		Speed: 90
 		Blockable: false
@@ -297,11 +303,10 @@ InfantryExplodeMeat:
 	Warhead@3Eff: CreateEffect
 		Explosions: inf_ketchup
 		ImpactSounds: DSXDTH1C.wav
-	-Warhead@2Smu:
 
 InfantryExplodeBlood:
 	Inherits: InfantryExplodeMeat
-	Range: 4c0
+	Range: 4096
 	Projectile: Bullet
 		Speed: 80
 		Inaccuracy: 9000
@@ -315,7 +320,7 @@ InfantryExplodeBlood:
 
 InfantryExplodeBloodLow:
 	Inherits: InfantryExplodeMeat
-	Range: 2c0
+	Range: 2048
 	Projectile: Bullet
 		Speed: 120
 		Inaccuracy: 9000
@@ -345,7 +350,7 @@ InfantryExplodeDamaged:
 FurryToxins:
 	Inherits: GLScorpionShell
 	Report: effectfart.wav
-	Range: 2c0
+	Range: 2048
 	Inherits@Contaminated: GLAnthraxGreen
 	Warhead@1Dam: SpreadDamage
 		Damage: 3000
@@ -358,7 +363,7 @@ FurryToxins:
 GalagaSting:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 30
-	Range: 5c0
+	Range: 5120
 	Report: galagashot.wav
 	Projectile: MissileCA
 		Image: DRAGON
@@ -411,7 +416,7 @@ AngrySunFlames:
 315Puncher:
 	ReloadDelay: 60
 	Report: genericpunch.wav
-	Range: 2c0
+	Range: 2048
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Damage: 10000
@@ -430,7 +435,7 @@ AngrySunFlames:
 PeashooterGun:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 25
-	Range: 6c0
+	Range: 6144
 	Report: pvzthrow1.wav
 	Projectile: Bullet
 		Speed: 853
@@ -445,7 +450,7 @@ PeashooterGun:
 			Heavy: 88
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: pvzsplat1.wav, pvzsplat2.wav, pvzsplat3.wav
-	Warhead@TankEff: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: pvzshieldhit1.wav, pvzshieldhit2.wav
 		ValidTargets: Vehicle
 PeashooterGunx2:
@@ -459,7 +464,7 @@ PeashooterGunice:
 	Projectile: Bullet
 		Image: pvzpeabulletice
 	Warhead@1Con: GrantExternalCondition
-		Range: 1c0
+		Range: 1024
 		Condition: empdisable
 		Duration: 25
 		ValidRelationships: Enemy, Neutral
@@ -468,8 +473,8 @@ PeashooterGunice:
 CabaggePult:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 50
-	Range: 12c0
-	MinRange: 1c0
+	Range: 12288
+	MinRange: 1024
 	Report: pvzthrow2.wav
 	TargetActorCenter: true
 	ValidTargets: Ground, Air
@@ -493,7 +498,7 @@ CabaggePult:
 		ImpactSounds: pvzsplat1.wav, pvzsplat2.wav, pvzsplat3.wav
 	Warhead@4EffWater: CreateEffect
 		Explosions: med_splash
-	Warhead@TankEff: CreateEffect
+	Warhead@EffectAir: CreateEffect
 		ImpactSounds: pvzshieldhit1.wav, pvzshieldhit2.wav
 		ValidTargets: Vehicle, Air
 KernelPult:
@@ -514,7 +519,7 @@ ButterPult:
 	Warhead@1Dam: SpreadDamage
 		Damage: 3500
 	Warhead@1Con: GrantExternalCondition
-		Range: 1c0
+		Range: 1024
 		Condition: empdisable
 		Duration: 75
 		ValidRelationships: Enemy, Neutral

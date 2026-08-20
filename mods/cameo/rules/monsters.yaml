@@ -32,7 +32,7 @@ TRIC:
 	Buildable:
 		Description: Quadruped with large bony frill and three horns
 	Selectable:
-		DecorationBounds: 61866, 43690, 0, 3626
+		DecorationBounds: 1450, 1024, 0, 85
 	Inherits@EXT: ^ExternalConditions ##########
 
 tric.citydrop:
@@ -119,8 +119,7 @@ Ant:
 		BuildDurationModifier: 100
 		Description: Irradiated insect that grew oversize.
 	Selectable:
-		Bounds: 1024, 1024, 0, -128
-		DecorationBounds: 1280, 1280, 0, -64
+		Bounds: 1280, 1280, 0, -64
 	SelectionDecorations:
 	Health:
 		HP: 100000
@@ -240,7 +239,7 @@ RA2ZOMBIE:
 	ProducibleWithLevel:
 		Prerequisites: barracks.upgraded
 RA2MUTALISK:
-	Inherits: SCMUTALISK
+	Inherits: zerg_mutalisk
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -263,7 +262,7 @@ RA2MUTALISK:
 		Weapon: RA2MUTA
 		LocalOffset: 0,0,0
 	RenderSprites:
-		Image: SCMUTALISK
+		Image: zerg_mutalisk
 	Power:
 		Amount: 0
 
@@ -276,7 +275,7 @@ RA2DEMON:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
 		BuildDurationModifier: 50
-		Prerequisites: ~RA2DOOM, ~techlevel.medium, anyhq
+		Prerequisites: ~RA2DOOM, anyhq
 		Description: Slow powerful demon. Attacks in close combat.
 	Armament:
 		Weapon: demonSlice
@@ -418,8 +417,8 @@ RA2EXCITER:
 
 RA2SKELETON:
 	Inherits: wc_o_skeleton
-	Inherits@upgrade_shields: ^wc_h_str_shield
-	Inherits@upgrade_swords: ^wc_h_str_sword
+	Inherits@upgrade_shields: ^WCHumansStrShield
+	Inherits@upgrade_swords: ^WCHumansStrSword
 	Inherits@MC: ^MCImmune
 	Buildable:
 		Queue: Infantry, RAInfantry
@@ -470,7 +469,7 @@ RA2SPIDER:
 		StartIfBelow: 150
 
 RA2CYBORG:
-	Inherits: TSREAPER
+	Inherits: cabal_cyborgreaper
 	Health:
 		HP: 30000
 	Armor:
@@ -479,7 +478,7 @@ RA2CYBORG:
 		Cost: 1800 #1000
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~techlevel.medium, ~RA2DOOM, yrngindp
+		Prerequisites: ~RA2DOOM, ra2_soviets_industrialplant
 		BuildDurationModifier: 100
 		BuildDuration: 720
 		Description: Cybernetic infantry\nMain anti-air unit of DOOM Russia\n  Strong vs Aircraft
@@ -497,7 +496,7 @@ RA2CYBORG:
 	Tooltip:
 		Name: DOOM Reaper
 	RenderSprites:
-		Image: tsreaper
+		Image: cabal_cyborgreaper
 
 RA2FLOATER:
 	Inherits: ^Vehicle
@@ -506,7 +505,7 @@ RA2FLOATER:
 		Name: DOOM Floater
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~techlevel.medium, ~RA2DOOM
+		Prerequisites: ~RA2DOOM
 		Description: Basic tank of DOOM Russia\nLeaves burning traces on ground\n  Strong vs Infantry, Light Vehicles
 		BuildPaletteOrder: 1
 	Valued:
@@ -547,7 +546,7 @@ RA2TRIPOD:
 		BuildPaletteOrder: 250
 		BuildDurationModifier: 100
 		BuildDuration: 1500
-		Prerequisites: ~techlevel.high, ~RA2DOOM, yrngindp
+		Prerequisites: ~RA2DOOM, ra2_soviets_industrialplant
 		BuildLimit: 3
 		Description: Alien War Hybrid but from hell.\nLimit: 3\n Strong vs Everything.
 	Valued:
@@ -555,7 +554,7 @@ RA2TRIPOD:
 	Tooltip:
 		Name: DOOM Tripod
 	Selectable:
-		Bounds: 100096, 163840, 0, 45482
+		Bounds: 2346, 3840, 0, 1066
 		Voice: Select
 	SelectionDecorations:
 	Health:
@@ -614,8 +613,8 @@ RA2CREEPCOLONY:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Selectable:
-		Bounds: 80085, 80085
-		Class: sccreepcolony
+		Bounds: 1877, 1877
+		Class: zerg_creepcolony
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -648,7 +647,7 @@ RA2CREEPCOLONY:
 		PauseOnCondition: disabled
 	Armament:
 		Name: spore
-		Weapon: Spore
+		Weapon: Spore_AA
 	RevealOnFire:
 		ArmamentNames: primary, spore
 	RevealsShroud@upgraded:
@@ -658,12 +657,12 @@ RA2CREEPCOLONY:
 		Range: 6c0
 		RequiresCondition: !disabled
 	RenderSprites:
-		Image: SCCREEPCOLONY
+		Image: zerg_creepcolony
 
 RA2ZEPDOOM:
-	Inherits: RA2ZEP
+	Inherits: ra2_soviets_kirovairship
 	RenderSprites:
-		Image: RA2ZEP
+		Image: ra2_soviets_kirovairship
 	Buildable:
 		BuildPaletteOrder: 99
 		Prerequisites: ~RA2DOOM, tek

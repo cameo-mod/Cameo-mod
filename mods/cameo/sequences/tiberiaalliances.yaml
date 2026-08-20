@@ -3,12 +3,12 @@
 # TA Infantry
 #######################################
 taforgotten:
-	Inherits: tsmutant
-	Defaults: tsmutant
+	Inherits: forgotten_mutant
+	Defaults: forgotten_mutant
 	icon: taforgottenicon
 	
 tae1.gdi:
-	Inherits: tse1.gdi
+	Inherits: ts_gdi_lightinfantry
 	Defaults: tse1
 	icon: tariflemanicon.shp
 		AddExtension: False
@@ -20,7 +20,7 @@ tae3.gdi:
 		AddExtension: False
 
 tae1.nod:
-	Inherits: tse1.nod
+	Inherits: ts_nod_lightinfantry
 	Defaults: tse1
 	stand: tamilitant
 		Facings: 8
@@ -87,40 +87,40 @@ tae3.nod:
 	icon: tarocketmilitanticon.shp
 		AddExtension: False
 tae3mutant:
-	Inherits: ra2deso
-	Defaults: ra2deso
+	Inherits: ra2_soviets_desolator
+	Defaults: ra2_soviets_desolator
 	icon: tamutante3icon.shp
 		AddExtension: False
 	die4: frag3
 		Length: *
 tablackhand:
-	Inherits: tsweedguy
+	Inherits: forgotten_chemsprayinfantry
 	Defaults: tsweed
 	-muzzle:
 	muzzle:
 		Combine:
-			flame-n:
+			flame_n:
 				Length: *
 				Offset: 1,6
-			flame-nw:
+			flame_nw:
 				Length: *
 				Offset: 8,7
-			flame-w:
+			flame_w:
 				Length: *
 				Offset: 8,2
-			flame-sw:
+			flame_sw:
 				Length: *
 				Offset: 7,-2
-			flame-s:
+			flame_s:
 				Length: *
 				Offset: 1,-2
-			flame-se:
+			flame_se:
 				Length: *
 				Offset: -5,-2
-			flame-e:
+			flame_e:
 				Length: *
 				Offset: -7,2
-			flame-ne:
+			flame_ne:
 				Length: *
 				Offset: -7,8
 		Facings: 8
@@ -128,8 +128,8 @@ tablackhand:
 	icon: tablackhandicon.shp
 		AddExtension: False
 taconfessor:
-	Inherits: elitcadre
-	Defaults: elitcadre
+	Inherits: ts_nod_elitecadre
+	Defaults: ts_nod_elitecadre
 	stand: taconfessor
 		Facings: 8
 		ShadowStart: 628
@@ -191,34 +191,34 @@ taconfessor:
 		AddExtension: False
 
 tanodcommando:
-	Inherits: ra2tany
-	Defaults: ra2tany
-	icon: tanodcommandoicon.shp
+	Inherits: ra2_allies_tanyaii
+	Defaults: ra2_allies_tanyaii
+	icon: td_nod_lasercommando_icon.shp
 		AddExtension: False
 
 taforgotten:
-	Inherits: tsmutant
-	Defaults: tsmutant
+	Inherits: forgotten_mutant
+	Defaults: forgotten_mutant
 	icon: taforgottenicon
 
 tatrooper:
-	Inherits: elitcadre
-	Defaults: elitcadre
+	Inherits: ts_nod_elitecadre
+	Defaults: ts_nod_elitecadre
 	icon: tazonetroopicon.shp
 		AddExtension: False
 
 tasnipe:
-	Inherits: ra2snipe
-	Defaults: ra2snipe
+	Inherits: ra2_allies_sniper
+	Defaults: ra2_allies_sniper
 	icon: tasnipericon
 tamutsnipe:
-	Inherits: tsumagon
-	Defaults: tsumagon
+	Inherits: forgotten_mutantsniper
+	Defaults: forgotten_mutantsniper
 	icon: tamutsnipeicon.shp
 		AddExtension: False
 tamutcommando:
-	Inherits: tsghost
-	Defaults: tsghost
+	Inherits: forgotten_ghoststalker
+	Defaults: forgotten_ghoststalker
 	icon: tamutcommandoicon.shp
 		AddExtension: False
 #######################################
@@ -1156,12 +1156,12 @@ tamgnest2:
 	icon: tamgnest2icon
 		Offset: 0,0
 tamgnod:
-	Defaults: tsntlasr
+	Defaults: ts_nod_laserturret
 		Offset: 0,4
-	idle: tsntlasr
-	damaged-idle: tsntlasr
+	idle: ts_nod_laserturret
+	damaged-idle: ts_nod_laserturret
 		Start: 1
-	critical-idle: tsntlasr
+	critical-idle: ts_nod_laserturret
 		Start: 2
 	make: invisibleitem
 	dead: invisibleitem

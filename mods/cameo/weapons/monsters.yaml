@@ -1,6 +1,6 @@
 ZClaw1:
 	ReloadDelay: 30
-	Range: 1c512
+	Range: 1536
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
@@ -17,7 +17,7 @@ ZClaw1:
 
 ZClaw2:
 	ReloadDelay: 30
-	Range: 1c512
+	Range: 1536
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
@@ -34,7 +34,7 @@ ZClaw2:
 
 ZClaw3:
 	ReloadDelay: 30
-	Range: 1c512
+	Range: 1536
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
@@ -51,8 +51,8 @@ ZClaw3:
 
 ZMutantPunch:
 	ReloadDelay: 30
-	ValidTargets: Ground, Water, Trees, Air
-	Range: 2c0
+	ValidTargets: Ground, Water, Air
+	Range: 2048
 	Report: dinoatk1.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -67,16 +67,16 @@ ZMutantPunch:
 			Heavy: 30        #10
 			Concrete: 20    #10
 		DamageTypes: Prone50Percent, TriggerProne, RippedApartDeath
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 
-ZBruteRock:
+ZBruteRock_AA:
 	Inherits: BikeRockets
 	Burst: 1
 	Report: galiatta.wav, galiattb.wav
 	ValidTargets: Air
 	Projectile: MissileCA 
 		HorizontalRateOfTurn: 16
-		Range: 7c512
+		Range: 7680
 		Speed: 268
 		RangeLimit: 10c512
 		Image: shrapnel
@@ -136,7 +136,7 @@ AntFireball:
 	Inherits: ^FireWeapon
 	Report: antbite.aud
 	ReloadDelay: 100
-	Range: 10c0
+	Range: 10240
 	Projectile: Bullet
 		Speed: 250
 		LaunchAngle: 125
@@ -166,14 +166,14 @@ AntFireball:
 			Medium: 80
 			Heavy: 70
 			Concrete: 50
-		ValidTargets: Ground, Water, Trees
-	Warhead@4Eff: CreateEffect
+		ValidTargets: Ground, Water
+	Warhead@Effect: CreateEffect
 		Explosions: large_napalm
 		Delay: 5
 
 SuperAntTeslaZap:
 	Inherits: TeslaZap
-	Range: 5c0
+	Range: 5120
 	Burst: 5
 	BurstDelays: 5
 	ReloadDelay: 50
@@ -209,8 +209,8 @@ SuperAntTeslaZap:
 AntNeedles:
 	Inherits: ^AntiGroundMissile
 	ReloadDelay: 32
-	Range: 6c6
-	MinRange: 1c256
+	Range: 6150
+	MinRange: 1280
 	Burst: 4
 	BurstDelays: 2
 	Report: vrocweaa.wav, vrocweab.wav, vrocweac.wav, vrocwead.wav, vrocweae.wav, vrocweaf.wav
@@ -261,7 +261,7 @@ AntNeedles:
 
 Tail2:
 	ReloadDelay: 30
-	Range: 1c0
+	Range: 1024
 	Report: dinoatk1.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -279,7 +279,7 @@ Tail2:
 
 Horn2:
 	ReloadDelay: 20
-	Range: 1c0
+	Range: 1024
 	Report: dinoatk1.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -297,8 +297,8 @@ Horn2:
 
 Teeth2:
 	ReloadDelay: 30
-	ValidTargets: Ground, Water, Trees, Air
-	Range: 2c0
+	ValidTargets: Ground, Water, Air
+	Range: 2048
 	Report: dinoatk1.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -313,11 +313,11 @@ Teeth2:
 			Heavy: 30 #10
 			Concrete: 20 #10
 		DamageTypes: Prone50Percent, TriggerProne, RippedApartDeath
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 
 Claw2:
 	ReloadDelay: 20
-	Range: 1c0
+	Range: 1024
 	Report: dinoatk1.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -336,7 +336,7 @@ Claw2:
 Munch:
 	Report: Munchymunchy.aud
 	ReloadDelay: 20
-	Range: 1c512
+	Range: 1536
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
@@ -353,7 +353,7 @@ Punch:
 	Inherits: ^Cannon
 	Report: Munchymunchy.aud
 	ReloadDelay: 20
-	Range: 1c512
+	Range: 1536
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
@@ -371,7 +371,7 @@ CannonBall:
 	Inherits: ^Cannon
 	ReloadDelay: 60
 	Burst: 3
-	Range: 4c0
+	Range: 4096
 	Report: turret1.aud
 	Projectile: Bullet
 		Speed: 200
@@ -390,13 +390,13 @@ CannonBall:
 			Concrete: 10
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Tank, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Tank, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: smallfire
 
 Fireball:
 	ReloadDelay: 75
-	Range: 7c0
+	Range: 7168
 	Report: dsfirsht.aud
 	Projectile: Bullet
 		Speed: 250
@@ -406,7 +406,7 @@ Fireball:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 308
 		Damage: 8000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 30
 			Wood: 40
@@ -416,15 +416,15 @@ Fireball:
 			Concrete: 30
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: dsfirxpl.aud
 
 FireballAA:
 	Inherits: ^AntiAirMissile
 	ReloadDelay: 75
-	Range: 7c0
-	MinRange: 0c512
+	Range: 7168
+	MinRange: 512
 	Report: turret1.aud
 	Projectile: Missile
 		Arm: 3
@@ -446,13 +446,13 @@ FireballAA:
 			Medium: 70
 			Heavy: 100
 			Concrete: 50
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: dsfirxpl.aud
 
 FireBurst:
 	ReloadDelay: 120
-	Range: 7c0
+	Range: 7168
 	Report: DemonShoot.aud
 	Projectile: Bullet
 		Blockable: false
@@ -465,7 +465,7 @@ FireBurst:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 512
 		Damage: 32000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 90
 			Wood: 75
@@ -483,7 +483,7 @@ FireBurst:
 		
 PlasmaBurst:
 	ReloadDelay: 100
-	Range: 7c0
+	Range: 7168
 	Report: dsfirsht.aud
 	Projectile: Bullet
 		Speed: 100
@@ -494,7 +494,7 @@ PlasmaBurst:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 500
 		Damage: 32000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 90
 			Wood: 75
@@ -506,29 +506,29 @@ PlasmaBurst:
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
 		Size: 2
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: smallfire
 		ImpactSounds: firebl3.aud
-	Warhead@8Eff_areanuke1: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Explosions: smallfire
 		ImpactSounds:
 		Delay: 5
-	Warhead@9Eff_areanuke1: CreateEffect ##########
+	Warhead@Effect3: CreateEffect ##########
 		Explosions: smallfire
 		ImpactSounds:
 		Delay: 10
-	Warhead@10Eff_areanuke1: CreateEffect ##########
+	Warhead@Effect4: CreateEffect ##########
 		Explosions: smallfire
 		ImpactSounds:
 		Delay: 15
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect5: CreateEffect
 		Explosions: plasmaburst_puff
 		ImpactSounds: dsfirxpl.aud
 	
 Flamethrower2:
 	Inherits: ^Cannon
 	ReloadDelay: 4
-	Range: 5c0
+	Range: 5120
 	Burst: 2
 	BurstDelays: 2
 	Projectile: Bullet
@@ -552,18 +552,18 @@ Flamethrower2:
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
 		Size: 1
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: smallfire
 		ImpactSounds: firebl3.aud
-	Warhead@8Eff_areanuke1: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Explosions: smallfire
 		ImpactSounds:
 		Delay: 5
-	Warhead@9Eff_areanuke1: CreateEffect ##########
+	Warhead@Effect3: CreateEffect ##########
 		Explosions: smallfire
 		ImpactSounds:
 		Delay: 10
-	Warhead@10Eff_areanuke1: CreateEffect ##########
+	Warhead@Effect4: CreateEffect ##########
 		Explosions: smallfire
 		ImpactSounds:
 		Delay: 15
@@ -573,7 +573,7 @@ Flamethrower2:
 Flamethrower3:
 	Inherits: Flamethrower2
 	ReloadDelay: 4
-	Range: 9c0
+	Range: 9216
 	Burst: 1
 	BurstDelays: 0
 	Warhead@1Dam_impact: SpreadDamage
@@ -591,7 +591,7 @@ Flamethrower3:
 		
 MiniGun:
 	ReloadDelay: 5
-	Range: 7c0
+	Range: 7168
 	Report: RedeemerGun.aud
 	Projectile: Bullet
 		Speed: 682
@@ -618,7 +618,7 @@ MiniGun:
 ShockShell:
 	Inherits: ^Artillery
 	ReloadDelay: 120
-	Range: 13c0
+	Range: 13312
 	Burst: 1
 	BurstDelays: 10
 	Report: AA.aud
@@ -655,10 +655,10 @@ ShockShell:
 		ImpactSounds: firebl3.aud
 		ValidTargets: Water
 
-EliminatorAA:
+Eliminator_AA:
 	Inherits: ^AACannon
 	ReloadDelay: 100
-	Range: 12c0
+	Range: 12288
 	Report: EliminatorGun.aud
 	ValidTargets: Air
 	Projectile: Bullet
@@ -684,7 +684,7 @@ EliminatorAA:
 
 Lazer:
 	ReloadDelay: 150
-	Range: 12c0
+	Range: 12288
 	Report: raycharge.aud
 	Projectile: LaserZap
 		Width: 4
@@ -693,7 +693,7 @@ Lazer:
 	Warhead@1Dam: SpreadDamage
 		Spread: 512
 		Damage: 32000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 1000
 		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath
@@ -705,14 +705,14 @@ Lazer:
 
 Electricity:
 	ReloadDelay: 150
-	Range: 12c0
-	Projectile: TeslaZap
+	Range: 12288
+	Projectile: LightningZap
 	Warhead@1Dam: SpreadDamage
 		Spread: 42
 		Damage: 10000
 		Versus:
 			None: 1000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
@@ -721,7 +721,7 @@ Electricity:
 TripodPlasmaPuff:
 	Inherits: ^AntiGroundMissile
 	ReloadDelay: 15
-	Range: 10c0
+	Range: 10240
 	BurstDelays: 3
 	Report: dsplasma.aud
 	Projectile: Missile
@@ -733,7 +733,7 @@ TripodPlasmaPuff:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 213
 		Damage: 4000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 20
 			Wood: 75
@@ -742,15 +742,15 @@ TripodPlasmaPuff:
 		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
 
-TripodPlasmaballAA:
+TripodPlasmaball_AA:
 	Inherits: ^AntiAirMissile
 	ReloadDelay: 15
-	Range: 12c0
-	MinRange: 0c512
+	Range: 12288
+	MinRange: 512
 	Report: dsfirsht.aud
 	Projectile: Missile
 		Arm: 3
@@ -771,48 +771,48 @@ TripodPlasmaballAA:
 			Medium: 70
 			Heavy: 100
 			Concrete: 50
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: plasma_puff
 		ImpactSounds: dsfirxpl.aud
 
 MothershipExplosion:
-	ValidTargets: Ground, Trees, Water, Underwater, Air
+	ValidTargets: Ground, Water, Underwater, Air
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 5c0
 		Damage: 6000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		Versus:
 			Concrete: 25
 		AffectsParent: false
 		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath, Incendiary
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: plasmaburst_puff
 		ImpactSounds: kaboom1.aud
 	Warhead@11Dam_areanuke3: SpreadDamage
 		Spread: 30c0
 		Damage: 200000
-		InvalidTargets: Vehicle, Tank, Structure, Wall
-		ValidTargets: Trees
+		InvalidTargets: Vehicle, Tank, Structure, wall
+		ValidTargets: Ground
 		DamageTypes: Incendiary, Prone50Percent, TriggerProne
 	Warhead@11Dam_areanuke3: SpreadDamage
 		Spread: 30c0
 		Damage: 200000
 		Delay: 1
-		InvalidTargets: Vehicle, Tank, Structure, Wall
-		ValidTargets: Trees
+		InvalidTargets: Vehicle, Tank, Structure, wall
+		ValidTargets: Ground
 		DamageTypes: Incendiary, Prone50Percent, TriggerProne
 	Warhead@12Res_areanuke3: DestroyResource
 		Size: 4
 		Delay: 15
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Tank, Structure, Wall, Trees
+		InvalidTargets: Vehicle, Tank, Structure, wall
 		Size: 20
 		Delay: 15
 	Warhead@14Smu_areanuke3: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Tank, Structure, Wall, Trees
+		InvalidTargets: Vehicle, Tank, Structure, wall
 		Size: 20
 		Delay: 15
 
@@ -840,7 +840,7 @@ TripodExplosion:
 		Spread: 3c0
 		Damage: 10000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Delay: 6
 		Versus:
 			None: 90
@@ -868,7 +868,7 @@ TripodExplosion:
 
 NikoTeslaRed:
 	ReloadDelay: 3
-	Range: 8c0
+	Range: 8192
 	Report: tesla1.aud
 	Projectile: TeslaZap
 		Image: niko_teslazap_red

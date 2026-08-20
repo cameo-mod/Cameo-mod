@@ -132,7 +132,7 @@ SimCityBuildingLevelUp:
 
 CITYMCV:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^Vehicle
+	Inherits@2: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@EXT: ^ExternalConditions
 	Inherits@mcv: ^MCV
@@ -150,7 +150,6 @@ CITYMCV:
 		Name: Mobile Construction Vehicle (SimCity)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 75
 		Locomotor: heavywheeled
@@ -187,7 +186,7 @@ CITYMCV.bot:
 
 CITYHARVESTER:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^Vehicle
+	Inherits@2: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@EXT: ^ExternalConditions
 	Inherits@harv: ^Harvester
@@ -240,6 +239,7 @@ CITYHARVESTER:
 CITYTRUCK:
 	Inherits: TRUCK
 	Buildable:
+		Prerequisites:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
 		Prerequisites: Police Department
@@ -260,9 +260,6 @@ CITYTRUCKXXL:
 		Cost: 2000
 	Tooltip:
 		Name: Money Truck XXL
-	DeliversCash:
-		Payload: 2000
-		PlayerExperience: 50
 	SpawnActorOnDeath:
 		Actor: moneycrate.large
 	ProducibleWithLevel:
@@ -272,7 +269,7 @@ CITYTRUCKXXL:
 
 CITYAMBULANCE:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^Vehicle
+	Inherits@2: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@MAYORCALL: ^ExternalConditionsMayorCall
 	Inherits@EMP: ^TurretEMP
@@ -318,7 +315,7 @@ CITYAMBULANCE:
 
 CITYFIRETRUCK:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^Tank
+	Inherits@2: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@MAYORCALL: ^ExternalConditionsMayorCall
@@ -377,7 +374,7 @@ CITYFIRETRUCK:
 		RequiresSelection: true
 CITYPOLICECAR:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^Tank
+	Inherits@2: ^Tank
 	Inherits@GAINSEXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@MAYORCALL: ^ExternalConditionsMayorCall
@@ -436,7 +433,7 @@ CITYSWATVAN:
 	Inherits: CITYPOLICECAR
 	Buildable:
 		Description: Heavy police vehicle driving S.W.A.T. to their destination\nEquipped with Taser.\nCan carry up to 4 units\nSWAT Units inside are equipped with tasers
-		Prerequisites: citylibrary, citybank, ~techlevel.high
+		Prerequisites: citylibrary, citybank
 		BuildDurationModifier: 25
 	Valued:
 		Cost: 2000
@@ -485,7 +482,7 @@ CITYMAYOR:
 	GrantExternalConditionToOwner@BuildingsOwned:
 		Condition: BuildingsOwned
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQ: ^CPQCondition
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -586,7 +583,7 @@ CITYMAYOR:
 
 CITYR:
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@shape: ^2x2Shape
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -630,7 +627,7 @@ CITYR:
 
 CITYC:
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@shape: ^2x2Shape
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -688,7 +685,7 @@ CITYC:
 
 CITYI:
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@shape: ^2x2Shape
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -744,7 +741,7 @@ CITYI:
 
 CITYFD:
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@FIRECALL: ^FireCall
@@ -832,7 +829,7 @@ CITYFD:
 
 CITYPD:
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@POLICECALL: ^PoliceCall
@@ -886,7 +883,7 @@ CITYPD:
 		Produces: RAVehicle
 		RequiresCondition: classicproductionqueues
 	Production@UPGRADEPOLICECITY:
-		Produces: Upgrades
+		Produces: Research
 	ProductionQueue:
 		Type: Vehicle
 		DisplayOrder: 3
@@ -905,7 +902,7 @@ CITYPD:
 		ProductionType: RAVehicle
 		RequiresCondition: classicproductionqueues
 	ProductionBar@UPGRADEPOLICECITY:
-		ProductionType: Upgrades
+		ProductionType: Research
 	ProvidesPrerequisite:
 		Prerequisite: Police Department
 	WithIdleOverlay@HQ:
@@ -928,7 +925,7 @@ CITYHARBOR:
 	Inherits: ^BaseBuilding
 	Inherits@ref: ^Refinery
 	Selectable:
-		Bounds: 131072, 131072
+		Bounds: 3072, 3072
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -982,7 +979,7 @@ CITYHARBOR:
 
 CITYCOAL:
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@power: ^PowerPlant
 	AcceptsDeliveredExperience:
 		ValidTypes: building
@@ -1010,10 +1007,9 @@ CITYCOAL:
 	Power:
 		Amount: 100
 	
-
 CITYNUKE:
 	Inherits: SimCityBuildingLevelUp
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@power: ^PowerPlant
 	AcceptsDeliveredExperience:
 		ValidTypes: building
@@ -1041,7 +1037,6 @@ CITYNUKE:
 	Power:
 		Amount: 300
 	
-
 CITYAIRPORT:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1049,7 +1044,7 @@ CITYAIRPORT:
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@SW: ^PrimarySuperweapon
 	Selectable:
-		Bounds: 174762, 174762
+		Bounds: 4096, 4096
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -1061,7 +1056,7 @@ CITYAIRPORT:
 		Name: Airport
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: Fire Department, Police Department, ~techlevel.high, !cityair
+		Prerequisites: Fire Department, Police Department, !cityair
 		Queue: Building, RABuilding
 		Description: Provides airborne support powers.
 	Building:
@@ -1088,14 +1083,14 @@ CITYAIRPORT:
 		EndChargeSpeechNotification: SpyPlaneReady
 		CameraActor: camera.spyplane
 		CameraRemoveDelay: 150
-		UnitType: u2
+		UnitType: ra1_soviets_spyplane
 		QuantizedFacings: 8
 		DisplayBeacon: true
 		BeaconPoster: racamicon
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 	AirstrikePower@greenbombs:
@@ -1116,7 +1111,7 @@ CITYAIRPORT:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 20
 	AirstrikePower@bluebombs:
@@ -1137,7 +1132,7 @@ CITYAIRPORT:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 30
 	AirstrikePower@mininuke:
@@ -1165,7 +1160,7 @@ CITYAIRPORT:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 	ParatroopersPower@SWAT:
@@ -1185,10 +1180,10 @@ CITYAIRPORT:
 		BeaconPoster: rapinficon
 		ArrowSequence: arrow
 		ClockSequence: clock
-		UnitType: C17.Paradrop
+		UnitType: ra1_allies_cargoplaneparadrop
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: cityair
@@ -1223,7 +1218,6 @@ CITYLIBRARY:
 	Power:
 		Amount: -10
 	
-
 CITYBANK:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1346,7 +1340,7 @@ CITYSTADIUM:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
 		Description: TBA
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		BuildLimit: 1
 	Building:
 		Footprint: xxx xxx xxx
@@ -1357,7 +1351,6 @@ CITYSTADIUM:
 	RevealsShroud:
 		Range: 4c0
 	
-
 CITYEXPO:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1373,7 +1366,7 @@ CITYEXPO:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
 		Description: TBA
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		BuildLimit: 1
 	Building:
 		Footprint: xx xx
@@ -1384,7 +1377,6 @@ CITYEXPO:
 	RevealsShroud:
 		Range: 4c0
 	
-
 CITYSTATION:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1458,7 +1450,7 @@ CITYMARIO:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
 		Description: TBA
-		Prerequisites: ~wip-content, Fire Department, Police Department, Commercial, Library, Bank, ~techlevel.superweapons
+		Prerequisites: ~disabled, Fire Department, Police Department, Commercial, Library, Bank, ~techlevel.superweapons
 		BuildLimit: 1
 	Building:
 		Footprint: xx xx
@@ -1471,7 +1463,6 @@ CITYMARIO:
 	RevealsShroud:
 		Range: 4c0
 	
-
 CITYCASINO:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1527,11 +1518,10 @@ CITYCASINO:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 50
 	
-
 CITYWINDMILL:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1547,7 +1537,7 @@ CITYWINDMILL:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
 		Description: TBA
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1557,7 +1547,6 @@ CITYWINDMILL:
 	RevealsShroud:
 		Range: 4c0
 	
-
 CITYAMUSE:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1573,7 +1562,7 @@ CITYAMUSE:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
 		Description: TBA
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1583,7 +1572,6 @@ CITYAMUSE:
 	RevealsShroud:
 		Range: 4c0
 	
-
 CITYZOO:
 	Inherits: SimCityBuildingLevelUp
 	Inherits@EXPCITY: ^GainsExperienceCity
@@ -1631,10 +1619,10 @@ CITYZOO:
 		BeaconPoster: rapinficon
 		ArrowSequence: arrow
 		ClockSequence: clock
-		UnitType: C17.Paradrop
+		UnitType: ra1_allies_cargoplaneparadrop
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		
 ####################################################################################################
@@ -1648,7 +1636,7 @@ CITYZOO:
 
 CITYFIREFIGHTER:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^CITYINFANTRY
+	Inherits@2: ^CITYINFANTRY
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@MAYORCALL: ^ExternalConditionsMayorCall
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -1689,7 +1677,7 @@ CITYFIREFIGHTER:
 		VoiceSet: FireFighterVoice
 CITYPOLICEOFFICER:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^CITYINFANTRY
+	Inherits@2: ^CITYINFANTRY
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@MAYORCALL: ^ExternalConditionsMayorCall
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -1936,7 +1924,7 @@ CITYEXPERT:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		BuildDuration: 160
 		Description: Upgrades a Vehicle by 1 Rank.
 	Valued:
@@ -1967,7 +1955,7 @@ CITYELITEEXPERT:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~wip-content #Bank
+		Prerequisites: ~disabled #Bank
 		BuildDuration: 400
 		Description: Upgrades a Vehicle to Rank 4 (Elite).
 		Icon: eliteicon
@@ -1991,7 +1979,7 @@ CITYSWAT:
 		DeathTypes: DefaultDeath
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: citylibrary, citybank, ~techlevel.high, Police.sc2k, RAPolice.sc2k
+		Prerequisites: citylibrary, citybank, Police.sc2k, RAPolice.sc2k
 		Queue: Vehicle, RAVehicle
 		Description: Elite law enforcement Team armed with silenced\nsubmachine guns and EMP grenades.\n Strong vs ground targets\n Weak vs Aircraft
 	Tooltip:
@@ -2044,7 +2032,7 @@ CITYSWAT:
 		
 CITYSWAT1:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^CITYINFANTRY
+	Inherits@2: ^CITYINFANTRY
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@BPV: ^SimCity_BPV
@@ -2113,7 +2101,7 @@ CITYSWATS:
 
 CITYSWATGL:
 	Inherits: SimCityUnitLevelUp
-	Inherits: ^CITYINFANTRY
+	Inherits@2: ^CITYINFANTRY
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@BPV: ^SimCity_BPV
@@ -2121,7 +2109,7 @@ CITYSWATGL:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 30
-		Prerequisites: citylibrary, citybank, cityairport, ~techlevel.high
+		Prerequisites: citylibrary, citybank, cityairport
 		BuildDurationModifier: 50
 		Queue: Vehicle, RAVehicle
 		Description: Stealth Elite law enforcement equipped with silenced Sniper Rifle\nCan he upgraded to get Grenade Launcher\nStrong vs Infantry, Air
@@ -2146,7 +2134,7 @@ CITYSWATGL:
 		Range: 7c0
 	AutoTarget:
 		ScanRadius: 8
-	Armament@Sniper:
+	Armament@lightsniper:
 		Weapon: SwatSniper
 		LocalOffset: 0,0,25
 	Armament@GL:
@@ -2181,7 +2169,6 @@ CITYE6:
 	Inherits: E6
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites:
 		Queue: Infantry, RAInfantry
 		Icon: cityicon
 	RenderSprites:
@@ -2192,12 +2179,12 @@ CITYE6:
 ########################################
 
 simcity_smg:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Submachine Guns
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 3000
 		BuildDurationModifier: 100
 		Description: Law Enforcements gets Low Accurate Submachine Guns instead of Handguns\nIncreases damage against Vehicles but decreases damage against Infantry
@@ -2209,12 +2196,12 @@ simcity_smg:
 	ProvidesPrerequisite@upgradename:
 	
 simcity_bpv:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bulletproof vests
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: All units produced at Police Departments gets Bulletproof vests reducing damage taken
@@ -2226,12 +2213,12 @@ simcity_bpv:
 	ProvidesPrerequisite@upgradename:
 	
 simcity_gl:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Grenade Launcher
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 3000
 		BuildDurationModifier: 100
 		Description: S.W.A.T Specialists will get Grenade Launcher that can Siege Buildings and other static targets
@@ -2243,12 +2230,12 @@ simcity_gl:
 	ProvidesPrerequisite@upgradename:
 	
 simcity_taser:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Taser Speed
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 4500
 		BuildDurationModifier: 100
 		Description: Police Cars and SWAT Vans will shoot their tasers 50% faster
@@ -2264,7 +2251,7 @@ simcity_taser:
 ####################################################################################################
 
 GreenBomber:
-	Inherits: C17.Bomber
+	Inherits: ra1_allies_cargoplanebomber
 	AttackBomber:
 		FacingTolerance: 32
 	Armament:
@@ -2282,7 +2269,7 @@ GreenBomber:
 		RequiresSelection: True
 
 BlueBomber:
-	Inherits: C17.Bomber
+	Inherits: ra1_allies_cargoplanebomber
 	AttackBomber:
 		FacingTolerance: 32
 	Armament:
@@ -2300,7 +2287,7 @@ BlueBomber:
 		RequiresSelection: True
 
 MininukeBomber:
-	Inherits: C17.Bomber
+	Inherits: ra1_allies_cargoplanebomber
 	AttackBomber:
 		FacingTolerance: 32
 	Armament:
@@ -2318,7 +2305,7 @@ MininukeBomber:
 		RequiresSelection: True
 
 CasinoCrateBomber:
-	Inherits: C17.Bomber
+	Inherits: ra1_allies_cargoplanebomber
 	AttackBomber:
 		FacingTolerance: 32
 	Armament:

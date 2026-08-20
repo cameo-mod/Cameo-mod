@@ -1,8 +1,8 @@
-###############
+﻿###############
 #   UNITS    #
 ###############
 
-^sow_cannon:
+^SowCannon:
 	Projectile: InstantHit
 		Inaccuracy: 0c48
 		Width: 0c1
@@ -12,38 +12,38 @@
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: cannon_impact.aud
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 		
-^sow_flame:
-	ValidTargets: Ground, Water, Trees
-	InvalidTargets: Wall
+^SowFlame:
+	ValidTargets: Ground, Water
+	InvalidTargets: wall
 	Projectile: Bullet
 		Speed: 300
 		TrailImage: fb4
 		Image: fb3
 		LaunchAngle: 45
 		Inaccuracy: 0c32
-	ValidTargets: Ground, Water, Trees
-		InvalidTargets: Wall
+	ValidTargets: Ground, Water
+		InvalidTargets: wall
 		DamageTypes: FireDeath, Incendiary
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, wall
 
-^sow_antiair:
+^SowAntiAir:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: antiair_impact.aud
@@ -53,12 +53,12 @@
 	Projectile: MissileCA
 		TrailImage: black_smokey
 		
-^sow_antiair_mk1:
-	Inherits: ^sow_antiair
+^SowAntiAirMk1:
+	Inherits: ^SowAntiAir
 	InvalidTargets: Ground
 	ValidTargets: Air
-	Range: 7c512
-	MinRange: 0c256
+	Range: 7680
+	MinRange: 256
 	Report: antiair_shoot.aud
 	Projectile: MissileCA
 		Arm: 5
@@ -75,7 +75,7 @@
 		Damage: 3333
 		ValidTargets: Air
 	
-^sow_special:
+^SowSpecial:
 	Projectile: Bullet
 		Speed: 333
 		Inaccuracy: 333
@@ -84,7 +84,7 @@
 	Warhead@1Dam: SpreadDamage
 		DamageTypes: TriggerProne, ElectricityDeath
 		
-^sow_siege:
+^SowSiege:
 	TargetActorCenter: true
 	Projectile: Bullet
 		Blockable: false
@@ -99,12 +99,12 @@
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: poof
 		ImpactSounds: siege_impact.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: med_splash
 		ImpactSounds: splash9.aud
@@ -112,9 +112,9 @@
 		InvalidTargets: Ship, Structure, Bridge
 		
 sow_lt_cannon:
-	Inherits: ^sow_cannon
+	Inherits: ^SowCannon
 	ReloadDelay: 30
-	Range: 5c0
+	Range: 5120
 	Report: lt_cannon_shoot.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 5000
@@ -127,9 +127,9 @@ sow_lt_cannon:
 			Concrete: 44
 
 sow_lt_flame:
-	Inherits: ^sow_flame
+	Inherits: ^SowFlame
 	ReloadDelay: 7
-	Range: 3c512
+	Range: 3584
 	Report: lt_flame.aud
 	Projectile: Bullet
 		Speed: 225
@@ -148,7 +148,7 @@ sow_lt_flame:
 		ImpactActors: false
 		
 sow_lt_antiair:
-	Inherits: ^sow_antiair_mk1
+	Inherits: ^SowAntiAirMk1
 	ReloadDelay: 20
 	Burst: 2
 	BurstDelays: 5
@@ -164,9 +164,9 @@ sow_lt_antiair:
 			Concrete: 20
 		
 sow_lt_special:
-	Inherits: ^sow_special
+	Inherits: ^SowSpecial
 	ReloadDelay: 50
-	Range: 4c0
+	Range: 4096
 	Report: lt_special_shoot.aud
 	Projectile: Bullet
 		Image: sowlightspecial_shot
@@ -183,9 +183,9 @@ sow_lt_special:
 		Damage: 11111
 		
 sow_lt_siege:
-	Inherits: ^sow_siege
+	Inherits: ^SowSiege
 	ReloadDelay: 50
-	Range: 7c512
+	Range: 7680
 	Report: lt_siege_shoot.aud
 	Projectile: Bullet
 		Speed: 500
@@ -204,11 +204,11 @@ sow_lt_siege:
 		Damage: 7500
 		
 sow_mt_cannon:
-	Inherits: ^sow_cannon
+	Inherits: ^SowCannon
 	ReloadDelay: 40
 	Burst: 2
 	BurstDelays: 5
-	Range: 7c512
+	Range: 7680
 	StartBurstReport: mt_cannon_shoot.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 7500
@@ -221,9 +221,9 @@ sow_mt_cannon:
 			Concrete: 44
 
 sow_mt_flame:
-	Inherits: ^sow_flame
+	Inherits: ^SowFlame
 	ReloadDelay: 7
-	Range: 5c0
+	Range: 5120
 	Report: lt_flame.aud
 	Projectile: Bullet
 		Speed: 225
@@ -241,7 +241,7 @@ sow_mt_flame:
 		ImpactActors: false
 		
 sow_mt_antiair:
-	Inherits: ^sow_antiair_mk1
+	Inherits: ^SowAntiAirMk1
 	ReloadDelay: 40
 	Burst: 4
 	BurstDelays: 5
@@ -257,11 +257,11 @@ sow_mt_antiair:
 			Concrete: 20
 			
 sow_mt_special:
-	Inherits: ^sow_special
+	Inherits: ^SowSpecial
 	ReloadDelay: 75
 	Burst: 2
 	BurstDelays: 5
-	Range: 5c0
+	Range: 5120
 	Report: mt_special_shoot.aud
 	Projectile: Bullet
 		Image: sowmedspecial_shot
@@ -278,10 +278,10 @@ sow_mt_special:
 		Damage: 22222
 		
 sow_mt_siege:
-	Inherits: ^sow_siege
+	Inherits: ^SowSiege
 	ReloadDelay: 50
-	Range: 10c0
-	MinRange: 0c768
+	Range: 10240
+	MinRange: 768
 	Report: mt_siege_shoot.aud
 	Projectile: Bullet
 		Speed: 400
@@ -300,11 +300,11 @@ sow_mt_siege:
 		Damage: 15000
 
 sow_ht_cannon:
-	Inherits: ^sow_cannon
+	Inherits: ^SowCannon
 	ReloadDelay: 50
 	Burst: 3
 	BurstDelays: 5
-	Range: 10c0
+	Range: 10240
 	StartBurstReport: ht_cannon_shoot.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 10000
@@ -317,11 +317,11 @@ sow_ht_cannon:
 			Concrete: 44
 
 sow_ht_flame:
-	Inherits: ^sow_flame
+	Inherits: ^SowFlame
 	ReloadDelay: 7
 	Burst: 2
 	BurstDelays: 0
-	Range: 6c512
+	Range: 6656
 	Report: lt_flame.aud
 	Projectile: Bullet
 		Speed: 225
@@ -340,7 +340,7 @@ sow_ht_flame:
 		ImpactActors: false
 		
 sow_ht_antiair:
-	Inherits: ^sow_antiair_mk1
+	Inherits: ^SowAntiAirMk1
 	ReloadDelay: 60
 	Burst: 6
 	BurstDelays: 5
@@ -356,12 +356,12 @@ sow_ht_antiair:
 			Concrete: 20
 
 sow_ht_siege:
-	Inherits: ^sow_siege
+	Inherits: ^SowSiege
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 15
-	Range: 12c512
-	MinRange: 1c0
+	Range: 12800
+	MinRange: 1024
 	Report: ht_siege_shoot.aud
 	Projectile: Bullet
 		Speed: 325
@@ -380,11 +380,11 @@ sow_ht_siege:
 		Damage: 15000
 		
 sow_ht_special:
-	Inherits: ^sow_special
+	Inherits: ^SowSpecial
 	ReloadDelay: 100
 	Burst: 3
 	BurstDelays: 10
-	Range: 6c0
+	Range: 6144
 	Report: ht_special_shoot.aud
 	Projectile: Bullet
 		Image: sowheavyspecial_shot
@@ -402,18 +402,18 @@ sow_ht_special:
 	Warhead@2Smu: LeaveSmudge
 		Size: 2
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: sowtriplerboom.aud
-		ValidTargets: Ground, Ship, Trees
-	Warhead@4Eff: CreateEffect
+		ValidTargets: Ground, Ship
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		
 sow_mech_avenger:
 	ReloadDelay: 64
-	Range: 12c512
-	MinRange: 0c768
+	Range: 12800
+	MinRange: 768
 	Report: turret6_shoot.aud
 	ValidTargets: Air
 	Burst: 8
@@ -442,7 +442,7 @@ sow_mech_avenger:
 		DamageTypes: ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: antiair_impact.aud
@@ -453,8 +453,8 @@ sow_mech_avenger_mk2:
 	ReloadDelay: 128
 	Burst: 16
 	BurstDelays: 4
-	Range: 25c0
-	MinRange: 3c0
+	Range: 25600
+	MinRange: 3072
 	Report: tripler_payload.aud
 	Projectile: MissileCA
 		Speed: 600
@@ -470,7 +470,7 @@ sow_mech_kodiak:
 	ReloadDelay: 15
 	Burst: 2
 	BurstDelays: 3
-	Range: 9c0
+	Range: 9216
 	StartBurstReport: kodiak_shoot.aud
 	InvalidTargets: Air
 	ValidTargets: Ground
@@ -492,7 +492,7 @@ sow_mech_kodiak:
 		DamageTypes: TriggerProne, FireDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 		
 sow_mech_kodiak_mk2:
 	Inherits: sow_mech_kodiak
@@ -500,8 +500,8 @@ sow_mech_kodiak_mk2:
 	BurstDelays: 5
 	-StartBurstReport:
 	Report: kodiak_shoot.aud
-	Range: 10c0
-	MinRange: 2c0
+	Range: 10240
+	MinRange: 2048
 	Projectile: LaserZap
 		Width: 300
 		HitAnim: laserfire
@@ -519,18 +519,18 @@ sow_mech_kodiak_mk2:
 			Medium: 99
 			Heavy: 88
 			Concrete: 55
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Delay: 5
 		Explosions: small_napalm
 		ImpactSounds: building2_explode.aud
 		ValidTargets: Ground
 	Warhead@1Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 		
 sow_mech_gatling:
 	ReloadDelay: 5
-	Range: 11c0
+	Range: 11264
 	StartBurstReport: cannon_impact.aud
 	Burst: 2
 	BurstDelays: 1
@@ -555,12 +555,12 @@ sow_mech_gatling:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: cannon_impact.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees, Air
+		ValidTargets: Ground, Ship, Air
 	Warhead@4EffWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: cannon_impact.aud
@@ -571,7 +571,7 @@ sow_mech_gatling_mk2:
 	Inherits: sow_mech_gatling
 	ReloadDelay: 4
 	ValidTargets: Air, Ground
-	Range: 12c0
+	Range: 12288
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground, Air
 		Spread: 400
@@ -581,7 +581,7 @@ sow_mech_jaguar:
 	ReloadDelay: 64
 	Burst: 4
 	BurstDelays: 4
-	Range: 7c0
+	Range: 7168
 	Report: plasma_robot_shoot.aud
 	Projectile: Bullet
 		Image: sowmechjaguar_shot
@@ -605,11 +605,11 @@ sow_mech_jaguar:
 	Warhead@2Smu: LeaveSmudge
 		Size: 2
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: sowtriplerboom.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: cannon_impact.aud
@@ -621,7 +621,7 @@ sow_mech_jaguar_mk2:
 	ReloadDelay: 40
 	Burst: 4
 	BurstDelays: 4
-	Range: 8c0
+	Range: 8192
 	Warhead@1Dam: SpreadDamage
 		Spread: 400
 		Damage: 40000
@@ -636,7 +636,7 @@ sow_mech_jaguar_mk2:
 
 sow_mech_achilles:
 	ReloadDelay: 10
-	Range: 2c512
+	Range: 2560
 	Report: karate_robot_shoot.aud
 	ValidTargets: Infantry, Building, Vehicle, Ground
 	TargetActorCenter: true
@@ -657,7 +657,7 @@ sow_mech_achilles:
 	
 sow_advancer:
 	ReloadDelay: 130
-	Range: 9c0
+	Range: 9216
 	Report: advancer_shoot.aud
 	ValidTargets: Vehicle, Infantry, Air
 	ValidStances: Enemy
@@ -681,12 +681,12 @@ sow_advancer:
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Structure, wall, Husk, Creep
 	
 sow_advancer_mk2:
 	Inherits: sow_advancer
 	ReloadDelay: 100
-	Range: 10c0
+	Range: 10240
 	Report: advancer_shoot.aud
 	ValidStances: Enemy
 	Projectile: LaserZap
@@ -706,7 +706,7 @@ sow_advancer_mk2:
 		
 sow_advancer_repair:
 	ReloadDelay: 14
-	Range: 2c0
+	Range: 2048
 	ValidTargets: Repairing, ivanattached, lockdowned
 	ValidStances: Ally
 	Report: advancer_repair.aud
@@ -736,7 +736,7 @@ sow_advancer_repair:
 	
 sow_advancer_capture:
 	ReloadDelay: 16
-	Range: 1c0
+	Range: 1024
 	ValidTargets: Structure, Defense, Building
 	ValidStances: Enemy, Neutral
 	Report: advancer_capture.aud
@@ -762,7 +762,7 @@ sow_advancer_capture:
 		
 sow_advancer_capture_mk2:
 	Inherits: sow_advancer_capture
-	Range: 2c0
+	Range: 2048
 	ReloadDelay: 12
 	Projectile: LaserZap
 		Width: 360
@@ -771,9 +771,9 @@ sow_advancer_capture_mk2:
 		Spread: 75
 		Damage: 2000
 		
-^sow_advancer_upgradebeam:
+^SowAdvancerUpgradeBeam:
 	ReloadDelay: 14
-	Range: 0c128
+	Range: 128
 	ValidTargets: sowupgrade, sowupgrade_1, sowupgrade_2, sowupgrade_3
 	ValidStances: Ally
 	Duration: 15
@@ -783,46 +783,46 @@ sow_advancer_capture_mk2:
 		Color: E6A357
 
 sow_advancer_upgrade:
-	Inherits: ^sow_advancer_upgradebeam
+	Inherits: ^SowAdvancerUpgradeBeam
 	Warhead@sowupgrade: GrantExternalCondition
-		Range: 2c512
+		Range: 2560
 		Condition: sowupgrade
 		ValidTargets: sowupgrade
 		Delay: 350
 		
 sow_advancer_upgrade_1:
-	Inherits: ^sow_advancer_upgradebeam
+	Inherits: ^SowAdvancerUpgradeBeam
 	Warhead@sowupgrade_1: GrantExternalCondition
-		Range: 2c512
+		Range: 2560
 		Condition: sowupgrade_1
 		ValidTargets: sowupgrade_1
 		Delay: 350
 		
 sow_advancer_upgrade_2:
-	Inherits: ^sow_advancer_upgradebeam
+	Inherits: ^SowAdvancerUpgradeBeam
 	Warhead@sowupgrade_2: GrantExternalCondition
-		Range: 2c512
+		Range: 2560
 		Condition: sowupgrade_2
 		ValidTargets: sowupgrade_2
 		Delay: 350
 
 sow_advancer_upgrade_3:
-	Inherits: ^sow_advancer_upgradebeam
+	Inherits: ^SowAdvancerUpgradeBeam
 	Warhead@sowupgrade_3: GrantExternalCondition
-		Range: 2c512
+		Range: 2560
 		Condition: sowupgrade_3
 		ValidTargets: sowupgrade_3
 		Delay: 350
 		
 sow_abc_nuke:
-	ValidTargets: Ground, Trees, Water, Underwater, Air
+	ValidTargets: Ground, Water, Underwater, Air
 	Report: sow_abc_nuke.aud
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 1c512
 		ImpactSounds: sow_abc_nuke.aud
 		Damage: 15000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Trees, Water, Air
+		ValidTargets: Ground, Water, Air
 		Versus:
 			Wood: 50
 			Medium: 200
@@ -832,7 +832,7 @@ sow_abc_nuke:
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
 	#Warhead@2Res_impact: DestroyResource
 	#	Size: 1
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke
 		ImpactSounds: sow_abc_nuke.aud
 		ImpactActors: false
@@ -842,7 +842,7 @@ sow_abc_nuke:
 		Damage: 12000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 20
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		Versus:
 			Wood: 45
 			Concrete: 20
@@ -851,7 +851,7 @@ sow_abc_nuke:
 	#Warhead@5Res_areanuke1: DestroyResource
 	#	Size: 2
 	#	Delay: 5
-	Warhead@6Eff_areanuke1: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: sow_abc_nuke.aud, sow_bomb.aud
 		Delay: 35
 		ImpactActors: false
@@ -873,7 +873,7 @@ sow_abc_nuke:
 		Damage: 8000
 		Falloff: 3000, 368, 135, 50, 18, 7, 0
 		Delay: 40
-		ValidTargets: Trees
+		ValidTargets: Ground
 		DamageTypes: Incendiary
 	#Warhead@9Res_areanuke2: DestroyResource
 	#	Size: 3
@@ -896,14 +896,14 @@ sow_abc_nuke:
 		Damage: 8000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 75
-		ValidTargets: Trees
+		ValidTargets: Ground
 		DamageTypes: Incendiary
 	#Warhead@12Res_areanuke3: DestroyResource
 	#	Size: 4
 	#	Delay: 60
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Trees
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 6
 		Delay: 60
 		
@@ -914,7 +914,7 @@ sow_abc_nuke_pp:
 		ImpactSounds: sow_abc_nuke.aud
 		Damage: 12500
 		Falloff: 800, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Trees, Water, Air
+		ValidTargets: Ground, Water, Air
 		Versus:
 			Wood: 250
 			Medium: 20
@@ -922,13 +922,13 @@ sow_abc_nuke_pp:
 			Concrete: 200
 			
 sow_aircraft_husk:
-	ValidTargets: Ground, Trees, Water, Underwater
+	ValidTargets: Ground, Water, Underwater
 	Report: sow_abc_nuke.aud
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 2c512
 		ImpactSounds: sow_abc_nuke.aud
 		Damage: 50000
-		ValidTargets: Ground, Trees, Water, Air
+		ValidTargets: Ground, Water, Air
 		Versus:
 			None: 300
 			Light: 250
@@ -938,25 +938,25 @@ sow_aircraft_husk:
 			Concrete: 50
 		AffectsParent: true
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@6Eff_areanuke1: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke
 		ImpactSounds: sow_abc_nuke.aud, sow_bomb.aud
 		Delay: 5
 		ImpactActors: false
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Trees
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 4
 		Delay: 30
 		
 sow_fighter_husk:
-	ValidTargets: Ground, Trees, Water, Underwater
+	ValidTargets: Ground, Water, Underwater
 	Report: sow_abc_nuke.aud
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 2c0
 		ImpactSounds: sow_abc_nuke.aud
 		Damage: 20000
-		ValidTargets: Ground, Trees, Water, Air
+		ValidTargets: Ground, Water, Air
 		Versus:
 			None: 300
 			Light: 250
@@ -966,26 +966,26 @@ sow_fighter_husk:
 			Concrete: 50
 		AffectsParent: true
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@6Eff_areanuke1: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke
 		ImpactSounds: sow_abc_nuke.aud, sow_bomb.aud
 		Delay: 5
 		ImpactActors: false
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Trees
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 4
 		Delay: 30
 		
 sowasteroid:
 	ReloadDelay: 75
-	Range: 100c0
+	Range: 102400
 	Projectile: GravityBomb
 		Image: sowasteroid
 		Velocity: 0, 0, -230
 		Acceleration: 0, 0, -40
 		Shadow: true
-	Warhead@1Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: large_explosion
 		ImpactSounds: Meteor.aud
 		ImpactActors: false
@@ -1011,7 +1011,7 @@ sowasteroid:
 		
 sowasteroid_b:
 	Inherits: sowasteroid
-	Range: 130c0
+	Range: 133120
 	ReloadDelay: 25
 	Projectile: GravityBomb
 		Image: sowasteroid_b
@@ -1028,7 +1028,7 @@ sowasteroid_b:
 			
 sowasteroid_c:
 	Inherits: sowasteroid
-	Range: 80c0
+	Range: 81920
 	ReloadDelay: 50
 	Projectile: GravityBomb
 		Image: sowasteroid_c
@@ -1045,7 +1045,7 @@ sowasteroid_c:
 			
 satelliteprotection:
 	ReloadDelay: 100
-	Range: 1c512
+	Range: 1536
 	Report: satelliteprotection.aud
 	ValidStances: Enemy
 	ValidTargets: Air
@@ -1068,12 +1068,12 @@ satelliteprotection:
 		DamageTypes: ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Structure, wall, Husk, Creep
 		
 satelliteprotection_mk2:
 	Inherits: satelliteprotection
 	ReloadDelay: 50
-	Range: 3c0
+	Range: 3072
 	Projectile: LaserZap
 		Width: 500
 		HitAnim: laserfire
@@ -1087,8 +1087,8 @@ satelliteprotection_mk2:
 sowfighter:
 	ReloadDelay: 100
 	Burst: 5
-	BurstDelay: 1
-	Range: 5c0
+	BurstDelays: 1
+	Range: 5120
 	Projectile: GravityBomb
 		Image: PARABOMB
 		OpenSequence: open
@@ -1109,15 +1109,15 @@ sowfighter:
 		ValidTargets: Ground, Water, Air
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: fighter_payload.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	
 sowbomber:
 	ReloadDelay: 2
-	Range: 7c512
+	Range: 7680
 	Projectile: GravityBomb
 		Image: sowbomber_bomb
 		OpenSequence: open
@@ -1138,15 +1138,15 @@ sowbomber:
 		ValidTargets: Ground, Water
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: poof
 		ImpactSounds: sowhercules_payload.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		
 sowtripler:
 	ReloadDelay: 30
-	Range: 3c0
+	Range: 3072
 	Report: tripler_payload.aud
 	Projectile: GravityBomb
 		Image: tripler_payload
@@ -1169,12 +1169,12 @@ sowtripler:
 	Warhead@2Smu: LeaveSmudge
 		Size: 2
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: sowtriplerboom.aud
-		ValidTargets: Ground, Ship, Trees
-	Warhead@4Eff: CreateEffect
+		ValidTargets: Ground, Ship
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 	
 ###############
@@ -1208,12 +1208,12 @@ sow_gun_tower:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: cannon_impact.aud
@@ -1223,7 +1223,7 @@ sow_gun_tower:
 sow_antiair_tower:
 	ReloadDelay: 64
 	Range: 12345
-	MinRange: 0c512
+	MinRange: 512
 	Report: turret2_shoot.aud
 	InvalidTargets: Ground
 	ValidTargets: Air
@@ -1253,7 +1253,7 @@ sow_antiair_tower:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: antiair_impact.aud
@@ -1281,12 +1281,12 @@ sow_plasma_tower:
 	Warhead@2Smu: LeaveSmudge
 		Size: 2
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: sowtriplerboom.aud
-		ValidTargets: Ground, Ship, Trees
-	Warhead@4Eff: CreateEffect
+		ValidTargets: Ground, Ship
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 
 sow_minigun_tower:
@@ -1324,12 +1324,12 @@ sow_minigun_tower:
 			Concrete: 1
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: cannon_impact.aud
@@ -1340,7 +1340,7 @@ sow_defragmenter_tower:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 123
 	Range: 12345
-	MinRange: 2c0
+	MinRange: 2048
 	Burst: 6
 	BurstDelays: 6
 	StartBurstReport: turret5_shoot.aud
@@ -1369,7 +1369,7 @@ sow_defragmenter_tower:
 		Explosions: poof
 		ImpactSounds: siege_impact.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: med_splash
 		ImpactSounds: splash9.aud
@@ -1378,10 +1378,10 @@ sow_defragmenter_tower:
 
 sow_vulcano_tower:
 	ReloadDelay: 64
-	Range: 16c0
+	Range: 16384
 	Burst: 8
 	BurstDelays: 4
-	MinRange: 1c0
+	MinRange: 1024
 	Report: turret6_shoot.aud
 	InvalidTargets: Ground
 	ValidTargets: Air
@@ -1409,7 +1409,7 @@ sow_vulcano_tower:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: antiair_impact.aud

@@ -1,0 +1,86 @@
+wc2_orcs_goblinzeppelin:
+	Inherits@WC2AirUnit: ^WC2AirUnit
+	Inherits@WC2Template: ^WC2AirScout
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Tooltip:
+		Name: Goblin Zeppelin
+	Buildable:
+		Prerequisites: ~wc2_orcs_golbinalchemist
+		Queue: Vehicle, RAVehicle
+		Description: Flying scout unit. He can see your house!\nDetector.
+	Voiced:
+		VoiceSet: wc2voiceorcgoblinzeppelin
+	ActorStatValues:
+		Upgrades: wc2_orcs_upgrade_armorstrength, wc2_orcs_upgrade_armorstrengthii
+
+wc2_orcs_dragon:
+	Inherits@WC2AirUnit: ^WC2AirUnit
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Inherits@OCannonUpg: ^WC2OrcsUpgradeCannonDamage
+	Tooltip:
+		Name: Dragon
+	Valued:
+		Cost: 2000
+	Power:
+		Amount: -100
+	Health:
+		HP: 150000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	-Integrity:
+	-GrantCondition@electronics:
+	Aircraft:
+		Speed: 125
+		TurnSpeed: 25
+		RepulsionSpeed: 25
+	Targetable@HEAL:
+		RequiresCondition: damaged
+		TargetTypes: Heal
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~wc2_orcs_dragonroost
+		Queue: Aircraft, RAAircraft
+		Description: Flying ranged attacker.\nFire breath can hit multiple targets in a line.\nStrong vs Aircraft
+	Armament@VISIBLE:
+		Weapon: wc2dragonFireVisible
+		LocalOffset: 400,-64,64, 400,64,64
+		LocalYaw: 64, -64
+		Name: primary
+		FireDelay: 3
+	Armament@EXPLOSIONS:
+		Weapon: wc2dragonFireExplosion
+		LocalOffset: 400,0,0
+		Name: secondary
+		FireDelay: 7
+	AttackAircraft:
+		FacingTolerance: 0
+		AttackType: Hover
+		Armaments: primary, secondary
+	WithAttackAnimation:
+		Armament: primary
+		Sequence: shoot
+	WithAttackAnimation@haste:
+		Body: body-haste
+		Armament: primary
+		Sequence: shoot
+	WithAttackAnimation@slow:
+		Body: body-slow
+		Armament: primary
+		Sequence: shoot
+	Voiced:
+		VoiceSet: wc2voiceorcdragon
+	WithFacingSpriteBody:
+		RequiresCondition: (!wc2_cond_haste && !wc2_cond_slow) || (wc2_cond_haste && wc2_cond_slow)
+	WithFacingSpriteBody@Haste:
+		Name: body-haste
+		Sequence: idle-haste
+		RequiresCondition: wc2_cond_haste && !wc2_cond_slow
+	WithFacingSpriteBody@Slow:
+		Name: body-slow
+		Sequence: idle-slow
+		RequiresCondition: wc2_cond_slow && !wc2_cond_haste
+	ActorStatValues:
+		Upgrades: wc2_orcs_upgrade_cannondamage, wc2_orcs_upgrade_cannondamageii, wc2_orcs_upgrade_armorstrength, wc2_orcs_upgrade_armorstrengthii

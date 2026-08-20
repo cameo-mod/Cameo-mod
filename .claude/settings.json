@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python tools/hooks/session_checklist.py",
+            "timeout": 10,
+            "statusMessage": "Loading Cameo checklist"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python tools/hooks/bash_guard.py",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}

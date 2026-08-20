@@ -1,7 +1,9 @@
 DTMiniLaser:
-	Inherits: ^LaserWeapon
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
 	ReloadDelay: 33
-	Range: 5c555
+	Range: 5675
 	Report: dtdinoatk1.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: LaserZap
@@ -55,7 +57,7 @@ DTLaser:
 		Explosions: big_napalm
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
-		ValidTargets: Ground, Air, Ship, Trees
+		ValidTargets: Ground, Air, Ship
 
 DTChemspray:
 	Inherits: ^FlameWeapon
@@ -78,8 +80,8 @@ DTChemspray:
 
 DTMissileCrawler:
 	ReloadDelay: 125
-	Range: 12c5
-	MinRange: 3c0
+	Range: 12293
+	MinRange: 3072
 	Report: rocket2.aud
 	ValidTargets: Ground, Water
 	Projectile: Bullet
@@ -95,7 +97,7 @@ DTMissileCrawler:
 		Spread: 1c0
 		Damage: 5000
 		Falloff: 1000, 500, 333, 100, 50, 33, 10, 0
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Versus:
 			None: 80
 			Wood: 90
@@ -120,13 +122,13 @@ DTMissileCrawler:
 		Explosions: big_napalm
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
-		ValidTargets: Ground, Air, Ship, Trees
+		ValidTargets: Ground, Air, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: large_splash
 		ValidTargets: Water
 		InvalidTargets: Ship, Structure, Bridge
 
-DTMissileCrawlerAA:
+DTMissileCrawler_AA:
 	Inherits: DTMissileCrawler
 	ValidTargets: Air
 	Projectile: MissileCA
@@ -150,7 +152,7 @@ DTMissileCrawlerAA:
 RedoubtGun:
 	Inherits: TurretGun
 	ReloadDelay: 20
-	Range: 7c512
+	Range: 7680
 	Warhead@1Dam: SpreadDamage
 		Spread: 100
 		Damage: 10000
@@ -176,7 +178,7 @@ RedoubtGun:
 	Warhead@3Eff: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 
 DTTurretGun:
 	Inherits: TurretGun
@@ -192,15 +194,15 @@ DTHighV:
 	BurstDelays: 2
 
 DTMutate:
-	ValidTargets: Ground, Air, Trees
+	ValidTargets: Ground, Air
 	Warhead@1Dam: HealthPercentageDamage
 		Spread: 4c0
 		Damage: 300
 		ValidTargets: Infantry
-		InvalidTargets: Vehicle, Structure, Wall, Husk, TerrorDrone
+		InvalidTargets: Vehicle, Structure, wall, Husk, TerrorDrone
 		AffectsParent: True
 		DamageTypes: QuestionMutate
-	Warhead@2eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: controlwave
 		ExplosionPalette: ra2effect
 		ImpactSounds: sgenon.wav
@@ -209,7 +211,7 @@ DTMutate:
 DTAtomic:
 	Inherits: Atomic
 	Report: nukemisl.aud
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: dt_nuke_explosion
 	Warhead@Cluster: FireFragment
 		Weapon: GLToxinExplodeClust1
@@ -226,8 +228,8 @@ DTTowerMissile:
 SCUDAA:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 300
-	Range: 10c0
-	MinRange: 1c0
+	Range: 10240
+	MinRange: 1024
 	Report: rocket2.aud
 	ValidTargets: Air
 	Projectile: MissileCA

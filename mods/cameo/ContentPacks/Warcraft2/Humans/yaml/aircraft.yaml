@@ -1,0 +1,96 @@
+wc2_humans_flyingmachine:
+	Inherits@WC2AirUnit: ^WC2AirUnit
+	Inherits@WC2Template: ^WC2AirScout
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
+	Tooltip:
+		Name: Flying Machine
+	Buildable:
+		Prerequisites: ~wc2_humans_gnomishinventor
+		Queue: Vehicle, RAVehicle
+		Description: Flying scout unit. He's got a flying machine!\nDetector.
+	Voiced:
+		VoiceSet: wc2voicehumanflyingmachine
+	ActorStatValues:
+		Upgrades: wc2_humans_upgrade_armorstrength, wc2_humans_upgrade_armorstrengthii
+
+wc2_humans_gyrocoptermachine:
+	Inherits@WC2AirUnit: ^WC2AirUnit
+	Inherits@WC2Template: ^WC2AirScout
+	Tooltip:
+		Name: Gyrocopter Machine
+	Buildable:
+		Prerequisites: ~wc2_humans_gnomishinventor
+		Queue: Vehicle, RAVehicle
+		Description: Flying scout unit. He's got a flying machine!\nDetector.
+	Voiced:
+		VoiceSet: wc2voicehumanflyingmachine
+
+wc2_humans_gryphonrider:
+	Inherits@WC2AirUnit: ^WC2AirUnit
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
+	Inherits@HCannonUpg: ^WC2HumansUpgradeCannonDamage
+	Tooltip:
+		Name: Gryphon Rider
+	Valued:
+		Cost: 1500
+	Power:
+		Amount: -75
+	Health:
+		HP: 125000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	-Integrity:
+	-GrantCondition@electronics:
+	Aircraft:
+		Speed: 145
+		TurnSpeed: 29
+		RepulsionSpeed: 29
+	Targetable@HEAL:
+		RequiresCondition: damaged
+		TargetTypes: Heal
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~wc2_humans_gryphonaviary
+		Queue: Aircraft, RAAircraft
+		Description: Flying attacker unit.\nMagical hammer can hit multiple targets in a line.\nStrong vs air units.
+	Armament@VISIBLE:
+		Weapon: wc2gryphonFireVisible
+		LocalOffset: 400,0,0
+		Name: primary
+		FireDelay: 3
+	AttackAircraft:
+		FacingTolerance: 0
+		AttackType: Hover
+		Armaments: primary, secondary
+	WithAttackAnimation:
+		Armament: primary
+		Sequence: shoot
+	WithAttackAnimation@haste:
+		Body: body-haste
+		Armament: primary
+		Sequence: shoot
+	WithAttackAnimation@slow:
+		Body: body-slow
+		Armament: primary
+		Sequence: shoot
+	Voiced:
+		VoiceSet: wc2voicehumangryphonrider
+	WithFacingSpriteBody:
+		RequiresCondition: (!wc2_cond_haste && !wc2_cond_slow) || (wc2_cond_haste && wc2_cond_slow)
+	WithFacingSpriteBody@Haste:
+		Name: body-haste
+		Sequence: idle-haste
+		RequiresCondition: wc2_cond_haste && !wc2_cond_slow
+	WithFacingSpriteBody@Slow:
+		Name: body-slow
+		Sequence: idle-slow
+		RequiresCondition: wc2_cond_slow && !wc2_cond_haste
+	ActorStatValues:
+		Upgrades: wc2_humans_upgrade_cannondamage, wc2_humans_upgrade_cannondamageii, wc2_humans_upgrade_armorstrength, wc2_humans_upgrade_armorstrengthii
+
+####################################################################################################
+# WC2 ORC BUILDINGS
+####################################################################################################

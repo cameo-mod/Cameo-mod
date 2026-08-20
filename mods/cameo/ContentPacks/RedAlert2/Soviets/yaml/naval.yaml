@@ -1,0 +1,48 @@
+ra2_soviets_seascorpion:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Template: ^BattleShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: actor_hyd.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra2_soviets_radar
+		Queue: Naval, RANaval
+		Description: actor_hyd.description
+	Mobile:
+		Speed: 120
+		TurnSpeed: 48
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armor:
+		Type: Light
+	Armament@AA:
+		Weapon: SeaScorpion_AA
+		Recoil: 43
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,400
+	Armament@AG:
+		Weapon: RA2FlakTrackGun
+		Recoil: 43
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,400
+	WithMuzzleOverlay:
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	Selectable:
+	Voiced:
+		VoiceSet: SeaScorpionVoice
+	RenderSprites:
+		PlayerPalette: playerra2

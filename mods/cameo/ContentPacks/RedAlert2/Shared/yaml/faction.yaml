@@ -1,0 +1,81 @@
+World:
+	FactionCA@ra2_allies:
+		Name: Allies RA2 #faction_ra2_allies.name
+		InternalName: ra2_allies
+		Game: Red Alert 2
+		Side: Red Alert 2
+		Description: faction_ra2_allies.description
+	FactionCA@ra2_soviets:
+		Name: Soviets RA2 #faction_ra2_soviets.name
+		InternalName: ra2_soviets
+		Game: Red Alert 2
+		Side: Red Alert 2
+		Description: faction_ra2_soviets.description
+	FactionCA@yuri:
+		Name: Yuri #faction_ra2_yuri.name
+		InternalName: yuri
+		Game: Red Alert 2
+		Side: Red Alert 2
+		Description: faction_ra2_yuri.description
+	FactionCA@Randomra2:
+		Name: Random RA2 #faction_ra2_random.name
+		InternalName: Randomra2
+		RandomFactionMembers: ra2_allies, ra2_soviets, yuri
+		Game: Red Alert 2
+		Side: Random
+		Description: faction_ra2_random.description
+	####################################################################################################
+	#		MPSTARTUNITS
+	####################################################################################################
+	StartingUnits@mcvra2allies:
+		Class: none
+		ClassName: MCV Only
+		Factions: ra2_allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		BaseActor: ra2_allies_alliedmobileconstructionvehicle
+	StartingUnits@mcvra2soviets:
+		Class: none
+		ClassName: MCV Only
+		Factions: ra2_soviets, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+		BaseActor: ra2_soviets_mobileconstructionvehicle
+	StartingUnits@mcvyuri:
+		Class: none
+		ClassName: MCV Only
+		Factions: yuri
+		BaseActor: yuri_mobileconstructionvehicle
+	StartingUnits@defaultra2allies:
+		Class: light
+		ClassName: Light Support
+		Factions: ra2_allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		BaseActor: ra2_allies_alliedmobileconstructionvehicle
+		SupportActors: ra2_allies_gi,ra2_allies_gi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_guardiangi,ra2_allies_ifv,ra2_allies_grizzlytank
+	StartingUnits@heavyra2allies:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: ra2_allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		BaseActor: ra2_allies_alliedmobileconstructionvehicle
+		SupportActors: ra2_allies_gi,ra2_allies_gi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_guardiangi,ra2_allies_ifv,ra2_allies_grizzlytank,ra2_allies_grizzlytank,ra2_allies_grizzlytank,ra2_allies_tankdestroyer,ra2_allies_ifv
+	StartingUnits@defaultra2soviets:
+		Class: light
+		ClassName: Light Support
+		Factions: ra2_soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+		BaseActor: ra2_soviets_mobileconstructionvehicle
+		SupportActors: ra2_soviets_conscript,ra2_soviets_conscript,ra2_soviets_conscript,ra2_soviets_flaktrooper,ra2_soviets_flaktrooper,ra2_soviets_rhinoheavytank,ra2_soviets_flaktrack
+	StartingUnits@heavyra2soviets:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: ra2_soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+		BaseActor: ra2_soviets_mobileconstructionvehicle
+		SupportActors: ra2_soviets_conscript,ra2_soviets_conscript,ra2_soviets_conscript,ra2_soviets_flaktrooper,ra2_soviets_flaktrooper,ra2_soviets_rhinoheavytank,ra2_soviets_flaktrack,ra2_soviets_rhinoheavytank,ra2_soviets_apocalypsetank
+	StartingUnits@defaultyuri:
+		Class: light
+		ClassName: Light Support
+		Factions: yuri
+		BaseActor: yuri_mobileconstructionvehicle
+		SupportActors: yuri_initiate,yuri_initiate,yuri_initiate,yuri_brute,yuri_brute,yrslav,yuri_gatlingtank,yuri_lashertank
+	StartingUnits@heavyyuri:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: yuri
+		BaseActor: yuri_mobileconstructionvehicle
+		SupportActors: yuri_initiate,yuri_initiate,yuri_initiate,yuri_brute,yuri_brute,yrslav,yuri_gatlingtank,yuri_lashertank,yuri_lashertank,yuri_lashertank,yuri_lashertank,yuri_gatlingtank
+

@@ -1,0 +1,224 @@
+forgotten_lcraft:
+	Inherits: ^BoatUnit
+	Inherits@cargo: ^CargoVehicle
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@ChemicalFuel: ^ChemicalFuel
+	Inherits@MyPet: ^MyPetAquatic
+	Inherits@JunkArmor: ^JunkArmor
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Warrior Ferry
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~forgotten_navalyard
+		Queue: Naval, RANaval
+		Description: Naval Transport, armed with rocket launchers, indefense aganist submarines
+	Mobile:
+		Speed: 60
+		TurnSpeed: 12
+		Locomotor: hover
+		RequiresCondition: !notmobile && !disabled
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7500
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 12
+		PassengerFacing: 0
+	Hovers:
+	Targetable@Hover:
+		TargetTypes: Water, Ship
+	Voiced:
+		VoiceSet: TSVehicle
+	Armament@PRIMARY:
+		Weapon: TSVanMissile
+		Recoil: 64
+		RecoilRecovery: 26
+		LocalOffset: 0,121,271, 0,-121,271
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TSChemVanMissile
+		Recoil: 64
+		RecoilRecovery: 26
+		LocalOffset: 0,121,271, 0,-121,271
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	AttackFrontal:
+		FacingTolerance: 5
+	WithMuzzleOverlay:
+	Turreted:
+		TurnSpeed: 12
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
+
+forgotten_juggerboat:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@ChemicalFuel: ^ChemicalFuel
+	Inherits@MyPet: ^MyPetAquatic
+	Inherits@JunkArmor: ^JunkArmor
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
+	Inherits@Unity: ^Unity
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~forgotten_navalyard
+		Queue: Naval, RANaval
+		Description: Siege light boat, attacks air and ground, long range aganist ground, can attack submarines
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Juggerboat
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 120
+		TurnSpeed: 24
+	Turreted:
+		TurnSpeed: 24
+		Offset: 512,0,0
+	Armament@AA:
+		Weapon: TSJuggerFlakAA_boat
+		Recoil: 43
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: -200,-100,0, -200,100,0
+	Armament@AG:
+		Weapon: TSJuggerboat90mm
+		Recoil: 43
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: -200,-100,0, -200,100,0
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TSChemJuggerboat90mm
+		Recoil: 43
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: -200,-100,0, -200,100,0
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: DepthCharge
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 5
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Voiced:
+		VoiceSet: TSVehicle
+	RenderSprites:
+		Image: forgotten_juggerboat
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
+
+forgotten_cannonboat:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^BattleShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@ChemicalFuel: ^ChemicalFuel
+	Inherits@MyPet: ^MyPetAquatic
+	Inherits@JunkArmor: ^JunkArmor
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Cannon Tug
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~forgotten_navalyard, forgotten_radar
+		Queue: Naval, RANaval
+		Description: Direct Attack boat, effective vs other ships, can attack submarines
+	Mobile:
+		Speed: 85
+		TurnSpeed: 17
+	Health:
+		HP: 125000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 17
+		Offset: 469,0,128
+	Armament:
+		Weapon: TSBoatcannon
+		LocalOffset: 200,-100,0, 200,100,0
+		LocalYaw: 64, -64
+		MuzzleSequence: muzzle
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TSChemBoatcannon
+		LocalOffset: 200,-100,0, 200,100,0
+		LocalYaw: 64, -64
+		MuzzleSequence: muzzle
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	Armament@DC1:
+		Weapon: DepthCharge
+		LocalOffset: 100,-100,0, 100,100,0
+		LocalYaw: 80, -80
+		MuzzleSequence: muzzle
+	Armament@DC2:
+		Weapon: DepthCharge
+		LocalOffset: 100,100,0, 100,-100,0
+		LocalYaw: 80, -80
+		FireDelay: 5
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Voiced:
+		VoiceSet: TSVehicle
+	DetectCloaked:
+		Range: 5000
+		DetectionTypes: Underwater
+	RenderDetectionCircle:
+	RenderSprites:
+		Image: forgotten_cannonboat
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
+
+####################################################################################################
+#		BUILDINGS
+####################################################################################################

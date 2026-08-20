@@ -1,0 +1,8 @@
+# rename_map_viniferafiend.yaml — Blue Tiberium Fiend renamed to Vinifera
+# Fiend (design decision 2026-07-09); tooltip and ids stay consistent.
+actors:
+	forgotten_bluetiberiumfiend: forgotten_viniferafiend
+	forgotten_promotion_bluetiberiumfiend: forgotten_promotion_viniferafiend
+files:
+	forgotten_bluetiberiumfiend.shp: forgotten_viniferafiend.shp
+	forgotten_bluetiberiumfiend_icon.png: forgotten_viniferafiend_icon.png

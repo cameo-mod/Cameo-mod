@@ -1,0 +1,329 @@
+^NodRankDecoration:
+	WithDecoration@RANK-1:
+		Image: nodrank
+		Sequence: rank-veteran-1
+		Palette: greyscale
+	WithDecoration@RANK-2:
+		Image: nodrank
+		Sequence: rank-veteran-2
+		Palette: greyscale
+	WithDecoration@RANK-3:
+		Image: nodrank
+		Sequence: rank-veteran-3
+		Palette: greyscale
+	WithDecoration@RANK-ELITE:
+		Image: nodrank
+		Sequence: rank-elite
+		Palette: greyscale
+
+^ElementalWarfare:
+	FirepowerMultiplier@td_nod_upgrade_elementalwarfare:
+		RequiresCondition: td_nod_upgrade_elementalwarfare
+		Modifier: 125
+	DamageMultiplier@td_nod_upgrade_elementalwarfare:
+		RequiresCondition: td_nod_upgrade_elementalwarfare
+		Modifier: 80
+	GrantConditionOnPrerequisite@td_nod_upgrade_elementalwarfare:
+		Condition: td_nod_upgrade_elementalwarfare
+		Prerequisites: td_nod_upgrade_elementalwarfare
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_elementalwarfare
+
+^EliteCapacitors:
+	FirepowerMultiplier@td_nod_upgrade_elitecapacitors:
+		RequiresCondition: td_nod_upgrade_elitecapacitors
+		Modifier: 130
+	ReloadDelayMultiplier@td_nod_upgrade_elitecapacitors:
+		RequiresCondition: td_nod_upgrade_elitecapacitors
+		Modifier: 115
+	RangeMultiplier@td_nod_upgrade_elitecapacitors:
+		RequiresCondition: td_nod_upgrade_elitecapacitors
+		Modifier: 115
+	RevealsShroudMultiplier@td_nod_upgrade_elitecapacitors:
+		RequiresCondition: td_nod_upgrade_elitecapacitors
+		Modifier: 115
+	DetectCloakedMultiplier@td_nod_upgrade_elitecapacitors:
+		RequiresCondition: td_nod_upgrade_elitecapacitors
+		Modifier: 115
+	GrantConditionOnPrerequisite@td_nod_upgrade_elitecapacitors:
+		Condition: td_nod_upgrade_elitecapacitors
+		Prerequisites: td_nod_upgrade_elitecapacitors
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_elitecapacitors
+
+^BurningLasers:
+	GrantConditionOnPrerequisite@td_nod_upgrade_burninglasers:
+		Condition: td_nod_upgrade_burninglasers
+		Prerequisites: td_nod_upgrade_burninglasers
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_burninglasers
+
+^ImprovedArtilleries:
+	FirepowerMultiplier@td_nod_upgrade_improvedartilleries:
+		RequiresCondition: td_nod_upgrade_improvedartilleries
+		Modifier: 125
+	RangeMultiplier@td_nod_upgrade_improvedartilleries:
+		RequiresCondition: td_nod_upgrade_improvedartilleries
+		Modifier: 125
+	RevealsShroudMultiplier@td_nod_upgrade_improvedartilleries:
+		RequiresCondition: td_nod_upgrade_improvedartilleries
+		Modifier: 150
+	GrantConditionOnPrerequisite@td_nod_upgrade_improvedartilleries:
+		Condition: td_nod_upgrade_improvedartilleries
+		Prerequisites: td_nod_upgrade_improvedartilleries
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_improvedartilleries
+
+^GuerillaTactics:
+	FirepowerMultiplier@td_nod_upgrade_guerillatactics:
+		RequiresCondition: td_nod_upgrade_guerillatactics
+		Modifier: 115
+	SpeedMultiplier@td_nod_upgrade_guerillatactics:
+		RequiresCondition: td_nod_upgrade_guerillatactics
+		Modifier: 110
+	RangeMultiplier@td_nod_upgrade_guerillatactics:
+		RequiresCondition: td_nod_upgrade_guerillatactics
+		Modifier: 105
+	RevealsShroudMultiplier@td_nod_upgrade_guerillatactics:
+		RequiresCondition: td_nod_upgrade_guerillatactics
+		Modifier: 105
+	DetectCloakedMultiplier@td_nod_upgrade_guerillatactics:
+		RequiresCondition: td_nod_upgrade_guerillatactics
+		Modifier: 105
+	GrantConditionOnPrerequisite@td_nod_upgrade_guerillatactics:
+		Condition: td_nod_upgrade_guerillatactics
+		Prerequisites: td_nod_upgrade_guerillatactics
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_guerillatactics
+
+^AdvancedGuerillaTactics:
+	FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics:
+		RequiresCondition: td_nod_upgrade_advancedguerillatactics
+		Modifier: 115
+	SpeedMultiplier@td_nod_upgrade_advancedguerillatactics:
+		RequiresCondition: td_nod_upgrade_advancedguerillatactics
+		Modifier: 110
+	RangeMultiplier@td_nod_upgrade_advancedguerillatactics:
+		RequiresCondition: td_nod_upgrade_advancedguerillatactics
+		Modifier: 105
+	RevealsShroudMultiplier@td_nod_upgrade_advancedguerillatactics:
+		RequiresCondition: td_nod_upgrade_advancedguerillatactics
+		Modifier: 105
+	DetectCloakedMultiplier@td_nod_upgrade_advancedguerillatactics:
+		RequiresCondition: td_nod_upgrade_advancedguerillatactics
+		Modifier: 105
+	GrantConditionOnPrerequisite@td_nod_upgrade_advancedguerillatactics:
+		Condition: td_nod_upgrade_advancedguerillatactics
+		Prerequisites: td_nod_upgrade_advancedguerillatactics
+
+^BlackMarketUpgrades:
+	GrantConditionOnPrerequisite@td_nod_upgrade_blackmarketupgrades:
+		Condition: td_nod_upgrade_blackmarketupgrades
+		Prerequisites: td_nod_upgrade_blackmarketupgrades
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_blackmarketupgrades
+
+^TiberiumInfusion:
+	GrantConditionOnPrerequisite@td_nod_upgrade_tiberiuminfusion:
+		Condition: td_nod_upgrade_tiberiuminfusion
+		Prerequisites: td_nod_upgrade_tiberiuminfusion
+	ChangesHealth@up_tiberiuminfusion1:
+		PercentageStep: 1
+		Delay: 10
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: td_nod_upgrade_tiberiuminfusion
+	ChangesHealth@up_tiberiuminfusion2:
+		Step: 10
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: td_nod_upgrade_tiberiuminfusion
+	ReloadDelayMultiplier@td_nod_upgrade_tiberiuminfusion:
+		RequiresCondition: td_nod_upgrade_tiberiuminfusion
+		Modifier: 90
+	SpeedMultiplier@td_nod_upgrade_tiberiuminfusion:
+		RequiresCondition: td_nod_upgrade_tiberiuminfusion
+		Modifier: 110
+	DamageMultiplier@td_nod_upgrade_tiberiuminfusion:
+		RequiresCondition: td_nod_upgrade_tiberiuminfusion
+		Modifier: 90
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_tiberiuminfusion
+
+^CyberneticModifications:
+	GrantConditionOnPrerequisite@td_nod_upgrade_cyberneticmodifications:
+		Condition: td_nod_upgrade_cyberneticmodifications
+		Prerequisites: td_nod_upgrade_cyberneticmodifications
+	Shielded:
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenAmount: 25
+		RegenInterval: 1
+		ShieldsUpCondition: armored
+		RequiresCondition: (td_nod_upgrade_cyberneticmodifications || shieldgen)
+		SelectionBarColor: FFFF88FF
+	GrantCondition@shieldpermanent:
+		Condition: shieldpermanent
+		RequiresCondition: td_nod_upgrade_cyberneticmodifications
+	Armor@td_nod_upgrade_cyberneticmodifications:
+		Type: Medium
+		RequiresCondition: armored
+	DamageMultiplier@td_nod_upgrade_cyberneticmodifications:
+		RequiresCondition: td_nod_upgrade_cyberneticmodifications
+		Modifier: 200
+	SpeedMultiplier@td_nod_upgrade_cyberneticmodifications:
+		RequiresCondition: td_nod_upgrade_cyberneticmodifications
+		Modifier: 120
+	ActorStatValues:
+		Upgrades: td_nod_upgrade_cyberneticmodifications
+
+td_nod_upgrade_guerillatactics:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Guerilla Tactics
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade_guerillatactics.description
+		Prerequisites: ~td_nod_communicationscenter, !td_nod_upgrade_guerillatactics
+	RenderSprites:
+		Image: guerillatacticsicon
+	ProvidesPrerequisite:
+
+td_nod_upgrade_tiberiuminfusion:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Tiberium Infusion
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade_tiberiuminfusion.description
+		Prerequisites: ~td_nod_communicationscenter, !td_nod_upgrade_tiberiuminfusion
+	RenderSprites:
+		Image: tiberiuminfusionicon
+	ProvidesPrerequisite:
+
+td_nod_upgrade_improvedartilleries:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Improved Artilleries
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade_improvedartilleries.description
+		Prerequisites: ~td_nod_communicationscenter, !td_nod_upgrade_improvedartilleries
+	RenderSprites:
+		Image: improvedartilleriesicon
+	ProvidesPrerequisite:
+
+td_nod_upgrade_blackmarketupgrades:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Black Market Upgrades
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_blackmarketupgrades.description
+		Prerequisites: ~td_nod_templeofnod, !td_nod_upgrade_blackmarketupgrades
+	RenderSprites:
+		Image: blackmarketupgradesicon
+	ProvidesPrerequisite:
+
+td_nod_upgrade_elementalwarfare:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Elemental Warfare
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_elementalwarfare.description
+		Prerequisites: ~td_nod_templeofnod, !td_nod_upgrade_elementalwarfare
+	RenderSprites:
+		Image: elementalwarfareicon
+	ProvidesPrerequisite:
+
+td_nod_upgrade_elitecapacitors:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Elite Capacitors
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_elitecapacitors.description
+		Prerequisites: ~td_nod_templeofnod, td_nod_templeprime, !td_nod_upgrade_elitecapacitors
+	RenderSprites:
+		Image: elitecapacitorsicon
+	ProvidesPrerequisite:
+
+td_nod_upgrade_burninglasers:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Burning Lasers
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_burninglasers.description
+		Prerequisites: ~td_nod_templeofnod, td_nod_templeprime, td_nod_upgrade_elitecapacitors, !td_nod_upgrade_burninglasers
+	RenderSprites:
+		Image: elitecapacitorsicon
+	ProvidesPrerequisite:
+
+td_nod_upgrade_cyberneticmodifications:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Cybernetic Modifications
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_cyberneticmodifications.description
+		Prerequisites: ~td_nod_templeofnod, td_nod_templeprime, !td_nod_upgrade_cyberneticmodifications
+	RenderSprites:
+		Image: cyberneticmodificationsicon
+	ProvidesPrerequisite:
+
+td_nod_upgrade_advancedguerillatactics:
+	Inherits: ^UpgradeTemplate
+	Tooltip:
+		Name: Advanced Guerilla Tactics
+	Valued:
+		Cost: 12500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_advancedguerillatactics.description
+		Prerequisites: ~td_nod_templeofnod, td_nod_templeprime, td_nod_upgrade_guerillatactics, !td_nod_upgrade_advancedguerillatactics
+	RenderSprites:
+		Image: advancedguerillatacticsicon
+	#ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: team_upgrade.up_advancedguerillatactics
+
+team_upgrade.up_advancedguerillatactics:
+	Inherits: ^ResearchedUpgradeTemplate
+	ProvidesPrerequisite:
+		Prerequisite: td_nod_upgrade_advancedguerillatactics
+	RenderSprites:
+		Image: advancedguerillatacticsicon
+	Tooltip:
+		Name: Advanced Guerrilla Tactics
+	Buildable:
+		Description: upgrade_advancedguerillatactics.description
+	PlayerDisplayUpgrade:

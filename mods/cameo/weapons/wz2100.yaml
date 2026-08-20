@@ -42,7 +42,7 @@
 2100MachineGunEffect:
 	Inherits: ^MachinegunsEffects
 	ReloadDelay: 20
-	Range: 4c512
+	Range: 4608
 2100MachineGunAA:
 	Inherits: 2100MachineGun
 	ValidTargets: Air
@@ -88,10 +88,10 @@ ScavMG2:
 AssaultGun:
 	Inherits: ^HeavyMG
 	ReloadDelay: 16
-	Range: 7c512
+	Range: 7680
 	Report: asltmg.aud
 	Warhead@1Dam: SpreadDamage
-		InvalidTargets: Wall
+		InvalidTargets: wall
 		Versus:
 		DamageTypes: Prone50Percent, TriggerProne, RippedApartDeath, 2100ResearchSteal
 	Warhead@2Eff: CreateEffect
@@ -109,7 +109,7 @@ TwinAssaultGun:
 	Inherits: AssaultGun
 	Warhead@1Dam: SpreadDamage
 		Damage: 6666 #1520
-		InvalidTargets: Wall
+		InvalidTargets: wall
 
 TwinAssaultGunAA:
 	Inherits: AssaultGunAA
@@ -118,7 +118,7 @@ TwinAssaultGunAA:
 
 2100MachinegunBunker:
 	ReloadDelay: 24
-	Range: 6c6
+	Range: 6150
 	Report: mgheavy.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -161,7 +161,7 @@ TwinAssaultGunAA:
 
 2100AA:
 	ReloadDelay: 14
-	Range: 10c0
+	Range: 10240
 	Report: asltmg.aud
 	ValidTargets: Air
 	Projectile: Bullet
@@ -181,23 +181,23 @@ TwinAssaultGunAA:
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@2Eff: CreateEffect
 		Explosions: piffs
-		ValidTargets: Air, Ground, Water, Trees
+		ValidTargets: Air, Ground, Water
 
 CommandoGun:
 	ReloadDelay: 6
-	Range: 9c0
+	Range: 9216
 	Report: 2100rotlsr.wav
 	TargetActorCenter: true
-	ValidTargets: Ground, Water, Structure, Wall
+	ValidTargets: Ground, Water, Structure, wall
 	Projectile: LaserZap
 		Duration: 13
 		Width: 0c64
 		Color: 83B9FC
 	Warhead@2Con: GrantExternalCondition
-		Condition: CommandoDebuff
+		Condition: SonicDebuff
 		Duration: 13
-		Range: 0c172
-		ValidTargets: Ground, Water, Structure, Wall
+		Range: 172
+		ValidTargets: Ground, Water, Structure, wall
 	Warhead@Validation: TargetDamage
 
 CommandoGunAA:
@@ -207,19 +207,19 @@ CommandoGunAA:
 
 2100RadarGun:
 	ReloadDelay: 30
-	Range: 12c0
+	Range: 12288
 	Report: 2100rotlsr.wav
 	TargetActorCenter: true
-	ValidTargets: Ground, Water, Structure, Wall
+	ValidTargets: Ground, Water, Structure, wall
 	Projectile: LaserZap
 		Duration: 1
 		Width: 0c32
 		Color: 83B9FC
 	Warhead@2Con: GrantExternalCondition
-		Condition: CommandoDebuff
+		Condition: SonicDebuff
 		Duration: 13
-		Range: 0c172
-		ValidTargets: Ground, Water, Structure, Wall
+		Range: 172
+		ValidTargets: Ground, Water, Structure, wall
 	Warhead@Validation: TargetDamage
 
 ####################################################################################################
@@ -229,7 +229,7 @@ CommandoGunAA:
 ScavPistol:
 	Inherits: ^LightMG
 	ReloadDelay: 7
-	Range: 3c0
+	Range: 3072
 	Report: mgbar1.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 500
@@ -238,7 +238,7 @@ ScavPistol:
 ScavPistolEffect:
 	Inherits: ^MachinegunsEffects
 	ReloadDelay: 7
-	Range: 3c0
+	Range: 3072
 ScavHighV:
 	Inherits: HighV
 	Report: mgheavy.aud
@@ -247,15 +247,15 @@ ScavHighV:
 ScavHighVEffect:
 	Inherits: ^MachinegunsEffects
 	ReloadDelay: 7
-	Range: 6c0
+	Range: 6144
 ScavChopperAG:
 	Inherits: HeliAGGun
 	Report: asltmg.aud
 ScavChopperAGEffect:
 	Inherits: ^MachinegunsEffects
 	ReloadDelay: 10
-	Range: 4c0
-	MinRange: 0c768
+	Range: 4096
+	MinRange: 768
 ScavChopperAA:
 	Inherits: HeliAAGun
 	Report: asltmg.aud
@@ -270,7 +270,7 @@ ScavVulcan:
 ScavShotgun:
 	Inherits: ScavChopperAG
 	ReloadDelay: 50
-	Range: 3c0
+	Range: 3072
 	Report: DSSHOTGN.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 1800
@@ -279,18 +279,18 @@ ScavShotgun:
 ScavShotgunEffect:
 	Inherits: ^MachinegunsEffects
 	ReloadDelay: 40
-	Range: 3c0
+	Range: 3072
 	Projectile: Bullet
 		Inaccuracy: 1c256
 	Burst: 4
 	BurstDelays: 0
 ScavShotgunG:
 	Inherits: ScavShotgun
-	Range: 5c0
+	Range: 5120
 ScavShotgunF:
 	Inherits: ScavShotgun
 	ReloadDelay: 40
-	Range: 3c0
+	Range: 3072
 	Report: DSSHOTGN.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 2000
@@ -302,7 +302,7 @@ ScavShotgunF:
 		Amount: 2
 ScavShotgunFG:
 	Inherits: ScavShotgunF
-	Range: 5c0
+	Range: 5120
 ####################################################################################################
 #		2100 Cannons
 ####################################################################################################
@@ -310,8 +310,8 @@ ScavShotgunFG:
 MortarShell:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 120
-	Range: 12c0
-	MinRange: 3c0
+	Range: 12288
+	MinRange: 3072
 	Report: mortar.aud
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -336,8 +336,8 @@ MortarShell:
 2100BombardShell:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 120
-	Range: 12c0
-	MinRange: 3c0
+	Range: 12288
+	MinRange: 3072
 	Report: mortar.aud
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -372,8 +372,8 @@ PepperpotShell:
 2100HotwizerShell:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 120
-	Range: 16c0
-	MinRange: 3c0
+	Range: 16384
+	MinRange: 3072
 	Report: mortar.aud
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -395,7 +395,7 @@ PepperpotShell:
 	Warhead@1DamDefenses: SpreadDamage
 		Spread: 56
 		Damage: 15000
-		ValidTargets: Defense, Wall
+		ValidTargets: Defense, wall
 		Versus:
 			None: 50
 			Wood: 75
@@ -409,7 +409,7 @@ PepperpotShell:
 wallcanonlight:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 30
-	Range: 6c0
+	Range: 6144
 	Report: smlcan.aud
 	Projectile: Bullet
 		Speed: 853
@@ -423,7 +423,7 @@ wallcanonlight:
 wall2100needle:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 30
-	Range: 6c0
+	Range: 6144
 	Report: smlcan.aud
 	Projectile: Bullet
 		Speed: 853
@@ -438,12 +438,12 @@ wall2100needle:
 		Condition: empdisable
 		ValidTargets: Vehicle
 		Duration: 60
-		Range: 0c768
+		Range: 768
 		AffectsParent: true
 wall2100hypervelcannon:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 30
-	Range: 7c0
+	Range: 7168
 	Report: smlcan.aud
 	Projectile: Bullet
 		Speed: 1200
@@ -458,7 +458,7 @@ wall2100hypervelcannon:
 wallcanonmedium:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 60
-	Range: 6c512
+	Range: 6656
 	Report: medcan.aud
 	Projectile:
 		Blockable: false
@@ -473,7 +473,7 @@ wallcanonmedium:
 2100wallcannonassault:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 20
-	Range: 6c512
+	Range: 6656
 	Report: medcan.aud
 	Projectile:
 		Blockable: false
@@ -492,7 +492,7 @@ wallcanonmedium:
 wallcanonheavy:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 90
-	Range: 7c0
+	Range: 7168
 	Report: lrgcan.aud
 	Projectile:
 		Blockable: false
@@ -518,7 +518,7 @@ lightcanon:
 	Inherits: APCGun
 	ReloadDelay: 30
 	Report: smlcan.aud
-	Range: 6c0
+	Range: 6144
 	ValidTargets: Air
 	Projectile: Bullet
 		Speed: 2c0
@@ -536,7 +536,7 @@ lightcanon:
 		Explosions: small_explosion_air
 2100FlakAA:
 	Inherits: 2100hypervelcannonAA
-	Range: 10c0
+	Range: 10240
 	Burst: 2
 	ReloadDelay: 18
 	BurstDelays: 6
@@ -570,7 +570,7 @@ ScavCannon:
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath, 2100ResearchSteal
 IceCreamMortar:
 	Inherits: MortarShell
-	MinRange: 1c512
+	MinRange: 1536
 	ReloadDelay: 70
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: mpodexpl.aud
@@ -582,7 +582,7 @@ IceCreamMortar:
 
 2100Rockets:
 	ReloadDelay: 40
-	Range: 7c512
+	Range: 7680
 	Report: rocket.aud
 	ValidTargets: Ground, Air
 	Projectile: MissileCA
@@ -610,7 +610,7 @@ IceCreamMortar:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, 2100ResearchSteal
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: mpodexpl.aud
@@ -624,14 +624,14 @@ IceCreamMortar:
 
 RocketTower:
 	Inherits: 2100Rockets
-	Range: 10c0
+	Range: 10240
 	Projectile: MissileCA
 		RangeLimit: 20c0
 		Blockable: false
 
 TruckRockets:
 	Inherits: 2100Rockets
-	Range: 6c0
+	Range: 6144
 	Burst: 2
 	BurstDelays: 10
 	Warhead@1Dam: SpreadDamage
@@ -641,8 +641,8 @@ TruckRockets:
 ScavAGM:
 	Inherits: 2100Rockets
 	ReloadDelay: 12
-	Range: 5c0
-	MinRange: 1c256
+	Range: 5120
+	MinRange: 1280
 	ValidTargets: Ground
 	Projectile: MissileCA
 		Arm: 1
@@ -675,7 +675,7 @@ ScavAAM:
 TankKillerTower:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 120
-	Range: 8c512
+	Range: 8704
 	Report: rocket.aud
 	Burst: 2
 	BurstDelays: 15
@@ -703,7 +703,7 @@ TankKillerTower:
 TankKiller:
 	Inherits: TankKillerTower
 	ReloadDelay: 90
-	Range: 7c512
+	Range: 7680
 	Projectile: MissileCA
 		Blockable: true
 2100LancerTower:
@@ -730,7 +730,7 @@ TankKiller:
 2100Lancer:
 	Inherits: 2100LancerTower
 	ReloadDelay: 90
-	Range: 7c512
+	Range: 7680
 	Projectile: MissileCA
 		Blockable: true
 2100LancerCyborg:
@@ -742,7 +742,7 @@ TankKiller:
 	Warhead@1DamDefenses: SpreadDamage
 		Spread: 56
 		Damage: 25000
-		ValidTargets: Defense, Wall
+		ValidTargets: Defense, wall
 		Versus:
 			None: 50
 			Wood: 75
@@ -755,7 +755,7 @@ TankKiller:
 ScavJeepRK:
 	Inherits: 2100Rockets
 	ReloadDelay: 70
-	Range: 6c0
+	Range: 6144
 	Burst: 6
 	BurstDelays: 5
 	Projectile: MissileCA
@@ -771,7 +771,7 @@ ScavBuggyRK:
 	Inherits: 2100Rockets
 	ValidTargets: Ground
 	ReloadDelay: 100
-	Range: 9c0
+	Range: 9216
 	Burst: 8
 	BurstDelays: 5
 	Projectile: MissileCA
@@ -783,7 +783,7 @@ ScavBuggyRK:
 2100RippleRocket:
 	Inherits: 2100LancerTower
 	ReloadDelay: 150
-	Range: 36c0
+	Range: 36864
 	Burst: 7
 	BurstDelays: 5
 	Projectile: MissileCA
@@ -803,7 +803,7 @@ HealBuilding:
 	ReloadDelay: 5
 	Burst: 2
 	BurstDelays: 3
-	Range: 3c512
+	Range: 3584
 	Report: 2100build1.wav, 2100build2.wav, 2100build3.wav, 2100build4.wav
 	ValidTargets: Repairing, ivanattached
 	Projectile: LaserZap
@@ -821,7 +821,7 @@ HealBuilding:
 
 HealUnit:
 	ReloadDelay: 5
-	Range: 2c512
+	Range: 2560
 	ValidTargets: Healing, ivanattached
 	Projectile: LaserZap
 		Color: 99FF99
@@ -838,7 +838,7 @@ HealUnit:
 
 HealUnitFix:
 	ReloadDelay: 5
-	Range: 3c512
+	Range: 3584
 	ValidTargets: Healing, ivanattached
 	Projectile: LaserZap
 		Color: 99FF99
@@ -855,7 +855,7 @@ HealUnitFix:
 
 FlamerBunker:
 	Inherits: 2100Flamer
-	Range: 4c512
+	Range: 4608
 	Report: flmthrow.aud
 	Warhead@1Dam: SpreadDamage
 		Spread: 468
@@ -871,7 +871,7 @@ FlamerBunker:
 	Inherits: Flamer
 	Inherits@Rad: 2100FlameRadiation
 	Burst: 1
-	Range: 1c512
+	Range: 1536
 	Warhead@1Dam: TargetDamage
 		Damage: 250
 	Projectile: InstantHit
@@ -883,7 +883,7 @@ FlamerBunker:
 		Duration: 50
 		Speed: 8, 24
 		TurnRate: 4
-		Image: burn-l
+		Image: burn_l
 		Sequences: idle
 		Palette: alpha25
 		Weapon: CHFlame
@@ -894,7 +894,7 @@ FlamerBunker:
 	ReloadDelay: 120
 	BurstDelays: 3
 	Report: flmthrow.aud
-	Range: 5c0
+	Range: 5120
 	Projectile: Bullet
 		Speed: 200
 		Image: flameall
@@ -929,7 +929,7 @@ HealBuilding:
 	ReloadDelay: 5
 	Burst: 2
 	BurstDelays: 3
-	Range: 3c512
+	Range: 3584
 	ValidTargets: Repairing, ivanattached
 	Projectile: LaserZap
 		Color: 8888FF
@@ -946,7 +946,7 @@ HealBuilding:
 
 HealUnit:
 	ReloadDelay: 5
-	Range: 2c512
+	Range: 2560
 	ValidTargets: Healing, ivanattached
 	Projectile: LaserZap
 		Color: 99FF99
@@ -963,7 +963,7 @@ HealUnit:
 
 HealUnitFix:
 	ReloadDelay: 5
-	Range: 3c512
+	Range: 3584
 	ValidTargets: Healing, ivanattached
 	Projectile: LaserZap
 		Color: 99FF99
@@ -1000,7 +1000,7 @@ FiretruckFlamer:
 ^2100TurretHusk:
 	Inherits: ^GeneralsLightHusks
 	ReloadDelay: 60
-	Range: 5c0
+	Range: 5120
 	ValidTargets: Ground, Air
 	Projectile: Bullet
 		BounceCount: 3
@@ -1016,7 +1016,7 @@ FiretruckFlamer:
 	Warhead@Shrapnel: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: 2100lmghusk
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: d2k_building
 		ImpactSounds: EXPLSML2.WAV
 		ImpactActors: false
@@ -1032,7 +1032,7 @@ FiretruckFlamer:
 	Warhead@Shrapnel: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: 2100rpodhusk
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Explosions: d2k_building
 		ImpactSounds: EXPLSML2.WAV
 		ImpactActors: false

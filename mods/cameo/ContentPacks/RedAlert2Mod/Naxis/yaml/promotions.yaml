@@ -1,0 +1,133 @@
+naxis_promotion_sarubiamodel:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Sarubia Model
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Promotions
+		Description: Enables construction of the Sarubia.
+		Prerequisites: ~naxis_constructionyard, !naxis_promotion_sarubiamodel, rank1
+	RenderSprites:
+		Image: naxis_nop03sarubia
+	ProvidesPrerequisite:
+
+naxis_promotion_donnerschlagmodelandotheradvancedmissiles:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Donnerschlag Model and other advanced Missiles
+	Buildable:
+		BuildPaletteOrder: 113
+		Queue: Promotions
+		Description: Enables construction of the Donnerschlag.
+		Prerequisites: ~naxis_constructionyard, naxis_promotion_sarubiamodel, !naxis_promotion_donnerschlagmodelandotheradvancedmissiles, rank1
+	RenderSprites:
+		Image: naxis_donnerschlag
+	ProvidesPrerequisite:
+
+naxis_promotion_shoekarnandking:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Shoe, Karn, and King
+	Buildable:
+		BuildPaletteOrder: 116
+		Queue: Promotions
+		Description: Enables construction of the Shoe Karn.
+		Prerequisites: ~naxis_constructionyard, naxis_promotion_donnerschlagmodelandotheradvancedmissiles, !naxis_promotion_shoekarnandking, rank1
+	RenderSprites:
+		Image: naxis_shoekarn
+	ProvidesPrerequisite:
+
+naxis_promotion_bossestanks:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Bosses Tanks
+	Buildable:
+		BuildPaletteOrder: 119
+		Queue: Promotions
+		Description: Enables construction of the Iron Nokana.
+		Prerequisites: ~naxis_constructionyard, naxis_promotion_shoekarnandking, !naxis_promotion_bossestanks, rank1
+	RenderSprites:
+		Image: naxis_nokana
+	ProvidesPrerequisite:
+
+#		Army
+
+naxis_promotion_generationiitanks:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Generation II tanks
+	Buildable:
+		BuildPaletteOrder: 111
+		Queue: Promotions
+		Description: Enables construction of King Tiger, Brummbar, and Jagdpanzer vehicles.
+		Prerequisites: ~naxis_constructionyard, !naxis_promotion_generationiitanks, rank1
+	RenderSprites:
+		Image: naxis_kingtigerheavytank
+	ProvidesPrerequisite:
+
+naxis_promotion_heavyvehicles:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Heavy Vehicles
+	Buildable:
+		BuildPaletteOrder: 114
+		Queue: Promotions
+		Description: Enables construction of Maus and Sturmtiger vehicles.
+		Prerequisites: ~naxis_constructionyard, naxis_promotion_generationiitanks, !naxis_promotion_heavyvehicles, rank1
+	RenderSprites:
+		Image: naxis_sturmtiger
+	ProvidesPrerequisite:
+
+naxis_promotion_betterparatanks:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Better Paratanks
+	Buildable:
+		BuildPaletteOrder: 117
+		Queue: Promotions
+		Description: Upgrades Paratanks Support with more units.
+		Prerequisites: ~naxis_constructionyard, naxis_promotion_heavyvehicles, !naxis_promotion_betterparatanks, rank1
+	RenderSprites:
+		Image: tiger.nax
+	ProvidesPrerequisite:
+
+naxis_promotion_theratte:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: The Ratte
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Promotions
+		Description: Enables construction of the Ratte.
+		Prerequisites: ~naxis_constructionyard, naxis_promotion_betterparatanks, !naxis_promotion_theratte, rank1
+	RenderSprites:
+		Image: naxis_ratte
+	ProvidesPrerequisite:
+
+#		Soldats
+
+naxis_promotion_partisans:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Partisans
+	Buildable:
+		BuildPaletteOrder: 112
+		Queue: Promotions
+		Description: Enables construction of Partisan.
+		Prerequisites: ~naxis_constructionyard, !naxis_promotion_partisans, rank1
+	RenderSprites:
+		Image: naxis_naximercenarysniper
+	ProvidesPrerequisite:
+
+naxis_promotion_shrek:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: Shrek
+	Buildable:
+		BuildPaletteOrder: 115
+		Queue: Promotions
+		Description: Enables construction of Panzershrek.
+		Prerequisites: ~naxis_constructionyard, naxis_promotion_partisans, !naxis_promotion_shrek, rank1
+	RenderSprites:
+		Image: naxis_panzerschreck
+	ProvidesPrerequisite:

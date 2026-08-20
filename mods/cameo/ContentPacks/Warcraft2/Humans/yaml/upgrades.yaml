@@ -1,0 +1,366 @@
+wc2_humans_upgrade_betterfarm:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Better Farm
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~!wc2_humans_upgrade_betterfarm, ~wc2_humans_farm, wc2_humans_keep
+		Queue: Research
+		Description: Gives Farms +50% Supply and HP (150% total)
+		Icon: icon
+	RenderSprites:
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_bestfarm:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Best Farm
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~wc2_humans_upgrade_betterfarm, ~wc2_humans_farm, wc2_humans_castle
+		Queue: Research
+		Description: Gives Farms +100% Supply and HP (200% total)
+		Icon: icon
+	RenderSprites:
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_swordstrength:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Sword Strength
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases melee damage by 15%. Double Effect for Footmen.
+		Prerequisites: ~!wc2_humans_upgrade_swordstrength, ~wc2_humans_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_humans_upgrade_swordstrength
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_swordstrengthii:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Sword Strength II
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases melee damage by 35%. Double Effect for Footmen.
+		Prerequisites: !wc2_humans_upgrade_swordstrengthii, ~wc2_humans_upgrade_swordstrength, ~wc2_humans_blacksmith, wc2_humans_castle
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_humans_upgrade_swordstrengthii
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_armorstrength:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Armor Strength
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Increases damage resistance of all land units by 10%. Footmen have 15% damage resistance instead.
+		Prerequisites: ~!wc2_humans_upgrade_armorstrength, ~wc2_humans_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_humans_upgrade_armorstrength
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_armorstrengthii:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Armor Strength II
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Increases damage resistance of all land units by 20%. Footmen have 30% damage resistance instead.
+		Prerequisites: !wc2_humans_upgrade_armorstrengthii, ~wc2_humans_upgrade_armorstrength, ~wc2_humans_blacksmith, wc2_humans_castle
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_humans_upgrade_armorstrengthii
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_arrowstrength:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Arrow Strength
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases arrow damage dealt by Archers and Guard Towers by 15%.
+		Prerequisites: ~!wc2_humans_upgrade_arrowstrength, ~wc2_humans_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_humans_upgrade_arrowstrength
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_arrowstrengthii:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Arrow Strength II
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases arrow damage by Archers and Guard Towers by 35%.
+		Prerequisites: !wc2_humans_upgrade_arrowstrengthii, ~wc2_humans_upgrade_arrowstrength, ~wc2_humans_blacksmith, wc2_humans_castle
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_humans_upgrade_arrowstrengthii
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_warcraft3footman:
+	Inherits: ^UnitUpgradeTemplate
+	Tooltip:
+		Name:  Warcraft 3 Footman
+	Buildable:
+		Queue: Research
+		Description: Upgrades the Footman into the Warcraft 3 Footman
+		Prerequisites: ~!wc2_humans_upgrade_warcraft3footman, ~wc2_humans_blacksmith, wc2_humans_castle
+	RenderSprites:
+		Image: wc2_humans_warcraft3footman
+
+wc2_humans_upgrade_ranger:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Ranger
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Intense training is given to Elven Archers.\nIncreases damage resistance by 20% and unlocks upgrades for the Ranger.
+		Prerequisites: ~!wc2_humans_upgrade_ranger, ~wc2_humans_blacksmith ## when keep/castle are fixed, will require Castle
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_humans_upgrade_ranger
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_highelvenarcher:
+	Inherits: ^UnitUpgradeTemplate
+	Tooltip:
+		Name: High Elven Archer
+	Buildable:
+		Queue: Research
+		Description: Upgrades the Elven Ranger into the High Elven Archer
+		Prerequisites: ~!wc2_humans_upgrade_highelvenarcher, ~wc2_humans_blacksmith, wc2_humans_upgrade_ranger, wc2_humans_castle
+	RenderSprites:
+		Image: wc2_humans_highelvenarcher
+
+wc2_humans_upgrade_rangerlongbow:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Ranger Longbow
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Increases range of Rangers by 20%.
+		Prerequisites: ~!wc2_humans_upgrade_rangerlongbow, ~wc2_humans_upgrade_ranger, ~wc2_humans_blacksmith, wc2_humans_castle
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_humans_upgrade_rangerlongbow
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_rangerscouting:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Ranger Scouting
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Research
+		Description: Increases vision range of Rangers by 20%.
+		Prerequisites: ~!wc2_humans_upgrade_rangerscouting, ~wc2_humans_upgrade_ranger, ~wc2_humans_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_humans_upgrade_rangerscouting
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_rangermarksman:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Ranger Marksman
+	Buildable:
+		BuildPaletteOrder: 4
+		Queue: Research
+		Description: Increases arrow damage of Rangers by 25%.
+		Prerequisites: ~!wc2_humans_upgrade_rangermarksman, ~wc2_humans_upgrade_ranger, ~wc2_humans_blacksmith, wc2_humans_keep
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_humans_upgrade_rangermarksman
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_ballistastrength:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Ballista Strength
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Research
+		Description: Increases ballista damage dealt by Ballista by 15%
+		Prerequisites: ~!wc2_humans_upgrade_ballistastrength, ~wc2_humans_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_humans_upgrade_ballistastrength
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_ballistastrengthii:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Ballista Strength II
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Research
+		Description: Increases ballista damage dealt by Ballista by 35%
+		Prerequisites: !wc2_humans_upgrade_ballistastrengthii, ~wc2_humans_upgrade_ballistastrength, ~wc2_humans_blacksmith, wc2_humans_castle
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_humans_upgrade_ballistastrengthii
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_cannondamage:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Cannon Damage
+	Buildable:
+		BuildPaletteOrder: 4
+		Queue: Research
+		Description: Increases Cannon Damage dealt by Naval Vessels and Cannon Towers by 15%
+		Prerequisites: ~!wc2_humans_upgrade_cannondamage, ~wc2_humans_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_humans_upgrade_cannondamage
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_cannondamageii:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Cannon Damage II
+	Buildable:
+		BuildPaletteOrder: 4
+		Queue: Research
+		Description: Increases Cannon Damage dealt by Naval Vessels and Cannon Towers by 35%
+		Prerequisites: !wc2_humans_upgrade_cannondamageii, ~wc2_humans_upgrade_cannondamage, ~wc2_humans_blacksmith, wc2_humans_castle
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_humans_upgrade_cannondamageii
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_paladin:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Paladin
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Perform holy rituals to turn your noble Knights into righteous Paladins!\nPaladins are more powerful and can cast Heal.\nIncreases damage resistance, melee damage and speed by 25%.
+		Prerequisites: ~!wc2_humans_upgrade_paladin, ~wc2_humans_blacksmith, wc2_humans_church
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_humans_upgrade_paladin
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_warcraft3knightwip:
+	Inherits: ^UnitUpgradeTemplate
+	Tooltip:
+		Name: Warcraft 3 Knight (WIP)
+	Buildable:
+		Queue: Research
+		Description: Upgrades the Paladin into the Warcraft 3 Knight (WIP)
+		Prerequisites: ~!wc2_humans_upgrade_warcraft3knightwip, ~wc2_humans_blacksmith, wc2_humans_upgrade_paladin, wc2_humans_church
+	RenderSprites:
+		Image: wc2_humans_warcraft3knight
+
+wc2_humans_upgrade_healing:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Healing
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Paladins can now heal.\nToggle Paladin's modes by deploying them.\nHealing uses mana.
+		Prerequisites: ~wc2_humans_upgrade_paladin, ~!wc2_humans_upgrade_healing, ~wc2_humans_blacksmith, wc2_humans_church
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_humans_upgrade_healing
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_exorcism:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Exorcism
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Paladins can now exorcise.\nToggle Paladin's modes by deploying them.\nExorcism only affects undead units.\nGood vs Orc Death Knight and Skeleton.
+		Prerequisites: ~wc2_humans_upgrade_paladin, ~!wc2_humans_upgrade_exorcism, ~wc2_humans_blacksmith, wc2_humans_church
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_humans_upgrade_exorcism
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_slow:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Slow
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Research
+		Description: Allows Mages to cast Slow.\nToggle Mage's modes by deploying them.\nSlows down affected target.\nAffects movement and attack speed.\nUses 50 mana.
+		Prerequisites: ~!wc2_humans_upgrade_slow, ~wc2_humans_blacksmith, wc2_humans_magetower
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_humans_upgrade_slow
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_polymorph:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Polymorph
+	Buildable:
+		BuildPaletteOrder: 30
+		Queue: Research
+		Description: Allows Mages to cast Polymorph.\nToggle Mage's modes by deploying them.\nTurns target into a\nharmless critter.\nUses 200 mana.
+		Prerequisites: ~!wc2_humans_upgrade_polymorph, ~wc2_humans_blacksmith, wc2_humans_magetower
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_humans_upgrade_polymorph
+	ProvidesPrerequisite:
+
+wc2_humans_upgrade_blizzard:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Blizzard
+	Buildable:
+		BuildPaletteOrder: 40
+		Queue: Research
+		Description: Allows Mages to cast Blizzard.\nToggle Mage's modes by deploying them.\nAOE damage spell.\nUses 25 mana.
+		Prerequisites: ~!wc2_humans_upgrade_blizzard, ~wc2_humans_blacksmith, wc2_humans_magetower
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_humans_upgrade_blizzard
+	ProvidesPrerequisite:
+
+####################################################################################################
+# WC2 ORC UPGRADES
+####################################################################################################

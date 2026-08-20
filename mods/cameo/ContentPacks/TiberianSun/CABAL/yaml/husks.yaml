@@ -1,0 +1,272 @@
+cabal_overkillgunship_husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Overkill Gunship
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 150
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: cabal_overkillgunship
+		PlayerPalette: player_rgba
+
+cabal_hunterdronecarrier_husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Hunter Drone Carrier
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 170
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: cabal_hunterdronecarrier
+		PlayerPalette: player_rgba
+
+cabal_hunterdrone_husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Hunter Drone
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 150
+	RenderSprites:
+		Image: cabal_hunterdrone
+		PlayerPalette: player_rgba
+
+cabal_hunterkillermk1_husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Hunter Killer
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 150
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: cabal_hunterkillermk1
+
+cabal_cyborgassassin_husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Cyborg Assassin
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 150
+	RenderSprites:
+		Image: cabal_cyborgassassin
+		PlayerPalette: player_rgba
+
+cabal_manticore_backup:
+	Inherits: cabal_manticore
+	Valued:
+		Cost: 1400
+	Tooltip:
+		Name: Manticore (Backup Mode)
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~cabal_mechfactory, ~disabled
+		Queue: Disabled
+		Description: HuskMode
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 0
+		Speed: 0
+	Health:
+		HP: 200000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: cabal_manticore
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	-SpawnActorOnDeath@backup:
+	GrantPeriodicCondition@rebuild:
+		Condition: buildingrebirth
+		CooldownDuration: 40
+		PauseOnCondition: chronobeamed
+	TransformOnCondition@buildingrebirth:
+		RequiresCondition: buildingrebirth
+		IntoActor: cabal_manticore
+		SkipMakeAnims: true
+	WithColoredOverlay@backup:
+		Color: 000000b4
+
+cabal_artilleryspider_backup:
+	Inherits: cabal_artilleryspider
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Artillery Spider (Backup Mode)
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~cabal_mechfactory, ~disabled
+		Queue: Disabled
+		Description: HuskMode
+	Mobile:
+		Locomotor: tracked
+		Speed: 0
+		TurnSpeed: 0
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: tsartspid
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+ 	-SpawnActorOnDeath@backup:
+	GrantPeriodicCondition@rebuild:
+		Condition: buildingrebirth
+		CooldownDuration: 20
+		PauseOnCondition: chronobeamed
+	TransformOnCondition@buildingrebirth:
+		RequiresCondition: buildingrebirth
+		IntoActor: cabal_artilleryspider
+		SkipMakeAnims: true
+	WithColoredOverlay@backup:
+		Color: 000000b4
+
+cabal_tarantula_backup:
+	Inherits: cabal_tarantula
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Tarantula (Backup Mode)
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~cabal_mechfactory, ~disabled
+		Queue: Disabled
+		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: tracked
+		Speed: 0
+		TurnSpeed: 0
+	Health:
+		HP: 500000
+	Repairable:
+		HpPerStep: 5000
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	BodyOrientation:
+		QuantizedFacings: 32
+		UseClassicPerspectiveFudge: False
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tstnkspid
+ 	-SpawnActorOnDeath@backup:
+	GrantPeriodicCondition@rebuild:
+		Condition: buildingrebirth
+		CooldownDuration: 100
+		PauseOnCondition: chronobeamed
+	TransformOnCondition@buildingrebirth:
+		RequiresCondition: buildingrebirth
+		IntoActor: cabal_tarantula
+		SkipMakeAnims: true
+	WithColoredOverlay@backup:
+		Color: 000000b4
+
+cabal_widow_backup:
+	Inherits: cabal_widow
+	Valued:
+		Cost: 3500
+	Tooltip:
+		Name: Widow (Backup Mode)
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~cabal_mechfactory, ~disabled
+		Queue: Disabled
+		Description: HuskMode
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 0
+		Speed: 0
+	Health:
+		HP: 300000
+	Repairable:
+		HpPerStep: 5000
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		Image: tstnkspid
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	-SpawnActorOnDeath@backup:
+	GrantPeriodicCondition@rebuild:
+		Condition: buildingrebirth
+		CooldownDuration: 60
+		PauseOnCondition: chronobeamed
+	TransformOnCondition@buildingrebirth:
+		RequiresCondition: buildingrebirth
+		IntoActor: cabal_widow
+		SkipMakeAnims: true
+	WithColoredOverlay@backup:
+		Color: 000000b4
+
+cabal_avatar_backup:
+	Inherits: cabal_avatar
+	Valued:
+		Cost: 7500
+	Tooltip:
+		Name: Avatar (Backup Mode)
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~cabal_mechfactory, ~disabled
+		Queue: Disabled
+		Description: HuskMode
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 0
+		Speed: 0
+	Health:
+		HP: 2500000
+	Repairable:
+		HpPerStep: 5000
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		Image: cabal_avatar
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: run
+		ValidMovementTypes: Horizontal, Turn
+	-SpawnActorOnDeath@backup:
+	GrantPeriodicCondition@rebuild:
+		Condition: buildingrebirth
+		CooldownDuration: 500
+		PauseOnCondition: chronobeamed
+	TransformOnCondition@buildingrebirth:
+		RequiresCondition: buildingrebirth
+		IntoActor: cabal_avatar
+		SkipMakeAnims: true
+	WithColoredOverlay@backup:
+		Color: 000000b4

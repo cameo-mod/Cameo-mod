@@ -1,0 +1,606 @@
+schwarzermond_ubermensch:
+	Inherits: ^Soldier
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
+	Inherits@Propaganda: ^NaxiMoonPropaganda
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@LUpgrade: ^NaxiCrystalLens
+	Inherits@LUpgrade2: ^NaxiAmplifiedLens
+	Inherits@VrilInfusion: ^NaxiVrilInfusion
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Übermensch
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~schwarzermond_barracks, schwarzermond_techcenter, ~schwarzermond_promotion_ubermensch
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 64
+	Health:
+		HP: 64000
+	ChangesHealth@SelfHealing:
+		Step: 64
+	Armament@PRIMARY:
+		Weapon: UbermenschLaser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@ELITE:
+		Weapon: UbermenschLaser_elite
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: UbermenschLaser
+		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: UbermenschLaser_elite
+		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@PRIMARY_UP:
+		Weapon: Lunar_YellowUbermenschLaser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@ELITE_UP:
+		Weapon: Lunar_YellowUbermenschLaser_elite
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONED_UP:
+		Name: garrisoned
+		Weapon: Lunar_YellowUbermenschLaser
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONEDELITE_UP:
+		Name: garrisoned
+		Weapon: Lunar_YellowUbermenschLaser_elite
+		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@PRIMARY_AMP:
+		Weapon: Lunar_AmplifiedUbermenschLaser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
+	Armament@ELITE_AMP:
+		Weapon: Lunar_AmplifiedUbermenschLaser_elite
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONED_AMP:
+		Name: garrisoned
+		Weapon: Lunar_AmplifiedUbermenschLaser
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONEDELITE_AMP:
+		Name: garrisoned
+		Weapon: Lunar_AmplifiedUbermenschLaser_elite
+		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
+	AttackFrontal:
+		FacingTolerance: 0
+	Crushable:
+		CrushClasses: vehicle
+	Voiced:
+		VoiceSet: NaxiUbermenVoice
+schwarzermond_parzival:
+	Inherits: ^Soldier
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
+	Inherits@Propaganda: ^NaxiMoonPropaganda
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@VrilInfusion: ^NaxiVrilInfusion
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Parzival
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 100
+		Prerequisites: ~schwarzermond_barracks, schwarzermond_techcenter, ~schwarzermond_promotion_parzival
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 120000
+	ChangesHealth@SelfHealing:
+		Step: 120
+	Armament@PRIMARY:
+		Weapon: BlackHoleMaker
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: BlackHoleMaker_elite
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: BlackHoleMaker
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: BlackHoleMaker_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	AnnounceOnKill:
+	Voiced:
+		VoiceSet: NaxiUbermenVoice
+schwarzermond_noidmgarmor:
+	Inherits: ^Walker
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
+	Inherits@Propaganda: ^NaxiMoonPropaganda
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@LUpgrade: ^NaxiCrystalLens
+	Inherits@LUpgrade2: ^NaxiAmplifiedLens
+	Inherits@VrilInfusion: ^NaxiVrilInfusion
+	Selectable:
+		Bounds: 600, 600, 0, -125
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Noid MG Armor
+	Buildable:
+		BuildPaletteOrder: 75
+		Prerequisites: ~schwarzermond_barracks, schwarzermond_radar, ~schwarzermond_promotion_noidmg
+		Queue: Infantry, RAInfantry
+		Description: actor_aamecha.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+		Locomotor: tracked
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 50
+	# W21 layer stack, R5: while the plating holds, BOTH armors are enabled and the
+	# warhead AVERAGES them (AreaDamage.MultiArmorCombination) — so anti-infantry fire
+	# is never useless against a plated walker and AP fire is never oppressive. Once
+	# the bar is stripped only the body armor is left. NEVER let two armors multiply.
+	Armor:                      # body — always on
+		Type: Plate
+	Armor@Plating:              # averaged with the body while the plating bar holds
+		Type: Superheavy
+		RequiresCondition: plating_up && !shielded
+	ArmorPlating:
+		MaxPercentageStrength: 50
+		PercentageRegenAmount: 1
+		RegenInterval: 25
+		RampTicks: 125
+		FullCondition: plating_up
+	Armament@PRIMARY:
+		Weapon: NaxiMP40Laser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@ELITE:
+		Weapon: NaxiMP40Laser_elite
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@PRIMARY_UP:
+		Weapon: Lunar_YellowMP40Laser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@ELITE_UP:
+		Weapon: Lunar_YellowMP40Laser_elite
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@PRIMARY_AMP:
+		Weapon: Lunar_AmplifiedMP40Laser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
+	Armament@ELITE_AMP:
+		Weapon: Lunar_AmplifiedMP40Laser_elite
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
+	AttackFrontal:
+		FacingTolerance: 20
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+	Voiced:
+		VoiceSet: NaxiRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+schwarzermond_noidharvester:
+	Inherits: ^Walker
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
+	Inherits@Propaganda: ^NaxiMoonPropaganda
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Selectable:
+		Bounds: 600, 600, 0, -125
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Noid Harvester
+	Buildable:
+		BuildDuration: 250
+		BuildDurationModifier: 100
+		BuildPaletteOrder: 75
+		Prerequisites: ~schwarzermond_orerefinery
+		Queue: Infantry, RAInfantry
+		Description: actor_aamecha.description
+	Mobile:
+		Speed: 50
+		TurnSpeed: 20
+		Locomotor: chem
+	Health:
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 30
+	# W21 layer stack, R5: while the plating holds, BOTH armors are enabled and the
+	# warhead AVERAGES them (AreaDamage.MultiArmorCombination) — so anti-infantry fire
+	# is never useless against a plated walker and AP fire is never oppressive. Once
+	# the bar is stripped only the body armor is left. NEVER let two armors multiply.
+	Armor:                      # body — always on
+		Type: Plate
+		OccupancyCostModifier: 0
+	Armor@Plating:              # averaged with the body while the plating bar holds
+		Type: Heavy
+		OccupancyCostModifier: 0
+		RequiresCondition: plating_up
+	ArmorPlating:
+		MaxPercentageStrength: 50
+		PercentageRegenAmount: 1
+		RegenInterval: 25
+		RampTicks: 125
+		FullCondition: plating_up
+	Armament@PRIMARY:
+		Weapon: NaxiMP40Laser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxiMP40Laser_elite
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 20
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+	Voiced:
+		VoiceSet: NaxiRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+	Harvester:
+		BaleLoadDelay: 5
+		BaleUnloadDelay: 1
+	DockClientManager:
+		OccupancyCostModifier: 0
+	StoresResources:
+		Capacity: 50
+	WithStoresResourcesPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+
+schwarzermond_engineeringarmor:
+	Inherits: ^Walker
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
+	Inherits@Propaganda: ^NaxiMoonPropaganda
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@VrilInfusion: ^NaxiVrilInfusion
+	Selectable:
+		Bounds: 600, 600, 0, -125
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Engineering Armor
+	Buildable:
+		BuildPaletteOrder: 75
+		Prerequisites: ~schwarzermond_barracks
+		Queue: Infantry, RAInfantry
+		Description: actor_aamecha.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+		Locomotor: tracked
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	# W21 layer stack, R5: while the plating holds, BOTH armors are enabled and the
+	# warhead AVERAGES them (AreaDamage.MultiArmorCombination) — so anti-infantry fire
+	# is never useless against a plated walker and AP fire is never oppressive. Once
+	# the bar is stripped only the body armor is left. NEVER let two armors multiply.
+	Armor:                      # body — always on
+		Type: Plate
+	Armor@Plating:              # averaged with the body while the plating bar holds
+		Type: Heavy
+		RequiresCondition: plating_up && !shielded
+	ArmorPlating:
+		MaxPercentageStrength: 50
+		PercentageRegenAmount: 1
+		RegenInterval: 25
+		RampTicks: 125
+		FullCondition: plating_up
+	Armament:
+		Name: primary
+		Weapon: RA2IFVRepair
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 10
+		Count: 1
+		ResetOnFire: true
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 5
+	AttackFrontal:
+		FacingTolerance: 20
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+	Voiced:
+		VoiceSet: NaxiRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	Captures:
+		CaptureTypes: building, tech
+		PlayerExperience: 500
+		CaptureDelay: 375
+		ConsumedByCapture: False
+		EnterCursor: ability
+		EnterBlockedCursor: move-blocked
+		Voice: Move
+schwarzermond_lunarsoldier:
+	Inherits: ^Soldier
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
+	Inherits@Propaganda: ^NaxiMoonPropaganda
+	Inherits@LUpgrade: ^NaxiCrystalLens
+	Inherits@LUpgrade2: ^NaxiAmplifiedLens
+	Inherits@Template: ^SpecialForcesInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VrilInfusion: ^NaxiVrilInfusion
+	# ^NaxiVrilInfusion is inherited LAST, so its Shielded gate would overwrite the
+	# stealth-suit term this unit alone gets from ^RA2YuriStealthSuits and quietly kill
+	# that shield. RequiresCondition is a scalar — it cannot be appended to — so the only
+	# way to keep both paths is to restate the whole expression here, on the actor, where
+	# it wins over every template.
+	Shielded:
+		RequiresCondition: !disabled && (schwarzermond_upgrade_vrilinfusion || yuri_upgrade_infantrystealthsuits || shieldgen || shielded)
+	# SPECIAL-FORCES VERIFIER (Formula v2, maintainer 2026-07-20): the
+	# Tier-1 clean tripwire (no tech penalty, no specials — the moon-
+	# propaganda is a RECEIVED upgrade buff, not an aura). Exactly 2x the
+	# japan baseline — 30000 HP (2x 15000), 50 speed & 6000 range (same),
+	# SmallArms+Chaingun+Laser triad 12000 @ reload 50 = 240 DPS (2x 120),
+	# cost 500 (2.5x 200). Must resolve to 500.00. This makes SM's basic
+	# infantry very strong on purpose — flagged for in-game testing.
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Lunar Soldier
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~schwarzermond_barracks
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@schwarzermond_lunarsoldier:
+		Modifier: 100
+	Armament@PRIMARY:
+		Weapon: schwarzermond_lunarsoldier_rifle
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@ELITE:
+		Weapon: schwarzermond_lunarsoldier_rifle_elite
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@PRIMARY_UP:
+		Weapon: schwarzermond_lunarsoldier_rifle_yellow
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@ELITE_UP:
+		Weapon: schwarzermond_lunarsoldier_rifle_yellow_elite
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@PRIMARY_AMP:
+		Weapon: schwarzermond_lunarsoldier_rifle_amplified
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
+	Armament@ELITE_AMP:
+		Weapon: schwarzermond_lunarsoldier_rifle_amplified_elite
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: schwarzermond_lunarsoldier_rifle
+		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: schwarzermond_lunarsoldier_rifle_elite
+		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONED_UP:
+		Name: garrisoned
+		Weapon: schwarzermond_lunarsoldier_rifle_yellow
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONEDELITE_UP:
+		Name: garrisoned
+		Weapon: schwarzermond_lunarsoldier_rifle_yellow_elite
+		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONED_AMP:
+		Name: garrisoned
+		Weapon: schwarzermond_lunarsoldier_rifle_amplified
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
+	Armament@GARRISONEDELITE_AMP:
+		Name: garrisoned
+		Weapon: schwarzermond_lunarsoldier_rifle_amplified_elite
+		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiLunarTroopVoice
+schwarzermond_lunarrocket:
+	Inherits: ^Soldier
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
+	Inherits@Propaganda: ^NaxiMoonPropaganda
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VrilInfusion: ^NaxiVrilInfusion
+	Valued:
+		Cost: 350
+	Tooltip:
+		Name: Lunar Rocket
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~schwarzermond_barracks
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 18000
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Armament@PRIMARY:
+		Weapon: NaxCorrosionRocketTrooper_elite
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxCorrosionRocketTrooper_elite
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxCorrosionRocketTrooper_elite
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxCorrosionRocketTrooper_elite
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiLunarTroopVoice
+
+hole_small.nax2:
+	Inherits@1: hole.nax2
+	Health:
+		HP: 25000
+	ChangesHealth:
+		Step: -100
+
+hole.nax2:
+	Inherits: ^EnergyEntity
+	Inherits@selection: ^SelectableCombatUnit
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Armament:
+		Weapon: NaxiBlackholeShoot
+		LocalOffset: 0,0,5
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	Mobile:
+		Locomotor: hover
+		Speed: 5
+		TurnSpeed: 255
+	RenderSprites:
+		Palette: ra2infantry
+	Health:
+		HP: 2400
+	ChangesHealth:
+		Step: -10
+		Delay: 1
+		StartIfBelow: 101
+	WithDeathAnimation:
+		FallbackSequence: die
+		UseDeathTypeSuffix: false
+		DeathSequencePalette: ra2infantry
+		DeathPaletteIsPlayerPalette: false
+	Tooltip:
+		Name: Black Hole
+	Targetable@BlackHole:
+		TargetTypes: BlackHole, Ground
+	Voiced:
+		VoiceSet: DinoVoice
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-MapEditorData:

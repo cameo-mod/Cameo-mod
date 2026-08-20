@@ -1,0 +1,49 @@
+Container@TRANSIENTS_PANEL:
+	X: 2 * WINDOW_WIDTH / 3 + 5
+	Y: WINDOW_HEIGHT - HEIGHT - 56
+	Width: 550
+	Height: 80
+	Logic: IngameTransientNotificationsLogic
+	Children:
+		TextNotificationsDisplay@TRANSIENTS_DISPLAY:
+			Width: PARENT_WIDTH
+			Height: PARENT_HEIGHT
+			DisplayDurationMs: 11000
+			LogLength: 10
+			HideOverflow: False
+			TransientsTemplate: CAMEO_TRANSIENT_LINE_TEMPLATE
+			FeedbackTemplate: CAMEO_TRANSIENT_LINE_TEMPLATE
+			# Whole-line flash: pulse the line's BACKGROUND box bright (white) for 2 cycles,
+			# leaving the text styling unchanged. Blank FlashFont disables the bold swap so it's
+			# fill-only (an empty value, NOT "" — MiniYaml reads "" as a literal 2-char string).
+			FlashFont:
+			FlashCount: 2
+			FlashHighlight: True
+			# White, slightly transparent (C0 = ~75% opaque) so the battlefield shows through a little.
+			FlashBackgroundColor: FFFFFFC0
+			# Match the template's TextColor so the flash leaves the text unchanged.
+			FlashTextColor: AFEEEE
+
+# Transient notification line with a translucent box backing.
+# Width is pinned to the panel width (550): a PARENT_WIDTH ColorBlock would
+# resolve against the full screen at template-load time (null parent) and only
+# the container is resized afterwards, so the box would overflow the screen.
+Container@CAMEO_TRANSIENT_LINE_TEMPLATE:
+	Width: PARENT_WIDTH
+	Height: 16
+	Children:
+		ColorBlock@BACKGROUND:
+			Width: 350
+			Height: PARENT_HEIGHT
+			Color: 00000040
+		Label@TIME:
+			X: 5
+			Width: 37
+			Height: 16
+			Shadow: True
+		Label@TEXT:
+			X: 5
+			Height: 16
+			WordWrap: True
+			Shadow: True
+			TextColor: AFEEEE

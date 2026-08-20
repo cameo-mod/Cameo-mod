@@ -1,0 +1,604 @@
+forgotten_tiberiumspike:
+	Inherits: OILB.TS
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Inherits@shape: ^3x4Shape
+	Tooltip:
+		Name: actor_forgotten_tiberiumspike.name
+	Buildable:
+		Description: actor_forgotten_tiberiumspike.description
+		BuildLimit: 1
+		Queue: Building, RABuilding
+		Prerequisites: ~forgotten_constructionyard, forgotten_church, derricklimit
+	SeedsResource:
+		ResourceType: Tiberium
+		Interval: 50
+		MaxRange: 250
+	-WithIdleOverlay@PLATFORM:
+	WithIdleOverlay@LIGHTS:
+		Sequence: anim
+		Palette: tseffect
+	RenderSprites:
+		Image: tibdrill
+		PlayerPalette: playerra2
+
+#######################################
+# TS MCV
+#######################################
+
+forgotten_constructionyard:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@conyard: ^Conyard
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: actor_forgotten_constructionyard.name
+	Buildable:
+		Description: actor_forgotten_constructionyard.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 1000000
+	Armor:
+		Type: Wood
+	Transforms:
+		IntoActor: forgotten_mobileconstructionvehicle
+		Offset: 1,1
+		Facing: 432
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Building, Defence, RABuilding, RADefence
+		Sequence: build
+	ProvidesPrerequisite@tsoilderricksuper:
+		Prerequisite: tsoilderricksuper
+	ProvidesPrerequisite@fact.forgotten:
+		Prerequisite: fact.forgotten
+	ProvidesPrerequisite@wirefence:
+		Prerequisite: wirefence
+	WithBuildingPlacedOverlay:
+		RequiresCondition: !build-incomplete
+	Selectable:
+		Bounds: 3072, 2560
+	ProvidesPrerequisite@buildingname:
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
+	RenderSprites:
+		Image: forgot_conyard
+		PlayerPalette: player_rgba
+
+forgotten_refinery:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@ref: ^Refinery
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 853
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -512, -1450
+			BottomRight: 896, -512
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: actor_forgotten_refinery.name
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~forgotten_constructionyard, forgotten_crystalpowerextractor
+		Queue: Building, RABuilding
+		Description: actor_forgotten_refinery.description
+	Building:
+		Footprint: _x_ xxx === ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	Refinery:
+	DockHost:
+		DockAngle: 680
+		DockOffset: 1c0, 1c0, 0
+	StoresResources:
+		Capacity: 1000
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+	CustomSellValue:
+		Value: 500
+	FreeActor:
+		Actor: forgotten_tiberiumharvester
+		SpawnOffset: 1,2
+		Facing: 256
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	GivesBuildableArea
+		AreaTypes: building, cityi
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
+	RenderSprites:
+		Image: forgot_refin
+		PlayerPalette: player_rgba
+
+forgotten_crystalpowerextractor:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Selectable:
+		Bounds: 2048, 2048
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 640,-384,0, 640,512,0, -710,-512,0, -710,512,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 10
+		Prerequisites: ~forgotten_constructionyard
+		Description: actor_forgotten_crystalpowerextractor.description
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: actor_forgotten_crystalpowerextractor.name
+	Health:
+		HP: 150000
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: 160
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience
+	ProvidesPrerequisite@buildingname:
+		ValidTypes: building
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: forgot_power
+
+forgotten_barracks:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 840,-256,0, 840,512,0, 210,-512,0, -71,512,0
+		Type: Rectangle
+			TopLeft: -1024, -1024
+			BottomRight: 1024, 640
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: actor_forgotten_barracks.name
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~forgotten_constructionyard, forgotten_crystalpowerextractor
+		Queue: Building, RABuilding
+		Description: actor_forgotten_barracks.description
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -426,85,0
+		ExitCell: 0,1
+	Exit@2:
+		SpawnOffset: 298,298,0
+		ExitCell: 1,1
+	GrantExternalConditionToProduced:
+		Condition: produced
+	ProductionQueue@INFANTRY:
+	Power:
+		Amount: -20
+	Selectable:
+		Bounds: 1280, 1024
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
+	RenderSprites:
+		Image: forgot_barracks
+		PlayerPalette: player_rgba
+
+forgotten_warfactory:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^3x2Shape
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
+		Type: Rectangle
+			TopLeft: -1536, -1024
+			BottomRight: 1536, 512
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: actor_forgotten_warfactory.name
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~forgotten_constructionyard, forgotten_refinery
+		Queue: Building, RABuilding
+		Description: actor_forgotten_warfactory.description
+	Building:
+		Footprint: xx= x== ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 1280, 1024
+	SelectionDecorations:
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -512,-512,0
+		ExitCell: 2,1
+		ExitDelay: 3
+	ProductionQueue@VEHICLE:
+	Power:
+		Amount: -40
+	WithIdleOverlay@ROOF:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-roof
+	WithProductionDoorOverlay@DOOR:
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@BIB:
+		RequiresCondition: !build-incomplete
+		Sequence: bib2
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
+	RenderSprites:
+		Image: forgot_weap
+		PlayerPalette: player_rgba
+
+forgotten_servicedepot:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: actor_forgotten_servicedepot.name
+	Buildable:
+		BuildPaletteOrder: 60
+		Description: actor_forgotten_servicedepot.description
+		Prerequisites: ~forgotten_constructionyard, forgotten_warfactory
+		Queue: Building, RABuilding
+	Building:
+		Footprint: x++ +++
+		Dimensions: 3,2
+	SelectionDecorations:
+	Reservable:
+	RallyPoint:
+	Power:
+		Amount: -20
+	ProvidesPrerequisite@buildingname:
+	GivesBuildableArea
+		AreaTypes: building, cityi
+	WithIdleOverlay@LIGHT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-light
+	WithIdleOverlay@GROUND:
+		RequiresCondition: !build-incomplete
+		Sequence: ground
+	WithIdleOverlay@CIRCUITS:
+		RequiresCondition: !build-incomplete
+		Sequence: circuits
+	WithRepairOverlay@CRANE:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+		StartSequence: crane-start
+		Sequence: crane-loop
+		EndSequence: crane-end
+	WithRepairOverlay@PLATFORM:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: platform
+	WithDeathAnimation@BIB:
+		DeathSequence: dead-ground
+		DeathSequencePalette: playerra2
+		UseDeathTypeSuffix: false
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
+	RenderSprites:
+		Image: tsgtdept
+		PlayerPalette: playerra2
+
+forgotten_helipad:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^2x2Shape
+	Inherits@hpad: ^IsAircraftFactory
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: actor_forgotten_helipad.name
+	Buildable:
+		BuildPaletteOrder: 50
+		Description: actor_forgotten_helipad.description
+		Queue: Building, RABuilding
+		Prerequisites: ~forgotten_constructionyard, forgotten_radar
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Exit@1:
+		SpawnOffset: 0,-256,0
+	Reservable:
+	RepairsUnits:
+		HpPerStep: 1000
+		PlayerExperience: 25
+		StartRepairingNotification: Repairing
+	RallyPoint:
+	ProductionQueue@AIRCRAFT:
+	Power:
+		Amount: -10
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@PLATFORM:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-platform
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
+	RenderSprites:
+		Image: tsnthpadmut
+		PlayerPalette: playerra2
+
+forgotten_radar:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@radar: ^RadarBuilding
+	Inherits@spy: ^InfiltrateForSupportPowerReset
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,512,0, 420,-598,256
+		Type: Rectangle
+			TopLeft: -1024, -384
+			BottomRight: 1024, 1024
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: actor_forgotten_radar.name
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~forgotten_constructionyard, forgotten_refinery
+		Queue: Building, RABuilding
+		Description: actor_forgotten_radar.description
+	Building:
+		Footprint: X_ xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 2248, 2248
+	SelectionDecorations:
+	WithSpriteBody:
+		PauseOnCondition: lowpower
+	WithBuildingBib:
+	ProvidesRadar:
+		RequiresCondition: !jammed && !lowpower
+	RenderDetectionCircle:
+	DetectCloaked:
+		Range: 5c0
+		RequiresCondition: !lowpower
+	SupportPowerChargeBar:
+	Power:
+		Amount: -50
+	ExternalCondition@JAMMED:
+		Condition: jammed
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: forgot_radar
+
+forgotten_church:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@shape: ^3x2Shape
+	Selectable:
+		Bounds: 3072, 2048
+	HitShape:
+		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 150
+		Prerequisites: ~forgotten_constructionyard, forgotten_radar
+		Description: actor_forgotten_church.description
+		BuildLimit: 1
+	Tooltip:
+		Name: actor_forgotten_church.name
+	Building:
+		Footprint: xxx ===
+		Dimensions: 3,2
+		LocalCenterOffset: 0,0,0
+	Armor:
+		Type: Wood
+	WithBuildingBib:
+	Power:
+		Amount: -100
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: tstek
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
+	RenderSprites:
+		Image: forgot_church
+		PlayerPalette: player_rgba
+
+forgotten_chemicalplant:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@shape: ^3x2Shape
+	Selectable:
+		Bounds: 3072, 2048
+	HitShape:
+		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 150
+		Prerequisites: ~forgotten_constructionyard, forgotten_church
+		Description: actor_forgotten_chemicalplant.description
+		BuildLimit: 1
+	Tooltip:
+		Name: actor_forgotten_chemicalplant.name
+	Building:
+		Footprint: xxx ===
+		Dimensions: 3,2
+		LocalCenterOffset: 0,0,0
+	Armor:
+		Type: Wood
+	WithBuildingBib:
+	Power:
+		Amount: -100
+	ProvidesPrerequisite@buildingname:
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
+	RenderSprites:
+		Image: forgotten_chemicalplant
+		PlayerPalette: player_rgba
+forgotten_navalyard:
+	Inherits: ^RA2Building
+	Inherits@shipyard: ^IsShipyard
+	Inherits@shape: ^3x3Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
+	Tooltip:
+		Name: Forgotten Naval Yard
+	Buildable:
+		Prerequisites: ~forgotten_constructionyard, forgotten_barracks, ~globalnaval
+	Building:
+		Footprint: =+= +++ =+=
+		Dimensions: 3,3
+		TerrainTypes: Water
+	-GivesBuildableArea:
+	#WithResupplyAnimation:
+	#	Sequence: repair
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	#WithIdleOverlay@waves:
+	#	Sequence: idle-waves
+	#	RequiresCondition: !build-incomplete
+	Targetable:
+		TargetTypes: Ground, Water, C4, Structure
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+# tsntyard2:
+# 	Inherits: yrygyard
+# 	Buildable:
+# 		BuildPaletteOrder: 50
+# 		Prerequisites: ~ts_gdi_constructionyard
+# 		Queue: Building, RABuilding
+# 		Description: Produces, and\nrepairs boats
+# 	Production@NORMAL:
+# 		Produces: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	Production@CLASSICPRODUCTIONQUEUES:
+# 		Produces: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	ProductionQueue:
+# 		Type: Naval
+# 	ProductionBar@NAVALYURI:
+# 		ProductionType: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	ProductionBar@RANAVALYURI:
+# 		ProductionType: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	WithDeathAnimation:
+# 		DeathSequencePalette: player_rgba
+# 		DeathPaletteIsPlayerPalette: true
+# 	RenderSprites:
+# 		Image: yrygyard
+# 		PlayerPalette: playerra2
+
+# tsgtyard:
+# 	Inherits: ra2gayard
+# 	Buildable:
+# 		BuildPaletteOrder: 50
+# 		Prerequisites: ~ts_gdi_constructionyard
+# 		Queue: Building, RABuilding
+# 		Description: Produces, and\nrepairs boats
+# 	Production@NORMAL:
+# 		Produces: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	Production@CLASSICPRODUCTIONQUEUES:
+# 		Produces: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	ProductionQueue:
+# 		Type: Naval
+# 	ProductionBar@NAVALALLIESRA2:
+# 		ProductionType: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	ProductionBar@RANAVALALLIESRA2:
+# 		ProductionType: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	WithDeathAnimation:
+# 		DeathSequencePalette: player_rgba
+# 		DeathPaletteIsPlayerPalette: true
+# 	RenderSprites:
+# 		Image: ra2gayard
+# 		PlayerPalette: playerra2
+
+# tsgtyard2:
+# 	Inherits: ra2gayard
+# 	Buildable:
+# 		BuildPaletteOrder: 50
+# 		Prerequisites: ~ts_gdi_constructionyard
+# 		Queue: Building, RABuilding
+# 		Description: Produces, and\nrepairs boats
+# 	Production@NORMAL:
+# 		Produces: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	Production@CLASSICPRODUCTIONQUEUES:
+# 		Produces: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	ProductionQueue:
+# 		Type: Naval
+# 	ProductionBar@NAVALALLIESRA2:
+# 		ProductionType: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	ProductionBar@RANAVALALLIESRA2:
+# 		ProductionType: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	WithDeathAnimation:
+# 		DeathSequencePalette: player_rgba
+# 		DeathPaletteIsPlayerPalette: true
+# 	RenderSprites:
+# 		Image: ra2gayard
+# 		PlayerPalette: playerra2
+
+#######################################
+# TS Defensive
+#######################################

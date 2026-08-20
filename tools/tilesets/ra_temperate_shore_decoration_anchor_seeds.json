@@ -1,0 +1,232 @@
+{
+  "description": "Human-reviewed candidate decoration bounds for RA Temperate shoreline donors. These are placement guides only; donor pixels are never copied.",
+  "templates": {
+    "sh01": [
+      {
+        "anchor": [170, 30],
+        "bounds": [146, 2, 189, 31],
+        "terrain_phase": "ground",
+        "size_class": "medium",
+        "confidence": 0.82,
+        "note": "upper ground rock group"
+      },
+      {
+        "anchor": [166, 135],
+        "bounds": [161, 113, 190, 136],
+        "terrain_phase": "offshore",
+        "size_class": "medium",
+        "confidence": 0.86,
+        "note": "isolated offshore boulder"
+      }
+    ],
+    "sh02": [
+      {
+        "anchor": [8, 156],
+        "bounds": [1, 141, 16, 157],
+        "terrain_phase": "shoreline",
+        "size_class": "small",
+        "confidence": 0.72,
+        "note": "small left-edge shoreline rock"
+      },
+      {
+        "anchor": [63, 157],
+        "bounds": [53, 139, 73, 158],
+        "terrain_phase": "shoreline",
+        "size_class": "small",
+        "confidence": 0.76,
+        "note": "small beach rock"
+      },
+      {
+        "anchor": [87, 166],
+        "bounds": [73, 142, 101, 167],
+        "terrain_phase": "shoreline",
+        "size_class": "medium",
+        "confidence": 0.8,
+        "note": "central shoreline boulder"
+      },
+      {
+        "anchor": [108, 180],
+        "bounds": [96, 153, 121, 181],
+        "terrain_phase": "shoreline",
+        "size_class": "medium",
+        "confidence": 0.8,
+        "note": "lower shoreline boulder"
+      },
+      {
+        "anchor": [123, 236],
+        "bounds": [107, 211, 140, 237],
+        "terrain_phase": "offshore",
+        "size_class": "medium",
+        "confidence": 0.88,
+        "note": "large isolated offshore boulder"
+      }
+    ],
+    "sh03": [],
+    "sh04": [
+      {
+        "anchor": [10, 68],
+        "bounds": [2, 52, 18, 69],
+        "terrain_phase": "shoreline",
+        "placement_treatment": "clean_basalt_no_pool_no_glow",
+        "size_class": "small",
+        "confidence": 0.76,
+        "note": "small left shoreline rock"
+      },
+      {
+        "anchor": [40, 70],
+        "bounds": [32, 53, 49, 71],
+        "terrain_phase": "shoreline",
+        "placement_treatment": "clean_basalt_no_pool_no_glow",
+        "size_class": "small",
+        "confidence": 0.76,
+        "note": "small inner shoreline rock"
+      }
+    ],
+    "sh05": [
+      {
+        "anchor": [80, 25],
+        "bounds": [69, 1, 92, 26],
+        "terrain_phase": "ground",
+        "size_class": "medium",
+        "confidence": 0.86,
+        "note": "upper ground boulder"
+      },
+      {
+        "anchor": [62, 47],
+        "bounds": [52, 24, 73, 48],
+        "terrain_phase": "ground",
+        "size_class": "small",
+        "confidence": 0.8,
+        "note": "small beach-side boulder"
+      },
+      {
+        "anchor": [87, 105],
+        "bounds": [57, 60, 117, 106],
+        "terrain_phase": "offshore",
+        "size_class": "large",
+        "confidence": 0.92,
+        "note": "major offshore formation"
+      },
+      {
+        "anchor": [32, 128],
+        "bounds": [13, 98, 52, 129],
+        "terrain_phase": "offshore",
+        "size_class": "medium",
+        "confidence": 0.9,
+        "note": "lower-left offshore boulder"
+      }
+    ],
+    "sh06": [],
+    "sh07": [],
+    "sh08": [],
+    "sh09": [
+      {
+        "anchor": [133, 22],
+        "bounds": [113, 8, 143, 23],
+        "terrain_phase": "ground",
+        "size_class": "medium",
+        "confidence": 0.84,
+        "note": "upper-right ground boulder"
+      },
+      {
+        "anchor": [98, 53],
+        "bounds": [91, 43, 104, 54],
+        "terrain_phase": "offshore",
+        "size_class": "small",
+        "confidence": 0.78,
+        "note": "small water-channel rock"
+      }
+    ],
+    "sh10": [
+      {
+        "anchor": [181, 237],
+        "bounds": [124, 194, 238, 237],
+        "terrain_phase": "offshore",
+        "size_class": "large",
+        "confidence": 0.86,
+        "note": "lower offshore boulder group"
+      }
+    ],
+    "sh11": [],
+    "sh12": [],
+    "sh13": [
+      {
+        "anchor": [72, 52],
+        "bounds": [43, 4, 100, 52],
+        "terrain_phase": "offshore",
+        "placement_treatment": "clean_basalt_no_pool_no_glow",
+        "size_class": "medium",
+        "confidence": 0.88,
+        "note": "upper-left offshore rock group"
+      }
+    ],
+    "sh14": [
+      {
+        "anchor": [58, 118],
+        "bounds": [38, 52, 77, 118],
+        "terrain_phase": "shoreline",
+        "size_class": "medium",
+        "confidence": 0.84,
+        "note": "central shoreline boulder"
+      }
+    ],
+    "sh15": [],
+    "sh16": [],
+    "sh17": [],
+    "sh18": [
+      {
+        "anchor": [74, 120],
+        "bounds": [55, 91, 93, 120],
+        "terrain_phase": "shoreline",
+        "size_class": "medium",
+        "confidence": 0.82,
+        "note": "lower shoreline boulder"
+      }
+    ],
+    "sh19": [],
+    "sh20": [],
+    "sh39": [],
+    "sh49": [
+      {
+        "anchor": [60, 49],
+        "bounds": [52, 43, 69, 49],
+        "terrain_phase": "offshore",
+        "size_class": "small",
+        "confidence": 0.8,
+        "note": "small upper central offshore rock"
+      },
+      {
+        "anchor": [74, 93],
+        "bounds": [55, 68, 93, 93],
+        "terrain_phase": "offshore",
+        "size_class": "medium",
+        "confidence": 0.88,
+        "note": "central offshore rock formation"
+      },
+      {
+        "anchor": [22, 97],
+        "bounds": [8, 43, 37, 97],
+        "terrain_phase": "offshore",
+        "size_class": "large",
+        "confidence": 0.88,
+        "note": "large left offshore rock formation"
+      },
+      {
+        "anchor": [66, 123],
+        "bounds": [46, 100, 87, 123],
+        "terrain_phase": "offshore",
+        "size_class": "medium",
+        "confidence": 0.88,
+        "note": "lower central offshore rock formation"
+      },
+      {
+        "anchor": [123, 123],
+        "bounds": [105, 106, 141, 123],
+        "terrain_phase": "offshore",
+        "size_class": "medium",
+        "confidence": 0.88,
+        "note": "lower right offshore rock formation"
+      }
+    ]
+  }
+}

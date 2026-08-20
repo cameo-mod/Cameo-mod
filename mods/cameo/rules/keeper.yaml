@@ -46,7 +46,7 @@ keeperwall:
 	WithWallSpriteBody:
 		Type: concrete
 	Targetable:
-		TargetTypes: Drillable, Wall
+		TargetTypes: Drillable, wall
 
 keeperbedrock:
 	Inherits: ^Wall

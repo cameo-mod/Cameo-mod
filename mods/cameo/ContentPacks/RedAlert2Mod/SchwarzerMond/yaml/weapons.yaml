@@ -1,0 +1,1150 @@
+schwarzermond_lunarsoldier_rifle:
+	Inherits: ^Warhead_Bullet_Medium
+	Inherits@2: NaxiRifle
+	Inherits@3: ^RA2LaserWeapon
+	# SF VERIFIER weapon (maintainer 2026-07-20): SmallArms + Chaingun +
+	# Laser triad, 4000 each = 12000 @ reload 50 = 240 DPS (WC 1.0), exactly
+	# 2x the japan baseline (6000@50, 120). Range 6000, air-capable.
+	ReloadDelay: 50
+	Range: 6000
+	Report: vpriatta.wav
+	ValidTargets: Ground, Water, Air
+	Projectile: Bullet
+		ContrailStartColor: ff2d2d
+		ContrailEndColor: f55105
+		Width: 25
+	Warhead@Bullet_Light:
+		Damage: 8000
+		ValidTargets: Ground, Water, Air
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Water, Air
+	Warhead@Bullet_Medium:
+		Damage: 8000
+		ValidTargets: Ground, Water, Air
+	Warhead@Bullet_Medium_Percentage:
+		Damage: 2
+		ValidTargets: Ground, Water, Air
+	Warhead@Laser_Heavy:
+		Damage: 8000
+		ValidTargets: Ground, Water, Air
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Water, Air
+
+schwarzermond_lunarsoldier_rifle_elite:
+	Inherits: schwarzermond_lunarsoldier_rifle
+	Range: 5500
+	Burst: 2
+	BurstDelays: 3
+
+NaxiBeetleLaser_elite:
+	Inherits: ^SmallArms
+	Inherits@2: ^Chaingun
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^LaserWeapon
+	Range: 6448
+	ReloadDelay: 60
+	Burst: 2
+	BurstDelays: 4
+	Report: AWMinilaser.wav
+	ValidTargets: Ground, Water
+	Projectile: LaserZap
+		Width: 25
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water
+
+NaxiBeetleLaser_AA_elite:
+	Inherits: NaxiBeetleLaser_elite
+	Range: 9672
+	ValidTargets: Air
+	Warhead@Bullet_Light: AreaDamage
+		ValidTargets: Air
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Air
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+
+LunarPanzerCannon:
+	Inherits: ^RA2MediumCannon
+	ReloadDelay: 60
+	Range: 5121
+	Report: vgriatta.wav, vgriattb.wav, vgriattc.wav
+	Projectile: Bullet
+		Speed: 512
+	Warhead@CannonHE_Medium:
+		Damage: 10000
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+		Damage: 5
+
+LunarPanzerCannon_elite:
+	Inherits: LunarPanzerCannon
+	Inherits@Elite: ^RA2EliteEffects
+	Range: 6121
+	Burst: 2
+	BurstDelays: 3
+
+NaxiTank2Laser:
+	Inherits: ^SmallArms
+	Inherits@2: ^Chaingun
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^LaserWeapon
+	Range: 6500
+	ReloadDelay: 52
+	Burst: 4
+	BurstDelays: 4
+	Report: AWMinilaser.wav
+	ValidTargets: Ground, Water
+	Projectile: LaserZap
+		Width: 25
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water
+
+NaxiTank2Laser_AA:
+	Inherits: NaxiTank2Laser
+	Range: 9750
+	ValidTargets: Air
+	Warhead@Bullet_Light: AreaDamage
+		ValidTargets: Air
+	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@Bullet_Medium: AreaDamage
+		ValidTargets: Air
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+
+NaxiMP40Laser:
+	Inherits: ^Warhead_Bullet_Light
+	Inherits@2: NaxiMP40
+	Inherits@3: ^RA2LaserWeapon
+	Report: vpriatta.wav
+	Range: 4384
+	ReloadDelay: 100
+	Burst: 5
+	BurstDelays: 5
+	Projectile: Bullet
+		ContrailStartColor: ff2d2d
+		ContrailEndColor: f55105
+		Width: 25
+	Warhead@Grenade: SpreadDamage
+		Damage: 2000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 1000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Bullet_Light:
+		Damage: 2000
+	Warhead@Bullet_Light_Percentage:
+		Damage: 1
+	Warhead@Bullet_Medium:
+		Damage: 2000
+	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@CannonHE_Heavy: AreaDamage
+		Damage: 2000
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Laser_Heavy:
+		Damage: 2000
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		Damage: 1
+
+NaxiMP40Laser_elite:
+	Inherits: NaxiMP40Laser
+	Range: 5384
+	Burst: 10
+	BurstDelays: 3
+
+LunarNaxiJadgDestroyer:
+	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits@2: ^Projectile_Shell_Heavy
+	Inherits@3: ^Effect_CannonHE_Heavy
+	Inherits@wh: ^Warhead_Concussion_Medium
+	Inherits@fx: ^Effect_Concussion_Medium
+	Inherits@5: ^RA2TankDestroyerCannon
+	Report: cannon1.aud
+	ReloadDelay: 90
+	Range: 7379
+	Projectile: Bullet
+		Speed: 737
+	Warhead@CannonHE_Heavy:
+		Damage: 30000
+	Warhead@CannonHE_Heavy_Percentage:
+		Damage: 15
+	Warhead@Concussion_Medium:
+		Damage: 30000
+	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@CannonAP_Light:
+		Damage: 30000
+	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+		Damage: 15
+
+LunarNaxiJadgDestroyer_elite:
+	Inherits: LunarNaxiJadgDestroyer
+	Inherits@Elite: ^RA2EliteEffects
+	Report: cannon1.aud
+	Range: 8379
+	Burst: 2
+	BurstDelays: 3
+
+LunarTigerCannon:
+	Inherits: ^LightChemicalWeapon
+	Inherits@2: ^HeavyBomb
+	Inherits@3: ^MediumFlameWeapon
+	Inherits@4: ^RA2MediumCannon
+	ReloadDelay: 80
+	Report: trashcannon.wav
+	Range: 5105
+	Projectile: Bullet
+		Speed: 510
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 4000
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 2
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 4000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 4000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		Damage: 2
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@CannonHE_Medium:
+		Damage: 4000
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+		Damage: 2
+
+LunarTigerCannon_elite:
+	Inherits: LunarTigerCannon
+	Range: 6105
+	Burst: 2
+	BurstDelays: 3
+
+NaxHaenebuQuadCannon:
+	Inherits: ^Warhead_Concussion_Light
+	Inherits@2: ^Warhead_MissileAP_Heavy
+	Inherits@3: ^Effect_MissileAP_Heavy
+	Inherits@4: ^RA2FlakWeapon
+	ReloadDelay: 66
+	Range: 6666
+	Burst: 6
+	BurstDelays: 0
+	Report: nax_aa2.wav
+	ValidTargets: Ground, Water, Air
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: 3399FF
+		ContrailEndColor: 000000
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 333
+		ContrailLength: 33
+		Speed: 6000
+		Width: 50
+		Inaccuracy: 666
+	Warhead@Concussion_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@Concussion_Light_Percentage:
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@MissileAP_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@MissileAP_Heavy_Percentage:
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Flak_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+
+NaxHaenebuQuadCannon_elite:
+	Inherits: NaxHaenebuQuadCannon
+	Range: 7777
+	Burst: 7
+	Projectile: Bullet
+		ContrailStartColor: FF0000
+		Inaccuracy: 777
+
+DalekCannon:
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@wh2: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Inherits@EMP: ^EMPDamage
+	Inherits@3: ^RA2RailgunWeapon
+	ReloadDelay: 76
+	Range: 8060
+	Report: vrobatta.wav
+	ValidTargets: Ground, Water
+	Projectile: Railgun
+		BeamColor: 00EEFF88
+		BeamWidth: 128
+	Warhead@Tesla_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 100000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		ValidTargets: Ground, Water
+		Damage: 50000
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 50
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 100000
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 50
+	Warhead@Railgun_Heavy: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 100000
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 50
+	Warhead@Scatter: FireShrapnel
+		Weapon: DalekCannonScatter
+		Amount: 3
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: Ground, Water
+	Warhead@Effect: CreateEffect
+		Explosions: blue_building
+		ImpactSounds: psahit00.aud
+		ExplosionPalette: effect
+
+DalekCannon_elite:
+	Inherits: DalekCannon
+	Range: 9060
+	Projectile: Railgun
+		BeamColor: 4488FFBB
+		BeamWidth: 192
+		Duration: 24
+	Warhead@Tesla_Heavy:
+		Damage: 200000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 100000
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+		Damage: 100
+	Warhead@Laser_Heavy:
+		Damage: 200000
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		Damage: 100
+	Warhead@Railgun_Heavy:
+		Damage: 200000
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
+		Damage: 100
+	Warhead@Scatter: FireShrapnel
+		Weapon: DalekCannonScatterE
+		Amount: 6
+
+DalekCannonScatter:
+	Inherits: DalekCannon
+	Range: 4030
+	Report: tphfi201.wav, tgofi200.wav
+	-Report:
+		Color: 00EEFF88
+		Width: 96
+		-HitAnim:
+		ValidTargets: Ground, Water, Air
+		Damage: 50000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		ValidTargets: Ground, Water, Air
+		Damage: 25000
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 25
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 50000
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 25
+	Warhead@Railgun_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 50000
+	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 25
+	-Warhead@Scatter:
+	Warhead@Effect: CreateEffect
+		Explosions: blue_med_frag
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+
+DalekCannonScatterE:
+	Inherits: DalekCannonScatter
+	Range: 4530
+
+BlackHoleMaker:
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	Report: obelray1.aud
+	ReloadDelay: 60
+	Range: 6414
+	Projectile: KKNDLaser
+		Duration: 12
+		Colors: ee000008
+		InnerLightness: 200
+		OuterLightness: 100
+		Radius: 2
+		Distortion: 150
+		DistortionAnimation: 150
+		SegmentLength: 350
+		Inaccuracy: 128
+	ValidTargets: Ground, Water, Air
+	Warhead@Laser_Heavy:
+		Damage: 60000
+	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+		Damage: 30
+	Warhead@1Actor: SpawnActor
+		Actors: hole_small.nax2
+		#OwnerType: InternalName
+		#InternalOwner: Creeps
+		Range: 5
+		Image: ra2_allies_chronominer
+		Sequence: warpout
+		Palette: ra2effect
+		ValidTargets: Air, Ground, Water
+
+BlackHoleMaker_elite:
+	Inherits: BlackHoleMaker
+	Report: obelray1.aud
+	Range: 7414
+	Burst: 2
+	BurstDelays: 3
+	Projectile: KKNDLaser
+		Color: FF8844
+
+NaxiBlackholeShoot:
+	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
+	Report: tnkfire6.aud
+	Range: 5000
+	ReloadDelay: 5
+	Projectile: InstantHit
+	Warhead@BackEffect: BackFireShrapnel
+		Weapon: BlackHoleSuck
+		ImpactActors: false
+		AirThreshold: 10000
+		ValidTargets: Air, Ground, Water
+	Warhead@CannonHE_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+
+BlackHoleSuck:
+	Inherits: NanoReturn
+	ValidTargets: BlackHole
+	-Projectile:
+	Projectile: Missile
+		Inaccuracy: 512
+		Image: ra2debris
+		Sequences: small1, small2, small3, small4, small5, small6, small7, small8, small9
+		Palette: ra2effect
+		Speed: 60
+	Warhead@Heal: SpreadDamage
+		AffectsParent: true
+		Spread: 1000
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Damage: -1000
+		ValidRelationships: Ally
+		ValidTargets: BlackHole
+	Warhead@Effect: CreateEffect
+		ImpactSounds: nax_bh_slurp_01.wav, nax_bh_slurp_02.wav, nax_bh_slurp_03.wav
+
+NaxCorrosionRocket:
+	Inherits: ^Warhead_Concussion_Light
+	Inherits@2: ^Warhead_MissileAP_Heavy
+	Inherits@3: ^Effect_MissileAP_Heavy
+	Inherits@4: ^RA2MediumMissile
+	ReloadDelay: 50
+	Burst: 2
+	BurstDelays: 2
+	Range: 8000
+	MinRange: 1600
+	Report: nax_corrokit.wav
+	SoundVolume: 2.0
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Inaccuracy: 600
+		Speed: 600
+		Image: red_dragon
+		TrailImage: red_smokey
+		ContrailColor: e60000
+		ContrailStartColor: E60000
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+	Warhead@Concussion_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@Concussion_Light_Percentage:
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		ValidRelationships: Neutral, Enemy
+	Warhead@MissileAP_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@MissileAP_Heavy_Percentage:
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		ValidRelationships: Neutral, Enemy
+	Warhead@MissileAP_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		ValidRelationships: Neutral, Enemy
+	Warhead@Effect: CreateEffect
+		Explosions: nax_corr_ex
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+	Warhead@Condition: GrantExternalCondition
+		Range: 2000
+		Condition: corroded
+		Duration: 100
+		ValidTargets: corrodible
+		ValidRelationships: Enemy
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: NaxCorrosionExpand1
+		Amount: 4
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: !corroded
+
+NaxCorrosionExpand1:
+	ReloadDelay: 5
+	Range: 3000
+	ValidTargets: Ground, Air, Water
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: NaxCorrosionExpand2
+		Amount: 2
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: !corroded
+	Warhead@Effect: CreateEffect
+		Explosions: nax_corr_frag
+		ExplosionPalette: ra2effect
+		ImpactSounds: nax_corrosion.wav
+		ValidTargets: corrodible
+	Warhead@Condition: GrantExternalCondition
+		Range: 1000
+		Condition: corroded
+		Duration: 100
+		ValidTargets: corrodible
+		ValidRelationships: Enemy
+
+NaxCorrosionExpand2:
+	ReloadDelay: 5
+	Range: 3000
+	ValidTargets: Ground, Air, Water
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: NaxCorrosionExpand3
+		Amount: 1
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: !corroded
+	Warhead@Effect: CreateEffect
+		Explosions: nax_corr_frag
+		ExplosionPalette: ra2effect
+		ImpactSounds: nax_corrosion.wav
+		ValidTargets: corrodible
+	Warhead@Condition: GrantExternalCondition
+		Range: 1000
+		Condition: corroded
+		Duration: 100
+		ValidTargets: corrodible
+		ValidRelationships: Enemy
+
+NaxCorrosionExpand3:
+	ReloadDelay: 5
+	Range: 3000
+	ValidTargets: Ground, Air, Water
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+	Warhead@Effect: CreateEffect
+		Explosions: nax_corr_frag
+		ExplosionPalette: ra2effect
+		ImpactSounds: nax_corrosion.wav
+		ValidTargets: corrodible
+	Warhead@Condition: GrantExternalCondition
+		Range: 1000
+		Condition: corroded
+		Duration: 100
+		ValidTargets: corrodible
+		ValidRelationships: Enemy
+
+NaxCorrosionRocketTrooper_elite:
+	Inherits: NaxCorrosionRocket
+	ReloadDelay: 50
+	Burst: 1
+	Range: 6055
+	Warhead@Grenade: SpreadDamage
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@HeavyMissile: SpreadDamage
+		Damage: 4000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@MissileAP_Medium:
+		Damage: 4000
+	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+		Damage: 2
+
+	MinRange: 1210
+NaxCorrosionBeast:
+	Inherits: NaxCorrosionRocket
+	Range: 7984
+	ReloadDelay: 34
+	Burst: 8
+	BurstDelays: 2
+	Projectile: Missile
+		Inaccuracy: 400
+
+	MinRange: 1595
+NaxCorrosionBeast_elite:
+	Inherits: NaxCorrosionBeast
+	Range: 8984
+	Burst: 16
+
+NaxCrystalLeech:
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Report: tesla1.aud
+	ReloadDelay: 90
+	Range: 7420
+	Burst: 10
+	BurstDelays: 1
+	Warhead@Tesla_Heavy:
+		Damage: 2000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 1000
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+		Damage: 1
+
+NaxCrystalLeech_elite:
+	Inherits@wh: ^Warhead_Tesla_Super
+	Inherits@proj: ^Projectile_Lightning_Super
+	Inherits@fx: ^Effect_Tesla_Super
+	Report: tesla1.aud
+	Range: 8420
+	Burst: 20
+	BurstDelays: 1
+	Warhead@Tesla_Super:
+		Damage: 2000
+	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 1000
+	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
+		Damage: 1
+
+NaxDieGlocke:
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@proj: ^Projectile_Chem_Heavy
+	Inherits@fx: ^Effect_Chem_Heavy
+	Report: flamer2.aud
+	Range: 2500
+	ReloadDelay: 60
+	ValidTargets: Ground, Water, Air
+	Projectile: InstantHit
+	TargetActorCenter: true
+	Warhead@Chemical_Heavy:
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
+		Damage: 5
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@Effect: CreateEffect
+		Explosions: demotruck_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: vdemdiea.wav
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 25
+		Duration: 512
+		Speed: 8, 32
+		TurnRate: 10
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
+
+UbermenschLaser:
+	Inherits: NaxiAlienPistol
+	Range: 5801
+	ReloadDelay: 30
+	Burst: 2
+	BurstDelays: 3
+	ValidTargets: Ground, Water
+	Warhead@CannonHE_Medium:
+		Damage: 4000
+	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 2000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+
+UbermenschLaser_elite:
+	Inherits: UbermenschLaser
+	Range: 6801
+	Burst: 4
+	BurstDelays: 3
+
+NaxiCowDrop:
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@2: ^Effect_Clsn_Medium_RA2
+	ReloadDelay: 50
+	Range: 2000
+	Report: vflolo5a.wav, vflolo5b.wav
+	TargetActorCenter: true
+	Projectile: GravityBomb
+		Velocity: 0, 0, -50
+		Acceleration: 0, 0, -10
+		Image: nax_cowprojectile
+		Palette: playerra2
+		IsPlayerPalette: true
+		Shadow: True
+	Warhead@Demolition_Heavy:
+		ValidTargets: Ground, Ship
+		Damage: 10000
+		Spread: 1000
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
+		ValidRelationships: Neutral, Enemy
+		Damage: 10
+		Spread: 1000
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+	-Warhead@Effect1:
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 3
+		Duration: 512
+		Speed: 8, 32
+		TurnRate: 10
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
+
+Lunar_Green105mm_elite:
+	Inherits: Lunar_Green105mm
+	Range: 6000
+	Burst: 2
+	BurstDelays: 5
+	Report: laser_cannon2_2.wav
+
+Lunar_GreenTigerCannon:
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Inherits@Cannon: LunarTigerCannon
+	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	Warhead@Tesla_Heavy:
+		Damage: 4000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 2000
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+		Damage: 2
+	Report: laser_cannon3_4.wav
+
+Lunar_GreenTigerCannon_elite:
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Inherits@Cannon: LunarTigerCannon_elite
+	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	Warhead@Tesla_Heavy:
+		Damage: 4000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 2000
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+		Damage: 2
+	Report: laser_cannon3_4.wav
+
+Lunar_GreenJadgDestroyer:
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Inherits@Cannon: LunarNaxiJadgDestroyer
+	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	Warhead@Tesla_Heavy:
+		Damage: 30000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 15000
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+		Damage: 15
+	Report: laser_cannon3_4.wav
+
+Lunar_GreenJadgDestroyer_elite:
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Inherits@Cannon: LunarNaxiJadgDestroyer_elite
+	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	Warhead@Tesla_Heavy:
+		Damage: 30000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 15000
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+		Damage: 15
+	Report: laser_cannon3_4.wav
+
+Lunar_GreenGrilleArty:
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Inherits@Cannon: NaxGrilleArty
+	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	Warhead@Tesla_Heavy:
+		Damage: 16000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 8000
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+		Damage: 8
+	Report: laser_cannon3_2.wav
+
+Lunar_GreenGrilleArty_elite:
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Inherits@Cannon: NaxGrilleArty_elite
+	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	Warhead@Tesla_Heavy:
+		Damage: 16000
+	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
+		DamageTypes: Tesla
+		Damage: 8000
+	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+		Damage: 8
+	Report: laser_cannon3_2.wav
+
+Lunar_GreenSturmArty:
+	Inherits@wh: ^Warhead_Tesla_Heavy
+	Inherits@proj: ^Projectile_Lightning_Heavy
+	Inherits@fx: ^Effect_Tesla_Heavy
+	Inherits@Cannon: NaxSturmArty
+	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	Report: laser_cannon3_4.wav
+schwarzermond_lunarsoldier_rifle_yellow:
+	Inherits: schwarzermond_lunarsoldier_rifle
+	Burst: 2
+	BurstDelays: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+schwarzermond_lunarsoldier_rifle_yellow_elite:
+	Inherits: schwarzermond_lunarsoldier_rifle_elite
+	Burst: 4
+	BurstDelays: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+schwarzermond_lunarsoldier_rifle_amplified:
+	Inherits: schwarzermond_lunarsoldier_rifle
+	Burst: 3
+	BurstDelays: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+schwarzermond_lunarsoldier_rifle_amplified_elite:
+	Inherits: schwarzermond_lunarsoldier_rifle_elite
+	Burst: 6
+	BurstDelays: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowLaserT:
+	Inherits: NaxLaserT
+	Burst: 2
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_AmplifiedLaserT:
+	Inherits: NaxLaserT
+	Burst: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowBeetleLaser:
+	Inherits: NaxiBeetleLaser_elite
+	Burst: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowBeetleLaser_AA:
+	Inherits: NaxiBeetleLaser_AA_elite
+	Burst: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_AmplifiedBeetleLaser:
+	Inherits: NaxiBeetleLaser_elite
+	Burst: 4
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_AmplifiedBeetleLaser_AA:
+	Inherits: NaxiBeetleLaser_AA_elite
+	Burst: 4
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowMP40Laser:
+	Inherits: NaxiMP40Laser
+	Burst: 6
+	BurstDelays: 3
+	Projectile: Bullet
+		ContrailStartColor: f3e021AA
+		ContrailEndColor: f3e021AA
+		Width: 25
+
+Lunar_YellowMP40Laser_elite:
+	Inherits: NaxiMP40Laser_elite
+	Burst: 11
+	BurstDelays: 3
+
+Lunar_AmplifiedMP40Laser:
+	Inherits: NaxiMP40Laser
+	Burst: 7
+	BurstDelays: 3
+	Projectile: Bullet
+		ContrailStartColor: f3e021AA
+		ContrailEndColor: f3e021AA
+		Width: 25
+
+Lunar_AmplifiedMP40Laser_elite:
+	Inherits: NaxiMP40Laser_elite
+	Burst: 12
+	BurstDelays: 3
+
+Lunar_YellowTank2Laser:
+	Inherits: NaxiTank2Laser
+	Burst: 5
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowTank2Laser_AA:
+	Inherits: NaxiTank2Laser_AA
+	Burst: 5
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_AmplifiedTank2Laser:
+	Inherits: NaxiTank2Laser
+	Burst: 6
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_AmplifiedTank2Laser_AA:
+	Inherits: NaxiTank2Laser_AA
+	Burst: 6
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowUbermenschLaser:
+	Inherits: UbermenschLaser
+	Burst: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowUbermenschLaser_elite:
+	Inherits: UbermenschLaser_elite
+	Burst: 5
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_AmplifiedUbermenschLaser:
+	Inherits: UbermenschLaser
+	Burst: 4
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_AmplifiedUbermenschLaser_elite:
+	Inherits: UbermenschLaser_elite
+	Burst: 6
+	Projectile: LaserZap
+		Color: f3e021AA
+
+####################################################################################################
+#		Red Alert 2 Syndicate
+####################################################################################################
+
+NaxisBradleyTarget:
+	ValidTargets: Ground, Air, Water
+	ReloadDelay: 135
+	Burst: 4
+	BurstDelays: 10
+	Range: 17350
+	MinRange: 3470
+	Projectile: InstantHit
+		Inaccuracy: 1735
+
+Naxis_Komet:
+	Inherits: ^FlakWeapon
+	Inherits@2: ^Grenade
+	Inherits@3: ^HeavyAAWeapon
+	Inherits@4: ^MediumMissile
+	ValidTargets: Ground, Water
+	ReloadDelay: 60
+	Range: 7825
+	MinRange: 1565
+	Burst: 2
+	BurstDelays: 4
+	TargetActorCenter: true
+	Report: rocket1.aud
+	Projectile: Missile
+		Blockable: false
+		Image: DRAGON
+		Shadow: true
+		TrailImage: smokey
+		Inaccuracy: 400
+		MinimumLaunchAngle: 125
+		MaximumLaunchAngle: 125
+		Speed: 800
+		RangeLimit: 31300
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@HeavyAAWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@Effect: CreateEffect
+		Explosions: med_frag
+		ImpactSounds: kaboom25.aud
+		ValidTargets: Ground, Ship
+
+Naxis_Komet_AA:
+	Inherits: Naxis_Komet
+	ValidTargets: Air
+	Range: 11740
+	MinRange: 2350

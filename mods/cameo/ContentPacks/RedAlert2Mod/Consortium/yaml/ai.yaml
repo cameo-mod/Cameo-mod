@@ -1,0 +1,37 @@
+# ai.yaml â€” Consortium faction AI configuration
+#
+# ARCHITECTURE NOTE
+# =================
+# All AI bot modules (BaseBuilderBotModuleCA, UnitBuilderBotModuleCA,
+# SquadManagerBotModuleCA, SupportPowerBotASModule, etc.) are defined
+# as single trait instances on the Player: actor in the global
+# mods/cameo/ai/ai.yaml. Their sub-sections (BuildingLimits,
+# BuildingFractions, UnitsToBuild, UnitLimits) contain ALL faction
+# data in single dictionaries that CANNOT be split across files â€”
+# OpenRA's YAML merge replaces trait instances with the same @name,
+# it does not deep-merge their sub-sections.
+#
+# This file is loaded as a Rules: entry but contains no traits â€”
+# it is a placeholder ready for future per-faction bot module
+# splitting (see ROADMAP Phase E backlog).
+#
+# REFERENCE DATA (from global ai.yaml)
+# ====================================
+#
+# --- BuildingLimits (8 entries for steelconsortium) ---
+# 			steelconsortium_consortiumrefinery: 10
+# 			steelconsortium_steelbarracks: 10
+# 			steelconsortium_consortiumwarfactory: 10
+# 			steelconsortium_consortiumairpad: 10
+# 			steelconsortium_consortiumradar: 1
+# 			steelconsortium_cloningvats: 1
+# 			steelconsortium_consortiumbattlelab: 2
+# 			steelconsortium_orbitalcannonactivator: 1
+
+# Player: actor â€” no traits defined yet.
+# When the engine supports per-faction bot conditions, move the
+# faction-specific BuildingLimits/BuildingFractions/UnitsToBuild
+# entries here as a BaseBuilderBotModuleCA@<faction> /
+# UnitBuilderBotModuleCA@<faction> trait with RequiresCondition.
+Player:
+

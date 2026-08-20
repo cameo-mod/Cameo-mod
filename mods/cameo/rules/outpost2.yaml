@@ -1,57 +1,57 @@
 World:
-	FactionCA@plymouthl:
-		Name: Plymouth
-		InternalName: plymouthl
+	FactionCA@plymouth:
+		Name: Plymouth (WIP)
+		InternalName: plymouth
 		Game: Outpost 2
 		Side: Outpost 2
-		Description: Plymouth\nFeatures:\n- Splinter Colony\n- High tech faction from NewTerra\n- Must build a colony in order to operate\n- Has fast Lynx vehicles and strong Tiger verhicles\nSupport powers: Supernova Missile
+		Description: faction_outpost2_plymouth.description
 
 	#Starting units
-	StartingUnits@mcvonlyplymouthl:
+	StartingUnits@mcvonlyplymouth:
 		Class: none
 		ClassName: MCV Only
-		Factions: plymouthl
+		Factions: plymouth
 		BaseActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
 
-	StartingUnits@defaultplymouthl:
+	StartingUnits@defaultplymouth:
 		Class: light
 		ClassName: Light Support
-		Factions: plymouthl
+		Factions: plymouth
 		BaseActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
 		SupportActors: PLYMOUTH_SCOUT,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG
 
-	StartingUnits@heavyplymouthl:
+	StartingUnits@heavyplymouth:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: plymouthl
+		Factions: plymouth
 		BaseActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
 		SupportActors: PLYMOUTH_SCOUT,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG
 
-	FactionCA@edenl:
-		Name: Eden
-		InternalName: edenl
+	FactionCA@eden:
+		Name: Eden (WIP)
+		InternalName: eden
 		Game: Outpost 2
 		Side: Outpost 2
-		Description: Eden\nFeatures:\n- Primary Colony\n- High tech faction from NewTerra\n- Must build a colony in order to operate\n- Has fast Lynx vehicles and strong Tiger verhicles\nSupport powers: Supernova Missile
+		Description: faction_outpost2_eden.description
 
 	#Starting units
-	StartingUnits@mcvonlyedenl:
+	StartingUnits@mcvonlyeden:
 		Class: none
 		ClassName: MCV Only
-		Factions: edenl
+		Factions: eden
 		BaseActor: EDEN_CONVEC_STRUCTURE_FACTORY
 
-	StartingUnits@defaultedenl:
+	StartingUnits@defaulteden:
 		Class: light
 		ClassName: Light Support
-		Factions: edenl
+		Factions: eden
 		BaseActor: EDEN_CONVEC_STRUCTURE_FACTORY
 		SupportActors: EDEN_SCOUT,EDEN_LYNX_LASER,EDEN_LYNX_LASER,EDEN_LYNX_LASER,EDEN_LYNX_RAILGUN,EDEN_LYNX_RAILGUN
 
-	StartingUnits@heavyedenl:
+	StartingUnits@heavyeden:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: edenl
+		Factions: eden
 		BaseActor: EDEN_CONVEC_STRUCTURE_FACTORY
 		SupportActors: EDEN_SCOUT,EDEN_LYNX_LASER,EDEN_LYNX_LASER,EDEN_LYNX_LASER,EDEN_LYNX_RAILGUN,EDEN_LYNX_RAILGUN,EDEN_LYNX_RAILGUN
 
@@ -136,7 +136,7 @@ op2_commonore_beacon_3bar:
 #		INHERITABLES
 ####################################################################################################
 
-^op2_engineer:
+^OP2Engineer:
 	Inherits@selection: ^SelectableEconomicUnit
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -145,6 +145,7 @@ op2_commonore_beacon_3bar:
 	Valued:
 		Cost: 500
 	Buildable:
+		Description: Captures and repairs structures.\n  Unarmed
 		BuildPaletteOrder: 15
 		BuildDuration: 250
 		BuildDurationModifier: 100
@@ -156,12 +157,9 @@ op2_commonore_beacon_3bar:
 		HP: 7200
 	AutoTargetPriority@Repair:
 		ValidTargets: Repair, Repairing
-		ValidStances: Ally
 		Priority: 2
 	AutoTargetPriority@DEFAULT:
-		ValidStances: Enemy, Neutral
 	AutoTargetPriority@ATTACKANYTHING:
-		ValidStances: Enemy, Neutral
 	AutoTarget:
 		ScanRadius: 4
 	Passenger:
@@ -200,13 +198,14 @@ op2_commonore_beacon_3bar:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: false
 
-^op2_supplier:
+^OP2Supplier:
 	Inherits@selection: ^SelectableEconomicUnit
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Valued:
 		Cost: 500
 	Buildable:
+		Description: Supplies resources to nearby units.
 		BuildPaletteOrder: 18
 		BuildDuration: 100
 		BuildDurationModifier: 100
@@ -216,11 +215,6 @@ op2_commonore_beacon_3bar:
 		Modifier: 88
 	Health:
 		HP: 7200
-	DeliversCash:
-		Payload: 500
-		Type: NormalCash
-		PlayerExperience: 50
-		#-Sounds:
 	SpawnActorOnDeath:
 		Actor: moneycrate
 		OwnerType: InternalName
@@ -246,9 +240,10 @@ op2_commonore_beacon_3bar:
 		VoiceSet: factoryStructure
 	RenderSprites:
 		Image: rafact
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_tokamak:
+^OP2BaseTokamak:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@power: ^PowerPlant
@@ -256,9 +251,9 @@ op2_commonore_beacon_3bar:
 	Valued:
 		Cost: 750
 	Building:
-		Footprint: xX xx
-		Dimensions: 2,2
-		# LocalCenterOffset: 0,-512,0
+		Footprint: xX xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 225000
 	RevealsShroud:
@@ -267,10 +262,10 @@ op2_commonore_beacon_3bar:
 		Amount: 175
 	Voiced:
 		VoiceSet: tokamak
-	#WithBuildingBib:
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_smelter_common:
+^OP2BaseSmelterCommon:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@ref: ^Refinery
@@ -289,17 +284,19 @@ op2_commonore_beacon_3bar:
 		DragLength: 12
 	Voiced:
 		VoiceSet: smelterCommon
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_agridome:
+^OP2BaseAgridome:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@STATUS: ^OP2Building
 	Valued:
 		Cost: 300
 	Building:
-		Footprint: xxx xxx ===
-		Dimensions: 3,3
+		BuildLimit: 1
+		Footprint: xx xx ==
+		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 120000
@@ -309,10 +306,10 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: agridome
-	#WithBuildingBib:
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_residence:
+^OP2BaseResidence:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -321,6 +318,7 @@ op2_commonore_beacon_3bar:
 	ProvidesRadar:
 		RequiresCondition: !jammed
 	Building:
+		BuildLimit: 1
 		Footprint: xx xx ==
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
@@ -332,16 +330,17 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: residence
-	#WithBuildingBib:
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_basic_lab:
+^OP2BaseBasicLab:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
 	Valued:
 		Cost: 100
 	Building:
+		BuildLimit: 1
 		Footprint: xx xx ==
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
@@ -353,21 +352,22 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: basic_lab
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_factory_vehicle:
+^OP2BaseFactoryVehicle:
 	Inherits: ^BaseBuilding
-	Inherits@shape: ^2x2Shape
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@shape: ^3x3Shape
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@STATUS: ^OP2Building
-	Selectable:
-		Bounds: 4096,3072
+	# Selectable:
+	# 	Bounds: 4096,3072
 	Valued:
 		Cost: 2000
 	Building:
-		Footprint: xxx+ xxx+ xxx+ ====
-		Dimensions: 4,4
-		LocalCenterOffset: 0,-512,0
+		Footprint: xxx= xxx= ====
+		Dimensions: 4,3
+		LocalCenterOffset: -512,-512,0
 	Health:
 		HP: 150000
 	RevealsShroud:
@@ -377,15 +377,17 @@ op2_commonore_beacon_3bar:
 	Voiced:
 		VoiceSet: factoryVehicle
 	RallyPoint:
+		Path: 0,3
 	Exit@1:
 		SpawnOffset: 1500,85,0
-		ExitCell: 3,4
-	Exit@2:
-		SpawnOffset: 1500,298,0
-		ExitCell: 4,4
+		ExitCell: 3,1
+	# Exit@2:
+	# 	SpawnOffset: 1500,298,0
+	# 	ExitCell: 4,1
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_garage:
+^OP2BaseGarage:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@shape: ^3x3Shape
@@ -410,7 +412,6 @@ op2_commonore_beacon_3bar:
 		Type: Wood
 	RevealsShroud:
 		Range: 3c768
-	#-WithBuildingBib:
 	Selectable:
 		Bounds: 2048,1024,0,3
 		# DecorationBounds: 128,96
@@ -431,13 +432,14 @@ op2_commonore_beacon_3bar:
 		Amount: -50
 	ProvidesPrerequisite@buildingname:
 
-^op2base_nursery:
+^OP2BaseNursery:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
 	Valued:
 		Cost: 500
 	Building:
+		BuildLimit: 1
 		Footprint: xx xx ==
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
@@ -449,16 +451,17 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: nursery
-	#WithBuildingBib:
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_university:
+^OP2BaseUniversity:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
 	Valued:
 		Cost: 500
 	Building:
+		BuildLimit: 1
 		Footprint: xx xx ==
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
@@ -470,18 +473,19 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: university
-	#WithBuildingBib:
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_lab_standard:
+^OP2BaseLabStandard:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
 	Valued:
 		Cost: 500
 	Building:
-		Footprint: xxx xxx ===
-		Dimensions: 3,3
+		BuildLimit: 1
+		Footprint: xx xx ==
+		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 120000
@@ -491,10 +495,10 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: standard_lab
-	#WithBuildingBib:
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_dirt:
+^OP2BaseDirt:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -502,6 +506,7 @@ op2_commonore_beacon_3bar:
 	Valued:
 		Cost: 500
 	Building:
+		BuildLimit: 1
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
@@ -513,7 +518,7 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: dirt
-	#WithBuildingBib:
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 	GrantExternalConditionPower@forceshield:
 		OrderName: ForceShield
@@ -524,9 +529,9 @@ op2_commonore_beacon_3bar:
 			1: forceshield
 		ChargeInterval: 4500
 		Names:
-			1: power-forceshield.name
+			1: power_forceshield.name
 		Descriptions:
-			1: power-forceshield.description
+			1: power_forceshield.description
 		Durations:
 			1: 375
 		Conditions:
@@ -546,7 +551,7 @@ op2_commonore_beacon_3bar:
 		IncomingTextNotification: Warning: Force shield activated.
 		BlockedCursor: move-blocked
 
-^op2base_rcc:
+^OP2BaseRCC:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -564,9 +569,10 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: rcc
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_gorf:
+^OP2BaseGorf:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -584,26 +590,23 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: gorf
-	#WithBuildingBib:
+	WithBuildingBib:
 	ResourcePurifier:
 		Modifier: 25
 	ProvidesPrerequisite@buildingname:
 
-^op2base_lab_advanced:
+^OP2BaseLabAdvanced:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
 	Selectable:
 		Bounds: 3072,3072
-	HitShape:
-		Type: Rectangle
-			TopLeft: -2560,-2048
-			BottomRight: 2560,2048
 	Valued:
 		Cost: 1800
 	Building:
-		Footprint: xxx xxx xxx xxx ===
-		Dimensions: 3,5
+		BuildLimit: 1
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 140000
@@ -613,28 +616,29 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: advanced_lab
-	#WithBuildingBib:
+	WithBuildingBib:
 	FireWarheadsOnDeath@1:
 		Weapon: ReactorNuke
 		RequiresCondition: !chronobeamed
 	ProvidesPrerequisite@buildingname:
 
-^op2base_spaceport:
+^OP2BaseSpaceport:
 	Inherits: ^BaseBuilding
-	Inherits@shape: ^2x2Shape
+	Inherits@shape: ^4x4Shape
 	Inherits@STATUS: ^OP2Building
 	Inherits@SW: ^PrimarySuperweapon
 	Selectable:
-		Bounds: 4096,4096
+		Bounds: 3072,3072
 	HitShape:
 		Type: Rectangle
-			TopLeft: -2560,-2048
-			BottomRight: 2560,2048
+			TopLeft: -2048,-1536
+			BottomRight: 2048,1536
 	Valued:
 		Cost: 3000
 	Building:
-		Footprint: xxxxx xxxxx xxxxx xxxxx =====
-		Dimensions: 5,5
+		BuildLimit: 1
+		Footprint: xxxx xxxx xxxx ====
+		Dimensions: 4,4
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 200000
@@ -651,7 +655,7 @@ op2_commonore_beacon_3bar:
 		Cursor: nuke
 		ChargeInterval: 9000
 		Description: Supernova Missile
-		LongDesc: Launch a tactical missile.\nApplies heavy damage over a large area.
+		LongDesc: support_supernova_missile.description
 		EndChargeSpeechNotification: NuclearWeaponAvailable
 		SelectTargetSpeechNotification: SelectTarget
 		InsufficientPowerSpeechNotification: InsufficientPower
@@ -673,9 +677,10 @@ op2_commonore_beacon_3bar:
 	#	RequiresCondition: !build-incomplete
 	#WithNukeLaunchOverlay:
 	#	RequiresCondition: !build-incomplete
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_solararray:
+^OP2BaseSolarArray:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -686,8 +691,8 @@ op2_commonore_beacon_3bar:
 	Valued:
 		Cost: 1000
 	Building:
-		Footprint: xxx xxx xxx ===
-		Dimensions: 3,4
+		Footprint: xx xx ==
+		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 100000
@@ -697,23 +702,24 @@ op2_commonore_beacon_3bar:
 		Amount: 300
 	Voiced:
 		VoiceSet: tokamak
-	#WithBuildingBib:
+	WithBuildingBib:
 	ScalePowerWithHealth:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_smelter_rare:
+^OP2BaseSmelterRare:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
 	HitShape:
 		Type: Rectangle
-			TopLeft: -2560,-2048
-			BottomRight: 2560,2048
+			TopLeft: -2048,-1536
+			BottomRight: 2048,1536
 	Valued:
 		Cost: 2500
 	Building:
-		Footprint: xxxx xxxx xxxx xxxx ====
-		Dimensions: 4,5
+		BuildLimit: 1
+		Footprint: xxx xxx xxx ===
+		Dimensions: 3,4
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 140000
@@ -723,9 +729,10 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: smelterRare
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_light_tower:
+^OP2BaseLightTower:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^1x1Shape
 	Inherits@STATUS: ^OP2Building
@@ -746,7 +753,6 @@ op2_commonore_beacon_3bar:
 	DetectCloaked:
 		Range: 12c0
 		RequiresCondition: !lowpower
-	#WithBuildingBib:
 	WithSpriteBody:
 	#WithResourceLevelSpriteBody:
 	#	Sequence: stages
@@ -760,7 +766,7 @@ op2_commonore_beacon_3bar:
 	-AcceptsDeliveredCash:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_mine_common:
+^OP2BaseMineCommon:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -769,6 +775,7 @@ op2_commonore_beacon_3bar:
 	Valued:
 		Cost: 800
 	Building:
+		BuildLimit: 1
 		Footprint: xx ==
 		Dimensions: 2,2
 		LocalCenterOffset: 0,-512,0
@@ -783,14 +790,14 @@ op2_commonore_beacon_3bar:
 		Amount: -50
 	Voiced:
 		VoiceSet: mine_common
-	#WithBuildingBib:
+	WithBuildingBib:
 	SeedsResource:
 		Interval: 55	#110
 		ResourceType: OP2Ore
 		MaxRange: 2
 	ProvidesPrerequisite@buildingname:
 
-^op2base_storage_common:
+^OP2BaseStorageCommon:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^1x1Shape
 	Inherits@STATUS: ^OP2Building
@@ -806,7 +813,6 @@ op2_commonore_beacon_3bar:
 		HP: 25000
 	RevealsShroud:
 		Range: 4c0
-	#WithBuildingBib:
 	WithSpriteBody:
 	#WithResourceLevelSpriteBody:
 	#	Sequence: stages
@@ -842,7 +848,7 @@ EDEN_FACTORY_STRUCTURE:
 		Image: eden_factory_structure
 
 EDEN_TOKAMAK:
-	Inherits: ^op2base_tokamak
+	Inherits: ^OP2BaseTokamak
 	Tooltip:
 		Name: Eden Tokamak
 	ProvidesPrerequisite:
@@ -857,14 +863,14 @@ EDEN_TOKAMAK:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure
-		Description: Generates power\nReleases Emp Shockwave on\nDeath
+		Description: actor_tokamak.description
 	Building:
-		Footprint: xX xx
-		Dimensions: 2,2
-		# LocalCenterOffset: 0,-512,0
+		Footprint: xX xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
 
 EDEN_SMELTER_COMMON:
-	Inherits: ^op2base_smelter_common
+	Inherits: ^OP2BaseSmelterCommon
 	Tooltip:
 		Name: Eden Common Ore Smelter
 	ProvidesPrerequisite:
@@ -873,7 +879,7 @@ EDEN_SMELTER_COMMON:
 		BuildPaletteOrder: 20
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, eden_tokamak
-		Description: Processes resources
+		Description: eden_smelter_common.description
 	FreeActor:
 		Actor: eden_cargotruck_empty
 		SpawnOffset: 1,2
@@ -884,7 +890,7 @@ EDEN_SMELTER_COMMON:
 		Palette: placelinesegment
 
 EDEN_AGRIDOME:
-	Inherits: ^op2base_agridome
+	Inherits: ^OP2BaseAgridome
 	Tooltip:
 		Name: Eden Agridome
 	ProvidesPrerequisite:
@@ -895,10 +901,10 @@ EDEN_AGRIDOME:
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
 		BuildDuration: 50
-		Description: [Colony Building : Limit 1] Needed with Residence for Vehicle Factory
+		Description: eden_agridome.description
 
 EDEN_RESIDENCE:
-	Inherits: ^op2base_residence
+	Inherits: ^OP2BaseResidence
 	Tooltip:
 		Name: Eden Residence
 	ProvidesPrerequisite:
@@ -909,10 +915,10 @@ EDEN_RESIDENCE:
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
 		BuildDuration: 50
-		Description: [Colony Building : Limit 1] Needed with Agridome for Vehicle Factory\nProvides Radar
+		Description: actor_eden_residence.description
 
 EDEN_LAB_BASIC:
-	Inherits: ^op2base_basic_lab
+	Inherits: ^OP2BaseBasicLab
 	Tooltip:
 		Name: Eden Basic Lab
 	ProvidesPrerequisite:
@@ -923,10 +929,10 @@ EDEN_LAB_BASIC:
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
 		BuildDuration: 25
-		Description: [Colony Building : Limit 1] Needed with Nursery and University for Standard Lab
+		Description: actor_eden_lab_basic.description
 
 EDEN_FACTORY_VEHICLE:
-	Inherits: ^op2base_factory_vehicle
+	Inherits: ^OP2BaseFactoryVehicle
 	Tooltip:
 		Name: Eden Vehicle Factory
 	ProvidesPrerequisite:
@@ -935,19 +941,19 @@ EDEN_FACTORY_VEHICLE:
 		BuildPaletteOrder: 50
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_RESIDENCE, EDEN_AGRIDOME
-		Description: Constructs Vehicles
+		Description: actor_eden_factory_vehicle.description
 
 EDEN_GARAGE:
-	Inherits: ^op2base_garage
+	Inherits: ^OP2BaseGarage
 	Buildable:
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_FACTORY_VEHICLE
 		BuildPaletteOrder: 55
 		BuildDuration: 375
-		Description: Repairs vehicles.\n Allows construction of MCVs
+		Description: actor_eden_garage.description
 
 EDEN_NURSERY:
-	Inherits: ^op2base_nursery
+	Inherits: ^OP2BaseNursery
 	Tooltip:
 		Name: Eden Nursery
 	ProvidesPrerequisite:
@@ -958,10 +964,10 @@ EDEN_NURSERY:
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_RESIDENCE
 		BuildDuration: 50
-		Description: [Colony Building : Limit 1] Needed with University and Basic Lab for Standard Lab
+		Description: eden_nursery.description
 
 EDEN_UNIVERSITY:
-	Inherits: ^op2base_university
+	Inherits: ^OP2BaseUniversity
 	Tooltip:
 		Name: Eden University
 	ProvidesPrerequisite:
@@ -972,10 +978,10 @@ EDEN_UNIVERSITY:
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_RESIDENCE
 		BuildDuration: 50
-		Description: [Colony Building : Limit 1] Needed with Nursery and Basic Lab for Standard Lab
+		Description: eden_university.description
 
 EDEN_LAB_STANDARD:
-	Inherits: ^op2base_lab_standard
+	Inherits: ^OP2BaseLabStandard
 	Tooltip:
 		Name: Eden Standard Lab
 	ProvidesPrerequisite:
@@ -986,10 +992,10 @@ EDEN_LAB_STANDARD:
 		BuildPaletteOrder: 80
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_BASIC_LAB,EDEN_NURSERY,EDEN_UNIVERSITY
-		Description: [Colony Building : Limit 1] Needed for DIRT, Consumer Factory, GORF, and Advanced Lab
+		Description: eden_lab_standard.description
 
 EDEN_DIRT:
-	Inherits: ^op2base_dirt
+	Inherits: ^OP2BaseDirt
 	Tooltip:
 		Name: Eden Dirt
 	ProvidesPrerequisite:
@@ -998,10 +1004,10 @@ EDEN_DIRT:
 		BuildPaletteOrder: 90
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_LAB_STANDARD
-		Description: Provides Force Shield
+		Description: eden_dirt.description
 
 EDEN_RCC:
-	Inherits: ^op2base_rcc
+	Inherits: ^OP2BaseRCC
 	Tooltip:
 		Name: Eden Robot Command Center
 	ProvidesPrerequisite:
@@ -1012,7 +1018,7 @@ EDEN_RCC:
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_LAB_STANDARD
 		BuildDuration: 125
-		Description: [Colony Building : Limit 1] Needed for Consumer Factory
+		Description: eden_rcc.description
 
 EDEN_FACTORY_CONSUMER:
 	Inherits: ^BaseBuilding
@@ -1029,13 +1035,13 @@ EDEN_FACTORY_CONSUMER:
 		Cost: 1200
 	Tooltip:
 		Name: Eden Consumer Factory
-	#ProvidesPrerequisite:
-	#	Prerequisite:
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_FACTORY_CONSUMER
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_RCC
-		Description: Manufactures Consumer Goods
+		Description: eden_factory_consumer.description
 	Building:
 		Footprint: xx xx ==
 		Dimensions: 2,3
@@ -1048,7 +1054,7 @@ EDEN_FACTORY_CONSUMER:
 		Amount: -20
 	Voiced:
 		VoiceSet: factoryConsumer
-	#WithBuildingBib:
+	WithBuildingBib:
 	RallyPoint:
 	Exit@1:
 		SpawnOffset: -426,85,0
@@ -1073,10 +1079,10 @@ EDEN_FACTORY_CONSUMER:
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
-	ProductionBar@INFANTRYEDENL:
+	ProductionBar@INFANTRYeden:
 		ProductionType: Infantry
 		RequiresCondition: !classicproductionqueues
-	ProductionBar@RAINFANTRYEDENL:
+	ProductionBar@RAINFANTRYeden:
 		ProductionType: RAInfantry
 		RequiresCondition: classicproductionqueues
 	WithIdleOverlay@SMOKE1:
@@ -1093,7 +1099,7 @@ EDEN_FACTORY_CONSUMER:
 		Palette: placelinesegment
 
 EDEN_GORF:
-	Inherits: ^op2base_gorf
+	Inherits: ^OP2BaseGorf
 	Tooltip:
 		Name: Eden GORF
 	ProvidesPrerequisite:
@@ -1102,10 +1108,10 @@ EDEN_GORF:
 		BuildPaletteOrder: 110
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_LAB_STANDARD
-		Description: Increases income from Common Ore Smelter
+		Description: eden_gorf.description
 
 EDEN_LAB_ADVANCED:
-	Inherits: ^op2base_lab_advanced
+	Inherits: ^OP2BaseLabAdvanced
 	#1800
 	Tooltip:
 		Name: Eden Advanced Lab
@@ -1117,10 +1123,10 @@ EDEN_LAB_ADVANCED:
 		BuildDuration: 250
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_LAB_STANDARD
-		Description: [Colony Building : Limit 1] Needed for Space Port, Rare Ore Smelter
+		Description: eden_lab_advanced.description
 
 EDEN_SPACEPORT:
-	Inherits: ^op2base_spaceport
+	Inherits: ^OP2BaseSpaceport
 	#1800
 	Tooltip:
 		Name: Eden Space Port
@@ -1130,10 +1136,10 @@ EDEN_SPACEPORT:
 		BuildPaletteOrder: 130
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_LAB_ADVANCED
-		Description: Needed for Solar Power Array\nLaunches Supernova Missiles.
+		Description: eden_spaceport.description
 
 EDEN_SOLAR_ARRAY:
-	Inherits: ^op2base_solararray
+	Inherits: ^OP2BaseSolarArray
 	Tooltip:
 		Name: Eden Solar Array
 	ProvidesPrerequisite:
@@ -1142,10 +1148,10 @@ EDEN_SOLAR_ARRAY:
 		BuildPaletteOrder: 140
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_SPACEPORT
-		Description: Generates power\nReleases Emp Shockwave on\nDeath
+		Description: eden_solar_array.description
 
 EDEN_SMELTER_RARE:
-	Inherits: ^op2base_smelter_rare
+	Inherits: ^OP2BaseSmelterRare
 	#1800
 	Tooltip:
 		Name: Eden Rare Ore Smelter
@@ -1155,20 +1161,20 @@ EDEN_SMELTER_RARE:
 		BuildPaletteOrder: 150
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_LAB_ADVANCED
-		Description: Needed for Tigers
+		Description: eden_smelter_rare.description
 # ####################################################################################################
 # #		DEFENCE EDEN
 # ####################################################################################################
 EDEN_LIGHT_TOWER:
-	Inherits: ^op2base_light_tower
+	Inherits: ^OP2BaseLightTower
 	Buildable:
 		BuildPaletteOrder: 5
 		Prerequisites: ~eden_factory_structure
 		Queue: Defence, RADefence
-		Description: Provides sight and detection.
+		Description: eden_light_tower.description
 
 EDEN_MINE_COMMON:
-	Inherits: ^op2base_mine_common
+	Inherits: ^OP2BaseMineCommon
 	Tooltip:
 		Name: Eden Common Ore Mine
 	ProvidesPrerequisite:
@@ -1177,15 +1183,15 @@ EDEN_MINE_COMMON:
 		BuildPaletteOrder: 110
 		Queue: Defence, RADefence
 		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
-		Description: Provides passive income.\n spawns common ore
+		Description: eden_mine_common.description
 
 EDEN_STORAGE_COMMON:
-	Inherits: ^op2base_storage_common
+	Inherits: ^OP2BaseStorageCommon
 	Buildable:
 		BuildPaletteOrder: 5
 		Prerequisites: ~eden_factory_structure, EDEN_SMELTER_COMMON
 		Queue: Defence, RADefence
-		Description: Stores processed Tiberium
+		Description: eden_storage_common.description
 
 EDEN_GP_LASER:
 	Inherits: ^Defense
@@ -1203,7 +1209,7 @@ EDEN_GP_LASER:
 		Queue: Defence, RADefence
 		BuildDuration: 600
 		BuildDurationModifier: 40
-		Description: Laser defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
+		Description: eden_gp_laser.description
 	Building:
 	Health:
 		HP: 41000
@@ -1249,7 +1255,7 @@ EDEN_GP_EMP:
 		Queue: Defence, RADefence
 		BuildDuration: 600
 		BuildDurationModifier: 40
-		Description: EMP defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
+		Description: eden_gp_emp.description
 	Building:
 	Health:
 		HP: 41000
@@ -1263,7 +1269,7 @@ EDEN_GP_EMP:
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	Armament:
-		Weapon: edenEMPGP
+		Weapon: eden_EMP_GP
 		LocalOffset: 512,0,112
 		MuzzleSequence: muzzle
 	AttackTurreted:
@@ -1295,7 +1301,7 @@ EDEN_GP_RAILGUN:
 		Queue: Defence, RADefence
 		BuildDuration: 600
 		BuildDurationModifier: 40
-		Description: Railgun defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
+		Description: eden_gp_railgun.description
 	Building:
 	Health:
 		HP: 41000
@@ -1329,7 +1335,7 @@ EDEN_GP_RAILGUN:
 # #		WARES EDEN
 # ####################################################################################################
 
-CONSUMER_ITEMS_IMPULSE:
+eden_impulseitems:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
 	Valued:
@@ -1342,7 +1348,7 @@ CONSUMER_ITEMS_IMPULSE:
 		Queue: Infantry, RAInfantry
 		BuildDuration: 500
 		BuildDurationModifier: 40
-		Description: Cheap Items - Returns $600
+		Description: consumer_items_impulse.description
 	WithMoveAnimation:
 	Health:
 		HP: 1
@@ -1353,7 +1359,7 @@ CONSUMER_ITEMS_IMPULSE:
 		Delay: 3
 		RemoveInstead: true
 
-CONSUMER_ITEMS_WARES:
+eden_impulseitems_3:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
 	Valued:
@@ -1366,7 +1372,7 @@ CONSUMER_ITEMS_WARES:
 		Queue: Infantry, RAInfantry
 		BuildDuration: 800
 		BuildDurationModifier: 40
-		Description: Basic Items - Returns $1100
+		Description: consumer_items_wares.description
 	WithMoveAnimation:
 	Health:
 		HP: 1
@@ -1377,7 +1383,7 @@ CONSUMER_ITEMS_WARES:
 		Delay: 3
 		RemoveInstead: true
 
-CONSUMER_ITEMS_LUXURY_WARES:
+eden_impulseitems_2:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
 	Valued:
@@ -1390,7 +1396,7 @@ CONSUMER_ITEMS_LUXURY_WARES:
 		Queue: Infantry, RAInfantry
 		BuildDuration: 1000
 		BuildDurationModifier: 40
-		Description: Luxury Items - Returns $2300
+		Description: consumer_items_luxury_wares.description
 	WithMoveAnimation:
 	Health:
 		HP: 1
@@ -1412,9 +1418,9 @@ EDEN_CONVEC_STRUCTURE_FACTORY:
 	Tooltip:
 		Name: Eden Convec - Structure Factory
 	Buildable:
-		Prerequisites: ~eden_university
+		Prerequisites: ~eden_factory_vehicle, eden_university
 		Queue: Vehicle, RAVehicle
-		Description: Deploys into another Command Center.\n  Unarmed
+		Description: eden_convec_structure_factory.description
 	Transforms:
 		IntoActor: eden_factory_structure
 		Offset: -1,-1
@@ -1439,7 +1445,7 @@ EDEN_CARGOTRUCK_EMPTY:
 		BuildPaletteOrder: 10
 		Prerequisites: ~eden_factory_vehicle, eden_smelter_common
 		Queue: Vehicle, RAVehicle
-		Description: template-harvester.description
+		Description: template_harvester.description
 	Harvester:
 		BaleLoadDelay: 5
 		BaleUnloadDelay: 1
@@ -1477,71 +1483,76 @@ EDEN_CARGOTRUCK_EMPTY:
 
 EDEN_SCOUT:
 	Inherits: ^Vehicle
-	Inherits@selection: ^SelectableSupportUnit
-	Valued:
-		Cost: 300
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
 	Tooltip:
 		Name: Eden Scout
+	Valued:
+		Cost: 300
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~eden_factory_vehicle
 		Queue: Vehicle, RAVehicle
-		BuildDuration: 500
-		BuildDurationModifier: 40
-		Description: Unarmed scout
+		Description: eden_scout.description
 	Selectable:
 		Bounds: 1024,1024
 	Mobile:
 		Speed: 140
+		TurnSpeed: 28
 		Locomotor: heavywheeled
-	WithMoveAnimation:
 	Health:
-		HP: 10000
+		HP: 32500
+	Repairable:
+		HpPerStep: 1625
+	ChangesHealth@SelfHealing:
+		Step: 13
+	Turreted:
+		TurnSpeed: 28
+		Offset: -43,0,128
+	Armament:
+		Weapon: edenMachineGun
+		LocalOffset: 171,0,43
+		MuzzleSequence: muzzle
+	WithMoveAnimation:
 	Voiced:
 		VoiceSet: scoutVoice
-	Repairable:
-		HpPerStep: 2182
-	Armor:
-		Type: Heavy
-	RevealsShroud:
-		Range: 10c0
 	SelectionDecorations:
-	RenderSprites:
-		Scale: 0.75
 
 EDEN_LYNX_LASER:
 	Inherits: ^Vehicle
-	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@CLOAK: ^AcceptsCloakCrate
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Valued:
-		Cost: 500
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
 	Tooltip:
 		Name: Eden Laser Lynx
+	Valued:
+		Cost: 750
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 50
 		Prerequisites: ~eden_factory_vehicle
 		Queue: Vehicle, RAVehicle
-		Description: Fast laser vehicle
+		Description: eden_lynx_laser.description
 	Mobile:
-		TurnSpeed: 10
-		Speed: 90
+		Speed: 75
+		TurnSpeed: 15
 	WithMoveAnimation:
 	Health:
-		HP: 25000
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 30
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
-		Type: Light
-	RevealsShroud:
-		Range: 8c0
+		Type: Medium
 	Turreted:
-		TurnSpeed: 10
+		TurnSpeed: 15
 		Offset: -85,0,128
 	Armament:
 		Weapon: edenMobileLaser
@@ -1549,69 +1560,77 @@ EDEN_LYNX_LASER:
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
-	RenderSprites:
-		Scale: 0.75
 
-EDEN_TIGER_MICROWAVE:
-	Inherits: EDEN_LYNX_LASER
-	Valued:
-		Cost: 1300
+EDEN_TIGER_LASER:
+	Inherits: ^Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
 	Tooltip:
 		Name: Eden Laser Tiger
+	Valued:
+		Cost: 1500
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 100
 		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE
 		Queue: Vehicle, RAVehicle
-		Description: Slow and strong laser vehicle
+		Description: eden_tiger_microwave.description
 	Mobile:
+		Speed: 50
 		TurnSpeed: 10
-		Speed: 45
+	WithMoveAnimation:
 	Health:
-		HP: 60000
+		HP: 150000
+	Repairable:
+		HpPerStep: 7500
+	ChangesHealth@SelfHealing:
+		Step: 60
 	Voiced:
 		VoiceSet: op2tigerVoice
 	Armor:
 		Type: Heavy
+	Turreted:
+		TurnSpeed: 10
+		Offset: -85,0,128
 	Armament:
 		Weapon: edenMobileLaserTiger
 		LocalOffset: 171,0,85
-	RenderSprites:
-		Scale: 0.75
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
 
 EDEN_LYNX_RAILGUN:
 	Inherits: ^Vehicle
-	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@CLOAK: ^AcceptsCloakCrate
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Valued:
-		Cost: 600
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
 	Tooltip:
 		Name: Eden Railgun Lynx
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
+	Valued:
+		Cost: 900
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 60
 		Prerequisites: ~eden_factory_vehicle
 		Queue: Vehicle, RAVehicle
-		Description: Fast railgun vehcile
+		Description: eden_lynx_railgun.description
 	Mobile:
-		TurnSpeed: 10
-		Speed: 90
+		Speed: 80
+		TurnSpeed: 16
 	WithMoveAnimation:
 	Health:
-		HP: 25000
+		HP: 60000
+	Repairable:
+		HpPerStep: 3000
+	ChangesHealth@SelfHealing:
+		Step: 24
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 8c0
 	Turreted:
-		TurnSpeed: 10
+		TurnSpeed: 16
 		Offset: -85,0,128
 	Armament:
 		Weapon: edenRailgun
@@ -1620,109 +1639,135 @@ EDEN_LYNX_RAILGUN:
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
-	RenderSprites:
-		Scale: 0.75
 
 EDEN_TIGER_RAILGUN:
-	Inherits: EDEN_LYNX_RAILGUN
-	Valued:
-		Cost: 1300
+	Inherits: ^Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
 	Tooltip:
 		Name: Eden Railgun Tiger
+	Valued:
+		Cost: 1600
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 110
 		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE
 		Queue: Vehicle, RAVehicle
-		Description: Slow and strong railgun vehicle
+		Description: eden_tiger_railgun.description
 	Mobile:
-		TurnSpeed: 10
-		Speed: 45
+		Speed: 60
+		TurnSpeed: 12
+	WithMoveAnimation:
 	Health:
-		HP: 60000
+		HP: 120000
+	Repairable:
+		HpPerStep: 6000
+	ChangesHealth@SelfHealing:
+		Step: 48
 	Voiced:
 		VoiceSet: op2tigerVoice
 	Armor:
-		Type: Heavy
-	Armament:
-		Weapon: edenTigerRailgun
-		LocalOffset: 171,0,85
-	RenderSprites:
-		Scale: 0.75
-
-EDEN_LYNX_EMP:
-	Inherits: ^Vehicle
-	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@CLOAK: ^AcceptsCloakCrate
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Valued:
-		Cost: 700
-	Tooltip:
-		Name: Eden EMP Lynx
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 60
-		Prerequisites: ~eden_factory_vehicle, EDEN_LAB_STANDARD
-		Queue: Vehicle, RAVehicle
-		Description: Fast EMP vehicle
-	Mobile:
-		TurnSpeed: 10
-		Speed: 90
-	WithMoveAnimation:
-	Health:
-		HP: 25000
-	Voiced:
-		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
-	Armor:
-		Type: Light
-	RevealsShroud:
-		Range: 8c0
+		Type: Medium
 	Turreted:
-		TurnSpeed: 10
+		TurnSpeed: 12
 		Offset: -85,0,128
 	Armament:
-		Weapon: plymouthEMP
+		Weapon: edenTigerRailgun
 		LocalOffset: 256,43,341
 		FireDelay: 5
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
-	RenderSprites:
-		Scale: 0.75
+
+EDEN_LYNX_EMP:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Tooltip:
+		Name: Eden EMP Lynx
+	Valued:
+		Cost: 1050
+	Buildable:
+		Prerequisites: ~eden_factory_vehicle
+		Queue: Vehicle, RAVehicle
+		Description: eden_lynx_emp.description
+	Mobile:
+		Speed: 85
+		TurnSpeed: 17
+	WithMoveAnimation:
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Voiced:
+		VoiceSet: lynxVoice
+	Armor:
+		Type: Light
+	Turreted:
+		TurnSpeed: 17
+		Offset: -85,0,128
+	Armament@AG:
+		Weapon: eden_EMP
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	Armament@AA:
+		Weapon: eden_EMP_AA
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
 
 EDEN_TIGER_EMP:
-	Inherits: EDEN_LYNX_EMP
-	Valued:
-		Cost: 1500
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
 	Tooltip:
 		Name: Eden EMP Tiger
+	Valued:
+		Cost: 1700
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 120
-		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_LAB_STANDARD
+		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE
 		Queue: Vehicle, RAVehicle
-		Description: Slow and strong EMP vehicle
+		Description: eden_tiger_emp.description
 	Mobile:
-		TurnSpeed: 10
-		Speed: 45
+		Speed: 70
+		TurnSpeed: 14
+	WithMoveAnimation:
 	Health:
-		HP: 60000
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
 	Voiced:
 		VoiceSet: op2tigerVoice
 	Armor:
-		Type: Heavy
-	Armament:
-		Weapon: plymouthEMPTiger
-		LocalOffset: 171,0,85
-	RenderSprites:
-		Scale: 0.75
+		Type: Medium
+	Turreted:
+		TurnSpeed: 14
+		Offset: -85,0,128
+	Armament@AG:
+		Weapon: edenTiger_EMP
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	Armament@AA:
+		Weapon: edenTiger_EMP_AA
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
 
 EDEN_LYNX_ACIDCLOUD:
 	Inherits: ^Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -1733,11 +1778,9 @@ EDEN_LYNX_ACIDCLOUD:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 60
 		Prerequisites: ~eden_factory_vehicle, EDEN_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
-		Description: Fast AcidCloud vehicle
+		Description: eden_lynx_acidcloud.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -1746,8 +1789,6 @@ EDEN_LYNX_ACIDCLOUD:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -1772,11 +1813,9 @@ EDEN_TIGER_ACIDCLOUD:
 	Tooltip:
 		Name: Eden AcidCloud Tiger
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 140
 		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
-		Description: Slow and strong AcidCloud vehicle
+		Description: eden_tiger_acidcloud.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45
@@ -1794,37 +1833,34 @@ EDEN_TIGER_ACIDCLOUD:
 
 EDEN_LYNX_STARFLARE:
 	Inherits: ^Vehicle
+	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Valued:
-		Cost: 400
 	Tooltip:
 		Name: Eden Starflare Lynx
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
+	Valued:
+		Cost: 400
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 80
 		Prerequisites: ~eden_factory_vehicle, EDEN_GORF
 		Queue: Vehicle, RAVehicle
-		Description: Fast starflare vehicle
+		Description: eden_lynx_starflare.description
 	Mobile:
-		TurnSpeed: 10
-		Speed: 90
+		Speed: 100
+		TurnSpeed: 20
 	WithMoveAnimation:
 	Health:
-		HP: 25000
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 8c0
 	Turreted:
-		TurnSpeed: 10
+		TurnSpeed: 20
 		Offset: -85,0,128
 	Armament:
 		Weapon: DemoTruckTargeting
@@ -1835,79 +1871,101 @@ EDEN_LYNX_STARFLARE:
 	GrantConditionOnDeploy:
 		DeployedCondition: triggered
 		PauseOnCondition: disabled
-	FireWarheadsOnDeath@bomb:
-		Weapon: GLBarrelExplode
-		EmptyWeapon: GLBarrelExplode
-		DamageSource: Killer
+	FireWarheadsOnDeathCA@bomb:
+		Weapon: RA2Terrorist
+		EmptyWeapon: RA2Terrorist
 		RequiresCondition: !disabled
+	FirepowerMultiplier@bomb:
+		Modifier: 200
 	KillsSelf:
 		RequiresCondition: !disabled && (invulnerability || triggered)
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
-	RenderSprites:
-		Scale: 0.75
 
 EDEN_TIGER_STARFLARE:
-	Inherits: EDEN_LYNX_STARFLARE
-	Valued:
-		Cost: 800
-	Tooltip:
-		Name: Eden Starflare Tiger
-	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 150
-		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_GORF
-		Queue: Vehicle, RAVehicle
-		Description: Slow and strong Starflare vehicle
-	Mobile:
-		TurnSpeed: 10
-		Speed: 45
-	Health:
-		HP: 90000
-	Voiced:
-		VoiceSet: op2tigerVoice
-	Armor:
-		Type: Heavy
-	Armament:
-		Weapon: DemoTruckTargeting
-		LocalOffset: 171,0,85
-	RenderSprites:
-		Scale: 0.75
-
-EDEN_LYNX_THORSHAMMER:
 	Inherits: ^Vehicle
+	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Valued:
-		Cost: 1100
 	Tooltip:
-		Name: Eden ThorsHammer Lynx
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
+		Name: Eden Starflare Tiger
+	Valued:
+		Cost: 800
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 60
-		Prerequisites: ~eden_factory_vehicle, EDEN_LAB_ADVANCED
+		BuildPaletteOrder: 80
+		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_GORF
 		Queue: Vehicle, RAVehicle
-		Description: Fast ThorsHammer vehicle
+		Description: eden_tiger_starflare.description
 	Mobile:
-		TurnSpeed: 10
-		Speed: 90
+		Speed: 75
+		TurnSpeed: 15
 	WithMoveAnimation:
 	Health:
-		HP: 25000
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Voiced:
+		VoiceSet: op2tigerVoice
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 15
+		Offset: -85,0,128
+	Armament:
+		Weapon: DemoTruckTargeting
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	GrantConditionOnAttack:
+		Condition: triggered
+	GrantConditionOnDeploy:
+		DeployedCondition: triggered
+		PauseOnCondition: disabled
+	FireWarheadsOnDeathCA@bomb:
+		Weapon: RA2Terrorist
+		EmptyWeapon: RA2Terrorist
+		RequiresCondition: !disabled
+	FirepowerMultiplier@bomb:
+		Modifier: 400
+	KillsSelf:
+		RequiresCondition: !disabled && (invulnerability || triggered)
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+
+EDEN_LYNX_THORSHAMMER:
+	Inherits: ^Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Tooltip:
+		Name: Eden ThorsHammer Lynx
+	Valued:
+		Cost: 1100
+	Buildable:
+		Prerequisites: ~eden_factory_vehicle, EDEN_LAB_ADVANCED
+		Queue: Vehicle, RAVehicle
+		Description: eden_lynx_thorshammer.description
+	Mobile:
+		Speed: 90
+		TurnSpeed: 18
+	WithMoveAnimation:
+	Health:
+		HP: 80000
+	Repairable:
+		HpPerStep: 4000
+	ChangesHealth@SelfHealing:
+		Step: 32
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
-		Type: Light
-	RevealsShroud:
-		Range: 8c0
+		Type: Medium
 	Turreted:
-		TurnSpeed: 10
+		TurnSpeed: 18
 		Offset: -85,0,128
 	Armament:
 		Weapon: edenMobileThorsHammer
@@ -1916,35 +1974,45 @@ EDEN_LYNX_THORSHAMMER:
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
-	RenderSprites:
-		Scale: 0.75
 
 EDEN_TIGER_THORSHAMMER:
-	Inherits: EDEN_LYNX_THORSHAMMER
-	Valued:
-		Cost: 2200
+	Inherits: ^Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Tooltip:
 		Name: Eden ThorsHammer Tiger
+	Valued:
+		Cost: 2200
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 140
 		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
-		Description: Slow and strong ThorsHammer vehicle
+		Description: eden_tiger_thorshammer.description
 	Mobile:
-		TurnSpeed: 10
-		Speed: 45
+		Speed: 80
+		TurnSpeed: 16
+	WithMoveAnimation:
 	Health:
-		HP: 60000
+		HP: 160000
+	Repairable:
+		HpPerStep: 8000
+	ChangesHealth@SelfHealing:
+		Step: 64
 	Voiced:
 		VoiceSet: op2tigerVoice
 	Armor:
 		Type: Heavy
+	Turreted:
+		TurnSpeed: 18
+		Offset: -85,0,128
 	Armament:
 		Weapon: edenMobileThorsHammerTiger
-		LocalOffset: 171,0,85
-	RenderSprites:
-		Scale: 0.75
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
 
 # #OLD
 # ELLASER:
@@ -2003,7 +2071,7 @@ PLYMOUTH_STRUCTURE_FACTORY:
 		Image: plymouth_structure_factory
 
 PLYMOUTH_TOKAMAK:
-	Inherits: ^op2base_tokamak
+	Inherits: ^OP2BaseTokamak
 	Tooltip:
 		Name: Plymouth Tokamak
 	ProvidesPrerequisite:
@@ -2012,10 +2080,10 @@ PLYMOUTH_TOKAMAK:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY
-		Description: Generates power\nReleases Emp Shockwave on\nDeath
+		Description: actor_tokamak.description
 
 PLYMOUTH_SMELTER_COMMON:
-	Inherits: ^op2base_smelter_common
+	Inherits: ^OP2BaseSmelterCommon
 	Tooltip:
 		Name: Plymouth Common Ore Smelter
 	ProvidesPrerequisite:
@@ -2024,14 +2092,14 @@ PLYMOUTH_SMELTER_COMMON:
 		BuildPaletteOrder: 20
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, plymouth_tokamak
-		Description: Processes resources
+		Description: plymouth_smelter_common.description
 	FreeActor:
 		Actor: plymouth_cargotruck_empty
 		SpawnOffset: 1,2
 		Facing: 64
 
 PLYMOUTH_AGRIDOME:
-	Inherits: ^op2base_agridome
+	Inherits: ^OP2BaseAgridome
 	Tooltip:
 		Name: Plymouth Agridome
 	ProvidesPrerequisite:
@@ -2042,10 +2110,10 @@ PLYMOUTH_AGRIDOME:
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_TOKAMAK
 		BuildDuration: 100
-		Description: [Colony Building : Limit 1] Needed with Residence for Vehicle Factory
+		Description: plymouth_agridome.description
 
 PLYMOUTH_RESIDENCE:
-	Inherits: ^op2base_residence
+	Inherits: ^OP2BaseResidence
 	Tooltip:
 		Name: Plymouth Residence
 	ProvidesPrerequisite:
@@ -2056,10 +2124,10 @@ PLYMOUTH_RESIDENCE:
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
 		BuildDuration: 100
-		Description: [Colony Building : Limit 1] Needed with Agridome for Vehicle Factory\nProvides Radar
+		Description: plymouth_residence.description
 
 PLYMOUTH_BASIC_LAB:
-	Inherits: ^op2base_basic_lab
+	Inherits: ^OP2BaseBasicLab
 	Tooltip:
 		Name: Plymouth Basic Lab
 	ProvidesPrerequisite:
@@ -2070,10 +2138,10 @@ PLYMOUTH_BASIC_LAB:
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_TOKAMAK
 		BuildDuration: 25
-		Description: [Colony Building : Limit 1] Needed with Nursery and University for Standard Lab
+		Description: plymouth_basic_lab.description
 
 PLYMOUTH_FACTORY_VEHICLE:
-	Inherits: ^op2base_factory_vehicle
+	Inherits: ^OP2BaseFactoryVehicle
 	Tooltip:
 		Name: Plymouth Vehicle Factory
 	ProvidesPrerequisite:
@@ -2083,42 +2151,19 @@ PLYMOUTH_FACTORY_VEHICLE:
 		BuildDuration: 600
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_RESIDENCE, PLYMOUTH_AGRIDOME
-		Description: Constructs Vehicles
-	Production@NORMAL:
-		Produces: Vehicle
-		RequiresCondition: !classicproductionqueues
-	Production@CLASSICPRODUCTIONQUEUES:
-		Produces: RAVehicle
-		RequiresCondition: classicproductionqueues
-	ProductionQueue:
-		Type: Vehicle
-		DisplayOrder: 3
-		Group: Vehicle
-		LowPowerModifier: 300
-		ReadyAudio: UnitReady
-		BlockedAudio: NoBuild
-		LimitedAudio: BuildingInProgress
-		QueuedAudio: Training
-		OnHoldAudio: OnHold
-		CancelledAudio: Cancelled
-	ProductionBar@VEHICLEPLYMOUTHL:
-		ProductionType: Vehicle
-		RequiresCondition: !classicproductionqueues
-	ProductionBar@RAVEHICLEPLYMOUTHL:
-		ProductionType: RAVehicle
-		RequiresCondition: classicproductionqueues
+		Description: plymouth_factory_vehicle.description
 
 PLYMOUTH_GARAGE:
-	Inherits: ^op2base_garage
+	Inherits: ^OP2BaseGarage
 	Buildable:
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_FACTORY_VEHICLE
 		BuildPaletteOrder: 55
 		BuildDuration: 375
-		Description: Repairs vehicles.\n Allows construction of MCVs
+		Description: plymouth_garage.description
 
 PLYMOUTH_NURSERY:
-	Inherits: ^op2base_nursery
+	Inherits: ^OP2BaseNursery
 	Tooltip:
 		Name: Plymouth Nursery
 	ProvidesPrerequisite:
@@ -2129,10 +2174,10 @@ PLYMOUTH_NURSERY:
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_RESIDENCE
 		BuildDuration: 50
-		Description: [Colony Building : Limit 1] Needed with University and Basic Lab for Standard Lab
+		Description: plymouth_nursery.description
 
 PLYMOUTH_UNIVERSITY:
-	Inherits: ^op2base_university
+	Inherits: ^OP2BaseUniversity
 	Tooltip:
 		Name: Plymouth University
 	ProvidesPrerequisite:
@@ -2143,10 +2188,10 @@ PLYMOUTH_UNIVERSITY:
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_RESIDENCE
 		BuildDuration: 50
-		Description: [Colony Building : Limit 1] Needed with Nursery and Basic Lab for Standard Lab
+		Description: plymouth_university.description
 
 PLYMOUTH_LAB_STANDARD:
-	Inherits: ^op2base_lab_standard
+	Inherits: ^OP2BaseLabStandard
 	Tooltip:
 		Name: Plymouth Standard Lab
 	ProvidesPrerequisite:
@@ -2156,10 +2201,10 @@ PLYMOUTH_LAB_STANDARD:
 		BuildPaletteOrder: 80
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_BASIC_LAB,PLYMOUTH_NURSERY,PLYMOUTH_UNIVERSITY
-		Description: [Colony Building : Limit 1] Needed for DIRT, Arachnid Factory, GORF, and Advanced Lab
+		Description: plymouth_lab_standard.description
 
 PLYMOUTH_DIRT:
-	Inherits: ^op2base_dirt
+	Inherits: ^OP2BaseDirt
 	Tooltip:
 		Name: Plymouth Dirt
 	ProvidesPrerequisite:
@@ -2168,10 +2213,10 @@ PLYMOUTH_DIRT:
 		BuildPaletteOrder: 90
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
-		Description: Provides Force Shield
+		Description: plymouth_dirt.description
 
 PLYMOUTH_RCC:
-	Inherits: ^op2base_rcc
+	Inherits: ^OP2BaseRCC
 	Tooltip:
 		Name: Plymouth Robot Command Center
 	ProvidesPrerequisite:
@@ -2182,13 +2227,13 @@ PLYMOUTH_RCC:
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
 		BuildDuration: 125
-		Description: [Colony Building : Limit 1] Needed for Arachnid Factory
+		Description: plymouth_rcc.description
 
 PLYMOUTH_FACTORY_ARACHNID:
 	Inherits: ^BaseBuilding
-	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	Selectable:
 		Bounds: 2048,2048
 	HitShape:
@@ -2203,7 +2248,7 @@ PLYMOUTH_FACTORY_ARACHNID:
 		BuildPaletteOrder: 100
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_RCC
-		Description: Constructs Arachnids
+		Description: plymouth_factory_arachnid.description
 	Building:
 		Footprint: xx xx ==
 		Dimensions: 2,3
@@ -2216,7 +2261,7 @@ PLYMOUTH_FACTORY_ARACHNID:
 		Amount: -20
 	Voiced:
 		VoiceSet: factoryArachnid
-	#WithBuildingBib:
+	WithBuildingBib:
 	RallyPoint:
 	Exit@1:
 		SpawnOffset: -426,85,0
@@ -2224,32 +2269,9 @@ PLYMOUTH_FACTORY_ARACHNID:
 	Exit@2:
 		SpawnOffset: 298,298,0
 		ExitCell: 2,2
-	Production@NORMAL:
-		Produces: Infantry
-		RequiresCondition: !classicproductionqueues
-	Production@CLASSICPRODUCTIONQUEUES:
-		Produces: RAInfantry
-		RequiresCondition: classicproductionqueues
-	ProductionQueue:
-		Type: Infantry
-		DisplayOrder: 2
-		Group: Infantry
-		LowPowerModifier: 300
-		ReadyAudio: UnitReady
-		BlockedAudio: NoBuild
-		LimitedAudio: BuildingInProgress
-		QueuedAudio: Training
-		OnHoldAudio: OnHold
-		CancelledAudio: Cancelled
-	ProductionBar@INFANTRYPLYMOUTHL:
-		ProductionType: Infantry
-		RequiresCondition: !classicproductionqueues
-	ProductionBar@RAINFANTRYPLYMOUTHL:
-		ProductionType: RAInfantry
-		RequiresCondition: classicproductionqueues
 
 PLYMOUTH_GORF:
-	Inherits: ^op2base_gorf
+	Inherits: ^OP2BaseGorf
 	Tooltip:
 		Name: Plymouth GORF
 	ProvidesPrerequisite:
@@ -2258,10 +2280,10 @@ PLYMOUTH_GORF:
 		BuildPaletteOrder: 110
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
-		Description: Increases income from Common Ore Smelter
+		Description: plymouth_gorf.description
 
 PLYMOUTH_LAB_ADVANCED:
-	Inherits: ^op2base_lab_advanced
+	Inherits: ^OP2BaseLabAdvanced
 	#1800
 	Tooltip:
 		Name: Plymouth Advanced Lab
@@ -2273,10 +2295,10 @@ PLYMOUTH_LAB_ADVANCED:
 		BuildDuration: 250
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
-		Description: [Colony Building : Limit 1] Needed for Space Port, Rare Ore Smelter
+		Description: plymouth_lab_advanced.description
 
 PLYMOUTH_SPACEPORT:
-	Inherits: ^op2base_spaceport
+	Inherits: ^OP2BaseSpaceport
 	#1800
 	Tooltip:
 		Name: Plymouth Space Port
@@ -2286,10 +2308,10 @@ PLYMOUTH_SPACEPORT:
 		BuildPaletteOrder: 130
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_ADVANCED
-		Description: Needed for Solar Power Array\nLaunches Supernova Missiles.
+		Description: plymouth_spaceport.description
 
 PLYMOUTH_SOLARARRAY:
-	Inherits: ^op2base_solararray
+	Inherits: ^OP2BaseSolarArray
 	Tooltip:
 		Name: Plymouth Solar Array
 	ProvidesPrerequisite:
@@ -2298,10 +2320,10 @@ PLYMOUTH_SOLARARRAY:
 		BuildPaletteOrder: 140
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_SPACEPORT
-		Description: Generates power\nReleases Emp Shockwave on\nDeath
+		Description: plymouth_solar_array.description
 
 PLYMOUTH_SMELTER_RARE:
-	Inherits: ^op2base_smelter_rare
+	Inherits: ^OP2BaseSmelterRare
 	#1800
 	Tooltip:
 		Name: Plymouth Rare Ore Smelter
@@ -2311,22 +2333,21 @@ PLYMOUTH_SMELTER_RARE:
 		BuildPaletteOrder: 150
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_ADVANCED
-		Description: Needed for Tigers
-
+		Description: plymouth_smelter_rare.description
 
 # ####################################################################################################
 # #		DEFENCE PLYMOUTH
 # ####################################################################################################
 PLYMOUTH_LIGHT_TOWER:
-	Inherits: ^op2base_light_tower
+	Inherits: ^OP2BaseLightTower
 	Buildable:
 		BuildPaletteOrder: 5
 		Prerequisites: ~plymouth_structure_factory
 		Queue: Defence, RADefence
-		Description: Provides sight and detection.
+		Description: plymouth_light_tower.description
 
 PLYMOUTH_MINE_COMMON:
-	Inherits: ^op2base_mine_common
+	Inherits: ^OP2BaseMineCommon
 	Tooltip:
 		Name: Plymouth Common Ore Mine
 	ProvidesPrerequisite:
@@ -2335,15 +2356,15 @@ PLYMOUTH_MINE_COMMON:
 		BuildPaletteOrder: 110
 		Queue: Defence, RADefence
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
-		Description: Provides passive income.\n spawns common ore
+		Description: plymouth_mine_common.description
 
 PLYMOUTH_STORAGE_COMMON:
-	Inherits: ^op2base_storage_common
+	Inherits: ^OP2BaseStorageCommon
 	Buildable:
 		BuildPaletteOrder: 5
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_SMELTER_COMMON
 		Queue: Defence, RADefence
-		Description: Stores processed Tiberium
+		Description: plymouth_storage_common.description
 
 PLYMOUTH_GP_MICROWAVE:
 	Inherits: ^Defense
@@ -2361,7 +2382,7 @@ PLYMOUTH_GP_MICROWAVE:
 		Queue: Defence, RADefence
 		BuildDuration: 600
 		BuildDurationModifier: 40
-		Description: Microwave defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
+		Description: plymouth_gp_microwave.description
 	Building:
 	Health:
 		HP: 41000
@@ -2407,7 +2428,7 @@ PLYMOUTH_GP_STICKYFOAM:
 		Queue: Defence, RADefence
 		BuildDuration: 600
 		BuildDurationModifier: 40
-		Description: Stickyfoam defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
+		Description: plymouth_gp_stickyfoam.description
 	Building:
 	Health:
 		HP: 41000
@@ -2453,7 +2474,7 @@ PLYMOUTH_GP_RPG:
 		Queue: Defence, RADefence
 		BuildDuration: 600
 		BuildDurationModifier: 40
-		Description: RPG defense.\n  Strong vs Tanks, vehicles\n  Doubles as Anti-air
+		Description: plymouth_gp_rpg.description
 	Building:
 	Health:
 		HP: 41000
@@ -2495,9 +2516,9 @@ PLYMOUTH_CONVEC_STRUCTURE_FACTORY:
 	Tooltip:
 		Name: Plymouth Convec - Structure Factory
 	Buildable:
-		Prerequisites: ~plymouth_university
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, plymouth_university
 		Queue: Vehicle, RAVehicle
-		Description: Deploys into a Structure Factory.\n  Unarmed
+		Description: plymouth_convec_structure_factory.description
 	Selectable:
 		Bounds: 1024,1024
 	Voiced:
@@ -2522,9 +2543,9 @@ PLYMOUTH_CARGOTRUCK_EMPTY:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~plymouth_smelter_common
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, plymouth_smelter_common
 		Queue: Vehicle, RAVehicle
-		Description: template-harvester.description
+		Description: template_harvester.description
 	Harvester:
 		BaleLoadDelay: 4
 		BaleUnloadDelay: 1
@@ -2562,41 +2583,47 @@ PLYMOUTH_CARGOTRUCK_EMPTY:
 
 PLYMOUTH_SCOUT:
 	Inherits: ^Vehicle
-	Inherits@selection: ^SelectableSupportUnit
-	Valued:
-		Cost: 300
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
 	Tooltip:
 		Name: Plymouth Scout
+	Valued:
+		Cost: 350
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE
 		Queue: Vehicle, RAVehicle
-		BuildDuration: 500
-		BuildDurationModifier: 40
-		Description: Unarmed scout
+		Description: plymouth_scout.description
 	Selectable:
-		DecorationBounds: 1024,1024
+		Bounds: 1024,1024
 	Mobile:
-		Speed: 140
+		Speed: 135
+		TurnSpeed: 27
 		Locomotor: heavywheeled
-	WithMoveAnimation:
 	Health:
-		HP: 10000
+		HP: 35000
+	Repairable:
+		HpPerStep: 1750
+	ChangesHealth@SelfHealing:
+		Step: 14
+	Turreted:
+		TurnSpeed: 27
+		Offset: -43,0,128
+	Armament:
+		Weapon: plymouthMachineGun
+		LocalOffset: 171,0,43
+		MuzzleSequence: muzzle
+	WithMoveAnimation:
 	Voiced:
 		VoiceSet: scoutVoice
-	Repairable:
-		HpPerStep: 2182
-	Armor:
-		Type: Heavy
-	RevealsShroud:
-		Range: 10c0
 	SelectionDecorations:
-	RenderSprites:
-		Scale: 0.75
 
 # PLYMOUTH_TECH_PLATFORM:
 # 	Inherits: ^Soldier
-# 	Inherits@OP2Template: ^op2_engineer
+# 	Inherits@OP2Template: ^OP2Engineer
 # 	Mobile:
 # 		Speed: 72
 # 	Tooltip:
@@ -2616,7 +2643,7 @@ PLYMOUTH_SCOUT:
 
 # PLYMOUTH_CASH_PLATFORM:
 # 	Inherits: ^Soldier
-# 	Inherits@OP2Template: ^op2_supplier
+# 	Inherits@OP2Template: ^OP2Supplier
 # 	Tooltip:
 # 		Name: Cash Platform
 # 	Buildable:
@@ -2634,6 +2661,7 @@ PLYMOUTH_SCOUT:
 
 PLYMOUTH_SPIDER:
 	Inherits: ^Vehicle
+	Inherits@Template: ^MechanicTemplate
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -2644,7 +2672,7 @@ PLYMOUTH_SPIDER:
 		Queue: Infantry, RAInfantry
 		BuildDuration: 500
 		BuildDurationModifier: 40
-		Description: Arachnid capable of repair and capturing vehicles
+		Description: plymouth_spider.description
 	Selectable:
 		Bounds: 512,512
 	Mobile:
@@ -2663,7 +2691,7 @@ PLYMOUTH_SPIDER:
 		Range: 10c0
 	SelectionDecorations:
 	Armament:
-		Weapon: TSRepair
+		Weapon: ts_nod_mobilerepairvehicle
 		TargetStances: Ally
 		ForceTargetStances: None
 	AttackFrontal:
@@ -2678,6 +2706,7 @@ PLYMOUTH_SPIDER:
 
 PLYMOUTH_SCORPION:
 	Inherits: ^Vehicle
+	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Valued:
 		Cost: 300
@@ -2691,7 +2720,7 @@ PLYMOUTH_SCORPION:
 		Queue: Infantry, RAInfantry
 		BuildDuration: 500
 		BuildDurationModifier: 40
-		Description: Arachnid armed with laser
+		Description: plymouth_scorpion.description
 	Selectable:
 		Bounds: 512,512
 	Mobile:
@@ -2747,6 +2776,7 @@ PLYMOUTH_SCORPION:
 
 PLYMOUTH_LYNX_MICROWAVE:
 	Inherits: ^Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -2761,7 +2791,7 @@ PLYMOUTH_LYNX_MICROWAVE:
 		BuildPaletteOrder: 50
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE
 		Queue: Vehicle, RAVehicle
-		Description: Fast microwave vehicle
+		Description: plymouth_lynx_microwave.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -2770,8 +2800,6 @@ PLYMOUTH_LYNX_MICROWAVE:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -2799,7 +2827,7 @@ PLYMOUTH_TIGER_MICROWAVE:
 		BuildPaletteOrder: 100
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE,PLYMOUTH_SMELTER_RARE
 		Queue: Vehicle, RAVehicle
-		Description: Slow and strong microwave vehicle
+		Description: plymouth_tiger_microwave.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45
@@ -2817,6 +2845,7 @@ PLYMOUTH_TIGER_MICROWAVE:
 
 PLYMOUTH_LYNX_RPG:
 	Inherits: ^Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -2831,7 +2860,7 @@ PLYMOUTH_LYNX_RPG:
 		BuildPaletteOrder: 60
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE
 		Queue: Vehicle, RAVehicle
-		Description: Fast rpg vehcile
+		Description: plymouth_lynx_rpg.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -2840,8 +2869,6 @@ PLYMOUTH_LYNX_RPG:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -2870,7 +2897,7 @@ PLYMOUTH_TIGER_RPG:
 		BuildPaletteOrder: 110
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE,PLYMOUTH_SMELTER_RARE
 		Queue: Vehicle, RAVehicle
-		Description: Slow and strong RPG vehicle
+		Description: plymouth_tiger_rpg.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45
@@ -2888,6 +2915,7 @@ PLYMOUTH_TIGER_RPG:
 
 PLYMOUTH_LYNX_EMP:
 	Inherits: ^Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -2902,7 +2930,7 @@ PLYMOUTH_LYNX_EMP:
 		BuildPaletteOrder: 60
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_LAB_STANDARD
 		Queue: Vehicle, RAVehicle
-		Description: Fast EMP vehcile
+		Description: plymouth_lynx_emp.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -2911,8 +2939,6 @@ PLYMOUTH_LYNX_EMP:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -2921,7 +2947,7 @@ PLYMOUTH_LYNX_EMP:
 		TurnSpeed: 10
 		Offset: -85,0,128
 	Armament:
-		Weapon: plymouthEMP
+		Weapon: plymouth_EMP
 		LocalOffset: 256,43,341
 		FireDelay: 5
 	AttackTurreted:
@@ -2941,7 +2967,7 @@ PLYMOUTH_TIGER_EMP:
 		BuildPaletteOrder: 120
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_SMELTER_RARE, PLYMOUTH_LAB_STANDARD
 		Queue: Vehicle, RAVehicle
-		Description: Slow and strong EMP vehicle
+		Description: plymouth_tiger_emp.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45
@@ -2952,13 +2978,14 @@ PLYMOUTH_TIGER_EMP:
 	Armor:
 		Type: Heavy
 	Armament:
-		Weapon: plymouthEMPTiger
+		Weapon: plymouth_EMP_Tiger
 		LocalOffset: 171,0,85
 	RenderSprites:
 		Scale: 0.75
 
 PLYMOUTH_LYNX_STICKYFOAM:
 	Inherits: ^Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -2973,7 +3000,7 @@ PLYMOUTH_LYNX_STICKYFOAM:
 		BuildPaletteOrder: 60
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_RESIDENCE
 		Queue: Vehicle, RAVehicle
-		Description: Fast EMP vehcile
+		Description: plymouth_lynx_stickyfoam.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -2982,8 +3009,6 @@ PLYMOUTH_LYNX_STICKYFOAM:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -3012,7 +3037,7 @@ PLYMOUTH_TIGER_STICKYFOAM:
 		BuildPaletteOrder: 130
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_SMELTER_RARE, PLYMOUTH_RESIDENCE
 		Queue: Vehicle, RAVehicle
-		Description: Slow and strong Stickyfoam vehicle
+		Description: plymouth_tiger_stickyfoam.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45
@@ -3030,6 +3055,7 @@ PLYMOUTH_TIGER_STICKYFOAM:
 
 PLYMOUTH_LYNX_ESG:
 	Inherits: ^Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -3044,7 +3070,7 @@ PLYMOUTH_LYNX_ESG:
 		BuildPaletteOrder: 60
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
-		Description: Fast EMP vehcile
+		Description: plymouth_lynx_esg.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -3053,8 +3079,6 @@ PLYMOUTH_LYNX_ESG:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -3083,7 +3107,7 @@ PLYMOUTH_TIGER_ESG:
 		BuildPaletteOrder: 140
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_SMELTER_RARE, PLYMOUTH_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
-		Description: Slow and strong ESG vehicle
+		Description: plymouth_tiger_esg.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45
@@ -3101,6 +3125,7 @@ PLYMOUTH_TIGER_ESG:
 
 PLYMOUTH_LYNX_STARFLARE:
 	Inherits: ^Vehicle
+	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -3115,7 +3140,7 @@ PLYMOUTH_LYNX_STARFLARE:
 		BuildPaletteOrder: 80
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_GORF
 		Queue: Vehicle, RAVehicle
-		Description: Fast starflare vehicle
+		Description: plymouth_lynx_starflare.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -3124,8 +3149,6 @@ PLYMOUTH_LYNX_STARFLARE:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -3166,7 +3189,7 @@ PLYMOUTH_TIGER_STARFLARE:
 		BuildPaletteOrder: 150
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_SMELTER_RARE, PLYMOUTH_GORF
 		Queue: Vehicle, RAVehicle
-		Description: Slow and strong Starflare vehicle
+		Description: plymouth_tiger_starflare.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45
@@ -3184,6 +3207,7 @@ PLYMOUTH_TIGER_STARFLARE:
 
 PLYMOUTH_LYNX_SUPERNOVA:
 	Inherits: ^Vehicle
+	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -3198,7 +3222,7 @@ PLYMOUTH_LYNX_SUPERNOVA:
 		BuildPaletteOrder: 90
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
-		Description: Fast supernova vehicle
+		Description: plymouth_lynx_supernova.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -3207,8 +3231,6 @@ PLYMOUTH_LYNX_SUPERNOVA:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -3248,7 +3270,7 @@ PLYMOUTH_TIGER_SUPERNOVA:
 		BuildPaletteOrder: 160
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_SMELTER_RARE, PLYMOUTH_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
-		Description: Slow and strong Supernova vehicle
+		Description: plymouth_tiger_supernova.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45
@@ -3310,16 +3332,16 @@ PLYMOUTH_TIGER_SUPERNOVA:
 # 	BaseBuilding:
 # 	Production:
 # 		Produces: Building, Defence, Vehicle
-# 	ProductionBar@BuildingEdenl:
+# 	ProductionBar@Buildingeden:
 # 		ProductionType: Building
-# 	ProductionBar@DefenceEdenl:
+# 	ProductionBar@Defenceeden:
 # 		ProductionType: Defence
-# 	ProductionBar@VehicleEdenl:
+# 	ProductionBar@Vehicleeden:
 # 		ProductionType: Vehicle
-# 	ProductionQueue@BuildingEdenl:
+# 	ProductionQueue@Buildingeden:
 # 		Type: Building
 # 		DisplayOrder: 0
-# 		Factions: edenl
+# 		Factions: eden
 # 		Group: Building
 # 		LowPowerModifier: 200
 # 		ReadyAudio: ConstructionComplete
@@ -3328,10 +3350,10 @@ PLYMOUTH_TIGER_SUPERNOVA:
 # 		QueuedAudio: Building
 # 		OnHoldAudio: OnHold
 # 		CancelledAudio: Cancelled
-# 	ProductionQueue@EdenlDefenceEdenl:
+# 	ProductionQueue@edenDefenceeden:
 # 		Type: Defence
 # 		DisplayOrder: 1
-# 		Factions: edenl
+# 		Factions: eden
 # 		Group: Defence
 # 		LowPowerModifier: 200
 # 		ReadyAudio: UnitReady
@@ -3341,10 +3363,10 @@ PLYMOUTH_TIGER_SUPERNOVA:
 # 		OnHoldAudio: OnHold
 # 		CancelledAudio: Cancelled
 # 	#Temporary vehicle production capability
-# 	ProductionQueue@EdenlVehicleEdenl:
+# 	ProductionQueue@edenVehicleeden:
 # 		Type: Vehicle
 # 		DisplayOrder: 1
-# 		Factions: edenl
+# 		Factions: eden
 # 		Group: Vehicle
 # 		LowPowerModifier: 200
 # 		ReadyAudio: UnitReady

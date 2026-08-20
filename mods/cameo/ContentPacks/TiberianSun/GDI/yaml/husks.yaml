@@ -1,0 +1,95 @@
+ts_gdi_orcafighter_husk:
+	Inherits: ^PlaneHusk
+	Inherits@Voxel: ^TSRenderVoxel
+	Tooltip:
+		Name: Orca Fighter
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 186
+	RenderSprites:
+		Image: ts_gdi_orcafighter
+	RenderVoxels:
+		Image: ts_gdi_orcafighter
+	-WithShadow:
+	-Cloak@TDcloak:
+	-Cloak@TScloak:
+
+ts_gdi_orcabomber_husk:
+	Inherits: ^PlaneHusk
+	Inherits@Voxel: ^TSRenderVoxel
+	Tooltip:
+		Name: Orca Bomber
+	Aircraft:
+		TurnSpeed: 40
+		Speed: 96
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: ts_gdi_orcabomber
+	RenderVoxels:
+		Image: ts_gdi_orcabomber
+		Scale: 15
+	-WithShadow:
+	-Cloak@TDcloak:
+	-Cloak@TScloak:
+
+ts_gdi_carryall_husk:
+	Inherits: ^PlaneHusk
+	Inherits@Voxel: ^TSRenderVoxel
+	Tooltip:
+		Name: Carryall
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 149
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: ts_gdi_carryall
+	RenderVoxels:
+		Image: ts_gdi_carryall
+		Scale: 7.4
+	-WithShadow:
+	-Cloak@TDcloak:
+	-Cloak@TScloak:
+
+ts_gdi_kodiakcommandship_husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Kodiak Command Ship
+	Aircraft:
+		TurnSpeed: 15
+		Speed: 30
+	RenderSprites:
+		Image: ts_gdi_kodiakcommandship
+		PlayerPalette: playerra2
+	FallsToEarth:
+		Explosion: KirovExplode
+
+
+
+###############################################
+# TS Upgrades
+###############################################
+
+########## Radar ##########
+
+ts_gdi_jumpjetinfantry_husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Jumpjet Infantry
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 149
+	LeavesTrails:
+		Offsets: -427,0,0
+		Image: smokey
+		MovingInterval: 3
+		StationaryInterval: 3
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: tsjumpjet
+		PlayerPalette: playerra2

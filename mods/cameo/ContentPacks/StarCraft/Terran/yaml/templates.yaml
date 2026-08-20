@@ -1,0 +1,134 @@
+^Stimpackable:
+	Inherits@bot: ^BotAutoDeployTimedAbility
+	GrantTimedConditionOnDeploy@stim:
+		DeployedCondition: stimmed
+		CooldownTicks: 550
+		DeployedTicks: 275
+		PauseOnCondition: disabled || nostim
+		RequiresCondition: terran_upgrade_stimpack
+		StartsFullyCharged: true
+	SpeedMultiplier@stim:
+		Modifier: 150
+		RequiresCondition: stimmed
+	ReloadDelayMultiplier@stim:
+		Modifier: 50
+		RequiresCondition: stimmed
+	DamageMultiplier@stim:
+		Modifier: 150
+		RequiresCondition: stimmed
+	GrantTimedCondition@stimdamage:
+		Condition: stimdamage
+		Duration: 4
+		RequiresCondition: stimmed
+	ChangesHealth@stimdamage:
+		Step: -2000
+		Delay: 1
+		StartIfBelow: 150
+		DamageTypes: DefaultDeath
+		RequiresCondition: stimdamage
+	GrantConditionOnDamageState@disablestim:
+		Condition: nostim
+		ValidDamageStates: Critical
+	IssueOrderToBot@AI:
+		OrderTrigger: Attack
+		OrderChance: 50
+		OrderInterval: 550
+		RequiresCondition: terran_upgrade_stimpack && !nostim && botmicro
+	GrantConditionOnPrerequisite@stim:
+		Condition: terran_upgrade_stimpack
+		Prerequisites: terran_upgrade_stimpack
+	ActorStatValues:
+		Upgrades: terran_upgrade_stimpack
+
+^UraniumShellsUpgrade:
+	RangeMultiplier@terran_upgrade_u238shells:
+		RequiresCondition: terran_upgrade_u238shells
+		Modifier: 120
+	GrantConditionOnPrerequisite@terran_upgrade_u238shells:
+		Condition: terran_upgrade_u238shells
+		Prerequisites: terran_upgrade_u238shells
+	ActorStatValues:
+		Upgrades: terran_upgrade_u238shells
+
+^TerranInfantryWeaponUpgrades:
+	FirepowerMultiplier@terran_upgrade_infantryweaponslevel1:
+		Modifier: 115
+		RequiresCondition: terran_upgrade_infantryweaponslevel1 && !terran_upgrade_infantryweaponslevel2
+	GrantConditionOnPrerequisite@terran_upgrade_infantryweaponslevel1:
+		Condition: terran_upgrade_infantryweaponslevel1
+		Prerequisites: terran_upgrade_infantryweaponslevel1
+	FirepowerMultiplier@terran_upgrade_infantryweaponslevel2:
+		Modifier: 135
+		RequiresCondition: terran_upgrade_infantryweaponslevel2
+	GrantConditionOnPrerequisite@terran_upgrade_infantryweaponslevel2:
+		Condition: terran_upgrade_infantryweaponslevel2
+		Prerequisites: terran_upgrade_infantryweaponslevel2
+	ActorStatValues:
+		Upgrades: terran_upgrade_infantryweaponslevel1
+
+^TerranInfantryArmorUpgrades:
+	DamageMultiplier@terran_upgrade_infantryarmorlevel1:
+		Modifier: 90
+		RequiresCondition: terran_upgrade_infantryarmorlevel1 && !terran_upgrade_infantryarmorlevel2
+	GrantConditionOnPrerequisite@terran_upgrade_infantryarmorlevel1:
+		Condition: terran_upgrade_infantryarmorlevel1
+		Prerequisites: terran_upgrade_infantryarmorlevel1
+	DamageMultiplier@terran_upgrade_infantryarmorlevel2:
+		Modifier: 80
+		RequiresCondition: terran_upgrade_infantryarmorlevel2
+	GrantConditionOnPrerequisite@terran_upgrade_infantryarmorlevel2:
+		Condition: terran_upgrade_infantryarmorlevel2
+		Prerequisites: terran_upgrade_infantryarmorlevel2
+	ActorStatValues:
+		Upgrades: terran_upgrade_infantryarmorlevel1
+
+^TerranVehiclesWeaponUpgrades:
+	FirepowerMultiplier@terran_upgrade_vehicleweaponslevel1:
+		Modifier: 115
+		RequiresCondition: terran_upgrade_vehicleweaponslevel1 && !terran_upgrade_vehicleweaponslevel2
+	GrantConditionOnPrerequisite@terran_upgrade_vehicleweaponslevel1:
+		Condition: terran_upgrade_vehicleweaponslevel1
+		Prerequisites: terran_upgrade_vehicleweaponslevel1
+	FirepowerMultiplier@terran_upgrade_vehicleweaponslevel2:
+		Modifier: 135
+		RequiresCondition: terran_upgrade_vehicleweaponslevel2
+	GrantConditionOnPrerequisite@terran_upgrade_vehicleweaponslevel2:
+		Condition: terran_upgrade_vehicleweaponslevel2
+		Prerequisites: terran_upgrade_vehicleweaponslevel2
+	ActorStatValues:
+		Upgrades: terran_upgrade_vehicleweaponslevel1
+
+^SCTINFANTRY:
+	Inherits: ^DefaultSoldier
+	Inherits@EXT: ^ExternalConditions
+	Inherits@shadow: ^SCSmallShadow
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		IdleSequences: idle
+		DefaultAttackSequence: shoot
+	Armor:
+		Type: None
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
+		CrushedSequence: die
+		CrushedSequencePalette: player
+		CrushedPaletteIsPlayerPalette: true
+		PlayerPalette: player_rgba
+	Crushable:
+		CrushClasses: vehicle
+		-CrushSound:
+	Power:
+		Amount: -10
+
+^SCTVEHICLE:
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Description: Terran vehicle template.
+	Power:
+		Amount: -20

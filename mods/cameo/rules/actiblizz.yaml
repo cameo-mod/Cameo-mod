@@ -15,13 +15,13 @@ World:
 		ClassName: Light Support
 		Factions: actibliz
 		BaseActor: mcv.actibliz
-		SupportActors: drguardian,drguardian,drguardian,drbion,drbion,scvulture,drptnk
+		SupportActors: drguardian,drguardian,drguardian,drbion,drbion,terran_vulture,drptnk
 	StartingUnits@heavyactibliz:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: actibliz
 		BaseActor: mcv.actibliz
-		SupportActors: drguardian,drguardian,drguardian,drbion,drbion,scvulture,drptnk,drptnk,drptnk,drptnk
+		SupportActors: drguardian,drguardian,drguardian,drbion,drbion,terran_vulture,drptnk,drptnk,drptnk,drptnk
 
 drwaterl.actibliz:
 	Inherits: drwaterl.imperium
@@ -40,13 +40,13 @@ drwaterl.actibliz:
 		Prerequisite: Extractor
 
 scsupplydepot.actibliz:
-	Inherits: SCSUPPLYDEPOT
+	Inherits: terran_supplydepot
 	Buildable:
 		Queue: Building, RABuilding
 	Power:
 		Amount: 150
 	RenderSprites:
-		Image: scsupplydepot
+		Image: terran_supplydepot
 mcv.actibliz:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
@@ -59,13 +59,12 @@ mcv.actibliz:
 		Name: Construction Rig (Actibliz)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -165,7 +164,7 @@ drihq.actibliz:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmactibliz
@@ -190,7 +189,7 @@ dribarr.actibliz:
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -321,13 +320,13 @@ drplastur1.actibliz:
 	RenderSprites:
 		Image: drplastur1
 scmissileturret.actibliz:
-	Inherits: SCMISSILETURRET
+	Inherits: terran_missileturret
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: drihq2
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: scmissileturret
+		Image: terran_missileturret
 drneutronturret.actibliz:
 	Inherits: drneutronturret
 	Buildable:
@@ -338,13 +337,13 @@ drneutronturret.actibliz:
 	RenderSprites:
 		Image: drneutronturret
 scbunker.actibliz:
-	Inherits: SCBUNKER
+	Inherits: terran_bunker
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: barracks, ~techlevel.low
 	RenderSprites:
-		Image: scbunker
+		Image: terran_bunker
 
 drirep.actibliz:
 	Inherits: drirep
@@ -363,7 +362,7 @@ drihosp.actibliz:
 	RenderSprites:
 		Image: drihosp
 scstarport.actibliz:
-	Inherits: SCSTARPORT
+	Inherits: terran_starport
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: drihq3
@@ -381,46 +380,46 @@ scstarport.actibliz:
 		ProductionType: RAAircraft
 		RequiresCondition: classicproductionqueues
 	RenderSprites:
-		Image: scstarport
+		Image: terran_starport
 scsciencefacility.actibliz:
-	Inherits: SCSCIENCEFACILITY
+	Inherits: terran_sciencefacility
 	Buildable:
 		Prerequisites: drihq3, !terrannuke
 		Queue: Building, RABuilding
 		Description: Unlocks Battlecruiser, Ghost & Nuclear Strike.
 	RenderSprites:
-		Image: scsciencefacility
+		Image: terran_sciencefacility
 scengineeringbay.actibliz:
-	Inherits: SCENGINEERINGBAY
+	Inherits: terran_engineeringbay
 	Buildable:
-		Prerequisites: barracks, ~techlevel.medium
+		Prerequisites: barracks
 		Queue: Building, RABuilding
 	RenderSprites:
-		Image: scengineeringbay
+		Image: terran_engineeringbay
 scarmory.actibliz:
-	Inherits: SCARMORY
+	Inherits: terran_armory
 	Buildable:
-		Prerequisites: vehicleproduction, ~techlevel.medium
+		Prerequisites: vehicleproduction
 		Queue: Building, RABuilding
 	RenderSprites:
-		Image: scarmory
+		Image: terran_armory
 scacademy.actibliz:
-	Inherits: SCACADEMY
+	Inherits: terran_academy
 	Buildable:
-		Prerequisites: barracks, ~techlevel.medium
+		Prerequisites: barracks
 		Queue: Building, RABuilding
 	RenderSprites:
-		Image: scacademy
+		Image: terran_academy
 
-^actiblizzprotoss:
+^ActiBlizzProtoss:
 	Tooltip:
 		Name: Protoss Archives
 	ProvidesPrerequisite:
 		Prerequisite: actiblizzprotoss
 		
 sctemplararchives.actibliz:
-	Inherits: ^actiblizzprotoss
-	Inherits: SCTEMPLARARCHIVES
+	Inherits: ^ActiBlizzProtoss
+	Inherits@2: protoss_templararchives
 	Valued:
 		Cost: 1600
 	Tooltip:
@@ -429,14 +428,14 @@ sctemplararchives.actibliz:
 		Prerequisite: actiblizzprotoss
 	Buildable:
 		BuildPaletteOrder: 130
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Building, RABuilding
 		Description: Unlocks Protoss Technology.
 	RenderSprites:
 		Image: actitemplararchives
 
 scfleetbeacon.actibliz:
-	Inherits: SCFLEETBEACON
+	Inherits: protoss_fleetbeacon
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -445,14 +444,14 @@ scfleetbeacon.actibliz:
 		Prerequisite: Fleet Beacon
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: Starport, actiblizzprotoss, ~techlevel.high, !purebeam
+		Prerequisites: Starport, actiblizzprotoss, !purebeam
 		Queue: Building, RABuilding
 		Description: Unlocks Carrier and Purifier Beam support power.
 	RenderSprites:
 		Image: actifleetbeacon
 
 scroboticssupportbay.actibliz:
-	Inherits: SCROBOTICSSUPPORTBAY
+	Inherits: protoss_roboticssupportbay
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -461,42 +460,42 @@ scroboticssupportbay.actibliz:
 		Prerequisite: Robotics Support Bay
 	Buildable:
 		BuildPaletteOrder: 110
-		Prerequisites: driweap2, actiblizzprotoss, ~techlevel.medium
+		Prerequisites: driweap2, actiblizzprotoss
 		Queue: Building, RABuilding
 		Description: Unlocks Reaver.
 	RenderSprites:
 		Image: actiroboticssupportbay
 scbunker.actibliz.full:
-	Inherits: SCBUNKER
+	Inherits: terran_bunker
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: barracks, ~techlevel.low, ~botplayer
 	RenderSprites:
-		Image: scbunker
+		Image: terran_bunker
 	Cargo:
 		InitialUnits: scmarine.actibliz, scmarine.actibliz, scmarine.actibliz, scmarine.actibliz
 scbunker.actibliz.full2:
-	Inherits: SCBUNKER
+	Inherits: terran_bunker
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: barracks, ~techlevel.low, ~botplayer
 	RenderSprites:
-		Image: scbunker
+		Image: terran_bunker
 	Cargo:
 		InitialUnits: scmarine.actibliz, scmarauder.actibliz, drguardian.actibliz, drbion.actibliz
 scinfestedcom.actibliz:
-	Inherits: SCINFESTEDCOMMANDCENTER
+	Inherits: zerg_infestedcommandcenter
 	Valued:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: drihq3, ~techlevel.high, !zergnuke
+		Prerequisites: drihq3, !zergnuke
 		Queue: Building, RABuilding
 		Description: Unlocks Zerg Stuff.
 	RenderSprites:
-		Image: scinfestedcommandcenter
+		Image: zerg_infestedcommandcenter
 	MobSpawnerMaster@1:
 		Actors: sc_zerg_larva
 		Offset: 1000,255,0
@@ -532,24 +531,24 @@ scinfestedcom.actibliz:
 ####################################################################################################
 ^SCDRUPGRADES1:
 	GrantConditionOnPrerequisite@infarmor:
-		Condition: upinfarmor
-		Prerequisites: upinfarmor
+		Condition: terran_upgrade_infantryarmorlevel1
+		Prerequisites: terran_upgrade_infantryarmorlevel1
 	DamageMultiplier@infarmor:
 		Modifier: 75
-		RequiresCondition: upinfarmor
+		RequiresCondition: terran_upgrade_infantryarmorlevel1
 
 ^SCDRUPGRADES2:
 	GrantConditionOnPrerequisite@mecharmor:
-		Condition: upmecharmor
-		Prerequisites: upmecharmor
+		Condition: terran_upgrade_vehicleplatinglevel1
+		Prerequisites: terran_upgrade_vehicleplatinglevel1
 	DamageMultiplier@mecharmor:
 		Modifier: 66
-		RequiresCondition: upmecharmor
+		RequiresCondition: terran_upgrade_vehicleplatinglevel1
 
 ^SCDRUPGRADES3:
 	GrantConditionOnPrerequisite@sarmor:
 		Condition: uparmor
-		Prerequisites: upshiparmor
+		Prerequisites: terran_upgrade_shipplatinglevel1
 	DamageMultiplier@armor:
 		Modifier: 75
 		RequiresCondition: uparmor
@@ -566,43 +565,43 @@ drspy.actibliz:
 		VoiceSet: DRImperiumSpyVoice
 
 scscv.actibliz:
-	Inherits: SCSCV
+	Inherits: terran_scv
 	Buildable:
 		Prerequisites: drwaterl.actibliz
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: scscv
+		Image: terran_scv
 
 scmarine.actibliz:
-	Inherits: SCMARINE
+	Inherits: terran_marine
 	Buildable:
 		Queue: Infantry, RAInfantry
 	RenderSprites:
-		Image: scmarine
+		Image: terran_marine
 
 scmarauder.actibliz:
-	Inherits: scmarauder
+	Inherits: terran_marauder
 	Buildable:
 		Queue: Infantry, RAInfantry
 	RenderSprites:
-		Image: scmarauder
+		Image: terran_marauder
 
 scghost.actibliz:
-	Inherits: SCGHOST
+	Inherits: terran_ghost
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: Academy, Science Facility, ~techlevel.high, dribarr2
+		Prerequisites: Academy, Science Facility, dribarr2
 	RenderSprites:
-		Image: scghost
+		Image: terran_ghost
 
 scmedic.actibliz:
-	Inherits: SCMEDIC
+	Inherits: terran_medic
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 40
 		Prerequisites: Academy, drihosp.actibliz
 	RenderSprites:
-		Image: scmedic
+		Image: terran_medic
 
 drbion.actibliz:
 	Inherits: drbion
@@ -623,13 +622,13 @@ drext.actibliz:
 		Image: drext
 
 scdarktemplar.actibliz:
-	Inherits: SCDARKTEMPLAR
+	Inherits: protoss_darktemplar
 	Inherits@SCUPGRADES: ^SCDRUPGRADES1
 	Buildable:
 		Prerequisites: barracks, dribarr2, actiblizzprotoss
 		Queue: Infantry, RAInfantry
 	RenderSprites:
-		Image: scdarktemplar
+		Image: protoss_darktemplar
 
 drguardian.actibliz:
 	Inherits: drguardian
@@ -640,24 +639,24 @@ drguardian.actibliz:
 		Image: drguardian
 
 scvulture.actibliz:
-	Inherits: SCVULTURE
+	Inherits: terran_vulture
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
-		Image: scvulture
+		Image: terran_vulture
 
 scgoliath.actibliz:
-	Inherits: SCGOLIATH
+	Inherits: terran_goliath
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
-		Image: scgoliath
+		Image: terran_goliath
 
 drfury.actibliz:
 	Inherits: drfury
 	Inherits@SCUPGRADES: ^SCDRUPGRADES2
 	Buildable:
-		Prerequisites: driweap2, ~techlevel.medium, Armory
+		Prerequisites: driweap2, Armory
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: drfury
@@ -695,7 +694,7 @@ drmad.actibliz:
 		Image: drmad
 
 scsiegetank.actibliz:
-	Inherits: SCSIEGETANK
+	Inherits: terran_siegetank
 	Buildable:
 		Prerequisites: Engineering Bay, driweap2
 		Queue: Vehicle, RAVehicle
@@ -703,33 +702,33 @@ scsiegetank.actibliz:
 		Image: actisiegetank
 
 scwraith.actibliz:
-	Inherits: SCWRAITH
+	Inherits: terran_wraith
 	Buildable:
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
-		Image: scwraith
+		Image: terran_wraith
 
 scdropship.actibliz:
-	Inherits: SCWRAITH
+	Inherits: terran_wraith
 	Buildable:
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
-		Image: scdropship
+		Image: terran_dropship
 
 scbattlecruiser.actibliz:
-	Inherits: SCBATTLECRUISER
+	Inherits: terran_battlecruiser
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: Science Facility, ~techlevel.high
+		Prerequisites: Science Facility
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
-		Image: scbattlecruiser
+		Image: terran_battlecruiser
 
 drdrone.actibliz:
 	Inherits: drdrone
 	Inherits@SCUPGRADES: ^SCDRUPGRADES1
 	Buildable:
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
 		Image: drdrone
@@ -738,45 +737,45 @@ drhades.actibliz:
 	Inherits: drhades
 	Inherits@SCUPGRADES: ^SCDRUPGRADES1
 	Buildable:
-		Prerequisites: drihq3, ~techlevel.medium
+		Prerequisites: drihq3
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
 		Image: drhades
 
 scdragoon.actibliz:
-	Inherits: SCDRAGOON
+	Inherits: protoss_dragoon
 	Inherits@SCUPGRADES: ^SCDRUPGRADES1
 	Buildable:
-		Prerequisites: actiblizzprotoss, ~techlevel.medium
+		Prerequisites: actiblizzprotoss
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: actidragoon
 screaver.actibliz:
-	Inherits: SCREAVER
+	Inherits: protoss_reaver
 	Inherits@SCUPGRADES: ^SCDRUPGRADES1
 	Buildable:
-		Prerequisites: Robotics Support Bay, driweap2, ~techlevel.medium
+		Prerequisites: Robotics Support Bay, driweap2
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: actireaver
 
 sccarrier.actibliz:
-	Inherits: SCCARRIER
+	Inherits: protoss_carrier
 	Buildable:
-		Prerequisites: Fleet Beacon, drihq3, ~techlevel.high
+		Prerequisites: Fleet Beacon, drihq3
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
 		Image: acticarrier
 
 scscout.actibliz:
-	Inherits: SCSCOUT
+	Inherits: protoss_scout
 	Valued:
 		Cost: 2500
 	Tooltip:
 		Name: Imperial Scout
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~techlevel.high, Fleet Beacon
+		Prerequisites: Fleet Beacon
 		Queue: Aircraft, RAAircraft
 		Description: Protoss fighter aircraft.\n Strong vs Aircraft
 	Armament@PRIMARY:
@@ -785,11 +784,11 @@ scscout.actibliz:
 		Image: actiscout
 
 scbotoverlord.actibliz:
-	Inherits: SCOVERLORD
+	Inherits: zerg_overlord
 	UpdatesPlayerStatistics:
-		OverrideActor: scoverlord
+		OverrideActor: zerg_overlord
 	RenderSprites:
-		Image: SCOVERLORD
+		Image: zerg_overlord
 	Buildable:
 		BuildPaletteOrder: 1020
 		Queue: Defence, RADefence
@@ -835,23 +834,23 @@ drmadfake.actibliz:
 ####################################################################################################
 #		AI Bunkers
 scbunker.actibliz.full:
-	Inherits: SCBUNKER
+	Inherits: terran_bunker
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: barracks, ~techlevel.low, ~botplayer
 	RenderSprites:
-		Image: scbunker
+		Image: terran_bunker
 	Cargo:
 		InitialUnits: scmarine.actibliz, scmarine.actibliz, scmarine.actibliz, drbion.actibliz
 scbunker.actibliz.full2:
-	Inherits: SCBUNKER
+	Inherits: terran_bunker
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: barracks, ~techlevel.low, ~botplayer
 	RenderSprites:
-		Image: scbunker
+		Image: terran_bunker
 	Cargo:
 		InitialUnits: scmarine.actibliz, scmarine.actibliz, scmarine.actibliz, drguardian.actibliz
 #		AI Transport
@@ -939,4 +938,4 @@ scdropship.actibliz.templar:
 		Prerequisites: ~hardbotplayer, dribarr2, actiblizzprotoss
 		Queue: Aircraft, RAAircraft
 	Cargo:
-		InitialUnits: scdarktemplar, scdarktemplar, scdarktemplar, scdarktemplar
+		InitialUnits: protoss_darktemplar, protoss_darktemplar, protoss_darktemplar, protoss_darktemplar

@@ -1,0 +1,169 @@
+forgotten_promotion_bowler:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: actor_forgotten_promotion_bowler.name
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Promotions
+		Description: actor_forgotten_promotion_bowler.description
+		Prerequisites: ~fact.forgotten, !forgotten_promotion_bowler, rank1
+	RenderSprites:
+		Image: forgotten_bowler
+	ProvidesPrerequisite:
+		Prerequisite: forgotten_promotion_bowler
+
+forgotten_promotion_runnershotgal:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: actor_forgotten_promotion_runnershotgal.name
+	Buildable:
+		BuildPaletteOrder: 4
+		Queue: Promotions
+		Description: actor_forgotten_promotion_runnershotgal.description
+		Prerequisites: ~fact.forgotten, forgotten_promotion_bowler, !forgotten_promotion_runnershotgal, rank1
+	RenderSprites:
+		Image: forgotten_runnershotgal
+	ProvidesPrerequisite:
+		Prerequisite: forgotten_promotion_runnershotgal
+
+forgotten_promotion_viniferafiend:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: actor_forgotten_promotion_viniferafiend.name
+	Buildable:
+		BuildPaletteOrder: 7
+		Queue: Promotions
+		Description: actor_forgotten_promotion_viniferafiend.description
+		Prerequisites: ~fact.forgotten, forgotten_promotion_runnershotgal, !forgotten_promotion_viniferafiend, rank1
+	RenderSprites:
+		Image: forgotten_viniferafiend
+	ProvidesPrerequisite:
+		Prerequisite: forgotten_promotion_viniferafiend
+
+forgotten_promotion_ghoststalker:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: actor_forgotten_promotion_ghoststalker.name
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Promotions
+		Description: actor_forgotten_promotion_ghoststalker.description
+		Prerequisites: ~fact.forgotten, forgotten_promotion_viniferafiend, !forgotten_promotion_ghoststalker, rank1
+	RenderSprites:
+		Image: forgotten_ghoststalker
+	ProvidesPrerequisite:
+		Prerequisite: forgotten_promotion_ghoststalker
+
+forgotten_promotion_warriortank:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: actor_forgotten_promotion_warriortank.name
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Promotions
+		Description: actor_forgotten_promotion_warriortank.description
+		Prerequisites: ~fact.forgotten, !forgotten_promotion_warriortank, rank1
+	RenderSprites:
+		Image: forgotten_warriortank
+	ProvidesPrerequisite:
+		Prerequisite: forgotten_promotion_warriortank
+
+forgotten_promotion_scoopertank:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: actor_forgotten_promotion_scoopertank.name
+	Buildable:
+		BuildPaletteOrder: 5
+		Queue: Promotions
+		Description: actor_forgotten_promotion_scoopertank.description
+		Prerequisites: ~fact.forgotten, forgotten_promotion_warriortank, !forgotten_promotion_scoopertank, rank1
+	RenderSprites:
+		Image: forgotten_scoopertank
+	ProvidesPrerequisite:
+		Prerequisite: forgotten_promotion_scoopertank
+
+forgotten_promotion_mlrs:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: actor_forgotten_promotion_mlrs.name
+	Buildable:
+		BuildPaletteOrder: 8
+		Queue: Promotions
+		Description: actor_forgotten_promotion_mlrs.description
+		Prerequisites: ~fact.forgotten, forgotten_promotion_scoopertank, !forgotten_promotion_mlrs, rank1
+	RenderSprites:
+		Image: forgotten_mlrs
+	ProvidesPrerequisite:
+		Prerequisite: forgotten_promotion_mlrs
+
+forgotten_promotion_experimentalmammothtank:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: actor_forgotten_promotion_experimentalmammothtank.name
+	Buildable:
+		BuildPaletteOrder: 11
+		Queue: Promotions
+		Description: actor_forgotten_promotion_experimentalmammothtank.description
+		Prerequisites: ~fact.forgotten, forgotten_promotion_mlrs, !forgotten_promotion_experimentalmammothtank, rank1
+	RenderSprites:
+		Image: forgotten_experimentalmammothtank
+	ProvidesPrerequisite:
+		Prerequisite: forgotten_promotion_experimentalmammothtank
+
+forgotten_promotion_cobracopter:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: actor_forgotten_promotion_cobracopter.name
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Promotions
+		Description: actor_forgotten_promotion_cobracopter.description
+		Prerequisites: ~fact.forgotten, !forgotten_promotion_cobracopter, rank1
+	RenderSprites:
+		Image: forgotten_cobracopter
+	ProvidesPrerequisite:
+		Prerequisite: forgotten_promotion_cobracopter
+
+forgotten_promotion_flametank:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: actor_forgotten_promotion_flametank.name
+	Buildable:
+		BuildPaletteOrder: 6
+		Queue: Promotions
+		Description: actor_forgotten_promotion_flametank.description
+		Prerequisites: ~fact.forgotten, forgotten_promotion_cobracopter, !forgotten_promotion_flametank, rank1
+	RenderSprites:
+		Image: forgotten_flametank
+	ProvidesPrerequisite:
+		Prerequisite: forgotten_promotion_flametank
+
+forgotten_promotion_locustbomber:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: actor_forgotten_promotion_locustbomber.name
+	Buildable:
+		BuildPaletteOrder: 9
+		Queue: Promotions
+		Description: actor_forgotten_promotion_locustbomber.description
+		Prerequisites: ~fact.forgotten, forgotten_promotion_flametank, !forgotten_promotion_locustbomber, rank1
+	RenderSprites:
+		Image: forgotten_locustbomber
+	ProvidesPrerequisite:
+		Prerequisite: forgotten_promotion_locustbomber
+
+forgotten_promotion_chemicalmammothtank:
+	Inherits: ^PromotionUpgradeTemplate
+	Tooltip:
+		Name: actor_forgotten_promotion_chemicalmammothtank.name
+	Buildable:
+		BuildPaletteOrder: 12
+		Queue: Promotions
+		Description: actor_forgotten_promotion_chemicalmammothtank.description
+		Prerequisites: ~fact.forgotten, forgotten_promotion_locustbomber, !forgotten_promotion_chemicalmammothtank, rank1
+	RenderSprites:
+		Image: forgotten_chemicalmammothtank
+	ProvidesPrerequisite:
+		Prerequisite: forgotten_promotion_chemicalmammothtank
+
+

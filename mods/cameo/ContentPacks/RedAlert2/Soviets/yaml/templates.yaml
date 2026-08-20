@@ -1,0 +1,300 @@
+^RA2SSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: ra2_soviets_engineer, ra2_soviets_conscript, ra2_soviets_conscript, ra2_soviets_flaktrooper
+
+^RA2SovietsConscription:
+	GrantConditionOnPrerequisite@ra2_soviets_doctrine_conscription:
+		Condition: ra2_soviets_doctrine_conscription
+		Prerequisites: ra2_soviets_doctrine_conscription
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_conscription
+
+^RA2SovietsInfantryConditioning:
+	ChangesHealth@ra2_soviets_doctrine_harshenvironmentinfantryconditioning:
+		Step: 15
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: ra2_soviets_doctrine_harshenvironmentinfantryconditioning
+	DamageMultiplier@ra2_soviets_doctrine_harshenvironmentinfantryconditioning:
+		Modifier: 75
+		RequiresCondition: ra2_soviets_doctrine_harshenvironmentinfantryconditioning
+	SpeedMultiplier@ra2_soviets_doctrine_harshenvironmentinfantryconditioning:
+		Modifier: 105
+		RequiresCondition: ra2_soviets_doctrine_harshenvironmentinfantryconditioning
+	GrantConditionOnPrerequisite@ra2_soviets_doctrine_harshenvironmentinfantryconditioning:
+		Condition: ra2_soviets_doctrine_harshenvironmentinfantryconditioning
+		Prerequisites: ra2_soviets_doctrine_harshenvironmentinfantryconditioning
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_harshenvironmentinfantryconditioning
+
+^RA2SovietsShockTrooperTraining:
+	RangeMultiplier@ra2_soviets_doctrine_shocktroopertraining:
+		Modifier: 115
+		RequiresCondition: ra2_soviets_doctrine_shocktroopertraining
+	FirepowerMultiplier@ra2_soviets_doctrine_shocktroopertraining:
+		Modifier: 115
+		RequiresCondition: ra2_soviets_doctrine_shocktroopertraining
+	SpeedMultiplier@ra2_soviets_doctrine_shocktroopertraining:
+		Modifier: 115
+		RequiresCondition: ra2_soviets_doctrine_shocktroopertraining
+	GrantConditionOnPrerequisite@ra2_soviets_doctrine_shocktroopertraining:
+		Condition: ra2_soviets_doctrine_shocktroopertraining
+		Prerequisites: ra2_soviets_doctrine_shocktroopertraining
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_shocktroopertraining
+
+^RA2HeavyCannons:
+	FirepowerMultiplier@ra2_soviets_upgrade_heavycannons:
+		Modifier: 130
+		RequiresCondition: ra2_soviets_upgrade_heavycannons
+	RangeMultiplier@ra2_soviets_upgrade_heavycannons:
+		Modifier: 115
+		RequiresCondition: ra2_soviets_upgrade_heavycannons
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_heavycannons:
+		Condition: ra2_soviets_upgrade_heavycannons
+		Prerequisites: ra2_soviets_upgrade_heavycannons
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavycannons
+
+^RA2GrinderTankTreads:
+	ChangesHealth@ra2_soviets_upgrade_grindertanktreads1:
+		PercentageStep: 1
+		Delay: 40
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: ra2_soviets_upgrade_grindertanktreads
+	ChangesHealth@ra2_soviets_upgrade_grindertanktreads2:
+		Step: 50
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: ra2_soviets_upgrade_grindertanktreads
+	SpeedMultiplier@ra2_soviets_upgrade_grindertanktreads:
+		Modifier: 115
+		RequiresCondition: ra2_soviets_upgrade_grindertanktreads
+	DamageMultiplier@ra2_soviets_upgrade_grindertanktreads:
+		Modifier: 85
+		RequiresCondition: ra2_soviets_upgrade_grindertanktreads
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_grindertanktreads:
+		Condition: ra2_soviets_upgrade_grindertanktreads
+		Prerequisites: ra2_soviets_upgrade_grindertanktreads
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_grindertanktreads
+
+^RA2KirovGastroburners:
+	SpeedMultiplier@ra2_soviets_upgrade_gastroburners:
+		Modifier: 125
+		RequiresCondition: ra2_soviets_upgrade_gastroburners
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_gastroburners:
+		Condition: ra2_soviets_upgrade_gastroburners
+		Prerequisites: ra2_soviets_upgrade_gastroburners
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_gastroburners
+
+^RA2KirovAtomicBombs:
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_kirovatomicbombs:
+		Condition: ra2_soviets_upgrade_kirovatomicbombs
+		Prerequisites: ra2_soviets_upgrade_kirovatomicbombs
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_kirovatomicbombs
+
+####################################################################################################
+#		Promotions Allies
+####################################################################################################
+
+# ### Infantry tree
+
+# ra2_allies_upgrade_paratroopers:
+# 	Inherits: ^PromotionUpgradeTemplate
+# 	Tooltip:
+# 		Name: Unlock Airborne
+# 	Buildable:
+# 		BuildPaletteOrder: 73
+# 		Icon: icon2
+# 		Queue: Promotions
+# 		Description: Allows paratroopers to be accessed from the Airforce Command.
+# 		Prerequisites: ~ra2_allies_alliedconstructionyard, !ra2_allies_upgrade_paratroopers, rank1
+# 	RenderSprites:
+# 		Image: ra2_allies_airforcecommandhq
+# 	ProvidesPrerequisite:
+
+# upra2seal:
+# 	Inherits: ^PromotionUpgradeTemplate
+# 	Tooltip:
+# 		Name: Unlock SEAL
+# 	Buildable:
+# 		BuildPaletteOrder: 76
+# 		Queue: Promotions
+# 		Description: Allows training of SEALs.
+# 		Prerequisites: ~ra2_allies_alliedconstructionyard, !upra2seal, ra2_allies_upgrade_paratroopers, rank1
+# 	RenderSprites:
+# 		Image: ra2_allies_seal
+# 	ProvidesPrerequisite:
+
+# upra2snipe:
+# 	Inherits: ^PromotionUpgradeTemplate
+# 	Tooltip:
+# 		Name: Unlock ra1_allies_alliedsniper
+# 	Buildable:
+# 		BuildPaletteOrder: 79
+# 		Queue: Promotions
+# 		Description: Allows training of Snipers.
+# 		Prerequisites: ~ra2_allies_alliedconstructionyard, !upra2snipe, upra2seal, rank1
+# 	RenderSprites:
+# 		Image: ra2_allies_sniper
+# 	ProvidesPrerequisite:
+
+# ra2_allies_upgrade_elitegi:
+# 	Inherits: ^PromotionUpgradeTemplate
+# 	Tooltip:
+# 		Name: Upgrade GIs
+# 	Buildable:
+# 		BuildPaletteOrder: 82
+# 		Queue: Promotions
+# 		Description: Upgrade GI undeployed weapons and deployment armor.
+# 		Prerequisites: ~ra2_allies_alliedconstructionyard, !ra2_allies_upgrade_elitegi, upra2snipe, rank1
+# 	RenderSprites:
+# 		Image: ra2_allies_gi
+# 	ProvidesPrerequisite:
+
+# ### Offensive tree
+
+# upra2tnkd:
+# 	Inherits: ^PromotionUpgradeTemplate
+# 	Tooltip:
+# 		Name: Unlock Tank Destroyer
+# 	Buildable:
+# 		BuildPaletteOrder: 74
+# 		Queue: Promotions
+# 		Description: Allows construction of the Tank Destroyer.
+# 		Prerequisites: ~ra2_allies_alliedconstructionyard, !upra2tnkd, rank1
+# 	RenderSprites:
+# 		Image: ra2_allies_tankdestroyer
+# 	ProvidesPrerequisite:
+
+# ra2_allies_upgrade_eliterocketeer:
+# 	Inherits: ^PromotionUpgradeTemplate
+# 	Tooltip:
+# 		Name: Unlock Rocketeers
+# 	Buildable:
+# 		BuildPaletteOrder: 77
+# 		-Queue: #Promotions
+# 		Description: Upgrades the Rocketeer to fire faster and take less damage.
+# 		Prerequisites: ~ra2_allies_alliedconstructionyard, !ra2_allies_upgrade_paratroopers, upra2tnkd, rank1
+# 	RenderSprites:
+# 		Image: ra2_allies_rocketeer
+# 	ProvidesPrerequisite:
+
+# ra2_allies_upgrade_heavymiragetank:
+# 	Inherits: ^PromotionUpgradeTemplate
+# 	Tooltip:
+# 		Name: Unlock Heavy Mirage Tanks
+# 	Buildable:
+# 		BuildPaletteOrder: 77
+# 		Queue: Promotions
+# 		Description: Allows construction of Heavy Mirage Tanks.
+# 		Prerequisites: ~ra2_allies_alliedconstructionyard, !ra2_allies_upgrade_heavymiragetank, upra2tnkd, rank1
+# 	RenderSprites:
+# 		Image: ra2_allies_heavymiragetank
+# 	ProvidesPrerequisite:
+
+# upra2beag:
+# 	Inherits: ^PromotionUpgradeTemplate
+# 	Tooltip:
+# 		Name: Unlock Black Eagle
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Promotions
+# 		Description: Allows construction of the Black Eagle.
+# 		Prerequisites: ~ra2_allies_alliedconstructionyard, !upra2beag, ra2_allies_upgrade_heavymiragetank, rank1
+# 	RenderSprites:
+# 		Image: ra2_allies_blackeagle
+# 	ProvidesPrerequisite:
+
+# ra2_allies_upgrade_advancedaeronautics:
+# 	Inherits: ^PromotionUpgradeTemplate
+# 	Tooltip:
+# 		Name: Advanced Aeronautics
+# 	Buildable:
+# 		BuildPaletteOrder: 83
+# 		Queue: Promotions
+# 		Description: Allied jets receive speed and armor bonuses when attacking.
+# 		Prerequisites: ~ra2_allies_alliedconstructionyard, !ra2_allies_upgrade_advancedaeronautics, upra2beag, rank1
+# 	RenderSprites:
+# 		Image: ra2_allies_harrier
+# 	ProvidesPrerequisite:
+
+# ^RA2AlliedAdvancedAeronautics:
+# 	GrantConditionOnPrerequisite@supersonic:
+# 		Condition: upaeronautics
+# 		Prerequisites: ra2_allies_upgrade_advancedaeronautics
+# 	GrantConditionOnActivity@supersonic:
+# 		Condition: supersonic
+# 	SpeedMultiplier@supersonic:
+# 		Modifier: 120
+# 		RequiresCondition: supersonic && ammo && upaeronautics
+# 	DamageMultiplier@supersonic:
+# 		RequiresCondition: supersonic && ammo && upaeronautics
+# 		Modifier: 85
+
+# ### Defensive tree
+
+# ra2_allies_upgrade_prismlinking:
+# 	Inherits: ^PromotionUpgradeTemplate
+# 	Tooltip:
+# 		Name: Prism Chaining
+# 	Buildable:
+# 		BuildPaletteOrder: 75
+# 		Queue: Promotions
+# 		Description: Allows Prism Towers to chain, boosting damage.
+# 		Prerequisites: ~ra2_allies_alliedconstructionyard, !ra2_allies_upgrade_prismlinking, rank1
+# 	RenderSprites:
+# 		Image: ra2_allies_prismtower
+# 	ProvidesPrerequisite:
+
+# ra2_allies_upgrade_forceshield:
+# 	Inherits: ^PromotionUpgradeTemplate
+# 	Tooltip:
+# 		Name: Force Shield
+# 	Buildable:
+# 		Icon: forceshield
+# 		BuildPaletteOrder: 78
+# 		Queue: Promotions
+# 		Description: Enables the Force Shield power from the Battle Lab.
+# 		Prerequisites: ~ra2_allies_alliedconstructionyard, !ra2_allies_upgrade_forceshield, ra2_allies_upgrade_prismlinking, rank1
+# 	RenderSprites:
+# 		Image: icon
+# 	ProvidesPrerequisite:
+
+# upra2gaorep:
+# 	Inherits: ^PromotionUpgradeTemplate
+# 	Tooltip:
+# 		Name: Unlock Ore Purifier
+# 	Buildable:
+# 		BuildPaletteOrder: 81
+# 		Queue: Promotions
+# 		Description: Allows construction of the Ore Purifier.
+# 		Prerequisites: ~ra2_allies_alliedconstructionyard, !upra2gaorep, ra2_allies_upgrade_forceshield, rank1
+# 	RenderSprites:
+# 		Image: ra2_allies_orepurifier
+# 	ProvidesPrerequisite:
+
+# upra2gtgcan:
+# 	Inherits: ^PromotionUpgradeTemplate
+# 	Tooltip:
+# 		Name: Unlock Grand Cannon
+# 	Buildable:
+# 		BuildPaletteOrder: 84
+# 		Queue: Promotions
+# 		Description: Allows construction of the Grand Cannon.
+# 		Prerequisites: ~ra2_allies_alliedconstructionyard, !upra2gtgcan, upra2gaorep, rank1
+# 	RenderSprites:
+# 		Image: ra2_allies_grandcannon
+# 	ProvidesPrerequisite:
+
+####################################################################################################
+#		Upgrades Allies
+####################################################################################################
+
+### Radar ###

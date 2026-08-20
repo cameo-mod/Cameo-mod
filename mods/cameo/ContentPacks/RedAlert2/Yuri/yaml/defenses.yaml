@@ -1,0 +1,502 @@
+yuri_concretebarrier:
+	Inherits: ^Wall
+	Valued:
+		Cost: 200
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Concrete Barrier
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~yuri_constructionyard
+		Queue: Defence, RADefence
+		Description: Provides flat building foundation.
+	Health:
+		HP: 100000
+	Armor:
+		Type: Concrete
+	BlocksProjectiles:
+	Crushable:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSounds: crumble.aud
+	LineBuild:
+		NodeTypes: concrete
+	LineBuildNode:
+		Types: concrete
+	RenderSprites:
+		Image: yuri_concretebarrier
+		Palette: ra2
+		PlayerPalette: playerra2
+	WithWallSpriteBody:
+		IsPlayerPalette: True
+		Palette: playerra2
+		PlayerPalette: playerra2
+		Type: yuri_concretebarrier
+
+###########################
+##############################################
+#   Red Alert 2 Soviet Structures
+##############################################
+
+yuri_slaveminer_deployed:
+	Inherits@2: ^RA2Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@shape: ^2x2Shape
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Inherits@ref: ^Refinery
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@RA2YuriScrapArmor: ^RA2YuriScrapArmor
+	Inherits@RA2YuriChaosGasEmitters: ^RA2YuriChaosGasEmitters
+	Inherits@RA2YuriPsionicShields: ^RA2YuriPsionicShields
+	Inherits@RA2YuriToxicEngines: ^RA2YuriToxicEngines
+	Tooltip:
+		Name: Slave Miner
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildDuration: 750
+		BuildDurationModifier: 100
+		Prerequisites: ~yuri_constructionyard, yuri_bioreactor
+		Description: actor_yarefn.description
+	Building:
+		Footprint: xx x+
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 200000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Power:
+		Amount: 0
+	Armor:
+		Type: Heavy
+		-RequiresCondition:
+	Armor@Concrete:
+		Type: Concrete
+	RevealsShroud:
+		Range: 6666
+	DetectCloaked:
+		Range: 3333
+	Refinery:
+	DockHost:
+		Type: Unload
+		DockAngle: 640
+		DockOffset: 0,724,0
+		MaxQueueLength: 12
+	DrawLineToTarget:
+	Selectable:
+		Bounds: 2048, 2048
+		Class: yuri_slaveminer_deployed
+	SlaveMinerSpawnerMaster:
+		Actors: yrslav, yrslav, yrslav, yrslav
+		SlavesHaveFreeWill: true
+		SlaveDisposalOnKill: GiveSlavesToAttacker
+		SlaveDisposalOnOwnerChange: GiveSlavesToAttacker
+		SpawnOffset: 511,511,0, 511,511,0, 511,511,0, 511,511,0
+	SelectionDecorations:
+	BodyOrientation:
+	Transforms:
+		RequiresCondition: !build-incomplete && !disabled
+		IntoActor: yuri_slaveminer
+		Facing: 128
+		Voice: Undeploy
+	Turreted:
+		TurnSpeed: 10
+	AttackTurreted:
+		Voice: Attack
+	Armament:
+		Weapon: RA220mmrapid
+		LocalOffset: 640,0,640
+		MuzzleSequence: muzzle
+	RangeMultiplier@SlaveMiner:
+		Modifier: 120
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: SlaveMinerVoice
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Kills
+		Upgrades: yuri_doctrine_scrapvehiclearmor, yuri_doctrine_chaosgasemitters, yuri_doctrine_psionicvehicleshields, yuri_upgrade_toxicengines
+
+yuri_psychicdominator:
+	Inherits: ^RA2Building
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Tooltip:
+		Name: Psychic Dominator
+	Buildable:
+		Prerequisites: ~yuri_constructionyard, yuri_battlelab, !psydom, ~techlevel.superweapons
+		Description: actor_yappet.description
+	Building:
+		Footprint: =x= xxx xxx
+		Dimensions: 3,3
+	SelectionDecorations:
+	DetonateWeaponPowerCA@psi:
+		AllowMultiple: true
+		OrderName: PsychicDominator
+		Prerequisites:
+			1: ~techlevel.superweapons
+		PauseOnCondition: disabled
+		Icons:
+			1: ra2domin
+		Cursor: ability
+		ChargeInterval: 10500
+		ActivationDelay: 25
+		ActivationSequence:
+		Names:
+			1: power_psychicdominator.name
+		Descriptions:
+			1: power_psychicdominator.description
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		EndChargeTextNotification: Psychic Dominator ready.
+		EndChargeSound: spsyopen.wav
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		LaunchTextNotification: Warning: Psychic Dominator activated.
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Warning: Psychic Dominator activated.
+		Weapons:
+			1: ra2psiatomic
+		DisplayRadarPing: True
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraRemoveDelay: 100
+		TargetCircleRanges:
+			1: 5000, 10000
+		TargetCircleColors: 66339988, ff000080
+		PostProcessEffectType: PsychicDominator
+		LaunchSound: spsyopen.wav
+		IncomingSound: spsyopen.wav
+		BeaconActor: blastradius.dominate
+		CameraRange: 10000
+	MindControllerCA:
+		Capacity: 0
+		ControllingCondition: controlling
+		RequiresCondition: !disabled && !build-incomplete
+	WithIdleOverlay@controlling:
+		Sequence: active
+		RequiresCondition: controlling
+	SupportPowerChargeBar:
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: psydom
+
+yuri_geneticmutator:
+	Inherits: ^RA2Building
+	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Inherits@SW: ^Superweapon
+	Inherits@shape: ^3x3Shape
+	SelectionDecorations:
+	Tooltip:
+		Name: Genetic Mutator
+	Buildable:
+		Prerequisites: ~yuri_constructionyard, yuri_battlelab, ~techlevel.superweapons
+		Description: actor_yagntc.description
+	Building:
+		Footprint: =x= xxx xxx
+		Dimensions: 3,3
+	WithSpriteBody:
+		PauseOnCondition: disabled
+	WithIdleOverlay@top:
+		Sequence: idle-top
+		RequiresCondition: !build-incomplete
+	DetonateWeaponPower@Mutate:
+		OrderName: GeneticMutator
+		PauseOnCondition: disabled
+			1: ~techlevel.superweapons
+		Icons:
+			1: ra2mutate
+		Cursor: ioncannon
+		ChargeInterval: 7500
+		ActivationDelay: 10
+		ActivationSequence:
+		Names:
+			1: power_mutate.name
+		Weapons:
+			1: RA2Mutate
+		Descriptions:
+			1: power_mutate.description
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		EndChargeSound: sgenopen.wav
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		DisplayRadarPing: True
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraActor: camera.small
+		CameraRange: 4c0
+		CameraRemoveDelay: 300
+		TargetCircleRanges:
+			1: 4000
+		TargetCircleColor: ff000080
+		LaunchSound: sgenopen.wav
+		IncomingSound: sgenopen.wav
+	SupportPowerChargeBar:
+
+yuri_tankbunker:
+	Inherits@2: ^RA2Defense
+	Inherits@Template: ^BunkerTemplate
+	Inherits@shape: ^2x2Shape
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Inherits@gar: ^ClearableGarrison
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Selectable:
+		Bounds: 2048, 2048
+		Class: yuri_tankbunker
+	Tooltip:
+		Name: Tank Bunker
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 40
+		Prerequisites: ~yuri_constructionyard, yuri_warfactory
+		Description: actor_natbnk.description
+	Valued:
+		Cost: 1000
+	Health:
+		HP: 100000
+	Turreted:
+		TurnSpeed: 1023
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Cargo:
+		Types: Vehicle
+		MaxWeight: 4
+		LoadedCondition: loaded
+		PassengerFacing: 0
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	WithCargoBuilding:
+		Facing: 384
+		DisplayTypes: Vehicle
+	WithCargoSounds:
+		EnterSounds: btanupa.wav
+		ExitSounds: btandowa.wav
+	-SpawnActorsOnSell:
+	AttackGarrisoned:
+		Armaments: primary, secondary, garrisoned
+		PortOffsets: 192,0,128, 112,-170,128, -112,-170,128, -192,0,128, -112,170,128, 112,170,128
+		PortYaws: 0, 176, 341, 512, 682, 853
+		PortCones: 88, 88, 88, 88, 88, 88
+		PauseOnCondition: chronobeamed
+		MuzzlePalette: ra2effect #TODO: tanks with other palettes will render incorrectly
+	Targetable@garrisoned:
+		TargetTypes: LoadedTankBunker
+		RequiresCondition: loaded
+	WithSpriteBody:
+	WithIdleOverlay@Garrisoned:
+		Sequence: idle-bunkered
+		RequiresCondition: !build-incomplete && loaded
+	WithIdleOverlay@GarrisonedFront:
+		Sequence: idle-bunkered-front
+		RequiresCondition: !build-incomplete && loaded
+	WithMakeAnimation:
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	RevealsShroud:
+		Range: 6666
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 1
+	ActorStatValues:
+		DisplayCargoRelationships: Ally, Neutral, Enemy
+		Stats: Armor, Sight, Cargo, Kills
+
+yuri_gatlingcannon:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@RenderVoxel: ^RenderVoxel
+	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@RA2YuriGatlingPower: ^RA2YuriGatlingPower
+	Inherits@RA2YuriGatlingSpeed: ^RA2YuriGatlingSpeed
+	Inherits@detect: ^GenericAllDetector
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~yuri_constructionyard, yuri_barracks
+		Description: actor_yaggun.description
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Gatling Cannon
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 140000
+	Selectable:
+		Bounds: 1024, 1024
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: -300,25,10
+	AttackTurreted:
+		PauseOnCondition: lowpower || disabled
+	Armament@1:
+		Name: primary
+		Weapon: YuriGatlingCannonMG1
+		PauseOnCondition: gatling
+		LocalOffset: 500,140,400, 500,-150,400
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 100,140,400, 100,-150,400
+		CasingTargetOffset: 0,740,0, 0,-750,0
+	Armament@2:
+		Name: primary
+		Weapon: YuriGatlingCannonMG2
+		PauseOnCondition: gatling != 1
+		LocalOffset: 500,140,400, 500,-150,400
+		MuzzleSequence: muzzle-1
+		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 100,140,400, 100,-150,400
+		CasingTargetOffset: 0,740,0, 0,-750,0
+	Armament@3:
+		Name: primary
+		Weapon: YuriGatlingCannonMG3
+		PauseOnCondition: gatling < 2
+		LocalOffset: 500,140,400, 500,-150,400
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 100,140,400, 100,-150,400
+		CasingTargetOffset: 0,740,0, 0,-750,0
+	Armament@1AA:
+		Name: secondary
+		Weapon: YuriGatlingCannonMG1_AA
+		PauseOnCondition: gatling
+		LocalOffset: 500,140,400, 500,-150,400
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 100,140,400, 100,-150,400
+		CasingTargetOffset: 0,740,0, 0,-750,0
+	Armament@2AA:
+		Name: secondary
+		Weapon: YuriGatlingCannonMG2_AA
+		PauseOnCondition: gatling != 1
+		LocalOffset: 500,140,400, 500,-150,400
+		MuzzleSequence: muzzle-1
+		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 100,140,400, 100,-150,400
+		CasingTargetOffset: 0,740,0, 0,-750,0
+	Armament@3AA:
+		Name: secondary
+		Weapon: YuriGatlingCannonMG3_AA
+		PauseOnCondition: gatling < 2
+		LocalOffset: 500,140,400, 500,-150,400
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 100,140,400, 100,-150,400
+		CasingTargetOffset: 0,740,0, 0,-750,0
+	RangeMultiplier@GatlingBuff:
+		Modifier: 150
+	-RenderRangeCircle:
+	RenderRangeCircleCA:
+		Armaments: primary
+	RenderRangeCircleCA@SECONDARY:
+		Armaments: secondary
+	WithMuzzleOverlay:
+	WithMuzzleSmoke:
+		Weapons: YuriGatlingCannonMG1, YuriGatlingCannonMG2, YuriGatlingCannonMG3, YuriGatlingCannonMG1_AA, YuriGatlingCannonMG2_AA, YuriGatlingCannonMG3_AA
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithVoxelTurret:
+		RequiresCondition: !build-incomplete
+	AutoTarget:
+	RenderVoxels:
+		Scale: 17 #6.9
+	-WithVoxelBody:
+	-Cloak@TDcloak:
+	Power:
+		Amount: -50
+	RevealsShroud:
+		Range: 8250
+	DetectCloaked:
+		Range: 4125
+	ActorStatValues:
+		Upgrades: yuri_upgrade_gatlingfirepowerupgrade, yuri_upgrade_gatlingspeedupgrade
+
+yuri_psychictower:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Inherits@turret: ^DefenseTurretedEMP
+	Inherits@RA2YuriMindControlCap: ^RA2YuriMindControlCap
+	Inherits@RA2YuriPsychicRange: ^RA2YuriPsychicRange
+	Inherits@RA2YuriPsionicArmor: ^RA2YuriPsionicArmor
+	Inherits@RA2YuriPsychicVision: ^RA2YuriPsychicVision
+	Inherits@detect: ^GenericAllDetector
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 80
+		Prerequisites: ~yuri_constructionyard, yuri_battlelab
+		Description: actor_yapsyt.description
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Psychic Tower
+	Selectable:
+		Bounds: 1024, 2560, 0, -768
+	SelectionDecorations:
+	Health:
+		HP: 150000
+	Armament@CONTROL:
+		Weapon: RA2TMindControl
+		LocalOffset: 0,0,896
+	MindControllerCA:
+		ArmamentNames: primary
+		ExperienceFromControl: 100
+		TicksToControl: 30
+		Capacity: 3
+		RequiresCondition: !disabled
+	MindControllerCapacityModifier@yuri_upgrade_domination:
+		Amount: 3
+		RequiresCondition: yuri_upgrade_domination
+	ReloadDelayMultiplier@yuri_upgrade_domination:
+		Modifier: 75
+		RequiresCondition: yuri_upgrade_domination
+	RangeMultiplier@yuri_upgrade_psychicrange:
+		Modifier: 130
+	RangedGpsProvider@yuri_upgrade_psychicvision:
+		Range: 15000
+		RequiresCondition: yuri_upgrade_psychicvision
+	RenderRangeCircle:
+		RangeCircleType: mindcontrol
+		Color: 663399b0
+	ReloadArmamentsBar:
+	AttackTurreted:
+	Turreted:
+	AutoTarget:
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@top:
+		Sequence: idle-top
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+	RenderSprites:
+		PlayerPalette: playerra2
+	Power:
+		Amount: -100
+	RevealsShroud:
+		Range: 10000
+	DetectCloaked:
+		Range: 5000
+	ActorStatValues:
+		Upgrades: yuri_upgrade_domination, yuri_upgrade_psychicrange, yuri_upgrade_psionicarmor, yuri_upgrade_psychicvision

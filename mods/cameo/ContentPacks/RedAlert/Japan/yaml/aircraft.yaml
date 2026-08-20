@@ -1,0 +1,329 @@
+japan_zerofighter:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@DivineWindProtocol: ^DivineWindProtocol
+	Inherits@EnergizedArrows: ^EnergizedArrows
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@eject: ^AircraftEjectOnDeath
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 30
+		Prerequisites: ~japan_japaneseairfield
+		Description: actor_yak.description
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Zero Fighter
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@Missiles:
+		Weapon: ZeroFighterArrows
+		LocalOffset: 85,-300,-85, 85,300,-85
+		MuzzleSequence: muzzle
+		AmmoUsage: 6
+		PauseOnCondition: ammo < 6
+		RequiresCondition: !japan_upgrade_energizedarrows
+	Armament@MissilesUpgrade:
+		Weapon: ZeroFighterArrowsEnergized
+		LocalOffset: 85,-300,-85, 85,300,-85
+		MuzzleSequence: muzzle
+		AmmoUsage: 6
+		PauseOnCondition: ammo < 6
+		RequiresCondition: japan_upgrade_energizedarrows
+	Armament@PRIMARY:
+		Weapon: ZeroFighterChainGun
+		LocalOffset: 256,213,0, 256,-213,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: ammo < 6
+		RequiresCondition: !japan_upgrade_waveforcebullets
+	Armament@Upgrade: ##########
+		Weapon: ZeroFighterChainGunWaveforce
+		LocalOffset: 256,213,0, 256,-213,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: ammo < 6
+		RequiresCondition: japan_upgrade_waveforcebullets
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	AttackAircraft:
+		FacingTolerance: 40
+	Aircraft:
+		TurnSpeed: 12
+		Speed: 175
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	Contrail:
+		Offset: -1000,0,250
+	SpawnActorOnDeath:
+		Actor: modkami.Husk
+	EjectOnDeath:
+		PilotActor: japan_imperialscoutsman
+	LeavesTrails:
+		Offsets: -1000,0,250
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	RenderSprites:
+		Image: japan_zerofighter
+	AmmoPool:
+		Ammo: 24
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 11
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_divinewindprotocol, japan_upgrade_energizedarrows, japan_upgrade_nanotechrepairs
+
+japan_japanesebomber:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@DivineWindProtocol: ^DivineWindProtocol
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@eject: ^AircraftEjectOnDeath
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 30
+		Prerequisites: ~japan_japaneseairfield, japan_japanesetechcenter
+		Description: actor_jpbomber.description
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Japanese Bomber
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 122500
+	Repairable:
+		HpPerStep: 6125
+	ChangesHealth@SelfHealing:
+		Step: 49
+	AttackAircraft:
+		AttackType: Strafe
+		Armaments: primary, secondary
+		StrafeRunLength: 5000
+		FacingTolerance: 50
+	Armament@Guns:
+		Name: secondary
+		Weapon: ZeroFighterChainGun
+		LocalOffset: 0,128,0, 0,-128,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: !japan_upgrade_waveforcebullets
+	Armament@UpgradeGuns:
+		Name: secondary
+		Weapon: ZeroFighterChainGunWaveforce
+		LocalOffset: 0,128,0, 0,-128,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: japan_upgrade_waveforcebullets
+	Armament@Bombs:
+		Name: primary
+		Weapon: JapaneseHeavyBomb
+		PauseOnCondition: !ammo
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@UpgradeBombs: ##########
+		Name: primary
+		Weapon: JapanesePlasmaBomb
+		PauseOnCondition: !ammo
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	RangeMultiplier@Chaingun:
+		Modifier: 70
+	Aircraft:
+		TurnSpeed: 11
+		Speed: 165
+		IdealSeparation: 2500
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: AttackAnything
+		ScanRadius: 10
+	AmmoPool:
+		Ammo: 12
+		ReloadDelay: 16
+		AmmoCondition: ammo
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	Contrail@1:
+		Offset: -500,-250,200
+	Contrail@2:
+		Offset: -500,250,200
+	SpawnActorOnDeath:
+		Actor: modbomber.Husk
+	EjectOnDeath:
+		PilotActor: japan_samurai
+	LeavesTrails:
+		Offsets: -500,0,200
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	RenderSprites:
+		Image: japan_japanesebomber
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_advancedplasmaweapons, japan_upgrade_divinewindprotocol, japan_upgrade_nanotechrepairs
+
+japan_skyhawk:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@CLOAK: ^CloakedAircraft
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@EnergizedArrows: ^EnergizedArrows
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@DivineWindProtocol: ^DivineWindProtocol
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@eject: ^AircraftEjectOnDeath
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 20
+		Prerequisites: ~japan_japaneseairfield, japan_japanesetechcenter
+		Description: actor_hind.description
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Sky Hawk
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@Missiles:
+		Weapon: SkyHawkArrows
+		LocalOffset: 85,-300,-85, 85,300,-85
+		MuzzleSequence: muzzle
+		AmmoUsage: 4
+		PauseOnCondition: ammo < 4
+		RequiresCondition: !japan_upgrade_energizedarrows
+	Armament@MissilesUpgrade:
+		Weapon: SkyHawkArrowsEnergized
+		LocalOffset: 85,-300,-85, 85,300,-85
+		MuzzleSequence: muzzle
+		AmmoUsage: 4
+		PauseOnCondition: ammo < 4
+		RequiresCondition: japan_upgrade_energizedarrows
+	Armament@Cannon:
+		Weapon: SkyHawkCannon
+		LocalOffset: 85,250,-85, 85,-250,-85
+		MuzzleSequence: muzzle
+		AmmoUsage: 2
+		PauseOnCondition: ammo < 4
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@CannonUpgrade:
+		Weapon: SkyHawkPlasmaCannon
+		LocalOffset: 85,250,-85, 85,-250,-85
+		MuzzleSequence: muzzle
+		AmmoUsage: 2
+		PauseOnCondition: ammo < 4
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	Armament@ChainGun:
+		Weapon: SkyHawkChainGun
+		LocalOffset: 85,-200,-85, 85,200,-85
+		MuzzleSequence: muzzle
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 4
+		RequiresCondition: !japan_upgrade_waveforcebullets
+	Armament@ChainGunUpgrade:
+		Weapon: SkyHawkChainGunWaveforce
+		LocalOffset: 85,-200,-85, 85,200,-85
+		MuzzleSequence: muzzle
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 4
+		RequiresCondition: japan_upgrade_waveforcebullets
+	AttackAircraft:
+		FacingTolerance: 40
+		AttackType: Hover
+	Aircraft:
+		TurnSpeed: 25
+		Speed: 125
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	SpawnActorOnDeath:
+		Actor: JHIND.Husk
+	EjectOnDeath:
+		PilotActor: japan_tankbuster
+	LeavesTrails:
+		Offsets: -250,0,0
+		Image: smokey
+		MovingInterval: 3
+		StationaryInterval: 3
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: JapaneseVoice
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	AmmoPool:
+		Ammo: 16
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 16
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 8
+	FireWarheadsOnDeath:
+		Weapon: LargeHeliExplode
+	RenderSprites:
+		PlayerPalette: skyhawkplayer
+	Cloak:
+		InitialDelay: 125
+		CloakDelay: 75
+		CloakSound: trans1.aud
+		UncloakSound: appear1.aud
+		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_divinewindprotocol, japan_upgrade_energizedarrows, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs

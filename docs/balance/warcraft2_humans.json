@@ -1,0 +1,5947 @@
+{
+ "ledger": "warcraft2_humans",
+ "pack": "mods/cameo/ContentPacks/Warcraft2/Humans",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "wc2_humans_flyingmachine": {
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "350"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Helicopter",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "25000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Flying Machine",
+    "prerequisites": [
+     "~wc2_humans_gnomishinventor"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "165"
+    }
+   },
+   "wc2_humans_gryphonrider": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "100",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "100",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "4444",
+      "reloaddelay": "100",
+      "slot": "Armament@VISIBLE",
+      "versus_templates": [
+       "^LightMissile",
+       "^MediumFlameWeapon",
+       "^HeavyBomb",
+       "^TeslaChargedWeapon"
+      ],
+      "warheads": [],
+      "weapon": "wc2gryphonFireVisible",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Spaceship"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": 1.25,
+     "subtype": "Spaceship",
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/aircraft.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "Gryphon Rider",
+    "prerequisites": [
+     "~wc2_humans_gryphonaviary"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "12345"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "145"
+    }
+   },
+   "wc2_humans_gyrocoptermachine": {
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "350"
+    },
+    "design": {
+     "category": "Aircraft",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Helicopter",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "25000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Gyrocopter Machine",
+    "prerequisites": [
+     "~wc2_humans_gnomishinventor"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "165"
+    }
+   }
+  },
+  "buildings": {
+   "wc2_humans_barracks": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "200000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Barracks",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_farm"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "wc2_humans_blacksmith": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Blacksmith",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_barracks"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "wc2_humans_cannontower_plug": {
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Upgraded Guard Tower",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_elvenlumbermill",
+     "scouttowerupgradeavailable"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "wc2_humans_castle": {
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Castle",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_keep",
+     "castleupgradeavailable",
+     "wc2_humans_gnomishinventor",
+     "wc2_humans_stables"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "wc2_humans_church": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Church",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_castle"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "wc2_humans_elvenlumbermill": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Elven Lumber Mill",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_farm"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "wc2_humans_farm": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Health.HP",
+     "v": "300000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Farm",
+    "prerequisites": [
+     "~wc2_humans_townhall"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "4c0"
+    }
+   },
+   "wc2_humans_gnomishinventor": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Gnomish Inventor",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_keep"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    }
+   },
+   "wc2_humans_gryphonaviary": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "375"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Gryphon Aviary",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_castle"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "wc2_humans_guardtower_plug": {
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Upgraded Cannon Tower",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_blacksmith",
+     "scouttowerupgradeavailable"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "wc2_humans_humangoldmine": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Human Gold Mine",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_blacksmith",
+     "derricklimit"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "wc2_humans_humangoldmine_bot": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Valued.Cost",
+     "v": "15000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Human Gold Mine",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_blacksmith",
+     "derricklimit",
+     "~botplayer"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "wc2_humans_keep": {
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Keep",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "keepupgradeavailable",
+     "wc2_humans_blacksmith"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "wc2_humans_magetower": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Mage Tower",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_castle"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "wc2_humans_stables": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Stables",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_keep"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "wc2_humans_sunwell": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#Health.HP",
+     "v": "250000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Sunwell",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_church"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "12345"
+    }
+   },
+   "wc2_humans_townhall": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Town Hall",
+    "prerequisites": [
+     "~disabled"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   }
+  },
+  "defenses": {
+   "wc2_humans_cannontower": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8750",
+      "reloaddelay": "34",
+      "requires": "guard",
+      "slot": "Armament@guard",
+      "versus_templates": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^ArrowWeapon"
+      ],
+      "warheads": [],
+      "weapon": "wc2_tower_arrow",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "cannon",
+      "damage_warheads": [
+       {
+        "damage": "60000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "30",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2100",
+      "pricing": true,
+      "range": "10500",
+      "reloaddelay": "90",
+      "requires": "cannon",
+      "slot": "Armament@cannon",
+      "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "wc2cannontowerFire",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "BasicDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "100000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Cannon Tower",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_blacksmith"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "wc2_humans_guardtower": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8750",
+      "reloaddelay": "34",
+      "requires": "guard",
+      "slot": "Armament@guard",
+      "versus_templates": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^ArrowWeapon"
+      ],
+      "warheads": [],
+      "weapon": "wc2_tower_arrow",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "cannon",
+      "damage_warheads": [
+       {
+        "damage": "60000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "30",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2100",
+      "pricing": true,
+      "range": "10500",
+      "reloaddelay": "90",
+      "requires": "cannon",
+      "slot": "Armament@cannon",
+      "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "wc2cannontowerFire",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "BasicDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "100000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Guard Tower",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_elvenlumbermill"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "wc2_humans_humanscouttower": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8750",
+      "reloaddelay": "34",
+      "requires": "guard",
+      "slot": "Armament@guard",
+      "versus_templates": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^ArrowWeapon"
+      ],
+      "warheads": [],
+      "weapon": "wc2_tower_arrow",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "cannon",
+      "damage_warheads": [
+       {
+        "damage": "60000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "30",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.25,
+      "minrange": "2100",
+      "pricing": true,
+      "range": "10500",
+      "reloaddelay": "90",
+      "requires": "cannon",
+      "slot": "Armament@cannon",
+      "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "wc2cannontowerFire",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "BasicDefense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Health.HP",
+     "v": "100000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Human Scout Tower",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "5000"
+    }
+   },
+   "wc2_humans_wall": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Valued.Cost",
+     "v": "300"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Defense",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Wall",
+    "prerequisites": [
+     "~wc2_humans_townhall"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ]
+   }
+  },
+  "infantry": {
+   "wc2_humans_archmage": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "200",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "100",
+        "tag": "Tesla_Super_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "40",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_2 && !mageslow_upg) || (FSD_cond_3 && !magepolymorph_upg) || (FSD_cond_4 && !mageblizzard_upg)",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Tesla_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
+      ],
+      "warheads": [
+       "^Warhead_Tesla_Super"
+      ],
+      "weapon": "wc2mageFire",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "200",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "100",
+        "tag": "Tesla_Super_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "8000",
+      "reloaddelay": "40",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Tesla_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
+      ],
+      "warheads": [
+       "^Warhead_Tesla_Super"
+      ],
+      "weapon": "wc2mageFire",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "armament_name": "fireball",
+      "damage_warheads": [
+       {
+        "damage": "18000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "9",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "80",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
+      "slot": "Armament@FIREBALL_VISIBLE",
+      "versus_templates": [
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
+      "weapon": "wc2mageFireballVisible",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "5",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "18000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "9",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "80",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
+      "slot": "Armament@FIREBALL_EXPLOSIONS",
+      "versus_templates": [
+       "wc2mageFireballVisible"
+      ],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
+      "weapon": "wc2mageFireballExplosion",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "slow",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "0c1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_2 && mageslow_upg",
+      "slot": "Armament@SLOW",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2mageSlow",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "polymorph",
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "8000",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_3 && magepolymorph_upg",
+      "slot": "Armament@POLYMORPH",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2magePolymorph",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "blizzard",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "0c1",
+        "tag": "1Dam_impact",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "50",
+      "requires": "FSD_cond_4 && mageblizzard_upg",
+      "slot": "Armament@BLIZZARD",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2mageBlizzard",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SniperInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "50000"
+    },
+    "name": "Archmage",
+    "prerequisites": [
+     "~wc2_humans_magetower"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "65"
+    }
+   },
+   "wc2_humans_dwarvenrifleman": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "200",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "6936",
+      "reloaddelay": "60",
+      "slot": "Armament",
+      "versus_templates": [
+       "^RailgunWeapon",
+       "^MediumMissile",
+       "^TankDestroyerCannon"
+      ],
+      "warheads": [],
+      "weapon": "wc2_dwarf_Rifle",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "125",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "400",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "200",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "6936",
+      "reloaddelay": "60",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^RailgunWeapon",
+       "^MediumMissile",
+       "^TankDestroyerCannon"
+      ],
+      "warheads": [],
+      "weapon": "wc2_dwarf_Rifle",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "buildable": true,
+    "charge_up": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#AttackFrontalCharged",
+     "ticks": 0.0,
+     "v": "AttackFrontalCharged"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": 1.0,
+     "subtype": "HeavyInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 0.8
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#FirepowerMultiplier@rifleman.Modifier",
+     "trait": "FirepowerMultiplier@rifleman",
+     "v": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
+     "v": "24000"
+    },
+    "name": "Dwarven Rifleman",
+    "prerequisites": [
+     "~wc2_humans_blacksmith"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.Speed",
+     "v": "64"
+    }
+   },
+   "wc2_humans_elvenarcher": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6973",
+      "reloaddelay": "25",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
+       "^FlakWeapon",
+       "^Chaingun",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "wc2arrowFire",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "6973",
+      "reloaddelay": "25",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
+       "^FlakWeapon",
+       "^Chaingun",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "wc2arrowFire",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": "archer",
+     "special": 1.0,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#FirepowerMultiplier@Arrows.Modifier",
+     "trait": "FirepowerMultiplier@Arrows",
+     "v": 0.75
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Elven Archer",
+    "prerequisites": [
+     "~wc2_humans_elvenlumbermill",
+     "~!wc2_humans_upgrade_ranger",
+     "~!wc2_humans_upgrade_highelvenarcher"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.Speed",
+     "v": "75"
+    }
+   },
+   "wc2_humans_elvenranger": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6973",
+      "reloaddelay": "25",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
+       "^FlakWeapon",
+       "^Chaingun",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "wc2arrowFire",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "6973",
+      "reloaddelay": "25",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
+       "^FlakWeapon",
+       "^Chaingun",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "wc2arrowFire",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "600"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "25000"
+    },
+    "name": "Elven Ranger",
+    "prerequisites": [
+     "~wc2_humans_upgrade_ranger",
+     "wc2_humans_elvenlumbermill"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    }
+   },
+   "wc2_humans_footman": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1333",
+      "reloaddelay": "15",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2footmanslice",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": 1.0,
+     "subtype": "MeleeInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 0.75
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#FirepowerMultiplier@WC2SwordUpg.Modifier",
+     "trait": "FirepowerMultiplier@WC2SwordUpg",
+     "v": 1.3
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Footman",
+    "prerequisites": [
+     "~wc2_humans_barracks",
+     "~!wc2_humans_upgrade_warcraft3footman"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.Speed",
+     "v": "75"
+    }
+   },
+   "wc2_humans_highelfpriest": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "200",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "100",
+        "tag": "Tesla_Super_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "40",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Tesla_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
+      ],
+      "warheads": [
+       "^Warhead_Tesla_Super"
+      ],
+      "weapon": "wc2mageFire",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "armament_name": "healing",
+      "damage_warheads": [
+       {
+        "damage": "-5000",
+        "falloff": null,
+        "spread": "128",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "40",
+      "requires": "FSD_cond_3 && paladinhealing_upg",
+      "slot": "Armament@HEAL",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2priesthealing",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "exorcism",
+      "damage_warheads": [
+       {
+        "damage": "4025",
+        "falloff": null,
+        "spread": "128",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_4 && paladinexorcism_upg",
+      "slot": "Armament@EXORCISM",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2paladinexorcism",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SniperInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "50000"
+    },
+    "name": "High Elf priest",
+    "prerequisites": [
+     "~wc2_humans_magetower"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "65"
+    }
+   },
+   "wc2_humans_highelfsorceress": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "200",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "100",
+        "tag": "Tesla_Super_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "40",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Tesla_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
+      ],
+      "warheads": [
+       "^Warhead_Tesla_Super"
+      ],
+      "weapon": "wc2mageFire",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "armament_name": "healing",
+      "damage_warheads": [
+       {
+        "damage": "-4025",
+        "falloff": null,
+        "spread": "128",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_3 && paladinhealing_upg",
+      "slot": "Armament@HEAL",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2paladinhealing",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "exorcism",
+      "damage_warheads": [
+       {
+        "damage": "4025",
+        "falloff": null,
+        "spread": "128",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_4 && paladinexorcism_upg",
+      "slot": "Armament@EXORCISM",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2paladinexorcism",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SniperInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "50000"
+    },
+    "name": "High Elf Sorceress",
+    "prerequisites": [
+     "~wc2_humans_magetower"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "65"
+    }
+   },
+   "wc2_humans_highelvenarcher": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "250",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "7487",
+      "reloaddelay": "35",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LaserWeapon",
+       "^HeavyMissile",
+       "^HeavyAAWeapon",
+       "wc2arrowFire"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "wc2highArrowFire",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "1000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "falloff": null,
+        "spread": "300",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "600",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "300",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "500",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "250",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "250",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "125",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "100",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "70",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "falloff": "100, 85, 70, 55, 40, 25, 10",
+        "spread": "35",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "7487",
+      "reloaddelay": "35",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^LaserWeapon",
+       "^HeavyMissile",
+       "^HeavyAAWeapon",
+       "wc2arrowFire"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "wc2highArrowFire",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Valued.Cost",
+     "v": "1100"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": "archer",
+     "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
+     "v": "35000"
+    },
+    "name": "High Elven Archer",
+    "prerequisites": [
+     "~wc2_humans_upgrade_highelvenarcher"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.Speed",
+     "v": "85"
+    }
+   },
+   "wc2_humans_knight": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "16000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1420",
+      "reloaddelay": "12",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2knightslice",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "holyvision",
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "falloff": null,
+        "spread": "1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "512000",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_2",
+      "slot": "Armament@HOLYVISION",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2paladinholyvision",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "healing",
+      "damage_warheads": [
+       {
+        "damage": "-4025",
+        "falloff": null,
+        "spread": "128",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_3 && paladinhealing_upg",
+      "slot": "Armament@HEAL",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2paladinhealing",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "exorcism",
+      "damage_warheads": [
+       {
+        "damage": "4025",
+        "falloff": null,
+        "spread": "128",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_4 && paladinexorcism_upg",
+      "slot": "Armament@EXORCISM",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2paladinexorcism",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "category": "Tanks",
+     "class_anchor": null,
+     "special": 1.0,
+     "subtype": "LineBreaker",
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
+     "v": "167500"
+    },
+    "name": "Knight",
+    "prerequisites": [
+     "~wc2_humans_stables",
+     "~!wc2_humans_upgrade_paladin"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.Speed",
+     "v": "115"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "92"
+    }
+   },
+   "wc2_humans_mage": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "200",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "100",
+        "tag": "Tesla_Super_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "40",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_2 && !mageslow_upg) || (FSD_cond_3 && !magepolymorph_upg) || (FSD_cond_4 && !mageblizzard_upg)",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Tesla_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
+      ],
+      "warheads": [
+       "^Warhead_Tesla_Super"
+      ],
+      "weapon": "wc2mageFire",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "200",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4",
+        "falloff": "100, 40, 20, 10, 5, 0",
+        "spread": "100",
+        "tag": "Tesla_Super_Percentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "8000",
+      "reloaddelay": "40",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Tesla_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
+      ],
+      "warheads": [
+       "^Warhead_Tesla_Super"
+      ],
+      "weapon": "wc2mageFire",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "armament_name": "fireball",
+      "damage_warheads": [
+       {
+        "damage": "18000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "9",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "80",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
+      "slot": "Armament@FIREBALL_VISIBLE",
+      "versus_templates": [
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
+      "weapon": "wc2mageFireballVisible",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "5",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "18000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "9",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "80",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
+      "slot": "Armament@FIREBALL_EXPLOSIONS",
+      "versus_templates": [
+       "wc2mageFireballVisible"
+      ],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
+      "weapon": "wc2mageFireballExplosion",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "slow",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "0c1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_2 && mageslow_upg",
+      "slot": "Armament@SLOW",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2mageSlow",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "polymorph",
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "8000",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_3 && magepolymorph_upg",
+      "slot": "Armament@POLYMORPH",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2magePolymorph",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "blizzard",
+      "damage_warheads": [
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "0c1",
+        "tag": "1Dam_impact",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "8000",
+      "reloaddelay": "50",
+      "requires": "FSD_cond_4 && mageblizzard_upg",
+      "slot": "Armament@BLIZZARD",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2mageBlizzard",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SniperInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "50000"
+    },
+    "name": "Mage",
+    "prerequisites": [
+     "~wc2_humans_magetower"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "65"
+    }
+   },
+   "wc2_humans_militiapeasant": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1333",
+      "reloaddelay": "15",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2footmanslice",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Valued.Cost",
+     "v": "300"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "MeleeInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
+     "v": "20000"
+    },
+    "name": "Militia Peasant",
+    "prerequisites": [
+     "~wc2_humans_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.Speed",
+     "v": "90"
+    }
+   },
+   "wc2_humans_mortarteam": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "2400",
+      "pricing": true,
+      "range": "12000",
+      "reloaddelay": "200",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
+       "^MediumChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "MortarTeamArtilleryShell",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "20000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "minrange": "2400",
+      "pricing": false,
+      "range": "12000",
+      "reloaddelay": "200",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_CannonHE_Medium",
+       "^MediumChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Medium"
+      ],
+      "weapon": "MortarTeamArtilleryShell",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": 1.0,
+     "subtype": "MortarInfantry",
+     "tech_tier": 1.0,
+     "unit_class": 0.6
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
+     "v": "40000"
+    },
+    "name": "Mortar Team",
+    "prerequisites": [
+     "~wc2_humans_gnomishinventor",
+     "wc2_humans_blacksmith"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.Speed",
+     "v": "80"
+    }
+   },
+   "wc2_humans_warcraft3footman": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "18000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "9",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1533",
+      "reloaddelay": "15",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2footmanslice2",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "category": "Infantry",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "MeleeInfantry",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#FirepowerMultiplier@WC2SwordUpg.Modifier",
+     "trait": "FirepowerMultiplier@WC2SwordUpg",
+     "v": 1.3
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Health.HP",
+     "v": "80000"
+    },
+    "name": "Warcraft 3 Footman",
+    "prerequisites": [
+     "~wc2_humans_upgrade_warcraft3footman"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml#Mobile.Speed",
+     "v": "85"
+    }
+   }
+  },
+  "upgrades": {
+   "wc2_humans_upgrade_armorstrength": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Armor Strength",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_armorstrength",
+     "~wc2_humans_blacksmith"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_armorstrengthii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Armor Strength II",
+    "prerequisites": [
+     "!wc2_humans_upgrade_armorstrengthii",
+     "~wc2_humans_upgrade_armorstrength",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_castle"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_arrowstrength": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Arrow Strength",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_arrowstrength",
+     "~wc2_humans_blacksmith"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_arrowstrengthii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Arrow Strength II",
+    "prerequisites": [
+     "!wc2_humans_upgrade_arrowstrengthii",
+     "~wc2_humans_upgrade_arrowstrength",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_castle"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_ballistastrength": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Ballista Strength",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_ballistastrength",
+     "~wc2_humans_blacksmith"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_ballistastrengthii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Ballista Strength II",
+    "prerequisites": [
+     "!wc2_humans_upgrade_ballistastrengthii",
+     "~wc2_humans_upgrade_ballistastrength",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_castle"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_bestfarm": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Best Farm",
+    "prerequisites": [
+     "~wc2_humans_upgrade_betterfarm",
+     "~wc2_humans_farm",
+     "wc2_humans_castle"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_betterfarm": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Better Farm",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_betterfarm",
+     "~wc2_humans_farm",
+     "wc2_humans_keep"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_blizzard": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Blizzard",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_blizzard",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_magetower"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_cannondamage": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Cannon Damage",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_cannondamage",
+     "~wc2_humans_blacksmith"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_cannondamageii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Cannon Damage II",
+    "prerequisites": [
+     "!wc2_humans_upgrade_cannondamageii",
+     "~wc2_humans_upgrade_cannondamage",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_castle"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_exorcism": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Exorcism",
+    "prerequisites": [
+     "~wc2_humans_upgrade_paladin",
+     "~!wc2_humans_upgrade_exorcism",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_church"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_healing": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Healing",
+    "prerequisites": [
+     "~wc2_humans_upgrade_paladin",
+     "~!wc2_humans_upgrade_healing",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_church"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_highelvenarcher": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "UnitUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "High Elven Archer",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_highelvenarcher",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_upgrade_ranger",
+     "wc2_humans_castle"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_paladin": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Paladin",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_paladin",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_church"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_polymorph": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Polymorph",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_polymorph",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_magetower"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_ranger": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Ranger",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_ranger",
+     "~wc2_humans_blacksmith"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_rangerlongbow": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Ranger Longbow",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_rangerlongbow",
+     "~wc2_humans_upgrade_ranger",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_castle"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_rangermarksman": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Ranger Marksman",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_rangermarksman",
+     "~wc2_humans_upgrade_ranger",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_keep"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_rangerscouting": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Ranger Scouting",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_rangerscouting",
+     "~wc2_humans_upgrade_ranger",
+     "~wc2_humans_blacksmith"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_slow": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Slow",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_slow",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_magetower"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_swordstrength": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Sword Strength",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_swordstrength",
+     "~wc2_humans_blacksmith"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_swordstrengthii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Sword Strength II",
+    "prerequisites": [
+     "!wc2_humans_upgrade_swordstrengthii",
+     "~wc2_humans_upgrade_swordstrength",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_castle"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_warcraft3footman": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "UnitUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Warcraft 3 Footman",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_warcraft3footman",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_castle"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "wc2_humans_upgrade_warcraft3knightwip": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "UnitUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Warcraft 3 Knight (WIP)",
+    "prerequisites": [
+     "~!wc2_humans_upgrade_warcraft3knightwip",
+     "~wc2_humans_blacksmith",
+     "wc2_humans_upgrade_paladin",
+     "wc2_humans_church"
+    ],
+    "queue": [
+     "Research"
+    ]
+   }
+  },
+  "vehicles": {
+   "wc2_humans_ballista": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "30000",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Demolition_Light_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "30000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "30000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "15",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Concussion_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "minrange": "2890",
+      "pricing": true,
+      "range": "14450",
+      "reloaddelay": "180",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium",
+       "^Projectile_Grenade_Light",
+       "^Effect_Demolition_Heavy"
+      ],
+      "warheads": [
+       "^Warhead_Demolition_Light",
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_Concussion_Medium"
+      ],
+      "weapon": "wc2ballistaFire",
+      "weapon_class_source": "illegal_mix"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "artillery",
+     "special": null,
+     "subtype": "Artillery",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Health.HP",
+     "v": "45000"
+    },
+    "name": "Ballista",
+    "prerequisites": [
+     "~wc2_humans_blacksmith"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry",
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "45"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "18"
+    }
+   },
+   "wc2_humans_demolitionsquad": {
+    "armaments": [
+     {
+      "armament_name": "detonate",
+      "damage_warheads": [],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
+      "range": "1536",
+      "requires": "!cond_deployed",
+      "slot": "Armament",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2demolitionsquadTargeting",
+      "weapon_class_source": "none"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1333",
+      "reloaddelay": "15",
+      "requires": "cond_deployed",
+      "slot": "Armament@Melee",
+      "versus_templates": [
+       "wc2footmanslice"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2demolitionsquadMelee",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Superheavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "800"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "line_breaker",
+     "special": null,
+     "subtype": "LineBreaker",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "40000"
+    },
+    "name": "Demolition Squad",
+    "prerequisites": [
+     "~wc2_humans_gnomishinventor"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "80"
+    }
+   },
+   "wc2_humans_mobileconstructionvehiclehuman": {
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SupportVehicle",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Mobile Construction Vehicle (Human)",
+    "prerequisites": [
+     "~wc2_humans_blacksmith"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
+    }
+   },
+   "wc2_humans_paladin": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "16000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1420",
+      "reloaddelay": "12",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2knightslice",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "holyvision",
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "falloff": null,
+        "spread": "1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "512000",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_2",
+      "slot": "Armament@HOLYVISION",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2paladinholyvision",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "healing",
+      "damage_warheads": [
+       {
+        "damage": "-4025",
+        "falloff": null,
+        "spread": "128",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_3 && paladinhealing_upg",
+      "slot": "Armament@HEAL",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2paladinhealing",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "exorcism",
+      "damage_warheads": [
+       {
+        "damage": "4025",
+        "falloff": null,
+        "spread": "128",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_4 && paladinexorcism_upg",
+      "slot": "Armament@EXORCISM",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2paladinexorcism",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "1600"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "line_breaker",
+     "special": null,
+     "subtype": "LineBreaker",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "167500"
+    },
+    "name": "Paladin",
+    "prerequisites": [
+     "~wc2_humans_upgrade_paladin",
+     "wc2_humans_church",
+     "wc2_humans_stables",
+     "~!wc2_humans_upgrade_warcraft3knightwip"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "115"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "92"
+    }
+   },
+   "wc2_humans_peasant": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1333",
+      "reloaddelay": "15",
+      "slot": "Armament",
+      "versus_templates": [
+       "wc2footmanslice"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2peasantsmack",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Harvester",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "40000"
+    },
+    "name": "Peasant",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_elvenlumbermill"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "80"
+    }
+   },
+   "wc2_humans_siegeengine": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "10000",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "1000",
+        "tag": "NuclearWarhead",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
+        "spread": "500",
+        "tag": "NuclearWarheadPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "200",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "100",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "LightChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "99, 66, 33",
+        "spread": "175",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "99, 66, 33",
+        "spread": "700",
+        "tag": "MediumChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "99, 66, 33",
+        "spread": "350",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "99, 66, 33",
+        "spread": "1050",
+        "tag": "HeavyChemicalWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "99, 66, 33",
+        "spread": "525",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "LightFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "111, 33, 11, 3",
+        "spread": "250",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "750",
+        "tag": "MediumFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "111, 33, 11, 3",
+        "spread": "375",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "111, 33, 11, 3",
+        "spread": "1000",
+        "tag": "HeavyFlameWeapon",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "111, 33, 11, 3",
+        "spread": "500",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "400",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 50, 33, 25, 20",
+        "spread": "200",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "600",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 75, 50, 25",
+        "spread": "300",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "800",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": "100, 50, 25, 10, 5",
+        "spread": "400",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "450",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "225",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "300",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "150",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "falloff": null,
+        "spread": "150",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "75",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "minrange": "2240",
+      "pricing": true,
+      "range": "11200",
+      "reloaddelay": "100",
+      "slot": "Armament",
+      "versus_templates": [
+       "^NuclearWarhead",
+       "^LightMissile",
+       "^LightChemicalWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyChemicalWeapon",
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^HeavyCannon",
+       "^MediumCannon",
+       "^TankDestroyerCannon"
+      ],
+      "warheads": [],
+      "weapon": "SiegeEngineCannon",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "buildable": true,
+    "charge_up": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#AttackFrontalCharged",
+     "ticks": 20.0,
+     "v": "AttackFrontalCharged"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1800"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "artillery",
+     "special": null,
+     "subtype": "Artillery",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Health.HP",
+     "v": "70000"
+    },
+    "name": "Siege Engine",
+    "prerequisites": [
+     "~wc2_humans_townhall",
+     "wc2_humans_castle",
+     "wc2_humans_blacksmith"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "70"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "28"
+    }
+   },
+   "wc2_humans_warcraft3knight": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "16000",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Melee_Medium_Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "1420",
+      "reloaddelay": "12",
+      "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_Melee_Medium",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2knightslice",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "holyvision",
+      "damage_warheads": [
+       {
+        "damage": "0",
+        "falloff": null,
+        "spread": "1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "512000",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_2",
+      "slot": "Armament@HOLYVISION",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2paladinholyvision",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "healing",
+      "damage_warheads": [
+       {
+        "damage": "-4025",
+        "falloff": null,
+        "spread": "128",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_3 && paladinhealing_upg",
+      "slot": "Armament@HEAL",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2paladinhealing",
+      "weapon_class_source": "none"
+     },
+     {
+      "armament_name": "exorcism",
+      "damage_warheads": [
+       {
+        "damage": "4025",
+        "falloff": null,
+        "spread": "128",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": null,
+      "pricing": true,
+      "range": "5120",
+      "reloaddelay": "60",
+      "requires": "FSD_cond_4 && paladinexorcism_upg",
+      "slot": "Armament@EXORCISM",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "wc2paladinexorcism",
+      "weapon_class_source": "none"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Superheavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2200"
+    },
+    "design": {
+     "category": "Vehicles",
+     "class_anchor": "line_breaker",
+     "special": null,
+     "subtype": "LineBreaker",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Health.HP",
+     "v": "180000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Warcraft 3 Knight",
+    "prerequisites": [
+     "~wc2_humans_upgrade_warcraft3knightwip"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "120"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "96"
+    }
+   }
+  }
+ }
+}

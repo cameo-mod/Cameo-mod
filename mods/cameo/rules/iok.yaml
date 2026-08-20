@@ -305,7 +305,7 @@ FACTIOK:
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
-		IntoActor: mcv.nod
+		IntoActor: td_nod_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	TransformsIntoMobile:
@@ -697,6 +697,8 @@ IOKNUK2:
 	ScalePowerWithHealth:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: building ##########
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: IOKNUKE
 	WithIdleOverlay@BOX:
 		Sequence: box-overlay
 	WithIdleOverlay@BOX2:
@@ -708,7 +710,7 @@ IOKNUK2:
 
 iokblackmarket:
 	Inherits: OILB.Building
-	Inherits: ^BaseBuilding
+	Inherits@2: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@camo: ^BuildingCamoLevel2
 	Inherits@fort: ^GLAFortifiable
@@ -755,7 +757,7 @@ iokblackmarket:
 	CashTrickler:
 		Interval: 25
 		Amount: 25
-	Production@Upgrades:
+	Production@Research:
 		Produces: MarketUpgrades.GLA
 	Voiced:
 		VoiceSet: GLBlackMarketVoice
@@ -777,7 +779,7 @@ iokpalace:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@camo: ^BuildingCamoLevel2
 	Inherits@fort: ^GLAFortifiable
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -995,6 +997,7 @@ IOKSITE:
 	Tooltip:
 		Name: Stinger Site
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 60
 		Prerequisites: iokbarracks
 		Queue: Defence, RADefence
@@ -1054,7 +1057,7 @@ IOKSITE:
 IOKGUN:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@shape: ^1x1Shape
 	Valued:
 		Cost: 600
@@ -1092,12 +1095,12 @@ IOKGUN:
 	Power:
 		Amount: -20
 	RenderSprites:
-		Image: gun
+		Image: td_nod_gunturret
 	SpawnActorOnDeath@hole:
 		Actor: iokhole.iokgun
 
 IOKOBLI:
-	Inherits: OBLI
+	Inherits: td_nod_obeliskoflight
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: iokblackmarket
@@ -1123,13 +1126,11 @@ MCV.IOK:
 		Name: Mobile Construction Vehicle (IOK)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 75
 		Locomotor: heavywheeled
@@ -1163,7 +1164,7 @@ mcviok.bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: ~techlevel.medium, ~botplayer, allowsMCV
+		Prerequisites: ~botplayer, allowsMCV
 
 ####################################################################################################
 #		IOK - AIRCRAFT

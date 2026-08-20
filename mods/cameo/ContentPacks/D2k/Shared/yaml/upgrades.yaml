@@ -1,0 +1,103 @@
+upgrade_conyard:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Construction Yard Upgrade
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~d2k_construction_yard, research_centre, !upgrade_conyard
+		Queue: Upgrades
+		BuildLimit: 1
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Description: Construction Yard gets 25% more armor. Reduces cost and production time by 10% for all Defenses and upgrades Concrete Slabs.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 1250
+	RenderSprites:
+		Image: conyard.ordos
+
+upgrade_barracks:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Barracks Upgrade
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~d2k_barracks, research_centre, !upgrade_barracks
+		Queue: Upgrades
+		BuildLimit: 1
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Description: Barracks gets 25% more armor. Reduces cost and production time by 10% for all infantry.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 1250
+	RenderSprites:
+		Image: barracks.ordos
+
+upgrade_heavy:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Heavy Factory Upgrade
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~heavy_factory, research_centre, !upgrade_heavy
+		Queue: Upgrades
+		BuildLimit: 1
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Description: Heavy Factory gets 25% more armor. Reduces cost and production time by 10% for all heavy vehicles.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 1250
+	RenderSprites:
+		Image: heavy.ordos
+
+upgrade_hightech:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: High Tech Factory Upgrade
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~high_tech_factory, research_centre, !upgrade_hightech
+		Queue: Upgrades
+		BuildLimit: 1
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Description: High Tech Factory gets 25% more armor. Reduces cost and production time by 10% for all air units.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 1250
+	RenderSprites:
+		Image: hightech.atreides
+
+d2k_wind_trap_upgrade:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Advanced Wind Traps
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 200
+		Prerequisites: ~outpost.d2k, !d2k_wind_trap_upgrade
+		Queue: Upgrades
+		Description: upgrade_wind_trap.description
+		IconPalette: d2kunit
+	RenderSprites:
+		Image: power.atreides
+
+#   Common Upgrades
+
+d2k_spice_sifter_upgrade:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Efficient Filtering
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 200
+		Prerequisites: ~research_centre, !d2k_spice_sifter_upgrade
+		Queue: Research
+		Description: upgrade_spice_sifter.description
+		IconPalette: d2kunit
+	RenderSprites:
+		Image: d2k_spice_sifter

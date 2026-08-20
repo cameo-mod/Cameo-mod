@@ -1,0 +1,391 @@
+yuri_constructionyard:
+	Inherits: ^RA2Building
+	Inherits@conyard: ^Conyard
+	Inherits@shape: ^4x3Shape
+	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Tooltip:
+		Name: Yuri Construction Yard
+	Building:
+		Footprint: xxxx xxxx xxxx
+		Dimensions: 4,3
+	Transforms:
+		IntoActor: yuri_mobileconstructionvehicle
+		Offset: 1,1
+		Facing: 432
+	WithIdleOverlay@top:
+		Sequence: idle-top
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@normal:
+		Sequence: idle-normal
+		RequiresCondition: !build-incomplete
+	WithBuildingPlacedAnimation:
+		RequiresCondition: !build-incomplete
+	Exit@1:
+		SpawnOffset: 213,-128,0
+		ExitCell: 1,2
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+	ProvidesPrerequisite@ra2ywall:
+		Prerequisite: ra2ywall
+	Targetable@TechStealerInfiltrate:
+		TargetTypes: TechStealerInfiltrate
+	InfiltrateForSupportPower:
+		Proxy: yrnacnst.infiltrated
+		Types: TechStealerInfiltrate
+
+yuri_warfactory:
+	Inherits: ^RA2DefaultWeap
+	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Tooltip:
+		Name: Yuri War Factory
+	Buildable:
+		Prerequisites: ~yuri_constructionyard, yuri_slaveminer_deployed
+		Description: Produces vehicles.
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@bib:
+		Sequence: bib
+
+yuri_bioreactor:
+	Inherits: ^RA2Building
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Inherits@gar: ^ClearableGarrison
+	Inherits@BotMicro: ^BotMicromanageable
+	HitShape:
+		TargetableOffsets: 630,299,0
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Bio Reactor
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~yuri_constructionyard
+		Queue: Building, RABuilding
+		Description: actor_yapowr.description
+	Building:
+		Footprint: xX xx __
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 125000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c0
+	ScalePowerWithHealth:
+	Selectable:
+		Class: yuri_bioreactor
+	AcceptsDeliveredExperience:
+		ValidTypes: building
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@idle-tier2:
+		Sequence: idle-tier2
+		RequiresCondition: PowerLoad >= 1 && !build-incomplete
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+		EjectOnDeath: false
+		LoadedCondition: PowerLoad
+	WithCargoSounds:
+		EnterSounds: bbioenta.wav
+		ExitSounds: bbioenta.wav
+	Power@0:
+		Amount: 150
+		RequiresCondition: PowerLoad == 0
+	Power@1:
+		Amount: 200
+		RequiresCondition: PowerLoad == 1
+	Power@2:
+		Amount: 250
+		RequiresCondition: PowerLoad == 2
+	Power@3:
+		Amount: 300
+		RequiresCondition: PowerLoad == 3
+	Power@4:
+		Amount: 350
+		RequiresCondition: PowerLoad == 4
+	Power@5:
+		Amount: 400
+		RequiresCondition: PowerLoad >= 5
+	PowerMultiplier@yuri_upgrade_bioreactorefficiency:
+		Modifier: 200
+		RequiresCondition: yuri_upgrade_bioreactorefficiency
+	GrantConditionOnPrerequisite@yuri_upgrade_bioreactorefficiency:
+		Condition: yuri_upgrade_bioreactorefficiency
+		Prerequisites: yuri_upgrade_bioreactorefficiency
+	FireWarheadsOnDeathCA@4:
+		Weapon: ReactorNukeWeak
+		EmptyWeapon: ReactorNukeWeak
+		RequiresCondition: !chronobeamed && (PowerLoad >= 1)
+	FirepowerMultiplier@Load1:
+		Modifier: 10
+		RequiresCondition: PowerLoad == 1
+	FirepowerMultiplier@Load2:
+		Modifier: 20
+		RequiresCondition: PowerLoad == 2
+	FirepowerMultiplier@Load3:
+		Modifier: 30
+		RequiresCondition: PowerLoad == 3
+	FirepowerMultiplier@Load4:
+		Modifier: 40
+		RequiresCondition: PowerLoad == 4
+	FirepowerMultiplier@Load5:
+		Modifier: 50
+		RequiresCondition: PowerLoad >= 5
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	ActorStatValues:
+		Stats: Armor, Sight, Power, Cargo
+	ActorStatValues:
+		Upgrades: yuri_upgrade_bioreactorefficiency
+
+yuri_barracks:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	SelectionDecorations:
+	Tooltip:
+		Name: Yuri Barracks
+	Buildable:
+		Prerequisites: ~yuri_constructionyard, yuri_bioreactor
+		Description: Trains infantry units.
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+		Path: 1,2
+	Exit@1:
+		SpawnOffset: 512,1024,0
+		ExitCell: 1,2
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+
+yuri_grinder:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Selectable:
+		Bounds: 3072, 2048, 0, -256
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Grinder
+	ProvidesPrerequisite:
+		Prerequisite: yuri_grinder
+	Buildable:
+		BuildPaletteOrder: 60
+		BuildDuration: 750
+		BuildDurationModifier: 100
+		Queue: Building, RABuilding
+		Description: Recycles units into cash.
+		Prerequisites: ~yuri_constructionyard, yuri_warfactory
+	Building:
+		Footprint: xxx =x=
+		Dimensions: 3,2
+	Health:
+		HP: 200000
+	Armor:
+		Type: Concrete
+	RevealsShroud:
+		Range: 5c0
+	Power:
+		Amount: -30
+	AcceptsDeliveredCash:
+		ValidTypes: GrinderCash
+
+yuri_psychicsensor:
+	Inherits: ^RA2Building
+	Inherits@shape: ^2x2Shape
+	Inherits@radar: ^RadarBuilding
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Selectable:
+		Bounds: 2048, 3200, 0, -640
+	SelectionDecorations:
+	Tooltip:
+		Name: Psychic Sensor
+	Buildable:
+		Prerequisites: ~yuri_constructionyard, yuri_slaveminer_deployed
+		Description: actor_napsis.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	WithSpriteBody:
+		PauseOnCondition: lowpower
+	WithIdleOverlay@spin:
+		Sequence: idle-spin
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+	SpawnActorPower@psireveal:
+		PauseOnCondition: disabled
+		OrderName: SovietRA2SpyPlane
+		Prerequisites:
+			1:
+		Icons:
+			1: ra2psirev
+		ChargeInterval: 4500
+		Names:
+			1: power_ra2psireveal.name
+		Descriptions:
+			1: power_ra2psireveal.description
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		EndChargeSpeechNotification: SpyPlaneReady
+		Actors:
+			1: camera.psireveal
+		LifeTime: 250
+		DeploySound: spysreve.wav
+		LaunchSound: spysreve.wav
+		IncomingSound: spysreve.wav
+		SupportPowerPaletteOrder: 10
+		EffectSequence: idle
+		BlockedCursor: move-blocked
+	SupportPowerChargeBar:
+	RevealsShroudMultiplier@yuri_upgrade_psychicvision:
+		Modifier: 150
+	DetectCloakedMultiplier@yuri_upgrade_psychicvision:
+		Modifier: 150
+	RangedGpsProvider:
+		Range: 20000
+		RequiresCondition: !disabled && !yuri_upgrade_psychicvision
+	WithRangeCircle:
+		Range: 20000
+		Color: FF000088
+		RequiresCondition: !disabled && !yuri_upgrade_psychicvision
+	RangedGpsProvider@upgrade:
+		Range: 30000
+		RequiresCondition: !disabled && yuri_upgrade_psychicvision
+	WithRangeCircle@upgrade:
+		Range: 30000
+		Color: FF000088
+		RequiresCondition: !disabled && yuri_upgrade_psychicvision
+	GrantConditionOnPrerequisite@yuri_upgrade_psychicvision:
+		Condition: yuri_upgrade_psychicvision
+		Prerequisites: yuri_upgrade_psychicvision
+	ActorStatValues:
+		Upgrades: yuri_upgrade_psychicvision
+
+yuri_battlelab:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Selectable:
+		Bounds: 3072, 2048, 0, -256
+	Buildable:
+		Prerequisites: ~yuri_constructionyard, yuri_psychicsensor
+		Description: Unlocks advanced technology.
+	Tooltip:
+		Name: Yuri Battle Lab
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	SupportPowerChargeBar:
+	ProvidesPrerequisite:
+		Prerequisite: ra2tek
+	WithIdleOverlay@critical:
+		Sequence: idle-critical
+		RequiresCondition: !build-incomplete
+
+yuri_lunarcommandcenter:
+	Inherits: ^RA2Building
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Inherits@shape: ^4x3Shape
+	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Inherits@CPQWP: ^CPQConditionWithPrimary
+	Buildable:
+		Queue: Building, RABuilding
+		BuildLimit: 1
+		BuildPaletteOrder: 150
+		Prerequisites: ~yuri_constructionyard, yuri_battlelab, derricklimit
+		Description: template_airfield.description
+	Building:
+		Footprint: =xx= xxxx xxxx
+		Dimensions: 4,3
+	Tooltip:
+		Name: Lunar Command Center
+	ProvidesPrerequisite@buildingname:
+	WithSpriteBody:
+	Selectable:
+		Bounds: 4096, 4096, 0, -512
+	Exit@1:
+		SpawnOffset: 1536, 1024, 0
+		ExitCell: 3,2
+		Facing: 640
+	RallyPoint: ##########
+		Path: 0,2
+	Production@NORMAL:
+		Produces: Aircraft
+		RequiresCondition: !classicproductionqueues
+		PauseOnCondition: disabled
+	Production@CLASSICPRODUCTIONQUEUES:
+		Produces: RAAircraft
+		RequiresCondition: classicproductionqueues
+		PauseOnCondition: disabled
+	ParallelProductionQueue@AIRCRAFT:
+		Type: Aircraft
+		DisplayOrder: 4
+		Group: Aircraft
+		LowPowerModifier: 300
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		BuildDurationModifier: 25
+		InfiniteBuildLimit: 10
+	ProductionBar@AIRCRAFT:
+		ProductionType: Aircraft
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAAIRCRAFT:
+		ProductionType: RAAircraft
+		RequiresCondition: classicproductionqueues
+
+yuri_cloningvats:
+	Inherits: ^RA2Building
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Inherits@CPQWP: ^CPQConditionWithPrimary
+	Buildable:
+		BuildPaletteOrder: 160
+		Prerequisites: ~yuri_constructionyard, yuri_battlelab, yuri_lunarcommandcenter, derricklimit
+		Queue: Building, RABuilding
+		Description: Clones produced infantry.
+		BuildLimit: 1
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+	Tooltip:
+		Name: Yuri Cloning Vats
+	ProvidesPrerequisite@buildingname:
+	Production:
+		Produces: Clone.Yuri
+	ClonesProducedUnits:
+		CloneableTypes: NormalInfantry
+		ProductionType: Clone.Yuri
+	Exit:
+		ExitCell: -1, 0
+	Exit@2:
+		ExitCell: 1, 0
+	RallyPoint:
+		Path: 3,3
+	RenderSprites:
+		Image: ra2naclon

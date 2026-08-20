@@ -1,0 +1,270 @@
+japan_japaneseshrine:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Tooltip:
+		Name: Japanese Shrine
+	Buildable:
+		Prerequisites: ~japan_japanesetechcenter, ~techlevel.superweapons, !japan_japaneseshrine
+		Description: actor_mslo.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	DetonateWeaponPowerCA:
+		AllowMultiple: true
+		OrderName: MagicOrbHailstorm
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		IconImage: japan_japaneseshrine
+		Icons:
+			1: japanspellcard
+		Cursor: ability
+		ChargeInterval: 10500
+		ActivationDelay: 100
+		ActivationSequence:
+		Names:
+			1: Magic Orb Hailstorm
+		Descriptions:
+			1: Unleashes a hailstorm of magical orbs that deal damage over a wide area and disable vehicles and structures.
+		Weapons:
+			1: MagicOrbHailstormActivate
+		EndChargeSound: snukread.wav
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		EndChargeTextNotification: Magic Orb Hailstorm ready.
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		LaunchTextNotification: Warning: Spell Card cast.
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Warning: Spell Card cast.
+		LaunchSound: spellcard.wav
+		IncomingSound: spellcard.wav
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraRemoveDelay: 500
+		Duration: 250
+		ActiveCondition: active
+		DisplayBeacon: True
+		DisplayRadarPing: True
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		BeaconPosters:
+			1: japanspellcardicon
+		TargetCircleRanges:
+			1: 10000
+		TargetCircleColors: ff000080
+		BeaconActor: BLASTRADIUS.atomic
+		CameraRange: 10000
+	SupportPowerChargeBar:
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: japan_japaneseshrine
+	RenderSprites:
+		Image: japan_japaneseshrine
+
+japan_japanesemgnest:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@detect: ^GenericAllDetector
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@shape: ^1x1Shape
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Japanese MG Nest
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japanesebarracks
+		Queue: Defence, RADefence
+		Description: actor_mgnest.description
+	Building:
+	Health:
+		HP: 110000
+	WithBuildingBib:
+		HasMinibib: true
+	Armament:
+		Name: primary
+		Weapon: JHighV
+		LocalOffset: 768,0,512
+		MuzzleSequence: muzzle
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 384,0,512
+		CasingTargetOffset: 0,-600,0
+		RequiresCondition: !japan_upgrade_waveforcebullets
+	Armament@Upgrade: ##########
+		Name: primary
+		Weapon: JHighVWaveforce
+		LocalOffset: 768,0,512
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_waveforcebullets
+	-RenderRangeCircle:
+	RenderRangeCircleCA:
+		Armaments: primary
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	Turreted:
+		TurnSpeed: 25
+		InitialFacing: 200
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Power:
+		Amount: -50
+	RevealsShroud:
+		Range: 6696
+	DetectCloaked:
+		Range: 3348
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_nanotechrepairs
+
+japan_ballistatower:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@selection: ^AdvancedDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@detect: ^GenericAllDetector
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@shape: ^1x1Shape
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@EnergizedArrows: ^EnergizedArrows
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Valued:
+		Cost: 1400
+	Tooltip:
+		Name: Ballista Tower
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseradararray
+		Queue: Defence, RADefence
+		Description: actor_mgnest.description
+	Building:
+	Health:
+		HP: 190000
+	WithBuildingBib:
+		HasMinibib: true
+	Armament@PRIMARY: ##########
+		Weapon: BallistaTowerMultiShot
+		LocalOffset: 624,0,208
+		PauseOnCondition: ammo < 5
+	Armament@AIR: ##########
+		Weapon: BallistaSingleShotAir
+		LocalOffset: 624,0,208
+		AmmoUsage: 5
+		PauseOnCondition: ammo < 5
+	Armament@Upgrade: ##########
+		Weapon: BallistaTowerMultiShotEnergized
+		LocalOffset: 624,0,208
+		PauseOnCondition: ammo < 5
+		RequiresCondition: japan_upgrade_energizedarrows
+	Armament@UpgradeAIR: ##########
+		Weapon: BallistaSingleShotAirEnergized
+		LocalOffset: 624,0,208
+		AmmoUsage: 5
+		PauseOnCondition: ammo < 5
+		RequiresCondition: japan_upgrade_energizedarrows
+	ReloadDelayMultiplier@DualWeapon:
+		Modifier: 125
+		RequiresCondition: japan_upgrade_energizedarrows
+	AmmoPool:
+		Ammo: 5
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 5
+		Count: 1
+		ResetOnFire: true
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+	-RenderRangeCircle:
+	RenderRangeCircleCA:
+		Armaments: primary
+	RenderRangeCircleCA@SECONDARY:
+		Armaments: secondary
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	Turreted:
+		TurnSpeed: 25
+		InitialFacing: 200
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Power:
+		Amount: -70
+	RevealsShroud:
+		Range: 9214
+	DetectCloaked:
+		Range: 4607
+	FirepowerMultiplier@japan_upgrade_energizedarrows:
+		Modifier: 75
+	ActorStatValues:
+		Upgrades: japan_upgrade_energizedarrows, japan_upgrade_nanotechrepairs
+
+japan_waveforceturret:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@selection: ^AdvancedDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@shape: ^2x2Shape
+	Inherits@AntiTank: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 90
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japanesetechcenter
+		Description: actor_waveforceturret.description
+	Valued:
+		Cost: 3200
+	Tooltip:
+		Name: Waveforce Turret
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 220000
+	WithBuildingBib:
+		HasMinibib: true
+	Turreted:
+		TurnSpeed: 15
+	Armament@WaveTurretShell:
+		Weapon: WaveTurretShell
+		LocalOffset: 1000,0,500
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@SplashCompensation:
+		Modifier: 50
+	AttackTurreted:
+	WithMuzzleOverlay:
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	RenderSprites:
+		Image: japan_waveforceturret
+	FireWarheadsOnDeath:
+		Weapon: WaveTurretImpact
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	Power:
+		Amount: -160
+	RevealsShroud:
+		Range: 9824
+	DetectCloaked:
+		Range: 4912
+	ActorStatValues:
+		Upgrades: japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
+
+	####################################################################################################
+	#		Upgrades Allies
+	####################################################################################################

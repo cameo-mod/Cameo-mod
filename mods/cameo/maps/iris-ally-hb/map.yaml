@@ -32,7 +32,7 @@ Players:
 		Playable: True
 		Required: True
 		LockFaction: True
-		Faction: gdi
+		Faction: td_gdi
 		LockColor: True
 		Color: FF66CC
 		LockTeam: True
@@ -43,7 +43,7 @@ Players:
 		Playable: True
 		Required: True
 		LockFaction: True
-		Faction: gdi
+		Faction: td_gdi
 		LockColor: True
 		Color: A94064
 		LockTeam: True
@@ -52,14 +52,14 @@ Players:
 	PlayerReference@Sankalpa:
 		Name: Sankalpa
 		Bot: campaign
-		Faction: nod
+		Faction: td_nod
 		Color: FC6A03
 		Allies: NewHopeOne, NewHopeTwo
 		Enemies: Nitro, NitroJP, NitroRed
 	PlayerReference@Nitro:
 		Name: Nitro
 		Bot: veryhard
-		Faction: soviet
+		Faction: ra1_soviets
 		Color: FEFE00
 		Handicap: 30
 		Allies: NitroJP, NitroRed
@@ -75,7 +75,7 @@ Players:
 	PlayerReference@NitroJP:
 		Name: NitroJP
 		Bot: hard
-		Faction: modjapan
+		Faction: japan
 		Color: 836593
 		Handicap: 20
 		Allies: Nitro, NitroRed
@@ -94,7 +94,7 @@ Actors:
 	Actor167: temv09
 		Owner: Neutral
 		Location: 81,42
-	Actor168: raafld
+	Actor168: ra1_soviets_airfield
 		Owner: Nitro
 		Location: 95,40
 	Actor169: brik
@@ -112,13 +112,13 @@ Actors:
 	Actor173: brik
 		Owner: Neutral
 		Location: 91,38
-	Actor174: tsla
+	Actor174: ra1_soviets_teslacoil
 		Owner: Nitro
 		Location: 90,42
-	Actor176: apwr
+	Actor176: ra1_advancedpowerplant
 		Owner: Nitro
 		Location: 100,41
-	Actor177: dome.soviet
+	Actor177: ra1_soviets_radardome
 		Owner: Nitro
 		Location: 104,40
 	Actor181: mine
@@ -130,7 +130,7 @@ Actors:
 	Actor183: temv10
 		Owner: Neutral
 		Location: 74,46
-	Actor184: yrngbnkr
+	Actor184: ra2_soviets_battlebunker
 		Owner: Neutral
 		Health: 7
 		Location: 77,48
@@ -146,28 +146,28 @@ Actors:
 	Actor188: brik
 		Owner: Neutral
 		Location: 91,47
-	Actor189: tsla
+	Actor189: ra1_soviets_teslacoil
 		Owner: Nitro
 		Location: 90,47
-	Actor191: ftur
+	Actor191: ra1_soviets_flametower
 		Owner: Nitro
 		Location: 90,46
-	Actor195: ftur
+	Actor195: ra1_soviets_flametower
 		Owner: Nitro
 		Location: 90,43
-	Actor196: powr
+	Actor196: ra1_powerplant
 		Owner: Nitro
 		Location: 95,44
-	Actor197: rafact.soviet
+	Actor197: ra1_soviets_constructionyard
 		Owner: Nitro
 		Location: 100,44
-	Actor199: powr
+	Actor199: ra1_powerplant
 		Owner: Nitro
 		Location: 97,44
-	Actor200: powr
+	Actor200: ra1_powerplant
 		Owner: Nitro
 		Location: 104,44
-	Actor201: powr
+	Actor201: ra1_powerplant
 		Owner: Nitro
 		Location: 106,44
 	Actor213: splitgold
@@ -200,22 +200,22 @@ Actors:
 	Actor222: brik
 		Owner: Neutral
 		Location: 91,50
-	Actor223: barr
+	Actor223: ra1_soviets_barracks
 		Owner: Nitro
 		Location: 97,49
-	Actor224: raweap
+	Actor224: ra1_soviets_warfactory
 		Owner: Nitro
 		Location: 100,49
-	Actor225: raproc.soviet
+	Actor225: ra1_soviets_orerefinery
 		Owner: Nitro
 		Location: 99,53
-	Actor226: raafld
+	Actor226: ra1_soviets_airfield
 		Owner: Nitro
 		Location: 104,49
-	Actor227: raproc.soviet
+	Actor227: ra1_soviets_orerefinery
 		Owner: Nitro
 		Location: 103,53
-	Actor228: stek
+	Actor228: ra1_soviets_techcenter
 		Owner: Nitro
 		Location: 106,53
 	Actor229: v05
@@ -254,11 +254,11 @@ Actors:
 	Actor241: brik
 		Owner: Neutral
 		Location: 94,55
-	Actor243: raharv.soviet
+	Actor243: ra1_soviets_oretruck
 		Owner: Nitro
 		Facing: 384
 		Location: 91,55
-	Actor244: raharv.soviet
+	Actor244: ra1_soviets_oretruck
 		Owner: Nitro
 		Facing: 384
 		Location: 94,58
@@ -280,7 +280,7 @@ Actors:
 	Actor250: brik
 		Owner: Neutral
 		Location: 98,59
-	Actor251: ftur
+	Actor251: ra1_soviets_flametower
 		Owner: Nitro
 		Location: 98,60
 	Actor252: brik
@@ -298,13 +298,13 @@ Actors:
 	Actor256: brik
 		Owner: Neutral
 		Location: 107,59
-	Actor257: ftur
+	Actor257: ra1_soviets_flametower
 		Owner: Nitro
 		Location: 103,60
 	Actor258: brik
 		Owner: Neutral
 		Location: 108,59
-	Actor259: raproc.soviet
+	Actor259: ra1_soviets_orerefinery
 		Owner: Neutral
 		Health: 10
 		FreeActor: False
@@ -315,7 +315,7 @@ Actors:
 	Actor261: v11
 		Owner: Neutral
 		Location: 12,61
-	Actor262: dtrk
+	Actor262: ra1_soviets_nukedemotruck
 		Owner: Nitro
 		Facing: 384
 		Location: 20,63
@@ -325,7 +325,7 @@ Actors:
 	Actor264: v03
 		Owner: Neutral
 		Location: 27,65
-	Actor265: ra2gaorep
+	Actor265: ra2_allies_orepurifier
 		Owner: Neutral
 		Health: 7
 		Location: 34,65
@@ -366,7 +366,7 @@ Actors:
 		Facing: 384
 		SubCell: 3
 		Location: 15,72
-	Actor340: rae1
+	Actor340: ra1_allies_rifleinfantry
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
@@ -391,39 +391,39 @@ Actors:
 		Facing: 384
 		SubCell: 3
 		Location: 21,72
-	Actor346: 3tnk
+	Actor346: ra1_soviets_heavytank
 		Owner: Nitro
 		Facing: 515
 		Location: 18,70
-	Actor347: 3tnk
+	Actor347: ra1_soviets_heavytank
 		Owner: Nitro
 		Facing: 499
 		Location: 23,70
-	Actor348: rae1
+	Actor348: ra1_allies_rifleinfantry
 		Owner: Nitro
 		SubCell: 3
 		Facing: 384
 		Location: 19,69
-	Actor349: rae1
+	Actor349: ra1_allies_rifleinfantry
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
 		Location: 22,70
-	Actor350: rae2
+	Actor350: ra1_soviets_grenadier
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
 		Location: 18,68
-	Actor351: rae2
+	Actor351: ra1_soviets_grenadier
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
 		Location: 22,69
-	Actor352: kotin
+	Actor352: ra1_soviets_kotinnucleartank
 		Owner: Nitro
 		Facing: 504
 		Location: 20,67
-	Actor365: rae1
+	Actor365: ra1_allies_rifleinfantry
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
@@ -464,7 +464,7 @@ Actors:
 	Actor396: tc03
 		Owner: Neutral
 		Location: 96,68
-	Actor397: powr
+	Actor397: ra1_powerplant
 		Owner: Neutral
 		Health: 9
 		Location: 11,78
@@ -480,7 +480,7 @@ Actors:
 	Actor401: brik
 		Owner: Neutral
 		Location: 17,74
-	Actor403: arty
+	Actor403: td_nod_artillery
 		Owner: NewHopeOne
 		Facing: 927
 		Location: 12,75
@@ -493,16 +493,16 @@ Actors:
 	Actor408: brik
 		Owner: Neutral
 		Location: 22,74
-	Actor409: gtwr
+	Actor409: td_gdi_guardtower
 		Owner: NewHopeOne
 		Location: 18,73
-	Actor410: gtwr
+	Actor410: td_gdi_guardtower
 		Owner: NewHopeOne
 		Location: 22,73
 	Actor412: brik
 		Owner: Neutral
 		Location: 24,74
-	Actor417: arty
+	Actor417: td_nod_artillery
 		Owner: NewHopeOne
 		Facing: 55
 		Location: 28,76
@@ -517,12 +517,12 @@ Actors:
 	Actor428: gmine
 		Owner: Neutral
 		Location: 42,73
-	Actor429: rae1
+	Actor429: ra1_allies_rifleinfantry
 		Owner: Nitro
 		SubCell: 3
 		Facing: 384
 		Location: 44,78
-	Actor430: rare3
+	Actor430: ra1_soviets_rocketsoldier
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
@@ -536,7 +536,7 @@ Actors:
 	Actor435: tc02
 		Owner: Neutral
 		Location: 81,73
-	Actor438: fix.gdi
+	Actor438: td_gdi_repairfacility
 		Owner: NewHopeOne
 		Location: 6,80
 	Actor439: brik
@@ -563,11 +563,11 @@ Actors:
 	Actor446: brik
 		Owner: Neutral
 		Location: 28,84
-	Actor448: modspaceport
+	Actor448: ra1_allies_reinforcementpad
 		Owner: Neutral
 		Location: 24,79
 		Health: 11
-	Actor452: raweapa
+	Actor452: ra1_allies_alliedwarfactory
 		Owner: Neutral
 		Health: 10
 		Location: 32,83
@@ -583,10 +583,10 @@ Actors:
 	Actor456: brik
 		Owner: Neutral
 		Location: 39,81
-	Actor457: gtwr
+	Actor457: td_gdi_guardtower
 		Owner: NewHopeTwo
 		Location: 39,80
-	Actor459: raarty
+	Actor459: ra1_allies_alliedartillery
 		Owner: NewHopeTwo
 		Location: 37,79
 		Facing: 893
@@ -618,18 +618,18 @@ Actors:
 	Actor467: brik
 		Owner: Neutral
 		Location: 42,81
-	Actor468: gtwr
+	Actor468: td_gdi_guardtower
 		Owner: NewHopeTwo
 		Location: 45,82
-	Actor469: mtnk
+	Actor469: td_gdi_battletank
 		Owner: NewHopeTwo
 		Facing: 896
 		Location: 43,80
-	Actor470: htnk
+	Actor470: td_gdi_mammothtank
 		Owner: NewHopeTwo
 		Facing: 880
 		Location: 46,82
-	Actor471: 3tnk
+	Actor471: ra1_soviets_heavytank
 		Owner: Nitro
 		Facing: 384
 		Location: 47,79
@@ -648,7 +648,7 @@ Actors:
 		SubCell: 3
 		Facing: 384
 		Location: 43,79
-	Actor475: rae1
+	Actor475: ra1_allies_rifleinfantry
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
@@ -656,14 +656,14 @@ Actors:
 	Actor476: brik
 		Owner: Neutral
 		Location: 48,84
-	Actor477: gtwr
+	Actor477: td_gdi_guardtower
 		Owner: NewHopeTwo
 		Location: 49,84
-	Actor478: mtnk
+	Actor478: td_gdi_battletank
 		Owner: NewHopeTwo
 		Facing: 888
 		Location: 50,84
-	Actor479: 3tnk
+	Actor479: ra1_soviets_heavytank
 		Owner: Nitro
 		Location: 50,81
 		Facing: 384
@@ -677,17 +677,17 @@ Actors:
 		Facing: 384
 		SubCell: 3
 		Location: 51,84
-	Actor482: rae1
+	Actor482: ra1_allies_rifleinfantry
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
 		Location: 51,82
-	Actor483: rae1
+	Actor483: ra1_allies_rifleinfantry
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
 		Location: 49,80
-	Actor484: rare3
+	Actor484: ra1_soviets_rocketsoldier
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
@@ -713,7 +713,7 @@ Actors:
 	Actor491: mine
 		Owner: Neutral
 		Location: 6,90
-	Actor493: pyle
+	Actor493: td_gdi_barracks
 		Owner: NewHopeOne
 		Location: 22,85
 	Actor494: brik
@@ -731,7 +731,7 @@ Actors:
 	Actor498: brik
 		Owner: Neutral
 		Location: 22,88
-	Actor499: weap
+	Actor499: td_gdi_weaponsfactory
 		Owner: NewHopeOne
 		Location: 25,85
 	Actor500: brik
@@ -776,7 +776,7 @@ Actors:
 	Actor513: brik
 		Owner: Neutral
 		Location: 38,90
-	Actor514: atwr
+	Actor514: td_gdi_advancedguardtower
 		Owner: NewHopeTwo
 		Location: 45,85
 	Actor515: brik
@@ -806,10 +806,10 @@ Actors:
 	Actor523: brik
 		Owner: Neutral
 		Location: 48,85
-	Actor525: atwr
+	Actor525: td_gdi_advancedguardtower
 		Owner: NewHopeTwo
 		Location: 57,88
-	Actor526: raarty
+	Actor526: ra1_allies_alliedartillery
 		Owner: NewHopeTwo
 		Location: 55,87
 		Facing: 886
@@ -831,7 +831,7 @@ Actors:
 	Actor533: mine
 		Owner: Neutral
 		Location: 84,86
-	Actor534: hpad.gdi
+	Actor534: td_gdi_helipad
 		Owner: NewHopeOne
 		Location: 4,95
 	Actor535: brik
@@ -849,7 +849,7 @@ Actors:
 	Actor539: brik
 		Owner: Neutral
 		Location: 3,96
-	Actor540: hpad.gdi
+	Actor540: td_gdi_helipad
 		Location: 7,95
 		Owner: NewHopeTwo
 	Actor541: brik
@@ -870,21 +870,21 @@ Actors:
 	Actor546: brik
 		Owner: Neutral
 		Location: 7,94
-	Actor547: hq.gdi
+	Actor547: td_gdi_communicationscenter
 		Owner: NewHopeOne
 		Location: 17,91
-	Actor548: proc.gdi
+	Actor548: td_gdi_tiberiumrefinery
 		Owner: NewHopeOne
 		Location: 12,93
-	Actor549: mlrs
+	Actor549: td_gdi_mlrs
 		Owner: NewHopeOne
 		Facing: 515
 		Location: 23,91
-	Actor550: mtnk
+	Actor550: td_gdi_battletank
 		Owner: NewHopeOne
 		Facing: 507
 		Location: 22,92
-	Actor551: mtnk
+	Actor551: td_gdi_battletank
 		Owner: NewHopeOne
 		Facing: 507
 		Location: 20,92
@@ -948,23 +948,23 @@ Actors:
 		Facing: 384
 		SubCell: 2
 		Location: 23,93
-	Actor564: htnk
+	Actor564: td_gdi_mammothtank
 		Owner: NewHopeOne
 		Location: 21,91
 		Facing: 525
-	Actor565: mlrs
+	Actor565: td_gdi_mlrs
 		Owner: NewHopeOne
 		Location: 25,91
 		Facing: 515
-	Actor566: mtnk
+	Actor566: td_gdi_battletank
 		Owner: NewHopeOne
 		Facing: 507
 		Location: 28,92
-	Actor567: mtnk
+	Actor567: td_gdi_battletank
 		Owner: NewHopeOne
 		Facing: 507
 		Location: 26,92
-	Actor568: mtnk
+	Actor568: td_gdi_battletank
 		Owner: NewHopeOne
 		Facing: 507
 		Location: 24,92
@@ -1028,11 +1028,11 @@ Actors:
 		Facing: 384
 		SubCell: 2
 		Location: 27,93
-	Actor582: htnk
+	Actor582: td_gdi_mammothtank
 		Owner: NewHopeOne
 		Location: 27,91
 		Facing: 525
-	Actor583: weap
+	Actor583: td_gdi_weaponsfactory
 		Owner: NewHopeTwo
 		Location: 32,91
 	Actor584: brik
@@ -1050,7 +1050,7 @@ Actors:
 	Actor588: brik
 		Owner: Neutral
 		Location: 31,91
-	Actor589: pyle
+	Actor589: td_gdi_barracks
 		Owner: NewHopeTwo
 		Location: 36,91
 	Actor590: brik
@@ -1068,11 +1068,11 @@ Actors:
 	Actor594: brik
 		Owner: Neutral
 		Location: 37,94
-	Actor595: dome.japan
+	Actor595: japan_japaneseradararray
 		Owner: Neutral
 		Health: 10
 		Location: 41,96
-	Actor600: proc.gdi
+	Actor600: td_gdi_tiberiumrefinery
 		Owner: NewHopeTwo
 		Location: 57,95
 	Actor601: mine
@@ -1084,7 +1084,7 @@ Actors:
 	Actor603: splitgold
 		Owner: Neutral
 		Location: 82,95
-	Actor604: ra1jsyrd
+	Actor604: japan_japanesenavalyard
 		Owner: NitroJP
 		Location: 97,96
 	Actor605: moneycrate.large
@@ -1129,23 +1129,23 @@ Actors:
 	Actor621: nuk2
 		Owner: NewHopeOne
 		Location: 25,99
-	Actor622: mlrs
+	Actor622: td_gdi_mlrs
 		Facing: 515
 		Owner: NewHopeTwo
 		Location: 33,97
-	Actor623: mlrs
+	Actor623: td_gdi_mlrs
 		Facing: 515
 		Owner: NewHopeTwo
 		Location: 35,97
-	Actor624: mtnk
+	Actor624: td_gdi_battletank
 		Facing: 507
 		Owner: NewHopeTwo
 		Location: 30,98
-	Actor625: mtnk
+	Actor625: td_gdi_battletank
 		Facing: 507
 		Owner: NewHopeTwo
 		Location: 32,98
-	Actor626: mtnk
+	Actor626: td_gdi_battletank
 		Facing: 507
 		Owner: NewHopeTwo
 		Location: 34,98
@@ -1239,7 +1239,7 @@ Actors:
 		Facing: 384
 		SubCell: 2
 		Location: 33,98
-	Actor645: htnk
+	Actor645: td_gdi_mammothtank
 		Owner: NewHopeTwo
 		Location: 31,97
 		Facing: 525
@@ -1249,11 +1249,11 @@ Actors:
 	Actor647: nuk2
 		Owner: NewHopeTwo
 		Location: 38,102
-	Actor648: mtnk
+	Actor648: td_gdi_battletank
 		Facing: 507
 		Owner: NewHopeTwo
 		Location: 36,98
-	Actor649: mtnk
+	Actor649: td_gdi_battletank
 		Facing: 507
 		Owner: NewHopeTwo
 		Location: 38,98
@@ -1287,7 +1287,7 @@ Actors:
 		Facing: 384
 		SubCell: 2
 		Location: 37,99
-	Actor656: htnk
+	Actor656: td_gdi_mammothtank
 		Owner: NewHopeTwo
 		Location: 37,97
 		Facing: 525
@@ -1363,70 +1363,70 @@ Actors:
 		Owner: NewHopeTwo
 		Facing: 515
 		Location: 54,113
-	Actor419: modraafld
+	Actor419: japan_japaneseairfield
 		Owner: NitroJP
 		Location: 98,85
-	Actor420: modraafld
+	Actor420: japan_japaneseairfield
 		Owner: NitroJP
 		Location: 102,85
-	Actor421: modraafld
+	Actor421: japan_japaneseairfield
 		Owner: NitroJP
 		Location: 94,85
-	Actor422: rafix.japan
+	Actor422: japan_japaneseservicedepot
 		Owner: NitroJP
 		Location: 102,81
-	Actor425: jproc
+	Actor425: japan_japaneseorerefinery
 		Owner: NitroJP
 		Location: 90,81
-	Actor426: jproc
+	Actor426: japan_japaneseorerefinery
 		Owner: NitroJP
 		Location: 83,76
-	Actor436: rafact.japan
+	Actor436: japan_japaneseconstructionyard
 		Owner: NitroJP
 		Location: 89,76
-	Actor437: modtentj
+	Actor437: japan_japanesebarracks
 		Owner: NitroJP
 		Location: 94,72
-	Actor449: modraweapj
+	Actor449: japan_japanesewarfactory
 		Owner: NitroJP
 		Location: 89,71
-	Actor451: dome.japan
+	Actor451: japan_japaneseradararray
 		Owner: NitroJP
 		Location: 99,81
-	Actor581: apwr
+	Actor581: ra1_advancedpowerplant
 		Owner: NitroJP
 		Location: 94,78
-	Actor596: apwr
+	Actor596: ra1_advancedpowerplant
 		Owner: NitroJP
 		Location: 98,78
-	Actor616: jpwr
+	Actor616: japan_waveforcereactor
 		Owner: NitroJP
 		Location: 96,81
-	Actor660: jpwr
+	Actor660: japan_waveforcereactor
 		Owner: NitroJP
 		Location: 106,81
-	Actor684: jpwr
+	Actor684: japan_waveforcereactor
 		Owner: NitroJP
 		Location: 102,76
-	Actor689: wind_trap.atreides
+	Actor689: ixian_windtrap
 		Owner: NitroRed
 		Location: 11,11
-	Actor690: wind_trap.atreides
+	Actor690: ixian_windtrap
 		Owner: NitroRed
 		Location: 18,11
-	Actor691: wind_trap.atreides
+	Actor691: ixian_windtrap
 		Owner: NitroRed
 		Location: 9,11
-	Actor692: wind_trap.atreides
+	Actor692: ixian_windtrap
 		Owner: NitroRed
 		Location: 20,11
-	Actor704: wind_trap.atreides
+	Actor704: ixian_windtrap
 		Owner: NitroRed
 		Location: 5,5
-	Actor705: wind_trap.atreides
+	Actor705: ixian_windtrap
 		Owner: NitroRed
 		Location: 5,8
-	Actor706: wind_trap.atreides
+	Actor706: ixian_windtrap
 		Owner: NitroRed
 		Location: 5,11
 	Actor707: brik
@@ -1483,95 +1483,95 @@ Actors:
 	Actor724: brik
 		Owner: Neutral
 		Location: 108,38
-	Actor726: powr
+	Actor726: ra1_powerplant
 		Owner: Nitro
 		Location: 85,6
-	Actor727: powr
+	Actor727: ra1_powerplant
 		Owner: Nitro
 		Location: 87,6
-	Actor728: apwr
+	Actor728: ra1_advancedpowerplant
 		Owner: Nitro
 		Location: 83,12
-	Actor729: barr
+	Actor729: ra1_soviets_barracks
 		Owner: Nitro
 		Location: 84,18
-	Actor731: raproc.soviet
+	Actor731: ra1_soviets_orerefinery
 		Owner: Nitro
 		Location: 74,9
-	Actor732: dome.allies
+	Actor732: ra1_allies_alliedradardome
 		Owner: Nitro
 		Location: 103,8
-	Actor733: stek
+	Actor733: ra1_soviets_techcenter
 		Owner: Nitro
 		Location: 81,6
-	Actor735: apwr
+	Actor735: ra1_advancedpowerplant
 		Owner: NitroJP
 		Location: 95,12
-	Actor738: modjtek
+	Actor738: japan_japanesetechcenter
 		Owner: NitroJP
 		Location: 94,6
-	Actor739: dome.japan
+	Actor739: japan_japaneseradararray
 		Owner: NitroJP
 		Location: 103,12
-	Actor740: modraweapj
+	Actor740: japan_japanesewarfactory
 		Owner: NitroJP
 		Location: 97,18
-	Actor741: modtentj
+	Actor741: japan_japanesebarracks
 		Owner: NitroJP
 		Location: 87,18
-	Actor742: jproc
+	Actor742: japan_japaneseorerefinery
 		Owner: NitroJP
 		Location: 74,13
-	Actor743: apwr
+	Actor743: ra1_advancedpowerplant
 		Owner: NitroJP
 		Location: 79,12
-	Actor745: rafix.soviet
+	Actor745: ra1_soviets_servicedepot
 		Owner: Nitro
 		Location: 102,16
-	Actor746: kenn
+	Actor746: ra1_soviets_kennel
 		Owner: Nitro
 		Location: 82,19
-	Actor748: tsla
+	Actor748: ra1_soviets_teslacoil
 		Owner: Nitro
 		Location: 93,24
-	Actor757: ftur
+	Actor757: ra1_soviets_flametower
 		Owner: Nitro
 		Location: 69,15
-	Actor758: ftur
+	Actor758: ra1_soviets_flametower
 		Owner: Nitro
 		Location: 69,11
-	Actor759: tsla
+	Actor759: ra1_soviets_teslacoil
 		Owner: Nitro
 		Location: 69,16
-	Actor760: tsla
+	Actor760: ra1_soviets_teslacoil
 		Owner: Nitro
 		Location: 69,10
-	Actor761: jmgnest
+	Actor761: japan_japanesemgnest
 		Owner: NitroJP
 		Location: 82,24
 		TurretFacing: 504
-	Actor762: jmgnest
+	Actor762: japan_japanesemgnest
 		Owner: NitroJP
 		Location: 99,24
 		TurretFacing: 518
-	Actor763: jmgnest
+	Actor763: japan_japanesemgnest
 		Owner: NitroJP
 		Location: 69,18
 		TurretFacing: 293
-	Actor764: jmgnest
+	Actor764: japan_japanesemgnest
 		Owner: NitroJP
 		Location: 69,8
 		TurretFacing: 272
-	Actor736: jpwr
+	Actor736: japan_waveforcereactor
 		Owner: NitroJP
 		Location: 89,6
-	Actor737: jpwr
+	Actor737: japan_waveforcereactor
 		Owner: NitroJP
 		Location: 91,6
-	Actor765: powr
+	Actor765: ra1_powerplant
 		Owner: Nitro
 		Location: 78,6
-	Actor766: powr
+	Actor766: ra1_powerplant
 		Owner: Nitro
 		Location: 98,6
 	Actor767: brik
@@ -2087,55 +2087,55 @@ Actors:
 	Actor941: brik
 		Owner: Neutral
 		Location: 24,2
-	Actor957: rasam
+	Actor957: ra1_soviets_samsite
 		Owner: Nitro
 		Location: 74,23
-	Actor958: rasam
+	Actor958: ra1_soviets_samsite
 		Owner: Nitro
 		Location: 70,19
-	Actor959: rasam
+	Actor959: ra1_soviets_samsite
 		Owner: Nitro
 		Location: 70,7
-	Actor960: rasam
+	Actor960: ra1_soviets_samsite
 		Owner: Nitro
 		Location: 100,23
-	Actor961: rasam
+	Actor961: ra1_soviets_samsite
 		Owner: Nitro
 		Location: 104,19
 	Actor880: brik
 		Owner: Neutral
 		Location: 17,19
-	Actor694: outpost.ixian
+	Actor694: ixian_outpost
 		Owner: NitroRed
 		Location: 14,6
-	Actor697: high_tech_factory.ixian
+	Actor697: ixian_hightechfactory
 		Owner: NitroRed
 		Location: 10,5
 	Actor693: heavy_factory
 		Owner: NitroRed
 		Location: 18,14
-	Actor698: d2k_barracks.ixian
+	Actor698: ixian_barracks
 		Owner: NitroRed
 		Location: 13,14
-	Actor695: refinery.atreides
+	Actor695: ixian_refineryixian
 		Owner: NitroRed
 		Location: 24,6
-	Actor700: d2k_silo.atreides
+	Actor700: ixian_storagesilo
 		Owner: NitroRed
 		Location: 23,11
-	Actor699: d2k_silo.atreides
+	Actor699: ixian_storagesilo
 		Owner: NitroRed
 		Location: 23,12
-	Actor701: d2k_silo.atreides
+	Actor701: ixian_storagesilo
 		Owner: NitroRed
 		Location: 23,10
-	Actor702: d2k_silo.atreides
+	Actor702: ixian_storagesilo
 		Owner: NitroRed
 		Location: 24,9
-	Actor696: refinery.atreides
+	Actor696: ixian_refineryixian
 		Owner: NitroRed
 		Location: 28,10
-	Actor970: research_centre.ixian
+	Actor970: ixian_ixresearchcenter
 		Owner: NitroRed
 		Location: 24,10
 	Actor750: brik
@@ -2150,54 +2150,54 @@ Actors:
 	Actor754: brik
 		Owner: Neutral
 		Location: 97,24
-	Actor752: ftur
+	Actor752: ra1_soviets_flametower
 		Owner: Nitro
 		Location: 94,24
-	Actor755: jmgnest
+	Actor755: japan_japanesemgnest
 		Owner: NitroJP
 		Location: 80,3
 		TurretFacing: 0
-	Actor749: ftur
+	Actor749: ra1_soviets_flametower
 		Owner: Nitro
 		Location: 87,24
-	Actor747: tsla
+	Actor747: ra1_soviets_teslacoil
 		Owner: Nitro
 		Location: 88,24
-	Actor831: modpillboxfort
+	Actor831: japan_waveforceturret
 		Owner: NitroJP
 		Location: 90,22
 		TurretFacing: 504
-	Actor832: modpillboxfort
+	Actor832: japan_waveforceturret
 		Owner: NitroJP
 		Location: 71,12
 		TurretFacing: 279
-	Actor962: modpillboxfort
+	Actor962: japan_waveforceturret
 		Owner: NitroJP
 		Location: 73,19
 		TurretFacing: 388
-	Actor744: rafix.japan
+	Actor744: japan_japaneseservicedepot
 		Owner: NitroJP
 		Location: 101,5
-	Actor756: jmgnest
+	Actor756: japan_japanesemgnest
 		Owner: NitroJP
 		TurretFacing: 872
 		Location: 104,5
-	Actor963: tsla
+	Actor963: ra1_soviets_teslacoil
 		Owner: Nitro
 		Location: 97,60
-	Actor964: tsla
+	Actor964: ra1_soviets_teslacoil
 		Owner: Nitro
 		Location: 104,60
-	Actor972: tsla
+	Actor972: ra1_soviets_teslacoil
 		Owner: Nitro
 		Location: 95,55
-	Actor973: rasam
+	Actor973: ra1_soviets_samsite
 		Owner: Nitro
 		Location: 92,51
-	Actor974: rasam
+	Actor974: ra1_soviets_samsite
 		Owner: Nitro
 		Location: 92,39
-	Actor975: rasam
+	Actor975: ra1_soviets_samsite
 		Owner: Nitro
 		Location: 105,58
 	Actor983: splitgold
@@ -2240,48 +2240,48 @@ Actors:
 	Actor988: mine
 		Owner: Neutral
 		Location: 50,36
-	Actor989: construction_yard.ixian
+	Actor989: ixian_constructionyard
 		Owner: NitroRed
 		Location: 13,42
-	Actor990: wind_trap.atreides
+	Actor990: ixian_windtrap
 		Owner: NitroRed
 		Location: 17,42
-	Actor991: wind_trap.atreides
+	Actor991: ixian_windtrap
 		Owner: NitroRed
 		Location: 16,39
-	Actor992: wind_trap.atreides
+	Actor992: ixian_windtrap
 		Owner: NitroRed
 		Location: 13,39
-	Actor993: refinery.atreides
+	Actor993: ixian_refineryixian
 		Owner: NitroRed
 		Location: 21,40
 	Actor994: heavy_factory
 		Owner: NitroRed
 		Location: 13,47
-	Actor995: d2k_barracks.ixian
+	Actor995: ixian_barracks
 		Owner: NitroRed
 		Location: 19,45
-	Actor996: high_tech_factory.ixian
+	Actor996: ixian_hightechfactory
 		Owner: NitroRed
 		Location: 7,46
-	Actor997: outpost.ixian
+	Actor997: ixian_outpost
 		Owner: NitroRed
 		Location: 8,40
-	Actor998: wind_trap.atreides
+	Actor998: ixian_windtrap
 		Owner: NitroRed
 		Location: 7,43
-	Actor999: medium_gun_turret
+	Actor999: ixian_gunturret
 		Owner: NitroRed
 		Location: 20,50
 		TurretFacing: 634
-	Actor1000: medium_gun_turret
+	Actor1000: ixian_gunturret
 		Owner: NitroRed
 		Location: 25,47
 		TurretFacing: 634
 	Actor901: brik
 		Owner: Neutral
 		Location: 32,4
-	PlayerOneMCV: fact.gdi
+	PlayerOneMCV: td_gdi_constructionyard
 		Faction: Random
 		Owner: NewHopeOne
 		Location: 15,88
@@ -2291,22 +2291,22 @@ Actors:
 	Actor619: nuke
 		Owner: NewHopeOne
 		Location: 21,99
-	Actor730: raweap
+	Actor730: ra1_soviets_warfactory
 		Owner: Nitro
 		Location: 91,18
-	Actor942: yamatobattleship
+	Actor942: japan_yamatobattleship
 		Owner: NitroJP
 		Facing: 384
 		Location: 101,98
-	Actor943: japanspeedboat
+	Actor943: japan_japanesespeedboat
 		Owner: NitroJP
 		Facing: 384
 		Location: 96,100
-	Actor944: japanspeedboat
+	Actor944: japan_japanesespeedboat
 		Owner: NitroJP
 		Facing: 384
 		Location: 100,101
-	Actor945: japanspeedboat
+	Actor945: japan_japanesespeedboat
 		Owner: NitroJP
 		Facing: 384
 		Location: 104,99
@@ -2349,47 +2349,47 @@ Actors:
 	SpawnSeven: waypoint
 		Owner: Neutral
 		Location: 58,131
-	PlayerTwoMCV: fact.gdi
+	PlayerTwoMCV: td_gdi_constructionyard
 		Faction: Random
 		Owner: NewHopeTwo
 		Location: 43,94
-	Actor598: hq.gdi
+	Actor598: td_gdi_communicationscenter
 		Owner: NewHopeTwo
 		Location: 46,99
-	Actor946: mlrs
+	Actor946: td_gdi_mlrs
 		Owner: NewHopeOne
 		Location: 20,76
 		Facing: 0
-	Actor947: harv.gdi
+	Actor947: td_gdi_tiberiumharvester
 		Owner: NewHopeOne
 		Facing: 384
 		Location: 5,86
-	Actor948: harv.gdi
+	Actor948: td_gdi_tiberiumharvester
 		Owner: NewHopeOne
 		Facing: 384
 		Location: 10,91
-	Actor949: harv.gdi
+	Actor949: td_gdi_tiberiumharvester
 		Facing: 384
 		Owner: NewHopeTwo
 		Location: 64,94
-	Actor950: harv.gdi
+	Actor950: td_gdi_tiberiumharvester
 		Facing: 384
 		Owner: NewHopeTwo
 		Location: 69,99
-	Actor951: v2rl
+	Actor951: ra1_soviets_v2rocketlauncher
 		Owner: Nitro
 		Facing: 384
 		Location: 51,78
-	Actor952: atwr
+	Actor952: td_gdi_advancedguardtower
 		Owner: NewHopeTwo
 		Location: 41,83
-	Actor953: atwr
+	Actor953: td_gdi_advancedguardtower
 		Owner: NewHopeOne
 		Location: 18,75
-	Actor954: atwr
+	Actor954: td_gdi_advancedguardtower
 		Owner: NewHopeOne
 		Location: 22,75
-	Actor955: mlrs
+	Actor955: td_gdi_mlrs
 		Owner: NewHopeOne
 		Location: 24,90
 		Facing: 525
@@ -2411,22 +2411,22 @@ Actors:
 	Actor1003: v03
 		Owner: Neutral
 		Location: 59,65
-	Actor1005: latin_cgweap
+	Actor1005: latinsyndicate_syndicatefactory
 		Owner: Neutral
 		Location: 51,92
 		Health: 23
-	Actor1006: modartyturret
+	Actor1006: ra1_allies_bastionartillerybunker
 		Owner: NewHopeOne
 		Location: 14,75
-	Actor1007: modartyturret
+	Actor1007: ra1_allies_bastionartillerybunker
 		Owner: NewHopeOne
 		Location: 25,75
-	Actor1008: modartyturret
+	Actor1008: ra1_allies_bastionartillerybunker
 		Owner: NewHopeTwo
 		Location: 36,80
 		TurretFacing: 0
 		TurretFacing@cannon: 832
-	Actor1009: modartyturret
+	Actor1009: ra1_allies_bastionartillerybunker
 		Owner: NewHopeTwo
 		Location: 53,87
 		TurretFacing@cannon: 832
@@ -2442,21 +2442,21 @@ Actors:
 	Actor1012: mammothbunker
 		Owner: NewHopeTwo
 		Location: 45,91
-	Actor1013: fix.gdi
+	Actor1013: td_gdi_repairfacility
 		Owner: NewHopeTwo
 		Location: 48,94
-	Actor1014: mlrs
+	Actor1014: td_gdi_mlrs
 		Owner: NewHopeTwo
 		Location: 34,96
 		Facing: 518
-	Actor1015: mlrs
+	Actor1015: td_gdi_mlrs
 		Owner: NewHopeTwo
 		Location: 43,84
 		Facing: 900
-	Actor1016: wind_trap.atreides
+	Actor1016: ixian_windtrap
 		Owner: NitroRed
 		Location: 20,6
-	Actor1017: wind_trap.atreides
+	Actor1017: ixian_windtrap
 		Owner: NitroRed
 		Location: 18,6
 	Actor1018: nuk2
@@ -2465,35 +2465,35 @@ Actors:
 	Actor1019: nuk2
 		Owner: NewHopeTwo
 		Location: 40,102
-	Actor1020: ra2gaspysat
+	Actor1020: ra2_allies_spysatelliteuplink
 		Owner: Neutral
 		Location: 60,101
 		Health: 22
-	Actor1021: nax_weap
+	Actor1021: naxis_warfactory
 		Owner: Neutral
 		Location: 19,95
 		Health: 21
-	Actor956: mtnk
+	Actor956: td_gdi_battletank
 		Owner: NewHopeOne
 		Location: 17,73
 		Facing: 0
-	Actor965: mtnk
+	Actor965: td_gdi_battletank
 		Owner: NewHopeOne
 		Location: 23,73
 		Facing: 0
-	Actor725: rafact.soviet
+	Actor725: ra1_soviets_constructionyard
 		Owner: Nitro
 		Location: 87,11
-	Actor734: rafact.japan
+	Actor734: japan_japaneseconstructionyard
 		Owner: NitroJP
 		Location: 91,11
-	Actor966: ftur
+	Actor966: ra1_soviets_flametower
 		Owner: Nitro
 		Location: 90,51
-	Actor967: ftur
+	Actor967: ra1_soviets_flametower
 		Owner: Nitro
 		Location: 90,39
-	Actor1022: dtrk
+	Actor1022: ra1_soviets_nukedemotruck
 		Owner: Nitro
 		Facing: 384
 		Location: 54,74

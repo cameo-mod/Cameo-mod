@@ -85,7 +85,7 @@ WCON:
 	Inherits@aicash: ^AIConyardCash
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 131072, 131072
+		Bounds: 3072, 3072
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -179,8 +179,8 @@ WNUKE:
 	ProvidesPrerequisite:
 		Prerequisite: wnuke
 	Buildable:
-		BuildPaletteOrder: 5
 		Prerequisites:
+		BuildPaletteOrder: 5
 		Queue: Building, RABuilding
 		BuildDuration: 330
 		Description: Provides Power
@@ -214,6 +214,8 @@ WNUK2:
 		Name: Tall Windmill
 	ProvidesPrerequisite:
 		Prerequisite: wnuk2
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: wnuke
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: wnuke
@@ -275,8 +277,7 @@ WREF:
 	StoresResources:
 		Capacity: 1000
 	Selectable:
-		Bounds: 131072, 101930
-		DecorationBounds: 132864, 131072
+		Bounds: 3114, 3072
 	CustomSellValue:
 		Value: 500
 	FreeActor:
@@ -306,7 +307,7 @@ WHAND:
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-512,0, 355,512,0, -281,-512,0, -630,512,0
@@ -361,8 +362,7 @@ WHAND:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 87381, 123776, 0, -18176
+		Bounds: 2048, 2901, 0, -426
 	SelectionDecorations:
 	WithIdleOverlay@FLIP:
 		Sequence: flip-overlay
@@ -375,7 +375,7 @@ WWEAP:
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -397,8 +397,7 @@ WWEAP:
 		Dimensions: 3,2
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 110000
@@ -498,8 +497,7 @@ WHQ:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	#RenderSprites:
 	#	Image: dome
@@ -546,8 +544,7 @@ WSHEEPSTRIKECOMMAND:
 		Dimensions: 3,4
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	#RenderSprites:
 	#	Image: dome
@@ -586,7 +583,7 @@ WSHEEPSTRIKECOMMAND:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 	SupportPowerChargeBar:
@@ -615,8 +612,7 @@ WTIMEMACHINE:
 		Dimensions: 1,2
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	#RenderSprites:
 	#	Image: dome
@@ -690,7 +686,7 @@ WCONCRETEDONKEY:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Queue: Defence, RADefence
 		Description: Provides Concrete Donkey support power.\nRequires power to operate.
 	Building:
@@ -698,8 +694,7 @@ WCONCRETEDONKEY:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -21845
+		Bounds: 3072, 2901, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 210000
@@ -776,10 +771,10 @@ WSILO:
 	MustBeDestroyed:
 		RequiredForShortGame: false
 	SelectionDecorations:
+		Bounds: 2048, 1024
 	-AcceptsDeliveredCash:
 	Selectable:
-		Bounds: 87381, 43690
-		DecorationBounds: 89173, 54613
+		DecorationBounds: 2090, 1280
 	WithIdleOverlay@BARREL:
 		Sequence: barrel-overlay
 	WithIdleOverlay@BARREL2:
@@ -822,10 +817,10 @@ WSANTASSLEIGH:
 	MustBeDestroyed:
 		RequiredForShortGame: false
 	SelectionDecorations:
+		Bounds: 2048, 1024
 	-AcceptsDeliveredCash:
 	Selectable:
-		Bounds: 87381, 43690
-		DecorationBounds: 89173, 54613
+		DecorationBounds: 2090, 1280
 	WithResourceStoragePipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -972,8 +967,7 @@ LASPY:
 		BuildDurationModifier: 40
 		Description: Advanced base defense.\nRequires power to operate.\n  Strong vs all Ground units\n  Cannot target Aircraft
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 80085, 0, -18176
+		Bounds: 938, 1877, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 75000
@@ -1010,7 +1004,7 @@ WORMS_WORMPAD:
 	Inherits@prod: ^ProducesUnits
 	Inherits@hpad: ^IsAircraftFactory
 	Selectable:
-		Bounds: 125610, 125610
+		Bounds: 2944, 2944
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
@@ -1089,8 +1083,8 @@ WORMUZI:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 10
 		Prerequisites:
+		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
 		Description: Uzi Infantry.
 	Mobile:
@@ -1129,8 +1123,8 @@ WORMGRENADE:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 40
 		Prerequisites:
+		BuildPaletteOrder: 40
 		Queue: Infantry, RAInfantry
 		Description: Fast infantry armed with grenades. \n  Strong vs Buildings, slow-moving targets
 	Mobile:
@@ -1170,8 +1164,8 @@ WORMBAZOOKA:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 20
 		Prerequisites:
+		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
 		Description: Anti-tank/Anti-aircraft infantry. \n  Strong vs Tanks, Aircraft\n  Weak vs Infantry
 	Mobile:
@@ -1218,8 +1212,8 @@ WORMFLAMER:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 40
 		Prerequisites:
+		BuildPaletteOrder: 40
 		Queue: Infantry, RAInfantry
 		Description: Advanced Anti-infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 	Mobile:
@@ -1259,8 +1253,8 @@ WORMENGINEER:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 30
 		Prerequisites:
+		BuildPaletteOrder: 30
 		Queue: Infantry, RAInfantry
 		Description: Damages and captures enemy structures.\n  Repairs destroyed vehicles\n  Unarmed
 	Mobile:
@@ -1300,7 +1294,7 @@ WORMDYNAMITE:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Queue: Infantry, RAInfantry
 		BuildDuration: 1000
 		BuildDurationModifier: 40
@@ -1319,7 +1313,7 @@ WORMDYNAMITE:
 	Demolition:
 		DetonationDelay: 45
 	Armament:
-		Weapon: Sniper
+		Weapon: LightSniper
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 		-IdleSequences: idle1,idle2,idle3
@@ -1509,8 +1503,8 @@ WORMBUGGY:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 20
 		Prerequisites:
+		BuildPaletteOrder: 20
 		Queue: Vehicle, RAVehicle
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry\n  Weak vs Tanks
 	Mobile:
@@ -1671,8 +1665,8 @@ WTANK:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 40
 		Prerequisites:
+		BuildPaletteOrder: 40
 		Queue: Vehicle, RAVehicle
 		Description: General-Purpose Worms Tank.\n  Strong vs Tanks, Vehicles\n  Weak vs Infantry
 	Mobile:
@@ -1714,7 +1708,7 @@ WMISSILELAUNCHER:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Vehicle, RAVehicle
 		Description: Long range rocket artillery.\n  Strong vs all Ground units.
 	Mobile:
@@ -1753,8 +1747,8 @@ WCANNON:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 20
-		Prerequisites: ~techlevel.medium
 		Queue: Vehicle, RAVehicle
 		Description: Slow and Weak tank.\n  Strong vs all Ground units.
 	Mobile:
@@ -1786,7 +1780,7 @@ WORMS_MCV:
 		Name: Worms Mobile Construction Vehicle
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 3750
 		BuildDurationModifier: 40
@@ -1885,7 +1879,7 @@ WORMS_UFO:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium
+		Prerequisites: hpad, anyhq
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with AG Missiles.\n  Strong vs Buildings, Tanks\n  Weak vs Infantry
 	Aircraft:
@@ -1948,7 +1942,7 @@ WORMS_APACHE:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, ~techlevel.medium
+		Prerequisites: hpad
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with Missiles.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:

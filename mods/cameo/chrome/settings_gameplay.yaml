@@ -1,0 +1,87 @@
+Container@GAMEPLAY_PANEL:
+	Logic: CameoGameplaySettingsLogic
+	Width: PARENT_WIDTH
+	Height: PARENT_HEIGHT
+	Children:
+		ScrollPanel@SETTINGS_SCROLLPANEL:
+			Width: PARENT_WIDTH
+			Height: PARENT_HEIGHT
+			CollapseHiddenChildren: True
+			TopBottomSpacing: 5
+			ItemSpacing: 10
+			Children:
+				Background@INPUT_SECTION_HEADER:
+					X: 5
+					Width: PARENT_WIDTH - 24 - 10
+					Height: 13
+					Background: separator
+					ClickThrough: True
+					Children:
+						Label@LABEL:
+							Width: PARENT_WIDTH
+							Height: PARENT_HEIGHT
+							Font: TinyBold
+							Align: Center
+							Text: label_game_play_section_header
+				Container@ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 50
+					Children:
+						Container@AUTO_SAVE_INTERVAL_CONTAINER:
+							X: 10
+							Width: PARENT_WIDTH / 2 - 20
+							Children:
+								Label@AUTO_SAVE_INTERVAL_DROP_DOWN_LABEL:
+									Width: PARENT_WIDTH
+									Height: 20
+									Font: Regular
+									Text: auto-save-interval-label
+								DropDownButton@AUTO_SAVE_INTERVAL_DROP_DOWN:
+									Y: 25
+									Width: PARENT_WIDTH
+									Height: 25
+									Font: Regular
+						Container@AUTO_SAVE_NO_CONTAINER:
+							X: PARENT_WIDTH / 2 + 10
+							Width: PARENT_WIDTH / 2 - 20
+							Children:
+								Label@AUTO_SAVE_FILE_NUMBER_DROP_DOWN_LABEL:
+									Width: PARENT_WIDTH
+									Height: 20
+									Font: Regular
+									Text: auto_save_nr_label
+								DropDownButton@AUTO_SAVE_FILE_NUMBER_DROP_DOWN:
+									Y: 25
+									Width: PARENT_WIDTH
+									Height: 25
+									Font: Regular
+				Container@QUOTA_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 25
+					Children:
+						Container@QUOTA_MODE_CHECKBOX_CONTAINER:
+							X: 10
+							Width: PARENT_WIDTH - 20
+							Children:
+								Checkbox@QUOTA_MODE_CHECKBOX:
+									Width: PARENT_WIDTH
+									Height: 20
+									Font: Regular
+									Text: checkbox_quota_mode.label
+									TooltipText: checkbox_quota_mode.tooltip
+									TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
+				Container@BUILDING_COUNTS_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 25
+					Children:
+						Container@BUILDING_COUNTS_CHECKBOX_CONTAINER:
+							X: 10
+							Width: PARENT_WIDTH - 20
+							Children:
+								Checkbox@BUILDING_COUNTS_CHECKBOX:
+									Width: PARENT_WIDTH
+									Height: 20
+									Font: Regular
+									Text: checkbox-building-counts.label
+									TooltipText: checkbox-building-counts.tooltip
+									TooltipContainer: SETTINGS_TOOLTIP_CONTAINER

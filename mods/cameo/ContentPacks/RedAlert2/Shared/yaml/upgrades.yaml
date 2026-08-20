@@ -1,0 +1,36 @@
+ra2_yuri_upgrade_stealthsuits_proxy_actor:
+	Inherits: ^TeamUpgradeProxyActor
+	Tooltip:
+		Name: Infantry Stealth Suits
+	Buildable:
+		Description: TEAM Upgrade: All Scout and Anti Tank Anti Air Infantry in your team receive stealth suits with personal shield generators.
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: yuri_upgrade_infantrystealthsuits
+	ProvidesPrerequisite:
+		Prerequisite: yuri_upgrade_infantrystealthsuits
+
+ra2_yuri_upgrade_geneticboost_proxy_actor:
+	Inherits: ^TeamUpgradeProxyActor
+	Tooltip:
+		Name: Infantry Stealth Suits
+	Buildable:
+		Description: TEAM Upgrade: All Infantry in your team gain 20% more Damage Resistance, Speed and Regeneration.
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: yuri_upgrade_geneticmodificationboost
+	ProvidesPrerequisite:
+		Prerequisite: yuri_upgrade_geneticmodificationboost
+
+ra2_yuri_upgrade_psychicvision_proxy_actor:
+	Inherits: ^TeamUpgradeProxyActor
+	Tooltip:
+		Name: Psychic Vision
+	Buildable:
+		Description: TEAM Upgrade: Increases Infantry Vision and Stealth Detection Range by 20%. For Yuri: Increases Psychic Sensor Vision and Stealth Detection Range by 50%. Psychic Units can sense enemies in the fog of war in a 15 tile radius (30 for Yuri Prime).
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: yuri_upgrade_psychicvision
+	ProvidesPrerequisite:
+		Prerequisite: yuri_upgrade_psychicvision
+

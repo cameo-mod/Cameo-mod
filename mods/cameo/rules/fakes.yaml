@@ -28,7 +28,7 @@ FPWR:
 		Type: Wood
 	WithBuildingBib:
 	RenderSprites:
-		Image: POWR
+		Image: ra1_powerplant
 	Valued:
 		Cost: 30
 
@@ -54,7 +54,7 @@ TENF:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: TENT
+		Image: ra1_allies_alliedbarracks
 	Valued:
 		Cost: 50
 	Health:
@@ -70,11 +70,11 @@ SYRF:
 	Inherits: ^FakeBuilding
 	Inherits@infiltrate: ^InfiltratableFake
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Buildable:
 		BuildPaletteOrder: 890
 		Queue: Defense
-		Prerequisites: #~structures.france, ~techlevel.medium
+		Prerequisites: #~structures.france
 		Description: Looks like a Naval Yard.
 		Icon: fake-icon
 	Tooltip:
@@ -91,7 +91,7 @@ SYRF:
 	RequiresBuildableArea:
 		Adjacent: 8
 	RenderSprites:
-		Image: RA1SYRD
+		Image: ra1_allies_alliednavalyard
 	Valued:
 		Cost: 100
 	Health:
@@ -115,13 +115,13 @@ SPEF:
 	Inherits: ^FakeBuilding
 	Inherits@infiltrate: ^InfiltratableFake
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Targetable:
 		TargetTypes: Ground, Water, Structure, SpyInfiltrate
 	Buildable:
 		BuildPaletteOrder: 890
 		Queue: Defense
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Looks like a Sub Pen.
 		Icon: fake-icon
 	Tooltip:
@@ -136,7 +136,7 @@ SPEF:
 	RequiresBuildableArea:
 		Adjacent: 8
 	RenderSprites:
-		Image: RASPEN
+		Image: ra1_soviets_subpen
 	Valued:
 		Cost: 80
 	Health:
@@ -160,10 +160,10 @@ WEAF:
 	Inherits@infiltrate: ^InfiltratableFake
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Buildable:
 		BuildPaletteOrder: 920
-		Prerequisites: #~structures.france, ~techlevel.medium
+		Prerequisites: #~structures.france
 		Queue: Defense
 		Description: Looks like a War Factory.
 		Icon: fake-icon
@@ -177,7 +177,7 @@ WEAF:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: RAWEAP
+		Image: ra1_soviets_warfactory
 	WithBuildingBib:
 	WithProductionDoorOverlay:
 		RequiresCondition: !build-incomplete
@@ -210,7 +210,7 @@ DOMF:
 	Buildable:
 		BuildPaletteOrder: 930
 		Queue: Defense
-		Prerequisites: #~structures.france, ~techlevel.medium
+		Prerequisites: #~structures.france
 		Description: Looks like a Radar Dome.
 		Icon: fake-icon
 	Building:
@@ -230,12 +230,11 @@ DOMF:
 FIXF:
 	Inherits: ^FakeBuilding
 	Selectable:
-		Bounds: 123776, 61866, 0, 5461
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	Buildable:
 		BuildPaletteOrder: 940
 		Queue: Defense
-		Prerequisites: #~structures.france, ~techlevel.medium
+		Prerequisites: #~structures.france
 		Description: Looks like a Service Depot.
 		Icon: fake-icon
 	Tooltip:
@@ -270,7 +269,7 @@ FAPW:
 	Buildable:
 		BuildPaletteOrder: 950
 		Queue: Defense
-		Prerequisites: #~structures.france, ~techlevel.medium
+		Prerequisites: #~structures.france
 		Description: Looks like an Advanced Power Plant.
 		Icon: fake-icon
 	Tooltip:
@@ -288,10 +287,9 @@ FAPW:
 		Type: Wood
 	WithBuildingBib:
 	RenderSprites:
-		Image: APWR
+		Image: ra1_advancedpowerplant
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Valued:
 		Cost: 50
@@ -310,7 +308,7 @@ ATEF:
 	Buildable:
 		BuildPaletteOrder: 970
 		Queue: Defense
-		Prerequisites: #~structures.france, ~techlevel.high
+		Prerequisites: #~structures.france
 		Description: Looks like an Allies Tech Center.
 		Icon: fake-icon
 	Building:
@@ -319,7 +317,7 @@ ATEF:
 		LocalCenterOffset: 0,-512,0
 	WithBuildingBib:
 	RenderSprites:
-		Image: ATEK
+		Image: ra1_allies_alliedtechcenter
 	Valued:
 		Cost: 150
 	Health:
@@ -349,7 +347,7 @@ PDOF:
 		Footprint: xx xx
 		Dimensions: 2,2
 	RenderSprites:
-		Image: PDOX
+		Image: ra1_allies_chronosphere
 	WithBuildingBib:
 		HasMinibib: true
 	Valued:
@@ -366,7 +364,7 @@ MSLF:
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@shape: ^2x1Shape
 	Selectable:
-		Bounds: 87381, 43690
+		Bounds: 2048, 1024
 	Tooltip:
 		Name: Fake Missile Silo
 		GenericName: Missile Silo
@@ -383,7 +381,7 @@ MSLF:
 		Footprint: xx
 		Dimensions: 2,1
 	RenderSprites:
-		Image: MSLO
+		Image: ra1_soviets_missilesilo
 	Valued:
 		Cost: 250
 	Health:
@@ -396,11 +394,11 @@ MSLF:
 FACF:
 	Inherits: ^FakeBuilding
 	Selectable:
-		Bounds: 131072, 131072
+		Bounds: 3072, 3072
 	Buildable:
 		BuildPaletteOrder: 1000
 		Queue: Defense
-		Prerequisites: #~structures.france, ~techlevel.medium
+		Prerequisites: #~structures.france
 		Description: Looks like a Construction Yard.
 		Icon: fake-icon
 	Tooltip:

@@ -1,0 +1,125 @@
+ixian_upgrade_twinbazooka:
+	Inherits: ^UnitUpgradeTemplate
+	Tooltip:
+		Name: Twin Bazooka Upgrade
+	Buildable:
+		Queue: Upgrades
+		Description: upgrade_ixian_twin_rocket_trooper.description
+		Prerequisites: ~ixian_outpost, !ixian_upgrade_twinbazooka
+		# Prerequisites: ~outpost.d2k, !ixian_upgrade_twinbazooka
+	RenderSprites:
+		Image: ixian_upgrade_twinbazooka
+
+ixian_upgrade_tungstenneedleguns:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Tungsten Needle Guns
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 200
+		Prerequisites: ~ixian_outpost, !ixian_upgrade_tungstenneedleguns
+		Queue: Upgrades
+		Description: upgrade_d2k_upgrade_needleguns.description
+		IconPalette: d2kunit
+	RenderSprites:
+		Image: ixian_upgrade_tungstenneedleguns
+
+ixian_upgrade_personalshield:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Personal Shield
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 200
+		Queue: Upgrades
+		Description: upgrade_personal_shield.description
+		Prerequisites: ~ixian_outpost, !ixian_upgrade_personalshield
+		IconPalette: ra2
+	RenderSprites:
+		Image: ixian_personalshield_icon
+
+ixian_upgrade_generalpurposearmor:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: General Purpose Armor
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 200
+		Prerequisites: ~ixian_ixresearchcenter, !ixian_upgrade_generalpurposearmor
+		Queue: Research
+		Description: upgrade_d2k_general_purpose_armor.description
+		IconPalette: d2kunit
+	RenderSprites:
+		Image: ixian_kodatank
+
+ixian_upgrade_reinforcedbarrel:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Reinforced Barrel
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 200
+		Prerequisites: ~ixian_ixresearchcenter, !ixian_upgrade_reinforcedbarrel
+		Queue: Research
+		Description: upgrade_d2k_siege_range_upgrade.description
+	RenderSprites:
+		Image: d2k_siege_tank_higher_range
+
+ixian_upgrade_heavymissiles:
+	Inherits: ^ResearchedUpgradeTemplate
+	Tooltip:
+		Name: Heavy Missiles
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 200
+		Prerequisites: ~ixian_ixresearchcenter, !ixian_upgrade_heavymissiles
+		Queue: Research
+		Description: upgrade_d2k_heavy_missile_upgrade.description
+	RenderSprites:
+		Image: ix_missile_tank
+
+ixian_upgrade_heavykodatank:
+	Inherits: ^UnitUpgradeTemplate
+	Tooltip:
+		Name: Heavy Koda Tank Upgrade
+	Buildable:
+		Queue: Upgrades
+		Description: Upgrades the Koda Tank to the Heavy Koda Tank
+		Prerequisites: ~ixian_outpost, !ixian_upgrade_heavykodatank
+		IconPalette: d2kunit
+	RenderSprites:
+		Image: ixian_heavykodatank
+
+ixian_upgrade_advancedixiantechnology:
+	Inherits: ^UpgradeTemplate
+	Tooltip:
+		Name: Advanced Ixian Technology
+	Valued:
+		Cost: 12500
+	Buildable:
+		BuildPaletteOrder: 200
+		Queue: Research
+		Description: upgrade_d2k_advanced_ixian_technology.description
+		Prerequisites: ~ixian_ixresearchcenter, ixian_upgrade_personalshield, !ixian_upgrade_advancedixiantechnology
+	RenderSprites:
+		Image: ixian_stormraider
+	#ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: team_upgrade.d2k_advanced_ixian_technology
+
+team_upgrade.d2k_advanced_ixian_technology:
+	Inherits: ^ResearchedUpgradeTemplate
+	ProvidesPrerequisite:
+		Prerequisite: ixian_upgrade_advancedixiantechnology
+	RenderSprites:
+		Image: ixian_stormraider
+	Tooltip:
+		Name: Advanced Ixian Technology
+	Buildable:
+		Description: upgrade_d2k_advanced_ixian_technology.description, ~ixian_ixresearchcenter
+	PlayerDisplayUpgrade:

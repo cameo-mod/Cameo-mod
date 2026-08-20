@@ -142,12 +142,12 @@ n64procnod:
 	icon: chromen64_refinery_nod
 
 n64hand:
-	Defaults: hand
+	Defaults: td_nod_handofnod
 		Offset: 0,-8
 	idle: n64hand
 	damaged-idle:
 		Start: 1
-	dead: hand
+	dead: td_nod_handofnod
 		Start: 2
 		Tick: 800
 	make: handmake
@@ -162,11 +162,11 @@ n64hand:
 
 n64pyle:
 	idle: n64barracks
-	damaged-idle: pyle
+	damaged-idle: td_gdi_barracks
 		Start: 10
 		Length: 10
 		Tick: 100
-	dead: pyle
+	dead: td_gdi_barracks
 		Start: 20
 		Tick: 800
 	make: pylemake
@@ -218,7 +218,7 @@ n64weap:
 	damaged-idle:
 		Start: 1
 		ZOffset: -511
-	dead: weap
+	dead: td_gdi_weaponsfactory
 		Start: 2
 		Tick: 800
 	build-top: weap2
@@ -250,15 +250,15 @@ n64afld:
 		Length: 4
 		Tick: 120
 		ZOffset: -1023
-	damaged-idle: afld
+	damaged-idle: td_nod_airstrip
 		Start: 16
 		Tick: 120
 		ZOffset: -1023
-	active: afld
+	active: td_nod_airstrip
 		Length: 16
 		Tick: 120
 		ZOffset: -1023
-	damaged-active: afld
+	damaged-active: td_nod_airstrip
 		Start: 16
 		Length: 16
 		Tick: 120
@@ -270,7 +270,7 @@ n64afld:
 		Start: 16
 		Length: 16
 		Tick: 160
-	dead: afld
+	dead: td_nod_airstrip
 		Start: 32
 		ZOffset: -1023
 		Tick: 800
@@ -466,11 +466,11 @@ n64fixnod:
 
 n64eye:
 	idle: n64advcomm
-	damaged-idle: eye
+	damaged-idle: td_gdi_advancedcommunicationscenter
 		Start: 16
 		Length: 16
 		Tick: 100
-	dead: eye
+	dead: td_gdi_advancedcommunicationscenter
 		Start: 32
 		Tick: 800
 	make: eyemake
@@ -485,18 +485,18 @@ n64tmpl:
 	Defaults:
 		Offset: 0,-12
 	idle: n64temple
-	damaged-idle: tmpl
+	damaged-idle: td_nod_templeofnod
 		Start: 5
-	active: tmpl
+	active: td_nod_templeofnod
 		Length: 5
 		Tick: 200
 	smoke: atomdoor
 		Length: *
 		Offset: -1,-47
-	damaged-active: tmpl
+	damaged-active: td_nod_templeofnod
 		Start: 5
 		Length: 5
-	dead: tmpl
+	dead: td_nod_templeofnod
 		Start: 10
 		Tick: 800
 	make: tmplmake
@@ -513,18 +513,18 @@ n64tmpl:
 #		N64 - DEFENSES
 ####################################################################################################
 n64gun:
-	idle: gun
+	idle: td_nod_gunturret
 		Facings: 32
 		UseClassicFacings: True
-	recoil: gun
+	recoil: td_nod_gunturret
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
-	damaged-idle: gun
+	damaged-idle: td_nod_gunturret
 		Start: 64
 		Facings: 32
 		UseClassicFacings: True
-	damaged-recoil: gun
+	damaged-recoil: td_nod_gunturret
 		Start: 96
 		Facings: 32
 		UseClassicFacings: True
@@ -548,36 +548,36 @@ n64gun:
 n64sam:
 	closed-idle: n64sam
 		Start: 0
-	opening: sam
+	opening: td_nod_samsite
 		Start: 1
 		Length: 16
 		Tick: 30
-	idle: sam
+	idle: td_nod_samsite
 		Start: 17
 		Facings: 32
 		UseClassicFacings: True
-	closing: sam
+	closing: td_nod_samsite
 		Start: 50
 		Length: 14
 		Tick: 30
-	damaged-closed-idle: sam
+	damaged-closed-idle: td_nod_samsite
 		Start: 64
-	damaged-opening: sam
+	damaged-opening: td_nod_samsite
 		Start: 65
 		Length: 16
 		Tick: 30
-	damaged-idle: sam
+	damaged-idle: td_nod_samsite
 		Start: 81
 		Facings: 32
 		UseClassicFacings: True
-	damaged-closing: sam
+	damaged-closing: td_nod_samsite
 		Start: 114
 		Length: 14
 		Tick: 30
-	dead: sam
+	dead: td_nod_samsite
 		Start: 128
 		Tick: 800
-	place: sam
+	place: td_nod_samsite
 		Start: 0
 	make: sammake
 		Length: 20
@@ -591,16 +591,16 @@ n64obli:
 	Defaults:
 		Offset: 0,-12
 	idle:
-	damaged-idle: obli
+	damaged-idle: td_nod_obeliskoflight
 		Start: 4
-	active: obli
+	active: td_nod_obeliskoflight
 		Length: 4
 		Tick: 680
-	damaged-active: obli
+	damaged-active: td_nod_obeliskoflight
 		Start: 4
 		Length: 4
 		Tick: 680
-	dead: obli
+	dead: td_nod_obeliskoflight
 		Start: 8
 		Tick: 800
 	make: oblimake
@@ -621,12 +621,12 @@ n64obli:
 
 n64gtwr:
 	idle: n64guard
-	damaged-idle: gtwr
+	damaged-idle: td_gdi_guardtower
 		Start: 1
-	dead: gtwr
+	dead: td_gdi_guardtower
 		Start: 2
 		Tick: 800
-	make: gtwr
+	make: td_gdi_guardtower
 		Combine:
 			gtwrmake:
 				Length: 17
@@ -653,9 +653,9 @@ n64atwr:
 	Defaults:
 		Offset: 0,-13
 	idle: n64advguard
-	damaged-idle: atwr
+	damaged-idle: td_gdi_advancedguardtower
 		Start: 1
-	dead: atwr
+	dead: td_gdi_advancedguardtower
 		Start: 2
 		Tick: 800
 	make: atwrmake
@@ -924,87 +924,87 @@ n64e1nod:
 
 n64e2:
 	Inherits: ^InfantryOverlays
-	stand: e2
+	stand: td_gdi_grenadier
 		Facings: 8
-	stand2: e2
+	stand2: td_gdi_grenadier
 		Start: 8
 		Facings: 8
-	run: e2
+	run: td_gdi_grenadier
 		Start: 16
 		Length: 6
 		Facings: 8
 		Tick: 100
-	throw: e2
+	throw: td_gdi_grenadier
 		Start: 64
 		Length: 20
 		Facings: 8
 	# stand -> prone transition
-	liedown: e2
+	liedown: td_gdi_grenadier
 		Start: 224
 		Length: 2
 		Facings: 8
 	# prone -> stand transition
-	standup: e2
+	standup: td_gdi_grenadier
 		Start: 272
 		Length: 2
 		Facings: 8
-	prone-stand: e2
+	prone-stand: td_gdi_grenadier
 		Start: 240
 		Stride: 4
 		Facings: 8
-	prone-stand2: e2
+	prone-stand2: td_gdi_grenadier
 		Start: 240
 		Stride: 4
 		Facings: 8
-	prone-run: e2
+	prone-run: td_gdi_grenadier
 		Start: 240
 		Length: 4
 		Facings: 8
 		Tick: 100
-	prone-throw: e2
+	prone-throw: td_gdi_grenadier
 		Start: 288
 		Length: 12
 		Facings: 8
-	idle1: e2
+	idle1: td_gdi_grenadier
 		Start: 384
 		Length: 16
 		Tick: 120
-	idle2: e2
+	idle2: td_gdi_grenadier
 		Start: 400
 		Length: 13
 		Tick: 120
-	cheer: e2
+	cheer: td_gdi_grenadier
 		Start: 588
 		Length: 3
 		Facings: 8
 		Tick: 120
 	# Shot
-	die1: e2
+	die1: td_gdi_grenadier
 		Start: 509
 		Length: 9
 		Tick: 80
 	# Explode
-	die2: e2
+	die2: td_gdi_grenadier
 		Start: 518
 		Length: 8
 		Tick: 80
 	# Fly and explode in air
-	die3: e2
+	die3: td_gdi_grenadier
 		Start: 526
 		Length: 8
 		Tick: 80
 	# Fly through air squish on ground
-	die4: e2
+	die4: td_gdi_grenadier
 		Start: 534
 		Length: 12
 		Tick: 80
 	# Burn
-	die5: e2
+	die5: td_gdi_grenadier
 		Start: 546
 		Length: 18
 		Tick: 80
 	# Tib
-	die6: e2
+	die6: td_gdi_grenadier
 		Start: 494
 		Length: 11
 		Tick: 80
@@ -1212,87 +1212,87 @@ n64e3nod:
 
 n64e4:
 	Inherits: ^InfantryOverlays
-	stand: e4
+	stand: td_nod_flamethrower
 		Facings: 8
-	stand2: e4
+	stand2: td_nod_flamethrower
 		Start: 8
 		Facings: 8
-	run: e4
+	run: td_nod_flamethrower
 		Start: 16
 		Length: 6
 		Facings: 8
 		Tick: 100
-	shoot: e4
+	shoot: td_nod_flamethrower
 		Start: 64
 		Length: 16
 		Facings: 8
 	# stand -> prone transition
-	liedown: e4
+	liedown: td_nod_flamethrower
 		Start: 192
 		Length: 2
 		Facings: 8
 	# prone -> stand transition
-	standup: e4
+	standup: td_nod_flamethrower
 		Start: 240
 		Length: 2
 		Facings: 8
-	prone-stand: e4
+	prone-stand: td_nod_flamethrower
 		Start: 208
 		Stride: 4
 		Facings: 8
-	prone-stand2: e4
+	prone-stand2: td_nod_flamethrower
 		Start: 208
 		Stride: 4
 		Facings: 8
-	prone-run: e4
+	prone-run: td_nod_flamethrower
 		Start: 208
 		Length: 4
 		Facings: 8
 		Tick: 100
-	prone-shoot: e4
+	prone-shoot: td_nod_flamethrower
 		Start: 256
 		Length: 16
 		Facings: 8
-	idle1: e4
+	idle1: td_nod_flamethrower
 		Start: 384
 		Length: 16
 		Tick: 120
-	idle2: e4
+	idle2: td_nod_flamethrower
 		Start: 400
 		Length: 16
 		Tick: 120
-	cheer: e4
+	cheer: td_nod_flamethrower
 		Start: 588
 		Length: 3
 		Facings: 8
 		Tick: 120
 	# Shot
-	die1: e4
+	die1: td_nod_flamethrower
 		Start: 509
 		Length: 9
 		Tick: 80
 	# Explode
-	die2: e4
+	die2: td_nod_flamethrower
 		Start: 518
 		Length: 8
 		Tick: 80
 	# Fly and explode in air
-	die3: e4
+	die3: td_nod_flamethrower
 		Start: 526
 		Length: 8
 		Tick: 80
 	# Fly through air squish on ground
-	die4: e4
+	die4: td_nod_flamethrower
 		Start: 534
 		Length: 12
 		Tick: 80
 	# Burn
-	die5: e4
+	die5: td_nod_flamethrower
 		Start: 546
 		Length: 18
 		Tick: 80
 	# Tib
-	die6: e4
+	die6: td_nod_flamethrower
 		Start: 494
 		Length: 10
 		Tick: 80
@@ -1306,28 +1306,28 @@ n64e4:
 		ZOffset: -511
 	muzzle:
 		Combine:
-			flame-n:
+			flame_n:
 				Length: *
 				Offset: 1,6
-			flame-nw:
+			flame_nw:
 				Length: *
 				Offset: 8,7
-			flame-w:
+			flame_w:
 				Length: *
 				Offset: 8,2
-			flame-sw:
+			flame_sw:
 				Length: *
 				Offset: 7,-2
-			flame-s:
+			flame_s:
 				Length: *
 				Offset: 1,-2
-			flame-se:
+			flame_se:
 				Length: *
 				Offset: -5,-2
-			flame-e:
+			flame_e:
 				Length: *
 				Offset: -7,2
-			flame-ne:
+			flame_ne:
 				Length: *
 				Offset: -7,8
 		Facings: 8
@@ -1529,7 +1529,7 @@ n64harvgdi:
 	icon: chromen64_harvester_gdi
 
 n64apc:
-	idle: apc
+	idle: td_gdi_apc
 		Facings: 32
 		UseClassicFacings: True
 	turret: apctur
@@ -1546,10 +1546,10 @@ n64apc:
 	icon: chromen64_apc
 
 n64jeep:
-	idle: jeep
+	idle: td_gdi_humvee
 		Facings: 32
 		UseClassicFacings: True
-	turret: jeep
+	turret: td_gdi_humvee
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -1559,10 +1559,10 @@ n64jeep:
 	icon: chromen64_humvee
 
 n64mtnk:
-	idle: mtnk
+	idle: td_gdi_battletank
 		Facings: 32
 		UseClassicFacings: True
-	turret: mtnk
+	turret: td_gdi_battletank
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -1571,10 +1571,10 @@ n64mtnk:
 	icon: chromen64_heavytank
 
 n64htnk:
-	idle: htnk
+	idle: td_gdi_mammothtank
 		Facings: 32
 		UseClassicFacings: True
-	turret: htnk
+	turret: td_gdi_mammothtank
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -1626,10 +1626,10 @@ n64harvnod:
 	icon: chromen64_harvester_nod
 	
 n64bggy:
-	idle: bggy
+	idle: td_nod_buggy
 		Facings: 32
 		UseClassicFacings: True
-	turret: bggy
+	turret: td_nod_buggy
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -1639,16 +1639,16 @@ n64bggy:
 	icon: chromen64_buggy
 
 n64bike:
-	idle: bike
+	idle: td_nod_reconbike
 		Facings: 32
 		UseClassicFacings: True
 	icon: chromen64_reconbike
 
 n64ltnk:
-	idle: ltnk
+	idle: td_nod_lighttank
 		Facings: 32
 		UseClassicFacings: True
-	turret: ltnk
+	turret: td_nod_lighttank
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -1657,33 +1657,33 @@ n64ltnk:
 	icon: chromen64_lighttank
 
 n64ftnk:
-	idle: ftnk
+	idle: td_nod_flametank
 		Facings: 32
 		UseClassicFacings: True
 	muzzle:
 		Combine:
-			flame-n:
+			flame_n:
 				Length: *
 				Offset: 3,6
-			flame-nw:
+			flame_nw:
 				Length: *
 				Offset: 8,7
-			flame-w:
+			flame_w:
 				Length: *
 				Offset: 8,2
-			flame-sw:
+			flame_sw:
 				Length: *
 				Offset: 7,-2
-			flame-s:
+			flame_s:
 				Length: *
 				Offset: 3,-2
-			flame-se:
+			flame_se:
 				Length: *
 				Offset: -5,-2
-			flame-e:
+			flame_e:
 				Length: *
 				Offset: -7,2
-			flame-ne:
+			flame_ne:
 				Length: *
 				Offset: -7,8
 		Facings: 8
@@ -1691,7 +1691,7 @@ n64ftnk:
 	icon: chromen64_flametank
 
 n64arty:
-	idle: arty
+	idle: td_nod_artillery
 		Facings: 32
 		UseClassicFacings: True
 	muzzle: gunfire2
@@ -1699,7 +1699,7 @@ n64arty:
 	icon: chromen64_artillery
 
 n64stnk:
-	idle: stnk
+	idle: td_nod_stealthtank
 		Facings: 32
 		UseClassicFacings: True
 	icon: chromen64_stealthtank
@@ -1716,16 +1716,16 @@ mcv.n64nod:
 ####################################################################################################
 
 n64orca:
-	idle: orca
+	idle: td_gdi_orca
 		Facings: 32
 		UseClassicFacings: True
-	move: orca
+	move: td_gdi_orca
 		Start: 32
 		Facings: 32
 	icon: chromen64_orca
 
 n64heli:
-	idle: heli
+	idle: td_nod_apacheattackhelicopter
 		Facings: 32
 		UseClassicFacings: True
 	rotor: lrotor

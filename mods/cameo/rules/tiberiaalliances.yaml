@@ -45,15 +45,15 @@ World:
 	StartingUnits@defaulttagdi:
 		Class: light
 		ClassName: Light Support
-		Factions: tsgdi
+		Factions: ts_gdi
 		BaseActor: mcv.tagdi
-		SupportActors: tse1,tse1,tse1,tse2,tse2,tssmech,tsmmch
+		SupportActors: tse1,tse1,tse1,ts_gdi_discthrower,ts_gdi_discthrower,ts_gdi_wolverine,ts_gdi_titan
 	StartingUnits@heavytagdi:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: tsgdi
+		Factions: ts_gdi
 		BaseActor: mcv.tagdi
-		SupportActors: tse1,tse1,tse1,tse2,tse2,tssmech,tsmmch,tsmmch,tsmmch,tsmmch
+		SupportActors: tse1,tse1,tse1,ts_gdi_discthrower,ts_gdi_discthrower,ts_gdi_wolverine,ts_gdi_titan,ts_gdi_titan,ts_gdi_titan,ts_gdi_titan
 	StartingUnits@mcvonlyratanod:
 		Class: none
 		ClassName: MCV Only
@@ -64,13 +64,13 @@ World:
 		ClassName: Light Support
 		Factions: tanod
 		BaseActor: mcv.tanod
-		SupportActors: tse1,tse1,tse1,tse3,tse3,tsbggy,tsttnk
+		SupportActors: tse1,tse1,tse1,tse3,tse3,ts_nod_attackbuggy,ts_nod_ticktank
 	StartingUnits@heavytanod:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: tanod
 		BaseActor: mcv.tanod
-		SupportActors: tse1,tse1,tse1,tse3,tse3,tsbggy,tsttnk,tsttnk,tsttnk,tsttnk
+		SupportActors: tse1,tse1,tse1,tse3,tse3,ts_nod_attackbuggy,ts_nod_ticktank,ts_nod_ticktank,ts_nod_ticktank,ts_nod_ticktank
 	StartingUnits@mcvonlyrataforgotten:
 		Class: none
 		ClassName: MCV Only
@@ -81,13 +81,13 @@ World:
 		ClassName: Light Support
 		Factions: taforgotten
 		BaseActor: mcv.tamutant
-		SupportActors: tsmutant,tsmutant,tsmwmn,tsmutant3,tsmutant3,tscar2,ts1tnk
+		SupportActors: forgotten_mutant,forgotten_mutant,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_mutantsergeant,forgotten_raidercar,forgotten_rattytank
 	StartingUnits@heavytaforgotten:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: taforgotten
 		BaseActor: mcv.tamutant
-		SupportActors: tsmutant,tsmutant,tsmwmn,tsmutant3,tsmutant3,tscar2,ts1tnk,ts2tnk,ts2tnk,ts2tnk
+		SupportActors: forgotten_mutant,forgotten_mutant,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_mutantsergeant,forgotten_raidercar,forgotten_rattytank,forgotten_warriortank,forgotten_warriortank,forgotten_warriortank
 	StartingUnits@mcvonlyrataelectro:
 		Class: none
 		ClassName: MCV Only
@@ -98,13 +98,13 @@ World:
 		ClassName: Light Support
 		Factions: taelectro
 		BaseActor: mcv.taelectro
-		SupportActors: tsmutant,tsmutant,tsmwmn,tsmutant3,tsmutant3,tscar2,ts1tnk
+		SupportActors: forgotten_mutant,forgotten_mutant,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_mutantsergeant,forgotten_raidercar,forgotten_rattytank
 	StartingUnits@heavytaelectro:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: taelectro
 		BaseActor: mcv.taelectro
-		SupportActors: tsmutant,tsmutant,tsmwmn,tsmutant3,tsmutant3,tscar2,ts1tnk,ts2tnk,ts2tnk,ts2tnk
+		SupportActors: forgotten_mutant,forgotten_mutant,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_mutantsergeant,forgotten_raidercar,forgotten_rattytank,forgotten_warriortank,forgotten_warriortank,forgotten_warriortank
 
 Player:
 ^TALevelUpgradeable:
@@ -163,7 +163,6 @@ Player:
 		RequiresCondition: levelupgrade3
 		Modifier: 85
 
-
 #######################################
 # TA Infantry
 #######################################
@@ -201,7 +200,7 @@ TAE1.NOD:
 		RequiresCondition: taupstealth1
 		IsPlayerPalette: true
 TAFORGOTTEN:
-	Inherits: TSMUTANT
+	Inherits: forgotten_mutant
 	Valued:
 		Cost: 100
 	Tooltip:
@@ -246,7 +245,7 @@ TAE3.NOD:
 		RequiresCondition: taupdefence1
 		Modifier: 75
 TABLACKHAND:
-	Inherits: TSWEEDGUY
+	Inherits: forgotten_chemsprayinfantry
 	Valued:
 		Cost: 250
 	Tooltip:
@@ -269,7 +268,7 @@ TABLACKHAND:
 		RequiresCondition: taupflamer1
 		Modifier: 75
 TACONFESSOR:
-	Inherits: elitcadre
+	Inherits: ts_nod_elitecadre
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -324,7 +323,7 @@ TAE3.MUTANT:
 	Voiced:
 		VoiceSet: RA2DesolatorVoice
 TATROOPER:
-	Inherits: elitcadre
+	Inherits: ts_nod_elitecadre
 	Tooltip:
 		Name: Zone Trooper
 	Buildable:
@@ -340,14 +339,14 @@ TATROOPER:
 		RequiresCondition: taupcharge
 		Modifier: 125
 TASNIPE:
-	Inherits: RA2SNIPE
+	Inherits: ra2_allies_sniper
 	Valued:
 		Cost: 800
 	Tooltip:
 		Name: Sniper
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: Addonsbarr3, ~techlevel.medium
+		Prerequisites: Addonsbarr3
 		Queue: Infantry, RAInfantry
 		Description: Special anti-infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
 	RenderSprites:
@@ -359,7 +358,7 @@ TASNIPE:
 		RequiresCondition: tauplaserscope
 		Modifier: 75
 TANODCOMMANDO:
-	Inherits: RA2TANY
+	Inherits: ra2_allies_tanyaii
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: barracks, Addonshand2
@@ -388,7 +387,7 @@ TANODCOMMANDO:
 		RequiresCondition: taupstealth2
 		IsPlayerPalette: true
 TAMUTSNIPE:
-	Inherits: TSUMAGON
+	Inherits: forgotten_mutantsniper
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -402,7 +401,7 @@ TAMUTSNIPE:
 	RenderSprites:
 		Image: tamutsnipe
 TAMUTCOMMANDO:
-	Inherits: TSGHOST
+	Inherits: forgotten_ghoststalker
 	RenderSprites:
 		Image: tamutcommando
 	Valued:
@@ -412,13 +411,13 @@ TAMUTCOMMANDO:
 		BuildLimit: 0
 		Prerequisites: barracks, upgrade.tamutbarr3
 	UpdatesPlayerStatistics:
-		OverrideActor: tsghost
+		OverrideActor: forgotten_ghoststalker
 	Armament@PRIMARY:
-		Weapon: MutAPRifleE
+		Weapon: MutAPRifle_elite
 		LocalOffset: 256,43,256
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: MutAPRifleE
+		Weapon: MutAPRifle_elite
 	Voiced:
 		VoiceSet: BruteVoice
 	GrantConditionOnPrerequisite@taupbarbaric:
@@ -440,8 +439,6 @@ TAENGINEER:
 		Queue: Infantry, RAInfantry
 	Voiced:
 		VoiceSet: TSEngineer
-	DeliversCash:
-		Payload: 250
 	RenderSprites:
 		Image: tsengineer
 #######################################
@@ -460,10 +457,10 @@ taguardian:
 		Name: Guardian APC
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: apc
+		OverrideActor: td_gdi_apc
 	Buildable:
-		BuildPaletteOrder: 30
 		Prerequisites:
+		BuildPaletteOrder: 30
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Armed infantry transport.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
@@ -499,7 +496,7 @@ taguardian:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Selectable:
-		Class: apc
+		Class: td_gdi_apc
 	RenderSprites:
 		Image: taguardian
 	Voiced:
@@ -530,10 +527,10 @@ tapitbull:
 		Name: Pitbull
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: apc
+		OverrideActor: td_gdi_apc
 	Buildable:
-		BuildPaletteOrder: 30
 		Prerequisites:
+		BuildPaletteOrder: 30
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Missile Light Buggy.\nCan attack Aircraft.\n  Strong vs Vehicles\n  Weak vs Infantry
@@ -656,7 +653,6 @@ tarocketfist:
 	WithSpriteTurret:
 	-WithFacingSpriteBody:
 	Passenger:
-		Weight: 2
 		CustomPipType: blue
 	RenderSprites:
 	Voiced:
@@ -869,7 +865,6 @@ taavatar:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	Passenger:
-		Weight: 4
 		CustomPipType: blue
 	Power:
 		Amount: 0
@@ -912,7 +907,6 @@ tamammoth:
 		Speed: 50
 		TurnSpeed: 32
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 350000
 	Repairable:
@@ -949,7 +943,7 @@ tamammoth:
 		EmptyWeapon: UnitExplodeMech
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, 0
+		DecorationBounds: 1450, 1450, 0, 0
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -1017,7 +1011,6 @@ tabaneblade:
 		Speed: 68
 		TurnSpeed: 8
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 500000
 	Repairable:
@@ -1070,7 +1063,7 @@ tabaneblade:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -1119,7 +1112,6 @@ tathumper:
 		Speed: 35
 		TurnSpeed: 12
 	Passenger:
-		Weight: 4
 	Health:
 		HP: 320000
 	Repairable:
@@ -1149,7 +1141,7 @@ tathumper:
 		EmptyWeapon: UnitExplodeMech
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -1210,14 +1202,14 @@ tascooper:
 		VoiceSet: MarauderTankVoice
 
 tajugg:
-	Inherits: TSJUGG
+	Inherits: ts_gdi_juggernaut
 	Valued:
 		Cost: 950
 	Tooltip:
 		Name: Juggernaut
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: Addonsweap2, ~techlevel.high
+		Prerequisites: Addonsweap2
 		Queue: Vehicle, RAVehicle
 		Description: Mobile artillery mech.\nImmobile when firing.\n  Strong vs Ground units\n  Weak vs Aircraft
 	Armament:
@@ -1237,9 +1229,9 @@ tajugg:
 	RenderVoxels:
 		Scale: 5.0
 	RenderSprites:
-		Image: tsjugg
+		Image: ts_gdi_juggernaut
 	RenderVoxels:
-		Image: tsjugg
+		Image: ts_gdi_juggernaut
 
 taptnk:
 	Inherits: ^Tank
@@ -1312,7 +1304,7 @@ tapaladin:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with AG Missiles.\n  Strong vs Buildings, Tanks\n  Weak vs Infantry
 	Aircraft:
@@ -1382,14 +1374,14 @@ tagdiharv:
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: tagdiharv
-tanodharv:
+td_nod_stealthharvester:
 	Inherits: HARV
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: vehicleproduction
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
-		Image: tanodharv
+		Image: td_nod_stealthharvester
 
 tascrapbus:
 	Inherits: ^Tank
@@ -1420,7 +1412,7 @@ tascrapbus:
 	RevealsShroud:
 		Range: 5c0
 	Armament:
-		Weapon: ZSU-23
+		Weapon: zsu_23
 		LocalOffset: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
 	AttackTurreted:
 	Turreted:
@@ -1592,12 +1584,12 @@ taavatarscrap4:
 # TA Upgrades Units
 #######################################
 taupsmokegrenades:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Smoke Grenade
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Smoke grenade for GDI Rifleman \n Disables buildings
 		Prerequisites: ~!taupsmokegrenades, barracks
 	Valued:
@@ -1608,12 +1600,12 @@ taupsmokegrenades:
 		Prerequisite: taupsmokegrenades
 		
 taupmissilestorm:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Missile Storm
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: GDI missile soldies fire faster
 		Prerequisites: ~!taupmissilestorm, barracks
 	Valued:
@@ -1624,12 +1616,12 @@ taupmissilestorm:
 		Prerequisite: taupmissilestorm
 		
 taupcharge:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Zone Trooper Charge
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Zone Trooper Speed
 		Prerequisites: ~!taupcharge, barracks
 	Valued:
@@ -1640,12 +1632,12 @@ taupcharge:
 		Prerequisite: taupcharge
 		
 taupcharge2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Commando Charge
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Commando Speed
 		Prerequisites: ~!taupcharge2, barracks, taupcharge
 	Valued:
@@ -1656,12 +1648,12 @@ taupcharge2:
 		Prerequisite: taupcharge2
 		
 tauplaserscope:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Laser Scope
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Sniper Shoot Range
 		Prerequisites: ~!tauplaserscope, barracks
 	Valued:
@@ -1672,12 +1664,12 @@ tauplaserscope:
 		Prerequisite: tauplaserscope
 		
 taupflashbang:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Flashbang
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Bulldog Unlocks Flashbang grenades \n Efective vs Infantry
 		Prerequisites: ~!taupflashbang, vehicleproduction
 	Valued:
@@ -1688,12 +1680,12 @@ taupflashbang:
 		Prerequisite: taupflashbang
 		
 taupheatcannon:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAT-MP-T
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Predator Firepower
 		Prerequisites: ~!taupheatcannon, vehicleproduction
 	Valued:
@@ -1704,12 +1696,12 @@ taupheatcannon:
 		Prerequisite: taupheatcannon
 		
 taupbarrage:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Barrage
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Juggernaut munition
 		Prerequisites: ~!taupbarrage, vehicleproduction
 	Valued:
@@ -1720,12 +1712,12 @@ taupbarrage:
 		Prerequisite: taupbarrage
 		
 taupbatteringram:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Battering Ram
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Mammoth Firepower and Speed
 		Prerequisites: ~!taupbatteringram, vehicleproduction
 	Valued:
@@ -1736,12 +1728,12 @@ taupbatteringram:
 		Prerequisite: taupbatteringram
 
 taupstealth1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Stealth Militant
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Stealth Ability for Nod Militants
 		Prerequisites: ~!taupstealth1, barracks
 	Valued:
@@ -1752,12 +1744,12 @@ taupstealth1:
 		Prerequisite: taupstealth1
 
 taupdefence1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Defense Matrix Rocket Militants
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade the Armot of Rocket Militants
 		Prerequisites: ~!taupdefence1, barracks
 	Valued:
@@ -1768,12 +1760,12 @@ taupdefence1:
 		Prerequisite: taupdefence1
 
 taupflamer1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Conflagration
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Blackhand causes more Damage
 		Prerequisites: ~!taupflamer1, barracks
 	Valued:
@@ -1783,12 +1775,12 @@ taupflamer1:
 	ProvidesPrerequisite:
 		Prerequisite: taupflamer1
 taupstealth2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Stealth Commando
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Stealth Ability for Nod Commandos
 		Prerequisites: ~!taupstealth2, taupstealth1, barracks
 	Valued:
@@ -1799,12 +1791,12 @@ taupstealth2:
 		Prerequisite: taupstealth2
 
 taupdefence2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Defense Matrix Confessor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade the Armot of Confessor
 		Prerequisites: ~!taupdefence2, barracks, taupdefence1
 	Valued:
@@ -1815,12 +1807,12 @@ taupdefence2:
 		Prerequisite: taupdefence2
 
 taupshield1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Shields
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade the Armor of Attack Bike
 		Prerequisites: ~!taupshield1, vehicleproduction
 	Valued:
@@ -1831,12 +1823,12 @@ taupshield1:
 		Prerequisite: taupshield1
 
 tauplasercut1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Laser Cutter
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Adds a frontal Bumper with Laser fence /n Attack nearby Infantry
 		Prerequisites: ~!tauplasercut1, vehicleproduction
 	Valued:
@@ -1846,12 +1838,12 @@ tauplasercut1:
 	ProvidesPrerequisite:
 		Prerequisite: tauplasercut1
 taupstealth3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Stealth Specter
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Stealth Ability for Specter
 		Prerequisites: ~!taupstealth2, taupstealth1, vehicleproduction
 	Valued:
@@ -1862,12 +1854,12 @@ taupstealth3:
 		Prerequisite: taupstealth2
 
 tauptrade1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tiberium Trade
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Trade center Income
 		Prerequisites: ~!tauptrade1, vehicleproduction
 	Valued:
@@ -1877,12 +1869,12 @@ tauptrade1:
 	ProvidesPrerequisite:
 		Prerequisite: tauptrade1
 tauptrade2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Crystal Trade
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Trade center Income
 		Prerequisites: ~!tauptrade2, tauptrade1
 	Valued:
@@ -1892,12 +1884,12 @@ tauptrade2:
 	ProvidesPrerequisite:
 		Prerequisite: tauptrade2
 taupenergy1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Buy Energy
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Energy Plants Power
 		Prerequisites: ~!taupenergy1, tauptrade1
 	Valued:
@@ -1908,12 +1900,12 @@ taupenergy1:
 		Prerequisite: taupenergy1
 
 taupbarbaric2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Barbaric Blow
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade the Reload Speed of Mutant Soldiers
 		Prerequisites: ~!taupbarbaric2, barracks
 	Valued:
@@ -1923,14 +1915,13 @@ taupbarbaric2:
 	ProvidesPrerequisite:
 		Prerequisite: taupbarbaric2
 
-
 taupbarbaric:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Barbaric Blow
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade the Reload Speed of Mutant Commando
 		Prerequisites: ~!taupbarbaric, taupbarbaric2
 	Valued:
@@ -1941,12 +1932,12 @@ taupbarbaric:
 		Prerequisite: taupbarbaric
 
 taupchemical1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Chemical Rockets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Adds Chemical Rockets to Mutant Missiles
 		Prerequisites: ~!taupchemical1, barracks
 	Valued:
@@ -1957,12 +1948,12 @@ taupchemical1:
 		Prerequisite: taupchemical1
 
 taupchemical2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Big Chemical Rockets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Adds Chemical Rockets to Iron Fist
 		Prerequisites: ~!taupchemical2, taupchemical1
 	Valued:
@@ -1976,12 +1967,12 @@ taupchemical2:
 # TA Upgrades Defences
 #######################################
 taupguidedmiss:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Guided Missiles
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: GDI Flak Bunker, adds a little SAM Launcher
 		Prerequisites: ~!taupguidedmiss, tagdihq2
 	Valued:
@@ -1992,12 +1983,12 @@ taupguidedmiss:
 		Prerequisite: taupguidedmiss
 
 taupsrarms1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Short-Range Arms
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Nod Obelisk Artillery, adds a little short range laser
 		Prerequisites: ~!taupsrarms1, tanodhq2
 	Valued:
@@ -2011,7 +2002,6 @@ taupsrarms1:
 #######################################
 
 Addonspower1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2031,7 +2021,6 @@ Addonspower1:
 	ProvidesPrerequisite@upgradename:
 
 Addonspower2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2051,7 +2040,6 @@ Addonspower2:
 	ProvidesPrerequisite@upgradename:
 	
 Addonspower3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2071,7 +2059,6 @@ Addonspower3:
 	ProvidesPrerequisite@upgradename:
 	
 Addonsacum1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2091,7 +2078,6 @@ Addonsacum1:
 	ProvidesPrerequisite@upgradename:
 
 Addonsacum2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2111,7 +2097,6 @@ Addonsacum2:
 	ProvidesPrerequisite@upgradename:
 	
 Addonsacum3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2131,7 +2116,6 @@ Addonsacum3:
 	ProvidesPrerequisite@upgradename:
 	
 Addonsbarr1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2151,7 +2135,6 @@ Addonsbarr1:
 	ProvidesPrerequisite@upgradename:
 
 Addonsbarr2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2171,7 +2154,6 @@ Addonsbarr2:
 	ProvidesPrerequisite@upgradename:
 	
 Addonsbarr3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2190,7 +2172,6 @@ Addonsbarr3:
 		Image: tagdibarr
 	ProvidesPrerequisite@upgradename:
 Addonssilo1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2210,7 +2191,6 @@ Addonssilo1:
 	ProvidesPrerequisite@upgradename:
 
 Addonssilo2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2230,7 +2210,6 @@ Addonssilo2:
 	ProvidesPrerequisite@upgradename:
 	
 Addonssilo3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2250,7 +2229,6 @@ Addonssilo3:
 	ProvidesPrerequisite@upgradename:
 
 Addonsweap1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2270,7 +2248,6 @@ Addonsweap1:
 	ProvidesPrerequisite@upgradename:
 
 Addonsweap2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2290,7 +2267,6 @@ Addonsweap2:
 	ProvidesPrerequisite@upgradename:
 	
 Addonsweap3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2310,7 +2286,6 @@ Addonsweap3:
 	ProvidesPrerequisite@upgradename:
 
 Addonshq1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2330,7 +2305,6 @@ Addonshq1:
 	ProvidesPrerequisite@upgradename:
 
 Addonshq2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2350,7 +2324,6 @@ Addonshq2:
 	ProvidesPrerequisite@upgradename:
 	
 Addonshq3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2370,7 +2343,6 @@ Addonshq3:
 	ProvidesPrerequisite@upgradename:
 
 Addonshq21:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2390,7 +2362,6 @@ Addonshq21:
 	ProvidesPrerequisite@upgradename:
 
 Addonshq22:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2410,7 +2381,6 @@ Addonshq22:
 	ProvidesPrerequisite@upgradename:
 	
 Addonshq23:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2430,7 +2400,6 @@ Addonshq23:
 	ProvidesPrerequisite@upgradename:
 
 upgrade.tacannonb1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2450,7 +2419,6 @@ upgrade.tacannonb1:
 	ProvidesPrerequisite@upgradename:
 
 upgrade.tacannonb2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2470,7 +2438,6 @@ upgrade.tacannonb2:
 	ProvidesPrerequisite@upgradename:
 	
 upgrade.tacannonb3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2490,7 +2457,6 @@ upgrade.tacannonb3:
 	ProvidesPrerequisite@upgradename:
 
 upgrade.taflakb1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2510,7 +2476,6 @@ upgrade.taflakb1:
 	ProvidesPrerequisite@upgradename:
 
 upgrade.taflakb2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2530,7 +2495,6 @@ upgrade.taflakb2:
 	ProvidesPrerequisite@upgradename:
 	
 upgrade.taflakb3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2550,7 +2514,6 @@ upgrade.taflakb3:
 	ProvidesPrerequisite@upgradename:
 	
 upgrade.tamgnest1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2570,7 +2533,6 @@ upgrade.tamgnest1:
 	ProvidesPrerequisite@upgradename:
 
 upgrade.tamgnest2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2590,7 +2552,6 @@ upgrade.tamgnest2:
 	ProvidesPrerequisite@upgradename:
 	
 upgrade.tamgnest3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2613,7 +2574,6 @@ upgrade.tamgnest3:
 #######################################
 
 Addonspower1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2633,7 +2593,6 @@ Addonspower1:
 	ProvidesPrerequisite@upgradename:
 
 Addonspower2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2653,7 +2612,6 @@ Addonspower2:
 	ProvidesPrerequisite@upgradename:
 	
 Addonspower3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2672,9 +2630,7 @@ Addonspower3:
 		Image: tanodpower
 	ProvidesPrerequisite@upgradename:
 	
-
 Addonsacum1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2694,7 +2650,6 @@ Addonsacum1:
 	ProvidesPrerequisite@upgradename:
 
 Addonsacum2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2714,7 +2669,6 @@ Addonsacum2:
 	ProvidesPrerequisite@upgradename:
 	
 Addonsacum3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2734,7 +2688,6 @@ Addonsacum3:
 	ProvidesPrerequisite@upgradename:
 	
 Addonssilo1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2754,7 +2707,6 @@ Addonssilo1:
 	ProvidesPrerequisite@upgradename:
 
 Addonssilo2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2774,7 +2726,6 @@ Addonssilo2:
 	ProvidesPrerequisite@upgradename:
 	
 Addonssilo3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2794,7 +2745,6 @@ Addonssilo3:
 	ProvidesPrerequisite@upgradename:
 
 Addonshand1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2814,7 +2764,6 @@ Addonshand1:
 	ProvidesPrerequisite@upgradename:
 
 Addonshand2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2834,7 +2783,6 @@ Addonshand2:
 	ProvidesPrerequisite@upgradename:
 	
 Addonshand3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2853,7 +2801,6 @@ Addonshand3:
 		Image: tanodhand
 	ProvidesPrerequisite@upgradename:
 Addonsweap1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2873,7 +2820,6 @@ Addonsweap1:
 	ProvidesPrerequisite@upgradename:
 
 Addonsweap2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2893,7 +2839,6 @@ Addonsweap2:
 	ProvidesPrerequisite@upgradename:
 	
 Addonsweap3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2912,9 +2857,7 @@ Addonsweap3:
 		Image: tanodweap
 	ProvidesPrerequisite@upgradename:
 
-
 Addonshq1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2934,7 +2877,6 @@ Addonshq1:
 	ProvidesPrerequisite@upgradename:
 
 Addonshq2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2954,7 +2896,6 @@ Addonshq2:
 	ProvidesPrerequisite@upgradename:
 	
 Addonshq3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2973,7 +2914,6 @@ Addonshq3:
 		Image: tanodhq
 	ProvidesPrerequisite@upgradename:
 Addonshq21:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2993,7 +2933,6 @@ Addonshq21:
 	ProvidesPrerequisite@upgradename:
 
 Addonshq22:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3013,7 +2952,6 @@ Addonshq22:
 	ProvidesPrerequisite@upgradename:
 	
 Addonshq23:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3033,7 +2971,6 @@ Addonshq23:
 	ProvidesPrerequisite@upgradename:
 
 upgrade.tamgnod1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3053,7 +2990,6 @@ upgrade.tamgnod1:
 	ProvidesPrerequisite@upgradename:
 
 upgrade.tamgnod2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3073,7 +3009,6 @@ upgrade.tamgnod2:
 	ProvidesPrerequisite@upgradename:
 	
 upgrade.tamgnod3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3092,7 +3027,6 @@ upgrade.tamgnod3:
 		Image: tamgnod
 	ProvidesPrerequisite@upgradename:
 Addonsobelisk1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3112,7 +3046,6 @@ Addonsobelisk1:
 	ProvidesPrerequisite@upgradename:
 
 Addonsobelisk2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3132,7 +3065,6 @@ Addonsobelisk2:
 	ProvidesPrerequisite@upgradename:
 	
 Addonsobelisk3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3151,7 +3083,6 @@ Addonsobelisk3:
 		Image: tanodobelisk
 	ProvidesPrerequisite@upgradename:
 Addonssam1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3171,7 +3102,6 @@ Addonssam1:
 	ProvidesPrerequisite@upgradename:
 
 Addonssam2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3191,7 +3121,6 @@ Addonssam2:
 	ProvidesPrerequisite@upgradename:
 	
 Addonssam3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3210,7 +3139,6 @@ Addonssam3:
 		Image: tanodsam
 	ProvidesPrerequisite@upgradename:
 Addonsgattling1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3230,7 +3158,6 @@ Addonsgattling1:
 	ProvidesPrerequisite@upgradename:
 
 Addonsgattling2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3250,7 +3177,6 @@ Addonsgattling2:
 	ProvidesPrerequisite@upgradename:
 	
 Addonsgattling3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3269,12 +3195,10 @@ Addonsgattling3:
 		Image: tanodgattling
 	ProvidesPrerequisite@upgradename:
 
-
 #######################################
 # TA Building Upgrades MUTANT
 #######################################
 upgrade.tamutbarr1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3294,7 +3218,6 @@ upgrade.tamutbarr1:
 	ProvidesPrerequisite@upgradename:
 
 upgrade.tamutbarr2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3314,7 +3237,6 @@ upgrade.tamutbarr2:
 	ProvidesPrerequisite@upgradename:
 	
 upgrade.tamutbarr3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3333,7 +3255,6 @@ upgrade.tamutbarr3:
 		Image: tamutbarr
 	ProvidesPrerequisite@upgradename:
 upgrade.tamuttrade1:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3353,7 +3274,6 @@ upgrade.tamuttrade1:
 	ProvidesPrerequisite@upgradename:
 
 upgrade.tamuttrade2:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3373,7 +3293,6 @@ upgrade.tamuttrade2:
 	ProvidesPrerequisite@upgradename:
 	
 upgrade.tamuttrade3:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -3406,13 +3325,12 @@ mcv.tagdi:
 		Name: Mobile Construction Vehicle (GDI)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -3443,7 +3361,7 @@ mcv.tanod:
 		Name: Mobile Construction Vehicle (Nod)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 	Transforms:
@@ -3456,7 +3374,7 @@ mcv.tamutant:
 		Name: Mobile Construction Vehicle (Forgotten)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, upgrade.tamuttrade1
+		Prerequisites: anyhq, upgrade.tamuttrade1
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 	Transforms:
@@ -3470,7 +3388,7 @@ tagdiyard:
 	Inherits@aicash: ^AIConyardCash
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -3507,7 +3425,7 @@ tagdiyard:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -3543,7 +3461,7 @@ tagdiyard:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmtagdi
@@ -3627,7 +3545,7 @@ tagdidept:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -3712,7 +3630,7 @@ mcv.taelectro:
 		Name: Mobile Construction Vehicle (Electronic Army)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 	Transforms:
@@ -3794,8 +3712,7 @@ tagdipower:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -3845,8 +3762,7 @@ tagdiacum:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -3961,8 +3877,7 @@ tagdibarr:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -4096,8 +4011,7 @@ tagdisilo:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -4189,8 +4103,7 @@ tagdiref:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -4246,7 +4159,7 @@ tanodref:
 		BuildPaletteOrder: 110
 		Prerequisites: anypower
 	FreeActor:
-		Actor: tanodharv
+		Actor: td_nod_stealthharvester
 tamutref:
 	Inherits: tagdiref
 	Buildable:
@@ -4264,7 +4177,7 @@ tagdiweap:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tagdiref, ~techlevel.medium
+		Prerequisites: tagdiref
 		Description: Trains Infantry.
 	Valued:
 		Cost: 2000 #500
@@ -4275,8 +4188,7 @@ tagdiweap:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -4337,7 +4249,7 @@ tanodweap:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tanodref, ~techlevel.medium
+		Prerequisites: tanodref
 	Valued:
 		Cost: 2000 #500
 	Tooltip:
@@ -4368,7 +4280,7 @@ tamuttrade:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tamutref, ~techlevel.medium
+		Prerequisites: tamutref
 	Valued:
 		Cost: 1500 #500
 	Tooltip:
@@ -4422,7 +4334,7 @@ tagdihq:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tagdiref, ~techlevel.medium
+		Prerequisites: tagdiref
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 1000 #500
@@ -4433,8 +4345,7 @@ tagdihq:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -4460,9 +4371,9 @@ tagdihq:
 		Prerequisite: anyhq
 	ProvidesPrerequisite@buildingname:
 	Production:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar:
-		ProductionType: Upgrades
+		ProductionType: Research
 	GrantConditionOnPrerequisite@levelupgrade1:
 		Condition: levelupgrade1
 		Prerequisites: Addonshq1
@@ -4479,11 +4390,11 @@ tanodhq:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tanodref, ~techlevel.medium
+		Prerequisites: tanodref
 	Production:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar:
-		ProductionType: Upgrades
+		ProductionType: Research
 	GrantConditionOnPrerequisite@levelupgrade1:
 		Condition: levelupgrade1
 		Prerequisites: Addonshq1
@@ -4498,11 +4409,11 @@ tamuthq:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tamutref, ~techlevel.medium
+		Prerequisites: tamutref
 	Production:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar:
-		ProductionType: Upgrades
+		ProductionType: Research
 tagdihq2:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
@@ -4512,7 +4423,7 @@ tagdihq2:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: anyhq, ~techlevel.medium, !tagdihq2c
+		Prerequisites: anyhq, !tagdihq2c
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 1500 #500
@@ -4523,8 +4434,7 @@ tagdihq2:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -4558,7 +4468,7 @@ tanodhq2:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 2500 #500
@@ -4569,8 +4479,7 @@ tanodhq2:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -4624,8 +4533,7 @@ tagdihpad:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -4691,8 +4599,7 @@ tanodhpad:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -4748,7 +4655,7 @@ tagdiskystrike:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tagdihq2, ~techlevel.medium, !tagdiskystrikesw
+		Prerequisites: tagdihq2, !tagdiskystrikesw
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 2000 #500
@@ -4759,8 +4666,7 @@ tagdiskystrike:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -4816,7 +4722,7 @@ tagdifalcon:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tagdihq2, ~techlevel.medium, !tagdifalconsw
+		Prerequisites: tagdihq2, !tagdifalconsw
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 1500 #500
@@ -4827,8 +4733,7 @@ tagdifalcon:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -4902,7 +4807,7 @@ tagdiion:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tagdihq2, ~techlevel.medium, !tagdiionsw
+		Prerequisites: tagdihq2, !tagdiionsw
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 2500 #500
@@ -4913,8 +4818,7 @@ tagdiion:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -4975,7 +4879,7 @@ tanodbladeofkane:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tanodhq2, ~techlevel.medium, !tanodbladeofkanesw
+		Prerequisites: tanodhq2, !tanodbladeofkanesw
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 2000 #500
@@ -4986,8 +4890,7 @@ tanodbladeofkane:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -5043,7 +4946,7 @@ tanodeyeofkane:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tanodhq2, ~techlevel.medium, !tagdifalconsw
+		Prerequisites: tanodhq2, !tagdifalconsw
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 1500 #500
@@ -5054,8 +4957,7 @@ tanodeyeofkane:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -5129,7 +5031,7 @@ tafistofkane:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tanodhq2, ~techlevel.medium, !tafistofkanesw
+		Prerequisites: tanodhq2, !tafistofkanesw
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 2000 #500
@@ -5140,8 +5042,7 @@ tafistofkane:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -5218,11 +5119,11 @@ taelechq:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tagdiref, ~techlevel.medium
+		Prerequisites: tagdiref
 	Production:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar:
-		ProductionType: Upgrades
+		ProductionType: Research
 	RenderSprites:
 		Image: tagdihq
 	ProvidesPrerequisite@tagdihq:
@@ -5237,7 +5138,7 @@ taelechq2:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
-		Prerequisites: tagdihq, ~techlevel.medium
+		Prerequisites: tagdihq
 	RenderSprites:
 		Image: tagdihq2
 	ProvidesPrerequisite@tagdihq2:
@@ -5253,7 +5154,7 @@ taelecweap:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tagdiref, ~techlevel.medium
+		Prerequisites: tagdiref
 	Valued:
 		Cost: 1500 #500
 	Tooltip:
@@ -5302,7 +5203,7 @@ tatacitus:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: anyhq, tamutcrystal, vehicleproduction, ~techlevel.medium, !tatacitussw
+		Prerequisites: anyhq, tamutcrystal, vehicleproduction, !tatacitussw
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 5000 #500
@@ -5313,8 +5214,7 @@ tatacitus:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 85000
@@ -5355,7 +5255,7 @@ tatacitus:
 		InsufficientPowerSpeechNotification: InsufficientPower
 		LaunchSpeechNotification: NuclearWeaponLaunched
 		IncomingSpeechNotification: NuclearWarheadApproaching
-		MissileWeapon: TSChemTacticalMissile
+		MissileWeapon: TSTacticalChemMissile
 		MissileDelay: 5
 		MissilePalette: tseffect
 		FlightDelay: 100
@@ -5370,7 +5270,7 @@ tatacitus:
 		ArrowSequence: arrow
 		ClockSequence: clocklarge
 		CircleSequence: circles
-		MissileImage: TSChemTacticalMissile
+		MissileImage: tsnodmmsil
 	NukePower:
 		AllowMultiple: True
 		PauseOnCondition: lowpower
@@ -5409,10 +5309,10 @@ tatacitus:
 tabarb:
 	Inherits@1: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
 	Selectable:
-		Bounds: 43690, 65536
+		Bounds: 1024, 1536
 	Valued:
 		Cost: 25
 	Tooltip:
@@ -5452,12 +5352,12 @@ tabarb:
 		Condition: levelupgrade3
 		Prerequisites: upgrade.tabarb3
 tamgnest:
-	Inherits: ra2nalasr
+	Inherits: ra2_soviets_sentrygun
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
 	RenderSprites:
 		Image: tamgnest
 	RenderVoxels:
-		Image: ra2nalasr
+		Image: ra2_soviets_sentrygun
 	Buildable:
 		Prerequisites: barracks
 		Queue: Defence, RADefence
@@ -5477,7 +5377,7 @@ tamgnest2:
 	RenderSprites:
 		Image: tamgnest
 	RenderVoxels:
-		Image: ra2nalasr
+		Image: ra2_soviets_sentrygun
 	Buildable:
 		Prerequisites: barracks
 		Queue: Defence, RADefence
@@ -5492,7 +5392,7 @@ tabrik:
 tacannonb:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gar: ^ClearableGarrison
 	Inherits@ifvbunk: ^IFVConditionsBunker
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
@@ -5564,7 +5464,7 @@ tacannonb.bot:
 taflakb:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gar: ^ClearableGarrison
 	Inherits@ifvbunk: ^IFVConditionsBunker
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
@@ -5596,7 +5496,7 @@ taflakb:
 		Offset: 0,0,900
 	WithSpriteBody:
 	Armament:
-		Weapon: ZSU-23
+		Weapon: zsu_23
 		LocalOffset: 410,0,700
 	GrantConditionOnPrerequisite@taupguidedmiss:
 		Condition: taupguidedmiss
@@ -5642,12 +5542,12 @@ taflakb.bot:
 	RenderSprites:
 		Image: taflakb
 tamgnod:
-	Inherits: tsntlasr
+	Inherits: ts_nod_laserturret
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
 	RenderSprites:
 		Image: tamgnod
 	RenderVoxels:
-		Image: ra2nalasr
+		Image: ra2_soviets_sentrygun
 	Buildable:
 		Prerequisites: barracks
 		Queue: Defence, RADefence
@@ -5675,7 +5575,7 @@ tamgnod:
 tanodgattling:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
 	Valued:
 		Cost: 1000
@@ -5708,7 +5608,7 @@ tanodgattling:
 		Weapon: CHGattlingTurret
 		LocalOffset: 410,0,700
 	Armament@AA:
-		Weapon: CHGattlingTurretAA
+		Weapon: CHGattlingTurret_AA
 		LocalOffset: 410,0,700
 	AttackTurreted:
 	WithSpriteTurret:
@@ -5736,7 +5636,7 @@ tanodobelisk:
 		Name: Obelisk Artillery
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Advanced base defense.\nRequires power to operate.\n  Strong vs Ground units\n  Weak vs Aircraft
@@ -5744,8 +5644,7 @@ tanodobelisk:
 		Footprint: xx xx
 		Dimensions: 2,2
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 2048, 2048, 0, -512
+		Bounds: 2048, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 100000
@@ -5800,7 +5699,7 @@ tanodsam:
 		Name: Surface-to-Air Missile
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Advanced base defense.\nRequires power to operate.\n  Strong vs Ground units\n  Weak vs Aircraft
@@ -5808,8 +5707,7 @@ tanodsam:
 		Footprint: xx xx
 		Dimensions: 2,2
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 2048, 2048, 0, -18176
+		Bounds: 48, 48, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 100000
@@ -5857,7 +5755,7 @@ tanodsam:
 tademolisher:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
 	Valued:
 		Cost: 800
@@ -5900,7 +5798,7 @@ tademolisher:
 tareapercann:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
 	Inherits@RenderVoxel: ^RenderVoxel
 	Valued:
@@ -5942,7 +5840,7 @@ tareapercann:
 	-WithVoxelBody:
 	RenderSprites:
 	RenderVoxels:
-		Image: ra2nalasr
+		Image: ra2_soviets_sentrygun
 		Scale: 7.5
 		NormalsPalette: normals
 		PlayerPalette: playerra2
@@ -5950,7 +5848,7 @@ tareapercann:
 tamutflak:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
 	Inherits@RenderVoxel: ^TSRenderVoxel
 	Valued:
@@ -5981,7 +5879,7 @@ tamutflak:
 		Offset: 0,0,900
 	WithSpriteBody:
 	Armament:
-		Weapon: ZSU-23
+		Weapon: zsu_23
 		LocalOffset: 410,0,700
 	AttackTurreted:
 	WithVoxelBarrel:
@@ -5992,5 +5890,5 @@ tamutflak:
 	-WithVoxelBody:
 	RenderSprites:
 	RenderVoxels:
-		Image: tsjugg
+		Image: ts_gdi_juggernaut
 		Scale: 7.5

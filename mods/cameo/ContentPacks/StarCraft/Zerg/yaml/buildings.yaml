@@ -1,0 +1,839 @@
+zerg_hatchery:
+	Inherits: ^BaseBuildingZerg
+	Inherits@ref: ^SCRefineryCommon
+	Inherits@shape: ^3x2Shape
+	Inherits@bot: ^BotMicromanageable
+	Inherits@breedfaster: ^SCBREEDFASTER
+	#Inherits@ra1_soviets_barracks: ^IsBarrack
+	Inherits@conyard: ^Conyard
+	Tooltip:
+		Name: Hatchery
+		RequiresCondition: !zerg_lair && !zerg_hive
+	Tooltip@2:
+		Name: Lair
+		RequiresCondition: zerg_lair && !zerg_hive
+	Tooltip@3:
+		Name: Hive
+		RequiresCondition: zerg_hive
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@zerg_lair:
+		Prerequisite: zerg_lair
+		RequiresCondition: zerg_lair
+	ProvidesPrerequisite@zerg_hive:
+		Prerequisite: zerg_hive
+		RequiresCondition: zerg_hive
+	ProvidesPrerequisite@lairupgradeavailable:
+		Prerequisite: lairupgradeavailable
+		RequiresCondition: !zerg_lair
+	ProvidesPrerequisite@hiveupgradeavailable:
+		Prerequisite: hiveupgradeavailable
+		RequiresCondition: zerg_lair && !zerg_hive
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			zerg_hatchery: zerg_lair
+		Requirements:
+			zerg_hatchery: !zerg_lair
+	Pluggable@2:
+		Offset: 0,0
+		Conditions:
+			zerg_lair: zerg_hive
+		Requirements:
+			zerg_lair: zerg_lair && !zerg_hive
+	WithSpriteBody:
+		RequiresCondition: !zerg_lair && !zerg_hive
+	WithSpriteBody@lair:
+		Sequence: lair
+		Name: lair
+		RequiresCondition: zerg_lair && !zerg_hive
+	WithSpriteBody@hive:
+		Sequence: hive
+		Name: hive
+		RequiresCondition: zerg_hive
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: zchrdy00.aud
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil ##########
+	DamageMultiplier@lair:
+		Modifier: 75
+		RequiresCondition: zerg_lair && !zerg_hive
+	DamageMultiplier@hive:
+		Modifier: 50
+		RequiresCondition: zerg_hive
+	RallyPoint: ##########
+		Path: 1,2
+	PrimaryBuilding:
+		PrimaryCondition: primary
+		SelectionNotification: PrimaryBuildingSelected
+	WithDecoration@primary:
+		RequiresSelection: true
+		Image: rapips
+		Sequence: tag-primary
+		Position: Top
+		RequiresCondition: primary
+	LarvaProductionQueue@ZINFANTRY:
+		Type: SCZergInfantry
+		DisplayOrder: 2
+		Group: Infantry
+		LowPowerModifier: 100
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		InfiniteBuildLimit: 10
+		MaxParallel: 3
+	ProductionBar@ZINFANTRY:
+		ProductionType: SCZergInfantry
+	LarvaConsumingProduction:
+		Produces: SCZergInfantry
+		EggCondition: sc_zerg_egg
+	Exit@0:
+		SpawnOffset: 0,0,0
+		ExitCell: 0,2
+		Facing: 540
+	Exit@1:
+		SpawnOffset: 0,0,0 #-1323,1280,0
+		ExitCell: 1,2
+		Facing: 540
+	Exit@2:
+		SpawnOffset: 0,0,0
+		ExitCell: 2,2
+		Facing: 540
+	ProvidesRadar:
+		RequiresCondition: !jammed
+	ExternalCondition@JAMMED:
+		Condition: jammed
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi, hatchery, creep
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 3000
+		BodyNames: body, lair, hive
+	-WithDeathAnimation:
+	Refinery:
+	##########
+	Sellable:
+	##########
+	GrantConditionOnProduction@botpowerrestriction:
+		Condition: botpowerrestriction
+		Duration: 1000
+		ShowSelectionBar: False
+		Actors: zerg_overlord
+	ProvidesPrerequisite@botpowerrestriction:
+		Prerequisite: botpowerrestriction
+		RequiresCondition: botpowerrestriction
+		RequiresPrerequisites: !Extractor
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death4:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death5:
+		Actor: SCBROODLING
+	StoresResources:
+		Capacity: 1000
+	DroneSpawnerMaster:
+		Actors: sc_zerg_larva, sc_zerg_larva, sc_zerg_larva
+		SpawnOffset: -1024,1024,0, 0,1024,0, 1024,1024,0
+		RespawnTicks: 125
+		InitialActorCount: 0
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	Transforms:
+		IntoActor: zerg_hatcherydrone
+	WithCreepOverlay:
+		Adjacent: 5
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+zerg_lair:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Lair
+	Valued:
+		Cost: 1400
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites: ~zerg_hatchery, zerg_spawningpool, lairupgradeavailable
+		Description: actor_sclair.description
+	Plug:
+		Type: zerg_hatchery
+	RenderSprites:
+		Image: zerg_lair
+
+zerg_hive:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Hive
+	Valued:
+		Cost: 2000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites: ~zerg_hatchery, zerg_lair, hiveupgradeavailable
+		Description: actor_schive.description
+	Plug:
+		Type: zerg_lair
+	RenderSprites:
+		Image: zerg_hive
+
+zerg_sunkencolony:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Sunken Colony
+	Valued:
+		Cost: 500
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~zerg_hatchery, creepcolonyupgradeavailable
+		Description: actor_scsporecolonyupgrade.description
+	Plug:
+		Type: zerg_creepcolony
+	RenderSprites:
+		Image: zerg_sunkencolony_defense
+
+zerg_sporecolony_defense:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Spore Colony
+	Valued:
+		Cost: 500
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~zerg_hatchery, creepcolonyupgradeavailable
+		Description: actor_scsunkencolonyupgrade.description
+	Plug:
+		Type: sccreepcolony2
+	RenderSprites:
+		Image: zerg_sporecolony
+
+zerg_extractor:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^3x2Shape
+	Inherits@ref: ^SCRefineryCommon
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: Extractor
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	RequiresBuildableArea:
+		AreaTypes: building
+		Adjacent: 4
+		IsCircular: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~zerg_hatchery
+		Queue: Building, RABuilding
+		Description: actor_scextractor.description
+	Building:
+		Footprint: _x_ xxx ===
+		Dimensions: 3,3
+		BuildSounds: zchrdy00.aud
+	FreeActor@1:
+		Actor: zerg_drone
+		SpawnOffset: 0,2
+		Facing: 540
+	FreeActor@2:
+		Actor: zerg_drone
+		SpawnOffset: 0,2
+		Facing: 540
+	SelectionDecorations:
+	Refinery:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	DamageMultiplier@extractorupg:
+		RequiresCondition: extractorupg
+		Modifier: 50
+	WithIdleOverlay@smoke:
+		RequiresCondition: extractorupg
+		Sequence: smoke
+		Palette: greyscale
+	SeedsResource:
+		ResourceType: SCGas3
+		Interval: 125
+		RequiresCondition: extractorupg
+	CashTrickler@extractorupg:
+		RequiresCondition: extractorupg
+		Interval: 50
+		Amount: 25
+		ShowTicks: True
+	ProvidesPrerequisite:
+		Prerequisite: sczrefineryupgradeavailable
+		RequiresCondition: !extractorupg
+	Pluggable:
+		Offset: 1,0
+		Conditions:
+			zerg_extractor: extractorupg
+		Requirements:
+			zerg_extractor: !build-incomplete && !extractorupg
+	WithCreepOverlay:
+		Adjacent: 0
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_vespenegascollector
+
+zerg_vespenegascollector:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Vespene Gas Collector
+	Valued:
+		Cost: 2500
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~zerg_hatchery, sczrefineryupgradeavailable
+		Description: actor_sczvespenegascollector.description
+	Plug:
+		Type: zerg_extractor
+	RenderSprites:
+		Image: upscrefinery3
+
+zerg_spawningpool:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+	Tooltip:
+		Name: Spawning Pool
+	Valued:
+		Cost: 1250
+	Health:
+		HP: 125000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 40
+		BuildDuration: 375
+		BuildDurationModifier: 100
+		Prerequisites: ~zerg_hatchery
+		Queue: Building, RABuilding
+		Description: actor_scspawningpool.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+zerg_evolutionchamber:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: Evolution Chamber
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 200000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 50
+		BuildDuration: 625
+		BuildDurationModifier: 100
+		Prerequisites: ~zerg_hatchery
+		Queue: Building, RABuilding
+		Description: actor_scevolutionchamber.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+zerg_hydraliskden:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: Hydralisk Den
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 150000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 60
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~zerg_hatchery, zerg_spawningpool
+		Queue: Building, RABuilding
+		Description: actor_schydraliskden.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+zerg_queensnest:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: Queen's Nest
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 150000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~zerg_hatchery, zerg_lair
+		Queue: Building, RABuilding
+		Description: actor_scqueensnest.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death4:
+		Actor: SCBROODLING
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+zerg_spire:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Inherits@bot: ^BotMicromanageable
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: Spire
+		RequiresCondition: !spirecondition
+	Tooltip@2:
+		Name: Greater Spire
+		RequiresCondition: spirecondition
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 150000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@zerg_greaterspire:
+		Prerequisite: zerg_greaterspire
+		RequiresCondition: zerg_greaterspire
+	Buildable:
+		BuildPaletteOrder: 80
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~zerg_hatchery, zerg_lair
+		Queue: Building, RABuilding
+		Description: actor_scspire.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	GivesBuildableArea:
+		AreaTypes: building, spire
+	-WithDeathAnimation:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+		BodyNames: body, greaterspire
+	WithSpriteBody:
+		RequiresCondition: !zerg_greaterspire
+	WithSpriteBody@greaterspire:
+		Sequence: greaterspire
+		Name: greaterspire
+		RequiresCondition: zerg_greaterspire
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			zerg_spire: zerg_greaterspire
+		Requirements:
+			zerg_spire: !zerg_greaterspire
+	DamageMultiplier@zerg_greaterspire:
+		RequiresCondition: zerg_greaterspire
+		Modifier: 50
+	ProvidesPrerequisite:
+		Prerequisite: greaterspireupgradeavailable
+		RequiresCondition: !zerg_greaterspire
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death4:
+		Actor: SCBROODLING
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+zerg_greaterspire:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Greater Spire
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Queue: BuildingAddons
+		Prerequisites: ~zerg_hatchery, zerg_lair, greaterspireupgradeavailable
+		Description: actor_scgreaterspire.description
+	Plug:
+		Type: zerg_spire
+	RenderSprites:
+		Image: zerg_greaterspire
+
+zerg_ultraliskcavern:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: Ultralisk Cavern
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 200000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 90
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~zerg_hatchery, zerg_hive
+		Queue: Building, RABuilding
+		Description: actor_scultraliskcavern.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	#Production@Research:
+	#	Produces: UltraCave
+	#ProductionQueue@Research:
+	#	Type: UltraCave
+	#	DisplayOrder: 10
+	#	Group: Upgrade
+	#	ItemLimit: 1
+	#	DisallowPaused: true
+	#ProductionBar@Research:
+	#	ProductionType: UltraCave
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death4:
+		Actor: SCBROODLING
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+zerg_defilermound:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: Defiler Mound
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 200000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~zerg_hatchery, zerg_hive
+		Queue: Building, RABuilding
+		Description: actor_scdefilermound.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+	-WithDeathAnimation:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+zerg_nyduscanal:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Nydus Canal
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 8010
+		Prerequisites: ~zerg_hatchery, zerg_hive
+		Queue: Building, RABuilding
+		Description: actor_scnyduscanal.description
+	Building:
+		Footprint: ++ ++
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	Health:
+		HP: 25000
+	RevealsShroud:
+		Range: 7c0
+	RallyPoint:
+		Path: 1,1
+		IsPlayerPalette: true
+	Exit:
+	TeleportNetworkPrimaryExit:
+	TeleportNetwork:
+		Type: nydus
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+zerg_overmind:
+	Inherits: ^BaseBuildingZerg
+	Inherits@radar: ^RadarBuilding
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Inherits@shape: ^2x2Shape
+	Inherits@DisabledOverlay: ^DisabledOverlay
+	Tooltip:
+		Name: Overmind
+	Power:
+		Amount: 2000
+	StoresResources:
+		Capacity: 10000
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		Prerequisites: ~zerg_hatchery, zerg_hive, derricklimit
+		Queue: Building, RABuilding
+		Description: actor_scovermind.description
+		IconPalette: windows256
+		BuildLimit: 1
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 3000
+	-WithDeathAnimation:
+	-ToggleConditionOnOrder:
+	SpawnActorOnDeath@death1:
+		Actor: zerg_overlord
+	SpawnActorOnDeath@death2:
+		Actor: zerg_overlord
+	SpawnActorOnDeath@death3:
+		Actor: zerg_overlord
+
+zerg_infestedcommandcenter:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Inherits@supply: ^SCUnitProduction
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	Tooltip:
+		Name: Infested Command Center
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: zchrdy00.aud
+	WithBuildingPlacedAnimation:
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 8020
+		Prerequisites: ~zerg_hatchery, zerg_overmind
+		Queue: Building, RABuilding
+		Description: actor_scinfestedcommandcenter.description
+		IconPalette: windows256
+	WithBuildingBib:
+	ProductionQueue@VEHICLE:
+		LowPowerModifier: 10000
+	RallyPoint: ##########
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0 #-1323,1280,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesRadar:
+		RequiresCondition: !jammed
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+####################################################################################################
+#		UNIT TERRAN
+####################################################################################################

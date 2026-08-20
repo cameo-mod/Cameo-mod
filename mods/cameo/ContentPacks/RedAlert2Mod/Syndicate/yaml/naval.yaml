@@ -1,0 +1,195 @@
+triton.latin:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Template: ^BattleShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@gat: ^GatlingSpinUpUnitBehavior
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Triton Speedboat
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~cgyard.latin
+		Queue: Naval, RANaval
+		Description: actor_hyd.description
+	Mobile:
+		Speed: 125
+		TurnSpeed: 50
+	Health:
+		HP: 37500
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Armor:
+		Type: Light
+	Armament@PRIMARY:
+		Weapon: LatinSentryMG
+		Recoil: 43
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 512,0,256
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: LatinSentryMG_elite
+		Recoil: 43
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 512,0,256
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	GrantConditionOnPrerequisite@latinsyndicate_upgrade_yuristolentechchainguns:
+		Condition: latinsyndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latinsyndicate_upgrade_yuristolentechchainguns
+	ReloadDelayMultiplier@gat1:
+		Modifier: 50
+		RequiresCondition: gatling == 1 && latinsyndicate_upgrade_yuristolentechchainguns
+	ReloadDelayMultiplier@gat2:
+		Modifier: 25
+		RequiresCondition: gatling > 1 && latinsyndicate_upgrade_yuristolentechchainguns
+	RangeMultiplier@gat1:
+		Modifier: 111
+		RequiresCondition: gatling == 1 && latinsyndicate_upgrade_yuristolentechchainguns
+	RangeMultiplier@gat2:
+		Modifier: 123
+		RequiresCondition: gatling > 1 && latinsyndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@gatling:
+		Condition: gatling
+		RequiredShotsPerInstance: 3, 8
+		RequiresCondition: !rank-elite && latinsyndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@elitegatling:
+		Condition: gatling
+		RequiredShotsPerInstance: 2, 4
+		RequiresCondition: rank-elite && latinsyndicate_upgrade_yuristolentechchainguns
+	Selectable:
+		DecorationBounds: 1024, 1024
+	Voiced:
+		VoiceSet: LatinSoldierVoice
+	ActorStatValues:
+		Upgrades: latinsyndicate_upgrade_cashrecovery, latinsyndicate_upgrade_sovietstolentechindustrialmethods, latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging, latinsyndicate_upgrade_yuristolentechchainguns
+	RenderSprites:
+		PlayerPalette: playerra2
+
+sub.latin:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@sub: ^Submarine
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Valued:
+		Cost: 3600
+	Tooltip:
+		Name: Akula
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~cgyard.latin, latinsyndicate_spycenter
+		Queue: Naval, RANaval
+		Description: actor_ra2sub.description
+	Mobile:
+		Speed: 55
+		TurnSpeed: 22
+	Health:
+		HP: 240000
+	ChangesHealth@SelfHealing:
+		Step: 96
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 11
+		Offset: 512,0,0
+	Armament@ARTILLERY:
+		Weapon: RA2AkulaRockets
+		LocalOffset: 800,320,250, 800,-320,250, 600,320,250, 600,-320,250, 400,320,250, 400,-320,250, 200,320,250, 200,-320,250
+	FirepowerMultiplier@latinsyndicate_upgrade_asianalliancestolentechhotfire:
+		Modifier: 200
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	RenderDetectionCircle:
+	Selectable:
+		DecorationBounds: 3000, 3000
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
+	Cloak@underwater:
+		CloakDelay: 75
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
+	Voiced:
+		VoiceSet: TyphoonSubVoice
+	ActorStatValues:
+		Upgrades: latinsyndicate_upgrade_cashrecovery, latinsyndicate_upgrade_sovietstolentechindustrialmethods, latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging, latinsyndicate_upgrade_asianalliancestolentechhotfire
+	RenderSprites:
+		PlayerPalette: playerra2
+
+rammax.latin:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@sub: ^Submarine
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@uprecover: ^LatinCashrecover
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Rammax Drone
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~cgyard.latin
+		Queue: Naval, RANaval
+		Description: Little Drone, Armed with a Sabotage weapon, effective aganist ships
+	Mobile:
+		Speed: 125
+		TurnSpeed: 50
+	Health:
+		HP: 47500
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Armor:
+		Type: Medium
+	Armament@PRIMARY:
+		Weapon: Rammax_Sabot
+		Recoil: 43
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 512,0,256
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: Rammax_Sabot
+		Recoil: 43
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 512,0,256
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	Selectable:
+		DecorationBounds: 1024, 1024
+	Voiced:
+		VoiceSet: LatinSoldierVoice
+	ActorStatValues:
+		Upgrades: latinsyndicate_upgrade_cashrecovery, latinsyndicate_upgrade_sovietstolentechindustrialmethods
+	RenderSprites:
+		PlayerPalette: playerra2
+
+#   Pass those units to Syndicate

@@ -16,7 +16,7 @@
 		ImpactActors: false
 	Warhead@3Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 ^DamagingExplosionHE:
 	Inherits: ^DamagingExplosion
@@ -46,7 +46,7 @@ HeliCrash:
 		Damage: 10000
 
 HeliExplode:
-	Warhead@1Eff: CreateEffect
+	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
 		Explosions: tsexplomed
 		ExplosionPalette: tseffect
@@ -54,7 +54,7 @@ HeliExplode:
 
 LargeHeliExplode:
 	Inherits: HeliExplode
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: tsexplolrg
 
 UnitExplode:
@@ -122,7 +122,7 @@ GrenadierExplode:
 		ImpactSounds: xplosml2.aud
 
 BuildingExplode:
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: building, building_napalm, med_frag, poof, small_building
 		Delay: 1
 		ImpactActors: false
@@ -130,7 +130,7 @@ BuildingExplode:
 		SmudgeType: Crater
 		Delay: 1
 
-Napalm.Crate:
+Napalm_Crate:
 	Inherits: ^DamagingExplosionHE
 	Warhead@1Dam: SpreadDamage
 		Spread: 170
@@ -145,7 +145,9 @@ Napalm.Crate:
 		ImpactSounds: flamer2.aud
 	Warhead@3Smu: LeaveSmudge
 		SmudgeType: Scorch
-
+	Warhead@Demolition_Light_FriendlyFire: SpreadDamage
+		Damage: 2500
+		Spread: 85
 TiberiumExplosion:
 	Inherits: ^DamagingExplosionHE
 	Warhead@1Dam: SpreadDamage
@@ -178,11 +180,11 @@ TiberiumExplosion:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Structure, Wall, Trees
+		InvalidTargets: Structure, wall
 	Warhead@2Eff: CreateEffect
 		Explosions: self_destruct
 		ImpactSounds: kaboom22.aud
-		ValidTargets: Ground, Air, Ship, Trees
+		ValidTargets: Ground, Air, Ship
 	Warhead@3EffWater: CreateEffect
 		Explosions: large_splash
 		ImpactSounds: splash9.aud

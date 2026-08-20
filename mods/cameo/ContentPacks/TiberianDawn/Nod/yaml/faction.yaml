@@ -1,0 +1,34 @@
+World:
+	FactionCA@td_nod:
+		Name: Nod TD #faction_td_nod.name
+		InternalName: td_nod
+		Game: Tiberian Dawn
+		Side: Tiberian Dawn
+		Description: faction_td_nod.description
+
+	StartingUnits@mcvonlynod:
+		Class: none
+		ClassName: MCV Only
+		Factions: td_nod
+		BaseActor: td_nod_mobileconstructionvehicle
+
+	StartingUnits@defaultnoda:
+		Class: light
+		ClassName: Light Support
+		Factions: td_nod
+		BaseActor: td_nod_mobileconstructionvehicle
+		SupportActors: td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,e3,e3,td_nod_buggy
+
+	StartingUnits@heavynoda:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: td_nod
+		BaseActor: td_nod_mobileconstructionvehicle
+		SupportActors: td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,e3,e3,td_nod_lighttank,td_nod_lighttank,td_nod_flametank
+
+	StartingUnits@heavynodb:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: td_nod
+		BaseActor: td_nod_mobileconstructionvehicle
+		SupportActors: td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,e3,e3,e3,td_nod_flametank,td_nod_flametank

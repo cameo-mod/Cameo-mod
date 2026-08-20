@@ -1,0 +1,169 @@
+yuriinvisibleplane:
+	Inherits: ^AirstrikePlane
+	Tooltip:
+		Name: Spy Plane
+	Valued:
+		Cost: 5000
+	Health:
+		HP: 100000
+	Armor:
+		Type: Bomber
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 20
+		Speed: 300
+		Repulsable: False
+		MaximumPitch: 25
+	AttackBomber:
+		FacingTolerance: 32
+	Selectable:
+	SelectionDecorations:
+	SpawnActorOnDeath:
+		Actor: U2.Husk
+	Armament:
+		Weapon: SpyPlaneTargeting
+	ParaDrop:
+		DropRange: 5c0
+		ChuteSound: chute1.aud
+	Cargo:
+		MaxWeight: 25
+	LeavesTrails:
+		Offsets: -1c43,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	RejectsOrders:
+	GivesExperience:
+	DynamicSpeedMultiplier:
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	RenderSprites:
+		Image: ra1_soviets_spyplane
+		PlayerPalette: raplayer
+
+yuri_floatingdisk:
+	Inherits: ^Helicopter
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@detect: ^GenericAirDetector
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@RA2YuriGravitonDrive: ^RA2YuriGravitonDrive
+	Inherits@RA2YuriPsionicPlasmaBeams: ^RA2YuriPsionicPlasmaBeams
+	Valued:
+		Cost: 2400
+	Tooltip:
+		Name: Floating Disk
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~yuri_warfactory, yuri_battlelab
+		Queue: Vehicle, Aircraft, RAAircraft
+		Description: actor_disk.description
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 80
+		RepulsionSpeed: 80
+		IdealSeparation: 2000
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: RA2DiskLaser
+		LocalOffset: 800,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Name: primary
+		Weapon: RA2DiskLaser_elite
+		LocalOffset: 800,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	Armament@SECOND:
+		Name: secondary
+		Weapon: RA2DiskDrain
+		MuzzleSequence: ra2_diskray
+		MuzzlePalette: ra2effect
+		RequiresCondition: yuri_upgrade_disksiphonattack
+	Armament@Steal:
+		Name: secondary
+		Weapon: RA2DiskSteal
+		MuzzleSequence: ra2_diskray
+		MuzzlePalette: ra2effect
+		Voice: Steal
+	GrantConditionOnPrerequisite@yuri_upgrade_disksiphonattack:
+		Condition: yuri_upgrade_disksiphonattack
+		Prerequisites: yuri_upgrade_disksiphonattack
+	ReloadDelayMultiplier@yuri_upgrade_diskhighfrequencylasers:
+		Modifier: 50
+		RequiresCondition: yuri_upgrade_diskhighfrequencylasers
+	ReloadAmmoDelayMultiplier@yuri_upgrade_diskhighfrequencylasers:
+		Modifier: 75
+		RequiresCondition: yuri_upgrade_diskhighfrequencylasers
+	GrantConditionOnPrerequisite@yuri_upgrade_diskhighfrequencylasers:
+		Condition: yuri_upgrade_diskhighfrequencylasers
+		Prerequisites: yuri_upgrade_diskhighfrequencylasers
+	AttackAircraft:
+		Voice: Attack
+		AttackType: Hover
+		FacingTolerance: 512
+	AmmoPool:
+		Armaments: primary
+		Ammo: 3
+		AmmoCondition: ammo
+	WithShadow:
+	WithMoveAnimation:
+		MoveSequence: move
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	ReloadAmmoPool:
+		Delay: 80
+		Count: 1
+	Selectable:
+		DecorationBounds: 1280, 1024
+	SpawnActorOnDeath:
+		Actor: YRDISK.Husk
+	Turreted:
+	Voiced:
+		VoiceSet: DiskVoice
+	RenderRangeCircle:
+		RangeCircleType: aircraft
+	DeathSounds:
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	AmbientSound@Steal:
+		SoundFiles: vflolo5a.wav, vflolo5b.wav
+		Volume: 1.5
+		RequiresCondition: stealing
+	SoundAnnouncement@StealEnd:
+		SoundFiles: vflolo6a.wav
+		Volume: 1.5
+		RequiresCondition: !stealing
+	GrantConditionOnAttack:
+		Condition: stealing
+		RevokeDelay: 5
+		ArmamentNames: secondary
+	DamageMultiplier@stealing:
+		Modifier: 75
+		RequiresCondition: stealing
+	ChangesHealth@stealing:
+		Step: 100
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: stealing
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: yuri_upgrade_gravitondrive, yuri_upgrade_disksiphonattack, yuri_upgrade_diskhighfrequencylasers, yuri_upgrade_psionicplasmabeams

@@ -143,13 +143,12 @@ MCV.TOMORROW:
 		Name: Mobile Construction Vehicle (Tomorrow)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 75
 		Locomotor: heavywheeled
@@ -183,7 +182,7 @@ mcvtomorrow.bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: anyhq, ~techlevel.medium, fix, ~botplayer, allowsMCV
+		Prerequisites: anyhq, fix, ~botplayer, allowsMCV
 
 MCV.ANSWER:
 	Inherits: ^Vehicle
@@ -196,13 +195,12 @@ MCV.ANSWER:
 		Name: Mobile Construction Vehicle (Answer)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 75
 		Locomotor: heavywheeled
@@ -236,7 +234,7 @@ mcvanswer.bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: anyhq, ~techlevel.medium, fix, ~botplayer, allowsMCV
+		Prerequisites: anyhq, fix, ~botplayer, allowsMCV
 
 MCV.DTUSA:
 	Inherits: ^Vehicle
@@ -249,13 +247,12 @@ MCV.DTUSA:
 		Name: Mobile Construction Vehicle (USA)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 75
 		Locomotor: heavywheeled
@@ -289,7 +286,7 @@ mcvdtusa.bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: anyhq, ~techlevel.medium, fix, ~botplayer, allowsMCV
+		Prerequisites: anyhq, fix, ~botplayer, allowsMCV
 
 RAMCV.DTRUSSIA:
 	Inherits: ^Vehicle
@@ -299,7 +296,7 @@ RAMCV.DTRUSSIA:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: fix, ~techlevel.medium
+		Prerequisites: fix
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Valued:
@@ -308,7 +305,6 @@ RAMCV.DTRUSSIA:
 		Name: Mobile Construction Vehicle (Russia)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 150000
@@ -340,7 +336,7 @@ ramcvdtrussia.bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: anyhq, ~techlevel.medium, fix, ~botplayer, allowsMCV
+		Prerequisites: anyhq, fix, ~botplayer, allowsMCV
 
 MCV.DTJAPAN:
 	Inherits: ^Vehicle
@@ -353,13 +349,12 @@ MCV.DTJAPAN:
 		Name: Mobile Construction Vehicle (Japan)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 75
 		Locomotor: heavywheeled
@@ -393,7 +388,7 @@ mcvdtjapan.bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: anyhq, ~techlevel.medium, fix, ~botplayer, allowsMCV
+		Prerequisites: anyhq, fix, ~botplayer, allowsMCV
 
 RAFACT.DTRUSSIA:
 	GrantExternalConditionToOwner@BuildingsOwned:
@@ -489,7 +484,7 @@ FACT.TOMORROW:
 	Inherits@conyard: ^Conyard
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -526,7 +521,7 @@ FACT.TOMORROW:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -580,7 +575,7 @@ FACT.TOMORROW:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmgdi
@@ -597,7 +592,7 @@ FACT.ANSWER:
 	Inherits@conyard: ^Conyard
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -634,7 +629,7 @@ FACT.ANSWER:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -688,7 +683,7 @@ FACT.ANSWER:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factionnod:
 		Prerequisite: mmnod
@@ -705,7 +700,7 @@ FACT.DTUSA:
 	Inherits@conyard: ^Conyard
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -742,7 +737,7 @@ FACT.DTUSA:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -796,7 +791,7 @@ FACT.DTUSA:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factionnod:
 		Prerequisite: mmnod
@@ -813,7 +808,7 @@ FACT.DTJAPAN:
 	Inherits@conyard: ^Conyard
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -850,7 +845,7 @@ FACT.DTJAPAN:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -904,7 +899,7 @@ FACT.DTJAPAN:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factionnod:
 		Prerequisite: mmnod
@@ -915,9 +910,9 @@ AFLD.ANSWER:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Selectable:
-		Bounds: 174762, 87381
+		Bounds: 4096, 2048
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,-512,256, 0,-1451,384, 0,512,128, 0,1536,85
 		Type: Rectangle
@@ -988,14 +983,14 @@ AFLD.ANSWER:
 		Amount: -40
 	ProvidesPrerequisite@buildingname:
 	RenderSprites:
-		Image: AFLD
+		Image: td_nod_airstrip
 WEAP.TOMORROW:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -1017,8 +1012,7 @@ WEAP.TOMORROW:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 110000
@@ -1063,14 +1057,14 @@ WEAP.TOMORROW:
 	SequencePlaceBuildingPreview:
 		Sequence: place
 	RenderSprites:
-		Image: WEAP
+		Image: td_gdi_weaponsfactory
 WEAP.DTUSA:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -1092,8 +1086,7 @@ WEAP.DTUSA:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 110000
@@ -1138,14 +1131,14 @@ WEAP.DTUSA:
 	SequencePlaceBuildingPreview:
 		Sequence: place
 	RenderSprites:
-		Image: WEAP
+		Image: td_gdi_weaponsfactory
 WEAP.DTRUSSIA:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -1167,8 +1160,7 @@ WEAP.DTRUSSIA:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 110000
@@ -1213,14 +1205,14 @@ WEAP.DTRUSSIA:
 	SequencePlaceBuildingPreview:
 		Sequence: place
 	RenderSprites:
-		Image: WEAP
+		Image: td_gdi_weaponsfactory
 WEAP.DTJAPAN:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -1242,8 +1234,7 @@ WEAP.DTJAPAN:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 110000
@@ -1288,7 +1279,7 @@ WEAP.DTJAPAN:
 	SequencePlaceBuildingPreview:
 		Sequence: place
 	RenderSprites:
-		Image: WEAP
+		Image: td_gdi_weaponsfactory
 DTNUKE:
 	Inherits: NUKE
 	RenderSprites:
@@ -1301,18 +1292,17 @@ DTNUKE:
 DTHAND:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-512,0, 355,512,0, -281,-512,0, -630,512,0
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 87381, 123776, 0, -18176
+		Bounds: 2048, 2901, 0, -426
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -1395,7 +1385,7 @@ HQ.TOMORROW:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: dtpropaganda, ~techlevel.medium
+		Prerequisites: dtpropaganda
 		Queue: Building, RABuilding
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	RenderSprites:
@@ -1413,7 +1403,7 @@ HQ.ANSWER:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: atek.answer, ~techlevel.medium
+		Prerequisites: atek.answer
 		Queue: Building, RABuilding
 		Description: Unlocks higher-tech units and buildings.\nRequires power to operate.
 	RenderSprites:
@@ -1430,7 +1420,7 @@ DOME.DTRUSSIA:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: atek.answer, ~techlevel.medium
+		Prerequisites: atek.answer
 		Queue: Building, RABuilding
 		Description: Unlocks higher-tech units and buildings.\nRequires power to operate.
 	RenderSprites:
@@ -1452,7 +1442,7 @@ DTSTRIKE:
 		Name: Airstrike Center
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: anyhq, ~techlevel.medium, !a10strikec
+		Prerequisites: anyhq, !a10strikec
 		Queue: Building, RABuilding
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	Building:
@@ -1460,8 +1450,7 @@ DTSTRIKE:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -1499,7 +1488,7 @@ DTSTRIKE:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 		DisplayTimerStances: Ally, Neutral, Enemy
@@ -1550,8 +1539,7 @@ DTPROC:
 	StoresResources:
 		Capacity: 1000
 	Selectable:
-		Bounds: 131072, 101930
-		DecorationBounds: 132864, 131072
+		Bounds: 3114, 3072
 	CustomSellValue:
 		Value: 500
 	FreeActor:
@@ -1584,7 +1572,7 @@ DTPROPAGANDA:
 		Name: Propaganda Center
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: dtproc, ~techlevel.high
+		Prerequisites: dtproc
 		Queue: Building, RABuilding
 		Description: Provides some Technologies
 	Building:
@@ -1592,8 +1580,7 @@ DTPROPAGANDA:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -21845
+		Bounds: 3072, 2901, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 210000
@@ -1667,7 +1654,7 @@ DTPOWER2:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 800 #500
@@ -1678,8 +1665,7 @@ DTPOWER2:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -1696,13 +1682,15 @@ DTPOWER2:
 		UseDeathTypeSuffix: false
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: building ##########
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: DTPOWER
 
 DTPYLE:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 840,-256,0, 840,512,0, 210,-512,0, -71,512,0
@@ -1765,7 +1753,7 @@ DTPYLE:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 DTPYLE.DTRUSSIA:
 	Inherits: DTPYLE
 	Buildable:
@@ -2140,20 +2128,20 @@ HPAD.DTJAPAN:
 	RenderSprites:
 		Image: hpad
 SAM.TOMORROW:
-	Inherits: SAM
+	Inherits: td_nod_samsite
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: barracks
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: SAM
+		Image: td_nod_samsite
 GTWR.ANSWER:
-	Inherits: GTWR
+	Inherits: td_gdi_guardtower
 	Buildable:
 		Prerequisites: barracks
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: GTWR
+		Image: td_gdi_guardtower
 	Armament:
 		Weapon: DTHighV
 	RangeMultiplier@LongRangeGun:
@@ -2161,17 +2149,17 @@ GTWR.ANSWER:
 	Health:
 		HP: 60000
 PBOX.TOMORROW:
-	Inherits: PBOX
+	Inherits: ra1_allies_pillbox
 	RenderSprites:
-		Image: PBOX
+		Image: ra1_allies_pillbox
 	Buildable:
 		Queue: Defence, RADefence
 		Prerequisites: barracks, ~disabled
 	-MapEditorData:
 GUN.TOMORROW:
-	Inherits: GUN
+	Inherits: td_nod_gunturret
 	RenderSprites:
-		Image: GUN
+		Image: td_nod_gunturret
 	Buildable:
 		Queue: Defence, RADefence
 		Prerequisites: barracks
@@ -2193,7 +2181,7 @@ DTBIO:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 140
-		Prerequisites: vehicleproduction, anyhq, ~techlevel.high, !bacterialmissc
+		Prerequisites: vehicleproduction, anyhq, !bacterialmissc
 		Description: Provides Tomorrow advanced technologies
 	Valued:
 		Cost: 1500
@@ -2256,7 +2244,7 @@ ATEK.ANSWER:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 50
-		Prerequisites: dtproc, ~techlevel.high
+		Prerequisites: dtproc
 		Description: Provides Allies advanced technologies.\n  Special Ability: GPS Satellite
 	Valued:
 		Cost: 1000
@@ -2293,7 +2281,7 @@ ATEK.ANSWER:
 	ProvidesPrerequisite@techcenter:
 		Prerequisite: techcenter
 	RenderSprites:
-		Image: ATEK
+		Image: ra1_allies_alliedtechcenter
 DTWOOD:
 	Inherits: ^Wall
 	Valued:
@@ -2348,12 +2336,11 @@ DTOBLI:
 		Name: Question Spire
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: dtbio, ~techlevel.high
+		Prerequisites: dtbio
 		Queue: Defence, RADefence
 		Description: Advanced base defense.\nRequires power to operate.\n  Strong vs all Ground units\n  Cannot target Aircraft
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 80085, 0, -18176
+		Bounds: 938, 1877, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 100000
@@ -2413,7 +2400,7 @@ DTEYE:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: dtpropaganda, ~techlevel.high, !cruisemissc
+		Prerequisites: dtpropaganda, !cruisemissc
 		Queue: Building, RABuilding
 		Description: Provides radar and Orbital Ion Cannon support power.\nRequires power to operate.
 	Building:
@@ -2421,8 +2408,7 @@ DTEYE:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -2483,7 +2469,7 @@ DTHQ:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: atek.answer, ~techlevel.high, !cruisemissc
+		Prerequisites: atek.answer, !cruisemissc
 		Queue: Building, RABuilding
 		Description: Provides radar and Orbital Ion Cannon support power.\nRequires power to operate.
 	Building:
@@ -2491,8 +2477,7 @@ DTHQ:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -2587,7 +2572,7 @@ DTJPOWER:
 DTRKPOD:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Selectable:
 		Bounds: 1024, 1024
 	Valued:
@@ -2830,7 +2815,7 @@ DTRMBO:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: anyhq, ~techlevel.high, dtpropaganda
+		Prerequisites: anyhq, dtpropaganda
 		Queue: Infantry, RAInfantry
 		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 		BuildDuration: 375
@@ -2851,10 +2836,10 @@ DTRMBO:
 	AutoTarget:
 		ScanRadius: 8
 	Armament:
-		Weapon: Sniper
+		Weapon: LightSniper
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Sniper
+		Weapon: LightSniper
 	Armament@c4:
 		Weapon: GenericC4
 		Cursor: c4
@@ -2886,7 +2871,7 @@ dtapc:
 		Name: Rocket APC
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: apc
+		OverrideActor: td_gdi_apc
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: barracks
@@ -2919,7 +2904,7 @@ dtapc:
 		LocalOffset: 85,85,299, 85,-85,299
 		MuzzleSequence: muzzle
 	Armament@ROCKET:
-		Weapon: APCRocket.AA
+		Weapon: APCRocket_AA
 		LocalOffset: 85,125,299
 	AttackFrontal:
 		FacingTolerance: 0
@@ -2932,25 +2917,25 @@ dtapc:
 		Weapon: UnitExplodeBig
 		EmptyWeapon: UnitExplodeBig
 	Selectable:
-		Class: apc
+		Class: td_gdi_apc
 	RenderSprites:
 		Image: dtapc
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
 ftnk.tomorrow:
-	Inherits: FTNK
+	Inherits: td_nod_flametank
 	RenderSprites:
-		Image: FTNK
+		Image: td_nod_flametank
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: dtpropaganda
 	-MapEditorData:
 
 mtnk.tomorrow:
-	Inherits: MTNK
+	Inherits: td_gdi_battletank
 	RenderSprites:
-		Image: MTNK
+		Image: td_gdi_battletank
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	-MapEditorData:
@@ -2968,7 +2953,7 @@ v2rl.tomorrow:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Description: Long-range rocket artillery.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles, Aircraft
 		BuildDurationModifier: 50
 	Valued:
@@ -2989,7 +2974,7 @@ v2rl.tomorrow:
 		Weapon: DTMissileCrawler
 		ReloadingCondition: reloading
 	Armament@AA:
-		Weapon: DTMissileCrawlerAA
+		Weapon: DTMissileCrawler_AA
 		ReloadingCondition: reloading
 	AutoTarget:
 		ScanRadius: 20
@@ -3018,9 +3003,9 @@ v2rl.tomorrow:
 		Image: dtv2rl
 
 heli.tomorrow:
-	Inherits: HELI
+	Inherits: td_nod_apacheattackhelicopter
 	RenderSprites:
-		Image: HELI
+		Image: td_nod_apacheattackhelicopter
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: anyhq
@@ -3046,7 +3031,7 @@ tran.tomorrow.e3:
 	AttackAircraft:
 		FacingTolerance: 512
 	Armament:
-		Weapon: deploytargeting.5c0
+		Weapon: deploytargeting_5c0
 		RequiresCondition: botmicro && loaded
 	AutoDeployer:
 		DeployChance: 100
@@ -3134,17 +3119,17 @@ DTE2:
 		ValidTypes: infantry ##########
 		
 rajeep.answer:
-	Inherits: RAJEEP
+	Inherits: ra1_allies_ranger
 	RenderSprites:
-		Image: RAJEEP
+		Image: ra1_allies_ranger
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: vehicleproduction
 	-MapEditorData:
 heli.answer:
-	Inherits: HELI
+	Inherits: td_nod_apacheattackhelicopter
 	RenderSprites:
-		Image: HELI
+		Image: td_nod_apacheattackhelicopter
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: anyhq
@@ -3167,7 +3152,7 @@ dtorca:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, dtstrike, ~techlevel.medium
+		Prerequisites: hpad, dtstrike
 		Queue: Aircraft, RAAircraft
 		Description: VTol Gunship with AG Missiles.\n  Strong vs Buildings, Infantry
 	Aircraft:
@@ -3218,24 +3203,24 @@ dtorca.husk:
 		Image: dtorca
 
 apc.answer:
-	Inherits: RAAPC
+	Inherits: ra1_allies_alliedapc
 	RenderSprites:
-		Image: APC
+		Image: td_gdi_apc
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: barracks
 	-MapEditorData:
 
 mrj.answer:
-	Inherits: MRJ
+	Inherits: ra1_allies_mobileradarjammer
 	RenderSprites:
-		Image: MRJ
+		Image: ra1_allies_mobileradarjammer
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: atek.answer, anyhq
 	-MapEditorData:
 arty.answer:
-	Inherits: ARTY
+	Inherits: td_nod_artillery
 	RenderSprites:
 		Image: dtarty
 	Buildable:
@@ -3289,7 +3274,7 @@ dtltnk2.answer:
 #                   UNITS USA
 ###############################################
 dtltnk2:
-	Inherits: LTNK
+	Inherits: td_nod_lighttank
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Valued:
 		Cost: 650
@@ -3314,7 +3299,7 @@ dtltnk2:
 		Prerequisites: dtshop
 		InitialLevels: 1
 jeep.dtusa:
-	Inherits: JEEP
+	Inherits: td_gdi_humvee
 	RenderSprites:
 		Image: JEEP.dtusa
 	Buildable:
@@ -3333,9 +3318,9 @@ jeep.dtusa:
 		MuzzleSequence: muzzle
 
 apc.dtusa:
-	Inherits: RAAPC
+	Inherits: ra1_allies_alliedapc
 	RenderSprites:
-		Image: APC
+		Image: td_gdi_apc
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: barracks, dtshop
@@ -3357,7 +3342,7 @@ apc.dtusa.e2:
 		DeployTicks: 0
 
 arty.dtusa:
-	Inherits: ARTY
+	Inherits: td_nod_artillery
 	RenderSprites:
 		Image: dtarty
 	Buildable:
@@ -3368,9 +3353,9 @@ arty.dtusa:
 		Prerequisites: dtshop
 		InitialLevels: 1
 heli.dtusa:
-	Inherits: HELI
+	Inherits: td_nod_apacheattackhelicopter
 	RenderSprites:
-		Image: HELI
+		Image: td_nod_apacheattackhelicopter
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: dtpropaganda
@@ -3386,9 +3371,9 @@ heli.dtusa:
 #                   UNITS Russia
 ###############################################
 hind.dtrussia:
-	Inherits: HELI
+	Inherits: td_nod_apacheattackhelicopter
 	RenderSprites:
-		Image: HIND
+		Image: ra1_soviets_hindattackhelicopter
 	Tooltip:
 		Name: Hind
 	Buildable:
@@ -3434,13 +3419,13 @@ dtstnk:
 	Turreted:
 		TurnSpeed: 40
 	Armament@PRIMARY:
-		Weapon: 227mm.stnk
+		Weapon: 227mm_stnk
 		Recoil: 96
 		RecoilRecovery: 18
 		LocalOffset: 85,85,299, 85,-85,299
 		MuzzleSequence: muzzle
 	Armament@ROCKET:
-		Weapon: APCRocket.AA
+		Weapon: APCRocket_AA
 		LocalOffset: 85,125,299
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -3460,7 +3445,7 @@ dtstnk:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Selectable:
-		Class: apc
+		Class: td_gdi_apc
 	RenderSprites:
 		Image: dtstnk
 	WithCargoPipsDecoration:
@@ -3468,7 +3453,7 @@ dtstnk:
 		RequiresSelection: true
 
 mssm.dtrussia:
-	Inherits: MSSM
+	Inherits: td_nod_ssmlauncher
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: anyhq, atek.answer
@@ -3476,7 +3461,7 @@ mssm.dtrussia:
 		Description: Long-range rocket artillery.\n  Strong vs Buildings\n  Weak vs Aircraft
 		Icon: icon
 dthtnk:
-	Inherits: HTNK
+	Inherits: td_gdi_mammothtank
 	Tooltip:
 		Name: Russian Tank
 	UpdatesPlayerStatistics:
@@ -3513,7 +3498,7 @@ dtstnk.dtrussia.e2:
 	Buildable:
 		Prerequisites: barracks, ~botplayer
 	Cargo:
-		InitialUnits: e1, e1, e2, e2, e3
+		InitialUnits: e1, e1, td_gdi_grenadier, td_gdi_grenadier, e3
 	ProductionCostMultiplier:
 		Multiplier: 150
 	AutoDeployer:
@@ -3540,7 +3525,7 @@ tran.dtrussia.e2:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: barracks, ~botplayer
 	Cargo:
-		InitialUnits: e2, e2, e2, e2, e3, e3, e2, e2, e1, e1
+		InitialUnits: td_gdi_grenadier, td_gdi_grenadier, td_gdi_grenadier, td_gdi_grenadier, e3, e3, td_gdi_grenadier, td_gdi_grenadier, e1, e1
 	ProductionCostMultiplier:
 		Multiplier: 300
 
@@ -3569,7 +3554,7 @@ dte5:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Queue: Infantry, RAInfantry
 		Description: Advanced general-purpose infantry.\n  Strong vs all Ground units
 	Mobile:
@@ -3612,7 +3597,7 @@ dtapc2:
 		Name: Tear Gas APC
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: apc
+		OverrideActor: td_gdi_apc
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: barracks
@@ -3636,7 +3621,7 @@ dtapc2:
 		LocalOffset: 85,0,299
 		MuzzleSequence: muzzle
 	Armament@ROCKET:
-		Weapon: APCRocket.AA
+		Weapon: APCRocket_AA
 		LocalOffset: 85,125,299
 	MineImmune:
 	AttackFrontal:
@@ -3650,14 +3635,14 @@ dtapc2:
 		Weapon: UnitExplodeBig
 		EmptyWeapon: UnitExplodeBig
 	Selectable:
-		Class: apc
+		Class: td_gdi_apc
 	RenderSprites:
 		Image: dtapc2
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
 dtltnk:
-	Inherits: 1TNK
+	Inherits: ra1_allies_alliedlighttank
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -3757,7 +3742,7 @@ dtfbik:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: anyhq, ~techlevel.medium, ~disabled
+		Prerequisites: anyhq, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: Heavily armored flame-throwing vehicle.\n  Strong vs Infantry, Buildings and Vehicles\n  Weak vs Tanks
 	Mobile:
@@ -3791,7 +3776,7 @@ dtdtrk:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 160
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Description: Truck with actively armed nuclear\nexplosives. Has very weak armor.
 	Valued:
 		Cost: 400

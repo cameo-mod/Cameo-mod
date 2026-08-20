@@ -64,7 +64,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public InfectorOld InfectorTrait;
 		public int[] FirepowerMultipliers = Array.Empty<int>();
 
-		[Sync]
+		[VerifySync]
 		public int Ticks;
 
 		int beingInfectedToken = Actor.InvalidConditionToken;

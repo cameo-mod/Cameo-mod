@@ -5,13 +5,13 @@ ZGruntGunG:
 	Inherits: ^LightMG
 	Report: ZMACHGUN2.wav
 	Burst: 2
-	Range: 6c0
+	Range: 6144
 ZSniper:
 	Report: ramgun2.aud
 	ValidTargets: Ground, Infantry
-	InvalidTargets: Vehicle, Water, Structure, Wall, Husk
+	InvalidTargets: Vehicle, Water, Structure, wall, Husk
 	ReloadDelay: 40
-	Range: 8c0
+	Range: 8192
 	Projectile: Bullet
 		Speed: 5c682
 	Warhead@1Dam: SpreadDamage
@@ -21,9 +21,11 @@ ZSniper:
 		InvalidTargets: BulletImmune
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 ZGrenade:
-	Inherits: Grenade
+	Inherits: ^Warhead_Demolition_Light
+	Inherits@2: ^Projectile_Grenade_Light
+	Inherits@3: ^Effect_Demolition_Light
 	ReloadDelay: 30
-	Range: 6c0
+	Range: 6144
 	Report: toss1.aud
 	Projectile: Bullet
 		Speed: 300
@@ -38,7 +40,7 @@ ZPsycoGunG:
 	Inherits: MachineGun
 	Burst: 10
 	Report: ZGATTGUN.wav
-	Range: 6c0
+	Range: 6144
 ZJeepGun:
 	Inherits: MachineGun
 	Burst: 3
@@ -57,7 +59,7 @@ ZJeepGun:
 ZLaserGun:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 50
-	Range: 5c0
+	Range: 5120
 	Report: ZLASERGUN.wav
 	Projectile: Bullet
 		Speed: 750
@@ -85,7 +87,7 @@ ZLaserGun:
 
 ZFlamer:
 	Inherits: ^FireWeapon
-	Range: 5c0
+	Range: 5120
 	Report: ZFLAMER.wav
 	ReloadDelay: 25
 	Burst: 5
@@ -119,12 +121,12 @@ ZFlamer:
 	-Warhead@2Smu:
 ZFlamerG:
 	Inherits: ZFlamer
-	Range: 6c0
+	Range: 6144
 
 ZToughMissile:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 66
-	Range: 6c666
+	Range: 6810
 	Report: ZGRENLOBX.wav
 	Projectile: Bullet
 		Speed: 250
@@ -161,7 +163,7 @@ ZToughMissileAA:
 	Report: ZGRENLOBX.wav
 	Projectile: MissileCA
 		HorizontalRateOfTurn: 16
-		Range: 7c512
+		Range: 7680
 		Speed: 333
 		RangeLimit: 12c512
 		TrailImage: smokey
@@ -190,7 +192,7 @@ ZRLMissile:
 	ReloadDelay: 50
 	Burst: 3
 	BurstDelays: 0
-	Range: 12c512
+	Range: 12800
 	Report: ZGRENLOBX.wav
 	Projectile: Bullet
 		Speed: 500
@@ -214,7 +216,7 @@ ZRLMissileAA:
 	Inherits: ZToughMissileAA
 	Burst: 3
 	BurstDelays: 3
-	Range: 12c512
+	Range: 12800
 	Report: ZGRENLOBX.wav
 	Projectile: MissileCA
 	HorizontalRateOfTurn: 16
@@ -231,20 +233,20 @@ ZCANMissile:
 	Inherits: ZToughMissile
 	Burst: 2
 	BurstDelays: 3
-	Range: 7c512
+	Range: 7680
 	Report: ZGRENLOBX.wav
 
 ZCANMissileAA:
 	Inherits: ZToughMissileAA
 	Burst: 2
 	BurstDelays: 3
-	Range: 7c512
+	Range: 7680
 	Report: ZGRENLOBX.wav
 
 ZGattling:
 	Inherits: ^LightMG
 	ReloadDelay: 3
-	Range: 6c6
+	Range: 6150
 	Report: ZGATTGUN.wav
 	Projectile: Bullet
 		Image: 50CAL
@@ -277,7 +279,7 @@ ZGattling:
 
 ZGattlingAA:
 	Inherits: ZGattling
-	Range: 7c7
+	Range: 7175
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		Spread: 333
@@ -328,13 +330,13 @@ ZHVCannon:
 ZDFCannon:
 	Inherits: 70mm
 	ReloadDelay: 20
-	Range: 7c7
+	Range: 7175
 	Report: ZLTGUN.wav
 
 ZHWCannon:
 	Inherits: ZHVCannon
-	Range: 11c111
-	MinRange: 3c333
+	Range: 11375
+	MinRange: 3405
 	ReloadDelay: 66
 	Projectile: Bullet
 		Blockable: true
@@ -346,7 +348,7 @@ ZHWCannon:
 
 ZLTNK_DEBRIS:
 	ReloadDelay: 60
-	Range: 2c768
+	Range: 2816
 	Projectile: Bullet
 		Speed: 32, 64
 		Blockable: false

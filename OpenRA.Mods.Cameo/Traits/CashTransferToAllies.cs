@@ -1,4 +1,4 @@
-﻿#region Copyright & License Information
+#region Copyright & License Information
 /*
  * Copyright 2007-2018 The OpenRA Developers (see AUTHORS)
  * This file is part of OpenRA, which is free software. It is made
@@ -34,14 +34,14 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		[FluentReference]
 		[Desc("Descriptive label for the creeps checkbox in the lobby.")]
-		public readonly string CheckboxLabel = "Team Cash Sharing";
+		public readonly string CheckboxLabel = "Auto Cash Sharing";
 
 		[FluentReference]
 		[Desc("Tooltip description for the creeps checkbox in the lobby.")]
 		public readonly string CheckboxDescription = "Automatically share cash among teammates";
 
 		[Desc("Default value of the creeps checkbox in the lobby.")]
-		public readonly bool CheckboxEnabled = true;
+		public readonly bool CheckboxEnabled = false;
 
 		[Desc("Prevent the creeps state from being changed in the lobby.")]
 		public readonly bool CheckboxLocked = false;
@@ -69,7 +69,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		int addedticks;
 		public bool Enabled { get; private set; }
 
-		[Sync]
+		[VerifySync]
 		int ticks;
 
 		Dictionary<int, List<PlayerResources>> teams;

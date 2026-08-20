@@ -1,0 +1,774 @@
+protoss_nexus:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@ref: ^SCRefineryCommon
+	Inherits@shape: ^3x2Shape
+	Inherits@radar: ^RadarBuilding
+	-Production@Upgrades:
+	-ProductionBar@Upgrades:
+	Inherits@conyard: ^Conyard
+	Inherits@POWERDOWN: ^DisableOnPowerDown
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Nexus
+	Power:
+		Amount: 100
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	WithIdleOverlay@shield1:
+		RequiresCondition: !disabled && shielded && !shieldhit && !build-incomplete
+	WithIdleOverlay@shield_damage:
+		RequiresCondition: !disabled && shielded && shieldhit && !build-incomplete
+	Production@INFANTRY:
+		Produces: Infantry
+		PauseOnCondition: disabled
+	ProductionQueue@INFANTRY:
+		Type: Infantry
+		DisplayOrder: 2
+		Group: Infantry
+		LowPowerModifier: 300
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		InfiniteBuildLimit: 10
+	ProductionBar@INFANTRY:
+		ProductionType: Infantry
+	# Production@NORMAL:
+	# 	-RequiresCondition:
+	# -Production@CLASSICPRODUCTIONQUEUES:
+	# ProductionBar@BUILDING:
+	# 	-RequiresCondition:
+	# ProductionBar@DEFENCE:
+	# 	-RequiresCondition:
+	# -ProductionBar@RABUILDING:
+	# -ProductionBar@RADEFENCE:
+	ProductionQueue@Building:
+		LowPowerModifier: 100
+	ProductionQueue@Defense:
+		LowPowerModifier: 100
+	WithBuildingPlacedAnimation:
+	ProvidesPrerequisite@buildingname:
+	RallyPoint: ##########
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0 #-1323,1280,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesRadar:
+		RequiresCondition: !jammed
+	Refinery:
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Building, Defence, RABuilding, RADefence
+		Sequence: build
+	Transforms:
+		IntoActor: protoss_mobilenexus
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_pylon:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@power: ^PowerPlant
+	Inherits@storage: ^StoresResources
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Pylon
+	Valued:
+		Cost: 1000
+	Power:
+		Amount: 250
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~protoss_nexus
+		Queue: Building, RABuilding
+		Description: actor_scpylon.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: pshbld03.aud
+	Health:
+		HP: 250000
+	StoresResources:
+		Capacity: 5000
+	RevealsShroud:
+		Range: 5c0
+	GrantConditionOnPrerequisite@protoss_upgrade_upgradepylonlevel1:
+		Condition: protoss_upgrade_upgradepylonlevel1
+		Prerequisites: protoss_upgrade_upgradepylonlevel1
+	Power@protoss_upgrade_upgradepylonlevel1:
+		Amount: 150
+		RequiresCondition: protoss_upgrade_upgradepylonlevel1 && !protoss_upgrade_upgradepylonlevel2
+	GrantConditionOnPrerequisite@protoss_upgrade_upgradepylonlevel2:
+		Condition: protoss_upgrade_upgradepylonlevel2
+		Prerequisites: protoss_upgrade_upgradepylonlevel2
+	Power@protoss_upgrade_upgradepylonlevel2:
+		Amount: 200
+		RequiresCondition: protoss_upgrade_upgradepylonlevel2
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: protoss_upgrade_upgradepylonlevel1, protoss_upgrade_upgradepylonlevel2
+
+protoss_assimilator:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^3x2Shape
+	Inherits@ref: ^SCRefineryCommon
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: Assimilator
+	Power:
+		Amount: 0
+	Buildable:
+		Prerequisites: ~protoss_nexus
+		BuildPaletteOrder: 20
+		Queue: Building, RABuilding
+		Description: actor_scassimilator.description
+	Building:
+		Footprint: _x_ xxx ===
+		BuildSounds: pshbld03.aud
+		Dimensions: 3,3
+	FreeActor@1:
+		Actor: protoss_probe
+		SpawnOffset: 0,2
+		Facing: 540
+	FreeActor@2:
+		Actor: protoss_probe
+		SpawnOffset: 0,2
+		Facing: 540
+	SelectionDecorations:
+	Refinery:
+	DamageMultiplier@assimilatorupg:
+		RequiresCondition: assimilatorupg
+		Modifier: 50
+	WithIdleOverlay@smoke:
+		RequiresCondition: assimilatorupg
+		Sequence: smoke
+		Palette: greyscale
+	SeedsResource:
+		ResourceType: SCGas2
+		Interval: 125
+		RequiresCondition: assimilatorupg
+	CashTrickler@assimilatorupg:
+		RequiresCondition: assimilatorupg
+		Interval: 50
+		Amount: 25
+		ShowTicks: True
+	ProvidesPrerequisite:
+		Prerequisite: scprefineryupgradeavailable
+		RequiresCondition: !assimilatorupg
+	Pluggable:
+		Offset: 1,0
+		Conditions:
+			protoss_assimilator: assimilatorupg
+		Requirements:
+			protoss_assimilator: !build-incomplete && !assimilatorupg
+	Voiced:
+		VoiceSet: SCRefineryVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: protoss_vespenegascollector
+
+protoss_vespenegascollector:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Vespene Gas Collector
+	Valued:
+		Cost: 2500
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~protoss_nexus, scprefineryupgradeavailable
+		Description: actor_scpvespenegascollector.description
+	Plug:
+		Type: protoss_assimilator
+	RenderSprites:
+		Image: upscrefinery2
+
+protoss_gateway:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^3x2Shape
+	Inherits@supply: ^SCUnitProduction
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Gateway
+	Power:
+		Amount: 0
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~protoss_nexus
+		Queue: Building, RABuilding
+		Description: actor_scgateway.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	ProductionQueue@INFANTRY:
+		LowPowerModifier: 10000
+	ProductionCostMultiplier@protoss:
+		Multiplier: 125
+	ProductionTimeMultiplier@protoss:
+		Multiplier: 125
+	DamageMultiplier@protoss:
+		Modifier: 75
+	ProvidesPrerequisite@buildingname:
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	SelectionDecorations:
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0
+		ExitCell: 0,2
+		Facing: 540
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_forge:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Forge
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 150000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 40
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~protoss_nexus
+		Queue: Building, RABuilding
+		Description: actor_scforge.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_cyberneticscore:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Cybernetics Core
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 150000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 50
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~protoss_nexus, protoss_gateway
+		Queue: Building, RABuilding
+		Description: actor_sccyberneticscore.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_shieldbattery:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@EMP: ^DefenseTurretedEMP
+	Inherits@shape: ^3x2Shape
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Shield Battery
+	Building:
+		Footprint: === =x=
+		Dimensions: 3,2
+		BuildSounds: pshbld03.aud
+	Buildable:
+		BuildPaletteOrder: 140
+		Prerequisites: ~protoss_nexus, protoss_gateway
+		Queue: Building, RABuilding
+		Description: actor_scshieldbattery.description
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	Health:
+		HP: 100000
+	RevealsShroud:
+		Range: 10000
+	Armament:
+		Weapon: Heal
+		#Cursor: heal
+		#OutsideRangeCursor: heal
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+	AttackTurreted:
+	Turreted:
+		TurnSpeed: 40
+	WithEmbeddedTurretSpriteBody:
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Infantry, Vehicle
+	ProximityExternalCondition@shieldgen:
+		Range: 10000
+		Condition: shieldgen
+		EnableSound: shielded_on.aud
+		DisableSound: shielded_on.aud
+		RequiresCondition: !disabled
+	WithRangeCircle@shieldgen:
+		Range: 10000
+		Type: shield
+		Color: 8888FF88
+		RequiresCondition: !disabled
+	RallyPoint:
+	RepairsUnits:
+		ValuePercentage: 0
+		HpPerStep: 500
+		Interval: 12
+	-WithSpriteBody:
+	-GivesBuildableArea:
+	-WithDeathAnimation:
+	FirepowerMultiplier@protoss_upgrade_plasmashields:
+		Modifier: 200
+		RequiresCondition: protoss_upgrade_plasmashields
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_roboticsfacility:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^3x2Shape
+	Inherits@supply: ^SCUnitProduction
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Robotics Facility
+	Power:
+		Amount: 0
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~protoss_nexus, protoss_cyberneticscore
+		Queue: Building, RABuilding
+		Description: actor_scroboticsfacility.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	ProductionQueue@VEHICLE:
+		LowPowerModifier: 10000
+	ProductionCostMultiplier@protoss:
+		Multiplier: 125
+	ProductionTimeMultiplier@protoss:
+		Multiplier: 125
+	DamageMultiplier@protoss:
+		Modifier: 75
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	SelectionDecorations:
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_stargate:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^3x2Shape
+	Inherits@supply: ^SCUnitProduction
+	Inherits@hpad: ^IsAircraftFactory
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Stargate
+	Power:
+		Amount: 0
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~protoss_nexus, protoss_cyberneticscore
+		Queue: Building, RABuilding
+		Description: actor_scstargate.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	ProductionQueue@AIRCRAFT:
+		LowPowerModifier: 10000
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_citadelofadun:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Citadel of Adun
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 200000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 80
+		BuildDuration: 625
+		BuildDurationModifier: 100
+		Prerequisites: ~protoss_nexus, protoss_cyberneticscore
+		Queue: Building, RABuilding
+		Description: actor_sccitadelofadun.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_roboticssupportbay:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Robotics Support Bay
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 200000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 90
+		BuildDuration: 625
+		BuildDurationModifier: 100
+		Prerequisites: ~protoss_nexus, protoss_roboticsfacility
+		Queue: Building, RABuilding
+		Description: actor_scroboticssupportbay.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_fleetbeacon:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Fleet Beacon
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 130
+		Prerequisites: ~protoss_nexus, protoss_stargate, !SCPurifierStrike
+		Queue: Building, RABuilding
+		Description: actor_scfleetbeacon.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	IonCannonPower:
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Icons:
+			1: ioncannon
+		Cursor: ioncannon
+		ChargeInterval: 7500
+		WeaponDelay: 0
+		Weapon: SteelIonCannon
+		Effect: tsioncannon
+		EffectSequence: targeting
+		EffectPalette: ra2effect
+		Names:
+			1: power_ioncannon.name
+		Descriptions:
+			1: power_ioncannon.description
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		EndChargeTextNotification: Ion Cannon ready.
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		OnFireSound: ion1.aud
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayRadarPing: True
+		CameraRange: 6000
+		CameraRemoveDelay: 125
+		CameraActor: CAMERA.small
+		SupportPowerPaletteOrder: 20
+	SupportPowerChargeBar:
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: SCPurifierStrike
+		RequiresPrerequisites: global-swlimit
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_templararchives:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Templar Archives
+	Valued:
+		Cost: 2500
+	Health:
+		HP: 250000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 110
+		BuildDuration: 750
+		BuildDurationModifier: 100
+		Prerequisites: ~protoss_nexus, protoss_citadelofadun, protoss_gateway
+		Queue: Building, RABuilding
+		Description: actor_sctemplararchives.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_observatory:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@radar: ^RadarBuilding
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Observatory
+	Valued:
+		Cost: 2500
+	Health:
+		HP: 250000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 100
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~protoss_nexus, protoss_roboticsfacility
+		Queue: Building, RABuilding
+		Description: actor_scobservatory.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+protoss_arbitertribunal:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Arbiter Tribunal
+	Valued:
+		Cost: 2500
+	Health:
+		HP: 250000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 120
+		BuildDuration: 750
+		BuildDurationModifier: 100
+		Prerequisites: ~protoss_nexus, protoss_stargate, protoss_templararchives
+		Queue: Building, RABuilding
+		Description: actor_scarbitertribunal.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+####################################################################################################
+#		BUILDING ZERG
+####################################################################################################

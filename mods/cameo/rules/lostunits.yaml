@@ -1,5 +1,5 @@
 NODWEAP:
-	Inherits: WEAP
+	Inherits: td_gdi_weaponsfactory
 	Tooltip:
 		Name: Black Hand Factory
 	-Buildable:
@@ -43,27 +43,27 @@ NODWEAP:
 		String: Biohazard
 
 RNBGGY:
-	Inherits: BGGY
+	Inherits: td_nod_buggy
 	RenderSprites:
-		Image: BGGY
+		Image: td_nod_buggy
 	Buildable:
 		Queue: Vehicle
 		Prerequisites: vehicleproduction
 	-MapEditorData:
 
 RNBIKE:
-	Inherits: BIKE
+	Inherits: td_nod_reconbike
 	RenderSprites:
-		Image: BIKE
+		Image: td_nod_reconbike
 	Buildable:
 		Queue: Vehicle
 		Prerequisites: vehicleproduction
 	-MapEditorData:
 
 RNV2RL:
-	Inherits: V2RL
+	Inherits: ra1_soviets_v2rocketlauncher
 	RenderSprites:
-		Image: V2RL
+		Image: ra1_soviets_v2rocketlauncher
 	Buildable:
 		Queue: Vehicle
 		Prerequisites: vehicleproduction
@@ -79,7 +79,7 @@ RNAPC.Husk:
 		Image: rnapc
 
 RNLTNK:
-	Inherits: LTNK
+	Inherits: td_nod_lighttank
 	Valued:
 		Cost: 670
 	Tooltip:
@@ -107,7 +107,7 @@ RNLTNK.Husk:
 		Image: rnltnk
 
 RNFTNK:
-	Inherits: FTNK
+	Inherits: td_nod_flametank
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -163,24 +163,24 @@ NODBIO.Husk:
 		Name: Black Hand Biological Lab (Destroyed)
 
 RNE4:
-	Inherits: E4
+	Inherits: td_nod_flamethrower
 	RenderSprites:
-		Image: E4
+		Image: td_nod_flamethrower
 	Buildable:
 		Prerequisites: nodbio
 		Queue: Biolab.TECHNOD
 	-MapEditorData:
 
 RNE5:
-	Inherits: E5
+	Inherits: td_nod_chemicalwarrior
 	RenderSprites:
-		Image: E5
+		Image: td_nod_chemicalwarrior
 	Buildable:
 		Prerequisites: nodbio
 		Queue: Biolab.TECHNOD
 	-MapEditorData:
 
-E3FLAMER:
+ra1_soviets_firerocketsoldier:
 	Inherits: E3
 	Valued:
 		Cost: 400
@@ -380,7 +380,7 @@ techgdrone:
 		Delay: 30
 		Count: 1
 	Selectable:
-		DecorationBounds: 36394, 27306
+		DecorationBounds: 853, 640
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -412,7 +412,7 @@ UniversalHusk:
 	Inherits: ^TechBuilding
 	Inherits@shape: ^2x2Shape
 	Selectable:
-		Bounds: 233002, 87381
+		Bounds: 6144, 3072
 	OwnerLostAction:
 		Action: ChangeOwner
 	Building:
@@ -577,7 +577,7 @@ aoecobra:
 		ValidTypes: vehicle ##########
 	RenderSprites:
 ###########################################################################################
-## Black Hand Custom
+## Black td_nod_handofnod Custom
 ###########################################################################################
 
 BHFACT:
@@ -585,7 +585,7 @@ BHFACT:
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQ: ^CPQCondition
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 3500
 	Tooltip:
@@ -609,7 +609,7 @@ BHFACT:
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
-		IntoActor: mcv.nod
+		IntoActor: td_nod_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	TransformsIntoMobile:
@@ -622,7 +622,7 @@ BHFACT:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
 		Condition: factundeploy
@@ -675,7 +675,7 @@ BHFACT:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factionnod:
 		Prerequisite: mmbhnod
@@ -693,7 +693,7 @@ BHNUK2:
 	Inherits: NUK2
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Building, RABuilding
 		Description: Provides more power, cheaper than the\nstandard Power Plant
 
@@ -727,7 +727,7 @@ BHSILO:
 	RenderSprites:
 		Image: silo
 BHHAND:
-	Inherits: HAND
+	Inherits: td_nod_handofnod
 	Tooltip:
 		Name: Biolab
 	Buildable:
@@ -751,7 +751,7 @@ BHHAND:
 		RequiresCondition: classicproductionqueues
 
 BHWEAP:
-	Inherits: WEAP
+	Inherits: td_gdi_weaponsfactory
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: bhproc
@@ -841,7 +841,7 @@ BHHQ:
 	Inherits: HQ
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: bhproc, ~techlevel.medium
+		Prerequisites: bhproc
 		Queue: Building, RABuilding
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	AirstrikePower:
@@ -874,7 +874,7 @@ BHFIX:
 		Image: fix
 
 BHEYE:
-	Inherits: EYE
+	Inherits: td_gdi_advancedcommunicationscenter
 	Valued:
 		Cost: 1800
 	Tooltip:
@@ -883,14 +883,14 @@ BHEYE:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Queue: Building, RABuilding
 		Description: Provides radar and Orbital Ion Cannon support power.\nUnlocks Mammoth Tank and Commando.\nRequires power to operate.
 	RenderSprites:
-		Image: eye
+		Image: td_gdi_advancedcommunicationscenter
 
 BHTMPL:
-	Inherits: TMPL
+	Inherits: td_nod_templeofnod
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@shape: ^3x2Shape
 	HitShape:
@@ -904,15 +904,15 @@ BHTMPL:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Queue: Building, RABuilding
 		Description: Provides Nuclear Strike support power.\nUnlocks Stealth Tank, Chem. Warrior and Obelisk of Light.\nRequires power to operate.
 	ProvidesPrerequisite@buildingname:
 	RenderSprites:
-		Image: tmpl
+		Image: td_nod_templeofnod
 
 BHGUN:
-	Inherits: GUN
+	Inherits: td_nod_gunturret
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -928,37 +928,37 @@ BHGUN:
 	Power:
 		Amount: -30
 	RenderSprites:
-		Image: gun
+		Image: td_nod_gunturret
 
 BHSAM:
-	Inherits: SAM
+	Inherits: td_nod_samsite
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: hand
+		Prerequisites: td_nod_handofnod
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: sam
+		Image: td_nod_samsite
 
 BHOBLI:
-	Inherits: OBLI
+	Inherits: td_nod_obeliskoflight
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: bhtmpl, ~techlevel.high
+		Prerequisites: bhtmpl
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: obli
+		Image: td_nod_obeliskoflight
 
 BHGTWR:
-	Inherits: GTWR
+	Inherits: td_gdi_guardtower
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: barracks
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: gtwr
+		Image: td_gdi_guardtower
 
 BHCYCL:
-	Inherits: CYCL
+	Inherits: cycl
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: fact
@@ -984,7 +984,7 @@ BHBRIK:
 		Type: Heavy
 
 BHBIKE:
-	Inherits: BIKE
+	Inherits: td_nod_reconbike
 	Tooltip:
 		Name: Black Bike
 	UpdatesPlayerStatistics:
@@ -1030,9 +1030,9 @@ BHLTNK:
 		Image: rnltnk
 
 BHV2RL:
-	Inherits: V2RL
+	Inherits: ra1_soviets_v2rocketlauncher
 	RenderSprites:
-		Image: V2RL
+		Image: ra1_soviets_v2rocketlauncher
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 70
@@ -1114,7 +1114,7 @@ BHE1:
 		Prerequisites: foolsgems
 
 foolsgems:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: 4000 Gems
 	Buildable:
@@ -1705,7 +1705,7 @@ galagabee:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium, ~wip-content
+		Prerequisites: hpad, anyhq, ~disabled
 		Queue: Aircraft, RAAircraft
 		Description: Light Aircraft with Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -1750,7 +1750,7 @@ galagabutterfly:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium, ~wip-content
+		Prerequisites: hpad, anyhq, ~disabled
 		Queue: Aircraft, RAAircraft
 		Description: Light Aircraft with Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -1794,7 +1794,7 @@ smflamechomp:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium, ~wip-content
+		Prerequisites: hpad, anyhq, ~disabled
 		Queue: Aircraft, RAAircraft
 		Description: Light Aircraft with Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -1838,7 +1838,7 @@ smangrysun:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium, ~wip-content
+		Prerequisites: hpad, anyhq, ~disabled
 		Queue: Aircraft, RAAircraft
 		Description: Light Aircraft with Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -1882,7 +1882,7 @@ smgoomba:
 		Queue: Infantry
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 200
-		Prerequisites: xhosp, ~wip-content
+		Prerequisites: xhosp, ~disabled
 		Description: Slow undead. Attacks in close combat.
 	Health:
 		HP: 6000 #25000
@@ -1916,7 +1916,7 @@ smgoomba2:
 		Queue: Infantry
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 200
-		Prerequisites: xhosp, ~wip-content
+		Prerequisites: xhosp, ~disabled
 		Description: Slow undead. Attacks in close combat.
 	Health:
 		HP: 7500 #25000
@@ -1949,7 +1949,7 @@ smbeetle:
 		Queue: Infantry, Vehicle
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 200
-		Prerequisites: xhosp, ~wip-content
+		Prerequisites: xhosp, ~disabled
 		Description: Slow undead. Attacks in close combat.
 	Health:
 		HP: 50000 #100000
@@ -1985,7 +1985,7 @@ smkoopa:
 		Queue: Infantry, Vehicle
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 200
-		Prerequisites: xhosp, ~wip-content
+		Prerequisites: xhosp, ~disabled
 		Description: Slow undead. Attacks in close combat.
 	Health:
 		HP: 25000 #100000
@@ -2021,7 +2021,7 @@ smkoopa2:
 		Queue: Infantry, Vehicle
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 200
-		Prerequisites: xhosp, ~wip-content
+		Prerequisites: xhosp, ~disabled
 		Description: Slow undead. Attacks in close combat.
 	Health:
 		HP: 30000 #100000
@@ -2060,7 +2060,7 @@ bcltnk:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Fast, light tank.\n  Strong vs Vehicles, Tanks\n  Weak vs Infantry
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 	Mobile:
 		Speed: 80
 	Health:
@@ -2100,7 +2100,7 @@ bcbtnk:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Fast, light tank.\n  Strong vs Vehicles, Tanks\n  Weak vs Infantry
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 	Mobile:
 		Speed: 120
 	Health:
@@ -2139,7 +2139,7 @@ bchtnk:
 		BuildPaletteOrder: 40
 		Queue: Vehicle, RAVehicle
 		Description: General-Purpose GDI Tank.\n  Strong vs Tanks, Vehicles\n  Weak vs Infantry
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled
 	Mobile:
 		Speed: 85
 	Health:
@@ -2178,10 +2178,10 @@ digdugpooka:
 		Name: Pooka
 		GenericName: Pooka
 	Buildable:
-		Queue: Infantry, Vehicle, ~wip-content
+		Queue: Infantry, Vehicle, ~disabled
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 200
-		Prerequisites: xhosp, ~wip-content
+		Prerequisites: xhosp, ~disabled
 		Description: Slow undead. Attacks in close combat.
 	Health:
 		HP: 25000 #100000
@@ -2223,10 +2223,10 @@ digdugfigars:
 		Name: Fygar
 		GenericName: Fygar
 	Buildable:
-		Queue: Infantry, Vehicle, ~wip-content
+		Queue: Infantry, Vehicle, ~disabled
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 200
-		Prerequisites: xhosp, ~wip-content
+		Prerequisites: xhosp, ~disabled
 		Description: Slow undead. Attacks in close combat.
 	Health:
 		HP: 25000 #100000
@@ -2265,7 +2265,7 @@ digdugfigars:
 pvzpea1:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Selectable:
 		Bounds: 1024, 1024
 	Valued:

@@ -1,0 +1,406 @@
+# upgrades_intent.yaml — MASTER_REPORT R4: one line of intent per upgrade.
+# Seeded for the Tiberian Sun faction group (TS GDI, TS Nod, CABAL, Forgotten),
+# whose upgrade economies were hand-verified in the TB23 normalization work.
+# Other factions' upgrades are reported by audit_upgrades.py as "no intent
+# entry" until transcribed — that list is the transcription TODO.
+#
+# Fields:
+#   faction:   owning faction slug
+#   effect:    what the tooltip promises (free text, for humans)
+#   coverage:  roster_wide | infantry | vehicles | aircraft | listed | narrow
+#   phase:     early | mid | late
+#   drawbacks: space-separated trait base names that are INTENTIONALLY
+#              anti-buff (e.g. damagemultiplier for a glass-cannon upgrade)
+
+######################## TS GDI — Radar tier ########################
+up_seretraining:
+	faction: tsgdi
+	effect: infantry speed +20% and damage taken -25%
+	coverage: infantry
+	phase: mid
+up_tsprojectileimprovements:
+	faction: tsgdi
+	effect: range +20% and firepower +20% for projectile users
+	coverage: listed
+	phase: mid
+up_mechanicalreliability:
+	faction: tsgdi
+	effect: vehicle self-repair, damage taken -10%, speed +10%
+	coverage: vehicles
+	phase: mid
+######################## TS GDI — Lab tier ##########################
+up_ceramicarmor:
+	faction: tsgdi
+	effect: damage taken -25%, speed +10%
+	coverage: listed
+	phase: late
+up_mechengineering:
+	faction: tsgdi
+	effect: mech damage taken -20%, speed +25%
+	coverage: listed
+	phase: late
+up_sonicweaponry:
+	faction: tsgdi
+	effect: unlocks sonic weapon variants
+	coverage: listed
+	phase: late
+up_railgunweaponry:
+	faction: tsgdi
+	effect: unlocks railgun weapon variants
+	coverage: listed
+	phase: late
+up_modernfirecontrolsystems:
+	faction: tsgdi
+	effect: team-wide reload -10%, accuracy +10%, range/vision +5%
+	coverage: roster_wide
+	phase: late
+
+######################## TS Nod — Radar tier ########################
+up_infiltrationkit:
+	faction: tsnod
+	effect: stealth suits, +25% speed, spy infiltration
+	coverage: listed
+	phase: mid
+up_mobilityspecialization:
+	faction: tsnod
+	effect: light vehicles/aircraft armor, accuracy, speed, vision, range
+	coverage: listed
+	phase: mid
+up_auxiliaryweapon:
+	faction: tsnod
+	effect: adds/improves secondary weapons; reload -10%, firepower +10%
+	coverage: listed
+	phase: mid
+######################## TS Nod — Lab tier ##########################
+up_stealthfieldsimprovements:
+	faction: tsnod
+	effect: stealth units damage taken -20%; harvester stealth
+	coverage: listed
+	phase: late
+up_tiberiumlenses:
+	faction: tsnod
+	effect: unlocks laser weapon variants
+	coverage: listed
+	phase: late
+up_tiberiumcoremissiles:
+	faction: tsnod
+	effect: unlocks tiberium-core missile variants
+	coverage: listed
+	phase: late
+up_advancedtiberiumrefinement:
+	faction: tsnod
+	effect: vehicle speed +25%; unlocks Waste Facility
+	coverage: vehicles
+	phase: late
+up_willofkane:
+	faction: tsnod
+	effect: team-wide infantry firepower scaling with missing health
+	coverage: infantry
+	phase: late
+
+######################## CABAL — Radar tier #########################
+cabalmobilitymatrix:
+	faction: cabal
+	effect: walkers speed +25%, damage taken -10%
+	coverage: listed
+	phase: mid
+cabaldarkarmament:
+	faction: cabal
+	effect: infantry extra weapons, reload -10%
+	coverage: infantry
+	phase: mid
+cabaltibcatalysticon:
+	faction: cabal
+	effect: unlocks neutron shells
+	coverage: listed
+	phase: mid
+cabalradarhack:
+	faction: cabal
+	effect: unlocks Radar Hack support power
+	coverage: narrow
+	phase: mid
+cabalnetworkprotocols:
+	faction: cabal
+	effect: all units firepower +8%, reload -5%
+	coverage: roster_wide
+	phase: mid
+######################## CABAL — Research tier ######################
+cabalbackupsystemicon:
+	faction: cabal
+	effect: heavy vehicles revive as husks
+	coverage: listed
+	phase: late
+cabalhandoflegion:
+	faction: cabal
+	effect: free Hackers from Tech Center; Hacker speed
+	coverage: narrow
+	phase: late
+cabaldataworm:
+	faction: cabal
+	effect: unlocks Data Worm support power
+	coverage: narrow
+	phase: late
+cabalfirewallprotocol:
+	faction: cabal
+	effect: mind-control / hijack immunity
+	coverage: roster_wide
+	phase: late
+cabalclusterwarhead:
+	faction: cabal
+	effect: Missile Silo neutron cluster retrofit
+	coverage: narrow
+	phase: late
+upcabalreinforcedchassis:
+	faction: cabal
+	effect: light walkers damage taken -15%
+	coverage: listed
+	phase: late
+upcabalovercharge:
+	faction: cabal
+	effect: heavy walkers + aircraft reload -15%
+	coverage: listed
+	phase: late
+upcabalneuraluplink:
+	faction: cabal
+	effect: Hacker reload -20%
+	coverage: narrow
+	phase: late
+upcabalreclamation:
+	faction: cabal
+	effect: cyborg self-repair
+	coverage: listed
+	phase: late
+upcabalfullassimilation:
+	faction: cabal
+	effect: all units vision and detection +20%
+	coverage: roster_wide
+	phase: late
+
+######################## Forgotten — Radar tier #####################
+up_genomemapping:
+	faction: forgotten
+	effect: infantry damage taken -20%; range/vision/speed +10%
+	coverage: infantry
+	phase: mid
+up_chemicalfuel:
+	faction: forgotten
+	effect: vehicle speed +30%
+	coverage: vehicles
+	phase: mid
+up_mypet:
+	faction: forgotten
+	effect: units spawn visceroids on death
+	coverage: roster_wide
+	phase: mid
+######################## Forgotten — Lab tier #######################
+up_junkarmor:
+	faction: forgotten
+	effect: vehicles damage taken -25%
+	coverage: vehicles
+	phase: late
+up_tiberiumboosters:
+	faction: forgotten
+	effect: missile/shell range +25%
+	coverage: listed
+	phase: late
+up_unity:
+	faction: forgotten
+	effect: proximity aura, damage taken -2% per nearby ally (max -20%)
+	coverage: roster_wide
+	phase: late
+up_chemicalweapons:
+	faction: forgotten
+	effect: adds/upgrades chemical weapons
+	coverage: listed
+	phase: late
+up_tiberiumadaptability:
+	faction: forgotten
+	effect: team-wide health regeneration
+	coverage: roster_wide
+	phase: late
+ra_upgrade_shtoradefensesystem:
+	faction: soviet
+	effect: Hammer Tanks gain periodic blinding countermeasure laser
+	coverage: narrow
+	phase: late
+
+######################## Schwarzer Mond — Radar tier ##################
+schwarzer_mond_upgrade_crystallens:
+	faction: lnaxis
+	effect: multi-shot yellow laser weapons gain +1 burst
+	coverage: listed
+	phase: mid
+schwarzer_mond_upgrade_lunaralloys:
+	faction: lnaxis
+	effect: all units take 10% less damage
+	coverage: roster_wide
+	phase: mid
+schwarzer_mond_upgrade_helium3:
+	faction: lnaxis
+	effect: hydrogen plants produce 50% more power; all vehicles and aircraft gain 25% speed and turn rate
+	coverage: narrow
+	phase: mid
+######################## Schwarzer Mond — Tech tier ###################
+schwarzer_mond_upgrade_amplifiedlens:
+	faction: lnaxis
+	effect: multi-shot yellow laser weapons gain another +1 burst
+	coverage: listed
+	phase: late
+schwarzer_mond_upgrade_vrilpoweredweapons:
+	faction: lnaxis
+	effect: cannon vehicles deal +25% firepower and Tesla-type damage
+	coverage: listed
+	phase: late
+schwarzer_mond_upgrade_vrilinfusion:
+	faction: lnaxis
+	effect: all infantry gain 25% firepower, 25% speed/turn rate and 15% damage reduction
+	coverage: infantry
+	phase: late
+schwarzer_mond_upgrade_moonpropaganda:
+	faction: lnaxis
+	effect: all infantry deal +10% firepower
+	coverage: infantry
+	phase: late
+schwarzer_mond_upgrade_cryptofascism:
+	faction: lnaxis
+	effect: every living unit generates 1 credit per second
+	coverage: roster_wide
+	phase: late
+
+######################## CABAL � additional entries ################
+cabal_promotion_ascended:
+	faction: cabal
+	effect: replaces Rocket Cyborg with the Ascended anti-armor walker
+	coverage: narrow
+	phase: mid
+cabal_promotion_beholder:
+	faction: cabal
+	effect: unlocks the Beholder promoted unit
+	coverage: narrow
+	phase: mid
+cabal_promotion_coredefender:
+	faction: cabal
+	effect: unlocks the Core Defender promoted unit
+	coverage: narrow
+	phase: late
+cabal_promotion_cyborgassassin:
+	faction: cabal
+	effect: unlocks the Cyborg Assassin promoted unit
+	coverage: narrow
+	phase: mid
+cabal_promotion_cyborgcommandov2:
+	faction: cabal
+	effect: unlocks the Cyborg Commando V2 promoted unit
+	coverage: narrow
+	phase: mid
+cabal_promotion_devout:
+	faction: cabal
+	effect: replaces Cyborg Infantry with the more powerful Devout
+	coverage: narrow
+	phase: mid
+cabal_promotion_hunterkillermk1elite:
+	faction: cabal
+	effect: unlocks the Super Hunter Killer promoted unit
+	coverage: narrow
+	phase: mid
+cabal_promotion_manticore:
+	faction: cabal
+	effect: unlocks the Heavy Reaper promoted unit
+	coverage: narrow
+	phase: mid
+cabal_promotion_mothership:
+	faction: cabal
+	effect: unlocks the Mothership promoted unit
+	coverage: narrow
+	phase: late
+cabal_promotion_overkillgunship:
+	faction: cabal
+	effect: unlocks the Overkill Gunship promoted unit
+	coverage: narrow
+	phase: mid
+cabal_promotion_spidercnc4:
+	faction: cabal
+	effect: unlocks the Spider CNC4 promoted unit
+	coverage: narrow
+	phase: mid
+cabal_promotion_widow:
+	faction: cabal
+	effect: unlocks the Widow promoted unit
+	coverage: narrow
+	phase: mid
+cabal_upgrade_backupsystems:
+	faction: cabal
+	effect: heavy vehicles revive as husks
+	coverage: listed
+	phase: late
+cabal_upgrade_cyberneticplating:
+	faction: cabal
+	effect: secondary armor takes increased damage (drawback)
+	coverage: listed
+	phase: mid
+	drawbacks: damagemultiplier
+cabal_upgrade_darkarmament:
+	faction: cabal
+	effect: infantry extra weapons, reload -10%
+	coverage: infantry
+	phase: mid
+cabal_upgrade_dataworm:
+	faction: cabal
+	effect: unlocks Data Worm support power
+	coverage: narrow
+	phase: late
+cabal_upgrade_firewallprotocol:
+	faction: cabal
+	effect: mind-control / hijack immunity
+	coverage: roster_wide
+	phase: late
+cabal_upgrade_fullassimilation:
+	faction: cabal
+	effect: all units vision and detection +20%
+	coverage: roster_wide
+	phase: late
+cabal_upgrade_handof:
+	faction: cabal
+	effect: free Hackers from Tech Center; Hacker speed
+	coverage: narrow
+	phase: late
+cabal_upgrade_mobilitymatrix:
+	faction: cabal
+	effect: walkers speed +25%, damage taken -10%
+	coverage: listed
+	phase: mid
+cabal_upgrade_networkedcombatprotocols:
+	faction: cabal
+	effect: all units firepower +8%, reload -5%
+	coverage: roster_wide
+	phase: mid
+cabal_upgrade_neuraluplink:
+	faction: cabal
+	effect: Hacker reload -20%
+	coverage: narrow
+	phase: late
+cabal_upgrade_neutronnuclearcatalyst:
+	faction: cabal
+	effect: unlocks neutron shells
+	coverage: listed
+	phase: mid
+cabal_upgrade_overchargedservos:
+	faction: cabal
+	effect: heavy walkers + aircraft reload -15%
+	coverage: listed
+	phase: late
+cabal_upgrade_radarhack:
+	faction: cabal
+	effect: unlocks Radar Hack support power
+	coverage: narrow
+	phase: mid
+cabal_upgrade_reclamationprotocols:
+	faction: cabal
+	effect: cyborg self-repair
+	coverage: listed
+	phase: late
+cabal_upgrade_reinforcedchassis:
+	faction: cabal
+	effect: light walkers damage taken -15%
+	coverage: listed
+	phase: late

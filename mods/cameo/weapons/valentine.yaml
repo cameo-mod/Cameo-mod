@@ -12,7 +12,7 @@ LoveDoublePistols:
 
 lovebowFire:
 	ReloadDelay: 40
-	Range: 5c0
+	Range: 5120
 	Report: bowfire.aud
 	ValidTargets: MindControl
 	InvalidTargets: Hero, MCImmune
@@ -47,10 +47,10 @@ LoveHeliAAGun:
 		ImpactSounds: bowhit.aud
 		Explosions: loveex1
 
-LovebowFireAAB:
+LovebowFireAAB_AA:
 	ReloadDelay: 25
 	Burst: 2
-	Range: 7c512
+	Range: 7680
 	Report: bowfire.aud
 	ValidTargets: Air
 	Projectile: Missile
@@ -79,7 +79,7 @@ LovebowFireAAB:
 LovebowFireB:
 	ReloadDelay: 25
 	Burst: 2
-	Range: 7c512
+	Range: 7680
 	Report: bowfire.aud
 	ValidTargets: Ground, Water
 	Projectile: Bullet
@@ -107,7 +107,7 @@ LovebowFireB:
 
 CupidoAK47:
 	Inherits: LovebowFireB
-	Range: 12c512
+	Range: 12800
 	Burst: 2
 	ReloadDelay: 1
 	Report: irebweaa.wav, irebweab.wav, irebweac.wav, irebwead.wav, irebweae.wav, irebweaf.wav, irebweag.wav
@@ -115,9 +115,9 @@ CupidoAK47:
 		Spread: 512
 		Damage: 5120
 
-CupidoAK47AA:
-	Inherits: LovebowFireAAB
-	Range: 12c512
+CupidoAK47_AA:
+	Inherits: LovebowFireAAB_AA
+	Range: 12800
 	Burst: 2
 	ReloadDelay: 1
 	Report: irebweaa.wav, irebweab.wav, irebweac.wav, irebwead.wav, irebweae.wav, irebweaf.wav, irebweag.wav
@@ -125,7 +125,7 @@ CupidoAK47AA:
 AlienMobClawz:
 	Report: svsavoice1.aud, svsavoice2.aud
 	ReloadDelay: 5
-	Range: 1c256
+	Range: 1280
 	Projectile: Bullet
 		Speed: 2c0
 	Warhead@1Dam: TargetDamage
@@ -142,7 +142,7 @@ AlienMobClawz:
 
 TeletubbyLaser:
 	ReloadDelay: 75
-	Range: 7c512
+	Range: 7680
 	Report: val_fireLaser.aud
 	Projectile: LaserZap
 		#pink
@@ -180,18 +180,18 @@ TeletubbyLaser:
 			Concrete: 50
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: big_napalm
 		#ImpactSounds: firebl3.aud
 		ImpactActors: false
-		ValidTargets: Ground, Air, Ship, Trees
+		ValidTargets: Ground, Air, Ship
 
 ValentineTowerDouble:
 	Inherits: LovebowFireB
 	ReloadDelay: 12
 	Report: vpalwe2d.aud
-	Range: 8c0
+	Range: 8192
 	-Projectile:
 	Projectile: LaserZap
 		Width: 125
@@ -214,7 +214,7 @@ ValentineTowerDouble:
 
 sweetHeartsFire:
 	ReloadDelay: 77
-	Range: 5c555
+	Range: 5675
 	Report: bowfire.aud
 	ValidTargets: Ground
 	Projectile: Bullet
@@ -247,7 +247,7 @@ sweetHeartsFire:
 planBFire:
 	Inherits: SWPatriot
 	ReloadDelay: 33
-	Range: 7c512
+	Range: 7680
 	Report: vpalwe2d.aud
 	ValidTargets: Air
 	Projectile: MissileCA
@@ -279,7 +279,7 @@ planBFire:
 valentine_bullethell:
 	ReloadDelay: 60
 	Report: bowfire.aud
-	Range: 7c512
+	Range: 7680
 	ValidTargets: Ground
 	InvalidTargets: Ally
 	Projectile: MissileCA
@@ -320,7 +320,7 @@ valentine_bullethell:
 valentine_bullethell2:
 	ReloadDelay: 70
 	Report: svsavoice1.aud
-	Range: 7c512
+	Range: 7680
 	ValidTargets: Ground
 	InvalidTargets: Ally
 	Projectile: MissileCA
@@ -358,7 +358,7 @@ valentine_bullethell2:
 valentine_bullethell3:
 	ReloadDelay: 80
 	Report: svsavoice2.aud
-	Range: 7c512
+	Range: 7680
 	ValidTargets: Ground
 	InvalidTargets: Ally
 	Projectile: MissileCA
@@ -399,7 +399,7 @@ valentine_bullethell3:
 valentine_bullethell4:
 	ReloadDelay: 90
 	Report: vpalwe2d.aud
-	Range: 7c512
+	Range: 7680
 	ValidTargets: Ground
 	InvalidTargets: Ally
 	Projectile: MissileCA
@@ -442,28 +442,28 @@ SwanAttack:
 CuteKirovBomb:
 	Inherits: RA2KirovBomb
 	ReloadDelay: 125
-	Range: 5c0
+	Range: 5120
 	Warhead@3Eff: CreateEffect
 		Delay: 5
 		Explosions: napalm
 		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: large_splash
 		ImpactSounds: gexpwasa.wav
 		ValidTargets: Water, Underwater
-	Warhead@5Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: siege_impact.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
-	Warhead@Yuri_effect: CreateEffect
+		ValidTargets: Ground, Ship
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: spsydom.wav
 		ImpactActors: false
 		Explosions: yuriface
 		ExplosionPalette: ra2effect
 		Delay: 15
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect3: CreateEffect
 		ImpactSounds: iyurat2a.wav
 		ImpactActors: false
 		Explosions: controlwave
@@ -484,35 +484,35 @@ CuteKirovBomb:
 		Delay: 30
 	Warhead@2Own: ChangeOwner
 		Duration: 250
-		Range: 5c0
+		Range: 5120
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Infantry, Vehicle, Water
 		InvalidTargets: Hero
 		Delay: 35
 	Warhead@3Own: GrantExternalCondition
 		Duration: 250
-		Range: 5c0
+		Range: 5120
 		Condition: prevent-mindcontrol
 		Delay: 35
 		ValidRelationships: Ally, Neutral, Enemy
 	Warhead@2Smu_areanuke: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 5
 		Delay: 40
 
-CuteKirovBombElite:
+CuteKirovBomb_elite:
 	Inherits: CuteKirovBomb
 	Warhead@3Eff: CreateEffect
 		Delay: 0
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	-Warhead@5Eff:
 	Warhead@1Radiation: CreateTintedCells
 		Spread: 1c512
 		Falloff: 100, 66, 33, 0
 		Level: 300
 		LayerName: ra2radiation
-	
+

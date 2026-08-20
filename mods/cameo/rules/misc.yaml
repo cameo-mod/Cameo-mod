@@ -1,7 +1,6 @@
 ^NonClonableActors:
 	DuplicateUnitCrateAction:
-		ExcludedActorTypes: yrslav, angrymob1, angrymob2, angrymob3, sow_advancer, wc_o_skeleton, CITYSWAT1, CITYSWAT2, awangrymob1, awangrymob2, awangrymob3, CHITZKOI, schofficer, SCHE2, SCHE3,svsmalien1, svsmalien2, svsmalien3, svsmalien4, svsmalien5, sglaangrymob1, sglaangrymob2, dunee1mobslave, dunee3mobslave, dunee4mobslave, dunee5mobslave, sglfundamentalist1, sglfundamentalist2
-
+		ExcludedActorTypes: yrslav, scadept.shade
 
 CRATE.plain:
 	Inherits: ^Crate
@@ -58,121 +57,146 @@ CRATE:
 		Sound: gcraspee.wav
 		Condition: crate-speed
 		MaxExtraCollectors: 10
-	GiveBaseBuilderCrateAction@gdi:
+	GiveBaseBuilderCrateAction@td_gdi:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: mcv.gdi
-		ValidFactions: gdi
-	GiveBaseBuilderCrateAction@nod:
+		Units: td_gdi_mobileconstructionvehicle
+		ValidFactions: td_gdi
+	GiveBaseBuilderCrateAction@td_nod:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: mcv.nod
-		ValidFactions: nod
-	GiveBaseBuilderCrateAction@tsgdi:
+		Units: td_nod_mobileconstructionvehicle
+		ValidFactions: td_nod
+	GiveBaseBuilderCrateAction@ts_gdi:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: tsmcvgdi
-		ValidFactions: tsgdi
-	GiveBaseBuilderCrateAction@tsnod:
+		Units: ts_gdi_mobileconstructionvehicle
+		ValidFactions: ts_gdi
+	GiveBaseBuilderCrateAction@ts_nod:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: tsmcvnod
-		ValidFactions: tsnod
+		Units: ts_nod_mobileconstructionvehicle
+		ValidFactions: ts_nod
 	GiveBaseBuilderCrateAction@forgotten:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: tsmcvmutant
+		Units: forgotten_mobileconstructionvehicle
 		ValidFactions: forgotten
 	GiveBaseBuilderCrateAction@cabal:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: tsmcvcabal
+		Units: cabal_mobileconstructionvehicle
 		ValidFactions: cabal
-	GiveBaseBuilderCrateAction@allies:
+	GiveBaseBuilderCrateAction@ra1_allies:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: ramcv.allies
-		ValidFactions: allies
-	GiveBaseBuilderCrateAction@soviet:
+		Units: ra1_allies_alliedmobileconstructionvehicle
+		ValidFactions: ra1_allies
+	GiveBaseBuilderCrateAction@ra1_soviets:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: ramcv.soviet
-		ValidFactions: soviet
-	GiveBaseBuilderCrateAction@modjapan:
+		Units: ra1_soviets_mobileconstructionvehicle
+		ValidFactions: ra1_soviets
+	GiveBaseBuilderCrateAction@japan:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: ramcv.japan
-		ValidFactions: modjapan
-	GiveBaseBuilderCrateAction@ra2america:
+		Units: japan_japanesemobileconstructionvehicle
+		ValidFactions: japan
+	GiveBaseBuilderCrateAction@ra2_allies:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: ra2amcv
-		ValidFactions: ra2america
-	GiveBaseBuilderCrateAction@ra2russia:
+		Units: ra2_allies_alliedmobileconstructionvehicle
+		ValidFactions: ra2_allies
+	GiveBaseBuilderCrateAction@ra2_soviets:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: ra2smcv
-		ValidFactions: ra2russia
+		Units: ra2_soviets_mobileconstructionvehicle
+		ValidFactions: ra2_soviets
 	GiveBaseBuilderCrateAction@yuri:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: yrpcv
+		Units: yuri_mobileconstructionvehicle
 		ValidFactions: yuri
 	GiveBaseBuilderCrateAction@asianalliance:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: aa_acv
+		Units: asianalliance_asianmobileconstructionvehicle
 		ValidFactions: asianalliance
-	GiveBaseBuilderCrateAction@consortium:
+	GiveBaseBuilderCrateAction@latinsyndicate:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: steel_qmcv
-		ValidFactions: consortium
-	GiveBaseBuilderCrateAction@syndicate:
+		Units: latinsyndicate_syndicatemobileconstructionvehicle
+		ValidFactions: latinsyndicate
+	GiveBaseBuilderCrateAction@steelconsortium:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: latin_mcv
-		ValidFactions: syndicate
+		Units: steelconsortium_consortiummobileconstructionvehicle
+		ValidFactions: steelconsortium
 	GiveBaseBuilderCrateAction@naxis:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: nax_mcv
+		Units: naxis_naximobileconstructionvehicle
 		ValidFactions: naxis
-	GiveBaseBuilderCrateAction@lnaxis:
+	GiveBaseBuilderCrateAction@schwarzermond:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: nax2_mcv
-		ValidFactions: lnaxis
-	GiveBaseBuilderCrateAction@ix:
+		Units: schwarzermond_naxismobileconstructionvehicle
+		ValidFactions: schwarzermond
+	GiveBaseBuilderCrateAction@futuretech:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: d2k_mcv.ixian
+		Units: futuretech_mobileconstructionvehicle
+		ValidFactions: futuretech
+	GiveBaseBuilderCrateAction@ixian:
+		SelectionShares: 0
+		NoBaseSelectionShares: 10000
+		Units: ixian_mobileconstructionvehicle
 		ValidFactions: ixian
+	GiveBaseBuilderCrateAction@ordos:
+		SelectionShares: 0
+		NoBaseSelectionShares: 10000
+		Units: ordos_mobileconstructionvehicle
+		ValidFactions: ordos
 	GiveBaseBuilderCrateAction@terran:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: sctmcv
+		Units: terran_mobilecommandcenter
 		ValidFactions: terran
 	GiveBaseBuilderCrateAction@zerg:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: sczmcv
+		Units: zerg_hatcherydrone
 		ValidFactions: zerg
 	GiveBaseBuilderCrateAction@protoss:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: scpmcv
+		Units: protoss_mobilenexus
 		ValidFactions: protoss
-	GiveBaseBuilderCrateAction@human2:
+	GiveBaseBuilderCrateAction@wc2_humans:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: wc2_human_mcv
-		ValidFactions: human2
-	GiveBaseBuilderCrateAction@orc2:
+		Units: wc2_humans_mobileconstructionvehiclehuman
+		ValidFactions: wc2_humans
+	GiveBaseBuilderCrateAction@wc2_orcs:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: wc2_orc_mcv
-		ValidFactions: orc2
+		Units: wc2_orcs_mobileconstructionvehicleorc
+		ValidFactions: wc2_orcs
+	GiveBaseBuilderCrateAction@tkm:
+		SelectionShares: 0
+		NoBaseSelectionShares: 10000
+		Units: tkm_mobileconstructionvehicletkm
+		ValidFactions: tkm
+	GiveBaseBuilderCrateAction@eden:
+		SelectionShares: 0
+		NoBaseSelectionShares: 10000
+		Units: EDEN_CONVEC_STRUCTURE_FACTORY
+		ValidFactions: eden
+	GiveBaseBuilderCrateAction@plymouth:
+		SelectionShares: 0
+		NoBaseSelectionShares: 10000
+		Units: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
+		ValidFactions: plymouth
 
 WWCRATE:
 	Inherits: CRATE
@@ -291,7 +315,7 @@ casinocrate:
 		MinAmount: 7
 		MaxDuplicateValue: 10000
 	ExplodeCrateAction@chem:
-		Weapon: TSChemTacticalMissile
+		Weapon: TSTacticalChemMissile
 		SelectionShares: 5
 	ExplodeCrateAction@nuke:
 		Weapon: RA2DemoBomb
@@ -309,7 +333,6 @@ mpspawn:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (multiplayer player starting point)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	WithSpriteBody:
@@ -325,7 +348,6 @@ waypoint:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (waypoint for scripted behavior)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	WithSpriteBody:
@@ -336,18 +358,38 @@ waypoint:
 		Categories: System
 
 fact.colorpicker:
-	Inherits: FACT.GDI
-	-Buildable:
+	Inherits: ^BaseBuilding
 	-MapEditorData:
 	RenderSprites:
 		Image: fact
 		Palette: colorpicker
 
+rafact.colorpicker:
+	Inherits: ^BaseBuilding
+	-MapEditorData:
+	RenderSprites:
+		Image: rafactcolor
+		Palette: colorpicker
+
+rafactj.colorpicker:
+	Inherits: ^BaseBuilding
+	-MapEditorData:
+	RenderSprites:
+		Image: rafactj
+		Palette: colorpicker
+
+ra1_soviets_mammothtank.colorpicker:
+	Inherits: ra1_soviets_mammothtank
+	-Buildable:
+	-MapEditorData:
+	RenderSprites:
+		Image: ra1_soviets_mammothtank
+		Palette: colorpickerra
+
 CAMERA:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (reveals area to owner)
-	AlwaysVisible:
 	WithSpriteBody:
 	RenderSpritesEditorOnly:
 	BodyOrientation:
@@ -364,7 +406,6 @@ CAMERA.small:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (reveals small area to owner)
-	AlwaysVisible:
 	WithSpriteBody:
 	RenderSpritesEditorOnly:
 		Image: camera
@@ -387,6 +428,54 @@ CAMERA.sw:
 		RemoveInstead: true
 		Delay: 240
 
+# Persistent ground-fire entity dropped by flame weapons (via SpawnActorWarhead). Shows the
+# fire visual, continuously emits dark smoke, then removes itself after its lifetime. Immobile
+# with OccupiesSpace:false so it never blocks units and many can overlap. No new C# - all stock
+# traits (SmokeParticleEmitter is Mods.AS). Scorch smudge is left by the spawning weapon impact.
+groundfire:
+	Interactable:
+	Tooltip:
+		Name: Fire
+	RenderSprites:
+		Image: groundfire_flame
+	BodyOrientation:
+		QuantizedFacings: 1
+	DeterministicCellOffset:
+		MinOffset: -384,-384,0
+		MaxOffset: 384,384,0
+		Salt: 197
+	WithDeterministicOffsetIdleOverlay:
+		Image: groundfire_flame
+		Sequence: 1
+		IsDecoration: True
+	Immobile:
+		OccupiesSpace: false
+	# Cap to one fire per tile (FPS): burst weapons spawn many groundfire on/near the same cell;
+	# duplicates on an occupied cell remove themselves. Doesn't block movement (OccupiesSpace stays
+	# false). See OpenRA.Mods.Cameo/Traits/OneActorPerCell.cs.
+	OneActorPerCell:
+	DeterministicOffsetSmokeParticleEmitter@GroundFireSmoke:
+		Image: smoke_fire_glow
+		Sequences: idle
+		Palette: effect
+		# Interval (ticks) between smoke puffs, lower = more smoke.
+		SpawnFrequency: 6, 12
+		# Must equal the animation length (32 frames * 80ms Tick = 64 sim ticks). The engine plays
+		# the sprite with PlayRepeating; a longer Duration loops it and pops a fresh puff back in.
+		Duration: 64
+		Speed: 6, 16
+		Gravity: 30, 70
+		TurnRate: 2
+		Offset: 0,0,128
+	# Lifetime 125-250 ticks (5-10s @ 25/sec), then removes itself. Fades the fire in (10 ticks,
+	# ~400ms) at spawn and out before removal so it doesn't pop. Replaces KillsSelf (the lifetime
+	# is owned here so the fade-out can be timed against it). The fire visual loops and the smoke
+	# emitter runs for the whole lifetime.
+	WithLifetimeFade:
+		Duration: 125, 250
+		FadeInTicks: 10
+		FadeOutTicks: 10
+
 BLASTRADIUS.atomic:
 	Inherits: ^BlastRadiusIndicator
 	WithRangeCircle:
@@ -398,6 +487,12 @@ BLASTRADIUS.ioncannon:
 	WithRangeCircle:
 		Type: blast-radius
 		Range: 6000
+
+BLASTRADIUS.super:
+	Inherits: ^BlastRadiusIndicator
+	WithRangeCircle:
+		Type: blast-radius
+		Range: 12345
 
 FLARE:
 	Immobile:
@@ -420,11 +515,33 @@ FLARE:
 	MapEditorData:
 		Categories: System
 	Interactable:
+
+Vortex:
+	Immobile:
+		OccupiesSpace: false
+	RevealsShroud:
+		Range: 3c0
+		Type: CenterPosition
+	RenderSprites:
+		Image: vortexanim2
+		Palette: ra
+	WithSpriteBody:
+		StartSequence: open
+	HiddenUnderFog:
+		Type: CenterPosition
+	Tooltip:
+		Name: Vortex
+		ShowOwnerRow: false
+	BodyOrientation:
+		QuantizedFacings: 1
+	MapEditorData:
+		Categories: System
+	Interactable:
 ####################################################################################################
 #		RA
 ####################################################################################################
 infantry.upgraded:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Infantry Veterancy
 	Buildable:
@@ -432,7 +549,7 @@ infantry.upgraded:
 	RenderSprites:
 
 vehicles.upgraded:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Vehicle Veterancy
 	Buildable:
@@ -440,7 +557,7 @@ vehicles.upgraded:
 	RenderSprites:
 
 aircraft.upgraded:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Aircraft Veterancy
 	Buildable:
@@ -448,7 +565,7 @@ aircraft.upgraded:
 	RenderSprites:
 
 techbuilding.upgraded:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Tech Center Infiltration
 	Buildable:
@@ -459,7 +576,6 @@ RACAMERA:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (reveals area to owner)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	RevealsShroud:
@@ -534,20 +650,22 @@ camera.gpssat:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (reveals map to owner)
-	AlwaysVisible:
+	Tooltip:
+		Name: GPS Satellite
 	Immobile:
 		OccupiesSpace: false
 	BodyOrientation:
 		QuantizedFacings: 1
 	Buildable:
 		Queue: SpySatellite
+		Description: GPS satellite camera. Reveals map area.
 	RevealsMap:
 		RevealGeneratedShroud: false
 		RequiresCondition: uplinkavailable
 		IncludeAllies: true
 	GrantConditionOnPrerequisite@UPLINK:
 		Condition: uplinkavailable
-		Prerequisites: ra2gaspysat
+		Prerequisites: ra2_allies_spysatelliteuplink
 	KillsSelf:
 		RemoveInstead: true
 		Delay: 375
@@ -581,185 +699,223 @@ MINV:
 	FireWarheadsOnDeath:
 		Weapon: ATMine
 
-SPLIT2:
-	Inherits: ^TibTree
-	SeedsResource:
-		ResourceType: Tiberium
-		Interval: 95
-		MaxRange: 180
-	WithIdleAnimation:
-	TerrainLightSource:
-		Range: 12345
-		Intensity: 0.12345
-		RedTint: 0.0
-		GreenTint: 0.33
-		BlueTint: 0.0
-
-SPLIT3:
-	Inherits: ^TibTree
-	RenderSprites:
-		Image: split2
-	SeedsResource:
-		ResourceType: Tiberium
-		Interval: 95
-		MaxRange: 180
-	WithIdleAnimation:
-	TerrainLightSource:
-		Range: 12345
-		Intensity: 0.12345
-		RedTint: 0.0
-		GreenTint: 0.33
-		BlueTint: 0.0
-
-SPLITBLUE:
-	Inherits: ^TibTree
-	RenderSprites:
-		Image: split3
-	SeedsResource:
-		ResourceType: BlueTiberium
-		Interval: 90
-		MaxRange: 160
-	WithIdleAnimation:
+ra2gmine:
+	Inherits@1: ^TibTree
 	Tooltip:
-		Name: Blossom Tree (blue)
-	RadarColorFromTerrain:
-		Terrain: BlueTiberium
-	AppearsOnMapPreview:
-		Terrain: BlueTiberium
-	TerrainLightSource:
-		Range: 12345
-		Intensity: 0.12345
-		RedTint: 0.0
-		GreenTint: 0.0
-		BlueTint: 0.33
-
-SPLITRED:
-	Inherits: ^TibTree
+		Name: Gem Driller
 	SeedsResource:
-		ResourceType: RedTiberium
-		Interval: 85
-		MaxRange: 140
-	WithIdleAnimation:
-	Tooltip:
-		Name: Blossom Tree (red)
+		ResourceType: RA2Gems
+		Interval: 70
+		MaxRange: 125
+	RenderSprites:
+		Palette: ra2temperat
+	-WithMakeAnimation:
 	RadarColorFromTerrain:
-		Terrain: RedTiberium
+		Terrain: RA2Gems
 	AppearsOnMapPreview:
-		Terrain: RedTiberium
+		Terrain: RA2Gems
 	TerrainLightSource:
-		Range: 12345
-		Intensity: 0.12345
-		RedTint: 0.33
-		GreenTint: 0.0
+		Range: 3072
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.1
 		BlueTint: 0.0
 
-SPLITGOLD:
-	Inherits: ^TibTree
+ra2mine:
+	Inherits@1: ^TibTree
+	Tooltip:
+		Name: Ore Driller
 	SeedsResource:
-		ResourceType: GoldTiberium
+		ResourceType: RA2Ore
 		Interval: 80
-		MaxRange: 120
-	WithIdleAnimation:
-	Tooltip:
-		Name: Blossom Tree (gold)
+		MaxRange: 150
+	RenderSprites:
+		Palette: ra2infantry
+	-WithMakeAnimation:
 	RadarColorFromTerrain:
-		Terrain: GoldTiberium
+		Terrain: RA2Ore
 	AppearsOnMapPreview:
-		Terrain: GoldTiberium
+		Terrain: RA2Ore
 	TerrainLightSource:
-		Range: 12345
-		Intensity: 0.12345
-		RedTint: 0.33
-		GreenTint: 0.33
+		Range: 3072
+		Intensity: 0.05
+		RedTint: 0.0
+		GreenTint: 0.05
+		BlueTint: 0.1
+
+ra2smine:
+	Inherits@1: ^TibTree
+	Tooltip:
+		Name: Silver Driller
+	SeedsResource:
+		ResourceType: RA2Silver
+		Interval: 90
+		MaxRange: 175
+	RenderSprites:
+		Palette: ra2silverdrill
+		Image: ra2rmine
+	-WithMakeAnimation:
+	RadarColorFromTerrain:
+		Terrain: RA2Silver
+	AppearsOnMapPreview:
+		Terrain: RA2Silver
+	TerrainLightSource:
+		Range: 3072
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.1
+		BlueTint: 0.1
+
+ra2cmine:
+	Inherits@1: ^TibTree
+	Tooltip:
+		Name: Copper Driller
+	SeedsResource:
+		ResourceType: RA2Copper
+		Interval: 100
+		MaxRange: 200
+	RenderSprites:
+		Palette: racopperdrill
+		Image: ra2rmine
+	-WithMakeAnimation:
+	RadarColorFromTerrain:
+		Terrain: RA2Copper
+	AppearsOnMapPreview:
+		Terrain: RA2Copper
+	TerrainLightSource:
+		Range: 3072
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.05
 		BlueTint: 0.0
-
-SPLIT2SMALL:
-	Inherits: ^TibTree
-	RenderSprites:
-		Image: split2
-	SeedsResource:
-		ResourceType: Tiberium
-		Interval: 140
-		MaxRange: 140
-	WithIdleAnimation:
-	Tooltip:
-		Name: Small Blossom Tree
-
-SPLITBLUESMALL:
-	Inherits: ^TibTree
-	RenderSprites:
-		Image: split3
-	SeedsResource:
-		ResourceType: BlueTiberium
-		Interval: 130
-		MaxRange: 130
-	WithIdleAnimation:
-	Tooltip:
-		Name: Small Blossom Tree (blue)
-	RadarColorFromTerrain:
-		Terrain: BlueTiberium
-	AppearsOnMapPreview:
-		Terrain: BlueTiberium
-
-SPLITREDSMALL:
-	Inherits: ^TibTree
-	RenderSprites:
-		Image: splitred
-	SeedsResource:
-		ResourceType: RedTiberium
-		Interval: 120
-		MaxRange: 120
-	WithIdleAnimation:
-	Tooltip:
-		Name: Small Blossom Tree (red)
-	RadarColorFromTerrain:
-		Terrain: RedTiberium
-	AppearsOnMapPreview:
-		Terrain: RedTiberium
-
-SPLITGOLDSMALL:
-	Inherits: ^TibTree
-	RenderSprites:
-		Image: splitgold
-	SeedsResource:
-		ResourceType: GoldTiberium
-		Interval: 110
-		MaxRange: 110
-	WithIdleAnimation:
-	Tooltip:
-		Name: Small Blossom Tree (gold)
-	RadarColorFromTerrain:
-		Terrain: GoldTiberium
-	AppearsOnMapPreview:
-		Terrain: GoldTiberium
 
 MINE:
 	Inherits@1: ^TibTree
 	Tooltip:
 		Name: Ore Mine
-	RadarColorFromTerrain:
-		Terrain: Ore
-	SeedsResource:
+	LobbyScaledSeedsResource:
 		ResourceType: Ore
 		Interval: 100
 		MaxRange: 200
 	RenderSprites:
 		Palette: ra_temperat
 	-WithMakeAnimation:
+	RadarColorFromTerrain:
+		Terrain: Ore
+	AppearsOnMapPreview:
+		Terrain: Ore
 	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
-		RedTint: 0.2
+		Range: 3072
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.05
+		BlueTint: 0.025
+
+SPLIT2:
+	Inherits: ^TibTree
+	LobbyScaledSeedsResource:
+		ResourceType: Tiberium
+		Interval: 95
+		MaxRange: 180
+	WithIdleAnimation:
+	RadarColorFromTerrain:
+		Terrain: Tiberium
+	AppearsOnMapPreview:
+		Terrain: Tiberium
+	TerrainLightSource:
+		Range: 3072
+		Intensity: 0.06
+		RedTint: 0.0
 		GreenTint: 0.1
-		BlueTint: 0.05
+		BlueTint: 0.0
+
+SPLIT3:
+	Inherits: ^TibTree
+	RenderSprites:
+		Image: split2
+	LobbyScaledSeedsResource:
+		ResourceType: Tiberium
+		Interval: 95
+		MaxRange: 180
+	WithIdleAnimation:
+	RadarColorFromTerrain:
+		Terrain: Tiberium
+	AppearsOnMapPreview:
+		Terrain: Tiberium
+	TerrainLightSource:
+		Range: 3072
+		Intensity: 0.06
+		RedTint: 0.0
+		GreenTint: 0.1
+		BlueTint: 0.0
+
+SPLITBLUE:
+	Inherits: ^TibTree
+	RenderSprites:
+		Image: split3
+	LobbyScaledSeedsResource:
+		ResourceType: BlueTiberium
+		Interval: 90
+		MaxRange: 160
+	WithIdleAnimation:
+	Tooltip:
+		Name: Blossom Tree (Arbor Vinifera)
+	RadarColorFromTerrain:
+		Terrain: BlueTiberium
+	AppearsOnMapPreview:
+		Terrain: BlueTiberium
+	TerrainLightSource:
+		Range: 3072
+		Intensity: 0.06
+		RedTint: 0.0
+		GreenTint: 0.0
+		BlueTint: 0.1
+
+SPLITRED:
+	Inherits: ^TibTree
+	LobbyScaledSeedsResource:
+		ResourceType: RedTiberium
+		Interval: 85
+		MaxRange: 140
+	WithIdleAnimation:
+	Tooltip:
+		Name: Blossom Tree (Arbor Ignis)
+	RadarColorFromTerrain:
+		Terrain: RedTiberium
+	AppearsOnMapPreview:
+		Terrain: RedTiberium
+	TerrainLightSource:
+		Range: 3072
+		Intensity: 0.06
+		RedTint: 0.1
+		GreenTint: 0.0
+		BlueTint: 0.0
+
+SPLITGOLD:
+	Inherits: ^TibTree
+	LobbyScaledSeedsResource:
+		ResourceType: GoldTiberium
+		Interval: 80
+		MaxRange: 120
+	WithIdleAnimation:
+	Tooltip:
+		Name: Blossom Tree (Arbor Aureum)
+	RadarColorFromTerrain:
+		Terrain: GoldTiberium
+	AppearsOnMapPreview:
+		Terrain: GoldTiberium
+	TerrainLightSource:
+		Range: 3072
+		Intensity: 0.06
+		RedTint: 0.1
+		GreenTint: 0.1
+		BlueTint: 0.0
 
 GMINE:
 	Inherits@1: ^TibTree
 	Tooltip:
 		Name: Gem Mine
-	RadarColorFromTerrain:
-		Terrain: Gems
-	SeedsResource:
+	LobbyScaledSeedsResource:
 		ResourceType: Gems
 		Interval: 75
 		MaxRange: 100
@@ -771,11 +927,11 @@ GMINE:
 	AppearsOnMapPreview:
 		Terrain: Gems
 	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
-		RedTint: 0.1
-		GreenTint: 0.05
-		BlueTint: 0.2
+		Range: 3072
+		Intensity: 0.05
+		RedTint: 0.05
+		GreenTint: 0.025
+		BlueTint: 0.1
 
 op2_commonore_beacon_3bar:
 	Inherits@1: ^TibTree
@@ -803,7 +959,6 @@ wormspawner:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (worm spawning location)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	RenderSpritesEditorOnly:
@@ -862,7 +1017,6 @@ spicebloom.spawnpoint:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: Spice Bloom spawnpoint
-	AlwaysVisible:
 	RenderSpritesEditorOnly:
 		Image: spicebloom
 		Palette: effect50alpha
@@ -925,7 +1079,6 @@ CTFLAG:
 
 
 powerproxy.parabombs:
-	AlwaysVisible:
 	AirstrikePower:
 		Icons:
 			1: parabombs
@@ -936,7 +1089,7 @@ powerproxy.parabombs:
 		OneShot: true
 		AllowMultiple: true
 		UnitTypes:
-			1: badr.bomber
+			1: ra1_badger_bomber
 		SquadSizes:
 			1: 1
 		SelectTargetSpeechNotification: SelectTarget
@@ -952,7 +1105,6 @@ powerproxy.parabombs:
 
 
 powerproxy.sonarpulse:
-	AlwaysVisible:
 	SpawnActorPower:
 		Icons:
 			1: sonar
@@ -975,7 +1127,6 @@ powerproxy.sonarpulse:
 
 
 powerproxy.paratroopers:
-	AlwaysVisible:
 	ParatroopersPower:
 		Icons:
 			1: paratroopers
@@ -988,7 +1139,7 @@ powerproxy.paratroopers:
 		SquadSizes:
 			1: 1
 		UnitTypes:
-			1: badr
+			1: ra1_badger
 		SelectTargetSpeechNotification: SelectTarget
 		AllowImpassableCells: false
 		QuantizedFacings: 8
@@ -1002,7 +1153,6 @@ powerproxy.paratroopers:
 
 
 powerproxy.emp:
-	AlwaysVisible:
 	DetonateWeaponPower:
 		OrderName: crateemp
 		Icons:
@@ -1012,7 +1162,7 @@ powerproxy.emp:
 		Descriptions:
 			1: Detonate a EMP weapon anywhere on the map.
 		Weapons:
-			1: TSEMPulseCannon
+			1: TSPulseCannon_EMP
 		AllowMultiple: true
 		OneShot: true
 		CameraRange: 6000
@@ -1031,7 +1181,6 @@ ambiance_wind:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (Periodic Wind Sounds)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	RenderSpritesEditorOnly:
@@ -1091,31 +1240,26 @@ ambiance_rumbling:
 		Interval: 500,4500
 
 anytdhq:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: TD Tech Center
 
 techcenter:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: RA/TD Tech Center
 
 tdtechcenter:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: TD Tech Center
 
 tek:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: RA Tech Center
 
 ra2tek:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: RA2 Tech Center

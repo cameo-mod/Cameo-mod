@@ -398,7 +398,6 @@ halloween_graveyard.turbine:
 	RenderSprites:
 		Image: halloween_graveyard
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -437,7 +436,7 @@ halloween_daemonpit:
 	Exit@2:
 		ExitCell: 2,1
 		ExitDelay: 3
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: VehicleUpgrades.Chaos
 	Production@NORMAL:
 		Produces: Vehicle
@@ -491,8 +490,7 @@ halloween_tower:
 	Tooltip:
 		Name: Mediaval Tower
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 43690, 72789, 0, -14549
+		Bounds: 1024, 1706, 0, -341
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -558,8 +556,7 @@ halloween_spirittower:
 	Tooltip:
 		Name: Spirit Tower
 	Selectable:
-		Bounds: 76458, 76458
-		DecorationBounds: 43690, 72789, 0, -14549
+		Bounds: 1024, 1706, 0, -341
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -770,8 +767,7 @@ halloween_cauldron:
 		Dimensions: 3,4
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 91008, 0, 21845
-		DecorationBounds: 131072, 127402, 0, -3626
+		Bounds: 3072, 2986, 0, -85
 	SelectionDecorations:
 	Health:
 		HP: 90000
@@ -890,7 +886,6 @@ halloween_dkghost_small:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Power:
 		Amount: -5
@@ -976,7 +971,6 @@ halloween_bat:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	Power:
 		Amount: -5
@@ -990,8 +984,8 @@ halloween_bat:
 		Chance: 45
 halloween_skeleton:
 	Inherits: wc_o_skeleton
-	Inherits@upgrade_shields: ^wc_h_str_shield
-	Inherits@upgrade_swords: ^wc_h_str_sword
+	Inherits@upgrade_shields: ^WCHumansStrShield
+	Inherits@upgrade_swords: ^WCHumansStrSword
 	Inherits@MC: ^MCImmune
 	Buildable:
 		Queue: Infantry, RAInfantry
@@ -1043,7 +1037,7 @@ halloween_demon:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
 		BuildDurationModifier: 50
-		Prerequisites: ~techlevel.medium, halloween_daemonpit
+		Prerequisites: halloween_daemonpit
 		Description: Slow powerful demon. Attacks in close combat.
 	Armament:
 		Weapon: demonSlice
@@ -1196,10 +1190,10 @@ halloween_rockgolem:
 		DeathSequencePalette: terrain
 		DeathPaletteIsPlayerPalette: false
 	Buildable:
+		Prerequisites:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 60
 		BuildDurationModifier: 50
-		Prerequisites: ~techlevel.medium
 		Description: A large Rock Golem, throws rocks.
 	Inherits@EXT: ^ExternalConditions ##########
 	SpawnActorOnDeath@death1:
@@ -1215,7 +1209,7 @@ halloween_rockgolem:
 		EmptyWeapon: halloween_ghost_spawner_bigunit
 		RequiresCondition: halloween_upgrade.ghost
 	Selectable:
-		Bounds: 65536, 65536
+		Bounds: 1536, 1536
 	GrantConditionOnPrerequisite@mana:
 		Prerequisites: halloween_upgrade.mana
 		Condition: halloween_upgrade.mana
@@ -1276,10 +1270,10 @@ halloween_spider:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
+		Prerequisites:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
 		BuildDurationModifier: 50
-		Prerequisites: ~techlevel.medium
 		Description: A evil Spider.
 	Mobile:
 		Speed: 56
@@ -1320,9 +1314,9 @@ halloween_franky:
 	Tooltip:
 		Name: Frankenstein
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 30
 		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
-		Prerequisites: ~techlevel.medium
 		Queue: Infantry, RAInfantry
 	Mobile:
 		Speed: 46
@@ -1383,7 +1377,6 @@ halloween_clown:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GrantConditionOnPrerequisite@ghost:
 		Prerequisites: halloween_upgrade.ghost
@@ -1436,7 +1429,6 @@ halloween_clown2:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GrantConditionOnPrerequisite@ghost:
 		Prerequisites: halloween_upgrade.ghost
@@ -1509,7 +1501,6 @@ halloween_clown3:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 	Passenger:
-		Weight: 1
 	-TakeCover:
 	GrantConditionOnPrerequisite@ghost:
 		Prerequisites: halloween_upgrade.ghost
@@ -1731,8 +1722,8 @@ halloween_skeleton_archer:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 20
-		Prerequisites: ~techlevel.medium
 		Queue: Infantry, RAInfantry
 		Description: Anti-tank/Anti-aircraft infantry. \n  Strong vs Tanks, Aircraft\n  Weak vs Infantry
 	Mobile:
@@ -1744,7 +1735,7 @@ halloween_skeleton_archer:
 	Armament:
 		Weapon: bowFire
 	Armament@aa:
-		Weapon: bowFireAA
+		Weapon: bowFire_AA
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: bowFire
@@ -1893,7 +1884,6 @@ halloween_blob:
 		StartIfBelow: 100
 		DamageCooldown: 1
 halloween_upgrade.ghost:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -1912,7 +1902,6 @@ halloween_upgrade.ghost:
 		Image: halloween_upgrade.ghost
 	ProvidesPrerequisite@upgradename:
 halloween_upgrade.boiling:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -1931,7 +1920,6 @@ halloween_upgrade.boiling:
 		Image: halloween_upgrade.boiling
 	ProvidesPrerequisite@upgradename:
 halloween_upgrade.axe:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -1950,7 +1938,6 @@ halloween_upgrade.axe:
 		Image: halloween_upgrade.axe
 	ProvidesPrerequisite@upgradename:
 halloween_upgrade.sword:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -1969,7 +1956,6 @@ halloween_upgrade.sword:
 		Image: halloween_upgrade.sword
 	ProvidesPrerequisite@upgradename:
 halloween_upgrade.bows:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -1988,7 +1974,6 @@ halloween_upgrade.bows:
 		Image: halloween_upgrade.bows
 	ProvidesPrerequisite@upgradename:
 halloween_upgrade.mana:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -2065,7 +2050,6 @@ halloween_mcv:
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -2101,4 +2085,4 @@ halloween_mcv_bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: halloween_daemonpit, ~techlevel.medium, ~botplayer, allowsMCV
+		Prerequisites: halloween_daemonpit, ~botplayer, allowsMCV

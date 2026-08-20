@@ -1,0 +1,162 @@
+refinery.atreides:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2809
+		Offset: -48,64
+	make:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4495
+		Length: 11
+		Offset: -48,64
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4505
+		Length: 12
+		Offset: -48,64
+		Tick: 100
+	damaged-idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2809
+		Offset: -48,64
+	idle-top:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2810
+		Offset: -48,64
+	damaged-idle-top:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2811
+		Offset: -48,64
+	bib:
+		Filename: BLOXBASE.R8
+		Frames: 611, 612, 613, 631, 632, 633
+		Length: 6
+		Offset: -16,-16
+	bib-Concrete:
+		Filename: BLOXBASE.R8
+		Frames: 643, 644, 645, 663, 664, 665
+		Length: 6
+		Offset: -16,-16
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4330
+		Offset: -30,-24
+	smoke:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4138
+		Length: 14
+		Offset: 13,-16
+		Tick: 100
+		BlendMode: Additive
+	stages:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4138
+
+sonic_tank_husk.atreides:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 1827
+		Facings: -32
+		ZOffset: -512
+
+combat_tank.atreides:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 1731
+		Facings: -32
+	turret:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 1859
+		Facings: -32
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4028
+		Tick: 60
+		Facings: -32
+		BlendMode: Additive
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4281
+		Offset: -30,-24
+
+combat_tank_husk.atreides:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 1731
+		Facings: -32
+		ZOffset: -512
+	turret:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 1859
+		Facings: -32
+		ZOffset: -512
+
+ornithopter:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 1955
+		Facings: -32
+		Length: 3
+		Tick: 90
+		Transpose: true
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4292
+		Offset: -30,-24
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3996
+		Tick: 50
+		Facings: -32
+		BlendMode: Additive
+	idle-landed:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 1987
+		Facings: -32
+		Length: 1
+		Tick: 120
