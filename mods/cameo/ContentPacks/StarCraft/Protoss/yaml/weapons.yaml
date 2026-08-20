@@ -478,7 +478,7 @@ ScarabLaunchDummy:
 		Damage: 0
 
 ScoutRockets_AA:
-	Inherits@wh: ^Warhead_MissileHE_Heavy
+	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
 	Inherits@fx: ^Effect_MissileHE_Heavy_D2K
 	Report: HKMISSLE.aud
@@ -500,9 +500,9 @@ ScoutRockets_AA:
 		ContrailEndColor: 000000FF
 		ContrailStartWidth: 50
 		ContrailEndWidth: 100
-	Warhead@MissileHE_Heavy:
+	Warhead@MissileAA_Heavy:
 		Damage: 10000
-	Warhead@MissileHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAA_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 
 	Warhead@EffectWater: CreateEffect

@@ -1301,15 +1301,15 @@
        {
         "damage": "10000",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
+        "spread": "200",
+        "tag": "MissileAA_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -1320,10 +1320,12 @@
       "reloaddelay": "40",
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
-       "^D2KRocket"
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_Heavy_D2K",
+       "^Effect_MissileHE_Heavy_D2K"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "ScoutRockets_AA",
       "weapon_class_source": "template"
@@ -1334,15 +1336,15 @@
        {
         "damage": "10000",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
+        "spread": "200",
+        "tag": "MissileAA_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -1353,10 +1355,12 @@
       "reloaddelay": "40",
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
-       "^D2KRocket"
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_Heavy_D2K",
+       "^Effect_MissileHE_Heavy_D2K"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "ScoutRockets_AA",
       "weapon_class_source": "template"

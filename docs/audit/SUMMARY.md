@@ -128,7 +128,7 @@ Three more always-active `FirepowerMultiplier` instances were found and fixed (`
 
 ## W24 cluster 9 — D2K rocket family (GoliathRockets_AA, WraithRockets_AA, SunDogRockets, MissileTurret, ScoutRockets_AA, HeavyOrdosCombatTankRockets) (2026-08-22)
 
-**Converted** six mixed-stack D2K-rocket weapons to a single `^D2KRocket` archetype (one `^Warhead_MissileAP_Heavy` main + `^Warhead_MissileAP_Heavy_Percentage` twin):
+**Converted** six mixed-stack D2K-rocket weapons; later corrected so four anti-air weapons use `^Warhead_MissileAA_Heavy` and `SunDogRockets` uses `^Warhead_MissileAP_Heavy` (all on `^Projectile_Missile_Heavy_D2K` with D2K impact effects):
 
 - `GoliathRockets_AA` (`mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml`) → 5×6000 + 5×3 = `Damage: 30000` / `Damage: 15`.
 - `WraithRockets_AA` (`mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml`) → 5×2000 + 5×1 = `Damage: 10000` / `Damage: 5`.
@@ -146,5 +146,7 @@ Three more always-active `FirepowerMultiplier` instances were found and fixed (`
 **Resolver diff:** `tools/audit/review_resolve_diff.py` OK (behavioural invariants preserved) for all six, with no CreateEffect changes; the only resolved delta is the damage-warhead multiset collapsing to one warhead whose sum equals the old total.
 
 **Audits:** `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs; `audit_warhead_split` broadcast count 952, baseline lowered 958→952; `audit_physical_state_warheads` PASS; `audit_balance_drift` clean; `sweep_areadamage.py` dry-run no changes in cluster; `extract_stats` regenerated ledgers; `run_all.py` has pre-existing unrelated failures (`audit_inherits`, `audit_upgrades`, `audit_sequences`, `audit_fluent`, `audit_basebuilder_crates`, `audit_buildable_order`, `audit_weapon_suffixes`) unchanged.
+
+**Correction (2026-08-22+):** `GoliathRockets_AA`, `WraithRockets_AA`, `ScoutRockets_AA`, and `MissileTurret` are `^Warhead_MissileAA_Heavy`; `SunDogRockets` is `^Warhead_MissileAP_Heavy`; the earlier `^D2KRocket` / `^Warhead_MissileAP_Heavy` classification in this summary and in `docs/design/BALANCE_PROGRAM_PLAN.md` was stale.
 
 **Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.

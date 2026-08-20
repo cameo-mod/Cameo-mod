@@ -1004,7 +1004,7 @@ GoliathMG:
 		Damage: 1
 
 GoliathRockets_AA:
-	Inherits@wh: ^Warhead_MissileHE_Heavy
+	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
 	Inherits@fx: ^Effect_MissileHE_Heavy_D2K
 	Range: 6000
@@ -1026,9 +1026,9 @@ GoliathRockets_AA:
 		ContrailEndColor: 000000FF
 		ContrailStartWidth: 50
 		ContrailEndWidth: 100
-	Warhead@MissileHE_Heavy:
+	Warhead@MissileAA_Heavy:
 		Damage: 30000
-	Warhead@MissileHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAA_Heavy_Percentage: HealthPercentageDamage
 		Damage: 15
 
 	Warhead@EffectWater: CreateEffect
@@ -1113,7 +1113,7 @@ GoliathMk2Rockets:
 		Damage: 4
 
 WraithRockets_AA:
-	Inherits@wh: ^Warhead_MissileHE_Heavy
+	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
 	Inherits@fx: ^Effect_MissileHE_Heavy_D2K
 	Report: TPhFi200.aud
@@ -1135,9 +1135,9 @@ WraithRockets_AA:
 		ContrailZOffset: 4000
 		ContrailStartWidth: 50
 		ContrailEndWidth: 100
-	Warhead@MissileHE_Heavy:
+	Warhead@MissileAA_Heavy:
 		Damage: 10000
-	Warhead@MissileHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAA_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 
 	Warhead@EffectWater: CreateEffect
@@ -1164,9 +1164,9 @@ WraithLaser:
 		Damage: 8
 
 SunDogRockets:
-	Inherits@wh: ^Warhead_MissileHE_Heavy
+	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
-	Inherits@fx: ^Effect_MissileHE_Heavy_D2K
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K
 	Report: TPhFi200.aud
 	ReloadDelay: 39
 	Range: 6060
@@ -1186,9 +1186,9 @@ SunDogRockets:
 		ContrailEndColor: 000000FF
 		ContrailStartWidth: 50
 		ContrailEndWidth: 100
-	Warhead@MissileHE_Heavy:
+	Warhead@MissileAP_Heavy:
 		Damage: 10000
-	Warhead@MissileHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		Damage: 5
 
 	Warhead@EffectWater: CreateEffect
@@ -1592,7 +1592,7 @@ PhobosLaser:
 		ValidTargets: Air
 
 MissileTurret:
-	Inherits@wh: ^Warhead_MissileHE_Heavy
+	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
 	Inherits@fx: ^Effect_MissileHE_Heavy_D2K
 	Report: TPhFi200.aud
@@ -1614,9 +1614,9 @@ MissileTurret:
 		ContrailEndColor: 000000FF
 		ContrailStartWidth: 50
 		ContrailEndWidth: 100
-	Warhead@MissileHE_Heavy:
+	Warhead@MissileAA_Heavy:
 		Damage: 20000
-	Warhead@MissileHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAA_Heavy_Percentage: HealthPercentageDamage
 		Damage: 10
 
 	Warhead@EffectWater: CreateEffect

@@ -1325,7 +1325,9 @@
       "reloaddelay": "39",
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
-       "^D2KRocket"
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Heavy_D2K",
+       "^Effect_MissileAP_Heavy_D2K"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1357,7 +1359,9 @@
       "reloaddelay": "39",
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
-       "^D2KRocket"
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Heavy_D2K",
+       "^Effect_MissileAP_Heavy_D2K"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy"
@@ -1696,15 +1700,15 @@
        {
         "damage": "10000",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
+        "spread": "200",
+        "tag": "MissileAA_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -1715,10 +1719,12 @@
       "reloaddelay": "24",
       "slot": "Armament@SECONDARY1",
       "versus_templates": [
-       "^D2KRocket"
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_Heavy_D2K",
+       "^Effect_MissileHE_Heavy_D2K"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "WraithRockets_AA",
       "weapon_class_source": "template"
@@ -1728,15 +1734,15 @@
        {
         "damage": "10000",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
+        "spread": "200",
+        "tag": "MissileAA_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -1747,10 +1753,12 @@
       "reloaddelay": "24",
       "slot": "Armament@SECONDARY2",
       "versus_templates": [
-       "^D2KRocket"
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_Heavy_D2K",
+       "^Effect_MissileHE_Heavy_D2K"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "WraithRockets_AA",
       "weapon_class_source": "template"
@@ -2862,15 +2870,15 @@
        {
         "damage": "20000",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
+        "spread": "200",
+        "tag": "MissileAA_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -2881,10 +2889,12 @@
       "reloaddelay": "30",
       "slot": "Armament@1",
       "versus_templates": [
-       "^D2KRocket"
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_Heavy_D2K",
+       "^Effect_MissileHE_Heavy_D2K"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "MissileTurret",
       "weapon_class_source": "template"
@@ -2894,15 +2904,15 @@
        {
         "damage": "20000",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
+        "spread": "200",
+        "tag": "MissileAA_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -2913,10 +2923,12 @@
       "reloaddelay": "30",
       "slot": "Armament@2",
       "versus_templates": [
-       "^D2KRocket"
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_Heavy_D2K",
+       "^Effect_MissileHE_Heavy_D2K"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "MissileTurret",
       "weapon_class_source": "template"
@@ -6767,15 +6779,15 @@
        {
         "damage": "30000",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
+        "spread": "200",
+        "tag": "MissileAA_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -6786,10 +6798,12 @@
       "reloaddelay": "33",
       "slot": "Armament@A1",
       "versus_templates": [
-       "^D2KRocket"
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_Heavy_D2K",
+       "^Effect_MissileHE_Heavy_D2K"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "GoliathRockets_AA",
       "weapon_class_source": "template"
@@ -6799,15 +6813,15 @@
        {
         "damage": "30000",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
         "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
+        "spread": "200",
+        "tag": "MissileAA_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -6818,10 +6832,12 @@
       "reloaddelay": "33",
       "slot": "Armament@A2",
       "versus_templates": [
-       "^D2KRocket"
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_Heavy_D2K",
+       "^Effect_MissileHE_Heavy_D2K"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "GoliathRockets_AA",
       "weapon_class_source": "template"

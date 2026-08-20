@@ -1336,8 +1336,8 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium",
-       "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Heavy",
+       "^Projectile_Grenade_Light_D2K_155mm",
+       "^Effect_Demolition_Heavy_D2K_155mm",
        "^D2K_Cannon"
       ],
       "warheads": [
@@ -3699,8 +3699,8 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light",
-       "^Projectile_Shell_Light",
-       "^Effect_CannonAP_Light",
+       "^Projectile_Shell_Light_D2K_Mortar",
+       "^Effect_CannonAP_Light_D2K_Mortar",
        "^D2K_Cannon"
       ],
       "warheads": [
@@ -3783,8 +3783,8 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Warhead_CannonAP_Light",
-       "^Projectile_Shell_Light",
-       "^Effect_CannonAP_Light",
+       "^Projectile_Shell_Light_D2K_Mortar",
+       "^Effect_CannonAP_Light_D2K_Mortar",
        "^D2K_Cannon"
       ],
       "warheads": [
@@ -6028,14 +6028,14 @@
         "damage": "10000",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
+        "tag": "MissileHE_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -6047,10 +6047,12 @@
       "requires": "ordos_upgrade_heavycombattankrockets",
       "slot": "Armament@Rockets",
       "versus_templates": [
-       "^D2KRocket"
+       "^Warhead_MissileHE_Heavy",
+       "^Projectile_Missile_Heavy_D2K",
+       "^Effect_MissileHE_Heavy_D2K"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "HeavyOrdosCombatTankRockets",
       "weapon_class_source": "template"
