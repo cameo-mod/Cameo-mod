@@ -307,99 +307,35 @@ D2K_Rocket_Trooper1:
 		Damage: 4
 
 D2K_TowerMissile:
-	Inherits: ^Grenade
-	Inherits@2: ^MediumFlameWeapon
-	Inherits@3: ^FlakWeapon
-	Inherits@4: ^D2KMissile
-	ReloadDelay: 42
-	Burst: 2
-	Range: 10684
-	BurstDelays: 5
+	Inherits@wh: ^Warhead_Demolition_Light_D2K_TowerMissile
+	Inherits@wh2: ^Warhead_Flame_Medium_D2K_TowerMissile
+	Inherits@wh3: ^Warhead_Flak_Medium_D2K_TowerMissile
+	Inherits@wh4: ^Warhead_MissileAP_Heavy_D2K_TowerMissile
+	Inherits@proj: ^Projectile_Missile_Heavy_D2K_TowerMissile
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_TowerMissile
 	ValidTargets: Ground, Water, Air
-	Projectile: Missile
-		Blockable: false
-		RangeLimit: 33333
-		Speed: 3333
-		Inaccuracy: 33
-		Acceleration: 6
-		CloseEnough: 666
-		AllowSnapping: true
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-
+	ReloadDelay: 42
+	Range: 10684
+	Report: ROCKET1.WAV
+	TargetActorCenter: true
+	InvalidTargets: wall
 	MinRange: 2135
+	Burst: 2
+	BurstDelays: 5
+
 mtank_pri2:
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Flame_Medium
-	Inherits@proj: ^Projectile_Grenade_Light
-	Inherits@fx: ^Effect_Demolition_Light
-	Inherits@3: ^D2KMissile
+	Inherits@wh: ^Warhead_Demolition_Light_D2K_mtank_pri2
+	Inherits@wh2: ^Warhead_Flame_Medium_D2K_mtank_pri2
+	Inherits@wh3: ^Warhead_MissileAP_Heavy_D2K_mtank_pri2
+	Inherits@proj: ^Projectile_Missile_Heavy_D2K_mtank_pri2
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_mtank_pri2
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 5
 	Range: 10052
-	ValidTargets: Ground, Water, Air
 	TargetActorCenter: true
-	Projectile: Missile
-		RangeLimit: 45000
-		InaccuracyType: PerCellIncrement
-		Inaccuracy: 150
-		HorizontalRateOfTurn: 25
-		VerticalRateOfTurn: 25
-		Speed: 500
-		Acceleration: 5
-		CloseEnough: 500
-		AllowSnapping: true
-	Warhead@Demolition_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-	Warhead@Flame_Medium:
-		Damage: 8000
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 4
-	Warhead@MissileAP_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_med_explosion
-
 	MinRange: 2010
+	Report: ROCKET1.WAV
+
 IxRailgunDroneBullet:
 	Inherits: ^FlakWeapon
 	Inherits@2: ^TankDestroyerCannon

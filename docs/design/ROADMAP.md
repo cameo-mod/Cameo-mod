@@ -1657,6 +1657,21 @@ window.
   smudge/glow/shield/concrete effects; `review_resolve_diff.py` OK, all
   targeted audits clean, ledgers re-extracted and `audit_balance_drift` clean,
   boot-gated with no new exception log.
+- [x] **Ixian giant multi-warhead split** (2026-08-23) — converted
+  `D2K_TowerMissile` and `mtank_pri2` in `ContentPacks/D2k/Ixian/yaml/weapons.yaml`
+  to explicit `Inherits@wh/@wh2/@wh3` (and `@wh4` for the tower) + `@proj` + `@fx`.
+  Removed legacy `Inherits: ^Grenade`, `^MediumFlameWeapon`, `^FlakWeapon`, and
+  `^D2KMissile` inherits; added per-weapon `^Warhead_*_D2K_TowerMissile` and
+  `^Warhead_*_D2K_mtank_pri2` templates in D2K Shared to hold the giant multi-warhead
+  `Versus`/warhead data. Also added per-weapon `^Projectile_Missile_Heavy_D2K_TowerMissile`,
+  `^Projectile_Missile_Heavy_D2K_mtank_pri2`, `^Effect_MissileAP_Heavy_D2K_TowerMissile`,
+  and `^Effect_MissileAP_Heavy_D2K_mtank_pri2` templates. Preserved the giant
+  multi-warhead identity (Demolition + Flame + Flak + MissileAP for the tower;
+  Demolition + Flame + MissileAP for the tank), all resolved `Damage`/`Spread`/
+  `Falloff`/`Versus`/`DamageTypes`, and the D2K heavy missile projectile visuals
+  and effects; `scratchpad/compare_full.py` (full resolved-vs-baseline) OK,
+  `tools/audit/review_resolve_diff.py` OK, all targeted audits clean,
+  `audit_balance_drift` clean after re-extraction, boot-gated with no new exception log.
 - Note: 7 Ordos armor-rework files are the maintainer's live WIP — leave.
 
 ---

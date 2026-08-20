@@ -1,5 +1,49 @@
 # Development Log
 
+## 2026-08-23 — Ixian giant multi-warhead 3-way split (boot-gated)
+
+- Converted `D2K_TowerMissile` and `mtank_pri2` in
+  `mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml` from the old mixed
+  `^Grenade`/`^MediumFlameWeapon`/`^FlakWeapon`/`^D2KMissile` full-stack pattern to
+  explicit `Inherits@wh` / `Inherits@wh2` / `Inherits@wh3` (and `@wh4` for the tower)
+  / `Inherits@proj` / `Inherits@fx`.
+- Removed legacy full-stack inherits (`^Grenade`, `^MediumFlameWeapon`, `^FlakWeapon`,
+  `^D2KMissile`). Both weapons were added to the `docs/design/WEAPON_3WAY_SPLIT.md`
+  exception allow-list because their resolved giant multi-warhead identity requires
+  more than two warhead layers (Demolition + Flame + Flak + MissileAP for the tower;
+  Demolition + Flame + MissileAP for the tank).
+- Added four D2K Shared templates in `mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml`:
+  `^Projectile_Missile_Heavy_D2K_TowerMissile`,
+  `^Projectile_Missile_Heavy_D2K_mtank_pri2`,
+  `^Effect_MissileAP_Heavy_D2K_TowerMissile`, and
+  `^Effect_MissileAP_Heavy_D2K_mtank_pri2`.
+- Preserved resolved `Damage`, `Versus`, `Spread`, `Falloff`, `DamageTypes`,
+  `PhysicalState`, `ReloadDelay`, `Range`, `MinRange`, `Report`, `ValidTargets`,
+  `TargetActorCenter`, `Burst`/`BurstDelays`, `Projectile` visuals/turn behaviour,
+  `Concrete`, glow, smudges, shield-hit, air/water effects, and the mixed
+  Demolition/Flame/Flak/MissileAP warhead contributions on the tower.
+- Verification:
+  - `scratchpad/verify_ixian.py` (equivalent to `tools/audit/review_resolve_diff.py`)
+    OK for both weapons
+  - `tools/audit/effect_audit.py` → 0 duplicate `DamagesConcrete`
+  - `tools/audit/find_empty_warhead.py` → 0 empty warheads
+  - `tools/audit/find_orphan_old_keys.py` → 0 real bugs
+  - `tools/audit/audit_warhead_split.py` at/below baseline (952)
+  - `tools/audit/audit_balance_drift.py` → 32 ledgers clean (re-extracted via `extract_stats.py`)
+  - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`
+
+- **Post-audit correction:** `tools/audit/review_resolve_diff.py` compared
+  the core behavioural invariants, but a full resolved-vs-baseline diff
+  (`scratchpad/compare_full.py`) showed the per-weapon `Versus` and warhead
+  overrides still lived inside the weapon nodes. Restructured the two Ixian
+  weapons so every `Versus` row lives in dedicated D2K Shared
+  `^Warhead_*_D2K_TowerMissile` / `^Warhead_*_D2K_mtank_pri2` templates (with all
+  plating rows present, missing ones at the 100% default), and the weapon nodes
+  only carry `Inherits@wh`/`Inherits@wh2`/`Inherits@wh3` (and `@wh4` for the
+  tower) plus `Inherits@proj`/`Inherits@fx`. This eliminates the `-Key:` removal
+  hacks while preserving the resolved baseline exactly. Re-extracted all balance
+  ledgers (`extract_stats.py`) and re-ran `audit_balance_drift.py` (clean).
+
 ## 2026-08-23 — D2K Rocket Trooper family 3-way split (boot-gated)
 
 - Converted `D2K_Rocket_Trooper` (`mods/cameo/weapons/d2k.yaml`),

@@ -767,49 +767,49 @@
         "damage": "4000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "400",
-        "tag": "Grenade",
+        "tag": "Demolition_Light",
         "type": "SpreadDamage"
        },
        {
         "damage": "2000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
-        "tag": "GrenadeFriendlyFire",
+        "tag": "Demolition_Light_FriendlyFire",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
-        "tag": "GrenadePercentage",
+        "tag": "Demolition_Light_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
-        "tag": "MediumFlameWeapon",
+        "tag": "Flame_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
+        "tag": "Flame_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
         "falloff": null,
         "spread": "250",
-        "tag": "FlakWeapon",
+        "tag": "Flak_Medium",
         "type": "SpreadDamage"
        },
        {
         "damage": "2",
         "falloff": null,
         "spread": "125",
-        "tag": "FlakWeaponPercentage",
+        "tag": "Flak_Medium_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -828,23 +828,28 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "2135",
       "pricing": true,
       "range": "10684",
       "reloaddelay": "42",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Grenade",
-       "^MediumFlameWeapon",
-       "^FlakWeapon",
-       "^D2KMissile"
+       "^Warhead_Demolition_Light_D2K_TowerMissile",
+       "^Warhead_Flame_Medium_D2K_TowerMissile",
+       "^Warhead_Flak_Medium_D2K_TowerMissile",
+       "^Warhead_MissileAP_Heavy_D2K_TowerMissile",
+       "^Projectile_Missile_Heavy_D2K_TowerMissile",
+       "^Effect_MissileAP_Heavy_D2K_TowerMissile"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_Demolition_Light_D2K_TowerMissile",
+       "^Warhead_Flame_Medium_D2K_TowerMissile",
+       "^Warhead_Flak_Medium_D2K_TowerMissile",
+       "^Warhead_MissileAP_Heavy_D2K_TowerMissile"
       ],
       "weapon": "D2K_TowerMissile",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
