@@ -289,7 +289,8 @@ into `^Projectile_Shell_Light_D2K_Mortar` and `^Effect_CannonAP_Light_D2K_Mortar
 then `D2K_Rocket` and `Fremen_RPG` moved their `d2k_rocket_explosion` effect
 into `^Effect_MissileAP_Heavy_D2K_Rocket_Blast` and
 `^Effect_MissileAP_Heavy_D2K_Missile_Blast` while keeping their custom
-concrete and warhead stacks.
+concrete and warhead stacks; then `oRocket` moved its `d2k_rocket_explosion`
+effect into `^Effect_MissileAP_Heavy_D2K_Rocket_Blast`.
 
 **RESUME — Phase 2 remaining families** (one commit each: `--old <names>` → self-check → boot → commit):
 `LightMissile,MediumMissile,HeavyMissile` + `FlakWeapon,HeavyAAWeapon` → then

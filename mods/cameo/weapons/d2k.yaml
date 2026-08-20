@@ -2307,6 +2307,7 @@ oBazooka:
 
 oRocket:
 	Inherits: ^ORocket
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Blast
 	ReloadDelay: 30
 	Range: 3584
 	Projectile: Bullet
@@ -2325,9 +2326,6 @@ oRocket:
 			harvester: 50
 	Warhead@2Concrete: DamagesConcrete
 		Damage: 625
-	Warhead@3Eff: CreateEffect
-		Explosions: d2k_rocket_explosion
-		ExplosionPalette: effect75alpha
 
 oTowerMissile:
 	Inherits: ^OMissile
