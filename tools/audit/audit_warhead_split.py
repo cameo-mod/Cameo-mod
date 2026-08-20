@@ -50,11 +50,11 @@ REVIEW_DMG = 8000
 # a hand edit or a foreign tool reintroduced the bug distribute_damage exists to
 # prevent.
 #
-# ⚠ 972, not the 874 quoted in the W24 diagnosis: that figure counts only weapons
+# ⚠ 970, not the 874 quoted in the W24 diagnosis: that figure counts only weapons
 # FIRED by a concrete actor, while this audit scans EVERY concrete weapon
 # (`rs.weapons`), fired or not. Two populations, both correct for their own
 # question — don't reconcile them by changing one.
-BROADCAST_BASELINE = 972
+BROADCAST_BASELINE = 970
 
 
 def _int(v) -> int:

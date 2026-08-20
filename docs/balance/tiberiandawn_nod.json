@@ -1414,48 +1414,36 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
+        "damage": "12000",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
+        "type": "AreaDamage"
        },
        {
-        "damage": "3",
-        "falloff": null,
-        "spread": "250",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "6",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "200",
+        "tag": "MissileAA_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "12193",
       "reloaddelay": "40",
       "slot": "Armament",
       "versus_templates": [
-       "^HeavyAAWeapon",
-       "^ImpactGlow",
-       "^HeavyMissile"
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Flak_Heavy",
+       "^Effect_Flak_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Heavy"
+      ],
       "weapon": "Dragon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

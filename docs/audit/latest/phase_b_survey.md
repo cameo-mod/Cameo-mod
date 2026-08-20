@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 331
+Total concrete weapons on old families: 329
 Single old-family with new inherits (Phase B completion): 2
 Pure single old-family (mechanical Phase A candidates): 20
-Mixed old-family (Phase B maintainer sign-off): 309 in 221 groups
+Mixed old-family (Phase B maintainer sign-off): 307 in 220 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `AsianChemicalBombs` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | old: HeavyChemicalWeapon | HeavyChemicalWeapon=2000, HeavyChemicalWeaponPercentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, Effect=0, Cloud=0
@@ -278,10 +278,6 @@ Mixed old-family (Phase B maintainer sign-off): 309 in 221 groups
 ### FlakWeapon, HeavyAAWeapon, HeavyMissile, MediumMissile (2 weapons)
 - `RA2MultiThunderboltMissile` (weapons\redalert2.yaml) | dominant: HeavyMissile(2000) | HeavyMissile=2000, HeavyMissilePercentage=1, HeavyAAWeapon=2000, HeavyAAWeaponPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1 | → collapse to HeavyMissile
 - `RA2ThunderboltMissile` (weapons\redalert2.yaml) | dominant: HeavyMissile(2000) | HeavyMissile=2000, HeavyMissilePercentage=1, HeavyAAWeapon=2000, HeavyAAWeaponPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, ArrowWeapon=2000, ArrowWeaponPercentage=1, MissileAP_Light=2000, MissileAP_Light_Percentage=1 | → collapse to HeavyMissile
-
-### FlakWeapon, LightMissile, MediumMissile, ShrapnelWeapon (2 weapons)
-- `FutureJavelinRockets` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | dominant: LightMissile(2000) | LightMissile=2000, LightMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, MissileAP_Heavy=2000, MissileAP_Heavy_Percentage=1 | → collapse to LightMissile
-- `Future_MultiMissile_Javelin` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | dominant: LightMissile(2000) | LightMissile=2000, LightMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, MissileAP_Heavy=2000, MissileAP_Heavy_Percentage=1 | → collapse to LightMissile
 
 ### Grenade, HeavyBomb, MediumFlameWeapon, ShrapnelWeapon (2 weapons)
 - `D2K_155mm2` (ContentPacks\D2k\Ixian\yaml\weapons.yaml) | dominant: Grenade(12000) | Grenade=12000, GrenadeFriendlyFire=6000, GrenadePercentage=6, MediumFlameWeapon=12000, MediumFlameWeaponPercentage=6, ShrapnelWeapon=12000, ShrapnelWeaponFriendlyFire=6000, ShrapnelWeaponPercentage=6, HeavyBomb=12000, HeavyBombPercentage=6, Effect=0 | → collapse to Grenade

@@ -1,5 +1,29 @@
 # Development Log
 
+## 2026-08-22 — W24 cluster 4: Dragon SAM (boot-gated)
+
+- Converted `Dragon` in `mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml` to the
+  3-way split using `^Warhead_MissileAA_Heavy`, `^Projectile_Flak_Heavy`, `^Effect_Flak_Heavy`.
+- Removed old `^HeavyAAWeapon`, `^HeavyMissile`, and `^ImpactGlow` inherits; moved the
+  `GlowImpact` warhead into the local effect layer.
+- Preserved the homing `Missile` projectile with `Image: MISSILE`, `TrailImage: smokey`,
+  inaccuracy 150, speed 500, launch/turn behavior, and the AA-only `ValidTargets: Air`.
+- Collapsed two 6000-damage warheads into one `Damage: 12000` main and `Damage: 6`
+  percentage, preserving `ValidRelationships: Neutral, Enemy`.
+- Preserved `big_frag` / `small_building` / `small_splash` impact effects, shield-hit
+  duration 10, concrete damage 200, and all smudge behavior.
+- Lowered `BROADCAST_BASELINE` in `tools/audit/audit_warhead_split.py` from 972 to 970.
+- Regenerated balance ledgers and derived sidecars for affected factions.
+- Updated `docs/design/BALANCE_PROGRAM_PLAN.md` W24 status line.
+- Verification:
+  - `find_empty_warhead.py` = 0
+  - `find_orphan_old_keys.py` = 0 real bugs
+  - `audit_warhead_split.py` at/below baseline
+  - `audit_balance_drift.py` clean
+  - `review_resolve_diff.py` OK for `dragon`
+  - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new
+    `exception-*.log`.
+
 ## 2026-08-22 — W24 cluster 3: FutureTech missile javelins (boot-gated)
 
 - Converted `FutureJavelinRockets`, its children (`_elite`, `Deployed`, `Deployed_elite`),
