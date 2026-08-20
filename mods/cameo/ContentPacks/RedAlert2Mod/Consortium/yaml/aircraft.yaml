@@ -508,13 +508,11 @@ steelconsortium_cloudbreaker:
 		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: SteelEmpressVoice
+	# Geometry-only exception; size and timing stay on the shared aircraft-standard sequence.
 	WithIdleOverlay@shield1:
 		Image: hexshield_directional_oval
-		Sequence: directional-oval-large
-		StartSequence: directional-oval-large
 	WithIdleOverlay@shield_damage:
 		Image: hexshield_directional_oval
-		Sequence: directional-oval-large
 	CarrierMaster:
 		Actors: cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel
 		RearmTicks: 25

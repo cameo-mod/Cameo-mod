@@ -1179,11 +1179,6 @@ ixian_ixcombatsiege:
 ixian_neocymek:
 	Inherits: ^Vehicle
 	Inherits@Template: ^DreadnoughtTemplate
-	WithIdleOverlay@shield1:
-		Sequence: sphere-medium
-		StartSequence: sphere-medium
-	WithIdleOverlay@shield_damage:
-		Sequence: sphere-medium
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff

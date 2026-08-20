@@ -1,10 +1,5 @@
 protoss_zealot:
 	Inherits@protoss: ^BasicProtoss
-	WithIdleOverlay@shield1:
-		Sequence: infantry-compact
-		StartSequence: infantry-compact
-	WithIdleOverlay@shield_damage:
-		Sequence: infantry-compact
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD

@@ -22,13 +22,8 @@ protoss_nexus:
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: pshbld03.aud
 	WithIdleOverlay@shield1:
-		Image: hexshield_dome
-		Sequence: dome-raised-medium
-		StartSequence: dome-raised-medium
 		RequiresCondition: !disabled && shielded && !shieldhit && !build-incomplete
 	WithIdleOverlay@shield_damage:
-		Image: hexshield_dome
-		Sequence: dome-raised-medium
 		RequiresCondition: !disabled && shielded && shieldhit && !build-incomplete
 	Production@INFANTRY:
 		Produces: Infantry

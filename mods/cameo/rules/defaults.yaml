@@ -14,7 +14,25 @@
 	QuantizeFacingsFromSequence:
 	RenderSprites:
 
+# Complete dormant overlay pair inherited by building footprint classes.
+# Palette selection remains with ^ShieldedShieldable and faction templates.
+^ShieldDomeShapeVisual:
+	WithIdleOverlay@shield1:
+		Image: hexshield_dome
+		RequiresCondition: !disabled && shielded && !shieldhit
+		IsDecoration: True
+	WithIdleOverlay@shield_damage:
+		Image: hexshield_dome
+		RequiresCondition: !disabled && shielded && shieldhit
+		IsDecoration: True
+
 ^1x1Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-1x1
+		StartSequence: dome-1x1
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-1x1
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -24,6 +42,12 @@
 		Bounds: 1024, 1024
 
 ^1x2Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-1x2
+		StartSequence: dome-1x2
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-1x2
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -33,6 +57,12 @@
 		Bounds: 1024, 2048
 
 ^2x1Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-2x1
+		StartSequence: dome-2x1
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-2x1
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -42,6 +72,12 @@
 		Bounds: 2048, 1024
 
 ^2x2Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-2x2
+		StartSequence: dome-2x2
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-2x2
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -51,6 +87,12 @@
 		Bounds: 2048, 2048
 
 ^2x3Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-2x3
+		StartSequence: dome-2x3
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-2x3
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -60,6 +102,12 @@
 		Bounds: 2048, 3072
 
 ^3x2Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-3x2
+		StartSequence: dome-3x2
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-3x2
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -69,6 +117,12 @@
 		Bounds: 3072, 2048
 
 ^3x3Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-3x3
+		StartSequence: dome-3x3
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-3x3
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -78,6 +132,12 @@
 		Bounds: 3072, 3072
 
 ^3x4Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-3x4
+		StartSequence: dome-3x4
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-3x4
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -87,6 +147,12 @@
 		Bounds: 3072, 4096
 
 ^3x5Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-3x5
+		StartSequence: dome-3x5
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-3x5
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -96,6 +162,12 @@
 		Bounds: 3072, 5120
 
 ^4x2Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-4x2
+		StartSequence: dome-4x2
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-4x2
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -105,6 +177,12 @@
 		Bounds: 4096, 2048
 
 ^4x3Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-4x3
+		StartSequence: dome-4x3
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-4x3
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -114,6 +192,12 @@
 		Bounds: 4096, 3072
 
 ^4x4Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-4x4
+		StartSequence: dome-4x4
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-4x4
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -123,6 +207,12 @@
 		Bounds: 4096, 4096
 
 ^4x5Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-4x5
+		StartSequence: dome-4x5
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-4x5
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -132,6 +222,12 @@
 		Bounds: 4096, 5120
 
 ^5x3Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-5x3
+		StartSequence: dome-5x3
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-5x3
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -141,6 +237,12 @@
 		Bounds: 5120, 3072
 
 ^5x4Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-5x4
+		StartSequence: dome-5x4
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-5x4
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -150,6 +252,12 @@
 		Bounds: 5120, 4096
 
 ^5x5Shape:
+	Inherits@shieldvisual: ^ShieldDomeShapeVisual
+	WithIdleOverlay@shield1:
+		Sequence: dome-5x5
+		StartSequence: dome-5x5
+	WithIdleOverlay@shield_damage:
+		Sequence: dome-5x5
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -1795,11 +1903,11 @@
 		Description: Dreadnought
 	WithIdleOverlay@shield1:
 		Image: hexshield_sphere
-		Sequence: sphere-large
-		StartSequence: sphere-large
+		Sequence: large-mobile-standard
+		StartSequence: large-mobile-standard
 	WithIdleOverlay@shield_damage:
 		Image: hexshield_sphere
-		Sequence: sphere-large
+		Sequence: large-mobile-standard
 
 ^MissileVehicleTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceVehicle
@@ -2365,11 +2473,11 @@
 		Sounds: bgrinda.wav
 	WithIdleOverlay@shield1:
 		Image: hexshield_sphere
-		Sequence: sphere-medium
-		StartSequence: sphere-medium
+		Sequence: vehicle-standard
+		StartSequence: vehicle-standard
 	WithIdleOverlay@shield_damage:
 		Image: hexshield_sphere
-		Sequence: sphere-medium
+		Sequence: vehicle-standard
 	WithIdleOverlay@shrouded:
 		Image: shrouded_overlay
 	ProductionCostMultiplier@scaledprices:
@@ -2380,13 +2488,13 @@
 	Inherits: ^BasicUnit
 	WithIdleOverlay@shield1:
 		Image: hexshield_sphere
-		Sequence: sphere-medium
-		StartSequence: sphere-medium
+		Sequence: vehicle-standard
+		StartSequence: vehicle-standard
 		Palette: hexshield25
 		IsPlayerPalette: false
 	WithIdleOverlay@shield_damage:
 		Image: hexshield_sphere
-		Sequence: sphere-medium
+		Sequence: vehicle-standard
 		Palette: hexshield50
 		IsPlayerPalette: false
 	# Muzzle-flash glow for every ground vehicle; gated per-armament by MuzzleSequence, so only
@@ -2579,10 +2687,10 @@
 ^BoatUnit:
 	Inherits: ^Vehicle
 	WithIdleOverlay@shield1:
-		Sequence: sphere-large
-		StartSequence: sphere-large
+		Sequence: naval-standard
+		StartSequence: naval-standard
 	WithIdleOverlay@shield_damage:
-		Sequence: sphere-large
+		Sequence: naval-standard
 	# Ships weren't part of the muzzle-flash pass; opt the whole naval line out (re-enable per-ship if wanted).
 	-WithMuzzleGlow:
 	Inherits@snipe: ^DriverKillImmune
@@ -2728,13 +2836,13 @@
 	Inherits@1: ^BasicUnit
 	WithIdleOverlay@shield1:
 		Image: hexshield_sphere
-		Sequence: sphere-medium
-		StartSequence: sphere-medium
+		Sequence: aircraft-standard
+		StartSequence: aircraft-standard
 		Palette: hexshield25
 		IsPlayerPalette: false
 	WithIdleOverlay@shield_damage:
 		Image: hexshield_sphere
-		Sequence: sphere-medium
+		Sequence: aircraft-standard
 		Palette: hexshield50
 		IsPlayerPalette: false
 	Inherits@ext: ^ExternalConditions
@@ -4068,13 +4176,6 @@
 			powerdown: -10, 0
 	ActorStatValues:
 		Stats: Armor, Sight, Power
-	WithIdleOverlay@shield1:
-		Image: hexshield_dome
-		Sequence: dome-medium
-		StartSequence: dome-medium
-	WithIdleOverlay@shield_damage:
-		Image: hexshield_dome
-		Sequence: dome-medium
 	WithIdleOverlay@shrouded:
 		Image: shrouded_overlay_big
 	DamagedByTerrain:
@@ -4390,6 +4491,8 @@
 ^Wall:
 	Inherits@1: ^SpriteActor
 	Inherits@shape: ^1x1Shape
+	-WithIdleOverlay@shield1:
+	-WithIdleOverlay@shield_damage:
 	Inherits@cloak: ^StealthGenCloakable
 	-Selectable:
 	Interactable:
@@ -4678,6 +4781,8 @@
 
 ^Bridge:
 	Inherits@shape: ^1x1Shape
+	-WithIdleOverlay@shield1:
+	-WithIdleOverlay@shield_damage:
 	Tooltip:
 		Name: Bridge
 		ShowOwnerRow: false
@@ -4756,13 +4861,6 @@
 	-GivesBuildableArea:
 	-CommandBarBlacklist:
 	-AcceptsDeliveredCash:
-	WithIdleOverlay@shield1:
-		Image: hexshield_dome
-		Sequence: dome-small
-		StartSequence: dome-small
-	WithIdleOverlay@shield_damage:
-		Image: hexshield_dome
-		Sequence: dome-small
 	WithIdleOverlay@shrouded:
 		Image: shrouded_overlay
 

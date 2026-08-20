@@ -38,11 +38,6 @@ protoss_probe:
 
 protoss_dragoon:
 	Inherits: ^LargeProtoss
-	WithIdleOverlay@shield1:
-		Sequence: sphere-small
-		StartSequence: sphere-small
-	WithIdleOverlay@shield_damage:
-		Sequence: sphere-small
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@Template: ^MainBattleTankTemplate
