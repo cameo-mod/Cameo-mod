@@ -3,6 +3,7 @@ TS30mm:
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
+	Report: aacanon3.aud
 	ReloadDelay: 26
 	Burst: 3
 	Range: 6125
@@ -48,6 +49,7 @@ TS120mmRail:
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	ReloadDelay: 44
 	Range: 6201
 	Warhead@CannonHE_Medium:
@@ -64,6 +66,7 @@ TS120mmTal:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
+	Report: tnkfire6.aud
 	ReloadDelay: 50
 	Range: 6201
 	Projectile: Bullet
@@ -81,6 +84,7 @@ TS120mmTalRail:
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	ReloadDelay: 50
 	Range: 6201
 	Warhead@CannonHE_Medium:
@@ -210,15 +214,19 @@ KodiakCannon:
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Speed: 850
-	Warhead@HeavyChemicalWeapon: SpreadDamage
+	Warhead@HeavyChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 4000
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 4
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -570,6 +578,44 @@ TSHoverMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
+TSDestroyerMissiles:
+	Inherits: ^FlakWeapon
+	Inherits: ^MediumMissile
+	Inherits: ^ShrapnelWeapon
+	ValidTargets: Ground, Water, Air
+	Report: missile6.aud
+	ReloadDelay: 60
+	Burst: 4
+	BurstDelays: 4
+	Range: 8159
+	Report: hovrmis1.aud
+	Projectile: Missile
+		RangeLimit: 22c512
+		HorizontalRateOfTurn: 20
+		Inaccuracy: 32
+		VerticalRateOfTurn: 20
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+
 TSMammothTusk2:
 	Inherits@glow: ^ImpactGlow
 	Inherits@wh: ^Warhead_MissileAP_Heavy
@@ -875,6 +921,7 @@ TSAssaultCannonSonic:
 	Inherits@wh2: ^Warhead_Sonic_Medium
 	Inherits@proj: ^Projectile_Sonic_Shell
 	Inherits@fx: ^Effect_Sonic_Shell
+	Report: 120mmf.aud
 	ReloadDelay: 45
 	Burst: 2
 	BurstDelays: 2
@@ -910,6 +957,7 @@ TSAssaultCannonTalSonic:
 	Inherits@wh2: ^Warhead_Sonic_Medium
 	Inherits@proj: ^Projectile_Sonic_Shell
 	Inherits@fx: ^Effect_Sonic_Shell
+	Report: 120mmf.aud
 	ReloadDelay: 45
 	Projectile: Bullet
 		Speed: 2000
@@ -927,7 +975,6 @@ TSVulcanGun:
 	Burst: 4
 	BurstDelays: 2
 	Range: 6809
-	-Report:
 	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
@@ -947,7 +994,6 @@ TSVulcanGunSonic:
 	Burst: 4
 	BurstDelays: 2
 	Range: 6809
-	-Report:
 	Warhead@Bullet_Medium: AreaDamage
 		Damage: 8000
 	Warhead@Sonic_Medium: AreaDamage
@@ -991,6 +1037,7 @@ TSAAPCCannon:
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
+	Report: aacanon3.aud
 	ReloadDelay: 10
 	Range: 6263
 	ValidTargets: Ground, Water, Air
@@ -1033,6 +1080,7 @@ TSMechMGII:
 
 TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 	Inherits: IonCannon
+	Report: tesla1.aud
 	Range: 12288
 	AirThreshold: 8c0
 	ValidTargets: Ground, Water, Air
@@ -1115,6 +1163,7 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 
 TSIonBeamMini:
 	Inherits: ^TSIonBeam
+	Report: tesla1.aud
 	Range: 5376
 	AirThreshold: 8c0
 	Projectile: SpriteAthenaLaser
@@ -1130,6 +1179,7 @@ TSIonBeamMini:
 
 TSIonBeamMiniEnd:
 	Inherits: ^TSIonBeam
+	Report: tesla1.aud
 	Projectile: SpriteAthenaLaser
 		StayTicks: 45
 		Sequence: ionbeamstart
@@ -1138,6 +1188,7 @@ TSIonBeamMiniEnd:
 
 TSIonbeam:
 	Inherits: ^TSIonBeam
+	Report: tesla1.aud
 	Projectile: SpriteAthenaLaser
 		Image: explosion
 		Sequence: ionbeam

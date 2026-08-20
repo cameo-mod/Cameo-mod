@@ -1,11 +1,11 @@
 # audit_security — credentials, code execution, supply chain
 
-Files scanned: **1338**
+Files scanned: **1370**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | S1 | committed credential shapes | 0 | 0 |
-| S2 | code execution from data | 0 | 0 |
+| S2 | code execution from data | 1 | 0 |
 | S3 | plaintext http:// download | 0 | 0 |
 | S4 | unpinned third-party GitHub Action | 0 | 0 |
 | S5 | unpinned/floating NuGet package | 0 | 0 |
@@ -17,9 +17,11 @@ Files scanned: **1338**
 _none found_
 
 
-## S2 — 0 finding(s)
+## S2 — 1 finding(s)
 
-_none found_
+| file | line | detail |
+|---|---|---|
+| tools/balance/formula.py | 58 | `eval()` |
 
 
 ## S3 — 0 finding(s)
@@ -48,4 +50,9 @@ _none found_
   `dotnet list CameoMod.sln package --vulnerable --include-transitive`
   as part of the periodic security run and paste the output into the
   evidence file.
+
+
+## FAIL
+
+- S2: 1 > baseline 0
 

@@ -123,21 +123,14 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -165,21 +158,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -278,7 +264,31 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Health.HP",
      "v": "37500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Cruiser Fighter",
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.MaxPercentageStrength",
+     "v": "200"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#RevealsShroud.Range",
      "v": "10000"
@@ -407,42 +417,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -605,7 +601,23 @@
      "src": "inherited",
      "v": "10000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Anti Air Scalpel",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -719,7 +731,23 @@
      "src": "inherited",
      "v": "10000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Scalpel",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -759,42 +787,28 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -902,42 +916,28 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -1034,7 +1034,23 @@
      "src": "inherited",
      "v": "10000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Quantum Scalpel",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -1116,6 +1132,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Health.HP",
      "v": "125000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Cargo Ship",
     "prerequisites": [
      "~steelconsortium_consortiumairpad"
@@ -1124,6 +1144,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -1418,6 +1450,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Health.HP",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Cloud Breaker",
     "prerequisites": [
      "~steelconsortium_consortiumairpad",
@@ -1428,6 +1464,26 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.MaxPercentageStrength",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12345"
@@ -1545,6 +1601,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Health.HP",
      "v": "1500000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "200"
+    },
     "name": "Empress Station",
     "prerequisites": [
      "~steelconsortium_consortiumairpad",
@@ -1554,6 +1614,26 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.MaxPercentageStrength",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12345"
@@ -1814,6 +1894,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Health.HP",
      "v": "120000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Sky Hammer",
     "prerequisites": [
      "~steelconsortium_consortiumairpad",
@@ -1823,6 +1907,26 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Shielded.MaxPercentageStrength",
+     "v": "200"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -1865,21 +1969,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -1976,21 +2073,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -2074,6 +2164,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml#Health.HP",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Twister",
     "prerequisites": [
      "~steelconsortium_consortiumairpad"
@@ -2082,6 +2176,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -2307,6 +2413,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Health.HP",
      "v": "121000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Anti Air Quantum Missile Turret",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -2316,6 +2426,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "12000"
@@ -2584,6 +2706,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Health.HP",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "BFG 10000",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -2594,6 +2720,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "25000"
@@ -2624,6 +2762,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Health.HP",
      "v": "110000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Cloning Vats",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -2633,6 +2775,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
@@ -2663,6 +2817,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Consortium Airpad",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -2672,6 +2830,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -2702,6 +2872,10 @@
      "src": "inherited",
      "v": "500000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Consortium Battle Lab",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -2711,6 +2885,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -2737,6 +2923,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Consortium Construction Yard",
     "prerequisites": [
      "~disabled"
@@ -2745,6 +2935,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -2771,6 +2973,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Health.HP",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Consortium Power Plant",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard"
@@ -2779,6 +2985,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
@@ -2809,6 +3027,10 @@
      "src": "inherited",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Consortium Radar",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -2818,6 +3040,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -2848,6 +3082,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Consortium Refinery",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -2857,6 +3095,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -3031,6 +3281,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Health.HP",
      "v": "88000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Consortium Sentry Turret",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -3040,6 +3294,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "6666"
@@ -3070,6 +3336,10 @@
      "src": "inherited",
      "v": "400000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Consortium War Factory",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -3079,6 +3349,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -3113,6 +3395,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Health.HP",
      "v": "750000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Geothermal Reactor",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -3123,6 +3409,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -3157,6 +3455,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Orbital Cannon Activator",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -3168,6 +3470,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -3220,42 +3534,28 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -3364,42 +3664,28 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -3508,42 +3794,28 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -3647,42 +3919,28 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -3778,6 +4036,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#Health.HP",
      "v": "230000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Quantum Cannon",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -3787,6 +4049,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "8888"
@@ -3817,6 +4091,10 @@
      "src": "inherited",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Steel Barracks",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
@@ -3826,6 +4104,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -4390,6 +4680,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6500"
@@ -4462,6 +4768,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -4480,21 +4806,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -4576,21 +4895,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -4668,21 +4980,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -4765,21 +5070,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -4856,21 +5154,14 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -4898,21 +5189,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -4993,21 +5277,14 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -5035,21 +5312,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -5127,21 +5397,14 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -5169,21 +5432,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -5265,21 +5521,14 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -5307,21 +5556,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -5427,6 +5669,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5500"
@@ -5645,42 +5899,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -5857,42 +6097,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -6261,42 +6487,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -6474,42 +6686,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -6860,42 +7058,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -7073,42 +7257,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -7280,6 +7450,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -7990,6 +8172,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -8558,42 +8752,28 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -8695,42 +8875,28 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -8826,6 +8992,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "325000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Federation Cobra",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -8836,6 +9006,26 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.InitialPercentageStrength",
+     "v": "50"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
+     "v": "50"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -8937,6 +9127,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Federation Cougar",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -8946,6 +9140,26 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.InitialPercentageStrength",
+     "v": "200"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
+     "v": "200"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -9003,7 +9217,8 @@
       "slot": "Armament@AG",
       "versus_templates": [
        "^ArrowWeapon",
-       "^SteelLightMissile"
+       "^SteelLightMissile",
+       "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -9052,7 +9267,8 @@
       "requires": "rank-elite",
       "slot": "Armament@AGELITE",
       "versus_templates": [
-       "SteelHoverMissile"
+       "SteelHoverMissile",
+       "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"
@@ -9082,6 +9298,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "45000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Federation Hummer",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -9091,6 +9311,26 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.InitialPercentageStrength",
+     "v": "150"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
+     "v": "150"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -9240,6 +9480,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "112500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Beta Quantum Tank",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -9250,6 +9494,26 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -9744,6 +10008,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Barracuda",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -9753,6 +10021,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -9792,6 +10072,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Consortium Miner",
     "prerequisites": [
      "~steelconsortium_consortiumrefinery"
@@ -9800,6 +10084,22 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -9839,6 +10139,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "150000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Consortium Mobile Construction Vehicle",
     "prerequisites": [
      "steelconsortium_consortiumradar",
@@ -9848,6 +10152,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -9872,21 +10188,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -9968,21 +10277,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -10079,6 +10381,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Dagger",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -10089,6 +10395,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -10311,42 +10629,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -10523,42 +10827,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -10721,6 +11011,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "210000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Defender Bot",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -10731,6 +11025,26 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
+     "v": "200"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -10884,6 +11198,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "52500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Hammerhead Artillery Tank",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -10893,6 +11211,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -11088,42 +11418,28 @@
         "falloff": null,
         "spread": null,
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": null,
-        "spread": null,
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": null,
         "spread": null,
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
         "falloff": null,
         "spread": null,
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": null,
         "spread": null,
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -11219,42 +11535,28 @@
         "falloff": null,
         "spread": null,
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": null,
-        "spread": null,
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": null,
         "spread": null,
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
         "falloff": null,
         "spread": null,
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": null,
         "spread": null,
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -11297,6 +11599,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "275000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Katy Tank",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -11307,6 +11613,26 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
+     "v": "200"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -11329,21 +11655,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -11425,21 +11744,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -11516,21 +11828,14 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -11558,21 +11863,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -11653,21 +11951,14 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -11695,21 +11986,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -11801,6 +12085,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "95000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Mako",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -11810,6 +12098,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -12478,6 +12778,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "55000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Manta",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -12487,6 +12791,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -12509,21 +12825,14 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -12591,21 +12900,14 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "15",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "30000",
@@ -12694,21 +12996,14 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "15",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "30000",
@@ -12794,6 +13089,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "450000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Megalodon",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -12803,6 +13102,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -12874,6 +13185,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "125000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Poseidon Tank",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -12883,6 +13198,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -13215,6 +13542,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Quantum Tank",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -13224,6 +13555,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -13492,6 +13835,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "140000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Stalker",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -13502,6 +13849,26 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.InitialPercentageStrength",
+     "v": "200"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
+     "v": "200"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -13553,6 +13920,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Support Shield Generator",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -13562,6 +13933,26 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
+     "v": "200"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -13695,6 +14086,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Health.HP",
      "v": "150000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "White Rabbit",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
@@ -13705,6 +14100,26 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "!disabled"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.InitialPercentageStrength",
+     "v": "200"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
+     "v": "200"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"

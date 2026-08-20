@@ -29,6 +29,7 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/balance"))
 import formula  # noqa: E402
+import tier_chain  # noqa: E402
 
 LEDGER = ROOT / "docs/balance"
 ANCHORS = LEDGER / "class_anchors.json"
@@ -118,23 +119,52 @@ def unit_inputs(u, du=None, use_k=False):
     total_dps *= fp   # apply the actor-level FirepowerMultiplier to effective DPS
     if hp is None or speed is None or total_dps == 0:
         return None, 0
+    # Tech tier: manual design.tech_tier is the maintainer override;
+    # otherwise fall back to the derived sidecar's computed f(C).
+    tech_tier = tier_chain.effective_tier(d.get("tech_tier"),
+                                          (du or {}).get("tier_multiplier"),
+                                          default=1.0)
     return ((hp, speed, best_range, total_dps,
              fnum(d.get("special")) or 1.0, fnum(d.get("unit_class")) or 1.0,
-             fnum(d.get("tech_tier")) or 1.0), fallbacks)
+             tech_tier), fallbacks)
 
 
-def price_unit(u, inp, o0, p0, q0, cost0) -> float:
+def physical_state_weight(u, du=None) -> float:
+    """Delivery weight for the physical-state price multiplier, or 0.
+
+    The value is read from the derived sidecar first (the canonical place after
+    `extract_stats.split_derived`), then from a still-attached `_derived` blob,
+    then from a raw top-level field, so the helper works whether the caller has
+    already merged the sidecar or not.
+    """
+    for src in (u.get("_derived") if isinstance(u, dict) else None,
+                du or {},
+                u if isinstance(u, dict) else {}):
+        if src and "physical_state_weight" in src:
+            return float(src["physical_state_weight"])
+    return 0.0
+
+
+def price_unit(u, du, inp, o0, p0, q0, cost0) -> float:
     """Formula-v2 price for one ledger unit, including the actor-level modifiers.
 
     The charge-up discount is applied to the PRICE, after the estimators, not to
     DPS: O/P/Q are degree 1/2/3 in their inputs, so scaling DPS would not produce
     a clean 0.75x on the result. Charging is an ACTOR property (W4) — the delay
     inflates the effective reload AND the unit is helpless while it winds up.
+
+    The physical-state surcharge (E2) is also an actor-level price multiplier:
+    it is proportional to delivery, so a heat/chemical unit that does not fill
+    the meter pays less than the 1.25x ceiling. The weight comes from the derived
+    sidecar so it cannot desync from the raw ledger.
     """
     o, p, q = formula.estimators(*inp)
     v2 = formula.class_anchor_price(o, p, q, o0, p0, q0, cost0)
-    return v2 * formula.charge_price_multiplier(u.get("charge_up"),
-                                                charge_cycle_fallback(u))
+    return (v2
+            * formula.charge_price_multiplier(u.get("charge_up"),
+                                              charge_cycle_fallback(u))
+            * formula.physical_state_price_multiplier(
+                physical_state_weight(u, du)))
 
 
 def charge_cycle_fallback(u) -> float | None:
@@ -320,7 +350,7 @@ def main() -> int:
             if inp is None or cost is None:
                 rws.append((actor, cost, None, None))
                 continue
-            v2 = price_unit(u, inp, *e0, c0)
+            v2 = price_unit(u, derived.get(actor), inp, *e0, c0)
             rws.append((actor, cost, v2, (v2 - cost) / cost if cost else None))
         return (args.anchor, c0) + e0 + (rws, fb)
 
@@ -356,13 +386,30 @@ def main() -> int:
     rep.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
     anchors = json.loads(ANCHORS.read_text(encoding="utf-8"))
-    anchors[args.cls] = {"anchor_actor": args.anchor or anchor_id, "cost0": cost0,
-                         "o0": round(o0, 4), "p0": round(p0, 4),
-                         "q0": round(q0, 4), "signed_off": False,
-                         "comment": "candidate — maintainer sign-off pending"}
+    # ⚠⚠ **MERGE, NEVER REPLACE.** This used to be `anchors[args.cls] = {...}`, which
+    # DESTROYED the rest of the entry — measured 2026-08-17 on `mbt`: one run wiped `spec`
+    # (cost0/dps0/hp0/range0_wdist/speed0), `armor`, `tech_tier`, `tech_tier_flag`,
+    # `verifier_actor`, `reveals_shroud` and the "★ LOCKED 2026-08-01" provisional note,
+    # leaving six keys behind. Those are the maintainer's DESIGN inputs, not fit outputs —
+    # `formula.class_baseline_price` reads `spec`, and the tier/verifier pair enforces the
+    # 2.5x identity ([[cameo-verifier-tier-k-match]]). The sign-off workflow is "run
+    # fit_class for each of the 27 classes, then review", so the obvious next step would
+    # have silently erased ALL 27 locked specs, with a clean exit 0 and a plausible report.
+    entry = dict(anchors.get(args.cls) or {})
+    was_signed = bool(entry.get("signed_off"))
+    entry.update({"anchor_actor": args.anchor or anchor_id, "cost0": cost0,
+                  "o0": round(o0, 4), "p0": round(p0, 4), "q0": round(q0, 4),
+                  # A fresh fit moves the numbers, so any previous approval is void.
+                  "signed_off": False,
+                  # Its OWN key: `comment` carries the maintainer's design rationale.
+                  "fit_comment": "candidate — maintainer sign-off pending"})
+    anchors[args.cls] = entry
     ANCHORS.write_text(json.dumps(anchors, sort_keys=True, indent=1,
                                   ensure_ascii=False) + "\n",
                        encoding="utf-8", newline="\n")
+    if was_signed:
+        print(f"⚠ `{args.cls}` was signed_off — this fit RESET it to false. "
+              f"Re-review before relying on it.")
     print(f"candidate written to class_anchors.json (signed_off: false); "
           f"validation -> {rep.relative_to(ROOT)}")
     return 0

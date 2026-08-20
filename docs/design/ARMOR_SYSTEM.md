@@ -40,7 +40,13 @@ Every damage weapon's Versus table is fully determined by two choices:
 
 - 16 non-Shield armor types, so 100 down in 15 steps to the floor:
   light 100,94,88,…,10 · medium 100,95,…,25 · heavy 100,96,…,40.
-- **Shield = top + floor** — the one unifying rule for BOTH warheads.
+- ⚠ **`Shield = top + floor` is RETIRED (W25, 2026-08-16).** It held only while every
+  profile peaked at exactly 100; once profiles were renormalised, "top" became a function
+  of each family's SHARPNESS and the rule rewarded sharpness instead of anti-shield design
+  (a sword read 200, a Tesla coil 151). Replaced by `DESIGN.md §12.0c`:
+  `Shield = PHYSICS_RANK x SHIELD_LEVEL x damped structural scale`, compressed onto exactly
+  [100, 400] with every value distinct and Tesla top at every level. The text below is kept
+  as the historical statement of the old law.
   Main warhead: top 100 + floor (10/25/40) = **110 / 125 / 140**.
   Shield is the only main value above 100; heavier weapons hit shields
   hardest.

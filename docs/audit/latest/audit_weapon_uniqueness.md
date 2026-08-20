@@ -1,6 +1,6 @@
 # Weapon uniqueness (DESIGN.md §10 — faction identity)
 
-damaging armament weapons checked: 1400; W1 same-faction 34, W2 cross-faction 34, W3 carrier-only 101
+damaging armament weapons checked: 1415; W1 same-faction 34, W2 cross-faction 34, W3 carrier-only 95
 
 
 ## W1 — same faction, distinct actors, identical weapon (34)
@@ -83,7 +83,7 @@ damaging armament weapons checked: 1400; W1 same-faction 34, W2 cross-faction 34
 | wc2peasantsmack | 2 | wc2_humans, wc2_orcs | wc2_humans_peasant, wc2_orcs_peon |
 
 
-## W3 — shared only with weapon-borrowing carriers (101)
+## W3 — shared only with weapon-borrowing carriers (95)
 
 | weapon | actors |
 |---|---|
@@ -132,12 +132,6 @@ damaging armament weapons checked: 1400; W1 same-faction 34, W2 cross-faction 34
 | ra2crm60h | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | ra2doublepistolsifv | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | ra2flaktrackgun | ra2_soviets_flaktrack, ra2_soviets_seascorpion |
-| ra2gattlingmg1 | yuri_gatlingcannon, yuri_gatlingtank |
-| ra2gattlingmg1_aa | yuri_gatlingcannon, yuri_gatlingtank |
-| ra2gattlingmg2 | yuri_gatlingcannon, yuri_gatlingtank |
-| ra2gattlingmg2_aa | yuri_gatlingcannon, yuri_gatlingtank |
-| ra2gattlingmg3 | yuri_gatlingcannon, yuri_gatlingtank |
-| ra2gattlingmg3_aa | yuri_gatlingcannon, yuri_gatlingtank |
 | ra2hovermissile | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | ra2hovermissile_aa | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | ra2hovermissile_aa_elite | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |

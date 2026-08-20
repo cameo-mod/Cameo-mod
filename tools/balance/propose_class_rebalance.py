@@ -18,6 +18,7 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/balance"))
 import formula  # noqa: E402
+import tier_chain  # noqa: E402
 
 LEDGER_DIR = ROOT / "docs/balance"
 ANCHORS_FILE = LEDGER_DIR / "class_anchors.json"
@@ -280,6 +281,12 @@ def load_class_rows(cls: str):
         if not isinstance(doc, dict):
             continue
         ledger_name = doc.get("ledger") or path.stem
+        dfile = LEDGER_DIR / "derived" / path.name
+        try:
+            ddoc = json.loads(dfile.read_text(encoding="utf-8-sig")) if dfile.is_file() else {}
+        except Exception:
+            ddoc = {}
+        dsec = ddoc.get("sections") or {}
         for section_name, section in doc.get("sections", {}).items():
             if not isinstance(section, dict):
                 continue
@@ -287,6 +294,7 @@ def load_class_rows(cls: str):
                 if not isinstance(u, dict):
                     continue
                 design = u.get("design") or {}
+                du = (dsec.get(section_name) or {}).get(actor) or {}
                 actor_cls = design.get("class_anchor") or subtype_to_anchor(design.get("subtype"))
                 if actor in EXCLUDED_ACTORS or actor_cls != cls:
                     continue
@@ -319,7 +327,8 @@ def load_class_rows(cls: str):
                     "fp0": fp0,
                     "base_dps": base_dps,
                     "special": fnum(design.get("special")) or 1.0,
-                    "tech_tier": fnum(design.get("tech_tier")) or 1.0,
+                    "tier_abs": tier_chain.effective_tier(
+                        design.get("tech_tier"), du.get("tier_multiplier"), default=1.0),
                     "protected": is_protected,
                     "note": "anchor" if actor == anchor.get("anchor_actor") else
                             ("verifier" if actor == anchor.get("verifier_actor") else ""),
@@ -361,6 +370,17 @@ def load_class_rows(cls: str):
                 if is_protected:
                     row["rng"] = int(spec["range0_wdist"])
                 rows.append(row)
+    # Convert absolute tier multipliers to RELATIVE tier multipliers
+    # f(C_unit) / f(C_anchor).  class_baseline_price is anchored at the
+    # anchor's absolute price, so it must receive a relative multiplier.
+    anchor_tech = fnum(anchor.get("tech_tier")) or 1.0
+    anchor_row = next((r for r in rows if r["actor"] == anchor.get("anchor_actor")), None)
+    if anchor_row:
+        anchor_tech = anchor_row["tier_abs"]
+    if not anchor_tech:
+        anchor_tech = 1.0
+    for r in rows:
+        r["tech_tier"] = r["tier_abs"] / anchor_tech
     return rows, spec, band_lo, band_hi, spd_lo, spd_hi
 
 

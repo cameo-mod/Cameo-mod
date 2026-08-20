@@ -19,7 +19,6 @@
 		ValidTargets: Ground, Ship
 
 ^Projectile_Sonic_Shell:
-	Report: 120mmf.aud
 	Projectile: Bullet
 		Speed: 896
 		Image: BOMB
@@ -37,7 +36,6 @@
 		ValidTargets: Ground, Ship
 
 ^Projectile_TS_Missile_Medium:
-	Report: bazook1.aud
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -65,7 +63,6 @@
 		PointDefenseTypes: Missile
 
 ^Projectile_TS_Missile_Heavy:
-	Report: missile6.aud
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -184,6 +181,7 @@ TS90mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
+	Report: tnkfire6.aud
 	ReloadDelay: 26
 	Range: 5319
 	Warhead@CannonHE_Medium:
@@ -193,6 +191,7 @@ TS90mm:
 
 TS90mmDep:
 	Inherits: TS90mm
+	Report: tnkfire6.aud
 	ReloadDelay: 22
 	Range: 6679
 	Projectile: Bullet
@@ -230,6 +229,7 @@ TS120mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
+	Report: tnkfire6.aud
 	ReloadDelay: 44
 	Range: 6201
 	Projectile: Bullet
@@ -246,6 +246,7 @@ TS120mm_bluenuke:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
+	Report: tnkfire6.aud
 	ReloadDelay: 44
 	Range: 6201
 	Projectile: Bullet
@@ -271,12 +272,17 @@ TSHighVelocityTurChem:
 		Damage: 48000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 24
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 24000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 12000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 12
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 4
 		Duration: 50
@@ -601,7 +607,6 @@ TurretLaserFragment:
 	Inherits@3: ^Projectile_Laser_Heavy
 	Inherits@4: ^TSLaserEffect
 	Inherits@5: ^Effect_Laser_Heavy
-	-Report:
 	Range: 2500
 	Projectile: LaserZap
 		Width: 24
@@ -704,6 +709,7 @@ ObeliskLaserFragment:
 	Inherits@3: ^Projectile_Laser_Heavy
 	Inherits@4: ^TSLaserEffect
 	Inherits@5: ^Effect_Laser_Heavy
+	Report: obelray1.aud
 	Range: 4000
 	-Warhead@Effect:
 	-Warhead@EffectAir:
@@ -891,24 +897,32 @@ TSBikeTibMissile:
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water, Air
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumChemicalWeapon: SpreadDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water, Air
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
@@ -1051,15 +1065,19 @@ TSChemAdatsMissile:
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
 	ValidTargets: Ground, Water
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		ValidTargets: Ground, Water
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water

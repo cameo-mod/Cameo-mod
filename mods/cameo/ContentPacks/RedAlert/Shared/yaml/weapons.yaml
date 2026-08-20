@@ -309,6 +309,7 @@ LightSniper:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
 	Inherits@fx: ^Effect_Sniper_Light
+	Report: ramgun2.aud
 	ReloadDelay: 100
 	Range: 9153
 	Warhead@Sniper_Light:
@@ -739,6 +740,7 @@ WaveforceCannonChargedLaser:
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	ReloadDelay: 120
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -837,6 +839,7 @@ WaveforceCannonDistortedBeam2:
 	Inherits@wh2: ^Warhead_Flame_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
+	Report: flamer2.aud
 	ReloadDelay: 120
 	Range: 9343
 	ValidTargets: Ground, Water, Air
@@ -1022,24 +1025,32 @@ JapanSuperBomb:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@MediumFlameWeapon: SpreadDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
@@ -1840,6 +1851,7 @@ DepthCharge:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Light
+	Report: M203.aud
 	ReloadDelay: 60
 	Range: 6000
 	ValidTargets: Underwater, Submarine
@@ -1999,6 +2011,7 @@ YamatoFlak:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
+	Report: aacanon3.aud
 	ValidTargets: Air
 	ReloadDelay: 4
 	Range: 12500

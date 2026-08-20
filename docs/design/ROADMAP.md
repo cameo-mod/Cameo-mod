@@ -32,6 +32,18 @@ Current: **W1 ✅ done** (K coefficient + target model, `f8421d345`) · **W2 ⬜
 Devin** (`^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*`) · **W3–W5 ⬜ ready,
 owner Claude** (ledger split, retire weapon-class K, the five missing metrics).
 
+## ▶ ACTIVE — CAMEO CONTENT INSTALLER
+
+- [x] **Manage Content downloads:** hidden `cameo-content` installer mod,
+  Cameo switched to `ContentInstallerFileSystem`, `ContentPackages:` empty so
+  installation stays opt-in; disc-source outputs corrected from `Content/ca/`
+  to `Content/cameo/` (PR #260).
+- [ ] **Disc-source gaps surfaced by the installer going live:** `tsmusic` /
+  `fsmusic` `TestFiles` are not produced by their declared disc sources
+  (Firestorm writes `scores01.mix`), and `Content/cameo/{cnc/desert.mix,
+  ra2/theme.mix, ra2/thememd.mix, expand/*}` are written by disc installs but
+  not mounted by `mods/cameo/mod.yaml`.
+
 ## ▶ ACTIVE — VEHICLE BALANCE APPLY + BACKLOG (2026-07-31)
 
 **Vehicle ladder DESIGN is being re-tuned** — latest table = `docs/balance/anchor_decisions_log.md`
@@ -40,21 +52,12 @@ committed: `^MissileVehicleTemplate` + 10 reassignments (missile-MLRS family + N
 removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
 
 **Queue (priority order):**
-- **[🔴 P1 BUG — 77 live weapons deal NO flame damage] `^LightFlameWeapon` is a dead
-  warhead.** `mods/cameo/weapons/weapons.yaml` `^LightFlameWeapon` sets
-  `Warhead@LightFlameWeapon: SpreadDamage` with `Spread: 500` **and** `Range: 500` — a
-  SINGLE `Range` value. The engine (`AreaDamageWarhead.cs` + upstream
-  `SpreadDamageWarhead.cs`) then sets `effectiveRange = [500]`, and `GetDamageFalloff`
-  loops `for (i = 1; i < effectiveRange.Length; i++)` — which never runs — and
-  **returns 0**. So `Damage: 1000` is delivered as **zero at every distance**, silently:
-  load-time validation accepts `Range.Length == 1`. 77 live weapons inherit it
-  (`NodTurretLaser`, `HonestJohn`, `VenomLaser`, `FireRockets*`, `SiegeMortar*`,
-  `HeatRayBeam*`, …); one more weapon has the same shape on `Warhead@2`
-  (`Range: 5000`, `Falloff: 100, 100`). **Fix = delete the `Range: 500` line** so
-  `Spread: 500` defines the geometry as intended. That is a warhead change (CLAUDE.md
-  rule 4/5) → needs an explicit maintainer order, and it will make 77 weapons suddenly
-  start dealing their flame damage, so it wants a balance pass with it. Detected by the
-  engine-fidelity fix in [`EFFECTIVE_DAMAGE.md`](EFFECTIVE_DAMAGE.md) §4.
+- [x] **P1 BUG — 77 live weapons deal NO flame damage] `^LightFlameWeapon` dead warhead
+  RESOLVED** (2026-08-18). The `ApplyPhysicalState` → damage-scaled conversion replaced
+  `^LightFlameWeapon`'s `SpreadDamage` with `AreaDamage`, which also removed the `Range: 500`
+  footgun, and propagated the same fix to all `^*FlameWeapon`/`^*ChemicalWeapon` concrete
+  overrides (34 YAML files). `audit_physical_state_warheads` PASS, `find_empty_warhead.py = 0`,
+  boot-gated. The one `Range: 5000` / `Falloff: 100, 100` shape is unaffected.
 - **[DECISION NEEDED] `effective_damage`: two open rulings.** (a) Do
   `*_ExtraDamage` chips count? `formula.spread_damage_sum` excludes them (they are paid
   for by K / charge delay); the metric includes them — both cannot be right once the
@@ -423,6 +426,11 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
 - **RevealsShroud per class = baseline range, floored to 5000** for
   scout/closecombat/melee (helps snipers scout). Apply to each `^…Template`.
 - **Melee range IS priced** (FORMULA_V2 §6b corrected).
+- [x] **Physical-state delivery surcharge (E2)** — 1.25× ceiling scaled by delivery
+  weight; computed by `physical_state_price.actor_multipliers()`, stored in the
+  derived sidecar (`docs/balance/derived/*.json`), and applied by `fit_class.price_unit()`
+  after the charge-up discount. Flame/chemical units now pay the surcharge; cryo and
+  non-state units price at 1.0.
 
 **To do (in order):**
 - [x] **BUILDABILITY LAW** (maintainer 2026-07-22): a unit is balance-relevant
@@ -451,12 +459,12 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   verifier or confirm it's upgrade-reachable; (d) 5 buildable vehicles sit in the
   infantry section (leech/bmwbike/antitankcannon/noidharvester/engineeringarmor) —
   handle in the vehicle pass.
-- [ ] **Populate design.special (K) + design.tech_tier** across the roster:
-  the formula APPLIES them when set (verified: madcap K=1.25, ghost tier=0.75 are
-  used) but most units are untagged → default 1.0, so specials/high-tech are
-  under-counted. The huge SF-pollutant deltas (ghost SUM 130000, specter 260000)
-  are dominated by MAX-era hot damage, not missing modifiers, but the modifiers
-  still need populating (ties into the catch-all-specials audit).
+- [x] **Computed tech-tier from prerequisite building chains** (done): new
+  `tools/balance/tier_chain.py` resolves each buildable actor's chain cost `C`
+  using only its own ContentPack leaf + the same game's Shared pack, computes
+  `f(C) = 1 / (1 + (C - 9500) / 8250)`, and writes `tier_chain_cost` +
+  `tier_multiplier` to the derived sidecar. Manual `design.tech_tier` values are
+  preserved as overrides.
 - [ ] Build `tools/balance/rebalance_classes.py` dispatcher: SUM price →
   2000-grid warheads → 1%-step FP-mult → range-solve to band (mult-of-10) →
   uniqueness within broad TYPE → Δ (goal ≤1). Consolidates the scout/
@@ -475,20 +483,20 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   locomotor but no TurnSpeed) stay step-1. Foot infantry also get a Speed±1
   fine-tune as a Δ lever (maintainer 2026-07-22). `VEHICLE_TYPE_CLASSES` still
   forces the class default where every member is a vehicle (mbt).
+- [x] Between-cell movement responsiveness: `^DefaultInfantry` opts in; infantry
+  with a defined `Mobile.TurnSpeed` opt out through `^VehicleTurnRateInfantry`,
+  preserving the documented vehicle-turn-rate marker.
 - [x] Apply **closecombat ReloadDelay 75→70** (anchor DPS 250 / verifier 500) —
   done as part of the 4-anchor restat below.
 - [x] Fix the 4 anchor units to grid (shotgunner/fanatic 4000→2000×2, reload
   75→70; japan 12000→4000×3; lunar 24000→8000×3) via ledger→apply_balance→boot
   gate. Verified Δ0: anchors price to cost0, verifiers to 2.5×cost0. (2026-07-22)
-- [ ] **Tech-tier is applied ABSOLUTE, must be RELATIVE to the anchor's tier**
-  (found 2026-07-22 during the 4-anchor restat): `class_baseline_price` multiplies
-  by `design.tech_tier` (default 1.0). Closecombat is documented T3 (0.75) but no
-  unit is tagged, so all price at tier 1.0 and the anchor lands on cost0 — correct
-  BY ACCIDENT. The moment any closecombat unit is tagged T4, it would get absolute
-  0.5 instead of 0.5/0.75 (relative). FIX: effective tier = unit_tier / anchor_tier
-  so the anchor always cancels to 1.0 (matches the "verifier shares tier so it
-  cancels" law). Until fixed, do NOT tag class members with a tech_tier ≠ the
-  anchor's.
+- [x] **Tech-tier is applied RELATIVE to the anchor's tier** (done 2026-08-17):
+  `propose_class_rebalance.py`, `build_workbook.py`, and `check_band.py` now pass
+  `f(C_unit) / f(C_anchor)` to `class_baseline_price`; `fit_class.py` and the
+  `class_anchor_price` path still use the absolute multiplier because the anchor
+  cancels. The `TechTier` workbook column is absolute so a maintainer override is
+  readable; the class-baseline formulas divide by the anchor's absolute tier.
 - [~] Reconvert the ~20 MAX-era-hot closecombat+SF members (each warhead was
   set = intended total → 2–3× hot under SUM). BLOCKED on membership cleanup
   first — the current subtype rosters pull in snipers/casters/spies/core-combat
@@ -1231,6 +1239,11 @@ pin revert (never committed). **RESOLVED: `make.cmd all` fetched b89ae60 and reb
 Maintainer picked the scout class first; proposed anchor 20000 HP /
 50 Speed / 5.0 Range / 4000 Damage / 50 Reload / Cost 100 with the
 2x-health bake replacing the ScoutInfantryBuff damage reduction.
+⚠ **The bake is HALF APPLIED (measured 2026-08-17): 19 of 35 scouts
+cancel the template's `DamageMultiplier@ScoutInfantryBuff: 50` with a
+local `Modifier: 100`; 16 still resolve to 50 and are therefore twice
+as durable as their price. Finishing this class means finishing that
+migration, not just setting the anchor** — W26 / FORMULA_V2.md.
 Assessment + simulation: docs/balance/formula_v2_scout.md — anchor
 structure confirmed, speed 60 recommended over 50, bake endorsed;
 BLOCKED ON: (1) garrisoned/pricing armament flag in the extractor,

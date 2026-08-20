@@ -25,6 +25,50 @@ status rather than keeping its own copy.
 
 ---
 
+## 0a. ⛔ ORDER OF OPERATIONS — WEAPON STRUCTURE BEFORE PRICING (ruling 2026-08-17)
+
+**Maintainer:** *"shouldn't we first finish the 3 way split like documented before we start
+applying the balance formula to our actors? It would be double work splitting the multi
+warheads later on. If we split it now applying the balance formula will be easy."*
+
+**Correct, and measured.** A price is a function of `K`, and `K` is built from the weapon's
+warhead set and their `Versus` profiles. Both are still scheduled to change across most of the
+roster, so pricing first means pricing inputs we are about to replace:
+
+| what is still in flux | measured 2026-08-17 |
+|---|---|
+| W24 — fired weapons with **more than one** damage main | **975 of 1495 = 65.2%** (histogram runs out to 15 mains) |
+| armament slots whose `K` moves when those collapse | **1 584** |
+| fired weapons that reach a `^Warhead_*` family at all | **639 of 1620 = 39%** — the rest still route through legacy templates (`audit_unconverted_templates`: 47 templates, 1343 inheritors) |
+
+Collapsing N mains into 1 preserves the damage SUM (`formula.spread_damage_sum`) but **not
+`K`** — `K` is share-weighted over each warhead's armor profile, so picking ONE family changes
+the profile and therefore the price. Retrofitting a legacy template onto a family changes it
+again.
+
+⚠ **The anchor table already said so.** `class_anchors.json` → `mbt.provisional`: *"DPS restat
+DEFERRED to the cannon/weapon rebuild."* The decision to wait was written into the data before
+the question was asked.
+
+**The order:**
+
+1. **W24** — one damage warhead per weapon (DESIGN §11b). 65% non-compliant.
+2. **W23** — the 25-template legacy retrofit. ⭐ **W24 DISSOLVES W23's BLOCKER.** That blocker
+   is "33 weapons inherit several legacy templates mapping into the SAME family, so the rename
+   merges two warheads and the smaller damage vanishes". After W24 each weapon carries ONE
+   damage warhead, so there is nothing left to merge — the collisions were this debt made
+   visible, not a conversion bug. **The owed ruling ("should one weapon carry three warheads of
+   the same family at all?") is already answered by §11b: no.**
+3. **A5** — retire the remaining inline-`Versus` weapons onto templates.
+4. **THEN** class anchors → `fit_class` per class → maintainer sign-off (W11) → targets written
+   into the ledger → `apply_balance --confirm` → boot gate.
+
+**Still safe BEFORE the split:** `fit_class` as a DIAGNOSTIC — it writes a validation report,
+and its anchor write is merge-safe since `f1c89db9f`. Reading where costs stand today costs
+nothing and informs the anchor choice. What must wait is WRITING targets and applying them.
+
+---
+
 ## 1. THE BOARD
 
 | id | work item | status | owner | needs |
@@ -52,11 +96,337 @@ status rather than keeping its own copy.
 | **W21** | Layered health Shield → Integrity → Armor → Health, layer-aware armor (solves W20 structurally) | ✅ BUILT + LIVE `ab467fe52` | Claude | — |
 | **W22** | Roster census: liveness classifier + per-credit weighting (552/1977 armored actors are not buildable) | ⬜ PROPOSED | — | — |
 | **W23** | Retrofit the 47 legacy templates into the `^Warhead_*` family system | 🔵 MACHINERY DONE + verified; content ⛔ on the 33-collision ruling | Claude | W13 |
-| **W24** | Collapse every weapon to ONE damage warhead (3-way split, damage half) — 61% of weapons carry 2+, worst case 15 | ⬜ READY, blocks W23 content | Claude | — |
-| **W25** | Versus mean-normalisation to 100 + class tilt + the Shield ladder rebuild | ⬜ PLAN WRITTEN (`SHIELD_AND_NORMALISATION_PLAN.md`), needs 4 rulings | Claude | — |
+| **W24** | Collapse every weapon to ONE damage warhead (3-way split, damage half) — 61% of weapons carry 2+, worst case 15 | 🔵 STARTED: first cluster collapsed (`wc2cannontowerFire` + `wc2dragonFireVisible`) to `^Warhead_Flame_Light`; broadcast baseline lowered to 981 | Claude | — |
+| **W25** | Versus mean-normalisation to 100 + class tilt + Shield rebuild + the ARMOR-PLATING LAYER | ✅ S1–S4 SHIPPED 2026-08-16/17 (`78568a36d`..`99deed28d`). **E1 + E4 FIXED** (`30ead6d4b`, `761e79ed9`). ⛔ **S5 is NOT "run `--confirm`" — see the correction below: `--confirm` is a NO-OP until targets are written into the ledger, and that needs W11's sign-off.** | Claude | — |
+
+| **W26** | **Retire `DamageMultiplier` (R1) — case by case, 369 live declarations** | 🔵 STARTED 2026-08-17: the shield 150% is DELETED. Inventory + rules below. | Claude | — |
 
 **Recommended order:** W2 ∥ W3 → W4 → W5 → W6 → (W7, W9) → W8 → W10 → W11 → W12.
 `∥` = safe to run in parallel (disjoint file sets).
+
+---
+
+## 1a. W26 — RETIRING `DamageMultiplier`, CASE BY CASE
+
+**Honest status first:** R1 (§W21, below) has said *"`DamageMultiplier` is abolished"* since
+2026-08-12, but **it had no board item and no inventory**, so nothing executed it and it was
+carried in conversation only. That is exactly how a ruling rots. This is the item.
+
+**Maintainer 2026-08-17:** *"we want to remove all the damage multipliers and only keep those
+that are absolutely necessary where we don't have a real answer yet. But mark them still for
+later to replace them with a new mechanic. However some multipliers are still intended
+especially those with status effects so yeah... we need to remove them on a case by case
+basis."*
+
+**366 live declarations** (683 in the tree; 314 sit in DEAD files such as `rules/wh40k.yaml`
+and `rules/wz2100.yaml`, which `mod.yaml` does not load — do not "fix" those, delete the files).
+Was 369 before the shield-150% deletion below. ⚠ **This count is registered in
+`docs/audit/doc_claims.yaml` and re-measured by `audit_doc_claims.py`** — it went stale within
+the same session it was written, and the audit caught it, which is precisely why the registry
+exists. Update both together.
+
+| category | count | median | disposition |
+|---|--:|--:|---|
+| UPGRADE-granted | 128 | 80 | → **convert to armor AMOUNT** (R1: a 15% reduction becomes +15% of HP as armor). Price into the upgrade (E5). |
+| other condition | 113 | 80 | ⬜ **needs sub-classification** — the biggest unknown, do this before touching them |
+| UNCONDITIONAL | 100 | 80 | → **fold into HP.** Pure baseline armor; an unconditional `Modifier: 80` is exactly `HP x 1.25` |
+| PHYSICAL STATE / stance | 12 | 75 | **KEEP** — deployed/crouched/garrisoned is a genuine rate change |
+| TEMPORARY ability | 10 | 80 | **KEEP** — Iron Curtain, chrono, invulnerability |
+| VETERANCY / rank | 5 | 75 | → **grant HP instead** (see the correction below) |
+
+**Two "no-brainer" sweeps — ⛔ ONE OF THEM WAS WRONG, and it nearly shipped:**
+
+* ~~**20 declarations are `Modifier: 100`** — literal no-ops. Delete.~~
+  ⚠⚠ **FALSE, measured 2026-08-17. Only ONE of the 20 is a no-op.** A `Modifier: 100` on a CHILD
+  is not a no-op — it **CANCELS an inherited value**:
+
+  | | | |
+  |---|--:|---|
+  | `^ScoutInfantryTemplate` declares | **50** | scouts take HALF damage — 2× effective HP |
+  | actors that CANCEL it with a local `Modifier: 100` | 19 | the migrated ones — **deleting these restores the 50% reduction** |
+  | actors that still RESOLVE to 50 | **16** | ⚠ un-migrated: double durability, unpriced |
+  | `^CloseCombatInfantryTemplate` declares | 100 | the only genuine no-op (4 actors, nothing overrides it) |
+
+  I wrote the deletion sweep, and the assertion in it (*"each node is exactly two lines"*) is what
+  caught the error — it hit `Modifier: 50` on the template and stopped. **The scan was asking the
+  wrong question**: it checked whether any DESCENDANT overrode the key, when the danger was an
+  ANCESTOR declaring it. ⭐ **A no-op test must be RESOLVED, never read off the source node.**
+  Claim `unmigrated_scout_damage_multiplier` now measures the 16 every audit run.
+
+  Consequence for W26: these 19 can only be deleted **together with** the template's `50`, and
+  only after the remaining 16 scouts get the 2×-health bake through the pipeline — i.e. it is a
+  balance change needing a maintainer order, not a cleanup. FORMULA_V2's claim that the bake
+  *"replaced"* the reduction was true for 19 of 35.
+* 6 are `Modifier: 0` (true invulnerability) and 1 is `1000`; leave those, they are deliberate.
+
+### THE PRINCIPLE (use this to decide any case not listed)
+
+**`DamageMultiplier` is the right primitive for a RATE; a pool/bar is the right primitive for
+an AMOUNT.** So:
+* an **unconditional rate reduction** is indistinguishable from more HP → fold it into HP;
+* a **conditional rate change** (stance, status, temporary power) stays a multiplier;
+* an **amount** of extra durability becomes a pool (shield / armor plating).
+
+⚠⚠ **CORRECTION — veterancy.** I recommended *keeping* the veterancy multipliers on the
+rate-vs-amount argument, and the maintainer accepted that. **R1 had already ruled the other
+way and R1 is right:** veterancy *"stops granting damage multipliers and grants HP instead —
+currently veterancy gives NO HP at all, only invisible multipliers. **HP is visible in the unit
+stat widget; a multiplier is not.**"* That legibility argument beats mine, and it does **not**
+create the extra health bar the maintainer was worried about — it raises HP on the bar that is
+already there. 5 declarations, so the job is small; the re-pricing is the real cost.
+
+### ✅ DONE — the shield 150% penalty (2026-08-17)
+
+`DamageMultiplier@shielded: Modifier: 150` in `defaults.yaml` (one block, inherited by all 56
+always-on-shield actors). Deleted, because it **duplicated and fought** what it stood for:
+`Armor@shielded` already routes hits through the `Shield` Versus row, whose entire design is
+that energy weapons hurt shields (Tesla 369) and kinetics do not (Melee ~76). A FLAT 1.5x
+scaled both ends equally, adding no counter-play — an unmanaged extension of the Shield ladder
+living OUTSIDE its designed `[100,400]` window (1.5x would put Tesla at 553). It also hid the
+pool's worth: a shield point read 0.540 HP from the ladder but was really 0.360.
+
+⚠ **This is a BUFF and is not yet paid for.** A shield point went 0.360 → 0.540 HP, so the 56
+actors' effective HP rose from +38.6% to +57.8% over raw. `audit_survivability_pricing.py` has
+the per-actor numbers; the cost correction belongs in the same pass that prices the shields.
+
+⚠ **`Modifier` is `[FieldLoader.Require]`.** Two actors (`steelconsortium_stalker`,
+`steelconsortium_whiterabbit`) re-declared `DamageMultiplier@shielded` only to widen the
+condition, inheriting the parent's `Modifier`. Deleting the parent alone would have crashed the
+boot with a missing-required-field error — the same bug class as the empty-warhead crash, where
+removing a template node orphans bare child overrides. **Always scan for dependents that
+inherit a required field before deleting a template block.**
+
+### ⬜ PROPOSED — halve unarmed-building HP, give them a shield (maintainer 2026-08-17)
+
+*"for non defense buildings (which are not priced from the balance formula) you need to half
+their HP and give them 200% shield from their HP so the effective health is about the same
+right?"*
+
+**The identity is right, and there is an EXACT figure.** Measured:
+
+| pool, as % of the HALVED HP | resulting effective HP |
+|--:|--:|
+| 150% | 0.905× (−9.5%) |
+| **185%** | **0.999× (−0.1%)** |
+| 200% | 1.040× (+4.0%) |
+
+⭐ **The break-even pool is `100 / shield_hp_factor` = the MEAN VERSUS VS SHIELD itself
+(185.2%).** Not a coincidence: converting HP into an equal-value shield means undoing exactly
+the average penalty the Shield row applies. So **185% is the derived, self-updating number**
+and 200% overshoots by 4%. Write it as a formula, never as a literal.
+
+⚠⚠ **BUT THE IDENTITY HIDES THE REAL CONSEQUENCE — this is the largest single lever on weapon
+pricing in the project.** Unarmed buildings hold **more HP than the entire unit roster**:
+
+| group | actors | total HP |
+|---|--:|--:|
+| armed buildings (defenses, formula-priced) | 107 | 18 161 500 |
+| **unarmed buildings (the target)** | **1 016** | **238 205 500** |
+| everything else (units) | — | 129 248 940 |
+
+The `Shield` row's share of all roster raw damage is an INPUT to `target_model.weighted_versus`
+→ `K` → every weapon's price. Converting the unarmed buildings moves it:
+
+```
+Shield row share TODAY : 1.432%
+Shield row share AFTER : ~27.5%     = a 19.2x increase in the Shield column's weight
+```
+
+Energy families (Tesla `Shield: 369`) would gain across the board; kinetic families (Melee ~76)
+would lose. **So a change that is neutral for the buildings is emphatically NOT neutral for
+weapons** — it would make "anti-shield" a mainstream weapon property instead of a 1.4% niche,
+and every base assault becomes a shield fight.
+
+**Two rulings owed before this can be built:**
+1. **Is the 19× shift intended?** It is defensible — the Shield row is currently near-decorative
+   and this gives it real meaning — but it is a deliberate rebalance of every weapon, not a
+   side effect to absorb quietly.
+2. **Do building shields REGENERATE?** `^ShieldedShieldable` carries `DamageRegenDelay: 125`.
+   If regen is on, half of every building's effective HP comes back between raids — a large
+   buff to turtling that the effective-HP identity does not show, and the reason harassment
+   strategies would weaken. HP does not regenerate; a shield does. **This is the difference the
+   arithmetic cannot see.**
+
+⚠ Sequencing: do this BEFORE weapon pricing (§0a), never after — it moves K for the whole roster.
+
+---
+
+## 1b. W24 DIAGNOSIS (2026-08-17) — it is an INHERITANCE PILEUP, not a family choice
+
+Measured before touching anything, and the finding changes the plan.
+
+### What the 975 actually are
+
+| shape | count | note |
+|---|--:|---|
+| **inheritance PILEUP** — ≥3 legacy templates inherited, no `^Warhead_*` family | **221** | the sum is an artifact |
+| carries a `^Warhead_*` family inherit | 341 | real multi-warhead designs |
+| 1–2 legacy inherits, no family | 411 | mostly the same disease, milder |
+
+`wc2dragonFireVisible` — a dragon's fire breath — inherits **fifteen** legacy weapon templates:
+
+```
+^LightFlameWeapon  ^LightChemicalWeapon  ^MediumFlameWeapon  ^MediumChemicalWeapon
+^HeavyFlameWeapon  ^HeavyChemicalWeapon  ^TankDestroyerCannon  ^MediumCannon
+^HeavyCannon  ^Grenade  ^ShrapnelWeapon  ^HeavyBomb  ^MediumMissile  ^Chaingun  ^FlakWeapon
+```
+
+A dragon does not fire a tank-destroyer cannon or drop a heavy bomb. Each template contributes a
+damage warhead, so this is accumulated copy-paste, not design. The templates most often pulled in
+this way: `^ShrapnelWeapon` (100 weapons), `^Grenade` (96), `^FlakWeapon` (91), `^MediumMissile`
+(85). **This is the same debt as W23/A5** — 47 legacy templates with 1343 inheritors — showing up
+from the other end.
+
+### ⚠ The finding that changes the collapse rule: 90% are BROADCAST
+
+**874 of the 975 (89.6%) have EVERY main at the identical damage.** The worst pileups are all one
+value repeated:
+
+| weapon | mains | each | sum |
+|---|--:|--:|--:|
+| `SCUDNUKE` | 15 | 20 000 | 300 000 |
+| `wc2cannontowerFire` | 15 | 4 000 | 60 000 |
+| `wc2dragonFireVisible` | 15 | 2 000 | 30 000 |
+| `SiegeTankSiegeCannon` | 14 | 10 000 | 140 000 |
+
+That is the **broadcast fingerprint** `audit_warhead_split` was written to catch: one design
+number written onto every warhead, multiplying real damage by the warhead count. **So the SUM is
+frequently not a design value** — the dragon's 30 000 exists only because someone pasted 15
+inherits.
+
+⚠ **Which makes DESIGN §11b's "collapsing preserves the SUM" ambiguous here.** Preserving 30 000
+locks the accident in as intent; collapsing to 2 000 is a 15× nerf.
+
+**RECOMMENDATION — preserve the SUM anyway, and let the pricing pass fix the magnitude.** Not
+because 30 000 is right, but because:
+* it keeps W24 a **behaviour-neutral refactor**, which is the only version that can be VERIFIED —
+  `dump_resolved`/`review_resolve_diff` must diff empty, and a boot gate then means something;
+* changing magnitudes inside a structural sweep is a hand-edited balance number (CLAUDE.md rule
+  3) across ~874 weapons at once, with no way to tell a correct collapse from a wrong one;
+* the whole point of §0a's ordering is that **pricing comes after structure**. The pricing pass
+  will move these a long way, and that is where a 15× correction belongs — traceably, through the
+  ledger.
+
+Expect, and do not be alarmed by, large `Damage` moves for these weapons when pricing runs.
+
+### ⚠ The guard's FAIL condition is narrower than the fingerprint it describes
+
+`audit_warhead_split` FAIL 1 requires *"≥2 MAIN warheads **AND ≥1 side warhead** where every
+warhead has the identical damage"*. The side-warhead requirement is why it reports **4** while the
+fingerprint is present on **874**; its informational list adds 246 more but only at ≥8000 damage
+per main. The type filter is fine (it counts `AreaDamage` as well as `SpreadDamage`, line 53).
+**Widen FAIL 1 to "all mains identical" and drop the side-warhead precondition** — otherwise the
+guard cannot see the thing W24 is cleaning up.
+
+### Flame vs Inferno — KEEP BOTH, and the dragon is Flame
+
+*"Maybe Flame or Inferno? … I'm not even sure we need to have both flame and inferno warheads at
+the same time since they are basically the same right?"*
+
+**They are not the same, and the data says so clearly:**
+
+| | Flame | Inferno |
+|---|---|---|
+| ladder | **SHARP**: `None 200 … Concrete 92`, span ~2.2× | **FLAT**: `Scout 121 … Helicopter 76`, span ~1.6× |
+| role | anti-infantry / anti-wood specialist | generalist — hurts everything about equally |
+| `Shield` | 187–203 | **263** (couples more; it is part-energy) |
+| `PHYSICS_RANK` | 0.50 (thermal) | 0.64 (blended) — vs Prism 0.76 |
+
+Inferno's identity is not "fancier Flame": the family spec is `("Prism", "Temperature", +100, L3)`
+— **a prism chassis that burns**, i.e. a HEAT RAY (`HeatRayBeam1/2`), which is why it inherits
+Prism's flat ladder. Flame is fuel combustion. Merging them would delete the only *generalist*
+thermal option and hand every heat weapon the anti-infantry spike.
+
+**A dragon's fire breath is fuel combustion with an anti-infantry bite → `Flame`.**
+
+### ✅ CONTRADICTION FOUND while checking this — FIXED (`e7fa2d57b`)
+
+Two tables in `gen_weapon_template.py` described the same physics and disagreed about Inferno:
+
+```
+PHYSICS_RANK["Inferno"] = 0.64      # "blended energy — part field-coupling, part thermal"
+COMPOSITION["Inferno"]  = {"thermo": 1.00}    # ...100% thermal, 0% energy
+```
+
+`COMPOSITION` drives the plating columns, so Inferno shipped **byte-identical to Flame** and a
+REFLECTOR plating did nothing special against a focused-energy heat ray.
+
+⚠ **The first fix — deriving the share from the rank table — was itself wrong and has been
+retired.** It over-reached: the two tables answer different questions (how much a FORCE FIELD
+absorbs vs what reaches MATTER), and `Railgun` is the standing disproof that they are one axis
+(rank 0.78, a nearly pure kinetic slug). A derivation like that has to be overruled the moment a
+ruling touches either table — which is exactly what happened when the maintainer ruled Inferno
+*"mostly thermal"* while its rank puts it above the midpoint.
+
+**Shipped instead:** `COMPOSITION["Inferno"] = {"thermo": 0.60, "energy": 0.40}` (the ruling), and
+the anti-drift job moved to `rank_composition_conflicts()`, which constrains no share — a family
+the shield table calls field-coupling must have SOME energy, one it calls thermal/kinetic must
+have none. ⭐ Writing that guard immediately found the SAME drift a second time in **`Cryo`**
+(rank 0.66, a prism chassis, still `thermo 1.00`).
+
+Result: `Inferno` HAZMAT **49** / REFLECTOR **75** — reduced by both, far more by HAZMAT, which is
+what the maintainer asked for. Full reasoning: `docs/design/PLATING_COMPOSITION_REFINEMENT.md`.
+
+⚠ Keep the general lesson: this was a **code-vs-code** contradiction, which `audit_doc_claims`
+cannot catch. Two tables describing one reality need a guard of their own, and a guard that
+DERIVES one from the other is too strong — it forbids a legitimate ruling.
+
+### ⛔ THE PROCEDURE — resolve and INLINE first, remove inherits second, clean up third
+
+**Maintainer 2026-08-17:** *"first you need to resolve all the inherits for the projectile and the
+effects for each weapon before you remove any inherits. So those 15 inherits you saw earlier, they
+all contributed something right? Inherit them one by one in order and resolve that, then remove
+the inherits and then try to clean the massive field list up for what's important."*
+
+**Correct, and the collapse planner alone is nowhere near sufficient** — it only chooses the
+DAMAGE family. Measured on `wc2dragonFireVisible`: its local definition has 63 top-level nodes and
+the full resolve has 69, of which **23 exist ONLY in the inherits**:
+
+| what the inherits alone provide | nodes |
+|---|--:|
+| ground decals — `LeaveSmudge` (`Smudge`, `RA2Scorch`, `DuneRock`, `DuneSand`, `RA2Crater`, `Smudge1`, `Smudge2`, `Smudge2RA2`) | 8 |
+| impact effects — `CreateEffect` (`ShieldHitEffect`, `EffectWater`, `EffectAir`) + `GlowImpact` | 4 |
+| **`ApplyPhysicalState`** — the Temperature meters (Light/Medium/Heavy Flame + FriendlyFire twins) | 6 |
+| `SpawnActor` `GroundFire` (burning ground), `GrantExternalCondition` `ShieldHit`, `DamagesConcrete` | 3 |
+| `InvalidTargets: wall`, `TargetActorCenter: true` | 2 |
+
+and the `Projectile` node goes from **2 local fields to 25 resolved** (`Inaccuracy: 250`,
+`Shadow: true`, +21 more). **Deleting the inherits without inlining first would silently strip
+every impact effect, every decal, the physical-state application, the ground fire, the glow, and
+23 of 25 projectile fields** — a weapon that still lints, still boots, and looks visually broken
+only in play.
+
+⚠ It also already declares all ~41 warhead nodes locally as bare type re-declarations
+(`Warhead@LightFlameWeapon: SpreadDamage`, …), inheriting their FIELDS. Removing the parents
+orphans those into abstract/missing-required-field warheads — the empty-warhead boot-crash class.
+⚠ And it is still `SpreadDamage` / `HealthPercentageDamage` with explicit `FriendlyFire` twins:
+**never converted by the AreaDamage sweep.** So W24 on these weapons is also an A5 conversion.
+
+**The order, per weapon:**
+
+1. **RESOLVE** with `rs.resolve_weapon()` — it already implements the MiniYaml semantics
+   (each parent spliced AT its `Inherits` line, document order, **last node wins**, so among 15
+   inherits the later override the earlier and the weapon's own fields beat all of them).
+2. **INLINE** the whole resolved node as a self-contained definition.
+3. **REMOVE** the inherits.
+4. **COLLAPSE** the damage mains to the one family (`plan_warhead_collapse.py`).
+5. **CLEAN UP — this is where the real value is.** The dragon carries **8 ground decals** because
+   it inherited eight games' worth; after collapsing to `Flame` it needs ONE smudge, ONE impact
+   effect, ONE `ApplyPhysicalState` (Temperature). Same for the 6 physical-state nodes, which
+   exist once per inherited flame tier.
+6. **VERIFY** with `dump_resolved` / `review_resolve_diff` — the diff must show ONLY the intended
+   collapse — then boot-gate the batch.
+
+⚠ Step 5 cannot be automated safely: choosing which of eight decals a Warcraft dragon should
+leave is a design call. Steps 1–3 are mechanical and verifiable; steps 4–5 need the review table.
+
+### What is still judgment, and what is not
+
+The family choice is NOT "which of 15 legacy templates wins" — it is **"what is this weapon?"**,
+which its name, projectile and report answer directly (a dragon breathing fire → `Flame`). That
+makes it reviewable at a glance rather than a research task per weapon, so the next step is a PLAN
+tool that proposes one family per weapon with that evidence attached, for maintainer review before
+any yaml moves.
 
 ---
 
@@ -113,9 +483,11 @@ Commit trailer = the ACTUAL agent (CLAUDE.md rule 10). Never sign as another age
 `effective_dps = Damage_total × (burst / eff_reload) × FirepowerMultiplier × K`, with
 `K = Σ_warheads share_w × versus_w × (reliability_w + secondary_w)`.
 
-K is independent of the Damage magnitude, so pricing inverts exactly:
-`Damage_required = target_dps × eff_reload / (burst × FP × K)`, quantised to the 2000
-grid with `FirepowerMultiplier` absorbing the remainder. Spec: `EFFECTIVE_DAMAGE.md`.
+The FLAT part of K is independent of the Damage magnitude, so pricing inverts exactly:
+`Damage_required = (target_per_shot − pct_absolute_context) / k_flat_context`, snapped to
+the grid. ⚠ **Never invert `k` / `k_context`** — a `%`-of-max-HP twin is ADDITIVE, so those
+two move when Damage moves (E4, fixed 2026-08-17; guard `audit_k_linearity.py`). They remain
+correct measurements. Spec: `EFFECTIVE_DAMAGE.md`.
 
 **VERIFY:** `python tools/balance/weapon_efficiency.py --families` prints 20 rows.
 
@@ -280,10 +652,11 @@ traced to the ONE factor that moved it. Spec + shapes: `EFFECTIVE_DAMAGE.md` §3
 | 5 | **`AttackDelay`** | ✖ **does not exist** — see below | — |
 
 **The split that makes this safe:** factors 2–4 do NOT depend on `Damage`, so they fold
-into the new **`k_context`** and the pricing inversion stays closed-form. **Overkill does**
-depend on Damage, so it is reported BESIDE K and never inside it — folding it in would turn
-`Damage_required = target_dps × eff_reload / (burst × FP × K)` into a fixed-point iteration.
-`test_weapon_context.py` pins that distinction explicitly.
+into the new **`k_flat_context`** and the pricing inversion stays closed-form. **Overkill
+does** depend on Damage, so it is reported BESIDE K and never inside it — folding it in
+would turn the inversion into a fixed-point iteration. `test_weapon_context.py` pins that
+distinction explicitly. ⚠ The `%`-twin is that same defect and WAS folded in until E4
+(2026-08-17) split it out as the additive `pct_absolute_context`.
 
 ⚠ **Item 5 was based on a field that isn't there.** `AttackDelay` appears **0 times** in
 the tree. Charge-up is an ACTOR trait (`AttackCharged`, `AttackCharges`, `AttackTesla`, …)
@@ -590,8 +963,38 @@ armaments did not move at all — those are the ~878 legacy nodes still declarin
 `Versus` on `SpreadDamage` (item A5), which the templates do not reach.
 
 ⚠ **That K shift is not yet paid for.** `Damage` still has its old values, so a family whose
-mean rose 1.4x currently deals 1.4x. The correction is `apply_balance --confirm`, which needs
-a maintainer order (CLAUDE.md rule 3). Until then the tree is deliberately mid-pipeline.
+mean rose 1.4x currently deals 1.4x.
+
+⛔⭐ **AND `apply_balance --confirm` IS NOT THE CORRECTION — MEASURED 2026-08-17.** Dry-run on
+four factions (`starcraft_protoss`, `redalert2_soviets`, `tiberiansun_gdi`, `warcraft2_orcs`):
+
+```
+DRY RUN: 0 values would change (0 inherited stats skipped).
+```
+
+`apply_balance` writes **LEDGER → yaml**, and the ledger is a faithful EXTRACT of yaml, so
+there is nothing in it to apply. `--confirm` today is a **no-op on every faction**, and it has
+been described as "the pending final step, blocked on E1/E4" across several handoffs. That
+description was wrong in a way no audit could catch, because the tool exits 0 either way.
+
+**The missing step is UPSTREAM of the apply.** The pipeline is
+`extract_stats` → **DECIDE TARGETS** → ledger → `apply_balance --confirm`, and the middle box
+has never been filled in for the roster. Filling it means:
+
+1. Choose the scope (one class, or one faction) — the ledger is per-faction, the anchors per class.
+2. Generate targets: `fit_class.py` (class-formula price vs actual cost) and/or
+   `propose_class_rebalance.py`, or `build_workbook.py` → edit the unlocked cells →
+   `import_workbook.py`.
+3. ⛔ **Get the maintainer's sign-off, which W11 already owes:** *which class has costs they
+   consider CORRECT.* Every price is relative to that anchor, so nothing downstream can be
+   right until it exists — this is the true head of the queue, not the apply.
+4. THEN `apply_balance --faction X --confirm`, re-extract, audits, boot gate, commit yaml +
+   ledger together.
+
+⚠ Because the twin is now known to impose a **DPS floor** (E4), step 2 must respect it: 52
+weapons cannot be priced below 25% of current output by lowering flat `Damage`, so a target
+under `dps_floor` needs the TWIN shrunk instead. `required_damage()` returns `None` there
+rather than a plausible wrong number.
 
 **Two rules were CORRECTED by running this** (both now in DESIGN.md):
 - **§12.0b Heroic/Airborne divide by the profile's PEAK, not by 100.** The two stopped being
@@ -663,8 +1066,9 @@ the sources contain no derived armor, and clamping would break §12.0b).
 
 **Two bugs this flushed out**, both silent fall-throughs to the even ramp:
 - `^Warhead_Cryo_*` / `^Warhead_Inferno_*` looked their profile up under their OWN name. They
-  are INHERITING families whose entire premise is reusing Prism's ladder, so they split off
-  from the parent and shipped at 10x. Fixed with `family(..., profile_family=parent)`.
+  are now BLEND_FAMILIES (Cryo = Laser×Prism, Inferno = Flame×Prism) with their own averaged
+  Versus and their own PHYSICS_RANK/COMPOSITION values, so the `profile_family=parent` fix was
+  replaced by promoting them to proper blends.
 - `^Warhead_Tesla_Super` had no measured tier (the export only walked Light/Medium/Heavy) and
   kept the even ramp at 1.8x while every other Tesla level was rebuilt. The export now walks
   the levels the GENERATOR emits; `Tesla/Super` measures n=29 / 7 mods.

@@ -8,7 +8,7 @@
 | ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml | 53 | muboat.nax | TD actor missing RankDecoration | ? |
 | ContentPacks/TiberianDawn/Shared/yaml/templates.yaml | 30 | ^E1 | TD actor missing RankDecoration | ? |
 | ContentPacks/TiberianDawn/Shared/yaml/templates.yaml | 67 | ^E3 | TD actor missing RankDecoration | ? |
-| ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml | 931 | cabal_eliminator800 | RA2 actor has RankDecoration (should not) | CABALRankDecoration |
+| ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml | 940 | cabal_eliminator800 | RA2 actor has RankDecoration (should not) | CABALRankDecoration |
 | ContentPacks/Warcraft2/Humans/yaml/aircraft.yaml | 28 | wc2_humans_gryphonrider | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Humans/yaml/defenses.yaml | 1 | wc2_humans_humanscouttower | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Humans/yaml/infantry.yaml | 55 | wc2_humans_footman | TD actor missing RankDecoration | ? |

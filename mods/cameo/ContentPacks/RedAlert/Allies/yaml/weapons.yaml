@@ -1,6 +1,7 @@
 CryoLightSniper:
 	Inherits: LightSniper
 	Inherits@2: ^CryoMissileProjectile
+	Report: ramgun2.aud
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 0
@@ -52,6 +53,7 @@ zsu_23:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
+	Report: aacanon3.aud
 	ReloadDelay: 14
 	Burst: 2
 	BurstDelays: 2
@@ -174,6 +176,7 @@ SheridanMissiles:
 	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
+	Report: bazook1.aud
 	ReloadDelay: 64
 	Range: 5023
 	ValidTargets: Ground, Water, Air
@@ -193,6 +196,7 @@ SheridanMissiles:
 SheridanMissilesCryo:
 	Inherits: SheridanMissiles
 	Inherits@2: ^CryoMissileProjectile
+	Report: bazook1.aud
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -48000
 		Range: 300
@@ -561,24 +565,32 @@ ChronoTuskCryo:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@LightFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumChemicalWeapon: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath

@@ -1,6 +1,6 @@
 # audit_inherits — §10.3 invariant violations (B2)
 
-Actors+templates scanned: **3956**
+Actors+templates scanned: **3962**
 
 | violation | meaning | count |
 |---|---|---|
@@ -915,7 +915,7 @@ _none found_
 | naxis_naxiriflesoldier | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml |
 | naxis_naxirocketsilo | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml |
 | naxis_naxpetrolplant | 4 | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml |
-| naxis_nokana | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml |
+| naxis_nokana | 4 | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml |
 | naxis_nop03sarubia | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml |
 | naxis_oldtank | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml |
 | naxis_orerefinery | 4 | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml |
@@ -953,7 +953,7 @@ _none found_
 | ordos_contaminator | 5 | mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml |
 | ordos_deviatorartillery | 5 | mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml |
 | ordos_deviatortank | 5 | mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml |
-| ordos_dustdrone | 5 | mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml |
+| ordos_dustdrone | 4 | mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml |
 | ordos_eyeinthesky | 4 | mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml |
 | ordos_facedancer | 5 | mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml |
 | ordos_heavyautoguntank | 5 | mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml |
@@ -1470,6 +1470,7 @@ _none found_
 | schwarzermond_haunebuii | 4 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml |
 | schwarzermond_haunebuiii | 4 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml |
 | schwarzermond_hydrogenplant | 4 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml |
+| schwarzermond_komet | 4 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml |
 | schwarzermond_korruptesbiest | 5 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml |
 | schwarzermond_laserbeetle | 4 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml |
 | schwarzermond_lasertank | 4 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml |
@@ -1479,7 +1480,6 @@ _none found_
 | schwarzermond_lunarrocket | 5 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml |
 | schwarzermond_lunarsoldier | 5 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml |
 | schwarzermond_lunartiger | 5 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml |
-| schwarzermond_m200bjagerline | 4 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml |
 | schwarzermond_mars | 5 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml |
 | schwarzermond_meteortractionray | 5 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml |
 | schwarzermond_moondairyfarm | 4 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml |
@@ -1622,7 +1622,7 @@ _none found_
 | td_nod_ssmlauncher | 5 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml |
 | td_nod_stealthharvester | 5 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml |
 | td_nod_stealthsoldier | 5 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml |
-| td_nod_stealthtank | 5 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml |
+| td_nod_stealthtank | 4 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml |
 | td_nod_templeofnod | 5 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml |
 | td_nod_templeprime | 5 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml |
 | td_nod_tiberiumharvester | 5 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml |
@@ -1691,7 +1691,7 @@ _none found_
 | tkm_sandmarine | 4 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml |
 | tkm_sniper | 5 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml |
 | tkm_spetsnaz | 5 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml |
-| tkm_stryker | 5 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml |
+| tkm_stryker | 4 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml |
 | tkm_t30 | 4 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml |
 | tkm_t72m | 5 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml |
 | tkm_tankturretbunker | 4 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml |

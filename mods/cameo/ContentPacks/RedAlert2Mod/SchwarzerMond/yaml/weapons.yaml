@@ -224,6 +224,7 @@ LunarNaxiJadgDestroyer:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@5: ^RA2TankDestroyerCannon
+	Report: cannon1.aud
 	ReloadDelay: 90
 	Range: 7379
 	Projectile: Bullet
@@ -244,6 +245,7 @@ LunarNaxiJadgDestroyer:
 LunarNaxiJadgDestroyer_elite:
 	Inherits: LunarNaxiJadgDestroyer
 	Inherits@Elite: ^RA2EliteEffects
+	Report: cannon1.aud
 	Range: 8379
 	Burst: 2
 	BurstDelays: 3
@@ -258,22 +260,32 @@ LunarTigerCannon:
 	Range: 5105
 	Projectile: Bullet
 		Speed: 510
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 4000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 4000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 4000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 2
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@CannonHE_Medium:
 		Damage: 4000
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
@@ -450,6 +462,7 @@ BlackHoleMaker:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
+	Report: obelray1.aud
 	ReloadDelay: 60
 	Range: 6414
 	Projectile: KKNDLaser
@@ -479,6 +492,7 @@ BlackHoleMaker:
 
 BlackHoleMaker_elite:
 	Inherits: BlackHoleMaker
+	Report: obelray1.aud
 	Range: 7414
 	Burst: 2
 	BurstDelays: 3
@@ -489,6 +503,7 @@ NaxiBlackholeShoot:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
+	Report: tnkfire6.aud
 	Range: 5000
 	ReloadDelay: 5
 	Projectile: InstantHit
@@ -691,6 +706,7 @@ NaxCrystalLeech:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
+	Report: tesla1.aud
 	ReloadDelay: 90
 	Range: 7420
 	Burst: 10
@@ -707,6 +723,7 @@ NaxCrystalLeech_elite:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
+	Report: tesla1.aud
 	Range: 8420
 	Burst: 20
 	BurstDelays: 1
@@ -722,6 +739,7 @@ NaxDieGlocke:
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Chem_Heavy
+	Report: flamer2.aud
 	Range: 2500
 	ReloadDelay: 60
 	ValidTargets: Ground, Water, Air
@@ -776,6 +794,7 @@ UbermenschLaser_elite:
 NaxiCowDrop:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@2: ^Effect_Clsn_Medium_RA2
 	ReloadDelay: 50
 	Range: 2000
 	Report: vflolo5a.wav, vflolo5b.wav
@@ -799,10 +818,6 @@ NaxiCowDrop:
 		Explosions: large_splash
 		ImpactSounds: gexpwasa.wav
 		ValidTargets: Water, Underwater
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
 	-Warhead@Effect1:
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 3

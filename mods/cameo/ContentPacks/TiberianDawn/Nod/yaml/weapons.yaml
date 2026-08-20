@@ -127,6 +127,7 @@ BigTiberiumExplosion:
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Chem_Heavy
+	Report: flamer2.aud
 	Warhead@Chemical_Heavy:
 		Damage: 50000
 	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
@@ -170,18 +171,28 @@ ArtilleryShellUpgrade:
 		Damage: 3000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 3
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 6000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 3
-	Warhead@MediumFlameWeapon: SpreadDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 6000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 3
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 6000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
@@ -417,6 +428,7 @@ HeliMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
+	Report: bazook1.aud
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Burst: 4
@@ -511,6 +523,7 @@ LaserObelisk:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
+	Report: obelray1.aud
 	ReloadDelay: 96
 	Range: 9600
 	Projectile: LaserZap
@@ -541,6 +554,7 @@ LaserObelisk:
 LaserObeliskBurning:
 	Inherits: LaserObelisk
 	Inherits@inferno: ^Warhead_Inferno_Heavy
+	Report: obelray1.aud
 	ReloadDelay: 96
 	Range: 9600
 	ValidTargets: Ground, Water
@@ -577,18 +591,21 @@ ChemRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
@@ -612,12 +629,17 @@ ChemRocketsExplosion:
 		Damage: 3000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 3
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 6000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 3
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@LightMissile: SpreadDamage
 		Damage: 6000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -649,18 +671,21 @@ ChemicalBikeRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -715,18 +740,21 @@ ChemicalStealthTankMissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
@@ -785,24 +813,32 @@ ChemicalHonestJohn:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 15
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 30000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 15000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 15
-	Warhead@HeavyChemicalWeapon: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 30000
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 15000
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 15
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	-Warhead@Effect1:
 	Warhead@Effect: CreateEffect
 		Explosions: big_tibnapalm
@@ -996,12 +1032,17 @@ LightTank2Cannon:
 	Report: tnkfire3.aud
 	Projectile: Bullet
 		Speed: 490
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 4000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 4000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
@@ -1272,18 +1313,28 @@ SpecterArtilleryShellUpgrade:
 		Damage: 4000
 	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 4000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@MediumFlameWeapon: SpreadDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 4000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 2
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 4000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
@@ -1509,6 +1560,7 @@ CorvetteLaserObelisk:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
+	Report: obelray1.aud
 	ReloadDelay: 90
 	Range: 9550
 	Warhead@Laser_Heavy:

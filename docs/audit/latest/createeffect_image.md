@@ -3,12 +3,12 @@
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:811  Hakureiring2  Image: hakurei_giphy
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:884  ReimuYinYangDrone  Image: hakurei_giphy
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:906  THMiss  Image: hakurei_dream
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:2926  RA2CorpseSpawner  Image: ra2corpse
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:2972  RA2FlyingBody  Image: ra2corpse
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:1488  AsianTSIonCannon  Image: tsioncannon
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:3444  RA2CorpseSpawner  Image: ra2corpse
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:3480  RA2FlyingBody  Image: ra2corpse
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:1464  AsianTSIonCannon  Image: tsioncannon
 [VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1791  TDIonCannon  Image: tsioncannon
 [VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1803  TDIonCannon  Image: ionsfx
-[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1050  TSIonCannon  Image: tsioncannon
+[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1064  TSIonCannon  Image: tsioncannon
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:112  wc2paladinholyvision_hit  Image: wc2_effect_sparkle
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:142  wc2holyvisionSuper_hit  Image: wc2_effect_sparkle_circle
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:146  wc2holyvisionSuper_hit  Image: wc2_effect_sparkle_circle
@@ -34,8 +34,8 @@
 [VIOLATION] mods\cameo\weapons\generals.yaml:2313  GLSneakAttack  Image: tsdig
 [VIOLATION] mods\cameo\weapons\heroes.yaml:811  McNealMechDrop1  Image: tspodring
 [VIOLATION] mods\cameo\weapons\heroes.yaml:816  McNealMechDrop1  Image: tsmcnealmechdrop
-[VIOLATION] mods\cameo\weapons\redalert2.yaml:3074  RA2CorpseSpawner  Image: ra2corpse
-[VIOLATION] mods\cameo\weapons\redalert2.yaml:3120  RA2FlyingBody  Image: ra2corpse
+[VIOLATION] mods\cameo\weapons\redalert2.yaml:3071  RA2CorpseSpawner  Image: ra2corpse
+[VIOLATION] mods\cameo\weapons\redalert2.yaml:3117  RA2FlyingBody  Image: ra2corpse
 [VIOLATION] mods\cameo\weapons\simcity.yaml:253  CasinoCrateSpawner  Image: tspodring
 [VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1643  E1Droppod  Image: tsdroppod
 [VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1651  E1Droppod  Image: tsdroppod

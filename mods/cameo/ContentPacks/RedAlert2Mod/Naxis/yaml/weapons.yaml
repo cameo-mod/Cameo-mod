@@ -429,6 +429,7 @@ NaxiSniper:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
 	Inherits@fx: ^Effect_Sniper_Light
+	Report: ramgun2.aud
 	ReloadDelay: 120
 	Range: 7777
 	Warhead@Sniper_Light:
@@ -440,6 +441,7 @@ NaxiSniper:
 
 NaxiSniper_elite:
 	Inherits: NaxiSniper
+	Report: ramgun2.aud
 	Range: 8888
 	Burst: 2
 	BurstDelays: 3
@@ -451,6 +453,7 @@ NaxiShrek:
 	Inherits@4: ^TankDestroyerCannon
 	Inherits@5: ^MediumChemicalWeapon
 	Inherits@6: ^RA2MediumMissile
+	Report: bazook1.aud
 	ReloadDelay: 124
 	Range: 6805
 	ValidTargets: Ground, Water
@@ -471,15 +474,19 @@ NaxiShrek:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
@@ -495,15 +502,19 @@ NaxiShrek:
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@MissileAP_Medium:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
@@ -513,6 +524,7 @@ NaxiShrek:
 
 NaxiShrek_elite:
 	Inherits: NaxiShrek
+	Report: bazook1.aud
 	Range: 7805
 	Burst: 2
 	BurstDelays: 3
@@ -532,6 +544,7 @@ NaxiShrekCons:
 	Inherits@4: ^TankDestroyerCannon
 	Inherits@5: ^MediumChemicalWeapon
 	Inherits@6: ^RA2MediumMissile
+	Report: bazook1.aud
 	ReloadDelay: 135
 	Range: 5512
 	ValidTargets: Ground, Water
@@ -552,15 +565,19 @@ NaxiShrekCons:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
@@ -576,15 +593,19 @@ NaxiShrekCons:
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@MissileAP_Medium:
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
@@ -594,6 +615,7 @@ NaxiShrekCons:
 
 NaxiShrekCons_elite:
 	Inherits: NaxiShrekCons
+	Report: bazook1.aud
 	Range: 6512
 	Burst: 2
 	BurstDelays: 3
@@ -611,6 +633,7 @@ NaxiHetzerDestroyer:
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
 	Inherits@4: ^RA2TankDestroyerCannon
+	Report: cannon1.aud
 	ReloadDelay: 80
 	Range: 7132
 	Projectile: Bullet
@@ -627,6 +650,7 @@ NaxiHetzerDestroyer:
 NaxiHetzerDestroyer_elite:
 	Inherits: NaxiHetzerDestroyer
 	Inherits@Elite: ^RA2EliteEffects
+	Report: cannon1.aud
 	Range: 6000
 	Burst: 2
 	BurstDelays: 3
@@ -638,6 +662,7 @@ NaxiJadgDestroyer:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@5: ^RA2TankDestroyerCannon
+	Report: cannon1.aud
 	ReloadDelay: 90
 	Range: 7396
 	Projectile: Bullet
@@ -658,6 +683,7 @@ NaxiJadgDestroyer:
 NaxiJadgDestroyer_elite:
 	Inherits: NaxiJadgDestroyer
 	Inherits@Elite: ^RA2EliteEffects
+	Report: cannon1.aud
 	Range: 8396
 	Burst: 2
 	BurstDelays: 3
@@ -717,18 +743,28 @@ NaxMausCannon:
 		ContrailStartWidth: 111
 		ContrailEndWidth: 22
 		TrailInterval: 1
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 10000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 5
-	Warhead@HeavyFlameWeapon: SpreadDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 10000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 5
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 10000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
@@ -779,12 +815,17 @@ NaxRatteCannon:
 		ContrailStartWidth: 100
 		ContrailEndWidth: 20
 		TrailInterval: 1
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 50000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 50000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
@@ -870,8 +911,6 @@ NaxQuadCannon_AA:
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
 NaxQuadCannon_AA_elite:
@@ -1065,9 +1104,9 @@ NaxiInterceptorGun:
 
 NaxShoeRocket:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@2: ^RA2Grenade
 	Inherits@3: ^RA2MediumMissile
+	Inherits@4: ^Effect_Terrorist_Explosion_RA2
 	-Warhead@Effect1:
 	Report: vaegatta.wav, vaegattb.wav
 	ReloadDelay: 250
@@ -1088,8 +1127,6 @@ NaxShoeRocket:
 		TrailInterval: 1
 		Inaccuracy: 15000
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_terrorist_explosion
-		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine

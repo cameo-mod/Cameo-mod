@@ -14,12 +14,30 @@ K is the whole pricing model in one dimensionless number:
       reliability  P-weighted falloff at the impact point, over the ENGINE's scatter
       secondary_w  expected extra bodies caught = density x min(footprint, blob) - own cell
 
-**K does not depend on the Damage magnitude** — every term multiplies the base — so
-the pricing inversion is exact and the yaml grid is never violated:
+**The FLAT part of K does not depend on the Damage magnitude** — every term multiplies
+the base — but a `%`-of-max-HP twin does NOT scale with the flat Damage, so the honest
+model is AFFINE, not a single multiplier (E4, measured 2026-08-17):
 
-    Damage_required = target_effective_dps x eff_reload / (burst x FP x K)
-    Damage_yaml     = round(Damage_required / 2000) x 2000      # the 2000 grid
-    FirepowerMult   = Damage_required / Damage_yaml             # absorbs the remainder
+    effective_per_shot = Damage_total x K_flat_context  +  pct_absolute_context
+
+    Damage_required = (target_per_shot - pct_absolute_context) / K_flat_context
+    Damage_yaml     = formula.snap_damage_step(Damage_required)   # the 100 grid
+
+⚠ **`k` / `k_context` are the AFFINE-CONTAMINATED forms**: `k = K_flat + pct_absolute /
+Damage_total`. They still reproduce `effective_per_shot` EXACTLY at the weapon's current
+Damage — every `effective_*` number in the ledger is a correct measurement — but they are
+NOT shape coefficients and **must never be inverted**. Doubling a chem cloud's flat Damage
+moves its `k` by -37%; inverting through it to reach 2x the DPS prescribes 40% of the
+Damage actually needed. Invert through `k_flat_context` and `pct_absolute_context`.
+
+This is the same defect the W5 block below already calls out for `overkill` ("folding it
+into K would turn the closed-form inversion into a fixed-point iteration, so it is
+reported ALONGSIDE K, never inside it") — the %-twin was folded in anyway.
+
+**`pct_absolute_context` is also a DPS FLOOR.** A weapon delivers it at `Damage: 0`, so no
+reduction of flat Damage can price the weapon below it. 1542 concrete weapons carry a twin;
+for the worst (`AnthraxCloudLarge`) the floor is 75% of current output. A target below the
+floor is UNREACHABLE and must be reported, not silently rounded to a positive Damage.
 
 That is the answer to "how does 2351.85 get into the yaml": it does not. The
 designer sets geometry for FEEL, K measures it, and the pipeline solves for Damage.
@@ -62,11 +80,15 @@ CHIP_SUFFIX = "_ExtraDamage"
 # has to be explainable by pointing at the factor that moved it.
 #
 # Three of them (targets / range / deadzone) are INDEPENDENT OF DAMAGE, so they
-# fold into `k_context` and the pricing inversion stays exact:
-#     Damage_required = target_dps x eff_reload / (burst x FP x k_context)
+# fold into `k_flat_context` and the pricing inversion stays closed-form:
+#     Damage_required = (target_per_shot - pct_absolute_context) / k_flat_context
 # `overkill` is NOT: it compares per-shot damage against target HP, so it moves
 # when Damage moves. Folding it into K would turn the closed-form inversion into
 # a fixed-point iteration, so it is reported ALONGSIDE K, never inside it.
+#
+# ⚠ The %-of-max-HP twin is the SAME defect, and it WAS folded in — see E4 in the
+# docstring. That is why the inversion above goes through `k_flat_context` and not
+# `k_context`: the twin is additive, so it belongs on the other side of the equation.
 # ---------------------------------------------------------------------------
 
 # A weapon that cannot hit air still fights 90% of the game. The floor stops a
@@ -256,7 +278,21 @@ def analyse(resolved, damage_total: float = 20000.0):
                       "secondary": tm.footprint_targets(footprint, density),
                       "footprint": footprint, "kind": "pct"})
 
-    k = sum(p["share"] * p["versus"] * (p["rel"] + p["secondary"]) for p in parts)
+    def contrib(p):
+        return p["share"] * p["versus"] * (p["rel"] + p["secondary"])
+
+    k = sum(contrib(p) for p in parts)
+
+    # ---- E4: the AFFINE split (see the module docstring) --------------------
+    # k_flat is scale-invariant: every flat/chip share is base/flat_total, so multiplying
+    # every flat Damage by c leaves it untouched. pct_absolute is the twin's contribution
+    # in ABSOLUTE HP-equivalent damage per shot — it does not move with flat Damage at all,
+    # which is precisely why dividing it by flat_total (as `k` does) is a unit error.
+    #
+    # Exact identity, asserted by tools/audit/audit_k_linearity.py:
+    #     k == k_flat + pct_absolute / flat_total
+    k_flat = sum(contrib(p) for p in parts if p["kind"] != "pct")
+    pct_absolute = sum(contrib(p) for p in parts if p["kind"] == "pct") * flat_total
 
     # W5 context factors. The damage-independent three multiply into k_context, so
     # the pricing inversion stays closed-form; overkill is reported separately
@@ -264,12 +300,31 @@ def analyse(resolved, damage_total: float = 20000.0):
     factors = {"targets": targets_factor(resolved),
                "range": range_factor(resolved),
                "deadzone": deadzone_factor(resolved)}
-    k_context = k * factors["targets"] * factors["range"] * factors["deadzone"]
+    ctx = factors["targets"] * factors["range"] * factors["deadzone"]
+    k_context = k * ctx
     overkill = overkill_factor(damage_total * k, ref_hp)
 
     return {"k": k, "k_context": k_context, "factors": factors,
+            "k_flat": k_flat, "k_flat_context": k_flat * ctx,
+            "pct_absolute": pct_absolute, "pct_absolute_context": pct_absolute * ctx,
+            "flat_total": flat_total,
             "overkill": overkill, "sigma": sigma, "instant": is_instant,
             "parts": parts, "effective": damage_total * k_context, "ref_hp": ref_hp}
+
+
+def required_damage(target_per_shot: float, k_flat_context: float,
+                    pct_absolute_context: float = 0.0) -> float | None:
+    """Invert the AFFINE model: the flat `Damage` total that hits `target_per_shot`.
+
+    Returns **None when the target is below the %-twin floor** — that is not an error to
+    round away, it is the model reporting that no flat Damage can get there (the twin
+    alone already exceeds the target, so the weapon needs a smaller twin or a different
+    warhead). The old single-K inversion returned a confidently wrong positive number.
+    """
+    if k_flat_context <= 0:
+        return None
+    headroom = target_per_shot - pct_absolute_context
+    return headroom / k_flat_context if headroom > 0 else None
 
 
 def family_table(damage_total: float = 20000.0, level: str = "Heavy") -> str:

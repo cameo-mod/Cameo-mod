@@ -13,42 +13,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -173,6 +159,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12345"
@@ -253,6 +251,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -328,6 +338,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -367,21 +389,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -455,6 +470,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -473,21 +500,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -543,21 +563,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -629,6 +642,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -704,6 +729,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -818,6 +855,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -857,21 +906,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -952,6 +994,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -990,6 +1044,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -1008,21 +1074,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -1082,6 +1141,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -1169,6 +1240,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -1205,6 +1288,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Defiler Mound",
     "prerequisites": [
      "~zerg_hatchery",
@@ -1214,6 +1301,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -1244,6 +1343,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Evolution Chamber",
     "prerequisites": [
      "~zerg_hatchery"
@@ -1252,6 +1355,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -1282,6 +1397,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Extractor",
     "prerequisites": [
      "~zerg_hatchery"
@@ -1290,6 +1409,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -1347,6 +1478,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Hatchery",
     "prerequisites": [
      "~disabled"
@@ -1355,6 +1490,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -1408,6 +1555,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "150000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Hydralisk Den",
     "prerequisites": [
      "~zerg_hatchery",
@@ -1417,6 +1568,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -1447,6 +1610,10 @@
      "src": "inherited",
      "v": "400000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Infested Command Center",
     "prerequisites": [
      "~zerg_hatchery",
@@ -1456,6 +1623,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -1505,6 +1684,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "25000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Nydus Canal",
     "prerequisites": [
      "~zerg_hatchery",
@@ -1514,6 +1697,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "7c0"
@@ -1548,6 +1743,10 @@
      "src": "inherited",
      "v": "500000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Overmind",
     "prerequisites": [
      "~zerg_hatchery",
@@ -1558,6 +1757,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -1588,6 +1799,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "150000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Queen's Nest",
     "prerequisites": [
      "~zerg_hatchery",
@@ -1597,6 +1812,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -1627,6 +1854,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "125000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Spawning Pool",
     "prerequisites": [
      "~zerg_hatchery"
@@ -1635,6 +1866,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -1665,6 +1908,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "150000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Spire",
     "prerequisites": [
      "~zerg_hatchery",
@@ -1674,6 +1921,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -1748,6 +2007,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml#Health.HP",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Ultralisk Cavern",
     "prerequisites": [
      "~zerg_hatchery",
@@ -1757,6 +2020,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -1966,6 +2241,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml#Health.HP",
      "v": "80000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Creep Colony",
     "prerequisites": [
      "~zerg_hatchery"
@@ -1974,6 +2253,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "5000"
@@ -2158,6 +2449,10 @@
      "src": "inherited",
      "v": "80000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Creep Colony",
     "prerequisites": [
      "~zerg_hatchery"
@@ -2166,6 +2461,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -2351,6 +2658,10 @@
      "src": "inherited",
      "v": "80000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Spore Colony",
     "prerequisites": [
      "~zerg_hatchery"
@@ -2359,6 +2670,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -2543,6 +2866,10 @@
      "src": "inherited",
      "v": "80000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Sunken Colony",
     "prerequisites": [
      "~zerg_hatchery"
@@ -2551,6 +2878,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -2623,6 +2962,22 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -2645,21 +3000,14 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "18000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "18000",
@@ -2728,21 +3076,14 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "18000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "18000",
@@ -2837,6 +3178,22 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6500"
@@ -2895,6 +3252,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -2973,6 +3342,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -3048,6 +3429,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -3210,6 +3603,22 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -3228,42 +3637,28 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -3415,6 +3810,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -3490,6 +3897,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -3564,6 +3983,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -3648,6 +4079,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -4383,6 +4826,10 @@
      "src": "inherited",
      "v": "45000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Zerg Drone",
     "prerequisites": [
      "~zerg_extractor"
@@ -4390,6 +4837,22 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -4470,6 +4933,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -4509,6 +4984,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Zerg Hatchery Drone",
     "prerequisites": [
      "~zerg_evolutionchamber"
@@ -4516,6 +4995,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -4691,6 +5182,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -4769,6 +5272,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -5143,6 +5658,18 @@
     "queue": [
      "SCZergInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"

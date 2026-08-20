@@ -204,6 +204,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "80000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Armored Yak",
     "prerequisites": [
      "~ra1_soviets_airfield",
@@ -213,6 +217,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -488,21 +504,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -604,21 +613,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -720,21 +722,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -794,21 +789,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -877,21 +865,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -960,21 +941,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -1225,6 +1199,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Hind Attack Helicopter",
     "prerequisites": [
      "~ra1_soviets_airfield",
@@ -1234,6 +1212,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -1265,6 +1255,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "150000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Hip Transport",
     "prerequisites": [
      "~ra1_soviets_airfield"
@@ -1273,6 +1267,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -1333,7 +1339,7 @@
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
@@ -1647,21 +1653,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -1711,7 +1710,8 @@
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
        "^TeslaWeapon",
-       "^MediumMissile"
+       "^MediumMissile",
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [],
       "weapon": "KamovMissilesTesla",
@@ -1766,21 +1766,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -1830,7 +1823,8 @@
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
        "^TeslaWeapon",
-       "^MediumMissile"
+       "^MediumMissile",
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [],
       "weapon": "KamovMissilesTesla",
@@ -1885,21 +1879,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -1949,7 +1936,8 @@
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
        "^TeslaWeapon",
-       "^MediumMissile"
+       "^MediumMissile",
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [],
       "weapon": "KamovMissilesTesla",
@@ -2158,6 +2146,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "122500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Kamov Attack Helicopter",
     "prerequisites": [
      "~ra1_soviets_airfield",
@@ -2167,6 +2159,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -2305,8 +2309,8 @@
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy",
-       "Maverick"
+       "Maverick",
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
@@ -2366,8 +2370,8 @@
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy",
-       "Maverick"
+       "Maverick",
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
@@ -2413,21 +2417,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "6",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "12000",
@@ -2501,21 +2498,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "6",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "12000",
@@ -2574,6 +2564,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "40000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Mig Attack Bomber",
     "prerequisites": [
      "~ra1_soviets_airfield",
@@ -2584,6 +2578,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -2616,42 +2622,28 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -2899,6 +2891,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "64000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Nuclear Yak",
     "prerequisites": [
      "~ra1_soviets_airfield",
@@ -2908,6 +2904,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -3254,6 +3262,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "65000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Su-57 Attack Bomber",
     "prerequisites": [
      "~ra1_soviets_airfield",
@@ -3264,6 +3276,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -3296,42 +3320,28 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "50",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "100000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "50000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "50",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "100000",
@@ -3390,6 +3400,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "125000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "200"
+    },
     "name": "Supersonic Nuclear Bomber",
     "prerequisites": [
      "~ra1_soviets_airfield",
@@ -3400,6 +3414,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -3453,42 +3479,28 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "40000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -3501,7 +3513,8 @@
        "^TeslaWeapon",
        "^HeavyBomb",
        "^HeavyChemicalWeapon",
-       "^HeavyFlameWeapon"
+       "^HeavyFlameWeapon",
+       "^Effect_Kirov_Tesla_RA2"
       ],
       "warheads": [],
       "weapon": "YakTeslaBomb",
@@ -3559,7 +3572,7 @@
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
@@ -3841,6 +3854,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "64000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Tesla Yak",
     "prerequisites": [
      "~ra1_soviets_airfield",
@@ -3850,6 +3867,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -3905,42 +3934,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -4174,6 +4189,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#Health.HP",
      "v": "32000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Yak Scout Plane",
     "prerequisites": [
      "~ra1_soviets_airfield",
@@ -4185,6 +4204,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -4221,6 +4252,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Airfield",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
@@ -4231,6 +4266,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -4261,6 +4308,10 @@
      "src": "inherited",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Barracks",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
@@ -4270,6 +4321,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -4296,6 +4359,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Construction Yard",
     "prerequisites": [
      "~disabled"
@@ -4304,6 +4371,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -4334,6 +4413,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml#Health.HP",
      "v": "600000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Large Factory",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
@@ -4344,6 +4427,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "10000"
@@ -4374,6 +4469,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml#Health.HP",
      "v": "500000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Large Soviet Airfield",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
@@ -4384,6 +4483,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "10000"
@@ -4414,6 +4525,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Ore Refinery",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
@@ -4423,6 +4538,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -4453,6 +4580,10 @@
      "src": "inherited",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Radar Dome",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
@@ -4462,6 +4593,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -4492,6 +4635,10 @@
      "src": "inherited",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Service Depot",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
@@ -4501,6 +4648,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -4531,6 +4690,10 @@
      "src": "inherited",
      "v": "500000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Tech Center",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
@@ -4540,6 +4703,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -4570,6 +4745,10 @@
      "src": "inherited",
      "v": "400000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet War Factory",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
@@ -4580,6 +4759,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -4681,6 +4872,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml#Health.HP",
      "v": "64000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Flame Tower",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
@@ -4690,6 +4885,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6742"
@@ -4725,6 +4932,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Iron Curtain",
     "prerequisites": [
      "~ra1_soviets_techcenter",
@@ -4734,6 +4945,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -4769,6 +4992,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Missile Silo",
     "prerequisites": [
      "~ra1_soviets_techcenter",
@@ -4779,6 +5006,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -4888,6 +5127,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml#Health.HP",
      "v": "75000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet SAM Site",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
@@ -4897,6 +5140,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "12790"
@@ -5055,6 +5310,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml#Health.HP",
      "v": "90000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Tesla Coil",
     "prerequisites": [
      "~ra1_soviets_constructionyard",
@@ -5064,6 +5323,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "9318"
@@ -5214,6 +5485,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -5277,6 +5564,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -5388,6 +5687,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7500"
@@ -5451,6 +5762,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#RevealsShroud.Range",
      "v": "10000"
@@ -5693,6 +6016,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6500"
@@ -5877,6 +6216,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6500"
@@ -6061,6 +6416,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -6203,21 +6570,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -6296,21 +6656,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -6391,6 +6744,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5500"
@@ -6585,6 +6950,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -6816,6 +7193,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -6960,6 +7353,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6500"
@@ -7250,6 +7659,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -7284,21 +7705,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -7365,21 +7779,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -7435,7 +7842,7 @@
        "VolkovMagneticWeapon",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
@@ -7481,21 +7888,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "40000",
@@ -7576,21 +7976,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -7658,21 +8051,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -7700,21 +8086,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -7748,7 +8127,8 @@
       "versus_templates": [
        "VolkovMagneticWeapon",
        "^MediumFlameWeapon",
-       "^TeslaWeapon"
+       "^TeslaWeapon",
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -7765,21 +8145,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "40000",
@@ -7814,21 +8187,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "40000",
@@ -7895,21 +8261,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -7977,21 +8336,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -8047,7 +8399,7 @@
        "VolkovMagneticWeapon",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
@@ -8094,21 +8446,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "40000",
@@ -8190,21 +8535,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -8273,21 +8611,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -8315,21 +8646,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -8363,7 +8687,8 @@
       "versus_templates": [
        "VolkovMagneticWeapon",
        "^MediumFlameWeapon",
-       "^TeslaWeapon"
+       "^TeslaWeapon",
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -8381,21 +8706,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "40000",
@@ -8430,21 +8748,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "40000",
@@ -8513,6 +8824,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Health.HP",
      "v": "400000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Volkov",
     "prerequisites": [
      "~ra1_soviets_barracks",
@@ -8523,6 +8838,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -8732,6 +9059,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -10048,7 +10387,7 @@
        "^Warhead_MissileAP_Light",
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
@@ -10250,6 +10589,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "90000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "BTR-80",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -10259,6 +10602,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -10395,6 +10750,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "30000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Flak Truck",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -10404,6 +10763,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -10621,7 +10992,7 @@
       "versus_templates": [
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
-       "^Effect_Tesla_Heavy"
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy"
@@ -10771,6 +11142,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Gatling Tank",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -10781,6 +11156,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -10854,6 +11241,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "150000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Gorynych Tank",
     "prerequisites": [
      "~ra1_soviets_warfactory"
@@ -10862,6 +11253,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -10940,21 +11343,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -11041,6 +11437,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Grad",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -11051,6 +11451,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -11210,21 +11622,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -11266,21 +11671,14 @@
         "falloff": null,
         "spread": null,
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": null,
         "spread": null,
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -11321,6 +11719,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "210000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Hammer Tank",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -11332,6 +11734,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -11503,6 +11917,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Heatray Tank",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -11512,6 +11930,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -11551,6 +11981,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "135000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Heavy Industrial Miner",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -11561,6 +11995,22 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -11688,6 +12138,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "150000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Heavy Tank",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -11697,6 +12151,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -11856,6 +12322,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "150000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Heavy Tesla Tank",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -11865,6 +12335,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -12039,6 +12521,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "240000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Kotin Nuclear Tank",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -12048,6 +12534,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -12104,6 +12602,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "MAD Tank",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -12113,6 +12615,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -12632,21 +13146,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -12695,7 +13202,8 @@
        "^Grenade",
        "^LightFlameWeapon",
        "^TeslaWeapon",
-       "^HeavyMissile"
+       "^HeavyMissile",
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [],
       "weapon": "MammothTuskTesla",
@@ -12732,21 +13240,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -12808,63 +13309,42 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -12982,63 +13462,42 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -13161,6 +13620,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "375000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Mammoth Tank",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -13171,6 +13634,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -13210,6 +13685,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Mobile Construction Vehicle",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -13219,6 +13698,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -13436,21 +13927,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "13250",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "13",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "26750",
@@ -13499,7 +13983,8 @@
        "^Grenade",
        "^LightFlameWeapon",
        "^TeslaWeapon",
-       "^HeavyMissile"
+       "^HeavyMissile",
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [],
       "weapon": "MonsterTankTuskTesla",
@@ -13514,63 +13999,42 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6750",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "7",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "13250",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6750",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "7",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "13250",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "6750",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "7",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "13250",
@@ -13709,6 +14173,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Monster Tank",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -13719,6 +14187,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -13839,126 +14319,84 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -14137,126 +14575,84 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -14338,6 +14734,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Nuclear V2 Launcher",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -14348,6 +14748,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -14402,6 +14814,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "20000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Nuke Demo Truck",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -14411,6 +14827,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#RevealsShroud.Range",
      "v": "5c0"
@@ -14450,6 +14878,10 @@
      "src": "inherited",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Soviet Ore Truck",
     "prerequisites": [
      "~ra1_soviets_orerefinery",
@@ -14459,6 +14891,22 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -14497,42 +14945,28 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -14578,42 +15012,28 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -14778,42 +15198,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
@@ -14857,42 +15263,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
@@ -14933,21 +15325,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
@@ -15004,21 +15389,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
@@ -15085,6 +15463,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "625000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Siege Mammoth Tank",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -15095,6 +15477,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -15138,6 +15532,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Stalin Fist",
     "prerequisites": [
      "~ra1_soviets_techcenter"
@@ -15146,6 +15544,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -15305,6 +15715,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Tesla Tank",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -15314,6 +15728,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -15427,21 +15853,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -15483,6 +15902,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "25000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "V1 Rocket Truck",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -15493,6 +15916,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -15622,21 +16057,14 @@
         "falloff": null,
         "spread": null,
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20000",
-        "falloff": null,
-        "spread": null,
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "20",
         "falloff": null,
         "spread": null,
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -15730,21 +16158,14 @@
         "falloff": null,
         "spread": null,
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15000",
-        "falloff": null,
-        "spread": null,
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "15",
         "falloff": null,
         "spread": null,
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -15759,7 +16180,8 @@
        "^Warhead_Tesla_Heavy",
        "^Projectile_Lightning_Heavy",
        "^Effect_Tesla_Heavy",
-       "SCUD"
+       "SCUD",
+       "^Effect_Kirov_Tesla_RA2"
       ],
       "warheads": [
        "^Warhead_Tesla_Heavy",
@@ -15791,6 +16213,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#Health.HP",
      "v": "30000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "V2 Rocket Launcher",
     "prerequisites": [
      "~ra1_soviets_warfactory",
@@ -15801,6 +16227,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"

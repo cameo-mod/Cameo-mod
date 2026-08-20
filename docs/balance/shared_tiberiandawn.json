@@ -26,7 +26,23 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Chinook Transport",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -119,6 +135,10 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Advanced Power Plant",
     "prerequisites": [
      "~fact",
@@ -128,6 +148,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "5c0"
@@ -154,6 +186,10 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
      "v": "150000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Power Plant",
     "prerequisites": [
      "~fact"
@@ -162,6 +198,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
@@ -218,6 +266,10 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Tiberium Silo",
     "prerequisites": [
      "~fact",
@@ -227,6 +279,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
@@ -327,6 +391,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"

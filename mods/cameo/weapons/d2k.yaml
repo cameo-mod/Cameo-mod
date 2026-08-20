@@ -778,17 +778,20 @@ LeechSpit:
 		Speed: 2500
 		Width: 25
 		TrailImage: sczhsplash
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Vehicle
 		Damage: 4000
 		DamageTypes: Prone50Percent, TriggerProne, LeechTankInfect
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Vehicle
-		Damage: 2000
-		DamageTypes: Prone50Percent, TriggerProne, LeechTankInfect
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Vehicle
 		Damage: 1
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Vehicle
 		Damage: 4000
@@ -1238,6 +1241,7 @@ PlasmaExplosion:
 
 d2k_munitions_explosion_h:
 	Inherits: d2k_munitions_explosion
+	Report: 2100rotlsr.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 52500
 		Spread: 3c0
@@ -1925,21 +1929,22 @@ ixian_airdrone:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		ValidRelationships: Neutral, Enemy
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		ValidRelationships: Neutral, Enemy
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -2007,6 +2012,7 @@ d2k_kwny_fighter:
 	MinRange: 920
 d2k_laser_aa:
 	Inherits: d2k_laser
+	Report: obelray1.aud
 	Range: 8192
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -2014,6 +2020,7 @@ d2k_laser_aa:
 
 d2k_laser_qafza:
 	Inherits: d2k_laser
+	Report: obelray1.aud
 	StartBurstReport: d2k_laser.wav
 	Burst: 1
 	ReloadDelay: 12
@@ -2030,6 +2037,7 @@ d2k_laser_qafza:
 
 d2k_laser_qafza_aa:
 	Inherits: d2k_laser_qafza
+	Report: obelray1.aud
 	Range: 8192
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage

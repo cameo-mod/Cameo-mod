@@ -218,18 +218,28 @@ TSCABALObeliskLaserFire:
 		Damage: 70000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 35
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 70000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 35000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 35
-	Warhead@MediumChemicalWeapon: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 70000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 35000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 35
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	-Warhead@EffectAir:
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
@@ -322,18 +332,28 @@ TSCABALEnlightedLaser:
 		Damage: 70000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 35
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 70000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 35000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 35
-	Warhead@MediumChemicalWeapon: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 70000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 35000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 35
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	-Warhead@EffectAir:
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
@@ -785,12 +805,17 @@ CabalArtilleryWalkerShellUpgraded:
 		Damage: 42000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 21
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 42000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 21000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 21
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		Damage: 42000
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
@@ -1014,12 +1039,17 @@ CabalDissolverSpray:
 		Image: tsdissolvereffect
 		Palette: alpha50
 		Inaccuracy: 512
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 2000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
@@ -1050,18 +1080,28 @@ CabalCommandoPlasma:
 		Damage: 50000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 25
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 50000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 25
-	Warhead@MediumChemicalWeapon: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 50000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
@@ -1083,18 +1123,28 @@ CabalCommandoPlasmaMk2:
 		Damage: 50000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 25
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 50000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 25
-	Warhead@MediumChemicalWeapon: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 50000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
@@ -1121,18 +1171,28 @@ CabalSubmarinePlasma:
 		Damage: 25000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 12
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 25000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 12
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 12
-	Warhead@MediumChemicalWeapon: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 25000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 12000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 12
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
@@ -1415,24 +1475,32 @@ CabalMothershipRockets:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@MediumFlameWeapon: SpreadDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
@@ -2223,18 +2291,28 @@ CabalCommandoPlasmaNeutron:
 		Damage: 50000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 25
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 50000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 25
-	Warhead@MediumChemicalWeapon: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 50000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 50000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
@@ -2271,18 +2349,28 @@ CabalCommandoPlasmaMk2Neutron:
 		Damage: 50000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 25
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 50000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 25
-	Warhead@MediumChemicalWeapon: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 50000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 25
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 50000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
@@ -2404,6 +2492,7 @@ CabalOverkillGunshipLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
+	Report: obelray1.aud
 	ReloadDelay: 40
 	Range: 6000
 	Projectile: LaserZap
@@ -2431,6 +2520,7 @@ CabalOverkillLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
+	Report: obelray1.aud
 	ReloadDelay: 50
 	Range: 6400
 	Burst: 50

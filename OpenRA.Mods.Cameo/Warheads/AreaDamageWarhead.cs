@@ -38,17 +38,22 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 	public class AreaDamageWarhead : DamageWarhead, IRulesetLoaded<WeaponInfo>
 	{
-		[Desc("How a victim's MULTIPLE enabled Armor types combine into one Versus value.",
+		[Desc("How a victim's MULTIPLE enabled CLASS armors combine into one Versus value.",
+			"⚠ This governs the CLASS armors only. A PLATING is a separate layer and always",
+			"MULTIPLIES on top of the result (maintainer 2026-08-17: \"the hybrid armors ... should",
+			"be averaged while the armor layer on top should be multiplied ... That gives both",
+			"their own game mechanic\"). Two rules in one field, which is why the plating set is",
+			"matched by NAME below.",
 			"Only affects actors wearing more than one armor (armor-plated units and the legacy",
 			"dual-armor cyborgs and droids) — over a single armor every rule returns that armor,",
 			"which is why a SHIELDED unit is unaffected: its body armor is gated off while the",
 			"shield holds, so only the Shield row is ever read (W21 R5).",
-			"Average: the Cameo law. 40% and 30% -> 35%, so the plating and the body meet in the",
-			"  middle — anti-infantry fire is never useless against a plated cyborg and AP fire is",
+			"Average: the Cameo law. 40% and 30% -> 35%, so the two bodies meet in the middle —",
+			"  anti-infantry fire is never useless against a dual-armor cyborg and AP fire is",
 			"  never oppressive against one.",
 			"Multiply: the ENGINE's rule, and the reason this field exists. 40% x 30% = 12%, so a",
 			"  second armor does not average a weapon's profile, it SQUARES it — a 17:1 weapon",
-			"  becomes ~289:1 against these units.",
+			"  becomes ~289:1 against these units. Never use it for CLASS armors.",
 			"Lowest / Highest: the unit is as tough as its best / worst protected aspect.",
 			"⚠ Only warheads that ROUTE THROUGH AreaDamage obey this. The ~878 legacy warhead",
 			"nodes still declaring inline Versus on SpreadDamage keep multiplying until they are",
@@ -103,7 +108,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 			"the single PhysicalStateName/Scale above. For a blend, e.g. Plasma: Temperature: 50, Corrosion: 50.")]
 		public readonly Dictionary<string, int> PhysicalStates = new();
 
-		[Desc("Drain the victim's Integrity (shield/EMP) pool by the damage this warhead deals x this",
+		[Desc("Drain the victim's Integrity ELECTRONICS pool by the damage this warhead deals x this",
 			"percentage, SCALED exactly like PhysicalStateScale (auto-tracks the real post-armor/falloff",
 			"damage, so no flat EMP number is hand-set). Cameo Tesla-content law: Tesla 100, Storm 50,",
 			"Quantum 33 (Tesla-parents / total-parents). 0 = off. Put it on the main + _Percentage warheads,",
@@ -165,28 +170,33 @@ namespace OpenRA.Mods.Cameo.Warheads
 		// Selection removes the whole failure mode: only one row is ever read.
 		//
 		// This is deliberately NOT the same as being strictly better. Each plating is strong against
-		// one damage axis and WEAK against another (the 5-cycle: thermochemical -> kinetic -> shaped
-		// charge -> blast -> energy -> thermochemical), so picking one is a trade, not a free
-		// upgrade. That is only safe BECAUSE selection replaced averaging: under averaging a "weak"
-		// row would have been an unconditional penalty stacked on top of the class armor.
+		// one damage axis and WEAK against the next (the cycle: thermochemical -> kinetic -> blast
+		// -> energy -> thermochemical), so picking one is a trade, not a free upgrade. That is only
+		// safe BECAUSE selection replaced averaging: under averaging a "weak" row would have been an
+		// unconditional penalty stacked on top of the class armor.
 		//
 		// `Shield` is absent here on purpose — it already does exactly this in yaml
 		// (`Armor: RequiresCondition: !shielded` in defaults.yaml), and it sits ABOVE plating in the
 		// layer stack, so its own condition takes it out of the running before this code runs.
+		//
+		// ⚠ Keep in step with `gen_weapon_template.PLATING_CYCLE`, which generates the columns.
+		// A name here with no column would select an armor the warheads have no row for, which
+		// `DamageVersus` answers with 100 — i.e. the plating would REMOVE the unit's armor.
 		static readonly string[] PlatingArmors =
 		{
-			"HAZMAT",           // sealed suit / NBC     — vs fire, chemical, radiation
-			"Composite",        // ceramic matrix        — vs kinetic penetrators and bullets
-			"Reactive",         // ERA / slat            — vs shaped charges
-			"BlastProtection",  // spall liner / V-hull  — vs HE, demolition, concussion
-			"REFLECTOR",        // ablative / mirrored   — vs directed energy
+			"HAZMAT",     // sealed / filtered envelope — vs fire, chemical, radiation
+			"COMPOSITE",  // ceramic matrix + ERA       — vs kinetic penetrators AND shaped charges
+			"BLAST",      // spall liner / V-hull       — vs HE, demolition, concussion
+			"REFLECTOR",  // ablative / mirrored        — vs directed energy
+			// The GENERIC plating: flat against everything, so it counters nothing and is
+			// punished by nothing. Home for every non-branching "+armor" upgrade (Yuri scrap,
+			// Forgotten junk armor, the StarCraft/Warcraft armor and carapace levels), which
+			// were never designed with a counter-play identity.
+			"ARMOR",
 		};
 
 		protected override int DamageVersus(Actor victim, HitShape shape, WarheadArgs args)
 		{
-			if (MultiArmorCombination == ArmorCombination.Multiply)
-				return base.DamageVersus(victim, shape, args);
-
 			if (Versus.Count == 0)
 				return 100;
 
@@ -197,29 +207,51 @@ namespace OpenRA.Mods.Cameo.Warheads
 					(shape.Info.ArmorTypes.IsEmpty || shape.Info.ArmorTypes.Contains(a.Info.Type)))
 				.ToList();
 
-			// A plating outranks the class armor: it is the outermost layer, so it is what got hit.
-			// If several are somehow active at once, the most protective wins rather than an
-			// average — stacking platings must never be worse than wearing one.
+			// A PLATING is a LAYER, not an armor class: it sits on top of whatever the unit already
+			// is. If several are somehow active at once the most protective wins rather than an
+			// average — stacking platings must never be worse than wearing one. (`X1` in
+			// audit_plating_exclusivity keeps it to one in practice.)
 			var plating = matched
 				.Where(a => PlatingArmors.Contains(a.Info.Type))
 				.Select(a => Versus[a.Info.Type])
 				.ToList();
-			if (plating.Count > 0)
-				return plating.Min();
 
-			var armor = matched.Select(a => Versus[a.Info.Type]).ToList();
+			var armor = matched
+				.Where(a => !PlatingArmors.Contains(a.Info.Type))
+				.Select(a => Versus[a.Info.Type])
+				.ToList();
 
-			// No matching armor means no modifier, exactly as the base's empty product does.
-			if (armor.Count == 0)
-				return 100;
+			// No matching class armor means no class modifier, exactly as the base's empty product
+			// does — the plating (if any) then applies alone.
+			var classRow = armor.Count == 0
+				? 100
+				: MultiArmorCombination switch
+				{
+					ArmorCombination.Average => armor.Sum() / armor.Count,
+					ArmorCombination.Lowest => armor.Min(),
+					ArmorCombination.Highest => armor.Max(),
+					_ => Util.ApplyPercentageModifiers(100, armor),
+				};
 
-			return MultiArmorCombination switch
-			{
-				ArmorCombination.Average => armor.Sum() / armor.Count,
-				ArmorCombination.Lowest => armor.Min(),
-				ArmorCombination.Highest => armor.Max(),
-				_ => Util.ApplyPercentageModifiers(100, armor),
-			};
+			// ⭐ THE LAYER RULE (maintainer 2026-08-17). The plating MULTIPLIES the class row
+			// instead of REPLACING it. Selection erased the class armor outright, so installing an
+			// upgrade switched off the unit-class ladder — a plated Heroic stopped being Heroic and
+			// a Superheavy tank took the same damage as a Scout car wearing the same plate. Both
+			// axes now stay live.
+			//
+			// Safe here in a way the engine's blanket Multiply is not: a plating row is a SHALLOW
+			// modifier (35..106, mean 70), not a second full ladder, so the compounded spread is
+			// 5.32:1 — inside the documented 2-8x band — where multiplying two CLASS ladders is
+			// W20's squaring bug (40% x 30% = 12%). That is exactly why the class armors keep
+			// combining by MultiArmorCombination above and only the layer multiplies.
+			//
+			// ⚠ Deliberately NO clamp at 100. The five cells that exceed it (Arrow/Concussion 106,
+			// Prism 103, Bullet/Toxic 102) ARE the closed cycle's weaknesses; clamping would make
+			// every plating a strict upgrade, which is the "free upgrade" the cycle exists to
+			// prevent. A +6% penalty against your counter-weapon is a trade a player can read.
+			return plating.Count > 0
+				? classRow * plating.Min() / 100
+				: classRow;
 		}
 
 		protected override void DoImpact(WPos pos, Actor firedBy, WarheadArgs args)
@@ -363,12 +395,18 @@ namespace OpenRA.Mods.Cameo.Warheads
 			physicalState?.ApplyChange(change, firedBy, true);
 		}
 
-		// Drain the victim's Integrity (shield/EMP) pool proportional to the damage just dealt, the same
+		// Drain the victim's Integrity ELECTRONICS pool proportional to the damage just dealt, the same
 		// way ApplyPhysicalState scales a heat/corrosion meter. Auto-tracks the final effective damage
 		// (armor + falloff already baked into `damage`), so the "EMP" self-adjusts with the weapon's
 		// output and never needs a hand-set number. Shared with the _Percentage subclass so both the flat
 		// main and the %HP twin drain the pool; the _ExtraDamage chip never calls this (excluded). No
-		// Integrity trait on the victim (most units have no shield) => a harmless no-op.
+		// Integrity trait on the victim (most units have no electronics pool) => a harmless no-op.
+		//
+		// ⚠ INTEGRITY IS NOT A SHIELD. It absorbs NOTHING — `INotifyDamage` runs after the damage has
+		// already landed on health — so draining it buys the attacker no extra damage, only the EMP
+		// DISABLE when it reaches zero. The shield is `Shielded` (OpenRA.Mods.AS), a separate trait and
+		// a separate layer. `Integrity.cs` had every [Desc] copied verbatim from `Shielded.cs` and this
+		// file inherited the same wrong word; corrected 2026-08-17 on the maintainer's report.
 		protected void ApplyIntegrityScale(Actor victim, Actor firedBy, int damage)
 		{
 			if (damage == 0 || IntegrityScale == 0)

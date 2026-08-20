@@ -105,42 +105,28 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -288,42 +274,28 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
@@ -385,6 +357,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "500000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Battlecruiser",
     "prerequisites": [
      "~terran_starport",
@@ -394,6 +370,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12345"
@@ -425,6 +413,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "125000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Dropship",
     "prerequisites": [
      "~terran_starport",
@@ -434,6 +426,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -504,6 +508,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "125000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Medivac",
     "prerequisites": [
      "~terran_starport",
@@ -513,6 +521,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -611,42 +631,28 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -793,42 +799,28 @@
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
@@ -894,6 +886,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "200"
+    },
     "name": "Phobos",
     "prerequisites": [
      "~terran_starport",
@@ -904,6 +900,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12345"
@@ -993,6 +1001,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "400000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "200"
+    },
     "name": "Pythean",
     "prerequisites": [
      "~terran_starport",
@@ -1002,6 +1014,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12345"
@@ -1074,6 +1098,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Raven",
     "prerequisites": [
      "~terran_starport",
@@ -1083,6 +1111,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -1185,6 +1225,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Science Vessel",
     "prerequisites": [
      "~terran_sciencefacility"
@@ -1193,6 +1237,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -1456,6 +1512,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "160000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Sundog",
     "prerequisites": [
      "~terran_starport",
@@ -1465,6 +1525,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -1661,6 +1733,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "120000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Valkyrie",
     "prerequisites": [
      "~terran_starport",
@@ -1671,6 +1747,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -1929,6 +2017,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Wraith",
     "prerequisites": [
      "~terran_starport",
@@ -1938,6 +2030,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -1972,42 +2076,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -2128,42 +2218,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -2283,6 +2359,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
      "v": "180000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Wyvern",
     "prerequisites": [
      "~terran_starport",
@@ -2293,6 +2373,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -2329,6 +2421,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Health.HP",
      "v": "150000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Academy",
     "prerequisites": [
      "~terran_commandcenter",
@@ -2338,6 +2434,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -2364,6 +2472,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Health.HP",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Armory",
     "prerequisites": [
      "~terran_commandcenter",
@@ -2373,6 +2485,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -2403,6 +2527,10 @@
      "src": "inherited",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Barracks",
     "prerequisites": [
      "~terran_commandcenter"
@@ -2411,6 +2539,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -2441,6 +2581,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Command Center",
     "prerequisites": [
      "~disabled"
@@ -2449,6 +2593,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -2479,6 +2635,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Health.HP",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Engineering Bay",
     "prerequisites": [
      "~terran_commandcenter",
@@ -2488,6 +2648,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -2540,6 +2712,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Refinery",
     "prerequisites": [
      "~terran_commandcenter"
@@ -2548,6 +2724,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -2578,6 +2766,10 @@
      "src": "inherited",
      "v": "500000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Science Facility",
     "prerequisites": [
      "~terran_commandcenter",
@@ -2588,6 +2780,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -2618,6 +2822,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Starport",
     "prerequisites": [
      "~terran_commandcenter",
@@ -2627,6 +2835,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -2653,6 +2873,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Health.HP",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Supply Depot",
     "prerequisites": [
      "~terran_commandcenter"
@@ -2661,6 +2885,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "5c0"
@@ -2713,6 +2949,10 @@
      "src": "inherited",
      "v": "400000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Weapons Factory",
     "prerequisites": [
      "~terran_commandcenter",
@@ -2722,6 +2962,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -2751,6 +3003,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Health.HP",
      "v": "240000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Bunker",
     "prerequisites": [
      "~terran_commandcenter",
@@ -2760,6 +3016,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6666"
@@ -2795,6 +3063,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Terran Missile Silo",
     "prerequisites": [
      "~terran_commandcenter",
@@ -2806,6 +3078,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -3019,6 +3303,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Health.HP",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Missile Turret",
     "prerequisites": [
      "~terran_commandcenter",
@@ -3028,6 +3316,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "11626"
@@ -3140,6 +3440,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Health.HP",
      "v": "160000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Sentinel",
     "prerequisites": [
      "~terran_commandcenter",
@@ -3149,6 +3453,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "8181"
@@ -3340,6 +3656,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -3717,6 +4045,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7500"
@@ -3737,42 +4077,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -3798,42 +4124,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -3860,42 +4172,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -3922,42 +4220,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -4010,6 +4294,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -4160,6 +4456,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -4340,6 +4648,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6500"
@@ -4510,6 +4834,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -4694,6 +5030,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6500"
@@ -4712,21 +5064,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -4768,21 +5113,14 @@
         "falloff": null,
         "spread": null,
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": null,
         "spread": null,
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -4845,21 +5183,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -4901,21 +5232,14 @@
         "falloff": null,
         "spread": null,
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": null,
-        "spread": null,
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": null,
         "spread": null,
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -4963,6 +5287,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "4000"
@@ -5281,6 +5617,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7500"
@@ -5658,6 +6006,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7500"
@@ -6586,6 +6946,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
      "v": "90000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Cyclone",
     "prerequisites": [
      "~terran_engineeringbay",
@@ -6595,6 +6959,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -6957,6 +7333,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
      "v": "125000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Goliath",
     "prerequisites": [
      "~terran_armory",
@@ -6966,6 +7346,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -7340,6 +7732,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
      "v": "175000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Goliath Mk2",
     "prerequisites": [
      "~terran_armory",
@@ -7349,6 +7745,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -7497,6 +7905,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Matador",
     "prerequisites": [
      "~terran_weaponsfactory",
@@ -7506,6 +7918,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -7545,6 +7969,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Terran Mobile Command Center",
     "prerequisites": [
      "~terran_engineeringbay"
@@ -7553,6 +7981,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -7666,6 +8106,10 @@
      "src": "inherited",
      "v": "45000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "SCV",
     "prerequisites": [
      "~terran_refinery"
@@ -7674,6 +8118,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -7792,126 +8252,84 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
         "falloff": "99, 66, 33",
         "spread": "1050",
         "tag": "HeavyChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "525",
         "tag": "HeavyChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
         "falloff": "111, 33, 11, 3",
         "spread": "1000",
         "tag": "HeavyFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "500",
-        "tag": "HeavyFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -8067,6 +8485,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
      "v": "150000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Siege Tank",
     "prerequisites": [
      "~terran_engineeringbay"
@@ -8075,6 +8497,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -8213,6 +8647,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Vulture",
     "prerequisites": [
      "~terran_weaponsfactory"
@@ -8221,6 +8659,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -8246,21 +8696,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -8409,7 +8852,8 @@
        "^Grenade",
        "^FlakWeapon",
        "^HeavyMissile",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -8439,6 +8883,10 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Warhound",
     "prerequisites": [
      "~terran_sciencefacility",
@@ -8448,6 +8896,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"

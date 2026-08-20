@@ -41,6 +41,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Health.HP",
      "v": "37500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Black Bomb",
     "prerequisites": [
      "~schwarzermond_airfield",
@@ -50,6 +54,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -152,6 +168,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Health.HP",
      "v": "37500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Corruptor Piercer",
     "prerequisites": [
      "~schwarzermond_airfield",
@@ -162,6 +182,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -234,6 +266,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Health.HP",
      "v": "3750000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Die Glocke",
     "prerequisites": [
      "~schwarzermond_airfield",
@@ -244,6 +280,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12345"
@@ -472,7 +520,23 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Health.HP",
      "v": "7500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Drone",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#RevealsShroud.Range",
      "v": "7500"
@@ -641,6 +705,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Health.HP",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Haunebu II",
     "prerequisites": [
      "~schwarzermond_airfield",
@@ -650,6 +718,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12345"
@@ -822,7 +902,8 @@
       "slot": "Armament@SECOND",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Effect_Demolition_Heavy"
+       "^Effect_Demolition_Heavy",
+       "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy"
@@ -852,6 +933,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Health.HP",
      "v": "375000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Haunebu III",
     "prerequisites": [
      "~schwarzermond_airfield",
@@ -862,6 +947,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12345"
@@ -1902,6 +1999,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml#Health.HP",
      "v": "1350000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Space Zeppelin",
     "prerequisites": [
      "~schwarzermond_warfactory",
@@ -1913,6 +2014,18 @@
      "RAAircraft",
      "Vehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -1965,6 +2078,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml#Health.HP",
      "v": "600000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Schwarzer Mond Airfield",
     "prerequisites": [
      "~schwarzermond_constructionyard",
@@ -1974,6 +2091,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "12000"
@@ -2004,6 +2133,10 @@
      "src": "inherited",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Schwarzer Mond Barracks",
     "prerequisites": [
      "~schwarzermond_constructionyard",
@@ -2013,6 +2146,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -2039,6 +2184,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Schwarzer Mond Construction Yard",
     "prerequisites": [
      "~disabled"
@@ -2047,6 +2196,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -2081,6 +2242,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Gravity Core",
     "prerequisites": [
      "~schwarzermond_constructionyard",
@@ -2090,6 +2255,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -2116,6 +2293,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml#Health.HP",
      "v": "175000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Schwarzer Mond Hydrogen Plant",
     "prerequisites": [
      "~schwarzermond_constructionyard"
@@ -2124,6 +2305,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
@@ -2397,6 +2590,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml#Health.HP",
      "v": "160000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Laser Tower",
     "prerequisites": [
      "~schwarzermond_constructionyard",
@@ -2406,6 +2603,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "8181"
@@ -2440,6 +2649,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Meteor Traction Ray",
     "prerequisites": [
      "~schwarzermond_constructionyard",
@@ -2451,6 +2664,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -2481,6 +2706,10 @@
      "src": "inherited",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Moon Dairy Farm",
     "prerequisites": [
      "~schwarzermond_constructionyard",
@@ -2491,6 +2720,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7500"
@@ -2521,6 +2762,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Schwarzer Mond Ore Refinery",
     "prerequisites": [
      "~schwarzermond_constructionyard",
@@ -2530,6 +2775,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -2560,6 +2817,10 @@
      "src": "inherited",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Schwarzer Mond Radar",
     "prerequisites": [
      "~schwarzermond_constructionyard",
@@ -2569,6 +2830,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -2754,6 +3027,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml#Health.HP",
      "v": "160000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Sturm Cannon",
     "prerequisites": [
      "~schwarzermond_constructionyard",
@@ -2763,6 +3040,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "6666"
@@ -2793,6 +3082,10 @@
      "src": "inherited",
      "v": "500000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Schwarzer Mond Tech Center",
     "prerequisites": [
      "~schwarzermond_constructionyard",
@@ -2802,6 +3095,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -2832,6 +3137,10 @@
      "src": "inherited",
      "v": "400000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Schwarzer Mond War Factory",
     "prerequisites": [
      "~schwarzermond_constructionyard",
@@ -2841,6 +3150,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -2909,6 +3230,18 @@
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#ChangesHealth.Step",
      "v": "-10"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
     },
     "sight": {
      "src": "inherited",
@@ -2984,6 +3317,18 @@
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#ChangesHealth.Step",
      "v": "-100"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
     },
     "sight": {
      "src": "inherited",
@@ -3062,6 +3407,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#Health.HP",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Engineering Armor",
     "prerequisites": [
      "~schwarzermond_barracks"
@@ -3070,6 +3419,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (schwarzermond_upgrade_vrilinfusion || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -3521,6 +3886,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (schwarzermond_upgrade_vrilinfusion || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6500"
@@ -4437,6 +4818,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#Shielded.RequiresCondition",
+     "v": "!disabled && (schwarzermond_upgrade_vrilinfusion || yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6500"
@@ -4722,6 +5119,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#Health.HP",
      "v": "75000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Noid Harvester",
     "prerequisites": [
      "~schwarzermond_orerefinery"
@@ -4730,6 +5131,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -5507,6 +5924,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#Health.HP",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Noid MG Armor",
     "prerequisites": [
      "~schwarzermond_barracks",
@@ -5517,6 +5938,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (schwarzermond_upgrade_vrilinfusion || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -5738,6 +6175,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (schwarzermond_upgrade_vrilinfusion || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -6639,6 +7092,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (schwarzermond_upgrade_vrilinfusion || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -7290,6 +7759,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Health.HP",
      "v": "400000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Crystal Tank",
     "prerequisites": [
      "~schwarzermond_warfactory",
@@ -7300,6 +7773,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -7519,6 +8004,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Health.HP",
      "v": "325000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Dalek",
     "prerequisites": [
      "~schwarzermond_warfactory",
@@ -7529,6 +8018,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -7580,6 +8081,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Health.HP",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Gravity Core Tank",
     "prerequisites": [
      "~schwarzermond_warfactory",
@@ -7590,6 +8095,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -7798,6 +8315,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Health.HP",
      "v": "70000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Komet",
     "prerequisites": [
      "~schwarzermond_warfactory",
@@ -7808,6 +8329,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -7977,6 +8510,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Health.HP",
      "v": "240000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Korruptes Biest",
     "prerequisites": [
      "~schwarzermond_warfactory",
@@ -7988,6 +8525,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -8526,6 +9075,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Health.HP",
      "v": "47500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Laser Beetle",
     "prerequisites": [
      "~schwarzermond_warfactory",
@@ -8535,6 +9088,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -9073,6 +9638,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Laser Tank",
     "prerequisites": [
      "~schwarzermond_warfactory",
@@ -9082,6 +9651,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -9437,6 +10018,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Health.HP",
      "v": "62500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Lunar Grille",
     "prerequisites": [
      "~schwarzermond_warfactory",
@@ -9446,6 +10031,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -9672,6 +10269,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Health.HP",
      "v": "90000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Lunar Panzer",
     "prerequisites": [
      "~schwarzermond_warfactory",
@@ -9681,6 +10282,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -9704,21 +10317,14 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -9739,21 +10345,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -9799,21 +10398,14 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -9834,21 +10426,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -9910,21 +10495,14 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -9945,21 +10523,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -10028,21 +10599,14 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -10063,21 +10627,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -10137,6 +10694,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Health.HP",
      "v": "160000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Lunar Tiger",
     "prerequisites": [
      "~schwarzermond_warfactory",
@@ -10147,6 +10708,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -10206,6 +10779,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Health.HP",
      "v": "35000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "MARS",
     "prerequisites": [
      "~schwarzermond_warfactory",
@@ -10216,6 +10793,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -10255,6 +10844,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Naxis Mobile Construction Vehicle",
     "prerequisites": [
      "~schwarzermond_warfactory",
@@ -10265,6 +10858,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -10616,6 +11221,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml#Health.HP",
      "v": "450000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Neo Jagdpanzer",
     "prerequisites": [
      "~schwarzermond_warfactory",
@@ -10625,6 +11234,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"

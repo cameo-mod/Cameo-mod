@@ -98,12 +98,17 @@ DuelistTankCannon:
 		InaccuracyType: PerCellIncrement
 		Image: d2k_155mm
 		Palette: d2keffect
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 14000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 7000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 7
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@Grenade: SpreadDamage
 		Damage: 14000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -165,12 +170,17 @@ D2K_155mm2:
 		Damage: 6000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 12000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 6000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 6
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 12000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
@@ -349,15 +359,19 @@ D2K_TowerMissile:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -477,18 +491,21 @@ IxianBomb_EMP:
 		Acceleration: 0, 0, -10
 		Image: MISSILE
 		Shadow: True
-	Warhead@MediumFlameWeapon: SpreadDamage
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 15000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 15
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 30000
@@ -550,6 +567,7 @@ IxianDisable_EMP:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
 	Inherits@fx: ^Effect_Tesla_Super
+	Report: tesla1.aud
 	ReloadDelay: 4
 	Range: 20000
 	ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
@@ -580,6 +598,7 @@ d2k_munitions_explosion:
 	Inherits@wh: ^Warhead_Magic_Heavy
 	Inherits@proj: ^Projectile_Magic_Heavy
 	Inherits@fx: ^Effect_Magic_Heavy
+	Report: 2100rotlsr.wav
 	Warhead@Magic_Heavy:
 		Delay: 20
 		Damage: 40000
@@ -698,7 +717,6 @@ RaiderGuns:
 	Burst: 4
 	BurstDelays: 2
 	Range: 6400
-	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Light:
@@ -720,6 +738,7 @@ RaiderGuns_upgrade:
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	Inherits: RaiderGuns
 	Inherits@2: ^HeavyMachineGunProjectile
+	Report: tnkfire6.aud
 	Projectile: Bullet
 		Inaccuracy: 120
 	ValidTargets: Ground, Water, Air
@@ -751,7 +770,6 @@ HMG_turret:
 	Burst: 4
 	BurstDelays: 2
 	Range: 7394
-	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water
 	Warhead@Bullet_Light:
@@ -773,6 +791,7 @@ HMG_turret_upgrade:
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	Inherits: HMG_turret
 	Inherits@2: ^HeavyMachineGunProjectile
+	Report: tnkfire6.aud
 	ReloadDelay: 33
 	Burst: 4
 	BurstDelays: 3
@@ -1005,6 +1024,7 @@ D2K_ShockGunInf:
 	Inherits@wh: ^Warhead_Storm_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	ReloadDelay: 45
 	Range: 5818
 	Projectile: Railgun
@@ -1026,6 +1046,7 @@ D2K_StormGunInf:
 	Inherits@wh: ^Warhead_Storm_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	ReloadDelay: 66
 	Range: 6275
 	Projectile: Railgun
@@ -1056,6 +1077,7 @@ D2K_StormGunCymek:
 	Inherits@wh: ^Warhead_Storm_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Report: bigggun1.aud
 	Range: 6787
 	ReloadDelay: 66
 	Burst: 2
@@ -1087,6 +1109,7 @@ D2K_RocketsCymek:
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^HeavyMissile
 	Inherits@4: ^RA2MediumMissile
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 60
 	Burst: 4
 	BurstDelays: 2
@@ -1132,9 +1155,6 @@ D2K_RocketsCymek:
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 
 d2k_air_drone_guns:
 	Inherits: ^D2KMissile
@@ -1175,6 +1195,7 @@ d2k_air_drone_guns_upgrade:
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	Inherits: d2k_air_drone_guns
 	Inherits@2: ^HeavyMachineGunProjectile
+	Report: tnkfire6.aud
 	ValidTargets: Ground, Water, Air
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -1200,6 +1221,7 @@ d2k_laser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
+	Report: obelray1.aud
 	ReloadDelay: 25
 	Range: 7500
 	Burst: 5
@@ -1275,15 +1297,19 @@ ixian_farasha:
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 1000
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
@@ -1313,12 +1339,17 @@ d2k_farasha_aa:
 		DamageTypes: Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@HeavyFlameWeapon: SpreadDamage
+	Warhead@HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Air
-	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
-	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Air
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Air
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage

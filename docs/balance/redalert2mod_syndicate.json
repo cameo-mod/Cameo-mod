@@ -81,6 +81,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml#Health.HP",
      "v": "95000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Hind Transport",
     "prerequisites": [
      "~latinsyndicate_airstation"
@@ -89,6 +93,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -173,7 +189,8 @@
        "^HeavyBomb",
        "^HeavyAAWeapon",
        "^FlakWeapon",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -437,6 +454,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml#Health.HP",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "MiG-21",
     "prerequisites": [
      "~latinsyndicate_airstation",
@@ -446,6 +467,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -742,6 +775,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml#Health.HP",
      "v": "40000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Yakovlev",
     "prerequisites": [
      "~latinsyndicate_airstation"
@@ -750,6 +787,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -786,6 +835,10 @@
      "src": "inherited",
      "v": "600000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Syndicate Naval Yard",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -796,6 +849,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12000"
@@ -826,6 +891,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Air Station",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -835,6 +904,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -861,6 +942,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Health.HP",
      "v": "60000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Bunker Tower",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -870,6 +955,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "10000"
@@ -900,6 +997,10 @@
      "src": "inherited",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Combat Barracks",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -909,6 +1010,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "6666"
@@ -943,6 +1056,10 @@
      "src": "inherited",
      "v": "500000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Defense Bureau",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -953,6 +1070,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "10000"
@@ -1085,6 +1214,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Health.HP",
      "v": "132500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Latin AA Defender",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -1094,6 +1227,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "15000"
@@ -1128,6 +1273,10 @@
      "src": "inherited",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Latin EMP Radar",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -1137,6 +1286,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -1300,6 +1461,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Health.HP",
      "v": "113500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Latin Sentry Gun",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -1309,6 +1474,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "6666"
@@ -1340,6 +1517,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Health.HP",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Power Station",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard"
@@ -1348,6 +1529,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
@@ -1382,6 +1575,10 @@
      "src": "inherited",
      "v": "500000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Recycling Center",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -1392,6 +1589,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -1422,6 +1631,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Recycling Refinery",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -1431,6 +1644,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -1475,6 +1700,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#Health.HP",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "SML Turret",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -1484,6 +1713,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "15000"
@@ -1514,6 +1755,10 @@
      "src": "inherited",
      "v": "500000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Spy Center",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -1523,6 +1768,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -1549,6 +1806,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Syndicate Construction Yard",
     "prerequisites": [
      "~disabled"
@@ -1557,6 +1818,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -1587,6 +1860,10 @@
      "src": "inherited",
      "v": "400000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Syndicate Factory",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -1596,6 +1873,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -1626,6 +1915,10 @@
      "src": "inherited",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Syndicate Service Depot",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -1635,6 +1928,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -1669,6 +1974,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Topol Silo",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
@@ -1680,6 +1989,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -1750,6 +2071,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "(td_nod_upgrade_cyberneticmodifications || shieldgen)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -1820,7 +2161,8 @@
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^Chaingun",
-       "^SniperWeapon"
+       "^SniperWeapon",
+       "^Effect_Bullet_Light_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -2091,7 +2433,8 @@
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^Chaingun",
-       "^SniperWeapon"
+       "^SniperWeapon",
+       "^Effect_Bullet_Light_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -2343,6 +2686,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -2791,6 +3146,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5500"
@@ -3101,6 +3468,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -3493,6 +3872,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -3825,6 +4220,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7500"
@@ -4001,6 +4408,22 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6500"
@@ -4063,6 +4486,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -4250,6 +4685,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml#Health.HP",
      "v": "47500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Rammax Drone",
     "prerequisites": [
      "~cgyard.latin"
@@ -4258,6 +4697,18 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -4328,10 +4779,10 @@
       "slot": "Armament@ARTILLERY",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Effect_Demolition_Heavy",
        "^RA2Grenade",
        "^RA2MediumMissile",
-       "^RA2RadShell"
+       "^RA2RadShell",
+       "^Effect_Terrorist_Explosion_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Heavy",
@@ -4368,6 +4819,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml#Health.HP",
      "v": "240000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Akula",
     "prerequisites": [
      "~cgyard.latin",
@@ -4377,6 +4832,18 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -4548,6 +5015,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml#Health.HP",
      "v": "37500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Triton Speedboat",
     "prerequisites": [
      "~cgyard.latin"
@@ -4556,6 +5027,18 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -5185,21 +5668,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -5242,7 +5718,8 @@
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
        "^HeavyBomb",
-       "^RA2HeavyMissile"
+       "^RA2HeavyMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -5295,21 +5772,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -5353,7 +5823,8 @@
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
        "^HeavyBomb",
-       "^RA2HeavyMissile"
+       "^RA2HeavyMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -5389,6 +5860,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "35000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Burrito",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
@@ -5399,6 +5874,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -5504,6 +5991,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "167500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Cartel Truck",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
@@ -5514,6 +6005,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -5553,6 +6056,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "85000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Collection Truck",
     "prerequisites": [
      "~latinsyndicate_recyclingrefinery"
@@ -5561,6 +6068,22 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -5616,6 +6139,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "30000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Demolition Truck",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
@@ -5626,6 +6153,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#RevealsShroud.Range",
      "v": "5c0"
@@ -5974,6 +6513,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "45000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Diablo",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory"
@@ -5982,6 +6525,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -6084,7 +6639,8 @@
        "^HeavyAAWeapon",
        "^LightMissile",
        "^TankDestroyerCannon",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy",
@@ -6181,7 +6737,8 @@
        "^HeavyAAWeapon",
        "^LightMissile",
        "^TankDestroyerCannon",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy",
@@ -6217,6 +6774,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "47500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "LARS",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
@@ -6227,6 +6788,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -6822,7 +7395,8 @@
        "^HeavyBomb",
        "^HeavyAAWeapon",
        "^FlakWeapon",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileAP_Medium"
@@ -7083,6 +7657,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "180000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Latin APC",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
@@ -7093,6 +7671,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -7137,7 +7727,7 @@
       "versus_templates": [
        "^Warhead_MissileHE_Medium",
        "^Projectile_ArtilleryRocket_Medium",
-       "^Effect_MissileHE_Medium_RA2"
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium"
@@ -7175,7 +7765,7 @@
       "versus_templates": [
        "^Warhead_MissileHE_Medium",
        "^Projectile_ArtilleryRocket_Medium",
-       "^Effect_MissileHE_Medium_RA2"
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium"
@@ -7210,6 +7800,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "30000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Missile Truck",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
@@ -7220,6 +7814,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -7312,42 +7918,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
@@ -7366,7 +7958,8 @@
        "^ShrapnelWeapon",
        "^HeavyBomb",
        "^LightFlameWeapon",
-       "^MediumChemicalWeapon"
+       "^MediumChemicalWeapon",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy"
@@ -7453,42 +8046,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "LightFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "250",
-        "tag": "LightFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "111, 33, 11, 3",
         "spread": "250",
         "tag": "LightFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
@@ -7535,6 +8114,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "28000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Mortar Bike",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
@@ -7546,6 +8129,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -7682,6 +8277,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "97500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Narco Hummer",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
@@ -7692,6 +8291,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -7746,6 +8357,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "60000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Nuke Truck",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
@@ -7756,6 +8371,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#RevealsShroud.Range",
      "v": "5c0"
@@ -8103,9 +8730,9 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
-       "^Effect_Concussion_Medium",
        "^SteelLightMissile",
-       "^RA2MediumMissile"
+       "^RA2MediumMissile",
+       "^Effect_Explosion_Large_RA2"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -8223,6 +8850,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "37500"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Raider Buggy",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
@@ -8232,6 +8863,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -8467,6 +9110,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Rusher Tank",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
@@ -8476,6 +9123,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -8520,21 +9179,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -8653,21 +9305,14 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -8978,6 +9623,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "260000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Smoker Tank",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
@@ -8987,6 +9636,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -9026,6 +9687,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Syndicate Mobile Construction Vehicle",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
@@ -9035,6 +9700,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -9101,21 +9778,14 @@
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -9143,21 +9813,14 @@
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -9226,6 +9889,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Topol-M",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
@@ -9236,6 +9903,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -9535,6 +10214,10 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Health.HP",
      "v": "875000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Tortuga Tank",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
@@ -9544,6 +10227,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -9578,7 +10273,23 @@
      "src": "inherited",
      "v": "20000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Civilian Vehicle",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -9613,7 +10324,23 @@
      "src": "inherited",
      "v": "20000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Civilian Vehicle",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -9664,7 +10391,23 @@
      "src": "inherited",
      "v": "20000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Bomb Car",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -9750,7 +10493,23 @@
      "src": "inherited",
      "v": "25000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Drive By Car",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -9801,7 +10560,23 @@
      "src": "inherited",
      "v": "20000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Bomb Car",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5c0"
@@ -9887,7 +10662,23 @@
      "src": "inherited",
      "v": "25000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Drive By Car",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"

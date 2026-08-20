@@ -3812,6 +3812,7 @@ Player:
 			ts_gdi_droppoduplink: 1
 			ts_nod_tiberiumwastefacility: 1
 			ts_gdi_silo: 1
+			ts_gdi_navalyard: 1
 			#################### BuildingLimits TS Nod
 			ts_nod_tiberiumrefinery: 10
 			ts_nod_handof: 10
@@ -3822,6 +3823,7 @@ Player:
 			ts_nod_missilesilo: 1
 			ts_nod_stealthgenerator: 1
 			ts_nod_silo: 1
+			ts_nod_navalyard: 1
 			#################### BuildingLimits TS Forgotten
 			forgotten_refinery: 10
 			forgotten_barracks: 5
@@ -4158,6 +4160,7 @@ Player:
 			ts_gdi_servicedepot: 1
 			ts_gdi_empulsecannon: 1
 			ts_gdi_powerturbine: 1
+			ts_gdi_navalyard: 1
 			#################### BuildingFractions TS Nod
 			ts_nod_tiberiumrefinery: 15
 			ts_nod_handof: 15
@@ -4174,6 +4177,7 @@ Player:
 			ts_nod_missilesilo: 1
 			ts_nod_stealthgenerator: 1
 			# tsntpulsnod: 1
+			ts_nod_navalyard: 1
 			#################### BuildingFractions TS Forgotten
 			forgotten_refinery: 20
 			forgotten_barracks: 5
@@ -4741,6 +4745,9 @@ Player:
 			ts_gdi_upgrade_fieldmaintenance: 1
 			ts_gdi_upgrade_ceramicarmor: 1
 			ts_gdi_upgrade_modernfirecontrolsystems: 1
+			ts_gdi_cruiser: 1
+			ts_gdi_destroyer: 2
+			ts_gdi_carrier: 1
 			#################### UnitsToBuild TS Nod
 			ts_nod_subterraneanapc: 1
 			ts_nod_mobileconstructionvehicle: 1
@@ -4771,6 +4778,9 @@ Player:
 			ts_nod_upgrade_tiberiumcoremissiles: 1
 			ts_nod_upgrade_advancedtiberiumrefinement: 1
 			ts_nod_upgrade_willofkane: 1
+			ts_nod_cruiser: 1
+			ts_nod_rayboat: 2
+			ts_nod_submarine: 1
 			#################### UnitsToBuild TS Forgotten
 			forgotten_scarabapc: 1
 			forgotten_engineer: 1

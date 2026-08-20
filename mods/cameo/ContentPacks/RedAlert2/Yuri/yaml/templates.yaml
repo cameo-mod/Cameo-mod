@@ -10,8 +10,12 @@
 	SpeedMultiplier@yuri_doctrine_scrapvehiclearmor:
 		Modifier: 115
 		RequiresCondition: yuri_doctrine_scrapvehiclearmor
-	DamageMultiplier@yuri_doctrine_scrapvehiclearmor:
-		Modifier: 85
+	# Welded-on junk: the GENERIC plating, flat against everything. It is the honest type
+	# for scrap — uniform plate with no counter-play to express — and it deliberately
+	# REPLACES the vehicle's class armor, which is what makes it read as improvised rather
+	# than engineered. The flat 85 is retired: the type already averages ~30%.
+	Armor@ARMOR:
+		Type: ARMOR
 		RequiresCondition: yuri_doctrine_scrapvehiclearmor
 	GrantConditionOnPrerequisite@yuri_doctrine_scrapvehiclearmor:
 		Condition: yuri_doctrine_scrapvehiclearmor

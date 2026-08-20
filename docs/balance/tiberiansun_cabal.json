@@ -87,6 +87,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -176,7 +188,23 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "15000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Hunter Drone",
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -310,6 +338,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Hunter Drone Carrier",
     "prerequisites": [
      "~cabal_helipad",
@@ -320,6 +352,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12345"
@@ -526,6 +570,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "35000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Hunter Killer",
     "prerequisites": [
      "~cabal_helipad"
@@ -534,6 +582,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -762,6 +822,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "40000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Super Hunter Killer",
     "prerequisites": [
      "~cabal_helipad",
@@ -771,6 +835,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -867,42 +943,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -985,6 +1047,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "500000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "200"
+    },
     "name": "Mothership",
     "prerequisites": [
      "~cabal_helipad",
@@ -995,6 +1061,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12345"
@@ -1085,6 +1163,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -1171,6 +1261,18 @@
      "cabal_radar",
      "!cabal_promotion_cyborgassassin"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -1285,6 +1387,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "45000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Overkill Gunship",
     "prerequisites": [
      "~cabal_helipad",
@@ -1295,6 +1401,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -1366,6 +1484,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
      "v": "25000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Repair Drone",
     "prerequisites": [
      "~cabal_helipad",
@@ -1375,6 +1497,18 @@
      "Aircraft",
      "RAAircraft"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -1433,6 +1567,10 @@
      "src": "inherited",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "CABAL Core",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -1442,6 +1580,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -1472,6 +1622,10 @@
      "src": "inherited",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Cyborg Factory",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -1481,6 +1635,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -1511,6 +1677,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "CABAL Helipad",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -1520,6 +1690,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -1550,6 +1732,10 @@
      "src": "inherited",
      "v": "400000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "CABAL War Factory",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -1559,6 +1745,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -1589,6 +1787,10 @@
      "src": "inherited",
      "v": "600000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "CABAL Naval Yard",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -1599,6 +1801,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "12000"
@@ -1625,6 +1839,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Health.HP",
      "v": "160000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "CABAL Power Plant",
     "prerequisites": [
      "~cabal_constructionyard"
@@ -1633,6 +1851,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "4c0"
@@ -1663,6 +1893,10 @@
      "src": "inherited",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Radar",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -1672,6 +1906,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -1702,6 +1948,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "CABAL Refinery",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -1711,6 +1961,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -1741,6 +2003,10 @@
      "src": "inherited",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Service Depot",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -1750,6 +2016,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -1784,6 +2062,10 @@
      "src": "inherited",
      "v": "500000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "CABAL Tech Center",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -1793,6 +2075,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -1844,42 +2138,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "35000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "35",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "70000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "35000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "35",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -1926,6 +2206,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Fortified Obelisk",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -1935,6 +2219,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "7c0"
@@ -2039,6 +2335,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
      "v": "120000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Obelisk of Darkness",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -2048,6 +2348,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "12c0"
@@ -2075,6 +2387,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
      "v": "85000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Pillbox",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -2084,6 +2400,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6583"
@@ -2167,6 +2495,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
      "v": "60000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Plasma Turret",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -2176,6 +2508,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "7c0"
@@ -2203,6 +2547,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Silo",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -2212,6 +2560,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "4c0"
@@ -2243,6 +2603,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Stealth Generator",
     "prerequisites": [
      "~cabal_constructionyard",
@@ -2252,6 +2616,18 @@
      "Defence",
      "RADefence"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "6c0"
@@ -2502,6 +2878,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "70000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Ascended",
     "prerequisites": [
      "~cabal_cyborgfactory",
@@ -2511,6 +2891,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.RequiresCondition",
+     "v": "armored"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.MaxPercentageStrength",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6500"
@@ -2547,42 +2947,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -2622,42 +3008,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -2764,42 +3136,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -2840,42 +3198,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -2986,6 +3330,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "250000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Cyborg Commando",
     "prerequisites": [
      "~cabal_cyborgfactory",
@@ -2996,6 +3344,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.RequiresCondition",
+     "v": "armored"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.MaxPercentageStrength",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -3032,42 +3400,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -3107,42 +3461,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -3249,42 +3589,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -3325,42 +3651,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "25000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -3471,6 +3783,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "400000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Cyborg Commando V2",
     "prerequisites": [
      "~cabal_cyborgfactory",
@@ -3481,6 +3797,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.RequiresCondition",
+     "v": "armored"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.MaxPercentageStrength",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -3619,6 +3955,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "45000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Cyborg Infantry",
     "prerequisites": [
      "~cabal_cyborgfactory",
@@ -3628,6 +3968,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.RequiresCondition",
+     "v": "armored"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.MaxPercentageStrength",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -3770,6 +4130,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "80000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Devout",
     "prerequisites": [
      "~cabal_cyborgfactory",
@@ -3779,6 +4143,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.RequiresCondition",
+     "v": "armored"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.MaxPercentageStrength",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -3801,21 +4185,14 @@
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "LightChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "99, 66, 33",
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -3868,6 +4245,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Dissolver",
     "prerequisites": [
      "~cabal_cyborgfactory"
@@ -3876,6 +4257,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.RequiresCondition",
+     "v": "armored"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.MaxPercentageStrength",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -3988,6 +4389,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "85000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Eliminator 800",
     "prerequisites": [
      "~cabal_cyborgfactory"
@@ -3996,6 +4401,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.RequiresCondition",
+     "v": "armored"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.MaxPercentageStrength",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -4087,6 +4512,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "20000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "CABAL Engineer",
     "prerequisites": [
      "~cabal_cyborgfactory"
@@ -4095,6 +4524,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.RequiresCondition",
+     "v": "armored"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.MaxPercentageStrength",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "4000"
@@ -4152,42 +4601,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "35000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "35",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "70000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "35000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "35",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -4265,42 +4700,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "35000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "35",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "70000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "35000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "35",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -4342,6 +4763,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "80000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Enlighted",
     "prerequisites": [
      "~cabal_cyborgfactory",
@@ -4351,6 +4776,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.RequiresCondition",
+     "v": "armored"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.MaxPercentageStrength",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -4474,6 +4919,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "30000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Hacker Cyborg",
     "prerequisites": [
      "~cabal_cyborgfactory"
@@ -4482,6 +4931,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.RequiresCondition",
+     "v": "armored"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.MaxPercentageStrength",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -4678,6 +5147,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
      "v": "45000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Rocket Cyborg",
     "prerequisites": [
      "~cabal_cyborgfactory",
@@ -4687,6 +5160,26 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.RequiresCondition",
+     "v": "armored"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Shielded.MaxPercentageStrength",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6500"
@@ -4842,6 +5335,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Health.HP",
      "v": "60000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Laser Hydroboat",
     "prerequisites": [
      "~cabal_navalyard"
@@ -4850,6 +5347,18 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -4884,6 +5393,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Landing Craft",
     "prerequisites": [
      "~cabal_navalyard"
@@ -4892,6 +5405,18 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#RevealsShroud.Range",
      "v": "7500"
@@ -4928,42 +5453,28 @@
         "falloff": "111, 33, 11, 3",
         "spread": "750",
         "tag": "MediumFlameWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "12",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "25000",
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "12",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -5007,6 +5518,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Health.HP",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Plasma Submarine",
     "prerequisites": [
      "~cabal_navalyard",
@@ -5016,6 +5531,18 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -5116,6 +5643,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/naval.yaml#Health.HP",
      "v": "200000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "CABAL Hacker Cruiser",
     "prerequisites": [
      "~cabal_navalyard",
@@ -5125,6 +5656,18 @@
      "Naval",
      "RANaval"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -5989,21 +6532,14 @@
         "falloff": "99, 66, 33",
         "spread": "700",
         "tag": "MediumChemicalWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "21000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "21",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "42000",
@@ -6113,6 +6649,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "50000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Artillery Spider",
     "prerequisites": [
      "~cabal_mechfactory",
@@ -6122,6 +6662,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "9000"
@@ -6241,6 +6793,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Avatar",
     "prerequisites": [
      "~cabal_mechfactory",
@@ -6251,6 +6807,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "7000"
@@ -6386,6 +6954,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "125000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Beholder",
     "prerequisites": [
      "~cabal_cyborgfactory",
@@ -6396,6 +6968,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -6473,6 +7057,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "800000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Berserker",
     "prerequisites": [
      "~cabal_cyborgfactory",
@@ -6482,6 +7070,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -6517,6 +7117,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "1000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Construction Yard (CABAL)",
     "prerequisites": [
      "~disabled"
@@ -6525,6 +7129,18 @@
      "Building",
      "RABuilding"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "10000"
@@ -6640,6 +7256,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "2000000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Core Defender",
     "prerequisites": [
      "~cabal_mechfactory",
@@ -6650,6 +7270,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -6883,6 +7515,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "70000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Cyborg Reaper",
     "prerequisites": [
      "~cabal_cyborgfactory",
@@ -6895,6 +7531,18 @@
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#ChangesHealth.Step",
      "v": "30"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
     },
     "sight": {
      "src": "inherited",
@@ -7115,6 +7763,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "75000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Heavy Reaper",
     "prerequisites": [
      "~cabal_cyborgfactory",
@@ -7127,6 +7779,18 @@
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#ChangesHealth.Step",
      "v": "30"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
     },
     "sight": {
      "src": "inherited",
@@ -7206,6 +7870,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Laser Spider",
     "prerequisites": [
      "~cabal_mechfactory",
@@ -7215,6 +7883,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -7374,6 +8054,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "100000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Manticore",
     "prerequisites": [
      "~cabal_cyborgfactory",
@@ -7383,6 +8067,18 @@
      "Infantry",
      "RAInfantry"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -7477,6 +8173,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "35000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Mantis",
     "prerequisites": [
      "~cabal_mechfactory"
@@ -7485,6 +8185,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -7524,6 +8236,10 @@
      "src": "inherited",
      "v": "300000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "CABAL Mobile Construction Vehicle",
     "prerequisites": [
      "~cabal_mechfactory",
@@ -7533,6 +8249,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -7640,6 +8368,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "70000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Ravager",
     "prerequisites": [
      "~cabal_mechfactory"
@@ -7648,6 +8380,26 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Shielded.RequiresCondition",
+     "v": "armored"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Shielded.InitialPercentageStrength",
+     "v": "100"
+    },
+    "shield_pct": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Shielded.MaxPercentageStrength",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -7683,6 +8435,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "30000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Scarab APC",
     "prerequisites": [
      "~cabal_mechfactory",
@@ -7692,6 +8448,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#RevealsShroud.Range",
      "v": "5c0"
@@ -7770,6 +8538,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "40000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Spider CNC4",
     "prerequisites": [
      "~cabal_mechfactory",
@@ -7779,6 +8551,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "8000"
@@ -7887,6 +8671,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "110000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Tarantula",
     "prerequisites": [
      "~cabal_mechfactory",
@@ -7896,6 +8684,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"
@@ -7935,6 +8735,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "150000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Tiberium Harvester",
     "prerequisites": [
      "~cabal_mechfactory",
@@ -7944,6 +8748,22 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_condition": {
+     "src": "inherited",
+     "v": "!disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "5000"
@@ -8038,6 +8858,10 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
      "v": "120000"
     },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "name": "Widow",
     "prerequisites": [
      "~cabal_mechfactory",
@@ -8048,6 +8872,18 @@
      "Vehicle",
      "RAVehicle"
     ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
     "sight": {
      "src": "inherited",
      "v": "6000"

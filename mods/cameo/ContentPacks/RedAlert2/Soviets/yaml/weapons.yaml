@@ -1,5 +1,6 @@
 RA2TURRETFLAKAA:
 	Inherits: ^RA2FlakWeapon
+	Report: aacanon3.aud
 	Range: 12936
 	ReloadDelay: 15
 	ValidTargets: Air
@@ -7,13 +8,10 @@ RA2TURRETFLAKAA:
 		Damage: 10000
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 5
-	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
-		ValidTargets: Air
 
 SeaScorpion_AA:
 	Inherits: ^RA2FlakWeapon
+	Report: aacanon3.aud
 	Range: 13500
 	ReloadDelay: 17
 	ValidTargets: Air
@@ -21,14 +19,10 @@ SeaScorpion_AA:
 		Damage: 8000
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
-	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
-		ValidTargets: Air
 
 RA2KirovBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@fx: ^Effect_Clsn_VeryLarge_RA2
 	ReloadDelay: 50
 	Range: 2500
 	Report: vkiratta.wav
@@ -48,16 +42,6 @@ RA2KirovBomb:
 		ValidRelationships: Neutral, Enemy
 		Damage: 40
 		Spread: 4000
-	Warhead@EffectWater: CreateEffect
-		Explosions: large_splash
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water, Underwater
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_verylarge_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
-	-Warhead@Effect1:
-	-Warhead@Effect2:
 
 RA2KirovBomb_rad:
 	Inherits@wh: ^Warhead_Chemical_Heavy
@@ -121,7 +105,7 @@ RA2KirovBomb_fire:
 RA2KirovBomb_tesla:
 	Inherits@wh: ^Warhead_Tesla_Super
 	Inherits@proj: ^Projectile_Lightning_Super
-	Inherits@fx: ^Effect_Tesla_Super
+	Inherits@fx: ^Effect_Kirov_Tesla_RA2
 	Inherits@2: RA2KirovBomb
 	Warhead@Tesla_Super:
 		Damage: 80000
@@ -134,12 +118,6 @@ RA2KirovBomb_tesla:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Effect1: CreateEffect
-		Delay: 0
-		Explosions: ra2_kirovtesla
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpapoa.wav
-		ValidTargets: Ground, Ship
 	Warhead@Shrapnel: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: TeslaFragmentLarge
@@ -355,11 +333,8 @@ RA160mmE_rad_elite:
 RA160mmE_fire_elite:
 	Inherits: RA160mm_fire
 	Inherits@Elite: ^RA2EliteEffects
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	Range: 12345
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianOilBombFragments
 		Amount: 2
@@ -367,17 +342,17 @@ RA160mmE_fire_elite:
 RA160mmE_tesla_elite:
 	Inherits: RA160mm_tesla
 	Inherits@Elite: ^RA2EliteEffects
+	Inherits@fx: ^Effect_Kirov_Tesla_RA2
 	Range: 12345
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: TeslaFragmentLarge
 		Amount: 2
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_kirovtesla
 
 RA2120xmm:
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^RA2HeavyCannon
+	Inherits@fx: ^Effect_Apoc_Explosion_RA2
 	Range: 6992
 	ReloadDelay: 63
 	Burst: 2
@@ -399,9 +374,6 @@ RA2120xmm:
 		Damage: 4000
 	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
 		Damage: 2
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_apoc_explosion
-		ImpactSounds: gexpapoa.wav
 
 RA2120xmm_rad:
 	Inherits: ^LightChemicalWeapon
@@ -409,24 +381,39 @@ RA2120xmm_rad:
 	Inherits@3: ^HeavyChemicalWeapon
 	Inherits@4: RA2120xmm
 	Inherits@rad: ^RA2RadShell
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@MediumChemicalWeapon: SpreadDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@HeavyChemicalWeapon: SpreadDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@CannonAP_Light: AreaDamage
 		Damage: 2000
 	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
@@ -566,6 +553,7 @@ TeslaFragmentWeak:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
+	Report: tesla1.aud
 	Range: 1555
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@Tesla_Heavy:
@@ -621,6 +609,7 @@ TeslaTankFragment:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
+	Report: tesla1.aud
 	Range: 2500
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@Tesla_Heavy:
@@ -638,6 +627,7 @@ TeslaTankFragment2:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
 	Inherits@fx: ^Effect_Tesla_Heavy
+	Report: tesla1.aud
 	Range: 3750
 	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@Tesla_Heavy:
@@ -771,6 +761,7 @@ RA2CRFlakGuyGun_elite:
 
 RA2FLAKAA:
 	Inherits: ^RA2FlakWeapon
+	Report: aacanon3.aud
 	ReloadDelay: 26
 	Range: 7834
 	ValidTargets: Air
@@ -780,13 +771,10 @@ RA2FLAKAA:
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		Damage: 4
 		ValidTargets: Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
-		ValidTargets: Air
 
 RA2FLAKAA_elite:
 	Inherits: RA2FLAKAA
+	Report: aacanon3.aud
 	Range: 8834
 	Burst: 2
 	BurstDelays: 3
@@ -799,10 +787,15 @@ RA2FlakTrackGun_elite:
 
 RA2FlakTrackAAGun:
 	Inherits: RA2FlakTrackGun
-	Inherits@2: ^RA2FlakWeapon
+	ReloadDelay: 25
+	Report: aacanon3.aud
 	ValidTargets: Air
 	Range: 8292
 	Projectile: Bullet
+		Image: 50CAL
+		Speed: 10000
+		Inaccuracy: 250
+		Blockable: false
 		-LaunchAngle:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
@@ -822,10 +815,6 @@ RA2FlakTrackAAGun:
 		ValidTargets: Air
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Air
-	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
-		ValidTargets: Air
 
 RA2FlakTrackAAGun_elite:
 	Inherits: RA2FlakTrackAAGun
@@ -842,6 +831,7 @@ IvanAttachAir:
 
 IvanBombAir:
 	Inherits: IvanBomb
+	Report: M203.aud
 	Warhead@Demolition_Light:
 		ValidTargets: Aircraft
 	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
@@ -889,13 +879,4 @@ MigTarget:
 
 RA2UnitExplodeSmall:
 	Inherits: UnitExplodeSmall
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_bang
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp06a.wav, gexp07a.wav, expnew13.wav
-		ValidTargets: Ground, Air
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_small_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
-		ValidTargets: Water
+	Inherits@fx: ^Effect_Bang_Medium_RA2

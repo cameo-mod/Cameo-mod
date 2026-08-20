@@ -2878,6 +2878,7 @@
 ^AirstrikePlane:
 	Inherits@1: ^BasicUnit
 	Inherits@SHADOWS: ^Shadows
+	Inherits@corr: ^Corrodible
 	Armor:
 		Type: Light
 	AppearsOnRadar:
@@ -3110,6 +3111,11 @@
 	MapEditorData:
 		Categories: Critter
 
+# A defined Mobile.TurnSpeed marks infantry that deliberately turn like vehicles; these units opt out of between-cell responsiveness.
+^VehicleTurnRateInfantry:
+	Mobile:
+		ResponsiveBetweenCells: false
+
 ^DefaultInfantry:
 	Inherits@1: ^BasicUnit
 	Inherits@mindcontrol: ^MindControllable
@@ -3130,6 +3136,7 @@
 		RequiresCondition: hazmatsuits
 	Mobile:
 		Locomotor: foot
+		ResponsiveBetweenCells: true
 		PauseOnCondition: disabled
 		RequiresCondition: !beingterrordroned
 	Selectable:
@@ -5354,7 +5361,7 @@
 		PhysicalStateName: Temperature
 		UsePercentageDamage: false
 		DamageAtMaximum: 150
-		DamageAtMinimum: 0
+		DamageAtMinimum: -150
 		DamageThreshold: 0
 		DamageInterval: 1
 		DamageTypes: FireDeath
@@ -5578,12 +5585,12 @@
 		Palette: ra2effect
 	# --- Corrosion METER (physical-state axis). ADDITIVE + inert until a weapon feeds it via
 	# AreaDamage PhysicalStateName: Corrosion / PhysicalStateScale. Green tint 200->20000; effects
-	# ramp 50%->100% (Corroding); nax_corr_frag pulse at max. Binary `corroded` above kept until the
+	# open at 1% (Corroding); nax_corr_frag pulse at max. Binary `corroded` above kept until the
 	# Schwarzer Mond weapons are migrated onto the meter. See docs/design/PHYSICAL_STATE_SYSTEM.md.
 	PhysicalState@Corrosion:
 		Name: Corrosion
 		MaxValue: 20000
-		MinValue: 0
+		MinValue: -20000
 		RelaxedValue: 0
 		RelativeToHealth: true
 		RelaxationLinear: 5
@@ -5603,12 +5610,12 @@
 		PhysicalStateName: Corrosion
 		Condition: CorrosionDeadzone
 		UpperValue: 200
-		LowerValue: 0
+		LowerValue: -200
 	GrantConditionOnPhysicalState@Corroding:
 		PhysicalStateName: Corrosion
 		Condition: Corroding
 		UpperValue: 20000
-		LowerValue: 10000
+		LowerValue: 200
 	GrantConditionOnPhysicalState@CorrosionMax:
 		PhysicalStateName: Corrosion
 		Condition: CorrosionMax
@@ -5624,7 +5631,7 @@
 		PhysicalStateName: Corrosion
 		UsePercentageDamage: false
 		DamageAtMaximum: 180
-		DamageAtMinimum: 0
+		DamageAtMinimum: -180
 		DamageThreshold: 0
 		DamageInterval: 1
 		RequiresCondition: Corroding && !hazmatsuits
@@ -5632,7 +5639,7 @@
 		PhysicalStateName: Corrosion
 		UsePercentageDamage: false
 		DamageAtMaximum: 90
-		DamageAtMinimum: 0
+		DamageAtMinimum: -90
 		DamageThreshold: 0
 		DamageInterval: 1
 		RequiresCondition: Corroding && hazmatsuits
@@ -7336,9 +7343,17 @@ CPQDEBUGDUMMY:
 	Armor@shielded:
 		Type: Shield
 		RequiresCondition: shielded
-	DamageMultiplier@shielded:
-		RequiresCondition: shielded && !shieldpermanent
-		Modifier: 150
+	# W26/R1 — the flat 150%-while-shielded penalty is DELETED (2026-08-17).
+	# It duplicated, and fought, the thing it was standing in for. `Armor@shielded` already
+	# routes every hit through the `Shield` Versus row, whose whole design is that energy
+	# weapons hurt shields (Tesla 369) and kinetics do not (Melee ~76). A FLAT 1.5x on top
+	# multiplied both ends equally, so it added no counter-play — it was just an unmanaged
+	# extension of the Shield ladder living OUTSIDE its designed [100,400] window (1.5x would
+	# put Tesla at 553). Worse, it made the pool's worth invisible: a shield point read as
+	# 0.540 HP from the ladder but was really 0.360.
+	# The anti-shield story now lives in ONE place, the Versus row — the same law as
+	# "Versus lives only in ^Warhead_* templates". Removing it is a real BUFF (a shield point
+	# goes 0.360 -> 0.540 HP) and must be paid for in COST: re-extract, then price.
 	DamageMultiplier@steelconsortium_upgrade_shieldresistance:
 		RequiresCondition: steelconsortium_upgrade_shieldresistance && shielded
 		Modifier: 75

@@ -63,7 +63,6 @@ SCScourgeDroneExplosion:
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@3: ^Projectile_Grenade_Light
-	-Report:
 	ValidTargets: Ground, Water, Air
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
@@ -117,7 +116,6 @@ SCSPIDEREXPLOSION:
 	Inherits@wh: ^Warhead_Chemical_Medium
 	Inherits@proj: ^Projectile_Chem_Medium
 	Inherits@fx: ^Effect_Chem_Medium
-	-Report:
 	Warhead@Chemical_Medium:
 		Damage: 80000
 		Spread: 2048

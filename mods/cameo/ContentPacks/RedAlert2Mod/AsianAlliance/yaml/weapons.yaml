@@ -1,5 +1,6 @@
 RA2AsianShotgun:
 	Inherits: ^RA2SmallArms
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	ReloadDelay: 52
 	Range: 4567
 	Report: aa_sshtgatt.wav
@@ -7,9 +8,6 @@ RA2AsianShotgun:
 		Damage: 6000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_piffs
-		ExplosionPalette: ra2effect
 
 RA2AsianShotgun_elite:
 	Inherits: RA2AsianShotgun
@@ -43,6 +41,7 @@ AsianGrenade_elite:
 
 asianalliance_asianmilitia_shotgun:
 	Inherits: ^RA2SmallArms
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
 	ReloadDelay: 50
 	Range: 4500
 	Report: aa_sshtgatt.wav
@@ -50,9 +49,6 @@ asianalliance_asianmilitia_shotgun:
 		Damage: 6000
 	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
 		Damage: 3
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_piffs
-		ExplosionPalette: ra2effect
 
 asianalliance_asianmilitia_shotgun_elite:
 	Inherits: asianalliance_asianmilitia_shotgun
@@ -86,6 +82,7 @@ asianalliance_asianmilitia_grenade_elite:
 
 AsianTankKillerRocket:
 	Inherits: ^RA2LightMissile
+	Report: bazook1.aud
 	ReloadDelay: 75
 	Range: 6460
 	Projectile: Missile
@@ -100,6 +97,7 @@ AsianTankKillerRocket:
 
 AsianTankKillerRocket_upgrade:
 	Inherits: AsianTankKillerRocket
+	Report: bazook1.aud
 	Projectile: Missile
 		Image: d2k_missile2
 		Palette: d2keffect
@@ -115,6 +113,7 @@ AsianTankKillerRocket_upgrade:
 
 AsianTankKillerRocket_elite:
 	Inherits: AsianTankKillerRocket
+	Report: bazook1.aud
 	Range: 7460
 	Warhead@MissileAP_Light:
 		Damage: 68000
@@ -131,6 +130,7 @@ AsianTankKillerRocket_elite:
 
 AsianTankKillerRocket_upgrade_elite:
 	Inherits: AsianTankKillerRocket_elite
+	Report: bazook1.aud
 	Projectile: Missile
 		Image: d2k_missile2
 		Palette: d2keffect
@@ -203,9 +203,6 @@ RA2AsianShotgunFanatic1:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
 		Damage: 1
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_piffs
-		ExplosionPalette: ra2effect
 
 RA2AsianShotgunFanatic2:
 	Inherits: RA2AsianShotgunFanatic1
@@ -330,6 +327,7 @@ AsianNinjaStar:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_Melee_Medium
 	Inherits@fx: ^Effect_Melee_Medium
+	Inherits@2: ^Effect_Bullet_Medium_RA2
 	InvalidTargets: Structure, wall, Husk
 	Report: toss1.aud
 	ReloadDelay: 25
@@ -340,9 +338,6 @@ AsianNinjaStar:
 		Damage: 20000
 	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_piffs
-		ExplosionPalette: ra2effect
 
 AsianNinjaStar_elite:
 	Inherits: AsianNinjaStar
@@ -399,24 +394,32 @@ AsianLynxTankCannon:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@LightFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumChemicalWeapon: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -720,33 +723,45 @@ AsianChemical:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@LightChemicalWeapon: SpreadDamage
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@MediumChemicalWeapon: SpreadDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyChemicalWeapon: SpreadDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
@@ -793,15 +808,19 @@ AsianChemicalBombs:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		TrailInterval: 1
-	Warhead@HeavyChemicalWeapon: SpreadDamage
+	Warhead@HeavyChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
@@ -928,7 +947,7 @@ AsianHowitzerCannon_elite:
 
 AsianOilBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@fx: ^Effect_Twlt_Large_RA2
 	Range: 2000
 	ReloadDelay: 100
 	Projectile: InstantExplode
@@ -942,10 +961,6 @@ AsianOilBomb:
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 50
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-	Warhead@2Eff: CreateEffect
-		Explosions: ra2_large_twlt
-		ExplosionPalette: ra2effect
-		ImpactSounds: expnew09.wav
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianOilBombFragments
 		Amount: 20
@@ -954,7 +969,7 @@ AsianOilBomb:
 
 AsianSmallOilBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@fx: ^Effect_Demolition_Heavy
+	Inherits@fx: ^Effect_Twlt_Large_RA2
 	Range: 2000
 	ReloadDelay: 100
 	Projectile: InstantExplode
@@ -971,8 +986,6 @@ AsianSmallOilBomb:
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_twlt
-		ExplosionPalette: ra2effect
 		ImpactSounds: expnew09.wav
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianOilBombFragments
@@ -1024,15 +1037,19 @@ AsianPulverizerMechaGatling:
 	Inherits@3: AsianPulverizerGatling
 	Range: 7020
 	ReloadDelay: 15
-	Warhead@MediumChemicalWeapon: SpreadDamage
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Air, Water
-		Damage: 1000
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
@@ -1051,6 +1068,7 @@ AsianSinglePlasma:
 	Inherits@8: ^ShrapnelWeapon
 	Inherits@9: ^HeavyBomb
 	Inherits@10: ^RA2HeavyCannon
+	Inherits@fx: ^Effect_Apoc_Explosion_RA2
 	Range: 5190
 	ReloadDelay: 34
 	Report: aa_plasfire.wav
@@ -1060,42 +1078,58 @@ AsianSinglePlasma:
 		Palette: ra2effect
 		ContrailStartColor: DD000088
 		ContrailLength: 34
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@LightFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightChemicalWeapon: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumFlameWeapon: SpreadDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeapon: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1128,9 +1162,6 @@ AsianSinglePlasma:
 		Amount: 1
 		AimChance: 0
 		AimTargetStances: Enemy, Neutral
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_apoc_explosion
-		ImpactSounds: gexpapoa.wav
 
 AsianSinglePlasma_elite:
 	Inherits: AsianSinglePlasma
@@ -1162,6 +1193,7 @@ AsianTwinPlasma_elite:
 
 AsianTurretPlasma:
 	Inherits: AsianSinglePlasma
+	Inherits@fx: ^Effect_Twlt_Large_RA2
 	Range: 14000
 	MinRange: 2800
 	ReloadDelay: 90
@@ -1173,8 +1205,6 @@ AsianTurretPlasma:
 		Speed: 700
 		ContrailLength: 28
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_twlt
-		ExplosionPalette: ra2effect
 		ImpactSounds: expnew09.wav
 	Warhead@FireShrapnel: FireShrapnel
 		Amount: 8
@@ -1190,6 +1220,7 @@ AsianHarbingerPlasma:
 	Inherits@8: ^ShrapnelWeapon
 	Inherits@9: ^HeavyBomb
 	Inherits@10: ^RA2MediumMissile
+	Inherits@fx: ^Effect_Apoc_Explosion_RA2
 	Range: 7777
 	Burst: 2
 	BurstDelays: 5
@@ -1203,54 +1234,66 @@ AsianHarbingerPlasma:
 		ContrailStartColor: DD000088
 		ContrailLength: 34
 		-PointDefenseTypes:
-	Warhead@LightFlameWeapon: SpreadDamage
+	Warhead@LightFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		ValidTargets: Ground, Water, Air
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightChemicalWeapon: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		ValidTargets: Ground, Water, Air
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumFlameWeapon: SpreadDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		ValidTargets: Ground, Water, Air
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeapon: SpreadDamage
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		ValidTargets: Ground, Water, Air
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@CannonHE_Medium:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
@@ -1293,8 +1336,6 @@ AsianHarbingerPlasma:
 		AimChance: 0
 		AimTargetStances: Enemy, Neutral
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_apoc_explosion
-		ImpactSounds: gexpapoa.wav
 		ValidTargets: Ground, Water, Air
 		ImpactActors: false
 
@@ -1302,6 +1343,7 @@ AsianRailgun:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Inherits@2: ^Effect_Explosion_Medium_RA2
 	Range: 9600
 	ReloadDelay: 10
 	Report: railuse5.aud
@@ -1314,15 +1356,12 @@ AsianRailgun:
 		ValidTargets: Ground, Water
 		Damage: 15
 		ValidRelationships: Enemy, Neutral
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
 
 AsianRailTank:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
+	Inherits@2: ^Effect_Clsn_Medium_RA2
 	Range: 8888
 	ReloadDelay: 60
 	Report: railuse5.aud
@@ -1337,10 +1376,6 @@ AsianRailTank:
 	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 12
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_clsn
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexp14a.wav
 
 AsianRailTank2:
 	Inherits: AsianRailTank
@@ -1428,7 +1463,6 @@ AAHyperionMagnet:
 	ReloadDelay: 200
 	Burst: 100
 	BurstDelays: 1
-	-Report:
 	StartBurstReport: vmagatta.wav
 	TargetActorCenter: true
 	Projectile: LaserZap
@@ -1457,6 +1491,7 @@ AAHyperionMagnet:
 
 AsianTSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 	Inherits: IonCannon
+	Report: tesla1.aud
 	Range: 12288
 	AirThreshold: 8c0
 	ValidTargets: Ground, Water, Air
@@ -1545,6 +1580,7 @@ AsianTSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 
 AsianIonBeamMiniStart:
 	Inherits: ^AsianIonBeam
+	Report: tesla1.aud
 	Projectile: SpriteAthenaLaser
 		StayTicks: 21
 		Sequence: ionbeamstart
@@ -1552,6 +1588,7 @@ AsianIonBeamMiniStart:
 
 AsianIonBeamMini:
 	Inherits: ^AsianIonBeam
+	Report: tesla1.aud
 	Range: 4864
 	AirThreshold: 8c0
 	Projectile: SpriteAthenaLaser
@@ -1567,6 +1604,7 @@ AsianIonBeamMini:
 
 AsianIonbeam:
 	Inherits: ^AsianIonBeam
+	Report: tesla1.aud
 	Projectile: SpriteAthenaLaser
 		Image: explosion
 		Sequence: ionbeam
@@ -1633,6 +1671,8 @@ AsianMineSpawner2:
 
 AsianTankMine:
 	Inherits: ^RA2TankDestroyerCannon
+	Inherits@fx: ^Effect_Elite_Explosion_RA2
+	Report: cannon1.aud
 	Projectile: InstantExplode
 	Warhead@CannonAP_Light:
 		Spread: 1250
@@ -1644,12 +1684,6 @@ AsianTankMine:
 		Falloff: 125, 100, 75, 50, 25
 		Damage: 25
 		InvalidTargets: Mine
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_elite_explosion
-		ImpactSounds: gexpapoa.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ImpactSounds: gexpwala.wav
 
 AsianChaosMine:
 	Inherits: AsianChaosTurret
@@ -1657,6 +1691,7 @@ AsianChaosMine:
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Chem_Heavy
+	Report: flamer2.aud
 	Warhead@Chemical_Heavy:
 		Spread: 1250
 		Falloff: 125, 100, 75, 50, 25
@@ -1684,6 +1719,7 @@ AsianPelicanMissile:
 	Inherits@3: ^Projectile_Missile_Heavy
 	Inherits@4: ^Effect_MissileAP_Heavy
 	Inherits@5: ^RA2MediumMissile
+	Inherits@fx: ^Effect_Grey_Explosion_Small_RA2
 	ReloadDelay: 25
 	Burst: 2
 	BurstDelays: 2
@@ -1707,9 +1743,6 @@ AsianPelicanMissile:
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_small_grey_explosion
-		ImpactSounds: gexpifva.wav
 
 AsianPelicanMissile_elite:
 	Inherits: AsianPelicanMissile
@@ -1798,8 +1831,6 @@ AAGunBoatFlak:
 	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 	Warhead@EffectAir: CreateEffect
-		Explosions: ra2_flak_puff_AA
-		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
 AAGunBoatFlak_elite:
@@ -1831,6 +1862,8 @@ AsianSubmarineBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@2: ^RA2Grenade
+	Inherits@3: ^Effect_Twlt_Large_RA2
+	Report: M203.aud
 	Range: 2500
 	ReloadDelay: 100
 	Projectile: InstantExplode
@@ -1859,13 +1892,7 @@ AsianSubmarineBomb:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
 	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_twlt
-		ExplosionPalette: ra2effect
 		ImpactSounds: expnew09.wav
-	Warhead@EffectWater: CreateEffect
-		Explosions: ra2_large_watersplash
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpwasa.wav
 
 AsianPhoenixRocket:
 	Inherits@wh: ^Warhead_Flame_Medium
@@ -1873,6 +1900,7 @@ AsianPhoenixRocket:
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
 	Inherits@3: ^RA2HeavyMissile
+	Inherits@4: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 65
 	Range: 6500
 	MinRange: 1300
@@ -1905,10 +1933,6 @@ AsianPhoenixRocket:
 	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 
 AsianPhoenixRocket_elite:
 	Inherits: AsianPhoenixRocket
@@ -1984,6 +2008,7 @@ ASDFKamikazeExplosion:
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@3: ^Projectile_Grenade_Light
+	Report: M203.aud
 	Warhead@Demolition_Heavy:
 		Damage: 10000
 	Warhead@Demolition_Heavy_Percentage:
@@ -2215,6 +2240,7 @@ AsianMLRS:
 
 AsianSpitfireRockets:
 	Inherits: AsianMLRS
+	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 90
 	Burst: 8
 	BurstDelays: 4
@@ -2245,10 +2271,6 @@ AsianSpitfireRockets:
 	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_large_explosion
-		ExplosionPalette: ra2effect
-		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
 
 AsianKamikazeImpactTargeting:
 	ReloadDelay: 25

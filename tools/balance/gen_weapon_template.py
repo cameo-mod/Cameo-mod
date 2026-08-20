@@ -259,11 +259,14 @@ PHYSICS_RANK = {
     # direct electrical / EM — current couples straight into the field; the shield IS the conductor
     "Tesla": 1.00, "Storm": 0.95,
     # coherent energy — delivers energy the emitter must absorb; scales with coherence
-    "Quantum": 0.82, "Railgun": 0.78, "Prism": 0.76, "Laser": 0.74,
+    "Quantum": 0.82, "Railgun": 0.78, "Prism": 0.76, "Cryo": 0.75,
+    # Cryo = Laser×Prism coldray: coherent energy with freeze-kinetic. 0.75 sits between its parents.
+    "Laser": 0.74,
     # blended energy — part field-coupling, part thermal
-    "Waveforce": 0.70, "Plasma": 0.68, "Inferno": 0.64,
+    "Waveforce": 0.70, "Plasma": 0.68,
     # exotic / field-adjacent
-    "Sonic": 0.60, "Magic": 0.58, "Nuclear": 0.56,
+    "Sonic": 0.60, "Magic": 0.58, "Inferno": 0.57, "Nuclear": 0.56,
+    # Inferno = Flame×Prism heatray: thermo-led but still some field-coupling.
     # thermal / chemical — a shield stops heat and reagents well; little field coupling
     "FireCannon": 0.52, "FireMissile": 0.52, "Flame": 0.50, "ChemCannon": 0.50,
     "ChemMissile": 0.50, "Chemical": 0.48, "Toxic": 0.46, "Thermobaric": 0.44,
@@ -272,7 +275,7 @@ PHYSICS_RANK = {
     "MissileAA": 0.34, "CannonHE": 0.33, "MissileHE": 0.33, "CannonAP": 0.32,
     "MissileAP": 0.32, "Sniper": 0.30,
     # physical contact — the canonical thing a shield stops
-    "Arrow": 0.24, "Melee": 0.22, "Cryo": 0.66,
+    "Arrow": 0.24, "Melee": 0.22,
 }
 # A shield is an ENERGY BUDGET, so a bigger discharge depletes proportionally more of it.
 SHIELD_LEVEL = {"Trace": 0.80, "Light": 0.90, "Medium": 1.00, "Heavy": 1.12, "Super": 1.25}
@@ -382,7 +385,7 @@ def shield_for(family, level, rows):
 # --------------------------------------------------------------------------- #
 # THE FIVE ARMOR PLATINGS (maintainer, 2026-08-16)
 # --------------------------------------------------------------------------- #
-# *"Hazmat against fire, chemical and radiation, BlastProtection against all the HE weapons,
+# *"Hazmat against fire, chemical and radiation, BLAST against all the HE weapons,
 #  reflector against energy, composite against AP weapons and bullets ... they are all good
 #  against a certain family but bad against another and medium against everything else ...
 #  also they will average on 100% each across all weapon types ... and we need to make sure
@@ -400,50 +403,129 @@ def shield_for(family, level, rows):
 # that safe is selection: only one row is ever read, so a weak row is a chosen exposure
 # rather than a penalty stacked on top of the class armor.
 #
-# THE COLUMN LAW: each plating's mean across all templates is 100, so no plating is stronger
-# overall — they differ only in WHAT they are strong against. This is the transpose of W25 S1
-# (which pins each WEAPON's mean across armors) and the two cannot conflict: platings live in
-# NON_ARMOR_ROWS, so they never entered S1's row mean, and S1's armors never enter this
-# column mean.
+# THE COLUMN LAW: every plating's mean across all templates is the SAME, so no plating is
+# stronger overall — they differ only in WHAT they are strong against. This is the transpose
+# of W25 S1 (which pins each WEAPON's mean across armors) and the two cannot conflict:
+# platings live in NON_ARMOR_ROWS, so they never entered S1's row mean, and S1's armors never
+# enter this column mean.
 #
-# THE CYCLE: five platings, five damage axes, each plating countering one axis and weak to
-# the next — `thermo -> kinetic -> shaped -> blast -> energy -> thermo`. An odd cycle is what
-# keeps it from collapsing into two mirrored pairs, and every step is real:
+# ⚠ **The common mean is 70, NOT 100, and the difference is a measured bug fix.** A plating
+# REPLACES the class armor, so what matters is how its column compares to the one it
+# displaces — and six of the sixteen class armors already average better than 100 (`Heroic`
+# 74.3, the four aircraft 76-80). At a mean of 100 a hero or an aircraft that took a plating
+# got 25-35% WORSE, and `td_gdi_upgrade_heavyaircraftarmorplating` is live. That is the same
+# failure as the old averaging bug arriving by a different route: not stacking badly, but
+# DISPLACING SOMETHING BETTER. 70 sits just under `Heroic`'s 74.3, so a plating is a genuine
+# upgrade for every armor it can replace. The maintainer's law is untouched — its purpose was
+# that platings be equal to EACH OTHER, which any common mean satisfies. The ~30% durability
+# this grants must then be PRICED (see E1); it is not free, it is merely not yet charged for.
+PLATING_TARGET_MEAN = 70.0
 #
-#   HAZMAT          counters thermochemical, weak to KINETIC   (a suit does not stop a bullet)
-#   Composite       counters kinetic,        weak to SHAPED    (why ERA had to be invented)
-#   Reactive        counters shaped charges, weak to BLAST     (HE strips the ERA blocks off)
-#   BlastProtection counters blast,          weak to ENERGY    (a spall liner ignores a laser)
-#   REFLECTOR       counters energy,         weak to THERMO    (flame ablates and fouls a mirror)
+# NAMING: every plating is ALL CAPS (maintainer, 2026-08-16) — the class armors are
+# TitleCase (`None`, `Superheavy`, `Concrete`), so the case alone tells a reader which LAYER
+# a Versus row belongs to without having to remember the taxonomy. Each name is the most
+# recognisable real term for its role rather than a coined one:
 #
-# Rejected as too niche (maintainer): `Insulated` for Tesla, `Damping` for Sonic, `Warding`
-# for Magic — *"only a few factions have tesla but everyone has something like energy, AP, HE,
-# fire / chemical"*. Electricity folds into `energy`, Sonic into `blast`, Magic into `energy`.
+#   HAZMAT     the sealed / filtered suit — already an all-caps acronym in the real world
+#   COMPOSITE  Chobham-type ceramic matrix, the standard word for modern armour
+#   BLAST      names the threat, as HAZMAT does; `SPALL` (the liner) was the alternative and
+#              is more precise but less legible — this is a one-word revert either way
+#   REFLECTOR  the mirrored / ablative coating
+#
+# THE CYCLE: FOUR platings over the roster's four real damage axes, each countering one and
+# weak to the next — `thermo -> kinetic -> blast -> energy -> thermo`. Every step is a defeat
+# mechanism, not flavour:
+#
+#   HAZMAT     counters thermochemical  weak to KINETIC  a seal has no mass; a bullet passes
+#                                                        through a rubber suit
+#   COMPOSITE  counters kinetic+SHAPED  weak to BLAST    ceramic shatters a penetrator and ERA
+#                                                        breaks a jet — a real tank carries
+#                                                        both — but neither spreads an impulse
+#   BLAST      counters blast           weak to ENERGY   a liner absorbs mechanical impulse,
+#                                                        and a beam delivers none
+#   REFLECTOR  counters energy          weak to THERMO   flame and corrosives foul the surface,
+#                                                        and a dull mirror is just thin plate
+#
+# ⚠ **`Reactive` was cut on the measurement, not on taste** (§H2). Composition share across
+# all 33 families: thermochemical 27.4%, kinetic 23.4%, blast 22.7%, energy 20.1% — and
+# shaped charge **6.4%**, with only `MissileAP` shaped-led. It failed the maintainer's own
+# niche test, the one that already retired `Insulated`, `Damping` and `Warding`. The `shaped`
+# AXIS survives as an honest description of what those warheads are; it is simply counted
+# under `COMPOSITE`, which is how a real tank is built anyway.
+#
+# A four-cycle is not degenerate: each plating is weak to what the NEXT one counters, so it is
+# one 4-cycle rather than two mirrored 2-cycles. (An earlier note claimed only an ODD cycle
+# could avoid that collapse — wrong; what matters is that no two platings counter each other's
+# weakness.)
 PLATING_AXES = ("thermo", "kinetic", "shaped", "blast", "energy")
-PLATING_CYCLE = {                      # plating: (axis it counters, axis it is weak to)
-    "HAZMAT":          ("thermo",  "kinetic"),
-    "Composite":       ("kinetic", "shaped"),
-    "Reactive":        ("shaped",  "blast"),
-    "BlastProtection": ("blast",   "energy"),
-    "REFLECTOR":       ("energy",  "thermo"),
+PLATING_CYCLE = {                  # plating: (axes it counters, axes it is weak to)
+    "HAZMAT":          (("thermo",),            ("kinetic", "shaped")),
+    "COMPOSITE":       (("kinetic", "shaped"),  ("blast",)),
+    "BLAST":           (("blast",),             ("energy",)),
+    "REFLECTOR":       (("energy",),            ("thermo",)),
+    # --- THE GENERIC PLATING (maintainer, 2026-08-17) --------------------------------- #
+    # *"there should also be a generic ARMOR armor type called ARMOR that receives 100%
+    #  damage from everything. This is for the things like Scrap or Junkarmor and the
+    #  StarCraft and Warcraft armor upgrades. So in a way this could be our fifth armor
+    #  type."*
+    #
+    # It counters nothing and is weak to nothing, so `plating_raw` returns a FLAT 100 for
+    # every family — "100% damage from everything", exactly as stated — and the column law
+    # then scales that flat row to the common mean like any other plating. No special case
+    # is needed anywhere: the empty tuples ARE the definition.
+    #
+    # It is the fifth plating the roster CAN support, and it sidesteps §H2 entirely: it is
+    # not a fifth damage AXIS (which the measurement showed cannot be even) but a fifth
+    # CHOICE with no axis at all. So the four-way partition stays exactly as even as it was.
+    #
+    # In play it is the HEDGE: identical average durability to the four specialists, but
+    # flat, so it is never punished for guessing wrong. Against a known opponent a specialist
+    # beats it; against an unknown one it does not. That is a real decision rather than a
+    # filler option — and it is the honest home for every generic "+armor" upgrade
+    # (Yuri scrap, Forgotten junk armor, the StarCraft/Warcraft armor and carapace levels),
+    # which have no business carrying a counter-play identity they were never designed with.
+    "ARMOR":           ((), ()),
 }
-# How much a full share moves the row away from 100 — so a pure-thermo weapon reads 50
-# against HAZMAT and 150 against REFLECTOR, before the column is normalised.
+# How much a full share moves the row away from the mean — so a pure-thermo weapon reads half
+# against HAZMAT and half again as much against REFLECTOR, before the column is normalised.
 PLATING_DEPTH = 0.50
 
 # Each PRIMITIVE family's damage composition over the five axes; shares sum to 1. Blends
 # average their parents, so a new blend is classified for free. This is the same kind of
 # design table as PHYSICS_RANK — measured against nothing, argued from what the weapon IS.
+#
+# ⚠ EVERY EMITTED FAMILY'S ROW MUST BE UNIQUE (maintainer, 2026-08-17: *"I want all weapon
+# families to be a bit more unique so don't put 3 energy weapons exactly on the same versus
+# value"*), and the ONLY way a family can earn a distinct row is to move mass ACROSS a group
+# boundary. The cycle reads `kinetic` and `shaped` as one SET, so five axes give exactly FOUR
+# distinguishable groups — {thermo} / {kinetic+shaped} / {blast} / {energy} — and refining
+# WITHIN one group is arithmetically INERT: `Bullet` 0.90/0.10 against `Arrow` 0.65/0.35 was
+# measured as BYTE-IDENTICAL. So every secondary share below names a SECOND real defeat
+# mechanism; none is a fudge to break a tie, because a fabricated difference is a lie about the
+# model (`b182fd228`). `tools/tests/test_plating_composition.py` pins the uniqueness, and
+# `docs/design/PLATING_COMPOSITION_REFINEMENT.md` argues every line one at a time.
 COMPOSITION = {
     # --- KINETIC: a solid mass arrives at speed. Defeated by hard, brittle ceramic that
     # shatters or erodes the penetrator before it reaches the backing plate — which is what
     # composite (Chobham-type) armour IS.
-    "Bullet":      {"kinetic": 1.00},
-    "Sniper":      {"kinetic": 1.00},
-    "Melee":       {"kinetic": 1.00},                   # a blade is a slow, sharp penetrator
-    "Arrow":       {"kinetic": 1.00},
+    #
+    # These four were all `kinetic 1.00`, i.e. one four-way tie. They are separated by what
+    # happens BEHIND the plate, which is the only honest non-kinetic share a solid projectile
+    # has: a penetration event throws SPALL, and a spall liner (`BLAST`) is the real answer to
+    # it — that is what spall liners are FOR. So the share tracks how violent the event is.
+    "Arrow":       {"kinetic": 1.00},                   # the pure point: no spall, no flash
+    "Sniper":      {"kinetic": 0.95, "blast": 0.05},    # one round, one channel, little spall
+    "Bullet":      {"kinetic": 0.90, "blast": 0.10},    # deforms, cavitates, sprays spall
+    # A blade is a slow sharp penetrator, but this family also covers the swung mass, and blunt
+    # trauma is the one melee mechanism rigid armour cannot simply stop: a mace transmits SHOCK
+    # THROUGH the plate instead of trying to pass through it, which is overpressure behaviour.
+    # Hence composite helps LESS against melee than against a rifle, and padding helps more.
+    "Melee":       {"kinetic": 0.75, "blast": 0.25},
     "Railgun":     {"kinetic": 0.85, "energy": 0.15},   # a SLUG; the energy is in the launcher
-    "CannonAP":    {"kinetic": 0.75, "shaped": 0.25},   # APFSDS, the canonical KE dart
+    # APFSDS, the canonical KE dart — and a dart is PYROPHORIC (depleted uranium ignites) with
+    # adiabatic heating at the contact point, so the documented behind-armour effect is
+    # incendiary as much as mechanical. That thermal share is what separates it from a bullet.
+    "CannonAP":    {"kinetic": 0.70, "shaped": 0.15, "thermo": 0.15},
     # Fragments are METAL MOVING FAST, not overpressure — which is exactly why "flak jacket"
     # is a real garment and why fragmentation sleeves are rated in kinetic terms. Both of
     # these were blast-led in the first draft, which credited them to the wrong counter.
@@ -451,34 +533,98 @@ COMPOSITION = {
     "MissileAA":   {"kinetic": 0.55, "blast": 0.45},    # continuous-rod / frag warheads
     # --- SHAPED CHARGE: a metal JET formed by an explosive-driven liner, defeated by making
     # the jet form early or wander — ERA, slat, spaced plate. Nothing about mass or hardness.
-    "MissileAP":   {"shaped": 0.90, "blast": 0.10},     # HEAT/ATGM
+    "MissileAP":   {"shaped": 0.85, "blast": 0.10, "thermo": 0.05},   # HEAT/ATGM + BAI
     "MissileHE":   {"blast": 0.75, "shaped": 0.25},
     # --- BLAST: overpressure and shock through the structure, defeated by absorbing and
     # spreading impulse — spall liners, V-hulls, standoff.
     "CannonHE":    {"blast": 0.90, "kinetic": 0.10},
-    "Demolition":  {"blast": 1.00},
+    # `Demolition` and `Concussion` were both `blast 1.00`. A concussion shell is the pure
+    # overpressure archetype; a demolition charge is placed in contact and its detonation
+    # delivers a real thermal flash (that is what an incendiary cutting charge exploits), so a
+    # sealed suit gives a little protection against one and none against the other.
     "Concussion":  {"blast": 1.00},
+    "Demolition":  {"blast": 0.85, "thermo": 0.15},
     "Sonic":       {"blast": 0.70, "energy": 0.30},     # a pressure wave IS overpressure
     "Thermobaric": {"blast": 0.60, "thermo": 0.40},     # fuel-air: overpressure + burn
     # --- THERMOCHEMICAL: agents and thermal load, defeated by SEALING and insulating.
-    "Flame":       {"thermo": 1.00},
-    "Inferno":     {"thermo": 1.00},
-    "Chemical":    {"thermo": 1.00},
-    "Toxic":       {"thermo": 1.00},
-    "Cryo":        {"thermo": 1.00},
+    #
+    # `Flame`/`Chemical`/`Toxic`/`Cryo` were a four-way tie at `thermo 1.00`. A sealed insulated
+    # suit really is the right counter to all four, so they keep a thermo LEAD and separate on
+    # their second mechanism:
+    "Toxic":       {"thermo": 1.00},                    # an agent vs the CREW: the pure case
+    "Flame":       {"thermo": 0.85, "blast": 0.15},     # fuel DEFLAGRATES: pressure + O2 loss
+    # Chemical is CORROSION, not gas (`PHYSICAL_STATE_SYSTEM.md`) — a reaction that eats a
+    # channel through the material itself, which is localised material removal. Ceramics are
+    # chemically INERT where steel and reactive armour are not, so `COMPOSITE` earns a real
+    # (partial) answer to it and that is what separates it from flame.
+    "Chemical":    {"thermo": 0.75, "shaped": 0.25},
+    # Cryo is a Laser×Prism coldray: coherent energy delivery that freezes, so the shield
+    # sees mostly field coupling (energy). The thermal load is still real (insulation stops it),
+    # and the kill has a small kinetic share from cryogenic embrittlement of frozen material.
+    "Cryo":        {"energy": 0.55, "thermo": 0.25, "kinetic": 0.20},   # Laser×Prism coldray: energy-led with embrittlement
     "Nuclear":     {"thermo": 0.50, "blast": 0.40, "energy": 0.10},
     # --- ENERGY: radiated or conducted, defeated by REFLECTING or ablating it away.
-    "Laser":       {"energy": 1.00},
-    "Prism":       {"energy": 1.00},
-    "Tesla":       {"energy": 1.00},
-    "Storm":       {"energy": 0.90, "blast": 0.10},
+    #
+    # `Laser`/`Prism`/`Tesla` were a three-way tie at `energy 1.00`, so one REFLECTOR row
+    # answered all three identically. They separate on how much of the delivered damage is
+    # THERMAL, which is also the order in which a mirrored coating stops being the right idea:
+    "Prism":       {"energy": 0.90, "thermo": 0.10},    # focused visible light: purest radiant
+    # Maintainer 2026-08-17: *"the tesla is the opposite [of Inferno]: it's mostly energy and a
+    # bit of thermal"*. A conducted arc is the field-coupling champion (PHYSICS_RANK 1.00); what
+    # it delivers to MATTER is resistive heating (the thermo share) plus the arc channel's
+    # thunderclap — thunder is literally an overpressure wave, which is the blast share. And a
+    # mirrored plating is a METAL skin, so it spreads and grounds an arc rather than reflecting
+    # it: same benefit, different mechanism, which is why REFLECTOR still helps here.
+    "Tesla":       {"energy": 0.75, "thermo": 0.20, "blast": 0.05},
+    "Storm":       {"energy": 0.80, "thermo": 0.10, "blast": 0.10},   # lightning: fires+thunder
+    "Laser":       {"energy": 0.65, "thermo": 0.35},    # coherent IR, but the KILL is ablation
     "Magic":       {"energy": 0.60, "thermo": 0.20, "blast": 0.20},
 }
 # Where a blend's parent list understates what the weapon physically IS.
 COMPOSITION_OVERRIDE = {
     # Flame + Chemical gives Plasma a pure thermo reading, but plasma is ionised and radiates.
     "Plasma": {"thermo": 0.55, "energy": 0.45},
+    # Inferno is a Flame×Prism heatray: thermo-led, but delivered as a coherent beam so both
+    # HAZMAT (sealed/insulated) and REFLECTOR (mirror) reduce it, with HAZMAT doing more.
+    "Inferno": {"thermo": 0.65, "energy": 0.35},   # Flame×Prism heatray: thermo-led with field coupling
 }
+
+# The PHYSICS_RANK band boundary, read OFF that table rather than chosen: everything at or below
+# 0.52 sits in its "thermal / chemical" band and everything at or above 0.56 is at least
+# "exotic / field-adjacent".
+ENERGY_COUPLING_RANK = 0.56
+
+
+def rank_composition_conflicts():
+    """Families whose PHYSICS_RANK band and COMPOSITION disagree about field coupling.
+
+    ⚠ **This REPLACES `_rank_blend`**, which derived Inferno's thermo/energy split from its rank
+    arithmetically. That over-reached: the two tables answer DIFFERENT questions — rank asks how
+    much of a discharge a FORCE FIELD absorbs, composition asks what reaches MATTER — and
+    `Railgun` has always been the standing proof that they are not one axis (rank 0.78, a nearly
+    pure kinetic slug). Deriving one from the other therefore had to be overruled the moment a
+    ruling touched either table, which is exactly what happened.
+
+    So the guard keeps only the part the two tables genuinely share, and constrains no share: a
+    family the shield table calls field-coupling must have SOME energy in it, and one it calls
+    thermal/kinetic must have none. That catches precisely the drift that shipped TWICE — both
+    `Inferno` (0.64) and `Cryo` (0.66) sat at `thermo 1.00` while being prism-chassis weapons.
+    """
+    bad = []
+    for fam, rank in sorted(PHYSICS_RANK.items()):
+        energy = composition(fam)["energy"]
+        if rank >= ENERGY_COUPLING_RANK and energy <= 0:
+            bad.append((fam, rank, energy, "ranked field-coupling, but no energy share"))
+        elif rank < ENERGY_COUPLING_RANK and energy > 0 and fam not in BLEND_FAMILIES:
+            # ⚠ The converse holds for PRIMITIVES only. A blend's rank is the MEAN of its
+            # parents', so a mostly-ordnance blend can sit below the band boundary while still
+            # carrying a real energy share from one parent — `PhotonCannon` (rank 0.46, one
+            # third Waveforce) is the case that proved it. Applying the converse there would
+            # forbid a legitimate family rather than catch drift, which is the opposite of what
+            # this guard is for: the drift it exists to catch (`Inferno`, `Cryo`) was in the
+            # PRIMITIVE table both times.
+            bad.append((fam, rank, energy, "ranked thermal/kinetic, but has an energy share"))
+    return bad
 
 
 def composition(name):
@@ -500,10 +646,15 @@ def composition(name):
 
 
 def plating_raw(family):
-    """Un-normalised plating row per plating: 100, minus its counter, plus its weakness."""
+    """Un-normalised row per plating: flat, minus what it counters, plus what beats it.
+
+    Counter and weakness are SETS of axes, not single axes — `COMPOSITE` answers both
+    kinetic penetrators and shaped-charge jets, so it sums both shares.
+    """
     comp = composition(family)
-    return {p: 100.0 * (1 - PLATING_DEPTH * comp[counter] + PLATING_DEPTH * comp[weak])
-            for p, (counter, weak) in PLATING_CYCLE.items()}
+    return {p: 100.0 * (1 - PLATING_DEPTH * sum(comp[a] for a in counters)
+                        + PLATING_DEPTH * sum(comp[a] for a in weak))
+            for p, (counters, weak) in PLATING_CYCLE.items()}
 
 
 def _plating_scales():
@@ -526,7 +677,7 @@ def _plating_scales():
     for p in PLATING_CYCLE:
         vals = [plating_raw(f)[p] for f in families]
         mean = sum(vals) / len(vals) if vals else 100.0
-        scales[p] = 100.0 / mean if mean else 1.0
+        scales[p] = PLATING_TARGET_MEAN / mean if mean else 1.0
     return scales
 
 
@@ -1192,7 +1343,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         if physical_states:  # multi-state blend (e.g. Plasma: Temperature 50 + Corrosion 50)
             main_wh.append("\t\tPhysicalStates:")
             main_wh += [f"\t\t\t{k}: {v}" for k, v in physical_states.items()]
-        integ = FAMILY_INTEGRITY_SCALE.get(name)  # shield/EMP auto-drain
+        integ = FAMILY_INTEGRITY_SCALE.get(name)  # ELECTRONICS (EMP) auto-drain — NOT a shield
         if integ:
             main_wh.append(f"\t\tIntegrityScale: {integ}")
         percentage_state = FAMILY_PHYSICAL_STATE.get(name) if name in {"Flame", "Chemical", "Inferno", "Cryo"} else None
@@ -1288,16 +1439,41 @@ def at(seq, index):
 # Flame and Chemical also emit meter-aware AreaDamagePercentage twins so their percentage damage
 # contributes to the same meter. The _ExtraDamage chip remains excluded.
 # Cryo is a separate thin child of Prism (Temperature -100), not listed here.
+# ⭐ FULL STRENGTH IS ONE KNOB — `METER_FULL`. Everything below is a FRACTION of it, so the
+# maintainer can move the whole system with a single edit instead of 13 hand-divided numbers.
+#
+# The race, corrected 2026-08-18 (`tools/balance/physical_state_price.py` owns the arithmetic):
+#
+#     hits_to_fill / hits_to_kill = MaxValue x 100 / (Scale x range) = 50 / Scale
+#
+# `range = MaxValue - MinValue` = 40000 on BOTH meters now that Corrosion is signed like
+# Temperature. The target's HP and the weapon's damage BOTH cancel, so the constant alone decides
+# it, and the bar ("full effect while 25% HP remains") is ratio <= 0.75.
+#
+# ⚠ A previous revision here claimed the ratio was `200 / scale`, concluded that every
+# flamethrower filled its meter twice as slowly as it killed, and had the maintainer raise the
+# constant to 300 to fix it. That derivation trusted `PhysicalStateInfo.RelativeToHealth`'s stale
+# [Desc] ("divided by HP/10000") instead of `ScaleChangeToHealth`, and was wrong by 4x.
+# **METER_FULL = 100 already gives ratio 0.50** — full effect with half the target's life left,
+# comfortably inside the bar. 300 was a 3x faster fill than anything needed it to be.
+METER_FULL = 100
+
+
+def _m(fraction: float) -> int:
+    """A meter strength expressed as a share of full. Keeps the per-parent-average rule exact."""
+    return int(round(METER_FULL * fraction))
+
+
 FAMILY_PHYSICAL_STATE = {
-    "Flame":    ("Temperature", 100),   # heat -> overheat/pop
-    "Laser":    ("Temperature", 75),    # laser overheats (main only, chip excluded)
-    "Chemical": ("Corrosion", 100),     # acid -> corrosion meter
-    "Cryo":     ("Temperature", -100),  # prism beam that freezes
-    "Inferno":  ("Temperature", 100),   # prism beam that burns
-    # Plasma (Temperature 50 + Corrosion 50) needs two states on one warhead -> handled at family build.
+    "Flame":    ("Temperature", _m(1.00)),   # heat -> overheat/pop
+    "Laser":    ("Temperature", _m(0.75)),   # laser overheats (main only, chip excluded)
+    "Chemical": ("Corrosion", _m(1.00)),     # acid -> corrosion meter
+    "Cryo":     ("Temperature", _m(-1.00)),  # prism beam that freezes
+    "Inferno":  ("Temperature", _m(1.00)),   # prism beam that burns
+    # Plasma (Temperature + Corrosion) needs two states on one warhead -> handled at family build.
 }
 
-# Per-family Integrity (shield/EMP) auto-scale: the C# AreaDamage.IntegrityScale drains the victim's
+# Per-family Integrity ELECTRONICS auto-scale: the C# AreaDamage.IntegrityScale drains the victim's
 # shield by `damage x Scale%` on hit, EXACTLY like PhysicalStateScale (auto-tracks the real post-armor
 # damage, so no flat EMP number is ever hand-set and the ordering can't drift). Tesla-content law:
 # Scale = round(100 x Tesla-parents / total-parents) -> pure Tesla 100, Storm (Tesla+Magic) 50,
@@ -1307,7 +1483,7 @@ FAMILY_PHYSICAL_STATE = {
 # the passive INotifyDamage drain. The flat AffectsIntegrity warhead stays UPGRADE-only (a concrete
 # bonus on top), so no template emits it. See PHYSICAL_STATE_SYSTEM.md.
 FAMILY_INTEGRITY_SCALE = {
-    "Tesla": 100,                          # pure Tesla = full shield-drain (the disable specialist)
+    "Tesla": 100,                          # pure Tesla = full drain (the EMP-disable specialist)
     "Storm": 50,                          # Tesla+Magic -> 1/2
     "Quantum": 33,                        # Railgun+Laser+Tesla -> 1/3
     # ⚠ `Waveforce: 20` DELETED 2026-08-16 (maintainer order) — it could never fire.
@@ -1374,11 +1550,10 @@ def emit_condition(tag, cname, duration, rng, vt):
 
 
 # Inheriting families: a thin child that inherits a parent family template and overrides ONLY the main
-# warhead to add a PhysicalState (e.g. Cryo = Prism's anti-LIGHT beam + cold). Keeps the parent's Versus
-# + warhead key. {name: (parent, PhysicalStateName, PhysicalStateScale, levels)}.
+# warhead to add a PhysicalState. Keeps the parent's Versus + warhead key.
+# {name: (parent, PhysicalStateName, PhysicalStateScale, levels)}.
+# Cryo and Inferno were promoted to BLEND_FAMILIES below so they get their own Versus averages.
 INHERIT_FAMILIES = {
-    "Cryo":    ("Prism", "Temperature", -100, L3),   # a prism beam that also freezes (its "utility")
-    "Inferno": ("Prism", "Temperature", +100, L3),   # a prism beam that also burns (heat ray)
 }
 
 
@@ -1393,26 +1568,26 @@ def emit_inherit_family(name, parent, psn, pss, levels):
 
 
 # Blend families: a NEW family whose Versus is the per-armor AVERAGE of parent families, plus a
-# multi-state. Plasma = Flame x Chemical Versus + Temperature 50 + Corrosion 50 ("as close as possible
+# multi-state. Plasma = Flame x Chemical Versus + Temperature 150 + Corrosion 150 ("as close as possible
 # to the flame + chemical combo"). {name: (parents, {StateName: Scale}, levels)}.
 BLEND_FAMILIES = {
-    "Plasma": (["Flame", "Chemical"], {"Temperature": 50, "Corrosion": 50}, L3),
+    "Plasma": (["Flame", "Chemical"], {"Temperature": _m(0.50), "Corrosion": _m(0.50)}, L3),
     # Thermobaric = fuel-air incendiary blast: the per-armor AVERAGE of Demolition + Concussion +
-    # Flame ("demolition + concussion + fire"). Heat = Flame 100 / 3 parents = 33 (per-parent-average
+    # Flame ("demolition + concussion + fire"). Heat = Flame 300 / 3 parents = 100 (per-parent-average
     # rule, Plasma-consistent). Collapses the thermobaric frankenstein weapons onto one warhead.
-    "Thermobaric": (["Demolition", "Concussion", "Flame"], {"Temperature": 33}, L3),
+    "Thermobaric": (["Demolition", "Concussion", "Flame"], {"Temperature": _m(1 / 3)}, L3),
     # Quantum = high-tech energy blend: per-armor AVERAGE of Railgun + Laser + Tesla (Heavy-only
-    # parents extrapolated to L/M via the level step). Heat = Laser's 75 / 3 parents = 25 (only Laser
+    # parents extrapolated to L/M via the level step). Heat = Laser's 225 / 3 parents = 75 (only Laser
     # contributes a meter; Plasma-consistent per-parent averaging). EMP auto-scales via IntegrityScale
     # 33 (Tesla = 1/3 parents, FAMILY_INTEGRITY_SCALE); the ExtraDamage chip stays per-weapon.
-    "Quantum": (["Railgun", "Laser", "Tesla"], {"Temperature": 25}, L3),
+    "Quantum": (["Railgun", "Laser", "Tesla"], {"Temperature": _m(0.25)}, L3),
     # Element + delivery blends (maintainer 2026-08-10): per-armor AVERAGE of the element family and the
-    # delivery family + the element's meter / 2 parents (50). FIRE = anti-light -> pairs with HE delivery
+    # delivery family + the element's meter / 2 parents (150). FIRE = anti-light -> pairs with HE delivery
     # (better vs infantry/buildings); CHEMICAL = anti-armor -> pairs with AP delivery (better vs armor).
-    "FireCannon":  (["Flame", "CannonHE"],    {"Temperature": 50}, L3),
-    "FireMissile": (["Flame", "MissileHE"],   {"Temperature": 50}, L3),
-    "ChemCannon":  (["Chemical", "CannonAP"], {"Corrosion": 50}, L3),
-    "ChemMissile": (["Chemical", "MissileAP"],{"Corrosion": 50}, L3),
+    "FireCannon":  (["Flame", "CannonHE"],    {"Temperature": _m(0.50)}, L3),
+    "FireMissile": (["Flame", "MissileHE"],   {"Temperature": _m(0.50)}, L3),
+    "ChemCannon":  (["Chemical", "CannonAP"], {"Corrosion": _m(0.50)}, L3),
+    "ChemMissile": (["Chemical", "MissileAP"],{"Corrosion": _m(0.50)}, L3),
     # Waveforce = a resonant energy weapon: "a bit like a mix of the plasma warhead and the
     # quantum warheads" (maintainer 2026-08-16), adopted for the Japanese energy rifles —
     # which inherit `^WaveforceBulletWarhead` and were never railguns — and for the Protoss
@@ -1426,9 +1601,42 @@ BLEND_FAMILIES = {
     # half gives armour piercing and the anti-shield coupling.
     #
     # Meters follow the documented per-parent-average rule, same as Quantum's comment above:
-    # Temperature = (Flame 100 + Laser 75) / 5 parents = 35; Corrosion = (Chemical 100) / 5 = 20.
+    # Temperature = (Flame 300 + Laser 225) / 5 parents = 105; Corrosion = (Chemical 300) / 5 = 60.
     "Waveforce": (["Flame", "Chemical", "Railgun", "Laser", "Tesla"],
-                  {"Temperature": 35, "Corrosion": 20}, L3),
+                  {"Temperature": _m(0.35), "Corrosion": _m(0.20)}, L3),
+    # PhotonCannon = the maintainer's 3-way — Waveforce 25% / CannonHE 25% / MissileAA 50% — and
+    # DELIBERATELY WITHOUT METERS (2026-08-18: *"a Waveforce x ... combo but without the physical
+    # states"* … *"use a 3 way: waveforce x cannonHE x MissileAA"* … *"the photon cannon should
+    # NOT be better against air than against ground"*). The resonant quarter gives anti-shield
+    # coupling and anti-infantry reach, the HE quarter the ground punch, the AA half the air
+    # defence. It neither burns nor corrodes — no Temperature, no Corrosion — which also makes it
+    # the first family whose price is pure damage, with nothing for E2 to weight.
+    #
+    # ⭐ THE TARGET IS PARITY, and the weighting is what achieves it. Measured air/ground ratios:
+    #
+    #     equal thirds (Wave/HE/AA)      0.88   air WORSE than ground — fails the brief
+    #     Wave x AA 50/50                0.99   parity, but Fighter sits at 95, below baseline
+    #     Wave x AA 1/3 : 2/3            1.11   air-LED — overshot, and shipped once by mistake
+    #     Wave 25 / HE 25 / AA 50        1.01   ⭐ parity with every row healthy
+    #
+    # ⚠ Equal thirds fails for a specific reason worth keeping: `CannonHE` is anti-air HOSTILE
+    # (Fighter 79, Helicopter 51, Spaceship 43), so one AA share cannot cancel it. Doubling the
+    # AA parent is what buys the ground punch back WITHOUT tipping into an AA-led ladder.
+    #
+    # ⭐ THE REPEATED PARENTS ARE THE WEIGHTING, not a typo. `blend_versus` averages over the
+    # LIST, so 5 Waveforce primitives : 5 CannonHE : 10 MissileAA is exactly 25/25/50 — a
+    # weighted blend of a blend and two primitives, which the machinery cannot express any other
+    # way (it averages PARENT FAMILIES, and a blend-of-blends would need the parents built first
+    # — see Waveforce above).
+    "PhotonCannon": (["Flame", "Chemical", "Railgun", "Laser", "Tesla"]
+                     + ["CannonHE"] * 5 + ["MissileAA"] * 10, {}, L3),
+    # Inferno = a Flame×Prism heatray: thermo-led (mostly fire), but delivered as a coherent
+    # energy beam so REFLECTOR still helps. Ground-only, thin spread, FireDeath.
+    "Inferno": (["Flame", "Prism"], {}, L3),
+    # Cryo = a Laser×Prism coldray: coherent energy delivery that freezes. Mostly energy-field
+    # coupling, some thermal load, and a small kinetic share from cryogenic embrittlement.
+    # Air-capable (Laser parent), thin spread, negative Temperature scaling.
+    "Cryo": (["Laser", "Prism"], {}, L3),
 }
 # Fixed emission order for a blend (it has no single light/heavy direction).
 BLEND_ARMOR_ORDER = ["None", "Flak", "Plate", "Heroic", "Scout", "Light", "Medium", "Heavy",
@@ -1551,9 +1759,22 @@ def _generate():
     for nm, (parents, states, lv) in BLEND_FAMILIES.items():
         if wanted and nm.lower() not in wanted:
             continue
-        vt = valid_targets(False)  # plasma is a ground weapon (like flame/chem)
+        # ⚠ Air capability is INHERITED FROM THE PARENTS, not assumed. This used to be a flat
+        # `valid_targets(False)` with the note "plasma is a ground weapon (like flame/chem)" —
+        # true of Plasma and false as a rule: `PhotonCannon` exists precisely to be the Protoss
+        # AIR defence, and a hardcoded ground-only target list would have shipped an AA family
+        # that cannot shoot at aircraft.
+        #
+        # The test is a WEIGHTED SHARE, not "any parent": a blend can engage air when at least a
+        # third of what it is made of can. "Any" would have promoted `Waveforce` on the strength
+        # of one Laser in five parents — an unrelated family silently gaining AA. A third is also
+        # exactly what the repeated-parent weighting expresses, so it reads off the list directly.
+        air_share = (sum(1 for p in parents if p in WEAPONS and WEAPONS[p][2]) / len(parents)
+                     if parents else 0)
+        vt = valid_targets(air_share >= 1 / 3)
         dt = FAMILY_DAMAGE_TYPES.get(nm)
-        print(f"###### {nm}: blend of {'+'.join(parents)} + PhysicalStates {states} ######")
+        states_note = f"+ PhysicalStates {states}" if states else "no PhysicalStates"
+        print(f"###### {nm}: blend of {'+'.join(parents)} + {states_note} ######")
         print(family(nm, None, vt, lv, versus_override=blend_versus(parents), physical_states=states,
                      **({"damage_types": dt} if dt else {})))
         print()

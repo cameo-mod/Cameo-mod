@@ -1,7 +1,30 @@
-# HAZMAT / REFLECTOR / Integrity — measured mechanics, and what to do about them
+# The armor-plating layer, shields and Integrity — measured mechanics and shipped design
 
-**Status: RESEARCH + OPTIONS. No mechanic changed yet.** Three maintainer questions of
-2026-08-16, answered from the artifacts rather than from the design docs:
+**Status: ✅ MOSTLY SHIPPED (2026-08-16/17).** Started as research into three maintainer
+questions and became the plating layer. What is LIVE, with the binding summary in
+`DESIGN.md §12.0e/§12.0f`:
+
+| shipped | where |
+|---|---|
+| 5 platings `HAZMAT` `COMPOSITE` `BLAST` `REFLECTOR` `ARMOR`, ALL CAPS, full columns in all 94 templates | §D-bis, §G, §H |
+| LAYER SELECTION — a plating replaces the class armor | `AreaDamageWarhead.DamageVersus` |
+| the column law: every plating averages **70** | §I |
+| `effective_HP = HP + shield x 0.540`, measured live | §I |
+| 4 upgrades retagged; the generic ones stay multipliers | §G |
+| guards `audit_armor_upgrade_harm.py` + `audit_plating_exclusivity.py` | §F, run_all.sh |
+| `Waveforce` IntegrityScale deleted (could never fire) | §B, §D-bis |
+
+**STILL OPEN:** the Integrity options I1–I4 (§B) are analysis only — the pool is still 100%
+of max HP, so the EMP disable still lands late; and the `IntegrityScaleMultiplier` design
+(§D) is written but NOT built, so 15 sites still hard-code `IntegrityScale: 150`.
+
+⚠ **Sections A–E are preserved as WRITTEN, including options that were later rejected**, so
+the reasoning stays auditable. Where a later section supersedes an earlier one it says so.
+The most important such correction: **§A1–A4 describe the AVERAGING world**, which still
+governs class armors but NO LONGER governs platings — §F replaced that with selection.
+
+Three maintainer questions of 2026-08-16, answered from the artifacts rather than from the
+design docs:
 
 1. scale `HAZMAT` **and** `REFLECTOR` by the weapon's thermal / chemical / explosive /
    energy composition — and add `REFLECTOR` to the mixed families that lack it;
@@ -443,23 +466,23 @@ average is a 1.84x self-inflicted damage increase.
 
 ## G. The plating taxonomy — 4 given, 2 proposed
 
-> *"Hazmat against fire, chemical and radiation, BlastProtection against all the HE weapons
+> *"Hazmat against fire, chemical and radiation, BLAST against all the HE weapons
 > like demolition, concussion etc, reflector against energy, composite against AP weapons and
 > bullets ... try to find another 1 or 2 that fit the real world armors"*
 
 | plating | counters | real-world basis |
 |---|---|---|
 | **HAZMAT** | Flame, Inferno, Chemical, Toxic, Cryo, Nuclear, + fire/chem blends | NBC suit, sealed overpressure hull |
-| **BlastProtection** | Demolition, Concussion, Thermobaric, CannonHE, MissileHE, Flak, Sonic | spall liner, blast-attenuating V-hull |
+| **BLAST** | Demolition, Concussion, Thermobaric, CannonHE, MissileHE, Flak, Sonic | spall liner, blast-attenuating V-hull |
 | **REFLECTOR** | Laser, Prism, Plasma | ablative / mirrored coating |
-| **Composite** | Bullet, Sniper, CannonAP, Railgun, Arrow | Chobham, ceramic matrix — the anti-KINETIC answer |
-| **➕ Reactive** | MissileAP, and the shaped-charge half of the AT families | **ERA / slat armour.** The KE-vs-HEAT split is the actual axis real tank armour is designed around, and it is the one distinction `Composite` alone cannot express: ceramics beat penetrators, ERA beats shaped charges, and neither does the other's job. |
+| **COMPOSITE** | Bullet, Sniper, CannonAP, Railgun, Arrow | Chobham, ceramic matrix — the anti-KINETIC answer |
+| **➕ Reactive** | MissileAP, and the shaped-charge half of the AT families | **ERA / slat armour.** The KE-vs-HEAT split is the actual axis real tank armour is designed around, and it is the one distinction `COMPOSITE` alone cannot express: ceramics beat penetrators, ERA beats shaped charges, and neither does the other's job. |
 | **➕ Insulated** | Tesla, Storm, and the electrical share of Quantum / Waveforce | **Faraday cage / grounding mesh.** This also repairs a compromise in §D-bis: I put Tesla on REFLECTOR at 0.60 because the maintainer's ruling said "energy", while noting a mirror does not stop lightning. With `Insulated` in the set, REFLECTOR goes back to being honestly PHOTONIC (Laser/Prism 1.0, Tesla 0) and electricity gets its own real counter. |
 
 Both additions do the same kind of work: they split a category that was hiding two different
 physics behind one name. That is the test a seventh type would have to pass too — `Damping`
 for Sonic and `Warding` for Magic were considered and rejected, because Sonic is already
-served by `BlastProtection` (both are pressure) and Magic ignores armor by design.
+served by `BLAST` (both are pressure) and Magic ignores armor by design.
 
 ### Consequences to decide before building
 
@@ -481,9 +504,9 @@ means does nothing. Both halves are mechanisms, not flavour.
 | plating | what it physically IS | COUNTERS because | WEAK TO because |
 |---|---|---|---|
 | **HAZMAT** | sealed, filtered, overpressured envelope + insulation | thermochemical harm arrives as an AGENT or a heat flux, and a sealed boundary keeps gas and liquid off skin/optics while insulation slows conduction | **kinetic** — a seal has no mass and no hardness; a bullet passes through a rubber suit as if it were not there |
-| **Composite** | hard ceramic tiles in a ductile matrix | a kinetic penetrator is defeated by SHATTERING or eroding it before it reaches the backing plate — ceramic is harder than the rod and destroys it on contact | **shaped charge** — the jet is already liquid metal at 8 km/s; there is nothing to shatter, which is historically why ERA had to be invented on top of composite |
+| **COMPOSITE** | hard ceramic tiles in a ductile matrix | a kinetic penetrator is defeated by SHATTERING or eroding it before it reaches the backing plate — ceramic is harder than the rod and destroys it on contact | **shaped charge** — the jet is already liquid metal at 8 km/s; there is nothing to shatter, which is historically why ERA had to be invented on top of composite |
 | **Reactive** | explosive sandwich / standoff cage that fires outward | a shaped-charge JET is disrupted by moving plate ACROSS its path, breaking the jet's continuity before it can penetrate | **blast** — ERA bricks are surface-mounted and an HE burst strips or pre-detonates them, leaving the base armour bare |
-| **BlastProtection** | spall liner, V-hull, standoff, energy-absorbing structure | blast is an IMPULSE through the structure; you survive it by spreading it over time and area and by catching the spall the shock throws off the inner wall | **energy** — a liner absorbs mechanical impulse, and a beam delivers none; it deposits heat at a point, which a liner does nothing about |
+| **BLAST** | spall liner, V-hull, standoff, energy-absorbing structure | blast is an IMPULSE through the structure; you survive it by spreading it over time and area and by catching the spall the shock throws off the inner wall | **energy** — a liner absorbs mechanical impulse, and a beam delivers none; it deposits heat at a point, which a liner does nothing about |
 | **REFLECTOR** | polished / ablative optical coating | radiated energy is defeated by TURNING IT AWAY before absorption — reflectivity is the whole mechanism, and ablation carries away what does couple | **thermochemical** — sustained flame and corrosives foul, soot and etch the surface, and a mirror that is no longer mirror-bright is just thin plate |
 
 The cycle closes: `thermo → kinetic → shaped → blast → energy → thermo`. Every link is a
@@ -514,14 +537,14 @@ everyone has something like energy, AP, HE, fire / chemical"*.
 So the honest answer to "find another 1 or 2, but keep it balanced" is: **you can have
 balanced, or you can have five, not both.** Three ways out, in preference order:
 
-1. **Ship FOUR** — HAZMAT / Composite / BlastProtection / REFLECTOR, at 20–27% each. The
-   maintainer's original set, and the measurement says it was right. `Composite` then
+1. **Ship FOUR** — HAZMAT / COMPOSITE / BLAST / REFLECTOR, at 20–27% each. The
+   maintainer's original set, and the measurement says it was right. `COMPOSITE` then
    counters kinetic AND shaped (ceramic and ERA are both anti-armour), which is how a real
    modern tank is built anyway — it carries both at once.
 2. **Keep five and accept `Reactive` as a SPECIALIST** — narrow but deep. It should then be
    cheaper or stronger than the other four, because it answers 6% of the roster.
 3. **Five by splitting kinetic instead** — `Ballistic` (small arms, fragments, blades) vs
-   `Composite` (penetrators, slugs, jets). Both real, but each lands near 12%, which trades
+   `COMPOSITE` (penetrators, slugs, jets). Both real, but each lands near 12%, which trades
    one uneven category for two undersized ones.
 
 **Recommendation: option 1.** The four-way split is what the roster actually is, and it is
@@ -533,7 +556,7 @@ Two families were credited to the wrong counter in the first draft:
 
 * **`Flak` and `MissileAA` were blast-led.** Fragments are METAL MOVING FAST, not
   overpressure — which is exactly why "flak jacket" is a real garment rated in ballistic
-  terms. Both are now kinetic-led (0.60 / 0.55), which moves them to `Composite`.
+  terms. Both are now kinetic-led (0.60 / 0.55), which moves them to `COMPOSITE`.
 * **`Sonic` 0.60 → 0.70 blast.** A pressure wave IS overpressure; the energy share was
   overstated by treating "it is a wave" as "it is radiation".
 
@@ -590,18 +613,177 @@ Measured against `formula.py`, `weapon_efficiency.py` and `target_model.py`.
 
 | # | gap | why it matters | severity |
 |---|---|---|---|
-| **E1** | **`Shield`, `HAZMAT` and `REFLECTOR` are priced at ZERO.** `target_model.ARMORS` is the 16 canonical types only, so `K` never sees them. | Tesla's `Shield: 400` against **51% of the roster** is free, and the S1/Shield rebuild just made that row far more meaningful. HAZMAT covers 11% of actors. This is the biggest hole, and it grew today. | **high** |
-| **E2** | `PhysicalState` (heat / cold / corrosion) is priced at zero — `extract_stats` reads no such field. | ~89 live bindings deliver a real effect for free. Design work exists (`cameo-physical-state-pricing`), the extractor does not. | **high** |
+| **E1** | ✅ **FIXED 2026-08-17 (both halves).** Weapon side: `armor_weights()` now carries a 17th `Shield` row at its measured damage share, and `weighted_versus` iterates the weights instead of `ARMORS`. Unit side: `extract_stats.survivability()` publishes `effective_hp` for actors that SPAWN with a pool. | ⚠ **The "51% of the roster" figure was wrong** — it counted the 1592 actors carrying `Shielded`, but 1318 of those hold an EMPTY capacity behind `shieldgen >= 1`. Only **58** spawn with a pool, so baseline Shield exposure is **1.432%**, and the weapon-side correction is +0.65% (Bullet) to +3.47% (Tesla), not a repricing. The real hole is the unit side: those 58 carry **+57.8% effective HP at zero cost**. Report: `audit_survivability_pricing.py`. | ~~high~~ **done** |
+| **E2** | `PhysicalState` (heat / cold / corrosion) is priced at zero — `extract_stats` contains **0** references to it. | ⚠ **"~89 live bindings" was wrong by 8×. Measured 2026-08-18: 722 bindings on 453 weapons, of which 367 are actually FIRED, carried by 578 armaments** — roughly a quarter of the damaging roster delivers a status meter for free. It is also TWO mechanisms, not one (see below), and the earlier count saw only part of one. Design work exists (`cameo-physical-state-pricing`), the extractor does not. | **high** |
 | **E3** | `IntegrityScale` is priced at zero. | 1233 actors carry the pool; a disable at 50% HP is worth real money. | medium |
-| **E4** | **`K` mixes two units.** `avg_versus` deliberately excludes the `_Percentage` twins, but `k` sums over ALL parts including them — and until W18 the twin's `Versus` IS its magnitude, on a 16-wide window. | The twin's contribution to `K` is on a different scale from the main's. W18 fixes the unit; until then this is a systematic distortion of every %-carrying weapon's price. | **high** |
+| **E4** | ✅ **FIXED 2026-08-17 — `K` was not damage-independent.** The `%`-twin's damage is a share of the TARGET's max HP, so it does not scale with the weapon's flat `Damage` — yet `k` folded it in as `share = ref_hp × pct_damage / 100 / flat_total`, putting `flat_total` in a DENOMINATOR. | Not a mis-price of anything shipped: `effective_per_shot = damage_total × k_context` is exact at the current Damage, and `propose_class_rebalance` never routes through K (it sums flat warheads, twins excluded). It was a **documented wrong recipe** — the inversion `Damage_required = target_dps × eff_reload / (burst × FP × K)` was stated in 6 places and is only correct at λ=1. Fix: the affine split `k_flat_context` + `pct_absolute_context`, `required_damage()`, and `dps_floor` in the ledger. Guard: `audit_k_linearity.py`. | ~~high~~ **done** |
 | **E5** | Upgrades are priced at zero — there is no ΔP report, so a weapon swap is free. | The maintainer has already flagged this; it is the whole upgrade-rebalance prerequisite. | high (deferred by design) |
 | **E6** | Inaccuracy and projectile speed are not priced. | A weapon that misses is worth less than one that does not; `reliability` covers spatial falloff, not aim. | medium |
 | **E7** | `MinRange` is not priced. | A real artillery drawback that costs nothing. | low |
 | **E8** | A5's asymmetry is undocumented in the balance docs: an omitted Versus row and a row of 100 differ for multi-armor actors. | Any future sweep that "fills in missing rows for completeness" would silently rebalance every shielded and hazmat unit. | **trap** |
 | **E9** | 23 macro ladders are non-monotone — blend families average their parents and `finish_blend` never re-imposes the ordering law. | The ordering law is "the most important part"; blends quietly opt out of it. Pre-existing, unrelated to W25. | medium |
-| **E10** | `target_model.ARMORS`' comment says "the 16 canonical armor types + Shield" — the tuple has no Shield. | Stale comment that would mislead exactly the fix E1 needs. | trivial |
+| **E10** | ✅ **FIXED 2026-08-17** alongside E1 — the comment now says what the tuple is (16 CLASS armors) and why `Shield` and the platings are layers with their own weight rather than rungs on the ladder. | It would have misled exactly the fix E1 needed, which is how it got found. | ~~trivial~~ **done** |
 
-**The two I would fix first are E1 and E4**, because both distort prices *systematically*
-rather than for one weapon, and both are now larger than they were a week ago — E1 because
-the Shield ladder went from a near-constant 110..140 to a designed 100..400, and E4 because
-every family now has a normalised main warhead sitting next to an un-normalised twin.
+**E1 and E4 were fixed first** (2026-08-17), because both distorted prices *systematically*
+rather than for one weapon. Both turned out to be a different size than this table first
+claimed, in opposite directions, and the corrections are recorded below rather than quietly
+edited away — a severity estimate that moves by 30x is itself a finding.
+
+### E2 measured — and it is TWO mechanisms, which is why the old count was small
+
+```
+Temperature, damage-SCALED   396 bindings   PhysicalStateName + PhysicalStateScale on an AreaDamage warhead
+Temperature, discrete APPLY  242 bindings   Warhead@X: ApplyPhysicalState + Amount
+Corrosion,   damage-SCALED    84 bindings
+                             ---
+                             722 bindings on 453 weapons — 367 of them FIRED, on 578 armaments
+```
+
+⚠ **Counting only one mechanism is how "~89" happened, and I repeated the mistake mid-measurement**
+— a first pass that looked only for `ApplyPhysicalState` reported 242, which is also wrong. The
+damage-scaled meters (`PhysicalStateScale`, the larger half) ride on the *damage* warhead and
+carry no `ApplyPhysicalState` marker at all.
+
+Two consequences for the fix:
+
+* **The scale units are NOT comparable across mechanisms.** `Amount` is an absolute meter delta
+  per hit (`800`, `1200`, `-30000` for cryo — the sign is the direction, heat vs cold), while
+  `PhysicalStateScale` is a PERCENTAGE of the damage dealt (`100`, `75`). A pricing term has to
+  normalise them before it can add them up.
+* **Only two states are live: Temperature and Corrosion.** Everything else in
+  `PHYSICAL_STATE_SYSTEM.md` (Sonic, ArmorBreach, Hex, Knockback) is design, not shipped content,
+  so E2's scope is exactly these two.
+
+⛔ **What is still owed before the extractor can price it: what a meter is WORTH.** Recording the
+bindings is mechanical and needs no ruling; converting them into a `state_w` term does — the
+existing note (`cameo-physical-state-pricing`) has cryo at 0.75× as an empirical measurement, and
+nothing equivalent exists for heat or corrosion. Claim: `physical_state_fired_weapons`.
+
+### ✅ E2 ANSWERED (2026-08-18) — `tools/balance/physical_state_price.py`
+
+The maintainer's ruling supplies the worth: **1.25× cost, but only for delivery** — *"Cryo seems as
+strong as Fire IF it is able to completely freeze a unit BEFORE it dies"*. Built as
+
+```
+weight     = clamp01( exposure × delivery(ratio, effect curve) / delivery(bar, cryo curve) )
+multiplier = 1 + 0.25 × weight            formula.physical_state_price_multiplier
+```
+
+with all three inputs measured from the resolved tree, never assumed. Full derivation in
+`PHYSICAL_STATE_SYSTEM.md`; the three findings that matter here:
+
+Building it uncovered **three defects that made the axes behave differently** — all fixed in
+`defaults.yaml` on maintainer order (*"the absolute maximum and minimum values are the same!"*):
+
+* ⛔ **D1 — one `Scale` meant two fill rates.** The engine divides by the meter's `range`
+  (`MaxValue − MinValue`), not by the `10000` its own `[Desc]` advertises. `Corrosion` shipped
+  `MinValue: 0`, so its range was half `Temperature`'s and the same Scale filled heat **twice as
+  fast**. Fixed by making Corrosion signed. Corrected count: **223 of 376 bindings** reach full
+  effect, not the 124 or the 1 this document previously carried — both were wrong-formula values;
+* ⛔ **D2 — corrosion delivered nothing below HALF the meter** (`Corroding: LowerValue 10000`)
+  while heat opened at 1%: a 50× gate difference inside one system. Now both open at 1%;
+* ⛔ **D3 — every DoT opened at half strength**, because
+  `ChangesHealthProportionalToPhysicalState` normalises over the full *signed* range with no
+  deviation option. `DamageAtMinimum: -DamageAtMaximum` puts the zero back at a relaxed meter;
+* ⭐ **exposure is now the ONLY thing separating the axes** — `Corrosion` sits on **45.0%** of
+  priced actors against `Temperature`'s 98.6%, so a corrosion weapon caps at **1.165×** where a
+  flame weapon reaches 1.25× despite an identical meter and an identical fill rate. That is what
+  separates Flame from Chemical, and nothing in the price model saw it before.
+
+Result: 190 bindings pay the full 1.25×, 174 partially, 12 nothing; **+15.7%** across 276 actors.
+Guards: `tools/tests/test_physical_state_price.py` (17 tests) + claims
+`meters_filling_before_death`, `corrosion_meter_actors`, `physical_state_fired_weapons`.
+
+⛔ **Still owed by the maintainer:** whether `PhysicalStateScale` stays at **300**. It was chosen
+against the wrong arithmetic — `Scale: 100` already cleared the bar at ratio 0.50 — so 300 is a 3×
+faster fill that the 1.25× ceiling cannot charge for.
+
+### E1, as measured and fixed (2026-08-17)
+
+**The premise was wrong, and checking it was the whole job.** "Tesla's `Shield: 400` is free
+against 51% of the roster" came from counting the 1592 actors whose resolved ruleset contains a
+`Shielded` trait. But `^ShieldedShieldable` (`defaults.yaml:7230`) sets
+`MaxPercentageStrength: 100` together with `InitialStrength: 0`, and the regen sits behind
+`RequiresCondition: shieldgen >= 1`. That is a **capacity**, not a shield: it starts empty and
+stays empty until something fills it.
+
+| bucket | actors | is it durability? | who prices it |
+|---|--:|---|---|
+| spawns with a pool, ungated | **58** | yes | **E1** |
+| empty capacity, needs `shieldgen` | 1318 | no | nobody — correctly |
+| pool behind an upgrade | ~216 | yes, but not baseline | **E5** |
+
+The maintainer's own qualifier decides the split — *"that's only if the unit already has armor
+or shield included in them"*. A shield the unit spawns with is baseline durability; one an
+upgrade grants is not, and charging the base cost for it would overprice every un-upgraded
+unit.
+
+⚠ **`!disabled` is not a gate.** It is the standard not-EMP'd/not-captured guard and is TRUE on
+a healthy unit. An early version of the classifier treated any `RequiresCondition` as a gate,
+which put every Protoss unit (`InitialPercentageStrength: 100`, `RequiresCondition: !disabled`)
+in the "needs an upgrade" bucket and reported that the roster had **no** always-on shields at
+all — contradicting the maintainer, who was right. Only a POSITIVE token gates.
+
+**The two halves, and their true sizes:**
+
+* **Weapon side — small.** Baseline Shield exposure is **1.432%** of all roster raw damage, so
+  adding the row moves a family's `versus` by **+0.65%** (Bullet, `Shield: 165`) to **+3.47%**
+  (Tesla, `Shield: 369`). Correctly ordered — energy families pay most, kinetic least — but a
+  correction, not a repricing. `armor_weights()` takes the share OUT of the class rows so the
+  weights still sum to 1.0 and `versus` stays comparable.
+* **Unit side — the real hole.** Those 58 actors hold **12 872 500 HP that is really 20 316 495
+  effective HP, +57.8%, priced at zero**. Implied price change: median **×1.378**, up to
+  **×1.752**. At a 200% pool the multiplier is **×2.080**, so the maintainer's "count the 200%
+  shield strength like an extra 100% HP" was right to **8%**.
+
+⚠ **The Protoss carry a 150% damage multiplier to compensate for their shields.** Pricing the
+shield is the prerequisite for retiring that multiplier — they have to land in ONE pass, or the
+faction is charged twice for the same thing.
+
+**Why the weapon side stayed on the baseline world.** Counting upgrade-granted shields would
+raise the Shield weight from 1.4% to roughly 30% and reprice every energy weapon. That is a
+design ruling about whether K prices the baseline or the post-upgrade game, so it is left as a
+one-predicate change in `shield_damage_share()` for the maintainer, not decided here.
+
+**Platings need no weight of their own.** Every plating is upgrade-granted, so baseline
+exposure is zero and they belong to E5 with the conditional shields. Their columns are also
+pinned to a common mean by construction (§F), so once E5 does price them, a plating changes
+*where* damage lands, not how much on average.
+
+### E4, as measured and fixed (2026-08-17)
+
+Two things had to be separated that the single `k` conflated, and getting the severity right
+mattered as much as the fix:
+
+* **`k` as a MEASUREMENT is sound.** `effective_per_shot = damage_total × k_context`
+  reproduces the truth exactly at the weapon's current Damage, and the identity
+  `k == k_flat + pct_absolute / flat_total` (checked on all 2016 concrete weapons, L2) shows
+  the new split is a decomposition of the published number, not a second opinion. **No
+  shipped price was wrong.** The `_Percentage`-excluding `spread_damage_sum` also keeps the
+  live `propose_class_rebalance` inversion clear of K entirely.
+* **`k` as a SHAPE COEFFICIENT was false**, and that is what six documents told the reader
+  to invert. Measured on the worst case, `AnthraxCloudLarge` (twin = 75% of output):
+
+  | want | old prescription | old actually delivers | error | new |
+  |--:|--:|--:|--:|--:|
+  | 2.0× | 354 | 1225 vs 1961 asked | **−37.5%** | 887 → exact |
+  | 1.5× | 266 | 1103 vs 1471 asked | −25.0% | 532 → exact |
+  | 1.0× | 177 | 981 vs 981 asked | 0.0% | 177 → exact |
+  | 0.6× | 106 | 883 vs 588 asked | **+50.0%** | UNREACHABLE |
+  | 0.4× | 71 | 834 vs 392 asked | **+112.6%** | UNREACHABLE |
+
+  The old form is exact **only at λ=1**, its own fixed point — which is exactly why nothing
+  caught it: every check that re-derived a weapon's current Damage passed.
+
+**The `%`-twin is a DPS FLOOR.** This fell out of the fix and is a design fact, not a bug: a
+weapon delivers `pct_absolute_context` at `Damage: 0`, so lowering flat Damage can never
+price it below that. 52 weapons have a floor ≥25% of output. `required_damage()` returns
+`None` there instead of a positive number, and `dps_floor` is now published per weapon so the
+balance pass sees the bound before it prescribes an impossible target. To price one of these
+lower, the **twin** must shrink.
+
+**What this leaves for W18.** W18 rebases the twin's `Versus` to basis points (`×5`,
+`PercentageDenominator: 10000`). That changes the twin's magnitude and therefore every
+`pct_absolute` — but not the SHAPE of the model, because the affine split already puts the
+twin on the correct side of the equation. Re-run `extract_stats` after W18 and the floors
+move; nothing needs re-deriving.
