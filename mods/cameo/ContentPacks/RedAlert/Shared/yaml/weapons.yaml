@@ -969,7 +969,6 @@ ParaBomb:
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Heavy
 	Inherits@3: ^Effect_Flame_Heavy
-	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 8
 	Range: 5000
 	Report: chute1.aud
@@ -1923,7 +1922,6 @@ Stinger:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
-	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 27
 	Range: 8000
 	Report: missile6.aud

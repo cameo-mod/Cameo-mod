@@ -617,7 +617,6 @@ TSDestroyerMissiles:
 		Damage: 2
 
 TSMammothTusk2:
-	Inherits@glow: ^ImpactGlow
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
@@ -646,7 +645,6 @@ TSMammothTusk2:
 		Explosions: small_building
 
 TSMammothTusk2II_AA:
-	Inherits@glow: ^ImpactGlow
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy

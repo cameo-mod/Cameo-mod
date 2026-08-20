@@ -410,7 +410,6 @@ MammothMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
-	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 68
 	Burst: 2
 	BurstDelays: 12
@@ -589,7 +588,6 @@ A10CarrierMissiles_AA:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
-	Inherits@glow: ^ImpactGlow
 	ValidTargets: Air
 	ReloadDelay: 100
 	Range: 5000
@@ -1263,7 +1261,6 @@ MammothTank3Missiles:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
-	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 98
 	Burst: 2
 	BurstDelays: 12
@@ -1662,7 +1659,6 @@ FirehawkMissiles_AA:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileAP_Heavy
-	Inherits@glow: ^ImpactGlow
 	ValidTargets: Air
 	ReloadDelay: 50
 	Range: 12500
