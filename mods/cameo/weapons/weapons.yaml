@@ -9739,7 +9739,6 @@ DefuseKit:
 # tools/audit/check_effect_audio.py guards the mappings changed by those splits.
 ####################################################################
 ^Effect_Arrow_Light:
-	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -9760,7 +9759,6 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Arrow_Medium:
-	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -9781,7 +9779,6 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Arrow_Heavy:
-	Inherits@glow: ^ImpactGlow
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -9802,7 +9799,6 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Bullet_Light:
-	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Effect: CreateEffect
 		Explosions: piff
 		ValidTargets: Ground, Ship, Air
@@ -9820,7 +9816,6 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Bullet_Medium:
-	Inherits@glow: ^ImpactGlow_Medium
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ValidTargets: Ground, Ship, Air
@@ -9840,7 +9835,6 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Bullet_Heavy:
-	Inherits@glow: ^ImpactGlow
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -10981,7 +10975,6 @@ DefuseKit:
 		ValidTargets: Shielded
 
 ^Effect_Sniper_Light:
-	Inherits@glow: ^ImpactGlow_Light
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ValidTargets: Ground, Ship, Air
