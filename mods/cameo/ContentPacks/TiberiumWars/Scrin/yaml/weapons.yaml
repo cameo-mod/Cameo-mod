@@ -1,0 +1,201 @@
+# Initial independently-authored Scrin gameplay weapons. These deliberately use
+# engine-native beam/warhead primitives so the first playable faction pass does
+# not depend on another mod's art or effects.
+
+^ScrinBeamBase:
+	ReloadDelay: 25
+	Range: 5c0
+	TargetActorCenter: true
+	ValidTargets: Ground, Water
+	Projectile: LaserZap
+		Width: 40
+		Duration: 4
+		Color: 44FF88
+		ZOffset: 2047
+		SecondaryBeam: true
+		SecondaryBeamWidth: 16
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 22443388
+	Warhead@1Dam: SpreadDamage
+		Spread: 42
+		Damage: 2500
+		Versus:
+			None: 100
+			Wood: 80
+			Light: 85
+			Medium: 65
+			Heavy: 45
+			Concrete: 35
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+		ValidTargets: Ground, Water
+
+ScrinLightBeam:
+	Inherits: ^ScrinBeamBase
+
+ScrinLightBeamAA:
+	Inherits: ^ScrinBeamBase
+	ValidTargets: Ground, Water, Air
+	Warhead@1Dam:
+		ValidTargets: Ground, Water, Air
+
+ScrinShardBeam:
+	Inherits: ^ScrinBeamBase
+	ReloadDelay: 36
+	Burst: 3
+	BurstDelays: 4
+	Range: 6c0
+	Projectile:
+		Width: 52
+		Color: 88FF44
+	Warhead@1Dam:
+		Damage: 2200
+		Versus:
+			None: 125
+			Wood: 100
+			Light: 90
+			Medium: 55
+			Heavy: 35
+			Concrete: 25
+
+ScrinHeavyBeam:
+	Inherits: ^ScrinBeamBase
+	ReloadDelay: 65
+	Range: 7c0
+	Projectile:
+		Width: 82
+		Duration: 7
+		Color: 66FFCC
+		SecondaryBeamWidth: 28
+	Warhead@1Dam:
+		Spread: 64
+		Damage: 11000
+		Versus:
+			None: 45
+			Wood: 70
+			Light: 90
+			Medium: 115
+			Heavy: 135
+			Concrete: 110
+
+ScrinAcidBeam:
+	Inherits: ^ScrinBeamBase
+	ReloadDelay: 30
+	Range: 5c512
+	Projectile:
+		Width: 68
+		Duration: 8
+		Color: 33FF66
+	Warhead@1Dam:
+		Spread: 96
+		Damage: 4200
+		Versus:
+			None: 125
+			Wood: 115
+			Light: 95
+			Medium: 65
+			Heavy: 45
+			Concrete: 35
+
+ScrinAirZap:
+	Inherits: ^ScrinBeamBase
+	ReloadDelay: 28
+	Range: 6c0
+	ValidTargets: Ground, Water, Air
+	Projectile:
+		Width: 54
+		Color: 66AAFF
+	Warhead@1Dam:
+		Damage: 4200
+		ValidTargets: Ground, Water, Air
+
+ScrinCapitalBeam:
+	Inherits: ^ScrinBeamBase
+	ReloadDelay: 75
+	Range: 8c0
+	ValidTargets: Ground, Water, Air
+	Projectile:
+		Width: 96
+		Duration: 10
+		Color: 8855FF
+		SecondaryBeamWidth: 36
+	Warhead@1Dam:
+		Spread: 128
+		Damage: 16000
+		Versus:
+			None: 70
+			Wood: 100
+			Light: 110
+			Medium: 120
+			Heavy: 130
+			Concrete: 100
+		ValidTargets: Ground, Water, Air
+
+ScrinMothershipBeam:
+	Inherits: ScrinCapitalBeam
+	ReloadDelay: 160
+	Range: 10c0
+	Projectile:
+		Width: 150
+		Duration: 16
+		Color: AA66FF
+		SecondaryBeamWidth: 60
+	Warhead@1Dam:
+		Spread: 384
+		Damage: 42000
+
+ScrinCarrierLaunch:
+	ReloadDelay: 100
+	Range: 9c0
+	ValidTargets: Ground, Water, Air
+	Projectile: InstantHit
+	Warhead@Dummy: Dummy
+
+ScrinMindControl:
+	ReloadDelay: 75
+	Range: 7c0
+	TargetActorCenter: true
+	ValidTargets: MindControl
+	InvalidTargets: Hero, MCImmune
+	Projectile: LaserZap
+		Width: 45
+		Duration: 10
+		Color: AA55FF
+		ZOffset: 2047
+	Warhead@1Dam: TargetDamage
+		Damage: 0
+
+ScrinRepairBeam:
+	Inherits: ^RepairWeapon
+	ReloadDelay: 30
+	Range: 5c512
+	ValidTargets: SpecialRepair, Repairing, Repair, lockdowned, plagued, ivanattached
+	Projectile: LaserZap
+		Width: 50
+		Duration: 8
+		Color: 55FF99
+		ZOffset: 2047
+	Warhead@RepairWeapon: SpreadDamage
+		Damage: -1400
+
+ScrinDefenseBeam:
+	Inherits: ScrinLightBeamAA
+	ReloadDelay: 22
+	Range: 7c0
+	Warhead@1Dam:
+		Damage: 5200
+
+ScrinDefenseHeavyBeam:
+	Inherits: ScrinHeavyBeam
+	ReloadDelay: 55
+	Range: 9c0
+	ValidTargets: Ground, Water, Air
+	Warhead@1Dam:
+		Damage: 12500
+		ValidTargets: Ground, Water, Air
+
+ScrinStormColumnBeam:
+	Inherits: ScrinCapitalBeam
+	ReloadDelay: 45
+	Range: 10c0
+	Warhead@1Dam:
+		Damage: 18000

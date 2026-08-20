@@ -1,8 +1,28 @@
 World:
 	FactionCA@scrin:
-		Selectable: false
+		Selectable: true
 		Name: Scrin
 		InternalName: scrin
 		Game: Tiberium Wars
 		Side: Scrin
 		Description: faction_scrin.description
+
+	StartingUnits@mcvonlyscrin:
+		Class: none
+		ClassName: MCV Only
+		Factions: scrin
+		BaseActor: scrin_drone_ship
+
+	StartingUnits@lightscrin:
+		Class: light
+		ClassName: Light Support
+		Factions: scrin
+		BaseActor: scrin_drone_ship
+		SupportActors: scrin_disintegrator,scrin_disintegrator,scrin_disintegrator,scrin_disintegrator,scrin_assimilator,scrin_seeker
+
+	StartingUnits@heavyscrin:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: scrin
+		BaseActor: scrin_drone_ship
+		SupportActors: scrin_disintegrator,scrin_disintegrator,scrin_disintegrator,scrin_assimilator,scrin_gun_walker,scrin_seeker,scrin_devourer_tank

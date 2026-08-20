@@ -3,6 +3,7 @@
 
 ^ScrinInfantryVisual:
 	Inherits: ^DefaultInfantry
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Health:
 		HP: 10000
 	Mobile:
@@ -18,13 +19,62 @@ scrin_disintegrator:
 	Inherits: ^ScrinInfantryVisual
 	Tooltip:
 		Name: actor_scrin_disintegrator.name
+	Buildable:
+		Queue: ScrinInfantry
+		BuildPaletteOrder: 10
+		Prerequisites: ~scrin_portal
+		Icon: stand
+		IconPalette: scrin_disintegrator_player
+		IconPaletteIsPlayerPalette: true
+		Description: Basic ranged infantry.
+	Valued:
+		Cost: 200
+	Health:
+		HP: 7000
+	Armament:
+		Weapon: ScrinLightBeam
+	AttackFrontal:
+		FacingTolerance: 64
 	RenderSprites:
 		PlayerPalette: scrin_disintegrator_player
 
 scrin_assimilator:
 	Inherits: ^ScrinInfantryVisual
+	Inherits@engineer: ^EngineerDefaultWeapons
+	Inherits@isengineer: ^IsEngineer
 	Tooltip:
 		Name: actor_scrin_assimilator.name
+	Buildable:
+		Queue: ScrinInfantry
+		BuildPaletteOrder: 20
+		Prerequisites: ~scrin_portal
+		Icon: stand
+		IconPalette: scrin_assimilator_player
+		IconPaletteIsPlayerPalette: true
+		Description: Captures and repairs structures.
+	Valued:
+		Cost: 500
+	Health:
+		HP: 5000
+	Passenger:
+		CustomPipType: engineer
+	Garrisoner:
+		CustomPipType: engineer
+	InstantlyRepairs:
+		Types: building
+		EnterBehaviour: Dispose
+	InstantlyRepairs@Tech:
+		Types: tech
+		EnterBehaviour: Dispose
+	RepairsBridges:
+		EnterBehaviour: Exit
+	CaptureManager:
+	Captures:
+		CaptureTypes: building, defense, tech
+		PlayerExperience: 500
+		ConsumedByCapture: true
+	Selectable:
+		Priority: 5
 	RenderSprites:
 		PlayerPalette: scrin_assimilator_player
 
@@ -32,6 +82,22 @@ scrin_shock_trooper:
 	Inherits: ^ScrinInfantryVisual
 	Tooltip:
 		Name: actor_scrin_shock_trooper.name
+	Buildable:
+		Queue: ScrinInfantry
+		BuildPaletteOrder: 30
+		Prerequisites: ~scrin_portal, scrin_nerve_center
+		Icon: stand
+		IconPalette: scrin_shock_trooper_player
+		IconPaletteIsPlayerPalette: true
+		Description: Heavy anti-vehicle infantry.
+	Valued:
+		Cost: 600
+	Health:
+		HP: 26000
+	Armament:
+		Weapon: ScrinHeavyBeam
+	AttackFrontal:
+		FacingTolerance: 64
 	RenderSprites:
 		PlayerPalette: scrin_shock_trooper_player
 
@@ -39,6 +105,33 @@ scrin_shock_trooper_blink_pack:
 	Inherits: ^ScrinInfantryVisual
 	Tooltip:
 		Name: actor_scrin_shock_trooper_blink_pack.name
+	Buildable:
+		Queue: ScrinInfantry
+		BuildPaletteOrder: 40
+		Prerequisites: ~scrin_portal, scrin_stasis_chamber
+		Icon: stand
+		IconPalette: scrin_shock_trooper_blink_pack_player
+		IconPaletteIsPlayerPalette: true
+		Description: Elite Shock Trooper equipped for rapid repositioning.
+	Valued:
+		Cost: 900
+	Health:
+		HP: 32000
+	Mobile:
+		Speed: 65
+	Armament:
+		Weapon: ScrinHeavyBeam
+	AttackFrontal:
+		FacingTolerance: 64
+	RA2PortableChrono:
+		TeleportType: PortableChrono
+		ChargeDelay: 100
+		MaxTeleportDistance: 12
+		PauseOnCondition: disabled
+	ExplodeWeaponTeleportEffect:
+		TeleportType: PortableChrono
+		ImpactWeapon: PortableChronoImpact
+		TeleportWeapon: PortableChronoTeleport
 	RenderSprites:
 		PlayerPalette: scrin_shock_trooper_blink_pack_player
 
@@ -46,6 +139,24 @@ scrin_ravager:
 	Inherits: ^ScrinInfantryVisual
 	Tooltip:
 		Name: actor_scrin_ravager.name
+	Buildable:
+		Queue: ScrinInfantry
+		BuildPaletteOrder: 50
+		Prerequisites: ~scrin_portal, scrin_nerve_center
+		Icon: stand
+		IconPalette: scrin_ravager_player
+		IconPaletteIsPlayerPalette: true
+		Description: Rapid-firing Tiberium shard infantry.
+	Valued:
+		Cost: 750
+	Health:
+		HP: 22000
+	Mobile:
+		Speed: 60
+	Armament:
+		Weapon: ScrinShardBeam
+	AttackFrontal:
+		FacingTolerance: 64
 	RenderSprites:
 		PlayerPalette: scrin_ravager_player
 
@@ -53,6 +164,31 @@ scrin_mastermind:
 	Inherits: ^ScrinInfantryVisual
 	Tooltip:
 		Name: actor_scrin_mastermind.name
+	Buildable:
+		Queue: ScrinInfantry
+		BuildPaletteOrder: 60
+		Prerequisites: ~scrin_portal, scrin_stasis_chamber
+		BuildLimit: 1
+		Icon: stand
+		IconPalette: scrin_mastermind_player
+		IconPaletteIsPlayerPalette: true
+		Description: Advanced battlefield control infantry.
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 20000
+	Armament@CONTROL:
+		Name: primary
+		Weapon: ScrinMindControl
+	AttackFrontal:
+		FacingTolerance: 128
+	MindControllerCA:
+		ArmamentNames: primary
+		ExperienceFromControl: 100
+		TicksToControl: 30
+		Capacity: 1
+		RequiresCondition: !disabled
+		ControllingCondition: controlling
 	RenderSprites:
 		PlayerPalette: scrin_mastermind_player
 
@@ -60,5 +196,32 @@ scrin_prodigy:
 	Inherits: ^ScrinInfantryVisual
 	Tooltip:
 		Name: actor_scrin_prodigy.name
+	Buildable:
+		Queue: ScrinInfantry
+		BuildPaletteOrder: 70
+		Prerequisites: ~scrin_portal, scrin_stasis_chamber, scrin_technology_assembler
+		BuildLimit: 1
+		Icon: stand
+		IconPalette: scrin_prodigy_player
+		IconPaletteIsPlayerPalette: true
+		Description: Elite Scrin command organism.
+	Valued:
+		Cost: 2500
+	Health:
+		HP: 40000
+	Mobile:
+		Speed: 70
+	Armament@CONTROL:
+		Name: primary
+		Weapon: ScrinMindControl
+	AttackFrontal:
+		FacingTolerance: 128
+	MindControllerCA:
+		ArmamentNames: primary
+		ExperienceFromControl: 150
+		TicksToControl: 20
+		Capacity: 2
+		RequiresCondition: !disabled
+		ControllingCondition: controlling
 	RenderSprites:
 		PlayerPalette: scrin_prodigy_player

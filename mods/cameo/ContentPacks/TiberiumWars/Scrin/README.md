@@ -1,9 +1,10 @@
 # Scrin content pack
 
-This is a map/editor-ready visual foundation for the future Scrin faction, now
+This content pack now provides an initial playable Scrin faction foundation,
 covering its approved structures, defenses, Eradicator Hexapod, and initial
-infantry, vehicle, and aircraft rosters. It is not a playable roster yet, and the faction
-remains hidden from the lobby. The map/editor-ready Drone Ship now lands and
+infantry, vehicle, and aircraft rosters. The faction is selectable in the lobby,
+starts from a Drone Ship, and follows the production graph documented below.
+The Drone Ship lands and
 transforms into the Drone Platform, which plays its genuine deployment cycle.
 
 The pack contains 51 approved map/editor-ready actors. All sheets pair their
@@ -36,16 +37,16 @@ faction-neutral effect for future structures, but Reactor no longer uses it.
 
 All Scrin structures inherit the standard base-building placement, repair,
 capture, and sale lifecycle. Their shared placement sound is the authentic
-Tiberium Wars `ALI_Building_Placed` asset (`ABBuild_placea`). Reactor remains
-the only newly buildable structure until the planned production graph below is
-wired and balanced. Materialization and reverse-sale behavior still require a
-final in-game review.
+Tiberium Wars `ALI_Building_Placed` asset (`ABBuild_placea`). The complete
+initial structure roster now uses this lifecycle. Production, combat, economy,
+and upgrade values are a playable baseline; final balance remains deferred until
+the combined in-game review.
 
 The earlier Tiberium-creep visual pilot was rejected and is deliberately not
 part of this checkpoint. A replacement ground-field concept remains deferred
 until it has a stronger visual direction.
 
-## Planned production graph
+## Production graph
 
 - Drone Platform initially constructs Reactor and Extractor.
 - Reactor unlocks Portal.
@@ -59,7 +60,12 @@ until it has a stronger visual direction.
 - Warp Chasm produces all Scrin vehicles including Eradicator Hexapod, plus
   Devastator Warship, Planetary Assault Carrier, Mothership, and the remaining
   Scrin aircraft roster.
-- Gravity Stabilizer produces Stormriders.
+- Gravity Stabilizer produces Stormriders and Drone Ships.
+
+The Extractor deploys a free Harvester, all standard producers have explicit
+unit exits and rally points, and the Foundry provides an additional construction
+queue. Nerve Center researches Fusion Reactor: existing Reactors immediately
+transform while newly constructed power plants use the Fusion Reactor actor.
 
 The Eradicator Hexapod uses the approved AIDA frame 65 static pose and the
 corrected WLKA cycle sampled to 12 frames across 32 facings. Its indexed source
@@ -89,15 +95,16 @@ The initial aircraft roster contains the Drone Ship, Stormrider, Devastator
 Warship, Planetary Assault Carrier, Invader Fighter, and Mothership. Their
 approved 32-facing spacecraft renders use fixed authored pivots, native ground
 shadows, and bright player-color ramps. The PAC idle visual carries its full
-complement of eight docked Invader Fighters. Carrier launch/recovery behavior
-remains deferred.
+complement of eight docked Invader Fighters. The initial gameplay layer spawns,
+launches, repairs, replenishes, and recovers the same eight Invader Fighter
+actors through the shared carrier system.
 
-The actors currently expose only the shared building behavior, turret rigs,
-and provisional unit locomotion needed by maps and the editor. Production roles,
-weapons, costs, power, prerequisites, construction animations, destruction art,
-AI, and balance are intentionally deferred. Apart from the reviewed Drone
-Platform 3x3 cross footprint (`_x_ / xxx / _x_`), the new gameplay footprints
-remain provisional scaffolding.
+The actors now expose initial production roles, costs, health, weapons, power,
+prerequisites, construction and reverse-sale behavior, economy flow, engineer
+capture/repair, Repair Drone support, carrier fighters, and the Fusion Reactor
+upgrade. Canonical special abilities, destruction art, AI tuning, and competitive
+balance remain later work. The reviewed footprints and visual pivots remain
+unchanged by this gameplay pass.
 
 The sprites were independently extracted and rendered from the official
 *Command & Conquer 3: Tiberium Wars* and *Kane's Wrath* assets. The source

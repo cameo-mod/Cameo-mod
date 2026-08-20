@@ -66,6 +66,28 @@ scrin_fusion_reactor:
 		ShadowZOffset: -5
 		Offset: 2.000,3.000
 		Scale: 0.60
+	make:
+		Filename: scrin_sprites|scrin_fusion_reactor_make_indexed8.png
+		Start: 0
+		Length: 56
+		Tick: 33
+		ShadowStart: 56
+		ShadowZOffset: -5
+		Offset: 2.000,3.000
+		Scale: 0.60
+	aurora-make:
+		Filename: scrin_sprites|scrin_building_aurora.png
+		Start: 0
+		Length: 28
+		Tick: 66
+		Offset: 2.000,-93.000
+		Scale: 0.60
+		ZOffset: 1024
+		IgnoreWorldTint: true
+	icon:
+		Filename: scrin_sprites|scrin_reactor_icon.png
+		Start: 0
+		Length: 1
 
 scrin_extractor:
 	idle:
