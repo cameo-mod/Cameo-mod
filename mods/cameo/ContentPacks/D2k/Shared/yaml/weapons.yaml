@@ -61,7 +61,6 @@
 		ExplosionPalette: effect75alpha
 		ImpactActors: false
 		ValidTargets: Ground, Air
-	-Warhead@EffectAir:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 750
 
@@ -78,7 +77,41 @@
 		ExplosionPalette: effect75alpha
 		ImpactActors: false
 		ValidTargets: Ground, Air
-	-Warhead@EffectAir:
+	Warhead@Concrete: DamagesConcrete
+		Damage: 240
+
+## D2K per-game EFFECT templates for the AP missile/rocket family (legacy ^D2KRocket/^D2KMissile remain AP).
+
+^Effect_MissileAP_Heavy_D2K:
+	Inherits: ^Effect_MissileAP_Heavy
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_explosion
+		ImpactSounds: EXPLSML1.WAV
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+		ValidTargets: Ground, Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 750
+
+^Effect_MissileAP_Heavy_D2K_Rocket:
+	Inherits: ^Effect_MissileAP_Heavy
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_tiny_explosion
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+		ValidTargets: Ground, Air
 	Warhead@Concrete: DamagesConcrete
 		Damage: 240
 
@@ -107,3 +140,23 @@
 		ValidTargets: Ground, Ship
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1000
+
+## D2K heavy missile/rocket intermediates.
+## These keep the per-weapon defaults (ReloadDelay, Range, Report) while pulling
+## the projectile and effect layers from the D2K Shared templates above.
+
+^D2KRocket:
+	Inherits@wh: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy_D2K_Rocket
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket
+	ReloadDelay: 50
+	Range: 5000
+	Report: ROCKET1.WAV
+
+^D2KMissile:
+	Inherits: ^D2KRocket
+	Inherits@proj: ^Projectile_Missile_Heavy_D2K
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K
+	ReloadDelay: 60
+	Range: 5500
+	MinRange: 1100

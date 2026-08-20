@@ -276,7 +276,9 @@ D2K heavy missile/rocket HE 3-way split: created `ContentPacks/D2k/Shared/yaml/w
 with the per-game `^Projectile_Missile_Heavy_D2K` and `^Effect_MissileHE_Heavy_D2K` layers,
 reparented the six D2K rocket cluster weapons to `^Warhead_MissileHE_Heavy`, and boot-gated;
 followed by `^D2K_Cannon` repointed to the per-game `^Projectile_Shell_Medium_D2K` and
-`^Effect_CannonHE_Medium_D2K` layers (preserving the d2k_120mm and d2k_small_napalm visuals).
+`^Effect_CannonHE_Medium_D2K` layers (preserving the d2k_120mm and d2k_small_napalm visuals);
+then `^D2KRocket` and `^D2KMissile` migrated into the same D2K Shared pack as AP 3-way
+split intermediates using `^Effect_MissileAP_Heavy_D2K` / `^Effect_MissileAP_Heavy_D2K_Rocket`.
 
 **RESUME — Phase 2 remaining families** (one commit each: `--old <names>` → self-check → boot → commit):
 `LightMissile,MediumMissile,HeavyMissile` + `FlakWeapon,HeavyAAWeapon` → then

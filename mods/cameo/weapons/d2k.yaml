@@ -271,58 +271,6 @@ D2K_SiegeQuad:
 	Projectile: Bullet
 		Speed: 228
 
-^D2KRocket:
-	Inherits@wh: ^Warhead_MissileAP_Heavy
-	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileAP_Heavy
-	ReloadDelay: 50
-	Range: 5000
-	Report: ROCKET1.WAV
-	Projectile: Bullet
-		Blockable: false
-		Speed: 500
-		Inaccuracy: 25
-		InaccuracyType: PerCellIncrement
-		Image: d2k_RPG
-		Palette: d2keffect
-		TrailImage: bazooka_trail2
-		TrailPalette: effect75alpha
-		TrailInterval: 1
-		LaunchAngle: 125
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: SandCrater, RockCrater
-		InvalidTargets: Vehicle, Structure
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_tiny_explosion
-		ImpactActors: false
-		ValidTargets: Ground, Air
-		ExplosionPalette: effect75alpha
-	Warhead@Concrete: DamagesConcrete
-		Damage: 240
-
-^D2KMissile:
-	Inherits: ^D2KRocket
-	ReloadDelay: 60
-	Range: 5500
-	MinRange: 1100
-	Projectile: Missile
-		Shadow: true
-		HorizontalRateOfTurn: 80
-		CruiseAltitude: 1000
-		MinimumLaunchAngle: 64
-		Image: d2k_missile2
-		Palette: d2keffect
-		TrailImage: large_trail
-		Speed: 666
-		Acceleration: 3
-		RangeLimit: 33333
-	Warhead@Concrete: DamagesConcrete
-		Damage: 750
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_small_explosion
-		ImpactSounds: EXPLSML1.WAV
-		ExplosionPalette: effect75alpha
-
 D2K_Bazooka:
 	Inherits: ^D2KRocket
 	Range: 4608
