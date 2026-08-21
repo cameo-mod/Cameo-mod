@@ -786,9 +786,10 @@ AsianChemical_elite:
 	BurstDelays: 3
 
 AsianChemicalBombs:
-	Inherits: ^HeavyChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@2: ^RA2MediumCannon
 	ValidTargets: Ground, Water
+	InvalidTargets: wall
 	ReloadDelay: 8
 	Report: vflaat1a.wav, vflaat1b.wav
 	Range: 3000
@@ -808,7 +809,7 @@ AsianChemicalBombs:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		TrailInterval: 1
-	Warhead@HeavyChemicalWeapon: AreaDamage
+	Warhead@Chemical_Heavy:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -816,7 +817,7 @@ AsianChemicalBombs:
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
+	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 		PhysicalStateName: Corrosion
@@ -831,6 +832,9 @@ AsianChemicalBombs:
 		Explosions: aa_plasgreeexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 150

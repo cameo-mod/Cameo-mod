@@ -1038,16 +1038,16 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "525",
-        "tag": "HeavyChemicalWeaponPercentage",
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "Chemical_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
@@ -1066,16 +1066,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "3000",
       "reloaddelay": "8",
       "slot": "Armament@Secondary",
       "versus_templates": [
-       "^HeavyChemicalWeapon",
+       "^Warhead_Chemical_Heavy",
        "^RA2MediumCannon"
       ],
       "warheads": [
+       "^Warhead_Chemical_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "AsianChemicalBombs",
