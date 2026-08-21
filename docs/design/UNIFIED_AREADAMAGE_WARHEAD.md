@@ -144,18 +144,43 @@ unrelated to main damage (sampled ratios `oHMG` 1:1, `GoliathRockets_AA` 40:1, `
 `SCUDNUKE` 300:1), so routing full damage at 1:1 makes slabs melt unless `BuildableTerrainLayer`'s
 per-cell health is raised to match.
 
-**MEASURED CALIBRATION — 1495 weapons carry both a main and a concrete warhead:**
+### ⭐ RULED: `BuildableTerrainLayer.MaxStrength` 9000 → **1 800 000** (200×)
 
-    effective main damage : current concrete damage
+`MaxStrength` is currently the engine default 9000 — `mods/cameo/rules/world.yaml:1056` declares
+`BuildableTerrainLayer:` with no override at all. Maintainer 2026-08-19: *"make it a nice 200x"*.
+
+**Two measurements, and they disagree — which is why 200 is better than either.**
+
+    effective main damage : current concrete damage      (1495 weapons carrying both)
         lower quartile     68 : 1
-        MEDIAN            166 : 1        <- raise slab health by ~166x
+        MEDIAN            166 : 1
         upper quartile    352 : 1
+        ratio of medians  144 : 1        <- 14 400 effective main vs 100 concrete
 
-So `BuildableTerrainLayer`'s per-cell health should rise by **≈166×** for a typical shot to do what it
-does today, then be tuned from play. The quartile spread (68…352) is the noise the current per-weapon
-values encode — after the fold it collapses into one honest number, and weapons stop disagreeing about
-what "damaging concrete" means. That is a balance change and needs the pipeline, but it is now ONE
-number (slab health) instead of 131 scattered ones, which is the whole point.
+Median-of-ratios (166) and ratio-of-medians (144) are both defensible and neither is the whole story,
+because **the fold also widens the attacker pool**:
+
+| | weapons |
+|---|--:|
+| damage slabs TODAY (carry a concrete warhead) | 1504 |
+| have a `Concrete` Versus row, so damage slabs AFTER | **1987** |
+| **gain the ability** | **+483** (×1.32) |
+
+So per-shot toughness and the number of things shooting must be weighed together:
+
+    slab HP     9 000 (today)   ->  median shots to destroy   90
+    slab HP 1 800 000 (200x)    ->  median shots to destroy  125     = 1.39x tougher per shot
+    but 1.32x more weapons can hurt concrete
+    NET in aggregate  1.39 / 1.32  =  ~1.05x            <- within 5% of today
+
+**200× is the right number, and for a better reason than roundness**: it holds aggregate parity once
+the 483 newly-capable weapons are counted, which a pure per-shot calibration (144–166×) would miss and
+end up making concrete *softer* overall. The quartile spread 68…352 is the noise the 131 hand-set
+values encode; after the fold it collapses into one honest number and weapons stop disagreeing about
+what "damaging concrete" means.
+
+⚠ Still a balance change: `world.yaml` + boot gate + a play check on D2k concrete-heavy maps, where
+slab durability is a real strategic layer rather than a detail.
 
 **R2 — ~106 pairs do not use the 0.50 spread rule** (56 at 1.00, 28 at 10.00, 9 at 5.00) and **45 use
 a different Falloff.** They need either an explicit per-weapon escape hatch or individual conversion.
