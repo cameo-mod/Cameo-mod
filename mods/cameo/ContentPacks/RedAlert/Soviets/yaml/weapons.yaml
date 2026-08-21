@@ -964,141 +964,53 @@ SCUDTesla:
 		AimTargetStances: Enemy, Neutral
 
 SCUDNUKE:
-	Inherits: ^HeavyMissile
-	Inherits@2: ^MediumMissile
-	Inherits@3: ^LightMissile
-	Inherits@4: ^HeavyBomb
-	Inherits@5: ^ShrapnelWeapon
-	Inherits@6: ^Grenade
-	Inherits@7: ^HeavyChemicalWeapon
-	Inherits@8: ^MediumChemicalWeapon
-	Inherits@9: ^LightChemicalWeapon
-	Inherits@10: ^HeavyFlameWeapon
-	Inherits@11: ^MediumFlameWeapon
-	Inherits@12: ^LightFlameWeapon
-	Inherits@13: ^TankDestroyerCannon
-	Inherits@14: ^FlakWeapon
-	Inherits@15: ^NuclearWarhead
+	Inherits@wh: ^Warhead_Nuclear_Super
+	Inherits@fx: ^Effect_Nuclear_Super
 	ReloadDelay: 158
 	Range: 12550
 	MinRange: 2510
 	Report: missile1.aud
 	Projectile: Bullet
 		Speed: 240
+		Arm: 0
 		Blockable: false
-		TrailImage: smokey
-		TrailDelay: 2
-		TrailInterval: 1
+		AllowSnapping: true
 		Inaccuracy: 240
 		Image: V2
 		Shadow: True
+		HorizontalRateOfTurn: 40
+		VerticalRateOfTurn: 40
+		TrailImage: smokey
+		TrailInterval: 1
+		ContrailLength: 10
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		CloseEnough: 600
+		Acceleration: 4
+		HomingActivationDelay: 1
+		RangeLimit: 20000
+		PointDefenseTypes: Missile
 		LaunchAngle: 80
-	Warhead@HeavyMissile: SpreadDamage
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		TrailDelay: 2
+	Warhead@Nuclear_Super: AreaDamage
+		ValidRelationships: Enemy
+		AffectsParent: true
 		Damage: 20000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		MaxRadius: 9000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
+		ValidRelationships: Enemy
+		AffectsParent: true
 		Damage: 10
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 20000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 10
-	Warhead@LightMissile: SpreadDamage
-		Damage: 20000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 10
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 20000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		Damage: 10
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 20000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 10
-	Warhead@Grenade: SpreadDamage
-		Damage: 20000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 10000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 10
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 10
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 10
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 10
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 10
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 10
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 10
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 20000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		Damage: 10
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 20000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 10
-	Warhead@NuclearWarhead: SpreadDamage
-		Damage: 20000
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
-		Damage: 10
+		Spread: 500
+		MaxRadius: 4500
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
 		ImpactSounds: kaboom22.aud
 

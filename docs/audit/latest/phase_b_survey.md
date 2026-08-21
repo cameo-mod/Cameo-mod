@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 295
+Total concrete weapons on old families: 294
 Single old-family with new inherits (Phase B completion): 0
 Pure single old-family (mechanical Phase A candidates): 12
-Mixed old-family (Phase B maintainer sign-off): 283 in 211 groups
+Mixed old-family (Phase B maintainer sign-off): 282 in 210 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `SteelMakoGun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Demolition_Light_Percentage=1, Railgun_Heavy=2000, Railgun_Heavy_Percentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, Effect=0
@@ -22,9 +22,6 @@ Mixed old-family (Phase B maintainer sign-off): 283 in 211 groups
 
 ## Single old-family with new inherits (finish conversion)
 ## Mixed-inherit (Phase B) — dominant-damage analysis for maintainer sign-off
-### FlakWeapon, Grenade, HeavyBomb, HeavyChemicalWeapon, HeavyFlameWeapon, HeavyMissile, LightChemicalWeapon, LightFlameWeapon, LightMissile, MediumChemicalWeapon, MediumFlameWeapon, MediumMissile, NuclearWarhead, ShrapnelWeapon, TankDestroyerCannon (1 weapons)
-- `SCUDNUKE` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: HeavyMissile(20000) | HeavyMissile=20000, HeavyMissilePercentage=10, MediumMissile=20000, MediumMissilePercentage=10, LightMissile=20000, LightMissilePercentage=10, HeavyBomb=20000, HeavyBombPercentage=10, ShrapnelWeapon=20000, ShrapnelWeaponFriendlyFire=10000, ShrapnelWeaponPercentage=10, Grenade=20000, GrenadeFriendlyFire=10000, GrenadePercentage=10, HeavyChemicalWeapon=20000, HeavyChemicalWeaponPercentage=10, MediumChemicalWeapon=20000, MediumChemicalWeaponPercentage=10, LightChemicalWeapon=20000, LightChemicalWeaponPercentage=10, HeavyFlameWeapon=20000, HeavyFlameWeaponPercentage=10, MediumFlameWeapon=20000, MediumFlameWeaponPercentage=10, LightFlameWeapon=20000, LightFlameWeaponPercentage=10, TankDestroyerCannon=20000, TankDestroyerCannonPercentage=10, FlakWeapon=20000, FlakWeaponPercentage=10, NuclearWarhead=20000, NuclearWarheadPercentage=10, Effect=0 | → collapse to HeavyMissile
-
 ### Grenade, HeavyBomb, HeavyCannon, HeavyChemicalWeapon, HeavyFlameWeapon, LightChemicalWeapon, LightFlameWeapon, LightMissile, MediumCannon, MediumChemicalWeapon, MediumFlameWeapon, NuclearWarhead, ShrapnelWeapon, TankDestroyerCannon (2 weapons)
 - `SiegeEngineCannon` (weapons\warcraft2.yaml) | dominant: NuclearWarhead(10000) | NuclearWarhead=10000, NuclearWarheadPercentage=5, LightMissile=10000, LightMissilePercentage=5, LightChemicalWeapon=10000, LightChemicalWeaponPercentage=5, MediumChemicalWeapon=10000, MediumChemicalWeaponPercentage=5, HeavyChemicalWeapon=10000, HeavyChemicalWeaponPercentage=5, LightFlameWeapon=10000, LightFlameWeaponPercentage=5, MediumFlameWeapon=10000, MediumFlameWeaponPercentage=5, HeavyFlameWeapon=10000, HeavyFlameWeaponPercentage=5, Grenade=10000, GrenadeFriendlyFire=5000, GrenadePercentage=5, ShrapnelWeapon=10000, ShrapnelWeaponFriendlyFire=5000, ShrapnelWeaponPercentage=5, HeavyBomb=10000, HeavyBombPercentage=5, HeavyCannon=10000, HeavyCannonPercentage=5, MediumCannon=10000, MediumCannonPercentage=5, TankDestroyerCannon=10000, TankDestroyerCannonPercentage=5, Effect=0 | → collapse to NuclearWarhead
 - `SiegeTankSiegeCannon` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | dominant: NuclearWarhead(10000) | NuclearWarhead=10000, NuclearWarheadPercentage=5, LightMissile=10000, LightMissilePercentage=5, LightChemicalWeapon=10000, LightChemicalWeaponPercentage=5, MediumChemicalWeapon=10000, MediumChemicalWeaponPercentage=5, HeavyChemicalWeapon=10000, HeavyChemicalWeaponPercentage=5, LightFlameWeapon=10000, LightFlameWeaponPercentage=5, MediumFlameWeapon=10000, MediumFlameWeaponPercentage=5, HeavyFlameWeapon=10000, HeavyFlameWeaponPercentage=5, Grenade=10000, GrenadeFriendlyFire=5000, GrenadePercentage=5, ShrapnelWeapon=10000, ShrapnelWeaponFriendlyFire=5000, ShrapnelWeaponPercentage=5, HeavyBomb=10000, HeavyBombPercentage=5, HeavyCannon=10000, HeavyCannonPercentage=5, MediumCannon=10000, MediumCannonPercentage=5, TankDestroyerCannon=10000, TankDestroyerCannonPercentage=5, Effect=0 | → collapse to NuclearWarhead

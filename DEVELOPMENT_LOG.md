@@ -984,3 +984,21 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
   reports 0 drifted.
 - Boot-gate: reached main menu (`MenuPostProcessEffect.PostWorldLoaded`); no new
   `exception-*.log` files.
+
+
+## 2026-08-22 — W24 Phase B: SCUDNUKE/SCUDNUKEThermobaric collapse to Nuclear_Super
+
+- Converted SCUDNUKE in mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml:
+  - Removed 15 stacked old full-stack inherits (^HeavyMissile, ^MediumMissile, ^LightMissile, ^HeavyBomb, ^ShrapnelWeapon, ^Grenade, ^HeavyChemicalWeapon, ^MediumChemicalWeapon, ^LightChemicalWeapon, ^HeavyFlameWeapon, ^MediumFlameWeapon, ^LightFlameWeapon, ^TankDestroyerCannon, ^FlakWeapon, ^NuclearWarhead).
+  - Replaced with Inherits@wh: ^Warhead_Nuclear_Super and Inherits@fx: ^Effect_Nuclear_Super.
+  - Per-shot totals preserved: 20000 flat + 10% percentage via Nuclear_Super main Damage: 20000 (10-tick AreaDamage, MaxRadius: 9000, Spread: 1000) and percentage Damage: 10 (10-tick AreaDamagePercentage, Spread: 500, MaxRadius: 4500); ValidRelationships: Enemy, AffectsParent: true, DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary.
+  - V2 Bullet projectile retained (Image: V2, Speed: 240, Inaccuracy: 240, LaunchAngle: 80, TrailImage: smokey, contrail colors from the old ^HeavyMissile inherit restored as local overrides).
+  - Warhead@Effect kept with ImpactSounds: kaboom22.aud; ^Effect_Nuclear_Super supplies Explosions: nuke_explosion, ImpactActors: false, plus ShieldHit, Concrete: 1000, delayed Scorch smudges, and nuke glow.
+  - SCUDNUKEThermobaric still inherits SCUDNUKE and overrides the projectile contrail (width/length/colors); it now resolves to the same single nuke warhead.
+- eview_resolve_diff.py expected flags: 15 duplicate 20000 warheads collapse to one, ValidTargets becomes Ground, Water, Air, effect stack simplifies to nuke-specific.
+- Audits: ind_empty_warhead.py 0, ind_orphan_old_keys.py 0 real, udit_warhead_split broadcast count lowered 941 -> 939 (baseline updated), udit_balance_drift clean.
+- 	ools/balance/extract_stats.py re-ran; 32 ledgers + derived sidecars refreshed.
+- docs/audit/latest/phase_b_survey.md regenerated: 294 concrete, 12 pure single, 0 finish, 282 mixed in 210 groups.
+- Updated docs/design/BALANCE_PROGRAM_PLAN.md W24 row.
+- Boot-gate: reached MenuPostProcessEffect.PostWorldLoaded; no new exception-*.log.
+
