@@ -682,7 +682,7 @@ TSBoatcannon:
 		Damage: 8
 		Spread: 400
 TSChemJuggerboat90mm:
-	Inherits@wh: ^Warhead_ChemCannon_Medium
+	Inherits@wh: ^Warhead_CannonChem_Medium
 	Inherits@proj: ^Projectile_ArtilleryShell_Medium
 	Inherits@fx: ^Effect_Chem_Medium
 	ReloadDelay: 69
@@ -694,9 +694,9 @@ TSChemJuggerboat90mm:
 	TargetActorCenter: true
 	Projectile: Bullet
 		Speed: 280
-	Warhead@ChemCannon_Medium:
+	Warhead@CannonChem_Medium:
 		Damage: 30000
-	Warhead@ChemCannon_Medium_Percentage: AreaDamagePercentage
+	Warhead@CannonChem_Medium_Percentage: AreaDamagePercentage
 		Damage: 21
 	Warhead@Effect: CreateEffect
 		ImpactActors: false
@@ -747,7 +747,7 @@ TSChemBoatcannon:
 ####################################################################################################
 
 TSChemBazooka:
-	Inherits@wh: ^Warhead_ChemMissile_Light
+	Inherits@wh: ^Warhead_MissileChem_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Light
 	Report: rketinf1.aud
@@ -756,10 +756,10 @@ TSChemBazooka:
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		TrailImage: spittrail
-	Warhead@ChemMissile_Light:
+	Warhead@MissileChem_Light:
 		Damage: 30000
 		FriendlyFireDamage: 90
-	Warhead@ChemMissile_Light_Percentage:
+	Warhead@MissileChem_Light_Percentage:
 		Damage: 15
 		FriendlyFireDamage: 90
 	Warhead@Effect: CreateEffect
@@ -816,7 +816,7 @@ TSVanMissile:
 		Damage: 12
 
 TSChemVanMissile:
-	Inherits@wh: ^Warhead_ChemMissile_Medium
+	Inherits@wh: ^Warhead_MissileChem_Medium
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	ValidTargets: Ground, Water
@@ -834,9 +834,9 @@ TSChemVanMissile:
 		Palette: d2keffect
 		TrailImage: large_trail
 		LaunchAngle: 60
-	Warhead@ChemMissile_Medium:
+	Warhead@MissileChem_Medium:
 		Damage: 36000
-	Warhead@ChemMissile_Medium_Percentage: AreaDamagePercentage
+	Warhead@MissileChem_Medium_Percentage: AreaDamagePercentage
 		Damage: 18
 	Warhead@Effect: CreateEffect
 		GlowScale: 1.5
@@ -877,7 +877,7 @@ TSMLRSMissile:
 		Damage: 12
 
 TSChemMLRSMissile:
-	Inherits@wh: ^Warhead_ChemMissile_Medium
+	Inherits@wh: ^Warhead_MissileChem_Medium
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	ValidTargets: Ground, Water
@@ -895,9 +895,9 @@ TSChemMLRSMissile:
 		Palette: d2keffect
 		TrailImage: large_trail
 		LaunchAngle: 165
-	Warhead@ChemMissile_Medium:
+	Warhead@MissileChem_Medium:
 		Damage: 36000
-	Warhead@ChemMissile_Medium_Percentage: AreaDamagePercentage
+	Warhead@MissileChem_Medium_Percentage: AreaDamagePercentage
 		Damage: 18
 	Warhead@Effect: CreateEffect
 		GlowScale: 1.5
@@ -1117,7 +1117,7 @@ TSApacheMissile:
 		Duration: 8
 
 TSChemApacheMissile:
-	Inherits@wh: ^Warhead_ChemMissile_Medium
+	Inherits@wh: ^Warhead_MissileChem_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
 	ValidTargets: Ground, Water, Air
@@ -1127,14 +1127,14 @@ TSChemApacheMissile:
 	Report: orcamis1.aud
 	Projectile: Missile
 		TrailImage: spittrail
-	Warhead@ChemMissile_Medium:
+	Warhead@MissileChem_Medium:
 		Damage: 36000
 		FriendlyFireDamage: 33
 		FriendlyFireSpread: 50
 		Spread: 700
 		Falloff: 99, 66, 33
 		InvalidTargets: wall
-	Warhead@ChemMissile_Medium_Percentage:
+	Warhead@MissileChem_Medium_Percentage:
 		Damage: 18
 		Spread: 350
 		Falloff: 99, 66, 33
@@ -1201,7 +1201,7 @@ TSCobraMissile:
 		Duration: 8
 
 TSChemCobraMissile:
-	Inherits@wh: ^Warhead_ChemMissile_Medium
+	Inherits@wh: ^Warhead_MissileChem_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
 	ValidTargets: Ground, Water, Air
@@ -1211,14 +1211,14 @@ TSChemCobraMissile:
 	Report: orcamis1.aud
 	Projectile: Missile
 		TrailImage: spittrail
-	Warhead@ChemMissile_Medium:
+	Warhead@MissileChem_Medium:
 		Damage: 36000
 		FriendlyFireDamage: 33
 		FriendlyFireSpread: 50
 		Spread: 700
 		Falloff: 99, 66, 33
 		InvalidTargets: wall
-	Warhead@ChemMissile_Medium_Percentage:
+	Warhead@MissileChem_Medium_Percentage:
 		Damage: 18
 		Spread: 350
 		Falloff: 99, 66, 33

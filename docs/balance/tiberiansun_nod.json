@@ -2820,14 +2820,14 @@
         "damage": "30000",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
-        "tag": "ChemMissile_Light",
+        "tag": "MissileChem_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
-        "tag": "ChemMissile_Light_Percentage",
+        "tag": "MissileChem_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2839,12 +2839,12 @@
       "requires": "ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_ChemMissile_Light",
+       "^Warhead_MissileChem_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileAP_Light"
       ],
       "warheads": [
-       "^Warhead_ChemMissile_Light"
+       "^Warhead_MissileChem_Light"
       ],
       "weapon": "TSTibBazooka",
       "weapon_class_source": "template"
@@ -2856,14 +2856,14 @@
         "damage": "30000",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
-        "tag": "ChemMissile_Light",
+        "tag": "MissileChem_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
-        "tag": "ChemMissile_Light_Percentage",
+        "tag": "MissileChem_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2875,12 +2875,12 @@
       "requires": "ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
-       "^Warhead_ChemMissile_Light",
+       "^Warhead_MissileChem_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileAP_Light"
       ],
       "warheads": [
-       "^Warhead_ChemMissile_Light"
+       "^Warhead_MissileChem_Light"
       ],
       "weapon": "TSTibBazooka",
       "weapon_class_source": "template"

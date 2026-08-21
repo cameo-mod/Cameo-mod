@@ -6053,14 +6053,14 @@
         "damage": "32000",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
-        "tag": "FireMissile_Light",
+        "tag": "MissileFire_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
-        "tag": "FireMissile_Light_Percentage",
+        "tag": "MissileFire_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -6072,12 +6072,12 @@
       "requires": "!ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_FireMissile_Light",
+       "^Warhead_MissileFire_Light",
        "^Projectile_Missile_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_FireMissile_Light"
+       "^Warhead_MissileFire_Light"
       ],
       "weapon": "FireRockets",
       "weapon_class_source": "template"
@@ -6089,14 +6089,14 @@
         "damage": "32000",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
-        "tag": "FireMissile_Light",
+        "tag": "MissileFire_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
-        "tag": "FireMissile_Light_Percentage",
+        "tag": "MissileFire_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -6108,12 +6108,12 @@
       "requires": "!ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_FireMissile_Light",
+       "^Warhead_MissileFire_Light",
        "^Projectile_Missile_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_FireMissile_Light"
+       "^Warhead_MissileFire_Light"
       ],
       "weapon": "FireRockets",
       "weapon_class_source": "template"
@@ -6124,14 +6124,14 @@
         "damage": "32000",
         "falloff": "100, 60, 30, 15, 5, 0",
         "spread": "600",
-        "tag": "FireMissile_Medium",
+        "tag": "MissileFire_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
         "falloff": "100, 60, 30, 15, 5, 0",
         "spread": "300",
-        "tag": "FireMissile_Medium_Percentage",
+        "tag": "MissileFire_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -6143,12 +6143,12 @@
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_FireMissile_Medium",
+       "^Warhead_MissileFire_Medium",
        "^Projectile_Missile_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_FireMissile_Medium"
+       "^Warhead_MissileFire_Medium"
       ],
       "weapon": "FireRocketsThermobaric",
       "weapon_class_source": "template"
@@ -6160,14 +6160,14 @@
         "damage": "32000",
         "falloff": "100, 60, 30, 15, 5, 0",
         "spread": "600",
-        "tag": "FireMissile_Medium",
+        "tag": "MissileFire_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
         "falloff": "100, 60, 30, 15, 5, 0",
         "spread": "300",
-        "tag": "FireMissile_Medium_Percentage",
+        "tag": "MissileFire_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -6179,12 +6179,12 @@
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^Warhead_FireMissile_Medium",
+       "^Warhead_MissileFire_Medium",
        "^Projectile_Missile_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_FireMissile_Medium"
+       "^Warhead_MissileFire_Medium"
       ],
       "weapon": "FireRocketsThermobaric",
       "weapon_class_source": "template"

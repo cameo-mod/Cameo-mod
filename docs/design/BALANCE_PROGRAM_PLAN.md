@@ -467,8 +467,8 @@ it actually needs either was not reached for or does not exist:
 
 | weapon | mains after the batch | what it should be |
 |---|---|---|
-| `TS70mmChem` | `CannonHE_Medium` + `Chemical_Light` | **`^Warhead_ChemCannon_Light`** — already exists, already used 6× **in the same file** |
-| `TSScoopDualChem` | `CannonHE_Medium` + `Chemical_Medium` | **`^Warhead_ChemCannon_Medium`** — exists |
+| `TS70mmChem` | `CannonHE_Medium` + `Chemical_Light` | **`^Warhead_CannonChem_Light`** — already exists, already used 6× **in the same file** |
+| `TSScoopDualChem` | `CannonHE_Medium` + `Chemical_Medium` | **`^Warhead_CannonChem_Medium`** — exists |
 | `JapanesePlasmaBomb` | `Chemical_Heavy` + `Flame_Heavy` + `Demolition_Heavy` | **`^Warhead_Plasma_Heavy`** — exists |
 | `NuclearMaverick` | `MissileHE_Heavy` + `Nuclear_Super` | `^Warhead_MissileHE_Heavy` (see ruling 2) |
 | `ThermobaricNuclearMaverick` | `MissileHE_Heavy` + `Nuclear_Super` + `Flame_Heavy` | `^Warhead_MissileThermobaric_Heavy` — **NEW** |
@@ -511,7 +511,7 @@ different template" law. Collapse them back into the shared layer or inline them
    ⚠ An earlier draft of this section recommended element-first "to match the existing templates".
    That was measured on half the library and is **wrong**: the split is exactly **5 v 5**
    — delivery-first `CannonAP` `CannonHE` `MissileAA` `MissileAP` `MissileHE` against element-first
-   `ChemCannon` `ChemMissile` `FireCannon` `FireMissile` `PhotonCannon`. Neither was "the existing
+   `CannonChem` `MissileChem` `CannonFire` `MissileFire` `PhotonCannon`. Neither was "the existing
    convention", so the tie is broken on principle, and the maintainer's reading is the right one:
    delivery is the macro-type the **weapon ordering law** already sorts by, and it scales as one
    block — `Missile{AP,HE,AA,Chem,Fire,Nuke,Quantum,Tesla,Thermobaric}`.
@@ -567,8 +567,8 @@ delivery and price number measured before it lands is measuring the wrong object
 | # | work | gate |
 |---|---|---|
 | A0 | **Three new guards first**: family-vs-name mismatch, collapse-preserves-total, template-with-one-user. Cheap, and they make the rest self-checking. | tests green |
-| A1a | Rename the 4 element-first blends to delivery-first (12 templates, 5 files) | `safe_rename.py`, invariant diff = 0 |
-| A1b | Generate `MissileNuke` / `CannonNuke` / `MissileQuantum` / `MissileTesla` / `MissileThermobaric` (L/M/H) via `gen_weapon_template.py` | `verify_generator_sync` |
+| A1a | Rename the 4 element-first blends to delivery-first (12 templates, 6 files) | ✅ DONE — CannonFire/MissileFire/CannonChem/MissileChem live, safe_rename.py preserves case, splice_templates.py runs full generator and preserves CRLF, verify_generator_sync drift 0, extract_stats --check clean |
+| A1b | Generate MissileNuke / CannonNuke / MissileQuantum / MissileTesla / MissileThermobaric (L/M/H) via gen_weapon_template.py | 🔵 IN PROGRESS |
 | A2 | Collapse the 7 nuclear weapons onto A1b's families — ONE main each, total preserved | invariant diff = 0 |
 | A3 | Fix the three misclassifications onto templates that already exist (`CannonChem` ×2, `Plasma` ×1) | invariant diff = 0 |
 | A4 | Rename `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1` + its condition, then the Su-57 and MonsterTank weapon pairs per ruling 2 | `safe_rename.py`, fluent keys |
@@ -682,7 +682,7 @@ effect inherit), which removes the dead template entirely.
 
 | weapons | → warhead |
 |---|---|
-| `HonestJohn`, `FireRockets*` | `^Warhead_FireMissile_Heavy` |
+| `HonestJohn`, `FireRockets*` | `^Warhead_MissileFire_Heavy` |
 | `SiegeMortar*`, **V2 rocket** | `^Warhead_Thermobaric_Heavy` |
 | `VenomLaser`, `NodTurretLaser` | `^Warhead_Laser_Medium` |
 | `LaserBuggy2`, laser rifle infantry | `^Warhead_Laser_Light` |
@@ -1316,11 +1316,11 @@ had to be undone. `finish_blend()` now does both:
 1. **It computed the derived armors instead of DERIVING them.** §12.0b says
    `Heroic = Plate x Scout / peak` **of the profile it belongs to**, and the average of the
    parents' Heroic is not the product of the blend's own Plate and Scout
-   (`avg(ab/p) != avg(a)avg(b)/avg(p)`). **5 of 21 blend levels were off**, `FireCannon_Light`
+   (`avg(ab/p) != avg(a)avg(b)/avg(p)`). **5 of 21 blend levels were off**, `CannonFire_Light`
    by 12 points. Exactly the `/100`-divisor failure again: **a derived value must be derived
    LAST, from the finished profile.** All 22 now match the rule to within rounding.
 2. **It flattened** — the same cancellation that makes a per-family aggregate mush.
-   `ChemMissile_Heavy` fell to 1.8x. Re-sharpened with the same POWER LAW the reference side
+   `MissileChem_Heavy` fell to 1.8x. Re-sharpened with the same POWER LAW the reference side
    uses (`v' = G * (v/G) ** alpha` about the geometric mean), **never by clamping**: clamping
    moves two cells and deforms the shape, the power law moves every cell proportionally and
    preserves both the ordering and the geometric centre. It now ships at exactly **2.0x**.

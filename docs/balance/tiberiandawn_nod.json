@@ -3921,14 +3921,14 @@
         "damage": "50000",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "800",
-        "tag": "FireMissile_Heavy",
+        "tag": "MissileFire_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "FireMissile_Heavy_Percentage",
+        "tag": "MissileFire_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -3940,11 +3940,11 @@
       "reloaddelay": "225",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_FireMissile_Heavy",
+       "^Warhead_MissileFire_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_FireMissile_Heavy"
+       "^Warhead_MissileFire_Heavy"
       ],
       "weapon": "HonestJohn",
       "weapon_class_source": "template"
@@ -6859,14 +6859,14 @@
         "damage": "50000",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "800",
-        "tag": "FireMissile_Heavy",
+        "tag": "MissileFire_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "25",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "FireMissile_Heavy_Percentage",
+        "tag": "MissileFire_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -6878,11 +6878,11 @@
       "reloaddelay": "225",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_FireMissile_Heavy",
+       "^Warhead_MissileFire_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_FireMissile_Heavy"
+       "^Warhead_MissileFire_Heavy"
       ],
       "weapon": "HonestJohn",
       "weapon_class_source": "template"

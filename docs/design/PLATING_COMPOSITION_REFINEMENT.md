@@ -165,10 +165,10 @@ That catches exactly the drift that shipped twice (`Inferno` 0.57 (Flame×Prism)
 | MissileAA | 89 | 67 | 55 | 69 | 70 | kinetic 0.55, blast 0.45 |
 | MissileHE | 78 | 88 | 45 | 69 | 70 | blast 0.75, shaped 0.25 |
 | PhotonCannon | 78 | 74 | 58 | 70 | 70 | blast 0.46, kinetic 0.34, thermo 0.11, energy 0.08, shaped 0.01 |
-| ChemMissile | 75 | 53 | 70 | 82 | 70 | shaped 0.55, thermo 0.40, blast 0.05 |
+| MissileChem | 75 | 53 | 70 | 82 | 70 | shaped 0.55, thermo 0.40, blast 0.05 |
 | CannonHE | 73 | 99 | 39 | 69 | 70 | blast 0.90, kinetic 0.10 |
 | Quantum | 73 | 61 | 89 | 57 | 70 | energy 0.52, kinetic 0.28, thermo 0.18, blast 0.02 |
-| ChemCannon | 73 | 51 | 71 | 84 | 70 | thermo 0.45, kinetic 0.35, shaped 0.20 |
+| CannonChem | 73 | 51 | 71 | 84 | 70 | thermo 0.45, kinetic 0.35, shaped 0.20 |
 | Concussion | 70 | 106 | 36 | 69 | 70 | blast 1.00 |
 | Sonic | 70 | 95 | 57 | 58 | 70 | blast 0.70, energy 0.30 |
 | Cryo | 68 | 63 | 91 | 58 | 70 | energy 0.55, thermo 0.25, kinetic 0.20 |
@@ -178,8 +178,8 @@ That catches exactly the drift that shipped twice (`Inferno` 0.57 (Flame×Prism)
 | Magic | 63 | 78 | 86 | 55 | 70 | energy 0.60, thermo 0.20, blast 0.20 |
 | Tesla | 63 | 72 | 96 | 50 | 70 | energy 0.75, thermo 0.20, blast 0.05 |
 | Waveforce | 62 | 64 | 81 | 73 | 70 | thermo 0.43, energy 0.31, kinetic 0.17, shaped 0.05, blast 0.04 |
-| FireMissile | 59 | 82 | 55 | 83 | 70 | blast 0.45, thermo 0.42, shaped 0.12 |
-| FireCannon | 57 | 87 | 53 | 83 | 70 | blast 0.53, thermo 0.42, kinetic 0.05 |
+| MissileFire | 59 | 82 | 55 | 83 | 70 | blast 0.45, thermo 0.42, shaped 0.12 |
+| CannonFire | 57 | 87 | 53 | 83 | 70 | blast 0.53, thermo 0.42, kinetic 0.05 |
 | Laser | 57 | 70 | 95 | 58 | 70 | energy 0.65, thermo 0.35 |
 | Thermobaric | 56 | 92 | 50 | 82 | 70 | blast 0.60, thermo 0.40 |
 | Chemical | 52 | 62 | 71 | 94 | 70 | thermo 0.75, shaped 0.25 |

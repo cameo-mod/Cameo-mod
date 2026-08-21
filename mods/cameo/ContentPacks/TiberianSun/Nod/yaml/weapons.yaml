@@ -99,7 +99,7 @@ TSProton:
 		Explosions: small_frag
 
 TSTibBazooka:
-	Inherits@wh: ^Warhead_ChemMissile_Light
+	Inherits@wh: ^Warhead_MissileChem_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Light
 	Report: rketinf1.aud
@@ -108,10 +108,10 @@ TSTibBazooka:
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		TrailImage: spittrail
-	Warhead@ChemMissile_Light:
+	Warhead@MissileChem_Light:
 		Damage: 30000
 		FriendlyFireDamage: 90
-	Warhead@ChemMissile_Light_Percentage:
+	Warhead@MissileChem_Light_Percentage:
 		Damage: 15
 		FriendlyFireDamage: 90
 	Warhead@Effect: CreateEffect

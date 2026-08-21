@@ -833,8 +833,8 @@ warhead — `CreateEffect`, `LeaveSmudge`, `GrantExternalCondition`, `ApplyPhysi
    damage — check what it actually is (its projectile, its lore, its role).
 3. ⚠ **If no existing family fits, CREATE A NEW ONE — do not force a bad fit.**
    Maintainer, 2026-08-16: *"every time you don't know how to collapse them you should
-   suggest to create a new warhead family."* Blends are cheap: `^Warhead_ChemMissile`,
-   `FireCannon` and `ChemCannon` are all blends of two parents, and a new family is a few
+   suggest to create a new warhead family."* Blends are cheap: `^Warhead_MissileChem`,
+   `CannonFire` and `CannonChem` are all blends of two parents, and a new family is a few
    lines in `gen_weapon_template.py`.
 
 **Worked examples (both found by the W23 retrofit):**

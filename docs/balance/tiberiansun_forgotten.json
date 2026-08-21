@@ -47,14 +47,14 @@
         "damage": "36000",
         "falloff": "99, 66, 33",
         "spread": "700",
-        "tag": "ChemMissile_Medium",
+        "tag": "MissileChem_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "18",
         "falloff": "99, 66, 33",
         "spread": "350",
-        "tag": "ChemMissile_Medium_Percentage",
+        "tag": "MissileChem_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -66,12 +66,12 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_ChemMissile_Medium",
+       "^Warhead_MissileChem_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_ChemMissile_Medium"
+       "^Warhead_MissileChem_Medium"
       ],
       "weapon": "TSChemApacheMissile",
       "weapon_class_source": "template"
@@ -287,14 +287,14 @@
         "damage": "36000",
         "falloff": "99, 66, 33",
         "spread": "700",
-        "tag": "ChemMissile_Medium",
+        "tag": "MissileChem_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "18",
         "falloff": "99, 66, 33",
         "spread": "350",
-        "tag": "ChemMissile_Medium_Percentage",
+        "tag": "MissileChem_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -306,12 +306,12 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_ChemMissile_Medium",
+       "^Warhead_MissileChem_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium"
       ],
       "warheads": [
-       "^Warhead_ChemMissile_Medium"
+       "^Warhead_MissileChem_Medium"
       ],
       "weapon": "TSChemCobraMissile",
       "weapon_class_source": "template"
@@ -4782,14 +4782,14 @@
         "damage": "30000",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
-        "tag": "ChemMissile_Light",
+        "tag": "MissileChem_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
-        "tag": "ChemMissile_Light_Percentage",
+        "tag": "MissileChem_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -4801,12 +4801,12 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_ChemMissile_Light",
+       "^Warhead_MissileChem_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileAP_Light"
       ],
       "warheads": [
-       "^Warhead_ChemMissile_Light"
+       "^Warhead_MissileChem_Light"
       ],
       "weapon": "TSChemBazooka",
       "weapon_class_source": "template"
@@ -4818,14 +4818,14 @@
         "damage": "30000",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
-        "tag": "ChemMissile_Light",
+        "tag": "MissileChem_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
-        "tag": "ChemMissile_Light_Percentage",
+        "tag": "MissileChem_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -4837,12 +4837,12 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
-       "^Warhead_ChemMissile_Light",
+       "^Warhead_MissileChem_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileAP_Light"
       ],
       "warheads": [
-       "^Warhead_ChemMissile_Light"
+       "^Warhead_MissileChem_Light"
       ],
       "weapon": "TSChemBazooka",
       "weapon_class_source": "template"
@@ -6919,14 +6919,14 @@
         "damage": "30000",
         "falloff": "100, 60, 30, 15, 5, 0",
         "spread": "600",
-        "tag": "ChemCannon_Medium",
+        "tag": "CannonChem_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "21",
         "falloff": "100, 60, 30, 15, 5, 0",
         "spread": "300",
-        "tag": "ChemCannon_Medium_Percentage",
+        "tag": "CannonChem_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -6939,12 +6939,12 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_ChemCannon_Medium",
+       "^Warhead_CannonChem_Medium",
        "^Projectile_ArtilleryShell_Medium",
        "^Effect_Chem_Medium"
       ],
       "warheads": [
-       "^Warhead_ChemCannon_Medium"
+       "^Warhead_CannonChem_Medium"
       ],
       "weapon": "TSChemJuggerboat90mm",
       "weapon_class_source": "template"
@@ -7089,14 +7089,14 @@
         "damage": "36000",
         "falloff": "100, 60, 30, 15, 5, 0",
         "spread": "600",
-        "tag": "ChemMissile_Medium",
+        "tag": "MissileChem_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "18",
         "falloff": "100, 60, 30, 15, 5, 0",
         "spread": "300",
-        "tag": "ChemMissile_Medium_Percentage",
+        "tag": "MissileChem_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -7108,12 +7108,12 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_ChemMissile_Medium",
+       "^Warhead_MissileChem_Medium",
        "^Projectile_ArtilleryRocket_Medium",
        "^Effect_Concussion_Medium"
       ],
       "warheads": [
-       "^Warhead_ChemMissile_Medium"
+       "^Warhead_MissileChem_Medium"
       ],
       "weapon": "TSChemVanMissile",
       "weapon_class_source": "template"
@@ -8983,14 +8983,14 @@
         "damage": "36000",
         "falloff": "100, 60, 30, 15, 5, 0",
         "spread": "600",
-        "tag": "ChemMissile_Medium",
+        "tag": "MissileChem_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "18",
         "falloff": "100, 60, 30, 15, 5, 0",
         "spread": "300",
-        "tag": "ChemMissile_Medium_Percentage",
+        "tag": "MissileChem_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -9002,12 +9002,12 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_ChemMissile_Medium",
+       "^Warhead_MissileChem_Medium",
        "^Projectile_ArtilleryRocket_Medium",
        "^Effect_Concussion_Medium"
       ],
       "warheads": [
-       "^Warhead_ChemMissile_Medium"
+       "^Warhead_MissileChem_Medium"
       ],
       "weapon": "TSChemVanMissile",
       "weapon_class_source": "template"
@@ -9119,14 +9119,14 @@
         "damage": "36000",
         "falloff": "100, 60, 30, 15, 5, 0",
         "spread": "600",
-        "tag": "ChemMissile_Medium",
+        "tag": "MissileChem_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "18",
         "falloff": "100, 60, 30, 15, 5, 0",
         "spread": "300",
-        "tag": "ChemMissile_Medium_Percentage",
+        "tag": "MissileChem_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -9138,12 +9138,12 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_ChemMissile_Medium",
+       "^Warhead_MissileChem_Medium",
        "^Projectile_ArtilleryRocket_Medium",
        "^Effect_Concussion_Medium"
       ],
       "warheads": [
-       "^Warhead_ChemMissile_Medium"
+       "^Warhead_MissileChem_Medium"
       ],
       "weapon": "TSChemMLRSMissile",
       "weapon_class_source": "template"

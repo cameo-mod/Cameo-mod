@@ -159,7 +159,7 @@ GrenadeThermobaricExplode:
 		PhysicalStateScale: 100
 
 FireRockets:
-	Inherits@wh: ^Warhead_FireMissile_Light
+	Inherits@wh: ^Warhead_MissileFire_Light
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
 	ReloadDelay: 53
@@ -170,24 +170,24 @@ FireRockets:
 		TrailImage: fb2
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@FireMissile_Light:
+	Warhead@MissileFire_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
-	Warhead@FireMissile_Light_Percentage:
+	Warhead@MissileFire_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 16
 
 FireRocketsExplode:
 	Inherits: FireRockets
-	Warhead@FireMissile_Light:
+	Warhead@MissileFire_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	Warhead@FireMissile_Light_Percentage:
+	Warhead@MissileFire_Light_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 
 FireRocketsThermobaric:
-	Inherits@wh: ^Warhead_FireMissile_Medium
+	Inherits@wh: ^Warhead_MissileFire_Medium
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
 	ReloadDelay: 58
@@ -198,10 +198,10 @@ FireRocketsThermobaric:
 		TrailImage: fb2
 		TrailInterval: 1
 		TrailDelay: 0
-	Warhead@FireMissile_Medium:
+	Warhead@MissileFire_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
-	Warhead@FireMissile_Medium_Percentage:
+	Warhead@MissileFire_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 16
 	Warhead@Effect:
@@ -212,10 +212,10 @@ FireRocketsThermobaric:
 
 FireRocketsThermobaricExplode:
 	Inherits: FireRocketsThermobaric
-	Warhead@FireMissile_Medium:
+	Warhead@MissileFire_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	Warhead@FireMissile_Medium_Percentage:
+	Warhead@MissileFire_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 

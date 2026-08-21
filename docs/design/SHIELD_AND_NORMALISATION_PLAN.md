@@ -393,7 +393,7 @@ control of the ordering"; post-S1 that was measurably false.
 Two changes, and both are structural rather than a re-calibration:
 
 1. **The structural term is DAMPED** to the one job §5b actually left it — separating
-   families whose physics rank is EQUAL (`ChemCannon`/`ChemMissile` both 0.50). The
+   families whose physics rank is EQUAL (`CannonChem`/`MissileChem` both 0.50). The
    exponent is derived, not chosen: `ln(smallest distinct rank ratio) / ln(the term's own
    swing)`, i.e. exactly the largest damping under which the smallest genuine rank gap
    still wins. Both inputs are stable — `PHYSICS_RANK` is a design table, and the swing is

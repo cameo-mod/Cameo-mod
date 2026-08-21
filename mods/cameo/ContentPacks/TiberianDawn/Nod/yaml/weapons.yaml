@@ -304,7 +304,7 @@ LTNKMissiles:
 		Explosions: small_frag
 
 HonestJohn:
-	Inherits@wh: ^Warhead_FireMissile_Heavy
+	Inherits@wh: ^Warhead_MissileFire_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
 	ReloadDelay: 225
 	Burst: 2
@@ -324,12 +324,12 @@ HonestJohn:
 		Shadow: true
 		TrailDelay: 1
 		TrailInterval: 1
-	Warhead@FireMissile_Heavy: AreaDamage
+	Warhead@MissileFire_Heavy: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 50000
 		FriendlyFireDamage: 30
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath, Incendiary
-	Warhead@FireMissile_Heavy_Percentage: AreaDamagePercentage
+	Warhead@MissileFire_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 25
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath, Incendiary

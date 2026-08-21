@@ -268,8 +268,8 @@ PHYSICS_RANK = {
     "Sonic": 0.60, "Magic": 0.58, "Inferno": 0.57, "Nuclear": 0.56,
     # Inferno = Flame×Prism heatray: thermo-led but still some field-coupling.
     # thermal / chemical — a shield stops heat and reagents well; little field coupling
-    "FireCannon": 0.52, "FireMissile": 0.52, "Flame": 0.50, "ChemCannon": 0.50,
-    "ChemMissile": 0.50, "Chemical": 0.48, "Toxic": 0.46, "Thermobaric": 0.44,
+    "CannonFire": 0.52, "MissileFire": 0.52, "Flame": 0.50, "CannonChem": 0.50,
+    "MissileChem": 0.50, "Chemical": 0.48, "Toxic": 0.46, "Thermobaric": 0.44,
     # kinetic / explosive — momentum is exactly what a shield is designed for
     "Flak": 0.38, "Concussion": 0.36, "Demolition": 0.35, "Bullet": 0.34,
     "MissileAA": 0.34, "CannonHE": 0.33, "MissileHE": 0.33, "CannonAP": 0.32,
@@ -295,7 +295,7 @@ SHIELD_CEIL_TARGET = 400
 # to set the band.
 #
 # So the term is DAMPED to the one job §5b actually left it: separating families whose
-# physics rank is EQUAL (`ChemCannon`/`ChemMissile` both 0.50, `CannonHE`/`MissileHE` both
+# physics rank is EQUAL (`CannonChem`/`MissileChem` both 0.50, `CannonHE`/`MissileHE` both
 # 0.33). The exponent is derived, not chosen — it is exactly the largest damping under which
 # the SMALLEST genuine rank gap still wins:
 #
@@ -1075,12 +1075,12 @@ def finish_blend(rows, name=None):
        `Heroic = Plate x Scout / peak` **of the profile it belongs to** — and the
        average of the parents' Heroic is not the product of the blend's own Plate
        and Scout (`avg(ab/p) != avg(a)avg(b)/avg(p)`). Measured: 5 of 21 blend
-       levels were off, `FireCannon_Light` by 12 points. Same failure as the
+       levels were off, `CannonFire_Light` by 12 points. Same failure as the
        `/100` divisor bug — a derived value has to be derived LAST, from the
        finished profile.
     2. **It flattens.** Averaging profiles that disagree cancels the
        disagreement — the identical effect that makes a per-family aggregate mush
-       (DESIGN §12.0 rule 5). `ChemMissile_Heavy` came out at 1.8x, under the
+       (DESIGN §12.0 rule 5). `MissileChem_Heavy` came out at 1.8x, under the
        band. It is re-sharpened back to the band floor with the same POWER LAW the
        reference side uses (`v' = G * (v/G) ** alpha` about the geometric mean),
        never by clamping: clamping would move two cells and change the shape,
@@ -1540,8 +1540,8 @@ FAMILY_DAMAGE_TYPES = {
     "Tesla":      "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
     "Quantum":    "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
     "Inferno":    "Prone75Percent, TriggerProne, FireDeath, Incendiary",
-    "ChemCannon": "Prone75Percent, TriggerProne, TiberiumDeath",
-    "ChemMissile":"Prone75Percent, TriggerProne, TiberiumDeath",
+    "CannonChem": "Prone75Percent, TriggerProne, TiberiumDeath",
+    "MissileChem":"Prone75Percent, TriggerProne, TiberiumDeath",
     # Storm is handled at its own call site (Prone100Percent + Tesla).
 }
 
@@ -1613,10 +1613,10 @@ BLEND_FAMILIES = {
     # Element + delivery blends (maintainer 2026-08-10): per-armor AVERAGE of the element family and the
     # delivery family + the element's meter / 2 parents (150). FIRE = anti-light -> pairs with HE delivery
     # (better vs infantry/buildings); CHEMICAL = anti-armor -> pairs with AP delivery (better vs armor).
-    "FireCannon":  (["Flame", "CannonHE"],    {"Temperature": _m(0.50)}, L3),
-    "FireMissile": (["Flame", "MissileHE"],   {"Temperature": _m(0.50)}, L3),
-    "ChemCannon":  (["Chemical", "CannonAP"], {"Corrosion": {"Light": 20, "Medium": 33, "Heavy": 50}}, L3),
-    "ChemMissile": (["Chemical", "MissileAP"],{"Corrosion": {"Light": 20, "Medium": 33, "Heavy": 50}}, L3),
+    "CannonFire":  (["Flame", "CannonHE"],    {"Temperature": _m(0.50)}, L3),
+    "MissileFire": (["Flame", "MissileHE"],   {"Temperature": _m(0.50)}, L3),
+    "CannonChem":  (["Chemical", "CannonAP"], {"Corrosion": {"Light": 20, "Medium": 33, "Heavy": 50}}, L3),
+    "MissileChem": (["Chemical", "MissileAP"],{"Corrosion": {"Light": 20, "Medium": 33, "Heavy": 50}}, L3),
     # Waveforce = a resonant energy weapon: "a bit like a mix of the plasma warhead and the
     # quantum warheads" (maintainer 2026-08-16), adopted for the Japanese energy rifles —
     # which inherit `^WaveforceBulletWarhead` and were never railguns — and for the Protoss

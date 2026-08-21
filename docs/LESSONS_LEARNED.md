@@ -705,3 +705,11 @@ Two resolver/tooling gotchas from the chemical-weapon and artillery-projectile p
 The legacy mixed-stack missile weapons (`227mm`, `GDIRigMissilePod`, `MammothTusk`) inherited `^FlakWeapon` — a `Bullet` projectile with `ContrailStartColor: FF884400` and `ContrailEndColor: 000000FF` — and then a `^*Missile` template that switched the projectile to `Missile`. Because `ContrailStartColor`/`ContrailEndColor` were not re-declared in the missile template, the resolved `Projectile: Missile` still carried the flak bullet colors.
 
 A naive 3-way split onto `^Projectile_Missile_*` drops those colors and `review_resolve_diff.py` flags `Proj.CStart`/`Proj.CEnd`. Preserve them as local `Projectile:` overrides on the concrete weapon whenever the resolved baseline had them and the new family does not.
+
+---
+
+## Tooling fixes discovered during W24 A1a (2026-08-22)
+
+- tools/rename/safe_rename.py lower-cased every replacement. It now preserves the exact case written in the rename map, so mixed-case OpenRA ids stay canonical.
+- tools/balance/splice_templates.py ran gen_weapon_template.py with a family filter, which caused shield_uniqueness to see only a subset and emit wrong compressed Shield values. It now always runs the full generator and splices only the requested blocks, preserving the original newline style (CRLF/LF).
+- The A1a delivery-first rename proved that verify_generator_sync.py is the real source of truth for ^Warhead_* blocks: the Flame and MissileChem blocks had drifted by one Shield point and were re-synced by splicing.

@@ -5086,7 +5086,7 @@ DefuseKit:
 			BLAST: 66
 			REFLECTOR: 98
 			ARMOR: 70
-			Shield: 203
+			Shield: 202
 			None: 200
 			Wood: 198
 			Flak: 155
@@ -5152,7 +5152,7 @@ DefuseKit:
 			BLAST: 66
 			REFLECTOR: 98
 			ARMOR: 70
-			Shield: 221
+			Shield: 220
 			None: 191
 			Wood: 187
 			Flak: 162
@@ -6570,12 +6570,12 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 ###### Storm: Tesla_Super + Magic + TeslaSuperExtraDamage/5 (Super-anchored, scaled down) ######
 
-^Warhead_FireMissile_Light:
+^Warhead_MissileFire_Light:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@FireMissile_Light: AreaDamage
+	Warhead@MissileFire_Light: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -6609,7 +6609,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
-	Warhead@FireMissile_Light_Percentage: AreaDamagePercentage
+	Warhead@MissileFire_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -6634,12 +6634,12 @@ DefuseKit:
 			Spaceship: 3
 		UpdatesUnitStatistics: false
 
-^Warhead_FireMissile_Medium:
+^Warhead_MissileFire_Medium:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@FireMissile_Medium: AreaDamage
+	Warhead@MissileFire_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -6673,7 +6673,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
-	Warhead@FireMissile_Medium_Percentage: AreaDamagePercentage
+	Warhead@MissileFire_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
@@ -6698,12 +6698,12 @@ DefuseKit:
 			Spaceship: 7
 		UpdatesUnitStatistics: false
 
-^Warhead_FireMissile_Heavy:
+^Warhead_MissileFire_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@FireMissile_Heavy: AreaDamage
+	Warhead@MissileFire_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -6737,7 +6737,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
-	Warhead@FireMissile_Heavy_Percentage: AreaDamagePercentage
+	Warhead@MissileFire_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
@@ -6763,12 +6763,12 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### ChemMissile: blend of Chemical+MissileAP + PhysicalStates {'Corrosion': 50} ######
-^Warhead_ChemMissile_Light:
+^Warhead_MissileChem_Light:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@ChemMissile_Light: AreaDamage
+	Warhead@MissileChem_Light: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -6802,7 +6802,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 20
-	Warhead@ChemMissile_Light_Percentage: AreaDamagePercentage
+	Warhead@MissileChem_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -6827,12 +6827,12 @@ DefuseKit:
 			Fighter: 4
 		UpdatesUnitStatistics: false
 
-^Warhead_ChemMissile_Medium:
+^Warhead_MissileChem_Medium:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@ChemMissile_Medium: AreaDamage
+	Warhead@MissileChem_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -6846,7 +6846,7 @@ DefuseKit:
 			BLAST: 70
 			REFLECTOR: 82
 			ARMOR: 70
-			Shield: 202
+			Shield: 203
 			Superheavy: 192
 			Heavy: 167
 			Medium: 148
@@ -6866,7 +6866,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 33
-	Warhead@ChemMissile_Medium_Percentage: AreaDamagePercentage
+	Warhead@MissileChem_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
@@ -6891,12 +6891,12 @@ DefuseKit:
 			Fighter: 8
 		UpdatesUnitStatistics: false
 
-^Warhead_ChemMissile_Heavy:
+^Warhead_MissileChem_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@ChemMissile_Heavy: AreaDamage
+	Warhead@MissileChem_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -6910,7 +6910,7 @@ DefuseKit:
 			BLAST: 70
 			REFLECTOR: 82
 			ARMOR: 70
-			Shield: 220
+			Shield: 221
 			Superheavy: 173
 			Heavy: 153
 			Medium: 134
@@ -6930,7 +6930,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 50
-	Warhead@ChemMissile_Heavy_Percentage: AreaDamagePercentage
+	Warhead@MissileChem_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 1
@@ -6956,12 +6956,12 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### ChemCannon: blend of Chemical+CannonAP + PhysicalStates {'Corrosion': 50} ######
-^Warhead_ChemCannon_Light:
+^Warhead_CannonChem_Light:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@ChemCannon_Light: AreaDamage
+	Warhead@CannonChem_Light: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -6995,7 +6995,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 20
-	Warhead@ChemCannon_Light_Percentage: AreaDamagePercentage
+	Warhead@CannonChem_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -7020,12 +7020,12 @@ DefuseKit:
 			Fighter: 1
 		UpdatesUnitStatistics: false
 
-^Warhead_ChemCannon_Medium:
+^Warhead_CannonChem_Medium:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@ChemCannon_Medium: AreaDamage
+	Warhead@CannonChem_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -7059,7 +7059,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 33
-	Warhead@ChemCannon_Medium_Percentage: AreaDamagePercentage
+	Warhead@CannonChem_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -7084,12 +7084,12 @@ DefuseKit:
 			Fighter: 5
 		UpdatesUnitStatistics: false
 
-^Warhead_ChemCannon_Heavy:
+^Warhead_CannonChem_Heavy:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@ChemCannon_Heavy: AreaDamage
+	Warhead@CannonChem_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -7123,7 +7123,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStates:
 			Corrosion: 50
-	Warhead@ChemCannon_Heavy_Percentage: AreaDamagePercentage
+	Warhead@CannonChem_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
@@ -7410,12 +7410,12 @@ DefuseKit:
 		UpdatesUnitStatistics: false
 
 ###### FireCannon: blend of Flame+CannonHE + PhysicalStates {'Temperature': 50} ######
-^Warhead_FireCannon_Light:
+^Warhead_CannonFire_Light:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@FireCannon_Light: AreaDamage
+	Warhead@CannonFire_Light: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -7449,7 +7449,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
-	Warhead@FireCannon_Light_Percentage: AreaDamagePercentage
+	Warhead@CannonFire_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -7474,12 +7474,12 @@ DefuseKit:
 			Spaceship: 1
 		UpdatesUnitStatistics: false
 
-^Warhead_FireCannon_Medium:
+^Warhead_CannonFire_Medium:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@FireCannon_Medium: AreaDamage
+	Warhead@CannonFire_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -7513,7 +7513,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
-	Warhead@FireCannon_Medium_Percentage: AreaDamagePercentage
+	Warhead@CannonFire_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -7538,12 +7538,12 @@ DefuseKit:
 			Spaceship: 5
 		UpdatesUnitStatistics: false
 
-^Warhead_FireCannon_Heavy:
+^Warhead_CannonFire_Heavy:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
 	TargetActorCenter: true
-	Warhead@FireCannon_Heavy: AreaDamage
+	Warhead@CannonFire_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -7577,7 +7577,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PhysicalStates:
 			Temperature: 50
-	Warhead@FireCannon_Heavy_Percentage: AreaDamagePercentage
+	Warhead@CannonFire_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 400
 		Damage: 1
