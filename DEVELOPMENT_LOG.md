@@ -1,5 +1,26 @@
 # Development Log
 
+## 2026-08-21 — SteelHoverMissile 3-way split (boot-gated)
+
+- Converted `SteelHoverMissile` in `mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml`
+  from `^ArrowWeapon + ^SteelLightMissile` to `^SteelLightMissile` only, collapsing the
+  two 4000 main warheads (`ArrowWeapon` + `MissileAP_Light`) into one `MissileAP_Light`:
+  - `Damage: 8000`
+  - `MissileAP_Light_Percentage` `Damage: 4` (HealthPercentageDamage preserved)
+- Kept the per-faction `^SteelLightMissile` addon (it supplies the RA2-style missile
+  contrail and `steel_blueexp` look) and `Inherits@fx: ^Effect_Grey_Explosion_Small_RA2`
+  (resolved `ra2_small_grey_explosion` ground/water effect).
+- Added `ImpactActors: false` to the local `Warhead@Effect` node to preserve the exact
+  resolved CreateEffect behaviour after `^ArrowWeapon` was removed.
+- `review_resolve_diff.py wt_baseline . SteelHoverMissile` OK.
+- `extract_stats.py` regenerated ledgers; `audit_balance_drift` clean.
+- Updated `doc_claims.yaml` and `docs/design/BALANCE_PROGRAM_PLAN.md` W24 counts:
+  `multi_main_fired_weapons` 935 → 934; 1–2 legacy 117 → 116; broadcast 577 → 576 (61.7%).
+- Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split`
+  947 (baseline 950, one fewer broadcast), `audit_doc_claims` 16/16 clean,
+  `verify_generator_sync` drift 0.
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+
 ## 2026-08-21 — HueyGun 3-way split (boot-gated)
 
 - Converted `HueyGun` in `mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml`

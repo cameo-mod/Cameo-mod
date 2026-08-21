@@ -1,9 +1,9 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 306
+Total concrete weapons on old families: 305
 Single old-family with new inherits (Phase B completion): 2
-Pure single old-family (mechanical Phase A candidates): 20
+Pure single old-family (mechanical Phase A candidates): 19
 Mixed old-family (Phase B maintainer sign-off): 284 in 212 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
@@ -12,7 +12,6 @@ Mixed old-family (Phase B maintainer sign-off): 284 in 212 groups
 - `SteelHoverMissile` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: ArrowWeapon | ArrowWeapon=4000, ArrowWeaponPercentage=2, MissileAP_Light=4000, MissileAP_Light_Percentage=2
 - `SteelMakoGun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Demolition_Light_Percentage=1, Railgun_Heavy=2000, Railgun_Heavy_Percentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, Effect=0
 - `Future_Cryocopter_Rocket` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | old: Grenade | Grenade=16000, GrenadeFriendlyFire=8000, GrenadePercentage=8, MissileAP_Heavy=16000, MissileAP_Heavy_Percentage=8, MissileAP_Medium=16000, MissileAP_Medium_Percentage=8, PhysicalStateCryo1=0, PhysicalStateCryo2=0, PhysicalStateCryo3=0, Effect=0, EffectAir=0
-- `HueyGun` (ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml) | old: FlakWeapon | FlakWeapon=2000, FlakWeaponPercentage=1, Bullet_Medium=2000, Bullet_Medium_Percentage=1
 - `RA2CRM60H` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, CannonHE_Heavy_Percentage=1, Bullet_Medium=2000, Bullet_Medium_Percentage=1, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
 - `RA2SCUD` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=30000, MediumFlameWeaponPercentage=15, Demolition_Light=30000, Demolition_Light_Percentage=15, MissileAP_Heavy=30000, MissileAP_Heavy_Percentage=15, Effect=0
 - `ArmoredCarMGAAWaveforce` (ContentPacks\RedAlert\Japan\yaml\weapons.yaml) | old: HeavyAAWeapon | 

@@ -1515,7 +1515,6 @@ SteelInspectorIonCannonDamage:
 		Volume: 5
 
 SteelHoverMissile:
-	Inherits: ^ArrowWeapon
 	Inherits@2: ^SteelLightMissile
 	Inherits@fx: ^Effect_Grey_Explosion_Small_RA2
 	Burst: 4
@@ -1523,22 +1522,16 @@ SteelHoverMissile:
 	Range: 6666
 	Report: vifvatta.wav
 	ValidTargets: Ground, Water, Air
-	Warhead@ArrowWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Effect: CreateEffect
+		ImpactActors: false
 
 SteelKatyCannons:
 	Inherits: ^Warhead_CannonHE_Heavy

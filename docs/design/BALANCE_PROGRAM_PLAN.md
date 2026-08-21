@@ -37,7 +37,7 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured 2026-08-17 |
 |---|---|
-| W24 — fired weapons with **more than one** damage main | **935 of 1622 = 57.8%** (histogram runs out to 15 mains) |
+| W24 — fired weapons with **more than one** damage main | **934 of 1622 = 57.8%** (histogram runs out to 15 mains) |
 | armament slots whose `K` moves when those collapse | **1 547** |
 | fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1196 inheritors) |
 
@@ -255,13 +255,13 @@ and every base assault becomes a shield fight.
 
 Measured before touching anything, and the finding changes the plan.
 
-### What the 935 actually are
+### What the 934 actually are
 
 | shape | count | note |
 |---|--:|---|
 | **inheritance PILEUP** — ≥3 legacy templates inherited, no `^Warhead_*` family | **201** | the sum is an artifact |
 | carries a `^Warhead_*` family inherit | 339 | real multi-warhead designs |
-| 1–2 legacy inherits, no family | 117 | mostly the same disease, milder |
+| 1–2 legacy inherits, no family | 116 | mostly the same disease, milder |
 || other (no legacy / no family, still multi-main) | 278 | mixed new-family or local warheads |
 
 `wc2dragonFireVisible` — a dragon's fire breath — inherits **fifteen** legacy weapon templates:
@@ -280,7 +280,7 @@ from the other end.
 
 ### ⚠ The finding that changes the collapse rule: 90% are BROADCAST
 
-**577 of the 935 (61.7%) have EVERY main at the identical damage.** The worst pileups are all one
+**576 of the 934 (61.7%) have EVERY main at the identical damage.** The worst pileups are all one
 value repeated:
 
 | weapon | mains | each | sum |
@@ -2213,7 +2213,7 @@ generator ships that matrix on purpose and `verify_generator_sync.py` requires i
 ## W24 / W25 — see `SHIELD_AND_NORMALISATION_PLAN.md` and DESIGN.md §11b
 
 **W24 (one warhead per weapon)** is now a written binding rule — DESIGN.md **§11b**. Among
-fired weapons, **34.5%** comply (560 of 1622); **57.8%** (935 of 1622) carry 2 or more damage
+fired weapons, **34.5%** comply (560 of 1622); **57.8%** (934 of 1622) carry 2 or more damage
 warheads, worst case **15**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
 content ships, because same-family collisions are a symptom of it rather than a bug in the
 conversion. Collapsing preserves the SUM; where no family fits, a NEW family is created

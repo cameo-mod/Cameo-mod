@@ -9180,28 +9180,14 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "35",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "4",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
         "tag": "MissileAP_Light_Percentage",
@@ -9216,7 +9202,6 @@
       "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
-       "^ArrowWeapon",
        "^SteelLightMissile",
        "^Effect_Grey_Explosion_Small_RA2"
       ],
@@ -9232,31 +9217,24 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "35",
-        "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "8000",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "400",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "4",
         "falloff": "100, 50, 33, 25, 20, 0",
         "spread": "200",
         "tag": "MissileAP_Light_Percentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": null,
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
