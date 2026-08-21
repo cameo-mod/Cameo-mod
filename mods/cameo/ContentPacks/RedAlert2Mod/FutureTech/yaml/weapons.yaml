@@ -950,6 +950,10 @@ ShotgunAttackRobotGun:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
+	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
+	# ^Projectile_Bullet_* would take the type and orphan the other one's
+	# guidance fields. Keeps today's resolved type verbatim.
+	Projectile: Bullet
 
 ShotgunAttackRobotGun_elite:
 	Inherits: ShotgunAttackRobotGun

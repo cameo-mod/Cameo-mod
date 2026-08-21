@@ -9444,30 +9444,27 @@ DefuseKit:
 		PointDefenseTypes: Missile
 
 ^Projectile_Bullet_Light:
-	Projectile: Bullet
+	# HITSCAN. A rifle round crosses its range in milliseconds; modelling it as a travelling
+	# projectile let fast units outrun bullets and made bursts land behind a moving target.
+	# InstantTracer resolves the warhead on the firing tick and draws the 50CAL sprite plus a
+	# short tracer dash as pure decoration. Speed/Contrail* are gone because there is no flight.
+	Projectile: InstantTracer
 		Image: 50CAL
-		ContrailZOffset: 4000
-		ContrailStartColor: 88888888
-		ContrailEndColor: 44444444
-		ContrailStartWidth: 30
-		ContrailEndWidth: 60
-		#ContrailWidth: 60
-		ContrailLength: 6
-		Speed: 2000
 		Inaccuracy: 100
+		TracerLength: 192
+		Width: 12
+		Duration: 3
+		Color: CCCCCCEE
 
 ^Projectile_Bullet_Medium:
-	Projectile: Bullet
+	# HITSCAN — see ^Projectile_Bullet_Light. Heavier round: longer, wider, warmer tracer.
+	Projectile: InstantTracer
 		Image: 50CAL
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		#ContrailWidth: 80
-		ContrailLength: 8
-		Speed: 4000
 		Inaccuracy: 200
+		TracerLength: 256
+		Width: 16
+		Duration: 3
+		Color: EECCAAEE
 
 ^Projectile_Chem_Light:
 	Projectile: Bullet

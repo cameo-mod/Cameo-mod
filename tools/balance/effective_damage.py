@@ -42,7 +42,12 @@ MIN_SPREAD = 100        # absolute floor: no weapon integrates below Spread 100 
 # range. A projectile with no Speed field is also instant (beams / support-power explosions). The
 # SPEED_CAP only tames actual moving projectiles.
 INSTANT_PROJECTILES = {"InstantHit", "LaserZap", "Railgun", "InstantHitLine", "InstantHitAS",
-                       "SupportPowerInstantExplode", "InstantExplode"}
+                       "SupportPowerInstantExplode", "InstantExplode",
+                       # Cameo hitscan tracer: damage lands on the firing tick, the streak is
+                       # decoration. Named explicitly rather than relying on "has no Speed",
+                       # because a weapon that inherits a SECOND projectile template can drag a
+                       # foreign `Speed` in and would then be priced as a slow shell.
+                       "InstantTracer"}
 
 
 def parse_wdist(s) -> int:

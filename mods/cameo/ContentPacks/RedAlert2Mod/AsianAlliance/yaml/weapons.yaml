@@ -203,18 +203,30 @@ RA2AsianShotgunFanatic1:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
+	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
+	# ^Projectile_Bullet_* would take the type and orphan the other one's
+	# guidance fields. Keeps today's resolved type verbatim.
+	Projectile: Bullet
 
 RA2AsianShotgunFanatic2:
 	Inherits: RA2AsianShotgunFanatic1
 	Range: 5500
 	Burst: 2
 	BurstDelays: 3
+	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
+	# ^Projectile_Bullet_* would take the type and orphan the other one's
+	# guidance fields. Keeps today's resolved type verbatim.
+	Projectile: Bullet
 
 RA2AsianShotgunFanatic3:
 	Inherits: RA2AsianShotgunFanatic1
 	Range: 6000
 	Burst: 3
 	BurstDelays: 3
+	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
+	# ^Projectile_Bullet_* would take the type and orphan the other one's
+	# guidance fields. Keeps today's resolved type verbatim.
+	Projectile: Bullet
 
 AsianSamuraiSword1:
 	Inherits@wh: ^Warhead_Melee_Medium
@@ -1791,11 +1803,19 @@ AsianPelicanMG:
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
+	# ^Projectile_Bullet_* would take the type and orphan the other one's
+	# guidance fields. Keeps today's resolved type verbatim.
+	Projectile: Bullet
 
 AsianPelicanMG_elite:
 	Inherits: AsianPelicanMG
 	Range: 7100
 	Burst: 8
+	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
+	# ^Projectile_Bullet_* would take the type and orphan the other one's
+	# guidance fields. Keeps today's resolved type verbatim.
+	Projectile: Bullet
 
 AAGunBoatCannon:
 	Inherits: ^RA2HeavyCannon
@@ -1988,6 +2008,10 @@ ASDFGun2:
 	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
+	# ^Projectile_Bullet_* would take the type and orphan the other one's
+	# guidance fields. Keeps today's resolved type verbatim.
+	Projectile: Bullet
 
 ASDFKamikazeTargeting:
 	Range: 7250
