@@ -453,7 +453,7 @@ DeviatorMissile:
 		AirThreshold: 0c0
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Structure, MCImmune
-		ValidStances: Neutral, Enemy
+		ValidRelationships: Neutral, Enemy
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1000
 

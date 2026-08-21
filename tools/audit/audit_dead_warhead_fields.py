@@ -41,7 +41,7 @@ from cameo_model import Model  # noqa: E402
 
 # Distinct (warhead type, dead field) pairs present when this audit was written (2026-08-22).
 # ⚠ RATCHET — LOWER ONLY. Raising it hides a field the engine is throwing away.
-DEAD_FIELD_BASELINE = 26
+DEAD_FIELD_BASELINE = 15
 
 # mod.yaml `Assemblies:` order — first hit wins, exactly like ObjectCreator.FindType.
 ASSEMBLY_DIRS = [
@@ -54,7 +54,14 @@ ASSEMBLY_DIRS = [
 ]
 
 CLASS_RE = re.compile(r"^\s*(?:public|internal)\s+(?:abstract\s+|sealed\s+)?class\s+(\w+)\s*:\s*([\w<>, .]+)")
-FIELD_RE = re.compile(r"^\s*public\s+readonly\s+.+?\s+(\w+)\s*(?:=|;)")
+# ⚠ NOT just `public readonly` — FieldLoader loads any public instance field, and some AS
+# warheads declare mutable ones (CreateTintedCellsWarhead: `public int Level = 100;`).
+# Matching only readonly fields reported 45 live radiation settings as dead.
+# Requires the declaration to end in `=` or `;` so methods and properties are excluded.
+FIELD_RE = re.compile(
+    r"^\s*public\s+(?!readonly\s+static)(?:readonly\s+)?"
+    r"(?!class|struct|enum|const|static|delegate|event|abstract|override|virtual|sealed)"
+    r"[\w<>\[\]\,\.\?\s]+?\s+(\w+)\s*(?:=|;)")
 IGNORE_RE = re.compile(r"\[FieldLoader\.Ignore\]")
 
 

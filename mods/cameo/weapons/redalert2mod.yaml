@@ -1441,7 +1441,7 @@ RA2TraitorPower:
 		AirThreshold: 0
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Structure, MCImmune
-		ValidStances: Neutral, Enemy
+		ValidRelationships: Neutral, Enemy
 
 RA2Robotmm:
 	Inherits@wh: ^Warhead_Tesla_Heavy
