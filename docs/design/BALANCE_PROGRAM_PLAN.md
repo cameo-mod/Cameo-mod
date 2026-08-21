@@ -431,6 +431,167 @@ any yaml moves.
 
 ---
 
+## 1c. ⛔ W24 BRANCH REVIEW (2026-08-19) — what the `d2k_projectile_effect_split` batch got wrong
+
+39 commits reviewed by resolving all 2325 weapons in an `origin/master` worktree and diffing the
+invariants. **The tree boots, 227 tests pass, `find_empty_warhead` is 0 and all doc claims are
+green** — the batch is not broken. But four defect classes came out of it, three now fixed
+(`47a66b6c2`) and one that needs new templates before it can be.
+
+### ✅ FIXED — the sum was dropped on the nuclear batch
+
+The last six commits scaled the surviving `Nuclear_Super` main to **10% of its sibling** instead of
+preserving the pileup's total, so 7 weapons lost 30–93% of their damage (`SCUDNUKE` 300000 → 20000).
+`WEAPON_3WAY_SPLIT.md` is explicit that the retrofit "PRESERVES the weapon's existing on-grid value
+verbatim; it invents NO numbers". Restored — every value is the sibling main's own, all on the
+2000-grid. The earlier D2K batch had done this correctly (`GoliathRockets_AA`: 5×6000 → one 30000),
+so this was a mid-batch policy change, not a misunderstanding.
+
+### ✅ FIXED — two silent behaviour regressions the damage diff surfaced
+
+`SCUDNUKE` gained air-targeting (`^Warhead_Nuclear_Super` carries `ValidTargets: Ground, Water, Air`);
+`HeavyOrdosCombatTankRockets` went **silent** (base resolved `Report: ROCKET1.WAV` through
+`^D2KRocket`; none of the three new layers carry one).
+
+### ✅ FIXED — one dead template
+
+`^Effect_MissileHE_Heavy_D2K_Rocket`: created in this batch, inherited by ZERO weapons, and carrying
+four `-Warhead@` removals (dead D4 crash-class node).
+
+### ⬜ OPEN — the real defect: legacy templates were CONVERTED, never COLLAPSED
+
+This is the one the maintainer caught by reading names: *"TS70mmChem is obviously a chemical cannon
+from the name alone."* Each conversion was a faithful one-for-one swap of a legacy template for its
+modern equivalent — and left the weapon with **two or three damage mains**, because the blend family
+it actually needs either was not reached for or does not exist:
+
+| weapon | mains after the batch | what it should be |
+|---|---|---|
+| `TS70mmChem` | `CannonHE_Medium` + `Chemical_Light` | **`^Warhead_ChemCannon_Light`** — already exists, already used 6× **in the same file** |
+| `TSScoopDualChem` | `CannonHE_Medium` + `Chemical_Medium` | **`^Warhead_ChemCannon_Medium`** — exists |
+| `JapanesePlasmaBomb` | `Chemical_Heavy` + `Flame_Heavy` + `Demolition_Heavy` | **`^Warhead_Plasma_Heavy`** — exists |
+| `NuclearMaverick` | `MissileHE_Heavy` + `Nuclear_Super` | `^Warhead_MissileHE_Heavy` (see ruling 2) |
+| `ThermobaricNuclearMaverick` | `MissileHE_Heavy` + `Nuclear_Super` + `Flame_Heavy` | `^Warhead_MissileThermobaric_Heavy` — **NEW** |
+| `MonsterTank120mm` | `CannonHE_Heavy` + `Nuclear_Super` | `^Warhead_CannonNuke_Heavy` — **NEW** |
+| `TorpTubeThermobaric` | `Nuclear_Super` + `MissileAP_Heavy` | `^Warhead_MissileNuke_*` — **NEW** |
+| `D2K_Rocket_Trooper*` | three `MissileAP` levels at once | one level |
+| `D2K_Rocket_Trooper2` | `Demolition_Light` + `Railgun_Heavy` + `CannonHE_Medium` | a rocket trooper firing a railgun and a cannon |
+
+⚠ **`CannonHE_Medium` on the two TS chem weapons is PRE-EXISTING debt, not this batch's doing** —
+the diff only converted `^LightChemicalWeapon` → `^Warhead_Chemical_Light`. The outcome is still
+wrong, but the fix is a collapse, not a revert.
+
+### ⬜ OPEN — template proliferation
+
+The batch created **40 new templates, 27 of which serve exactly ONE weapon**
+(`^Projectile_Grenade_Light_D2K_155mm`, `^Warhead_CannonHE_Heavy_D2K_DevBullet`, …). A template used
+by one weapon is that weapon's own body relocated — it bloats the library and shares nothing. Two are
+**warhead** templates, which carry `Versus`: that is the 2494-profile sprawl returning through the
+back door, against the "Versus lives ONLY in `^Warhead_*` templates, a different profile means a
+different template" law. Collapse them back into the shared layer or inline them on the weapon.
+
+### 📋 MAINTAINER RULINGS 2026-08-19
+
+1. **Blend families are DELIVERY-FIRST — `<Delivery><Payload>` — everywhere, one convention.**
+   ⚠ An earlier draft of this section recommended element-first "to match the existing templates".
+   That was measured on half the library and is **wrong**: the split is exactly **5 v 5**
+   — delivery-first `CannonAP` `CannonHE` `MissileAA` `MissileAP` `MissileHE` against element-first
+   `ChemCannon` `ChemMissile` `FireCannon` `FireMissile` `PhotonCannon`. Neither was "the existing
+   convention", so the tie is broken on principle, and the maintainer's reading is the right one:
+   delivery is the macro-type the **weapon ordering law** already sorts by, and it scales as one
+   block — `Missile{AP,HE,AA,Chem,Fire,Nuke,Quantum,Tesla,Thermobaric}`.
+
+   | rename (12 templates, **5 files** touch them) | new |
+   |---|---|
+   | `^Warhead_ChemCannon_*` | `^Warhead_CannonChem_*` |
+   | `^Warhead_ChemMissile_*` | `^Warhead_MissileChem_*` |
+   | `^Warhead_FireCannon_*` | `^Warhead_CannonFire_*` |
+   | `^Warhead_FireMissile_*` | `^Warhead_MissileFire_*` |
+
+   **NEW families** (L/M/H each, via `gen_weapon_template.py` — never hand-typed, per the ordering
+   law): **`MissileNuke`, `CannonNuke`, `MissileQuantum`, `MissileTesla`, `MissileThermobaric`**.
+   `MissileQuantum` is for Steel Consortium's upgraded quantum weapons; `MissileTesla` for the RA1
+   Soviet tesla-missile upgrades. **`PhotonCannon` is EXEMPT** — it is a proper noun (the Protoss
+   building's actual weapon), not a `<Element><Delivery>` blend.
+
+2. **Weapon names follow the UPGRADE GATE**, because that is what the player reads in the UI —
+   and where the gate itself is misnamed, the GATE is renamed too.
+   `NuclearMaverick`/`ThermobaricNuclearMaverick` both belong to **one** actor,
+   `ra1_soviets_su57attackbomber`. The upgrade trait `^HighExplosiveRocketsUpgradeRA1` becomes
+   **`^ThermobaricRocketsUpgradeRA1`** (condition `..._upgrade_highexplosiverockets` →
+   `..._upgrade_thermobaricrockets`), so the pair reads straight through:
+
+   | | weapon | family |
+   |---|---|---|
+   | base | `Su57Maverick` | `^Warhead_MissileHE_Heavy` |
+   | upgrade | `Su57MaverickThermobaric` | `^Warhead_MissileThermobaric_Heavy` |
+
+   `MonsterTank120mmThermobaric` is gated on `doctrine_inferno` → `MonsterTank120mmInferno`.
+   The weapon-pair rename law applies: renaming a base renames its variants.
+   ⚠ **OPEN:** this drops the `Nuclear_Super` component from the Su-57 entirely (an HE→thermobaric
+   missile, no nuke). Total damage is preserved either way — 40000 goes onto the single main — but
+   whether an Su-57 should carry a nuclear payload at all is a design call still to confirm.
+
+### ⛔ THE GUARD GAP — why none of this was caught
+
+`audit_warhead_split` counts broadcasts, `find_empty_warhead` catches NREs, the boot gate proves it
+loads, `doc_claims` pins totals. **Nothing checks that a weapon's family matches its identity, that a
+collapse preserved the total, or that a new template has more than one user.** All three are
+mechanical and belong in the audit suite BEFORE the next batch — see the plan below.
+
+---
+
+## 1d. PLAN — finishing the pipeline, in dependency order (2026-08-19)
+
+⛔ **§0a still governs: weapon STRUCTURE before pricing.** Phase A is not optional preamble; every
+delivery and price number measured before it lands is measuring the wrong object
+(`meters_filling_before_death` claimed 534/549 and is really 118/549 for exactly this reason).
+
+### Phase A — finish W24 (blocks everything downstream)
+
+| # | work | gate |
+|---|---|---|
+| A0 | **Three new guards first**: family-vs-name mismatch, collapse-preserves-total, template-with-one-user. Cheap, and they make the rest self-checking. | tests green |
+| A1a | Rename the 4 element-first blends to delivery-first (12 templates, 5 files) | `safe_rename.py`, invariant diff = 0 |
+| A1b | Generate `MissileNuke` / `CannonNuke` / `MissileQuantum` / `MissileTesla` / `MissileThermobaric` (L/M/H) via `gen_weapon_template.py` | `verify_generator_sync` |
+| A2 | Collapse the 7 nuclear weapons onto A1b's families — ONE main each, total preserved | invariant diff = 0 |
+| A3 | Fix the three misclassifications onto templates that already exist (`CannonChem` ×2, `Plasma` ×1) | invariant diff = 0 |
+| A4 | Rename `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1` + its condition, then the Su-57 and MonsterTank weapon pairs per ruling 2 | `safe_rename.py`, fluent keys |
+| A5 | Collapse the 27 single-user templates | template census |
+| A6 | Continue the burn-down: `w24_multi_main_fed` **381**, `multi_main_fired_weapons` **932** | both ratchets fall |
+
+### Phase B — the physical-state half (parallel to A, different file set)
+
+| # | work | note |
+|---|---|---|
+| B1 | `^Corrodible` coverage — ~100 vehicles + 42 aircraft | Zerg BOTH; Protoss/Terran vehicles+aircraft corrodible; Terran infantry poisonable; Protoss infantry neither. **Run `audit_duplicate_inherits` — adding a parent to a base template is the D1 crash route.** |
+| B2 | **W9 Poison meter** — the infantry half | Corrosion is 0% infantry / 0% buildings BY DESIGN, so chemical prices are low because half their victims have no meter |
+| B3 | Devin's 43 legacy Cryo `apply` → `scaled` conversions | ⛔ **AFTER** each weapon is split — converting a multi-main weapon moves it from the exempt class into the broken one |
+| B4 | Requantify delivery with **relaxation** (~642 meter/shot at `ReloadDelay 60`) | one term at a time, on a corrected base |
+
+### Phase C — pricing (ONLY after A and B)
+
+| # | work | state |
+|---|---|---|
+| C1 | **W11 class-anchor sign-off — 27/27 unsigned** | ⛔ **hard blocker: no price is final until this lands** |
+| C2 | W23 — rule on the 33 weapons that collide inside one family; delete the 6 obsolete templates that still bias every census | needs one ruling |
+| C3 | W15 (%-twin + `reference_hp` 200000) → unblocks W17 | ready |
+| C4 | W16 charge-up · W18 basis points · W19 `ExtraDamage` chips | ready |
+| C5 | W13 warhead rebuild from the reference corpus | ready |
+| C6 | W12 superweapons as a separate track | maintainer-led |
+
+### Phase D — remaining meters (needs C# first)
+
+W6 (`ModifiesCombatProportionalToPhysicalState`) → then W8 SpinUp, W10 Blind, W7 Sonic/Resonance.
+⚠ `engine/` is a build output — ship these as an `OpenRA.Mods.Cameo` **shadow** if the type allows it.
+
+### Housekeeping (not blocking, but it is the tree everyone shares)
+
+~90 untracked files in `scratchpad/` (not gitignored), 5 stale worktrees under `%TEMP%`, local
+`master` diverged (ahead 1 / behind 2), and 15 commits on this branch not pushed to its own remote.
+
+---
+
 ## 2. FILE OWNERSHIP — how two agents work at once without collisions
 
 One owner per FILE SET at a time. These sets are disjoint by construction:
