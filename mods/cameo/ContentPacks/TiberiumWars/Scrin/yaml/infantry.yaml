@@ -73,6 +73,8 @@ scrin_assimilator:
 		CaptureTypes: building, defense, tech
 		PlayerExperience: 500
 		ConsumedByCapture: true
+	AttackFrontal:
+		FacingTolerance: 0
 	Selectable:
 		Priority: 5
 	RenderSprites:
