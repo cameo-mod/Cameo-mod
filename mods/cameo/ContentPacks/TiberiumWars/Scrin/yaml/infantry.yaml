@@ -23,8 +23,8 @@ scrin_disintegrator:
 		Queue: ScrinInfantry
 		BuildPaletteOrder: 10
 		Prerequisites: ~scrin_portal
-		Icon: stand
-		IconPalette: scrin_disintegrator_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Basic ranged infantry.
 	Valued:
@@ -48,8 +48,8 @@ scrin_assimilator:
 		Queue: ScrinInfantry
 		BuildPaletteOrder: 20
 		Prerequisites: ~scrin_portal
-		Icon: stand
-		IconPalette: scrin_assimilator_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Captures and repairs structures.
 	Valued:
@@ -88,8 +88,8 @@ scrin_shock_trooper:
 		Queue: ScrinInfantry
 		BuildPaletteOrder: 30
 		Prerequisites: ~scrin_portal, scrin_nerve_center
-		Icon: stand
-		IconPalette: scrin_shock_trooper_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Heavy anti-vehicle infantry.
 	Valued:
@@ -111,8 +111,8 @@ scrin_shock_trooper_blink_pack:
 		Queue: ScrinInfantry
 		BuildPaletteOrder: 40
 		Prerequisites: ~scrin_portal, scrin_stasis_chamber
-		Icon: stand
-		IconPalette: scrin_shock_trooper_blink_pack_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Elite Shock Trooper equipped for rapid repositioning.
 	Valued:
@@ -145,8 +145,8 @@ scrin_ravager:
 		Queue: ScrinInfantry
 		BuildPaletteOrder: 50
 		Prerequisites: ~scrin_portal, scrin_nerve_center
-		Icon: stand
-		IconPalette: scrin_ravager_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Rapid-firing Tiberium shard infantry.
 	Valued:
@@ -171,8 +171,8 @@ scrin_mastermind:
 		BuildPaletteOrder: 60
 		Prerequisites: ~scrin_portal, scrin_stasis_chamber
 		BuildLimit: 1
-		Icon: stand
-		IconPalette: scrin_mastermind_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Advanced battlefield control infantry.
 	Valued:
@@ -203,8 +203,8 @@ scrin_prodigy:
 		BuildPaletteOrder: 70
 		Prerequisites: ~scrin_portal, scrin_stasis_chamber, scrin_technology_assembler
 		BuildLimit: 1
-		Icon: stand
-		IconPalette: scrin_prodigy_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Elite Scrin command organism.
 	Valued:

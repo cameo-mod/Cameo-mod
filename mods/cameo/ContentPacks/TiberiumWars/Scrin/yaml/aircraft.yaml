@@ -45,7 +45,7 @@ scrin_drone_ship:
 		Queue: ScrinAircraft, ScrinCapitalAircraft
 		BuildPaletteOrder: 10
 		Prerequisites: scrin_reactor, scrin_extractor
-		Icon: idle
+		Icon: icon
 		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Deploys into a Drone Platform construction hub.
@@ -85,8 +85,8 @@ scrin_stormrider:
 		Queue: ScrinAircraft, ScrinCapitalAircraft
 		BuildPaletteOrder: 20
 		Prerequisites: scrin_reactor, scrin_extractor
-		Icon: idle
-		IconPalette: scrin_stormrider_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Fast attack spacecraft effective against ground and air targets.
 	Valued:
@@ -121,8 +121,8 @@ scrin_devastator_warship:
 		Queue: ScrinCapitalAircraft
 		BuildPaletteOrder: 30
 		Prerequisites: scrin_technology_assembler
-		Icon: idle
-		IconPalette: scrin_devastator_warship_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Heavy long-range assault warship.
 	Valued:
@@ -157,8 +157,8 @@ scrin_planetary_assault_carrier:
 		Queue: ScrinCapitalAircraft
 		BuildPaletteOrder: 40
 		Prerequisites: scrin_technology_assembler
-		Icon: idle
-		IconPalette: scrin_planetary_assault_carrier_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Carrier spacecraft that deploys eight Invader Fighters.
 	Valued:
@@ -230,8 +230,8 @@ scrin_mothership:
 		BuildPaletteOrder: 50
 		Prerequisites: scrin_signal_transmitter
 		BuildLimit: 1
-		Icon: idle
-		IconPalette: scrin_mothership_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Colossal command spacecraft with a devastating energy weapon.
 	Valued:
