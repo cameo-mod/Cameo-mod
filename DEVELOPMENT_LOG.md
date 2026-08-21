@@ -1,5 +1,26 @@
 # Development Log
 
+## 2026-08-21 — Ixian D2K missile damage-total correction (boot-gated)
+
+- Re-verified `D2K_TowerMissile` and `mtank_pri2` against their pre-refactor
+  (`7d346685^`) resolved baseline and found the local `Damage` had been set to
+  the per-warhead value instead of the per-shot total. Restored the totals:
+  - `D2K_TowerMissile`: one `Warhead@MissileAP_Heavy` main `Damage: 16000`
+    (was 4 × 4000) and `Damage: 8` for the percentage twin (was 4 × 2).
+  - `mtank_pri2`: one `Warhead@MissileAP_Heavy` main `Damage: 24000`
+    (was 3 × 8000) and `Damage: 12` for the percentage twin (was 3 × 4).
+- Removed explicit `HealthPercentageDamage` from the percentage twins so the
+  `^D2KMissile` `AreaDamagePercentage` family is inherited consistently.
+- Regenerated all balance ledgers with `extract_stats.py`; `audit_balance_drift`
+  reports 32/32 ledgers clean.
+- `review_resolve_diff.py wt_pre_7d34668 . D2K_TowerMissile mtank_pri2` reports
+  behavioural invariants preserved.
+- Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split`
+  950 pre-existing broadcasts, `audit_physical_state_warheads` PASS,
+  `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new
+  `exception-*.log`.
+
 ## 2026-08-24 — Ixian D2K missile correction (boot-gated)
 
 - Corrected `D2K_TowerMissile` and `mtank_pri2` in

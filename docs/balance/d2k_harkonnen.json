@@ -764,18 +764,18 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "16000",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "800",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "8",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
         "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",

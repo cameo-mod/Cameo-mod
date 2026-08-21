@@ -320,9 +320,9 @@ D2K_TowerMissile:
 	Burst: 2
 	BurstDelays: 5
 	Warhead@MissileAP_Heavy:
-		Damage: 4000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
-		Damage: 2
+		Damage: 16000
+	Warhead@MissileAP_Heavy_Percentage:
+		Damage: 8
 
 mtank_pri2:
 	Inherits: ^D2KMissile
@@ -335,9 +335,9 @@ mtank_pri2:
 	MinRange: 2010
 	Report: ROCKET1.WAV
 	Warhead@MissileAP_Heavy:
-		Damage: 8000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 24000
+	Warhead@MissileAP_Heavy_Percentage:
+		Damage: 12
 
 IxRailgunDroneBullet:
 	Inherits: ^FlakWeapon
