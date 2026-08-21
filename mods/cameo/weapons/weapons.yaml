@@ -6606,7 +6606,7 @@ DefuseKit:
 			Helicopter: 59
 			Heroic: 56
 			Spaceship: 50
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Temperature: 50
 	Warhead@MissileFire_Light_Percentage: AreaDamagePercentage
@@ -6670,7 +6670,7 @@ DefuseKit:
 			Helicopter: 65
 			Spaceship: 54
 			Heroic: 44
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Temperature: 50
 	Warhead@MissileFire_Medium_Percentage: AreaDamagePercentage
@@ -6734,7 +6734,7 @@ DefuseKit:
 			Bomber: 73
 			Helicopter: 66
 			Spaceship: 59
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Temperature: 50
 	Warhead@MissileFire_Heavy_Percentage: AreaDamagePercentage
@@ -7446,7 +7446,7 @@ DefuseKit:
 			Bomber: 56
 			Helicopter: 47
 			Spaceship: 35
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Temperature: 50
 	Warhead@CannonFire_Light_Percentage: AreaDamagePercentage
@@ -7510,7 +7510,7 @@ DefuseKit:
 			Helicopter: 57
 			Heroic: 54
 			Spaceship: 39
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Temperature: 50
 	Warhead@CannonFire_Medium_Percentage: AreaDamagePercentage
@@ -7574,7 +7574,7 @@ DefuseKit:
 			Bomber: 60
 			Helicopter: 59
 			Spaceship: 58
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStates:
 			Temperature: 50
 	Warhead@CannonFire_Heavy_Percentage: AreaDamagePercentage

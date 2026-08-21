@@ -3653,51 +3653,35 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
-        "spread": "1000",
-        "tag": "Nuclear_Super",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
-        "spread": "500",
-        "tag": "Nuclear_Super_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "tag": "MissileNuke_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "9",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
+        "tag": "MissileNuke_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.375,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "100",
       "requires": "ra1_soviets_doctrine_inferno",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Nuclear_Super",
-       "^Warhead_MissileAP_Heavy",
+       "^Warhead_MissileNuke_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_Nuclear_Super",
        "^Effect_MissileAP_Heavy"
       ],
       "warheads": [
-       "^Warhead_Nuclear_Super",
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileNuke_Heavy"
       ],
       "weapon": "TorpTubeThermobaric",
       "weapon_class_source": "template"

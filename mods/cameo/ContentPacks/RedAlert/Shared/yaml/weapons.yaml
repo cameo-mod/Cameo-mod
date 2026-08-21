@@ -1783,8 +1783,7 @@ TorpTube:
 		InvalidTargets: Ship, Structure, Bridge
 
 TorpTubeThermobaric:
-	Inherits@wh: ^Warhead_Nuclear_Super
-	Inherits@wh2: ^Warhead_MissileAP_Heavy
+	Inherits@wh: ^Warhead_MissileNuke_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Nuclear_Super
 	Inherits@fx2: ^Effect_MissileAP_Heavy
@@ -1810,38 +1809,19 @@ TorpTubeThermobaric:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	Warhead@Nuclear_Super: AreaDamage
-		ValidTargets: Ground, Air, Water
-		ValidRelationships: Enemy
-		Damage: 16000
-		MaxRadius: 9000
-		AffectsParent: true
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Air, Water
-		ValidRelationships: Enemy
-		Damage: 1
-		Spread: 500
-		MaxRadius: 4500
-		AffectsParent: true
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
-		Ticks: 8
-	Warhead@MissileAP_Heavy: AreaDamage
+	Warhead@MissileNuke_Heavy:
 		ValidTargets: Water, Underwater, Bridge, Structure
 		ValidRelationships: Enemy
-		Damage: 16000
-		MaxRadius: 4000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
+		AffectsParent: true
+		Damage: 32000
+	Warhead@MissileNuke_Heavy_Percentage:
 		ValidTargets: Water, Underwater, Bridge, Structure
 		ValidRelationships: Enemy
-		Damage: 8
-		MaxRadius: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		UpdatesUnitStatistics: false
+		AffectsParent: true
+		Damage: 9
 	-Warhead@Glow:
 	-Warhead@Smudge:
+	-Warhead@EffectAir:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
@@ -1852,13 +1832,11 @@ TorpTubeThermobaric:
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
-	-Warhead@EffectAir:
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: splash9.aud
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
-
 DepthCharge:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light

@@ -1,14 +1,21 @@
 # Development Log
 
+## 2026-08-22 — W24 A2: five nuclear/thermobaric weapons collapsed (boot-gated)
 
-
-
-
-
-
-
-
-
+- Converted five multi-main weapons to one damage warhead each, preserving per-shot totals:
+  - `NuclearMaverick` -> `^Warhead_MissileHE_Heavy` (40 000 main, 11 percentage)
+  - `ThermobaricNuclearMaverick` -> `^Warhead_MissileThermobaric_Heavy` (42 000 main, 15 percentage)
+  - `MonsterTank120mm` -> `^Warhead_CannonNuke_Heavy` (80 000 main, 22 percentage)
+  - `TorpTubeThermobaric` -> `^Warhead_MissileNuke_Heavy` (32 000 main, 9 percentage)
+  - `MonsterTank120mmThermobaric` -> `^Warhead_CannonFire_Heavy` (120 000 main, 42 percentage)
+- Dropped the `^Warhead_Nuclear_Super` component from the Su-57 base/upgrade pair.
+- Fixed `^Warhead_CannonFire_*` and `^Warhead_MissileFire_*` `DamageTypes` to
+  `Prone75Percent, TriggerProne, FireDeath, Incendiary` in `tools/balance/gen_weapon_template.py`
+  and re-spliced `mods/cameo/weapons/weapons.yaml`.
+- Left `SCUDNUKE` and `SCUDNUKEThermobaric` on `^Warhead_Nuclear_Super` pending maintainer call.
+- Verification: `review_batch_diff` clean, `find_empty_warhead` 0, `find_orphan_old_keys` 0 real,
+  `audit_warhead_split` 939 vs baseline 939, `verify_generator_sync` 0,
+  `extract_stats --check` 0, boot-gated (menu loaded, no new exceptions).
 
 ## 2026-08-22 — W24 A1a: delivery-first blend family rename
 

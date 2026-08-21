@@ -2041,10 +2041,8 @@ ThermobaricMaverick:
 
 NuclearMaverick:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
-	Inherits@wh2: ^Warhead_Nuclear_Super
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_Nuclear_Super
-	Inherits@fx2: ^Effect_MissileHE_Heavy
+	Inherits@fx: ^Effect_MissileHE_Heavy
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 4
@@ -2066,40 +2064,14 @@ NuclearMaverick:
 		TrailInterval: 1
 		TrailDelay: 1
 	Warhead@MissileHE_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
+		Damage: 40000
 	Warhead@MissileHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 10
-	Warhead@Nuclear_Super:
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy
-		Damage: 20000
-		MaxRadius: 9000
-		AffectsParent: false
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Nuclear_Super_Percentage:
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy
-		Damage: 1
-		Spread: 500
-		MaxRadius: 4500
-		AffectsParent: false
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
-	Warhead@Effect: CreateEffect
-		ValidTargets: Ground, Water, Air
-		Explosions: nuke_small
-		ImpactSounds: kaboom1.aud
-		ImpactActors: false
-
+		Damage: 11
 ThermobaricNuclearMaverick:
-	Inherits@wh: ^Warhead_MissileHE_Heavy
-	Inherits@wh2: ^Warhead_Nuclear_Super
-	Inherits@wh3: ^Warhead_Flame_Heavy
+	Inherits@wh: ^Warhead_MissileThermobaric_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
-	Inherits@fx2: ^Effect_Nuclear_Super
+	ValidTargets: Ground, Water
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 4
@@ -2121,40 +2093,10 @@ ThermobaricNuclearMaverick:
 		ContrailEndColor: 33221100
 		TrailInterval: 1
 		TrailDelay: 1
-	Warhead@MissileHE_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 14000
-	Warhead@MissileHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 7
-	Warhead@Nuclear_Super:
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy
-		Damage: 14000
-		MaxRadius: 9000
-		AffectsParent: false
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Nuclear_Super_Percentage:
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy
-		Damage: 1
-		Spread: 500
-		MaxRadius: 4500
-		AffectsParent: false
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
-		Ticks: 7
-	Warhead@Flame_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 14000
-	Warhead@Flame_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 7
-	Warhead@Effect: CreateEffect
-		ValidTargets: Ground, Water, Air
-		Explosions: nuke_small
-		ImpactSounds: kaboom1.aud
-		ImpactActors: false
+	Warhead@MissileThermobaric_Heavy:
+		Damage: 42000
+	Warhead@MissileThermobaric_Heavy_Percentage:
+		Damage: 15
 	Warhead@Effect2: CreateEffect
 		ValidTargets: Ground, Water, Air
 		Explosions: large_napalm
@@ -2164,7 +2106,6 @@ ThermobaricNuclearMaverick:
 		ImpactSounds: firebl3.aud
 		Delay: 5
 		ImpactActors: false
-
 105mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -2907,10 +2848,10 @@ MammothTusk2ThermobaricTargetingComputer:
 	ValidTargets: Ground, Water, Air
 
 MonsterTank120mm:
-	Inherits@wh: ^Warhead_Nuclear_Super
-	Inherits@wh2: ^Warhead_CannonHE_Heavy
+	Inherits@wh: ^Warhead_CannonNuke_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
+	ValidTargets: Ground, Water
 	Inherits@fx2: ^Effect_Nuclear_Super
 	Report: nukemisl.aud
 	ReloadDelay: 103
@@ -2921,41 +2862,36 @@ MonsterTank120mm:
 		Speed: 300
 		LaunchAngle: 50
 		Inaccuracy: 500
-	Warhead@CannonHE_Heavy:
-		Damage: 40000
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 20
-	Warhead@Nuclear_Super:
-		ValidTargets: Ground, Air, Water
-		ValidRelationships: Enemy
-		Damage: 40000
-		MaxRadius: 9000
+	Warhead@CannonNuke_Heavy:
+		Damage: 80000
 		AffectsParent: true
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Nuclear_Super_Percentage:
-		ValidTargets: Ground, Air, Water
-		ValidRelationships: Enemy
-		Damage: 2
-		Spread: 500
-		MaxRadius: 4500
+	Warhead@CannonNuke_Heavy_Percentage:
+		Damage: 22
 		AffectsParent: true
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
 		ImpactActors: true
-
 MonsterTank120mmThermobaric:
-	Inherits@wh: ^Warhead_Flame_Heavy
-	Inherits@proj: ^Projectile_Flame_Heavy
-	Inherits@fx: ^Effect_Flame_Heavy
-	Inherits: MonsterTank120mm
-	Warhead@Flame_Heavy:
-		Damage: 40000
-	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
-
+	Inherits@wh: ^Warhead_CannonFire_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
+	Inherits@fx2: ^Effect_Flame_Heavy
+	Report: nukemisl.aud
+	ReloadDelay: 103
+	Burst: 2
+	BurstDelays: 32
+	Range: 7833
+	Projectile: Bullet
+		Speed: 300
+		LaunchAngle: 50
+		Inaccuracy: 500
+	Warhead@CannonFire_Heavy:
+		Damage: 120000
+		AffectsParent: true
+	Warhead@CannonFire_Heavy_Percentage:
+		Damage: 42
+		AffectsParent: true
 MonsterTankTusk:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_MissileHE_Heavy

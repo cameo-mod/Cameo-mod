@@ -1544,6 +1544,8 @@ FAMILY_DAMAGE_TYPES = {
     "Inferno":    "Prone75Percent, TriggerProne, FireDeath, Incendiary",
     "CannonNuke":    "Prone75Percent, TriggerProne, FireDeath, Incendiary",
     "MissileNuke":    "Prone75Percent, TriggerProne, FireDeath, Incendiary",
+    "CannonFire":    "Prone75Percent, TriggerProne, FireDeath, Incendiary",
+    "MissileFire":    "Prone75Percent, TriggerProne, FireDeath, Incendiary",
     "MissileTesla":   "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
     "MissileQuantum": "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
     "MissileThermobaric": "Prone75Percent, TriggerProne, FireDeath, Incendiary",
