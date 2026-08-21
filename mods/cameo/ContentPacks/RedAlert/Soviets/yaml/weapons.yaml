@@ -2127,10 +2127,11 @@ ThermobaricMaverick:
 		ImpactActors: false
 
 NuclearMaverick:
-	Inherits: ^NuclearWarhead
 	Inherits@wh: ^Warhead_MissileHE_Heavy
+	Inherits@wh2: ^Warhead_Nuclear_Super
 	Inherits@proj: ^Projectile_Missile_Heavy
-	Inherits@fx: ^Effect_MissileHE_Heavy
+	Inherits@fx: ^Effect_Nuclear_Super
+	Inherits@fx2: ^Effect_MissileHE_Heavy
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 4
@@ -2151,20 +2152,28 @@ NuclearMaverick:
 		ContrailStartColor: 996633
 		TrailInterval: 1
 		TrailDelay: 1
-	Warhead@NuclearWarhead: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		AffectsParent: false
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10
-		AffectsParent: false
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 	Warhead@MissileHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 10
+	Warhead@Nuclear_Super:
+		ValidTargets: Ground, Water, Air
+		ValidRelationships: Enemy
+		Damage: 2000
+		MaxRadius: 9000
+		AffectsParent: false
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@Nuclear_Super_Percentage:
+		ValidTargets: Ground, Water, Air
+		ValidRelationships: Enemy
+		Damage: 1
+		Spread: 500
+		MaxRadius: 4500
+		AffectsParent: false
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Water, Air
 		Explosions: nuke_small

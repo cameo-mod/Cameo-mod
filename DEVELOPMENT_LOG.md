@@ -1,5 +1,30 @@
 # Development Log
 
+## 2026-08-21 — NuclearMaverick 3-way split (boot-gated)
+
+- Converted `NuclearMaverick` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`
+  from the old full-stack `^NuclearWarhead` to a 3-way split finish conversion:
+  - `Inherits@wh: ^Warhead_MissileHE_Heavy`
+  - `Inherits@wh2: ^Warhead_Nuclear_Super`
+  - `Inherits@proj: ^Projectile_Missile_Heavy`
+  - `Inherits@fx: ^Effect_Nuclear_Super`
+  - `Inherits@fx2: ^Effect_MissileHE_Heavy`
+- Preserved per-shot totals (40000 flat + 20% percentage) by using the
+  `^Warhead_Nuclear_Super` 10-tick `AreaDamage` design with local `MaxRadius: 9000`
+  (main, `Damage: 2000`) and `Spread: 500`/`MaxRadius: 4500` (percentage, `Damage: 1`).
+- Preserved old `SpreadDamage`/`HealthPercentageDamage` shape (falloff 100->10,
+  `AffectsParent: false`, `ValidRelationships: Enemy`, `DamageTypes: Prone75Percent,
+  TriggerProne, FireDeath, Incendiary`) while moving to the canonical nuclear family.
+- Preserved `^Effect_MissileHE_Heavy` as the dominant effect layer: `Concrete: 200`,
+  `ShieldHit` duration 10, `EffectAir: big_explosion_air`, main `Effect: nuke_small`
+  (local), `Glow`/`Smudge`/dune smudges, plus `^Effect_Nuclear_Super`'s
+  `Smudge1/2/3` and `ShieldHitEffectNuclear`.
+- `extract_stats.py` regenerated ledgers and derived sidecars; `audit_balance_drift` clean.
+- Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real,
+  `audit_warhead_split` 945 (baseline lowered 946->945),
+  `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+
 ## 2026-08-24 — HammerheadArtillery 3-way split (boot-gated)
 
 - Converted `HammerheadArtillery` in `mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml`

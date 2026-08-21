@@ -1,8 +1,8 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 300
-Single old-family with new inherits (Phase B completion): 2
+Total concrete weapons on old families: 299
+Single old-family with new inherits (Phase B completion): 1
 Pure single old-family (mechanical Phase A candidates): 14
 Mixed old-family (Phase B maintainer sign-off): 284 in 212 groups
 
@@ -25,9 +25,6 @@ Mixed old-family (Phase B maintainer sign-off): 284 in 212 groups
 ## Single old-family with new inherits (finish conversion)
 ### HeavyBomb (1 weapons)
 - `JapanesePlasmaBomb` (ContentPacks\RedAlert\Japan\yaml\weapons.yaml) | Chemical_Heavy=10000, Chemical_Heavy_Percentage=5, Flame_Heavy=10000, Flame_Heavy_Percentage=5, HeavyBomb=10000, HeavyBombPercentage=5, Effect=0, Effect2=0
-
-### NuclearWarhead (1 weapons)
-- `NuclearMaverick` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | NuclearWarhead=20000, NuclearWarheadPercentage=10, MissileHE_Heavy=20000, MissileHE_Heavy_Percentage=10, Effect=0
 
 ## Mixed-inherit (Phase B) — dominant-damage analysis for maintainer sign-off
 ### FlakWeapon, Grenade, HeavyBomb, HeavyChemicalWeapon, HeavyFlameWeapon, HeavyMissile, LightChemicalWeapon, LightFlameWeapon, LightMissile, MediumChemicalWeapon, MediumFlameWeapon, MediumMissile, NuclearWarhead, ShrapnelWeapon, TankDestroyerCannon (1 weapons)

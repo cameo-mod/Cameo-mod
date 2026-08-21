@@ -166,3 +166,17 @@ Three more always-active `FirepowerMultiplier` instances were found and fixed (`
 **Audits:** `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs; `audit_warhead_split` broadcast count 946, baseline lowered 950→946; `audit_physical_state_warheads` PASS; `audit_balance_drift` clean; `extract_stats` regenerated ledgers; `verify_generator_sync` drift 0.
 
 **Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+
+## W24 cluster 11 — NuclearMaverick (2026-08-21)
+
+**Converted** `NuclearMaverick` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` from the old full-stack `^NuclearWarhead` to a 3-way split finish conversion:
+- `Inherits@wh: ^Warhead_MissileHE_Heavy`
+- `Inherits@wh2: ^Warhead_Nuclear_Super` (main `AreaDamage` 10-tick shockwave, `Damage: 2000`, `MaxRadius: 9000`; percentage `AreaDamagePercentage`, `Damage: 1`, `Spread: 500`, `MaxRadius: 4500`)
+- `Inherits@proj: ^Projectile_Missile_Heavy`
+- `Inherits@fx: ^Effect_Nuclear_Super` then `Inherits@fx2: ^Effect_MissileHE_Heavy` so the missile effect layer wins for `Concrete`, `ShieldHit`, `EffectAir`, etc., while the nuclear smudges and `ShieldHitEffectNuclear` remain.
+
+**Preserved** per-shot totals (40000 flat + 20 percentage) and the old `SpreadDamage`/`HealthPercentageDamage` shape (falloff 100→10, `AffectsParent: false`, `ValidRelationships: Enemy`, `FireDeath, Incendiary` damage types) while adopting the canonical `^Warhead_Nuclear_Super` Versus profile. Local `Effect: nuke_small`, `Projectile: Missile`, `Burst`, `Range`, `Report`, and contrail all unchanged.
+
+**Audits:** `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs; `audit_warhead_split` broadcast count 945, baseline lowered 946→945; `audit_balance_drift` clean; `extract_stats` regenerated ledgers; `verify_generator_sync` drift 0; `audit_doc_claims` 16/16 clean.
+
+**Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
