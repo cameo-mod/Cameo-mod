@@ -111,11 +111,11 @@ scrin_devastator_warship:
 	Inherits: ^ScrinAircraftVisual
 	WithIdleOverlay@shield1:
 		Image: hexshield_directional_oval
-		Sequence: capital-aircraft-large-west
-		StartSequence: capital-aircraft-large-west
+		Sequence: aircraft-large-west
+		StartSequence: aircraft-large-west
 	WithIdleOverlay@shield_damage:
 		Image: hexshield_directional_oval
-		Sequence: capital-aircraft-large-west
+		Sequence: aircraft-large-west
 	Tooltip:
 		Name: actor_scrin_devastator_warship.name
 	Buildable:
@@ -131,7 +131,7 @@ scrin_devastator_warship:
 	Health:
 		HP: 240000
 	Aircraft:
-		CruiseAltitude: 2590
+		CruiseAltitude: 2317
 		Speed: 55
 		TurnSpeed: 12
 	Armament:
@@ -148,11 +148,11 @@ scrin_planetary_assault_carrier:
 	Inherits: ^ScrinAircraftVisual
 	WithIdleOverlay@shield1:
 		Image: hexshield_directional_oval
-		Sequence: capital-aircraft-colossal
-		StartSequence: capital-aircraft-colossal
+		Sequence: aircraft-colossal
+		StartSequence: aircraft-colossal
 	WithIdleOverlay@shield_damage:
 		Image: hexshield_directional_oval
-		Sequence: capital-aircraft-colossal
+		Sequence: aircraft-colossal
 	Tooltip:
 		Name: actor_scrin_planetary_assault_carrier.name
 	Buildable:
@@ -168,7 +168,7 @@ scrin_planetary_assault_carrier:
 	Health:
 		HP: 300000
 	Aircraft:
-		CruiseAltitude: 2693
+		CruiseAltitude: 2488
 		Speed: 50
 		TurnSpeed: 12
 	Armament:

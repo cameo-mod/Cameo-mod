@@ -37,7 +37,7 @@
 
 scrin_drone_platform:
 	Inherits: ^ScrinBuilding
-	Inherits@CPQ: ^CPQCondition
+	Inherits@conyard: ^Conyard
 	Inherits@shape: ^3x3Shape
 	Tooltip:
 		Name: actor_scrin_drone_platform.name
@@ -53,10 +53,10 @@ scrin_drone_platform:
 	BaseProvider:
 		Range: 15c0
 	Production@NORMAL:
-		Produces: Building
+		Produces: Building, Defence
 		RequiresCondition: !(classicproductionqueues || hybridproductionqueues)
 	Production@CLASSICPRODUCTIONQUEUES:
-		Produces: RABuilding
+		Produces: RABuilding, RADefence
 		RequiresCondition: classicproductionqueues || hybridproductionqueues
 	ProductionQueue@Building:
 		Type: Building
@@ -78,10 +78,17 @@ scrin_drone_platform:
 		RequiresCondition: classicproductionqueues || hybridproductionqueues
 	ProvidesPrerequisite@buildingname:
 	Transforms:
+		-RequiresCondition:
+		-PauseOnCondition:
 		IntoActor: scrin_drone_ship
 		Offset: 1,1
 		Facing: 480
 		NoTransformNotification: BuildingCannotPlaceAudio
+	-TransformsIntoMobile:
+	-TransformsIntoPassenger:
+	-TransformsIntoRepairable:
+	-TransferTimedExternalConditionOnTransform:
+	-GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
 
 scrin_reactor:
 	Inherits: ^ScrinBuilding
@@ -475,7 +482,7 @@ scrin_buzzer_hive:
 	Tooltip:
 		Name: actor_scrin_buzzer_hive.name
 	Buildable:
-		Queue: Building, RABuilding
+		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~scrin_drone_platform, scrin_reactor
 		Icon: icon
@@ -504,7 +511,7 @@ scrin_photon_cannon:
 	Tooltip:
 		Name: actor_scrin_photon_cannon.name
 	Buildable:
-		Queue: Building, RABuilding
+		Queue: Defence, RADefence
 		BuildPaletteOrder: 30
 		Prerequisites: ~scrin_drone_platform, scrin_reactor, scrin_extractor
 		Icon: icon
@@ -539,7 +546,7 @@ scrin_plasma_missile_battery:
 	Tooltip:
 		Name: actor_scrin_plasma_missile_battery.name
 	Buildable:
-		Queue: Building, RABuilding
+		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
 		Prerequisites: ~scrin_drone_platform, scrin_nerve_center
 		Icon: icon
@@ -635,7 +642,7 @@ scrin_storm_column:
 	Tooltip:
 		Name: actor_scrin_storm_column.name
 	Buildable:
-		Queue: Building, RABuilding
+		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
 		Prerequisites: ~scrin_drone_platform, scrin_technology_assembler
 		Icon: icon
@@ -695,7 +702,7 @@ scrin_lightning_spike:
 	Tooltip:
 		Name: actor_scrin_lightning_spike.name
 	Buildable:
-		Queue: Building, RABuilding
+		Queue: Defence, RADefence
 		BuildPaletteOrder: 55
 		Prerequisites: ~scrin_drone_platform, scrin_nerve_center
 		Icon: icon
@@ -724,7 +731,7 @@ scrin_tiberium_hive:
 	Tooltip:
 		Name: actor_scrin_tiberium_hive.name
 	Buildable:
-		Queue: Building, RABuilding
+		Queue: Defence, RADefence
 		BuildPaletteOrder: 65
 		Prerequisites: ~scrin_drone_platform, scrin_nerve_center
 		Icon: icon
