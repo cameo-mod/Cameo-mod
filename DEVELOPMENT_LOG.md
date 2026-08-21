@@ -1,5 +1,32 @@
 # Development Log
 
+## 2026-08-21 — JapanesePlasmaBomb 3-way split (boot-gated)
+
+- Converted `JapanesePlasmaBomb` in `mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml`:
+  - Replaced the legacy `Inherits@3: ^HeavyBomb` full-stack inheritance with the split
+    `Inherits@wh3: ^Warhead_Demolition_Heavy` and `Inherits@fx2: ^Effect_Demolition_Heavy`.
+  - Kept the existing chemical and flame 3-way split (`^Warhead_Chemical_Heavy`,
+    `^Warhead_Flame_Heavy`, `^Projectile_Chem_Heavy`, `^Effect_Flame_Heavy`).
+  - Preserved demolition totals: main `10000` flat (`AreaDamage`, `MaxRadius: 3200`,
+    `Spread: 800`) and percentage `5%` (`AreaDamagePercentage`, `MaxRadius: 1600`,
+    `Spread: 400`).
+  - Preserved old `HeavyBomb` falloff shape: the new `^Warhead_Demolition_Heavy` family
+    `Falloff` is `100, 50, 25, 10, 5, 0`; setting `MaxRadius: 3200` and `1600` makes the
+    resolved falloff identical to the old 5-step `100, 50, 25, 10, 5` shape.
+  - Preserved local damage types `Prone100Percent, TriggerProne, ElectricityDeath, Tesla`
+    and `ValidRelationships: Enemy` on the demolition warheads (the family defaults to
+    `Ally, Neutral, Enemy`).
+  - Restored the weapon-specific primary explosion visual by overriding
+    `Warhead@Effect1.Explosions: poof` (the `^Effect_Demolition_Heavy` family supplies
+    `building`). Kept `Warhead@Effect` (`blueartexp`/`psahit00.aud`) and `Warhead@Effect2`
+    (`blue_building_napalm`).
+  - Preserved the bullet projectile (`Image: hakureiring`, `Speed: 250`, `Inaccuracy: 500`,
+    `TrailImage: blue_smokey`) and burst/report behavior.
+- `find_empty_warhead` 0, `find_orphan_old_keys` 0, `audit_warhead_split` broadcast
+  count 941 (baseline already 941), `audit_balance_drift` clean, `extract_stats` regenerated.
+- `review_resolve_diff` reports `OK (behavioural invariants preserved)`.
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+
 ## 2026-08-21 — TorpTubeThermobaric partial 3-way split (boot-gated)
 
 - Converted `TorpTubeThermobaric` in `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml`:

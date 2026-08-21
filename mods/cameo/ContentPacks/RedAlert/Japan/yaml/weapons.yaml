@@ -1957,9 +1957,10 @@ JapaneseHeavyBomb:
 JapanesePlasmaBomb:
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@wh2: ^Warhead_Flame_Heavy
+	Inherits@wh3: ^Warhead_Demolition_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
-	Inherits@3: ^HeavyBomb
+	Inherits@fx2: ^Effect_Demolition_Heavy
 	ReloadDelay: 100
 	Burst: 4
 	BurstDelays: 5
@@ -1987,15 +1988,27 @@ JapanesePlasmaBomb:
 	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyBomb: SpreadDamage
+	Warhead@Demolition_Heavy: AreaDamage
+		ValidTargets: Ground, Ship
+		ValidRelationships: Enemy
 		Damage: 10000
+		MaxRadius: 3200
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
+		ValidTargets: Ground, Ship
+		ValidRelationships: Enemy
 		Damage: 5
+		MaxRadius: 1600
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
 		Explosions: blueartexp
+	Warhead@Effect1: CreateEffect
+		Explosions: poof
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
 	Warhead@Effect2: CreateEffect
 		Explosions: blue_building_napalm
 

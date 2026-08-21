@@ -1,8 +1,8 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 297
-Single old-family with new inherits (Phase B completion): 2
+Total concrete weapons on old families: 296
+Single old-family with new inherits (Phase B completion): 1
 Pure single old-family (mechanical Phase A candidates): 12
 Mixed old-family (Phase B maintainer sign-off): 283 in 211 groups
 
@@ -21,9 +21,6 @@ Mixed old-family (Phase B maintainer sign-off): 283 in 211 groups
 - `TSLaser90mm` (weapons\tiberiansun.yaml) | old: LaserWeapon | CannonHE_Medium=6000, CannonHE_Medium_Percentage=3, LaserWeapon=6000, LaserWeaponPercentage=3
 
 ## Single old-family with new inherits (finish conversion)
-### HeavyBomb (1 weapons)
-- `JapanesePlasmaBomb` (ContentPacks\RedAlert\Japan\yaml\weapons.yaml) | Chemical_Heavy=10000, Chemical_Heavy_Percentage=5, Flame_Heavy=10000, Flame_Heavy_Percentage=5, HeavyBomb=10000, HeavyBombPercentage=5, Effect=0, Effect2=0
-
 ### HeavyMissile (1 weapons)
 - `TorpTubeThermobaric` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | Nuclear_Super=1600, Nuclear_Super_Percentage=1, HeavyMissile=16000, HeavyMissilePercentage=8, Effect=0, EffectWater=0
 

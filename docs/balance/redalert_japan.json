@@ -200,21 +200,21 @@
        },
        {
         "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5",
+        "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
+        "tag": "Demolition_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
-        "falloff": "100, 50, 25, 10, 5",
+        "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "400",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "tag": "Demolition_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "100",
@@ -223,16 +223,18 @@
       "versus_templates": [
        "^Warhead_Chemical_Heavy",
        "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy",
        "^Projectile_Chem_Heavy",
        "^Effect_Flame_Heavy",
-       "^HeavyBomb"
+       "^Effect_Demolition_Heavy"
       ],
       "warheads": [
        "^Warhead_Chemical_Heavy",
-       "^Warhead_Flame_Heavy"
+       "^Warhead_Flame_Heavy",
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "JapanesePlasmaBomb",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {

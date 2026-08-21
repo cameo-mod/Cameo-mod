@@ -196,6 +196,14 @@ Three more always-active `FirepowerMultiplier` instances were found and fixed (`
 
 **Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
 
+## W24 cluster 15 — JapanesePlasmaBomb (2026-08-21)
+
+**Converted** `JapanesePlasmaBomb` in `mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml` from `Inherits@3: ^HeavyBomb` to the 3-way split `Inherits@wh3: ^Warhead_Demolition_Heavy` + `Inherits@fx2: ^Effect_Demolition_Heavy`, keeping the existing chemical and flame split. Preserved per-shot totals (`10000` flat + `5%` percentage) and the old falloff shape by setting `MaxRadius: 3200`/`1600` on `^Warhead_Demolition_Heavy`'s 6-step falloff, so the resolved 5-step `100, 50, 25, 10, 5` shape is unchanged. Preserved local damage types, projectile (`hakureiring`, `Speed: 250`, `blue_smokey` trail), burst, report, and effects (`blueartexp`, `blue_building_napalm`, `poof` restored via a local `Warhead@Effect1` override, water splash, smudges, shield, ground fire, concrete `250`).
+
+**Audits:** `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs; `audit_warhead_split` count 941; `audit_balance_drift` clean; `extract_stats` regenerated; `review_resolve_diff` OK (behavioural invariants preserved).
+
+**Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+
 ## W24 cluster 14 — TorpTubeThermobaric (2026-08-21)
 
 **Converted** `TorpTubeThermobaric` in `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml` from `Inherits: ^NuclearWarhead` to a partial 3-way split:
