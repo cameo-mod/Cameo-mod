@@ -487,8 +487,9 @@ scrin_growth_stimulator:
 	idle:
 		Filename: scrin_sprites|scrin_growth_stimulator_indexed8.png
 		Start: 0
-		Length: 1
-		ShadowStart: 1
+		Length: 16
+		Tick: 100
+		ShadowStart: 16
 		ShadowZOffset: -5
 		Offset: 0.000,-12.000
 	make:
@@ -1251,7 +1252,6 @@ scrin_devastator_warship:
 		ShadowStart: 32
 		ShadowZOffset: -5
 		Offset: 4.000,-16.000
-		Scale: 0.60
 
 	icon:
 		Filename: scrin_sprites|scrin_devastator_warship_icon.png
@@ -1265,7 +1265,6 @@ scrin_planetary_assault_carrier:
 		ShadowStart: 32
 		ShadowZOffset: -5
 		Offset: 4.000,-12.000
-		Scale: 0.60
 
 	icon:
 		Filename: scrin_sprites|scrin_planetary_assault_carrier_icon.png
