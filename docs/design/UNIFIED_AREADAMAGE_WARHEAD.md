@@ -73,7 +73,9 @@ Everything below lives in the **template**. The weapon inline sets `Damage:` and
             Heavy: 90
             ...
         # ---- concrete half, folded in ----
-        ConcreteScale: 25                 # slab damage per 2000 flat Damage, scaled by Versus[Concrete]
+        DamagesConcrete: true             # slab damage = Damage x Versus[Concrete] / 100, 1:1.
+                                          #   NO scale knob — ruling 2026-08-19: a wall, a building
+                                          #   and a slab all take the same Concrete damage.
         # ---- already folded in (the friendly-fire precedent) ----
         FriendlyFireDamage: 50
         FriendlyFireSpread: 50
@@ -128,11 +130,32 @@ It also halves the `multi_main_fired_weapons` accounting problem: a percentage t
 
 ## 6. Risks and open questions — the honest list
 
-**R1 — concrete damage is NOT proportional today, so folding it in CHANGES numbers.** Sampled
-flat:concrete ratios: `oHMG` 1:1, `GoliathRockets_AA` 40:1, `Debris` 53:1, `SCUDNUKE` 300:1. There is
-no constant to preserve, so any single `ConcreteScale` re-prices all 131 sites. That is arguably the
-fix — the current values are noise — but it is a **balance change and needs a maintainer order and a
-pipeline pass**, not a silent fold. ⚠ This is the one part that cannot be done "verbatim".
+**R1 — RESOLVED BY RULING (maintainer, 2026-08-19).** *"I want 1:1 any damage to concrete to go to
+the concrete slabs. So doesn't matter if the target is a wall or a building or a concrete slab, the
+damage it deals to concrete is definitely going to all of them equally and if we need we should
+increase the concrete slab health. So I say do it!"*
+
+So there is no `ConcreteScale` at all — **slab damage IS `Damage × Versus[Concrete] / 100`, 1:1**, the
+same number a concrete wall or building would take. One rule, no third knob, and the `Concrete` Versus
+row means exactly what it says everywhere it appears.
+
+⚠ The compensation moves to the SLABS, not the weapons. Current `DamagesConcrete` values are tiny and
+unrelated to main damage (sampled ratios `oHMG` 1:1, `GoliathRockets_AA` 40:1, `Debris` 53:1,
+`SCUDNUKE` 300:1), so routing full damage at 1:1 makes slabs melt unless `BuildableTerrainLayer`'s
+per-cell health is raised to match.
+
+**MEASURED CALIBRATION — 1495 weapons carry both a main and a concrete warhead:**
+
+    effective main damage : current concrete damage
+        lower quartile     68 : 1
+        MEDIAN            166 : 1        <- raise slab health by ~166x
+        upper quartile    352 : 1
+
+So `BuildableTerrainLayer`'s per-cell health should rise by **≈166×** for a typical shot to do what it
+does today, then be tuned from play. The quartile spread (68…352) is the noise the current per-weapon
+values encode — after the fold it collapses into one honest number, and weapons stop disagreeing about
+what "damaging concrete" means. That is a balance change and needs the pipeline, but it is now ONE
+number (slab health) instead of 131 scattered ones, which is the whole point.
 
 **R2 — ~106 pairs do not use the 0.50 spread rule** (56 at 1.00, 28 at 10.00, 9 at 5.00) and **45 use
 a different Falloff.** They need either an explicit per-weapon escape hatch or individual conversion.
