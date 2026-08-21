@@ -3040,7 +3040,7 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 67
 		Damage: 2000
 		Falloff: 100, 0
 		Versus:
@@ -3069,7 +3069,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 200
+		Spread: 33
 		Damage: 1
 		Falloff: 100, 0
 		Versus:
@@ -3102,7 +3102,7 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 600
+		Spread: 100
 		Damage: 2000
 		Falloff: 100, 0
 		Versus:
@@ -3131,7 +3131,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 50
 		Damage: 1
 		Falloff: 100, 0
 		Versus:
@@ -3164,7 +3164,7 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 800
+		Spread: 133
 		Damage: 2000
 		Falloff: 100, 0
 		Versus:
@@ -3193,7 +3193,7 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Bullet_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 66
 		Damage: 1
 		Falloff: 100, 0
 		Versus:
@@ -3227,9 +3227,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 80
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 93
 			COMPOSITE: 40
@@ -3256,9 +3256,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 200
+		Spread: 40
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -3289,9 +3289,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 600
+		Spread: 120
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 93
 			COMPOSITE: 40
@@ -3318,9 +3318,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@CannonAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 300
+		Spread: 60
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -3351,9 +3351,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 800
+		Spread: 160
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 93
 			COMPOSITE: 40
@@ -3380,9 +3380,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@CannonAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 80
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -3414,9 +3414,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 200
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 50, 20, 0
 		Versus:
 			HAZMAT: 72
 			COMPOSITE: 98
@@ -3443,9 +3443,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@CannonHE_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 200
+		Spread: 100
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 50, 20, 0
 		Versus:
 			Shield: 17
 			Scout: 16
@@ -3476,9 +3476,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 600
+		Spread: 300
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 50, 20, 0
 		Versus:
 			HAZMAT: 72
 			COMPOSITE: 98
@@ -3505,9 +3505,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 300
+		Spread: 150
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 50, 20, 0
 		Versus:
 			Shield: 25
 			Scout: 20
@@ -3538,9 +3538,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 800
+		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 50, 20, 0
 		Versus:
 			HAZMAT: 72
 			COMPOSITE: 98
@@ -3567,9 +3567,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 50, 20, 0
 		Versus:
 			Shield: 35
 			Scout: 25
@@ -3601,9 +3601,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 67
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 97
 			COMPOSITE: 44
@@ -3630,9 +3630,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 200
+		Spread: 33
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -3663,9 +3663,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 600
+		Spread: 100
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 97
 			COMPOSITE: 44
@@ -3692,9 +3692,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 50
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -3725,9 +3725,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 800
+		Spread: 133
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 97
 			COMPOSITE: 44
@@ -3754,9 +3754,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 66
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -3788,9 +3788,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 45, 15, 0
 		Versus:
 			HAZMAT: 78
 			COMPOSITE: 88
@@ -3817,9 +3817,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileHE_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 200
+		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 45, 15, 0
 		Versus:
 			Shield: 17
 			Scout: 16
@@ -3850,9 +3850,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 600
+		Spread: 150
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 45, 15, 0
 		Versus:
 			HAZMAT: 78
 			COMPOSITE: 88
@@ -3879,9 +3879,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 75
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 45, 15, 0
 		Versus:
 			Shield: 25
 			Scout: 20
@@ -3912,9 +3912,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 800
+		Spread: 200
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 45, 15, 0
 		Versus:
 			HAZMAT: 78
 			COMPOSITE: 88
@@ -3941,9 +3941,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 100
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 45, 15, 0
 		Versus:
 			Shield: 35
 			Scout: 25
@@ -3977,7 +3977,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 88
 			COMPOSITE: 67
@@ -4006,7 +4006,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 17
 			Spaceship: 16
@@ -4039,7 +4039,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 88
 			COMPOSITE: 67
@@ -4068,7 +4068,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 150
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 25
 			Spaceship: 20
@@ -4101,7 +4101,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 88
 			COMPOSITE: 67
@@ -4130,7 +4130,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 35
 			Spaceship: 25
@@ -4162,9 +4162,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 83
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 55, 25, 8, 0
 		Versus:
 			HAZMAT: 90
 			COMPOSITE: 63
@@ -4191,9 +4191,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Flak_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 200
+		Spread: 41
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 55, 25, 8, 0
 		Versus:
 			Shield: 17
 			Fighter: 16
@@ -4224,9 +4224,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 600
+		Spread: 125
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 55, 25, 8, 0
 		Versus:
 			HAZMAT: 90
 			COMPOSITE: 63
@@ -4253,9 +4253,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 62
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 55, 25, 8, 0
 		Versus:
 			Shield: 25
 			Fighter: 20
@@ -4286,9 +4286,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 800
+		Spread: 166
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 55, 25, 8, 0
 		Versus:
 			HAZMAT: 90
 			COMPOSITE: 63
@@ -4315,9 +4315,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Flak_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 83
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 55, 25, 8, 0
 		Versus:
 			Shield: 35
 			Fighter: 25
@@ -4351,7 +4351,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 57
 			COMPOSITE: 70
@@ -4382,7 +4382,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -4444,7 +4444,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 57
 			COMPOSITE: 70
@@ -4475,7 +4475,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -4537,7 +4537,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 57
 			COMPOSITE: 70
@@ -4568,7 +4568,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -4631,7 +4631,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 66
 			COMPOSITE: 70
@@ -4660,7 +4660,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 17
 			Scout: 16
@@ -4693,7 +4693,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 66
 			COMPOSITE: 70
@@ -4722,7 +4722,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 25
 			Scout: 20
@@ -4755,7 +4755,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 66
 			COMPOSITE: 70
@@ -4784,7 +4784,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 35
 			Scout: 25
@@ -4818,7 +4818,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 67
 			COMPOSITE: 63
@@ -4849,7 +4849,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 17
 			Plate: 10
@@ -4884,7 +4884,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 67
 			COMPOSITE: 63
@@ -4915,7 +4915,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 25
 			Plate: 14
@@ -4950,7 +4950,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 67
 			COMPOSITE: 63
@@ -4981,7 +4981,7 @@ DefuseKit:
 		ValidTargets: Ground, Water, Air
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 35
 			Plate: 19
@@ -5015,9 +5015,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 200
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 90, 78, 60, 0
 		Versus:
 			HAZMAT: 40
 			COMPOSITE: 76
@@ -5046,9 +5046,9 @@ DefuseKit:
 		PhysicalStateScale: 100
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 200
+		Spread: 100
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 90, 78, 60, 0
 		Versus:
 			Shield: 17
 			None: 16
@@ -5081,9 +5081,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 600
+		Spread: 300
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 90, 78, 60, 0
 		Versus:
 			HAZMAT: 40
 			COMPOSITE: 76
@@ -5112,9 +5112,9 @@ DefuseKit:
 		PhysicalStateScale: 100
 	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 300
+		Spread: 150
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 90, 78, 60, 0
 		Versus:
 			Shield: 25
 			None: 20
@@ -5147,9 +5147,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 800
+		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 90, 78, 60, 0
 		Versus:
 			HAZMAT: 40
 			COMPOSITE: 76
@@ -5178,9 +5178,9 @@ DefuseKit:
 		PhysicalStateScale: 100
 	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 90, 78, 60, 0
 		Versus:
 			Shield: 35
 			None: 25
@@ -5214,9 +5214,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 183
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 88, 72, 50, 0
 		Versus:
 			HAZMAT: 52
 			COMPOSITE: 62
@@ -5245,9 +5245,9 @@ DefuseKit:
 			Corrosion: 100
 	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 200
+		Spread: 91
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 88, 72, 50, 0
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -5280,9 +5280,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 600
+		Spread: 275
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 88, 72, 50, 0
 		Versus:
 			HAZMAT: 52
 			COMPOSITE: 62
@@ -5311,9 +5311,9 @@ DefuseKit:
 			Corrosion: 100
 	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 300
+		Spread: 137
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 88, 72, 50, 0
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -5346,9 +5346,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 800
+		Spread: 366
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 88, 72, 50, 0
 		Versus:
 			HAZMAT: 52
 			COMPOSITE: 62
@@ -5377,9 +5377,9 @@ DefuseKit:
 			Corrosion: 100
 	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 183
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 88, 72, 50, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -5610,9 +5610,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 191
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 89, 75, 55, 0
 		Versus:
 			HAZMAT: 50
 			COMPOSITE: 70
@@ -5642,9 +5642,9 @@ DefuseKit:
 			Corrosion: 50
 	Warhead@Plasma_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 200
+		Spread: 95
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 89, 75, 55, 0
 		Versus:
 			Shield: 17
 			None: 12
@@ -5675,9 +5675,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 600
+		Spread: 287
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 89, 75, 55, 0
 		Versus:
 			HAZMAT: 50
 			COMPOSITE: 70
@@ -5707,9 +5707,9 @@ DefuseKit:
 			Corrosion: 50
 	Warhead@Plasma_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 300
+		Spread: 143
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 89, 75, 55, 0
 		Versus:
 			Shield: 25
 			None: 16
@@ -5740,9 +5740,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 800
+		Spread: 383
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 89, 75, 55, 0
 		Versus:
 			HAZMAT: 50
 			COMPOSITE: 70
@@ -5772,9 +5772,9 @@ DefuseKit:
 			Corrosion: 50
 	Warhead@Plasma_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 191
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 89, 75, 55, 0
 		Versus:
 			Shield: 35
 			None: 21
@@ -5806,9 +5806,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 169
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 76, 57, 43, 31, 17, 0
 		Versus:
 			HAZMAT: 55
 			COMPOSITE: 91
@@ -5837,9 +5837,9 @@ DefuseKit:
 			Temperature: 33
 	Warhead@Thermobaric_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 200
+		Spread: 84
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 76, 57, 43, 31, 17, 0
 		Versus:
 			Shield: 17
 			Wood: 15
@@ -5870,9 +5870,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 600
+		Spread: 253
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 76, 57, 43, 31, 17, 0
 		Versus:
 			HAZMAT: 55
 			COMPOSITE: 91
@@ -5901,9 +5901,9 @@ DefuseKit:
 			Temperature: 33
 	Warhead@Thermobaric_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 300
+		Spread: 126
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 76, 57, 43, 31, 17, 0
 		Versus:
 			Shield: 25
 			Wood: 19
@@ -5934,9 +5934,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 800
+		Spread: 338
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 76, 57, 43, 31, 17, 0
 		Versus:
 			HAZMAT: 55
 			COMPOSITE: 91
@@ -5965,9 +5965,9 @@ DefuseKit:
 			Temperature: 33
 	Warhead@Thermobaric_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 169
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 76, 57, 43, 31, 17, 0
 		Versus:
 			Shield: 35
 			Wood: 24
@@ -5999,9 +5999,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 61
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 72
 			COMPOSITE: 61
@@ -6031,9 +6031,9 @@ DefuseKit:
 		IntegrityScale: 33
 	Warhead@Quantum_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 200
+		Spread: 30
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -6066,9 +6066,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 600
+		Spread: 92
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 72
 			COMPOSITE: 61
@@ -6098,9 +6098,9 @@ DefuseKit:
 		IntegrityScale: 33
 	Warhead@Quantum_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 46
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -6133,9 +6133,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 800
+		Spread: 123
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 72
 			COMPOSITE: 61
@@ -6165,9 +6165,9 @@ DefuseKit:
 		IntegrityScale: 33
 	Warhead@Quantum_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 61
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -6202,9 +6202,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 42
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 81, 60, 37, 0
 		Versus:
 			HAZMAT: 62
 			COMPOSITE: 64
@@ -6234,9 +6234,9 @@ DefuseKit:
 			Corrosion: 20
 	Warhead@Waveforce_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 200
+		Spread: 21
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 81, 60, 37, 0
 		Versus:
 			Shield: 17
 			Heroic: 13
@@ -6267,9 +6267,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 600
+		Spread: 63
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 81, 60, 37, 0
 		Versus:
 			HAZMAT: 62
 			COMPOSITE: 64
@@ -6299,9 +6299,9 @@ DefuseKit:
 			Corrosion: 20
 	Warhead@Waveforce_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 300
+		Spread: 31
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 81, 60, 37, 0
 		Versus:
 			Shield: 25
 			Heroic: 17
@@ -6332,9 +6332,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 800
+		Spread: 84
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 81, 60, 37, 0
 		Versus:
 			HAZMAT: 62
 			COMPOSITE: 64
@@ -6364,9 +6364,9 @@ DefuseKit:
 			Corrosion: 20
 	Warhead@Waveforce_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 42
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 81, 60, 37, 0
 		Versus:
 			Shield: 35
 			Heroic: 22
@@ -6399,9 +6399,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 44
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 73, 49, 26, 0
 		Versus:
 			HAZMAT: 78
 			COMPOSITE: 74
@@ -6428,9 +6428,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@PhotonCannon_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 200
+		Spread: 22
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 73, 49, 26, 0
 		Versus:
 			Shield: 17
 			Heavy: 11
@@ -6460,9 +6460,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 600
+		Spread: 66
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 73, 49, 26, 0
 		Versus:
 			HAZMAT: 78
 			COMPOSITE: 74
@@ -6489,9 +6489,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@PhotonCannon_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 33
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 73, 49, 26, 0
 		Versus:
 			Shield: 25
 			Heavy: 15
@@ -6521,9 +6521,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 800
+		Spread: 89
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 73, 49, 26, 0
 		Versus:
 			HAZMAT: 78
 			COMPOSITE: 74
@@ -6550,9 +6550,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@PhotonCannon_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 44
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 73, 49, 26, 0
 		Versus:
 			Shield: 35
 			Heavy: 20
@@ -6584,9 +6584,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 122
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 74, 54, 36, 0
 		Versus:
 			HAZMAT: 59
 			COMPOSITE: 82
@@ -6615,9 +6615,9 @@ DefuseKit:
 			Temperature: 50
 	Warhead@MissileFire_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 200
+		Spread: 61
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 74, 54, 36, 0
 		Versus:
 			Shield: 17
 			Wood: 15
@@ -6648,9 +6648,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 600
+		Spread: 183
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 74, 54, 36, 0
 		Versus:
 			HAZMAT: 59
 			COMPOSITE: 82
@@ -6679,9 +6679,9 @@ DefuseKit:
 			Temperature: 50
 	Warhead@MissileFire_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 91
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 74, 54, 36, 0
 		Versus:
 			Shield: 25
 			Wood: 19
@@ -6712,9 +6712,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 800
+		Spread: 245
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 74, 54, 36, 0
 		Versus:
 			HAZMAT: 59
 			COMPOSITE: 82
@@ -6743,9 +6743,9 @@ DefuseKit:
 			Temperature: 50
 	Warhead@MissileFire_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 122
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 74, 54, 36, 0
 		Versus:
 			Shield: 35
 			Wood: 24
@@ -6777,9 +6777,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 55
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 82, 61, 38, 0
 		Versus:
 			HAZMAT: 74
 			COMPOSITE: 53
@@ -6808,9 +6808,9 @@ DefuseKit:
 			Corrosion: 20
 	Warhead@MissileChem_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 200
+		Spread: 27
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 82, 61, 38, 0
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -6841,9 +6841,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 600
+		Spread: 83
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 82, 61, 38, 0
 		Versus:
 			HAZMAT: 74
 			COMPOSITE: 53
@@ -6872,9 +6872,9 @@ DefuseKit:
 			Corrosion: 33
 	Warhead@MissileChem_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 41
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 82, 61, 38, 0
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -6905,9 +6905,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 800
+		Spread: 110
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 82, 61, 38, 0
 		Versus:
 			HAZMAT: 74
 			COMPOSITE: 53
@@ -6936,9 +6936,9 @@ DefuseKit:
 			Corrosion: 50
 	Warhead@MissileChem_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 55
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 82, 61, 38, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -6970,9 +6970,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 60
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 82, 61, 38, 0
 		Versus:
 			HAZMAT: 72
 			COMPOSITE: 51
@@ -7001,9 +7001,9 @@ DefuseKit:
 			Corrosion: 20
 	Warhead@CannonChem_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 200
+		Spread: 30
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 82, 61, 38, 0
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -7034,9 +7034,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 600
+		Spread: 90
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 82, 61, 38, 0
 		Versus:
 			HAZMAT: 72
 			COMPOSITE: 51
@@ -7065,9 +7065,9 @@ DefuseKit:
 			Corrosion: 33
 	Warhead@CannonChem_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 300
+		Spread: 45
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 82, 61, 38, 0
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -7098,9 +7098,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 800
+		Spread: 121
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 82, 61, 38, 0
 		Versus:
 			HAZMAT: 72
 			COMPOSITE: 51
@@ -7129,9 +7129,9 @@ DefuseKit:
 			Corrosion: 50
 	Warhead@CannonChem_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 60
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 82, 61, 38, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -7163,9 +7163,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 213
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 70, 45, 25, 10, 0
 		Versus:
 			HAZMAT: 66
 			COMPOSITE: 74
@@ -7193,9 +7193,9 @@ DefuseKit:
 		IntegrityScale: 50
 	Warhead@Storm_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 200
+		Spread: 106
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 70, 45, 25, 10, 0
 		Versus:
 			Shield: 85
 			Heroic: 65
@@ -7228,9 +7228,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 600
+		Spread: 320
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 70, 45, 25, 10, 0
 		Versus:
 			HAZMAT: 66
 			COMPOSITE: 74
@@ -7258,9 +7258,9 @@ DefuseKit:
 		IntegrityScale: 50
 	Warhead@Storm_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 300
+		Spread: 160
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 70, 45, 25, 10, 0
 		Versus:
 			Shield: 113
 			Heroic: 87
@@ -7293,9 +7293,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 800
+		Spread: 426
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 70, 45, 25, 10, 0
 		Versus:
 			HAZMAT: 66
 			COMPOSITE: 74
@@ -7323,9 +7323,9 @@ DefuseKit:
 		IntegrityScale: 50
 	Warhead@Storm_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 213
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 70, 45, 25, 10, 0
 		Versus:
 			Shield: 141
 			Heroic: 109
@@ -7358,9 +7358,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 1000
+		Spread: 533
 		Damage: 2000
-		Falloff: 100, 40, 20, 10, 5, 0
+		Falloff: 100, 70, 45, 25, 10, 0
 		Versus:
 			HAZMAT: 66
 			COMPOSITE: 74
@@ -7388,9 +7388,9 @@ DefuseKit:
 		IntegrityScale: 50
 	Warhead@Storm_Super_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 500
+		Spread: 266
 		Damage: 1
-		Falloff: 100, 40, 20, 10, 5, 0
+		Falloff: 100, 70, 45, 25, 10, 0
 		Versus:
 			Shield: 170
 			Heroic: 131
@@ -7424,9 +7424,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 173
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 76, 56, 38, 0
 		Versus:
 			HAZMAT: 56
 			COMPOSITE: 87
@@ -7455,9 +7455,9 @@ DefuseKit:
 			Temperature: 50
 	Warhead@CannonFire_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 200
+		Spread: 86
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 76, 56, 38, 0
 		Versus:
 			Shield: 17
 			Wood: 15
@@ -7488,9 +7488,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 600
+		Spread: 259
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 76, 56, 38, 0
 		Versus:
 			HAZMAT: 56
 			COMPOSITE: 87
@@ -7519,9 +7519,9 @@ DefuseKit:
 			Temperature: 50
 	Warhead@CannonFire_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 300
+		Spread: 129
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 76, 56, 38, 0
 		Versus:
 			Shield: 25
 			Wood: 19
@@ -7552,9 +7552,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 800
+		Spread: 346
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 76, 56, 38, 0
 		Versus:
 			HAZMAT: 56
 			COMPOSITE: 87
@@ -7583,9 +7583,9 @@ DefuseKit:
 			Temperature: 50
 	Warhead@CannonFire_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 173
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 76, 56, 38, 0
 		Versus:
 			Shield: 35
 			Wood: 24
@@ -7617,9 +7617,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground
-		Spread: 400
+		Spread: 1
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 95
 			COMPOSITE: 53
@@ -7646,9 +7646,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Melee_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground
-		Spread: 200
+		Spread: 0
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 17
 			None: 16
@@ -7679,9 +7679,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground
-		Spread: 600
+		Spread: 1
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 95
 			COMPOSITE: 53
@@ -7708,9 +7708,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground
-		Spread: 300
+		Spread: 0
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 25
 			None: 20
@@ -7741,9 +7741,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground
-		Spread: 800
+		Spread: 1
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 95
 			COMPOSITE: 53
@@ -7770,9 +7770,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Melee_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground
-		Spread: 400
+		Spread: 0
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 35
 			None: 25
@@ -7804,9 +7804,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 67
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 104
 			COMPOSITE: 35
@@ -7833,9 +7833,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Arrow_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 200
+		Spread: 33
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 17
 			None: 16
@@ -7866,9 +7866,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 600
+		Spread: 100
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 104
 			COMPOSITE: 35
@@ -7895,9 +7895,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Arrow_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 50
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 25
 			None: 20
@@ -7928,9 +7928,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 800
+		Spread: 133
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 104
 			COMPOSITE: 35
@@ -7957,9 +7957,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Arrow_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 66
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 35
 			None: 25
@@ -7991,9 +7991,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 80
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 62
 			COMPOSITE: 77
@@ -8020,9 +8020,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Magic_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 200
+		Spread: 40
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 25
 			Bomber: 25
@@ -8053,9 +8053,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 600
+		Spread: 120
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 62
 			COMPOSITE: 77
@@ -8082,9 +8082,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Magic_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 300
+		Spread: 60
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 40
 			Bomber: 40
@@ -8115,9 +8115,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 800
+		Spread: 160
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 62
 			COMPOSITE: 77
@@ -8144,9 +8144,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Magic_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 80
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 50
 			Bomber: 50
@@ -8177,9 +8177,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 1000
+		Spread: 200
 		Damage: 2000
-		Falloff: 100, 40, 20, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 62
 			COMPOSITE: 77
@@ -8206,9 +8206,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Magic_Super_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 500
+		Spread: 100
 		Damage: 1
-		Falloff: 100, 40, 20, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 65
 			Bomber: 65
@@ -8240,9 +8240,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 233
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 45, 18, 6, 0
 		Versus:
 			HAZMAT: 64
 			COMPOSITE: 100
@@ -8269,9 +8269,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 200
+		Spread: 116
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 45, 18, 6, 0
 		Versus:
 			Shield: 17
 			Wood: 16
@@ -8302,9 +8302,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 600
+		Spread: 350
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 45, 18, 6, 0
 		Versus:
 			HAZMAT: 64
 			COMPOSITE: 100
@@ -8331,9 +8331,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Demolition_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 300
+		Spread: 175
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 45, 18, 6, 0
 		Versus:
 			Shield: 25
 			Wood: 20
@@ -8364,9 +8364,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 800
+		Spread: 466
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 45, 18, 6, 0
 		Versus:
 			HAZMAT: 64
 			COMPOSITE: 100
@@ -8393,9 +8393,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 233
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 45, 18, 6, 0
 		Versus:
 			Shield: 35
 			Wood: 25
@@ -8427,9 +8427,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 233
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 72, 50, 32, 18, 8, 0
 		Versus:
 			HAZMAT: 69
 			COMPOSITE: 105
@@ -8456,9 +8456,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Concussion_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 200
+		Spread: 116
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 72, 50, 32, 18, 8, 0
 		Versus:
 			Shield: 17
 			Scout: 16
@@ -8489,9 +8489,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 600
+		Spread: 350
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 72, 50, 32, 18, 8, 0
 		Versus:
 			HAZMAT: 69
 			COMPOSITE: 105
@@ -8518,9 +8518,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 300
+		Spread: 175
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 72, 50, 32, 18, 8, 0
 		Versus:
 			Shield: 25
 			Scout: 20
@@ -8551,9 +8551,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 800
+		Spread: 466
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 72, 50, 32, 18, 8, 0
 		Versus:
 			HAZMAT: 69
 			COMPOSITE: 105
@@ -8580,9 +8580,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Concussion_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 233
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 72, 50, 32, 18, 8, 0
 		Versus:
 			Shield: 35
 			Scout: 25
@@ -8614,9 +8614,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 266
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			HAZMAT: 69
 			COMPOSITE: 95
@@ -8643,9 +8643,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Sonic_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 200
+		Spread: 133
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			Shield: 5
 			Bomber: 5
@@ -8668,7 +8668,7 @@ DefuseKit:
 	Warhead@Sonic_Light_Debuff: GrantExternalCondition
 		Condition: SonicDebuff
 		Duration: 50
-		Range: 800
+		Range: 532
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
 
@@ -8682,9 +8682,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 600
+		Spread: 400
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			HAZMAT: 69
 			COMPOSITE: 95
@@ -8711,9 +8711,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Sonic_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 300
+		Spread: 200
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			Shield: 8
 			Bomber: 8
@@ -8736,7 +8736,7 @@ DefuseKit:
 	Warhead@Sonic_Medium_Debuff: GrantExternalCondition
 		Condition: SonicDebuff
 		Duration: 50
-		Range: 1200
+		Range: 800
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
 
@@ -8750,9 +8750,9 @@ DefuseKit:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water
-		Spread: 800
+		Spread: 533
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			HAZMAT: 69
 			COMPOSITE: 95
@@ -8779,9 +8779,9 @@ DefuseKit:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Sonic_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Spread: 400
+		Spread: 266
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 75, 50, 25, 0
 		Versus:
 			Shield: 10
 			Bomber: 10
@@ -8804,7 +8804,7 @@ DefuseKit:
 	Warhead@Sonic_Heavy_Debuff: GrantExternalCondition
 		Condition: SonicDebuff
 		Duration: 50
-		Range: 1600
+		Range: 1066
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Ground, Water, Structure, wall
 
@@ -8821,7 +8821,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 98
 			COMPOSITE: 40
@@ -8850,7 +8850,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -8913,7 +8913,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 62
 			COMPOSITE: 72
@@ -8943,7 +8943,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -9007,7 +9007,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 62
 			COMPOSITE: 72
@@ -9037,7 +9037,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -9101,7 +9101,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 62
 			COMPOSITE: 72
@@ -9131,7 +9131,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -9196,7 +9196,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 2000
-		Falloff: 100, 40, 20, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 62
 			COMPOSITE: 72
@@ -9226,7 +9226,7 @@ DefuseKit:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 1
-		Falloff: 100, 40, 20, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 45
 			Superheavy: 30
@@ -13405,7 +13405,7 @@ generic_bullet_casing:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 82, 64, 42, 0
 		Versus:
 			HAZMAT: 47
 			COMPOSITE: 70
@@ -13436,7 +13436,7 @@ generic_bullet_casing:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 82, 64, 42, 0
 		Versus:
 			Shield: 17
 			None: 15
@@ -13471,7 +13471,7 @@ generic_bullet_casing:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 82, 64, 42, 0
 		Versus:
 			HAZMAT: 47
 			COMPOSITE: 70
@@ -13502,7 +13502,7 @@ generic_bullet_casing:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 82, 64, 42, 0
 		Versus:
 			Shield: 25
 			None: 19
@@ -13537,7 +13537,7 @@ generic_bullet_casing:
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 82, 64, 42, 0
 		Versus:
 			HAZMAT: 47
 			COMPOSITE: 70
@@ -13568,7 +13568,7 @@ generic_bullet_casing:
 		ValidTargets: Ground, Water
 		Spread: 50
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 82, 64, 42, 0
 		Versus:
 			Shield: 35
 			None: 24
@@ -13602,9 +13602,9 @@ generic_bullet_casing:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 800
+		Spread: 400
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 88, 75, 62, 52, 42, 33, 24, 16, 8, 0
 		Versus:
 			HAZMAT: 62
 			COMPOSITE: 91
@@ -13631,9 +13631,9 @@ generic_bullet_casing:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@CannonNuke_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 200
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 88, 75, 62, 52, 42, 33, 24, 16, 8, 0
 		Versus:
 			Shield: 35
 			Wood: 23
@@ -13664,9 +13664,9 @@ generic_bullet_casing:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 200
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 88, 75, 62, 52, 42, 33, 24, 16, 8, 0
 		Versus:
 			HAZMAT: 62
 			COMPOSITE: 91
@@ -13693,9 +13693,9 @@ generic_bullet_casing:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@CannonNuke_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 200
+		Spread: 100
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 88, 75, 62, 52, 42, 33, 24, 16, 8, 0
 		Versus:
 			Shield: 17
 			Wood: 14
@@ -13726,9 +13726,9 @@ generic_bullet_casing:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 600
+		Spread: 300
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 88, 75, 62, 52, 42, 33, 24, 16, 8, 0
 		Versus:
 			HAZMAT: 62
 			COMPOSITE: 91
@@ -13755,9 +13755,9 @@ generic_bullet_casing:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@CannonNuke_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 150
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 88, 75, 62, 52, 42, 33, 24, 16, 8, 0
 		Versus:
 			Shield: 25
 			Wood: 18
@@ -13788,9 +13788,9 @@ generic_bullet_casing:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 800
+		Spread: 133
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0
 		Versus:
 			HAZMAT: 74
 			COMPOSITE: 64
@@ -13817,9 +13817,9 @@ generic_bullet_casing:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MissileNuke_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 66
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0
 		Versus:
 			Shield: 35
 			Superheavy: 23
@@ -13850,9 +13850,9 @@ generic_bullet_casing:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 66
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0
 		Versus:
 			HAZMAT: 74
 			COMPOSITE: 64
@@ -13879,9 +13879,9 @@ generic_bullet_casing:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MissileNuke_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 200
+		Spread: 33
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0
 		Versus:
 			Shield: 17
 			Superheavy: 14
@@ -13912,9 +13912,9 @@ generic_bullet_casing:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 600
+		Spread: 100
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0
 		Versus:
 			HAZMAT: 74
 			COMPOSITE: 64
@@ -13941,9 +13941,9 @@ generic_bullet_casing:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MissileNuke_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 50
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0
 		Versus:
 			Shield: 25
 			Superheavy: 18
@@ -13974,9 +13974,9 @@ generic_bullet_casing:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 800
+		Spread: 128
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 85
 			COMPOSITE: 52
@@ -14006,9 +14006,9 @@ generic_bullet_casing:
 		IntegrityScale: 17
 	Warhead@MissileQuantum_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 64
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -14041,9 +14041,9 @@ generic_bullet_casing:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 64
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 85
 			COMPOSITE: 52
@@ -14073,9 +14073,9 @@ generic_bullet_casing:
 		IntegrityScale: 17
 	Warhead@MissileQuantum_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 200
+		Spread: 32
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -14108,9 +14108,9 @@ generic_bullet_casing:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 600
+		Spread: 96
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 85
 			COMPOSITE: 52
@@ -14140,9 +14140,9 @@ generic_bullet_casing:
 		IntegrityScale: 17
 	Warhead@MissileQuantum_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 48
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -14175,9 +14175,9 @@ generic_bullet_casing:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 800
+		Spread: 147
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 79
 			COMPOSITE: 58
@@ -14205,9 +14205,9 @@ generic_bullet_casing:
 		IntegrityScale: 50
 	Warhead@MissileTesla_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 73
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -14240,9 +14240,9 @@ generic_bullet_casing:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 73
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 79
 			COMPOSITE: 58
@@ -14270,9 +14270,9 @@ generic_bullet_casing:
 		IntegrityScale: 50
 	Warhead@MissileTesla_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 200
+		Spread: 36
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -14305,9 +14305,9 @@ generic_bullet_casing:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 600
+		Spread: 110
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			HAZMAT: 79
 			COMPOSITE: 58
@@ -14335,9 +14335,9 @@ generic_bullet_casing:
 		IntegrityScale: 50
 	Warhead@MissileTesla_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 55
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 0
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -14370,9 +14370,9 @@ generic_bullet_casing:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 800
+		Spread: 184
 		Damage: 2000
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 74, 51, 36, 23, 13, 0
 		Versus:
 			HAZMAT: 68
 			COMPOSITE: 91
@@ -14401,9 +14401,9 @@ generic_bullet_casing:
 			Temperature: 17
 	Warhead@MissileThermobaric_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 92
 		Damage: 1
-		Falloff: 100, 50, 25, 10, 5, 0
+		Falloff: 100, 74, 51, 36, 23, 13, 0
 		Versus:
 			Shield: 35
 			Wood: 24
@@ -14434,9 +14434,9 @@ generic_bullet_casing:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 400
+		Spread: 92
 		Damage: 2000
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 74, 51, 36, 23, 13, 0
 		Versus:
 			HAZMAT: 68
 			COMPOSITE: 91
@@ -14465,9 +14465,9 @@ generic_bullet_casing:
 			Temperature: 17
 	Warhead@MissileThermobaric_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 200
+		Spread: 46
 		Damage: 1
-		Falloff: 100, 50, 33, 25, 20, 0
+		Falloff: 100, 74, 51, 36, 23, 13, 0
 		Versus:
 			Shield: 17
 			Wood: 15
@@ -14498,9 +14498,9 @@ generic_bullet_casing:
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Ground, Water, Air
-		Spread: 600
+		Spread: 138
 		Damage: 2000
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 74, 51, 36, 23, 13, 0
 		Versus:
 			HAZMAT: 68
 			COMPOSITE: 91
@@ -14529,9 +14529,9 @@ generic_bullet_casing:
 			Temperature: 17
 	Warhead@MissileThermobaric_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 69
 		Damage: 1
-		Falloff: 100, 60, 30, 15, 5, 0
+		Falloff: 100, 74, 51, 36, 23, 13, 0
 		Versus:
 			Shield: 25
 			Wood: 19

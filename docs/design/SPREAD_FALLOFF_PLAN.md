@@ -12,6 +12,15 @@ the method; the METHOD is the point.
 > everywhere (§1a) and the 3-shape menu {Linear/Punchy/Flat} (§1a table). Implementation: per-family
 > `spreads`/`falloffs` overrides in `gen_weapon_template.py` → `splice_templates.py` → boot-gate.
 
+> **✅ BUILT 2026-08-22.** §8 is live: `PHYSICS_SHAPES` in `gen_weapon_template.py` holds the
+> per-type radius + curve, `LEVEL_RADIUS_SCALE` scales the radius by level without touching the
+> shape, and `blend_shape()` crosses a blend family's shape from its parents' (geometric mean of
+> the radii, arithmetic mean of the curves) exactly as `blend_versus` already crossed their armor
+> profiles. Measured effect: **10 distinct falloff curves → 24**, and the flat tier where 23
+> different Heavy families all sat at Spread 800 / radius 4000 / `100,50,25,10,5,0` — Melee,
+> Arrow, PhotonCannon, Sonic, Flame, CannonNuke alike — is gone. `review_batch_diff`: main damage
+> preserved on all 2325 weapons, blast shape changed on 1467.
+
 ## 1. The engine mechanic (verified in `OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs`)
 
 - `Spread` (WDist) = the distance **between** falloff steps.

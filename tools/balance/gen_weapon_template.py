@@ -1434,6 +1434,131 @@ FAMILY_FALLOFFS = {
 }
 
 
+# ---------------------------------------------------------------------------------------------
+# SPREAD_FALLOFF_PLAN.md §8 — the per-type PHYSICS shape (maintainer ruling 2026-08-08, built
+# 2026-08-22). Every damage TYPE gets its own curve derived from how that weapon really spreads
+# energy; the LEVEL scales the radius but never the shape.
+#
+# ⛔ WHY THIS EXISTS. Before this table 103 of 117 families shared just THREE curves, one per
+# level, so the shape encoded the weapon's LEVEL and not its TYPE: 23 different Heavy families —
+# Melee, Arrow, PhotonCannon, Sonic, Flame, CannonNuke — all sat at Spread 800 / radius 4000 /
+# `100,50,25,10,5,0`. A melee strike had the same four-cell blast as a nuclear tank shell.
+#
+# radius = the MEDIUM radius in WDist (1024 = one cell); Spread = radius / (len(Falloff) - 1),
+# because AreaDamageWarhead.cs:143 lays the falloff points at 0, S, 2S ... (N-1)S.
+PHYSICS_SHAPES = {
+    # -- kinetic point impact: the energy goes INTO the target, there is no blast ------------
+    "Bullet":     (100,  "100, 0"),
+    "CannonAP":   (120,  "100, 0"),
+    "MissileAP":  (100,  "100, 0"),
+    "MissileAA":  (150,  "100, 0"),
+    "Arrow":      (100,  "100, 0"),
+    "Sniper":     (40,   "100, 0"),
+    "Melee":      (0,    "100, 0"),      # adjacent contact only
+    # -- directed energy: a beam deposits along a line; "spread" is beam width ---------------
+    "Laser":      (80,   "100, 0"),
+    "Prism":      (150,  "100, 0"),
+    "Railgun":    (80,   "100, 0"),
+    "Tesla":      (120,  "100, 0"),
+    "Magic":      (120,  "100, 0"),      # non-physical %HP, no splash
+    # -- overpressure: convex, ~1/r near-field --------------------------------------------
+    "CannonHE":   (900,  "100, 50, 20, 0"),
+    "MissileHE":  (450,  "100, 45, 15, 0"),
+    "Flak":       (500,  "100, 55, 25, 8, 0"),
+    "Demolition": (1400, "100, 45, 18, 6, 0"),        # concentrated charge, ~1/r^3, punchy centre
+    # -- fragmentation: frags fly OUTWARD, so the field is broad with a long thin tail -------
+    "Concussion": (2100, "100, 72, 50, 32, 18, 8, 0"),
+    # -- sustained zone: fire covers an area evenly and stops at a hard edge -----------------
+    "Flame":      (1200, "100, 90, 78, 60, 0"),
+    "Chemical":   (1100, "100, 88, 72, 50, 0"),
+    # -- wave: sound pressure falls ~1/r, near-linear ----------------------------------------
+    "Sonic":      (1600, "100, 75, 50, 25, 0"),
+    # -- families the plan's table does not name, derived on the same three axes -------------
+    # An electrical STORM is many discrete arcs over an area: broad reach, but each arc is a
+    # point, so the field thins quickly rather than holding a plateau like fire.
+    "Storm":      (1600, "100, 70, 45, 25, 10, 0"),
+    # Nuclear's own template is HAND_TUNED (11 expanding rings) and the generator skips it, but
+    # it must appear here or the blends that cross it — CannonNuke, MissileNuke — silently drop
+    # their nuclear half and come out the size of a plain HE shell.
+    "Nuclear":    (10000, "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0"),
+}
+
+# Radius by level, relative to the family's MEDIUM radius. Preserves the ratios of the old
+# global (400, 600, 800, 1000) tuple — 0.67 / 1 / 1.33 / 1.67 — so the level ladder is unchanged
+# and only the per-family SHAPE and SCALE move. Trace is the sub-light lingering tier.
+LEVEL_RADIUS_SCALE = {"Light": 2 / 3, "Medium": 1.0, "Heavy": 4 / 3, "Super": 5 / 3, "Trace": 0.5}
+
+
+def _curve(text):
+    return [int(x) for x in text.split(",")]
+
+
+def _resample(curve, n):
+    """`curve` re-expressed on `n` evenly spaced points over the SAME normalised radius.
+
+    Blending a 2-point `100, 0` with a 5-point fire curve needs both on one grid; resampling
+    the pinpoint curve to 5 points yields `100, 75, 50, 25, 0`, i.e. the same straight line
+    it always described. Linear interpolation, matching GetDamageFalloff's own int2.Lerp.
+    """
+    if n == len(curve):
+        return list(curve)
+    out = []
+    for i in range(n):
+        pos = i * (len(curve) - 1) / (n - 1)
+        lo = int(pos)
+        hi = min(lo + 1, len(curve) - 1)
+        out.append(round(curve[lo] + (curve[hi] - curve[lo]) * (pos - lo)))
+    return out
+
+
+def blend_shape(parents):
+    """A crossover family's shape, built from the shapes of the families it crosses.
+
+    Maintainer 2026-08-22: *"if one warhead is like a crossover of different other warheads they
+    should take the original shapes into account and then create a crossover shape as well"*.
+
+    - RADIUS is the GEOMETRIC mean, because the notation is `Bullet x Flame` and scales
+      multiply: an incendiary bullet leaves a small fire (sqrt(100 x 1200) = 346), not half a
+      flamethrower (arithmetic would say 650). Over parents of similar size the two agree.
+    - The CURVE is the arithmetic mean per point, on the finest parent's grid — percentages
+      average, and keeping the most detailed grid means no parent's shape detail is lost.
+    """
+    shapes = [PHYSICS_SHAPES[p] for p in parents if p in PHYSICS_SHAPES]
+    if not shapes:
+        return None
+    radius = 1.0
+    for r, _ in shapes:
+        radius *= max(r, 1)
+    radius = round(radius ** (1 / len(shapes)))
+    n = max(len(_curve(c)) for _, c in shapes)
+    grids = [_resample(_curve(c), n) for _, c in shapes]
+    avg = [round(sum(g[i] for g in grids) / len(grids)) for i in range(n)]
+    avg[0], avg[-1] = 100, 0                     # every curve starts full and reaches zero
+    return radius, ", ".join(str(v) for v in avg)
+
+
+def shape_for(name):
+    """(spreads, falloffs) tuples for one family, indexed by level position in LEVELS.
+
+    Returns None when the family is governed by an explicit FAMILY_SPREADS/FAMILY_FALLOFFS
+    override (Toxic's spawned gas field) or is HAND_TUNED (Nuclear's 11 expanding rings).
+    """
+    shape = PHYSICS_SHAPES.get(name)
+    if shape is None:
+        parents = BLEND_FAMILIES.get(name, ([],))[0]
+        shape = blend_shape(parents) if parents else None
+    if shape is None:
+        return None
+    radius, falloff = shape
+    steps = len(_curve(falloff)) - 1
+    spreads, falloffs = [], []
+    for level in LEVELS:
+        r = round(radius * LEVEL_RADIUS_SCALE[level])
+        spreads.append(max(r // steps, 1) if steps else 1)
+        falloffs.append(falloff)
+    return tuple(spreads), tuple(falloffs)
+
+
 def at(seq, index):
     """`seq[index]`, tolerating a tuple shorter than the level count.
 
@@ -1784,8 +1909,9 @@ def _generate():
         if nm in HAND_TUNED:  # hand-authored; never regenerate (would revert)
             continue
         vt = valid_targets(air, ground_only=(nm == "Melee"))
-        spreads = FAMILY_SPREADS.get(nm, (400, 600, 800, 1000))
-        falloffs = FAMILY_FALLOFFS.get(nm, DEFAULT_FALLOFFS)
+        physics = shape_for(nm)
+        spreads = FAMILY_SPREADS.get(nm) or (physics[0] if physics else (400, 600, 800, 1000))
+        falloffs = FAMILY_FALLOFFS.get(nm) or (physics[1] if physics else DEFAULT_FALLOFFS)
         if isinstance(bl, str) and bl in SPECIAL_MODE:
             print(f"###### {nm}: {macro_summary(bl)} ######")
             print(family(nm, None, vt, lv, mode=SPECIAL_MODE[bl], spreads=spreads, falloffs=falloffs))
@@ -1820,14 +1946,23 @@ def _generate():
         vt = valid_targets(air_share >= 1 / 3)
         dt = FAMILY_DAMAGE_TYPES.get(nm)
         states_note = f"+ PhysicalStates {states}" if states else "no PhysicalStates"
+        # The blend's SHAPE crosses its parents' shapes exactly as its Versus crosses their
+        # profiles — see blend_shape(). Without this the 17 blend families kept the old
+        # one-curve-per-level default while every primitive moved to its physics curve.
+        bphysics = shape_for(nm)
+        bspreads = FAMILY_SPREADS.get(nm) or (bphysics[0] if bphysics else (400, 600, 800, 1000))
+        bfalloffs = FAMILY_FALLOFFS.get(nm) or (bphysics[1] if bphysics else DEFAULT_FALLOFFS)
         print(f"###### {nm}: blend of {'+'.join(parents)} + {states_note} ######")
         print(family(nm, None, vt, lv, versus_override=blend_versus(parents), physical_states=states,
+                     spreads=bspreads, falloffs=bfalloffs,
                      **({"damage_types": dt} if dt else {})))
         print()
     if not wanted or "storm" in wanted:
         print("###### Storm: Tesla_Super + Magic + TeslaSuperExtraDamage/5 (Super-anchored, scaled down) ######")
+        sphysics = shape_for("Storm")
         print(family("Storm", None, valid_targets(False), STORM_LEVELS,
                      versus_override=storm_versus,
+                     spreads=sphysics[0], falloffs=sphysics[1],
                      damage_types="Prone100Percent, TriggerProne, ElectricityDeath, Tesla"))
         print()
 

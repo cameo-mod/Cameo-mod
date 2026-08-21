@@ -10,15 +10,15 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "133",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "12",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "66",
         "tag": "MissileAP_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -250,15 +250,15 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "133",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "12",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "66",
         "tag": "MissileAP_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -378,17 +378,17 @@
       "damage_warheads": [
        {
         "damage": "120000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "60",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -412,29 +412,29 @@
       "damage_warheads": [
        {
         "damage": "120000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "60",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "60000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "366",
         "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "30",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -523,17 +523,17 @@
       "damage_warheads": [
        {
         "damage": "180000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "90",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -559,29 +559,29 @@
       "damage_warheads": [
        {
         "damage": "180000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "90",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "90000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "366",
         "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "45",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -671,16 +671,16 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "100, 0",
-        "spread": "300",
+        "spread": "50",
         "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -1429,29 +1429,29 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 50, 20, 0",
+        "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "80",
         "tag": "CannonAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "40",
         "tag": "CannonAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -1483,15 +1483,15 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 50, 20, 0",
+        "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
@@ -1521,7 +1521,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -1605,31 +1605,31 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 50, 20, 0",
+        "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "175",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -1660,15 +1660,15 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 50, 20, 0",
+        "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },
@@ -1705,7 +1705,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -1787,17 +1787,17 @@
       "damage_warheads": [
        {
         "damage": "48000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "80",
         "tag": "CannonAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "24",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "40",
         "tag": "CannonAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -1878,17 +1878,17 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 55, 25, 8, 0",
+        "spread": "125",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 55, 25, 8, 0",
+        "spread": "62",
         "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -1967,30 +1967,30 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "100, 0",
-        "spread": "200",
+        "spread": "33",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "100, 0",
-        "spread": "300",
+        "spread": "50",
         "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -2186,15 +2186,15 @@
       "damage_warheads": [
        {
         "damage": "32000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2283,15 +2283,15 @@
       "damage_warheads": [
        {
         "damage": "32000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2475,7 +2475,7 @@
         "falloff": "100, 75, 50, 25, 0",
         "spread": "5",
         "tag": "Sniper_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -2510,7 +2510,7 @@
         "falloff": "100, 75, 50, 25, 0",
         "spread": "5",
         "tag": "Sniper_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -2595,15 +2595,15 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2630,15 +2630,15 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2680,15 +2680,15 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2716,15 +2716,15 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2810,15 +2810,15 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2845,15 +2845,15 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2895,15 +2895,15 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2931,15 +2931,15 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3012,15 +3012,15 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3047,15 +3047,15 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3083,15 +3083,15 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3119,15 +3119,15 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3202,16 +3202,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "100, 0",
-        "spread": "200",
+        "spread": "33",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -3238,16 +3238,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "100, 0",
-        "spread": "200",
+        "spread": "33",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -3336,16 +3336,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "100, 0",
-        "spread": "200",
+        "spread": "33",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -3372,16 +3372,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "100, 0",
-        "spread": "200",
+        "spread": "33",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -3457,16 +3457,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "100, 0",
-        "spread": "200",
+        "spread": "33",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -3493,16 +3493,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "100, 0",
-        "spread": "200",
+        "spread": "33",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -3639,29 +3639,29 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "175",
         "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3691,43 +3691,43 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "175",
         "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
         "tag": "Chemical_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "137",
         "tag": "Chemical_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3759,29 +3759,29 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "175",
         "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3812,43 +3812,43 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "175",
         "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
         "tag": "Chemical_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "137",
         "tag": "Chemical_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3934,30 +3934,30 @@
        {
         "damage": "8000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "100, 0",
-        "spread": "200",
+        "spread": "33",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "100, 0",
-        "spread": "300",
+        "spread": "50",
         "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -3985,30 +3985,30 @@
        {
         "damage": "8000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "100, 0",
-        "spread": "200",
+        "spread": "33",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "100, 0",
-        "spread": "300",
+        "spread": "50",
         "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -4103,7 +4103,7 @@
         "falloff": "100, 75, 50, 25, 0",
         "spread": "5",
         "tag": "Sniper_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -4138,7 +4138,7 @@
         "falloff": "100, 75, 50, 25, 0",
         "spread": "5",
         "tag": "Sniper_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -4230,7 +4230,7 @@
         "falloff": "100, 75, 50, 25, 0",
         "spread": "5",
         "tag": "Sniper_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -4265,7 +4265,7 @@
         "falloff": "100, 75, 50, 25, 0",
         "spread": "5",
         "tag": "Sniper_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -4349,7 +4349,7 @@
         "falloff": "100, 75, 50, 25, 0",
         "spread": "5",
         "tag": "Sniper_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -4384,7 +4384,7 @@
         "falloff": "100, 75, 50, 25, 0",
         "spread": "5",
         "tag": "Sniper_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -4459,16 +4459,16 @@
        {
         "damage": "8000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "4",
         "falloff": "100, 0",
-        "spread": "200",
+        "spread": "33",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -4494,16 +4494,16 @@
        {
         "damage": "8000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "4",
         "falloff": "100, 0",
-        "spread": "200",
+        "spread": "33",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -4591,16 +4591,16 @@
        {
         "damage": "8000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "4",
         "falloff": "100, 0",
-        "spread": "200",
+        "spread": "33",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -4626,16 +4626,16 @@
        {
         "damage": "8000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "4",
         "falloff": "100, 0",
-        "spread": "200",
+        "spread": "33",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -4709,17 +4709,17 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "67",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "12",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "33",
         "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -4745,17 +4745,17 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "67",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "12",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "33",
         "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -4780,15 +4780,15 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "55",
         "tag": "MissileChem_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "27",
         "tag": "MissileChem_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -4816,15 +4816,15 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "55",
         "tag": "MissileChem_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "27",
         "tag": "MissileChem_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -4908,15 +4908,15 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 50, 20, 0",
+        "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
@@ -4939,7 +4939,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -4960,7 +4960,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -4974,7 +4974,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -4988,7 +4988,7 @@
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -5002,7 +5002,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -5032,15 +5032,15 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 50, 20, 0",
+        "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
@@ -5063,7 +5063,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -5084,7 +5084,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -5098,7 +5098,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -5112,7 +5112,7 @@
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -5126,7 +5126,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -5212,15 +5212,15 @@
       "damage_warheads": [
        {
         "damage": "6000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -5250,15 +5250,15 @@
       "damage_warheads": [
        {
         "damage": "6000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -5469,15 +5469,15 @@
       "damage_warheads": [
        {
         "damage": "6000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -5507,15 +5507,15 @@
       "damage_warheads": [
        {
         "damage": "6000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -5741,7 +5741,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -5762,7 +5762,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -5834,7 +5834,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -5855,7 +5855,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -5926,7 +5926,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -5947,7 +5947,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -6003,7 +6003,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -6049,7 +6049,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -6070,7 +6070,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -6126,7 +6126,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -6207,15 +6207,15 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "5",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -6243,15 +6243,15 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "5",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -6447,17 +6447,17 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 0",
+        "spread": "0",
         "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -6482,17 +6482,17 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 0",
+        "spread": "0",
         "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -6591,28 +6591,28 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "175",
         "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
-        "falloff": "100, 50, 25, 10, 5, 0",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "400",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": "100, 50, 25, 10, 5, 0",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "400",
         "tag": "Demolition_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -6660,7 +6660,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
@@ -6674,7 +6674,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -6711,17 +6711,17 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "116",
         "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
@@ -6745,17 +6745,17 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "116",
         "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
@@ -6843,17 +6843,17 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 55, 25, 8, 0",
+        "spread": "125",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 55, 25, 8, 0",
+        "spread": "62",
         "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -6880,17 +6880,17 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "175",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -6917,15 +6917,15 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "90",
         "tag": "CannonChem_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "21",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "45",
         "tag": "CannonChem_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -6954,17 +6954,17 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "116",
         "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
@@ -7051,17 +7051,17 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "12",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "175",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -7087,15 +7087,15 @@
       "damage_warheads": [
        {
         "damage": "36000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "83",
         "tag": "MissileChem_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "18",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "41",
         "tag": "MissileChem_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -7709,28 +7709,28 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "100, 0",
-        "spread": "300",
+        "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 55, 25, 8, 0",
+        "spread": "125",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 55, 25, 8, 0",
+        "spread": "62",
         "tag": "Flak_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -7820,30 +7820,30 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "100, 0",
-        "spread": "200",
+        "spread": "33",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
         "falloff": "100, 0",
-        "spread": "300",
+        "spread": "50",
         "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -7933,29 +7933,29 @@
       "damage_warheads": [
        {
         "damage": "40000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "20",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "40000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "366",
         "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "20",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -7996,7 +7996,7 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -8098,15 +8098,15 @@
       "damage_warheads": [
        {
         "damage": "28000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "300",
         "tag": "Flame_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "14",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "150",
         "tag": "Flame_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -8244,15 +8244,15 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 50, 20, 0",
+        "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
@@ -8265,17 +8265,17 @@
        },
        {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "175",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -8306,15 +8306,15 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 50, 20, 0",
+        "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
@@ -8358,7 +8358,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -8389,17 +8389,17 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "133",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "30",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "66",
         "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -8677,29 +8677,29 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 55, 25, 8, 0",
+        "spread": "125",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 55, 25, 8, 0",
+        "spread": "62",
         "tag": "Flak_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 15, 0",
+        "spread": "100",
         "tag": "MissileHE_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 45, 15, 0",
+        "spread": "50",
         "tag": "MissileHE_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -8730,31 +8730,31 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 55, 25, 8, 0",
+        "spread": "125",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 55, 25, 8, 0",
+        "spread": "62",
         "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 15, 0",
+        "spread": "100",
         "tag": "MissileHE_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 45, 15, 0",
+        "spread": "50",
         "tag": "MissileHE_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -8780,29 +8780,29 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 55, 25, 8, 0",
+        "spread": "125",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 55, 25, 8, 0",
+        "spread": "62",
         "tag": "Flak_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 15, 0",
+        "spread": "100",
         "tag": "MissileHE_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 45, 15, 0",
+        "spread": "50",
         "tag": "MissileHE_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -8833,31 +8833,31 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 55, 25, 8, 0",
+        "spread": "125",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 55, 25, 8, 0",
+        "spread": "62",
         "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 15, 0",
+        "spread": "100",
         "tag": "MissileHE_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 45, 15, 0",
+        "spread": "50",
         "tag": "MissileHE_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -8945,17 +8945,17 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "12",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "175",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -8981,15 +8981,15 @@
       "damage_warheads": [
        {
         "damage": "36000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "83",
         "tag": "MissileChem_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "18",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "41",
         "tag": "MissileChem_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -9081,17 +9081,17 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "12",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "175",
         "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -9117,15 +9117,15 @@
       "damage_warheads": [
        {
         "damage": "36000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "83",
         "tag": "MissileChem_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "18",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "41",
         "tag": "MissileChem_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -9280,16 +9280,16 @@
        {
         "damage": "8000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "4",
         "falloff": "100, 0",
-        "spread": "300",
+        "spread": "50",
         "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -9382,16 +9382,16 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "100, 0",
-        "spread": "200",
+        "spread": "33",
         "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -9477,17 +9477,17 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 50, 20, 0",
+        "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -9513,29 +9513,29 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 50, 20, 0",
+        "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -9626,29 +9626,29 @@
       "damage_warheads": [
        {
         "damage": "18000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "9",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "116",
         "tag": "Demolition_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "18000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
         "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "9",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 45, 15, 0",
+        "spread": "75",
         "tag": "MissileHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -9722,7 +9722,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "18000",
@@ -9736,7 +9736,7 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -9840,7 +9840,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -9854,7 +9854,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -9877,15 +9877,15 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "4",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "91",
         "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
@@ -9908,7 +9908,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -9922,7 +9922,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -10011,17 +10011,17 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 50, 20, 0",
+        "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -10049,29 +10049,29 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 50, 20, 0",
+        "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
         "tag": "Chemical_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "137",
         "tag": "Chemical_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -10164,17 +10164,17 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "80",
         "tag": "CannonAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "40",
         "tag": "CannonAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -10224,7 +10224,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -10310,29 +10310,29 @@
       "damage_warheads": [
        {
         "damage": "32000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "175",
         "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "32000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -10377,7 +10377,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "32000",
@@ -10391,7 +10391,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "32000",
@@ -10573,17 +10573,17 @@
       "damage_warheads": [
        {
         "damage": "40000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "80",
         "tag": "CannonAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "20",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "40",
         "tag": "CannonAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
@@ -10633,14 +10633,14 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10",
         "falloff": null,
         "spread": null,
         "tag": "MLightChemicalWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
