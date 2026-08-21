@@ -1,5 +1,30 @@
 # Development Log
 
+## 2026-08-24 — HammerheadArtillery 3-way split (boot-gated)
+
+- Converted `HammerheadArtillery` in `mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml`
+  from the old `^RA2Grenade` + `^HeavyBomb` + `^SteelMediumCannon` pileup to a 2-warhead 3-way split:
+  - `Inherits@wh: ^Warhead_Demolition_Heavy` (`Damage: 22222`, `Demolition_Heavy_Percentage` `Damage: 22`)
+  - `Inherits@wh2: ^Warhead_CannonHE_Medium` (`Damage: 11111`, `CannonHE_Medium_Percentage` `Damage: 11`)
+  - `Inherits@proj: ^Projectile_Shell_Medium` with local `Bullet` overrides
+  - `Inherits@fx: ^Effect_Demolition_Heavy`
+- Merged `Demolition_Light` (11111/11) and `HeavyBomb` (11111/11) into one heavy demolition warhead
+  so the per-shot total stays 33333/33. The `CannonHE_Medium` warhead stays as the cannon-shell
+  contribution.
+- Preserved `Projectile: Bullet` (`Image: 120MM`, `Speed: 333`, `LaunchAngle: 111`, `Inaccuracy: 1111`,
+  `Blockable: false`, blue contrail colors/widths/length), `Range: 11111`, `MinRange: 2220`,
+  `ReloadDelay: 111`, `Report: vdesatta.wav, vdesattb.wav`.
+- Inlined all actor-specific effect/smudge/glow/shield/concrete overrides:
+  `steel_blueexp`/`makoexplose` main, `siege_impact` second, `blue_building_napalm`/`kaboom12`
+  delayed, `RA2Crater`/`RA2Scorch` + cannon dune smudges, `med_explosion_air` air effect,
+  `ra2_small_watersplash` water, shell-style shield-hit sound, `Concrete: 150`, `ShieldHit` duration 10.
+- `review_resolve_diff.py wt_baseline . HammerheadArtillery` reports only the expected damage-multiset
+  collapse; all projectile/effect invariants preserved.
+- `extract_stats.py` regenerated ledgers and derived sidecars; `audit_balance_drift` clean.
+- Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split` 946
+  (baseline lowered 950→946), `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+
 ## 2026-08-21 — AsianChemicalBombs 3-way split (boot-gated)
 
 - Converted `AsianChemicalBombs` in `mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml`

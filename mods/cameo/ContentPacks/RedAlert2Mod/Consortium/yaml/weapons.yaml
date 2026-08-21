@@ -1857,44 +1857,109 @@ HammerheadTankCannon:
 		Damage: 12
 
 HammerheadArtillery:
-	Inherits: ^RA2Grenade
-	Inherits@2: ^HeavyBomb
-	Inherits@3: ^SteelMediumCannon
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Demolition_Heavy
 	ReloadDelay: 111
 	Range: 11111
 	MinRange: 2220
 	Report: vdesatta.wav, vdesattb.wav
 	Projectile: Bullet
+		Image: 120MM
+		Blockable: false
 		LaunchAngle: 111
 		Inaccuracy: 1111
 		Speed: 333
 		ContrailLength: 33
 		ContrailStartWidth: 111
 		ContrailEndWidth: 33
-	Warhead@Demolition_Light:
+		ContrailStartColor: 77CCFFAA
+		ContrailEndColor: 4488FF00
+	Warhead@Demolition_Heavy:
 		Spread: 1111
-		Damage: 11111
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+		Damage: 22222
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		Spread: 1111
-		Damage: 11
-	Warhead@HeavyBomb: SpreadDamage
-		Spread: 1111
-		Damage: 11111
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		Spread: 1111
-		Damage: 11
+		Damage: 22
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@CannonHE_Medium:
 		Spread: 1111
 		Damage: 11111
 	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
 		Spread: 1111
 		Damage: 11
+	Warhead@Effect: CreateEffect
+		Explosions: steel_blueexp
+		ExplosionPalette: ra2effect
+		ImpactSounds: makoexplose.wav
+		ImpactActors: false
+		ValidTargets: Ground, Ship
 	Warhead@Effect1: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
 	Warhead@Effect2: CreateEffect
+		Delay: 6
 		Explosions: blue_building_napalm
 		ImpactSounds: kaboom12.aud
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectWater: CreateEffect
+		Explosions: ra2_small_watersplash
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: med_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 150
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
 
 SteelDaggerCannon:
 	Inherits: ^MediumFlameWeapon

@@ -1,14 +1,12 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 304
+Total concrete weapons on old families: 300
 Single old-family with new inherits (Phase B completion): 2
-Pure single old-family (mechanical Phase A candidates): 18
+Pure single old-family (mechanical Phase A candidates): 14
 Mixed old-family (Phase B maintainer sign-off): 284 in 212 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
-- `AsianChemicalBombs` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | old: HeavyChemicalWeapon | HeavyChemicalWeapon=2000, HeavyChemicalWeaponPercentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, Effect=0, Cloud=0
-- `HammerheadArtillery` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: HeavyBomb | Demolition_Light=11111, Demolition_Light_Percentage=11, HeavyBomb=11111, HeavyBombPercentage=11, CannonHE_Medium=11111, CannonHE_Medium_Percentage=11, Effect1=0, Effect2=0
 - `SteelMakoGun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Demolition_Light_Percentage=1, Railgun_Heavy=2000, Railgun_Heavy_Percentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, Effect=0
 - `Future_Cryocopter_Rocket` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | old: Grenade | Grenade=16000, GrenadeFriendlyFire=8000, GrenadePercentage=8, MissileAP_Heavy=16000, MissileAP_Heavy_Percentage=8, MissileAP_Medium=16000, MissileAP_Medium_Percentage=8, PhysicalStateCryo1=0, PhysicalStateCryo2=0, PhysicalStateCryo3=0, Effect=0, EffectAir=0
 - `RA2CRM60H` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, CannonHE_Heavy_Percentage=1, Bullet_Medium=2000, Bullet_Medium_Percentage=1, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
@@ -19,8 +17,6 @@ Mixed old-family (Phase B maintainer sign-off): 284 in 212 groups
 - `ZeroFighterChainGunWaveforce` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | old: Grenade | Bullet_Medium_Percentage=2, Railgun_Heavy=4000, Railgun_Heavy_Percentage=2, GrenadeFriendlyFire=500, GrenadePercentage=2
 - `MonsterTank120mm` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | old: NuclearWarhead | NuclearWarhead=40000, NuclearWarheadPercentage=20, CannonHE_Heavy=40000, CannonHE_Heavy_Percentage=20, Effect=0
 - `ThermobaricNuclearMaverick` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | old: NuclearWarhead | Flame_Heavy=14000, Flame_Heavy_Percentage=7, NuclearWarhead=14000, NuclearWarheadPercentage=7, MissileHE_Heavy=14000, MissileHE_Heavy_Percentage=7, Effect=0, Effect2=0
-- `TS70mmChem` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | old: LightChemicalWeapon | CannonHE_Medium=4000, CannonHE_Medium_Percentage=2, LightChemicalWeapon=2000, LightChemicalWeaponPercentage=1, Cloud=0
-- `TSScoopDualChem` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | old: MediumChemicalWeapon | CannonHE_Medium=20000, CannonHE_Medium_Percentage=10, MediumChemicalWeapon=10000, MediumChemicalWeaponPercentage=5, Cloud=0
 - `RA2CRM60H` (weapons\redalert2.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, CannonHE_Heavy_Percentage=1, Bullet_Medium=2000, Bullet_Medium_Percentage=1, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
 - `RA2MultiHoverMissile` (weapons\redalert2.yaml) | old: MediumChemicalWeapon | ArrowWeapon=2000, ArrowWeaponPercentage=1, MissileAP_Light=2000, MissileAP_Light_Percentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, MediumChemicalWeapon=2000, MediumChemicalWeaponFriendlyFire=1000, MediumChemicalWeaponPercentage=1
 - `RA2SCUD` (weapons\redalert2.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=30000, MediumFlameWeaponFriendlyFire=15000, MediumFlameWeaponPercentage=15, Demolition_Light=30000, Demolition_Light_FriendlyFire=15000, Demolition_Light_Percentage=15, MissileAP_Heavy=30000, MissileAP_Heavy_Percentage=15, Effect=0

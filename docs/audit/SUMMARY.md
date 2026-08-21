@@ -150,3 +150,19 @@ Three more always-active `FirepowerMultiplier` instances were found and fixed (`
 **Correction (2026-08-22+):** `GoliathRockets_AA`, `WraithRockets_AA`, `ScoutRockets_AA`, and `MissileTurret` are `^Warhead_MissileAA_Heavy`; `SunDogRockets` is `^Warhead_MissileAP_Heavy`; the earlier `^D2KRocket` / `^Warhead_MissileAP_Heavy` classification in this summary and in `docs/design/BALANCE_PROGRAM_PLAN.md` was stale.
 
 **Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+
+## W24 cluster 10 — HammerheadArtillery (2026-08-24)
+
+**Converted** `HammerheadArtillery` in `mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml` from the old `^RA2Grenade` + `^HeavyBomb` + `^SteelMediumCannon` 3-main stack to a 2-warhead 3-way split:
+- `Inherits@wh: ^Warhead_Demolition_Heavy` (merged `Demolition_Light` 11111 + `HeavyBomb` 11111 into `Damage: 22222`; `Demolition_Heavy_Percentage` `Damage: 22`).
+- `Inherits@wh2: ^Warhead_CannonHE_Medium` (`Damage: 11111`; `CannonHE_Medium_Percentage` `Damage: 11`).
+- `Inherits@proj: ^Projectile_Shell_Medium` with local `Bullet` overrides (`Image: 120MM`, `Speed: 333`, `LaunchAngle: 111`, `Inaccuracy: 1111`, `Blockable: false`, blue contrail).
+- `Inherits@fx: ^Effect_Demolition_Heavy` with local effect/smudge/glow/shield/concrete overrides.
+
+**Preserved** `Range: 11111`, `MinRange: 2220`, `ReloadDelay: 111`, `Report: vdesatta.wav, vdesattb.wav`, `120MM` projectile, all smudge/RA2Scorch/crater/dune behaviour, `Concrete: 150`, shell-style shield-hit sound, `steel_blueexp` + `blue_building_napalm` visual sequence, and the per-shot damage total (33333 flat + 33 percentage).
+
+**Resolver diff:** `tools/audit/review_resolve_diff.py` OK (only the expected damage-multiset collapse); all projectile/effect invariants preserved.
+
+**Audits:** `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs; `audit_warhead_split` broadcast count 946, baseline lowered 950→946; `audit_physical_state_warheads` PASS; `audit_balance_drift` clean; `extract_stats` regenerated ledgers; `verify_generator_sync` drift 0.
+
+**Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.

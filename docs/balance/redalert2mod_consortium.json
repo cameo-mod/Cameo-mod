@@ -11074,31 +11074,17 @@
      {
       "damage_warheads": [
        {
-        "damage": "11111",
-        "falloff": "100, 50, 33, 25, 20, 0",
+        "damage": "22222",
+        "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "1111",
-        "tag": "Demolition_Light",
+        "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "11",
-        "falloff": "100, 50, 33, 25, 20, 0",
+        "damage": "22",
+        "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "1111",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "11111",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "1111",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "11",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "1111",
-        "tag": "HeavyBombPercentage",
+        "tag": "Demolition_Heavy_Percentage",
         "type": "HealthPercentageDamage"
        },
        {
@@ -11117,7 +11103,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.125,
       "minrange": "2220",
       "pricing": true,
       "range": "11111",
@@ -11125,12 +11111,13 @@
       "requires": "deployed",
       "slot": "Armament@Deployed",
       "versus_templates": [
-       "^RA2Grenade",
-       "^HeavyBomb",
-       "^SteelMediumCannon"
+       "^Warhead_Demolition_Heavy",
+       "^Warhead_CannonHE_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Demolition_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
+       "^Warhead_Demolition_Heavy",
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "HammerheadArtillery",
