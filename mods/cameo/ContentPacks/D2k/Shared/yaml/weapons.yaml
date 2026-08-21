@@ -65,22 +65,6 @@
 	Warhead@Concrete: DamagesConcrete
 		Damage: 750
 
-^Effect_MissileHE_Heavy_D2K_Rocket:
-	Inherits: ^Effect_MissileHE_Heavy
-	-Warhead@DuneRock:
-	-Warhead@DuneSand:
-	-Warhead@RA2Crater:
-	-Warhead@Concrete
-	Warhead@Smudge: LeaveSmudge
-		SmudgeType: SandCrater, RockCrater
-		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
-	Warhead@Effect: CreateEffect
-		Explosions: d2k_tiny_explosion
-		ExplosionPalette: effect75alpha
-		ImpactActors: false
-		ValidTargets: Ground, Air
-	Warhead@Concrete: DamagesConcrete
-		Damage: 240
 
 ## D2K per-game EFFECT templates for the AP missile/rocket family (legacy ^D2KRocket/^D2KMissile remain AP).
 

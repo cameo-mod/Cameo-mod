@@ -158,7 +158,7 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 934
+    value: 932
     tolerance: 0
     what: >
       Fired weapons carrying MORE THAN ONE damage main — W24's scope, and the reason pricing
@@ -299,7 +299,7 @@ claims:
                   break
       print(n)
   - id: w24_multi_main_fed
-    value: 383
+    value: 381
     tolerance: 0
     what: >
       RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their
@@ -330,7 +330,7 @@ claims:
               n += 1
       print(n)
   - id: physical_state_fired_weapons
-    value: 448
+    value: 446
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
