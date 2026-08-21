@@ -87,15 +87,15 @@ scrin_reactor:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 10
-		Prerequisites: ~scrin_drone_platform, !scrin_upgrade_fusion_reactor
+		Prerequisites: ~scrin_drone_platform, ~!scrin_upgrade_fusion_reactor
 		Icon: icon
 		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: actor_scrin_reactor.description
 	Valued:
-		Cost: 500
+		Cost: 600
 	Power:
-		Amount: 100
+		Amount: 225
 	GrantConditionOnPrerequisite@FUSION:
 		Condition: fusion-reactor
 		Prerequisites: scrin_upgrade_fusion_reactor
@@ -126,7 +126,7 @@ scrin_fusion_reactor:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 10
-		Prerequisites: ~scrin_drone_platform, scrin_upgrade_fusion_reactor
+		Prerequisites: ~scrin_drone_platform, ~scrin_upgrade_fusion_reactor
 		Icon: icon
 		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
@@ -134,7 +134,7 @@ scrin_fusion_reactor:
 	Valued:
 		Cost: 800
 	Power:
-		Amount: 200
+		Amount: 450
 	RenderSprites:
 		Image: scrin_fusion_reactor
 		PlayerPalette: scrin_fusion_reactor_player
@@ -866,16 +866,8 @@ scrin_outpost:
 	Inherits@shape: ^1x1Shape
 	Tooltip:
 		Name: actor_scrin_outpost.name
-	Buildable:
-		Queue: Building, RABuilding
-		BuildPaletteOrder: 35
-		Prerequisites: ~scrin_drone_platform, scrin_reactor
-		Icon: icon
-		IconPalette: player_rgba
-		IconPaletteIsPlayerPalette: true
-		Description: Extends the buildable area.
 	Valued:
-		Cost: 750
+		Cost: 800
 	Power:
 		Amount: -10
 	BaseProvider:
