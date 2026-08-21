@@ -1,5 +1,29 @@
 # Development Log
 
+## 2026-08-21 — MonsterTank120mm 3-way split (boot-gated)
+
+- Converted `MonsterTank120mm` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`
+  from `^NuclearWarhead` to the 3-way split:
+  - `Inherits@wh: ^Warhead_Nuclear_Super`
+  - `Inherits@wh2: ^Warhead_CannonHE_Heavy`
+  - `Inherits@proj: ^Projectile_Shell_Heavy`
+  - `Inherits@fx: ^Effect_CannonHE_Heavy`
+  - `Inherits@fx2: ^Effect_Nuclear_Super`
+- Preserved per-shot totals: `CannonHE_Heavy` `40000` flat / `20%`; `Nuclear_Super` main
+  `4000` × 10 ticks (`MaxRadius: 9000`) and percentage `2` × 10 ticks (`Spread: 500`,
+  `MaxRadius: 4500`) for the old `20%`.
+- Preserved old `SpreadDamage`/`HealthPercentageDamage` shape for the nuclear half:
+  `AffectsParent: true`, `ValidRelationships: Enemy`, `FireDeath, Incendiary`.
+- Kept `Report: nukemisl.aud`, bullet projectile (`Image: 120MM`, `Speed: 300`, `Inaccuracy: 500`),
+  and the local `Effect` (`nuke_small`, `kaboom22.aud`, `ImpactActors: true`).
+- `MonsterTank120mmThermobaric` (child) now inherits the same nuclear/cannon split plus
+  `^Warhead_Flame_Heavy` / `^Projectile_Flame_Heavy` / `^Effect_Flame_Heavy`; resolved
+  totals remain `120000` flat + `60%`.
+- `find_empty_warhead` 0, `find_orphan_old_keys` 0, `audit_warhead_split` broadcast
+  baseline lowered 944 → 942, `audit_balance_drift` clean, `audit_doc_claims` 16/16,
+  `verify_generator_sync` drift 0.
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+
 ## 2026-08-21 — ThermobaricNuclearMaverick 3-way split (boot-gated)
 
 - Converted `ThermobaricNuclearMaverick` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`

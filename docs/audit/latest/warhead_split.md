@@ -1,9 +1,9 @@
 # Warhead-split guard (multi-warhead over-damage)
 
 
-## FAIL 1 — broadcast fingerprint / every MAIN identical (944 vs baseline 944)
+## FAIL 1 — broadcast fingerprint / every MAIN identical (942 vs baseline 942)
 
-_at or below baseline_ — pre-existing **W24** debt (944 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
+_at or below baseline_ — pre-existing **W24** debt (942 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
 
 | weapon | mains | per_warhead | total |
 |---|---|---|---|
@@ -49,7 +49,7 @@ _at or below baseline_ — pre-existing **W24** debt (944 weapons), not a regres
 | AsianGrenade_elite | 2 | 4000 | 8000 |
 
 
-_... and 904 more._
+_... and 902 more._
 
 
 ## FAIL 2 — FriendlyFire louder than the shot (0)
@@ -57,7 +57,7 @@ _... and 904 more._
 None. ✅
 
 
-## Review — high uniform stacks (informational, 240)
+## Review — high uniform stacks (informational, 239)
 
 Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (not flattening residue).
 

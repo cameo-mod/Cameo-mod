@@ -1,9 +1,9 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 298
+Total concrete weapons on old families: 297
 Single old-family with new inherits (Phase B completion): 1
-Pure single old-family (mechanical Phase A candidates): 13
+Pure single old-family (mechanical Phase A candidates): 12
 Mixed old-family (Phase B maintainer sign-off): 284 in 212 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
@@ -15,7 +15,6 @@ Mixed old-family (Phase B maintainer sign-off): 284 in 212 groups
 - `ArmoredCarMGWaveforce` (ContentPacks\RedAlert\Japan\yaml\weapons.yaml) | old: HeavyAAWeapon | 
 - `ATMine` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | old: HeavyMissile | HeavyMissile=50000, HeavyMissilePercentage=25, Effect=0, Smudge=0
 - `ZeroFighterChainGunWaveforce` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | old: Grenade | Bullet_Medium_Percentage=2, Railgun_Heavy=4000, Railgun_Heavy_Percentage=2, GrenadeFriendlyFire=500, GrenadePercentage=2
-- `MonsterTank120mm` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | old: NuclearWarhead | NuclearWarhead=40000, NuclearWarheadPercentage=20, CannonHE_Heavy=40000, CannonHE_Heavy_Percentage=20, Effect=0
 - `RA2CRM60H` (weapons\redalert2.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, CannonHE_Heavy_Percentage=1, Bullet_Medium=2000, Bullet_Medium_Percentage=1, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
 - `RA2MultiHoverMissile` (weapons\redalert2.yaml) | old: MediumChemicalWeapon | ArrowWeapon=2000, ArrowWeaponPercentage=1, MissileAP_Light=2000, MissileAP_Light_Percentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, MediumChemicalWeapon=2000, MediumChemicalWeaponFriendlyFire=1000, MediumChemicalWeaponPercentage=1
 - `RA2SCUD` (weapons\redalert2.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=30000, MediumFlameWeaponFriendlyFire=15000, MediumFlameWeaponPercentage=15, Demolition_Light=30000, Demolition_Light_FriendlyFire=15000, Demolition_Light_Percentage=15, MissileAP_Heavy=30000, MissileAP_Heavy_Percentage=15, Effect=0

@@ -2994,10 +2994,12 @@ MammothTusk2ThermobaricTargetingComputer:
 	ValidTargets: Ground, Water, Air
 
 MonsterTank120mm:
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^NuclearWarhead
+	Inherits@wh: ^Warhead_Nuclear_Super
+	Inherits@wh2: ^Warhead_CannonHE_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_CannonHE_Heavy
+	Inherits@fx2: ^Effect_Nuclear_Super
+	Report: nukemisl.aud
 	ReloadDelay: 103
 	Burst: 2
 	BurstDelays: 32
@@ -3006,14 +3008,26 @@ MonsterTank120mm:
 		Speed: 300
 		LaunchAngle: 50
 		Inaccuracy: 500
-	Warhead@NuclearWarhead: SpreadDamage
-		Damage: 40000
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
-		Damage: 20
 	Warhead@CannonHE_Heavy:
 		Damage: 40000
 	Warhead@CannonHE_Heavy_Percentage:
 		Damage: 20
+	Warhead@Nuclear_Super:
+		ValidTargets: Ground, Air, Water
+		ValidRelationships: Enemy
+		Damage: 4000
+		MaxRadius: 9000
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@Nuclear_Super_Percentage:
+		ValidTargets: Ground, Air, Water
+		ValidRelationships: Enemy
+		Damage: 2
+		Spread: 500
+		MaxRadius: 4500
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud

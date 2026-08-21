@@ -195,3 +195,19 @@ Three more always-active `FirepowerMultiplier` instances were found and fixed (`
 **Audits:** `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs; `audit_warhead_split` broadcast count 944, baseline lowered 945→944; `audit_balance_drift` clean; `extract_stats` regenerated ledgers; `verify_generator_sync` drift 0; `audit_doc_claims` 16/16 clean.
 
 **Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+
+## W24 cluster 13 — MonsterTank120mm (2026-08-21)
+
+**Converted** `MonsterTank120mm` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` from `Inherits: ^NuclearWarhead` to a clean 3-way split:
+- `Inherits@wh: ^Warhead_Nuclear_Super`
+- `Inherits@wh2: ^Warhead_CannonHE_Heavy`
+- `Inherits@proj: ^Projectile_Shell_Heavy`
+- `Inherits@fx: ^Effect_CannonHE_Heavy` then `Inherits@fx2: ^Effect_Nuclear_Super`
+
+**Preserved** total per-shot damage: `CannonHE_Heavy` `40000` flat / `20%`; `Nuclear_Super` main `4000` × 10-tick shockwave (`MaxRadius: 9000`) and percentage `2` × 10-tick (`Spread: 500`, `MaxRadius: 4500`) for the old `20%`. Also preserved `AffectsParent: true`, `ValidRelationships: Enemy`, and `FireDeath, Incendiary` on the nuclear half; `Report: nukemisl.aud`; bullet projectile; and the local `Effect` (`nuke_small`, `kaboom22.aud`, `ImpactActors: true`).
+
+`MonsterTank120mmThermobaric` inherits the same nuclear/cannon split and adds `^Warhead_Flame_Heavy` / `^Projectile_Flame_Heavy` / `^Effect_Flame_Heavy`; resolved totals stay `120000` flat + `60%`.
+
+**Audits:** `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs; `audit_warhead_split` broadcast count 942, baseline lowered 944→942; `audit_balance_drift` clean; `extract_stats` regenerated ledgers; `verify_generator_sync` drift 0; `audit_doc_claims` 16/16 clean.
+
+**Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
