@@ -39,6 +39,7 @@ scrin_drone_platform:
 	Inherits: ^ScrinBuilding
 	Inherits@conyard: ^Conyard
 	Inherits@shape: ^3x3Shape
+	-Buildable:
 	Tooltip:
 		Name: actor_scrin_drone_platform.name
 	Building:
