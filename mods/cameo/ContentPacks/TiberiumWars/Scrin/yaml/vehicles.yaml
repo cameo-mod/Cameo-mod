@@ -3,7 +3,6 @@
 
 ^ScrinVehicleVisual:
 	Inherits: ^Vehicle
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Health:
 		HP: 100000
 	Armor:
@@ -71,6 +70,7 @@ scrin_harvester:
 
 scrin_seeker:
 	Inherits: ^ScrinHoverVisual
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Tooltip:
 		Name: actor_scrin_seeker.name
 	Buildable:
@@ -96,6 +96,7 @@ scrin_seeker:
 
 scrin_devourer_tank:
 	Inherits: ^ScrinHoverVisual
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Tooltip:
 		Name: actor_scrin_devourer_tank.name
 	Buildable:
@@ -121,6 +122,7 @@ scrin_devourer_tank:
 
 scrin_repair_drone:
 	Inherits: ^ScrinHoverVisual
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Tooltip:
 		Name: actor_scrin_repair_drone.name
 	Buildable:
@@ -151,6 +153,7 @@ scrin_repair_drone:
 
 scrin_gun_walker:
 	Inherits: ^ScrinVehicleVisual
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Tooltip:
 		Name: actor_scrin_gun_walker.name
 	Buildable:
@@ -179,6 +182,7 @@ scrin_gun_walker:
 
 scrin_shard_walker:
 	Inherits: ^ScrinVehicleVisual
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Tooltip:
 		Name: actor_scrin_shard_walker.name
 	Buildable:
@@ -207,6 +211,7 @@ scrin_shard_walker:
 
 scrin_corrupter:
 	Inherits: ^ScrinVehicleVisual
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Tooltip:
 		Name: actor_scrin_corrupter.name
 	Buildable:
@@ -239,6 +244,7 @@ scrin_corrupter:
 
 scrin_annihilator_tripod:
 	Inherits: ^ScrinVehicleVisual
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Tooltip:
 		Name: actor_scrin_annihilator_tripod.name
 	Buildable:
@@ -269,6 +275,7 @@ scrin_annihilator_tripod:
 
 scrin_reaper_tripod:
 	Inherits: ^ScrinVehicleVisual
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Tooltip:
 		Name: actor_scrin_reaper_tripod.name
 	Buildable:
