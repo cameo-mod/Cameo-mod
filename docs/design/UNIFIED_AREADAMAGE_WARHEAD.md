@@ -231,11 +231,30 @@ to a uniform 100, or families that legitimately drifted get re-priced by acciden
 
 ---
 
+**R6 — ⛔ THE PREREQUISITE I MISSED, and it is most of the work.** §1's "65-line subclass, easy
+merge" is only true for the twins that are already the Cameo type. Measured on the live tree:
+
+    resolved *_Percentage warhead nodes
+        HealthPercentageDamage (stock engine)   3378     <-- NOT foldable as-is
+        AreaDamagePercentage   (Cameo)          1426
+    `PercentageDenominator` anywhere in mods/      0     <-- the basis-point rollout never landed
+
+`HealthPercentageDamage` is a different warhead with no `PercentageDenominator`, no `Ticks`, no
+`Spread`/`Falloff` — there is nothing to fold it INTO until it is migrated. **So the fold is gated on
+W18**, which already specs exactly this migration plus `PercentageDenominator: 10000` (the 0.01% steps
+this design needs) and is marked READY on the board. Do W18 first and the fold becomes mechanical;
+skip it and 3378 nodes have no path.
+
+---
+
 ## 7. Suggested order
 
-1. **C# first, behind compatibility.** Add `PercentageScale` / `PercentageSpread` / `PercentageVersus`
-   / `PercentageTicks` / `ConcreteScale` to `AreaDamageWarhead`, defaulting to **off** so nothing
-   changes. Keep `AreaDamagePercentageWarhead` working.
+0. ⛔ **W18 FIRST** — migrate the 3378 `HealthPercentageDamage` twins to `AreaDamagePercentage` and
+   roll out `PercentageDenominator: 10000`. Behaviour-preserving, already specced, already READY, and
+   without it 3378 of 4804 nodes cannot be folded at all (R6).
+1. **C# next, behind compatibility.** Add `PercentageScale` / `PercentageSpread` / `PercentageVersus`
+   / `PercentageTicks` and the 1:1 concrete routing to `AreaDamageWarhead`, defaulting to **off** so
+   nothing changes. Keep `AreaDamagePercentageWarhead` working.
 2. **Calibrate per family** from the measured medians; write them into the generator
    (`gen_weapon_template.py`), never by hand.
 3. **Migrate in batches**, `review_batch_diff` clean per batch, boot gate per batch.
