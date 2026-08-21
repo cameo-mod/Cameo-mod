@@ -149,8 +149,8 @@ scrin_extractor:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 20
 		Prerequisites: ~scrin_drone_platform
-		Icon: idle
-		IconPalette: scrin_extractor_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Processes Tiberium into credits and deploys a Harvester.
 	Valued:
@@ -193,8 +193,8 @@ scrin_portal:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 30
 		Prerequisites: ~scrin_drone_platform, scrin_reactor
-		Icon: idle
-		IconPalette: scrin_portal_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Trains Scrin infantry.
 	Valued:
@@ -252,8 +252,8 @@ scrin_warp_gate:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 40
 		Prerequisites: ~scrin_drone_platform, scrin_reactor, scrin_extractor
-		Icon: idle
-		IconPalette: scrin_warp_gate_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Produces standard Scrin vehicles.
 	Valued:
@@ -305,8 +305,8 @@ scrin_gravity_stabilizer:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 50
 		Prerequisites: ~scrin_drone_platform, scrin_reactor, scrin_extractor
-		Icon: idle
-		IconPalette: scrin_gravity_stabilizer_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Produces Stormriders and Drone Ships.
 	Valued:
@@ -356,8 +356,8 @@ scrin_nerve_center:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 60
 		Prerequisites: ~scrin_drone_platform, scrin_reactor, scrin_extractor
-		Icon: idle
-		IconPalette: scrin_nerve_center_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Unlocks advanced structures and researches Scrin upgrades.
 	Valued:
@@ -398,8 +398,8 @@ scrin_stasis_chamber:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 70
 		Prerequisites: ~scrin_drone_platform, scrin_portal, scrin_nerve_center
-		Icon: idle
-		IconPalette: scrin_stasis_chamber_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Unlocks elite infantry and advanced control technologies.
 	Valued:
@@ -423,8 +423,8 @@ scrin_technology_assembler:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 80
 		Prerequisites: ~scrin_drone_platform, scrin_nerve_center
-		Icon: idle
-		IconPalette: scrin_technology_assembler_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Unlocks capital units and high-tier structures.
 	Valued:
@@ -448,8 +448,8 @@ scrin_signal_transmitter:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 90
 		Prerequisites: ~scrin_drone_platform, scrin_technology_assembler
-		Icon: idle
-		IconPalette: scrin_signal_transmitter_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Enables the most advanced Scrin technology.
 	Valued:
@@ -474,8 +474,8 @@ scrin_buzzer_hive:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 20
 		Prerequisites: ~scrin_drone_platform, scrin_reactor
-		Icon: idle
-		IconPalette: scrin_buzzer_hive_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Basic defensive organism.
 	Valued:
@@ -503,8 +503,8 @@ scrin_photon_cannon:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 30
 		Prerequisites: ~scrin_drone_platform, scrin_reactor, scrin_extractor
-		Icon: idle
-		IconPalette: scrin_photon_cannon_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: General-purpose anti-ground and anti-air defense.
 	Valued:
@@ -538,8 +538,8 @@ scrin_plasma_missile_battery:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 40
 		Prerequisites: ~scrin_drone_platform, scrin_nerve_center
-		Icon: idle
-		IconPalette: scrin_plasma_missile_battery_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Long-range heavy defense.
 	Valued:
@@ -572,8 +572,8 @@ scrin_growth_accelerator:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 45
 		Prerequisites: ~scrin_drone_platform, scrin_extractor
-		Icon: idle
-		IconPalette: scrin_growth_accelerator_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Supports Tiberium harvesting operations.
 	Valued:
@@ -604,8 +604,8 @@ scrin_growth_stimulator:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 95
 		Prerequisites: ~scrin_drone_platform, scrin_technology_assembler, scrin_growth_accelerator
-		Icon: idle
-		IconPalette: scrin_growth_stimulator_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Advanced Tiberium support structure.
 	Valued:
@@ -634,8 +634,8 @@ scrin_storm_column:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 80
 		Prerequisites: ~scrin_drone_platform, scrin_technology_assembler
-		Icon: idle
-		IconPalette: scrin_storm_column_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: High-tier ion storm defense.
 	Valued:
@@ -663,8 +663,8 @@ scrin_rift_generator:
 		BuildPaletteOrder: 110
 		Prerequisites: ~scrin_drone_platform, scrin_signal_transmitter
 		BuildLimit: 1
-		Icon: idle
-		IconPalette: scrin_rift_generator_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Experimental rift-generation superweapon structure.
 	Valued:
@@ -694,8 +694,8 @@ scrin_lightning_spike:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 55
 		Prerequisites: ~scrin_drone_platform, scrin_nerve_center
-		Icon: idle
-		IconPalette: scrin_lightning_spike_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Compact lightning defense.
 	Valued:
@@ -723,8 +723,8 @@ scrin_tiberium_hive:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 65
 		Prerequisites: ~scrin_drone_platform, scrin_nerve_center
-		Icon: idle
-		IconPalette: scrin_tiberium_hive_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Tiberium-infused defensive organism.
 	Valued:
@@ -751,8 +751,8 @@ scrin_warp_chasm:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 85
 		Prerequisites: ~scrin_drone_platform, scrin_technology_assembler
-		Icon: idle
-		IconPalette: scrin_warp_chasm_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Produces all Scrin vehicles and capital aircraft.
 	Valued:
@@ -821,8 +821,8 @@ scrin_foundry:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 75
 		Prerequisites: ~scrin_drone_platform, scrin_nerve_center
-		Icon: idle
-		IconPalette: scrin_foundry_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Provides additional construction capacity.
 	Valued:
@@ -870,8 +870,8 @@ scrin_outpost:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 35
 		Prerequisites: ~scrin_drone_platform, scrin_reactor
-		Icon: idle
-		IconPalette: scrin_outpost_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Extends the buildable area.
 	Valued:
@@ -898,8 +898,8 @@ scrin_control_node:
 		BuildPaletteOrder: 100
 		Prerequisites: ~scrin_drone_platform, scrin_technology_assembler
 		BuildLimit: 1
-		Icon: idle
-		IconPalette: scrin_control_node_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Strategic command structure.
 	Valued:
@@ -924,8 +924,8 @@ scrin_phase_generator:
 		BuildPaletteOrder: 105
 		Prerequisites: ~scrin_drone_platform, scrin_technology_assembler
 		BuildLimit: 1
-		Icon: idle
-		IconPalette: scrin_phase_generator_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Strategic phase-control structure.
 	Valued:
@@ -952,8 +952,8 @@ scrin_lifeform_recycling_plant:
 		BuildPaletteOrder: 115
 		Prerequisites: ~scrin_drone_platform, scrin_technology_assembler
 		BuildLimit: 1
-		Icon: idle
-		IconPalette: scrin_lifeform_recycling_plant_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Strategic lifeform processing structure.
 	Valued:
@@ -978,8 +978,8 @@ scrin_terraforming_nexus:
 		BuildPaletteOrder: 120
 		Prerequisites: ~scrin_drone_platform, scrin_technology_assembler
 		BuildLimit: 1
-		Icon: idle
-		IconPalette: scrin_terraforming_nexus_player
+		Icon: icon
+		IconPalette: player_rgba
 		IconPaletteIsPlayerPalette: true
 		Description: Strategic planetary conversion structure.
 	Valued:
