@@ -171,10 +171,17 @@ have no class assignment to sort on. So the honest order is:
 
 ## 7. Open decisions for the maintainer
 
-1. **Where does the boundary sit?** `epic_vehicle` -> Super is obvious. Light is ambiguous:
-   `scout_vehicle` + `light_tank` only (44 tagged), or does `missile_vehicle` /
-   `anti_air_vehicle` / `support` count as light too? This decides whether the Ordos light factory
-   is a niche building or a real early-game alternative.
+1. ✅ **RULED 2026-08-22 — `scout_vehicle` ONLY, for now.** Maintainer: *"the rule should be
+   that scout vehicles, support vehicles and maybe light tanks are part of the light queue ...
+   I'm not yet sure about anything else than the scout vehicle class so let's try it only with
+   those and keep the other two in mind for later once we have figured it out."*
+
+   So the Light queue opens with the **28 tagged `scout_vehicle`s** and nothing else.
+   `support` and `light_tank` are the two candidates held back deliberately — decide them after
+   the three-queue split is in and playable, not before. Starting narrow is also the cheap
+   option: 28 retags instead of 44+, and widening later is one more mechanical pass over the
+   `class_anchor` tag, whereas narrowing after release takes a unit away from players who have
+   already learned to build it there.
 2. **Harvesters, MCVs and support vehicles** — one of `Light`, `Vehicle`, or left where they are.
    An MCV in the Light queue would let a light factory rebuild a base.
 3. **Does the super factory replace the war factory or stack with it?** The containment ladder
