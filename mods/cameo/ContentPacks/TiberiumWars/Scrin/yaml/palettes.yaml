@@ -26,6 +26,14 @@
 		BasePalette: scrin_reactor
 		BaseName: scrin_reactor_player
 		RemapIndex: 249, 250, 251, 252, 253, 254, 255
+	PaletteFromEmbeddedSpritePalette@scrin_fusion_reactor:
+		Name: scrin_fusion_reactor
+		Filename: scrin_sprites|scrin_fusion_reactor_indexed8.png
+		AllowModifiers: true
+	PlayerColorPalette@scrin_fusion_reactor:
+		BasePalette: scrin_fusion_reactor
+		BaseName: scrin_fusion_reactor_player
+		RemapIndex: 249, 250, 251, 252, 253, 254, 255
 	PaletteFromEmbeddedSpritePalette@scrin_hexapod:
 		Name: scrin_hexapod
 		Filename: scrin_sprites|scrin_eradicator_hexapod_idle.png
