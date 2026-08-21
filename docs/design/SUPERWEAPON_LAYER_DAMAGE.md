@@ -74,7 +74,7 @@ Versus[Shield] = 2 x Versus[the building's armor row]
 `(H/2) x 100/V_c` for the health plus `H x 100/V_s` for the pool. Setting them equal gives
 `0.5/V_c + 1/V_s = 1/V_c`, i.e. `V_s = 2 V_c`.
 
-⭐ This is the same fact as the **185.2% break-even pool** (`100 / shield_hp_factor`): both say
+⭐ This is the same fact as the **186.8% break-even pool** (`100 / shield_hp_factor`): both say
 that converting HP into an equal-value shield means undoing exactly the Shield row's average
 penalty. AtomicCore has `Shield 155` against `Concrete 100`, i.e. 1.55x where neutrality needs
 2.0x — which is precisely why the converted building came out *tougher*.

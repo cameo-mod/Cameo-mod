@@ -1,4 +1,4 @@
-﻿# doc_claims.yaml â€” every NUMERIC claim the design docs make, and how to re-measure it.
+# doc_claims.yaml â€” every NUMERIC claim the design docs make, and how to re-measure it.
 #
 # Maintainer 2026-08-17: *"the documentations are starting to explode in size ... regularly
 # review everything for discrepancies and contradictions and then make design decisions
@@ -29,7 +29,7 @@
 
 claims:
   - id: shield_versus_mean
-    value: 183.26
+    value: 186.791
     tolerance: 0.01
     what: Mean Versus-vs-Shield across all main flat warheads. Drives shield_hp_factor.
     docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md, docs/design/SUPERWEAPON_LAYER_DAMAGE.md]
@@ -40,7 +40,7 @@ claims:
       print(tm.pseudo_armor_mean('Shield'))
 
   - id: shield_hp_factor
-    value: 0.5457
+    value: 0.535357
     tolerance: 0.01
     what: What one shield point is worth as HP (100 / mean Versus vs Shield).
     docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
@@ -158,7 +158,7 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 932
+    value: 927
     tolerance: 0
     what: >
       Fired weapons carrying MORE THAN ONE damage main — W24's scope, and the reason pricing
@@ -299,7 +299,7 @@ claims:
                   break
       print(n)
   - id: w24_multi_main_fed
-    value: 381
+    value: 380
     tolerance: 0
     what: >
       RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their
@@ -400,7 +400,7 @@ claims:
       print(len(names) - len(set(rows)))
 
   - id: plating_families
-    value: 32
+    value: 37
     tolerance: 0
     what: >
       Families the generator emits a plating row for. The row count of the matrix in

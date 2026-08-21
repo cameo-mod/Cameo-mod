@@ -1,4 +1,4 @@
-﻿# Making each weapon's plating row unique â€” what physics allows, and what the cycle forbids
+# Making each weapon's plating row unique â€” what physics allows, and what the cycle forbids
 
 **Maintainer 2026-08-17:** *"maybe more reasoning to make each one a finer rating against each
 armor type? like you said sword, arrow and rifle might impact the armors slightly differently even
@@ -6,7 +6,7 @@ though they are in the same kinetic family right? But you need to use your best 
 reasoning for this to get it right!"* â€¦ *"I want all weapon families to be a bit more unique so
 don't put 3 energy weapons exactly on the same versus value but slightly different"*
 
-**STATUS: DONE** â€” shipped in `e7fa2d57b`. **32 emitted families, 32 distinct rows.** Four groups
+**STATUS: DONE** â€” shipped in `e7fa2d57b`. **37 emitted families, 37 distinct rows.** Four groups
 of ties are gone: `Laser/Prism/Tesla`, `Chemical/Cryo/Flame/Toxic`, `Concussion/Demolition`, and
 `Arrow/Bullet/CannonAP/Melee`. Pinned by `tools/tests/test_plating_composition.py`.
 
@@ -151,7 +151,7 @@ That catches exactly the drift that shipped twice (`Inferno` 0.57 (Flame×Prism)
 
 ## The shipped matrix
 
-32 families, 32 distinct rows (ARMOR excluded — it is flat by definition).
+37 families, 37 distinct rows (ARMOR excluded — it is flat by definition).
 
 | family | HAZMAT | COMPOSITE | BLAST | REFLECTOR | ARMOR | composition |
 |---|--:|--:|--:|--:|--:|---|
@@ -188,6 +188,12 @@ That catches exactly the drift that shipped twice (`Inferno` 0.57 (Flame×Prism)
 | Flame | 40 | 76 | 66 | 98 | 70 | thermo 0.85, blast 0.15 |
 | Toxic | 35 | 70 | 71 | 103 | 70 | thermo 1.00 |
 
+| CannonNuke | 62 | 91 | 51 | 75 | 70 | blast 0.65, thermo 0.25, kinetic 0.05, energy 0.05 |
+| MissileNuke | 74 | 64 | 65 | 76 | 70 | shaped 0.43, thermo 0.28, blast 0.25, energy 0.05 |
+| MissileQuantum | 85 | 52 | 79 | 64 | 70 | shaped 0.43, energy 0.26, kinetic 0.14, thermo 0.12, blast 0.06 |
+| MissileTesla | 79 | 58 | 83 | 60 | 70 | shaped 0.43, energy 0.38, thermo 0.13, blast 0.08 |
+| MissileThermobaric | 68 | 91 | 47 | 74 | 70 | blast 0.71, thermo 0.17, shaped 0.13 |
+
 **`ARMOR` is 70 for every family BY DESIGN** â€” it is the generic hedge that *"receives 100% damage
 from everything"*, so it must be flat. Varying it would contradict its purpose, and
 `test_the_generic_plating_stays_flat` pins that.
@@ -209,7 +215,7 @@ cycle folds shaped into `COMPOSITE` anyway, which is how a real tank is built.
 
 ### Under multiplication
 
-**6 cells of 160 increase damage, worst Ã—1.06** (was 13 of 100 at Ã—1.07 â€” better on both counts):
+**6 cells of 185 increase damage, worst Ã—1.06** (was 13 of 100 at Ã—1.07 â€” better on both counts):
 `Arrow`/`Concussion` 106, `Prism` 103, `Bullet`/`Toxic` 102. Rows span 3.03:1; multiplied by the
 class ladder that is **5.32:1**, inside the documented 2â€“8Ã— band (DESIGN Â§12.0 rule 5).
 
@@ -217,8 +223,8 @@ class ladder that is **5.32:1**, inside the documented 2â€“8Ã— band (DES
 
 ## Still open: if EVERY CELL must be unique, re-cut the cycle
 
-Full-row uniqueness is done. Individual **cells** still coincide (`REFLECTOR` has 18 distinct
-values across 31 families), and the honest route to more is not finer shares but **cutting the
+Full-row uniqueness is done. Individual **cells** still coincide (`REFLECTOR` has 23 distinct
+values across 37 families), and the honest route to more is not finer shares but **cutting the
 cycle differently**, because `COMPOSITE` currently merges two platings that behave oppositely in
 reality:
 

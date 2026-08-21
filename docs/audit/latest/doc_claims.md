@@ -1,19 +1,26 @@
-﻿# audit_doc_claims — do the documents still match the tree?
+# audit_doc_claims — do the documents still match the tree?
 
-Registry: `docs/audit/doc_claims.yaml` — **9** claims.
+Registry: `docs/audit/doc_claims.yaml` — **16** claims.
 
 A number in prose is true only on the day it is written. These are the claims a DECISION rests on, re-measured every run.
 
 | claim | documented | measured | status |
 |---|--:|--:|---|
-| `shield_versus_mean` | 185.25 | 185.25 | ✅ |
-| `shield_hp_factor` | 0.5398 | 0.539811 | ✅ |
-| `shield_damage_share` | 0.01432 | 0.0143182 | ✅ |
+| `shield_versus_mean` | 186.791 | 186.791 | ✅ |
+| `shield_hp_factor` | 0.535357 | 0.535357 | ✅ |
+| `shield_damage_share` | 0.01432 | 0.014602 | ✅ |
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
 | `live_damage_multipliers` | 366 | 366 | ✅ |
-| `multi_main_fired_weapons` | 973 | 973 | ✅ |
+| `multi_main_fired_weapons` | 927 | 927 | ✅ |
 | `percentage_denominator_unset` | 0 | 0 | ✅ |
+| `unmigrated_scout_damage_multiplier` | 16 | 16 | ✅ |
+| `meters_filling_before_death` | 122 | 122 | ✅ |
+| `corrosion_meter_actors` | 785 | 785 | ✅ |
+| `w24_multi_main_fed` | 380 | 380 | ✅ |
+| `physical_state_fired_weapons` | 446 | 446 | ✅ |
+| `plating_row_ties` | 0 | 0 | ✅ |
+| `plating_families` | 37 | 37 | ✅ |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
 
 _clean_ — every registered claim still matches the tree.
