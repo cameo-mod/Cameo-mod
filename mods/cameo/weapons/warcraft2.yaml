@@ -16,7 +16,7 @@ wc2footmanslice:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 12000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 6
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
@@ -52,13 +52,13 @@ wc2arrowFire:
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@CannonHE_Medium:
@@ -73,19 +73,19 @@ wc2arrowFire:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@ArrowWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Effect: CreateEffect
@@ -115,19 +115,19 @@ wc2highArrowFire:
 		-MinimumLaunchSpeed:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@HeavyAAWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
@@ -153,13 +153,13 @@ SiegeEngineCannon:
 	Warhead@NuclearWarhead: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
+	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightMissile: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightChemicalWeapon: AreaDamage
@@ -246,7 +246,7 @@ SiegeEngineCannon:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 5000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -255,31 +255,31 @@ SiegeEngineCannon:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 5000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	-Warhead@Effect1:
@@ -394,7 +394,7 @@ wc2mageFire:
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Super_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@Effect: CreateEffect
@@ -529,7 +529,7 @@ wc2mageBlizzard_Projectile:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
@@ -537,7 +537,7 @@ wc2mageBlizzard_Projectile:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
@@ -599,19 +599,19 @@ wc2_tower_arrow:
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@ArrowWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@Effect: CreateEffect
@@ -632,7 +632,7 @@ wc2gruntslice:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 16000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
@@ -702,7 +702,7 @@ wc2lightshipFire:
 			Heavy: 75
 			Concrete: 50
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
-	Warhead@Percentage: HealthPercentageDamage
+	Warhead@Percentage: AreaDamagePercentage
 		Damage: 8
 		Spread: 128
 		Delay: 5
@@ -742,7 +742,7 @@ wc2heavyshipFire:
 			Heavy: 75
 			Concrete: 50
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
-	Warhead@Percentage: HealthPercentageDamage
+	Warhead@Percentage: AreaDamagePercentage
 		Damage: 29
 		Spread: 256
 		Delay: 5
@@ -781,7 +781,7 @@ wc2submarineFire:
 			Heavy: 20
 			Concrete: 40
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
-	Warhead@Percentage: HealthPercentageDamage
+	Warhead@Percentage: AreaDamagePercentage
 		Damage: 9
 		Spread: 128
 		Delay: 5
@@ -817,7 +817,7 @@ wc2tornadoTest:
 			Heavy: 20
 			Concrete: 40
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
-	Warhead@Percentage: HealthPercentageDamage
+	Warhead@Percentage: AreaDamagePercentage
 		Damage: 1
 		Spread: 128
 		Delay: 5
@@ -858,7 +858,7 @@ wc2daemonFire:
 			Heavy: 20
 			Concrete: 40
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
-	Warhead@Percentage: HealthPercentageDamage
+	Warhead@Percentage: AreaDamagePercentage
 		Damage: 1
 		Spread: 128
 		Delay: 5

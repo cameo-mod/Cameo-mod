@@ -8,7 +8,7 @@ ZerglingClaw:
 	Range: 1350
 	Warhead@Melee_Medium:
 		Damage: 2000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -22,7 +22,7 @@ TalonClaw:
 	Range: 1680
 	Warhead@Melee_Medium:
 		Damage: 6000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -38,7 +38,7 @@ GorekrakenClaw:
 	Warhead@Melee_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 14000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 7
 	Warhead@Effect: CreateEffect
@@ -56,7 +56,7 @@ ShriekStinger:
 	Warhead@Melee_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Effect: CreateEffect
@@ -97,19 +97,19 @@ HydraSpit:
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 18000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 18000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@ArrowWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 18000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -137,19 +137,19 @@ SpithidSpit:
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@ArrowWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -183,7 +183,7 @@ MutaliskSpore:
 	Warhead@SwordWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@MediumChemicalWeapon: AreaDamage
@@ -202,13 +202,13 @@ MutaliskSpore:
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@ArrowWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@Effect: CreateEffect
@@ -231,7 +231,7 @@ MutaBounce1:
 		Damage: 4000
 	Warhead@SwordWeaponFriendlyFire: SpreadDamage
 		Damage: 2000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -246,11 +246,11 @@ MutaBounce1:
 		PhysicalStateScale: 100
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@ArrowWeapon: SpreadDamage
 		Damage: 4000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@shrapnel: FireShrapnel
 		Weapon: MutaBounce2
@@ -262,7 +262,7 @@ MutaBounce2:
 		Damage: 2000
 	Warhead@SwordWeaponFriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -277,11 +277,11 @@ MutaBounce2:
 		PhysicalStateScale: 100
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@ArrowWeapon: SpreadDamage
 		Damage: 2000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	-Warhead@shrapnel:
 
@@ -366,7 +366,7 @@ DreadshroudSpore:
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -375,7 +375,7 @@ DreadshroudSpore:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@MediumChemicalWeapon: AreaDamage
@@ -394,7 +394,7 @@ DreadshroudSpore:
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Condition: GrantExternalCondition
@@ -519,17 +519,17 @@ GuardianShoot:
 		Damage: 8000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 4000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 8000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 4000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 8000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 4
 	-Warhead@Effect1:
 	-Warhead@Effect2:
@@ -634,19 +634,19 @@ HermitShoot:
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Grenade: SpreadDamage
@@ -655,7 +655,7 @@ HermitShoot:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -664,13 +664,13 @@ HermitShoot:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	-Warhead@Effect1:
@@ -785,7 +785,7 @@ SwarmlingShoot:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
@@ -793,7 +793,7 @@ SwarmlingShoot:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
@@ -801,7 +801,7 @@ SwarmlingShoot:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
@@ -813,7 +813,7 @@ SwarmlingShoot:
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
@@ -825,7 +825,7 @@ SwarmlingShoot:
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
@@ -833,7 +833,7 @@ SwarmlingShoot:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
@@ -886,7 +886,7 @@ QueenSpine:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, QueenBroodlingSpawn
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Broodling
 		ValidTargets: Ground, Water, Air
 		Damage: 5
@@ -911,7 +911,7 @@ UltraliskHusk:
 	Range: 1600
 	Warhead@Melee_Medium:
 		Damage: 40000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 20
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -925,7 +925,7 @@ GoremawClaw:
 	Range: 1250
 	Warhead@Melee_Medium:
 		Damage: 30000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -986,7 +986,7 @@ LurkerSpinesImpact:
 		Damage: 1000
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 		ValidRelationships: Enemy, Neutral
@@ -1078,7 +1078,7 @@ BehemothShoot:
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Grenade: SpreadDamage
@@ -1087,7 +1087,7 @@ BehemothShoot:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -1096,13 +1096,13 @@ BehemothShoot:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	-Warhead@Effect1:
@@ -1127,7 +1127,7 @@ zerg_kerrigan:
 	TargetActorCenter: True
 	Warhead@Melee_Medium:
 		Damage: 40000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 20
 
 SCKERRIGANSUMMON:
@@ -1172,15 +1172,15 @@ Spore_AA:
 		TrailImage: sczhsplash
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 12000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 6
 	Warhead@Chaingun: SpreadDamage
 		Damage: 12000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 6
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 12000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 6
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
@@ -1200,11 +1200,11 @@ Tentacle:
 	Report: zlufir00.aud
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 6000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Chaingun: SpreadDamage
 		Damage: 6000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@CannonHE_Heavy:
 		Damage: 6000
@@ -1214,7 +1214,7 @@ Tentacle:
 		Damage: 6000
 	Warhead@SwordWeaponFriendlyFire: SpreadDamage
 		Damage: 3000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		Explosions: sctentacle

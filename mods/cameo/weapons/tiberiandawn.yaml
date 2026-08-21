@@ -43,7 +43,7 @@ M16:
 	Report: mgun2.aud
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 
 
@@ -65,7 +65,7 @@ Grenade:
 		ContrailEndColor: FF884422
 	Warhead@Demolition_Light:
 		Damage: 16000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		Damage: 8
 
 Rockets:
@@ -77,7 +77,7 @@ Rockets:
 	Report: bazook1.aud
 	Warhead@MissileAP_Light:
 		Damage: 18000
-	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		Damage: 9
 
 Flamethrower:
@@ -128,7 +128,7 @@ ra1_allies_alliedsniper:
 		Damage: 40000
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 40000
-	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 20
 
 ArtilleryShell:
@@ -245,7 +245,7 @@ HighVAP:
 	StartBurstReport: gun8.aud
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 
 ChemTibAtomic:

@@ -44,7 +44,7 @@
 			Spaceship: 16
 			Superheavy: 10
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
 		Damage: 1
@@ -150,7 +150,7 @@
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@SniperWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Spread: 5
 		Damage: 1
@@ -238,7 +238,7 @@
 			Spaceship: 30
 			Superheavy: 25
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 1
@@ -321,7 +321,7 @@
 			Concrete: 30
 			Steel: 25
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 125
 		Damage: 1
@@ -407,7 +407,7 @@
 			Concrete: 44
 			Wood: 40
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
-	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 250
 		Damage: 1
@@ -502,7 +502,7 @@
 			None: 16
 			Heroic: 10
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 100
 		Damage: 1
@@ -606,7 +606,7 @@
 			None: 30
 			Heroic: 25
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 200
 		Damage: 1
@@ -710,7 +710,7 @@
 			None: 44
 			Heroic: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
 		Damage: 1
@@ -818,7 +818,7 @@
 			Bomber: 16
 			Fighter: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 75
 		Damage: 1
@@ -913,7 +913,7 @@
 			Helicopter: 30
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 150
 		Damage: 1
@@ -1008,7 +1008,7 @@
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 225
 		Damage: 1
@@ -1102,7 +1102,7 @@
 			None: 44
 			Scout: 40
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 75
 		Damage: 1
@@ -1214,7 +1214,7 @@
 			Bomber: 44
 			Fighter: 40
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		AffectsParent: false
 		Spread: 125
 		Damage: 1
@@ -1335,7 +1335,7 @@
 			Bomber: 10
 			Fighter: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 50
 		Damage: 1
@@ -1429,7 +1429,7 @@
 			Bomber: 10
 			Fighter: 10
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 1
@@ -2074,7 +2074,7 @@
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 200
 		Damage: 1
@@ -2188,7 +2188,7 @@
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		UpdatesUnitStatistics: false
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Spread: 300
 		Damage: 1
@@ -2273,7 +2273,7 @@
 			Helicopter: 44
 			Spaceship: 40
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Ship
 		Spread: 400
 		Damage: 1
@@ -2373,7 +2373,7 @@
 			Bomber: 44
 			Fighter: 40
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
+	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
 		AffectsParent: True
 		Spread: 500
@@ -2485,7 +2485,7 @@
 			Spaceship: 25
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Falloff: 100, 50
 		Spread: 160
@@ -2557,7 +2557,7 @@
 			Concrete: 16
 			Wood: 10
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: wall
 		Spread: 35
@@ -2650,7 +2650,7 @@
 			Concrete: 44
 			Wood: 40
 		DamageTypes: Prone75Percent, TriggerProne, PsychicDeath, Incendiary
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+	Warhead@MagicWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 111
 		Damage: 1
@@ -2802,7 +2802,9 @@
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
-	Warhead@HealingWeaponPercentage: HealthPercentageDamage
+	Warhead@HealingWeaponPercentage: AreaDamagePercentage
+		FriendlyFireDamage: 100
+		FriendlyFireSpread: 100
 		ValidTargets: Heal
 		ValidRelationships: Ally
 		Spread: 1000
@@ -2928,7 +2930,9 @@
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
-	Warhead@RepairWeaponPercentage: HealthPercentageDamage
+	Warhead@RepairWeaponPercentage: AreaDamagePercentage
+		FriendlyFireDamage: 100
+		FriendlyFireSpread: 100
 		ValidTargets: Repairing, Repair, SpecialRepair
 		ValidRelationships: Ally
 		Spread: 1000
@@ -9375,7 +9379,7 @@ DefuseKit:
 			Helicopter: 16
 			Spaceship: 10
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
-	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Spread: 5
 		Damage: 1
@@ -11131,7 +11135,7 @@ DefuseKit:
 			Heavy: 133
 			Concrete: 67
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@Percentage: HealthPercentageDamage
+	Warhead@Percentage: AreaDamagePercentage
 		Damage: 1
 		Spread: 100
 		Delay: 1
@@ -11233,7 +11237,7 @@ DefuseKit:
 	ValidTargets: Ground, Water, Air
 	Warhead@Demolition_Light:
 		Damage: 20000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		Damage: 10
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
@@ -11261,7 +11265,7 @@ DefuseKit:
 	Inherits: ^Explosion
 	Warhead@Demolition_Light:
 		Damage: 40000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		Damage: 20
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
@@ -11270,7 +11274,7 @@ DefuseKit:
 	Inherits: ^Explosion
 	Warhead@Demolition_Light:
 		Damage: 60000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		Damage: 30
 	Warhead@Effect: CreateEffect
 
@@ -11578,7 +11582,7 @@ GenericC4:
 
 C4:
 	Projectile: InstantHit
-	Warhead@1Dam: HealthPercentageDamage
+	Warhead@1Dam: AreaDamagePercentage
 		ValidTargets: demolishable
 		Spread: 1000
 		Damage: 1000
@@ -11899,14 +11903,14 @@ IonCannon:
 		AffectsParent: True
 		Delay: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@IonCannonPercentage: HealthPercentageDamage
+	Warhead@IonCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Spread: 6000
 		Damage: 25
 		AffectsParent: True
 		Delay: 3
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@IonCannonAirPercentage: HealthPercentageDamage
+	Warhead@IonCannonAirPercentage: AreaDamagePercentage
 		ValidTargets: Vehicle, Water, Air
 		Spread: 3000
 		Damage: 50
@@ -12139,7 +12143,7 @@ TSPulseCannon_EMP:
 		Spread: 5000
 		InvalidTargets: Infantry
 		DamageTypes: Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 5
@@ -12158,7 +12162,7 @@ TSPulseCannon_EMP:
 		Spread: 5000
 		InvalidTargets: Infantry
 		DamageTypes: Tesla
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 5
@@ -12417,15 +12421,15 @@ TSTurretLaserFire:
 		-HitAnim:
 	Warhead@SmallArms: SpreadDamage
 		Damage: 1000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		Damage: 1000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 1000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@LightFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -12440,11 +12444,11 @@ TSTurretLaserFire:
 		PhysicalStateScale: 100
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 1000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 1000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 
 BHBombs:
@@ -12553,7 +12557,7 @@ Spit:
 			Heavy: 99
 			Concrete: 66
 		ValidTargets: Ground, Water
-	Warhead@2Dam: HealthPercentageDamage
+	Warhead@2Dam: AreaDamagePercentage
 		Damage: 5
 		Spread: 555
 		Delay: 5
@@ -13002,7 +13006,7 @@ bowFire_AA:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 	Warhead@2Eff: CreateEffect
 		ImpactSounds: bowhit.aud
-	Warhead@Percentage: HealthPercentageDamage
+	Warhead@Percentage: AreaDamagePercentage
 		Damage: 2
 		Spread: 150
 		Delay: 5
@@ -13027,7 +13031,7 @@ bowFire:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 	Warhead@2Eff: CreateEffect
 		ImpactSounds: bowhit.aud
-	Warhead@Percentage: HealthPercentageDamage
+	Warhead@Percentage: AreaDamagePercentage
 		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
 		ValidTargets: Ground
 
@@ -13048,7 +13052,7 @@ wc_tower_fire:
 			Medium: 75
 			Heavy: 50
 			Concrete: 12
-	Warhead@Percentage: HealthPercentageDamage
+	Warhead@Percentage: AreaDamagePercentage
 		Damage: 3
 		Spread: 300
 		Versus:

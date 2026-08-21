@@ -8,7 +8,7 @@ TS70mm:
 	Range: 5566
 	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 
 TS70mmChem:
@@ -99,7 +99,7 @@ TS70mmTurChem:
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@LightChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -136,7 +136,7 @@ TS120mmx:
 	BurstDelays: 4
 	Warhead@Concussion_Medium:
 		Damage: 30000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@CannonHE_Medium:
 		Damage: 30000
@@ -158,7 +158,7 @@ TSChem120mmx:
 		Damage: 30000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 15000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@CannonHE_Medium:
 		Damage: 30000
@@ -198,7 +198,7 @@ TSScoopDual:
 	Range: 6224
 	Warhead@CannonHE_Medium:
 		Damage: 20000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 10
 
 TSScoopDualChem:
@@ -268,7 +268,7 @@ TSScoopDualTur:
 		Damage: 8
 	Warhead@Concussion_Medium:
 		Damage: 16000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		Damage: 8
 
 TSScoopDualTurChem:
@@ -292,7 +292,7 @@ TSScoopDualTurChem:
 		Damage: 16000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 8000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -328,7 +328,7 @@ TSHighVelocity:
 		Speed: 850
 	Warhead@CannonAP_Light:
 		Damage: 30000
-	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 15
 
 TSHighVelocityChem:
@@ -341,7 +341,7 @@ TSHighVelocityChem:
 		Speed: 850
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 30000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@LightChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -377,7 +377,7 @@ TSHighVelocity2:
 		Speed: 850
 	Warhead@CannonAP_Light:
 		Damage: 40000
-	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 20
 
 TSHighVelocity2Chem:
@@ -390,7 +390,7 @@ TSHighVelocity2Chem:
 		Speed: 850
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 40000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 20
 	Warhead@LightChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -399,7 +399,7 @@ TSHighVelocity2Chem:
 		Damage: 20000
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@MLightChemicalWeaponPercentage: HealthPercentageDamage
+	Warhead@MLightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 10
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
@@ -424,7 +424,7 @@ TSHighVelocityTur:
 		Speed: 1280
 	Warhead@CannonAP_Light:
 		Damage: 48000
-	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 24
 
 TSBusMortar:
@@ -475,11 +475,11 @@ TSBusMortarChem:
 		Damage: 32000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 16000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 16
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 32000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 16
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -578,7 +578,7 @@ TS120mmxChem:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 20
 	Warhead@Chemical_Heavy:
@@ -609,7 +609,7 @@ TSJuggerFlakAA:
 	Warhead@Flak_Medium:
 		Damage: 10000
 		ValidTargets: Air
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		Damage: 5
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
@@ -630,7 +630,7 @@ TSJuggerFlakAA_boat:
 	Warhead@Flak_Medium:
 		Damage: 10000
 		ValidTargets: Air
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		Damage: 5
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
@@ -655,7 +655,7 @@ TSJuggerboat90mm:
 		ContrailWidth: 0c32
 	Warhead@Concussion_Medium:
 		Damage: 20000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
@@ -728,7 +728,7 @@ TSChemBoatcannon:
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 16000
 		Spread: 400
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 8
 		Spread: 400
 	Warhead@MediumChemicalWeapon: AreaDamage
@@ -812,7 +812,7 @@ TSVanMissile:
 		LaunchAngle: 60
 	Warhead@Concussion_Medium:
 		Damage: 24000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		Damage: 12
 
 TSChemVanMissile:
@@ -873,7 +873,7 @@ TSMLRSMissile:
 		LaunchAngle: 165
 	Warhead@Concussion_Medium:
 		Damage: 24000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		Damage: 12
 
 TSChemMLRSMissile:
@@ -950,7 +950,7 @@ TSMammothTuskChem:
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 	Warhead@HeavyChemicalWeapon: AreaDamage
@@ -999,7 +999,7 @@ TSMammothTusk:
 	Warhead@MissileAP_Heavy:
 		Damage: 60000
 		ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		Damage: 30
 		ValidTargets: Ground, Water, Air
 	Warhead@EffectAir: CreateEffect
@@ -1070,13 +1070,13 @@ TSChemRuinerMissile:
 	Warhead@GrenadeFriendlyFire:
 		Damage: 9000
 		ValidTargets: Ground, Water, Air
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 9
 		ValidTargets: Ground, Water, Air
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 18000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 9
 		ValidTargets: Ground, Water, Air
 	Warhead@Cloud: SpawnSmokeParticle
@@ -1288,11 +1288,11 @@ TSAdatsMissile_AA:
 	ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@MissileHE_Light:
 		ValidTargets: Air
-	Warhead@MissileHE_Light_Percentage: HealthPercentageDamage
+	Warhead@MissileHE_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 
 MutFlamer:
@@ -1544,13 +1544,13 @@ TSFiendShardBlue:
 		Damage: 6000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 3000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 6000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 3000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@LightChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1601,13 +1601,13 @@ TSFiendShardBlueUP:
 		Damage: 6000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 3000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 6000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 3000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@LightChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1644,7 +1644,7 @@ TSFiendShardBlueUP:
 		PhysicalStateScale: 100
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 6000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
@@ -1671,7 +1671,7 @@ TSZombieAttack:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 16000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 8
 
 TSSmoke:
@@ -1813,7 +1813,7 @@ TSCropBomb:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 120000
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Ship
 		Damage: 60
 	Warhead@2Eff: CreateEffect
@@ -1843,7 +1843,7 @@ TSCropBombChem:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 120000
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Ship
 		Damage: 60
 	Warhead@Chemical_Heavy:
@@ -1889,7 +1889,7 @@ TSLocustBombChem:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 180000
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Ship
 		Damage: 90
 	Warhead@Chemical_Heavy:
@@ -1935,17 +1935,17 @@ TSMutShotgun:
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Medium:
 		Damage: 4000
@@ -1953,11 +1953,11 @@ TSMutShotgun:
 		Damage: 2
 	Warhead@SmallArms: SpreadDamage
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@Chaingun: SpreadDamage
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 2
 
 TSMutVulcanTurret:
@@ -1971,11 +1971,11 @@ TSMutVulcanTurret:
 	Report: tsgun4.aud
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 
 TSRaiderCarCannon:
@@ -1990,7 +1990,7 @@ TSRaiderCarCannon:
 	Report: chaingn1.aud
 	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 
 TSBowlerCannon:
@@ -2004,11 +2004,11 @@ TSBowlerCannon:
 	Report: chaingn1.aud
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 
 TSWaspClaw:
@@ -2025,7 +2025,7 @@ TSWaspClaw:
 	Warhead@Bullet_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Air
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 		ValidTargets: Ground, Air
 
@@ -2071,7 +2071,7 @@ TSNomadGun:
 	Warhead@Bullet_Medium:
 		Damage: 8000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 4
 		ValidTargets: Ground, Water
 
@@ -2086,7 +2086,7 @@ TSSniper:
 		Damage: 10000
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 10000
-	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 5
 
 TSGhostGun:
@@ -2147,7 +2147,7 @@ MutAPRifle:
 	Report: jumpjet1.aud, gostgun1.aud
 	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 
 TSSergGun:
@@ -2160,12 +2160,12 @@ TSSergGun:
 	Report: cygun1.aud
 	Warhead@Bullet_Light:
 		Damage: 8000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Bullet_Medium:
 		Damage: 8000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
 
@@ -2184,5 +2184,5 @@ forgotten_mutantsoldier_rifle:
 	Report: mgun2.aud
 	Warhead@Bullet_Light:
 		Damage: 8000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 4

@@ -35,17 +35,17 @@ PositronGrenade:
 		ContrailEndColor: 88BBFF44
 	Warhead@SmallArms: SpreadDamage
 		Damage: 8000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 8000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Grenade: SpreadDamage
 		Damage: 8000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 4000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@CannonHE_Medium:
 		Damage: 8000
@@ -53,7 +53,7 @@ PositronGrenade:
 		Damage: 1
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 8000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: scblueexplosion
@@ -71,25 +71,25 @@ PositronBounce1:
 	Range: 2522
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@Grenade: SpreadDamage
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 4000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonAP_Light: AreaDamage
 		Damage: 4000
-	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@shrapnel: FireShrapnel
 		Weapon: PositronBounce2
@@ -99,25 +99,25 @@ PositronBounce2:
 	Range: 1261
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Grenade: SpreadDamage
 		Damage: 2000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 2000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@CannonAP_Light: AreaDamage
 		Damage: 2000
-	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 	-Warhead@shrapnel:
 
@@ -149,25 +149,25 @@ PhotonCannon:
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@HeavyCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@MediumCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@TankDestroyerCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@Effect: CreateEffect
@@ -246,31 +246,31 @@ GladiusCannon:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@CannonHE_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@CannonAP_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@Effect: CreateEffect
@@ -328,7 +328,7 @@ psi_blades:
 	Range: 1335
 	Warhead@Melee_Medium:
 		Damage: 8000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -343,7 +343,7 @@ psi_spear:
 	Range: 1337
 	Warhead@Melee_Medium:
 		Damage: 32000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 16
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -372,7 +372,7 @@ PsiStorm:
 		Damage: 4000
 		AffectsParent: True
 		ValidRelationships: Enemy, Neutral
-	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Delay: 6
 		Spread: 2000
@@ -405,7 +405,7 @@ PsionicShockwave:
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 15000
-	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Super_Percentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@Effect: CreateEffect
 		Explosions: scaae
@@ -442,7 +442,7 @@ ScarabLaunch:
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 50000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 25
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -451,7 +451,7 @@ ScarabLaunch:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 25000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 25
 	Warhead@CannonHE_Heavy:
@@ -463,7 +463,7 @@ ScarabLaunch:
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 50000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 25
 	Warhead@Effect: CreateEffect
@@ -502,7 +502,7 @@ ScoutRockets_AA:
 		ContrailEndWidth: 100
 	Warhead@MissileAA_Heavy:
 		Damage: 10000
-	Warhead@MissileAA_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAA_Heavy_Percentage: AreaDamagePercentage
 		Damage: 5
 
 	Warhead@EffectWater: CreateEffect
@@ -519,7 +519,7 @@ WarpBlade:
 	SoundVolume: 3
 	Warhead@Melee_Medium:
 		Damage: 20000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -534,7 +534,7 @@ WarpBladeAmaranth:
 	SoundVolume: 3
 	Warhead@Melee_Medium:
 		Damage: 30000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -550,7 +550,7 @@ ZeratulSlice:
 	TargetActorCenter: True
 	Warhead@Melee_Medium:
 		Damage: 64000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 32
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -577,13 +577,13 @@ CorsairFlash:
 	Warhead@Demolition_Light:
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 1
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -614,7 +614,7 @@ Corsair_EMP:
 		Falloff: 100, 75, 50, 25
 		Damage: 2500
 		Spread: 500
-	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Super_Percentage: AreaDamagePercentage
 		ValidTargets: Vehicle, Defense
 		Falloff: 100, 75, 50, 25
 		Damage: 5
@@ -660,25 +660,25 @@ VoidRayBeam:
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@TeslaWeapon: SpreadDamage
@@ -688,13 +688,13 @@ VoidRayBeam:
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
 		DamageTypes: Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@PhysicalStateCryo1: ApplyPhysicalState
@@ -753,7 +753,7 @@ StarshipSovereignBeam:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -761,7 +761,7 @@ StarshipSovereignBeam:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -769,7 +769,7 @@ StarshipSovereignBeam:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -777,7 +777,7 @@ StarshipSovereignBeam:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -790,7 +790,7 @@ StarshipSovereignBeam:
 		Damage: 1000
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -798,7 +798,7 @@ StarshipSovereignBeam:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -865,7 +865,7 @@ SCWorkerExplodeProtoss:
 	Inherits: UnitExplodeSmallProtoss
 	Warhead@Demolition_Light:
 		Damage: 12000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		Damage: 6
 
 ScoutMG:
@@ -890,13 +890,13 @@ ScoutMG:
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -933,31 +933,31 @@ EpigraphMG:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@ArrowWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@MediumChemicalWeapon: AreaDamage
@@ -976,7 +976,7 @@ EpigraphMG:
 	Warhead@HeavyAAWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@CannonHE_Heavy:
@@ -988,13 +988,13 @@ EpigraphMG:
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -1038,7 +1038,7 @@ ManifoldMG:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -1053,15 +1053,15 @@ ManifoldMG_AA:
 		ValidTargets: Air
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Air
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Air
-	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
 		ValidTargets: Air
@@ -1096,7 +1096,7 @@ AtreusMG:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@CannonHE_Heavy:
@@ -1108,19 +1108,19 @@ AtreusMG:
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -1155,19 +1155,19 @@ PatriarchShoot:
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Grenade: SpreadDamage
@@ -1176,7 +1176,7 @@ PatriarchShoot:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -1185,13 +1185,13 @@ PatriarchShoot:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	-Warhead@Effect1:

@@ -148,7 +148,7 @@ TS25mmDep:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 
@@ -167,13 +167,13 @@ TSLaser25mmDep:
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 
@@ -187,7 +187,7 @@ TS90mm:
 	Range: 5319
 	Warhead@CannonHE_Medium:
 		Damage: 6000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 3
 
 TS90mmDep:
@@ -217,7 +217,7 @@ TSLaser90mm:
 		Damage: 3
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 6000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 
 TSLaser90mmDep:
@@ -239,7 +239,7 @@ TS120mm:
 		LaunchAngle: 0
 	Warhead@CannonHE_Medium:
 		Damage: 12000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 6
 
 TS120mm_bluenuke:
@@ -256,7 +256,7 @@ TS120mm_bluenuke:
 		LaunchAngle: 0
 	Warhead@CannonHE_Medium:
 		Damage: 24000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 6
 	Warhead@3Eff: CreateEffect
 		Explosions: magicnuke_med
@@ -271,7 +271,7 @@ TSHighVelocityTurChem:
 		Speed: 1280
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 48000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 24
 	Warhead@LightChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -349,11 +349,11 @@ TS155mm_bluenuke:
 		ContrailWidth: 0c32
 	Warhead@Concussion_Medium:
 		Damage: 60000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		Damage: 30
 	Warhead@Demolition_Heavy:
 		Damage: 60000
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@3Eff: CreateEffect
 		Explosions: magicnuke_med
@@ -381,7 +381,7 @@ TSGrenade:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water
 		Damage: 12000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 6
 	Warhead@CannonHE_Medium:
@@ -503,7 +503,7 @@ MammothTankCannon:
 		Speed: 634
 	Warhead@CannonHE_Heavy:
 		Damage: 12000
-	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		Damage: 6
 
 ^TSLaserEffect:
@@ -648,11 +648,11 @@ TSObeliskLaserFire:
 		SourceFlareCoreSize: 5
 	Warhead@CannonAP_Light:
 		Damage: 52000
-	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 26
 	Warhead@Laser_Heavy:
 		Damage: 52000
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		Damage: 26
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
@@ -685,11 +685,11 @@ TSLaserObeliskLaserFire:
 	ValidTargets: Ground, Water
 	Warhead@CannonAP_Light:
 		Damage: 80000
-	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 40
 	Warhead@Laser_Heavy:
 		Damage: 80000
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		Damage: 40
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
@@ -778,11 +778,11 @@ ts_nod_mobilerepairvehicle:
 	Report: missile6.aud
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 10000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 5
 	Warhead@LightMissile: SpreadDamage
 		Damage: 10000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 5
 
 TSBazooka:
@@ -795,7 +795,7 @@ TSBazooka:
 	Projectile: Missile
 	Warhead@MissileAP_Light:
 		Damage: 24000
-	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		Damage: 12
 
 TSBazookaG:
@@ -829,7 +829,7 @@ TSReaperTusk:
 	Warhead@1Dam: SpreadDamage
 		Damage: 7777
 		Spread: 444
-	Warhead@2Dam: HealthPercentageDamage
+	Warhead@2Dam: AreaDamagePercentage
 		Damage: 1
 		Spread: 111
 		Delay: 1
@@ -927,13 +927,13 @@ TSBikeTibMissile:
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 42
 		ValidTargets: Ground, Water, Air
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
 
@@ -954,13 +954,13 @@ TSSAPCMissiles:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 4
 		ValidTargets: Ground, Water, Air
 	Warhead@LightMissile: SpreadDamage
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 4
 		ValidTargets: Ground, Water, Air
 
@@ -1052,13 +1052,13 @@ TSChemAdatsMissile:
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		ValidTargets: Ground, Water
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 2
 		ValidTargets: Ground, Water
 	Warhead@Cloud: SpawnSmokeParticle
@@ -1080,11 +1080,11 @@ TSChemAdatsMissileAA:
 		TrailImage: spittrail
 	Warhead@Flak_Medium:
 		Damage: 6000
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@MissileHE_Light:
 		Damage: 6000
-	Warhead@MissileHE_Light_Percentage: HealthPercentageDamage
+	Warhead@MissileHE_Light_Percentage: AreaDamagePercentage
 		Damage: 3
 
 TSSlimeAttack:
@@ -1198,7 +1198,7 @@ TSLocustBomb:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 180000
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Ship
 		Damage: 90
 	Warhead@2Eff: CreateEffect
@@ -1225,7 +1225,7 @@ TSLocustBomb:
 		Inaccuracy: 200
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 
 TSMinigun:
@@ -1237,7 +1237,7 @@ TSMinigun:
 	Report: infgun3.aud, gostgun1.aud, slvkgun1.aud
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 
 TSM1Carbine:
@@ -1303,11 +1303,11 @@ TSLaserRaiderCannon:
 	Report: chaingn1.aud
 	Warhead@Bullet_Light:
 		Damage: 6000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Laser_Heavy:
 		Damage: 6000
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		Damage: 3
 
 TSPistola:
@@ -1333,7 +1333,7 @@ TSEngineerPistol:
 		Damage: 20000
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 20000
-	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 10
 
 TSSniper_elite:
@@ -1357,7 +1357,7 @@ forgotten_mutant_dualwield:
 	ValidTargets: Ground, Water
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 
 forgotten_mutant_dualwield_elite:
@@ -1416,7 +1416,7 @@ TSTacticalMissileDamage:
 	Inherits: ^TSDefaultMissile
 	AirThreshold: 11c0
 	Projectile: SupportPowerInstantExplode
-	Warhead@AirPercentage: HealthPercentageDamage
+	Warhead@AirPercentage: AreaDamagePercentage
 		AirThreshold: 11c0
 		Spread: 512
 		Falloff: 100, 100, 100
@@ -1512,7 +1512,7 @@ TSHSeekerBomb:
 	ValidTargets: Ground, Water, Air
 	TargetActorCenter: true
 	Projectile: InstantHit
-	Warhead@1Dam: HealthPercentageDamage
+	Warhead@1Dam: AreaDamagePercentage
 		Damage: 300
 		DamageTypes: Prone100Percent, TriggerProne, FireDeath
 		ValidTargets: Ground, Water, Air

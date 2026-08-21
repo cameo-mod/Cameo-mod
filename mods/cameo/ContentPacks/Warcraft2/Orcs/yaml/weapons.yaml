@@ -8,7 +8,7 @@ wc2gruntslice2:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 24000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 12
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
@@ -43,7 +43,7 @@ wc2ogrepunch:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 30000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_punch.aud
@@ -168,7 +168,7 @@ wc2catapultFire:
 		Damage: 30000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 15000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -185,11 +185,11 @@ wc2catapultFire:
 		Damage: 30000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 15000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 30000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@Effect: CreateEffect
 		Image: wc2_catapult_stone_projectile_medium

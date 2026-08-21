@@ -32,15 +32,15 @@ TS30mmRail:
 	BurstDelays: 2
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 2000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 
 TS120mmRail:
@@ -75,7 +75,7 @@ TS120mmTal:
 		LaunchAngle: 0
 	Warhead@CannonHE_Medium:
 		Damage: 24000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 12
 
 TS120mmTalRail:
@@ -130,7 +130,7 @@ TSRPGTowerRail:
 		Damage: 16000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 8000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
@@ -138,7 +138,7 @@ TSRPGTowerRail:
 		Damage: 8
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 16000
-	Warhead@HRailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@HRailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 8
 
 TSJugg90mm:
@@ -159,7 +159,7 @@ TSJugg90mm:
 		ContrailWidth: 0c32
 	Warhead@Concussion_Medium:
 		Damage: 30000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
@@ -191,7 +191,7 @@ TSJugg120mm:
 		ContrailWidth: 0c32
 	Warhead@Concussion_Medium:
 		Damage: 40000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		Damage: 20
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
@@ -230,13 +230,13 @@ KodiakCannon:
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@CannonHE_Heavy:
@@ -248,7 +248,7 @@ KodiakCannon:
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 4
 
@@ -374,7 +374,7 @@ TSZapWeapon_EMP:
 		Damage: 1000
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
-	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
@@ -396,7 +396,7 @@ TSMine_EMP:
 		Damage: 5000
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
-	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
 		Damage: 5
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
@@ -425,7 +425,7 @@ TSMechRailgun:
 	Warhead@Railgun_Heavy:
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@RailgunPercentage: HealthPercentageDamage
+	Warhead@RailgunPercentage: AreaDamagePercentage
 		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 
@@ -449,7 +449,7 @@ TSMechRailgunII:
 	Warhead@Railgun_Heavy:
 		Damage: 80000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@RailgunPercentage: HealthPercentageDamage
+	Warhead@RailgunPercentage: AreaDamagePercentage
 		Damage: 40
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 
@@ -481,7 +481,7 @@ TSCommandoRailgun:
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 		ValidTargets: Ground, Water, Air
-	Warhead@RailgunPercentage: HealthPercentageDamage
+	Warhead@RailgunPercentage: AreaDamagePercentage
 		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 		ValidTargets: Ground, Water, Air
@@ -508,7 +508,7 @@ TSZoneRailgun:
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 		ValidTargets: Ground, Water
-	Warhead@RailgunPercentage: HealthPercentageDamage
+	Warhead@RailgunPercentage: AreaDamagePercentage
 		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 		ValidTargets: Ground, Water
@@ -521,7 +521,7 @@ TSZoneRailgunRail:
 		Damage: 60000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 		ValidTargets: Ground, Water
-	Warhead@RailgunPercentage: HealthPercentageDamage
+	Warhead@RailgunPercentage: AreaDamagePercentage
 		Damage: 30
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 		ValidTargets: Ground, Water
@@ -537,7 +537,7 @@ PitbullRockets:
 	Report: rketinf1.aud
 	Warhead@MissileAP_Light:
 		Damage: 20000
-	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		Damage: 10
 
 TSHoverMissile:
@@ -559,13 +559,13 @@ TSHoverMissile:
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -574,7 +574,7 @@ TSHoverMissile:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
@@ -597,13 +597,13 @@ TSDestroyerMissiles:
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -612,7 +612,7 @@ TSDestroyerMissiles:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
@@ -638,7 +638,7 @@ TSMammothTusk2:
 	Warhead@MissileAP_Heavy:
 		Damage: 42000
 		ValidTargets: Air
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		Damage: 21
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
@@ -668,7 +668,7 @@ TSMammothTusk2II_AA:
 	Warhead@MissileAP_Heavy:
 		Damage: 60000
 		ValidTargets: Air
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		Damage: 30
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
@@ -741,7 +741,7 @@ TSGDIRedEye:
 	Warhead@MissileAP_Heavy:
 		Damage: 8000
 		Spread: 500
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		Damage: 4
 		Spread: 500
 	Warhead@2Eff: CreateEffect
@@ -828,7 +828,7 @@ TSMobile_EMP:
 		Falloff: 100, 75, 50, 25
 		Damage: 32000
 		Spread: 813
-	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
 		Damage: 32
@@ -870,17 +870,17 @@ TSShotgun:
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Medium:
 		Damage: 4000
@@ -888,11 +888,11 @@ TSShotgun:
 		Damage: 2
 	Warhead@SmallArms: SpreadDamage
 		Damage: 4000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@Chaingun: SpreadDamage
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 2
 
 TSJumpCannon:
@@ -904,13 +904,13 @@ TSJumpCannon:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
 
@@ -946,7 +946,7 @@ TSAssaultCannonTal:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 4
 
@@ -975,11 +975,11 @@ TSVulcanGun:
 	Range: 6809
 	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 
 TSVulcanGunSonic:
@@ -1011,7 +1011,7 @@ KodiakAAGuns:
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 6000
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 3
 
@@ -1026,7 +1026,7 @@ TSHammerheadGun:
 	Warhead@Bullet_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 		ValidTargets: Ground, Water
 
@@ -1072,7 +1072,7 @@ TSMechMGII:
 	Warhead@Bullet_Medium:
 		Damage: 16000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 8
 		ValidTargets: Ground, Water
 
@@ -1125,7 +1125,7 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Spread: 600
 		Damage: 16000
 		Delay: 107
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
 		Spread: 6000
 		Damage: 8
 		Delay: 108
@@ -1138,7 +1138,7 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Spread: 1600
 		Damage: 6000
 		Delay: 110
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		Spread: 6000
 		Damage: 6
 		Delay: 111
@@ -1151,11 +1151,11 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		Range: 0, 600, 1400, 2000, 2820
 		Damage: 16000
 		Delay: 113
-	Warhead@IonCannonPercentage: HealthPercentageDamage
+	Warhead@IonCannonPercentage: AreaDamagePercentage
 		Spread: 4000
 		Damage: 8
 		Delay: 114
-	Warhead@IonCannonAirPercentage: HealthPercentageDamage
+	Warhead@IonCannonAirPercentage: AreaDamagePercentage
 		Delay: 115
 	-Warhead@2Smu_impact:
 

@@ -10,15 +10,15 @@ M16Laser:
 		Width: 25
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 
 FlamethrowerExplode:
@@ -163,13 +163,13 @@ ArtilleryShellUpgrade:
 		Damage: 6000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 3000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 6000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 3000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -195,11 +195,11 @@ ArtilleryShellUpgrade:
 		PhysicalStateScale: 100
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 6000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 6000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 3
 	-Warhead@Effect:
 
@@ -215,7 +215,7 @@ MachineGun:
 	Report: mgun11.aud
 	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 
 FireballLauncherBuggy:
@@ -252,21 +252,21 @@ BikeRockets:
 		MaximumLaunchAngle: 75
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 2
 
 PDLaserBike:
@@ -284,7 +284,7 @@ PDLaserBike:
 		Speed: 499
 	Warhead@CannonHE_Medium:
 		Damage: 6000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
@@ -298,7 +298,7 @@ LTNKMissiles:
 	Report: bazook1.aud
 	Warhead@MissileAP_Medium:
 		Damage: 6000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
@@ -352,7 +352,7 @@ StealthTankMissiles:
 	Report: rocket1.aud
 	Warhead@MissileAP_Medium:
 		Damage: 12000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		Damage: 6
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -420,7 +420,7 @@ HeliGun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
@@ -437,7 +437,7 @@ HeliMissiles:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -455,21 +455,21 @@ TurretGun:
 		Damage: 6000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 3000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Grenade: SpreadDamage
 		Damage: 6000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 3000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 6000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 6000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 3
 
 TurretGunBlackMarket:
@@ -478,11 +478,11 @@ TurretGunBlackMarket:
 	Inherits@3: TurretGun
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 6000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 6000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 3
 	-Warhead@Effect:
 
@@ -591,7 +591,7 @@ LaserObelisk:
 		SourceFlareCoreSize: 5
 	Warhead@Laser_Heavy:
 		Damage: 96000
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		Damage: 48
 	# Warhead@Effect: CreateEffect
 	# 	-ImpactSounds:
@@ -634,7 +634,7 @@ ChemRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -657,7 +657,7 @@ ChemRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -674,7 +674,7 @@ ChemRocketsExplosion:
 		Damage: 6000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 3000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@LightChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -689,7 +689,7 @@ ChemRocketsExplosion:
 		PhysicalStateScale: 100
 	Warhead@LightMissile: SpreadDamage
 		Damage: 6000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Resource: CreateResource
 		AddsResourceType: Tiberium
@@ -714,7 +714,7 @@ ChemicalBikeRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -737,7 +737,7 @@ ChemicalBikeRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -745,7 +745,7 @@ ChemicalBikeRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -783,7 +783,7 @@ ChemicalStealthTankMissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 5000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -806,7 +806,7 @@ ChemicalStealthTankMissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -851,13 +851,13 @@ ChemicalHonestJohn:
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 30000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 15
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 30000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 15
 	Warhead@HeavyFlameWeapon: AreaDamage
@@ -907,19 +907,19 @@ MachineGunBuggy2:
 	Warhead@HeavyCannon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -929,15 +929,15 @@ MachineGunBuggy2_AA:
 	ValidTargets: Air
 	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Air
-	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 
 LaserBuggy2:
@@ -1092,7 +1092,7 @@ LightTank2Cannon:
 		PhysicalStateScale: 100
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: chemball
@@ -1185,16 +1185,16 @@ BlackHandLaser:
 		SecondaryBeamColor: FFFFFF
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 48000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 48000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 48000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 
@@ -1252,7 +1252,7 @@ BHRedDarts:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaChargedWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1260,7 +1260,7 @@ BHRedDarts:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1268,7 +1268,7 @@ BHRedDarts:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1280,7 +1280,7 @@ BHRedDarts:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1288,7 +1288,7 @@ BHRedDarts:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -1353,11 +1353,11 @@ SpecterArtilleryShellUpgrade:
 		TrailInterval: 1
 	Warhead@Demolition_Light:
 		Damage: 4000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@Concussion_Medium:
 		Damage: 4000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1383,19 +1383,19 @@ SpecterArtilleryShellUpgrade:
 		PhysicalStateScale: 100
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 4000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 4000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 4000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 2
 	-Warhead@Effect:
 
@@ -1497,7 +1497,7 @@ NodCommandoLaser:
 		-HitAnim:
 		ValidTargets: Ground, Air, Missile, BulletAS, BallisticMissile
 		Damage: 12000
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Missile, BulletAS, BallisticMissile
 		Damage: 6
 	Warhead@Effect: CreateEffect
@@ -1611,7 +1611,7 @@ CorvetteLaserObelisk:
 	Range: 9550
 	Warhead@Laser_Heavy:
 		Damage: 120000
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		Damage: 60
 
 CorvetteDragon:
@@ -1634,7 +1634,7 @@ CorvetteDragon:
 	Warhead@MissileAP_Heavy:
 		Damage: 10000
 		Spread: 500
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		Damage: 5
 		Spread: 500
 	Warhead@EffectAir: CreateEffect
@@ -1654,7 +1654,7 @@ td_nod_minigunner_minigun:
 	Report: mgun2.aud
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 
 td_nod_minigunner_minigun_laser:
@@ -1671,13 +1671,13 @@ td_nod_minigunner_minigun_laser:
 		Width: 25
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1

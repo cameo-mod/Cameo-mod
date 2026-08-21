@@ -60,13 +60,13 @@ NaxiWW2KübelwagenMachinegun:
 	Warhead@Bullet_Light:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Medium:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 
@@ -92,13 +92,13 @@ NaxiWW2Machinegun:
 	Warhead@Bullet_Light:
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 		ValidTargets: Ground, Water
 
@@ -108,11 +108,11 @@ NaxiWW2Machinegun_AA:
 	ValidTargets: Air
 	Warhead@Bullet_Light:
 		ValidTargets: Air
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 
 NaxiWW2MachinegunSmall:
@@ -123,13 +123,13 @@ NaxiWW2MachinegunSmall:
 	Warhead@Bullet_Light:
 		Damage: 2000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium:
 		Damage: 2000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
 
@@ -139,11 +139,11 @@ NaxiWW2MachinegunSmall_AA:
 	ValidTargets: Air
 	Warhead@Bullet_Light:
 		ValidTargets: Air
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 
 NaxiWW2MachinegunTop:
@@ -160,7 +160,7 @@ NaxiWW2MachinegunTop_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 
 NaxiWW2Machinegunner:
@@ -213,7 +213,7 @@ naxis_naxiriflesoldier_rifle:
 		Width: 50
 	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 
 naxis_naxiriflesoldier_rifle_elite:
@@ -235,7 +235,7 @@ naxis_naxiriflerecruit_rifle:
 	ValidTargets: Ground, Water
 	Warhead@Bullet_Light:
 		Damage: 8000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 
 naxis_naxiriflerecruit_rifle_elite:
@@ -265,7 +265,7 @@ NaxiRifleT:
 		Width: 55
 	Warhead@Bullet_Light:
 		Damage: 32000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 16
 
 NaxiRifleCons:
@@ -278,7 +278,7 @@ NaxiRifleCons:
 	ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 
 NaxiRifleCons_elite:
@@ -305,19 +305,19 @@ LunarNaxiDroneLaser:
 		Width: 25
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 
 LunarNaxiDroneMissile:
@@ -352,7 +352,7 @@ LunarNaxiDroneMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -360,7 +360,7 @@ LunarNaxiDroneMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -368,7 +368,7 @@ LunarNaxiDroneMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -376,7 +376,7 @@ LunarNaxiDroneMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -384,7 +384,7 @@ LunarNaxiDroneMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -392,7 +392,7 @@ LunarNaxiDroneMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -436,7 +436,7 @@ NaxiSniper:
 		Damage: 24000
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 24000
-	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 12
 
 NaxiSniper_elite:
@@ -471,7 +471,7 @@ NaxiShrek:
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	Warhead@HeavyFlameWeapon: AreaDamage
@@ -493,13 +493,13 @@ NaxiShrek:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	Warhead@MediumChemicalWeapon: AreaDamage
@@ -518,7 +518,7 @@ NaxiShrek:
 	Warhead@MissileAP_Medium:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 
@@ -562,7 +562,7 @@ NaxiShrekCons:
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	Warhead@HeavyFlameWeapon: AreaDamage
@@ -584,13 +584,13 @@ NaxiShrekCons:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 3000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	Warhead@MediumChemicalWeapon: AreaDamage
@@ -609,7 +609,7 @@ NaxiShrekCons:
 	Warhead@MissileAP_Medium:
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		Damage: 3
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 
@@ -644,7 +644,7 @@ NaxiHetzerDestroyer:
 		Damage: 10
 	Warhead@CannonAP_Light:
 		Damage: 20000
-	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 10
 
 NaxiHetzerDestroyer_elite:
@@ -673,11 +673,11 @@ NaxiJadgDestroyer:
 		Damage: 10
 	Warhead@Concussion_Medium:
 		Damage: 20000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		Damage: 10
 	Warhead@CannonAP_Light:
 		Damage: 20000
-	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 10
 
 NaxiJadgDestroyer_elite:
@@ -709,7 +709,7 @@ NaxiAntiTankCannon:
 		Damage: 7
 	Warhead@CannonAP_Light:
 		Damage: 14000
-	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 7
 
 NaxiAntiTankCannon_elite:
@@ -769,19 +769,19 @@ NaxMausCannon:
 		Damage: 10000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 5000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 10000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 5
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 10000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 5
 	Warhead@CannonHE_Medium:
 		Damage: 10000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 5
 
 NaxMausCannon_elite:
@@ -828,11 +828,11 @@ NaxRatteCannon:
 		PhysicalStateScale: 100
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 50000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 25
 	Warhead@CannonHE_Medium:
 		Damage: 50000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 25
 
 NaxRatteCannon_elite:
@@ -860,25 +860,25 @@ NaxQuadCannon:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -896,19 +896,19 @@ NaxQuadCannon_AA:
 		ValidTargets: Air
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Air
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Air
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
@@ -1029,7 +1029,7 @@ NaxPlanegun_elite:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -1056,11 +1056,11 @@ NaxPlaneRockets_elite:
 		TrailDelay: 1
 	Warhead@MissileAP_Medium:
 		Damage: 10000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		Damage: 5
 	Warhead@MissileAP_Heavy: AreaDamage
 		Damage: 10000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		Damage: 5
 
 NaxiInterceptorGun:
@@ -1091,15 +1091,15 @@ NaxiInterceptorGun:
 		Damage: 3
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 6000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Chaingun: SpreadDamage
 		Damage: 6000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@SmallArms: SpreadDamage
 		Damage: 6000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 3
 
 NaxShoeRocket:
@@ -1131,19 +1131,19 @@ NaxShoeRocket:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 4
 	Warhead@Demolition_Light: AreaDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 4
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 4
 
@@ -1156,7 +1156,7 @@ NaxTigerCannon:
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 	Warhead@CannonHE_Medium:
 		Damage: 10000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 5
 
 NaxTigerCannon_elite:
@@ -1175,7 +1175,7 @@ KingNaxTigerCannon:
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 	Warhead@CannonHE_Medium:
 		Damage: 20000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 10
 
 KingNaxTigerCannon_elite:
@@ -1243,7 +1243,7 @@ NaxiMissileUboat:
 	Warhead@MissileAP_Medium:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		Damage: 8
 		ValidTargets: Ground, Water, Air
 

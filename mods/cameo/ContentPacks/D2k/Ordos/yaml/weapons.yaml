@@ -6,7 +6,7 @@ OrdosCombatTankCannon:
 		Speed: 523
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 4
 
 HeavyOrdosCombatTankCannon:
@@ -17,7 +17,7 @@ HeavyOrdosCombatTankCannon:
 		Speed: 600
 	Warhead@CannonHE_Medium:
 		Damage: 10000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 5
 
 HeavyOrdosCombatTankRockets:
@@ -49,7 +49,7 @@ HeavyOrdosCombatTankRockets:
 		ContrailEndWidth: 100
 	Warhead@MissileHE_Heavy:
 		Damage: 10000
-	Warhead@MissileHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileHE_Heavy_Percentage: AreaDamagePercentage
 		Damage: 5
 
 	Warhead@EffectWater: CreateEffect
@@ -92,11 +92,11 @@ HeavyOrdosCombatTankRockets:
 		PhysicalStateScale: 100
 	Warhead@CannonHE_Medium:
 		Damage: 14000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 7
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 14000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 7
 
 120mm_cobra:
@@ -119,7 +119,7 @@ HeavyOrdosCombatTankRockets:
 		ContrailEndColor: FF884422
 	Warhead@CannonHE_Medium:
 		Damage: 30000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 15
 	Warhead@CannonAP_Light:
 		Damage: 30000
@@ -191,7 +191,7 @@ eye_bomberguy:
 		Damage: 20000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 10000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 10
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -219,11 +219,11 @@ eye_bomberguy:
 		Damage: 20000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 10000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 10
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 20000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 10
 	-Warhead@Effect1:
 	-Warhead@Effect2:
@@ -261,7 +261,7 @@ D2K_155mm_turret:
 		Damage: 6
 	Warhead@CannonHE_Medium:
 		Damage: 12000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 6
 	Warhead@Concrete: DamagesConcrete
 		Damage: 5625
@@ -288,7 +288,7 @@ Dune_SiegeMortar:
 		Damage: 5
 	Warhead@CannonHE_Medium:
 		Damage: 10000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 5
 	Warhead@CannonAP_Light:
 		Damage: 10000
@@ -311,17 +311,17 @@ D2K_Rocket_Trooper_AGOnly:
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 10000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 5
 	Warhead@Railgun_Heavy:
 		Damage: 10000
-	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
 		Damage: 5
 	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water
 		Damage: 10000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 5
 
@@ -338,19 +338,19 @@ D2K_Rocket_Trooper_AA:
 	Warhead@MissileAP_Light:
 		ValidTargets: Air
 		Damage: 10000
-	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 5
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 10000
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 5
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 		Damage: 10000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 5
 
@@ -372,19 +372,19 @@ D2K_APC_Rocket:
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 D2K_APC_Rocket_AA:
@@ -432,13 +432,13 @@ DeviatorMissile:
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@Effect: CreateEffect
@@ -476,7 +476,7 @@ DeviatorMissile_Artillery:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@HeavyFlameWeapon: AreaDamage
@@ -541,7 +541,7 @@ contaminator_attack:
 	Warhead@Melee_Medium:
 		Damage: 10000
 		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 5
 		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
 
@@ -643,7 +643,7 @@ Laboratory_Bioball:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
@@ -651,7 +651,7 @@ Laboratory_Bioball:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
@@ -659,7 +659,7 @@ Laboratory_Bioball:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
-	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
@@ -775,7 +775,7 @@ facedancer_grenade:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageCalculationType: ClosestTargetablePosition
@@ -787,7 +787,7 @@ facedancer_grenade:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageCalculationType: ClosestTargetablePosition
@@ -799,7 +799,7 @@ facedancer_grenade:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageCalculationType: ClosestTargetablePosition
@@ -815,7 +815,7 @@ facedancer_grenade:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageCalculationType: ClosestTargetablePosition
@@ -823,7 +823,7 @@ facedancer_grenade:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageCalculationType: ClosestTargetablePosition
@@ -831,7 +831,7 @@ facedancer_grenade:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		DamageCalculationType: ClosestTargetablePosition
@@ -909,7 +909,7 @@ HMGo:
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
@@ -928,7 +928,7 @@ HMGo_upgrade:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium:
@@ -955,7 +955,7 @@ d2kChainGun:
 	StartBurstReport: MGUN2.WAV
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 
 d2kChainGun_upgrade:
@@ -972,7 +972,7 @@ d2kChainGun_upgrade:
 		Color: 00ffbb
 	Warhead@Laser_Heavy:
 		Damage: 4000
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		Damage: 2
 
 HMGstealth:
@@ -989,13 +989,13 @@ HMGstealth:
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -1064,7 +1064,7 @@ autogun_tank:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@CannonHE_Heavy:
@@ -1076,25 +1076,25 @@ autogun_tank:
 	Warhead@HeavyAAWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -1140,7 +1140,7 @@ d2kCarryallChainGun:
 	StartBurstReport: MGUN2.WAV
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 
 ordos_airmine:
@@ -1188,7 +1188,7 @@ ordos_lasertank:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
@@ -1196,7 +1196,7 @@ ordos_lasertank:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
@@ -1204,7 +1204,7 @@ ordos_lasertank:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
@@ -1212,7 +1212,7 @@ ordos_lasertank:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
@@ -1291,7 +1291,7 @@ HMGstealth_upgrade:
 		Color: 00ffbb
 	Warhead@Laser_Heavy:
 		Damage: 2000
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		Damage: 1
 
 d2kCarryallChainGun_upgrade:
@@ -1307,7 +1307,7 @@ d2kCarryallChainGun_upgrade:
 		Color: 00ffbb
 	Warhead@Laser_Heavy:
 		Damage: 2000
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		Damage: 1
 
 LMG_ordos_upgrade:
@@ -1325,7 +1325,7 @@ LMG_ordos_upgrade:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 
 light_inf_lmg_ordos_upgrade:
@@ -1343,18 +1343,18 @@ light_inf_lmg_ordos_upgrade:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1

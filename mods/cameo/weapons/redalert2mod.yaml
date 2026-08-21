@@ -153,12 +153,12 @@ AsianSmallTorpedo:
 		CruiseAltitude: 0
 	Warhead@Demolition_Light:
 		Damage: 12000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		Damage: 6
 	Warhead@MissileAP_Heavy:
 		Damage: 12000
 		ValidTargets: Water, Underwater, Bridge, Structure
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		Damage: 6
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:
@@ -374,7 +374,7 @@ SteelTwisterMissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
 		ValidRelationships: Neutral, Enemy
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -396,7 +396,7 @@ SteelTwisterMissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -404,14 +404,14 @@ SteelTwisterMissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
-	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
@@ -594,11 +594,11 @@ NaxGrilleArty:
 		Damage: 8
 	Warhead@Concussion_Medium:
 		Damage: 16000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
+	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Demolition_Light:
 		Damage: 16000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		Damage: 8
 
 NaxGrilleArty_elite:
@@ -627,7 +627,7 @@ NaxiRifle:
 		Width: 50
 	Warhead@Bullet_Light:
 		Damage: 6000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 3
 
 NaxLaserT:
@@ -643,19 +643,19 @@ NaxLaserT:
 		Width: 25
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 2000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 
 NaxiMP40:
@@ -689,7 +689,7 @@ NaxiMP40:
 		Damage: 1
 	Warhead@Bullet_Medium: AreaDamage
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 
 NaxSturmArty:
@@ -713,15 +713,15 @@ NaxSturmArty:
 		TrailPalette: effect75alpha
 	Warhead@Demolition_Heavy:
 		Damage: 30000
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		Damage: 14
 	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 30000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 14
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 20000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		Damage: 14
 
 NaxDefensivePlaneTarget:
@@ -868,7 +868,7 @@ NaxiAlienPistol:
 	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@TeslaWeapon: SpreadDamage
@@ -877,7 +877,7 @@ NaxiAlienPistol:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -1004,7 +1004,7 @@ NaxiMeteor:
 		Falloff: 100, 50
 		Damage: 10000
 		Spread: 2500
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Falloff: 100, 50
 		Damage: 5
@@ -1032,7 +1032,7 @@ NaxiMeteor:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		Spread: 1500
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		Spread: 3000
@@ -1040,7 +1040,7 @@ NaxiMeteor:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		Spread: 2000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		Spread: 2000
@@ -1048,7 +1048,7 @@ NaxiMeteor:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 		Spread: 1000
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
+	Warhead@NuclearWarheadPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		Spread: 1000
@@ -1091,7 +1091,7 @@ NaxisBlackBomb:
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 100000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		Spread: 1500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 50
@@ -1137,11 +1137,11 @@ NaxisBlackBombSmaller:
 		PhysicalStateScale: 100
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 25000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 10
 	Warhead@CannonHE_Medium:
 		Damage: 25000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 10
 	Warhead@Effect: CreateEffect
 		Explosions: ra2nuke
@@ -1181,7 +1181,7 @@ Lunar_Green105mm:
 	ReloadDelay: 50
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@Tesla_Heavy:
 		Damage: 8000
@@ -1276,13 +1276,13 @@ LatinBuggyRocket:
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 
@@ -1397,7 +1397,7 @@ LatinBuggyRocket_elite:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		Spread: 8000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		Spread: 8000
@@ -1413,7 +1413,7 @@ LatinBuggyRocket_elite:
 		ValidTargets: Ground, Water, Air
 		Damage: 24000
 		Spread: 1000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 8
 		Spread: 1000
@@ -1463,19 +1463,19 @@ RA2Robotmm:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 4000
-	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@Railgun_Heavy: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 4
 
@@ -1506,15 +1506,15 @@ RA2RobotmmScatter_elite:
 		Damage: 4000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Damage: 2000
-	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@Laser_Heavy:
 		Damage: 4000
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@Railgun_Heavy:
 		Damage: 4000
-	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
 		Damage: 2
 	-Warhead@Scatter:
 	Warhead@Effect: CreateEffect
@@ -1542,11 +1542,11 @@ naxis_sssoldier_smg:
 		Inaccuracy: 600
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 
 naxis_sssoldier_smg_elite:

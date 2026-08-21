@@ -35,7 +35,7 @@ Debris:
 	Warhead@Demolition_Light:
 		Damage: 16000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		Damage: 8
 		DamageCalculationType: ClosestTargetablePosition
 
@@ -52,7 +52,7 @@ Debris2:
 		TrailInterval: 1
 	Warhead@Demolition_Light:
 		Damage: 16000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Flame_Light:
 		Damage: 16000
@@ -71,7 +71,7 @@ Debris3:
 		TrailImage: small_trail2
 	Warhead@Demolition_Light:
 		Damage: 8000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@Flame_Light:
 		Damage: 8000
@@ -206,7 +206,7 @@ D2K_155mm:
 		Damage: 6
 	Warhead@CannonHE_Medium:
 		Damage: 12000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 6
 	Warhead@Concrete: DamagesConcrete
 		Damage: 5625
@@ -277,19 +277,19 @@ D2K_Rocket_Trooper:
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 D2K_Combat_Fleet:
@@ -509,11 +509,11 @@ d2k_quake_thump:
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0
 		ValidTargets: Ground
 		Damage: 12500
-	Warhead@Damage2: HealthPercentageDamage
+	Warhead@Damage2: AreaDamagePercentage
 		Spread: 7500
 		Damage: 4
 		InvalidTargets: MADTank, Infantry
-	Warhead@Damage3: HealthPercentageDamage
+	Warhead@Damage3: AreaDamagePercentage
 		Spread: 5000
 		Damage: 8
 		InvalidTargets: MADTank, Infantry
@@ -533,11 +533,11 @@ d2k_quake_boom:
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0
 		ValidTargets: Ground
 		Damage: 100000
-	Warhead@Damage2: HealthPercentageDamage
+	Warhead@Damage2: AreaDamagePercentage
 		Spread: 3333
 		Damage: 32
 		InvalidTargets: MADTank
-	Warhead@Damage3: HealthPercentageDamage
+	Warhead@Damage3: AreaDamagePercentage
 		Spread: 2500
 		Damage: 64
 		InvalidTargets: MADTank
@@ -670,20 +670,20 @@ LeechSpit:
 		ValidTargets: Vehicle
 		Damage: 4000
 		DamageTypes: Prone50Percent, TriggerProne, LeechTankInfect
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Vehicle
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Vehicle
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Vehicle
 		Damage: 1
 	Warhead@ArrowWeapon: SpreadDamage
 		ValidTargets: Vehicle
 		Damage: 2000
 		DamageTypes: Prone50Percent, TriggerProne, LeechTankInfect
-	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Vehicle
 		Damage: 1
 	Warhead@Effect: CreateEffect
@@ -704,7 +704,7 @@ WormSwallow:
 	Range: 1792
 	InvalidTargets: Structure, Air, DevourImmune
 	Projectile: InstantHit
-	Warhead@1Dam: HealthPercentageDamage
+	Warhead@1Dam: AreaDamagePercentage
 		Spread: 1c0
 		Damage: 100
 		InvalidTargets: Structure, Air, DevourImmune
@@ -1145,11 +1145,11 @@ LMG:
 	Report: gun11.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 
 light_inf_lmg:
@@ -1162,11 +1162,11 @@ light_inf_lmg:
 	Report: gun11.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 
 LMG_upgrade:
@@ -1770,7 +1770,7 @@ ixian_airdrone:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1796,7 +1796,7 @@ ixian_airdrone:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1806,7 +1806,7 @@ ixian_airdrone:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1816,7 +1816,7 @@ ixian_airdrone:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1825,7 +1825,7 @@ ixian_airdrone:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1917,14 +1917,14 @@ d2k_chaos_lightning:
 	ValidTargets: Ground, Air
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: susaenforcerbeamimpact.wav
-	Warhead@1Dam: HealthPercentageDamage
+	Warhead@1Dam: AreaDamagePercentage
 		Damage: 15
 		Spread: 5c0
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Incendiary
 		Versus:
 			Wood: 20
 			Concrete: 15
-	Warhead@2Dam: HealthPercentageDamage
+	Warhead@2Dam: AreaDamagePercentage
 		Damage: 25
 		Delay: 8
 		Spread: 4c256
@@ -1985,7 +1985,7 @@ D2KGomJabbar:
 	Range: 1250
 	ValidTargets: Infantry
 	Projectile: InstantHit
-	Warhead@1Dam: HealthPercentageDamage
+	Warhead@1Dam: AreaDamagePercentage
 		Damage: 100
 		DamageTypes: DefaultDeath
 		ValidTargets: Infantry
@@ -2004,7 +2004,7 @@ d2k_aircraft_eater:
 	ReloadDelay: 500
 	Range: 1024
 	Projectile: InstantHit
-	Warhead@1Dam: HealthPercentageDamage
+	Warhead@1Dam: AreaDamagePercentage
 		Damage: 100
 		DamageTypes: DefaultDeath
 		ValidTargets: Air
@@ -2079,7 +2079,7 @@ d2k_sard_crossbow:
 		Image: 120mm
 	Warhead@CannonHE_Medium:
 		Damage: 5350
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
@@ -3014,7 +3014,7 @@ PulseMissile:
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@NuclearMissilePercentage1: HealthPercentageDamage
+	Warhead@NuclearMissilePercentage1: AreaDamagePercentage
 		Spread: 10000
 		Damage: 10
 		Versus:
@@ -3039,7 +3039,7 @@ PulseMissile:
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@NuclearMissilePercentage2: HealthPercentageDamage
+	Warhead@NuclearMissilePercentage2: AreaDamagePercentage
 		Spread: 9000
 		Damage: 10
 		Versus:
@@ -3064,7 +3064,7 @@ PulseMissile:
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@NuclearMissilePercentage3: HealthPercentageDamage
+	Warhead@NuclearMissilePercentage3: AreaDamagePercentage
 		Spread: 8000
 		Damage: 10
 		Versus:
@@ -3089,7 +3089,7 @@ PulseMissile:
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@NuclearMissilePercentage4: HealthPercentageDamage
+	Warhead@NuclearMissilePercentage4: AreaDamagePercentage
 		Spread: 7000
 		Damage: 10
 		Versus:
@@ -3114,7 +3114,7 @@ PulseMissile:
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@NuclearMissilePercentage5: HealthPercentageDamage
+	Warhead@NuclearMissilePercentage5: AreaDamagePercentage
 		Spread: 6000
 		Damage: 10
 		Versus:
@@ -3139,7 +3139,7 @@ PulseMissile:
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@NuclearMissilePercentage6: HealthPercentageDamage
+	Warhead@NuclearMissilePercentage6: AreaDamagePercentage
 		Spread: 5000
 		Damage: 10
 		Versus:
@@ -3164,7 +3164,7 @@ PulseMissile:
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@NuclearMissilePercentage7: HealthPercentageDamage
+	Warhead@NuclearMissilePercentage7: AreaDamagePercentage
 		Spread: 4000
 		Damage: 10
 		Versus:
@@ -3189,7 +3189,7 @@ PulseMissile:
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@NuclearMissilePercentage8: HealthPercentageDamage
+	Warhead@NuclearMissilePercentage8: AreaDamagePercentage
 		Spread: 3000
 		Damage: 10
 		Versus:
@@ -3214,7 +3214,7 @@ PulseMissile:
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@NuclearMissilePercentage9: HealthPercentageDamage
+	Warhead@NuclearMissilePercentage9: AreaDamagePercentage
 		Spread: 2000
 		Damage: 10
 		Versus:
@@ -3239,7 +3239,7 @@ PulseMissile:
 		AffectsParent: true
 		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@NuclearMissilePercentage10: HealthPercentageDamage
+	Warhead@NuclearMissilePercentage10: AreaDamagePercentage
 		Spread: 1000
 		Damage: 10
 		Versus:

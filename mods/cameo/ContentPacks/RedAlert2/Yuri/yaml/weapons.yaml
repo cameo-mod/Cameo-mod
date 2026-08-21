@@ -16,7 +16,7 @@ RA2LasherCannon:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 1000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -25,7 +25,7 @@ RA2LasherCannon:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 1000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightFlameWeapon: AreaDamage
@@ -57,13 +57,13 @@ RA2LasherCannon:
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
@@ -109,7 +109,7 @@ RA2LasherToxicMortar:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 1000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -118,13 +118,13 @@ RA2LasherToxicMortar:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 1000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@LightChemicalWeapon: AreaDamage
@@ -169,19 +169,19 @@ RA2LasherToxicMortar:
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	-Warhead@Effect1:
@@ -207,17 +207,17 @@ RA2LasherToxicMortar_elite:
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 4000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@LightChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -254,15 +254,15 @@ RA2LasherToxicMortar_elite:
 		PhysicalStateScale: 100
 	Warhead@CannonAP_Light: AreaDamage
 		Damage: 4000
-	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 4000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 4000
-	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: ra2radbang
@@ -309,11 +309,11 @@ RA2LasherLaser_elite:
 		SecondaryBeamWidth: 36
 	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 16000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
+	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 16000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 8
 
 RA2DiskLaser:
@@ -337,7 +337,7 @@ RA2DiskLaser:
 	Warhead@Laser_Heavy:
 		Damage: 24000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		Damage: 12
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 
@@ -351,7 +351,7 @@ RA2DiskLaser_elite:
 		SecondaryBeamWidth: 40
 	Warhead@Laser_Heavy:
 		Damage: 48000
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		Damage: 24
 
 RA2DiskDrain:
@@ -424,7 +424,7 @@ RA2Magnet:
 		Falloff: 100, 100
 		Damage: 2000
 		ValidTargets: Vehicle, Structure
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		Range: 0, 32
 		Falloff: 100, 100
 		Damage: 1
@@ -443,7 +443,7 @@ RA2MagnetAA:
 	Warhead@Laser_Heavy:
 		ValidTargets: Vehicle, Air, Structure
 		InvalidTargets: Paratrooper
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Vehicle, Air, Structure
 		InvalidTargets: Paratrooper
 	Warhead@Condition: GrantExternalCondition
@@ -463,7 +463,7 @@ RA2MagnetAA_elite:
 	Warhead@Laser_Heavy:
 		ValidTargets: Vehicle, Air, Structure
 		InvalidTargets: Paratrooper
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Vehicle, Air, Structure
 		InvalidTargets: Paratrooper
 	Warhead@Condition: GrantExternalCondition
@@ -492,7 +492,7 @@ RA2PsychicJab:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -523,7 +523,7 @@ RA2PsychicJab:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -675,12 +675,12 @@ YRBoomerTorpedo:
 		CruiseAltitude: 0
 	Warhead@Demolition_Light:
 		Damage: 20000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		Damage: 10
 	Warhead@MissileAP_Heavy:
 		Damage: 20000
 		ValidTargets: Water, Underwater, Bridge, Structure
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		Damage: 10
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:
@@ -727,13 +727,13 @@ RA2GattlingMG3_AA:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 2
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 		Damage: 2
 
@@ -764,13 +764,13 @@ RA2GattlingInf:
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Air, Water
 		Damage: 8000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 8000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 
@@ -798,7 +798,7 @@ RA2Virusgun:
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@SniperWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
@@ -842,7 +842,7 @@ RA2Virusgun2:
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
+	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
@@ -850,7 +850,7 @@ RA2Virusgun2:
 		ValidTargets: Ground, Ship, Garrisoned
 	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
 		ValidTargets: Ground, Ship, Garrisoned
-	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+	Warhead@SniperWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Ship, Garrisoned
 	Warhead@HeavyChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -882,7 +882,7 @@ RA2Virusgun3:
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
+	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 6
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
@@ -979,30 +979,30 @@ RA2CosmonautLaser:
 		UsePlayerColor: true
 	Warhead@LightMissile: SpreadDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Bullet_Light: AreaDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@FlakWeapon: SpreadDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Bullet_Medium:
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	-Warhead@Effect:

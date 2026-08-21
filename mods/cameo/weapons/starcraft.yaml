@@ -24,7 +24,7 @@ WraithDroneLaser:
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Air
 		Damage: 10
@@ -42,7 +42,7 @@ SCBROODLING:
 	Range: 1200
 	Warhead@Melee_Medium:
 		Damage: 2000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -101,7 +101,7 @@ InterceptorCannon:
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Laser_Heavy_Percentage: HealthPercentageDamage
+	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -155,7 +155,7 @@ SCWorkerExplode:
 	Inherits: UnitExplodeSmall
 	Warhead@Demolition_Light:
 		Damage: 12000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
+	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		Damage: 6
 
 RavenTurretSpawner:
@@ -203,7 +203,7 @@ Scarab:
 	TargetActorCenter: True
 	Warhead@Melee_Medium:
 		Damage: 10000
-	Warhead@Melee_Medium_Percentage: HealthPercentageDamage
+	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		Damage: 5
 
 SCVAttack:

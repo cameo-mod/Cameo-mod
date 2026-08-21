@@ -41,7 +41,7 @@ from cameo_model import Model  # noqa: E402
 
 # Distinct (warhead type, dead field) pairs present when this audit was written (2026-08-22).
 # ⚠ RATCHET — LOWER ONLY. Raising it hides a field the engine is throwing away.
-DEAD_FIELD_BASELINE = 33
+DEAD_FIELD_BASELINE = 26
 
 # mod.yaml `Assemblies:` order — first hit wins, exactly like ObjectCreator.FindType.
 ASSEMBLY_DIRS = [
