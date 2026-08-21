@@ -180,3 +180,18 @@ Three more always-active `FirepowerMultiplier` instances were found and fixed (`
 **Audits:** `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs; `audit_warhead_split` broadcast count 945, baseline lowered 946→945; `audit_balance_drift` clean; `extract_stats` regenerated ledgers; `verify_generator_sync` drift 0; `audit_doc_claims` 16/16 clean.
 
 **Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+
+## W24 cluster 12 — ThermobaricNuclearMaverick (2026-08-21)
+
+**Converted** `ThermobaricNuclearMaverick` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` from a broken duplicate `Inherits@2` stack (`^NuclearWarhead` and `^Warhead_Flame_Heavy` sharing the same inherit key) to a clean 3-way split:
+- `Inherits@wh: ^Warhead_MissileHE_Heavy`
+- `Inherits@wh2: ^Warhead_Nuclear_Super` (main `AreaDamage` 10-tick shockwave, `Damage: 1400`, `MaxRadius: 9000`; percentage `AreaDamagePercentage`, `Damage: 1`, `Ticks: 7`, `Spread: 500`, `MaxRadius: 4500`)
+- `Inherits@wh3: ^Warhead_Flame_Heavy`
+- `Inherits@proj: ^Projectile_Missile_Heavy`
+- `Inherits@fx: ^Effect_Flame_Heavy` then `Inherits@fx2: ^Effect_Nuclear_Super` so the nuclear effect layer wins for `Concrete`, `ShieldHit`, `Smudge1/2/3`, and `ShieldHitEffectNuclear`, while the flame smudge, glow, napalm `Effect2`, and `GroundFire` remain.
+
+**Preserved** total per-shot damage (`42000` flat + `21%` percentage) and the old `SpreadDamage`/`HealthPercentageDamage` shape (`AffectsParent: false`, `ValidRelationships: Enemy`, `FireDeath, Incendiary` damage types) while fixing the duplicate-inherit bug. `ContrailEndColor`, `ContrailLength`, `Effect: nuke_small`, `Effect2: large_napalm`, `GlowScale`, `Delay`, and missile projectile all unchanged.
+
+**Audits:** `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs; `audit_warhead_split` broadcast count 944, baseline lowered 945→944; `audit_balance_drift` clean; `extract_stats` regenerated ledgers; `verify_generator_sync` drift 0; `audit_doc_claims` 16/16 clean.
+
+**Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.

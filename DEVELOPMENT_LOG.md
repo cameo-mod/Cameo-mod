@@ -1,5 +1,30 @@
 # Development Log
 
+## 2026-08-21 — ThermobaricNuclearMaverick 3-way split (boot-gated)
+
+- Converted `ThermobaricNuclearMaverick` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`
+  from the broken duplicate `Inherits@2: ^NuclearWarhead` / `Inherits@2: ^Warhead_Flame_Heavy` stack
+  to a clean 3-way split with distinct inherit keys:
+  - `Inherits@wh: ^Warhead_MissileHE_Heavy`
+  - `Inherits@wh2: ^Warhead_Nuclear_Super`
+  - `Inherits@wh3: ^Warhead_Flame_Heavy`
+  - `Inherits@proj: ^Projectile_Missile_Heavy`
+  - `Inherits@fx: ^Effect_Flame_Heavy`
+  - `Inherits@fx2: ^Effect_Nuclear_Super`
+- Preserved total per-shot damage: `MissileHE_Heavy`/`Flame_Heavy` stay `14000` flat/`7%`;
+  `^Warhead_Nuclear_Super` delivers `1400` × 10-tick `AreaDamage` (`MaxRadius: 9000`) and
+  `1` × 7-tick `AreaDamagePercentage` (`Spread: 500`, `MaxRadius: 4500`) to keep the old `7%`
+  percentage total while using the canonical nuclear family.
+- Preserved old `SpreadDamage`/`HealthPercentageDamage` shape (`FireDeath, Incendiary` damage
+  types, `AffectsParent: false`, `ValidRelationships: Enemy`) for the nuclear half.
+- Resolved `Effect`/`Effect2`, `Glow`, `Smudge`, `RA2Scorch`, `GroundFire`, `Concrete: 1000`,
+  `ShieldHit` duration 25, `ShieldHitEffect`, `ShieldHitEffectNuclear` all unchanged.
+- `extract_stats.py` regenerated ledgers and derived sidecars; `audit_balance_drift` clean.
+- Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real,
+  `audit_warhead_split` 944 (baseline lowered 945→944),
+  `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+
 ## 2026-08-21 — NuclearMaverick 3-way split (boot-gated)
 
 - Converted `NuclearMaverick` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`

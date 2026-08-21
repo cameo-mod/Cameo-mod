@@ -2181,11 +2181,12 @@ NuclearMaverick:
 		ImpactActors: false
 
 ThermobaricNuclearMaverick:
-	Inherits: ^Warhead_MissileHE_Heavy
-	Inherits@2: ^Warhead_Flame_Heavy
-	Inherits@3: ^Projectile_Missile_Heavy
-	Inherits@4: ^Effect_Flame_Heavy
-	Inherits@2: ^NuclearWarhead
+	Inherits@wh: ^Warhead_MissileHE_Heavy
+	Inherits@wh2: ^Warhead_Nuclear_Super
+	Inherits@wh3: ^Warhead_Flame_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
+	Inherits@fx2: ^Effect_Nuclear_Super
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 4
@@ -2207,24 +2208,33 @@ ThermobaricNuclearMaverick:
 		ContrailEndColor: 33221100
 		TrailInterval: 1
 		TrailDelay: 1
-	Warhead@Flame_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 14000
-	Warhead@Flame_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 7
-	Warhead@NuclearWarhead: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 14000
-		AffectsParent: false
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 7
-		AffectsParent: false
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 14000
 	Warhead@MissileHE_Heavy_Percentage:
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+	Warhead@Nuclear_Super:
+		ValidTargets: Ground, Water, Air
+		ValidRelationships: Enemy
+		Damage: 1400
+		MaxRadius: 9000
+		AffectsParent: false
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@Nuclear_Super_Percentage:
+		ValidTargets: Ground, Water, Air
+		ValidRelationships: Enemy
+		Damage: 1
+		Spread: 500
+		MaxRadius: 4500
+		AffectsParent: false
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		Ticks: 7
+	Warhead@Flame_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 14000
+	Warhead@Flame_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
 		Damage: 7
 	Warhead@Effect: CreateEffect

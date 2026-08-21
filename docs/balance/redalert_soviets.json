@@ -3001,6 +3001,20 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "1400",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
+        "spread": "1000",
+        "tag": "Nuclear_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
+        "spread": "500",
+        "tag": "Nuclear_Super_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
         "damage": "14000",
         "falloff": "100, 50, 25, 10, 5, 0",
         "spread": "800",
@@ -3013,24 +3027,10 @@
         "spread": "400",
         "tag": "Flame_Heavy_Percentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "14000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "1000",
-        "tag": "NuclearWarhead",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "500",
-        "tag": "NuclearWarheadPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": null,
       "minrange": "1580",
       "pricing": true,
       "range": "7890",
@@ -3039,17 +3039,19 @@
       "slot": "Armament@HE",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
+       "^Warhead_Nuclear_Super",
        "^Warhead_Flame_Heavy",
        "^Projectile_Missile_Heavy",
        "^Effect_Flame_Heavy",
-       "^NuclearWarhead"
+       "^Effect_Nuclear_Super"
       ],
       "warheads": [
        "^Warhead_MissileHE_Heavy",
+       "^Warhead_Nuclear_Super",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "ThermobaricNuclearMaverick",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "burst": "8",
