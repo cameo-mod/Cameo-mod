@@ -234,3 +234,26 @@ Three more always-active `FirepowerMultiplier` instances were found and fixed (`
 **Audits:** `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs; `audit_warhead_split` broadcast count 942, baseline lowered 944→942; `audit_balance_drift` clean; `extract_stats` regenerated ledgers; `verify_generator_sync` drift 0; `audit_doc_claims` 16/16 clean.
 
 **Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+
+## Upgrade regression audit + blast-shape reporting (2026-08-22)
+
+**Motivation:** Maintainer review of W24 A2 flagged that `MonsterTank120mm -> MonsterTank120mmThermobaric` felt like a downgrade even though every damage check passed. A proper `AreaDamageWarhead.cs:282` reading confirmed `Damage` is **split across ticks** (`perTickModifier = Ticks > 1 ? 100 / Ticks : 100`) and `review_batch_diff` only checked damage totals, not the warhead shape.
+
+**Added:**
+- `tools/audit/audit_upgrade_regression.py` — 314 gated armament pairs found across the ruleset.
+  - **12 STRICTLY WEAKER** (e.g. `RA2PatriotThunderboltMissile` vs `RA2Patriot` 0.13×, `TSHellfireSonic` vs `TSHellfire` 0.11× vs Superheavy).
+  - **42 ROLE-SHIFTED** — legitimate for specialists, regressions when losses land on the unit's primary armor classes.
+  - **5 THIN MARGIN** — never loses, but is only +4–10% where it matters while +100%+ elsewhere (`MonsterTank120mmThermobaric` best 2.26×, worst core gain 1.04× vs Scout).
+- `tools/audit/review_batch_diff.py` — added **blast shape** (`Spread`/`Falloff`/`Ticks`/`MaxRadius`) as a reported (non-failing) diff so future retrofits cannot silently flatten an expanding shockwave while preserving damage.
+
+**Measured A2 innocence:** 54 findings before A2, 54 after. A2 did not create new regressions; it deepened a pre-existing `Su57` case from 0.92× to 0.87×.
+
+**Status:** reporting only (`--baseline N` to enable the ratchet once the tree settles).
+
+## Inline effect warheads (2026-08-22)
+
+**Maintainer ruling:** effect warheads (`Warhead@Effect*`) should be **inherited** from `^Effect_*` templates, not declared inline on concrete weapons. **Superweapons** are the only accepted exception (unique multi-animated sequences).
+
+**First scan:** 665 concrete weapons carry 815 inline effect warheads (`CreateEffect` / `EffectAir` / `EffectWater` / `ShieldHit` / etc.) instead of being supplied by an `Inherits@fx` template.
+
+**Status:** guard `tools/audit/audit_inline_effects.py` pending; this is a structural-debt work item.

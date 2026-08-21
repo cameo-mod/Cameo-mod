@@ -1,5 +1,15 @@
 # Development Log
 
+## 2026-08-22 — A2 committed + audit guards documented
+
+- Committed W24 A2 (five nuclear/thermobaric weapons collapsed to one damage family).
+- Cleaned the malformed `docs/design/BALANCE_PROGRAM_PLAN.md` W24 status line.
+- Added `W27` to the BPP for inline `Warhead@Effect*` debt.
+- Documented the `audit_upgrade_regression.py` + blast-shape diff findings in
+  `docs/audit/SUMMARY.md` and `docs/LESSONS_LEARNED.md`.
+- Recorded the maintainer ruling: effect warheads should be inherited, not inline;
+  superweapons are the only accepted exception.
+
 ## 2026-08-22 — W24 A2: five nuclear/thermobaric weapons collapsed (boot-gated)
 
 - Converted five multi-main weapons to one damage warhead each, preserving per-shot totals:

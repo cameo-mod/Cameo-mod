@@ -70,6 +70,8 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - [Loose-extracted .oramap maps must always be repacked before finishing a task (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
 - [Empty warhead type = boot NRE; check-yaml does not catch it (2026-08-04)](#empty-warhead-type--boot-nre-check-yaml-does-not-catch-it-2026-08-04)
 - [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
+- [Upgrade regressions feel like downgrades (2026-08-19)](#upgrade-regressions-feel-like-downgrades-2026-08-19)
+- [Inline effect warheads should be inherited, not inline (2026-08-19)](#inline-effect-warheads-should-be-inherited-not-inline-2026-08-19)
 
 ---
 
@@ -713,3 +715,31 @@ A naive 3-way split onto `^Projectile_Missile_*` drops those colors and `review_
 - tools/rename/safe_rename.py lower-cased every replacement. It now preserves the exact case written in the rename map, so mixed-case OpenRA ids stay canonical.
 - tools/balance/splice_templates.py ran gen_weapon_template.py with a family filter, which caused shield_uniqueness to see only a subset and emit wrong compressed Shield values. It now always runs the full generator and splices only the requested blocks, preserving the original newline style (CRLF/LF).
 - The A1a delivery-first rename proved that verify_generator_sync.py is the real source of truth for ^Warhead_* blocks: the Flame and MissileChem blocks had drifted by one Shield point and were re-synced by splicing.
+
+## Upgrade regressions feel like downgrades (2026-08-19)
+
+A W24 collapse can move an upgrade pair onto families with **opposite Versus profiles** and still pass every damage check, because the on-grid `Damage` total is preserved on both sides. `audit_upgrade_regression.py` was added to catch this:
+
+- **314 gated armament pairs** scanned (`Armament` with `RequiresCondition`, one half `!cond` and the other `cond`).
+- **59 findings** in the first pass:
+  - **12 STRICTLY WEAKER** — the upgrade loses on every core armor (e.g. `RA2PatriotThunderboltMissile` vs `RA2Patriot` is 0.13× on vehicles, `TSHellfireSonic` vs `TSHellfire` is 0.11× vs Superheavy).
+  - **42 ROLE-SHIFTED** — wins on some armor, loses on others (legitimate for a specialist, a regression when the loss is on the armor the unit exists to fight).
+  - **5 THIN MARGIN** — the upgrade never loses, but is worth only ~1.03–1.10× where it matters while multiplying on another class. `MonsterTank120mm -> MonsterTank120mmThermobaric` is the poster case: same geometry, 1.5× damage, but the Versus shift means it is **+4% vs Scout / +7% vs Light / +16% vs Medium** and **+126% vs infantry**.
+
+⚠ **A2 was NOT the root cause.** Measured before vs after A2: **54 findings before, 54 after.** A2 deepened the pre-existing `Su57` case from 0.92× to 0.87×. This is pre-existing debt the W24 collapse made visible.
+
+**Rule:** every upgrade must be verified with `python tools/audit/audit_upgrade_regression.py` after any family repoint that touches an armament pair. Do not rely on a damage-preservation check alone.
+
+## Inline effect warheads should be inherited, not inline (2026-08-19)
+
+Maintainer ruling: **Effect warheads (`Warhead@Effect*`) should live in `^Effect_*` templates and be inherited, not declared inline on a concrete weapon.** The only legitimate exception is superweapons, which may need multiple bespoke animations.
+
+First scan: **665 concrete weapons carry 815 inline effect warhead nodes** (`Warhead@Effect`, `Warhead@EffectAir`, `Warhead@EffectWater`, etc.) instead of using `Inherits@fx:`. This is a structural-debt class: it duplicates FX definitions across the tree and makes the 3-way split harder to reason about.
+
+**Rule:**
+- A concrete weapon should use `Inherits@fx: ^Effect_<Family>` for its visuals.
+- Local `Warhead@Effect*` entries should be reserved for **exceptional overrides** (e.g. a custom sound, a one-off `Explosions` list) and should be rare.
+- Superweapons are exempt from the inherit rule because their effects are often unique and multi-animated.
+- Add new effect families to `gen_weapon_template.py` / `weapons.yaml` instead of copy-pasting `CreateEffect` nodes.
+
+**Guard:** `tools/audit/audit_inline_effects.py` (TBD) will report the count and the worst offenders; the target is to drive the non-superweapon count to 0.
