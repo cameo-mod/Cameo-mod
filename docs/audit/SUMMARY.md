@@ -206,14 +206,16 @@ Three more always-active `FirepowerMultiplier` instances were found and fixed (`
 
 ## W24 cluster 14 — TorpTubeThermobaric (2026-08-21)
 
-**Converted** `TorpTubeThermobaric` in `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml` from `Inherits: ^NuclearWarhead` to a partial 3-way split:
+**Converted** `TorpTubeThermobaric` in `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml` from legacy full-stack templates to the 3-way split:
 - `Inherits@wh: ^Warhead_Nuclear_Super`
+- `Inherits@wh2: ^Warhead_MissileAP_Heavy`
+- `Inherits@proj: ^Projectile_Missile_Heavy`
 - `Inherits@fx: ^Effect_Nuclear_Super`
-- `Inherits@2: ^HeavyMissile` (left as the old half; its `SpreadDamage`/`HealthPercentageDamage` shape and `Versus`/`Falloff` do not cleanly map to `^Warhead_MissileHE_Heavy` and need maintainer sign-off)
+- `Inherits@fx2: ^Effect_MissileAP_Heavy`
 
-**Preserved** the torpedo projectile (`Image: v2`, `TrailImage: bubbles`, `Speed: 150`, water-bound, cloak palette) and `Report: torpedo1.aud`. The nuclear half keeps totals `16000` flat and `8%` as `AreaDamage` `1600` × 10 ticks (`MaxRadius: 9000`, `Spread: 1000`) and `AreaDamagePercentage` `1` × 8 ticks (`MaxRadius: 4500`, `Spread: 500`). Preserved `AffectsParent: true`, `ValidRelationships: Enemy`, `FireDeath, Incendiary`, and set `TargetActorCenter: false` to match the old resolved node. Added `-Warhead@Glow:` so `^Effect_Nuclear_Super` does not introduce a new glow. The effect order keeps `^Effect_Nuclear_Super` first so `^HeavyMissile` still wins for `ShieldHit` (`Duration: 10`), `Concrete` (`200`), and `Effect` before the local override to `nuke_small`/`kaboom22.aud`/`ImpactActors: true`.
+**Preserved** the torpedo projectile (`Image: v2`, `TrailImage: bubbles`, `Speed: 150`, water-bound, cloak palette) and `Report: torpedo1.aud`. The bespoke torpedo fields are unchanged because `-Projectile:` removes the inherited projectile and the local node redefines it; the family is declared for bookkeeping. The nuclear half keeps totals `16000` flat and `8%` as `AreaDamage` `1600` × 10 ticks (`MaxRadius: 9000`, `Spread: 1000`) and `AreaDamagePercentage` `1` × 8 ticks (`MaxRadius: 4500`, `Spread: 500`). The missile half keeps totals `16000` flat and `8%` as `AreaDamage` `16000` (`MaxRadius: 4000`, `Spread: 800`) and `AreaDamagePercentage` `8` (`MaxRadius: 2000`, `Spread: 400`). Preserved `AffectsParent: true`, `ValidRelationships: Enemy` on both damage warheads, `FireDeath, Incendiary` for the nuclear warhead, and set `TargetActorCenter: false` to match the old resolved node. Added `-Warhead@Glow:` so neither `^Effect_Nuclear_Super` nor `^Effect_MissileAP_Heavy` introduces a new glow. Effect order keeps `^Effect_Nuclear_Super` first so `^Effect_MissileAP_Heavy` wins for `ShieldHit`, `Concrete` (`200`), `DuneRock`, `DuneSand`, `RA2Crater`, and the non-nuclear `Effect` (`big_frag`) before the local override to `nuke_small`/`kaboom22.aud`/`ImpactActors: true`. A local `Warhead@ShieldHit` override keeps `Duration: 10`.
 
-**Audits:** `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs; `audit_warhead_split` broadcast count 941, baseline lowered 942→941; `audit_balance_drift` clean; `extract_stats` regenerated ledgers; `review_resolve_diff` flags only the expected `[16000, 16000] -> [1600, 16000]` multiset change.
+**Audits:** `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs; `audit_warhead_split` broadcast count 941; `audit_balance_drift` clean; `extract_stats` regenerated ledgers; `review_resolve_diff` reports `OK (behavioural invariants preserved)`.
 
 **Boot-gate:** `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
 

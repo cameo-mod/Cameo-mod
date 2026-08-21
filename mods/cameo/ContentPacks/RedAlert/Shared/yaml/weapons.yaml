@@ -1784,8 +1784,10 @@ TorpTube:
 
 TorpTubeThermobaric:
 	Inherits@wh: ^Warhead_Nuclear_Super
+	Inherits@wh2: ^Warhead_MissileAP_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Nuclear_Super
-	Inherits@2: ^HeavyMissile
+	Inherits@fx2: ^Effect_MissileAP_Heavy
 	ReloadDelay: 100
 	TargetActorCenter: false
 	Range: 10000
@@ -1825,19 +1827,31 @@ TorpTubeThermobaric:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		UpdatesUnitStatistics: false
 		Ticks: 8
+	Warhead@MissileAP_Heavy: AreaDamage
+		ValidTargets: Water, Underwater, Bridge, Structure
+		ValidRelationships: Enemy
+		Damage: 16000
+		MaxRadius: 4000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
+		ValidTargets: Water, Underwater, Bridge, Structure
+		ValidRelationships: Enemy
+		Damage: 8
+		MaxRadius: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
 	-Warhead@Glow:
 	-Warhead@Smudge:
-	Warhead@HeavyMissile: SpreadDamage
-		Damage: 16000
-		ValidTargets: Water, Underwater, Bridge, Structure
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		Damage: 8
-		ValidTargets: Water, Underwater, Bridge, Structure
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
 	-Warhead@EffectAir:
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash

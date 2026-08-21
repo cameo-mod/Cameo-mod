@@ -1,8 +1,8 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 296
-Single old-family with new inherits (Phase B completion): 1
+Total concrete weapons on old families: 295
+Single old-family with new inherits (Phase B completion): 0
 Pure single old-family (mechanical Phase A candidates): 12
 Mixed old-family (Phase B maintainer sign-off): 283 in 211 groups
 
@@ -21,9 +21,6 @@ Mixed old-family (Phase B maintainer sign-off): 283 in 211 groups
 - `TSLaser90mm` (weapons\tiberiansun.yaml) | old: LaserWeapon | CannonHE_Medium=6000, CannonHE_Medium_Percentage=3, LaserWeapon=6000, LaserWeaponPercentage=3
 
 ## Single old-family with new inherits (finish conversion)
-### HeavyMissile (1 weapons)
-- `TorpTubeThermobaric` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | Nuclear_Super=1600, Nuclear_Super_Percentage=1, HeavyMissile=16000, HeavyMissilePercentage=8, Effect=0, EffectWater=0
-
 ## Mixed-inherit (Phase B) — dominant-damage analysis for maintainer sign-off
 ### FlakWeapon, Grenade, HeavyBomb, HeavyChemicalWeapon, HeavyFlameWeapon, HeavyMissile, LightChemicalWeapon, LightFlameWeapon, LightMissile, MediumChemicalWeapon, MediumFlameWeapon, MediumMissile, NuclearWarhead, ShrapnelWeapon, TankDestroyerCannon (1 weapons)
 - `SCUDNUKE` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: HeavyMissile(20000) | HeavyMissile=20000, HeavyMissilePercentage=10, MediumMissile=20000, MediumMissilePercentage=10, LightMissile=20000, LightMissilePercentage=10, HeavyBomb=20000, HeavyBombPercentage=10, ShrapnelWeapon=20000, ShrapnelWeaponFriendlyFire=10000, ShrapnelWeaponPercentage=10, Grenade=20000, GrenadeFriendlyFire=10000, GrenadePercentage=10, HeavyChemicalWeapon=20000, HeavyChemicalWeaponPercentage=10, MediumChemicalWeapon=20000, MediumChemicalWeaponPercentage=10, LightChemicalWeapon=20000, LightChemicalWeaponPercentage=10, HeavyFlameWeapon=20000, HeavyFlameWeaponPercentage=10, MediumFlameWeapon=20000, MediumFlameWeaponPercentage=10, LightFlameWeapon=20000, LightFlameWeaponPercentage=10, TankDestroyerCannon=20000, TankDestroyerCannonPercentage=10, FlakWeapon=20000, FlakWeaponPercentage=10, NuclearWarhead=20000, NuclearWarheadPercentage=10, Effect=0 | → collapse to HeavyMissile

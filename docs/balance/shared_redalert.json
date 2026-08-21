@@ -3668,21 +3668,21 @@
        },
        {
         "damage": "16000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "800",
+        "tag": "MissileAP_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "8",
-        "falloff": null,
-        "spread": "300",
-        "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "falloff": "100, 50, 25, 10, 5, 0",
+        "spread": "400",
+        "tag": "MissileAP_Heavy_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.5,
+      "design_weapon_class": 1.375,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "100",
@@ -3690,11 +3690,14 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_Nuclear_Super",
+       "^Warhead_MissileAP_Heavy",
+       "^Projectile_Missile_Heavy",
        "^Effect_Nuclear_Super",
-       "^HeavyMissile"
+       "^Effect_MissileAP_Heavy"
       ],
       "warheads": [
-       "^Warhead_Nuclear_Super"
+       "^Warhead_Nuclear_Super",
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "TorpTubeThermobaric",
       "weapon_class_source": "template"
