@@ -1,5 +1,24 @@
 # Development Log
 
+## 2026-08-21 — TSScoopDualChem 3-way split (boot-gated)
+
+- Converted `TSScoopDualChem` in `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml`
+  from the old full-stack `^MediumChemicalWeapon` to a 3-way split:
+  - `Inherits@wh: ^Warhead_CannonHE_Medium`
+  - `Inherits@wh2: ^Warhead_Chemical_Medium`
+  - `Inherits@proj: ^Projectile_Shell_Medium`
+  - `Inherits@fx: ^Effect_CannonHE_Medium`
+  - `Inherits@fx2: ^TSCannonEffect`
+- Preserved CannonHE 20000 / percentage 10 plus Chemical 10000 / percentage 5,
+  `Bullet` `Speed: 3500`, `Report: flamer2.aud`, `med_tibnapalm` ground explosion
+  with `xplobig6.aud` and glow, `ShieldHit` duration 8, and bullet-style shield-
+  hit sounds by inlining the actor-specific overrides.
+- `review_resolve_diff.py wt_baseline . TSScoopDualChem` OK.
+- `extract_stats.py` regenerated ledgers; `audit_balance_drift` clean.
+- Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split`
+  947 (baseline 950), `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+
 ## 2026-08-21 — TS70mmChem 3-way split (boot-gated)
 
 - Converted `TS70mmChem` in `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml`

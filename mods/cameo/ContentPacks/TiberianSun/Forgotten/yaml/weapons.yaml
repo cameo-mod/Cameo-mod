@@ -202,30 +202,42 @@ TSScoopDual:
 		Damage: 10
 
 TSScoopDualChem:
-	Inherits: ^Warhead_CannonHE_Medium
-	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
-	Inherits@4: ^TSCannonEffect
-	Inherits@5: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@wh2: ^Warhead_Chemical_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
+	Inherits@fx2: ^TSCannonEffect
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 2
 	Range: 6224
+	Report: flamer2.aud
+	Projectile: Bullet
+		Speed: 3500
 	Warhead@CannonHE_Medium:
 		Damage: 20000
 	Warhead@CannonHE_Medium_Percentage:
 		Damage: 10
-	Warhead@MediumChemicalWeapon: AreaDamage
+	Warhead@Chemical_Medium:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 10000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		Damage: 5
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@Effect: CreateEffect
+		Explosions: med_tibnapalm
+		ImpactSounds: xplobig6.aud
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@ShieldHit: GrantExternalCondition
+		Duration: 8
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50

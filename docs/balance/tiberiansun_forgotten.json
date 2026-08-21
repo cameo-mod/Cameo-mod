@@ -10063,16 +10063,16 @@
        },
        {
         "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "600",
+        "tag": "Chemical_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "5",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
+        "falloff": "100, 60, 30, 15, 5, 0",
+        "spread": "300",
+        "tag": "Chemical_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -10085,13 +10085,14 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
+       "^Warhead_Chemical_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
-       "^TSCannonEffect",
-       "^MediumChemicalWeapon"
+       "^TSCannonEffect"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_Chemical_Medium"
       ],
       "weapon": "TSScoopDualChem",
       "weapon_class_source": "template"
