@@ -742,4 +742,4 @@ First scan: **665 concrete weapons carry 815 inline effect warhead nodes** (`War
 - Superweapons are exempt from the inherit rule because their effects are often unique and multi-animated.
 - Add new effect families to `gen_weapon_template.py` / `weapons.yaml` instead of copy-pasting `CreateEffect` nodes.
 
-**Guard:** `tools/audit/audit_inline_effects.py` (TBD) will report the count and the worst offenders; the target is to drive the non-superweapon count to 0.
+**Guard:** `tools/audit/audit_inline_effects.py` is now implemented. Current baseline: **665 concrete weapons carry 815 inline effect nodes**; after auto-detecting superweapons, **628 weapons with 771 nodes** remain as non-exempt debt. Run it after any conversion batch to watch the count fall.

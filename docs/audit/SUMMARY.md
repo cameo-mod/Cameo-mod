@@ -256,4 +256,4 @@ Three more always-active `FirepowerMultiplier` instances were found and fixed (`
 
 **First scan:** 665 concrete weapons carry 815 inline effect warheads (`CreateEffect` / `EffectAir` / `EffectWater` / `ShieldHit` / etc.) instead of being supplied by an `Inherits@fx` template.
 
-**Status:** guard `tools/audit/audit_inline_effects.py` pending; this is a structural-debt work item.
+**Status:** guard `tools/audit/audit_inline_effects.py` landed and run. Current scan: **665 concrete weapons carry 815 inline effect nodes**; auto-exempt superweapons remove **37** weapons (815 → 771 non-exempt nodes). This is a structural-debt work item.

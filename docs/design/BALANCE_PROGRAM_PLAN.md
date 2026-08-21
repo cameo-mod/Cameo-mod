@@ -100,7 +100,7 @@ nothing and informs the anchor choice. What must wait is WRITING targets and app
 | **W25** | Versus mean-normalisation to 100 + class tilt + Shield rebuild + the ARMOR-PLATING LAYER | ✅ S1–S4 SHIPPED 2026-08-16/17 (`78568a36d`..`99deed28d`). **E1 + E4 FIXED** (`30ead6d4b`, `761e79ed9`). ⛔ **S5 is NOT "run `--confirm`" — see the correction below: `--confirm` is a NO-OP until targets are written into the ledger, and that needs W11's sign-off.** | Claude | — |
 
 | **W26** | **Retire `DamageMultiplier` (R1) — case by case, 369 live declarations** | 🔵 STARTED 2026-08-17: the shield 150% is DELETED. Inventory + rules below. | Claude | — |
-| **W27** | Move inline Warhead@Effect* nodes into ^Effect_* templates (superweapons exempt) | ⬜ PROPOSED: 665 concrete weapons carry 815 inline effect warheads; add tools/audit/audit_inline_effects.py, adopt existing ^Effect_* families, and create missing families where no template exists. Boot-gate per batch. | Devin | W24 ✅ |
+| **W27** | Move inline Warhead@Effect* nodes into ^Effect_* templates (superweapons exempt) | 🔵 GUARD LANDED: `tools/audit/audit_inline_effects.py` now reports 665 concrete weapons with 815 inline effect nodes; superweapon auto-exemption removes 37 weapons/44 nodes. Next: adopt existing `^Effect_*` families and create missing families where none exists. Boot-gate per batch. | Devin | W24 ✅ |
 
 **Recommended order:** W2 ∥ W3 → W4 → W5 → W6 → (W7, W9) → W8 → W10 → W11 → W12.
 `∥` = safe to run in parallel (disjoint file sets).

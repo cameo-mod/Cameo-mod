@@ -9,6 +9,8 @@
   `docs/audit/SUMMARY.md` and `docs/LESSONS_LEARNED.md`.
 - Recorded the maintainer ruling: effect warheads should be inherited, not inline;
   superweapons are the only accepted exception.
+- Built and ran `tools/audit/audit_inline_effects.py`: 665 concrete weapons carry
+  815 inline effect nodes; 628 non-exempt (superweapons auto-detected) remain.
 
 ## 2026-08-22 — W24 A2: five nuclear/thermobaric weapons collapsed (boot-gated)
 
