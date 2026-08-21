@@ -1783,9 +1783,11 @@ TorpTube:
 		InvalidTargets: Ship, Structure, Bridge
 
 TorpTubeThermobaric:
-	Inherits: ^NuclearWarhead
+	Inherits@wh: ^Warhead_Nuclear_Super
+	Inherits@fx: ^Effect_Nuclear_Super
 	Inherits@2: ^HeavyMissile
 	ReloadDelay: 100
+	TargetActorCenter: false
 	Range: 10000
 	Report: torpedo1.aud
 	ValidTargets: Water, Underwater, Bridge
@@ -1806,17 +1808,31 @@ TorpTubeThermobaric:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	Warhead@NuclearWarhead: SpreadDamage
-		Damage: 16000
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
-		Damage: 8
+	Warhead@Nuclear_Super: AreaDamage
+		ValidTargets: Ground, Air, Water
+		ValidRelationships: Enemy
+		Damage: 1600
+		MaxRadius: 9000
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
+		ValidTargets: Ground, Air, Water
+		ValidRelationships: Enemy
+		Damage: 1
+		Spread: 500
+		MaxRadius: 4500
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
+		Ticks: 8
+	-Warhead@Glow:
+	-Warhead@Smudge:
 	Warhead@HeavyMissile: SpreadDamage
 		Damage: 16000
 		ValidTargets: Water, Underwater, Bridge, Structure
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Water, Underwater, Bridge, Structure
-	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true

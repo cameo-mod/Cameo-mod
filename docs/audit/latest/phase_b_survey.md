@@ -2,9 +2,9 @@
 
 Generated: 2026-08-08
 Total concrete weapons on old families: 297
-Single old-family with new inherits (Phase B completion): 1
+Single old-family with new inherits (Phase B completion): 2
 Pure single old-family (mechanical Phase A candidates): 12
-Mixed old-family (Phase B maintainer sign-off): 284 in 212 groups
+Mixed old-family (Phase B maintainer sign-off): 283 in 211 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `SteelMakoGun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Demolition_Light_Percentage=1, Railgun_Heavy=2000, Railgun_Heavy_Percentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, Effect=0
@@ -23,6 +23,9 @@ Mixed old-family (Phase B maintainer sign-off): 284 in 212 groups
 ## Single old-family with new inherits (finish conversion)
 ### HeavyBomb (1 weapons)
 - `JapanesePlasmaBomb` (ContentPacks\RedAlert\Japan\yaml\weapons.yaml) | Chemical_Heavy=10000, Chemical_Heavy_Percentage=5, Flame_Heavy=10000, Flame_Heavy_Percentage=5, HeavyBomb=10000, HeavyBombPercentage=5, Effect=0, Effect2=0
+
+### HeavyMissile (1 weapons)
+- `TorpTubeThermobaric` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | Nuclear_Super=1600, Nuclear_Super_Percentage=1, HeavyMissile=16000, HeavyMissilePercentage=8, Effect=0, EffectWater=0
 
 ## Mixed-inherit (Phase B) — dominant-damage analysis for maintainer sign-off
 ### FlakWeapon, Grenade, HeavyBomb, HeavyChemicalWeapon, HeavyFlameWeapon, HeavyMissile, LightChemicalWeapon, LightFlameWeapon, LightMissile, MediumChemicalWeapon, MediumFlameWeapon, MediumMissile, NuclearWarhead, ShrapnelWeapon, TankDestroyerCannon (1 weapons)
@@ -684,9 +687,6 @@ Mixed old-family (Phase B maintainer sign-off): 284 in 212 groups
 
 ### HeavyMissile, LaserWeapon (1 weapons)
 - `HMG_Duelist_upgrade` (ContentPacks\D2k\Ixian\yaml\weapons.yaml) | dominant: LaserWeapon(2000) | LaserWeapon=2000, LaserWeaponPercentage=1, HeavyMissile=2000, HeavyMissilePercentage=1, CannonHE_Heavy=2000, CannonHE_Heavy_Percentage=1 | → collapse to LaserWeapon
-
-### HeavyMissile, NuclearWarhead (1 weapons)
-- `TorpTubeThermobaric` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | dominant: NuclearWarhead(16000) | NuclearWarhead=16000, NuclearWarheadPercentage=8, HeavyMissile=16000, HeavyMissilePercentage=8, Effect=0, EffectWater=0 | → collapse to NuclearWarhead
 
 ### LaserWeapon, MediumFlameWeapon (1 weapons)
 - `TSProton` (ContentPacks\TiberianSun\Nod\yaml\weapons.yaml) | dominant: MediumFlameWeapon(30000) | MediumFlameWeapon=30000, MediumFlameWeaponPercentage=15, LaserWeapon=30000, LaserWeaponPercentage=15, 2Eff=0 | → collapse to MediumFlameWeapon

@@ -1,5 +1,31 @@
 # Development Log
 
+## 2026-08-21 — TorpTubeThermobaric partial 3-way split (boot-gated)
+
+- Converted `TorpTubeThermobaric` in `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml`:
+  - Replaced legacy `Inherits: ^NuclearWarhead` with `Inherits@wh: ^Warhead_Nuclear_Super`
+    and `Inherits@fx: ^Effect_Nuclear_Super`.
+  - Kept `Inherits@2: ^HeavyMissile` as the still-old missile half (its `SpreadDamage`
+    / `HealthPercentageDamage` shape and heavy-missile `Versus`/`Falloff` do not cleanly
+    map to `^Warhead_MissileHE_Heavy`, so it is left for a maintainer sign-off).
+  - Preserved nuclear totals: main `1600` × 10 ticks (`MaxRadius: 9000`) for the old
+    `16000` flat, and percentage `1` × 8 ticks (`Spread: 500`, `MaxRadius: 4500`) for
+    the old `8%`.
+  - Preserved old nuclear shape: `AffectsParent: true`, `ValidRelationships: Enemy`,
+    `FireDeath, Incendiary`, and `TargetActorCenter: false`.
+  - Preserved the torpedo projectile (`Image: v2`, `Speed: 150`, `TrailImage: bubbles`,
+    water-bound, cloak palette) and report `torpedo1.aud`.
+  - Removed the new `Warhead@Glow` that `^Effect_Nuclear_Super` would have introduced
+    by adding `-Warhead@Glow:`.
+  - Effect order kept `^Effect_Nuclear_Super` first so `^HeavyMissile` still wins for
+    `ShieldHit` (`Duration: 10`), `Concrete` (`200`), and `Effect` (then local override
+    to `nuke_small`/`kaboom22.aud`/`ImpactActors: true`).
+- `find_empty_warhead` 0, `find_orphan_old_keys` 0, `audit_warhead_split` broadcast
+  baseline lowered 942 → 941, `audit_balance_drift` clean, `extract_stats` regenerated.
+- `review_resolve_diff` only flags the expected multiset change `[16000, 16000]` ->
+  `[1600, 16000]`; total 32000 preserved because `^Warhead_Nuclear_Super` uses `Ticks: 10`.
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+
 ## 2026-08-21 — MonsterTank120mm 3-way split (boot-gated)
 
 - Converted `MonsterTank120mm` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`
