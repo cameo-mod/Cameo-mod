@@ -274,6 +274,10 @@ PHYSICS_RANK = {
     "Flak": 0.38, "Concussion": 0.36, "Demolition": 0.35, "Bullet": 0.34,
     "MissileAA": 0.34, "CannonHE": 0.33, "MissileHE": 0.33, "CannonAP": 0.32,
     "MissileAP": 0.32, "Sniper": 0.30,
+    # Bullet blends (maintainer 2026-08-22): the mean of their parents, same as every other
+    # blend in this table. A bullet couples to a shield poorly (0.34), so each blend lands just
+    # above Bullet by however much its payload couples.
+    "BulletFire": 0.42, "BulletThermobaric": 0.39, "BulletHE": 0.35, "BulletTesla": 0.67,
     # physical contact — the canonical thing a shield stops
     "Arrow": 0.24, "Melee": 0.22,
 }
@@ -1639,6 +1643,7 @@ FAMILY_INTEGRITY_SCALE = {
     "Storm": 50,                          # Tesla+Magic -> 1/2
     "Quantum": 33,                        # Railgun+Laser+Tesla -> 1/3
     "MissileTesla": 50,                   # Tesla + MissileAP -> 1/2
+    "BulletTesla": 50,                    # Tesla + Bullet -> 1/2
     "MissileQuantum": 17,                 # (Railgun+Laser+Tesla) + 3xMissileAP -> 1/6 Tesla
     # ⚠ `Waveforce: 20` DELETED 2026-08-16 (maintainer order) — it could never fire.
     #
@@ -1672,6 +1677,9 @@ FAMILY_DAMAGE_TYPES = {
     "CannonFire":    "Prone75Percent, TriggerProne, FireDeath, Incendiary",
     "MissileFire":    "Prone75Percent, TriggerProne, FireDeath, Incendiary",
     "MissileTesla":   "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
+    "BulletFire":     "Prone75Percent, TriggerProne, FireDeath, Incendiary",
+    "BulletThermobaric": "Prone75Percent, TriggerProne, FireDeath, Incendiary",
+    "BulletTesla":    "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
     "MissileQuantum": "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
     "MissileThermobaric": "Prone75Percent, TriggerProne, FireDeath, Incendiary",
     "CannonChem": "Prone75Percent, TriggerProne, TiberiumDeath",
@@ -1765,6 +1773,23 @@ BLEND_FAMILIES = {
     #
     # Meters follow the documented per-parent-average rule, same as Quantum's comment above:
     # Temperature = (Flame 300 + Laser 225) / 5 parents = 105; Corrosion = (Chemical 300) / 5 = 60.
+    # BULLET blends (maintainer 2026-08-22): *"BulletFire = Bullet x Flame, BulletHE = Bullet x
+    # Demolition, BulletThermobaric = Bullet x Thermobaric, BulletTesla = Bullet x Tesla"*. These
+    # are the small-arms payload rounds — incendiary, explosive and electrified ammunition — and
+    # they give the ~17 Incendiary* weapons and Volkov's electrified rounds a real family instead
+    # of a plain Bullet warhead. The blend machinery does the rest: the Versus profile averages the
+    # parents, and blend_shape() crosses their SHAPES, so an incendiary bullet gets a small fire
+    # (geometric mean of Bullet 100 and Flame 1200 = 346) rather than half a flamethrower.
+    #
+    # Thermobaric is itself a blend, so it is expanded to its own primitives and Bullet is repeated
+    # three times to keep the split 50/50 — the same repetition-as-weight convention PhotonCannon
+    # uses. Meters follow the per-parent-average rule: Flame's 300 over 2 parents = 150 for
+    # BulletFire, over 6 parents = 50 for BulletThermobaric.
+    "BulletFire":  (["Bullet", "Flame"],      {"Temperature": _m(0.50)}, L3),
+    "BulletHE":    (["Bullet", "Demolition"], None, L3),
+    "BulletThermobaric": (["Bullet", "Bullet", "Bullet", "Demolition", "Concussion", "Flame"],
+                          {"Temperature": _m(1 / 6)}, L3),
+    "BulletTesla": (["Bullet", "Tesla"],      None, L3),
     "Waveforce": (["Flame", "Chemical", "Railgun", "Laser", "Tesla"],
                   {"Temperature": _m(0.35), "Corrosion": _m(0.20)}, L3),
     # PhotonCannon = the maintainer's 3-way — Waveforce 25% / CannonHE 25% / MissileAA 50% — and
