@@ -20,6 +20,14 @@ collapses two concrete warheads into one and legitimately moves the total by 1�
 `Warhead@*Concrete*` is excluded from the damage comparison by default (`--with-concrete` to
 include it). Judge main damage on main warheads, or the real signal drowns.
 
+⚠ BLAST SHAPE IS REPORTED, NEVER FAILED, and it is the subtlest check here.
+`AreaDamageWarhead.cs` splits Damage ACROSS ticks (`perTickModifier = Ticks > 1 ? 100 / Ticks
+: 100`), so `Ticks` is TOTAL-PRESERVING: collapsing a 10-ring nuclear shockwave onto a family
+with no `Ticks` keeps every point of damage and still turns an expanding blast into one
+instantaneous thump. A damage check alone cannot see that, so `Spread`/`Falloff`/`Ticks`/
+`MaxRadius` are diffed too — as a REPORT, because changing the shape is often the whole point
+of moving a weapon onto a family.
+
 EXIT CODE: 1 if any weapon's non-concrete main damage changed — that is the "Damage verbatim"
 law from `WEAPON_3WAY_SPLIT.md` and it is not a judgement call. Everything else is reported but
 does not fail, because a retrofit may legitimately change `Burst` cadence or add a projectile.
@@ -55,7 +63,7 @@ def snapshot(root: str, with_concrete: bool) -> dict[str, dict]:
         node = rs.resolve_weapon(name)
         if node is None:
             continue
-        total, mains = 0.0, []
+        total, mains, shape = 0.0, [], []
         for wh in node.children:
             if not wh.key.startswith("Warhead"):
                 continue
@@ -68,9 +76,16 @@ def snapshot(root: str, with_concrete: bool) -> dict[str, dict]:
             if d is not None and d > 0 and "Percentage" not in wh.key:
                 total += d
                 mains.append(int(d))
+                # The blast GEOMETRY. Damage says how much; this says where and over how long.
+                # `Ticks` is the expanding-shockwave count — `AreaDamageWarhead.cs` splits Damage
+                # ACROSS ticks (`perTickModifier = 100 / Ticks`), so dropping it preserves the sum
+                # and silently changes a 10-ring nuclear shockwave into one instantaneous blast.
+                shape.append("|".join(str(wh.get(k) or "-")
+                                      for k in ("Spread", "Falloff", "Ticks", "MaxRadius")))
         out[name] = {
             "damage": total,
             "mains": sorted(mains, reverse=True),
+            "shape": sorted(shape),
             "Range": node.get("Range"),
             "ReloadDelay": node.get("ReloadDelay"),
             "Burst": node.get("Burst"),
@@ -95,6 +110,8 @@ def compare(base: dict, head: dict) -> tuple[dict, list, list]:
         for k in SOFT:
             if (b[k] or "") != (h[k] or ""):
                 diffs.append([k, b[k], h[k]])
+        if b["shape"] != h["shape"]:
+            diffs.append(["blast_shape", " ; ".join(b["shape"]), " ; ".join(h["shape"])])
         if b["report"] and not h["report"]:
             diffs.append(["Report", "yes", "LOST"])
         if diffs:
@@ -149,7 +166,7 @@ def main() -> int:
     else:
         print("\n## ✅ main damage preserved on every weapon")
 
-    for kind in SOFT + ("Report",):
+    for kind in SOFT + ("Report", "blast_shape"):
         ws = by_kind.get(kind)
         if not ws:
             continue
