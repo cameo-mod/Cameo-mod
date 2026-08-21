@@ -12,6 +12,23 @@
 - Built and ran `tools/audit/audit_inline_effects.py`: 665 concrete weapons carry
   815 inline effect nodes; 628 non-exempt (superweapons auto-detected) remain.
 
+## 2026-08-22 — docs/audit: reconcile `doc_claims` and regenerate `latest/` evidence
+
+- Ran `tools/audit/run_all.sh` and fixed the `audit_doc_claims` mismatches:
+  - `shield_versus_mean` 186.791, `shield_hp_factor` 0.535357,
+  - `multi_main_fired_weapons` 927, `w24_multi_main_fed` 380,
+  - `plating_families` 37.
+- Updated `docs/audit/doc_claims.yaml` and the listed design docs
+  (`BALANCE_PROGRAM_PLAN`, `PHYSICAL_STATE_SYSTEM`, `PSEUDO_ARMOR_AND_INTEGRITY`,
+  `SUPERWEAPON_LAYER_DAMAGE`, `PLATING_COMPOSITION_REFINEMENT`, `DESIGN.md`).
+- Appended the 5 missing blend families to the plating matrix
+  (`CannonNuke`, `MissileNuke`, `MissileQuantum`, `MissileTesla`, `MissileThermobaric`).
+- Regenerated `docs/audit/latest/*.md` and `docs/factions/MATRIX.md`,
+  converted all evidence to UTF-8 LF.
+- `python tools/audit/audit_doc_claims.py` is clean (16/16 green).
+- Boot-gated: menu loaded, no new exceptions.
+- Commit: `564089ef9`.
+
 ## 2026-08-22 — W24 A2: five nuclear/thermobaric weapons collapsed (boot-gated)
 
 - Converted five multi-main weapons to one damage warhead each, preserving per-shot totals:
