@@ -83,19 +83,24 @@ tkmbunkmg:
 	Warhead@Bullet_Light_Percentage:
 		Damage: 1
 HueyGun:
-	Inherits: ^FlakWeapon
-	Inherits@2: ^RA2Chaingun
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 7
 	Range: 4783
 	Report: mgun11.aud
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 1
 	Warhead@Bullet_Medium:
-		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		Damage: 1
+		Damage: 4000
+	Warhead@Bullet_Medium_Percentage:
+		Damage: 2
+	Warhead@Effect: CreateEffect
+		ImpactSounds: xplos.aud
+	Warhead@EffectAir: CreateEffect
+		Explosions: ra2_piffs
+		ExplosionPalette: ra2effect
+		ValidTargets: Air
+		ImpactSounds: xplos.aud
 HueyMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium

@@ -9,32 +9,18 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "600",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "2",
         "falloff": "100, 0",
         "spread": "300",
         "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
@@ -44,8 +30,9 @@
       "reloaddelay": "7",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^FlakWeapon",
-       "^RA2Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium_RA2"
       ],
       "warheads": [
        "^Warhead_Bullet_Medium"
