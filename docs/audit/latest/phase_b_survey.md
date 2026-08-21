@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 307
+Total concrete weapons on old families: 306
 Single old-family with new inherits (Phase B completion): 2
 Pure single old-family (mechanical Phase A candidates): 20
-Mixed old-family (Phase B maintainer sign-off): 285 in 212 groups
+Mixed old-family (Phase B maintainer sign-off): 284 in 212 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `AsianChemicalBombs` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | old: HeavyChemicalWeapon | HeavyChemicalWeapon=2000, HeavyChemicalWeaponPercentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, Effect=0, Cloud=0
@@ -245,10 +245,6 @@ Mixed old-family (Phase B maintainer sign-off): 285 in 212 groups
 - `NaxiBeetleLaser_elite` (ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to SmallArms
 - `NaxiTank2Laser` (ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to SmallArms
 
-### Chaingun, FlakWeapon, Grenade, SmallArms (2 weapons)
-- `ChainGunMH60` (ContentPacks\RedAlert\Allies\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, Chaingun=2000, ChaingunPercentage=1 | → collapse to SmallArms
-- `GDISniperRifle` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: SmallArms(8000) | SmallArms=8000, SmallArmsPercentage=4, Grenade=8000, GrenadeFriendlyFire=4000, GrenadePercentage=4, FlakWeapon=8000, FlakWeaponPercentage=4, Chaingun=8000, ChaingunPercentage=4, Effect=0 | → collapse to SmallArms
-
 ### FlakWeapon, Grenade, SmallArms, TankDestroyerCannon (2 weapons)
 - `PositronGrenade` (ContentPacks\StarCraft\Protoss\yaml\weapons.yaml) | dominant: SmallArms(8000) | SmallArms=8000, SmallArmsPercentage=1, FlakWeapon=8000, FlakWeaponPercentage=1, Grenade=8000, GrenadeFriendlyFire=4000, GrenadePercentage=1, CannonHE_Medium=8000, CannonHE_Medium_Percentage=1, TankDestroyerCannon=8000, TankDestroyerCannonPercentage=1, Effect=0, shrapnel=0 | → collapse to SmallArms
 - `VultureGrenade` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | dominant: SmallArms(4000) | SmallArms=4000, SmallArmsPercentage=2, FlakWeapon=4000, FlakWeaponPercentage=2, Grenade=4000, GrenadeFriendlyFire=2000, GrenadePercentage=2, CannonHE_Medium=4000, CannonHE_Medium_Percentage=2, TankDestroyerCannon=4000, TankDestroyerCannonPercentage=2, Effect=0 | → collapse to SmallArms
@@ -284,6 +280,9 @@ Mixed old-family (Phase B maintainer sign-off): 285 in 212 groups
 
 ### ArrowWeapon, MediumChemicalWeapon, SmallArms, SwordWeapon (1 weapons)
 - `MutaliskSpore` (ContentPacks\StarCraft\Zerg\yaml\weapons.yaml) | dominant: SwordWeapon(8000) | SwordWeapon=8000, SwordWeaponFriendlyFire=4000, SwordWeaponPercentage=4, MediumChemicalWeapon=8000, MediumChemicalWeaponPercentage=4, SmallArms=8000, SmallArmsPercentage=4, ArrowWeapon=8000, ArrowWeaponPercentage=4, Effect=0, shrapnel=0 | → collapse to SwordWeapon
+
+### Chaingun, FlakWeapon, Grenade, SmallArms (1 weapons)
+- `GDISniperRifle` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: SmallArms(8000) | SmallArms=8000, SmallArmsPercentage=4, Grenade=8000, GrenadeFriendlyFire=4000, GrenadePercentage=4, FlakWeapon=8000, FlakWeaponPercentage=4, Chaingun=8000, ChaingunPercentage=4, Effect=0 | → collapse to SmallArms
 
 ### Chaingun, FlakWeapon, HeavyAAWeapon, MediumMissile (1 weapons)
 - `autogun_tank` (ContentPacks\D2k\Ordos\yaml\weapons.yaml) | dominant: MissileAP_Heavy(2000) | MissileAP_Heavy=2000, MissileAP_Heavy_Percentage=1, CannonHE_Heavy=2000, CannonHE_Heavy_Percentage=1, HeavyAAWeapon=2000, HeavyAAWeaponPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, Chaingun=2000, ChaingunPercentage=1, Effect=0 | → collapse to MissileAP_Heavy

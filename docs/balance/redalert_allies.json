@@ -64,167 +64,71 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": null,
-        "spread": "50",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4",
+        "falloff": "100, 0",
+        "spread": "300",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3375",
       "reloaddelay": "6",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms",
-       "^Grenade",
-       "^FlakWeapon",
-       "^Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "ChainGunMH60",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "600",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": null,
-        "spread": "50",
-        "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "damage": "4",
+        "falloff": "100, 0",
+        "spread": "300",
+        "tag": "Bullet_Medium_Percentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3375",
       "reloaddelay": "6",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^SmallArms",
-       "^Grenade",
-       "^FlakWeapon",
-       "^Chaingun"
+       "^Warhead_Bullet_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Bullet_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "ChainGunMH60",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -97,41 +97,29 @@ HellfireCryo:
 		Range: 400
 
 ChainGunMH60:
-	Inherits: ^SmallArms
-	Inherits@2: ^Grenade
-	Inherits@3: ^FlakWeapon
-	Inherits@4: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 6
 	Range: 3375
 	Report: gun13.aud
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
+	Warhead@Bullet_Medium:
+		Damage: 8000
+	Warhead@Bullet_Medium_Percentage:
+		Damage: 4
+	Warhead@Effect: CreateEffect
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ValidTargets: Air
+		ImpactSounds: xplos.aud
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 
 AlliedTankDestroyerCannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium

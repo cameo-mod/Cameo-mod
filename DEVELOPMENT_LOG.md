@@ -1,5 +1,27 @@
 # Development Log
 
+## 2026-08-21 — ChainGunMH60 3-way split (boot-gated)
+
+- Converted `ChainGunMH60` in `mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml`
+  from the old full-stack `^SmallArms`/`^Grenade`/`^FlakWeapon`/`^Chaingun` pileup to the
+  single-family 3-way split:
+  - `Inherits@wh: ^Warhead_Bullet_Medium` with local `Damage: 8000` (4 × 2000 preserved)
+  - `Inherits@proj: ^Projectile_Bullet_Medium` (bullet/50CAL/contrail visuals preserved)
+  - `Inherits@fx: ^Effect_Bullet_Medium` (piffs/water/shield hit core preserved)
+- Preserved `ReloadDelay: 6`, `Range: 3375`, `Report: gun13.aud`, `ValidTargets: Ground, Water, Air`.
+- Inlined the resolved impact-sound/actor overrides and `EffectAir` locally so
+  `review_resolve_diff.py` reports the CreateEffect behaviour as unchanged.
+- `review_resolve_diff.py wt_baseline . ChainGunMH60` OK (behavioural invariants preserved).
+- `extract_stats.py` regenerated all ledgers; `audit_balance_drift` clean.
+- Updated `doc_claims.yaml` and `docs/design/BALANCE_PROGRAM_PLAN.md` W24 counts:
+  `multi_main_fired_weapons` 937 → 936; W24 pileup shape 202 → 201; broadcast
+  count 579 → 578; the four prose occurrences in BPP now read 936.
+- Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_doc_claims` 16/16 clean,
+  `audit_warhead_split` 949 (baseline 950, one fewer broadcast), `verify_generator_sync` drift 0.
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+- Skipped `GDISniperRifle` in the same `phase_b_survey` group because the file is currently
+  open in the maintainer IDE; will revisit when it is not live WIP.
+
 ## 2026-08-21 — Ixian D2K missile damage-total correction (boot-gated)
 
 - Re-verified `D2K_TowerMissile` and `mtank_pri2` against their pre-refactor
