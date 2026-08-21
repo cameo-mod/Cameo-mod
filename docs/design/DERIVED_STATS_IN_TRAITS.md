@@ -76,7 +76,7 @@ seeing turn rate entirely.
 
 ---
 
-## 3. Self-heal — needs one new Cameo trait, and the per-tick maths has a trap
+## 3. Self-heal — needs one new Cameo trait; the per-tick maths turned out fine
 
 `ChangesHealth` is `sealed` and internal in `OpenRA.Mods.Common`, so it cannot be subclassed; the
 answer is a small Cameo trait (`ScaledSelfHeal`) and a yaml key swap. Fully mod-side — no `engine/`.
@@ -89,18 +89,27 @@ answer is a small Cameo trait (`ScaledSelfHeal`) and a yaml key swap. Fully mod-
 2. **Per-tick application** — `Delay: 1`, with the rate divided by 25 to keep the *same* total rate.
    The maintainer's ask is a **resolution** change, not a rate change: `1% / 25` per tick over 25
    ticks is still 1% per second, just smooth instead of a step.
-3. **A remainder accumulator** — and this is the trap.
+3. **A floor of 1**, so a tick can never heal nothing — see the measurement below.
 
-⛔ **"Always heal at least the minimum per tick" and "keep the rate exact" CONFLICT for small units.**
-At 0.04% per tick a 100000-HP tank heals 40/tick — fine. A 1000-HP infantryman heals **0.4/tick**,
-which integer maths floors to **0** (heals never) or, with a hard minimum of 1, to **1 — two and a
-half times the intended rate**. Neither is acceptable, and infantry HP steps of 1000 mean this is the
-common case, not an edge case.
+✅ **RESOLVED BY MEASUREMENT — a plain floor is enough, no accumulator.** I argued for a remainder
+accumulator on the grounds that a 1000-HP infantryman heals 0.4/tick and would floor to 0. The
+maintainer pushed back — *"no infantry has 1000 HP, I think the lowest is the engineer and medic at
+5000"* — and the data says they are right and my example was imaginary. It came from DESIGN's 1000-HP
+*step*, not from any actual unit:
 
-**The fix is an accumulator, not a floor:** carry the fractional remainder between ticks and heal
-whenever it crosses 1. The 1000-HP infantryman then heals 1 every 2.5 ticks — *exactly* the specified
-rate, still visibly smooth, and never 0 forever. Recommend this over a hard minimum; a hard minimum
-should exist only as a safety net for a rate that would otherwise round to literally never.
+    actors carrying ChangesHealth@SelfHealing        1043
+    MINIMUM HP among them                            5000   (spies, attack dogs, yuri_clone)
+    median HP among them                           67 500
+    self-healers below 1 hp/tick at 0.04%               0   <-- none. lowest is 2.00/tick
+
+So plain integer per-tick maths is already exact for every unit that self-heals, and a **floor of 1**
+costs nothing because it never fires. Keep the floor anyway: it is the guard rail for the day someone
+adds a sub-2500-HP self-healer, and it makes "never heals" structurally impossible.
+
+⚠ The floor DOES over-heal if a self-healer below 2500 HP is ever added (at 2500 HP the rate is
+exactly 1.00/tick — that is the break-even). If the roster ever goes below it, revisit the
+accumulator; do not silently accept a unit healing at up to 2.5x its specified rate. An
+`audit_stat_formulas` check on `min(HP) >= 2500 for self-healers` would catch it mechanically.
 
 ---
 
@@ -109,7 +118,7 @@ should exist only as a safety net for a rate that would otherwise round to liter
 `GrantsShield` is already Cameo and already percentage-of-max-HP. It needs exactly what self-heal
 needs, minus the scaling that is already there:
 
-- `RegenInterval: 25` → per tick, rate ÷ 25, same accumulator;
+- `RegenInterval: 25` → per tick, rate ÷ 25, same floor-of-1;
 - basis points, for the same 0.04% reason;
 - **the ramp**, copied from `ArmorPlating.RampTicks` — and `ArmorPlating`'s own `[Desc]` already
   prescribes **250 for shields**, so the number is chosen, just not wired;
@@ -129,14 +138,13 @@ verdict as turn rate: **generate it into yaml.** Static value, no runtime input,
 
 ## 6. Recommended order
 
-1. **`ScaledSelfHeal`** (new Cameo trait): basis points + per-tick + accumulator + ramp. Nothing else
-   depends on it and it proves the accumulator.
+1. **`ScaledSelfHeal`** (new Cameo trait): basis points + per-tick + floor + ramp.
 2. **`GrantsShield`**: same three changes on a trait we already own.
 3. **Generator pass** for the static values — turn rates (all four cases) and repair rate — plus a
    `doc_claims` entry so drift is caught.
 4. **Then the weapon half**, `UNIFIED_AREADAMAGE_WARHEAD.md` — same principle, much larger blast
    radius (3243 yaml nodes), and it shares the basis-point unit with this work. Do it after the
-   accumulator pattern is proven here on something small.
+   per-tick + basis-point pattern is proven here on something small.
 
 ⚠ Every one of these changes what units actually do in play. Each needs `extract_stats` re-run, the
 ledger committed WITH the yaml, and a boot gate — and the self-heal/shield changes are **balance

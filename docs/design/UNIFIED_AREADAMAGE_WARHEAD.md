@@ -123,6 +123,13 @@ a weapon that is good against concrete *buildings* is good against concrete *sla
 | `DamagesConcrete` warheads in templates | 75 |
 | **total yaml nodes deleted** | **3243** |
 
+⛔ **EVERY pure concrete warhead is DELETED, not kept alongside** (maintainer: *"you need to remove any
+pure concrete damage warheads now because it's all included into the main area damage warhead right?
+so no more duplicates right?"* — yes). A surviving `Warhead@Concrete: DamagesConcrete` next to a folded
+`AreaDamage` would hit the slab twice. `audit_weapon_identity` and `review_batch_diff` both run per
+batch, and a leftover is exactly the kind of double-application that neither the boot gate nor a
+damage-total check would flag.
+
 It also halves the `multi_main_fired_weapons` accounting problem: a percentage twin is a second
 `Warhead@` node on 1235 weapons.
 
@@ -144,10 +151,11 @@ unrelated to main damage (sampled ratios `oHMG` 1:1, `GoliathRockets_AA` 40:1, `
 `SCUDNUKE` 300:1), so routing full damage at 1:1 makes slabs melt unless `BuildableTerrainLayer`'s
 per-cell health is raised to match.
 
-### ⭐ RULED: `BuildableTerrainLayer.MaxStrength` 9000 → **1 800 000** (200×)
+### ⭐ RULED: `BuildableTerrainLayer.MaxStrength` 9000 → **6 000 000**
 
 `MaxStrength` is currently the engine default 9000 — `mods/cameo/rules/world.yaml:1056` declares
-`BuildableTerrainLayer:` with no override at all. Maintainer 2026-08-19: *"make it a nice 200x"*.
+`BuildableTerrainLayer:` with no override at all. Maintainer 2026-08-19 asked first for 200x, then *"make it a nice 2 million"* — and the
+percentage term below rules out both.
 
 **Two measurements, and they disagree — which is why 200 is better than either.**
 
@@ -166,18 +174,39 @@ because **the fold also widens the attacker pool**:
 | have a `Concrete` Versus row, so damage slabs AFTER | **1987** |
 | **gain the ability** | **+483** (×1.32) |
 
-So per-shot toughness and the number of things shooting must be weighed together:
+⛔ **AND THEN THE PERCENTAGE HALF CHANGES THE ANSWER AGAIN.** Maintainer: *"don't forget the percentage
+damage is still there so at that high value they should be kind of quickly destroyed from the
+percentage values alone right?"* — correct, and it is decisive. Median effective percentage vs
+`Concrete` is **0.9%**, and a percentage is a fraction of MAX strength, so it does not care how big
+that maximum is:
 
-    slab HP     9 000 (today)   ->  median shots to destroy   90
-    slab HP 1 800 000 (200x)    ->  median shots to destroy  125     = 1.39x tougher per shot
-    but 1.32x more weapons can hurt concrete
-    NET in aggregate  1.39 / 1.32  =  ~1.05x            <- within 5% of today
+    slab HP       flat-only weapon      weapon carrying percentage
+     1 800 000        143 shots                  62
+     2 000 000        159                        65
+     3 000 000        238                        76
+     6 000 000        476                        90      <-- today's 90
+    10 000 000        794                        97
+    20 000 000       1587                       104
+    ceiling             --                      111      <-- UNREACHABLE at any HP
 
-**200× is the right number, and for a better reason than roundness**: it holds aggregate parity once
-the 483 newly-capable weapons are counted, which a pure per-shot calibration (144–166×) would miss and
-end up making concrete *softer* overall. The quartile spread 68…352 is the noise the 131 hand-set
-values encode; after the fold it collapses into one honest number and weapons stop disagreeing about
-what "damaging concrete" means.
+**Percentage damage CAPS slab durability no matter how high the HP goes.** At 0.9% per shot nothing
+can ever take more than ~111 median shots, so past ~3M more HP buys almost nothing.
+
+That kills 200× (1 800 000): with percentage applied it gives **62 shots — 1.4× SOFTER than today's
+90** — and 483 more weapons can hit it on top. The exact opposite of "really tanky".
+
+**6 000 000 is the number.** It is the parity point exactly
+(`90 × 12600 / (1 − 90 × 0.009) = 5 968 421`) and it produces the design the ruling was reaching for:
+
+- a weapon with **no** percentage half needs **476 shots** — concrete really is a fortification;
+- a weapon **carrying** percentage clears it in **90** — exactly today's feel.
+
+Percentage becomes *the* answer to concrete and flat damage alone effectively cannot break it, so the
+rock-paper-scissors is structural rather than tuned. The quartile spread 68…352 is the noise the 131
+hand-set values encode; after the fold it collapses into one honest number.
+
+⚠ **The percentage half MUST therefore apply to slabs**, as a fraction of `MaxStrength`. If it stays
+flat-only, 6 000 000 means 476 shots for every weapon and concrete becomes near-immortal.
 
 ⚠ Still a balance change: `world.yaml` + boot gate + a play check on D2k concrete-heavy maps, where
 slab durability is a real strategic layer rather than a detail.
