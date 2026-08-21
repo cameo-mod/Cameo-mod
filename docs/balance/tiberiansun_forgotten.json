@@ -9527,21 +9527,21 @@
        },
        {
         "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "400",
+        "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
+        "falloff": "100, 50, 33, 25, 20, 0",
+        "spread": "200",
+        "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5566",
       "reloaddelay": "24",
@@ -9549,13 +9549,14 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
+       "^Warhead_Chemical_Light",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
-       "^TSCannonEffect",
-       "^LightChemicalWeapon"
+       "^TSCannonEffect"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonHE_Medium",
+       "^Warhead_Chemical_Light"
       ],
       "weapon": "TS70mmChem",
       "weapon_class_source": "template"

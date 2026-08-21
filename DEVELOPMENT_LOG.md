@@ -1,5 +1,24 @@
 # Development Log
 
+## 2026-08-21 — TS70mmChem 3-way split (boot-gated)
+
+- Converted `TS70mmChem` in `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml`
+  from the old full-stack `^LightChemicalWeapon` to a proper 3-way split:
+  - `Inherits@wh: ^Warhead_CannonHE_Medium`
+  - `Inherits@wh2: ^Warhead_Chemical_Light`
+  - `Inherits@proj: ^Projectile_Shell_Medium`
+  - `Inherits@fx: ^Effect_CannonHE_Medium`
+  - `Inherits@fx2: ^TSCannonEffect`
+- Preserved the per-actor projectile speed (`Bullet` `Speed: 3500`), report (`flamer2.aud`),
+  chemical warhead damage (4000 CannonHE + 2000 Chemical), percentage damage, `TiberiumDeath`
+  kill type, `chemball` explosion, `ShieldHit` duration 6, `Concrete: 100`, and bullet-style
+  `ShieldHitEffect` sounds by inlining the local overrides that the old full-stack used to supply.
+- `review_resolve_diff.py wt_baseline . TS70mmChem` OK.
+- `extract_stats.py` regenerated ledgers; `audit_balance_drift` clean.
+- Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split`
+  947 (baseline 950), `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+
 ## 2026-08-21 — SteelHoverMissile 3-way split (boot-gated)
 
 - Converted `SteelHoverMissile` in `mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml`

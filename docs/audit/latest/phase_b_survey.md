@@ -1,15 +1,14 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 305
+Total concrete weapons on old families: 304
 Single old-family with new inherits (Phase B completion): 2
-Pure single old-family (mechanical Phase A candidates): 19
+Pure single old-family (mechanical Phase A candidates): 18
 Mixed old-family (Phase B maintainer sign-off): 284 in 212 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `AsianChemicalBombs` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | old: HeavyChemicalWeapon | HeavyChemicalWeapon=2000, HeavyChemicalWeaponPercentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, Effect=0, Cloud=0
 - `HammerheadArtillery` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: HeavyBomb | Demolition_Light=11111, Demolition_Light_Percentage=11, HeavyBomb=11111, HeavyBombPercentage=11, CannonHE_Medium=11111, CannonHE_Medium_Percentage=11, Effect1=0, Effect2=0
-- `SteelHoverMissile` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: ArrowWeapon | ArrowWeapon=4000, ArrowWeaponPercentage=2, MissileAP_Light=4000, MissileAP_Light_Percentage=2
 - `SteelMakoGun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Demolition_Light_Percentage=1, Railgun_Heavy=2000, Railgun_Heavy_Percentage=1, CannonHE_Medium=2000, CannonHE_Medium_Percentage=1, Effect=0
 - `Future_Cryocopter_Rocket` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | old: Grenade | Grenade=16000, GrenadeFriendlyFire=8000, GrenadePercentage=8, MissileAP_Heavy=16000, MissileAP_Heavy_Percentage=8, MissileAP_Medium=16000, MissileAP_Medium_Percentage=8, PhysicalStateCryo1=0, PhysicalStateCryo2=0, PhysicalStateCryo3=0, Effect=0, EffectAir=0
 - `RA2CRM60H` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, CannonHE_Heavy_Percentage=1, Bullet_Medium=2000, Bullet_Medium_Percentage=1, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
