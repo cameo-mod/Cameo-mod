@@ -481,6 +481,21 @@ it actually needs either was not reached for or does not exist:
 the diff only converted `^LightChemicalWeapon` → `^Warhead_Chemical_Light`. The outcome is still
 wrong, but the fix is a collapse, not a revert.
 
+### ⚠ CONSEQUENCE OF THE FIX — the broadcast ratchet is RED at 944 vs baseline 939, and that is CORRECT
+
+Restoring the seven totals made each weapon's mains EQUAL again, which is the guard's
+"every MAIN identical" fingerprint. Exactly five weapons re-entered the count:
+`NuclearMaverick` (20000+20000), `MonsterTank120mm` (40000+40000), `TorpTubeThermobaric`
+(16000+16000), and the two 3-main thermobarics (14000x3, 40000x3).
+
+⛔ **The baseline 939 was partly earned by the defect, not by collapses.** `4185340e5` lowered
+`BROADCAST_BASELINE` 941 → 939 in the same commit that scaled the nuclear mains to 10% — and
+under-damaging a weapon drops it out of the broadcast count just as effectively as collapsing it.
+Two of those two points were bought with the bug. **Do NOT raise the baseline back to 944** (the
+ratchet may only fall); the sanctioned fix is the guard's own second option — *collapse the weapon
+to one main warhead* — which is exactly A2 below. The red clears when A2 lands, and it should stay
+red until then, because it is now telling the truth about five weapons that really are broadcasts.
+
 ### ⬜ OPEN — template proliferation
 
 The batch created **40 new templates, 27 of which serve exactly ONE weapon**
