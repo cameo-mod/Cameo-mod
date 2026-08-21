@@ -81,11 +81,14 @@ def main():
         else:
             result.append(ln)
             i += 1
-    F.write_text(newline.join(result), encoding="utf-8")
-    print(f"spliced {len(replaced)} blocks: {', '.join(replaced)}")
     missing = sorted(set(gen) - set(replaced))
     if missing:
-        print("WARNING: generated block not present in file (NOT spliced):", missing)
+        for m in missing:
+            result.append("")
+            result.extend(gen[m])
+        replaced += missing
+    F.write_text(newline.join(result), encoding="utf-8")
+    print(f"spliced {len(replaced)} blocks: {', '.join(replaced)}")
 
 
 if __name__ == "__main__":

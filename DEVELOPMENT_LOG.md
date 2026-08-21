@@ -2731,5 +2731,11 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 
 - Boot-gate: reached MenuPostProcessEffect.PostWorldLoaded; no new exception-*.log.
 
+## 2026-08-22 — W24 A1b: generate five new blend families
 
-
+- Added CannonNuke, MissileNuke, MissileQuantum, MissileTesla, MissileThermobaric (L/M/H) to gen_weapon_template.py BLEND_FAMILIES, PHYSICS_RANK, FAMILY_DAMAGE_TYPES, FAMILY_INTEGRITY_SCALE.
+- Expanded Nuclear in WEAPONS to L/M/H/Super so it can be a blend parent while remaining HAND_TUNED (Nuclear_Super still hand-authored, not emitted).
+- Parent choices: CannonNuke = Nuclear + CannonHE; MissileNuke = Nuclear + MissileAP; MissileTesla = Tesla + MissileAP; MissileQuantum = Railgun + Laser + Tesla + 3xMissileAP; MissileThermobaric = Demolition + Concussion + Flame + 3xMissileHE.
+- Extended splice_templates.py to append missing ^Warhead_* blocks at end of weapons.yaml.
+- Ran splice_templates --all: 112 blocks (15 new) spliced/ appended; verify_generator_sync drift 0; extract_stats regenerated, 0 drift; find_empty_warhead 0; find_orphan_old_keys 0 real; audit_warhead_split 944 vs baseline 939 (expected red, unchanged).
+- Boot-gate reached MenuPostProcessEffect.PostWorldLoaded; no new exception-*.log.

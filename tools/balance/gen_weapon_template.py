@@ -139,7 +139,7 @@ WEAPONS = {
     "Tesla":       ([("INF", "VEH"), "BLD", "AIR"],     "heavy", False, L3 + ["Super"]),  # 4-tier (L/M/H/Super); was TeslaCharged at Super
     # Nuclear = BUILDING-first heavy (levels structures+heavy units+air, weak vs inf) — distinct
     # from Chemical/Tesla (inf+veh). Super tier (step 3, WC 1.5). Maintainer 2026-08-02.
-    "Nuclear":     (["BLD", "VEH", "AIR", "INF"],       "heavy", True,  ["Super"]),
+    "Nuclear":     (["BLD", "VEH", "AIR", "INF"],       "heavy", True,  L3 + ["Super"]),
 }
 
 
@@ -265,11 +265,11 @@ PHYSICS_RANK = {
     # blended energy — part field-coupling, part thermal
     "Waveforce": 0.70, "Plasma": 0.68,
     # exotic / field-adjacent
-    "Sonic": 0.60, "Magic": 0.58, "Inferno": 0.57, "Nuclear": 0.56,
+    "Sonic": 0.60, "Magic": 0.58, "Inferno": 0.57, "Nuclear": 0.56, "MissileQuantum": 0.57, "MissileTesla": 0.66,
     # Inferno = Flame×Prism heatray: thermo-led but still some field-coupling.
     # thermal / chemical — a shield stops heat and reagents well; little field coupling
-    "CannonFire": 0.52, "MissileFire": 0.52, "Flame": 0.50, "CannonChem": 0.50,
-    "MissileChem": 0.50, "Chemical": 0.48, "Toxic": 0.46, "Thermobaric": 0.44,
+    "CannonFire": 0.52, "MissileFire": 0.52, "Flame": 0.50, "CannonChem": 0.50, "CannonNuke": 0.45, "MissileNuke": 0.44,
+    "MissileChem": 0.50, "Chemical": 0.48, "Toxic": 0.46, "Thermobaric": 0.44, "MissileThermobaric": 0.39,
     # kinetic / explosive — momentum is exactly what a shield is designed for
     "Flak": 0.38, "Concussion": 0.36, "Demolition": 0.35, "Bullet": 0.34,
     "MissileAA": 0.34, "CannonHE": 0.33, "MissileHE": 0.33, "CannonAP": 0.32,
@@ -1513,6 +1513,8 @@ FAMILY_INTEGRITY_SCALE = {
     "Tesla": 100,                          # pure Tesla = full drain (the EMP-disable specialist)
     "Storm": 50,                          # Tesla+Magic -> 1/2
     "Quantum": 33,                        # Railgun+Laser+Tesla -> 1/3
+    "MissileTesla": 50,                   # Tesla + MissileAP -> 1/2
+    "MissileQuantum": 17,                 # (Railgun+Laser+Tesla) + 3xMissileAP -> 1/6 Tesla
     # ⚠ `Waveforce: 20` DELETED 2026-08-16 (maintainer order) — it could never fire.
     #
     # The drain rate is `(1 if the damage carries the `Tesla` type else 0) + IntegrityScale/100`
@@ -1540,6 +1542,11 @@ FAMILY_DAMAGE_TYPES = {
     "Tesla":      "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
     "Quantum":    "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
     "Inferno":    "Prone75Percent, TriggerProne, FireDeath, Incendiary",
+    "CannonNuke":    "Prone75Percent, TriggerProne, FireDeath, Incendiary",
+    "MissileNuke":    "Prone75Percent, TriggerProne, FireDeath, Incendiary",
+    "MissileTesla":   "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
+    "MissileQuantum": "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
+    "MissileThermobaric": "Prone75Percent, TriggerProne, FireDeath, Incendiary",
     "CannonChem": "Prone75Percent, TriggerProne, TiberiumDeath",
     "MissileChem":"Prone75Percent, TriggerProne, TiberiumDeath",
     # Storm is handled at its own call site (Prone100Percent + Tesla).
@@ -1665,6 +1672,14 @@ BLEND_FAMILIES = {
     # Cryo = a Laser×Prism coldray: coherent energy delivery that freezes. Mostly energy-field
     # coupling, some thermal load, and a small kinetic share from cryogenic embrittlement.
     # Air-capable (Laser parent), thin spread, negative Temperature scaling.
+    # Nuclear delivery blends (A1b): the nuclear family is Super-only, so expanding it to L/M/H
+    # in WEAPONS makes it available as a blend parent while keeping it hand-tuned (not emitted).
+    "CannonNuke":  (["Nuclear", "CannonHE"], {}, L3),
+    "MissileNuke":  (["Nuclear", "MissileAP"], {}, L3),
+    # Tesla/Quantum thermobaric missile blends (A1b). Expanded to primitives for the generator.
+    "MissileTesla":   (["Tesla", "MissileAP"], {}, L3),
+    "MissileQuantum": (["Railgun", "Laser", "Tesla"] + ["MissileAP"] * 3, {"Temperature": _m(0.125)}, L3),
+    "MissileThermobaric": (["Demolition", "Concussion", "Flame"] + ["MissileHE"] * 3, {"Temperature": _m(0.17)}, L3),
     "Cryo": (["Laser", "Prism"], {}, L3),
 }
 # Fixed emission order for a blend (it has no single light/heavy direction).

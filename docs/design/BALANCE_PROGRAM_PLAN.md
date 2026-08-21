@@ -568,7 +568,7 @@ delivery and price number measured before it lands is measuring the wrong object
 |---|---|---|
 | A0 | **Three new guards first**: family-vs-name mismatch, collapse-preserves-total, template-with-one-user. Cheap, and they make the rest self-checking. | tests green |
 | A1a | Rename the 4 element-first blends to delivery-first (12 templates, 6 files) | ✅ DONE — CannonFire/MissileFire/CannonChem/MissileChem live, safe_rename.py preserves case, splice_templates.py runs full generator and preserves CRLF, verify_generator_sync drift 0, extract_stats --check clean |
-| A1b | Generate MissileNuke / CannonNuke / MissileQuantum / MissileTesla / MissileThermobaric (L/M/H) via gen_weapon_template.py | 🔵 IN PROGRESS |
+| A1b | Generate MissileNuke / CannonNuke / MissileQuantum / MissileTesla / MissileThermobaric (L/M/H) via gen_weapon_template.py | ✅ DONE — 15 new ^Warhead_* blocks live, verify_generator_sync drift 0, extract_stats regenerated, boot-gated |
 | A2 | Collapse the 7 nuclear weapons onto A1b's families — ONE main each, total preserved | invariant diff = 0 |
 | A3 | Fix the three misclassifications onto templates that already exist (`CannonChem` ×2, `Plasma` ×1) | invariant diff = 0 |
 | A4 | Rename `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1` + its condition, then the Su-57 and MonsterTank weapon pairs per ruling 2 | `safe_rename.py`, fluent keys |
