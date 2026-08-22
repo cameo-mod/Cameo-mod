@@ -326,10 +326,13 @@ def delivery_weight(ratio: float | None, curve, meter_exposure: float,
     return max(0.0, min(1.0, meter_exposure * delivery(ratio, curve) / reference))
 
 
-# How much faster than the bar a binding may be charged for. A weapon that fills the meter
-# SPEED_CEILING x sooner than the bar pays the full surcharge; beyond that it is not charged
-# more, so a pathological Scale cannot run the price away.
-SPEED_CEILING = 4.0
+# ⛔ NO CEILING, BY RULING (maintainer 2026-08-22: *"clamps are really a horrible thing and
+# break balance so there should never be any clamps"*). A first version of this capped the
+# weight at 4.0 -- and `SheridanMissilesCryo` already sat at 4.46x, so the cap was ALREADY
+# hiding an imbalance on the day it was written. That is exactly the failure this function
+# replaced: the old `delivery_weight` clamped at 1.0 and made every binding from Scale ~67
+# upwards cost the same. A price that keeps rising is visible and can be argued with; a
+# clamped one silently stops charging and looks correct.
 
 
 def speed_weight(ratio: float | None, meter_exposure: float) -> float:
@@ -360,10 +363,11 @@ def speed_weight(ratio: float | None, meter_exposure: float) -> float:
         ratio 0.25 (Scale 200) -> 3.00  ratio 0.20 (Scale 250) -> 3.75
 
     Exposure still gates it: a meter no target carries delivers nothing and costs nothing.
+    There is NO upper clamp -- see the note above SPEED_CEILING's removal.
     """
     if ratio is None or ratio <= 0 or meter_exposure <= 0:
         return 0.0
-    return max(0.0, min(SPEED_CEILING, meter_exposure * FULL_EFFECT_BAR / ratio))
+    return max(0.0, meter_exposure * FULL_EFFECT_BAR / ratio)
 
 
 # --------------------------------------------------------------------------- #
