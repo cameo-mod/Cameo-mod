@@ -59,6 +59,7 @@ options-observer-stats =
     .promotions = Promotions
     .build-order = Build Order
     .units-produced = Units Produced
+    .economy-damage = Economy Damage
     .earnings-graph = Earnings (graph)
     .army-graph = Army (graph)
 

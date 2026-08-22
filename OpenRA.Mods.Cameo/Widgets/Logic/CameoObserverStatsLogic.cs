@@ -24,9 +24,9 @@ using OpenRA.Widgets;
 
 namespace OpenRA.Mods.Cameo.Widgets.Logic
 {
-	public enum CameoObserverStatsPanel { None, Minimal, Basic, Economy, Production, SupportPowers, Combat, Army, Upgrades, Promotions, BuildOrder, UnitsProduced, Graph, ArmyGraph }
+	public enum CameoObserverStatsPanel { None, Minimal, Basic, Economy, Production, SupportPowers, Combat, Army, Upgrades, Promotions, BuildOrder, UnitsProduced, EconomyDamage, Graph, ArmyGraph }
 
-	[ChromeLogicArgsHotkeys("StatisticsMinimalKey", "StatisticsBasicKey", "StatisticsEconomyKey", "StatisticsProductionKey", "StatisticsSupportPowersKey", "StatisticsCombatKey", "StatisticsArmyKey", "StatisticsUpgradesKey", "StatisticsPromotionsKey", "StatisticsBuildOrderKey", "StatisticsUnitsProducedKey", "StatisticsGraphKey",
+	[ChromeLogicArgsHotkeys("StatisticsMinimalKey", "StatisticsBasicKey", "StatisticsEconomyKey", "StatisticsProductionKey", "StatisticsSupportPowersKey", "StatisticsCombatKey", "StatisticsArmyKey", "StatisticsUpgradesKey", "StatisticsPromotionsKey", "StatisticsBuildOrderKey", "StatisticsUnitsProducedKey", "StatisticsEconomyDamageKey", "StatisticsGraphKey",
 		"StatisticsArmyGraphKey")]
 	public class CameoObserverStatsLogic : ChromeLogic
 	{
@@ -67,6 +67,9 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		const string UnitsProduced = "options-observer-stats.units-produced";
 
 		[FluentReference]
+		const string EconomyDamage = "options-observer-stats.economy-damage";
+
+		[FluentReference]
 		const string EarningsGraph = "options-observer-stats.earnings-graph";
 
 		[FluentReference]
@@ -89,6 +92,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		readonly ContainerWidget promotionsHeaders;
 		readonly ContainerWidget buildOrderHeaders;
 		readonly ContainerWidget unitsProducedHeaders;
+		readonly ContainerWidget economyDamageHeaders;
 		readonly ScrollPanelWidget playerStatsPanel;
 		readonly ScrollItemWidget minimalPlayerTemplate;
 		readonly ScrollItemWidget basicPlayerTemplate;
@@ -100,6 +104,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		readonly ScrollItemWidget promotionsPlayerTemplate;
 		readonly ScrollItemWidget buildOrderPlayerTemplate;
 		readonly ScrollItemWidget unitsProducedPlayerTemplate;
+		readonly ScrollItemWidget economyDamagePlayerTemplate;
 		readonly ScrollItemWidget combatPlayerTemplate;
 		readonly ContainerWidget incomeGraphContainer;
 		readonly ContainerWidget armyValueGraphContainer;
@@ -141,6 +146,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			promotionsHeaders = widget.Get<ContainerWidget>("PROMOTIONS_HEADERS");
 			buildOrderHeaders = widget.Get<ContainerWidget>("BUILD_ORDER_HEADERS");
 			unitsProducedHeaders = widget.Get<ContainerWidget>("UNITS_PRODUCED_HEADERS");
+			economyDamageHeaders = widget.Get<ContainerWidget>("ECONOMY_DAMAGE_HEADERS");
 			combatStatsHeaders = widget.Get<ContainerWidget>("COMBAT_STATS_HEADERS");
 
 			playerStatsPanel = widget.Get<ScrollPanelWidget>("PLAYER_STATS_PANEL");
@@ -162,6 +168,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				AdjustHeader(promotionsHeaders);
 				AdjustHeader(buildOrderHeaders);
 				AdjustHeader(unitsProducedHeaders);
+				AdjustHeader(economyDamageHeaders);
 			}
 
 			minimalPlayerTemplate = playerStatsPanel.Get<ScrollItemWidget>("MINIMAL_PLAYER_TEMPLATE");
@@ -174,6 +181,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			promotionsPlayerTemplate = playerStatsPanel.Get<ScrollItemWidget>("PROMOTIONS_PLAYER_TEMPLATE");
 			buildOrderPlayerTemplate = playerStatsPanel.Get<ScrollItemWidget>("BUILD_ORDER_PLAYER_TEMPLATE");
 			unitsProducedPlayerTemplate = playerStatsPanel.Get<ScrollItemWidget>("UNITS_PRODUCED_PLAYER_TEMPLATE");
+			economyDamagePlayerTemplate = playerStatsPanel.Get<ScrollItemWidget>("ECONOMY_DAMAGE_PLAYER_TEMPLATE");
 			combatPlayerTemplate = playerStatsPanel.Get<ScrollItemWidget>("COMBAT_PLAYER_TEMPLATE");
 
 			incomeGraphContainer = widget.Get<ContainerWidget>("INCOME_GRAPH_CONTAINER");
@@ -233,6 +241,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				CreateStatsOption(Promotions, CameoObserverStatsPanel.Promotions, promotionsPlayerTemplate, () => DisplayStats(PromotionsStats)),
 				CreateStatsOption(BuildOrder, CameoObserverStatsPanel.BuildOrder, buildOrderPlayerTemplate, () => DisplayStats(BuildOrderStats)),
 				CreateStatsOption(UnitsProduced, CameoObserverStatsPanel.UnitsProduced, unitsProducedPlayerTemplate, () => DisplayStats(UnitsProducedStats)),
+				CreateStatsOption(EconomyDamage, CameoObserverStatsPanel.EconomyDamage, economyDamagePlayerTemplate, () => DisplayStats(EconomyDamageStats)),
 				CreateStatsOption(EarningsGraph, CameoObserverStatsPanel.Graph, null, () => IncomeGraph()),
 				CreateStatsOption(ArmyGraph, CameoObserverStatsPanel.ArmyGraph, null, () => ArmyValueGraph()),
 			};
@@ -285,6 +294,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			promotionsHeaders.Visible = false;
 			buildOrderHeaders.Visible = false;
 			unitsProducedHeaders.Visible = false;
+			economyDamageHeaders.Visible = false;
 			combatStatsHeaders.Visible = false;
 
 			incomeGraphContainer.Visible = false;
@@ -507,6 +517,34 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 			// Without this the icon strip never receives mouse-over, so no tooltip appears.
 			template.IgnoreChildMouseOver = false;
+
+			return template;
+		}
+
+		ScrollItemWidget EconomyDamageStats(OpenRA.Player player)
+		{
+			economyDamageHeaders.Visible = true;
+			var template = SetupPlayerScrollItemWidget(economyDamagePlayerTemplate, player);
+
+			AddPlayerFlagAndName(template, player);
+
+			var playerName = template.Get<LabelWidget>("PLAYER");
+			playerName.GetColor = () => Color.White;
+
+			var playerColor = template.Get<ColorBlockWidget>("PLAYER_COLOR");
+			var playerGradient = template.Get<GradientColorBlockWidget>("PLAYER_GRADIENT");
+			SetupPlayerColor(player, template, playerColor, playerGradient);
+
+			// The four counters are named strings maintained by UpdatesCount@EconomyDamage on
+			// ^Refinery and on harvesters; a player who has neither yet simply has no key.
+			var counts = player.PlayerActor.Trait<CountManager>().Counts;
+			string Count(string type) => counts.TryGetValue(type, out var count)
+				? count.ToString(NumberFormatInfo.CurrentInfo) : "0";
+
+			template.Get<LabelWidget>("HARVESTERS_KILLED").GetText = () => Count("HarvesterKilled");
+			template.Get<LabelWidget>("HARVESTERS_LOST").GetText = () => Count("HarvesterLost");
+			template.Get<LabelWidget>("REFINERIES_KILLED").GetText = () => Count("RefineryKilled");
+			template.Get<LabelWidget>("REFINERIES_LOST").GetText = () => Count("RefineryLost");
 
 			return template;
 		}

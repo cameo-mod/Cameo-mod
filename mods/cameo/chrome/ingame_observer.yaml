@@ -308,10 +308,10 @@ Container@OBSERVER_WIDGETS:
 			ImageCollection: sidebar-observer
 			ImageName: observer-bottom
 		Image@REPLAY_PLAYER:
-			Logic: ReplayControlBarLogic
-			X: WINDOW_WIDTH - 250
+			Logic: ReplayControlBarLogicCameo
+			X: WINDOW_WIDTH - 387
 			Y: 297
-			Width: 238
+			Width: 375
 			Height: 40
 			Visible: false
 			ImageCollection: sidebar-observer
@@ -352,52 +352,96 @@ Container@OBSERVER_WIDGETS:
 							ImageCollection: music
 							ImageName: play
 				Button@BUTTON_SLOW:
-					X: 49
+					X: 45
 					Y: 8
-					Width: 42
+					Width: 38
 					Height: 22
 					Background: sidebar-button-observer
 					Key: ReplaySpeedSlow
-					TooltipText: button_observer_widgets_slow.tooltip
+					TooltipText: 50% speed
 					TooltipContainer: TOOLTIP_CONTAINER
 					VisualHeight: 0
-					Text: button_observer_widgets_slow.label
+					Text: 0.5x
 					Font: TinyBold
 				Button@BUTTON_REGULAR:
-					X: 95
+					X: 85
 					Y: 8
-					Width: 42
+					Width: 38
 					Height: 22
 					Background: sidebar-button-observer
 					Key: ReplaySpeedRegular
-					TooltipText: button_observer_widgets_regular.tooltip
+					TooltipText: 100% speed
 					TooltipContainer: TOOLTIP_CONTAINER
 					VisualHeight: 0
-					Text: button_observer_widgets_regular.label
+					Text: 1x
+					Font: TinyBold
+				Button@BUTTON_SPEED125:
+					X: 125
+					Y: 8
+					Width: 38
+					Height: 22
+					Background: sidebar-button-observer
+					TooltipText: 125% speed
+					TooltipContainer: TOOLTIP_CONTAINER
+					VisualHeight: 0
+					Text: 1.25x
+					Font: TinyBold
+				Button@BUTTON_SPEED133:
+					X: 165
+					Y: 8
+					Width: 38
+					Height: 22
+					Background: sidebar-button-observer
+					TooltipText: 133% speed
+					TooltipContainer: TOOLTIP_CONTAINER
+					VisualHeight: 0
+					Text: 1.33x
+					Font: TinyBold
+				Button@BUTTON_SPEED150:
+					X: 205
+					Y: 8
+					Width: 38
+					Height: 22
+					Background: sidebar-button-observer
+					TooltipText: 150% speed
+					TooltipContainer: TOOLTIP_CONTAINER
+					VisualHeight: 0
+					Text: 1.5x
 					Font: TinyBold
 				Button@BUTTON_FAST:
-					X: 141
+					X: 245
 					Y: 8
-					Width: 42
+					Width: 38
 					Height: 22
 					Background: sidebar-button-observer
 					Key: ReplaySpeedFast
-					TooltipText: button_observer_widgets_fast.tooltip
+					TooltipText: 200% speed
 					TooltipContainer: TOOLTIP_CONTAINER
 					VisualHeight: 0
-					Text: button_observer_widgets_fast.label
+					Text: 2x
+					Font: TinyBold
+				Button@BUTTON_FASTER:
+					X: 285
+					Y: 8
+					Width: 38
+					Height: 22
+					Background: sidebar-button-observer
+					TooltipText: 500% speed
+					TooltipContainer: TOOLTIP_CONTAINER
+					VisualHeight: 0
+					Text: 5x
 					Font: TinyBold
 				Button@BUTTON_MAXIMUM:
-					X: 187
+					X: 325
 					Y: 8
-					Width: 42
+					Width: 38
 					Height: 22
 					Background: sidebar-button-observer
 					Key: ReplaySpeedMax
-					TooltipText: button_observer_widgets_maximum.tooltip
+					TooltipText: Maximum speed
 					TooltipContainer: TOOLTIP_CONTAINER
 					VisualHeight: 0
-					Text: button_observer_widgets_maximum.label
+					Text: MAX
 					Font: TinyBold
 		Container@INGAME_OBSERVERSTATS_BG:
 			Logic: CameoObserverStatsLogic
@@ -832,6 +876,66 @@ Container@OBSERVER_WIDGETS:
 									Height: PARENT_HEIGHT
 									Font: Bold
 									Text: Upgrades
+									Shadow: True
+						Container@ECONOMY_DAMAGE_HEADERS:
+							X: 0
+							Y: 0
+							Width: 480
+							Height: PARENT_HEIGHT
+							Children:
+								ColorBlock@HEADER_COLOR:
+									X: 0
+									Y: 0
+									Color: 00000090
+									Width: PARENT_WIDTH - 200
+									Height: PARENT_HEIGHT
+								GradientColorBlock@HEADER_GRADIENT:
+									X: PARENT_WIDTH - 200
+									Y: 0
+									TopLeftColor: 00000090
+									BottomLeftColor: 00000090
+									Width: 200
+									Height: PARENT_HEIGHT
+								Label@PLAYER_HEADER:
+									X: 40
+									Y: 0
+									Width: 120
+									Height: PARENT_HEIGHT
+									Font: Bold
+									Text: Player
+									Align: Left
+									Shadow: True
+								Label@HARVESTERS_KILLED_HEADER:
+									X: 155
+									Y: 0
+									Width: 80
+									Height: PARENT_HEIGHT
+									Font: Bold
+									Text: Harv Killed
+									Shadow: True
+								Label@HARVESTERS_LOST_HEADER:
+									X: 235
+									Y: 0
+									Width: 80
+									Height: PARENT_HEIGHT
+									Font: Bold
+									Text: Harv Lost
+									Shadow: True
+								Label@REFINERIES_KILLED_HEADER:
+									X: 315
+									Y: 0
+									Width: 80
+									Height: PARENT_HEIGHT
+									Font: Bold
+									Text: Ref Killed
+									Shadow: True
+								Label@REFINERIES_LOST_HEADER:
+									X: 395
+									Y: 0
+									Width: 80
+									Height: PARENT_HEIGHT
+									Font: Bold
+									Text: Ref Lost
 									Shadow: True
 						Container@BUILD_ORDER_HEADERS:
 							X: 0
@@ -1499,6 +1603,67 @@ Container@OBSERVER_WIDGETS:
 									Width: 0
 									Height: PARENT_HEIGHT
 									TooltipContainer: TOOLTIP_CONTAINER
+						ScrollItem@ECONOMY_DAMAGE_PLAYER_TEMPLATE:
+							X: 0
+							Y: 0
+							Width: 480
+							Height: 24
+							Background: scrollitem-nohover
+							Children:
+								ColorBlock@PLAYER_COLOR:
+									X: 0
+									Y: 0
+									Width: PARENT_WIDTH - 200
+									Height: PARENT_HEIGHT
+								GradientColorBlock@PLAYER_GRADIENT:
+									X: PARENT_WIDTH - 200
+									Y: 0
+									Width: 200
+									Height: PARENT_HEIGHT
+								Image@FLAG:
+									X: 5
+									Y: 4
+									Width: 35
+									Height: PARENT_HEIGHT - 4
+									ImageName: random
+									ImageCollection: flags
+								LabelWithTooltip@PLAYER:
+									X: 40
+									Y: 0
+									Width: 120
+									Height: PARENT_HEIGHT
+									Font: Bold
+									Shadow: True
+									TooltipContainer: TOOLTIP_CONTAINER
+									TooltipTemplate: SIMPLE_TOOLTIP
+								Label@HARVESTERS_KILLED:
+									X: 155
+									Y: 0
+									Width: 80
+									Height: PARENT_HEIGHT
+									Align: Right
+									Shadow: True
+								Label@HARVESTERS_LOST:
+									X: 235
+									Y: 0
+									Width: 80
+									Height: PARENT_HEIGHT
+									Align: Right
+									Shadow: True
+								Label@REFINERIES_KILLED:
+									X: 315
+									Y: 0
+									Width: 80
+									Height: PARENT_HEIGHT
+									Align: Right
+									Shadow: True
+								Label@REFINERIES_LOST:
+									X: 395
+									Y: 0
+									Width: 80
+									Height: PARENT_HEIGHT
+									Align: Right
+									Shadow: True
 						ScrollItem@BUILD_ORDER_PLAYER_TEMPLATE:
 							X: 0
 							Y: 0

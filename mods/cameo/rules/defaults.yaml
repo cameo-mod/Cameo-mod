@@ -6845,6 +6845,11 @@ CPQDEBUGDUMMY:
 		RequiresCondition: (easiestbot || veryeasybot || easybot || normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && easiestbotinsurance
 
 ^Harvester:
+	# Observer Economy Damage tab — see ^Refinery above.
+	UpdatesCount@EconomyDamage:
+		Type: HarvesterKilled
+		LossType: HarvesterLost
+		UpdateOn: Killed
 	Inherits@MC: ^MCImmune
 	Inherits@snipe: ^DriverKillImmune
 	Inherits@D2K_AdvancedIxianTechnology: ^D2K_AdvancedIxianTechnology
@@ -7881,6 +7886,12 @@ CPQDEBUGDUMMY:
 		Prerequisite: conyard
 
 ^Refinery:
+	# Observer Economy Damage tab (ported from Combined Arms). Feeds the named counters on the
+	# player's CountManager: the KILLER's RefineryKilled and the victim's RefineryLost.
+	UpdatesCount@EconomyDamage:
+		Type: RefineryKilled
+		LossType: RefineryLost
+		UpdateOn: Killed
 	Inherits@WarEconomyTeamUpgradeRA1: ^WarEconomyTeamUpgradeRA1
 	Buildable:
 		Queue: Building, RABuilding
