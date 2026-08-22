@@ -33,6 +33,27 @@ owner Devin** (`^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*`; `^Lig
 still has **31** matches, including `HeatRayBeam1/2/3/4` now fully split) · **W3–W5 ⬜ ready,
 owner Claude** (ledger split, retire weapon-class K, the five missing metrics).
 
+## ⭐ NEXT MAJOR — continuous weapon heaviness — see [`CONTINUOUS_WEAPON_HEAVINESS.md`](CONTINUOUS_WEAPON_HEAVINESS.md) (2026-08-22)
+
+Resolves the 3-way-split vs between-tier-mix collision: ONE warhead template per family plus a
+continuous `Heaviness` scalar, instead of a discrete level ladder. Measured: a level is already a
+pure transform (`Versus = base + offset(h)`, offset 0/+4/+9, plating 0, Shield 2x; `Spread` ramps
+1 : 1.5 : 2) on 39 of 40 families. Collapses ~600 future templates to ~100 and fixes the 33
+between-tier weapons that currently out-damage the tier ABOVE them.
+
+**Ordered steps** (full detail in the doc §7):
+
+1. ⛔ **BLOCKER — fix the 9 broken level ladders.** `audit_level_ladder.py` ratchet 9: 6 families
+   INVERTED (MissileAP falls 20000 -> 12000 -> 11000; Tesla Super is half its Heavy), 3 FLAT.
+   Interpolating between equal endpoints yields nothing, between inverted ones nonsense.
+   **Balance restat → pipeline + `apply_balance --confirm` (maintainer order required).**
+2. Maintainer rulings: Super is inconsistent (Tesla +5 vs Magic +15); calibrate `offset(h)`.
+3. Add `Heaviness` to `AreaDamageWarhead`, inert at 0. Rebuild + boot-gate.
+4. Verify the transform reproduces all 126 existing templates exactly.
+5. Collapse level templates to one per family; set `Heaviness` from `tier_multiplier`.
+6. Re-point the 102 mix weapons; lower the `three_way_split` (1190) and `tier_weapon_class` (218)
+   ratchets.
+
 ## ▶ ACTIVE — CAMEO CONTENT INSTALLER
 
 - [x] **Manage Content downloads:** hidden `cameo-content` installer mod,
