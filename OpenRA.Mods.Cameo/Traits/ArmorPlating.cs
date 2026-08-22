@@ -334,6 +334,27 @@ namespace OpenRA.Mods.Cameo.Traits
 			UpdateConditions(self);
 		}
 
+		// ⛔ TOGGLING A SOURCE OFF AND ON MUST NOT REFILL THE BAR.
+		//
+		// Maintainer 2026-08-22: *"if undeploying and deploying gives instantly a full shield
+		// this is an exploit ... quickly undeploying and redeploying can instantly refill your
+		// armor bar for unlimited armor."* Exactly right, and it was true here: TraitEnabled
+		// granted `pool` unconditionally, so disable -> enable ran
+		//
+		//     Strength = (10 - P).Clamp(0, 0) = 0        then  (0 + P).Clamp(0, P) = P
+		//
+		// i.e. a full bar for the price of two key presses. It also reset the owner's regen
+		// ramp, so the RampTicks wait was skipped for free on top.
+		//
+		// ⚠ Not reachable in the CURRENT tree — all 39 ArmorPlating actors gate on
+		// `schwarzermond_upgrade_lunaralloys`, a one-way research upgrade — but it goes live the
+		// moment plating is granted on anything a player can toggle, which is precisely what a
+		// deploy-granted plating would be.
+		//
+		// The fix is to remember what this source had. `retainedStrength` is null until the
+		// first disable, so a genuine first grant still hands over a full bar and a fresh ramp.
+		int? retainedStrength;
+
 		// Uniform for every source, owner or not: report in, hand the pool this source's
 		// worth of plating, let the owner do the arithmetic.
 		protected override void TraitEnabled(Actor self)
@@ -341,18 +362,44 @@ namespace OpenRA.Mods.Cameo.Traits
 			contributed = true;
 
 			var pool = PoolOf(this);
-			var granted = Info.InitialStrength < 0 ? pool : Info.InitialStrength.Clamp(0, pool);
+			var granted = retainedStrength ?? (Info.InitialStrength < 0 ? pool : Info.InitialStrength);
+			granted = granted.Clamp(0, pool);
 
-			owner.regenTicks = owner.Info.RegenInterval;
-			owner.ticksSinceDamage = owner.Info.RampTicks;
+			// Only a FIRST enable resets the ramp. Resetting it on every re-enable would hand
+			// back the skipped regen delay even once the strength itself is preserved, and the
+			// ramp lives on the OWNER, so one contributor toggling would clear it for all.
+			if (retainedStrength == null)
+			{
+				owner.regenTicks = owner.Info.RegenInterval;
+				owner.ticksSinceDamage = owner.Info.RampTicks;
+			}
+
 			owner.PoolChanged(self, granted);
 		}
 
 		protected override void TraitDisabled(Actor self)
 		{
 			var was = contributed ? PoolOf(this) : 0;
+
+			// ⚠ The pool is SHARED and damage is not attributed to a source, so "what was left
+			// of mine" has to be apportioned: this source's share of the surviving strength, by
+			// its share of the maximum. With a single source that is just the current strength;
+			// with several it splits a partly-drained pool proportionally instead of letting
+			// one source claim all the survivors or none of them.
+			retainedStrength = owner.MaxStrength > 0
+				? (int)((long)owner.Strength * was / owner.MaxStrength)
+				: 0;
+
 			contributed = false;
-			owner.PoolChanged(self, -was);
+
+			// ⚠ REMOVE THE SHARE, NOT THE WHOLE CONTRIBUTION — and this also fixes a bug that
+			// predates the refill one. `-was` takes the source's FULL size out of a pool that
+			// may be half drained, so it eats the OTHER sources' surviving strength: with a
+			// 600 owner + 400 contributor drained to 500, disabling the contributor left 100
+			// when the owner's own share was 300. Removing the same proportional share that
+			// gets handed back makes a toggle round-trip exactly (500 -> 300 -> 500 instead of
+			// 500 -> 100 -> 300), which is what "no free armour, no stolen armour" requires.
+			owner.PoolChanged(self, -retainedStrength.Value);
 		}
 
 		float ISelectionBar.GetValue()
