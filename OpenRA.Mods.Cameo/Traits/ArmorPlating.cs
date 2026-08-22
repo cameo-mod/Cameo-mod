@@ -90,7 +90,7 @@ namespace OpenRA.Mods.Cameo.Traits
 	}
 
 	public class ArmorPlating : PausableConditionalTrait<ArmorPlatingInfo>, ITick, ISync,
-		ISelectionBar, IDamageModifier, INotifyDamage
+		ISelectionBar, IDamageModifier, INotifyDamage, ITransformActorInitModifier
 	{
 		// Resolved in Created(), NOT in the constructor. Traits are constructed in declaration
 		// order, so TraitOrDefault<Health>() from a constructor returns null whenever Health
@@ -135,8 +135,27 @@ namespace OpenRA.Mods.Cameo.Traits
 		// %-twin damage (W21 R9). Stashing the real number avoids the round trip entirely.
 		int pendingDamage;
 
+		// ⭐ CARRIED ACROSS A TRANSFORM AS A PERCENTAGE, exactly the way health is.
+		// `Transform.cs` does `newHP = health.HP * 100 / health.MaxHP` and passes a HealthInit,
+		// so a half-dead MCV deploys into a half-dead construction yard even though the two
+		// actors have completely different MaxHP. A percentage is the only thing that means
+		// anything across two actors, and it is equally the right unit for a toggle: the pool
+		// can be a different size on the way back in (another contributor enabled meanwhile).
 		public ArmorPlating(ActorInitializer init, ArmorPlatingInfo info)
-			: base(info) { }
+			: base(info)
+		{
+			retainedPercentage = init.GetOrDefault<ArmorPlatingInit>()?.Value;
+		}
+
+		void ITransformActorInitModifier.ModifyTransformActorInit(Actor self, TypeDictionary init)
+		{
+			// Only the owner holds the pool, so only the owner reports it — ArmorPlatingInit is
+			// ISingleInstanceInit and a second Add would throw on a multi-source actor.
+			if (!IsOwner || MaxStrength <= 0)
+				return;
+
+			init.Add(new ArmorPlatingInit((int)(Strength * 100L / MaxStrength)));
+		}
 
 		protected override void Created(Actor self)
 		{
@@ -351,9 +370,14 @@ namespace OpenRA.Mods.Cameo.Traits
 		// moment plating is granted on anything a player can toggle, which is precisely what a
 		// deploy-granted plating would be.
 		//
-		// The fix is to remember what this source had. `retainedStrength` is null until the
-		// first disable, so a genuine first grant still hands over a full bar and a fresh ramp.
-		int? retainedStrength;
+		// The fix is to remember what this source had, AS A PERCENTAGE — null until either a
+		// transform hands one over or this source is disabled, so a genuine first grant still
+		// yields a full bar and a fresh ramp.
+		int? retainedPercentage;
+
+		// Distinct from `retainedPercentage`: a transformed actor arrives with a percentage but
+		// has never been enabled, and should still get a fresh regen ramp.
+		bool hasBeenEnabled;
 
 		// Uniform for every source, owner or not: report in, hand the pool this source's
 		// worth of plating, let the owner do the arithmetic.
@@ -362,18 +386,21 @@ namespace OpenRA.Mods.Cameo.Traits
 			contributed = true;
 
 			var pool = PoolOf(this);
-			var granted = retainedStrength ?? (Info.InitialStrength < 0 ? pool : Info.InitialStrength);
+			var granted = retainedPercentage != null
+				? (int)(pool * (long)retainedPercentage.Value / 100)
+				: (Info.InitialStrength < 0 ? pool : Info.InitialStrength);
 			granted = granted.Clamp(0, pool);
 
 			// Only a FIRST enable resets the ramp. Resetting it on every re-enable would hand
 			// back the skipped regen delay even once the strength itself is preserved, and the
 			// ramp lives on the OWNER, so one contributor toggling would clear it for all.
-			if (retainedStrength == null)
+			if (!hasBeenEnabled)
 			{
 				owner.regenTicks = owner.Info.RegenInterval;
 				owner.ticksSinceDamage = owner.Info.RampTicks;
 			}
 
+			hasBeenEnabled = true;
 			owner.PoolChanged(self, granted);
 		}
 
@@ -386,9 +413,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			// its share of the maximum. With a single source that is just the current strength;
 			// with several it splits a partly-drained pool proportionally instead of letting
 			// one source claim all the survivors or none of them.
-			retainedStrength = owner.MaxStrength > 0
+			var share = owner.MaxStrength > 0
 				? (int)((long)owner.Strength * was / owner.MaxStrength)
 				: 0;
+			retainedPercentage = was > 0 ? (int)(share * 100L / was) : 0;
 
 			contributed = false;
 
@@ -399,7 +427,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			// when the owner's own share was 300. Removing the same proportional share that
 			// gets handed back makes a toggle round-trip exactly (500 -> 300 -> 500 instead of
 			// 500 -> 100 -> 300), which is what "no free armour, no stolen armour" requires.
-			owner.PoolChanged(self, -retainedStrength.Value);
+			owner.PoolChanged(self, -share);
 		}
 
 		float ISelectionBar.GetValue()
@@ -424,5 +452,14 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool ISelectionBar.DisplayWhenEmpty => false;
 
 		Color ISelectionBar.GetColor() { return Info.SelectionBarColor; }
+	}
+
+	// Percentage (0-100) of the plating pool an actor starts with, mirroring HealthInit's
+	// contract. Emitted by Transform via ITransformActorInitModifier so a damaged MCV deploys
+	// into a construction yard with the same FRACTION of plating it had, not a full bar.
+	public class ArmorPlatingInit : ValueActorInit<int>, ISingleInstanceInit
+	{
+		public ArmorPlatingInit(int value)
+			: base(value) { }
 	}
 }
