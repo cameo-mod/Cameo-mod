@@ -41,7 +41,13 @@ pure transform (`Versus = base + offset(h)`, offset 0/+4/+9, plating 0, Shield 2
 1 : 1.5 : 2) on 39 of 40 families. Collapses ~600 future templates to ~100 and fixes the 33
 between-tier weapons that currently out-damage the tier ABOVE them.
 
-**Ordered steps** (full detail in the doc §7):
+⭐ **SUPERSEDED BY THE BELL CURVE MODEL — read `CONTINUOUS_WEAPON_HEAVINESS.md` §9.**
+Heaviness now REDISTRIBUTES the Versus profile (family-anchored bell, renormalised to a constant
+mean) instead of adding an offset. Two new blockers ahead of the C#: bring every family into the
+2x-8x spread band (all 42 violate it today), and rule whether heaviness should affect PRICE at
+all (a constant mean makes K invariant, reversing the earlier self-pricing finding).
+
+**Ordered steps** (full detail in the doc §9.6):
 
 1. ⛔ **BLOCKER — fix the 9 broken level ladders.** `audit_level_ladder.py` ratchet 9: 6 families
    INVERTED (MissileAP falls 20000 -> 12000 -> 11000; Tesla Super is half its Heavy), 3 FLAT.
