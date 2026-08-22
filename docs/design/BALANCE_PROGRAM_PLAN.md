@@ -434,6 +434,12 @@ any yaml moves.
 
 ## 1c. ⛔ W24 BRANCH REVIEW (2026-08-19) — what the `d2k_projectile_effect_split` batch got wrong
 
+> _Branch renamed 2026-08-22 to `weapon_structure_and_warhead_fold`. The D2K projectile/effect
+> split it was named for merged as PR #133 on 2026-08-20; the branch then went on to carry W18
+> basis points, the AreaDamage fold, the physics blast shapes and the hitscan projectiles, so
+> the name described 18 of its eventual 75 commits. The old name is kept in this heading
+> because it is what the reviewed batch was called._
+
 39 commits reviewed by resolving all 2325 weapons in an `origin/master` worktree and diffing the
 invariants. **The tree boots, 227 tests pass, `find_empty_warhead` is 0 and all doc claims are
 green** — the batch is not broken. But four defect classes came out of it, three now fixed
