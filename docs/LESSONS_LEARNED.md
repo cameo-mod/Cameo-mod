@@ -575,7 +575,13 @@ The engine lives in TWO places that must stay in sync. Follow these steps IN ORD
 4. **Update `mod.config`** in the mod repository: set `ENGINE_VERSION="<full-40-char-hash>"`. The engine pin lives in `mod.config`, NOT `mod.yaml`.
 5. **Run `make all`** (Windows: `make.cmd all`). Because `engine/VERSION` no longer matches, the SDK deletes `engine/`, downloads the source zip for the pinned commit from GitHub, and rebuilds everything.
 6. **Verify**: `engine/VERSION` must contain the new hash; the build must have 0 errors.
-7. **Boot-gate with `launch-game.cmd`** before committing the `mod.config` change (see AGENT_WORKSPACE.md git rules). Recreate any custom `engine/glsl/` shaders after the fetch (they are wiped).
+7. **Boot-gate with `launch-game.cmd`** before committing the `mod.config` change (see AGENT_WORKSPACE.md git rules).
+   ⚠ **The old "recreate any custom `engine/glsl/` shaders, they are wiped" step is STALE — verified 2026-08-22.**
+   All 16 shaders (including `postprocess_nuclearflash.frag`) are now TRACKED in the engine repo, so the source
+   zipball carries them and the fetch restores them untouched. Measured by md5-summing `engine/glsl/*` before and
+   after a full `make.cmd all` on pin `462fc1fc4b`: identical, all 16. Still worth a `md5sum` before/after rather
+   than trusting either version of this line — if a shader is ever added WITHOUT committing it to the engine repo,
+   the wipe becomes real again.
 8. **Commit `mod.config`** together with the change's docs updates.
 
 Key facts verified 2026-07-30:
