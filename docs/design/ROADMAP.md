@@ -209,12 +209,45 @@ visible bar rather than an invisible DamageMultiplier."* It is a `PausableCondit
    armor-swap pattern and would fight §12.0g's deploy averaging. A pure pool has no Versus
    interaction and composes cleanly.
 
-### 3. Spectator tabs ported from Combined Arms (request: Demeow Cat Hans)
+### 3. Spectator tabs ported from Combined Arms (request: Demeow Cat Hans) — ✅ SHIPPED AND VERIFIED
 
-Four extra observer tabs plus replay speed: **Economy Damage** (harvesters/refineries killed and
-lost), **Upgrades** (per-player, with purchase timings), **Units Produced** (count + value per
-unit type), **Build Order** (initial order with timestamps), and **1.33x / 1.5x** replay speed.
-An in-game encyclopedia was raised and deferred as too large.
+Shipped: **Economy Damage** (harvesters/refineries killed and lost), **Units Produced** (count +
+value per unit type), **Build Order** (initial order with timestamps), **Team Army** and **Team
+Earnings** graphs, per-player **selected-unit value**, and CA's five-speed replay bar with MAX
+capped at the Insane timestep rather than the uncapped one. Upgrades and Promotions already
+existed. An in-game encyclopedia was raised and deferred as too large.
+
+⭐ **VERIFIED IN A LIVE REPLAY 2026-08-23** — previously this whole surface rested on boot-gating
+alone, which never draws observer chrome. It has now been exercised for real:
+
+| what | result |
+|---|---|
+| all 17 stats dropdown options constructed + `DisplayStats` run, with real players | no exception |
+| `Earnings` / `Army` / `Team Army` / `Team Earnings` graphs left **visible and drawing** 45 s each | no exception |
+| selected-unit value forced to a **2-owner** selection so the per-player grouping path runs | no exception |
+
+⭐ **HOW TO TEST OBSERVER UI WITHOUT PLAYING A GAME** — this is the reusable part. The main menu
+never loads observer chrome, but the engine will drive straight into a replay:
+
+    engine\bin\OpenRA.exe Game.Mod=cameo Engine.EngineDir=".." ^
+        Engine.ModSearchPaths="<repo>\mods,./mods" ^
+        Launch.Replay="%APPDATA%\OpenRA\Replays\cameo\{DEV_VERSION}\<file>.orarep" ^
+        Launch.AllowIncompatibleReplay=true
+
+(`LaunchArguments.cs` → `BlankLoadScreen.cs`; `AllowIncompatibleReplay` skips the version prompt,
+which matters because the replays predate the current rules.) **147 cameo replays already exist**
+in that folder, newest 2026-08-19. ⚠ Do NOT invoke `launch-game.cmd` for this — it wraps `"%*"`
+in one pair of quotes and collapses the arguments into a single token.
+
+`CameoObserverStatsLogic` selects `statsDropDownOptions[1]` (Minimal) at load, so a plain replay
+run draws exactly one panel. To exercise the rest, temporarily loop `OnClick()` over every option
+in the constructor and rest on the index you want drawn — the sweep proves construction and
+`DisplayStats`, resting on an index proves `Draw`. Revert the harness before committing.
+
+**Still unexercised:** the replay-speed buttons and the stats hotkeys are only reachable by a real
+click/keypress, and `ScrollableLineGraphWidget` (CA's horizontally scrollable graph, 613 lines) has
+not been ported — Cameo's four graphs use stock `LineGraphWidget`, which compresses a long game
+into the panel width instead of scrolling.
 
 ### 4. Deploy-abuse bugs (reporter: ws) — UNVERIFIED, needs reproduction
 
