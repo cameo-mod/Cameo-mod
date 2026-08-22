@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""audit_three_way_split.py — ONE warhead, ONE projectile, ONE effect. No bundles.
+"""audit_three_way_split.py — a weapon fires ONE main warhead. Measured on the RESOLVED node.
 
     python tools/audit/audit_three_way_split.py
 
@@ -7,28 +7,36 @@ Maintainer 2026-08-22, looking at `IxianCombatTankCannon`: *"has 2 projectiles a
 2 warheads and then the d2k cannon on top? can we please finish the 3 way split so there are no
 more multiple of those things there?"*
 
-    IxianCombatTankCannon:
-        Inherits:   ^Warhead_CannonHE_Heavy      <- warhead 1
-        Inherits@2: ^Projectile_Shell_Heavy      <- projectile 1
-        Inherits@3: ^Effect_CannonHE_Heavy       <- effect 1
-        Inherits@4: ^Warhead_CannonAP_Light      <- warhead 2
-        Inherits@5: ^Projectile_Shell_Light      <- projectile 2
-        Inherits@6: ^Effect_CannonAP_Light       <- effect 2
-        Inherits@7: ^D2K_Cannon                  <- a BUNDLE carrying a third of each
+⛔ THIS AUDIT WAS WRONG ONCE — read why before changing it back.
 
-WEAPON_3WAY_SPLIT.md's whole point is that a weapon is exactly three independent layers. Stacking
-two of a layer means the last one silently wins for the single-valued parts (`Projectile:` is ONE
-node — a second template does not add a projectile, it REPLACES fields of the first), while the
-multi-valued parts accumulate: that is how a weapon ends up firing three warheads it was never
-meant to have, and it is the source of the `multi_main_fired_weapons` backlog.
+The first version counted, in the SOURCE yaml, any `^Template` that inherited a `^Warhead_*` while
+also carrying its own `Warhead@` node, called it a "legacy bundle", and flagged every weapon using
+one. That produced 393, and 393 was both too high and too low:
 
-A LEGACY BUNDLE is a `^Template` that is not itself a layer but supplies one — `^D2K_Cannon`
-inherits `^Warhead_CannonHE_Medium` AND carries its own `Warhead@` override, so it is a whole
-weapon wearing a template's clothes. Mixing one with explicit layers is the worst case, because
-the bundle's own balance numbers land on top of the layers the weapon chose.
+  TOO HIGH — it cannot tell an OVERRIDE from an ADDITION. `^D2K_Cannon` inherits
+    `^Warhead_CannonHE_Medium` and writes `Warhead@CannonHE_Medium:` — the SAME key, so it tunes
+    the single warhead it already has. That is a correctly-formed 3-way intermediate with local
+    damage tuning, and it was being reported as a bundle.
 
-⚠ RATCHET, LOWER-ONLY. The tree starts with a known backlog; this locks it in and lets W24 burn
-it down. Never raise it to make the suite green.
+  TOO LOW  — it only looked at a weapon's DIRECT inherits. A weapon that picks up three warheads
+    through an intermediate, which itself pulled a legacy pile-up, resolved to a mess the source
+    scan never saw.
+
+The property we actually care about is a RESOLVED one — "how many damaging warheads does this
+weapon fire when the engine builds it" — so that is what this measures now. Same lesson as
+`cameo-resolved-not-source`: a child's node is usually a MODIFICATION of an inherited one.
+
+WHAT COUNTS AS A VIOLATION. One main damaging warhead per weapon. These are NOT violations and
+are excluded deliberately, because the design mandates them:
+
+  *_Percentage    the percentage twin, the paired half of the main (W18 / the AreaDamage fold)
+  *_ExtraDamage   the twin law — an ExtraDamage chip at 50% of the main is the documented pattern
+                  for Tesla / Laser / Railgun upgrade variants
+  *_Concrete      DamagesConcrete, the concrete-slab mechanism; folding it away is its own task
+  *_ExtraRepair   the healer equivalent of the twin
+
+⚠ RATCHET, LOWER-ONLY. Never raise it to make the suite green — that is how the old number hid a
+threefold undercount for a day.
 
 EXIT CODE: 1 above the ratchet.
 """
@@ -36,87 +44,85 @@ from __future__ import annotations
 
 import collections
 import pathlib
-import re
 import sys
 
 if hasattr(sys.stdout, "reconfigure"):          # Windows consoles default to cp1252
     sys.stdout.reconfigure(encoding="utf-8")
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from miniyaml import load_manifest  # noqa: E402
+from miniyaml import Ruleset  # noqa: E402
 
-# Weapons violating the split when this audit was written (2026-08-22). LOWER ONLY.
-SPLIT_BASELINE = 393
+# Weapons resolving to >1 main damaging warhead when this was measured (2026-08-22). LOWER ONLY.
+SPLIT_BASELINE = 1190
 
-ACTOR_RE = re.compile(r"^(?P<name>[^\s#][^:]*):\s*$")
-LAYERS = ("^Warhead_", "^Projectile_", "^Effect_")
+# Warhead types that inflict damage on a normal target. Everything else (CreateEffect,
+# LeaveSmudge, GrantExternalCondition, SpawnActor, GlowImpact, ...) is cosmetic or utility and
+# belongs to the ^Effect_ layer, so it is not counted here.
+MAIN_DAMAGE_TYPES = {"AreaDamage", "SpreadDamage", "HealthPercentageDamage", "TargetDamage"}
+
+# Key fragments marking a warhead as a DESIGNED companion of the main rather than a second main.
+COMPANION_MARKERS = ("Percentage", "ExtraDamage", "ExtraRepair", "Concrete")
 
 
-def blocks():
-    """(file, name, [inherit targets]) for every top-level node in the live weapon files."""
-    for path in sorted({p.resolve() for p in load_manifest(pathlib.Path(".")).weapons}):
-        lines = path.read_text(encoding="utf-8", errors="surrogateescape").split("\n")
-        i = 0
-        while i < len(lines):
-            m = ACTOR_RE.match(lines[i])
-            if not (m and not lines[i][0].isspace()):
-                i += 1
+def main_warheads(resolved) -> list[str]:
+    """The main damaging warheads a resolved weapon actually fires."""
+    out = []
+    for wh in resolved.children:
+        if not (wh.key.startswith("Warhead@") or wh.key == "Warhead"):
+            continue
+        if (wh.value or "").strip() not in MAIN_DAMAGE_TYPES:
+            continue
+        if any(m in wh.key for m in COMPANION_MARKERS):
+            continue
+        damage = wh.get("Damage")
+        try:                                    # a Damage: 0 warhead fires nothing
+            if damage is not None and int(str(damage).strip()) == 0:
                 continue
-            name, j = m.group("name").strip(), i + 1
-            while j < len(lines) and (not lines[j].strip() or lines[j][:1] in ("\t", " ")):
-                j += 1
-            body = lines[i + 1:j]
-            inherits = [b.split(":", 1)[1].strip() for b in body
-                        if b.lstrip().startswith("Inherits") and ":" in b]
-            yield path, name, body, inherits
-            i = j
+        except ValueError:
+            pass
+        out.append(wh.key.replace("Warhead@", ""))
+    return out
 
 
 def main() -> int:
-    # A template counts as a BUNDLE when it supplies a layer without being one.
-    bundles = set()
-    for _path, name, body, inherits in blocks():
-        if not name.startswith("^") or name.startswith(LAYERS):
-            continue
-        supplies = (any(t.startswith(LAYERS) for t in inherits)
-                    or any(b.lstrip().startswith(("Warhead@", "Projectile:")) for b in body))
-        if supplies:
-            bundles.add(name)
+    rs = Ruleset(pathlib.Path("."))
+    hist = collections.Counter()
+    combos = collections.Counter()
+    rows: list[tuple[str, list[str]]] = []
 
-    rows, counts = [], collections.Counter()
-    for _path, name, _body, inherits in blocks():
+    for name in sorted(rs.weapons):
         if name.startswith("^"):
             continue
-        n = {p: sum(1 for t in inherits if t.startswith(p)) for p in LAYERS}
-        used = [t for t in inherits if t in bundles]
-        why = []
-        for p in LAYERS:
-            if n[p] > 1:
-                why.append(f"{n[p]}x {p}*")
-                counts[f">1 {p}*"] += 1
-        if used and any(n.values()):
-            why.append("bundle: " + ", ".join(sorted(set(used))[:3]))
-            counts["bundle mixed with layers"] += 1
-        if why:
-            rows.append((name, "; ".join(why)))
+        resolved = rs.resolve_weapon(name)
+        if resolved is None:
+            continue
+        mains = main_warheads(resolved)
+        hist[len(mains)] += 1
+        if len(mains) > 1:
+            rows.append((name, mains))
+            combos[tuple(sorted(mains))] += 1
 
-    print(f"# audit_three_way_split — {len(rows)} weapons break ONE-warhead/ONE-projectile/ONE-effect\n")
-    for k, v in counts.most_common():
-        print(f"  {v:5d}  {k}")
-    print(f"\n  {len(bundles):5d}  legacy bundle templates in play")
+    total = sum(hist.values())
+    print(f"# audit_three_way_split — {len(rows)} of {total} weapons fire more than ONE main warhead\n")
+    print(f"  {hist[1]:5d}  correct — exactly one main warhead")
+    print(f"  {hist[0]:5d}  none — utility / effect-only weapons")
+    print(f"  {len(rows):5d}  VIOLATIONS — stacked mains\n")
 
-    if rows:
-        print("\n| weapon | problem |\n|---|---|")
-        for name, why in sorted(rows)[:40]:
-            print(f"| {name} | {why} |")
-        if len(rows) > 40:
-            print(f"\n_({len(rows) - 40} more)_")
+    print("  mains  weapons")
+    for k in sorted(hist):
+        if k > 1:
+            print(f"  {k:5d}  {hist[k]:5d}")
+
+    print(f"\n{len(combos)} distinct stacked combinations; the 20 most common:\n")
+    print("| count | combination |\n|---|---|")
+    for combo, n in combos.most_common(20):
+        print(f"| {n} | {' + '.join(combo)} |")
 
     over = len(rows) > SPLIT_BASELINE
     print(f"\n{'FAIL' if over else 'WARN'} {len(rows)} violating weapons (ratchet {SPLIT_BASELINE})")
     if over:
-        print("**A weapon just gained a second layer or a legacy bundle.** Split it instead of "
-              "raising SPLIT_BASELINE.")
+        print("**A weapon just gained a second main warhead.** Split it into the 3 layers instead "
+              "of raising SPLIT_BASELINE.")
     else:
         print("Lower `SPLIT_BASELINE` as W24 converts weapons; never raise it.")
     return 1 if over else 0
