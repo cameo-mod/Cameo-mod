@@ -410,6 +410,15 @@ Container@OBSERVER_WIDGETS:
 					VisualHeight: 0
 					Text: MAX
 					Font: TinyBold
+		# Total Valued.Cost of the current selection, split PER OWNING PLAYER — box-select
+		# both armies as a spectator and both totals are listed, sorted by value. Sits just
+		# below the replay bar (which ends at Y 297 + 40); ReplayYPosModifier nudges it further
+		# down in replays, where the speed buttons are actually visible.
+		ObserverArmyValues:
+			X: WINDOW_WIDTH - WIDTH - 12
+			Y: 345
+			Width: 238
+			ReplayYPosModifier: 35
 		Container@INGAME_OBSERVERSTATS_BG:
 			Logic: CameoObserverStatsLogic
 				StatisticsNoneKey: StatisticsNone
