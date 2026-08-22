@@ -33,14 +33,5 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			Assert.That(SynchronizesPhysicalStateWithCondition.ValueForConditionLevel(-1, 0, 10), Is.Zero);
 		}
-
-		[TestCase(0, 0f)]
-		[TestCase(10, 0.1f)]
-		[TestCase(50, 0.5f)]
-		[TestCase(100, 1f)]
-		public void SpinStateMapsToSelectionBarValue(int state, float expected)
-		{
-			Assert.That(SynchronizesPhysicalStateWithCondition.SelectionBarValue(state, 0, 100), Is.EqualTo(expected));
-		}
 	}
 }

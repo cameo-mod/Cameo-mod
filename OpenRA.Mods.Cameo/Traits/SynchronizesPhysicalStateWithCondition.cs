@@ -13,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.Common.Traits;
-using OpenRA.Primitives;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits
@@ -37,15 +36,6 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("PhysicalState value when no condition instances are granted.")]
 		public readonly int BaseValue = 0;
 
-		[Desc("Display the synchronized PhysicalState as a selection bar.")]
-		public readonly bool ShowSelectionBar = false;
-
-		[Desc("Color of the selection bar.")]
-		public readonly Color SelectionBarColor = Color.Magenta;
-
-		[Desc("Only display the selection bar while the actor is selected.")]
-		public readonly bool SelectionBarRequiresSelection = true;
-
 		public override object Create(ActorInitializer init)
 		{
 			return new SynchronizesPhysicalStateWithCondition(init.Self, this);
@@ -59,16 +49,14 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 	}
 
-	public class SynchronizesPhysicalStateWithCondition : IObservesVariables, ISelectionBar
+	public class SynchronizesPhysicalStateWithCondition : IObservesVariables
 	{
-		readonly Actor self;
 		readonly SynchronizesPhysicalStateWithConditionInfo info;
 		readonly PhysicalState physicalState;
 
 		public SynchronizesPhysicalStateWithCondition(
 			Actor self, SynchronizesPhysicalStateWithConditionInfo info)
 		{
-			this.self = self;
 			this.info = info;
 			physicalState = self.TraitsImplementing<PhysicalState>()
 				.Single(ps => ps.Name == info.PhysicalStateName);
@@ -89,23 +77,5 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			return checked(baseValue + Math.Max(0, level) * valuePerInstance);
 		}
-
-		internal static float SelectionBarValue(int value, int minValue, int maxValue)
-		{
-			var range = maxValue - minValue;
-			return range <= 0 ? 0f : Math.Clamp((value - minValue) / (float)range, 0f, 1f);
-		}
-
-		float ISelectionBar.GetValue()
-		{
-			if (!info.ShowSelectionBar || (info.SelectionBarRequiresSelection && !self.World.Selection.Contains(self)))
-				return 0f;
-
-			return SelectionBarValue(physicalState.Value, physicalState.MinValue, physicalState.MaxValue);
-		}
-
-		Color ISelectionBar.GetColor() { return info.SelectionBarColor; }
-
-		bool ISelectionBar.DisplayWhenEmpty => false;
 	}
 }

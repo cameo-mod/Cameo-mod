@@ -5428,7 +5428,7 @@
 		RelaxationDelay: 25
 		InitialValue: 0
 		ApplyDamageModifiers: true
-	PhysicalStateBar@TemperatureBar:
+	SelectedPhysicalStateBar@TemperatureBar:
 		PhysicalStateName: Temperature
 		PositiveColor: FF0000
 		NegativeColor: 0080FF
@@ -5831,9 +5831,11 @@
 		Condition: gatling
 		PhysicalStateName: SpinUp
 		ValuePerInstance: 10
-		ShowSelectionBar: true
-		SelectionBarColor: FF8000
-		SelectionBarRequiresSelection: true
+	SelectedPhysicalStateBar@SpinUp:
+		PhysicalStateName: SpinUp
+		PositiveColor: FF8000
+		DisplayWhenRelaxed: false
+		ShowAbsoluteValues: true
 	ModifiesCombatProportionalToPhysicalState@SpinUp:
 		PhysicalStateName: SpinUp
 		ReloadDelayFrom: 100
