@@ -5827,16 +5827,13 @@
 		MaxValue: 100
 		RelaxedValue: 0
 		InitialValue: 0
-	PhysicalStateBar@SpinUp:
-		PhysicalStateName: SpinUp
-		PositiveColor: FF8000
-		DisplayWhenRelaxed: false
-		DisplayWhenEmpty: false
-		ShowAbsoluteValues: true
 	SynchronizesPhysicalStateWithCondition@SpinUp:
 		Condition: gatling
 		PhysicalStateName: SpinUp
 		ValuePerInstance: 10
+		ShowSelectionBar: true
+		SelectionBarColor: FF8000
+		SelectionBarRequiresSelection: true
 	ModifiesCombatProportionalToPhysicalState@SpinUp:
 		PhysicalStateName: SpinUp
 		ReloadDelayFrom: 100
