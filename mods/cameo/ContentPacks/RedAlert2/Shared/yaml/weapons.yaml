@@ -1857,7 +1857,7 @@ RA2DroneSparks:
 
 RA2BrutePunch:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 37
 	Report: ibruattb.wav, ibruattc.wav, ibruattd.wav, ibruatte.wav, ibruattf.wav #ibruatta.wav
@@ -1893,7 +1893,7 @@ SquidGrab:
 
 RA2Shovel:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 30
 	Report: isl1atta.wav

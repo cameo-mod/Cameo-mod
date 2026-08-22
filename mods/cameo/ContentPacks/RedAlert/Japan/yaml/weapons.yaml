@@ -214,7 +214,7 @@ HeavyPlasmaFlamer:
 
 SamuraiBlade:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 20
 	Range: 1637
@@ -2049,7 +2049,7 @@ ExecutionerDeath:
 
 ExecutionerSword:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 300
 	Report: JUShoEx_swordSwipea.wav, JUShoEx_swordSwipeb.wav, JUShoEx_swordSwipec.wav, JUShoEx_swordSwiped.wav, JUShoEx_swordSwipee.wav, JUShoEx_swordSwipef.wav

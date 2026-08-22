@@ -318,7 +318,7 @@ GlaveCanon:
 
 psi_blades:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	Report: pzehit00.aud
 	SoundVolume: 3
@@ -335,7 +335,7 @@ psi_blades:
 
 psi_spear:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	Report: pzehit00.aud
 	SoundVolume: 3
@@ -511,7 +511,7 @@ ScoutRockets_AA:
 		InvalidTargets: Ship, Structure, Bridge
 WarpBlade:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 25
 	Range: 1600
@@ -526,7 +526,7 @@ WarpBlade:
 
 WarpBladeAmaranth:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 20
 	Range: 1840
@@ -541,7 +541,7 @@ WarpBladeAmaranth:
 
 ZeratulSlice:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	Range: 1445
 	ReloadDelay: 24

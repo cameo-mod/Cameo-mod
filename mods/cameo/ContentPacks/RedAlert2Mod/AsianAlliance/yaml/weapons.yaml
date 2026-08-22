@@ -230,7 +230,7 @@ RA2AsianShotgunFanatic3:
 
 AsianSamuraiSword1:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 40
 	Report: aa_samu_kil1.wav
@@ -337,7 +337,7 @@ AsianMaidenBow_elite:
 		Spread: 125
 AsianNinjaStar:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	Inherits@2: ^Effect_Bullet_Medium_RA2
 	InvalidTargets: Structure, wall, Husk
@@ -359,7 +359,7 @@ AsianNinjaStar_elite:
 
 AsianCrocBite:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 39
 	Report: galiatta.wav, galiattb.wav

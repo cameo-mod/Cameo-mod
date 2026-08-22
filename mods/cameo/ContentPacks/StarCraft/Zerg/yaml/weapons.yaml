@@ -1,6 +1,6 @@
 ZerglingClaw:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	Report: zerglinghit.wav
 	SoundVolume: 3
@@ -15,7 +15,7 @@ ZerglingClaw:
 
 TalonClaw:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	Report: zerglinghit.wav
 	ReloadDelay: 15
@@ -29,7 +29,7 @@ TalonClaw:
 
 GorekrakenClaw:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	Report: zulatt00.aud,zulatt01.aud,zulatt02.aud
 	ValidTargets: Ground, Water, Air
@@ -47,7 +47,7 @@ GorekrakenClaw:
 
 ShriekStinger:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	Report: zerglinghit.wav
 	ValidTargets: Ground, Water, Air
@@ -904,7 +904,7 @@ QueenSpine:
 
 UltraliskHusk:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	Report: zulatt00.aud,zulatt01.aud,zulatt02.aud
 	ReloadDelay: 15
@@ -918,7 +918,7 @@ UltraliskHusk:
 
 GoremawClaw:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	Report: zulatt00.aud,zulatt01.aud,zulatt02.aud
 	ReloadDelay: 30
@@ -1119,7 +1119,7 @@ BehemothShoot:
 
 zerg_kerrigan:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	Range: 2225
 	ReloadDelay: 20

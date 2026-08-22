@@ -532,7 +532,7 @@ Wraith_ToxinMissiles:
 	MinRange: 1675
 contaminator_attack:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 20
 	Report: contaminator_attack_2.wav

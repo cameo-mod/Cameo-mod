@@ -35,7 +35,7 @@ GhostSniperBunker:
 
 SCBROODLING:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	Report: zerglinghit.wav
 	ReloadDelay: 6
@@ -195,7 +195,7 @@ Scarab:
 
 ^WorkerAttack:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	Range: 1500
 	ReloadDelay: 25

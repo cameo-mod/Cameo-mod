@@ -402,7 +402,7 @@ TSHSeekerLaunch:
 
 eliminator_blades:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 25
 	Range: 2048
@@ -422,7 +422,7 @@ eliminator_blades:
 
 CabalBerserkerBlades:
 	Inherits@wh: ^Warhead_Melee_Medium
-	Inherits@proj: ^Projectile_Melee_Medium
+	Inherits@proj: ^Projectile_InstantHit
 	Inherits@fx: ^Effect_Melee_Medium
 	ReloadDelay: 30
 	Range: 2048

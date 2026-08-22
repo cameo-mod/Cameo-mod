@@ -9602,14 +9602,6 @@ DefuseKit:
 	# nothing is drawn, the warhead lands on the firing tick.
 	Projectile: InstantHit
 
-^Projectile_Melee_Light:
-	Inherits: ^Projectile_InstantHit
-
-^Projectile_Melee_Medium:
-	Inherits: ^Projectile_InstantHit
-
-^Projectile_Melee_Heavy:
-	Inherits: ^Projectile_InstantHit
 
 ^Projectile_Missile_Light:
 	Projectile: Missile
