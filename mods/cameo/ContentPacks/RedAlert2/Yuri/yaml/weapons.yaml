@@ -395,9 +395,15 @@ RA2Magnet:
 		Falloff: 100, 100
 		Damage: 2000
 		ValidTargets: Vehicle, Structure
-	Warhead@Condition: GrantExternalCondition
-		Condition: Magnet
-		Duration: 100
+	# 20000-point Magnetism meter over `Burst: 100` shots = 200 a shot, so a full volley
+	# is a full lock -- exactly what the 100 stacked `Magnet` tokens used to mean. Neither
+	# firepower nor the target's damage modifiers touched the old grant, and the magnetron
+	# carries `FirepowerMultiplier@MultiWeapon: 50` while not elite, so both stay OFF.
+	Warhead@Condition: ApplyPhysicalState
+		PhysicalStateName: Magnetism
+		Amount: 200
+		ApplyFirepowerModifiers: false
+		ApplyDamageModifiers: false
 		Range: 500
 		ValidTargets: Vehicle
 	-Warhead@EffectAir:
@@ -409,7 +415,7 @@ RA2MagnetAA:
 	Warhead@Laser_Heavy:
 		ValidTargets: Vehicle, Air, Structure
 		InvalidTargets: Paratrooper
-	Warhead@Condition: GrantExternalCondition
+	Warhead@Condition: ApplyPhysicalState
 		ValidTargets: Vehicle, Air
 		InvalidTargets: Paratrooper
 
@@ -426,7 +432,7 @@ RA2MagnetAA_elite:
 	Warhead@Laser_Heavy:
 		ValidTargets: Vehicle, Air, Structure
 		InvalidTargets: Paratrooper
-	Warhead@Condition: GrantExternalCondition
+	Warhead@Condition: ApplyPhysicalState
 		ValidTargets: Vehicle, Air
 		InvalidTargets: Paratrooper
 

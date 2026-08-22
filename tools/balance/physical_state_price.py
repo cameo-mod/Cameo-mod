@@ -25,13 +25,17 @@ Delivery has THREE independent factors, all measured from the resolved tree, nev
 
 so the divisor is the meter's RANGE, not the 10000 that `PhysicalStateInfo`'s own [Desc]
 advertises ("divided by HP/10000"). That stale Desc is exactly what the old derivation
-trusted. Because `Temperature` is SIGNED (-20000..20000) its range is 40000 — DOUBLE
-`Corrosion`'s 20000 — so the two meters do not even share a formula:
+trusted. RANGE is not MaxValue: a SIGNED meter spans twice its top, so its formula halves.
 
-    ratio = MaxValue * 100 / (Scale * range)        damage-scaled  -> Temperature  50/Scale
-                                                                      Corrosion   100/Scale
-    ratio = MaxValue * damage / (Amount * range)    discrete apply -> Temperature  D/(2A)
-                                                                      Corrosion   D/A
+    ratio = MaxValue * 100 / (Scale * range)        damage-scaled
+    ratio = MaxValue * damage / (Amount * range)    discrete apply
+
+⚠ Nothing here is hard-coded per meter — `meter_geometry` MEASURES the bounds, and the
+constants that used to be written out in this docstring have already drifted once. As of
+2026-08-22 the tree carries: `Temperature` -20000..20000 (range 40000 -> 50/Scale),
+`Corrosion` -20000..20000 (range 40000 -> 50/Scale, NOT the 100/Scale an earlier version of
+this text claimed — it was signed after that was written), and `Magnetism` 0..20000, the one
+UNSIGNED meter (range 20000 -> 100/Scale). Read the `--report` table, never this paragraph.
 
 ⭐ Target MaxHP and weapon damage BOTH cancel in the damage-scaled form — the race is a
 property of the CONSTANT alone, which is why one constant moved every weapon at once.
@@ -376,7 +380,15 @@ def speed_weight(ratio: float | None, meter_exposure: float) -> float:
 
 # Which curve a binding is read against. The SIGN of the constant picks it: a negative
 # `PhysicalStateScale` / `Amount` cools (Cryo), a positive one heats (Flame).
-AXIS_TEMPLATE = {"Temperature": "^CryoFreezable", "Corrosion": "^Corrodible"}
+AXIS_TEMPLATE = {"Temperature": "^CryoFreezable", "Corrosion": "^Corrodible",
+                 "Magnetism": "^Magnefreezable"}
+
+
+def axis_label(meter: str, positive: bool) -> str:
+    """The report's name for a (meter, sign) pair. Only Temperature is signed."""
+    if meter == "Temperature":
+        return "heat" if positive else "cryo"
+    return meter.lower()
 
 
 def fired_weapons(rs) -> set[str]:
@@ -497,8 +509,7 @@ def scan(rs) -> list[dict]:
                         "fed_share": share if kind == "scaled" else 1.0,
                         "delivery": delivery(ratio, curve), "weight": weight,
                         "multiplier": 1.0 + 0.25 * weight,
-                        "axis": ("heat" if positive else "cryo") if meter == "Temperature"
-                                else "corrosion"})
+                        "axis": axis_label(meter, positive)})
     return out, reference, geom, exp, curves
 
 
@@ -603,9 +614,13 @@ def main() -> int:
     print("\n## Effect curves — share of the axis delivered at a given fill\n")
     print("| axis | 5% | 25% | 50% | 75% | 100% |")
     print("|---|--:|--:|--:|--:|--:|")
-    for label, key in (("heat", ("Temperature", True)), ("cryo", ("Temperature", False)),
-                       ("corrosion", ("Corrosion", True))):
+    # Every axis in AXIS_TEMPLATE, both signs, minus the ones whose consumers never fire for
+    # that sign (`Corrosion` and `Magnetism` only rise, so their negative curve is flat zero).
+    for key in sorted(curves):
         c = curves[key]
+        if all(c(x) == 0.0 for x in (0.05, 0.25, 0.5, 0.75, 1.0)):
+            continue
+        label = axis_label(*key)
         print(f"| {label} | " + " | ".join(f"{c(x):.2f}" for x in
                                            (0.05, 0.25, 0.5, 0.75, 1.0)) + " |")
     print(f"\nReference delivery (the maintainer's bar on the cryo curve): "

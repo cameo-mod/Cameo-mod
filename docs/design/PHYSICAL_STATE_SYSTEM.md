@@ -404,6 +404,19 @@ reference an image+sequence, so the yaml wires with placeholders and the art dro
   ticks, `Range = 2 × Spread` = 800/1200/1600 = the half-damage radius). Zero damage → price-neutral,
   drift stays 0. The predator laser / waveforce / IonPulse keep their own hand-tuned grants, now of the
   renamed condition. `5a14355e6`
+- ✅ **Magnetism meter on `^Magnefreezable`** (2026-08-22) — the third live axis. The magnetic grip
+  used to be an `ExternalCondition` counted in STACKS (`RA2Magnet` is `Burst 100 / BurstDelays 1`, so
+  one volley grants 100 tokens over 99 ticks) read by ten `SpeedMultiplier` + ten `WithColoredOverlay`
+  traits on 10-point windows. ⛔ **All nine interior boundaries overlapped** — `Magnet <= 20` and
+  `Magnet >= 20` both hold at exactly 20 — so two multipliers MULTIPLIED at every step the burst swept
+  through: 90%×80% = **72%** at 20, 60%×50% = **30%** at 50. The ramp was non-monotonic at every
+  boundary, on all **739** actors that inherit the template (via `^Vehicle`, `^RANeutralPlane`,
+  `^ShootableMissile`), on every volley. 20 traits → 5; the overlap is structurally impossible now
+  because `SlowsProportionalToPhysicalState` interpolates. Meter `0..20000`, `RelativeToHealth: false`
+  (the old stack counted SHOTS, not damage), `Amount: 200` × `Burst: 100` = a full lock per volley,
+  and the CONSUMED `magnetfreeze` condition is re-granted by `GrantConditionOnPhysicalState` at a full
+  bar. Price-neutral: both carriers (`yuri_magnetron`, `asianalliance_hyperionprojector`) already pay
+  1.183× for the heat binding on `^RA2LaserWeapon`, and `actor_multipliers` takes the max, not the sum.
 - (Temperature axis + framework were ALREADY built — see §0.)
 - ✅ **Upgraded-weapon IntegrityScale bump + missing chip `DamageTypes: Tesla`** (Devin, 2026-08-10,
   `145c6861c`, PR `fix/tesla-integrity-upgrade-drain`) — fixed two bugs that kept RA1 Tesla Doctrine /

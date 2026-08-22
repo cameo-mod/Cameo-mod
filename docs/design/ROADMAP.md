@@ -73,22 +73,29 @@ condition, so exactly ONE fires at a time. They are NOT diluted and must never b
 per-armament analysis has to collapse condition-gated variants first. Deferred by maintainer
 ruling; needs a variant-aware model.
 
-### 3. `^Magnefreezable` → a `Magnetism` meter
+### 3. ✅ DONE — `^Magnefreezable` → a `Magnetism` meter
 
-72 lines, **10 `SpeedMultiplier` + 10 `WithColoredOverlay`** traits on 10-point bands, inherited by
-`^Vehicle`, `^RANeutralPlane` and `^ShootableMissile` — **739 actors**.
+The 10 `SpeedMultiplier` + 10 `WithColoredOverlay` bands became 5 meter traits, on all **739**
+actors that inherit the template (`^Vehicle`, `^RANeutralPlane`, `^ShootableMissile`). The nine
+overlapping band boundaries (`<= 20` and `>= 20` both hold at 20 → 90%×80% = **72%**, 60%×50% =
+**30%**) are now structurally impossible: `SlowsProportionalToPhysicalState` interpolates between
+two endpoints. `Burst 100 / BurstDelays 1` swept every one of those boundaries on every volley.
 
-⛔ **All 17 band boundaries OVERLAP** (`<= 20` and `>= 20` both match at 20), so two multipliers
-stack: 90%x80% = **72%** at Magnet 20, 60%x50% = **30%** at Magnet 50. The ramp is non-monotonic at
-every step.
+⚠ **NOT the sole carrier** — a first pass said `yuri_magnetron` only. `AAHyperionMagnet`
+(`asianalliance_hyperionprojector`, anti-air) grants the same condition and was converted too;
+so did `RA2MagnetAA` / `RA2MagnetAA_elite`, which RE-DECLARE the warhead type and would have
+silently kept `GrantExternalCondition` if only the base had been edited.
 
-⚠ And the ramp IS reached, contrary to a first reading that checked only `ReloadDelay`/`Duration`:
-`RA2Magnet` is **`Burst 100 / BurstDelays 1`**, so one volley grants 100 stacks over 99 ticks and
-sweeps the whole ramp — hitting all 9 overlapping boundaries every volley. Sole carrier:
-`yuri_magnetron`.
+Behaviour preserved deliberately: `RelativeToHealth: false` (the old stack counted SHOTS, so a
+scout and a superheavy were pinned by the same 100 hits), firepower and damage modifiers OFF (the
+magnetron carries `FirepowerMultiplier@MultiWeapon: 50` while not elite), and turn/turret/reload
+pinned at 100 at BOTH ends — the trait defaults them to 50, and omitting them would have quietly
+added three effects the magnetron never had.
 
-Converting to one `SlowsProportionalToPhysicalState` on a `Magnetism` meter replaces all 20 traits,
-fixes the overlap, and gets the effect priced by `speed_weight` automatically.
+⚠ **The full lock is still nearly unreachable, and that is unchanged, not introduced.** 100 shots
+fill the bar; `physical_state_price` puts the fill/kill ratio at **15.1**, so the magnetron's own
+laser kills long before `magnetfreeze` is granted. That was equally true of the 100-token stack.
+Whether the grip should complete faster is a BALANCE question for the ledger, not a conversion bug.
 
 ### 4. More axes to convert
 
@@ -127,10 +134,13 @@ The blockers previously listed here were measured with a broken hand parser that
 1. Make the class tilt **CONTINUOUS** — driven by `h` from `tier_chain` (already computed and
    stored per actor) instead of four discrete levels. This is the whole remaining idea.
 2. Collapse the level templates to **one per family + a per-weapon `h`**.
-3. ⛔ **4 families change orientation between their levels**, which §12.0d says cannot happen:
-   `CannonNuke`, `Cryo`, `MissileHE`, `Storm`. All have a weak gradient. Guarded by
-   `audit_versus_profile.py` (ratchet 4).
-4. Two spread outliers, both too FLAT: `CannonAP` 1.81x, `Cryo` 1.97x (ratchet 2).
+3. ✅ CLEARED — the 4 orientation flips were **one real flip** (`Cryo`) plus 3 false positives from
+   comparing `None` (INF ladder) against `Superheavy` (VEH); §12.0d only orders WITHIN a ladder.
+   `Cryo` flipped because its blend tiebreak was decided per LEVEL on a one-point margin — the
+   tiebreak is now family-wide (`1af72a3c1`). `audit_versus_profile.py` ratchet **0**.
+4. ✅ CLEARED — `CannonAP` 1.81x and `Cryo` 1.97x were too flat because the 2x band floor lived
+   inside `finish_blend()` (blend families only) and ran BEFORE `class_tilt` reshaped the profile.
+   It is now applied to every family, after the tilt (`edd1c4597`). Ratchet **0**.
 5. The 9 broken DAMAGE ladders (`audit_level_ladder.py`, ratchet 9) — unaffected by the parser
    bug, since that audit reads `Damage` through the resolver. Still a balance restat needing
    `apply_balance --confirm`.

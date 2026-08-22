@@ -5269,76 +5269,80 @@
 		ValidRelationships: Ally, Neutral, Enemy
 
 ^Magnefreezable:
-	ExternalCondition@Magnetron:
-		Condition: Magnet
 	Targetable@Magnet:
 		TargetTypes: Magnefreezable
-	TimedConditionBar@Magnet:
-		Condition: Magnet
-		Color: FF55FF
-	GrantCondition@magnetfreeze:
+	# THE MAGNETIC GRIP IS A METER, NOT TEN STACKED CONDITION BANDS.
+	#
+	# It used to be an `ExternalCondition` counted in stacks (`RA2Magnet` is `Burst 100 /
+	# BurstDelays 1`, so one volley grants 100 tokens over 99 ticks) read by ten
+	# `SpeedMultiplier` traits on 10-point windows -- and every one of the nine interior
+	# boundaries OVERLAPPED, because `Magnet <= 20` and `Magnet >= 20` both hold at exactly 20.
+	# Two multipliers therefore MULTIPLIED at each step the burst swept through:
+	# 90% x 80% = 72% at 20, 60% x 50% = 30% at 50. The ramp was non-monotonic at every
+	# boundary, and the burst hit all nine of them on every single volley.
+	#
+	# `SlowsProportionalToPhysicalState` interpolates continuously between two endpoints, so
+	# the overlap cannot exist. 20 traits collapse to 5, and the effect becomes visible to
+	# `tools/balance/physical_state_price.py`, which prices a meter by how fast it fills.
+	#
+	# Scale: 20000 over `Burst: 100` shots = `Amount: 200` per shot, so a full volley still
+	# means a full lock, exactly as the 100-token stack did.
+	PhysicalState@Magnetism:
+		Name: Magnetism
+		MaxValue: 20000
+		MinValue: 0
+		RelaxedValue: 0
+		# The old stack counted SHOTS, not damage -- a scout and a superheavy were pinned by
+		# the same 100 hits. `false` keeps that; `true` would silently make the magnetron
+		# far better against light targets than it has ever been.
+		RelativeToHealth: false
+		ApplyDamageModifiers: false
+		# A token lasted 100 ticks, so the grip unwound over ~100 ticks after the last shot.
+		# 200/tick over a 20000 bar reproduces that; `ReloadDelay: 200` still leaves the
+		# target fully free between volleys.
+		RelaxationLinear: 200
+		RelaxationInterval: 1
+		RelaxationDelay: 25
+		InitialValue: 0
+	PhysicalStateBar@MagnetismBar:
+		PhysicalStateName: Magnetism
+		PositiveColor: FF55FF
+		NeutralColor: 808080
+		DisplayWhenRelaxed: false
+		ShowAbsoluteValues: false
+	# `magnetfreeze` is CONSUMED -- it is one of the disable conditions on ^Vehicle and
+	# ^Aircraft (`empdisable || superfreeze || ... || magnetfreeze`). Deleting it without
+	# a replacement would leave those `RequiresCondition` expressions referencing a
+	# condition nothing grants. Granted only at a completely full bar, as `Magnet >= 100` was.
+	GrantConditionOnPhysicalState@magnetfreeze:
+		PhysicalStateName: Magnetism
 		Condition: magnetfreeze
-		RequiresCondition: Magnet >= 100
-	SpeedMultiplier@MagnetFreeze1:
-		Modifier: 90
-		RequiresCondition: Magnet >= 10 && Magnet <= 20
-	SpeedMultiplier@MagnetFreeze2:
-		Modifier: 80
-		RequiresCondition: Magnet >= 20 && Magnet <= 30
-	SpeedMultiplier@MagnetFreeze3:
-		Modifier: 70
-		RequiresCondition: Magnet >= 30 && Magnet <= 40
-	SpeedMultiplier@MagnetFreeze4:
-		Modifier: 60
-		RequiresCondition: Magnet >= 40 && Magnet <= 50
-	SpeedMultiplier@MagnetFreeze5:
-		Modifier: 50
-		RequiresCondition: Magnet >= 50 && Magnet <= 60
-	SpeedMultiplier@MagnetFreeze6:
-		Modifier: 40
-		RequiresCondition: Magnet >= 60 && Magnet <= 70
-	SpeedMultiplier@MagnetFreeze7:
-		Modifier: 30
-		RequiresCondition: Magnet >= 70 && Magnet <= 80
-	SpeedMultiplier@MagnetFreeze8:
-		Modifier: 20
-		RequiresCondition: Magnet >= 80 && Magnet <= 90
-	SpeedMultiplier@MagnetFreeze9:
-		Modifier: 10
-		RequiresCondition: Magnet >= 90 && Magnet <= 100
-	SpeedMultiplier@MagnetFreeze10:
-		Modifier: 0
-		RequiresCondition: Magnet >= 100
-	WithColoredOverlay@Magnet1:
-		Color: 66886611
-		RequiresCondition: Magnet >= 10 && Magnet <= 20
-	WithColoredOverlay@Magnet2:
-		Color: 77887722
-		RequiresCondition: Magnet >= 20 && Magnet <= 30
-	WithColoredOverlay@Magnet3:
-		Color: 88888833
-		RequiresCondition: Magnet >= 30 && Magnet <= 40
-	WithColoredOverlay@Magnet4:
-		Color: 99889944
-		RequiresCondition: Magnet >= 40 && Magnet <= 50
-	WithColoredOverlay@Magnet5:
-		Color: AA88AA55
-		RequiresCondition: Magnet >= 50 && Magnet <= 60
-	WithColoredOverlay@Magnet6:
-		Color: BB88BB66
-		RequiresCondition: Magnet >= 60 && Magnet <= 70
-	WithColoredOverlay@Magnet7:
-		Color: CC88CC77
-		RequiresCondition: Magnet >= 70 && Magnet <= 80
-	WithColoredOverlay@Magnet8:
-		Color: DD88DD88
-		RequiresCondition: Magnet >= 80 && Magnet <= 90
-	WithColoredOverlay@Magnet9:
-		Color: EE88EE99
-		RequiresCondition: Magnet >= 90 && Magnet <= 100
-	WithColoredOverlay@Magnet10:
-		Color: FF88FFAA
-		RequiresCondition: Magnet >= 100
+		LowerValue: 20000
+		UpperValue: 20000
+	# Movement only. The old ramp was ten `SpeedMultiplier` traits and touched nothing else,
+	# so turn speed, turret traverse and reload are pinned at 100 AT BOTH ENDS -- this trait
+	# defaults them to 50 at maximum, and leaving them out would quietly add three new
+	# effects the magnetron never had.
+	SlowsProportionalToPhysicalState@Magnetism:
+		PhysicalStateName: Magnetism
+		UseDeviationFromRelaxed: true
+		OnlyPositiveValues: true
+		SpeedModifierAtMinimum: 100
+		SpeedModifierAtMaximum: 0
+		TurnSpeedModifierAtMinimum: 100
+		TurnSpeedModifierAtMaximum: 100
+		TurretTurnSpeedModifierAtMinimum: 100
+		TurretTurnSpeedModifierAtMaximum: 100
+		ReloadDelayModifierAtMinimum: 100
+		ReloadDelayModifierAtMaximum: 100
+	# Same magenta ramp the ten `WithColoredOverlay` traits drew, now interpolated. It opens
+	# at 2000 (the old `Magnet >= 10`) so a single stray shot still does not tint the actor.
+	WithPhysicalStateColoredOverlay@Magnetism:
+		PhysicalStateName: Magnetism
+		MinColor: 66886611
+		MaxColor: FF88FFAA
+		LowerValue: 2000
+		UpperValue: 20000
 
 ^EnemyInProximity:
 	PhysicalState@EnemyProximity:

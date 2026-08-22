@@ -1371,9 +1371,13 @@ AAHyperionMagnet:
 		Falloff: 100, 100
 		Damage: 2000
 		ValidTargets: Air
-	Warhead@Condition: GrantExternalCondition
-		Condition: Magnet
-		Duration: 100
+	# Same conversion as Yuri's RA2Magnet: 200 a shot x `Burst: 100` fills the 20000
+	# Magnetism bar in one volley, replacing the 100 stacked `Magnet` tokens.
+	Warhead@Condition: ApplyPhysicalState
+		PhysicalStateName: Magnetism
+		Amount: 200
+		ApplyFirepowerModifiers: false
+		ApplyDamageModifiers: false
 		Range: 500
 		ValidTargets: Air
 	-Warhead@EffectAir:
