@@ -42,7 +42,23 @@ def main():
              "have live uncommitted WIP that a wide add would capture or clobber). "
              "Stage explicit paths instead: `git add <file> [<file> ...]`.")
 
-    # (2) boot-gate before committing engine-loaded content
+    # (2) NEVER HAND-PARSE VERSUS. A bespoke line-scanner that opens a dict on `Versus:` and
+    # scans following `Key: <int>` lines cannot see where the block ENDS, so the
+    # `PercentageVersus:` rows that live in the SAME warhead node silently overwrite the real
+    # profile. That produced a full session of internally-consistent, wrong numbers on
+    # 2026-08-22 ("0 of 125 obey the MEAN-100 law"; the truth was 123 of 125). The project has
+    # correct readers; use them.
+    if re.search(r"""["']Versus:["']""", cmd) and re.search(r"startswith|split\(|re\.match", cmd):
+        if "versus_of" not in cmd and "resolve_weapon" not in cmd:
+            deny("Never hand-parse a `Versus:` block. A line-scanner cannot tell where the block "
+                 "ENDS, so `PercentageVersus:` in the same warhead node silently overwrites the "
+                 "profile — that is exactly how a whole session of weapon-profile numbers came "
+                 "out wrong. Use the project's readers: "
+                 "`miniyaml.Ruleset.resolve_weapon(name)` for the node, then "
+                 "`weapon_efficiency.versus_of(warhead_node)` for the {armor: percent} dict. "
+                 "See CLAUDE.md rule 8e and tools/audit/audit_versus_profile.py.")
+
+    # (3) boot-gate before committing engine-loaded content
     if re.search(r"\bgit\s+commit\b", cmd):
         root = pathlib.Path(__file__).resolve().parents[2]
         try:

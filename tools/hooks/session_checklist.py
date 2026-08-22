@@ -8,9 +8,38 @@ CHECKLIST = """\
 CAMEO — orient before acting this session (verify against the artifacts, don't trust summaries):
 
 MUST-READ, in order: CLAUDE.md · docs/LESSONS_LEARNED.md · docs/AGENT_WORKSPACE.md ·
-docs/design/ROADMAP.md · docs/design/BALANCE_PIPELINE_ESTIMATE.md.
+**docs/DESIGN.md** · docs/design/ROADMAP.md · docs/design/BALANCE_PIPELINE_ESTIMATE.md.
 For weapon work also: docs/AI_HANDOFF_2026-08-05.md · docs/design/AREADAMAGE_HANDOFF.md ·
 docs/design/WEAPON_3WAY_SPLIT.md.
+
+⛔ BEFORE DESIGNING ANYTHING, GREP docs/DESIGN.md FOR THE CONCEPT. It is the BINDING contract
+and it is long, so nobody reads it end to end — grep it. On 2026-08-22 a whole session was spent
+re-deriving a weapon-tier model that §12.0a/§12.0c/§12.0d had already ruled AND shipped. A design
+question that feels novel usually is not. The rulings most often re-invented:
+
+  §12.0a MEAN-100      every ^Warhead_* MAIN warhead has its 16 armor rows normalised to
+                       arithmetic MEAN 100. Therefore K is SHAPE-ONLY, `Damage` is the SOLE
+                       magnitude knob, and a tilt is FREE. Weapon tier does NOT price via Versus.
+  §12.0c SHIELD LADDER Shield is its own compressed [100,400] ladder, Tesla top. NOT a normal armor.
+  §12.0d CLASS TILT    each LEVEL tilts toward one end of every armor ladder (Light->lightest rung,
+                       Medium->middle, Heavy->heaviest, Super->FLAT generalist). The tilt is applied
+                       to the VALUES and each armor is then given back the RANK it held, so it
+                       "can never invert" — WITHIN a ladder. LADDERS are INF/VEH/BLD/AIR, so
+                       `None` (INF) vs `Superheavy` (VEH) is a CROSS-ladder relation the tilt is
+                       DESIGNED to change. Comparing them proves nothing.
+  §12.0b HEROIC        a DERIVED cell: Heroic = Plate x Scout / PEAK. Never tilt it; recompute it.
+
+⛔ NEVER HAND-PARSE YAML. Read through `miniyaml.Ruleset.resolve_weapon` / `.resolve`, and pull
+Versus with `weapon_efficiency.versus_of(node)`. A bespoke line-scanner opened a dict on `Versus:`
+and never CLOSED it, so the `PercentageVersus:` rows sitting in the SAME warhead node overwrote the
+profile: every mean, spread, ratio and inversion count came out internally consistent and WRONG
+("0 of 125 obey MEAN-100"; the truth was 123 of 125). The near-miss sibling name is the trap — the
+OPEN guard was right, the CLOSE was missing. Guarded by tools/audit/audit_versus_profile.py.
+[hook-enforced: bash_guard blocks inline Versus scanning]
+
+⚠ A RESULT THAT CONTRADICTS A BINDING LAW IS A CONTRADICTION, NOT A FINDING. If the generator
+implements a law and verify_generator_sync reports 0 drift, "nothing conforms" means YOUR MEASURE
+is broken. Check the measurement before writing it up.
 
 HARD RULES (several are enforced by hooks — see .claude/settings.json):
  1. Never commit without booting to the main menu (perf.log ends
