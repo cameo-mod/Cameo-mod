@@ -3986,7 +3986,7 @@
     },
     "name": "Auxiliary Weapon",
     "prerequisites": [
-     "~ts_nod_radar",
+     "~ts_nod_techcenter",
      "!ts_nod_upgrade_auxiliaryweapon"
     ],
     "queue": [
@@ -5404,9 +5404,9 @@
       "damage_warheads": [
        {
         "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "falloff": "100, 0",
+        "spread": "120",
+        "tag": "CannonAP_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -5419,12 +5419,12 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^TSCannonEffect",
-       "^Warhead_CannonHE_Medium",
+       "^Warhead_CannonAP_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium"
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonAP_Medium"
       ],
       "weapon": "TS90mm",
       "weapon_class_source": "template"
@@ -5433,9 +5433,9 @@
       "damage_warheads": [
        {
         "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "falloff": "100, 0",
+        "spread": "120",
+        "tag": "CannonAP_Medium",
         "type": "AreaDamage"
        },
        {
@@ -5468,14 +5468,14 @@
       "requires": "undeployed && ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium",
+       "^Warhead_CannonAP_Medium",
        "^Projectile_Shell_Medium",
-       "^Effect_CannonHE_Medium",
+       "^Effect_CannonAP_Medium",
        "^LaserWeapon",
        "^TSLaserEffect"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonAP_Medium"
       ],
       "weapon": "TSLaser90mm",
       "weapon_class_source": "template"
@@ -5485,9 +5485,9 @@
       "damage_warheads": [
        {
         "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "falloff": "100, 0",
+        "spread": "120",
+        "tag": "CannonAP_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -5502,7 +5502,7 @@
        "TS90mm"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonAP_Medium"
       ],
       "weapon": "TS90mmDep",
       "weapon_class_source": "template"
@@ -5512,9 +5512,9 @@
       "damage_warheads": [
        {
         "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "falloff": "100, 0",
+        "spread": "120",
+        "tag": "CannonAP_Medium",
         "type": "AreaDamage"
        },
        {
@@ -5550,7 +5550,7 @@
        "TSLaser90mm"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonAP_Medium"
       ],
       "weapon": "TSLaser90mmDep",
       "weapon_class_source": "template"

@@ -138,15 +138,19 @@
 		InvalidTargets: Ship, Structure, Bridge
 
 TS25mmDep:
+	# ⛔ GROUND ONLY. Maintainer + Destined 2026-08-22: the tick tank should not shoot air —
+	# *"TS Nod already has good enough anti air from the buggy and bike and also later on the
+	# stealth tank so the tick tank doesn't even need anti air"*. This auxiliary weapon was the
+	# ONLY source of it, so removing Air here removes it from the unit entirely.
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
 	ReloadDelay: 8
 	Range: 6679
 	Report: chaingn1.aud
-	ValidTargets: Ground, Water, Air
+	ValidTargets: Ground, Water
 	Warhead@Flak_Medium:
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 2000
 TSLaser25mmDep:
 	Inherits: ^FlakWeapon
@@ -156,13 +160,14 @@ TSLaser25mmDep:
 		Width: 36
 		Duration: 8
 		SecondaryBeamWidth: 18
-	ValidTargets: Ground, Water, Air
+	# Ground only, as TS25mmDep above — this is its T3 laser variant.
+	ValidTargets: Ground, Water
 	ReloadDelay: 8
 	Range: 6679
 	Report: chaingn1.aud
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 2000
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
@@ -174,14 +179,22 @@ TSLaser25mmDep:
 		ValidTargets: Ground, Water, Air
 
 TS90mm:
+	# ⭐ ANTI-ARMOUR, NOT ANTI-EVERYTHING. Destined 2026-08-22: the tick tank *"should be tanky
+	# ... but not do any damage against infantry ... Only good against other tanks/buildings."*
+	# CannonHE -> CannonAP is exactly that trade, measured across the generated profiles:
+	# None 0.51x, Wood 0.69x, Scout 0.78x — but Heavy 1.27x, Concrete 1.72x, Superheavy 1.91x.
+	# ⚠ The `Warhead@` override key is renamed WITH the template. Leaving it as
+	# `Warhead@CannonHE_Medium` would orphan it into a bare override of a warhead the new
+	# parent never defines — an abstract warhead, which is the documented empty-warhead boot
+	# crash (find_empty_warhead.py).
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@wh: ^Warhead_CannonAP_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
+	Inherits@fx: ^Effect_CannonAP_Medium
 	Report: tnkfire6.aud
 	ReloadDelay: 26
 	Range: 5319
-	Warhead@CannonHE_Medium:
+	Warhead@CannonAP_Medium:
 		Damage: 6000
 TS90mmDep:
 	Inherits: TS90mm
@@ -194,9 +207,10 @@ TS90mmDep:
 		LaunchAngle: 0
 
 TSLaser90mm:
-	Inherits: ^Warhead_CannonHE_Medium
+	# Anti-armour cannon half, as TS90mm above — this is its T3 laser variant.
+	Inherits: ^Warhead_CannonAP_Medium
 	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@3: ^Effect_CannonAP_Medium
 	Inherits@4: ^LaserWeapon
 	Inherits@5: ^TSLaserEffect
 	Projectile: LaserZap
@@ -204,7 +218,7 @@ TSLaser90mm:
 		SecondaryBeamWidth: 36
 	ReloadDelay: 32
 	Range: 5423
-	Warhead@CannonHE_Medium:
+	Warhead@CannonAP_Medium:
 		Damage: 6000
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 6000
