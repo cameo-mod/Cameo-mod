@@ -309,9 +309,9 @@ Container@OBSERVER_WIDGETS:
 			ImageName: observer-bottom
 		Image@REPLAY_PLAYER:
 			Logic: ReplayControlBarLogicCameo
-			X: WINDOW_WIDTH - 387
+			X: WINDOW_WIDTH - 250
 			Y: 297
-			Width: 375
+			Width: 238
 			Height: 40
 			Visible: false
 			ImageCollection: sidebar-observer
@@ -352,9 +352,9 @@ Container@OBSERVER_WIDGETS:
 							ImageCollection: music
 							ImageName: play
 				Button@BUTTON_SLOW:
-					X: 45
+					X: 52
 					Y: 8
-					Width: 38
+					Width: 34
 					Height: 22
 					Background: sidebar-button-observer
 					Key: ReplaySpeedSlow
@@ -364,9 +364,9 @@ Container@OBSERVER_WIDGETS:
 					Text: 0.5x
 					Font: TinyBold
 				Button@BUTTON_REGULAR:
-					X: 85
+					X: 88
 					Y: 8
-					Width: 38
+					Width: 34
 					Height: 22
 					Background: sidebar-button-observer
 					Key: ReplaySpeedRegular
@@ -375,70 +375,37 @@ Container@OBSERVER_WIDGETS:
 					VisualHeight: 0
 					Text: 1x
 					Font: TinyBold
-				Button@BUTTON_SPEED125:
-					X: 125
+				Button@BUTTON_FAST:
+					X: 124
 					Y: 8
-					Width: 38
+					Width: 34
 					Height: 22
 					Background: sidebar-button-observer
-					TooltipText: 125% speed
-					TooltipContainer: TOOLTIP_CONTAINER
-					VisualHeight: 0
-					Text: 1.25x
-					Font: TinyBold
-				Button@BUTTON_SPEED133:
-					X: 165
-					Y: 8
-					Width: 38
-					Height: 22
-					Background: sidebar-button-observer
+					Key: ReplaySpeedFast
 					TooltipText: 133% speed
 					TooltipContainer: TOOLTIP_CONTAINER
 					VisualHeight: 0
 					Text: 1.33x
 					Font: TinyBold
-				Button@BUTTON_SPEED150:
-					X: 205
+				Button@BUTTON_FASTER:
+					X: 160
 					Y: 8
-					Width: 38
+					Width: 34
 					Height: 22
 					Background: sidebar-button-observer
-					TooltipText: 150% speed
-					TooltipContainer: TOOLTIP_CONTAINER
-					VisualHeight: 0
-					Text: 1.5x
-					Font: TinyBold
-				Button@BUTTON_FAST:
-					X: 245
-					Y: 8
-					Width: 38
-					Height: 22
-					Background: sidebar-button-observer
-					Key: ReplaySpeedFast
 					TooltipText: 200% speed
 					TooltipContainer: TOOLTIP_CONTAINER
 					VisualHeight: 0
 					Text: 2x
 					Font: TinyBold
-				Button@BUTTON_FASTER:
-					X: 285
-					Y: 8
-					Width: 38
-					Height: 22
-					Background: sidebar-button-observer
-					TooltipText: 500% speed
-					TooltipContainer: TOOLTIP_CONTAINER
-					VisualHeight: 0
-					Text: 5x
-					Font: TinyBold
 				Button@BUTTON_MAXIMUM:
-					X: 325
+					X: 196
 					Y: 8
 					Width: 38
 					Height: 22
 					Background: sidebar-button-observer
 					Key: ReplaySpeedMax
-					TooltipText: Maximum speed
+					TooltipText: Insane speed (capped so it stays playable)
 					TooltipContainer: TOOLTIP_CONTAINER
 					VisualHeight: 0
 					Text: MAX
