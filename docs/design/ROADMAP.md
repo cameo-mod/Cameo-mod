@@ -116,6 +116,39 @@ Documented in `PHYSICAL_STATE_SYSTEM.md` §5 but not built: **Sonic → `Resonan
 new C#), **Hex** (Magic: −firepower/−accuracy/disable specials), **ArmorBreach**, **Knockback**
 (needs new C#). Only **Temperature** (98.6% exposure) and **Corrosion** (45.0%) exist today.
 
+## ⛔ OPEN DECISION — how the Cryo families get adopted (2026-08-23)
+
+`BulletCryo`, `CannonCryo`, `MissileCryo` and `CryoBlast` are BUILT and spliced but adopted by
+**0 weapons**. So is the base `Cryo` family. Everything cryo still runs the legacy path.
+
+⭐ **THE STRUCTURE IS NOT WHAT IT LOOKED LIKE.** All **17** cryo weapons are THIN CHILDREN of one
+shared template, `^CryoMissileProjectile` (`ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1`),
+which carries a single `Warhead@PhysicalStateCryo: ApplyPhysicalState`. Their main damage comes
+entirely from their NON-CRYO parents (`Stinger`, `SheridanMissiles`, `RapierBombs`, `M1Carbine`,
+`ViperMissiles`...), which other units share. Each cryo weapon overrides only the `Amount`:
+
+    -48000 x1   -32000 x1   -30000 x3   -20000 x2   -16000 x3   -10000 x2   -2000 x5
+
+That spread IS the hand-cranked dilution compensation diagnosed on the Sheridan, all in one place.
+
+⚠ A first pass misread this: a `sed` window overran the block and showed the NEXT weapon's
+`Inherits@wh:` lines, making these look like standalone weapons on modern templates. They are not.
+
+**Three shapes, one disqualified:**
+
+| option | verdict |
+|---|---|
+| ADD the family as an extra warhead (DESIGN's "an upgrade ADDS the warhead") | ⛔ adds a main to ~12 weapons → **raises the `three_way_split` ratchet**, which is forbidden |
+| REPLACE the parents' mains | yaml cannot un-inherit; needs restructuring parents that non-cryo units depend on |
+| ⭐ **FOLD the meter onto the existing main warhead** — swap the discrete `ApplyPhysicalState` for `PhysicalStateName: Temperature` + `PhysicalStateScale` | no new warhead, no ratchet change, implements the Scale-200 support design, and is close to a ONE-TEMPLATE change because they all share `^CryoMissileProjectile` |
+
+**Recommended: fold.** ⚠ It implies the four Cryo families serve a DIFFERENT population — weapons
+whose damage TYPE should be cryo — not cryo-flavoured variants of existing weapons. Decide that
+before pointing anything at them.
+
+12 of the 17 are additionally blocked behind the legacy 3-way split (`155mmBastionCryo`,
+`APTuskCryo`, the `LightMissile+SmallArms+Chaingun+...` beam soup, etc.).
+
 ## ⭐ FROM THE DISCORD PLAYTEST THREAD (2026-08-22)
 
 ### 1. TS Nod tick tank — the complaint is real, the diagnosis pointed at the wrong upgrade
