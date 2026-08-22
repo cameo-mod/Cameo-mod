@@ -116,6 +116,81 @@ Documented in `PHYSICAL_STATE_SYSTEM.md` §5 but not built: **Sonic → `Resonan
 new C#), **Hex** (Magic: −firepower/−accuracy/disable specials), **ArmorBreach**, **Knockback**
 (needs new C#). Only **Temperature** (98.6% exposure) and **Corrosion** (45.0%) exist today.
 
+## ⭐ FROM THE DISCORD PLAYTEST THREAD (2026-08-22)
+
+### 1. TS Nod tick tank — the complaint is real, the diagnosis pointed at the wrong upgrade
+
+Destined: *"They are supposed to be aggravatingly tanky once deployed … They shouldn't be good
+against infantry, at least not until t3 upgrade."* Plus: *"it's crazy that in this mod they
+become hard to counter at radar upgrade instead of tech center upgrade."*
+
+⛔ **Tiberium Lenses is ALREADY at T3.** Measured: `~ts_nod_techcenter`, cost 10,000 — exactly
+where Shattered Paradise has it. The T2 upgrade doing the damage is a different one:
+
+| upgrade | tier | cost | what it adds |
+|---|---|--:|---|
+| **Auxiliary Weapon** | **T2 `~ts_nod_radar`** | 4,000 | `TS25mmDep` — `Ground, Water, Air`, **None 200** / Flak 149 / Plate 117 |
+| Tiberium Lenses | T3 `~ts_nod_techcenter` | 10,000 | swaps to lasers |
+
+So the **Auxiliary Weapon** is both the anti-infantry AND the anti-air spike, at T2. Without it
+the tick tank has **no anti-air at all** and its cannon is `Ground, Water` only. And the T3 laser
+is a NERF, not a spike: `TSLaser25mmDep` drops None 200 → 80 and Heavy 49 → 45.
+
+**Levers, with collateral measured:**
+
+| lever | collateral |
+|---|---|
+| drop `Air` from `TS25mmDep` `ValidTargets` | none — per weapon |
+| move Auxiliary Weapon T2 → T3 | none — per upgrade |
+| cannon `^Warhead_CannonHE_Medium` → `^Warhead_CannonAP_Medium` | **1** other inherit site |
+| lower the anti-infantry Versus directly | ⛔ not viable — Flak_Medium is 32 weapons, CannonHE_Medium is 73, and Versus lives only in templates |
+
+⭐ The cannon swap is the precise answer to *"only good against tanks/buildings"*:
+None **0.51x**, Wood 0.69x, Scout 0.78x — but Heavy **1.27x**, Concrete **1.72x**,
+Superheavy **1.91x**. `CannonAP_Medium` has only ONE inherit site today, so adoption is cheap.
+
+⚠ 333ggg wants a dedicated TS Nod anti-air unit; removing the tick tank's AA is gated on that.
+
+### 2. "Very tanky" via an armour BAR — supported, and it is the R1 law
+
+Maintainer: *"give them an additional armor plating when deployed (armor bar shows up so they
+need to destroy the armor bar first) … will that cause any problems?"*
+
+`OpenRA.Mods.Cameo/Traits/ArmorPlating.cs` is exactly this and its own [Desc] states the rule:
+*"Every 'this unit is tougher now' effect in Cameo is meant to be one of these … toughness is a
+visible bar rather than an invisible DamageMultiplier."* It is a `PausableConditionalTrait`, so
+`RequiresCondition: deployed` is all it takes. Two properties fit the tick fantasy exactly:
+
+- **`RampTicks: 125`** — the pool repairs NOTHING while under fire and winds up to full rate once
+  left alone. It heals back between engagements, not during them.
+- **`BypassDamageTypes`** — damage types that pass straight THROUGH the plating to health. Point
+  it at artillery/siege types and the unit is countered by exactly what Destined says should
+  counter it, by construction rather than by tuning.
+
+⚠ Two things to get right:
+1. `MaxPercentageStrength: 50` (the default) is a pool worth 50% of max HP = **1.5x** effective
+   HP — LESS than the ×0.5 multiplier it replaces (2x). If "very tanky" is the target the pool
+   has to be bigger; the difference is that a bar is visible and priced, a multiplier was neither.
+2. Grant the plating **without** a `FullCondition` armour type. The trait's docs tell you to gate
+   the body `Armor` on `EmptyCondition` when the plating carries its own type — that is for the
+   armor-swap pattern and would fight §12.0g's deploy averaging. A pure pool has no Versus
+   interaction and composes cleanly.
+
+### 3. Spectator tabs ported from Combined Arms (request: Demeow Cat Hans)
+
+Four extra observer tabs plus replay speed: **Economy Damage** (harvesters/refineries killed and
+lost), **Upgrades** (per-player, with purchase timings), **Units Produced** (count + value per
+unit type), **Build Order** (initial order with timestamps), and **1.33x / 1.5x** replay speed.
+An in-game encyclopedia was raised and deferred as too large.
+
+### 4. Deploy-abuse bugs (reporter: ws) — UNVERIFIED, needs reproduction
+
+- redeploying a **nexus** appears to refill its shield — a free full shield on demand.
+- **hatcheries** appear to lose their upgrades when redeployed.
+
+Both are `GrantConditionOnDeploy` state-reset bugs; neither has been reproduced against the tree
+yet, so they are reports, not findings.
+
 ## ⭐ NEXT MAJOR — continuous weapon heaviness — see [`CONTINUOUS_WEAPON_HEAVINESS.md`](CONTINUOUS_WEAPON_HEAVINESS.md) (2026-08-22)
 
 Resolves the 3-way-split vs between-tier-mix collision: ONE warhead template per family plus a
