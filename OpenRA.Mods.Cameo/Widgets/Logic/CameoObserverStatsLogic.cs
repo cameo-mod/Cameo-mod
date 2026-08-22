@@ -24,9 +24,9 @@ using OpenRA.Widgets;
 
 namespace OpenRA.Mods.Cameo.Widgets.Logic
 {
-	public enum CameoObserverStatsPanel { None, Minimal, Basic, Economy, Production, SupportPowers, Combat, Army, Upgrades, Promotions, BuildOrder, UnitsProduced, EconomyDamage, Graph, ArmyGraph }
+	public enum CameoObserverStatsPanel { None, Minimal, Basic, Economy, Production, SupportPowers, Combat, Army, Upgrades, Promotions, BuildOrder, UnitsProduced, EconomyDamage, Graph, ArmyGraph, TeamArmyGraph, TeamEarningsGraph }
 
-	[ChromeLogicArgsHotkeys("StatisticsMinimalKey", "StatisticsBasicKey", "StatisticsEconomyKey", "StatisticsProductionKey", "StatisticsSupportPowersKey", "StatisticsCombatKey", "StatisticsArmyKey", "StatisticsUpgradesKey", "StatisticsPromotionsKey", "StatisticsBuildOrderKey", "StatisticsUnitsProducedKey", "StatisticsEconomyDamageKey", "StatisticsGraphKey",
+	[ChromeLogicArgsHotkeys("StatisticsMinimalKey", "StatisticsBasicKey", "StatisticsEconomyKey", "StatisticsProductionKey", "StatisticsSupportPowersKey", "StatisticsCombatKey", "StatisticsArmyKey", "StatisticsUpgradesKey", "StatisticsPromotionsKey", "StatisticsBuildOrderKey", "StatisticsUnitsProducedKey", "StatisticsEconomyDamageKey", "StatisticsGraphKey", "StatisticsTeamArmyGraphKey", "StatisticsTeamEarningsGraphKey",
 		"StatisticsArmyGraphKey")]
 	public class CameoObserverStatsLogic : ChromeLogic
 	{
@@ -70,16 +70,22 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		const string EconomyDamage = "options-observer-stats.economy-damage";
 
 		[FluentReference]
-		const string EarningsGraph = "options-observer-stats.earnings-graph";
+		const string TeamArmyGraph = "options-observer-stats.team-army-graph";
 
 		[FluentReference]
-		const string ArmyGraph = "options-observer-stats.army-graph";
+		const string TeamEarningsGraph = "options-observer-stats.team-earnings-graph";
 
 		[FluentReference("team")]
 		const string TeamNumber = "label-team-name";
 
 		[FluentReference]
 		const string NoTeam = "label-no-team";
+
+		[FluentReference]
+		const string EarningsGraph = "options-observer-stats.earnings-graph";
+
+		[FluentReference]
+		const string ArmyGraph = "options-observer-stats.army-graph";
 
 		readonly ContainerWidget minimalStatsHeaders;
 		readonly ContainerWidget basicStatsHeaders;
@@ -93,6 +99,10 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		readonly ContainerWidget buildOrderHeaders;
 		readonly ContainerWidget unitsProducedHeaders;
 		readonly ContainerWidget economyDamageHeaders;
+		readonly ContainerWidget teamArmyValueGraphContainer;
+		readonly ContainerWidget teamIncomeGraphContainer;
+		readonly LineGraphWidget teamArmyValueGraph;
+		readonly LineGraphWidget teamIncomeGraph;
 		readonly ScrollPanelWidget playerStatsPanel;
 		readonly ScrollItemWidget minimalPlayerTemplate;
 		readonly ScrollItemWidget basicPlayerTemplate;
@@ -189,6 +199,10 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 			armyValueGraphContainer = widget.Get<ContainerWidget>("ARMY_VALUE_GRAPH_CONTAINER");
 			armyValueGraph = armyValueGraphContainer.Get<LineGraphWidget>("ARMY_VALUE_GRAPH");
+			teamArmyValueGraphContainer = widget.Get<ContainerWidget>("TEAM_ARMY_VALUE_GRAPH_CONTAINER");
+			teamArmyValueGraph = teamArmyValueGraphContainer.Get<LineGraphWidget>("TEAM_ARMY_VALUE_GRAPH");
+			teamIncomeGraphContainer = widget.Get<ContainerWidget>("TEAM_INCOME_GRAPH_CONTAINER");
+			teamIncomeGraph = teamIncomeGraphContainer.Get<LineGraphWidget>("TEAM_INCOME_GRAPH");
 
 			teamTemplate = playerStatsPanel.Get<ScrollItemWidget>("TEAM_TEMPLATE");
 
@@ -244,6 +258,8 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				CreateStatsOption(EconomyDamage, CameoObserverStatsPanel.EconomyDamage, economyDamagePlayerTemplate, () => DisplayStats(EconomyDamageStats)),
 				CreateStatsOption(EarningsGraph, CameoObserverStatsPanel.Graph, null, () => IncomeGraph()),
 				CreateStatsOption(ArmyGraph, CameoObserverStatsPanel.ArmyGraph, null, () => ArmyValueGraph()),
+				CreateStatsOption(TeamArmyGraph, CameoObserverStatsPanel.TeamArmyGraph, null, () => TeamArmyValueGraph()),
+				CreateStatsOption(TeamEarningsGraph, CameoObserverStatsPanel.TeamEarningsGraph, null, () => TeamIncomeGraph()),
 			};
 
 			ScrollItemWidget SetupItem(StatsDropDownOption option, ScrollItemWidget template)
@@ -299,9 +315,13 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 			incomeGraphContainer.Visible = false;
 			armyValueGraphContainer.Visible = false;
+			teamArmyValueGraphContainer.Visible = false;
+			teamIncomeGraphContainer.Visible = false;
 
 			incomeGraph.GetSeries = null;
 			armyValueGraph.GetSeries = null;
+			teamArmyValueGraph.GetSeries = null;
+			teamIncomeGraph.GetSeries = null;
 		}
 
 		void IncomeGraph()
@@ -314,6 +334,59 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 					p.PlayerName,
 					p.Color,
 					(p.PlayerActor.TraitOrDefault<PlayerStatistics>() ?? new PlayerStatistics(p.PlayerActor)).IncomeSamples.Select(s => (float)s)));
+		}
+
+		/// <summary>
+		/// Element-wise sum of every member's samples, padded to the LONGEST list.
+		/// </summary>
+		/// <remarks>
+		/// ⛔ NOT `Zip`, which is what the CA original uses. `PlayerStatistics.Tick` stops
+		/// sampling permanently once a defeated player's army and income reach zero
+		/// (`armyGraphDisabled = true`), so a dead teammate's list is SHORTER than a living
+		/// one's — and Zip truncates to the shortest input. The team's line would therefore
+		/// stop dead at the moment its first member died, in exactly the games where a team
+		/// graph is worth looking at. Padding with 0 is also the correct reading: a player with
+		/// no army contributes no army.
+		/// </remarks>
+		static IEnumerable<float> SumSamples(IEnumerable<IEnumerable<int>> series)
+		{
+			var lists = series.Select(s => s.ToArray()).ToArray();
+			if (lists.Length == 0)
+				return Array.Empty<float>();
+
+			var length = lists.Max(l => l.Length);
+			var totals = new float[length];
+			foreach (var list in lists)
+				for (var i = 0; i < list.Length; i++)
+					totals[i] += list[i];
+
+			return totals;
+		}
+
+		IEnumerable<LineGraphSeries> TeamSeries(Func<PlayerStatistics, IEnumerable<int>> samples)
+		{
+			return teams.Select(t => new LineGraphSeries(
+				t.Key > 0
+					? FluentProvider.GetMessage(TeamNumber, "team", t.Key.ToString(NumberFormatInfo.CurrentInfo))
+					: FluentProvider.GetMessage(NoTeam),
+				// The team's colour is its first member's — teams have no colour of their own.
+				t.First().Color,
+				SumSamples(t.Select(p => samples(
+					p.PlayerActor.TraitOrDefault<PlayerStatistics>() ?? new PlayerStatistics(p.PlayerActor))))));
+		}
+
+		void TeamArmyValueGraph()
+		{
+			playerStatsPanel.Visible = false;
+			teamArmyValueGraphContainer.Visible = true;
+			teamArmyValueGraph.GetSeries = () => TeamSeries(ps => ps.ArmySamples);
+		}
+
+		void TeamIncomeGraph()
+		{
+			playerStatsPanel.Visible = false;
+			teamIncomeGraphContainer.Visible = true;
+			teamIncomeGraph.GetSeries = () => TeamSeries(ps => ps.IncomeSamples);
 		}
 
 		void ArmyValueGraph()
