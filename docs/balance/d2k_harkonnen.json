@@ -18,8 +18,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "33",
         "tag": "Bullet_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -32,8 +33,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -46,8 +48,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -236,8 +239,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "Flame_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -771,8 +775,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "42",
         "tag": "MissileAP_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -1018,8 +1023,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -1281,8 +1287,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "42",
         "tag": "MissileAP_Heavy_Percentage",
         "type": "AreaDamagePercentage"

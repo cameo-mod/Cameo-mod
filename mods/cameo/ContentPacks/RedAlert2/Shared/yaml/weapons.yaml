@@ -878,7 +878,7 @@ RA2GIRocketsG:
 	Warhead@MissileAP_Light:
 		Damage: 24000
 	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		Damage: 12
+		Damage: 240
 
 RA2GIRocketsG_elite:
 	Inherits: RA2GIRocketsG
@@ -887,7 +887,7 @@ RA2GIRocketsG_elite:
 	Warhead@MissileAP_Light:
 		Damage: 48000
 	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		Damage: 24
+		Damage: 480
 	Projectile: Missile
 		Image: red_dragon
 		Shadow: true
@@ -919,7 +919,7 @@ RA2105mm:
 	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 
 RA2105mm_elite:
 	Inherits: RA2105mm
@@ -938,7 +938,7 @@ RA2sabot:
 	Warhead@CannonAP_Light:
 		Damage: 80000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 40
+		Damage: 800
 
 RA2sabot_elite:
 	Inherits: RA2sabot
@@ -948,7 +948,7 @@ RA2sabot_elite:
 	Warhead@CannonAP_Light:
 		Damage: 160000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 80
+		Damage: 1600
 
 RA2MirageGun:
 	Inherits: ^RailgunWeapon
@@ -983,7 +983,7 @@ RA2MirageGun:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 
 RA2HoverMissile:
@@ -1002,7 +1002,7 @@ RA2HoverMissile:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Arrow_Light_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 3
+		Damage: 60
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
@@ -1010,7 +1010,7 @@ RA2HoverMissile:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 3
+		Damage: 60
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
 		-ImpactSounds:
@@ -1447,7 +1447,7 @@ RA2120mm:
 	Warhead@CannonHE_Medium:
 		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 
 RA2120mm_elite:
 	Inherits: RA2120mm
@@ -1470,7 +1470,7 @@ RA2155mm:
 		Damage: 16000
 		Spread: 400
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 		Spread: 400
 
 RA2155mm_elite:
@@ -1566,7 +1566,7 @@ SonicZap:
 	Warhead@Magic_Heavy_Percentage: AreaDamagePercentage
 		Range: 0, 32
 		Falloff: 100, 50
-		Damage: 1
+		Damage: 20
 		AffectsParent: false
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -1619,7 +1619,7 @@ TeslaFragmentLarge:
 		DamageTypes: Tesla
 		Damage: 8000
 	Warhead@Tesla_Super_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
 	Warhead@TeslaArc: FireShrapnel
@@ -1784,7 +1784,7 @@ RA2PortaTesla:
 		DamageTypes: Tesla
 		Damage: 12000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 12
+		Damage: 240
 
 RA2PortaTesla2:
 	Inherits: RA2PortaTesla
@@ -1821,7 +1821,7 @@ TeslaFragment:
 		DamageTypes: Tesla
 		Damage: 4000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 
@@ -1839,7 +1839,7 @@ TeslaFragment2:
 		DamageTypes: Tesla
 		Damage: 6000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 12000
 	Warhead@TeslaArc: FireShrapnel
@@ -1865,7 +1865,7 @@ RA2BrutePunch:
 	Warhead@Melee_Medium:
 		Damage: 20000
 	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 	-Warhead@Effect:
 
 RA2BrutePunch_elite:
@@ -1901,7 +1901,7 @@ RA2Shovel:
 	Warhead@Melee_Medium:
 		Damage: 2000
 	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 IonPulseDischarge:
 	Inherits@fx: ^Effect_Emp_Fx_RA2
@@ -1963,7 +1963,7 @@ RA2RadBeamWeapon:
 		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, RadiationDeath
 	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
-		Damage: 15
+		Damage: 300
 	-Warhead@Effect:
 
 RA2CarrierTarget:
@@ -2067,18 +2067,18 @@ RA2HornetMissile:
 		Damage: 2000
 	Warhead@Demolition_Light_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Demolition_Heavy:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 	Warhead@Demolition_Heavy_Percentage:
-		Damage: 1
+		Damage: 20
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 		ValidTargets: Ground, Water, Air
 
 RA2GIRockets:
@@ -2133,7 +2133,7 @@ MigMissiles:
 	Warhead@MissileAP_Medium:
 		Damage: 8000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 	-Warhead@Effect1:
 
 MigMissiles_rad:
@@ -2151,7 +2151,7 @@ MigMissiles_rad:
 	Warhead@Chemical_Medium:
 		Damage: 4000
 	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
 		Spread: 200
@@ -2313,13 +2313,13 @@ RA2SCUD:
 		Damage: 30000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 15
+		Damage: 300
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 30000
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 15
+		Damage: 300
 	Warhead@Effect: CreateEffect
 		ImpactSounds: gexp14a.wav
 		ValidTargets: Ground, Air
@@ -2377,11 +2377,11 @@ RA2SCUD_rad:
 	Warhead@Demolition_Light:
 		Damage: 18000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 9
+		Damage: 180
 	Warhead@MissileAP_Heavy:
 		Damage: 18000
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		Damage: 9
+		Damage: 180
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
 		Spread: 540
@@ -2437,11 +2437,11 @@ V3Explode:
 	Warhead@Demolition_Light:
 		Damage: 10000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 	Warhead@MissileAP_Heavy:
 		Damage: 10000
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 
 DredMissile:
 	Inherits: RA2SCUD
@@ -2464,13 +2464,13 @@ YRBoomerSCUD:
 		Damage: 20000
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 10
+		Damage: 200
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 10
+		Damage: 200
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Air
 	Warhead@EffectWater: CreateEffect
@@ -2504,12 +2504,12 @@ RA2TorpTube:
 	Warhead@Demolition_Light:
 		Damage: 18000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 9
+		Damage: 180
 	Warhead@MissileAP_Heavy:
 		Damage: 18000
 		ValidTargets: Water, Underwater, Bridge, Structure
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		Damage: 9
+		Damage: 180
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
@@ -2546,7 +2546,7 @@ ra2_soviets_conscript_carbine:
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 ra2_soviets_conscript_carbine_elite:
 	Inherits: ra2_soviets_conscript_carbine
@@ -2580,13 +2580,13 @@ BlackHawkCannon:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
-		Damage: 1
+		Damage: 20
 
 RA2ZOMBIE:
 	ReloadDelay: 45
@@ -2636,13 +2636,13 @@ RA2CRM60:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 1
+		Damage: 20
 
 RA2CRM60H:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -2668,13 +2668,13 @@ RA2CRM60H:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@SniperWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -2730,7 +2730,7 @@ RA2FlakTrackGun:
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 1
+		Damage: 20
 
 RA2DoublePistols:
 	Inherits@wh: ^Warhead_Sniper_Light
@@ -2800,13 +2800,13 @@ RA2GattlingMG1:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage:
 		ValidTargets: Ground, Water
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 1
+		Damage: 20
 
 RA2GattlingMG1_AA:
 	Inherits: RA2GattlingMG1
@@ -2817,13 +2817,13 @@ RA2GattlingMG1_AA:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-		Damage: 2
+		Damage: 40
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-		Damage: 2
+		Damage: 40
 
 RA2GattlingMG2:
 	Inherits: RA2GattlingMG1
@@ -2840,13 +2840,13 @@ RA2GattlingMG2_AA:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-		Damage: 2
+		Damage: 40
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-		Damage: 2
+		Damage: 40
 
 RA2Cloud:
 	Inherits: ^ToxicWeapon
@@ -2907,13 +2907,13 @@ RA220mmrapid:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
-		Damage: 2
+		Damage: 40
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 2
+		Damage: 40
 
 ####################################################################################################
 #		SuperWeapons
@@ -2994,11 +2994,11 @@ RA2Terrorist:
 	Warhead@Concussion_Medium:
 		Damage: 50000
 	Warhead@Concussion_Medium_Percentage:
-		Damage: 25
+		Damage: 500
 	Warhead@Demolition_Heavy:
 		Damage: 50000
 	Warhead@Demolition_Heavy_Percentage:
-		Damage: 25
+		Damage: 500
 
 2100Tanktrap:
 	Warhead@1Dam: SpreadDamage
@@ -3177,7 +3177,7 @@ LightningBolt:
 	Warhead@Storm_Super_Percentage:
 		Spread: 1000
 		Falloff: 100, 75, 50, 25, 0
-		Damage: 12
+		Damage: 240
 		ValidTargets: Air, Ground, Water
 	Warhead@Effect: CreateEffect
 		Explosions: wclbolt1,wclbolt2,wclbolt3
@@ -3233,15 +3233,15 @@ IvanBomb:
 	Warhead@Demolition_Light:
 		Damage: 30000
 	Warhead@Demolition_Light_Percentage:
-		Damage: 15
+		Damage: 300
 	Warhead@Concussion_Medium:
 		Damage: 30000
 	Warhead@Concussion_Medium_Percentage:
-		Damage: 15
+		Damage: 300
 	Warhead@Demolition_Heavy:
 		Damage: 30000
 	Warhead@Demolition_Heavy_Percentage:
-		Damage: 15
+		Damage: 300
 	Warhead@Effect: CreateEffect
 		Explosions: ivan_explosion
 		ExplosionPalette: ra2effect
@@ -3278,19 +3278,19 @@ TanyaBomb:
 		Damage: 100000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 50
+		Damage: 1000
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 50
+		Damage: 1000
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
 	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 50
+		Damage: 1000
 	Warhead@Effect: CreateEffect
 		Explosions: self_destruct
 		ExplosionPalette: effect
@@ -3301,19 +3301,19 @@ TanyaBomb:
 		Damage: 100000
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 50
+		Damage: 1000
 	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
 	Warhead@CannonHE_Medium_Percentage:
 		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 50
+		Damage: 1000
 	Warhead@CannonAP_Light:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
 	Warhead@CannonAP_Light_Percentage:
 		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 50
+		Damage: 1000
 SEALAttach:
 	Inherits: TanyaAttach
 	ValidTargets: Vehicle, Ship, Submarine, demolishable
@@ -3327,27 +3327,27 @@ SealBomb:
 	Warhead@CannonAP_Light: AreaDamage
 		Damage: 20000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 20000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 20000
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 	Warhead@Demolition_Light:
 		Damage: 20000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 	Warhead@Concussion_Medium:
 		Damage: 20000
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 	Warhead@Demolition_Heavy:
 		Damage: 20000
 	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 
 BorisAKM:
 	Inherits: ^RA2SmallArms
@@ -3364,13 +3364,13 @@ BorisAKM:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 2
+		Damage: 40
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 2
+		Damage: 40
 
 WarpawayEffect:
 	ValidTargets: Ground, Water, Air

@@ -9,7 +9,7 @@ ZerglingClaw:
 	Warhead@Melee_Medium:
 		Damage: 2000
 	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -23,7 +23,7 @@ TalonClaw:
 	Warhead@Melee_Medium:
 		Damage: 6000
 	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -40,7 +40,7 @@ GorekrakenClaw:
 		Damage: 14000
 	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 7
+		Damage: 140
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Water, Air
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -58,7 +58,7 @@ ShriekStinger:
 		Damage: 4000
 	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Water, Air
 		ImpactSounds: zulhit00.aud,zulhit01.aud
@@ -309,7 +309,7 @@ CorruptorSpore:
 		Damage: 10000
 	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 5
+		Damage: 100
 	Warhead@Condition: GrantExternalCondition
 		Range: 1000
 		Condition: snared
@@ -479,13 +479,13 @@ SCScourgeExplosion:
 		Damage: 50000
 	Warhead@Concussion_Medium_Percentage:
 		ValidTargets: Air
-		Damage: 25
+		Damage: 500
 	Warhead@Demolition_Heavy:
 		ValidTargets: Air
 		Damage: 50000
 	Warhead@Demolition_Heavy_Percentage:
 		ValidTargets: Air
-		Damage: 25
+		Damage: 500
 	Warhead@Effect: CreateEffect
 		Explosions: scscourgeexplosion
 		ValidTargets: Air
@@ -568,7 +568,7 @@ SporemawShoot:
 	Warhead@Concussion_Medium:
 		Damage: 18000
 	Warhead@Concussion_Medium_Percentage:
-		Damage: 9
+		Damage: 180
 	Warhead@Effect: CreateEffect
 		Explosions: chemball
 		ImpactSounds: firebl3.aud
@@ -912,7 +912,7 @@ UltraliskHusk:
 	Warhead@Melee_Medium:
 		Damage: 40000
 	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
+		Damage: 400
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -926,7 +926,7 @@ GoremawClaw:
 	Warhead@Melee_Medium:
 		Damage: 30000
 	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 15
+		Damage: 300
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -1007,15 +1007,15 @@ InfestedExplosion:
 	Warhead@Demolition_Light:
 		Damage: 50000
 	Warhead@Demolition_Light_Percentage:
-		Damage: 25
+		Damage: 500
 	Warhead@Concussion_Medium:
 		Damage: 50000
 	Warhead@Concussion_Medium_Percentage:
-		Damage: 25
+		Damage: 500
 	Warhead@Demolition_Heavy:
 		Damage: 50000
 	Warhead@Demolition_Heavy_Percentage:
-		Damage: 25
+		Damage: 500
 	Warhead@Effect: CreateEffect
 		Explosions: self_destruct
 		ImpactSounds: ExploLrg.aud
@@ -1128,7 +1128,7 @@ zerg_kerrigan:
 	Warhead@Melee_Medium:
 		Damage: 40000
 	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
+		Damage: 400
 
 SCKERRIGANSUMMON:
 	ReloadDelay: 1
@@ -1209,7 +1209,7 @@ Tentacle:
 	Warhead@CannonHE_Heavy:
 		Damage: 6000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 3
+		Damage: 60
 	Warhead@SwordWeapon: SpreadDamage
 		Damage: 6000
 	Warhead@SwordWeaponFriendlyFire: SpreadDamage
@@ -1250,7 +1250,7 @@ DefilerPlague:
 	Warhead@Chemical_Heavy:
 		Damage: 30000
 	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
-		Damage: 15
+		Damage: 300
 	#Warhead@2: GrantExternalCondition
 	#	Range: 3c512
 	#	ValidTargets: Ground, Air, Water

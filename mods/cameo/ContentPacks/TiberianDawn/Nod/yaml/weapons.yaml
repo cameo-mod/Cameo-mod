@@ -26,7 +26,7 @@ FlamethrowerExplode:
 	Warhead@Flame_Light:
 		Damage: 10000
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 NodTurretLaser:
 	Inherits@wh: ^Warhead_Laser_Medium
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -50,7 +50,7 @@ NodTurretLaser:
 	Warhead@Laser_Medium:
 		Damage: 12000
 	Warhead@Laser_Medium_Percentage:
-		Damage: 6
+		Damage: 120
 	Warhead@Laser_Medium_ExtraDamage:
 		Spread: 300
 		Damage: 600
@@ -101,7 +101,7 @@ NodTurretLaserInferno:
 	Warhead@Inferno_Medium:
 		Damage: 12000
 	Warhead@Inferno_Medium_Percentage:
-		Damage: 6
+		Damage: 120
 
 NodTurretLaserBurning:
 	Inherits: NodTurretLaserInferno
@@ -118,7 +118,7 @@ SmallTiberiumExplosion:
 	Warhead@Chemical_Light:
 		Damage: 24000
 	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
-		Damage: 12
+		Damage: 240
 	Warhead@Resource: CreateResource
 		AddsResourceType: Tiberium
 		Size: 0,0
@@ -131,7 +131,7 @@ BigTiberiumExplosion:
 	Warhead@Chemical_Heavy:
 		Damage: 50000
 	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
-		Damage: 25
+		Damage: 500
 	Warhead@Resource: CreateResource
 		AddsResourceType: Tiberium
 		Size: 1,0
@@ -216,7 +216,7 @@ MachineGun:
 	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 
 FireballLauncherBuggy:
 	Inherits@wh: ^Warhead_Flame_Light
@@ -235,7 +235,7 @@ FireballLauncherBuggy:
 	Warhead@Flame_Light:
 		Damage: 2000
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 BikeRockets:
 	Inherits: ^TankDestroyerCannon
@@ -285,7 +285,7 @@ PDLaserBike:
 	Warhead@CannonHE_Medium:
 		Damage: 6000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
 
@@ -299,7 +299,7 @@ LTNKMissiles:
 	Warhead@MissileAP_Medium:
 		Damage: 6000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
 
@@ -331,7 +331,7 @@ HonestJohn:
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath, Incendiary
 	Warhead@MissileFire_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 25
+		Damage: 500
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath, Incendiary
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
@@ -353,7 +353,7 @@ StealthTankMissiles:
 	Warhead@MissileAP_Medium:
 		Damage: 12000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplobig4.aud
@@ -395,7 +395,7 @@ StealthTankMissilesShrapnel:
 		Damage: 2000
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 2
 		Duration: 12
@@ -422,7 +422,7 @@ HeliGun:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 
 HeliMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
@@ -439,7 +439,7 @@ HeliMissiles:
 		Damage: 2000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 TurretGun:
 	Inherits: ^ShrapnelWeapon
@@ -527,7 +527,7 @@ Dragon:
 		Damage: 12000
 	Warhead@MissileAA_Heavy_Percentage:
 		ValidRelationships: Neutral, Enemy
-		Damage: 6
+		Damage: 120
 	Warhead@Effect: CreateEffect
 		Explosions: big_frag
 		ImpactSounds: xplobig4.aud
@@ -592,7 +592,7 @@ LaserObelisk:
 	Warhead@Laser_Heavy:
 		Damage: 96000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 48
+		Damage: 960
 	# Warhead@Effect: CreateEffect
 	# 	-ImpactSounds:
 	# Warhead@EffectAir: CreateEffect
@@ -615,7 +615,7 @@ LaserObeliskBurning:
 	Warhead@Inferno_Heavy:
 		Damage: 24000
 	Warhead@Inferno_Heavy_Percentage:
-		Damage: 12
+		Damage: 240
 
 ChemRockets:
 	Inherits: ^Grenade
@@ -962,7 +962,7 @@ LaserBuggy2:
 	Warhead@Laser_Light:
 		Damage: 6000
 	Warhead@Laser_Light_Percentage:
-		Damage: 3
+		Damage: 60
 	Warhead@Laser_Light_ExtraDamage:
 		Spread: 300
 		Damage: 600
@@ -1008,7 +1008,7 @@ LaserBuggy2Inferno:
 	Warhead@Inferno_Light:
 		Damage: 6000
 	Warhead@Inferno_Light_Percentage:
-		Damage: 3
+		Damage: 60
 
 LaserBuggy2Burning:
 	Inherits: LaserBuggy2Inferno
@@ -1061,15 +1061,15 @@ FireballLauncherBuggy2:
 	Warhead@Flame_Light:
 		Damage: 2000
 	Warhead@Flame_Light_Percentage:
-		Damage: 1
+		Damage: 20
 	Warhead@Flame_Heavy:
 		Damage: 2000
 	Warhead@Flame_Heavy_Percentage:
-		Damage: 1
+		Damage: 20
 	Warhead@Flame_Medium:
 		Damage: 2000
 	Warhead@Flame_Medium_Percentage:
-		Damage: 1
+		Damage: 20
 
 LightTank2Cannon:
 	Inherits: ^LightChemicalWeapon
@@ -1111,13 +1111,13 @@ LightTank2Missiles:
 		Damage: 4000
 	Warhead@Flame_Light_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MissileAP_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
 
@@ -1137,7 +1137,7 @@ BigFlamer2:
 	Warhead@Flame_Heavy:
 		Damage: 20000
 	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 	Warhead@Glow: GlowImpact
 		Color: FF6600
 		Scale: 2.0
@@ -1151,7 +1151,7 @@ FlametankExplode2:
 	Warhead@Flame_Heavy:
 		Damage: 40000
 	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
+		Damage: 400
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
 		GlowScale: 2.0
@@ -1215,7 +1215,7 @@ BlackHandFlamer:
 	Warhead@Flame_Medium:
 		Damage: 4000
 	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 BlackHandFlamerExplode:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
@@ -1223,7 +1223,7 @@ BlackHandFlamerExplode:
 	Warhead@Flame_Medium:
 		Damage: 12000
 	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 BHRedDarts:
 	Inherits: ^TeslaChargedWeapon
 	Inherits@2: ^TankDestroyerCannon
@@ -1328,11 +1328,11 @@ SpecterArtilleryShell:
 	Warhead@Demolition_Light:
 		Damage: 16000
 	Warhead@Demolition_Light_Percentage:
-		Damage: 8
+		Damage: 160
 	Warhead@Concussion_Medium:
 		Damage: 16000
 	Warhead@Concussion_Medium_Percentage:
-		Damage: 8
+		Damage: 160
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
@@ -1354,11 +1354,11 @@ SpecterArtilleryShellUpgrade:
 	Warhead@Demolition_Light:
 		Damage: 4000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Warhead@Concussion_Medium:
 		Damage: 4000
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1419,7 +1419,7 @@ VenomLaser:
 	Warhead@Laser_Medium:
 		Damage: 8000
 	Warhead@Laser_Medium_Percentage:
-		Damage: 4
+		Damage: 80
 	Warhead@Laser_Medium_ExtraDamage:
 		Spread: 300
 		Damage: 600
@@ -1463,7 +1463,7 @@ VenomLaserInferno:
 	Warhead@Inferno_Medium:
 		Damage: 8000
 	Warhead@Inferno_Medium_Percentage:
-		Damage: 4
+		Damage: 80
 
 VenomLaserBurning:
 	Inherits: VenomLaserInferno
@@ -1499,7 +1499,7 @@ NodCommandoLaser:
 		Damage: 12000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Missile, BulletAS, BallisticMissile
-		Damage: 6
+		Damage: 120
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Air, Ship
 		Explosions: small_napalm
@@ -1537,12 +1537,12 @@ NodTorpTube:
 	Warhead@Concussion_Light:
 		Damage: 8000
 	Warhead@Concussion_Light_Percentage:
-		Damage: 4
+		Damage: 80
 	Warhead@MissileHE_Heavy:
 		Damage: 8000
 		ValidTargets: Water, Underwater, Bridge, Structure
 	Warhead@MissileHE_Heavy_Percentage:
-		Damage: 4
+		Damage: 80
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
@@ -1586,12 +1586,12 @@ NodTorpTubeBlackMarket:
 	Warhead@Demolition_Heavy:
 		Damage: 8000
 	Warhead@Demolition_Heavy_Percentage:
-		Damage: 4
+		Damage: 80
 	Warhead@MissileHE_Heavy:
 		Damage: 8000
 		ValidTargets: Water, Underwater, Bridge, Structure
 	Warhead@MissileHE_Heavy_Percentage:
-		Damage: 4
+		Damage: 80
 		ValidTargets: Water, Underwater, Bridge, Structure
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
@@ -1612,7 +1612,7 @@ CorvetteLaserObelisk:
 	Warhead@Laser_Heavy:
 		Damage: 120000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 60
+		Damage: 1200
 
 CorvetteDragon:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
@@ -1635,7 +1635,7 @@ CorvetteDragon:
 		Damage: 10000
 		Spread: 500
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 		Spread: 500
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
@@ -1655,7 +1655,7 @@ td_nod_minigunner_minigun:
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 td_nod_minigunner_minigun_laser:
 	Inherits: ^SmallArms

@@ -36,7 +36,7 @@ Debris:
 		Damage: 16000
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 		DamageCalculationType: ClosestTargetablePosition
 
 Debris2:
@@ -53,11 +53,11 @@ Debris2:
 	Warhead@Demolition_Light:
 		Damage: 16000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 	Warhead@Flame_Light:
 		Damage: 16000
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_small_napalm
 		ExplosionPalette: effect75alpha
@@ -72,11 +72,11 @@ Debris3:
 	Warhead@Demolition_Light:
 		Damage: 8000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 	Warhead@Flame_Light:
 		Damage: 8000
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1350
 
@@ -195,19 +195,19 @@ D2K_155mm:
 	Warhead@Demolition_Light:
 		Damage: 12000
 	Warhead@Demolition_Light_Percentage:
-		Damage: 6
+		Damage: 120
 	Warhead@Concussion_Medium:
 		Damage: 12000
 	Warhead@Concussion_Medium_Percentage:
-		Damage: 6
+		Damage: 120
 	Warhead@Demolition_Heavy:
 		Damage: 12000
 	Warhead@Demolition_Heavy_Percentage:
-		Damage: 6
+		Damage: 120
 	Warhead@CannonHE_Medium:
 		Damage: 12000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 	Warhead@Concrete: DamagesConcrete
 		Damage: 5625
 
@@ -279,19 +279,19 @@ D2K_Rocket_Trooper:
 		Damage: 8000
 	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 80
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 80
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 80
 D2K_Combat_Fleet:
 	Inherits: ^D2KRocket
 	Range: 10240
@@ -1146,11 +1146,11 @@ LMG:
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 light_inf_lmg:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -1163,11 +1163,11 @@ light_inf_lmg:
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 LMG_upgrade:
 	Inherits: ^Warhead_Bullet_Medium
@@ -1185,19 +1185,19 @@ LMG_upgrade:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 light_inf_lmg_upgrade:
 	Inherits: ^Warhead_Bullet_Medium
@@ -1215,19 +1215,19 @@ light_inf_lmg_upgrade:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 Fremen_S:
 	Inherits: ^MG
@@ -1746,7 +1746,7 @@ PhoenixRocketShrapnel:
 		Damage: 2000
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 ixian_airdrone:
 	Inherits: ^TankDestroyerCannon
@@ -1827,7 +1827,7 @@ ixian_airdrone:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@Shrapnel: FireShrapnel
@@ -2080,7 +2080,7 @@ d2k_sard_crossbow:
 	Warhead@CannonHE_Medium:
 		Damage: 5350
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure
@@ -2784,7 +2784,7 @@ PulseMissile:
 		ValidTargets: Shielded
 		Falloff: 100, 0
 		Spread: 10000
-		Damage: 10
+		Damage: 200
 		Delay: 2
 	Warhead@Tesla_Heavy:
 		ValidTargets: Shielded
@@ -2796,7 +2796,7 @@ PulseMissile:
 		ValidTargets: Shielded
 		Falloff: 100, 0
 		Spread: 10000
-		Damage: 10
+		Damage: 200
 		Delay: 5
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Shielded

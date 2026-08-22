@@ -11,11 +11,11 @@ TS30mm:
 	Warhead@MissileHE_Medium:
 		Damage: 8000
 	Warhead@MissileHE_Medium_Percentage:
-		Damage: 1
+		Damage: 20
 	Warhead@Flak_Medium:
 		Damage: 8000
 	Warhead@Flak_Medium_Percentage:
-		Damage: 1
+		Damage: 20
 
 TS30mmRail:
 	Inherits: ^MediumMissile
@@ -55,11 +55,11 @@ TS120mmRail:
 	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage:
-		Damage: 4
+		Damage: 80
 	Warhead@Railgun_Heavy:
 		Damage: 8000
 	Warhead@Railgun_Heavy_Percentage:
-		Damage: 4
+		Damage: 80
 
 TS120mmTal:
 	Inherits: ^TSCannonEffect
@@ -76,7 +76,7 @@ TS120mmTal:
 	Warhead@CannonHE_Medium:
 		Damage: 24000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 12
+		Damage: 240
 
 TS120mmTalRail:
 	# Inherits: ^TSCannon
@@ -90,11 +90,11 @@ TS120mmTalRail:
 	Warhead@CannonHE_Medium:
 		Damage: 18000
 	Warhead@CannonHE_Medium_Percentage:
-		Damage: 9
+		Damage: 180
 	Warhead@Railgun_Heavy:
 		Damage: 18000
 	Warhead@Railgun_Heavy_Percentage:
-		Damage: 9
+		Damage: 180
 
 TSRPGTower:
 	Inherits@wh: ^Warhead_Concussion_Medium
@@ -112,11 +112,11 @@ TSRPGTower:
 	Warhead@Concussion_Medium:
 		Damage: 16000
 	Warhead@Concussion_Medium_Percentage:
-		Damage: 8
+		Damage: 160
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 8
+		Damage: 160
 
 TSRPGTowerRail:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -135,7 +135,7 @@ TSRPGTowerRail:
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 8
+		Damage: 160
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 16000
 	Warhead@HRailgunWeaponPercentage: AreaDamagePercentage
@@ -160,7 +160,7 @@ TSJugg90mm:
 	Warhead@Concussion_Medium:
 		Damage: 30000
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 15
+		Damage: 300
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 	# Warhead@3Eff: CreateEffect
@@ -192,7 +192,7 @@ TSJugg120mm:
 	Warhead@Concussion_Medium:
 		Damage: 40000
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
+		Damage: 400
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 	# Warhead@3Eff: CreateEffect
@@ -244,7 +244,7 @@ KodiakCannon:
 		Damage: 8000
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water
-		Damage: 4
+		Damage: 80
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -266,11 +266,11 @@ KodiakCannonSonic:
 	Warhead@CannonHE_Heavy:
 		Damage: 8000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 4
+		Damage: 80
 	Warhead@Sonic_Heavy:
 		Damage: 8000
 	Warhead@Sonic_Heavy_Percentage:
-		Damage: 4
+		Damage: 80
 
 TSSonicWeaponEffect:
 	ReloadDelay: 60
@@ -310,7 +310,7 @@ TSSonicZapWeapon:
 	Warhead@Magic_Heavy:
 		Damage: 2000
 	Warhead@Magic_Heavy_Percentage:
-		Damage: 1
+		Damage: 20
 		ValidRelationships: Neutral, Enemy
 	Warhead@Tesla_Heavy:
 		Damage: 2000
@@ -319,7 +319,7 @@ TSSonicZapWeapon:
 		Damage: 1000
 		ValidRelationships: Neutral, Enemy
 	Warhead@Tesla_Heavy_Percentage:
-		Damage: 1
+		Damage: 20
 		ValidRelationships: Neutral, Enemy
 
 TSSonicZapWeaponSonic:
@@ -344,7 +344,7 @@ TSSonicZapWeaponSonic:
 	Warhead@Sonic_Heavy:
 		Damage: 4000
 	Warhead@Sonic_Heavy_Percentage:
-		Damage: 2
+		Damage: 40
 
 TSZapWeapon_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -375,7 +375,7 @@ TSZapWeapon_EMP:
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
 	Warhead@EMPUnit: AffectsIntegrity
@@ -397,7 +397,7 @@ TSMine_EMP:
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
 	Warhead@EMPUnit: AffectsIntegrity
@@ -538,7 +538,7 @@ PitbullRockets:
 	Warhead@MissileAP_Light:
 		Damage: 20000
 	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 
 TSHoverMissile:
 	Inherits: ^FlakWeapon
@@ -639,7 +639,7 @@ TSMammothTusk2:
 		Damage: 42000
 		ValidTargets: Air
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		Damage: 21
+		Damage: 420
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
@@ -669,7 +669,7 @@ TSMammothTusk2II_AA:
 		Damage: 60000
 		ValidTargets: Air
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		Damage: 30
+		Damage: 600
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
@@ -687,7 +687,7 @@ TSHellfireSonic:
 		Damage: 8000
 	Warhead@Sonic_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 80
 	Warhead@EffectAir: CreateEffect
 		Explosions: med_explosion_air
 		ImpactSounds: xplos.aud
@@ -718,7 +718,7 @@ TSZoneHellfireSonic:
 		Damage: 8000
 	Warhead@Sonic_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 80
 
 TSGDIRedEye:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
@@ -742,7 +742,7 @@ TSGDIRedEye:
 		Damage: 8000
 		Spread: 500
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 		Spread: 500
 	Warhead@2Eff: CreateEffect
 		ImpactSounds: expnew13.aud
@@ -767,13 +767,13 @@ TSBomb:
 		Damage: 10000
 	Warhead@Concussion_Medium_Percentage:
 		ValidTargets: Ground, Ship
-		Damage: 5
+		Damage: 100
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 10000
 	Warhead@Demolition_Heavy_Percentage:
 		ValidTargets: Ground, Ship
-		Damage: 5
+		Damage: 100
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: expnew09.aud
@@ -801,13 +801,13 @@ TSBombSonic:
 		Damage: 10000
 	Warhead@Demolition_Heavy_Percentage:
 		ValidTargets: Ground, Ship
-		Damage: 5
+		Damage: 100
 	Warhead@Sonic_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 10000
 	Warhead@Sonic_Heavy_Percentage:
 		ValidTargets: Ground, Ship
-		Damage: 5
+		Damage: 100
 
 TSMobile_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -831,7 +831,7 @@ TSMobile_EMP:
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
-		Damage: 32
+		Damage: 640
 		Spread: 813
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water
@@ -885,7 +885,7 @@ TSShotgun:
 	Warhead@CannonHE_Medium:
 		Damage: 4000
 	Warhead@CannonHE_Medium_Percentage:
-		Damage: 2
+		Damage: 40
 	Warhead@SmallArms: SpreadDamage
 		Damage: 4000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
@@ -906,13 +906,13 @@ TSJumpCannon:
 		Damage: 4000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
-		Damage: 2
+		Damage: 40
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
-		Damage: 2
+		Damage: 40
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -952,7 +952,7 @@ TSAssaultCannonTal:
 		Damage: 8000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 4
+		Damage: 80
 
 TSAssaultCannonTalSonic:
 	Inherits: TSAssaultCannonTal
@@ -980,11 +980,11 @@ TSVulcanGun:
 	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Warhead@Bullet_Medium:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 
 TSVulcanGunSonic:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -1017,7 +1017,7 @@ KodiakAAGuns:
 		Damage: 6000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-		Damage: 3
+		Damage: 60
 
 TSHammerheadGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -1031,7 +1031,7 @@ TSHammerheadGun:
 		Damage: 4000
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 		ValidTargets: Ground, Water
 
 TSAAPCCannon:
@@ -1047,13 +1047,13 @@ TSAAPCCannon:
 	ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage:
-		Damage: 1
+		Damage: 20
 	ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Medium_Percentage:
-		Damage: 1
+		Damage: 20
 	ValidTargets: Ground, Water, Air
 
 TSMechMGII:
@@ -1077,7 +1077,7 @@ TSMechMGII:
 		Damage: 16000
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 		ValidTargets: Ground, Water
 
 TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY

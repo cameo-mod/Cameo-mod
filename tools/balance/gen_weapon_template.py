@@ -1250,7 +1250,17 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
     allr = sorted(CANON16)
     for level in levels:
         li = list(LEVELS).index(level)
-        pct_damage = damage // 2000              # 1% chip per 2000 main flat damage
+        # W18: the %-twin's Damage is in BASIS POINTS (0.01% steps), read against
+        # `PercentageDenominator: 10000` below. 2000 flat -> 20 = 0.20%.
+        # ⚠ This, the x5 Versus and the denominator are ONE change and must never ship apart:
+        # they cancel exactly (Damage x20, Versus x5, then /100 by the denominator), so the
+        # resolved percentage damage is identical. Ship any one alone and every twin deals a
+        # fifth or five times.
+        # It also removes a LATENT floor bug: `damage // 2000` returned 0 — literally no
+        # percentage damage at all — for any family under 2000 main damage. Measured: no family
+        # is currently below 2000, so nothing was actually losing damage; the trap was waiting
+        # for the first cheap family anyone added.
+        pct_damage = damage // 100
         if versus_override is not None:          # blend family (e.g. Plasma = avg of Flame + Chemical)
             main, pct = versus_override(level)
             main = finish_blend(main, name)      # ordering law, re-derive Heroic/Airborne, un-flatten
@@ -1370,11 +1380,17 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         # affecting families, the %-twin MUST also drain integrity (otherwise HP dies before integrity
         # depletes). The %-twin also carries DamageTypes: Tesla for the passive INotifyDamage drain.
         percentage_type = "AreaDamagePercentage"
+        # W18: x5 Versus band, in clean multiples of 5. Together with Damage x20 and the
+        # denominator this is an exact identity; what it BUYS is resolution — one step in the
+        # new band is 0.2 of a step in the old one, so a %-twin ladder can finally be shaped
+        # as finely as the flat one.
+        pct = [(a, v * 5) for a, v in pct]
         pct_wh = [f"\tWarhead@{tag}_Percentage: {percentage_type}",
              f"\t\tValidTargets: {vt}",
              *inv_warhead,
              f"\t\tSpread: {main_spread // 2}",
              f"\t\tDamage: {pct_damage}",
+             f"\t\tPercentageDenominator: 10000",
              f"\t\tFalloff: {at(falloffs, li)}",
              f"\t\tVersus:",
              emit_versus(pct)]

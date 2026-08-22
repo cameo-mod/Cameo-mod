@@ -7,7 +7,7 @@ RA2TURRETFLAKAA:
 	Warhead@Flak_Medium:
 		Damage: 10000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 
 SeaScorpion_AA:
 	Inherits: ^RA2FlakWeapon
@@ -18,7 +18,7 @@ SeaScorpion_AA:
 	Warhead@Flak_Medium:
 		Damage: 8000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 
 RA2KirovBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
@@ -40,7 +40,7 @@ RA2KirovBomb:
 		Spread: 800
 	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		ValidRelationships: Neutral, Enemy
-		Damage: 40
+		Damage: 800
 		Spread: 4000
 
 RA2KirovBomb_rad:
@@ -53,13 +53,13 @@ RA2KirovBomb_rad:
 		Damage: 48000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
-		Damage: 24
+		Damage: 480
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Demolition_Heavy:
 		Damage: 48000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		Damage: 24
+		Damage: 480
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
@@ -113,7 +113,7 @@ RA2KirovBomb_tesla:
 		DamageTypes: Tesla
 		Damage: 40000
 	Warhead@Tesla_Super_Percentage: AreaDamagePercentage
-		Damage: 40
+		Damage: 800
 	Warhead@Demolition_Heavy:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
@@ -158,7 +158,7 @@ RA2KirovBomb_nuclear_elite:
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		ValidRelationships: Neutral, Enemy
-		Damage: 50
+		Damage: 1000
 		Spread: 5000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Nuclear_Super:
@@ -190,11 +190,11 @@ RA2120mm_rad:
 	Warhead@Chemical_Medium:
 		Damage: 6000
 	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 	Warhead@CannonHE_Medium:
 		Damage: 6000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 
 RA2120mm_fire:
 	Inherits: RA2120mm
@@ -257,11 +257,11 @@ RA160mm:
 	Warhead@Concussion_Medium:
 		Damage: 60000
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 30
+		Damage: 600
 	Warhead@Demolition_Light:
 		Damage: 60000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 30
+		Damage: 600
 
 RA160mm_rad:
 	Inherits@wh: ^Warhead_Chemical_Light
@@ -276,15 +276,15 @@ RA160mm_rad:
 	Warhead@Chemical_Light:
 		Damage: 36000
 	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
-		Damage: 18
+		Damage: 360
 	Warhead@Concussion_Medium:
 		Damage: 36000
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 18
+		Damage: 360
 	Warhead@Demolition_Light:
 		Damage: 36000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 18
+		Damage: 360
 
 RA160mm_fire:
 	Inherits: RA160mm
@@ -373,7 +373,7 @@ RA2120xmm:
 	Warhead@CannonHE_Heavy:
 		Damage: 4000
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 
 RA2120xmm_rad:
 	Inherits: ^LightChemicalWeapon
@@ -427,7 +427,7 @@ RA2120xmm_rad:
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 RA2120xmm_fire:
 	Inherits: RA2120xmm
@@ -486,7 +486,7 @@ RA2CoilBolt:
 		DamageTypes: Tesla
 		Damage: 32000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 32
+		Damage: 640
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: TeslaFragmentWeak
 		Amount: 1
@@ -523,7 +523,7 @@ RA2OPCoilBolt1:
 		DamageTypes: Tesla
 		Damage: 32000
 	Warhead@Tesla_Super_Percentage: AreaDamagePercentage
-		Damage: 32
+		Damage: 640
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 32000
 	Warhead@TeslaArc: FireShrapnel
@@ -562,7 +562,7 @@ TeslaFragmentWeak:
 		DamageTypes: Tesla
 		Damage: 3000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 6000
 
@@ -581,7 +581,7 @@ RA2TankBolt:
 		DamageTypes: Tesla
 		Damage: 6000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 
 RA2TankBolt2:
 	Inherits: RA2TankBolt
@@ -619,7 +619,7 @@ TeslaTankFragment:
 		DamageTypes: Tesla
 		Damage: 2000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
 
@@ -637,7 +637,7 @@ TeslaTankFragment2:
 		DamageTypes: Tesla
 		Damage: 3000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 6000
 	Warhead@TeslaArc: FireShrapnel
@@ -710,7 +710,7 @@ RA2MammothTusk_AA:
 		Damage: 16000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-		Damage: 8
+		Damage: 160
 
 RA2MammothTusk_AA_elite:
 	Inherits: RA2MammothTusk_AA
@@ -751,7 +751,7 @@ RA2CRFlakGuyGun:
 		Damage: 16000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 4
+		Damage: 80
 
 RA2CRFlakGuyGun_elite:
 	Inherits: RA2CRFlakGuyGun
@@ -769,7 +769,7 @@ RA2FLAKAA:
 		Damage: 8000
 		ValidTargets: Air
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 		ValidTargets: Air
 
 RA2FLAKAA_elite:

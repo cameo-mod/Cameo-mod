@@ -10,11 +10,11 @@ AsianHowitzerSplash:
 	Warhead@Concussion_Medium:
 		Damage: 20000
 	Warhead@Concussion_Medium_Percentage:
-		Damage: 10
+		Damage: 200
 	Warhead@Demolition_Heavy:
 		Damage: 20000
 	Warhead@Demolition_Heavy_Percentage:
-		Damage: 10
+		Damage: 200
 
 AsianFlameFragment:
 	Inherits@wh: ^Warhead_Flame_Light
@@ -25,7 +25,7 @@ AsianFlameFragment:
 	Warhead@Flame_Light:
 		Damage: 2000
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment2
 		Amount: 1
@@ -56,7 +56,7 @@ AsianOilBombFragments:
 		Damage: 4000
 		Falloff: 100, 50, 25, 12, 6, 3, 1
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 		Falloff: 100, 50, 25, 12, 6, 3, 1
 	Warhead@Effect: CreateEffect
 		ImpactSounds: vdemdiea.wav
@@ -84,7 +84,7 @@ AsianFlamerTurret:
 	Warhead@Flame_Light:
 		Damage: 4000
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
 		Amount: 2
@@ -154,12 +154,12 @@ AsianSmallTorpedo:
 	Warhead@Demolition_Light:
 		Damage: 12000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 	Warhead@MissileAP_Heavy:
 		Damage: 12000
 		ValidTargets: Water, Underwater, Bridge, Structure
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
@@ -413,7 +413,7 @@ SteelTwisterMissiles:
 		Damage: 2000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 		ValidRelationships: Neutral, Enemy
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
@@ -460,7 +460,7 @@ Support_EMP_Bomb:
 	Warhead@Tesla_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
-		Damage: 5
+		Damage: 100
 		Spread: 10000
 		InvalidTargets: Infantry
 	Warhead@Tesla_Super:
@@ -478,7 +478,7 @@ Support_EMP_Bomb:
 	Warhead@Tesla_Super_Percentage:
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
-		Damage: 5
+		Damage: 100
 		Spread: 10000
 		InvalidTargets: Infantry
 	Warhead@EMPUnit: AffectsIntegrity
@@ -591,15 +591,15 @@ NaxGrilleArty:
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 8
+		Damage: 160
 	Warhead@Concussion_Medium:
 		Damage: 16000
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 	Warhead@Demolition_Light:
 		Damage: 16000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 
 NaxGrilleArty_elite:
 	Inherits: NaxGrilleArty
@@ -628,7 +628,7 @@ NaxiRifle:
 	Warhead@Bullet_Light:
 		Damage: 6000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 
 NaxLaserT:
 	Inherits: ^SmallArms
@@ -682,15 +682,15 @@ NaxiMP40:
 	Warhead@Concussion_Light:
 		Damage: 2000
 	Warhead@Concussion_Light_Percentage:
-		Damage: 1
+		Damage: 20
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium: AreaDamage
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 NaxSturmArty:
 	Inherits@wh: ^Warhead_Demolition_Heavy
@@ -714,15 +714,15 @@ NaxSturmArty:
 	Warhead@Demolition_Heavy:
 		Damage: 30000
 	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		Damage: 14
+		Damage: 280
 	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 30000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 14
+		Damage: 280
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 20000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 14
+		Damage: 280
 
 NaxDefensivePlaneTarget:
 	ReloadDelay: 30
@@ -870,7 +870,7 @@ NaxiAlienPistol:
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 1
+		Damage: 20
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
@@ -1072,7 +1072,7 @@ MeteorFlameFragment:
 	Warhead@Flame_Light:
 		Damage: 2000
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@Aliens: SpawnActorOrWeapon
 		Actors: alien.nax
 		Weapon: AsianTankMine
@@ -1094,7 +1094,7 @@ NaxisBlackBomb:
 	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		Spread: 1500
 		Falloff: 100, 75, 50, 25, 0
-		Damage: 50
+		Damage: 1000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: NaxisBlackBombSmaller
@@ -1142,7 +1142,7 @@ NaxisBlackBombSmaller:
 	Warhead@CannonHE_Medium:
 		Damage: 25000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 	Warhead@Effect: CreateEffect
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
@@ -1182,13 +1182,13 @@ Lunar_Green105mm:
 	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 	Warhead@Tesla_Heavy:
 		Damage: 8000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Damage: 4000
 	Warhead@Tesla_Heavy_Percentage:
-		Damage: 4
+		Damage: 80
 	Report: laser_cannon2_2.wav
 
 SyndicateFireballLauncher:
@@ -1209,15 +1209,15 @@ SyndicateFireballLauncher:
 	Warhead@Flame_Light:
 		Damage: 2000
 	Warhead@Flame_Light_Percentage:
-		Damage: 1
+		Damage: 20
 	Warhead@Flame_Medium:
 		Damage: 2000
 	Warhead@Flame_Medium_Percentage:
-		Damage: 1
+		Damage: 20
 	Warhead@Flame_Heavy:
 		Damage: 2000
 	Warhead@Flame_Heavy_Percentage:
-		Damage: 1
+		Damage: 20
 RA2RTruckRocket:
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
@@ -1234,7 +1234,7 @@ RA2RTruckRocket:
 		Damage: 8000
 	Warhead@MissileHE_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 80
 
 LatinBuggyRocket:
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -1266,25 +1266,25 @@ LatinBuggyRocket:
 		Damage: 10000
 	Warhead@Demolition_Light_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 5
+		Damage: 100
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 	Warhead@Concussion_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 5
+		Damage: 100
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 5
+		Damage: 100
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 5
+		Damage: 100
 
 LatinBuggyRocket_elite:
 	Inherits: LatinBuggyRocket
@@ -1391,7 +1391,7 @@ LatinBuggyRocket_elite:
 		Spread: 4000
 	Warhead@Demolition_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 8
+		Damage: 160
 		Spread: 4000
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
@@ -1399,7 +1399,7 @@ LatinBuggyRocket_elite:
 		Spread: 8000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 8
+		Damage: 160
 		Spread: 8000
 	Warhead@Flame_Medium:
 		ValidTargets: Ground, Water, Air
@@ -1407,7 +1407,7 @@ LatinBuggyRocket_elite:
 		Spread: 2000
 	Warhead@Flame_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 8
+		Damage: 160
 		Spread: 2000
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -1415,7 +1415,7 @@ LatinBuggyRocket_elite:
 		Spread: 1000
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 8
+		Damage: 160
 		Spread: 1000
 	Warhead@Effect: CreateEffect
 		Explosions: ra2nuke
@@ -1465,19 +1465,19 @@ RA2Robotmm:
 		Damage: 4000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 4
+		Damage: 80
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 4
+		Damage: 80
 	Warhead@Railgun_Heavy: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 4
+		Damage: 80
 
 RA2Robotmm_elite:
 	Inherits: RA2Robotmm
@@ -1507,15 +1507,15 @@ RA2RobotmmScatter_elite:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Damage: 2000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Warhead@Laser_Heavy:
 		Damage: 4000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Warhead@Railgun_Heavy:
 		Damage: 4000
 	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	-Warhead@Scatter:
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
@@ -1543,11 +1543,11 @@ naxis_sssoldier_smg:
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 naxis_sssoldier_smg_elite:
 	Inherits: naxis_sssoldier_smg

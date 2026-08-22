@@ -25,7 +25,7 @@ edenMachineGun:
 	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 
 plymouthMachineGun:
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -40,7 +40,7 @@ plymouthMachineGun:
 	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 
 edenMobileLaser:
 	Inherits: ^TankDestroyerCannon
@@ -104,7 +104,7 @@ edenMobileLaserTiger:
 		Damage: 2000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 edenMobileDefenceLaser:
 	Inherits: edenMobileLaserTiger
@@ -335,7 +335,7 @@ edenMobileThorsHammer:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Damage: 3000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 
 edenMobileThorsHammerTiger:
 	Inherits: edenMobileThorsHammer
@@ -526,7 +526,7 @@ plymouthStickyTiger:
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@CannonHE_Medium_Percentage:
-		Damage: 2
+		Damage: 40
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -573,7 +573,7 @@ plymouthStickyDefence:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -592,7 +592,7 @@ plymouthStickyDefence:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 1
+		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@HeavyChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy

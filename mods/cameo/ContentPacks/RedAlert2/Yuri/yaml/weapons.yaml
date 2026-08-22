@@ -64,7 +64,7 @@ RA2LasherCannon:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 RA2LasherCannon_elite:
@@ -290,13 +290,13 @@ RA2LasherLaser:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@CannonHE_Medium_Percentage:
-		Damage: 4
+		Damage: 80
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Laser_Heavy:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Laser_Heavy_Percentage:
-		Damage: 4
+		Damage: 80
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 
 RA2LasherLaser_elite:
@@ -310,7 +310,7 @@ RA2LasherLaser_elite:
 	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 16000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 16000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -338,7 +338,7 @@ RA2DiskLaser:
 		Damage: 24000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 12
+		Damage: 240
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 
 RA2DiskLaser_elite:
@@ -352,7 +352,7 @@ RA2DiskLaser_elite:
 	Warhead@Laser_Heavy:
 		Damage: 48000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 24
+		Damage: 480
 
 RA2DiskDrain:
 	Inherits: ^Warhead_Tesla_Heavy
@@ -376,7 +376,7 @@ RA2DiskDrain:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Magic_Heavy_Percentage:
 		ValidTargets: Ground, Water
-		Damage: 1
+		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water
@@ -388,7 +388,7 @@ RA2DiskDrain:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_Percentage:
 		ValidTargets: Ground, Water
-		Damage: 1
+		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 
 RA2DiskSteal:
@@ -427,7 +427,7 @@ RA2Magnet:
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		Range: 0, 32
 		Falloff: 100, 100
-		Damage: 1
+		Damage: 20
 		ValidTargets: Vehicle, Structure
 	Warhead@Condition: GrantExternalCondition
 		Condition: Magnet
@@ -502,7 +502,7 @@ RA2PsychicJab:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@CannonHE_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@LightFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -676,12 +676,12 @@ YRBoomerTorpedo:
 	Warhead@Demolition_Light:
 		Damage: 20000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 	Warhead@MissileAP_Heavy:
 		Damage: 20000
 		ValidTargets: Water, Underwater, Bridge, Structure
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
@@ -729,13 +729,13 @@ RA2GattlingMG3_AA:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-		Damage: 2
+		Damage: 40
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-		Damage: 2
+		Damage: 40
 
 YuriGatlingCannonMG3:
 	Inherits: RA2GattlingMG3
@@ -766,13 +766,13 @@ RA2GattlingInf:
 		Damage: 8000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 8000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
-		Damage: 1
+		Damage: 20
 
 RA2Virusgun:
 	Inherits: ^HeavyChemicalWeapon
@@ -844,7 +844,7 @@ RA2Virusgun2:
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Infantry, Monster, Garrisoned
-		Damage: 6
+		Damage: 120
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@SniperWeapon: SpreadDamage
 		ValidTargets: Ground, Ship, Garrisoned
@@ -884,7 +884,7 @@ RA2Virusgun3:
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Infantry, Monster, Garrisoned
-		Damage: 6
+		Damage: 120
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Condition: GrantExternalCondition
 		Range: 2000
@@ -920,7 +920,7 @@ RA2Chemspray:
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	-Warhead@Effect:
 	Warhead@Cloud: SpawnSmokeParticle
@@ -944,7 +944,7 @@ RA2Chemspray2:
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Condition: GrantExternalCondition
 		Range: 2000

@@ -8,7 +8,7 @@ latinsyndicate_latinmilitia_ak47:
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 latinsyndicate_latinmilitia_ak47_elite:
 	Inherits: latinsyndicate_latinmilitia_ak47
@@ -29,12 +29,12 @@ latinsyndicate_latinmilitia_molotov:
 	Warhead@Flame_Light:
 		Damage: 6000
 	Warhead@Flame_Light_Percentage:
-		Damage: 3
+		Damage: 60
 	Warhead@Demolition_Light:
 		Damage: 2000
 		FriendlyFireDamage: 0
 	Warhead@Demolition_Light_Percentage:
-		Damage: 1
+		Damage: 20
 	Warhead@FireShrapnel: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: AsianFlameFragment
@@ -61,7 +61,7 @@ LatinTankKillerRocket:
 	Warhead@MissileAP_Light:
 		Damage: 26000
 	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		Damage: 13
+		Damage: 260
 
 LatinTankKillerRocket_elite:
 	Inherits: LatinTankKillerRocket
@@ -70,7 +70,7 @@ LatinTankKillerRocket_elite:
 	Warhead@MissileAP_Light:
 		Damage: 52000
 	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		Damage: 26
+		Damage: 520
 	Projectile: Missile
 		Image: red_dragon
 		Shadow: true
@@ -122,7 +122,7 @@ NarcoGrenade:
 	Warhead@Demolition_Light:
 		Damage: 70000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 35
+		Damage: 700
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment2
 		Amount: 3
@@ -149,13 +149,13 @@ RA2NarcoAKM:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Garrisoned
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Garrisoned
-		Damage: 1
+		Damage: 20
 
 RA2NarcoAKM_elite:
 	Inherits: RA2NarcoAKM
@@ -173,7 +173,7 @@ RA2Narco60mm:
 	Warhead@CannonHE_Medium:
 		Damage: 16000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 
 RA2Narco60mm_elite:
 	Inherits: RA2Narco60mm
@@ -202,7 +202,7 @@ RA2FreedomAK47:
 		Damage: 6000
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air, Garrisoned
-		Damage: 3
+		Damage: 60
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air, Garrisoned
 		Damage: 6000
@@ -262,7 +262,7 @@ RA2FreedomRocket:
 		Damage: 60000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Garrisoned
-		Damage: 30
+		Damage: 600
 
 RA2FreedomRocket_elite:
 	Inherits: RA2FreedomRocket
@@ -288,7 +288,7 @@ RA2FreedomRocket_elite:
 	Warhead@MissileAP_Medium:
 		Damage: 120000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 60
+		Damage: 1200
 
 SyndicateFireballLauncher_elite:
 	Inherits: SyndicateFireballLauncher
@@ -362,7 +362,7 @@ LatinMonkeyGrenade1:
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Demolition_Light_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 5
+		Damage: 100
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
@@ -370,7 +370,7 @@ LatinMonkeyGrenade1:
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Concussion_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 5
+		Damage: 100
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -378,7 +378,7 @@ LatinMonkeyGrenade1:
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 5
+		Damage: 100
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater
@@ -419,15 +419,15 @@ LatinMonkeyGrenadeExplode:
 	Warhead@Demolition_Light:
 		Damage: 4000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Warhead@Concussion_Medium:
 		Damage: 4000
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 4000
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 
 RA2RBurritoRocket:
 	Inherits: ^RA2Grenade
@@ -456,7 +456,7 @@ RA2RBurritoRocket:
 		Damage: 4000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 	Warhead@ShrapnelWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -490,7 +490,7 @@ RA2RBurritoRocket:
 		Damage: 4000
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 	-Warhead@Effect1:
 	Warhead@FireShrapnel: FireShrapnel
 		InvalidTargets: FireImmune
@@ -531,7 +531,7 @@ RA2LarsRocket:
 		Damage: 2000
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@HeavyAAWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -555,7 +555,7 @@ RA2LarsRocket:
 		Damage: 2000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 RA2Gren60mm:
 	Inherits: ^RA2HeavyCannon
@@ -569,15 +569,15 @@ RA2Gren60mm:
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@CannonHE_Medium:
 		Damage: 2000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@CannonAP_Light:
 		Damage: 2000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 RA2Gren60mm_elite:
 	Inherits: RA2Gren60mm
@@ -598,7 +598,7 @@ LatinRusherRocket:
 	Warhead@MissileAP_Medium:
 		Damage: 16000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 
 LatinRusherRocket_elite:
 	Inherits: LatinRusherRocket
@@ -614,7 +614,7 @@ LatinRusherRocket_elite:
 	Warhead@MissileAP_Medium:
 		Damage: 32000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 16
+		Damage: 320
 
 LatinSmokerCannon:
 	Inherits: ^RailgunWeapon
@@ -656,11 +656,11 @@ LatinSmokerCannon:
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@CannonHE_Medium:
 		Damage: 2000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 LatinSmokerCannon_elite:
 	Inherits: LatinSmokerCannon
@@ -691,19 +691,19 @@ RA2GrenadePack:
 		Damage: 2000
 	Warhead@MissileAP_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Concussion_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Concussion_Light_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Condition: GrantExternalCondition
 		Condition: blinded
 		Duration: 22
@@ -729,7 +729,7 @@ LatinSmokerRocket:
 	Warhead@MissileAP_Medium:
 		Damage: 24000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 12
+		Damage: 240
 
 LatinSmokerRocket_elite:
 	Inherits: LatinSmokerRocket
@@ -745,7 +745,7 @@ LatinSmokerRocket_elite:
 	Warhead@MissileAP_Medium:
 		Damage: 48000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 24
+		Damage: 480
 
 DiabloCannon:
 	Inherits: ^LightMissile
@@ -779,7 +779,7 @@ DiabloCannon:
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -898,7 +898,7 @@ RA2MortarBike:
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 3
+		Damage: 60
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
 		ImpactSounds: gexp14a.wav
@@ -932,13 +932,13 @@ LatinBuggyMG:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 
 LatinBuggyMG_elite:
 	Inherits: LatinBuggyMG
@@ -972,23 +972,23 @@ LatinBuggyChaingun:
 		Damage: 2000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Flak_Medium:
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 LatinBuggyChaingun_elite:
 	Inherits: LatinBuggyChaingun
@@ -1024,23 +1024,23 @@ YakovlevCannon:
 		Damage: 2000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Flak_Medium:
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 YakovlevCannon_elite:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -1069,23 +1069,23 @@ YakovlevCannon_elite:
 		Damage: 2000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Flak_Medium:
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 LatinSentryMG:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -1113,19 +1113,19 @@ LatinSentryMG:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 LatinSentryMG_elite:
 	Inherits: LatinSentryMG
@@ -1155,11 +1155,11 @@ LatinAADefenderCannon:
 	Warhead@MissileAP_Medium:
 		Damage: 2000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@Flak_Medium: AreaDamage
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
 
@@ -1316,7 +1316,7 @@ RA2APCFlakCannon:
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -1379,13 +1379,13 @@ RA2APCMachineGun:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 RA2APCMachineGun_elite:
 	Inherits: RA2APCMachineGun
@@ -1452,7 +1452,7 @@ RA2APCRocket:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 		ValidTargets: Ground, Water, Air
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Water, Air
@@ -1534,19 +1534,19 @@ RA2AkulaRockets:
 		Damage: 8000
 	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
-		Damage: 4
+		Damage: 80
 	Warhead@Demolition_Light: AreaDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
-		Damage: 4
+		Damage: 80
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
-		Damage: 4
+		Damage: 80
 
 Rammax_Sabot:
 	Inherits: ^Chaingun

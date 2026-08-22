@@ -12,7 +12,7 @@ RA2Patriot:
 	Warhead@MissileAP_Medium:
 		Damage: 10000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 
 RA2PatriotThunderboltMissile:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
@@ -134,7 +134,7 @@ HarrierMissiles:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
@@ -182,19 +182,19 @@ BlackEagleMissiles:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
 	Warhead@Demolition_Light_Percentage:
-		Damage: 8
+		Damage: 160
 		ValidTargets: Ground, Water, Air
 	Warhead@Demolition_Heavy:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
 	Warhead@Demolition_Heavy_Percentage:
-		Damage: 8
+		Damage: 160
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 		ValidTargets: Ground, Water, Air
 
 BlackEagleMissiles_elite:
@@ -319,7 +319,7 @@ BlackEagleThunderboltMissiles:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 3
+		Damage: 60
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 BlackEagleThunderboltMissiles_elite:
@@ -401,7 +401,7 @@ RA2Prism:
 		Damage: 32000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 16
+		Damage: 320
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@3: FireShrapnel
 		Weapon: PrismScatter
@@ -421,7 +421,7 @@ PrismScatter:
 	Warhead@Laser_Heavy:
 		Damage: 4000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Warhead@3: FireShrapnel
 		Weapon: PrismScatter2
 		Amount: 3
@@ -438,7 +438,7 @@ PrismScatter2:
 	Warhead@Laser_Heavy:
 		Damage: 2000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	-Warhead@3:
 
 PrismScatterE:
@@ -447,7 +447,7 @@ PrismScatterE:
 	Warhead@Laser_Heavy:
 		Damage: 6000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 	Warhead@3: FireShrapnel
 		Weapon: PrismScatter2
 		Amount: 4
@@ -479,17 +479,17 @@ RA2Comet:
 		Damage: 20000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Flame_Medium:
 		Damage: 20000
 	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 	Warhead@Laser_Heavy:
 		Damage: 20000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@3: FireShrapnel
 		InvalidTargets: FireImmune
@@ -541,7 +541,7 @@ RA2GrandCannonWeapon:
 	Warhead@CannonHE_Heavy:
 		Damage: 50000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 25
+		Damage: 500
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 50000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
@@ -577,7 +577,7 @@ RA2GrandCannonWeapon:
 	Warhead@Demolition_Light:
 		Damage: 50000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 25
+		Damage: 500
 	Warhead@EffectWater: CreateEffect
 		Explosions: large_splash
 		ImpactSounds: gexpwasa.wav
@@ -633,7 +633,7 @@ RA2HeavyMirageGun:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 
 RA2HeavyMirageGun_elite:
@@ -676,7 +676,7 @@ RA2Medusa_AA:
 		Damage: 30000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-		Damage: 15
+		Damage: 300
 
 RA2MedusaAG:
 	Inherits: RA2Medusa_AA
@@ -698,7 +698,7 @@ RA2M60:
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 ra2_allies_gi_mg:
 	Inherits: ^RA2SmallArms
@@ -710,7 +710,7 @@ ra2_allies_gi_mg:
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 ra2_allies_gi_para:
 	Inherits: ^RA2Chaingun
@@ -723,7 +723,7 @@ ra2_allies_gi_para:
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 RA2vulcan2:
 	Inherits: GuardianGIMG
@@ -743,11 +743,11 @@ GuardianGIMG:
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 RA2para:
 	Inherits: ^RA2Chaingun
@@ -760,14 +760,14 @@ RA2para:
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 GuardianGIMG2:
 	Inherits: RA2para
 	Warhead@Bullet_Medium:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 
 GuardianGIMG_elite:
 	Inherits: GuardianGIMG
@@ -856,7 +856,7 @@ ra2roktgun:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Air, Water
-		Damage: 1
+		Damage: 20
 	-Warhead@EffectAir:
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's

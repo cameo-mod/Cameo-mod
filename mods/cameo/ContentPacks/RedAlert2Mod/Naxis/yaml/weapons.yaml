@@ -22,15 +22,15 @@ NaxBrummbarArty:
 	Warhead@Demolition_Heavy:
 		Damage: 14000
 	Warhead@Demolition_Heavy_Percentage:
-		Damage: 7
+		Damage: 140
 	Warhead@CannonHE_Heavy:
 		Damage: 14000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 7
+		Damage: 140
 	Warhead@Concussion_Medium:
 		Damage: 14000
 	Warhead@Concussion_Medium_Percentage:
-		Damage: 7
+		Damage: 140
 NaxBrummbarArty_elite:
 	Inherits: NaxBrummbarArty
 	Inherits@Elite: ^RA2EliteEffects
@@ -61,13 +61,13 @@ NaxiWW2KübelwagenMachinegun:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 		ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Medium:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 		ValidTargets: Ground, Water, Air
 
 NaxiWW2Machinegun:
@@ -93,13 +93,13 @@ NaxiWW2Machinegun:
 		Damage: 4000
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 		ValidTargets: Ground, Water
 
 NaxiWW2Machinegun_AA:
@@ -124,13 +124,13 @@ NaxiWW2MachinegunSmall:
 		Damage: 2000
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium:
 		Damage: 2000
 		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 		ValidTargets: Ground, Water
 
 NaxiWW2MachinegunSmall_AA:
@@ -214,7 +214,7 @@ naxis_naxiriflesoldier_rifle:
 	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 
 naxis_naxiriflesoldier_rifle_elite:
 	Inherits: naxis_naxiriflesoldier_rifle
@@ -236,7 +236,7 @@ naxis_naxiriflerecruit_rifle:
 	Warhead@Bullet_Light:
 		Damage: 8000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 
 naxis_naxiriflerecruit_rifle_elite:
 	Inherits: naxis_naxiriflerecruit_rifle
@@ -266,7 +266,7 @@ NaxiRifleT:
 	Warhead@Bullet_Light:
 		Damage: 32000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 16
+		Damage: 320
 
 NaxiRifleCons:
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -279,7 +279,7 @@ NaxiRifleCons:
 	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 
 NaxiRifleCons_elite:
 	Inherits: NaxiRifleCons
@@ -394,7 +394,7 @@ LunarNaxiDroneMissile:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 NaxiMP40_elite:
@@ -424,7 +424,7 @@ NaxiFlamerTroopExplode:
 	Warhead@Flame_Light:
 		Damage: 6000
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 NaxiSniper:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
@@ -519,7 +519,7 @@ NaxiShrek:
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 
 NaxiShrek_elite:
@@ -610,7 +610,7 @@ NaxiShrekCons:
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 
 NaxiShrekCons_elite:
@@ -641,11 +641,11 @@ NaxiHetzerDestroyer:
 	Warhead@CannonHE_Medium:
 		Damage: 20000
 	Warhead@CannonHE_Medium_Percentage:
-		Damage: 10
+		Damage: 200
 	Warhead@CannonAP_Light:
 		Damage: 20000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 
 NaxiHetzerDestroyer_elite:
 	Inherits: NaxiHetzerDestroyer
@@ -670,15 +670,15 @@ NaxiJadgDestroyer:
 	Warhead@CannonHE_Heavy:
 		Damage: 20000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 10
+		Damage: 200
 	Warhead@Concussion_Medium:
 		Damage: 20000
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 	Warhead@CannonAP_Light:
 		Damage: 20000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 
 NaxiJadgDestroyer_elite:
 	Inherits: NaxiJadgDestroyer
@@ -706,11 +706,11 @@ NaxiAntiTankCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 14000
 	Warhead@CannonHE_Medium_Percentage:
-		Damage: 7
+		Damage: 140
 	Warhead@CannonAP_Light:
 		Damage: 14000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 7
+		Damage: 140
 
 NaxiAntiTankCannon_elite:
 	Inherits: NaxiAntiTankCannon
@@ -782,7 +782,7 @@ NaxMausCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 
 NaxMausCannon_elite:
 	Inherits: NaxMausCannon
@@ -833,7 +833,7 @@ NaxRatteCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 50000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 25
+		Damage: 500
 
 NaxRatteCannon_elite:
 	Inherits: NaxRatteCannon
@@ -880,7 +880,7 @@ NaxQuadCannon:
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 1
+		Damage: 20
 
 NaxQuadCannon_elite:
 	Inherits: NaxQuadCannon
@@ -1019,19 +1019,19 @@ NaxPlanegun_elite:
 		Damage: 2000
 	Warhead@Concussion_Light_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 NaxPlaneRockets_elite:
 	Inherits@wh: ^Warhead_MissileAP_Medium
@@ -1057,11 +1057,11 @@ NaxPlaneRockets_elite:
 	Warhead@MissileAP_Medium:
 		Damage: 10000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 	Warhead@MissileAP_Heavy: AreaDamage
 		Damage: 10000
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 
 NaxiInterceptorGun:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -1088,7 +1088,7 @@ NaxiInterceptorGun:
 	Warhead@CannonHE_Heavy:
 		Damage: 6000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 3
+		Damage: 60
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 6000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
@@ -1133,19 +1133,19 @@ NaxShoeRocket:
 		Damage: 8000
 	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
-		Damage: 4
+		Damage: 80
 	Warhead@Demolition_Light: AreaDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
-		Damage: 4
+		Damage: 80
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
 		Damage: 8000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
-		Damage: 4
+		Damage: 80
 
 NaxTigerCannon:
 	Inherits: ^RA2MediumCannon
@@ -1157,7 +1157,7 @@ NaxTigerCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 
 NaxTigerCannon_elite:
 	Inherits: NaxTigerCannon
@@ -1176,7 +1176,7 @@ KingNaxTigerCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 20000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 
 KingNaxTigerCannon_elite:
 	Inherits: KingNaxTigerCannon
@@ -1232,19 +1232,19 @@ NaxiMissileUboat:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
 	Warhead@Demolition_Light_Percentage:
-		Damage: 8
+		Damage: 160
 		ValidTargets: Ground, Water, Air
 	Warhead@Demolition_Heavy:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
 	Warhead@Demolition_Heavy_Percentage:
-		Damage: 8
+		Damage: 160
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 		ValidTargets: Ground, Water, Air
 
 NaxiSlaveWhip:

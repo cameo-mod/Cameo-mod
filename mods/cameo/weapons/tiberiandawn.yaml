@@ -44,7 +44,7 @@ M16:
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 
 
@@ -66,7 +66,7 @@ Grenade:
 	Warhead@Demolition_Light:
 		Damage: 16000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 
 Rockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
@@ -78,7 +78,7 @@ Rockets:
 	Warhead@MissileAP_Light:
 		Damage: 18000
 	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		Damage: 9
+		Damage: 180
 
 Flamethrower:
 	Inherits@wh: ^Warhead_Flame_Light
@@ -90,7 +90,7 @@ Flamethrower:
 	Warhead@Flame_Light:
 		Damage: 20000
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 
 Chemspray:
 	Inherits@wh: ^Warhead_Chemical_Light
@@ -102,7 +102,7 @@ Chemspray:
 	Warhead@Chemical_Light:
 		Damage: 48000
 	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
-		Damage: 24
+		Damage: 480
 
 TiberiumExplosion:
 	Inherits@wh: ^Warhead_Chemical_Medium
@@ -112,7 +112,7 @@ TiberiumExplosion:
 	Warhead@Chemical_Medium:
 		Damage: 40000
 	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
+		Damage: 400
 	Warhead@Resource: CreateResource
 		AddsResourceType: Tiberium
 		Size: 1,1
@@ -152,11 +152,11 @@ ArtilleryShell:
 	Warhead@Demolition_Light:
 		Damage: 16000
 	Warhead@Demolition_Light_Percentage:
-		Damage: 8
+		Damage: 160
 	Warhead@Concussion_Medium:
 		Damage: 16000
 	Warhead@Concussion_Medium_Percentage:
-		Damage: 8
+		Damage: 160
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
@@ -173,7 +173,7 @@ BigFlamer:
 	Warhead@Flame_Medium:
 		Damage: 14000
 	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 7
+		Damage: 140
 	Warhead@Glow: GlowImpact
 		Color: FF6600
 		Scale: 1.5
@@ -187,7 +187,7 @@ FlametankExplode:
 	Warhead@Flame_Medium:
 		Damage: 28000
 	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 14
+		Damage: 280
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
 		GlowScale: 2.0
@@ -221,7 +221,7 @@ FlametankExplode:
 	Warhead@MissileHE_Medium:
 		Damage: 8000
 	Warhead@MissileHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 	Warhead@Effect: CreateEffect
 		Explosions: med_frag
 		ImpactSounds: kaboom25.aud
@@ -246,7 +246,7 @@ HighVAP:
 	Warhead@Bullet_Medium:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 
 ChemTibAtomic:
 	Inherits: Atomic

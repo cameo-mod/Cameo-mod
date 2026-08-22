@@ -14,15 +14,15 @@
 	Warhead@CannonAP_Light:
 		Damage: 10000
 	Warhead@CannonAP_Light_Percentage:
-		Damage: 5
+		Damage: 100
 	Warhead@CannonHE_Medium:
 		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 	Warhead@CannonHE_Heavy:
 		Damage: 10000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 5
+		Damage: 100
 
 IxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -39,15 +39,15 @@ IxianCombatTankCannon:
 	Warhead@CannonAP_Light:
 		Damage: 4000
 	Warhead@CannonAP_Light_Percentage:
-		Damage: 2
+		Damage: 40
 	Warhead@CannonHE_Heavy:
 		Damage: 4000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 2
+		Damage: 40
 	Warhead@CannonHE_Medium:
 		Damage: 4000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 
 HeavyIxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -64,15 +64,15 @@ HeavyIxianCombatTankCannon:
 	Warhead@CannonAP_Light:
 		Damage: 6000
 	Warhead@CannonAP_Light_Percentage:
-		Damage: 3
+		Damage: 60
 	Warhead@CannonHE_Heavy:
 		Damage: 6000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 3
+		Damage: 60
 	Warhead@CannonHE_Medium:
 		Damage: 6000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 
 DuelistTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -126,11 +126,11 @@ DuelistTankCannon:
 	Warhead@CannonHE_Heavy:
 		Damage: 14000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 7
+		Damage: 140
 	Warhead@CannonHE_Medium:
 		Damage: 14000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 7
+		Damage: 140
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
@@ -218,15 +218,15 @@ D2K_155mm3:
 	Warhead@Demolition_Light:
 		Damage: 8000
 	Warhead@Demolition_Light_Percentage:
-		Damage: 4
+		Damage: 80
 	Warhead@Concussion_Medium:
 		Damage: 8000
 	Warhead@Concussion_Medium_Percentage:
-		Damage: 4
+		Damage: 80
 	Warhead@Demolition_Heavy:
 		Damage: 8000
 	Warhead@Demolition_Heavy_Percentage:
-		Damage: 4
+		Damage: 80
 	Warhead@Concrete: DamagesConcrete
 		Damage: 250
 
@@ -247,7 +247,7 @@ D2K_Bazooka2:
 	Warhead@MissileAP_Heavy:
 		Damage: 6000
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 
 	MinRange: 1280
 D2K_Rocket_Trooper2:
@@ -265,17 +265,17 @@ D2K_Rocket_Trooper2:
 		Damage: 8000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 80
 	Warhead@Railgun_Heavy:
 		Damage: 8000
 	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 80
 
 D2K_Rocket_Trooper1:
 	Inherits@wh: ^Warhead_Flak_Medium
@@ -292,19 +292,19 @@ D2K_Rocket_Trooper1:
 		Damage: 8000
 	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 80
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 80
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 80
 
 D2K_TowerMissile:
 	Inherits: ^D2KMissile
@@ -322,7 +322,7 @@ D2K_TowerMissile:
 	Warhead@MissileAP_Heavy:
 		Damage: 16000
 	Warhead@MissileAP_Heavy_Percentage:
-		Damage: 8
+		Damage: 160
 
 mtank_pri2:
 	Inherits: ^D2KMissile
@@ -337,7 +337,7 @@ mtank_pri2:
 	Warhead@MissileAP_Heavy:
 		Damage: 24000
 	Warhead@MissileAP_Heavy_Percentage:
-		Damage: 12
+		Damage: 240
 
 IxRailgunDroneBullet:
 	Inherits: ^FlakWeapon
@@ -383,7 +383,7 @@ IxRailgunDroneBullet:
 		Damage: 6000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 3
+		Damage: 60
 
 ResonanceDroneRepair:
 	Inherits: ^RepairWeapon
@@ -498,7 +498,7 @@ IxianDisable_EMP:
 		DamageTypes: Tesla
 		Damage: 1000
 	Warhead@Tesla_Super_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 	Warhead@Effect: CreateEffect
@@ -521,7 +521,7 @@ d2k_munitions_explosion:
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Magic_Heavy_Percentage: AreaDamagePercentage
 		Delay: 20
-		Damage: 20
+		Damage: 400
 		Spread: 2000
 		Falloff: 100, 50, 25, 0
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
@@ -589,13 +589,13 @@ RashidanGun_upgrade:
 		Damage: 2000
 	Warhead@MissileHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -637,13 +637,13 @@ RaiderGuns:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 RaiderGuns_upgrade:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
@@ -660,19 +660,19 @@ RaiderGuns_upgrade:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 HMG_turret:
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -690,13 +690,13 @@ HMG_turret:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 1
+		Damage: 20
 
 HMG_turret_upgrade:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
@@ -717,19 +717,19 @@ HMG_turret_upgrade:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 HMG_Duelist:
 	Inherits: ^LightMissile
@@ -814,7 +814,7 @@ HMG_Duelist_upgrade:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 d2kStormLasher:
 	# Ixian superweapon-class storm. Wired to Storm blend (2026-08-10).
@@ -834,7 +834,7 @@ d2kStormLasher:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Storm_Heavy_Percentage:
-		Damage: 150
+		Damage: 3000
 		Spread: 750
 		Falloff: 100, 75, 50, 25
 		Delay: 7
@@ -879,7 +879,7 @@ D2K_ShockGun:
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Storm_Heavy_Percentage:
-		Damage: 20
+		Damage: 400
 		Falloff: 100, 75, 50, 25
 		DamageCalculationType: ClosestTargetablePosition
 
@@ -906,7 +906,7 @@ D2K_StormGun:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Storm_Heavy_Percentage:
-		Damage: 40
+		Damage: 800
 		Spread: 750
 		Falloff: 100, 75, 50, 25
 		Delay: 2
@@ -951,7 +951,7 @@ D2K_ShockGunInf:
 	Warhead@Storm_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Spread: 100
-		Damage: 9
+		Damage: 180
 
 D2K_StormGunInf:
 	# Ixian storm infantry weapon. Wired to Storm blend (2026-08-10).
@@ -975,7 +975,7 @@ D2K_StormGunInf:
 	Warhead@Storm_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Spread: 1000
-		Damage: 12
+		Damage: 240
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
 	# EMP auto-scales via the Storm template's IntegrityScale 50 (flat EMPUnit removed 2026-08-10).
@@ -1008,7 +1008,7 @@ D2K_StormGunCymek:
 	Warhead@Storm_Heavy_Percentage:
 		ValidTargets: Ground, Water
 		Spread: 1000
-		Damage: 16
+		Damage: 320
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
 	# EMP auto-scales via the Storm template's IntegrityScale 50 (flat EMPUnit removed 2026-08-10).
@@ -1067,7 +1067,7 @@ D2K_RocketsCymek:
 		Damage: 6000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 3
+		Damage: 60
 
 d2k_air_drone_guns:
 	Inherits: ^D2KMissile
@@ -1087,19 +1087,19 @@ d2k_air_drone_guns:
 		Damage: 4000
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 
 	MinRange: 1300
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
@@ -1119,19 +1119,19 @@ d2k_air_drone_guns_upgrade:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 	MinRange: 1300
 d2k_laser:
@@ -1153,7 +1153,7 @@ d2k_laser:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 
 d2k_dronelauncher:
@@ -1291,7 +1291,7 @@ farasha_drone_ixian:
 	Warhead@Inferno_Light_Percentage:
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Air
-		Damage: 3
+		Damage: 60
 
 d2k_basq:
 	Inherits@wh: ^Warhead_Flak_Light
@@ -1312,7 +1312,7 @@ d2k_basq:
 		Damage: 32000
 	Warhead@Flak_Light_Percentage:
 		ValidTargets: Ground, Water
-		Damage: 16
+		Damage: 320
 	Warhead@Effect: CreateEffect
 		Explosions: sczhsplash
 		ImpactSounds: EXPLSML4.WAV
@@ -1424,7 +1424,7 @@ MongooseRocket:
 		Damage: 4000
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_rocket_explosion
 		ExplosionPalette: effect75alpha

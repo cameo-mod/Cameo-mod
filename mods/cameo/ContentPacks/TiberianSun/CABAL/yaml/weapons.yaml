@@ -128,7 +128,7 @@ DarkObeliskLaser:
 		Spread: 250
 		ValidTargets: Air
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 18
+		Damage: 360
 		Spread: 500
 		Delay: 5
 		ValidTargets: Air
@@ -175,7 +175,7 @@ TSCABALDisable_EMP:
 		DamageTypes: Tesla
 		Damage: 1000
 	Warhead@Tesla_Super_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 2000
 	Warhead@Effect: CreateEffect
@@ -384,7 +384,7 @@ TSVulcanTower:
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ImpactSounds: methit1.aud
@@ -414,7 +414,7 @@ eliminator_blades:
 	Warhead@Melee_Medium:
 		Damage: 12000
 	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: pzehit00.aud
@@ -434,7 +434,7 @@ CabalBerserkerBlades:
 	Warhead@Melee_Medium:
 		Damage: 74000
 	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 37
+		Damage: 740
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: expnew12.aud
@@ -451,11 +451,11 @@ CabalCyborgChaingun:
 	Warhead@Bullet_Light:
 		Damage: 10000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 	Warhead@Bullet_Medium:
 		Damage: 10000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ImpactSounds: methit1.aud
@@ -474,11 +474,11 @@ TSDevoutChainguns:
 	Warhead@Bullet_Light:
 		Damage: 12000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 	Warhead@Bullet_Medium:
 		Damage: 12000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ImpactSounds: methit1.aud
@@ -497,7 +497,7 @@ CabalEliminatorGatling:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 16
+		Damage: 320
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ImpactSounds: methit1.aud
@@ -513,7 +513,7 @@ CabalTarantulaCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 16000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 
 
 
@@ -542,19 +542,19 @@ CabalReaperMissiles:
 	Warhead@MissileHE_Light: AreaDamage
 		Damage: 8000
 	Warhead@MissileHE_Light_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 8000
 	Warhead@MissileHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 8000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 8000
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 
 CabalReaperMissiles_AA:
 	Inherits@wh: ^Warhead_MissileHE_Light
@@ -582,25 +582,25 @@ CabalReaperMissiles_AA:
 		Damage: 8000
 		ValidTargets: Air
 	Warhead@MissileHE_Light_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 		ValidTargets: Air
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 8000
 		ValidTargets: Air
 	Warhead@MissileHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 		ValidTargets: Air
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 8000
 		ValidTargets: Air
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 		ValidTargets: Air
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 8000
 		ValidTargets: Air
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 4
+		Damage: 80
 		ValidTargets: Air
 
 CabalHeavyReaperMissiles:
@@ -631,19 +631,19 @@ CabalHeavyReaperMissiles:
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 12000
 	Warhead@MissileHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 	Warhead@MissileHE_Heavy: AreaDamage
 		Damage: 12000
 	Warhead@MissileHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 12000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 12000
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 
 CabalHeavyReaperMissiles_AA:
 	Inherits@wh: ^Warhead_MissileHE_Medium
@@ -674,25 +674,25 @@ CabalHeavyReaperMissiles_AA:
 		Damage: 12000
 		ValidTargets: Air
 	Warhead@MissileHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 		ValidTargets: Air
 	Warhead@MissileHE_Heavy: AreaDamage
 		Damage: 12000
 		ValidTargets: Air
 	Warhead@MissileHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 		ValidTargets: Air
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 12000
 		ValidTargets: Air
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 		ValidTargets: Air
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 12000
 		ValidTargets: Air
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 		ValidTargets: Air
 
 CabalHeavyReaperTrap:
@@ -921,7 +921,7 @@ CabalHunterKillerHeavyLaser:
 	Warhead@Laser_Heavy:
 		Damage: 20000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_m
 		ImpactSounds: drtelectro.wav
@@ -944,7 +944,7 @@ CabalSpiderLaser:
 	Warhead@Laser_Heavy:
 		Damage: 44000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 22
+		Damage: 440
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
@@ -968,7 +968,7 @@ CabalSpiderCnc4Laser:
 	Warhead@Laser_Heavy:
 		Damage: 44000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 22
+		Damage: 440
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
@@ -991,7 +991,7 @@ CabalLaserBoatLaser:
 	Warhead@Laser_Heavy:
 		Damage: 40000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 22
+		Damage: 440
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
@@ -1017,7 +1017,7 @@ CabalLaserBoatLaserAA:
 		Spread: 250
 		ValidTargets: Air
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 18
+		Damage: 360
 		Spread: 500
 		Delay: 5
 		ValidTargets: Air
@@ -1215,7 +1215,7 @@ CabalCoreDefenderLaser:
 	Warhead@Laser_Heavy:
 		Damage: 160000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 80
+		Damage: 1600
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
@@ -1238,7 +1238,7 @@ CabalAvatarLaser:
 	Warhead@Laser_Heavy:
 		Damage: 80000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 40
+		Damage: 800
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
@@ -1271,11 +1271,11 @@ CabalMantisGun:
 	Warhead@Bullet_Light:
 		Damage: 6000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 	Warhead@Laser_Heavy:
 		Damage: 6000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
@@ -1299,11 +1299,11 @@ CabalLegionGun:
 	Warhead@Bullet_Light:
 		Damage: 60000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 30
+		Damage: 600
 	Warhead@Laser_Heavy:
 		Damage: 60000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 30
+		Damage: 600
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
@@ -1333,19 +1333,19 @@ CabalLegionGun:
 	Warhead@MissileHE_Light: AreaDamage
 		Damage: 12000
 	Warhead@MissileHE_Light_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 12000
 	Warhead@MissileHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 12000
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 12000
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 6
+		Damage: 120
 
 CabalManticoreMissilesAA:
 	Inherits: ^CabalManticoreMissiles
@@ -1391,11 +1391,11 @@ CabalRocketCyborgRockets:
 	Warhead@MissileHE_Light: AreaDamage
 		Damage: 6000
 	Warhead@MissileHE_Light_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 6000
 	Warhead@MissileHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 
 CabalRocketCyborgRocketsUpgraded:
 	Inherits@wh: ^Warhead_MissileHE_Light
@@ -1420,11 +1420,11 @@ CabalRocketCyborgRocketsUpgraded:
 	Warhead@MissileHE_Light: AreaDamage
 		Damage: 6000
 	Warhead@MissileHE_Light_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 6000
 	Warhead@MissileHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 3
+		Damage: 60
 
 CabalMothershipRockets:
 	Inherits: ^TeslaWeapon
@@ -1549,7 +1549,7 @@ CabalWaspLaser:
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 		ValidTargets: Ground, Water, Air
 	Warhead@LaserExtraDamage: SpreadDamage
 		Damage: 2000
@@ -1582,7 +1582,7 @@ CabalWaspLaserStriker:
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 		ValidTargets: Ground, Water, Air
 	Warhead@LaserExtraDamage: SpreadDamage
 		Damage: 2000
@@ -1669,7 +1669,7 @@ CabalRavagerPlasma:
 	Warhead@Chemical_Medium:
 		Damage: 32000
 	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
-		Damage: 16
+		Damage: 320
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
@@ -1688,7 +1688,7 @@ CabalWidowPlasma:
 	Warhead@Chemical_Medium:
 		Damage: 32000
 	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
-		Damage: 16
+		Damage: 320
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
@@ -1712,7 +1712,7 @@ CabalManticoreLaser:
 	Warhead@Laser_Heavy:
 		Damage: 10000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
@@ -1742,7 +1742,7 @@ CabalMagicNuke:
 		ValidTargets: Shielded
 		Falloff: 100, 0
 		Spread: 10000
-		Damage: 10
+		Damage: 200
 		Delay: 2
 	Warhead@Tesla_Heavy:
 		ValidTargets: Shielded
@@ -1754,7 +1754,7 @@ CabalMagicNuke:
 		ValidTargets: Shielded
 		Falloff: 100, 0
 		Spread: 10000
-		Damage: 10
+		Damage: 200
 		Delay: 5
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
@@ -2402,7 +2402,7 @@ CabalRavagerPlasmaNeutron:
 	Warhead@Chemical_Medium:
 		Damage: 32000
 	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
-		Damage: 16
+		Damage: 320
 	Warhead@Effect: CreateEffect
 		Explosions: magicnuke_small
 		ImpactSounds: expnew12.aud
@@ -2482,7 +2482,7 @@ CabalOverkillCharge:
 	Warhead@Tesla_Heavy:
 		Damage: 24000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 12
+		Damage: 240
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
@@ -2509,7 +2509,7 @@ CabalOverkillGunshipLaser:
 		Spread: 256
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
@@ -2540,7 +2540,7 @@ CabalOverkillLaser:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_l
@@ -2566,11 +2566,11 @@ CabalOverkillDroneLaser:
 	Warhead@Bullet_Light:
 		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Warhead@Laser_Heavy:
 		Damage: 4000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav

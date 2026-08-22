@@ -17,19 +17,19 @@ schwarzermond_lunarsoldier_rifle:
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 		ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Medium:
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Medium_Percentage:
-		Damage: 2
+		Damage: 40
 		ValidTargets: Ground, Water, Air
 	Warhead@Laser_Heavy:
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 		ValidTargets: Ground, Water, Air
 
 schwarzermond_lunarsoldier_rifle_elite:
@@ -107,7 +107,7 @@ LunarPanzerCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 
 LunarPanzerCannon_elite:
 	Inherits: LunarPanzerCannon
@@ -197,19 +197,19 @@ NaxiMP40Laser:
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage:
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@Laser_Heavy:
 		Damage: 2000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 NaxiMP40Laser_elite:
 	Inherits: NaxiMP40Laser
@@ -232,15 +232,15 @@ LunarNaxiJadgDestroyer:
 	Warhead@CannonHE_Heavy:
 		Damage: 30000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 15
+		Damage: 300
 	Warhead@Concussion_Medium:
 		Damage: 30000
 	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 15
+		Damage: 300
 	Warhead@CannonAP_Light:
 		Damage: 30000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 15
+		Damage: 300
 
 LunarNaxiJadgDestroyer_elite:
 	Inherits: LunarNaxiJadgDestroyer
@@ -289,7 +289,7 @@ LunarTigerCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 4000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 
 LunarTigerCannon_elite:
 	Inherits: LunarTigerCannon
@@ -323,19 +323,19 @@ NaxHaenebuQuadCannon:
 		Damage: 2000
 	Warhead@Concussion_Light_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MissileAP_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 NaxHaenebuQuadCannon_elite:
 	Inherits: NaxHaenebuQuadCannon
@@ -368,19 +368,19 @@ DalekCannon:
 		Damage: 50000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 50
+		Damage: 1000
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 100000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 50
+		Damage: 1000
 	Warhead@Railgun_Heavy: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 100000
 	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 50
+		Damage: 1000
 	Warhead@Scatter: FireShrapnel
 		Weapon: DalekCannonScatter
 		Amount: 3
@@ -405,15 +405,15 @@ DalekCannon_elite:
 		DamageTypes: Tesla
 		Damage: 100000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 100
+		Damage: 2000
 	Warhead@Laser_Heavy:
 		Damage: 200000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 100
+		Damage: 2000
 	Warhead@Railgun_Heavy:
 		Damage: 200000
 	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		Damage: 100
+		Damage: 2000
 	Warhead@Scatter: FireShrapnel
 		Weapon: DalekCannonScatterE
 		Amount: 6
@@ -434,19 +434,19 @@ DalekCannonScatter:
 		Damage: 25000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 25
+		Damage: 500
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 50000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 25
+		Damage: 500
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 50000
 	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 25
+		Damage: 500
 	-Warhead@Scatter:
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
@@ -479,7 +479,7 @@ BlackHoleMaker:
 	Warhead@Laser_Heavy:
 		Damage: 60000
 	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 30
+		Damage: 600
 	Warhead@1Actor: SpawnActor
 		Actors: hole_small.nax2
 		#OwnerType: InternalName
@@ -517,7 +517,7 @@ NaxiBlackholeShoot:
 		Damage: 2000
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
-		Damage: 1
+		Damage: 20
 
 BlackHoleSuck:
 	Inherits: NanoReturn
@@ -566,21 +566,21 @@ NaxCorrosionRocket:
 		Damage: 2000
 	Warhead@Concussion_Light_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 		ValidRelationships: Neutral, Enemy
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MissileAP_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 		ValidRelationships: Neutral, Enemy
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 		ValidRelationships: Neutral, Enemy
 	Warhead@Effect: CreateEffect
 		Explosions: nax_corr_ex
@@ -684,7 +684,7 @@ NaxCorrosionRocketTrooper_elite:
 	Warhead@MissileAP_Medium:
 		Damage: 4000
 	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 
 	MinRange: 1210
 NaxCorrosionBeast:
@@ -717,7 +717,7 @@ NaxCrystalLeech:
 		DamageTypes: Tesla
 		Damage: 1000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 NaxCrystalLeech_elite:
 	Inherits@wh: ^Warhead_Tesla_Super
@@ -733,7 +733,7 @@ NaxCrystalLeech_elite:
 		DamageTypes: Tesla
 		Damage: 1000
 	Warhead@Tesla_Super_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 NaxDieGlocke:
 	Inherits@wh: ^Warhead_Chemical_Heavy
@@ -749,7 +749,7 @@ NaxDieGlocke:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
-		Damage: 5
+		Damage: 100
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Effect: CreateEffect
 		Explosions: demotruck_explosion
@@ -776,7 +776,7 @@ UbermenschLaser:
 	Warhead@CannonHE_Medium:
 		Damage: 4000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
@@ -812,7 +812,7 @@ NaxiCowDrop:
 		Spread: 1000
 	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		ValidRelationships: Neutral, Enemy
-		Damage: 10
+		Damage: 200
 		Spread: 1000
 	Warhead@EffectWater: CreateEffect
 		Explosions: large_splash
@@ -849,7 +849,7 @@ Lunar_GreenTigerCannon:
 		DamageTypes: Tesla
 		Damage: 2000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Report: laser_cannon3_4.wav
 
 Lunar_GreenTigerCannon_elite:
@@ -864,7 +864,7 @@ Lunar_GreenTigerCannon_elite:
 		DamageTypes: Tesla
 		Damage: 2000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 40
 	Report: laser_cannon3_4.wav
 
 Lunar_GreenJadgDestroyer:
@@ -879,7 +879,7 @@ Lunar_GreenJadgDestroyer:
 		DamageTypes: Tesla
 		Damage: 15000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 15
+		Damage: 300
 	Report: laser_cannon3_4.wav
 
 Lunar_GreenJadgDestroyer_elite:
@@ -894,7 +894,7 @@ Lunar_GreenJadgDestroyer_elite:
 		DamageTypes: Tesla
 		Damage: 15000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 15
+		Damage: 300
 	Report: laser_cannon3_4.wav
 
 Lunar_GreenGrilleArty:
@@ -909,7 +909,7 @@ Lunar_GreenGrilleArty:
 		DamageTypes: Tesla
 		Damage: 8000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 	Report: laser_cannon3_2.wav
 
 Lunar_GreenGrilleArty_elite:
@@ -924,7 +924,7 @@ Lunar_GreenGrilleArty_elite:
 		DamageTypes: Tesla
 		Damage: 8000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 8
+		Damage: 160
 	Report: laser_cannon3_2.wav
 
 Lunar_GreenSturmArty:

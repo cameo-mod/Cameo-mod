@@ -65,7 +65,7 @@
 		Damage: 2000
 	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 20
 
 OreExplosion:
 	Inherits@wh: ^Warhead_Flame_Medium
@@ -74,7 +74,7 @@ OreExplosion:
 	Warhead@Flame_Medium:
 		Damage: 40000
 	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
+		Damage: 400
 	Warhead@Resource: CreateResource
 		AddsResourceType: Ore
 		Size: 1,1
@@ -89,7 +89,7 @@ M1Carbine:
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 CryoM1Carbine:
 	Inherits: M1Carbine
@@ -163,11 +163,11 @@ ConscriptMolotov:
 	Warhead@Demolition_Light:
 		Damage: 8000
 	Warhead@Demolition_Light_Percentage:
-		Damage: 4
+		Damage: 80
 	Warhead@Flame_Light:
 		Damage: 8000
 	Warhead@Flame_Light_Percentage:
-		Damage: 4
+		Damage: 80
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
 		Duration: 40
@@ -184,11 +184,11 @@ ConscriptMolotovExplode:
 	Warhead@Demolition_Light:
 		Damage: 4000
 	Warhead@Demolition_Light_Percentage:
-		Damage: 2
+		Damage: 40
 	Warhead@Flame_Light:
 		Damage: 4000
 	Warhead@Flame_Light_Percentage:
-		Damage: 2
+		Damage: 40
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
 		Duration: 25
@@ -204,11 +204,11 @@ RocketsRA:
 	Warhead@MissileHE_Medium:
 		Damage: 10000
 	Warhead@MissileHE_Medium_Percentage:
-		Damage: 5
+		Damage: 100
 	Warhead@MissileHE_Light:
 		Damage: 10000
 	Warhead@MissileHE_Light_Percentage:
-		Damage: 5
+		Damage: 100
 
 RocketsRACryo:
 	Inherits: RocketsRA
@@ -274,7 +274,7 @@ Flamer:
 	Warhead@Flame_Light:
 		Damage: 2000
 	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 PortaTesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
@@ -288,7 +288,7 @@ PortaTesla:
 		DamageTypes: Tesla
 		Damage: 10000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 10
+		Damage: 200
 
 TTankZap:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -303,7 +303,7 @@ TTankZap:
 		DamageTypes: Tesla
 		Damage: 20000
 	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
+		Damage: 400
 
 LightSniper:
 	Inherits@wh: ^Warhead_Sniper_Light
@@ -341,7 +341,7 @@ ReimuYinYangOrb:
 		Damage: 64000
 	Warhead@Magic_Heavy_Percentage:
 		Spread: 160
-		Damage: 32
+		Damage: 640
 		ValidRelationships: Enemy, Neutral
 	Warhead@Effect: CreateEffect
 		ImpactSounds: thgun.wav
@@ -538,7 +538,7 @@ MagicOrb:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_Percentage:
 		Spread: 800
-		Damage: 4
+		Damage: 80
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Magic_Heavy:
 		Spread: 1200
@@ -546,7 +546,7 @@ MagicOrb:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Magic_Heavy_Percentage:
 		Spread: 800
-		Damage: 4
+		Damage: 80
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Spread: 2000
@@ -592,7 +592,7 @@ MagicOrb2:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy_Percentage:
 		Spread: 1200
-		Damage: 2
+		Damage: 40
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Magic_Heavy:
 		Spread: 1600
@@ -600,7 +600,7 @@ MagicOrb2:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Magic_Heavy_Percentage:
 		Spread: 1200
-		Damage: 2
+		Damage: 40
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Spread: 2000
@@ -623,13 +623,13 @@ APCGunAllies:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage:
 		ValidTargets: Ground, Water
-		Damage: 1
+		Damage: 20
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage:
 		ValidTargets: Ground, Water
-		Damage: 1
+		Damage: 20
 
 APCGunAllies_AA:
 	Inherits: APCGunAllies
@@ -658,11 +658,11 @@ RAVulcan:
 	Warhead@Bullet_Light:
 		Damage: 8000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 8000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 ZeroFighterChainGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -681,7 +681,7 @@ ZeroFighterChainGun:
 		Damage: 6000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 3
+		Damage: 60
 
 ZeroFighterChainGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
@@ -694,13 +694,13 @@ ZeroFighterChainGunWaveforce:
 		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 40
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 500
@@ -721,11 +721,11 @@ TigerCannon:
 	Warhead@CannonHE_Heavy:
 		Damage: 8000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 4
+		Damage: 80
 	Warhead@CannonHE_Medium:
 		Damage: 8000
 	Warhead@CannonHE_Medium_Percentage:
-		Damage: 4
+		Damage: 80
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
@@ -760,7 +760,7 @@ WaveforceCannonChargedLaser:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Railgun_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 5
+		Damage: 100
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -768,7 +768,7 @@ WaveforceCannonChargedLaser:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MissileHE_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 5
+		Damage: 100
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
@@ -859,7 +859,7 @@ WaveforceCannonDistortedBeam2:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 5
+		Damage: 100
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water, Air
@@ -867,7 +867,7 @@ WaveforceCannonDistortedBeam2:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 5
+		Damage: 100
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
@@ -936,7 +936,7 @@ MammothTusk:
 	Warhead@MissileHE_Heavy:
 		Damage: 24000
 	Warhead@MissileHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 12
+		Damage: 240
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom12.aud
@@ -964,11 +964,11 @@ ParaBomb:
 	Warhead@Demolition_Heavy:
 		Damage: 20000
 	Warhead@Demolition_Heavy_Percentage:
-		Damage: 10
+		Damage: 200
 	Warhead@Flame_Heavy:
 		Damage: 20000
 	Warhead@Flame_Heavy_Percentage:
-		Damage: 10
+		Damage: 200
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
@@ -1057,7 +1057,7 @@ JapanCarrierFighterBomb:
 		Damage: 10000
 	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 5
+		Damage: 100
 
 JapanCarrierTarget:
 	ReloadDelay: 25
@@ -1766,12 +1766,12 @@ TorpTube:
 	Warhead@Concussion_Light:
 		Damage: 16000
 	Warhead@Concussion_Light_Percentage:
-		Damage: 8
+		Damage: 160
 	Warhead@MissileHE_Heavy:
 		Damage: 16000
 		ValidTargets: Water, Underwater, Bridge, Structure
 	Warhead@MissileHE_Heavy_Percentage:
-		Damage: 8
+		Damage: 160
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
@@ -1820,7 +1820,7 @@ TorpTubeThermobaric:
 		ValidTargets: Water, Underwater, Bridge, Structure
 		ValidRelationships: Enemy
 		AffectsParent: true
-		Damage: 9
+		Damage: 180
 	-Warhead@Glow:
 	-Warhead@Smudge:
 	-Warhead@EffectAir:
@@ -1854,7 +1854,7 @@ DepthCharge:
 		Damage: 60000
 		ValidTargets: Submarine, Ship, Underwater
 	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 30
+		Damage: 600
 		ValidTargets: Submarine, Ship, Underwater
 	Warhead@EffectWater: CreateEffect
 		Explosions: large_splash
@@ -1879,7 +1879,7 @@ DepthCharge:
 		Damage: 30000
 		Spread: 300
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 15
+		Damage: 300
 		Spread: 300
 
 8Inch:
@@ -1906,11 +1906,11 @@ DepthCharge:
 	Warhead@Demolition_Heavy:
 		Damage: 40000
 	Warhead@Demolition_Heavy_Percentage:
-		Damage: 20
+		Damage: 400
 	Warhead@Demolition_Light:
 		Damage: 40000
 	Warhead@Demolition_Light_Percentage:
-		Damage: 20
+		Damage: 400
 Stinger:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1933,7 +1933,7 @@ Stinger:
 	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Underwater
-		Damage: 5
+		Damage: 100
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 
@@ -1957,11 +1957,11 @@ JapanSpeedBoatGun:
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 JapanSpeedBoatGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
@@ -1992,11 +1992,11 @@ YamatoCannon:
 	Warhead@Demolition_Heavy:
 		Damage: 20000
 	Warhead@Demolition_Heavy_Percentage:
-		Damage: 10
+		Damage: 200
 	Warhead@CannonHE_Heavy:
 		Damage: 20000
 	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 10
+		Damage: 200
 
 YamatoFlak:
 	Inherits@wh: ^Warhead_Flak_Medium
@@ -2011,7 +2011,7 @@ YamatoFlak:
 		Damage: 2000
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-		Damage: 1
+		Damage: 20
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
@@ -2148,7 +2148,7 @@ ra1_allies_rifleinfantry_carbine:
 	Warhead@Bullet_Light:
 		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 1
+		Damage: 20
 
 ra1_allies_rifleinfantry_carbine_cryo:
 	Inherits: ra1_allies_rifleinfantry_carbine

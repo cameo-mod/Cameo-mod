@@ -9,7 +9,7 @@ wc2gruntslice2:
 	Warhead@Melee_Medium:
 		Damage: 24000
 	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 12
+		Damage: 240
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 
@@ -44,7 +44,7 @@ wc2ogrepunch:
 	Warhead@Melee_Medium:
 		Damage: 30000
 	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 15
+		Damage: 300
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_punch.aud
 
@@ -212,7 +212,7 @@ wc2deathknightFire:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 80
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Effect: CreateEffect
 		Image: wc2_effect_death_knight_attack
@@ -354,7 +354,7 @@ wc2deathknightDeathAndDecay_Hit:
 		Damage: 24000
 	Warhead@Inferno_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 12
+		Damage: 240
 	Warhead@Effect: CreateEffect
 		Image: wc2_effect_death_and_decay
 		Explosions: idle
@@ -518,7 +518,7 @@ wc2dragonFireVisible:
 		PhysicalStateScale: 100
 	Warhead@Flame_Heavy_Percentage:
 		ValidTargets: Ground, Water, Air
-		Damage: 15
+		Damage: 300
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect

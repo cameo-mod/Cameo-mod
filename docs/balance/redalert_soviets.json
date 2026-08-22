@@ -18,8 +18,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -55,8 +56,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -91,8 +93,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -105,8 +108,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -143,8 +147,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -157,8 +162,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -250,8 +256,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "116",
         "tag": "Demolition_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -264,8 +271,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -278,8 +286,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "percentage_denominator": "10000",
         "spread": "175",
         "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -317,8 +326,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "116",
         "tag": "Demolition_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -331,8 +341,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -345,8 +356,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "percentage_denominator": "10000",
         "spread": "175",
         "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -384,8 +396,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "116",
         "tag": "Demolition_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -398,8 +411,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -412,8 +426,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "percentage_denominator": "10000",
         "spread": "175",
         "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -451,8 +466,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -560,8 +576,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -669,8 +686,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -1006,8 +1024,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -1042,8 +1061,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -1077,8 +1097,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -1091,8 +1112,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -1130,8 +1152,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -1144,8 +1167,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -1300,8 +1324,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -1314,8 +1339,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -1358,8 +1384,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -1372,8 +1399,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -1413,8 +1441,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "116",
         "tag": "Demolition_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -1427,8 +1456,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -1441,8 +1471,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "percentage_denominator": "10000",
         "spread": "175",
         "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -1480,8 +1511,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "116",
         "tag": "Demolition_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -1494,8 +1526,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -1508,8 +1541,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "percentage_denominator": "10000",
         "spread": "175",
         "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -1547,8 +1581,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "116",
         "tag": "Demolition_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -1561,8 +1596,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -1575,8 +1611,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "percentage_denominator": "10000",
         "spread": "175",
         "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -1953,8 +1990,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -1989,8 +2027,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -2024,8 +2063,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -2038,8 +2078,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -2077,8 +2118,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -2091,8 +2133,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -2194,8 +2237,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
+        "damage": "400",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -2232,8 +2276,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
+        "damage": "400",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -2270,8 +2315,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -2291,8 +2337,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -2331,8 +2378,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -2352,8 +2400,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -2434,8 +2483,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
+        "damage": "120",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -2515,8 +2565,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
+        "damage": "120",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -2688,8 +2739,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -2727,8 +2779,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -2765,8 +2818,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -2779,8 +2833,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -2821,8 +2876,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -2835,8 +2891,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -2939,8 +2996,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "11",
+        "damage": "220",
         "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -2977,8 +3035,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
+        "damage": "300",
         "falloff": "100, 74, 51, 36, 23, 13, 0",
+        "percentage_denominator": "10000",
         "spread": "92",
         "tag": "MissileThermobaric_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -3015,8 +3074,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -3053,8 +3113,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -3091,8 +3152,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -3105,8 +3167,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -3146,8 +3209,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -3160,8 +3224,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -3486,8 +3551,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -3500,8 +3566,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -3547,8 +3614,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -3561,8 +3629,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -3605,8 +3674,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -3644,8 +3714,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -3682,8 +3753,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -3696,8 +3768,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -3738,8 +3811,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -3752,8 +3826,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -3940,8 +4015,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -3979,8 +4055,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -4017,8 +4094,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -4031,8 +4109,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -4073,8 +4152,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -4087,8 +4167,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -4744,8 +4825,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "9",
+        "damage": "180",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "Flame_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -4779,8 +4861,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "10",
+        "damage": "200",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "Flame_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -5123,8 +5206,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "16",
+        "damage": "320",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -5165,8 +5249,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "16",
+        "damage": "320",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -5205,8 +5290,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "16",
+        "damage": "320",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -5310,8 +5396,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "33",
         "tag": "Bullet_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -5324,8 +5411,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -5363,8 +5451,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "33",
         "tag": "Bullet_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -5377,8 +5466,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -6007,8 +6097,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "16",
+        "damage": "320",
         "falloff": "100, 74, 54, 36, 0",
+        "percentage_denominator": "10000",
         "spread": "61",
         "tag": "MissileFire_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -6043,8 +6134,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "16",
+        "damage": "320",
         "falloff": "100, 74, 54, 36, 0",
+        "percentage_denominator": "10000",
         "spread": "61",
         "tag": "MissileFire_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -6078,8 +6170,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "16",
+        "damage": "320",
         "falloff": "100, 74, 54, 36, 0",
+        "percentage_denominator": "10000",
         "spread": "91",
         "tag": "MissileFire_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -6114,8 +6207,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "16",
+        "damage": "320",
         "falloff": "100, 74, 54, 36, 0",
+        "percentage_denominator": "10000",
         "spread": "91",
         "tag": "MissileFire_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -6207,8 +6301,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "Flame_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -6243,8 +6338,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "Flame_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -6278,8 +6374,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "Flame_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -6314,8 +6411,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "Flame_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -6403,8 +6501,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "116",
         "tag": "Demolition_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -6417,8 +6516,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -6455,8 +6555,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "116",
         "tag": "Demolition_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -6469,8 +6570,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -6541,8 +6643,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "116",
         "tag": "Demolition_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -6555,8 +6658,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -6627,8 +6731,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "116",
         "tag": "Demolition_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -6641,8 +6746,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -6731,8 +6837,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "16",
+        "damage": "320",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "percentage_denominator": "10000",
         "spread": "126",
         "tag": "Thermobaric_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -6768,8 +6875,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "16",
+        "damage": "320",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "percentage_denominator": "10000",
         "spread": "126",
         "tag": "Thermobaric_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -6804,8 +6912,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "12",
+        "damage": "240",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "percentage_denominator": "10000",
         "spread": "169",
         "tag": "Thermobaric_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -6841,8 +6950,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "12",
+        "damage": "240",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "percentage_denominator": "10000",
         "spread": "169",
         "tag": "Thermobaric_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -6939,8 +7049,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "33",
         "tag": "Bullet_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -6977,8 +7088,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "33",
         "tag": "Bullet_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -7014,8 +7126,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -7028,8 +7141,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "33",
         "tag": "Bullet_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -7069,8 +7183,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -7083,8 +7198,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "33",
         "tag": "Bullet_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -7184,8 +7300,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
+        "damage": "100",
         "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
         "spread": "75",
         "tag": "MissileHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -7198,8 +7315,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
+        "damage": "100",
         "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "MissileHE_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -7235,8 +7353,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
+        "damage": "100",
         "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
         "spread": "75",
         "tag": "MissileHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -7249,8 +7368,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
+        "damage": "100",
         "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "MissileHE_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -7344,8 +7464,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "10",
+        "damage": "200",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -7386,8 +7507,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "10",
+        "damage": "200",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -7426,8 +7548,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "10",
+        "damage": "200",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -7467,8 +7590,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "10",
+        "damage": "200",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -7510,8 +7634,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "10",
+        "damage": "200",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -7551,8 +7676,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "10",
+        "damage": "200",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -7648,8 +7774,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
+        "damage": "100",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -7722,8 +7849,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -7771,8 +7899,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -7831,8 +7960,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
+        "damage": "400",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -7905,8 +8035,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
+        "damage": "100",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "Flame_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -7919,8 +8050,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
+        "damage": "100",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -7994,8 +8126,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -8130,8 +8263,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
+        "damage": "400",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -8204,8 +8338,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
+        "damage": "100",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -8279,8 +8414,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -8328,8 +8464,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -8389,8 +8526,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
+        "damage": "400",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -8464,8 +8602,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
+        "damage": "100",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "Flame_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -8478,8 +8617,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
+        "damage": "100",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -8554,8 +8694,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -8691,8 +8832,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
+        "damage": "400",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -8825,8 +8967,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "16",
+        "damage": "320",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -8867,8 +9010,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "16",
+        "damage": "320",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -8908,8 +9052,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "16",
+        "damage": "320",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -8951,8 +9096,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "16",
+        "damage": "320",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -10201,8 +10347,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "33",
         "tag": "Bullet_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -10215,8 +10362,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -10253,8 +10401,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "33",
         "tag": "Bullet_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -10267,8 +10416,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -10302,8 +10452,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -10316,8 +10467,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -10362,8 +10514,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -10376,8 +10529,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -10419,8 +10573,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -10433,8 +10588,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -10476,8 +10632,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -10490,8 +10647,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -10594,8 +10752,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -10608,8 +10767,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 58, 32, 16, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "55",
         "tag": "Flak_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -10642,8 +10802,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -10656,8 +10817,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 58, 32, 16, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "55",
         "tag": "Flak_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -10754,8 +10916,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -10789,8 +10952,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -10822,8 +10986,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -10836,8 +11001,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -10874,8 +11040,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "Flame_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -10888,8 +11055,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 0",
+        "percentage_denominator": "10000",
         "spread": "50",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -10922,8 +11090,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -10964,8 +11133,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -11004,8 +11174,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -11044,8 +11215,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
+        "damage": "20",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -11149,8 +11321,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "7",
+        "damage": "140",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "Flame_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -11246,8 +11419,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -11260,8 +11434,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "percentage_denominator": "10000",
         "spread": "175",
         "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -11328,8 +11503,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -11342,8 +11518,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "percentage_denominator": "10000",
         "spread": "175",
         "tag": "Concussion_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -11444,8 +11621,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
+        "damage": "60",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -11458,8 +11636,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
+        "damage": "60",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -11497,8 +11676,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -11511,8 +11691,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "Flame_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -11525,8 +11706,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -11539,8 +11721,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -11725,8 +11908,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
+        "damage": "60",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "10000",
         "spread": "250",
         "tag": "Inferno_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -11759,8 +11943,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
+        "damage": "60",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "10000",
         "spread": "250",
         "tag": "Inferno_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -11791,8 +11976,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
+        "damage": "60",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "10000",
         "spread": "250",
         "tag": "Inferno_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -11823,8 +12009,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
+        "damage": "60",
         "falloff": "111, 33, 11, 3",
+        "percentage_denominator": "10000",
         "spread": "250",
         "tag": "Inferno_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -11993,8 +12180,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
+        "damage": "100",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -12030,8 +12218,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
+        "damage": "60",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "Flame_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -12044,8 +12233,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
+        "damage": "60",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -12144,8 +12334,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
+        "damage": "100",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -12185,8 +12376,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
+        "damage": "400",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "58",
         "tag": "Tesla_Super_Percentage",
         "type": "AreaDamagePercentage"
@@ -12225,8 +12417,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
+        "damage": "400",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "58",
         "tag": "Tesla_Super_Percentage",
         "type": "AreaDamagePercentage"
@@ -12329,8 +12522,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
+        "damage": "60",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -12343,8 +12537,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
+        "damage": "60",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -12382,8 +12577,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -12396,8 +12592,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "Flame_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -12410,8 +12607,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -12424,8 +12622,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
+        "damage": "40",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "150",
         "tag": "CannonHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -12776,8 +12975,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -12790,8 +12990,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -12804,8 +13005,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -12847,8 +13049,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -12861,8 +13064,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -12875,8 +13079,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
+        "damage": "80",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -12913,8 +13118,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "12",
+        "damage": "240",
         "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -12951,8 +13157,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "12",
+        "damage": "240",
         "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -13596,8 +13803,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "22",
+        "damage": "440",
         "falloff": "100, 88, 75, 62, 52, 42, 33, 24, 16, 8, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonNuke_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -13634,8 +13842,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "42",
+        "damage": "840",
         "falloff": "100, 76, 56, 38, 0",
+        "percentage_denominator": "10000",
         "spread": "173",
         "tag": "CannonFire_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -13672,8 +13881,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "10",
+        "damage": "200",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -13686,8 +13896,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "10",
+        "damage": "200",
         "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -14321,8 +14532,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -14388,8 +14600,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -14451,8 +14664,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -14465,8 +14679,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -14479,8 +14694,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -14522,8 +14738,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 50, 20, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "CannonHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -14536,8 +14753,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -14550,8 +14768,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8",
+        "damage": "160",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -14968,8 +15187,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
+        "damage": "400",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -15010,8 +15230,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
+        "damage": "400",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -15050,8 +15271,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
+        "damage": "400",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -15154,8 +15376,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
+        "damage": "120",
         "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
         "spread": "75",
         "tag": "MissileHE_Medium_Percentage",
         "type": "AreaDamagePercentage"
@@ -15168,8 +15391,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
+        "damage": "120",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "116",
         "tag": "Demolition_Light_Percentage",
         "type": "AreaDamagePercentage"
@@ -15340,8 +15564,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "30",
+        "damage": "600",
         "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -15354,8 +15579,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "30",
+        "damage": "600",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -15391,8 +15617,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
+        "damage": "400",
         "falloff": "100, 45, 18, 6, 0",
+        "percentage_denominator": "10000",
         "spread": "233",
         "tag": "Demolition_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -15405,8 +15632,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "30",
+        "damage": "600",
         "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -15419,8 +15647,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "30",
+        "damage": "600",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -15485,8 +15714,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
+        "damage": "300",
         "falloff": "100, 55, 0",
+        "percentage_denominator": "10000",
         "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -15506,8 +15736,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "30",
+        "damage": "600",
         "falloff": "100, 45, 15, 0",
+        "percentage_denominator": "10000",
         "spread": "100",
         "tag": "MissileHE_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -15520,8 +15751,9 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "30",
+        "damage": "600",
         "falloff": "100, 90, 78, 60, 0",
+        "percentage_denominator": "10000",
         "spread": "200",
         "tag": "Flame_Heavy_Percentage",
         "type": "AreaDamagePercentage"
