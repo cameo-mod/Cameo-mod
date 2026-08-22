@@ -130,6 +130,63 @@ ScrinCapitalBeam:
 			Concrete: 100
 		ValidTargets: Ground, Water, Air
 
+# Combined-Arms-inspired Tripod beam behavior, independently tuned for Cameo.
+# A synchronized three-shot burst preserves the existing per-volley damage
+# while using the fixed visual pose's center, right, and left hardpoints.
+ScrinTripodLaser:
+	ReloadDelay: 75
+	Burst: 3
+	BurstDelays: 13, 12
+	Range: 7c0
+	TargetActorCenter: true
+	ValidTargets: Ground, Water
+	Projectile: PlasmaBeam
+		Duration: 19
+		Colors: 7D44FFE6, EB66FFE6, 5763FFE6
+		InnerLightness: 200
+		OuterLightness: 115
+		Radius: 2
+		Blockable: false
+		StartOffset: -150,300,0
+		FollowingOffset: 20,-40,0
+		ImpactTicks: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
+		MaxFacingDeviation: 192
+	Warhead@1Dam: SpreadDamage
+		Spread: 64
+		Damage: 193
+		Versus:
+			None: 45
+			Wood: 70
+			Light: 90
+			Medium: 115
+			Heavy: 135
+			Concrete: 110
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+		ValidTargets: Ground, Water
+
+ScrinReaperTripodLaser:
+	Inherits: ScrinTripodLaser
+	ReloadDelay: 75
+	Range: 8c0
+	ValidTargets: Ground, Water, Air
+	Projectile:
+		Colors: 338800EE, 008800EE
+		InnerLightness: 170
+		OuterLightness: 130
+		CenterBeam: true
+		CenterBeamWidth: 45
+		CenterBeamColor: EEFFEEFF
+	Warhead@1Dam:
+		Damage: 282
+		Versus:
+			None: 70
+			Wood: 100
+			Light: 110
+			Medium: 120
+			Heavy: 130
+			Concrete: 100
+		ValidTargets: Ground, Water, Air
+
 ScrinMothershipBeam:
 	Inherits: ScrinCapitalBeam
 	ReloadDelay: 160

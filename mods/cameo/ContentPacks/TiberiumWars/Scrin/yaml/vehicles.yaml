@@ -262,9 +262,12 @@ scrin_annihilator_tripod:
 	Mobile:
 		Speed: 45
 	Armament:
-		Weapon: ScrinHeavyBeam
+		Weapon: ScrinTripodLaser
+		# Burst indexing is 0, 2, 1: center, right, left.
+		LocalOffset: 140,-73,2044, 673,-823,1944, 673,664,2100
 	AttackFrontal:
-		FacingTolerance: 192
+		Armaments: primary
+		FacingTolerance: 128
 	Selectable:
 		Bounds: 2048, 2048
 	WithMoveAnimation:
@@ -293,9 +296,12 @@ scrin_reaper_tripod:
 	Mobile:
 		Speed: 45
 	Armament:
-		Weapon: ScrinCapitalBeam
+		Weapon: ScrinReaperTripodLaser
+		# Burst indexing is 0, 2, 1: center, right, left.
+		LocalOffset: 140,-73,2044, 673,-823,1944, 673,664,2100
 	AttackFrontal:
-		FacingTolerance: 192
+		Armaments: primary
+		FacingTolerance: 128
 	Selectable:
 		Bounds: 2048, 2048
 	WithMoveAnimation:
