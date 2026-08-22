@@ -16,8 +16,6 @@ wc2footmanslice:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 12000
-	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 120
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 
@@ -64,9 +62,6 @@ wc2arrowFire:
 	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@CannonHE_Medium_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 40
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -344,8 +339,6 @@ wc2demolitionsquadExplode:
 		PointDefenseTypes: Missile
 	Warhead@Demolition_Heavy:
 		Damage: 90000
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 900
 	Warhead@Effect1: CreateEffect
 		Explosions: wc2_building_collapse
 		ImpactSounds: explode.aud
@@ -394,9 +387,6 @@ wc2mageFire:
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Tesla_Super_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 80
 	Warhead@Effect: CreateEffect
 		Image: wc2_lightng
 		Explosions: hit
@@ -632,17 +622,14 @@ wc2gruntslice:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 16000
-	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 160
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 
 wc2ogremageRunes_Hit:
 	Inherits: wc2demolitionsquadExplode
 	Warhead@Demolition_Heavy:
+		PercentageScale: 19556
 		Damage: 11250
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 220
 wc2skeletonpunch:
 	Inherits: wc2footmanslice
 	Report: wc2_punch.aud
@@ -676,8 +663,6 @@ wc2cannontowerFire:
 		ContrailEndColor: 000000FF
 	Warhead@CannonHE_Heavy:
 		Damage: 60000
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 600
 	Warhead@Effect: CreateEffect
 		Image: wc2_cannon_impact
 		Explosions: idle

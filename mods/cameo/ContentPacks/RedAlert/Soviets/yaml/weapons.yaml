@@ -8,16 +8,9 @@ IncendiaryM1Carbine:
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-
 ra1_soviets_ak47conscript_rifle:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
@@ -32,13 +25,8 @@ ra1_soviets_ak47conscript_rifle:
 	Report: conscriptak.wav
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-
 CommissarPistol:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
@@ -71,24 +59,14 @@ GrenadeRA:
 		ContrailEndColor: FFFFFF22
 	Warhead@Demolition_Light:
 		Damage: 8000
-	Warhead@Demolition_Light_Percentage:
-		Damage: 80
 	Warhead@Flame_Light:
 		Damage: 8000
-	Warhead@Flame_Light_Percentage:
-		Damage: 80
-
 GrenadeRAExplode:
 	Inherits: GrenadeRA
 	Warhead@Demolition_Light:
 		Damage: 4000
-	Warhead@Demolition_Light_Percentage:
-		Damage: 40
 	Warhead@Flame_Light:
 		Damage: 4000
-	Warhead@Flame_Light_Percentage:
-		Damage: 40
-
 GrenadeThermobaric:
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^MediumFlameWeapon
@@ -103,8 +81,6 @@ GrenadeThermobaric:
 		Damage: 2
 	Warhead@Demolition_Light:
 		Damage: 4000
-	Warhead@Demolition_Light_Percentage:
-		Damage: 40
 	Warhead@MediumFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -118,9 +94,6 @@ GrenadeThermobaric:
 		PhysicalStateScale: 100
 	Warhead@Flame_Light:
 		Damage: 4000
-	Warhead@Flame_Light_Percentage:
-		Damage: 40
-
 GrenadeThermobaricExplode:
 	Inherits: GrenadeThermobaric
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -173,19 +146,11 @@ FireRockets:
 	Warhead@MissileFire_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
-	Warhead@MissileFire_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 320
-
 FireRocketsExplode:
 	Inherits: FireRockets
 	Warhead@MissileFire_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	Warhead@MissileFire_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 160
-
 FireRocketsThermobaric:
 	Inherits@wh: ^Warhead_MissileFire_Medium
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -201,9 +166,6 @@ FireRocketsThermobaric:
 	Warhead@MissileFire_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
-	Warhead@MissileFire_Medium_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 320
 	Warhead@Effect:
 		Explosions: med_napalm
 		GlowScale: 1.5
@@ -215,10 +177,6 @@ FireRocketsThermobaricExplode:
 	Warhead@MissileFire_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	Warhead@MissileFire_Medium_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 160
-
 FireballLauncher:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
@@ -234,8 +192,6 @@ FireballLauncher:
 		TrailDelay: 0
 	Warhead@Flame_Medium:
 		Damage: 18000
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 180
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
 		GlowScale: 1.5
@@ -257,9 +213,6 @@ FireballLauncherThermobaric:
 		TrailDelay: 0
 	Warhead@Flame_Medium:
 		Damage: 20000
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 200
-
 FireballGun:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
@@ -275,8 +228,6 @@ FireballGun:
 		TrailDelay: 0
 	Warhead@Flame_Medium:
 		Damage: 8000
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
 		GlowScale: 1.5
@@ -287,8 +238,6 @@ FireballGunExplode:
 	Inherits: FireballGun
 	Warhead@Flame_Medium:
 		Damage: 4000
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
 FireballGunThermobaric:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
@@ -304,16 +253,10 @@ FireballGunThermobaric:
 		TrailDelay: 0
 	Warhead@Flame_Medium:
 		Damage: 8000
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 80
-
 FireballGunThermobaricExplode:
 	Inherits: FireballGunThermobaric
 	Warhead@Flame_Medium:
 		Damage: 4000
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
-
 SiegeMortar:
 	Inherits: ^Warhead_Thermobaric_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -334,16 +277,10 @@ SiegeMortar:
 		ContrailEndColor: 87654321
 	Warhead@Thermobaric_Medium:
 		Damage: 32000
-	Warhead@Thermobaric_Medium_Percentage:
-		Damage: 320
-
 SiegeMortarExplode:
 	Inherits: SiegeMortar
 	Warhead@Thermobaric_Medium:
 		Damage: 16000
-	Warhead@Thermobaric_Medium_Percentage:
-		Damage: 160
-
 SiegeMortarThermobaric:
 	Inherits: ^Warhead_Thermobaric_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -368,9 +305,6 @@ SiegeMortarThermobaric:
 	Warhead@Thermobaric_Heavy:
 		Damage: 24000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Thermobaric_Heavy_Percentage:
-		Damage: 240
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Effect:
 		Explosions: big_napalm
 		ImpactSounds: firebl3.aud
@@ -383,9 +317,6 @@ SiegeMortarThermobaricExplode:
 	Inherits: SiegeMortarThermobaric
 	Warhead@Thermobaric_Heavy:
 		Damage: 12000
-	Warhead@Thermobaric_Heavy_Percentage:
-		Damage: 120
-
 PortaTesla_EMP:
 	Inherits: PortaTesla
 	Warhead@Tesla_Heavy:
@@ -410,8 +341,6 @@ PortaTeslaFragment:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 5000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 100
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
 	-Warhead@TeslaArc:
@@ -428,8 +357,6 @@ ZapperPortaTesla:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 16000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 320
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
 
@@ -450,8 +377,6 @@ ZapperPortaTeslaFragment:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 8000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 160
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 	-Warhead@TeslaArc:
@@ -471,10 +396,6 @@ PointDefenseTesla:
 		DamageTypes: Tesla
 		ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
 		Damage: 5000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Air, Missile, Bullet, BallisticMissile
-		Damage: 100
-
 TTankZap_EMP:
 	Inherits: TTankZap
 	Warhead@Tesla_Heavy:
@@ -499,8 +420,6 @@ TTankZapArcTeslaFragment1_EMP:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 10000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 200
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 	Warhead@TeslaArc: FireShrapnel
@@ -518,8 +437,6 @@ TTankZapArcTeslaFragment2_EMP:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 5000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 100
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
 	-Warhead@TeslaArc:
@@ -536,9 +453,6 @@ TTankZap2:
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 20000
-	Warhead@Tesla_Super_Percentage: AreaDamagePercentage
-		Damage: 400
-
 TTankZap2_EMP:
 	Inherits: TTankZap2
 	Warhead@Tesla_Super:
@@ -600,9 +514,6 @@ TeslaZap:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 16000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 320
-
 TeslaZap_EMP:
 	Inherits: TeslaZap
 	Warhead@Tesla_Heavy:
@@ -627,8 +538,6 @@ TeslaZapArcTeslaFragment1_EMP:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 8000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 160
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 	Warhead@TeslaArc: FireShrapnel
@@ -646,8 +555,6 @@ TeslaZapArcTeslaFragment2_EMP:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 4000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
 	-Warhead@TeslaArc:
@@ -673,11 +580,6 @@ HeatRayBeam1:
 		Damage: 6000
 		Spread: 500
 		Falloff: 111, 33, 11, 3
-	Warhead@Inferno_Heavy_Percentage:
-		Damage: 60
-		Spread: 250
-		Falloff: 111, 33, 11, 3
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Effect:
 		Explosions: small_napalm
 		Volume: 0.25
@@ -735,13 +637,8 @@ v1rockets:
 		LaunchAngle: 60
 	Warhead@MissileHE_Medium:
 		Damage: 12000
-	Warhead@MissileHE_Medium_Percentage:
-		Damage: 120
 	Warhead@Demolition_Light:
 		Damage: 12000
-	Warhead@Demolition_Light_Percentage:
-		Damage: 120
-
 v1rocketsThermobaric:
 	Inherits: ^MediumMissile
 	Inherits@2: ^Grenade
@@ -810,13 +707,8 @@ GradRockets:
 		LaunchAngle: 60
 	Warhead@MissileHE_Heavy:
 		Damage: 8000
-	Warhead@MissileHE_Heavy_Percentage:
-		Damage: 80
 	Warhead@Concussion_Medium:
 		Damage: 8000
-	Warhead@Concussion_Medium_Percentage:
-		Damage: 80
-
 GradHeavyRockets:
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^HeavyBomb
@@ -846,13 +738,8 @@ GradHeavyRockets:
 		Damage: 2
 	Warhead@MissileHE_Heavy:
 		Damage: 4000
-	Warhead@MissileHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@Concussion_Medium:
 		Damage: 4000
-	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
-
 SCUD:
 	Inherits: ^Warhead_MissileHE_Heavy
 	Inherits@2: ^Warhead_Flame_Heavy
@@ -873,13 +760,8 @@ SCUD:
 		LaunchAngle: 75
 	Warhead@MissileHE_Heavy:
 		Damage: 60000
-	Warhead@MissileHE_Heavy_Percentage:
-		Damage: 600
 	Warhead@Flame_Heavy:
 		Damage: 60000
-	Warhead@Flame_Heavy_Percentage:
-		Damage: 600
-
 SCUDThermobaric:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
@@ -915,9 +797,6 @@ SCUDThermobaric:
 		PhysicalStateScale: 100
 	Warhead@Demolition_Heavy:
 		Damage: 40000
-	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		Damage: 400
-
 SCUDTesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
@@ -952,8 +831,6 @@ SCUDTesla:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 15000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 300
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 45000
 	Warhead@TeslaArc: FireShrapnel
@@ -1039,16 +916,9 @@ FLAK-23-AG:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 20
-
 FLAK-23-AA:
 	Inherits: FLAK-23-AG
 	Range: 8118
@@ -1075,26 +945,16 @@ BTRMachineGun:
 	Report: mgun11.aud
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-
 BTRMachineGun_AA:
 	Inherits: BTRMachineGun
 	Range: 8181
 	ValidTargets: Air
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Air
-
 BTRTeslaMachineGun:
 	Inherits: ^Warhead_MissileAP_Light
 	Inherits@2: ^Warhead_Tesla_Heavy
@@ -1111,10 +971,6 @@ BTRTeslaMachineGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MissileAP_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1122,10 +978,6 @@ BTRTeslaMachineGun:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Tesla_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 1000
@@ -1174,10 +1026,6 @@ ChainGun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-
 IncendiaryChainGun:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
@@ -1191,13 +1039,8 @@ IncendiaryChainGun:
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
 HindMissiles:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_MissileAP_Medium
@@ -1211,21 +1054,12 @@ HindMissiles:
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: xplos.aud
@@ -1292,9 +1126,6 @@ HindMissilesThermobaric:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1476,10 +1307,6 @@ KamovTesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MissileAP_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 160
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -1487,10 +1314,6 @@ KamovTesla:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Tesla_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 160
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
@@ -1559,10 +1382,6 @@ YakChainGun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 40
-
 ArmoredYakChainGun:
 	Inherits: YakChainGun
 	ReloadDelay: 148
@@ -1586,13 +1405,8 @@ IncendiaryYakChainGun:
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 40
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
 IncendiaryArmoredYakChainGun:
 	Inherits: IncendiaryYakChainGun
 	ReloadDelay: 148
@@ -1616,10 +1430,6 @@ YakTeslaGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MissileAP_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 80
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1627,10 +1437,6 @@ YakTeslaGun:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Tesla_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 80
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
@@ -1891,9 +1697,6 @@ Maverick:
 		TrailDelay: 1
 	Warhead@MissileAP_Medium:
 		Damage: 40000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 400
-
 TeslaMaverick:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
@@ -1919,15 +1722,9 @@ TeslaMaverick:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		ValidRelationships: Neutral, Enemy
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 160
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 160
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
 	Warhead@TeslaArc: FireShrapnel
@@ -1950,12 +1747,8 @@ TeslaMaverickFragment1:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 4000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@MissileAP_Medium:
 		Damage: 8000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 	Warhead@TeslaArc: FireShrapnel
@@ -1973,12 +1766,8 @@ TeslaMaverickFragment2:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@MissileAP_Medium:
 		Damage: 4000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
 	-Warhead@TeslaArc:
@@ -2030,9 +1819,6 @@ ThermobaricMaverick:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 120
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Water, Air
 		Explosions: nuke_small
@@ -2064,9 +1850,8 @@ NuclearMaverick:
 		TrailInterval: 1
 		TrailDelay: 1
 	Warhead@MissileHE_Heavy:
+		PercentageScale: 5500
 		Damage: 40000
-	Warhead@MissileHE_Heavy_Percentage:
-		Damage: 220
 ThermobaricNuclearMaverick:
 	Inherits@wh: ^Warhead_MissileThermobaric_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -2094,9 +1879,8 @@ ThermobaricNuclearMaverick:
 		TrailInterval: 1
 		TrailDelay: 1
 	Warhead@MissileThermobaric_Heavy:
+		PercentageScale: 7143
 		Damage: 42000
-	Warhead@MissileThermobaric_Heavy_Percentage:
-		Damage: 300
 	Warhead@Effect2: CreateEffect
 		ValidTargets: Ground, Water, Air
 		Explosions: large_napalm
@@ -2119,8 +1903,6 @@ ThermobaricNuclearMaverick:
 		Speed: 546
 	Warhead@CannonHE_Medium:
 		Damage: 10000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 100
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
@@ -2131,12 +1913,8 @@ ThermobaricNuclearMaverick:
 	Inherits: 105mm
 	Warhead@Flame_Medium:
 		Damage: 6000
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 60
 	Warhead@CannonHE_Medium:
 		Damage: 6000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 60
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
 		GlowScale: 1.5
@@ -2158,12 +1936,8 @@ HammerTankCannon:
 		Speed: 682
 	Warhead@CannonHE_Heavy:
 		Damage: 6000
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 60
 	Warhead@CannonHE_Medium:
 		Damage: 6000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 60
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
@@ -2177,20 +1951,12 @@ HammerTankCannonThermobaric:
 	Report: tnkfire6.aud
 	Warhead@Demolition_Heavy:
 		Damage: 4000
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 40
 	Warhead@Flame_Medium:
 		Damage: 4000
-	Warhead@Flame_Medium_Percentage:
-		Damage: 40
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 4000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 4000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
 		GlowScale: 1.5
@@ -2268,12 +2034,8 @@ KotinCannon:
 		Speed: 642
 	Warhead@CannonHE_Heavy:
 		Damage: 6000
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 60
 	Warhead@CannonHE_Medium:
 		Damage: 6000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 60
 	Warhead@Radiation: CreateTintedCells
 		InvalidTargets: RadiationImmmune
 		Spread: 1000
@@ -2294,20 +2056,12 @@ KotinCannonThermobaric:
 	Report: tnkfire6.aud
 	Warhead@Demolition_Heavy:
 		Damage: 4000
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 40
 	Warhead@Flame_Medium:
 		Damage: 4000
-	Warhead@Flame_Medium_Percentage:
-		Damage: 40
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 4000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 4000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@Radiation: CreateTintedCells
 		InvalidTargets: RadiationImmmune
 		Spread: 1000
@@ -2342,16 +2096,10 @@ ra120mmThermobaric:
 		Speed: 641
 	Warhead@Flame_Heavy:
 		Damage: 8000
-	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@Demolition_Heavy:
 		Damage: 8000
-	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@CannonHE_Heavy:
 		Damage: 8000
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 80
 	-Warhead@Effect:
 
 ra120mmThermobaricTargetingComputer:
@@ -2681,8 +2429,6 @@ ra120mm2:
 		PhysicalStateScale: 100
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 160
 	Warhead@Effect: CreateEffect
 		Explosions: small_building
 		ImpactSounds: kaboom15.aud
@@ -2711,16 +2457,10 @@ ra120mm2Thermobaric:
 		Speed: 666
 	Warhead@Flame_Heavy:
 		Damage: 16000
-	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
-		Damage: 160
 	Warhead@Demolition_Heavy:
 		Damage: 16000
-	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		Damage: 160
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 160
 	-Warhead@Effect:
 
 ra120mm2ThermobaricTargetingComputer:
@@ -2863,10 +2603,8 @@ MonsterTank120mm:
 		LaunchAngle: 50
 		Inaccuracy: 500
 	Warhead@CannonNuke_Heavy:
+		PercentageScale: 5500
 		Damage: 80000
-		AffectsParent: true
-	Warhead@CannonNuke_Heavy_Percentage:
-		Damage: 440
 		AffectsParent: true
 	Warhead@Effect: CreateEffect
 		Explosions: nuke_small
@@ -2887,10 +2625,8 @@ MonsterTank120mmThermobaric:
 		LaunchAngle: 50
 		Inaccuracy: 500
 	Warhead@CannonFire_Heavy:
+		PercentageScale: 7000
 		Damage: 120000
-		AffectsParent: true
-	Warhead@CannonFire_Heavy_Percentage:
-		Damage: 840
 		AffectsParent: true
 MonsterTankTusk:
 	Inherits@wh: ^Warhead_Demolition_Heavy
@@ -2906,16 +2642,9 @@ MonsterTankTusk:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@Demolition_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 200
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@MissileHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 200
-
 MonsterTankTuskTesla:
 	Inherits: ^Grenade
 	Inherits@2: ^LightFlameWeapon
@@ -3128,9 +2857,6 @@ VolkovMagneticWeapon:
 	Warhead@CannonHE_Heavy:
 		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 100
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3173,10 +2899,6 @@ VolkovMagneticWeaponTesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 80
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3212,10 +2934,6 @@ VolkovMagneticWeaponTesla:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 80
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
 	Warhead@TeslaArc: FireShrapnel
@@ -3232,8 +2950,6 @@ VolkovMagneticWeaponTeslaFragment1:
 	Report: shktrop1.aud
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 4000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3256,8 +2972,6 @@ VolkovMagneticWeaponTeslaFragment1:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
 	Warhead@TeslaArc: FireShrapnel
@@ -3272,8 +2986,6 @@ VolkovMagneticWeaponTeslaFragment2:
 	Range: 1415
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3296,8 +3008,6 @@ VolkovMagneticWeaponTeslaFragment2:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 1000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
 	-Warhead@TeslaArc:
@@ -3321,9 +3031,6 @@ VolkovMagneticWeaponNuclearShells:
 		Image: BOMB
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 40000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 400
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -3366,9 +3073,6 @@ VolkovMagneticWeaponIncendiary:
 	Inherits@2: ^IncendiaryBulletProjectile
 	Warhead@Flame_Medium:
 		Damage: 10000
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 100
-
 VolkovMagneticWeaponIncendiaryTesla:
 	Inherits: VolkovMagneticWeapon
 	Inherits@2: ^MediumFlameWeapon
@@ -3383,10 +3087,6 @@ VolkovMagneticWeaponIncendiaryTesla:
 	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 80
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -3458,8 +3158,6 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 	Report: shktrop1.aud
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 4000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3493,8 +3191,6 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 10000
 	Warhead@TeslaArc: FireShrapnel
@@ -3509,8 +3205,6 @@ VolkovMagneticWeaponIncendiaryTeslaFragment2:
 	Range: 1415
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3544,8 +3238,6 @@ VolkovMagneticWeaponIncendiaryTeslaFragment2:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 1000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
 	-Warhead@TeslaArc:
@@ -3582,9 +3274,6 @@ VolkovMagneticWeaponIncendiaryNuclearShells:
 		PhysicalStateScale: 100
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 40000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 400
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -3727,19 +3416,12 @@ RAGatlingTankCannon:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
-
 RAGatlingTankCannon_AA:
 	Inherits: RAGatlingTankCannon
 	Range: 7500
 	ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Air
-
 IncendiaryRAGatlingTankCannon:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
@@ -3753,20 +3435,13 @@ IncendiaryRAGatlingTankCannon:
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
 IncendiaryRAGatlingTankCannon_AA:
 	Inherits: IncendiaryRAGatlingTankCannon
 	Range: 7500
 	ValidTargets: Air
 	Warhead@Flame_Light:
-		ValidTargets: Air
-	Warhead@Flame_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 TeslaRAGatlingTankCannon:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -3783,10 +3458,6 @@ TeslaRAGatlingTankCannon:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 1000
@@ -3880,9 +3551,6 @@ ra1_soviets_rifleinfantry_carbine:
 	Report: gun11.aud
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
-
 ra1_soviets_rifleinfantry_carbine_incendiary:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
@@ -3893,12 +3561,6 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20

@@ -17,14 +17,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "1000",
@@ -185,14 +177,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "160",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
@@ -559,14 +543,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "60",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "6000",
         "falloff": null,
         "spread": "250",
@@ -712,14 +688,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "160",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "16000",
@@ -939,27 +907,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 15, 0",
-        "percentage_denominator": "10000",
-        "spread": "100",
-        "tag": "MissileHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -1178,14 +1130,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1000",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "58",
-        "tag": "Tesla_Super_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "50000",
         "falloff": "100, 75, 50, 25",
         "spread": "400",
@@ -1277,14 +1221,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "160",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -1317,14 +1253,6 @@
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "100",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "42",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -1352,14 +1280,6 @@
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "100",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "42",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -1494,14 +1414,6 @@
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "42",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -1574,14 +1486,6 @@
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "42",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -1676,14 +1580,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "160",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -1716,14 +1612,6 @@
         "spread": "400",
         "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "100",
-        "falloff": "100, 70, 30, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "MissileAA_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -1751,14 +1639,6 @@
         "spread": "400",
         "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "100",
-        "falloff": "100, 70, 30, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "MissileAA_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -1848,14 +1728,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
@@ -1945,14 +1817,6 @@
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "42",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -1992,14 +1856,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "111, 33, 11, 3",
         "spread": "750",
@@ -2089,14 +1945,6 @@
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "42",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -2892,14 +2740,6 @@
         "spread": "400",
         "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "200",
-        "falloff": "100, 70, 30, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "MissileAA_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -2927,14 +2767,6 @@
         "spread": "400",
         "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "200",
-        "falloff": "100, 70, 30, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "MissileAA_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -3157,14 +2989,6 @@
         "spread": "300",
         "tag": "Flame_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 90, 78, 60, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "Flame_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -3194,14 +3018,6 @@
         "spread": "300",
         "tag": "Flame_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 90, 78, 60, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "Flame_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -3232,14 +3048,6 @@
         "spread": "300",
         "tag": "Flame_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 90, 78, 60, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "Flame_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -3270,14 +3078,6 @@
         "spread": "300",
         "tag": "Flame_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 90, 78, 60, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "Flame_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -3366,14 +3166,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "58",
-        "tag": "Tesla_Super_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "20000",
         "falloff": "100, 75, 50, 25",
         "spread": "400",
@@ -3386,14 +3178,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -3509,14 +3293,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": null,
         "spread": "400",
@@ -3603,14 +3379,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -4010,27 +3778,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 15, 0",
-        "percentage_denominator": "10000",
-        "spread": "100",
-        "tag": "MissileHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -4065,27 +3817,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 15, 0",
-        "percentage_denominator": "10000",
-        "spread": "100",
-        "tag": "MissileHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -4174,14 +3910,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "100",
@@ -4189,27 +3917,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -4244,14 +3956,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "100",
@@ -4259,27 +3963,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -4376,14 +4064,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "100",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "10000",
         "falloff": null,
         "spread": "150",
@@ -4440,14 +4120,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "100",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -4562,14 +4234,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "100",
@@ -4577,27 +4241,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -4634,14 +4282,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 0",
         "spread": "100",
@@ -4649,27 +4289,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -5087,14 +4711,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
@@ -5102,27 +4718,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "percentage_denominator": "10000",
-        "spread": "175",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -5230,14 +4830,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
@@ -5245,27 +4837,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "percentage_denominator": "10000",
-        "spread": "175",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -5355,14 +4931,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "80",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "58",
-        "tag": "Tesla_Super_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "40000",
         "falloff": "100, 75, 50, 25",
         "spread": "400",
@@ -5375,14 +4943,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "80",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "40000",
@@ -5498,14 +5058,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": null,
         "spread": "400",
@@ -5592,14 +5144,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -6542,27 +6086,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 15, 0",
-        "percentage_denominator": "10000",
-        "spread": "75",
-        "tag": "MissileHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 45, 15, 0",
         "spread": "100",
         "tag": "MissileHE_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 45, 15, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "MissileHE_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -6597,27 +6125,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 15, 0",
-        "percentage_denominator": "10000",
-        "spread": "75",
-        "tag": "MissileHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 45, 15, 0",
         "spread": "100",
         "tag": "MissileHE_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 45, 15, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "MissileHE_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -6711,14 +6223,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Concussion_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
@@ -6726,27 +6230,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -6782,14 +6270,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Concussion_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
@@ -6797,27 +6277,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -6849,14 +6313,6 @@
         "spread": "400",
         "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "300",
-        "falloff": "100, 70, 30, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "MissileAA_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -6884,14 +6340,6 @@
         "spread": "400",
         "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "300",
-        "falloff": "100, 70, 30, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "MissileAA_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -6990,14 +6438,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "400",
@@ -7038,14 +6478,6 @@
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -7081,14 +6513,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "400",
@@ -7129,14 +6553,6 @@
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -7210,14 +6626,6 @@
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "80",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "42",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -7288,14 +6696,6 @@
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "80",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "42",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -7395,14 +6795,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 90, 78, 60, 0",
-        "percentage_denominator": "10000",
-        "spread": "100",
-        "tag": "Flame_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "300",
@@ -7410,27 +6802,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 90, 78, 60, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "Flame_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
         "tag": "Flame_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 90, 78, 60, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "Flame_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -7463,14 +6839,6 @@
         "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "320",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -7631,14 +6999,6 @@
         "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "100",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "0",
-        "tag": "Melee_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
@@ -7775,14 +7135,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "100",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "10000",
         "falloff": "100, 50, 20, 0",
         "spread": "300",
@@ -7790,27 +7142,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "100",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "10000",
         "falloff": "100, 0",
         "spread": "80",
         "tag": "CannonAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "100",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "40",
-        "tag": "CannonAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -8153,14 +7489,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": null,
         "spread": "100",
@@ -8366,14 +7694,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -8454,14 +7774,6 @@
         "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",

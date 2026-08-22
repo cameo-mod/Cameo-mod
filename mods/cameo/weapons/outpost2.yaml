@@ -24,9 +24,6 @@ edenMachineGun:
 	Report: mgun11.aud
 	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 40
-
 plymouthMachineGun:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -39,9 +36,6 @@ plymouthMachineGun:
 	Report: mgun11.aud
 	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 40
-
 edenMobileLaser:
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^Chaingun
@@ -102,10 +96,6 @@ edenMobileLaserTiger:
 	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-
 edenMobileDefenceLaser:
 	Inherits: edenMobileLaserTiger
 	ReloadDelay: 10
@@ -334,9 +324,6 @@ edenMobileThorsHammer:
 		Damage: 6000
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		Damage: 3000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 60
-
 edenMobileThorsHammerTiger:
 	Inherits: edenMobileThorsHammer
 	ReloadDelay: 19
@@ -525,9 +512,6 @@ plymouthStickyTiger:
 	Warhead@CannonHE_Medium:
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 40
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -572,9 +556,6 @@ plymouthStickyDefence:
 	Warhead@CannonHE_Medium: AreaDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -590,9 +571,6 @@ plymouthStickyDefence:
 		PhysicalStateScale: 100
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@HeavyChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy

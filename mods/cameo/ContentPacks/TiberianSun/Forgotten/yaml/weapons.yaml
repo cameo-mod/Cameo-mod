@@ -8,9 +8,6 @@ TS70mm:
 	Range: 5566
 	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
-
 TS70mmChem:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_Chemical_Light
@@ -24,16 +21,11 @@ TS70mmChem:
 		Speed: 3500
 	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 40
 	Warhead@Chemical_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
-		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@Effect: CreateEffect
 		Explosions: chemball
@@ -73,13 +65,8 @@ TS70mmTur:
 		LaunchAngle: 0
 	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 40
 	Warhead@CannonAP_Light:
 		Damage: 4000
-	Warhead@CannonAP_Light_Percentage:
-		Damage: 40
-
 TS70mmTurChem:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -95,8 +82,6 @@ TS70mmTurChem:
 		LaunchAngle: 0
 	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 40
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 4000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
@@ -136,13 +121,8 @@ TS120mmx:
 	BurstDelays: 4
 	Warhead@Concussion_Medium:
 		Damage: 30000
-	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 300
 	Warhead@CannonHE_Medium:
 		Damage: 30000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 300
-
 TSChem120mmx:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -162,8 +142,6 @@ TSChem120mmx:
 		Damage: 15
 	Warhead@CannonHE_Medium:
 		Damage: 30000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 300
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -198,9 +176,6 @@ TSScoopDual:
 	Range: 6224
 	Warhead@CannonHE_Medium:
 		Damage: 20000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 200
-
 TSScoopDualChem:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_Chemical_Medium
@@ -216,16 +191,11 @@ TSScoopDualChem:
 		Speed: 3500
 	Warhead@CannonHE_Medium:
 		Damage: 20000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 200
 	Warhead@Chemical_Medium:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		Damage: 10000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
-		Damage: 100
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@Effect: CreateEffect
 		Explosions: med_tibnapalm
@@ -264,13 +234,8 @@ TSScoopDualTur:
 		Speed: 850
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 160
 	Warhead@Concussion_Medium:
 		Damage: 16000
-	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 160
-
 TSScoopDualTurChem:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -286,8 +251,6 @@ TSScoopDualTurChem:
 		Speed: 850
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 160
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 16000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
@@ -328,9 +291,6 @@ TSHighVelocity:
 		Speed: 850
 	Warhead@CannonAP_Light:
 		Damage: 30000
-	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 300
-
 TSHighVelocityChem:
 	Inherits: ^TSCannonEffect
 	Inherits@2: ^LightChemicalWeapon
@@ -377,9 +337,6 @@ TSHighVelocity2:
 		Speed: 850
 	Warhead@CannonAP_Light:
 		Damage: 40000
-	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 400
-
 TSHighVelocity2Chem:
 	Inherits: ^TSCannonEffect
 	Inherits@2: ^LightChemicalWeapon
@@ -424,9 +381,6 @@ TSHighVelocityTur:
 		Speed: 1280
 	Warhead@CannonAP_Light:
 		Damage: 48000
-	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 480
-
 TSBusMortar:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_Demolition_Heavy
@@ -446,13 +400,8 @@ TSBusMortar:
 		TrailImage: black_smokey
 	Warhead@Concussion_Medium:
 		Damage: 32000
-	Warhead@Concussion_Medium_Percentage:
-		Damage: 320
 	Warhead@Demolition_Heavy:
 		Damage: 32000
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 320
-
 TSBusMortarChem:
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^HeavyBomb
@@ -535,13 +484,8 @@ TSInfantryMortar:
 		ContrailEndColor: 22222222
 	Warhead@Concussion_Medium:
 		Damage: 16000
-	Warhead@Concussion_Medium_Percentage:
-		Damage: 160
 	Warhead@Demolition_Heavy:
 		Damage: 16000
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 160
-
 TSInfantryMortarChem:
 	Inherits: TSInfantryMortar
 	Inherits@wh: ^Warhead_Chemical_Medium
@@ -552,8 +496,6 @@ TSInfantryMortarChem:
 	ReloadDelay: 88
 	Warhead@Chemical_Medium:
 		Damage: 16000
-	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
-		Damage: 160
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
@@ -578,13 +520,8 @@ TS120mmxChem:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 400
 	Warhead@Chemical_Heavy:
 		Damage: 40000
-	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
-		Damage: 400
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 5
 		Duration: 50
@@ -609,9 +546,6 @@ TSJuggerFlakAA:
 	Warhead@Flak_Medium:
 		Damage: 10000
 		ValidTargets: Air
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		Damage: 100
-		ValidTargets: Air
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: expnew13.aud
@@ -629,9 +563,6 @@ TSJuggerFlakAA_boat:
 	ValidTargets: Air
 	Warhead@Flak_Medium:
 		Damage: 10000
-		ValidTargets: Air
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		Damage: 100
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -654,9 +585,8 @@ TSJuggerboat90mm:
 		ContrailLength: 10
 		ContrailWidth: 0c32
 	Warhead@Concussion_Medium:
+		PercentageScale: 15000
 		Damage: 20000
-	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 300
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 	# Warhead@3Eff: CreateEffect
@@ -678,9 +608,6 @@ TSBoatcannon:
 	Warhead@Demolition_Heavy:
 		Damage: 16000
 		Spread: 400
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 160
-		Spread: 400
 TSChemJuggerboat90mm:
 	Inherits@wh: ^Warhead_CannonChem_Medium
 	Inherits@proj: ^Projectile_ArtilleryShell_Medium
@@ -695,9 +622,8 @@ TSChemJuggerboat90mm:
 	Projectile: Bullet
 		Speed: 280
 	Warhead@CannonChem_Medium:
+		PercentageScale: 14000
 		Damage: 30000
-	Warhead@CannonChem_Medium_Percentage: AreaDamagePercentage
-		Damage: 420
 	Warhead@Effect: CreateEffect
 		ImpactActors: false
 		ValidTargets: Ground, Ship
@@ -759,9 +685,6 @@ TSChemBazooka:
 	Warhead@MissileChem_Light:
 		Damage: 30000
 		FriendlyFireDamage: 90
-	Warhead@MissileChem_Light_Percentage:
-		Damage: 300
-		FriendlyFireDamage: 90
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -812,9 +735,6 @@ TSVanMissile:
 		LaunchAngle: 60
 	Warhead@Concussion_Medium:
 		Damage: 24000
-	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 240
-
 TSChemVanMissile:
 	Inherits@wh: ^Warhead_MissileChem_Medium
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
@@ -836,8 +756,6 @@ TSChemVanMissile:
 		LaunchAngle: 60
 	Warhead@MissileChem_Medium:
 		Damage: 36000
-	Warhead@MissileChem_Medium_Percentage: AreaDamagePercentage
-		Damage: 360
 	Warhead@Effect: CreateEffect
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -873,9 +791,6 @@ TSMLRSMissile:
 		LaunchAngle: 165
 	Warhead@Concussion_Medium:
 		Damage: 24000
-	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 240
-
 TSChemMLRSMissile:
 	Inherits@wh: ^Warhead_MissileChem_Medium
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
@@ -897,8 +812,6 @@ TSChemMLRSMissile:
 		LaunchAngle: 165
 	Warhead@MissileChem_Medium:
 		Damage: 36000
-	Warhead@MissileChem_Medium_Percentage: AreaDamagePercentage
-		Damage: 360
 	Warhead@Effect: CreateEffect
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -999,9 +912,6 @@ TSMammothTusk:
 	Warhead@MissileAP_Heavy:
 		Damage: 60000
 		ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		Damage: 600
-		ValidTargets: Ground, Water, Air
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 
@@ -1016,16 +926,9 @@ TSRuinerMissile:
 	Warhead@Demolition_Light:
 		Damage: 18000
 		ValidTargets: Ground, Water, Air
-	Warhead@Demolition_Light_Percentage:
-		Damage: 180
-		ValidTargets: Ground, Water, Air
 	Warhead@MissileHE_Medium:
 		Damage: 18000
 		ValidTargets: Ground, Water, Air
-	Warhead@MissileHE_Medium_Percentage:
-		Damage: 180
-		ValidTargets: Ground, Water, Air
-
 TSChemRuinerMissile:
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^MediumChemicalWeapon
@@ -1102,8 +1005,6 @@ TSApacheMissile:
 		Damage: 24000
 		FriendlyFireDamage: 25
 		FriendlyFireSpread: 50
-	Warhead@MissileAP_Heavy_Percentage:
-		Damage: 240
 	Warhead@EffectWater: CreateEffect
 		Explosions: med_splash
 		ImpactSounds: splash9.aud
@@ -1132,11 +1033,6 @@ TSChemApacheMissile:
 		FriendlyFireDamage: 33
 		FriendlyFireSpread: 50
 		Spread: 700
-		Falloff: 99, 66, 33
-		InvalidTargets: wall
-	Warhead@MissileChem_Medium_Percentage:
-		Damage: 360
-		Spread: 350
 		Falloff: 99, 66, 33
 		InvalidTargets: wall
 	Warhead@Effect: CreateEffect
@@ -1186,8 +1082,6 @@ TSCobraMissile:
 		Damage: 24000
 		FriendlyFireDamage: 25
 		FriendlyFireSpread: 50
-	Warhead@MissileAP_Heavy_Percentage:
-		Damage: 240
 	Warhead@EffectWater: CreateEffect
 		Explosions: med_splash
 		ImpactSounds: splash9.aud
@@ -1216,11 +1110,6 @@ TSChemCobraMissile:
 		FriendlyFireDamage: 33
 		FriendlyFireSpread: 50
 		Spread: 700
-		Falloff: 99, 66, 33
-		InvalidTargets: wall
-	Warhead@MissileChem_Medium_Percentage:
-		Damage: 360
-		Spread: 350
 		Falloff: 99, 66, 33
 		InvalidTargets: wall
 	Warhead@Effect: CreateEffect
@@ -1272,29 +1161,17 @@ TSAdatsMissile:
 	Warhead@Flak_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@Flak_Medium_Percentage:
-		Damage: 40
-		ValidTargets: Ground, Water
 	Warhead@MissileHE_Light:
 		Damage: 4000
 		ValidTargets: Ground, Water
-	Warhead@MissileHE_Light_Percentage:
-		Damage: 40
-		ValidTargets: Ground, Water
-
 TSAdatsMissile_AA:
 	Inherits: TSAdatsMissile
 	Range: 8409
 	ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Air
 	Warhead@MissileHE_Light:
 		ValidTargets: Air
-	Warhead@MissileHE_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Air
-
 MutFlamer:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
@@ -1304,8 +1181,6 @@ MutFlamer:
 	Report: flamtnk1.aud
 	Warhead@Flame_Medium:
 		Damage: 28000
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 280
 MutFlamerChem:
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^MediumChemicalWeapon
@@ -1454,8 +1329,6 @@ TSFiendShard:
 		TrailImage: green_smokey
 	Warhead@Chemical_Light:
 		Damage: 6000
-	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
-		Damage: 60
 	Warhead@3Eff: CreateEffect
 		Explosions: sczhsplash
 		ImpactActors: false
@@ -1671,9 +1544,6 @@ TSZombieAttack:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 16000
-	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 160
-
 TSSmoke:
 	Inherits: ^ToxicWeapon
 
@@ -1686,8 +1556,6 @@ TSChemspray:
 	Range: 3183
 	Warhead@Chemical_Light:
 		Damage: 32000
-	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
-		Damage: 320
 TSChemsprayUP:
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^MediumChemicalWeapon
@@ -1747,8 +1615,6 @@ TSVisceroidSpray:
 	Range: 1618
 	Warhead@Chemical_Light:
 		Damage: 10000
-	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
-		Damage: 100
 TSVisceroidSprayUP:
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^MediumChemicalWeapon
@@ -1813,9 +1679,6 @@ TSCropBomb:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 120000
-	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Ship
-		Damage: 1200
 	Warhead@2Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: expnew09.aud
@@ -1843,13 +1706,8 @@ TSCropBombChem:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 120000
-	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Ship
-		Damage: 1200
 	Warhead@Chemical_Heavy:
 		Damage: 60000
-	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
-		Damage: 600
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 10
 		Duration: 50
@@ -1889,13 +1747,8 @@ TSLocustBombChem:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 180000
-	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Ship
-		Damage: 1800
 	Warhead@Chemical_Heavy:
 		Damage: 90000
-	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
-		Damage: 900
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 15
 		Duration: 50
@@ -1949,8 +1802,6 @@ TSMutShotgun:
 		Damage: 2
 	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 40
 	Warhead@SmallArms: SpreadDamage
 		Damage: 4000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
@@ -1971,13 +1822,8 @@ TSMutVulcanTurret:
 	Report: tsgun4.aud
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-
 TSRaiderCarCannon:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -1990,9 +1836,6 @@ TSRaiderCarCannon:
 	Report: chaingn1.aud
 	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 40
-
 TSBowlerCannon:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
@@ -2004,13 +1847,8 @@ TSBowlerCannon:
 	Report: chaingn1.aud
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-
 TSWaspClaw:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -2025,10 +1863,6 @@ TSWaspClaw:
 	Warhead@Bullet_Medium:
 		Damage: 4000
 		ValidTargets: Ground, Air
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
-		ValidTargets: Ground, Air
-
 TSMutApcCannon:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
@@ -2041,14 +1875,10 @@ TSMutApcCannon:
 	Warhead@Flak_Medium:
 	ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage:
-		Damage: 20
 	ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Medium:
 		Damage: 2000
 	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Medium_Percentage:
-		Damage: 20
 	ValidTargets: Ground, Water, Air
 
 TSNomadGun:
@@ -2071,10 +1901,6 @@ TSNomadGun:
 	Warhead@Bullet_Medium:
 		Damage: 8000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 80
-		ValidTargets: Ground, Water
-
 TSSniper:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
@@ -2111,9 +1937,6 @@ TSGhostGun:
 		Inaccuracy: 0
 	Warhead@Chemical_Light:
 		Damage: 20000
-	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
-		Damage: 200
-
 TSChemGhostGun:
 	Inherits@wh: ^Warhead_Chemical_Light
 	Inherits@proj: ^Projectile_Chem_Light
@@ -2136,8 +1959,6 @@ TSChemGhostGun:
 		Inaccuracy: 0
 	Warhead@Chemical_Light:
 		Damage: 20000
-	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
-		Damage: 200
 MutAPRifle:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -2147,9 +1968,6 @@ MutAPRifle:
 	Report: jumpjet1.aud, gostgun1.aud
 	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 40
-
 TSSergGun:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
@@ -2159,16 +1977,12 @@ TSSergGun:
 	Range: 5611
 	Report: cygun1.aud
 	Warhead@Bullet_Light:
+		PercentageScale: 2500
 		Damage: 8000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Bullet_Medium:
+		PercentageScale: 2500
 		Damage: 8000
 		ValidTargets: Ground, Water
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-		ValidTargets: Ground, Water
-
 # SCOUT-CLASS VERIFICATION WEAPON (law 2026-07-19): exactly 2x the
 # baseline rifle (8000 dmg / 50 rl / 5000 rng, SmallArms, % = 4). The
 # verification unit proves the class formula: 2x HP + 2x damage at
@@ -2184,5 +1998,3 @@ forgotten_mutantsoldier_rifle:
 	Report: mgun2.aud
 	Warhead@Bullet_Light:
 		Damage: 8000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 80

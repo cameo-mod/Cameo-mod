@@ -6,9 +6,6 @@ RA2AsianShotgun:
 	Report: aa_sshtgatt.wav
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 6000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 60
-
 RA2AsianShotgun_elite:
 	Inherits: RA2AsianShotgun
 	Range: 5567
@@ -26,13 +23,8 @@ AsianGrenade:
 		Speed: 456
 	Warhead@Concussion_Medium:
 		Damage: 4000
-	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
-
 AsianGrenade_elite:
 	Inherits: AsianGrenade
 	Range: 5567
@@ -47,9 +39,6 @@ asianalliance_asianmilitia_shotgun:
 	Report: aa_sshtgatt.wav
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 6000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 60
-
 asianalliance_asianmilitia_shotgun_elite:
 	Inherits: asianalliance_asianmilitia_shotgun
 	Range: 5500
@@ -67,13 +56,8 @@ asianalliance_asianmilitia_grenade:
 		Speed: 456
 	Warhead@Concussion_Medium:
 		Damage: 4000
-	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@CannonHE_Medium:
 		Damage: 4000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
-
 asianalliance_asianmilitia_grenade_elite:
 	Inherits: asianalliance_asianmilitia_grenade
 	Range: 5500
@@ -92,9 +76,6 @@ AsianTankKillerRocket:
 		Acceleration: 5
 	Warhead@MissileAP_Light:
 		Damage: 34000
-	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		Damage: 340
-
 AsianTankKillerRocket_upgrade:
 	Inherits: AsianTankKillerRocket
 	Report: bazook1.aud
@@ -117,8 +98,6 @@ AsianTankKillerRocket_elite:
 	Range: 7460
 	Warhead@MissileAP_Light:
 		Damage: 68000
-	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		Damage: 680
 	Projectile: Missile
 		Image: red_dragon
 		Shadow: true
@@ -163,9 +142,6 @@ AsianTankKillerRocketShrapnel:
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 2
 		Duration: 12
@@ -189,20 +165,12 @@ RA2AsianShotgunFanatic1:
 	Report: aa_sshtgatt.wav
 	Warhead@Demolition_Light:
 		Damage: 2000
-	Warhead@Demolition_Light_Percentage:
-		Damage: 20
 	Warhead@Concussion_Medium:
 		Damage: 2000
-	Warhead@Concussion_Medium_Percentage:
-		Damage: 20
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Bullet_Medium: AreaDamage
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -238,9 +206,6 @@ AsianSamuraiSword1:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 20000
-	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 200
-
 AsianSamuraiSword2:
 	Inherits: AsianSamuraiSword1
 	Burst: 2
@@ -348,9 +313,6 @@ AsianNinjaStar:
 		Speed: 456
 	Warhead@Melee_Medium:
 		Damage: 20000
-	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 200
-
 AsianNinjaStar_elite:
 	Inherits: AsianNinjaStar
 	Range: 5560
@@ -367,8 +329,6 @@ AsianCrocBite:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 16000
-	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 160
 	-Warhead@Effect:
 
 AsianCrocBite_elite:
@@ -441,10 +401,6 @@ AsianLynxTankCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-
 AsianLynxTankCannon_elite:
 	Inherits: AsianLynxTankCannon
 	Inherits@Elite: ^RA2EliteEffects
@@ -464,16 +420,9 @@ AsianLynxMG:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
-
 AsianLynxMG_elite:
 	Inherits: AsianLynxMG
 	Inherits@Elite: ^RA2EliteEffects
@@ -496,10 +445,6 @@ AsianKamikazeChaingun:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-
 AsianPhotonCannon:
 	Inherits: ^MediumMissile
 	Inherits@2: ^FlakWeapon
@@ -717,9 +662,6 @@ AsianChemical:
 	Warhead@Demolition_Light:
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 40
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
@@ -829,16 +771,8 @@ AsianChemicalBombs:
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@CannonHE_Medium:
 		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	Warhead@Effect: CreateEffect
 		Explosions: aa_plasgreeexp
@@ -909,12 +843,8 @@ AsianHowitzerCannon:
 		Inaccuracy: 320
 	Warhead@CannonHE_Medium:
 		Damage: 20000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 200
 	Warhead@CannonHE_Heavy:
 		Damage: 20000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 200
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 125
@@ -972,11 +902,6 @@ AsianOilBomb:
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 100000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		Spread: 1500
-		Falloff: 100, 75, 50, 25, 0
-		Damage: 1000
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianOilBombFragments
 		Amount: 20
@@ -993,11 +918,6 @@ AsianSmallOilBomb:
 		Spread: 1000
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 40000
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		Spread: 1000
-		Falloff: 100, 75, 50, 25, 0
-		Damage: 400
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	-Warhead@Effect1:
 	-Warhead@Effect2:
@@ -1031,22 +951,12 @@ AsianPulverizerGatling:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage:
-		ValidTargets: Ground, Air, Water
-		Damage: 20
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage:
-		ValidTargets: Ground, Air, Water
-		Damage: 20
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Air, Water
-		Damage: 20
-
 AsianPulverizerMechaGatling:
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^MediumMissile
@@ -1149,9 +1059,6 @@ AsianSinglePlasma:
 	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 20
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1169,9 +1076,6 @@ AsianSinglePlasma:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
@@ -1314,10 +1218,6 @@ AsianHarbingerPlasma:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 20
-		ValidTargets: Ground, Water, Air
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
@@ -1342,10 +1242,6 @@ AsianHarbingerPlasma:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-		ValidTargets: Ground, Water, Air
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
 		Amount: 1
@@ -1368,11 +1264,6 @@ AsianRailgun:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 30000
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 300
-		ValidRelationships: Enemy, Neutral
-
 AsianRailTank:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -1389,10 +1280,6 @@ AsianRailTank:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 24000
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 240
-
 AsianRailTank2:
 	Inherits: AsianRailTank
 	Range: 10000
@@ -1404,9 +1291,6 @@ AsianRailTank2:
 		HelixThickness: 48
 	Warhead@Railgun_Heavy:
 		Damage: 36000
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		Damage: 360
-
 AsianRailTank3:
 	Inherits: AsianRailTank
 	Range: 11111
@@ -1418,9 +1302,6 @@ AsianRailTank3:
 		HelixThickness: 64
 	Warhead@Railgun_Heavy:
 		Damage: 48000
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		Damage: 480
-
 AsianFlamerTank:
 	Inherits: AsianFlamerTurret
 	ReloadDelay: 25
@@ -1450,8 +1331,6 @@ AsianFlamerTroopExplode:
 	Inherits: AsianFlamerTurret
 	Warhead@Flame_Light:
 		Damage: 12000
-	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 120
 AsianChaosTurret:
 	Range: 5000
 	ReloadDelay: 125
@@ -1491,11 +1370,6 @@ AAHyperionMagnet:
 		Range: 0, 32
 		Falloff: 100, 100
 		Damage: 2000
-		ValidTargets: Air
-	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Range: 0, 32
-		Falloff: 100, 100
-		Damage: 20
 		ValidTargets: Air
 	Warhead@Condition: GrantExternalCondition
 		Condition: Magnet
@@ -1691,16 +1565,11 @@ AsianTankMine:
 	Report: cannon1.aud
 	Projectile: InstantExplode
 	Warhead@CannonAP_Light:
+		PercentageScale: 4000
 		Spread: 1250
 		Falloff: 125, 100, 75, 50, 25
 		Damage: 125000
 		InvalidTargets: Mine
-	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Spread: 2500
-		Falloff: 125, 100, 75, 50, 25
-		Damage: 500
-		InvalidTargets: Mine
-
 AsianChaosMine:
 	Inherits: AsianChaosTurret
 	Inherits@2: AsianTankMine
@@ -1709,15 +1578,11 @@ AsianChaosMine:
 	Inherits@fx: ^Effect_Chem_Heavy
 	Report: flamer2.aud
 	Warhead@Chemical_Heavy:
+		PercentageScale: 4000
 		Spread: 1250
 		Falloff: 125, 100, 75, 50, 25
 		Damage: 125000
 		InvalidTargets: Mine
-	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
-		Spread: 2500
-		Falloff: 125, 100, 75, 50, 25
-		InvalidTargets: Mine
-		Damage: 500
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 4
 		Duration: 125
@@ -1744,22 +1609,12 @@ AsianPelicanMissile:
 	Warhead@Concussion_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Concussion_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 40
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MissileAP_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 40
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 40
-
 AsianPelicanMissile_elite:
 	Inherits: AsianPelicanMissile
 	Range: 7100
@@ -1788,21 +1643,12 @@ AsianPelicanMG:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -1830,10 +1676,6 @@ AAGunBoatCannon:
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
 		Spread: 400
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 160
-		Spread: 400
-
 AAGunBoatCannon_elite:
 	Inherits: RA2155mm
 	Inherits@Elite: ^RA2EliteEffects
@@ -1851,8 +1693,6 @@ AAGunBoatFlak:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 	Warhead@Flak_Medium:
-		ValidTargets: Ground, Water, Air
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
@@ -1897,22 +1737,10 @@ AsianSubmarineBomb:
 		Damage: 50000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
-	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		Spread: 2500
-		Falloff: 100, 75, 50, 25, 0
-		Damage: 500
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		ValidTargets: Ground, Water, Ship, Submarine, Underwater
 	Warhead@Demolition_Light: AreaDamage
 		Spread: 2500
 		Falloff: 100, 75, 50, 25, 0
 		Damage: 50000
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		ValidTargets: Ground, Water, Ship, Submarine, Underwater
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Spread: 2500
-		Falloff: 100, 75, 50, 25, 0
-		Damage: 500
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
 	Warhead@Effect: CreateEffect
@@ -1944,20 +1772,11 @@ AsianPhoenixRocket:
 	Warhead@Flame_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 200
 	Warhead@Demolition_Light:
 		Damage: 20000
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 200
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
-	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 200
-
 AsianPhoenixRocket_elite:
 	Inherits: AsianPhoenixRocket
 	Range: 7500
@@ -1987,16 +1806,9 @@ ASDFGun:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-
 ASDFGun2:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -2005,9 +1817,6 @@ ASDFGun2:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -2039,12 +1848,8 @@ ASDFKamikazeExplosion:
 	Report: M203.aud
 	Warhead@Demolition_Heavy:
 		Damage: 10000
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 100
 	Warhead@Concussion_Medium:
 		Damage: 10000
-	Warhead@Concussion_Medium_Percentage:
-		Damage: 100
 	Warhead@Effect: CreateEffect
 		Explosions: ivan_explosion
 		ExplosionPalette: ra2effect
@@ -2081,9 +1886,6 @@ AsianSniper:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@CannonHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 60
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -2120,8 +1922,6 @@ AsianSniperAP:
 		Damage: 8
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 16000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 160
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 16000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
@@ -2160,11 +1960,6 @@ AsianSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Tesla_Super_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 320
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
@@ -2179,11 +1974,6 @@ AsianSniperLockdown:
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 320
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
@@ -2256,16 +2046,9 @@ AsianMLRS:
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-
 AsianSpitfireRockets:
 	Inherits: AsianMLRS
 	Inherits@fx: ^Effect_Explosion_Large_RA2
@@ -2288,18 +2071,13 @@ AsianSpitfireRockets:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Demolition_Light:
+		PercentageScale: 5000
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@MissileAP_Medium:
+		PercentageScale: 5000
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-
 AsianKamikazeImpactTargeting:
 	ReloadDelay: 25
 	Range: 7500
@@ -2331,13 +2109,8 @@ asianalliance_fanatic_shotgun:
 		Inaccuracy: 800
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-
 asianalliance_fanatic_shotgun_upgrade:
 	Inherits: asianalliance_fanatic_shotgun
 	Burst: 13

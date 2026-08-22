@@ -179,7 +179,6 @@
 	Range: 6666
 	ReloadDelay: 100
 	-Warhead@CannonHE_Heavy
-	-Warhead@CannonHE_Heavy_Percentage
 	Warhead@CannonHE_Heavy_D2K_DevBullet: SpreadDamage
 		Spread: 666
 		Damage: 80000
@@ -241,7 +240,6 @@
 	-ValidTargets
 	-TargetActorCenter
 	-Warhead@MissileAP_Heavy
-	-Warhead@MissileAP_Heavy_Percentage
 	Warhead@MissileAP_Heavy: SpreadDamage
 		Spread: 192
 		Falloff: 100, 50, 25, 0
@@ -413,7 +411,6 @@
 	Inherits: ^Warhead_Demolition_Heavy
 	-ValidTargets
 	-TargetActorCenter
-	-Warhead@Demolition_Heavy_Percentage
 	-Warhead@Demolition_Heavy
 	Warhead@Demolition_Heavy: SpreadDamage
 		Spread: 1250

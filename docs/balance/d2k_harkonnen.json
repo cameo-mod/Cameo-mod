@@ -18,14 +18,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
@@ -33,27 +25,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
@@ -237,14 +213,6 @@
         "spread": "300",
         "tag": "Flame_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "80",
-        "falloff": "100, 90, 78, 60, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "Flame_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
@@ -773,14 +741,6 @@
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "160",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "42",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -1021,14 +981,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
@@ -1285,14 +1237,6 @@
         "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "42",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "15000",

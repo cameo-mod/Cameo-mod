@@ -25,9 +25,6 @@ M60mg:
 	Report: pillbox1.aud
 	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 40
-
 RATurretGun:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_CannonHE_Heavy
@@ -40,12 +37,8 @@ RATurretGun:
 		Speed: 768
 	Warhead@Concussion_Medium:
 		Damage: 10000
-	Warhead@Concussion_Medium_Percentage:
-		Damage: 100
 	Warhead@CannonHE_Heavy:
 		Damage: 10000
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 100
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
@@ -61,8 +54,6 @@ zsu_23:
 	ValidTargets: Air
 	Warhead@Flak_Medium:
 		Damage: 4000
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
@@ -79,16 +70,9 @@ Hellfire:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@Concussion_Medium_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 80
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 80
-
 HellfireCryo:
 	Inherits: Hellfire
 	Inherits@2: ^CryoMissileProjectile
@@ -106,8 +90,6 @@ ChainGunMH60:
 	Report: gun13.aud
 	Warhead@Bullet_Medium:
 		Damage: 8000
-	Warhead@Bullet_Medium_Percentage:
-		Damage: 80
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
 		ImpactActors: false
@@ -133,13 +115,8 @@ AlliedTankDestroyerCannon:
 		Speed: 1362
 	Warhead@CannonHE_Medium:
 		Damage: 12000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 120
 	Warhead@CannonAP_Light:
 		Damage: 12000
-	Warhead@CannonAP_Light_Percentage:
-		Damage: 120
-
 SheridanCannon:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@wh2: ^Warhead_CannonHE_Medium
@@ -152,13 +129,8 @@ SheridanCannon:
 		Speed: 502
 	Warhead@CannonAP_Light:
 		Damage: 8000
-	Warhead@CannonAP_Light_Percentage:
-		Damage: 80
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 80
-
 SheridanMissiles:
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Light
@@ -171,16 +143,9 @@ SheridanMissiles:
 	Warhead@MissileHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileHE_Medium_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 80
 	Warhead@MissileHE_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileHE_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 80
-
 SheridanMissilesCryo:
 	Inherits: SheridanMissiles
 	Inherits@2: ^CryoMissileProjectile
@@ -202,13 +167,8 @@ SheridanVulcan:
 	ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-
 RapierBombs:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
@@ -226,10 +186,6 @@ RapierBombs:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 10000
-	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Ship
-		Damage: 100
-
 RapierBombsCryo:
 	Inherits: RapierBombs
 	Inherits@2: ^CryoMissileProjectile
@@ -266,15 +222,9 @@ Aphid_AA:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@Concussion_Medium_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 80
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 80
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
@@ -375,9 +325,6 @@ ReconRangerRecoillessGun:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 40
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -587,9 +534,6 @@ ChronoTuskCryo:
 	Warhead@CannonHE_Medium:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 20
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
 
@@ -604,8 +548,6 @@ ChronoTuskCryo:
 		Speed: 515
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 

@@ -10,16 +10,9 @@ ACV_Machinegun:
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
-
 Future_Cryocopter_Rocket:
 	Inherits: ^Grenade
 	Inherits@2: ^D2KRocket
@@ -42,15 +35,9 @@ Future_Cryocopter_Rocket:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 160
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 160
 	Warhead@PhysicalStateCryo1: ApplyPhysicalState
 		PhysicalStateName: Temperature
 		Amount: -16000
@@ -328,14 +315,11 @@ FutureMicrotorpedos:
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
 	Warhead@Demolition_Light:
+		PercentageScale: 20000
 		Damage: 6000
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 120
 	Warhead@MissileAP_Heavy:
+		PercentageScale: 20000
 		Damage: 6000
-		ValidTargets: Water, Underwater, Bridge, Structure
-	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		Damage: 120
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
@@ -486,8 +470,6 @@ Future_CoilerAgressive:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 25000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 500
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: Future_CoilerFriendFrag1
 		Amount: 3
@@ -549,13 +531,8 @@ Future_MultiMissile:
 	Report: vifvatta.wav
 	Warhead@Arrow_Light:
 		Damage: 4000
-	Warhead@Arrow_Light_Percentage:
-		Damage: 40
 	Warhead@MissileAP_Light:
 		Damage: 4000
-	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		Damage: 40
-
 Future_MultiMissile_Javelin:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -597,8 +574,6 @@ Future_MultiMissile_Javelin:
 		Palette: d2keffect
 	Warhead@MissileAP_Heavy:
 		Damage: 10000
-	Warhead@MissileAP_Heavy_Percentage:
-		Damage: 100
 	Warhead@Smudge: LeaveSmudge
 		InvalidTargets: Vehicle, Structure
 	Warhead@Effect: CreateEffect
@@ -649,11 +624,6 @@ Future_MultiMissile_Frag:
 	Warhead@Concussion_Heavy:
 		Damage: 16000
 		FriendlyFireDamage: 62
-		PhysicalStates:
-			Temperature: 25
-			Corrosion: 25
-	Warhead@Concussion_Heavy_Percentage:
-		Damage: 160
 		PhysicalStates:
 			Temperature: 25
 			Corrosion: 25
@@ -775,8 +745,6 @@ FutureEnforcerShotgun:
 		Damage: 1
 	Warhead@CannonHE_Medium:
 		Damage: 2000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 20
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
@@ -842,8 +810,6 @@ FutureJavelinRockets:
 		Palette: d2keffect
 	Warhead@MissileAP_Medium:
 		Damage: 10000
-	Warhead@MissileAP_Medium_Percentage:
-		Damage: 100
 	Warhead@Smudge: LeaveSmudge
 		InvalidTargets: Vehicle, Structure
 	Warhead@Effect: CreateEffect
@@ -895,13 +861,8 @@ Future_Wheel_MG:
 	Report: heavy_mgun1_3.wav
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-
 Future_Wheel_MG_elite:
 	Inherits: Future_Wheel_MG
 	Inherits@2: ^SteelChaingun
@@ -940,16 +901,12 @@ ShotgunAttackRobotGun:
 		Damage: 1
 	Warhead@CannonHE_Medium:
 		Damage: 2000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 20
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -990,12 +947,8 @@ CannonAttackRobotGun:
 		PhysicalStateScale: 100
 	Warhead@Railgun_Heavy:
 		Damage: 2000
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@CannonHE_Medium:
 		Damage: 2000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Effect: CreateEffect
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
@@ -1019,13 +972,8 @@ MissileAttackRobotGun:
 	Report: vifvatta.wav
 	Warhead@MissileAP_Medium:
 		Damage: 12000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 120
 	Warhead@MissileAP_Light: AreaDamage
 		Damage: 12000
-	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		Damage: 120
-
 MissileAttackRobotGun_elite:
 	Inherits: MissileAttackRobotGun
 	Inherits@fx: ^Effect_Grey_Explosion_Medium_RA2
@@ -1077,10 +1025,6 @@ FutureMechGatling:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-
 FutureMechPlasma:
 	Inherits: ^Grenade
 	Inherits@2: ^MediumChemicalWeapon
@@ -1121,8 +1065,6 @@ FutureMechPlasma:
 		PhysicalStateScale: 100
 	Warhead@CannonHE_Heavy:
 		Damage: 10000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 100
 	Warhead@Effect: CreateEffect
 		Explosions: aa_pulsexp
 		ImpactSounds: xplos.aud
@@ -1145,9 +1087,6 @@ GuardianTankCannon:
 		Speed: 782
 	Warhead@CannonHE_Medium:
 		Damage: 12000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 120
-
 GuardianTankCannon_elite:
 	Inherits: GuardianTankCannon
 	Inherits@Elite: ^RA2EliteEffects
@@ -1267,10 +1206,6 @@ FutureTankCannons:
 		ValidTargets: Ground, Water, Air
 		Damage: 100000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 100000
 		Spread: 1000
@@ -1372,8 +1307,6 @@ FutureHarbingerCannon:
 		Damage: 2
 	Warhead@CannonHE_Heavy:
 		Damage: 4000
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 40
 	Warhead@Effect1:
 		Explosions: blue_big_frag
 	Warhead@Effect2:
@@ -1396,9 +1329,6 @@ HarbingerChainguns:
 	Report: AUGunsh_wea1Firea.wav,AUGunsh_wea1Fireb.wav,AUGunsh_wea1Firec.wav
 	Warhead@Flak_Medium:
 		Damage: 12000
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		Damage: 120
-
 HarbingerChainguns_elite:
 	Inherits: HarbingerChainguns
 	Range: 7030
@@ -1453,12 +1383,8 @@ OrionRailgun:
 		ContrailDelay: 0
 	Warhead@Railgun_Heavy:
 		Damage: 30000
-	Warhead@Railgun_Heavy_Percentage:
-		Damage: 300
 	Warhead@CannonHE_Heavy:
 		Damage: 30000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 300
 	Warhead@Effect: CreateEffect
 		ImpactSounds: gexp14a.wav
 
@@ -1479,9 +1405,6 @@ OrionRailgun_elite:
 		Damage: 30
 	Warhead@CannonHE_Heavy:
 		Damage: 60000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 600
-
 BeehiveCarrierTarget:
 	Inherits: RA2CarrierTarget
 	ReloadDelay: 150

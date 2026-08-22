@@ -96,13 +96,17 @@ namespace OpenRA.Mods.Cameo.Warheads
 		[Desc("Percentage of the tick radius within which allied actors can be hit (Cameo law: 50).")]
 		public readonly int FriendlyFireSpread = 50;
 
-		[Desc("FOLDED-IN PERCENTAGE HALF. 0.01%-units of the victim's MAX HEALTH removed per 2000",
-			"flat Damage, so 100 reproduces the old convention of 1% per 2000 and is the",
-			"per-family dial: a chemical family scales harder, a kinetic one softer, without",
-			"touching a single weapon. 0 disables the percentage half entirely.",
+		[Desc("FOLDED-IN PERCENTAGE HALF, in HUNDREDTHS of a 0.01%-unit of the victim's MAX",
+			"HEALTH per 2000 flat Damage. 10000 reproduces the old convention of 1% per 2000 and",
+			"is the per-family dial: a chemical family scales harder, a kinetic one softer,",
+			"without touching a single weapon. 0 disables the percentage half entirely.",
 			"This replaces the separate AreaDamagePercentage twin — one warhead, one Damage",
 			"number inline, and the percentage follows from it instead of being hand-typed",
-			"alongside and drifting.")]
+			"alongside and drifting.",
+			"⚠ WHY HUNDREDTHS AND NOT WHOLE UNITS. A whole-unit dial cannot express the ratio",
+			"some weapons already have: TSMechRailgunII needs exactly 2.5 and would round to 2,",
+			"a 20% error on its percentage half. 47 weapons were rounding-limited that way. In",
+			"hundredths every ratio in the tree lands exactly.")]
 		public readonly int PercentageScale = 0;
 
 		[Desc("The percentage half's radius as a PERCENTAGE of the main one (Cameo law: 50 —",
@@ -434,9 +438,12 @@ namespace OpenRA.Mods.Cameo.Warheads
 			if (healthInfo == null)
 				return;
 
-			// Basis points of max health = Damage/2000 x PercentageScale, i.e. Scale 100 on a
-			// 2000-damage weapon is 100bp = 1.00%, exactly what the old twin dealt.
-			var basisPoints = Damage * PercentageScale / 2000;
+			// Basis points of max health = Damage/2000 x PercentageScale/100, i.e. Scale 10000 on
+			// a 2000-damage weapon is 100bp = 1.00%, exactly what the old twin dealt. The extra
+			// factor of 100 is the hundredths granularity — see PercentageScale's [Desc].
+			// ROUND, do not truncate: integer division biases every weapon DOWNWARD by up to
+			// one basis point, which showed up as a systematic 0.99% where 1.00% was meant.
+			var basisPoints = (Damage * PercentageScale + 100000) / 200000;
 			if (basisPoints <= 0)
 				return;
 

@@ -39,14 +39,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -59,14 +51,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -88,14 +72,6 @@
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -178,27 +154,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -213,14 +173,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -318,14 +270,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -340,14 +284,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
@@ -355,27 +291,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -514,14 +434,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -536,14 +448,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
@@ -551,27 +455,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -653,27 +541,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -683,27 +555,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -876,14 +732,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -1006,14 +854,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -1092,27 +932,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -1239,14 +1063,6 @@
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -1320,14 +1136,6 @@
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -1356,27 +1164,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "160",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "16000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "160",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -1410,27 +1202,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "160",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "16000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "160",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -1533,14 +1309,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "1000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "4000",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "50000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "200",
@@ -1553,14 +1321,6 @@
         "spread": "300",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "4000",
-        "tag": "Tesla_Super_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -1745,14 +1505,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "160",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "46",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -1829,14 +1581,6 @@
         "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "240",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "46",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "12000",
@@ -2044,14 +1788,6 @@
         "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
@@ -2149,14 +1885,6 @@
         "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
@@ -2299,27 +2027,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "60",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "60",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -2390,27 +2102,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "60",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "60",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -3179,14 +2875,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
@@ -3194,27 +2882,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -3247,14 +2919,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
@@ -3262,27 +2926,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -3649,14 +3297,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -3780,14 +3420,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -3911,14 +3543,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4037,14 +3661,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4183,14 +3799,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "64",
@@ -4198,27 +3806,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4253,14 +3845,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "64",
@@ -4268,27 +3852,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4320,14 +3888,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "64",
@@ -4335,27 +3895,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4391,14 +3935,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "64",
@@ -4406,27 +3942,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4457,14 +3977,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "64",
@@ -4472,27 +3984,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4525,14 +4021,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "64",
@@ -4540,27 +4028,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4592,14 +4064,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "64",
@@ -4607,27 +4071,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4661,14 +4109,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "64",
@@ -4676,27 +4116,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4895,27 +4319,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -4930,14 +4338,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4987,27 +4387,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -5022,14 +4406,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5075,27 +4451,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -5110,14 +4470,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5168,27 +4520,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -5203,14 +4539,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5290,27 +4618,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -5325,14 +4637,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5416,27 +4720,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -5451,14 +4739,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5539,27 +4819,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -5574,14 +4838,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5666,27 +4922,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -5701,14 +4941,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5800,14 +5032,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -5822,14 +5046,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
@@ -5837,27 +5053,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -5894,14 +5094,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -5916,14 +5108,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
@@ -5931,27 +5115,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -6090,14 +5258,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -6112,14 +5272,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
@@ -6127,27 +5279,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -6292,14 +5428,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -6314,14 +5442,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
@@ -6329,27 +5449,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -6402,14 +5506,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -6424,14 +5520,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
@@ -6439,27 +5527,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -6497,14 +5569,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -6519,14 +5583,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
@@ -6534,27 +5590,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -6694,14 +5734,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -6716,14 +5748,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
@@ -6731,27 +5755,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -6897,14 +5905,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -6919,14 +5919,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
@@ -6934,27 +5926,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -6989,14 +5965,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -7011,14 +5979,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
@@ -7026,27 +5986,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -7084,14 +6028,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -7106,14 +6042,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
@@ -7121,27 +6049,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -7281,14 +6193,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -7303,14 +6207,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
@@ -7318,27 +6214,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -7484,14 +6364,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -7506,14 +6378,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
@@ -7521,27 +6385,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -8967,14 +7815,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9091,14 +7931,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9197,14 +8029,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
@@ -9212,27 +8036,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9334,14 +8142,6 @@
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "80",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9371,14 +8171,6 @@
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "80",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -9486,14 +8278,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "120",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "46",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "6000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -9508,14 +8292,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "120",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -9528,14 +8304,6 @@
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "120",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -9672,27 +8440,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9723,27 +8475,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9774,14 +8510,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
@@ -9789,27 +8517,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9841,14 +8553,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
@@ -9856,27 +8560,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9908,27 +8596,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -9959,27 +8631,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -10010,14 +8666,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
@@ -10025,27 +8673,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -10077,14 +8709,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
@@ -10092,27 +8716,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -10378,27 +8986,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -10469,27 +9061,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -10590,14 +9166,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -10612,14 +9180,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
@@ -10627,27 +9187,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -10684,14 +9228,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -10706,14 +9242,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
@@ -10721,27 +9249,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -10880,14 +9392,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -10902,14 +9406,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
@@ -10917,27 +9413,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -11082,14 +9562,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -11104,14 +9576,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
@@ -11119,27 +9583,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -11240,14 +9688,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "240",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -11276,27 +9716,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "440",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "1111",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "11111",
         "falloff": "100, 50, 20, 0",
         "spread": "1111",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "220",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "1111",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -11413,27 +9837,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "100",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "20000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
         "tag": "Flame_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "200",
-        "falloff": "100, 90, 78, 60, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "Flame_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -11470,27 +9878,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "100",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "20000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
         "tag": "Flame_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "200",
-        "falloff": "100, 90, 78, 60, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "Flame_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -11559,27 +9951,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "100",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "20000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
         "tag": "Flame_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "200",
-        "falloff": "100, 90, 78, 60, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "Flame_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -11678,27 +10054,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "100",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "20000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
         "tag": "Flame_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "200",
-        "falloff": "100, 90, 78, 60, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "Flame_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -11842,27 +10202,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -11877,14 +10221,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -11934,27 +10270,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -11969,14 +10289,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -12056,27 +10368,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -12091,14 +10387,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -12182,27 +10470,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -12217,14 +10489,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -12317,27 +10581,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -12347,27 +10595,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -12401,27 +10633,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -12431,27 +10647,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -12485,27 +10685,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -12515,27 +10699,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -12566,27 +10734,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -12596,27 +10748,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -12647,27 +10783,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -12677,27 +10797,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -12729,27 +10833,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -12759,27 +10847,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -12811,27 +10883,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -12841,27 +10897,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -12893,27 +10933,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "21",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "33",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -12923,27 +10947,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -13192,14 +11200,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "300",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -13354,14 +11354,6 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "140",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -13452,14 +11444,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "120",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -13472,14 +11456,6 @@
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "120",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -13520,14 +11496,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "80",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "46",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -13542,14 +11510,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "120",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -13562,14 +11522,6 @@
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "120",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -13639,14 +11591,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "120",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "46",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "6000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -13661,14 +11605,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "120",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "32",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "1000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -13681,14 +11617,6 @@
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "120",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -13876,14 +11804,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "400",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "46",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "20000",
         "falloff": "100, 75, 50, 25",
         "spread": "200",
@@ -13960,14 +11880,6 @@
         "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "46",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "30000",
@@ -14258,14 +12170,6 @@
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",

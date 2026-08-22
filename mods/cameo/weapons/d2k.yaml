@@ -35,10 +35,6 @@ Debris:
 	Warhead@Demolition_Light:
 		Damage: 16000
 		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 160
-		DamageCalculationType: ClosestTargetablePosition
-
 Debris2:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
@@ -52,12 +48,8 @@ Debris2:
 		TrailInterval: 1
 	Warhead@Demolition_Light:
 		Damage: 16000
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 160
 	Warhead@Flame_Light:
 		Damage: 16000
-	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 160
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_small_napalm
 		ExplosionPalette: effect75alpha
@@ -71,12 +63,8 @@ Debris3:
 		TrailImage: small_trail2
 	Warhead@Demolition_Light:
 		Damage: 8000
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@Flame_Light:
 		Damage: 8000
-	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1350
 
@@ -97,6 +85,7 @@ Debris4:
 	Inherits@fx: ^Effect_CannonHE_Medium_D2K
 	Report: MEDTANK1.WAV
 	Warhead@CannonHE_Medium:
+		PercentageScale: 2500
 		Damage: 8000
 
 80mm_A:
@@ -194,20 +183,13 @@ D2K_155mm:
 	Report: MORTAR1.WAV
 	Warhead@Demolition_Light:
 		Damage: 12000
-	Warhead@Demolition_Light_Percentage:
-		Damage: 120
 	Warhead@Concussion_Medium:
 		Damage: 12000
-	Warhead@Concussion_Medium_Percentage:
-		Damage: 120
 	Warhead@Demolition_Heavy:
 		Damage: 12000
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 120
 	Warhead@CannonHE_Medium:
+		PercentageScale: 10000
 		Damage: 12000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 120
 	Warhead@Concrete: DamagesConcrete
 		Damage: 5625
 
@@ -277,21 +259,12 @@ D2K_Rocket_Trooper:
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 80
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 80
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 80
 D2K_Combat_Fleet:
 	Inherits: ^D2KRocket
 	Range: 10240
@@ -1145,13 +1118,8 @@ LMG:
 	Report: gun11.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
-
 light_inf_lmg:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Bullet_Light
@@ -1162,13 +1130,8 @@ light_inf_lmg:
 	Report: gun11.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
-
 LMG_upgrade:
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Bullet_Light
@@ -1183,22 +1146,12 @@ LMG_upgrade:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-
 light_inf_lmg_upgrade:
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Bullet_Light
@@ -1213,22 +1166,12 @@ light_inf_lmg_upgrade:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-
 Fremen_S:
 	Inherits: ^MG
 	Report: FREMODD1.WAV
@@ -1744,10 +1687,6 @@ PhoenixRocketShrapnel:
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-
 ixian_airdrone:
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^LightChemicalWeapon
@@ -1825,11 +1764,6 @@ ixian_airdrone:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		ValidRelationships: Neutral, Enemy
 	Warhead@Shrapnel: FireShrapnel
 		ValidTargets: Ground, Water, Air
 		Weapon: PhoenixRocketShrapnel
@@ -2078,9 +2012,8 @@ d2k_sard_crossbow:
 		Inaccuracy: 380
 		Image: 120mm
 	Warhead@CannonHE_Medium:
+		PercentageScale: 14953
 		Damage: 5350
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure
@@ -2769,6 +2702,7 @@ PulseMissile:
 	ValidTargets: Ground, Air
 	Report: nukemisl.aud
 	Warhead@Tesla_Super:
+		PercentageScale: 2000
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 1000
@@ -2780,24 +2714,13 @@ PulseMissile:
 		Spread: 2000
 		Damage: 50000
 		Delay: 1
-	Warhead@Tesla_Super_Percentage:
-		ValidTargets: Shielded
-		Falloff: 100, 0
-		Spread: 10000
-		Damage: 200
-		Delay: 2
 	Warhead@Tesla_Heavy:
+		PercentageScale: 2000
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 1000
 		Damage: 100000
 		Delay: 4
-	Warhead@Tesla_Heavy_Percentage:
-		ValidTargets: Shielded
-		Falloff: 100, 0
-		Spread: 10000
-		Damage: 200
-		Delay: 5
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10

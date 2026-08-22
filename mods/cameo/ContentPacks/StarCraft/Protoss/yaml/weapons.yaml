@@ -48,9 +48,8 @@ PositronGrenade:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@CannonHE_Medium:
+		PercentageScale: 2500
 		Damage: 8000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 20
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 8000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
@@ -84,9 +83,8 @@ PositronBounce1:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Medium: AreaDamage
+		PercentageScale: 10000
 		Damage: 4000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@CannonAP_Light: AreaDamage
 		Damage: 4000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
@@ -112,9 +110,8 @@ PositronBounce2:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@CannonHE_Medium: AreaDamage
+		PercentageScale: 10000
 		Damage: 2000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@CannonAP_Light: AreaDamage
 		Damage: 2000
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
@@ -306,16 +303,9 @@ GlaveCanon:
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@Demolition_Light_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 80
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 8000
-	Warhead@Railgun_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 80
-
 psi_blades:
 	Inherits@wh: ^Warhead_Melee_Medium
 	Inherits@proj: ^Projectile_InstantHit
@@ -328,8 +318,6 @@ psi_blades:
 	Range: 1335
 	Warhead@Melee_Medium:
 		Damage: 8000
-	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -343,8 +331,6 @@ psi_spear:
 	Range: 1337
 	Warhead@Melee_Medium:
 		Damage: 32000
-	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 320
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -372,14 +358,6 @@ PsiStorm:
 		Damage: 4000
 		AffectsParent: True
 		ValidRelationships: Enemy, Neutral
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Delay: 6
-		Spread: 2000
-		Damage: 80
-		AffectsParent: True
-		ValidRelationships: Enemy, Neutral
-
 PsiStormCosmetic:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 64
@@ -405,8 +383,6 @@ PsionicShockwave:
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 15000
-	Warhead@Tesla_Super_Percentage: AreaDamagePercentage
-		Damage: 300
 	Warhead@Effect: CreateEffect
 		Explosions: scaae
 		ValidTargets: Ground, Water, Air
@@ -457,9 +433,6 @@ ScarabLaunch:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 50000
-	Warhead@CannonHE_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 500
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 50000
@@ -502,9 +475,6 @@ ScoutRockets_AA:
 		ContrailEndWidth: 100
 	Warhead@MissileAA_Heavy:
 		Damage: 10000
-	Warhead@MissileAA_Heavy_Percentage: AreaDamagePercentage
-		Damage: 100
-
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ValidTargets: Water, Underwater
@@ -518,9 +488,8 @@ WarpBlade:
 	Report: uzefir00.wav
 	SoundVolume: 3
 	Warhead@Melee_Medium:
+		PercentageScale: 1000
 		Damage: 20000
-	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -534,8 +503,6 @@ WarpBladeAmaranth:
 	SoundVolume: 3
 	Warhead@Melee_Medium:
 		Damage: 30000
-	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 300
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -550,8 +517,6 @@ ZeratulSlice:
 	TargetActorCenter: True
 	Warhead@Melee_Medium:
 		Damage: 64000
-	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 640
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
@@ -577,15 +542,9 @@ CorsairFlash:
 	Warhead@Demolition_Light:
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Air
-		Damage: 20
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Air
-		Damage: 20
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
 
@@ -604,6 +563,7 @@ Corsair_EMP:
 		LaunchAngle: 175
 		Image: tspulsball
 	Warhead@Tesla_Super:
+		PercentageScale: 20000
 		ValidTargets: Vehicle, Defense
 		Falloff: 100, 75, 50, 25
 		Damage: 5000
@@ -614,11 +574,6 @@ Corsair_EMP:
 		Falloff: 100, 75, 50, 25
 		Damage: 2500
 		Spread: 500
-	Warhead@Tesla_Super_Percentage: AreaDamagePercentage
-		ValidTargets: Vehicle, Defense
-		Falloff: 100, 75, 50, 25
-		Damage: 100
-		Spread: 2500
 	Warhead@Cam: RevealShroud
 		Radius: 5000
 		Duration: 250
@@ -865,9 +820,6 @@ SCWorkerExplodeProtoss:
 	Inherits: UnitExplodeSmallProtoss
 	Warhead@Demolition_Light:
 		Damage: 12000
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 120
-
 ScoutMG:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_Demolition_Light
@@ -890,15 +842,9 @@ ScoutMG:
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
 
@@ -982,9 +928,6 @@ EpigraphMG:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1026,21 +969,12 @@ ManifoldMG:
 	Warhead@Concussion_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Concussion_Light_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
 		ValidTargets: Ground, Water
@@ -1057,11 +991,7 @@ ManifoldMG_AA:
 		ValidTargets: Air
 	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Air
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Air
 	Warhead@Bullet_Medium:
-		ValidTargets: Air
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
 		ValidTargets: Air
@@ -1102,9 +1032,6 @@ AtreusMG:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1120,9 +1047,6 @@ AtreusMG:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
 		ValidTargets: Ground, Water, Air

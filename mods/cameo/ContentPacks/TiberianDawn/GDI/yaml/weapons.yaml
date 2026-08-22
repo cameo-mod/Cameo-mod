@@ -22,9 +22,6 @@ M16AP:
 	Report: mgun2.aud
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
-
 HighV:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -36,9 +33,6 @@ HighV:
 	StartBurstReport: gun8.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-
 GrenadeExplode:
 	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Projectile_Grenade_Light
@@ -46,9 +40,6 @@ GrenadeExplode:
 	Report: M203.aud
 	Warhead@Demolition_Light:
 		Damage: 8000
-	Warhead@Demolition_Light_Percentage:
-		Damage: 80
-
 RocketsAMT:
 	Inherits: Rockets
 	Inherits@2: ^AMTProjectile
@@ -64,8 +55,6 @@ td_gdi_commando_sniper_elite:
 		ContrailLength: 40
 	Warhead@Railgun_Heavy:
 		Damage: 20000
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		Damage: 200
 	Warhead@Sniper_Light:
 		Damage: 20000
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
@@ -87,29 +76,17 @@ APCGun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 20
-
 APCGun_AA:
 	Inherits: APCGun
 	Range: 8502
 	ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Air
-
 BoxerCannonAG:
 	Inherits: ^SmallArms
 	Inherits@2: ^LightMissile
@@ -292,9 +269,6 @@ MachineGunH:
 	Report: mgun11.aud
 	Warhead@Bullet_Light:
 		Damage: 6000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 60
-
 MachineGunAPH:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -306,9 +280,6 @@ MachineGunAPH:
 	Report: mgun11.aud
 	Warhead@Bullet_Medium:
 		Damage: 6000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 60
-
 120mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -320,8 +291,6 @@ MachineGunAPH:
 		Speed: 543
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
@@ -337,8 +306,6 @@ MachineGunAPH:
 		Speed: 1086
 	Warhead@CannonHE_Medium:
 		Damage: 16000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 160
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
@@ -351,8 +318,6 @@ M1A1Missiles:
 	Report: rocket1.aud
 	Warhead@MissileAP_Medium:
 		Damage: 8000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
 
@@ -370,9 +335,6 @@ M1A1MachineGun:
 	Report: mgun11.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-
 120mmDual:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -386,9 +348,6 @@ M1A1MachineGun:
 		Speed: 614
 	Warhead@CannonHE_Heavy:
 		Damage: 8000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 80
-
 120mmDualHV:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -403,9 +362,6 @@ M1A1MachineGun:
 		Speed: 1228
 	Warhead@CannonHE_Heavy:
 		Damage: 16000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 160
-
 MammothMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -419,8 +375,6 @@ MammothMissiles:
 		Image: DRAGON
 	Warhead@MissileAP_Heavy:
 		Damage: 8000
-	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
@@ -507,11 +461,6 @@ Vulcan:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		Spread: 600
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 120
-		Spread: 600
-
 Napalm:
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Heavy
@@ -525,12 +474,8 @@ Napalm:
 		Shadow: true
 	Warhead@Demolition_Heavy:
 		Damage: 6000
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 60
 	Warhead@Flame_Heavy:
 		Damage: 6000
-	Warhead@Flame_Heavy_Percentage:
-		Damage: 60
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
@@ -553,12 +498,6 @@ VulcanA10Carrier:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		Spread: 300
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 60
-		Spread: 300
-		ValidRelationships: Neutral, Enemy
-
 NapalmA10Carrier:
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Heavy
@@ -572,12 +511,8 @@ NapalmA10Carrier:
 		Shadow: true
 	Warhead@Demolition_Heavy:
 		Damage: 4000
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 40
 	Warhead@Flame_Heavy:
 		Damage: 4000
-	Warhead@Flame_Heavy_Percentage:
-		Damage: 40
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
@@ -615,10 +550,6 @@ A10CarrierMissiles_AA:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 		Damage: 12000
-	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Air
-		Damage: 120
-		ValidRelationships: Neutral, Enemy
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
@@ -1005,17 +936,11 @@ MachineGunHumvee2:
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
-
 MachineGunHumvee2_AA:
 	Inherits: MachineGunHumvee2
 	Range: 8397
 	ValidTargets: Air
 	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Air
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
@@ -1035,19 +960,12 @@ MachineGunHumvee2AP:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
-
 MachineGunHumvee2AP_AA:
 	Inherits: MachineGunHumvee2AP
 	Range: 8397
 	ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Air
-
 RocketsHumvee2:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1059,19 +977,12 @@ RocketsHumvee2:
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water
 		Damage: 16000
-	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 160
-
 RocketsHumvee2_AA:
 	Inherits: RocketsHumvee2
 	Range: 8397
 	ValidTargets: Air
 	Warhead@MissileAP_Light:
 		ValidTargets: Air
-	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Air
-
 RocketsHumvee2AMT:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1081,23 +992,14 @@ RocketsHumvee2AMT:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 16000
-	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 160
-
 RocketsHumvee2AMT_AA:
 	Inherits: RocketsHumvee2AMT
 	Range: 8397
 	ValidTargets: Air
 	Warhead@MissileAP_Light:
 		ValidTargets: Air
-	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Air
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
-	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Air
-
 TDShotgun:
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
@@ -1149,8 +1051,6 @@ GDIPredatorTankCannon:
 		Speed: 588
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
@@ -1166,8 +1066,6 @@ GDIPredatorTankCannonHV:
 		Speed: 1176
 	Warhead@CannonHE_Medium:
 		Damage: 16000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 160
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
@@ -1180,8 +1078,6 @@ GDIPredatorTankMissiles:
 	Report: rocket1.aud
 	Warhead@MissileAP_Medium:
 		Damage: 8000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		Damage: 80
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
 
@@ -1199,9 +1095,6 @@ GDIPredatorMachineGun:
 	Report: mgun11.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-
 GDIPredatorBlueLaser:
 	ReloadDelay: 11
 	Range: 5880
@@ -1237,9 +1130,6 @@ MammothTank3Cannons:
 		Speed: 634
 	Warhead@CannonHE_Heavy:
 		Damage: 12000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 120
-
 MammothTank3CannonsHV:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -1254,9 +1144,6 @@ MammothTank3CannonsHV:
 		Speed: 1268
 	Warhead@CannonHE_Heavy:
 		Damage: 24000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 240
-
 MammothTank3Missiles:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1270,8 +1157,6 @@ MammothTank3Missiles:
 		Image: DRAGON
 	Warhead@MissileAP_Heavy:
 		Damage: 12000
-	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		Damage: 120
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
@@ -1292,10 +1177,6 @@ ExosuitRailgun:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 20000
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 200
-
 OfficerMachineGun:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
@@ -1308,14 +1189,11 @@ OfficerMachineGun:
 	Range: 5596
 	Report: mgun11.aud
 	Warhead@Bullet_Light:
+		PercentageScale: 2500
 		Damage: 8000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Bullet_Medium:
+		PercentageScale: 2500
 		Damage: 8000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-
 OfficerMachineGunAP:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1329,10 +1207,6 @@ OfficerMachineGunAP:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Air, Water
-		Damage: 40
-
 GDIRigDroneTargeting:
 	# ValidTargets: SpecialRepair, Repairing, Repair, lockdowned, plagued, ivanattached
 	# ValidRelationships: Ally
@@ -1369,9 +1243,6 @@ GDIRigPDLaser:
 		-HitAnim:
 	Warhead@Laser_Heavy:
 		Damage: 2000
-	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
-
 GDIRigDroneRepair:
 	Inherits: ^RepairWeapon
 	ValidTargets: SpecialRepair, Repairing, Repair, lockdowned, plagued, ivanattached
@@ -1464,10 +1335,6 @@ GDIRigRailgun:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 160000
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1600
-
 GDIRigMissilePod:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Medium
@@ -1493,8 +1360,6 @@ GDIRigMissilePod:
 		ContrailEndColor: 000000FF
 	Warhead@MissileHE_Heavy:
 		Damage: 32000
-	Warhead@MissileHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 320
 	Warhead@Effect: CreateEffect
 		Explosions: med_frag
 		ImpactSounds: kaboom25.aud
@@ -1564,15 +1429,9 @@ CommandoRocketLauncher:
 	Warhead@MissileHE_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 20000
-	Warhead@MissileHE_Medium_Percentage:
-		ValidTargets: Ground, Air, Water
-		Damage: 200
 	Warhead@MissileHE_Light:
 		ValidTargets: Ground, Air, Water
 		Damage: 20000
-	Warhead@MissileHE_Light_Percentage:
-		ValidTargets: Ground, Air, Water
-		Damage: 200
 	Warhead@Effect: CreateEffect
 		ValidRelationships: Neutral, Enemy
 		Explosions: blue_building_napalm
@@ -1671,9 +1530,6 @@ FirehawkMissiles_AA:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 		Damage: 20000
-	Warhead@MissileAP_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Air
-		Damage: 200
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
@@ -1743,10 +1599,6 @@ GDIBattleshipRailgun:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 50000
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 500
-
 GunboatMissile:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
@@ -1768,10 +1620,6 @@ GunboatMissile:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water
 		Damage: 18000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 180
-
 GunboatMissileAMT:
 	Inherits: GunboatMissile
 	Inherits@2: ^AMTProjectile
@@ -1884,9 +1732,6 @@ td_gdi_minigunner_minigun:
 	Report: mgun2.aud
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
-
 td_gdi_minigunner_minigun_ap:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1899,9 +1744,6 @@ td_gdi_minigunner_minigun_ap:
 	Report: mgun2.aud
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 40
-
 # CLOSE-COMBAT BASELINE WEAPON (Formula v2, 2026-07-19): defines the
 # closecombat anchor with td_gdi_shotgunner. SmallArms+Chaingun (WC .875),
 # burst 5 pellets fire together (BurstDelays 0) = one shotgun blast;
@@ -1923,9 +1765,5 @@ td_gdi_shotgunner_shotgun:
 		Inaccuracy: 800
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20

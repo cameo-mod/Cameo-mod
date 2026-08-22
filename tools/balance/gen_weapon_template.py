@@ -1373,39 +1373,26 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         if integ:
             main_wh.append(f"\t\tIntegrityScale: {integ}")
         percentage_state = FAMILY_PHYSICAL_STATE.get(name) if name in {"Flame", "Chemical", "Inferno", "Cryo"} else None
-        # All %-twins use the Cameo AreaDamagePercentage warhead (unified 2026-08-10): same expanding-ring
-        # spatial pass + baked-FF plumbing as the AreaDamage main, and it can carry PhysicalStateScale.
-        # Behaviour-preserving drop-in for HealthPercentageDamage (no ValidRelationships: Ally => no FF).
-        # AreaDamagePercentage extends AreaDamageWarhead, so it inherits IntegrityScale. For integrity-
-        # affecting families, the %-twin MUST also drain integrity (otherwise HP dies before integrity
-        # depletes). The %-twin also carries DamageTypes: Tesla for the passive INotifyDamage drain.
-        percentage_type = "AreaDamagePercentage"
-        # W18: x5 Versus band, in clean multiples of 5. Together with Damage x20 and the
-        # denominator this is an exact identity; what it BUYS is resolution — one step in the
-        # new band is 0.2 of a step in the old one, so a %-twin ladder can finally be shaped
-        # as finely as the flat one.
-        pct = [(a, v * 5) for a, v in pct]
-        pct_wh = [f"\tWarhead@{tag}_Percentage: {percentage_type}",
-             f"\t\tValidTargets: {vt}",
-             *inv_warhead,
-             f"\t\tSpread: {main_spread // 2}",
-             f"\t\tDamage: {pct_damage}",
-             f"\t\tPercentageDenominator: 10000",
-             f"\t\tFalloff: {at(falloffs, li)}",
-             f"\t\tVersus:",
-             emit_versus(pct)]
-        if integ:
-            pct_wh.append(f"\t\tDamageTypes: Tesla")
-            pct_wh.append(f"\t\tIntegrityScale: {integ}")
-        pct_wh.append(f"\t\tUpdatesUnitStatistics: false")
-        if percentage_state:
-            if isinstance(percentage_state, dict):
-                pct_wh += ["\t\tPhysicalStates:"]
-                pct_wh += [f"\t\t\t{k}: {v}" for k, v in _physical_states_for_level(percentage_state, level).items()]
-            else:
-                psn, pss = percentage_state
-                pct_wh += [f"\t\tPhysicalStateName: {psn}", f"\t\tPhysicalStateScale: {pss}"]
-        parts = main_wh + pct_wh
+        # ⭐ THE FOLD (UNIFIED_AREADAMAGE_WARHEAD.md). The percentage half is no longer a second
+        # warhead — it is four fields on the main one, so an inline weapon carries ONE Damage
+        # number and the percentage follows from it instead of being hand-typed alongside and
+        # drifting. Measured before the change: 2287 of 2469 twins were already exactly
+        # `main // 100`, and the 182 that were not drifted by clean fractions (x0.5, x0.25,
+        # x0.2, x2) — i.e. deliberate per-weapon dials, which is what PercentageScale is.
+        #
+        # ⚠ NO x5 on these Versus values. W18 multiplied the standalone twin's band by 5 to pair
+        # with `Damage = flat // 100`; the fold derives its own basis points as
+        # `Damage x PercentageScale / 2000`, which already carries that factor. (D/100)x5V is
+        # (D/20)xV, so PercentageVersus stays in the natural band.
+        #
+        # IntegrityScale, PhysicalStateName/Scale and PhysicalStates already sit on the main
+        # warhead and AreaDamageWarhead.InflictPercentage applies them to the percentage hit
+        # too, so the twin's copies of all three are simply no longer needed.
+        main_wh += [f"		PercentageScale: 10000",
+                    f"		PercentageSpread: 50",
+                    f"		PercentageVersus:",
+                    emit_versus(pct)]
+        parts = main_wh
         if name in CHIPS:  # paid-for ExtraDamage chip (energy families only)
             parts.append(emit_chip(tag, name, damage, vt, level=level))
         if name in FAMILY_CONDITION:  # on-hit status mark (Sonic -> SonicDebuff)

@@ -8,22 +8,12 @@ SteelCloneGun:
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-
 SteelCloneGun_elite:
 	Inherits: SteelCloneGun
 	Range: 6000
@@ -82,16 +72,10 @@ SteelVulcan:
 	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
 	Report: pulseturretfire.wav
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
@@ -150,16 +134,9 @@ ConsortiumMissileSystem:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 60
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 60
-
 ConsortiumMissileSystem_EMP:
 	Inherits: ConsortiumMissileSystem
 	Warhead@TeslaWeapon: SpreadDamage
@@ -174,11 +151,7 @@ ConsortiumMissileSystem_EMP:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Flak_Medium:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MissileAP_Medium:
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 12000
@@ -198,15 +171,9 @@ SteelQuantumCannon:
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 12000
-	Warhead@Laser_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 120
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 12000
-	Warhead@Railgun_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 120
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
@@ -224,10 +191,6 @@ SteelQuantumCannon_EMP:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 4000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 80
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water
@@ -261,8 +224,6 @@ SteelQuantumCannon_elite:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 6000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 120
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 12000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -285,6 +246,8 @@ SteelQuantumCannon_elite:
 
 SteelQuantumCannonScatter_elite:
 	Inherits: SteelQuantumCannon_elite
+	Warhead@Tesla_Heavy:
+		PercentageScale: 1667
 	Range: 3500
 	-Report:
 	Projectile: LaserZap
@@ -294,8 +257,6 @@ SteelQuantumCannonScatter_elite:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 1000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 2000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -422,16 +383,10 @@ SteelMakoGun:
 		PhysicalStateScale: 100
 	Warhead@Demolition_Light:
 		Damage: 2000
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Railgun_Heavy:
 		Damage: 2000
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@CannonHE_Medium:
 		Damage: 2000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Effect: CreateEffect
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
@@ -462,20 +417,11 @@ SteelMakoGun_EMP:
 	Warhead@Demolition_Light:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 20
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Railgun_Heavy:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@CannonHE_Medium:
 		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@LightChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -530,28 +476,15 @@ SteelMantaAG:
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-
 SteelManta_AA:
 	Inherits: SteelMantaAG
 	Report: steel_chaingunfire.wav
@@ -624,16 +557,9 @@ SteelMantaHunterCannons:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-
 SteelMantaHunterCannons_AA:
 	Inherits: ^SteelMediumMissile
 	Inherits@2: SteelMantaHunterCannons
@@ -644,10 +570,6 @@ SteelMantaHunterCannons_AA:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MissileAP_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-
 SteelMantaHunterCannonsResonance:
 	Inherits: SteelMantaHunterCannons
 	Warhead@shrapnel: FireShrapnel
@@ -804,27 +726,15 @@ SteelInfRailgun:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 40
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 40
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 40
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 40
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
@@ -930,33 +840,17 @@ SteelInfRailgun_EMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water, Air
@@ -998,15 +892,9 @@ SteelFighterRailgun:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@TankDestroyerCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1016,9 +904,6 @@ SteelFighterRailgun:
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 20
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
@@ -1123,9 +1008,6 @@ SteelMegaSword_elite:
 	Warhead@Railgun_Heavy:
 		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Railgun_Heavy_Percentage: AreaDamagePercentage
-		Damage: 300
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1197,10 +1079,6 @@ SteelAirTurret_EMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 160
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -1233,8 +1111,6 @@ SteelAirTurret_elite:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 12000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 240
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 24000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -1257,6 +1133,8 @@ SteelAirTurret_elite:
 
 SteelAirTurretEScatter:
 	Inherits: SteelAirTurret_elite
+	Warhead@Tesla_Heavy:
+		PercentageScale: 1667
 	Range: 4500
 	-Report:
 	Projectile: LaserZap
@@ -1267,8 +1145,6 @@ SteelAirTurretEScatter:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 40
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -1300,8 +1176,6 @@ SteelFortressWeapons:
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 	Warhead@CannonHE_Medium:
 		Damage: 14000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 140
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
@@ -1356,8 +1230,6 @@ SteelQuantumTurretRail:
 		Damage: 1
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
@@ -1403,8 +1275,6 @@ SteelQuantumTurretRail_EMP:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@CannonHE_Heavy:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -1445,13 +1315,6 @@ SteelInspectorIonCannonDamage:
 		Damage: 100000
 		Delay: 0
 		AffectsParent: False
-	Warhead@Tesla_Super_Percentage:
-		ValidTargets: Ground, Water
-		Falloff: 100, 0
-		Spread: 4000
-		Damage: 1000
-		Delay: 1
-		AffectsParent: False
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		ValidTargets: Ground, Water
@@ -1466,13 +1329,6 @@ SteelInspectorIonCannonDamage:
 		Spread: 300
 		Damage: 100000
 		Delay: 3
-		AffectsParent: False
-	Warhead@Tesla_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Falloff: 100, 0
-		Spread: 4000
-		Damage: 1000
-		Delay: 4
 		AffectsParent: False
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
@@ -1526,10 +1382,6 @@ SteelHoverMissile:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 80
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
 		ImpactActors: false
 
@@ -1561,12 +1413,8 @@ SteelKatyCannons:
 	Warhead@CannonHE_Heavy:
 		Damage: 10000
 		FriendlyFireDamage: 0
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 100
 	Warhead@Flame_Heavy:
 		Damage: 20000
-	Warhead@Flame_Heavy_Percentage:
-		Damage: 200
 	Warhead@Effect: CreateEffect
 		Explosions: aa_pulsexp
 		ImpactSounds: xplos.aud
@@ -1646,9 +1494,6 @@ SteelKatyCannons_EMP:
 	Warhead@CannonHE_Heavy:
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 100
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water
 		Damage: 25000
@@ -1705,10 +1550,6 @@ SteelStalkerRailgun_EMP:
 		ValidTargets: Ground, Water
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 400
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 40000
@@ -1741,8 +1582,6 @@ SteelStalkerRailgun_elite:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 30000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 600
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 60000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -1765,6 +1604,8 @@ SteelStalkerRailgun_elite:
 
 SteelStalkerRailgunEScatter:
 	Inherits: SteelStalkerRailgun_elite
+	Warhead@Tesla_Heavy:
+		PercentageScale: 1667
 	Range: 5000
 	-Report:
 	Projectile: LaserZap
@@ -1775,8 +1616,6 @@ SteelStalkerRailgunEScatter:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 5000
-	Warhead@Tesla_Heavy_Percentage: AreaDamagePercentage
-		Damage: 100
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 10000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -1840,10 +1679,6 @@ WhiteRabbitGatling:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Air, Water
-		Damage: 40
-
 HammerheadTankCannon:
 	Inherits: ^RA2MediumCannon
 	ReloadDelay: 55
@@ -1853,9 +1688,6 @@ HammerheadTankCannon:
 		Speed: 515
 	Warhead@CannonHE_Medium:
 		Damage: 24000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 240
-
 HammerheadArtillery:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_CannonHE_Medium
@@ -1877,19 +1709,14 @@ HammerheadArtillery:
 		ContrailStartColor: 77CCFFAA
 		ContrailEndColor: 4488FF00
 	Warhead@Demolition_Heavy:
+		PercentageScale: 19800
 		Spread: 1111
 		Damage: 22222
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		Spread: 1111
-		Damage: 440
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@CannonHE_Medium:
+		PercentageScale: 19800
 		Spread: 1111
 		Damage: 11111
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Spread: 1111
-		Damage: 220
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
@@ -2003,15 +1830,9 @@ SteelDaggerCannon:
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
@@ -2037,12 +1858,8 @@ SteelCruiserArtillery:
 		ContrailLength: 20
 	Warhead@Demolition_Light:
 		Damage: 16000
-	Warhead@Demolition_Light_Percentage: AreaDamagePercentage
-		Damage: 160
 	Warhead@CannonHE_Medium:
 		Damage: 16000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 160
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
@@ -2094,10 +1911,6 @@ SteelCruiserCannons:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Air, Water
-		Damage: 20
-
 SteelCruiserCannons_elite:
 	Inherits: SteelCruiserCannons
 	Range: 8000
@@ -2123,16 +1936,9 @@ SteelCargoshipCannons:
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Air, Water
-		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Air, Water
-		Damage: 20
-
 ####################################################################################################
 #		Red Alert 2 Steel Support Generator
 ####################################################################################################

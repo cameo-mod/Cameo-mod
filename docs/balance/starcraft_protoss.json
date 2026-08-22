@@ -256,14 +256,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "100",
-        "falloff": "100, 75, 50, 25",
-        "percentage_denominator": "10000",
-        "spread": "2500",
-        "tag": "Tesla_Super_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2500",
         "falloff": "100, 75, 50, 25",
         "spread": "500",
@@ -300,27 +292,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -353,27 +329,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -468,14 +428,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -645,14 +597,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -1211,27 +1155,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -1264,27 +1192,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "55",
-        "tag": "Flak_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -1315,14 +1227,6 @@
         "spread": "400",
         "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "100",
-        "falloff": "100, 70, 30, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "MissileAA_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -1351,14 +1255,6 @@
         "spread": "400",
         "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "100",
-        "falloff": "100, 70, 30, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "MissileAA_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -3048,27 +2944,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "80",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "80",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -3108,27 +2988,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "80",
-        "falloff": "100, 45, 18, 6, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "8000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "80",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -3226,14 +3090,6 @@
         "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "300",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "0",
-        "tag": "Melee_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -3323,14 +3179,6 @@
         "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "0",
-        "tag": "Melee_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -3437,14 +3285,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "80",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "2000",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "400",
@@ -3478,14 +3318,6 @@
         "spread": "200",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "80",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "2000",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3523,14 +3355,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "80",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "2000",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "400",
@@ -3564,14 +3388,6 @@
         "spread": "200",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "80",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "2000",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3609,14 +3425,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "80",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "2000",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "400",
@@ -3650,14 +3458,6 @@
         "spread": "200",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "80",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "2000",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3695,14 +3495,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "80",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "2000",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "400",
@@ -3736,14 +3528,6 @@
         "spread": "200",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "80",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "2000",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3839,14 +3623,6 @@
         "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "320",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "0",
-        "tag": "Melee_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -4247,14 +4023,6 @@
         "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "80",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "0",
-        "tag": "Melee_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -4344,14 +4112,6 @@
         "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "640",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "0",
-        "tag": "Melee_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -5129,14 +4889,6 @@
         "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "100",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "0",
-        "tag": "Melee_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
@@ -5274,14 +5026,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "300",
-        "falloff": "100, 55, 0",
-        "percentage_denominator": "10000",
-        "spread": "58",
-        "tag": "Tesla_Super_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "15000",
         "falloff": "100, 75, 50, 25",
         "spread": "400",
@@ -5387,14 +5131,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "400",
@@ -5449,14 +5185,6 @@
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -5707,27 +5435,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "100",
-        "falloff": "100, 45, 15, 0",
-        "percentage_denominator": "10000",
-        "spread": "100",
-        "tag": "MissileHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "10000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "100",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "48",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -5818,27 +5530,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "100",
-        "falloff": "100, 88, 72, 50, 0",
-        "percentage_denominator": "10000",
-        "spread": "183",
-        "tag": "Chemical_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "10000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
         "tag": "Flame_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "100",
-        "falloff": "100, 90, 78, 60, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "Flame_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
@@ -5949,14 +5645,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Concussion_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
@@ -5964,27 +5652,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -6017,14 +5689,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "percentage_denominator": "10000",
-        "spread": "116",
-        "tag": "Concussion_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
@@ -6032,27 +5696,11 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "50",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -6223,14 +5871,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "20",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "150",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "8000",
         "falloff": null,
         "spread": "100",
@@ -6398,14 +6038,6 @@
         "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "100",
-        "falloff": "100, 0",
-        "percentage_denominator": "10000",
-        "spread": "0",
-        "tag": "Melee_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
@@ -6505,14 +6137,6 @@
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "500",
-        "falloff": "100, 50, 20, 0",
-        "percentage_denominator": "10000",
-        "spread": "200",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",

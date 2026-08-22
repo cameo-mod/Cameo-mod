@@ -8,8 +8,6 @@ wc2footmanslice2:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 18000
-	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 180
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 
@@ -66,8 +64,6 @@ wc2knightslice:
 	Projectile: InstantHit
 	Warhead@Melee_Medium:
 		Damage: 16000
-	Warhead@Melee_Medium_Percentage: AreaDamagePercentage
-		Damage: 160
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 
@@ -284,16 +280,10 @@ wc2ballistaFire:
 		Blockable: false
 	Warhead@Demolition_Light:
 		Damage: 30000
-	Warhead@Demolition_Light_Percentage:
-		Damage: 300
 	Warhead@Concussion_Medium:
 		Damage: 30000
-	Warhead@Concussion_Medium_Percentage:
-		Damage: 300
 	Warhead@Demolition_Heavy:
 		Damage: 30000
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 300
 	Warhead@Effect: CreateEffect
 		Image: wc2_catapult_impact
 		Explosions: idle
@@ -325,9 +315,6 @@ MortarTeamArtilleryShell:
 		TrailPalette: effect75alpha
 	Warhead@CannonHE_Medium:
 		Damage: 20000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 200
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -482,8 +469,6 @@ wc2mageFireballVisible:
 		PointDefenseTypes: Missile
 	Warhead@Flame_Heavy:
 		Damage: 18000
-	Warhead@Flame_Heavy_Percentage:
-		Damage: 180
 	Warhead@Effect: CreateEffect
 		Explosions: wc2_building_collapse
 		ImpactSounds: explode.aud

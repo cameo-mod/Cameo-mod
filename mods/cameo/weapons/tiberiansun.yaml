@@ -148,10 +148,6 @@ TS25mmDep:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
-		ValidTargets: Ground, Water, Air
-
 TSLaser25mmDep:
 	Inherits: ^FlakWeapon
 	Inherits@2: ^LaserWeapon
@@ -187,9 +183,6 @@ TS90mm:
 	Range: 5319
 	Warhead@CannonHE_Medium:
 		Damage: 6000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 60
-
 TS90mmDep:
 	Inherits: TS90mm
 	Report: tnkfire6.aud
@@ -213,8 +206,6 @@ TSLaser90mm:
 	Range: 5423
 	Warhead@CannonHE_Medium:
 		Damage: 6000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 60
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 6000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
@@ -239,9 +230,6 @@ TS120mm:
 		LaunchAngle: 0
 	Warhead@CannonHE_Medium:
 		Damage: 12000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 120
-
 TS120mm_bluenuke:
 	Inherits: ^TSCannonEffect
 	Inherits@wh: ^Warhead_CannonHE_Medium
@@ -255,9 +243,8 @@ TS120mm_bluenuke:
 		Blockable: false
 		LaunchAngle: 0
 	Warhead@CannonHE_Medium:
+		PercentageScale: 5000
 		Damage: 24000
-	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
-		Damage: 120
 	Warhead@3Eff: CreateEffect
 		Explosions: magicnuke_med
 
@@ -328,12 +315,8 @@ TS155mm:
 		ContrailWidth: 0c32
 	Warhead@Concussion_Medium:
 		Damage: 30000
-	Warhead@Concussion_Medium_Percentage:
-		Damage: 300
 	Warhead@Demolition_Heavy:
 		Damage: 30000
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 300
 	# Warhead@3Eff: CreateEffect
 	# 	Explosions: artillery_explosion
 	# Warhead@3Eff: CreateEffect
@@ -349,12 +332,9 @@ TS155mm_bluenuke:
 		ContrailWidth: 0c32
 	Warhead@Concussion_Medium:
 		Damage: 60000
-	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		Damage: 600
 	Warhead@Demolition_Heavy:
+		PercentageScale: 5000
 		Damage: 60000
-	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		Damage: 300
 	Warhead@3Eff: CreateEffect
 		Explosions: magicnuke_med
 
@@ -381,18 +361,12 @@ TSGrenade:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water
 		Damage: 12000
-	Warhead@Concussion_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 120
 	Warhead@CannonHE_Medium:
 		ValidTargets: Ground, Water
 		Damage: 12000
 	Warhead@MediumCannonFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 6000
-	Warhead@CannonHE_Medium_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 120
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 
@@ -418,16 +392,9 @@ TSGrenadeSonic:
 	Warhead@Concussion_Light:
 		ValidTargets: Ground, Water
 		Damage: 12000
-	Warhead@Concussion_Light_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 120
 	Warhead@Sonic_Light:
 		ValidTargets: Ground, Water
 		Damage: 12000
-	Warhead@Sonic_Light_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 120
-
 TSGrenadeAA:
 	Inherits: TSGrenade
 	Range: 6512
@@ -503,9 +470,6 @@ MammothTankCannon:
 		Speed: 634
 	Warhead@CannonHE_Heavy:
 		Damage: 12000
-	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 120
-
 ^TSLaserEffect:
 	Projectile: LaserZap
 		Width: 96
@@ -556,13 +520,8 @@ TSTurretLaser:
 		-HitAnim:
 	Warhead@Bullet_Medium:
 		Damage: 10000
-	Warhead@Bullet_Medium_Percentage:
-		Damage: 100
 	Warhead@Laser_Heavy:
 		Damage: 10000
-	Warhead@Laser_Heavy_Percentage:
-		Damage: 100
-
 TSCABALPlasmaFire:
 	Inherits: TSTurretLaser
 	Projectile: LaserZap
@@ -589,12 +548,8 @@ TSLaserTurretLaser:
 		-HitAnim:
 	Warhead@Bullet_Medium:
 		Damage: 16000
-	Warhead@Bullet_Medium_Percentage:
-		Damage: 160
 	Warhead@Laser_Heavy:
 		Damage: 16000
-	Warhead@Laser_Heavy_Percentage:
-		Damage: 160
 	Warhead@3: FireShrapnel
 		Weapon: TurretLaserFragment
 		Amount: 1
@@ -617,13 +572,8 @@ TurretLaserFragment:
 		-HitAnim:
 	Warhead@Bullet_Medium:
 		Damage: 8000
-	Warhead@Bullet_Medium_Percentage:
-		Damage: 80
 	Warhead@Laser_Heavy:
 		Damage: 8000
-	Warhead@Laser_Heavy_Percentage:
-		Damage: 80
-
 TSObeliskLaserFire:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
@@ -648,12 +598,8 @@ TSObeliskLaserFire:
 		SourceFlareCoreSize: 5
 	Warhead@CannonAP_Light:
 		Damage: 52000
-	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 520
 	Warhead@Laser_Heavy:
 		Damage: 52000
-	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 520
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
@@ -685,12 +631,8 @@ TSLaserObeliskLaserFire:
 	ValidTargets: Ground, Water
 	Warhead@CannonAP_Light:
 		Damage: 80000
-	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 800
 	Warhead@Laser_Heavy:
 		Damage: 80000
-	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 800
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
@@ -721,13 +663,8 @@ ObeliskLaserFragment:
 		-HitAnim:
 	Warhead@Bullet_Medium:
 		Damage: 40000
-	Warhead@Bullet_Medium_Percentage:
-		Damage: 400
 	Warhead@Laser_Heavy:
 		Damage: 40000
-	Warhead@Laser_Heavy_Percentage:
-		Damage: 400
-
 TSLaserFence:
 	TargetActorCenter: true
 	Projectile: InstantHit
@@ -795,9 +732,6 @@ TSBazooka:
 	Projectile: Missile
 	Warhead@MissileAP_Light:
 		Damage: 24000
-	Warhead@MissileAP_Light_Percentage: AreaDamagePercentage
-		Damage: 240
-
 TSBazookaG:
 	Inherits: TSBazooka
 	Range: 9216
@@ -874,16 +808,9 @@ TSBikeMissile:
 	Warhead@MissileHE_Light:
 		Damage: 6000
 		ValidTargets: Ground, Water, Air
-	Warhead@MissileHE_Light_Percentage:
-		Damage: 60
-		ValidTargets: Ground, Water, Air
 	Warhead@MissileHE_Medium:
 		Damage: 6000
 		ValidTargets: Ground, Water, Air
-	Warhead@MissileHE_Medium_Percentage:
-		Damage: 60
-		ValidTargets: Ground, Water, Air
-
 TSBikeTibMissile:
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^MediumChemicalWeapon
@@ -976,10 +903,6 @@ TSSAPCCoreMissiles:
 	Warhead@Chemical_Light:
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
-	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
-		Damage: 80
-		ValidTargets: Ground, Water, Air
-
 TSDragon:
 	Inherits: ^TSDefaultMissile
 	ReloadDelay: 50
@@ -1000,8 +923,6 @@ TSHellfire:
 		Damage: 24000
 		FriendlyFireDamage: 25
 		FriendlyFireSpread: 50
-	Warhead@MissileAP_Heavy_Percentage:
-		Damage: 240
 	Warhead@EffectWater: CreateEffect
 		Explosions: med_splash
 		ImpactSounds: splash9.aud
@@ -1080,13 +1001,8 @@ TSChemAdatsMissileAA:
 		TrailImage: spittrail
 	Warhead@Flak_Medium:
 		Damage: 6000
-	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
-		Damage: 60
 	Warhead@MissileHE_Light:
 		Damage: 6000
-	Warhead@MissileHE_Light_Percentage: AreaDamagePercentage
-		Damage: 60
-
 TSSlimeAttack:
 	ReloadDelay: 80
 	Range: 1408
@@ -1198,9 +1114,6 @@ TSLocustBomb:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 180000
-	Warhead@Demolition_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Ship
-		Damage: 1800
 	Warhead@2Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: expnew09.aud
@@ -1225,9 +1138,6 @@ TSLocustBomb:
 		Inaccuracy: 200
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
-
 TSMinigun:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -1237,9 +1147,6 @@ TSMinigun:
 	Report: infgun3.aud, gostgun1.aud, slvkgun1.aud
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
-
 TSM1Carbine:
 	Inherits: ^TSMG
 	Report: infgun3.aud
@@ -1275,16 +1182,9 @@ TSAssaultCannon:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 20
-
 TSLaserRaiderCannon:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Laser_Heavy
@@ -1303,13 +1203,8 @@ TSLaserRaiderCannon:
 	Report: chaingn1.aud
 	Warhead@Bullet_Light:
 		Damage: 6000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 60
 	Warhead@Laser_Heavy:
 		Damage: 6000
-	Warhead@Laser_Heavy_Percentage: AreaDamagePercentage
-		Damage: 60
-
 TSPistola:
 	Inherits: ^TSMG
 	Range: 3072
@@ -1357,9 +1252,6 @@ forgotten_mutant_dualwield:
 	ValidTargets: Ground, Water
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
-		Damage: 20
-
 forgotten_mutant_dualwield_elite:
 	Inherits: forgotten_mutant_dualwield
 	Burst: 4
@@ -1396,9 +1288,7 @@ TSTacticalMissile:
 		TrailInterval: 0
 		Gravity: 0
 	-Warhead@MediumMissile:
-	-Warhead@MediumMissilePercentage:
 	-Warhead@LightMissile:
-	-Warhead@LightMissilePercentage:
 	Warhead@1Dam: FireFragment
 		Weapon: TSTacticalMissileDamage
 		ValidTargets: Ground, Water, Air
