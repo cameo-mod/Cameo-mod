@@ -6,9 +6,9 @@ A number in prose is true only on the day it is written. These are the claims a 
 
 | claim | documented | measured | status |
 |---|--:|--:|---|
-| `shield_versus_mean` | 186.791 | 186.791 | ✅ |
-| `shield_hp_factor` | 0.535357 | 0.535357 | ✅ |
-| `shield_damage_share` | 0.01432 | 0.014602 | ✅ |
+| `shield_versus_mean` | 186.791 | 187.441 | ✅ |
+| `shield_hp_factor` | 0.535357 | 0.533501 | ✅ |
+| `shield_damage_share` | 0.01432 | 0.0146741 | ✅ |
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
 | `live_damage_multipliers` | 366 | 366 | ✅ |
@@ -20,7 +20,7 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `w24_multi_main_fed` | 380 | 380 | ✅ |
 | `physical_state_fired_weapons` | 446 | 446 | ✅ |
 | `plating_row_ties` | 0 | 0 | ✅ |
-| `plating_families` | 37 | 37 | ✅ |
+| `plating_families` | 41 | 41 | ✅ |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
 
 _clean_ — every registered claim still matches the tree.

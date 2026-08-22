@@ -1,6 +1,6 @@
 # audit_outliers — systemic numeric drift (B9)
 
-(trait,field) distributions sampled: **18** — robust outliers (top 25 per field): **178**, selection bounds > 5120: **0**
+(trait,field) distributions sampled: **18** — robust outliers (top 25 per field): **176**, selection bounds > 5120: **0**
 
 
 ## Hard screen — Selectable bounds above the 5x5-cell maximum
@@ -32,15 +32,15 @@ _none found_
 | Aircraft.TurnSpeed | ts_gdi_carryall_husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | ts_gdi_strike_orca_husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | forgotten_carryall | 80 | 20 | 8.1 |
-| Aircraft.TurnSpeed | forgotten_wasp | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | forgotten_cobracopter_husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | forgotten_apache_husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | forgotten_wasp_husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | RA2FALC.Husk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | ra2beag.Husk | 80 | 20 | 8.1 |
-| Aircraft.TurnSpeed | yuri_floatingdisk | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | phoenix_husk.asian | 80 | 20 | 8.1 |
 | Aircraft.TurnSpeed | harbinger_husk.asian | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | twister_husk.steel | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | tkmdrone | 80 | 20 | 8.1 |
 | ChangesHealth.PercentageStep | wc2_orcs_deathknight | 83 | 1 | 55.3 |
 | ChangesHealth.Step | terran_marine | -2000 | 20 | 68.1 |
 | ChangesHealth.Step | terran_madcap | -2000 | 20 | 68.1 |
@@ -92,11 +92,9 @@ _none found_
 | Health.HP | cabal_core | 1000000 | 60000 | 15.9 |
 | Health.HP | cabal_constructionyard | 1000000 | 60000 | 15.9 |
 | Health.HP | cabal_avatar | 1000000 | 60000 | 15.9 |
-| Mobile.TurnSpeed | protoss_dragoon | 1023 | 20 | 96.6 |
-| Mobile.TurnSpeed | hole_small.nax2 | 255 | 20 | 22.6 |
-| Mobile.TurnSpeed | hole.nax2 | 255 | 20 | 22.6 |
-| Mobile.TurnSpeed | ra2_soviets_terrordrone | 200 | 20 | 17.3 |
-| Mobile.TurnSpeed | SCSPIDERMINE | 200 | 20 | 17.3 |
+| Mobile.TurnSpeed | hole_small.nax2 | 255 | 20 | 24.4 |
+| Mobile.TurnSpeed | hole.nax2 | 255 | 20 | 24.4 |
+| Mobile.TurnSpeed | SCSPIDERMINE | 200 | 20 | 18.7 |
 | Power.Amount | asianalliance_tankreactor | 2700 | -35 | 73.8 |
 | Power.Amount | wc2_humans_sunwell | 2500 | -35 | 68.4 |
 | Power.Amount | ra2_soviets_nuclearreactor | 2000 | -35 | 54.9 |

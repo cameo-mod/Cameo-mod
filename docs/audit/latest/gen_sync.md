@@ -1,3 +1,3 @@
 
-checked 112 shared template(s); drift = 0
+checked 124 shared template(s); drift = 0
 [OK] generator reproduces every ^Warhead_ family in weapons.yaml (no-op regenerate).

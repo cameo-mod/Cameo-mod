@@ -32,7 +32,7 @@ Buildable actors with ^GainsExperienceRA2 but NO Armament@*ELITE*: **197**
 |---|---|---|---|
 | ContentPacks/RedAlert2/Allies/yaml/naval.yaml | 1 | ra2_allies_aegiscruiser | RedAlert2/Allies |
 | ContentPacks/RedAlert2/Allies/yaml/infantry.yaml | 1 | ra2_allies_attackdog | RedAlert2/Allies |
-| ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml | 605 | ra2_allies_battlefortress | RedAlert2/Allies |
+| ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml | 617 | ra2_allies_battlefortress | RedAlert2/Allies |
 | ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml | 33 | ra2_allies_chronominer | RedAlert2/Allies |
 | ContentPacks/RedAlert2/Allies/yaml/infantry.yaml | 109 | ra2_allies_gi | RedAlert2/Allies |
 | ContentPacks/RedAlert2/Allies/yaml/defenses.yaml | 427 | ra2_allies_grandcannon | RedAlert2/Allies |
@@ -102,15 +102,15 @@ Buildable actors with ^GainsExperienceRA2 but NO Armament@*ELITE*: **197**
 | ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml | 526 | cruiser_f.steel | RedAlert2Mod/Consortium |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 494 | oldqtnk.steel | RedAlert2Mod/Consortium |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml | 488 | steelconsortium_antiairquantummissileturret | RedAlert2Mod/Consortium |
-| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 1040 | steelconsortium_barracuda | RedAlert2Mod/Consortium |
+| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 1041 | steelconsortium_barracuda | RedAlert2Mod/Consortium |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml | 640 | steelconsortium_bfg10000 | RedAlert2Mod/Consortium |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml | 137 | steelconsortium_cargoship | RedAlert2Mod/Consortium |
-| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 724 | steelconsortium_consortiumminer | RedAlert2Mod/Consortium |
+| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 725 | steelconsortium_consortiumminer | RedAlert2Mod/Consortium |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml | 419 | steelconsortium_consortiumsentryturret | RedAlert2Mod/Consortium |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml | 272 | steelconsortium_empressstation | RedAlert2Mod/Consortium |
-| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 1234 | steelconsortium_hammerheadartillerytank | RedAlert2Mod/Consortium |
-| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 940 | steelconsortium_manta | RedAlert2Mod/Consortium |
-| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 1335 | steelconsortium_poseidontank | RedAlert2Mod/Consortium |
+| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 1235 | steelconsortium_hammerheadartillerytank | RedAlert2Mod/Consortium |
+| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 941 | steelconsortium_manta | RedAlert2Mod/Consortium |
+| ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 1336 | steelconsortium_poseidontank | RedAlert2Mod/Consortium |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml | 555 | steelconsortium_quantumcannon | RedAlert2Mod/Consortium |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 620 | steelconsortium_supportshieldgenerator | RedAlert2Mod/Consortium |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 279 | steelconsortium_whiterabbit | RedAlert2Mod/Consortium |

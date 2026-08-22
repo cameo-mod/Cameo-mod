@@ -1,12 +1,12 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **391**, files touched: **518**
+Commits reviewed: **369**, files touched: **552**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
 | R1 | balance yaml edited without the ledger | 15 | yes |
 | R2 | audit script never run by run_all.sh | 6 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 7 | partly |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 8 | partly |
 | R4 | engine/mod.config change (needs boot gate) | 8 | no |
 
 
@@ -43,10 +43,11 @@ Commits reviewed: **391**, files touched: **518**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (7)
+## R3 — commits without provenance (8)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| 2bb046ae | 2026-08-20 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | 7800eaab | 2026-08-17 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | 519105d4 | 2026-08-16 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | e62ac4ea | 2026-08-16 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
@@ -74,21 +75,21 @@ Commits reviewed: **391**, files touched: **518**
 
 | file | commits touching it |
 |---|---|
-| docs/design/BALANCE_PROGRAM_PLAN.md | 95 |
-| mods/cameo/weapons/weapons.yaml | 67 |
-| tools/balance/gen_weapon_template.py | 49 |
-| DEVELOPMENT_LOG.md | 36 |
-| docs/balance/derived/redalert_soviets.json | 35 |
-| docs/balance/redalert_soviets.json | 33 |
+| docs/design/BALANCE_PROGRAM_PLAN.md | 98 |
+| mods/cameo/weapons/weapons.yaml | 74 |
+| tools/balance/gen_weapon_template.py | 53 |
+| docs/balance/derived/redalert_soviets.json | 41 |
+| DEVELOPMENT_LOG.md | 37 |
+| docs/balance/redalert_soviets.json | 34 |
+| docs/balance/derived/d2k_ixian.json | 33 |
+| docs/balance/derived/redalert2mod_consortium.json | 33 |
+| docs/balance/derived/redalert2mod_futuretech.json | 33 |
+| docs/balance/derived/tiberiandawn_nod.json | 33 |
+| docs/balance/derived/tiberiansun_forgotten.json | 33 |
+| docs/balance/derived/shared_redalert.json | 31 |
+| docs/balance/derived/starcraft_protoss.json | 31 |
 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 31 |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml | 28 |
-| docs/AI_HANDOFF_2026-08-05.md | 28 |
-| docs/balance/derived/d2k_ixian.json | 27 |
-| docs/balance/derived/redalert2mod_consortium.json | 27 |
-| docs/balance/derived/redalert2mod_futuretech.json | 27 |
-| docs/balance/derived/tiberiandawn_nod.json | 27 |
-| docs/balance/derived/tiberiansun_forgotten.json | 27 |
-| docs/balance/derived/starcraft_protoss.json | 26 |
+| docs/balance/derived/d2k_ordos.json | 30 |
 
 
 ## Reviewer checklist (not machine-checkable)
@@ -102,7 +103,7 @@ Commits reviewed: **391**, files touched: **518**
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 8 R1 and 0 R3 of 15/7 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 8 R1 and 0 R3 of 15/8 findings are in scope; the rest predate the gate.
 
 
 ## FAIL

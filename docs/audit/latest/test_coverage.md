@@ -4,7 +4,7 @@
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (2 file(s)) | 24 | >= 24 |
 | T2 | `def test_*` in tools/tests (19 file(s)) | 227 | >= 177 |
-| T3 | modules with no test mentioning them | 249 | <= 224 |
+| T3 | modules with no test mentioning them | 254 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (249)
+## T3 — untested modules (254)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -32,6 +32,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Orders/CustomFormationsAttackMoveOrderGenerator.cs | CustomFormationsAttackMoveOrderGenerator |
 | C# | OpenRA.Mods.Cameo/Orders/CustomFormationsOrderGeneratorBase.cs | UnitOrderResult, CustomFormationsOrderGeneratorBase, OrderGeneratorHelpers |
 | C# | OpenRA.Mods.Cameo/Orders/CustomFormationsUnitOrderGenerator.cs | CustomFormationsUnitOrderGenerator |
+| C# | OpenRA.Mods.Cameo/Projectiles/InstantHitWithFakeBullets.cs | InstantHitWithFakeBullets |
 | C# | OpenRA.Mods.Cameo/Projectiles/LightningZap.cs | LightningZap |
 | C# | OpenRA.Mods.Cameo/Rendering/ColorPickerColorShift.cs | ColorPickerColorShift |
 | C# | OpenRA.Mods.Cameo/Rendering/PlayerColorShift.cs | PlayerColorShift |
@@ -163,6 +164,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_code_duplication.py | audit_code_duplication |
 | python | tools/audit/audit_consistency_report.py | audit_consistency_report |
 | python | tools/audit/audit_damage_grid.py | audit_damage_grid |
+| python | tools/audit/audit_dead_warhead_fields.py | audit_dead_warhead_fields |
 | python | tools/audit/audit_display_text.py | audit_display_text |
 | python | tools/audit/audit_doc_claims.py | audit_doc_claims |
 | python | tools/audit/audit_dune_rank_decoration.py | audit_dune_rank_decoration |
@@ -171,6 +173,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_elite_gating.py | audit_elite_gating |
 | python | tools/audit/audit_empty_warheads.py | audit_empty_warheads |
 | python | tools/audit/audit_faction_leaks.py | audit_faction_leaks |
+| python | tools/audit/audit_family_uniqueness.py | audit_family_uniqueness |
 | python | tools/audit/audit_fluent.py | audit_fluent |
 | python | tools/audit/audit_garrison_weapons.py | audit_garrison_weapons |
 | python | tools/audit/audit_hex_shield_routing.py | audit_hex_shield_routing |
@@ -197,6 +200,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_survivability_pricing.py | audit_survivability_pricing |
 | python | tools/audit/audit_template_conformance.py | audit_template_conformance |
 | python | tools/audit/audit_test_coverage.py | audit_test_coverage |
+| python | tools/audit/audit_three_way_split.py | audit_three_way_split |
 | python | tools/audit/audit_ts_death_palette.py | audit_ts_death_palette |
 | python | tools/audit/audit_unconverted_templates.py | audit_unconverted_templates |
 | python | tools/audit/audit_unique_traits.py | audit_unique_traits |
@@ -238,6 +242,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/fix_orphan_old_keys.py | fix_orphan_old_keys |
 | python | tools/balance/fix_orphan_old_keys_multi.py | fix_orphan_old_keys_multi |
 | python | tools/balance/fix_stale_warhead_keys.py | fix_stale_warhead_keys |
+| python | tools/balance/gen_derived_stats.py | gen_derived_stats |
 | python | tools/balance/gen_effects.py | gen_effects |
 | python | tools/balance/gen_projectiles.py | gen_projectiles |
 | python | tools/balance/harvester_table.py | harvester_table |
@@ -272,5 +277,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 249 untested > baseline 224
+- T3: 254 untested > baseline 224
 

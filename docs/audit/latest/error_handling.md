@@ -1,13 +1,13 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **257**
+Files scanned: **261**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 2 | 2 |
-| E2 | handler discards the error | 61 | 30 |
+| E2 | handler discards the error | 63 | 30 |
 | E3 | open() without encoding= | 91 | 90 |
-| E4 | subprocess call without check= | 12 | 9 |
+| E4 | subprocess call without check= | 13 | 9 |
 
 
 ## E1 — 2 finding(s)
@@ -18,13 +18,14 @@ Files scanned: **257**
 | tools/audit_createeffect_image.py | 19 | bare `except:` |
 
 
-## E2 — 61 finding(s)
+## E2 — 63 finding(s)
 
 | file | line | detail |
 |---|---|---|
 | tools/audit/audit_ai.py | 45 | handler body discards the error |
 | tools/audit/audit_armor_upgrade_harm.py | 101 | handler body discards the error |
 | tools/audit/audit_balance_sheet.py | 136 | handler body discards the error |
+| tools/audit/audit_dead_warhead_fields.py | 76 | handler body discards the error |
 | tools/audit/audit_dune_rank_decoration.py | 15 | handler body discards the error |
 | tools/audit/audit_elite_gating.py | 16 | handler body discards the error |
 | tools/audit/audit_garrison_weapons.py | 61 | handler body discards the error |
@@ -57,6 +58,7 @@ Files scanned: **257**
 | tools/balance/extract_stats.py | 238 | handler body discards the error |
 | tools/balance/extract_stats.py | 948 | handler body discards the error |
 | tools/balance/formula.py | 390 | handler body discards the error |
+| tools/balance/gen_derived_stats.py | 95 | handler body discards the error |
 | tools/balance/measure_retrofit_gap.py | 134 | handler body discards the error |
 | tools/balance/plan_firepower_retirement.py | 81 | handler body discards the error |
 | tools/balance/propose_class_rebalance.py | 279 | handler body discards the error |
@@ -182,7 +184,7 @@ Files scanned: **257**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 12 finding(s)
+## E4 — 13 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -192,6 +194,7 @@ Files scanned: **257**
 | tools/balance/apply_balance.py | 271 | `subprocess.run()` without check= |
 | tools/balance/apply_balance.py | 273 | `subprocess.run()` without check= |
 | tools/balance/compensate_retrofit.py | 170 | `subprocess.run()` without check= |
+| tools/balance/gen_derived_stats.py | 60 | `subprocess.run()` without check= |
 | tools/balance/run_with_guard.py | 39 | `subprocess.Popen()` without check= |
 | tools/balance/splice_templates.py | 58 | `subprocess.run()` without check= |
 | tools/balance/verify_generator_sync.py | 56 | `subprocess.run()` without check= |
@@ -202,7 +205,7 @@ Files scanned: **257**
 
 ## FAIL
 
-- E2: 61 > baseline 30
+- E2: 63 > baseline 30
 - E3: 91 > baseline 90
-- E4: 12 > baseline 9
+- E4: 13 > baseline 9
 
