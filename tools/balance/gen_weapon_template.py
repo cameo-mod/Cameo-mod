@@ -1063,12 +1063,52 @@ def blend_direction(name, values):
     heavy, light = votes.count("heavy"), votes.count("light")
     if heavy != light:
         return "heavy" if heavy > light else "light"
-    lean = 0.0                       # sum of (heaviest rung - lightest rung) per ladder
+    # A TIE is settled by the measured lean -- but ACROSS THE WHOLE FAMILY, not per level.
+    #
+    # ⚠ Deciding it per level made `Cryo` (= Laser heavy + Prism light) lay itself out BOTH
+    # ways: its averaged profile leaned heavy at Light (None 68 / Superheavy 83) and Medium
+    # (68 / 88), then light at Heavy by a ONE-POINT margin (83 / 82). A single point flipped
+    # the entire level's ladder, so one family read anti-heavy at two levels and anti-light at
+    # the third -- the only family in the tree to do so. A family has ONE identity; the level
+    # decides how big it is, never which way it points.
+    cached = _BLEND_DIRECTION.get(name)
+    if cached is not None:
+        return cached
+    levels = BLEND_FAMILIES.get(name, ([], None, []))[2] or []
+    leans = []
+    for lvl in levels or [None]:
+        rows = values if lvl is None else _blend_rows_for(name, parents, lvl)
+        if not rows:
+            continue
+        leans.append(_lean_of(rows))
+    if not leans:
+        leans = [_lean_of(values)]
+    direction = "heavy" if sum(leans) > 0 else "light"
+    if levels:
+        _BLEND_DIRECTION[name] = direction        # one identity per family, computed once
+    return direction
+
+
+_BLEND_DIRECTION: dict[str, str] = {}
+
+
+def _lean_of(values):
+    """Sum of (heaviest rung - lightest rung) over every ladder. >0 means anti-heavy."""
+    lean = 0.0
     for ladder in LADDERS.values():
         rungs = [a for a in ladder if a in values and a not in DERIVED_ARMORS]
         if len(rungs) >= 2:
             lean += values[rungs[-1]] - values[rungs[0]]
-    return "heavy" if lean > 0 else "light"
+    return lean
+
+
+def _blend_rows_for(name, parents, level):
+    """The averaged parent profile at one level, for the family-wide lean vote."""
+    try:
+        main, _pct = blend_versus(parents)(level)
+    except Exception:
+        return None
+    return dict(main)
 
 
 def relay_ladders(values, direction):

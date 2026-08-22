@@ -54,7 +54,7 @@ import weapon_efficiency as we          # noqa: E402
 MEAN_OFFENDERS_BASELINE = 2      # Nuclear_Super + Sniper_Light, both HAND_TUNED
 SPREAD_OFFENDERS_BASELINE = 0    # CLEARED 2026-08-22 by fit_band_floor in gen_weapon_template
                                  # (Nuclear and Sniper excluded: their only level is HAND_TUNED)
-FLIP_BASELINE = 4                # 4 family/ladder pairs, all of them Cryo (INF/VEH/BLD/AIR)
+FLIP_BASELINE = 0                # CLEARED 2026-08-22 — the blend tiebreak is now family-wide
 
 # The generator skips these entirely, so they are not expected to obey the generated laws.
 HAND_TUNED = {("Nuclear", "Super"), ("Sniper", "Light")}

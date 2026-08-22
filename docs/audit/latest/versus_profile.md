@@ -11,14 +11,7 @@
 
 ## §12.0d DIRECTION WITHIN A LADDER - must not change between a family's levels
 
-⛔ The tilt may never reorder a ladder, yet these family/ladder pairs rise at
-   one level and fall at another. A near-FLAT profile has no stable direction,
-   so the fix is the family's spread, not the tilt.
+  OK - every family keeps one direction within every ladder, at every level.
 
-  Cryo           ladder INF  down / up
-  Cryo           ladder VEH  down / up
-  Cryo           ladder BLD  down / up
-  Cryo           ladder AIR  down / up
-
-WARN mean 2/2 (0 unexpected) · spread 0/0 · orientation flips 4/4
+WARN mean 2/2 (0 unexpected) · spread 0/0 · orientation flips 0/0
 Lower the ratchets as profiles are brought onto the laws; never raise them.
