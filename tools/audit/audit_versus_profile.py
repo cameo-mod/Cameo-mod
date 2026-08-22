@@ -52,7 +52,7 @@ import weapon_efficiency as we          # noqa: E402
 
 # Measured 2026-08-22 through the resolver. LOWER ONLY.
 MEAN_OFFENDERS_BASELINE = 2      # Nuclear_Super + Sniper_Light, both HAND_TUNED
-SPREAD_OFFENDERS_BASELINE = 2    # CannonAP 1.81x, Cryo 1.97x (both too FLAT)
+SPREAD_OFFENDERS_BASELINE = 0    # CLEARED 2026-08-22 by fit_band_floor in gen_weapon_template
                                  # (Nuclear and Sniper excluded: their only level is HAND_TUNED)
 FLIP_BASELINE = 4                # 4 family/ladder pairs, all of them Cryo (INF/VEH/BLD/AIR)
 

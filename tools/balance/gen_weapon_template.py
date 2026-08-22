@@ -798,6 +798,7 @@ def distinct_ints(rows):
 
 
 BAND_LOW = 2.0                      # DESIGN.md §12.0 rule 5 — the target band's flat end
+BAND_MARGIN = 1.03                  # headroom so integer rounding cannot fall back out of band
 DERIVED_ARMORS = ("Heroic", "Airborne")
 # Rows that live on a Versus node but are not armor classes, so they never enter a
 # profile statistic: the shield LAYER, the HAZMAT gate, Tesla's REFLECTOR.
@@ -975,6 +976,35 @@ def _powerlaw(vals, alpha):
 def _to_mean(vals, target):
     m = statistics.fmean(vals)
     return [v * target / m for v in vals] if m > 0 else list(vals)
+
+
+def fit_band_floor(rows):
+    """Expand a too-FLAT profile up to `BAND_LOW` about its geometric mean (DESIGN 12.0 rule 5).
+
+    The same floor already existed inside `finish_blend`, but that is the BLEND-only path and it
+    runs BEFORE `class_tilt` — the last thing that reshapes a profile. Two families slipped
+    through: `CannonAP` (a standard WEAPONS family, so `finish_blend` never ran on it) sat at
+    1.81x, and `Cryo` (a blend) was floored to exactly 2.00 and then nudged back to 1.97x by the
+    tilt. Applying it to EVERY family AFTER the tilt closes both holes.
+
+    Order-preserving (a power law about the geometric mean is monotonic), and safe to run before
+    `mean_normalise` because that rescale is multiplicative, so the ratio set here survives.
+    A profile that is flat BY DESIGN (`Sonic`, `Magic`) has hi/lo == 1.0 and is left alone.
+    """
+    live = [v for a, v in rows
+            if a not in NON_ARMOR_ROWS and a not in DERIVED_ARMORS and v > 0]
+    if len(live) < 2:
+        return rows
+    hi, lo = max(live), min(live)
+    if not (1.0 < hi / lo < BAND_LOW):
+        return rows
+    centre = statistics.geometric_mean(live)
+    # ⚠ Aim slightly ABOVE the floor. `mean_normalise` rounds to ints afterwards, and landing
+    # exactly on 2.00 let rounding drop Prism_Heavy to 1.98x and Laser_Light to 1.99x — still
+    # out of band, from a fix that had just put them in it.
+    alpha = math.log(BAND_LOW * BAND_MARGIN) / math.log(hi / lo)
+    return [(a, v if a in NON_ARMOR_ROWS else centre * (max(v, 1.0) / centre) ** alpha)
+            for a, v in rows]
 
 
 def mean_normalise(rows, target=MEAN_TARGET):
@@ -1299,6 +1329,10 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         # armors and would otherwise leave the mean off 100. Order-preserving by
         # construction (see class_tilt), so the two-level ordering law is untouched.
         main = class_tilt(main, level)
+        # DESIGN 12.0 rule 5 — the 2x band floor, applied to EVERY family and AFTER the tilt.
+        # See fit_band_floor: the blend-only copy inside finish_blend missed CannonAP entirely
+        # and let the tilt undo it for Cryo.
+        main = fit_band_floor(main)
         # W25 S1 — pin the profile's MEAN to 100 before anything reads it. Must run on
         # EVERY branch and BEFORE `shield_for`: Shield's structural term is
         # `sqrt((200+floor)(100+top))`, so it has to see the final ladder, not the
