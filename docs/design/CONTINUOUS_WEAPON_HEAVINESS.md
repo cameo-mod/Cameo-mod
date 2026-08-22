@@ -1,6 +1,7 @@
 # Continuous weapon heaviness — replace the level ladder with one scalar
 
 **Status:** design proposal, measured but not implemented. No yaml or C# changed yet.
+**⭐ READ §9 FIRST — the BELL CURVE model supersedes the additive offset of §2.**
 **Date:** 2026-08-22
 **Supersedes the plan to generate intermediate level templates** (`LightMedium`, `MediumHeavy`, …).
 
@@ -237,3 +238,115 @@ read from a summary. Guards added while investigating:
 override instead of addition, template placeholder instead of effective value — and each produced
 a confident, wrong number (393 violations; 40 broken ladders; 79 weapons queued for a "repair"
 that would have erased their tier identity). Assert against the resolved node, always.
+
+---
+
+## 9. ⭐ SUPERSEDING MODEL — the BELL CURVE (maintainer, 2026-08-22)
+
+**This replaces the additive offset of §2.** Maintainer proposal: instead of raising every Versus
+entry, place the armor classes on a light->heavy axis and multiply the profile by a bell curve
+whose peak moves with heaviness, then RENORMALISE so the profile keeps a constant mean.
+
+    curve(x) = LO + (1 - LO) * exp( -(x - mu)^2 / (2*sigma^2) )
+    Versus(armor, h) = base(armor) * curve( x(armor), mu(h) )   then renormalised
+
+Heaviness then **redistributes** what a weapon is good against instead of inflating everything.
+That is strictly better than the additive model, which flattened rock-paper-scissors as tier rose
+(§2): MissileAP fell from 16.0x to 2.5x differentiation.
+
+### 9.1 Verified: the mean really is invariant
+
+Renormalising to a constant **weighted** mean holds exactly. Measured across CannonAP, MissileAP,
+Laser, Tesla, Flame, Prism, CannonHE, Sonic, Magic: weighted mean identical at h=0, 1 and 2
+(`1.00x` at every step).
+
+### 9.2 ⛔ CRITICAL FLAW IN THE LITERAL PROPOSAL — the peak must be anchored to the FAMILY
+
+If `mu` is a function of tier ALONE (h=0 peaks at the lightest armor, h=2 at the heaviest), then a
+low-tier armor-piercing weapon peaks at LIGHT armor. Measured on the real profiles:
+
+    CannonAP  at h=0 ->  best target = Light   (Light 16.1 vs Superheavy 10.9)
+    MissileAP at h=0 ->  best target = Light   (Light 16.4 vs Superheavy 11.1)
+
+That is precisely what the maintainer said must NOT happen: *"even the lightest CannonAP weapon is
+still much better against heavy than light."*
+
+**Cause:** the bell's swing (2x at LO=0.5) is larger than most families' own gradient across the
+ladder. MissileAP runs Light 13 -> Superheavy 16, a gradient of only **1.23x**; a 2x bell trivially
+overpowers it. Families whose own gradient EXCEEDS the swing survive — `Laser` (5.33x), `Flame`
+(3.20x), `Prism` (3.00x), `Inferno` (3.00x) all keep their orientation.
+
+**Measured inversion counts, 42 families with a full ladder:**
+
+| model | swing | inverts |
+|---|--:|--:|
+| tier-only peak (as proposed) | 2.00x | **26 of 42** |
+| tier-only peak | 1.25x | 10 of 42 |
+| **family-anchored, shift +-0.25** | 2.00x | 9 of 42 |
+| **family-anchored, shift +-0.25** | **1.25x** | **6 of 42** |
+| family-anchored, shift +-0.30 | 1.18x | 7 of 42 |
+
+**FIX:** anchor the peak to the family's own centre of mass and let heaviness only SHIFT it:
+
+    mu(family, h) = centre_of_mass(base_profile) + SHIFT * (h - 1)     SHIFT ~ 0.25
+    LO = 0.80                                                          swing ~ 1.25x
+
+The family decides WHERE it is strong; heaviness nudges it heavier or lighter. This is exactly the
+maintainer's stated intent: *"a heavy AP weapon is even stronger against heavy and worse against
+light"* while a light one stays anti-heavy.
+
+The residual 6 inversions are the FLAT families (`Sonic` 1.00x, `Magic` 1.00x, `Cryo` 1.25x,
+`Railgun` 1.47x, `Waveforce` 1.44x, `Storm` 1.49x) which have almost no gradient to preserve. They
+are fixed by §9.4, not by tuning the bell.
+
+### 9.3 ⚠ TRADE-OFF — a constant mean means heaviness NO LONGER RAISES THE PRICE
+
+`HEAVINESS_RESEARCH.md` §1 established that K = SUM(share x versus x ...) reads the weighted mean
+Versus, so under the ADDITIVE model a Heavy weapon priced ~2x a Light one automatically.
+
+**Renormalising to a constant mean removes that entirely.** K becomes invariant in h, so heaviness
+has NO price effect at all.
+
+That is arguably correct and cleaner — it separates the two concerns:
+
+    Versus  = WHAT the weapon is good against   (RPS shape; heaviness lives here)
+    Damage  = HOW strong the weapon is          (magnitude; the balance pipeline lives here)
+
+but it is a real reversal of the earlier answer and the maintainer must choose knowingly. If
+late-game weapons should still cost more *because they are late-game*, that must now come from
+Damage or from the tier term in pricing, not from Versus.
+
+### 9.4 The spread law — 2x to 8x, target 4x
+
+Maintainer ruling: the ratio between a family's highest and lowest Versus must sit in **[2x, 8x]**
+with a target of **4x**. Measured today, over the full armor table, **every family violates it**:
+
+| family | spread | |
+|---|--:|---|
+| Chemical, Flame, Inferno, Tesla | 100.00x | TOO WIDE |
+| Laser | 75.00x | TOO WIDE |
+| BulletFire, CannonFire | 50.00x | TOO WIDE |
+| Bullet, CannonAP, CannonHE, MissileAP, Prism, ... | 17.00x | TOO WIDE |
+| MissileTesla | 12.50x | TOO WIDE |
+
+and on the vehicle ladder alone several are far too NARROW (`Sonic` 1.00x, `Magic` 1.00x, `Cryo`
+1.25x, `Railgun` 1.47x). Bringing every family into the band is a prerequisite for the bell,
+because a family with no gradient cannot survive any modulation.
+
+### 9.5 Open: the armor x-axis is a design decision
+
+The bell needs an x-coordinate per armor class. `None/Light/Medium/Heavy/Superheavy` is an obvious
+ladder, but `Helicopter`, `Heroic`, `Scout`, `Shield`, `Wood`, `Steel`, `Plate`, `Concrete` and the
+air classes are not on one axis. Their placement changes every result above and must be ruled on
+explicitly, not inferred.
+
+### 9.6 Revised build order
+
+1. Fix the 9 broken level ladders (unchanged blocker).
+2. **Bring every family into the 2x-8x spread band** (§9.4) — including authoring real profiles for
+   the flat families. This now BLOCKS the bell, not just follows it.
+3. Rule the armor x-axis (§9.5).
+4. Rule §9.3: should heaviness affect price at all?
+5. Implement the family-anchored bell in `AreaDamageWarhead`, inert at h=1.
+6. Verify no family inverts; verify the weighted mean is invariant.
+7. Collapse to one template per family; set `h` by the `HEAVINESS_RESEARCH.md` §3.3 rule.
