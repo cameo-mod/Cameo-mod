@@ -5803,21 +5803,23 @@
 	ExternalCondition@INVULNERABILITY:
 		Condition: invulnerability
 
-# W8 (2026-08-15) — the gatling spin-up, as a METER instead of a condition ladder.
+# W8 (2026-08-15) — the gatling spin-up, as a compact meter backed by the
+# existing condition ladder.
 # Replaces the three ^GatlingSpeedUp* templates, now deleted: 20 conditional
 # multipliers on the turret variant, 30 on the unit, 40 on the special unit, across
 # 43 actors — roughly 1300 trait objects — collapse into three traits per template
-# that move CONTINUOUSLY rather than in ten visible 5% steps.
+# whose value follows the ten condition stages.
 #
-# End-points reproduce the ladder EXACTLY, measured not assumed:
+# Rounded end-points preserve the previous ladder targets:
 #   reload  0.95^10 = 0.599 -> ReloadDelayTo 60   (lower = faster)
 #   range   1.02^10 = 1.219 -> RangeTo       122
 # The turret template has no speed term, so neither does this.
+# Intermediate stages retain the compact meter's linear interpolation; they are not
+# numerically identical to the old stack of compounded 95% / 102% modifier traits.
 #
-# The `gatling` condition is kept as the FILL TRIGGER rather than as ten thresholds:
-# GrantConditionOnAttack still counts shots, but only `>= 1` is read, so the elite
-# variant's faster stacking no longer needs a parallel ladder — it simply reaches the
-# trigger sooner and the meter does the rest.
+# The `gatling` condition count is the single source of truth for the meter. This keeps
+# normal/elite shot thresholds and staged decay while avoiding independent fill and
+# relaxation timers that can fight each other and make the range circle oscillate.
 ^GatlingSpinUpTurretBehavior:
 	PhysicalState@SpinUp:
 		Name: SpinUp
@@ -5825,15 +5827,10 @@
 		MaxValue: 100
 		RelaxedValue: 0
 		InitialValue: 0
-		RelaxationLinear: 10
-		RelaxationDelay: 30
-		RelaxationInterval: 1
-	ChangesPhysicalState@SpinUp:
+	SynchronizesPhysicalStateWithCondition@SpinUp:
+		Condition: gatling
 		PhysicalStateName: SpinUp
-		Amount: 10
-		Delay: 5
-		AffectedByModifiers: false
-		RequiresCondition: gatling >= 1
+		ValuePerInstance: 10
 	ModifiesCombatProportionalToPhysicalState@SpinUp:
 		PhysicalStateName: SpinUp
 		ReloadDelayFrom: 100
@@ -5872,6 +5869,10 @@
 	ModifiesCombatProportionalToPhysicalState@SpinUp:
 		SpeedFrom: 100
 		SpeedTo: 60
+		TurnSpeedFrom: 100
+		TurnSpeedTo: 60
+		TurretTurnSpeedFrom: 100
+		TurretTurnSpeedTo: 60
 
 # Special-unit variant: adds the DEFENSIVE term. DamageMultiplier < 100 means less
 # damage TAKEN, so a spun-up gatling is also harder to kill (0.95^10 = 0.599).
