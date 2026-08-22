@@ -193,6 +193,10 @@ That catches exactly the drift that shipped twice (`Inferno` 0.57 (Flame×Prism)
 | MissileQuantum | 85 | 52 | 79 | 64 | 70 | shaped 0.43, energy 0.26, kinetic 0.14, thermo 0.12, blast 0.06 |
 | MissileTesla | 79 | 58 | 83 | 60 | 70 | shaped 0.43, energy 0.38, thermo 0.13, blast 0.08 |
 | MissileThermobaric | 68 | 91 | 47 | 74 | 70 | blast 0.71, thermo 0.17, shaped 0.13 |
+| BulletFire | 69 | 59 | 68 | 83 | 70 | kinetic 0.45, thermo 0.42, blast 0.12 |
+| BulletHE | 81 | 72 | 55 | 71 | 70 | blast 0.47, kinetic 0.45, thermo 0.07 |
+| BulletThermobaric | 78 | 69 | 59 | 74 | 70 | kinetic 0.45, blast 0.38, thermo 0.17 |
+| BulletTesla | 80 | 58 | 83 | 59 | 70 | kinetic 0.45, energy 0.38, thermo 0.10, blast 0.08 |
 
 **`ARMOR` is 70 for every family BY DESIGN** â€” it is the generic hedge that *"receives 100% damage
 from everything"*, so it must be flat. Varying it would contradict its purpose, and

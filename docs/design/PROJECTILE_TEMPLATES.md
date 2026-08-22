@@ -68,6 +68,25 @@ So deriving Speed is a real change: most cannons get a *faster* shell (the bulk 
 the longest-ranged get 2.8×. Deriving Inaccuracy is a large accuracy buff, and E6 prices
 inaccuracy at zero, so it would be free until E6 lands. Both go through the pipeline.
 
+> ### ⛔ IT WAS NEVER RUNNING — fixed 2026-08-22
+>
+> `ScaledBullet` has carried `InaccuracyPercentage: 1` and `ProjectileSpeedPercentage: 10` on
+> `^Projectile_Shell` for weeks, and **neither ever reached a single weapon.** The reason is in
+> `ScaledBullet.cs`'s own comment: it derives a value **only when the field is still at
+> `BulletInfo`'s default**, because FieldLoader cannot report which keys the yaml actually
+> contained — so *an explicit yaml value always wins*. `^Projectile_Shell` also wrote
+> `Speed: 500`, and `^Projectile_Shell_{Light,Medium,Heavy}` each wrote
+> `Inaccuracy: 150/300/450`. Every one of those literals switched the derivation back off, for
+> all **145** shell weapons.
+>
+> The literals are deleted. `Inaccuracy = 1% of Range` and `Speed = 10% of Range` now actually
+> reach the engine, which is what the maintainer asked for again on 2026-08-22: *"for tank shells
+> those should scale their inaccuracy with their maximum range."*
+>
+> **The general lesson:** a "derive it unless overridden" default is invisible when something
+> upstream always overrides it. Assert the derived value on a real weapon, never just that the
+> percentage field is present.
+
 ⭐ **The measurement also settles the collapse question.** The Light/Medium/Heavy assignment does
 not correlate with range at all — `120mm_cobra` sits on `Shell_Light` at Range 7640 while `105mm`
 sits on `Shell_Medium` at 5469. The three templates differ ONLY in a hand-written `Inaccuracy`, and
