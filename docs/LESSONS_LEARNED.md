@@ -75,6 +75,49 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 
 ---
 
+## ⛔ NEVER HAND-PARSE YAML — a sibling node silently overwrote every Versus number (2026-08-22)
+
+A whole day of weapon-profile analysis produced confident, internally consistent, WRONG numbers,
+because the reader was a bespoke line-scanner instead of the project's resolver.
+
+The scanner opened a dict on `Versus:` and then kept absorbing any `Key: <int>` line. It never
+CLOSED the block. The AreaDamage fold had since added `PercentageVersus:` INSIDE the same warhead
+node, so the twin's rank ladder overwrote the real profile row by row:
+
+```
+Warhead@Bullet_Light: AreaDamage
+    Versus:            None: 200 ... Superheavy 48   <- the real profile, mean 100
+    PercentageVersus:  None: 16  ... Superheavy  1   <- what got read, mean 8.5
+```
+
+**What it cost.** Reported "0 of 125 profiles obey the MEAN-100 law" (truth: **123 of 125**),
+"every family violates the 2x-8x spread band" (truth: **39 of 42 in band, median 4.17x**),
+an additive `+4/+5` level offset that was really the rank ladder stepping 1/5/10, "26 of 42
+families invert", and "a Heavy weapon self-prices at ~2x a Light one" (truth: the Heavy/Light
+weighted-mean Versus ratio is **1.00x** — the level does not price through Versus at all, exactly
+as §12.0a intends). Two design documents were written and committed on those numbers.
+
+**The rules:**
+
+1. **Read through `miniyaml.Ruleset.resolve_weapon` / `.resolve`**, and pull Versus with
+   `weapon_efficiency.versus_of(node)`. They return structured nodes and cannot confuse siblings.
+2. If a hand parser is genuinely unavoidable, **CLOSE every block on indentation** — the moment
+   indentation returns to the opening key's level or shallower, the block is over.
+3. **A near-miss name is the danger**: `PercentageVersus` does not `startswith("Versus:")`, so the
+   opening guard looked correct. The bug was the missing CLOSE, not the missing open.
+4. **Sanity-check against a stated law before believing a result.** "0 of 125 conform to a binding
+   law that the generator implements and `verify_generator_sync` reports 0 drift on" is not a
+   finding, it is a contradiction — and the contradiction was visible immediately.
+
+Guarded by `tools/audit/audit_versus_profile.py`, which reads through the resolver on purpose.
+
+**And the deeper miss:** `docs/DESIGN.md` is required reading #4 in CLAUDE.md ("the binding design
+contract ... Read it before touching any yaml"), and it already contained §12.0a (MEAN-100),
+§12.0c (the Shield ladder) and §12.0d (the class tilt). Days of design work re-derived rulings
+that were already made and already shipped. **Before designing anything, grep DESIGN.md for the
+concept.** A design question that feels novel usually is not.
+
+
 ## Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)
 
 All five were **invisible to every gate we run** — valid yaml, values inside the window, the
