@@ -47,7 +47,7 @@ INSTANT_PROJECTILES = {"InstantHit", "LaserZap", "Railgun", "InstantHitLine", "I
                        # decoration. Named explicitly rather than relying on "has no Speed",
                        # because a weapon that inherits a SECOND projectile template can drag a
                        # foreign `Speed` in and would then be priced as a slow shell.
-                       "InstantTracer"}
+                       "InstantHitWithFakeBullets"}
 
 
 def parse_wdist(s) -> int:

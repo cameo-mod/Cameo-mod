@@ -42,14 +42,14 @@
        {
         "damage": "16000",
         "falloff": "100, 0",
-        "spread": "100",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "100, 0",
-        "spread": "50",
+        "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -112,14 +112,14 @@
        {
         "damage": "16000",
         "falloff": "100, 0",
-        "spread": "100",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "8",
         "falloff": "100, 0",
-        "spread": "50",
+        "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -276,14 +276,14 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -446,14 +446,14 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -617,14 +617,14 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "100",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "100, 0",
-        "spread": "50",
+        "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -736,14 +736,14 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "100",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
         "falloff": "100, 0",
-        "spread": "50",
+        "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -1817,14 +1817,14 @@
        {
         "damage": "10000",
         "falloff": "100, 0",
-        "spread": "100",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "5",
         "falloff": "100, 0",
-        "spread": "50",
+        "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -1851,14 +1851,14 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 0",
+        "falloff": "100, 70, 30, 0",
         "spread": "400",
         "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "1",
-        "falloff": "100, 0",
+        "falloff": "100, 70, 30, 0",
         "spread": "200",
         "tag": "MissileAA_Heavy_Percentage",
         "type": "AreaDamagePercentage"
@@ -2009,14 +2009,14 @@
        {
         "damage": "32000",
         "falloff": "100, 0",
-        "spread": "100",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "16",
         "falloff": "100, 0",
-        "spread": "50",
+        "spread": "32",
         "tag": "Laser_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },
@@ -2878,14 +2878,14 @@
        {
         "damage": "24000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "12",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2912,14 +2912,14 @@
        {
         "damage": "24000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "12",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2946,14 +2946,14 @@
        {
         "damage": "48000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "24",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -2980,14 +2980,14 @@
        {
         "damage": "48000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "24",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3913,14 +3913,14 @@
        {
         "damage": "30000",
         "falloff": "100, 0",
-        "spread": "100",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
         "falloff": "100, 0",
-        "spread": "50",
+        "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3947,14 +3947,14 @@
        {
         "damage": "30000",
         "falloff": "100, 0",
-        "spread": "100",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "15",
         "falloff": "100, 0",
-        "spread": "50",
+        "spread": "32",
         "tag": "MissileAP_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -5444,8 +5444,8 @@
        },
        {
         "damage": "2000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "40",
         "tag": "SniperWeapon",
         "type": "SpreadDamage"
        },
@@ -5623,15 +5623,15 @@
       "damage_warheads": [
        {
         "damage": "40000",
-        "falloff": "100, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "20",
-        "falloff": "100, 0",
-        "spread": "50",
+        "falloff": "100, 55, 0",
+        "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },
@@ -6324,28 +6324,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -6377,28 +6377,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -6429,28 +6429,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -6480,28 +6480,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -7290,8 +7290,8 @@
        },
        {
         "damage": "2000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "40",
         "tag": "SniperWeapon",
         "type": "SpreadDamage"
        },
@@ -7469,15 +7469,15 @@
       "damage_warheads": [
        {
         "damage": "40000",
-        "falloff": "100, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "20",
-        "falloff": "100, 0",
-        "spread": "50",
+        "falloff": "100, 55, 0",
+        "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },
@@ -8170,28 +8170,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -8223,28 +8223,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -8275,28 +8275,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -8326,28 +8326,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -9138,8 +9138,8 @@
        },
        {
         "damage": "2000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "40",
         "tag": "SniperWeapon",
         "type": "SpreadDamage"
        },
@@ -9317,15 +9317,15 @@
       "damage_warheads": [
        {
         "damage": "40000",
-        "falloff": "100, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "20",
-        "falloff": "100, 0",
-        "spread": "50",
+        "falloff": "100, 55, 0",
+        "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },
@@ -10018,28 +10018,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -10071,28 +10071,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -10123,28 +10123,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -10174,28 +10174,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -10986,8 +10986,8 @@
        },
        {
         "damage": "2000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "40",
         "tag": "SniperWeapon",
         "type": "SpreadDamage"
        },
@@ -11165,15 +11165,15 @@
       "damage_warheads": [
        {
         "damage": "40000",
-        "falloff": "100, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "20",
-        "falloff": "100, 0",
-        "spread": "50",
+        "falloff": "100, 55, 0",
+        "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },
@@ -11866,28 +11866,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -11919,28 +11919,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -11971,28 +11971,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -12022,28 +12022,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -12833,8 +12833,8 @@
        },
        {
         "damage": "2000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "40",
         "tag": "SniperWeapon",
         "type": "SpreadDamage"
        },
@@ -13012,15 +13012,15 @@
       "damage_warheads": [
        {
         "damage": "40000",
-        "falloff": "100, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "20",
-        "falloff": "100, 0",
-        "spread": "50",
+        "falloff": "100, 55, 0",
+        "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },
@@ -13713,28 +13713,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -13766,28 +13766,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -13818,28 +13818,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -13869,28 +13869,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -14680,8 +14680,8 @@
        },
        {
         "damage": "2000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
+        "falloff": "100, 0",
+        "spread": "40",
         "tag": "SniperWeapon",
         "type": "SpreadDamage"
        },
@@ -14859,15 +14859,15 @@
       "damage_warheads": [
        {
         "damage": "40000",
-        "falloff": "100, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "20",
-        "falloff": "100, 0",
-        "spread": "50",
+        "falloff": "100, 55, 0",
+        "spread": "46",
         "tag": "Tesla_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },
@@ -15560,28 +15560,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -15613,28 +15613,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -15665,28 +15665,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -15716,28 +15716,28 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "59",
         "tag": "Arrow_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "29",
         "tag": "Arrow_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "67",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "3",
         "falloff": "100, 0",
-        "spread": "33",
+        "spread": "21",
         "tag": "MissileAP_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -16718,14 +16718,14 @@
        {
         "damage": "20000",
         "falloff": "100, 0",
-        "spread": "100",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "100, 0",
-        "spread": "50",
+        "spread": "32",
         "tag": "Laser_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },
@@ -16792,14 +16792,14 @@
        {
         "damage": "20000",
         "falloff": "100, 0",
-        "spread": "100",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
        },
        {
         "damage": "10",
         "falloff": "100, 0",
-        "spread": "50",
+        "spread": "32",
         "tag": "Laser_Heavy_Percentage",
         "type": "AreaDamagePercentage"
        },

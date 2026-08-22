@@ -1318,8 +1318,14 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
         main = [r for r in main if r[0] not in PLATING_CYCLE]
         main = plating_rows(name) + main
         tag = f"{name}_{level}"
-        # Energy families are thinned to near single-target; the chip/utility pays for the low spread.
-        main_spread = ENERGY_THIN_SPREAD_LEVEL.get((name, level), ENERGY_THIN_SPREAD.get(name, at(spreads, li)))
+        # ⚠ `spreads` (the PHYSICS_SHAPES value) WINS. ENERGY_THIN_SPREAD is the older
+        # "thin the energy mains to near single-target" rule and it is now only a FALLBACK for a
+        # family with no physics shape. It used to win outright, which pinned Tesla, Laser,
+        # Railgun, Prism, Inferno and Cryo to a flat Spread 100 at every level and made Laser
+        # collide with Railgun and with Bullet — the physics table was computed and then thrown
+        # away for exactly the six families whose identity is "a thin beam".
+        main_spread = at(spreads, li) if spreads else ENERGY_THIN_SPREAD_LEVEL.get(
+            (name, level), ENERGY_THIN_SPREAD.get(name, 400))
         invalid = FAMILY_INVALID_TARGETS.get(name)
         inv_weapon = [f"\tInvalidTargets: {invalid}"] if invalid else []
         inv_warhead = [f"\t\tInvalidTargets: {invalid}"] if invalid else []
@@ -1451,24 +1457,34 @@ FAMILY_FALLOFFS = {
 # radius = the MEDIUM radius in WDist (1024 = one cell); Spread = radius / (len(Falloff) - 1),
 # because AreaDamageWarhead.cs:143 lays the falloff points at 0, S, 2S ... (N-1)S.
 PHYSICS_SHAPES = {
-    # -- kinetic point impact: the energy goes INTO the target, there is no blast ------------
-    "Bullet":     (100,  "100, 0"),
-    "CannonAP":   (120,  "100, 0"),
-    "MissileAP":  (100,  "100, 0"),
-    "MissileAA":  (150,  "100, 0"),
-    "Arrow":      (100,  "100, 0"),
-    "Sniper":     (40,   "100, 0"),
-    "Melee":      (0,    "100, 0"),      # adjacent contact only
-    # -- directed energy: a beam deposits along a line; "spread" is beam width ---------------
-    "Laser":      (80,   "100, 0"),
-    "Prism":      (150,  "100, 0"),
-    "Railgun":    (80,   "100, 0"),
-    "Tesla":      (120,  "100, 0"),
-    "Magic":      (120,  "100, 0"),      # non-physical %HP, no splash
-    # -- overpressure: convex, ~1/r near-field --------------------------------------------
+    # -- kinetic point impact ---------------------------------------------------------------
+    # ⚠ These are NOT all "100, 0 at whatever radius". Maintainer 2026-08-22: *"every family
+    # needs to be unique as fuck"*. A pinpoint weapon still has a real lateral energy spread and
+    # the ladder below is that spread, smallest first — a coherent beam deposits on a spot, a
+    # shaped-charge jet is a narrow cone, a broadhead is physically wide, a proximity fuze never
+    # touches the target at all. No two families share BOTH a radius and a curve.
+    "Sniper":     (40,   "100, 0"),          # one aimed round, tighter than a burst
+    "Laser":      (48,   "100, 0"),          # coherent light: no lateral spread whatsoever
+    "MissileAP":  (64,   "100, 0"),          # shaped-charge jet — narrow, deep, all energy forward
+    "Railgun":    (72,   "100, 0"),          # hypervelocity slug + plasma sheath on impact
+    "Arrow":      (88,   "100, 0"),          # a broadhead is physically wide but slow
+    "Magic":      (96,   "100, 0"),          # non-physical %HP, no blast at all
+    "Bullet":     (100,  "100, 0"),          # the reference point impact
+    "CannonAP":   (120,  "100, 0"),          # big penetrator: spall sprays behind the plate
+    "Melee":      (0,    "100, 0"),          # adjacent contact only
+    # -- pinpoint WITH a real secondary spread: these earn their own curve -------------------
+    "Prism":      (150,  "100, 40, 0"),      # beam plus a refraction scatter halo
+    "Tesla":      (140,  "100, 55, 0"),      # the arc jumps to nearby conductors
+    "MissileAA":  (180,  "100, 70, 30, 0"),  # proximity fuze: never hits, detonates NEAR
+    # -- overpressure: convex, ~1/r near-field ----------------------------------------------
     "CannonHE":   (900,  "100, 50, 20, 0"),
     "MissileHE":  (450,  "100, 45, 15, 0"),
-    "Flak":       (500,  "100, 55, 25, 8, 0"),
+    # Airburst fragmentation (maintainer: *"flak could get a slightly different shape that makes
+    # it more like explosion or shrapnel"*). A shell bursting in the air throws fragments outward,
+    # so it is NOT the plain convex blast of an HE shell: a sharp drop off the detonation point
+    # and then a long thin fragment tail. Smaller and sharper-cored than Concussion, which is the
+    # same physics at ground level and twice the size.
+    "Flak":       (550,  "100, 58, 32, 16, 6, 0"),
     "Demolition": (1400, "100, 45, 18, 6, 0"),        # concentrated charge, ~1/r^3, punchy centre
     # -- fragmentation: frags fly OUTWARD, so the field is broad with a long thin tail -------
     "Concussion": (2100, "100, 72, 50, 32, 18, 8, 0"),
@@ -1477,7 +1493,6 @@ PHYSICS_SHAPES = {
     "Chemical":   (1100, "100, 88, 72, 50, 0"),
     # -- wave: sound pressure falls ~1/r, near-linear ----------------------------------------
     "Sonic":      (1600, "100, 75, 50, 25, 0"),
-    # -- families the plan's table does not name, derived on the same three axes -------------
     # An electrical STORM is many discrete arcs over an area: broad reach, but each arc is a
     # point, so the field thins quickly rather than holding a plateau like fire.
     "Storm":      (1600, "100, 70, 45, 25, 10, 0"),
@@ -1486,6 +1501,7 @@ PHYSICS_SHAPES = {
     # their nuclear half and come out the size of a plain HE shell.
     "Nuclear":    (10000, "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0"),
 }
+
 
 # Radius by level, relative to the family's MEDIUM radius. Preserves the ratios of the old
 # global (400, 600, 800, 1000) tuple — 0.67 / 1 / 1.33 / 1.67 — so the level ladder is unchanged

@@ -780,6 +780,10 @@ DiabloCannon:
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
+	# ^Projectile_Bullet_* would take the type and orphan the other one's
+	# guidance fields. Keeps today's resolved type verbatim.
+	Projectile: Bullet
 
 DiabloCannon_elite:
 	Inherits: DiabloCannon
@@ -787,6 +791,10 @@ DiabloCannon_elite:
 	Range: 7300
 	Burst: 2
 	BurstDelays: 3
+	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
+	# ^Projectile_Bullet_* would take the type and orphan the other one's
+	# guidance fields. Keeps today's resolved type verbatim.
+	Projectile: Bullet
 
 DiabloCannon_AA:
 	Inherits: DiabloCannon
@@ -795,6 +803,10 @@ DiabloCannon_AA:
 	Range: 9450
 	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
+	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
+	# ^Projectile_Bullet_* would take the type and orphan the other one's
+	# guidance fields. Keeps today's resolved type verbatim.
+	Projectile: Bullet
 
 DiabloCannonAAE_AA:
 	Inherits: DiabloCannon_AA
@@ -802,6 +814,10 @@ DiabloCannonAAE_AA:
 	Range: 10450
 	Burst: 2
 	BurstDelays: 3
+	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
+	# ^Projectile_Bullet_* would take the type and orphan the other one's
+	# guidance fields. Keeps today's resolved type verbatim.
+	Projectile: Bullet
 
 RA2MortarBike:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -1301,6 +1317,10 @@ RA2APCFlakCannon:
 	Warhead@Flak_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
+	# ^Projectile_Bullet_* would take the type and orphan the other one's
+	# guidance fields. Keeps today's resolved type verbatim.
+	Projectile: Bullet
 
 RA2APCFlakCannon_elite:
 	Inherits: RA2APCFlakCannon
@@ -1308,6 +1328,10 @@ RA2APCFlakCannon_elite:
 	Range: 6740
 	Burst: 2
 	BurstDelays: 3
+	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
+	# ^Projectile_Bullet_* would take the type and orphan the other one's
+	# guidance fields. Keeps today's resolved type verbatim.
+	Projectile: Bullet
 
 RA2APCFlakCannonAA:
 	Inherits: RA2APCFlakCannon
@@ -1316,6 +1340,10 @@ RA2APCFlakCannonAA:
 	Range: 8610
 	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
+	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
+	# ^Projectile_Bullet_* would take the type and orphan the other one's
+	# guidance fields. Keeps today's resolved type verbatim.
+	Projectile: Bullet
 
 RA2APCFlakCannonAA_elite:
 	Inherits: RA2APCFlakCannonAA
@@ -1323,6 +1351,10 @@ RA2APCFlakCannonAA_elite:
 	Range: 9610
 	Burst: 2
 	BurstDelays: 3
+	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
+	# ^Projectile_Bullet_* would take the type and orphan the other one's
+	# guidance fields. Keeps today's resolved type verbatim.
+	Projectile: Bullet
 
 RA2APCMachineGun:
 	Inherits: ^RA2SmallArms
