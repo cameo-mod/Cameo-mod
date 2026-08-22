@@ -1089,6 +1089,68 @@ Laws:
    `audit_plating_exclusivity.py`. Carrying two plating TRAITS is normal and correct; both
    CONDITIONS being true is not.
 
+### 12.0g DEPLOYING ADDS A SECOND ARMOUR (maintainer 2026-08-22) — binding
+
+> *"We don't want damage multipliers anymore because they are bad for exactly the reason
+> described. Instead deploying should change the armor type … it should turn into the Steel
+> armor type because that's what defenses use … But the problem with this is: it still needs
+> the underlying armor intact. So give it the secondary armor type steel and keep the primary
+> armor type, then use that multi armor scaling."*
+
+A unit that deploys becomes a static defence, and **Steel is what defences wear**. So deploying
+grants `Armor@deployed: Steel` **in addition to** the class armour — never instead of it, and
+never as a `DamageMultiplier`.
+
+```
+Armor:                                  # class armour — NO deploy gate
+    Type: Heavy
+    RequiresCondition: !shielded
+Armor@deployed:
+    Type: Steel
+    RequiresCondition: !shielded && deployed
+```
+
+Both traits are enabled together, and `AreaDamageWarhead.MultiArmorCombination` (default
+`Average`) makes the two rows meet in the middle. This is the same mechanism as the CABAL
+cyborg dual-armour rule, and it is why the class armour must NOT be gated on `undeployed`:
+that makes Steel a REPLACEMENT and throws the unit's own class away.
+
+**Why not a `DamageMultiplier`.** R1 abolishes them generally, and the tick tank is the worked
+example of the harm: `Modifier: 50` on `deployed` was the strongest deploy bonus in the tree,
+it MULTIPLIED with the whole veterancy ladder (deployed + rank-elite = ×0.30, a realistic stack
+reached ~613,000 effective HP on an 800-credit tank), and `extract_stats` could not see it at
+all — it only reads a `DamageMultiplier` gated on the SHIELD-up condition, so the survivability
+was free.
+
+**Measured effect** — average(class, Steel) / class, over all 137 generated profiles:
+
+| class armour | median | toughest | softest |
+|---|--:|--:|--:|
+| None | 0.95× | 0.60× | 1.95× |
+| Light | 0.94× | 0.69× | 1.58× |
+| Medium | 0.98× | 0.67× | 1.70× |
+| Heavy | 1.00× | 0.66× | 1.92× |
+| Superheavy | 1.01× | 0.64× | 2.12× |
+
+Near-neutral in the median, so it is a RESHAPE and not a buff: anti-armour fire gets weaker
+against a deployed unit, siege and fire get stronger. Deploy to hold a line against tanks; do
+not deploy under artillery.
+
+⚠ **Scope is the units that FIRE from a deployed mode — 20 of the 74 that carry
+`GrantConditionOnDeploy`.** The rest detonate (the ~20 civilian car bombs), transform, or
+burrow; "becomes a static defence" is not true of them and Steel would be meaningless.
+
+⚠ **Air units are excluded.** Averaging Steel into `Fighter` (1.23× median) or `Helicopter`
+(1.21×) makes them SOFTER overall, and a ground-defence armour on an aircraft is incoherent
+anyway. Neither air deployer fires from its deployed mode, so the exclusion costs nothing.
+
+⚠ **Only warheads routing through `AreaDamage` average — 62.9% of the tree.** The remaining
+37.1% still declare inline `Versus` on `SpreadDamage`/`TargetDamage` and MULTIPLY, and under
+multiplication the class row cancels out entirely (the ratio collapses to `Steel/100`), so the
+"meet in the middle" does not happen for them. Those weapons see a flatter effect than designed
+until item A5 retires them onto `^Warhead_*` templates. This is a reason to finish A5, not a
+reason to avoid the rule.
+
 ### 12.0f PRICED SURVIVABILITY (E1, 2026-08-16; SHIPPED 2026-08-17)
 
 ```
