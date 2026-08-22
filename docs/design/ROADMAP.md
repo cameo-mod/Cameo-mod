@@ -41,24 +41,36 @@ pure transform (`Versus = base + offset(h)`, offset 0/+4/+9, plating 0, Shield 2
 1 : 1.5 : 2) on 39 of 40 families. Collapses ~600 future templates to ~100 and fixes the 33
 between-tier weapons that currently out-damage the tier ABOVE them.
 
-⭐ **SUPERSEDED BY THE BELL CURVE MODEL — read `CONTINUOUS_WEAPON_HEAVINESS.md` §9.**
-Heaviness now REDISTRIBUTES the Versus profile (family-anchored bell, renormalised to a constant
-mean) instead of adding an offset. Two new blockers ahead of the C#: bring every family into the
-2x-8x spread band (all 42 violate it today), and rule whether heaviness should affect PRICE at
-all (a constant mean makes K invariant, reversing the earlier self-pricing finding).
+⛔ **CORRECTED 2026-08-22 — MOST OF THIS WAS ALREADY LAW AND ALREADY SHIPPED.**
 
-**Ordered steps** (full detail in the doc §9.6):
+`DESIGN.md` §12.0a (THE MEAN-100 LAW), §12.0c (THE SHIELD LADDER) and §12.0d (THE CLASS TILT)
+already rule this design, and all three are live in `gen_weapon_template.py` (`mean_normalise`,
+`class_tilt`, `TILT_RATIO 1.5`, `MEAN_TARGET 100`). §12.0d IS the bell curve, and it already
+solves inversion: the tilt is applied to the VALUES and each armor is then given back the RANK it
+held, so it *"can never invert"*.
 
-1. ⛔ **BLOCKER — fix the 9 broken level ladders.** `audit_level_ladder.py` ratchet 9: 6 families
-   INVERTED (MissileAP falls 20000 -> 12000 -> 11000; Tesla Super is half its Heavy), 3 FLAT.
-   Interpolating between equal endpoints yields nothing, between inverted ones nonsense.
-   **Balance restat → pipeline + `apply_balance --confirm` (maintainer order required).**
-2. Maintainer rulings: Super is inconsistent (Tesla +5 vs Magic +15); calibrate `offset(h)`.
-3. Add `Heaviness` to `AreaDamageWarhead`, inert at 0. Rebuild + boot-gate.
-4. Verify the transform reproduces all 126 existing templates exactly.
-5. Collapse level templates to one per family; set `Heaviness` from `tier_multiplier`.
-6. Re-point the 102 mix weapons; lower the `three_way_split` (1190) and `tier_weapon_class` (218)
-   ratchets.
+The blockers previously listed here were measured with a broken hand parser that read
+`PercentageVersus` instead of `Versus` — see the correction banner in
+`CONTINUOUS_WEAPON_HEAVINESS.md`. Re-measured through the resolver:
+
+| previously claimed | truth |
+|---|---|
+| 0 of 125 obey MEAN-100 | **123 of 125** (the 2 are HAND_TUNED) |
+| every family breaks the 2x-8x band | **39 of 42 in band**, median 4.17x vs a 4x target |
+| a Heavy weapon self-prices at ~2x a Light one | Heavy/Light weighted-mean Versus is **1.00x** — tier does NOT price through Versus, exactly as §12.0a intends |
+
+**What is genuinely still open:**
+
+1. Make the class tilt **CONTINUOUS** — driven by `h` from `tier_chain` (already computed and
+   stored per actor) instead of four discrete levels. This is the whole remaining idea.
+2. Collapse the level templates to **one per family + a per-weapon `h`**.
+3. ⛔ **4 families change orientation between their levels**, which §12.0d says cannot happen:
+   `CannonNuke`, `Cryo`, `MissileHE`, `Storm`. All have a weak gradient. Guarded by
+   `audit_versus_profile.py` (ratchet 4).
+4. Two spread outliers, both too FLAT: `CannonAP` 1.81x, `Cryo` 1.97x (ratchet 2).
+5. The 9 broken DAMAGE ladders (`audit_level_ladder.py`, ratchet 9) — unaffected by the parser
+   bug, since that audit reads `Damage` through the resolver. Still a balance restat needing
+   `apply_balance --confirm`.
 
 ## ▶ ACTIVE — CAMEO CONTENT INSTALLER
 
