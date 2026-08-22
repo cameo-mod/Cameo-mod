@@ -1932,6 +1932,39 @@ BLEND_FAMILIES = {
     "MissileQuantum": (["Railgun", "Laser", "Tesla"] + ["MissileAP"] * 3, {"Temperature": _m(0.125)}, L3),
     "MissileThermobaric": (["Demolition", "Concussion", "Flame"] + ["MissileHE"] * 3, {"Temperature": _m(0.17)}, L3),
     "Cryo": (["Laser", "Prism"], {}, L3),
+    # ⭐ CRYO DELIVERY BLENDS (maintainer 2026-08-22): *"we do need to create those new like
+    # CannonCryo, BulletCryo, MissileCryo"* plus *"a cryo explosion which is demolition x cryo
+    # for the heavy bombs that carry the cryo load"*. They exist because a cryo weapon whose
+    # OTHER guns do not freeze is diluted at the ACTOR level (audit_meter_dilution) — the fix is
+    # to give every gun on a cryo unit a cryo family, not to hand-crank one weapon's Scale.
+    #
+    # ⭐ THE DELIVERY HALF IS AP AND HE TOGETHER, by ruling: *"use an in between blend of HE and
+    # AP so it fits with both versions"*. Cryo does not fit the documented FIRE→HE / CHEM→AP
+    # split — freezing both embrittles armour AND controls soft targets — and the weapons prove
+    # it: `SheridanCannon` is already `CannonAP_Light + CannonHE_Medium`, so either pure choice
+    # would have changed its role. Averaging both cannon halves keeps it.
+    #
+    # Cryo is itself a blend, so it is expanded to its primitives (Laser + Prism) and the
+    # delivery side is listed twice — the repetition-as-weight convention PhotonCannon and
+    # BulletThermobaric already use. 2 Cryo primitives : 2 delivery = exactly 50/50, with the
+    # delivery half split 25/25 between AP and HE.
+    #
+    # Meter: the per-parent-average rule over the TOP-LEVEL halves, which is how MissileQuantum
+    # (Quantum 0.25 → 0.125) and MissileThermobaric (Thermobaric 1/3 → 0.17) are derived —
+    # Cryo's -2.00 over 2 halves = -1.00. NOT over the four primitives: Laser's meter is
+    # POSITIVE (it heats), so deriving from the expanded list would flip the sign of a cryo
+    # weapon. The explicit dict is what keeps that from happening.
+    "BulletCryo":     (["Laser", "Prism", "Bullet", "Bullet"],
+                       {"Temperature": _m(-1.00)}, L3),
+    "CannonCryo":     (["Laser", "Prism", "CannonAP", "CannonHE"],
+                       {"Temperature": _m(-1.00)}, L3),
+    "MissileCryo":    (["Laser", "Prism", "MissileAP", "MissileHE"],
+                       {"Temperature": _m(-1.00)}, L3),
+    # Demolition twice for the same 50/50 — the cryo bomb / cryo artillery shell.
+    # `RapierBombsCryo` is already a pure `Demolition_Heavy`, and `155mmBastionCryo` /
+    # `155mmCryo` are the artillery shells the ruling names.
+    "DemolitionCryo": (["Laser", "Prism", "Demolition", "Demolition"],
+                       {"Temperature": _m(-1.00)}, L3),
 }
 # Fixed emission order for a blend (it has no single light/heavy direction).
 BLEND_ARMOR_ORDER = ["None", "Flak", "Plate", "Heroic", "Scout", "Light", "Medium", "Heavy",

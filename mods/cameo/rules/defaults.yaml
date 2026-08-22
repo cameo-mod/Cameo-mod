@@ -5304,9 +5304,13 @@
 		RelaxationInterval: 1
 		RelaxationDelay: 25
 		InitialValue: 0
+	# Pink, matching `WithPhysicalStateColoredOverlay`'s MaxColor (FF88FF) rather than the old
+	# `TimedConditionBar` magenta, so the bar and the tint read as one effect. Same shape as the
+	# Temperature and Corrosion bars; no deadzone condition is needed because Magnetism is
+	# UNSIGNED and relaxes to 0, so `DisplayWhenRelaxed: false` already hides it at rest.
 	PhysicalStateBar@MagnetismBar:
 		PhysicalStateName: Magnetism
-		PositiveColor: FF55FF
+		PositiveColor: FF88FF
 		NeutralColor: 808080
 		DisplayWhenRelaxed: false
 		ShowAbsoluteValues: false
