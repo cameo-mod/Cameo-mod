@@ -33,6 +33,69 @@ owner Devin** (`^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*`; `^Lig
 still has **31** matches, including `HeatRayBeam1/2/3/4` now fully split) · **W3–W5 ⬜ ready,
 owner Claude** (ledger split, retire weapon-class K, the five missing metrics).
 
+## ⭐ PHYSICAL STATES — dilution, Magnetism, and the IFV problem (2026-08-22)
+
+Maintainer: *"we need to rework all units that can only apply physical states from one weapon"*
+and *"the IFV kind of things need their own logic so you should skip them"*.
+
+### 1. METER DILUTION — 58 actors
+
+The meter fills from ONE weapon's damage but the target dies to the actor's WHOLE output, so the
+effect lands far later than the per-weapon `fill_ratio` says. `physical_state_price.fill_ratio` has
+a `fed_share` term for exactly this, but it works WITHIN a weapon and stops at the weapon boundary;
+the actor level is not modelled at all.
+
+**58 actors** fire a state weapon alongside unconditional non-state weapons. Worst offenders:
+
+| actor | state weapon | meter share | dilution |
+|---|---|--:|--:|
+| `japan_exorcistoitank` | `OIPlasmaFlamer` | 1.5% | **66.00x** |
+| `EDEN_LYNX_EMP` / `EDEN_TIGER_EMP` | `eden_EMP` | 4.0% | 25.10x |
+| `cabal_hunterdronecarrier` | `CabalOverkillLaser` | 6.9% | 14.51x |
+| `ra1_allies_destroyer` | `StingerCryo` | 14.5% | 6.89x |
+
+Distribution: 31 actors above 3x, 12 at 2-3x, 10 at 1.5-2x, 5 below 1.5x.
+
+⚠ **`SheridanMissilesCryo`'s extreme Scale is a COMPENSATION for this, not an outlier.** The
+Sheridan fires Cannon + Vulcan + (Missiles XOR MissilesCryo); the cryo half is 44.4% of output, so
+the true ratio is 0.378, not the 0.168 the pricing sees — it is **OVER-charged 1.41x**.
+
+**MAINTAINER'S FIX (preferred): make every weapon on a state unit apply the state** — cryo cannon,
+cryo bullet, cryo rocket. Dilution becomes 1.0 by construction, no per-weapon compensation is
+needed, and `Scale 100` means the same thing everywhere. Strictly better than teaching the pricing
+to model actor-level dilution, because it removes the problem instead of measuring it.
+
+### 2. ⛔ DEFERRED — the IFV class needs its own logic
+
+`ra2_allies_ifv` and friends carry **42 armaments**, each gated on a distinct `ifv-<passenger>`
+condition, so exactly ONE fires at a time. They are NOT diluted and must never be counted as such
+— a first measurement did exactly that and reported 10.92x for every IFV variant. Any
+per-armament analysis has to collapse condition-gated variants first. Deferred by maintainer
+ruling; needs a variant-aware model.
+
+### 3. `^Magnefreezable` → a `Magnetism` meter
+
+72 lines, **10 `SpeedMultiplier` + 10 `WithColoredOverlay`** traits on 10-point bands, inherited by
+`^Vehicle`, `^RANeutralPlane` and `^ShootableMissile` — **739 actors**.
+
+⛔ **All 17 band boundaries OVERLAP** (`<= 20` and `>= 20` both match at 20), so two multipliers
+stack: 90%x80% = **72%** at Magnet 20, 60%x50% = **30%** at Magnet 50. The ramp is non-monotonic at
+every step.
+
+⚠ And the ramp IS reached, contrary to a first reading that checked only `ReloadDelay`/`Duration`:
+`RA2Magnet` is **`Burst 100 / BurstDelays 1`**, so one volley grants 100 stacks over 99 ticks and
+sweeps the whole ramp — hitting all 9 overlapping boundaries every volley. Sole carrier:
+`yuri_magnetron`.
+
+Converting to one `SlowsProportionalToPhysicalState` on a `Magnetism` meter replaces all 20 traits,
+fixes the overlap, and gets the effect priced by `speed_weight` automatically.
+
+### 4. More axes to convert
+
+Documented in `PHYSICAL_STATE_SYSTEM.md` §5 but not built: **Sonic → `Resonance`** (W7, needs no
+new C#), **Hex** (Magic: −firepower/−accuracy/disable specials), **ArmorBreach**, **Knockback**
+(needs new C#). Only **Temperature** (98.6% exposure) and **Corrosion** (45.0%) exist today.
+
 ## ⭐ NEXT MAJOR — continuous weapon heaviness — see [`CONTINUOUS_WEAPON_HEAVINESS.md`](CONTINUOUS_WEAPON_HEAVINESS.md) (2026-08-22)
 
 Resolves the 3-way-split vs between-tier-mix collision: ONE warhead template per family plus a
