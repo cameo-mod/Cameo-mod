@@ -833,6 +833,78 @@ Container@OBSERVER_WIDGETS:
 									Font: Bold
 									Text: Upgrades
 									Shadow: True
+						Container@BUILD_ORDER_HEADERS:
+							X: 0
+							Y: 0
+							Width: 400
+							Height: PARENT_HEIGHT
+							Children:
+								ColorBlock@HEADER_COLOR:
+									X: 0
+									Y: 0
+									Color: 00000090
+									Width: PARENT_WIDTH - 200
+									Height: PARENT_HEIGHT
+								GradientColorBlock@HEADER_GRADIENT:
+									X: PARENT_WIDTH - 200
+									Y: 0
+									TopLeftColor: 00000090
+									BottomLeftColor: 00000090
+									Width: 200
+									Height: PARENT_HEIGHT
+								Label@PLAYER_HEADER:
+									X: 40
+									Y: 0
+									Width: 120
+									Height: PARENT_HEIGHT
+									Font: Bold
+									Text: Player
+									Align: Left
+									Shadow: True
+								Label@BUILD_ORDER_HEADER:
+									X: 160
+									Y: 0
+									Width: 100
+									Height: PARENT_HEIGHT
+									Font: Bold
+									Text: Initial Build Order
+									Shadow: True
+						Container@UNITS_PRODUCED_HEADERS:
+							X: 0
+							Y: 0
+							Width: 400
+							Height: PARENT_HEIGHT
+							Children:
+								ColorBlock@HEADER_COLOR:
+									X: 0
+									Y: 0
+									Color: 00000090
+									Width: PARENT_WIDTH - 200
+									Height: PARENT_HEIGHT
+								GradientColorBlock@HEADER_GRADIENT:
+									X: PARENT_WIDTH - 200
+									Y: 0
+									TopLeftColor: 00000090
+									BottomLeftColor: 00000090
+									Width: 200
+									Height: PARENT_HEIGHT
+								Label@PLAYER_HEADER:
+									X: 40
+									Y: 0
+									Width: 120
+									Height: PARENT_HEIGHT
+									Font: Bold
+									Text: Player
+									Align: Left
+									Shadow: True
+								Label@UNITS_PRODUCED_HEADER:
+									X: 160
+									Y: 0
+									Width: 100
+									Height: PARENT_HEIGHT
+									Font: Bold
+									Text: Units Produced
+									Shadow: True
 						Container@PROMOTIONS_HEADERS:
 							X: 0
 							Y: 0
@@ -1427,6 +1499,86 @@ Container@OBSERVER_WIDGETS:
 									Width: 0
 									Height: PARENT_HEIGHT
 									TooltipContainer: TOOLTIP_CONTAINER
+						ScrollItem@BUILD_ORDER_PLAYER_TEMPLATE:
+							X: 0
+							Y: 0
+							Width: 400
+							Height: 24
+							Background: scrollitem-nohover
+							Children:
+								ColorBlock@PLAYER_COLOR:
+									X: 0
+									Y: 0
+									Width: PARENT_WIDTH - 200
+									Height: PARENT_HEIGHT
+								GradientColorBlock@PLAYER_GRADIENT:
+									X: PARENT_WIDTH - 200
+									Y: 0
+									Width: 200
+									Height: PARENT_HEIGHT
+								Image@FLAG:
+									X: 5
+									Y: 4
+									Width: 35
+									Height: PARENT_HEIGHT - 4
+									ImageName: random
+									ImageCollection: flags
+								LabelWithTooltip@PLAYER:
+									X: 40
+									Y: 0
+									Width: 120
+									Height: PARENT_HEIGHT
+									Font: Bold
+									Shadow: True
+									TooltipContainer: TOOLTIP_CONTAINER
+									TooltipTemplate: SIMPLE_TOOLTIP
+								ObserverBuildOrderIcons@BUILD_ORDER_ICONS:
+									X: 160
+									Y: 0
+									Width: 0
+									Height: PARENT_HEIGHT
+									TooltipContainer: TOOLTIP_CONTAINER
+									TooltipTemplate: ARMY_TOOLTIP
+						ScrollItem@UNITS_PRODUCED_PLAYER_TEMPLATE:
+							X: 0
+							Y: 0
+							Width: 400
+							Height: 24
+							Background: scrollitem-nohover
+							Children:
+								ColorBlock@PLAYER_COLOR:
+									X: 0
+									Y: 0
+									Width: PARENT_WIDTH - 200
+									Height: PARENT_HEIGHT
+								GradientColorBlock@PLAYER_GRADIENT:
+									X: PARENT_WIDTH - 200
+									Y: 0
+									Width: 200
+									Height: PARENT_HEIGHT
+								Image@FLAG:
+									X: 5
+									Y: 4
+									Width: 35
+									Height: PARENT_HEIGHT - 4
+									ImageName: random
+									ImageCollection: flags
+								LabelWithTooltip@PLAYER:
+									X: 40
+									Y: 0
+									Width: 120
+									Height: PARENT_HEIGHT
+									Font: Bold
+									Shadow: True
+									TooltipContainer: TOOLTIP_CONTAINER
+									TooltipTemplate: SIMPLE_TOOLTIP
+								ObserverUnitsProducedIcons@UNITS_PRODUCED_ICONS:
+									X: 160
+									Y: 0
+									Width: 0
+									Height: PARENT_HEIGHT
+									TooltipContainer: TOOLTIP_CONTAINER
+									TooltipTemplate: ARMY_VALUE_TOOLTIP
 						ScrollItem@PROMOTIONS_PLAYER_TEMPLATE:
 							X: 0
 							Y: 0

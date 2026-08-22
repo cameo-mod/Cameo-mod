@@ -3863,6 +3863,12 @@
 		String: Infantry
 
 ^Building:
+	# Observer spectator tabs (ported from Combined Arms). `UpdatesBuildOrder` records this
+	# structure in the player's initial build order with a timestamp; `UpdatesUnitsProduced`
+	# records every unit produced here by name, count and value. Both report into the
+	# `ProductionTracker` on the player actor, and both are inert for anyone not spectating.
+	UpdatesBuildOrder:
+	UpdatesUnitsProduced:
 	Inherits@1: ^ExistsInWorld
 	Inherits@2: ^SpriteActor
 	Inherits@bounty: ^GlobalBounty

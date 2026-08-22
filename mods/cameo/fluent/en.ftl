@@ -57,6 +57,8 @@ options-observer-stats =
     .army = Army
     .upgrades = Upgrades
     .promotions = Promotions
+    .build-order = Build Order
+    .units-produced = Units Produced
     .earnings-graph = Earnings (graph)
     .army-graph = Army (graph)
 

@@ -24,9 +24,9 @@ using OpenRA.Widgets;
 
 namespace OpenRA.Mods.Cameo.Widgets.Logic
 {
-	public enum CameoObserverStatsPanel { None, Minimal, Basic, Economy, Production, SupportPowers, Combat, Army, Upgrades, Promotions, Graph, ArmyGraph }
+	public enum CameoObserverStatsPanel { None, Minimal, Basic, Economy, Production, SupportPowers, Combat, Army, Upgrades, Promotions, BuildOrder, UnitsProduced, Graph, ArmyGraph }
 
-	[ChromeLogicArgsHotkeys("StatisticsMinimalKey", "StatisticsBasicKey", "StatisticsEconomyKey", "StatisticsProductionKey", "StatisticsSupportPowersKey", "StatisticsCombatKey", "StatisticsArmyKey", "StatisticsUpgradesKey", "StatisticsPromotionsKey", "StatisticsGraphKey",
+	[ChromeLogicArgsHotkeys("StatisticsMinimalKey", "StatisticsBasicKey", "StatisticsEconomyKey", "StatisticsProductionKey", "StatisticsSupportPowersKey", "StatisticsCombatKey", "StatisticsArmyKey", "StatisticsUpgradesKey", "StatisticsPromotionsKey", "StatisticsBuildOrderKey", "StatisticsUnitsProducedKey", "StatisticsGraphKey",
 		"StatisticsArmyGraphKey")]
 	public class CameoObserverStatsLogic : ChromeLogic
 	{
@@ -61,6 +61,12 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		const string Promotions = "options-observer-stats.promotions";
 
 		[FluentReference]
+		const string BuildOrder = "options-observer-stats.build-order";
+
+		[FluentReference]
+		const string UnitsProduced = "options-observer-stats.units-produced";
+
+		[FluentReference]
 		const string EarningsGraph = "options-observer-stats.earnings-graph";
 
 		[FluentReference]
@@ -81,6 +87,8 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		readonly ContainerWidget armyHeaders;
 		readonly ContainerWidget upgradesHeaders;
 		readonly ContainerWidget promotionsHeaders;
+		readonly ContainerWidget buildOrderHeaders;
+		readonly ContainerWidget unitsProducedHeaders;
 		readonly ScrollPanelWidget playerStatsPanel;
 		readonly ScrollItemWidget minimalPlayerTemplate;
 		readonly ScrollItemWidget basicPlayerTemplate;
@@ -90,6 +98,8 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		readonly ScrollItemWidget armyPlayerTemplate;
 		readonly ScrollItemWidget upgradesPlayerTemplate;
 		readonly ScrollItemWidget promotionsPlayerTemplate;
+		readonly ScrollItemWidget buildOrderPlayerTemplate;
+		readonly ScrollItemWidget unitsProducedPlayerTemplate;
 		readonly ScrollItemWidget combatPlayerTemplate;
 		readonly ContainerWidget incomeGraphContainer;
 		readonly ContainerWidget armyValueGraphContainer;
@@ -129,6 +139,8 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			armyHeaders = widget.Get<ContainerWidget>("ARMY_HEADERS");
 			upgradesHeaders = widget.Get<ContainerWidget>("UPGRADES_HEADERS");
 			promotionsHeaders = widget.Get<ContainerWidget>("PROMOTIONS_HEADERS");
+			buildOrderHeaders = widget.Get<ContainerWidget>("BUILD_ORDER_HEADERS");
+			unitsProducedHeaders = widget.Get<ContainerWidget>("UNITS_PRODUCED_HEADERS");
 			combatStatsHeaders = widget.Get<ContainerWidget>("COMBAT_STATS_HEADERS");
 
 			playerStatsPanel = widget.Get<ScrollPanelWidget>("PLAYER_STATS_PANEL");
@@ -148,6 +160,8 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				AdjustHeader(armyHeaders);
 				AdjustHeader(upgradesHeaders);
 				AdjustHeader(promotionsHeaders);
+				AdjustHeader(buildOrderHeaders);
+				AdjustHeader(unitsProducedHeaders);
 			}
 
 			minimalPlayerTemplate = playerStatsPanel.Get<ScrollItemWidget>("MINIMAL_PLAYER_TEMPLATE");
@@ -158,6 +172,8 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			armyPlayerTemplate = playerStatsPanel.Get<ScrollItemWidget>("ARMY_PLAYER_TEMPLATE");
 			upgradesPlayerTemplate = playerStatsPanel.Get<ScrollItemWidget>("UPGRADES_PLAYER_TEMPLATE");
 			promotionsPlayerTemplate = playerStatsPanel.Get<ScrollItemWidget>("PROMOTIONS_PLAYER_TEMPLATE");
+			buildOrderPlayerTemplate = playerStatsPanel.Get<ScrollItemWidget>("BUILD_ORDER_PLAYER_TEMPLATE");
+			unitsProducedPlayerTemplate = playerStatsPanel.Get<ScrollItemWidget>("UNITS_PRODUCED_PLAYER_TEMPLATE");
 			combatPlayerTemplate = playerStatsPanel.Get<ScrollItemWidget>("COMBAT_PLAYER_TEMPLATE");
 
 			incomeGraphContainer = widget.Get<ContainerWidget>("INCOME_GRAPH_CONTAINER");
@@ -215,6 +231,8 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				CreateStatsOption(Army, CameoObserverStatsPanel.Army, armyPlayerTemplate, () => DisplayStats(ArmyStats)),
 				CreateStatsOption(Upgrades, CameoObserverStatsPanel.Upgrades, upgradesPlayerTemplate, () => DisplayStats(UpgradesStats)),
 				CreateStatsOption(Promotions, CameoObserverStatsPanel.Promotions, promotionsPlayerTemplate, () => DisplayStats(PromotionsStats)),
+				CreateStatsOption(BuildOrder, CameoObserverStatsPanel.BuildOrder, buildOrderPlayerTemplate, () => DisplayStats(BuildOrderStats)),
+				CreateStatsOption(UnitsProduced, CameoObserverStatsPanel.UnitsProduced, unitsProducedPlayerTemplate, () => DisplayStats(UnitsProducedStats)),
 				CreateStatsOption(EarningsGraph, CameoObserverStatsPanel.Graph, null, () => IncomeGraph()),
 				CreateStatsOption(ArmyGraph, CameoObserverStatsPanel.ArmyGraph, null, () => ArmyValueGraph()),
 			};
@@ -265,6 +283,8 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			armyHeaders.Visible = false;
 			upgradesHeaders.Visible = false;
 			promotionsHeaders.Visible = false;
+			buildOrderHeaders.Visible = false;
+			unitsProducedHeaders.Visible = false;
 			combatStatsHeaders.Visible = false;
 
 			incomeGraphContainer.Visible = false;
@@ -462,6 +482,45 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			template.IgnoreChildMouseOver = false;
 
 			return template;
+		}
+
+		ScrollItemWidget IconsOnlyStats(ContainerWidget headers, ScrollItemWidget rowTemplate,
+			OpenRA.Player player, Action<ScrollItemWidget, OpenRA.Player> bindIcons)
+		{
+			// Shared body for the two icon-strip tabs (Build Order, Units Produced). They differ
+			// only in which widget they bind, so the player flag / name / colour setup lives here
+			// once rather than being copy-pasted the way the CA original has it.
+			headers.Visible = true;
+			var template = SetupPlayerScrollItemWidget(rowTemplate, player);
+
+			AddPlayerFlagAndName(template, player);
+
+			var playerName = template.Get<LabelWidget>("PLAYER");
+			playerName.GetColor = () => Color.White;
+
+			var playerColor = template.Get<ColorBlockWidget>("PLAYER_COLOR");
+			var playerGradient = template.Get<GradientColorBlockWidget>("PLAYER_GRADIENT");
+
+			SetupPlayerColor(player, template, playerColor, playerGradient);
+
+			bindIcons(template, player);
+
+			// Without this the icon strip never receives mouse-over, so no tooltip appears.
+			template.IgnoreChildMouseOver = false;
+
+			return template;
+		}
+
+		ScrollItemWidget BuildOrderStats(OpenRA.Player player)
+		{
+			return IconsOnlyStats(buildOrderHeaders, buildOrderPlayerTemplate, player,
+				(t, p) => t.Get<ObserverBuildOrderIconsWidget>("BUILD_ORDER_ICONS").GetPlayer = () => p);
+		}
+
+		ScrollItemWidget UnitsProducedStats(OpenRA.Player player)
+		{
+			return IconsOnlyStats(unitsProducedHeaders, unitsProducedPlayerTemplate, player,
+				(t, p) => t.Get<ObserverUnitsProducedIconsWidget>("UNITS_PRODUCED_ICONS").GetPlayer = () => p);
 		}
 
 		ScrollItemWidget PromotionsStats(Player player)
