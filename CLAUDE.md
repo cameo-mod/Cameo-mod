@@ -53,6 +53,21 @@ the artifact, **the artifact wins — then fix the stale summary.**
    match `public`, **not** `public readonly` — some AS warheads declare mutable public fields.
    The same trap exists one layer up: a weapon inheriting TWO `^Projectile_*` templates merges into
    ONE node whose TYPE is the last template's and whose FIELDS are the union of both.
+8e. **NEVER hand-parse yaml — read through `miniyaml.Ruleset.resolve_weapon` / `.resolve`,**
+   and pull Versus with `weapon_efficiency.versus_of(node)`. A bespoke line-scanner opened a dict
+   on `Versus:` and never CLOSED it, so the `PercentageVersus:` rows the AreaDamage fold added
+   INSIDE the same warhead overwrote the profile: every measured mean, spread, ratio and inversion
+   count was internally consistent and wrong (reported "0 of 125 obey the MEAN-100 law"; the truth
+   was **123 of 125**). A near-miss sibling name is the trap — `PercentageVersus` does not
+   `startswith("Versus:")`, so the OPEN guard looked right; the bug was the missing CLOSE. If a
+   hand parser is unavoidable, close every block the moment indentation returns to its level.
+   Guarded by `audit_versus_profile.py`. And **a result that contradicts a binding law the
+   generator implements is a contradiction, not a finding** — check before believing it.
+8f. **GREP `docs/DESIGN.md` BEFORE DESIGNING ANYTHING.** It is required reading #4 and it is
+   binding. §12.0a (MEAN-100: `K` is SHAPE-ONLY, `Damage` is the sole magnitude knob), §12.0c (the
+   Shield ladder) and §12.0d (the CLASS TILT — each level tilts toward one end of every armor
+   ladder and *"can never invert"*) were all already ruled and already shipped while days of design
+   work re-derived them. A design question that feels novel usually is not.
 8c. **A "derive unless overridden" default is invisible when something upstream always overrides.**
    `ScaledBullet` derived shell Inaccuracy/Speed from Range for weeks and reached zero weapons,
    because the templates also wrote literals and an explicit yaml value always wins. Assert the
