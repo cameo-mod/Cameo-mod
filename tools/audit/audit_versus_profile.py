@@ -11,6 +11,11 @@ them, so nothing checked that what the generator intends is what the tree actual
           sole magnitude knob, so a drifted mean is a HIDDEN price multiplier.
   §12.0d  THE CLASS TILT — each LEVEL tilts toward one end of every armor ladder, and
           *"the tilt MUST NEVER reorder a ladder ... it can never invert"*.
+          ⚠ The guarantee is WITHIN a ladder. `None` is INF and `Superheavy` is VEH, so
+          comparing them is a CROSS-ladder relation the tilt is DESIGNED to change — a Light
+          tilt deliberately raises infantry relative to superheavy vehicles. A first version
+          of this audit compared None vs Superheavy and reported 4 families "inverting"; that
+          was a false positive. The real invariant is direction WITHIN each ladder.
   spread  Target band 2x-8x (aim 4x) between a profile's highest and lowest armor row.
 
 ⛔ WHY THIS EXISTS — AND WHY IT READS THROUGH THE RESOLVER, NEVER A HAND PARSER.
@@ -49,7 +54,7 @@ import weapon_efficiency as we          # noqa: E402
 MEAN_OFFENDERS_BASELINE = 2      # Nuclear_Super + Sniper_Light, both HAND_TUNED
 SPREAD_OFFENDERS_BASELINE = 2    # CannonAP 1.81x, Cryo 1.97x (both too FLAT)
                                  # (Nuclear and Sniper excluded: their only level is HAND_TUNED)
-FLIP_BASELINE = 4                # CannonNuke, Cryo, MissileHE, Storm
+FLIP_BASELINE = 4                # 4 family/ladder pairs, all of them Cryo (INF/VEH/BLD/AIR)
 
 # The generator skips these entirely, so they are not expected to obey the generated laws.
 HAND_TUNED = {("Nuclear", "Super"), ("Sniper", "Light")}
@@ -57,7 +62,14 @@ HAND_TUNED = {("Nuclear", "Super"), ("Sniper", "Light")}
 FLAT_BY_DESIGN = {"Sonic", "Magic"}
 
 NON_ARMOR = {"Shield", "HAZMAT", "COMPOSITE", "BLAST", "REFLECTOR", "ARMOR"}
-WEIGHT_LADDER = ["None", "Light", "Medium", "Heavy", "Superheavy"]
+# The armor LADDERS, from gen_weapon_template.LADDERS. Direction is only meaningful WITHIN one.
+LADDERS = {
+    "INF": ["None", "Flak", "Plate", "Heroic"],
+    "VEH": ["Scout", "Light", "Medium", "Heavy", "Superheavy"],
+    "BLD": ["Wood", "Steel", "Concrete"],
+    "AIR": ["Fighter", "Bomber", "Helicopter", "Spaceship"],
+}
+DERIVED_ARMORS = ("Heroic", "Airborne")
 LEVELS = ("Light", "Medium", "Heavy", "Super")
 COMPANION = ("Percentage", "ExtraDamage", "ExtraRepair", "Concrete",
              "Effect", "ShieldHit", "Glow", "Smudge")
@@ -92,12 +104,16 @@ def armor_rows(profile):
     return {k: v for k, v in profile.items() if k not in NON_ARMOR}
 
 
-def orientation(profile):
-    """'heavy' if the profile favours Superheavy over None, else 'light'; None if unjudgeable."""
-    lad = {k: profile[k] for k in WEIGHT_LADDER if k in profile}
-    if len(lad) < len(WEIGHT_LADDER):
+def ladder_direction(profile, rungs):
+    """'up' if the profile rises along this ladder, 'down' if it falls, None if unjudgeable.
+
+    Derived armors are excluded — `Heroic` is a PRODUCT of two other cells (§12.0b) and is
+    recomputed from the finished profile, so it is not an independent rung.
+    """
+    present = [a for a in rungs if a in profile and a not in DERIVED_ARMORS]
+    if len(present) < 2:
         return None
-    return "heavy" if lad["Superheavy"] > lad["None"] else "light"
+    return "up" if profile[present[-1]] > profile[present[0]] else "down"
 
 
 def main() -> int:
@@ -129,10 +145,11 @@ def main() -> int:
         if not (SPREAD_LO <= spread <= SPREAD_HI):
             spread_bad.append((family, spread))
 
-        seen = [(l, orientation(data[(family, l)])) for l in LEVELS if (family, l) in data]
-        seen = [(l, o) for l, o in seen if o]
-        if len({o for _l, o in seen}) > 1:
-            flips.append((family, seen))
+        levels = [l for l in LEVELS if (family, l) in data]
+        for ladder_name, rungs in LADDERS.items():
+            dirs = {d for d in (ladder_direction(data[(family, l)], rungs) for l in levels) if d}
+            if len(dirs) > 1:
+                flips.append((family, ladder_name, sorted(dirs)))
 
     print(f"# audit_versus_profile — {len(data)} MAIN profiles across {len(families)} families\n")
 
@@ -148,15 +165,18 @@ def main() -> int:
         print(f"  {family:14s} {spread:6.2f}x   {why}")
     print(f"  _(flat by design, excluded: {', '.join(sorted(FLAT_BY_DESIGN))})_")
 
-    print(f"\n## §12.0d ORIENTATION — a family must not change direction between its levels\n")
+    print("")
+    print("## §12.0d DIRECTION WITHIN A LADDER - must not change between a family's levels")
+    print("")
     if flips:
-        print("⛔ The class tilt is documented as unable to invert a ladder, but these families")
-        print("   read anti-light at one level and anti-heavy at another. Every one has a WEAK")
-        print("   gradient, which is what lets a tilt overpower the family's own direction.\n")
-        for family, seen in flips:
-            print(f"  {family:14s} " + ", ".join(f"{l}={o}" for l, o in seen))
+        print("⛔ The tilt may never reorder a ladder, yet these family/ladder pairs rise at")
+        print("   one level and fall at another. A near-FLAT profile has no stable direction,")
+        print("   so the fix is the family's spread, not the tilt.")
+        print("")
+        for family, ladder_name, dirs in flips:
+            print("  {:14s} ladder {:4s} {}".format(family, ladder_name, " / ".join(dirs)))
     else:
-        print("  OK — every family keeps one direction across all its levels.")
+        print("  OK - every family keeps one direction within every ladder, at every level.")
 
     unexpected_mean = [m for m in mean_bad if not m[2]]
     fail = (len(unexpected_mean) > 0
