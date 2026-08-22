@@ -53,7 +53,8 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from miniyaml import Ruleset  # noqa: E402
 
 # Weapons resolving to >1 main damaging warhead when this was measured (2026-08-22). LOWER ONLY.
-SPLIT_BASELINE = 1190
+# 1190 -> 1178 the same day: a MEASUREMENT fix, not converted weapons. See FRIENDLY_FIRE below.
+SPLIT_BASELINE = 1178
 
 # Warhead types that inflict damage on a normal target. Everything else (CreateEffect,
 # LeaveSmudge, GrantExternalCondition, SpawnActor, GlowImpact, ...) is cosmetic or utility and
@@ -62,6 +63,25 @@ MAIN_DAMAGE_TYPES = {"AreaDamage", "SpreadDamage", "HealthPercentageDamage", "Ta
 
 # Key fragments marking a warhead as a DESIGNED companion of the main rather than a second main.
 COMPANION_MARKERS = ("Percentage", "ExtraDamage", "ExtraRepair", "Concrete")
+
+# ⛔ A FRIENDLY-FIRE TWIN IS NOT A SECOND MAIN. It is the SAME main at reduced damage aimed at
+# allies (the twin law: FF = 50% of main), so counting it doubled a correctly-split weapon.
+# `physical_state_price` has excluded these from day one via ValidRelationships; this audit
+# did not, and the effect was visible in its own output: `Heal` and `MedicHeal` — healing
+# weapons, one warhead plus its ally-only twin — were reported as "stacked mains".
+#
+# BOTH tests are needed. 356 twins declare an Ally-only `ValidRelationships`, but 24 more are
+# only identifiable by name (`Warhead@GrenadeFriendlyFire`), and the legacy Grenade/Shrapnel
+# templates are exactly where those live. Either test alone leaves twins counted as mains.
+FRIENDLY_FIRE_MARKER = "FriendlyFire"
+
+
+def is_friendly_fire(wh) -> bool:
+    """An ally-only twin of the main warhead, by relationship or by name."""
+    if FRIENDLY_FIRE_MARKER in wh.key:
+        return True
+    rel = (wh.get("ValidRelationships") or "").strip()
+    return "Ally" in rel and "Enemy" not in rel
 
 
 def main_warheads(resolved) -> list[str]:
@@ -73,6 +93,8 @@ def main_warheads(resolved) -> list[str]:
         if (wh.value or "").strip() not in MAIN_DAMAGE_TYPES:
             continue
         if any(m in wh.key for m in COMPANION_MARKERS):
+            continue
+        if is_friendly_fire(wh):
             continue
         damage = wh.get("Damage")
         try:                                    # a Damage: 0 warhead fires nothing

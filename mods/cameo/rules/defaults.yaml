@@ -5319,10 +5319,16 @@
 		Condition: magnetfreeze
 		LowerValue: 20000
 		UpperValue: 20000
-	# Movement only. The old ramp was ten `SpeedMultiplier` traits and touched nothing else,
-	# so turn speed, turret traverse and reload are pinned at 100 AT BOTH ENDS -- this trait
-	# defaults them to 50 at maximum, and leaving them out would quietly add three new
-	# effects the magnetron never had.
+	# A FULL BAR IS A DISABLE, so every axis ramps -- maintainer ruling 2026-08-22: *"turn speed
+	# should be scaled, reload delay too because it's an actual disable! even if it didn't have
+	# it before it should have it now"*. The old ten `SpeedMultiplier` bands moved movement only;
+	# this deliberately does MORE than they did, and the ramp now agrees with `magnetfreeze`
+	# instead of contradicting it -- a unit pinned at 100% used to keep firing and traversing at
+	# full rate right up to the instant the disable condition landed.
+	#
+	# Identical in shape to `@FrostSlowdown` on the Temperature meter. Reload bottoms out at 1,
+	# not 0: `ConvertReloadSpeedToDelayPercent` maps 0 to `int.MaxValue`, and 1 already means a
+	# 100x reload delay.
 	SlowsProportionalToPhysicalState@Magnetism:
 		PhysicalStateName: Magnetism
 		UseDeviationFromRelaxed: true
@@ -5330,11 +5336,11 @@
 		SpeedModifierAtMinimum: 100
 		SpeedModifierAtMaximum: 0
 		TurnSpeedModifierAtMinimum: 100
-		TurnSpeedModifierAtMaximum: 100
+		TurnSpeedModifierAtMaximum: 0
 		TurretTurnSpeedModifierAtMinimum: 100
-		TurretTurnSpeedModifierAtMaximum: 100
+		TurretTurnSpeedModifierAtMaximum: 0
 		ReloadDelayModifierAtMinimum: 100
-		ReloadDelayModifierAtMaximum: 100
+		ReloadDelayModifierAtMaximum: 1
 	# Same magenta ramp the ten `WithColoredOverlay` traits drew, now interpolated. It opens
 	# at 2000 (the old `Magnet >= 10`) so a single stray shot still does not tint the actor.
 	WithPhysicalStateColoredOverlay@Magnetism:
