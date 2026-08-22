@@ -1,6 +1,6 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **369**, files touched: **552**
+Commits reviewed: **360**, files touched: **561**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
@@ -76,11 +76,10 @@ Commits reviewed: **369**, files touched: **552**
 | file | commits touching it |
 |---|---|
 | docs/design/BALANCE_PROGRAM_PLAN.md | 98 |
-| mods/cameo/weapons/weapons.yaml | 74 |
+| mods/cameo/weapons/weapons.yaml | 72 |
 | tools/balance/gen_weapon_template.py | 53 |
 | docs/balance/derived/redalert_soviets.json | 41 |
 | DEVELOPMENT_LOG.md | 37 |
-| docs/balance/redalert_soviets.json | 34 |
 | docs/balance/derived/d2k_ixian.json | 33 |
 | docs/balance/derived/redalert2mod_consortium.json | 33 |
 | docs/balance/derived/redalert2mod_futuretech.json | 33 |
@@ -88,8 +87,9 @@ Commits reviewed: **369**, files touched: **552**
 | docs/balance/derived/tiberiansun_forgotten.json | 33 |
 | docs/balance/derived/shared_redalert.json | 31 |
 | docs/balance/derived/starcraft_protoss.json | 31 |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 31 |
+| docs/balance/redalert_soviets.json | 31 |
 | docs/balance/derived/d2k_ordos.json | 30 |
+| docs/balance/derived/redalert2mod_syndicate.json | 30 |
 
 
 ## Reviewer checklist (not machine-checkable)

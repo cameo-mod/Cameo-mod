@@ -358,8 +358,8 @@ Files scanned: **635** — D1 dropped inherits: **88**, D2 merged duplicates: **
 | mods/cameo/rules/defaults.yaml | 3688, 3722 | ^Monster | CombatDebugOverlay |
 | mods/cameo/rules/defaults.yaml | 4073, 4172 | ^BaseBuilding | RepairableBuilding |
 | mods/cameo/rules/defaults.yaml | 4123, 4174 | ^BaseBuilding | WithBuildingRepairDecoration |
-| mods/cameo/rules/defaults.yaml | 6830, 6886 | ^Harvester | DockClientManager |
-| mods/cameo/rules/defaults.yaml | 6873, 6890 | ^Harvester | WithStoresResourcesPipsDecoration |
+| mods/cameo/rules/defaults.yaml | 6831, 6887 | ^Harvester | DockClientManager |
+| mods/cameo/rules/defaults.yaml | 6874, 6891 | ^Harvester | WithStoresResourcesPipsDecoration |
 | mods/cameo/rules/dune2.yaml | 621, 625 | dunemcv | RenderSprites |
 | mods/cameo/rules/generals.yaml | 3618, 3654 | glbggy | RenderSprites |
 | mods/cameo/rules/generals.yaml | 4905, 4937 | glworker | AutoTarget |

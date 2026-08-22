@@ -1,11 +1,11 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **261**
+Files scanned: **264**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 2 | 2 |
-| E2 | handler discards the error | 63 | 30 |
+| E2 | handler discards the error | 65 | 30 |
 | E3 | open() without encoding= | 91 | 90 |
 | E4 | subprocess call without check= | 13 | 9 |
 
@@ -18,7 +18,7 @@ Files scanned: **261**
 | tools/audit_createeffect_image.py | 19 | bare `except:` |
 
 
-## E2 — 63 finding(s)
+## E2 — 65 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -38,6 +38,8 @@ Files scanned: **261**
 | tools/audit/audit_power_budget.py | 100 | handler body discards the error |
 | tools/audit/audit_rank_decoration.py | 49 | handler body discards the error |
 | tools/audit/audit_rank_decoration.py | 68 | handler body discards the error |
+| tools/audit/audit_three_way_split.py | 81 | handler body discards the error |
+| tools/audit/audit_tier_weapon_class.py | 76 | handler body discards the error |
 | tools/audit/audit_unique_traits.py | 71 | handler body discards the error |
 | tools/audit/audit_upgrades.py | 145 | handler body discards the error |
 | tools/audit/audit_weapon_suffixes.py | 119 | handler body discards the error |
@@ -205,7 +207,7 @@ Files scanned: **261**
 
 ## FAIL
 
-- E2: 63 > baseline 30
+- E2: 65 > baseline 30
 - E3: 91 > baseline 90
 - E4: 13 > baseline 9
 

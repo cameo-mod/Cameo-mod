@@ -2,9 +2,9 @@
 
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
-| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (2 file(s)) | 24 | >= 24 |
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (3 file(s)) | 29 | >= 24 |
 | T2 | `def test_*` in tools/tests (19 file(s)) | 227 | >= 177 |
-| T3 | modules with no test mentioning them | 254 | <= 224 |
+| T3 | modules with no test mentioning them | 257 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (254)
+## T3 — untested modules (257)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -181,6 +181,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_inherits.py | audit_inherits |
 | python | tools/audit/audit_inline_effects.py | audit_inline_effects |
 | python | tools/audit/audit_k_linearity.py | audit_k_linearity |
+| python | tools/audit/audit_level_ladder.py | audit_level_ladder |
 | python | tools/audit/audit_metadata.py | audit_metadata |
 | python | tools/audit/audit_min_range.py | audit_min_range |
 | python | tools/audit/audit_missing_elite.py | audit_missing_elite |
@@ -201,12 +202,14 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_template_conformance.py | audit_template_conformance |
 | python | tools/audit/audit_test_coverage.py | audit_test_coverage |
 | python | tools/audit/audit_three_way_split.py | audit_three_way_split |
+| python | tools/audit/audit_tier_weapon_class.py | audit_tier_weapon_class |
 | python | tools/audit/audit_ts_death_palette.py | audit_ts_death_palette |
 | python | tools/audit/audit_unconverted_templates.py | audit_unconverted_templates |
 | python | tools/audit/audit_unique_traits.py | audit_unique_traits |
 | python | tools/audit/audit_upgrade_coverage.py | audit_upgrade_coverage |
 | python | tools/audit/audit_upgrade_regression.py | audit_upgrade_regression |
 | python | tools/audit/audit_upgrades.py | audit_upgrades |
+| python | tools/audit/audit_versus_profile.py | audit_versus_profile |
 | python | tools/audit/audit_warhead_split.py | audit_warhead_split |
 | python | tools/audit/audit_weapon_identity.py | audit_weapon_identity |
 | python | tools/audit/audit_weapon_suffixes.py | audit_weapon_suffixes |
@@ -277,5 +280,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 254 untested > baseline 224
+- T3: 257 untested > baseline 224
 
