@@ -598,7 +598,7 @@ ts_nod_ticktank:
 		# BuildDuration: 300
 		Prerequisites: ~ts_nod_warfactory
 		Queue: Vehicle, RAVehicle
-		Description: Nod's main battle tank.\nCan deploy to gain extra protection.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+		Description: Nod's main battle tank.\nDeploys into concrete armour: resists anti-tank fire,\nbut siege weapons hit it much harder.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: tracked
 		TurnSpeed: 18
@@ -611,9 +611,36 @@ ts_nod_ticktank:
 		Step: 40
 	RevealOnFire:
 		ArmamentNames: primary, deployed
-	DamageMultiplier:
-		Modifier: 50
-		RequiresCondition: deployed
+	# DEPLOYING SWAPS THE ARMOUR TYPE, IT DOES NOT GRANT BLANKET DAMAGE REDUCTION.
+	# Maintainer 2026-08-22: *"What it should do instead is switching the armor type from heavy
+	# to concrete like in the original TS, which means anti building weapons will be more
+	# effective when it's deployed but anti vehicle weapons will be less effective. Right now
+	# everything is equally less effective at 50% reduced damage."*
+	#
+	# It used to carry `DamageMultiplier: 50 / RequiresCondition: deployed` — the STRONGEST
+	# deploy bonus in the tree (every other deployable sits at 60-75, and the only other
+	# vehicle-scale one is the 5000-credit `td_gdi_defenserig` at 70). Because damage
+	# multipliers MULTIPLY, it compounded with the whole veterancy ladder: deployed +
+	# rank-elite = x0.30, and a realistic late-game stack reached ~613,000 effective HP on an
+	# 800-credit tank. It was also invisible to pricing — `extract_stats` only reads a
+	# `DamageMultiplier` gated on the SHIELD-up condition — so the 2x was free.
+	#
+	# Measured across all 137 generated profiles, Concrete vs Heavy: anti-vehicle fire is far
+	# WEAKER against it (MissileAP 0.41x, Railgun 0.51x, MissileChem 0.50x) while siege fire is
+	# far STRONGER (Demolition 2.34x/2.06x, Flame 1.85x, Thermobaric 1.57x). Median 0.94x, so
+	# deploying is now a genuine trade-off instead of a flat 2x.
+	#
+	# ⚠ The three Armor traits MUST stay mutually exclusive. `DamageWarhead.DamageVersus` does
+	# `Util.ApplyPercentageModifiers(100, armor)` over EVERY enabled Armor trait, so two active
+	# at once MULTIPLY their Versus (Heavy 74 x Concrete 136 = 101, i.e. armour cancels itself).
+	# Gated on `!deployed` rather than `undeployed` so the deploy transition can never leave the
+	# actor with NO armour trait — that would resolve to a flat 100% and ignore Versus entirely.
+	Armor:
+		Type: Heavy
+		RequiresCondition: !shielded && !deployed
+	Armor@deployed:
+		Type: Concrete
+		RequiresCondition: !shielded && deployed
 	Turreted:
 		TurnSpeed: 18
 		Turret: deployed
