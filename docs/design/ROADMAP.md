@@ -38,23 +38,36 @@ owner Claude** (ledger split, retire weapon-class K, the five missing metrics).
 Maintainer: *"we need to rework all units that can only apply physical states from one weapon"*
 and *"the IFV kind of things need their own logic so you should skip them"*.
 
-### 1. METER DILUTION — 58 actors
+### 1. METER DILUTION — 34 actors — **now guarded: `audit_meter_dilution.py` (ratchet 34)**
 
 The meter fills from ONE weapon's damage but the target dies to the actor's WHOLE output, so the
 effect lands far later than the per-weapon `fill_ratio` says. `physical_state_price.fill_ratio` has
 a `fed_share` term for exactly this, but it works WITHIN a weapon and stops at the weapon boundary;
 the actor level is not modelled at all.
 
-**58 actors** fire a state weapon alongside unconditional non-state weapons. Worst offenders:
+⛔ **The number was 58 here and it was wrong — twice over, in opposite directions.** The measure
+now lives in a committed audit instead of a scratchpad script, because both errors were invisible
+in the output:
 
-| actor | state weapon | meter share | dilution |
-|---|---|--:|--:|
-| `japan_exorcistoitank` | `OIPlasmaFlamer` | 1.5% | **66.00x** |
-| `EDEN_LYNX_EMP` / `EDEN_TIGER_EMP` | `eden_EMP` | 4.0% | 25.10x |
-| `cabal_hunterdronecarrier` | `CabalOverkillLaser` | 6.9% | 14.51x |
-| `ra1_allies_destroyer` | `StingerCryo` | 14.5% | 6.89x |
+  1. counting EVERY `Armament` gave 170 and put every RA2 IFV at 10.92x — an IFV's 42 armaments
+     are each gated on a distinct `ifv-<passenger>` condition, so exactly ONE ever fires.
+  2. dividing meter-feeding damage by the actor's total gave 81 and scored `cobra.steel` at 5.20x
+     on a ONE-gun loadout. That formula DOUBLE-COUNTS: `fed_share` already prices the dilution
+     inside the state weapon. The factor the pricing cannot see is only the OTHER guns' damage,
+     `actor_total / carrier_total`.
 
-Distribution: 31 actors above 3x, 12 at 2-3x, 10 at 1.5-2x, 5 below 1.5x.
+**34 actors** fire a state weapon alongside unconditional non-state weapons:
+
+| actor | guns | with state | state guns' share | dilution |
+|---|--:|--:|--:|--:|
+| `japan_exorcistoitank` | 5 | 3 | 6.2% | **16.12x** |
+| `cabal_hunterdronecarrier` | 3 | 1 | 10.4% | **9.60x** |
+| `ra1_allies_destroyer` | 2 | 1 | 14.5% | **6.89x** |
+| `cabal_manticore` / `_backup` | 2 | 1 | 18.7% | **5.35x** |
+| `ra1_allies_sheridanassaulttank` | 3 | 1 | 44.4% | **2.25x** |
+
+Distribution: 10 above 3x, 3 at 2-3x, 11 at 1.5-2x, 10 below 1.5x. `EDEN_LYNX_EMP`/`EDEN_TIGER_EMP`
+are NOT on the list — both their guns carry the state, so there is nothing to dilute.
 
 ⚠ **`SheridanMissilesCryo`'s extreme Scale is a COMPENSATION for this, not an outlier.** The
 Sheridan fires Cannon + Vulcan + (Missiles XOR MissilesCryo); the cryo half is 44.4% of output, so
