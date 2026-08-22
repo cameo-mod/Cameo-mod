@@ -63,7 +63,7 @@ td_gdi_apc:
 	Armor:
 		Type: Medium
 	Turreted:
-		TurnSpeed: 40
+		TurnSpeed: 20
 	Armament@PRIMARY:
 		Weapon: APCGun
 		Recoil: 48
@@ -361,7 +361,7 @@ td_gdi_boxer:
 		Speed: 80
 		TurnSpeed: 16
 	Turreted:
-		TurnSpeed: 32
+		TurnSpeed: 16
 		Offset: -128,0,0
 	Armament@AG:
 		Weapon: BoxerCannonAG
@@ -560,7 +560,7 @@ td_gdi_assaultapc:
 	AttackFrontal:
 		FacingTolerance: 0
 	Turreted:
-		TurnSpeed: 25
+		TurnSpeed: 20
 		Offset: 100,0,250
 	Cargo:
 		UnloadVoice: Move
@@ -639,7 +639,7 @@ td_gdi_humveemkii:
 	ChangesHealth@SelfHealing:
 		Step: 15
 	Turreted:
-		TurnSpeed: 46
+		TurnSpeed: 23
 		Offset: 0,0,300
 	Armament:
 		Weapon: MachineGunHumvee2

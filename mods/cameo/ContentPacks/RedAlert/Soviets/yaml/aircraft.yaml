@@ -1065,7 +1065,7 @@ ra1_soviets_hiptransport:
 	ChangesHealth@SelfHealing:
 		Step: 60
 	Aircraft:
-		TurnSpeed: 10
+		TurnSpeed: 20
 		Speed: 100
 	WithIdleOverlay@ROTORAIR:
 		Sequence: rotor
@@ -1153,7 +1153,7 @@ ra1_soviets_supersonicnuclearbomber:
 		FacingTolerance: 40
 		StrafeRunLength: 5000
 	Aircraft:
-		TurnSpeed: 15
+		TurnSpeed: 13
 		Speed: 200
 		IdleTurnSpeed: 10
 		IdleSpeed: 100

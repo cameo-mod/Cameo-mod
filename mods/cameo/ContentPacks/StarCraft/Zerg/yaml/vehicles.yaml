@@ -10,6 +10,8 @@ zerg_drone:
 	Inherits@ZergBurrow: ^ZergBurrow
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
+	Mobile:
+		TurnSpeed: 40
 	FireWarheadsOnDeath:
 		Weapon: SCWorkerExplode
 		EmptyWeapon: SCWorkerExplode

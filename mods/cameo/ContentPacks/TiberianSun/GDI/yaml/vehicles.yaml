@@ -195,7 +195,7 @@ ts_gdi_mobileemp:
 	Mobile:
 		Locomotor: tracked
 		Speed: 100
-		TurnSpeed: 40
+		TurnSpeed: 20
 	Health:
 		HP: 150000
 	Repairable:
@@ -379,7 +379,7 @@ ts_gdi_juggernautmkii:
 	Mobile:
 		Locomotor: heavytracked
 		Speed: 70
-		TurnSpeed: 14
+		TurnSpeed: 28
 	Health:
 		HP: 50000
 	Repairable:
@@ -459,7 +459,7 @@ ts_gdi_juggernaut:
 	Mobile:
 		Locomotor: tracked
 		Speed: 71
-		TurnSpeed: 20
+		TurnSpeed: 14
 	RevealsShroud:
 		RequiresCondition: !inside-tunnel
 		Range: 9c0
@@ -485,7 +485,7 @@ ts_gdi_juggernaut:
 		Name: deployedbody
 	Turreted:
 		Turret: deploy
-		TurnSpeed: 20
+		TurnSpeed: 14
 		InitialFacing: 384
 		Offset: 0,0,256
 		RealignDelay: -1
@@ -546,6 +546,7 @@ ts_gdi_hovermlrs:
 		Queue: Vehicle, RAVehicle
 		Description: Hovering vehicle armed with\nlong range missiles.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	Mobile:
+		TurnSpeed: 16
 		Locomotor: hover
 		Speed: 80
 	Health:
@@ -1000,6 +1001,7 @@ ts_gdi_mobilesensorarray:
 		Queue: Vehicle, RAVehicle
 		Description: Detects cloaked units and buildings.\n Unarmed
 	Mobile:
+		TurnSpeed: 17
 		Speed: 85
 	Health:
 		HP: 60000

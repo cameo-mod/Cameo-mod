@@ -640,7 +640,7 @@ steelconsortium_supportshieldgenerator:
 	Mobile:
 		Locomotor: amphibius
 		Speed: 75
-		TurnSpeed: 15
+		TurnSpeed: 30
 	Health:
 		HP: 100000
 	Repairable:
@@ -694,6 +694,7 @@ steelconsortium_consortiummobileconstructionvehicle:
 		Prerequisites: steelconsortium_consortiumradar, ~steelconsortium_consortiumwarfactory
 		Description: Deploys into a Construction Yard.\n  Unarmed
 	Mobile:
+		TurnSpeed: 12
 		Speed: 60
 		Locomotor: amphibius
 	Health:
@@ -1072,7 +1073,7 @@ steelconsortium_barracuda:
 	ChangesHealth@SelfHealing:
 		Step: 16
 	Turreted:
-		TurnSpeed: 12
+		TurnSpeed: 16
 	Armament@AG1:
 		Name: primary
 		Weapon: SteelMantaHunterCannons
@@ -1254,7 +1255,7 @@ steelconsortium_hammerheadartillerytank:
 	Mobile:
 		Locomotor: hover
 		Speed: 100
-		TurnSpeed: 20
+		TurnSpeed: 40
 	Health:
 		HP: 52500
 	Repairable:
@@ -1425,7 +1426,7 @@ steelconsortium_dagger:
 	Mobile:
 		Locomotor: hover
 		Speed: 100
-		TurnSpeed: 20
+		TurnSpeed: 40
 	Health:
 		HP: 25000
 	Repairable:

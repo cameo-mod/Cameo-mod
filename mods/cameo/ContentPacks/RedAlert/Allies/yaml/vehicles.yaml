@@ -146,7 +146,7 @@ ra1_allies_alliedheavyaatank:
 		Speed: 75
 		TurnSpeed: 15
 	Turreted:
-		TurnSpeed: 30
+		TurnSpeed: 15
 		Offset: -128,0,0
 	Armament@AG:
 		Weapon: HeavyAATankCannonAG
@@ -240,7 +240,7 @@ ra1_allies_alliedartillery:
 		Step: 8
 	Mobile:
 		Speed: 60
-		TurnSpeed: 12
+		TurnSpeed: 24
 		Locomotor: lighttracked
 	Armament:
 		Weapon: 155mm
@@ -365,6 +365,7 @@ ra1_allies_minelayer:
 	Armor:
 		Type: Heavy
 	Mobile:
+		TurnSpeed: 26
 		Speed: 128
 	RevealsShroud:
 		Range: 5c0
@@ -882,7 +883,7 @@ ra1_allies_mobilegapgenerator:
 		Type: Light
 	Mobile:
 		Speed: 75
-		TurnSpeed: 15
+		TurnSpeed: 30
 	Targetable@Epic:
 		TargetTypes: Epic
 	TooltipExtras@Epic:
@@ -968,7 +969,7 @@ ra1_allies_mobileradarjammer:
 		Type: Light
 	Mobile:
 		Speed: 100
-		TurnSpeed: 20
+		TurnSpeed: 40
 	Targetable@Epic:
 		TargetTypes: Epic
 	TooltipExtras@Epic:

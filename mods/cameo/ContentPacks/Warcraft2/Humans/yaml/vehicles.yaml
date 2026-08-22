@@ -1,6 +1,8 @@
 wc2_humans_mobileconstructionvehiclehuman:
 	Inherits@WC2INFANTRY: ^WC2Vehicle
 	Inherits@WC2Template: ^WC2MCV
+	Mobile:
+		TurnSpeed: 30
 	Buildable:
 		Prerequisites: ~wc2_humans_blacksmith
 		Description: Transforms into a Town Hall.
@@ -65,6 +67,8 @@ wc2_humans_paladin:
 		Condition: paladin_upg
 	#Weapons
 	Inherits@attacks_and_spells: ^WC2KnightPaladinAttacksSpells
+	Mobile:
+		TurnSpeed: 46
 
 wc2_humans_warcraft3knight:
 	Inherits@WC2VEHICLE: ^WC2Vehicle
@@ -90,7 +94,7 @@ wc2_humans_warcraft3knight:
 		Step: 72
 	Mobile:
 		Speed: 120
-		TurnSpeed: 96
+		TurnSpeed: 48
 		Locomotor: tracked
 	Buildable:
 		BuildPaletteOrder: 30

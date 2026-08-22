@@ -99,7 +99,7 @@ ts_nod_subterraneanapc:
 		Locomotor: subterranean
 		PauseOnCondition: loading || being-captured || disabled
 		Speed: 60
-		TurnSpeed: 40
+		TurnSpeed: 24
 	Health:
 		HP: 17500
 	Repairable:
@@ -361,7 +361,7 @@ ts_nod_artillery:
 	Mobile:
 		Locomotor: tracked
 		Speed: 60
-		TurnSpeed: 24
+		TurnSpeed: 12
 	Health:
 		HP: 30000
 	Repairable:
@@ -369,7 +369,7 @@ ts_nod_artillery:
 	ChangesHealth@SelfHealing:
 		Step: 12
 	Turreted:
-		TurnSpeed: 24
+		TurnSpeed: 12
 		InitialFacing: 384
 	Armament@Dummy:
 		Weapon: TSArtyTargeting
@@ -477,6 +477,7 @@ ts_nod_mobilestealthgenerator:
 		Queue: Vehicle, RAVehicle
 		Description: Cloaks nearby buildings and units.\nCan not be cloaked.\n Unarmed
 	Mobile:
+		TurnSpeed: 11
 		Speed: 56
 	Health:
 		HP: 20000
@@ -600,7 +601,7 @@ ts_nod_ticktank:
 		Description: Nod's main battle tank.\nCan deploy to gain extra protection.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: tracked
-		TurnSpeed: 32
+		TurnSpeed: 18
 		Speed: 90
 	Health:
 		HP: 100000
@@ -614,7 +615,7 @@ ts_nod_ticktank:
 		Modifier: 50
 		RequiresCondition: deployed
 	Turreted:
-		TurnSpeed: 32
+		TurnSpeed: 18
 		Turret: deployed
 		Offset: 220,-20,296
 	Armament@PRIMARY:

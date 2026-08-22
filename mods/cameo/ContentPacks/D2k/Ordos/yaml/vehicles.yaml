@@ -38,7 +38,7 @@ ordos_apc:
 		Locomotor: hover
 		Voice: Move
 	Turreted:
-		TurnSpeed: 42
+		TurnSpeed: 21
 		Offset: -100,20,10
 	Armament:
 		Weapon: D2K_APC_Rocket
@@ -804,10 +804,10 @@ ordos_cobratank:
 		RegenAmount: 36
 	Mobile:
 		Speed: 45
-		TurnSpeed: 18
+		TurnSpeed: 9
 		RequireForceMoveCondition: deployed
 	Turreted:
-		TurnSpeed: 18
+		TurnSpeed: 9
 		Turret: deployed
 	RevealOnFire:
 		ArmamentNames: primary, deployed
@@ -906,9 +906,9 @@ ordos_pythontank:
 		RegenAmount: 56
 	Mobile:
 		Speed: 40
-		TurnSpeed: 16
+		TurnSpeed: 8
 	Turreted:
-		TurnSpeed: 16
+		TurnSpeed: 8
 		Turret: deployed
 	RevealOnFire:
 		ArmamentNames: primary, deployed
@@ -1786,10 +1786,10 @@ ordos_heavyautoguntank:
 		RegenAmount: 96
 	Mobile:
 		Speed: 75
-		TurnSpeed: 30
+		TurnSpeed: 15
 	Turreted:
 		Offset: 32,16,0
-		TurnSpeed: 12
+		TurnSpeed: 15
 	AttackFrontal:
 		FacingTolerance: 0
 	Armament:

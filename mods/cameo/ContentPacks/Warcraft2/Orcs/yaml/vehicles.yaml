@@ -1,6 +1,8 @@
 wc2_orcs_mobileconstructionvehicleorc:
 	Inherits@WC2INFANTRY: ^WC2Vehicle
 	Inherits@WC2Template: ^WC2MCV
+	Mobile:
+		TurnSpeed: 30
 	Buildable:
 		Prerequisites: ~wc2_orcs_blacksmith
 		Description: Transforms into a Great Hall.
@@ -68,6 +70,8 @@ wc2_orcs_ogremage:
 		Condition: ogremage_upg
 	#Weapons
 	Inherits@attacks_and_spells: ^WC2OgreOgreMageAttacksSpells
+	Mobile:
+		TurnSpeed: 34
 
 wc2_orcs_catapult:
 	Inherits@WC2VEHICLE: ^WC2Vehicle

@@ -8,6 +8,8 @@ terran_scv:
 	Inherits@AutoRepair: ^PrioritizeRepair
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@SHADOWS: ^Shadows
+	Mobile:
+		TurnSpeed: 40
 	FireWarheadsOnDeath:
 		Weapon: SCWorkerExplode
 		EmptyWeapon: SCWorkerExplode
@@ -300,7 +302,7 @@ terran_matador:
 		Type: Steel
 		RequiresCondition: !shielded && !undeployed
 	Turreted:
-		TurnSpeed: 15
+		TurnSpeed: 20
 		Offset: 0,0,0
 		RequiresCondition: undeployed
 	Turreted@deployed:
@@ -404,7 +406,7 @@ terran_cyclone:
 	ChangesHealth@SelfHealing:
 		Step: 36
 	Turreted:
-		TurnSpeed: 46
+		TurnSpeed: 23
 		Offset: -16,0,64
 	Armament:
 		Weapon: CycloneRockets
@@ -483,7 +485,7 @@ terran_goliath:
 	ChangesHealth@SelfHealing:
 		Step: 50
 	Turreted:
-		TurnSpeed: 36
+		TurnSpeed: 18
 		Offset: 0,0,0
 	Armament@G1:
 		Weapon: GoliathMG
@@ -554,7 +556,7 @@ terran_goliathmk2:
 	ChangesHealth@SelfHealing:
 		Step: 70
 	Turreted:
-		TurnSpeed: 30
+		TurnSpeed: 15
 		Offset: 0,0,0
 	Armament@G1:
 		Weapon: GoliathMk2MG
