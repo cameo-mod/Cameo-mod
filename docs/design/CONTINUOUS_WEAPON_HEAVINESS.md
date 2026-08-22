@@ -1,5 +1,46 @@
 # Continuous weapon heaviness — replace the level ladder with one scalar
 
+> # ⛔⛔ CORRECTION 2026-08-22 — THE VERSUS NUMBERS BELOW ARE WRONG
+>
+> **Every Versus figure in this document was measured with a broken parser** and must not be
+> acted on. The parser never CLOSED the `Versus:` block, so the `PercentageVersus:` rows that the
+> AreaDamage fold added inside the same warhead node silently OVERWROTE the real profile. What
+> was measured throughout was the percentage twin's 1..16 RANK ladder, not the armor profile.
+>
+> ```
+> Warhead@Bullet_Light: AreaDamage
+>     Versus:            None: 200 ... Spaceship 53, Superheavy 48   <- the REAL profile
+>     PercentageVersus:  None: 16  ... Spaceship  2, Superheavy  1   <- what was read
+> ```
+>
+> **Re-measured correctly (close the block when indentation returns to its level):**
+>
+> | claim in this document | truth |
+> |---|---|
+> | 0 of 125 profiles obey the MEAN-100 law | **123 of 125 obey it** (the 2 are `Nuclear_Super` and `Sniper_Light`, both `HAND_TUNED`) |
+> | every family violates the 2x-8x spread band | **37 of 42 are IN the band**; median spread **4.17x** against a target of 4x |
+> | spreads run 12x-100x | min 1.00x, p25 2.61x, median 4.17x, p75 4.97x, max 10.00x |
+> | the level applies an additive `+4 / +5` offset | that was the twin's rank ladder stepping 1/5/10 |
+> | 26 of 42 families invert under a tier-only bell | unverified — measured on the wrong data |
+> | a Heavy weapon self-prices at ~2x a Light one | unverified — measured on the wrong data |
+>
+> **The real outliers are three families:** `CannonAP` 1.81x and `Cryo` 1.97x (too flat), `Sniper`
+> 10.00x (too sharp). `Magic` and `Sonic` at 1.00x are FLAT BY DESIGN — `mean_normalise`
+> special-cases them ("ignores armor").
+>
+> **And the substance of this document is already LAW and already LIVE.** See `DESIGN.md`
+> **§12.0a THE MEAN-100 LAW** (2026-08-16, binding: *"all warheads average all versus values at
+> 100"*, so `K` is SHAPE-ONLY and `Damage` is the sole magnitude knob) and **§12.0d THE CLASS
+> TILT** (each LEVEL tilts toward one end of every armor ladder — Light toward the lightest rung,
+> Heavy toward the heaviest). §12.0d is the bell curve, and it already solves the inversion
+> problem properly: *"the tilt MUST NEVER reorder a ladder ... it can never invert"* — it is
+> applied to the VALUES and each armor is then given back the RANK it held. Both are implemented
+> in `gen_weapon_template.py` (`class_tilt` line 927, `mean_normalise` line 980) and live.
+>
+> **What is genuinely still open** is only this: make the tilt CONTINUOUS (driven by `h` from
+> `tier_chain`) instead of four discrete levels, and collapse the level templates to one per
+> family plus a per-weapon `h`.
+
 **Status:** design proposal, measured but not implemented. No yaml or C# changed yet.
 **⭐ READ §9 FIRST — the BELL CURVE model supersedes the additive offset of §2.**
 **Date:** 2026-08-22
