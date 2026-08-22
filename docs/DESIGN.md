@@ -918,11 +918,16 @@ cells are generated — inventing one would ship a faction identity nobody asked
 | **Bullet** | ✅ | — | ✅ | ✅ | — | — | — | ✅ |
 | **Cannon** | ✅ | ✅ | ✅ | — | — | ✅ | — | — |
 | **Missile** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ |
-| **Demolition** | — | — | ✅ | — | — | — | — | — |
+| **Demolition** | — | — | ✅ *(`CryoBlast`)* | — | — | — | — | ✅ *(`Thermobaric`)* |
 
-⚠ `Sonic` has **no** cell at all, so the resonance-ammo upgrade cannot be built today; and
-`Demolition` (bombs, charges, artillery shells) has only its Cryo cell. Those are the two
-gaps that block named upgrades.
+⚠ `Sonic` has **no** cell at all, so the resonance-ammo upgrade cannot be built today.
+
+⭐ The Demolition row shows the naming exception worth knowing: a blast cell built from
+`Demolition + Concussion + <element>` gets its OWN name rather than a `<Delivery><Tech>`
+one, because it is not a delivery carrying a payload — it IS the explosion. `Thermobaric`
+(fire) and `CryoBlast` (cold) are exact siblings of that construction, and `Concussion` is
+what makes them read as detonations: radius 2100, the widest of any family, on a seven-point
+curve that still does half damage at half its radius.
 
 ### Sharing is allowed — uniqueness is the goal, not a quota (maintainer 2026-08-22)
 

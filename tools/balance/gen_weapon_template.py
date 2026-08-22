@@ -1960,11 +1960,33 @@ BLEND_FAMILIES = {
                        {"Temperature": _m(-1.00)}, L3),
     "MissileCryo":    (["Laser", "Prism", "MissileAP", "MissileHE"],
                        {"Temperature": _m(-1.00)}, L3),
-    # Demolition twice for the same 50/50 — the cryo bomb / cryo artillery shell.
-    # `RapierBombsCryo` is already a pure `Demolition_Heavy`, and `155mmBastionCryo` /
-    # `155mmCryo` are the artillery shells the ruling names.
-    "DemolitionCryo": (["Laser", "Prism", "Demolition", "Demolition"],
-                       {"Temperature": _m(-1.00)}, L3),
+    # ⭐ CryoBlast = THE CRYO SIBLING OF THERMOBARIC (maintainer 2026-08-22): *"change the
+    # DemolitionCryo into a new thing: CryoBlast (which is like a cryo explosion) and it
+    # combines Demolition x Concussion x Cryo … It should increase the spread a bit and also
+    # make the versus values feel more like a detonation"*. Confirmed on all three counts.
+    #
+    # Same construction as `Thermobaric` (Demolition + Concussion + Flame) with Cryo in the
+    # element slot, so the two are exact siblings: the fire blast and the cold blast. EQUAL
+    # THIRDS, and Cryo expands to two primitives, so Demolition and Concussion are each listed
+    # twice to hold the 1/3 : 1/3 : 1/3 split.
+    #
+    # ⭐ CONCUSSION IS WHAT MAKES IT AN EXPLOSION, and it is the biggest single lever in the
+    # whole shape table: radius 2100 (the widest of any family) on a SEVEN-point curve
+    # (100, 72, 50, 32, 18, 8, 0), i.e. a shockwave that still does half damage at half its
+    # radius. Measured against the DemolitionCryo it replaces:
+    #
+    #     radius   345 -> 630 (+83%)      Spread 86 -> 105
+    #     falloff  100,59,32,14,0  ->  100,72,50,32,19,9,0
+    #     Versus   spread 1.90x -> 1.84x — FLATTER, which is the detonation feel: it gives up
+    #              anti-soft-target discrimination (Wood/None/Steel -3..-8) and gains the
+    #              vehicle rows (Scout/Light/Medium/Heroic +6..+8). A shaped charge picks a
+    #              target; a blast does not.
+    #
+    # Carries the cryo weapons whose delivery IS the explosion — `RapierBombsCryo` (a pure
+    # `Demolition_Heavy` today), and the `155mmBastionCryo` / `155mmCryo` artillery shells.
+    # Meter: Cryo's -200 over 3 top-level halves = -67, the Thermobaric derivation exactly.
+    "CryoBlast": (["Laser", "Prism", "Demolition", "Demolition", "Concussion", "Concussion"],
+                  {"Temperature": _m(-2 / 3)}, L3),
 }
 # Fixed emission order for a blend (it has no single light/heavy direction).
 BLEND_ARMOR_ORDER = ["None", "Flak", "Plate", "Heroic", "Scout", "Light", "Medium", "Heavy",
