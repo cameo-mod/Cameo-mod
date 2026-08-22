@@ -1717,8 +1717,14 @@ FAMILY_PHYSICAL_STATE = {
     "Flame":    ("Temperature", _m(1.00)),   # heat -> overheat/pop
     "Laser":    ("Temperature", _m(0.75)),   # laser overheats (main only, chip excluded)
     "Chemical": {"Corrosion": _m(1.00)},     # acid -> corrosion meter (mapping form)
-    "Cryo":     ("Temperature", _m(-1.00)),  # prism beam that freezes
-    "Inferno":  ("Temperature", _m(1.00)),   # prism beam that burns
+    # ⭐ SUPPORT WEAPONS, maintainer 2026-08-22: Cryo and Inferno fill the meter TWICE as fast as
+    # Flame (Scale 200 vs 100), so they freeze/ignite after 25% of lethal damage instead of 50%.
+    # The intent is "mostly apply the physical effect without dealing too much direct damage" —
+    # most of their output is INDIRECT. That is only expressible now that `speed_weight` prices
+    # fill RATE (the old delivery-average metric charged Scale 400 the same as Scale 67), so the
+    # doubled rate is paid for and the pipeline can take the direct damage back out.
+    "Cryo":     ("Temperature", _m(-2.00)),  # prism beam that freezes — 2x Flame
+    "Inferno":  ("Temperature", _m(2.00)),   # prism beam that burns — 2x Flame
     # Plasma (Temperature + Corrosion) needs two states on one warhead -> handled at family build.
 }
 
