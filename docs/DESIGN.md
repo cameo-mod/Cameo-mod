@@ -850,6 +850,118 @@ warhead — `CreateEffect`, `LeaveSmudge`, `GrantExternalCondition`, `ApplyPhysi
 **A weapon that cannot be collapsed is a design question, not a conversion blocker** — file
 it, propose the family, and do not merge warheads by damage arithmetic alone.
 
+## 11c. THE FACTION CROSS-WARHEAD LAW (binding, maintainer 2026-08-22)
+
+**Basic warheads are what an un-upgraded unit fires. A faction's weapon UPGRADE swaps them
+for that faction's CROSS warhead.** In the maintainer's words:
+
+> *"every cross warhead needs to be based on the faction's specific technology — for example
+> CannonTesla or MissileTesla for Soviet tech and CannonCryo or MissileCryo for Allied tech
+> and CannonQuantum and MissileQuantum for Steel Consortium and so on, so that we have the
+> tech for each faction to apply after the upgrades. Every faction should start with the basic
+> warheads like CannonAP and CannonHE and MissileAP and MissileHE but later on the faction
+> specific cross warheads are used for upgrades … Upgrades change warheads to faction specific
+> cross warheads! Basic warheads are used for unupgraded units."*
+
+This is the reason the `<Delivery><Tech>` blend grid exists. It is **not** a catalogue of
+combinations observed in the tree — it is the **faction upgrade matrix**, and a missing cell
+is a faction upgrade that cannot be built.
+
+### The two halves
+
+| | warhead family | example |
+|---|---|---|
+| **un-upgraded** | the PRIMITIVE delivery family | `CannonAP`, `CannonHE`, `MissileAP`, `MissileHE`, `Bullet`, `Demolition` |
+| **upgraded** | `<Delivery><FactionTech>` | `CannonTesla`, `MissileCryo`, `BulletQuantum` |
+
+### The mechanism already exists — do not invent a new one
+
+The Steel Consortium quantum upgrade is the reference implementation: a pair of armaments
+gated on the upgrade condition and its negation, swapping the WEAPON, which carries the
+different warhead.
+
+```
+Armament@PRIMARY:
+    Weapon: SteelQuantumTurretRail
+    RequiresCondition: !steelconsortium_upgrade_quantumweaponpower
+Armament@Upgrade:
+    Weapon: SteelQuantumTurretRail_EMP
+    RequiresCondition: steelconsortium_upgrade_quantumweaponpower
+```
+
+**55 armaments** in the Consortium pack already use exactly this shape. An upgrade that is
+meant to convert a faction's whole arsenal ("this one should replace all the weapons with the
+quantum versions") is that pattern applied across the pack, not a `FirepowerMultiplier`.
+
+⚠ A condition/negation armament pair is ONE gun, not two. `audit_meter_dilution` and any
+per-armament analysis must collapse the pair before counting, or an upgraded unit reads as
+carrying double the weapons it fires.
+
+### Named tech bindings (maintainer 2026-08-22)
+
+| faction | signature tech | cross families |
+|---|---|---|
+| Soviet | **Tesla** | `CannonTesla`, `MissileTesla`, `BulletTesla` |
+| Allied | **Cryo** | `CannonCryo`, `MissileCryo`, `BulletCryo`, `DemolitionCryo` |
+| Steel Consortium | **Quantum** | `CannonQuantum`, `MissileQuantum`, `BulletQuantum` |
+| *(resonance ammo upgrade)* | **Sonic** | `CannonSonic`, `MissileSonic`, `BulletSonic` |
+
+Every other faction's tech binding is still OPEN and needs a maintainer ruling before its
+cells are generated — inventing one would ship a faction identity nobody asked for.
+
+### Grid coverage, measured 2026-08-22
+
+4 deliveries × 8 techs = 32 cells; **16 exist**.
+
+| | Fire | Chem | Cryo | Tesla | Quantum | Nuke | Sonic | Thermobaric |
+|---|---|---|---|---|---|---|---|---|
+| **Bullet** | ✅ | — | ✅ | ✅ | — | — | — | ✅ |
+| **Cannon** | ✅ | ✅ | ✅ | — | — | ✅ | — | — |
+| **Missile** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ |
+| **Demolition** | — | — | ✅ | — | — | — | — | — |
+
+⚠ `Sonic` has **no** cell at all, so the resonance-ammo upgrade cannot be built today; and
+`Demolition` (bombs, charges, artillery shells) has only its Cryo cell. Those are the two
+gaps that block named upgrades.
+
+### Sharing is allowed — uniqueness is the goal, not a quota (maintainer 2026-08-22)
+
+> *"sometimes the cross warheads can be reused by other factions IF it makes sense for them to
+> have it. Not everything CAN be completely unique. There are not that many different types of
+> Fire we can use … make it as unique as possible while still trying to keep our warheads down
+> to a minimum without bloating it or making new nonsensical warheads just for the sake of
+> uniqueness … Still try to keep it unique as the primary objective."*
+
+So the faction→tech mapping is **many-to-one**. Two factions may share a cross family when the
+tech genuinely fits both; what is forbidden is minting a near-duplicate family so that each
+faction can own one.
+
+**The test, in order:**
+
+1. Does an existing family fit this faction's tech? → **reuse it.**
+2. Does the faction's tech name a genuinely different physical mechanism? → build the cell.
+3. Is the only argument "faction X should have its own"? → **reuse.** That is the bloat case.
+
+The fire families are the worked example of the ceiling: `Flame` (the primitive),
+`Thermobaric` = Flame × Demolition × Concussion, `Inferno` = Flame × Prism, `Plasma` =
+Flame × Chemical. Four distinct fire mechanisms is close to everything the physics offers — a
+fifth would be a relabel, not a weapon.
+
+⚠ This does **not** relax `audit_family_uniqueness` (rule 8d): no two FAMILIES may share both a
+radius and a curve. That guard is about the families being distinguishable in play, and it is
+untouched by two factions pointing at the same family. Reuse costs nothing there; duplication
+is exactly what it catches.
+
+### Consequences for the splice programme
+
+1. A cross family is justified by a FACTION UPGRADE, not by weapon-combination frequency.
+   The `Concussion × Demolition` cluster (27 weapons) is a 3-way-split problem; `CannonTesla`
+   (0 weapons today) is a REQUIRED cell. Frequency and necessity are different questions.
+2. Cells are built from `BLEND_FAMILIES` with the delivery half averaging **AP and HE**
+   together (§ the Cryo ruling: *"an in between blend of HE and AP so it fits with both
+   versions"*), so one cell serves both an AP and an HE base weapon.
+3. Always `splice_templates.py --all` — a new cell re-ranks the shield-coupling ladder.
+
 ## 12. Balance formula — the Cameo Armor System workbook
 
 **Weapon Versus construction: see `docs/design/ARMOR_SYSTEM.md`** — the
