@@ -1390,6 +1390,10 @@ Rammax_Sabot:
 		Damage: 10000
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 5
-####################################################################################################
-#		Red Alert 2 Syndicate
-####################################################################################################
+
+ScrapCarSpawner:
+	Projectile: InstantExplode
+	Warhead@1Actor: SpawnActor
+		Actors: scrapcar_driveby.latin, scrapcar2_driveby.latin
+		Range: 5
+		ValidTargets: Air, Ground, Water

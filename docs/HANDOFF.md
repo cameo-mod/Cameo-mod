@@ -62,17 +62,24 @@ is **dynamic faction loading** — load only the factions the lobby picked, inst
 at boot (historical peak: 12 GB RAM, unplayable on 8 GB machines). Every faction therefore
 becomes a self-contained ContentPack. Runbook: [`MIGRATION.md`](MIGRATION.md).
 
-**Health.** Green, with one easy red.
+**Health.** Green, with one red that needs a maintainer decision rather than work.
 
 | | |
 |---|---|
 | crash-class content (B8) | **0** |
-| empty warhead types (boot NRE class) | **0** of 2680 weapons |
+| empty warhead types (boot NRE class) | **0** of 2765 weapons |
 | dangling weapon refs / dangling inherit targets | **0** / **0** |
-| `tools/tests` | **227 tests, all green** |
+| `tools/tests` | **241 tests, all green** |
 | cross-document consistency audit | 73 passed, 0 failed |
 | balance-ledger drift | **0** — master re-extracted in `31e649b8` |
-| ⛔ **pinned doc claims** | **4 of 19 drifted** — see §3.0 |
+| pinned doc claims | **19 of 19 match** |
+| generator sync | drift **0** across 136 shared templates |
+| documentation structure (`audit_doc_health`, D1–D8) | **0** findings |
+| ⛔ **level-ladder ratchet** | **10 broken vs a ratchet of 9** — see §3.0 |
+
+⚠ The counts above were re-measured at `519175ae`; the per-class counts in
+[`audit/SUMMARY.md`](audit/SUMMARY.md) come from the last full suite run and carry the
+mixed-environment caveat described there.
 
 **The active front is the weapon rebuild, and pricing is deliberately NOT running yet.**
 `BALANCE_PROGRAM_PLAN.md` §0a is the binding order, and the reason is measurable: a price is a
@@ -173,33 +180,70 @@ not repeatedly.
 
 Crashes and player-visible regressions jump everything below.
 
-### 3.0 — DO THIS FIRST (four pinned numbers have drifted)
+### 3.0 — DO THIS FIRST (the suite is red, and one item is not yours to fix)
 
-`audit_doc_claims` is RED on **4 of 19** claims. Each is a number a DECISION rests on, and each
-is quoted in prose somewhere:
+Two things, in this order. Neither is large; the first is a decision, the second is a chore that
+has to happen on a machine this container is not.
 
-| claim | documented | measured | why it moved |
-|---|--:|--:|---|
-| `shield_versus_mean` | 186.791 | 189.088 | the new Cryo/blend families changed the Shield column |
-| `shield_hp_factor` | 0.535357 | 0.528855 | derived from the above |
-| `live_damage_multipliers` | 366 | 353 | W26 has been deleting them — progress, not a bug |
-| `plating_families` | 41 | 45 | four new families shipped; the plating matrix has no rows for them |
+**a. `audit_level_ladder` is FAILING — 10 broken ladders against a ratchet of 9.**
 
-**The fix is not just editing `value:`.** Every claim in the registry carries a `docs:` key
-naming each file that repeats the number — update `value` **and every one of those files in the
-same commit**. That co-update is the entire point of the registry.
+A family's damage must RISE with its level. Ten families do not: seven are INVERTED (a heavier
+level hits softer than a lighter one) and three are FLAT (every level identical). The measured
+table for all ten, and the three distinct shapes they fall into, are in
+[`design/ROADMAP.md`](design/ROADMAP.md) under **RATCHET BREACH**.
 
-`plating_families` is the one needing judgement rather than find-and-replace: four families
-exist that the plating matrix in `design/ARMOR_LAYERS.md` does not describe, so somebody has to
-write their rows.
+⛔ **Do not fix these by hand and do not raise the ratchet.** They are balance numbers
+(CLAUDE.md rule 3): the route is a maintainer ruling → `extract_stats` → ledger →
+`apply_balance --confirm`. `LADDER_BASELINE` in `tools/audit/audit_level_ladder.py` is
+LOWER-ONLY, and lowering it is how this closes.
+
+The ruling needed is small — for each family, which rung is wrong — but it is a **design**
+ruling, so it belongs to the maintainer. `MissileAP` (n=81) and `Tesla` (n=67) descend
+monotonically across well-populated rungs, which reads as a family built the wrong way round
+rather than a stray weapon; `CannonAP`, `Flak` and `Thermobaric` invert against a rung holding
+only two weapons, where the thin side is the likelier error; `Bullet` and `Demolition` are flat
+across 91 and 53 weapons, which is a different question again.
+
+⭐ **How it stayed hidden**, worth reading once: `latest/level_ladder.md` had not been
+regenerated since a commit PREDATING the change that exposed it, so a FAIL sat in the tree
+reporting itself as a WARN. A ratchet re-measured only when someone remembers is not a ratchet.
+
+**b. `docs/audit/latest/` needs one clean regenerate, from a complete tree.**
+
+It is currently a MIXTURE of two environments. A dozen audits read `engine/` C# or full git
+history; where those are missing the scripts scan a smaller corpus, report fewer findings and
+still say **PASS** — `unique_traits` 125 trait types → 11, `dead_warhead_fields` 27071 nodes →
+7014 — so alternating Windows and container runs have been overwriting each other's numbers.
+
+`run_all` now refuses to write `latest/` from an incomplete tree, diverting to the untracked
+`docs/audit/degraded/` and saying why (`--force-latest` overrides). So this is a one-time
+cleanup, and it needs a machine with `engine/` built and a non-shallow clone:
 
 ```sh
-python tools/audit/audit_doc_claims.py     # documented vs measured, all 19
+git fetch --unshallow          # if the clone is shallow
+bash tools/audit/run_all.sh    # writes latest/ only from a complete tree
 ```
 
-⚠ **The previous #1 item here — 9 drifted balance ledgers — is DONE.** Master fixed it in
-`31e649b8`. `ledgers_drifted` is now pinned in the registry, so a recurrence goes red
-immediately instead of being found by accident weeks later.
+Commit the result **whole**. Do not cherry-pick report files: Windows writes `mods\cameo\…`
+and Linux writes `mods/cameo/…`, so a cross-platform diff is dirty even between two complete
+trees. Full diagnosis: [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md).
+
+⚠ The suite also rewrites TRACKED files **outside** `audit/latest/` — `docs/factions/MATRIX.md`
+and `tools/rename/rename_map_*.yaml` (`gen_rename_maps.py` writes those as a side effect of the
+naming report). So `git status` after a suite run is not expected to be clean, and those files
+belong in the same commit. Seven rename maps are currently stale against master's icon renames
+at `519175ae`; they regenerate from tracked yaml only, so any complete tree produces the same
+answer.
+
+⚠ **The previous items here are DONE.** The 9 drifted balance ledgers were fixed by master in
+`31e649b8`, and the 4 drifted doc claims were cleared on 2026-08-23 —
+`audit_doc_claims` is now **19 of 19**, and `ledgers_drifted` is pinned in the registry so a
+recurrence goes red immediately instead of being found by accident weeks later.
+
+```sh
+python tools/audit/audit_level_ladder.py   # the red one
+python tools/audit/audit_doc_claims.py     # documented vs measured, all 19
+```
 
 ### 3.1 — The weapon rebuild (the main line)
 

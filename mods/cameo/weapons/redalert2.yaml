@@ -2994,7 +2994,7 @@ RA2SpyCamera:
 RA2ChronoAI:
 	Inherits: ChronoAI
 	Warhead@1Actor: SpawnActor
-		Actors: yrrobo, ra2_allies_ifv, ra2_allies_grizzlytank, ra2_allies_tankdestroyer, ra2_allies_miragetank, ra2_allies_prismtank, ra2_allies_battlefortress
+		Actors: ra2_allies_grizzlytank, ra2_allies_ifv, ra2_allies_grizzlytank, ra2_allies_tankdestroyer, ra2_allies_miragetank, ra2_allies_prismtank, ra2_allies_battlefortress
 
 ForceShield:
 	ReloadDelay: 10

@@ -3136,6 +3136,7 @@ SealBomb:
 		Damage: 20000
 	Warhead@Demolition_Heavy:
 		Damage: 20000
+
 BorisAKM:
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
@@ -3152,6 +3153,7 @@ BorisAKM:
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water
 		Damage: 4000
+
 WarpawayEffect:
 	ValidTargets: Ground, Water, Air
 	Warhead@1: CreateEffect
@@ -3220,9 +3222,13 @@ RA2SpyCamera:
 		ValidTargets: Ground, Water, Air
 
 RA2ChronoAI:
-	Inherits: ChronoAI
+	Inherits: ChronoshiftImpact
+	ReloadDelay: 1
+	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
 		Actors: yrrobo, ra2_allies_ifv, ra2_allies_grizzlytank, ra2_allies_tankdestroyer, ra2_allies_miragetank, ra2_allies_prismtank, ra2_allies_battlefortress
+		Range: 5
+		ValidTargets: Air, Ground, Water
 
 ForceShield:
 	ReloadDelay: 10

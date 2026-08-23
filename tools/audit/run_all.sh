@@ -16,7 +16,32 @@ if ! "$PYTHON" -c 'import sys' 2>/dev/null; then
   done
 fi
 
-OUT="docs/audit/latest"
+# Where may this run write?  docs/audit/latest/ is TRACKED evidence, and several
+# audits read engine/ C# or full git history — neither of which exists in a fresh
+# clone or a cloud container.  Missing them makes those audits report LESS and still
+# say PASS, so a regenerate from an incomplete tree silently deletes real findings.
+# tools/audit/environment.py owns the check and the exact list; pass --force-latest
+# to override.  See docs/LESSONS_LEARNED.md "audit/latest is environment-bound".
+FORCE_LATEST=""
+ARGS=""
+for arg in "$@"; do
+  case "$arg" in
+    --force-latest) FORCE_LATEST="--force-latest" ;;
+    *) ARGS="$ARGS $arg" ;;
+  esac
+done
+# shellcheck disable=SC2086
+set -- $ARGS
+
+OUT="$("$PYTHON" tools/audit/environment.py --print-dir $FORCE_LATEST)"
+if [ -z "$OUT" ]; then
+  # Fail loudly rather than defaulting: defaulting to latest/ is exactly the write
+  # this guard exists to prevent, and defaulting to anywhere else scatters 60 reports.
+  echo "run_all.sh: tools/audit/environment.py reported no output directory" >&2
+  exit 2
+fi
+"$PYTHON" tools/audit/environment.py $FORCE_LATEST >&2 || true
+
 mkdir -p "$OUT" docs/factions
 failed=0
 
@@ -69,7 +94,7 @@ done
 # audit_unconverted_templates writes its OWN report with --write; its stdout is only a
 # short summary, so redirecting stdout into the report file would clobber the real one.
 echo "== unconverted_templates"
-"$PYTHON" tools/audit/audit_unconverted_templates.py --write > /dev/null 2> "$OUT/unconverted_templates.err" \
+"$PYTHON" tools/audit/audit_unconverted_templates.py --write $FORCE_LATEST > /dev/null 2> "$OUT/unconverted_templates.err" \
   || failed=1
 [ -s "$OUT/unconverted_templates.err" ] || rm -f "$OUT/unconverted_templates.err"
 
@@ -90,7 +115,9 @@ echo "== gen_damage_matrix"
 echo "== gen_rename_maps"
 "$PYTHON" tools/audit/gen_rename_maps.py > "$OUT/naming.md" || failed=1
 echo "== gen_faction_matrix"
-"$PYTHON" tools/audit/gen_faction_matrix.py > docs/factions/MATRIX.md || failed=1
+MATRIX="docs/factions/MATRIX.md"
+[ "$OUT" = "docs/audit/latest" ] || MATRIX="$OUT/MATRIX.md"
+"$PYTHON" tools/audit/gen_faction_matrix.py > "$MATRIX" || failed=1
 
-echo "reports in $OUT/ ; matrix in docs/factions/MATRIX.md"
+echo "reports in $OUT/ ; matrix in $MATRIX"
 exit $failed

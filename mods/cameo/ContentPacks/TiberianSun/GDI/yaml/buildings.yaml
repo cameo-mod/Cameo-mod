@@ -725,32 +725,11 @@ ts_gdi_upgradecenter:
 		TargetCircleRanges:
 			1: 6000
 		TargetCircleColor: ff000080
-	DropPodsPower:
-		RequiresCondition: droppod
-		PauseOnCondition: lowpower || disabled
-			1: ~techlevel.superweapons
-		Icons:
-			1: droppod
-		Cursor: ability
-		ChargeInterval: 4500
-		UnitTypes: TSDPODE1, TSDPODE2
-		Weapon: TSDroppodSpawner
-		Names:
-			1: Drop Pods
-		Descriptions:
-			1: Deploys elite infantry from orbit.
-		SelectTargetSpeechNotification: SelectTarget
-		SelectTargetTextNotification: Select target.
-		LaunchSpeechNotification: ReinforcementsArrived
-		DisplayRadarPing: True
-		DisplayTimerRelationships: Ally, Neutral, Enemy
-		CameraActor: CAMERA.small
-		CameraRemoveDelay: 60
-		SupportPowerPaletteOrder: 30
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: tsionc
 	RenderSprites:
 		PlayerPalette: playerra2
+
 ts_gdi_navalyard:
 	Inherits: ^RA2Building
 	Inherits@shipyard: ^IsShipyard
@@ -775,3 +754,117 @@ ts_gdi_navalyard:
 		TargetTypes: Ground, Water, C4, Structure
 	RenderSprites:
 		PlayerPalette: player_rgba
+
+ts_gdi_dropshipbay:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^4x3Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@CPQWP: ^CPQConditionWithPrimary
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: GDI Dropship Bay
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 150
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Prerequisites:  ~ts_gdi_constructionyard, ts_gdi_techcenter, derricklimit
+		Queue: Building, RABuilding
+		Description: template_factory.description
+		IconPalette: tscameo
+	Building:
+		Footprint: =xx= xxxx =xx=
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
+	# Selectable:
+	# 	Bounds: 3072, 2048
+	# 	DecorationBounds: 3072, 2048
+	SelectionDecorations:
+	RallyPoint:
+		Path: 5,3
+	Exit@1:
+		SpawnOffset: 0,0,0
+		ExitCell: 2,2
+	Exit@2:
+		SpawnOffset: 0,0,0
+		ExitCell: 3,2
+	ProductionAirdropCA@NORMAL:
+		Produces: Vehicle
+		ActorType: ts_gdi_dropship
+		LandingFacing: 384
+		ReadyAudio: ReinforcementsArrived
+		SpawnType: ClosestEdgeToDestination
+		ProportionalSpeed: true
+		PauseOnCondition: disabled
+		RequiresCondition: !classicproductionqueues
+	ProductionAirdropCA@CLASSIC:
+		Produces: RAVehicle
+		ActorType: ts_gdi_dropship
+		LandingFacing: 384
+		ReadyAudio: ReinforcementsArrived
+		SpawnType: ClosestEdgeToDestination
+		ProportionalSpeed: true
+		PauseOnCondition: disabled
+		RequiresCondition: classicproductionqueues
+	ParallelProductionQueue@VEHICLE:
+		Type: Vehicle
+		DisplayOrder: 3
+		Group: Vehicle
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		BuildDurationModifier: 25
+		InfiniteBuildLimit: 10
+	ProductionBar@VEHICLE:
+		ProductionType: Vehicle
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAVEHICLE:
+		ProductionType: RAVehicle
+		RequiresCondition: classicproductionqueues
+	ProvidesPrerequisite:
+		Prerequisite: vehicleproduction
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@DISH:
+		Sequence: idle-dish
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	WithIdleOverlay@LIGHTS-BRIGHT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights-bright
+	DetonateWeaponPower@DropPods:
+		OrderName: GDI Drop
+		Prerequisites:
+			1: ~techlevel.superweapons
+		PauseOnCondition: disabled
+		Icons:
+			1: paratroopers
+		Cursor: ability
+		ChargeInterval: 4500
+		Names:
+			1: Drop Pods
+		ActivationDelay: 25
+		ActivationSequence:
+		Descriptions:
+			1: Drops in infantry from orbit.
+		Weapons:
+			1: TSDroppodSpawner
+		CameraActor: camera.placeholderhack
+		CameraRemoveDelay: 0
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		LaunchSpeechNotification: ReinforcementsArrived
+		IncomingSpeechNotification: EnemyUnitsApproaching
+		DisplayRadarPing: True
+		LaunchSound:
+		IncomingSound:
+	RenderSprites:
+		Image: ts_gdi_dropshipbay
+		PlayerPalette: playerra2
