@@ -1881,7 +1881,7 @@ Container@OBSERVER_WIDGETS:
 							Width: PARENT_WIDTH
 							Height: PARENT_HEIGHT
 							Color: 00000090
-						LineGraph@INCOME_GRAPH:
+						ScrollableLineGraph@INCOME_GRAPH:
 							X: 0
 							Y: 0
 							Width: PARENT_WIDTH - 5
@@ -1907,7 +1907,7 @@ Container@OBSERVER_WIDGETS:
 							Width: PARENT_WIDTH
 							Height: PARENT_HEIGHT
 							Color: 00000090
-						LineGraph@ARMY_VALUE_GRAPH:
+						ScrollableLineGraph@ARMY_VALUE_GRAPH:
 							X: 0
 							Y: 0
 							Width: PARENT_WIDTH - 5
@@ -1933,7 +1933,7 @@ Container@OBSERVER_WIDGETS:
 							Width: PARENT_WIDTH
 							Height: PARENT_HEIGHT
 							Color: 00000090
-						LineGraph@TEAM_ARMY_VALUE_GRAPH:
+						ScrollableLineGraph@TEAM_ARMY_VALUE_GRAPH:
 							X: 0
 							Y: 0
 							Width: PARENT_WIDTH - 5
@@ -1959,7 +1959,7 @@ Container@OBSERVER_WIDGETS:
 							Width: PARENT_WIDTH
 							Height: PARENT_HEIGHT
 							Color: 00000090
-						LineGraph@TEAM_INCOME_GRAPH:
+						ScrollableLineGraph@TEAM_INCOME_GRAPH:
 							X: 0
 							Y: 0
 							Width: PARENT_WIDTH - 5

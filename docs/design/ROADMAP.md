@@ -244,10 +244,15 @@ run draws exactly one panel. To exercise the rest, temporarily loop `OnClick()` 
 in the constructor and rest on the index you want drawn — the sweep proves construction and
 `DisplayStats`, resting on an index proves `Draw`. Revert the harness before committing.
 
-**Still unexercised:** the replay-speed buttons and the stats hotkeys are only reachable by a real
-click/keypress, and `ScrollableLineGraphWidget` (CA's horizontally scrollable graph, 613 lines) has
-not been ported — Cameo's four graphs use stock `LineGraphWidget`, which compresses a long game
-into the panel width instead of scrolling.
+⭐ **`ScrollableLineGraphWidget` ported 2026-08-23** — all four graphs now use it. Stock
+`LineGraphWidget` divides the panel width by the sample count, so a long game squeezes every sample
+into a couple of pixels and the graph stops being readable exactly when it gets interesting. The
+scrollable one keeps the x step FIXED (`XAxisSize` samples visible) and scrolls instead,
+auto-following the right edge until the viewer scrolls away from it. All four verified drawing in
+the same replay. That closes the CA observer widget set — Cameo now has every one of them.
+
+**Still unexercised:** the replay-speed buttons, the stats hotkeys and the new graph scrollbar are
+only reachable by a real click or keypress, which the replay harness cannot synthesise.
 
 ### 4. Deploy-abuse bugs (reporter: ws) — UNVERIFIED, needs reproduction
 

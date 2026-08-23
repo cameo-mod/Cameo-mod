@@ -101,8 +101,8 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		readonly ContainerWidget economyDamageHeaders;
 		readonly ContainerWidget teamArmyValueGraphContainer;
 		readonly ContainerWidget teamIncomeGraphContainer;
-		readonly LineGraphWidget teamArmyValueGraph;
-		readonly LineGraphWidget teamIncomeGraph;
+		readonly ScrollableLineGraphWidget teamArmyValueGraph;
+		readonly ScrollableLineGraphWidget teamIncomeGraph;
 		readonly ScrollPanelWidget playerStatsPanel;
 		readonly ScrollItemWidget minimalPlayerTemplate;
 		readonly ScrollItemWidget basicPlayerTemplate;
@@ -118,8 +118,8 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		readonly ScrollItemWidget combatPlayerTemplate;
 		readonly ContainerWidget incomeGraphContainer;
 		readonly ContainerWidget armyValueGraphContainer;
-		readonly LineGraphWidget incomeGraph;
-		readonly LineGraphWidget armyValueGraph;
+		readonly ScrollableLineGraphWidget incomeGraph;
+		readonly ScrollableLineGraphWidget armyValueGraph;
 		readonly ScrollItemWidget teamTemplate;
 		readonly IEnumerable<Player> players;
 		readonly IOrderedEnumerable<IGrouping<int, Player>> teams;
@@ -195,14 +195,14 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			combatPlayerTemplate = playerStatsPanel.Get<ScrollItemWidget>("COMBAT_PLAYER_TEMPLATE");
 
 			incomeGraphContainer = widget.Get<ContainerWidget>("INCOME_GRAPH_CONTAINER");
-			incomeGraph = incomeGraphContainer.Get<LineGraphWidget>("INCOME_GRAPH");
+			incomeGraph = incomeGraphContainer.Get<ScrollableLineGraphWidget>("INCOME_GRAPH");
 
 			armyValueGraphContainer = widget.Get<ContainerWidget>("ARMY_VALUE_GRAPH_CONTAINER");
-			armyValueGraph = armyValueGraphContainer.Get<LineGraphWidget>("ARMY_VALUE_GRAPH");
+			armyValueGraph = armyValueGraphContainer.Get<ScrollableLineGraphWidget>("ARMY_VALUE_GRAPH");
 			teamArmyValueGraphContainer = widget.Get<ContainerWidget>("TEAM_ARMY_VALUE_GRAPH_CONTAINER");
-			teamArmyValueGraph = teamArmyValueGraphContainer.Get<LineGraphWidget>("TEAM_ARMY_VALUE_GRAPH");
+			teamArmyValueGraph = teamArmyValueGraphContainer.Get<ScrollableLineGraphWidget>("TEAM_ARMY_VALUE_GRAPH");
 			teamIncomeGraphContainer = widget.Get<ContainerWidget>("TEAM_INCOME_GRAPH_CONTAINER");
-			teamIncomeGraph = teamIncomeGraphContainer.Get<LineGraphWidget>("TEAM_INCOME_GRAPH");
+			teamIncomeGraph = teamIncomeGraphContainer.Get<ScrollableLineGraphWidget>("TEAM_INCOME_GRAPH");
 
 			teamTemplate = playerStatsPanel.Get<ScrollItemWidget>("TEAM_TEMPLATE");
 
@@ -330,7 +330,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			incomeGraphContainer.Visible = true;
 
 			incomeGraph.GetSeries = () =>
-				players.Select(p => new LineGraphSeries(
+				players.Select(p => new ScrollableLineGraphSeries(
 					p.PlayerName,
 					p.Color,
 					(p.PlayerActor.TraitOrDefault<PlayerStatistics>() ?? new PlayerStatistics(p.PlayerActor)).IncomeSamples.Select(s => (float)s)));
@@ -363,9 +363,9 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			return totals;
 		}
 
-		IEnumerable<LineGraphSeries> TeamSeries(Func<PlayerStatistics, IEnumerable<int>> samples)
+		IEnumerable<ScrollableLineGraphSeries> TeamSeries(Func<PlayerStatistics, IEnumerable<int>> samples)
 		{
-			return teams.Select(t => new LineGraphSeries(
+			return teams.Select(t => new ScrollableLineGraphSeries(
 				t.Key > 0
 					? FluentProvider.GetMessage(TeamNumber, "team", t.Key.ToString(NumberFormatInfo.CurrentInfo))
 					: FluentProvider.GetMessage(NoTeam),
@@ -395,7 +395,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			armyValueGraphContainer.Visible = true;
 
 			armyValueGraph.GetSeries = () =>
-				players.Select(p => new LineGraphSeries(
+				players.Select(p => new ScrollableLineGraphSeries(
 					p.PlayerName,
 					p.Color,
 					(p.PlayerActor.TraitOrDefault<PlayerStatistics>() ?? new PlayerStatistics(p.PlayerActor)).ArmySamples.Select(s => (float)s)));
