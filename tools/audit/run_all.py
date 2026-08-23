@@ -27,6 +27,7 @@ CHILD_ENV = dict(os.environ, PYTHONIOENCODING="utf-8")
 
 AUDITS = [
     "inherits", "faction_leaks", "upgrades", "upgrade_coverage", "ai",
+    "ai_personalities",
     "sequences", "metadata", "outliers", "orphans", "assets", "fluent",
     "power_budget", "stat_formulas", "weapon_uniqueness", "garrison_weapons",
     "asset_files", "promotion_gating", "min_range", "basebuilder_crates",

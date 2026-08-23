@@ -1,5 +1,15 @@
 # Cameo Roadmap — detailed work queue (rebuilt 2026-07-13)
 
+## AI personality selector (2026-08-21)
+
+- [x] Add synchronized random Rush/Turtle/Tech/Expansion/Steamroller selection.
+- [x] Gate independent squad-manager instances on the selected condition.
+- [x] Add audit coverage for shared-field duplication and condition parity.
+- [ ] Add an observer-facing notification so players can see the selected
+  personality in-game.
+- [ ] Consider personality-specific base-builder behavior without duplicating
+  the full base-builder configuration.
+
 _The living work queue, resumable by any agent. Rule zero: crashes and
 bugs ALWAYS jump the queue. Ordering within a section: **quickest wins
 first, then by severity**. Effort: S < 1h, M = one session, L = multi-

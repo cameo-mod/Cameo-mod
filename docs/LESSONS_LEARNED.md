@@ -1,5 +1,22 @@
 # Lessons Learned — Start Here Before Every Task
 
+## YAML-only AI personalities and dead squad-manager keys (2026-08-21)
+
+The Cameo AI personality selector uses `GrantRandomCondition` on the inherited
+`Player` actor and gates five independent `SquadManagerBotModuleCA` instances
+with mutually exclusive personality conditions. The instances must duplicate
+their shared fields: YAML trait inheritance is keyed by the trait suffix, so a
+shared fallback can leave live managers with different or incomplete values.
+`tools/audit/audit_ai_personalities.py` compares every non-tuning field
+byte-for-byte and checks selector/consumer condition parity.
+
+`RushInterval` and `RushAttackScanRadius` are stale squad-manager keys. They
+are absent from both the vendored CA trait and the pinned engine, and must not
+be copied into new instances. Steamroller cannot express zero guerrilla units
+in YAML: the engine's `guerrillaForce == null` short-circuit creates the first
+guerrilla squad regardless of `JoinGuerrilla`, so its documented behavior is
+at most one harasser.
+
 **Read this document, `AGENT_WORKSPACE.md`, `PROJECT_CONTEXT.md`, and especially `DESIGN.md` before touching any code, YAML, asset, or balance value.** All canonical documents must be loaded into context at the start of every session.
 
 This is the central, repository-owned record of hard-won lessons, safe defaults, and recurring pitfalls discovered while working on Cameo. `docs/balance/LESSONS_LEARNED.md` is now a redirect to this file; keep all new lessons here.

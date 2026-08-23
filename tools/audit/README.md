@@ -25,6 +25,7 @@ suite can gate CI.
 | `audit_upgrades.py` | B3 | inverted multiplier directions, dead upgrades, dead wiring (needs `docs/design/upgrades_intent.yaml`) |
 | `audit_upgrade_coverage.py` | B4 | roster-wide upgrade coverage gaps |
 | `audit_ai.py` | B5 | ai.yaml refs to nonexistent/unloaded actors; unwired combat units |
+| `audit_ai_personalities.py` | AI wiring | personality selector/consumer condition parity and byte-identical shared squad-manager fields |
 | `audit_sequences.py` | B6 | missing render images/sequences; orphaned sequence images |
 | `audit_metadata.py` | B7 | duplicate/missing tooltips per faction |
 | `audit_outliers.py` | B9 | robust-z numeric drift per (trait, field); bounds hard screen |

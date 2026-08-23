@@ -1,5 +1,22 @@
 # Baseline Audit — Summary
 
+## AI personality audit
+
+`audit_ai_personalities.py` verifies that the five personality-gated
+`SquadManagerBotModuleCA` instances retain byte-identical shared fields and
+that their consumed conditions exactly match the `GrantRandomCondition`
+selector. Personality-specific differences are restricted to an explicit
+tuning allow-list.
+
+The implementation removes the stale `RushInterval` and
+`RushAttackScanRadius` keys; neither exists in the vendored CA or pinned engine
+SquadManager implementation. Steamroller is intentionally documented as
+having at most one harasser because the engine always creates the first
+guerrilla squad and YAML cannot express zero guerrilla units.
+
+There is no current in-game personality announcement. A condition-triggered
+notification/observer integration is a follow-up.
+
 _One page. Details: [FINDINGS.md](FINDINGS.md) · raw tables: [baseline/](baseline/) ·
 faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 
