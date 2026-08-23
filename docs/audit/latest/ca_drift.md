@@ -277,4 +277,4 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod\OpenRA.Mods.CA`
 -  168  `Traits/MadTankCA.cs`
 -  144  `AIUtils.cs`
 
-_Informational: this audit never fails. Adopting upstream CA code is a maintainer decision — see `docs/design/CA_UPSTREAM.md`._
+_Informational: this audit never fails. Adopting upstream CA code is a maintainer decision — see `docs/design/UPSTREAM_MODS.md`._

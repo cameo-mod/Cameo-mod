@@ -65,7 +65,7 @@ Crashes and player-visible regressions always jump the queue.
 |---|---|
 | [`design/PHYSICAL_STATE_SYSTEM.md`](design/PHYSICAL_STATE_SYSTEM.md) | the status-meter layer: heat, cryo, corrosion, EMP, sonic |
 | [`design/EMP_INTEGRITY_SYSTEM.md`](design/EMP_INTEGRITY_SYSTEM.md) | EMP / Integrity auto-scaling |
-| [`design/CA_UPSTREAM.md`](design/CA_UPSTREAM.md) | tracking Combined Arms upstream: the engine lineage, why the engine must NOT move to `ca-engine`, and the phased adoption plan for the 322 unadopted CA files |
+| [`design/UPSTREAM_MODS.md`](design/UPSTREAM_MODS.md) | absorbing the other OpenRA mods — CA, Crystallized Nexus, Romanov's Vengeance, Shattered Paradise: the engine lineage, why the engine must NOT move to `ca-engine`, and the phased adoption plan |
 
 ### Factions and content — 5 documents
 

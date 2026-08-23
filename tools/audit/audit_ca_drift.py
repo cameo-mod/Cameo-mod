@@ -102,7 +102,7 @@ def main():
         print(f"- {n:4d}  `{rel}`")
 
     print("\n_Informational: this audit never fails. Adopting upstream CA code is a maintainer "
-          "decision — see `docs/design/CA_UPSTREAM.md`._")
+          "decision — see `docs/design/UPSTREAM_MODS.md`._")
     return 0
 
 

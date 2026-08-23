@@ -1,8 +1,8 @@
-# Tracking Combined Arms upstream
+# Tracking the upstream mods
 
-**Owns:** how Cameo keeps its vendored `OpenRA.Mods.CA/` in step with
-[Combined Arms](https://github.com/Inq8/CAmod), what may be adopted automatically, and what may
-never be. Measured, not assumed — every number below comes from
+**Owns:** how Cameo absorbs work from the other OpenRA mods it descends from or wants to follow —
+Combined Arms, Crystallized Nexus, Romanov's Vengeance and Shattered Paradise — what may be
+adopted automatically, and what may never be. Measured, not assumed — every number below comes from
 `python tools/audit/audit_ca_drift.py` and from the two git histories.
 
 > Maintainer, 2026-08-23: *"Cameo is like the Frankenstein Monster of all the OpenRA mods, it
@@ -122,3 +122,77 @@ them, and let that tell us what kind of CA mechanics are actually wanted.
 
 **Related:** `docs/design/PROJECTILE_AND_EFFECT_LAYER.md` (weapon layer),
 `docs/LESSONS_LEARNED.md` (the engine pipeline and the assembly-order trap).
+
+
+---
+
+## 6. The other upstreams (2026-08-23)
+
+> Maintainer: *"we not only want RV and CA but basically ALL the OpenRA mods included … Cameo is
+> like the Frankenstein Monster of all the OpenRA mods."*
+
+All four are cloned beside this repo under `~/Documents/GitHub/`, so every number here is
+re-derivable. **`git -C <clone> pull` before trusting any of it** — a stale checkout produced a
+confident, wrong "CA doesn't have this" earlier in the same programme.
+
+| mod | clone | mod assembly | .cs | engine it pins | last push |
+|---|---|---|--:|---|---|
+| Combined Arms | `CAmod` | `OpenRA.Mods.CA` | 471 | `Inq8/OpenRA` `ca-engine/1.09` | 2026-07-30 **live** |
+| Crystallized Nexus | `crystallized-nexus` | `.modsdk/OpenRA.Mods.CN` | 134 (+21 launcher) | `DoGyAUT/crystallized-nexus-engine` `cn-20260820` | 2026-08-19 **live** |
+| Shattered Paradise | `Shattered-Paradise-SDK` | `OpenRA.Mods.Sp` | 50 | `MustaphaTR/OpenRA` `ab187a38c2` | 2025-09-27 dormant |
+| Romanov's Vengeance | `Romanovs-Vengeance` | `OpenRA.Mods.RA2` | 32 | `MustaphaTR/OpenRA` `ac7864a16d` | 2025-07-26 dormant |
+
+⭐ **RV and SP need no engine work at all, and that is measured, not assumed.** Both pin commits
+of `MustaphaTR/OpenRA`, and **both are ANCESTORS of `cameo-engine`** — checked with
+`git merge-base --is-ancestor`. Cameo's engine already contains everything their engines had; it
+is 2 581 commits past the 2024 base while they are frozen at points behind it. So for RV and SP
+the entire question is their MOD assemblies, and those are small: 32 and 50 files.
+
+That is also the answer to *"follow CA without losing what we got from RV"* — there is nothing to
+lose. The RV/SP inheritance lives in Cameo's ENGINE (`OpenRA.Mods.AS` above all), which CA does
+not have and which adopting CA mod code does not touch.
+
+**Two live upstreams, two frozen ones.** CA and CN are still moving, so they need the recurring
+drift check of §4. RV and SP are dormant: mine them ONCE, record what was taken, and stop
+watching them.
+
+### Crystallized Nexus — the one that needs real research
+
+CN is the newest and the most active, and unlike the others it **ships its own feature list**:
+`crystallized-nexus/FEATURES.txt` enumerates what it adds over the stock TS mod, which makes it
+the cheapest upstream to evaluate — read the list, pick, then look at the code. Its opening
+section alone offers `VoxelDynamics` (spring-based impact/recoil/roll tilt on voxel units, with a
+graphics toggle), drop-in `CNWithVoxelBody`/`Turret`/`Barrel`/`WalkerBody` replacements,
+`AlphaGradientPalette`, `CharredPalette`, `DamageSmoke`, `PeriodicSpriteEffect` and a full-screen
+`AtmosphericGradingRenderer`.
+
+⚠ **CN pins its OWN engine fork** (`DoGyAUT/crystallized-nexus-engine`), and `FEATURES.txt`
+explicitly refers to "ENGINE PATCHES". So some CN features are NOT mod-side and cannot simply be
+copied into `OpenRA.Mods.Cameo`. **This is the one unmeasured thing in this document** — the next
+step is to establish whether CN's engine shares an ancestor with `cameo-engine`, exactly as was
+done for RV and SP:
+
+```sh
+cd ~/Documents/GitHub/cameo-engine
+git remote add cn https://github.com/DoGyAUT/crystallized-nexus-engine.git
+git fetch cn --no-tags
+git merge-base cameo-engine cn/<branch>        # is there a shared base at all?
+git rev-list --left-right --count cameo-engine...cn/<branch>
+```
+
+Until that is run, treat every CN feature as *possibly* engine-side. A mod-side port is a copy; an
+engine-side one goes through the `cameo-engine` pipeline in `docs/LESSONS_LEARNED.md`.
+
+### Order of work
+
+1. **RV + SP first** — 82 files total, frozen, and no engine risk. Smallest job, and it closes
+   two upstreams permanently.
+2. **CN's mod-side features** — after the engine-lineage measurement above says which they are.
+3. **CA by capability** — §3, the largest and slowest, and the one where usage rather than
+   adoption is the bottleneck.
+
+⚠ The same trap applies to all four: `ObjectCreator.FindType` takes the FIRST assembly in
+`mod.yaml`'s `Assemblies:` order — **AS, CA, Cameo, Cnc, D2k, Common**. A ported type placed in
+`OpenRA.Mods.Cameo` cannot shadow one that already exists in AS or CA. Prove a port resolves to
+the assembly you intended by giving it a field the other one lacks and booting with that field
+set; `--docs` lists both types and proves nothing.
