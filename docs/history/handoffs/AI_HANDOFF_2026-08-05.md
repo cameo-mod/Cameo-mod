@@ -1,5 +1,11 @@
 # AI Handoff — 2026-08-05: Weapon 3-way split + AreaDamage + Balance pipeline
 
+> ⛔ **ARCHIVED — SUPERSEDED by [`docs/HANDOFF.md`](../../HANDOFF.md) (2026-08-23).**
+> This is a dated session record, kept for provenance and for the technique notes in it.
+> It is **not** current state: statuses, branch names, counts and "next steps" below were
+> true on 2026-08-05 and have moved since. Never resume work from this file — read
+> `docs/HANDOFF.md`, then verify against the artifact. This was the file CLAUDE.md pointed at as the weapon-work must-read; that pointer now goes to `docs/HANDOFF.md` and `docs/design/WEAPON_3WAY_SPLIT.md`. Still useful for: the per-cluster conversion notes and the retrofit technique.
+
 > **Scope:** This is a continuation handoff for the next AI agent. Read it top-to-bottom before touching weapons, balance, or warhead templates. Companion docs: `AREADAMAGE_HANDOFF.md`, `WEAPON_3WAY_SPLIT.md`, `ROADMAP.md`, `BALANCE_PIPELINE.md`, `AGENT_WORKSPACE.md`.
 
 ---

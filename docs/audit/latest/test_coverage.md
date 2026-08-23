@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (2 file(s)) | 24 | >= 24 |
-| T2 | `def test_*` in tools/tests (16 file(s)) | 189 | >= 177 |
-| T3 | modules with no test mentioning them | 239 | <= 224 |
+| T2 | `def test_*` in tools/tests (19 file(s)) | 227 | >= 177 |
+| T3 | modules with no test mentioning them | 244 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (239)
+## T3 — untested modules (244)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -164,13 +164,17 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_consistency_report.py | audit_consistency_report |
 | python | tools/audit/audit_damage_grid.py | audit_damage_grid |
 | python | tools/audit/audit_display_text.py | audit_display_text |
+| python | tools/audit/audit_doc_claims.py | audit_doc_claims |
 | python | tools/audit/audit_dune_rank_decoration.py | audit_dune_rank_decoration |
+| python | tools/audit/audit_duplicate_inherits.py | audit_duplicate_inherits |
 | python | tools/audit/audit_effect_warhead_names.py | audit_effect_warhead_names |
 | python | tools/audit/audit_elite_gating.py | audit_elite_gating |
 | python | tools/audit/audit_empty_warheads.py | audit_empty_warheads |
 | python | tools/audit/audit_faction_leaks.py | audit_faction_leaks |
 | python | tools/audit/audit_fluent.py | audit_fluent |
 | python | tools/audit/audit_garrison_weapons.py | audit_garrison_weapons |
+| python | tools/audit/audit_hex_shield_routing.py | audit_hex_shield_routing |
+| python | tools/audit/audit_impact_glow_preservation.py | audit_impact_glow_preservation |
 | python | tools/audit/audit_inherits.py | audit_inherits |
 | python | tools/audit/audit_k_linearity.py | audit_k_linearity |
 | python | tools/audit/audit_metadata.py | audit_metadata |
@@ -200,7 +204,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_warhead_split.py | audit_warhead_split |
 | python | tools/audit/audit_weapon_suffixes.py | audit_weapon_suffixes |
 | python | tools/audit/audit_weapon_uniqueness.py | audit_weapon_uniqueness |
-| python | tools/audit/cameo_model.py | cameo_model |
 | python | tools/audit/check_effect_audio.py | check_effect_audio |
 | python | tools/audit/dump_resolved.py | dump_resolved |
 | python | tools/audit/find_empty_warhead.py | find_empty_warhead |
@@ -224,6 +227,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/build_workbook.py | build_workbook |
 | python | tools/balance/check_band.py | check_band |
 | python | tools/balance/compensate_retrofit.py | compensate_retrofit |
+| python | tools/balance/convert_apply_to_scaled_v2.py | convert_apply_to_scaled_v2 |
 | python | tools/balance/count_mixed.py | count_mixed |
 | python | tools/balance/design_invented_profiles.py | design_invented_profiles |
 | python | tools/balance/fix_orphan_old_keys.py | fix_orphan_old_keys |
@@ -231,11 +235,11 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/fix_stale_warhead_keys.py | fix_stale_warhead_keys |
 | python | tools/balance/gen_effects.py | gen_effects |
 | python | tools/balance/gen_projectiles.py | gen_projectiles |
-| python | tools/balance/gen_weapon_template.py | gen_weapon_template |
 | python | tools/balance/harvester_table.py | harvester_table |
 | python | tools/balance/import_workbook.py | import_workbook |
 | python | tools/balance/measure_retrofit_gap.py | measure_retrofit_gap |
 | python | tools/balance/plan_firepower_retirement.py | plan_firepower_retirement |
+| python | tools/balance/plan_warhead_collapse.py | plan_warhead_collapse |
 | python | tools/balance/propose_rebalance.py | propose_rebalance |
 | python | tools/balance/remove_dead_weapons.py | remove_dead_weapons |
 | python | tools/balance/rename_3way_underscore.py | rename_3way_underscore |
@@ -249,6 +253,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/strip_orphan_report.py | strip_orphan_report |
 | python | tools/balance/strip_weapon_versus.py | strip_weapon_versus |
 | python | tools/balance/sweep_areadamage.py | sweep_areadamage |
+| python | tools/balance/tier_chain.py | tier_chain |
 | python | tools/balance/update_ranges.py | update_ranges |
 | python | tools/balance/verify_generator_sync.py | verify_generator_sync |
 | python | tools/balance/verify_retrofit.py | verify_retrofit |
@@ -262,5 +267,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 239 untested > baseline 224
+- T3: 244 untested > baseline 224
 

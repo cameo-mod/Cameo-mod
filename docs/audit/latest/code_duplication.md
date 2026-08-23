@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **241** (min 5 statements), C# files: **332** (min 8 lines)
+Python files: **252** (min 5 statements), C# files: **333** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
@@ -20,9 +20,9 @@ Python files: **241** (min 5 statements), C# files: **332** (min 8 lines)
 | 2 | 3ec58372f7614926 | tools/tilesets/generate_clear_lava.py:639 lattice(); tools/tilesets/generate_sh04_alpha_beach_prototype.py:1538 lattice() |
 | 2 | 6a38f8704e6495e3 | tools/tilesets/generate_volcanic_tileset.py:576 tileable_noise(); tools/tilesets/volcanic_art_utils.py:120 tileable_noise() |
 | 2 | 91e5e00bc8dcb778 | tools/tilesets/build_volcanic_basalt_gimp_brushes.py:58 checkerboard(); tools/tilesets/fix_tc_basalt_shadow_outlines.py:60 checkerboard() |
-| 2 | 97800b303b1b47fb | tools/rename/apply.py:73 sub(); tools/rename/safe_rename.py:87 sub() |
 | 2 | beec2625d556ef6b | tools/tilesets/generate_clear_lava.py:621 periodic_value_noise(); tools/tilesets/generate_sh04_alpha_beach_prototype.py:1520 periodic_value_noise() |
 | 2 | f0e4b6e20114d0f8 | tools/rename/apply.py:35 load_map(); tools/rename/safe_rename.py:35 load_map() |
+| 2 | f8ceb8b1978799b5 | tools/rename/apply.py:73 sub(); tools/rename/safe_rename.py:87 sub() |
 
 
 ## C2 — C# method clones (14 group(s))
@@ -55,7 +55,7 @@ Python files: **241** (min 5 statements), C# files: **332** (min 8 lines)
 | 2 | 4979d18fd8f148a1 | tools/tilesets/detect_cliff_dark_noise.py:14 BLACK; tools/tilesets/process_ai_edge_mask.py:15 BLACK |
 | 2 | 590fa5489ca5f751 | tools/audit/find_orphan_old_keys_multi.py:25 OLD_KEY_FAMILIES; tools/balance/fix_orphan_old_keys_multi.py:22 OLD_KEY_FAMILIES |
 | 2 | 7b392ae5dfabff76 | tools/tilesets/apply_ai_edge_correction.py:16 MAGENTA; tools/tilesets/process_ai_edge_mask.py:14 MAGENTA |
-| 2 | 8ad665990352733b | tools/balance/build_workbook.py:57 TYPE_ORDER; tools/balance/import_workbook.py:36 TYPE_SHEETS |
+| 2 | 8ad665990352733b | tools/balance/build_workbook.py:58 TYPE_ORDER; tools/balance/import_workbook.py:36 TYPE_SHEETS |
 | 2 | 985c1fe34e42db41 | tools/audit/find_empty_warhead.py:16 CENTRAL; tools/balance/sweep_areadamage.py:25 CENTRAL |
 | 2 | c15459229a835d70 | tools/tilesets/build_tc_basalt_from_gimp.py:18 ACTORS; tools/tilesets/fix_tc_basalt_shadow_outlines.py:18 ACTORS |
 | 2 | de57d7955065e638 | tools/balance/gen_effects.py:38 LEVELORDER; tools/balance/gen_projectiles.py:30 LEVELORDER |

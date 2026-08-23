@@ -835,7 +835,7 @@ _none found_
 | tsfiendshard | Warhead@Chemical_Light, Warhead@Chemical_Light_Percentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by forgotten_tiberianfiend) |
 | tsfiendshardblue | Warhead@Grenade, Warhead@GrenadeFriendlyFire, Warhead@GrenadePercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by forgotten_viniferafiend) |
 | tsfiendshardblueup | Warhead@Grenade, Warhead@GrenadeFriendlyFire, Warhead@GrenadePercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by forgotten_viniferafiend) |
-| tsfiendshardup | Warhead@LightChemicalWeapon, Warhead@LightChemicalWeaponFriendlyFire, Warhead@LightChemicalWeaponPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by forgotten_tiberianfiend) |
+| tsfiendshardup | Warhead@LightChemicalWeapon, Warhead@LightChemicalWeaponPercentage, Warhead@Concrete, Warhead@MediumChemicalWeapon | targets Air but no damage warhead hits Air (used by forgotten_tiberianfiend) |
 | tstacticalchemmissile | Warhead@Concrete | targets Air but no damage warhead hits Air (used by ts_nod_missilesilo) |
 | tstacticalmissile | Warhead@Concrete | targets Air but no damage warhead hits Air (used by ts_nod_missilesilo) |
 | venomlaserburning | Warhead@Inferno_Medium, Warhead@Inferno_Medium_Percentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by td_nod_venom) |

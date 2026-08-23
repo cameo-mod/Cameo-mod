@@ -4,7 +4,7 @@
 > to finish the Cameo balance program — the weapon 3-way split, the weapon
 > foundation laws, the reference data-mining + synthesis, the class anchors,
 > the Formula-V2 completion, and the per-faction apply. Supersedes the PERT
-> table in `docs/AI_HANDOFF_2026-08-05.md` §8 (which predates A1 being done and
+> table in `docs/history/handoffs/AI_HANDOFF_2026-08-05.md` §8 (which predates A1 being done and
 > under-counted the reference-research and Formula-V2 categories).
 >
 > Method: **three-point PERT**. For each item, `O` = optimistic, `M` = most

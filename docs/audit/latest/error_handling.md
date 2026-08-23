@@ -1,13 +1,13 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **241**
+Files scanned: **252**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 2 | 2 |
-| E2 | handler discards the error | 57 | 30 |
+| E2 | handler discards the error | 61 | 30 |
 | E3 | open() without encoding= | 91 | 90 |
-| E4 | subprocess call without check= | 11 | 9 |
+| E4 | subprocess call without check= | 13 | 9 |
 
 
 ## E1 — 2 finding(s)
@@ -18,7 +18,7 @@ Files scanned: **241**
 | tools/audit_createeffect_image.py | 19 | bare `except:` |
 
 
-## E2 — 57 finding(s)
+## E2 — 61 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -54,12 +54,12 @@ Files scanned: **241**
 | tools/balance/compensate_retrofit.py | 121 | handler body discards the error |
 | tools/balance/design_invented_profiles.py | 172 | handler body discards the error |
 | tools/balance/design_invented_profiles.py | 186 | handler body discards the error |
-| tools/balance/extract_stats.py | 236 | handler body discards the error |
-| tools/balance/extract_stats.py | 860 | handler body discards the error |
-| tools/balance/formula.py | 324 | handler body discards the error |
+| tools/balance/extract_stats.py | 238 | handler body discards the error |
+| tools/balance/extract_stats.py | 948 | handler body discards the error |
+| tools/balance/formula.py | 390 | handler body discards the error |
 | tools/balance/measure_retrofit_gap.py | 134 | handler body discards the error |
 | tools/balance/plan_firepower_retirement.py | 81 | handler body discards the error |
-| tools/balance/propose_class_rebalance.py | 278 | handler body discards the error |
+| tools/balance/propose_class_rebalance.py | 279 | handler body discards the error |
 | tools/balance/report_versus_change.py | 74 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 209 | handler body discards the error |
 | tools/balance/retrofit_legacy_template.py | 312 | handler body discards the error |
@@ -69,6 +69,10 @@ Files scanned: **241**
 | tools/balance/retrofit_legacy_template.py | 531 | handler body discards the error |
 | tools/balance/shield_uniqueness.py | 63 | handler body discards the error |
 | tools/balance/target_model.py | 411 | handler body discards the error |
+| tools/balance/tier_chain.py | 48 | handler body discards the error |
+| tools/balance/tier_chain.py | 119 | handler body discards the error |
+| tools/balance/tier_chain.py | 133 | handler body discards the error |
+| tools/balance/tier_chain.py | 254 | handler body discards the error |
 | tools/balance/verify_retrofit.py | 79 | handler body discards the error |
 | tools/balance/verify_retrofit.py | 87 | handler body discards the error |
 | tools/reference/aggregate_archetype.py | 873 | handler body discards the error |
@@ -178,12 +182,14 @@ Files scanned: **241**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 11 finding(s)
+## E4 — 13 finding(s)
 
 | file | line | detail |
 |---|---|---|
-| tools/audit/run_all.py | 58 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 79 | `subprocess.run()` without check= |
+| tools/audit/audit_doc_claims.py | 104 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 75 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 92 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 112 | `subprocess.run()` without check= |
 | tools/balance/apply_balance.py | 271 | `subprocess.run()` without check= |
 | tools/balance/apply_balance.py | 273 | `subprocess.run()` without check= |
 | tools/balance/compensate_retrofit.py | 170 | `subprocess.run()` without check= |
@@ -197,7 +203,7 @@ Files scanned: **241**
 
 ## FAIL
 
-- E2: 57 > baseline 30
+- E2: 61 > baseline 30
 - E3: 91 > baseline 90
-- E4: 11 > baseline 9
+- E4: 13 > baseline 9
 

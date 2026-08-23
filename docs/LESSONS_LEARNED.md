@@ -1,26 +1,77 @@
-# Lessons Learned — Start Here Before Every Task
+# Lessons Learned — read before every task
 
-**Read this document, `AGENT_WORKSPACE.md`, `PROJECT_CONTEXT.md`, and especially `DESIGN.md` before touching any code, YAML, asset, or balance value.** All canonical documents must be loaded into context at the start of every session.
+**Read this file, `AGENT_WORKSPACE.md`, `HANDOFF.md` and the relevant sections of `DESIGN.md`
+before touching any code, YAML, asset or balance value.**
 
-This is the central, repository-owned record of hard-won lessons, safe defaults, and recurring pitfalls discovered while working on Cameo. `docs/balance/LESSONS_LEARNED.md` is now a redirect to this file; keep all new lessons here.
+This is the repository-owned record of hard-won lessons, safe defaults and recurring pitfalls.
+Every entry was paid for once — the point of the file is that it is not paid for twice.
+**Add new lessons here**, not in a session log and not in a memory.
 
 ---
 
 ## Required reading order for every new task
 
-**The canonical reading order is defined in `docs/README.md`.** The list below
-is provided for convenience; if it disagrees with README.md, README.md wins.
+**`docs/README.md` is the canonical definition of the reading order.** The list below is a
+convenience copy; if they disagree, README wins and this copy gets fixed.
 
-1. `CLAUDE.md` (repo root) — project instructions, loaded every session.
+1. `CLAUDE.md` (repo root) — the hard rules, loaded every session.
 2. `docs/LESSONS_LEARNED.md` (this file) — safe defaults and pitfalls.
 3. `docs/AGENT_WORKSPACE.md` — source-of-truth map, operating sequence, incident protocol, commit gate.
-4. `docs/PROJECT_CONTEXT.md` — short project orientation and current safety focus.
-5. `docs/DESIGN.md` — binding rules and conventions (read the relevant sections, especially before modifying YAML, assets, naming, weapons, balance, or descriptions).
-6. `docs/design/ROADMAP.md` — current work queue and P0 items.
-7. `docs/audit/SUMMARY.md` — known issue classes and current audit status.
+4. `docs/HANDOFF.md` — verified current state and the priority-ordered queue.
+5. `docs/DESIGN.md` — binding rules; read the sections your change touches.
+6. `docs/design/ROADMAP.md` — the granular work queue.
+7. `docs/audit/SUMMARY.md` — known issue classes and current audit counts.
 8. `docs/Cameo_Knowledge_Base_Manual.md` — engine and custom-trait reference, as needed.
 
-Do not modify rules, assets, or balance numbers until these documents are in context. When this document and `DESIGN.md` conflict with code or old notes, the repository documents win unless an audit baseline explicitly defers the fix.
+When this document and `DESIGN.md` conflict with code or old notes, the repository documents
+win — **unless the artifact says otherwise, and then the artifact wins and you fix the document.**
+
+---
+
+## Contents
+
+**Crash classes — these end a boot, and most gates cannot see them**
+
+- [`Parent type X was already inherited` — the crash class nothing but the boot could see (2026-08-17)](#parent-type-x-was-already-inherited--the-crash-class-nothing-but-the-boot-could-see-2026-08-17)
+- [Empty warhead type = boot NRE; check-yaml does not catch it (2026-08-04)](#empty-warhead-type--boot-nre-check-yaml-does-not-catch-it-2026-08-04)
+- [Interactable trait and upgrade actors (2026-07-24)](#interactable-trait-and-upgrade-actors-2026-07-24)
+- [ClassicProductionQueueProperties crash on actors with no queue (2026-07-31)](#classicproductionqueueproperties-crash-on-actors-with-no-queue-2026-07-31)
+- [YAML lint cleanup header-removal bug (2026-07-24)](#yaml-lint-cleanup-header-removal-bug-2026-07-24)
+
+**Silent-corruption classes — valid yaml, clean boot, wrong game**
+
+- [Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)](#five-bug-classes-from-the-w25-armorversus-rebuild-2026-08-1617)
+- [`Inherits` POSITION is semantic, not cosmetic (2026-08-16)](#inherits-position-is-semantic-not-cosmetic-2026-08-16)
+- [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
+- [Effect-warhead merge safety during 3-way split (2026-08-07)](#effect-warhead-merge-safety-during-3-way-split-2026-08-07)
+- [Bulk YAML rename scripts: safety lessons (2026-07-31)](#bulk-yaml-rename-scripts-safety-lessons-2026-07-31)
+- [Loose-extracted .oramap maps must always be repacked (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
+
+**Weapon templates and the 3-way split**
+
+- [Weapon template retrofit — Phase A lessons (2026-08-02)](#weapon-template-retrofit--phase-a-lessons-2026-08-02)
+- [Weapon 3-way split — effect/projectile pitfalls (2026-08-05)](#weapon-3-way-split--effectprojectile-pitfalls-found-during-the-effects-table-pass-2026-08-05)
+- [Weapon 3-way split: projectile family naming (2026-08-07)](#weapon-3-way-split-projectile-family-naming-2026-08-07)
+
+**Balance pipeline and formula**
+
+- [Latest lessons from the July 2026 infantry rebalance pass](#latest-lessons-from-the-july-2026-infantry-rebalance-pass)
+- [Class-specific notes](#class-specific-notes)
+- [Uniqueness enforcement](#uniqueness-enforcement)
+- [Dual-weapon units](#dual-weapon-units)
+- [Audit and pipeline findings from 2026-07-22](#audit-and-pipeline-findings-from-2026-07-22)
+
+**Process, tooling and platform**
+
+- [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
+- [YAML lint rules learned (2026-07-24)](#yaml-lint-rules-learned-2026-07-24)
+- [Superweapon documentation audit (2026-07-25)](#superweapon-documentation-audit-2026-07-25)
+- [Engine update pipeline and Smart App Control findings (2026-07-30)](#engine-update-pipeline-and-smart-app-control-findings-2026-07-30-updated-with-deep-research)
+- [Content installer and music filesystem plumbing (2026-08-11)](#content-installer-and-music-filesystem-plumbing-2026-08-11)
+- [Between-cell movement responsiveness (2026-08-11)](#between-cell-movement-responsiveness-2026-08-11)
+- [OpenRA Lua `Map` API: there is no `Map.Contains` (2026-07-31)](#openra-lua-map-api-there-is-no-mapcontains-2026-07-31)
+
+---
 
 ## Content installer and music filesystem plumbing (2026-08-11)
 
@@ -38,24 +89,6 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - `cameo-content` is deliberately hyphenated to match the engine's
   `*-content` mod convention; it is an explicit exception to Cameo's
   underscore-only in-mod naming rule.
-
-## Contents
-
-- [Latest lessons from the July 2026 infantry rebalance pass](#latest-lessons-from-the-july-2026-infantry-rebalance-pass)
-- [Class-specific notes](#class-specific-notes)
-- [Uniqueness enforcement](#uniqueness-enforcement)
-- [Dual-weapon units](#dual-weapon-units)
-- [Audit and pipeline findings from 2026-07-22](#audit-and-pipeline-findings-from-2026-07-22)
-- [Interactable trait and upgrade actors (2026-07-24)](#interactable-trait-and-upgrade-actors-2026-07-24)
-- [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
-- [YAML lint cleanup header-removal bug (2026-07-24)](#yaml-lint-cleanup-header-removal-bug-2026-07-24)
-- [Superweapon documentation audit (2026-07-25)](#superweapon-documentation-audit-2026-07-25)
-- [Engine update pipeline and Smart App Control findings (2026-07-30, updated with deep research)](#engine-update-pipeline-and-smart-app-control-findings-2026-07-30-updated-with-deep-research)
-- [Loose-extracted .oramap maps must always be repacked before finishing a task (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
-- [Empty warhead type = boot NRE; check-yaml does not catch it (2026-08-04)](#empty-warhead-type--boot-nre-check-yaml-does-not-catch-it-2026-08-04)
-- [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
-
----
 
 ## Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)
 
@@ -272,8 +305,18 @@ codebase.
 
 - **Speed step depends on the domain:** infantry use **steps of 1**; vehicles, aircraft, AND ships use **steps of 5** (their speed is divided by 5 to derive the turn-rate, so it must be a multiple of 5).
 - `Range` is always a **multiple of 10**.
-- `FirepowerMultiplier` is the **fine-tuning** lever (1 % integer steps, 5 %–200 %): after coarse-tuning warhead `Damage` on the 2000-step grid, use the FP multiplier to land the exact intended DPS. It is a multiplier and is **meaningless on its own** — it is never a uniqueness key (see [Uniqueness enforcement](#uniqueness-enforcement)).
-- Raw `Damage` should be kept in 2000-step increments for the balance pipeline (percentage warheads in 1-steps).
+- **`Damage` sits on `formula.DAMAGE_STEP` = 100** (W15, 2026-08-15). The `%`-twin is derived by
+  `formula.percentage_twin()`, which is continuous and monotone in `Damage` and never rounds a live
+  warhead below 1.
+- **`FirepowerMultiplier` is RETIRED as a tuning knob** (W17). `apply_balance` cannot write it
+  (`RETIRED_UNIT_FIELDS`), and `propose_class_rebalance.decompose_dps` always returns `1.0`. 152
+  actors still carry one, so `extract_stats` still READS it and `fit_class` still prices with it —
+  un-pricing them would misprice the roster. Do not add new ones.
+- ⚠ **The retired law** — "`Damage` in 2000-step increments, then fine-tune with a 1 %
+  `FirepowerMultiplier`" — appears in older notes below and in `FORMULA_V2.md`. It described the
+  world before W15/W17. The reason it existed is still worth knowing: the old `%`-twin was
+  `damage // 2000` with integer division, so an off-grid `Damage` silently zeroed the percentage
+  warhead. Fixing that derivation is exactly what had to land before the grid could move.
 
 ### DPS and formula rules
 
@@ -320,21 +363,25 @@ codebase.
 > [`docs/design/EFFECTIVE_DAMAGE.md`](design/EFFECTIVE_DAMAGE.md). Never feed one to the
 > other's consumer.
 - `FirepowerMultiplier` alone — or any single one of these values in isolation — need NOT be unique; on its own it is meaningless. This **supersedes** any earlier "make effective DPS unique via FirepowerMultiplier" rule: DPS is derived, and uniqueness lives on the 5 raw stats above, with #3 (damage×FP) and #4 (raw ReloadDelay) checked **separately** (two units may share one if they differ on the other).
-- Break ties by nudging a stat on its own grid: `Speed` steps of **1** (infantry) / **5** (vehicles, aircraft, ships), `Range` steps of **10**, `Damage` steps of **2000** (then FP-multiplier fine-tune), `HP` steps of **1000**.
+- Break ties by nudging a stat on its own grid: `Speed` steps of **1** (infantry) / **5** (vehicles, aircraft, ships), `Range` steps of **10**, `Damage` steps of **`formula.DAMAGE_STEP` = 100** (2000 pre-W15; the FP-multiplier fine-tune is retired), `HP` steps of **1000**.
 - **CODE NOTE:** `propose_class_rebalance.resolve_dps_uniqueness` and the uniqueness audit currently key on *effective DPS* — they must be updated to key on the 5 stats above (raw damage×FP and raw ReloadDelay separately).
 
 ## Dual-weapon units
 
 - Units with two weapons (e.g. `ra2_soviets_flaktrooper`: short anti-ground + long anti-air) are balanced **independently — as if each weapon were its own actor**: one anti-ground-only actor and one anti-air-only actor, sharing the same `HP` and `Speed` but each with its own `Damage`, `Range`, `ReloadDelay`, and `Burst` fitted to its weapon.
 - **Range is relative between the two weapons** (e.g. anti-air range = anti-ground range × 1.5). The RATIO is the rule, so if one weapon's range must change, change **both** to preserve the ratio.
-- `FirepowerMultiplier` is **shared** — it scales BOTH weapons at once. So tune each weapon's other stats (`Damage` on the 2000-grid, `ReloadDelay`, `Burst`, `Range`) FIRST, and use the FP multiplier only for final fine-tuning, remembering every FP change hits both weapons together.
+- `FirepowerMultiplier` is **shared** — it scales BOTH weapons at once, and every warhead on each,
+  not just the mains (`Armament` builds `DamageModifiers` once and passes it to every warhead). That
+  is one of the two reasons W17 retired it. On an actor that still carries one, tune the weapons'
+  own stats (`Damage` on the 100-grid, `ReloadDelay`, `Burst`, `Range`) and delete the multiplier
+  rather than tuning with it.
 
 ## Audit and pipeline findings from 2026-07-22
 
 ### Audit report encoding
 
 - `docs/audit/latest/*.md` files can be written in UTF-16 with embedded null bytes.
-- Decode them to clean UTF-8 before reading or processing (e.g. `tools/balance/_decode_audit.py` or an equivalent one-shot script).
+- Decode them to clean UTF-8 before reading or processing with a one-shot script. (`tools/balance/_decode_audit.py` is referenced by older notes and is **no longer in the tree**.) The root cause is prevented at source: regenerate reports with `bash tools/audit/run_all.sh`, which forces `PYTHONIOENCODING=utf-8` — never with a PowerShell `>` redirect.
 - Never commit `.safe.md` decoded copies; regenerate them on demand.
 
 ### `MinRange` rule and intentional exceptions
@@ -396,7 +443,7 @@ codebase.
 ### Script hygiene (pending)
 
 - Multiple `scout_rebalance_*.py`, `closecombat_rebalance_*.py`, and `special_forces_rebalance_*.py` scripts are redundant with the generic `propose_class_rebalance.py`.
-- Plan: consolidate the helpers into one `tools/balance/rebalance_classes.py` dispatcher that calls `extract` → `propose` → `patch` → `apply` (dry-run/confirm) → `build_workbook`.
+- Plan: consolidate the helpers into one `tools/balance/rebalance_classes.py` dispatcher that calls `extract` → `propose` → `patch` → `apply` (dry-run/confirm) → `build_workbook`. ⚠ **Still PLANNED — that file does not exist.** Use `propose_class_rebalance.py` + `apply_balance.py` directly until it does.
 - Do this after the current audit batch is finished and the pipeline is trusted.
 
 ## Interactable trait and upgrade actors (2026-07-24)
@@ -408,7 +455,7 @@ codebase.
 
 ### The audit lint rule conflict
 
-- `tools/audit/audit_yaml_lint_rules.py` check 4 (`find_interactable_selectable_conflicts`) flags any actor that has BOTH `Interactable` and `Selectable` traits in the same YAML block as a "conflict".
+- `tools/archive/audit_yaml_lint_rules.py` check 4 (`find_interactable_selectable_conflicts`) flags any actor that has BOTH `Interactable` and `Selectable` traits in the same YAML block as a "conflict".
 - However, `Interactable` and `Selectable` serve **complementary** purposes in OpenRA:
   - `Interactable` provides the click/hit-test bounds (required for the actor to be interactive at all).
   - `Selectable` provides selection visual feedback (selection box, health bar, decoration bounds) and **depends on** `Interactable` to function.
@@ -486,7 +533,7 @@ SpeedMultiplier@myupgrade:
 - **Harkonnen Palace has `^PrimarySuperweapon` but NO power trait**: The building inherits the superweapon template and has `SupportPowerChargeBar` but no actual `NukePower`/`DetonateWeaponPower`/etc. The Death Hand Missile described in faction YAML is unimplemented. This is a parked faction, not a regression.
 - **WIP faction superweapons exist in `rules/` YAML**: Warzone 2100, Worms, Win98, Warcraft 1, and WH40K all have superweapon traits in `rules/*.yaml` (not yet migrated to ContentPacks). These should be documented in FACTIONS.md only when the factions become active.
 - **Outpost 2 superweapon is in `rules/outpost2.yaml`, not ContentPacks**: The Supernova Missile uses `NukePower` with `supernova_missile_super` weapon, charge 9000, on `EDEN_OBSERVATORY` and `PLYMOUTH_OBSERVATORY`. FACTIONS.md was already correct for this.
-- **Audit raw data location**: `docs/audit/latest/superweapon_audit.yaml` contains the full cross-reference with all primary/secondary superweapons, support powers, critical findings, and WIP faction discoveries.
+- **Audit raw data**: this pass wrote `docs/audit/latest/superweapon_audit.yaml`. ⚠ **That file is gone** — `docs/audit/latest/` is regenerated wholesale by `run_all.sh`, which does not produce it, so a one-off artifact dropped there does not survive. The findings themselves were promoted into `FACTIONS.md` and `docs/audit/SUMMARY.md`; re-derive the raw table from the YAML if it is needed again, and write one-off artifacts OUTSIDE `latest/`.
 
 ### Engine update pipeline and Smart App Control findings (2026-07-30, updated with deep research)
 
@@ -551,7 +598,7 @@ Key facts verified 2026-07-30:
 
 ## Bulk YAML rename scripts: safety lessons (2026-07-31)
 
-Applies to any script that renames a weapon/actor/condition identifier across the whole mod tree (see `tools/rename_aa_weapons.py`, `tools/rename_emp_weapons.py`).
+Applies to any script that renames a weapon/actor/condition identifier across the whole mod tree (see `tools/archive/rename_aa_weapons.py`, `tools/archive/rename_emp_weapons.py`).
 
 - **Never do a blind file-wide word-boundary substitution of a bare identifier.** An early draft renamed `Dragon` → `Dragon_AA` via `re.sub(r'\bDragon\b', ...)` across every YAML file. This also mangled unrelated `Tooltip: Name: Way of the Dragon`, a Warcraft2 `Dragon Roost` building name, and a commented-out `# Image: DRAGON` sprite reference — none of which are weapon references. The same bug hit `Spore` (a Zerg building's `RequiresCondition`/`Armament Name:` field coincidentally shares the literal string with the weapon name). **Root cause of the corruption class**: identifiers in this codebase are reused across completely different namespaces (weapon names, condition names, armament trait `Name:` identifiers, tooltip display text, sprite/image names), so any substring or bare-identifier match is unsafe. Always match on the **exact YAML field** (`Weapon:`, `Weapons:`, `Inherits:`, the top-level definition key) with an **exact full-token value comparison**, never a regex substring/word-boundary match against arbitrary line content.
 - **The same literal name can be a weapon, an actor, AND a sequence.** E.g. `sow_mech_avenger` is simultaneously an actor id (`rules/sow.yaml`), a weapon (`weapons/sow.yaml`), and a sequence (`sequences/sow.yaml`); `d2k_aircraft_eater` is both a weapon and a (commented-out) actor + sequence. Renaming the top-level definition key, or an `Inherits:` value, requires first classifying **which specific block** the identifier belongs to (`is_weapon_definition_body`-style marker-key heuristics) — do not rename just because the name string matches; verify the containing block is actually a weapon.
@@ -585,7 +632,7 @@ The `Map` global exposed to map Lua does **not** define a `Contains` method. Cal
 
 ## Weapon template retrofit — Phase A lessons (2026-08-02)
 
-The 3-way weapon-template split requires retrofitting weapons from the old full-stack templates (`^SmallArms`, `^Chaingun`) to the new 3-layer system (`^Bullet_Light`/`^ProjectileBullet_Light`/`^EffectBullet_Light`, `^Bullet_Medium`/`^ProjectileBullet_Medium`/`^EffectBullet_Medium`). Script: `tools/archive/retrofit_v3.py`.
+The 3-way weapon-template split requires retrofitting weapons from the old full-stack templates (`^SmallArms`, `^Chaingun`) to the new 3-layer system (`^Bullet_Light`/`^ProjectileBullet_Light`/`^EffectBullet_Light`, `^Bullet_Medium`/`^ProjectileBullet_Medium`/`^EffectBullet_Medium`). Script: `tools/archive/retrofit_v3.py` — ⚠ **removed from the tree**; the canonical retrofit tool is now `tools/balance/retrofit_weapon_family.py`.
 
 - **Missing `Report` field causes `-Report:` lint errors.** Old templates (`^SmallArms`, `^Chaingun`) carried `Report: gun8.aud`; the new warhead-only templates (`^Bullet_Light`, `^Bullet_Medium`) did not. When a child weapon has `-Report:` (removal node) but the parent template lacks the field, `check-yaml` flags it. Fix: add `Report: gun8.aud` to the new templates to match the old defaults. Always check for fields that child weapons attempt to remove (`-FieldName:`) when creating replacement templates — the new template must carry any inherited field that children override or remove.
 - **Warhead key renaming must happen in the same pass as inherit repointing.** The first script version (`retrofit_v2.py`) classified weapons for warhead key renaming BEFORE repointing inherits, then repointed in a separate step. After repointing, the classification no longer held (the weapon no longer inherited from `^SmallArms`), causing missed warhead key renames. Fix (`retrofit_v3.py`): rename warhead keys and repoint inherits in a single pass per weapon.

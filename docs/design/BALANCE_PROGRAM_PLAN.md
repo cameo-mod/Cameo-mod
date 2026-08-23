@@ -1,4 +1,4 @@
-# BALANCE PROGRAM — the execution plan (rev. 2026-08-11)
+# BALANCE PROGRAM — the execution plan (rev. 2026-08-23)
 
 **This file is the SINGLE SOURCE OF TRUTH for what is done, what is next, and who owns
 what.** It survives compaction, agent handover and session death. Every other document
@@ -35,11 +35,11 @@ warheads later on. If we split it now applying the balance formula will be easy.
 warhead set and their `Versus` profiles. Both are still scheduled to change across most of the
 roster, so pricing first means pricing inputs we are about to replace:
 
-| what is still in flux | measured 2026-08-17 |
+| what is still in flux | re-measured 2026-08-23 (was 2026-08-17) |
 |---|---|
-| W24 — fired weapons with **more than one** damage main | **975 of 1495 = 65.2%** (histogram runs out to 15 mains) |
-| armament slots whose `K` moves when those collapse | **1 584** |
-| fired weapons that reach a `^Warhead_*` family at all | **639 of 1620 = 39%** — the rest still route through legacy templates (`audit_unconverted_templates`: 47 templates, 1343 inheritors) |
+| W24 — fired weapons with **more than one** damage main | **951 of 1497 = 63.5%** (was 975 of 1495; histogram still runs out to 15 mains) |
+| armament slots whose `K` moves when those collapse | **1 568** (was 1 584) |
+| fired weapons that reach a `^Warhead_*` family at all | **1 221 of 1 622 = 75.3%** — the rest still route through legacy templates (`audit_unconverted_templates`: 47 templates, **1 238** direct inheritors, was 1 343). ⚠ The old figure here read "639 of 1620 = 39%" with **no recorded counting method**, so it is not safe to read the jump as pure progress. Both numbers are now pinned in `docs/audit/doc_claims.yaml` (`warhead_family_reach`, `unconverted_template_inheritors`) **with** their measure commands, so the next reader never has to guess again. |
 
 Collapsing N mains into 1 preserves the damage SUM (`formula.spread_damage_sum`) but **not
 `K`** — `K` is share-weighted over each warhead's armor profile, so picking ONE family changes
@@ -92,17 +92,27 @@ nothing and informs the anchor choice. What must wait is WRITING targets and app
 | **W17** | ~~Remove the 2000-damage grid~~ (done as a 100 grid in W15); retire FirepowerMultiplier as a fine-tuning knob | 🔵 TOOLING DONE `451e10a63`; **content half NOW UNBLOCKED** | Claude | W15 ✅ |
 | **W18** | Roll the 0.01% basis-point unit out into yaml (`PercentageDenominator: 10000`, `pct_damage = damage // 100`, ×5 the Versus values — all three together) | ⬜ READY (set B free) | Claude | W15 ✅ |
 | **W19** | Collapse the 195 `SpreadDamage` ExtraDamage chips into the main warhead (KEEP the 34 sniper `OpenToppedDamage`) | ⬜ READY (set B free) | Claude | W13 |
-| **W20** | Multi-armor combination rule (engine MULTIPLIES → squares the profile); mechanism + switch | ⬜ MECHANISM DONE, rule = maintainer | Claude | — |
+| **W20** | Multi-armor combination rule (engine MULTIPLIES → squares the profile); mechanism + switch | ✅ DONE — `Average` is live; superseded structurally by W21's layered stack | Claude | — |
 | **W21** | Layered health Shield → Integrity → Armor → Health, layer-aware armor (solves W20 structurally) | ✅ BUILT + LIVE `ab467fe52` | Claude | — |
 | **W22** | Roster census: liveness classifier + per-credit weighting (552/1977 armored actors are not buildable) | ⬜ PROPOSED | — | — |
-| **W23** | Retrofit the 47 legacy templates into the `^Warhead_*` family system | 🔵 MACHINERY DONE + verified; content ⛔ on the 33-collision ruling | Claude | W13 |
-| **W24** | Collapse every weapon to ONE damage warhead (3-way split, damage half) — 61% of weapons carry 2+, worst case 15 | ✅ seventh cluster (TSChemJuggerboat90mm/TSChemVanMissile/TSChemMLRSMissile/TSChemBazooka/TSTibBazooka/TSChemApacheMissile/TSChemCobraMissile) reparented to chemical cannon/missile families with PhysicalStates moved into ^Warhead_Chem*/^Warhead_ChemCannon*/^Warhead_ChemMissile* templates; added global ^Projectile_ArtilleryShell_Medium and ^Projectile_ArtilleryRocket_Medium, consolidated the redundant ContentPacks/RedAlert2/Shared copy into the global template, and switched Future_MultiMissile_Frag to the artillery-rocket family; udit_physical_state_warheads updated to resolve PhysicalStates maps as well as direct PhysicalStateName/PhysicalStateScale; ind_empty_warhead 0, udit_warhead_split baseline 965, udit_balance_drift clean, boot-gated | Claude | — |
+| **W23** | Retrofit the 47 legacy templates into the `^Warhead_*` family system | 🔵 MACHINERY DONE + verified; content ⬜ READY — **the 33-collision blocker is DISSOLVED** (§0a + DESIGN §11b: one damage warhead per weapon, so there is nothing left to merge). Sequenced AFTER W24. | Claude | W13, W24 |
+| **W24** | Collapse every weapon to ONE damage warhead (3-way split, damage half) — **63.5%** (951 of 1497) of fired weapons carry 2+, worst case 15 | ✅ seventh cluster (TSChemJuggerboat90mm/TSChemVanMissile/TSChemMLRSMissile/TSChemBazooka/TSTibBazooka/TSChemApacheMissile/TSChemCobraMissile) reparented to chemical cannon/missile families with PhysicalStates moved into ^Warhead_Chem*/^Warhead_ChemCannon*/^Warhead_ChemMissile* templates; added global ^Projectile_ArtilleryShell_Medium and ^Projectile_ArtilleryRocket_Medium, consolidated the redundant ContentPacks/RedAlert2/Shared copy into the global template, and switched Future_MultiMissile_Frag to the artillery-rocket family; audit_physical_state_warheads updated to resolve PhysicalStates maps as well as direct PhysicalStateName/PhysicalStateScale; find_empty_warhead 0, audit_warhead_split baseline 965, audit_balance_drift clean, boot-gated | Claude | — |
 | **W25** | Versus mean-normalisation to 100 + class tilt + Shield rebuild + the ARMOR-PLATING LAYER | ✅ S1–S4 SHIPPED 2026-08-16/17 (`78568a36d`..`99deed28d`). **E1 + E4 FIXED** (`30ead6d4b`, `761e79ed9`). ⛔ **S5 is NOT "run `--confirm`" — see the correction below: `--confirm` is a NO-OP until targets are written into the ledger, and that needs W11's sign-off.** | Claude | — |
 
-| **W26** | **Retire `DamageMultiplier` (R1) — case by case, 369 live declarations** | 🔵 STARTED 2026-08-17: the shield 150% is DELETED. Inventory + rules below. | Claude | — |
+| **W26** | **Retire `DamageMultiplier` (R1) — case by case, 366 live declarations** (was 369; the shield 150% is deleted — pinned as `live_damage_multipliers`) | 🔵 STARTED 2026-08-17: the shield 150% is DELETED. Inventory + rules below. | Claude | — |
 
-**Recommended order:** W2 ∥ W3 → W4 → W5 → W6 → (W7, W9) → W8 → W10 → W11 → W12.
-`∥` = safe to run in parallel (disjoint file sets).
+**Order of work — §0a is binding and supersedes any per-item ordering below:**
+
+    W24  (one damage warhead per weapon)
+     └─> W23  (retrofit the 47 legacy templates; W24 dissolves its blocker)
+          └─> A5  (retire the remaining inline-`Versus` weapons onto templates)
+               └─> class anchors → fit_class per class → W11 sign-off
+                    → targets into the ledger → apply_balance --confirm → boot gate
+
+The meter items (W7, W9, W10) and W12 are INDEPENDENT of that chain and may run in
+parallel — they touch different files (§2). The older "W2 ∥ W3 → W4 → …" sequence was
+written before §0a and is retired: W2–W6 and W15/W16 are done, and pricing is explicitly
+gated behind the weapon rebuild.
 
 ---
 
@@ -457,7 +467,7 @@ rather than as a separate item; they need the same regeneration anyway.
 ```sh
 python -m unittest discover -s tools/tests -t tools/tests   # all green
 python tools/audit/find_empty_warhead.py                    # 0
-python tools/balance/verify_generator_sync.py               # drift = 1 (^Warhead_Sniper_Light)
+python tools/balance/verify_generator_sync.py               # ⛔ 10 as of 2026-08-23, not 1
 bash tools/audit/run_all.sh                                 # bash ONLY — PowerShell writes UTF-16
 python tools/balance/extract_stats.py --check               # 0 drifted
 ```
@@ -493,7 +503,7 @@ correct measurements. Spec: `EFFECTIVE_DAMAGE.md`.
 
 ---
 
-### W2 — `^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*` 🔵 IN PROGRESS (Devin, 2026-08-11) · owner **Devin**
+### W2 — `^LightFlameWeapon` → 3-way split + `^Warhead_Inferno_*` ⚠ ABANDONED by Devin · lock RELEASED by the maintainer 2026-08-15, set B is FREE · owner **unclaimed**
 
 **Why:** `^LightFlameWeapon` sets `Spread: 500` **and** `Range: 500`. A single-value
 `Range` makes `effectiveRange` length 1, so `GetDamageFalloff`'s loop never runs and it
@@ -584,7 +594,7 @@ and `ls docs/balance/derived/*.json | wc -l` → 33
 
 ---
 
-### W4 — Retire weapon-class K; charge-up moves to the ACTOR ⬜ READY · owner Claude · needs W1
+### W4 — Retire weapon-class K; charge-up moves to the ACTOR ✅ DONE · owner Claude · needs W1 ✅ (superseded in part by W16)
 
 **Maintainer ruling 2026-08-11:** chips now count in the metric, so their structural
 "payment" must come off or they are double-charged. Concretely:
@@ -675,7 +685,7 @@ placeholder was invented to fill the row.
 
 ---
 
-### W6 — C# `ModifiesCombatProportionalToPhysicalState` ⬜ READY · owner either
+### W6 — C# `ModifiesCombatProportionalToPhysicalState` ✅ DONE (`fc45a9632`) · owner Claude
 
 The framework's missing half: every existing proportional trait only makes things
 *worse* (`SlowsProportionalToPhysicalState`, `DamageMultiplierProportionalToPhysicalState`).
@@ -734,7 +744,7 @@ removed. Expect a balance pass: one hit no longer gives the full debuff.
 
 ---
 
-### W8 — Gatling ladder → `SpinUp` meter ⛔ needs W6
+### W8 — Gatling ladder → `SpinUp` meter ✅ DONE (`c0d6abf70`) — all 43 actors, `GattlingSpeed` = 0 · needs W6 ✅
 
 **47 actors** × 20–30 multiplier traits ≈ **1340 trait objects**, roughly **40% of all
 3197 multiplier instances in the mod**, in ten visible 5% steps. A meter replaces them
@@ -780,7 +790,7 @@ binary `poisoned` condition is retired, infantry-only gating verified.
 
 ---
 
-### W10 — `^Blindable` → `Blind` meter ⛔ needs W6
+### W10 — `^Blindable` → `Blind` meter ⬜ READY (unblocked — W6 ✅) · owner either
 
 Today: binary, range/vision/detection → 20%. A cliff. Maintainer's spec:
 - scale range **100% → 20%** proportionally with the meter (20% at full blind);
@@ -855,7 +865,7 @@ counterplay), tracked separately from class anchors.
 
 ---
 
-### W13 — Warhead system rebuild from the reference corpus ⬜ READY · owner Claude
+### W13 — Warhead system rebuild from the reference corpus 🔵 steps 1–4a DONE (measured profiles LIVE on all 10 sourced families + 8 blends); 4b = the INVENTED families · owner Claude
 
 Reference data: `docs/reference/versus_raw.json` — **2494 warhead profiles, 14 sources**,
 built by `tools/reference/extract_versus.py` (+ `extract_mix_ini.py` for Mental Omega).
@@ -1265,7 +1275,7 @@ population scores HIGHER K than the AA-capable one because it is full of artille
 
 ---
 
-### W15 — `%`-twin fix + `reference_hp` 200 000 ⬜ READY · **blocks W17**
+### W15 — `%`-twin fix + `reference_hp` 200 000 ✅ DONE · unblocked W17
 
 Two maintainer rulings, both about how percentage damage is valued.
 
@@ -1372,7 +1382,7 @@ which contradicted the spec in W18 and the C# `[Desc]`; the unit is `10000` (bas
 
 ---
 
-### W16 — Charge-up proportional to real charge share ⬜ READY · supersedes W4's flat rate
+### W16 — Charge-up proportional to real charge share ✅ DONE · supersedes W4's flat rate
 
 W4 applied a flat **0.75x** to every charging actor. Measured, that is too blunt:
 
@@ -1719,8 +1729,10 @@ is empty.
 `OpenRA.Mods.Cameo/Traits/` holds `Integrity.cs`, `ArmorPlating.cs` and `GrantsShield.cs`;
 the stack is wired in yaml (`Shielded` 22 files, `Integrity` 6, `ChangesShield` 6,
 `ArmorPlating` 2) and boot-gated across `0556f8fc9` → `4cdf8b2a8` → `ab467fe52`. The
-rulings (R1–R14), the ONE-POOL/ONE-BAR law and the two-intercepting-layers hazard live in
-`docs/design/ARMOR_LAYERS.md` + memory `cameo-armor-layers-and-granularity`.
+rulings (R1–R14), the ONE-POOL/ONE-BAR law and the two-intercepting-layers hazard are stated
+**in this section, below** — the earlier pointer to `docs/design/ARMOR_LAYERS.md` was wrong, that
+file has never existed in this repository. The binding summary is `DESIGN.md §12.0e/§12.0f`;
+the measured mechanics are `docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md`.
 
 ⚠ **The bug class this shipped with, because boot gates cannot catch it:** two layers that
 both intercept a hit each return damage modifier 1 and then each charge their own pool, so
@@ -2144,7 +2156,7 @@ Constants added by W5: `TARGETS_FLOOR 0.5` · `RANGE_WEIGHT 0.25` ·
 
 ---
 
-## W23 — Retrofit the 47 legacy templates into the `^Warhead_*` family system 🔵 MACHINERY DONE, content BLOCKED on one ruling
+## W23 — Retrofit the 47 legacy templates into the `^Warhead_*` family system 🔵 MACHINERY DONE, content ⬜ READY (blocker dissolved — see §0a)
 
 **Why.** DESIGN.md §12 is explicit that **`Versus` lives ONLY in `^Warhead_*` templates**. 47
 templates still declare their own and **1343 weapons inherit them**, so every one is both a
@@ -2176,7 +2188,15 @@ W1's K coefficient, `armor_exposure.py` and the family surveys are all built on.
 | `^NuclearWarhead` | family is hand-tuned to **BLD > VEH > AIR > INF**; the legacy ladder is anti-heavy, so a repoint re-roles the weapon |
 | `^LightFlameWeapon` | **W2 owns it** — the maintainer split it across FOUR families per weapon, and its `Range: 500` P1 bug is still open |
 
-### ⛔ THE BLOCKER — 33 weapons collide inside one family
+### ✅ THE FORMER BLOCKER — 33 weapons collide inside one family (DISSOLVED)
+
+> **Resolved 2026-08-17 by §0a + DESIGN §11b, recorded here 2026-08-23.** The design question
+> below ("should a weapon carry three separate cannon warheads of the same family at all?") was
+> already answered: **no** — §11b makes ONE damage warhead per weapon binding, and W24 executes
+> it. Once a weapon carries a single damage main there is nothing for the rename to merge, so the
+> collisions were this debt made VISIBLE, not a conversion bug. The consequence is ORDERING, not a
+> block: **run W24 first, then this batch.** The analysis below is kept because it is the evidence
+> for that ruling.
 
 582 of 615 affected weapons convert with their mean output **exactly preserved**. The other 33
 inherit **several legacy templates that map into the SAME family**, so after the rename MiniYaml
@@ -2193,7 +2213,8 @@ pass and the collisions compound. **The real question is a design one: should a 
 separate cannon warheads of the same family at all?** Under the one-weapon-one-warhead intent it
 should be ONE warhead at the summed damage; that is a maintainer call.
 
-**NEXT:** rule on the 33, then run the batch (25 templates, ~2839 keys, one boot gate).
+**NEXT:** finish W24 for the affected weapons (which removes the collisions), then run the batch
+(25 templates, ~2839 keys, one boot gate). No further ruling is owed.
 
 ### Also found — obsolete definitions that bias the census
 

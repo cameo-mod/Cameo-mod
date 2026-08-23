@@ -1,4 +1,4 @@
-﻿# doc_claims.yaml â€” every NUMERIC claim the design docs make, and how to re-measure it.
+# doc_claims.yaml — every NUMERIC claim the design docs make, and how to re-measure it.
 #
 # Maintainer 2026-08-17: *"the documentations are starting to explode in size ... regularly
 # review everything for discrepancies and contradictions and then make design decisions
@@ -158,7 +158,7 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 975
+    value: 951
     tolerance: 0
     what: >
       Fired weapons carrying MORE THAN ONE damage main — W24's scope, and the reason pricing
@@ -232,7 +232,7 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 118
+    value: 122
     tolerance: 0
     what: >
       Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
@@ -273,7 +273,7 @@ claims:
                 if r['ratio'] is not None and r['ratio'] <= psp.FULL_EFFECT_BAR))
 
   - id: corrosion_meter_actors
-    value: 783
+    value: 785
     tolerance: 0
     what: >
       Actors carrying the `Corrosion` meter — 48.7% of the 1609 priced (Health + Valued)
@@ -299,7 +299,7 @@ claims:
                   break
       print(n)
   - id: w24_multi_main_fed
-    value: 386
+    value: 385
     tolerance: 0
     what: >
       RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their
@@ -330,7 +330,7 @@ claims:
               n += 1
       print(n)
   - id: physical_state_fired_weapons
-    value: 449
+    value: 450
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
@@ -427,3 +427,69 @@ claims:
       d = json.loads(pathlib.Path('docs/balance/class_anchors.json').read_text(encoding='utf-8'))
       print(sum(1 for v in d.values()
                 if isinstance(v, dict) and 'spec' in v and v.get('signed_off')))
+
+  - id: warhead_family_reach
+    value: 1221
+    tolerance: 0
+    what: >
+      Fired weapons whose inherit chain reaches a `^Warhead_*` family — the W23/W24 burn-up.
+      The rest still route through the legacy templates that `audit_unconverted_templates`
+      lists. BALANCE_PROGRAM_PLAN §0a carried "639 of 1620 = 39%" with no recorded method;
+      this entry pins BOTH the number and how it is counted (transitive inherit chain over the
+      fired-weapon set), so the next reader does not have to guess which was measured.
+      ⛔ RATCHET — this may only go UP.
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
+    measure: |
+      import pathlib, sys
+      sys.path[:0] = ['tools/audit', 'tools/balance']
+      from miniyaml import Ruleset
+      rs = Ruleset(pathlib.Path('.').resolve())
+      fired = set()
+      for name in rs.actors:
+          if name.startswith('^'): continue
+          node = rs.resolve(name)
+          if node is None: continue
+          for c in node.children:
+              if c.key == 'Armament' or c.key.startswith('Armament@'):
+                  w = c.get('Weapon')
+                  if w: fired.add(str(w).strip())
+      def ancestors(nm, seen=None):
+          seen = seen if seen is not None else set()
+          n = rs.weapon(nm)
+          if n is None: return seen
+          for _k, v in rs.inherits_of(n):
+              v = str(v).strip()
+              if v and v not in seen:
+                  seen.add(v); ancestors(v, seen)
+          return seen
+      print(sum(1 for w in fired
+                if rs.weapon(w) is not None
+                and any(a.startswith('^Warhead_') for a in ancestors(w))))
+
+  - id: unconverted_template_inheritors
+    value: 1238
+    tolerance: 0
+    what: >
+      Direct inheritors of the 47 remaining legacy weapon templates (W23's scope).
+      ⛔ RATCHET — this may only go DOWN. Was 1343 when BALANCE_PROGRAM_PLAN §0a was written.
+    docs: [docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md]
+    measure: |
+      import re, subprocess, sys
+      out = subprocess.run([sys.executable, 'tools/audit/audit_unconverted_templates.py'],
+                           capture_output=True, text=True).stdout
+      print(re.search(r'(\d+) direct inheritors', out).group(1))
+
+  - id: ledgers_drifted
+    value: 0
+    tolerance: 0
+    what: >
+      Balance ledgers (docs/balance/*.json) that disagree with the live yaml. CLAUDE.md requires
+      committing yaml and ledger TOGETHER, so the only correct value is 0. Any other number means
+      a commit moved balance data without re-running `extract_stats.py`.
+    docs: [docs/HANDOFF.md, docs/design/BALANCE_PIPELINE.md]
+    measure: |
+      import re, subprocess, sys
+      out = subprocess.run([sys.executable, 'tools/audit/audit_balance_drift.py'],
+                           capture_output=True, text=True).stdout
+      m = re.search(r'\*\*(\d+) ledger\(s\) drifted\*\*', out)
+      print(m.group(1) if m else 0)

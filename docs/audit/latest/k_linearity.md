@@ -1,6 +1,6 @@
-﻿# audit_k_linearity — the flat K must not move when Damage moves
+# audit_k_linearity — the flat K must not move when Damage moves
 
-Analysed **2016** concrete weapons.
+Analysed **2018** concrete weapons.
 
 ## L1 — `k_flat` is invariant under a change of flat Damage
 
@@ -14,7 +14,7 @@ _clean_ — the identity holds for every analysed weapon.
 
 ## L3 — weapons with a %-twin DPS floor
 
-1537 weapon(s) carry a %-twin; **51** have a floor at or above 25% of output.
+1554 weapon(s) carry a %-twin; **51** have a floor at or above 25% of output.
 
 A price target below the floor is UNREACHABLE by lowering flat Damage — `required_damage()` returns None rather than a wrong positive number. To price these lower, the TWIN has to shrink.
 
@@ -23,8 +23,8 @@ A price target below the floor is UNREACHABLE by lowering flat Damage — `requi
 | `AnthraxCloudLarge` | 75.1% |
 | `AnthraxCloudBlueLarge` | 73.1% |
 | `AnthraxCloudPurpleLarge` | 71.5% |
-| `D2K_StormGunCymek` | 68.0% |
 | `D2K_StormGunInf` | 68.0% |
+| `D2K_StormGunCymek` | 68.0% |
 | `TSSmoke` | 54.3% |
 | `RA2Cloud` | 54.3% |
 | `RA2CloudSafe` | 54.3% |
@@ -34,7 +34,7 @@ A price target below the floor is UNREACHABLE by lowering flat Damage — `requi
 | `NodCommandoLaser` | 47.8% |
 | `LightningBolt` | 44.7% |
 | `CabalEliminatorGatling` | 41.9% |
-| `Corsair_EMP` | 40.5% |
+| `Corsair_EMP` | 40.4% |
 | `D2K_StormGun` | 37.3% |
 | `d2kStormLasher` | 37.3% |
 | `TSShadowTeamPistols` | 36.5% |
@@ -44,11 +44,11 @@ A price target below the floor is UNREACHABLE by lowering flat Damage — `requi
 | `ReimuDreamSeal` | 32.4% |
 | `RA2KirovBomb_nuclear_elite` | 32.0% |
 | `RA2SCUDELITE` | 31.1% |
-| `td_gdi_commando_sniper` | 28.7% |
+| `RA2NarcoPistol` | 28.7% |
+| `tkmsmg` | 28.7% |
 | `LightSniper` | 28.7% |
-| `CommissarPistol` | 28.7% |
 | `CryoLightSniper` | 28.7% |
-| `RA2AWP` | 28.7% |
-| `RA2DoublePistols_elite` | 28.7% |
+| `ChamBlade` | 28.7% |
+| `RA2DoublePistols` | 28.7% |
 
 _... and 21 more._

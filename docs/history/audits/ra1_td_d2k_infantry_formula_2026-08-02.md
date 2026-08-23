@@ -1,5 +1,8 @@
 # RA1, Tiberian Dawn, and Dune Infantry Formula Audit
 
+> ⛔ **ARCHIVED 2026-08-23.** A one-off dated audit, not live evidence. Current audit output is
+> regenerated into `docs/audit/latest/` by `bash tools/audit/run_all.sh`.
+
 Date: 2026-08-02
 Scope: every active, buildable combat infantry actor belonging to RA1, Tiberian Dawn, or Dune 2000 / Dune Universe. The audit snapshot predates the Stealth Soldier correction recorded below.
 

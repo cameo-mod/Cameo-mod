@@ -1,7 +1,9 @@
 # FORMULA V2 — the complete law book (as learned through 2026-07-19)
 
-_Master index: **MEGAPLAN.md** ties this + BALANCE_PIPELINE + the class
-logs + the weapon-template program together._
+_Where this fits: [`BALANCE_MEGAPLAN.md`](BALANCE_MEGAPLAN.md) is the phase sequence,
+[`BALANCE_PROGRAM_PLAN.md`](BALANCE_PROGRAM_PLAN.md) is the board and ownership, and
+[`BALANCE_PIPELINE.md`](BALANCE_PIPELINE.md) is the machinery. (The old `MEGAPLAN.md`
+index is archived at [`../history/MEGAPLAN_2026-08-08.md`](../history/MEGAPLAN_2026-08-08.md).)_
 
 _The consolidated, binding reference for the per-class balance system.
 Grew out of DESIGN §12 + the balance pipeline (BALANCE_PIPELINE.md) +
@@ -221,7 +223,8 @@ class-specific log, because they apply to all classes.
   **raw `ReloadDelay`** (NOT the burst-adjusted/effective reload), or **Range**.
   `FirepowerMultiplier` on its own — like any single value — is meaningless and
   is NEVER a uniqueness key; use it to fine-tune the effective damage-per-shot
-  without breaking the 2000-step rule. #3 (damage×FP) and #4 (raw ReloadDelay)
+  without breaking the damage-grid rule (**100** since W15; 2000 before it).
+  #3 (damage×FP) and #4 (raw ReloadDelay)
   are checked SEPARATELY, so two units may share one if they differ on the other.
 - **Baseline/verifier exception only**: the verification unit is exactly
   2× HP, 2× DPS, 2.5× cost, same Range and Speed as the baseline (§2). No other

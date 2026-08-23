@@ -37,6 +37,11 @@ Stamp a completed periodic run (never stamp without doing the steps):
 python tools/audit/audit_periodic_freshness.py --record <id> --evidence <path-or-url>
 ```
 
+⚠ **Not everything that guards the docs is on a cadence.** `audit_doc_claims.py` (numeric
+claims) and `audit_doc_health.py` (structural defects: control characters, mojibake, broken
+links and anchors, references to moved documents, duplicate DESIGN section ids) both run on
+**every** `run_all.sh`, because both are cheap and both catch corruption rather than staleness.
+
 Baselines live at the top of each script. Lowering a baseline after fixing
 findings is the point; raising one needs a note in the commit message saying
 why the debt was accepted.

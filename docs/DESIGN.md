@@ -244,7 +244,7 @@ mods/cameo/ContentPacks/<Theme>/<Faction>/
 - **The standard file set above is CLOSED.** A pack may omit a file it
   doesn't need, but must not invent new names — `audit_packs.py`
   enforces the set, so tooling can always find everything.
-- **content.yaml becomes machine-generated** (`tools/packs/gen_content.py`):
+- **content.yaml becomes machine-generated** (`tools/packs/gen_content.py` — ⚠ **planned, not built**):
   regenerated from the files on disk, deterministic ordering; the audit
   fails on drift. Nobody hand-edits include lists.
 - **Wrong-section rules** (the "actor in the wrong pack/file" bug class):
@@ -870,153 +870,17 @@ renormalised, "top" became a function of each family's SHARPNESS and the rule st
 rewarding sharpness instead of anti-shield design — a sword read 200 while a Tesla coil
 read 151. It is replaced by §12.0c below.
 
-### 12.0a THE MEAN-100 LAW (maintainer, 2026-08-16) — binding, supersedes median-100
-
-> *"all warheads average all versus values at 100 to make them comparable"*
-
-Every `^Warhead_*` family's MAIN warhead has its 16 armor rows normalised so their
-**arithmetic MEAN is 100** (`gen_weapon_template.mean_normalise`). W13's median-100 left
-the mean free, and the mean is not a shape statistic but a MAGNITUDE: `K` is a
-share-weighted average of the profile, so the mean IS the family's contribution to priced
-DPS. Measured before the change, family means ran 22.0 to 106.1 — up to a 4.8x hidden
-multiplier between two families that both looked "normalised".
-
-Consequences, all binding:
-
-* **`K` is SHAPE-ONLY.** Choosing a family redistributes output across armors without
-  changing how much there is. `Damage` is the sole magnitude knob.
-* **`max <= 200` now MEANS `max <= 2 x mean`.** A profile brilliant against three armors
-  and useless against thirteen cannot keep its peak. 11 of 94 templates breached and are
-  compressed by the POWER LAW about the geometric mean — never a clamp, because the power
-  law is the only transform that also preserves `Heroic = Plate x Scout / peak` exactly.
-* **A tilt is FREE.** Moving output between armors costs nothing in total, which is what
-  makes §12.0d expressible at all.
-* **Scope: MAIN warheads only.** A `_Percentage` twin's `Versus` is a MAGNITUDE until W18
-  rebases it; normalising it would multiply every %-effect by ~5x.
-
-### 12.0c THE SHIELD LADDER (maintainer 2026-08-16) — binding
-
-> *"the only thing that should deal extreme amount of damage to shields is tesla"*
-
-```
-Shield = PHYSICS_RANK[family] x SHIELD_LEVEL[level] x damped structural scale
-```
-compressed onto **exactly [100, 400] = 4.000x**, every value DISTINCT, ascending within
-each family, with **Tesla the top family at every level** (312/338/369/400).
-
-⚠ **No structural formula can carry this identity** and that is measured, not assumed:
-`floor` and `top` are ANTI-CORRELATED by normalisation, so any product of them cancels to
-an invariant of the normalisation rather than a property of the weapon (`200+floor` spans
-1.26x, the geometric mean 1.54x, both with >50% ties). The structural term therefore sets
-the BAND and `PHYSICS_RANK` sets the ORDER — and the term is DAMPED so it can only
-separate families of EQUAL rank, never reorder unequal ones.
-
-⚠ **The compression is DERIVED every run** (`shield_uniqueness.compress`), not calibrated.
-Three hand-set constants were correct for exactly one profile set and went silently wrong
-the moment §12.0a renormalised everything.
-
-### 12.0d THE CLASS TILT (maintainer 2026-08-16) — binding
-
-Within a family, each LEVEL tilts toward one end of every armor ladder:
-
-| level | tilts toward | |
-|---|---|---|
-| Light (and Trace) | `None` `Wood` `Scout` `Light` `Fighter` | the lightest rung of each ladder |
-| Medium | `Flak` `Steel` `Medium` `Bomber` `Helicopter` | the middle rung |
-| Heavy | `Plate` `Concrete` `Heavy` `Superheavy` `Spaceship` | the heaviest rung |
-| **Super** | nothing — **FLAT**, the generalist | actively compressed to the band's flat end |
-
-Implemented as ladder POSITION, not as a literal armor set, because position is what those
-sets ARE. ⚠ **The tilt MUST NEVER reorder a ladder**: it is applied to the VALUES and each
-armor is then given back the RANK it held, so where the tilt agrees with the family's
-direction it sharpens, where it disagrees it flattens, and it can never invert
-`None > Flak > Plate`. That also removes any need for a `direction` argument, which is what
-makes it work for the blends.
-
-### 12.0e THE ARMOR-PLATING LAYER (maintainer 2026-08-16/17) — binding
-
-Five overlay armors, granted by upgrades, **ALWAYS ALL CAPS** so the case alone distinguishes
-them from the TitleCase class armors:
-
-| plating | counters | weak to | real basis |
-|---|---|---|---|
-| `HAZMAT` | thermochemical | kinetic | sealed/filtered envelope; no mass, so a bullet ignores it |
-| `COMPOSITE` | kinetic **+ shaped** | blast | ceramic shatters a penetrator, ERA breaks a jet; neither spreads an impulse |
-| `BLAST` | blast | energy | spall liner absorbs impulse; a beam delivers none |
-| `REFLECTOR` | energy | thermochemical | mirror-bright coating; flame and corrosives foul it |
-| `ARMOR` | nothing | nothing | the GENERIC hedge — flat, for scrap/junk and non-branching upgrades |
-
-Laws:
-
-1. **LAYER SELECTION, not combination.** A plating REPLACES the class armor while active
-   (`AreaDamageWarhead.DamageVersus`), exactly as `Shield` already does in yaml
-   (`Armor: RequiresCondition: !shielded`). This is what makes "weak against" safe: only one
-   row is ever read, so a weak row is a chosen exposure rather than a penalty stacked on top.
-2. **EVERY template carries EVERY plating row, with no exceptions** — Sonic and Magic
-   included. A MISSING row is not "no opinion": both the engine and Cameo's override select
-   on `Versus.ContainsKey`, and an EMPTY match list returns **100**, so a gap makes the
-   weapon hit PLATED units harder than unplated ones.
-3. **THE COLUMN LAW.** Every plating's mean across all templates is the same (**70**), so no
-   plating is stronger overall — they differ only in WHAT they resist. This is the TRANSPOSE
-   of §12.0a and cannot conflict with it: platings sit outside the class-armor set.
-   ⚠ 70 rather than 100 because a plating displaces the class armor, and six class armors
-   already average better than 100 (`Heroic` 74.3, the four aircraft 76–80) — at 100 a hero
-   or an aircraft got 25–35% WORSE for taking an upgrade.
-4. **AN ARMOR UPGRADE MUST NEVER INCREASE INCOMING DAMAGE.** Guard:
-   `audit_armor_upgrade_harm.py`. Nothing else can see this class of bug — the yaml is valid,
-   every value is in the window, and a boot gate cannot catch a number that is merely wrong.
-5. **PLATINGS ARE MUTUALLY EXCLUSIVE; TEAM UPGRADES ARE NOT.** A plating changes the TYPE
-   and must share one `ProductionIconMutualExclusion` group with its siblings; a team/tech
-   upgrade changes the AMOUNT (`DamageMultiplier`) and must NOT grant a type — giving one to
-   a stacking tech would erase the unit's class identity as a side effect. Guard:
-   `audit_plating_exclusivity.py`. Carrying two plating TRAITS is normal and correct; both
-   CONDITIONS being true is not.
-
-### 12.0f PRICED SURVIVABILITY (E1, 2026-08-16; SHIPPED 2026-08-17)
-
-```
-effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # x0.540 measured
-```
-The factor is MEASURED from the live ruleset, never frozen — the Shield ladder is generated
-and has moved repeatedly. ⚠ **`Integrity` is NOT a shield and is NOT counted**: it absorbs
-nothing (`INotifyDamage` runs after the damage lands), so it buys no survivability at all
-and only gates the EMP disable. Platings contribute 0 net by construction (law 3).
-
-**LAW — only a shield the unit SPAWNS with is priced.** The maintainer's qualifier *"that's
-only if the unit already has armor or shield included in them"* is binding, and it decides
-three buckets:
-
-| the unit has | count | priced into base cost |
-|---|--:|---|
-| a pool present at spawn, no positive gate | **58** | **YES** — `effective_HP` |
-| `MaxPercentageStrength` but `InitialStrength: 0` behind `shieldgen` | 1318 | no — it is an empty CAPACITY, not a shield |
-| a pool granted by an upgrade (incl. every plating) | ~216 | no — that is upgrade pricing (E5) |
-
-⚠ **`!disabled` is NOT a gate.** It is the standard not-EMP'd/not-captured guard and is true
-on a healthy unit. Any classifier that treats every `RequiresCondition` as a gate will hide
-all 43 Protoss shields (`InitialPercentageStrength: 100`, `RequiresCondition: !disabled`) and
-report a shield-free roster. Only a POSITIVE token gates.
-
-**The weapon side gets its own weight, not a rung.** `armor_weights()` carries a 17th `Shield`
-row at the measured baseline damage share (**1.432%**), taken OUT of the 16 class rows so the
-weights still sum to 1.0; `weighted_versus` iterates the weights, never `ARMORS`. Effect:
-+0.65% (Bullet) to +3.47% (Tesla). `effective_density` deliberately stays on `ARMORS` — it
-counts BODIES, and a shield sits on a body the class row already counted.
-
-⚠ **The Protoss 150% damage multiplier compensates for their shields.** Pricing the shield and
-retiring that multiplier must land in ONE pass, or the faction pays twice.
-
-Report: `tools/audit/audit_survivability_pricing.py` (informational — these actors are
-mis-priced until `apply_balance --confirm` runs, so it must not gate commits).
-
 ### 12.0 THE PROFILE SHAPE LAW (maintainer, 2026-08-15) — binding
 
 Supersedes the "even step" half of the step law. Three rules, in force for every
 `^Warhead_*` family:
 
-1. **The MEDIAN is 100, and values above 100 are legal** (revised 2026-08-15;
-   this rule originally said *"peak is 100"*). Every profile is normalised so its
-   own median is 100, which is also how reference profiles from other mods are
+1. **The profile's CENTRE is 100, and values above 100 are legal** (revised
+   2026-08-15 from *"peak is 100"*; the centre statistic was revised again on
+   2026-08-16 from the MEDIAN to the arithmetic **MEAN** — see §12.0g, which is
+   the binding normaliser. The reasoning below is why a centre statistic beats
+   the peak at all, and it holds for either one). Every profile is normalised so its
+   own centre is 100, which is also how reference profiles from other mods are
    read — a source that writes 200/100 and one that writes 100/50 are recognised
    as the SAME design. Absolute lethality still lives in `Damage`, never in the
    armor profile.
@@ -1529,6 +1393,145 @@ warheads per the even-spread law, ReloadDelay→weapon `ReloadDelay`
 mismatch the balance sheet wins**; audit_balance_sheet.py is the
 detector and fixes land as ordered batches, never silently.
 
+### 12.0c THE SHIELD LADDER (maintainer 2026-08-16) — binding
+
+> *"the only thing that should deal extreme amount of damage to shields is tesla"*
+
+```
+Shield = PHYSICS_RANK[family] x SHIELD_LEVEL[level] x damped structural scale
+```
+compressed onto **exactly [100, 400] = 4.000x**, every value DISTINCT, ascending within
+each family, with **Tesla the top family at every level** (312/338/369/400).
+
+⚠ **No structural formula can carry this identity** and that is measured, not assumed:
+`floor` and `top` are ANTI-CORRELATED by normalisation, so any product of them cancels to
+an invariant of the normalisation rather than a property of the weapon (`200+floor` spans
+1.26x, the geometric mean 1.54x, both with >50% ties). The structural term therefore sets
+the BAND and `PHYSICS_RANK` sets the ORDER — and the term is DAMPED so it can only
+separate families of EQUAL rank, never reorder unequal ones.
+
+⚠ **The compression is DERIVED every run** (`shield_uniqueness.compress`), not calibrated.
+Three hand-set constants were correct for exactly one profile set and went silently wrong
+the moment §12.0a renormalised everything.
+
+### 12.0d THE CLASS TILT (maintainer 2026-08-16) — binding
+
+Within a family, each LEVEL tilts toward one end of every armor ladder:
+
+| level | tilts toward | |
+|---|---|---|
+| Light (and Trace) | `None` `Wood` `Scout` `Light` `Fighter` | the lightest rung of each ladder |
+| Medium | `Flak` `Steel` `Medium` `Bomber` `Helicopter` | the middle rung |
+| Heavy | `Plate` `Concrete` `Heavy` `Superheavy` `Spaceship` | the heaviest rung |
+| **Super** | nothing — **FLAT**, the generalist | actively compressed to the band's flat end |
+
+Implemented as ladder POSITION, not as a literal armor set, because position is what those
+sets ARE. ⚠ **The tilt MUST NEVER reorder a ladder**: it is applied to the VALUES and each
+armor is then given back the RANK it held, so where the tilt agrees with the family's
+direction it sharpens, where it disagrees it flattens, and it can never invert
+`None > Flak > Plate`. That also removes any need for a `direction` argument, which is what
+makes it work for the blends.
+
+### 12.0e THE ARMOR-PLATING LAYER (maintainer 2026-08-16/17) — binding
+
+Five overlay armors, granted by upgrades, **ALWAYS ALL CAPS** so the case alone distinguishes
+them from the TitleCase class armors:
+
+| plating | counters | weak to | real basis |
+|---|---|---|---|
+| `HAZMAT` | thermochemical | kinetic | sealed/filtered envelope; no mass, so a bullet ignores it |
+| `COMPOSITE` | kinetic **+ shaped** | blast | ceramic shatters a penetrator, ERA breaks a jet; neither spreads an impulse |
+| `BLAST` | blast | energy | spall liner absorbs impulse; a beam delivers none |
+| `REFLECTOR` | energy | thermochemical | mirror-bright coating; flame and corrosives foul it |
+| `ARMOR` | nothing | nothing | the GENERIC hedge — flat, for scrap/junk and non-branching upgrades |
+
+Laws:
+
+1. **LAYER SELECTION, not combination.** A plating REPLACES the class armor while active
+   (`AreaDamageWarhead.DamageVersus`), exactly as `Shield` already does in yaml
+   (`Armor: RequiresCondition: !shielded`). This is what makes "weak against" safe: only one
+   row is ever read, so a weak row is a chosen exposure rather than a penalty stacked on top.
+2. **EVERY template carries EVERY plating row, with no exceptions** — Sonic and Magic
+   included. A MISSING row is not "no opinion": both the engine and Cameo's override select
+   on `Versus.ContainsKey`, and an EMPTY match list returns **100**, so a gap makes the
+   weapon hit PLATED units harder than unplated ones.
+3. **THE COLUMN LAW.** Every plating's mean across all templates is the same (**70**), so no
+   plating is stronger overall — they differ only in WHAT they resist. This is the TRANSPOSE
+   of §12.0a and cannot conflict with it: platings sit outside the class-armor set.
+   ⚠ 70 rather than 100 because a plating displaces the class armor, and six class armors
+   already average better than 100 (`Heroic` 74.3, the four aircraft 76–80) — at 100 a hero
+   or an aircraft got 25–35% WORSE for taking an upgrade.
+4. **AN ARMOR UPGRADE MUST NEVER INCREASE INCOMING DAMAGE.** Guard:
+   `audit_armor_upgrade_harm.py`. Nothing else can see this class of bug — the yaml is valid,
+   every value is in the window, and a boot gate cannot catch a number that is merely wrong.
+5. **PLATINGS ARE MUTUALLY EXCLUSIVE; TEAM UPGRADES ARE NOT.** A plating changes the TYPE
+   and must share one `ProductionIconMutualExclusion` group with its siblings; a team/tech
+   upgrade changes the AMOUNT (`DamageMultiplier`) and must NOT grant a type — giving one to
+   a stacking tech would erase the unit's class identity as a side effect. Guard:
+   `audit_plating_exclusivity.py`. Carrying two plating TRAITS is normal and correct; both
+   CONDITIONS being true is not.
+
+### 12.0f PRICED SURVIVABILITY (E1, 2026-08-16; SHIPPED 2026-08-17)
+
+```
+effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # x0.540 measured
+```
+The factor is MEASURED from the live ruleset, never frozen — the Shield ladder is generated
+and has moved repeatedly. ⚠ **`Integrity` is NOT a shield and is NOT counted**: it absorbs
+nothing (`INotifyDamage` runs after the damage lands), so it buys no survivability at all
+and only gates the EMP disable. Platings contribute 0 net by construction (law 3).
+
+**LAW — only a shield the unit SPAWNS with is priced.** The maintainer's qualifier *"that's
+only if the unit already has armor or shield included in them"* is binding, and it decides
+three buckets:
+
+| the unit has | count | priced into base cost |
+|---|--:|---|
+| a pool present at spawn, no positive gate | **58** | **YES** — `effective_HP` |
+| `MaxPercentageStrength` but `InitialStrength: 0` behind `shieldgen` | 1318 | no — it is an empty CAPACITY, not a shield |
+| a pool granted by an upgrade (incl. every plating) | ~216 | no — that is upgrade pricing (E5) |
+
+⚠ **`!disabled` is NOT a gate.** It is the standard not-EMP'd/not-captured guard and is true
+on a healthy unit. Any classifier that treats every `RequiresCondition` as a gate will hide
+all 43 Protoss shields (`InitialPercentageStrength: 100`, `RequiresCondition: !disabled`) and
+report a shield-free roster. Only a POSITIVE token gates.
+
+**The weapon side gets its own weight, not a rung.** `armor_weights()` carries a 17th `Shield`
+row at the measured baseline damage share (**1.432%**), taken OUT of the 16 class rows so the
+weights still sum to 1.0; `weighted_versus` iterates the weights, never `ARMORS`. Effect:
++0.65% (Bullet) to +3.47% (Tesla). `effective_density` deliberately stays on `ARMORS` — it
+counts BODIES, and a shield sits on a body the class row already counted.
+
+⚠ **The Protoss 150% damage multiplier compensates for their shields.** Pricing the shield and
+retiring that multiplier must land in ONE pass, or the faction pays twice.
+
+Report: `tools/audit/audit_survivability_pricing.py` (informational — these actors are
+mis-priced until `apply_balance --confirm` runs, so it must not gate commits).
+
+### 12.0g THE MEAN-100 LAW (maintainer, 2026-08-16) — binding, supersedes median-100
+
+> *"all warheads average all versus values at 100 to make them comparable"*
+
+Every `^Warhead_*` family's MAIN warhead has its 16 armor rows normalised so their
+**arithmetic MEAN is 100** (`gen_weapon_template.mean_normalise`). W13's median-100 left
+the mean free, and the mean is not a shape statistic but a MAGNITUDE: `K` is a
+share-weighted average of the profile, so the mean IS the family's contribution to priced
+DPS. Measured before the change, family means ran 22.0 to 106.1 — up to a 4.8x hidden
+multiplier between two families that both looked "normalised".
+
+Consequences, all binding:
+
+* **`K` is SHAPE-ONLY.** Choosing a family redistributes output across armors without
+  changing how much there is. `Damage` is the sole magnitude knob.
+* **`max <= 200` now MEANS `max <= 2 x mean`.** A profile brilliant against three armors
+  and useless against thirteen cannot keep its peak. 11 of 94 templates breached and are
+  compressed by the POWER LAW about the geometric mean — never a clamp, because the power
+  law is the only transform that also preserves `Heroic = Plate x Scout / peak` exactly.
+* **A tilt is FREE.** Moving output between armors costs nothing in total, which is what
+  makes §12.0d expressible at all.
+* **Scope: MAIN warheads only.** A `_Percentage` twin's `Versus` is a MAGNITUDE until W18
+  rebases it; normalising it would multiply every %-effect by ~5x.
+
 ## 13. Map props (Obstacle target type)
 
 - Trees, rocks, utility poles and other decorations carry
@@ -1558,7 +1561,7 @@ detector and fixes land as ordered batches, never silently.
   ids. A map's `campaign.lua` may reference actor types in utility
   functions (e.g. `GetAirstrikeTarget` checking for `"sam"`) — these must
   also be renamed.
-- **Tooling.** `tools/rename_map_actors.py` applies the rename maps to
+- **Tooling.** `tools/archive/rename_map_actors.py` applies the rename maps to
   map.yaml and lua files in bulk. It matches `ActorNN: <type>` lines in
   yaml and quoted `"oldname"` strings in lua, replacing them with the
   new ids from the rename maps.
@@ -1713,7 +1716,7 @@ significantly to convey a heavier chassis; (b) ReloadDelay may be longer
 only if total damage per salvo increases significantly. **Range must never
 be lower** on a promotion unit. Promotion weapons must use stronger
 warhead classes than the base unit (e.g. base medium → promotion heavy).
-Audit this with `tools/audit/audit_promotion_superiority.py`.
+Audit this with `tools/audit/audit_promotion_superiority.py` ⚠ (**proposed, never built**; the closest live check is `tools/audit/audit_promotion_gating.py`).
 
 **Linebreaker / mutual-weapon design (CABAL Manticore).** A unit whose
 primary and anti-air weapons are mutually exclusive (e.g. a turret that

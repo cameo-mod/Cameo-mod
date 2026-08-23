@@ -6271,7 +6271,7 @@ If any of the concepts above feel unclear, review the relevant section before co
 - `docs/AGENT_WORKSPACE.md`
 - `docs/DESIGN.md`
 - `docs/MIGRATION.md` — the ongoing migration of faction content into self-contained ContentPacks, directly relevant to the `mods/cameo/ContentPacks/` layout described here.
-- `docs/history/AI_AGENT_HANDOFF.md`
+- `docs/history/handoffs/AI_AGENT_HANDOFF_2026-07-25.md`
 
 ## What to read next
 
@@ -14408,7 +14408,7 @@ If any of the concepts above feel unclear, review the relevant section before co
 - [Part 8.4 — Bot Order Flow](#file-chapters-Part_08_Chapter_04_Order_Flow) for how bot orders enter the lockstep pipeline.
 - [Part 9.1 — OrderManager and Lockstep Foundation](#file-chapters-Part_09_Chapter_01_OrderManager) for the network frame pacing that makes bot orders deterministic.
 - `docs/design/FORMULA_V2.md` and `docs/design/ARMOR_SYSTEM.md`
-- `docs/history/AI_AGENT_HANDOFF.md`
+- `docs/history/handoffs/AI_AGENT_HANDOFF_2026-07-25.md`
 
 
 ---
@@ -14845,7 +14845,7 @@ For build planning, `UnitCompositionsBotModule` provides a parsed composition st
 - [Part 8.3 — Bot Squads and Combat Heuristics](#file-chapters-Part_08_Chapter_03_Squads) for how `SquadManagerBotModuleCA` turns produced units into combat forces.
 - [Part 8.4 — Bot Order Flow](#file-chapters-Part_08_Chapter_04_Order_Flow) for how bot module orders enter the lockstep pipeline.
 - `docs/design/FORMULA_V2.md` and `docs/design/ARMOR_SYSTEM.md`
-- `docs/history/AI_AGENT_HANDOFF.md`
+- `docs/history/handoffs/AI_AGENT_HANDOFF_2026-07-25.md`
 
 
 ---
@@ -15876,7 +15876,7 @@ Set `IsImmediate = true` for orders that should not cross the lockstep pipeline 
 - [Part 8.1 — Bot Architecture and IBot](#file-chapters-Part_08_Chapter_01_IBot) for the broader `IBot` and `ModularBot` architecture.
 - [Part 8.3 — Bot Squads and Combat Heuristics](#file-chapters-Part_08_Chapter_03_Squads) for the squad state machines that issue the `AttackMove` orders described in this chapter.
 - `docs/AGENT_WORKSPACE.md`
-- `docs/history/AI_AGENT_HANDOFF.md`
+- `docs/history/handoffs/AI_AGENT_HANDOFF_2026-07-25.md`
 
 ## Summary
 

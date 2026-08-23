@@ -1,5 +1,11 @@
 # AreaDamage universal conversion — AGENT HANDOFF (2026-08-04)
 
+> ⛔ **ARCHIVED — SUPERSEDED by [`docs/HANDOFF.md`](../../HANDOFF.md) (2026-08-23).**
+> This is a dated session record, kept for provenance and for the technique notes in it.
+> It is **not** current state: statuses, branch names, counts and "next steps" below were
+> true on 2026-08-04 and have moved since. Never resume work from this file — read
+> `docs/HANDOFF.md`, then verify against the artifact. Its conversion work is COMPLETE. Still useful for: the C# build/deploy gotchas (§1, §5) and the design rationale.
+
 > **✅ HISTORICAL — this handoff's work is COMPLETE (as of 2026-08-08).** The universal AreaDamage
 > conversion, both C# warheads, the generator reconcile (A1), the MissileAA spread reduction, and the
 > energy-chip rework are all DONE and merged to `master` (the `fix/production-queue-crash` branch +

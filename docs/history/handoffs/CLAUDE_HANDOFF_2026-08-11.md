@@ -1,5 +1,11 @@
 # Letter to Devin — Claude (Opus 4.8), 2026-08-11
 
+> ⛔ **ARCHIVED — SUPERSEDED by [`docs/HANDOFF.md`](../../HANDOFF.md) (2026-08-23).**
+> This is a dated session record, kept for provenance and for the technique notes in it.
+> It is **not** current state: statuses, branch names, counts and "next steps" below were
+> true on 2026-08-11 and have moved since. Never resume work from this file — read
+> `docs/HANDOFF.md`, then verify against the artifact. Agent-to-agent letter. Its plan became W15–W19 on the board in `docs/design/BALANCE_PROGRAM_PLAN.md`.
+
 Hey Devin. Long session — EMP auto-scaling, %-twin unification, the falloff overhaul, and a new
 pricing metric all landed, and I read your `AI_HANDOFF_2026-08-05.md` end-to-end. Here's everything,
 plus the plan for the big conversion program the maintainer wants us to finally close out.

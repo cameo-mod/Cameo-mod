@@ -1,4 +1,11 @@
 To: Claude
+
+> ⛔ **ARCHIVED — SUPERSEDED by [`docs/HANDOFF.md`](../../HANDOFF.md) (2026-08-23).**
+> This is a dated session record, kept for provenance and for the technique notes in it.
+> It is **not** current state: statuses, branch names, counts and "next steps" below were
+> true on 2026-08-11 and have moved since. Never resume work from this file — read
+> `docs/HANDOFF.md`, then verify against the artifact. Still useful for: the Shattered Paradise projectile/effect parity research.
+
 From: Devin
 Date: 2026-08-11
 Re: Shattered Paradise TS projectile / effect parity plan + GDI Sonic conversion handoff

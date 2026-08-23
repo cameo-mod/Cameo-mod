@@ -1,28 +1,9 @@
-﻿# Warhead-split guard (multi-warhead over-damage)
+# Warhead-split guard (multi-warhead over-damage)
 
 
-## FAIL 1 — broadcast fingerprint (4)
+## FAIL 1 — broadcast fingerprint / every MAIN identical (965 vs baseline 965)
 
-Every SpreadDamage warhead (mains + sides) shares one identical value — the 2026-07-22 broadcast bug. Fix by editing the per-shot TOTAL through the workbook so `distribute_damage` splits it, or by restoring the intended per-warhead values.
-
-| weapon | mains | sides | damage |
-|---|---|---|---|
-| HydraSpit | 4 | 1 | 18000 |
-| NanoArtilleryAG | 3 | 2 | 7777 |
-| NaxiAlienPistol | 3 | 1 | 8000 |
-| NaxiAlienPistol_elite | 3 | 1 | 8000 |
-
-
-## FAIL 2 — FriendlyFire louder than the shot (0)
-
-None. ✅
-
-
-## FAIL 3 — every MAIN identical, on a ratchet (982 vs baseline 982)
-
-This is the fingerprint FAIL 1 *describes* but cannot catch: FAIL 1 also requires a SIDE warhead, which is why it reports 4 where the fingerprint is on 982.
-
-_at or below baseline_ — pre-existing **W24** debt (982 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
+_at or below baseline_ — pre-existing **W24** debt (965 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
 
 | weapon | mains | per_warhead | total |
 |---|---|---|---|
@@ -68,10 +49,15 @@ _at or below baseline_ — pre-existing **W24** debt (982 weapons), not a regres
 | AsianChemical_elite | 6 | 4000 | 24000 |
 
 
-_... and 942 more._
+_... and 925 more._
 
 
-## Review — high uniform stacks (informational, 246)
+## FAIL 2 — FriendlyFire louder than the shot (0)
+
+None. ✅
+
+
+## Review — high uniform stacks (informational, 245)
 
 Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (not flattening residue).
 

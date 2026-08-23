@@ -8,16 +8,24 @@ boot-gate the tree. When a summary (ROADMAP line, handoff, memory, status table)
 the artifact, **the artifact wins — then fix the stale summary.**
 
 **Must-read, in order:** this file → `docs/LESSONS_LEARNED.md` → `docs/AGENT_WORKSPACE.md` →
-`docs/design/ROADMAP.md` → `docs/design/BALANCE_PIPELINE_ESTIMATE.md`. For weapon work also:
-`docs/AI_HANDOFF_2026-08-05.md`, `docs/design/AREADAMAGE_HANDOFF.md`, `docs/design/WEAPON_3WAY_SPLIT.md`,
-`docs/design/SPREAD_FALLOFF_PLAN.md` (Spread/Falloff balancing: radius=(N-1)×Spread, shape=value spacing,
-3-axis gameplay/physics/uniqueness).
+**`docs/HANDOFF.md`** (the entry point: verified current state + the priority-ordered queue;
+it supersedes every dated handoff) → `docs/DESIGN.md` → `docs/design/ROADMAP.md` →
+`docs/audit/SUMMARY.md`. `docs/README.md` is the canonical definition of that order — if any
+copy disagrees, README wins.
+
+For weapon work also: `docs/design/WEAPON_3WAY_SPLIT.md`, `docs/design/WEAPON_TYPE_SYSTEM.md`,
+`docs/design/BALANCE_PROGRAM_PLAN.md` (the board + §0a's binding order of operations), and
+`docs/design/SPREAD_FALLOFF_PLAN.md` (Spread/Falloff: radius=(N-1)×Spread, shape=value spacing,
+3-axis gameplay/physics/uniqueness). Effort planning: `docs/design/BALANCE_PIPELINE_ESTIMATE.md`.
+⚠ The dated handoffs in `docs/history/handoffs/` are provenance ONLY — read them for technique,
+never for status.
 
 **Ten hard rules** (rules 1–2 are enforced by hooks in `.claude/settings.json`):
 1. **Boot-gate every commit** of engine content — `launch-game.cmd` must reach the main menu
    (`perf.log` ends `MenuPostProcessEffect.PostWorldLoaded`, no new `exception-*.log`). Snapshot the
    log list + cutoff BEFORE launching; menu-proof is grepping `perf.log`, not its last line.
-2. **Scoped `git add <files>` only — never `-A` / `.` / `--all`.** The maintainer + Devin have live WIP.
+2. **Scoped `git add <files>` only — never `-A` / `.` / `--all`.** Several contributors have live WIP
+   in this tree (AedisToru, Blackrobe, Elpollo315, Devin AI, and agents landing under the shared identity).
 3. **Never hand-edit a balance number** — use the pipeline (`extract_stats` → ledger →
    `apply_balance --confirm`; `--confirm` needs a maintainer order).
 4. **`Versus` lives ONLY in `^Warhead_*` templates.** Never change a warhead / `Burst` / `BurstDelays`
@@ -25,9 +33,10 @@ the artifact, **the artifact wins — then fix the stale summary.**
 5. **Weapon 3-way split:** preserve resolved behaviour (`Damage` verbatim, projectile fields — the
    Frankenstein merge), `find_empty_warhead.py = 0`, boot-gate per batch. Verify a conversion with
    `tools/audit/review_resolve_diff.py` (before/after resolve).
-6. **Multi-agent tree** (maintainer / Devin / you): **one owner per file-set.** Check a file's mtime
-   for a live agent before editing; re-verify others' commits before building on them; never
-   `git checkout -- .` or wide-add someone else's WIP.
+6. **Multi-agent tree** (maintainer, co-maintainer, other agents, you): **one owner per file-set.**
+   Check a file's mtime and `git log -3 <file>` for a live agent before editing; re-verify others'
+   commits before building on them; never `git checkout -- .` or wide-add someone else's WIP.
+   The file-set boundaries are defined in `docs/design/BALANCE_PROGRAM_PLAN.md` §2.
 7. **Rebuild C# before boot** if `OpenRA.Mods.Cameo/` or `engine/` changed
    (`DOTNET_ROLL_FORWARD=LatestMajor dotnet build -c Release --nologo -p:TargetPlatform=win-x64` → `engine/bin`).
    ⚠ **`engine/` IS NOT PART OF THIS REPO** — it is `.gitignore`d, has no `.git`/`.gitmodules`,
@@ -77,36 +86,54 @@ audited and deleted. Current progress + the exact runbook to continue:
 
 ## Required reading, in order
 
-See `docs/README.md` for the canonical reading order and document authority.
-The essential documents, in order:
+This is the same list as the ⚡ START HERE block above, expanded.
+**`docs/README.md` is the canonical definition** — if any copy disagrees with it,
+README wins and the copy gets fixed.
 
-1. **`docs/LESSONS_LEARNED.md`** — accumulated pitfalls, safe defaults, and
-   the required reading order.
+1. **`docs/LESSONS_LEARNED.md`** — accumulated pitfalls and safe defaults.
 2. **`docs/AGENT_WORKSPACE.md`** — mandatory workflow, evidence rules,
    incident protocol, and commit gate.
-3. **`docs/PROJECT_CONTEXT.md`** — short project orientation and current
-   safety focus.
+3. **`docs/HANDOFF.md`** — the entry point: verified current state, the
+   priority-ordered queue, and what each stale document was replaced by.
+   Supersedes every dated handoff in `docs/history/handoffs/`.
 4. **`docs/DESIGN.md`** — the binding design contract (naming grammar, stat
    formulas, tech tiers, content-pack layout, description scheme, agent
    operating rules). Read it before touching any yaml.
-5. **`docs/design/ROADMAP.md`** — active work queue; crashes always jump
-   the queue.
+5. **`docs/design/ROADMAP.md`** — the granular work queue; crashes always
+   jump it.
 6. **`docs/audit/SUMMARY.md`** — current known-issue state by bug class.
-7. `docs/Cameo_Knowledge_Base_Manual.md` — the ENGINE/CODE reference
-   (v.0.5): custom traits, assemblies (OpenRA.Mods.Cameo/CA),
-   activities, bot modules, UI internals. Consult it for any C#-side
-   question (it lists code-derived identifiers!); verify against source
-   when in doubt — it is a contributor document, not the binding contract.
-8. `docs/MASTER_REPORT.md` — historical long-form analysis, bug taxonomy
-   (B1–B12); consult §9/§10/§13 when DESIGN.md is not enough. Not a live
-   roadmap — active work belongs in ROADMAP.md. (Listed here as essential
-   for context; `docs/README.md` classifies it as reference/historical —
-   both are correct: read it for background, but don't treat it as binding.)
+
+Then, as the task needs them:
+
+* `docs/design/BALANCE_PROGRAM_PLAN.md` — the balance board (W1–W26), file-set
+  ownership, and §0a's binding order of operations.
+* `docs/Cameo_Knowledge_Base_Manual.md` — the ENGINE/CODE reference (v.0.5):
+  custom traits, assemblies (OpenRA.Mods.Cameo/CA), activities, bot modules,
+  UI internals. Consult it for any C#-side question (it lists code-derived
+  identifiers); verify against source when in doubt — it is a contributor
+  document, not the binding contract.
+* `docs/MASTER_REPORT.md` — historical long-form analysis and the B1–B12 bug
+  taxonomy, dated 2026-07-08. Read it for background; it is **not** binding and
+  **not** a live roadmap.
+* `docs/PROJECT_CONTEXT.md` — one-page orientation for a first-time reader.
 
 ## Tooling
 
-- `tools/audit/run_all.sh` — full audit suite (run before/after changes;
-  single checks: `python tools/audit/audit_<name>.py`).
+- `tools/audit/run_all.sh` — full audit suite, the canonical runner (run
+  before/after changes; single checks: `python tools/audit/audit_<name>.py`).
+  `tools/audit/run_all.py` is a Python port for shells without `sh`; it reads its
+  audit list out of `run_all.sh`, so the two cannot drift apart.
+- `tools/balance/run_with_guard.py` — syntax pre-check + timeout guard; run
+  balance/audit scripts through it (`.windsurf/workflows/run_python_safe.md`).
+- `tools/audit/find_empty_warhead.py` — the boot-NRE guard. Must print 0 after
+  any bulk warhead edit; `--check-yaml` does NOT catch that class.
+- `tools/audit/audit_duplicate_inherits.py` — the `Parent type X was already
+  inherited` crash class. Grep cannot find it; this reports every instance at once.
+- `tools/audit/review_resolve_diff.py` — before/after resolved diff for a weapon
+  conversion (rule 5).
+- `tools/audit/audit_doc_claims.py` + `docs/audit/doc_claims.yaml` — every numeric
+  claim a DECISION rests on, with its re-measure command. When a claim legitimately
+  changes, update `value` and every doc listed under `docs:` IN THE SAME COMMIT.
 - `tools/rename/safe_rename.py` + `rename_map_<faction>.yaml` — naming migration
   (replaces the deprecated `apply.py`).
 - `tools/packs/split_faction.py` — ContentPack extraction.
@@ -137,8 +164,9 @@ never `git add -A` — the maintainer usually has live uncommitted edits.
    (`docs/balance/*.json`, raw stats + provenance).
 2. Edit the LEDGER, or generate the workbench
    (`tools/balance/build_workbook.py` →
-   `docs/design/cameo_balance_v2.xlsx`, gitignored), edit the unlocked
-   input cells there, and read it back with
+   `docs/design/cameo_balance_v2.xlsx` — ⚠ **tracked in git**, despite older
+   notes calling it gitignored; regenerating it produces a real diff), edit
+   the unlocked input cells there, and read it back with
    `tools/balance/import_workbook.py`.
 3. `python tools/balance/apply_balance.py --faction X --confirm` —
    ledger → yaml (dry run without --confirm). **Maintainer order
@@ -147,7 +175,16 @@ never `git add -A` — the maintainer usually has live uncommitted edits.
    ledger TOGETHER.
 
 `audit_balance_drift` (in run_all.sh) fails red whenever yaml and the
-committed ledger disagree — hand edits cannot land silently.
+committed ledger disagree — hand edits cannot land silently. ⚠ It only helps if
+someone LOOKS: it has gone red twice now because yaml commits landed without a
+re-extract. Re-extract before every commit that moves a balance number, not at the
+end of a session.
+
+**The damage grid is 100, not 2000.** `formula.DAMAGE_STEP = 100` (W15), and
+`FirepowerMultiplier` is retired as a pricing/fine-tuning knob (W17): `apply_balance`
+cannot write it, and `propose_class_rebalance.decompose_dps` always solves at
+`fp = 1.0`. Older documents that teach the 2000-step grid plus an FP fine-tune are
+describing a retired law.
 
 The LEGACY workbook `docs/design/cameo_armor_system.xlsx` remains the
 reference for design judgments until the Phase-3 discrepancy triage
@@ -156,7 +193,19 @@ exists, the workbook is open in Excel: don't write it; queue and say so.
 
 ## Memory
 
-Before running any shell command that has a corresponding memory file (build commands, engine sync, git operations), **read that memory file in full before executing**.
+If your harness has a per-agent memory store, read the memory that covers a command
+(build, engine sync, git) in full before running it.
+
+⚠ **A memory is not a repository document.** It is private to one agent: nobody else —
+maintainer, co-maintainer, another agent — can open it, and 36 `memory <name>` citations
+already sit in the design docs pointing at things no reader can resolve. So:
+
+* treat a memory as **provenance, never authority**;
+* the moment a memory carries a rule, a number or a decision that others must follow,
+  **promote it into the repository** (`DESIGN.md` for law, `LESSONS_LEARNED.md` for a trap,
+  `docs/audit/doc_claims.yaml` for a number that must not rot) in the same session;
+* never resolve a contradiction in favour of a memory. The artifact wins, then the
+  repository documents, then everything else.
 
 ## Work queue & token efficiency
 

@@ -4,12 +4,27 @@ The single source of truth for **what order** to build the balance pipeline and 
 needs** to be complete. Written 2026-08-04. This does not replace the detailed docs — it **threads
 them** into one sequence so we never lose the order. Each phase links the doc that owns the detail.
 
-> **Authority note (2026-08-08):** THIS is the authoritative **phase-sequence map** for the balance
-> program (the strategic "what order, A→G"). It complements `ROADMAP.md`, which is the **live granular
-> task queue** (individual items + commit hashes; crashes jump it). When they disagree on *status*, the
-> artifact wins — verify, then fix both. This doc **supersedes** the older `MEGAPLAN.md` (kept as a thin
-> index) for program sequencing; `AREADAMAGE_HANDOFF.md` is now **historical** (its warhead conversion
-> is complete — see §1).
+> **Authority note (rev. 2026-08-23) — three files, three jobs, no overlap:**
+>
+> | file | owns |
+> |---|---|
+> | **this file** | the strategic **phase sequence** (what order, A→G) |
+> | [`BALANCE_PROGRAM_PLAN.md`](BALANCE_PROGRAM_PLAN.md) | **status, ownership, acceptance criteria** — the W1–W26 board, the file-set map (§2), the binding order of operations (§0a) |
+> | [`ROADMAP.md`](ROADMAP.md) | the **live granular queue** — individual tasks + commit hashes; crashes jump it |
+>
+> ⚠ **Where §0a of `BALANCE_PROGRAM_PLAN.md` and the phase order below disagree, §0a wins** — it is
+> the newer ruling (2026-08-17) and it is measured. When any of the three disagree on *status*, the
+> **artifact** wins: verify, then fix all of them.
+>
+> This doc supersedes the older `MEGAPLAN.md`, archived at
+> [`../history/MEGAPLAN_2026-08-08.md`](../history/MEGAPLAN_2026-08-08.md).
+> [`../history/handoffs/AREADAMAGE_HANDOFF_2026-08-04.md`](../history/handoffs/AREADAMAGE_HANDOFF_2026-08-04.md)
+> is historical — its warhead conversion is complete (see §1).
+>
+> ⚠ **This file carries 20 `memory <name>` citations.** They point at a private, per-agent memory
+> store that no other reader — maintainer, co-maintainer or another agent — can open. Treat every
+> one as **provenance, never authority**. If a memory carries a binding rule, promote it into
+> `DESIGN.md`; if it carries a number, pin it in `docs/audit/doc_claims.yaml`.
 >
 > Companion docs (do NOT duplicate — this indexes them): `BALANCE_PIPELINE.md` (the sanctioned
 > loop), `FORMULA_V2.md` (the laws), `BALANCE_SYNTHESIS.md` (synthesis laws), `ARMOR_SYSTEM.md` +
@@ -104,7 +119,7 @@ is driven by EFFECTIVE DPS = raw × ∏ firepower knobs (memory `cameo-firepower
   generator to emit `AreaDamage` + `ValidRelationships: Ally, Neutral, Enemy` + `FriendlyFireDamage/
   Spread 50`, drop the FF twin, `^Warhead_{tag}`/`Warhead@{tag}_Percentage` naming. Then
   `regenerate + diff` the 54 non-Nuclear templates == file (no-op). **Until then DO NOT regenerate**
-  (would revert). (`AREADAMAGE_HANDOFF.md` §3c)
+  (would revert). (`../history/handoffs/AREADAMAGE_HANDOFF_2026-08-04.md` §3c)
 - **A2. Cannon/weapon rebuild** — `CannonAP_{L/M/H}` (anti-heavy) + `CannonHE_{L/M/H}` (anti-veh);
   current cannons -> CannonHE, TankDestroyerCannon -> CannonAP_Light. Built by `gen_weapon_template.py`
   via the two-level ordering law (macro priority × light/heavy). (memory `cameo-cannon-weapon-templates`,

@@ -9,11 +9,11 @@ Achieve zero errors and zero warnings from `OpenRA.Utility.exe cameo --check-yam
 
 ## Baseline
 
-- **Saved at:** `docs/audit/check-yaml-baseline.txt`
+- **Saved at:** `docs/audit/check-yaml-baseline.txt` ⚠ (**not in the tree** — the baseline file was never committed, so the totals below cannot be re-derived; re-run `check-yaml` to establish a new baseline before resuming this program)
 - **Date:** 2026-07-23
 - **Commit:** `85de3138e` (post-naming-refactor)
 - **Totals:** 379,899 errors, 80,703 warnings
-- **Analysis tool:** `tools/audit/analyze_check_yaml.py`
+- **Analysis tool:** `tools/archive/analyze_check_yaml.py`
 - **Note:** Errors are multiplied by ~39 (one per map tested). Unique error count is approximately 9,700.
 
 ## How to re-run the check
@@ -79,7 +79,7 @@ python tools\audit\analyze_check_yaml.py docs\audit\check-yaml-baseline.txt
 1. ✅ Root cause: `^upgrade.template` defines `Interactable:`, `^promotion_upgrade.template` inherits it and adds `Selectable:`
 2. ✅ Fix: removed `Interactable:` from `^upgrade.template` (root cause), removed `-Interactable:` workaround from `^promotion_upgrade.template`
 3. ✅ 242 promotion actors fixed (236 from content packs + 6 bridges are separate minor issue)
-4. ✅ **Rule enforced:** Never have both `Interactable` and `Selectable` on the same actor. Fix at the root template, not in children. See `tools/audit/audit_yaml_lint_rules.py`
+4. ✅ **Rule enforced:** Never have both `Interactable` and `Selectable` on the same actor. Fix at the root template, not in children. See `tools/archive/audit_yaml_lint_rules.py`
 
 ### Phase 3: Missing FTL Keys (~6,717 warnings → ~4,327 remaining) — ⏳ PARTIAL
 
@@ -115,7 +115,7 @@ This is the largest category. Strategy:
    - ✅ Removed non-existent actors from `^NonClonableActors` `ExcludedActorTypes` in `misc.yaml`
 5. **TransformsIntoRepairable** (~74 unique) — ✅ DONE
    - ✅ Replaced invalid `RepairActors` in 4 TS ContentPack conyards with valid list (now inherited from `^Conyard` template)
-   - ✅ **Rule enforced:** `RepairActors` lists belong in templates, not duplicated per-faction. See `tools/audit/audit_yaml_lint_rules.py`
+   - ✅ **Rule enforced:** `RepairActors` lists belong in templates, not duplicated per-faction. See `tools/archive/audit_yaml_lint_rules.py`
 
 ### Phase 5: Unresolved Prerequisites (~79 unique → 0) — ✅ DONE
 
@@ -146,7 +146,7 @@ This is the largest category. Strategy:
 
 **ProvidesPrerequisite default behavior:** `ProvidesPrerequisite:` without explicit `Prerequisite:` field provides the actor's own name (`info.Name`). With `Prerequisite: custom_name`, it provides `custom_name`.
 
-**Rule enforced:** Always use exactly `~disabled` for intentional gating prereqs. Never use `~wip`, `~disable`, `~unbuildable`, `~disabled-wip`, `~disabled-wip-content`, `~disabled-unbuildable` — just `~disabled`. See `tools/audit/audit_yaml_lint_rules.py`
+**Rule enforced:** Always use exactly `~disabled` for intentional gating prereqs. Never use `~wip`, `~disable`, `~unbuildable`, `~disabled-wip`, `~disabled-wip-content`, `~disabled-unbuildable` — just `~disabled`. See `tools/archive/audit_yaml_lint_rules.py`
 
 ### Phase 6: Unused Granted Conditions (~1,600 unique → 0)
 
@@ -230,7 +230,7 @@ This is achievable but requires sustained effort across multiple sessions. The b
 
 The following audit script enforces the rules learned during cleanup:
 ```
-python tools/audit/audit_yaml_lint_rules.py
+python tools/archive/audit_yaml_lint_rules.py
 ```
 
 Checks:

@@ -1,5 +1,8 @@
 # Basic Infantry Damage Audit
 
+> ⛔ **ARCHIVED 2026-08-23.** A one-off dated audit, not live evidence. Current audit output is
+> regenerated into `docs/audit/latest/` by `bash tools/audit/run_all.sh`.
+
 Date: 2026-08-02
 Scope: active factions loaded by `mods/cameo/mod.yaml`; unupgraded, non-elite entry-level combat infantry only.
 

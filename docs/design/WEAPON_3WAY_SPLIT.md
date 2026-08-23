@@ -1,5 +1,8 @@
 # WEAPON 3-WAY SPLIT — warhead / projectile / effect layers (2026-08-02)
 
+> ⚠ **SUPERSEDED (W15/W17, 2026-08-15).** The grid is now `formula.DAMAGE_STEP` = **100**, the `%`-twin comes from `formula.percentage_twin()` (not `damage // 2000`), and `FirepowerMultiplier` is retired as a fine-tuning knob — `apply_balance` cannot write it and `decompose_dps` always solves at `fp = 1.0`. Read every "multiple of 2000" mention below as history.
+> The split itself is unaffected — it preserves `Damage` verbatim either way.
+
 _The repoint architecture. Maintainer decision 2026-08-02: "do the full split
 now." Supersedes the naive "reparent onto warhead-only templates" plan (which
 would orphan 392/437 override keys + strip FX). Companion to
@@ -211,7 +214,7 @@ pair. Every concrete weapon under the intermediate then inherits it unchanged �
   run audits (warhead_split, template_conformance, yaml_lint, weapon_uniqueness); **boot-gate**;
   spot-check every category (single SA, single CG, RA2 intermediate, a skipped dual/mixed weapon).
 - If clean → **commit it** as "retrofit: Bullet family (SmallArms/Chaingun)". If any defect → fix or
-  discard (my `stash@{0}` holds the v1; the v3 tooling is `tools/archive/retrofit_v3.py`).
+  discard (my `stash@{0}` holds the v1; the v3 tooling is `tools/archive/retrofit_v3.py` — ⚠ **not in the tree**; the surviving canonical tool is `tools/balance/retrofit_weapon_family.py`).
 - **Adopt ONE canonical retrofit tool** (`tools/balance/retrofit_weapon_family.py`, authored/owned by
   me) driven by the triple-map above + the categorizer, so every remaining family is done identically.
 
