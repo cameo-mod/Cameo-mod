@@ -55,8 +55,8 @@ never for status.
 8. **Audit reports regenerate via `bash tools/audit/run_all.sh` only** (PowerShell `>` writes UTF-16),
    **and only from a COMPLETE tree** — `engine/` built, clone not shallow. Missing either makes a
    dozen audits scan a smaller corpus, report FEWER findings and still say PASS, so the commit
-   deletes real evidence with a green run (`unique_traits` 125 trait types → 11). `run_all` now
-   diverts to the untracked `docs/audit/degraded/` in that case and says why; `--force-latest`
+   deletes real evidence with a green run (`dead_warhead_fields` 27071 warhead nodes → 7014).
+   `run_all` diverts to the untracked `docs/audit/degraded/` in that case and says why; `--force-latest`
    overrides. Refresh `latest/` WHOLE, from one machine — path separators alone make a
    cross-platform diff dirty. (`tools/audit/environment.py`, `docs/LESSONS_LEARNED.md`.)
 8b. **The engine DROPS unknown yaml fields in silence.** `FieldLoader.Load` (FieldLoader.cs:676)
@@ -236,8 +236,9 @@ If your harness has a per-agent memory store, read the memory that covers a comm
 (build, engine sync, git) in full before running it.
 
 ⚠ **A memory is not a repository document.** It is private to one agent: nobody else —
-maintainer, co-maintainer, another agent — can open it, and 36 `memory <name>` citations
-already sit in the design docs pointing at things no reader can resolve. So:
+maintainer, co-maintainer, another agent — can open it. Thirty-six `memory <name>` citations
+once sat in the design docs pointing at things no reader could resolve; they were promoted
+out on 2026-08-23 and the live set now holds **zero**. Keep it that way. So:
 
 * treat a memory as **provenance, never authority**;
 * the moment a memory carries a rule, a number or a decision that others must follow,

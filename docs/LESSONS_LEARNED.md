@@ -76,6 +76,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [OpenRA Lua `Map` API: there is no `Map.Contains` (2026-07-31)](#openra-lua-map-api-there-is-no-mapcontains-2026-07-31)
 - [Between-cell movement responsiveness (2026-08-11)](#between-cell-movement-responsiveness-2026-08-11)
 - [`docs/audit/latest/` is environment-bound — an incomplete tree reports LESS and still says PASS (2026-08-23)](#docsauditlatest-is-environment-bound--an-incomplete-tree-reports-less-and-still-says-pass-2026-08-23)
+- [Two ways a gate passes its own verification and is still broken (2026-08-23)](#two-ways-a-gate-passes-its-own-verification-and-is-still-broken-2026-08-23)
 
 ---
 
@@ -763,11 +764,13 @@ Measured in a cloud container on 2026-08-23, one `git add` away from being commi
 
 | report | complete tree | incomplete tree | why |
 |---|--:|--:|---|
-| `unique_traits.md` | 125 trait types | **11** | no `engine/**/*.cs` to resolve `.Trait<T>()` |
+| `unique_traits.md` | 125 trait types † | **11** | no `engine/**/*.cs` to resolve `.Trait<T>()` |
 | `dead_warhead_fields.md` | 27071 warhead nodes | **7014** | no C# field sets, so most types are "not checked" |
 | `fluent.md` | 5235 messages | **3640** | the engine ships fluent files too |
 | `assets.md` | 8780 WAVs | **4390** | the engine's own mods are not there |
 | `recent_changes.md` | 663 files touched | **31523** | shallow clone: the grafted boundary commit looks like it touched the world |
+
+† 125 was itself an under-report. `audit_unique_traits.py` looked for CA under `engine/OpenRA.Mods.CA`, but `OpenRA.Mods.CA` is **vendored at the repo root** — so 14 CA trait types had never been scanned on ANY machine. The complete-tree figure is **139**. A denominator can be wrong on the good tree too.
 
 `git log` showed `latest/` had been ping-ponging between a Windows checkout and a container for
 several commits — each run overwriting the other's numbers, `unique_traits.md` flipping 125 ↔ 11
@@ -793,6 +796,57 @@ not file by file.
 `tools/rename/rename_map_*.yaml`, which `gen_rename_maps.py` emits as a side effect of the
 naming report. `git status` after a suite run is therefore *expected* to be dirty in places the
 run never mentions — check what moved before assuming a stray edit.
+
+
+## Two ways a gate passes its own verification and is still broken (2026-08-23)
+
+The commit that added `tools/audit/environment.py` and the D8 citation check shipped with two
+defects, both in the new code, both "verified" before landing. The verifications were real —
+they were just aimed slightly off the thing that mattered.
+
+**1. A grep whose filter excluded exactly the counter-evidence.**
+
+`environment.py` needed the list of assemblies whose C# the audits read. The list was copied in
+spirit from `audit_unique_traits.py`, then sanity-checked with:
+
+    grep -n "engine" tools/audit/audit_dead_warhead_fields.py
+
+which printed the `AS`, `Cnc`, `D2k` and `Common` rows and looked like confirmation. It was not.
+`audit_dead_warhead_fields.py`'s table is:
+
+    ("AS",     "engine/OpenRA.Mods.AS"),
+    ("CA",     "OpenRA.Mods.CA"),        <- no "engine", so the grep hid it
+    ("Cameo",  "OpenRA.Mods.Cameo"),     <- likewise
+    ("Cnc",    "engine/OpenRA.Mods.Cnc"),
+
+**`OpenRA.Mods.CA` and `OpenRA.Mods.Cameo` are VENDORED AT THE REPO ROOT**, not under `engine/`.
+The two rows that disproved the assumption were precisely the two the filter removed, and the
+filter was the word the assumption was built on. So the new gate listed `engine/OpenRA.Mods.CA`,
+a path that cannot exist on any machine, and `incomplete()` returned a reason even on a fully
+built Windows tree — the gate could never say "complete", and diverted a legitimate run's 65
+reports to `degraded/`. The same wrong path had been sitting in `audit_unique_traits.py` for
+much longer, silently: 125 trait types scanned instead of 139.
+
+⭐ **When you grep for the word your belief is made of, matches confirm nothing** — the
+counter-examples are the lines that lack the word. Either read the whole structure, or grep for
+the FIELD (`OpenRA.Mods`) rather than the value you expect (`engine`). `ls` would also have
+settled it in one call.
+
+**2. A tracked-file scan run while the new file was still untracked.**
+
+`audit_doc_health` enumerates files with `git ls-files`. The D8 check was added along with
+`tools/tests/test_audit_doc_health.py`, whose fixtures deliberately contain a wrong citation
+label so the detector can be tested against the real bug. Running the audit at that moment
+reported **0 findings** and exit 0 — correctly, because the test file was still UNTRACKED and
+therefore invisible to `git ls-files`. `git add` made it visible; the very next run of the suite
+reported 3 findings and exited 1 on a clean tree.
+
+⭐ **Any check that enumerates via `git ls-files` must be re-run AFTER staging**, never before.
+Otherwise the last thing you verify is a tree that does not contain your change. This is the
+third instance of the self-reference class in this one audit — D5 needed the same exclusion for
+its own `GONE` table, and D4 for its own example anchor. A detector that scans the repository
+will eventually scan itself and its tests; write the exclusion when you add the check, not after
+it fires.
 
 ## `Inherits` POSITION is semantic, not cosmetic (2026-08-16)
 

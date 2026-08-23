@@ -122,9 +122,11 @@ Documented in `PHYSICAL_STATE_SYSTEM.md` §5 but not built: **Sonic → `Resonan
 new C#), **Hex** (Magic: −firepower/−accuracy/disable specials), **ArmorBreach**, **Knockback**
 (needs new C#). Only **Temperature** (98.6% exposure) and **Corrosion** (45.0%) exist today.
 
-## ⛔ RATCHET BREACH — `audit_level_ladder` 10 vs ratchet 9 (found 2026-08-23)
+## ⛔ BROKEN LADDERS — `audit_level_ladder` 9 vs ratchet 9 (breached at 10 on 2026-08-23)
 
-The suite exits 1 on this. **It is ours, from tick tank commit `f9b71bffa`**, and it stayed
+The suite exited 1 on this until `a9f31258` brought it back to the ratchet; the nine below are
+still broken and still need a ruling. **The breach was ours, from tick tank commit
+`f9b71bffa`**, and it stayed
 invisible because `docs/audit/latest/level_ladder.md` had not been regenerated since `52b364cb5`,
 which PREDATES that commit — so a FAIL sat in the tree reporting itself as a WARN at baseline.
 
@@ -139,11 +141,11 @@ measurable for the first time. What it measured:
 ⚠ The tick tank change did not CREATE this; it EXPOSED it. `CannonAP_Light` was already at 48000
 while the weapons now on `CannonAP_Medium` sit at 6000. One of the two rungs is wrong.
 
-### All ten, so they can be ruled on in one pass
+### All nine, so they can be ruled on in one pass
 
 `CannonAP` is the family that crossed the measurability threshold, but it is not the only broken
-ladder — it is the tenth. The full report (`python tools/audit/audit_level_ladder.py`, measured at
-`519175ae`) reads:
+ladder. The full report (`python tools/audit/audit_level_ladder.py`, re-measured at `3b320c89`)
+reads:
 
 | family | Light | Medium | Heavy | Super | verdict |
 |---|--:|--:|--:|--:|---|
@@ -151,17 +153,25 @@ ladder — it is the tenth. The full report (`python tools/audit/audit_level_lad
 | `Chemical` | 20000 _(n=9)_ | 32000 _(n=9)_ | 30000 _(n=3)_ | — | ⛔ INVERTED |
 | `Flak` | 32000 _(n=2)_ | 8000 _(n=15)_ | — | — | ⛔ INVERTED |
 | `Inferno` | 6000 _(n=5)_ | 10000 _(n=4)_ | 6000 _(n=5)_ | — | ⛔ INVERTED |
-| `MissileAP` | 20000 _(n=23)_ | 12000 _(n=26)_ | 11000 _(n=32)_ | — | ⛔ INVERTED |
+| `MissileAP` | 20000 _(n=23)_ | 12000 _(n=26)_ | 12000 _(n=31)_ | — | ⛔ INVERTED |
 | `Tesla` | — | — | 12000 _(n=47)_ | 6500 _(n=20)_ | ⛔ INVERTED |
 | `Thermobaric` | — | 24000 _(n=2)_ | 18000 _(n=2)_ | — | ⛔ INVERTED |
-| `Bullet` | 4000 _(n=51)_ | 4000 _(n=40)_ | — | — | ⚠ FLAT |
-| `Demolition` | 40000 _(n=36)_ | — | 40000 _(n=17)_ | — | ⚠ FLAT |
+| `Bullet` | 4000 _(n=49)_ | 4000 _(n=40)_ | — | — | ⚠ FLAT |
 | `MissileFire` | 24000 _(n=2)_ | 24000 _(n=2)_ | — | — | ⚠ FLAT |
 
-Rising correctly: `CannonHE`, `Flame`, `Laser`, `MissileChem`, `MissileHE`. Sixteen more families
-are still too thin to judge (fewer than 2 rungs with 2+ weapons), so this list can only grow as
-W23/W24 adoption fills the rungs — which is an argument for ruling on the shape of the ladder
-rather than on ten separate pairs of numbers.
+Rising correctly: `BulletCryo`, `CannonHE`, `Demolition`, `Flame`, `Laser`, `MissileChem`,
+`MissileHE`. Fifteen more families are still too thin to judge (fewer than 2 rungs with 2+
+weapons), so this list can move in either direction as W23/W24 adoption fills the rungs — which
+is an argument for ruling on the SHAPE of the ladder rather than on nine separate pairs of
+numbers.
+
+⚠ **It was ten on 2026-08-23 and the count fell without anyone ruling on anything.** The RA1
+Allies cryo conversion (`a9f31258`) took `Demolition` from FLAT to rising by moving its Heavy
+rung 40000 → 60000, and added a new measurable family (`BulletCryo`, rising). So the audit is
+back to **WARN 9 against ratchet 9** and the suite no longer exits 1 on it. Two things follow:
+the pressure is off, and the count is not a progress metric — a family can leave this list
+because it was fixed, because it fell below the measurability threshold, or because a
+conversion moved its rungs as a side effect. Read the table, not the number.
 
 Three shapes are visible, and they may not want the same answer:
 
@@ -366,8 +376,9 @@ The blockers previously listed here were measured with a broken hand parser that
    It is now applied to every family, after the tilt (`edd1c4597`). Ratchet **0**.
 5. The broken DAMAGE ladders (`audit_level_ladder.py`) — unaffected by the parser bug, since
    that audit reads `Damage` through the resolver. Still a balance restat needing
-   `apply_balance --confirm`. **Now 10 against a ratchet of 9**, so the audit is FAILING; the
-   measured table and the three distinct shapes are in the RATCHET BREACH section above.
+   `apply_balance --confirm`. **Now 9 against a ratchet of 9 — WARN, not FAIL** (it was 10 and
+   failing on 2026-08-23; `a9f31258` fixed `Demolition`). The measured table and the three
+   distinct shapes are in the RATCHET BREACH section above.
 
 ## ▶ ACTIVE — CAMEO CONTENT INSTALLER
 
