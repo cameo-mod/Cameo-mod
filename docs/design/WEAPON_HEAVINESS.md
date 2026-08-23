@@ -41,7 +41,7 @@ _Merged 2026-08-23 from `docs/design/HEAVINESS_RESEARCH.md`, unedited below this
 > special-cases them ("ignores armor").
 >
 > **And the substance of this document is already LAW and already LIVE.** See `DESIGN.md`
-> **§12.0a THE MEAN-100 LAW** (2026-08-16, binding: *"all warheads average all versus values at
+> **§12.0h THE MEAN-100 LAW** (2026-08-16, binding: *"all warheads average all versus values at
 > 100"*, so `K` is SHAPE-ONLY and `Damage` is the sole magnitude knob) and **§12.0d THE CLASS
 > TILT** (each LEVEL tilts toward one end of every armor ladder — Light toward the lightest rung,
 > Heavy toward the heaviest). §12.0d is the bell curve, and it already solves the inversion
@@ -55,7 +55,7 @@ _Merged 2026-08-23 from `docs/design/HEAVINESS_RESEARCH.md`, unedited below this
 
 **Status:** research findings. No yaml, no C#, no balance numbers changed.
 **Date:** 2026-08-22
-**Companion to:** [`CONTINUOUS_WEAPON_HEAVINESS.md`](CONTINUOUS_WEAPON_HEAVINESS.md)
+**Absorbed 2026-08-23:** `CONTINUOUS_WEAPON_HEAVINESS.md` is merged into this file (see the end).
 
 Answers four maintainer questions: does heaviness feed the PRICE, does a late-game unit keep its
 anti-light identity, what deterministic rule governs SECONDARY weapons, and what must not be
@@ -303,7 +303,7 @@ _Merged 2026-08-23 from `docs/design/CONTINUOUS_WEAPON_HEAVINESS.md`, unedited b
 > special-cases them ("ignores armor").
 >
 > **And the substance of this document is already LAW and already LIVE.** See `DESIGN.md`
-> **§12.0a THE MEAN-100 LAW** (2026-08-16, binding: *"all warheads average all versus values at
+> **§12.0h THE MEAN-100 LAW** (2026-08-16, binding: *"all warheads average all versus values at
 > 100"*, so `K` is SHAPE-ONLY and `Damage` is the sole magnitude knob) and **§12.0d THE CLASS
 > TILT** (each LEVEL tilts toward one end of every armor ladder — Light toward the lightest rung,
 > Heavy toward the heaviest). §12.0d is the bell curve, and it already solves the inversion

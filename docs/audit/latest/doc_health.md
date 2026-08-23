@@ -1,6 +1,6 @@
 # audit_doc_health — is the documentation structurally sound?
 
-Documents scanned: **194**
+Documents scanned: **203**
 
 `audit_doc_claims.py` checks whether the NUMBERS are still true. This checks whether the documents themselves are intact.
 

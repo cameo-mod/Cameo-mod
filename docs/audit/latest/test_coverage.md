@@ -4,7 +4,7 @@
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (3 file(s)) | 29 | >= 24 |
 | T2 | `def test_*` in tools/tests (19 file(s)) | 227 | >= 177 |
-| T3 | modules with no test mentioning them | 269 | <= 224 |
+| T3 | modules with no test mentioning them | 270 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (269)
+## T3 — untested modules (270)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -161,6 +161,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Widgets/QuotaProductionPaletteWidget.cs | QuotaProductionPaletteWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/RoundedImageWidget.cs | RoundedImageWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/ScaledImageWidget.cs | ScaledImageWidget |
+| C# | OpenRA.Mods.Cameo/Widgets/ScrollableLineGraphWidget.cs | ScrollableLineGraphWidget, ScrollableLineGraphSeries |
 | python | tools/audit/audit_ai.py | audit_ai |
 | python | tools/audit/audit_armament_naming.py | audit_armament_naming |
 | python | tools/audit/audit_armor_upgrade_harm.py | audit_armor_upgrade_harm |
@@ -292,5 +293,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 269 untested > baseline 224
+- T3: 270 untested > baseline 224
 

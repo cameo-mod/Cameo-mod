@@ -17,19 +17,6 @@ _none found_
 
 | location | referenced |
 |---|---|
-| mods/cameo/sequences/iok.yaml:74 | ra2_soviets_barracks_bib3.tem |
-| mods/cameo/sequences/iok.yaml:262 | ra2_soviets_barracks_bib3.tem |
-| mods/cameo/sequences/iok.yaml:297 | ra2_soviets_barracks_bib3.tem |
-| mods/cameo/sequences/iok.yaml:521 | iokscud.shp |
-| mods/cameo/sequences/starcraft.yaml:34 | zergsoilmaker.shp |
-| mods/cameo/sequences/starcraft.yaml:60 | zergsoilmaker2.shp |
-| mods/cameo/sequences/starcraft.yaml:285 | scztruck.shp |
-| mods/cameo/sequences/warcraft1.yaml:562 | wc_h_peasant_engineer.shp |
-| mods/cameo/sequences/warcraft1.yaml:1102 | wc_o_catapult.shp |
-| mods/cameo/sequences/redalert2.yaml:3834 | cra2cmin.shp |
-| mods/cameo/sequences/redalert2.yaml:3854 | ra2ltnk.shp |
-| mods/cameo/sequences/redalert2.yaml:3864 | ra2howi.shp |
-| mods/cameo/sequences/redalert2.yaml:3877 | ra2arty.shp |
 | mods/cameo/sequences/actiblizz.yaml:3 | actitemplararchives.shp |
 | mods/cameo/sequences/actiblizz.yaml:15 | actifleetbeacon.shp |
 | mods/cameo/sequences/actiblizz.yaml:27 | actiroboticssupportbay.shp |
@@ -40,8 +27,6 @@ _none found_
 | mods/cameo/sequences/actiblizz.yaml:95 | actisiegetanksiege.shp |
 | mods/cameo/sequences/actiblizz.yaml:98 | actisiegetankmake.shp |
 | mods/cameo/sequences/actiblizz.yaml:106 | actiscout.shp |
-| mods/cameo/sequences/tiberiandawn.yaml:1352 | chemtibatomic.shp |
-| mods/cameo/sequences/tiberiandawn.yaml:1440 | explosion.shp |
 | mods/cameo/sequences/darkreign.yaml:196 | drihq_bib |
 | mods/cameo/sequences/darkreign.yaml:201 | drihq_bib |
 | mods/cameo/sequences/darkreign.yaml:210 | drihq2 |
@@ -60,6 +45,17 @@ _none found_
 | mods/cameo/sequences/darkreign.yaml:2546 | drttnkfake.shp |
 | mods/cameo/sequences/darkreign.yaml:4783 | .shp |
 | mods/cameo/sequences/darkreign.yaml:4873 | drshrederfake.shp |
+| mods/cameo/sequences/iok.yaml:74 | ra2_soviets_barracks_bib3.tem |
+| mods/cameo/sequences/iok.yaml:262 | ra2_soviets_barracks_bib3.tem |
+| mods/cameo/sequences/iok.yaml:297 | ra2_soviets_barracks_bib3.tem |
+| mods/cameo/sequences/iok.yaml:521 | iokscud.shp |
+| mods/cameo/sequences/redalert2.yaml:3834 | cra2cmin.shp |
+| mods/cameo/sequences/redalert2.yaml:3854 | ra2ltnk.shp |
+| mods/cameo/sequences/redalert2.yaml:3864 | ra2howi.shp |
+| mods/cameo/sequences/redalert2.yaml:3877 | ra2arty.shp |
+| mods/cameo/sequences/starcraft.yaml:34 | zergsoilmaker.shp |
+| mods/cameo/sequences/starcraft.yaml:60 | zergsoilmaker2.shp |
+| mods/cameo/sequences/starcraft.yaml:285 | scztruck.shp |
 | mods/cameo/sequences/starwars.yaml:305 | bib1.shp |
 | mods/cameo/sequences/starwars.yaml:375 | ra2_soviets_barracks_bib3.tem |
 | mods/cameo/sequences/starwars.yaml:392 | invisibleitem.tem |
@@ -100,6 +96,10 @@ _none found_
 | mods/cameo/sequences/starwars.yaml:1468 | ra2_soviets_barracks_bib3.tem |
 | mods/cameo/sequences/starwars.yaml:1487 | ra2_soviets_barracks_bib3.tem |
 | mods/cameo/sequences/starwars.yaml:2570 | swatomic.shp |
+| mods/cameo/sequences/tiberiandawn.yaml:1352 | chemtibatomic.shp |
+| mods/cameo/sequences/tiberiandawn.yaml:1440 | explosion.shp |
+| mods/cameo/sequences/warcraft1.yaml:562 | wc_h_peasant_engineer.shp |
+| mods/cameo/sequences/warcraft1.yaml:1102 | wc_o_catapult.shp |
 
 
 ## A4 — VoiceSet without definition (0) — CRASH

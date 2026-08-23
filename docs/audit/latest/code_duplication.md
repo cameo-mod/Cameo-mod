@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **266** (min 5 statements), C# files: **345** (min 8 lines)
+Python files: **266** (min 5 statements), C# files: **346** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
@@ -20,9 +20,9 @@ Python files: **266** (min 5 statements), C# files: **345** (min 8 lines)
 | 2 | 3ec58372f7614926 | tools/tilesets/generate_clear_lava.py:639 lattice(); tools/tilesets/generate_sh04_alpha_beach_prototype.py:1538 lattice() |
 | 2 | 6a38f8704e6495e3 | tools/tilesets/generate_volcanic_tileset.py:576 tileable_noise(); tools/tilesets/volcanic_art_utils.py:120 tileable_noise() |
 | 2 | 91e5e00bc8dcb778 | tools/tilesets/build_volcanic_basalt_gimp_brushes.py:58 checkerboard(); tools/tilesets/fix_tc_basalt_shadow_outlines.py:60 checkerboard() |
+| 2 | 97800b303b1b47fb | tools/rename/apply.py:73 sub(); tools/rename/safe_rename.py:91 sub() |
 | 2 | beec2625d556ef6b | tools/tilesets/generate_clear_lava.py:621 periodic_value_noise(); tools/tilesets/generate_sh04_alpha_beach_prototype.py:1520 periodic_value_noise() |
 | 2 | f0e4b6e20114d0f8 | tools/rename/apply.py:35 load_map(); tools/rename/safe_rename.py:35 load_map() |
-| 2 | f8ceb8b1978799b5 | tools/rename/apply.py:73 sub(); tools/rename/safe_rename.py:91 sub() |
 
 
 ## C2 — C# method clones (15 group(s))

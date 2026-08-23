@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""audit_versus_profile.py — guard DESIGN §12.0a / §12.0c / §12.0d on the LIVE profiles.
+"""audit_versus_profile.py — guard DESIGN §12.0h / §12.0c / §12.0d on the LIVE profiles.
 
     python tools/audit/audit_versus_profile.py
 
 Three binding maintainer rulings had NO guard at all — only `gen_weapon_template.py` implemented
 them, so nothing checked that what the generator intends is what the tree actually carries:
 
-  §12.0a  THE MEAN-100 LAW (2026-08-16) — every family's MAIN warhead has its 16 armor rows
+  §12.0h  THE MEAN-100 LAW (2026-08-16) — every family's MAIN warhead has its 16 armor rows
           normalised to arithmetic MEAN 100. This is what makes `K` SHAPE-ONLY and `Damage` the
           sole magnitude knob, so a drifted mean is a HIDDEN price multiplier.
   §12.0d  THE CLASS TILT — each LEVEL tilts toward one end of every armor ladder, and
@@ -153,7 +153,7 @@ def main() -> int:
 
     print(f"# audit_versus_profile — {len(data)} MAIN profiles across {len(families)} families\n")
 
-    print(f"## §12.0a MEAN-100 — {len(data) - len(mean_bad)} of {len(data)} conform\n")
+    print(f"## §12.0h MEAN-100 — {len(data) - len(mean_bad)} of {len(data)} conform\n")
     for key, mean, hand in mean_bad:
         tag = " _(HAND_TUNED — generator skips it, expected)_" if hand else " **UNEXPECTED**"
         print(f"  {key[0]}_{key[1]}  mean {mean:.1f}{tag}")
