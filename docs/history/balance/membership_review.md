@@ -1,5 +1,7 @@
 # Infantry membership review (auto-classified 2026-07-22)
 
+> ⛔ **ARCHIVED 2026-08-23 — not current.** Moved out of the live documentation set: it is either machine-generated (regenerate it rather than reading this copy) or the programme it belonged to is finished or dormant. Kept for provenance. Start at [`docs/HANDOFF.md`](../../HANDOFF.md).
+
 Membership = the `^…InfantryTemplate` each unit inherits (design.subtype), with explicit `design.class_anchor` overrides for pollutants. Review the overrides + ambiguous; then per-class conversion follows.
 
 ## Per-class counts

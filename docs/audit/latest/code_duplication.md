@@ -1,11 +1,11 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **264** (min 5 statements), C# files: **335** (min 8 lines)
+Python files: **266** (min 5 statements), C# files: **345** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
 | C1 | identical Python function bodies | 10 | 10 |
-| C2 | identical C# method bodies | 14 | 14 |
+| C2 | identical C# method bodies | 15 | 14 |
 | C3 | identical module-level literal tables | 16 | 10 |
 
 
@@ -20,25 +20,26 @@ Python files: **264** (min 5 statements), C# files: **335** (min 8 lines)
 | 2 | 3ec58372f7614926 | tools/tilesets/generate_clear_lava.py:639 lattice(); tools/tilesets/generate_sh04_alpha_beach_prototype.py:1538 lattice() |
 | 2 | 6a38f8704e6495e3 | tools/tilesets/generate_volcanic_tileset.py:576 tileable_noise(); tools/tilesets/volcanic_art_utils.py:120 tileable_noise() |
 | 2 | 91e5e00bc8dcb778 | tools/tilesets/build_volcanic_basalt_gimp_brushes.py:58 checkerboard(); tools/tilesets/fix_tc_basalt_shadow_outlines.py:60 checkerboard() |
-| 2 | 97800b303b1b47fb | tools/rename/apply.py:73 sub(); tools/rename/safe_rename.py:91 sub() |
 | 2 | beec2625d556ef6b | tools/tilesets/generate_clear_lava.py:621 periodic_value_noise(); tools/tilesets/generate_sh04_alpha_beach_prototype.py:1520 periodic_value_noise() |
 | 2 | f0e4b6e20114d0f8 | tools/rename/apply.py:35 load_map(); tools/rename/safe_rename.py:35 load_map() |
+| 2 | f8ceb8b1978799b5 | tools/rename/apply.py:73 sub(); tools/rename/safe_rename.py:91 sub() |
 
 
-## C2 — C# method clones (14 group(s))
+## C2 — C# method clones (15 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
+| 3 | 2049c109832a37b5 | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs:183 Tick(); OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:157 Tick(); OpenRA.Mods.Cameo/Widgets/PlayerUpgradesIconsWidget.cs:150 Tick() |
 | 2 | 05372eb40e5f4542 | OpenRA.Mods.Cameo/UtilityCommands/FactionBuildableReportCommand.cs:292 ExpandTransforms(); OpenRA.Mods.Cameo/UtilityCommands/TildeAuditCommand.cs:470 ExpandTransforms() |
 | 2 | 1c600b09b51924b2 | OpenRA.Mods.Cameo/Widgets/ClickMaskWidget.cs:28 HandleMouseInput(); OpenRA.Mods.Cameo/Widgets/CommanderTreeDismissWidget.cs:24 HandleMouseInput() |
 | 2 | 1fe354611923a401 | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:235 SpawnIntoWorld(); OpenRA.Mods.Cameo/Traits/ShadeMaster.cs:139 SpawnIntoWorld() |
-| 2 | 2049c109832a37b5 | OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:157 Tick(); OpenRA.Mods.Cameo/Widgets/PlayerUpgradesIconsWidget.cs:150 Tick() |
 | 2 | 2a3b5caf2a992b8b | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:282 MoveSlaves(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:193 MoveSlaves() |
 | 2 | 2c7861f2ea9c9096 | OpenRA.Mods.Cameo/Traits/World/HeatDistortionRenderer.cs:86 RegisterDistortion(); OpenRA.Mods.Cameo/Traits/World/ShockwaveDistortionRenderer.cs:85 RegisterShockwave() |
 | 2 | 2ed6818d4fa1dcc1 | OpenRA.Mods.CA/Traits/AttachOnCreation.cs:43 Attach(); OpenRA.Mods.CA/Traits/AttachOnTransform.cs:45 Attach() |
 | 2 | 36919d259764fdb5 | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:297 AssignSlaveActivity(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:208 AssignSlaveActivity() |
 | 2 | 522ab179c848a0ef | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:103 Created(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:85 Created() |
 | 2 | 61d619290028a34b | OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1509 TryProjectOntoCenterLine(); OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1520 CalculateFalloffDistance() |
+| 2 | 88ddeee6df34ebf1 | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs:63 ObserverBuildOrderIconsWidget(); OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:61 ObserverPromotionsIconsWidget() |
 | 2 | 918c59746a74f5f7 | OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1531 TryProjectOntoCenterLine(); OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1542 GetFalloffModifier() |
 | 2 | 9b5c59ffeffd6c33 | OpenRA.Mods.Cameo/Widgets/CommanderTreeWidget.cs:337 HandleRightClick(); OpenRA.Mods.Cameo/Widgets/CommanderTreeWidget.cs:353 HandleMiddleClick() |
 | 2 | 9f8a4e4f976a99f2 | OpenRA.Mods.CA/Traits/Render/WithColoredSelectionBox.cs:108 Update(); OpenRA.Mods.CA/Traits/Render/WithNameTagDecorationCA.cs:121 Update() |
@@ -50,9 +51,9 @@ Python files: **264** (min 5 statements), C# files: **335** (min 8 lines)
 | copies | fingerprint | sites |
 |---|---|---|
 | 5 | 28fac3656bc8fc3b | tools/audit/find_orphan_old_keys.py:20 CENTRAL; tools/audit/find_orphan_old_keys_multi.py:18 CENTRAL; tools/audit/weapon_families.py:23 CENTRAL; tools/balance/fix_orphan_old_keys.py:19 CENTRAL; tools/balance/fix_orphan_old_keys_multi.py:16 CENTRAL |
-| 3 | 9a62b7cb0c6b46dc | tools/audit/audit_level_ladder.py:53 COMPANION_MARKERS; tools/audit/audit_three_way_split.py:64 COMPANION_MARKERS; tools/audit/audit_tier_weapon_class.py:55 COMPANION_MARKERS |
-| 3 | eba2f9dc1c86d3e4 | tools/audit/audit_level_ladder.py:51 LADDER; tools/audit/audit_tier_weapon_class.py:59 LADDER; tools/balance/gen_weapon_template.py:1897 STORM_LEVELS |
-| 3 | efe4c032c5c937c9 | tools/audit/audit_level_ladder.py:52 MAIN_DAMAGE_TYPES; tools/audit/audit_three_way_split.py:61 MAIN_DAMAGE_TYPES; tools/audit/audit_tier_weapon_class.py:54 MAIN_DAMAGE_TYPES |
+| 3 | 9a62b7cb0c6b46dc | tools/audit/audit_level_ladder.py:53 COMPANION_MARKERS; tools/audit/audit_three_way_split.py:65 COMPANION_MARKERS; tools/audit/audit_tier_weapon_class.py:55 COMPANION_MARKERS |
+| 3 | eba2f9dc1c86d3e4 | tools/audit/audit_level_ladder.py:51 LADDER; tools/audit/audit_tier_weapon_class.py:59 LADDER; tools/balance/gen_weapon_template.py:2032 STORM_LEVELS |
+| 3 | efe4c032c5c937c9 | tools/audit/audit_level_ladder.py:52 MAIN_DAMAGE_TYPES; tools/audit/audit_three_way_split.py:62 MAIN_DAMAGE_TYPES; tools/audit/audit_tier_weapon_class.py:54 MAIN_DAMAGE_TYPES |
 | 2 | 153d4fc74c8cdd31 | tools/tilesets/build_ra_temperate_basalt_trees.py:20 ACTORS; tools/tilesets/build_volcanic_basalt_gimp_brushes.py:20 ACTORS |
 | 2 | 2665d6950cd4417a | tools/audit/find_orphan_old_keys.py:27 OLD_TO_NEW; tools/balance/fix_orphan_old_keys.py:25 OLD_TO_NEW |
 | 2 | 4979d18fd8f148a1 | tools/tilesets/detect_cliff_dark_noise.py:14 BLACK; tools/tilesets/process_ai_edge_mask.py:15 BLACK |
@@ -69,5 +70,6 @@ Python files: **264** (min 5 statements), C# files: **335** (min 8 lines)
 
 ## FAIL
 
+- C2: 15 > baseline 14
 - C3: 16 > baseline 10
 

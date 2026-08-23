@@ -1,5 +1,7 @@
 # Central weapons.yaml cleanup plan (below the DO-NOT-INHERIT divider)
 
+> ⛔ **ARCHIVED 2026-08-23 — not current.** Moved out of the live documentation set: it is either machine-generated (regenerate it rather than reading this copy) or the programme it belonged to is finished or dormant. Kept for provenance. Start at [`docs/HANDOFF.md`](../../HANDOFF.md).
+
 _Maintainer directive (2026-07-25): everything below the `DO NOT INHERIT BELOW THIS LINE` divider
 (weapons.yaml:3241) should leave the central file — used-by-a-faction → its ContentPack, unused →
 deleted, the rest → a separate yaml. Analysis by `scratchpad/below_divider_usage.py` (reproducible)._

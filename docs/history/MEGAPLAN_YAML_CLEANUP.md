@@ -1,5 +1,7 @@
 # MEGAPLAN — YAML Clean-up Program: Zero Errors, Zero Warnings
 
+> ⛔ **ARCHIVED 2026-08-23 — not current.** Moved out of the live documentation set: it is either machine-generated (regenerate it rather than reading this copy) or the programme it belonged to is finished or dormant. Kept for provenance. Start at [`docs/HANDOFF.md`](../HANDOFF.md).
+
 > **Non-binding index.** Per `docs/README.md`, this is a program index, not an
 > active work queue. Live task status and completion tracking belong in
 > `docs/design/ROADMAP.md`. The phase status and commit log below are kept for

@@ -1025,7 +1025,7 @@
 - Fixed stale shield survivability numbers in `docs/DESIGN.md` and
 
 
-  `docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md` and updated `docs/audit/doc_claims.yaml`
+  `docs/design/ARMOR_LAYERS.md` and updated `docs/audit/doc_claims.yaml`
 
 
   so `audit_doc_claims.py` passes again (`shield_versus_mean` 183.26, `shield_hp_factor` 0.5457).
@@ -1749,7 +1749,7 @@
 
 - Regenerated 32 balance ledgers and derived sidecars with `extract_stats.py`.
 
-- Updated `docs/design/PHYSICAL_STATE_SYSTEM.md`, `docs/design/PLATING_COMPOSITION_REFINEMENT.md`,
+- Updated `docs/design/PHYSICAL_STATE_SYSTEM.md`, `docs/design/ARMOR_LAYERS.md`,
 
 
   and `docs/design/BALANCE_PROGRAM_PLAN.md` to reflect the new family model.
@@ -1857,7 +1857,7 @@
 
   a candidate and was reverted so `class_anchors.json` is unchanged.
 
-- Updated `docs/design/tier_chain_validation.md`, `docs/design/ROADMAP.md`, and this log.
+- Updated `docs/design/RESEARCH_NOTES.md`, `docs/design/ROADMAP.md`, and this log.
 
 - Building-plug addons (`Plug:` trait) are not counted as separate actor-name
 

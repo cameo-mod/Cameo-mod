@@ -32,7 +32,7 @@ claims:
     value: 186.791
     tolerance: 0.01
     what: Mean Versus-vs-Shield across all main flat warheads. Drives shield_hp_factor.
-    docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md, docs/design/SUPERWEAPON_LAYER_DAMAGE.md]
+    docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md, docs/design/ARMOR_LAYERS.md]
     measure: |
       import sys, pathlib
       sys.path[:0] = ['tools/audit', 'tools/balance']
@@ -43,7 +43,7 @@ claims:
     value: 0.535357
     tolerance: 0.01
     what: What one shield point is worth as HP (100 / mean Versus vs Shield).
-    docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
+    docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md]
     measure: |
       import sys
       sys.path[:0] = ['tools/audit', 'tools/balance']
@@ -56,7 +56,7 @@ claims:
     what: >
       Fraction of roster raw damage landing on the Shield row at BASELINE. The claim that
       replaced "51% of the roster", which counted empty shield CAPACITY as a shield.
-    docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
+    docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md]
     measure: |
       import sys
       sys.path[:0] = ['tools/audit', 'tools/balance']
@@ -69,7 +69,7 @@ claims:
     what: >
       Actors that SPAWN with a shield pool and no positive gate — the only ones E1 prices.
       1318 more carry an empty capacity behind `shieldgen`; ~216 are upgrade-gated.
-    docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
+    docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md]
     measure: |
       import re, sys, pathlib
       sys.path[:0] = ['tools/audit', 'tools/balance']
@@ -194,7 +194,7 @@ claims:
     what: >
       W18 has NOT landed. Any nonzero here means the basis-point rebase shipped and every
       pct_absolute / dps_floor figure in the docs is stale.
-    docs: [docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md, docs/design/BALANCE_PROGRAM_PLAN.md]
+    docs: [docs/design/ARMOR_LAYERS.md, docs/design/BALANCE_PROGRAM_PLAN.md]
     measure: |
       import pathlib, sys
       sys.path[:0] = ['tools/audit', 'tools/balance']
@@ -262,7 +262,7 @@ claims:
       Add it after W24, not before — it is a second term on the same corrected base.
       The formula lives ONLY in `tools/balance/physical_state_price.py`, which this measure
       imports, so the two can no longer disagree.
-    docs: [docs/design/PHYSICAL_STATE_SYSTEM.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
+    docs: [docs/design/PHYSICAL_STATE_SYSTEM.md, docs/design/ARMOR_LAYERS.md]
     measure: |
       import sys, pathlib
       sys.path[:0] = ['tools/audit', 'tools/balance']
@@ -338,7 +338,7 @@ claims:
       damage-scaled `PhysicalStateScale`, and a BLEND's `PhysicalStates:` dict — which carries no
       `PhysicalStateName` at all, so keying on that name misses every blend family. Counting one
       shape is how the docs carried "~89 bindings"; counting two gave 367.
-    docs: [docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md, docs/design/BALANCE_PROGRAM_PLAN.md]
+    docs: [docs/design/ARMOR_LAYERS.md, docs/design/BALANCE_PROGRAM_PLAN.md]
     measure: |
       import sys, pathlib
       sys.path[:0] = ['tools/audit', 'tools/balance']
@@ -380,7 +380,7 @@ claims:
       design). The maintainer's uniqueness law: *"don't put 3 energy weapons exactly on the same
       versus value"*. Four groups tied before e7fa2d57b. A tie may ONLY be fixed by moving mass
       across a group boundary onto a second real defeat mechanism — never by fabricated noise.
-    docs: [docs/design/PLATING_COMPOSITION_REFINEMENT.md, docs/design/PLATING_COMBINATION.md]
+    docs: [docs/design/ARMOR_LAYERS.md, docs/design/ARMOR_LAYERS.md]
     measure: |
       import sys
       sys.path[:0] = ['tools/audit', 'tools/balance']
@@ -406,7 +406,7 @@ claims:
       Families the generator emits a plating row for. The row count of the matrix in
       PLATING_COMPOSITION_REFINEMENT.md — so adding a family without updating that table, or
       dropping one, goes red instead of silently making the document wrong.
-    docs: [docs/design/PLATING_COMPOSITION_REFINEMENT.md]
+    docs: [docs/design/ARMOR_LAYERS.md]
     measure: |
       import sys
       sys.path[:0] = ['tools/audit', 'tools/balance']

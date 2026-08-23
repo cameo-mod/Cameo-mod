@@ -1,5 +1,7 @@
 # P1 flame/footgun impact measurement
 
+> ⛔ **ARCHIVED 2026-08-23 — not current.** Moved out of the live documentation set: it is either machine-generated (regenerate it rather than reading this copy) or the programme it belonged to is finished or dormant. Kept for provenance. Start at [`docs/HANDOFF.md`](../../HANDOFF.md).
+
 Concrete weapons with a single-value `Range:` on a flat-damage warhead: **49**
 
 The fix is to delete the `Range:` line from the warhead so `Spread:` + `Falloff:` define the geometry. `effective_damage.py` is the same metric the balance pipeline uses (area-integrated per-shot).

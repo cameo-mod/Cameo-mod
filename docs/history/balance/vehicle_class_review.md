@@ -1,5 +1,7 @@
 # Vehicle 13-class classification — REVIEW (maintainer sign-off)
 
+> ⛔ **ARCHIVED 2026-08-23 — not current.** Moved out of the live documentation set: it is either machine-generated (regenerate it rather than reading this copy) or the programme it belonged to is finished or dormant. Kept for provenance. Start at [`docs/HANDOFF.md`](../../HANDOFF.md).
+
 _Auto-generated from CURRENT yaml (in-memory extract). 266 buildable combat vehicles already assigned to the 13 templates via `Inherits@Template`. This is a VERIFY + flag pass, not a from-scratch reclassification: the templates exist and membership is ~90% set. Columns: cost/hp/spd/rng/dps/armor + air(hits air)/T(turret)/K(KeepsDistance)/BL(BuildLimit)._
 
 **subtype→anchor-key map:** `ScoutVehicle`→`scout_vehicle`, `LightTank`→`light_tank`, `Artillery`→`artillery`, `TankDestroyer`→`tank_destroyer`, `ArtilleryTank`→`artillery_tank`, `MainBattleTank`→`mbt`, `AntiAirVehicle`→`anti_air_vehicle`, `MissileVehicle`→`missile_vehicle`, `FireSupport`→`fire_support`, `LineBreaker`→`line_breaker`, `HighTechTank`→`high_tech_tank`, `Dreadnought`→`dreadnought`, `EpicVehicle`→`epic_vehicle`

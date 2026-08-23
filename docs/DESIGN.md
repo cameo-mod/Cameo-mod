@@ -2,7 +2,7 @@
 
 _The distilled, binding design contract for this mod. Every AI agent session
 and every contributor reads this FIRST. The long-form historical analysis
-lives in [MASTER_REPORT.md](MASTER_REPORT.md) (not a live roadmap — active
+lives in [MASTER_REPORT.md](history/MASTER_REPORT_2026-07-08.md) (not a live roadmap — active
 work belongs in [design/ROADMAP.md](design/ROADMAP.md)); the machine-checkable
 state lives in [audit/](audit/) — this document is the rules themselves.
 Faction lore, gameplay profiles, and roster details live in
@@ -2383,7 +2383,7 @@ the first to receive the full template because it is the focus faction.
     Enrichment upgrade.
 11. [DONE] Re-enable Crystal Lens / Amplified Lens on 1-burst laser weapons.
 12. [DONE] Replace copy-pasted unit icons with unique placeholders per
-    `docs/design/schwarzer_mond_artwork_status.md`.
+    `docs/design/RESEARCH_NOTES.md`.
 13. [DONE] Finalize promotion intent: use existing `^PromotionUnitBuff` on all
     combat units instead of unlocking new actor variants.
 14. [TODO] Boot-test the mod and verify the overhaul in-game.

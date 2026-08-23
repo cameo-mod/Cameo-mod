@@ -1,5 +1,7 @@
 # Vehicle classification — DECISIONS NEEDED (curated review)
 
+> ⛔ **ARCHIVED 2026-08-23 — not current.** Moved out of the live documentation set: it is either machine-generated (regenerate it rather than reading this copy) or the programme it belonged to is finished or dormant. Kept for provenance. Start at [`docs/HANDOFF.md`](../../HANDOFF.md).
+
 _266 combat vehicles across 13 existing templates. Only REAL classification concerns below; pure intra-class stat spread is intentional (per-unit uniqueness) and handled in the stat-synthesis pass, not here._
 
 

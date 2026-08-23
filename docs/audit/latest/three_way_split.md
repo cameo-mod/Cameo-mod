@@ -1,27 +1,25 @@
-# audit_three_way_split — 1190 of 2325 weapons fire more than ONE main warhead
+# audit_three_way_split — 1178 of 2325 weapons fire more than ONE main warhead
 
-    927  correct — exactly one main warhead
-    208  none — utility / effect-only weapons
-   1190  VIOLATIONS — stacked mains
+    917  correct — exactly one main warhead
+    230  none — utility / effect-only weapons
+   1178  VIOLATIONS — stacked mains
 
   mains  weapons
-      2    434
-      3    249
-      4    192
-      5     86
-      6     64
-      7     59
-      8     53
-      9     22
-     10     14
-     11      7
-     12      4
+      2    431
+      3    277
+      4    219
+      5     60
+      6    110
+      7     21
+      8     35
+      9     10
+     10      8
+     11      1
+     12      2
      13      1
-     14      1
-     15      2
-     16      2
+     14      3
 
-459 distinct stacked combinations; the 20 most common:
+454 distinct stacked combinations; the 20 most common:
 
 | count | combination |
 |---|---|
@@ -37,14 +35,14 @@
 | 10 | MissileAP_Light + Tesla_Heavy |
 | 10 | MissileHE_Light + MissileHE_Medium |
 | 10 | Bullet_Light + Bullet_Medium + Laser_Heavy |
-| 10 | Chaingun + FlakWeapon + Grenade + GrenadeFriendlyFire + HeavyBomb + MediumMissile + ShrapnelWeapon + ShrapnelWeaponFriendlyFire |
+| 10 | Chaingun + FlakWeapon + Grenade + HeavyBomb + MediumMissile + ShrapnelWeapon |
 | 10 | Chaingun + LaserWeapon + MediumMissile + SmallArms |
 | 9 | 1Dam + CannonHE_Medium |
-| 9 | HeavyCannon + HeavyMissile + MediumCannon + MediumFlameWeapon + MediumMissile + ShrapnelWeapon + ShrapnelWeaponFriendlyFire + TeslaChargedWeapon + TeslaWeapon |
+| 9 | HeavyCannon + HeavyMissile + MediumCannon + MediumFlameWeapon + MediumMissile + ShrapnelWeapon + TeslaChargedWeapon + TeslaWeapon |
 | 9 | 1Dam + Bullet_Light + Bullet_Medium |
 | 8 | Concussion_Medium + MissileHE_Heavy |
 | 8 | Concussion_Medium + Demolition_Light |
 | 8 | Chaingun + Flak_Medium + LightMissile + TankDestroyerCannon |
 
-WARN 1190 violating weapons (ratchet 1190)
+WARN 1178 violating weapons (ratchet 1178)
 Lower `SPLIT_BASELINE` as W24 converts weapons; never raise it.

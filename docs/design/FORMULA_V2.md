@@ -1,13 +1,13 @@
 # FORMULA V2 — the complete law book (as learned through 2026-07-19)
 
-_Where this fits: [`BALANCE_MEGAPLAN.md`](BALANCE_MEGAPLAN.md) is the phase sequence,
+_Where this fits: [`BALANCE_PROGRAM_PLAN.md`](BALANCE_PROGRAM_PLAN.md) is the phase sequence,
 [`BALANCE_PROGRAM_PLAN.md`](BALANCE_PROGRAM_PLAN.md) is the board and ownership, and
 [`BALANCE_PIPELINE.md`](BALANCE_PIPELINE.md) is the machinery. (The old `MEGAPLAN.md`
 index is archived at [`../history/MEGAPLAN_2026-08-08.md`](../history/MEGAPLAN_2026-08-08.md).)_
 
 _The consolidated, binding reference for the per-class balance system.
 Grew out of DESIGN §12 + the balance pipeline (BALANCE_PIPELINE.md) +
-the scout-class conversions (docs/balance/formula_v2_scout.md holds the
+the scout-class conversions (docs/balance/formula_v2_classes.md holds the
 class log). Update THIS file whenever a law is added or tuned._
 
 ## 1. The construction (why O = P = Q = cost always holds)

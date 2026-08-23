@@ -145,10 +145,10 @@ Then, as the task needs them:
   UI internals. Consult it for any C#-side question (it lists code-derived
   identifiers); verify against source when in doubt — it is a contributor
   document, not the binding contract.
-* `docs/MASTER_REPORT.md` — historical long-form analysis and the B1–B12 bug
+* `docs/history/MASTER_REPORT_2026-07-08.md` — historical long-form analysis and the B1–B12 bug
   taxonomy, dated 2026-07-08. Read it for background; it is **not** binding and
   **not** a live roadmap.
-* `docs/PROJECT_CONTEXT.md` — one-page orientation for a first-time reader.
+* `docs/README.md` — one-page orientation for a first-time reader.
 
 ## Tooling
 

@@ -1,6 +1,6 @@
 # tools/audit — the Cameo audit suite
 
-Implements the detector specifications from `docs/MASTER_REPORT.md`
+Implements the detector specifications from `docs/history/MASTER_REPORT_2026-07-08.md`
 Appendix A. Every script reads the live ruleset (mod.yaml include graph,
 merged + inheritance-resolved) and prints a markdown report to stdout.
 

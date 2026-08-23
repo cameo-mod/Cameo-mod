@@ -1,5 +1,7 @@
 # Baseline Audit — Findings by Bug Class
 
+> ⛔ **ARCHIVED 2026-08-23 — not current.** Moved out of the live documentation set: it is either machine-generated (regenerate it rather than reading this copy) or the programme it belonged to is finished or dormant. Kept for provenance. Start at [`docs/HANDOFF.md`](../../HANDOFF.md).
+
 > **Stale-date notice:** This file was generated from a baseline audit run.
 > File paths in the tables below reflect the pre-restructure directory layout
 > (e.g., `rules/vehicles.yaml` → now `yaml/vehicles.yaml` after the ContentPack

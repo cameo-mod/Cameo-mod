@@ -4,7 +4,7 @@
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (3 file(s)) | 29 | >= 24 |
 | T2 | `def test_*` in tools/tests (19 file(s)) | 227 | >= 177 |
-| T3 | modules with no test mentioning them | 257 | <= 224 |
+| T3 | modules with no test mentioning them | 269 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (257)
+## T3 — untested modules (269)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -40,7 +40,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveGameSpeedHost.cs | AdaptiveGameSpeedHost |
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveSpeedController.cs | AdaptiveSpeedController |
 | C# | OpenRA.Mods.Cameo/Traits/AnnounceOnDamageState.cs | AnnounceOnDamageState |
-| C# | OpenRA.Mods.Cameo/Traits/ArmorPlating.cs | ArmorPlating |
+| C# | OpenRA.Mods.Cameo/Traits/ArmorPlating.cs | ArmorPlating, ArmorPlatingInit |
 | C# | OpenRA.Mods.Cameo/Traits/Attack/AttackInfectCA.cs | AttackInfectCA |
 | C# | OpenRA.Mods.Cameo/Traits/BotGlobalUnitBudget.cs | BotGlobalUnitBudget |
 | C# | OpenRA.Mods.Cameo/Traits/BotInsurance.cs | BotInsurance |
@@ -72,9 +72,11 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/NewConstructionOptionsNotification.cs | NewConstructionOptionsNotification, NewConstructionOptionsOnDeploy |
 | C# | OpenRA.Mods.Cameo/Traits/OneActorPerCell.cs | OneActorPerCell |
 | C# | OpenRA.Mods.Cameo/Traits/PaletteEffects/TAStealthTankCloakPaletteEffect.cs | TAStealthTankCloakPaletteEffect |
+| C# | OpenRA.Mods.Cameo/Traits/Player/CountManager.cs | CountManager |
 | C# | OpenRA.Mods.Cameo/Traits/Player/CriticalUnitAttackNotifier.cs | CriticalUnit, CriticalUnitAttackNotifier |
 | C# | OpenRA.Mods.Cameo/Traits/Player/CustomFormationsModOptions.cs | CustomFormationsModOptions |
 | C# | OpenRA.Mods.Cameo/Traits/Player/PlayerPromotions.cs | PlayerPromotions |
+| C# | OpenRA.Mods.Cameo/Traits/Player/ProductionTracker.cs | ProductionTracker, ProductionTrackerBuildOrderItem, ProductionTrackerUnitValueItem |
 | C# | OpenRA.Mods.Cameo/Traits/PlayerDisplayUpgrade.cs | PlayerDisplayUpgrade |
 | C# | OpenRA.Mods.Cameo/Traits/ProductionIconHoverHeader.cs | ProductionIconHoverHeader |
 | C# | OpenRA.Mods.Cameo/Traits/ProductionIconMutualExclusion.cs | ProductionIconMutualExclusion |
@@ -104,6 +106,9 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/SupportPowers/TransferCashSupportPower.cs | TransferCashSupportPower |
 | C# | OpenRA.Mods.Cameo/Traits/TakeOffOnMake.cs | TakeOffOnMake |
 | C# | OpenRA.Mods.Cameo/Traits/TerrainLightSourceCA.cs | TerrainLightSourceCA |
+| C# | OpenRA.Mods.Cameo/Traits/UpdatesBuildOrder.cs | UpdatesBuildOrder |
+| C# | OpenRA.Mods.Cameo/Traits/UpdatesCount.cs | UpdatesCount |
+| C# | OpenRA.Mods.Cameo/Traits/UpdatesUnitsProduced.cs | UpdatesUnitsProduced |
 | C# | OpenRA.Mods.Cameo/Traits/UsePointsOnProduction.cs | UsePointsOnProduction |
 | C# | OpenRA.Mods.Cameo/Traits/World/AutoControlGroupsManager.cs | AutoControlGroupsManager |
 | C# | OpenRA.Mods.Cameo/Traits/World/BackstabGameMode.cs | BackstabGameMode |
@@ -136,6 +141,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Widgets/IngamePromotionCounterWidget.cs | IngamePromotionCounterWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/ActorIconTooltipCameoLogic.cs | ActorIconTooltipCameoLogic |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/ArmyTooltipCameoLogic.cs | ArmyTooltipCameoLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/ArmyValueTooltipLogic.cs | ArmyValueTooltipLogic |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/CameoDisplaySettingsLogic.cs | CameoDisplaySettingsLogic |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/CameoGameplaySettingsLogic.cs | CameoGameplaySettingsLogic |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/CameoMainMenuLogic.cs | CameoMainMenuLogic |
@@ -145,8 +151,12 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/IngameActorStatsLogicCameo.cs | IngameActorStatsLogicCameo |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/LobbyLogic.cs | LobbyLogic, LobbyFaction |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/ProductionTooltipCameoLogic.cs | ProductionTooltipCameoLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/Logic/ReplayControlBarLogicCameo.cs | ReplayControlBarLogicCameo |
 | C# | OpenRA.Mods.Cameo/Widgets/Logic/StarportBatchStatusLogic.cs | StarportBatchStatusLogic |
+| C# | OpenRA.Mods.Cameo/Widgets/ObserverArmyValuesWidget.cs | ObserverArmyValuesWidget |
+| C# | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs | ObserverBuildOrderIconsWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs | ObserverPromotionsIconsWidget |
+| C# | OpenRA.Mods.Cameo/Widgets/ObserverUnitsProducedIconsWidget.cs | ObserverUnitsProducedIconsWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/PlayerUpgradesIconsWidget.cs | PlayerUpgradesIconsWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/QuotaProductionPaletteWidget.cs | QuotaProductionPaletteWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/RoundedImageWidget.cs | RoundedImageWidget |
@@ -167,6 +177,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_dead_warhead_fields.py | audit_dead_warhead_fields |
 | python | tools/audit/audit_display_text.py | audit_display_text |
 | python | tools/audit/audit_doc_claims.py | audit_doc_claims |
+| python | tools/audit/audit_doc_health.py | audit_doc_health |
 | python | tools/audit/audit_dune_rank_decoration.py | audit_dune_rank_decoration |
 | python | tools/audit/audit_duplicate_inherits.py | audit_duplicate_inherits |
 | python | tools/audit/audit_effect_warhead_names.py | audit_effect_warhead_names |
@@ -183,6 +194,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_k_linearity.py | audit_k_linearity |
 | python | tools/audit/audit_level_ladder.py | audit_level_ladder |
 | python | tools/audit/audit_metadata.py | audit_metadata |
+| python | tools/audit/audit_meter_dilution.py | audit_meter_dilution |
 | python | tools/audit/audit_min_range.py | audit_min_range |
 | python | tools/audit/audit_missing_elite.py | audit_missing_elite |
 | python | tools/audit/audit_multiplier_modifiers.py | audit_multiplier_modifiers |
@@ -280,5 +292,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 257 untested > baseline 224
+- T3: 269 untested > baseline 224
 

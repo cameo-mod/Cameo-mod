@@ -8,14 +8,14 @@ This repository is the shared source of truth for maintainers and every AI agent
 |---|---|---|
 | Lessons learned / start protocol | `docs/LESSONS_LEARNED.md` | Read before every new task: accumulated pitfalls and safe defaults. (It carries a convenience copy of the reading order; `docs/README.md` is the canonical one.) |
 | **Entry point: current state + priority queue** | `docs/HANDOFF.md` | The single handoff. Supersedes every dated one in `docs/history/handoffs/`; never resume from those. |
-| Short project orientation | `docs/PROJECT_CONTEXT.md` | One page for a first-time reader; every document above is authoritative over it. |
+| Short project orientation | `docs/README.md` | One page for a first-time reader; every document above is authoritative over it. |
 | Current work queue | `docs/design/ROADMAP.md` | Crashes and player-visible bugs are P0 and always jump the queue. Add new issues here before implementation. Closed July items live in `docs/history/ROADMAP_ARCHIVE_2026-07.md`. |
 | Balance board, ownership, acceptance criteria | `docs/design/BALANCE_PROGRAM_PLAN.md` | W1–W26, file-set ownership (§2), and the binding order of operations (§0a). |
 | Numeric claims that must not rot | `docs/audit/doc_claims.yaml` | Every number a DECISION rests on, with its re-measure command. Update `value` AND every doc under `docs:` in the same commit. |
 | Binding rules and conventions | `docs/DESIGN.md` | Read before modifying YAML, assets, naming, weapons, balance, or descriptions. |
 | Engine and custom-trait reference | `docs/Cameo_Knowledge_Base_Manual.md` | Consult before changing unfamiliar traits or C#-backed behavior. |
 | Audit overview | `docs/audit/SUMMARY.md` | Read first for known issue classes and current audit status. |
-| Detailed audit findings | `docs/audit/FINDINGS.md`, `docs/audit/CONSISTENCY_REPORT.md` | Update only from evidence produced by a current audit or engine boot. |
+| Detailed audit findings | `docs/history/audits/BASELINE_FINDINGS.md`, `docs/audit/CONSISTENCY_REPORT.md` | Update only from evidence produced by a current audit or engine boot. |
 | Audit scripts | `tools/audit/` | Scripts are reusable tooling; do not duplicate them into personal-agent folders. |
 | Generated audit output | `docs/audit/latest/` | Regenerate via `tools/audit/run_all.sh`; it is the current evidence set. |
 | Baseline audit evidence | `docs/audit/baseline/` | Historical comparison only. |

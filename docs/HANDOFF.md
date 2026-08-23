@@ -1,7 +1,7 @@
 # Cameo — THE HANDOFF
 
 **This is the single entry point for anyone picking up work on Cameo — human or agent.**
-Written 2026-08-23 against commit `b888cb3f`. It supersedes every previous handoff document;
+Written 2026-08-23, re-verified against master at `e60aab63`. It supersedes every previous handoff document;
 those are archived under [`history/handoffs/`](history/handoffs/) and must not be resumed from.
 
 | you want to… | go to |
@@ -71,7 +71,8 @@ becomes a self-contained ContentPack. Runbook: [`MIGRATION.md`](MIGRATION.md).
 | dangling weapon refs / dangling inherit targets | **0** / **0** |
 | `tools/tests` | **227 tests, all green** |
 | cross-document consistency audit | 73 passed, 0 failed |
-| **balance-ledger drift** | ⛔ **9 ledgers drifted** — see §3.0 |
+| balance-ledger drift | **0** — master re-extracted in `31e649b8` |
+| ⛔ **pinned doc claims** | **4 of 19 drifted** — see §3.0 |
 
 **The active front is the weapon rebuild, and pricing is deliberately NOT running yet.**
 `BALANCE_PROGRAM_PLAN.md` §0a is the binding order, and the reason is measurable: a price is a
@@ -80,9 +81,9 @@ are still scheduled to change across most of the roster. Pricing now means prici
 are about to be replaced.
 
 ```
-W24  one damage warhead per weapon          951 of 1497 fired weapons still carry 2+  (63.5%)
- └─> W23  retrofit the 47 legacy templates   1238 direct inheritors left; 1221 of 1622
- │        (its old "33-collision" blocker    fired weapons already reach a ^Warhead_* family
+W24  one damage warhead per weapon          927 fired weapons still carry 2+
+ └─> W23  retrofit the legacy templates      1162 direct inheritors left; 1231 fired
+ │        (its old "33-collision" blocker    weapons already reach a ^Warhead_* family
  │         is DISSOLVED — W24 removes it)
  └─> A5   retire the remaining inline-Versus weapons onto templates
       └─> class anchors → fit_class per class → W11 maintainer sign-off
@@ -172,36 +173,46 @@ not repeatedly.
 
 Crashes and player-visible regressions jump everything below.
 
-### 3.0 — DO THIS FIRST (one command, currently red)
+### 3.0 — DO THIS FIRST (four pinned numbers have drifted)
 
-**Re-extract the balance ledgers.** `audit_balance_drift` reports **9 drifted ledgers**:
-`redalert2_allies`, `redalert2mod_futuretech`, `redalert_allies`, `redalert_japan`,
-`shared_redalert`, `tiberiandawn_gdi`, `tiberiandawn_nod`, `tiberiansun_forgotten`,
-`tiberiansun_gdi`. The drift is in the recorded inherit chains, not in damage numbers: PR #263
-(tiered impact glow) and the W24 chemical-split commit changed weapon inherits without a
-matching `extract_stats` run.
+`audit_doc_claims` is RED on **4 of 19** claims. Each is a number a DECISION rests on, and each
+is quoted in prose somewhere:
+
+| claim | documented | measured | why it moved |
+|---|--:|--:|---|
+| `shield_versus_mean` | 186.791 | 189.088 | the new Cryo/blend families changed the Shield column |
+| `shield_hp_factor` | 0.535357 | 0.528855 | derived from the above |
+| `live_damage_multipliers` | 366 | 353 | W26 has been deleting them — progress, not a bug |
+| `plating_families` | 41 | 45 | four new families shipped; the plating matrix has no rows for them |
+
+**The fix is not just editing `value:`.** Every claim in the registry carries a `docs:` key
+naming each file that repeats the number — update `value` **and every one of those files in the
+same commit**. That co-update is the entire point of the registry.
+
+`plating_families` is the one needing judgement rather than find-and-replace: four families
+exist that the plating matrix in `design/ARMOR_LAYERS.md` does not describe, so somebody has to
+write their rows.
 
 ```sh
-python tools/balance/extract_stats.py
-python tools/audit/audit_balance_drift.py     # must print "clean"
-git add docs/balance/*.json docs/balance/derived/*.json
+python tools/audit/audit_doc_claims.py     # documented vs measured, all 19
 ```
 
-CLAUDE.md rule 3 requires committing **yaml and ledger together**. This is the second time the
-rule has been broken the same way; `ledgers_drifted` is now pinned in
-[`audit/doc_claims.yaml`](audit/doc_claims.yaml) so the next occurrence goes red immediately
-instead of being discovered by accident.
+⚠ **The previous #1 item here — 9 drifted balance ledgers — is DONE.** Master fixed it in
+`31e649b8`. `ledgers_drifted` is now pinned in the registry, so a recurrence goes red
+immediately instead of being found by accident weeks later.
 
 ### 3.1 — The weapon rebuild (the main line)
 
-Owner: whoever holds **set B** (`mods/cameo/weapons/**`,
-`mods/cameo/ContentPacks/**/weapons.yaml`). Devin's lock on set B was **released by the
-maintainer on 2026-08-15** and the set is free.
+⛔ **Set B (`mods/cameo/weapons/**`, `mods/cameo/ContentPacks/**/weapons.yaml`) is NOT free.**
+Devin is working W2 in it — `IN PROGRESS (Devin, 2026-08-21)`, HeatRayBeam1-4 split, 28
+`^LightFlameWeapon` matches left. Check `git log -3 <file>` and the file mtime before touching
+anything in that set, and coordinate rather than assuming the 2026-08-15 lock release still
+holds.
 
 | step | what | how you know it moved |
 |---|---|---|
-| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` in `doc_claims.yaml` goes DOWN from 951 |
-| **W23** | retrofit the 47 legacy templates onto `^Warhead_*` families | `unconverted_template_inheritors` goes DOWN from 1238; `warhead_family_reach` goes UP from 1221 |
+| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` in `doc_claims.yaml` goes DOWN from 927 |
+| **W23** | retrofit the legacy templates onto `^Warhead_*` families | `unconverted_template_inheritors` goes DOWN from 1162; `warhead_family_reach` goes UP from 1231 |
 | **A5** | retire the remaining inline-`Versus` weapons onto templates | rule 4 — `Versus` only in `^Warhead_*` |
 
 Method for one W24 cluster, in order (this is the procedure that has worked for seven clusters
@@ -340,6 +351,38 @@ If you really need an engine change:
 6. Verify `engine/VERSION` matches and the build has 0 errors. **Recreate any `engine/glsl/`
    shaders** — the fetch wipes them (e.g. `postprocess_nuclearflash.frag`).
 7. Boot-gate, then commit `mod.config` together with the doc updates.
+
+---
+
+## 5b. The shape of the documentation set
+
+**43 live documents.** Everything else under `docs/` is generated (regenerate it) or archived in
+`history/` (what happened, never what is true now). [`README.md`](README.md) lists the whole live
+set in one table — if a document is not in that table, it is not live.
+
+The set was 83 documents on 2026-08-23. It came down by **merging overlapping documents**, not by
+deleting content: every merged file's body was carried across verbatim under its own heading with
+its original path recorded. The clusters that collapsed:
+
+| now | was |
+|---|---|
+| `design/ARMOR_LAYERS.md` | 5 files — pseudo-armor, shield normalisation, 2 plating docs, superweapon layering |
+| `design/PROJECTILE_AND_EFFECT_LAYER.md` | 3 — projectile templates, per-game sourcing, game-specific bases |
+| `design/RESEARCH_NOTES.md` | 5 — SP research, mission win/lose, CABAL rebuild, SM artwork, tier-chain |
+| `design/DECISIONS.md` | 3 — hex shields, vehicle queue split, derived stats in traits |
+| `design/WEAPON_HEAVINESS.md` | 2 — the research and the continuous scale |
+| `design/AREADAMAGE_WARHEAD.md` | 2 — the rebalance and the unified node |
+| `reference/WARHEAD_REFERENCE.md` | 3 — family profiles, versus archetypes, archetype tables |
+| `balance/formula_v2_classes.md` | 4 per-class logs + the delta audit |
+| `design/BALANCE_PROGRAM_PLAN.md` §7 | `BALANCE_MEGAPLAN.md`, which had spent two weeks disagreeing with §0a about order |
+
+13 stale generated per-class proposals were deleted rather than merged — they regenerate with
+`propose_class_rebalance.py --class <name>`, and the committed copies no longer matched the tree.
+Ten finished or dormant working notes moved to `history/`.
+
+**If you are about to add a document, don't.** Add a section to the one that already owns the
+topic — the table in `README.md` says which. A new file is justified only when no existing
+document owns the subject, and then it goes in that table in the same commit.
 
 ---
 

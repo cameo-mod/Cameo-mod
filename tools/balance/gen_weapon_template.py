@@ -507,7 +507,7 @@ PLATING_DEPTH = 0.50
 # measured as BYTE-IDENTICAL. So every secondary share below names a SECOND real defeat
 # mechanism; none is a fudge to break a tie, because a fabricated difference is a lie about the
 # model (`b182fd228`). `tools/tests/test_plating_composition.py` pins the uniqueness, and
-# `docs/design/PLATING_COMPOSITION_REFINEMENT.md` argues every line one at a time.
+# `docs/design/ARMOR_LAYERS.md` argues every line one at a time.
 COMPOSITION = {
     # --- KINETIC: a solid mass arrives at speed. Defeated by hard, brittle ceramic that
     # shatters or erodes the penetrator before it reaches the backing plate — which is what
@@ -1315,7 +1315,7 @@ def family(name, order16, vt, levels, *, mode=None, damage=2000,
     Every main warhead is AreaDamage with baked UNIVERSAL friendly fire
     (ValidRelationships: Ally, Neutral, Enemy + FriendlyFireDamage/Spread 50) —
     the old separate _FriendlyFire twin is retired. See cameo-expanding-damage-trait
-    and docs/design/AREADAMAGE_WARHEAD_REBALANCE.md."""
+    and docs/design/AREADAMAGE_WARHEAD.md."""
     blocks = []
     allr = sorted(CANON16)
     for level in levels:

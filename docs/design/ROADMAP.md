@@ -230,7 +230,7 @@ An in-game encyclopedia was raised and deferred as too large.
 Both are `GrantConditionOnDeploy` state-reset bugs; neither has been reproduced against the tree
 yet, so they are reports, not findings.
 
-## ⭐ NEXT MAJOR — continuous weapon heaviness — see [`CONTINUOUS_WEAPON_HEAVINESS.md`](CONTINUOUS_WEAPON_HEAVINESS.md) (2026-08-22)
+## ⭐ NEXT MAJOR — continuous weapon heaviness — see [`WEAPON_HEAVINESS.md`](WEAPON_HEAVINESS.md) (2026-08-22)
 
 Resolves the 3-way-split vs between-tier-mix collision: ONE warhead template per family plus a
 continuous `Heaviness` scalar, instead of a discrete level ladder. Measured: a level is already a
@@ -248,7 +248,7 @@ held, so it *"can never invert"*.
 
 The blockers previously listed here were measured with a broken hand parser that read
 `PercentageVersus` instead of `Versus` — see the correction banner in
-`CONTINUOUS_WEAPON_HEAVINESS.md`. Re-measured through the resolver:
+`WEAPON_HEAVINESS.md`. Re-measured through the resolver:
 
 | previously claimed | truth |
 |---|---|
@@ -611,7 +611,7 @@ AA-gating, rock-paper-scissors) are captured in `BALANCE_SYNTHESIS.md` + `ORIGIN
 
 ## Active documentation maintenance
 
-- [x] **Documentation architecture quick wins** — owner: Cascade. Added `docs/README.md`; reduced `PROJECT_CONTEXT.md` to orientation and canonical links; kept the complete startup, evidence, incident, and commit-gate protocol in `AGENT_WORKSPACE.md`. Validation: checked links in the entry documents and ran `git diff --check`.
+- [x] **Documentation architecture quick wins** — owner: Cascade. Added `docs/README.md`; reduced `README.md` to orientation and canonical links; kept the complete startup, evidence, incident, and commit-gate protocol in `AGENT_WORKSPACE.md`. Validation: checked links in the entry documents and ran `git diff --check`.
 - [x] **Documentation architecture continuation** — owner: Cascade. De-mixed `MEGAPLAN.md` into a short rebalance index and moved the Dynamic Campaign vision into non-binding `VISION.md`; Formula V2, balance-pipeline, and ARMOR_SYSTEM remain canonical linked sources. Excludes the ROADMAP history split and Formula V2 roster-log migration. Validation: internal-link check and `git diff --check`.
 
 ## Code health program
@@ -679,7 +679,7 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `design.class_anchor` overrides for pollutants. 257 buildable infantry classed:
   melee 41, heavy 39, rocket 35, support 34, scout 24, commando 24, SF 16,
   pure_sniper 16, grenadier 10, flying 7, closecombat 4, heavy_sniper 2. See
-  `docs/balance/membership_review.md`. Reclassified: engineers/medics/spies/
+  `docs/history/balance/membership_review.md`. Reclassified: engineers/medics/spies/
   casters→support; dogs→melee; dragunov+virus→heavy_sniper; futuretech droids
   (shotgun→closecombat, cannon→heavy, missile→rocket, scout→scout, repair→support);
   zerg_ultralisk/wc2 knight+ogre→melee (were on the tank template); marauder→heavy.
@@ -1226,7 +1226,7 @@ DESIGN formulas instead of silently "fixing".
   guards on ALL perpetual systems (verified zero unguarded), `PendingSpawns`
   counter to prevent premature victory from async reinforcements, and coop
   player elimination handling. Research documented in
-  `docs/design/mission_win_lose_research.md`.
+  `docs/design/RESEARCH_NOTES.md`.
   (b) difficulty dip waves 12–15 — ADDRESSED 2026-07-27: randomized
   wave system now pads waves with cheapest unit to meet minUnits floor.
   (c) maintainer idea: waves spawn with all upgrades ("elite force") —
@@ -1284,7 +1284,7 @@ cancel the template's `DamageMultiplier@ScoutInfantryBuff: 50` with a
 local `Modifier: 100`; 16 still resolve to 50 and are therefore twice
 as durable as their price. Finishing this class means finishing that
 migration, not just setting the anchor** — W26 / FORMULA_V2.md.
-Assessment + simulation: docs/balance/formula_v2_scout.md — anchor
+Assessment + simulation: docs/balance/formula_v2_classes.md — anchor
 structure confirmed, speed 60 recommended over 50, bake endorsed;
 BLOCKED ON: (1) garrisoned/pricing armament flag in the extractor,
 (2) WeaponClass seeding for the class weapons, then bake -> anchor ->
@@ -1903,7 +1903,7 @@ types, creating a unified wall+turret defense system across the mod.
 - [x] **SM-ARTWORK: Replace copy-pasted icons** — create unique placeholder
   icons for `schwarzer_mond_mars`, `schwarzer_mond_m200bjagerline`,
   `schwarzer_mond_gravitycoretank`, and `schwarzer_mond_blackbomb`. See
-  `docs/design/schwarzer_mond_artwork_status.md` for the full status. Final
+  `docs/design/RESEARCH_NOTES.md` for the full status. Final
   production-quality cameo art can replace the placeholders later.
 
 ## Sequence Filename Standardization
@@ -1957,7 +1957,7 @@ types, creating a unified wall+turret defense system across the mod.
 - [ ] **ZERO YAML ERRORS & WARNINGS** — achieve zero errors and zero warnings
   from `utility.cmd cameo --check-yaml`. Latest report: 2026-07-24
   (check_yaml_v8.txt, ~89,392 errors, ~69,325 warnings).
-  Full phased plan in `docs/design/MEGAPLAN_YAML_CLEANUP.md`.
+  Full phased plan in `docs/history/MEGAPLAN_YAML_CLEANUP.md`.
   Analysis tool: `tools/audit/analyze_check_yaml.py`. Effort: L (multi-session).
 
   **Fixes applied this session (2026-07-24):**
