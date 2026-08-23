@@ -775,3 +775,61 @@ ts_gdi_navalyard:
 		TargetTypes: Ground, Water, C4, Structure
 	RenderSprites:
 		PlayerPalette: player_rgba
+
+ts_gdi_dropshipbay:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^4x3Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@production: ^IsVehicleDropzone
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: GDI Dropship Bay
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 150
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Prerequisites:  ~ts_gdi_constructionyard, ts_gdi_techcenter, derricklimit
+		Queue: Building, RABuilding
+		Description: template_factory.description
+		IconPalette: tscameo
+	Building:
+		Footprint: =xx= xxxx =xx=
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
+	# Selectable:
+	# 	Bounds: 3072, 2048
+	# 	DecorationBounds: 3072, 2048
+	SelectionDecorations:
+	RallyPoint:
+		Path: 5,3
+	Exit@1:
+		# SpawnOffset: -512,-512,0
+		SpawnOffset: 0,0,0
+		ExitCell: 2,2
+		ExitDelay: 3
+	ProductionAirdropCA@CLASSIC:
+		Produces: RAVehicle
+		# RequiresCondition: classicproductionqueues
+		ActorType: ts_gdi_dropship
+		LandingFacing: 384
+		ReadyAudio: ReinforcementsArrived
+		SpawnType: ClosestEdgeToDestination
+		ProportionalSpeed: true
+		PauseOnCondition: disabled
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@DISH:
+		Sequence: idle-dish
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	WithIdleOverlay@LIGHTS-BRIGHT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights-bright
+	RenderSprites:
+		Image: ts_gdi_dropshipbay
+		PlayerPalette: playerra2
