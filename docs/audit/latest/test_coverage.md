@@ -4,7 +4,7 @@
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (3 file(s)) | 29 | >= 24 |
 | T2 | `def test_*` in tools/tests (20 file(s)) | 241 | >= 177 |
-| T3 | modules with no test mentioning them | 269 | <= 224 |
+| T3 | modules with no test mentioning them | 270 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (269)
+## T3 — untested modules (270)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -172,6 +172,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_basebuilder_crates.py | audit_basebuilder_crates |
 | python | tools/audit/audit_buildable_order.py | audit_buildable_order |
 | python | tools/audit/audit_burst_delays.py | audit_burst_delays |
+| python | tools/audit/audit_ca_drift.py | audit_ca_drift |
 | python | tools/audit/audit_code_duplication.py | audit_code_duplication |
 | python | tools/audit/audit_consistency_report.py | audit_consistency_report |
 | python | tools/audit/audit_damage_grid.py | audit_damage_grid |
@@ -292,5 +293,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 269 untested > baseline 224
+- T3: 270 untested > baseline 224
 

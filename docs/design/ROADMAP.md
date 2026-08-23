@@ -177,38 +177,60 @@ conversion moved its rungs as a side effect. Read the table, not the number.
 remembers is not a ratchet. `f9b71bffa` was boot-gated and shipped without re-running the suite,
 so a FAIL sat in the tree for three commits reporting itself as a WARN at baseline.
 
-## ⛔ OPEN DECISION — how the Cryo families get adopted (2026-08-23)
+## ✅ RULED AND SHIPPED — the Cryo families are adopted (2026-08-23, `a9f31258a`)
 
-`BulletCryo`, `CannonCryo`, `MissileCryo` and `CryoBlast` are BUILT and spliced but adopted by
-**0 weapons**. So is the base `Cryo` family. Everything cryo still runs the legacy path.
+Superseded the "OPEN DECISION" that stood here. The maintainer ruled a **fourth** shape, better
+than the three that had been costed:
 
-⭐ **THE STRUCTURE IS NOT WHAT IT LOOKED LIKE.** All **17** cryo weapons are THIN CHILDREN of one
-shared template, `^CryoMissileProjectile` (`ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1`),
-which carries a single `Warhead@PhysicalStateCryo: ApplyPhysicalState`. Their main damage comes
-entirely from their NON-CRYO parents (`Stinger`, `SheridanMissiles`, `RapierBombs`, `M1Carbine`,
-`ViperMissiles`...), which other units share. Each cryo weapon overrides only the `Amount`:
+> *"their regular weapons are upgraded into cryo versions: MissileAP and MissileHE become
+> MissileCryo warheads and the Missile Projectile changes into the Missile Cryo projectile with
+> the cryo trails and the Missile effect changes into the cryo explosion effect. The apply
+> physical state is removed and the cryo physical state is applied directly from the warhead …
+> This is the same for bullets, cannons, missiles, bombs, etc. — a GLOBAL change for all the RA1
+> Allies weapons, not only those that already have it … even the snipers have cryo, everything
+> else should too (except those that don't deal any damage, or heal, or repair)."*
+> — and: *"both Demolition and Concussion become CryoBlast, because CryoBlast is
+> Demolition × Concussion × Cryo."*
 
-    -48000 x1   -32000 x1   -30000 x3   -20000 x2   -16000 x3   -10000 x2   -2000 x5
+That is neither ADD nor FOLD: the cryo weapon is a SEPARATE weapon on a **condition-gated
+armament slot**, so the upgrade SWAPS the armament instead of layering a warhead. No main warhead
+is added to any weapon, so the `three_way_split` ratchet does not move — the objection that
+disqualified the ADD shape never applies.
 
-That spread IS the hand-cranked dilution compensation diagnosed on the Sheridan, all in one place.
+**Shipped by `a9f31258a`:** **14** new `*Cryo` weapon definitions and **21** new armament slots,
+a delivery-agnostic `^Effect_Cryo` template (cryo impact with no `Projectile` and no
+`ApplyPhysicalState`), and a `FlakCryo` family in `gen_weapon_template.py`. Tree-wide totals are
+now 27 cryo weapons on 39 slots across 12 files — **37 of the 39 are condition-gated**; the two
+that are not are FutureTech's Cryocopter and cryo turret, which are cryo by identity rather than
+by upgrade and were never in this ruling's scope. The conversion map:
 
-⚠ A first pass misread this: a `sed` window overran the block and showed the NEXT weapon's
-`Inherits@wh:` lines, making these look like standalone weapons on modern templates. They are not.
-
-**Three shapes, one disqualified:**
-
-| option | verdict |
+| non-cryo | becomes |
 |---|---|
-| ADD the family as an extra warhead (DESIGN's "an upgrade ADDS the warhead") | ⛔ adds a main to ~12 weapons → **raises the `three_way_split` ratchet**, which is forbidden |
-| REPLACE the parents' mains | yaml cannot un-inherit; needs restructuring parents that non-cryo units depend on |
-| ⭐ **FOLD the meter onto the existing main warhead** — swap the discrete `ApplyPhysicalState` for `PhysicalStateName: Temperature` + `PhysicalStateScale` | no new warhead, no ratchet change, implements the Scale-200 support design, and is close to a ONE-TEMPLATE change because they all share `^CryoMissileProjectile` |
+| `Bullet`, `Sniper` | `BulletCryo` |
+| `CannonAP`, `CannonHE` | `CannonCryo` |
+| `MissileAP`, `MissileHE` | `MissileCryo` |
+| `Demolition`, `Concussion` | `CryoBlast` |
+| `Flak` | `FlakCryo` |
+| `Flame` | *dropped* — fire and cryo cancel; `ParaBombCryo` is `CryoBlast_Heavy` alone |
 
-**Recommended: fold.** ⚠ It implies the four Cryo families serve a DIFFERENT population — weapons
-whose damage TYPE should be cryo — not cryo-flavoured variants of existing weapons. Decide that
-before pointing anything at them.
+Adoption today: `BulletCryo` 8 weapons, `CryoBlast` 6, `CannonCryo` 5, `MissileCryo` 3,
+`FlakCryo` 1. (Was 0 for every family when this section said "OPEN".)
 
-12 of the 17 are additionally blocked behind the legacy 3-way split (`155mmBastionCryo`,
-`APTuskCryo`, the `LightMissile+SmallArms+Chaingun+...` beam soup, etc.).
+### The remainder — 4 weapons, blocked on their PARENTS, not on cryo
+
+`CryoReconRangerRecoillessGun`, `APTuskCryo`, `ChronoTuskCryo` and `155mmCryo`
+(`ContentPacks/RedAlert/Allies/yaml/weapons.yaml`) still run the legacy
+`^CryoMissileProjectile` + `Warhead@PhysicalStateCryo: ApplyPhysicalState` path. Each is a thin
+child whose parent is a legacy MULTI-MAIN weapon — `APTusk` resolves **4** mains
+(`^TankDestroyerCannon` + `^Grenade` + `^FlakWeapon` + `^MediumMissile`), `ChronoTusk` **5**. A
+cryo child cannot be pointed at one `^Warhead_*Cryo` template until its parent has been reduced
+to one main warhead, so these are **W24 work on the parents**, not cryo work. Converting them
+also needs warhead permission (hard rule 4).
+
+⚠ The other `PhysicalStateCryo` sites are NOT this backlog and must not be swept in:
+`RedAlert/Shared` (13) is the `^CryoMissileProjectile` template itself plus a deliberate
+hand-built 12-ring cryo falloff on a bomb; `RedAlert2Mod/FutureTech` (11) and `StarCraft/Protoss`
+(6) belong to other factions and were never in the ruling's scope, which was RA1 Allies.
 
 ## ⭐ FROM THE DISCORD PLAYTEST THREAD (2026-08-22)
 

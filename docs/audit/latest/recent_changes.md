@@ -1,6 +1,6 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **383**, files touched: **872**
+Commits reviewed: **384**, files touched: **873**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
@@ -80,21 +80,21 @@ Commits reviewed: **383**, files touched: **872**
 
 | file | commits touching it |
 |---|---|
-| docs/design/BALANCE_PROGRAM_PLAN.md | 103 |
+| docs/design/BALANCE_PROGRAM_PLAN.md | 104 |
 | mods/cameo/weapons/weapons.yaml | 73 |
 | tools/balance/gen_weapon_template.py | 56 |
-| docs/balance/derived/redalert_soviets.json | 45 |
+| docs/balance/derived/redalert_soviets.json | 46 |
 | docs/design/ROADMAP.md | 40 |
+| docs/balance/derived/d2k_ixian.json | 38 |
+| docs/balance/derived/redalert2mod_consortium.json | 38 |
+| docs/balance/derived/redalert2mod_futuretech.json | 38 |
+| docs/balance/derived/tiberiandawn_nod.json | 38 |
+| docs/balance/derived/tiberiansun_forgotten.json | 38 |
 | DEVELOPMENT_LOG.md | 38 |
-| docs/balance/derived/d2k_ixian.json | 37 |
-| docs/balance/derived/redalert2mod_consortium.json | 37 |
-| docs/balance/derived/redalert2mod_futuretech.json | 37 |
-| docs/balance/derived/tiberiandawn_nod.json | 37 |
-| docs/balance/derived/tiberiansun_forgotten.json | 37 |
-| docs/balance/derived/shared_redalert.json | 35 |
-| docs/balance/derived/starcraft_protoss.json | 35 |
-| docs/balance/derived/tiberiansun_nod.json | 35 |
-| docs/balance/derived/d2k_ordos.json | 34 |
+| docs/balance/derived/shared_redalert.json | 36 |
+| docs/balance/derived/starcraft_protoss.json | 36 |
+| docs/balance/derived/tiberiansun_nod.json | 36 |
+| docs/balance/derived/d2k_ordos.json | 35 |
 
 
 ## Reviewer checklist (not machine-checkable)

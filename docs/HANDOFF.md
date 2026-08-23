@@ -300,6 +300,49 @@ and is written out in full in `BALANCE_PROGRAM_PLAN.md` §1b):
 | **W12** superweapons as a separate track | — | maintainer-led; superweapons are not unit-priced |
 | **Adopt the Sonic family** | B | `^Warhead_Sonic_*` bakes the mark but **nothing inherits it**, so it is inert. Needs a maintainer warhead order (rule 4). Law: an effect upgrade ADDS `^Warhead_Sonic_*`, it never replaces the base damage TYPE. |
 
+### 3.2b — Absorbing the other OpenRA mods (measured 2026-08-23)
+
+Plan and every number: [`design/UPSTREAM_MODS.md`](design/UPSTREAM_MODS.md).
+Re-measure with `python tools/audit/audit_upstream_adoption.py` (in `run_all.sh`).
+
+**Settled, do not re-derive.** The engine must NEVER move to `ca-engine` (it would discard 2 581
+commits and delete `OpenRA.Mods.AS`); CA mod code comes FORWARD onto Cameo's engine. Measured from
+the point where `cameo-engine` last took upstream OpenRA (`b0b0544d4a`, **2026-05-11**): Cameo is
+1 975 commits of its own past it and only **70 behind `openra/bleed`**. RV and SP pin ANCESTORS of
+`cameo-engine`, so they need **no engine work at all**. CN's own work is 170 enumerable commits on
+newer bleed, so its engine patches ARE cherry-pickable. Generals Alpha needs no engine work either
+— of the 49 commits its pin has that we lack, 41 are upstream bleed and 8 are maintenance.
+
+⛔ **`mtr/rv-engine` is STILL MAINTAINED** (tip 2026-07-25) — Generals Alpha pins it. The RV *mod*
+is dormant; the engine branch Cameo descends from is not. Any plan resting on "the RV engine is
+dead" is resting on a false premise.
+
+**What is actually left, by TYPE** (Cameo resolves 1 101 yaml-visible names across 7 assemblies):
+
+| mod | already here | duplicate under another name | real candidates | live in its own yaml |
+|---|--:|--:|--:|--:|
+| Generals Alpha | 2 of 23 | 1 | 20 | **20** |
+| RV | 11 of 26 | 8 | 7 | 6 |
+| SP | 7 of 46 | 7 | 32 | 31 |
+| CN | 5 of 107 | 2 | 100 | 90 |
+| CA | 182 of 348 | 35 | 131 | 119 |
+
+⭐ **Start with Generals Alpha.** Smallest assembly, highest signal — 20 of 20 candidates are used
+by its own rules, and they group into whole mechanics: a 9-type supply-dock economy Cameo has no
+equivalent of, cash hacking, `LaysMinefield` (self-replenishing, NOT our ordered `Minelayer`),
+`ConditionIconOverlay`, `PilotChamber`, `FakePower`. And it exposes a dead tag we already carry:
+CA's `CashHackable` sits on two actors here while **no assembly Cameo loads has the power that
+reads it** — adopting a `CashHackPower` (CA's or GenSDK's) is a one-file fix.
+
+⛔ **A new NAME is not a new MECHANIC.** RV's `Temporal` + `AffectedByTemporal` are CA's
+`WarpDamage` + `Warpable`, already wired to `ChronoBeam`. Both were ported, built clean and
+reverted in one session. Read the DESTINATION — the actor, then its weapon — before porting
+anything. Full account in [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md).
+
+⚠ Order: Generals Alpha, then RV + SP (frozen, 37 live candidates), then CN, then CA. **Which mechanics Cameo wants is
+a maintainer call** — §5 of the plan: 86 of the 142 CA trait types already vendored here are
+unused, so wiring beats adopting.
+
 ### 3.3 — Bounded bug work (good for a short session)
 
 From [`audit/SUMMARY.md`](audit/SUMMARY.md), smallest first:

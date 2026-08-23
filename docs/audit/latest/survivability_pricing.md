@@ -3,7 +3,7 @@
 | bucket | actors | priced today | belongs to |
 |---|--:|---|---|
 | spawns with a pool (**always-on**) | 56 | ✖ nothing | **E1 — this report** |
-| empty capacity, needs `shieldgen` | 1163 | ✔ correctly nothing | — (it has no shield) |
+| empty capacity, needs `shieldgen` | 1164 | ✔ correctly nothing | — (it has no shield) |
 | pool behind an upgrade | 210 | ✖ nothing | E5 (upgrade pricing) |
 
 Shield row mean Versus **189.81**, so one shield point is **0.5269 HP** BEFORE any shield-gated `DamageMultiplier` — measured off the live ladder every run, never frozen. The Shield row takes **1.465%** of all roster raw damage at baseline.

@@ -129,9 +129,11 @@ them, and let that tell us what kind of CA mechanics are actually wanted.
 ## 6. The other upstreams (2026-08-23)
 
 > Maintainer: *"we not only want RV and CA but basically ALL the OpenRA mods included … Cameo is
-> like the Frankenstein Monster of all the OpenRA mods."*
+> like the Frankenstein Monster of all the OpenRA mods."* Generals Alpha added on request,
+> 2026-08-23: *"another high profile OpenRA mod … a lot of interesting game mechanics we also
+> want to use."*
 
-All four are cloned beside this repo under `~/Documents/GitHub/`, so every number here is
+All five are cloned beside this repo under `~/Documents/GitHub/`, so every number here is
 re-derivable. **`git -C <clone> pull` before trusting any of it** — a stale checkout produced a
 confident, wrong "CA doesn't have this" earlier in the same programme.
 
@@ -139,6 +141,7 @@ confident, wrong "CA doesn't have this" earlier in the same programme.
 |---|---|---|--:|---|---|
 | Combined Arms | `CAmod` | `OpenRA.Mods.CA` | 471 | `Inq8/OpenRA` `ca-engine/1.09` | 2026-07-30 **live** |
 | Crystallized Nexus | `crystallized-nexus` | `.modsdk/OpenRA.Mods.CN` | 134 (+21 launcher) | `DoGyAUT/crystallized-nexus-engine` `cn-20260820` | 2026-08-19 **live** |
+| Generals Alpha | `Generals-Alpha` | `OpenRA.Mods.GenSDK` | 33 | `MustaphaTR/OpenRA` `40065d3e58` = tip of `rv-engine` | 2026-07-25 **live** |
 | Shattered Paradise | `Shattered-Paradise-SDK` | `OpenRA.Mods.Sp` | 50 | `MustaphaTR/OpenRA` `ab187a38c2` | 2025-09-27 dormant |
 | Romanov's Vengeance | `Romanovs-Vengeance` | `OpenRA.Mods.RA2` | 32 | `MustaphaTR/OpenRA` `ac7864a16d` | 2025-07-26 dormant |
 
@@ -152,11 +155,99 @@ That is also the answer to *"follow CA without losing what we got from RV"* — 
 lose. The RV/SP inheritance lives in Cameo's ENGINE (`OpenRA.Mods.AS` above all), which CA does
 not have and which adopting CA mod code does not touch.
 
-**Two live upstreams, two frozen ones.** CA and CN are still moving, so they need the recurring
-drift check of §4. RV and SP are dormant: mine them ONCE, record what was taken, and stop
-watching them.
+### The engine picture, once all five are measured
 
-### Crystallized Nexus — the one that needs real research
+Every "N commits ahead" figure in this document is measured against the point where
+**`cameo-engine` last took upstream OpenRA**: `b0b0544d4a`, **2026-05-11**, which is a commit on
+`openra/bleed`. Stated from there, the whole landscape is small:
+
+| | |
+|---|---|
+| Cameo's OWN engine work since that point | **1 975** commits |
+| Cameo behind `openra/bleed` | **70** commits |
+| CN past that point | its own 170, on top of newer bleed |
+| Generals Alpha past that point | **49**, of which only **8** are its author's own |
+
+So Cameo is not far from anyone: it is **70 upstream commits behind bleed**, and each sibling mod
+sits a different distance past that same sync point. A number like "CN is 8 227 ahead" is an
+artifact of history shape, not of work — see the CN section below.
+
+### Generals Alpha — measured 2026-08-23
+
+⭐ **All three MustaphaTR mods pin points on ONE branch — `rv-engine` — and Cameo is a fork of
+it.** Checked with `git merge-base --is-ancestor` against `MustaphaTR/OpenRA`:
+
+| pin | on `rv-engine`? | relative to `cameo-engine` |
+|---|---|---|
+| RV `ac7864a16d` | yes | **ancestor** — we already contain it |
+| SP `ab187a38c2` | yes | **ancestor** — we already contain it |
+| Generals Alpha `40065d3e58` | yes — it IS the branch **tip** | **not** an ancestor: 49 commits past our fork point |
+
+So the branch has four marks on it in order: RV, SP, the point Cameo forked at (`b0b0544d4a`,
+2026-05-11), and `rv-engine`'s current tip, which is what Generals Alpha pins. Cameo then has
+**278** commits of its own past that fork point.
+
+⛔ **That corrects a premise this programme has been carrying.** "The RV engine is no longer
+updated" is true of the RV *mod* (last pushed 2025-07-26) and **false of the branch**: `rv-engine`
+was last touched **2026-07-25**, and Generals Alpha is what keeps it alive. The engine lineage
+Cameo descends from is still maintained upstream — a different situation from the one that
+motivated looking at CA at all.
+
+⚠ Generals Alpha's README still points at `MustaphaTR/OpenRA/tree/generals-alpha-engine`. That
+branch was last touched **2018-09-05**; the mod moved to `rv-engine` and the README did not.
+Read `mod.config`, never the README, for the pin.
+
+Of the 49 commits its pin has that we lack, **41 are upstream OpenRA bleed** merged into
+`rv-engine` (Paul Chote, RoosterDragon, Matthias Mailänder, Gustas…) and only **8** are
+MustaphaTR's own non-merge commits — all maintenance: style fixes, the `.slnx` migration, a
+`FluentReference` location fix in `SupportPowerInfo>Names`, an `ISync` cleanup in the AS dll, and
+a `ProductionQueue.Build` wrong-queue fix.
+
+**So Generals Alpha needs no engine work for its features.** There are no gen-specific engine
+patches to take; its engine is simply a fresher checkout of our own upstream branch. Everything
+interesting is in `OpenRA.Mods.GenSDK` — 33 files, and §7 shows what that actually amounts to.
+
+⭐ **It has the highest signal of any of the five.** All 20 of its candidate types are used by its
+own rules — no dead code at all — and they cluster into whole MECHANICS rather than scattered
+helpers:
+
+| cluster | types | what it is |
+|---|--:|---|
+| **The supply economy** | 9 | `SupplyDock`, `SupplyCenter`, `SupplyCollector`, `ResupplyDock`, plus pips, collection/delivery overlays and two condition grants. Generals' supply-dock model — an ALTERNATIVE resource economy to harvesting, and Cameo has **no** equivalent type at all. |
+| **Cash hacking** | 2 | `CashHack` warhead + `CashHackPower` (the Hacker / Black Market) |
+| **`LaysMinefield`** | 1 | 20 uses, its most-used type. NOT our `Minelayer`: it *"places mines around itself, and replenishes them after a while"* — passive and self-refilling, where ours is ordered to lay. |
+| **`ConditionIconOverlay`** | 1 | 15 uses; status icons drawn over a unit |
+| **`PilotChamber`, `FakePower`, `RadarIcon`, `WithTerrainDependantSpriteBody`** | 4 | pilot ejection, decoy support powers, custom radar blips, terrain-dependent bodies |
+| **Bot modules** | 2 | `InitialBaseAndWorkerBotModule`, `GeneralCollectorBotModule` — ⚠ Cameo's AI is reworked; treat as reference, not as a drop-in |
+
+**Two patterns in its yaml that cost no C# at all.** 33 files is a small assembly for a mod this
+size because much of Generals is expressed in rules:
+
+* **The generals-power tree is buildable upgrade ACTORS** (`rules/generals_powers.yaml`, 1 097
+  lines). Each power is an actor with `Buildable` into a per-general queue, `BuildLimit: 1`,
+  `ProvidesPrerequisite`, and `WithProductionIconOverlay` to grey the icon once taken; the
+  promotion-point economy is just a `prerequisite.has_points` prerequisite. No custom trait
+  anywhere. Cameo already has research/upgrade queues, so this is a pattern to copy, not code.
+* **`FullnessConditions` drives artwork from a stored amount.** `SupplyDock` takes a
+  threshold → condition map (`834: one_third`, `1667: two_thirds`), and the sprite bodies switch on
+  those conditions while `KillsSelf: RemoveInstead` clears the husk at zero. That threshold→
+  condition shape is directly applicable to Cameo's physical-state meters.
+
+Also sizeable and worth reading before designing anything similar: `rules/upgrades.yaml` (1 409
+lines) and `rules/fakes.yaml` (1 021) — Generals' fake-structure system.
+
+⭐ **And it exposes a half-wired mechanic we already have.** CA's `CashHackable` is vendored here
+and applied to two actors (`rules/defaults.yaml:7913`, `rules/simcity.yaml:1252`) — but its own
+`[Desc]` says *"Tag trait for Cash Hack support power"*, and **no assembly Cameo loads contains
+that power.** Upstream CA has `Traits/SupportPowers/CashHackPower.cs`; we took the tag and not the
+power. Two implementations are now available (CA's and GenSDK's), and adopting either turns a dead
+tag into a working mechanic. That is the cheapest real win on this page.
+
+**Three live upstreams, two frozen ones.** CA, CN and Generals Alpha are still moving, so they
+need the recurring drift check of §4. RV and SP are dormant: mine them ONCE, record what was
+taken, and stop watching them.
+
+### Crystallized Nexus — measured 2026-08-23
 
 CN is the newest and the most active, and unlike the others it **ships its own feature list**:
 `crystallized-nexus/FEATURES.txt` enumerates what it adds over the stock TS mod, which makes it
@@ -166,33 +257,125 @@ graphics toggle), drop-in `CNWithVoxelBody`/`Turret`/`Barrel`/`WalkerBody` repla
 `AlphaGradientPalette`, `CharredPalette`, `DamageSmoke`, `PeriodicSpriteEffect` and a full-screen
 `AtmosphericGradingRenderer`.
 
-⚠ **CN pins its OWN engine fork** (`DoGyAUT/crystallized-nexus-engine`), and `FEATURES.txt`
-explicitly refers to "ENGINE PATCHES". So some CN features are NOT mod-side and cannot simply be
-copied into `OpenRA.Mods.Cameo`. **This is the one unmeasured thing in this document** — the next
-step is to establish whether CN's engine shares an ancestor with `cameo-engine`, exactly as was
-done for RV and SP:
+**CN pins its OWN engine fork** (`DoGyAUT/crystallized-nexus-engine`, tag `cn-20260820`), and
+`FEATURES.txt` refers to "ENGINE PATCHES" — so some CN features are engine-side. That question is
+now **measured**, and the answer is much better than the CA one:
 
-```sh
-cd ~/Documents/GitHub/cameo-engine
-git remote add cn https://github.com/DoGyAUT/crystallized-nexus-engine.git
-git fetch cn --no-tags
-git merge-base cameo-engine cn/<branch>        # is there a shared base at all?
-git rev-list --left-right --count cameo-engine...cn/<branch>
-```
+| | |
+|---|---|
+| CN's pinned engine | `cn-20260820` = `d323caa350967b4b5769e1a5815adc7155c8aaee` |
+| shared base with `cameo-engine` | `b0b0544d4a`, **2026-05-11** ("Add a heal debug command") |
+| CN's own fork point | tag `openra-base` = `febbbfebe6`, 2026-04-24, *"Initial CN engine fork based on OpenRA bleed"* |
+| **CN-authored commits** not in `openra/bleed` | **170** (DoGyAUT + dnqbob, all since 2026-04-24) |
+| Cameo's own commits not in `openra/bleed`, for scale | 1 516 |
 
-Until that is run, treat every CN feature as *possibly* engine-side. A mod-side port is a copy; an
-engine-side one goes through the `cameo-engine` pipeline in `docs/LESSONS_LEARNED.md`.
+⭐ **CN's engine patches are cherry-pickable, and CA's are not.** CN and Cameo share a base only
+**three months** old — against CA's 2024-11-16 — and CN's divergence is not a fork that drifted,
+it is 170 enumerable commits on top of recent OpenRA bleed. `git log cn-20260820 --not
+upstream/bleed --author=DoGyAUT` lists every one, and most are self-contained rendering work:
+the bloom-glow pipeline, water reflections, cloud shadows, `VoxelDynamics`, per-projectile
+`BeamBloomIntensity`, railgun distortion, Armament casing ejection, a zoom-scaled audio listener.
+
+⚠ **Do not read the raw `rev-list --left-right` count.** It reports `cameo 1975 / CN 8227`, and
+the CN side is history-shape noise: CN's history absorbs a legacy branch reaching back to 2017 and
+has been re-based onto bleed twice, so the count measures ancestry bookkeeping, not work. The
+`--not upstream/bleed --author=` figure above is the honest one. (`git log --format=%an ... | sort
+| uniq -c` shows the top authors are Paul Chote, reaperrr and RoosterDragon — i.e. upstream OpenRA.)
+
+So a CN feature is a mod-side copy if its type lives in `.modsdk/OpenRA.Mods.CN`, and a
+`cameo-engine` cherry-pick otherwise — both are cheap. The pipeline for the second is in
+`docs/LESSONS_LEARNED.md`.
 
 ### Order of work
 
-1. **RV + SP first** — 82 files total, frozen, and no engine risk. Smallest job, and it closes
-   two upstreams permanently.
-2. **CN's mod-side features** — after the engine-lineage measurement above says which they are.
-3. **CA by capability** — §3, the largest and slowest, and the one where usage rather than
+1. **Generals Alpha first** — 20 live candidates, no engine work needed, no dead code, and the
+   clusters are whole mechanics. Start with the two that cost one file each: adopt a
+   `CashHackPower` so the `CashHackable` tag we already apply stops being dead, and `LaysMinefield`
+   (20 uses upstream, and NOT our `Minelayer`).
+2. **RV + SP** — 37 live candidates between them (§7), frozen upstreams, and no engine
+   risk. Closes two upstreams permanently.
+3. **CN** — 90 live mod-side candidates (§7) plus 170 cherry-pickable engine commits. The
+   engine lineage is measured; nothing here is blocked on research any more.
+4. **CA by capability** — §3, the largest and slowest, and the one where usage rather than
    adoption is the bottleneck.
 
-⚠ The same trap applies to all four: `ObjectCreator.FindType` takes the FIRST assembly in
+⚠ The same trap applies to all five: `ObjectCreator.FindType` takes the FIRST assembly in
 `mod.yaml`'s `Assemblies:` order — **AS, CA, Cameo, Cnc, D2k, Common**. A ported type placed in
 `OpenRA.Mods.Cameo` cannot shadow one that already exists in AS or CA. Prove a port resolves to
 the assembly you intended by giving it a field the other one lacks and booting with that field
 set; `--docs` lists both types and proves nothing.
+
+---
+
+## 7. The only number that decides a port: TYPES, not files
+
+File counts mislead. Cameo resolves names through **six** assemblies, so a large share of any
+upstream mod is a type one of them already provides under the same name — and because
+`ObjectCreator.FindType` takes the FIRST match in `mod.yaml`'s order (**AS, CA, Cameo, Cnc, D2k,
+Common**), such a type cannot even be shadowed from `OpenRA.Mods.Cameo`. Porting it is not
+redundant, it is unreachable.
+
+`python tools/audit/audit_upstream_adoption.py` measures that directly. It reads the
+yaml-VISIBLE name (`class FooInfo` -> trait `Foo`, `class FooWarhead` -> warhead `Foo`), not the
+file name, and it counts how often the upstream mod's own rules use each remaining type — because
+a type its own mod never references is dead code there too, and is not a porting candidate.
+
+⛔ **A NEW NAME IS NOT A NEW MECHANIC, and this is the trap that actually bites.** RV's `Temporal`
+warhead and `AffectedByTemporal` trait are CA's `WarpDamage` and `Warpable` — same
+`TargetDamageWarhead` subclass routing damage into a separate meter on a companion trait, already
+vendored here, already wired to the Chrono Legionnaire's `ChronoBeam` and `IFVChronoBeam`, which
+are exactly the weapons RV points `Temporal` at. CA's version is the RICHER of the two (it adds
+`RevokeRate` and `ScaleWithCurrentHealthPercentage`). Both types were ported into
+`OpenRA.Mods.Cameo` on 2026-08-23, built clean, registered in `--docs` — and were reverted
+unbuilt-upon once `ChronoBeam` was read. Nothing but reading the destination would have stopped it.
+
+So the audit now also compares `[Desc(...)]` text: those two traits carry the **identical**
+description, and so do five more RV types. Anything it pairs up is reported as a stop sign
+instead of as a candidate.
+
+⚠ **That match is evidence, not proof, and it misleads in both directions.** It missed
+`MissileSpawnerOldSlave` (a duplicate whose wording differs by one word), and it flags
+`LeaveSmudgeSP`, which repeats Common `LeaveSmudge`'s description verbatim while being a genuine
+SUPERSET of it — smudge levels, ring size, a max level, its own `SmudgeLayerSP`. Read both
+implementations before concluding either way; the pairing narrows the reading list, it does not
+replace it.
+
+As of 2026-08-23 (Cameo resolves **1 101** yaml-visible names):
+
+| mod | types | already in Cameo | same mechanic, other name | candidates | live in its own yaml |
+|---|--:|--:|--:|--:|--:|
+| Romanov's Vengeance | 26 | 11 | 8 | 7 | **6** |
+| Shattered Paradise | 46 | 7 | 7 | 32 | **31** |
+| Crystallized Nexus | 107 | 5 | 2 | 100 | **90** |
+| Combined Arms | 348 | 182 | 35 | 131 | **119** |
+| Generals Alpha | 23 | 2 | 1 | 20 | **20** |
+| | | | **53** | | **266 total** |
+
+Four things fall straight out of that table:
+
+* **53 upstream types are duplicates of something we already run.** That column did not exist in
+  the first version of this audit, and without it RV looked like 15 new types when it has 7.
+* **Generals Alpha is the densest of the five.** 20 candidates and **20 of 20 are used by its own
+  rules** — the only upstream with no dead code in its candidate list — and they group into whole
+  mechanics (a 9-type supply economy, cash hacking, self-replenishing minefields) rather than
+  scattered helpers. Smallest assembly, highest signal. Detail in §6.
+* **RV is nearly done, and the adoption was selective.** 11 of its 26 types resolve here today:
+  8 vendored file-by-file into `OpenRA.Mods.Cameo` (`InfectableOld`, `InfectorOld`,
+  `SpawnActorOrWeapon`, `StealResource`, `WithCargoBuilding`, `SoundAnnouncement`,
+  `HeliGrantConditionOnDeploy`) and 3 free from CA (the `Mirage` family). Another 7 are duplicates
+  — including BOTH halves of its infect rewrite, `AttackInfectRV` and `InfectableRV`, which
+  duplicate `AttackInfect`/`Infectable` and their CA variants, and both halves of its old missile
+  spawner. What is genuinely left is **7** small types, and only one of them is a mechanic:
+  `SpawnBuildingOrWeapon`, which fills the case our own `SpawnActorOrWeapon` explicitly excludes
+  (*"Don't use this with buildings"*). The other six are a capture sound, a support-power charge
+  overlay, a palette flash, an owner-lost condition, a delivered-cash sound, and `LegacySpread`,
+  which RV's own rules never reference.
+* **CA is 52% adopted by type** (182 of 348) while only 41 of 181 vendored FILES are byte-identical
+  — the gap between those two numbers is the forward-porting described in §1, and it is the reason
+  a `cp -r` sync would break the build.
+
+⚠ A high use-count is evidence the mechanic matters to that mod, **not** that Cameo wants it.
+`ExplodesAlsoTransported` at 112 uses and `CNHealth` at 223 are load-bearing in SP and CN
+respectively; whether Cameo wants either is a maintainer call, and §5's bottleneck still applies —
+86 of the 142 CA trait types already vendored here are unused.
+

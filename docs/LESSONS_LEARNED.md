@@ -46,6 +46,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Bulk YAML rename scripts: safety lessons (2026-07-31)](#bulk-yaml-rename-scripts-safety-lessons-2026-07-31)
 - [Loose-extracted .oramap maps must always be repacked before finishing a task (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
 - [Effect-warhead merge safety during 3-way split (2026-08-07)](#effect-warhead-merge-safety-during-3-way-split-2026-08-07)
+- [Porting from an upstream mod: a NEW NAME is not a NEW MECHANIC (2026-08-23)](#porting-from-an-upstream-mod-a-new-name-is-not-a-new-mechanic-2026-08-23)
 - [`Inherits` POSITION is semantic, not cosmetic (2026-08-16)](#inherits-position-is-semantic-not-cosmetic-2026-08-16)
 - [Upgrade regressions feel like downgrades (2026-08-19)](#upgrade-regressions-feel-like-downgrades-2026-08-19)
 
@@ -796,6 +797,48 @@ not file by file.
 `tools/rename/rename_map_*.yaml`, which `gen_rename_maps.py` emits as a side effect of the
 naming report. `git status` after a suite run is therefore *expected* to be dirty in places the
 run never mentions — check what moved before assuming a stray edit.
+
+
+## Porting from an upstream mod: a NEW NAME is not a NEW MECHANIC (2026-08-23)
+
+Cameo is absorbing four upstream mods (`docs/design/UPSTREAM_MODS.md`). The obvious way to decide
+what to take is "which of their types do we not have" — and it is wrong, because **the same
+mechanic arrives under different names in different mods**, and a name comparison cannot see that.
+
+The case that proved it. `audit_upstream_adoption.py` listed Romanov's Vengeance's `Temporal`
+warhead and `AffectedByTemporal` trait as NEW, and a grep for `Temporal` across every assembly
+Cameo loads returned nothing — so they were ported into `OpenRA.Mods.Cameo`, adapted for the
+one engine API difference, built clean, and confirmed registered in `--docs`. Every step passed.
+
+They were duplicates. Combined Arms' `WarpDamage` + `Warpable`, vendored here for months, are the
+same design — a `TargetDamageWarhead` subclass routing damage into a meter on a companion trait —
+and are **already wired to `ChronoBeam` and `IFVChronoBeam`**, exactly the weapons RV points
+`Temporal` at. CA's is the richer version (`RevokeRate`, `ScaleWithCurrentHealthPercentage`).
+The two traits even carry a word-for-word identical `[Desc]`. The port was reverted before
+anything was built on it.
+
+**Nothing on the C# side could have caught this.** The grep was correct, the build was correct,
+the registration was correct. What caught it was opening the DESTINATION — the actor that would
+use the new trait — and seeing a working implementation already there.
+
+So, before porting any upstream type:
+
+1. **Find the actor or weapon it would serve, and read it.** `ra2_allies_chronolegionnaire` fires
+   `ChronoBeam`; one look at that weapon ends the question. This is the only reliable step.
+2. **Search by MECHANIC, not by name** — the damage-routing base class, the companion trait, the
+   yaml field names — and search `OpenRA.Mods.CA` explicitly, since it is vendored at the repo
+   ROOT and a search rooted at `engine/` will miss all 181 files of it.
+3. **Let the audit pair the descriptions.** `audit_upstream_adoption.py` now compares `[Desc(...)]`
+   text and reports matches as a stop sign instead of a candidate. It found **52** such pairs
+   across the four upstreams — RV alone drops from 15 "new" types to 7. But the match is evidence,
+   not proof, and it misleads **both** ways: it missed `MissileSpawnerOldSlave`, a real duplicate
+   whose wording differs by one word, and it flags `LeaveSmudgeSP`, which repeats Common
+   `LeaveSmudge`'s description verbatim while being a genuine superset of it. The pairing narrows
+   the reading list; it does not replace it.
+
+⚠ The cost of getting this wrong is not a broken build — it is a second implementation of a live
+mechanic sitting unused in the assembly, which is exactly the bloat `UPSTREAM_MODS.md` §5 warns
+about (86 of the 142 CA trait types already vendored here are unused).
 
 
 ## Two ways a gate passes its own verification and is still broken (2026-08-23)
