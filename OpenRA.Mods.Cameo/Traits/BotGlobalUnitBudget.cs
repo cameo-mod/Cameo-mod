@@ -5,6 +5,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Linq;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
@@ -47,13 +48,18 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) => new BotGlobalUnitBudget(init.Self, this);
 	}
 
-	public class BotGlobalUnitBudget : ConditionalTrait<BotGlobalUnitBudgetInfo>, IBotRequestPauseUnitProduction
+	public class BotGlobalUnitBudget : ConditionalTrait<BotGlobalUnitBudgetInfo>, IBotRequestPauseUnitProductionForQueue, IBotCashReservation
 	{
 		readonly World world;
 		readonly OpenRA.Player player;
+		PlayerResources playerResources;
 
 		int lastTick = -1;
-		bool paused;
+		int cachedCombatCount;
+		int reservationTick = -1;
+		int pendingCombatReservations;
+		int cashReservationTick = -1;
+		int pendingCashReservations;
 
 		public BotGlobalUnitBudget(Actor self, BotGlobalUnitBudgetInfo info)
 			: base(info)
@@ -62,27 +68,71 @@ namespace OpenRA.Mods.Cameo.Traits
 			player = self.Owner;
 		}
 
-		bool IBotRequestPauseUnitProduction.PauseUnitProduction
+		protected override void Created(Actor self)
 		{
-			get
-			{
-				if (IsTraitDisabled || Info.GlobalUnitBudget <= 0)
-					return false;
-
-				// Throttle the recompute. Only ever queried on the host (bots run host-side), and the
-				// inputs are synced state, so the decision is deterministic for the orders it gates.
-				var tick = world.WorldTick;
-				if (lastTick < 0 || tick - lastTick >= Info.RecalculationInterval)
-				{
-					lastTick = tick;
-					paused = ComputePaused();
-				}
-
-				return paused;
-			}
+			playerResources = self.Owner.PlayerActor.Trait<PlayerResources>();
 		}
 
-		bool ComputePaused()
+		bool IBotCashReservation.TryReserveCash(int cost, int minimumRemainingCash)
+		{
+			if (cashReservationTick != world.WorldTick)
+			{
+				cashReservationTick = world.WorldTick;
+				pendingCashReservations = 0;
+			}
+
+			if (playerResources.GetCashAndResources() - pendingCashReservations - cost < minimumRemainingCash)
+				return false;
+
+			pendingCashReservations += cost;
+			return true;
+		}
+
+		bool IBotRequestPauseUnitProductionForQueue.PauseUnitProductionForQueue(string queue, ActorInfo actorInfo)
+		{
+			if (IsTraitDisabled || Info.GlobalUnitBudget <= 0)
+				return false;
+
+			// Gate mobile combat actors, not the queue that happens to produce them. This keeps
+			// expansion MCVs, transports, upgrades and research available at the combat cap.
+			if (!IsCombatActor(actorInfo))
+				return false;
+
+			// Throttle the recompute. Only ever queried on the host (bots run host-side), and the
+			// inputs are synced state, so the decision is deterministic for the orders it gates.
+			var tick = world.WorldTick;
+			if (reservationTick != tick)
+			{
+				reservationTick = tick;
+				pendingCombatReservations = 0;
+			}
+
+			if (lastTick < 0 || tick - lastTick >= Info.RecalculationInterval)
+			{
+				lastTick = tick;
+				cachedCombatCount = ComputeCombatCount();
+			}
+
+			var cap = ComputeCap();
+			if (cachedCombatCount + pendingCombatReservations >= cap)
+				return true;
+
+			pendingCombatReservations++;
+			return false;
+		}
+
+		bool IsCombatActor(ActorInfo actorInfo)
+		{
+			if (actorInfo == null || Info.IgnoredActorTypes.Contains(actorInfo.Name))
+				return false;
+
+			if (Info.IgnoreHarvesters && actorInfo.HasTraitInfo<HarvesterInfo>())
+				return false;
+
+			return actorInfo.HasTraitInfo<AttackBaseInfo>();
+		}
+
+		int ComputeCap()
 		{
 			var livingBots = 0;
 			foreach (var p in world.Players)
@@ -98,35 +148,38 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (cap < Info.MinUnitsPerBot)
 				cap = Info.MinUnitsPerBot;
 
-			// Count this bot's live mobile units (IPositionable excludes buildings) - same notion of
-			// "army" the unit builders use. Stop as soon as we reach the cap; no need to count further.
+			return cap;
+		}
+
+		int ComputeCombatCount()
+		{
+			// Count live and already queued mobile combat units. Including queues prevents several
+			// parallel factories from overshooting the shared cap before their units finish.
 			var count = 0;
-			var ignoreNames = Info.IgnoredActorTypes.Count > 0;
 			foreach (var a in world.ActorsHavingTrait<IPositionable>())
 			{
-				if (a.Owner != player || a.IsDead)
-					continue;
-
-				// Resource collectors don't count against the combat budget, so a lower budget
-				// never starves the economy.
-				if (Info.IgnoreHarvesters && a.Info.HasTraitInfo<HarvesterInfo>())
-					continue;
-
-				if (ignoreNames && Info.IgnoredActorTypes.Contains(a.Info.Name))
+				if (a.Owner != player || a.IsDead || !IsCombatActor(a.Info))
 					continue;
 
 				// When not logging, stop as soon as we reach the cap - no need to count further.
 				// With Debug on we count every unit so the log shows the true army size vs the cap.
 				count++;
-				if (!Info.Debug && count >= cap)
-					return true;
 			}
 
-			if (Info.Debug)
-				Log.Write("debug", $"BotBudget {player.InternalName}: livingBots={livingBots} " +
-					$"cap={cap} units={count} paused={count >= cap}");
+			foreach (var queue in world.ActorsWithTrait<ProductionQueue>()
+				.Where(q => q.Actor.Owner == player && q.Trait.Enabled).Select(q => q.Trait))
+				foreach (var item in queue.AllQueued())
+					if (world.Map.Rules.Actors.TryGetValue(item.Item, out var actorInfo) &&
+						actorInfo.HasTraitInfo<IPositionableInfo>() && IsCombatActor(actorInfo))
+						count++;
 
-			return count >= cap;
+			if (Info.Debug)
+			{
+				var cap = ComputeCap();
+				Log.Write("debug", $"BotBudget {player.InternalName}: cap={cap} units={count} paused={count >= cap}");
+			}
+
+			return count;
 		}
 	}
 }

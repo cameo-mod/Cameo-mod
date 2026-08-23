@@ -3991,22 +3991,22 @@
 		Multiplier: 100
 		Prerequisites: mediumbotplayer
 	ProductionTimeMultiplier@hardbotplayer:
-		Multiplier: 90
+		Multiplier: 100
 		Prerequisites: hardbotplayer
 	ProductionTimeMultiplier@veryhardbotplayer:
-		Multiplier: 80
+		Multiplier: 90
 		Prerequisites: veryhardbotplayer
 	ProductionTimeMultiplier@brutalbotplayer:
-		Multiplier: 70
+		Multiplier: 80
 		Prerequisites: brutalbotplayer
 	ProductionTimeMultiplier@challengerbotplayer:
-		Multiplier: 60
+		Multiplier: 70
 		Prerequisites: challengerbotplayer
 	ProductionTimeMultiplier@unbeatablebotplayer:
-		Multiplier: 50
+		Multiplier: 60
 		Prerequisites: unbeatablebotplayer
 	ProductionTimeMultiplier@cameogodbotplayer:
-		Multiplier: 40
+		Multiplier: 50
 		Prerequisites: cameogodbotplayer
 	ProductionCostMultiplier@easiestbotplayer:
 		Multiplier: 115
@@ -4021,22 +4021,22 @@
 		Multiplier: 100
 		Prerequisites: mediumbotplayer
 	ProductionCostMultiplier@hardbotplayer:
-		Multiplier: 95
+		Multiplier: 100
 		Prerequisites: hardbotplayer
 	ProductionCostMultiplier@veryhardbotplayer:
-		Multiplier: 90
+		Multiplier: 95
 		Prerequisites: veryhardbotplayer
 	ProductionCostMultiplier@brutalbotplayer:
-		Multiplier: 85
+		Multiplier: 90
 		Prerequisites: brutalbotplayer
 	ProductionCostMultiplier@challengerbotplayer:
-		Multiplier: 80
+		Multiplier: 85
 		Prerequisites: challengerbotplayer
 	ProductionCostMultiplier@unbeatablebotplayer:
-		Multiplier: 75
+		Multiplier: 80
 		Prerequisites: unbeatablebotplayer
 	ProductionCostMultiplier@cameogodbotplayer:
-		Multiplier: 70
+		Multiplier: 75
 		Prerequisites: cameogodbotplayer
 
 ^BaseBuilding:
@@ -6799,11 +6799,11 @@ CPQDEBUGDUMMY:
 		Interval: 1
 		Amount: 1
 		ShowTicks: False
-		RequiresCondition: (normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && mediumbotinsurance
+		RequiresCondition: (mediumbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && mediumbotinsurance
 	ResourcePurifier@medium:
 		Modifier: 5
 		ShowTicks: False
-		RequiresCondition: (normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && mediumbotinsurance
+		RequiresCondition: (mediumbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && mediumbotinsurance
 	BotInsurance@easy:
 		Condition: easybotinsurance
 		Threshold: 3000
@@ -6812,11 +6812,11 @@ CPQDEBUGDUMMY:
 		Interval: 1
 		Amount: 1
 		ShowTicks: False
-		RequiresCondition: (easybot || normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && easybotinsurance
+		RequiresCondition: (easybot || mediumbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && easybotinsurance
 	ResourcePurifier@easy:
 		Modifier: 5
 		ShowTicks: False
-		RequiresCondition: (easybot || normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && easybotinsurance
+		RequiresCondition: (easybot || mediumbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && easybotinsurance
 	BotInsurance@veryeasy:
 		Condition: veryeasybotinsurance
 		Threshold: 2000
@@ -6825,11 +6825,11 @@ CPQDEBUGDUMMY:
 		Interval: 1
 		Amount: 1
 		ShowTicks: False
-		RequiresCondition: (veryeasybot || easybot || normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && veryeasybotinsurance
+		RequiresCondition: (veryeasybot || easybot || mediumbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && veryeasybotinsurance
 	ResourcePurifier@veryeasy:
 		Modifier: 5
 		ShowTicks: False
-		RequiresCondition: (veryeasybot || easybot || normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && veryeasybotinsurance
+		RequiresCondition: (veryeasybot || easybot || mediumbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && veryeasybotinsurance
 	BotInsurance@easiest:
 		Condition: easiestbotinsurance
 		Threshold: 1000
@@ -6838,11 +6838,11 @@ CPQDEBUGDUMMY:
 		Interval: 1
 		Amount: 1
 		ShowTicks: False
-		RequiresCondition: (easiestbot || veryeasybot || easybot || normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && easiestbotinsurance
+		RequiresCondition: (easiestbot || veryeasybot || easybot || mediumbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && easiestbotinsurance
 	ResourcePurifier@easiest:
 		Modifier: 5
 		ShowTicks: False
-		RequiresCondition: (easiestbot || veryeasybot || easybot || normalbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && easiestbotinsurance
+		RequiresCondition: (easiestbot || veryeasybot || easybot || mediumbot || hardbot || veryhardbot || brutalbot || challengerbot || unbeatablebot || cameogodbot) && easiestbotinsurance
 
 ^Harvester:
 	# Observer Economy Damage tab — see ^Refinery above.

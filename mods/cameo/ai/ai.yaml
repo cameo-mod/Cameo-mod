@@ -3147,6 +3147,31 @@ Player:
 		MinimumConstructionYardCount: 1
 		AdditionalConstructionYardCount: 1
 		BuildAdditionalMCVCashAmount: 4000
+		ExpeditionSitesByBotType:
+			hard: 2
+			veryhard: 2
+			brutal: 3
+			challenger: 3
+			unbeatable: 3
+			cameogod: 3
+		ConstructionYardLimitsByBotType:
+			hard: 3
+			veryhard: 3
+			brutal: 4
+			challenger: 5
+			unbeatable: 5
+			cameogod: 5
+		HarvesterLimitsByBotType:
+			hard: 15
+			veryhard: 18
+			brutal: 21
+			challenger: 24
+			unbeatable: 27
+			cameogod: 30
+		ExpeditionLaunchCash: 7500
+		ExpeditionRepeatCash: 5000
+		LaterExpansionCashStep: 5000
+		ExpeditionConfirmationRadius: 20
 		# Expand with a dedicated MCV. Existing conyards only relocate when recovering
 		# from a specific stuck building-placement request.
 		MoveConyardTick: 0
@@ -3475,7 +3500,9 @@ Player:
 		MinimumDefenseRadius: 10
 		MaximumDefenseRadius: 50
 		MaxResourceCellsToCheck: 5
-		NewProductionCashThreshold: 0
+		NewProductionCashThreshold: 7500
+		NewProductionBotTypes: hard, veryhard, brutal, challenger, unbeatable, cameogod
+		ExcessProductionRecoveryReserve: 4000
 		BuildingProductionMinCashRequirement: 1000
 		DefenseProductionMinCashRequirement: 1500
 		BuildingQueues: Building, RABuilding, BuildingAddons
@@ -4479,6 +4506,19 @@ Player:
 		IdleBaseUnitsMaximum: 50
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000
+		ExcessCashBotTypes: hard, veryhard, brutal, challenger, unbeatable, cameogod
+		RecoveryCashReserve: 4000
+		AdaptiveCounterBotTypes: hard, veryhard, brutal, challenger, unbeatable, cameogod
+		AdaptiveCounterWeight: 40
+		AdaptiveObservationInterval: 250
+		AdaptiveTargetLockDuration: 1500
+		AdaptiveCounterRoleOverrides:
+			ra1_soviets_yakscoutplane: Infantry, LightVehicle
+			ra2_allies_aegiscruiser: Aircraft
+			ra2_soviets_flaktrack: Infantry, Aircraft
+			yuri_gatlingtank: Infantry, Aircraft
+			td_gdi_orca: HeavyArmor
+			futuretech_cryocopter: HeavyArmor, Support
 		# One immediately buildable basic combat unit for each barracks-first faction.
 		OpeningDefenseUnitTypes: td_gdi_minigunner, td_nod_minigunner, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, ts_gdi_lightinfantry, ts_nod_lightinfantry, forgotten_mutant, cabal_cyborginfantry, ra2_allies_gi, ra2_soviets_conscript, yuri_initiate, asianalliance_asianmilitia, steelconsortium_clonetrooper, latinsyndicate_latinmilitia, naxis_naxiriflerecruit, schwarzermond_lunarsoldier, futuretech_enforcer, ixian_lightinfantry, ordos_lightinfantry, tkm_rifleman
 		MaxAircraft: 25

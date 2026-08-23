@@ -201,16 +201,30 @@ namespace OpenRA.Mods.CA.Traits
 				return false;
 
 			var currentBuilding = queue.AllQueued().FirstOrDefault();
+			var expeditionRequest = baseBuilder.GetRequestedRefinery(queue.Actor);
+			if (expeditionRequest.HasValue && baseBuilder.IsRequestedRefineryPlacementPending(queue.Actor) && currentBuilding == null)
+				return false;
+			if (baseBuilder.IsExclusiveConstructionQueue(queue.Actor) && !expeditionRequest.HasValue && currentBuilding == null)
+				return false;
 
 			// Waiting to build something
 			if (currentBuilding == null && failCount < baseBuilder.Info.MaximumFailedPlacementAttempts)
 			{
-				var item = ChooseBuildingToBuild(queue);
+				// Expansion conyards reserve their own queue for exactly one requested refinery.
+				var item = expeditionRequest.HasValue
+					? GetProducibleBuilding(baseBuilder.Info.RefineryTypes, queue.BuildableItems())
+					: ChooseBuildingToBuild(queue);
 				if (item == null)
 					return false;
 
 				// We shouldn't be queueing new buildings (other than refineries) when we're low on cash
 				if ((playerResources.GetCashAndResources() < minCashRequirement && !baseBuilder.Info.RefineryTypes.Contains(item.Name)) || itemQueuedThisTick)
+					return false;
+
+				var isExcessProduction = baseBuilder.Info.ProductionTypes.Contains(item.Name) &&
+					baseBuilder.Info.NewProductionBotTypes.Contains(player.BotType) &&
+					playerResources.GetCashAndResources() > baseBuilder.Info.NewProductionCashThreshold;
+				if (isExcessProduction && !baseBuilder.TryReserveExcessProductionCash(queue.GetProductionCost(item)))
 					return false;
 
 				baseBuilder.RecordOpeningStructureQueued(queue, item);
@@ -314,6 +328,9 @@ namespace OpenRA.Mods.CA.Traits
 						ExtraData = queue.Actor.ActorID,
 						SuppressVisualFeedback = true
 					});
+
+					if (baseBuilder.Info.RefineryTypes.Contains(currentBuilding.Item))
+						baseBuilder.MarkRequestedRefineryPlacementPending(queue.Actor);
 
 					// After succesfuly placing a building, nudge BaseExpansionModules to expand.
 					// We want to avoid expanding too often, so we make a judgement by counting buildings.
@@ -452,7 +469,10 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Make sure that we can spend as fast as we are earning
-			if (baseBuilder.Info.NewProductionCashThreshold > 0 && playerResources.GetCashAndResources() > baseBuilder.Info.NewProductionCashThreshold)
+			var canBuildExcessProduction = baseBuilder.Info.NewProductionBotTypes.Count == 0 ||
+				baseBuilder.Info.NewProductionBotTypes.Contains(player.BotType);
+			if (canBuildExcessProduction && baseBuilder.Info.NewProductionCashThreshold > 0 &&
+				playerResources.GetCashAndResources() > baseBuilder.Info.NewProductionCashThreshold)
 			{
 				var production = GetProducibleBuilding(baseBuilder.Info.ProductionTypes, buildableThings);
 
@@ -473,7 +493,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Only consider building this if there is enough water inside the base perimeter and there are close enough adjacent buildings
-			if (waterState == WaterCheck.EnoughWater && baseBuilder.Info.NewProductionCashThreshold > 0
+			if (canBuildExcessProduction && waterState == WaterCheck.EnoughWater && baseBuilder.Info.NewProductionCashThreshold > 0
 				&& playerResources.Resources > baseBuilder.Info.NewProductionCashThreshold
 				&& AIUtils.IsAreaAvailable<GivesBuildableArea>(world, player, world.Map, baseBuilder.Info.CheckForWaterRadius, baseBuilder.Info.WaterTerrainTypes))
 			{
@@ -696,14 +716,15 @@ namespace OpenRA.Mods.CA.Traits
 
 				case BuildingType.Refinery:
 
-					var requestRef = baseBuilder.RequestedRefineries.Count > 0 ? baseBuilder.RequestedRefineries.Keys.First() : null;
+					var request = baseBuilder.GetRequestedRefinery(producer);
+					var requestRef = request?.Requester;
 
 					// Try and place the refinery near a resource field
 					if (resourceLayer != null)
 					{
 						// If we have failed to place to the requested refinery point, try and place it near the base center
 						var resourceBaseCenter = failCount > 0 ? baseCenter :
-							(requestRef != null ? baseBuilder.RequestedRefineries[requestRef].ConyardLoc : (baseBuilder.ResourceConyardCenter ?? baseCenter));
+							(request.HasValue ? request.Value.ConyardLoc : (baseBuilder.ResourceConyardCenter ?? baseCenter));
 
 						// If we have a ResourceMapModule, only consider the resource types it considers valuable
 						// Otherwise consider any resource type
@@ -724,7 +745,7 @@ namespace OpenRA.Mods.CA.Traits
 							resourcesShouldCheck = nearbyResources.Shuffle(world.LocalRandom).Take(baseBuilder.Info.MaxResourceCellsToCheck);
 						else if (requestRef != null)
 						{
-							resourcesShouldCheck = nearbyResources.OrderBy(c => (c - baseBuilder.RequestedRefineries[requestRef].ResourceLoc).LengthSquared)
+							resourcesShouldCheck = nearbyResources.OrderBy(c => (c - request.Value.ResourceLoc).LengthSquared)
 								.Take(baseBuilder.Info.MaxResourceCellsToCheck);
 						}
 						else
@@ -736,15 +757,10 @@ namespace OpenRA.Mods.CA.Traits
 							var found = findPos(actorType, distanceToBaseIsImportant, producer, resourceBaseCenter, r, baseBuilder.Info.MinBaseRadius, baseBuilder.Info.MaxBaseRadius);
 							if (found.Location != null)
 							{
-								if (baseBuilder.RequestedRefineries.Count > 0)
-									baseBuilder.RequestedRefineries.Remove(requestRef);
 								return found;
 							}
 						}
 					}
-
-					if (baseBuilder.RequestedRefineries.Count > 0)
-						baseBuilder.RequestedRefineries.Remove(requestRef);
 
 					// Try and find a free spot somewhere else in the base
 					return findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, baseCenter, baseBuilder.Info.MinBaseRadius, baseBuilder.Info.MaxBaseRadius);
