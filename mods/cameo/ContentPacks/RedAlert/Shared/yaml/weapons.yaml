@@ -994,7 +994,7 @@ SpyPlaneTargeting2:
 	Warhead@Condition: GrantExternalCondition
 		Duration: 750
 
-ChronoAI:
+ChronoReinforcementsSpawner:
 	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
@@ -1005,6 +1005,15 @@ ChronoAI:
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
 	Warhead@2Flash: ChronoFlashEffect
+
+ChronoAI:
+	Inherits: ChronoshiftImpact
+	ReloadDelay: 1
+	Projectile: InstantExplode
+	Warhead@1Actor: SpawnActor
+		Actors: ra1_allies_ranger, ra1_allies_alliedlighttank, ra1_allies_alliedmediumtank, ra1_allies_sheridanassaulttank, ra1_allies_alliedtigerheavytank, ra1_allies_alliedtankdestroyer, ra1_allies_alliedartillery, ra1_allies_alliedapc
+		Range: 5
+		ValidTargets: Air, Ground, Water
 
 DTMutate:
 	ValidTargets: Ground, Air
