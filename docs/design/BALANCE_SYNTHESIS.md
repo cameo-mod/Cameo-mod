@@ -475,7 +475,7 @@ resolves each armed actor's Cameo **class** (via the `class_anchor`/`balance_inc
 template inheritance, not a name heuristic), (b) lists actors whose class is NOT in the §9
 air-allowed set yet carry an unconditional (non-upgrade) AA armament, and (c) emits to
 `docs/audit/latest/aa_gating.md` **via `run_all.sh`** (bash only — PowerShell `>` writes UTF-16,
-[[cameo-powershell-utf16-hazard]]). The vehicle/aircraft gate (support/scout/hi-tank; no
+). The vehicle/aircraft gate (support/scout/hi-tank; no
 flying-artillery AA) is the same check over `vehicles.yaml`/`aircraft.yaml`. This tool is the
 clean way to enforce §9 mod-wide; the scan above is only the scoping evidence that it's needed.
 

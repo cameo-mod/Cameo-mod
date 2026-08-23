@@ -890,7 +890,7 @@ meter, and a glow/overlay hook reusing the existing weapon-glow effects.
 
 **DONE WHEN** built, `dotnet build -c Release -p:TargetPlatform=win-x64` clean, deployed
 to `engine/bin`, and a CONCRETE actor instantiates it (an abstract-only template proves
-nothing — see memory `cameo-dll-deploy-engine-bin`).
+nothing).
 
 **VERIFY:** boot with a gatling actor present, no `Cannot locate type` in the log.
 
@@ -1915,7 +1915,7 @@ is empty.
 the stack is wired in yaml (`Shielded` 22 files, `Integrity` 6, `ChangesShield` 6,
 `ArmorPlating` 2) and boot-gated across `0556f8fc9` → `4cdf8b2a8` → `ab467fe52`. The
 rulings (R1–R14), the ONE-POOL/ONE-BAR law and the two-intercepting-layers hazard live in
-`docs/design/ARMOR_LAYERS.md` + memory `cameo-armor-layers-and-granularity`.
+`docs/design/ARMOR_LAYERS.md`.
 
 ⚠ **The bug class this shipped with, because boot gates cannot catch it:** two layers that
 both intercept a hit each return damage modifier 1 and then each charge their own pool, so
@@ -2144,8 +2144,8 @@ Plate 175 / **Heroic 200**, `^RailgunWeapon` 68/72/76/**80**, `^LaserWeapon` 44/
 (A few of the 52 are `^HealingWeapon` / `^RepairWeapon`, where a higher number is a bigger
 heal and therefore correct.)
 
-**This is the ordering law working exactly as written** ([[cameo-weapon-ordering-law]]:
-AP → heavy). Heroic is being asked to be two incompatible things at once: the heaviest rung
+**This is the ordering law working exactly as written** (macro-type priority x LIGHT/HEAVY,
+AP -> heavy). Heroic is being asked to be two incompatible things at once: the heaviest rung
 of the LIGHT→HEAVY infantry ladder, and "the best armour in the game". Under any law where
 AP scales up with weight, those contradict. Three ways out:
 
@@ -2414,7 +2414,7 @@ them** into one sequence so we never lose the order. Each phase links the doc th
 - **Never hand-edit a balance number in yaml.** Everything flows ledger/workbook -> `apply_balance`.
   `audit_balance_drift` fails red when yaml and the committed ledger disagree.
 - **Anchors are BASELINE comparisons, NOT per-unit targets.** HP/Cost, DPS/Cost, A/B aggregates
-  describe the class; members are UNIQUE, spread by the formula + synthesis. (memory `cameo-anchor-definition`)
+  describe the class; members are UNIQUE, spread by the formula + synthesis.
 
 ---
 
@@ -2467,7 +2467,13 @@ synthesize→apply (F) not started. Phase-3 discrepancy triage open (`docs/balan
 ### 2. PHASE A — finish the WEAPON / WARHEAD foundation (unblocks DPS + range for everything)
 
 *Balance cannot be finalized until every weapon's effective DPS + range is stable, because pricing
-is driven by EFFECTIVE DPS = raw × ∏ firepower knobs (memory `cameo-firepower-mult-in-dps`).*
+is driven by EFFECTIVE DPS = raw × ∏ firepower knobs.*
+⚠ **`FirepowerMultiplier` is LIVE AS A READ, RETIRED AS A WRITE** (verified in the code
+2026-08-23). Pricing must keep reading it — `formula.py` is literally
+`return base * firepower_multiplier`, `extract_stats.py` pulls one unconditional,
+locally-defined multiplier per actor, and 152 actors carry one. But nothing may ADD a new
+one: W26/R1 is retiring that class of knob. Saying only "live" invites a new one; saying
+only "retired" makes the pricing look broken.
 
 - **A1. Generator reconcile (AreaDamage drift) — TOP PRIORITY.** `gen_weapon_template.py` still
   emits `SpreadDamage` + old naming; the 54-template flip was a one-shot script. Update the
@@ -2477,11 +2483,11 @@ is driven by EFFECTIVE DPS = raw × ∏ firepower knobs (memory `cameo-firepower
   (would revert). (`../history/handoffs/AREADAMAGE_HANDOFF_2026-08-04.md` §3c)
 - **A2. Cannon/weapon rebuild** — `CannonAP_{L/M/H}` (anti-heavy) + `CannonHE_{L/M/H}` (anti-veh);
   current cannons -> CannonHE, TankDestroyerCannon -> CannonAP_Light. Built by `gen_weapon_template.py`
-  via the two-level ordering law (macro priority × light/heavy). (memory `cameo-cannon-weapon-templates`,
+  via the two-level ordering law (macro priority × light/heavy). (
   `cameo-weapon-ordering-law`; docs `ARMOR_SYSTEM.md` §PROFILE, `WEAPON_TYPE_SYSTEM.md`)
 - **A3. Projectile + effect template libraries** — `^Projectile<Family>_<Level>` + `^Effect<...>`
   (3-way split, `WEAPON_3WAY_SPLIT.md`, `PROJECTILE_AND_EFFECT_LAYER.md`). Retrofit weapons inherit
-  them. Custom effects = RGBA PngSheet, pair every effect with a sound (memory `cameo-custom-effects-pngsheet`).
+  them. Custom effects = RGBA PngSheet, pair every effect with a sound.
 - **A4. Weapon tuning laws** (all in `AREADAMAGE_WARHEAD.md` §3–§5):
   - Energy `_ExtraDamage` chips repurposed with LOCKED ladders (Laser=anti-inf, Railgun=anti-building
     +superheavy Concrete 200>Steel 175>Wood 150 / Shield 10, Tesla=anti-inf+shield keep, Prism/Magic
@@ -2492,7 +2498,7 @@ is driven by EFFECTIVE DPS = raw × ∏ firepower knobs (memory `cameo-firepower
   - Overall spread reduction + a **spread-pricing term** in the formula (diminishing returns,
     expected-targets-hit, capped by the single-target case).
 - **A5. Retire deprecated inline damage keys** — 297 live weapons still on inline `Warhead@1Dam`
-  etc.; convert to template inherits (memory `cameo-versus-only-in-templates`; DESIGN §870).
+  etc.; convert to template inherits (DESIGN §870).
 
 **Guard for A:** `audit_warhead_split`, `audit_template_conformance`, `find_empty_warhead.py`
 (now blocking in `run_all.sh`), + BOOT GATE. Versus lives ONLY in `^Warhead_*` templates.
@@ -2501,7 +2507,7 @@ is driven by EFFECTIVE DPS = raw × ∏ firepower knobs (memory `cameo-firepower
 
 ### 3. PHASE B — REFERENCE MATERIAL (the deep research; feeds every anchor)
 
-*The 3-layer framework (memory `cameo-source-library-scope`, `cameo-balance-synthesis`).*
+*The 3-layer framework.*
 
 - **B1. Layer 1 completeness — `ORIGINAL_UNIT_STATS.md`.** The cross-game library. Ensure every
   Cameo unit has its original-source row(s), `[STAT]` (raw numbers) vs `[IDENTITY]` (role/flavor)
@@ -2509,7 +2515,7 @@ is driven by EFFECTIVE DPS = raw × ∏ firepower knobs (memory `cameo-firepower
   Touhou; AsianAlliance = Generals China. (⚠ RA2 unitstatistics "health" is a 1–5 rating, NOT raw HP.)
 - **B2. Layer 2 — extract the remaining reference MODS + normalize.** DONE: DTA, CA, SP, MO.
   **PENDING: CnCR, RV.** Extract their unit stats, normalize, fold into the per-unit reference rows.
-  (memory `cameo-source-library-scope`). Also `RESEARCH_NOTES.md` (SP done).
+. Also `RESEARCH_NOTES.md` (SP done).
 - **B3. Layer 3 — synthesis inputs.** Old Cameo values + `FACTION_IDENTITY.md` + rock-paper-scissors
   mandate. This is the "well-reasoned" judgment layer that combines B1+B2 into an intended role.
 
@@ -2518,7 +2524,7 @@ is driven by EFFECTIVE DPS = raw × ∏ firepower knobs (memory `cameo-firepower
 ### 4. PHASE C — ANCHORS (per-class baselines, the synthesis output)
 
 *Class anchor = the baseline a class's members are spread around by the formula. Aggregate targets
-only (HP/Cost, DPS/Cost, A/B), NOT per-unit. (memory `cameo-anchor-definition`, `cameo-baseline-law`)*
+only (HP/Cost, DPS/Cost, A/B), NOT per-unit.*
 
 - **C1. Vehicle anchors — LOCKED (13 classes).** `class_anchors.json` + `anchor_decisions_log.md`
   ("★ LOCKED 2026-08-01"): epic-top, ≤2.0× A+B spread, HP 10k-steps, DPS/Cost 0.5–1.5. RESUME =
@@ -2528,11 +2534,11 @@ only (HP/Cost, DPS/Cost, A/B), NOT per-unit. (memory `cameo-anchor-definition`, 
   scout, closecombat, grenadier, mortar, melee, archer, heavy, flying, rocket_trooper, heavy_sniper,
   pure_sniper, special_forces). NEED: 4 new templates (heavy sniper / rocket trooper / archer /
   support), `^AntiTankAntiAir` split, fix scout verifier tier (forgotten_mutantsoldier is T3 not T1).
-  (memory `cameo-infantry-class-program-state`). Lock into `class_anchors.json`.
+. Lock into `class_anchors.json`.
 - **C3. Defense + aircraft anchors.** Per-class baselines for defenses + aircraft (memory
   `cameo-formula-future-tasks`). AA class-gating (only some classes get AA).
 
-**Anchor law (memory `cameo-verifier-tier-k-match`):** baseline + its verifier must share the same
+**Anchor law:** baseline + its verifier must share the same
 TechTier M-bucket AND K, or the 2.5× identity breaks (T1=T2=M1.0, T3=0.75, T4/5=0.5; tier from
 tech-building prereqs only; gatling K1.25; charge-up K adjust).
 
@@ -2540,21 +2546,21 @@ tech-building prereqs only; gatling K1.25; charge-up K adjust).
 
 ### 5. PHASE D — the FORMULA (FORMULA_V2 completeness)
 
-*Read `FORMULA_V2.md` FIRST (memory `cameo-baseline-law`): O=P=Q=cost baselines, 2×/2×/250%
+*Read `FORMULA_V2.md` FIRST: O=P=Q=cost baselines, 2×/2×/250%
 verifiers, stat bands, conversion checklist.*
 
-- **D1. Complete the missing terms** (memory `cameo-formula-future-tasks`): per-class baselines
+- **D1. Complete the missing terms**: per-class baselines
   (defenses + infantry), AA pricing, AoE pricing, per-ability specials, the **spread-pricing term**
   (from A4). Bake OUT per-actor multipliers, keep only global 50%+150% (BALANCE_SYNTHESIS law).
 - **D2. Verifier laws** — tier+K match (C3), FirepowerMultiplier in effective DPS (unconditional one
-  per actor; deploy/undeploy units priced as separate actors — memory `cameo-firepower-mult-in-dps`).
+  per actor; deploy/undeploy units priced as separate actors —).
 - Code home: `tools/balance/formula.py` (+ `extract_stats.py` provenance).
 
 ---
 
 ### 6. PHASE E — the EXCEL / WORKBOOK pipeline
 
-*Dual-write law (memory `cameo-sheet-yaml-dual-write`): price set in `cameo_armor_system.xlsx` first
+*Dual-write law: price set in `cameo_armor_system.xlsx` first
 (M in its cell; O/P/Q recompute), yaml FOLLOWS; never scale costs directly in yaml. If
 `~$cameo_armor_system.xlsx` exists the workbook is OPEN in Excel — do NOT write it; queue + say so.*
 
@@ -2594,9 +2600,9 @@ aircraft, then per-faction sweeps.
   `cameo_armor_system.xlsx` vs the new laws; retire the legacy sheet when clean.
 - **YAML cleanup** — `MEGAPLAN_YAML_CLEANUP.md`, `weapons_cleanup_plan.md`: dead weapon files
   (redalert2.yaml etc.) deletion, actor-inheritance -> `^Templates` review (deferred, grandfathered
-  — memory `cameo-no-actor-inheritance`), closed-file-set discipline.
+  —), closed-file-set discipline.
 - **ContentPack migration** (the mission end-goal) — split remaining monoliths, per-faction ai.yaml,
-  move assets in (memory `cameo-mission-contentpacks`, `docs/MIGRATION.md`). Balance-independent;
+  move assets in (`docs/MIGRATION.md`). Balance-independent;
   can run in parallel.
 
 ---
@@ -2632,17 +2638,17 @@ G  discrepancy triage + yaml/ContentPack cleanup  (parallel throughout)
 
 ### 10. GUARDRAILS (invariants that must ALWAYS hold — the pipeline is not "done" until all green)
 
-- **BOOT GATE before every commit** (memory `cameo-launch-before-commit`) — the only thing that
+- **BOOT GATE before every commit** — the only thing that
   catches junk trait nodes.
 - **`tools/audit/run_all.sh` green** — incl. `audit_balance_drift` (yaml==ledger), `audit_warhead_split`,
   `audit_template_conformance`, `find_empty_warhead.py` (blocking), `audit_stat_formulas`.
 - **Never hand-edit balance numbers** (pipeline only). **Never change a warhead/Burst/BurstDelays
-  without explicit permission** (memory `cameo-warhead-change-permission`).
-- **Versus ONLY in `^Warhead_*` templates** (memory `cameo-versus-only-in-templates`).
+  without explicit permission**.
+- **Versus ONLY in `^Warhead_*` templates**.
 - **Scoped `git add`, never `-A`** (maintainer WIP). **Reports via bash `run_all.sh` only** (PowerShell
   `>` = UTF-16 hazard). **Underscore-only naming** (no hyphens).
 - **The DLL loads from `engine/bin`** (rebuild after C# changes; copy to the tracked `mods/cameo`
-  copy for release — memory `cameo-dll-deploy-engine-bin`).
+  copy for release —).
 
 ---
 

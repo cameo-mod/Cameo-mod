@@ -61,7 +61,7 @@ import physical_state_price as psp      # noqa: E402
 # weapon on a state unit feeds the same meter (the maintainer's preferred fix).
 # ⚠ NOT comparable to the 58 an earlier scratchpad script produced: that one mixed the
 # actor-level factor together with the intra-weapon `fed_share` the pricing already sees.
-DILUTION_BASELINE = 34
+DILUTION_BASELINE = 32
 
 
 def meter_damage(rs, weapon: str) -> tuple[float, float]:

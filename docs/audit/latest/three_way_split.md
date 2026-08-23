@@ -1,11 +1,11 @@
-# audit_three_way_split — 1178 of 2325 weapons fire more than ONE main warhead
+# audit_three_way_split — 1176 of 2345 weapons fire more than ONE main warhead
 
-    917  correct — exactly one main warhead
-    230  none — utility / effect-only weapons
-   1178  VIOLATIONS — stacked mains
+    933  correct — exactly one main warhead
+    236  none — utility / effect-only weapons
+   1176  VIOLATIONS — stacked mains
 
   mains  weapons
-      2    431
+      2    429
       3    277
       4    219
       5     60
@@ -19,7 +19,7 @@
      13      1
      14      3
 
-454 distinct stacked combinations; the 20 most common:
+455 distinct stacked combinations; the 20 most common:
 
 | count | combination |
 |---|---|
@@ -33,16 +33,16 @@
 | 12 | FlakWeapon + HeavyAAWeapon + HeavyBomb + MissileAP_Medium |
 | 10 | CannonAP_Light + CannonHE_Medium |
 | 10 | MissileAP_Light + Tesla_Heavy |
-| 10 | MissileHE_Light + MissileHE_Medium |
 | 10 | Bullet_Light + Bullet_Medium + Laser_Heavy |
 | 10 | Chaingun + FlakWeapon + Grenade + HeavyBomb + MediumMissile + ShrapnelWeapon |
 | 10 | Chaingun + LaserWeapon + MediumMissile + SmallArms |
 | 9 | 1Dam + CannonHE_Medium |
 | 9 | HeavyCannon + HeavyMissile + MediumCannon + MediumFlameWeapon + MediumMissile + ShrapnelWeapon + TeslaChargedWeapon + TeslaWeapon |
 | 9 | 1Dam + Bullet_Light + Bullet_Medium |
-| 8 | Concussion_Medium + MissileHE_Heavy |
 | 8 | Concussion_Medium + Demolition_Light |
+| 8 | MissileHE_Light + MissileHE_Medium |
 | 8 | Chaingun + Flak_Medium + LightMissile + TankDestroyerCannon |
+| 8 | CannonHE_Heavy + Concussion_Medium + Demolition_Light |
 
-WARN 1178 violating weapons (ratchet 1178)
+WARN 1176 violating weapons (ratchet 1176)
 Lower `SPLIT_BASELINE` as W24 converts weapons; never raise it.

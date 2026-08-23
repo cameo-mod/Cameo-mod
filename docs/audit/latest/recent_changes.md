@@ -1,19 +1,22 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **374**, files touched: **663**
+Commits reviewed: **381**, files touched: **856**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
-| R1 | balance yaml edited without the ledger | 15 | yes |
+| R1 | balance yaml edited without the ledger | 18 | yes |
 | R2 | audit script never run by run_all.sh | 3 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 10 | partly |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 11 | partly |
 | R4 | engine/mod.config change (needs boot gate) | 9 | no |
 
 
-## R1 — hand-edited balance numbers (15)
+## R1 — hand-edited balance numbers (18)
 
 | commit | date | subject | fields |
 |---|---|---|---|
+| 71ea9200 | 2026-08-23 | separate AI chrono from chrono reinforcements an | Range, ReloadDelay |
+| c49a8f20 | 2026-08-23 | Add drop pods to the dropship bay and rework scr | Range, Speed |
+| 924e4f68 | 2026-08-23 | Add the dropship bay | BuildDuration, Cost, HP, Speed |
 | 47a66b6c | 2026-08-21 | fix(w24): the nuclear batch collapsed 15 warhead | Damage |
 | 33959758 | 2026-08-21 | HeatRayBeam1-4: complete Inferno 3-way split + s | Range, ReloadDelay |
 | 89c94c89 | 2026-08-20 | D2K: 3-way split OrniBomb and OrniBombC | Range |
@@ -40,10 +43,11 @@ Commits reviewed: **374**, files touched: **663**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (10)
+## R3 — commits without provenance (11)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| 4ec4fd1c | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
 | 20f15194 | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
 | 026963fd | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
 | 2bb046ae | 2026-08-20 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
@@ -75,21 +79,21 @@ Commits reviewed: **374**, files touched: **663**
 
 | file | commits touching it |
 |---|---|
-| docs/design/BALANCE_PROGRAM_PLAN.md | 100 |
+| docs/design/BALANCE_PROGRAM_PLAN.md | 102 |
 | mods/cameo/weapons/weapons.yaml | 73 |
 | tools/balance/gen_weapon_template.py | 56 |
-| docs/balance/derived/redalert_soviets.json | 44 |
+| docs/balance/derived/redalert_soviets.json | 45 |
+| docs/design/ROADMAP.md | 38 |
 | DEVELOPMENT_LOG.md | 38 |
-| docs/design/ROADMAP.md | 36 |
-| docs/balance/derived/d2k_ixian.json | 36 |
-| docs/balance/derived/redalert2mod_consortium.json | 36 |
-| docs/balance/derived/redalert2mod_futuretech.json | 36 |
-| docs/balance/derived/tiberiandawn_nod.json | 36 |
-| docs/balance/derived/tiberiansun_forgotten.json | 36 |
-| docs/balance/derived/tiberiansun_nod.json | 34 |
-| docs/balance/derived/shared_redalert.json | 34 |
-| docs/balance/derived/starcraft_protoss.json | 34 |
-| docs/balance/derived/d2k_ordos.json | 33 |
+| docs/balance/derived/d2k_ixian.json | 37 |
+| docs/balance/derived/redalert2mod_consortium.json | 37 |
+| docs/balance/derived/redalert2mod_futuretech.json | 37 |
+| docs/balance/derived/tiberiandawn_nod.json | 37 |
+| docs/balance/derived/tiberiansun_forgotten.json | 37 |
+| docs/balance/derived/shared_redalert.json | 35 |
+| docs/balance/derived/starcraft_protoss.json | 35 |
+| docs/balance/derived/tiberiansun_nod.json | 35 |
+| docs/balance/derived/d2k_ordos.json | 34 |
 
 
 ## Reviewer checklist (not machine-checkable)
@@ -103,10 +107,10 @@ Commits reviewed: **374**, files touched: **663**
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 8 R1 and 0 R3 of 15/10 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 11 R1 and 0 R3 of 18/11 findings are in scope; the rest predate the gate.
 
 
 ## FAIL
 
-- 8 R1, 3 R2, 0 R3 blocking finding(s)
+- 11 R1, 3 R2, 0 R3 blocking finding(s)
 

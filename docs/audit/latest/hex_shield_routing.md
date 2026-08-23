@@ -1,9 +1,9 @@
 # Hex-shield routing audit
 
-Resolved shield receivers: **1603**
+Resolved shield receivers: **1602**
 Dormant non-shield footprint actors: **261**
 Other dormant overlay actors: **0**
-Total actors carrying shield overlays: **1864**
+Total actors carrying shield overlays: **1863**
 Errors: **0**
 
 

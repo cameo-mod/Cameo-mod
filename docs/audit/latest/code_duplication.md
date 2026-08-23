@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **266** (min 5 statements), C# files: **346** (min 8 lines)
+Python files: **268** (min 5 statements), C# files: **346** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
@@ -52,7 +52,7 @@ Python files: **266** (min 5 statements), C# files: **346** (min 8 lines)
 |---|---|---|
 | 5 | 28fac3656bc8fc3b | tools/audit/find_orphan_old_keys.py:20 CENTRAL; tools/audit/find_orphan_old_keys_multi.py:18 CENTRAL; tools/audit/weapon_families.py:23 CENTRAL; tools/balance/fix_orphan_old_keys.py:19 CENTRAL; tools/balance/fix_orphan_old_keys_multi.py:16 CENTRAL |
 | 3 | 9a62b7cb0c6b46dc | tools/audit/audit_level_ladder.py:53 COMPANION_MARKERS; tools/audit/audit_three_way_split.py:65 COMPANION_MARKERS; tools/audit/audit_tier_weapon_class.py:55 COMPANION_MARKERS |
-| 3 | eba2f9dc1c86d3e4 | tools/audit/audit_level_ladder.py:51 LADDER; tools/audit/audit_tier_weapon_class.py:59 LADDER; tools/balance/gen_weapon_template.py:2032 STORM_LEVELS |
+| 3 | eba2f9dc1c86d3e4 | tools/audit/audit_level_ladder.py:51 LADDER; tools/audit/audit_tier_weapon_class.py:59 LADDER; tools/balance/gen_weapon_template.py:2045 STORM_LEVELS |
 | 3 | efe4c032c5c937c9 | tools/audit/audit_level_ladder.py:52 MAIN_DAMAGE_TYPES; tools/audit/audit_three_way_split.py:62 MAIN_DAMAGE_TYPES; tools/audit/audit_tier_weapon_class.py:54 MAIN_DAMAGE_TYPES |
 | 2 | 153d4fc74c8cdd31 | tools/tilesets/build_ra_temperate_basalt_trees.py:20 ACTORS; tools/tilesets/build_volcanic_basalt_gimp_brushes.py:20 ACTORS |
 | 2 | 2665d6950cd4417a | tools/audit/find_orphan_old_keys.py:27 OLD_TO_NEW; tools/balance/fix_orphan_old_keys.py:25 OLD_TO_NEW |

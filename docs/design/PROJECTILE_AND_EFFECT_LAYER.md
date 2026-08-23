@@ -513,7 +513,7 @@ Used by 5 weapons; each **overrides the projectile art per unit** (`Image: tsnod
 
 **Decomposition (target shape):**
 - `@wh:` — resolve **per user by unit tier**, NOT one global warhead (maintainer,
-  2026-08-03). Per the Tier↔WeaponClass law (memory `cameo-tier-weaponclass-law`,
+  2026-08-03). Per the Tier↔WeaponClass law (
   `weapon_classes.yaml` header): T1→`^Warhead_MissileAP_Light`, T2→`_Medium`,
   T3+→`_Heavy`; a **between-tier** unit keeps *both* adjacent levels (the Medium+Light
   stack is a legitimate between-T1/T2 weapon, not merely a hack). Warhead budget =

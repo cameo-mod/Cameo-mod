@@ -122,63 +122,39 @@ Documented in `PHYSICAL_STATE_SYSTEM.md` §5 but not built: **Sonic → `Resonan
 new C#), **Hex** (Magic: −firepower/−accuracy/disable specials), **ArmorBreach**, **Knockback**
 (needs new C#). Only **Temperature** (98.6% exposure) and **Corrosion** (45.0%) exist today.
 
-## ⛔ RATCHET BREACH — `audit_level_ladder` 10 vs ratchet 9 (found 2026-08-23)
+## ⚠ THE LEVEL LADDERS — 9 families still broken, and it needs one ruling (2026-08-23)
 
-The suite exits 1 on this. **It is ours, from tick tank commit `f9b71bffa`**, and it stayed
-invisible because `docs/audit/latest/level_ladder.md` had not been regenerated since `52b364cb5`,
-which PREDATES that commit — so a FAIL sat in the tree reporting itself as a WARN at baseline.
+**No longer blocking.** It was briefly `FAIL 10 vs ratchet 9`: the tick tank commit `f9b71bffa`
+moved `TS90mm`/`TSLaser90mm` onto `CannonAP_Medium`, which gave `CannonAP` a second populated rung
+and so made the family measurable for the first time — exposing an inversion rather than creating
+one. It was invisible because `level_ladder.md` had not been regenerated since `52b364cb5`, which
+PREDATES that commit. The RA1 Allies cryo conversion then moved the count back to **9 = ratchet**,
+so the suite no longer exits 1 on it.
 
-Moving `TS90mm` / `TSLaser90mm` from `CannonHE_Medium` to `CannonAP_Medium` gave `CannonAP` a
-SECOND populated rung, so the family crossed the "2+ rungs with 2+ weapons" threshold and became
-measurable for the first time. What it measured:
-
-| family | Light | Medium | verdict |
-|---|--:|--:|---|
-| `CannonAP` | **48000** _(n=7)_ | **6000** _(n=2)_ | ⛔ INVERTED — Light hits **8x** harder than Medium |
-
-⚠ The tick tank change did not CREATE this; it EXPOSED it. `CannonAP_Light` was already at 48000
-while the weapons now on `CannonAP_Medium` sit at 6000. One of the two rungs is wrong.
-
-### All ten, so they can be ruled on in one pass
-
-`CannonAP` is the family that crossed the measurability threshold, but it is not the only broken
-ladder — it is the tenth. The full report (`python tools/audit/audit_level_ladder.py`, measured at
-`519175ae`) reads:
+⚠ **9 of 16 measurable families still have a broken ladder**, and only ONE of them is the tick
+tank's doing. This is a balance question, so it cannot be hand-fixed (rule 3) and the ratchet must
+never be raised:
 
 | family | Light | Medium | Heavy | Super | verdict |
 |---|--:|--:|--:|--:|---|
-| `CannonAP` | 48000 _(n=7)_ | 6000 _(n=2)_ | — | — | ⛔ INVERTED |
-| `Chemical` | 20000 _(n=9)_ | 32000 _(n=9)_ | 30000 _(n=3)_ | — | ⛔ INVERTED |
-| `Flak` | 32000 _(n=2)_ | 8000 _(n=15)_ | — | — | ⛔ INVERTED |
-| `Inferno` | 6000 _(n=5)_ | 10000 _(n=4)_ | 6000 _(n=5)_ | — | ⛔ INVERTED |
-| `MissileAP` | 20000 _(n=23)_ | 12000 _(n=26)_ | 11000 _(n=32)_ | — | ⛔ INVERTED |
-| `Tesla` | — | — | 12000 _(n=47)_ | 6500 _(n=20)_ | ⛔ INVERTED |
-| `Thermobaric` | — | 24000 _(n=2)_ | 18000 _(n=2)_ | — | ⛔ INVERTED |
-| `Bullet` | 4000 _(n=51)_ | 4000 _(n=40)_ | — | — | ⚠ FLAT |
-| `Demolition` | 40000 _(n=36)_ | — | 40000 _(n=17)_ | — | ⚠ FLAT |
-| `MissileFire` | 24000 _(n=2)_ | 24000 _(n=2)_ | — | — | ⚠ FLAT |
+| `Bullet` | 4000 _(49)_ | 4000 _(40)_ | — | — | FLAT |
+| `MissileFire` | 24000 _(2)_ | 24000 _(2)_ | — | — | FLAT |
+| `CannonAP` | 48000 _(7)_ | 6000 _(2)_ | — | — | INVERTED — the tick tank one, 8x |
+| `Chemical` | 20000 _(9)_ | 32000 _(9)_ | 30000 _(3)_ | — | INVERTED at the top |
+| `Flak` | 32000 _(2)_ | 8000 _(15)_ | — | — | INVERTED |
+| `Inferno` | 6000 _(5)_ | 10000 _(4)_ | 6000 _(5)_ | — | INVERTED at the top |
+| `MissileAP` | 20000 _(23)_ | 12000 _(26)_ | 12000 _(31)_ | — | INVERTED |
+| `Tesla` | — | — | 12000 _(47)_ | 6500 _(20)_ | INVERTED into Super |
+| `Thermobaric` | — | 24000 _(2)_ | 18000 _(2)_ | — | INVERTED |
 
-Rising correctly: `CannonHE`, `Flame`, `Laser`, `MissileChem`, `MissileHE`. Sixteen more families
-are still too thin to judge (fewer than 2 rungs with 2+ weapons), so this list can only grow as
-W23/W24 adoption fills the rungs — which is an argument for ruling on the shape of the ladder
-rather than on ten separate pairs of numbers.
+**What is needed:** a ruling on whether the LIGHT rung or the HEAVY rung is wrong in each case,
+then `extract_stats` → ledger → `apply_balance --confirm`. Some are clearly thin-sample artefacts
+(`CannonAP` Medium is n=2 against Light n=7; `Flak` Light is n=2 against Medium n=15) and some are
+not (`Bullet` is 49 vs 40 weapons and dead flat; `MissileAP` is 23/26/31 and monotonically wrong).
 
-Three shapes are visible, and they may not want the same answer:
-
-* **`MissileAP` (n=81) and `Tesla` (n=67)** are monotonically DESCENDING across well-populated
-  rungs. That is not a stray weapon; that is the whole family built the wrong way round.
-* **`CannonAP`, `Flak`, `Thermobaric`** invert across a rung holding only 2 weapons — one thin
-  rung against a populated one, so the small side is the likelier error.
-* **`Bullet` and `Demolition`** are flat across 91 and 53 weapons: the levels were never
-  differentiated at all, which is a different question from an inversion.
-
-**Needs a maintainer ruling**, then `extract_stats` → ledger → `apply_balance --confirm`. These
-are balance numbers, so they cannot be hand-fixed (rule 3), and the ratchet must not be raised —
-`LADDER_BASELINE` in `tools/audit/audit_level_ladder.py` says LOWER ONLY, and lowering it is how
-this closes.
-
-⭐ **Process lesson:** a ratchet re-measured only when someone remembers is not a ratchet.
-`f9b71bffa` was boot-gated and shipped without re-running the suite.
+⭐ **Process lesson, and the more expensive one:** a ratchet that is only re-measured when someone
+remembers is not a ratchet. `f9b71bffa` was boot-gated and shipped without re-running the suite,
+so a FAIL sat in the tree for three commits reporting itself as a WARN at baseline.
 
 ## ⛔ OPEN DECISION — how the Cryo families get adopted (2026-08-23)
 
@@ -470,7 +446,7 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    and docs; propose merge/generalize/delete plan. NO deletes without maintainer sign-off.
 4. **[M] New weapon templates** (AFTER vehicles) — kill warhead-mixing, **HARD LIMIT 2 inherits/weapon**
    (special >2 only if justified, bar TBD); then weapon-class pipeline + unit↔weapon binding. Maintainer
-   names them + I propose. See [[cameo-weapon-structure-rules]] + [[cameo-weapon-ordering-law]].
+   names them + I propose. See +.
    DESIGNED + SIGNED OFF 2026-08-01/02 (survives /compact via docs+memory): two-level ordering law
    (ARMOR_SYSTEM "PROFILE construction" + `cameo-weapon-ordering-law`); 4-dimensional differentiation
    model + flat/% orthogonal axis + Super tier + AoE-FF rule + CORRECTED %-warhead
@@ -572,7 +548,7 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
    deemed fine/grandfathered** (116 = RA2 civ-terrain `ra2ct*`; ~83 variant/husk: `*mkii`←base,
    `ifv_*`←ifv, `E1`←minigunner, badger family, WC2 towers). NOT a must-fix — do it as its own pass
    later; resolution = inline (cross-pack/one-off) or hoist to `^Template` (same-pack). Memory:
-   [[cameo-no-actor-inheritance]]. Audit cmd in the memory. Don't stop pipeline work for it.
+. Audit cmd in the memory. Don't stop pipeline work for it.
 
 **ENGINE workflow.** ⚠ **CORRECTED 2026-08-15 — `engine/` is NOT a submodule of this repo.**
 Verified: no `.gitmodules`, no `engine/.git`, `.gitignore` lists `engine`/`engine*`, and

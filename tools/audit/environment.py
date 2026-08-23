@@ -43,7 +43,11 @@ ENGINE_ASSEMBLIES = (
     "engine/OpenRA.Game",
     "engine/OpenRA.Mods.Common",
     "engine/OpenRA.Mods.AS",
-    "engine/OpenRA.Mods.CA",
+    # ⚠ CA is vendored at the REPO ROOT, like OpenRA.Mods.Cameo — it is not part of the
+    # engine and `engine/OpenRA.Mods.CA` can never exist. Pointing there made incomplete()
+    # return a reason on EVERY machine, so every run diverted to degraded/ and the tracked
+    # docs/audit/latest/ could never be rewritten by anyone. (Found 2026-08-23.)
+    "OpenRA.Mods.CA",
     "engine/OpenRA.Mods.Cnc",
     "engine/OpenRA.Mods.D2k",
 )

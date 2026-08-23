@@ -19,7 +19,7 @@ surrounds it. It is not yet threaded into `DESIGN.md` / `ROADMAP.md` (the mainta
 live uncommitted edits there); fold the binding parts in on the next clean commit pass.
 
 Related: `ARMOR_SYSTEM.md` (Versus/step law), `WEAPON_TYPE_SYSTEM.md`,
-`WEAPON_3WAY_SPLIT.md`, `FORMULA_V2.md` (SUM law), memory `cameo-expanding-damage-trait`
+`WEAPON_3WAY_SPLIT.md`, `FORMULA_V2.md` (SUM law)
 (→ now the AreaDamage decision), `cameo-versus-only-in-templates`.
 
 ---
@@ -164,7 +164,7 @@ combos = a second priced warhead; ability = K; delivery = projectile/effect laye
 Sonic (flat) scales with HP → anti-low-HP / anti-swarm (2 shots vs infantry, 256 vs an epic);
 Magic (%HP) converges to ~11 shots regardless of HP/armor → anti-high-HP / giant-killer. The
 oppressive giant-killer belongs on the *rare* weapon (Magic), not the common Sonic. Keep as-is;
-they are damage-calculation TYPES, not chips. (Matches memory `cameo-weapon-differentiation`.)
+they are damage-calculation TYPES, not chips. (Matches.)
 
 ### 4. Spread pricing + spread reduction (open formula work)
 
@@ -224,7 +224,7 @@ split the *template* responsibilities.
 6. **Epic vehicle template split** (§6) — independent; can run in parallel.
 
 Everything after step 1 is boot-gated per commit; scoped `git add`; the C# needs a rebuild before
-the boot gate (`cameo-launch-before-commit`).
+the boot gate.
 
 ### 8. The universal conversion CASCADES to retrofitted weapons (discovered + reverted 2026-08-03)
 
@@ -311,7 +311,7 @@ weapon files and names the offending weapon (0 = safe); `check-yaml` reproduces 
 full boot. **Run the empty-type scan after ANY template warhead deletion/rename.** (Memory:
 `cameo-empty-warhead-crash`.)
 
-**Build/deploy fact (memory `cameo-dll-deploy-engine-bin`):** `dotnet build` → `engine/bin`
+**Build/deploy fact:** `dotnet build` → `engine/bin`
 (gitignored, what the running `engine/bin/OpenRA.exe` loads). `mods/cameo/OpenRA.Mods.Cameo.dll`
 is a git-TRACKED copy that does NOT auto-update (was a month stale) — refresh it from engine/bin
 only for release/commit.

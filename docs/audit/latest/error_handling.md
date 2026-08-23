@@ -1,6 +1,6 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **266**
+Files scanned: **268**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
@@ -40,7 +40,7 @@ Files scanned: **266**
 | tools/audit/audit_rank_decoration.py | 68 | handler body discards the error |
 | tools/audit/audit_three_way_split.py | 103 | handler body discards the error |
 | tools/audit/audit_tier_weapon_class.py | 76 | handler body discards the error |
-| tools/audit/audit_unique_traits.py | 71 | handler body discards the error |
+| tools/audit/audit_unique_traits.py | 73 | handler body discards the error |
 | tools/audit/audit_upgrades.py | 145 | handler body discards the error |
 | tools/audit/audit_weapon_suffixes.py | 119 | handler body discards the error |
 | tools/audit/audit_weapon_suffixes.py | 185 | handler body discards the error |
@@ -193,10 +193,10 @@ Files scanned: **266**
 | file | line | detail |
 |---|---|---|
 | tools/audit/audit_doc_claims.py | 104 | `subprocess.run()` without check= |
-| tools/audit/audit_doc_health.py | 75 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 75 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 92 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 112 | `subprocess.run()` without check= |
+| tools/audit/audit_doc_health.py | 130 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 87 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 104 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 130 | `subprocess.run()` without check= |
 | tools/balance/apply_balance.py | 271 | `subprocess.run()` without check= |
 | tools/balance/apply_balance.py | 273 | `subprocess.run()` without check= |
 | tools/balance/compensate_retrofit.py | 170 | `subprocess.run()` without check= |

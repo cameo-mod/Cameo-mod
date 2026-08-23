@@ -239,7 +239,12 @@ def main() -> int:
         checkable = {i for i in sections if not i.isdigit()}
         for f in tracked("*.md", "*.py", "*.yaml", "*.sh", "*.json"):
             rel = str(f).replace("\\", "/")
-            if rel.startswith("docs/history/") or rel == "tools/audit/audit_doc_health.py":
+            # tools/tests/ is excluded on purpose: the D8 unit tests assert on the exact
+            # wrong-law label this check fires on ("## §12.0a MEAN-100"), so scanning them
+            # makes the check report its own fixtures and D8 can never pass. Same class as
+            # the D5 self-references — a guard must not fail on the evidence it is built from.
+            if (rel.startswith("docs/history/") or rel.startswith("tools/tests/")
+                    or rel == "tools/audit/audit_doc_health.py"):
                 continue
             text = read(f)
             if text is None:

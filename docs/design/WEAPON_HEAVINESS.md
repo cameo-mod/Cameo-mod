@@ -327,7 +327,7 @@ _Merged 2026-08-23 from `docs/design/CONTINUOUS_WEAPON_HEAVINESS.md`, unedited b
 Two standing laws collide:
 
 - **The 3-way split** (`WEAPON_3WAY_SPLIT.md`): a weapon is ONE warhead + ONE projectile + ONE effect.
-- **The Tier↔WeaponClass law** (`weapon_classes.yaml` header, memory `cameo-tier-weaponclass-law`):
+- **The Tier↔WeaponClass law** (`weapon_classes.yaml` header):
   a unit sitting *between* tech tiers carries **two adjacent-level warheads** —
   `Bullet_Light + Bullet_Medium`.
 
@@ -481,7 +481,7 @@ lives in `OpenRA.Mods.Cameo`.
 - `Storm` is genuinely irregular and needs an explicit exception or a hand-authored table.
 - `CannonChem` / `MissileChem` need their one extra entry preserved.
 - The **plating** entries (ARMOR, BLAST, COMPOSITE, HAZMAT, REFLECTOR) must keep offset 0 — they
-  are layer-selected, not level-scaled (memory `cameo-armor-layers-and-granularity`).
+  are layer-selected, not level-scaled.
 - `Shield` keeps its 2× offset.
 - Per-weapon `Versus` overrides remain **forbidden** outside `^Warhead_*` templates (standing rule).
 

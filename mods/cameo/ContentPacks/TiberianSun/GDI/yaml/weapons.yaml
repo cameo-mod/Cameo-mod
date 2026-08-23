@@ -1136,7 +1136,12 @@ TSDroppod1:
 		ImpactActors: false
 		ValidTargets: Infantry, Vehicle, Building, Wall, Ground, Water, Air
 		AirThreshold: 8c0
-		Inaccuracy: 1024
+	# ⚠ `Inaccuracy: 1024` was here and the engine was throwing it away: FireShrapnelWarhead
+	# has no such field (Weapon, WeaponName, Amount, AimChance, AimTargetStances,
+	# ThrowWithoutTarget, AllowDirectHit, AroundTarget — that is the whole list), so the drop
+	# pods have never scattered. Removed rather than moved, because the scatter belongs on the
+	# FIRED weapon (E1Droppod) or its projectile, and neither carries one today — so putting it
+	# there would CHANGE behaviour rather than restore it. That is a balance call.
 	Warhead@Effect: CreateEffect
 		ImpactSounds: meteor1.aud, meteor2.aud
 		ValidTargets: Ground, Air, Water

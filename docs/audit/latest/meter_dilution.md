@@ -1,10 +1,9 @@
-# audit_meter_dilution — 34 actors fire a state weapon alongside unconditional non-state weapons
+# audit_meter_dilution — 32 actors fire a state weapon alongside unconditional non-state weapons
 
 | actor | guns | with state | state guns' share | dilution |
 |---|--:|--:|--:|--:|
 | `japan_exorcistoitank` | 5 | 3 | 6.2% | **16.12x** |
 | `cabal_hunterdronecarrier` | 3 | 1 | 10.4% | **9.60x** |
-| `ra1_allies_destroyer` | 2 | 1 | 14.5% | **6.89x** |
 | `cabal_manticore` | 2 | 1 | 18.7% | **5.35x** |
 | `cabal_manticore_backup` | 2 | 1 | 18.7% | **5.35x** |
 | `forgotten_cannonboat` | 2 | 1 | 29.5% | **3.39x** |
@@ -12,7 +11,6 @@
 | `forgotten_juggerboat` | 3 | 1 | 30.1% | **3.33x** |
 | `A10Carrier` | 3 | 1 | 30.5% | **3.28x** |
 | `td_nod_buggy` | 2 | 1 | 33.3% | **3.00x** |
-| `ra1_allies_sheridanassaulttank` | 3 | 1 | 44.4% | **2.25x** |
 | `japan_tankbuster` | 2 | 1 | 49.9% | **2.00x** |
 | `A10` | 2 | 1 | 49.9% | **2.00x** |
 | `terran_warhound` | 2 | 1 | 50.1% | **2.00x** |
@@ -32,20 +30,22 @@
 | `wc2_humans_mage` | 3 | 2 | 72.0% | **1.39x** |
 | `td_nod_buggymkii` | 9 | 7 | 78.2% | **1.28x** |
 | `tkm_trooper` | 2 | 1 | 85.7% | **1.17x** |
+| `ts_gdi_kodiakcommandship` | 2 | 1 | 87.3% | **1.15x** |
+| `nodlasercorvette` | 2 | 1 | 92.2% | **1.08x** |
 
-_(4 more — pass `--all`)_
+_(2 more — pass `--all`)_
 
 ## distribution
 
 - 1.0-1.5x: **10**
 - 1.5-2.0x: **11**
-- 2.0-3.0x: **3**
-- 3.0x+: **10**
+- 2.0-3.0x: **2**
+- 3.0x+: **9**
 
-## condition-gated actors the model cannot judge — 162
+## condition-gated actors the model cannot judge — 175
 
 Every armament is gated, so no two can be shown to fire together. This is the IFV
 shape, DEFERRED by maintainer ruling; it needs a variant-aware model, not a count.
 
-WARN 34 diluted actors (ratchet 34)
+WARN 32 diluted actors (ratchet 32)
 Lower `DILUTION_BASELINE` as carriers are reworked; never raise it.
