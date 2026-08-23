@@ -1,27 +1,5 @@
 # OpenRA Cameo — Design Document
 
-## AI personality selection
-
-Each bot draws one of five squad-manager personalities per match: Rush,
-Turtle, Tech, Expansion, or Steamroller. Selection is implemented by the
-existing synchronized `GrantRandomCondition` trait on `Player`; the lobby
-continues to expose only difficulty bot types.
-
-The personality effect is currently confined to the squad manager. Each
-personality has its own `SquadManagerBotModuleCA` instance gated by
-`genericbot && personality-*`, while base building, unit production, budgets,
-and difficulty definitions remain shared. The Steamroller profile is documented
-as having **at most one harasser**: the engine short-circuits creation of the
-first guerrilla squad, and zero guerrilla units is not expressible in YAML.
-
-There is currently no in-game way to reveal which personality a bot drew.
-Cameo has no condition-triggered text-notification trait, and the CN observer
-announcement requires one. In-game personality confirmation is a follow-up.
-
-`RushInterval` and `RushAttackScanRadius` are deliberately absent from the
-personality blocks. They are stale keys from an older squad manager and are not
-declared by either the vendored CA implementation or the pinned engine.
-
 _The distilled, binding design contract for this mod. Every AI agent session
 and every contributor reads this FIRST. The long-form historical analysis
 lives in [MASTER_REPORT.md](history/MASTER_REPORT_2026-07-08.md) (not a live roadmap — active
@@ -2469,3 +2447,25 @@ Race*. Key motifs that can be mined for upgrades, unit names, and faction flavor
 
 These sources are used only as parody/satire references; the faction remains a
 fictional sci-fi faction, not an endorsement of any real-world ideology.
+
+## 19. AI bot personalities
+
+Each bot draws one of five squad-manager personalities per match: Rush,
+Turtle, Tech, Expansion, or Steamroller. Selection is implemented by the
+existing synchronized `GrantRandomCondition` trait on `Player`; the lobby
+continues to expose only difficulty bot types.
+
+The personality effect is currently confined to the squad manager. Each
+personality has its own `SquadManagerBotModuleCA` instance gated by
+`genericbot && personality-*`, while base building, unit production, budgets,
+and difficulty definitions remain shared. The Steamroller profile is documented
+as having **at most one harasser**: the engine short-circuits creation of the
+first guerrilla squad, and zero guerrilla units is not expressible in YAML.
+
+There is currently no in-game way to reveal which personality a bot drew.
+Cameo has no condition-triggered text-notification trait, and the CN observer
+announcement requires one. In-game personality confirmation is a follow-up.
+
+`RushInterval` and `RushAttackScanRadius` are deliberately absent from the
+personality blocks. They are stale keys from an older squad manager and are not
+declared by either the vendored CA implementation or the pinned engine.
