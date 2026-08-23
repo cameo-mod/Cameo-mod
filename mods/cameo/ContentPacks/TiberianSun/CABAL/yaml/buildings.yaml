@@ -41,7 +41,7 @@ cabal_refinery:
 		Amount: -40
 	ProvidesPrerequisite@buildingname:
 	SelectionDecorations:
-	GivesBuildableArea: ##########
+	GivesBuildableArea:
 		AreaTypes: building, cityi
 	WithResourceStoragePipsDecoration:
 		Position: BottomLeft
@@ -86,9 +86,9 @@ cabal_powerplant:
 	RevealsShroud:
 		Range: 4c0
 	ScalePowerWithHealth:
-	AcceptsDeliveredExperience: ##########
+	AcceptsDeliveredExperience:
 	ProvidesPrerequisite@buildingname:
-		ValidTypes: building ##########
+		ValidTypes: building
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights

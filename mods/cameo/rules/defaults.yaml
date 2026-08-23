@@ -2570,7 +2570,7 @@
 	GrantConditionOnDamageState@DAMAGED:
 		Condition: damaged
 		ValidDamageStates: Light, Medium, Heavy, Critical
-	Parachutable: ##########
+	Parachutable:
 		FallRate: 20
 		KilledOnImpassableTerrain: true
 		GroundCorpseSequence:
@@ -2578,7 +2578,7 @@
 		WaterImpactSound: splash9.aud
 		WaterCorpseSequence: small_splash
 		ParachutingCondition: parachute
-	WithParachute: ##########
+	WithParachute:
 		ShadowImage: parach_shadow
 		ShadowSequence: idle
 		Image: parach
@@ -3361,7 +3361,7 @@
 			Radius: 128
 	MapEditorData:
 		Categories: Infantry
-	Parachutable: ##########
+	Parachutable:
 		FallRate: 25
 		KilledOnImpassableTerrain: true
 		GroundCorpseSequence: corpse
@@ -3369,7 +3369,7 @@
 		WaterImpactSound: splash9.aud
 		WaterCorpseSequence: small_splash
 		ParachutingCondition: parachute
-	WithParachute: ##########
+	WithParachute:
 		ShadowImage: parach_shadow
 		ShadowSequence: idle
 		Image: parach
@@ -3592,7 +3592,7 @@
 		Voice: Poisoned
 		DeathTypes: TiberiumDeath, RA2VirusDeath, RadiationDeath
 		RequiresCondition: !chronobeamed
-	DeathSounds@ZAPPED: ##########
+	DeathSounds@ZAPPED:
 		Voice: Zapped
 		DeathTypes: ElectricityDeath
 		RequiresCondition: !chronobeamed
@@ -4059,7 +4059,7 @@
 		RequiresBaseProvider: true
 		BuildSounds: constru2.aud, hvydoor1.aud, placbldg.aud, build5.aud
 		UndeploySounds: cashturn.aud
-		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune ##########
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 3
@@ -4511,7 +4511,7 @@
 		Dimensions: 1,1
 		Footprint: x
 		BuildSounds: hvydoor1.aud
-		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune ##########
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune
 	FootprintPlaceBuildingPreview:
 		TilesetPalettes:
 			VOLCANIC: ra_temperat

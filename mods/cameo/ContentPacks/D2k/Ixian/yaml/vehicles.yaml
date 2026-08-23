@@ -1072,13 +1072,13 @@ heavy_rocket_raider.ixian:
 		LocalYaw: 64, -64
 		PauseOnCondition: !ammo
 		MuzzleSequence: muzzle
-	Armament@Guns: ##########
+	Armament@Guns:
 		Weapon: RaiderGuns
 		LocalOffset: 256,0,256
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
-	Armament@Upgrade: ##########
+	Armament@Upgrade:
 		Weapon: RaiderGuns_upgrade
 		LocalOffset: 256,0,256
 		MuzzleSequence: muzzle
@@ -1574,13 +1574,13 @@ duelist_tank.ixian:
 		LocalOffset: 256,0,320
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
-	Armament@Guns: ##########
+	Armament@Guns:
 		Weapon: HMG_Duelist
 		LocalOffset: 128,-128,128, 128,128,128
 		MuzzleSequence: muzzle2
 		MuzzlePalette: d2keffect
 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
-	Armament@Upgrade: ##########
+	Armament@Upgrade:
 		Weapon: HMG_Duelist_upgrade
 		LocalOffset: 128,-128,128, 128,128,128
 		MuzzleSequence: muzzle2

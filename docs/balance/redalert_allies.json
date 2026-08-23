@@ -76,6 +76,7 @@
       "pricing": true,
       "range": "3375",
       "reloaddelay": "6",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
@@ -104,6 +105,7 @@
       "pricing": true,
       "range": "3375",
       "reloaddelay": "6",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
@@ -114,6 +116,63 @@
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "ChainGunMH60",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 48, 0",
+        "spread": "46",
+        "tag": "BulletCryo_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "3375",
+      "reloaddelay": "6",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@PRIMARYCryo",
+      "versus_templates": [
+       "^Warhead_BulletCryo_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_BulletCryo_Medium"
+      ],
+      "weapon": "ChainGunMH60Cryo",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "secondary",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 48, 0",
+        "spread": "46",
+        "tag": "BulletCryo_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "3375",
+      "reloaddelay": "6",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@SECONDARYCryo",
+      "versus_templates": [
+       "^Warhead_BulletCryo_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_BulletCryo_Medium"
+      ],
+      "weapon": "ChainGunMH60Cryo",
       "weapon_class_source": "template"
      }
     ],
@@ -220,16 +279,16 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
+        "falloff": "100, 72, 50, 32, 19, 9, 0",
+        "spread": "105",
+        "tag": "CryoBlast_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "8000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "falloff": "100, 60, 27, 0",
+        "spread": "53",
+        "tag": "MissileCryo_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -242,12 +301,14 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "Hellfire",
-       "^CryoMissileProjectile"
+       "^Warhead_CryoBlast_Medium",
+       "^Warhead_MissileCryo_Heavy",
+       "^Projectile_Missile_Heavy",
+       "^Effect_Cryo"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_CryoBlast_Medium",
+       "^Warhead_MissileCryo_Heavy"
       ],
       "weapon": "HellfireCryo",
       "weapon_class_source": "template"
@@ -345,9 +406,9 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "466",
-        "tag": "Demolition_Heavy",
+        "falloff": "100, 72, 50, 32, 19, 9, 0",
+        "spread": "140",
+        "tag": "CryoBlast_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -359,11 +420,11 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "RapierBombs",
-       "^CryoMissileProjectile"
+       "^Warhead_CryoBlast_Heavy",
+       "^Effect_Cryo"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy"
+       "^Warhead_CryoBlast_Heavy"
       ],
       "weapon": "RapierBombsCryo",
       "weapon_class_source": "template"
@@ -415,16 +476,16 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
+        "falloff": "100, 72, 50, 32, 19, 9, 0",
+        "spread": "105",
+        "tag": "CryoBlast_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "8000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "falloff": "100, 60, 27, 0",
+        "spread": "53",
+        "tag": "MissileCryo_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -436,12 +497,14 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@SECONDARYUpgrade",
       "versus_templates": [
-       "Aphid_AA",
-       "^CryoMissileProjectile"
+       "^Warhead_CryoBlast_Medium",
+       "^Warhead_MissileCryo_Heavy",
+       "^Projectile_Missile_Heavy",
+       "^Effect_Cryo"
       ],
       "warheads": [
-       "^Warhead_Concussion_Medium",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_CryoBlast_Medium",
+       "^Warhead_MissileCryo_Heavy"
       ],
       "weapon": "AphidCryo_AA",
       "weapon_class_source": "template"
@@ -1027,6 +1090,7 @@
       "pricing": true,
       "range": "11412",
       "reloaddelay": "14",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Flak_Medium",
@@ -1037,6 +1101,36 @@
        "^Warhead_Flak_Medium"
       ],
       "weapon": "zsu_23",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 68, 44, 26, 12, 0",
+        "spread": "43",
+        "tag": "FlakCryo_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "11412",
+      "reloaddelay": "14",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Cryo",
+      "versus_templates": [
+       "^Warhead_FlakCryo_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_FlakCryo_Medium"
+      ],
+      "weapon": "zsu_23Cryo",
       "weapon_class_source": "template"
      }
     ],
@@ -1691,17 +1785,10 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
-        "tag": "Sniper_Light",
+        "falloff": "100, 48, 0",
+        "spread": "30",
+        "tag": "BulletCryo_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
-        "tag": "Sniper_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
@@ -1712,11 +1799,12 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "LightSniper",
-       "^CryoMissileProjectile"
+       "^Warhead_BulletCryo_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Cryo"
       ],
       "warheads": [
-       "^Warhead_Sniper_Light"
+       "^Warhead_BulletCryo_Light"
       ],
       "weapon": "CryoLightSniper",
       "weapon_class_source": "template"
@@ -1726,17 +1814,10 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "10",
-        "tag": "Sniper_Light",
+        "falloff": "100, 48, 0",
+        "spread": "30",
+        "tag": "BulletCryo_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
-        "tag": "Sniper_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
@@ -1747,11 +1828,12 @@
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "LightSniper",
-       "^CryoMissileProjectile"
+       "^Warhead_BulletCryo_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Cryo"
       ],
       "warheads": [
-       "^Warhead_Sniper_Light"
+       "^Warhead_BulletCryo_Light"
       ],
       "weapon": "CryoLightSniper",
       "weapon_class_source": "template"
@@ -1834,6 +1916,7 @@
       "pricing": true,
       "range": "6500",
       "reloaddelay": "48",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Light",
@@ -1873,6 +1956,7 @@
       "pricing": false,
       "range": "6500",
       "reloaddelay": "48",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Light",
@@ -1885,6 +1969,67 @@
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RAVulcan",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "5",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "16000",
+        "falloff": "100, 48, 0",
+        "spread": "46",
+        "tag": "BulletCryo_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6500",
+      "reloaddelay": "48",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@PRIMARYCryo",
+      "versus_templates": [
+       "^Warhead_BulletCryo_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_BulletCryo_Medium"
+      ],
+      "weapon": "RAVulcanCryo",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "5",
+      "burstdelays": "3",
+      "damage_warheads": [
+       {
+        "damage": "16000",
+        "falloff": "100, 48, 0",
+        "spread": "46",
+        "tag": "BulletCryo_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "6500",
+      "reloaddelay": "48",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@GARRISONEDCryo",
+      "versus_templates": [
+       "^Warhead_BulletCryo_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_BulletCryo_Medium"
+      ],
+      "weapon": "RAVulcanCryo",
       "weapon_class_source": "template"
      }
     ],
@@ -2340,6 +2485,7 @@
       "pricing": true,
       "range": "7777",
       "reloaddelay": "7",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Sniper_Light",
@@ -2377,6 +2523,7 @@
       "pricing": false,
       "range": "7777",
       "reloaddelay": "7",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Sniper_Light",
@@ -2420,6 +2567,67 @@
       "warheads": [],
       "weapon": "GenericC4",
       "weapon_class_source": "none"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "7777",
+        "falloff": "100, 48, 0",
+        "spread": "30",
+        "tag": "BulletCryo_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "7777",
+      "reloaddelay": "7",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@PRIMARYCryo",
+      "versus_templates": [
+       "^Warhead_BulletCryo_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_BulletCryo_Light"
+      ],
+      "weapon": "Colt45Cryo",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "0",
+      "damage_warheads": [
+       {
+        "damage": "7777",
+        "falloff": "100, 48, 0",
+        "spread": "30",
+        "tag": "BulletCryo_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": false,
+      "range": "7777",
+      "reloaddelay": "7",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@GARRISONEDCryo",
+      "versus_templates": [
+       "^Warhead_BulletCryo_Light",
+       "^Projectile_Sniper_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_BulletCryo_Light"
+      ],
+      "weapon": "Colt45Cryo",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3604,6 +3812,7 @@
       "pricing": true,
       "range": "5159",
       "reloaddelay": "47",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
@@ -3614,6 +3823,34 @@
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "90mm",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 61, 28, 0",
+        "spread": "55",
+        "tag": "CannonCryo_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5159",
+      "reloaddelay": "47",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Cryo",
+      "versus_templates": [
+       "^Warhead_CannonCryo_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_CannonCryo_Medium"
+      ],
+      "weapon": "90mmCryo",
       "weapon_class_source": "template"
      }
     ],
@@ -3831,6 +4068,7 @@
       "pricing": true,
       "range": "6819",
       "reloaddelay": "60",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonHE_Medium",
@@ -3843,6 +4081,34 @@
        "^Warhead_CannonAP_Light"
       ],
       "weapon": "AlliedTankDestroyerCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "24000",
+        "falloff": "100, 61, 28, 0",
+        "spread": "55",
+        "tag": "CannonCryo_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "6819",
+      "reloaddelay": "60",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Cryo",
+      "versus_templates": [
+       "^Warhead_CannonCryo_Medium",
+       "^Projectile_Shell_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_CannonCryo_Medium"
+      ],
+      "weapon": "AlliedTankDestroyerCannonCryo",
       "weapon_class_source": "template"
      }
     ],
@@ -3930,6 +4196,7 @@
       "pricing": true,
       "range": "5915",
       "reloaddelay": "60",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
@@ -3942,6 +4209,34 @@
        "^Warhead_CannonHE_Medium"
       ],
       "weapon": "TigerCannon",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "16000",
+        "falloff": "100, 61, 28, 0",
+        "spread": "74",
+        "tag": "CannonCryo_Heavy",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "5915",
+      "reloaddelay": "60",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Cryo",
+      "versus_templates": [
+       "^Warhead_CannonCryo_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_CannonCryo_Heavy"
+      ],
+      "weapon": "TigerCannonCryo",
       "weapon_class_source": "template"
      }
     ],
@@ -4949,6 +5244,7 @@
       "pricing": true,
       "range": "4359",
       "reloaddelay": "10",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Bullet_Light",
@@ -4959,6 +5255,36 @@
        "^Warhead_Bullet_Light"
       ],
       "weapon": "M60mg",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "5",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 48, 0",
+        "spread": "30",
+        "tag": "BulletCryo_Light",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "pricing": true,
+      "range": "4359",
+      "reloaddelay": "10",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Cryo",
+      "versus_templates": [
+       "^Warhead_BulletCryo_Light",
+       "^Projectile_Bullet_Light",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_BulletCryo_Light"
+      ],
+      "weapon": "M60mgCryo",
       "weapon_class_source": "template"
      }
     ],
@@ -5404,6 +5730,7 @@
       "pricing": true,
       "range": "5023",
       "reloaddelay": "64",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonAP_Light",
@@ -5458,34 +5785,27 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
+        "damage": "16000",
+        "falloff": "100, 60, 27, 0",
+        "spread": "40",
+        "tag": "MissileCryo_Medium",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5023",
       "reloaddelay": "64",
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "SheridanMissiles",
-       "^CryoMissileProjectile"
+       "^Warhead_MissileCryo_Medium",
+       "^Projectile_Missile_Light",
+       "^Effect_Cryo"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileCryo_Medium"
       ],
       "weapon": "SheridanMissilesCryo",
       "weapon_class_source": "template"
@@ -5514,6 +5834,7 @@
       "pricing": true,
       "range": "5023",
       "reloaddelay": "58",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@MG",
       "versus_templates": [
        "^Warhead_Bullet_Light",
@@ -5526,6 +5847,64 @@
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SheridanVulcan",
+      "weapon_class_source": "template"
+     },
+     {
+      "damage_warheads": [
+       {
+        "damage": "16000",
+        "falloff": "100, 61, 28, 0",
+        "spread": "55",
+        "tag": "CannonCryo_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5023",
+      "reloaddelay": "64",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Cryo",
+      "versus_templates": [
+       "^Warhead_CannonCryo_Medium",
+       "^Projectile_Shell_Medium",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_CannonCryo_Medium"
+      ],
+      "weapon": "SheridanCannonCryo",
+      "weapon_class_source": "template"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "damage_warheads": [
+       {
+        "damage": "4000",
+        "falloff": "100, 48, 0",
+        "spread": "46",
+        "tag": "BulletCryo_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": true,
+      "range": "5023",
+      "reloaddelay": "58",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@MGCryo",
+      "versus_templates": [
+       "^Warhead_BulletCryo_Medium",
+       "^Projectile_Bullet_Medium",
+       "^Effect_Cryo"
+      ],
+      "warheads": [
+       "^Warhead_BulletCryo_Medium"
+      ],
+      "weapon": "SheridanVulcanCryo",
       "weapon_class_source": "template"
      }
     ],

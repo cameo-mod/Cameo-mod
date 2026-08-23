@@ -94,6 +94,7 @@ ra1_allies_alliedmediumtank:
 		RecoilRecovery: 38
 		LocalOffset: 720,0,80
 		MuzzleSequence: muzzle
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithMuzzleSmoke:
@@ -113,6 +114,13 @@ ra1_allies_alliedmediumtank:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
+	Armament@Cryo:
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 720,0,80
+		MuzzleSequence: muzzle
+		Weapon: 90mmCryo
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_alliedheavyaatank:
 	Inherits: ^Vehicle
 	Inherits@Template: ^AntiAirVehicleTemplate
@@ -247,7 +255,7 @@ ra1_allies_alliedartillery:
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
-	Armament@Upgrade: ##########
+	Armament@Upgrade:
 		Weapon: 155mmCryo
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
@@ -329,6 +337,7 @@ ra1_allies_ranger:
 		Weapon: M60mg
 		MuzzleSequence: muzzle
 		LocalOffset: 128,0,43
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -341,6 +350,11 @@ ra1_allies_ranger:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_gpssatellitesupport
 
+	Armament@Cryo:
+		MuzzleSequence: muzzle
+		LocalOffset: 128,0,43
+		Weapon: M60mgCryo
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_minelayer:
 	Inherits: ^Tank
 	Inherits@mines: ^DeployToClearMines
@@ -436,6 +450,7 @@ ra1_allies_sheridanassaulttank:
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Missile:
 		Weapon: SheridanMissiles
 		Recoil: 32
@@ -460,6 +475,7 @@ ra1_allies_sheridanassaulttank:
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 4
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	FirepowerMultiplier@MultiWeapon:
 		Modifier: 25
 	AttackTurreted:
@@ -489,6 +505,22 @@ ra1_allies_sheridanassaulttank:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
+	Armament@Cryo:
+		Recoil: 64
+		RecoilRecovery: 26
+		LocalOffset: 640,0,128
+		MuzzleSequence: muzzle
+		AmmoUsage: 4
+		PauseOnCondition: ammo < 4
+		Weapon: SheridanCannonCryo
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	Armament@MGCryo:
+		LocalOffset: 384,-64,128
+		MuzzleSequence: muzzle
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 4
+		Weapon: SheridanVulcanCryo
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_reconranger:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
@@ -528,7 +560,7 @@ ra1_allies_reconranger:
 		MuzzleSequence: muzzle
 		LocalOffset: 730,0,166
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
-	Armament@Upgrade: ##########
+	Armament@Upgrade:
 		Weapon: CryoReconRangerRecoillessGun
 		MuzzleSequence: muzzle
 		LocalOffset: 730,0,166
@@ -620,6 +652,7 @@ ra1_allies_alliedtigerheavytank:
 		RecoilRecovery: 50
 		LocalOffset: 1200,0,200
 		MuzzleSequence: muzzle
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -638,6 +671,13 @@ ra1_allies_alliedtigerheavytank:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
+	Armament@Cryo:
+		Recoil: 75
+		RecoilRecovery: 50
+		LocalOffset: 1200,0,200
+		MuzzleSequence: muzzle
+		Weapon: TigerCannonCryo
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_alliedtankdestroyer:
 	Inherits: ^Tank
 	Inherits@Template: ^TankDestroyerTemplate
@@ -676,6 +716,7 @@ ra1_allies_alliedtankdestroyer:
 		RecoilRecovery: 38
 		LocalOffset: 1150,0,250
 		MuzzleSequence: muzzle
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	AttackFrontal:
 		FacingTolerance: 0
 	WithMuzzleOverlay:
@@ -692,6 +733,13 @@ ra1_allies_alliedtankdestroyer:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
+	Armament@Cryo:
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 1150,0,250
+		MuzzleSequence: muzzle
+		Weapon: AlliedTankDestroyerCannonCryo
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_chronotank:
 	Inherits: ^Vehicle
 	Inherits@Template: ^EpicVehicleTemplate
@@ -816,7 +864,7 @@ ra1_allies_phasetransport:
 		LocalOffset: 192,0,176
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
-	Armament@Upgrade: ##########
+	Armament@Upgrade:
 		Weapon: APTuskCryo
 		LocalOffset: 192,0,176
 		MuzzleSequence: muzzle

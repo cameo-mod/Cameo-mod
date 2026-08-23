@@ -269,9 +269,9 @@ tkm_technicaltank:
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -532,9 +532,9 @@ tkm_abrams:
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -607,7 +607,7 @@ tkm_t72m:
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
-	Armament@machinegun: ##########
+	Armament@machinegun:
 		Weapon: tkmkord
 		LocalOffset: 768,85,90, 768,-85,90
 	WithMuzzleOverlay:
@@ -622,9 +622,9 @@ tkm_t72m:
 		RequiresCondition: tkm_upgrade_pointdefensesystem
 	WithAmmoPipsDecoration:
 		RequiresCondition: tkm_upgrade_pointdefensesystem
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	Voiced:
 		VoiceSet: TSVehicle
 	ActorStatValues:
@@ -676,9 +676,9 @@ tkm_trenchtruck:
 		Range: 6c0
 	SelectionDecorations:
 	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	Voiced:
 		VoiceSet: TSVehicle
 	Selectable:
@@ -1032,9 +1032,9 @@ tkm_trenchtank:
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	Voiced:
 		VoiceSet: TSVehicle
 	Selectable:
@@ -1093,9 +1093,9 @@ tkm_t30:
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	Voiced:
 		VoiceSet: TSVehicle
 	ActorStatValues:

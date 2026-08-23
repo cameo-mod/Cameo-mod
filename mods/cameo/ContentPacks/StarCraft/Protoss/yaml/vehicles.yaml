@@ -293,20 +293,20 @@ protoss_idol:
 		Step: 140
 	Shielded:
 		RegenAmount: 280
-	Armament@Upgrade1: ##########
+	Armament@Upgrade1:
 		Weapon: WaveforceCannonChargedLaser
 		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 600,0,100
 		MuzzleSequence: muzzle
-	Armament@Upgrade2: ##########
+	Armament@Upgrade2:
 		Weapon: WaveforceCannonDistortedBeam1
 		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 600,0,100
 		FireDelay: 1
 		MuzzleSequence: muzzle
-	Armament@Upgrade3: ##########
+	Armament@Upgrade3:
 		Weapon: WaveforceCannonDistortedBeam2
 		Recoil: 128
 		RecoilRecovery: 32
@@ -491,7 +491,7 @@ protoss_archon:
 	Passenger:
 		CustomPipType: blue
 	Voiced:
-		VoiceSet: SCArchonVoice ##########
+		VoiceSet: SCArchonVoice
 	-WithDeathAnimation:
 	-Crushable:
 	Selectable:

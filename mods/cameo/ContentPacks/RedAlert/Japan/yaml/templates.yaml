@@ -399,7 +399,7 @@
 		Type: Rectangle
 			TopLeft: -512, -1450
 			BottomRight: 896, -512
-	GivesBuildableArea: ##########
+	GivesBuildableArea:
 		AreaTypes: building, cityi
 	RenderSprites:
 		PlayerPalette: raplayer
@@ -455,7 +455,7 @@
 		Type: Rectangle
 			TopLeft: -640, -768
 			BottomRight: 640, 1024
-	GivesBuildableArea: ##########
+	GivesBuildableArea:
 		AreaTypes: building, cityi
 	RenderSprites:
 		Image: rafix

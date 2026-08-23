@@ -46,7 +46,7 @@ SKIP_PARTS = ("maps", "bits")
 
 # Ratchet: D1 findings measured on 2026-08-11 against the unmodified tree.
 # Lower it as duplicates are resolved; never raise it without a note.
-D1_BASELINE = 89
+D1_BASELINE = 88
 
 
 def duplicate_children(node: Node) -> dict[str, list[Node]]:

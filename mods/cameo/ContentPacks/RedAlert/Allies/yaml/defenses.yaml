@@ -276,6 +276,7 @@ ra1_allies_alliedaagun:
 		CasingWeapon: generic_bullet_casing
 		CasingSpawnLocalOffset: 260,150,450, 260,-150,450
 		CasingTargetOffset: 0,750,0, 0,-750,0
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
@@ -293,6 +294,14 @@ ra1_allies_alliedaagun:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
 
+	Armament@Cryo:
+		LocalOffset: 520,150,450, 520,-150,450
+		MuzzleSequence: muzzle
+		CasingWeapon: generic_bullet_casing
+		CasingSpawnLocalOffset: 260,150,450, 260,-150,450
+		CasingTargetOffset: 0,750,0, 0,-750,0
+		Weapon: zsu_23Cryo
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 ra1_allies_camopillbox:
 	Inherits: ^Defense
 	Inherits@exp: ^GainsExperienceRABuilding
@@ -408,7 +417,7 @@ ra1_allies_bastionartillerybunker:
 		Turret: cannon
 		Name: cannon
 		RequiresCondition: !disabled && !lowpower && !ra1_allies_upgrade_cryomissiles
-	Armament@Upgrade: ##########
+	Armament@Upgrade:
 		Weapon: 155mmBastionCryo
 		LocalOffset: 1000,0,900
 		MuzzleSequence: muzzle

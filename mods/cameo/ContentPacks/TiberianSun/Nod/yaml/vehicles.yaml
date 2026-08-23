@@ -582,9 +582,9 @@ ts_nod_attackcycle:
 		FacingTolerance: 512
 	SelectionDecorations:
 	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	Voiced:
 		VoiceSet: TSVehicle
 	RenderSprites:

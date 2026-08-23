@@ -565,8 +565,8 @@ ra1_soviets_heavyteslatank:
 		Weapon: UnitExplodeBig
 	Voiced:
 		VoiceSet: RussianVehicleVoice
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	GainsExperience:
 		LevelUpNotification: LevelUpRA1
 	ProducibleWithLevel:

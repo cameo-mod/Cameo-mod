@@ -394,7 +394,7 @@ TSE1:
 	# Armament@ELITE:
 	# 	Weapon: TSMinigun
 	# 	RequiresCondition: rank-elite
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: TSMinigun
 	RenderSprites:
@@ -414,7 +414,7 @@ TSE1PARA:
 		PlayerPalette: playerra2
 	ProducibleWithLevel:
 		InitialLevels: 4
-	Parachutable: ##########
+	Parachutable:
 		FallRate: 999
 	UpdatesPlayerStatistics:
 		OverrideActor: tse1
@@ -459,7 +459,7 @@ TSE2PARA:
 		PlayerPalette: playerra2
 	ProducibleWithLevel:
 		InitialLevels: 4
-	Parachutable: ##########
+	Parachutable:
 		FallRate: 999
 
 TSE3:
@@ -483,11 +483,11 @@ TSE3:
 		HP: 12000
 	ChangesHealth@SelfHealing:
 		Step: 12
-	Armament@PRIMARY: ##########
+	Armament@PRIMARY:
 		Weapon: TSBazooka
 		LocalOffset: 256,43,341
 		FireDelay: 5
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: TSBazooka
 	TakeCover:
@@ -587,7 +587,7 @@ RAPT:
 		Weapon: claw
 	Buildable:
 		Description: Bipedal with enlarged sickle-shaped claw on each hindfoot
-	Inherits@EXT: ^ExternalConditions ##########
+	Inherits@EXT: ^ExternalConditions
 
 #######################################
 # TS Shared Vehicles
@@ -791,9 +791,9 @@ tsaegis:
 		FacingTolerance: 0
 	Selectable:
 		DecorationBounds: 1706, 1706
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle

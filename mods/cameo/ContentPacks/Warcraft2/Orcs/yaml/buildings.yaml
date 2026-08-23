@@ -85,7 +85,7 @@ wc2_orcs_greathall:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: wc2_constrct.aud
-		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil ##########
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil
 	DamageMultiplier@keep:
 		Modifier: 75
 		RequiresCondition: wc2_orcs_greathall && !wc2_orcs_fortress
@@ -98,7 +98,7 @@ wc2_orcs_greathall:
 	ProvidesPrerequisite@supplylimit:
 		Prerequisite: supplylimit
 		RequiresCondition: lowpower
-	RallyPoint: ##########
+	RallyPoint:
 		Path: 0,2
 	Exit@1:
 		SpawnOffset: -1024,1024,0 #-1323,1280,0
@@ -108,7 +108,7 @@ wc2_orcs_greathall:
 		RequiresCondition: !jammed
 	ExternalCondition@JAMMED:
 		Condition: jammed
-	GivesBuildableArea: ##########
+	GivesBuildableArea:
 		AreaTypes: building, cityi, hatchery
 	WithMakeAnimation:
 	-WithDeathAnimation:

@@ -1960,6 +1960,19 @@ BLEND_FAMILIES = {
                        {"Temperature": _m(-1.00)}, L3),
     "MissileCryo":    (["Laser", "Prism", "MissileAP", "MissileHE"],
                        {"Temperature": _m(-1.00)}, L3),
+    # FlakCryo — the AA cell of the cryo grid (maintainer 2026-08-23: the cryo upgrade is
+    # GLOBAL for RA1 Allies, "this is the same for bullets, cannons, missiles, bombs, etc").
+    # Three Allies weapons resolve to Flak_Medium and had no cryo cell to swap to:
+    # APCGunAllies, APCGunAllies_AA and zsu_23. Flak is doubled to hold the 50/50 against
+    # the two-primitive Cryo half, exactly as BulletCryo doubles Bullet.
+    #
+    # ⚠ Sniper deliberately gets NO cell. It is not a generator family (it is a hand-made
+    # ^Warhead_Sniper_Light, which is why verify_generator_sync accepts it as an exception),
+    # so a SniperCryo would mean promoting Sniper to a family first and re-ranking every
+    # ladder. DESIGN §11c's reuse test settles it: a cryo sniper round IS a cryo bullet, so
+    # Colt45 maps to BulletCryo. Reuse beats a new family that only exists for the label.
+    "FlakCryo":       (["Laser", "Prism", "Flak", "Flak"],
+                       {"Temperature": _m(-1.00)}, L3),
     # ⭐ CryoBlast = THE CRYO SIBLING OF THERMOBARIC (maintainer 2026-08-22): *"change the
     # DemolitionCryo into a new thing: CryoBlast (which is like a cryo explosion) and it
     # combines Demolition x Concussion x Cryo … It should increase the spread a bit and also

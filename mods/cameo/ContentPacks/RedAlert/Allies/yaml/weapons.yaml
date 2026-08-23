@@ -1,7 +1,10 @@
 CryoLightSniper:
-	Inherits: LightSniper
-	Inherits@2: ^CryoMissileProjectile
+	Inherits@wh: ^Warhead_BulletCryo_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Cryo
 	Report: ramgun2.aud
+	ReloadDelay: 100
+	Range: 9153
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 0
@@ -10,8 +13,8 @@ CryoLightSniper:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		ContrailLength: 10
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-		Amount: -30000
+	Warhead@BulletCryo_Light:
+		Damage: 30000
 
 M60mg:
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -25,6 +28,19 @@ M60mg:
 	Report: pillbox1.aud
 	Warhead@Bullet_Light:
 		Damage: 4000
+M60mgCryo:
+	Inherits@wh: ^Warhead_BulletCryo_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Cryo
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 10
+	Burst: 4
+	BurstDelays: 5
+	Range: 4359
+	Report: pillbox1.aud
+	Warhead@BulletCryo_Light:
+		Damage: 4000
+
 RATurretGun:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_CannonHE_Heavy
@@ -57,6 +73,19 @@ zsu_23:
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
+zsu_23Cryo:
+	Inherits@wh: ^Warhead_FlakCryo_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Cryo
+	Report: aacanon3.aud
+	ReloadDelay: 14
+	Burst: 2
+	BurstDelays: 2
+	Range: 11412
+	ValidTargets: Air
+	Warhead@FlakCryo_Medium:
+		Damage: 4000
+
 Hellfire:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
@@ -74,11 +103,21 @@ Hellfire:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 HellfireCryo:
-	Inherits: Hellfire
-	Inherits@2: ^CryoMissileProjectile
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-		Amount: -16000
-		Range: 400
+	Inherits@wh: ^Warhead_CryoBlast_Medium
+	Inherits@wh2: ^Warhead_MissileCryo_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Cryo
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 16
+	Range: 6540
+	MinRange: 1310
+	Report: missile6.aud
+	Warhead@CryoBlast_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@MissileCryo_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
 
 ChainGunMH60:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -103,6 +142,17 @@ ChainGunMH60:
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 
+ChainGunMH60Cryo:
+	Inherits@wh: ^Warhead_BulletCryo_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Cryo
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 6
+	Range: 3375
+	Report: gun13.aud
+	Warhead@BulletCryo_Medium:
+		Damage: 8000
+
 AlliedTankDestroyerCannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@wh2: ^Warhead_CannonAP_Light
@@ -117,6 +167,18 @@ AlliedTankDestroyerCannon:
 		Damage: 12000
 	Warhead@CannonAP_Light:
 		Damage: 12000
+AlliedTankDestroyerCannonCryo:
+	Inherits@wh: ^Warhead_CannonCryo_Medium
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 60
+	Range: 6819
+	Report: tank5.aud
+	Projectile: Bullet
+		Speed: 1362
+	Warhead@CannonCryo_Medium:
+		Damage: 24000
+		ValidTargets: Ground, Water
 SheridanCannon:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@wh2: ^Warhead_CannonHE_Medium
@@ -131,6 +193,18 @@ SheridanCannon:
 		Damage: 8000
 	Warhead@CannonHE_Medium:
 		Damage: 8000
+SheridanCannonCryo:
+	Inherits@wh: ^Warhead_CannonCryo_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 64
+	Range: 5023
+	Report: cannon2.aud
+	Projectile: Bullet
+		Speed: 502
+	Warhead@CannonCryo_Medium:
+		Damage: 16000
+		ValidTargets: Ground, Water
 SheridanMissiles:
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Light
@@ -147,13 +221,16 @@ SheridanMissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 SheridanMissilesCryo:
-	Inherits: SheridanMissiles
-	Inherits@2: ^CryoMissileProjectile
+	Inherits@wh: ^Warhead_MissileCryo_Medium
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Cryo
 	Report: bazook1.aud
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-		Amount: -48000
-		Range: 300
-
+	ReloadDelay: 64
+	Range: 5023
+	ValidTargets: Ground, Water, Air
+	Warhead@MissileCryo_Medium:
+		Damage: 16000
+		ValidTargets: Ground, Water, Air
 SheridanVulcan:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
@@ -169,6 +246,19 @@ SheridanVulcan:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
+SheridanVulcanCryo:
+	Inherits@wh: ^Warhead_BulletCryo_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 58
+	Range: 5023
+	Burst: 4
+	BurstDelays: 2
+	Report: gun13.aud
+	ValidTargets: Ground, Water, Air
+	Warhead@BulletCryo_Medium:
+		Damage: 4000
+		ValidTargets: Ground, Water, Air
 RapierBombs:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
@@ -187,15 +277,20 @@ RapierBombs:
 		ValidTargets: Ground, Ship
 		Damage: 10000
 RapierBombsCryo:
-	Inherits: RapierBombs
-	Inherits@2: ^CryoMissileProjectile
+	Inherits@wh: ^Warhead_CryoBlast_Heavy
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 60
+	Range: 2000
+	Burst: 4
+	BurstDelays: 2
+	Report: flamer2.aud
+	TargetActorCenter: true
 	Projectile: GravityBomb
+	Warhead@CryoBlast_Heavy:
+		ValidTargets: Ground, Ship
+		Damage: 10000
 	Warhead@Effect: CreateEffect
 		Explosions: cryo_artillery
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-		Amount: -10000
-		Range: 2500
-		ValidRelationships: Neutral, Enemy
 
 Aphid_AA:
 	Inherits@wh: ^Warhead_Concussion_Medium
@@ -230,11 +325,33 @@ Aphid_AA:
 		ImpactSounds: xplobig4.aud
 
 AphidCryo_AA:
-	Inherits: Aphid_AA
-	Inherits@2: ^CryoMissileProjectile
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-		Amount: -16000
-		Range: 400
+	Inherits@wh: ^Warhead_CryoBlast_Medium
+	Inherits@wh2: ^Warhead_MissileCryo_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 62
+	Range: 7000
+	Burst: 2
+	BurstDelays: 4
+	Report: missile7.aud
+	Projectile: Missile
+		Speed: 600
+		Acceleration: 10
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		ContrailLength: 6
+		ContrailStartColor: 996633
+		TrailInterval: 1
+		TrailDelay: 1
+	Warhead@CryoBlast_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@MissileCryo_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
 
 ReconRangerRecoillessGun:
 	Inherits: ^Grenade
@@ -551,6 +668,18 @@ ChronoTuskCryo:
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
+90mmCryo:
+	Inherits@wh: ^Warhead_CannonCryo_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 47
+	Range: 5159
+	Report: cannon1.aud
+	Projectile: Bullet
+		Speed: 515
+	Warhead@CannonCryo_Medium:
+		Damage: 8000
+
 Repair:
 	Inherits: ^RepairWeapon
 	ReloadDelay: 75
@@ -610,6 +739,25 @@ Colt45:
 		Damage: 7777
 	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 3
+
+Colt45Cryo:
+	Inherits@wh: ^Warhead_BulletCryo_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Cryo
+	Report: ragun5.aud
+	ReloadDelay: 7
+	Range: 7777
+	Burst: 2
+	BurstDelays: 0
+	Projectile: Bullet
+		ContrailStartColor: 77777777
+		ContrailEndColor: 33333333
+		ContrailStartWidth: 33
+		ContrailEndWidth: 77
+		ContrailLength: 7
+		ContrailEndColorUsePlayerColor: false
+	Warhead@BulletCryo_Light:
+		Damage: 7777
 
 HeavyAATankCannonAG:
 	Inherits: ^LightMissile

@@ -101,7 +101,7 @@ ts_gdi_tiberiumrefinery:
 		Amount: -40
 	ProvidesPrerequisite@buildingname:
 	SelectionDecorations:
-	GivesBuildableArea: ##########
+	GivesBuildableArea:
 		AreaTypes: building, cityi
 	WithResourceStoragePipsDecoration:
 		Position: BottomLeft
@@ -143,8 +143,8 @@ ts_gdi_powerplant:
 	Selectable:
 		Bounds: 2048, 2048
 	ScalePowerWithHealth:
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: building ##########
+	AcceptsDeliveredExperience:
+		ValidTypes: building
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights
@@ -351,7 +351,7 @@ ts_gdi_servicedepot:
 	Power:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
-	GivesBuildableArea: ##########
+	GivesBuildableArea:
 		AreaTypes: building, cityi
 	WithIdleOverlay@LIGHT:
 		RequiresCondition: !build-incomplete

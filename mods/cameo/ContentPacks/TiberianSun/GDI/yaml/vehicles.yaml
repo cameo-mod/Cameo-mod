@@ -402,8 +402,8 @@ ts_gdi_juggernautmkii:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	Voiced:
 		VoiceSet: TSVehicle
 	# WithSpriteTurret:
@@ -581,9 +581,9 @@ ts_gdi_hovermlrs:
 	AttackTurreted:
 	SelectionDecorations:
 		Bounds: 2248, 2248
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	WithVoxelBody:
 	WithVoxelTurret:
 	Voiced:
@@ -820,9 +820,9 @@ ts_gdi_mammothprototype:
 	SelectionDecorations:
 	Selectable:
 		Bounds: 1280, 1024
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	-WithVoxelBody:
 	WithVoxelWalkerBody:
 		TickRate: 1
@@ -913,9 +913,9 @@ ts_gdi_mammothmkii:
 	SelectionDecorations:
 	Selectable:
 		Bounds: 1280, 1024
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	Voiced:
 		VoiceSet: TSVehicle
 	Passenger:
@@ -990,9 +990,9 @@ ts_gdi_disruptor:
 	WithVoxelTurret:
 	SelectionDecorations:
 	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -1027,7 +1027,7 @@ ts_gdi_mobilesensorarray:
 		HpPerStep: 2637
 	Armor:
 		Type: Wood
-	Inherits@EXT: ^ExternalConditions ##########
+	Inherits@EXT: ^ExternalConditions
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle
