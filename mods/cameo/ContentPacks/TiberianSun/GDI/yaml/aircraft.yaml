@@ -513,16 +513,6 @@ TSDPOD:
 		Velocity: 768
 		MaximumSpinSpeed: 0
 
-TSDPODE1:
-	Inherits: TSDPOD
-	SpawnActorOnDeath:
-		Actor: TSE1PARA
-
-TSDPODE2:
-	Inherits: TSDPOD
-	SpawnActorOnDeath:
-		Actor: TSE2PARA
-
 ts_gdi_dropship:
 	Inherits@1: ^ExistsInWorld
 	Inherits@2: ^SpriteActor

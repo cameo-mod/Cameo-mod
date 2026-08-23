@@ -725,32 +725,11 @@ ts_gdi_upgradecenter:
 		TargetCircleRanges:
 			1: 6000
 		TargetCircleColor: ff000080
-	DropPodsPower:
-		RequiresCondition: droppod
-		PauseOnCondition: lowpower || disabled
-			1: ~techlevel.superweapons
-		Icons:
-			1: droppod
-		Cursor: ability
-		ChargeInterval: 4500
-		UnitTypes: TSDPODE1, TSDPODE2
-		Weapon: TSDroppodSpawner
-		Names:
-			1: Drop Pods
-		Descriptions:
-			1: Deploys elite infantry from orbit.
-		SelectTargetSpeechNotification: SelectTarget
-		SelectTargetTextNotification: Select target.
-		LaunchSpeechNotification: ReinforcementsArrived
-		DisplayRadarPing: True
-		DisplayTimerRelationships: Ally, Neutral, Enemy
-		CameraActor: CAMERA.small
-		CameraRemoveDelay: 60
-		SupportPowerPaletteOrder: 30
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: tsionc
 	RenderSprites:
 		PlayerPalette: playerra2
+
 ts_gdi_navalyard:
 	Inherits: ^RA2Building
 	Inherits@shipyard: ^IsShipyard
@@ -830,6 +809,32 @@ ts_gdi_dropshipbay:
 	WithIdleOverlay@LIGHTS-BRIGHT:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-lights-bright
+	DetonateWeaponPower@DropPods:
+		OrderName: GDI Drop
+		Prerequisites:
+			1: ~techlevel.superweapons
+		PauseOnCondition: disabled
+		Icons:
+			1: paratroopers
+		Cursor: ability
+		ChargeInterval: 4500
+		Names:
+			1: Drop Pods
+		ActivationDelay: 25
+		ActivationSequence:
+		Descriptions:
+			1: Drops in infantry from orbit.
+		Weapons:
+			1: TSDroppodSpawner
+		CameraActor: camera.placeholderhack
+		CameraRemoveDelay: 0
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		LaunchSpeechNotification: ReinforcementsArrived
+		IncomingSpeechNotification: EnemyUnitsApproaching
+		DisplayRadarPing: True
+		LaunchSound:
+		IncomingSound:
 	RenderSprites:
 		Image: ts_gdi_dropshipbay
 		PlayerPalette: playerra2

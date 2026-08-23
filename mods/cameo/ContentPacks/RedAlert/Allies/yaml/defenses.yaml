@@ -55,6 +55,7 @@ ra1_allies_chronosphere:
 	DetonateWeaponPower@ChronoReinforcements:
 		OrderName: ChronoReinforcements
 		Cost: 1000
+		Prerequisites:
 			1: ra1_allies_upgrade_chronoarmor, ~techlevel.superweapons
 		PauseOnCondition: disabled
 		Icons:
@@ -76,10 +77,10 @@ ra1_allies_chronosphere:
 		DisplayRadarPing: True
 		LaunchSound: chrono2.aud
 		IncomingSound: chrono2.aud
-		DisplayTimerRelationships: Ally, Neutral, Enemy
 	DetonateWeaponPowerCA@ra1_allies_chronovortex:
 		AllowMultiple: true
 		OrderName: ra1_allies_chronovortex
+		Prerequisites:
 			1: ~techlevel.superweapons
 		IconImage: ra1_allies_chronosphere
 		Icons:
