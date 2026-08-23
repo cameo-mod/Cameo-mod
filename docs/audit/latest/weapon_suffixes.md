@@ -17,9 +17,9 @@ X5 suffix ordering violations: **0**
 | ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml | 850 | asianalliance_railguntank | Armament@ELITE | AsianRailTank2 |
 | ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml | 893 | asianalliance_heavyrailguntank | Armament@ELITE | AsianRailTank3 |
 | ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml | 1208 | steelconsortium_megalodon | Armament@ELITE | SteelMegaSword_EMP |
-| ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml | 466 | futuretech_phalanxwip | Armament@PRIMARYELITE | RA2RTruckRocket |
-| ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml | 1056 | conehead2.nax | Armament@ELITE | RA2PortaTesla |
-| ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml | 1066 | conehead2.nax | Armament@GARRISONEDELITE | RA2PortaTesla |
+| ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml | 484 | futuretech_phalanxwip | Armament@PRIMARYELITE | RA2RTruckRocket |
+| ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml | 1086 | conehead2.nax | Armament@ELITE | RA2PortaTesla |
+| ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml | 1096 | conehead2.nax | Armament@GARRISONEDELITE | RA2PortaTesla |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 176 | schwarzermond_spacezeppelin | Armament@eliteUP | Lunar_YellowBeetleLaser |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 190 | schwarzermond_spacezeppelin | Armament@eliteAA_UP | Lunar_YellowBeetleLaser_AA |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 204 | schwarzermond_spacezeppelin | Armament@eliteAMP | Lunar_AmplifiedBeetleLaser |

@@ -27,6 +27,10 @@ export PYTHONIOENCODING=utf-8
 # NOTE: "elite_naming" is intentionally excluded — audit_elite_naming.py is
 # deprecated, fully superseded by audit_weapon_suffixes.py X1 section
 # (same check: rank-elite gated armaments not ending _elite).
+# NOTE: "damage_grid" is intentionally excluded — audit_damage_grid.py still
+# encodes the RETIRED 2000-step grid and the `main // 2000` percentage twin.
+# The live law is formula.DAMAGE_STEP (= 100) + formula.percentage_twin().
+# Re-derive it from `formula` before wiring it in; see docs/HANDOFF.md.
 for a in inherits duplicate_inherits faction_leaks upgrades upgrade_coverage ai sequences \
          metadata outliers orphans assets fluent power_budget stat_formulas \
          weapon_uniqueness garrison_weapons asset_files promotion_gating min_range \
@@ -39,7 +43,10 @@ for a in inherits duplicate_inherits faction_leaks upgrades upgrade_coverage ai 
          template_conformance multiplier_modifiers nuclear_flash_bindings \
          ts_death_palette warhead_split physical_state_warheads \
          unique_traits armor_upgrade_harm plating_exclusivity k_linearity \
-         survivability_pricing doc_claims hex_shield_routing dead_warhead_fields family_uniqueness three_way_split tier_weapon_class level_ladder versus_profile meter_dilution; do
+         survivability_pricing doc_claims doc_health hex_shield_routing \
+         impact_glow_preservation dead_warhead_fields family_uniqueness \
+         three_way_split tier_weapon_class level_ladder versus_profile \
+         meter_dilution; do
   echo "== audit_$a"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" \
     || failed=1
@@ -58,6 +65,13 @@ for a in createeffect_image:tools/audit_createeffect_image.py \
     || failed=1
   [ -s "$OUT/$name.err" ] || rm -f "$OUT/$name.err"
 done
+
+# audit_unconverted_templates writes its OWN report with --write; its stdout is only a
+# short summary, so redirecting stdout into the report file would clobber the real one.
+echo "== unconverted_templates"
+"$PYTHON" tools/audit/audit_unconverted_templates.py --write > /dev/null 2> "$OUT/unconverted_templates.err" \
+  || failed=1
+[ -s "$OUT/unconverted_templates.err" ] || rm -f "$OUT/unconverted_templates.err"
 
 # Staleness gate for the mandatory recurring audits (docs/audit/periodic.json):
 # runs last so its report reflects this run's evidence files.

@@ -4,7 +4,7 @@
 # RESTORED from git 04de392b3; NOT engine-loaded => the InvalidWeaponField lint can't strip it.
 #
 # LAW (Tier<->WeaponClass, maintainer 2026-08-03; see memory cameo-tier-weaponclass-law
-# and docs/design/GAME_SPECIFIC_WEAPON_BASES.md): scale Light=0.75, Medium=1.0,
+# and docs/design/PROJECTILE_AND_EFFECT_LAYER.md): scale Light=0.75, Medium=1.0,
 # Heavy=1.25, Super=1.5. Unit Tech Tier drives it: T1->Light, T2->Medium, T3+->Heavy,
 # super-weapon units->1.5. Between-tier units MIX the two adjacent levels; specialized
 # single-purpose units may be higher tier yet keep a light weapon (case-by-case).

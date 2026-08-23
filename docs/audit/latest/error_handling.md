@@ -1,13 +1,13 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **264**
+Files scanned: **266**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 2 | 2 |
-| E2 | handler discards the error | 65 | 30 |
-| E3 | open() without encoding= | 91 | 90 |
-| E4 | subprocess call without check= | 13 | 9 |
+| E2 | handler discards the error | 66 | 30 |
+| E3 | open() without encoding= | 92 | 90 |
+| E4 | subprocess call without check= | 17 | 9 |
 
 
 ## E1 — 2 finding(s)
@@ -18,7 +18,7 @@ Files scanned: **264**
 | tools/audit_createeffect_image.py | 19 | bare `except:` |
 
 
-## E2 — 65 finding(s)
+## E2 — 66 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -38,7 +38,7 @@ Files scanned: **264**
 | tools/audit/audit_power_budget.py | 100 | handler body discards the error |
 | tools/audit/audit_rank_decoration.py | 49 | handler body discards the error |
 | tools/audit/audit_rank_decoration.py | 68 | handler body discards the error |
-| tools/audit/audit_three_way_split.py | 81 | handler body discards the error |
+| tools/audit/audit_three_way_split.py | 103 | handler body discards the error |
 | tools/audit/audit_tier_weapon_class.py | 76 | handler body discards the error |
 | tools/audit/audit_unique_traits.py | 71 | handler body discards the error |
 | tools/audit/audit_upgrades.py | 145 | handler body discards the error |
@@ -79,6 +79,7 @@ Files scanned: **264**
 | tools/balance/tier_chain.py | 254 | handler body discards the error |
 | tools/balance/verify_retrofit.py | 79 | handler body discards the error |
 | tools/balance/verify_retrofit.py | 87 | handler body discards the error |
+| tools/hooks/bash_guard.py | 103 | handler body discards the error |
 | tools/reference/aggregate_archetype.py | 873 | handler body discards the error |
 | tools/reference/extract_versus.py | 175 | handler body discards the error |
 | tools/rename/apply.py | 178 | handler body discards the error |
@@ -89,7 +90,7 @@ Files scanned: **264**
 | tools/tilesets/generate_volcanic_tileset.py | 814 | handler body discards the error |
 
 
-## E3 — 91 finding(s)
+## E3 — 92 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -99,7 +100,8 @@ Files scanned: **264**
 | tools/d2k_to_openra.py | 153 | `Image.open()` without encoding= |
 | tools/d2k_to_openra.py | 164 | `Image.open()` without encoding= |
 | tools/extract_insignias.py | 113 | `Image.open()` without encoding= |
-| tools/hooks/bash_guard.py | 71 | `perf.read_text()` without encoding= |
+| tools/hooks/bash_guard.py | 95 | `read_text()` without encoding= |
+| tools/hooks/bash_guard.py | 121 | `perf.read_text()` without encoding= |
 | tools/hooks/exec_guard.py | 69 | `perf.read_text()` without encoding= |
 | tools/make_syndicate_insignia.py | 41 | `Image.open()` without encoding= |
 | tools/make_syndicate_insignia.py | 63 | `Image.open()` without encoding= |
@@ -186,13 +188,15 @@ Files scanned: **264**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 13 finding(s)
+## E4 — 17 finding(s)
 
 | file | line | detail |
 |---|---|---|
 | tools/audit/audit_doc_claims.py | 104 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 58 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 79 | `subprocess.run()` without check= |
+| tools/audit/audit_doc_health.py | 75 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 75 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 92 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 112 | `subprocess.run()` without check= |
 | tools/balance/apply_balance.py | 271 | `subprocess.run()` without check= |
 | tools/balance/apply_balance.py | 273 | `subprocess.run()` without check= |
 | tools/balance/compensate_retrofit.py | 170 | `subprocess.run()` without check= |
@@ -201,13 +205,15 @@ Files scanned: **264**
 | tools/balance/splice_templates.py | 58 | `subprocess.run()` without check= |
 | tools/balance/verify_generator_sync.py | 56 | `subprocess.run()` without check= |
 | tools/balance/verify_retrofit.py | 239 | `subprocess.run()` without check= |
-| tools/hooks/bash_guard.py | 49 | `subprocess.run()` without check= |
+| tools/hooks/bash_guard.py | 70 | `subprocess.run()` without check= |
+| tools/hooks/bash_guard.py | 85 | `subprocess.run()` without check= |
+| tools/hooks/bash_guard.py | 90 | `subprocess.run()` without check= |
 | tools/hooks/exec_guard.py | 45 | `subprocess.run()` without check= |
 
 
 ## FAIL
 
-- E2: 65 > baseline 30
-- E3: 91 > baseline 90
-- E4: 13 > baseline 9
+- E2: 66 > baseline 30
+- E3: 92 > baseline 90
+- E4: 17 > baseline 9
 

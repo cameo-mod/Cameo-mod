@@ -4,7 +4,7 @@ Status: **The framework + the entire Temperature axis ALREADY EXIST and are wire
 corrects the first draft, which wrongly implied a from-scratch C# build. The real remaining work is
 small (one C# field + yaml config). Verify against the code before building — "don't trust, verify".
 
-Companion: `AREADAMAGE_WARHEAD_REBALANCE.md`, `SPREAD_FALLOFF_PLAN.md`; memory `cameo-weapon-differentiation`.
+Companion: `AREADAMAGE_WARHEAD.md`, `SPREAD_FALLOFF_PLAN.md`; memory `cameo-weapon-differentiation`.
 
 ---
 

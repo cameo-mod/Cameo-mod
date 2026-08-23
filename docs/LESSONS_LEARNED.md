@@ -1,26 +1,82 @@
-# Lessons Learned — Start Here Before Every Task
+# Lessons Learned — read before every task
 
-**Read this document, `AGENT_WORKSPACE.md`, `PROJECT_CONTEXT.md`, and especially `DESIGN.md` before touching any code, YAML, asset, or balance value.** All canonical documents must be loaded into context at the start of every session.
+**Read this file, `AGENT_WORKSPACE.md`, `HANDOFF.md` and the relevant sections of `DESIGN.md`
+before touching any code, YAML, asset or balance value.**
 
-This is the central, repository-owned record of hard-won lessons, safe defaults, and recurring pitfalls discovered while working on Cameo. `docs/balance/LESSONS_LEARNED.md` is now a redirect to this file; keep all new lessons here.
+This is the repository-owned record of hard-won lessons, safe defaults and recurring pitfalls.
+Every entry was paid for once — the point of the file is that it is not paid for twice.
+**Add new lessons here**, not in a session log and not in a memory. When you add a `##` section,
+add it to the Contents below: `audit_doc_health` D7 fails if the index misses one.
 
 ---
 
 ## Required reading order for every new task
 
-**The canonical reading order is defined in `docs/README.md`.** The list below
-is provided for convenience; if it disagrees with README.md, README.md wins.
+**`docs/README.md` is the canonical definition of the reading order.** The list below is a
+convenience copy; if they disagree, README wins and this copy gets fixed.
 
-1. `CLAUDE.md` (repo root) — project instructions, loaded every session.
+1. `CLAUDE.md` (repo root) — the hard rules, loaded every session.
 2. `docs/LESSONS_LEARNED.md` (this file) — safe defaults and pitfalls.
 3. `docs/AGENT_WORKSPACE.md` — source-of-truth map, operating sequence, incident protocol, commit gate.
-4. `docs/PROJECT_CONTEXT.md` — short project orientation and current safety focus.
-5. `docs/DESIGN.md` — binding rules and conventions (read the relevant sections, especially before modifying YAML, assets, naming, weapons, balance, or descriptions).
-6. `docs/design/ROADMAP.md` — current work queue and P0 items.
-7. `docs/audit/SUMMARY.md` — known issue classes and current audit status.
+4. `docs/HANDOFF.md` — verified current state and the priority-ordered queue.
+5. `docs/DESIGN.md` — binding rules; read the sections your change touches.
+6. `docs/design/ROADMAP.md` — the granular work queue.
+7. `docs/audit/SUMMARY.md` — known issue classes and current audit counts.
 8. `docs/Cameo_Knowledge_Base_Manual.md` — engine and custom-trait reference, as needed.
 
-Do not modify rules, assets, or balance numbers until these documents are in context. When this document and `DESIGN.md` conflict with code or old notes, the repository documents win unless an audit baseline explicitly defers the fix.
+When this document and `DESIGN.md` conflict with code or old notes, the repository documents
+win — **unless the artifact says otherwise, and then the artifact wins and you fix the document.**
+
+---
+
+## Contents
+
+**Crash classes — these end a boot, and most gates cannot see them**
+
+- [`Parent type X was already inherited` — the crash class nothing but the boot could see (2026-08-17)](#parent-type-x-was-already-inherited--the-crash-class-nothing-but-the-boot-could-see-2026-08-17)
+- [Interactable trait and upgrade actors (2026-07-24)](#interactable-trait-and-upgrade-actors-2026-07-24)
+- [ClassicProductionQueueProperties crash on actors with no queue (2026-07-31)](#classicproductionqueueproperties-crash-on-actors-with-no-queue-2026-07-31)
+- [Empty warhead type = boot NRE; check-yaml does not catch it (2026-08-04)](#empty-warhead-type--boot-nre-check-yaml-does-not-catch-it-2026-08-04)
+
+**Silent-corruption classes — valid yaml, clean boot, wrong game**
+
+- [⛔ NEVER HAND-PARSE YAML — a sibling node silently overwrote every Versus number (2026-08-22)](#-never-hand-parse-yaml--a-sibling-node-silently-overwrote-every-versus-number-2026-08-22)
+- [Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)](#five-bug-classes-from-the-w25-armorversus-rebuild-2026-08-1617)
+- [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
+- [Bulk YAML rename scripts: safety lessons (2026-07-31)](#bulk-yaml-rename-scripts-safety-lessons-2026-07-31)
+- [Loose-extracted .oramap maps must always be repacked before finishing a task (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
+- [Effect-warhead merge safety during 3-way split (2026-08-07)](#effect-warhead-merge-safety-during-3-way-split-2026-08-07)
+- [`Inherits` POSITION is semantic, not cosmetic (2026-08-16)](#inherits-position-is-semantic-not-cosmetic-2026-08-16)
+- [Upgrade regressions feel like downgrades (2026-08-19)](#upgrade-regressions-feel-like-downgrades-2026-08-19)
+
+**Weapon templates, the 3-way split and the effect layer**
+
+- [Weapon effect-layer `DamagesConcrete` handling (2026-08-20)](#weapon-effect-layer-damagesconcrete-handling-2026-08-20)
+- [Weapon template retrofit — Phase A lessons (2026-08-02)](#weapon-template-retrofit--phase-a-lessons-2026-08-02)
+- [Weapon 3-way split — effect/projectile pitfalls found during the effects-table pass (2026-08-05)](#weapon-3-way-split--effectprojectile-pitfalls-found-during-the-effects-table-pass-2026-08-05)
+- [Weapon 3-way split: projectile family naming (2026-08-07)](#weapon-3-way-split-projectile-family-naming-2026-08-07)
+- [Template location and PhysicalStates forms (2026-08-20)](#template-location-and-physicalstates-forms-2026-08-20)
+- [Contrail fields are projectile, not warhead, and can survive a projectile type swap (2026-08-20)](#contrail-fields-are-projectile-not-warhead-and-can-survive-a-projectile-type-swap-2026-08-20)
+- [Inline effect warheads should be inherited, not inline (2026-08-19)](#inline-effect-warheads-should-be-inherited-not-inline-2026-08-19)
+
+**Balance pipeline and formula**
+
+- [Latest lessons from the July 2026 infantry rebalance pass](#latest-lessons-from-the-july-2026-infantry-rebalance-pass)
+- [Class-specific notes](#class-specific-notes)
+- [Uniqueness enforcement](#uniqueness-enforcement)
+- [Dual-weapon units](#dual-weapon-units)
+- [Audit and pipeline findings from 2026-07-22](#audit-and-pipeline-findings-from-2026-07-22)
+- [Tooling fixes discovered during W24 A1a (2026-08-22)](#tooling-fixes-discovered-during-w24-a1a-2026-08-22)
+
+**Process, tooling and platform**
+
+- [Content installer and music filesystem plumbing (2026-08-11)](#content-installer-and-music-filesystem-plumbing-2026-08-11)
+- [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
+- [YAML lint rules learned (2026-07-24)](#yaml-lint-rules-learned-2026-07-24)
+- [OpenRA Lua `Map` API: there is no `Map.Contains` (2026-07-31)](#openra-lua-map-api-there-is-no-mapcontains-2026-07-31)
+- [Between-cell movement responsiveness (2026-08-11)](#between-cell-movement-responsiveness-2026-08-11)
+
+---
 
 ## Content installer and music filesystem plumbing (2026-08-11)
 
@@ -54,26 +110,6 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - Weapon children that need a different concrete value should override with a
   single `Warhead@Concrete:` key; matching keys merge, so only the last value
   survives.
-
-## Contents
-
-- [Latest lessons from the July 2026 infantry rebalance pass](#latest-lessons-from-the-july-2026-infantry-rebalance-pass)
-- [Class-specific notes](#class-specific-notes)
-- [Uniqueness enforcement](#uniqueness-enforcement)
-- [Dual-weapon units](#dual-weapon-units)
-- [Audit and pipeline findings from 2026-07-22](#audit-and-pipeline-findings-from-2026-07-22)
-- [Interactable trait and upgrade actors (2026-07-24)](#interactable-trait-and-upgrade-actors-2026-07-24)
-- [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
-- [YAML lint cleanup header-removal bug (2026-07-24)](#yaml-lint-cleanup-header-removal-bug-2026-07-24)
-- [Superweapon documentation audit (2026-07-25)](#superweapon-documentation-audit-2026-07-25)
-- [Engine update pipeline and Smart App Control findings (2026-07-30, updated with deep research)](#engine-update-pipeline-and-smart-app-control-findings-2026-07-30-updated-with-deep-research)
-- [Loose-extracted .oramap maps must always be repacked before finishing a task (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
-- [Empty warhead type = boot NRE; check-yaml does not catch it (2026-08-04)](#empty-warhead-type--boot-nre-check-yaml-does-not-catch-it-2026-08-04)
-- [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
-- [Upgrade regressions feel like downgrades (2026-08-19)](#upgrade-regressions-feel-like-downgrades-2026-08-19)
-- [Inline effect warheads should be inherited, not inline (2026-08-19)](#inline-effect-warheads-should-be-inherited-not-inline-2026-08-19)
-
----
 
 ## ⛔ NEVER HAND-PARSE YAML — a sibling node silently overwrote every Versus number (2026-08-22)
 
