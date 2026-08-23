@@ -3,9 +3,20 @@
 _One page. Live reports: [`latest/`](latest/) · comparison snapshots: [`baseline/`](baseline/) ·
 faction map: [`../factions/MATRIX.md`](../factions/MATRIX.md)._
 
-**Evidence date: 2026-08-23**, from `bash tools/audit/run_all.sh` at `e60aab63`.
+**Evidence date: 2026-08-23**, from `bash tools/audit/run_all.sh` at `e60aab63`, with
+`doc_claims`, `gen_sync` and `level_ladder` re-measured at `519175ae` (all three read only
+tracked files, so they are trustworthy from any checkout).
 Recurring code-health audits and their cadence: [`PERIODIC.md`](PERIODIC.md) +
 [`periodic.json`](periodic.json).
+
+⚠ **`latest/` is currently a MIXTURE of two environments and is owed one clean regenerate.**
+A dozen audits read `engine/` C# or full git history — neither of which exists in a fresh
+clone — and they respond by reporting *less* and still saying PASS (`unique_traits` 125 trait
+types → 11, `dead_warhead_fields` 27071 nodes → 7014). Alternating Windows and container runs
+have been overwriting each other's numbers. `run_all` now refuses to write `latest/` from an
+incomplete tree (it diverts to the untracked `docs/audit/degraded/`; `--force-latest`
+overrides), so this is a one-time cleanup: **run the suite once on a complete tree and commit
+the result whole.**
 
 > **How to use this page.** Every number is a count from a report in `latest/`, named in the
 > "report" column. If a number here disagrees with that report, **the report wins** — re-run the
@@ -54,16 +65,20 @@ refs **0** · missing voxels **0** · TS death-palette **0** · D2k rank decorat
 promotion wiring clean · `MinRange` clean · duplicate uniquely-resolved traits clean ·
 armor-plating invariants clean · plating exclusivity clean · physical-state warheads PASS ·
 cross-document consistency 73/0 · display text 0 active findings ·
-**documentation structure 0** (`doc_health.md`) · **balance-ledger drift 0**.
+**documentation structure 0** (`doc_health.md`, D1–D8) · **balance-ledger drift 0** ·
+**doc claims 19 of 19 match** · **generator sync drift 0** (136 shared templates, no-op
+regenerate).
 
 ## Red right now
 
 | check | state | what to do |
 |---|---|---|
-| **doc claims** | **4 of 19 drifted** — `shield_versus_mean`, `shield_hp_factor`, `live_damage_multipliers`, `plating_families` | `../HANDOFF.md` §3.0. Update `value` **and every file under the claim's `docs:` key** in the same commit. |
-| **generator sync** | drift ≠ 0 | reconcile `gen_weapon_template.py` with `weapons.yaml`; only `^Warhead_Sniper_Light` is an accepted entry |
+| **level ladder** | **FAIL — 10 broken vs ratchet 9** (7 inverted, 3 flat) | blocked on a maintainer ruling. Full measured table + the diagnosis: [`../design/ROADMAP.md`](../design/ROADMAP.md) "RATCHET BREACH". These are balance numbers: pipeline only, and **never raise the ratchet**. |
 | duplicate keys D1 | 88 dropped inherits | each one silently drops a template — same family as the `Parent type X was already inherited` boot crash |
 | warhead-split ratchet | at baseline | pre-existing W24 debt, not a regression; lower the baseline as W24 lands |
+
+Cleared since the last edition of this page: **doc claims** (was 4 of 19 drifted, now 19 of 19
+matching) and **generator sync** (was non-zero, now 0).
 
 ## Programme-scale debt
 
@@ -84,18 +99,20 @@ so they cannot rot in prose again.
 
 ## Recommended fix order
 
-1. **The 4 drifted doc claims** — cheapest, and until they are clean no number in the design docs
-   can be trusted.
-2. **B2b duplicate inherit paths / D1 dropped inherits** — the class that produces
+1. **One clean suite run on a complete tree** — cheapest, and until `latest/` stops mixing two
+   environments no count on this page can be fully trusted.
+2. **The 10 broken level ladders** — a heavier level dealing less damage than a lighter one is
+   player-visible nonsense, and the ratchet is red until it is ruled on.
+3. **B2b duplicate inherit paths / D1 dropped inherits** — the class that produces
    `Parent type X was already inherited` boot crashes and silently-dropped templates. Only the
    boot and `audit_duplicate_inherits` can see it.
-3. **G1 garrison weapons (6)** and **B6 missing images (2)** — small, bounded, player-visible.
-4. **B1 cross-faction leaks (435 L1)** — the count grew because the audit's faction coverage
+4. **G1 garrison weapons (6)** and **B6 missing images (2)** — small, bounded, player-visible.
+5. **B1 cross-faction leaks (435 L1)** — the count grew because the audit's faction coverage
    grew, not only because the tree got worse. Triage before treating it as 435 bugs.
-5. **B3/B4 upgrade direction and coverage**, plus transcribing the remaining 568
+6. **B3/B4 upgrade direction and coverage**, plus transcribing the remaining 568
    `upgrades_intent.yaml` entries so the audit can tell an intended drawback from a bug.
-6. **B10/B11 hygiene** — orphan purge, per-directory WAV normalisation. Good batch work.
-7. **R2 stacked multipliers (790)** — folds into W26; do not touch it separately.
+7. **B10/B11 hygiene** — orphan purge, per-directory WAV normalisation. Good batch work.
+8. **R2 stacked multipliers (790)** — folds into W26; do not touch it separately.
 
 ---
 

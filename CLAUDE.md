@@ -52,7 +52,13 @@ never for status.
    so an `OpenRA.Mods.Cameo` type of the same name wins with zero yaml changes (precedent:
    `ColorPickerColorShift`, `PlayerColorShift`, `SelectionDecorations`). Prove a shadow with a
    Cameo-only field — `--docs` lists both types and proves nothing.
-8. **Audit reports regenerate via `bash tools/audit/run_all.sh` only** (PowerShell `>` writes UTF-16).
+8. **Audit reports regenerate via `bash tools/audit/run_all.sh` only** (PowerShell `>` writes UTF-16),
+   **and only from a COMPLETE tree** — `engine/` built, clone not shallow. Missing either makes a
+   dozen audits scan a smaller corpus, report FEWER findings and still say PASS, so the commit
+   deletes real evidence with a green run (`unique_traits` 125 trait types → 11). `run_all` now
+   diverts to the untracked `docs/audit/degraded/` in that case and says why; `--force-latest`
+   overrides. Refresh `latest/` WHOLE, from one machine — path separators alone make a
+   cross-platform diff dirty. (`tools/audit/environment.py`, `docs/LESSONS_LEARNED.md`.)
 8b. **The engine DROPS unknown yaml fields in silence.** `FieldLoader.Load` (FieldLoader.cs:676)
    iterates the TYPE's fields and never reads the leftover keys, and traits + warheads go through
    it (`WeaponInfo.cs:178`). Only `FieldLoader.LoadField` throws — that is the settings/linter

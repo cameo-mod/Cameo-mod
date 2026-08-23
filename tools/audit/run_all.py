@@ -23,7 +23,19 @@ import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-OUT = ROOT / "docs" / "audit" / "latest"
+sys.path.insert(0, str(ROOT / "tools" / "audit"))
+import environment  # noqa: E402  (must follow the sys.path insert)
+
+# Same guard as run_all.sh: docs/audit/latest/ is TRACKED evidence and several audits
+# read engine/ C# or full git history. Without them those audits report LESS and still
+# say PASS, so regenerating from an incomplete tree silently deletes real findings.
+FORCE_LATEST = "--force-latest" in sys.argv
+PASSTHROUGH = [a for a in sys.argv[1:] if a != "--force-latest"]
+_dest, _reasons = environment.out_dir(FORCE_LATEST)
+if _reasons:
+    print(environment.banner(_dest, _reasons), file=sys.stderr)
+
+OUT = ROOT / _dest
 OUT.mkdir(parents=True, exist_ok=True)
 (ROOT / "docs" / "factions").mkdir(parents=True, exist_ok=True)
 
@@ -70,7 +82,7 @@ def run(name, script, extra_args=None):
     print(f"== {name}")
     md = OUT / f"{name}.md"
     err = OUT / f"{name}.err"
-    cmd = [PYTHON, str(script)] + (extra_args or [])
+    cmd = [PYTHON, str(script)] + (extra_args or PASSTHROUGH)
     with md.open("w", encoding="utf-8") as out, err.open("w", encoding="utf-8") as e:
         result = subprocess.run(cmd, cwd=ROOT, stdout=out, stderr=e, text=True, env=CHILD_ENV)
     if result.returncode != 0:
@@ -90,7 +102,8 @@ for name, path in EXTRAS:
 # short summary, so routing it through run() would clobber the real report.
 print("== unconverted_templates")
 _r = subprocess.run([PYTHON, str(ROOT / "tools" / "audit" / "audit_unconverted_templates.py"),
-                     "--write"], cwd=ROOT, capture_output=True, text=True, env=CHILD_ENV)
+                     "--write"] + (["--force-latest"] if FORCE_LATEST else []),
+                    cwd=ROOT, capture_output=True, text=True, env=CHILD_ENV)
 if _r.returncode != 0:
     failed = 1
     print(f"   FAILED: unconverted_templates (exit {_r.returncode})")
@@ -102,10 +115,15 @@ if _r.returncode != 0:
 run("periodic_freshness", ROOT / "tools" / "audit" / "audit_periodic_freshness.py",
     ["--warn-only"])
 
+# docs/factions/MATRIX.md is tracked too, so an incomplete run diverts it alongside
+# the reports rather than overwriting it.
+MATRIX = (ROOT / "docs" / "factions" / "MATRIX.md"
+          if _dest == environment.LATEST else OUT / "MATRIX.md")
+
 for name, script, dest in [
     ("gen_damage_matrix", ROOT / "tools" / "audit" / "gen_damage_matrix.py", OUT / "damage_matrix.md"),
     ("gen_rename_maps", ROOT / "tools" / "audit" / "gen_rename_maps.py", OUT / "naming.md"),
-    ("gen_faction_matrix", ROOT / "tools" / "audit" / "gen_faction_matrix.py", ROOT / "docs" / "factions" / "MATRIX.md"),
+    ("gen_faction_matrix", ROOT / "tools" / "audit" / "gen_faction_matrix.py", MATRIX),
 ]:
     print(f"== {name}")
     with dest.open("w", encoding="utf-8") as out:
@@ -114,5 +132,5 @@ for name, script, dest in [
         failed = 1
         print(f"   FAILED: {name} (exit {result.returncode})")
 
-print(f"reports in {OUT}/ ; matrix in docs/factions/MATRIX.md")
+print(f"reports in {OUT}/ ; matrix in {MATRIX}")
 sys.exit(failed)

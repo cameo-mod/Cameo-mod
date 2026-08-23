@@ -131,6 +131,14 @@ Plus [`design/VISION.md`](design/VISION.md) (north-star product intent, explicit
 report (CLAUDE.md rule 8). `tools/audit/run_all.py` is a port for shells without `sh`; it reads
 its audit list out of `run_all.sh`, so the two cannot drift apart.
 
+⚠ **`audit/latest/` can only be regenerated from a COMPLETE tree** — one with `engine/` built and
+a full (non-shallow) clone. Without them a dozen audits scan a smaller corpus, report fewer
+findings and still say PASS, so a regenerate silently deletes real evidence (`unique_traits`
+125 trait types → 11). Both runners now check first and divert to the untracked
+`docs/audit/degraded/` instead, printing why; `--force-latest` overrides. Details and the
+measured table: [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md). Refresh `latest/` **whole, from one
+machine** — path separators alone make a cross-platform diff dirty.
+
 ⚠ **Do not drop a one-off artifact into `audit/latest/`.** That directory is regenerated
 wholesale, so anything the suite does not produce is deleted on the next run — which is how
 `latest/superweapon_audit.yaml` disappeared while three documents still linked to it.
@@ -143,7 +151,7 @@ wholesale, so anything the suite does not produce is deleted on the next run —
 | audit | catches |
 |---|---|
 | `audit_doc_claims.py` | a NUMBER in prose that no longer matches the tree |
-| `audit_doc_health.py` | control characters, mojibake, broken links and anchors, references to moved documents, duplicate DESIGN section ids, a `## Contents` index that has gone stale |
+| `audit_doc_health.py` | control characters, mojibake, broken links and anchors, references to moved documents, duplicate DESIGN section ids, a `## Contents` index that has gone stale, and a citation that names one law while pointing at another |
 
 Neither can check **prose contradicting prose** — a ruling written into one document while the
 older statement still stands in another. The only defence is the discipline: **grep for the old
