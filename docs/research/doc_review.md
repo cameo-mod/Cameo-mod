@@ -1,5 +1,11 @@
 # Cameo Design/Instruction Document Review
 
+
+> ⚠ **SUPERSEDED 2026-08-23.** This review's findings were acted on by the documentation
+> audit (#269/#270/#272): the handoffs it cites are archived under `docs/history/handoffs/`
+> and the drift numbers it reports were re-measured — generator sync is now drift = 0.
+> Kept for the reasoning, not for the numbers.
+
 **Scope:** Review the primary design, instruction, and audit documents for contradictions, stale claims, conflicting authority statements, and missing/incomplete cross-references.  
 **Method:** Read listed docs, run `git log`, the audit suite, and targeted `grep`/Python counts against the live tree.  
 **Constraint:** Only `docs/research/doc_review.md` is created; no source, YAML, or tracked documentation was edited and no commit was made.
@@ -29,10 +35,10 @@ Historical disclaimers are present on `AREADAMAGE_HANDOFF.md` and (implicitly) o
 
 | # | Topic | Conflicting Documents & Claims | File / Line or Section | Live Evidence | Notes |
 |---|-------|-------------------------------|------------------------|---------------|-------|
-| 1 | **Generator sync drift** | `AREADAMAGE_HANDOFF.md` §0: "`verify_generator_sync.py` reports **drift = 0**" | `docs/design/AREADAMAGE_HANDOFF.md` lines 28-33 | `python tools/balance/verify_generator_sync.py` exits 1 and reports: <br>• 1 ungenerated template (`^Warhead_Sniper_Light`) <br>• 10 template blocks with drift <br>• `drift = 10` | `AREADAMAGE_HANDOFF.md` is marked historical, but the drift=0 claim is still present. |
+| 1 | **Generator sync drift** | `AREADAMAGE_HANDOFF.md` §0: "`verify_generator_sync.py` reports **drift = 0**" | `docs/history/handoffs/AREADAMAGE_HANDOFF_2026-08-04.md` lines 28-33 | `python tools/balance/verify_generator_sync.py` exits 1 and reports: <br>• 1 ungenerated template (`^Warhead_Sniper_Light`) <br>• 10 template blocks with drift <br>• `drift = 10` | `AREADAMAGE_HANDOFF.md` is marked historical, but the drift=0 claim is still present. |
 |   |   | `BALANCE_MEGAPLAN.md` §1: "A1 generator reconcile: ✅ DONE ... `verify_generator_sync.py` reports **drift = 0**" | `docs/design/BALANCE_MEGAPLAN.md` lines 57-59 |   |   |
 |   |   | `BALANCE_PIPELINE_ESTIMATE.md` §1: "`verify_generator_sync.py` proves **drift = 0**" | `docs/design/BALANCE_PIPELINE_ESTIMATE.md` lines 40-43 |   |   |
-|   |   | `AI_HANDOFF_2026-08-05.md`: "`verify_generator_sync.py` must report `drift = 0`" | `docs/AI_HANDOFF_2026-08-05.md` line 376 |   |   |
+|   |   | `AI_HANDOFF_2026-08-05.md`: "`verify_generator_sync.py` must report `drift = 0`" | `docs/history/handoffs/AI_HANDOFF_2026-08-05.md` line 376 |   |   |
 |   |   | `BALANCE_PROGRAM_PLAN.md`: "drift = 1 (`^Warhead_Sniper_Light`)" | `docs/design/BALANCE_PROGRAM_PLAN.md` lines 460, 1229 |   | Even the "drift = 1" figure is now stale (live = 10). |
 |   |   | `PHYSICAL_STATE_SYSTEM.md`: "`verify_generator_sync` drift stays **1**" | `docs/design/PHYSICAL_STATE_SYSTEM.md` line 432 |   |   |
 |   |   | `ROADMAP.md`: "Generator drift stays 1" | `docs/design/ROADMAP.md` line 83 |   |   |
@@ -46,25 +52,25 @@ Historical disclaimers are present on `AREADAMAGE_HANDOFF.md` and (implicitly) o
 | 4 | **W20 multi-armor combination rule — status** | `BALANCE_PROGRAM_PLAN.md` board: "W20 **⬜ MECHANISM DONE, rule = maintainer**" | `docs/design/BALANCE_PROGRAM_PLAN.md` line 95 | `OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs` has `MultiArmorCombination = Average` per W20 section. | Board says rule is not settled; section says it is live. |
 |   |   | `BALANCE_PROGRAM_PLAN.md` W20 section: "**W20 ✅ DONE (`Average` is live)**" | `docs/design/BALANCE_PROGRAM_PLAN.md` line 1650 |   |   |
 | 5 | **Template library size and naming** | `WEAPON_3WAY_SPLIT.md`: "the 55-template library" and proposes `^Proj*` / `^Fx*` | `docs/design/WEAPON_3WAY_SPLIT.md` line 34; lines 46-67 (projectile); lines 72-92 (effect) | `mods/cameo/weapons/weapons.yaml`: <br>• 99 `^Warhead_*` (96 above the `DO NOT INHERIT` divider + 3 `^Warhead_Inferno_*` below) <br>• 30 `^Projectile_*` <br>• 47 `^Effect_*` | The live naming is `^Projectile_*` / `^Effect_*`, not the proposed `^Proj*` / `^Fx*`. |
-|   |   | `AI_HANDOFF_2026-08-05.md`: "55 warhead, 24 projectile, 27 effect families" | `docs/AI_HANDOFF_2026-08-05.md` line 11 |   |   |
+|   |   | `AI_HANDOFF_2026-08-05.md`: "55 warhead, 24 projectile, 27 effect families" | `docs/history/handoffs/AI_HANDOFF_2026-08-05.md` line 11 |   |   |
 |   |   | `Cameo_Knowledge_Base_Manual.md` v0.5: "55 weapon-class, 24 projectile, 27 effect templates" | `docs/Cameo_Knowledge_Base_Manual.md` lines 17-18 |   |   |
 |   |   | `BALANCE_PIPELINE_ESTIMATE.md`: "55 warhead, 25 projectile, 45 effect families above the divider" | `docs/design/BALANCE_PIPELINE_ESTIMATE.md` lines 44-45 |   |   |
 | 6 | **W24 one-main-weapon scope / multi-main counts** | `BALANCE_PROGRAM_PLAN.md` W24/W25 section: "Only **39%** of weapons comply (805 of 2053); 61% carry 2 or more" | `docs/design/BALANCE_PROGRAM_PLAN.md` lines 2213-2214 | `python scratchpad/count_mains.py`: <br>• 1,622 fired weapons <br>• 558 one-main <br>• 939 multi-main <br>• compliance = 34.4% | Denominator and metric undefined; live count differs from both 39%/805 and the `audit_doc_claims` 975 figure. |
 |   |   | `BALANCE_MEGAPLAN.md`: "~350+ mixed weapons in ~250 groups remain" | `docs/design/BALANCE_MEGAPLAN.md` line 72 | `python tools/audit/audit_unconverted_templates.py`: <br>• 45 unconverted templates <br>• 1,196 direct inheritors <br>• 574 concrete weapons on ≥1 old template |   |
-|   |   | `AI_HANDOFF_2026-08-05.md`: "~609 mixed weapons" and "396 concrete weapons still inherit at least one old full-stack family" | `docs/AI_HANDOFF_2026-08-05.md` lines 12, 292 |   |   |
+|   |   | `AI_HANDOFF_2026-08-05.md`: "~609 mixed weapons" and "396 concrete weapons still inherit at least one old full-stack family" | `docs/history/handoffs/AI_HANDOFF_2026-08-05.md` lines 12, 292 |   |   |
 |   |   | `BALANCE_PROGRAM_PLAN.md` board W24: "61% of weapons carry 2+" and long cluster list | `docs/design/BALANCE_PROGRAM_PLAN.md` line 99 | `python tools/audit/audit_doc_claims.py`: `multi_main_fired_weapons` documented 975, **measured 939** |   |
 | 7 | **Armor/plating rule: average vs. layer selection** | `DESIGN.md` §12.0e law 1: "**LAYER SELECTION, not combination.** A plating REPLACES the class armor while active" | `docs/DESIGN.md` line 951 | `AreaDamageWarhead.MultiArmorCombination: Average` is live. | The design law is for platings; `PSEUDO_ARMOR` and `WEAPON_TYPE_SYSTEM` discuss class/dual armors averaging. The docs are not cross-linked clearly enough, so a reader can treat A1 as applying to platings. |
 |   |   | `PSEUDO_ARMOR_AND_INTEGRITY.md` §A1: "**Multiple armor types AVERAGE** (they do not multiply)" | `docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md` lines 43-47 |   |   |
 |   |   | `WEAPON_TYPE_SYSTEM.md` §10b: "Two armors now **AVERAGE** (`AreaDamageWarhead.MultiArmorCombination: Average`)" | `docs/design/WEAPON_TYPE_SYSTEM.md` line 231 |   |   |
 |   |   | `PSEUDO_ARMOR_AND_INTEGRITY.md` note: "§A1–A4 describe the AVERAGING world, which still governs class armors but NO LONGER governs platings — §F replaced that with selection" | `docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md` lines 21-24 |   | Self-disclaimer exists but is easy to miss. |
 | 8 | **Warhead `@1Dam` is retired vs. still live** | `DESIGN.md` §870: "The legacy generic `Warhead@1Dam` is **RETIRED** ... a bare `1Dam` ... is a bug" | `docs/DESIGN.md` lines 1314-1316 | `grep -c "Warhead@1Dam" mods/cameo` = **1,434** raw occurrences; `python scratchpad/count_1dam.py` = **95 fired weapons** still with `Warhead@1Dam`. | `AI_HANDOFF` says 297; live is 95. Either way, the pattern is not retired. |
-|   |   | `AI_HANDOFF_2026-08-05.md` W4.5: "`297` live weapons still use the deprecated `Warhead@1Dam` pattern" | `docs/AI_HANDOFF_2026-08-05.md` lines 364-366 |   |   |
+|   |   | `AI_HANDOFF_2026-08-05.md` W4.5: "`297` live weapons still use the deprecated `Warhead@1Dam` pattern" | `docs/history/handoffs/AI_HANDOFF_2026-08-05.md` lines 364-366 |   |   |
 | 9 | **Shield = top + floor — retired but still written** | `DESIGN.md`: "`Shield = 100+floor`" (in the Versus construction note) and later "`Shield = top + floor` is **RETIRED**" | `docs/DESIGN.md` line 856, line 867 | `audit_doc_claims.py` explicitly lists this as a surviving old statement. | The old formula is retired but still appears in the same or related docs. |
 |   |   | `ARMOR_SYSTEM.md`: "`Shield = top + floor` is **RETIRED**" but table still uses `Shield % (= top + floor)` | `docs/design/ARMOR_SYSTEM.md` line 43; lines 66-71 |   |   |
 | 10 | **Balance authority / source of truth** | `BALANCE_PROGRAM_PLAN.md`: "single source of truth for balance status and ownership" | `docs/design/BALANCE_PROGRAM_PLAN.md` board (lines 72-103) and §0 | Multiple files claim overlapping authority. | A new reader cannot tell which doc to trust for status vs. sequencing. |
 |   |   | `BALANCE_MEGAPLAN.md`: "THIS is the authoritative **phase-sequence map**" | `docs/design/BALANCE_MEGAPLAN.md` lines 7-10 |   |   |
 |   |   | `ROADMAP.md`: "The balance program's board, ownership and acceptance criteria live in ONE file: `BALANCE_PROGRAM_PLAN.md`" | `docs/design/ROADMAP.md` lines 25-29 |   |   |
-|   |   | `AREADAMAGE_HANDOFF.md`: "for **remaining** work and current status read `BALANCE_MEGAPLAN.md` §1 + `ROADMAP.md`" | `docs/design/AREADAMAGE_HANDOFF.md` lines 7-8 |   | Does not point to `BALANCE_PROGRAM_PLAN.md`, which ROADMAP says owns status. |
+|   |   | `AREADAMAGE_HANDOFF.md`: "for **remaining** work and current status read `BALANCE_MEGAPLAN.md` §1 + `ROADMAP.md`" | `docs/history/handoffs/AREADAMAGE_HANDOFF_2026-08-04.md` lines 7-8 |   | Does not point to `BALANCE_PROGRAM_PLAN.md`, which ROADMAP says owns status. |
 
 ---
 
@@ -104,8 +110,8 @@ Historical disclaimers are present on `AREADAMAGE_HANDOFF.md` and (implicitly) o
 |---|---|---|
 | `SPREAD_FALLOFF_PLAN.md` | `CLAUDE.md` mentions it for weapon work; the user-prescribed read order did not include it; `BALANCE_MEGAPLAN.md` lists it as a companion but `AI_HANDOFF_2026-08-05.md` does not | Weapon-work reading lists are inconsistent. |
 | Balance doc authority index | `BALANCE_PIPELINE.md`, `BALANCE_PIPELINE_ESTIMATE.md`, `BALANCE_PROGRAM_PLAN.md`, `BALANCE_MEGAPLAN.md`, `MEGAPLAN.md`, `ROADMAP.md` | No single index explains the difference between: machinery (`BALANCE_PIPELINE.md`), effort estimate (`BALANCE_PIPELINE_ESTIMATE.md`), live status board (`BALANCE_PROGRAM_PLAN.md`), and phase-sequence map (`BALANCE_MEGAPLAN.md`). `BALANCE_PIPELINE_ESTIMATE.md` does not point to the newer `BALANCE_PROGRAM_PLAN.md` or `BALANCE_MEGAPLAN.md`. |
-| Status pointer from `AREADAMAGE_HANDOFF.md` | `docs/design/AREADAMAGE_HANDOFF.md` lines 7-8 | Directs readers to `BALANCE_MEGAPLAN.md` §1 + `ROADMAP.md` for current status, but `ROADMAP.md` says status lives in `BALANCE_PROGRAM_PLAN.md`. |
-| `AI_HANDOFF_2026-08-05.md` companion list | `docs/AI_HANDOFF_2026-08-05.md` line 3 | Lists `BALANCE_PIPELINE.md`, `AREADAMAGE_HANDOFF.md`, `WEAPON_3WAY_SPLIT.md`, `ROADMAP.md`, `AGENT_WORKSPACE.md`; omits `BALANCE_PROGRAM_PLAN.md` and `BALANCE_MEGAPLAN.md`. Its counts (55/24/27, ~609, 297) are not explicitly framed as a 2026-08-05 snapshot. |
+| Status pointer from `AREADAMAGE_HANDOFF.md` | `docs/history/handoffs/AREADAMAGE_HANDOFF_2026-08-04.md` lines 7-8 | Directs readers to `BALANCE_MEGAPLAN.md` §1 + `ROADMAP.md` for current status, but `ROADMAP.md` says status lives in `BALANCE_PROGRAM_PLAN.md`. |
+| `AI_HANDOFF_2026-08-05.md` companion list | `docs/history/handoffs/AI_HANDOFF_2026-08-05.md` line 3 | Lists `BALANCE_PIPELINE.md`, `AREADAMAGE_HANDOFF.md`, `WEAPON_3WAY_SPLIT.md`, `ROADMAP.md`, `AGENT_WORKSPACE.md`; omits `BALANCE_PROGRAM_PLAN.md` and `BALANCE_MEGAPLAN.md`. Its counts (55/24/27, ~609, 297) are not explicitly framed as a 2026-08-05 snapshot. |
 | `Cameo_Knowledge_Base_Manual.md` freshness | `docs/Cameo_Knowledge_Base_Manual.md` lines 15-20 | v0.5 is dated 2026-08-02; counts and engine pin are stale. No prominent link to current `audit_doc_claims`/`BALANCE_PROGRAM_PLAN` status. |
 | `WEAPON_3WAY_SPLIT.md` naming | `docs/design/WEAPON_3WAY_SPLIT.md` lines 46-67 and 72-92 | Proposes `^Proj*` and `^Fx*`; the shipped tree uses `^Projectile_*` and `^Effect_*`. No "superseded by actual naming" note. |
 | `docs/audit/SUMMARY.md` current evidence | `docs/audit/SUMMARY.md` lines 3-4, 11 | Headline links to `FINDINGS.md` and `baseline/`; current generated outputs are in `latest/`. The stale-count warning is present but not prominent. |

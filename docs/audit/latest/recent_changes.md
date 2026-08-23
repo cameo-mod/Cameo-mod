@@ -1,12 +1,12 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **381**, files touched: **856**
+Commits reviewed: **383**, files touched: **872**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
 | R1 | balance yaml edited without the ledger | 18 | yes |
 | R2 | audit script never run by run_all.sh | 3 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 11 | partly |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 12 | partly |
 | R4 | engine/mod.config change (needs boot gate) | 9 | no |
 
 
@@ -43,10 +43,11 @@ Commits reviewed: **381**, files touched: **856**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (11)
+## R3 — commits without provenance (12)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| 1d18d5d4 | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
 | 4ec4fd1c | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
 | 20f15194 | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
 | 026963fd | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
@@ -79,11 +80,11 @@ Commits reviewed: **381**, files touched: **856**
 
 | file | commits touching it |
 |---|---|
-| docs/design/BALANCE_PROGRAM_PLAN.md | 102 |
+| docs/design/BALANCE_PROGRAM_PLAN.md | 103 |
 | mods/cameo/weapons/weapons.yaml | 73 |
 | tools/balance/gen_weapon_template.py | 56 |
 | docs/balance/derived/redalert_soviets.json | 45 |
-| docs/design/ROADMAP.md | 38 |
+| docs/design/ROADMAP.md | 40 |
 | DEVELOPMENT_LOG.md | 38 |
 | docs/balance/derived/d2k_ixian.json | 37 |
 | docs/balance/derived/redalert2mod_consortium.json | 37 |
@@ -107,7 +108,7 @@ Commits reviewed: **381**, files touched: **856**
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 11 R1 and 0 R3 of 18/11 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 11 R1 and 0 R3 of 18/12 findings are in scope; the rest predate the gate.
 
 
 ## FAIL

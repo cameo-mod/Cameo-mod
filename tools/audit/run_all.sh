@@ -71,7 +71,7 @@ for a in inherits duplicate_inherits faction_leaks upgrades upgrade_coverage ai 
          survivability_pricing doc_claims doc_health hex_shield_routing \
          impact_glow_preservation dead_warhead_fields family_uniqueness \
          three_way_split tier_weapon_class level_ladder versus_profile \
-         meter_dilution; do
+         meter_dilution ca_drift; do
   echo "== audit_$a"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" \
     || failed=1

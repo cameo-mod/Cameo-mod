@@ -37,7 +37,7 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured 2026-08-17 |
 |---|---|
-| W24 — fired weapons with **more than one** damage main | **927 of 1622 = 57.2%** (histogram runs out to 15 mains) |
+| W24 — fired weapons with **more than one** damage main | **925 of 1622 = 57.0%** (histogram runs out to 15 mains) |
 | armament slots whose `K` moves when those collapse | **1 547** |
 | fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1196 inheritors) |
 
@@ -129,7 +129,7 @@ later to replace them with a new mechanic. However some multipliers are still in
 especially those with status effects so yeah... we need to remove them on a case by case
 basis."*
 
-**353 live declarations** (683 in the tree; 314 sit in DEAD files such as `rules/wh40k.yaml`
+**354 live declarations** (683 in the tree; 314 sit in DEAD files such as `rules/wh40k.yaml`
 and `rules/wz2100.yaml`, which `mod.yaml` does not load — do not "fix" those, delete the files).
 Was 369 before the shield-150% deletion below. ⚠ **This count is registered in
 `docs/audit/doc_claims.yaml` and re-measured by `audit_doc_claims.py`** — it went stale within
@@ -2756,7 +2756,7 @@ generator ships that matrix on purpose and `verify_generator_sync.py` requires i
 ## W24 / W25 — see `ARMOR_LAYERS.md` and DESIGN.md §11b
 
 **W24 (one warhead per weapon)** is now a written binding rule — DESIGN.md **§11b**. Among
-fired weapons, **34.5%** comply (560 of 1622); **57.2%** (927 of 1622) carry 2 or more damage
+fired weapons, **34.5%** comply (560 of 1622); **57.0%** (925 of 1622) carry 2 or more damage
 warheads, worst case **15**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
 content ships, because same-family collisions are a symptom of it rather than a bug in the
 conversion. Collapsing preserves the SUM; where no family fits, a NEW family is created

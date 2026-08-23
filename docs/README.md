@@ -59,12 +59,13 @@ Crashes and player-visible regressions always jump the queue.
 | [`design/SPREAD_FALLOFF_PLAN.md`](design/SPREAD_FALLOFF_PLAN.md) | per-type spread and damage-falloff profiles |
 | [`design/INVENTED_WARHEAD_FAMILIES.md`](design/INVENTED_WARHEAD_FAMILIES.md) | *(generated)* the families with no cross-mod equivalent |
 
-### Systems — 2 documents
+### Systems — 3 documents
 
 | document | owns |
 |---|---|
 | [`design/PHYSICAL_STATE_SYSTEM.md`](design/PHYSICAL_STATE_SYSTEM.md) | the status-meter layer: heat, cryo, corrosion, EMP, sonic |
 | [`design/EMP_INTEGRITY_SYSTEM.md`](design/EMP_INTEGRITY_SYSTEM.md) | EMP / Integrity auto-scaling |
+| [`design/CA_UPSTREAM.md`](design/CA_UPSTREAM.md) | tracking Combined Arms upstream: the engine lineage, why the engine must NOT move to `ca-engine`, and the phased adoption plan for the 322 unadopted CA files |
 
 ### Factions and content — 5 documents
 

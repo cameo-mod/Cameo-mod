@@ -31,60 +31,6 @@
      "v": "300"
     }
    },
-   "TSDPODE1": {
-    "armor": {
-     "src": "inherited",
-     "v": "Light"
-    },
-    "buildable": false,
-    "cost": {
-     "src": "inherited",
-     "v": "10"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Aircraft",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "inherited",
-     "v": "6000"
-    },
-    "name": "Drop Pod",
-    "speed_air": {
-     "src": "inherited",
-     "v": "300"
-    }
-   },
-   "TSDPODE2": {
-    "armor": {
-     "src": "inherited",
-     "v": "Light"
-    },
-    "buildable": false,
-    "cost": {
-     "src": "inherited",
-     "v": "10"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Aircraft",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "inherited",
-     "v": "6000"
-    },
-    "name": "Drop Pod",
-    "speed_air": {
-     "src": "inherited",
-     "v": "300"
-    }
-   },
    "ts_gdi_carryall": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Armor.Type",
@@ -963,6 +909,66 @@
     "queue": [
      "BuildingAddons"
     ]
+   },
+   "ts_gdi_dropshipbay": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "GDI Dropship Bay",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "ts_gdi_techcenter",
+     "derricklimit"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
    },
    "ts_gdi_helipad": {
     "armor": {

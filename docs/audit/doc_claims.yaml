@@ -135,7 +135,7 @@ claims:
       print(n)
 
   - id: live_damage_multipliers
-    value: 353
+    value: 354
     tolerance: 0
     what: >
       DamageMultiplier declarations in LIVE files (mod.yaml's Rules list). The tree holds 683;
@@ -158,7 +158,7 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 927
+    value: 925
     tolerance: 0
     what: >
       Fired weapons carrying MORE THAN ONE damage main — W24's scope, and the reason pricing
@@ -207,7 +207,7 @@ claims:
       print(n)
 
   - id: unmigrated_scout_damage_multiplier
-    value: 16
+    value: 15
     tolerance: 0
     what: >
       Scouts still resolving `DamageMultiplier@ScoutInfantryBuff: 50` — i.e. taking HALF damage,
@@ -232,7 +232,7 @@ claims:
       print(n)
 
   - id: meters_filling_before_death
-    value: 122
+    value: 137
     tolerance: 0
     what: >
       Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
@@ -330,7 +330,7 @@ claims:
               n += 1
       print(n)
   - id: physical_state_fired_weapons
-    value: 446
+    value: 460
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
@@ -400,7 +400,7 @@ claims:
       print(len(names) - len(set(rows)))
 
   - id: plating_families
-    value: 45
+    value: 46
     tolerance: 0
     what: >
       Families the generator emits a plating row for. The row count of the matrix in
@@ -429,7 +429,7 @@ claims:
                 if isinstance(v, dict) and 'spec' in v and v.get('signed_off')))
 
   - id: warhead_family_reach
-    value: 1231
+    value: 1245
     tolerance: 0
     what: >
       Fired weapons whose inherit chain reaches a `^Warhead_*` family — the W23/W24 burn-up.
