@@ -133,8 +133,8 @@ its audit list out of `run_all.sh`, so the two cannot drift apart.
 
 ⚠ **`audit/latest/` can only be regenerated from a COMPLETE tree** — one with `engine/` built and
 a full (non-shallow) clone. Without them a dozen audits scan a smaller corpus, report fewer
-findings and still say PASS, so a regenerate silently deletes real evidence (`unique_traits`
-125 trait types → 11). Both runners now check first and divert to the untracked
+findings and still say PASS, so a regenerate silently deletes real evidence
+(`dead_warhead_fields` 27071 warhead nodes → 7014). Both runners now check first and divert to the untracked
 `docs/audit/degraded/` instead, printing why; `--force-latest` overrides. Details and the
 measured table: [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md). Refresh `latest/` **whole, from one
 machine** — path separators alone make a cross-platform diff dirty.

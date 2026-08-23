@@ -75,7 +75,9 @@ becomes a self-contained ContentPack. Runbook: [`MIGRATION.md`](MIGRATION.md).
 | pinned doc claims | **19 of 19 match** |
 | generator sync | drift **0** across 136 shared templates |
 | documentation structure (`audit_doc_health`, D1–D8) | **0** findings |
-| ⛔ **level-ladder ratchet** | **10 broken vs a ratchet of 9** — see §3.0 |
+| level-ladder ratchet | **9 broken, AT ratchet 9** — WARN, not FAIL. See §3.0a |
+| ⛔ **`audit_doc_health`** | **FAIL — D8 flags its own test fixtures**. See §3.0b |
+| ⛔ **`environment.py`** | **can never report a complete tree** — wrong CA path. See §3.0b |
 
 ⚠ The counts above were re-measured at `519175ae`; the per-class counts in
 [`audit/SUMMARY.md`](audit/SUMMARY.md) come from the last full suite run and carry the
@@ -180,69 +182,82 @@ not repeatedly.
 
 Crashes and player-visible regressions jump everything below.
 
-### 3.0 — DO THIS FIRST (the suite is red, and one item is not yours to fix)
+### 3.0 — DO THIS FIRST
 
-Two things, in this order. Neither is large; the first is a decision, the second is a chore that
-has to happen on a machine this container is not.
+**a. Nine broken damage ladders — WARN, and still unruled.**
 
-**a. `audit_level_ladder` is FAILING — 10 broken ladders against a ratchet of 9.**
+A family's damage must RISE with its level. Nine do not: seven are INVERTED (a heavier level hits
+softer than a lighter one) and two are FLAT. The measured table for all nine and the shapes they
+fall into are in [`design/ROADMAP.md`](design/ROADMAP.md) under **BROKEN LADDERS**.
 
-A family's damage must RISE with its level. Ten families do not: seven are INVERTED (a heavier
-level hits softer than a lighter one) and three are FLAT (every level identical). The measured
-table for all ten, and the three distinct shapes they fall into, are in
-[`design/ROADMAP.md`](design/ROADMAP.md) under **RATCHET BREACH**.
+⚠ This was **10 and FAILING** on 2026-08-23 and came back to the ratchet without anyone ruling on
+anything: `a9f31258` (the RA1 Allies cryo conversion) moved `Demolition`'s Heavy rung 40000 →
+60000 as a side effect, taking it from FLAT to rising, and added a new measurable family. So the
+suite no longer exits 1 on this — but the count is not a progress metric. A family leaves the list
+by being fixed, by dropping below the measurability threshold, or by a conversion moving its rungs
+in passing. Read the table, not the number.
 
 ⛔ **Do not fix these by hand and do not raise the ratchet.** They are balance numbers
 (CLAUDE.md rule 3): the route is a maintainer ruling → `extract_stats` → ledger →
-`apply_balance --confirm`. `LADDER_BASELINE` in `tools/audit/audit_level_ladder.py` is
-LOWER-ONLY, and lowering it is how this closes.
+`apply_balance --confirm`. `LADDER_BASELINE` is LOWER-ONLY, and lowering it is how this closes.
 
-The ruling needed is small — for each family, which rung is wrong — but it is a **design**
-ruling, so it belongs to the maintainer. `MissileAP` (n=81) and `Tesla` (n=67) descend
-monotonically across well-populated rungs, which reads as a family built the wrong way round
-rather than a stray weapon; `CannonAP`, `Flak` and `Thermobaric` invert against a rung holding
-only two weapons, where the thin side is the likelier error; `Bullet` and `Demolition` are flat
-across 91 and 53 weapons, which is a different question again.
+The ruling needed is small — for each family, which rung is wrong — but it is a **design** ruling,
+so it belongs to the maintainer. `MissileAP` (n=80) and `Tesla` (n=67) descend monotonically
+across well-populated rungs, which reads as a family built the wrong way round rather than a stray
+weapon; `CannonAP`, `Flak` and `Thermobaric` invert against a rung holding only two weapons, where
+the thin side is the likelier error; `Bullet` is flat across 89 weapons, which is a different
+question again.
 
-⭐ **How it stayed hidden**, worth reading once: `latest/level_ladder.md` had not been
-regenerated since a commit PREDATING the change that exposed it, so a FAIL sat in the tree
-reporting itself as a WARN. A ratchet re-measured only when someone remembers is not a ratchet.
+**b. Three tooling defects are LIVE on master. Fixes were reported in flight on 2026-08-23 from a
+Windows session — check whether they landed before redoing them.**
 
-**b. `docs/audit/latest/` needs one clean regenerate, from a complete tree.**
+| defect | effect | fix |
+|---|---|---|
+| `tools/audit/environment.py` lists `engine/OpenRA.Mods.CA` | `OpenRA.Mods.CA` is **vendored at the repo root**, not under `engine/`, so that path can never exist and `incomplete()` returns a reason on EVERY machine — `latest/` is unwritable without `--force-latest`, even from a fully built tree | drop the `engine/` prefix on that one entry |
+| `tools/audit/audit_unique_traits.py` has the same wrong path in `SOURCE_ROOTS` | not a gate, so it just **under-reported in silence**: 125 trait types scanned instead of 139. Fourteen CA trait types had never been checked | same |
+| `audit_doc_health` D8 flags its own test fixtures | `tools/tests/test_audit_doc_health.py` asserts on a literal wrong-citation label, so **D8 reports 3 findings against its own unit tests and the suite exits 1 on a clean tree** | exclude `tools/tests/` — the same self-reference class already handled for D5 |
 
-It is currently a MIXTURE of two environments. A dozen audits read `engine/` C# or full git
-history; where those are missing the scripts scan a smaller corpus, report fewer findings and
-still say **PASS** — `unique_traits` 125 trait types → 11, `dead_warhead_fields` 27071 nodes →
-7014 — so alternating Windows and container runs have been overwriting each other's numbers.
+`audit_dead_warhead_fields.py` and `audit_code_duplication.py` already had the CA path right, and
+a sweep of `tools/**/*.py` finds no third instance — those two are the whole set.
 
-`run_all` now refuses to write `latest/` from an incomplete tree, diverting to the untracked
-`docs/audit/degraded/` and saying why (`--force-latest` overrides). So this is a one-time
-cleanup, and it needs a machine with `engine/` built and a non-shallow clone:
+⭐ Both of the second and third defects were introduced by the change that added the gate, and both
+were "verified" before landing. How, is in [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md): a grep whose
+filter excluded exactly the lines that would have disproved it, and a tracked-file scan run while
+the new file was still untracked.
+
+**c. `docs/audit/latest/` needs one clean regenerate, from a complete tree.**
+
+It is a MIXTURE of two environments. A dozen audits read `engine/` C# or full git history; where
+those are missing the scripts scan a smaller corpus, report fewer findings and still say **PASS** —
+`dead_warhead_fields` 27071 nodes → 7014 — so alternating Windows and container runs have been
+overwriting each other's numbers.
+
+`run_all` now diverts to the untracked `docs/audit/degraded/` instead (`--force-latest` overrides),
+so this is a one-time cleanup — **but it cannot succeed until defect (b)#1 above is fixed**, because
+the probe currently calls every tree incomplete. Then, on a machine with `engine/` built:
 
 ```sh
 git fetch --unshallow          # if the clone is shallow
 bash tools/audit/run_all.sh    # writes latest/ only from a complete tree
 ```
 
-Commit the result **whole**. Do not cherry-pick report files: Windows writes `mods\cameo\…`
-and Linux writes `mods/cameo/…`, so a cross-platform diff is dirty even between two complete
-trees. Full diagnosis: [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md).
+Commit the result **whole**. Do not cherry-pick report files: Windows writes `mods\cameo\…` and
+Linux writes `mods/cameo/…`, so a cross-platform diff is dirty even between two complete trees.
 
 ⚠ The suite also rewrites TRACKED files **outside** `audit/latest/` — `docs/factions/MATRIX.md`
 and `tools/rename/rename_map_*.yaml` (`gen_rename_maps.py` writes those as a side effect of the
 naming report). So `git status` after a suite run is not expected to be clean, and those files
-belong in the same commit. Seven rename maps are currently stale against master's icon renames
-at `519175ae`; they regenerate from tracked yaml only, so any complete tree produces the same
-answer.
+belong in the same commit.
 
-⚠ **The previous items here are DONE.** The 9 drifted balance ledgers were fixed by master in
-`31e649b8`, and the 4 drifted doc claims were cleared on 2026-08-23 —
-`audit_doc_claims` is now **19 of 19**, and `ledgers_drifted` is pinned in the registry so a
-recurrence goes red immediately instead of being found by accident weeks later.
+⚠ **Previous items here are DONE.** The 9 drifted balance ledgers (`31e649b8`), the 4 drifted doc
+claims (`audit_doc_claims` is **19 of 19**), and the memory-citation promotion — **zero**
+`memory <name>` pointers remain in the live document set; the two load-bearing ones were inlined
+into `weapon_classes.yaml`'s header and `BALANCE_PROGRAM_PLAN.md` §7.
 
 ```sh
-python tools/audit/audit_level_ladder.py   # the red one
-python tools/audit/audit_doc_claims.py     # documented vs measured, all 19
+python tools/audit/audit_level_ladder.py   # WARN 9, at the ratchet
+python tools/audit/audit_doc_health.py     # FAIL until (b)#3 lands
+python tools/audit/environment.py          # should print "complete" on a built tree
 ```
 
 ### 3.1 — The weapon rebuild (the main line)
