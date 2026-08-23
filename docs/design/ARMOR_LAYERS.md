@@ -56,7 +56,7 @@ questions and became the plating layer. What is LIVE, with the binding summary i
 | 5 platings `HAZMAT` `COMPOSITE` `BLAST` `REFLECTOR` `ARMOR`, ALL CAPS, full columns in all 94 templates | §D-bis, §G, §H |
 | LAYER SELECTION — a plating replaces the class armor | `AreaDamageWarhead.DamageVersus` |
 | the column law: every plating averages **70** | §I |
-| `effective_HP = HP + shield x 0.535`, measured live | §I |
+| `effective_HP = HP + shield x 0.529`, measured live | §I |
 | 4 upgrades retagged; the generic ones stay multipliers | §G |
 | guards `audit_armor_upgrade_harm.py` + `audit_plating_exclusivity.py` | §F, run_all.sh |
 | `Waveforce` IntegrityScale deleted (could never fire) | §B, §D-bis |
@@ -617,13 +617,13 @@ Two families were credited to the wrong counter in the first draft:
 
 | layer | column mean | 1 point is worth | maintainer's estimate |
 |---|--:|--:|---|
-| `Shield` | **186.79** | **0.535 HP** | "200% shield ≈ 100% extra HP" — i.e. 0.5. **Confirmed to 9%.** |
+| `Shield` | **189.09** | **0.529 HP** | "200% shield ≈ 100% extra HP" — i.e. 0.5. **Confirmed to 9%.** |
 | all five platings | **100.0** | **1.000 HP** | "it evens out" — **confirmed exactly**, by construction |
 
 So the pricing rule is:
 
 ```
-effective_HP = HP + shield_strength x (100 / mean_versus_shield)      # x0.535 today
+effective_HP = HP + shield_strength x (100 / mean_versus_shield)      # x0.529 today
 ```
 
 and a plating contributes **nothing** to effective HP on average — it redistributes only.
@@ -1471,7 +1471,7 @@ though they are in the same kinetic family right? But you need to use your best 
 reasoning for this to get it right!"* … *"I want all weapon families to be a bit more unique so
 don't put 3 energy weapons exactly on the same versus value but slightly different"*
 
-**STATUS: DONE** — shipped in `e7fa2d57b`. **37 emitted families, 37 distinct rows.** Four groups
+**STATUS: DONE** — shipped in `e7fa2d57b`. **45 emitted families** (`plating_families`, re-measured 2026-08-23). ⚠ The matrix below still lists 37 rows — the families added since (the Cryo cells among them) have no row yet; `audit_doc_claims` holds this red until the table is regenerated. Four groups
 of ties are gone: `Laser/Prism/Tesla`, `Chemical/Cryo/Flame/Toxic`, `Concussion/Demolition`, and
 `Arrow/Bullet/CannonAP/Melee`. Pinned by `tools/tests/test_plating_composition.py`.
 
@@ -1616,7 +1616,7 @@ That catches exactly the drift that shipped twice (`Inferno` 0.57 (Flame×Prism)
 
 ### The shipped matrix
 
-37 families, 37 distinct rows (ARMOR excluded — it is flat by definition).
+45 families emitted; the table below still lists 37 rows (ARMOR excluded — it is flat by definition).
 
 | family | HAZMAT | COMPOSITE | BLAST | REFLECTOR | ARMOR | composition |
 |---|--:|--:|--:|--:|--:|---|
@@ -1810,7 +1810,7 @@ Versus[Shield] = 2 x Versus[the building's armor row]
 `(H/2) x 100/V_c` for the health plus `H x 100/V_s` for the pool. Setting them equal gives
 `0.5/V_c + 1/V_s = 1/V_c`, i.e. `V_s = 2 V_c`.
 
-⭐ This is the same fact as the **186.8% break-even pool** (`100 / shield_hp_factor`): both say
+⭐ This is the same fact as the **189.1% break-even pool** (`100 / shield_hp_factor`): both say
 that converting HP into an equal-value shield means undoing exactly the Shield row's average
 penalty. AtomicCore has `Shield 155` against `Concrete 100`, i.e. 1.55x where neutrality needs
 2.0x — which is precisely why the converted building came out *tougher*.

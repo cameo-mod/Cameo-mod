@@ -304,7 +304,7 @@ speed/5 for both the mobile trait and the turreted trait … Also the self heali
 the repairable traits should be scaled with the health … I want to see if everything we have already
 discussed is already implemented."_
 
-Same principle as [`UNIFIED_AREADAMAGE_WARHEAD.md`](UNIFIED_AREADAMAGE_WARHEAD.md): **the template is
+Same principle as [`AREADAMAGE_WARHEAD.md`](AREADAMAGE_WARHEAD.md): **the template is
 the big brain, the inline entry is one brain cell.** That document does it for weapons; this one does
 it for actors.
 
@@ -441,7 +441,7 @@ verdict as turn rate: **generate it into yaml.** Static value, no runtime input,
 2. **`GrantsShield`**: same three changes on a trait we already own.
 3. **Generator pass** for the static values — turn rates (all four cases) and repair rate — plus a
    `doc_claims` entry so drift is caught.
-4. **Then the weapon half**, `UNIFIED_AREADAMAGE_WARHEAD.md` — same principle, much larger blast
+4. **Then the weapon half**, `AREADAMAGE_WARHEAD.md` (weapon half) — same principle, much larger blast
    radius (3243 yaml nodes), and it shares the basis-point unit with this work. Do it after the
    per-tick + basis-point pattern is proven here on something small.
 

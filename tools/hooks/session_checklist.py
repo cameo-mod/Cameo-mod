@@ -18,10 +18,10 @@ docs/design/BALANCE_PROGRAM_PLAN.md (the board + §0a's binding order of operati
 
 ⛔ BEFORE DESIGNING ANYTHING, GREP docs/DESIGN.md FOR THE CONCEPT. It is the BINDING contract
 and it is long, so nobody reads it end to end — grep it. On 2026-08-22 a whole session was spent
-re-deriving a weapon-tier model that §12.0a/§12.0c/§12.0d had already ruled AND shipped. A design
+re-deriving a weapon-tier model that §12.0h/§12.0c/§12.0d had already ruled AND shipped. A design
 question that feels novel usually is not. The rulings most often re-invented:
 
-  §12.0a MEAN-100      every ^Warhead_* MAIN warhead has its 16 armor rows normalised to
+  §12.0h MEAN-100      every ^Warhead_* MAIN warhead has its 16 armor rows normalised to
                        arithmetic MEAN 100. Therefore K is SHAPE-ONLY, `Damage` is the SOLE
                        magnitude knob, and a tilt is FREE. Weapon tier does NOT price via Versus.
   §12.0c SHIELD LADDER Shield is its own compressed [100,400] ladder, Tesla top. NOT a normal armor.

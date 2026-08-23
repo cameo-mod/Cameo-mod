@@ -73,7 +73,7 @@ never for status.
    Guarded by `audit_versus_profile.py`. And **a result that contradicts a binding law the
    generator implements is a contradiction, not a finding** — check before believing it.
 8f. **GREP `docs/DESIGN.md` BEFORE DESIGNING ANYTHING.** It is required reading #4 and it is
-   binding. §12.0a (MEAN-100: `K` is SHAPE-ONLY, `Damage` is the sole magnitude knob), §12.0c (the
+   binding. §12.0h (MEAN-100: `K` is SHAPE-ONLY, `Damage` is the sole magnitude knob), §12.0c (the
    Shield ladder) and §12.0d (the CLASS TILT — each level tilts toward one end of every armor
    ladder and *"can never invert"*) were all already ruled and already shipped while days of design
    work re-derived them. A design question that feels novel usually is not.

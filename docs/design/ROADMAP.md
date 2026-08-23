@@ -122,6 +122,30 @@ Documented in `PHYSICAL_STATE_SYSTEM.md` §5 but not built: **Sonic → `Resonan
 new C#), **Hex** (Magic: −firepower/−accuracy/disable specials), **ArmorBreach**, **Knockback**
 (needs new C#). Only **Temperature** (98.6% exposure) and **Corrosion** (45.0%) exist today.
 
+## ⛔ RATCHET BREACH — `audit_level_ladder` 10 vs ratchet 9 (found 2026-08-23)
+
+The suite exits 1 on this. **It is ours, from tick tank commit `f9b71bffa`**, and it stayed
+invisible because `docs/audit/latest/level_ladder.md` had not been regenerated since `52b364cb5`,
+which PREDATES that commit — so a FAIL sat in the tree reporting itself as a WARN at baseline.
+
+Moving `TS90mm` / `TSLaser90mm` from `CannonHE_Medium` to `CannonAP_Medium` gave `CannonAP` a
+SECOND populated rung, so the family crossed the "2+ rungs with 2+ weapons" threshold and became
+measurable for the first time. What it measured:
+
+| family | Light | Medium | verdict |
+|---|--:|--:|---|
+| `CannonAP` | **48000** _(n=7)_ | **6000** _(n=2)_ | ⛔ INVERTED — Light hits **8x** harder than Medium |
+
+⚠ The tick tank change did not CREATE this; it EXPOSED it. `CannonAP_Light` was already at 48000
+while the weapons now on `CannonAP_Medium` sit at 6000. One of the two rungs is wrong.
+
+**Needs a maintainer ruling on which rung is wrong**, then `extract_stats` → ledger →
+`apply_balance --confirm`. It is a balance number, so it cannot be hand-fixed (rule 3), and the
+ratchet must not be raised.
+
+⭐ **Process lesson:** a ratchet re-measured only when someone remembers is not a ratchet.
+`f9b71bffa` was boot-gated and shipped without re-running the suite.
+
 ## ⛔ OPEN DECISION — how the Cryo families get adopted (2026-08-23)
 
 `BulletCryo`, `CannonCryo`, `MissileCryo` and `CryoBlast` are BUILT and spliced but adopted by
@@ -278,7 +302,7 @@ between-tier weapons that currently out-damage the tier ABOVE them.
 
 ⛔ **CORRECTED 2026-08-22 — MOST OF THIS WAS ALREADY LAW AND ALREADY SHIPPED.**
 
-`DESIGN.md` §12.0a (THE MEAN-100 LAW), §12.0c (THE SHIELD LADDER) and §12.0d (THE CLASS TILT)
+`DESIGN.md` §12.0h (THE MEAN-100 LAW), §12.0c (THE SHIELD LADDER) and §12.0d (THE CLASS TILT)
 already rule this design, and all three are live in `gen_weapon_template.py` (`mean_normalise`,
 `class_tilt`, `TILT_RATIO 1.5`, `MEAN_TARGET 100`). §12.0d IS the bell curve, and it already
 solves inversion: the tilt is applied to the VALUES and each armor is then given back the RANK it
@@ -292,7 +316,7 @@ The blockers previously listed here were measured with a broken hand parser that
 |---|---|
 | 0 of 125 obey MEAN-100 | **123 of 125** (the 2 are HAND_TUNED) |
 | every family breaks the 2x-8x band | **39 of 42 in band**, median 4.17x vs a 4x target |
-| a Heavy weapon self-prices at ~2x a Light one | Heavy/Light weighted-mean Versus is **1.00x** — tier does NOT price through Versus, exactly as §12.0a intends |
+| a Heavy weapon self-prices at ~2x a Light one | Heavy/Light weighted-mean Versus is **1.00x** — tier does NOT price through Versus, exactly as §12.0h intends |
 
 **What is genuinely still open:**
 

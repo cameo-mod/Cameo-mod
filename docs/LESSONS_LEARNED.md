@@ -131,7 +131,7 @@ Warhead@Bullet_Light: AreaDamage
 an additive `+4/+5` level offset that was really the rank ladder stepping 1/5/10, "26 of 42
 families invert", and "a Heavy weapon self-prices at ~2x a Light one" (truth: the Heavy/Light
 weighted-mean Versus ratio is **1.00x** — the level does not price through Versus at all, exactly
-as §12.0a intends). Two design documents were written and committed on those numbers.
+as §12.0h intends). Two design documents were written and committed on those numbers.
 
 **The rules:**
 
@@ -148,7 +148,7 @@ as §12.0a intends). Two design documents were written and committed on those nu
 Guarded by `tools/audit/audit_versus_profile.py`, which reads through the resolver on purpose.
 
 **And the deeper miss:** `docs/DESIGN.md` is required reading #4 in CLAUDE.md ("the binding design
-contract ... Read it before touching any yaml"), and it already contained §12.0a (MEAN-100),
+contract ... Read it before touching any yaml"), and it already contained §12.0h (MEAN-100),
 §12.0c (the Shield ladder) and §12.0d (the class tilt). Days of design work re-derived rulings
 that were already made and already shipped. **Before designing anything, grep DESIGN.md for the
 concept.** A design question that feels novel usually is not.

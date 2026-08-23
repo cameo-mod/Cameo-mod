@@ -1529,7 +1529,7 @@ separate families of EQUAL rank, never reorder unequal ones.
 
 ⚠ **The compression is DERIVED every run** (`shield_uniqueness.compress`), not calibrated.
 Three hand-set constants were correct for exactly one profile set and went silently wrong
-the moment §12.0a renormalised everything.
+the moment §12.0h renormalised everything.
 
 ### 12.0d THE CLASS TILT (maintainer 2026-08-16) — binding
 
@@ -1574,7 +1574,7 @@ Laws:
    weapon hit PLATED units harder than unplated ones.
 3. **THE COLUMN LAW.** Every plating's mean across all templates is the same (**70**), so no
    plating is stronger overall — they differ only in WHAT they resist. This is the TRANSPOSE
-   of §12.0a and cannot conflict with it: platings sit outside the class-armor set.
+   of §12.0h and cannot conflict with it: platings sit outside the class-armor set.
    ⚠ 70 rather than 100 because a plating displaces the class armor, and six class armors
    already average better than 100 (`Heroic` 74.3, the four aircraft 76–80) — at 100 a hero
    or an aircraft got 25–35% WORSE for taking an upgrade.
@@ -1591,7 +1591,7 @@ Laws:
 ### 12.0f PRICED SURVIVABILITY (E1, 2026-08-16; SHIPPED 2026-08-17)
 
 ```
-effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # x0.535 measured
+effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # x0.529 measured
 ```
 The factor is MEASURED from the live ruleset, never frozen — the Shield ladder is generated
 and has moved repeatedly. ⚠ **`Integrity` is NOT a shield and is NOT counted**: it absorbs

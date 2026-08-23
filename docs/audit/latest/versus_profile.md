@@ -1,6 +1,6 @@
 # audit_versus_profile — 137 MAIN profiles across 47 families
 
-## §12.0a MEAN-100 — 135 of 137 conform
+## §12.0h MEAN-100 — 135 of 137 conform
 
   Nuclear_Super  mean 77.5 _(HAND_TUNED — generator skips it, expected)_
   Sniper_Light  mean 55.0 _(HAND_TUNED — generator skips it, expected)_
