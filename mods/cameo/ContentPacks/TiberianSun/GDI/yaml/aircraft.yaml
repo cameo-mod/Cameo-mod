@@ -537,6 +537,7 @@ ts_gdi_dropship:
 		Repulsable: False
 		MaximumPitch: 36
 		CruiseAltitude: 2560
+		AltitudeVelocity: 250
 		IdleBehavior: LeaveMap
 	OwnerLostAction:
 		Action: Kill
@@ -555,16 +556,4 @@ ts_gdi_dropship:
 	DamageMultiplier@INVULNERABLE:
 		Modifier: 0
 	WithVoxelBody:
-	Contrail@1:
-		Offset: -261,-650,0
-		TrailLength: 15
-	Contrail@2:
-		Offset: -85,-384,0
-		TrailLength: 16
-	Contrail@3:
-		Offset: -85,384,0
-		TrailLength: 16
-	Contrail@4:
-		Offset: -261,650,0
-		TrailLength: 15
 	DynamicSpeedMultiplier:
