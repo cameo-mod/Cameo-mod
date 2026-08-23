@@ -269,9 +269,9 @@ tkm_technicaltank:
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -366,7 +366,7 @@ tkm_zaza:
 	ChangesHealth@SelfHealing:
 		Step: 11
 	Turreted:
-		TurnSpeed: 30
+		TurnSpeed: 15
 		Offset: -160,0,500
 	Armament@AG:
 		Weapon: TKMZazaCannonAG
@@ -532,9 +532,9 @@ tkm_abrams:
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -599,7 +599,7 @@ tkm_t72m:
 	RevealsShroud:
 		Range: 6c0
 	Turreted:
-		TurnSpeed: 20 #3
+		TurnSpeed: 16
 		Offset: 0,0,200
 	Armament:
 		Weapon: tkm2a46gun
@@ -607,7 +607,7 @@ tkm_t72m:
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
-	Armament@machinegun: ##########
+	Armament@machinegun:
 		Weapon: tkmkord
 		LocalOffset: 768,85,90, 768,-85,90
 	WithMuzzleOverlay:
@@ -622,9 +622,9 @@ tkm_t72m:
 		RequiresCondition: tkm_upgrade_pointdefensesystem
 	WithAmmoPipsDecoration:
 		RequiresCondition: tkm_upgrade_pointdefensesystem
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	Voiced:
 		VoiceSet: TSVehicle
 	ActorStatValues:
@@ -666,7 +666,7 @@ tkm_trenchtruck:
 		Speed: 60
 		TurnSpeed: 12
 	Turreted:
-		TurnSpeed: 15 #3
+		TurnSpeed: 12
 		Offset: -100,0,5
 	Health:
 		HP: 100000
@@ -676,9 +676,9 @@ tkm_trenchtruck:
 		Range: 6c0
 	SelectionDecorations:
 	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	Voiced:
 		VoiceSet: TSVehicle
 	Selectable:
@@ -711,7 +711,7 @@ tkm_tornadoglauncher:
 		Step: 14
 	Mobile:
 		Speed: 80
-		TurnSpeed: 16
+		TurnSpeed: 32
 	Armament@PRIMARY:
 		Weapon: tkmkatyushalalauncherrockets
 		RequiresCondition: !tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade
@@ -784,7 +784,7 @@ tkm_radartruck:
 		Description: actor_jeep.description
 	Mobile:
 		Speed: 75
-		TurnSpeed: 15
+		TurnSpeed: 30
 	Health:
 		HP: 75000
 	Repairable:
@@ -851,7 +851,7 @@ tkm_repairtruck:
 		Armaments: primary,repair
 	Mobile:
 		Speed: 75
-		TurnSpeed: 15
+		TurnSpeed: 30
 	Health:
 		HP: 50000
 	Repairable:
@@ -904,7 +904,7 @@ tkm_medictruck:
 		Speed: 75
 		TurnSpeed: 15
 	Turreted:
-		TurnSpeed: 20 #3
+		TurnSpeed: 15
 		Offset: 250,0,425
 	Health:
 		HP: 50000
@@ -1032,9 +1032,9 @@ tkm_trenchtank:
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	Voiced:
 		VoiceSet: TSVehicle
 	Selectable:
@@ -1093,9 +1093,9 @@ tkm_t30:
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
 	Voiced:
 		VoiceSet: TSVehicle
 	ActorStatValues:
@@ -1135,7 +1135,7 @@ tkm_battlebus:
 		Description: template_opentopped.description
 	Mobile:
 		Speed: 100
-		TurnSpeed: 20
+		TurnSpeed: 40
 	Passenger:
 	Health:
 		HP: 50000

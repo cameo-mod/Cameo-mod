@@ -101,7 +101,7 @@ japan_japanesemgnest:
 		CasingSpawnLocalOffset: 384,0,512
 		CasingTargetOffset: 0,-600,0
 		RequiresCondition: !japan_upgrade_waveforcebullets
-	Armament@Upgrade: ##########
+	Armament@Upgrade:
 		Name: primary
 		Weapon: JHighVWaveforce
 		LocalOffset: 768,0,512
@@ -153,21 +153,21 @@ japan_ballistatower:
 		HP: 190000
 	WithBuildingBib:
 		HasMinibib: true
-	Armament@PRIMARY: ##########
+	Armament@PRIMARY:
 		Weapon: BallistaTowerMultiShot
 		LocalOffset: 624,0,208
 		PauseOnCondition: ammo < 5
-	Armament@AIR: ##########
+	Armament@AIR:
 		Weapon: BallistaSingleShotAir
 		LocalOffset: 624,0,208
 		AmmoUsage: 5
 		PauseOnCondition: ammo < 5
-	Armament@Upgrade: ##########
+	Armament@Upgrade:
 		Weapon: BallistaTowerMultiShotEnergized
 		LocalOffset: 624,0,208
 		PauseOnCondition: ammo < 5
 		RequiresCondition: japan_upgrade_energizedarrows
-	Armament@UpgradeAIR: ##########
+	Armament@UpgradeAIR:
 		Weapon: BallistaSingleShotAirEnergized
 		LocalOffset: 624,0,208
 		AmmoUsage: 5

@@ -21,7 +21,7 @@ the same pipeline.
 6. push    JSON ──► yaml                 python tools/balance/apply_balance.py --confirm
 7. verify  drift audit: yaml ≡ ledger    python tools/balance/extract_stats.py --check
 8. verify  multiplier audit: all `*Multiplier Modifier` values are integer percentages    python tools/audit/audit_multiplier_modifiers.py
-9. decode  audit reports (if UTF-16)     python tools/balance/_decode_audit.py
+9. decode  audit reports (if UTF-16)     — no longer needed; `run_all.sh` forces UTF-8
 ```
 
 Class rebalances add two extra proposal steps before the normal push:

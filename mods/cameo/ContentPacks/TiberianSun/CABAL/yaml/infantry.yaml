@@ -135,7 +135,7 @@ cabal_cyborginfantry:
 	Voiced:
 		VoiceSet: TSCyborg
 	-TakeCover:
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: CabalCyborgChaingun
 	RenderSprites:
@@ -250,7 +250,7 @@ cabal_rocketcyborg:
 	-TakeCover:
 	Crushable:
 		CrushClasses: vehicle
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: CabalRocketCyborgRockets
 	RenderSprites:
@@ -484,7 +484,7 @@ cabal_ascended:
 	-TakeCover:
 	Crushable:
 		CrushClasses: vehicle
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: CabalAscendedRockets
 	RenderSprites:
@@ -736,7 +736,7 @@ cabal_hackercyborg:
 	-TakeCover:
 	Crushable:
 		CrushClasses: vehicle
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: TSRobotHackingControl
 	Selectable:

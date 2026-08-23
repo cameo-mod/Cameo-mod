@@ -63,18 +63,12 @@
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-
 OreExplosion:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
 	Inherits@fx: ^Effect_Flame_Medium
 	Warhead@Flame_Medium:
 		Damage: 40000
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Resource: CreateResource
 		AddsResourceType: Ore
 		Size: 1,1
@@ -88,12 +82,13 @@ M1Carbine:
 	Report: gun11.aud
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
-		Damage: 1
-
 CryoM1Carbine:
-	Inherits: M1Carbine
-	Inherits@2: ^CryoMissileProjectile
+	Inherits@wh: ^Warhead_BulletCryo_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 20
+	Range: 4655
+	Report: gun11.aud
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 0
@@ -102,8 +97,8 @@ CryoM1Carbine:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		ContrailLength: 10
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-		Amount: -2000
+	Warhead@BulletCryo_Light:
+		Damage: 2000
 
 VengeanceActivator1:
 	Projectile: InstantExplode
@@ -162,12 +157,8 @@ ConscriptMolotov:
 		ContrailEndColor: FFFFFF22
 	Warhead@Demolition_Light:
 		Damage: 8000
-	Warhead@Demolition_Light_Percentage:
-		Damage: 4
 	Warhead@Flame_Light:
 		Damage: 8000
-	Warhead@Flame_Light_Percentage:
-		Damage: 4
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
 		Duration: 40
@@ -183,12 +174,8 @@ ConscriptMolotovExplode:
 	Inherits: ConscriptMolotov
 	Warhead@Demolition_Light:
 		Damage: 4000
-	Warhead@Demolition_Light_Percentage:
-		Damage: 2
 	Warhead@Flame_Light:
 		Damage: 4000
-	Warhead@Flame_Light_Percentage:
-		Damage: 2
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
 		Duration: 25
@@ -203,20 +190,18 @@ RocketsRA:
 	Report: missile6.aud
 	Warhead@MissileHE_Medium:
 		Damage: 10000
-	Warhead@MissileHE_Medium_Percentage:
-		Damage: 5
 	Warhead@MissileHE_Light:
 		Damage: 10000
-	Warhead@MissileHE_Light_Percentage:
-		Damage: 5
-
 RocketsRACryo:
-	Inherits: RocketsRA
-	Inherits@2: ^CryoMissileProjectile
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-		Amount: -20000
-		Range: 300
-
+	Inherits@wh: ^Warhead_MissileCryo_Medium
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 50
+	Range: 6643
+	Report: missile6.aud
+	Warhead@MissileCryo_Medium:
+		Damage: 20000
+		ValidTargets: Ground, Water, Air
 DragunovSniper:
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^RailgunWeapon
@@ -228,31 +213,31 @@ DragunovSniper:
 	Warhead@TankDestroyerCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 80000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 80000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 80000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@HeavyCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 80000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 80000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 
@@ -273,8 +258,6 @@ Flamer:
 		Inaccuracy: 850
 	Warhead@Flame_Light:
 		Damage: 2000
-	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 1
 PortaTesla:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
@@ -287,9 +270,6 @@ PortaTesla:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 10000
-	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
-		Damage: 10
-
 TTankZap:
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
@@ -302,9 +282,6 @@ TTankZap:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 20000
-	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
-		Damage: 20
-
 LightSniper:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
@@ -316,7 +293,7 @@ LightSniper:
 		Damage: 30000
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 30000
-	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 15
 
 ReimuYinYangOrb:
@@ -339,10 +316,6 @@ ReimuYinYangOrb:
 	Warhead@Magic_Heavy:
 		Spread: 320
 		Damage: 64000
-	Warhead@Magic_Heavy_Percentage:
-		Spread: 160
-		Damage: 32
-		ValidRelationships: Enemy, Neutral
 	Warhead@Effect: CreateEffect
 		ImpactSounds: thgun.wav
 
@@ -529,6 +502,7 @@ MagicOrb:
 		TrailInterval: 1
 		ContrailLength: 0
 	Warhead@Tesla_Heavy:
+		PercentageScale: 6667
 		Spread: 1200
 		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -536,17 +510,10 @@ MagicOrb:
 		Spread: 1600
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Tesla_Heavy_Percentage:
-		Spread: 800
-		Damage: 4
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Magic_Heavy:
+		PercentageScale: 6667
 		Spread: 1200
 		Damage: 12000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Magic_Heavy_Percentage:
-		Spread: 800
-		Damage: 4
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Spread: 2000
@@ -590,17 +557,9 @@ MagicOrb2:
 		Spread: 2400
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Tesla_Heavy_Percentage:
-		Spread: 1200
-		Damage: 2
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Magic_Heavy:
 		Spread: 1600
 		Damage: 4000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Magic_Heavy_Percentage:
-		Spread: 1200
-		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Spread: 2000
@@ -621,29 +580,17 @@ APCGunAllies:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 1
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 1
-
 APCGunAllies_AA:
 	Inherits: APCGunAllies
 	Range: 8967
 	ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Air
-
 RAVulcan:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
@@ -656,14 +603,24 @@ RAVulcan:
 	Range: 6500
 	Report: gun13.aud
 	Warhead@Bullet_Light:
+		PercentageScale: 2500
 		Damage: 8000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
-		Damage: 1
 	Warhead@Bullet_Medium:
+		PercentageScale: 2500
 		Damage: 8000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		Damage: 1
-
+RAVulcanCryo:
+	Inherits@wh: ^Warhead_BulletCryo_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Cryo
+	ValidTargets: Ground, Water
+	ReloadDelay: 48
+	Burst: 5
+	BurstDelays: 3
+	Range: 6500
+	Report: gun13.aud
+	Warhead@BulletCryo_Medium:
+		Damage: 16000
+		ValidTargets: Ground, Water, Air
 ZeroFighterChainGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -679,32 +636,24 @@ ZeroFighterChainGun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 3
-
 ZeroFighterChainGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: ^Grenade
 	Inherits@3: ZeroFighterChainGun
 	Inherits@4: ^WaveforceBulletProjectile
+	Warhead@Bullet_Medium:
+		PercentageScale: 6667
 	Projectile: Bullet
 		-LaunchAngle:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Railgun_Heavy_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 500
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
@@ -720,16 +669,24 @@ TigerCannon:
 		Speed: 591
 	Warhead@CannonHE_Heavy:
 		Damage: 8000
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 4
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 4
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
 
+TigerCannonCryo:
+	Inherits@wh: ^Warhead_CannonCryo_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 60
+	Range: 5915
+	Report: cannon1.aud
+	Projectile: Bullet
+		Speed: 591
+	Warhead@CannonCryo_Heavy:
+		Damage: 16000
+		ValidTargets: Ground, Water
 25mmWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: 25mm
@@ -758,17 +715,9 @@ WaveforceCannonChargedLaser:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Railgun_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 5
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MissileHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
@@ -808,7 +757,7 @@ WaveforceCannonDistortedBeam1:
 		ValidTargets: Ground, Water, Air
 		Damage: 5000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -816,7 +765,7 @@ WaveforceCannonDistortedBeam1:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -857,17 +806,9 @@ WaveforceCannonDistortedBeam2:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 5
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Flame_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Flame_Heavy_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
@@ -898,21 +839,21 @@ ra120mm:
 		Speed: 641
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 6000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 6000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
+	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 6000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 3000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 6000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		Explosions: small_building
@@ -935,8 +876,6 @@ MammothTusk:
 		ContrailEndColor: 000000FF
 	Warhead@MissileHE_Heavy:
 		Damage: 24000
-	Warhead@MissileHE_Heavy_Percentage: AreaDamagePercentage
-		Damage: 12
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom12.aud
@@ -963,16 +902,21 @@ ParaBomb:
 		Shadow: False
 	Warhead@Demolition_Heavy:
 		Damage: 20000
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 10
 	Warhead@Flame_Heavy:
 		Damage: 20000
-	Warhead@Flame_Heavy_Percentage:
-		Damage: 10
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
 		ValidTargets: Ground, Ship
+
+ParaBombCryo:
+	Inherits@wh: ^Warhead_CryoBlast_Heavy
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 8
+	Range: 5000
+	Report: chute1.aud
+	Projectile: GravityBomb
+	Warhead@CryoBlast_Heavy:
 
 JapanSuperBomb:
 	Inherits: ^Grenade
@@ -995,7 +939,7 @@ JapanSuperBomb:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -1004,7 +948,7 @@ JapanSuperBomb:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@MediumChemicalWeapon: AreaDamage
@@ -1036,7 +980,7 @@ JapanSuperBomb:
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 
@@ -1055,10 +999,6 @@ JapanCarrierFighterBomb:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5
-
 JapanCarrierTarget:
 	ReloadDelay: 25
 	Range: 20000
@@ -1095,7 +1035,7 @@ SpyPlaneTargeting2:
 	Warhead@Condition: GrantExternalCondition
 		Duration: 750
 
-ChronoAI:
+ChronoReinforcementsSpawner:
 	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
@@ -1107,9 +1047,18 @@ ChronoAI:
 		ValidTargets: Air, Ground, Water
 	Warhead@2Flash: ChronoFlashEffect
 
+ChronoAI:
+	Inherits: ChronoshiftImpact
+	ReloadDelay: 1
+	Projectile: InstantExplode
+	Warhead@1Actor: SpawnActor
+		Actors: ra1_allies_ranger, ra1_allies_alliedlighttank, ra1_allies_alliedmediumtank, ra1_allies_sheridanassaulttank, ra1_allies_alliedtigerheavytank, ra1_allies_alliedtankdestroyer, ra1_allies_alliedartillery, ra1_allies_alliedapc
+		Range: 5
+		ValidTargets: Air, Ground, Water
+
 DTMutate:
 	ValidTargets: Ground, Air
-	Warhead@1Dam: HealthPercentageDamage
+	Warhead@1Dam: AreaDamagePercentage
 		Spread: 4c0
 		Damage: 300
 		ValidTargets: Infantry
@@ -1205,7 +1154,9 @@ Heal:
 	Warhead@ExtraHealing: SpreadDamage
 		Spread: 500
 		Damage: -1000
-	Warhead@HealingWeaponPercentage: HealthPercentageDamage
+	Warhead@HealingWeaponPercentage: AreaDamagePercentage
+		FriendlyFireDamage: 100
+		FriendlyFireSpread: 100
 		Spread: 5000
 		Damage: -1
 	Warhead@HealingField: GrantExternalCondition
@@ -1227,7 +1178,7 @@ Heal:
 
 MADTankThump:
 	InvalidTargets: MADTank, Infantry
-	Warhead@1Dam: HealthPercentageDamage
+	Warhead@1Dam: AreaDamagePercentage
 		Spread: 7c0
 		Damage: 1
 		InvalidTargets: MADTank, Infantry
@@ -1389,7 +1340,7 @@ ATMine:
 		ValidTargets: Ground, Water
 		InvalidTargets: Mine
 		Damage: 50000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		InvalidTargets: Mine
 		Damage: 25
@@ -1763,13 +1714,8 @@ TorpTube:
 		CruiseAltitude: 0
 	Warhead@Concussion_Light:
 		Damage: 16000
-	Warhead@Concussion_Light_Percentage:
-		Damage: 8
 	Warhead@MissileHE_Heavy:
 		Damage: 16000
-		ValidTargets: Water, Underwater, Bridge, Structure
-	Warhead@MissileHE_Heavy_Percentage:
-		Damage: 8
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
@@ -1783,9 +1729,12 @@ TorpTube:
 		InvalidTargets: Ship, Structure, Bridge
 
 TorpTubeThermobaric:
-	Inherits: ^NuclearWarhead
-	Inherits@2: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileNuke_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Nuclear_Super
+	Inherits@fx2: ^Effect_MissileAP_Heavy
 	ReloadDelay: 100
+	TargetActorCenter: false
 	Range: 10000
 	Report: torpedo1.aud
 	ValidTargets: Water, Underwater, Bridge
@@ -1806,29 +1755,30 @@ TorpTubeThermobaric:
 		Palette: cloak
 		MaximumLaunchAngle: 0
 		CruiseAltitude: 0
-	Warhead@NuclearWarhead: SpreadDamage
-		Damage: 16000
-	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
-		Damage: 8
-	Warhead@HeavyMissile: SpreadDamage
-		Damage: 16000
+	Warhead@MissileNuke_Heavy:
+		PercentageScale: 5625
 		ValidTargets: Water, Underwater, Bridge, Structure
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		Damage: 8
-		ValidTargets: Water, Underwater, Bridge, Structure
+		ValidRelationships: Enemy
+		AffectsParent: true
+		Damage: 32000
+	-Warhead@Glow:
 	-Warhead@Smudge:
+	-Warhead@EffectAir:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
-	-Warhead@EffectAir:
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 10
+		Range: 1250
+		ValidTargets: Shielded
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: splash9.aud
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
-
 DepthCharge:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -1843,9 +1793,6 @@ DepthCharge:
 	Warhead@Demolition_Light:
 		Damage: 60000
 		ValidTargets: Submarine, Ship, Underwater
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
-		Damage: 30
-		ValidTargets: Submarine, Ship, Underwater
 	Warhead@EffectWater: CreateEffect
 		Explosions: large_splash
 		ImpactSounds: h2obomb2.aud
@@ -1853,6 +1800,21 @@ DepthCharge:
 	Warhead@Effect: CreateEffect
 		Explosions: small_explosion
 		ImpactSounds: kaboom15.aud
+		ValidTargets: Submarine, Ship, Underwater
+
+DepthChargeCryo:
+	Inherits@wh: ^Warhead_CryoBlast_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Cryo
+	Report: M203.aud
+	ReloadDelay: 60
+	Range: 6000
+	ValidTargets: Underwater, Submarine
+	Projectile: Bullet
+		Speed: 125
+		Image: BOMB
+	Warhead@CryoBlast_Light:
+		Damage: 60000
 		ValidTargets: Submarine, Ship, Underwater
 
 2Inch:
@@ -1868,8 +1830,18 @@ DepthCharge:
 	Warhead@CannonAP_Light:
 		Damage: 30000
 		Spread: 300
-	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
-		Damage: 15
+2InchCryo:
+	Inherits@wh: ^Warhead_CannonCryo_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 30
+	Range: 6000
+	Report: cannon2.aud
+	InvalidTargets: Underwater, Submarine
+	Projectile: Bullet
+		Speed: 600
+	Warhead@CannonCryo_Light:
+		Damage: 30000
 		Spread: 300
 
 8Inch:
@@ -1895,12 +1867,31 @@ DepthCharge:
 		ContrailEndColor: FFFFFF
 	Warhead@Demolition_Heavy:
 		Damage: 40000
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 20
 	Warhead@Demolition_Light:
 		Damage: 40000
-	Warhead@Demolition_Light_Percentage:
-		Damage: 20
+8InchCryo:
+	Inherits@wh: ^Warhead_CryoBlast_Heavy
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 250
+	Range: 15000
+	MinRange: 3000
+	Burst: 2
+	Report: turret1.aud
+	TargetActorCenter: true
+	Projectile: Bullet
+		Image: 120MM
+		Speed: 250
+		Inaccuracy: 2500
+		LaunchAngle: 100
+		ContrailLength: 50
+		ContrailStartWidth: 50
+		ContrailEndWidth: 1
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF
+	Warhead@CryoBlast_Heavy:
+		Damage: 80000
+		ValidTargets: Ground, Water
 Stinger:
 	Inherits@wh: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
@@ -1920,19 +1911,28 @@ Stinger:
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Underwater
 		Damage: 10000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		InvalidTargets: Underwater
-		Damage: 5
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 
 StingerCryo:
-	Inherits: Stinger
-	Inherits@2: ^CryoMissileProjectile
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-		Amount: -10000
-		Range: 400
+	Inherits@wh: ^Warhead_MissileCryo_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 27
+	Range: 8000
+	Report: missile6.aud
+	ValidTargets: Ground, Water, Air
+	InvalidTargets: Underwater, Submarine
+	Burst: 2
+	BurstDelays: 7
+	Projectile: Missile
+		Speed: 500
+		MinimumLaunchAngle: 50
+		Acceleration: 5
+	Warhead@MissileCryo_Heavy:
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Underwater
+		Damage: 10000
 
 JapanSpeedBoatGun:
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -1946,13 +1946,8 @@ JapanSpeedBoatGun:
 	Report: vgatlo5a.wav, vgatlo5b.wav
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
-		Damage: 1
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		Damage: 1
-
 JapanSpeedBoatGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JapanSpeedBoatGun
@@ -1981,13 +1976,8 @@ YamatoCannon:
 		ContrailEndColor: FFFFFF
 	Warhead@Demolition_Heavy:
 		Damage: 20000
-	Warhead@Demolition_Heavy_Percentage:
-		Damage: 10
 	Warhead@CannonHE_Heavy:
 		Damage: 20000
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 10
-
 YamatoFlak:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -1999,9 +1989,6 @@ YamatoFlak:
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Air
-		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
@@ -2030,7 +2017,7 @@ ra1_allies_chronovortex:
 		Spread: 1000
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+	Warhead@MagicWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air, Ground, Water
 		Spread: 12345
 		Damage: 1
@@ -2040,7 +2027,7 @@ ra1_allies_chronovortex:
 		Spread: 2000
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyBombPercentage: HealthPercentageDamage
+	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Air, Ground, Water
 		Spread: 12345
 		Damage: 1
@@ -2137,12 +2124,16 @@ ra1_allies_rifleinfantry_carbine:
 	Report: gun11.aud
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
-		Damage: 1
-
 ra1_allies_rifleinfantry_carbine_cryo:
-	Inherits: ra1_allies_rifleinfantry_carbine
-	Inherits@2: ^CryoMissileProjectile
+	Inherits@wh: ^Warhead_BulletCryo_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 50
+	Range: 5500
+	ValidTargets: Ground, Water
+	Burst: 3
+	BurstDelays: 4
+	Report: gun11.aud
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 0
@@ -2151,5 +2142,5 @@ ra1_allies_rifleinfantry_carbine_cryo:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		ContrailLength: 10
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-		Amount: -2000
+	Warhead@BulletCryo_Light:
+		Damage: 2000

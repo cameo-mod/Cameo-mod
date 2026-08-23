@@ -1,6 +1,6 @@
 # Rank decoration audit
 
-## Actor decoration issues: **51**
+## Actor decoration issues: **52**
 
 | File | Line | Actor | Issue | Found |
 |---|---|---|---|---|
@@ -9,6 +9,7 @@
 | ContentPacks/TiberianDawn/Shared/yaml/templates.yaml | 30 | ^E1 | TD actor missing RankDecoration | ? |
 | ContentPacks/TiberianDawn/Shared/yaml/templates.yaml | 67 | ^E3 | TD actor missing RankDecoration | ? |
 | ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml | 940 | cabal_eliminator800 | RA2 actor has RankDecoration (should not) | CABALRankDecoration |
+| ContentPacks/TiberianSun/GDI/yaml/naval.yaml | 1 | ts_gdi_hover | Wrong decoration (expected GDIRankDecoration) | NodRankDecoration |
 | ContentPacks/Warcraft2/Humans/yaml/aircraft.yaml | 28 | wc2_humans_gryphonrider | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Humans/yaml/defenses.yaml | 1 | wc2_humans_humanscouttower | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Humans/yaml/infantry.yaml | 55 | wc2_humans_footman | TD actor missing RankDecoration | ? |

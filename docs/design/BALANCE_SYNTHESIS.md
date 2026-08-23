@@ -470,7 +470,7 @@ everywhere / air is useless" imbalance. **BUT the per-actor list needs a refined
 tool** (the keyword filter has false positives — legit snipers like `asianalliance_asiancommando`
 got flagged; and some `…AA`/`…SmallAA` weapons are the *intended* AA variant). 
 
-**Next step (scripted, not manual):** add `tools/audit/audit_aa_gating.py` to the suite that (a)
+**Next step (scripted, not manual):** add `tools/audit/audit_aa_gating.py` ⚠ (**proposed, never built** — no such script) to the suite that (a)
 resolves each armed actor's Cameo **class** (via the `class_anchor`/`balance_include` tags or
 template inheritance, not a name heuristic), (b) lists actors whose class is NOT in the §9
 air-allowed set yet carry an unconditional (non-upgrade) AA armament, and (c) emits to

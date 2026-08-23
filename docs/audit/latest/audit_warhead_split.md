@@ -1,9 +1,9 @@
 # Warhead-split guard (multi-warhead over-damage)
 
 
-## FAIL 1 — broadcast fingerprint / every MAIN identical (958 vs baseline 958)
+## FAIL 1 — broadcast fingerprint / every MAIN identical (944 vs baseline 939)
 
-_at or below baseline_ — pre-existing **W24** debt (958 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
+**FAIL — 944 exceeds the baseline of 939.** A weapon just had one damage number broadcast across its mains. Edit the per-shot TOTAL through the workbook so `formula.distribute_damage` splits it, or collapse the weapon to one main warhead during W24.
 
 | weapon | mains | per_warhead | total |
 |---|---|---|---|
@@ -49,7 +49,7 @@ _at or below baseline_ — pre-existing **W24** debt (958 weapons), not a regres
 | AsianGrenade_elite | 2 | 4000 | 8000 |
 
 
-_... and 918 more._
+_... and 904 more._
 
 
 ## FAIL 2 — FriendlyFire louder than the shot (0)
@@ -57,7 +57,7 @@ _... and 918 more._
 None. ✅
 
 
-## Review — high uniform stacks (informational, 243)
+## Review — high uniform stacks (informational, 239)
 
 Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (not flattening residue).
 
@@ -144,7 +144,6 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | GladiusCannon | 11 | 10000 | 110000 |
 | GoliathMk2Rockets | 4 | 8000 | 32000 |
 | GuardianShoot | 3 | 8000 | 24000 |
-| HammerheadArtillery | 3 | 11111 | 33333 |
 | HydraSpit | 4 | 18000 | 72000 |
 | IdolCannon | 4 | 10000 | 40000 |
 | InfestedExplosion | 3 | 50000 | 150000 |
@@ -183,4 +182,5 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | MigMissiles_fire_elite | 4 | 8000 | 32000 |
 | MigMissiles_tesla | 4 | 8000 | 32000 |
 | MigMissiles_tesla_elite | 4 | 8000 | 32000 |
+| MissileSoldierWeapon | 5 | 10000 | 50000 |
 

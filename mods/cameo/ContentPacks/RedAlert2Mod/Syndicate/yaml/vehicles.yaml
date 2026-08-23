@@ -436,7 +436,7 @@ latinsyndicate_smokertank:
 	ChangesHealth@SelfHealing:
 		Step: 104
 	Turreted:
-		TurnSpeed: 21 #3
+		TurnSpeed: 19
 		Offset: -100,0,5
 	Armament:
 		Name: primary
@@ -540,7 +540,7 @@ latinsyndicate_diablo:
 	ChangesHealth@SelfHealing:
 		Step: 18
 	Turreted:
-		TurnSpeed: 36
+		TurnSpeed: 25
 		Offset: -100,0,5
 	Armament:
 		Name: primary
@@ -660,7 +660,7 @@ latinsyndicate_latinapc:
 	Armor:
 		Type: Medium
 	Turreted:
-		TurnSpeed: 36
+		TurnSpeed: 18
 		Offset: -1,0,4
 	Armament@Flak:
 		Weapon: RA2APCFlakCannon
@@ -1042,7 +1042,7 @@ latinsyndicate_burrito:
 		Step: 14
 	Mobile:
 		Speed: 80
-		TurnSpeed: 16
+		TurnSpeed: 32
 	Armament:
 		Weapon: RA2RBurritoRocket
 		LocalOffset: -250,300,125, -250,150,250, -250,-150,375, -250,-300,500, -250,300,125, -250,150,250, -250,-150,375, -250,-300,500
@@ -1359,7 +1359,7 @@ latinsyndicate_topolm:
 		Step: 40
 	Mobile:
 		Speed: 75
-		TurnSpeed: 15
+		TurnSpeed: 30
 	Armament:
 		Weapon: RA2TOPOLCubaTarget
 		LocalOffset: -1500,250,1000

@@ -286,10 +286,10 @@
 		HP: 14000
 	ChangesHealth@SelfHealing:
 		Step: 14
-	Armament@PRIMARY: ##########
+	Armament@PRIMARY:
 		Weapon: M1Carbine
 		LocalOffset: 128,0,256
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: M1Carbine
 		MuzzleSequence: garrison-muzzle
@@ -332,11 +332,11 @@
 		HP: 10000
 	ChangesHealth@SelfHealing:
 		Step: 10
-	Armament@PRIMARY: ##########
+	Armament@PRIMARY:
 		Weapon: RocketsRA
 		LocalOffset: 256,43,341
 		FireDelay: 5
-	Armament@GARRISONED: ##########
+	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: RocketsRA
 	TakeCover:

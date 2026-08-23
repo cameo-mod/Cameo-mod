@@ -412,28 +412,56 @@ latinsyndicate_recyclingcenter:
 		Sequence: idle-lights2
 		RequiresCondition: !build-incomplete
 	SupportPowerChargeBar:
-	ProduceActorPower@car:
-		Names:
-			1: Give Scrap cars
-		Descriptions:
-			1: Produces scrap cars
+	DetonateWeaponPower@car:
+		OrderName: ScrapCars
+		Prerequisites:
+			1: ~techlevel.superweapons
+		PauseOnCondition: disabled
 		Icons:
 			1: icon
 		IconImage: latinsyndicate_raiderbuggy
 		AllowMultiple: True
-		PauseOnCondition: disabled
-		Prerequisites:
-			1:
-		Actors: scrapcar_driveby.latin, scrapcar2_driveby.latin
-		Type: Car
-		ChargeInterval: 750
-		AutoFire: true
-		OrderName: callcars
-		SupportPowerPaletteOrder: 20
+		Cursor: ability
+		ChargeInterval: 1500
+		Names:
+			1: Scrap Car Ambush
+		ActivationDelay: 25
+		ActivationSequence:
+		Descriptions:
+			1: Creates scrap cars to ambush the enemy.
+		Weapons:
+			1: ScrapCarSpawner
+		CameraActor: camera.placeholderhack
+		CameraRemoveDelay: 0
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		LaunchSpeechNotification: ReinforcementsArrived
+		IncomingSpeechNotification: EnemyUnitsApproaching
+		DisplayRadarPing: True
 		LaunchSound: gcraspee.wav
-		RequiresCondition: !disabled
-	Production@Car:
-		Produces: Car
+	 	IncomingSound:
+	# ProduceActorPower@car:
+	# 	Names:
+	# 		1: Give Scrap cars
+	# 	Descriptions:
+	# 		1: Produces scrap cars
+	# 	Icons:
+	# 		1: icon
+	# 	IconImage: latinsyndicate_raiderbuggy
+	# 	AllowMultiple: True
+	# 	PauseOnCondition: disabled
+	# 	Prerequisites:
+	# 		1:
+	# 	Actors: scrapcar_driveby.latin, scrapcar2_driveby.latin
+	# 	Type: Car
+	# 	ChargeInterval: 750
+	# 	AutoFire: true
+	# 	OrderName: callcars
+	# 	SupportPowerPaletteOrder: 20
+	# 	LaunchSound: gcraspee.wav
+	# 	RequiresCondition: !disabled
+	# Production@Car:
+	# 	Produces: Car
 	RallyPoint:
 	Exit@1:
 		SpawnOffset: -704,768,0

@@ -27,7 +27,7 @@ ra2_soviets_kirovairship:
 		Description: actor_zep.description
 	Aircraft:
 		InitialFacing: 896
-		TurnSpeed: 12
+		TurnSpeed: 6
 		Speed: 30
 		RepulsionSpeed: 24
 		CanSlide: False
@@ -405,7 +405,7 @@ ra2_soviets_transportkirov:
 		Queue: Aircraft, RAAircraft, Vehicle
 		Description: actor_shad.description
 	Aircraft:
-		TurnSpeed: 14
+		TurnSpeed: 7
 		Speed: 35
 		RepulsionSpeed: 14
 	Health:

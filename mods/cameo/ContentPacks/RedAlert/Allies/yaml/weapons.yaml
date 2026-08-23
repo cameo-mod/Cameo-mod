@@ -1,7 +1,10 @@
 CryoLightSniper:
-	Inherits: LightSniper
-	Inherits@2: ^CryoMissileProjectile
+	Inherits@wh: ^Warhead_BulletCryo_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Cryo
 	Report: ramgun2.aud
+	ReloadDelay: 100
+	Range: 9153
 	Projectile: Bullet
 		TrailImage: blue_smokey
 		TrailInterval: 0
@@ -10,8 +13,8 @@ CryoLightSniper:
 		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		ContrailLength: 10
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-		Amount: -30000
+	Warhead@BulletCryo_Light:
+		Damage: 30000
 
 M60mg:
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -25,8 +28,18 @@ M60mg:
 	Report: pillbox1.aud
 	Warhead@Bullet_Light:
 		Damage: 4000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
-		Damage: 2
+M60mgCryo:
+	Inherits@wh: ^Warhead_BulletCryo_Light
+	Inherits@proj: ^Projectile_Bullet_Light
+	Inherits@fx: ^Effect_Cryo
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 10
+	Burst: 4
+	BurstDelays: 5
+	Range: 4359
+	Report: pillbox1.aud
+	Warhead@BulletCryo_Light:
+		Damage: 4000
 
 RATurretGun:
 	Inherits@wh: ^Warhead_Concussion_Medium
@@ -40,12 +53,8 @@ RATurretGun:
 		Speed: 768
 	Warhead@Concussion_Medium:
 		Damage: 10000
-	Warhead@Concussion_Medium_Percentage:
-		Damage: 5
 	Warhead@CannonHE_Heavy:
 		Damage: 10000
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 5
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 
@@ -61,10 +70,21 @@ zsu_23:
 	ValidTargets: Air
 	Warhead@Flak_Medium:
 		Damage: 4000
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
-		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
+
+zsu_23Cryo:
+	Inherits@wh: ^Warhead_FlakCryo_Medium
+	Inherits@proj: ^Projectile_Flak_Medium
+	Inherits@fx: ^Effect_Cryo
+	Report: aacanon3.aud
+	ReloadDelay: 14
+	Burst: 2
+	BurstDelays: 2
+	Range: 11412
+	ValidTargets: Air
+	Warhead@FlakCryo_Medium:
+		Damage: 4000
 
 Hellfire:
 	Inherits@wh: ^Warhead_Concussion_Medium
@@ -79,59 +99,59 @@ Hellfire:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@Concussion_Medium_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 4
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-
 HellfireCryo:
-	Inherits: Hellfire
-	Inherits@2: ^CryoMissileProjectile
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-		Amount: -16000
-		Range: 400
+	Inherits@wh: ^Warhead_CryoBlast_Medium
+	Inherits@wh2: ^Warhead_MissileCryo_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Cryo
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 16
+	Range: 6540
+	MinRange: 1310
+	Report: missile6.aud
+	Warhead@CryoBlast_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@MissileCryo_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
 
 ChainGunMH60:
-	Inherits: ^SmallArms
-	Inherits@2: ^Grenade
-	Inherits@3: ^FlakWeapon
-	Inherits@4: ^Chaingun
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 6
 	Range: 3375
 	Report: gun13.aud
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
+	Warhead@Bullet_Medium:
+		Damage: 8000
+	Warhead@Effect: CreateEffect
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ValidTargets: Air
+		ImpactSounds: xplos.aud
+	Warhead@EffectWater: CreateEffect
+		Explosions: water_piffs
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+ChainGunMH60Cryo:
+	Inherits@wh: ^Warhead_BulletCryo_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Cryo
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 6
+	Range: 3375
+	Report: gun13.aud
+	Warhead@BulletCryo_Medium:
+		Damage: 8000
 
 AlliedTankDestroyerCannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
@@ -145,13 +165,20 @@ AlliedTankDestroyerCannon:
 		Speed: 1362
 	Warhead@CannonHE_Medium:
 		Damage: 12000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 6
 	Warhead@CannonAP_Light:
 		Damage: 12000
-	Warhead@CannonAP_Light_Percentage:
-		Damage: 6
-
+AlliedTankDestroyerCannonCryo:
+	Inherits@wh: ^Warhead_CannonCryo_Medium
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 60
+	Range: 6819
+	Report: tank5.aud
+	Projectile: Bullet
+		Speed: 1362
+	Warhead@CannonCryo_Medium:
+		Damage: 24000
+		ValidTargets: Ground, Water
 SheridanCannon:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@wh2: ^Warhead_CannonHE_Medium
@@ -164,13 +191,20 @@ SheridanCannon:
 		Speed: 502
 	Warhead@CannonAP_Light:
 		Damage: 8000
-	Warhead@CannonAP_Light_Percentage:
-		Damage: 4
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 4
-
+SheridanCannonCryo:
+	Inherits@wh: ^Warhead_CannonCryo_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 64
+	Range: 5023
+	Report: cannon2.aud
+	Projectile: Bullet
+		Speed: 502
+	Warhead@CannonCryo_Medium:
+		Damage: 16000
+		ValidTargets: Ground, Water
 SheridanMissiles:
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Light
@@ -183,24 +217,20 @@ SheridanMissiles:
 	Warhead@MissileHE_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileHE_Medium_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 4
 	Warhead@MissileHE_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileHE_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 4
-
 SheridanMissilesCryo:
-	Inherits: SheridanMissiles
-	Inherits@2: ^CryoMissileProjectile
+	Inherits@wh: ^Warhead_MissileCryo_Medium
+	Inherits@proj: ^Projectile_Missile_Light
+	Inherits@fx: ^Effect_Cryo
 	Report: bazook1.aud
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-		Amount: -48000
-		Range: 300
-
+	ReloadDelay: 64
+	Range: 5023
+	ValidTargets: Ground, Water, Air
+	Warhead@MissileCryo_Medium:
+		Damage: 16000
+		ValidTargets: Ground, Water, Air
 SheridanVulcan:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
@@ -214,13 +244,21 @@ SheridanVulcan:
 	ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
-		Damage: 1
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		Damage: 1
-
+SheridanVulcanCryo:
+	Inherits@wh: ^Warhead_BulletCryo_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 58
+	Range: 5023
+	Burst: 4
+	BurstDelays: 2
+	Report: gun13.aud
+	ValidTargets: Ground, Water, Air
+	Warhead@BulletCryo_Medium:
+		Damage: 4000
+		ValidTargets: Ground, Water, Air
 RapierBombs:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Demolition_Heavy
@@ -238,20 +276,21 @@ RapierBombs:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Ship
 		Damage: 10000
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Ship
-		Damage: 5
-
 RapierBombsCryo:
-	Inherits: RapierBombs
-	Inherits@2: ^CryoMissileProjectile
+	Inherits@wh: ^Warhead_CryoBlast_Heavy
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 60
+	Range: 2000
+	Burst: 4
+	BurstDelays: 2
+	Report: flamer2.aud
+	TargetActorCenter: true
 	Projectile: GravityBomb
+	Warhead@CryoBlast_Heavy:
+		ValidTargets: Ground, Ship
+		Damage: 10000
 	Warhead@Effect: CreateEffect
 		Explosions: cryo_artillery
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-		Amount: -10000
-		Range: 2500
-		ValidRelationships: Neutral, Enemy
 
 Aphid_AA:
 	Inherits@wh: ^Warhead_Concussion_Medium
@@ -278,25 +317,41 @@ Aphid_AA:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@Concussion_Medium_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 4
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@MissileHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 4
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 		ImpactSounds: xplobig4.aud
 
 AphidCryo_AA:
-	Inherits: Aphid_AA
-	Inherits@2: ^CryoMissileProjectile
-	Warhead@PhysicalStateCryo: ApplyPhysicalState
-		Amount: -16000
-		Range: 400
+	Inherits@wh: ^Warhead_CryoBlast_Medium
+	Inherits@wh2: ^Warhead_MissileCryo_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 62
+	Range: 7000
+	Burst: 2
+	BurstDelays: 4
+	Report: missile7.aud
+	Projectile: Missile
+		Speed: 600
+		Acceleration: 10
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		ContrailLength: 6
+		ContrailStartColor: 996633
+		TrailInterval: 1
+		TrailDelay: 1
+	Warhead@CryoBlast_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@MissileCryo_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
 
 ReconRangerRecoillessGun:
 	Inherits: ^Grenade
@@ -342,7 +397,7 @@ ReconRangerRecoillessGun:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -351,45 +406,42 @@ ReconRangerRecoillessGun:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MissileAP_Heavy_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -421,7 +473,7 @@ APTusk:
 	Warhead@TankDestroyerCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Grenade: SpreadDamage
@@ -430,19 +482,19 @@ APTusk:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
@@ -471,31 +523,31 @@ ChronoTusk:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
@@ -552,7 +604,7 @@ ChronoTuskCryo:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 1000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -561,7 +613,7 @@ ChronoTuskCryo:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 1000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightFlameWeapon: AreaDamage
@@ -593,14 +645,11 @@ ChronoTuskCryo:
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@CannonHE_Medium:
 		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplos.aud
@@ -616,10 +665,20 @@ ChronoTuskCryo:
 		Speed: 515
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
-		Damage: 4
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
+
+90mmCryo:
+	Inherits@wh: ^Warhead_CannonCryo_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_Cryo
+	ReloadDelay: 47
+	Range: 5159
+	Report: cannon1.aud
+	Projectile: Bullet
+		Speed: 515
+	Warhead@CannonCryo_Medium:
+		Damage: 8000
 
 Repair:
 	Inherits: ^RepairWeapon
@@ -633,7 +692,9 @@ Repair:
 	Warhead@ExtraRepair: SpreadDamage
 		Spread: 500
 		Damage: -1000
-	Warhead@RepairWeaponPercentage: HealthPercentageDamage
+	Warhead@RepairWeaponPercentage: AreaDamagePercentage
+		FriendlyFireDamage: 100
+		FriendlyFireSpread: 100
 		Spread: 5000
 		Damage: -1
 	Warhead@Defuse1: DetachDelayedWeapon
@@ -676,8 +737,27 @@ Colt45:
 		Damage: 7777
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 7777
-	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 3
+
+Colt45Cryo:
+	Inherits@wh: ^Warhead_BulletCryo_Light
+	Inherits@proj: ^Projectile_Sniper_Light
+	Inherits@fx: ^Effect_Cryo
+	Report: ragun5.aud
+	ReloadDelay: 7
+	Range: 7777
+	Burst: 2
+	BurstDelays: 0
+	Projectile: Bullet
+		ContrailStartColor: 77777777
+		ContrailEndColor: 33333333
+		ContrailStartWidth: 33
+		ContrailEndWidth: 77
+		ContrailLength: 7
+		ContrailEndColorUsePlayerColor: false
+	Warhead@BulletCryo_Light:
+		Damage: 7777
 
 HeavyAATankCannonAG:
 	Inherits: ^LightMissile
@@ -691,25 +771,25 @@ HeavyAATankCannonAG:
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 
@@ -719,19 +799,19 @@ HeavyAATankCannon_AA:
 	ValidTargets: Air
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Air
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 
 RadarJammer:
