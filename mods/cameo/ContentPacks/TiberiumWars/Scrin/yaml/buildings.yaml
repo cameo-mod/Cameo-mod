@@ -257,7 +257,9 @@ scrin_portal:
 	RallyPoint:
 		Path: 1,1
 	Exit@SCRININFANTRY:
-		SpawnOffset: 0,512,0
+		# Materialize at the portal-core center, then leave through the
+		# south-southwest front opening.
+		SpawnOffset: 0,0,0
 		ExitCell: 1,1
 		ProductionTypes: ScrinInfantry
 
@@ -310,7 +312,8 @@ scrin_warp_gate:
 	RallyPoint:
 		Path: 1,2
 	Exit@SCRINVEHICLE:
-		SpawnOffset: -512,1024,0
+		# Matches the scaled core sequence offset of 3,-32 screen pixels.
+		SpawnOffset: 59,-630,0
 		ExitCell: 1,2
 		ProductionTypes: ScrinVehicle
 
@@ -362,7 +365,8 @@ scrin_gravity_stabilizer:
 		ProductionType: ScrinAircraft
 	RallyPoint:
 	Exit@SCRINAIRCRAFT:
-		SpawnOffset: 0,0,0
+		# Gravity Stabilizer reuses the Warp Gate core and its center.
+		SpawnOffset: 59,-630,0
 		ProductionTypes: ScrinAircraft
 
 scrin_nerve_center:
@@ -823,11 +827,12 @@ scrin_warp_chasm:
 	RallyPoint:
 		Path: 1,2
 	Exit@SCRINADVANCEDVEHICLE:
-		SpawnOffset: -512,1024,0
+		# Matches the scaled core sequence offset of 0,-42 screen pixels.
+		SpawnOffset: 0,-827,0
 		ExitCell: 1,2
 		ProductionTypes: ScrinAdvancedVehicle
 	Exit@SCRINCAPITALAIRCRAFT:
-		SpawnOffset: 0,0,0
+		SpawnOffset: 0,-827,0
 		ProductionTypes: ScrinCapitalAircraft
 
 scrin_foundry:
