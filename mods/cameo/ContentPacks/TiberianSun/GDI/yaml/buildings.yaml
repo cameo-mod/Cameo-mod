@@ -759,7 +759,7 @@ ts_gdi_dropshipbay:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^4x3Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
-	Inherits@production: ^IsVehicleDropzone
+	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
 	Inherits@cashtricklerlimit: ^CashTricklerLimited
 	Valued:
@@ -786,19 +786,49 @@ ts_gdi_dropshipbay:
 	RallyPoint:
 		Path: 5,3
 	Exit@1:
-		# SpawnOffset: -512,-512,0
 		SpawnOffset: 0,0,0
 		ExitCell: 2,2
-		ExitDelay: 3
-	ProductionAirdropCA@CLASSIC:
-		Produces: RAVehicle
-		# RequiresCondition: classicproductionqueues
+	Exit@2:
+		SpawnOffset: 0,0,0
+		ExitCell: 3,2
+	ProductionAirdropCA@NORMAL:
+		Produces: Vehicle
 		ActorType: ts_gdi_dropship
 		LandingFacing: 384
 		ReadyAudio: ReinforcementsArrived
 		SpawnType: ClosestEdgeToDestination
 		ProportionalSpeed: true
 		PauseOnCondition: disabled
+		RequiresCondition: !classicproductionqueues
+	ProductionAirdropCA@CLASSIC:
+		Produces: RAVehicle
+		ActorType: ts_gdi_dropship
+		LandingFacing: 384
+		ReadyAudio: ReinforcementsArrived
+		SpawnType: ClosestEdgeToDestination
+		ProportionalSpeed: true
+		PauseOnCondition: disabled
+		RequiresCondition: classicproductionqueues
+	ParallelProductionQueue@VEHICLE:
+		Type: Vehicle
+		DisplayOrder: 3
+		Group: Vehicle
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		BuildDurationModifier: 25
+		InfiniteBuildLimit: 10
+	ProductionBar@VEHICLE:
+		ProductionType: Vehicle
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAVEHICLE:
+		ProductionType: RAVehicle
+		RequiresCondition: classicproductionqueues
+	ProvidesPrerequisite:
+		Prerequisite: vehicleproduction
 	ProvidesPrerequisite@buildingname:
 	WithIdleOverlay@DISH:
 		Sequence: idle-dish
