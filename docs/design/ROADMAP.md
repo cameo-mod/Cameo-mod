@@ -39,6 +39,239 @@ The current front is **W24** (one damage warhead per weapon) → **W23** (retrof
 templates) → **A5** → class anchors. §0a of that file is the binding order; it is why pricing
 is deliberately NOT running yet.
 
+## ⭐ PHYSICAL STATES — dilution, Magnetism, and the IFV problem (2026-08-22)
+
+Maintainer: *"we need to rework all units that can only apply physical states from one weapon"*
+and *"the IFV kind of things need their own logic so you should skip them"*.
+
+### 1. METER DILUTION — 34 actors — **now guarded: `audit_meter_dilution.py` (ratchet 34)**
+
+The meter fills from ONE weapon's damage but the target dies to the actor's WHOLE output, so the
+effect lands far later than the per-weapon `fill_ratio` says. `physical_state_price.fill_ratio` has
+a `fed_share` term for exactly this, but it works WITHIN a weapon and stops at the weapon boundary;
+the actor level is not modelled at all.
+
+⛔ **The number was 58 here and it was wrong — twice over, in opposite directions.** The measure
+now lives in a committed audit instead of a scratchpad script, because both errors were invisible
+in the output:
+
+  1. counting EVERY `Armament` gave 170 and put every RA2 IFV at 10.92x — an IFV's 42 armaments
+     are each gated on a distinct `ifv-<passenger>` condition, so exactly ONE ever fires.
+  2. dividing meter-feeding damage by the actor's total gave 81 and scored `cobra.steel` at 5.20x
+     on a ONE-gun loadout. That formula DOUBLE-COUNTS: `fed_share` already prices the dilution
+     inside the state weapon. The factor the pricing cannot see is only the OTHER guns' damage,
+     `actor_total / carrier_total`.
+
+**34 actors** fire a state weapon alongside unconditional non-state weapons:
+
+| actor | guns | with state | state guns' share | dilution |
+|---|--:|--:|--:|--:|
+| `japan_exorcistoitank` | 5 | 3 | 6.2% | **16.12x** |
+| `cabal_hunterdronecarrier` | 3 | 1 | 10.4% | **9.60x** |
+| `ra1_allies_destroyer` | 2 | 1 | 14.5% | **6.89x** |
+| `cabal_manticore` / `_backup` | 2 | 1 | 18.7% | **5.35x** |
+| `ra1_allies_sheridanassaulttank` | 3 | 1 | 44.4% | **2.25x** |
+
+Distribution: 10 above 3x, 3 at 2-3x, 11 at 1.5-2x, 10 below 1.5x. `EDEN_LYNX_EMP`/`EDEN_TIGER_EMP`
+are NOT on the list — both their guns carry the state, so there is nothing to dilute.
+
+⚠ **`SheridanMissilesCryo`'s extreme Scale is a COMPENSATION for this, not an outlier.** The
+Sheridan fires Cannon + Vulcan + (Missiles XOR MissilesCryo); the cryo half is 44.4% of output, so
+the true ratio is 0.378, not the 0.168 the pricing sees — it is **OVER-charged 1.41x**.
+
+**MAINTAINER'S FIX (preferred): make every weapon on a state unit apply the state** — cryo cannon,
+cryo bullet, cryo rocket. Dilution becomes 1.0 by construction, no per-weapon compensation is
+needed, and `Scale 100` means the same thing everywhere. Strictly better than teaching the pricing
+to model actor-level dilution, because it removes the problem instead of measuring it.
+
+### 2. ⛔ DEFERRED — the IFV class needs its own logic
+
+`ra2_allies_ifv` and friends carry **42 armaments**, each gated on a distinct `ifv-<passenger>`
+condition, so exactly ONE fires at a time. They are NOT diluted and must never be counted as such
+— a first measurement did exactly that and reported 10.92x for every IFV variant. Any
+per-armament analysis has to collapse condition-gated variants first. Deferred by maintainer
+ruling; needs a variant-aware model.
+
+### 3. ✅ DONE — `^Magnefreezable` → a `Magnetism` meter
+
+The 10 `SpeedMultiplier` + 10 `WithColoredOverlay` bands became 5 meter traits, on all **739**
+actors that inherit the template (`^Vehicle`, `^RANeutralPlane`, `^ShootableMissile`). The nine
+overlapping band boundaries (`<= 20` and `>= 20` both hold at 20 → 90%×80% = **72%**, 60%×50% =
+**30%**) are now structurally impossible: `SlowsProportionalToPhysicalState` interpolates between
+two endpoints. `Burst 100 / BurstDelays 1` swept every one of those boundaries on every volley.
+
+⚠ **NOT the sole carrier** — a first pass said `yuri_magnetron` only. `AAHyperionMagnet`
+(`asianalliance_hyperionprojector`, anti-air) grants the same condition and was converted too;
+so did `RA2MagnetAA` / `RA2MagnetAA_elite`, which RE-DECLARE the warhead type and would have
+silently kept `GrantExternalCondition` if only the base had been edited.
+
+Behaviour preserved deliberately: `RelativeToHealth: false` (the old stack counted SHOTS, so a
+scout and a superheavy were pinned by the same 100 hits), firepower and damage modifiers OFF (the
+magnetron carries `FirepowerMultiplier@MultiWeapon: 50` while not elite), and turn/turret/reload
+pinned at 100 at BOTH ends — the trait defaults them to 50, and omitting them would have quietly
+added three effects the magnetron never had.
+
+⚠ **The full lock is still nearly unreachable, and that is unchanged, not introduced.** 100 shots
+fill the bar; `physical_state_price` puts the fill/kill ratio at **15.1**, so the magnetron's own
+laser kills long before `magnetfreeze` is granted. That was equally true of the 100-token stack.
+Whether the grip should complete faster is a BALANCE question for the ledger, not a conversion bug.
+
+### 4. More axes to convert
+
+Documented in `PHYSICAL_STATE_SYSTEM.md` §5 but not built: **Sonic → `Resonance`** (W7, needs no
+new C#), **Hex** (Magic: −firepower/−accuracy/disable specials), **ArmorBreach**, **Knockback**
+(needs new C#). Only **Temperature** (98.6% exposure) and **Corrosion** (45.0%) exist today.
+
+## ⛔ OPEN DECISION — how the Cryo families get adopted (2026-08-23)
+
+`BulletCryo`, `CannonCryo`, `MissileCryo` and `CryoBlast` are BUILT and spliced but adopted by
+**0 weapons**. So is the base `Cryo` family. Everything cryo still runs the legacy path.
+
+⭐ **THE STRUCTURE IS NOT WHAT IT LOOKED LIKE.** All **17** cryo weapons are THIN CHILDREN of one
+shared template, `^CryoMissileProjectile` (`ContentPacks/RedAlert/Shared/yaml/weapons.yaml:1`),
+which carries a single `Warhead@PhysicalStateCryo: ApplyPhysicalState`. Their main damage comes
+entirely from their NON-CRYO parents (`Stinger`, `SheridanMissiles`, `RapierBombs`, `M1Carbine`,
+`ViperMissiles`...), which other units share. Each cryo weapon overrides only the `Amount`:
+
+    -48000 x1   -32000 x1   -30000 x3   -20000 x2   -16000 x3   -10000 x2   -2000 x5
+
+That spread IS the hand-cranked dilution compensation diagnosed on the Sheridan, all in one place.
+
+⚠ A first pass misread this: a `sed` window overran the block and showed the NEXT weapon's
+`Inherits@wh:` lines, making these look like standalone weapons on modern templates. They are not.
+
+**Three shapes, one disqualified:**
+
+| option | verdict |
+|---|---|
+| ADD the family as an extra warhead (DESIGN's "an upgrade ADDS the warhead") | ⛔ adds a main to ~12 weapons → **raises the `three_way_split` ratchet**, which is forbidden |
+| REPLACE the parents' mains | yaml cannot un-inherit; needs restructuring parents that non-cryo units depend on |
+| ⭐ **FOLD the meter onto the existing main warhead** — swap the discrete `ApplyPhysicalState` for `PhysicalStateName: Temperature` + `PhysicalStateScale` | no new warhead, no ratchet change, implements the Scale-200 support design, and is close to a ONE-TEMPLATE change because they all share `^CryoMissileProjectile` |
+
+**Recommended: fold.** ⚠ It implies the four Cryo families serve a DIFFERENT population — weapons
+whose damage TYPE should be cryo — not cryo-flavoured variants of existing weapons. Decide that
+before pointing anything at them.
+
+12 of the 17 are additionally blocked behind the legacy 3-way split (`155mmBastionCryo`,
+`APTuskCryo`, the `LightMissile+SmallArms+Chaingun+...` beam soup, etc.).
+
+## ⭐ FROM THE DISCORD PLAYTEST THREAD (2026-08-22)
+
+### 1. TS Nod tick tank — the complaint is real, the diagnosis pointed at the wrong upgrade
+
+Destined: *"They are supposed to be aggravatingly tanky once deployed … They shouldn't be good
+against infantry, at least not until t3 upgrade."* Plus: *"it's crazy that in this mod they
+become hard to counter at radar upgrade instead of tech center upgrade."*
+
+⛔ **Tiberium Lenses is ALREADY at T3.** Measured: `~ts_nod_techcenter`, cost 10,000 — exactly
+where Shattered Paradise has it. The T2 upgrade doing the damage is a different one:
+
+| upgrade | tier | cost | what it adds |
+|---|---|--:|---|
+| **Auxiliary Weapon** | **T2 `~ts_nod_radar`** | 4,000 | `TS25mmDep` — `Ground, Water, Air`, **None 200** / Flak 149 / Plate 117 |
+| Tiberium Lenses | T3 `~ts_nod_techcenter` | 10,000 | swaps to lasers |
+
+So the **Auxiliary Weapon** is both the anti-infantry AND the anti-air spike, at T2. Without it
+the tick tank has **no anti-air at all** and its cannon is `Ground, Water` only. And the T3 laser
+is a NERF, not a spike: `TSLaser25mmDep` drops None 200 → 80 and Heavy 49 → 45.
+
+**Levers, with collateral measured:**
+
+| lever | collateral |
+|---|---|
+| drop `Air` from `TS25mmDep` `ValidTargets` | none — per weapon |
+| move Auxiliary Weapon T2 → T3 | none — per upgrade |
+| cannon `^Warhead_CannonHE_Medium` → `^Warhead_CannonAP_Medium` | **1** other inherit site |
+| lower the anti-infantry Versus directly | ⛔ not viable — Flak_Medium is 32 weapons, CannonHE_Medium is 73, and Versus lives only in templates |
+
+⭐ The cannon swap is the precise answer to *"only good against tanks/buildings"*:
+None **0.51x**, Wood 0.69x, Scout 0.78x — but Heavy **1.27x**, Concrete **1.72x**,
+Superheavy **1.91x**. `CannonAP_Medium` has only ONE inherit site today, so adoption is cheap.
+
+⚠ 333ggg wants a dedicated TS Nod anti-air unit; removing the tick tank's AA is gated on that.
+
+### 2. "Very tanky" via an armour BAR — supported, and it is the R1 law
+
+Maintainer: *"give them an additional armor plating when deployed (armor bar shows up so they
+need to destroy the armor bar first) … will that cause any problems?"*
+
+`OpenRA.Mods.Cameo/Traits/ArmorPlating.cs` is exactly this and its own [Desc] states the rule:
+*"Every 'this unit is tougher now' effect in Cameo is meant to be one of these … toughness is a
+visible bar rather than an invisible DamageMultiplier."* It is a `PausableConditionalTrait`, so
+`RequiresCondition: deployed` is all it takes. Two properties fit the tick fantasy exactly:
+
+- **`RampTicks: 125`** — the pool repairs NOTHING while under fire and winds up to full rate once
+  left alone. It heals back between engagements, not during them.
+- **`BypassDamageTypes`** — damage types that pass straight THROUGH the plating to health. Point
+  it at artillery/siege types and the unit is countered by exactly what Destined says should
+  counter it, by construction rather than by tuning.
+
+⚠ Two things to get right:
+1. `MaxPercentageStrength: 50` (the default) is a pool worth 50% of max HP = **1.5x** effective
+   HP — LESS than the ×0.5 multiplier it replaces (2x). If "very tanky" is the target the pool
+   has to be bigger; the difference is that a bar is visible and priced, a multiplier was neither.
+2. Grant the plating **without** a `FullCondition` armour type. The trait's docs tell you to gate
+   the body `Armor` on `EmptyCondition` when the plating carries its own type — that is for the
+   armor-swap pattern and would fight §12.0g's deploy averaging. A pure pool has no Versus
+   interaction and composes cleanly.
+
+### 3. Spectator tabs ported from Combined Arms (request: Demeow Cat Hans)
+
+Four extra observer tabs plus replay speed: **Economy Damage** (harvesters/refineries killed and
+lost), **Upgrades** (per-player, with purchase timings), **Units Produced** (count + value per
+unit type), **Build Order** (initial order with timestamps), and **1.33x / 1.5x** replay speed.
+An in-game encyclopedia was raised and deferred as too large.
+
+### 4. Deploy-abuse bugs (reporter: ws) — UNVERIFIED, needs reproduction
+
+- redeploying a **nexus** appears to refill its shield — a free full shield on demand.
+- **hatcheries** appear to lose their upgrades when redeployed.
+
+Both are `GrantConditionOnDeploy` state-reset bugs; neither has been reproduced against the tree
+yet, so they are reports, not findings.
+
+## ⭐ NEXT MAJOR — continuous weapon heaviness — see [`CONTINUOUS_WEAPON_HEAVINESS.md`](CONTINUOUS_WEAPON_HEAVINESS.md) (2026-08-22)
+
+Resolves the 3-way-split vs between-tier-mix collision: ONE warhead template per family plus a
+continuous `Heaviness` scalar, instead of a discrete level ladder. Measured: a level is already a
+pure transform (`Versus = base + offset(h)`, offset 0/+4/+9, plating 0, Shield 2x; `Spread` ramps
+1 : 1.5 : 2) on 39 of 40 families. Collapses ~600 future templates to ~100 and fixes the 33
+between-tier weapons that currently out-damage the tier ABOVE them.
+
+⛔ **CORRECTED 2026-08-22 — MOST OF THIS WAS ALREADY LAW AND ALREADY SHIPPED.**
+
+`DESIGN.md` §12.0a (THE MEAN-100 LAW), §12.0c (THE SHIELD LADDER) and §12.0d (THE CLASS TILT)
+already rule this design, and all three are live in `gen_weapon_template.py` (`mean_normalise`,
+`class_tilt`, `TILT_RATIO 1.5`, `MEAN_TARGET 100`). §12.0d IS the bell curve, and it already
+solves inversion: the tilt is applied to the VALUES and each armor is then given back the RANK it
+held, so it *"can never invert"*.
+
+The blockers previously listed here were measured with a broken hand parser that read
+`PercentageVersus` instead of `Versus` — see the correction banner in
+`CONTINUOUS_WEAPON_HEAVINESS.md`. Re-measured through the resolver:
+
+| previously claimed | truth |
+|---|---|
+| 0 of 125 obey MEAN-100 | **123 of 125** (the 2 are HAND_TUNED) |
+| every family breaks the 2x-8x band | **39 of 42 in band**, median 4.17x vs a 4x target |
+| a Heavy weapon self-prices at ~2x a Light one | Heavy/Light weighted-mean Versus is **1.00x** — tier does NOT price through Versus, exactly as §12.0a intends |
+
+**What is genuinely still open:**
+
+1. Make the class tilt **CONTINUOUS** — driven by `h` from `tier_chain` (already computed and
+   stored per actor) instead of four discrete levels. This is the whole remaining idea.
+2. Collapse the level templates to **one per family + a per-weapon `h`**.
+3. ✅ CLEARED — the 4 orientation flips were **one real flip** (`Cryo`) plus 3 false positives from
+   comparing `None` (INF ladder) against `Superheavy` (VEH); §12.0d only orders WITHIN a ladder.
+   `Cryo` flipped because its blend tiebreak was decided per LEVEL on a one-point margin — the
+   tiebreak is now family-wide (`1af72a3c1`). `audit_versus_profile.py` ratchet **0**.
+4. ✅ CLEARED — `CannonAP` 1.81x and `Cryo` 1.97x were too flat because the 2x band floor lived
+   inside `finish_blend()` (blend families only) and ran BEFORE `class_tilt` reshaped the profile.
+   It is now applied to every family, after the tilt (`edd1c4597`). Ratchet **0**.
+5. The 9 broken DAMAGE ladders (`audit_level_ladder.py`, ratchet 9) — unaffected by the parser
+   bug, since that audit reads `Damage` through the resolver. Still a balance restat needing
+   `apply_balance --confirm`.
+
 ## ▶ ACTIVE — CAMEO CONTENT INSTALLER
 
 - [x] **Manage Content downloads:** hidden `cameo-content` installer mod,
@@ -87,7 +320,7 @@ removal (`43df39235`); 5 earlier templates + buff-strip (`090d3d997`).
   `^CommandoCall`/`^CommandoCallable` untouched) and the mark baked into all three
   `^Warhead_Sonic_*` levels by `gen_weapon_template.py` (`FAMILY_CONDITION` → a zero-damage
   `Warhead@<tag>_Debuff: GrantExternalCondition`; `Duration = 2 × ReloadDelay` = 50 ticks,
-  `Range = 2 × Spread` = 800/1200/1600, Enemy/Neutral only). Generator drift stays 1, empty-warhead 0,
+  `Range = 2 × Spread` = 800/1200/1600, Enemy/Neutral only). `verify_generator_sync.py` reports drift = 0, empty-warhead 0,
   `audit_physical_state_warheads` PASS. Boot-gated, `5a14355e6`. Spec: `PHYSICAL_STATE_SYSTEM.md` §5.
 - **[RESOLVED 2026-08-10, Devin] Upgraded Tesla weapons drained integrity at the same ratio as their
   un-upgraded base** — RA1 Tesla Doctrine (`PortaTesla_EMP`/`TTankZap_EMP`/`TTankZap2_EMP`/
@@ -379,23 +612,7 @@ AA-gating, rock-paper-scissors) are captured in `BALANCE_SYNTHESIS.md` + `ORIGIN
 ## Active documentation maintenance
 
 - [x] **Documentation architecture quick wins** — owner: Cascade. Added `docs/README.md`; reduced `PROJECT_CONTEXT.md` to orientation and canonical links; kept the complete startup, evidence, incident, and commit-gate protocol in `AGENT_WORKSPACE.md`. Validation: checked links in the entry documents and ran `git diff --check`.
-- [x] **Documentation architecture continuation** — owner: Cascade. De-mixed `../history/MEGAPLAN_2026-08-08.md` into a short rebalance index and moved the Dynamic Campaign vision into non-binding `VISION.md`; Formula V2, balance-pipeline, and ARMOR_SYSTEM remain canonical linked sources. Excludes the ROADMAP history split and Formula V2 roster-log migration. Validation: internal-link check and `git diff --check`.
-- [x] **Full documentation audit + reorganisation (2026-08-23)** — owner: Claude. Created
-  [`docs/HANDOFF.md`](../HANDOFF.md) as the single entry point and archived seven superseded
-  handoffs into `docs/history/handoffs/`; split this file's closed July sections into
-  [`docs/history/ROADMAP_ARCHIVE_2026-07.md`](../history/ROADMAP_ARCHIVE_2026-07.md) (41 open
-  items all retained); rebuilt `audit/SUMMARY.md` from a fresh suite run; reconciled eight
-  contradicting statuses inside `BALANCE_PROGRAM_PLAN.md`; fixed the duplicate `§12.0a`
-  section id in `DESIGN.md`; struck the retired 2000-step damage grid from eight places;
-  removed 38 duplicate audit reports and made `run_all.py` read its list from `run_all.sh`;
-  added `audit_doc_health.py`. Validation: `audit_doc_health` 0 findings, `audit_doc_claims`
-  18/19 (the one red is the live ledger drift), `audit_consistency_report` 73/0,
-  227 tools tests green.
-- [ ] **The two documentation gates are now permanent** — keep them green.
-  `audit_doc_claims.py` (numeric claims, registry `docs/audit/doc_claims.yaml`) and
-  `audit_doc_health.py` (structural defects) both run in `run_all.sh`. **Add a claim to the
-  registry the moment a decision starts resting on a number**, and when a claim legitimately
-  changes, update its `value` AND every file under its `docs:` key in the same commit.
+- [x] **Documentation architecture continuation** — owner: Cascade. De-mixed `MEGAPLAN.md` into a short rebalance index and moved the Dynamic Campaign vision into non-binding `VISION.md`; Formula V2, balance-pipeline, and ARMOR_SYSTEM remain canonical linked sources. Excludes the ROADMAP history split and Formula V2 roster-log migration. Validation: internal-link check and `git diff --check`.
 
 ## Code health program
 
@@ -432,7 +649,7 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
 - **SUM law** — effective damage = Σ offensive SpreadDamage warheads (excl.
   `*ExtraDamage`/`*Percentage`/`*FriendlyFire`), never MAX. Canonical reducer
   `formula.spread_damage_sum` (done: propose_class_rebalance/fit_class/update_ranges route through it).
-- **Two-stage DPS tuning** (⚠ pre-W15 law; the grid is 100 now and the FP knob is retired) — coarse: warhead `Damage` on the grid;
+- **Two-stage DPS tuning** — coarse: warhead `Damage` on the 2000 grid;
   fine: `FirepowerMultiplier@<unit>` in 1% steps (1 = ×0.01). Dispatcher must emit both.
 - **Baseline @ band middle**; **verifier ≡ baseline on range+speed, exactly
   2×HP / 2×DPS / 2.5×cost**; same tech tier as baseline so it cancels.
@@ -479,7 +696,7 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `f(C) = 1 / (1 + (C - 9500) / 8250)`, and writes `tier_chain_cost` +
   `tier_multiplier` to the derived sidecar. Manual `design.tech_tier` values are
   preserved as overrides.
-- [ ] Build `tools/balance/rebalance_classes.py` dispatcher (⚠ **not built yet**): SUM price →
+- [ ] Build `tools/balance/rebalance_classes.py` dispatcher: SUM price →
   2000-grid warheads → 1%-step FP-mult → range-solve to band (mult-of-10) →
   uniqueness within broad TYPE → Δ (goal ≤1). Consolidates the scout/
   closecombat/SF one-offs (LESSONS §172-176).
@@ -1317,7 +1534,7 @@ faction." Rules of engagement:
   (`delivery/map.yaml`, `deliverycoop/map.yaml`) with old compressed
   actor names. All 2257 actor references in both map.yaml files and 90
   string references in lua scripts renamed to new §1-compliant ids using
-  `tools/archive/rename_map_actors.py` with the `tools/rename/rename_map_*.yaml`
+  `tools/rename_map_actors.py` with the `tools/rename/rename_map_*.yaml`
   mapping files. Terrain decorations (t01, v01, boxes01, brik, etc.) left
   as-is since they still exist with those names.
 - [x] **DESIGN.md updated** (2026-07-15): Added §14 documenting map actor
@@ -1362,7 +1579,7 @@ well."_
   files/{sprites,icons,voxels,sounds}, reference via package prefix,
   boot). Order: follow the pack splits; the four cross-game blockers
   (gunfire2, electro, dragon, DATA.R16) stay tracked above.
-- [ ] **PACK-GEN (automatic maintenance)**: `tools/packs/gen_content.py` (⚠ **not built yet** — `tools/packs/` currently holds only `split_faction.py` and `extract_shared.py`)
+- [ ] **PACK-GEN (automatic maintenance)**: `tools/packs/gen_content.py`
   regenerates every pack's content.yaml deterministically from the
   files on disk (sorted, grouped Rules/Weapons/Sequences/FluentMessages);
   audit mode fails on drift. content.yaml becomes machine-maintained.
@@ -1518,7 +1735,7 @@ types, creating a unified wall+turret defense system across the mod.
 - **Map actor naming** (DESIGN §14, 2026-07-15): maps must use renamed
   actor ids, not old compressed names. Rename maps in
   `tools/rename/rename_map_*.yaml` are the source of truth. Lua scripts
-  must also be updated. Tool: `tools/archive/rename_map_actors.py`.
+  must also be updated. Tool: `tools/rename_map_actors.py`.
 - **No weapon inheritance between units** (DESIGN §15, reinforced
   2026-07-15): unit-unique weapons must never `Inherits:` from another
   unit's weapon. Copy stats or use a shared `^`-prefixed template. This
@@ -1700,7 +1917,7 @@ types, creating a unified wall+turret defense system across the mod.
       `td_shared_sprites|` — never renamed),
   (d) template default filenames in inherited `^` templates (never renamed),
   (e) death/muzzle/parachute files defined in templates (never renamed).
-  Output: `tools/audit/sequence_file_crossref.json` (⚠ **not in the tree** — regenerate before relying on it).
+  Output: `tools/audit/sequence_file_crossref.json`.
   Effort: M.
 - [ ] **SEQ-MIGRATE: Rename sequence files to match actor + sequence name**
   — per faction, rename actor-owned files so that:
@@ -1741,7 +1958,7 @@ types, creating a unified wall+turret defense system across the mod.
   from `utility.cmd cameo --check-yaml`. Latest report: 2026-07-24
   (check_yaml_v8.txt, ~89,392 errors, ~69,325 warnings).
   Full phased plan in `docs/design/MEGAPLAN_YAML_CLEANUP.md`.
-  Analysis tool: `tools/archive/analyze_check_yaml.py`. Effort: L (multi-session).
+  Analysis tool: `tools/audit/analyze_check_yaml.py`. Effort: L (multi-session).
 
   **Fixes applied this session (2026-07-24):**
   - [x] LaunchAngle (363→0): Converted LaunchAngle↔Min/MaxLaunchAngle per

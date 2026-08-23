@@ -191,9 +191,9 @@ japan_nanodronebuggy:
 		Step: 15
 	Mobile:
 		Speed: 77
-		TurnSpeed: 17
+		TurnSpeed: 15
 	Turreted:
-		TurnSpeed: 17
+		TurnSpeed: 15
 		Offset: -250,0,0
 	Armament:
 		Weapon: NanoArtilleryAG
@@ -245,7 +245,7 @@ japan_ballista:
 		Step: 26
 	Mobile:
 		Speed: 65
-		TurnSpeed: 13
+		TurnSpeed: 26
 		Locomotor: lighttracked
 	Armament@PRIMARY: ##########
 		Weapon: BallistaMultiShot
@@ -745,7 +745,7 @@ japan_armoredcar:
 		Speed: 130
 		TurnSpeed: 26
 	Turreted:
-		TurnSpeed: 52
+		TurnSpeed: 26
 		Offset: -200,0,100
 	Armament@AG:
 		Weapon: ArmoredCarMG

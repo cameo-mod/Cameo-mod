@@ -16,9 +16,8 @@ tkm_rifleman_rifle:
 		Speed: 10000
 		Width: 50
 	Warhead@Bullet_Light:
+		PercentageScale: 13333
 		Damage: 6000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
-		Damage: 4
 tkm_rifleman_semiautorifle:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -38,8 +37,6 @@ tkm_rifleman_semiautorifle:
 		Width: 50
 	Warhead@Bullet_Light:
 		Damage: 10000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
-		Damage: 5
 tkm_juggernaut:
 	Inherits: ^RA2Chaingun
 	ReloadDelay: 8
@@ -47,8 +44,6 @@ tkm_juggernaut:
 	Report: mgun11.aud
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		Damage: 2
 tkmjuggap:
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^RA2Grenade
@@ -64,8 +59,6 @@ tkmjuggap:
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water
 		Damage: 6000
-	Warhead@Bullet_Light_Percentage:
-		Damage: 3
 tkmbunkmg:
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^RA2Chaingun
@@ -76,26 +69,25 @@ tkmbunkmg:
 	Report: mgun11.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		Damage: 1
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage:
-		Damage: 1
 HueyGun:
-	Inherits: ^FlakWeapon
-	Inherits@2: ^RA2Chaingun
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@proj: ^Projectile_Bullet_Medium
+	Inherits@fx: ^Effect_Bullet_Medium_RA2
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 7
 	Range: 4783
 	Report: mgun11.aud
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 1
 	Warhead@Bullet_Medium:
-		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		Damage: 1
+		Damage: 4000
+	Warhead@Effect: CreateEffect
+		ImpactSounds: xplos.aud
+	Warhead@EffectAir: CreateEffect
+		Explosions: ra2_piffs
+		ExplosionPalette: ra2effect
+		ValidTargets: Air
+		ImpactSounds: xplos.aud
 HueyMissiles:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
@@ -105,8 +97,6 @@ HueyMissiles:
 	Report: bazook1.aud
 	Warhead@MissileAP_Medium:
 		Damage: 8000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
-		Damage: 4
 tkmtechnicalmgap:
 	Inherits: tkmjuggap
 	ValidTargets: Ground, Water
@@ -116,8 +106,6 @@ tkmtechnicalmgap:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 6000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
-		Damage: 3
 tkmtwinrockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -128,8 +116,6 @@ tkmtwinrockets:
 	Report: bazook1.aud
 	Warhead@MissileAP_Light:
 		Damage: 18000
-	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
-		Damage: 9
 tkmtwinrocketstechnicaltank:
 	Inherits: tkmtwinrockets
 	Range: 5243
@@ -143,12 +129,8 @@ tkmfirerockets:
 	Report: bazook1.aud
 	Warhead@MissileAP_Light:
 		Damage: 18000
-	Warhead@MissileAP_Light_Percentage:
-		Damage: 9
 	Warhead@Flame_Light:
 		Damage: 4000
-	Warhead@Flame_Light_Percentage:
-		Damage: 2
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, ixian_concretewall
@@ -176,8 +158,6 @@ tkmm16:
 	BurstDelays: 1
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
-		Damage: 1
 tkm_trooper_ak:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -189,8 +169,6 @@ tkm_trooper_ak:
 	BurstDelays: 1
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
-		Damage: 1
 tkmakap:
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^RA2Grenade
@@ -198,13 +176,12 @@ tkmakap:
 	Range: 5621
 	Report: mgun2.aud
 	Warhead@Bullet_Light:
+		PercentageScale: 3333
 		Burst: 3
 		Damage: 6000
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage:
-		Damage: 1
 tkmkord:
 	Inherits: ^RA2Chaingun
 	ReloadDelay: 10
@@ -212,8 +189,6 @@ tkmkord:
 	Report: mgun2.aud
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		Damage: 1
 tkmawp:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
@@ -225,7 +200,7 @@ tkmawp:
 		Damage: 44000
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 44000
-	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 22
 tkmsmg:
 	Inherits@wh: ^Warhead_Sniper_Light
@@ -247,7 +222,7 @@ tkmsmg:
 		Damage: 2000
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 2000
-	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 tkmtechmg:
 	Inherits: ^RA2Chaingun
@@ -256,8 +231,6 @@ tkmtechmg:
 	Report: mgun2.aud
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		Damage: 2
 ThermoF:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
@@ -274,8 +247,6 @@ ThermoF:
 		Palette: tseffect
 	Warhead@Flame_Medium:
 		Damage: 2000
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 1
 tkmm203:
 	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Warhead_Flame_Light
@@ -294,12 +265,8 @@ tkmm203:
 		ContrailEndColor: FFFFFF22
 	Warhead@Demolition_Light:
 		Damage: 4000
-	Warhead@Demolition_Light_Percentage:
-		Damage: 2
 	Warhead@Flame_Light:
 		Damage: 4000
-	Warhead@Flame_Light_Percentage:
-		Damage: 2
 tkmrockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -309,8 +276,6 @@ tkmrockets:
 	Report: bazook1.aud
 	Warhead@MissileAP_Light:
 		Damage: 18000
-	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
-		Damage: 9
 as42rockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -321,8 +286,6 @@ as42rockets:
 	Projectile: Missile
 	Warhead@MissileAP_Light:
 		Damage: 20000
-	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
-		Damage: 10
 tkmcryorockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -340,8 +303,6 @@ tkmcryorockets:
 		ContrailLength: 15
 	Warhead@MissileAP_Light:
 		Damage: 18000
-	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
-		Damage: 9
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 12000
 		Spread: 200
@@ -372,15 +333,9 @@ TKMQuadCannonAG:
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 TKMQuadCannonAA:
 	Inherits: TKMQuadCannonAG
 	Range: 7880
@@ -397,12 +352,8 @@ tkmturretcannon:
 		Speed: 850
 	Warhead@CannonAP_Light:
 		Damage: 8000
-	Warhead@CannonAP_Light_Percentage:
-		Damage: 4
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@CannonHE_Medium_Percentage:
-		Damage: 4
 tkmltgun:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -415,8 +366,6 @@ tkmltgun:
 		Speed: 524
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
-		Damage: 4
 tkm2a46gun:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -429,8 +378,6 @@ tkm2a46gun:
 		Speed: 524
 	Warhead@CannonHE_Medium:
 		Damage: 10000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
-		Damage: 5
 TKMZazaCannonAG:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Flak_Medium
@@ -452,15 +399,9 @@ TKMZazaCannonAG:
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 TKMZazaCannonAA:
 	Inherits: TKMZazaCannonAG
 	Range: 7926
@@ -474,17 +415,12 @@ TKMAATurretCannon:
 	Range: 11604
 	ValidTargets: Air
 	Warhead@MissileHE_Medium:
+		PercentageScale: 20000
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@MissileHE_Medium_Percentage:
-		ValidTargets: Air
-		Damage: 2
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 2000
-	Warhead@Flak_Medium_Percentage:
-		ValidTargets: Air
-		Damage: 1
 tkmstrykerrockets:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
@@ -495,9 +431,6 @@ tkmstrykerrockets:
 	ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium:
 		Damage: 24000
-		ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
-		Damage: 12
 		ValidTargets: Ground, Water, Air
 tkmstrykercryorockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
@@ -517,10 +450,8 @@ tkmstrykercryorockets:
 		ContrailEndWidth: 25
 		ContrailLength: 15
 	Warhead@MissileAP_Light:
+		PercentageScale: 15000
 		Damage: 12000
-		ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
-		Damage: 9
 		ValidTargets: Ground, Water, Air
 	Warhead@CryoFreeze: GrantExternalCondition
 		Condition: CryoFreeze
@@ -546,9 +477,6 @@ tkmstrykermg:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 t30shell:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh2: ^Warhead_Railgun_Heavy
@@ -571,19 +499,14 @@ t30shell:
 		MaximumLaunchSpeed: 125
 		Acceleration: 5
 	Warhead@Demolition_Heavy:
+		PercentageScale: 1000
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@Demolition_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 2
 	Warhead@Railgun_Heavy:
+		PercentageScale: 5000
 		ValidTargets: Ground, Water
 		Spread: 512
 		Damage: 40000
-	Warhead@Railgun_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Spread: 512
-		Damage: 10
 	# Warhead@FireShrapnel: FireShrapnel
 	# 	InvalidTargets: FireImmune
 	# 	Weapon: AsianFlameFragment
@@ -612,21 +535,12 @@ HueyCryoMissiles:
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 	Warhead@CryoFreeze: GrantExternalCondition
 		Condition: CryoFreeze
 		Duration: 125
@@ -653,21 +567,12 @@ HueyTwinMissiles:
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: xplos.aud
@@ -695,13 +600,8 @@ sandmarinemortar:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 120000
-	Warhead@Demolition_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 60
 	Warhead@Flame_Medium:
 		Damage: 120000
-	Warhead@Flame_Medium_Percentage:
-		Damage: 60
 bigshieemortar:
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Medium
@@ -724,13 +624,8 @@ bigshieemortar:
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 80000
-	Warhead@Demolition_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 40
 	Warhead@Flame_Medium:
 		Damage: 80000
-	Warhead@Flame_Medium_Percentage:
-		Damage: 40
 TKMLockOn:
 	ReloadDelay: 20
 	Range: 10000
@@ -753,7 +648,9 @@ TKMMedicHeal:
 	Warhead@ExtraHealing: SpreadDamage
 		Spread: 1024
 		Damage: -1000
-	Warhead@HealingWeaponPercentage: HealthPercentageDamage
+	Warhead@HealingWeaponPercentage: AreaDamagePercentage
+		FriendlyFireDamage: 100
+		FriendlyFireSpread: 100
 		Spread: 1024
 		Damage: -1
 tkmkatyushalalauncherrockets:
@@ -781,9 +678,6 @@ tkmkatyushalalauncherrockets:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water
 		Damage: 20000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 10
 tkmkatyushalalauncherrocketscryo:
 	Inherits: ^CryoMissileProjectile
 	Inherits@2: tkmkatyushalalauncherrockets
@@ -811,12 +705,9 @@ tkmkatyushalalauncherrocketsfire:
 		MinimumLaunchSpeed: 125
 		Acceleration: 5
 	Warhead@Flame_Light:
+		PercentageScale: 6667
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Flame_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 tkmkatyushalalauncherrocketstwin:
 	Inherits: tkmkatyushalalauncherrockets
@@ -835,15 +726,9 @@ SandmarineTusk:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@MissileHE_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@Concussion_Medium_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 20
 BigShieeTusk:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_Concussion_Medium
@@ -858,15 +743,9 @@ BigShieeTusk:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@MissileHE_Heavy_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 20
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@Concussion_Medium_Percentage:
-		ValidTargets: Ground, Water
-		Damage: 20
 SandmarineTuskTwin:
 	Inherits: SandmarineTusk
 	Inherits@wh: ^Warhead_MissileAP_Medium
@@ -884,33 +763,27 @@ SandmarineTuskTwin:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 2
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 4000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 2
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 2
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Ground, Water
 		Damage: 4000
-	Warhead@MissileHE_Heavy_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 2
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water
 		Damage: 4000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 2
 SandmarineTuskCryo:
 	Inherits: SandmarineTusk
 	Inherits@2: ^CryoMissileProjectile
@@ -925,12 +798,9 @@ SandmarineTuskFire:
 		TrailInterval: 1
 		TrailDelay: 0
 	Warhead@Flame_Light:
+		PercentageScale: 6667
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Flame_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 ViperMissiles:
 	Inherits@wh: ^Warhead_Concussion_Medium
@@ -959,14 +829,8 @@ ViperMissiles:
 	Warhead@Concussion_Medium:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
-		Damage: 8
-		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium:
 		Damage: 16000
-		ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
-		Damage: 8
 		ValidTargets: Ground, Water, Air
 ViperMissilesTwin:
 	Inherits: ViperMissiles
@@ -985,12 +849,9 @@ ViperMissilesFire:
 		TrailInterval: 1
 		TrailDelay: 0
 	Warhead@Flame_Light:
+		PercentageScale: 6667
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Flame_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 DronePodTruckLaser:
 	ReloadDelay: 5
@@ -1034,31 +895,28 @@ VonSniper:
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@CannonHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 3
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@Effect: CreateEffect
@@ -1074,23 +932,21 @@ VonSniperAP:
 		ContrailEndColor: 22446688
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 16000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 16000
-	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
-		Damage: 8
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 16000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 16000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Bullet_Medium: AreaDamage
 		Damage: 16000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
@@ -1117,17 +973,12 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 16
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
@@ -1137,17 +988,12 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 16
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
@@ -1157,7 +1003,7 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
@@ -1167,7 +1013,7 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
@@ -1187,9 +1033,6 @@ tkmm16ap:
 	BurstDelays: 1
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		Damage: 1
-
 tkm_trooper_gp25:
 	Inherits: ^Warhead_Demolition_Light
 	Inherits@2: ^Warhead_Flame_Light
@@ -1208,13 +1051,8 @@ tkm_trooper_gp25:
 		ContrailEndColor: FFFFFF22
 	Warhead@Demolition_Light:
 		Damage: 6000
-	Warhead@Demolition_Light_Percentage:
-		Damage: 3
 	Warhead@Flame_Light:
 		Damage: 6000
-	Warhead@Flame_Light_Percentage:
-		Damage: 3
-
 tkmstrykerfirerockets:
 	Inherits: ^Warhead_MissileAP_Medium
 	Inherits@2: ^Warhead_Flame_Medium
@@ -1230,16 +1068,9 @@ tkmstrykerfirerockets:
 	Warhead@MissileAP_Medium:
 		Damage: 24000
 		ValidTargets: Ground, Water, Trees, Air
-	Warhead@MissileAP_Medium_Percentage:
-		Damage: 12
-		ValidTargets: Ground, Water, Trees, Air
 	Warhead@Flame_Medium:
 		Damage: 6000
 		ValidTargets: Ground, Water, Air
-	Warhead@Flame_Medium_Percentage:
-		Damage: 3
-		ValidTargets: Ground, Water, Air
-
 VanSniper:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
@@ -1251,7 +1082,7 @@ VanSniper:
 		Damage: 80000
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 80000
-	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 40
 
 tkmt72cannon:
@@ -1267,10 +1098,8 @@ tkmt72cannon:
 	Projectile: Bullet
 		Speed: 546
 	Warhead@CannonHE_Medium:
+		PercentageScale: 5000
 		Damage: 20000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
-		Damage: 5
-
 tkmabramscannon:
 	Inherits@wh: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
@@ -1284,10 +1113,8 @@ tkmabramscannon:
 	Projectile: Bullet
 		Speed: 546
 	Warhead@CannonHE_Medium:
+		PercentageScale: 5000
 		Damage: 20000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
-		Damage: 5
-
 tkmquadcannonmg:
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^RA2Chaingun
@@ -1307,16 +1134,9 @@ tkmquadcannonmg:
 	Warhead@Bullet_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-
 HeavyAATankCannontkm:
 	Inherits: ^LightMissile
 	Inherits@2: ^FlakWeapon
@@ -1330,25 +1150,25 @@ HeavyAATankCannontkm:
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air, Air, Air
 		Damage: 1
 
@@ -1365,25 +1185,25 @@ tkmheavyaaturret:
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
@@ -1399,9 +1219,6 @@ tkmrh120gun:
 		Speed: 524
 	Warhead@CannonHE_Medium:
 		Damage: 12000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
-		Damage: 6
-
 tkmtrenchcannon:
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@wh2: ^Warhead_CannonHE_Heavy
@@ -1415,13 +1232,8 @@ tkmtrenchcannon:
 		Speed: 850
 	Warhead@Concussion_Medium:
 		Damage: 20000
-	Warhead@Concussion_Medium_Percentage:
-		Damage: 10
 	Warhead@CannonHE_Heavy:
 		Damage: 20000
-	Warhead@CannonHE_Heavy_Percentage:
-		Damage: 10
-
 tkmtrenchdepcannon:
 	Inherits: tkmtrenchcannon
 	ReloadDelay: 36
@@ -1454,7 +1266,7 @@ HueyFireMissiles:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -1463,19 +1275,16 @@ HueyFireMissiles:
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage:
-		ValidTargets: Ground, Water, Air
-		Damage: 1
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1487,7 +1296,7 @@ HueyFireMissiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightMissilePercentage: HealthPercentageDamage
+	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1508,10 +1317,6 @@ TKMDroneExplode:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water
 		Damage: 40000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 20
-
 TKMDroneExplosion:
 	Inherits: TKMDroneExplode
 	Range: 2000
@@ -1548,12 +1353,6 @@ FlakbusAA:
 	Warhead@MissileHE_Medium:
 		ValidTargets: Air
 		Damage: 16000
-	Warhead@MissileHE_Medium_Percentage:
-		ValidTargets: Air
-		Damage: 8
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 16000
-	Warhead@Flak_Medium_Percentage:
-		ValidTargets: Air
-		Damage: 8

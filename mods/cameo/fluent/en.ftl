@@ -57,8 +57,13 @@ options-observer-stats =
     .army = Army
     .upgrades = Upgrades
     .promotions = Promotions
+    .build-order = Build Order
+    .units-produced = Units Produced
+    .economy-damage = Economy Damage
     .earnings-graph = Earnings (graph)
     .army-graph = Army (graph)
+    .team-army-graph = Team Army (graph)
+    .team-earnings-graph = Team Earnings (graph)
 
 label_minimal_stats_player_header = Player
 label_minimal_stats_cash_header = Cash
@@ -616,3 +621,6 @@ label_d2k_map_generator_choice_density_area_high =
    .label = High
 label_d2k_map_generator_choice_density_area_very_high =
    .label = Very High
+
+label-team-name = Team { $team }
+label-no-team = No Team

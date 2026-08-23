@@ -1,6 +1,6 @@
 # gen_damage_matrix — armor classes & Versus aggregates (§8.1)
 
-Armor types in live actors: **21**, warheads with Versus tables: **11071**
+Armor types in live actors: **21**, warheads with Versus tables: **8295**
 
 
 ## Armor types referenced by actors
@@ -12,31 +12,31 @@ ARMOR, Bomber, COMPOSITE, Concrete, Fighter, Flak, HAZMAT, Heavy, Helicopter, He
 
 | armor type | #warheads naming it | mean Versus | min | max |
 |---|---|---|---|---|
-| ARMOR | 2955 | 70% | 70 | 70 |
-| BLAST | 2955 | 65% | 36 | 103 |
-| Bomber | 10801 | 37% | 1 | 196 |
-| COMPOSITE | 2955 | 70% | 35 | 106 |
-| Concrete | 11046 | 47% | 0 | 200 |
-| Fighter | 10801 | 38% | 1 | 200 |
-| Flak | 10801 | 59% | 1 | 250 |
-| HAZMAT | 4189 | 67% | 25 | 104 |
-| Heavy | 11057 | 51% | 0 | 200 |
-| Helicopter | 10801 | 35% | 1 | 177 |
-| Heroic | 10801 | 46% | 1 | 300 |
-| Light | 11059 | 53% | 1 | 200 |
-| Medium | 11020 | 51% | 0 | 200 |
-| None | 11051 | 65% | 1 | 1000 |
-| Plate | 10801 | 57% | 1 | 275 |
-| REFLECTOR | 3762 | 64% | 41 | 103 |
-| Scout | 10801 | 53% | 1 | 200 |
-| Shield | 10694 | 98% | 5 | 400 |
-| Spaceship | 10801 | 34% | 1 | 191 |
-| Steel | 10801 | 49% | 1 | 175 |
-| Superheavy | 10803 | 50% | 1 | 200 |
-| Wood | 11063 | 54% | 0 | 200 |
-| harvester | 29 | 42% | 25 | 100 |
-| invulnerable | 29 | 0% | 0 | 0 |
-| wall | 27 | 51% | 5 | 100 |
+| ARMOR | 2992 | 70% | 70 | 70 |
+| BLAST | 2992 | 66% | 36 | 105 |
+| Bomber | 8022 | 46% | 1 | 196 |
+| COMPOSITE | 2992 | 70% | 35 | 106 |
+| Concrete | 8270 | 58% | 0 | 200 |
+| Fighter | 8022 | 48% | 1 | 200 |
+| Flak | 8022 | 74% | 1 | 250 |
+| HAZMAT | 4175 | 66% | 25 | 102 |
+| Heavy | 8281 | 63% | 0 | 200 |
+| Helicopter | 8022 | 44% | 1 | 177 |
+| Heroic | 8022 | 56% | 1 | 300 |
+| Light | 8283 | 65% | 1 | 200 |
+| Medium | 8243 | 64% | 0 | 200 |
+| None | 8275 | 81% | 1 | 1000 |
+| Plate | 8022 | 71% | 1 | 275 |
+| REFLECTOR | 3799 | 64% | 41 | 103 |
+| Scout | 8022 | 66% | 1 | 200 |
+| Shield | 7915 | 123% | 9 | 400 |
+| Spaceship | 8022 | 43% | 1 | 191 |
+| Steel | 8022 | 60% | 1 | 175 |
+| Superheavy | 8025 | 63% | 1 | 200 |
+| Wood | 8287 | 67% | 0 | 200 |
+| harvester | 30 | 42% | 25 | 100 |
+| invulnerable | 30 | 0% | 0 | 0 |
+| wall | 28 | 52% | 5 | 100 |
 
 
 _Armor types with 0 warhead references are either default-100% targets everywhere or orphaned armor classes — cross-check with audit_orphans. Full per-warhead dump: run with --full._

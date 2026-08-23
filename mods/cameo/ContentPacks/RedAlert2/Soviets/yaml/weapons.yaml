@@ -6,9 +6,6 @@ RA2TURRETFLAKAA:
 	ValidTargets: Air
 	Warhead@Flak_Medium:
 		Damage: 10000
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
-		Damage: 5
-
 SeaScorpion_AA:
 	Inherits: ^RA2FlakWeapon
 	Report: aacanon3.aud
@@ -17,9 +14,6 @@ SeaScorpion_AA:
 	ValidTargets: Air
 	Warhead@Flak_Medium:
 		Damage: 8000
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
-		Damage: 4
-
 RA2KirovBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@fx: ^Effect_Clsn_VeryLarge_RA2
@@ -38,11 +32,6 @@ RA2KirovBomb:
 		ValidTargets: Ground, Ship
 		Damage: 80000
 		Spread: 800
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
-		ValidRelationships: Neutral, Enemy
-		Damage: 40
-		Spread: 4000
-
 RA2KirovBomb_rad:
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
@@ -52,14 +41,8 @@ RA2KirovBomb_rad:
 	Warhead@Chemical_Heavy:
 		Damage: 48000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Chemical_Heavy_Percentage: AreaDamagePercentage
-		Damage: 24
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Demolition_Heavy:
 		Damage: 48000
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
-		Damage: 24
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
@@ -112,11 +95,7 @@ RA2KirovBomb_tesla:
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 40000
-	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
-		Damage: 40
 	Warhead@Demolition_Heavy:
-		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Shrapnel: FireShrapnel
 		InvalidTargets: FireImmune
@@ -133,7 +112,7 @@ RA2KirovBomb_nuclear:
 		Damage: 80000
 		Spread: 800
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
+	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
 		Damage: 40
 		Spread: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
@@ -156,16 +135,11 @@ RA2KirovBomb_nuclear_elite:
 		Damage: 100000
 		Spread: 1000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
-		ValidRelationships: Neutral, Enemy
-		Damage: 50
-		Spread: 5000
-		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	Warhead@Nuclear_Super:
 		Damage: 100000
 		Spread: 1000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
-	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
+	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
 		Damage: 50
 		Spread: 5000
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
@@ -189,13 +163,8 @@ RA2120mm_rad:
 	Inherits@rad: ^RA2RadShell
 	Warhead@Chemical_Medium:
 		Damage: 6000
-	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
-		Damage: 3
 	Warhead@CannonHE_Medium:
 		Damage: 6000
-	Warhead@CannonHE_Medium_Percentage: HealthPercentageDamage
-		Damage: 3
-
 RA2120mm_fire:
 	Inherits: RA2120mm
 	Warhead@FireShrapnel: FireShrapnel
@@ -256,13 +225,8 @@ RA160mm:
 		TrailInterval: 1
 	Warhead@Concussion_Medium:
 		Damage: 60000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
-		Damage: 30
 	Warhead@Demolition_Light:
 		Damage: 60000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
-		Damage: 30
-
 RA160mm_rad:
 	Inherits@wh: ^Warhead_Chemical_Light
 	Inherits@proj: ^Projectile_Chem_Light
@@ -275,17 +239,10 @@ RA160mm_rad:
 		TrailPalette: effect
 	Warhead@Chemical_Light:
 		Damage: 36000
-	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
-		Damage: 18
 	Warhead@Concussion_Medium:
 		Damage: 36000
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
-		Damage: 18
 	Warhead@Demolition_Light:
 		Damage: 36000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
-		Damage: 18
-
 RA160mm_fire:
 	Inherits: RA160mm
 	Projectile: Bullet
@@ -325,7 +282,7 @@ RA160mmE_rad_elite:
 	Range: 12345
 	Warhead@Nuclear_Super:
 		Damage: 36000
-	Warhead@Nuclear_Super_Percentage: HealthPercentageDamage
+	Warhead@Nuclear_Super_Percentage: AreaDamagePercentage
 		Damage: 18
 	Warhead@Effect: CreateEffect
 		Explosions: ra2nukesmall
@@ -362,19 +319,16 @@ RA2120xmm:
 		Speed: 699
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@CannonHE_Heavy:
 		Damage: 4000
-	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
-		Damage: 2
-
 RA2120xmm_rad:
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^MediumChemicalWeapon
@@ -416,19 +370,16 @@ RA2120xmm_rad:
 		PhysicalStateScale: 100
 	Warhead@CannonAP_Light: AreaDamage
 		Damage: 2000
-	Warhead@CannonAP_Light_Percentage: HealthPercentageDamage
+	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 2000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
-	Warhead@CannonHE_Heavy_Percentage: HealthPercentageDamage
-		Damage: 1
-
 RA2120xmm_fire:
 	Inherits: RA2120xmm
 	Warhead@FireShrapnel: FireShrapnel
@@ -485,8 +436,6 @@ RA2CoilBolt:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 32000
-	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
-		Damage: 32
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: TeslaFragmentWeak
 		Amount: 1
@@ -522,8 +471,6 @@ RA2OPCoilBolt1:
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 32000
-	Warhead@Tesla_Super_Percentage: HealthPercentageDamage
-		Damage: 32
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 32000
 	Warhead@TeslaArc: FireShrapnel
@@ -561,8 +508,6 @@ TeslaFragmentWeak:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 3000
-	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
-		Damage: 3
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 6000
 
@@ -580,9 +525,6 @@ RA2TankBolt:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 6000
-	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
-		Damage: 6
-
 RA2TankBolt2:
 	Inherits: RA2TankBolt
 	Range: 8000
@@ -618,8 +560,6 @@ TeslaTankFragment:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
-	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
-		Damage: 2
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
 
@@ -636,8 +576,6 @@ TeslaTankFragment2:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 3000
-	Warhead@Tesla_Heavy_Percentage: HealthPercentageDamage
-		Damage: 3
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 6000
 	Warhead@TeslaArc: FireShrapnel
@@ -708,10 +646,6 @@ RA2MammothTusk_AA:
 	Warhead@MissileAP_Medium:
 		ValidTargets: Air
 		Damage: 16000
-	Warhead@MissileAP_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Air
-		Damage: 8
-
 RA2MammothTusk_AA_elite:
 	Inherits: RA2MammothTusk_AA
 	Range: 7100
@@ -736,10 +670,8 @@ RA2vulcan:
 	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
 	Warhead@Bullet_Light:
 		Damage: 2000
-	-Warhead@Bullet_Light_Percentage:
 	Warhead@Bullet_Medium:
 		Damage: 2000
-	-Warhead@Bullet_Medium_Percentage:
 
 RA2CRFlakGuyGun:
 	Inherits: RA2FLAKAG
@@ -747,12 +679,9 @@ RA2CRFlakGuyGun:
 	Range: 5627
 	ValidTargets: Ground, Water
 	Warhead@Flak_Medium:
+		PercentageScale: 5000
 		ValidTargets: Ground, Water
 		Damage: 16000
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Ground, Water
-		Damage: 4
-
 RA2CRFlakGuyGun_elite:
 	Inherits: RA2CRFlakGuyGun
 	Range: 5900
@@ -768,10 +697,6 @@ RA2FLAKAA:
 	Warhead@Flak_Medium:
 		Damage: 8000
 		ValidTargets: Air
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
-		Damage: 4
-		ValidTargets: Air
-
 RA2FLAKAA_elite:
 	Inherits: RA2FLAKAA
 	Report: aacanon3.aud
@@ -799,23 +724,20 @@ RA2FlakTrackAAGun:
 		-LaunchAngle:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Air
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Air
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Air
-	Warhead@GrenadePercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
+	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
-	Warhead@Flak_Medium_Percentage: HealthPercentageDamage
-		ValidTargets: Air
-
 RA2FlakTrackAAGun_elite:
 	Inherits: RA2FlakTrackAAGun
 	Range: 9292
@@ -834,17 +756,10 @@ IvanBombAir:
 	Report: M203.aud
 	Warhead@Demolition_Light:
 		ValidTargets: Aircraft
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
-		ValidTargets: Aircraft
 	Warhead@Concussion_Medium:
-		ValidTargets: Aircraft
-	Warhead@Concussion_Medium_Percentage: HealthPercentageDamage
 		ValidTargets: Aircraft
 	Warhead@Demolition_Heavy:
 		ValidTargets: Aircraft
-	Warhead@Demolition_Heavy_Percentage: HealthPercentageDamage
-		ValidTargets: Aircraft
-
 BorisAKM_elite:
 	Inherits: BorisAKM
 	Range: 9167

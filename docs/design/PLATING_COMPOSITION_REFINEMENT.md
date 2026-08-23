@@ -6,7 +6,7 @@ though they are in the same kinetic family right? But you need to use your best 
 reasoning for this to get it right!"* … *"I want all weapon families to be a bit more unique so
 don't put 3 energy weapons exactly on the same versus value but slightly different"*
 
-**STATUS: DONE** — shipped in `e7fa2d57b`. **32 emitted families, 32 distinct rows.** Four groups
+**STATUS: DONE** — shipped in `e7fa2d57b`. **37 emitted families, 37 distinct rows.** Four groups
 of ties are gone: `Laser/Prism/Tesla`, `Chemical/Cryo/Flame/Toxic`, `Concussion/Demolition`, and
 `Arrow/Bullet/CannonAP/Melee`. Pinned by `tools/tests/test_plating_composition.py`.
 
@@ -151,7 +151,7 @@ That catches exactly the drift that shipped twice (`Inferno` 0.57 (Flame×Prism)
 
 ## The shipped matrix
 
-32 families, 32 distinct rows (ARMOR excluded — it is flat by definition).
+37 families, 37 distinct rows (ARMOR excluded — it is flat by definition).
 
 | family | HAZMAT | COMPOSITE | BLAST | REFLECTOR | ARMOR | composition |
 |---|--:|--:|--:|--:|--:|---|
@@ -165,10 +165,10 @@ That catches exactly the drift that shipped twice (`Inferno` 0.57 (Flame×Prism)
 | MissileAA | 89 | 67 | 55 | 69 | 70 | kinetic 0.55, blast 0.45 |
 | MissileHE | 78 | 88 | 45 | 69 | 70 | blast 0.75, shaped 0.25 |
 | PhotonCannon | 78 | 74 | 58 | 70 | 70 | blast 0.46, kinetic 0.34, thermo 0.11, energy 0.08, shaped 0.01 |
-| ChemMissile | 75 | 53 | 70 | 82 | 70 | shaped 0.55, thermo 0.40, blast 0.05 |
+| MissileChem | 75 | 53 | 70 | 82 | 70 | shaped 0.55, thermo 0.40, blast 0.05 |
 | CannonHE | 73 | 99 | 39 | 69 | 70 | blast 0.90, kinetic 0.10 |
 | Quantum | 73 | 61 | 89 | 57 | 70 | energy 0.52, kinetic 0.28, thermo 0.18, blast 0.02 |
-| ChemCannon | 73 | 51 | 71 | 84 | 70 | thermo 0.45, kinetic 0.35, shaped 0.20 |
+| CannonChem | 73 | 51 | 71 | 84 | 70 | thermo 0.45, kinetic 0.35, shaped 0.20 |
 | Concussion | 70 | 106 | 36 | 69 | 70 | blast 1.00 |
 | Sonic | 70 | 95 | 57 | 58 | 70 | blast 0.70, energy 0.30 |
 | Cryo | 68 | 63 | 91 | 58 | 70 | energy 0.55, thermo 0.25, kinetic 0.20 |
@@ -178,8 +178,8 @@ That catches exactly the drift that shipped twice (`Inferno` 0.57 (Flame×Prism)
 | Magic | 63 | 78 | 86 | 55 | 70 | energy 0.60, thermo 0.20, blast 0.20 |
 | Tesla | 63 | 72 | 96 | 50 | 70 | energy 0.75, thermo 0.20, blast 0.05 |
 | Waveforce | 62 | 64 | 81 | 73 | 70 | thermo 0.43, energy 0.31, kinetic 0.17, shaped 0.05, blast 0.04 |
-| FireMissile | 59 | 82 | 55 | 83 | 70 | blast 0.45, thermo 0.42, shaped 0.12 |
-| FireCannon | 57 | 87 | 53 | 83 | 70 | blast 0.53, thermo 0.42, kinetic 0.05 |
+| MissileFire | 59 | 82 | 55 | 83 | 70 | blast 0.45, thermo 0.42, shaped 0.12 |
+| CannonFire | 57 | 87 | 53 | 83 | 70 | blast 0.53, thermo 0.42, kinetic 0.05 |
 | Laser | 57 | 70 | 95 | 58 | 70 | energy 0.65, thermo 0.35 |
 | Thermobaric | 56 | 92 | 50 | 82 | 70 | blast 0.60, thermo 0.40 |
 | Chemical | 52 | 62 | 71 | 94 | 70 | thermo 0.75, shaped 0.25 |
@@ -187,6 +187,16 @@ That catches exactly the drift that shipped twice (`Inferno` 0.57 (Flame×Prism)
 | Inferno | 47 | 70 | 84 | 79 | 70 | thermo 0.65, energy 0.35 |
 | Flame | 40 | 76 | 66 | 98 | 70 | thermo 0.85, blast 0.15 |
 | Toxic | 35 | 70 | 71 | 103 | 70 | thermo 1.00 |
+
+| CannonNuke | 62 | 91 | 51 | 75 | 70 | blast 0.65, thermo 0.25, kinetic 0.05, energy 0.05 |
+| MissileNuke | 74 | 64 | 65 | 76 | 70 | shaped 0.43, thermo 0.28, blast 0.25, energy 0.05 |
+| MissileQuantum | 85 | 52 | 79 | 64 | 70 | shaped 0.43, energy 0.26, kinetic 0.14, thermo 0.12, blast 0.06 |
+| MissileTesla | 79 | 58 | 83 | 60 | 70 | shaped 0.43, energy 0.38, thermo 0.13, blast 0.08 |
+| MissileThermobaric | 68 | 91 | 47 | 74 | 70 | blast 0.71, thermo 0.17, shaped 0.13 |
+| BulletFire | 69 | 59 | 68 | 83 | 70 | kinetic 0.45, thermo 0.42, blast 0.12 |
+| BulletHE | 81 | 72 | 55 | 71 | 70 | blast 0.47, kinetic 0.45, thermo 0.07 |
+| BulletThermobaric | 78 | 69 | 59 | 74 | 70 | kinetic 0.45, blast 0.38, thermo 0.17 |
+| BulletTesla | 80 | 58 | 83 | 59 | 70 | kinetic 0.45, energy 0.38, thermo 0.10, blast 0.08 |
 
 **`ARMOR` is 70 for every family BY DESIGN** — it is the generic hedge that *"receives 100% damage
 from everything"*, so it must be flat. Varying it would contradict its purpose, and
@@ -209,7 +219,7 @@ cycle folds shaped into `COMPOSITE` anyway, which is how a real tank is built.
 
 ### Under multiplication
 
-**6 cells of 160 increase damage, worst ×1.06** (was 13 of 100 at ×1.07 — better on both counts):
+**6 cells of 185 increase damage, worst ×1.06** (was 13 of 100 at ×1.07 — better on both counts):
 `Arrow`/`Concussion` 106, `Prism` 103, `Bullet`/`Toxic` 102. Rows span 3.03:1; multiplied by the
 class ladder that is **5.32:1**, inside the documented 2–8× band (DESIGN §12.0 rule 5).
 
@@ -217,8 +227,8 @@ class ladder that is **5.32:1**, inside the documented 2–8× band (DESIGN §12
 
 ## Still open: if EVERY CELL must be unique, re-cut the cycle
 
-Full-row uniqueness is done. Individual **cells** still coincide (`REFLECTOR` has 18 distinct
-values across 31 families), and the honest route to more is not finer shares but **cutting the
+Full-row uniqueness is done. Individual **cells** still coincide (`REFLECTOR` has 23 distinct
+values across 37 families), and the honest route to more is not finer shares but **cutting the
 cycle differently**, because `COMPOSITE` currently merges two platings that behave oppositely in
 reality:
 

@@ -29,7 +29,7 @@
 
 claims:
   - id: shield_versus_mean
-    value: 185.25
+    value: 186.791
     tolerance: 0.01
     what: Mean Versus-vs-Shield across all main flat warheads. Drives shield_hp_factor.
     docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md, docs/design/SUPERWEAPON_LAYER_DAMAGE.md]
@@ -40,7 +40,7 @@ claims:
       print(tm.pseudo_armor_mean('Shield'))
 
   - id: shield_hp_factor
-    value: 0.5398
+    value: 0.535357
     tolerance: 0.01
     what: What one shield point is worth as HP (100 / mean Versus vs Shield).
     docs: [docs/DESIGN.md, docs/design/PSEUDO_ARMOR_AND_INTEGRITY.md]
@@ -158,7 +158,7 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 951
+    value: 927
     tolerance: 0
     what: >
       Fired weapons carrying MORE THAN ONE damage main — W24's scope, and the reason pricing
@@ -299,7 +299,7 @@ claims:
                   break
       print(n)
   - id: w24_multi_main_fed
-    value: 385
+    value: 380
     tolerance: 0
     what: >
       RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their
@@ -330,7 +330,7 @@ claims:
               n += 1
       print(n)
   - id: physical_state_fired_weapons
-    value: 450
+    value: 446
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
@@ -400,7 +400,7 @@ claims:
       print(len(names) - len(set(rows)))
 
   - id: plating_families
-    value: 32
+    value: 41
     tolerance: 0
     what: >
       Families the generator emits a plating row for. The row count of the matrix in
@@ -429,7 +429,7 @@ claims:
                 if isinstance(v, dict) and 'spec' in v and v.get('signed_off')))
 
   - id: warhead_family_reach
-    value: 1221
+    value: 1231
     tolerance: 0
     what: >
       Fired weapons whose inherit chain reaches a `^Warhead_*` family — the W23/W24 burn-up.
@@ -467,7 +467,7 @@ claims:
                 and any(a.startswith('^Warhead_') for a in ancestors(w))))
 
   - id: unconverted_template_inheritors
-    value: 1238
+    value: 1162
     tolerance: 0
     what: >
       Direct inheritors of the 47 remaining legacy weapon templates (W23's scope).

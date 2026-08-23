@@ -1,11 +1,11 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **252**
+Files scanned: **264**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 2 | 2 |
-| E2 | handler discards the error | 61 | 30 |
+| E2 | handler discards the error | 65 | 30 |
 | E3 | open() without encoding= | 91 | 90 |
 | E4 | subprocess call without check= | 13 | 9 |
 
@@ -18,13 +18,14 @@ Files scanned: **252**
 | tools/audit_createeffect_image.py | 19 | bare `except:` |
 
 
-## E2 — 61 finding(s)
+## E2 — 65 finding(s)
 
 | file | line | detail |
 |---|---|---|
 | tools/audit/audit_ai.py | 45 | handler body discards the error |
 | tools/audit/audit_armor_upgrade_harm.py | 101 | handler body discards the error |
 | tools/audit/audit_balance_sheet.py | 136 | handler body discards the error |
+| tools/audit/audit_dead_warhead_fields.py | 76 | handler body discards the error |
 | tools/audit/audit_dune_rank_decoration.py | 15 | handler body discards the error |
 | tools/audit/audit_elite_gating.py | 16 | handler body discards the error |
 | tools/audit/audit_garrison_weapons.py | 61 | handler body discards the error |
@@ -37,6 +38,8 @@ Files scanned: **252**
 | tools/audit/audit_power_budget.py | 100 | handler body discards the error |
 | tools/audit/audit_rank_decoration.py | 49 | handler body discards the error |
 | tools/audit/audit_rank_decoration.py | 68 | handler body discards the error |
+| tools/audit/audit_three_way_split.py | 81 | handler body discards the error |
+| tools/audit/audit_tier_weapon_class.py | 76 | handler body discards the error |
 | tools/audit/audit_unique_traits.py | 71 | handler body discards the error |
 | tools/audit/audit_upgrades.py | 145 | handler body discards the error |
 | tools/audit/audit_weapon_suffixes.py | 119 | handler body discards the error |
@@ -57,6 +60,7 @@ Files scanned: **252**
 | tools/balance/extract_stats.py | 238 | handler body discards the error |
 | tools/balance/extract_stats.py | 948 | handler body discards the error |
 | tools/balance/formula.py | 390 | handler body discards the error |
+| tools/balance/gen_derived_stats.py | 95 | handler body discards the error |
 | tools/balance/measure_retrofit_gap.py | 134 | handler body discards the error |
 | tools/balance/plan_firepower_retirement.py | 81 | handler body discards the error |
 | tools/balance/propose_class_rebalance.py | 279 | handler body discards the error |
@@ -78,9 +82,9 @@ Files scanned: **252**
 | tools/reference/aggregate_archetype.py | 873 | handler body discards the error |
 | tools/reference/extract_versus.py | 175 | handler body discards the error |
 | tools/rename/apply.py | 178 | handler body discards the error |
-| tools/rename/safe_rename.py | 128 | handler body discards the error |
-| tools/rename/safe_rename.py | 137 | handler body discards the error |
-| tools/rename/safe_rename.py | 287 | handler body discards the error |
+| tools/rename/safe_rename.py | 132 | handler body discards the error |
+| tools/rename/safe_rename.py | 141 | handler body discards the error |
+| tools/rename/safe_rename.py | 291 | handler body discards the error |
 | tools/subset_judou_font.py | 56 | handler body discards the error |
 | tools/tilesets/generate_volcanic_tileset.py | 814 | handler body discards the error |
 
@@ -187,15 +191,15 @@ Files scanned: **252**
 | file | line | detail |
 |---|---|---|
 | tools/audit/audit_doc_claims.py | 104 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 75 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 92 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 112 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 58 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 79 | `subprocess.run()` without check= |
 | tools/balance/apply_balance.py | 271 | `subprocess.run()` without check= |
 | tools/balance/apply_balance.py | 273 | `subprocess.run()` without check= |
 | tools/balance/compensate_retrofit.py | 170 | `subprocess.run()` without check= |
+| tools/balance/gen_derived_stats.py | 60 | `subprocess.run()` without check= |
 | tools/balance/run_with_guard.py | 39 | `subprocess.Popen()` without check= |
-| tools/balance/splice_templates.py | 49 | `subprocess.run()` without check= |
-| tools/balance/verify_generator_sync.py | 55 | `subprocess.run()` without check= |
+| tools/balance/splice_templates.py | 58 | `subprocess.run()` without check= |
+| tools/balance/verify_generator_sync.py | 56 | `subprocess.run()` without check= |
 | tools/balance/verify_retrofit.py | 239 | `subprocess.run()` without check= |
 | tools/hooks/bash_guard.py | 49 | `subprocess.run()` without check= |
 | tools/hooks/exec_guard.py | 45 | `subprocess.run()` without check= |
@@ -203,7 +207,7 @@ Files scanned: **252**
 
 ## FAIL
 
-- E2: 61 > baseline 30
+- E2: 65 > baseline 30
 - E3: 91 > baseline 90
 - E4: 13 > baseline 9
 

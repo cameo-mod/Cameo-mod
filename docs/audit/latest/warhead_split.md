@@ -1,9 +1,9 @@
 # Warhead-split guard (multi-warhead over-damage)
 
 
-## FAIL 1 — broadcast fingerprint / every MAIN identical (965 vs baseline 965)
+## FAIL 1 — broadcast fingerprint / every MAIN identical (939 vs baseline 939)
 
-_at or below baseline_ — pre-existing **W24** debt (965 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
+_at or below baseline_ — pre-existing **W24** debt (939 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
 
 | weapon | mains | per_warhead | total |
 |---|---|---|---|
@@ -19,8 +19,6 @@ _at or below baseline_ — pre-existing **W24** debt (965 weapons), not a regres
 | 155mmBastion | 3 | 10000 | 30000 |
 | 155mmBastionCryo | 3 | 10000 | 30000 |
 | 155mmCryo | 3 | 10000 | 30000 |
-| 227mm | 4 | 2000 | 8000 |
-| 227mmAMT | 4 | 2000 | 8000 |
 | 25mm | 6 | 2000 | 12000 |
 | 25mmWaveforce | 7 | 2000 | 14000 |
 | 8Inch | 2 | 40000 | 80000 |
@@ -47,9 +45,11 @@ _at or below baseline_ — pre-existing **W24** debt (965 weapons), not a regres
 | AsianChemical | 6 | 4000 | 24000 |
 | AsianChemicalBombs | 2 | 2000 | 4000 |
 | AsianChemical_elite | 6 | 4000 | 24000 |
+| AsianGrenade | 2 | 4000 | 8000 |
+| AsianGrenade_elite | 2 | 4000 | 8000 |
 
 
-_... and 925 more._
+_... and 899 more._
 
 
 ## FAIL 2 — FriendlyFire louder than the shot (0)
@@ -57,7 +57,7 @@ _... and 925 more._
 None. ✅
 
 
-## Review — high uniform stacks (informational, 245)
+## Review — high uniform stacks (informational, 237)
 
 Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (not flattening residue).
 
@@ -140,13 +140,10 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | FutureTankCannons_elite | 6 | 100000 | 600000 |
 | Future_Cryocopter_Rocket | 3 | 16000 | 48000 |
 | Future_MultiMissile_Sigma | 5 | 10000 | 50000 |
-| GDIRigMissilePod | 4 | 8000 | 32000 |
-| GDIRigMissilePodAMT | 4 | 8000 | 32000 |
 | GDISniperRifle | 4 | 8000 | 32000 |
 | GladiusCannon | 11 | 10000 | 110000 |
 | GoliathMk2Rockets | 4 | 8000 | 32000 |
 | GuardianShoot | 3 | 8000 | 24000 |
-| HammerheadArtillery | 3 | 11111 | 33333 |
 | HydraSpit | 4 | 18000 | 72000 |
 | IdolCannon | 4 | 10000 | 40000 |
 | InfestedExplosion | 3 | 50000 | 150000 |
@@ -183,4 +180,7 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | MigMissiles_elite | 4 | 8000 | 32000 |
 | MigMissiles_fire | 4 | 8000 | 32000 |
 | MigMissiles_fire_elite | 4 | 8000 | 32000 |
+| MigMissiles_tesla | 4 | 8000 | 32000 |
+| MigMissiles_tesla_elite | 4 | 8000 | 32000 |
+| MissileSoldierWeapon | 5 | 10000 | 50000 |
 

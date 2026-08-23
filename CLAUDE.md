@@ -53,6 +53,39 @@ never for status.
    `ColorPickerColorShift`, `PlayerColorShift`, `SelectionDecorations`). Prove a shadow with a
    Cameo-only field — `--docs` lists both types and proves nothing.
 8. **Audit reports regenerate via `bash tools/audit/run_all.sh` only** (PowerShell `>` writes UTF-16).
+8b. **The engine DROPS unknown yaml fields in silence.** `FieldLoader.Load` (FieldLoader.cs:676)
+   iterates the TYPE's fields and never reads the leftover keys, and traits + warheads go through
+   it (`WeaponInfo.cs:178`). Only `FieldLoader.LoadField` throws — that is the settings/linter
+   path, and two Cameo docs used to claim otherwise. A misplaced field therefore costs nothing at
+   boot and everything in play: 2059 warheads carried a `Falloff` their type has no field for.
+   Run **`audit_dead_warhead_fields.py`** (LOWER-ONLY ratchet). ⚠ Reading C# to build a field set,
+   match `public`, **not** `public readonly` — some AS warheads declare mutable public fields.
+   The same trap exists one layer up: a weapon inheriting TWO `^Projectile_*` templates merges into
+   ONE node whose TYPE is the last template's and whose FIELDS are the union of both.
+8e. **NEVER hand-parse yaml — read through `miniyaml.Ruleset.resolve_weapon` / `.resolve`,**
+   and pull Versus with `weapon_efficiency.versus_of(node)`. A bespoke line-scanner opened a dict
+   on `Versus:` and never CLOSED it, so the `PercentageVersus:` rows the AreaDamage fold added
+   INSIDE the same warhead overwrote the profile: every measured mean, spread, ratio and inversion
+   count was internally consistent and wrong (reported "0 of 125 obey the MEAN-100 law"; the truth
+   was **123 of 125**). A near-miss sibling name is the trap — `PercentageVersus` does not
+   `startswith("Versus:")`, so the OPEN guard looked right; the bug was the missing CLOSE. If a
+   hand parser is unavoidable, close every block the moment indentation returns to its level.
+   Guarded by `audit_versus_profile.py`. And **a result that contradicts a binding law the
+   generator implements is a contradiction, not a finding** — check before believing it.
+8f. **GREP `docs/DESIGN.md` BEFORE DESIGNING ANYTHING.** It is required reading #4 and it is
+   binding. §12.0a (MEAN-100: `K` is SHAPE-ONLY, `Damage` is the sole magnitude knob), §12.0c (the
+   Shield ladder) and §12.0d (the CLASS TILT — each level tilts toward one end of every armor
+   ladder and *"can never invert"*) were all already ruled and already shipped while days of design
+   work re-derived them. A design question that feels novel usually is not.
+8c. **A "derive unless overridden" default is invisible when something upstream always overrides.**
+   `ScaledBullet` derived shell Inaccuracy/Speed from Range for weeks and reached zero weapons,
+   because the templates also wrote literals and an explicit yaml value always wins. Assert the
+   DERIVED value on a real resolved weapon, never that the knob is merely present.
+8d. **Every warhead family must be unique** — no two may share both a radius and a curve
+   (`audit_family_uniqueness.py`). Shape comes from `PHYSICS_SHAPES` in `gen_weapon_template.py`,
+   the level scales the radius only, and blends cross their parents' shapes via `blend_shape()`.
+   Radius = **(N-1) x Spread**, not N x Spread. Always `splice_templates.py --all`, never a subset:
+   adding a family re-ranks the shield-coupling ladder and a partial splice leaves drift.
 9. **Underscore-only naming** — no hyphens in ids / files / fluent keys.
 10. **Attribute the ACTUAL author in the commit trailer — never impersonate another agent.**
     Sign with **your own** identity, including your real model name:

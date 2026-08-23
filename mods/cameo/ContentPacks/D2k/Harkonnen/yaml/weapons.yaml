@@ -17,9 +17,8 @@ HarkonnenFlameTurret:
 		Image: tsflameall
 		Palette: tseffect
 	Warhead@Flame_Medium:
+		PercentageScale: 3183
 		Damage: 25135
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 4
 harkonnen_autogunturret:
 	Inherits: ordos_autogunturret
 	ReloadDelay: 132
@@ -59,10 +58,11 @@ ExplosiveDebris:
 		Inaccuracy: 2c512
 		BounceCount: 1
 	Warhead@Demolition_Light:
+		PercentageScale: 53333
 		Damage: 3000
 		Spread: 1c562
 	Warhead@Effect: CreateEffect
 		Explosions: large_explosion
 		ImpactSounds: EXPLSML4.WAV
-	Warhead@4Concrete: DamagesConcrete
+	Warhead@Concrete: DamagesConcrete
 		Damage: 4500

@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
-"""Enforce universal glow coverage for sprite-backed weapon effects.
+"""Enforce explicit emissive-impact glow policy for weapon effects.
 
-Policy:
+``CreateEffect.Explosions`` is OpenRA's generic impact-animation field: it also
+contains non-emissive piffs, poofs, and splashes.  Glow eligibility is therefore
+an explicit visual decision at each sprite-bearing root effect, never inferred
+from the presence of ``Explosions`` or ``Image`` alone.
 
-* Every resolved ``^Effect*`` template with a sprite-bearing ``CreateEffect``
-  warhead (``Explosions`` or ``Image``) resolves exactly one
-  ``Warhead@Glow: GlowImpact``.
-* Effect templates without an impact sprite do not resolve impact glow.
-* Every sprite-backed effect reaches exactly one light/medium/heavy glow tier.
-* Converted three-way weapons select their glow through the effect layer, not
-  through a fourth inline ``^ImpactGlow`` inherit.
+``GlowImpactWarhead.IsValidAgainst`` currently accepts every actor, so target
+filters cannot independently light one ground/air animation while excluding a
+water splash in the same root.  Classification is intentionally root-wide.
 """
 from __future__ import annotations
 
@@ -23,6 +22,63 @@ GLOW_TIERS = {
 	"^ImpactGlow_Light": ("0.3", "6"),
 	"^ImpactGlow_Medium": ("0.55", "10"),
 	"^ImpactGlow": ("0.8", "15"),
+}
+
+# Root effects whose impact art is intentionally explosive or emissive.
+# Descendant effect templates inherit the same classification.
+EMISSIVE_EFFECT_ROOTS = {
+	"^Effect_CannonAP_Light",
+	"^Effect_CannonAP_Medium",
+	"^Effect_CannonAP_Heavy",
+	"^Effect_CannonHE_Light",
+	"^Effect_CannonHE_Medium",
+	"^Effect_CannonHE_Heavy",
+	"^Effect_Chem_Light",
+	"^Effect_Chem_Medium",
+	"^Effect_Chem_Heavy",
+	"^Effect_Concussion_Light",
+	"^Effect_Concussion_Medium",
+	"^Effect_Concussion_Heavy",
+	"^Effect_Demolition_Light",
+	"^Effect_Demolition_Light_RA2",
+	"^Effect_Demolition_Medium",
+	"^Effect_Demolition_Heavy",
+	"^Effect_Flak_Light",
+	"^Effect_Flak_Medium",
+	"^Effect_Flak_Heavy",
+	"^Effect_Flame_Light",
+	"^Effect_Flame_Medium",
+	"^Effect_Flame_Heavy",
+	"^Effect_Ion_Ring_RA2",
+	"^Effect_Laser_Heavy",
+	"^Effect_Magic_Light",
+	"^Effect_Magic_Medium",
+	"^Effect_Magic_Heavy",
+	"^Effect_MissileAP_Light",
+	"^Effect_MissileAP_Medium",
+	"^Effect_MissileAP_Heavy",
+	"^Effect_MissileHE_Light",
+	"^Effect_MissileHE_Medium",
+	"^Effect_MissileHE_Heavy",
+	"^Effect_Nuclear_Super",
+	"^Effect_Psi_Wave_RA2",
+	"^Effect_Railgun_Heavy",
+	"^Effect_Sonic_Light",
+	"^Effect_Sonic_Medium",
+	"^Effect_Sonic_Heavy",
+	"^Effect_Sonic_Shell",
+	"^Effect_Tesla_Impact_RA2",
+}
+
+# These roots have sprite animations, but the art is a non-emissive hit/poof.
+NON_EMISSIVE_EFFECT_ROOTS = {
+	"^Effect_Arrow_Light",
+	"^Effect_Arrow_Medium",
+	"^Effect_Arrow_Heavy",
+	"^Effect_Bullet_Light",
+	"^Effect_Bullet_Medium",
+	"^Effect_Bullet_Heavy",
+	"^Effect_Sniper_Light",
 }
 
 
@@ -47,6 +103,17 @@ def has_impact_glow(node) -> bool:
 	return node is not None and any(
 		child.key == "Warhead@Glow" and child.value == "GlowImpact"
 		for child in node.children)
+
+
+def sprite_root(
+		ruleset: Ruleset, name: str, sprite_effects: set[str], stack: tuple[str, ...] = ()) -> str:
+	if name.lower() in {item.lower() for item in stack}:
+		return name
+	parents = [parent for parent in direct_parents(ruleset, name) if parent in sprite_effects]
+	if not parents:
+		return name
+	# The active effect graph currently has at most one sprite-bearing effect parent.
+	return sprite_root(ruleset, parents[-1], sprite_effects, stack + (name,))
 
 
 def tier_path_count(
@@ -84,24 +151,32 @@ def main() -> int:
 	non_sprite_effects = set(effects) - sprite_effects
 	glowing_effects = {name for name in effects if has_impact_glow(resolved[name])}
 
-	missing_glow = sprite_effects - glowing_effects
-	unexpected_glow = non_sprite_effects & glowing_effects
+	root_for = {name: sprite_root(ruleset, name, sprite_effects) for name in sprite_effects}
+	active_sprite_roots = set(root_for.values())
+	classified_roots = EMISSIVE_EFFECT_ROOTS | NON_EMISSIVE_EFFECT_ROOTS
+	unclassified_roots = active_sprite_roots - classified_roots
+	stale_classifications = classified_roots - active_sprite_roots
+	overlapping_classifications = EMISSIVE_EFFECT_ROOTS & NON_EMISSIVE_EFFECT_ROOTS
+
+	expected_glow = {
+		name for name, root in root_for.items() if root in EMISSIVE_EFFECT_ROOTS
+	}
+	expected_no_glow = set(effects) - expected_glow
+	missing_glow = expected_glow - glowing_effects
+	unexpected_glow = expected_no_glow & glowing_effects
+
 	tier_memo: dict[str, int] = {}
 	bad_tier_paths = {
 		name for name in effects
-		if tier_path_count(ruleset, name, tier_memo) != (1 if name in sprite_effects else 0)
+		if tier_path_count(ruleset, name, tier_memo) != (1 if name in expected_glow else 0)
 	}
 	obsolete_variants = {
 		name for name in effects if name.endswith("_Glow") or name.endswith("_NoGlow")
 	}
-	tier_roots = {
-		tier: {name for name in effects if tier in direct_parents(ruleset, name)}
-		for tier in GLOW_TIERS
-	}
 
 	inline_threeway: set[str] = set()
 	legacy_inline: set[str] = set()
-	for name, node in ruleset.weapons.items():
+	for name in ruleset.weapons:
 		if name.startswith("^"):
 			continue
 		parents = direct_parents(ruleset, name)
@@ -121,15 +196,17 @@ def main() -> int:
 				glow.get("FadeFrames") != fade):
 			bad_tier_config.add(tier)
 
-	print("# Universal impact-glow coverage audit")
+	print("# Explicit emissive-impact glow audit")
 	print(f"active ^Effect* templates: {len(effects)}")
-	print(f"sprite-backed effects: {len(sprite_effects)}")
-	print(f"non-sprite effects: {len(non_sprite_effects)}")
-	print(
-		"root tier assignments: " + ", ".join(
-			f"{tier}={len(names)}" for tier, names in tier_roots.items()))
-	show("sprite effects missing glow", missing_glow, args.details)
-	show("non-sprite effects with glow", unexpected_glow, args.details)
+	print(f"sprite-backed effect roots: {len(active_sprite_roots)}")
+	print(f"emissive roots: {len(EMISSIVE_EFFECT_ROOTS)}")
+	print(f"non-emissive sprite roots: {len(NON_EMISSIVE_EFFECT_ROOTS)}")
+	print(f"resolved emissive effects: {len(expected_glow)}")
+	show("unclassified sprite roots", unclassified_roots, args.details)
+	show("stale root classifications", stale_classifications, args.details)
+	show("overlapping root classifications", overlapping_classifications, args.details)
+	show("emissive effects missing glow", missing_glow, args.details)
+	show("non-emissive effects with glow", unexpected_glow, args.details)
 	show("effects with invalid tier-path count", bad_tier_paths, args.details)
 	show("obsolete glow/no-glow effect variants", obsolete_variants, args.details)
 	show("three-way weapons with inline ^ImpactGlow", inline_threeway, args.details)
@@ -138,6 +215,7 @@ def main() -> int:
 	show("informational legacy inline glows", legacy_inline, args.details)
 
 	failed = bool(
+		unclassified_roots or stale_classifications or overlapping_classifications or
 		missing_glow or unexpected_glow or bad_tier_paths or obsolete_variants or
 		inline_threeway or bad_tier_config)
 	print("result: " + ("FAIL" if failed else "PASS"))

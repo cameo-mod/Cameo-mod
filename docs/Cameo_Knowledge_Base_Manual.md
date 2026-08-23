@@ -5020,9 +5020,28 @@ The loader must be `static object MethodName(MiniYaml yaml)`. If the method sign
 
 `LoadTraitInfo` throws `YamlException` if the trait node has a non-empty `Value`. A trait is always a mapping; its data lives in child nodes.
 
-### Unknown fields throw by default
+### Unknown fields throw ONLY on the `LoadField` path — traits and warheads DROP them silently
 
-If a YAML file contains a key that does not match any serializable field on the target type, the default `UnknownFieldAction` throws a `NotImplementedException`. The linter swaps this to a logged error. The same action is also used when the `TypeDescriptor` fallback cannot find a converter for a type.
+⚠ **CORRECTED 2026-08-22 (measured).** This section used to say flatly that an unknown field
+throws. That is true of **`FieldLoader.LoadField`** (`FieldLoader.cs:758` → `UnknownFieldAction`
+→ `NotImplementedException`), which settings parsing and the `--check-yaml` linter use.
+
+It is **false** of **`FieldLoader.Load(object, MiniYaml)`** (`FieldLoader.cs:676`), which iterates
+the TYPE's own fields and **never looks at the leftover yaml keys**. Traits and warheads load
+through `Load` (`WeaponInfo.LoadWarheads`, `WeaponInfo.cs:178`), so a misspelled or misplaced
+field on a trait or a warhead is discarded in **total silence** — no error, no crash, green audits.
+
+What that cost: 2059 `Warhead@…Percentage` nodes across 1284 weapons carried a `Falloff:` line on
+`HealthPercentageDamage`, a type with 12 fields and no `Falloff`, so every nuke's percentage half
+was a flat pinpoint circle instead of half the main blast. Another 104 carried `IntegrityScale`,
+so the Tesla/EMP drain of the percentage half never fired at all.
+
+Empirical proof either way: the tree boots with those lines present. If they threw, it could not.
+
+**Guard:** `python tools/audit/audit_dead_warhead_fields.py` (in `run_all.sh`, LOWER-ONLY ratchet).
+⚠ When reading C# to build a field set, match `public`, **not** `public readonly` — FieldLoader
+loads any public instance field and some AS warheads declare mutable ones
+(`CreateTintedCellsWarhead: public int Level = 100;`).
 
 ### Type name collisions
 

@@ -244,7 +244,7 @@ mods/cameo/ContentPacks/<Theme>/<Faction>/
 - **The standard file set above is CLOSED.** A pack may omit a file it
   doesn't need, but must not invent new names — `audit_packs.py`
   enforces the set, so tooling can always find everything.
-- **content.yaml becomes machine-generated** (`tools/packs/gen_content.py` — ⚠ **planned, not built**):
+- **content.yaml becomes machine-generated** (`tools/packs/gen_content.py`):
   regenerated from the files on disk, deterministic ordering; the audit
   fails on drift. Nobody hand-edits include lists.
 - **Wrong-section rules** (the "actor in the wrong pack/file" bug class):
@@ -833,8 +833,8 @@ warhead — `CreateEffect`, `LeaveSmudge`, `GrantExternalCondition`, `ApplyPhysi
    damage — check what it actually is (its projectile, its lore, its role).
 3. ⚠ **If no existing family fits, CREATE A NEW ONE — do not force a bad fit.**
    Maintainer, 2026-08-16: *"every time you don't know how to collapse them you should
-   suggest to create a new warhead family."* Blends are cheap: `^Warhead_ChemMissile`,
-   `FireCannon` and `ChemCannon` are all blends of two parents, and a new family is a few
+   suggest to create a new warhead family."* Blends are cheap: `^Warhead_MissileChem`,
+   `CannonFire` and `CannonChem` are all blends of two parents, and a new family is a few
    lines in `gen_weapon_template.py`.
 
 **Worked examples (both found by the W23 retrofit):**
@@ -849,6 +849,123 @@ warhead — `CreateEffect`, `LeaveSmudge`, `GrantExternalCondition`, `ApplyPhysi
 
 **A weapon that cannot be collapsed is a design question, not a conversion blocker** — file
 it, propose the family, and do not merge warheads by damage arithmetic alone.
+
+## 11c. THE FACTION CROSS-WARHEAD LAW (binding, maintainer 2026-08-22)
+
+**Basic warheads are what an un-upgraded unit fires. A faction's weapon UPGRADE swaps them
+for that faction's CROSS warhead.** In the maintainer's words:
+
+> *"every cross warhead needs to be based on the faction's specific technology — for example
+> CannonTesla or MissileTesla for Soviet tech and CannonCryo or MissileCryo for Allied tech
+> and CannonQuantum and MissileQuantum for Steel Consortium and so on, so that we have the
+> tech for each faction to apply after the upgrades. Every faction should start with the basic
+> warheads like CannonAP and CannonHE and MissileAP and MissileHE but later on the faction
+> specific cross warheads are used for upgrades … Upgrades change warheads to faction specific
+> cross warheads! Basic warheads are used for unupgraded units."*
+
+This is the reason the `<Delivery><Tech>` blend grid exists. It is **not** a catalogue of
+combinations observed in the tree — it is the **faction upgrade matrix**, and a missing cell
+is a faction upgrade that cannot be built.
+
+### The two halves
+
+| | warhead family | example |
+|---|---|---|
+| **un-upgraded** | the PRIMITIVE delivery family | `CannonAP`, `CannonHE`, `MissileAP`, `MissileHE`, `Bullet`, `Demolition` |
+| **upgraded** | `<Delivery><FactionTech>` | `CannonTesla`, `MissileCryo`, `BulletQuantum` |
+
+### The mechanism already exists — do not invent a new one
+
+The Steel Consortium quantum upgrade is the reference implementation: a pair of armaments
+gated on the upgrade condition and its negation, swapping the WEAPON, which carries the
+different warhead.
+
+```
+Armament@PRIMARY:
+    Weapon: SteelQuantumTurretRail
+    RequiresCondition: !steelconsortium_upgrade_quantumweaponpower
+Armament@Upgrade:
+    Weapon: SteelQuantumTurretRail_EMP
+    RequiresCondition: steelconsortium_upgrade_quantumweaponpower
+```
+
+**55 armaments** in the Consortium pack already use exactly this shape. An upgrade that is
+meant to convert a faction's whole arsenal ("this one should replace all the weapons with the
+quantum versions") is that pattern applied across the pack, not a `FirepowerMultiplier`.
+
+⚠ A condition/negation armament pair is ONE gun, not two. `audit_meter_dilution` and any
+per-armament analysis must collapse the pair before counting, or an upgraded unit reads as
+carrying double the weapons it fires.
+
+### Named tech bindings (maintainer 2026-08-22)
+
+| faction | signature tech | cross families |
+|---|---|---|
+| Soviet | **Tesla** | `CannonTesla`, `MissileTesla`, `BulletTesla` |
+| Allied | **Cryo** | `CannonCryo`, `MissileCryo`, `BulletCryo`, `DemolitionCryo` |
+| Steel Consortium | **Quantum** | `CannonQuantum`, `MissileQuantum`, `BulletQuantum` |
+| *(resonance ammo upgrade)* | **Sonic** | `CannonSonic`, `MissileSonic`, `BulletSonic` |
+
+Every other faction's tech binding is still OPEN and needs a maintainer ruling before its
+cells are generated — inventing one would ship a faction identity nobody asked for.
+
+### Grid coverage, measured 2026-08-22
+
+4 deliveries × 8 techs = 32 cells; **16 exist**.
+
+| | Fire | Chem | Cryo | Tesla | Quantum | Nuke | Sonic | Thermobaric |
+|---|---|---|---|---|---|---|---|---|
+| **Bullet** | ✅ | — | ✅ | ✅ | — | — | — | ✅ |
+| **Cannon** | ✅ | ✅ | ✅ | — | — | ✅ | — | — |
+| **Missile** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ |
+| **Demolition** | — | — | ✅ *(`CryoBlast`)* | — | — | — | — | ✅ *(`Thermobaric`)* |
+
+⚠ `Sonic` has **no** cell at all, so the resonance-ammo upgrade cannot be built today.
+
+⭐ The Demolition row shows the naming exception worth knowing: a blast cell built from
+`Demolition + Concussion + <element>` gets its OWN name rather than a `<Delivery><Tech>`
+one, because it is not a delivery carrying a payload — it IS the explosion. `Thermobaric`
+(fire) and `CryoBlast` (cold) are exact siblings of that construction, and `Concussion` is
+what makes them read as detonations: radius 2100, the widest of any family, on a seven-point
+curve that still does half damage at half its radius.
+
+### Sharing is allowed — uniqueness is the goal, not a quota (maintainer 2026-08-22)
+
+> *"sometimes the cross warheads can be reused by other factions IF it makes sense for them to
+> have it. Not everything CAN be completely unique. There are not that many different types of
+> Fire we can use … make it as unique as possible while still trying to keep our warheads down
+> to a minimum without bloating it or making new nonsensical warheads just for the sake of
+> uniqueness … Still try to keep it unique as the primary objective."*
+
+So the faction→tech mapping is **many-to-one**. Two factions may share a cross family when the
+tech genuinely fits both; what is forbidden is minting a near-duplicate family so that each
+faction can own one.
+
+**The test, in order:**
+
+1. Does an existing family fit this faction's tech? → **reuse it.**
+2. Does the faction's tech name a genuinely different physical mechanism? → build the cell.
+3. Is the only argument "faction X should have its own"? → **reuse.** That is the bloat case.
+
+The fire families are the worked example of the ceiling: `Flame` (the primitive),
+`Thermobaric` = Flame × Demolition × Concussion, `Inferno` = Flame × Prism, `Plasma` =
+Flame × Chemical. Four distinct fire mechanisms is close to everything the physics offers — a
+fifth would be a relabel, not a weapon.
+
+⚠ This does **not** relax `audit_family_uniqueness` (rule 8d): no two FAMILIES may share both a
+radius and a curve. That guard is about the families being distinguishable in play, and it is
+untouched by two factions pointing at the same family. Reuse costs nothing there; duplication
+is exactly what it catches.
+
+### Consequences for the splice programme
+
+1. A cross family is justified by a FACTION UPGRADE, not by weapon-combination frequency.
+   The `Concussion × Demolition` cluster (27 weapons) is a 3-way-split problem; `CannonTesla`
+   (0 weapons today) is a REQUIRED cell. Frequency and necessity are different questions.
+2. Cells are built from `BLEND_FAMILIES` with the delivery half averaging **AP and HE**
+   together (§ the Cryo ruling: *"an in between blend of HE and AP so it fits with both
+   versions"*), so one cell serves both an AP and an HE base weapon.
+3. Always `splice_templates.py --all` — a new cell re-ranks the shield-coupling ladder.
 
 ## 12. Balance formula — the Cameo Armor System workbook
 
@@ -877,7 +994,7 @@ Supersedes the "even step" half of the step law. Three rules, in force for every
 
 1. **The profile's CENTRE is 100, and values above 100 are legal** (revised
    2026-08-15 from *"peak is 100"*; the centre statistic was revised again on
-   2026-08-16 from the MEDIAN to the arithmetic **MEAN** — see §12.0g, which is
+   2026-08-16 from the MEDIAN to the arithmetic **MEAN** — see §12.0h, which is
    the binding normaliser. The reasoning below is why a centre statistic beats
    the peak at all, and it holds for either one). Every profile is normalised so its
    own centre is 100, which is also how reference profiles from other mods are
@@ -1474,7 +1591,7 @@ Laws:
 ### 12.0f PRICED SURVIVABILITY (E1, 2026-08-16; SHIPPED 2026-08-17)
 
 ```
-effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # x0.540 measured
+effective_HP = HP + shield_pool x (100 / mean Versus-vs-Shield)      # x0.535 measured
 ```
 The factor is MEASURED from the live ruleset, never frozen — the Shield ladder is generated
 and has moved repeatedly. ⚠ **`Integrity` is NOT a shield and is NOT counted**: it absorbs
@@ -1508,7 +1625,69 @@ retiring that multiplier must land in ONE pass, or the faction pays twice.
 Report: `tools/audit/audit_survivability_pricing.py` (informational — these actors are
 mis-priced until `apply_balance --confirm` runs, so it must not gate commits).
 
-### 12.0g THE MEAN-100 LAW (maintainer, 2026-08-16) — binding, supersedes median-100
+### 12.0g DEPLOYING ADDS A SECOND ARMOUR (maintainer 2026-08-22) — binding
+
+> *"We don't want damage multipliers anymore because they are bad for exactly the reason
+> described. Instead deploying should change the armor type … it should turn into the Steel
+> armor type because that's what defenses use … But the problem with this is: it still needs
+> the underlying armor intact. So give it the secondary armor type steel and keep the primary
+> armor type, then use that multi armor scaling."*
+
+A unit that deploys becomes a static defence, and **Steel is what defences wear**. So deploying
+grants `Armor@deployed: Steel` **in addition to** the class armour — never instead of it, and
+never as a `DamageMultiplier`.
+
+```
+Armor:                                  # class armour — NO deploy gate
+    Type: Heavy
+    RequiresCondition: !shielded
+Armor@deployed:
+    Type: Steel
+    RequiresCondition: !shielded && deployed
+```
+
+Both traits are enabled together, and `AreaDamageWarhead.MultiArmorCombination` (default
+`Average`) makes the two rows meet in the middle. This is the same mechanism as the CABAL
+cyborg dual-armour rule, and it is why the class armour must NOT be gated on `undeployed`:
+that makes Steel a REPLACEMENT and throws the unit's own class away.
+
+**Why not a `DamageMultiplier`.** R1 abolishes them generally, and the tick tank is the worked
+example of the harm: `Modifier: 50` on `deployed` was the strongest deploy bonus in the tree,
+it MULTIPLIED with the whole veterancy ladder (deployed + rank-elite = ×0.30, a realistic stack
+reached ~613,000 effective HP on an 800-credit tank), and `extract_stats` could not see it at
+all — it only reads a `DamageMultiplier` gated on the SHIELD-up condition, so the survivability
+was free.
+
+**Measured effect** — average(class, Steel) / class, over all 137 generated profiles:
+
+| class armour | median | toughest | softest |
+|---|--:|--:|--:|
+| None | 0.95× | 0.60× | 1.95× |
+| Light | 0.94× | 0.69× | 1.58× |
+| Medium | 0.98× | 0.67× | 1.70× |
+| Heavy | 1.00× | 0.66× | 1.92× |
+| Superheavy | 1.01× | 0.64× | 2.12× |
+
+Near-neutral in the median, so it is a RESHAPE and not a buff: anti-armour fire gets weaker
+against a deployed unit, siege and fire get stronger. Deploy to hold a line against tanks; do
+not deploy under artillery.
+
+⚠ **Scope is the units that FIRE from a deployed mode — 20 of the 74 that carry
+`GrantConditionOnDeploy`.** The rest detonate (the ~20 civilian car bombs), transform, or
+burrow; "becomes a static defence" is not true of them and Steel would be meaningless.
+
+⚠ **Air units are excluded.** Averaging Steel into `Fighter` (1.23× median) or `Helicopter`
+(1.21×) makes them SOFTER overall, and a ground-defence armour on an aircraft is incoherent
+anyway. Neither air deployer fires from its deployed mode, so the exclusion costs nothing.
+
+⚠ **Only warheads routing through `AreaDamage` average — 62.9% of the tree.** The remaining
+37.1% still declare inline `Versus` on `SpreadDamage`/`TargetDamage` and MULTIPLY, and under
+multiplication the class row cancels out entirely (the ratio collapses to `Steel/100`), so the
+"meet in the middle" does not happen for them. Those weapons see a flatter effect than designed
+until item A5 retires them onto `^Warhead_*` templates. This is a reason to finish A5, not a
+reason to avoid the rule.
+
+### 12.0h THE MEAN-100 LAW (maintainer, 2026-08-16) — binding, supersedes median-100
 
 > *"all warheads average all versus values at 100 to make them comparable"*
 
@@ -1561,7 +1740,7 @@ Consequences, all binding:
   ids. A map's `campaign.lua` may reference actor types in utility
   functions (e.g. `GetAirstrikeTarget` checking for `"sam"`) — these must
   also be renamed.
-- **Tooling.** `tools/archive/rename_map_actors.py` applies the rename maps to
+- **Tooling.** `tools/rename_map_actors.py` applies the rename maps to
   map.yaml and lua files in bulk. It matches `ActorNN: <type>` lines in
   yaml and quoted `"oldname"` strings in lua, replacing them with the
   new ids from the rename maps.
@@ -1716,7 +1895,7 @@ significantly to convey a heavier chassis; (b) ReloadDelay may be longer
 only if total damage per salvo increases significantly. **Range must never
 be lower** on a promotion unit. Promotion weapons must use stronger
 warhead classes than the base unit (e.g. base medium → promotion heavy).
-Audit this with `tools/audit/audit_promotion_superiority.py` ⚠ (**proposed, never built**; the closest live check is `tools/audit/audit_promotion_gating.py`).
+Audit this with `tools/audit/audit_promotion_superiority.py`.
 
 **Linebreaker / mutual-weapon design (CABAL Manticore).** A unit whose
 primary and anti-air weapons are mutually exclusive (e.g. a turret that

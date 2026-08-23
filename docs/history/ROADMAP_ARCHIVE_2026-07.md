@@ -357,6 +357,44 @@ window.
   references in any D2k ContentPack yaml. All hyphens found are
   engine-defined conditions/sequence names (build-incomplete, damaged-idle,
   etc.) which are engine-owned and stay as-is per DESIGN.md §1.
+- [x] **D2K shared effect-template concrete cleanup** (2026-08-20) —
+  resolved duplicate `DamagesConcrete` warheads across the D2K rocket/missile/
+  155mm effect families, fixed `^D2KMissile`/`^D2KRocket`/`^ORocket`/`^OMissile`
+  3-way split inheritance, `effect_audit` reports 0 duplicate concrete warheads,
+  boot-gated with `MenuPostProcessEffect.PostWorldLoaded` and no new
+  exception log.
+- [x] **D2K Devastator/Plasma cannon 3-way split** (2026-08-20) —
+  converted `DevBullet`/`PlasBullet` to explicit `Inherits@wh/@proj/@fx` using
+  new `^Warhead_CannonHE_Heavy_D2K_DevBullet`, `^Projectile_Shell_Heavy_D2K_DevBullet`,
+  and `^Effect_CannonHE_Heavy_D2K_DevBullet` in D2K Shared; preserved damage,
+  projectile, effect, concrete, glow, and merged the duplicate ground
+  `d2k_small_napalm` + `d2k_shockwave` effects into a single `d2k_shockwave`
+  impact; `audit_balance_drift` clean, boot-gated with no new exception log.
+- [x] **D2K Rocket Trooper family 3-way split** (2026-08-23) —
+  converted the five `D2K_Rocket_Trooper*` weapons in `mods/cameo/weapons/d2k.yaml`,
+  `ContentPacks/D2k/Ixian/yaml/weapons.yaml`, and `ContentPacks/D2k/Ordos/yaml/weapons.yaml`
+  to explicit `Inherits@wh/@proj/@fx`; removed `Inherits: ^D2KRocket` and
+  `Inherits: ^D2K_Cannon`; added per-weapon `^Projectile_*_D2K_Rocket_Trooper*`
+  templates and `^Effect_MissileAP_Heavy_D2K_Rocket_Trooper` in D2K Shared.
+  Preserved triple warhead damage (Light/Medium/Heavy missile AP and
+  Demolition/Railgun/Cannon mixes), d2k_RPG projectile visuals, and Dune
+  smudge/glow/shield/concrete effects; `review_resolve_diff.py` OK, all
+  targeted audits clean, ledgers re-extracted and `audit_balance_drift` clean,
+  boot-gated with no new exception log.
+- [x] **Ixian D2K missile 3-way split** (2026-08-23) — converted
+  `D2K_TowerMissile` and `mtank_pri2` in `ContentPacks/D2k/Ixian/yaml/weapons.yaml`
+  to a single `Inherits: ^D2KMissile` warhead plus per-weapon
+  `Inherits@proj: ^Projectile_Missile_Heavy_D2K_TowerMissile` /
+  `^Projectile_Missile_Heavy_D2K_mtank_pri2` and
+  `Inherits@fx: ^Effect_MissileAP_Heavy_D2K_TowerMissile` /
+  `^Effect_MissileAP_Heavy_D2K_mtank_pri2`. Removed the 7 per-weapon
+  `^Warhead_*_D2K_TowerMissile` / `^Warhead_*_D2K_mtank_pri2` templates from
+  D2K Shared and deleted the legacy multi-warhead `Inherits: ^Grenade` /
+  `^MediumFlameWeapon` / `^FlakWeapon` stacks. Preserved missile `Damage` 4000/8000
+  and percentage `Damage` 2/4 as local overrides, D2K heavy missile projectile
+  visuals, and the resolved smudge/glow/shield/concrete effects. Resolver diff
+  and targeted audits clean, ledgers re-extracted, `audit_balance_drift` clean,
+  boot-gated with no new exception log.
 - Note: 7 Ordos armor-rework files are the maintainer's live WIP — leave.
 
 ---
@@ -466,7 +504,7 @@ All other factions have a single, thematically appropriate wall type.
 - [x] **WEAPON-SUFFIX-ELITE: Migrate legacy E suffix to _elite**
   — DONE 2026-07-30: Renamed 117 elite-gated weapons from `<base>E` to
   `<base>_elite` across 44 files (339 lines changed) via
-  `tools/archive/rename_elite_weapons.py`. Handles compound suffixes: `AAE`→`AA_elite`,
+  `tools/rename_elite_weapons.py`. Handles compound suffixes: `AAE`→`AA_elite`,
   `EMPE`→`EMP_elite`, `EResonance`→`_eliteResonance` + bounce variants.
   Skipped `MigMissiles_AA_ELITE` (already contains ELITE) and 45 doctrine
   variants (`_rad`/`_fire`/`_tesla`), upgrade combos, and gatling spin-ups
@@ -480,7 +518,7 @@ All other factions have a single, thematically appropriate wall type.
 
 - [x] **WEAPON-SUFFIX-EMP: Standardize EMP weapon names to _EMP suffix**
   — DONE 2026-07-31: Renamed 62 EMP weapons across 44 files (179 lines
-  changed) via `tools/archive/rename_emp_weapons.py`. Handles: EMP suffix ->
+  changed) via `tools/rename_emp_weapons.py`. Handles: EMP suffix ->
   _EMP, mid-name EMP -> _EMP_, compound EMPAA -> _EMP_AA, EMPulse ->
   _EMP_Pulse, ArcTeslaFragment sub-variants. Case-insensitive global
   replacement catches Weapon:, Weapons: list entries, and Inherits:
@@ -495,7 +533,7 @@ All other factions have a single, thematically appropriate wall type.
   AA-only weapons with no ground-capable sibling on the same actor (SAM
   Sites, etc.) are intentionally excluded, as are single weapons whose
   own `ValidTargets` already covers both Ground and Air.
-  **Renamed 111 weapons** via `tools/archive/rename_aa_weapons.py`
+  **Renamed 111 weapons** via `tools/rename_aa_weapons.py`
   (structurally-scoped exact-token replacement — top-level def key,
   `*Weapon:`/`*Weapons:` fields, indexed superweapon lists,
   block-context-gated `Inherits:` — never a blind substring match).
@@ -521,7 +559,7 @@ All other factions have a single, thematically appropriate wall type.
 ## Superweapon Documentation Audit (2026-07-25, COMPLETED)
 
 Full cross-reference of all superweapon and support power YAML traits vs
-`FACTIONS.md`. ⚠ The raw table was written to `docs/audit/latest/superweapon_audit.yaml`, which no longer exists — `run_all.sh` regenerates `latest/` wholesale and does not produce it. Findings were promoted into `FACTIONS.md` and `docs/audit/SUMMARY.md`.
+`FACTIONS.md`. Raw data: `docs/audit/latest/superweapon_audit.yaml`.
 Summary: `docs/audit/SUMMARY.md` § "Superweapon documentation audit".
 
 **14 findings** — all FACTIONS.md discrepancies FIXED:

@@ -190,7 +190,7 @@ Each step has a VERIFY and is independently boot-gateable.
 | **S1** | Switch normalisation median → **mean = 100** in `aggregate_archetype.py`; re-derive `family_profiles.json` | every family's mean == 100 ± 1 |
 | **S2** | Implement the class-tilt law (Light/Medium/Heavy tilt, Super flat) | tilt direction matches the level for all 88 templates |
 | **S3** | Rebuild Shield: `mean(physics_table, CEILING + floor)`, uniqueness-enforced | Tesla top, Melee bottom, 0 duplicate Shield values |
-| **S4** | Regenerate all 88 templates; report the movement | `report_versus_change.py` + `verify_generator_sync.py` drift = 1 |
+| **S4** | Regenerate all 88 templates; report the movement | `report_versus_change.py` + `verify_generator_sync.py` drift = 0 |
 | **S5** | Re-price through the pipeline | `extract_stats --check` 0 drifted; needs `apply_balance --confirm` (maintainer order) |
 
 **S1–S3 are pure generator work** — no yaml hand-edits, consistent with CLAUDE.md rule 3.
@@ -393,7 +393,7 @@ control of the ordering"; post-S1 that was measurably false.
 Two changes, and both are structural rather than a re-calibration:
 
 1. **The structural term is DAMPED** to the one job §5b actually left it — separating
-   families whose physics rank is EQUAL (`ChemCannon`/`ChemMissile` both 0.50). The
+   families whose physics rank is EQUAL (`CannonChem`/`MissileChem` both 0.50). The
    exponent is derived, not chosen: `ln(smallest distinct rank ratio) / ln(the term's own
    swing)`, i.e. exactly the largest damping under which the smallest genuine rank gap
    still wins. Both inputs are stable — `PHYSICS_RANK` is a design table, and the swing is

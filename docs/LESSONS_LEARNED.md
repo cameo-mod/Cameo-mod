@@ -5,7 +5,8 @@ before touching any code, YAML, asset or balance value.**
 
 This is the repository-owned record of hard-won lessons, safe defaults and recurring pitfalls.
 Every entry was paid for once — the point of the file is that it is not paid for twice.
-**Add new lessons here**, not in a session log and not in a memory.
+**Add new lessons here**, not in a session log and not in a memory. When you add a `##` section,
+add it to the Contents below: `audit_doc_health` D7 fails if the index misses one.
 
 ---
 
@@ -33,25 +34,30 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 **Crash classes — these end a boot, and most gates cannot see them**
 
 - [`Parent type X was already inherited` — the crash class nothing but the boot could see (2026-08-17)](#parent-type-x-was-already-inherited--the-crash-class-nothing-but-the-boot-could-see-2026-08-17)
-- [Empty warhead type = boot NRE; check-yaml does not catch it (2026-08-04)](#empty-warhead-type--boot-nre-check-yaml-does-not-catch-it-2026-08-04)
 - [Interactable trait and upgrade actors (2026-07-24)](#interactable-trait-and-upgrade-actors-2026-07-24)
 - [ClassicProductionQueueProperties crash on actors with no queue (2026-07-31)](#classicproductionqueueproperties-crash-on-actors-with-no-queue-2026-07-31)
-- [YAML lint cleanup header-removal bug (2026-07-24)](#yaml-lint-cleanup-header-removal-bug-2026-07-24)
+- [Empty warhead type = boot NRE; check-yaml does not catch it (2026-08-04)](#empty-warhead-type--boot-nre-check-yaml-does-not-catch-it-2026-08-04)
 
 **Silent-corruption classes — valid yaml, clean boot, wrong game**
 
+- [⛔ NEVER HAND-PARSE YAML — a sibling node silently overwrote every Versus number (2026-08-22)](#-never-hand-parse-yaml--a-sibling-node-silently-overwrote-every-versus-number-2026-08-22)
 - [Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)](#five-bug-classes-from-the-w25-armorversus-rebuild-2026-08-1617)
-- [`Inherits` POSITION is semantic, not cosmetic (2026-08-16)](#inherits-position-is-semantic-not-cosmetic-2026-08-16)
 - [3-way split retrofits: two recurring child-weapon bugs (2026-08-08)](#3-way-split-retrofits-two-recurring-child-weapon-bugs-2026-08-08)
-- [Effect-warhead merge safety during 3-way split (2026-08-07)](#effect-warhead-merge-safety-during-3-way-split-2026-08-07)
 - [Bulk YAML rename scripts: safety lessons (2026-07-31)](#bulk-yaml-rename-scripts-safety-lessons-2026-07-31)
-- [Loose-extracted .oramap maps must always be repacked (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
+- [Loose-extracted .oramap maps must always be repacked before finishing a task (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
+- [Effect-warhead merge safety during 3-way split (2026-08-07)](#effect-warhead-merge-safety-during-3-way-split-2026-08-07)
+- [`Inherits` POSITION is semantic, not cosmetic (2026-08-16)](#inherits-position-is-semantic-not-cosmetic-2026-08-16)
+- [Upgrade regressions feel like downgrades (2026-08-19)](#upgrade-regressions-feel-like-downgrades-2026-08-19)
 
-**Weapon templates and the 3-way split**
+**Weapon templates, the 3-way split and the effect layer**
 
+- [Weapon effect-layer `DamagesConcrete` handling (2026-08-20)](#weapon-effect-layer-damagesconcrete-handling-2026-08-20)
 - [Weapon template retrofit — Phase A lessons (2026-08-02)](#weapon-template-retrofit--phase-a-lessons-2026-08-02)
-- [Weapon 3-way split — effect/projectile pitfalls (2026-08-05)](#weapon-3-way-split--effectprojectile-pitfalls-found-during-the-effects-table-pass-2026-08-05)
+- [Weapon 3-way split — effect/projectile pitfalls found during the effects-table pass (2026-08-05)](#weapon-3-way-split--effectprojectile-pitfalls-found-during-the-effects-table-pass-2026-08-05)
 - [Weapon 3-way split: projectile family naming (2026-08-07)](#weapon-3-way-split-projectile-family-naming-2026-08-07)
+- [Template location and PhysicalStates forms (2026-08-20)](#template-location-and-physicalstates-forms-2026-08-20)
+- [Contrail fields are projectile, not warhead, and can survive a projectile type swap (2026-08-20)](#contrail-fields-are-projectile-not-warhead-and-can-survive-a-projectile-type-swap-2026-08-20)
+- [Inline effect warheads should be inherited, not inline (2026-08-19)](#inline-effect-warheads-should-be-inherited-not-inline-2026-08-19)
 
 **Balance pipeline and formula**
 
@@ -60,16 +66,15 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Uniqueness enforcement](#uniqueness-enforcement)
 - [Dual-weapon units](#dual-weapon-units)
 - [Audit and pipeline findings from 2026-07-22](#audit-and-pipeline-findings-from-2026-07-22)
+- [Tooling fixes discovered during W24 A1a (2026-08-22)](#tooling-fixes-discovered-during-w24-a1a-2026-08-22)
 
 **Process, tooling and platform**
 
+- [Content installer and music filesystem plumbing (2026-08-11)](#content-installer-and-music-filesystem-plumbing-2026-08-11)
 - [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
 - [YAML lint rules learned (2026-07-24)](#yaml-lint-rules-learned-2026-07-24)
-- [Superweapon documentation audit (2026-07-25)](#superweapon-documentation-audit-2026-07-25)
-- [Engine update pipeline and Smart App Control findings (2026-07-30)](#engine-update-pipeline-and-smart-app-control-findings-2026-07-30-updated-with-deep-research)
-- [Content installer and music filesystem plumbing (2026-08-11)](#content-installer-and-music-filesystem-plumbing-2026-08-11)
-- [Between-cell movement responsiveness (2026-08-11)](#between-cell-movement-responsiveness-2026-08-11)
 - [OpenRA Lua `Map` API: there is no `Map.Contains` (2026-07-31)](#openra-lua-map-api-there-is-no-mapcontains-2026-07-31)
+- [Between-cell movement responsiveness (2026-08-11)](#between-cell-movement-responsiveness-2026-08-11)
 
 ---
 
@@ -89,6 +94,65 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - `cameo-content` is deliberately hyphenated to match the engine's
   `*-content` mod convention; it is an explicit exception to Cameo's
   underscore-only in-mod naming rule.
+
+## Weapon effect-layer `DamagesConcrete` handling (2026-08-20)
+
+- `DamagesConcrete` is a separate warhead trait. It is NOT automatically
+  redundant with `SpreadDamage` or `AreaDamage`; it must be preserved unless the
+  source behavior proves it is accidental or duplicate.
+- When a weapon inherits multiple effect templates (e.g. old full-stack or
+  3-way-split intermediates), the same `DamagesConcrete` node can be inherited
+  more than once. Use `tools/audit/effect_audit.py` (or `scratchpad/`) to scan
+  all resolved weapons; the target is **0 weapons with >1 `DamagesConcrete`**.
+- Effect templates should remove inherited generic concrete with
+  `-Warhead@Concrete` and re-add a single `Warhead@Concrete: DamagesConcrete`
+  with the intended local value when the effect is meant to be standalone.
+- Weapon children that need a different concrete value should override with a
+  single `Warhead@Concrete:` key; matching keys merge, so only the last value
+  survives.
+
+## ⛔ NEVER HAND-PARSE YAML — a sibling node silently overwrote every Versus number (2026-08-22)
+
+A whole day of weapon-profile analysis produced confident, internally consistent, WRONG numbers,
+because the reader was a bespoke line-scanner instead of the project's resolver.
+
+The scanner opened a dict on `Versus:` and then kept absorbing any `Key: <int>` line. It never
+CLOSED the block. The AreaDamage fold had since added `PercentageVersus:` INSIDE the same warhead
+node, so the twin's rank ladder overwrote the real profile row by row:
+
+```
+Warhead@Bullet_Light: AreaDamage
+    Versus:            None: 200 ... Superheavy 48   <- the real profile, mean 100
+    PercentageVersus:  None: 16  ... Superheavy  1   <- what got read, mean 8.5
+```
+
+**What it cost.** Reported "0 of 125 profiles obey the MEAN-100 law" (truth: **123 of 125**),
+"every family violates the 2x-8x spread band" (truth: **39 of 42 in band, median 4.17x**),
+an additive `+4/+5` level offset that was really the rank ladder stepping 1/5/10, "26 of 42
+families invert", and "a Heavy weapon self-prices at ~2x a Light one" (truth: the Heavy/Light
+weighted-mean Versus ratio is **1.00x** — the level does not price through Versus at all, exactly
+as §12.0a intends). Two design documents were written and committed on those numbers.
+
+**The rules:**
+
+1. **Read through `miniyaml.Ruleset.resolve_weapon` / `.resolve`**, and pull Versus with
+   `weapon_efficiency.versus_of(node)`. They return structured nodes and cannot confuse siblings.
+2. If a hand parser is genuinely unavoidable, **CLOSE every block on indentation** — the moment
+   indentation returns to the opening key's level or shallower, the block is over.
+3. **A near-miss name is the danger**: `PercentageVersus` does not `startswith("Versus:")`, so the
+   opening guard looked correct. The bug was the missing CLOSE, not the missing open.
+4. **Sanity-check against a stated law before believing a result.** "0 of 125 conform to a binding
+   law that the generator implements and `verify_generator_sync` reports 0 drift on" is not a
+   finding, it is a contradiction — and the contradiction was visible immediately.
+
+Guarded by `tools/audit/audit_versus_profile.py`, which reads through the resolver on purpose.
+
+**And the deeper miss:** `docs/DESIGN.md` is required reading #4 in CLAUDE.md ("the binding design
+contract ... Read it before touching any yaml"), and it already contained §12.0a (MEAN-100),
+§12.0c (the Shield ladder) and §12.0d (the class tilt). Days of design work re-derived rulings
+that were already made and already shipped. **Before designing anything, grep DESIGN.md for the
+concept.** A design question that feels novel usually is not.
+
 
 ## Five bug classes from the W25 armor/Versus rebuild (2026-08-16/17)
 
@@ -260,6 +324,20 @@ type" cases). Re-run the detector after any future conversion batch;
 it exits 0 candidates when clean. Bug B is now CLOSED across the
 codebase.
 
+### Effect/water preservation when moving to ^Effect_MissileHE_*
+
+The new `^Effect_MissileHE_Light/Medium/Heavy` templates do **not** include `Warhead@EffectWater`. A weapon that previously resolved with a water splash (via `^FlakWeapon`, `^Grenade`, `^MediumMissile`, `^HeavyMissile`, etc.) will silently lose it unless a local `Warhead@EffectWater: CreateEffect` is kept. `review_resolve_diff.py` compares resolved `CreateEffect` fields, but `EffectWater` is a separate node; always inspect the full resolved FX dump for both `Effect` and `EffectWater` blocks.
+
+Likewise, `ImpactActors: false` on `Warhead@Effect` can come from an old full-stack family (`^Grenade` sets it). The new `^Effect_MissileHE_*` templates do not, so the resolved effect must carry a local `ImpactActors: false` override where the old stack had it.
+
+**Rule:** after reparenting a weapon, run `review_resolve_diff.py` and explicitly verify `EffectWater` and `ImpactActors` against the pre-conversion baseline; add local overrides when the new effect family drops them.
+
+### D2KRocket contrail visuals also need preserving
+
+The `^D2KRocket` archetype inherits `^Projectile_Missile_Heavy`, which does **not** carry the flak-bullet contrail visual fields (`ContrailZOffset`, `ContrailStartColor`, `ContrailEndColor`, `ContrailStartWidth`, `ContrailEndWidth`) that the old `^Chaingun`/`^FlakWeapon` stack contributed. A weapon that previously resolved with those colours will revert to no contrail visuals unless they are added as local `Projectile` overrides. `review_resolve_diff.py` checks `Proj.CStart`/`CEnd`, so the loss is caught, but `ContrailZOffset`/`StartWidth`/`EndWidth` must be inspected manually.
+
+**Rule:** when collapsing a mixed-stack weapon to `^D2KRocket`, dump the resolved `Projectile` block before and after, and copy any missing visual fields into the local `Projectile` override.
+
 ---
 
 ## Latest lessons from the July 2026 infantry rebalance pass
@@ -305,18 +383,8 @@ codebase.
 
 - **Speed step depends on the domain:** infantry use **steps of 1**; vehicles, aircraft, AND ships use **steps of 5** (their speed is divided by 5 to derive the turn-rate, so it must be a multiple of 5).
 - `Range` is always a **multiple of 10**.
-- **`Damage` sits on `formula.DAMAGE_STEP` = 100** (W15, 2026-08-15). The `%`-twin is derived by
-  `formula.percentage_twin()`, which is continuous and monotone in `Damage` and never rounds a live
-  warhead below 1.
-- **`FirepowerMultiplier` is RETIRED as a tuning knob** (W17). `apply_balance` cannot write it
-  (`RETIRED_UNIT_FIELDS`), and `propose_class_rebalance.decompose_dps` always returns `1.0`. 152
-  actors still carry one, so `extract_stats` still READS it and `fit_class` still prices with it —
-  un-pricing them would misprice the roster. Do not add new ones.
-- ⚠ **The retired law** — "`Damage` in 2000-step increments, then fine-tune with a 1 %
-  `FirepowerMultiplier`" — appears in older notes below and in `FORMULA_V2.md`. It described the
-  world before W15/W17. The reason it existed is still worth knowing: the old `%`-twin was
-  `damage // 2000` with integer division, so an off-grid `Damage` silently zeroed the percentage
-  warhead. Fixing that derivation is exactly what had to land before the grid could move.
+- `FirepowerMultiplier` is the **fine-tuning** lever (1 % integer steps, 5 %–200 %): after coarse-tuning warhead `Damage` on the 2000-step grid, use the FP multiplier to land the exact intended DPS. It is a multiplier and is **meaningless on its own** — it is never a uniqueness key (see [Uniqueness enforcement](#uniqueness-enforcement)).
+- Raw `Damage` should be kept in 2000-step increments for the balance pipeline (percentage warheads in 1-steps).
 
 ### DPS and formula rules
 
@@ -363,25 +431,21 @@ codebase.
 > [`docs/design/EFFECTIVE_DAMAGE.md`](design/EFFECTIVE_DAMAGE.md). Never feed one to the
 > other's consumer.
 - `FirepowerMultiplier` alone — or any single one of these values in isolation — need NOT be unique; on its own it is meaningless. This **supersedes** any earlier "make effective DPS unique via FirepowerMultiplier" rule: DPS is derived, and uniqueness lives on the 5 raw stats above, with #3 (damage×FP) and #4 (raw ReloadDelay) checked **separately** (two units may share one if they differ on the other).
-- Break ties by nudging a stat on its own grid: `Speed` steps of **1** (infantry) / **5** (vehicles, aircraft, ships), `Range` steps of **10**, `Damage` steps of **`formula.DAMAGE_STEP` = 100** (2000 pre-W15; the FP-multiplier fine-tune is retired), `HP` steps of **1000**.
+- Break ties by nudging a stat on its own grid: `Speed` steps of **1** (infantry) / **5** (vehicles, aircraft, ships), `Range` steps of **10**, `Damage` steps of **2000** (then FP-multiplier fine-tune), `HP` steps of **1000**.
 - **CODE NOTE:** `propose_class_rebalance.resolve_dps_uniqueness` and the uniqueness audit currently key on *effective DPS* — they must be updated to key on the 5 stats above (raw damage×FP and raw ReloadDelay separately).
 
 ## Dual-weapon units
 
 - Units with two weapons (e.g. `ra2_soviets_flaktrooper`: short anti-ground + long anti-air) are balanced **independently — as if each weapon were its own actor**: one anti-ground-only actor and one anti-air-only actor, sharing the same `HP` and `Speed` but each with its own `Damage`, `Range`, `ReloadDelay`, and `Burst` fitted to its weapon.
 - **Range is relative between the two weapons** (e.g. anti-air range = anti-ground range × 1.5). The RATIO is the rule, so if one weapon's range must change, change **both** to preserve the ratio.
-- `FirepowerMultiplier` is **shared** — it scales BOTH weapons at once, and every warhead on each,
-  not just the mains (`Armament` builds `DamageModifiers` once and passes it to every warhead). That
-  is one of the two reasons W17 retired it. On an actor that still carries one, tune the weapons'
-  own stats (`Damage` on the 100-grid, `ReloadDelay`, `Burst`, `Range`) and delete the multiplier
-  rather than tuning with it.
+- `FirepowerMultiplier` is **shared** — it scales BOTH weapons at once. So tune each weapon's other stats (`Damage` on the 2000-grid, `ReloadDelay`, `Burst`, `Range`) FIRST, and use the FP multiplier only for final fine-tuning, remembering every FP change hits both weapons together.
 
 ## Audit and pipeline findings from 2026-07-22
 
 ### Audit report encoding
 
 - `docs/audit/latest/*.md` files can be written in UTF-16 with embedded null bytes.
-- Decode them to clean UTF-8 before reading or processing with a one-shot script. (`tools/balance/_decode_audit.py` is referenced by older notes and is **no longer in the tree**.) The root cause is prevented at source: regenerate reports with `bash tools/audit/run_all.sh`, which forces `PYTHONIOENCODING=utf-8` — never with a PowerShell `>` redirect.
+- Decode them to clean UTF-8 before reading or processing (e.g. `tools/balance/_decode_audit.py` or an equivalent one-shot script).
 - Never commit `.safe.md` decoded copies; regenerate them on demand.
 
 ### `MinRange` rule and intentional exceptions
@@ -443,7 +507,7 @@ codebase.
 ### Script hygiene (pending)
 
 - Multiple `scout_rebalance_*.py`, `closecombat_rebalance_*.py`, and `special_forces_rebalance_*.py` scripts are redundant with the generic `propose_class_rebalance.py`.
-- Plan: consolidate the helpers into one `tools/balance/rebalance_classes.py` dispatcher that calls `extract` → `propose` → `patch` → `apply` (dry-run/confirm) → `build_workbook`. ⚠ **Still PLANNED — that file does not exist.** Use `propose_class_rebalance.py` + `apply_balance.py` directly until it does.
+- Plan: consolidate the helpers into one `tools/balance/rebalance_classes.py` dispatcher that calls `extract` → `propose` → `patch` → `apply` (dry-run/confirm) → `build_workbook`.
 - Do this after the current audit batch is finished and the pipeline is trusted.
 
 ## Interactable trait and upgrade actors (2026-07-24)
@@ -455,7 +519,7 @@ codebase.
 
 ### The audit lint rule conflict
 
-- `tools/archive/audit_yaml_lint_rules.py` check 4 (`find_interactable_selectable_conflicts`) flags any actor that has BOTH `Interactable` and `Selectable` traits in the same YAML block as a "conflict".
+- `tools/audit/audit_yaml_lint_rules.py` check 4 (`find_interactable_selectable_conflicts`) flags any actor that has BOTH `Interactable` and `Selectable` traits in the same YAML block as a "conflict".
 - However, `Interactable` and `Selectable` serve **complementary** purposes in OpenRA:
   - `Interactable` provides the click/hit-test bounds (required for the actor to be interactive at all).
   - `Selectable` provides selection visual feedback (selection box, health bar, decoration bounds) and **depends on** `Interactable` to function.
@@ -533,7 +597,7 @@ SpeedMultiplier@myupgrade:
 - **Harkonnen Palace has `^PrimarySuperweapon` but NO power trait**: The building inherits the superweapon template and has `SupportPowerChargeBar` but no actual `NukePower`/`DetonateWeaponPower`/etc. The Death Hand Missile described in faction YAML is unimplemented. This is a parked faction, not a regression.
 - **WIP faction superweapons exist in `rules/` YAML**: Warzone 2100, Worms, Win98, Warcraft 1, and WH40K all have superweapon traits in `rules/*.yaml` (not yet migrated to ContentPacks). These should be documented in FACTIONS.md only when the factions become active.
 - **Outpost 2 superweapon is in `rules/outpost2.yaml`, not ContentPacks**: The Supernova Missile uses `NukePower` with `supernova_missile_super` weapon, charge 9000, on `EDEN_OBSERVATORY` and `PLYMOUTH_OBSERVATORY`. FACTIONS.md was already correct for this.
-- **Audit raw data**: this pass wrote `docs/audit/latest/superweapon_audit.yaml`. ⚠ **That file is gone** — `docs/audit/latest/` is regenerated wholesale by `run_all.sh`, which does not produce it, so a one-off artifact dropped there does not survive. The findings themselves were promoted into `FACTIONS.md` and `docs/audit/SUMMARY.md`; re-derive the raw table from the YAML if it is needed again, and write one-off artifacts OUTSIDE `latest/`.
+- **Audit raw data location**: `docs/audit/latest/superweapon_audit.yaml` contains the full cross-reference with all primary/secondary superweapons, support powers, critical findings, and WIP faction discoveries.
 
 ### Engine update pipeline and Smart App Control findings (2026-07-30, updated with deep research)
 
@@ -547,7 +611,13 @@ The engine lives in TWO places that must stay in sync. Follow these steps IN ORD
 4. **Update `mod.config`** in the mod repository: set `ENGINE_VERSION="<full-40-char-hash>"`. The engine pin lives in `mod.config`, NOT `mod.yaml`.
 5. **Run `make all`** (Windows: `make.cmd all`). Because `engine/VERSION` no longer matches, the SDK deletes `engine/`, downloads the source zip for the pinned commit from GitHub, and rebuilds everything.
 6. **Verify**: `engine/VERSION` must contain the new hash; the build must have 0 errors.
-7. **Boot-gate with `launch-game.cmd`** before committing the `mod.config` change (see AGENT_WORKSPACE.md git rules). Recreate any custom `engine/glsl/` shaders after the fetch (they are wiped).
+7. **Boot-gate with `launch-game.cmd`** before committing the `mod.config` change (see AGENT_WORKSPACE.md git rules).
+   ⚠ **The old "recreate any custom `engine/glsl/` shaders, they are wiped" step is STALE — verified 2026-08-22.**
+   All 16 shaders (including `postprocess_nuclearflash.frag`) are now TRACKED in the engine repo, so the source
+   zipball carries them and the fetch restores them untouched. Measured by md5-summing `engine/glsl/*` before and
+   after a full `make.cmd all` on pin `462fc1fc4b`: identical, all 16. Still worth a `md5sum` before/after rather
+   than trusting either version of this line — if a shader is ever added WITHOUT committing it to the engine repo,
+   the wipe becomes real again.
 8. **Commit `mod.config`** together with the change's docs updates.
 
 Key facts verified 2026-07-30:
@@ -598,7 +668,7 @@ Key facts verified 2026-07-30:
 
 ## Bulk YAML rename scripts: safety lessons (2026-07-31)
 
-Applies to any script that renames a weapon/actor/condition identifier across the whole mod tree (see `tools/archive/rename_aa_weapons.py`, `tools/archive/rename_emp_weapons.py`).
+Applies to any script that renames a weapon/actor/condition identifier across the whole mod tree (see `tools/rename_aa_weapons.py`, `tools/rename_emp_weapons.py`).
 
 - **Never do a blind file-wide word-boundary substitution of a bare identifier.** An early draft renamed `Dragon` → `Dragon_AA` via `re.sub(r'\bDragon\b', ...)` across every YAML file. This also mangled unrelated `Tooltip: Name: Way of the Dragon`, a Warcraft2 `Dragon Roost` building name, and a commented-out `# Image: DRAGON` sprite reference — none of which are weapon references. The same bug hit `Spore` (a Zerg building's `RequiresCondition`/`Armament Name:` field coincidentally shares the literal string with the weapon name). **Root cause of the corruption class**: identifiers in this codebase are reused across completely different namespaces (weapon names, condition names, armament trait `Name:` identifiers, tooltip display text, sprite/image names), so any substring or bare-identifier match is unsafe. Always match on the **exact YAML field** (`Weapon:`, `Weapons:`, `Inherits:`, the top-level definition key) with an **exact full-token value comparison**, never a regex substring/word-boundary match against arbitrary line content.
 - **The same literal name can be a weapon, an actor, AND a sequence.** E.g. `sow_mech_avenger` is simultaneously an actor id (`rules/sow.yaml`), a weapon (`weapons/sow.yaml`), and a sequence (`sequences/sow.yaml`); `d2k_aircraft_eater` is both a weapon and a (commented-out) actor + sequence. Renaming the top-level definition key, or an `Inherits:` value, requires first classifying **which specific block** the identifier belongs to (`is_weapon_definition_body`-style marker-key heuristics) — do not rename just because the name string matches; verify the containing block is actually a weapon.
@@ -632,7 +702,7 @@ The `Map` global exposed to map Lua does **not** define a `Contains` method. Cal
 
 ## Weapon template retrofit — Phase A lessons (2026-08-02)
 
-The 3-way weapon-template split requires retrofitting weapons from the old full-stack templates (`^SmallArms`, `^Chaingun`) to the new 3-layer system (`^Bullet_Light`/`^ProjectileBullet_Light`/`^EffectBullet_Light`, `^Bullet_Medium`/`^ProjectileBullet_Medium`/`^EffectBullet_Medium`). Script: `tools/archive/retrofit_v3.py` — ⚠ **removed from the tree**; the canonical retrofit tool is now `tools/balance/retrofit_weapon_family.py`.
+The 3-way weapon-template split requires retrofitting weapons from the old full-stack templates (`^SmallArms`, `^Chaingun`) to the new 3-layer system (`^Bullet_Light`/`^ProjectileBullet_Light`/`^EffectBullet_Light`, `^Bullet_Medium`/`^ProjectileBullet_Medium`/`^EffectBullet_Medium`). Script: `tools/archive/retrofit_v3.py`.
 
 - **Missing `Report` field causes `-Report:` lint errors.** Old templates (`^SmallArms`, `^Chaingun`) carried `Report: gun8.aud`; the new warhead-only templates (`^Bullet_Light`, `^Bullet_Medium`) did not. When a child weapon has `-Report:` (removal node) but the parent template lacks the field, `check-yaml` flags it. Fix: add `Report: gun8.aud` to the new templates to match the old defaults. Always check for fields that child weapons attempt to remove (`-FieldName:`) when creating replacement templates — the new template must carry any inherited field that children override or remove.
 - **Warhead key renaming must happen in the same pass as inherit repointing.** The first script version (`retrofit_v2.py`) classified weapons for warhead key renaming BEFORE repointing inherits, then repointed in a separate step. After repointing, the classification no longer held (the weapon no longer inherited from `^SmallArms`), causing missed warhead key renames. Fix (`retrofit_v3.py`): rename warhead keys and repoint inherits in a single pass per weapon.
@@ -707,4 +777,54 @@ was reverted twice.
    lines sit relative to that value BEFORE suspecting the merge engine.
 3. A weapon whose own `Warhead@X` is declared ABOVE its `Inherits` lines is already relying
    on the parent to win — e.g. `japan_imperialscoutsman_rifle_waveforce` declares
-   `Warhead@Railgun_Heavy` at line 0 and three `Inherits` at lines 2-4.\n## Template location and PhysicalStates forms (2026-08-20)\n\nTwo resolver/tooling gotchas from the chemical-weapon and artillery-projectile pass:\n\n1. **Do not duplicate a ^Projectile_* template across weapons/weapons.yaml and a ContentPack Shared pack.** mod.yaml loads weapons/weapons.yaml after the ContentPack Weapons list, so the global copy silently shadows the pack copy and any weapon that only inherited the pack copy changes behaviour. If a template needs to be global, put it in weapons/weapons.yaml and remove the pack copy; if it needs pack-local defaults, use a pack-scoped name.\n\n2. **Chemical percentage warheads can declare physical-state meters in two forms:** a direct PhysicalStateName / PhysicalStateScale pair, OR a nested PhysicalStates: map (e.g. Corrosion: 100). 	ools/audit/audit_physical_state_warheads.py now resolves both forms; any future audit touching physical states must do the same or it will falsely report that Corrosion is not being fed.\n
+   `Warhead@Railgun_Heavy` at line 0 and three `Inherits` at lines 2-4.
+
+## Template location and PhysicalStates forms (2026-08-20)
+
+Two resolver/tooling gotchas from the chemical-weapon and artillery-projectile pass:
+
+1. **Do not duplicate a ^Projectile_* template across weapons/weapons.yaml and a ContentPack Shared pack.** mod.yaml loads weapons/weapons.yaml after the ContentPack Weapons list, so the global copy silently shadows the pack copy and any weapon that only inherited the pack copy changes behaviour. If a template needs to be global, put it in weapons/weapons.yaml and remove the pack copy; if it needs pack-local defaults, use a pack-scoped name.
+
+2. **Chemical percentage warheads can declare physical-state meters in two forms:** a direct PhysicalStateName / PhysicalStateScale pair, OR a nested PhysicalStates: map (e.g. Corrosion: 100). tools/audit/audit_physical_state_warheads.py now resolves both forms; any future audit touching physical states must do the same or it will falsely report that Corrosion is not being fed.
+
+## Contrail fields are projectile, not warhead, and can survive a projectile type swap (2026-08-20)
+
+The legacy mixed-stack missile weapons (`227mm`, `GDIRigMissilePod`, `MammothTusk`) inherited `^FlakWeapon` — a `Bullet` projectile with `ContrailStartColor: FF884400` and `ContrailEndColor: 000000FF` — and then a `^*Missile` template that switched the projectile to `Missile`. Because `ContrailStartColor`/`ContrailEndColor` were not re-declared in the missile template, the resolved `Projectile: Missile` still carried the flak bullet colors.
+
+A naive 3-way split onto `^Projectile_Missile_*` drops those colors and `review_resolve_diff.py` flags `Proj.CStart`/`Proj.CEnd`. Preserve them as local `Projectile:` overrides on the concrete weapon whenever the resolved baseline had them and the new family does not.
+
+---
+
+## Tooling fixes discovered during W24 A1a (2026-08-22)
+
+- tools/rename/safe_rename.py lower-cased every replacement. It now preserves the exact case written in the rename map, so mixed-case OpenRA ids stay canonical.
+- tools/balance/splice_templates.py ran gen_weapon_template.py with a family filter, which caused shield_uniqueness to see only a subset and emit wrong compressed Shield values. It now always runs the full generator and splices only the requested blocks, preserving the original newline style (CRLF/LF).
+- The A1a delivery-first rename proved that verify_generator_sync.py is the real source of truth for ^Warhead_* blocks: the Flame and MissileChem blocks had drifted by one Shield point and were re-synced by splicing.
+
+## Upgrade regressions feel like downgrades (2026-08-19)
+
+A W24 collapse can move an upgrade pair onto families with **opposite Versus profiles** and still pass every damage check, because the on-grid `Damage` total is preserved on both sides. `audit_upgrade_regression.py` was added to catch this:
+
+- **314 gated armament pairs** scanned (`Armament` with `RequiresCondition`, one half `!cond` and the other `cond`).
+- **59 findings** in the first pass:
+  - **12 STRICTLY WEAKER** — the upgrade loses on every core armor (e.g. `RA2PatriotThunderboltMissile` vs `RA2Patriot` is 0.13× on vehicles, `TSHellfireSonic` vs `TSHellfire` is 0.11× vs Superheavy).
+  - **42 ROLE-SHIFTED** — wins on some armor, loses on others (legitimate for a specialist, a regression when the loss is on the armor the unit exists to fight).
+  - **5 THIN MARGIN** — the upgrade never loses, but is worth only ~1.03–1.10× where it matters while multiplying on another class. `MonsterTank120mm -> MonsterTank120mmThermobaric` is the poster case: same geometry, 1.5× damage, but the Versus shift means it is **+4% vs Scout / +7% vs Light / +16% vs Medium** and **+126% vs infantry**.
+
+⚠ **A2 was NOT the root cause.** Measured before vs after A2: **54 findings before, 54 after.** A2 deepened the pre-existing `Su57` case from 0.92× to 0.87×. This is pre-existing debt the W24 collapse made visible.
+
+**Rule:** every upgrade must be verified with `python tools/audit/audit_upgrade_regression.py` after any family repoint that touches an armament pair. Do not rely on a damage-preservation check alone.
+
+## Inline effect warheads should be inherited, not inline (2026-08-19)
+
+Maintainer ruling: **Effect warheads (`Warhead@Effect*`) should live in `^Effect_*` templates and be inherited, not declared inline on a concrete weapon.** The only legitimate exception is superweapons, which may need multiple bespoke animations.
+
+First scan: **665 concrete weapons carry 815 inline effect warhead nodes** (`Warhead@Effect`, `Warhead@EffectAir`, `Warhead@EffectWater`, etc.) instead of using `Inherits@fx:`. This is a structural-debt class: it duplicates FX definitions across the tree and makes the 3-way split harder to reason about.
+
+**Rule:**
+- A concrete weapon should use `Inherits@fx: ^Effect_<Family>` for its visuals.
+- Local `Warhead@Effect*` entries should be reserved for **exceptional overrides** (e.g. a custom sound, a one-off `Explosions` list) and should be rare.
+- Superweapons are exempt from the inherit rule because their effects are often unique and multi-animated.
+- Add new effect families to `gen_weapon_template.py` / `weapons.yaml` instead of copy-pasting `CreateEffect` nodes.
+
+**Guard:** `tools/audit/audit_inline_effects.py` is now implemented. Current baseline: **665 concrete weapons carry 815 inline effect nodes**; after auto-detecting superweapons, **628 weapons with 771 nodes** remain as non-exempt debt. Run it after any conversion batch to watch the count fall.

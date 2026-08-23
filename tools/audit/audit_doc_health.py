@@ -15,6 +15,10 @@ found by hand on 2026-08-23 and neither had a detector:
   D5 a reference to a document this repository moved or deleted.
   D6 two sections sharing one id in DESIGN.md. `§12.0a` named two different BINDING
      laws at once, and code cites `§12.0a` — so the citation was ambiguous.
+  D7 a document with a `## Contents` index that does not list every one of its own `##`
+     sections. LESSONS_LEARNED's index had drifted twice, most recently listing 15 of 31 —
+     including neither of the two crash classes, in the one file whose entire job is
+     "read this before you repeat a mistake".
 
 D1, D2 and D6 are BLOCKING: they are corruption or an ambiguous law. D3–D5 are
 reported and also block, because a dead pointer is how a reader ends up in the wrong
@@ -101,6 +105,7 @@ def main() -> int:
     d4: list[str] = []
     d5: list[str] = []
     d6: list[str] = []
+    d7: list[str] = []
 
     for f in docs:
         text = read(f)
@@ -135,7 +140,9 @@ def main() -> int:
     # period-correct references on purpose.
     for f in tracked("*.md", "*.py", "*.json", "*.yaml", "*.sh"):
         rel = str(f).replace("\\", "/")
-        if rel.startswith("docs/history/"):
+        # history keeps its own period-correct references on purpose, and this
+        # script's own GONE table names every old path by definition.
+        if rel.startswith("docs/history/") or rel == "tools/audit/audit_doc_health.py":
             continue
         text = read(f)
         if text is None:
@@ -143,6 +150,20 @@ def main() -> int:
         for old, new in GONE.items():
             if old in text:
                 d5.append(f"`{rel}` names `{old}` — moved to `{new}`")
+
+    # D7 — a "## Contents" index must list every "##" section of its own document.
+    for f in docs:
+        text = read(f)
+        if text is None or "\n## Contents" not in text:
+            continue
+        rel = str(f).replace("\\", "/")
+        linked = set(ANCHOR.findall(text))
+        for m in re.finditer(r"^## (.+)$", text, re.M):
+            title = m.group(1).strip()
+            if title in ("Contents", "Required reading order for every new task"):
+                continue
+            if slug(title) not in linked:
+                d7.append(f"`{rel}` — Contents omits `{title}`")
 
     design = read(pathlib.Path("docs/DESIGN.md"))
     if design:
@@ -163,6 +184,7 @@ def main() -> int:
         ("D4", "same-file anchor with no heading", d4),
         ("D5", "reference to a moved/removed document", d5),
         ("D6", "duplicate section id in DESIGN.md", d6),
+        ("D7", "Contents index missing a section", d7),
     ):
         print(f"| {code} | {what} | {len(rows)} |")
 
@@ -174,6 +196,7 @@ def main() -> int:
         ("D4", "Broken anchors", d4),
         ("D5", "Stale document references", d5),
         ("D6", "Duplicate DESIGN section ids", d6),
+        ("D7", "Contents index out of date", d7),
     ):
         print(f"\n\n## {code} — {what} ({len(rows)})\n")
         if rows:
@@ -186,8 +209,9 @@ def main() -> int:
     print()
     if findings:
         print(f"\n**FAIL — {findings} finding(s).** Fix the document; none of these are "
-              "cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, and "
-              "D3–D5 send a reader to the wrong place.")
+              "cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, "
+              "D3–D5 send a reader to the wrong place, and D7 means a document is "
+              "hiding its own content from the person who was told to read it.")
         return 1
     print("\n**PASS** — no structural defects.")
     return 0
