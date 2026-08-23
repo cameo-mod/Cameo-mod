@@ -11,8 +11,8 @@ Recurring code-health audits and their cadence: [`PERIODIC.md`](PERIODIC.md) +
 
 ⚠ **`latest/` is currently a MIXTURE of two environments and is owed one clean regenerate.**
 A dozen audits read `engine/` C# or full git history — neither of which exists in a fresh
-clone — and they respond by reporting *less* and still saying PASS (`unique_traits` 125 trait
-types → 11, `dead_warhead_fields` 27071 nodes → 7014). Alternating Windows and container runs
+clone — and they respond by reporting *less* and still saying PASS (`dead_warhead_fields` 27071
+warhead nodes → 7014, `fluent` 5235 messages → 3640). Alternating Windows and container runs
 have been overwriting each other's numbers. `run_all` now refuses to write `latest/` from an
 incomplete tree (it diverts to the untracked `docs/audit/degraded/`; `--force-latest`
 overrides), so this is a one-time cleanup: **run the suite once on a complete tree and commit
@@ -73,7 +73,7 @@ regenerate).
 
 | check | state | what to do |
 |---|---|---|
-| **level ladder** | **FAIL — 10 broken vs ratchet 9** (7 inverted, 3 flat) | blocked on a maintainer ruling. Full measured table + the diagnosis: [`../design/ROADMAP.md`](../design/ROADMAP.md) "RATCHET BREACH". These are balance numbers: pipeline only, and **never raise the ratchet**. |
+| **level ladder** | **WARN — 9 broken, at ratchet 9** (7 inverted, 2 flat) | no longer failing: `a9f31258` fixed `Demolition`. Still blocked on a maintainer ruling. Full measured table + the diagnosis: [`../design/ROADMAP.md`](../design/ROADMAP.md) "BROKEN LADDERS". These are balance numbers: pipeline only, and **never raise the ratchet**. |
 | duplicate keys D1 | 88 dropped inherits | each one silently drops a template — same family as the `Parent type X was already inherited` boot crash |
 | warhead-split ratchet | at baseline | pre-existing W24 debt, not a regression; lower the baseline as W24 lands |
 
@@ -101,8 +101,9 @@ so they cannot rot in prose again.
 
 1. **One clean suite run on a complete tree** — cheapest, and until `latest/` stops mixing two
    environments no count on this page can be fully trusted.
-2. **The 10 broken level ladders** — a heavier level dealing less damage than a lighter one is
-   player-visible nonsense, and the ratchet is red until it is ruled on.
+2. **The 9 broken level ladders** — a heavier level dealing less damage than a lighter one is
+   player-visible nonsense. Back at the ratchet rather than over it, so it no longer fails the
+   suite, but nothing about the nine has been ruled on.
 3. **B2b duplicate inherit paths / D1 dropped inherits** — the class that produces
    `Parent type X was already inherited` boot crashes and silently-dropped templates. Only the
    boot and `audit_duplicate_inherits` can see it.

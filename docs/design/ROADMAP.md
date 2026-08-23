@@ -122,35 +122,56 @@ Documented in `PHYSICAL_STATE_SYSTEM.md` §5 but not built: **Sonic → `Resonan
 new C#), **Hex** (Magic: −firepower/−accuracy/disable specials), **ArmorBreach**, **Knockback**
 (needs new C#). Only **Temperature** (98.6% exposure) and **Corrosion** (45.0%) exist today.
 
-## ⚠ THE LEVEL LADDERS — 9 families still broken, and it needs one ruling (2026-08-23)
+## ⛔ BROKEN LADDERS — `audit_level_ladder` 9 vs ratchet 9 (breached at 10 on 2026-08-23)
 
-**No longer blocking.** It was briefly `FAIL 10 vs ratchet 9`: the tick tank commit `f9b71bffa`
-moved `TS90mm`/`TSLaser90mm` onto `CannonAP_Medium`, which gave `CannonAP` a second populated rung
-and so made the family measurable for the first time — exposing an inversion rather than creating
-one. It was invisible because `level_ladder.md` had not been regenerated since `52b364cb5`, which
-PREDATES that commit. The RA1 Allies cryo conversion then moved the count back to **9 = ratchet**,
-so the suite no longer exits 1 on it.
+The suite exited 1 on this until `a9f31258` brought it back to the ratchet; the nine below are
+still broken and still need a ruling. **The breach was ours, from tick tank commit
+`f9b71bffa`**, and it stayed
+invisible because `docs/audit/latest/level_ladder.md` had not been regenerated since `52b364cb5`,
+which PREDATES that commit — so a FAIL sat in the tree reporting itself as a WARN at baseline.
 
-⚠ **9 of 16 measurable families still have a broken ladder**, and only ONE of them is the tick
-tank's doing. This is a balance question, so it cannot be hand-fixed (rule 3) and the ratchet must
-never be raised:
+Moving `TS90mm` / `TSLaser90mm` from `CannonHE_Medium` to `CannonAP_Medium` gave `CannonAP` a
+SECOND populated rung, so the family crossed the "2+ rungs with 2+ weapons" threshold and became
+measurable for the first time. What it measured:
+
+| family | Light | Medium | verdict |
+|---|--:|--:|---|
+| `CannonAP` | **48000** _(n=7)_ | **6000** _(n=2)_ | ⛔ INVERTED — Light hits **8x** harder than Medium |
+
+⚠ The tick tank change did not CREATE this; it EXPOSED it. `CannonAP_Light` was already at 48000
+while the weapons now on `CannonAP_Medium` sit at 6000. One of the two rungs is wrong.
+
+### All nine, so they can be ruled on in one pass
+
+`CannonAP` is the family that crossed the measurability threshold, but it is not the only broken
+ladder. The full report (`python tools/audit/audit_level_ladder.py`, re-measured at `3b320c89`)
+reads:
 
 | family | Light | Medium | Heavy | Super | verdict |
 |---|--:|--:|--:|--:|---|
-| `Bullet` | 4000 _(49)_ | 4000 _(40)_ | — | — | FLAT |
-| `MissileFire` | 24000 _(2)_ | 24000 _(2)_ | — | — | FLAT |
-| `CannonAP` | 48000 _(7)_ | 6000 _(2)_ | — | — | INVERTED — the tick tank one, 8x |
-| `Chemical` | 20000 _(9)_ | 32000 _(9)_ | 30000 _(3)_ | — | INVERTED at the top |
-| `Flak` | 32000 _(2)_ | 8000 _(15)_ | — | — | INVERTED |
-| `Inferno` | 6000 _(5)_ | 10000 _(4)_ | 6000 _(5)_ | — | INVERTED at the top |
-| `MissileAP` | 20000 _(23)_ | 12000 _(26)_ | 12000 _(31)_ | — | INVERTED |
-| `Tesla` | — | — | 12000 _(47)_ | 6500 _(20)_ | INVERTED into Super |
-| `Thermobaric` | — | 24000 _(2)_ | 18000 _(2)_ | — | INVERTED |
+| `CannonAP` | 48000 _(n=7)_ | 6000 _(n=2)_ | — | — | ⛔ INVERTED |
+| `Chemical` | 20000 _(n=9)_ | 32000 _(n=9)_ | 30000 _(n=3)_ | — | ⛔ INVERTED |
+| `Flak` | 32000 _(n=2)_ | 8000 _(n=15)_ | — | — | ⛔ INVERTED |
+| `Inferno` | 6000 _(n=5)_ | 10000 _(n=4)_ | 6000 _(n=5)_ | — | ⛔ INVERTED |
+| `MissileAP` | 20000 _(n=23)_ | 12000 _(n=26)_ | 12000 _(n=31)_ | — | ⛔ INVERTED |
+| `Tesla` | — | — | 12000 _(n=47)_ | 6500 _(n=20)_ | ⛔ INVERTED |
+| `Thermobaric` | — | 24000 _(n=2)_ | 18000 _(n=2)_ | — | ⛔ INVERTED |
+| `Bullet` | 4000 _(n=49)_ | 4000 _(n=40)_ | — | — | ⚠ FLAT |
+| `MissileFire` | 24000 _(n=2)_ | 24000 _(n=2)_ | — | — | ⚠ FLAT |
 
-**What is needed:** a ruling on whether the LIGHT rung or the HEAVY rung is wrong in each case,
-then `extract_stats` → ledger → `apply_balance --confirm`. Some are clearly thin-sample artefacts
-(`CannonAP` Medium is n=2 against Light n=7; `Flak` Light is n=2 against Medium n=15) and some are
-not (`Bullet` is 49 vs 40 weapons and dead flat; `MissileAP` is 23/26/31 and monotonically wrong).
+Rising correctly: `BulletCryo`, `CannonHE`, `Demolition`, `Flame`, `Laser`, `MissileChem`,
+`MissileHE`. Fifteen more families are still too thin to judge (fewer than 2 rungs with 2+
+weapons), so this list can move in either direction as W23/W24 adoption fills the rungs — which
+is an argument for ruling on the SHAPE of the ladder rather than on nine separate pairs of
+numbers.
+
+⚠ **It was ten on 2026-08-23 and the count fell without anyone ruling on anything.** The RA1
+Allies cryo conversion (`a9f31258`) took `Demolition` from FLAT to rising by moving its Heavy
+rung 40000 → 60000, and added a new measurable family (`BulletCryo`, rising). So the audit is
+back to **WARN 9 against ratchet 9** and the suite no longer exits 1 on it. Two things follow:
+the pressure is off, and the count is not a progress metric — a family can leave this list
+because it was fixed, because it fell below the measurability threshold, or because a
+conversion moved its rungs as a side effect. Read the table, not the number.
 
 ⭐ **Process lesson, and the more expensive one:** a ratchet that is only re-measured when someone
 remembers is not a ratchet. `f9b71bffa` was boot-gated and shipped without re-running the suite,
@@ -342,8 +363,9 @@ The blockers previously listed here were measured with a broken hand parser that
    It is now applied to every family, after the tilt (`edd1c4597`). Ratchet **0**.
 5. The broken DAMAGE ladders (`audit_level_ladder.py`) — unaffected by the parser bug, since
    that audit reads `Damage` through the resolver. Still a balance restat needing
-   `apply_balance --confirm`. **Now 10 against a ratchet of 9**, so the audit is FAILING; the
-   measured table and the three distinct shapes are in the RATCHET BREACH section above.
+   `apply_balance --confirm`. **Now 9 against a ratchet of 9 — WARN, not FAIL** (it was 10 and
+   failing on 2026-08-23; `a9f31258` fixed `Demolition`). The measured table and the three
+   distinct shapes are in the RATCHET BREACH section above.
 
 ## ▶ ACTIVE — CAMEO CONTENT INSTALLER
 
