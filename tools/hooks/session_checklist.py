@@ -60,7 +60,10 @@ HARD RULES (several are enforced by hooks — see .claude/settings.json):
     find_empty_warhead.py = 0, boot-gate per batch. Verify with tools/audit/review_resolve_diff.py.
  7. Multi-agent tree: one owner per file-set (boundaries in BALANCE_PROGRAM_PLAN.md §2);
     re-verify others' commits before building on them (check mtimes + git log -3 <file> first).
- 8. Audit reports regen via `bash tools/audit/run_all.sh` ONLY (PowerShell > writes UTF-16).
+ 8. Audit reports regen via `bash tools/audit/run_all.sh` ONLY (PowerShell > writes UTF-16),
+    and ONLY from a COMPLETE tree (engine/ built, clone not shallow) - otherwise a dozen
+    audits scan a smaller corpus, report FEWER findings and still say PASS. run_all diverts
+    to the untracked docs/audit/degraded/ in that case; --force-latest overrides.
  9. Underscore-only naming — no hyphens in ids/files/fluent keys.
 10. Commit trailer = the ACTUAL author, with your REAL model name:
     Co-Authored-By: Claude <your-model> <noreply@anthropic.com>  (a template, not a

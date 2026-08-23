@@ -139,9 +139,43 @@ measurable for the first time. What it measured:
 ⚠ The tick tank change did not CREATE this; it EXPOSED it. `CannonAP_Light` was already at 48000
 while the weapons now on `CannonAP_Medium` sit at 6000. One of the two rungs is wrong.
 
-**Needs a maintainer ruling on which rung is wrong**, then `extract_stats` → ledger →
-`apply_balance --confirm`. It is a balance number, so it cannot be hand-fixed (rule 3), and the
-ratchet must not be raised.
+### All ten, so they can be ruled on in one pass
+
+`CannonAP` is the family that crossed the measurability threshold, but it is not the only broken
+ladder — it is the tenth. The full report (`python tools/audit/audit_level_ladder.py`, measured at
+`519175ae`) reads:
+
+| family | Light | Medium | Heavy | Super | verdict |
+|---|--:|--:|--:|--:|---|
+| `CannonAP` | 48000 _(n=7)_ | 6000 _(n=2)_ | — | — | ⛔ INVERTED |
+| `Chemical` | 20000 _(n=9)_ | 32000 _(n=9)_ | 30000 _(n=3)_ | — | ⛔ INVERTED |
+| `Flak` | 32000 _(n=2)_ | 8000 _(n=15)_ | — | — | ⛔ INVERTED |
+| `Inferno` | 6000 _(n=5)_ | 10000 _(n=4)_ | 6000 _(n=5)_ | — | ⛔ INVERTED |
+| `MissileAP` | 20000 _(n=23)_ | 12000 _(n=26)_ | 11000 _(n=32)_ | — | ⛔ INVERTED |
+| `Tesla` | — | — | 12000 _(n=47)_ | 6500 _(n=20)_ | ⛔ INVERTED |
+| `Thermobaric` | — | 24000 _(n=2)_ | 18000 _(n=2)_ | — | ⛔ INVERTED |
+| `Bullet` | 4000 _(n=51)_ | 4000 _(n=40)_ | — | — | ⚠ FLAT |
+| `Demolition` | 40000 _(n=36)_ | — | 40000 _(n=17)_ | — | ⚠ FLAT |
+| `MissileFire` | 24000 _(n=2)_ | 24000 _(n=2)_ | — | — | ⚠ FLAT |
+
+Rising correctly: `CannonHE`, `Flame`, `Laser`, `MissileChem`, `MissileHE`. Sixteen more families
+are still too thin to judge (fewer than 2 rungs with 2+ weapons), so this list can only grow as
+W23/W24 adoption fills the rungs — which is an argument for ruling on the shape of the ladder
+rather than on ten separate pairs of numbers.
+
+Three shapes are visible, and they may not want the same answer:
+
+* **`MissileAP` (n=81) and `Tesla` (n=67)** are monotonically DESCENDING across well-populated
+  rungs. That is not a stray weapon; that is the whole family built the wrong way round.
+* **`CannonAP`, `Flak`, `Thermobaric`** invert across a rung holding only 2 weapons — one thin
+  rung against a populated one, so the small side is the likelier error.
+* **`Bullet` and `Demolition`** are flat across 91 and 53 weapons: the levels were never
+  differentiated at all, which is a different question from an inversion.
+
+**Needs a maintainer ruling**, then `extract_stats` → ledger → `apply_balance --confirm`. These
+are balance numbers, so they cannot be hand-fixed (rule 3), and the ratchet must not be raised —
+`LADDER_BASELINE` in `tools/audit/audit_level_ladder.py` says LOWER ONLY, and lowering it is how
+this closes.
 
 ⭐ **Process lesson:** a ratchet re-measured only when someone remembers is not a ratchet.
 `f9b71bffa` was boot-gated and shipped without re-running the suite.
@@ -330,9 +364,10 @@ The blockers previously listed here were measured with a broken hand parser that
 4. ✅ CLEARED — `CannonAP` 1.81x and `Cryo` 1.97x were too flat because the 2x band floor lived
    inside `finish_blend()` (blend families only) and ran BEFORE `class_tilt` reshaped the profile.
    It is now applied to every family, after the tilt (`edd1c4597`). Ratchet **0**.
-5. The 9 broken DAMAGE ladders (`audit_level_ladder.py`, ratchet 9) — unaffected by the parser
-   bug, since that audit reads `Damage` through the resolver. Still a balance restat needing
-   `apply_balance --confirm`.
+5. The broken DAMAGE ladders (`audit_level_ladder.py`) — unaffected by the parser bug, since
+   that audit reads `Damage` through the resolver. Still a balance restat needing
+   `apply_balance --confirm`. **Now 10 against a ratchet of 9**, so the audit is FAILING; the
+   measured table and the three distinct shapes are in the RATCHET BREACH section above.
 
 ## ▶ ACTIVE — CAMEO CONTENT INSTALLER
 

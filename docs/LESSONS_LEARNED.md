@@ -75,6 +75,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [YAML lint rules learned (2026-07-24)](#yaml-lint-rules-learned-2026-07-24)
 - [OpenRA Lua `Map` API: there is no `Map.Contains` (2026-07-31)](#openra-lua-map-api-there-is-no-mapcontains-2026-07-31)
 - [Between-cell movement responsiveness (2026-08-11)](#between-cell-movement-responsiveness-2026-08-11)
+- [`docs/audit/latest/` is environment-bound — an incomplete tree reports LESS and still says PASS (2026-08-23)](#docsauditlatest-is-environment-bound--an-incomplete-tree-reports-less-and-still-says-pass-2026-08-23)
 
 ---
 
@@ -746,6 +747,52 @@ A `Warhead@X:` line with **no value** is a boot crash, not a lint warning. `Weap
 
 - `^DefaultInfantry` enables `ResponsiveBetweenCells` for responsive foot infantry.
 - A defined `Mobile.TurnSpeed` remains the documented marker for infantry that deliberately turn like vehicles; those actors inherit `^VehicleTurnRateInfantry`, which only sets `Mobile.ResponsiveBetweenCells: false` so their balance values and movement tuning remain unchanged.
+
+
+## `docs/audit/latest/` is environment-bound — an incomplete tree reports LESS and still says PASS (2026-08-23)
+
+**The failure is not that the audit breaks. It is that the audit succeeds.**
+
+`docs/audit/latest/` is TRACKED evidence, and a dozen audits read things that are not in this
+repository — `engine/` C# sources (a build output, `.gitignore`d, CLAUDE.md rule 7) and full git
+history. Run the suite where those are missing and nothing errors: the scripts scan a smaller
+corpus, find fewer problems, print a smaller number and say **PASS**. Commit that and real
+findings are deleted from the tracked evidence with a clean diff and a green run.
+
+Measured in a cloud container on 2026-08-23, one `git add` away from being committed:
+
+| report | complete tree | incomplete tree | why |
+|---|--:|--:|---|
+| `unique_traits.md` | 125 trait types | **11** | no `engine/**/*.cs` to resolve `.Trait<T>()` |
+| `dead_warhead_fields.md` | 27071 warhead nodes | **7014** | no C# field sets, so most types are "not checked" |
+| `fluent.md` | 5235 messages | **3640** | the engine ships fluent files too |
+| `assets.md` | 8780 WAVs | **4390** | the engine's own mods are not there |
+| `recent_changes.md` | 663 files touched | **31523** | shallow clone: the grafted boundary commit looks like it touched the world |
+
+`git log` showed `latest/` had been ping-ponging between a Windows checkout and a container for
+several commits — each run overwriting the other's numbers, `unique_traits.md` flipping 125 ↔ 11
+in commit after commit — so the committed set was a MIXTURE, some rows true and some degraded,
+with nothing on the page saying which.
+
+**The guard.** `tools/audit/environment.py` names the defects and the audits each one degrades.
+Both runners call it first: an incomplete tree still runs the whole suite (the answers are
+useful) but writes to the untracked `docs/audit/degraded/` and prints why. `--force-latest`
+overrides for a deliberate partial refresh. `docs/factions/MATRIX.md` is diverted the same way.
+
+⭐ **The general shape, worth more than this instance:** a tool that measures a corpus will report
+the corpus it can see, and "fewer findings" and "fixed" produce the identical green. Before
+believing a count fell, check that the DENOMINATOR did not. Every row above is a denominator
+that moved.
+
+⚠ Even on two complete trees the reports are not byte-identical: Windows writes `mods\cameo\…`
+and Linux writes `mods/cameo/…`, and a few audits emit unordered rows. So a cross-platform
+regenerate is never a clean diff, and `latest/` should be refreshed **whole, from one machine**,
+not file by file.
+
+⚠ And the suite writes TRACKED files outside `latest/`: `docs/factions/MATRIX.md`, plus
+`tools/rename/rename_map_*.yaml`, which `gen_rename_maps.py` emits as a side effect of the
+naming report. `git status` after a suite run is therefore *expected* to be dirty in places the
+run never mentions — check what moved before assuming a stray edit.
 
 ## `Inherits` POSITION is semantic, not cosmetic (2026-08-16)
 

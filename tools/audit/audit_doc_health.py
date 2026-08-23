@@ -19,10 +19,19 @@ found by hand on 2026-08-23 and neither had a detector:
      sections. LESSONS_LEARNED's index had drifted twice, most recently listing 15 of 31 —
      including neither of the two crash classes, in the one file whose entire job is
      "read this before you repeat a mistake".
+  D8 a citation that names one law and points at another. Renumbering DESIGN
+     sections moves the ids but not the ~800 §<id> references scattered through the
+     documents and the audit scripts, and a repointed citation is INVISIBLE — it still
+     renders, still looks authoritative, and now sends the reader to a different
+     BINDING law. This happened for real: a renumber left `audit_versus_profile.py`
+     PRINTING `§12.0a MEAN-100` into a generated report after §12.0a had become
+     PLATFORM and MEAN-100 had moved to §12.0h. D6 cannot see it (no id is
+     duplicated) and D3/D4 cannot see it (nothing is a link).
 
 D1, D2 and D6 are BLOCKING: they are corruption or an ambiguous law. D3–D5 are
 reported and also block, because a dead pointer is how a reader ends up in the wrong
-document. Nothing here needs the engine, so it runs anywhere.
+document. D8 blocks for the same reason one level deeper: the pointer resolves, it
+just resolves to the wrong law. Nothing here needs the engine, so it runs anywhere.
 
 Exceptions live in ALLOW_MOJIBAKE / GONE below and are deliberately narrow — several
 documents QUOTE mojibake while explaining the bug, and must not be "fixed".
@@ -70,6 +79,52 @@ ANCHOR = re.compile(r"\]\(#([^)]+)\)")
 HEADING = re.compile(r"^#{1,6} (.+)$", re.M)
 DESIGN_ID = re.compile(r"^#{2,4} (\d+(?:\.\d+)?[a-z]?)\.? ", re.M)
 
+DESIGN_HEADING = re.compile(r"^#{2,4} (\d+(?:\.\d+)?[a-z]?)\.? +(.+)$", re.M)
+
+# D8. A citation is `§<id>` optionally followed by a LABEL — the law's name written out,
+# as in "§12.0h THE MEAN-100 LAW". Only the label shape is checked, never free prose:
+# a sentence that happens to mention another law near a citation is normal writing,
+# while `§<id> NAME` is an assertion that <id> IS that law.
+CITATION = re.compile(r"§(\d+(?:\.\d+)?[a-z]?)\b[.,:]?[ \t]*"
+                      r"((?:(?:the|The|THE)[ \t]+)?[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)*"
+                      r"(?:[ \t]+[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)*)?)")
+
+# Words too common to identify a section on their own.
+D8_STOPWORDS = {
+    "THE", "AND", "NOT", "JUST", "FOR", "ITS", "IS", "ARE", "WAS", "ALL", "ONE", "TWO",
+    "LAW", "RULE", "RULES", "BINDING", "MAINTAINER", "DESIGN", "SECTION", "PHASE",
+    "STEP", "OPTION", "NOTE", "SEE", "PER", "VIA", "WITH", "FROM", "THIS", "THAT",
+    "ADDS", "A", "AN", "OF", "IN", "ON", "TO", "BY", "IT", "AS", "AT", "OR",
+}
+
+
+def design_sections(design: str) -> dict[str, str]:
+    """id -> heading title, for every numbered DESIGN.md section."""
+    return {m.group(1): m.group(2).strip() for m in DESIGN_HEADING.finditer(design)}
+
+
+def distinctive_names(sections: dict[str, str]) -> dict[str, str]:
+    """Word -> the single section id whose heading uses it.
+
+    A word owned by two headings identifies neither, so it is dropped. This is what
+    keeps D8 quiet: it fires only on a word that can mean exactly one section.
+    """
+    owners: dict[str, set[str]] = {}
+    for sid, title in sections.items():
+        for w in re.findall(r"[A-Za-z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)*", title):
+            # A hyphenated heading word claims its PARTS as well as the compound.
+            # Without this, `ARMOR-PLATING` (§12.0e) leaves the bare word `ARMOR`
+            # looking unique to `HEROIC ARMOR` (§12.0b) — and "§12.0e ARMOR layer"
+            # would be reported as naming the wrong law. Claiming both halves makes
+            # the shared word ambiguous, which is exactly what silences it.
+            for u in {w.upper(), *(part.upper() for part in w.split("-"))}:
+                if len(u) < 4 or u in D8_STOPWORDS:
+                    continue
+                owners.setdefault(u, set()).add(sid)
+    return {w: next(iter(ids)) for w, ids in owners.items() if len(ids) == 1}
+
+
+
 
 def tracked(*globs: str) -> list[pathlib.Path]:
     out = subprocess.run(["git", "ls-files", *globs], cwd=ROOT,
@@ -106,6 +161,7 @@ def main() -> int:
     d5: list[str] = []
     d6: list[str] = []
     d7: list[str] = []
+    d8: list[str] = []
 
     for f in docs:
         text = read(f)
@@ -171,6 +227,36 @@ def main() -> int:
         for i in sorted({i for i in ids if ids.count(i) > 1}):
             d6.append(f"`DESIGN.md` §{i} is used {ids.count(i)} times")
 
+    # D8 — a citation that names one law and points at another.
+    #
+    # Only FINE-GRAINED ids are checked (`12.0h`, `11b`, `16.3` …). A bare `§12` is
+    # ambiguous: half the design documents number their own sections, so `§2` in
+    # EMP_INTEGRITY_SYSTEM.md means that document's §2, not DESIGN's. Sub-numbered ids
+    # are also the ones that actually move when someone renumbers — which is the bug.
+    if design:
+        sections = design_sections(design)
+        names = distinctive_names(sections)
+        checkable = {i for i in sections if not i.isdigit()}
+        for f in tracked("*.md", "*.py", "*.yaml", "*.sh", "*.json"):
+            rel = str(f).replace("\\", "/")
+            if rel.startswith("docs/history/") or rel == "tools/audit/audit_doc_health.py":
+                continue
+            text = read(f)
+            if text is None:
+                continue
+            for m in CITATION.finditer(text):
+                sid, label = m.group(1), m.group(2)
+                if sid not in checkable:
+                    continue
+                for word in re.findall(r"[A-Za-z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)*", label):
+                    owner = names.get(word.upper())
+                    if owner and owner != sid:
+                        line = text.count("\n", 0, m.start()) + 1
+                        d8.append(
+                            f"`{rel}`:{line} — cites §{sid} ({sections[sid][:40]}) but "
+                            f"names `{word}`, which is §{owner} ({sections[owner][:40]})")
+                        break
+
     print("# audit_doc_health — is the documentation structurally sound?\n")
     print(f"Documents scanned: **{len(docs)}**\n")
     print("`audit_doc_claims.py` checks whether the NUMBERS are still true. "
@@ -185,6 +271,7 @@ def main() -> int:
         ("D5", "reference to a moved/removed document", d5),
         ("D6", "duplicate section id in DESIGN.md", d6),
         ("D7", "Contents index missing a section", d7),
+        ("D8", "citation names a different section's law", d8),
     ):
         print(f"| {code} | {what} | {len(rows)} |")
 
@@ -197,6 +284,7 @@ def main() -> int:
         ("D5", "Stale document references", d5),
         ("D6", "Duplicate DESIGN section ids", d6),
         ("D7", "Contents index out of date", d7),
+        ("D8", "Citation points at the wrong law", d8),
     ):
         print(f"\n\n## {code} — {what} ({len(rows)})\n")
         if rows:
@@ -210,8 +298,9 @@ def main() -> int:
     if findings:
         print(f"\n**FAIL — {findings} finding(s).** Fix the document; none of these are "
               "cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, "
-              "D3–D5 send a reader to the wrong place, and D7 means a document is "
-              "hiding its own content from the person who was told to read it.")
+              "D3–D5 send a reader to the wrong place, D7 means a document is "
+              "hiding its own content from the person who was told to read it, and "
+              "D8 means a citation resolves — to the wrong law.")
         return 1
     print("\n**PASS** — no structural defects.")
     return 0

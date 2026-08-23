@@ -451,7 +451,7 @@ any yaml moves.
 > because it is what the reviewed batch was called._
 
 39 commits reviewed by resolving all 2325 weapons in an `origin/master` worktree and diffing the
-invariants. **The tree boots, 227 tests pass, `find_empty_warhead` is 0 and all doc claims are
+invariants. **The tree boots, the `tools/tests` suite passes, `find_empty_warhead` is 0 and all doc claims are
 green** — the batch is not broken. But four defect classes came out of it, three now fixed
 (`47a66b6c2`) and one that needs new templates before it can be.
 

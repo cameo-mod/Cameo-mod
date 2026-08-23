@@ -489,7 +489,8 @@ lives in `OpenRA.Mods.Cameo`.
 
 ### 5. ⛔ BLOCKER — the ladder must be fixed first
 
-`audit_level_ladder.py` (ratchet 9, in `run_all.sh`) measures the EFFECTIVE ladder — median damage
+`audit_level_ladder.py` (ratchet 9 — currently BREACHED at 10, see `ROADMAP.md`; in
+`run_all.sh`) measures the EFFECTIVE ladder — median damage
 of the real weapons on each rung:
 
 | verdict | families |
@@ -547,7 +548,7 @@ Every number here was measured on the resolved ruleset via `tools/audit/miniyaml
 read from a summary. Guards added while investigating:
 
 - `tools/audit/audit_tier_weapon_class.py` — TYPES × LEVELS budget, ratchet 218.
-- `tools/audit/audit_level_ladder.py` — effective ladder monotonicity, ratchet 9.
+- `tools/audit/audit_level_ladder.py` — effective ladder monotonicity, ratchet 9 (breached: 10).
 
 ⚠ Three earlier versions of these audits measured the WRONG SURFACE — source instead of resolved,
 override instead of addition, template placeholder instead of effective value — and each produced
