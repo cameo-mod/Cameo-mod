@@ -49,6 +49,12 @@ guerrilla squad and YAML cannot express zero guerrilla units.
 There is no current in-game personality announcement. A condition-triggered
 notification/observer integration is a follow-up.
 
+The five personality managers now use optional time-scaled squad-value
+thresholds, preserving their early-game flat-bonus values. Other squad-manager
+instances retain the flat `SquadValueRandomBonus` path. The ramp and the
+actor-value cache have not been observed in a long match; that is an in-game
+verification follow-up.
+
 ## Counts by bug class
 
 | class | what | count | report |

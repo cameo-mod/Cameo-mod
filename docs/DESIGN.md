@@ -2469,3 +2469,10 @@ announcement requires one. In-game personality confirmation is a follow-up.
 `RushInterval` and `RushAttackScanRadius` are deliberately absent from the
 personality blocks. They are stale keys from an older squad manager and are not
 declared by either the vendored CA implementation or the pinned engine.
+
+Only the attack-force value threshold gains a time ramp. The five personality
+blocks replace their flat `SquadValueRandomBonus` with ramp values that preserve
+the same early-game maximum, while the flat bonus path remains supported for
+other squad-manager instances. The ramp reaches its late-match range over the
+first 20 minutes using the default 25 ticks per second. Long-match ramp
+behavior has not been observed in-game; that verification is a follow-up.

@@ -98,6 +98,12 @@ in YAML: the engine's `guerrillaForce == null` short-circuit creates the first
 guerrilla squad regardless of `JoinGuerrilla`, so its documented behavior is
 at most one harasser.
 
+When a squad manager gains optional time-scaled value thresholds, retain the
+flat `SquadValueRandomBonus` path for existing consumers and reject configuring
+both modes on one instance. Cache `ValuedInfo.Cost` by actor type when summing
+idle units; missing `ValuedInfo` must remain a cached zero rather than changing
+the threshold behavior.
+
 ## Content installer and music filesystem plumbing (2026-08-11)
 
 - Mounting `^SupportDir|Content/cameo/` does not recursively mount nested
