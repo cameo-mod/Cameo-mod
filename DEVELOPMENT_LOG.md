@@ -34,8 +34,16 @@
 - Re-read `HANDOFF.md` thoroughly and updated it: the three tooling defects are **already fixed**, `docs/audit/latest/` has been regenerated from a complete tree, and Step 5's generator half is done. Set B remains **NOT free** (31 `^LightFlameWeapon` matches live); did not touch weapon YAML.
 - Ran the full audit suite (`python tools/audit/run_all.py`; bash unavailable on this Windows shell) from a complete tree to regenerate `docs/audit/latest/*.md`. Suite exit code 1 from pre-existing gating failures; `audit_doc_health` **PASS**.
 - `tools/tests` still 300/300 green; `find_empty_warhead` 0.
+- Committed the inert bell work to `weapon_structure_and_warhead_fold`:
+  - `tools/balance/gen_weapon_template.py` + `tools/balance/preview_bell.py` (OFF by default, `CAMEO_HEAVINESS_BELL=1` to preview).
+  - `OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs` gains `Heaviness` int field (0 = disabled / today's behaviour).
+  - Rebuilt (`dotnet build` 0 errors) and boot-gated: `MenuPostProcessEffect.PostWorldLoaded`, no new `exception-*.log`.
 
-## 2026-08-24 (continued) — full composition-rollout cost analysis
+### Open at end of session
+
+- Wire `Heaviness` into `AreaDamageWarhead`'s `Versus` lookup / `Spread` computation (the C# transform).
+- Only after the C# transform is proven: enable `USE_BELL`, splice the generator, collapse Light/Medium/Heavy templates, set per-weapon `Heaviness`.
+- Set B remains NOT free (31 `^LightFlameWeapon` matches); do not touch weapon YAML.
 
 ## 2026-08-24 (continued) — full composition-rollout cost analysis
 
