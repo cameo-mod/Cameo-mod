@@ -2906,3 +2906,22 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   multi_main_fired_weapons 914 and meters_filling_before_death 143 in doc_claims.yaml and
   affected docs (BALANCE_PROGRAM_PLAN.md, PHYSICAL_STATE_SYSTEM.md, doc_claims.md).
 - Boot-gate passed; no new exceptions.
+
+## 2026-08-24 — W24 A4: rename upgrade gate and weapon pairs per ruling 2
+
+- `^HighExplosiveRocketsUpgradeRA1` -> `^ThermobaricRocketsUpgradeRA1`.
+- Condition `ra1_soviets_upgrade_highexplosiverockets` -> `ra1_soviets_upgrade_thermobaricrockets`
+  across units, templates, aircraft, naval, defenses, upgrades, ai, and fluent keys.
+- Fluent `ra_upgrade_highexplosiverockets` -> `ra_upgrade_thermobaricrockets`; UI strings
+  `High Explosive Rockets` -> `Thermobaric Rockets`.
+- Icon PNG `ra1_soviets_upgrade_highexplosiverockets_icon.png` git-mv'd to
+  `ra1_soviets_upgrade_thermobaricrockets_icon.png`; sequence `Filename` updated.
+- Weapon renames: `NuclearMaverick` -> `Su57Maverick`,
+  `ThermobaricNuclearMaverick` -> `Su57MaverickThermobaric`,
+  `MonsterTank120mmThermobaric` -> `MonsterTank120mmInferno`.
+- Used `safe_rename.py` with `tools/rename/rename_map_a4.yaml`; 90 replacements in 12 files
+  + icon git mv; post-rename validation clean.
+- `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split` 930 vs baseline 931,
+  `extract_stats --check` 0, `audit_doc_claims` 19 green.
+- Boot-gate passed; no new exceptions.
+- Updated `BALANCE_PROGRAM_PLAN.md` A4 status.

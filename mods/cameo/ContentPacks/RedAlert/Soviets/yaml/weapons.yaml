@@ -1825,7 +1825,7 @@ ThermobaricMaverick:
 		ImpactSounds: kaboom1.aud
 		ImpactActors: false
 
-NuclearMaverick:
+Su57Maverick:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_MissileHE_Heavy
@@ -1852,7 +1852,7 @@ NuclearMaverick:
 	Warhead@MissileHE_Heavy:
 		PercentageScale: 5500
 		Damage: 40000
-ThermobaricNuclearMaverick:
+Su57MaverickThermobaric:
 	Inherits@wh: ^Warhead_MissileThermobaric_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
@@ -2610,7 +2610,7 @@ MonsterTank120mm:
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
 		ImpactActors: true
-MonsterTank120mmThermobaric:
+MonsterTank120mmInferno:
 	Inherits@wh: ^Warhead_CannonFire_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy

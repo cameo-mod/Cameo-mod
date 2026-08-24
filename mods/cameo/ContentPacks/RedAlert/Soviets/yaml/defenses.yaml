@@ -245,7 +245,7 @@ ra1_soviets_samsite:
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@shape: ^2x1Shape
 	Inherits@AntiAir: ^PrioritizeAir
-	Inherits@HighExplosiveRocketsUpgradeRA1: ^HighExplosiveRocketsUpgradeRA1
+	Inherits@ThermobaricRocketsUpgradeRA1: ^ThermobaricRocketsUpgradeRA1
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
 	HitShape:
 		Type: Rectangle
@@ -294,11 +294,11 @@ ra1_soviets_samsite:
 		Range: 12790
 	DetectCloaked:
 		Range: 6395
-	FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+	FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 110
-	RangeMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+	RangeMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 110
-	RevealsShroudMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+	RevealsShroudMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 120
 	ActorStatValues:
-		Upgrades: ra1_soviets_upgrade_highexplosiverockets, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_upgrade_thermobaricrockets, ra1_soviets_upgrade_stalinium
