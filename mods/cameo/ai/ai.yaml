@@ -3177,7 +3177,9 @@ Player:
 		SquadSize: 3
 		SquadSizeRandomBonus: 8
 		SquadValue: 2500
-		SquadValueRandomBonus: 7500
+		SquadValueMaxEarlyBonus: 7500
+		SquadValueMinLateBonus: 2500
+		SquadValueMaxLateBonus: 12000
 		MaxIdleUnits: 12
 		DangerScanRadius: 15
 		AttackScanRadius: 20
@@ -3245,7 +3247,9 @@ Player:
 		SquadSize: 8
 		SquadSizeRandomBonus: 20
 		SquadValue: 12000
-		SquadValueRandomBonus: 20000
+		SquadValueMaxEarlyBonus: 20000
+		SquadValueMinLateBonus: 10000
+		SquadValueMaxLateBonus: 32000
 		MaxIdleUnits: 40
 		DangerScanRadius: 20
 		AttackScanRadius: 20
@@ -3313,7 +3317,9 @@ Player:
 		SquadSize: 6
 		SquadSizeRandomBonus: 15
 		SquadValue: 15000
-		SquadValueRandomBonus: 20000
+		SquadValueMaxEarlyBonus: 20000
+		SquadValueMinLateBonus: 8000
+		SquadValueMaxLateBonus: 36000
 		MaxIdleUnits: 30
 		DangerScanRadius: 15
 		AttackScanRadius: 20
@@ -3381,7 +3387,9 @@ Player:
 		SquadSize: 5
 		SquadSizeRandomBonus: 15
 		SquadValue: 6000
-		SquadValueRandomBonus: 15000
+		SquadValueMaxEarlyBonus: 15000
+		SquadValueMinLateBonus: 4000
+		SquadValueMaxLateBonus: 22000
 		MaxIdleUnits: 20
 		DangerScanRadius: 15
 		AttackScanRadius: 20
@@ -3449,7 +3457,9 @@ Player:
 		SquadSize: 12
 		SquadSizeRandomBonus: 25
 		SquadValue: 25000
-		SquadValueRandomBonus: 30000
+		SquadValueMaxEarlyBonus: 30000
+		SquadValueMinLateBonus: 15000
+		SquadValueMaxLateBonus: 45000
 		MaxIdleUnits: 60
 		DangerScanRadius: 15
 		AttackScanRadius: 20
@@ -4748,6 +4758,7 @@ Player:
 		MaxUnitsPerBot: 150
 	UnitBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot
+		UseCompositions: true
 		IdleBaseUnitsMaximum: 50
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000
@@ -6383,3 +6394,33 @@ Player:
 			wc2_orcs_peon: 50
 			wc2_orcs_goblinsappers: 1
 			wc2_orcs_goblinzeppelin: 1
+
+World:
+	UnitCompositionsBotModule:
+		Composition@TDGDIArmorPush:
+			UnitQueues: Vehicle, RAVehicle
+			Prerequisites: td_gdi_weaponsfactory
+			MinTime: 9000
+			MinInterval: 15000
+			MaxDuration: 4500
+			EnabledChance: 50
+			UnitsToBuild:
+				td_gdi_battletank: 45
+				td_gdi_predatortank: 20
+				td_gdi_mammothtank: 15
+				td_gdi_mlrs: 10
+				td_gdi_apc: 5
+				td_gdi_humveemkii: 5
+		Composition@TDNodStealthPush:
+			UnitQueues: Vehicle, RAVehicle
+			Prerequisites: td_nod_templeofnod
+			MinTime: 9000
+			MinInterval: 15000
+			MaxDuration: 4500
+			EnabledChance: 50
+			UnitsToBuild:
+				td_nod_stealthtank: 40
+				td_nod_chemicalstealthtank: 20
+				td_nod_lighttank: 20
+				td_nod_flametank: 10
+				td_nod_specterartillery: 10

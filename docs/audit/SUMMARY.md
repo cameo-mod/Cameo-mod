@@ -50,6 +50,19 @@ guerrilla squad and YAML cannot express zero guerrilla units.
 There is no current in-game personality announcement. A condition-triggered
 notification/observer integration is a follow-up.
 
+The five personality managers now use optional time-scaled squad-value
+thresholds, preserving their early-game flat-bonus values. Other squad-manager
+instances retain the flat `SquadValueRandomBonus` path. The ramp and the
+actor-value cache have not been observed in a long match; that is an in-game
+verification follow-up.
+
+The unit-builder composition consumer is opt-in through `UseCompositions`.
+Without an active composition, each personality's `UnitsToBuild` table remains
+the fallback. The pilot compositions are limited to TD vehicle queues and are
+gated by their respective tech prerequisites; broader composition coverage is
+still a follow-up. Explicit unit requests continue to bypass composition
+shares.
+
 ## Counts by bug class
 
 | class | what | count | report |

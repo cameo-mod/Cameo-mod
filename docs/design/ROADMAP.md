@@ -11,10 +11,17 @@ granular, resumable task queue that the handoff points into._
   (`cdd04e5a1`).
 - [x] Add audit coverage for shared-field duplication and condition parity
   (`cdd04e5a1`).
+- [ ] Observe long-match squad-value ramp behavior in-game; this branch makes no
+  long-match gameplay claim.
 - [ ] Add an observer-facing notification so players can see the selected
   personality in-game.
 - [ ] Consider personality-specific base-builder behavior without duplicating
   the full base-builder configuration.
+
+## AI UNIT COMPOSITIONS (2026-08-24)
+
+- [~] Port the opt-in unit-composition mechanism and two TD pilot compositions;
+  extend the pilot to other universes and factions as a follow-up.
 
 **Rule zero: crashes and player-visible regressions ALWAYS jump the queue.** Ordering inside a
 section: quickest wins first, then by severity. Effort: **S** < 1 h · **M** = one session ·
