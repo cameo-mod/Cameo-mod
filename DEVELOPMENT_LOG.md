@@ -1,5 +1,26 @@
 # Development Log
 
+## 2026-08-24 — old-repo reconciliation, no-file-change merge, full verification
+
+- Investigated `cameo-mod/Cameo-mod/compare/master...Zeruel87:Cameo-mod:master` showing 2 stray commits on the old fork.
+- Re-added `https://github.com/Zeruel87/Cameo-mod.git` as `upstream`, fetched and inspected the two commits:
+  - `15159ad7a` Merge pull request #128 from cameo-mod/op2_zhall
+  - `fd58e3f93` W24: D2K heavy missile HE 3-way split with D2K Shared projectile/effect templates (#133)
+- A direct merge would have produced ~594k lines of conflicts because the repos diverged by 2232 commits; instead did `git merge -s ours upstream/master` on a temp branch, fast-forwarded `weapon_structure_and_warhead_fold` and pushed both it and `master` to `cameo-mod/Cameo-mod`.
+- The GitHub compare page now reports "There isn’t anything to compare" and "cameo-mod:master is up to date with all commits from Zeruel87:master".
+- Verified the merge did not change the working tree or the content: only pre-existing uncommitted change is `tools/balance/gen_weapon_template.py` (heaviness-bell WIP, 124 new lines) and untracked `scratchpad/` files.
+- Ran gating audits: `find_empty_warhead` 0; `find_orphan_old_keys` 0 real; `find_orphan_old_keys_multi` 0; `audit_doc_claims` 19/19 green; `audit_doc_health` PASS; `environment.py` complete; `verify_generator_sync` drift 0; `audit_heaviness_bell` 0 inversions/0 mean drift; `tools/tests` 300/300 OK; `audit_warhead_split` 937 vs baseline 939 (pre-existing W24 debt, not a regression).
+- Re-read `HANDOFF.md`, `design/ROADMAP.md` and related docs; current queue: implement bell in `gen_weapon_template.py` (Step 5 per HANDOFF §3.0), W24 burn-down, independent W7/W9/W10 meters.
+- Did **not** touch the live `gen_weapon_template.py` WIP or any weapon YAML to avoid breaking in-progress work.
+
+### Open todos at end of session
+
+1. Decide whether to force-push `Zeruel87/Cameo-mod:master` to match `cameo-mod/Cameo-mod:master` (destructive).
+2. Remove or re-point local `upstream` remote to prevent accidental pushes to the old repo.
+3. Fix stale `multi_main_fired_weapons` 927 → 925 in `HANDOFF.md` and `BALANCE_PROGRAM_PLAN.md`.
+4. Regenerate `docs/audit/latest/` with `bash tools/audit/run_all.sh` from a complete tree.
+5. Continue W24/Phase B work only after verifying set B availability; `_stageB_made.txt` remains in scratchpad.
+
 ## 2026-08-22 — A2 committed + audit guards documented
 
 - Committed W24 A2 (five nuclear/thermobaric weapons collapsed to one damage family).
