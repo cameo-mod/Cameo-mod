@@ -1,61 +1,13 @@
 # audit_buildable_order — buildable actor order checks
 
 Buildable combat actors checked: **841**
-Prerequisite order violations: **47**
+Prerequisite order violations: **0**
 Build palette order violations: **1012**
 
 
 ## Prerequisite order violations
 
-| actor | queue | prerequisites | problem |
-|---|---|---|---|
-| asianalliance_asdf | Infantry, RAInfantry | ~asianalliance_asianbarracks, ~asianalliance_promotion_asdf, asianalliance_militaryacademy | tech token 'asianalliance_militaryacademy' appears after promotion token |
-| asianalliance_howitzer | Vehicle, RAVehicle | ~asianalliance_asianwarfactory, ~asianalliance_promotion_howitzer, asianalliance_militaryacademy | tech token 'asianalliance_militaryacademy' appears after promotion token |
-| asianalliance_japanesesamurai | Infantry, RAInfantry | ~asianalliance_asianbarracks, ~asianalliance_promotion_samurai, asianalliance_asianradar | tech token 'asianalliance_asianradar' appears after promotion token |
-| asianalliance_plasmatrooper | Infantry, RAInfantry | ~asianalliance_asianbarracks, ~asianalliance_promotion_plasmatrooper, asianalliance_asianbattlelab | tech token 'asianalliance_asianbattlelab' appears after promotion token |
-| asianalliance_type89mlrs | Vehicle, RAVehicle | ~asianalliance_asianwarfactory, ~asianalliance_promotion_mlrs, asianalliance_asianbattlelab | tech token 'asianalliance_asianbattlelab' appears after promotion token |
-| asianalliance_veteranarcher | Infantry, RAInfantry | ~asianalliance_asianbarracks, ~asianalliance_promotion_veteranarchers, asianalliance_asianradar | tech token 'asianalliance_asianradar' appears after promotion token |
-| asianalliance_warturtle | Vehicle, RAVehicle | ~asianalliance_asianwarfactory, ~asianalliance_promotion_warturtle, asianalliance_militaryacademy | tech token 'asianalliance_militaryacademy' appears after promotion token |
-| ixian_empbomber | Aircraft, RAAircraft | ~ixian_promotion_ixianempbomber, ~ixian_launchpad, ixian_ixresearchcenter | tech token '~ixian_launchpad' appears after promotion token; tech token 'ixian_ixresearchcenter' appears after promotion token |
-| ixian_farasha | Aircraft, RAAircraft | ~ixian_promotion_farasha, ~ixian_hightechfactory, ixian_ixresearchcenter | tech token '~ixian_hightechfactory' appears after promotion token; tech token 'ixian_ixresearchcenter' appears after promotion token |
-| ixian_ixprojector | Vehicle, RAVehicle, Starport | ~ixian_vehicle_production, ~ixian_promotion_ixprojector, ixian_ixresearchcenter | tech token 'ixian_ixresearchcenter' appears after promotion token |
-| ixian_ixsiegetank | Vehicle, RAVehicle, Starport | ~ixian_vehicle_production, ~ixian_promotion_ixsiegetank, ixian_outpost | tech token 'ixian_outpost' appears after promotion token |
-| ixian_neocymek | Vehicle, RAVehicle, Starport | ~ixian_vehicle_production, ~ixian_promotion_neocymek, ixian_ixresearchcenter | tech token 'ixian_ixresearchcenter' appears after promotion token |
-| ixian_railgundrone | Aircraft, RAAircraft | ~ixian_promotion_ixrailgundrone, ~ixian_hightechfactory | tech token '~ixian_hightechfactory' appears after promotion token |
-| ixian_resonancedrone | Aircraft, RAAircraft | ~ixian_promotion_ixresonancedrone, ~ixian_hightechfactory, ixian_ixresearchcenter | tech token '~ixian_hightechfactory' appears after promotion token; tech token 'ixian_ixresearchcenter' appears after promotion token |
-| japan_shogunexecutioner | Vehicle, RAVehicle | ~japan_japanesewarfactory, ~japan_promotion_shogunexecutioner, japan_japanesetechcenter | tech token 'japan_japanesetechcenter' appears after promotion token |
-| latinsyndicate_demolitiontruck | Vehicle, RAVehicle | ~latinsyndicate_syndicatefactory, ~latinsyndicate_promotion_demolitiontrucks, latinsyndicate_latinempradar | tech token 'latinsyndicate_latinempradar' appears after promotion token |
-| latinsyndicate_lars | Vehicle, RAVehicle | ~latinsyndicate_syndicatefactory, ~latinsyndicate_promotion_lars, latinsyndicate_defensebureau | tech token 'latinsyndicate_defensebureau' appears after promotion token |
-| latinsyndicate_latinapc | Vehicle, RAVehicle | ~latinsyndicate_syndicatefactory, ~latinsyndicate_promotion_latinapc, latinsyndicate_spycenter | tech token 'latinsyndicate_spycenter' appears after promotion token |
-| latinsyndicate_narco | Infantry, RAInfantry | ~latinsyndicate_combatbarracks, ~latinsyndicate_promotion_narcos, latinsyndicate_latinempradar | tech token 'latinsyndicate_latinempradar' appears after promotion token |
-| latinsyndicate_nuketruck | Vehicle, RAVehicle | ~latinsyndicate_syndicatefactory, ~latinsyndicate_promotion_nuketrucks, latinsyndicate_spycenter | tech token 'latinsyndicate_spycenter' appears after promotion token |
-| latinsyndicate_topolm | Vehicle, RAVehicle | ~latinsyndicate_syndicatefactory, ~latinsyndicate_promotion_topolm, latinsyndicate_defensebureau | tech token 'latinsyndicate_defensebureau' appears after promotion token |
-| missile_tank | Vehicle, RAVehicle, Starport | ~harkonnen_vehicle_production, ~heavy.missile_tank, upgrade_heavy, research_centre | tech token 'research_centre' appears after promotion token |
-| ordos_banshee | Aircraft, RAAircraft | ~ordos_hightechfactory, ~ordos_promotion_banshees, ordos_ixresearchcenter | tech token 'ordos_ixresearchcenter' appears after promotion token |
-| ordos_deviatortank | Vehicle, RAVehicle, Starport | ~ordos_heavy_vehicle_production, ~ordos_promotion_deviatortank, ordos_palace | tech token 'ordos_palace' appears after promotion token |
-| ordos_lasertank | Vehicle, RAVehicle, Starport | ~ordos_heavy_vehicle_production, ~ordos_promotion_lasertank, ordos_ixresearchcenter | tech token 'ordos_ixresearchcenter' appears after promotion token |
-| ordos_wraith | Aircraft, RAAircraft | ~ordos_hightechfactory, ~ordos_promotion_wraith, ordos_palace | tech token 'ordos_palace' appears after promotion token |
-| ptnk.asian | Vehicle, RAVehicle | ~asianalliance_asianwarfactory, ~asianalliance_promotion_plasmatank, asianalliance_asianbattlelab | tech token 'asianalliance_asianbattlelab' appears after promotion token |
-| ra1_allies_alliedtankdestroyer | Vehicle, RAVehicle | ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_tankdestroyer, ra1_allies_alliedradardome | tech token 'ra1_allies_alliedradardome' appears after promotion token |
-| ra1_soviets_cyberdog | Infantry, RAInfantry | ~ra1_soviets_promotion_cyberdog, ~ra1_soviets_barracks | tech token '~ra1_soviets_barracks' appears after promotion token |
-| ra2_allies_heavymiragetank | Vehicle, RAVehicle | ~ra2_allies_alliedwarfactory, ~ra2_allies_upgrade_heavymiragetank, ra2_allies_alliedbattlelab | tech token 'ra2_allies_alliedbattlelab' appears after promotion token |
-| steelconsortium_dagger | Vehicle, RAVehicle | ~steelconsortium_consortiumwarfactory, ~steelconsortium_promotion_daggerartillery, steelconsortium_consortiumbattlelab | tech token 'steelconsortium_consortiumbattlelab' appears after promotion token |
-| steelconsortium_defenderbot | Vehicle, RAVehicle | ~steelconsortium_consortiumwarfactory, ~steelconsortium_promotion_defenderbot, steelconsortium_consortiumradar | tech token 'steelconsortium_consortiumradar' appears after promotion token |
-| steelconsortium_katytank | Vehicle, RAVehicle | ~steelconsortium_consortiumwarfactory, ~steelconsortium_promotion_katytank, steelconsortium_consortiumbattlelab | tech token 'steelconsortium_consortiumbattlelab' appears after promotion token |
-| steelconsortium_stalker | Vehicle, RAVehicle | ~steelconsortium_consortiumwarfactory, ~steelconsortium_promotion_stalker, steelconsortium_consortiumbattlelab | tech token 'steelconsortium_consortiumbattlelab' appears after promotion token |
-| steelconsortium_whiterabbit | Vehicle, RAVehicle | ~steelconsortium_consortiumwarfactory, ~steelconsortium_promotion_whiterabbit, steelconsortium_consortiumbattlelab | tech token 'steelconsortium_consortiumbattlelab' appears after promotion token |
-| tkm_abrams | Vehicle, RAVehicle | ~tkm_warfactory, ~tkm_upgrade_natoarsenalupgrade, tkm_observationvan | tech token 'tkm_observationvan' appears after promotion token |
-| tkm_dronepodtruck | Vehicle, RAVehicle | ~tkm_warfactory, ~tkm_promotion_dronepodtruck, tkm_techcenter | tech token 'tkm_techcenter' appears after promotion token |
-| tkm_flakbus | Vehicle, RAVehicle | ~tkm_warfactory, ~tkm_promotion_flakbus, tkm_techcenter | tech token 'tkm_techcenter' appears after promotion token |
-| tkm_juggernaut | Infantry, RAInfantry | ~tkm_barracks, tkm_promotion_juggernaut, tkm_observationvan | tech token 'tkm_observationvan' appears after promotion token |
-| tkm_quadtruck | Vehicle, RAVehicle | ~tkm_warfactory, ~tkm_upgrade_berezkaarsenalupgrade, tkm_observationvan | tech token 'tkm_observationvan' appears after promotion token |
-| tkm_sniper | Infantry, RAInfantry | ~tkm_barracks, ~tkm_upgrade_berezkaarsenalupgrade, tkm_observationvan | tech token 'tkm_observationvan' appears after promotion token |
-| tkm_spetsnaz | Infantry, RAInfantry | ~tkm_barracks, ~tkm_upgrade_titanarsenalupgrade, tkm_observationvan | tech token 'tkm_observationvan' appears after promotion token |
-| tkm_stryker | Vehicle, RAVehicle | ~tkm_warfactory, ~tkm_upgrade_natoarsenalupgrade, tkm_observationvan | tech token 'tkm_observationvan' appears after promotion token |
-| tkm_t72m | Vehicle, RAVehicle | ~tkm_warfactory, ~tkm_upgrade_titanarsenalupgrade, tkm_observationvan | tech token 'tkm_observationvan' appears after promotion token |
-| tkm_thermonaut | Infantry, RAInfantry | ~tkm_barracks, ~tkm_upgrade_natoarsenalupgrade, tkm_observationvan | tech token 'tkm_observationvan' appears after promotion token |
-| tkm_zaza | Vehicle, RAVehicle | ~tkm_warfactory, ~tkm_upgrade_titanarsenalupgrade, tkm_techcenter | tech token 'tkm_techcenter' appears after promotion token |
-| tkmvan | Infantry, RAInfantry | ~tkm_barracks, tkm_observationvan, ~!tkm_von, ~disabled | tech token '~disabled' appears after promotion token |
+_none found_
 
 
 ## Build palette order violations

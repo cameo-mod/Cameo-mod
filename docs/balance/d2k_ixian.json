@@ -455,9 +455,9 @@
     },
     "name": "Ixian EMP Bomber",
     "prerequisites": [
-     "~ixian_promotion_ixianempbomber",
      "~ixian_launchpad",
-     "ixian_ixresearchcenter"
+     "ixian_ixresearchcenter",
+     "~ixian_promotion_ixianempbomber"
     ],
     "queue": [
      "Aircraft",
@@ -704,9 +704,9 @@
     },
     "name": "Farasha",
     "prerequisites": [
-     "~ixian_promotion_farasha",
      "~ixian_hightechfactory",
-     "ixian_ixresearchcenter"
+     "ixian_ixresearchcenter",
+     "~ixian_promotion_farasha"
     ],
     "queue": [
      "Aircraft",
@@ -848,8 +848,8 @@
     },
     "name": "Ixian Railgun Drone",
     "prerequisites": [
-     "~ixian_promotion_ixrailgundrone",
-     "~ixian_hightechfactory"
+     "~ixian_hightechfactory",
+     "~ixian_promotion_ixrailgundrone"
     ],
     "queue": [
      "Aircraft",
@@ -949,9 +949,9 @@
     },
     "name": "Ixian Resonance Drone",
     "prerequisites": [
-     "~ixian_promotion_ixresonancedrone",
      "~ixian_hightechfactory",
-     "ixian_ixresearchcenter"
+     "ixian_ixresearchcenter",
+     "~ixian_promotion_ixresonancedrone"
     ],
     "queue": [
      "Aircraft",
@@ -5163,8 +5163,8 @@
     "name": "Ix Projector",
     "prerequisites": [
      "~ixian_vehicle_production",
-     "~ixian_promotion_ixprojector",
-     "ixian_ixresearchcenter"
+     "ixian_ixresearchcenter",
+     "~ixian_promotion_ixprojector"
     ],
     "queue": [
      "Vehicle",
@@ -5328,8 +5328,8 @@
     "name": "Ix Siege Tank",
     "prerequisites": [
      "~ixian_vehicle_production",
-     "~ixian_promotion_ixsiegetank",
-     "ixian_outpost"
+     "ixian_outpost",
+     "~ixian_promotion_ixsiegetank"
     ],
     "queue": [
      "Vehicle",
@@ -5903,8 +5903,8 @@
     "name": "Neo Cymek",
     "prerequisites": [
      "~ixian_vehicle_production",
-     "~ixian_promotion_neocymek",
-     "ixian_ixresearchcenter"
+     "ixian_ixresearchcenter",
+     "~ixian_promotion_neocymek"
     ],
     "queue": [
      "Vehicle",

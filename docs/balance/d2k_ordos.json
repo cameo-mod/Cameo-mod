@@ -614,8 +614,8 @@
     "name": "Banshee",
     "prerequisites": [
      "~ordos_hightechfactory",
-     "~ordos_promotion_banshees",
-     "ordos_ixresearchcenter"
+     "ordos_ixresearchcenter",
+     "~ordos_promotion_banshees"
     ],
     "queue": [
      "Aircraft",
@@ -1084,8 +1084,8 @@
     "name": "Wraith",
     "prerequisites": [
      "~ordos_hightechfactory",
-     "~ordos_promotion_wraith",
-     "ordos_palace"
+     "ordos_palace",
+     "~ordos_promotion_wraith"
     ],
     "queue": [
      "Aircraft",
@@ -5001,8 +5001,8 @@
     "name": "Deviator Tank",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
-     "~ordos_promotion_deviatortank",
-     "ordos_palace"
+     "ordos_palace",
+     "~ordos_promotion_deviatortank"
     ],
     "queue": [
      "Vehicle",
@@ -5785,8 +5785,8 @@
     "name": "Laser Tank",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
-     "~ordos_promotion_lasertank",
-     "ordos_ixresearchcenter"
+     "ordos_ixresearchcenter",
+     "~ordos_promotion_lasertank"
     ],
     "queue": [
      "Vehicle",

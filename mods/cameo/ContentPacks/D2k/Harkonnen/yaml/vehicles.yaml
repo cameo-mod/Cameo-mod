@@ -83,7 +83,7 @@ missile_tank:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle, Starport
-		Prerequisites: ~harkonnen_vehicle_production, ~heavy.missile_tank, upgrade_heavy, research_centre
+		Prerequisites: ~harkonnen_vehicle_production, ~heavy.missile_tank, research_centre, upgrade_heavy
 		BuildPaletteOrder: 60
 		Description: Rocket Artillery\n  Strong vs Vehicles, Buildings, Aircraft\n  Weak vs Infantry\nDetector
 		IconPalette: d2kunit

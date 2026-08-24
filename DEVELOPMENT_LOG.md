@@ -1,5 +1,36 @@
 # Development Log
 
+## 2026-08-24 — Prerequisite order cleanup (47 actors)
+
+- Reordered `Prerequisites` tokens in 47 buildable actors to satisfy the buildable-order audit
+  (production-building tokens first, then tech/building tokens, then promotion/upgrade/doctrine tokens).
+- Used `cameo_model.Model()` and the same classification logic as `tools/audit/audit_buildable_order.py`
+  to resolve each actor, confirm the `Buildable` block lives in the actor's own file, and compute the
+  correct token order while preserving in-group ordering.
+- Changed 16 ContentPack rules files (no weapon files touched):
+  - `mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml`
+  - `mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml`
+  - `mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml`
+  - `mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml`
+  - `mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml`
+  - `mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml`
+  - `mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml`
+  - `mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml`
+  - `mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml`
+  - `mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml`
+  - `mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml`
+  - `mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml`
+  - `mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml`
+  - `mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml`
+  - `mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml`
+  - `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml`
+- Verification: `audit_buildable_order.py` reports `Prerequisite order violations: **0**`;
+  `Build palette order violations` remain **1012** and were intentionally left out of scope.
+- Ran `audit_duplicate_keys.py` (0 new D1/D2 from this change), `find_empty_warhead.py` (0),
+  and `extract_stats.py` (re-extracted; `--check` 0 drifted).
+- Updated `docs/audit/latest/buildable_order.md` and `docs/audit/SUMMARY.md` counts.
+- Boot-gate: `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`, no new `exception-*.log`.
+
 ## 2026-08-24 — D1 non-weapon duplicate Inherits fix
 
 - Fixed 80 D1 duplicate `Inherits` / `Inherits@<suffix>` entries across 40 non-weapon YAML files

@@ -86,7 +86,7 @@ shares.
 | G | garrison weapons (§11) | **0 G1** · 0 G2 · 0 G3 | `garrison_weapons.md` |
 | F | house stat formulas | 615 violations across 1910 roster actors | `stat_formulas.md` |
 | E | elite / rank wiring | 197 missing elite armaments · 21 ungated ELITE blocks · 52 decoration issues | `missing_elite.md`, `elite_gating.md`, `rank_decoration.md` |
-| Q | build order | prerequisite-order violations across 841 buildables | `buildable_order.md` |
+| Q | build order | **0** prerequisite-order · 1012 build-palette-order violations across 841 buildables | `buildable_order.md` |
 | D | duplicate keys | **6 D1 dropped inherits** · 439 D2 merged duplicates | `duplicate_keys.md` |
 
 ## Green — and must stay green
