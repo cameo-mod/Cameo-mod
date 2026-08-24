@@ -2934,3 +2934,12 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   `extract_stats --check` 0, `audit_doc_claims` 19 green.
 - Boot-gate passed; no new exceptions.
 - Updated `BALANCE_PROGRAM_PLAN.md` A4 status.
+
+## 2026-08-24 — Fix 2 missing sequence images (B6)
+
+- `ts_gdi_strike_orca` and `ts_gdi_strike_orca_husk` in
+  `mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml` used `Image: tsgdi_strike_orca`
+  (no underscore), which matched no sequence definition. Fixed to `Image: ts_gdi_strike_orca`
+  to use the existing sequence.
+- `audit_sequences` now reports S1 missing images: **0** (was 2); S3 unreferenced: 594.
+- Boot-gate passed; no new exceptions.

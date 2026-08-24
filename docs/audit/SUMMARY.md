@@ -74,7 +74,7 @@ shares.
 | B3 | upgrade direction | 594 items · 103 inverted · **0** dead · 19 dead tokens · 568 without an intent entry | `upgrades.md` |
 | B4 | upgrade coverage | 23 tagged upgrades · 21 uncovered unit slots | `upgrade_coverage.md` |
 | B5 | AI wiring | 1801 refs · **0** defined nowhere · **0** unloaded · **0** unwired pool factions | `ai.md` |
-| B6 | art/sequence refs | 2 missing images · **0** missing sequences · 595 unreferenced images | `sequences.md` |
+| B6 | art/sequence refs | **0** missing images · **0** missing sequences · 594 unreferenced images | `sequences.md` |
 | B7 | metadata rot | 32 duplicate-tooltip groups · **0** missing tooltip names | `metadata.md` |
 | B9 | numeric drift | 176 robust outliers · **0** bounds over the 5×5 max | `outliers.md` |
 | B10 | dead content | 374 orphan weapons · **0** dangling refs · 15 dead conditions | `orphans.md` |
@@ -138,7 +138,7 @@ so they cannot rot in prose again.
 3. **B2b duplicate inherit paths / D1 dropped inherits** — the class that produces
    `Parent type X was already inherited` boot crashes and silently-dropped templates. Only the
    boot and `audit_duplicate_inherits` can see it.
-4. **G1 garrison weapons (6)** and **B6 missing images (2)** — small, bounded, player-visible.
+4. **G1 garrison weapons (6)** and **B6 missing images (0)** — small, bounded, player-visible.
 5. **B1 cross-faction leaks (435 L1)** — the count grew because the audit's faction coverage
    grew, not only because the tree got worse. Triage before treating it as 435 bugs.
 6. **B3/B4 upgrade direction and coverage**, plus transcribing the remaining 568
