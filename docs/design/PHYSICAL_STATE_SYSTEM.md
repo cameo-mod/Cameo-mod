@@ -35,12 +35,14 @@ was always the same 20000; only the divisor differed, which makes it an artifact
 **Fixed:** `Corrosion MinValue: 0 → -20000`. Both meters now:
 
 ```
-damage-scaled   ratio = MaxValue × 100 / (Scale × range)   =  50 / Scale
+damage-scaled   ratio = MaxValue × 100 / (Scale × range × fed_share)
+                = 50 / Scale when fed_share = 1
 discrete apply  ratio = MaxValue × damage / (Amount × range)
 ```
 
-⭐ In the damage-scaled form the target's **MaxHP and the weapon's damage BOTH cancel** — the race
-is a property of the constant alone, which is why one constant moves every weapon at once.
+⭐ In the damage-scaled form the target's **MaxHP and the absolute weapon-damage magnitude cancel**.
+The weapon's damage mix does not: when only one component feeds the meter, its share of the total
+offensive damage remains in the equation.
 ℹ Negative corrosion is unreachable (nothing feeds it, `RelaxedValue: 0`), and the bar is
 unaffected: `PhysicalStateBar` with `ShowAbsoluteValues: false` measures deviation from relaxed.
 
@@ -64,29 +66,33 @@ difference in the opening gate between two axes of the same system.** A corrosio
 
 Full strength is now **`METER_FULL = 100`** — ONE knob in `gen_weapon_template.py`, with every
 family and blend expressed as a fraction of it (`_m(0.75)`, `_m(0.35)`, …) instead of 13
-hand-divided numbers. At 100 the race is **ratio 0.500 on both meters**: full effect with half the
-target's life still ahead of it, comfortably inside the 0.75 bar.
+hand-divided numbers. For a fully fed binding, 100 gives **ratio 0.500 on both meters**: full
+effect with half the target's life still ahead of it, comfortably inside the 0.75 bar.
 
 | mechanism | bindings | reach full effect before 25% HP |
 |---|--:|--:|
-| damage-scaled (heat + corrosion) | 527 | **111** |
-| discrete apply (cryo) | 22 | 7 |
-| **total** | **549** | **118 (21.5%)** |
+| damage-scaled (heat + corrosion) | 541 | **132** |
+| discrete apply (cryo) | 19 | 5 |
+| **total** | **560** | **137 (24.5%)** |
 
-⛔ **`meters_filling_before_death` = 118 of 549 — NOT the 534 (97.3%) this section claimed until
-2026-08-19.** The correction is one term, and it is W24's term. Everything above assumes the
-damage that FILLS the meter is the damage that KILLS the target. It is not: a damage-scaled
-binding fills from the ONE warhead carrying `PhysicalStateName`, while the target dies to every
-main warhead the weapon fires.
+⛔ **`meters_filling_before_death` is currently 137 of 560.** The 2026-08-19 discovery snapshot
+was 118 of 549, correcting the earlier 534-of-549 claim. The correction is one term, and it is
+the one-damage-warhead migration's term: a damage-scaled binding fills from the warhead carrying
+`PhysicalStateName`, while the target dies to every offensive main warhead the weapon fires.
 
-    ratio = 50 / Scale / fed_share            fed_share = fed damage / total main damage
+    ratio = 50 / Scale / fed_share
+    fed_share = fed offensive damage / total ordinary offensive damage
 
-Only **41 of 427** damage-scaled metered weapons have `fed_share == 1`. The median is **0.398**,
-so the typical metered weapon fills ~2.5× slower than modelled and misses the 0.75 bar outright.
-The worst are 12-main EMP weapons at **4%** (`eden_EMP`, `edenTiger_EMP`, `plymouth_EMP`, …).
+⚠ **The current detector has a known concrete-damage defect.** Across 446 damage-scaled metered
+fired weapons with positive measured damage, it reports **66 fully fed / 380 underfed**, with a
+median `fed_share` of **0.4913**. It incorrectly includes `DamagesConcrete` nodes in total damage.
+Filtering to ordinary offensive damage gives the intended result: **115 fully fed / 331
+underfed**, median **0.5**. Keep the registered ratchet at 380 until the detector and all affected
+derived ledgers are corrected together in a separately reviewed tooling change.
 
-⚠ **How this was found, and why nothing here found it.** The maintainer playtested a Chemical
-Stealth Tank against a harvester and the corrosion bar never filled. The weapon fires Shrapnel
+⚠ **Historical discovery example — how this was found, and why nothing here found it.** The
+maintainer playtested a Chemical Stealth Tank against a harvester and the corrosion bar never
+filled. The weapon fires Shrapnel
 5500 + Missile 9000 + Chemical 9000 vs Heavy: it kills on **27175**/shot and fills on **10350**
 (38%). Every guard in this tree passed — `doc_claims` counted bindings, the unit tests pinned the
 arithmetic, the boot gate proved it loads. None of them asked whether the two damage figures were
@@ -96,7 +102,8 @@ parts relate*.
 ⛔ **This is why `BALANCE_PROGRAM_PLAN` §0a puts weapon STRUCTURE before pricing** — restated by
 the maintainer 2026-08-19: *"that's exactly why I said you should finish the 3 way weapon split
 first!"* Pricing a weapon whose structure is wrong measures the wrong object. The burn-down is
-pinned as `w24_multi_main_fed` (380, ratchet-down-only).
+pinned as `w24_multi_main_fed` (380 under the current detector, 331 under the intended
+offensive-only semantics; ratchet-down-only after the detector migration).
 
 ⚠ **RELAXATION is still excluded** and moves this number down further: `RelaxationDelay 25` +
 `RelaxationLinear 5` + `RelaxationScaled 50` bleeds ~642 meter/shot at `ReloadDelay 60` (23% of

@@ -2198,7 +2198,7 @@ elite weapons — this must never happen again. The audit script
 1. **E1 — Missing elite weapon**: every actor using
    `^GainsExperienceRA2` with at least one `Armament@PRIMARY` (or
    `Armament@PRIMARY`-equivalent without `RequiresCondition: rank-elite`)
-   must also have an `Armament@ELITE` block. 217 actors currently fail
+   must also have an `Armament@ELITE` block. 197 actors currently fail
    this check.
 2. **E2 — Missing rank-elite condition**: every `Armament@ELITE` block
    must have `RequiresCondition: rank-elite` (or a condition that

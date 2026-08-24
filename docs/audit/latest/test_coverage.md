@@ -2,9 +2,9 @@
 
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
-| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (3 file(s)) | 29 | >= 24 |
-| T2 | `def test_*` in tools/tests (21 file(s)) | 277 | >= 177 |
-| T3 | modules with no test mentioning them | 269 | <= 224 |
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (4 file(s)) | 37 | >= 24 |
+| T2 | `def test_*` in tools/tests (23 file(s)) | 301 | >= 177 |
+| T3 | modules with no test mentioning them | 268 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (269)
+## T3 — untested modules (268)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -202,7 +202,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_orphans.py | audit_orphans |
 | python | tools/audit/audit_outliers.py | audit_outliers |
 | python | tools/audit/audit_packs.py | audit_packs |
-| python | tools/audit/audit_physical_state_warheads.py | audit_physical_state_warheads |
 | python | tools/audit/audit_plating_exclusivity.py | audit_plating_exclusivity |
 | python | tools/audit/audit_power_budget.py | audit_power_budget |
 | python | tools/audit/audit_promotion_gating.py | audit_promotion_gating |
@@ -292,5 +291,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 269 untested > baseline 224
+- T3: 268 untested > baseline 224
 

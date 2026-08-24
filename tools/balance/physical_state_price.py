@@ -126,10 +126,15 @@ def fill_ratio(kind: str, magnitude: float, damage: float, geom: dict,
 
         ratio = MaxValue x 100 / (Scale x range) x (total / fed) = 50/Scale / fed_share
 
-    MaxHP still cancels; weapon damage NO LONGER DOES. The old form silently assumed
-    fed == total, i.e. ONE damage warhead — true for 41 of 427 damage-scaled weapons. The
-    maintainer found it by playtest: a Chemical Stealth Tank kills a harvester on Shrapnel +
-    Missile + Chemical but fills the bar on Chemical alone, so the bar never finishes.
+    MaxHP still cancels; the absolute weapon-damage magnitude cancels, but its damage mix does
+    not. Across 446 damage-scaled metered fired weapons with positive measured damage, the
+    current detector reports 66 fully fed and 380 underfed (median fed_share 0.4913). This
+    includes a known detector defect: damage_split counts DamagesConcrete nodes as ordinary
+    damage. The intended offensive-only result is 115 fully fed and 331 underfed (median 0.5).
+    Keep the current 380 ratchet until that detector and its affected derived ledgers migrate
+    together. The maintainer found the missing term by playtest: a Chemical Stealth Tank kills
+    a harvester on Shrapnel + Missile + Chemical but fills the bar on Chemical alone, so the bar
+    never finishes.
     `apply` is exempt: a flat `Amount` lands per HIT, whatever the damage split is.
     """
     if magnitude <= 0 or geom["range"] <= 0:

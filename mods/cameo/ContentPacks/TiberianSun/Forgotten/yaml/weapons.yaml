@@ -9,8 +9,7 @@ TS70mm:
 	Warhead@CannonHE_Medium:
 		Damage: 4000
 TS70mmChem:
-	Inherits@wh: ^Warhead_CannonHE_Medium
-	Inherits@wh2: ^Warhead_Chemical_Light
+	Inherits@wh: ^Warhead_CannonChem_Light
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits@fx2: ^TSCannonEffect
@@ -19,14 +18,8 @@ TS70mmChem:
 	Report: flamer2.aud
 	Projectile: Bullet
 		Speed: 3500
-	Warhead@CannonHE_Medium:
-		Damage: 4000
-	Warhead@Chemical_Light:
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@CannonChem_Light:
+		Damage: 6000
 	Warhead@Effect: CreateEffect
 		Explosions: chemball
 		ImpactSounds: firebl3.aud
@@ -177,8 +170,7 @@ TSScoopDual:
 	Warhead@CannonHE_Medium:
 		Damage: 20000
 TSScoopDualChem:
-	Inherits@wh: ^Warhead_CannonHE_Medium
-	Inherits@wh2: ^Warhead_Chemical_Medium
+	Inherits@wh: ^Warhead_CannonChem_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits@fx2: ^TSCannonEffect
@@ -189,14 +181,8 @@ TSScoopDualChem:
 	Report: flamer2.aud
 	Projectile: Bullet
 		Speed: 3500
-	Warhead@CannonHE_Medium:
-		Damage: 20000
-	Warhead@Chemical_Medium:
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 10000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@CannonChem_Medium:
+		Damage: 30000
 	Warhead@Effect: CreateEffect
 		Explosions: med_tibnapalm
 		ImpactSounds: xplobig6.aud

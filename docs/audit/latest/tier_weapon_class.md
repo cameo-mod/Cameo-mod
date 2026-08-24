@@ -1,16 +1,16 @@
-# audit_tier_weapon_class — 218 of 1204 classifiable weapons break the TYPES x LEVELS budget
+# audit_tier_weapon_class — 217 of 1204 classifiable weapons break the TYPES x LEVELS budget
 
 LEGAL shapes:
-    688  1 type, 1 level - squarely in tier
-    108  2 types, 2 adjacent levels - hybrid AND between-tier (budget 4)
+    691  1 type, 1 level - squarely in tier
+    107  2 types, 2 adjacent levels - hybrid AND between-tier (budget 4)
     100  1 type, 2 ADJACENT levels - between-tier mix
-     90  2 types, 1 level - lore hybrid
+     89  2 types, 1 level - lore hybrid
 
     927  weapons skipped — at least one LEGACY-named main warhead (no Family_Level), so the budget cannot be judged until they are 3-way split
 
 VIOLATIONS by shape:
     123  3 LEVELS
-     47  3 TYPES
+     46  3 TYPES
      43  NON-ADJACENT levels
       5  4 TYPES
 
@@ -57,7 +57,7 @@ VIOLATIONS by shape:
 | D2K_APC_Rocket_AA | 3 LEVELS (Heavy+Light+Medium) - max is 2 | MissileAP_Heavy, MissileAP_Light, MissileAP_Medium |
 | D2K_Rocket_Trooper | 3 LEVELS (Heavy+Light+Medium) - max is 2 | MissileAP_Heavy, MissileAP_Light, MissileAP_Medium |
 
-_(178 more)_
+_(177 more)_
 
-WARN 218 budget violations (ratchet 218)
+WARN 217 budget violations (ratchet 217)
 Lower `TIER_BASELINE` as weapons are brought onto the law; never raise it.

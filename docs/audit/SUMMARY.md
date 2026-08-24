@@ -89,10 +89,10 @@ its §0a.
 
 | id | debt | measured |
 |---|---|--:|
-| W24 | fired weapons carrying more than one damage main | **927** |
-| W23 | fired weapons reaching a `^Warhead_*` family | **1231** |
+| W24 | fired weapons carrying more than one damage main | **922** |
+| W23 | fired weapons reaching a `^Warhead_*` family | **1245** |
 | W23 | direct inheritors of the legacy weapon templates | **1162** |
-| W26 | live `DamageMultiplier` declarations | **353** |
+| W26 | live `DamageMultiplier` declarations | **354** |
 | W11 | class anchors the maintainer has signed off | **0** — so no price is final |
 
 All five are pinned in [`doc_claims.yaml`](doc_claims.yaml) and re-measured on every suite run,

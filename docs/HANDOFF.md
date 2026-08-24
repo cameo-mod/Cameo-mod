@@ -69,7 +69,7 @@ becomes a self-contained ContentPack. Runbook: [`MIGRATION.md`](MIGRATION.md).
 | crash-class content (B8) | **0** |
 | empty warhead types (boot NRE class) | **0** of 2765 weapons |
 | dangling weapon refs / dangling inherit targets | **0** / **0** |
-| `tools/tests` | **286 tests, all green** |
+| `tools/tests` | **301 tests, all green** |
 | cross-document consistency audit | 73 passed, 0 failed |
 | balance-ledger drift | **0** — master re-extracted in `31e649b8` |
 | pinned doc claims | **19 of 19 match** |
@@ -80,7 +80,7 @@ becomes a self-contained ContentPack. Runbook: [`MIGRATION.md`](MIGRATION.md).
 | `environment.py` | ✅ reports a complete tree — the CA path was fixed 2026-08-23 |
 | **suite exit code** | **1**, and legitimately so — 8 gating audits report real content defects (§3.3's backlog). The 5 SCHEDULED scans that also reddened it are now ADVISORY. See §3.0c |
 | physical-state warheads | ✅ **PASS** — the audit demanded percentage TWINS the AreaDamage fold folded away; six false failures, fixed in the audit not the yaml |
-| `audit_test_coverage` | 269 untested vs baseline 224 — **advisory**, and recorded debt. `T3_BASELINE` deliberately NOT raised |
+| `audit_test_coverage` | 268 untested vs baseline 224 — **advisory**, and recorded debt. `T3_BASELINE` deliberately NOT raised |
 
 ⚠ The counts above were re-measured at `519175ae`; the per-class counts in
 [`audit/SUMMARY.md`](audit/SUMMARY.md) come from the last full suite run and carry the
@@ -93,7 +93,7 @@ are still scheduled to change across most of the roster. Pricing now means prici
 are about to be replaced.
 
 ```
-W24  one damage warhead per weapon          927 fired weapons still carry 2+
+W24  one damage warhead per weapon          922 fired weapons still carry 2+
  └─> W23  retrofit the legacy templates      1162 direct inheritors left; 1245 fired
  │        (its old "33-collision" blocker    weapons already reach a ^Warhead_* family
  │         is DISSOLVED — W24 removes it)
@@ -163,7 +163,7 @@ Rules 1–2 are enforced by hooks in `.claude/settings.json`.
 ### The gate before every commit
 
 ```sh
-python -m unittest discover -s tools/tests -t tools/tests   # all green (227 as of 2026-08-23)
+python -m unittest discover -s tools/tests -t tools/tests   # all green (301 as of 2026-08-24)
 python tools/audit/find_empty_warhead.py                    # 0
 python tools/balance/verify_generator_sync.py               # ⛔ drift = 10 today; only
                                                             # ^Warhead_Sniper_Light is accepted
@@ -216,14 +216,16 @@ collides across them (four armors on 0.0, four on 2.0). A global scale means ran
 ladders, which §12.0d says the tilt is designed to change. Stated in full as an OPEN block in
 DESIGN §12.0i. **Do not change the axis before it is ruled.**
 
-**b. Three tooling defects are LIVE on master. Fixes were reported in flight on 2026-08-23 from a
-Windows session — check whether they landed before redoing them.**
+**b. RESOLVED — three tooling defects reported on 2026-08-23.**
 
-| defect | effect | fix |
+The table is retained as failure history. The current tree contains all three fixes; do not redo
+them unless a regression reproduces.
+
+| historical defect | historical effect | current resolution |
 |---|---|---|
-| `tools/audit/environment.py` lists `engine/OpenRA.Mods.CA` | `OpenRA.Mods.CA` is **vendored at the repo root**, not under `engine/`, so that path can never exist and `incomplete()` returns a reason on EVERY machine — `latest/` is unwritable without `--force-latest`, even from a fully built tree | drop the `engine/` prefix on that one entry |
-| `tools/audit/audit_unique_traits.py` has the same wrong path in `SOURCE_ROOTS` | not a gate, so it just **under-reported in silence**: 125 trait types scanned instead of 139. Fourteen CA trait types had never been checked | same |
-| `audit_doc_health` D8 flags its own test fixtures | `tools/tests/test_audit_doc_health.py` asserts on a literal wrong-citation label, so **D8 reports 3 findings against its own unit tests and the suite exits 1 on a clean tree** | exclude `tools/tests/` — the same self-reference class already handled for D5 |
+| `tools/audit/environment.py` listed `engine/OpenRA.Mods.CA` | `OpenRA.Mods.CA` is vendored at the repo root, so the bad path made every environment look incomplete | **RESOLVED:** the probe checks the root path and reports `complete` on this built tree |
+| `tools/audit/audit_unique_traits.py` had the same wrong path in `SOURCE_ROOTS` | it silently scanned 125 trait types instead of 139 | **RESOLVED:** the CA source root is included |
+| `audit_doc_health` D8 flagged its own test fixtures | three fixture strings made the suite exit 1 on a clean tree | **RESOLVED:** `tools/tests/` is excluded from that self-reference check; doc health passes |
 
 `audit_dead_warhead_fields.py` and `audit_code_duplication.py` already had the CA path right, and
 a sweep of `tools/**/*.py` finds no third instance — those two are the whole set.
@@ -233,16 +235,18 @@ were "verified" before landing. How, is in [`LESSONS_LEARNED.md`](LESSONS_LEARNE
 filter excluded exactly the lines that would have disproved it, and a tracked-file scan run while
 the new file was still untracked.
 
-**c. `docs/audit/latest/` needs one clean regenerate, from a complete tree.**
+**c. Tooling/environment blockers RESOLVED — a clean complete-tree refresh is now possible, but
+remains a separate task.**
 
-It is a MIXTURE of two environments. A dozen audits read `engine/` C# or full git history; where
-those are missing the scripts scan a smaller corpus, report fewer findings and still say **PASS** —
-`dead_warhead_fields` 27071 nodes → 7014 — so alternating Windows and container runs have been
-overwriting each other's numbers.
+Before this cleanup it was a mixture of two environments. A dozen audits read `engine/` C# or full
+git history; where those were missing the scripts scanned a smaller corpus, reported fewer findings
+and still said **PASS** — `dead_warhead_fields` 27071 nodes → 7014. This branch ran the suite
+against complete engine source but deliberately retained only batch-relevant generated-report
+changes; it does **not** claim a wholesale `latest/` refresh. That separate refresh must still come
+from a complete tree.
 
 `run_all` now diverts to the untracked `docs/audit/degraded/` instead (`--force-latest` overrides),
-so this is a one-time cleanup — **but it cannot succeed until defect (b)#1 above is fixed**, because
-the probe currently calls every tree incomplete. Then, on a machine with `engine/` built:
+and the environment probe now recognizes this complete built tree. For a future refresh:
 
 ```sh
 git fetch --unshallow          # if the clone is shallow
@@ -317,15 +321,16 @@ in `tools/tests/test_audit_run_all_parser.py`.
 
 ### 3.1 — The weapon rebuild (the main line)
 
-⛔ **Set B (`mods/cameo/weapons/**`, `mods/cameo/ContentPacks/**/weapons.yaml`) is NOT free.**
-Devin is working W2 in it — `IN PROGRESS (Devin, 2026-08-21)`, HeatRayBeam1-4 split, 28
-`^LightFlameWeapon` matches left. Check `git log -3 <file>` and the file mtime before touching
-anything in that set, and coordinate rather than assuming the 2026-08-15 lock release still
-holds.
+⚠ **Set B's current owner is unverified** (`mods/cameo/weapons/**` and
+`mods/cameo/ContentPacks/**/weapons.yaml`). The last note, dated 2026-08-21, recorded
+HeatRayBeam1-4 as split with 28 textual `^LightFlameWeapon` matches remaining, but no matching
+current branch or open pull request was found during the 2026-08-24 reconciliation. Before
+touching this set, inspect the current branches, pull requests, `git log -3 <file>`, and file
+mtime, then coordinate; do not infer an exclusive owner from the historical note.
 
 | step | what | how you know it moved |
 |---|---|---|
-| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` in `doc_claims.yaml` goes DOWN from 927 |
+| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` in `doc_claims.yaml` goes DOWN from 922 |
 | **W23** | retrofit the legacy templates onto `^Warhead_*` families | `unconverted_template_inheritors` goes DOWN from 1162; `warhead_family_reach` goes UP from 1245 |
 | **A5** | retire the remaining inline-`Versus` weapons onto templates | rule 4 — `Versus` only in `^Warhead_*` |
 

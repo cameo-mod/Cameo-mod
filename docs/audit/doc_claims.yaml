@@ -158,7 +158,7 @@ claims:
       print(n)
 
   - id: multi_main_fired_weapons
-    value: 925
+    value: 922
     tolerance: 0
     what: >
       Fired weapons carrying MORE THAN ONE damage main — W24's scope, and the reason pricing
@@ -237,22 +237,25 @@ claims:
     what: >
       Weapon/meter bindings on FIRED weapons whose meter reaches FULL effect while the target
       still has 25% HP left — the maintainer's condition for pricing a meter at all ("it is
-      able to completely freeze a unit BEFORE it dies"). **118 of 549.**
-      ⛔ THE EARLIER VALUES (1, 124, 223, 534) ARE ALL VOID, for TWO different reasons, and the
-      second one is the important one.
+      able to completely freeze a unit BEFORE it dies"). **137 of 560 in the current scan.**
+      The 2026-08-19 discovery snapshot was 118 of 549; the still earlier values (1, 124, 223,
+      534) are void for two different reasons, and the second one is the important one.
       (a) ARITHMETIC. `PhysicalState.ApplyChange` health-scales through `ScaleChangeToHealth`,
       which divides by MaxHP and multiplies by the meter's RANGE (`MaxValue - MinValue`) — NOT
       by the 10000 that `PhysicalStateInfo`'s own [Desc] still advertises. Fixed 2026-08-18,
       together with `Corrosion`'s unsigned `MinValue` (maintainer: *"the absolute maximum and
       minimum values are the same!"*), giving `ratio = 50/Scale` on both meters.
-      (b) ⛔ STRUCTURE — W24, and no guard in this tree could see it. The clean form assumes
-      the damage that FILLS the meter is the damage that KILLS the target. That is true for
-      **41 of 427** damage-scaled weapons. The rest are multi-main Frankenstein weapons: a
-      Chemical Stealth Tank fires Shrapnel 5500 + Missile 9000 + Chemical 9000 and only the
-      Chemical warhead carries `PhysicalStateName`, so it kills on 27175/shot and fills on
-      10350. `ratio = 50/Scale / fed_share`, and the MEDIAN fed_share across the tree is
-      **0.398** — so the typical metered weapon fills ~2.5x slower than modelled and misses
-      the bar entirely. 534 -> 118 is that one term.
+      (b) ⛔ STRUCTURE — the one-damage-warhead migration, and no guard in this tree originally
+      saw it. The clean form assumes the damage that FILLS the meter is the damage that KILLS
+      the target. Across 446 damage-scaled metered fired weapons with positive measured damage,
+      the current detector reports **66 fully fed / 380 underfed**, with median `fed_share`
+      **0.4913**. It wrongly counts `DamagesConcrete` nodes as ordinary damage; the intended
+      offensive-only result is **115 fully fed / 331 underfed**, median **0.5**. The registered
+      ratchet remains 380 until the detector and affected derived ledgers are corrected together.
+      As the historical discovery example, a Chemical Stealth Tank fired Shrapnel 5500 + Missile
+      9000 + Chemical 9000 while only the Chemical warhead carried `PhysicalStateName`, so it
+      killed on 27175/shot and filled on 10350. The 534 -> 118 change was the 2026-08-19 snapshot;
+      the current registered scan is 137.
       ⚠ THE MAINTAINER FOUND THIS BY PLAYTESTING A HARVESTER, not by any check here. This
       claim counted bindings, the unit tests pinned arithmetic, the boot gate proved it loads;
       none asked whether the two damage figures were the same damage. See `w24_multi_main_fed`
@@ -303,9 +306,10 @@ claims:
     tolerance: 0
     what: >
       RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their
-      main damage (W24, the 3-way weapon split). 386 of 427; median fed share 0.398; the worst
-      are 12-main EMP weapons at 4%. Each one is a weapon where the status effect the player
-      was promised cannot arrive before the target dies.
+      measured damage (W24, the 3-way weapon split). The current 380 includes 49 false
+      positives because damage_split also counts DamagesConcrete nodes; filtering to ordinary
+      offensive damage yields 331. Correct that detector and its derived ledgers in a separately
+      reviewed tooling change rather than silently rebasing this claim here.
       ⛔ THIS NUMBER MUST ONLY EVER GO DOWN. It is the W24 burn-down: splitting a weapon so a
       single main warhead carries both the damage and the meter removes it from the count.
       A rise means a new multi-main weapon shipped with a meter on only part of its damage.

@@ -70,6 +70,33 @@ def state_scale(warhead, state):
 	return None
 
 
+def folded_percentage_problems(warhead, expected_state, expected_scale):
+	"""Return contract failures for a folded percentage-damage family node."""
+	problems = []
+	if warhead.value != "AreaDamage":
+		problems.append(f"main warhead is {warhead.value}, expected AreaDamage")
+
+	try:
+		percentage_scale = int(warhead.get("PercentageScale") or "0")
+	except ValueError:
+		percentage_scale = 0
+
+	if percentage_scale <= 0:
+		problems.append("main warhead does not enable folded percentage damage")
+	if expected_state not in scaled_states(warhead):
+		problems.append(f"main warhead does not apply {expected_state}")
+	if state_scale(warhead, expected_state) != expected_scale:
+		problems.append(f"main warhead {expected_state} scale is not {expected_scale}")
+
+	multiple = warhead.child("PhysicalStates")
+	if (warhead.get("PhysicalStateName") == expected_state
+			and multiple is not None and multiple.child(expected_state) is not None):
+		problems.append(
+			f"main warhead applies {expected_state} through both PhysicalStateName and PhysicalStates")
+
+	return problems
+
+
 def main() -> int:
 	rs = Ruleset(find_repo_root())
 	problems = []
@@ -78,31 +105,15 @@ def main() -> int:
 		for level in LEVELS:
 			tag = f"{family}_{level}"
 			template_name = f"^Warhead_{tag}"
-			# RESOLVED, not source: the meter and the percentage fields can be inherited.
+			# Resolve inheritance: the meter and percentage fields may come from a parent.
 			template = rs.resolve_weapon(template_name)
-			main = template.child(f"Warhead@{tag}") if template else None
-			if main is None:
-				problems.append(f"{template_name}: no Warhead@{tag} main warhead")
+			main_warhead = template.child(f"Warhead@{tag}") if template else None
+			if main_warhead is None:
+				problems.append(f"{template_name}: missing main warhead")
 				continue
 
-			if main.value != "AreaDamage":
-				problems.append(
-					f"{template_name}: main warhead is {main.value}, expected AreaDamage")
-			if expected_state not in scaled_states(main):
-				problems.append(
-					f"{template_name}: main warhead does not apply {expected_state}")
-			if state_scale(main, expected_state) != expected_scale:
-				problems.append(
-					f"{template_name}: {expected_state} scale is not {expected_scale}")
-
-			# The fold's whole point: percentage damage rides the SAME warhead, so it reaches the
-			# same meter. A zero or absent scale means the percentage component silently does not
-			# exist, which is the pre-fold bug wearing the post-fold shape.
-			scale = main.get("PercentageScale")
-			if scale is None or str(scale).strip() in {"", "0"}:
-				problems.append(
-					f"{template_name}: PercentageScale is {scale!r} — percentage damage is folded "
-					f"into this warhead and must be non-zero")
+			for problem in folded_percentage_problems(main_warhead, expected_state, expected_scale):
+				problems.append(f"{template_name}: {problem}")
 
 	for weapon_name in sorted(rs.weapons, key=str.lower):
 		if weapon_name.startswith("^"):
@@ -117,13 +128,8 @@ def main() -> int:
 		for warhead in weapon.children:
 			match = PERCENTAGE_KEY.fullmatch(warhead.key)
 			if match:
-				family = match.group(1)
-				expected_state, expected_scale = EXPECTED_PERCENTAGE_STATES[family]
-				if (warhead.value != "AreaDamagePercentage"
-						or expected_state not in scaled_states(warhead)
-						or state_scale(warhead, expected_state) != expected_scale):
-					problems.append(
-						f"{weapon_name}: {warhead.key} does not feed {expected_state} through AreaDamagePercentage")
+				problems.append(
+					f"{weapon_name}: obsolete {warhead.key} duplicates folded percentage damage")
 
 			if warhead.value in {"AreaDamage", "AreaDamagePercentage"}:
 				damage_scaled.update(scaled_states(warhead))
@@ -138,7 +144,7 @@ def main() -> int:
 
 	print("# Physical-state warhead audit\n")
 	print(f"Active concrete weapons checked: {sum(not name.startswith('^') for name in rs.weapons)}")
-	print(f"Formula percentage templates checked: {len(EXPECTED_PERCENTAGE_STATES) * len(LEVELS)}\n")
+	print(f"Formula folded templates checked: {len(EXPECTED_PERCENTAGE_STATES) * len(LEVELS)}\n")
 	if problems:
 		print(f"## FAIL ({len(problems)} problem(s))\n")
 		for problem in problems:
@@ -146,8 +152,7 @@ def main() -> int:
 		return 1
 
 	print("## PASS\n")
-	print("- Flame and Chemical fold percentage damage into the main AreaDamage warhead, and it")
-	print("  feeds the matching physical-state meter.")
+	print("- Flame and Chemical folded percentage damage feeds the matching physical-state meter.")
 	print("- No active weapon double-applies a meter through scaled and fixed warheads.")
 	return 0
 
