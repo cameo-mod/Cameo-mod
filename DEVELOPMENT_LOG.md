@@ -1,5 +1,15 @@
 # Development Log
 
+## 2026-08-24 — W24 A7: collapse RA2 gatling bullet+light weapons + KotinCannon correction
+
+- Cluster: `RA2GattlingMG1`, `RA2GattlingMG1_AA`, `RA2GattlingMG2_AA`, `RA2GattlingMG3_AA` in `mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`; `RA2GattlingInfant` in `mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml`.
+- Collapsed each from two `Bullet_Light` + `Bullet_Medium` warheads onto the `^RA2Chaingun` (`^Warhead_Bullet_Medium`) 3-way split.
+- Preserved per-shot damage sums: `RA2GattlingMG1` 4000, `_AA` variants 8000, `RA2GattlingInf` 16000 with `PercentageScale: 2500`.
+- Children (`RA2GattlingMG2`, `RA2GattlingMG3`, `YuriGatlingCannonMG*`) resolve through inheritance and become single-main without further edits.
+- Kotin correction: reverted `KotinCannon` to `^Warhead_CannonHE_Heavy` (`Damage: 12000`, effect `poof`); renamed/reclassified the upgrade from `KotinCannonThermobaric` to `KotinCannonNuclearShell` (`^Warhead_CannonNuke_Heavy`, `Damage: 16000`, effect `nuke_small`); updated `ra1_soviets_kotinnucleartank` weapon references.
+- Updated `docs/audit/doc_claims.yaml` (`multi_main_fired_weapons` 905 → 892, `w24_multi_main_fed` 381 → 380, `physical_state_fired_weapons` 462 → 461), `tools/audit/audit_warhead_split.py` `BROADCAST_BASELINE` 921 → 908, `docs/design/BALANCE_PROGRAM_PLAN.md` Phase A log, and `docs/design/PHYSICAL_STATE_SYSTEM.md`.
+- Verification: `find_empty_warhead` 0; `find_orphan_old_keys` 0 real; `audit_warhead_split` 908 vs baseline 908; `extract_stats --check` 0; `audit_doc_claims` 19/19 green; `review_resolve_diff` clean for gatlings and `KotinCannon`; `audit_garrison_weapons` 0/0/0; boot-gated with `MenuPostProcessEffect.PostWorldLoaded` and no new `exception-*.log`.
+
 ## 2026-08-24 — Correct KotinCannon and WC2 garrison exceptions
 
 - `KotinCannon` (`ra1_soviets_kotinnucleartank`) repointed from `^Warhead_CannonHE_Heavy`

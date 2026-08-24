@@ -2644,8 +2644,7 @@ RA2AWP:
 		Damage: 22
 
 RA2GattlingMG1:
-	Inherits: ^Warhead_Bullet_Light
-	Inherits@2: ^RA2Chaingun
+	Inherits: ^RA2Chaingun
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 5000
 	ReloadDelay: 6
@@ -2659,22 +2658,16 @@ RA2GattlingMG1:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
-		Damage: 2000
+		Damage: 4000
 RA2GattlingMG1_AA:
 	Inherits: RA2GattlingMG1
 	Range: 6750
 	ValidTargets: Air
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Air
-		Damage: 4000
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
-		Damage: 4000
+		Damage: 8000
 RA2GattlingMG2:
 	Inherits: RA2GattlingMG1
 	Range: 5250
@@ -2685,12 +2678,9 @@ RA2GattlingMG2_AA:
 	Inherits: RA2GattlingMG2
 	Range: 7500
 	ValidTargets: Air
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Air
-		Damage: 4000
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
-		Damage: 4000
+		Damage: 8000
 RA2Cloud:
 	Inherits: ^ToxicWeapon
 

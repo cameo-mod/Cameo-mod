@@ -681,12 +681,9 @@ RA2GattlingMG3_AA:
 	Inherits: RA2GattlingMG3
 	Range: 8250
 	ValidTargets: Air
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Air
-		Damage: 4000
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
-		Damage: 4000
+		Damage: 8000
 YuriGatlingCannonMG3:
 	Inherits: RA2GattlingMG3
 	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
@@ -696,8 +693,7 @@ YuriGatlingCannonMG3_AA:
 	Inherits@ProjectileStreak: ^YuriGatlingCannonProjectileStreak
 
 RA2GattlingInf:
-	Inherits: ^RA2SmallArms
-	Inherits@2: ^RA2Chaingun
+	Inherits: ^RA2Chaingun
 	ReloadDelay: 15
 	ValidTargets: Ground, Air, Water
 	Range: 5531
@@ -711,14 +707,10 @@ RA2GattlingInf:
 		ContrailLength: 5
 		Speed: 10000
 		Width: 75
-	Warhead@Bullet_Light:
-		PercentageScale: 2500
-		ValidTargets: Ground, Air, Water
-		Damage: 8000
 	Warhead@Bullet_Medium:
 		PercentageScale: 2500
 		ValidTargets: Ground, Air, Water
-		Damage: 8000
+		Damage: 16000
 RA2Virusgun:
 	Inherits: ^HeavyChemicalWeapon
 	Inherits@2: ^SniperWeapon
