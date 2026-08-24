@@ -37,7 +37,7 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured 2026-08-17 |
 |---|---|
-| W24 — fired weapons with **more than one** damage main | **914 of 1622 = 56.4%** (histogram runs out to 15 mains) |
+| W24 — fired weapons with **more than one** damage main | **910 of 1622 = 56.1%** (histogram runs out to 15 mains) |
 | armament slots whose `K` moves when those collapse | **1 547** |
 | fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1157 inheritors) |
 
@@ -590,7 +590,7 @@ delivery and price number measured before it lands is measuring the wrong object
 | A3 | Fix the three misclassifications onto templates that already exist (`CannonChem` ×2, `Plasma` ×1) | invariant diff = 0 |
 | A4 | Rename `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1` + its condition, then the Su-57 and MonsterTank weapon pairs per ruling 2 | ✅ DONE — renamed `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1`, condition `ra1_soviets_upgrade_highexplosiverockets` → `ra1_soviets_upgrade_thermobaricrockets`, fluent keys and icon, `NuclearMaverick` → `Su57Maverick`, `ThermobaricNuclearMaverick` → `Su57MaverickThermobaric`, `MonsterTank120mmThermobaric` → `MonsterTank120mmInferno`; safe_rename.py 90 replacements across 12 files + icon git mv; post-rename validation clean; boot-gated. |
 | A5 | Collapse the 27 single-user templates | template census |
-| A6 | Continue the burn-down: `w24_multi_main_fed` **381**, `multi_main_fired_weapons` **914** | both ratchets fall |
+| A6 | Continue the burn-down: `w24_multi_main_fed` **381**, `multi_main_fired_weapons` **910** | W24 A5/A6 batch: collapsed `ra120mmThermobaric`, `ra120mmThermobaricTargetingComputer`, `ra120mm2Thermobaric`, `ra120mm2ThermobaricTargetingComputer` onto `^Warhead_CannonFire_Heavy`; per-shot damage preserved (24 000 / 48 000); `review_resolve_diff` clean, `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `extract_stats --check` 0, `audit_doc_claims` 18/19 green after claim update, boot-gated. |
 
 ### Phase B — the physical-state half (parallel to A, different file set)
 
@@ -2756,7 +2756,7 @@ generator ships that matrix on purpose and `verify_generator_sync.py` requires i
 ## W24 / W25 — see `ARMOR_LAYERS.md` and DESIGN.md §11b
 
 **W24 (one warhead per weapon)** is now a written binding rule — DESIGN.md **§11b**. Among
-fired weapons, **34.5%** comply (560 of 1622); **56.4%** (914 of 1622) carry 2 or more damage
+fired weapons, **34.5%** comply (560 of 1622); **56.1%** (910 of 1622) carry 2 or more damage
 warheads, worst case **15**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
 content ships, because same-family collisions are a symptom of it rather than a bug in the
 conversion. Collapsing preserves the SUM; where no family fits, a NEW family is created

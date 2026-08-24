@@ -1,5 +1,14 @@
 # Development Log
 
+## 2026-08-24 — W24 A5/A6: collapse Soviet 120mm thermobaric cannon variants
+
+- Cluster: `ra120mmThermobaric`, `ra120mmThermobaricTargetingComputer`, `ra120mm2Thermobaric`, `ra120mm2ThermobaricTargetingComputer` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`.
+- Collapsed each onto `^Warhead_CannonFire_Heavy`, preserving per-shot damage sums (24 000 / 48 000).
+- Set `PhysicalStates: Temperature: 33` on the main warhead to preserve the old one-in-three flame meter feed.
+- Kept `^Projectile_Shell_Heavy`, `^Effect_CannonHE_Heavy`, `^Effect_Flame_Heavy`, and removed the ground `Warhead@Effect` to match the pre-collapse resolved effects.
+- Verification: `review_resolve_diff` clean (behavioural invariants preserved); `find_empty_warhead` 0; `find_orphan_old_keys` 0 real; `audit_warhead_split` 926 vs baseline 926; `extract_stats --check` 0; `audit_doc_claims` 19/19 green after updating `multi_main_fired_weapons` 914 -> 910.
+- Boot-gate: `MenuPostProcessEffect.PostWorldLoaded`, no new `exception-*.log`.
+
 ## 2026-08-24 — old-repo reconciliation, no-file-change merge, full verification
 
 - Investigated `cameo-mod/Cameo-mod/compare/master...Zeruel87:Cameo-mod:master` showing 2 stray commits on the old fork.
