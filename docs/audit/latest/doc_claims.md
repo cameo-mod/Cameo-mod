@@ -12,10 +12,10 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
 | `live_damage_multipliers` | 354 | 354 | ✅ |
-| `multi_main_fired_weapons` | 917 | 917 | ✅ |
+| `multi_main_fired_weapons` | 914 | 914 | ✅ |
 | `percentage_denominator_unset` | 0 | 0 | ✅ |
 | `unmigrated_scout_damage_multiplier` | 15 | 15 | ✅ |
-| `meters_filling_before_death` | 139 | 139 | ✅ |
+| `meters_filling_before_death` | 143 | 143 | ✅ |
 | `corrosion_meter_actors` | 785 | 785 | ✅ |
 | `w24_multi_main_fed` | 381 | 381 | ✅ |
 | `physical_state_fired_weapons` | 462 | 462 | ✅ |

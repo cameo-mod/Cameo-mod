@@ -2889,3 +2889,20 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   physical_state_fired_weapons 462); audit_warhead_split 931 at baseline.
 - Re-extracted balance ledgers with tools/balance/extract_stats.py.
 - Boot-gate: reached MenuPostProcessEffect.PostWorldLoaded; no new exception-*.log.
+
+## 2026-08-24 — W24 A3: collapse three misclassifications onto existing families
+
+- TS70mmChem (TiberianSun/Forgotten): ^Warhead_CannonHE_Medium + ^Warhead_Chemical_Light
+  -> ^Warhead_CannonChem_Light, total 6000, Corrosion 100.
+- TSScoopDualChem (TiberianSun/Forgotten): ^Warhead_CannonHE_Medium + ^Warhead_Chemical_Medium
+  -> ^Warhead_CannonChem_Medium, total 30000, Corrosion 100.
+- JapanesePlasmaBomb (RedAlert/Japan): ^Warhead_Chemical_Heavy + ^Warhead_Flame_Heavy +
+  ^Warhead_Demolition_Heavy -> ^Warhead_Plasma_Heavy, total 30000, preserved
+  ElectricityDeath/Tesla DamageTypes and Temperature/Corrosion 100 states, added Ship to
+  ValidTargets to keep the old demolition reach.
+- review_resolve_diff on all three: OK; find_empty_warhead 0; find_orphan_old_keys 0 real;
+  audit_warhead_split broadcast 930 vs baseline 931 (one identical-stack weapon collapsed);
+  verify_generator_sync 0; extract_stats --check 0; audit_doc_claims 19 green after updating
+  multi_main_fired_weapons 914 and meters_filling_before_death 143 in doc_claims.yaml and
+  affected docs (BALANCE_PROGRAM_PLAN.md, PHYSICAL_STATE_SYSTEM.md, doc_claims.md).
+- Boot-gate passed; no new exceptions.
