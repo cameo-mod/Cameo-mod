@@ -227,7 +227,13 @@ which is why the peak formula changed rather than the requirement.
 
 The acceptance test is `tools/balance/preview_bell.py` (tilt-to-tilt on the same base, the only
 valid comparison): 130 of 136 profiles move, mean 8.3% row change, **0 ladder inversions**, worst
-single row 32.0% on `Chemical_Medium`. Both of `WEAPON_HEAVINESS.md` §9.6's original blockers are gone: #1 was retired by the
+single row 32.0% on `Chemical_Medium`.
+
+**Status 2026-08-24:** `AreaDamageWarhead` now applies the bell to both `Versus`/`PercentageVersus`
+AND `Spread` (via `effectiveSpread`) when `Heaviness != 0`. `Spread` scales linearly
+`2/3 -> 1 -> 4/3` as `h` goes `0 -> 1 -> 2` (Light/Medium/Heavy), which is the data-driven
+interpolation of `LEVEL_RADIUS_SCALE`. `Trace`/`Super` are outside the ruled `h` range and remain
+unhandled. No yaml sets `Heaviness` yet, so the change is inert. Both of `WEAPON_HEAVINESS.md` §9.6's original blockers are gone: #1 was retired by the
 2026-08-23 ruling, and #2 (every family inside the 2x–8x spread band) had already been finished on
 2026-08-22 without the document noticing — `audit_versus_profile` reports 46 in band at
 `SPREAD_OFFENDERS_BASELINE = 0`.

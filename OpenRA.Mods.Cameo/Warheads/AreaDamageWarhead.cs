@@ -119,9 +119,10 @@ namespace OpenRA.Mods.Cameo.Warheads
 		public readonly int PercentageDenominator = 10000;
 
 		[Desc("Continuous heaviness scalar h, in THOUSANDTHS (0 = disabled / today's behaviour,",
-			"1000 = h = 1.0, 2000 = h = 2.0). When 0 the warhead uses its authored Versus; when",
-			"non-zero the profile is passed through the §12.0i bell at runtime. The bell currently",
-			"affects Versus only; the continuous Spread scale is a separate pending ruling.")]
+			"1000 = h = 1.0, 2000 = h = 2.0). When 0 the warhead uses its authored Versus and Spread;",
+			"when non-zero the profile is passed through the §12.0i bell at runtime. Spread scales",
+			"linearly 2/3 -> 1 -> 4/3 as h goes 0 -> 1 -> 2 (Light/Medium/Heavy); Super and Trace are",
+			"outside the currently ruled h range and are not yet reproduced.")]
 		public readonly int Heaviness = 0;
 
 		[Desc("The percentage half's own armor table. EMPTY falls back to Versus, which is the",
@@ -164,6 +165,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 			"and hits hard, later rings are larger and weaker. An INCREASING profile builds up instead.")]
 		public readonly ImmutableArray<int> TickDamage = default;
 
+		WDist effectiveSpread;
 		ImmutableArray<WDist> effectiveRange;
 		int tickDamageTotal;
 
@@ -172,6 +174,29 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 		void IRulesetLoaded<WeaponInfo>.RulesetLoaded(Ruleset rules, WeaponInfo info)
 		{
+			// §12.0i — continuous heaviness. Heaviness = 0 keeps authored values verbatim.
+			if (Heaviness == 0)
+			{
+				effectiveSpread = Spread;
+				effectiveVersus = Versus;
+				effectivePercentageVersus = PercentageVersus.Count > 0 ? PercentageVersus : Versus;
+			}
+			else
+			{
+				var h = Heaviness / 1000.0;
+
+				// Spread scale: linear interpolation of the existing LEVEL_RADIUS_SCALE points
+				// Light h=0 -> 2/3, Medium h=1 -> 1, Heavy h=2 -> 4/3. Super/Trace are outside the
+				// currently ruled h range and stay unhandled until the maintainer rules them.
+				var spreadScale = (h + 2.0) / 3.0;
+				effectiveSpread = new WDist((int)(Spread.Length * spreadScale));
+
+				effectiveVersus = HeavinessBell.Transform(Versus, h);
+				effectivePercentageVersus = PercentageVersus.Count > 0
+					? HeavinessBell.Transform(PercentageVersus, h)
+					: effectiveVersus;
+			}
+
 			if (Range != null)
 			{
 				if (Range.Length != 1 && Range.Length != Falloff.Length)
@@ -184,7 +209,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 				effectiveRange = Range;
 			}
 			else
-				effectiveRange = Exts.MakeArray(Falloff.Length, i => i * Spread).ToImmutableArray();
+				effectiveRange = Exts.MakeArray(Falloff.Length, i => i * effectiveSpread).ToImmutableArray();
 
 			if (TickDamage != null)
 			{
@@ -192,22 +217,6 @@ namespace OpenRA.Mods.Cameo.Warheads
 					throw new YamlException("Number of TickDamage weights must equal Ticks.");
 
 				tickDamageTotal = TickDamage.Sum();
-			}
-
-			// §12.0i — apply the continuous-heaviness bell to Versus and PercentageVersus
-			// once at load. Heaviness = 0 keeps the authored tables verbatim.
-			if (Heaviness == 0)
-			{
-				effectiveVersus = Versus;
-				effectivePercentageVersus = PercentageVersus.Count > 0 ? PercentageVersus : Versus;
-			}
-			else
-			{
-				var h = Heaviness / 1000.0;
-				effectiveVersus = HeavinessBell.Transform(Versus, h);
-				effectivePercentageVersus = PercentageVersus.Count > 0
-					? HeavinessBell.Transform(PercentageVersus, h)
-					: effectiveVersus;
 			}
 
 			ValidateFields();
