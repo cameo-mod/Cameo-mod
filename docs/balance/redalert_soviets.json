@@ -10198,22 +10198,15 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6825",
       "reloaddelay": "85",
@@ -10221,13 +10214,11 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "HammerTankCannon",
       "weapon_class_source": "template"
@@ -10682,17 +10673,10 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "300",
-        "tag": "Flame_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "damage": "12000",
+        "falloff": "100, 76, 56, 38, 0",
+        "spread": "259",
+        "tag": "CannonFire_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -10704,14 +10688,13 @@
       "requires": "ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Flame_Medium",
-       "^Projectile_Flame_Medium",
+       "^Warhead_CannonFire_Medium",
+       "^Projectile_Shell_Medium",
        "^Effect_Flame_Medium",
-       "105mm"
+       "^Effect_CannonHE_Medium"
       ],
       "warheads": [
-       "^Warhead_Flame_Medium",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonFire_Medium"
       ],
       "weapon": "105mmThermobaric",
       "weapon_class_source": "template"
@@ -10946,22 +10929,15 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6427",
       "reloaddelay": "96",
@@ -10969,13 +10945,11 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy",
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "KotinCannon",
       "weapon_class_source": "template"

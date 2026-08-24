@@ -1907,24 +1907,29 @@ Su57MaverickThermobaric:
 		Explosions: small_poof
 
 105mmThermobaric:
-	Inherits@wh: ^Warhead_Flame_Medium
-	Inherits@proj: ^Projectile_Flame_Medium
+	Inherits@wh: ^Warhead_CannonFire_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_Flame_Medium
-	Inherits: 105mm
-	Warhead@Flame_Medium:
-		Damage: 6000
-	Warhead@CannonHE_Medium:
-		Damage: 6000
+	Inherits@fx2: ^Effect_CannonHE_Medium
+	ReloadDelay: 76
+	Range: 5469
+	Burst: 2
+	BurstDelays: 5
+	Report: cannon1.aud
+	Projectile: Bullet
+		Speed: 546
+	Warhead@CannonFire_Medium:
+		Damage: 12000
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
+		ImpactActors: false
 
 HammerTankCannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
-	Inherits@wh2: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	Report: tnkfire6.aud
@@ -1935,9 +1940,7 @@ HammerTankCannon:
 	Projectile: Bullet
 		Speed: 682
 	Warhead@CannonHE_Heavy:
-		Damage: 6000
-	Warhead@CannonHE_Medium:
-		Damage: 6000
+		Damage: 12000
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
@@ -2024,7 +2027,6 @@ ShtoraLaser:
 
 KotinCannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
-	Inherits@wh2: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	Report: tnkfire6.aud
@@ -2035,9 +2037,7 @@ KotinCannon:
 	Projectile: Bullet
 		Speed: 642
 	Warhead@CannonHE_Heavy:
-		Damage: 6000
-	Warhead@CannonHE_Medium:
-		Damage: 6000
+		Damage: 12000
 	Warhead@Radiation: CreateTintedCells
 		InvalidTargets: RadiationImmmune
 		Spread: 1000

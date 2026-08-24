@@ -3027,3 +3027,23 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   `mods/cameo/rules/misc.yaml` granting `harkonnen_mobileconstructionvehicle`.
 - `audit_basebuilder_crates` now reports 29/29 covered, missing: **0**.
 - Boot-gate passed; no new exceptions.
+
+## 2026-08-24 — W24 A6: collapse 105mmThermobaric, HammerTankCannon, KotinCannon
+
+- `105mmThermobaric`: one `^Warhead_CannonFire_Medium` main `Damage: 12000`,
+  `^Projectile_Shell_Medium`, `^Effect_Flame_Medium` + `^Effect_CannonHE_Medium`,
+  local napalm explosion override (`ImpactActors: false`, `GlowScale 1.5`,
+  `GlowFadeFrames 30`, `GlowFadeInFrames 12`, `ImpactSounds firebl3.aud`).
+- `HammerTankCannon` and `KotinCannon`: one `^Warhead_CannonHE_Heavy` main
+  `Damage: 12000` each, `^Projectile_Shell_Heavy`, `^Effect_CannonHE_Heavy`;
+  Kotin retains local radiation node.
+- Per-shot totals preserved (12000 / 12000 / 12000); the two base cannons had
+  previously inherited both `^Warhead_CannonHE_Heavy` and `^Warhead_CannonHE_Medium`
+  as 2×6000 broadcast.
+- `review_resolve_diff` for all three: OK (behavioural invariants preserved).
+- `find_empty_warhead` 0; `find_orphan_old_keys` 0 real; `audit_warhead_split`
+  broadcast 921 vs baseline 921; `extract_stats --check` 0; `audit_doc_claims`
+  19 green after updating `multi_main_fired_weapons` 908→905, BROADCAST_BASELINE
+  924→921, and `BALANCE_PROGRAM_PLAN.md` / `SUMMARY.md` counts.
+- Re-extracted `docs/balance/redalert_soviets.json` + derived sidecar.
+- Boot-gate passed; no new exceptions.

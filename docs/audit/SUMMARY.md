@@ -107,7 +107,7 @@ regenerate).
 |---|---|---|
 | **level ladder** | **WARN — 9 broken, at ratchet 9** (7 inverted, 2 flat) | no longer failing: `a9f31258` fixed `Demolition`. Still blocked on a maintainer ruling. Full measured table + the diagnosis: [`../design/ROADMAP.md`](../design/ROADMAP.md) "BROKEN LADDERS". These are balance numbers: pipeline only, and **never raise the ratchet**. |
 | duplicate keys D1 | 6 dropped inherits | each one silently drops a template — same family as the `Parent type X was already inherited` boot crash |
-| warhead-split ratchet | at baseline | pre-existing W24 debt, not a regression; lower the baseline as W24 lands |
+| warhead-split ratchet | 921 vs baseline 921 | pre-existing W24 debt, not a regression; lower the baseline as W24 lands |
 
 Cleared since the last edition of this page: **doc claims** (was 4 of 19 drifted, now 19 of 19
 matching) and **generator sync** (was non-zero, now 0).
@@ -120,7 +120,7 @@ its §0a.
 
 | id | debt | measured |
 |---|---|--:|
-| W24 | fired weapons carrying more than one damage main | **917** |
+| W24 | fired weapons carrying more than one damage main | **905** |
 | W23 | fired weapons reaching a `^Warhead_*` family | **1231** |
 | W23 | direct inheritors of the legacy weapon templates | **1157** |
 | W26 | live `DamageMultiplier` declarations | **353** |
