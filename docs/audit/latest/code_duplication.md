@@ -1,12 +1,12 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **274** (min 5 statements), C# files: **347** (min 8 lines)
+Python files: **275** (min 5 statements), C# files: **348** (min 8 lines)
 
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
 | C1 | identical Python function bodies | 10 | 10 |
 | C2 | identical C# method bodies | 15 | 14 |
-| C3 | identical module-level literal tables | 18 | 10 |
+| C3 | identical module-level literal tables | 19 | 10 |
 
 
 ## C1 — Python function clones (10 group(s))
@@ -46,16 +46,17 @@ Python files: **274** (min 5 statements), C# files: **347** (min 8 lines)
 | 2 | fccb77d01668aded | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:825 CountQueuedBuildings(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:833 SellUselessRefinery() |
 
 
-## C3 — Duplicated constant tables (18 group(s))
+## C3 — Duplicated constant tables (19 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
 | 5 | 28fac3656bc8fc3b | tools/audit/find_orphan_old_keys.py:20 CENTRAL; tools/audit/find_orphan_old_keys_multi.py:18 CENTRAL; tools/audit/weapon_families.py:23 CENTRAL; tools/balance/fix_orphan_old_keys.py:19 CENTRAL; tools/balance/fix_orphan_old_keys_multi.py:16 CENTRAL |
-| 3 | 9a62b7cb0c6b46dc | tools/audit/audit_heaviness_bell.py:95 COMPANION; tools/audit/audit_three_way_split.py:65 COMPANION_MARKERS; tools/audit/audit_tier_weapon_class.py:55 COMPANION_MARKERS |
+| 4 | 9a62b7cb0c6b46dc | tools/audit/audit_heaviness_bell.py:95 COMPANION; tools/audit/audit_three_way_split.py:65 COMPANION_MARKERS; tools/audit/audit_tier_weapon_class.py:55 COMPANION_MARKERS; tools/balance/preview_bell.py:44 COMPANION |
 | 2 | 153d4fc74c8cdd31 | tools/tilesets/build_ra_temperate_basalt_trees.py:20 ACTORS; tools/tilesets/build_volcanic_basalt_gimp_brushes.py:20 ACTORS |
 | 2 | 2665d6950cd4417a | tools/audit/find_orphan_old_keys.py:27 OLD_TO_NEW; tools/balance/fix_orphan_old_keys.py:25 OLD_TO_NEW |
 | 2 | 4979d18fd8f148a1 | tools/tilesets/detect_cliff_dark_noise.py:14 BLACK; tools/tilesets/process_ai_edge_mask.py:15 BLACK |
 | 2 | 590fa5489ca5f751 | tools/audit/find_orphan_old_keys_multi.py:25 OLD_KEY_FAMILIES; tools/balance/fix_orphan_old_keys_multi.py:22 OLD_KEY_FAMILIES |
+| 2 | 783c5216cd3c1bf0 | tools/audit/audit_versus_profile.py:64 NON_ARMOR; tools/balance/preview_bell.py:45 OFF_AXIS |
 | 2 | 7b392ae5dfabff76 | tools/tilesets/apply_ai_edge_correction.py:16 MAGENTA; tools/tilesets/process_ai_edge_mask.py:14 MAGENTA |
 | 2 | 8ad665990352733b | tools/balance/build_workbook.py:58 TYPE_ORDER; tools/balance/import_workbook.py:36 TYPE_SHEETS |
 | 2 | 926a972c11b9232c | tools/audit/audit_heaviness_bell.py:142 AXIS_ORDER; tools/balance/gen_weapon_template.py:993 BELL_AXIS_ORDER |
@@ -73,5 +74,5 @@ Python files: **274** (min 5 statements), C# files: **347** (min 8 lines)
 ## FAIL
 
 - C2: 15 > baseline 14
-- C3: 18 > baseline 10
+- C3: 19 > baseline 10
 

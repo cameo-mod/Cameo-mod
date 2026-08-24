@@ -4,7 +4,7 @@
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (4 file(s)) | 37 | >= 24 |
 | T2 | `def test_*` in tools/tests (22 file(s)) | 300 | >= 177 |
-| T3 | modules with no test mentioning them | 270 | <= 224 |
+| T3 | modules with no test mentioning them | 272 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (270)
+## T3 — untested modules (272)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -126,6 +126,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Warheads/ChangeOwnerToNeutralWarhead.cs | ChangeOwnerToNeutralWarhead |
 | C# | OpenRA.Mods.Cameo/Warheads/GlowImpactWarhead.cs | GlowImpactWarhead |
 | C# | OpenRA.Mods.Cameo/Warheads/HeatDistortionWarhead.cs | HeatDistortionWarhead |
+| C# | OpenRA.Mods.Cameo/Warheads/HeavinessBell.cs | HeavinessBell |
 | C# | OpenRA.Mods.Cameo/Warheads/MindControlWarhead.cs | MindControlWarhead |
 | C# | OpenRA.Mods.Cameo/Warheads/NuclearFlashEffectWarhead.cs | NuclearFlashEffectWarhead |
 | C# | OpenRA.Mods.Cameo/Warheads/ShockwaveWarhead.cs | ShockwaveWarhead |
@@ -266,6 +267,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/balance/measure_retrofit_gap.py | measure_retrofit_gap |
 | python | tools/balance/plan_firepower_retirement.py | plan_firepower_retirement |
 | python | tools/balance/plan_warhead_collapse.py | plan_warhead_collapse |
+| python | tools/balance/preview_bell.py | preview_bell |
 | python | tools/balance/propose_rebalance.py | propose_rebalance |
 | python | tools/balance/remove_dead_weapons.py | remove_dead_weapons |
 | python | tools/balance/rename_3way_underscore.py | rename_3way_underscore |
@@ -293,5 +295,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 270 untested > baseline 224
+- T3: 272 untested > baseline 224
 
