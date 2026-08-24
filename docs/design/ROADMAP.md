@@ -3,6 +3,19 @@
 _Entry point for a new session: **[`docs/HANDOFF.md`](../HANDOFF.md)**. This file is the
 granular, resumable task queue that the handoff points into._
 
+## AI PERSONALITY SELECTOR (2026-08-21)
+
+- [x] Add synchronized random Rush/Turtle/Tech/Expansion/Steamroller selection
+  (`cdd04e5a1`).
+- [x] Gate independent squad-manager instances on the selected condition
+  (`cdd04e5a1`).
+- [x] Add audit coverage for shared-field duplication and condition parity
+  (`cdd04e5a1`).
+- [ ] Add an observer-facing notification so players can see the selected
+  personality in-game.
+- [ ] Consider personality-specific base-builder behavior without duplicating
+  the full base-builder configuration.
+
 **Rule zero: crashes and player-visible regressions ALWAYS jump the queue.** Ordering inside a
 section: quickest wins first, then by severity. Effort: **S** < 1 h · **M** = one session ·
 **L** = multi-session. Every completed item carries its commit hash; every new order lands here

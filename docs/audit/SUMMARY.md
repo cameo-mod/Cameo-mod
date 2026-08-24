@@ -33,6 +33,23 @@ the file (CLAUDE.md rule 8).
 
 ---
 
+## AI personality wiring
+
+`audit_ai_personalities.py` verifies that the five personality-gated
+`SquadManagerBotModuleCA` instances retain byte-identical shared fields and
+that their consumed conditions exactly match the `GrantRandomCondition`
+selector. Personality-specific differences are restricted to an explicit
+tuning allow-list.
+
+The implementation removes the stale `RushInterval` and
+`RushAttackScanRadius` keys; neither exists in the vendored CA or pinned engine
+SquadManager implementation. Steamroller is intentionally documented as
+having at most one harasser because the engine always creates the first
+guerrilla squad and YAML cannot express zero guerrilla units.
+
+There is no current in-game personality announcement. A condition-triggered
+notification/observer integration is a follow-up.
+
 ## Counts by bug class
 
 | class | what | count | report |

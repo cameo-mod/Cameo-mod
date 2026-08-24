@@ -56,7 +56,7 @@ export PYTHONIOENCODING=utf-8
 # encodes the RETIRED 2000-step grid and the `main // 2000` percentage twin.
 # The live law is formula.DAMAGE_STEP (= 100) + formula.percentage_twin().
 # Re-derive it from `formula` before wiring it in; see docs/HANDOFF.md.
-for a in inherits duplicate_inherits faction_leaks upgrades upgrade_coverage ai sequences \
+for a in inherits duplicate_inherits faction_leaks upgrades upgrade_coverage ai ai_personalities sequences \
          metadata outliers orphans assets fluent power_budget stat_formulas \
          weapon_uniqueness garrison_weapons asset_files promotion_gating min_range \
          basebuilder_crates buildable_order display_text rename_safety \

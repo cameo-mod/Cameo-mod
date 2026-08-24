@@ -73,6 +73,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 **Process, tooling and platform**
 
+- [YAML-only AI personalities and dead squad-manager keys (2026-08-21)](#yaml-only-ai-personalities-and-dead-squad-manager-keys-2026-08-21)
 - [Content installer and music filesystem plumbing (2026-08-11)](#content-installer-and-music-filesystem-plumbing-2026-08-11)
 - [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
 - [YAML lint rules learned (2026-07-24)](#yaml-lint-rules-learned-2026-07-24)
@@ -82,6 +83,23 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Two ways a gate passes its own verification and is still broken (2026-08-23)](#two-ways-a-gate-passes-its-own-verification-and-is-still-broken-2026-08-23)
 
 ---
+
+## YAML-only AI personalities and dead squad-manager keys (2026-08-21)
+
+The Cameo AI personality selector uses `GrantRandomCondition` on the inherited
+`Player` actor and gates five independent `SquadManagerBotModuleCA` instances
+with mutually exclusive personality conditions. The instances must duplicate
+their shared fields: YAML trait inheritance is keyed by the trait suffix, so a
+shared fallback can leave live managers with different or incomplete values.
+`tools/audit/audit_ai_personalities.py` compares every non-tuning field
+byte-for-byte and checks selector/consumer condition parity.
+
+`RushInterval` and `RushAttackScanRadius` are stale squad-manager keys. They
+are absent from both the vendored CA trait and the pinned engine, and must not
+be copied into new instances. Steamroller cannot express zero guerrilla units
+in YAML: the engine's `guerrillaForce == null` short-circuit creates the first
+guerrilla squad regardless of `JoinGuerrilla`, so its documented behavior is
+at most one harasser.
 
 ## Content installer and music filesystem plumbing (2026-08-11)
 
