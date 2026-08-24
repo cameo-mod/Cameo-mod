@@ -80,6 +80,7 @@ shares.
 | B10 | dead content | 374 orphan weapons · **0** dangling refs · 15 dead conditions | `orphans.md` |
 | B11 | asset norms | 148 / 2006 PNGs over budget · 1817 / 4390 WAVs off-norm | `assets.md` |
 | B12 | localization | **0** unresolved fluent refs · 526 orphaned `actor-*` messages | `fluent.md` |
+| B13 | basebuilder crate coverage | **29/29** factions covered · 0 missing | `basebuilder_crates.md` |
 | R2 | stacked multipliers | 790 units over the 2.0× power budget | `power_budget.md` |
 | W | weapon uniqueness (§10) | 34 same-faction · 34 cross-faction · 95 carrier-only | `weapon_uniqueness.md` |
 | G | garrison weapons (§11) | **0 G1** · 0 G2 · 0 G3 | `garrison_weapons.md` |
@@ -138,7 +139,8 @@ so they cannot rot in prose again.
 3. **B2b duplicate inherit paths / D1 dropped inherits** — the class that produces
    `Parent type X was already inherited` boot crashes and silently-dropped templates. Only the
    boot and `audit_duplicate_inherits` can see it.
-4. **G1 garrison weapons (0)** and **B6 missing images (0)** — small, bounded, player-visible.
+4. **G1 garrison weapons (0)**, **B6 missing images (0)**, **B12 fluent (0)**,
+   and **B13 basebuilder crate coverage (29/29)** — small, bounded, player-visible.
 5. **B1 cross-faction leaks (435 L1)** — the count grew because the audit's faction coverage
    grew, not only because the tree got worse. Triage before treating it as 435 bugs.
 6. **B3/B4 upgrade direction and coverage**, plus transcribing the remaining 568

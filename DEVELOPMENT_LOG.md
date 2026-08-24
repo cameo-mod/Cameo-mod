@@ -2963,3 +2963,11 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   which did not exist. Added `upgrade_burninglasers` to `mods/cameo/fluent/rules/en.ftl`.
 - `audit_fluent` now reports F1: **0** (was 1).
 - Boot-gate passed; no new exceptions.
+
+## 2026-08-24 — Fix missing Harkonnen basebuilder crate
+
+- `audit_basebuilder_crates` reported `harkonnen` as the only faction without an
+  MCV basebuilder crate. Added `GiveBaseBuilderCrateAction@harkonnen` to
+  `mods/cameo/rules/misc.yaml` granting `harkonnen_mobileconstructionvehicle`.
+- `audit_basebuilder_crates` now reports 29/29 covered, missing: **0**.
+- Boot-gate passed; no new exceptions.
