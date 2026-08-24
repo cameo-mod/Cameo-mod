@@ -2026,9 +2026,11 @@ ShtoraLaser:
 		#ValidTargets: Vehicle, Infantry, Ship, Submarine, Defense
 
 KotinCannon:
-	Inherits@wh: ^Warhead_CannonHE_Heavy
+	Inherits@wh: ^Warhead_CannonNuke_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
+	Inherits@fx2: ^Effect_Nuclear_Super
+	ValidTargets: Ground, Water
 	Report: tnkfire6.aud
 	ReloadDelay: 96
 	Range: 6427
@@ -2036,7 +2038,7 @@ KotinCannon:
 	BurstDelays: 4
 	Projectile: Bullet
 		Speed: 642
-	Warhead@CannonHE_Heavy:
+	Warhead@CannonNuke_Heavy:
 		Damage: 12000
 	Warhead@Radiation: CreateTintedCells
 		InvalidTargets: RadiationImmmune
@@ -2046,8 +2048,9 @@ KotinCannon:
 		MaxLevel: 1000
 		LayerName: ra2radiation
 	Warhead@Effect: CreateEffect
-		Explosions: poof
+		Explosions: nuke_small
 		ImpactSounds: xplosml2.aud
+		ImpactActors: true
 
 KotinCannonThermobaric:
 	Inherits@wh: ^Warhead_CannonFire_Heavy

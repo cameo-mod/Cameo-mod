@@ -1,5 +1,20 @@
 # Development Log
 
+## 2026-08-24 — Correct KotinCannon and WC2 garrison exceptions
+
+- `KotinCannon` (`ra1_soviets_kotinnucleartank`) repointed from `^Warhead_CannonHE_Heavy`
+  to `^Warhead_CannonNuke_Heavy` with `Damage: 12000` preserved, plus `^Effect_Nuclear_Super`
+  for nuke smudge/concrete; local `Warhead@Effect` now uses `nuke_small` with `xplosml2.aud`
+  and `ImpactActors: true`.
+- `ValidTargets: Ground, Water` set on `KotinCannon` so the nuke family does not auto-target air.
+- Reverted `a21a8b04a` garrison additions for the six exception-listed WC2 melee/caster infantry:
+  `wc2_humans_footman`, `wc2_humans_warcraft3footman`, `wc2_humans_highelfpriest`,
+  `wc2_humans_highelfsorceress`, `wc2_orcs_grunt`, `wc2_orcs_warcraft3grunt`.
+- Updated `docs/design/garrison_exceptions.yaml` to include the real WC2 actor IDs
+  (`wc2_humans_*` / `wc2_orcs_*`) so `audit_garrison_weapons` keeps G1 at 0.
+- Re-ran `extract_stats`, `audit_garrison_weapons`, `find_empty_warhead`, `find_orphan_old_keys`,
+  `audit_warhead_split`, `audit_doc_claims`; boot-gated, no new exceptions.
+
 ## 2026-08-24 — Prerequisite order cleanup (47 actors)
 
 - Reordered `Prerequisites` tokens in 47 buildable actors to satisfy the buildable-order audit

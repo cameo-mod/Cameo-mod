@@ -10930,9 +10930,9 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 50, 20, 0",
+        "falloff": "100, 88, 75, 62, 52, 42, 33, 24, 16, 8, 0",
         "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "CannonNuke_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -10944,12 +10944,13 @@
       "requires": "!ra1_soviets_upgrade_nucleartankshells",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
+       "^Warhead_CannonNuke_Heavy",
        "^Projectile_Shell_Heavy",
-       "^Effect_CannonHE_Heavy"
+       "^Effect_CannonHE_Heavy",
+       "^Effect_Nuclear_Super"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_CannonNuke_Heavy"
       ],
       "weapon": "KotinCannon",
       "weapon_class_source": "template"
