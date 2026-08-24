@@ -12,10 +12,10 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
 | `live_damage_multipliers` | 354 | 354 | ✅ |
-| `multi_main_fired_weapons` | 925 | 925 | ✅ |
+| `multi_main_fired_weapons` | 917 | 917 | ✅ |
 | `percentage_denominator_unset` | 0 | 0 | ✅ |
 | `unmigrated_scout_damage_multiplier` | 15 | 15 | ✅ |
-| `meters_filling_before_death` | 137 | 137 | ✅ |
+| `meters_filling_before_death` | 139 | 139 | ✅ |
 | `corrosion_meter_actors` | 785 | 785 | ✅ |
 | `w24_multi_main_fed` | 380 | 380 | ✅ |
 | `physical_state_fired_weapons` | 460 | 460 | ✅ |
@@ -23,7 +23,7 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `plating_families` | 46 | 46 | ✅ |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
 | `warhead_family_reach` | 1245 | 1245 | ✅ |
-| `unconverted_template_inheritors` | 1162 | 1162 | ✅ |
+| `unconverted_template_inheritors` | 1157 | 1157 | ✅ |
 | `ledgers_drifted` | 0 | 0 | ✅ |
 
 _clean_ — every registered claim still matches the tree.

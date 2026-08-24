@@ -37,9 +37,9 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured 2026-08-17 |
 |---|---|
-| W24 — fired weapons with **more than one** damage main | **925 of 1622 = 57.0%** (histogram runs out to 15 mains) |
+| W24 — fired weapons with **more than one** damage main | **917 of 1622 = 56.5%** (histogram runs out to 15 mains) |
 | armament slots whose `K` moves when those collapse | **1 547** |
-| fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1196 inheritors) |
+| fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1157 inheritors) |
 
 Collapsing N mains into 1 preserves the damage SUM (`formula.spread_damage_sum`) but **not
 `K`** — `K` is share-weighted over each warhead's armor profile, so picking ONE family changes
@@ -590,7 +590,7 @@ delivery and price number measured before it lands is measuring the wrong object
 | A3 | Fix the three misclassifications onto templates that already exist (`CannonChem` ×2, `Plasma` ×1) | invariant diff = 0 |
 | A4 | Rename `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1` + its condition, then the Su-57 and MonsterTank weapon pairs per ruling 2 | `safe_rename.py`, fluent keys |
 | A5 | Collapse the 27 single-user templates | template census |
-| A6 | Continue the burn-down: `w24_multi_main_fed` **380**, `multi_main_fired_weapons` **925** | both ratchets fall |
+| A6 | Continue the burn-down: `w24_multi_main_fed` **380**, `multi_main_fired_weapons` **917** | both ratchets fall |
 
 ### Phase B — the physical-state half (parallel to A, different file set)
 
@@ -1404,10 +1404,10 @@ that that were not converted yet?"*) — `tools/audit/audit_unconverted_template
 inheriting no `^Warhead_*` parent has not been converted, and is simultaneously a live
 violation of "Versus lives ONLY in `^Warhead_*` templates".
 
-**45 unconverted templates, 1196 direct inheritors.** Biggest: `^ShrapnelWeapon` (90) →
-Concussion · `^Grenade` (87) → Demolition/Concussion · `^FlakWeapon` (82) → Flak ·
-`^MediumChemicalWeapon` (73) · `^MediumMissile` (68) · `^TankDestroyerCannon` (68) → CannonAP ·
-`^MediumFlameWeapon` (66) · `^Chaingun` (60) → Bullet. Every target family already EXISTS, so these are retrofits, not
+**45 unconverted templates, 1157 direct inheritors.** Biggest: `^ShrapnelWeapon` (88) →
+Concussion · `^Grenade` (84) → Demolition/Concussion · `^FlakWeapon` (78) → Flak ·
+`^MediumChemicalWeapon` (70) · `^MediumMissile` (67) · `^TankDestroyerCannon` (66) → CannonAP ·
+`^MediumFlameWeapon` (64) · `^Chaingun` (59) → Bullet. Every target family already EXISTS, so these are retrofits, not
 design. `^SniperWeapon` / `^HealingWeapon` / `^RepairWeapon` stay out by design.
 
 ---
@@ -2756,7 +2756,7 @@ generator ships that matrix on purpose and `verify_generator_sync.py` requires i
 ## W24 / W25 — see `ARMOR_LAYERS.md` and DESIGN.md §11b
 
 **W24 (one warhead per weapon)** is now a written binding rule — DESIGN.md **§11b**. Among
-fired weapons, **34.5%** comply (560 of 1622); **57.0%** (925 of 1622) carry 2 or more damage
+fired weapons, **34.5%** comply (560 of 1622); **56.5%** (917 of 1622) carry 2 or more damage
 warheads, worst case **15**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
 content ships, because same-family collisions are a symptom of it rather than a bug in the
 conversion. Collapsing preserves the SUM; where no family fits, a NEW family is created

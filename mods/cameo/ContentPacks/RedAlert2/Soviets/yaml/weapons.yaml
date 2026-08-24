@@ -306,10 +306,10 @@ RA160mmE_tesla_elite:
 		Amount: 2
 
 RA2120xmm:
-	Inherits: ^TankDestroyerCannon
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^RA2HeavyCannon
-	Inherits@fx: ^Effect_Apoc_Explosion_RA2
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@fx2: ^Effect_Apoc_Explosion_RA2
 	Range: 6992
 	ReloadDelay: 63
 	Burst: 2
@@ -317,69 +317,51 @@ RA2120xmm:
 	Report: vapoat1a.wav
 	Projectile: Bullet
 		Speed: 699
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@CannonHE_Heavy:
-		Damage: 4000
-RA2120xmm_rad:
-	Inherits: ^LightChemicalWeapon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^HeavyChemicalWeapon
-	Inherits@4: RA2120xmm
-	Inherits@rad: ^RA2RadShell
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		Inaccuracy: 150
 	Warhead@CannonAP_Light: AreaDamage
-		Damage: 2000
-	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
-		Damage: 1
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-	Warhead@CannonHE_Heavy:
-		Damage: 2000
+		Damage: 12000
+	Warhead@Effect: CreateEffect
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+RA2120xmm_rad:
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Chem_Light
+	Inherits@fx2: ^Effect_Apoc_Explosion_RA2
+	Inherits@rad: ^RA2RadShell
+	Range: 6992
+	ReloadDelay: 63
+	Burst: 2
+	BurstDelays: 5
+	Report: vapoat1a.wav
+	InvalidTargets: wall
+	Projectile: Bullet
+		Speed: 699
+		Inaccuracy: 150
+	Warhead@Chemical_Light: AreaDamage
+		Damage: 16000
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@Effect: CreateEffect
+		ImpactActors: false
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 RA2120xmm_fire:
 	Inherits: RA2120xmm
 	Warhead@FireShrapnel: FireShrapnel

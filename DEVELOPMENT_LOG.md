@@ -2839,3 +2839,34 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 - Extended splice_templates.py to append missing ^Warhead_* blocks at end of weapons.yaml.
 - Ran splice_templates --all: 112 blocks (15 new) spliced/ appended; verify_generator_sync drift 0; extract_stats regenerated, 0 drift; find_empty_warhead 0; find_orphan_old_keys 0 real; audit_warhead_split 944 vs baseline 939 (expected red, unchanged).
 - Boot-gate reached MenuPostProcessEffect.PostWorldLoaded; no new exception-*.log.
+
+## 2026-08-24 — W24 Phase B: RA2 Apocalypse 120mm and rad-chemical 3-way split
+
+- Converted RA2120xmm and RA2120xmm_rad in
+  mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml to the canonical
+  three-layer composition:
+  - RA2120xmm: ^Warhead_CannonAP_Light, ^Projectile_Shell_Light,
+    ^Effect_CannonAP_Light, with ^Effect_Apoc_Explosion_RA2 as an RA2 visual
+    addon and a local EffectAir override to preserve ig_explosion_air.
+  - RA2120xmm_rad: ^Warhead_Chemical_Light, ^Projectile_Shell_Light,
+    ^Effect_Chem_Light, with ^Effect_Apoc_Explosion_RA2 and ^RA2RadShell as
+    addons; local EffectAir, smudges, and radiation behaviour preserved.
+- Per-shot totals preserved: RA2120xmm 12000 flat, RA2120xmm_rad 16000 flat.
+- 
+eview_resolve_diff.py before/after passes: behavioural invariants preserved
+  for both weapons and child variants (RA2120xmm_fire, RA2120xmm_tesla,
+  RA2120xmm_elite, RA2120xmm_rad_elite, RA2120xmm_fire_elite,
+  RA2120xmm_tesla_elite).
+- Audits: ind_empty_warhead.py 0; ind_orphan_old_keys.py 0 real;
+  udit_warhead_split broadcast baseline lowered 939 -> 931;
+  udit_doc_claims all 19 green after updating doc_claims.yaml and affected
+  docs; extract_stats.py --check 0 drift; erify_generator_sync 0 drift.
+- Re-extracted balance ledgers with 	ools/balance/extract_stats.py; only
+  docs/balance/redalert2_soviets.json + docs/balance/derived/redalert2_soviets.json
+  changed.
+- Updated documentation counts: docs/audit/doc_claims.yaml,
+  docs/design/BALANCE_PROGRAM_PLAN.md, docs/HANDOFF.md,
+  docs/audit/SUMMARY.md, docs/audit/latest/doc_claims.md,
+  docs/audit/latest/unconverted_templates.md.
+- Boot-gate: reached MenuPostProcessEffect.PostWorldLoaded; no new
+  exception-*.log files.

@@ -119,9 +119,9 @@ its §0a.
 
 | id | debt | measured |
 |---|---|--:|
-| W24 | fired weapons carrying more than one damage main | **925** |
+| W24 | fired weapons carrying more than one damage main | **917** |
 | W23 | fired weapons reaching a `^Warhead_*` family | **1231** |
-| W23 | direct inheritors of the legacy weapon templates | **1162** |
+| W23 | direct inheritors of the legacy weapon templates | **1157** |
 | W26 | live `DamageMultiplier` declarations | **353** |
 | W11 | class anchors the maintainer has signed off | **0** — so no price is final |
 
