@@ -98,9 +98,14 @@ modules in particular carry Cameo-specific behaviour.
 Fully automatic adoption is not safe — the engines differ by 2 581 commits, so any CA change can
 fail to compile here. What can be automated is **noticing**, and that is the part that decays:
 
-1. **`audit_ca_drift` runs in the suite** (`tools/audit/run_all.sh`), so every full run reports
-   the counts and every new upstream file appears in `docs/audit/latest/ca_drift.md`. It is
-   INFORMATIONAL and never fails a build — adopting CA code is a maintainer decision.
+1. **Three audits run in the suite** (`tools/audit/run_all.sh`), all INFORMATIONAL — adopting
+   upstream code is a maintainer decision, never a gate:
+   * `audit_ca_drift` — per-FILE drift against CA, and every upstream file not adopted;
+   * `audit_upstream_adoption` — what is left across all five mods by TYPE, with duplicates
+     paired off by `[Desc]` text (§7);
+   * `audit_engine_freshness` — the gap to `openra/bleed` and to `mtr/rv-engine`, plus whether
+     `engine/VERSION` matches `mod.config`. It does not fetch; refresh the `cameo-engine` clone
+     first or the number is as stale as the last fetch.
 2. **Record provenance.** When a file is adopted, note the CA commit it came from in its header,
    the way the ported observer widgets do. Without that, a future three-way merge has no base
    and every re-sync is guesswork.
@@ -155,11 +160,12 @@ That is also the answer to *"follow CA without losing what we got from RV"* — 
 lose. The RV/SP inheritance lives in Cameo's ENGINE (`OpenRA.Mods.AS` above all), which CA does
 not have and which adopting CA mod code does not touch.
 
-### The engine picture, once all five are measured
+### The engine picture, once everything is measured
 
 Every "N commits ahead" figure in this document is measured against the point where
 **`cameo-engine` last took upstream OpenRA**: `b0b0544d4a`, **2026-05-11**, which is a commit on
-`openra/bleed`. Stated from there, the whole landscape is small:
+`openra/bleed`. That point is also why `bleed` itself belongs on this page — see the next
+section. Stated from there, the whole landscape is small:
 
 | | |
 |---|---|
@@ -171,6 +177,48 @@ Every "N commits ahead" figure in this document is measured against the point wh
 So Cameo is not far from anyone: it is **70 upstream commits behind bleed**, and each sibling mod
 sits a different distance past that same sync point. A number like "CN is 8 227 ahead" is an
 artifact of history shape, not of work — see the CN section below.
+
+### OpenRA bleed — the sixth upstream, and the only one that is not a mod
+
+> Maintainer, 2026-08-23: *"add the OpenRA bleed to the repository list because we also want to
+> update from there as well … It should always try to keep it up to date there as well."*
+
+`OpenRA/OpenRA` branch `bleed` is where all five mods ultimately descend from, Cameo included.
+It belongs on this page, but it is a different KIND of upstream and the difference matters:
+
+* the five mods are absorbed by **copying types into a mod assembly** — reversible, inert until
+  yaml references them, and gated by nothing heavier than a build;
+* bleed is absorbed by **moving the engine**, which is the multi-step pipeline in
+  `docs/LESSONS_LEARNED.md` (merge in the separate `cameo-engine` clone → push → set
+  `ENGINE_VERSION` in `mod.config` → `make.cmd all` → **recreate `engine/glsl/` shaders, which the
+  refetch wipes** → boot-gate) and touches every faction at once.
+
+**Measured 2026-08-23:** Cameo is **70 non-merge commits behind `openra/bleed`**, and 47 behind
+`mtr/rv-engine`, its direct parent. What is in that gap:
+
+| | |
+|---|---|
+| rendering + performance (Gustas, 22 commits) | SIMD colour, matrix quad/text rotation, batched interleaved blend modes, texture subdata uploads, `float2/3` → `Vector2/3`, trigonometry and dedup speedups |
+| allocation + language (RoosterDragon, 8) | `MiniYaml.FromLines` via `GetAlternateLookup`, `AggregateBy`/`CountBy`, C# 13 |
+| build + platform (Mailänder, michaeldgg2) | **.NET 10**, ARM packaging, x86 and Mono dropped |
+| pathfinding / gameplay fixes | units not moving aside to avoid deadlocks, `Move.UnblockDestination`, saboteur stuck, dock closest-path search, veins vs submerged units |
+| ⭐ one real feature | **"Implement the Tiberian Sun Firestorm Defense"** (Matthias Hoste) — directly relevant, Cameo ships TS factions |
+
+⚠ **This is not a free update.** The .NET 10 upgrade and the Mono/x86 removals change the build,
+and `engine/glsl/` shaders must be recreated after the refetch. Schedule it deliberately, not as a
+side effect of another task.
+
+⭐ **`python tools/audit/audit_engine_freshness.py` (in `run_all.sh`) keeps the number honest.**
+It reads the `cameo-engine` clone — never `engine/`, which is a gitignored build output — and
+reports the gap to both `upstream/bleed` and `mtr/rv-engine`, plus whether `engine/VERSION`
+matches `mod.config`. It deliberately does **not** fetch: it prints each ref's own date so a stale
+answer is visible instead of silently wrong. Refresh with
+`git -C ~/Documents/GitHub/cameo-engine fetch upstream mtr --no-tags` before reading it.
+
+⚠ `engine/VERSION` is **UTF-16 LE with a BOM** — the SDK writes it from PowerShell, the same
+hazard that forces `bash run_all.sh`. Reading it as UTF-8 gives NUL-separated digits that match
+nothing; the first cut of this audit reported a permanent, false "the built engine is not the
+pinned one" because of exactly that.
 
 ### Generals Alpha — measured 2026-08-23
 
@@ -220,14 +268,28 @@ helpers:
 | **`PilotChamber`, `FakePower`, `RadarIcon`, `WithTerrainDependantSpriteBody`** | 4 | pilot ejection, decoy support powers, custom radar blips, terrain-dependent bodies |
 | **Bot modules** | 2 | `InitialBaseAndWorkerBotModule`, `GeneralCollectorBotModule` — ⚠ Cameo's AI is reworked; treat as reference, not as a drop-in |
 
-**Two patterns in its yaml that cost no C# at all.** 33 files is a small assembly for a mod this
-size because much of Generals is expressed in rules:
+**Two things its yaml teaches, one of them a warning.** 33 files is a small assembly for a mod
+this size because much of Generals is expressed in rules — and one of those rule systems we
+already run:
 
-* **The generals-power tree is buildable upgrade ACTORS** (`rules/generals_powers.yaml`, 1 097
-  lines). Each power is an actor with `Buildable` into a per-general queue, `BuildLimit: 1`,
-  `ProvidesPrerequisite`, and `WithProductionIconOverlay` to grey the icon once taken; the
-  promotion-point economy is just a `prerequisite.has_points` prerequisite. No custom trait
-  anywhere. Cameo already has research/upgrade queues, so this is a pattern to copy, not code.
+* ⛔ **The generals-power tree is ALREADY HERE — it is Cameo's promotions system**, and ours is
+  the more developed of the two. Do not "adopt" it. The lineage is visible in the actor names:
+  both `rules/promotions.yaml` and GenSDK's `rules/generals_powers.yaml` declare
+  `hack.has_points`, `hack.rank_3` and `hack.rank_5`, each `ProvidesPrerequisite` onto a
+  tooltip-only prerequisite actor (`rank1`/`rank3`/`rank5` here, `prerequisite.has_points`/
+  `.3_stars`/`.5_stars` there), feeding a dedicated `ClassicProductionQueue` of buildable
+  upgrade actors. Cameo even kept the Generals vocabulary: `canselectfrenzy` reads *"OF-3 or
+  Infantry General"* and `canselectrepair` *"OF-3 or Stealth, Nuclear, Tank Generals"*.
+
+  What Cameo added on top is real C#: `PlayerPromotions` (XP thresholds, `PointsPerRank` presets
+  default/classic/double/allatstart/none, lobby option, level-up notifications) and
+  `UsePointsOnProduction`, both in `OpenRA.Mods.Cameo`. **GenSDK has no promotions trait at all**
+  — 33 source files, none of them about ranks; it uses stock `PlayerExperience`.
+
+  ⭐ The ONE delta worth taking is not a port: GenSDK puts `WithProductionIconOverlay` on each
+  power so a taken icon greys out. That trait is stock `OpenRA.Mods.Common`, already available
+  here, and Cameo uses it **0 times** — wiring it into `^PromotionUpgradeTemplate` is a yaml-only
+  change.
 * **`FullnessConditions` drives artwork from a stored amount.** `SupplyDock` takes a
   threshold → condition map (`834: one_third`, `1667: two_thirds`), and the sprite bodies switch on
   those conditions while `KillsSelf: RemoveInstead` clears the husk at zero. That threshold→
@@ -298,6 +360,11 @@ So a CN feature is a mod-side copy if its type lives in `.modsdk/OpenRA.Mods.CN`
    engine lineage is measured; nothing here is blocked on research any more.
 4. **CA by capability** — §3, the largest and slowest, and the one where usage rather than
    adoption is the bottleneck.
+
+Running alongside all four, on its own schedule: **catching `openra/bleed` up** (70 commits,
+above). It is independent of every mod-side port — different mechanism, different risk, and it
+touches every faction at once, so it wants a session of its own rather than a slot in this queue.
+`audit_engine_freshness.py` reports the gap on every suite run so it cannot quietly grow.
 
 ⚠ The same trap applies to all five: `ObjectCreator.FindType` takes the FIRST assembly in
 `mod.yaml`'s `Assemblies:` order — **AS, CA, Cameo, Cnc, D2k, Common**. A ported type placed in

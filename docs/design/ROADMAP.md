@@ -122,60 +122,54 @@ Documented in `PHYSICAL_STATE_SYSTEM.md` §5 but not built: **Sonic → `Resonan
 new C#), **Hex** (Magic: −firepower/−accuracy/disable specials), **ArmorBreach**, **Knockback**
 (needs new C#). Only **Temperature** (98.6% exposure) and **Corrosion** (45.0%) exist today.
 
-## ⛔ BROKEN LADDERS — `audit_level_ladder` 9 vs ratchet 9 (breached at 10 on 2026-08-23)
+## ✅ RULED — the "broken ladders" were never broken (2026-08-23)
 
-The suite exited 1 on this until `a9f31258` brought it back to the ratchet; the nine below are
-still broken and still need a ruling. **The breach was ours, from tick tank commit
-`f9b71bffa`**, and it stayed
-invisible because `docs/audit/latest/level_ladder.md` had not been regenerated since `52b364cb5`,
-which PREDATES that commit — so a FAIL sat in the tree reporting itself as a WARN at baseline.
+Superseded the `⛔ BROKEN LADDERS` section that stood here and had been re-reported as an open
+maintainer question for days. **`audit_level_ladder` is retired.** It required a family's
+EFFECTIVE damage to rise Light -> Medium -> Heavy -> Super, and no law ever said so:
 
-Moving `TS90mm` / `TSLaser90mm` from `CannonHE_Medium` to `CannonAP_Medium` gave `CannonAP` a
-SECOND populated rung, so the family crossed the "2+ rungs with 2+ weapons" threshold and became
-measurable for the first time. What it measured:
+* **DESIGN §12.0d** makes the LEVEL a TILT — which armor the weapon is good against — not a
+  magnitude.
+* **DESIGN §12.0h** makes `Damage` a separate, free knob, and normalises every profile to MEAN 100
+  precisely so the tilt costs nothing.
+* Structurally decisive: **145 of the `^Warhead_*` templates carry only a placeholder
+  `Damage: 2000`.** The template holds the SHAPE, the weapon holds the MAGNITUDE. A family's damage
+  ladder is emergent from per-weapon values, and collapsing the levels into a continuous `h` never
+  touches a damage number.
 
-| family | Light | Medium | verdict |
-|---|--:|--:|---|
-| `CannonAP` | **48000** _(n=7)_ | **6000** _(n=2)_ | ⛔ INVERTED — Light hits **8x** harder than Medium |
+So nine families sat in a standing WARN against a rule that did not exist, and it was listed as
+blocker #1 of `WEAPON_HEAVINESS.md` §9.6 — blocking the bell for no reason.
 
-⚠ The tick tank change did not CREATE this; it EXPOSED it. `CannonAP_Light` was already at 48000
-while the weapons now on `CannonAP_Medium` sit at 6000. One of the two rungs is wrong.
+> **Maintainer, 2026-08-23**, restating the model in their own words: *"the weapon family should be
+> the most important and the heaviness level should only nudge it a little … a low level CannonAP
+> will lean stronger towards lighter armor types but still deal more damage to heavy armor … Flame
+> weapons will be the opposite … but still more damage to light, because that's their identity."*
 
-### All nine, so they can be ruled on in one pass
+That is §12.0d's sharpen-or-flatten sentence, and it is now **DESIGN §12.0i** with all four
+constants ruled: `SHIFT` 0.25, `LO` 0.80 (swing ~1.25x), x-axis = §12.0d's three buckets, and
+**heaviness has no price effect** (`Versus` = WHAT, `Damage` = HOW).
 
-`CannonAP` is the family that crossed the measurability threshold, but it is not the only broken
-ladder. The full report (`python tools/audit/audit_level_ladder.py`, re-measured at `3b320c89`)
-reads:
+**Replaced by `tools/audit/audit_heaviness_bell.py`**, which simulates the bell before it exists so
+§9.6 step 6 has its test waiting. Measured across 48 families, checking each ladder's FULL rank
+order: **0 orderings changed, 0 mean drift**, and 2 families with no gradient (`Sonic`, `Magic` —
+down from the 6 §9.2 predicted, since `fit_band_floor` gave `Cryo`/`Railgun`/`Waveforce`/`Storm`
+real gradients).
 
-| family | Light | Medium | Heavy | Super | verdict |
-|---|--:|--:|--:|--:|---|
-| `CannonAP` | 48000 _(n=7)_ | 6000 _(n=2)_ | — | — | ⛔ INVERTED |
-| `Chemical` | 20000 _(n=9)_ | 32000 _(n=9)_ | 30000 _(n=3)_ | — | ⛔ INVERTED |
-| `Flak` | 32000 _(n=2)_ | 8000 _(n=15)_ | — | — | ⛔ INVERTED |
-| `Inferno` | 6000 _(n=5)_ | 10000 _(n=4)_ | 6000 _(n=5)_ | — | ⛔ INVERTED |
-| `MissileAP` | 20000 _(n=23)_ | 12000 _(n=26)_ | 12000 _(n=31)_ | — | ⛔ INVERTED |
-| `Tesla` | — | — | 12000 _(n=47)_ | 6500 _(n=20)_ | ⛔ INVERTED |
-| `Thermobaric` | — | 24000 _(n=2)_ | 18000 _(n=2)_ | — | ⛔ INVERTED |
-| `Bullet` | 4000 _(n=49)_ | 4000 _(n=40)_ | — | — | ⚠ FLAT |
-| `MissileFire` | 24000 _(n=2)_ | 24000 _(n=2)_ | — | — | ⚠ FLAT |
+⛔ **An earlier version of this section recorded two permanent "known inversions" and a gap in
+§9.4 that called for authoring new gradients. Both are RETRACTED.** They were artifacts of the
+audit skipping §12.0d's rank restore — the tilt is applied to the VALUES and each armor is then
+given back the RANK it held. Without that step the bell reorders ladders in **127** cases across 60
+family/ladder pairs; with it, **zero**. Nothing needs authoring.
 
-Rising correctly: `BulletCryo`, `CannonHE`, `Demolition`, `Flame`, `Laser`, `MissileChem`,
-`MissileHE`. Fifteen more families are still too thin to judge (fewer than 2 rungs with 2+
-weapons), so this list can move in either direction as W23/W24 adoption fills the rungs — which
-is an argument for ruling on the SHAPE of the ladder rather than on nine separate pairs of
-numbers.
+⛔ **The x-axis is NOT settled.** The maintainer wants every armor to carry its OWN unique
+continuous value; the interim per-ladder form is unique within a ladder but collides across them.
+Recorded as an explicit OPEN block in DESIGN §12.0i — think it through before changing anything.
 
-⚠ **It was ten on 2026-08-23 and the count fell without anyone ruling on anything.** The RA1
-Allies cryo conversion (`a9f31258`) took `Demolition` from FLAT to rising by moving its Heavy
-rung 40000 → 60000, and added a new measurable family (`BulletCryo`, rising). So the audit is
-back to **WARN 9 against ratchet 9** and the suite no longer exits 1 on it. Two things follow:
-the pressure is off, and the count is not a progress metric — a family can leave this list
-because it was fixed, because it fell below the measurability threshold, or because a
-conversion moved its rungs as a side effect. Read the table, not the number.
-
-⭐ **Process lesson, and the more expensive one:** a ratchet that is only re-measured when someone
-remembers is not a ratchet. `f9b71bffa` was boot-gated and shipped without re-running the suite,
-so a FAIL sat in the tree for three commits reporting itself as a WARN at baseline.
+⭐ **The bell is unblocked.** §9.6's blockers 1 and 2 are both gone — blocker 2 (every family in the
+spread band) was already finished on 2026-08-22 and the document had not noticed
+(`audit_versus_profile`: 46 in band, `SPREAD_OFFENDERS_BASELINE = 0`). Next action is §9.6 step 5:
+implement the family-anchored bell in `AreaDamageWarhead`, **inert at h=1**, and prove the resolved
+profiles are byte-identical before any weapon sets a different `h`.
 
 ## ✅ RULED AND SHIPPED — the Cryo families are adopted (2026-08-23, `a9f31258a`)
 
@@ -383,11 +377,10 @@ The blockers previously listed here were measured with a broken hand parser that
 4. ✅ CLEARED — `CannonAP` 1.81x and `Cryo` 1.97x were too flat because the 2x band floor lived
    inside `finish_blend()` (blend families only) and ran BEFORE `class_tilt` reshaped the profile.
    It is now applied to every family, after the tilt (`edd1c4597`). Ratchet **0**.
-5. The broken DAMAGE ladders (`audit_level_ladder.py`) — unaffected by the parser bug, since
-   that audit reads `Damage` through the resolver. Still a balance restat needing
-   `apply_balance --confirm`. **Now 9 against a ratchet of 9 — WARN, not FAIL** (it was 10 and
-   failing on 2026-08-23; `a9f31258` fixed `Demolition`). The measured table and the three
-   distinct shapes are in the RATCHET BREACH section above.
+5. ✅ CLEARED — the "broken DAMAGE ladders" were never a defect. `audit_level_ladder.py` is
+   retired: it enforced a damage-monotonic rule no law states, while §12.0d makes the level a
+   TILT and the templates carry only a placeholder `Damage: 2000`. Replaced by
+   `audit_heaviness_bell.py`; see the RULED section above.
 
 ## ▶ ACTIVE — CAMEO CONTENT INSTALLER
 

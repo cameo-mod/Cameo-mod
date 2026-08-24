@@ -4,8 +4,9 @@ _One page. Live reports: [`latest/`](latest/) · comparison snapshots: [`baselin
 faction map: [`../factions/MATRIX.md`](../factions/MATRIX.md)._
 
 **Evidence date: 2026-08-23**, from `bash tools/audit/run_all.sh` at `e60aab63`, with
-`doc_claims`, `gen_sync` and `level_ladder` re-measured at `519175ae` (all three read only
-tracked files, so they are trustworthy from any checkout).
+`doc_claims` and `gen_sync` re-measured at `519175ae` (both read only tracked files, so they are
+trustworthy from any checkout). `level_ladder` was RETIRED on 2026-08-23 — it enforced a
+damage-monotonic rule no law states — and replaced by `heaviness_bell`.
 Recurring code-health audits and their cadence: [`PERIODIC.md`](PERIODIC.md) +
 [`periodic.json`](periodic.json).
 

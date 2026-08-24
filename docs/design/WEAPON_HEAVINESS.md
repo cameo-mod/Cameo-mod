@@ -63,7 +63,19 @@ broken when families are collapsed.
 
 ---
 
-### 1. Does `h` raise the unit's price? — **YES, automatically**
+### 1. Does `h` raise the unit's price? — ⛔ **REVERSED 2026-08-23: NO, and deliberately so**
+
+> **Maintainer ruling, 2026-08-23** (the choice §9.3 asked for): *heaviness is free; price via
+> Damage.* Renormalising to a constant weighted mean makes `K` invariant in `h`, so heaviness has
+> **no** price effect. That is the intended separation:
+>
+>     Versus  = WHAT the weapon is good against   (RPS shape; heaviness lives here)
+>     Damage  = HOW strong the weapon is          (magnitude; the balance pipeline lives here)
+>
+> A late-game weapon costs more because its `Damage` is higher, not because its profile is shaped
+> differently. **The section below is the superseded analysis** — it is correct about the additive
+> model it was measuring, and that model is no longer the design. Kept for provenance.
+
 
 `tools/balance/weapon_efficiency.py` line 8:
 
@@ -487,11 +499,20 @@ lives in `OpenRA.Mods.Cameo`.
 
 ---
 
-### 5. ⛔ BLOCKER — the ladder must be fixed first
+### 5. ~~⛔ BLOCKER — the ladder must be fixed first~~ — ✅ RETIRED 2026-08-23, NOT a blocker
 
-`audit_level_ladder.py` (ratchet 9 — 9 broken today, see `ROADMAP.md`; in
-`run_all.sh`) measures the EFFECTIVE ladder — median damage
-of the real weapons on each rung:
+⛔ **This section is superseded and kept only for provenance.** The maintainer ruled on 2026-08-23
+that the level is a TILT (§12.0d), not a damage ladder, and that no law ever required a family's
+effective damage to rise with its level. `audit_level_ladder.py` is deleted; the replacement is
+`audit_heaviness_bell.py`, which checks what the bell actually needs. See §9.6, and DESIGN §12.0i.
+
+The decisive fact this section missed: **145 of the `^Warhead_*` templates carry only a placeholder
+`Damage: 2000`** — the template holds the SHAPE, the weapon holds the MAGNITUDE — so collapsing the
+levels never touches a damage number and the ladder cannot block the collapse. The measurement
+below is real; the conclusion drawn from it was not.
+
+`audit_level_ladder.py` measured the EFFECTIVE ladder — median damage of the real weapons on each
+rung:
 
 | verdict | families |
 |---|---|
@@ -548,7 +569,9 @@ Every number here was measured on the resolved ruleset via `tools/audit/miniyaml
 read from a summary. Guards added while investigating:
 
 - `tools/audit/audit_tier_weapon_class.py` — TYPES × LEVELS budget, ratchet 218.
-- `tools/audit/audit_level_ladder.py` — effective ladder monotonicity, ratchet 9 (at 9: WARN).
+- ~~`tools/audit/audit_level_ladder.py` — effective ladder monotonicity, ratchet 9~~ —
+  RETIRED 2026-08-23, replaced by `tools/audit/audit_heaviness_bell.py` (0 inversions,
+  0 mean drift, 2 flat families at ratchet 2).
 
 ⚠ Three earlier versions of these audits measured the WRONG SURFACE — source instead of resolved,
 override instead of addition, template placeholder instead of effective value — and each produced
@@ -611,9 +634,55 @@ The family decides WHERE it is strong; heaviness nudges it heavier or lighter. T
 maintainer's stated intent: *"a heavy AP weapon is even stronger against heavy and worse against
 light"* while a light one stays anti-heavy.
 
+✅ **RULED 2026-08-23 — `SHIFT = 0.25`, `LO = 0.80`, swing ≈ 1.25x.** Restated by the maintainer in
+their own terms, which is the same model arrived at independently:
+
+> *"the weapon family should be the most important and the heaviness level should only nudge it a
+> little … a low level CannonAP will lean stronger towards lighter armor types but still deal more
+> damage to heavy armor, the difference just is not too much, while the heavy CannonAP will deal
+> much more to heavy … Flame weapons will be the opposite: a light flame weapon deals extremely
+> high damage to light and very low to heavy, a heavy flame weapon slightly less to light and a
+> little more to heavy — but still more to light, because that's their identity."*
+
+Those two examples are the two halves of §12.0d's sentence: the shift **sharpens** where it agrees
+with the family's centre of mass (CannonAP, already heavy-ward) and **flattens** where it disagrees
+(Flame, light-ward), and the rank restore means it can never flip Flame into an anti-heavy weapon.
+
 The residual 6 inversions are the FLAT families (`Sonic` 1.00x, `Magic` 1.00x, `Cryo` 1.25x,
 `Railgun` 1.47x, `Waveforce` 1.44x, `Storm` 1.49x) which have almost no gradient to preserve. They
 are fixed by §9.4, not by tuning the bell.
+
+⭐ **RE-MEASURED 2026-08-23 at the ruled constants — the result is better than this predicted**
+(`python tools/audit/audit_heaviness_bell.py`, which simulates the bell before it exists so §9.6
+step 6 has its test waiting):
+
+| | measured |
+|---|--:|
+| families with a full profile | **48** |
+| flat, no gradient for the bell to preserve | **2** — only `Sonic` and `Magic` |
+| weighted-mean drift at h = 0, 1, 2 | **0** (renormalisation holds exactly, confirming §9.1) |
+| ladder directions the bell would flip | **2** |
+
+`Cryo`, `Railgun`, `Waveforce` and `Storm` have been given real gradients since this was written —
+`fit_band_floor` in `gen_weapon_template.py`, 2026-08-22 — so the "residual 6" is down to 2.
+
+⛔ **RETRACTED 2026-08-24 — there are no remaining flips, and the "gap in §9.4" does not exist.**
+An earlier revision of this section recorded `BulletThermobaric` BLD and `CannonFire` AIR as
+permanent exceptions caused by near-flat 1.13x sub-ladders that no 1.25x swing could preserve, and
+called for authoring new gradients under hard rule 4. That was an artifact of the audit **skipping
+§12.0d's rank restore**.
+
+§12.0d applies the tilt to the VALUES and then gives each armor back the RANK it held. Restore that
+step and the count is **zero** — not just for those two endpoints but for the full internal ordering
+of every ladder. Measured across 48 families:
+
+| | ladder orderings changed |
+|---|--:|
+| bell WITHOUT the rank restore | **127** (60 family/ladder pairs) |
+| bell WITH the rank restore | **0** |
+
+So the spread band needs no widening, no warhead needs authoring for this, and the endpoint-only
+check that produced the two "known inversions" was also blind to 125 further reorderings.
 
 #### 9.3 ⚠ TRADE-OFF — a constant mean means heaviness NO LONGER RAISES THE PRICE
 
@@ -632,6 +701,10 @@ but it is a real reversal of the earlier answer and the maintainer must choose k
 late-game weapons should still cost more *because they are late-game*, that must now come from
 Damage or from the tier term in pricing, not from Versus.
 
+✅ **RULED 2026-08-23 — heaviness is free of price; magnitude comes from `Damage`.** §1 above is
+struck accordingly. No tier term is added to the pricing formula: a heavier weapon is priced
+through its `Damage`, exactly like every other magnitude change, and `K` stays invariant in `h`.
+
 #### 9.4 The spread law — 2x to 8x, target 4x
 
 Maintainer ruling: the ratio between a family's highest and lowest Versus must sit in **[2x, 8x]**
@@ -649,20 +722,94 @@ and on the vehicle ladder alone several are far too NARROW (`Sonic` 1.00x, `Magi
 1.25x, `Railgun` 1.47x). Bringing every family into the band is a prerequisite for the bell,
 because a family with no gradient cannot survive any modulation.
 
-#### 9.5 Open: the armor x-axis is a design decision
+#### 9.5 ✅ RULED 2026-08-23, REVISED 2026-08-24 — the axis is per-ladder rung position
 
-The bell needs an x-coordinate per armor class. `None/Light/Medium/Heavy/Superheavy` is an obvious
-ladder, but `Helicopter`, `Heroic`, `Scout`, `Shield`, `Wood`, `Steel`, `Plate`, `Concrete` and the
-air classes are not on one axis. Their placement changes every result above and must be ruled on
-explicitly, not inferred.
+⛔ **The three-bucket answer below is SUPERSEDED.** It ties armors that are not equally heavy, and
+tied coordinates move together under the bell, so heaviness could not tell them apart at all.
 
-#### 9.6 Revised build order
+> Maintainer, 2026-08-24: *"both bomber and helicopter armor type are considered medium but from the
+> two helicopter is the heavier one. Helicopter is actually in between medium and heavy while bomber
+> is between light and medium. Same with the scout to light and the heavy to superheavy."*
 
-1. Fix the 9 broken level ladders (unchanged blocker).
-2. **Bring every family into the 2x-8x spread band** (§9.4) — including authoring real profiles for
-   the flat families. This now BLOCKS the bell, not just follows it.
-3. Rule the armor x-axis (§9.5).
-4. Rule §9.3: should heaviness affect price at all?
-5. Implement the family-anchored bell in `AreaDamageWarhead`, inert at h=1.
-6. Verify no family inverts; verify the weighted mean is invariant.
-7. Collapse to one template per family; set `h` by the `HEAVINESS_RESEARCH.md` §3.3 rule.
+**Ruled: `x(armor)` is the armor's rung index inside its OWN ladder, normalised to 0..2.** The
+ordering is already canonical in `gen_weapon_template.LADDERS` (lightest → heaviest), so nothing new
+is invented:
+
+| ladder | coordinates |
+|---|---|
+| VEH | `Scout` 0.0 · `Light` 0.5 · `Medium` 1.0 · `Heavy` 1.5 · `Superheavy` 2.0 |
+| AIR | `Fighter` 0.0 · `Bomber` 0.67 · `Helicopter` 1.33 · `Spaceship` 2.0 |
+| INF | `None` 0.0 · `Flak` 1.0 · `Plate` 2.0 |
+| BLD | `Wood` 0.0 · `Steel` 1.0 · `Concrete` 2.0 |
+
+Per-ladder rather than one global scale, because §12.0d already makes a cross-ladder comparison
+meaningless: the same lean should land at the same RELATIVE position in every ladder, whatever that
+ladder's granularity.
+
+**What it buys, measured on `CannonAP`'s AIR rows, h=0 → h=2:**
+
+| | Bomber | Helicopter |
+|---|--:|--:|
+| three buckets | 80.35 → 79.49 (**−0.86**) | 82.46 → 81.58 (**−0.88**) |
+| per-ladder | 79.71 → 76.61 (**−3.10**) | 80.09 → 81.88 (**+1.79**) |
+
+Under the buckets both move identically — the bell is blind to the distinction. Under the fine axis
+they move in OPPOSITE directions, which is the design. And it cost nothing: across 48 families both
+axes give the same 2 inversions, the same 2 flat families and zero mean drift.
+
+The superseded reasoning, kept for provenance:
+
+##### ~~9.5a the armor x-axis is §12.0d's three buckets~~
+
+The bell needs an x-coordinate per armor class, and `None/Light/Medium/Heavy/Superheavy` is not one
+axis once `Helicopter`, `Heroic`, `Scout`, `Shield`, `Wood`, `Steel`, `Plate` and `Concrete` are
+included. **Ruled: reuse the three tilt buckets DESIGN §12.0d already defines**, as x = 0, 1, 2:
+
+| x | bucket | armors |
+|--:|---|---|
+| 0 | light | `None` `Wood` `Scout` `Light` `Fighter` |
+| 1 | middle | `Flak` `Steel` `Medium` `Bomber` `Helicopter` |
+| 2 | heavy | `Plate` `Concrete` `Heavy` `Superheavy` `Spaceship` |
+
+Zero new rulings, and guaranteed consistent with the tilt law already shipped and already verified
+(`audit_versus_profile`: *"every family keeps one direction within every ladder, at every level"*).
+
+⚠ **Consequences to implement against, not to be surprised by.** Armors TIE at a coordinate:
+`Scout` = `Light` = 0 and `Heavy` = `Superheavy` = 2, so the bell cannot separate them. It does not
+need to — it only shifts a centre of mass, the family's own base profile still differentiates those
+rungs, and §12.0d restores each armor's rank afterwards. `Shield` is excluded (§12.0c: its own
+compressed ladder, not a normal armor), as are the five ALL-CAPS platings (§12.0e) and `Heroic`
+(§12.0b: a derived cell, recomputed rather than tilted).
+
+#### 9.6 Build order — ⭐ steps 1-4 are DONE; the bell is unblocked (2026-08-23)
+
+| # | step | state |
+|--:|---|---|
+| 1 | Fix the 9 broken level ladders | ✅ **retired, not fixed** — see below |
+| 2 | Every family into the 2x-8x spread band (§9.4) | ✅ **already done 2026-08-22** |
+| 3 | Rule the armor x-axis (§9.5) | ✅ ruled — §12.0d's three buckets |
+| 4 | Rule §9.3: does heaviness affect price? | ✅ ruled — no, price via `Damage` |
+| 5 | Implement the family-anchored bell in `AreaDamageWarhead`, inert at h=1 | ▶ **next** |
+| 6 | Verify no family inverts; verify the weighted mean is invariant | |
+| 7 | Collapse to one template per family; set `h` by the §3.3 rule | |
+
+**Step 1 was never a real blocker.** The ladder audit measured the *effective damage* of the
+weapons on each rung, but 145 of the `^Warhead_*` templates carry only a placeholder `Damage: 2000`
+— the template holds the SHAPE and the weapon holds the MAGNITUDE. Collapsing Light/Medium/Heavy
+into one template plus a continuous `h` therefore never touches a damage number, and a family's
+damage ladder is orthogonal to the bell. The maintainer ruled the monotonic check retired on
+2026-08-23; nothing in §12.0d or §12.0h ever required it.
+
+**Step 2 was already finished and the document had not noticed.** `SPREAD_OFFENDERS_BASELINE = 0`
+in `audit_versus_profile.py`, cleared by `fit_band_floor` in `gen_weapon_template.py` on
+2026-08-22: **46 families in band**, with only `Sonic` and `Magic` excluded as flat by design.
+
+So the next action is step 5 — implementation — with every parameter now fixed:
+
+    x(armor)      = §12.0d bucket -> 0 (light) | 1 (middle) | 2 (heavy)
+    mu(family, h) = centre_of_mass(base_profile) + 0.25 * (h - 1)
+    LO            = 0.80                       (swing ~ 1.25x)
+    Versus(a, h)  = base(a) * curve(x(a), mu)  then renormalised to a constant weighted mean
+
+⚠ Ship it INERT at h=1 first and prove the resolved profiles are byte-identical before any weapon
+sets a different `h` — the same discipline that `AreaDamage` itself shipped under.

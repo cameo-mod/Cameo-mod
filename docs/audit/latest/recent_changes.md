@@ -1,6 +1,6 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **384**, files touched: **873**
+Commits reviewed: **385**, files touched: **875**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
@@ -84,7 +84,7 @@ Commits reviewed: **384**, files touched: **873**
 | mods/cameo/weapons/weapons.yaml | 73 |
 | tools/balance/gen_weapon_template.py | 56 |
 | docs/balance/derived/redalert_soviets.json | 46 |
-| docs/design/ROADMAP.md | 40 |
+| docs/design/ROADMAP.md | 41 |
 | docs/balance/derived/d2k_ixian.json | 38 |
 | docs/balance/derived/redalert2mod_consortium.json | 38 |
 | docs/balance/derived/redalert2mod_futuretech.json | 38 |

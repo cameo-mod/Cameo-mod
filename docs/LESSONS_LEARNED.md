@@ -46,6 +46,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Bulk YAML rename scripts: safety lessons (2026-07-31)](#bulk-yaml-rename-scripts-safety-lessons-2026-07-31)
 - [Loose-extracted .oramap maps must always be repacked before finishing a task (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
 - [Effect-warhead merge safety during 3-way split (2026-08-07)](#effect-warhead-merge-safety-during-3-way-split-2026-08-07)
+- [An audit is not evidence of a law — two guards enforced retired designs (2026-08-24)](#an-audit-is-not-evidence-of-a-law--two-guards-enforced-retired-designs-2026-08-24)
 - [Porting from an upstream mod: a NEW NAME is not a NEW MECHANIC (2026-08-23)](#porting-from-an-upstream-mod-a-new-name-is-not-a-new-mechanic-2026-08-23)
 - [`Inherits` POSITION is semantic, not cosmetic (2026-08-16)](#inherits-position-is-semantic-not-cosmetic-2026-08-16)
 - [Upgrade regressions feel like downgrades (2026-08-19)](#upgrade-regressions-feel-like-downgrades-2026-08-19)
@@ -797,6 +798,57 @@ not file by file.
 `tools/rename/rename_map_*.yaml`, which `gen_rename_maps.py` emits as a side effect of the
 naming report. `git status` after a suite run is therefore *expected* to be dirty in places the
 run never mentions — check what moved before assuming a stray edit.
+
+
+## An audit is not evidence of a law — two guards enforced retired designs (2026-08-24)
+
+A failing audit feels like a finding about the tree. Twice in one session it was a finding about
+the AUDIT, and in one of those cases believing it would have meant **changing shipped content to
+satisfy a rule that no longer existed.**
+
+**1. `audit_physical_state_warheads` demanded warheads the AreaDamage fold had folded away.**
+
+It looked for a separate `Warhead@{Flame,Chemical}_{Light,Medium,Heavy}_Percentage` twin of type
+`AreaDamagePercentage`. All six reported "missing percentage warhead", it had been red for days,
+and the drafted fix was *"make `gen_weapon_template.py` emit the six twins its own comment already
+promises."* That would have added six warheads to satisfy a retired structure.
+
+The fold put all of it in ONE node — `AreaDamageWarhead` carries `PercentageScale`,
+`PercentageSpread`, `PercentageVersus`, `FriendlyFireDamage` and `FriendlyFireSpread` as fields:
+
+```
+Warhead@Flame_Light: AreaDamage
+    Damage: 2000  Spread: 200  Falloff: 100, 90, 78, 60, 0   <- flat
+    PercentageScale: 10000   PercentageSpread: 50            <- percentage, folded in
+    FriendlyFireDamage: 50   FriendlyFireSpread: 50          <- friendly fire, folded in
+    PhysicalStateName: Temperature   PhysicalStateScale: 100 <- the meter
+```
+
+⛔ **The tell that was walked straight past: `verify_generator_sync` reported 0 drift.** The
+generator and the yaml agreed. When two independent artifacts agree and a THIRD checker disagrees,
+**the checker is the suspect** — the same rule already written down as *"a result that contradicts
+a binding law is a contradiction, not a finding"*, and it still lost to the instinct to fix the
+data.
+
+⚠ Second trap inside the first: the meter has **two legal forms**. Flame uses singular
+`PhysicalStateName` + `PhysicalStateScale`; **Chemical uses the `PhysicalStates:` MAP**
+(`Corrosion: 100`), which is what blend families emit. Reading only the singular form makes
+Chemical look like it has no meter at all.
+
+**2. `audit_level_ladder` enforced a damage ladder no law states.** It required a family's
+effective damage to rise Light -> Medium -> Heavy -> Super. DESIGN §12.0d makes the level a TILT,
+§12.0h makes `Damage` a free knob, and 145 `^Warhead_*` templates carry only a placeholder
+`Damage: 2000` — the template holds the SHAPE, the weapon holds the MAGNITUDE. Nine families sat
+in a standing WARN for weeks, and it was `WEAPON_HEAVINESS.md` §9.6's "blocker #1", holding up the
+continuous-heaviness bell for nothing. Retired by maintainer ruling.
+
+**The habit both cases needed:** before acting on an audit's findings, ask **what design era it was
+written for**, and grep `docs/DESIGN.md` for the structure it demands to confirm that structure is
+still current. An audit encodes a law as of the day it was written; DESIGN.md is the law now.
+
+⚠ And the corollary for authors: when a design supersedes a structure, **the guards that enforced
+the old one are part of the change**. Both of these outlived their designs because the yaml moved
+and nobody swept the audits.
 
 
 ## Porting from an upstream mod: a NEW NAME is not a NEW MECHANIC (2026-08-23)

@@ -13,7 +13,7 @@ Documents scanned: **210**
 | D5 | reference to a moved/removed document | 0 |
 | D6 | duplicate section id in DESIGN.md | 0 |
 | D7 | Contents index missing a section | 0 |
-| D8 | citation names a different section's law | 0 |
+| D8 | citation names a different section's law | 2 |
 
 
 ## D1 — Control characters (0)
@@ -51,9 +51,10 @@ _clean_
 _clean_
 
 
-## D8 — Citation points at the wrong law (0)
+## D8 — Citation points at the wrong law (2)
 
-_clean_
+- `tools/audit/audit_heaviness_bell.py`:100 — cites §12.0i (CONTINUOUS HEAVINESS — the family-anchor) but names `Shield`, which is §12.0c (THE SHIELD LADDER (maintainer 2026-08-16)
+- `tools/audit/audit_heaviness_bell.py`:16 — cites §12.0i (CONTINUOUS HEAVINESS — the family-anchor) but names `WEAPON`, which is §11b (ONE WARHEAD PER WEAPON (binding, maintai)
 
 
-**PASS** — no structural defects.
+**FAIL — 2 finding(s).** Fix the document; none of these are cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, D3–D5 send a reader to the wrong place, D7 means a document is hiding its own content from the person who was told to read it, and D8 means a citation resolves — to the wrong law.

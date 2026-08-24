@@ -52,20 +52,47 @@ failed = 0
 CHILD_ENV = dict(os.environ, PYTHONIOENCODING="utf-8")
 
 
-def audits_from_shell() -> list[str]:
-    """Read the audit-name list out of the ``for a in … ; do`` loop in run_all.sh.
+def audits_from_shell() -> tuple[list[str], list[str]]:
+    """Read BOTH ``for a in … ; do`` audit loops out of run_all.sh.
 
-    Parsing the shell script is deliberate: a hand-copied list in this file is
-    exactly the drift that produced the duplicate report set.
+    Returns (gating, advisory). Parsing the shell script is deliberate: a hand-copied list in
+    this file is exactly the drift that produced the duplicate report set.
+
+    ⚠ There are TWO loops since 2026-08-24. The first gates the suite's exit code; the second is
+    ADVISORY — the five scheduled scans from periodic.json, which must not turn the per-commit
+    gate red (see the comment above that loop). A parser that grabbed only the first would
+    silently stop running five audits, which is the same drift wearing a new costume.
     """
     text = SH.read_text(encoding="utf-8")
-    m = re.search(r"^for a in (.*?); do$", text, re.MULTILINE | re.DOTALL)
-    if not m:
+
+    def names(body: str) -> list[str]:
+        # ⚠ run_all.sh is checked out CRLF, so a line continuation is `\` + CRLF. Replacing only
+        # `\` + LF left every `\` in the list as its own "audit name": this parser yielded 73
+        # entries where 59 are real, and the runner then tried `tools/audit/audit_\.py` fourteen
+        # times and reported fourteen phantom FAILEDs. Normalise the line endings FIRST.
+        # (Latent since the file gained continuations — run_all.sh is the canonical path, so the
+        # Python fallback's output was never compared against it. Found 2026-08-24.)
+        body = body.replace("\r\n", "\n").replace("\r", "\n").replace("\\\n", " ")
+        # Drop comment lines that the DOTALL match may have swallowed.
+        body = "\n".join(ln for ln in body.splitlines() if not ln.lstrip().startswith("#"))
+        # The `name:script` loop for audits outside tools/audit/ is covered by EXTRAS.
+        return [w for w in body.split() if ":" not in w and w != "\\"]
+
+    # The GATING loop is the first one. The ADVISORY loop is found by its marker comment rather
+    # than by index: indexing blocks[1] would silently pick up any loop inserted between them.
+    first = re.search(r"^for a in (.*?); do$", text, re.MULTILINE | re.DOTALL)
+    if not first:
         raise SystemExit(f"cannot find the audit list in {SH}")
-    body = m.group(1).replace("\\\n", " ")
-    # Drop comment lines that the DOTALL match may have swallowed.
-    body = "\n".join(ln for ln in body.splitlines() if not ln.lstrip().startswith("#"))
-    return body.split()
+    gating = names(first.group(1))
+    if not gating:
+        raise SystemExit(f"the gating audit list in {SH} parsed empty")
+
+    advisory: list[str] = []
+    marker = re.search(r"^# ADVISORY audits\b.*?^for a in (.*?); do$",
+                       text, re.MULTILINE | re.DOTALL)
+    if marker:
+        advisory = names(marker.group(1))
+    return gating, [a for a in advisory if a not in gating]
 
 
 # Audits that live outside tools/audit/, mirroring the second loop in run_all.sh.
@@ -77,23 +104,30 @@ EXTRAS = [
 ]
 
 
-def run(name, script, extra_args=None):
+def run(name, script, extra_args=None, advisory=False):
     global failed
-    print(f"== {name}")
+    print(f"== {name}{' (advisory)' if advisory else ''}")
     md = OUT / f"{name}.md"
     err = OUT / f"{name}.err"
     cmd = [PYTHON, str(script)] + (extra_args or PASSTHROUGH)
     with md.open("w", encoding="utf-8") as out, err.open("w", encoding="utf-8") as e:
         result = subprocess.run(cmd, cwd=ROOT, stdout=out, stderr=e, text=True, env=CHILD_ENV)
     if result.returncode != 0:
-        failed = 1
-        print(f"   FAILED: {name} (exit {result.returncode})")
+        if advisory:
+            print(f"   advisory findings: {name} (exit {result.returncode}) - not gating")
+        else:
+            failed = 1
+            print(f"   FAILED: {name} (exit {result.returncode})")
     if err.stat().st_size == 0:
         err.unlink()
 
 
-for a in audits_from_shell():
+_gating, _advisory = audits_from_shell()
+for a in _gating:
     run(a, ROOT / "tools" / "audit" / f"audit_{a}.py")
+
+for a in _advisory:
+    run(a, ROOT / "tools" / "audit" / f"audit_{a}.py", advisory=True)
 
 for name, path in EXTRAS:
     run(name, path)

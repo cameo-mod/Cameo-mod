@@ -3,8 +3,8 @@
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
 | T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (3 file(s)) | 29 | >= 24 |
-| T2 | `def test_*` in tools/tests (20 file(s)) | 241 | >= 177 |
-| T3 | modules with no test mentioning them | 270 | <= 224 |
+| T2 | `def test_*` in tools/tests (21 file(s)) | 277 | >= 177 |
+| T3 | modules with no test mentioning them | 269 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (270)
+## T3 — untested modules (269)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -193,7 +193,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_inherits.py | audit_inherits |
 | python | tools/audit/audit_inline_effects.py | audit_inline_effects |
 | python | tools/audit/audit_k_linearity.py | audit_k_linearity |
-| python | tools/audit/audit_level_ladder.py | audit_level_ladder |
 | python | tools/audit/audit_metadata.py | audit_metadata |
 | python | tools/audit/audit_meter_dilution.py | audit_meter_dilution |
 | python | tools/audit/audit_min_range.py | audit_min_range |
@@ -293,5 +292,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 270 untested > baseline 224
+- T3: 269 untested > baseline 224
 
