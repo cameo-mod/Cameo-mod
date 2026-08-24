@@ -590,7 +590,7 @@ delivery and price number measured before it lands is measuring the wrong object
 | A3 | Fix the three misclassifications onto templates that already exist (`CannonChem` ×2, `Plasma` ×1) | invariant diff = 0 |
 | A4 | Rename `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1` + its condition, then the Su-57 and MonsterTank weapon pairs per ruling 2 | `safe_rename.py`, fluent keys |
 | A5 | Collapse the 27 single-user templates | template census |
-| A6 | Continue the burn-down: `w24_multi_main_fed` **380**, `multi_main_fired_weapons` **927** | both ratchets fall |
+| A6 | Continue the burn-down: `w24_multi_main_fed` **380**, `multi_main_fired_weapons` **925** | both ratchets fall |
 
 ### Phase B — the physical-state half (parallel to A, different file set)
 

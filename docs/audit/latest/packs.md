@@ -1,6 +1,6 @@
-# audit_packs — content-pack conversion & placement (DESIGN §2)
+# audit_packs â€” content-pack conversion & placement (DESIGN Â§2)
 
-## P1 — conversion coverage (faction prefixes with actors OUTSIDE packs)
+## P1 â€” conversion coverage (faction prefixes with actors OUTSIDE packs)
 
 | prefix | in packs | outside packs | sample outside file |
 |---|---|---|---|
@@ -117,7 +117,7 @@
 
 Fully converted prefixes (92): air, asianalliance, atreides, banshee, bbomb, bbomb2, bbomb3, bf109, bomber, cabal, cargoship, carryall, cgcnst, combat, conyard, corpse, cplane, cruiser, cryo, d2k, deathcash, dieglocke, drone, duelist, egcnst, eye, farasha, forgotten, fremen, futuretech, grun, harbinger, harkonnen, haunebu, haunebu2, heavy, heavydrone, hole, horten, inspect, ixian, japan, kami, landcarr, latinsyndicate, light, litt, me262, mig, missile, nax, naxis, ordos, ornithopter, pelican, phoenix, piercer, protoss, qacst, ra1_allies, ra1_badger, ra2_allies, ra2_soviets, ra2_yuri, ra2hind, resonance, rocket, sarubia, schwarzermond, scrapcar, scrapcar2, siege, sietch, steelconsortium, swarmer, td_gdi, team, terran, tkm, ts_gdi, ts_nod, twister, up, upgrade, wc2_humans, wc2_orcs, wind, wraith, yakolev, yuri, zep, zerg
 
-## P2 — actors whose id does not match the pack's dominant prefix
+## P2 â€” actors whose id does not match the pack's dominant prefix
 
 | pack | actor | dominant prefix |
 |---|---|---|
@@ -210,11 +210,11 @@ Fully converted prefixes (92): air, asianalliance, atreides, banshee, bbomb, bbo
 | TiberianDawn/GDI | team_upgrade.up_lightweightarmorplating | td_gdi |
 | TiberianDawn/Nod | team_upgrade.up_advancedguerillatactics | td_nod |
 
-## P3 — content.yaml manifest vs disk / nonstandard filenames
+## P3 â€” content.yaml manifest vs disk / nonstandard filenames
 
 _clean_
 
-## P4 — naming summary (counts; details via gen_rename_maps)
+## P4 â€” naming summary (counts; details via gen_rename_maps)
 
 - actor ids violating the lowercase grammar: **1510** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
 

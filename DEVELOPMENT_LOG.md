@@ -16,10 +16,48 @@
 ### Open todos at end of session
 
 1. Decide whether to force-push `Zeruel87/Cameo-mod:master` to match `cameo-mod/Cameo-mod:master` (destructive).
-2. Remove or re-point local `upstream` remote to prevent accidental pushes to the old repo.
-3. Fix stale `multi_main_fired_weapons` 927 → 925 in `HANDOFF.md` and `BALANCE_PROGRAM_PLAN.md`.
-4. Regenerate `docs/audit/latest/` with `bash tools/audit/run_all.sh` from a complete tree.
+2. ~~Remove or re-point local `upstream` remote to prevent accidental pushes to the old repo.~~ DONE — removed `upstream` (Zeruel87).
+3. ~~Fix stale `multi_main_fired_weapons` 927 → 925 in `HANDOFF.md`, `BALANCE_PROGRAM_PLAN.md`, and `audit/SUMMARY.md`.~~ DONE — `audit_doc_claims` still 19/19 clean.
+4. Regenerate `docs/audit/latest/` with `python tools/audit/run_all.py` (bash unavailable; Python port is the fallback) from a complete tree, then review every changed tracked file before staging.
 5. Continue W24/Phase B work only after verifying set B availability; `_stageB_made.txt` remains in scratchpad.
+
+## 2026-08-24 (continued #2) — picked up open todos
+
+- Removed local `upstream` remote (Zeruel87) to prevent accidental pushes; remotes now `origin` and `github-desktop-SteamsDev`.
+- Fixed stale `multi_main_fired_weapons` count from `927` to `925` in:
+  - `docs/HANDOFF.md` (overview and board table),
+  - `docs/design/BALANCE_PROGRAM_PLAN.md` (Phase A A6),
+  - `docs/audit/SUMMARY.md` (programme-scale debt table).
+- Re-ran `audit_doc_claims`: 19/19 clean; `multi_main_fired_weapons` measured 925 matches documented 925.
+- Verified the live heaviness-bell WIP in `tools/balance/gen_weapon_template.py` is still off (`USE_BELL` defaults to `0`) and the current generator reproduces shipped templates (`verify_generator_sync` drift 0 with bell off).
+- Previewed the bell impact with `CAMEO_HEAVINESS_BELL=1`: would change 135 of 139 shared templates, 8.3% mean row change, 0 ladder inversions. Did NOT splice or commit because CLAUDE.md rule 4 requires explicit maintainer permission to change `Versus`.
+- Ran the full audit suite (`python tools/audit/run_all.py`; bash unavailable on this Windows shell) to regenerate `docs/audit/latest/*.md` from a complete tree. Suite exit code 1 due to pre-existing gating failures (`inherits`, `upgrades`, `sequences`, `fluent`, `basebuilder_crates`, `buildable_order`, `weapon_suffixes`, `impact_glow_preservation`); advisory failures are also pre-existing. Reports were written and tracked files in `docs/audit/latest/` updated.
+- `tools/tests` still 300/300 green; `find_empty_warhead` 0.
+
+## 2026-08-24 (continued) — full composition-rollout cost analysis
+
+- Removed local `upstream` remote (Zeruel87) to prevent accidental pushes; remotes now `origin` and `github-desktop-SteamsDev`.
+- Fixed stale `multi_main_fired_weapons` count from `927` to `925` in:
+  - `docs/HANDOFF.md` (overview and board table),
+  - `docs/design/BALANCE_PROGRAM_PLAN.md` (Phase A A6),
+  - `docs/audit/SUMMARY.md` (programme-scale debt table).
+- Re-ran `audit_doc_claims`: 19/19 clean; `multi_main_fired_weapons` measured 925 matches documented 925.
+- Verified the live heaviness-bell WIP in `tools/balance/gen_weapon_template.py` is still off (`USE_BELL` defaults to `0`) and the current generator reproduces shipped templates (`verify_generator_sync` drift 0 with bell off).
+- Previewed the bell impact with `CAMEO_HEAVINESS_BELL=1`: would change 135 of 139 shared templates, 8.3% mean row change, 0 ladder inversions. Did NOT splice or commit because CLAUDE.md rule 4 requires explicit maintainer permission to change `Versus`.
+- `tools/tests` still 300/300 green; `find_empty_warhead` 0.
+
+## 2026-08-24 (continued) — full composition-rollout cost analysis
+
+- Merged `master` into `weapon_structure_and_warhead_fold` via fast-forward (`ad213ce0a`) and returned to the feature branch; no working-tree changes.
+- Measured the live Cameo roster from `cameo_model`:
+  - 29 real (non-meta) factions, 812 unique buildable combat units, 903 faction-specific combat rows, 1,782 unit x queue rows.
+- Measured `mods/cameo/ai/ai.yaml`:
+  - one `UnitBuilderBotModuleCA@generic` with `UseCompositions: true`, 1,386 `UnitsToBuild` entries (1,375 unique units), 2 active `Composition@` entries (11 UTB rows).
+- Measured reference AI systems:
+  - `CAmod` `UnitCompositionsBotModule`: 7 compositions, 223 total `UnitsToBuild` entries (195 baseline + 6 pushes).
+  - `crystallized-nexus` `CNSquadManagerBotModule`: 198 `Teams` across 5 personalities, 232 `Slots` total.
+- Ran projections in `scratchpad/ai_compositions/_tmp_full_cost.py` for full rollout scenarios (global baseline vs per-faction vs per-faction x personality); worst-case full data is 145-435 compositions and 1,400-8,900 `UnitsToBuild` rows.
+- No YAML or code changes committed; generated scripts live only in untracked `scratchpad/`.
 
 ## 2026-08-22 — A2 committed + audit guards documented
 

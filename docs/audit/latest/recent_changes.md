@@ -1,16 +1,16 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **376**, files touched: **876**
+Commits reviewed: **382**, files touched: **10525**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
-| R1 | balance yaml edited without the ledger | 16 | yes |
+| R1 | balance yaml edited without the ledger | 13 | yes |
 | R2 | audit script never run by run_all.sh | 3 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 12 | partly |
-| R4 | engine/mod.config change (needs boot gate) | 8 | no |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 15 | partly |
+| R4 | engine/mod.config change (needs boot gate) | 9 | no |
 
 
-## R1 — hand-edited balance numbers (16)
+## R1 — hand-edited balance numbers (13)
 
 | commit | date | subject | fields |
 |---|---|---|---|
@@ -27,9 +27,6 @@ Commits reviewed: **376**, files touched: **876**
 | a20cda71 | 2026-08-12 | W2: convert wc2deathknightDeathAndDecay_Hit to I | Damage |
 | 086efefc | 2026-08-11 | feat(balance): convert HonestJohn to 3-way split | Damage |
 | 14713d57 | 2026-08-11 | fix(tesla): rename extra-damage chips and restor | Damage |
-| 0d2cd6e8 | 2026-08-10 | feat(warhead): auto-scaling Integrity/EMP + unif | Damage, Spread |
-| 39995bba | 2026-08-10 | balance(weapons): wire D2K_StormGunInf/Cymek to  | Damage |
-| 4e9c3198 | 2026-08-10 | balance(weapons): collapse Exorcist family + Shr | Damage |
 
 
 ## R2 — audits missing from run_all.sh (3)
@@ -41,10 +38,13 @@ Commits reviewed: **376**, files touched: **876**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (12)
+## R3 — commits without provenance (15)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| 36ee102c | 2026-08-24 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
+| 75238eb3 | 2026-08-24 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
+| 5f0f2828 | 2026-08-24 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | 1d18d5d4 | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
 | 4ec4fd1c | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
 | 20f15194 | 2026-08-23 | Claude | agent trailer `Claude Opus 5 <noreply@anthropic.com>` on a non-shared identity | review |
@@ -59,11 +59,12 @@ Commits reviewed: **376**, files touched: **876**
 | 59ade89e | 2026-08-11 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 
 
-## R4 — engine/config changes to re-verify (8)
+## R4 — engine/config changes to re-verify (9)
 
 | commit | date | note |
 |---|---|---|
 | f1c64e93 | 2026-08-22 | mod.config changed (rebuild + boot gate required) |
+| fd58e3f9 | 2026-08-20 | mod.config changed (rebuild + boot gate required) |
 | c69604be | 2026-08-17 | mod.config changed (rebuild + boot gate required) |
 | a74638de | 2026-08-16 | mod.config changed (rebuild + boot gate required) |
 | 41f2870b | 2026-08-16 | mod.config changed (rebuild + boot gate required) |
@@ -77,21 +78,21 @@ Commits reviewed: **376**, files touched: **876**
 
 | file | commits touching it |
 |---|---|
-| docs/design/BALANCE_PROGRAM_PLAN.md | 104 |
-| mods/cameo/weapons/weapons.yaml | 66 |
-| tools/balance/gen_weapon_template.py | 51 |
-| docs/balance/derived/redalert_soviets.json | 46 |
-| docs/design/ROADMAP.md | 42 |
-| docs/balance/derived/d2k_ixian.json | 38 |
-| docs/balance/derived/redalert2mod_consortium.json | 38 |
-| docs/balance/derived/redalert2mod_futuretech.json | 38 |
-| docs/balance/derived/tiberiandawn_nod.json | 38 |
-| docs/balance/derived/tiberiansun_forgotten.json | 38 |
-| DEVELOPMENT_LOG.md | 38 |
-| docs/balance/derived/shared_redalert.json | 36 |
-| docs/balance/derived/starcraft_protoss.json | 36 |
-| docs/balance/derived/tiberiansun_nod.json | 36 |
-| docs/balance/derived/d2k_ordos.json | 35 |
+| docs/design/BALANCE_PROGRAM_PLAN.md | 105 |
+| mods/cameo/weapons/weapons.yaml | 65 |
+| tools/balance/gen_weapon_template.py | 50 |
+| docs/design/ROADMAP.md | 47 |
+| docs/balance/derived/redalert_soviets.json | 47 |
+| DEVELOPMENT_LOG.md | 40 |
+| docs/balance/derived/d2k_ixian.json | 39 |
+| docs/balance/derived/redalert2mod_consortium.json | 39 |
+| docs/balance/derived/redalert2mod_futuretech.json | 39 |
+| docs/balance/derived/tiberiandawn_nod.json | 39 |
+| docs/balance/derived/tiberiansun_forgotten.json | 39 |
+| docs/balance/derived/shared_redalert.json | 37 |
+| docs/balance/derived/starcraft_protoss.json | 37 |
+| docs/balance/derived/tiberiansun_nod.json | 37 |
+| docs/balance/derived/d2k_ordos.json | 36 |
 
 
 ## Reviewer checklist (not machine-checkable)
@@ -105,7 +106,7 @@ Commits reviewed: **376**, files touched: **876**
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 11 R1 and 0 R3 of 16/12 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 11 R1 and 0 R3 of 13/15 findings are in scope; the rest predate the gate.
 
 
 ## FAIL
