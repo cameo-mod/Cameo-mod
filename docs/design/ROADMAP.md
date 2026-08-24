@@ -11,6 +11,8 @@ granular, resumable task queue that the handoff points into._
   (`cdd04e5a1`).
 - [x] Add audit coverage for shared-field duplication and condition parity
   (`cdd04e5a1`).
+- [ ] Observe long-match squad-value ramp behavior in-game; this branch makes no
+  long-match gameplay claim.
 - [ ] Add an observer-facing notification so players can see the selected
   personality in-game.
 - [ ] Consider personality-specific base-builder behavior without duplicating
