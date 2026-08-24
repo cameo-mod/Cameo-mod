@@ -543,6 +543,7 @@ naxis_flak88:
 
 naxis_naxibunker:
 	Inherits: ^RA2Defense
+	Inherits@BuildingPlugProducer: ^BuildingPlugProducer
 	Inherits@Template: ^BunkerTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@shape: ^2x2Shape
@@ -550,7 +551,6 @@ naxis_naxibunker:
 	Inherits@gar: ^ClearableGarrison
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Inherits@Atlantikwall: ^Atlantikwall
-	Inherits: ^BuildingPlugProducer
 	Tooltip:
 		Name: Naxi Bunker
 	Building:

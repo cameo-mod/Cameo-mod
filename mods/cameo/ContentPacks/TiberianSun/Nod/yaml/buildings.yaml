@@ -360,7 +360,7 @@ ts_nod_servicedepot:
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@repair: ^RepairsUnits
-	Inherits@repair: ^RepairFacility
+	Inherits@RepairFacility: ^RepairFacility
 	Valued:
 		Cost: 800
 	Tooltip:

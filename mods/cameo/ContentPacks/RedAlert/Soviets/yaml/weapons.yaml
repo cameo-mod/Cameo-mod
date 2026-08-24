@@ -1943,26 +1943,28 @@ HammerTankCannon:
 		ImpactSounds: xplosml2.aud
 
 HammerTankCannonThermobaric:
-	Inherits: ^Warhead_Demolition_Heavy
-	Inherits@2: ^Warhead_Flame_Medium
-	Inherits@3: ^Projectile_Flame_Medium
-	Inherits@4: ^Effect_Flame_Medium
-	Inherits@3: HammerTankCannon
+	Inherits@wh: ^Warhead_CannonFire_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Flame_Medium
+	Inherits@fx2: ^Effect_CannonHE_Heavy
 	Report: tnkfire6.aud
-	Warhead@Demolition_Heavy:
-		Damage: 4000
-	Warhead@Flame_Medium:
-		Damage: 4000
-	Warhead@CannonHE_Heavy: AreaDamage
-		Damage: 4000
-	Warhead@CannonHE_Medium: AreaDamage
-		Damage: 4000
+	ReloadDelay: 85
+	Range: 6825
+	Burst: 2
+	BurstDelays: 5
+	Projectile: Bullet
+		Speed: 682
+	Warhead@CannonFire_Heavy:
+		Damage: 16000
+		PhysicalStates:
+			Temperature: 25
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
+		ImpactSounds: firebl3.aud
+		ImpactActors: false
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
-		ImpactSounds: firebl3.aud
 
 ShtoraLaser:
 	Inherits: ^LightFlameWeapon
@@ -2048,20 +2050,21 @@ KotinCannon:
 		ImpactSounds: xplosml2.aud
 
 KotinCannonThermobaric:
-	Inherits: ^Warhead_Demolition_Heavy
-	Inherits@2: ^Warhead_Flame_Medium
-	Inherits@3: ^Projectile_Flame_Medium
-	Inherits@4: ^Effect_Flame_Medium
-	Inherits@3: KotinCannon
+	Inherits@wh: ^Warhead_CannonFire_Heavy
+	Inherits@proj: ^Projectile_Shell_Heavy
+	Inherits@fx: ^Effect_Flame_Medium
+	Inherits@fx2: ^Effect_CannonHE_Heavy
 	Report: tnkfire6.aud
-	Warhead@Demolition_Heavy:
-		Damage: 4000
-	Warhead@Flame_Medium:
-		Damage: 4000
-	Warhead@CannonHE_Heavy: AreaDamage
-		Damage: 4000
-	Warhead@CannonHE_Medium: AreaDamage
-		Damage: 4000
+	ReloadDelay: 96
+	Range: 6427
+	Burst: 2
+	BurstDelays: 4
+	Projectile: Bullet
+		Speed: 642
+	Warhead@CannonFire_Heavy:
+		Damage: 16000
+		PhysicalStates:
+			Temperature: 25
 	Warhead@Radiation: CreateTintedCells
 		InvalidTargets: RadiationImmmune
 		Spread: 1000

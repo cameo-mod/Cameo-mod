@@ -524,11 +524,11 @@ td_nod_stealthtank:
 
 td_nod_chemicalattackbike:
 	Inherits: ^Vehicle
+	Inherits@GenericGroundDetector: ^GenericGroundDetector
 	Inherits@Template: ^MissileVehicleTemplate
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits: ^GenericGroundDetector
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@AntiAir: ^PrioritizeAir

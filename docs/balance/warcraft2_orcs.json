@@ -1790,6 +1790,34 @@
       ],
       "weapon": "wc2gruntslice",
       "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "1555",
+      "reloaddelay": "18",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2gruntslice",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3178,6 +3206,34 @@
       "range": "1600",
       "reloaddelay": "18",
       "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2gruntslice2",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "24000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "1600",
+      "reloaddelay": "18",
+      "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",

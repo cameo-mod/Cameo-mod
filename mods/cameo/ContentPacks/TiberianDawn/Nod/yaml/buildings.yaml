@@ -197,7 +197,7 @@ td_nod_repairfacility:
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@shape: ^3x3Shape
 	Inherits@repair: ^RepairsUnits
-	Inherits@repair: ^RepairFacility
+	Inherits@RepairFacility: ^RepairFacility
 	HitShape:
 		TargetableOffsets: 840,0,0, 598,-640,0, 598,640,0, -1060,0,0, -768,-640,0, -768,640,0
 		Type: Polygon
@@ -226,6 +226,7 @@ td_nod_repairfacility:
 
 td_nod_templeofnod:
 	Inherits: ^TDBuilding
+	Inherits@BuildingPlugProducer: ^BuildingPlugProducer
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^TDNodSpawnActorsOnSell
 	Inherits@radar: ^RadarBuilding
@@ -233,7 +234,6 @@ td_nod_templeofnod:
 	Inherits@SW: ^PrimarySuperweapon
 	-Production@Upgrades:
 	-ProductionBar@Upgrades:
-	Inherits: ^BuildingPlugProducer
 	Tooltip:
 		Name: Temple of Nod
 	ProvidesPrerequisite:

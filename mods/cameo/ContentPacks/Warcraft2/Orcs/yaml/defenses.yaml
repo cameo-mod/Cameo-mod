@@ -1,5 +1,6 @@
 wc2_orcs_orcwatchtower:
 	Inherits: ^Defense
+	Inherits@BuildingPlugProducer: ^BuildingPlugProducer
 	Inherits@Template: ^BasicDefenseTemplate
 	-WithTurretSearchlight:
 	Inherits@exp: ^GainsExperienceTDBuilding
@@ -7,7 +8,6 @@ wc2_orcs_orcwatchtower:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
 	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
-	Inherits: ^BuildingPlugProducer
 	Tooltip:
 		Name: Orc Watch Tower
 		RequiresCondition: !guard && !cannon

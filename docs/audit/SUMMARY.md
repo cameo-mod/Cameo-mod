@@ -87,7 +87,7 @@ shares.
 | F | house stat formulas | 615 violations across 1910 roster actors | `stat_formulas.md` |
 | E | elite / rank wiring | 197 missing elite armaments · 21 ungated ELITE blocks · 52 decoration issues | `missing_elite.md`, `elite_gating.md`, `rank_decoration.md` |
 | Q | build order | prerequisite-order violations across 841 buildables | `buildable_order.md` |
-| D | duplicate keys | **88 D1 dropped inherits** · 439 D2 merged duplicates | `duplicate_keys.md` |
+| D | duplicate keys | **6 D1 dropped inherits** · 439 D2 merged duplicates | `duplicate_keys.md` |
 
 ## Green — and must stay green
 
@@ -106,7 +106,7 @@ regenerate).
 | check | state | what to do |
 |---|---|---|
 | **level ladder** | **WARN — 9 broken, at ratchet 9** (7 inverted, 2 flat) | no longer failing: `a9f31258` fixed `Demolition`. Still blocked on a maintainer ruling. Full measured table + the diagnosis: [`../design/ROADMAP.md`](../design/ROADMAP.md) "BROKEN LADDERS". These are balance numbers: pipeline only, and **never raise the ratchet**. |
-| duplicate keys D1 | 88 dropped inherits | each one silently drops a template — same family as the `Parent type X was already inherited` boot crash |
+| duplicate keys D1 | 6 dropped inherits | each one silently drops a template — same family as the `Parent type X was already inherited` boot crash |
 | warhead-split ratchet | at baseline | pre-existing W24 debt, not a regression; lower the baseline as W24 lands |
 
 Cleared since the last edition of this page: **doc claims** (was 4 of 19 drifted, now 19 of 19

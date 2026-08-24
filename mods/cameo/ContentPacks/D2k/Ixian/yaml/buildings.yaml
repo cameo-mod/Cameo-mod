@@ -281,7 +281,7 @@ ixian_repairpad:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^3x3Shape
 	Inherits@repair: ^RepairsUnits
-	Inherits@repair: ^RepairFacility
+	Inherits@RepairFacility: ^RepairFacility
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_advancedheavyfactory
 		Description: Repairs nearby vehicles.

@@ -197,9 +197,9 @@ tkmtrenchtankdeployed:
 tkmratflakdeployed:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@AntiAirDefenseTemplate: ^AntiAirDefenseTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA2
-	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiInf: ^PrioritizeInfantry

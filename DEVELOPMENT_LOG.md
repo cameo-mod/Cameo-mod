@@ -1,5 +1,30 @@
 # Development Log
 
+## 2026-08-24 — D1 non-weapon duplicate Inherits fix
+
+- Fixed 80 D1 duplicate `Inherits` / `Inherits@<suffix>` entries across 40 non-weapon YAML files
+  (buildings, defenses, audio, chrome, and a few rules templates) using `audit_duplicate_keys.py`.
+- Each duplicate was split into two separate `Inherits` lines with unique suffixes, preserving
+  original value order so the later value still wins on field conflicts.
+- Skipped all weapon files (`*weapons.yaml` and `mods/cameo/weapons/*`) as Set B work.
+- Re-ran `audit_duplicate_keys.py`: D1 count **88 -> 6** (0 non-weapon remaining, 6 weapon rows
+  still unresolved for Set B).
+- Lowered `D1_BASELINE` in `tools/audit/audit_duplicate_keys.py` from 88 to 6 and updated
+  `docs/audit/SUMMARY.md`.
+- Re-extracted balance ledgers (`extract_stats.py`), `audit_balance_drift` 0, `audit_doc_claims` 19/19 green.
+- Boot-gate: `MenuPostProcessEffect.PostWorldLoaded`, no new `exception-*.log`.
+
+## 2026-08-24 — W24 A6 continued: collapse `HammerTankCannonThermobaric` and `KotinCannonThermobaric`
+
+- Cluster: `HammerTankCannonThermobaric` and `KotinCannonThermobaric` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`.
+- Collapsed each onto `^Warhead_CannonFire_Heavy`, preserving per-shot damage sum (16 000).
+- Set `PhysicalStates: Temperature: 25` on the main warhead to preserve the old one-in-four flame meter feed (4 000 / 16 000 total damage).
+- Inlined `ReloadDelay`, `Range`, `Burst`, `BurstDelays`, `Projectile`, `Report` from the parent `HammerTankCannon` / `KotinCannon`; kept `^Projectile_Shell_Heavy` and `^Effect_Flame_Medium` + `^Effect_CannonHE_Heavy` to preserve projectile and effects.
+- Preserved `KotinCannonThermobaric`'s local `Warhead@Radiation` (CreateTintedCells Level 30 / MaxLevel 2000).
+- Preserved custom ground impact effects (`napalm` / `nuke_small`) and `ImpactActors` (`false` / `true`).
+- Verification: `review_resolve_diff` clean (behavioural invariants preserved); `find_empty_warhead` 0; `find_orphan_old_keys` 0 real; `audit_warhead_split` 924 vs baseline 924; `extract_stats --check` 0; `audit_doc_claims` 19/19 green after updating `multi_main_fired_weapons` 910 -> 908 and `BROADCAST_BASELINE` 926 -> 924.
+- Boot-gate: `MenuPostProcessEffect.PostWorldLoaded`, no new `exception-*.log`.
+
 ## 2026-08-24 — W24 A5/A6: collapse Soviet 120mm thermobaric cannon variants
 
 - Cluster: `ra120mmThermobaric`, `ra120mmThermobaricTargetingComputer`, `ra120mm2Thermobaric`, `ra120mm2ThermobaricTargetingComputer` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`.

@@ -1,5 +1,6 @@
 zerg_creepcolony:
 	Inherits: ^Defense
+	Inherits@BuildingPlugProducer: ^BuildingPlugProducer
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@exp: ^GainsExperienceTDBuilding
 	Inherits@decoration: ^ZergRankDecoration
@@ -9,7 +10,6 @@ zerg_creepcolony:
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Inherits@weapon: ^ZergMissileWeaponUpgrades
 	Inherits@range: ^GroovedSpinesUpgrade
-	Inherits: ^BuildingPlugProducer
 	-WithTurretSearchlight:
 	Tooltip:
 		Name: Creep Colony

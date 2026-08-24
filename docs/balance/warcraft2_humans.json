@@ -2589,6 +2589,34 @@
       ],
       "weapon": "wc2footmanslice",
       "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "12000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "1333",
+      "reloaddelay": "15",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2footmanslice",
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2673,6 +2701,41 @@
       "reloaddelay": "40",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)",
       "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Tesla_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
+      ],
+      "warheads": [
+       "^Warhead_Tesla_Super"
+      ],
+      "weapon": "wc2mageFire",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 55, 0",
+        "spread": "116",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "8000",
+      "reloaddelay": "40",
+      "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Tesla_Super",
        "^Projectile_Lightning_Super",
@@ -2807,6 +2870,41 @@
       "reloaddelay": "40",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)",
       "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Tesla_Super",
+       "^Projectile_Lightning_Super",
+       "^Effect_Tesla_Super"
+      ],
+      "warheads": [
+       "^Warhead_Tesla_Super"
+      ],
+      "weapon": "wc2mageFire",
+      "weapon_class_source": "illegal_mix"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "8000",
+        "falloff": "100, 55, 0",
+        "spread": "116",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 75, 50, 25",
+        "spread": "400",
+        "tag": "Tesla_Super_ExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
+      "pricing": false,
+      "range": "8000",
+      "reloaddelay": "40",
+      "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Tesla_Super",
        "^Projectile_Lightning_Super",
@@ -3999,6 +4097,34 @@
       "range": "1533",
       "reloaddelay": "15",
       "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_Melee_Medium",
+       "^Projectile_InstantHit",
+       "^Effect_Melee_Medium"
+      ],
+      "warheads": [
+       "^Warhead_Melee_Medium"
+      ],
+      "weapon": "wc2footmanslice2",
+      "weapon_class_source": "template"
+     },
+     {
+      "armament_name": "garrisoned",
+      "damage_warheads": [
+       {
+        "damage": "18000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Melee_Medium",
+        "type": "AreaDamage"
+       }
+      ],
+      "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
+      "pricing": false,
+      "range": "1533",
+      "reloaddelay": "15",
+      "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Melee_Medium",
        "^Projectile_InstantHit",

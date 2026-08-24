@@ -1576,7 +1576,7 @@
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@VehicleBuffs: ^VehicleBuffs
 	Inherits@upgrade: ^LightWeightArmorPlating
-	Inherits@upgrade: ^AdvancedGuerillaTactics
+	Inherits@AdvancedGuerillaTactics2: ^AdvancedGuerillaTactics
 	Armor:
 		Type: Scout
 	RevealsShroud:
@@ -1598,7 +1598,7 @@
 	Inherits@detect: ^GenericAllDetector
 	Inherits@VehicleBuffs: ^VehicleBuffs
 	Inherits@upgrade: ^LightWeightArmorPlating
-	Inherits@upgrade: ^AdvancedGuerillaTactics
+	Inherits@AdvancedGuerillaTactics3: ^AdvancedGuerillaTactics
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -2405,9 +2405,9 @@
 	Inherits@selection: ^SelectableCombatUnit
 	Inherits@bot: ^BotProductionBehavior
 	Inherits@cloak: ^AcceptsCloakCrate
+	Inherits@StealthGenCloakable: ^StealthGenCloakable
 	Inherits@LockOn: ^LockOn
 	Inherits@ivan: ^BombAttachable
-	Inherits@cloak: ^StealthGenCloakable
 	Inherits@shielded: ^ShieldedShieldable
 	Inherits@chrono: ^ChronoBeamable
 	Inherits@base-reveal: ^Base-reveal

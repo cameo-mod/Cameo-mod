@@ -45,8 +45,10 @@ SCAN_DIRS = ("mods/cameo",)
 SKIP_PARTS = ("maps", "bits")
 
 # Ratchet: D1 findings measured on 2026-08-11 against the unmodified tree.
+# Lowered to 6 after merging all 80 non-weapon D1 duplicate Inherits entries;
+# 6 weapon-file D1 rows remain for Set B.
 # Lower it as duplicates are resolved; never raise it without a note.
-D1_BASELINE = 88
+D1_BASELINE = 6
 
 
 def duplicate_children(node: Node) -> dict[str, list[Node]]:

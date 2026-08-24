@@ -953,7 +953,7 @@ latinsyndicate_missiletruck:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@uprecover: ^LatinCashrecover
 	Inherits@flamerup: ^CartelRocketsUpgrade
-	Inherits@flamerup: ^LatinFlameUpgrades
+	Inherits@LatinFlameUpgrades: ^LatinFlameUpgrades
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
@@ -1024,7 +1024,7 @@ latinsyndicate_burrito:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@uprecover: ^LatinCashrecover
 	Inherits@flamerup: ^CartelRocketsUpgrade
-	Inherits@flamerup: ^LatinFlameUpgrades
+	Inherits@LatinFlameUpgrades2: ^LatinFlameUpgrades
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
@@ -1093,7 +1093,7 @@ latinsyndicate_lars:
 	Inherits@gat: ^GatlingSpinUpUnitBehavior
 	Inherits@uprecover: ^LatinCashrecover
 	Inherits@flamerup: ^CartelRocketsUpgrade
-	Inherits@flamerup: ^LatinFlameUpgrades
+	Inherits@LatinFlameUpgrades3: ^LatinFlameUpgrades
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80

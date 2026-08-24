@@ -187,7 +187,7 @@ td_gdi_repairfacility:
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@shape: ^3x3Shape
 	Inherits@repair: ^RepairsUnits
-	Inherits@repair: ^RepairFacility
+	Inherits@RepairFacility: ^RepairFacility
 	HitShape:
 		TargetableOffsets: 840,0,0, 598,-640,0, 598,640,0, -1060,0,0, -768,-640,0, -768,640,0
 		Type: Polygon
@@ -216,6 +216,7 @@ td_gdi_repairfacility:
 
 td_gdi_advancedcommunicationscenter:
 	Inherits: ^TDBuilding
+	Inherits@BuildingPlugProducer: ^BuildingPlugProducer
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@radar: ^RadarBuilding
@@ -223,7 +224,6 @@ td_gdi_advancedcommunicationscenter:
 	Inherits@SW: ^PrimarySuperweapon
 	-Production@Upgrades:
 	-ProductionBar@Upgrades:
-	Inherits: ^BuildingPlugProducer
 	Tooltip:
 		Name: Advanced Communications Center
 	ProvidesPrerequisite:
@@ -440,7 +440,7 @@ td_gdi_advancedguardtower:
 	Inherits@detect: ^GenericAllDetector
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@AntiTank: ^PrioritizeVehicle
-	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@PrioritizeTank: ^PrioritizeTank
 	Inherits@shape: ^1x1Shape
 	Inherits@LongRangeSensors: ^LongRangeSensors
 	Inherits@MissileTargeting: ^AdvancedMissileTargeting

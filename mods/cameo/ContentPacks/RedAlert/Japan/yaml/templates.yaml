@@ -430,7 +430,7 @@
 	Inherits@sell: ^RASpawnActorsOnSell
 	Inherits@shape: ^3x3Shape
 	Inherits@repair: ^RepairsUnits
-	Inherits@repair: ^RepairFacility
+	Inherits@RepairFacility: ^RepairFacility
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedwarfactory
 		Description: Provides power to the base.
