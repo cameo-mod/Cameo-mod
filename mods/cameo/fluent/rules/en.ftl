@@ -2864,3 +2864,6 @@ ra_upgrade_vengeance =
 
 ra_upgrade_wareconomy =
    .description = War Economy
+
+upgrade_burninglasers =
+   .description = Replaces Nod laser weapons with burning inferno variants, increasing damage and igniting targets.

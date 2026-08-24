@@ -2956,3 +2956,10 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   - `wc2_orcs_warcraft3grunt` → `wc2gruntslice2`
 - `audit_garrison_weapons` now reports G1: **0** (was 6), G2: 0, G3: 0.
 - Boot-gate passed; no new exceptions.
+
+## 2026-08-24 — Fix 1 unresolved fluent ref (B12)
+
+- `td_nod_upgrade_burninglasers` referenced `upgrade_burninglasers.description`,
+  which did not exist. Added `upgrade_burninglasers` to `mods/cameo/fluent/rules/en.ftl`.
+- `audit_fluent` now reports F1: **0** (was 1).
+- Boot-gate passed; no new exceptions.

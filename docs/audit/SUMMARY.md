@@ -79,7 +79,7 @@ shares.
 | B9 | numeric drift | 176 robust outliers · **0** bounds over the 5×5 max | `outliers.md` |
 | B10 | dead content | 374 orphan weapons · **0** dangling refs · 15 dead conditions | `orphans.md` |
 | B11 | asset norms | 148 / 2006 PNGs over budget · 1817 / 4390 WAVs off-norm | `assets.md` |
-| B12 | localization | 1 unresolved fluent ref · 526 orphaned `actor-*` messages | `fluent.md` |
+| B12 | localization | **0** unresolved fluent refs · 526 orphaned `actor-*` messages | `fluent.md` |
 | R2 | stacked multipliers | 790 units over the 2.0× power budget | `power_budget.md` |
 | W | weapon uniqueness (§10) | 34 same-faction · 34 cross-faction · 95 carrier-only | `weapon_uniqueness.md` |
 | G | garrison weapons (§11) | **0 G1** · 0 G2 · 0 G3 | `garrison_weapons.md` |
