@@ -18,6 +18,11 @@ granular, resumable task queue that the handoff points into._
 - [ ] Consider personality-specific base-builder behavior without duplicating
   the full base-builder configuration.
 
+## AI UNIT COMPOSITIONS (2026-08-24)
+
+- [~] Port the opt-in unit-composition mechanism and two TD pilot compositions;
+  extend the pilot to other universes and factions as a follow-up.
+
 **Rule zero: crashes and player-visible regressions ALWAYS jump the queue.** Ordering inside a
 section: quickest wins first, then by severity. Effort: **S** < 1 h · **M** = one session ·
 **L** = multi-session. Every completed item carries its commit hash; every new order lands here

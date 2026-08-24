@@ -4758,6 +4758,7 @@ Player:
 		MaxUnitsPerBot: 150
 	UnitBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot
+		UseCompositions: true
 		IdleBaseUnitsMaximum: 50
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000
@@ -6393,3 +6394,33 @@ Player:
 			wc2_orcs_peon: 50
 			wc2_orcs_goblinsappers: 1
 			wc2_orcs_goblinzeppelin: 1
+
+World:
+	UnitCompositionsBotModule:
+		Composition@TDGDIArmorPush:
+			UnitQueues: Vehicle, RAVehicle
+			Prerequisites: td_gdi_weaponsfactory
+			MinTime: 9000
+			MinInterval: 15000
+			MaxDuration: 4500
+			EnabledChance: 50
+			UnitsToBuild:
+				td_gdi_battletank: 45
+				td_gdi_predatortank: 20
+				td_gdi_mammothtank: 15
+				td_gdi_mlrs: 10
+				td_gdi_apc: 5
+				td_gdi_humveemkii: 5
+		Composition@TDNodStealthPush:
+			UnitQueues: Vehicle, RAVehicle
+			Prerequisites: td_nod_templeofnod
+			MinTime: 9000
+			MinInterval: 15000
+			MaxDuration: 4500
+			EnabledChance: 50
+			UnitsToBuild:
+				td_nod_stealthtank: 40
+				td_nod_chemicalstealthtank: 20
+				td_nod_lighttank: 20
+				td_nod_flametank: 10
+				td_nod_specterartillery: 10

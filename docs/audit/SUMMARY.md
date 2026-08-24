@@ -55,6 +55,13 @@ instances retain the flat `SquadValueRandomBonus` path. The ramp and the
 actor-value cache have not been observed in a long match; that is an in-game
 verification follow-up.
 
+The unit-builder composition consumer is opt-in through `UseCompositions`.
+Without an active composition, each personality's `UnitsToBuild` table remains
+the fallback. The pilot compositions are limited to TD vehicle queues and are
+gated by their respective tech prerequisites; broader composition coverage is
+still a follow-up. Explicit unit requests continue to bypass composition
+shares.
+
 ## Counts by bug class
 
 | class | what | count | report |

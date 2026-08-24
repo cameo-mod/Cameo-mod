@@ -71,6 +71,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 **Process, tooling and platform**
 
 - [YAML-only AI personalities and dead squad-manager keys (2026-08-21)](#yaml-only-ai-personalities-and-dead-squad-manager-keys-2026-08-21)
+- [Opt-in AI unit compositions (2026-08-24)](#opt-in-ai-unit-compositions-2026-08-24)
 - [Content installer and music filesystem plumbing (2026-08-11)](#content-installer-and-music-filesystem-plumbing-2026-08-11)
 - [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
 - [YAML lint rules learned (2026-07-24)](#yaml-lint-rules-learned-2026-07-24)
@@ -97,6 +98,18 @@ be copied into new instances. Steamroller cannot express zero guerrilla units
 in YAML: the engine's `guerrillaForce == null` short-circuit creates the first
 guerrilla squad regardless of `JoinGuerrilla`, so its documented behavior is
 at most one harasser.
+
+## Opt-in AI unit compositions (2026-08-24)
+
+When porting a composition selector into a divergent unit builder, keep the
+consumer opt-in and preserve the existing `UnitsToBuild` table as the fallback
+rather than introducing a second baseline configuration. Resolve shares by
+production queue category, and keep explicit unit requests on their existing
+bypass path so harvesters and MCVs are not blocked by composition filtering.
+Composition candidates must be gated by time, per-composition interval,
+technology prerequisites, and whether their units are producible in the
+player's queues. Parallel production queues must count every queued unit
+toward produced-value expiry.
 
 When a squad manager gains optional time-scaled value thresholds, retain the
 flat `SquadValueRandomBonus` path for existing consumers and reject configuring

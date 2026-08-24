@@ -2476,3 +2476,23 @@ the same early-game maximum, while the flat bonus path remains supported for
 other squad-manager instances. The ramp reaches its late-match range over the
 first 20 minutes using the default 25 ticks per second. Long-match ramp
 behavior has not been observed in-game; that verification is a follow-up.
+
+## 20. AI bot unit compositions
+
+Unit compositions are opt-in through `UseCompositions: true` on
+`UnitBuilderBotModuleCA`; existing unit builders continue to use their
+`UnitsToBuild` shares by default. Cameo has no separate baseline composition:
+each personality's `UnitsToBuild` table is the fallback whenever no active
+composition applies.
+
+An active composition only biases the production queue categories named by its
+`UnitQueues` field; an empty list applies to every category. The current pilot
+contains two 50%-chance, vehicle-focused TD compositions: a GDI armor push
+gated by `td_gdi_weaponsfactory` and a Nod stealth push gated by
+`td_nod_templeofnod`. Both become eligible after 9000 ticks, have a 15000-tick
+per-composition reselection interval, and expire after 4500 ticks.
+
+Explicit unit requests, including harvester and MCV requests, continue through
+the bypass path and do not use composition share filtering. Only boot
+verification has been performed for this system; no long-match in-game
+composition behavior is claimed.
