@@ -4737,9 +4737,9 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "183",
-        "tag": "Chemical_Light",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "60",
+        "tag": "CannonChem_Light",
         "type": "AreaDamage"
        }
       ],
@@ -4751,14 +4751,14 @@
       "requires": "!rank-elite && ra2_soviets_doctrine_nuclearmunitions",
       "slot": "Armament@PRIMARYRad",
       "versus_templates": [
-       "^Warhead_Chemical_Light",
+       "^Warhead_CannonChem_Light",
        "^Projectile_Shell_Light",
        "^Effect_Chem_Light",
        "^Effect_Apoc_Explosion_RA2",
        "^RA2RadShell"
       ],
       "warheads": [
-       "^Warhead_Chemical_Light"
+       "^Warhead_CannonChem_Light"
       ],
       "weapon": "RA2120xmm_rad",
       "weapon_class_source": "template"
@@ -4770,9 +4770,9 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "falloff": "100, 76, 56, 38, 0",
+        "spread": "173",
+        "tag": "CannonFire_Light",
         "type": "AreaDamage"
        }
       ],
@@ -4784,10 +4784,12 @@
       "requires": "!rank-elite && ra2_soviets_doctrine_firemunitions",
       "slot": "Armament@PRIMARYFire",
       "versus_templates": [
-       "RA2120xmm"
+       "^Warhead_CannonFire_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonFire_Light"
       ],
       "weapon": "RA2120xmm_fire",
       "weapon_class_source": "template"
@@ -4799,9 +4801,9 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "falloff": "100, 52, 0",
+        "spread": "43",
+        "tag": "CannonTesla_Light",
         "type": "AreaDamage"
        }
       ],
@@ -4813,10 +4815,12 @@
       "requires": "!rank-elite && ra2_soviets_doctrine_teslamunitions",
       "slot": "Armament@PRIMARYTesla",
       "versus_templates": [
-       "RA2120xmm"
+       "^Warhead_CannonTesla_Light",
+       "^Projectile_Shell_Light",
+       "^Effect_Tesla_Impact_RA2"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonTesla_Light"
       ],
       "weapon": "RA2120xmm_tesla",
       "weapon_class_source": "template"
@@ -4886,9 +4890,9 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "183",
-        "tag": "Chemical_Light",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "60",
+        "tag": "CannonChem_Light",
         "type": "AreaDamage"
        }
       ],
@@ -4904,7 +4908,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_Chemical_Light"
+       "^Warhead_CannonChem_Light"
       ],
       "weapon": "RA2120xmm_rad_elite",
       "weapon_class_source": "template"
@@ -4916,9 +4920,9 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "falloff": "100, 76, 56, 38, 0",
+        "spread": "173",
+        "tag": "CannonFire_Light",
         "type": "AreaDamage"
        }
       ],
@@ -4934,7 +4938,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonFire_Light"
       ],
       "weapon": "RA2120xmm_fire_elite",
       "weapon_class_source": "template"
@@ -4946,9 +4950,9 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "80",
-        "tag": "CannonAP_Light",
+        "falloff": "100, 52, 0",
+        "spread": "43",
+        "tag": "CannonTesla_Light",
         "type": "AreaDamage"
        }
       ],
@@ -4964,7 +4968,7 @@
        "^RA2EliteEffects"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Light"
+       "^Warhead_CannonTesla_Light"
       ],
       "weapon": "RA2120xmm_tesla_elite",
       "weapon_class_source": "template"

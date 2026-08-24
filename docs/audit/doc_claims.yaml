@@ -299,7 +299,7 @@ claims:
                   break
       print(n)
   - id: w24_multi_main_fed
-    value: 380
+    value: 381
     tolerance: 0
     what: >
       RATCHET — damage-scaled metered weapons whose meter is fed by LESS than 100% of their
@@ -330,7 +330,7 @@ claims:
               n += 1
       print(n)
   - id: physical_state_fired_weapons
-    value: 460
+    value: 462
     tolerance: 0
     what: >
       FIRED weapons that deliver a PhysicalState meter (Temperature or Corrosion) and are priced
@@ -400,7 +400,7 @@ claims:
       print(len(names) - len(set(rows)))
 
   - id: plating_families
-    value: 46
+    value: 47
     tolerance: 0
     what: >
       Families the generator emits a plating row for. The row count of the matrix in

@@ -17,10 +17,10 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `unmigrated_scout_damage_multiplier` | 15 | 15 | ✅ |
 | `meters_filling_before_death` | 139 | 139 | ✅ |
 | `corrosion_meter_actors` | 785 | 785 | ✅ |
-| `w24_multi_main_fed` | 380 | 380 | ✅ |
-| `physical_state_fired_weapons` | 460 | 460 | ✅ |
+| `w24_multi_main_fed` | 381 | 381 | ✅ |
+| `physical_state_fired_weapons` | 462 | 462 | ✅ |
 | `plating_row_ties` | 0 | 0 | ✅ |
-| `plating_families` | 46 | 46 | ✅ |
+| `plating_families` | 47 | 47 | ✅ |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
 | `warhead_family_reach` | 1245 | 1245 | ✅ |
 | `unconverted_template_inheritors` | 1157 | 1157 | ✅ |

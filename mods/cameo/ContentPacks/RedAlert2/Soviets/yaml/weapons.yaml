@@ -325,7 +325,7 @@ RA2120xmm:
 	Warhead@EffectAir: CreateEffect
 		Explosions: big_explosion_air
 RA2120xmm_rad:
-	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@wh: ^Warhead_CannonChem_Light
 	Inherits@proj: ^Projectile_Shell_Light
 	Inherits@fx: ^Effect_Chem_Light
 	Inherits@fx2: ^Effect_Apoc_Explosion_RA2
@@ -339,10 +339,10 @@ RA2120xmm_rad:
 	Projectile: Bullet
 		Speed: 699
 		Inaccuracy: 150
-	Warhead@Chemical_Light: AreaDamage
+	Warhead@CannonChem_Light: AreaDamage
 		Damage: 16000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		PhysicalStates:
+			Corrosion: 100
 	Warhead@Effect: CreateEffect
 		ImpactActors: false
 		GlowScale: 2.0
@@ -363,7 +363,19 @@ RA2120xmm_rad:
 		SmudgeType: SandCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 RA2120xmm_fire:
-	Inherits: RA2120xmm
+	Inherits@wh: ^Warhead_CannonFire_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Flame_Light
+	Range: 6992
+	ReloadDelay: 63
+	Burst: 2
+	BurstDelays: 5
+	Report: vapoat1a.wav
+	Projectile: Bullet
+		Speed: 699
+		Inaccuracy: 150
+	Warhead@CannonFire_Light: AreaDamage
+		Damage: 12000
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
 		Amount: 2
@@ -371,7 +383,19 @@ RA2120xmm_fire:
 		AimTargetStances: Enemy, Neutral
 
 RA2120xmm_tesla:
-	Inherits: RA2120xmm
+	Inherits@wh: ^Warhead_CannonTesla_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_Tesla_Impact_RA2
+	Range: 6992
+	ReloadDelay: 63
+	Burst: 2
+	BurstDelays: 5
+	Report: vapoat1a.wav
+	Projectile: Bullet
+		Speed: 699
+		Inaccuracy: 150
+	Warhead@CannonTesla_Light: AreaDamage
+		Damage: 12000
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: TeslaFragment
 		Amount: 1

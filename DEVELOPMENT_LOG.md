@@ -2852,7 +2852,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
     ^Effect_Chem_Light, with ^Effect_Apoc_Explosion_RA2 and ^RA2RadShell as
     addons; local EffectAir, smudges, and radiation behaviour preserved.
 - Per-shot totals preserved: RA2120xmm 12000 flat, RA2120xmm_rad 16000 flat.
-- 
+-
 eview_resolve_diff.py before/after passes: behavioural invariants preserved
   for both weapons and child variants (RA2120xmm_fire, RA2120xmm_tesla,
   RA2120xmm_elite, RA2120xmm_rad_elite, RA2120xmm_fire_elite,
@@ -2870,3 +2870,22 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   docs/audit/latest/unconverted_templates.md.
 - Boot-gate: reached MenuPostProcessEffect.PostWorldLoaded; no new
   exception-*.log files.
+
+## 2026-08-24 — W24 Phase B: Apocalypse 120mm variant family correction
+
+- Created ^Warhead_CannonTesla_Light/Medium/Heavy in the generator (blend of Tesla + CannonAP,
+  rank 0.66, IntegrityScale 50, ElectricityDeath/Tesla DamageTypes) and spliced it into
+  mods/cameo/weapons/weapons.yaml; verify_generator_sync drift 0.
+- Re-pointed the Apocalypse 120mm variants to cannon-delivery blend families:
+  - RA2120xmm_rad: ^Warhead_CannonChem_Light, ^Effect_Chem_Light, Corrosion scale 100.
+  - RA2120xmm_fire: ^Warhead_CannonFire_Light, ^Effect_Flame_Light.
+  - RA2120xmm_tesla: ^Warhead_CannonTesla_Light, ^Effect_Tesla_Impact_RA2.
+- Preserved per-shot damage totals (rad 16000, fire/tesla 12000) and kept RA2 addons / FireShrapnel.
+- review_resolve_diff: damage, Range, ReloadDelay, Burst, projectile fields preserved for all
+  variants; CreateEffect changes flagged only for fire and tesla (intended visual shifts).
+- Audits: find_empty_warhead 0; find_orphan_old_keys 0 real; verify_generator_sync 0;
+  extract_stats.py --check 0 drift; audit_doc_claims all 19 green after updating
+  doc_claims.yaml and affected docs (plating_families 47, w24_multi_main_fed 381,
+  physical_state_fired_weapons 462); audit_warhead_split 931 at baseline.
+- Re-extracted balance ledgers with tools/balance/extract_stats.py.
+- Boot-gate: reached MenuPostProcessEffect.PostWorldLoaded; no new exception-*.log.

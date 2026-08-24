@@ -266,7 +266,7 @@ PHYSICS_RANK = {
     # blended energy — part field-coupling, part thermal
     "Waveforce": 0.70, "Plasma": 0.68,
     # exotic / field-adjacent
-    "Sonic": 0.60, "Magic": 0.58, "Inferno": 0.57, "Nuclear": 0.56, "MissileQuantum": 0.57, "MissileTesla": 0.66,
+    "Sonic": 0.60, "Magic": 0.58, "Inferno": 0.57, "Nuclear": 0.56, "MissileQuantum": 0.57, "MissileTesla": 0.66, "CannonTesla": 0.66,
     # Inferno = Flame×Prism heatray: thermo-led but still some field-coupling.
     # thermal / chemical — a shield stops heat and reagents well; little field coupling
     "CannonFire": 0.52, "MissileFire": 0.52, "Flame": 0.50, "CannonChem": 0.50, "CannonNuke": 0.45, "MissileNuke": 0.44,
@@ -1865,6 +1865,7 @@ FAMILY_INTEGRITY_SCALE = {
     "Storm": 50,                          # Tesla+Magic -> 1/2
     "Quantum": 33,                        # Railgun+Laser+Tesla -> 1/3
     "MissileTesla": 50,                   # Tesla + MissileAP -> 1/2
+    "CannonTesla": 50,                    # Tesla + CannonAP -> 1/2
     "BulletTesla": 50,                    # Tesla + Bullet -> 1/2
     "MissileQuantum": 17,                 # (Railgun+Laser+Tesla) + 3xMissileAP -> 1/6 Tesla
     # ⚠ `Waveforce: 20` DELETED 2026-08-16 (maintainer order) — it could never fire.
@@ -1899,6 +1900,7 @@ FAMILY_DAMAGE_TYPES = {
     "CannonFire":    "Prone75Percent, TriggerProne, FireDeath, Incendiary",
     "MissileFire":    "Prone75Percent, TriggerProne, FireDeath, Incendiary",
     "MissileTesla":   "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
+    "CannonTesla":   "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
     "BulletFire":     "Prone75Percent, TriggerProne, FireDeath, Incendiary",
     "BulletThermobaric": "Prone75Percent, TriggerProne, FireDeath, Incendiary",
     "BulletTesla":    "Prone75Percent, TriggerProne, ElectricityDeath, Tesla",
@@ -2052,6 +2054,7 @@ BLEND_FAMILIES = {
     "MissileNuke":  (["Nuclear", "MissileAP"], {}, L3),
     # Tesla/Quantum thermobaric missile blends (A1b). Expanded to primitives for the generator.
     "MissileTesla":   (["Tesla", "MissileAP"], {}, L3),
+    "CannonTesla":    (["Tesla", "CannonAP"], {}, L3),
     "MissileQuantum": (["Railgun", "Laser", "Tesla"] + ["MissileAP"] * 3, {"Temperature": _m(0.125)}, L3),
     "MissileThermobaric": (["Demolition", "Concussion", "Flame"] + ["MissileHE"] * 3, {"Temperature": _m(0.17)}, L3),
     "Cryo": (["Laser", "Prism"], {}, L3),
