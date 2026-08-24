@@ -30,21 +30,12 @@
   - `docs/audit/SUMMARY.md` (programme-scale debt table).
 - Re-ran `audit_doc_claims`: 19/19 clean; `multi_main_fired_weapons` measured 925 matches documented 925.
 - Verified the live heaviness-bell WIP in `tools/balance/gen_weapon_template.py` is still off (`USE_BELL` defaults to `0`) and the current generator reproduces shipped templates (`verify_generator_sync` drift 0 with bell off).
-- Previewed the bell impact with `CAMEO_HEAVINESS_BELL=1`: would change 135 of 139 shared templates, 8.3% mean row change, 0 ladder inversions. Did NOT splice or commit because CLAUDE.md rule 4 requires explicit maintainer permission to change `Versus`.
-- Ran the full audit suite (`python tools/audit/run_all.py`; bash unavailable on this Windows shell) to regenerate `docs/audit/latest/*.md` from a complete tree. Suite exit code 1 due to pre-existing gating failures (`inherits`, `upgrades`, `sequences`, `fluent`, `basebuilder_crates`, `buildable_order`, `weapon_suffixes`, `impact_glow_preservation`); advisory failures are also pre-existing. Reports were written and tracked files in `docs/audit/latest/` updated.
+- Re-ran `tools/balance/preview_bell.py` (valid tilt-to-tilt comparison): 130 of 136 profiles move, mean 8.3% row change, **0 ladder inversions**, worst row 32.0% on `Chemical_Medium`; the shipped `class_tilt` scores worse against the same control. Did NOT enable `USE_BELL` or splice because rule 4 requires explicit authorisation to change `Versus`.
+- Re-read `HANDOFF.md` thoroughly and updated it: the three tooling defects are **already fixed**, `docs/audit/latest/` has been regenerated from a complete tree, and Step 5's generator half is done. Set B remains **NOT free** (31 `^LightFlameWeapon` matches live); did not touch weapon YAML.
+- Ran the full audit suite (`python tools/audit/run_all.py`; bash unavailable on this Windows shell) from a complete tree to regenerate `docs/audit/latest/*.md`. Suite exit code 1 from pre-existing gating failures; `audit_doc_health` **PASS**.
 - `tools/tests` still 300/300 green; `find_empty_warhead` 0.
 
 ## 2026-08-24 (continued) — full composition-rollout cost analysis
-
-- Removed local `upstream` remote (Zeruel87) to prevent accidental pushes; remotes now `origin` and `github-desktop-SteamsDev`.
-- Fixed stale `multi_main_fired_weapons` count from `927` to `925` in:
-  - `docs/HANDOFF.md` (overview and board table),
-  - `docs/design/BALANCE_PROGRAM_PLAN.md` (Phase A A6),
-  - `docs/audit/SUMMARY.md` (programme-scale debt table).
-- Re-ran `audit_doc_claims`: 19/19 clean; `multi_main_fired_weapons` measured 925 matches documented 925.
-- Verified the live heaviness-bell WIP in `tools/balance/gen_weapon_template.py` is still off (`USE_BELL` defaults to `0`) and the current generator reproduces shipped templates (`verify_generator_sync` drift 0 with bell off).
-- Previewed the bell impact with `CAMEO_HEAVINESS_BELL=1`: would change 135 of 139 shared templates, 8.3% mean row change, 0 ladder inversions. Did NOT splice or commit because CLAUDE.md rule 4 requires explicit maintainer permission to change `Versus`.
-- `tools/tests` still 300/300 green; `find_empty_warhead` 0.
 
 ## 2026-08-24 (continued) — full composition-rollout cost analysis
 

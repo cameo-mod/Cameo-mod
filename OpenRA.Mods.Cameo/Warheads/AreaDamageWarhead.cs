@@ -118,6 +118,12 @@ namespace OpenRA.Mods.Cameo.Warheads
 			"steps), which is what PercentageScale is expressed in.")]
 		public readonly int PercentageDenominator = 10000;
 
+		[Desc("Continuous heaviness scalar h, in THOUSANDTHS (0 = disabled / today's behaviour,",
+			"1000 = h = 1.0, 2000 = h = 2.0). When 0 the warhead uses its authored Versus; when",
+			"non-zero the profile is passed through the §12.0i bell at runtime. Currently INERT —",
+			"the field is shipped before the C# transform so the yaml can be authored first.")]
+		public readonly int Heaviness = 0;
+
 		[Desc("The percentage half's own armor table. EMPTY falls back to Versus, which is the",
 			"common case; a family whose percentage half should favour different armor states",
 			"its own here.")]

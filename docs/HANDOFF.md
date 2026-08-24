@@ -215,11 +215,13 @@ was unachievable under the family-anchored peak (all 48 families reshaped at h=1
 which is why the peak formula changed rather than the requirement.
 
 ⭐ **Step 5 is the next action** — implement the bell in `gen_weapon_template.py` (replacing
-`class_tilt`), then in `AreaDamageWarhead`. The acceptance test is regenerating the templates
-through the bell at h ∈ {0, 1, 2} and diffing against today's Light/Medium/Heavy yaml; ⛔ never by
-comparing the bell to the shipped TEMPLATES directly, because the level also changes the body's
-`step`/`floor` and even the shipped `class_tilt` scores +18.7% worse than doing nothing on that
-comparison. Both of `WEAPON_HEAVINESS.md` §9.6's original blockers are gone: #1 was retired by the
+`class_tilt`), then in `AreaDamageWarhead`. The generator bell is **DONE 2026-08-24** and is OFF
+(`USE_BELL` controlled by `CAMEO_HEAVINESS_BELL=1`) until the maintainer authorises regeneration.
+The acceptance test is `tools/balance/preview_bell.py` (tilt-to-tilt on the same base, which is the
+only valid comparison): 130 of 136 profiles move, mean 8.3% row change, **0 ladder inversions**,
+worst single row 32.0% on `Chemical_Medium` — a smaller deviation than the shipped `class_tilt`
+itself scores against the same control. Next sub-step: add an inert `Heaviness` field to
+`AreaDamageWarhead`. Both of `WEAPON_HEAVINESS.md` §9.6's original blockers are gone: #1 was retired by the
 2026-08-23 ruling, and #2 (every family inside the 2x–8x spread band) had already been finished on
 2026-08-22 without the document noticing — `audit_versus_profile` reports 46 in band at
 `SPREAD_OFFENDERS_BASELINE = 0`.
@@ -235,14 +237,14 @@ collides across them (four armors on 0.0, four on 2.0). A global scale means ran
 ladders, which §12.0d says the tilt is designed to change. Stated in full as an OPEN block in
 DESIGN §12.0i. **Do not change the axis before it is ruled.**
 
-**b. Three tooling defects are LIVE on master. Fixes were reported in flight on 2026-08-23 from a
-Windows session — check whether they landed before redoing them.**
+**b. Three tooling defects formerly live on master — VERIFIED FIXED 2026-08-24. Fixes were reported in flight on 2026-08-23 from a
+Windows session — the fixes landed; this section is now a verified-fixed record.**
 
 | defect | effect | fix |
 |---|---|---|
-| `tools/audit/environment.py` lists `engine/OpenRA.Mods.CA` | `OpenRA.Mods.CA` is **vendored at the repo root**, not under `engine/`, so that path can never exist and `incomplete()` returns a reason on EVERY machine — `latest/` is unwritable without `--force-latest`, even from a fully built tree | drop the `engine/` prefix on that one entry |
-| `tools/audit/audit_unique_traits.py` has the same wrong path in `SOURCE_ROOTS` | not a gate, so it just **under-reported in silence**: 125 trait types scanned instead of 139. Fourteen CA trait types had never been checked | same |
-| `audit_doc_health` D8 flags its own test fixtures | `tools/tests/test_audit_doc_health.py` asserts on a literal wrong-citation label, so **D8 reports 3 findings against its own unit tests and the suite exits 1 on a clean tree** | exclude `tools/tests/` — the same self-reference class already handled for D5 |
+| `tools/audit/environment.py` now points at repo-root `OpenRA.Mods.CA` (fixed) | `OpenRA.Mods.CA` is **vendored at the repo root**, not under `engine/`, `incomplete()` now returns empty on a built tree and `latest/` is writable | `python tools/audit/environment.py` reports `complete environment` |
+| `tools/audit/audit_unique_traits.py` `SOURCE_ROOTS` now uses repo-root `OpenRA.Mods.CA` | now scans all 139 trait types; CA path verified correct | `grep SOURCE_ROOTS` confirms the vendored path |
+| `audit_doc_health` D8 no longer flags its own fixtures | `tools/tests/test_audit_doc_health.py` excludes `tools/tests/` and `tools/audit/audit_doc_health.py` from the D8 scan | `python tools/audit/audit_doc_health.py` **PASS** (0 D8 findings) |
 
 `audit_dead_warhead_fields.py` and `audit_code_duplication.py` already had the CA path right, and
 a sweep of `tools/**/*.py` finds no third instance — those two are the whole set.
@@ -252,16 +254,17 @@ were "verified" before landing. How, is in [`LESSONS_LEARNED.md`](LESSONS_LEARNE
 filter excluded exactly the lines that would have disproved it, and a tracked-file scan run while
 the new file was still untracked.
 
-**c. `docs/audit/latest/` needs one clean regenerate, from a complete tree.**
+**c. `docs/audit/latest/` regenerated 2026-08-24 from a complete tree.**
 
-It is a MIXTURE of two environments. A dozen audits read `engine/` C# or full git history; where
-those are missing the scripts scan a smaller corpus, report fewer findings and still say **PASS** —
-`dead_warhead_fields` 27071 nodes → 7014 — so alternating Windows and container runs have been
-overwriting each other's numbers.
+Regenerated with `python tools/audit/run_all.py` (bash unavailable on this Windows shell) from a
+complete tree (`engine/` built, `OpenRA.Mods.CA` at repo root, not shallow). The suite exited 1 on
+the same pre-existing gating failures (`inherits`, `upgrades`, `sequences`, `fluent`,
+`basebuilder_crates`, `buildable_order`, `weapon_suffixes`, `impact_glow_preservation`); the report
+set is now a single-environment snapshot.
 
-`run_all` now diverts to the untracked `docs/audit/degraded/` instead (`--force-latest` overrides),
-so this is a one-time cleanup — **but it cannot succeed until defect (b)#1 above is fixed**, because
-the probe currently calls every tree incomplete. Then, on a machine with `engine/` built:
+`run_all` now writes to `docs/audit/latest/` because `environment.py` no longer mis-reports
+incomplete. The note below about `bash tools/audit/run_all.sh` is the canonical command; the Python
+port `run_all.py` is equivalent and was used here. On a machine with `engine/` built:
 
 ```sh
 git fetch --unshallow          # if the clone is shallow

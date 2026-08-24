@@ -829,7 +829,7 @@ compressed ladder, not a normal armor), as are the five ALL-CAPS platings (§12.
 | 3 | Rule the armor x-axis (§9.5) | ✅ ruled 2026-08-24 — one global 13-slot scale, §9.5b |
 | 4 | Rule §9.3: does heaviness affect price? | ✅ ruled — no, price via `Damage` |
 | 4b | Rule `mu`, `LO`, `sigma` | ✅ ruled 2026-08-24 — blend, 0.667, 0.75 |
-| 5 | Implement the bell in `gen_weapon_template`, then `AreaDamageWarhead` | ▶ **next** |
+| 5 | Implement the bell in `gen_weapon_template`, then `AreaDamageWarhead` | ✅ `gen_weapon_template` bell implemented (OFF by default); ▶ next: inert `Heaviness` field in `AreaDamageWarhead` |
 | 6 | Verify no family inverts; verify the weighted mean is invariant | ✅ `audit_heaviness_bell` |
 | 7 | Collapse to one template per family; set `h` by the §3.3 rule | |
 
