@@ -25,6 +25,9 @@ wc2_orcs_grunt:
 	Armament:
 		Weapon: wc2gruntslice
 		FireDelay: 5
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: wc2gruntslice
 	Targetable@ra1_soviets_attackdog:
 		TargetTypes: DogImmune
 	Voiced:
@@ -68,6 +71,9 @@ wc2_orcs_warcraft3grunt:
 	Armament:
 		Weapon: wc2gruntslice2
 		FireDelay: 5
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: wc2gruntslice2
 	Targetable@ra1_soviets_attackdog:
 		TargetTypes: DogImmune
 	Voiced:

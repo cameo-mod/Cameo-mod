@@ -82,7 +82,7 @@ shares.
 | B12 | localization | 1 unresolved fluent ref · 526 orphaned `actor-*` messages | `fluent.md` |
 | R2 | stacked multipliers | 790 units over the 2.0× power budget | `power_budget.md` |
 | W | weapon uniqueness (§10) | 34 same-faction · 34 cross-faction · 95 carrier-only | `weapon_uniqueness.md` |
-| G | garrison weapons (§11) | **6 G1** · 0 G2 · 0 G3 | `garrison_weapons.md` |
+| G | garrison weapons (§11) | **0 G1** · 0 G2 · 0 G3 | `garrison_weapons.md` |
 | F | house stat formulas | 615 violations across 1910 roster actors | `stat_formulas.md` |
 | E | elite / rank wiring | 197 missing elite armaments · 21 ungated ELITE blocks · 52 decoration issues | `missing_elite.md`, `elite_gating.md`, `rank_decoration.md` |
 | Q | build order | prerequisite-order violations across 841 buildables | `buildable_order.md` |
@@ -138,7 +138,7 @@ so they cannot rot in prose again.
 3. **B2b duplicate inherit paths / D1 dropped inherits** — the class that produces
    `Parent type X was already inherited` boot crashes and silently-dropped templates. Only the
    boot and `audit_duplicate_inherits` can see it.
-4. **G1 garrison weapons (6)** and **B6 missing images (0)** — small, bounded, player-visible.
+4. **G1 garrison weapons (0)** and **B6 missing images (0)** — small, bounded, player-visible.
 5. **B1 cross-faction leaks (435 L1)** — the count grew because the audit's faction coverage
    grew, not only because the tree got worse. Triage before treating it as 435 bugs.
 6. **B3/B4 upgrade direction and coverage**, plus transcribing the remaining 568

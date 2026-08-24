@@ -79,6 +79,9 @@ wc2_humans_footman:
 	Armament:
 		Weapon: wc2footmanslice
 		FireDelay: 5
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: wc2footmanslice
 	Targetable@ra1_soviets_attackdog:
 		TargetTypes: DogImmune
 	Voiced:
@@ -122,6 +125,9 @@ wc2_humans_warcraft3footman:
 	Armament:
 		Weapon: wc2footmanslice2
 		FireDelay: 5
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: wc2footmanslice2
 	Targetable@ra1_soviets_attackdog:
 		TargetTypes: DogImmune
 	Voiced:
@@ -759,6 +765,9 @@ wc2_humans_highelfpriest:
 		Weapon: wc2mageFire
 		FireDelay: 7
 		RequiresCondition: (FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: wc2mageFire
 	Armament@HEAL:
 		Name: healing
 		Weapon: wc2priesthealing
@@ -873,6 +882,9 @@ wc2_humans_highelfsorceress:
 		Weapon: wc2mageFire
 		FireDelay: 7
 		RequiresCondition: (FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: wc2mageFire
 	Armament@HEAL:
 		Name: healing
 		Weapon: wc2paladinhealing

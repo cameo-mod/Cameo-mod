@@ -2943,3 +2943,16 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   to use the existing sequence.
 - `audit_sequences` now reports S1 missing images: **0** (was 2); S3 unreferenced: 594.
 - Boot-gate passed; no new exceptions.
+
+## 2026-08-24 — Fix G1 garrison weapons (6)
+
+- Added `Armament@GARRISONED` with `Name: garrisoned` to all 6 armed garrison-capable
+  Warcraft 2 infantry:
+  - `wc2_humans_footman` → `wc2footmanslice`
+  - `wc2_humans_warcraft3footman` → `wc2footmanslice2`
+  - `wc2_humans_highelfpriest` → `wc2mageFire`
+  - `wc2_humans_highelfsorceress` → `wc2mageFire`
+  - `wc2_orcs_grunt` → `wc2gruntslice`
+  - `wc2_orcs_warcraft3grunt` → `wc2gruntslice2`
+- `audit_garrison_weapons` now reports G1: **0** (was 6), G2: 0, G3: 0.
+- Boot-gate passed; no new exceptions.
