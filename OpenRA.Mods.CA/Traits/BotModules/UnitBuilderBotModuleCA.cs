@@ -494,10 +494,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			nextCompositionSelectTick = GetNextCompositionSelectTick();
 
-			var playerQueues = player.World.ActorsWithTrait<ProductionQueue>()
-				.Where(a => a.Actor.Owner == player && a.Trait.Enabled)
-				.Select(a => a.Trait)
-				.ToLookup(q => q.Info.Type);
+			var playerQueues = OpenRA.Mods.Common.AIUtils.FindQueuesByCategory(player);
 			var candidates = possibleActiveCompositions
 				.Where(c => IsCompositionTimeValid(c)
 					&& IsCompositionIntervalValid(c)
@@ -510,8 +507,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool IsCompositionIntervalValid(UnitComposition composition)
 		{
-			if (composition == null || composition.MinInterval <= 0 || string.IsNullOrEmpty(composition.Id))
-				return composition != null;
+			if (composition.MinInterval <= 0 || string.IsNullOrEmpty(composition.Id))
+				return true;
 
 			if (!compositionLastUsedTickById.TryGetValue(composition.Id, out var lastTick))
 				return true;
@@ -521,9 +518,6 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool IsCompositionTimeValid(UnitComposition composition)
 		{
-			if (composition == null)
-				return false;
-
 			var tick = world.WorldTick;
 			if (composition.MinTime > 0 && tick < composition.MinTime)
 				return false;
@@ -535,7 +529,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool CanProduceAnyUnitInCompositionForQueueCategory(UnitComposition composition, string queueCategory)
 		{
-			if (composition == null || string.IsNullOrEmpty(queueCategory))
+			if (string.IsNullOrEmpty(queueCategory))
 				return false;
 
 			if (techTree == null)
@@ -555,9 +549,6 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool CanProduceAnyUnitInCompositionForEachQueueCategory(UnitComposition composition, ILookup<string, ProductionQueue> playerQueues)
 		{
-			if (composition == null)
-				return false;
-
 			var byQueue = composition.UnitPrerequisitesByQueue;
 			if (byQueue == null || byQueue.Count == 0)
 				return false;
