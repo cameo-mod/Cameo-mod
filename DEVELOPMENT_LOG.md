@@ -38,6 +38,7 @@
   - `tools/balance/gen_weapon_template.py` + `tools/balance/preview_bell.py` (OFF by default, `CAMEO_HEAVINESS_BELL=1` to preview).
   - `OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs` gains `Heaviness` int field (0 = disabled / today's behaviour).
   - Rebuilt (`dotnet build` 0 errors) and boot-gated: `MenuPostProcessEffect.PostWorldLoaded`, no new `exception-*.log`.
+- **Continued Step 5:** ported `heaviness_bell` to C# (`OpenRA.Mods.Cameo/Warheads/HeavinessBell.cs`) and wired it to `AreaDamageWarhead` at `RulesetLoaded`. `Heaviness=0` keeps authored Versus; non-zero tilts `Versus`/`PercentageVersus`. Spread scale intentionally not wired (pending ruling). Rebuilt, re-tested, re-boot-gated; all green. Refreshed `docs/audit/latest/`.
 
 ### Open at end of session
 
