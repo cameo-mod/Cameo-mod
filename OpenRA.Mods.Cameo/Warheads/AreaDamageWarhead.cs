@@ -120,8 +120,8 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 		[Desc("Continuous heaviness scalar h, in THOUSANDTHS (0 = disabled / today's behaviour,",
 			"1000 = h = 1.0, 2000 = h = 2.0). When 0 the warhead uses its authored Versus; when",
-			"non-zero the profile is passed through the §12.0i bell at runtime. Currently INERT —",
-			"the field is shipped before the C# transform so the yaml can be authored first.")]
+			"non-zero the profile is passed through the §12.0i bell at runtime. The bell currently",
+			"affects Versus only; the continuous Spread scale is a separate pending ruling.")]
 		public readonly int Heaviness = 0;
 
 		[Desc("The percentage half's own armor table. EMPTY falls back to Versus, which is the",
@@ -167,6 +167,9 @@ namespace OpenRA.Mods.Cameo.Warheads
 		ImmutableArray<WDist> effectiveRange;
 		int tickDamageTotal;
 
+		IReadOnlyDictionary<string, int> effectiveVersus;
+		IReadOnlyDictionary<string, int> effectivePercentageVersus;
+
 		void IRulesetLoaded<WeaponInfo>.RulesetLoaded(Ruleset rules, WeaponInfo info)
 		{
 			if (Range != null)
@@ -189,6 +192,22 @@ namespace OpenRA.Mods.Cameo.Warheads
 					throw new YamlException("Number of TickDamage weights must equal Ticks.");
 
 				tickDamageTotal = TickDamage.Sum();
+			}
+
+			// §12.0i — apply the continuous-heaviness bell to Versus and PercentageVersus
+			// once at load. Heaviness = 0 keeps the authored tables verbatim.
+			if (Heaviness == 0)
+			{
+				effectiveVersus = Versus;
+				effectivePercentageVersus = PercentageVersus.Count > 0 ? PercentageVersus : Versus;
+			}
+			else
+			{
+				var h = Heaviness / 1000.0;
+				effectiveVersus = HeavinessBell.Transform(Versus, h);
+				effectivePercentageVersus = PercentageVersus.Count > 0
+					? HeavinessBell.Transform(PercentageVersus, h)
+					: effectiveVersus;
 			}
 
 			ValidateFields();
@@ -238,7 +257,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 		protected override int DamageVersus(Actor victim, HitShape shape, WarheadArgs args)
 		{
-			return VersusFrom(Versus, victim, shape);
+			return VersusFrom(effectiveVersus, victim, shape);
 		}
 
 		/// <summary>
@@ -337,7 +356,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 			// Versus has no Concrete row on most families; 100 then means "full damage", the same
 			// default every other armor lookup uses.
-			var slab = Versus.TryGetValue("Concrete", out var v) ? Damage * v / 100 : Damage;
+			var slab = effectiveVersus.TryGetValue("Concrete", out var v) ? Damage * v / 100 : Damage;
 			if (slab > 0)
 				layer.HitTile(world.Map.CellContaining(pos), slab);
 		}
@@ -477,7 +496,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 		/// <summary>The percentage half's armor lookup: its own table, or Versus when it has none.</summary>
 		int PercentageDamageVersus(Actor victim, HitShape shape, WarheadArgs args)
 		{
-			return VersusFrom(PercentageVersus, victim, shape);
+			return VersusFrom(effectivePercentageVersus, victim, shape);
 		}
 
 

@@ -42,6 +42,9 @@
 ### Open at end of session
 
 - Wire `Heaviness` into `AreaDamageWarhead`'s `Versus` lookup / `Spread` computation (the C# transform).
+  **DONE 2026-08-24** — `HeavinessBell.cs` ported from `gen_weapon_template.py`, wired at
+  `RulesetLoaded`. `Heaviness = 0` keeps today's behaviour; non-zero tilts `Versus` and
+  `PercentageVersus`. Continuous Spread scale is intentionally NOT wired (needs a separate ruling).
 - Only after the C# transform is proven: enable `USE_BELL`, splice the generator, collapse Light/Medium/Heavy templates, set per-weapon `Heaviness`.
 - Set B remains NOT free (31 `^LightFlameWeapon` matches); do not touch weapon YAML.
 

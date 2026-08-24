@@ -215,13 +215,19 @@ was unachievable under the family-anchored peak (all 48 families reshaped at h=1
 which is why the peak formula changed rather than the requirement.
 
 ⭐ **Step 5 is the next action** — implement the bell in `gen_weapon_template.py` (replacing
-`class_tilt`), then in `AreaDamageWarhead`. The generator bell is **DONE 2026-08-24** and is OFF
-(`USE_BELL` controlled by `CAMEO_HEAVINESS_BELL=1`) until the maintainer authorises regeneration.
-The acceptance test is `tools/balance/preview_bell.py` (tilt-to-tilt on the same base, which is the
-only valid comparison): 130 of 136 profiles move, mean 8.3% row change, **0 ladder inversions**,
-worst single row 32.0% on `Chemical_Medium` — a smaller deviation than the shipped `class_tilt`
-itself scores against the same control. Next sub-step: add an inert `Heaviness` field to
-`AreaDamageWarhead`. Both of `WEAPON_HEAVINESS.md` §9.6's original blockers are gone: #1 was retired by the
+`class_tilt`), then in `AreaDamageWarhead`. **DONE 2026-08-24:**
+- The generator bell is in `tools/balance/gen_weapon_template.py`, OFF by default
+  (`USE_BELL` controlled by `CAMEO_HEAVINESS_BELL=1`).
+- The `AreaDamageWarhead` C# transform is in `OpenRA.Mods.Cameo/Warheads/HeavinessBell.cs`, wired
+  at `RulesetLoaded`. `Heaviness` defaults to `0` (today's behaviour); non-zero values tilt `Versus`
+  and `PercentageVersus` through the bell at load time.
+- The continuous **Spread** scale is intentionally NOT wired yet — the mapping from `h` to
+  `LEVEL_RADIUS_SCALE` (Light 2/3, Medium 1, Heavy 4/3, Super 5/3, Trace 1/2) is a separate design
+  ruling and must not be guessed.
+
+The acceptance test is `tools/balance/preview_bell.py` (tilt-to-tilt on the same base, the only
+valid comparison): 130 of 136 profiles move, mean 8.3% row change, **0 ladder inversions**, worst
+single row 32.0% on `Chemical_Medium`. Both of `WEAPON_HEAVINESS.md` §9.6's original blockers are gone: #1 was retired by the
 2026-08-23 ruling, and #2 (every family inside the 2x–8x spread band) had already been finished on
 2026-08-22 without the document noticing — `audit_versus_profile` reports 46 in band at
 `SPREAD_OFFENDERS_BASELINE = 0`.
