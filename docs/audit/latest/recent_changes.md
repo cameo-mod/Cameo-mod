@@ -1,16 +1,16 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **385**, files touched: **875**
+Commits reviewed: **376**, files touched: **876**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
-| R1 | balance yaml edited without the ledger | 18 | yes |
+| R1 | balance yaml edited without the ledger | 16 | yes |
 | R2 | audit script never run by run_all.sh | 3 | yes |
 | R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 12 | partly |
-| R4 | engine/mod.config change (needs boot gate) | 9 | no |
+| R4 | engine/mod.config change (needs boot gate) | 8 | no |
 
 
-## R1 — hand-edited balance numbers (18)
+## R1 — hand-edited balance numbers (16)
 
 | commit | date | subject | fields |
 |---|---|---|---|
@@ -30,8 +30,6 @@ Commits reviewed: **385**, files touched: **875**
 | 0d2cd6e8 | 2026-08-10 | feat(warhead): auto-scaling Integrity/EMP + unif | Damage, Spread |
 | 39995bba | 2026-08-10 | balance(weapons): wire D2K_StormGunInf/Cymek to  | Damage |
 | 4e9c3198 | 2026-08-10 | balance(weapons): collapse Exorcist family + Shr | Damage |
-| fefb19f6 | 2026-08-10 | Improve bullet casing ejection (#249) | Speed |
-| ea160f40 | 2026-08-10 | Restore autogun projectile visuals (#248) | Speed |
 
 
 ## R2 — audits missing from run_all.sh (3)
@@ -61,7 +59,7 @@ Commits reviewed: **385**, files touched: **875**
 | 59ade89e | 2026-08-11 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 
 
-## R4 — engine/config changes to re-verify (9)
+## R4 — engine/config changes to re-verify (8)
 
 | commit | date | note |
 |---|---|---|
@@ -73,7 +71,6 @@ Commits reviewed: **385**, files touched: **875**
 | 988a7580 | 2026-08-11 | mod.config changed (rebuild + boot gate required) |
 | 1d5d5e55 | 2026-08-11 | mod.config changed (rebuild + boot gate required) |
 | f2284b1c | 2026-08-11 | mod.config changed (rebuild + boot gate required) |
-| ea160f40 | 2026-08-10 | mod.config changed (rebuild + boot gate required) |
 
 
 ## R5 — most-churned files (re-read these first)
@@ -81,10 +78,10 @@ Commits reviewed: **385**, files touched: **875**
 | file | commits touching it |
 |---|---|
 | docs/design/BALANCE_PROGRAM_PLAN.md | 104 |
-| mods/cameo/weapons/weapons.yaml | 73 |
-| tools/balance/gen_weapon_template.py | 56 |
+| mods/cameo/weapons/weapons.yaml | 66 |
+| tools/balance/gen_weapon_template.py | 51 |
 | docs/balance/derived/redalert_soviets.json | 46 |
-| docs/design/ROADMAP.md | 41 |
+| docs/design/ROADMAP.md | 42 |
 | docs/balance/derived/d2k_ixian.json | 38 |
 | docs/balance/derived/redalert2mod_consortium.json | 38 |
 | docs/balance/derived/redalert2mod_futuretech.json | 38 |
@@ -108,7 +105,7 @@ Commits reviewed: **385**, files touched: **875**
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 11 R1 and 0 R3 of 18/12 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 11 R1 and 0 R3 of 16/12 findings are in scope; the rest predate the gate.
 
 
 ## FAIL

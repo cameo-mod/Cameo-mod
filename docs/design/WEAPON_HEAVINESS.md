@@ -634,8 +634,16 @@ The family decides WHERE it is strong; heaviness nudges it heavier or lighter. T
 maintainer's stated intent: *"a heavy AP weapon is even stronger against heavy and worse against
 light"* while a light one stays anti-heavy.
 
-✅ **RULED 2026-08-23 — `SHIFT = 0.25`, `LO = 0.80`, swing ≈ 1.25x.** Restated by the maintainer in
-their own terms, which is the same model arrived at independently:
+⛔ **SUPERSEDED 2026-08-24 — the constants in that table are RETIRED. `SHIFT` no longer exists,
+`LO` is 0.667 and the peak is `mu = (h + centre_of_mass) / 2`.** See DESIGN §12.0i, which is
+binding, and §9.5b below. Two things were wrong with the measurement above: the whole "inverts"
+column was taken **before §12.0d's rank restore was implemented in the audit** — with the restore
+in place a pure tier-anchored peak inverts **nothing**, so the row that rejects it (26 of 42) does
+not stand — and `LO = 0.80` was calibrated against a peak that moved only 0.25, which under the
+ruled blend leaves the continuous model much gentler than the discrete tilt already shipping.
+
+The maintainer's restatement below still holds in full — it is the DESIGN intent, and the ruled
+model implements it:
 
 > *"the weapon family should be the most important and the heaviness level should only nudge it a
 > little … a low level CannonAP will lean stronger towards lighter armor types but still deal more
@@ -742,9 +750,11 @@ is invented:
 | INF | `None` 0.0 · `Flak` 1.0 · `Plate` 2.0 |
 | BLD | `Wood` 0.0 · `Steel` 1.0 · `Concrete` 2.0 |
 
-Per-ladder rather than one global scale, because §12.0d already makes a cross-ladder comparison
-meaningless: the same lean should land at the same RELATIVE position in every ladder, whatever that
-ladder's granularity.
+⛔ **SUPERSEDED 2026-08-24 by §9.5b — this per-ladder form gave four armors x=0.0, three x=1.0 and
+four x=2.0.** The maintainer's requirement is one unique value per armor: *"I want a continuous
+value for all of them and all of them should have their own unique value and not two sharing the
+same."* Kept here because the Bomber/Helicopter measurement below is what proved a FINE axis
+necessary in the first place, and that conclusion carried straight into the global one.
 
 **What it buys, measured on `CannonAP`'s AIR rows, h=0 → h=2:**
 
@@ -756,6 +766,35 @@ ladder's granularity.
 Under the buckets both move identically — the bell is blind to the distinction. Under the fine axis
 they move in OPPOSITE directions, which is the design. And it cost nothing: across 48 families both
 axes give the same 2 inversions, the same 2 flat families and zero mean drift.
+
+##### ⭐ 9.5b THE RULED AXIS — one global 13-slot scale (maintainer 2026-08-24)
+
+> *"scout -> none -> fighter -> light -> wood -> bomber -> medium = flak = steel -> helicopter ->
+> concrete -> heavy -> spaceship -> plate -> superheavy … symmetrical armor types that are always
+> evenly distributed from 0 to 2.0, and the 3 medium / flak / steel armor types in the middle with
+> exactly 1.0."*
+
+13 evenly spaced slots, step 1/6, and **every ladder is centred exactly on 1.000** — the property
+that makes `h=1` mean "medium" in all four domains at once. The full table, the deliberate
+three-way tie at 1.0 (worth ≤0.89% on any row, because those three armors sit in three different
+ladders and the rank restore is per-ladder), and the ladder-width design claim are in
+**DESIGN §12.0i**, which is binding. Do not restate the numbers here.
+
+⚠ **The axis cannot be measured out of the corpus, and two attempts to do so both failed for
+structural reasons.** Recorded so nobody tries a third time:
+
+* the cross-ladder OFFSETS are provably not identifiable. Fit `log V = family + macro(family,
+  ladder) + lean·heaviness(armor)`: the `macro` term is the confound (`Bullet` favours infantry
+  whatever its heaviness) and removing it makes each ladder's residual mean exactly zero by
+  construction. Raw PC1 without that removal is 56% ladder-membership — half macro-type, not
+  heaviness.
+* the within-ladder SPACING that survives correlates **0.979** with mean `build_order` rank. The
+  profiles are GENERATED, so "measuring" them re-reads `gen_weapon_template`'s interleave rule
+  rather than confirming it.
+
+What the corpus CAN confirm, and does: with macro-type removed, one axis explains **92.3%** of the
+residual and all four ladders come out monotone lightest→heaviest independently. The ORDER is real.
+The numbers are a ruling.
 
 The superseded reasoning, kept for provenance:
 
@@ -787,10 +826,11 @@ compressed ladder, not a normal armor), as are the five ALL-CAPS platings (§12.
 |--:|---|---|
 | 1 | Fix the 9 broken level ladders | ✅ **retired, not fixed** — see below |
 | 2 | Every family into the 2x-8x spread band (§9.4) | ✅ **already done 2026-08-22** |
-| 3 | Rule the armor x-axis (§9.5) | ✅ ruled — §12.0d's three buckets |
+| 3 | Rule the armor x-axis (§9.5) | ✅ ruled 2026-08-24 — one global 13-slot scale, §9.5b |
 | 4 | Rule §9.3: does heaviness affect price? | ✅ ruled — no, price via `Damage` |
-| 5 | Implement the family-anchored bell in `AreaDamageWarhead`, inert at h=1 | ▶ **next** |
-| 6 | Verify no family inverts; verify the weighted mean is invariant | |
+| 4b | Rule `mu`, `LO`, `sigma` | ✅ ruled 2026-08-24 — blend, 0.667, 0.75 |
+| 5 | Implement the bell in `gen_weapon_template`, then `AreaDamageWarhead` | ▶ **next** |
+| 6 | Verify no family inverts; verify the weighted mean is invariant | ✅ `audit_heaviness_bell` |
 | 7 | Collapse to one template per family; set `h` by the §3.3 rule | |
 
 **Step 1 was never a real blocker.** The ladder audit measured the *effective damage* of the
@@ -806,10 +846,17 @@ in `audit_versus_profile.py`, cleared by `fit_band_floor` in `gen_weapon_templat
 
 So the next action is step 5 — implementation — with every parameter now fixed:
 
-    x(armor)      = §12.0d bucket -> 0 (light) | 1 (middle) | 2 (heavy)
-    mu(family, h) = centre_of_mass(base_profile) + 0.25 * (h - 1)
-    LO            = 0.80                       (swing ~ 1.25x)
-    Versus(a, h)  = base(a) * curve(x(a), mu)  then renormalised to a constant weighted mean
+    x(armor)      = the global 13-slot scale, §9.5b / DESIGN §12.0i
+    mu(family, h) = ( h + centre_of_mass(base_profile) ) / 2
+    LO            = 0.667                      (swing 1.50x = 1/TILT_RATIO)
+    sigma         = 0.75
+    Versus(a, h)  = base(a) * curve(x(a), mu)  then renormalised, then RANK-RESTORED per ladder
 
-⚠ Ship it INERT at h=1 first and prove the resolved profiles are byte-identical before any weapon
-sets a different `h` — the same discipline that `AreaDamage` itself shipped under.
+⚠ **"Inert at h=1" is a DEPLOYMENT property and it needs proving on the right comparison.** Under
+the retired family-anchored peak it was unachievable — the bell reshaped all 48 families at h=1,
+worst row 13.5%. Under the ruled model h=1 peaks at the middle rung of every ladder, i.e. exactly
+§12.0d's Medium tilt, so the test is: regenerate the templates through the bell at h ∈ {0, 1, 2}
+and diff against today's Light / Medium / Heavy yaml. ⛔ Do NOT compare the bell against the
+shipped TEMPLATES directly — the level also changes the body's `step` and `floor`, so even the
+shipped `class_tilt` scores **+18.7% worse than doing nothing** on that comparison. Compare tilt to
+tilt, on the same base.

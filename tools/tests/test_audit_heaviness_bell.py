@@ -35,23 +35,25 @@ import audit_upstream_adoption as adopt
 
 class CentreOfMass(unittest.TestCase):
     def test_anti_heavy_profile_sits_high_on_the_axis(self):
-        # The TOP rung of each ladder is x=2, so all the weight there centres at 2.
+        # On ONE global scale the heaviest rungs no longer share x=2: Superheavy 2.0 is the only
+        # armor there, Plate 1.833 and Concrete 1.333 sit below it.
         com = bell.centre_of_mass({"Plate": 100.0, "Concrete": 100.0, "Superheavy": 100.0})
-        self.assertAlmostEqual(com, 2.0)
+        self.assertAlmostEqual(com, (1.8333 + 1.3333 + 2.0) / 3, places=3)
+        self.assertGreater(com, 1.5)
 
     def test_heavy_is_below_superheavy_so_it_pulls_the_centre_down(self):
-        # `Heavy` is the FOURTH of five vehicle rungs (x=1.5), not the top — the distinction the
-        # coarse three-bucket axis could not make.
-        com = bell.centre_of_mass({"Plate": 100.0, "Concrete": 100.0, "Heavy": 100.0})
-        self.assertAlmostEqual(com, (2.0 + 2.0 + 1.5) / 3)
+        heavier = bell.centre_of_mass({"Plate": 100.0, "Concrete": 100.0, "Superheavy": 100.0})
+        lighter = bell.centre_of_mass({"Plate": 100.0, "Concrete": 100.0, "Heavy": 100.0})
+        self.assertGreater(heavier, lighter)
 
     def test_anti_light_profile_sits_low(self):
         com = bell.centre_of_mass({"None": 100.0, "Wood": 100.0, "Scout": 100.0})
-        self.assertAlmostEqual(com, 0.0)
+        self.assertLess(com, 0.5)
 
     def test_balanced_profile_sits_in_the_middle(self):
+        # The infantry ladder is symmetric about 1.0, so its two ends average to exactly medium.
         com = bell.centre_of_mass({"None": 100.0, "Plate": 100.0})
-        self.assertAlmostEqual(com, 1.0)
+        self.assertAlmostEqual(com, 1.0, places=3)
 
     def test_weighting_is_by_versus_not_by_count(self):
         # Two light rows at 10 vs one heavy row at 180: the heavy row dominates.
@@ -73,9 +75,8 @@ class BellPreservesTheMean(unittest.TestCase):
 
     def test_mean_is_unchanged_at_every_heaviness(self):
         before = statistics.mean(self.PROFILE.values())
-        com = bell.centre_of_mass(self.PROFILE)
         for h in (0.0, 0.5, 1.0, 1.5, 2.0):
-            after = statistics.mean(bell.belled(self.PROFILE, com + bell.SHIFT * (h - 1)).values())
+            after = statistics.mean(bell.belled(self.PROFILE, bell.mu_of(self.PROFILE, h)).values())
             self.assertAlmostEqual(after, before, places=9, msg=f"mean drifted at h={h}")
 
     def test_off_axis_rows_pass_through_untouched_by_the_curve(self):
@@ -112,17 +113,61 @@ class Direction(unittest.TestCase):
 
 
 class ArmorAxis(unittest.TestCase):
-    """Each armor sits at its RUNG POSITION inside its own ladder, normalised 0..2.
+    """ONE GLOBAL 13-slot scale, 0..2, step 1/6 (maintainer 2026-08-24).
 
-    The coarse three-bucket version this replaced TIED armors that are not equally heavy, and
-    tied coordinates move together under the bell — so heaviness could not distinguish
-    Bomber from Helicopter, Scout from Light, or Heavy from Superheavy at all.
+    Two earlier forms are retired. §12.0d's three coarse buckets tied armors INSIDE a ladder
+    (Bomber and Helicopter both at x=1), and tied coordinates move together under the bell, so
+    heaviness could not tell them apart at all. The per-ladder 0..2 normalisation that replaced it
+    was unique within a ladder but collided four ways ACROSS ladders, which is what the maintainer
+    rejected: every armor gets its own value.
     """
 
-    def test_every_ladder_spans_the_full_axis(self):
+    RULED_ORDER = ["Scout", "None", "Fighter", "Light", "Wood", "Bomber",
+                   "Flak", "Medium", "Steel",            # the one deliberate tie, all at 1.0
+                   "Helicopter", "Concrete", "Heavy", "Spaceship", "Plate", "Superheavy"]
+
+    def test_the_global_order_is_the_ruled_one(self):
+        got = sorted(bell.BUCKET, key=lambda a: (bell.BUCKET[a], self.RULED_ORDER.index(a)))
+        self.assertEqual(got, self.RULED_ORDER)
+
+    def test_thirteen_evenly_spaced_slots_from_zero_to_two(self):
+        slots = sorted(set(bell.BUCKET.values()))
+        self.assertEqual(len(slots), 13)
+        self.assertAlmostEqual(slots[0], 0.0)
+        self.assertAlmostEqual(slots[-1], 2.0)
+        for a, b in zip(slots, slots[1:]):
+            self.assertAlmostEqual(b - a, 2.0 / 12, places=3)
+
+    def test_every_ladder_is_centred_exactly_on_medium(self):
+        """The property that makes h=1 mean "medium" in all four domains at once.
+
+        My own candidate axis put infantry at 0.15..0.95, so a peak at h=1 sat ABOVE the whole
+        infantry ladder and a Medium weapon would have favoured Plate. Centring every ladder on
+        1.0 is what the maintainer's ordering gets right and mine did not.
+        """
         for ladder, rungs in bell.LADDERS.items():
-            self.assertEqual(bell.BUCKET[rungs[0]], 0.0, ladder)
-            self.assertEqual(bell.BUCKET[rungs[-1]], 2.0, ladder)
+            centre = (bell.BUCKET[rungs[0]] + bell.BUCKET[rungs[-1]]) / 2
+            self.assertAlmostEqual(centre, 1.0, places=3, msg=ladder)
+
+    def test_the_only_tie_is_the_ruled_one_and_it_crosses_ladders(self):
+        """Flak · Medium · Steel share exactly 1.0 — deliberate, and mechanically free.
+
+        They sit in three DIFFERENT ladders, and the rank restore is per-ladder, so they are never
+        in competition: de-tying them (Flak 0.95 / Steel 1.05) moves no row by more than 0.89%.
+        The tie buys perfect symmetry. A tie WITHIN one ladder stays forbidden.
+        """
+        tied = [a for a, x in bell.BUCKET.items() if x == 1.0]
+        self.assertEqual(sorted(tied), ["Flak", "Medium", "Steel"])
+        self.assertEqual(len({bell.LADDERS_OF[a] for a in tied}), 3)
+
+    def test_the_ladder_widths_are_the_ruled_design_claim(self):
+        # Vehicles span the whole scale, infantry nearly as much, buildings least — they
+        # compensate with HP, and a narrow ladder keeps anti-light weapons usable on bunkers.
+        width = {k: round(bell.BUCKET[r[-1]] - bell.BUCKET[r[0]], 3)
+                 for k, r in bell.LADDERS.items()}
+        self.assertEqual(width["VEH"], 2.0)
+        self.assertGreater(width["INF"], width["AIR"])
+        self.assertGreater(width["AIR"], width["BLD"])
 
     def test_each_ladder_is_strictly_increasing(self):
         for ladder, rungs in bell.LADDERS.items():
@@ -131,11 +176,14 @@ class ArmorAxis(unittest.TestCase):
             self.assertEqual(len(set(xs)), len(xs), f"{ladder} has tied coordinates")
 
     def test_helicopter_is_heavier_than_bomber(self):
-        # Both read as "medium", but the helicopter is the heavier of the two.
+        # Both read as "medium", but the helicopter is the heavier of the two. On ONE scale the
+        # maintainer's statement becomes literally checkable against the VEHICLE rungs:
+        # "helicopter is in between medium and heavy while bomber is between light and medium".
         self.assertGreater(bell.BUCKET["Helicopter"], bell.BUCKET["Bomber"])
-        # Bomber between light and medium; helicopter between medium and heavy.
-        self.assertLess(bell.BUCKET["Bomber"], 1.0)
-        self.assertGreater(bell.BUCKET["Helicopter"], 1.0)
+        self.assertLess(bell.BUCKET["Light"], bell.BUCKET["Bomber"])
+        self.assertLess(bell.BUCKET["Bomber"], bell.BUCKET["Medium"])
+        self.assertLess(bell.BUCKET["Medium"], bell.BUCKET["Helicopter"])
+        self.assertLess(bell.BUCKET["Helicopter"], bell.BUCKET["Heavy"])
 
     def test_scout_is_lighter_than_light_and_superheavy_heavier_than_heavy(self):
         self.assertLess(bell.BUCKET["Scout"], bell.BUCKET["Light"])
@@ -169,7 +217,7 @@ class ArmorAxis(unittest.TestCase):
     def test_a_heavier_shift_separates_bomber_from_helicopter(self):
         """The distinction the coarse axis could not express at all.
 
-        Bomber (x=0.67) and Helicopter (x=1.33) both read as "medium", but the helicopter is the
+        Bomber (x=0.833) and Helicopter (x=1.167) both read as "medium", but the helicopter is the
         heavier of the two. As the peak moves heavier the gap between them must WIDEN. Under the
         three-bucket axis they shared x=1 and moved identically, so the gap never changed.
 
@@ -199,6 +247,36 @@ class ArmorAxis(unittest.TestCase):
         self.assertGreater(out["Helicopter"], out["Bomber"])
         # And the mean is still untouched, so it costs nothing in price terms.
         self.assertAlmostEqual(statistics.mean(out.values()), 100.0, places=9)
+
+    def test_the_ruled_constants(self):
+        """LO and sigma were BOTH re-ruled on 2026-08-24; SHIFT was deleted with the old peak.
+
+        LO 0.80 was measured against the retired family-anchored model, where the peak moved only
+        0.25. Under the blend it sweeps a full 1.0, and at 0.80 the continuous model came out much
+        gentler than the discrete tilt that already ships (per-ladder 0.68-0.84 vs 0.50-0.52).
+        0.667 is 1/TILT_RATIO — the same 1.5x span `class_tilt` uses.
+        """
+        self.assertAlmostEqual(bell.LO, 0.667)
+        self.assertAlmostEqual(1 / bell.LO, 1.5, places=2)
+        self.assertAlmostEqual(bell.SIGMA, 0.75)
+        self.assertFalse(hasattr(bell, "SHIFT"), "SHIFT went with the family-anchored peak")
+
+    def test_mu_blends_the_heaviness_with_the_family_mass(self):
+        """§12.0i, ruled 2026-08-24: mu = (h + centre_of_mass) / 2.
+
+        Neither pure form was ruled. `mu = centre_of_mass + 0.25*(h-1)` made h=1 mean "wherever
+        this family already sits" rather than "medium"; `mu = h` was safe when re-measured (0
+        reorderings, unlike the 26-of-42 recorded before the rank restore existed) but gives the
+        family no formal say. The blend halves the distance.
+        """
+        profile = {"None": 40.0, "Flak": 100.0, "Plate": 160.0}
+        com = bell.centre_of_mass(profile)
+        for h in (0.0, 0.5, 1.0, 1.5, 2.0):
+            self.assertAlmostEqual(bell.mu_of(profile, h), (h + com) / 2, places=9)
+        # It always lies between the family's own mass and the requested heaviness.
+        self.assertLess(bell.mu_of(profile, 2.0), 2.0)
+        self.assertGreater(bell.mu_of(profile, 2.0), com)
+        self.assertIsNone(bell.mu_of({"Shield": 100.0}, 1.0))
 
     def test_the_off_axis_armors_are_not_on_the_axis(self):
         # §12.0c Shield, §12.0b Heroic and the §12.0e platings are excluded by ruling.

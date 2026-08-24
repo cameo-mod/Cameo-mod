@@ -46,6 +46,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Bulk YAML rename scripts: safety lessons (2026-07-31)](#bulk-yaml-rename-scripts-safety-lessons-2026-07-31)
 - [Loose-extracted .oramap maps must always be repacked before finishing a task (2026-07-31)](#loose-extracted-oramap-maps-must-always-be-repacked-before-finishing-a-task-2026-07-31)
 - [Effect-warhead merge safety during 3-way split (2026-08-07)](#effect-warhead-merge-safety-during-3-way-split-2026-08-07)
+- [Measure the law's OWN pipeline, and never validate a rule against the corpus it generated (2026-08-24)](#measure-the-laws-own-pipeline-and-never-validate-a-rule-against-the-corpus-it-generated-2026-08-24)
 - [An audit is not evidence of a law — two guards enforced retired designs (2026-08-24)](#an-audit-is-not-evidence-of-a-law--two-guards-enforced-retired-designs-2026-08-24)
 - [Porting from an upstream mod: a NEW NAME is not a NEW MECHANIC (2026-08-23)](#porting-from-an-upstream-mod-a-new-name-is-not-a-new-mechanic-2026-08-23)
 - [`Inherits` POSITION is semantic, not cosmetic (2026-08-16)](#inherits-position-is-semantic-not-cosmetic-2026-08-16)
@@ -799,6 +800,56 @@ not file by file.
 naming report. `git status` after a suite run is therefore *expected* to be dirty in places the
 run never mentions — check what moved before assuming a stray edit.
 
+
+## Measure the law's OWN pipeline, and never validate a rule against the corpus it generated (2026-08-24)
+
+Two failure modes from one session designing DESIGN §12.0i's armor axis. Both produced results that
+were internally consistent, plausible, and wrong — the hardest kind to catch.
+
+**1. A measurement of an INCOMPLETE pipeline is not evidence about the design.**
+
+§12.0d says the class tilt "is applied to the VALUES and each armor is then given back the RANK it
+held". `audit_heaviness_bell.py` skipped that restore and compared only each ladder's first-vs-last
+rung. Everything measured against it was wrong:
+
+| conclusion drawn | reality with the restore in place |
+|---|---|
+| 2 permanent `KNOWN_INVERSIONS`, "a gap in §9.4, author new gradients under rule 4" | 0 inversions; nothing needs authoring |
+| a tier-anchored peak "inverts 26 of 42 families", so §12.0i law 1 must anchor to the family | `mu = h` inverts **nothing**, at any sigma, across 44 families × 5 heaviness values |
+| ladder orderings changed by the bell: 0 (endpoints only) | **127**, across 60 family/ladder pairs |
+
+The endpoint check was ALSO blind to 125 reorderings it should have caught, so the same omission
+produced both a false positive and a false negative. **When a binding law names a pipeline STEP,
+implement the step before measuring against the law.**
+
+**2. A GENERATED corpus cannot confirm the rule that generated it.**
+
+The maintainer asked for a continuous heaviness value per armor, and the tempting move was to
+derive it from the 45 authored `^Warhead_*_Medium` profiles rather than hand-type 15 numbers. PC1
+of those profiles looked like a triumph: every ladder monotone lightest→heaviest, and it reproduced
+the maintainer's own independent statement (*"bomber is between light and medium, helicopter
+between medium and heavy"*) to two decimals. It was not a measurement of heaviness:
+
+* **56% of PC1 was ladder MEMBERSHIP, not heaviness** — macro-type priority in disguise (`Bullet`
+  favours infantry whatever its heaviness). PC2 was 93% ladder membership.
+* Remove the macro-type term and the cross-ladder OFFSETS vanish with it: each ladder's residual
+  mean is exactly zero **by construction**. They are not identifiable, at all, from any corpus.
+* The within-ladder SPACING that survives correlates **0.979** with mean `build_order` rank — it
+  re-reads `gen_weapon_template`'s interleave rule rather than confirming it.
+
+What the corpus legitimately confirms is the rung ORDER (with macro-type removed, one axis explains
+92.3% of the residual and all four ladders come out monotone independently) — which was never in
+doubt. **Reporting "this is a ruling, not a measurement, and here is why it cannot be one" is what
+got the numbers ruled.** Dressing a design decision as a fit would have shipped 15 numbers nobody
+had actually chosen.
+
+**3. The corollary for acceptance tests: compare like with like.** "Can the bell reproduce the
+shipped Light/Heavy templates from one base?" scored the bell at 2% better than doing nothing, and
+that nearly went in the notes as evidence against the model. The control killed it: the **shipped**
+`class_tilt` scores **+18.7% WORSE than doing nothing** on the same comparison, because the level
+also changes the body's `step` and `floor` (`LEVELS` in `gen_weapon_template.py`), not just the
+tilt. Compared tilt-to-tilt on the same base, the bell recovers ~60% of the shipped tilt. Always run
+the shipped implementation through your own acceptance test first — if it fails, the test is wrong.
 
 ## An audit is not evidence of a law — two guards enforced retired designs (2026-08-24)
 

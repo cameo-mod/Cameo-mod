@@ -15,12 +15,13 @@ families sat in a standing WARN for weeks against a rule that did not exist.
 
 WHAT THE BELL ACTUALLY NEEDS — see DESIGN §12.0i, and §9 of docs/design/WEAPON_HEAVINESS.md:
 
-    x(armor)      = rung position inside the armor's OWN ladder, normalised 0..2
-                    VEH  Scout 0.0 < Light 0.5 < Medium 1.0 < Heavy 1.5 < Superheavy 2.0
-                    AIR  Fighter 0.0 < Bomber 0.67 < Helicopter 1.33 < Spaceship 2.0
-    mu(family, h) = centre_of_mass(base_profile) + SHIFT * (h - 1)
+    x(armor)      = ONE GLOBAL 13-slot scale, 0..2, step 1/6 (maintainer 2026-08-24)
+                    Scout 0 · None · Fighter · Light · Wood · Bomber ·
+                    (Flak = Medium = Steel) 1.0 ·
+                    Helicopter · Concrete · Heavy · Spaceship · Plate · Superheavy 2.0
+    mu(family, h) = (h + centre_of_mass(base_profile)) / 2      <- the BLEND, ruled 2026-08-24
     curve(x)      = LO + (1 - LO) * exp( -(x - mu)^2 / (2*sigma^2) )
-    Versus(a, h)  = base(a) * curve(x(a), mu)   then renormalised to a constant weighted mean
+    Versus(a, h)  = base(a) * curve(x(a), mu)   then renormalised, then RANK-RESTORED per ladder
 
 Two properties must hold at every `h`, and this audit checks both BEFORE the bell is implemented,
 so step 5 of §9.6 lands against a test that already exists:
@@ -74,14 +75,21 @@ INVERT_BASELINE = 2
 # hold their order, along with 125 other reorderings the endpoint-only check never saw. The
 # spread band needs no widening and no warhead needs authoring for this. (Corrected 2026-08-24.)
 
-# DESIGN §12.0i: the bell's constants, all ruled 2026-08-23.
-SHIFT = 0.25
-LO = 0.80
-# ⚠ NOT RULED — an assumed default. WEAPON_HEAVINESS §9 writes sigma into the formula and never
-# assigns it a value. On a three-point axis 1.0 spans the whole ladder (a gentle curve); smaller
-# peaks it. Every number this audit reports was taken at 1.0. Rule it before the bell ships.
-SIGMA = 1.0
-HEAVINESS = [0.0, 1.0, 2.0]
+# DESIGN §12.0i: the bell's constants. `LO` and `SIGMA` were RE-RULED on 2026-08-24 and `SHIFT`
+# was DELETED with the family-anchored peak — see BLEND below.
+#
+# LO 0.80 was measured against the retired family-anchored model, where the peak moved only 0.25.
+# Under the blend the peak sweeps a full 1.0 of the scale, and at 0.80 the continuous model came
+# out much GENTLER than the discrete tilt the game already ships: per-ladder effect 0.68-0.84
+# against the shipped 0.50-0.52. 0.667 is 1/TILT_RATIO — the same 1.5x span `class_tilt` uses —
+# so collapsing three templates into one preserves today's differentiation instead of flattening
+# it. Mismatch against the shipped tilt falls 0.089 -> 0.056 (no tilt at all = 0.139).
+LO = 0.667
+# Ruled 2026-08-24 (was an assumed 1.0 inherited from this audit). 0.75 gives the strongest
+# consistent tilt; below ~0.5 the effect starts to INVERT, because only the rung nearest the peak
+# still moves and the ladder's spread stops changing.
+SIGMA = 0.75
+HEAVINESS = [0.0, 0.5, 1.0, 1.5, 2.0]
 
 LEVELS = ["Light", "Medium", "Heavy", "Super", "Trace"]
 COMPANION = ("Percentage", "ExtraDamage", "ExtraRepair", "Concrete")
@@ -102,31 +110,41 @@ LADDERS = {
     "AIR": ["Fighter", "Bomber", "Helicopter", "Spaceship"],
 }
 
-# ⭐ THE x-AXIS: each armor's RUNG POSITION inside its OWN ladder, normalised to 0..2.
+# ⭐ THE x-AXIS — ONE GLOBAL SCALE, 0..2, ruled by the maintainer 2026-08-24.
 #
-# ⛔ This REVISES the first form of §12.0i ruling 3, which used §12.0d's three coarse buckets.
-# A bucket TIES armors that are not equally heavy — `Bomber` and `Helicopter` both landed on x=1,
-# `Scout` and `Light` both on 0, `Heavy` and `Superheavy` both on 2 — and tied coordinates MOVE
-# TOGETHER under the bell, so heaviness could not tell them apart at all. Measured on CannonAP's
-# air rows from h=0 to h=2: under the buckets Bomber moved -0.86 and Helicopter -0.88, i.e.
-# identically; on this axis Bomber moves -3.10 while Helicopter moves **+1.79** — opposite
-# directions, because the peak slides away from the lighter one and toward the heavier one.
+# Maintainer: "scout -> none -> fighter -> light -> wood -> bomber -> medium = flak = steel ->
+# helicopter -> concrete -> heavy -> spaceship -> plate -> superheavy ... symmetrical armor types
+# that are always evenly distributed from 0 to 2.0, and the 3 medium / flak / steel armor types in
+# the middle with exactly 1.0."
 #
-# Maintainer, 2026-08-24: "both bomber and helicopter armor type are considered medium but from
-# the two helicopter is the heavier one. Helicopter is actually in between medium and heavy while
-# bomber is between light and medium. Same with the scout to light and the heavy to superheavy."
+# 13 evenly spaced slots, step 2/12 = 1/6. The property that makes the whole model work is that
+# EVERY LADDER IS CENTRED EXACTLY ON 1.000:
 #
-# The coordinates say exactly that: Bomber 0.67, Helicopter 1.33, Scout 0.0 < Light 0.5,
-# Heavy 1.5 < Superheavy 2.0. The switch cost nothing — across 48 families both axes give the
-# same 2 inversions, the same 2 flat families and zero mean drift.
+#     VEH  Scout 0.000 · Light 0.500 · Medium 1.000 · Heavy 1.500 · Superheavy 2.000   width 2.000
+#     INF  None  0.167 · Flak  1.000 · Plate      1.833                                width 1.667
+#     AIR  Fighter 0.333 · Bomber 0.833 · Helicopter 1.167 · Spaceship 1.667           width 1.333
+#     BLD  Wood  0.667 · Steel 1.000 · Concrete   1.333                                width 0.667
 #
-# Normalised PER LADDER rather than on one global scale because §12.0d already makes a
-# cross-ladder comparison meaningless: a family's lean should land at the same RELATIVE position
-# in every ladder, whatever that ladder's granularity.
-BUCKET = {}
-for _rungs in LADDERS.values():
-    for _i, _a in enumerate(_rungs):
-        BUCKET[_a] = 2.0 * _i / (len(_rungs) - 1)
+# so h=1 means "medium" in every domain at once, h=0 the lightest rung of every ladder and h=2 the
+# heaviest. The widths are the design claim: infantry armour varies nearly as much as vehicle
+# armour (a rifleman to power armour), buildings least — they compensate with HP, and a narrow
+# ladder keeps every anti-light weapon usable against bunkers (ruled 2026-08-24).
+#
+# ⛔ THE THREE-WAY TIE AT 1.0 IS DELIBERATE, and it is the ONLY tie. Flak, Medium and Steel sit in
+# three DIFFERENT ladders and the rank restore is per-ladder, so they are never in competition:
+# de-tying them (Flak 0.95 / Steel 1.05) changes no row by more than 0.89%. The tie buys perfect
+# symmetry and costs nothing. Ties WITHIN one ladder remain forbidden — that was the 2026-08-24
+# bucket bug, where Bomber and Helicopter shared a coordinate and could not be told apart.
+#
+# ⛔ This REPLACES two earlier forms, both retired: §12.0d's three coarse buckets (which tied
+# armors inside a ladder) and the per-ladder 0..2 normalisation that replaced them (unique within
+# a ladder, four-way collisions across them).
+AXIS_ORDER = [["Scout"], ["None"], ["Fighter"], ["Light"], ["Wood"], ["Bomber"],
+              ["Medium", "Flak", "Steel"],
+              ["Helicopter"], ["Concrete"], ["Heavy"], ["Spaceship"], ["Plate"], ["Superheavy"]]
+BUCKET = {a: round(i * 2.0 / (len(AXIS_ORDER) - 1), 4)
+          for i, slot in enumerate(AXIS_ORDER) for a in slot}
+LADDERS_OF = {a: name for name, rungs in LADDERS.items() for a in rungs}
 
 
 def profiles() -> dict[str, dict[str, float]]:
@@ -157,6 +175,21 @@ def centre_of_mass(profile: dict[str, float]) -> float | None:
     pairs = [(BUCKET[a], v) for a, v in profile.items() if a in BUCKET and v > 0]
     total = sum(v for _x, v in pairs)
     return sum(x * v for x, v in pairs) / total if total else None
+
+
+def mu_of(profile: dict[str, float], h: float) -> float | None:
+    """§12.0i: the peak is the BLEND of the requested heaviness and the family's own mass.
+
+    Maintainer ruling 2026-08-24, replacing `centre_of_mass + SHIFT * (h - 1)`. That form anchored
+    the peak to the family and let `h` nudge it by an eighth of the scale, so h=1 did NOT mean
+    "medium" — it meant "wherever this family already sits". A pure `mu = h` was rejected by the
+    earlier §12.0i law 1 for inverting 26 of 42 families, but that was measured BEFORE the rank
+    restore existed (the same omission that produced two false "known inversions"): re-measured
+    with the restore in place, `mu = h` reorders nothing at any sigma. The blend was ruled anyway,
+    so the family keeps a formal say in where its peak sits on top of the restore.
+    """
+    com = centre_of_mass(profile)
+    return None if com is None else (h + com) / 2.0
 
 
 def belled(profile: dict[str, float], mu: float) -> dict[str, float]:
@@ -214,8 +247,8 @@ def main() -> int:
         return 0
 
     print("# audit_heaviness_bell — would the continuous-heaviness bell invert any family?\n")
-    print(f"DESIGN §12.0i: `SHIFT` {SHIFT}, `LO` {LO} (swing ~"
-          f"{(1 / LO):.2f}x), x-axis = rung position inside each armor's own ladder, 0..2. "
+    print(f"DESIGN §12.0i: `LO` {LO} (swing {(1 / LO):.2f}x), `sigma` {SIGMA}, "
+          f"mu = (h + centre_of_mass) / 2, x-axis = one global 13-slot scale 0..2. "
           f"Simulated at h = {', '.join(str(h) for h in HEAVINESS)}.\n")
 
     inverted, flat_families, mean_drift = [], [], []
@@ -224,7 +257,7 @@ def main() -> int:
         if com is None:
             continue
         base_mean = statistics.mean(base.values())
-        at = {h: belled(base, com + SHIFT * (h - 1)) for h in HEAVINESS}
+        at = {h: belled(base, mu_of(base, h)) for h in HEAVINESS}
 
         for h, prof in at.items():
             drift = abs(statistics.mean(prof.values()) - base_mean) / base_mean

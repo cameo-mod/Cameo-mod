@@ -3,11 +3,8 @@
 Active concrete weapons checked: 2345
 Formula percentage templates checked: 6
 
-## FAIL (6 problem(s))
+## PASS
 
-- ^Warhead_Flame_Light: missing percentage warhead
-- ^Warhead_Flame_Medium: missing percentage warhead
-- ^Warhead_Flame_Heavy: missing percentage warhead
-- ^Warhead_Chemical_Light: missing percentage warhead
-- ^Warhead_Chemical_Medium: missing percentage warhead
-- ^Warhead_Chemical_Heavy: missing percentage warhead
+- Flame and Chemical fold percentage damage into the main AreaDamage warhead, and it
+  feeds the matching physical-state meter.
+- No active weapon double-applies a meter through scaled and fixed warheads.

@@ -145,9 +145,12 @@ blocker #1 of `WEAPON_HEAVINESS.md` §9.6 — blocking the bell for no reason.
 > will lean stronger towards lighter armor types but still deal more damage to heavy armor … Flame
 > weapons will be the opposite … but still more damage to light, because that's their identity."*
 
-That is §12.0d's sharpen-or-flatten sentence, and it is now **DESIGN §12.0i** with all four
-constants ruled: `SHIFT` 0.25, `LO` 0.80 (swing ~1.25x), x-axis = §12.0d's three buckets, and
-**heaviness has no price effect** (`Versus` = WHAT, `Damage` = HOW).
+That is §12.0d's sharpen-or-flatten sentence, and it is now **DESIGN §12.0i**, COMPLETE as of
+2026-08-24: one global 13-slot armor axis 0..2 (every ladder centred on 1.000, one deliberate
+three-way tie at 1.0), `mu = (h + centre_of_mass) / 2`, `LO` 0.667 (swing 1.50x = 1/`TILT_RATIO`),
+`sigma` 0.75, and **heaviness has no price effect** (`Versus` = WHAT, `Damage` = HOW). The
+2026-08-23 constants (`SHIFT` 0.25, `LO` 0.80, three buckets) are all retired — the axis twice, and
+`SHIFT` entirely.
 
 **Replaced by `tools/audit/audit_heaviness_bell.py`**, which simulates the bell before it exists so
 §9.6 step 6 has its test waiting. Measured across 48 families, checking each ladder's FULL rank

@@ -195,15 +195,34 @@ knob, and 145 `^Warhead_*` templates carry only a placeholder `Damage: 2000` —
 the SHAPE, the weapon holds the MAGNITUDE. The audit is retired and replaced by
 `tools/audit/audit_heaviness_bell.py`.
 
-The same session ruled the continuous-heaviness model into **DESIGN §12.0i**: family-anchored bell,
-`SHIFT` 0.25, `LO` 0.80 (swing ~1.25x), x-axis = §12.0d's three buckets, and **heaviness has no
-price effect** (`Versus` = WHAT it is good against, `Damage` = HOW strong it is).
+⭐ **DESIGN §12.0i IS NOW COMPLETE (2026-08-24) — every constant ruled, nothing open.** The
+2026-08-23 version of it is superseded in three places:
 
-⭐ **The bell is unblocked and step 5 is the next action** — implement it in `AreaDamageWarhead`,
-INERT at h=1, and prove the resolved profiles are byte-identical before any weapon sets a different
-`h`. Both of `WEAPON_HEAVINESS.md` §9.6's blockers are gone: #1 was retired by this ruling, and #2
-(every family inside the 2x–8x spread band) had already been finished on 2026-08-22 without the
-document noticing — `audit_versus_profile` reports 46 in band at `SPREAD_OFFENDERS_BASELINE = 0`.
+| | 2026-08-23 | ruled 2026-08-24 |
+|---|---|---|
+| x-axis | §12.0d's three coarse buckets, then a per-ladder 0..2 | **one global 13-slot scale**, step 1/6, every ladder centred on 1.000, one deliberate three-way tie (`Flak`=`Medium`=`Steel`=1.0) |
+| peak | `centre_of_mass + SHIFT*(h-1)`, `SHIFT` 0.25 | **`mu = (h + centre_of_mass)/2`**; `SHIFT` deleted |
+| swing | `LO` 0.80 (1.25x) | **`LO` 0.667 (1.50x)** = `1/TILT_RATIO`, so the continuous model keeps the differentiation the discrete tilt already ships |
+| `sigma` | unruled, assumed 1.0 | **0.75** |
+
+`audit_heaviness_bell.py` runs the ruled model over 48 families at h ∈ {0, 0.5, 1, 1.5, 2}: **0
+ladder orderings changed, 0 weighted-mean drift**, 2 flat families at the ratchet.
+
+⛔ Two 2026-08-23 conclusions are RETRACTED, both from the same cause — measurements taken before
+§12.0d's rank restore was implemented in the audit. A tier-anchored peak was rejected for
+"inverting 26 of 42 families"; with the restore it inverts **nothing**. And "ship it inert at h=1"
+was unachievable under the family-anchored peak (all 48 families reshaped at h=1, worst row 13.5%),
+which is why the peak formula changed rather than the requirement.
+
+⭐ **Step 5 is the next action** — implement the bell in `gen_weapon_template.py` (replacing
+`class_tilt`), then in `AreaDamageWarhead`. The acceptance test is regenerating the templates
+through the bell at h ∈ {0, 1, 2} and diffing against today's Light/Medium/Heavy yaml; ⛔ never by
+comparing the bell to the shipped TEMPLATES directly, because the level also changes the body's
+`step`/`floor` and even the shipped `class_tilt` scores +18.7% worse than doing nothing on that
+comparison. Both of `WEAPON_HEAVINESS.md` §9.6's original blockers are gone: #1 was retired by the
+2026-08-23 ruling, and #2 (every family inside the 2x–8x spread band) had already been finished on
+2026-08-22 without the document noticing — `audit_versus_profile` reports 46 in band at
+`SPREAD_OFFENDERS_BASELINE = 0`.
 
 ⛔ **RETRACTED:** an earlier version of this section listed two permanent "known inversions" and a
 gap in §9.4 needing new gradients authored. Both were artifacts of the audit skipping §12.0d's rank

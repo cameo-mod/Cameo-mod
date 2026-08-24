@@ -1,6 +1,6 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **272**
+Files scanned: **273**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
@@ -198,9 +198,9 @@ Files scanned: **272**
 | tools/audit/audit_doc_claims.py | 104 | `subprocess.run()` without check= |
 | tools/audit/audit_doc_health.py | 130 | `subprocess.run()` without check= |
 | tools/audit/audit_engine_freshness.py | 52 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 87 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 104 | `subprocess.run()` without check= |
-| tools/audit/run_all.py | 130 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 114 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 138 | `subprocess.run()` without check= |
+| tools/audit/run_all.py | 164 | `subprocess.run()` without check= |
 | tools/balance/apply_balance.py | 271 | `subprocess.run()` without check= |
 | tools/balance/apply_balance.py | 273 | `subprocess.run()` without check= |
 | tools/balance/compensate_retrofit.py | 170 | `subprocess.run()` without check= |

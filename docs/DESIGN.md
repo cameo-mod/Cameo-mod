@@ -1549,6 +1549,14 @@ direction it sharpens, where it disagrees it flattens, and it can never invert
 `None > Flak > Plate`. That also removes any need for a `direction` argument, which is what
 makes it work for the blends.
 
+⭐ **This is the DISCRETE form, and it is what `gen_weapon_template.class_tilt` ships today.**
+Its continuous successor is **§12.0i**, which replaces the three armor sets above with one global
+armor axis and the four levels with a continuous `h`. Two things to carry across when reading this
+section: the tilt's span here is `TILT_RATIO = 1.5`, which is why §12.0i's `LO` was re-ruled to
+0.667 (= 1/1.5) rather than 0.80; and the three sets above are the LIGHTEST / MIDDLE / HEAVIEST
+rung of each ladder, which on §12.0i's axis is `h = 0 / 1 / 2` — every ladder is centred on 1.000
+precisely so that mapping is exact.
+
 ### 12.0e THE ARMOR-PLATING LAYER (maintainer 2026-08-16/17) — binding
 
 Five overlay armors, granted by upgrades, **ALWAYS ALL CAPS** so the case alone distinguishes
@@ -1955,7 +1963,7 @@ needs three things for backup systems:
    `GrantPeriodicCondition@rebuild` + `TransformOnCondition@buildingrebirth`
    for auto-reanimation, and `WithColoredOverlay@backup` for the visual.
 
-### 12.0i CONTINUOUS HEAVINESS — the family-anchored bell (maintainer 2026-08-23) — binding
+### 12.0i CONTINUOUS HEAVINESS — the global armor axis and the bell (maintainer 2026-08-23/24) — binding
 
 Replaces the discrete `Light/Medium/Heavy/Super` LEVEL with a continuous heaviness `h`. Full
 derivation and the measurements behind every constant: `docs/design/WEAPON_HEAVINESS.md` §9.
@@ -1965,32 +1973,94 @@ derivation and the measurements behind every constant: `docs/design/WEAPON_HEAVI
 > damage to heavy armor, the difference just is not too much … Flame weapons will be the opposite
 > … but still more damage to light, because that's their identity."*
 
-    x(armor)      = the armor's RUNG POSITION inside its OWN ladder, normalised to 0..2
-                      VEH  Scout 0.0 < Light 0.5 < Medium 1.0 < Heavy 1.5 < Superheavy 2.0
-                      AIR  Fighter 0.0 < Bomber 0.67 < Helicopter 1.33 < Spaceship 2.0
-                      INF  None 0.0 < Flak 1.0 < Plate 2.0
-                      BLD  Wood 0.0 < Steel 1.0 < Concrete 2.0
-    mu(family, h) = centre_of_mass(base_profile) + SHIFT * (h - 1)
+> *"h=0 leans towards damage against light, h=1 leans towards damage against medium and h=2 leans
+> towards damage against heavy — each h value should shift the damage distribution, but on a
+> continuous scale."* (maintainer, 2026-08-24)
+
+    x(armor)      = ONE GLOBAL SCALE, 0..2, 13 evenly spaced slots, step 1/6
+    mu(family, h) = ( h + centre_of_mass(base_profile) ) / 2
     curve(x)      = LO + (1 - LO) * exp( -(x - mu)^2 / (2*sigma^2) )
     Versus(a, h)  = base(a) * curve(x(a), mu)
                     then renormalised to a constant weighted mean
-                    then RANK-RESTORED per ladder (§12.0d) — see law 6
+                    then RANK-RESTORED per ladder (§12.0d) — see law 5
 
-Four constants, all ruled 2026-08-23:
+#### The axis (maintainer, 2026-08-24)
+
+> *"scout -> none -> fighter -> light -> wood -> bomber -> medium = flak = steel -> helicopter ->
+> concrete -> heavy -> spaceship -> plate -> superheavy … symmetrical armor types that are always
+> evenly distributed from 0 to 2.0, and the 3 medium / flak / steel armor types in the middle with
+> exactly 1.0."*
+
+| slot | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `x` | 0.000 | 0.167 | 0.333 | 0.500 | 0.667 | 0.833 | **1.000** | 1.167 | 1.333 | 1.500 | 1.667 | 1.833 | 2.000 |
+| armor | Scout | None | Fighter | Light | Wood | Bomber | **Flak · Medium · Steel** | Helicopter | Concrete | Heavy | Spaceship | Plate | Superheavy |
+
+⭐ **EVERY LADDER IS CENTRED EXACTLY ON 1.000.** That is the property the whole model rests on:
+
+| ladder | rungs | width |
+|---|---|---|
+| VEH | Scout 0.000 · Light 0.500 · **Medium 1.000** · Heavy 1.500 · Superheavy 2.000 | 2.000 |
+| INF | None 0.167 · **Flak 1.000** · Plate 1.833 | 1.667 |
+| AIR | Fighter 0.333 · Bomber 0.833 · Helicopter 1.167 · Spaceship 1.667 | 1.333 |
+| BLD | Wood 0.667 · **Steel 1.000** · Concrete 1.333 | 0.667 |
+
+so `h=1` means "medium" in all four domains at once, `h=0` the lightest rung of every ladder and
+`h=2` the heaviest — literally what the maintainer asked for. The WIDTHS are the design claim:
+infantry armour varies nearly as much as vehicle armour (a rifleman to power armour), buildings
+least — they compensate with HP, and a narrow ladder keeps every anti-light weapon usable against
+bunkers (ruled 2026-08-24; wider buildings were offered and declined).
+
+⛔ **THE THREE-WAY TIE AT 1.0 IS DELIBERATE AND IT IS THE ONLY TIE.** `Flak`, `Medium` and `Steel`
+sit in three DIFFERENT ladders, and the rank restore is per-ladder, so they are never in
+competition. De-tying them (Flak 0.95 / Medium 1.00 / Steel 1.05) moves no row by more than
+**0.89%** — measured across 45 families × 5 heaviness values. The tie buys perfect symmetry and
+costs nothing. A tie **within** one ladder stays forbidden: that was the 2026-08-24 bucket bug,
+where `Bomber` and `Helicopter` shared a coordinate and heaviness could not tell them apart at all.
+
+⛔ **TWO EARLIER FORMS ARE RETIRED.** §12.0d's three coarse buckets tied armors inside a ladder.
+The per-ladder 0..2 normalisation that replaced them was unique within a ladder but collided four
+ways across ladders (`None`/`Scout`/`Wood`/`Fighter` all at 0.0), which is what the maintainer
+rejected: *"I want a continuous value for all of them and all of them should have their own unique
+value."*
+
+⚠ **The axis is a DESIGN RULING, not a measurement, and it cannot be one.** Two attempts to derive
+it from the 45 authored profiles both failed for structural reasons, and the negative result is
+worth keeping: (1) the cross-ladder OFFSETS are provably not identifiable — remove each family's
+macro-type priority (the confound: `Bullet` favours infantry whatever its heaviness) and the
+per-ladder means of the residual are exactly zero by construction; (2) the within-ladder SPACING
+that survives correlates **0.979** with mean `build_order` rank, i.e. it re-reads
+`gen_weapon_template`'s own interleave rule rather than confirming it. The corpus can confirm the
+rung ORDER — all four ladders come out monotone, independently — and nothing else.
+
+#### The constants
 
 | | value | why |
 |---|---|---|
-| `SHIFT` | **0.25** | the family dominates; heaviness nudges. A tier-only peak at 2.0x swing inverted **26 of 42** families and is rejected. |
-| `LO` | **0.80** (swing ~1.25x) | same measurement |
-| verified | `audit_heaviness_bell.py`, 2026-08-23 | across **48** families: **0** ladder inversions beyond two recorded exceptions, **0** weighted-mean drift, **2** flat families (`Sonic`, `Magic`). `WEAPON_HEAVINESS.md` §9.2 predicted six flat; four have since been given real gradients. |
-| x-axis | **rung position inside each armor's own ladder, 0..2** | REVISED 2026-08-24 — the three coarse buckets TIED armors that are not equally heavy, and tied coordinates move together, so heaviness could not separate them at all |
-| price effect | **none** | see below |
+| `LO` | **0.667** (swing 1.50x) | RE-RULED 2026-08-24. 0.80 was measured against the retired family-anchored peak, which moved only 0.25; under the blend the peak sweeps a full 1.0 and 0.80 came out much gentler than the tilt that already ships (per-ladder 0.68–0.84 vs 0.50–0.52). 0.667 = `1/TILT_RATIO`, the same 1.5x span `class_tilt` uses, so collapsing three templates into one preserves today's differentiation. Mismatch against the shipped tilt: 0.089 → 0.056 (no tilt at all = 0.139). |
+| `sigma` | **0.75** | RULED 2026-08-24 — it had been an assumed 1.0 inherited from an audit. 0.75 gives the strongest consistent tilt; below ~0.5 the effect starts to INVERT, because only the rung nearest the peak still moves. |
+| `mu` | **`(h + centre_of_mass) / 2`** | the BLEND, ruled 2026-08-24 — see law 1. |
+| `SHIFT` | **deleted** | it belonged to the family-anchored peak. |
+| price effect | **none** | see law 2. |
+| verified | `audit_heaviness_bell.py`, 2026-08-24 | 48 families, h ∈ {0, 0.5, 1, 1.5, 2}: **0** ladder orderings changed, **0** weighted-mean drift, **2** flat families (`Sonic`, `Magic`) at the ratchet. |
 
-1. **THE PEAK IS ANCHORED TO THE FAMILY, NEVER TO THE TIER.** `mu` starts at the family's own
-   centre of mass. A tier-only peak makes a low-tier `CannonAP` best against LIGHT armor, which
-   is exactly what must not happen. The shift SHARPENS where it agrees with the family's centre
-   (CannonAP, heavy-ward) and FLATTENS where it disagrees (Flame, light-ward) — the two halves of
-   §12.0d's sentence — and the rank restore means it can never invert a family's identity.
+#### The laws
+
+1. **THE PEAK IS THE BLEND OF THE HEAVINESS AND THE FAMILY'S OWN MASS.** ⛔ This REPLACES the
+   earlier law 1, *"the peak is anchored to the family, never to the tier"*. That law rejected a
+   tier-anchored peak because it *"inverted 26 of 42 families"* — but that was measured **before
+   the rank restore existed**, the same omission that produced two false "known inversions" (see
+   law 5). Re-measured with the restore in place, a pure `mu = h` reorders **nothing**, at any
+   sigma, across 44 families × 5 heaviness values. Both pure forms were therefore available and
+   the maintainer ruled the blend: `mu = h` gives the family no formal say beyond the restore,
+   while `mu = centre_of_mass + SHIFT*(h-1)` made `h=1` mean *"wherever this family already sits"*
+   rather than "medium". The blend halves the distance and keeps `h` meaningful.
+
+   The shift still SHARPENS where it agrees with the family's centre of mass (CannonAP,
+   heavy-ward) and FLATTENS where it disagrees (Flame, light-ward) — the two halves of §12.0d's
+   sentence. Worked example, `CannonAP`, `Versus` at h=0 / 1 / 2: `Superheavy` 160.1 → 174.1 →
+   205.0, `Scout` 108.9 → 89.4 → 81.4. At h=0 `Superheavy` is still the largest value in the whole
+   profile — the weapon leans lighter without ever ceasing to be anti-heavy.
 2. **HEAVINESS IS FREE OF PRICE.** Renormalising to a constant weighted mean makes `K` invariant
    in `h`. `Versus` = WHAT the weapon is good against, `Damage` = HOW strong it is. A late-game
    weapon costs more because its `Damage` is higher, and **no tier term is added to pricing**.
@@ -1999,32 +2069,10 @@ Four constants, all ruled 2026-08-23:
    placeholder `Damage: 2000`: the template holds the SHAPE, the weapon holds the MAGNITUDE. A
    family's effective damage across its rungs is emergent, orthogonal to the bell, and no law
    requires it to rise. `audit_level_ladder`'s monotonic check was retired on 2026-08-23.
-4. **EXCLUDED FROM THE BELL:** `Shield` (§12.0c — its own compressed ladder), the five ALL-CAPS
+4. **EXCLUDED FROM THE AXIS:** `Shield` (§12.0c — its own compressed ladder), the five ALL-CAPS
    platings (§12.0e — they replace the class armor rather than sit on the axis), and `Heroic`
    (§12.0b — a derived cell, recomputed rather than tilted).
-5. ⭐ **THE AXIS IS FINE-GRAINED, NOT THREE BUCKETS. A CATEGORY IS NOT FLAT.** Two armors can both
-   read as "medium" and still differ in heaviness, and the bell must see that difference.
-
-   > Maintainer, 2026-08-24: *"both bomber and helicopter armor type are considered medium but from
-   > the two helicopter is the heavier one. Helicopter is actually in between medium and heavy while
-   > bomber is between light and medium. Same with the scout to light and the heavy to superheavy."*
-
-   The ordering already exists and is canonical — `gen_weapon_template.LADDERS`, lightest to
-   heaviest — so `x` is just the rung index normalised to 0..2 **inside that armor's own ladder**.
-   Per-ladder, not one global scale, because §12.0d already makes a cross-ladder comparison
-   meaningless: a family's lean lands at the same RELATIVE position in every ladder, whatever that
-   ladder's granularity.
-
-   ⛔ **Why the first version was wrong.** Under §12.0d's three buckets `Bomber` and `Helicopter`
-   both sat at x=1, `Scout` and `Light` both at 0, `Heavy` and `Superheavy` both at 2 — and tied
-   coordinates MOVE TOGETHER under the bell. Measured on `CannonAP`'s air rows from h=0 to h=2:
-   buckets moved Bomber −0.86 and Helicopter −0.88, i.e. identically; the fine axis moves Bomber
-   **−3.10** and Helicopter **+1.79**, opposite directions, because the peak slides away from the
-   lighter one and toward the heavier one. Only the fine axis expresses the design.
-
-   The revision cost nothing: across 48 families both axes give the same result — zero
-   reorderings, zero mean drift (`audit_heaviness_bell.py`).
-6. ⛔ **THE RANK RESTORE IS A STEP OF THE PIPELINE, NOT A FOOTNOTE.** §12.0d already says the tilt
+5. ⛔ **THE RANK RESTORE IS A STEP OF THE PIPELINE, NOT A FOOTNOTE.** §12.0d already says the tilt
    "is applied to the VALUES and each armor is then given back the RANK it held", and that step is
    what makes "can never invert" TRUE rather than merely hoped for. Measured across 48 families:
    without it the bell changes a ladder's internal order in **127** cases spanning 60
@@ -2036,47 +2084,16 @@ Four constants, all ruled 2026-08-23:
    order, so the family picks up a mild gradient pointing that way. Reasonable as a tie-break, but
    "flat family" does not mean "heaviness does nothing".
 
-⛔ **OPEN — THE AXIS IS NOT SETTLED. Every armor must get its OWN unique continuous value.**
-
-> Maintainer, 2026-08-24: *"the 3 bucket thingy was just a suggestion but I want a continuous value
-> for all of them and all of them should have their own unique value and not two sharing the same.
-> Just think about it first how to best do it."*
-
-The per-ladder normalisation above satisfies this **within** a ladder and violates it **across**
-ladders — four armors sit on 0.0 (`None`, `Scout`, `Wood`, `Fighter`), three on 1.0 (`Flak`,
-`Medium`, `Steel`), four on 2.0 (`Plate`, `Superheavy`, `Concrete`, `Spaceship`). So it is an
-INTERIM answer, not the ruling.
-
-**The tension to resolve before designing it** — this is why it needs thought rather than a formula:
-
-1. **A single global scale requires ranking armors ACROSS ladders**, and §12.0d says a cross-ladder
-   comparison is exactly what the tilt is designed to change (*"`None` (INF) vs `Superheavy` (VEH)
-   is a CROSS-ladder relation… Comparing them proves nothing"*). A global axis asserts, for
-   instance, whether `Plate` infantry is heavier or lighter than `Medium` vehicle armor. That is a
-   real design claim, not bookkeeping.
-2. **The bell reads `x` through one `mu` per family.** If the ladders interleave on one axis, a
-   family's peak necessarily lands between rungs of *different* ladders, so heaviness would couple
-   INF and VEH responses — which may be wanted (one physical notion of "heavy") or unwanted (four
-   independent rock-paper-scissors axes).
-3. **Uniqueness is cheap; MEANINGFUL uniqueness is not.** Nudging tied values apart by epsilon
-   satisfies the letter and buys nothing. The values have to encode real relative heaviness, which
-   is the thing to think about.
-4. **The rank restore (law 6) constrains what uniqueness can achieve.** It re-sorts within a
-   ladder, so a coordinate's effect is felt through the SPACING of the tilted values, not their
-   order. Cross-ladder placement changes spacing; it cannot reorder a ladder.
-
-⚠ Do not implement an axis change until this is ruled. `audit_heaviness_bell.py` currently
-encodes the interim per-ladder form and its `ArmorAxis` tests assert no ladder has ties.
-
-⚠ **`sigma` is NOT ruled — it is an assumed default of 1.0.** `WEAPON_HEAVINESS.md` §9 writes it
-into the formula and never assigns it a value. On a three-point axis, `sigma = 1.0` makes the bell
-span the whole ladder (a gentle curve); a smaller value peaks it. Every measurement recorded here
-was taken at 1.0 and came out clean, so it is a defensible default — but it is the one constant of
-the five that has not been decided, and it should be ruled before the bell ships rather than
-inherited from an audit.
-
-⚠ Ship it INERT at `h=1` and prove the resolved profiles are byte-identical before any weapon sets
-a different `h`, exactly as `AreaDamage` shipped.
+⚠ **"Inert at h=1" is a DEPLOYMENT property, not a design one, and it needs proving separately.**
+The intent was the discipline `AreaDamage` shipped under: turn the code on with every weapon at
+h=1 and show no resolved number moved. It was unachievable under the old formula — anchored to the
+family's mass, the bell reshaped all 48 families at h=1, worst row **13.5%**. Under the ruled model
+h=1 peaks at the middle rung of every ladder, i.e. exactly §12.0d's Medium tilt, so the right
+acceptance test is: **regenerate the templates through the bell at h ∈ {0, 1, 2} and diff against
+today's Light / Medium / Heavy yaml.** Do NOT test it by comparing the bell against the shipped
+TEMPLATES directly — the level also changes the body's `step` and `floor` (`LEVELS` in
+`gen_weapon_template.py`), so even the shipped `class_tilt` itself scores **+18.7% worse than doing
+nothing** on that comparison. Compare tilt to tilt, on the same base.
 
 ## 16. Rank decorations, experience systems & elite weapons
 

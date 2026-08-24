@@ -1,6 +1,6 @@
-# audit_packs â€” content-pack conversion & placement (DESIGN Â§2)
+# audit_packs — content-pack conversion & placement (DESIGN §2)
 
-## P1 â€” conversion coverage (faction prefixes with actors OUTSIDE packs)
+## P1 — conversion coverage (faction prefixes with actors OUTSIDE packs)
 
 | prefix | in packs | outside packs | sample outside file |
 |---|---|---|---|
@@ -15,109 +15,109 @@
 | valentines | 0 | 13 | mods\cameo\rules\valentine.yaml |
 | wc2_orc | 0 | 11 | mods\cameo\rules\warcraft2.yaml |
 | ra2_lt | 10 | 10 | mods\cameo\rules\redalert2.yaml |
-| wc2_human | 0 | 9 | mods\cameo\rules\warcraft2.yaml |
 | shockwave | 0 | 9 | mods\cameo\rules\shockwave.yaml |
+| wc2_human | 0 | 9 | mods\cameo\rules\warcraft2.yaml |
 | sc2k | 0 | 8 | mods\cameo\rules\sc2k.yaml |
-| d2 | 0 | 7 | mods\cameo\rules\dune2.yaml |
 | ambiance | 0 | 7 | mods\cameo\rules\misc.yaml |
-| ra2_c | 4 | 4 | mods\cameo\rules\redalert2.yaml |
-| wc2_critter | 0 | 4 | mods\cameo\rules\warcraft2.yaml |
+| d2 | 0 | 7 | mods\cameo\rules\dune2.yaml |
 | factory | 0 | 4 | mods\cameo\rules\sow.yaml |
+| ra2_c | 4 | 4 | mods\cameo\rules\redalert2.yaml |
 | simcity | 0 | 4 | mods\cameo\rules\simcity.yaml |
+| wc2_critter | 0 | 4 | mods\cameo\rules\warcraft2.yaml |
 | eden | 0 | 3 | mods\cameo\rules\outpost2.yaml |
 | ra1_soviets | 121 | 3 | mods\cameo\rules\heroes.yaml |
 | sglmobilesupplytruck | 0 | 3 | mods\cameo\rules\shockwave.yaml |
-| ra2_cop | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| ra2_euroc | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| susacannon | 0 | 2 | mods\cameo\rules\shockwave.yaml |
-| ra2_trucka | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| ra2_tractor | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| ra2_suvb | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| schsupply | 0 | 2 | mods\cameo\rules\shockwave.yaml |
-| ra2_ycab | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| ra2_car | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| ra2_stang | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| wc2_h | 0 | 2 | mods\cameo\rules\warcraft2.yaml |
 | op2 | 0 | 2 | mods\cameo\rules\outpost2.yaml |
-| ra2_cona | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| win98 | 0 | 2 | mods\cameo\rules\win98.yaml |
-| ra2_taxi | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| ra2_bus | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| ra2_truckb | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| susasupply | 0 | 2 | mods\cameo\rules\shockwave.yaml |
-| ra2_ptruck | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| satelliteprotection | 0 | 2 | mods\cameo\rules\sow.yaml |
-| ra2_ddbx | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| susapower | 0 | 2 | mods\cameo\rules\shockwave.yaml |
-| ra2_jeep | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| sglrpgtrooper | 0 | 2 | mods\cameo\rules\shockwave.yaml |
 | ra2_ambu | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| ra2_limo | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| ra2_suvw | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| wc2_o | 0 | 2 | mods\cameo\rules\warcraft2.yaml |
 | ra2_bcab | 2 | 2 | mods\cameo\rules\redalert2.yaml |
-| sowfighter | 0 | 1 | mods\cameo\rules\sow.yaml |
-| zmcv | 0 | 1 | mods\cameo\rules\z.yaml |
-| mta | 0 | 1 | mods\cameo\rules\sow.yaml |
-| wh40kkarssquad | 0 | 1 | mods\cameo\rules\wh40k.yaml |
-| wh40kguardmobslave | 0 | 1 | mods\cameo\rules\wh40k.yaml |
-| wh40kkarsmobslave | 0 | 1 | mods\cameo\rules\wh40k.yaml |
-| ra2_ctmisc06 | 1 | 1 | mods\cameo\rules\redalert2.yaml |
-| worms | 0 | 1 | mods\cameo\rules\worms.yaml |
-| wc2_camera | 0 | 1 | mods\cameo\rules\warcraft2.yaml |
-| wh40kscoutmobslave | 0 | 1 | mods\cameo\rules\wh40k.yaml |
-| sowbomber | 0 | 1 | mods\cameo\rules\sow.yaml |
-| td_nod | 65 | 1 | mods\cameo\rules\tiberiaalliances.yaml |
-| wh40kogrynsquad | 0 | 1 | mods\cameo\rules\wh40k.yaml |
-| schtankhunter | 0 | 1 | mods\cameo\rules\shockwave.yaml |
-| mtc | 0 | 1 | mods\cameo\rules\sow.yaml |
-| schsiegesoldier | 0 | 1 | mods\cameo\rules\shockwave.yaml |
-| swdroidheli | 0 | 1 | mods\cameo\rules\starwars.yaml |
-| wh40ktechpriest | 0 | 1 | mods\cameo\rules\wh40k.yaml |
-| upsusagunship3 | 0 | 1 | mods\cameo\rules\shockwave.yaml |
-| sglaangrymob1 | 0 | 1 | mods\cameo\rules\shockwave.yaml |
-| ra1 | 11 | 1 | mods\cameo\rules\civilian.yaml |
-| schlotus | 0 | 1 | mods\cameo\rules\shockwave.yaml |
-| wh40kguardsquad | 0 | 1 | mods\cameo\rules\wh40k.yaml |
-| sglamob | 0 | 1 | mods\cameo\rules\shockwave.yaml |
-| wc2_support | 0 | 1 | mods\cameo\rules\warcraft2.yaml |
-| swlaat | 0 | 1 | mods\cameo\rules\starwars.yaml |
-| htd | 0 | 1 | mods\cameo\rules\sow.yaml |
-| wc2 | 0 | 1 | mods\cameo\rules\warcraft2.yaml |
-| large | 0 | 1 | mods\cameo\rules\xcom.yaml |
-| schhacker | 0 | 1 | mods\cameo\rules\shockwave.yaml |
+| ra2_bus | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_car | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_cona | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_cop | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_ddbx | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_euroc | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_jeep | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_limo | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_ptruck | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_stang | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_suvb | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_suvw | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_taxi | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_tractor | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_trucka | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_truckb | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| ra2_ycab | 2 | 2 | mods\cameo\rules\redalert2.yaml |
+| satelliteprotection | 0 | 2 | mods\cameo\rules\sow.yaml |
+| schsupply | 0 | 2 | mods\cameo\rules\shockwave.yaml |
+| sglrpgtrooper | 0 | 2 | mods\cameo\rules\shockwave.yaml |
+| susacannon | 0 | 2 | mods\cameo\rules\shockwave.yaml |
+| susapower | 0 | 2 | mods\cameo\rules\shockwave.yaml |
+| susasupply | 0 | 2 | mods\cameo\rules\shockwave.yaml |
+| wc2_h | 0 | 2 | mods\cameo\rules\warcraft2.yaml |
+| wc2_o | 0 | 2 | mods\cameo\rules\warcraft2.yaml |
+| win98 | 0 | 2 | mods\cameo\rules\win98.yaml |
 | camea | 0 | 1 | mods\cameo\rules\camea.yaml |
 | cute | 0 | 1 | mods\cameo\rules\valentine.yaml |
-| wc2_neutral | 0 | 1 | mods\cameo\rules\warcraft2.yaml |
-| wh40kogrynmobslave | 0 | 1 | mods\cameo\rules\wh40k.yaml |
-| sglaangrymob2 | 0 | 1 | mods\cameo\rules\shockwave.yaml |
-| htb | 0 | 1 | mods\cameo\rules\sow.yaml |
-| wh40kpsyker | 0 | 1 | mods\cameo\rules\wh40k.yaml |
-| wh40kmarine | 0 | 1 | mods\cameo\rules\wh40k.yaml |
-| medium | 0 | 1 | mods\cameo\rules\xcom.yaml |
-| ts | 0 | 1 | mods\cameo\rules\misc.yaml |
 | dummy | 1 | 1 | mods\cameo\rules\redalert2.yaml |
-| wh40kcommisair | 0 | 1 | mods\cameo\rules\wh40k.yaml |
-| wh40kscoutsquad | 0 | 1 | mods\cameo\rules\wh40k.yaml |
-| swa10 | 0 | 1 | mods\cameo\rules\starwars.yaml |
-| mte | 0 | 1 | mods\cameo\rules\sow.yaml |
-| upusaleaflet | 0 | 1 | mods\cameo\rules\generals.yaml |
-| sglterrorist | 0 | 1 | mods\cameo\rules\shockwave.yaml |
-| swxwing | 0 | 1 | mods\cameo\rules\starwars.yaml |
 | hta | 0 | 1 | mods\cameo\rules\sow.yaml |
-| mtd | 0 | 1 | mods\cameo\rules\sow.yaml |
-| sowtripler | 0 | 1 | mods\cameo\rules\sow.yaml |
-| ra | 0 | 1 | mods\cameo\rules\husks.yaml |
-| mtb | 0 | 1 | mods\cameo\rules\sow.yaml |
-| sgltoxinrebel | 0 | 1 | mods\cameo\rules\shockwave.yaml |
-| schredguard | 0 | 1 | mods\cameo\rules\shockwave.yaml |
-| sc | 0 | 1 | mods\cameo\rules\starcraft.yaml |
+| htb | 0 | 1 | mods\cameo\rules\sow.yaml |
 | htc | 0 | 1 | mods\cameo\rules\sow.yaml |
+| htd | 0 | 1 | mods\cameo\rules\sow.yaml |
 | hte | 0 | 1 | mods\cameo\rules\sow.yaml |
+| large | 0 | 1 | mods\cameo\rules\xcom.yaml |
+| medium | 0 | 1 | mods\cameo\rules\xcom.yaml |
+| mta | 0 | 1 | mods\cameo\rules\sow.yaml |
+| mtb | 0 | 1 | mods\cameo\rules\sow.yaml |
+| mtc | 0 | 1 | mods\cameo\rules\sow.yaml |
+| mtd | 0 | 1 | mods\cameo\rules\sow.yaml |
+| mte | 0 | 1 | mods\cameo\rules\sow.yaml |
+| ra | 0 | 1 | mods\cameo\rules\husks.yaml |
+| ra1 | 11 | 1 | mods\cameo\rules\civilian.yaml |
+| ra2_ctmisc06 | 1 | 1 | mods\cameo\rules\redalert2.yaml |
+| sc | 0 | 1 | mods\cameo\rules\starcraft.yaml |
+| schhacker | 0 | 1 | mods\cameo\rules\shockwave.yaml |
+| schlotus | 0 | 1 | mods\cameo\rules\shockwave.yaml |
+| schredguard | 0 | 1 | mods\cameo\rules\shockwave.yaml |
+| schsiegesoldier | 0 | 1 | mods\cameo\rules\shockwave.yaml |
+| schtankhunter | 0 | 1 | mods\cameo\rules\shockwave.yaml |
+| sglaangrymob1 | 0 | 1 | mods\cameo\rules\shockwave.yaml |
+| sglaangrymob2 | 0 | 1 | mods\cameo\rules\shockwave.yaml |
+| sglamob | 0 | 1 | mods\cameo\rules\shockwave.yaml |
+| sglterrorist | 0 | 1 | mods\cameo\rules\shockwave.yaml |
+| sgltoxinrebel | 0 | 1 | mods\cameo\rules\shockwave.yaml |
+| sowbomber | 0 | 1 | mods\cameo\rules\sow.yaml |
+| sowfighter | 0 | 1 | mods\cameo\rules\sow.yaml |
+| sowtripler | 0 | 1 | mods\cameo\rules\sow.yaml |
+| swa10 | 0 | 1 | mods\cameo\rules\starwars.yaml |
+| swdroidheli | 0 | 1 | mods\cameo\rules\starwars.yaml |
+| swlaat | 0 | 1 | mods\cameo\rules\starwars.yaml |
+| swxwing | 0 | 1 | mods\cameo\rules\starwars.yaml |
+| td_nod | 65 | 1 | mods\cameo\rules\tiberiaalliances.yaml |
+| ts | 0 | 1 | mods\cameo\rules\misc.yaml |
+| upsusagunship3 | 0 | 1 | mods\cameo\rules\shockwave.yaml |
+| upusaleaflet | 0 | 1 | mods\cameo\rules\generals.yaml |
+| wc2 | 0 | 1 | mods\cameo\rules\warcraft2.yaml |
+| wc2_camera | 0 | 1 | mods\cameo\rules\warcraft2.yaml |
+| wc2_neutral | 0 | 1 | mods\cameo\rules\warcraft2.yaml |
+| wc2_support | 0 | 1 | mods\cameo\rules\warcraft2.yaml |
+| wh40kcommisair | 0 | 1 | mods\cameo\rules\wh40k.yaml |
+| wh40kguardmobslave | 0 | 1 | mods\cameo\rules\wh40k.yaml |
+| wh40kguardsquad | 0 | 1 | mods\cameo\rules\wh40k.yaml |
+| wh40kkarsmobslave | 0 | 1 | mods\cameo\rules\wh40k.yaml |
+| wh40kkarssquad | 0 | 1 | mods\cameo\rules\wh40k.yaml |
+| wh40kmarine | 0 | 1 | mods\cameo\rules\wh40k.yaml |
+| wh40kogrynmobslave | 0 | 1 | mods\cameo\rules\wh40k.yaml |
+| wh40kogrynsquad | 0 | 1 | mods\cameo\rules\wh40k.yaml |
+| wh40kpsyker | 0 | 1 | mods\cameo\rules\wh40k.yaml |
+| wh40kscoutmobslave | 0 | 1 | mods\cameo\rules\wh40k.yaml |
+| wh40kscoutsquad | 0 | 1 | mods\cameo\rules\wh40k.yaml |
+| wh40ktechpriest | 0 | 1 | mods\cameo\rules\wh40k.yaml |
+| worms | 0 | 1 | mods\cameo\rules\worms.yaml |
+| zmcv | 0 | 1 | mods\cameo\rules\z.yaml |
 
 Fully converted prefixes (92): air, asianalliance, atreides, banshee, bbomb, bbomb2, bbomb3, bf109, bomber, cabal, cargoship, carryall, cgcnst, combat, conyard, corpse, cplane, cruiser, cryo, d2k, deathcash, dieglocke, drone, duelist, egcnst, eye, farasha, forgotten, fremen, futuretech, grun, harbinger, harkonnen, haunebu, haunebu2, heavy, heavydrone, hole, horten, inspect, ixian, japan, kami, landcarr, latinsyndicate, light, litt, me262, mig, missile, nax, naxis, ordos, ornithopter, pelican, phoenix, piercer, protoss, qacst, ra1_allies, ra1_badger, ra2_allies, ra2_soviets, ra2_yuri, ra2hind, resonance, rocket, sarubia, schwarzermond, scrapcar, scrapcar2, siege, sietch, steelconsortium, swarmer, td_gdi, team, terran, tkm, ts_gdi, ts_nod, twister, up, upgrade, wc2_humans, wc2_orcs, wind, wraith, yakolev, yuri, zep, zerg
 
-## P2 â€” actors whose id does not match the pack's dominant prefix
+## P2 — actors whose id does not match the pack's dominant prefix
 
 | pack | actor | dominant prefix |
 |---|---|---|
@@ -210,11 +210,11 @@ Fully converted prefixes (92): air, asianalliance, atreides, banshee, bbomb, bbo
 | TiberianDawn/GDI | team_upgrade.up_lightweightarmorplating | td_gdi |
 | TiberianDawn/Nod | team_upgrade.up_advancedguerillatactics | td_nod |
 
-## P3 â€” content.yaml manifest vs disk / nonstandard filenames
+## P3 — content.yaml manifest vs disk / nonstandard filenames
 
 _clean_
 
-## P4 â€” naming summary (counts; details via gen_rename_maps)
+## P4 — naming summary (counts; details via gen_rename_maps)
 
 - actor ids violating the lowercase grammar: **1510** (e.g. 1TNK.camea, 2100A2MAT, 2100A2PT, 2100A2TIT, 2100A2VET, 2100AA, 2100AACH, 2100AAMAT)
 
