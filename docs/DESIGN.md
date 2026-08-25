@@ -718,10 +718,13 @@ cheapest provider wins).
    You cannot change one stat in isolation — the formula ties all stats
    together, so changing Speed changes the unit's power, which changes the
    correct price or requires adjusting other stats to hold the price. The
-   rebalance MUST land in BOTH the spreadsheet
-   (`docs/design/cameo_armor_system.xlsx`) AND the yaml in the same pass.
-   Never change a stat without updating the spreadsheet and verifying the
-   formula still holds. If the range is beautiful (6.000, 7.500), adjust
+   rebalance MUST move through the raw ledger (`docs/balance/*.json`) or an
+   unlocked cell in one of the two active generated workbenches, then land in
+   yaml through the guarded balance pipeline. Regenerate both
+   `cameo_balance_by_faction.xlsx` and `cameo_balance_by_type.xlsx` in the same
+   pass. The legacy `cameo_armor_system.xlsx` is reference-only and is not a
+   required second write. Never change a stat without updating the ledger and
+   verifying the formula still holds. If the range is beautiful (6.000, 7.500), adjust
    HP/Damage instead of Range. If the new Range would violate promotion
    superiority, adjust HP or Price instead.
 4. Run the relevant audit before and after your change
@@ -1169,20 +1172,21 @@ Implementation: `tools/reference/aggregate_archetype.py` (`HEROIC_FROM`,
 
 **LAW (2026-07-18): balance numbers move ONLY through the balance
 pipeline** — `docs/design/BALANCE_PIPELINE.md` (raw-stat JSON ledger in
-`docs/balance/`, generated workbench `cameo_balance_v2.xlsx`, gated
+`docs/balance/`, generated `cameo_balance_by_faction.xlsx` and
+`cameo_balance_by_type.xlsx` workbenches, gated
 `apply_balance.py`, `audit_balance_drift` enforcement in run_all).
 Hand-editing a stat in yaml is a red audit finding. The subsections
 below remain the FORMULA reference; the legacy workbook stays the
 design-judgment reference until the Phase-3 triage
 (`docs/balance/discrepancies.md`) completes.
 
-_Source of truth: **`docs/design/cameo_armor_system.xlsx`** (the repo
-working copy; design's private master is synced into it; sheets:
+_Historical design-judgment reference: **`docs/design/cameo_armor_system.xlsx`** (sheets:
 Armor Types, Weapon Types, Infantry, Tanks, Vehicles, Aircraft,
 Defenses; Tabelle2/3 are scratch). 333ggg's CABAL concept
-(`Downloads\cabal.xlsx`) uses the same sheet layout. Tooling: openpyxl
-reads AND writes these — formula changes can be re-applied to every
-unit programmatically. Research 2026-07-11; open questions marked ❓._
+(`Downloads\cabal.xlsx`) uses the same sheet layout. It is not the current
+numeric source of truth and must not overwrite the ledger or the generated
+faction/type workbenches. The formulas below document the historical design
+reference. Research 2026-07-11; open questions marked ❓._
 
 **The cost identity.** Every unit sheet computes three cost estimates
 from the stats and averages them; the design workflow INVERTS this:
@@ -1278,15 +1282,15 @@ steps so the house formulas stay integral:
     warhead (the K model now prices what they compensated for), while the 34
     sniper `OpenToppedDamage` ones STAY — those are how a sniper hits
     passengers, not a damage bonus. See BALANCE_PROGRAM_PLAN W19.
-  - **Percentage twin** = **100 flat damage is 0.01% of max health**, so the
-    twin is exactly `Damage / 100` written in BASIS POINTS on an
-    `AreaDamagePercentage` warhead with `PercentageDenominator: 10000`.
-    Percentage-warhead `Versus` values are multiples of **5** in [5, 100]
-    (the x5 rebase of the old 1..17 band, which exactly cancels the 5x
-    weaker base ratio — never change one without the other).
-    The stock `HealthPercentageDamage` cannot express this (whole percent
-    only) and is being migrated away; until then it keeps the OLD law of
-    1 per 2000.
+  - **Folded percentage hit** = the normal family path. `AreaDamage` derives
+    its second hit from the same authored `Damage` through `PercentageScale`
+    and `PercentageDenominator: 10000`; it therefore scales to zero with the
+    main hit and cannot drift as a separately authored twin. Percentage
+    `Versus` values remain multiples of **5** in [5, 100].
+  - **Standalone percentage warheads** (`AreaDamagePercentage` and
+    `HealthPercentageDamage`) are reserved for bespoke effects whose damage
+    must remain independent of flat `Damage`. They are additive floors, not
+    family twins, and their explicit denominator defines the unit.
   - The ONE code implementation is `formula.distribute_damage` /
     `formula.spread_damage_sum`; guard `audit_warhead_split`.
 - **Only template-inherited warheads may exist.** Every `Warhead@X` on a
@@ -1925,10 +1929,11 @@ range increase over the ground weapon.
 attackers, not light infantry. Their weapon must use laser / missile
 warheads appropriate to their role, never `^SmallArms`.
 
-**Balance workflow.** All CABAL rebalances start in
-`docs/design/cameo_armor_system.xlsx` (or the CABAL concept sheet) and
-land in YAML in the same pass. The workbook wins on mismatch. Promotions
-add `^PromotionUnitBuff` on top of the sheet stats.
+**Balance workflow.** A CABAL concept sheet may supply design judgment, but numeric
+rebalance changes enter the same raw ledger / active faction-or-type workbench pipeline
+as every other faction and land in YAML through the guarded apply step. On mismatch,
+current ledger extraction and generator rules win over the legacy workbook. Promotions
+add `^PromotionUnitBuff` on top of the ledger stats.
 
 **CABAL Avatar — 50% scaled Core Defender (design 2026-07-15).** The
 `cabal_avatar` is a mass-produced variant of the Core Defender, NOT a

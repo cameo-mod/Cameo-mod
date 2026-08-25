@@ -41,16 +41,17 @@ Fields:
 - `MinRadius` / `MaxRadius` (default 0) — when `MaxRadius>0`, the damaged radius GROWS from
   MinRadius to MaxRadius across the ticks (expanding shockwave); when 0, every tick covers the
   full Falloff range (a **static DoT cloud**).
-- `TickDamage[]` (optional, length == Ticks) — relative per-tick damage weights, **normalised so
-  the ticks always sum to the authored `Damage`**. A DECREASING profile (`5,4,3,2,1`) + expanding
+- `TickDamage[]` (optional, length == Ticks) — relative per-tick damage weights, integer-normalised
+  against the authored `Damage` (truncation can leave a small remainder). A DECREASING profile (`5,4,3,2,1`) + expanding
   radius = the **nuclear shockwave** the maintainer wants: *small area / high damage first → each
   tick larger area / weaker damage*. INCREASING builds up instead. Omit for an even split.
 - **Baked friendly fire** (replaces the `_FriendlyFire` twin): `FriendlyFireDamage` (default 50 =
   Cameo law; 0 disables FF), `FriendlyFireSpread` (default 50 = allies only hit within half radius).
 
-**Balance invariant:** the authored `Damage` is always the TOTAL dealt across all ticks, so the
-balance pipeline reads ONE number (2000-grid law intact). Rounding on `100/Ticks` (or the weight
-split) is sub-1% — acceptable; if exactness ever matters, hand the remainder to tick 0.
+**Balance invariant:** the authored `Damage` is always the TOTAL before per-tick integer
+modifiers, so the balance pipeline reads ONE number on the current 100-damage grid. Runtime
+integer division can leave a small remainder (three even ticks apply 33% each); the pricing
+model mirrors those exact modifiers instead of silently redistributing the remainder.
 
 ### 2. Conversion scope — ALL 55 template main warheads → AreaDamage
 
@@ -386,8 +387,8 @@ Everything below lives in the **template**. The weapon inline sets `Damage:` and
             Heavy: 108
             ...
         # ---- percentage half, folded in ----
-        PercentageScale: 100              # 0.01%-units of max HP per 2000 flat Damage.
-                                          #   100 == today's "1% per 2000". THIS is the per-family
+        PercentageScale: 10000            # Damage 2000 -> 100 basis points = 1.00% max HP.
+                                          #   10000 is today's "1% per 2000". THIS is the per-family
                                           #   dial: a chemical family scales harder, a kinetic one
                                           #   softer, without touching a single weapon.
         PercentageSpread: 50              # % of the main Spread — mirrors FriendlyFireSpread: 50

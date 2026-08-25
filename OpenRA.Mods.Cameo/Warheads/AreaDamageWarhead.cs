@@ -152,7 +152,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 		public readonly int IntegrityScale = 0;
 
 		[Desc("Relative damage weight per tick. Length must equal Ticks (omit for an even split).",
-			"Weights are NORMALISED so the total across all ticks always equals the authored Damage,",
+			"Weights are integer-normalised; truncation can leave a small unapplied remainder,",
 			"keeping the balance figure a single number. For the nuclear shockwave use a DECREASING",
 			"profile (e.g. 5, 4, 3, 2, 1) together with MinRadius/MaxRadius: the first ring is small",
 			"and hits hard, later rings are larger and weaker. An INCREASING profile builds up instead.")]
@@ -163,6 +163,9 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 		void IRulesetLoaded<WeaponInfo>.RulesetLoaded(Ruleset rules, WeaponInfo info)
 		{
+			if (PercentageDenominator <= 0)
+				throw new YamlException("PercentageDenominator must be positive.");
+
 			if (Range != null)
 			{
 				if (Range.Length != 1 && Range.Length != Falloff.Length)
@@ -190,6 +193,44 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 		[Desc("Subclass validation hook, called once the base fields are checked.")]
 		protected virtual void ValidateFields() { }
+
+		public override void DoImpact(in Target target, WarheadArgs args)
+		{
+			// DamageWarhead deliberately treats an Actor target as one selected victim instead
+			// of a positional area impact. Preserve that behavior for hitscan/melee weapons, but
+			// include the folded PercentageScale hit that only the positional ring used to apply.
+			if (target.Type != TargetType.Actor)
+			{
+				base.DoImpact(target, args);
+				return;
+			}
+
+			var firedBy = args.SourceActor;
+			var victim = target.Actor;
+			if (!IsValidAgainst(victim, firedBy))
+				return;
+
+			// Match DamageWarhead's direct-actor shape selection exactly. In particular, do not
+			// route through ApplyRing: doing so would turn direct hits into unexpected splash.
+			var closestActiveShape = (HitShape)victim.EnabledTargetablePositions.MinByOrDefault(t =>
+			{
+				if (t is HitShape h)
+					return h.DistanceFromEdge(victim, victim.CenterPosition);
+				return WDist.MaxValue;
+			});
+
+			if (closestActiveShape == null)
+				return;
+
+			InflictDirectActor(victim, firedBy, closestActiveShape, args);
+		}
+
+		protected void InflictDirectActor(Actor victim, Actor firedBy, HitShape shape, WarheadArgs args)
+		{
+			InflictDamage(victim, firedBy, shape, args);
+			if (PercentageScale > 0)
+				InflictPercentage(victim, firedBy, shape, args);
+		}
 
 		// THE ARMOR-PLATING LAYER (maintainer, 2026-08-16).
 		//
@@ -345,7 +386,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 				outer = new WDist(MinRadius.Length + (MaxRadius.Length - MinRadius.Length) * (tick + 1) / Ticks);
 
 			// The authored Damage is the TOTAL across all ticks. Split it by the per-tick weights
-			// (TickDamage) when given, otherwise evenly. Normalised so the ticks always sum to Damage.
+			// (TickDamage) when given, otherwise evenly. Integer division may leave a small remainder.
 			var perTickModifier = Ticks > 1 ? 100 / Ticks : 100;
 			if (TickDamage != null && tickDamageTotal > 0)
 				perTickModifier = 100 * TickDamage[tick] / tickDamageTotal;
@@ -432,7 +473,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 			}
 		}
 
-		void InflictPercentage(Actor victim, Actor firedBy, HitShape shape, WarheadArgs args)
+		protected virtual void InflictPercentage(Actor victim, Actor firedBy, HitShape shape, WarheadArgs args)
 		{
 			var healthInfo = victim.Info.TraitInfoOrDefault<HealthInfo>();
 			if (healthInfo == null)
@@ -443,7 +484,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 			// factor of 100 is the hundredths granularity — see PercentageScale's [Desc].
 			// ROUND, do not truncate: integer division biases every weapon DOWNWARD by up to
 			// one basis point, which showed up as a systematic 0.99% where 1.00% was meant.
-			var basisPoints = (Damage * PercentageScale + 100000) / 200000;
+			var basisPoints = FoldedPercentageBasisPoints(Damage, PercentageScale);
 			if (basisPoints <= 0)
 				return;
 
@@ -451,14 +492,8 @@ namespace OpenRA.Mods.Cameo.Warheads
 				? PercentageDamageVersus(victim, shape, args)
 				: DamageVersus(victim, shape, args);
 
-			var damage = Util.ApplyPercentageModifiers(healthInfo.HP,
-				args.DamageModifiers.Append(basisPoints, versus));
-
-			// ApplyPercentageModifiers already divided by 100 for the basisPoints modifier, so
-			// only the remaining factor is left. Applied LAST, on the largest intermediate, so the
-			// extra division costs the least precision.
-			if (PercentageDenominator != 100)
-				damage = damage * 100 / PercentageDenominator;
+			var damage = ApplyPercentageDamage(healthInfo.HP,
+				args.DamageModifiers.Append(basisPoints, versus), PercentageDenominator);
 
 			if (damage <= 0)
 				return;
@@ -466,6 +501,37 @@ namespace OpenRA.Mods.Cameo.Warheads
 			victim.InflictDamage(firedBy, new Damage(damage, DamageTypes, GetProjectileType(args)));
 			ApplyPhysicalState(victim, firedBy, damage);
 			ApplyIntegrityScale(victim, firedBy, damage);
+		}
+
+		static int FoldedPercentageBasisPoints(int damage, int scale)
+		{
+			// Damage and PercentageScale are both ints, but four live weapons already
+			// exceed Int32 during the multiplication. Use a 64-bit intermediate so a
+			// valid folded hit cannot wrap negative and silently disappear.
+			var result = (damage * (long)scale + 100000L) / 200000L;
+			if (result > int.MaxValue)
+				return int.MaxValue;
+			if (result < int.MinValue)
+				return int.MinValue;
+			return (int)result;
+		}
+
+		protected static int ApplyPercentageDamage(int health, IEnumerable<int> modifiers, int denominator)
+		{
+			// Keep the denominator inside decimal arithmetic: with boss HP and a large
+			// basis-point hit, the pre-denominator value can exceed Int32 even though the
+			// final damage is ordinary. Truncate at the same two points as the old path.
+			var result = (decimal)health;
+			foreach (var modifier in modifiers)
+				result *= modifier / 100m;
+			result = decimal.Truncate(result);
+			if (denominator != 100)
+				result = decimal.Truncate(result * 100m / denominator);
+			if (result > int.MaxValue)
+				return int.MaxValue;
+			if (result < int.MinValue)
+				return int.MinValue;
+			return (int)result;
 		}
 
 		/// <summary>The percentage half's armor lookup: its own table, or Versus when it has none.</summary>
