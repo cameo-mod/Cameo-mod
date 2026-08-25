@@ -972,19 +972,16 @@ LurkerSpinesImpact:
 		ValidTargets: Ground, Water, Air
 
 InfestedExplosion:
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Demolition_Heavy
-	Inherits@wh3: ^Warhead_Concussion_Medium
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Report: M203.aud
 	Projectile: InstantHit
-	Warhead@Demolition_Light:
-		Damage: 50000
 	Warhead@Concussion_Medium:
 		Damage: 50000
 	Warhead@Demolition_Heavy:
-		Damage: 50000
+		Damage: 100000
 	Warhead@Effect: CreateEffect
 		Explosions: self_destruct
 		ImpactSounds: ExploLrg.aud
