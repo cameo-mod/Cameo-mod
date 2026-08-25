@@ -1012,7 +1012,6 @@ RA2HoverMissile_AA_elite:
 
 RA2ThunderboltMissile:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
-	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: bazook1.aud
@@ -1031,6 +1030,8 @@ RA2ThunderboltMissile:
 		Acceleration: 10
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
+	Warhead@MissileHE_Heavy:
+		Damage: 4000
 
 RA2ThunderboltMissile_elite:
 	Inherits: RA2ThunderboltMissile
@@ -1101,7 +1102,6 @@ RA2MultiHoverMissile_AA_elite:
 
 RA2MultiThunderboltMissile:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
-	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: bazook1.aud
@@ -1120,6 +1120,8 @@ RA2MultiThunderboltMissile:
 		Acceleration: 10
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
+	Warhead@MissileHE_Heavy:
+		Damage: 4000
 
 RA2MultiThunderboltMissile_elite:
 	Inherits: RA2MultiThunderboltMissile
@@ -2448,8 +2450,7 @@ RA2vulcan3:
 	Report: baocatta.wav, baocattb.wav, baocattc.wav
 
 BlackHawkCannon:
-	Inherits: ^RA2SmallArms
-	Inherits@2: ^RA2Chaingun
+	Inherits@wh: ^RA2Chaingun
 	ReloadDelay: 3
 	ValidTargets: Ground, Air, Water
 	Range: 4750
@@ -2463,12 +2464,9 @@ BlackHawkCannon:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Air, Water
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
-		Damage: 2000
+		Damage: 4000
 RA2ZOMBIE:
 	ReloadDelay: 45
 	Range: 1280
@@ -2504,20 +2502,16 @@ RA2SKELETON:
 		DamageTypes: DefaultDeath
 
 RA2CRM60:
-	Inherits: ^RA2SmallArms
-	Inherits@2: ^RA2Chaingun
+	Inherits@wh: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 14
 	Burst: 4
 	BurstDelays: 2
 	Range: 5660
 	Report: vifvat2a.wav, vifvat2b.wav, vifvat2c.wav
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
-		Damage: 2000
+		Damage: 4000
 RA2CRM60H:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -2726,18 +2720,14 @@ RA2VirusExplode:
 		InvalidTargets: Water
 
 RA220mmrapid:
-	Inherits: ^RA2SmallArms
-	Inherits@2: ^RA2Chaingun
+	Inherits@wh: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 15
 	Range: 5000
 	Report: vwaratta.wav, vwarattb.wav
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Air, Water
-		Damage: 4000
 	Warhead@Bullet_Medium:
-		ValidTargets: Ground, Water
-		Damage: 4000
+		ValidTargets: Ground, Air, Water
+		Damage: 8000
 ####################################################################################################
 #		SuperWeapons
 ####################################################################################################
@@ -3128,8 +3118,7 @@ SealBomb:
 		Damage: 20000
 
 BorisAKM:
-	Inherits: ^RA2SmallArms
-	Inherits@2: ^RA2Chaingun
+	Inherits@wh: ^RA2Chaingun
 	Report: iboratta.wav, iborattb.wav
 	ValidTargets: Ground, Water
 	InvalidTargets: Structure, Bridge, wall
@@ -3139,10 +3128,7 @@ BorisAKM:
 	BurstDelays: 2
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
-		Damage: 4000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water
-		Damage: 4000
+		Damage: 8000
 
 WarpawayEffect:
 	ValidTargets: Ground, Water, Air

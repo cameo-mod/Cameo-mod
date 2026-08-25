@@ -667,18 +667,15 @@ RA2vulcan2:
 	Report: bpilatta.wav, bpilattb.wav, bpilattc.wav, bpilattd.wav, bpilattc.wav
 
 GuardianGIMG:
-	Inherits: ^RA2SmallArms
-	Inherits@2: ^RA2Chaingun
+	Inherits@wh: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 20
 	Range: 4762
 	Burst: 3
 	BurstDelays: 2
 	Report: vblhatta.wav, vblhattb.wav
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 RA2para:
 	Inherits: ^RA2Chaingun
 	ValidTargets: Ground, Water
