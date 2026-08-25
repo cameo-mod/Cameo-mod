@@ -1802,18 +1802,15 @@ TSMutShotgun:
 		Damage: 2
 
 TSMutVulcanTurret:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water
 	ReloadDelay: 6
 	Range: 6272
 	Report: tsgun4.aud
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 TSRaiderCarCannon:
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
@@ -1827,18 +1824,15 @@ TSRaiderCarCannon:
 	Warhead@Bullet_Light:
 		Damage: 4000
 TSBowlerCannon:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 5
 	Range: 6603
 	Report: chaingn1.aud
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 TSWaspClaw:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1959,19 +1953,15 @@ MutAPRifle:
 	Warhead@Bullet_Light:
 		Damage: 4000
 TSSergGun:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 8
 	Range: 5611
 	Report: cygun1.aud
-	Warhead@Bullet_Light:
-		PercentageScale: 2500
-		Damage: 8000
 	Warhead@Bullet_Medium:
 		PercentageScale: 2500
-		Damage: 8000
+		Damage: 16000
 		ValidTargets: Ground, Water
 # SCOUT-CLASS VERIFICATION WEAPON (law 2026-07-19): exactly 2x the
 # baseline rifle (8000 dmg / 50 rl / 5000 rng, SmallArms, % = 4). The

@@ -207,10 +207,10 @@ TS90mmDep:
 		LaunchAngle: 0
 
 TSLaser90mm:
-	# Anti-armour cannon half, as TS90mm above — this is its T3 laser variant.
-	Inherits@wh: ^Warhead_CannonAP_Medium
+	# Anti-armour 90mm laser — T3 laser variant.
+	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
-	Inherits@fx: ^Effect_CannonAP_Medium
+	Inherits@fx: ^Effect_Laser_Heavy
 	Inherits@tslaser: ^TSLaserEffect
 	ValidTargets: Ground, Water
 	ReloadDelay: 32
@@ -219,9 +219,14 @@ TSLaser90mm:
 	Projectile: LaserZap
 		Width: 72
 		SecondaryBeamWidth: 36
-	Warhead@CannonAP_Medium:
+	-Warhead@Laser_Heavy_ExtraDamage:
+	Warhead@Laser_Heavy:
 		Damage: 12600
+		PercentageScale: 9524
+		-PhysicalStateName:
+		-PhysicalStateScale:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, FireDeath, Incendiary
+		ValidTargets: Ground, Water
 	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactActors: false
@@ -232,8 +237,19 @@ TSLaser90mm:
 		ImpactActors: false
 		ImpactSounds: kaboom25.aud
 		ValidTargets: Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@Concrete: DamagesConcrete
 		Damage: 25

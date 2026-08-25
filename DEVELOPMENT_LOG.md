@@ -1,5 +1,27 @@
 # Development Log
 
+## 2026-08-25 — W24 A11: collapse three Forgotten bullet weapons onto Bullet_Medium
+
+- Cluster in `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml`:
+  `TSMutVulcanTurret`, `TSBowlerCannon`, `TSSergGun` (no children).
+- Each carried two bullet damage mains (`Bullet_Light` + `Bullet_Medium`).
+  Collapsed onto one `^Warhead_Bullet_Medium` main at the summed per-shot damage:
+  - `TSMutVulcanTurret` 2000 + 2000 -> 4000
+  - `TSBowlerCannon`    2000 + 2000 -> 4000
+  - `TSSergGun`         8000 + 8000 -> 16000 (PercentageScale 2500 preserved)
+- Dropped `Inherits@wh: ^Warhead_Bullet_Light` and the `Warhead@Bullet_Light`
+  block; repointed `Inherits@wh2: ^Warhead_Bullet_Medium` to `Inherits@wh`.
+- Verification: `review_resolve_diff` OK for all three (only the damage-multiset
+  change, effects/projectile/concrete preserved); `find_empty_warhead` 0;
+  `find_orphan_old_keys` 0 real; `audit_warhead_split` 894 vs 897 (baseline
+  lowered 897 -> 894); `audit_doc_claims` 19/19 green; `extract_stats --check`
+  0 drifted; `multi_main_fired_weapons` 882 -> 879.
+- Co-updated `docs/audit/doc_claims.yaml`, `BALANCE_PROGRAM_PLAN.md`, `HANDOFF.md`,
+  `SUMMARY.md`, `tiberiansun_forgotten` ledger + derived sidecar, and
+  `tools/audit/audit_warhead_split.py` baseline.
+- Did NOT touch the locked `tiberiansun.yaml` or the `tiberiansun_nod` ledger
+  (another Devin session's uncommitted Laser_Heavy work).
+
 ## 2026-08-25 — W24 A10: finish TSLaser90mm 3-way split cleanup
 
 - Cluster: `TSLaser90mm` and `TSLaser90mmDep` in `mods/cameo/weapons/tiberiansun.yaml`.
@@ -3143,19 +3165,40 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
 - Used `^Projectile_Laser_Heavy` and `^Effect_CannonAP_Medium` plus local overrides
   to preserve beam visuals, napalm ground effect, big air explosion, scorch smudge,
   concrete damage (`25`) and the 600-damage all-1 chip.
-- Note: post-commit review flagged that the weapon is a *laser* and should use
-  `^Warhead_Laser_Medium` (or `^Warhead_Laser_Heavy`) as the main family. A10 is
-  **under re-evaluation** — do not start another TiberianSun cluster until this is
-  resolved.
+- Re-evaluation resolved: `TSLaser90mm` now uses `^Warhead_Laser_Heavy` as the main
+  family, with the `Warhead@Laser_Heavy_ExtraDamage` chip removed (`Damage: 12600`
+  is the preserved per-shot total). Inherited `PhysicalStateName`/`PhysicalStateScale`
+  are stripped with removal markers so the weapon does not become a physical-state
+  metered weapon (preserves `physical_state_fired_weapons` at 456). Local effect
+  overrides (`small_napalm`, `big_explosion_air`, `Scorch`, concrete `25`) and the
+  `^TSLaserEffect` projectile addon are retained.
 - `TSLaser90mmDep` inherits the same 3-way split.
-- Verification: `review_resolve_diff` only expected damage-multiset change;
-  `find_empty_warhead` 0; `find_orphan_old_keys` 0 real; `audit_warhead_split`
-  897 vs 897 (baseline lowered); `audit_doc_claims` 19/19 green;
-  `extract_stats --check` 0; boot-gate reached main menu with no new exceptions.
-- Co-updated `docs/audit/doc_claims.yaml`, `BALANCE_PROGRAM_PLAN.md`, `HANDOFF.md`,
-  `SUMMARY.md`, `tiberiansun_nod` ledger + derived, and
-  `tools/audit/audit_warhead_split.py` baseline.
-- Commit `554048aa7`.
+- Verification: `review_resolve_diff` clean for both; `find_empty_warhead` 0;
+  `find_orphan_old_keys` 0 real; `find_orphan_old_keys_multi` 0;
+  `audit_warhead_split` 894 vs 894 (baseline lowered); `audit_doc_claims` 19/19 green;
+  `extract_stats --check` 0; `verify_generator_sync` 0; boot-gate reached main menu
+  with no new exceptions.
+- Co-updated `docs/audit/doc_claims.yaml` (`multi_main_fired_weapons` 882 → 879),
+  `BALANCE_PROGRAM_PLAN.md`, `HANDOFF.md`, `SUMMARY.md`, `tiberiansun_nod` ledger +
+  derived, and `tools/audit/audit_warhead_split.py` baseline.
+
+## 2026-08-25 — W24 A11: TiberianSun/Forgotten bullet collapse
+
+- File: `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml`.
+- Cluster: `TSMutVulcanTurret`, `TSBowlerCannon`, `TSSergGun`.
+- Collapsed each from `^Warhead_Bullet_Light` + `^Warhead_Bullet_Medium` onto a single
+  `^Warhead_Bullet_Medium` 3-way split with `^Projectile_Bullet_Medium` +
+  `^Effect_Bullet_Medium`.
+- Preserved per-shot totals: `TSMutVulcanTurret` 4000, `TSBowlerCannon` 4000,
+  `TSSergGun` 16000 (its old `PercentageScale: 2500` is retained on the new main).
+- No children to update; these weapons are not currently fired by any actor, so
+  `multi_main_fired_weapons` stays at 879.
+- Verification: `review_resolve_diff` clean for all three; `find_empty_warhead` 0;
+  `find_orphan_old_keys` 0 real; `find_orphan_old_keys_multi` 0;
+  `audit_warhead_split` 894 vs 894; `audit_doc_claims` 19/19 green;
+  `extract_stats --check` 0; `verify_generator_sync` 0; `phase_b_survey` 286 / 11 / 275;
+  boot-gate reached main menu with no new exceptions.
+- Co-updated `tiberiansun_forgotten` ledger + derived sidecar.
 
 ## 2026-08-25 — Agent coordination note (multi-agent W24 burn-down)
 
@@ -3165,8 +3208,8 @@ and respect the open-file/locked-file list below.
 
 ### Current locks / do not touch
 
-- `mods/cameo/weapons/tiberiansun.yaml` — A10 under re-evaluation (`TSLaser90mm`
-  warhead family choice is being fixed). Do not start a new TiberianSun cluster here.
+- `mods/cameo/weapons/tiberiansun.yaml` — A10 re-evaluation resolved (`TSLaser90mm`
+  now on `^Warhead_Laser_Heavy`). Free for the next TiberianSun cluster.
 - `mods/cameo/weapons/tiberiandawn.yaml` — another agent has this open in the IDE.
 - `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml` — another agent has
   this open in the IDE.
@@ -3216,6 +3259,13 @@ per weapon, and commit with the full doc/ledger co-update.
 5. **TSLaser90mm fix + TiberianSun continuation** (this session, Devin): resolve the
    A10 family choice (laser vs cannon) and finish any remaining TiberianSun pure
    single-family candidates once the path is clear.
+
+### Active claims
+
+- **(completed by this session, 2026-08-25)** — `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml`:
+  W24 bullet collapse for `TSMutVulcanTurret`, `TSBowlerCannon`, `TSSergGun`
+  (Bullet_Light + Bullet_Medium → one Bullet_Medium at the summed damage; no children).
+  Verification and boot-gate passed; committed.
 
 ### Mandatory pre-edit check for every agent
 

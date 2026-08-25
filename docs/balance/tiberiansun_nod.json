@@ -5434,26 +5434,26 @@
        {
         "damage": "12600",
         "falloff": "100, 0",
-        "spread": "120",
-        "tag": "CannonAP_Medium",
+        "spread": "64",
+        "tag": "Laser_Heavy",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5423",
       "reloaddelay": "32",
       "requires": "undeployed && ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_CannonAP_Medium",
+       "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
-       "^Effect_CannonAP_Medium",
+       "^Effect_Laser_Heavy",
        "^TSLaserEffect"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Medium"
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "TSLaser90mm",
       "weapon_class_source": "template"
@@ -5491,13 +5491,13 @@
        {
         "damage": "12600",
         "falloff": "100, 0",
-        "spread": "120",
-        "tag": "CannonAP_Medium",
+        "spread": "64",
+        "tag": "Laser_Heavy",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6754",
       "reloaddelay": "26",
@@ -5507,7 +5507,7 @@
        "TSLaser90mm"
       ],
       "warheads": [
-       "^Warhead_CannonAP_Medium"
+       "^Warhead_Laser_Heavy"
       ],
       "weapon": "TSLaser90mmDep",
       "weapon_class_source": "template"
