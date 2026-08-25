@@ -418,43 +418,27 @@
 	Warhead@Concrete: DamagesConcrete
 		Damage: 175
 
-## D2K mortar weapon family: CannonHE/CannonChem/CannonFire main x Concussion effect.
+## D2K per-game overrides for the generic Mortar weapon family.
+## Generic Mortar/MortarFire/MortarChem live in mods/cameo/weapons/weapons.yaml.
+## These D2K variants override the projectile and effect with D2k-specific sprites/sounds.
 
 D2K_Mortar:
-	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@base: Mortar
 	Inherits@proj: ^Projectile_Shell_Light_D2K_Mortar
 	Inherits@fx: ^Effect_Concussion_Medium_D2K
-	ReloadDelay: 80
-	Range: 10000
-	MinRange: 1985
 	Report: MORTAR1.WAV
-	TargetActorCenter: true
-	Warhead@CannonHE_Medium:
-		Damage: 12000
 
 D2K_MortarFire:
-	Inherits@wh: ^Warhead_CannonFire_Medium
+	Inherits@base: MortarFire
 	Inherits@proj: ^Projectile_Shell_Light_D2K_Mortar
 	Inherits@fx: ^Effect_Concussion_Medium_D2K
-	ReloadDelay: 90
-	Range: 10000
-	MinRange: 1985
 	Report: MORTAR1.WAV
-	TargetActorCenter: true
-	Warhead@CannonFire_Medium:
-		Damage: 15000
 
 D2K_MortarChem:
-	Inherits@wh: ^Warhead_CannonChem_Medium
+	Inherits@base: MortarChem
 	Inherits@proj: ^Projectile_Shell_Light_D2K_Mortar
 	Inherits@fx: ^Effect_Concussion_Medium_D2K
-	ReloadDelay: 90
-	Range: 10000
-	MinRange: 1985
 	Report: MORTAR1.WAV
-	TargetActorCenter: true
-	Warhead@CannonChem_Medium:
-		Damage: 12000
 
 ## D2K per-game PROJECTILE and WARHEAD/EFFECT templates for the Ornithopter bomb.
 
