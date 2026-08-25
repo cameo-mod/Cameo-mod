@@ -127,6 +127,41 @@ combat_tank_husk.atreides:
 		Facings: -32
 		ZOffset: -512
 
+atreides_spiceharvester:
+	idle:
+		Filename: atreides_harvester.png
+		Start: 0
+		Length: 1
+		Facings: 8
+	move:
+		Filename: atreides_harvester.png
+		Start: 0
+		Length: 1
+		Facings: 8
+	harvest:
+		Filename: atreides_harvester.png
+		Start: 8
+		Length: 3
+		Facings: 8
+		Tick: 80
+	dock:
+		Filename: atreides_harvester.png
+		Start: 8
+		Length: 3
+		Facings: 8
+		Tick: 80
+	dock-loop:
+		Filename: atreides_harvester.png
+		Start: 8
+		Length: 3
+		Facings: 8
+		Tick: 80
+	icon:
+		Filename: atreides_harvester.png
+		Start: 0
+		Length: 1
+		Facings: 1
+
 ornithopter:
 	Defaults:
 	idle:

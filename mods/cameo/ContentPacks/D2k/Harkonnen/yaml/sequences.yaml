@@ -99,3 +99,57 @@ devastator_husk.harkonnen:
 		Start: 2083
 		Facings: -32
 		ZOffset: -512
+
+harkonnen_spiceharvester:
+	Defaults:
+		Filename: harkonnen_harvester.png
+		Scale: 0.5
+	idle:
+		Start: 64
+		Length: 1
+		Facings: 64
+	move:
+		Start: 0
+		Length: 8
+		Facings: 8
+		Tick: 80
+	harvest:
+		Start: 128
+		Length: 8
+		Facings: 8
+		Tick: 80
+	dock:
+		Start: 64
+		Length: 1
+		Facings: 1
+	dock-loop:
+		Start: 64
+		Length: 1
+		Facings: 1
+	icon:
+		Start: 0
+		Length: 1
+		Facings: 1
+		Scale: 0.35
+		Offset: -30,-24
+
+harkonnen_devastatorturret:
+	Defaults:
+		Scale: 0.5
+		Offset: 0,-24
+	invisible:
+		Filename: harkonnen_devastatorturret.png
+		Start: 0
+		Length: 1
+	make:
+		Filename: harkonnen_devastatorturret.png
+		Start: 0
+		Length: 16
+		Tick: 80
+	turret:
+		Filename: harkonnen_devastatorturret.png
+		Start: 16
+		Length: 64
+		Facings: -64
+	icon:
+		Filename: harkonnen_devastatorturret_icon.png

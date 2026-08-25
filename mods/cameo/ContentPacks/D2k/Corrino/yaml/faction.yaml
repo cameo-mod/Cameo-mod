@@ -1,0 +1,12 @@
+World:
+	FactionCA@Corrino:
+		Name: Corrino DU
+		InternalName: corrino
+		Game: Dune Universe
+		Side: Dune
+		Description: House Corrino\nOnce deadliest and grandest House in the Universe and for many thousands of years the imperial family of Imperium from the world Salusa Secundus.\nCorrino uses their elite trained Sardaukars, to rule the war.\nBonus: Uparmored Harvesters\nSupport Power: Release the Sardaukars
+	StartingUnits@corrino:
+		Class: none
+		ClassName: MCV Only
+		BaseActor: corrino_mobileconstructionvehicle
+		Factions: corrino

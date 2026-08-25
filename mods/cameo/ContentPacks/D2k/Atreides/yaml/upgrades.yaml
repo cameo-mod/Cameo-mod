@@ -1,1 +1,54 @@
-# No upgrades units.
+upgrade_conyard.atreides:
+	Inherits: ^UpgradeTemplate
+	Buildable:
+		Queue: Upgrades
+		BuildPaletteOrder: 10
+		Prerequisites: ~atreides_constructionyard, atreides_outpost
+		Description: Allows construction of larger buildings.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 200
+
+upgrade_barracks.atreides:
+	Inherits: ^UpgradeTemplate
+	Buildable:
+		Queue: Upgrades
+		BuildPaletteOrder: 20
+		Prerequisites: ~atreides_barracks
+		Description: Upgrades barracks for elite infantry training.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 200
+
+upgrade_light.atreides:
+	Inherits: ^UpgradeTemplate
+	Buildable:
+		Queue: Upgrades
+		BuildPaletteOrder: 30
+		Prerequisites: ~atreides_lightfactory
+		Description: Upgrades light factory for advanced vehicle production.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 200
+
+upgrade_heavy.atreides:
+	Inherits: ^UpgradeTemplate
+	Buildable:
+		Queue: Upgrades
+		BuildPaletteOrder: 40
+		Prerequisites: ~atreides_heavyfactory
+		Description: Reinforces heavy factory armor.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 400
+
+upgrade_radar.atreides:
+	Inherits: ^UpgradeTemplate
+	Buildable:
+		Queue: Upgrades
+		BuildPaletteOrder: 50
+		Prerequisites: ~atreides_outpost
+		Description: Expands radar range and detection.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 300

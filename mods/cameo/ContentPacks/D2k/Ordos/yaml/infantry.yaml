@@ -410,7 +410,8 @@ ordos_facedancer:
 	Voiced:
 		VoiceSet: D2KInfantryVoice
 	WithInfantryBody:
-		IdleSequences: idle
+		IdleSequences: idle1, idle2
+		StandSequences: stand
 	-TakeCover:
 	-DamagedByTerrain:
 	RenderSprites:

@@ -201,11 +201,11 @@ Crashes and player-visible regressions jump everything below.
 
 | Agent name | Status | Current task | Files claimed |
 |---|---|---|---|
-| **Devin-Dawn** (was Devin-Prime) | Committed A10–A14 | W24 bullet/missile collapses across multiple packs; ATMine rework. Work is committed. | `mods/cameo/weapons/tiberiansun.yaml`, `RedAlert/Shared/`, `RedAlert/Japan/`, `TiberianSun/GDI/`, `TiberianSun/Nod/`, `TiberianSun/CABAL/`, `RedAlert2Mod/TKM/`, `RedAlert2Mod/AsianAlliance/` |
-| **Devin-Aurora** (was Devin-Aether, this agent, SWE-1.7 Max) | Active | PPM credit attribution (Orion Tank, Land Carrier, Guardian Tank); W24 RedAlert2Mod/Naxis + RedAlert/Allies + RedAlert/Soviets same-family collapses committed f08becd6d. | `mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml`, `mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml`, `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`, `mods/cameo/credits.txt`, `mods/cameo/bits/ra2/credits.txt`, `mods/cameo/bits/ra2/voxel2/credits.txt` |
+| **Devin-Dawn** (was Devin-Prime) | Committed A10–A14 | D2k/Corrino pack skeleton created; full build deferred until Phase 3. TSLaser90mm family work on hold. | `ContentPacks/D2k/Corrino/`, `mods/cameo/weapons/tiberiansun.yaml` |
+| **Devin-Aurora** (was Devin-Aether, this agent, SWE-1.7 Max) | Active | D2k Phase 0 foundation complete — boot-gate passed; coordinating Atreides/Harkonnen/Corrino rollout and preparing scoped Phase 0 commit. | `mods/cameo/ContentPacks/D2k/Atreides/`, `mods/cameo/ContentPacks/D2k/Harkonnen/`, `mods/cameo/bits/d2k/` |
 | **Devin-Cyrus** (was Devin-Forge) | Active — **BOOT-GATE BLOCKER** | WC2 hero weapon rework. Missing `wc2_orcs_hellscream_icon.png` crashes the game on shellmap load. Must fix before anyone can commit. | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` |
-| **Devin-Echo** (SWE-1.7 Max) | Active | W24 A15: collapse `MongooseRocket`, `facedancer_grenade`, `D2K_APC_Rocket` in D2k/Ixian + D2k/Ordos + CABAL. | `mods/cameo/ContentPacks/D2k/Ixian/`, `D2k/Ordos/`, `TiberianSun/CABAL/` |
-| **Devin-Blaze** | **DUPLICATE — STOP** | Was assigned to d2k.yaml/redalert2mod.yaml — same files as Devin-Aether. Must pick a different file-set from the unassigned tasks below. | — |
+| **Devin-Echo** (SWE-1.7 Max) | Active | Phase 2 Atreides pack completion (after Phase 0 commit); continues W24 A15 work in `D2k/Ordos/` and `D2k/Ixian/` (Ordos turret art/weapons need confirmation). | `mods/cameo/ContentPacks/D2k/Atreides/`, `D2k/Ordos/`, `D2k/Ixian/`, `TiberianSun/CABAL/` |
+| **Devin-Blaze** | Active | Phase 1 Harkonnen pack completion (after Phase 0 commit); final shared/global pass in Phase 4. | `mods/cameo/ContentPacks/D2k/Harkonnen/`, `ContentPacks/D2k/Shared/`, legacy `mods/cameo/weapons/d2k.yaml`, `mods/cameo/rules/d2k.yaml` |
 
 #### Locked files (DO NOT TOUCH — another agent owns these)
 
@@ -243,6 +243,166 @@ Crashes and player-visible regressions jump everything below.
 5. **W23 retrofit candidates** — read `docs/audit/latest/phase_b_survey.md` for the
    current list of single-old-family weapons that can be retrofitted onto `^Warhead_*`
    families. These are W23 (not W24) and are a different work stream.
+
+---
+
+### 3.7 — Dune 2000 faction completion: Atreides, Harkonnen, Corrino (2026-08-25)
+
+⭐ **PRIORITY TASK — maintainer order 2026-08-25.** The three remaining D2k factions
+must be fully built out so they are selectable and playable. Currently:
+
+| faction | state | units | buildings | infantry | aircraft | weapons | upgrades | selectable |
+|---|---|---|---|---|---|---|---|---|
+| **Atreides** | Phase 0 skeleton | 5+ (MCV, spice harvester, combat tank, sonic tank, siege tank) | full set in pack, need review | 0 | 1 husk only, ornithopter/carryall defined | empty `weapons.yaml` | 5 | **no** (FactionCA commented out) |
+| **Harkonnen** | Phase 0 skeleton | 5 (MCV, spice harvester, combat tank, missile tank, devastator) | full set in pack, needs unique art/actors | 0 | 0 | 4 | 0 | **no** (Selectable: false) |
+| **Corrino** | skeleton created | 2 (MCV, combat tank) | 6+ (conyard, windtrap, refinery, silo, light/heavy factories) | 1 (sardaukar bazooka) | 0 | 0 | 0 | **no** (mod.yaml include present; FactionCA pending) |
+| Ixian (reference) | complete | 16 | 18 | 6 | 11 | 32KB | 9 | yes |
+| Ordos (reference) | complete | 17 | 16+ | 9 | 13 | 28KB | 11 | yes |
+
+**Phase 0 boot-gate:** passed. The canonical rollout plan and agent instructions are in §3.B below. The table above is a snapshot; §3.B is the authoritative task queue.
+
+**Reference templates:** use Ixian and Ordos as the structural pattern. Every
+faction needs: `content.yaml`, `yaml/faction.yaml` (with `FactionCA@<Name>` and
+`StartingUnits@<name>` entries), `yaml/buildings.yaml`, `yaml/infantry.yaml`,
+`yaml/vehicles.yaml`, `yaml/aircraft.yaml`, `yaml/weapons.yaml`, `yaml/upgrades.yaml`,
+`yaml/sequences.yaml`, `yaml/ai.yaml`, `translations/en.ftl`.
+
+**D2k Shared content** (`ContentPacks/D2k/Shared/yaml/`): buildings (concrete slabs,
+walls, oil derrick), vehicles (siege_tank, sandworm), infantry (light_inf, trooper,
+fremen_creep, engineer). These are shared across all D2k factions — do NOT duplicate
+them in faction packs. Reference them via `ProvidesPrerequisite` and `Buildable:
+Prerequisites: ~d2k_barracks` etc.
+
+#### Agent assignments for D2k faction completion
+
+| agent | faction | file-set | scope of work |
+|---|---|---|---|
+| **Devin-Aurora** (this agent) | **Atreides** (stub) | `mods/cameo/ContentPacks/D2k/Atreides/**` | Nearly everything needs to be built. Add: full building set (barracks, light factory, repair pad, outpost, gun turret, rocket turret, high tech factory, research center, starport, palace), infantry (light_inf, trooper, engineer, Fremen, kinjal), vehicles (MCV, spice harvester, combat tank, missile tank, sonic tank, trike/raider), aircraft (ornithopter, carryall), weapons, upgrades, sequences. Uncomment `FactionCA@Atreides` and set `Selectable: true`. Port Atreides-specific units/weapons/sequences from legacy `mods/cameo/weapons/d2k.yaml` and `mods/cameo/sequences/d2k.yaml`. |
+| **Devin-Cyrus** | **Harkonnen** (partial) | `mods/cameo/ContentPacks/D2k/Harkonnen/**` | Buildings exist (16, full set). Add: infantry (light_inf, trooper, engineer, sardaukar), aircraft (carryall, gunship), upgrades (at least 5-8), more vehicles (siege tank via Shared, flame tank), weapons for new units, sequences for new units. Set `FactionCA@Harkonnen: Selectable: true` (currently false). Port remaining Harkonnen units from legacy `d2k.yaml` / `rules/d2k.yaml` / `sequences/d2k.yaml`. |
+| **Devin-Dawn** | **Corrino** (new) | `mods/cameo/ContentPacks/D2k/Corrino/**` (create from scratch) | Create the entire faction directory + all yaml files. Copy the Ordos pack skeleton. Corrino is the Imperial faction: Sardaukar elite infantry, combat tank, missile tank, siege tank, carryall, palace with Death Hand support power. Register in `mod.yaml` (add `Include: ContentPacks/D2k/Corrino/content.yaml`). Set `FactionCA@Corrino: Selectable: true`. Add `StartingUnits@corrino` entries (already exist in Ixian faction.yaml as a placeholder using ixian MCV — replace with corrino MCV once created). |
+| **Devin-Blaze** | **D2k Shared + legacy consolidation** | `mods/cameo/ContentPacks/D2k/Shared/yaml/**`, `mods/cameo/weapons/d2k.yaml`, `mods/cameo/rules/d2k.yaml` | Move all D2k units/weapons/sequences used by multiple factions into `ContentPacks/D2k/Shared/yaml/`. Update `Shared/content.yaml`. Remove or comment out dead blocks from legacy `d2k.yaml` and `rules/d2k.yaml` once content has moved. Verify no `Parent type ... not found` or dangling refs. |
+| **Devin-Echo** | **coordinator** | verification & ledger sync | Maintain the plan in `DEVELOPMENT_LOG.md` and `HANDOFF.md`. Run `extract_stats`, `audit_doc_claims`, `audit_warhead_split`, and `find_empty_warhead` after each phase. Boot-gate the integrated tree. Commit each pack in a scoped batch. |
+
+#### D2k faction unit rosters (from Dune 2000 source game)
+
+**Atreides** (noble, air superiority, Fremen allies):
+- Buildings: construction yard, wind trap, barracks, refinery, silo, light factory,
+  heavy factory, repair pad, outpost, gun turret, rocket turret, high tech factory,
+  research center, starport, palace
+- Infantry: light infantry, trooper (rocket), engineer, Fremen, kinjal soldier
+- Vehicles: MCV, spice harvester, combat tank, missile tank, sonic tank, trike/raider
+- Aircraft: ornithopter (air superiority), carryall, gunship
+- Upgrades: upgrade_conyard, upgrade_barracks, upgrade_lightfactory,
+  upgrade_heavyfactory, upgrade_radar, upgrade_hightech
+- Support powers: Ornithopter Airstrike, Fremen Guerilla
+
+**Harkonnen** (brute force, atomic weapons):
+- Buildings: already has 16 (full set) — verify completeness
+- Infantry: light infantry, trooper, engineer, sardaukar (elite)
+- Vehicles: MCV (has), combat tank (has), missile tank (has), devastator (has),
+  siege tank (Shared), flame tank
+- Aircraft: carryall, gunship
+- Upgrades: upgrade_conyard, upgrade_barracks, upgrade_lightfactory,
+  upgrade_heavyfactory, upgrade_radar, upgrade_hightech
+- Support powers: Death Hand Missile
+
+**Corrino** (imperial, Sardaukar):
+- Buildings: construction yard, wind trap, barracks, refinery, silo, light factory,
+  heavy factory, repair pad, outpost, gun turret, rocket turret, high tech factory,
+  research center, starport, palace
+- Infantry: light infantry, trooper, engineer, Sardaukar (elite imperial guard)
+- Vehicles: MCV, spice harvester, combat tank, missile tank, siege tank (Shared)
+- Aircraft: carryall
+- Upgrades: upgrade_conyard, upgrade_barracks, upgrade_lightfactory,
+  upgrade_heavyfactory, upgrade_radar, upgrade_hightech
+- Support powers: Imperial Sardaukar reinforcement
+
+#### Build order for all agents (parallel-safe)
+
+1. **Phase 1 — scaffolding (Devin-Cyrus first, then all parallel):**
+   - Devin-Cyrus: create `Corrino/` directory + `content.yaml` + register in `mod.yaml`.
+   - All agents: create your faction's `faction.yaml` with `FactionCA` (Selectable: true)
+     and `StartingUnits` entries.
+   - Boot-gate after scaffolding to verify no crash.
+
+2. **Phase 2 — buildings (parallel):**
+   - Each agent builds their faction's `buildings.yaml`.
+   - Use Ixian/Ordos buildings as the structural template (inherit `^D2KBuilding`,
+     `^D2kUpgradeable`, `^D2KPaletteRender`, etc.).
+   - Gate with `Prerequisites: ~<faction>_constructionyard` etc.
+   - Boot-gate after buildings.
+
+3. **Phase 3 — infantry + vehicles (parallel):**
+   - Each agent builds their faction's `infantry.yaml` and `vehicles.yaml`.
+   - Use D2k Shared infantry (light_inf, trooper, engineer) as the base — faction
+     variants inherit from Shared or from `^D2KInfantry`.
+   - Vehicles inherit from `^D2KTank`, `^CombatTank`, `^MainBattleTankTemplate`, etc.
+   - Boot-gate after infantry + vehicles.
+
+4. **Phase 4 — aircraft + weapons (parallel):**
+   - Each agent builds their faction's `aircraft.yaml` and `weapons.yaml`.
+   - Use the 3-way weapon split (`^Warhead_*`, `^Projectile_*`, `^Effect_*`).
+   - Boot-gate after aircraft + weapons.
+
+5. **Phase 5 — upgrades + sequences + AI (parallel):**
+   - Each agent builds their faction's `upgrades.yaml` and `sequences.yaml`.
+   - Devin-Cyrus wires AI build lists and regenerates the faction matrix.
+   - Boot-gate after upgrades + sequences + AI.
+
+6. **Phase 6 — final verification:**
+   - All agents: `find_empty_warhead.py = 0`, `audit_doc_claims` green,
+     `extract_stats --check` 0 drifted.
+   - Boot-gate with all three factions selectable.
+   - Regenerate `docs/factions/MATRIX.md`.
+   - Update `DEVELOPMENT_LOG.md` with completion summary.
+
+#### Critical rules for faction creation
+
+- **Do NOT edit another agent's faction files.** Each agent owns exactly one
+  faction's file-set. Devin-Blaze owns D2k/Shared only. Devin-Cyrus owns
+  registration/AI files only.
+- **Use the 3-way weapon split** for all new weapons (`^Warhead_*`, `^Projectile_*`,
+  `^Effect_*`). No inline `Versus` — it lives only in `^Warhead_*` templates.
+- **Use `^D2KPaletteRender`** for D2k sprites (palette: `d2kunit` or `playerd2k`).
+- **Sequence files** must use `Filename: DATA.R16` with `Scale: 1.5` and
+  `Remap: 54F94B` for D2k sprites (see existing Atreides/Harkonnen sequences).
+- **Boot-gate after every phase.** The game must reach the main menu with no new
+  `exception-*.log` files.
+- **Scoped `git add` only.** Each agent commits only their own faction's files.
+- **Naming convention:** `<faction>_<unitname>` (e.g. `atreides_lightinfantry`,
+  `harkonnen_sardaukar`, `corrino_combattank`). Shared units keep their base
+  name (e.g. `light_inf`, `siege_tank`).
+- **Balance numbers** must go through the pipeline (`extract_stats` → ledger →
+  `apply_balance --confirm`). Do NOT hand-edit balance values. For initial
+  creation, use the same damage/HP/cost values as the equivalent Ixian/Ordos unit.
+
+### 3.B — D2k Faction Rollout: Atreides / Harkonnen / Corrino (NEW — 2026-08-25)
+
+**Coordinating agent:** Devin-Aurora (this session).
+**Goal:** make Atreides, Harkonnen, and Corrino fully playable, self-contained Dune factions with **completely unique tech trees and no shared units/assets** with each other or with the existing Ixian/Ordos factions. This supersedes the older draft in `DEVELOPMENT_LOG.md` §"D2k faction rollout plan" because the user has now supplied harvester sprites and explicitly required uniqueness and asset isolation.
+
+**New assets already in the repo (Phase 0):**
+- `mods/cameo/bits/d2k/atreides_harvester.png` — 32-frame strip, 98×98 px/frame: 8 idle facings + 3 frames × 8 facings harvesting.
+- `mods/cameo/bits/d2k/harkonnen_harvester.png` — 192-frame strip, 200×150 px/frame: 8 frames × 8 facings move, 64 one-frame idle facings, 8 frames × 8 facings harvest.
+- No absolute local paths are recorded in any repository document.
+
+**Agent assignments and detailed instructions:**
+
+| Phase | Owner | File-set | What to build | Acceptance |
+|---|---|---|---|---|
+| **0 — Foundation** | **Devin-Aurora** (done) | `ContentPacks/D2k/Atreides/`, `ContentPacks/D2k/Harkonnen/`, `mods/cameo/bits/d2k/` | Wire the maintainer-supplied harvester PNGs (`atreides_harvester.png` and `harkonnen_harvester.png`) as `atreides_spiceharvester` and `harkonnen_spiceharvester` (actors + sequences + refinery `FreeActor`). Create `Atreides/yaml/weapons.yaml` and `Atreides/yaml/promotions.yaml` and load them from `Atreides/content.yaml`. Fix Atreides `^D2KVehicleHusk`/`^UpgradeTemplate` parents and `IconPalette` indentation. Do **not** enable `Selectable` yet. | `launch-game.cmd` reaches main menu with no new `exception-*.log`; scoped commit pending. |
+| **1 — Harkonnen** | **Devin-Blaze** | `ContentPacks/D2k/Harkonnen/` | Complete Harkonnen as a brute-force, heavy-vehicle faction. Replace all shared art (`ordos_*`, `ixian_*`, global actor refs) with unique `harkonnen_*` assets/actors. Add infantry, aircraft, naval, upgrades, promotions, ai, weapons, sequences. Add unique defenses (flame/rocket/autogun turrets). Enable `FactionCA@Harkonnen` `Selectable: true` + `StartingUnits` once the tech tree is complete. | Boot-gate; `utility.cmd cameo --check-yaml` 0 errors/warnings; `find_empty_warhead.py` 0; no duplicate actor/weapon ids. |
+| **2 — Atreides** | **Devin-Echo** | `ContentPacks/D2k/Atreides/` | Complete Atreides as a noble/air/Fremen faction. Same scope as Harkonnen. Theme: air superiority, faster construction, Fremen guerillas. Uncomment `FactionCA@Atreides` and set `Selectable: true` + `StartingUnits`. | Same as phase 1. |
+| **3 — Corrino** | **Devin-Cyrus** (after WC2 hero work and after phases 1–2) | `ContentPacks/D2k/Corrino/` (new pack) | Create Corrino from scratch as imperial/Sardaukar, elite heavy infantry, uparmored harvesters. New `content.yaml`, all yaml files, assets, translations. Add to `mod.yaml` and `ContentPacks/D2k/Shared/yaml/faction.yaml`. | Same as phase 1, plus `mod.yaml` includes the pack. |
+| **4 — Shared/global pass** | **Devin-Blaze** + **Devin-Echo** as needed | `ContentPacks/D2k/Shared/yaml/`, `mods/cameo/weapons/d2k.yaml`, `mods/cameo/rules/d2k.yaml` | Add any shared templates, fix prerequisites, ensure walls/turrets/superweapons/promotions work. Remove dead legacy blocks. Run full audits. | Boot-gate; all `tools/audit/*.py` green; `multi_main_fired_weapons` not inflated. |
+
+**Hard constraints for every phase owner:**
+1. **Unique and isolated.** Every actor, weapon, sequence, icon, and building in a new faction is prefixed with the faction name and lives inside that faction's pack. No references to `ordos_*`, `ixian_*`, or generic shared actors except through intentionally shared `^D2K*` templates in `ContentPacks/D2k/Shared/yaml/templates.yaml`.
+2. **Assets in the repo only.** All new `.png`/`.shp` files go under `mods/cameo/bits/d2k/<faction>/` (or `ContentPacks/D2k/<Faction>/files/` if the `mod.yaml` package is updated). No absolute local paths in docs.
+3. **W24 weapons.** Every new weapon has one main damage warhead. Run `find_empty_warhead.py`, `audit_warhead_split.py`, and `review_resolve_diff.py` per batch.
+4. **Harvester rule.** Every refinery spawns `<faction>_spiceharvester` via `FreeActor`/`FreeActorWithDelivery`.
+5. **Do not flip `Selectable: true` prematurely.** A faction is only selectable when it has a full minimum viable tech tree: con yard, wind trap, refinery, harvester, barracks, light vehicle factory, MCV, one anti-ground unit, and `StartingUnits`.
+6. **Boot-gate and scoped commits.** `launch-game.cmd` before every commit; `git add <files>` only; never `-A`.
 
 #### How to coordinate after every step
 
@@ -293,6 +453,20 @@ When a weapon has `Bullet_Light` + `Bullet_Medium` as two damage mains:
 7. Run `review_resolve_diff.py` against HEAD — only the damage multiset should change.
 8. Run `find_empty_warhead.py` — must be 0.
 9. Boot-gate before committing.
+
+### 3.C - D2k Atreides / Harkonnen / Corrino (legacy draft - superseded by §3.B)
+
+**Coordinating agent:** Devin-Echo. See full plan and per-agent instructions in `DEVELOPMENT_LOG.md` §"D2k faction rollout plan — Atreides / Harkonnen / Corrino".
+
+| Agent | Pack | Key deliverable | Verification before commit |
+|---|---|---|---|
+| **Devin-Aurora** | `ContentPacks/D2k/Atreides/` | playable Atreides pack: `weapons.yaml`, unit/sequence/weapon port from legacy `d2k.yaml`/`rules/d2k.yaml`, `Atreides/files/icons/atreides_harvester.png` wired | `review_resolve_diff`, `find_empty_warhead=0`, `extract_stats --check=0`, boot-gate |
+| **Devin-Cyrus** | `ContentPacks/D2k/Harkonnen/` | playable Harkonnen pack: complete actors/sequences, `Harkonnen/files/icons/harkonnen_harvester.png` wired | same |
+| **Devin-Dawn** | `ContentPacks/D2k/Corrino/` | new Corrino pack created from Ordos skeleton, added to `mod.yaml`, units/sequences ported | same |
+| **Devin-Blaze** | `ContentPacks/D2k/Shared/`, legacy `d2k.yaml`, `rules/d2k.yaml` | consolidate shared D2k content, remove dead blocks from `mods/cameo/weapons/d2k.yaml` and `mods/cameo/rules/d2k.yaml` | `audit_duplicate_inherits.py`, `find_orphan_old_keys.py`, boot-gate |
+| **Devin-Echo** | coordinator | keep `DEVELOPMENT_LOG`/`HANDOFF` current, run audits, boot-gate final integration, commit scoped batches | full `run_all.py` + boot-gate |
+
+**Rollout order:** Phase 0 inventory → Phase 1 pack content (parallel) → Phase 2 shared consolidation → Phase 3 integration/audits/commits.
 
 ### 3.0 — DO THIS FIRST
 

@@ -1,0 +1,103 @@
+corrino_constructionyard:
+	Inherits: ^ConstructionYard
+	Tooltip:
+		Name: Corrino Construction Yard
+	Transforms:
+		IntoActor: corrino_mobileconstructionvehicle
+		Offset: 1,1
+		Facing: 432
+	RenderSprites:
+		Image: conyard.harkonnen
+
+corrino_windtrap:
+	Inherits: ^WindTrap
+	Buildable:
+		Prerequisites: ~corrino_constructionyard
+		Description: Provides power to the base.
+	RenderSprites:
+		Image: power.harkonnen
+
+corrino_barracks:
+	Inherits: ^D2KBuilding
+	Inherits@UPGRADEABLE: ^D2kUpgradeable
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Inherits@shape: ^2x2Shape
+	Buildable:
+		Prerequisites: ~corrino_constructionyard, corrino_windtrap
+		Description: Trains infantry units.
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Corrino Barracks
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 352,576,0
+		ExitCell: 0,2
+	Exit@2:
+		SpawnOffset: 512,480,0
+		ExitCell: 1,2
+	RenderSprites:
+		Image: barracks.harkonnen
+	ProvidesPrerequisite@d2kbarracks:
+		Prerequisite: d2k_barracks
+	ProvidesPrerequisite@barracks:
+		Prerequisite: barracks
+	ProvidesPrerequisite@factionbarracks:
+		Prerequisite: corrino_barracks
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 1, 2
+		Range: 1c512, 2c768
+
+corrino_refinery:
+	Inherits: ^D2KRefinery
+	Tooltip:
+		Name: Refinery
+	Buildable:
+		Prerequisites: ~corrino_constructionyard, corrino_windtrap
+		Description: Processes spice into credits.
+	FreeActor:
+		Actor: corrino_spiceharvester
+		SpawnOffset: 0,2
+		Facing: 160
+	FreeActorWithDelivery@1:
+		Actor: corrino_spiceharvester
+		DeliveryOffset: 2,2
+		DeliveringActor: carryall.reinforce
+		Facing: 160
+	RenderSprites:
+		Image: refinery.harkonnen
+
+corrino_storagesilo:
+	Inherits: ^D2KSilo
+	Buildable:
+		Prerequisites: ~corrino_constructionyard, corrino_refinery
+		Description: Stores excess spice.
+	RenderSprites:
+		Image: silo.harkonnen
+
+corrino_heavyfactory:
+	Inherits: ^HeavyFactory
+	Tooltip:
+		Name: Corrino Heavy Factory
+	RenderSprites:
+		Image: heavy.harkonnen
+	Buildable:
+		Prerequisites: ~corrino_constructionyard, corrino_refinery
+		Description: template_factory.description
+		IconPalette: player
+	ProvidesPrerequisite@vehicle_production:
+		Prerequisite: corrino_vehicle_production
+	ProvidesPrerequisite@corrino_combat:
+		Prerequisite: heavy.corrino_combat
+	ProvidesPrerequisite@mcv_production:
+		Prerequisite: corrino_mcv_production

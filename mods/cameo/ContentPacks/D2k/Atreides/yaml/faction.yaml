@@ -1,7 +1,28 @@
 World:
-	# FactionCA@Atreides:
-	# 	Name: Atreides DU
-	# 	InternalName: atreides
-	# 	Game: Dune Universe
-	# 	Side: Dune
-	# 	Description: House Atreides\nThe noble Atreides, from the water world of Caladan,\nrely on their ornithopters to ensure air superiority.\nThey have allied themselves with the Fremen, the fearsome\nnative warriors of Dune that can move undetected in battle.\nTheir Strength lies in air superiority\nBonus: Builds structures faster\nSupport Power: Ornithopter Airstrike, Fremen Guerilla
+	FactionCA@Atreides:
+		Name: Atreides DU
+		InternalName: atreides
+		Game: Dune Universe
+		Side: Dune
+		Description: House Atreides\nThe noble Atreides, from the water world of Caladan,\nrely on their ornithopters to ensure air superiority.\nThey have allied themselves with the Fremen, the fearsome\nnative warriors of Dune that can move undetected in battle.\nTheir Strength lies in air superiority\nBonus: Builds structures faster\nSupport Power: Ornithopter Airstrike, Fremen Guerilla
+	StartingUnits@atreides:
+		Class: none
+		ClassName: MCV Only
+		BaseActor: atreides_mobileconstructionvehicle
+		Factions: atreides
+	StartingUnits@atreides_L:
+		Class: light
+		ClassName: Light Support
+		Factions: atreides
+		BaseActor: atreides_mobileconstructionvehicle
+		SupportActors: light_inf, light_inf, heavy_inf.ixian, trooper, trooper, rocket_raider.ixian, ixian_kodatank
+		InnerSupportRadius: 3
+		OuterSupportRadius: 5
+	StartingUnits@atreides_h:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: atreides
+		BaseActor: atreides_mobileconstructionvehicle
+		SupportActors: light_inf, light_inf, heavy_inf.ixian, trooper, trooper, rocket_raider.ixian, heavy_rocket_raider.ixian, ixian_kodatank, duelist_tank.ixian
+		InnerSupportRadius: 3
+		OuterSupportRadius: 5

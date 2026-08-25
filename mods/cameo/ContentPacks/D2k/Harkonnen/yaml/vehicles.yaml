@@ -225,3 +225,54 @@ devastator:
 		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Kills, Experience
 	Voiced:
 		VoiceSet: D2KVehicleVoice
+
+harkonnen_spiceharvester:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@harv: ^Harvester
+	Buildable:
+		Queue: Vehicle, RAVehicle, Starport
+		Prerequisites: ~spice_refinery, ~harkonnen_vehicle_production
+		BuildPaletteOrder: 10
+		Description: Collects spice for credits.\n  Unarmed
+		IconPalette: d2kunit
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Harkonnen Spice Harvester
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Harvester:
+		BuildDuration: 250
+		BuildDurationModifier: 100
+		HarvestFacings: 8
+		BaleUnloadDelay: 1
+	StoresResources:
+		Capacity: 60
+	CarryableHarvester:
+	Health:
+		HP: 240000
+	Repairable:
+		HpPerStep: 10000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 38
+		TurnSpeed: 9
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeLarge
+		EmptyWeapon: D2KUnitExplodeLarge
+	WithHarvestOverlay:
+		Palette: effect50alpha
+	WithDockingAnimation:
+	-RevealOnFire:
+	Voiced:
+		VoiceSet: D2KHarvester
+	WithMoveAnimation:
+		MoveSequence: move
+	RenderSprites:
+		PlayerPalette: player_rgba

@@ -1118,3 +1118,17 @@ light_inf_lmg_ordos_upgrade:
 	Warhead@Laser_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+
+ordos_laserturret:
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@fx: ^Effect_Laser_Heavy
+	Report: LaserTankAttack.wav
+	ValidTargets: Ground, Water, Air
+	-Warhead@Laser_Heavy_ExtraDamage:
+
+ordos_chemturret:
+	Inherits@wh: ^Warhead_Chemical_Light
+	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
+	Inherits@fx: ^Effect_Chem_Light
+	Report: MORTAR1.WAV

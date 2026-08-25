@@ -1,0 +1,56 @@
+corrino_sardaukar_bazooka:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@anim: ^RA2Infantry
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiAir: ^PrioritizeAir
+	Tooltip:
+		Name: Sardaukar Bazooka
+	Valued:
+		Cost: 600
+	Buildable:
+		BuildPaletteOrder: 40
+		Queue: Infantry, RAInfantry
+		Description: Elite Sardaukar anti-tank trooper with a heavy bazooka.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		IconPalette: d2kunit
+		Prerequisites: ~corrino_barracks
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 120000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Mobile:
+		Speed: 56
+	Armor:
+		Type: Heavy
+	Armament@PRIMARY:
+		Weapon: D2K_Rocket_Trooper
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: D2K_TowerMissile
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: D2K_Rocket_Trooper
+		MuzzleSequence: garrison-muzzle
+		MuzzlePalette: d2keffect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: D2K_TowerMissile
+		MuzzleSequence: garrison-muzzle
+		MuzzlePalette: d2keffect
+		RequiresCondition: rank-elite
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	RenderSprites:
+		Image: saudakar_bazooka
+	Voiced:
+		VoiceSet: D2KInfantryVoice
