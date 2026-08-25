@@ -2278,7 +2278,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "falloff": null,
         "spread": null,
         "tag": "Bullet_Medium",
@@ -2289,6 +2289,20 @@
         "falloff": null,
         "spread": null,
         "tag": "Bullet_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": null,
+        "tag": "Bullet_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2471,7 +2485,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "falloff": null,
         "spread": null,
         "tag": "Bullet_Medium",
@@ -2482,6 +2496,20 @@
         "falloff": null,
         "spread": null,
         "tag": "Bullet_Medium_Percentage",
+        "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": null,
+        "spread": null,
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": null,
+        "tag": "Bullet_Light_Percentage",
         "type": "AreaDamagePercentage"
        }
       ],
@@ -2598,17 +2626,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
@@ -2620,7 +2641,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "20",
@@ -2628,7 +2649,6 @@
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -2636,11 +2656,10 @@
       ],
       "warheads": [
        "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2675,17 +2694,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
@@ -2697,7 +2709,7 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "20",
@@ -2705,7 +2717,6 @@
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -2713,11 +2724,10 @@
       ],
       "warheads": [
        "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2784,21 +2794,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -2806,45 +2802,27 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6185",
       "reloaddelay": "64",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Medium_D2K_Rocket_Trooper",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -2852,25 +2830,21 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6185",
       "reloaddelay": "64",
       "slot": "Armament@garrisoned",
       "versus_templates": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Medium_D2K_Rocket_Trooper",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -3168,7 +3142,14 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "16000",
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "43",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -3176,23 +3157,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6502",
       "reloaddelay": "64",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Flak_Medium",
+       "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Light_D2K_Rocket_Trooper1",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
        "^Warhead_Flak_Medium",
+       "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper1",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "damage_warheads": [
@@ -3257,7 +3240,14 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "16000",
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "43",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -3265,23 +3255,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": false,
       "range": "6502",
       "reloaddelay": "64",
       "slot": "Armament@garrisoned",
       "versus_templates": [
        "^Warhead_Flak_Medium",
+       "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Light_D2K_Rocket_Trooper1",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
        "^Warhead_Flak_Medium",
+       "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper1",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
@@ -4020,7 +4012,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "28000",
+        "damage": "14000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
@@ -4088,6 +4080,13 @@
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "14000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -4494,7 +4493,14 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -4502,18 +4508,20 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "40",
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@Guns",
       "versus_templates": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RaiderGuns",
@@ -4531,6 +4539,13 @@
         "type": "AreaDamage"
        },
        {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "67",
+        "tag": "Bullet_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
@@ -4539,7 +4554,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "40",
@@ -4554,10 +4569,11 @@
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
+       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RaiderGuns_upgrade",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -4634,7 +4650,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "6000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
@@ -4645,6 +4661,13 @@
         "falloff": "100, 0",
         "spread": "80",
         "tag": "CannonAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -4740,7 +4763,14 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
+        "damage": "8000",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
+        "tag": "Demolition_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
@@ -4755,23 +4785,25 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8686",
       "reloaddelay": "80",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light_D2K_155mm",
        "^Effect_Demolition_Heavy_D2K_155mm"
       ],
       "warheads": [
+       "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "D2K_155mm3",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -5232,7 +5264,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "4000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
@@ -5243,6 +5275,13 @@
         "falloff": "100, 0",
         "spread": "80",
         "tag": "CannonAP_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "CannonHE_Medium",
         "type": "AreaDamage"
        }
       ],

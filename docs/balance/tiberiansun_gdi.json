@@ -692,7 +692,7 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 75, 50, 25, 0",
         "spread": "533",
         "tag": "Sonic_Heavy",
@@ -4031,22 +4031,15 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -4054,13 +4047,11 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "8Inch",
       "weapon_class_source": "template"
@@ -4070,22 +4061,15 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -4093,13 +4077,11 @@
       "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "8Inch",
       "weapon_class_source": "template"
@@ -4108,22 +4090,15 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -4131,13 +4106,11 @@
       "slot": "Armament@TERCERA",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "8Inch",
       "weapon_class_source": "template"
@@ -4146,22 +4119,15 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -4169,13 +4135,11 @@
       "slot": "Armament@CUARTA",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "8Inch",
       "weapon_class_source": "template"

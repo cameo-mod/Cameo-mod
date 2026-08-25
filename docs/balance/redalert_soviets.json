@@ -6347,35 +6347,26 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
         "tag": "MissileHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6643",
       "reloaddelay": "50",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Medium"
       ],
       "weapon": "RocketsRA",
       "weapon_class_source": "template"
@@ -6384,35 +6375,26 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
         "tag": "MissileHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6643",
       "reloaddelay": "50",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Medium"
       ],
       "weapon": "RocketsRA",
       "weapon_class_source": "template"

@@ -254,13 +254,10 @@ GladiusCannon:
 		Damage: 5
 	Warhead@CannonHE_Heavy: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 20000
 	Warhead@CannonHE_Heavy_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
-	Warhead@CannonHE_Medium: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5

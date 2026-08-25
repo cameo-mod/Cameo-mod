@@ -553,9 +553,6 @@ plymouthStickyDefence:
 	Warhead@CannonAP_Light_Percentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@CannonHE_Medium: AreaDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -570,7 +567,7 @@ plymouthStickyDefence:
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@CannonHE_Heavy:
-		Damage: 2000
+		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@HeavyChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy

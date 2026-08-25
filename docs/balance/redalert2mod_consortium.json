@@ -1284,9 +1284,9 @@
      {
       "damage_warheads": [
        {
-        "damage": "100000",
-        "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
-        "spread": "300",
+        "damage": "2000",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
        },
@@ -1298,7 +1298,7 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "100000",
+        "damage": "200000",
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "300",
         "tag": "Tesla_Super",

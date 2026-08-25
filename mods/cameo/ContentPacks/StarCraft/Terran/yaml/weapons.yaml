@@ -477,11 +477,6 @@ GhostSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 20000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
@@ -500,7 +495,7 @@ GhostSniperLockdown:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 20000
+		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -605,11 +600,6 @@ SpecterSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 40000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
@@ -628,7 +618,7 @@ SpecterSniperLockdown:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 40000
+		Damage: 80000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air

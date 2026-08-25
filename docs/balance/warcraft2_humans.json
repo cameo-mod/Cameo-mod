@@ -5154,14 +5154,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "30000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "30000",
+        "damage": "60000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
@@ -5176,26 +5169,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "minrange": "2890",
       "pricing": true,
       "range": "14450",
       "reloaddelay": "180",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Heavy"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium"
       ],
       "weapon": "wc2ballistaFire",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

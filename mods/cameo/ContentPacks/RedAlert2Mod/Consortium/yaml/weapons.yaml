@@ -1305,7 +1305,7 @@ SteelInspectorIonCannonDamage:
 		ValidTargets: Ground, Water
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 300
-		Damage: 100000
+		Damage: 200000
 		Delay: 0
 		AffectsParent: False
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
@@ -1315,13 +1315,6 @@ SteelInspectorIonCannonDamage:
 		Spread: 200
 		Damage: 50000
 		Delay: 2
-		AffectsParent: False
-	Warhead@Tesla_Heavy:
-		ValidTargets: Ground, Water
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Spread: 300
-		Damage: 100000
-		Delay: 3
 		AffectsParent: False
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla

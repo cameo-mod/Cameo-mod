@@ -11530,7 +11530,7 @@ IonCannon:
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 1000
-		Damage: 100000
+		Damage: 200000
 		Delay: 0
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
@@ -11539,13 +11539,6 @@ IonCannon:
 		Spread: 1000
 		Damage: 100000
 		Delay: 2
-	Warhead@Tesla_Heavy:
-		PercentageScale: 2000
-		ValidTargets: Shielded
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Spread: 1000
-		Damage: 100000
-		Delay: 3
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		ValidTargets: Shielded

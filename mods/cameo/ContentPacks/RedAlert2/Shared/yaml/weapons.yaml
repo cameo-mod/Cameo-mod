@@ -1983,8 +1983,7 @@ RA2PSIAtomicDamage:
 ####################################################################################################
 
 RA2HornetMissile:
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Demolition_Heavy
+	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@3: ^RA2MediumMissile
@@ -2000,11 +1999,8 @@ RA2HornetMissile:
 		ContrailLength: 25
 		ContrailStartWidth: 25
 		ContrailEndWidth: 1
-	Warhead@Demolition_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Demolition_Heavy:
-		Damage: 2000
+		Damage: 4000
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium:
 		Damage: 2000
@@ -3028,18 +3024,15 @@ IvanAttach:
 	Warhead@2: TargetDamage
 
 IvanBomb:
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Demolition_Heavy
-	Inherits@wh3: ^Warhead_Concussion_Medium
+	Inherits@wh: ^Warhead_Demolition_Heavy
+	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Report: M203.aud
-	Warhead@Demolition_Light:
-		Damage: 30000
 	Warhead@Concussion_Medium:
 		Damage: 30000
 	Warhead@Demolition_Heavy:
-		Damage: 30000
+		Damage: 60000
 	Warhead@Effect: CreateEffect
 		Explosions: ivan_explosion
 		ExplosionPalette: ra2effect
@@ -3066,20 +3059,16 @@ TanyaAttach:
 TanyaBomb:
 	Inherits: IvanBomb
 	Inherits@wh: ^Warhead_CannonHE_Heavy
-	Inherits@wh2: ^Warhead_CannonHE_Medium
-	Inherits@wh3: ^Warhead_CannonAP_Light
+	Inherits@wh2: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	Report: tnkfire6.aud
-	Warhead@Demolition_Light:
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 100000
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
 	Warhead@Demolition_Heavy:
 		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 100000
+		Damage: 200000
 	Warhead@Effect: CreateEffect
 		Explosions: self_destruct
 		ExplosionPalette: effect
@@ -3087,10 +3076,7 @@ TanyaBomb:
 
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 100000
-	Warhead@CannonHE_Medium:
-		ValidTargets: Ground, Air, Water, Underwater
-		Damage: 100000
+		Damage: 200000
 	Warhead@CannonAP_Light:
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 100000
@@ -3106,16 +3092,12 @@ SealBomb:
 	Report: tnkfire6.aud
 	Warhead@CannonAP_Light: AreaDamage
 		Damage: 20000
-	Warhead@CannonHE_Medium: AreaDamage
-		Damage: 20000
 	Warhead@CannonHE_Heavy: AreaDamage
-		Damage: 20000
-	Warhead@Demolition_Light:
-		Damage: 20000
+		Damage: 40000
 	Warhead@Concussion_Medium:
 		Damage: 20000
 	Warhead@Demolition_Heavy:
-		Damage: 20000
+		Damage: 40000
 
 BorisAKM:
 	Inherits@wh: ^RA2Chaingun

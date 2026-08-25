@@ -424,12 +424,6 @@ Support_EMP_Bomb:
 	Range: 25000
 	ReloadDelay: 250
 	Projectile: InstantExplode
-	Warhead@Tesla_Heavy:
-		ValidTargets: Ground, Water
-		Falloff: 100, 75, 50, 25
-		Damage: 10000
-		Spread: 2500
-		InvalidTargets: Infantry
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
@@ -439,7 +433,7 @@ Support_EMP_Bomb:
 	Warhead@Tesla_Super:
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
-		Damage: 10000
+		Damage: 20000
 		Spread: 2500
 		InvalidTargets: Infantry
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
@@ -1125,7 +1119,6 @@ Lunar_Green105mm:
 
 SyndicateFireballLauncher:
 	Inherits: ^Warhead_Flame_Light
-	Inherits@2: ^Warhead_Flame_Medium
 	Inherits@3: ^Warhead_Flame_Heavy
 	Inherits@4: ^Effect_Flame_Heavy
 	ReloadDelay: 44
@@ -1138,12 +1131,8 @@ SyndicateFireballLauncher:
 		Image: tsflameall
 		Inaccuracy: 555
 		Palette: tseffect
-	Warhead@Flame_Light:
-		Damage: 2000
-	Warhead@Flame_Medium:
-		Damage: 2000
 	Warhead@Flame_Heavy:
-		Damage: 2000
+		Damage: 6000
 RA2RTruckRocket:
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^Projectile_ArtilleryRocket_Medium
@@ -1189,12 +1178,9 @@ LatinBuggyRocket:
 	Warhead@Concussion_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
-	Warhead@MissileAP_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
 	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 20000
 LatinBuggyRocket_elite:
 	Inherits: LatinBuggyRocket
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav

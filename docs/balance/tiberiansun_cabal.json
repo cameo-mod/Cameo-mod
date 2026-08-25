@@ -6966,14 +6966,7 @@
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
         "tag": "MissileHE_Medium",
@@ -7001,7 +6994,6 @@
       "reloaddelay": "24",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
@@ -7009,7 +7001,6 @@
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium"
@@ -7022,14 +7013,7 @@
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
         "tag": "MissileHE_Medium",
@@ -7057,7 +7041,6 @@
       "reloaddelay": "24",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
@@ -7065,7 +7048,6 @@
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium"
@@ -7172,14 +7154,7 @@
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
+        "damage": "24000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
         "tag": "MissileHE_Heavy",
@@ -7207,7 +7182,6 @@
       "reloaddelay": "30",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_MissileHE_Medium",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
@@ -7215,7 +7189,6 @@
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium"
@@ -7228,14 +7201,7 @@
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "150",
-        "tag": "MissileHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
+        "damage": "24000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
         "tag": "MissileHE_Heavy",
@@ -7263,7 +7229,6 @@
       "reloaddelay": "30",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_MissileHE_Medium",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium",
@@ -7271,7 +7236,6 @@
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
        "^Warhead_MissileHE_Heavy",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium"

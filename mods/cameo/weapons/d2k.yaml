@@ -172,7 +172,6 @@ PlasBullet:
 		Spread: 250
 
 D2K_155mm:
-	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@wh3: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
@@ -181,12 +180,10 @@ D2K_155mm:
 	ReloadDelay: 74
 	Range: 10000
 	Report: MORTAR1.WAV
-	Warhead@Demolition_Light:
-		Damage: 12000
 	Warhead@Concussion_Medium:
 		Damage: 12000
 	Warhead@Demolition_Heavy:
-		Damage: 12000
+		Damage: 24000
 	Warhead@CannonHE_Medium:
 		PercentageScale: 10000
 		Damage: 12000
@@ -247,8 +244,6 @@ D2K_Rocket_Buggy:
 		Damage: 5500
 
 D2K_Rocket_Trooper:
-	Inherits@wh: ^Warhead_MissileAP_Light
-	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@wh3: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Medium_D2K_Rocket_Trooper
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
@@ -256,15 +251,9 @@ D2K_Rocket_Trooper:
 	Range: 6185
 	Report: ROCKET1.WAV
 	ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 24000
 D2K_Combat_Fleet:
 	Inherits: ^D2KRocket
 	Range: 10240
@@ -1128,7 +1117,6 @@ light_inf_lmg:
 		Damage: 4000
 LMG_upgrade:
 	Inherits: ^Warhead_Bullet_Medium
-	Inherits@2: ^Warhead_Bullet_Light
 	Inherits@3: ^Warhead_CannonHE_Heavy
 	Inherits@4: ^Projectile_Shell_Heavy
 	Inherits@5: ^Effect_CannonHE_Heavy
@@ -1142,13 +1130,9 @@ LMG_upgrade:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 light_inf_lmg_upgrade:
 	Inherits: ^Warhead_Bullet_Medium
-	Inherits@2: ^Warhead_Bullet_Light
 	Inherits@3: ^Warhead_CannonHE_Heavy
 	Inherits@4: ^Projectile_Shell_Heavy
 	Inherits@5: ^Effect_CannonHE_Heavy
@@ -1162,10 +1146,7 @@ light_inf_lmg_upgrade:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 Fremen_S:
 	Inherits: ^MG
 	Report: FREMODD1.WAV
@@ -1307,7 +1288,6 @@ Fremen_RPG:
 	MinRange: 975
 HMG:
 	Inherits@wh: ^Warhead_Bullet_Medium
-	Inherits@wh2: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 20
@@ -2700,7 +2680,7 @@ PulseMissile:
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Spread: 1000
-		Damage: 100000
+		Damage: 200000
 		Delay: 0
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
 		ValidTargets: Shielded
@@ -2708,13 +2688,6 @@ PulseMissile:
 		Spread: 2000
 		Damage: 50000
 		Delay: 1
-	Warhead@Tesla_Heavy:
-		PercentageScale: 2000
-		ValidTargets: Shielded
-		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
-		Spread: 1000
-		Damage: 100000
-		Delay: 4
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		ValidTargets: Shielded
 		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10

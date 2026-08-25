@@ -674,10 +674,8 @@ RA2vulcan:
 	Burst: 4
 	BurstDelays: 3
 	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 
 RA2CRFlakGuyGun:
 	Inherits: RA2FLAKAG
@@ -760,8 +758,6 @@ IvanAttachAir:
 IvanBombAir:
 	Inherits: IvanBomb
 	Report: M203.aud
-	Warhead@Demolition_Light:
-		ValidTargets: Aircraft
 	Warhead@Concussion_Medium:
 		ValidTargets: Aircraft
 	Warhead@Demolition_Heavy:

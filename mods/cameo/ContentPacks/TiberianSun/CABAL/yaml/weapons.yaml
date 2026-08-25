@@ -484,7 +484,6 @@ CabalTarantulaCannon:
 	Warhead@CannonHE_Medium:
 		Damage: 16000
 CabalReaperMissiles:
-	Inherits@wh: ^Warhead_MissileHE_Light
 	Inherits@wh2: ^Warhead_MissileHE_Medium
 	Inherits@wh3: ^Warhead_Demolition_Light
 	Inherits@wh4: ^Warhead_Concussion_Medium
@@ -505,16 +504,13 @@ CabalReaperMissiles:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@MissileHE_Light: AreaDamage
-		Damage: 8000
 	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 8000
+		Damage: 16000
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 8000
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 8000
 CabalReaperMissiles_AA:
-	Inherits@wh: ^Warhead_MissileHE_Light
 	Inherits@wh2: ^Warhead_MissileHE_Medium
 	Inherits@wh3: ^Warhead_Demolition_Light
 	Inherits@wh4: ^Warhead_Concussion_Medium
@@ -535,11 +531,8 @@ CabalReaperMissiles_AA:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@MissileHE_Light: AreaDamage
-		Damage: 8000
-		ValidTargets: Air
 	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 8000
+		Damage: 16000
 		ValidTargets: Air
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 8000
@@ -548,7 +541,6 @@ CabalReaperMissiles_AA:
 		Damage: 8000
 		ValidTargets: Air
 CabalHeavyReaperMissiles:
-	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@wh3: ^Warhead_Demolition_Light
 	Inherits@wh4: ^Warhead_Concussion_Medium
@@ -572,16 +564,13 @@ CabalHeavyReaperMissiles:
 		Acceleration: 2
 		HomingActivationDelay: 3
 		RangeLimit: 30000
-	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 12000
 	Warhead@MissileHE_Heavy: AreaDamage
-		Damage: 12000
+		Damage: 24000
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 12000
 	Warhead@Concussion_Medium: AreaDamage
 		Damage: 12000
 CabalHeavyReaperMissiles_AA:
-	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_MissileHE_Heavy
 	Inherits@wh3: ^Warhead_Demolition_Light
 	Inherits@wh4: ^Warhead_Concussion_Medium
@@ -605,11 +594,8 @@ CabalHeavyReaperMissiles_AA:
 		Acceleration: 2
 		HomingActivationDelay: 3
 		RangeLimit: 30000
-	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 12000
-		ValidTargets: Air
 	Warhead@MissileHE_Heavy: AreaDamage
-		Damage: 12000
+		Damage: 24000
 		ValidTargets: Air
 	Warhead@Demolition_Light: AreaDamage
 		Damage: 12000
@@ -1240,8 +1226,6 @@ CabalManticoreMissilesAA:
 	Inherits: ^CabalManticoreMissiles
 	Range: 5358
 	ValidTargets: Air
-	Warhead@MissileHE_Light: AreaDamage
-		ValidTargets: Air
 	Warhead@MissileHE_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@Demolition_Light: AreaDamage

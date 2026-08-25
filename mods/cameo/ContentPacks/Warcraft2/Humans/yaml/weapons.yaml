@@ -264,7 +264,6 @@ wc2paladinexorcism:
 # 25-80 WC2 damage. 80 Base, 0 Pierce.
 
 wc2ballistaFire:
-	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Demolition_Heavy
 	Inherits@wh3: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -278,12 +277,10 @@ wc2ballistaFire:
 		Inaccuracy: 384
 		Image: wc2_human_ballistabolt
 		Blockable: false
-	Warhead@Demolition_Light:
-		Damage: 30000
 	Warhead@Concussion_Medium:
 		Damage: 30000
 	Warhead@Demolition_Heavy:
-		Damage: 30000
+		Damage: 60000
 	Warhead@Effect: CreateEffect
 		Image: wc2_catapult_impact
 		Explosions: idle

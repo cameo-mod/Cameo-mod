@@ -12,14 +12,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
@@ -34,26 +27,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
       "requires": "!rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Heavy",
        "^RA2MediumMissile"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "BlackEagleMissiles",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -61,14 +52,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
@@ -83,7 +67,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "50",
@@ -93,12 +77,11 @@
        "BlackEagleMissiles"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "BlackEagleMissiles_elite",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",

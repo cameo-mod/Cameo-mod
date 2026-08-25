@@ -182,16 +182,13 @@ ConscriptMolotovExplode:
 
 RocketsRA:
 	Inherits@wh: ^Warhead_MissileHE_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	ReloadDelay: 50
 	Range: 6643
 	Report: missile6.aud
 	Warhead@MissileHE_Medium:
-		Damage: 10000
-	Warhead@MissileHE_Light:
-		Damage: 10000
+		Damage: 20000
 RocketsRACryo:
 	Inherits@wh: ^Warhead_MissileCryo_Medium
 	Inherits@proj: ^Projectile_Missile_Light
@@ -592,7 +589,6 @@ APCGunAllies_AA:
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 RAVulcan:
-	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
@@ -602,12 +598,9 @@ RAVulcan:
 	BurstDelays: 3
 	Range: 6500
 	Report: gun13.aud
-	Warhead@Bullet_Light:
-		PercentageScale: 2500
-		Damage: 8000
 	Warhead@Bullet_Medium:
 		PercentageScale: 2500
-		Damage: 8000
+		Damage: 16000
 RAVulcanCryo:
 	Inherits@wh: ^Warhead_BulletCryo_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -659,7 +652,6 @@ ZeroFighterChainGunWaveforce:
 
 TigerCannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
-	Inherits@wh2: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	ReloadDelay: 60
@@ -668,9 +660,7 @@ TigerCannon:
 	Projectile: Bullet
 		Speed: 591
 	Warhead@CannonHE_Heavy:
-		Damage: 8000
-	Warhead@CannonHE_Medium:
-		Damage: 8000
+		Damage: 16000
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
@@ -1933,7 +1923,6 @@ StingerCryo:
 		Damage: 10000
 
 JapanSpeedBoatGun:
-	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
@@ -1942,10 +1931,8 @@ JapanSpeedBoatGun:
 	ReloadDelay: 4
 	Range: 5750
 	Report: vgatlo5a.wav, vgatlo5b.wav
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 JapanSpeedBoatGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JapanSpeedBoatGun

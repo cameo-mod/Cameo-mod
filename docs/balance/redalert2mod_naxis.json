@@ -435,14 +435,7 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -450,19 +443,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
       "slot": "Armament@Rockets",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium",
        "^D2KRocket"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "NaxPlaneRockets_elite",
@@ -529,14 +520,7 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -544,19 +528,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
       "slot": "Armament@Rockets",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium",
        "^D2KRocket"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "NaxPlaneRockets_elite",
@@ -568,14 +550,7 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -583,20 +558,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": 1.125,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
       "requires": "rank-elite",
       "slot": "Armament@RocketsELITE",
       "versus_templates": [
-       "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_MissileAP_Medium",
        "^D2KRocket"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "NaxPlaneRockets_elite",
@@ -6754,14 +6727,7 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
+        "damage": "32000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
@@ -6776,25 +6742,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "15000",
       "reloaddelay": "125",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Heavy",
        "^RA2MediumMissile"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "NaxiMissileUboat",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6867,22 +6831,15 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -6890,13 +6847,11 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "8Inch",
       "weapon_class_source": "template"
@@ -6906,22 +6861,15 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -6929,13 +6877,11 @@
       "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "8Inch",
       "weapon_class_source": "template"
@@ -6944,22 +6890,15 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -6967,13 +6906,11 @@
       "slot": "Armament@TERCERA",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "8Inch",
       "weapon_class_source": "template"
@@ -6982,22 +6919,15 @@
       "burst": "2",
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "80000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -7005,13 +6935,11 @@
       "slot": "Armament@CUARTA",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light",
        "^Projectile_Grenade_Light",
        "^Effect_Demolition_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Heavy",
-       "^Warhead_Demolition_Light"
+       "^Warhead_Demolition_Heavy"
       ],
       "weapon": "8Inch",
       "weapon_class_source": "template"
@@ -7774,14 +7702,7 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "300",
-        "tag": "Flame_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
         "tag": "Flame_Heavy",
@@ -7789,24 +7710,22 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "44",
       "slot": "Armament@Flam",
       "versus_templates": [
        "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9764,14 +9683,14 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "10000",
+        "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
@@ -9808,14 +9727,7 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "300",
-        "tag": "Flame_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
         "tag": "Flame_Heavy",
@@ -9823,24 +9735,22 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "44",
       "slot": "Armament@Flam",
       "versus_templates": [
        "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
        "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -10534,14 +10444,14 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "8000",
+        "damage": "2000",
         "falloff": "100, 45, 18, 6, 0",
         "spread": "233",
         "tag": "Demolition_Light",
