@@ -1,5 +1,7 @@
 upgrade_conyard.harkonnen:
 	Inherits: ^UpgradeTemplate
+	Tooltip:
+		Name: Construction Yard Upgrade
 	Buildable:
 		Queue: Upgrades
 		BuildPaletteOrder: 10
@@ -11,6 +13,8 @@ upgrade_conyard.harkonnen:
 
 upgrade_barracks.harkonnen:
 	Inherits: ^UpgradeTemplate
+	Tooltip:
+		Name: Barracks Upgrade
 	Buildable:
 		Queue: Upgrades
 		BuildPaletteOrder: 20
@@ -22,6 +26,8 @@ upgrade_barracks.harkonnen:
 
 upgrade_light.harkonnen:
 	Inherits: ^UpgradeTemplate
+	Tooltip:
+		Name: Light Factory Upgrade
 	Buildable:
 		Queue: Upgrades
 		BuildPaletteOrder: 30
@@ -33,6 +39,8 @@ upgrade_light.harkonnen:
 
 upgrade_heavy.harkonnen:
 	Inherits: ^UpgradeTemplate
+	Tooltip:
+		Name: Heavy Factory Upgrade
 	Buildable:
 		Queue: Upgrades
 		BuildPaletteOrder: 40
@@ -44,6 +52,8 @@ upgrade_heavy.harkonnen:
 
 upgrade_radar.harkonnen:
 	Inherits: ^UpgradeTemplate
+	Tooltip:
+		Name: Radar Upgrade
 	Buildable:
 		Queue: Upgrades
 		BuildPaletteOrder: 50

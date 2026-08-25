@@ -99,6 +99,8 @@ corrino_heavyfactory:
 		Prerequisite: corrino_vehicle_production
 	ProvidesPrerequisite@corrino_combat:
 		Prerequisite: heavy.corrino_combat
+	ProvidesPrerequisite@missile_tank:
+		Prerequisite: heavy.missile_tank
 	ProvidesPrerequisite@mcv_production:
 		Prerequisite: corrino_mcv_production
 
@@ -151,8 +153,8 @@ corrino_repairpad:
 	RenderSprites:
 		Image: repair.harkonnen
 	RepairsUnits:
-		FinishRepairingNotification: RepairingFinish
-		StartRepairingNotification: RepairingStart
+		FinishRepairingNotification: Repaired
+		StartRepairingNotification: Repairing
 	RallyPoint:
 
 corrino_outpost:
@@ -221,7 +223,7 @@ corrino_starport:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^3x2Shape
 	Buildable:
-		Prerequisites: ~corrino_hightechfactory, corrino_ixresearchcenter
+		Prerequisites: ~hightech.corrino, ~research_centre
 		Description: Orders units from orbit.
 		IconPalette: d2kunit
 	Tooltip:
@@ -240,7 +242,7 @@ corrino_palace:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^2x2Shape
 	Buildable:
-		Prerequisites: ~corrino_hightechfactory, corrino_ixresearchcenter
+		Prerequisites: ~hightech.corrino, ~research_centre
 		Description: Unlocks superweapons and elite units.
 		IconPalette: d2kunit
 	Tooltip:
@@ -253,4 +255,52 @@ corrino_palace:
 		Image: palace.harkonnen
 	ProvidesPrerequisite@palace:
 		Prerequisite: palace
+
+corrino_gunturret:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^1x1Shape
+	Buildable:
+		Prerequisites: ~corrino_constructionyard, corrino_barracks
+		Description: Anti-infantry defense turret.
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Corrino Gun Turret
+	Building:
+		Footprint: x =
+		Dimensions: 1,2
+		LocalCenterOffset: 0,-512,0
+	RenderSprites:
+		Image: gun_turret.harkonnen
+	Armament:
+		Weapon: 110mm_Gun
+	AttackTurreted:
+		FacingTolerance: 0
+	Turreted:
+		TurnSpeed: 80
+	WithSpriteTurret:
+
+corrino_rocketturret:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^1x1Shape
+	Buildable:
+		Prerequisites: ~corrino_constructionyard, corrino_barracks
+		Description: Anti-vehicle rocket turret.
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Corrino Rocket Turret
+	Building:
+		Footprint: x =
+		Dimensions: 1,2
+		LocalCenterOffset: 0,-512,0
+	RenderSprites:
+		Image: rocket_turret.harkonnen
+	Armament:
+		Weapon: D2K_TowerMissile
+	AttackTurreted:
+		FacingTolerance: 0
+	Turreted:
+		TurnSpeed: 80
+	WithSpriteTurret:
 

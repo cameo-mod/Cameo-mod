@@ -91,7 +91,7 @@ atreides_fremen:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 80
-		Prerequisites: ~atreides_barracks, upgrade_barracks, atreides_hightechfactory
+		Prerequisites: ~atreides_barracks, upgrade_barracks, ~hightech.atreides
 		Icon: phantomicon
 		IconPalette: windows256
 		Description: Fast Elite infantry units armed with assault rifles and machine guns. When grouped, they can take down buildings extremely quickly.\nDetector\n  Strong vs Buildings\n  Weak vs Infantry, Vehicles\n  Special Ability: Invisibility
@@ -117,7 +117,8 @@ atreides_fremen:
 		UncloakOn: Attack, Unload, Demolish, Dock, Damage, Heal
 		IsPlayerPalette: true
 		PauseOnCondition: cloak-force-disabled || base-reveal
-		Palette: d2kcloak
+		CloakStyle: Palette
+		CloakedPalette: d2kcloak
 		CloakedCondition: cloaked
 	GrantConditionOnDamageState@UNCLOAK:
 		Condition: cloak-force-disabled

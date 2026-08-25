@@ -8,7 +8,7 @@ corrino_carryall:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 10
-		Prerequisites: ~corrino_hightechfactory
+		Prerequisites: ~hightech.corrino
 		Description: Lifts and transports vehicles across the battlefield.\n  Unarmed
 		IconPalette: d2kunit
 	Health:
@@ -30,9 +30,11 @@ corrino_carryall:
 	RevealsShroud:
 		Range: 4c0
 		Type: GroundPosition
+	-WithFacingSpriteBody:
 	WithFacingSpriteBody:
 		RequiresCondition: airborne
 	WithFacingSpriteBody@LANDED:
+		Name: body-landed
 		Sequence: idle-landed
 		RequiresCondition: !airborne
 	Selectable:

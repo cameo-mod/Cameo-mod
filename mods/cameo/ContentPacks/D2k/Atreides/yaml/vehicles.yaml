@@ -133,6 +133,7 @@ atreides_sonictank:
 		Intensity: 600
 	Voiced:
 		VoiceSet: D2KSonicTank
+	-WithDeathAnimation:
 	RenderSprites:
 		Image: sonic_tank
 
@@ -143,6 +144,7 @@ sonic_tank_husk.atreides:
 		Name: Sonic Tank
 	TransformOnCapture:
 		IntoActor: atreides_sonictank
+	-WithDeathAnimation:
 	RenderSprites:
 		Image: sonic_tank
 
@@ -159,7 +161,7 @@ atreides_missiletank:
 		AddToArmyValue: true
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~heavy.missile_tank, atreides_ixresearchcenter
+		Prerequisites: ~heavy.missile_tank, research_centre
 		BuildPaletteOrder: 60
 		Description: Rocket Artillery.\n  Strong vs Vehicles, Buildings, Aircraft\n  Weak vs Infantry\nDetector
 		IconPalette: d2kunit
@@ -259,3 +261,228 @@ siege_tank_husk.atreides:
 		IntoActor: atreides_siegetank
 	RenderSprites:
 		Image: siege_tank
+atreides_sandbike:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Buildable:
+		Queue: Vehicle, RAVehicle, Starport
+		BuildPaletteOrder: 20
+		Prerequisites: ~atreides_vehicle_production, ~light.atreides
+		Description: Fast scout bike.\n  Strong vs Infantry\n  Weak vs Tanks
+		IconPalette: d2kunit
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Atreides Sand Bike
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 30000
+	Mobile:
+		Locomotor: wheeled
+		Speed: 90
+		TurnSpeed: 24
+	Armament:
+		Weapon: HMG
+		LocalOffset: 256,0,0
+	AttackFrontal:
+		FacingTolerance: 0
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeSmall
+		EmptyWeapon: D2KUnitExplodeSmall
+	-WithDeathAnimation:
+	RenderSprites:
+		Image: atreides_sandbike
+		PlayerPalette: player_rgba
+	Voiced:
+		VoiceSet: D2KVehicleVoice
+	MapEditorData:
+		Categories: Vehicle
+
+atreides_apc:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^UnarmedCargoVehicle
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Buildable:
+		Queue: Vehicle, RAVehicle, Starport
+		BuildPaletteOrder: 45
+		Prerequisites: ~atreides_vehicle_production, ~heavy.atreides_combat
+		Description: Armored personnel carrier.\n  Strong vs Infantry\n  Can transport infantry
+		IconPalette: d2kunit
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Atreides APC
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 90000
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 65
+		TurnSpeed: 16
+	Cargo:
+		MaxWeight: 5
+		Types: Infantry
+	Turreted:
+		TurnSpeed: 48
+	Armament:
+		Weapon: HMG
+		LocalOffset: 256,0,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeLarge
+		EmptyWeapon: D2KUnitExplodeLarge
+	-WithDeathAnimation:
+	RenderSprites:
+		Image: atreides_apc
+		PlayerPalette: player_rgba
+	Voiced:
+		VoiceSet: D2KVehicleVoice
+	MapEditorData:
+		Categories: Vehicle
+
+atreides_repairtank:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AutoRepair: ^PrioritizeRepair
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Buildable:
+		Queue: Vehicle, RAVehicle, Starport
+		BuildPaletteOrder: 55
+		Prerequisites: ~atreides_vehicle_production, ~heavy.atreides_combat
+		Description: Repairs friendly vehicles.\n  Support
+		IconPalette: d2kunit
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Atreides Repair Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 60000
+	Mobile:
+		Speed: 50
+		TurnSpeed: 16
+	Armament:
+		Weapon: D2KRepair
+		LocalOffset: 256,0,0
+		TargetRelationships: Ally
+	AttackFrontal:
+		FacingTolerance: 0
+		Armaments: primary
+	AutoTarget:
+		InitialStanceAI: Defend
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeMed
+		EmptyWeapon: D2KUnitExplodeMed
+	-WithDeathAnimation:
+	RenderSprites:
+		Image: atreides_repairtank
+		PlayerPalette: player_rgba
+	Voiced:
+		VoiceSet: D2KVehicleVoice
+	MapEditorData:
+		Categories: Vehicle
+
+atreides_minotaurus:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Buildable:
+		Queue: Vehicle, RAVehicle, Starport
+		BuildPaletteOrder: 65
+		Prerequisites: ~atreides_vehicle_production, ~heavy.missile_tank, research_centre
+		Description: Heavy artillery.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry
+		IconPalette: d2kunit
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Atreides Minotaurus
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 40000
+	Mobile:
+		Speed: 43
+		TurnSpeed: 48
+	Armament:
+		Weapon: D2K_155mm
+		LocalOffset: 512,0,320
+	AttackFrontal:
+		FacingTolerance: 10
+		TargetFrozenActors: true
+	AutoTarget:
+		InitialStanceAI: Defend
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeMed
+		EmptyWeapon: D2KUnitExplodeMed
+	-WithDeathAnimation:
+	RenderSprites:
+		Image: atreides_minotaurus
+		PlayerPalette: player_rgba
+	Voiced:
+		VoiceSet: D2KVehicleVoice
+	MapEditorData:
+		Categories: Vehicle
+
+atreides_mongoose:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^MissileVehicleTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Buildable:
+		Queue: Vehicle, RAVehicle, Starport
+		BuildPaletteOrder: 57
+		Prerequisites: ~atreides_vehicle_production, ~heavy.missile_tank, research_centre
+		Description: Turreted missile vehicle.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		IconPalette: d2kunit
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Atreides Mongoose
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 50000
+	Mobile:
+		Speed: 64
+		TurnSpeed: 20
+	Turreted:
+		TurnSpeed: 48
+	Armament:
+		Weapon: mtank_pri
+		LocalOffset: -128,128,171, -128,-128,171
+	AttackTurreted:
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeMed
+		EmptyWeapon: D2KUnitExplodeMed
+	-WithDeathAnimation:
+	RenderSprites:
+		Image: atreides_mongoose
+		PlayerPalette: player_rgba
+	Voiced:
+		VoiceSet: D2KVehicleVoice
+	MapEditorData:
+		Categories: Vehicle

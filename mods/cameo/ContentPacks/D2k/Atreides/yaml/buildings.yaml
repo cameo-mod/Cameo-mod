@@ -162,8 +162,8 @@ atreides_repairpad:
 	RenderSprites:
 		Image: repair.atreides
 	RepairsUnits:
-		FinishRepairingNotification: RepairingFinish
-		StartRepairingNotification: RepairingStart
+		FinishRepairingNotification: Repaired
+		StartRepairingNotification: Repairing
 	RallyPoint:
 
 atreides_outpost:
@@ -232,7 +232,7 @@ atreides_starport:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^3x2Shape
 	Buildable:
-		Prerequisites: ~atreides_hightechfactory, atreides_ixresearchcenter
+		Prerequisites: ~hightech.atreides, ~research_centre
 		Description: Orders units from orbit.
 		IconPalette: d2kunit
 	Tooltip:
@@ -251,7 +251,7 @@ atreides_palace:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^2x2Shape
 	Buildable:
-		Prerequisites: ~atreides_hightechfactory, atreides_ixresearchcenter
+		Prerequisites: ~hightech.atreides, ~research_centre
 		Description: Unlocks superweapons and elite units.
 		IconPalette: d2kunit
 	Tooltip:

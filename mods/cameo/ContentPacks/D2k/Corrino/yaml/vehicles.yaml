@@ -38,6 +38,8 @@ corrino_spiceharvester:
 		BuildPaletteOrder: 10
 		Description: Collects spice for credits.\n  Unarmed
 		IconPalette: d2kunit
+		BuildDuration: 250
+		BuildDurationModifier: 100
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -45,8 +47,6 @@ corrino_spiceharvester:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Harvester:
-		BuildDuration: 250
-		BuildDurationModifier: 100
 		HarvestFacings: 8
 		BaleUnloadDelay: 1
 	StoresResources:
@@ -242,4 +242,51 @@ corrino_apc:
 		VoiceSet: D2KVehicleVoice
 	RenderSprites:
 		Image: corrino_apc
+
+corrino_missiletank:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Tooltip:
+		Name: Corrino Missile Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~heavy.missile_tank, ~research_centre
+		BuildPaletteOrder: 60
+		Description: Rocket Artillery.\n  Strong vs Vehicles, Buildings, Aircraft\n  Weak vs Infantry\nDetector
+		IconPalette: d2kunit
+	Valued:
+		Cost: 750
+	Mobile:
+		Speed: 64
+		TurnSpeed: 80
+	Health:
+		HP: 50000
+	Armor:
+		Type: Medium
+	RevealsShroud:
+		Range: 6c768
+	Armament:
+		Weapon: mtank_pri
+		LocalOffset: -128,128,171, -128,-128,171
+	AttackFrontal:
+		FacingTolerance: 0
+	AutoTarget:
+		InitialStanceAI: Defend
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeMed
+		EmptyWeapon: D2KUnitExplodeMed
+	Selectable:
+		Class: missiletank
+	DetectCloaked:
+		Range: 4c0
+	Voiced:
+		VoiceSet: D2KMissileTank
+	RenderSprites:
+		Image: mtank
 

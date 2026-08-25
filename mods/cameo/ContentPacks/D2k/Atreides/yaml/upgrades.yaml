@@ -1,9 +1,11 @@
 upgrade_conyard.atreides:
 	Inherits: ^UpgradeTemplate
+	Tooltip:
+		Name: Construction Yard Upgrade
 	Buildable:
 		Queue: Upgrades
 		BuildPaletteOrder: 10
-		Prerequisites: ~atreides_constructionyard, atreides_outpost
+		Prerequisites: ~atreides_constructionyard, ~outpost
 		Description: Allows construction of larger buildings.
 		IconPalette: d2kunit
 	Valued:
@@ -11,6 +13,8 @@ upgrade_conyard.atreides:
 
 upgrade_barracks.atreides:
 	Inherits: ^UpgradeTemplate
+	Tooltip:
+		Name: Barracks Upgrade
 	Buildable:
 		Queue: Upgrades
 		BuildPaletteOrder: 20
@@ -22,6 +26,8 @@ upgrade_barracks.atreides:
 
 upgrade_light.atreides:
 	Inherits: ^UpgradeTemplate
+	Tooltip:
+		Name: Light Factory Upgrade
 	Buildable:
 		Queue: Upgrades
 		BuildPaletteOrder: 30
@@ -33,6 +39,8 @@ upgrade_light.atreides:
 
 upgrade_heavy.atreides:
 	Inherits: ^UpgradeTemplate
+	Tooltip:
+		Name: Heavy Factory Upgrade
 	Buildable:
 		Queue: Upgrades
 		BuildPaletteOrder: 40
@@ -44,10 +52,12 @@ upgrade_heavy.atreides:
 
 upgrade_radar.atreides:
 	Inherits: ^UpgradeTemplate
+	Tooltip:
+		Name: Radar Upgrade
 	Buildable:
 		Queue: Upgrades
 		BuildPaletteOrder: 50
-		Prerequisites: ~atreides_outpost
+		Prerequisites: ~outpost
 		Description: Expands radar range and detection.
 		IconPalette: d2kunit
 	Valued:

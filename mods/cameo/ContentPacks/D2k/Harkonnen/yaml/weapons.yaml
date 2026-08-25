@@ -78,5 +78,10 @@ harkonnen_devastatorturret:
 		Speed: 333
 		Image: doubleblastbullet
 		Palette: d2keffect
-
-
+harkonnen_inkvine_weapon:
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
+	Inherits@fx: ^Effect_Demolition_Heavy_D2K_155mm
+	ReloadDelay: 120
+	Range: 10000
+	Report: MORTAR1.WAV
