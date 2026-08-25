@@ -1,16 +1,13 @@
 CHGuardRifle:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 55
 	Range: 5547
 	ValidTargets: Ground, Water, Air
 	Report: iredweaa.wav, iredweab.wav, iredweac.wav, iredwead.wav
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 # SCOUT-CLASS BASELINE WEAPON (Formula v2, design 2026-07-18): the round
 # reference stats â€” 4000 damage / 50 reload / 5000 range â€” that define
 # the scout anchor together with the Imperial Scoutsman's 20000/50/100.
@@ -1811,8 +1808,7 @@ JapanesePlasmaBomb:
 		Explosions: blue_building_napalm
 
 JHighV:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
@@ -1821,11 +1817,9 @@ JHighV:
 	BurstDelays: 5
 	Range: 6696
 	StartBurstReport: gun8.aud
-	Warhead@Bullet_Light:
-		PercentageScale: 5000
-		Damage: 4000
 	Warhead@Bullet_Medium:
-		Damage: 4000
+		Damage: 8000
+		PercentageScale: 7500
 JHighVWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JHighV

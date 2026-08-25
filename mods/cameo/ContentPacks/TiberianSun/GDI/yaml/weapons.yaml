@@ -874,8 +874,7 @@ TSAssaultCannonTalSonic:
 		Damage: 8000
 
 TSVulcanGun:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water
@@ -883,10 +882,8 @@ TSVulcanGun:
 	Burst: 4
 	BurstDelays: 2
 	Range: 6809
-	Warhead@Bullet_Light:
-		Damage: 4000
 	Warhead@Bullet_Medium:
-		Damage: 4000
+		Damage: 8000
 TSVulcanGunSonic:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Sonic_Medium

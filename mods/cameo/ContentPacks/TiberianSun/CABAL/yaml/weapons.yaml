@@ -1249,8 +1249,7 @@ CabalManticoreMissilesAA:
 	Warhead@Concussion_Medium: AreaDamage
 		ValidTargets: Air
 CabalRocketCyborgRockets:
-	Inherits@wh: ^Warhead_MissileHE_Light
-	Inherits@wh2: ^Warhead_MissileHE_Medium
+	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	-Warhead@EffectWater:
@@ -1268,13 +1267,10 @@ CabalRocketCyborgRockets:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@MissileHE_Light: AreaDamage
-		Damage: 6000
 	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 6000
+		Damage: 12000
 CabalRocketCyborgRocketsUpgraded:
-	Inherits@wh: ^Warhead_MissileHE_Light
-	Inherits@wh2: ^Warhead_MissileHE_Medium
+	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@proj: ^CabalMissileLight
 	Inherits@fx: ^CabalMissileEffect
 	-Warhead@EffectWater:
@@ -1292,10 +1288,8 @@ CabalRocketCyborgRocketsUpgraded:
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
-	Warhead@MissileHE_Light: AreaDamage
-		Damage: 6000
 	Warhead@MissileHE_Medium: AreaDamage
-		Damage: 6000
+		Damage: 12000
 CabalMothershipRockets:
 	Inherits: ^TeslaWeapon
 	Inherits@HEAVYMISSILE: ^HeavyMissile

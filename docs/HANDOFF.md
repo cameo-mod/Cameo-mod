@@ -93,7 +93,7 @@ are still scheduled to change across most of the roster. Pricing now means prici
 are about to be replaced.
 
 ```
-W24  one damage warhead per weapon          872 fired weapons still carry 2+
+W24  one damage warhead per weapon          867 fired weapons still carry 2+
  └─> W23  retrofit the legacy templates      1124 direct inheritors left; 1248 fired
  │        (its old "33-collision" blocker    weapons already reach a ^Warhead_* family
  │         is DISSOLVED — W24 removes it)
@@ -359,7 +359,7 @@ holds.
 
 | step | what | how you know it moved |
 |---|---|---|
-| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` in `doc_claims.yaml` goes DOWN from 872 |
+| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` in `doc_claims.yaml` goes DOWN from 867 |
 | **W23** | retrofit the legacy templates onto `^Warhead_*` families | `unconverted_template_inheritors` goes DOWN from 1124; `warhead_family_reach` goes UP from 1248 |
 | **A5** | retire the remaining inline-`Versus` weapons onto templates | rule 4 — `Versus` only in `^Warhead_*` |
 

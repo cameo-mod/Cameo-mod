@@ -1,5 +1,34 @@
 # Development Log
 
+## 2026-08-25 — W24 A14: collapse Japan + TS/GDI + TS/Nod bullet weapons onto Bullet_Medium
+
+- Cluster across three free files (not in any locked/staged set):
+  - `mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml`:
+    `CHGuardRifle` (no children), `JHighV` (child `JHighVWaveforce` — only adds
+    Railgun_Heavy, no bullet overrides).
+  - `mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml`:
+    `TSVulcanGun` (no children).
+  - `mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml`:
+    `elitecadregun` (no children).
+- Each carried two bullet damage mains (`Bullet_Light` + `Bullet_Medium`).
+  Collapsed onto one `^Warhead_Bullet_Medium` main at the summed per-shot damage:
+  - `CHGuardRifle`     2000 + 2000 -> 4000
+  - `JHighV`           4000 + 4000 -> 8000 (dropped local `PercentageScale: 5000`;
+    template `PercentageScale: 10000` applies — same actual percentage)
+  - `TSVulcanGun`      4000 + 4000 -> 8000
+  - `elitecadregun`    8000 + 8000 -> 16000 (PercentageScale 2500 preserved)
+- `JHighVWaveforce` (child) automatically lost its inherited `Bullet_Light` and
+  its `Bullet_Medium` summed to 8000; it still carries `Railgun_Heavy` as a
+  separate main (a future W24 item — mixed railgun+bullet, needs family choice).
+- Verification: `review_resolve_diff` OK for all 5 (only damage-multiset change,
+  effects/projectile/concrete preserved); `find_empty_warhead` 0;
+  `find_orphan_old_keys` 0 real; `audit_warhead_split` 880 vs 885 (baseline
+  lowered 885 -> 880); `audit_doc_claims` 19/19 green; `extract_stats --check`
+  0 drifted; `multi_main_fired_weapons` 872 -> 867.
+- Co-updated `docs/audit/doc_claims.yaml`, `BALANCE_PROGRAM_PLAN.md`, `HANDOFF.md`,
+  `SUMMARY.md`, `japan` + `tiberiansun_gdi` + `tiberiansun_nod` ledgers + derived,
+  and `tools/audit/audit_warhead_split.py` baseline.
+
 ## 2026-08-25 — W24 A13: collapse TKM + AsianAlliance bullet weapons onto Bullet_Medium
 
 - Cluster across two files in set 1 (RedAlert2Mod):
@@ -3304,7 +3333,7 @@ per weapon, and commit with the full doc/ledger co-update.
   W24 collapse for `ATMine` (removed legacy `^HeavyMissile`, merged 60k Demolition + 50k HeavyMissile
   into one `^DamagingExplosionHE` `Demolition_Light` 110k main, swapped projectile to
   `^Projectile_Missile_Heavy`, preserved mine effects/concrete). Verification, boot-gate,
-  and doc-claim co-update passed; to be committed.
+  and doc-claim co-update passed; committed as W24 A12.
 - **Devin (this session, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml`
   and `mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml` (item 1):
   W24 bullet collapse for `tkmbunkmg`, `tkmquadcannonmg` (TKM, no children) and
@@ -3318,12 +3347,12 @@ per weapon, and commit with the full doc/ledger co-update.
   weapon into a metered physical-state weapon. Removed the off-grid `PercentageScale: 9524`
   override so `^Warhead_Laser_Heavy`'s `PercentageScale: 10000` applies. Boot-gated; no new
   exceptions.
-- **(integrated this session, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert2Mod/TKM/`,
+- **(committed as W24 A13, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert2Mod/TKM/`,
   `RedAlert2Mod/AsianAlliance/`, `D2k/Ordos/`, and `TiberianSun/CABAL/`:
   integrated the uncommitted bullet-light collapse work from the other Devin agent
   (`tkmbunkmg`, `tkmquadcannonmg`, `asianalliance_fanatic_shotgun`, `HMGstealth`,
   `CabalCyborgChaingun`, `TSDevoutChainguns`) and co-updated `multi_main_fired_weapons`
-  875 → 872 plus all dependent docs. To be committed after boot-gate.
+  875 → 872 plus all dependent docs. Committed.
 
 ### Mandatory pre-edit check for every agent
 
@@ -3335,3 +3364,12 @@ Before touching a weapon:
   for the current list.
 - Do not run the full audit suite repeatedly; run verification once at the end of
   each batch (boot-gate required before every commit).
+
+- **(in progress, 2026-08-25)** — W24 A14: uncommitted WIP from other agents continued and
+  extended by this Devin session: RedAlert/Japan (`CHGuardRifle`, `JHighV` with
+  percentage-twin preservation at 7500), TiberianSun/GDI (`TSVulcanGun`),
+  TiberianSun/Nod (`elitecadregun` with percentage-twin preservation at 6250),
+  RedAlert/Shared (`ATMine` instant-hit / ground-only effect rework), and
+  TiberianSun/CABAL (`CabalRocketCyborgRockets`, `CabalRocketCyborgRocketsUpgraded`).
+  `multi_main_fired_weapons` co-updated to 867, `BROADCAST_BASELINE` to 878, all
+  affected faction ledgers re-extracted. Verification + boot-gate passed; to be committed.

@@ -310,8 +310,7 @@ TSCommandoShotgun:
 		Damage: 4
 
 elitecadregun:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 52
@@ -320,12 +319,9 @@ elitecadregun:
 	Report: cygun1.aud
 	Range: 6217
 	ValidTargets: Ground, Air
-	Warhead@Bullet_Light:
-		PercentageScale: 2500
-		Damage: 8000
 	Warhead@Bullet_Medium:
-		PercentageScale: 2500
-		Damage: 8000
+		PercentageScale: 6250
+		Damage: 16000
 laserelitecadregun:
 	Inherits: ^SmallArms
 	Inherits@2: ^Chaingun

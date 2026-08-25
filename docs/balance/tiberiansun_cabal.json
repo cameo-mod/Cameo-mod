@@ -4767,14 +4767,7 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
         "tag": "MissileHE_Medium",
@@ -4782,20 +4775,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8753",
       "reloaddelay": "52",
       "requires": "!cabal_upgrade_darkarmament",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium",
        "^CabalMissileLight",
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium"
       ],
       "weapon": "CabalRocketCyborgRockets",
@@ -4806,14 +4797,7 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
         "tag": "MissileHE_Medium",
@@ -4821,20 +4805,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8753",
       "reloaddelay": "52",
       "requires": "cabal_upgrade_darkarmament",
       "slot": "Armament@Upgraded",
       "versus_templates": [
-       "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium",
        "^CabalMissileLight",
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium"
       ],
       "weapon": "CabalRocketCyborgRocketsUpgraded",
@@ -4846,14 +4828,7 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
         "tag": "MissileHE_Medium",
@@ -4861,19 +4836,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "8753",
       "reloaddelay": "52",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium",
        "^CabalMissileLight",
        "^CabalMissileEffect"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Light",
        "^Warhead_MissileHE_Medium"
       ],
       "weapon": "CabalRocketCyborgRockets",
