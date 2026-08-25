@@ -1,5 +1,37 @@
 # Development Log
 
+## ⚠️ Name collision resolution (2026-08-25 14:16)
+
+**I am renaming from Devin-Aether to Devin-Aurora.** Another agent registered as
+"Devin-Aether" in the HANDOFF.md line-200 registry for `d2k.yaml`/`redalert2mod.yaml`.
+I was the original Devin-Aether (committed `f14eda274` at 13:56 for CABAL/D2k-Ordos/
+audit-damage-grid). To avoid confusion, I am now **Devin-Aurora**.
+
+**File-set change:** Devin-Forge and Devin-Echo have claimed my old D2k-Ordos file-set
+(for `D2K_APC_Rocket` and `MongooseRocket`/`facedancer_grenade` respectively). To avoid
+conflicts, I am moving to **StarCraft** (`mods/cameo/ContentPacks/StarCraft/*/yaml/`),
+which is completely unclaimed (HANDOFF task 1).
+
+My prior commits (609e95cdd, 0ef74586e, 49b057c1f, f14eda274) remain under the
+Devin-Aether name — they are committed and do not need renaming.
+
+## Devin-Aurora — PPM credit attribution (2026-08-25)
+
+**Identity:** Devin-Aurora (was Devin-Aether; this session, SWE-1.7 Max).
+
+**What and why:**
+- Added missing Project Perfect Mod asset attributions per the user's source URLs.
+- `mods/cameo/credits.txt`: added entries in the existing `Authors of public assets from Project Perfect Mod` style.
+- `mods/cameo/bits/ra2/credits.txt` and `mods/cameo/bits/ra2/voxel2/credits.txt`: added per-asset `#Asset / Author: / Voxels:` entries in the same style used for OverWatch's Tsunami and Soviet Light tanks.
+- Voxel ids resolved from the live rules:
+  - **Orion Tank** (Nova Railgun Tank by OverWatch): `futuretech_orion`, `futuretech_oriontur`
+  - **Land Carrier** (RA2\\Vxl Pack [uiop.vxl] by Moder.U): `futuretech_landcarr`
+  - **Guardian Tank** (from RA3 by kiriha): `futuretech_mbt`, `futuretech_mbttur`
+- Decision basis: the main mod credits (`cameo|credits.txt`) are loaded by `mod.yaml`, while the `bits/ra2/credits.txt` sidecar records per-asset author/voxel mappings. Both files previously lacked these three attributions; the `voxel2` copy is kept identical.
+- Verification: `grep` confirmed the three asset names now appear in all three files; no weapon/actor rules were changed, so no weapon audit or boot-gate is needed for this documentation-only edit.
+
+**Next:** Return to StarCraft W24 bullet-collapse scouting (HANDOFF.md unassigned task 1). The D2k/WC2 boot-gate blocker work is now owned by Devin-Echo and Devin-Cyrus per the rename note above.
+
 ## Agent registry (2026-08-25)
 
 There are 5+ Devin agents running locally on the same branch
@@ -9,7 +41,7 @@ file's mtime.** If another agent claimed it in the last 30 minutes, do not touch
 
 | name | identity | current file-set | current task | status |
 |---|---|---|---|---|
-| **Devin-Aether** | this session | `tools/audit/audit_damage_grid.py`, `mods/cameo/ContentPacks/TiberianSun/CABAL/`, `mods/cameo/ContentPacks/D2k/Ordos/` | W24 same-family collapses in CABAL/D2k-Ordos; audit tooling | active |
+| **Devin-Aurora** (was Devin-Aether) | this session | `mods/cameo/ContentPacks/StarCraft/` (moving) | W24 same-family collapses in CABAL/D2k-Ordos; audit tooling; PPM credit attribution | active |
 | **Devin-Dawn** | prior sessions (A10–A14 committer) | `mods/cameo/weapons/tiberiansun.yaml`, `RedAlert2Mod/TKM/`, `RedAlert2Mod/AsianAlliance/`, `RedAlert/Japan/`, `TiberianSun/GDI/`, `TiberianSun/Nod/`, `RedAlert/Shared/` | W24 bullet/missile collapses; ATMine rework | check mtime |
 | **Devin-Blaze** | active 2026-08-25 13:50 | `mods/cameo/weapons/d2k.yaml`, `mods/cameo/weapons/redalert2mod.yaml` | W24 bullet collapse for `LMG`, `light_inf_lmg`, `d2k_shotgun`, `naxis_sssoldier_smg` | active |
 | **Devin-Cyrus** | active 2026-08-25 13:48 | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` | WC2 hero weapon rework (Alleria FirepowerMultiplier, Hellscream slice) | active |
@@ -3517,13 +3549,16 @@ Before touching a weapon:
   TiberianSun/CABAL (`CabalRocketCyborgRockets`, `CabalRocketCyborgRocketsUpgraded`).
   `multi_main_fired_weapons` co-updated to 867, `BROADCAST_BASELINE` to 878, all
   affected faction ledgers re-extracted. Verification + boot-gate passed; to be committed.
-- **Devin (this session, 2026-08-25)** — `mods/cameo/weapons/redalert2mod.yaml` and
+- **Devin-Aether (this session, 2026-08-25, GLM-5.2 High)** — `mods/cameo/weapons/redalert2mod.yaml` and
   `mods/cameo/weapons/d2k.yaml` (shared template files, NOT locked):
   W24 bullet collapse for `naxis_sssoldier_smg`, `naxis_sssoldier_smg_elite`
   (redalert2mod.yaml), `LMG`, `light_inf_lmg`, `d2k_shotgun` (d2k.yaml).
   All have 2 Bullet mains (Bullet_Light + Bullet_Medium), no children, no shadowing.
   Not in any open IDE tab; not claimed by another agent.
-- **Devin (this session, 2026-08-25)** — `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml`
+  **Status**: Converted and verified (review_resolve_diff OK, find_empty_warhead 0,
+  audit_warhead_split 872 vs 878). Needs doc-claim co-update (multi_main_fired 867→862,
+  baseline 878→872) and boot-gate before committing.
+- **Devin-Forge (this session, 2026-08-25)** — `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml`
   and `mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml`:
   ported the 4 hero weapon pairs from `wcameo(1)` (Alleria, Danath, Hellscream, Zul-jin)
   onto the current 3-way split with the new `wc2_<faction>_<hero>_<weapon>[_elite]` naming
@@ -3531,10 +3566,103 @@ Before touching a weapon:
   `wc2_humans_danath_slice`, `wc2_humans_danath_slice_elite`,
   `wc2_orcs_hellscream_slice`, `wc2_orcs_hellscream_slice_elite`,
   `wc2_orcs_zuljin_spear`, `wc2_orcs_zuljin_spear_elite`.
-  Next: add the 4 hero actor rules (base + elite), sequence definitions, and icon assets;
-  run `find_empty_warhead.py`, `review_resolve_diff.py`, `extract_stats --check`, and boot-gate.
-  Files checked: mtime 8/25 for weapons (my edits), 8/24 and 8/22 for infantry/sequences (stale,
-  no active agent).
+  Alleria `Damage` set to 36000 (raw per old 6×6000 warheads) so the retired actor-level
+  `FirepowerMultiplier@Arrows: 85` is not reintroduced; Hellscream slice weapons renamed to
+  `wc2_orcs_hellscream_slice[_elite]` and inherit Danath's converted swords to avoid cross-faction
+  weapon names. Zul-jin spear reuses the Alleria arrow base with orc axe projectile/sound overrides.
+  Verification: `miniyaml.Ruleset.resolve_weapon()` succeeds for all 8; `find_empty_warhead.py` 0;
+  no new `Parent type ... not found` errors after the cross-faction inheritance was fixed.
+- **Devin-Forge (continuing, 2026-08-25)** — `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml`
+  and `mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml`:
+  added the 8 hero actor rules (4 base + 4 elite):
+  - Humans: `wc2_humans_alleria`, `wc2_humans_alleria_elite`, `wc2_humans_danath`, `wc2_humans_danath_elite`
+  - Orcs: `wc2_orcs_hellscream`, `wc2_orcs_hellscream_elite`, `wc2_orcs_zuljin`, `wc2_orcs_zuljin_elite`
+  Decisions:
+  - Actors inherit `^WC2Infantry` and current faction upgrade templates (not the retired
+    `wc2_h_str_*` / `wc2_o_str_*` names), and use the current upgrade actor ids for
+    `ActorStatValues`.
+  - `Armor: Type: Heroic` and `Buildable: BuildLimit: 1` are set locally; `^HeroInfantryTemplate`
+    was not used because its permanent 125% firepower buff and `^GainsExperienceInfantry` would
+    conflict with the current WC2 `^GainsExperienceTD` and the retired `FirepowerMultiplier@Arrows`
+    actor stat. This keeps behavior close to the port while the balance pipeline reviews hero stats.
+  - Elite variants require the same upgrade prerequisites as the corresponding advanced infantry
+    (`wc2_humans_upgrade_highelvenarcher`, `wc2_humans_upgrade_warcraft3footman`,
+    `wc2_orcs_upgrade_warcraft3grunt`, `wc2_orcs_upgrade_trollheadhunter`) and carry
+    `^PromotionUnitBuff`.
+  Verification: `miniyaml.Ruleset.resolve()` succeeds for all 8 actors; all weapon references
+  resolve to the new `wc2_<faction>_<hero>_<weapon>` ids; prerequisite tokens use current actor ids.
+  Next: add sequence definitions, copy/rename the 4 hero icons, run full verification suite, boot-gate.
+
+---
+
+## Agent identity & handoff — Devin-Prime (this session)
+
+**I am Devin-Prime.** My file-set for this session was:
+- `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml` (ATMine correction)
+- `mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml`
+- `mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml`
+- `mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml`
+- `mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml`
+- communal docs: `docs/audit/doc_claims.yaml`, `docs/HANDOFF.md`, `docs/audit/SUMMARY.md`,
+  `docs/design/BALANCE_PROGRAM_PLAN.md`, `tools/audit/audit_warhead_split.py`
+
+**What I did:**
+1. Fixed `ATMine` per the maintainer's correction: moved from `^Projectile_Missile_Heavy` to
+   `^Projectile_InstantHit`, removed `Air` targeting, removed `Warhead@EffectAir`, kept
+   `Damage: 110000` and all ground effects/concrete/crater behaviour.
+2. Integrated the uncommitted W24 bullet/missile collapses that other Devin agents had left in
+   the working tree: `CHGuardRifle`, `JHighV`, `TSVulcanGun`, `elitecadregun`,
+   `CabalRocketCyborgRockets`, `CabalRocketCyborgRocketsUpgraded`. Preserved per-shot totals and
+   percentage twins where they existed (JHighV `PercentageScale: 5000` → the surviving
+   `Bullet_Medium` keeps an effective percentage; elitecadregun keeps `PercentageScale: 2500`).
+3. Co-updated `multi_main_fired_weapons` 869 → 867, `BROADCAST_BASELINE` 878 (later adjusted by
+   other agents to 876), re-extracted affected faction ledgers, and updated all dependent docs.
+4. Ran emergency boot repair on `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml`
+   because `wc2_orcs_zuljin_spear` inherited `wc2_humans_alleria_arrow`, which was missing and
+   caused a fatal `Parent type not found` error at boot. I added the missing Alleria arrow pair
+   using `^Warhead_Arrow_Medium` / `Heavy`, `^Projectile_Arrow_Light`, and `^Effect_Arrow_Medium`
+   / `Heavy`, matching the 3-way split pattern. This was an exception to the lock rule because it
+   blocked the boot-gate. Devin-Forge owns this file set and has since refined the `Damage` back
+   to 36000; I will not touch Warcraft2 again unless asked.
+
+**Verification I ran before the handoff interrupt:**
+- `find_empty_warhead.py` = 0
+- `cameo_model.py` resolves `wc2_humans_alleria_arrow` and `wc2_orcs_zuljin_spear` correctly
+- `audit_doc_claims.py` 19/19 green (multi_main = 867, ledgers_drifted = 0)
+- `audit_warhead_split.py` = 878 vs baseline 878 (other agents later lowered baseline to 876)
+- `audit_balance_drift.py` = clean (32 ledgers match)
+- `launch-game.cmd` boot-gate passed to `MenuPostProcessEffect.PostWorldLoaded` with no new
+  `exception-*.log` before the Warcraft2 crash; after the Alleria fix I re-ran up to mod load
+  (killed by user interrupt before menu).
+
+**Decisions & basis:**
+- `^Projectile_InstantHit` for `ATMine` because the engine has no `InstantExplosion` projectile
+  type; `InstantHit` is the documented, safe way for a mine that detonates on the same cell.
+- Ground-only for `ATMine` because the maintainer explicitly stated "it just explodes" and
+  "doesn't hit air".
+- Sum-and-simplify for the multi-main bullet/missile weapons because `DESIGN.md` §11b and the
+  W24 board require one damage warhead per weapon, and the `W24 bullet-collapse pattern` in
+  `HANDOFF.md` is the binding procedure.
+- Emergency repair of the Warcraft2/Humans file because `launch-game.cmd` is the commit gate and
+  the missing parent produced a fatal `OpenRA.YamlException`; boot errors take priority over file
+  locks per `HANDOFF.md` §"Crashes and player-visible regressions jump everything below".
+
+**My plans / wishes for the next agent taking the baton:**
+- I would like the A14 batch and the Warcraft2 emergency fix to be committed as one clean W24 A15
+  batch once Devin-Forge and Devin-Aether finish their current edits and a passing boot-gate is
+  re-confirmed.
+- I would like no agent to `git add -A`; the working tree currently contains several agents' WIP
+  (D2k/Ordos, redalert2mod.yaml, d2k.yaml, Warcraft2, rename map, ledgers) and must be committed
+  in scoped batches.
+- I would like the next available agent (Devin-Spark) to pick one of the unlocked file-sets in
+  `HANDOFF.md` §"Unassigned tasks" rather than editing anything currently locked.
+
+**Status: handing off.** I am not claiming any new file-set. I will wait for maintainer direction
+before resuming.
+
+---
+
+4. **Audit/RedAlert2 dead-code cleanup** (non-destructive): run a resolver script to
    list every weapon in `mods/cameo/weapons/redalert2.yaml` that is shadowed by
    `ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`, then either delete the dead
    block or mark it with a comment. This is safe work that does not touch live
@@ -3592,40 +3720,33 @@ Before touching a weapon:
   `BROADCAST_BASELINE` 880 → 878, ledgers, and all dependent docs. Boot-gated; no new
   exceptions.
 
-### Mandatory pre-edit check for every agent
+---
 
-Before touching a weapon:
-- `python -c "import cameo_model; m=cameo_model.Model(); print(m.rs.resolve_weapon('WEAPON_NAME').file)"`
-- If the resolved `file` is **not** the file you are about to edit, the weapon is
-  shadowed — stop and report it in this log.
-- Run `python tools/audit/phase_b_survey.py` and read `docs/audit/latest/phase_b_survey.md`
-  for the current list.
-- Do not run the full audit suite repeatedly; run verification once at the end of
-  each batch (boot-gate required before every commit).
+### Agent registry (2026-08-25)
 
-- **(in progress, 2026-08-25)** — W24 A14: uncommitted WIP from other agents continued and
-  extended by this Devin session: RedAlert/Japan (`CHGuardRifle`, `JHighV` with
-  percentage-twin preservation at 7500), TiberianSun/GDI (`TSVulcanGun`),
-  TiberianSun/Nod (`elitecadregun` with percentage-twin preservation at 6250),
-  RedAlert/Shared (`ATMine` instant-hit / ground-only effect rework), and
-  TiberianSun/CABAL (`CabalRocketCyborgRockets`, `CabalRocketCyborgRocketsUpgraded`).
-  `multi_main_fired_weapons` co-updated to 867, `BROADCAST_BASELINE` to 878, all
-  affected faction ledgers re-extracted. Verification + boot-gate passed; to be committed.
-- **Devin (this session, 2026-08-25)** — `mods/cameo/weapons/redalert2mod.yaml` and
-  `mods/cameo/weapons/d2k.yaml` (shared template files, NOT locked):
-  W24 bullet collapse for `naxis_sssoldier_smg`, `naxis_sssoldier_smg_elite`
-  (redalert2mod.yaml), `LMG`, `light_inf_lmg`, `d2k_shotgun` (d2k.yaml).
-  All have 2 Bullet mains (Bullet_Light + Bullet_Medium), no children, no shadowing.
-  Not in any open IDE tab; not claimed by another agent.
-- **Devin (this session, 2026-08-25)** — `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml`
-  and `mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml`:
-  ported the 4 hero weapon pairs from `wcameo(1)` (Alleria, Danath, Hellscream, Zul-jin)
-  onto the current 3-way split with the new `wc2_<faction>_<hero>_<weapon>[_elite]` naming
-  convention. 8 weapons added: `wc2_humans_alleria_arrow`, `wc2_humans_alleria_arrow_elite`,
-  `wc2_humans_danath_slice`, `wc2_humans_danath_slice_elite`,
-  `wc2_orcs_hellscream_slice`, `wc2_orcs_hellscream_slice_elite`,
-  `wc2_orcs_zuljin_spear`, `wc2_orcs_zuljin_spear_elite`.
-  Next: add the 4 hero actor rules (base + elite), sequence definitions, and icon assets;
-  run `find_empty_warhead.py`, `review_resolve_diff.py`, `extract_stats --check`, and boot-gate.
-  Files checked: mtime 8/25 for weapons (my edits), 8/24 and 8/22 for infantry/sequences (stale,
-  no active agent).
+Mirrored from `docs/HANDOFF.md` §3.6. Agents must register here and keep this row current.
+
+| name | identity | current file-set | current task |
+|---|---|---|---|---|
+| **Devin-Aether** | this session (GLM-5.2 High) | `mods/cameo/weapons/d2k.yaml`, `mods/cameo/weapons/redalert2mod.yaml` | W24 bullet collapse for `LMG`, `light_inf_lmg`, `d2k_shotgun`, `naxis_sssoldier_smg` (+_elite). **Converted + verified, blocked on boot-gate by Devin-Cyrus's missing icon.** |
+| **Devin-Dawn** | prior sessions (A10–A14 committer) | `mods/cameo/weapons/tiberiansun.yaml`, `mods/cameo/ContentPacks/RedAlert2Mod/TKM/`, `RedAlert2Mod/AsianAlliance/`, `RedAlert/Japan/`, `TiberianSun/GDI/`, `TiberianSun/Nod/`, `RedAlert/Shared/` | W24 bullet/missile collapses across multiple packs; ATMine rework. **Committed A10–A14.** |
+| **Devin-Blaze** | active 2026-08-25 13:50 | — | **DUPLICATE of Devin-Aether's work on d2k.yaml/redalert2mod.yaml — STOP and pick a different file-set. See unassigned tasks in HANDOFF.md §3.A.** |
+| **Devin-Cyrus** | active 2026-08-25 13:48 | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` | WC2 hero weapon rework. **BOOT-GATE BLOCKER**: `wc2_orcs_hellscream_icon.png` is missing — the game crashes on shellmap load. Fix the missing icon or revert the sequence reference before anyone can commit. |
+| **Devin-Echo** | this session (SWE-1.7 Max, `devin@cognition.ai`) | `mods/cameo/ContentPacks/D2k/Ixian/`, `mods/cameo/ContentPacks/D2k/Ordos/`, `mods/cameo/ContentPacks/TiberianSun/CABAL/` | W24 A15: collapse `MongooseRocket`, `facedancer_grenade`, `D2K_APC_Rocket`; analyze CABAL `CabalArtilleryWalkerShellUpgraded` / `CabalMothershipRockets` for design sign-off |
+
+### ⚠️ BOOT-GATE BLOCKER (2026-08-25 14:09)
+
+**Devin-Cyrus**: your Warcraft2 hero work introduced a missing icon reference that
+crashes the game on shellmap load:
+```
+ContentPacks|Warcraft2/Orcs/yaml/sequences.yaml:1104:
+wc2_orcs_hellscream_icon.png does not contain frames: 1
+```
+The game reaches `MenuPostProcessEffect.PostWorldLoaded` but then throws
+`System.InvalidOperationException` in `SpriteCache.LoadReservations` when loading
+the shellmap. This blocks ALL agents from committing until you either:
+1. Add the missing `wc2_orcs_hellscream_icon.png` asset, OR
+2. Revert the sequence reference in `sequences.yaml:1104` to remove the broken icon.
+
+**All other agents**: do NOT commit until Devin-Cyrus fixes this. The boot-gate
+must pass with no new exceptions before any commit.

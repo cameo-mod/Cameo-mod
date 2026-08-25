@@ -678,22 +678,15 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5475",
       "reloaddelay": "20",
@@ -701,13 +694,11 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light"
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg",
       "weapon_class_source": "template"
@@ -763,22 +754,15 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5475",
       "reloaddelay": "20",
@@ -786,13 +770,11 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light",
        "^Projectile_Bullet_Light",
        "^Effect_Bullet_Light"
       ],
       "warheads": [
-       "^Warhead_Bullet_Medium",
-       "^Warhead_Bullet_Light"
+       "^Warhead_Bullet_Medium"
       ],
       "weapon": "light_inf_lmg",
       "weapon_class_source": "template"

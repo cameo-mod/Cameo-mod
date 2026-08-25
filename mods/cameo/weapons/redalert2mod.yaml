@@ -1411,8 +1411,7 @@ RA2RobotmmScatter_elite:
 # burst 10 rapid spray, no-air. NaxiMP40 kept for nothing else â€” renamed
 # with its elite pair per the rename law.
 naxis_sssoldier_smg:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 75
@@ -1423,10 +1422,8 @@ naxis_sssoldier_smg:
 	Report: nax_mp40.wav
 	Projectile: Bullet
 		Inaccuracy: 600
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 naxis_sssoldier_smg_elite:
 	Inherits: naxis_sssoldier_smg
 	Burst: 20

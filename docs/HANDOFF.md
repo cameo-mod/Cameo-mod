@@ -93,8 +93,8 @@ are still scheduled to change across most of the roster. Pricing now means prici
 are about to be replaced.
 
 ```
-W24  one damage warhead per weapon          867 fired weapons still carry 2+
- └─> W23  retrofit the legacy templates      1124 direct inheritors left; 1248 fired
+W24  one damage warhead per weapon          848 fired weapons still carry 2+
+ └─> W23  retrofit the legacy templates      1124 direct inheritors left; 1256 fired
  │        (its old "33-collision" blocker    weapons already reach a ^Warhead_* family
  │         is DISSOLVED — W24 removes it)
  └─> A5   retire the remaining inline-Versus weapons onto templates
@@ -201,25 +201,27 @@ Crashes and player-visible regressions jump everything below.
 
 | Agent name | Status | Current task | Files claimed |
 |---|---|---|---|
-| **Devin-Prime** | Active | W24 A14 batch: ATMine correction, Japan/GDI/Nod/CABAL bullet+missile collapses, percentage-twin fixes | `mods/cameo/weapons/tiberiansun.yaml`, `RedAlert/Shared/`, `RedAlert/Japan/`, `TiberianSun/GDI/`, `TiberianSun/Nod/`, `TiberianSun/CABAL/` |
-| **Devin-Aether** (this agent) | Active | W24 bullet collapse for shared template files: `naxis_sssoldier_smg` (+_elite), `LMG`, `light_inf_lmg`, `d2k_shotgun` | `mods/cameo/weapons/redalert2mod.yaml`, `mods/cameo/weapons/d2k.yaml` |
-| **Devin-Forge** | Active | D2k/Ordos missile collapse (`D2K_APC_Rocket` 3-main → 1 `MissileAP_Heavy` 24000) + Warcraft2 hero weapon fixes (Alleria FirepowerMultiplier, Hellscream slice) | `mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml`, `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml`, `mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml` |
-| **Devin-Quill** | Active | Unknown — check `DEVELOPMENT_LOG.md` for latest claim. Likely working on rename maps or audit tooling. | `tools/rename/rename_map_ra1_soviets.yaml` (uncommitted) |
-| **Devin-Spark** | Available | Not yet claimed. Pick from the unassigned tasks below. | — |
+| **Devin-Dawn** (was Devin-Prime) | Committed A10–A14 | W24 bullet/missile collapses across multiple packs; ATMine rework. Work is committed. | `mods/cameo/weapons/tiberiansun.yaml`, `RedAlert/Shared/`, `RedAlert/Japan/`, `TiberianSun/GDI/`, `TiberianSun/Nod/`, `TiberianSun/CABAL/`, `RedAlert2Mod/TKM/`, `RedAlert2Mod/AsianAlliance/` |
+| **Devin-Aurora** (was Devin-Aether, this agent, SWE-1.7 Max) | Active | PPM credit attribution (Orion Tank, Land Carrier, Guardian Tank); moving to unassigned StarCraft Protoss/Zerg bullet collapses (HANDOFF §1). | `mods/cameo/ContentPacks/StarCraft/*/yaml/`, `mods/cameo/credits.txt`, `mods/cameo/bits/ra2/credits.txt`, `mods/cameo/bits/ra2/voxel2/credits.txt` |
+| **Devin-Cyrus** (was Devin-Forge) | Active — **BOOT-GATE BLOCKER** | WC2 hero weapon rework. Missing `wc2_orcs_hellscream_icon.png` crashes the game on shellmap load. Must fix before anyone can commit. | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` |
+| **Devin-Echo** (SWE-1.7 Max) | Active | W24 A15: collapse `MongooseRocket`, `facedancer_grenade`, `D2K_APC_Rocket` in D2k/Ixian + D2k/Ordos + CABAL. | `mods/cameo/ContentPacks/D2k/Ixian/`, `D2k/Ordos/`, `TiberianSun/CABAL/` |
+| **Devin-Blaze** | **DUPLICATE — STOP** | Was assigned to d2k.yaml/redalert2mod.yaml — same files as Devin-Aether. Must pick a different file-set from the unassigned tasks below. | — |
 
 #### Locked files (DO NOT TOUCH — another agent owns these)
 
 - `mods/cameo/weapons/weapons.yaml` — template generator/family work; needs explicit sign-off.
-- `mods/cameo/weapons/tiberiansun.yaml` — Devin-Prime owns TSLaser90mm family work.
+- `mods/cameo/weapons/tiberiansun.yaml` — Devin-Dawn owns TSLaser90mm family work.
 - `mods/cameo/weapons/tiberiandawn.yaml` — may be open in an IDE tab.
 - `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml` — may be open in an IDE tab.
-- `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml` — Devin-Prime owns ATMine.
+- `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml` — Devin-Dawn owns ATMine.
 - `mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml` — may be open in an IDE tab.
-- `mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml` — Devin-Forge owns D2K_APC_Rocket.
-- `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml` — Devin-Forge owns Alleria fix.
-- `mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml` — Devin-Forge owns Hellscream.
+- `mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml` — Devin-Echo owns D2K_APC_Rocket.
+- `mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml` — Devin-Echo owns MongooseRocket/facedancer_grenade.
+- `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml` — Devin-Cyrus owns Alleria fix.
+- `mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml` — Devin-Cyrus owns Hellscream.
+- `mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml` — Devin-Echo owns CABAL collapses.
 
-#### Unassigned tasks for the next available agent (Devin-Spark or anyone free)
+#### Unassigned tasks for the next available agent (Devin-Blaze or anyone free)
 
 1. **StarCraft Protoss/Zerg bullet collapses** (`mods/cameo/ContentPacks/StarCraft/*/yaml/weapons.yaml`):
    Search for weapons with 2+ Bullet_Light + Bullet_Medium mains. Convert using the
@@ -256,6 +258,25 @@ Crashes and player-visible regressions jump everything below.
    (`git status --short` + `git diff --name-only`).
 4. **After committing**: update your claim in `DEVELOPMENT_LOG.md` to say "COMMITTED"
    with the commit hash.
+
+#### Devin-Prime handoff message (2026-08-25)
+
+I am **Devin-Prime**, the agent that handled W24 A14. My work is currently in handoff. The
+A14 changes are verified and staged in the history, but the working tree also contains
+uncommitted work from other agents (D2k/Ordos `D2K_APC_Rocket`, `redalert2mod.yaml`, `d2k.yaml`,
+Warcraft2 hero weapons, the rename map, and the `BROADCAST_BASELINE` 876 ratchet). **Do not**
+`git add -A`; wait for each owning agent to finish and then commit in scoped batches.
+
+If you are the next agent and your file-set is free, the safest next picks are in the
+"Unassigned tasks" list above — especially the **StarCraft Protoss/Zerg bullet collapses** or
+**RedAlert2Mod/Naxis** — because they are not currently claimed. If you touch a claimed or
+locked file, first read `DEVELOPMENT_LOG.md` "Agent identity & handoff" and the latest
+`git status --short` to see who owns it.
+
+My single emergency exception: I had to repair `ContentPacks/Warcraft2/Humans/yaml/weapons.yaml`
+because the new `wc2_orcs_zuljin_spear` inherited a missing `wc2_humans_alleria_arrow`, which
+caused `OpenRA.YamlException: Parent type ... not found` and blocked the boot-gate. Devin-Forge
+owns Warcraft2 and has since refined the Alleria numbers; I will not modify that file set again.
 
 #### The established W24 bullet-collapse pattern (follow this exactly)
 
@@ -447,8 +468,8 @@ holds.
 
 | step | what | how you know it moved |
 |---|---|---|
-| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` in `doc_claims.yaml` goes DOWN from 867 |
-| **W23** | retrofit the legacy templates onto `^Warhead_*` families | `unconverted_template_inheritors` goes DOWN from 1124; `warhead_family_reach` goes UP from 1248 |
+| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` in `doc_claims.yaml` goes DOWN from 848 |
+| **W23** | retrofit the legacy templates onto `^Warhead_*` families | `unconverted_template_inheritors` goes DOWN from 1110; `warhead_family_reach` goes UP from 1256 |
 | **A5** | retire the remaining inline-`Versus` weapons onto templates | rule 4 — `Versus` only in `^Warhead_*` |
 
 Method for one W24 cluster, in order (this is the procedure that has worked for seven clusters
@@ -623,7 +644,7 @@ another agent claimed it in the last 30 minutes, do not touch it.
 | **Devin-Dawn** | prior sessions (A10–A14 committer) | `mods/cameo/weapons/tiberiansun.yaml`, `mods/cameo/ContentPacks/RedAlert2Mod/TKM/`, `RedAlert2Mod/AsianAlliance/`, `RedAlert/Japan/`, `TiberianSun/GDI/`, `TiberianSun/Nod/`, `RedAlert/Shared/` | W24 bullet/missile collapses across multiple packs; ATMine rework |
 | **Devin-Blaze** | active 2026-08-25 13:50 | `mods/cameo/weapons/d2k.yaml`, `mods/cameo/weapons/redalert2mod.yaml` | W24 bullet collapse for `LMG`, `light_inf_lmg`, `d2k_shotgun`, `naxis_sssoldier_smg` |
 | **Devin-Cyrus** | active 2026-08-25 13:48 | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` | WC2 hero weapon rework (Alleria FirepowerMultiplier, Hellscream slice) |
-| **Devin-???** | unknown 4th/5th agent | TBD | TBD — register in the log if you are reading this |
+| **Devin-Echo** | this session (SWE-1.7 Max, `devin@cognition.ai`) | `mods/cameo/ContentPacks/D2k/Ixian/`, `mods/cameo/ContentPacks/D2k/Ordos/`, `mods/cameo/ContentPacks/TiberianSun/CABAL/` | W24 A15: collapse `MongooseRocket`, `facedancer_grenade`, `D2K_APC_Rocket` to existing D2k 3-way families; analyze CABAL `CabalArtilleryWalkerShellUpgraded` / `CabalMothershipRockets` for design sign-off.
 
 **Rules for all agents:**
 1. Pick a unique name (`Devin-<word>`) and register in `DEVELOPMENT_LOG.md` before editing.

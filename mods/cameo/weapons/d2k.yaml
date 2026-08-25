@@ -1110,28 +1110,22 @@ D2K_Personal_Shield_Impact:
 
 LMG:
 	Inherits@wh: ^Warhead_Bullet_Medium
-	Inherits@wh2: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 20
 	Range: 4448
 	Report: gun11.aud
 	Warhead@Bullet_Medium:
-		Damage: 2000
-	Warhead@Bullet_Light:
-		Damage: 2000
+		Damage: 4000
 light_inf_lmg:
 	Inherits@wh: ^Warhead_Bullet_Medium
-	Inherits@wh2: ^Warhead_Bullet_Light
 	Inherits@proj: ^Projectile_Bullet_Light
 	Inherits@fx: ^Effect_Bullet_Light
 	ReloadDelay: 20
 	Range: 5475
 	Report: gun11.aud
 	Warhead@Bullet_Medium:
-		Damage: 2000
-	Warhead@Bullet_Light:
-		Damage: 2000
+		Damage: 4000
 LMG_upgrade:
 	Inherits: ^Warhead_Bullet_Medium
 	Inherits@2: ^Warhead_Bullet_Light

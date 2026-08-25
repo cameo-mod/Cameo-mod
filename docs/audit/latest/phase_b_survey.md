@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-08
-Total concrete weapons on old families: 276
+Total concrete weapons on old families: 274
 Single old-family with new inherits (Phase B completion): 0
 Pure single old-family (mechanical Phase A candidates): 7
-Mixed old-family (Phase B maintainer sign-off): 269 in 206 groups
+Mixed old-family (Phase B maintainer sign-off): 267 in 205 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `SteelMakoGun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Railgun_Heavy=2000, CannonHE_Medium=2000, Effect=0
@@ -48,15 +48,11 @@ Mixed old-family (Phase B maintainer sign-off): 269 in 206 groups
 ### HeavyCannon, HeavyMissile, MediumCannon, MediumFlameWeapon, MediumMissile, ShrapnelWeapon, TeslaChargedWeapon, TeslaWeapon (1 weapons)
 - `EMPGrenade` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: EMPUnit(32000) | TeslaChargedWeapon=8000, TeslaChargedExtraDamage=4000, TeslaChargedWeaponPercentage=4, TeslaWeapon=8000, TeslaExtraDamage=4000, TeslaWeaponPercentage=4, MediumFlameWeapon=8000, MediumFlameWeaponPercentage=4, ShrapnelWeapon=8000, ShrapnelWeaponFriendlyFire=4000, ShrapnelWeaponPercentage=4, HeavyCannon=8000, HeavyCannonPercentage=4, MediumCannon=8000, MediumCannonPercentage=4, MediumMissile=8000, MediumMissilePercentage=4, HeavyMissile=8000, HeavyMissilePercentage=4, EMPUnit=32000, Effect=0 | → collapse to EMPUnit
 
-### Chaingun, FlakWeapon, Grenade, MediumMissile, RailgunWeapon, ShrapnelWeapon, TankDestroyerCannon (2 weapons)
-- `MongooseRocket` (ContentPacks\D2k\Ixian\yaml\weapons.yaml) | dominant: Grenade(4000) | Grenade=4000, GrenadeFriendlyFire=2000, GrenadePercentage=2, ShrapnelWeapon=4000, ShrapnelWeaponFriendlyFire=2000, ShrapnelWeaponPercentage=2, Chaingun=4000, ChaingunPercentage=2, FlakWeapon=4000, FlakWeaponPercentage=2, TankDestroyerCannon=4000, TankDestroyerCannonPercentage=2, RailgunWeapon=4000, RailgunWeaponPercentage=2, MediumMissile=4000, MediumMissilePercentage=2, MissileAP_Heavy=4000, Effect=0 | → collapse to Grenade
+### Chaingun, FlakWeapon, Grenade, MediumMissile, RailgunWeapon, ShrapnelWeapon, TankDestroyerCannon (1 weapons)
 - `ReconRangerRecoillessGun` (ContentPacks\RedAlert\Allies\yaml\weapons.yaml) | dominant: Grenade(4000) | Grenade=4000, GrenadeFriendlyFire=2000, GrenadePercentage=2, ShrapnelWeapon=4000, ShrapnelWeaponFriendlyFire=2000, ShrapnelWeaponPercentage=2, Chaingun=4000, ChaingunPercentage=2, FlakWeapon=4000, FlakWeaponPercentage=2, TankDestroyerCannon=4000, TankDestroyerCannonPercentage=2, RailgunWeapon=4000, RailgunWeaponPercentage=2, MediumMissile=4000, MediumMissilePercentage=2, MissileAP_Heavy=4000, Effect=0 | → collapse to Grenade
 
 ### FlakWeapon, Grenade, HeavyAAWeapon, HeavyMissile, MediumMissile, ShrapnelWeapon, TankDestroyerCannon (1 weapons)
 - `TowerMissile` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: TankDestroyerCannon(2000) | TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, HeavyAAWeapon=2000, HeavyAAWeaponPercentage=1, HeavyMissile=2000, HeavyMissilePercentage=1, MediumMissile=2000, MediumMissilePercentage=1, Effect=0, EffectAir=0 | → collapse to TankDestroyerCannon
-
-### Grenade, HeavyBomb, LightFlameWeapon, LightMissile, MediumChemicalWeapon, MediumMissile, ShrapnelWeapon (1 weapons)
-- `facedancer_grenade` (ContentPacks\D2k\Ordos\yaml\weapons.yaml) | dominant: LightFlameWeapon(20000) | LightFlameWeapon=20000, LightFlameWeaponPercentage=10, MediumChemicalWeapon=20000, MediumChemicalWeaponPercentage=10, HeavyBomb=20000, HeavyBombPercentage=10, Grenade=20000, GrenadeFriendlyFire=10000, GrenadePercentage=10, ShrapnelWeapon=20000, ShrapnelWeaponFriendlyFire=10000, ShrapnelWeaponPercentage=10, CannonHE_Heavy=20000, LightMissile=20000, LightMissilePercentage=10, MediumMissile=20000, MediumMissilePercentage=10, MissileAP_Heavy=20000, Smudge=0, Effect=0 | → collapse to LightFlameWeapon
 
 ### HeavyAAWeapon, HeavyBomb, HeavyChemicalWeapon, HeavyFlameWeapon, HeavyMissile, LaserWeapon, RailgunWeapon (1 weapons)
 - `PhobosLaser` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | dominant: RailgunWeapon(6000) | RailgunWeapon=6000, RailgunWeaponPercentage=3, HeavyMissile=6000, HeavyMissilePercentage=3, CannonHE_Heavy=6000, HeavyAAWeapon=6000, HeavyAAWeaponPercentage=3, HeavyBomb=6000, HeavyBombPercentage=3, HeavyChemicalWeapon=6000, HeavyChemicalWeaponPercentage=3, HeavyFlameWeapon=6000, HeavyFlameWeaponPercentage=3, LaserWeapon=6000, LaserWeaponPercentage=3, EffectAir=0 | → collapse to RailgunWeapon

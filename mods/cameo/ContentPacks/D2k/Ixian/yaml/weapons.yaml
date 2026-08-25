@@ -1167,76 +1167,51 @@ d2k_projections:
 		Delay: 10
 
 MongooseRocket:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^Chaingun
-	Inherits@4: ^FlakWeapon
-	Inherits@5: ^TankDestroyerCannon
-	Inherits@6: ^RailgunWeapon
-	Inherits@7: ^MediumMissile
-	Inherits@8: ^D2KRocket
+	Inherits: ^D2KRocket
 	ReloadDelay: 64
 	Range: 6183
 	Report: d2k_buggy_rocket.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
-		Acceleration: 6
-		Speed: 666
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		ContrailLength: 0
+		Shadow: true
+		LaunchAngle: 125
 		MaximumLaunchSpeed: 222
 		MinimumLaunchSpeed: 222
+		Speed: 666
+		CloseEnough: 500
+		Acceleration: 6
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 22
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
 	Warhead@MissileAP_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@Effect: CreateEffect
+		Damage: 32000
+		PercentageScale: 10000
+	Warhead@Effect:
 		Explosions: d2k_rocket_explosion
+		ImpactSounds: xplobig4.aud
 		ExplosionPalette: effect75alpha
+		ImpactActors: false
+		ValidTargets: Ground, Air
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge

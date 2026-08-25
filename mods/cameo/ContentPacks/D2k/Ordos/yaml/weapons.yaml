@@ -306,8 +306,6 @@ D2K_Rocket_Trooper_AA:
 		ValidTargets: Air
 		Damage: 10000
 D2K_APC_Rocket:
-	Inherits@wh: ^Warhead_MissileAP_Light
-	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
 	Inherits: ^D2KRocket
@@ -320,15 +318,9 @@ D2K_APC_Rocket:
 		MinimumLaunchSpeed: 222
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 22
-	Warhead@MissileAP_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 24000
 D2K_APC_Rocket_AA:
 	Inherits: D2K_APC_Rocket
 	ValidTargets: Air
@@ -623,17 +615,7 @@ Laboratory_Bioball:
 		InvalidTargets: Water, Structure
 
 facedancer_grenade:
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^LightFlameWeapon
-	Inherits@5: ^MediumChemicalWeapon
-	Inherits@6: ^HeavyBomb
-	Inherits@7: ^Grenade
-	Inherits@8: ^ShrapnelWeapon
-	Inherits@9: ^LightMissile
-	Inherits@10: ^MediumMissile
-	Inherits@11: ^D2KMissile
+	Inherits: ^D2KRocket
 	ReloadDelay: 90
 	Range: 7250
 	MinRange: 1450
@@ -651,99 +633,44 @@ facedancer_grenade:
 		Inaccuracy: 5
 		InaccuracyType: PerCellIncrement
 		Shadow: true
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		DamageCalculationType: ClosestTargetablePosition
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 10
-		DamageCalculationType: ClosestTargetablePosition
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		DamageCalculationType: ClosestTargetablePosition
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 10
-		DamageCalculationType: ClosestTargetablePosition
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@HeavyBombPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 10
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 10
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 10
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@LightMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 10
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		DamageCalculationType: ClosestTargetablePosition
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 10
-		DamageCalculationType: ClosestTargetablePosition
+		Arm: 0
+		AllowSnapping: true
+		HorizontalRateOfTurn: 80
+		VerticalRateOfTurn: 20
+		TrailInterval: 1
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 400
+		Acceleration: 3
+		HomingActivationDelay: 3
+		RangeLimit: 33333
+		PointDefenseTypes: Missile
+		CruiseAltitude: 1000
 	Warhead@MissileAP_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
+		Damage: 180000
+		PercentageScale: 10000
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater
 		InvalidTargets: Vehicle, Structure
-	Warhead@Effect: CreateEffect
+		Chance: 15
+	Warhead@Effect:
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLSML4.WAV
+		ExplosionPalette: effect75alpha
 		ImpactActors: false
+		ValidTargets: Ground, Air
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Concrete:
+		Damage: 750
 
 GrenDeath:
 	Warhead@EnemyDam: SpreadDamage
