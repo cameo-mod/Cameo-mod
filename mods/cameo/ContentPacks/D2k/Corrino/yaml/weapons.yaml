@@ -1,6 +1,10 @@
 # Corrino faction-specific weapons.
 # Sardaukar Bazooka uses D2K_Rocket_Trooper and D2K_TowerMissile from shared/global weapons.
 
+corrino_cannon:
+	Inherits: ^D2K_Cannon
+	ReloadDelay: 55
+
 corrino_buggy_gun:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Light

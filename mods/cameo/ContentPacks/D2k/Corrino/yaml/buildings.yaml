@@ -93,8 +93,8 @@ corrino_heavyfactory:
 		Image: heavy.harkonnen
 	Buildable:
 		Prerequisites: ~corrino_constructionyard, corrino_refinery
-		Description: template_factory.description
-		IconPalette: player
+		Description: Produces heavy vehicles.
+		IconPalette: d2kunit
 	ProvidesPrerequisite@vehicle_production:
 		Prerequisite: corrino_vehicle_production
 	ProvidesPrerequisite@corrino_combat:
@@ -107,6 +107,7 @@ corrino_lightfactory:
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^2x2Shape
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Buildable:
 		Prerequisites: ~corrino_constructionyard, corrino_refinery
 		Description: Produces light vehicles.
