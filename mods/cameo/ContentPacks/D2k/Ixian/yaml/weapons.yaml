@@ -33,10 +33,8 @@ IxianCombatTankCannon:
 	Warhead@CannonAP_Light:
 		Damage: 4000
 	Warhead@CannonHE_Heavy:
-		Damage: 4000
-	Warhead@CannonHE_Medium:
-		PercentageScale: 10000
-		Damage: 4000
+		Damage: 8000
+	-Warhead@CannonHE_Medium:
 HeavyIxianCombatTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -52,10 +50,8 @@ HeavyIxianCombatTankCannon:
 	Warhead@CannonAP_Light:
 		Damage: 6000
 	Warhead@CannonHE_Heavy:
-		Damage: 6000
-	Warhead@CannonHE_Medium:
-		PercentageScale: 10000
-		Damage: 6000
+		Damage: 12000
+	-Warhead@CannonHE_Medium:
 DuelistTankCannon:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -106,10 +102,8 @@ DuelistTankCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 7
 	Warhead@CannonHE_Heavy:
-		Damage: 14000
-	Warhead@CannonHE_Medium:
-		PercentageScale: 10000
-		Damage: 14000
+		Damage: 28000
+	-Warhead@CannonHE_Medium:
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
@@ -172,8 +166,7 @@ D2K_155mm2:
 	-Warhead@Effect2:
 
 D2K_155mm3:
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Demolition_Heavy
+	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@wh3: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
 	Inherits@fx: ^Effect_Demolition_Heavy_D2K_155mm
@@ -194,12 +187,10 @@ D2K_155mm3:
 		InaccuracyType: PerCellIncrement
 		Image: d2k_155mm
 		Palette: d2keffect
-	Warhead@Demolition_Light:
-		Damage: 8000
 	Warhead@Concussion_Medium:
 		Damage: 8000
 	Warhead@Demolition_Heavy:
-		Damage: 8000
+		Damage: 16000
 	Warhead@Concrete: DamagesConcrete
 		Damage: 250
 
@@ -240,23 +231,19 @@ D2K_Rocket_Trooper2:
 		Damage: 8000
 D2K_Rocket_Trooper1:
 	Inherits@wh: ^Warhead_Flak_Medium
-	Inherits@wh2: ^Warhead_MissileAP_Light
-	Inherits@wh3: ^Warhead_MissileAP_Heavy
+	Inherits@wh2: ^Warhead_MissileAP_Heavy
 	Inherits@proj: ^Projectile_Missile_Light_D2K_Rocket_Trooper1
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
 	ReloadDelay: 64
 	Range: 6502
 	Report: ROCKET1.WAV
 	ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 16000
 D2K_TowerMissile:
 	Inherits: ^D2KMissile
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K_TowerMissile
@@ -537,20 +524,13 @@ RashidanGun_upgrade:
 		Damage: 1
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 RaiderGuns:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 40
@@ -559,12 +539,9 @@ RaiderGuns:
 	Range: 6400
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 RaiderGuns_upgrade:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
