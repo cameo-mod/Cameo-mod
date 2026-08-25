@@ -65,7 +65,8 @@ combat_tank.harkonnen:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
 	Cloak@TDcloak:
-		Palette: d2kcloak
+		CloakStyle: Palette
+		CloakedPalette: d2kcloak
 	-WithDeathAnimation:
 	RenderSprites:
 		Image: combat_tank.harkonnen
@@ -135,6 +136,107 @@ missile_tank:
 
 devastator:
 	Inherits@D2KT: ^D2KTank
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@EXT: ^ExternalConditions
+	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
+	Inherits@AntiTank: ^PrioritizeTank
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 100
+		Prerequisites: ~heavy.harkonnen, research_centre, ~faction.harkonnen
+		BuildDuration: 1000
+		BuildDurationModifier: 100
+		Description: Super Heavy Tank\n  Strong vs Tanks\n  Weak vs Artillery
+		IconPalette: d2kunit
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Devastator
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 150000
+	ChangesHealth:
+		Step: 60
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+	Armor:
+		Type: Heavy
+	Voiced:
+		VoiceSet: D2KDevastator
+	Mobile:
+		TurnSpeed: 48
+		Speed: 33
+		Locomotor: heavytracked
+		RequiresCondition: !overload
+		PauseOnCondition: notmobile
+	AutoCarryable:
+		RequiresCondition: !overload
+	RevealsShroud:
+		Range: 4c768
+	Armament:
+		Weapon: DevBullet
+		LocalOffset: 640,0,32
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+	AttackFrontal:
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+		IgnoreOffset: true
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeLarge
+		EmptyWeapon: D2KUnitExplodeLarge
+		RequiresCondition: !overload
+	SpawnActorOnDeath:
+		Actor: devastator.husk
+		OwnerType: InternalName
+		EffectiveOwnerFromOwner: true
+	FireWarheadsOnDeath@OVERLOAD:
+		Weapon: PlasmaExplosion
+		EmptyWeapon: PlasmaExplosion
+		RequiresCondition: meltdown
+	GrantConditionOnDeploy@REACTOR:
+		DeployedCondition: overload
+		PauseOnCondition: overload
+	WithIdleOverlay@OVERLOAD:
+		Sequence: active
+		RequiresCondition: overload
+	WithIdleOverlay@OVERLOAD2:
+		Sequence: active-2
+		RequiresCondition: overload
+	KillsSelf@MELTDOWN:
+		Delay: 180
+		RequiresCondition: overload
+		GrantsCondition: meltdown
+	ChangesHealth:
+		Step: 50
+		Delay: 3
+		StartIfBelow: 50
+	Selectable:
+		DecorationBounds: 1280, 1280, 0, 0
+	RenderSprites:
+		Image: harkonnen_devastatormech
+		PlayerPalette: playerd2k
+	Cloak@TDcloak:
+		Palette: d2kcloak
+
+devastator.husk:
+	Inherits: ^D2KVehicleHusk
+	Health:
+		HP: 1250
+	Tooltip:
+		Name: Devastator (Destroyed)
+	TransformOnCapture:
+		IntoActor: devastator
+	RenderSprites:
+		Image: harkonnen_devastatormech
+		PlayerPalette: playerd2k
+
+harkonnen_devastatormech:
+	Inherits@D2KT: ^D2KTank
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -145,15 +247,15 @@ devastator:
 	Buildable:
 		Queue: Vehicle, RAVehicle, Starport
 		Prerequisites: ~harkonnen_vehicle_production, ~heavy.harkonnen, research_centre
-		BuildPaletteOrder: 100
+		BuildPaletteOrder: 105
 		BuildDuration: 1000
 		BuildDurationModifier: 100
-		Description: Super Heavy Tank\n  Strong vs Tanks\n  Weak vs Artillery
+		Description: Super Heavy Mech\n  Strong vs Tanks\n  Weak vs Artillery
 		IconPalette: d2kunit
 	Valued:
 		Cost: 3000
 	Tooltip:
-		Name: Harkonnen Devastator Tank
+		Name: Harkonnen Devastator Mech
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -230,7 +332,7 @@ devastator:
 		VoiceSet: D2KVehicleVoice
 	-WithDeathAnimation:
 	RenderSprites:
-		Image: devastator
+		Image: harkonnen_devastatormech
 		PlayerPalette: player_rgba
 
 harkonnen_spiceharvester:
@@ -245,6 +347,8 @@ harkonnen_spiceharvester:
 		BuildPaletteOrder: 10
 		Description: Collects spice for credits.\n  Unarmed
 		IconPalette: d2kunit
+		BuildDuration: 250
+		BuildDurationModifier: 100
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -252,8 +356,6 @@ harkonnen_spiceharvester:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Harvester:
-		BuildDuration: 250
-		BuildDurationModifier: 100
 		HarvestFacings: 8
 		BaleUnloadDelay: 1
 	StoresResources:

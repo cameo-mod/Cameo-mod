@@ -34,7 +34,7 @@ atreides_combattank:
 	Armament:
 		Weapon: 80mm_A
 	RenderSprites:
-		Image: combat_tank
+		Image: combat_tank.atreides
 
 atreides_spiceharvester:
 	Inherits@D2KT: ^D2KTank
@@ -48,6 +48,8 @@ atreides_spiceharvester:
 		BuildPaletteOrder: 10
 		Description: Collects spice for credits.\n  Unarmed
 		IconPalette: d2kunit
+		BuildDuration: 250
+		BuildDurationModifier: 100
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -55,8 +57,6 @@ atreides_spiceharvester:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Harvester:
-		BuildDuration: 250
-		BuildDurationModifier: 100
 		HarvestFacings: 8
 		BaleUnloadDelay: 1
 	StoresResources:
@@ -130,7 +130,7 @@ atreides_sonictank:
 		Actor: sonic_tank_husk.atreides
 		OwnerType: InternalName
 		EffectiveOwnerFromOwner: true
-		Intensity: 600
+
 	Voiced:
 		VoiceSet: D2KSonicTank
 	-WithDeathAnimation:
@@ -188,7 +188,7 @@ atreides_missiletank:
 		EmptyWeapon: D2KUnitExplodeMed
 	Selectable:
 		Class: missiletank
-		Intensity: 600
+
 	DetectCloaked:
 		Range: 4c0
 	Voiced:
@@ -246,7 +246,7 @@ atreides_siegetank:
 		Actor: siege_tank_husk.atreides
 		OwnerType: InternalName
 		EffectiveOwnerFromOwner: true
-		Intensity: 600
+
 	Voiced:
 		VoiceSet: D2KSiegeTank
 	RenderSprites:

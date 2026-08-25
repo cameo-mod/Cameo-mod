@@ -350,3 +350,17 @@ atreides_airdrone:
 		Tick: 80
 	icon:
 		Filename: atreides_airdrone_icon.png
+
+gun_turret.atreides:
+	Inherits: flame_turret
+	turret:
+		Filename: invisibleitem.shp
+		Length: *
+		Facings: 1
+
+rocket_turret.atreides:
+	Inherits: flame_turret
+	turret:
+		Filename: invisibleitem.shp
+		Length: *
+		Facings: 1

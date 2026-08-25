@@ -63,7 +63,7 @@ atreides_ornithopter:
 	AmmoPool@PRIMARY:
 		Ammo: 5
 		ReloadCount: 5
-		PipCount: 5
+
 		RearmSound: REARM1.WAV
 	Targetable:
 		TargetTypes: Air
@@ -124,7 +124,6 @@ atreides_airdrone:
 		RearmSound: REARM1.WAV
 	Targetable:
 		TargetTypes: Air
-	WithFacingSpriteBody:
 	-WithDeathAnimation:
 	-RevealsShroud@lockon:
 	RenderSprites:
@@ -163,6 +162,7 @@ atreides_advancedcarryall:
 	Carryall:
 		LocalOffset: 0,0,-256
 		CarryCondition: carrying
+	-WithFacingSpriteBody:
 	WithFacingSpriteBody:
 		RequiresCondition: airborne
 	WithFacingSpriteBody@LANDED:

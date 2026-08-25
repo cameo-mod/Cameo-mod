@@ -30,6 +30,7 @@ harkonnen_carryall:
 	RevealsShroud:
 		Range: 4c0
 		Type: GroundPosition
+	-WithFacingSpriteBody:
 	WithFacingSpriteBody:
 		RequiresCondition: airborne
 	WithFacingSpriteBody@LANDED:
@@ -102,11 +103,10 @@ harkonnen_gunship:
 	AmmoPool:
 		Ammo: 10
 		ReloadCount: 10
-		PipCount: 10
+
 		RearmSound: REARM1.WAV
 	Targetable:
 		TargetTypes: Air
-	WithFacingSpriteBody:
 	-WithDeathAnimation:
 	-RevealsShroud@lockon:
 	RenderSprites:
@@ -145,6 +145,7 @@ harkonnen_advancedcarryall:
 	Carryall:
 		LocalOffset: 0,0,-256
 		CarryCondition: carrying
+	-WithFacingSpriteBody:
 	WithFacingSpriteBody:
 		RequiresCondition: airborne
 	WithFacingSpriteBody@LANDED:

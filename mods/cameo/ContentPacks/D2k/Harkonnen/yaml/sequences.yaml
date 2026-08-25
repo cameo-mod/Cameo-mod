@@ -161,20 +161,18 @@ missile_tank:
 		Filename: harkonnen_rockettank_icon.png
 
 
-devastator:
+harkonnen_devastatormech:
 	Defaults:
 		Filename: harkonnen_devestator.png
 	idle:
 		Start: 0
 		Length: 8
 		Facings: 32
-		Transpose: true
 		Tick: 100
 	move:
 		Start: 0
 		Length: 8
 		Facings: 32
-		Transpose: true
 		Tick: 100
 	icon:
 		Filename: harkonnen_devestator_icon.png
@@ -289,4 +287,10 @@ harkonnen_advancedcarryall:
 		Tick: 120
 	icon:
 		Filename: harkonnen_advancedcarryall_icon.png
+
+gun_turret.harkonnen:
+	Inherits: harkonnen_flameturret
+
+rocket_turret.harkonnen:
+	Inherits: harkonnen_flameturret
 

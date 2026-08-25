@@ -1,5 +1,22 @@
 # Development Log
 
+## Devin-Aurora — D2k validation pass (2026-08-25)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max).
+
+**What and why:**
+- Continued D2k pack cleanup after `utility.cmd cameo --check-yaml` reported validation issues.
+- Added `Tooltip` to buildable Atreides/Harkonnen/Corrino upgrades (`upgrade_conyard.*`, `upgrade_barracks.*`, `upgrade_light.*`, `upgrade_heavy.*`, `upgrade_radar.*`) to satisfy the Buildable tooltip lint.
+- Fixed `corrino_carryall` duplicate `WithFacingSpriteBody` `Name: body` by adding `Name: body-landed` to the `WithFacingSpriteBody@LANDED` variant.
+- Confirmed `aircraft_husk` generic husk actor and `Actor: aircraft_husk` in base `SpawnActorOnDeath` nodes are in place.
+- `python tools/audit/find_empty_warhead.py` reports 0 empty warheads.
+
+**Verification in progress:**
+- `utility.cmd cameo --check-yaml` re-run (ID `cameo-util2`) to capture the current error set.
+
+**Next:**
+- Collect remaining D2k-specific `utility` errors, fix blockers, then boot-gate.
+
 ## Devin-Aurora — D2k Ordos turret laser/chemical mortar rework (2026-08-25)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max), D2k rollout coordinator / weapons pass.
@@ -3987,3 +4004,36 @@ the shellmap. This blocks ALL agents from committing until you either:
 
 **All other agents**: do NOT commit until Devin-Cyrus fixes this. The boot-gate
 must pass with no new exceptions before any commit.
+
+## Devin-Aurora — Corrino Sardaukar quartet + final D2k boot-gate (2026-08-25)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max).
+
+**What and why:**
+- Investigated the four Corrino Sardaukar sprite strips (`saudakar_berserker.png`, `saudakar_javelin.png`, `saudakar_laser.png`, `saudakar_sword.png`) and confirmed via PNG metadata that all four share the same `FrameSize: 131,36` and `FrameAmount: 333` as the existing `saudakar_bazooka.png`. This validates reusing the `saudakar_bazooka` sequence layout.
+- Copied the four source strips from `C:/Users/AedisToru/Documents/Cameo/Sprites/Saudakars/` into `mods/cameo/bits/d2k/`.
+- Added four new sequence blocks (`saudakar_berserker`, `saudakar_javelin`, `saudakar_laser`, `saudakar_sword`) to `ContentPacks/D2k/Corrino/yaml/sequences.yaml`, mirroring `saudakar_bazooka` and including the `garrison-muzzle` sequence added by the maintainer.
+- Added four new actors (`corrino_sardaukar_berserker`, `corrino_sardaukar_sword`, `corrino_sardaukar_javelin`, `corrino_sardaukar_laser`) to `ContentPacks/D2k/Corrino/yaml/infantry.yaml`, using existing infantry templates (`^MeleeInfantryTemplate` for the melee pair, `^AntiTankAntiAirInfantryTemplate` for the ranged pair) and `^RA2Infantry` for animation.
+- Added four new weapons to `ContentPacks/D2k/Corrino/yaml/weapons.yaml` using the 3-way split and existing templates:
+  - `corrino_sardaukar_berserker_axe` — `^Warhead_Melee_Heavy`.
+  - `corrino_sardaukar_sword` — `^Warhead_Melee_Heavy`.
+  - `corrino_sardaukar_javelin_spear` — `^Warhead_MissileAP_Heavy` + `^Projectile_Missile_Light` + `^Effect_MissileAP_Heavy_D2K_Rocket_Trooper`, with `Image: spearfire` for the projectile.
+  - `corrino_sardaukar_laser` — `^Warhead_Laser_Heavy` + `^Projectile_Laser_Heavy` + `^Effect_Laser_Heavy`.
+- No `Damage`, `Versus`, `Burst`, or `BurstDelays` were hand-edited; all damage values are inherited from the existing `^Warhead_*` templates.
+- Kept the earlier D2k boot-gate fixes in `Atreides`/`Harkonnen`/`Corrino` aircraft (duplicate `WithFacingSpriteBody` removals, token-based prerequisites, repair-pad notification fixes).
+
+**Verification:**
+- `python tools/audit/find_empty_warhead.py` — 0 empty warheads.
+- `launch-game.cmd` reached the main menu (`MenuPostProcessEffect.PostWorldLoaded` in `perf.log`, 26,656 ms total). No new `exception-*.log` was generated in `%APPDATA%/OpenRA/Logs`.
+
+**Pending before a safe commit:**
+- The working tree contains mixed WIP from multiple agents; the four Sardaukar files, the three aircraft YAMLs, and the Corrino/Atreides building prerequisite/repairpad changes should be scoped into a commit. Coordinate with the maintainer before staging because `git status` shows other agents' uncommitted edits in the same files.
+
+**Next:**
+- Await maintainer sign-off on weapon/sequence choices and the `Cost: 600` placeholder, then stage a scoped commit or move on to the next D2k task.
+
+**Update (same session):** Maintainer made follow-up edits:
+- `Atreides`/`Harkonnen`/`Corrino` engineers: `DefaultAttackSequence` set to `shoot`.
+- `mods/cameo/sequences/d2k.yaml`: added a `shoot` sequence under `sardaukar`.
+- `ContentPacks/D2k/Corrino/yaml/infantry.yaml`: added `StandSequences: stand` to the four new Sardaukar `WithInfantryBody` blocks.
+Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorldLoaded`, 22.4 s, no new `exception-*.log`).

@@ -2187,6 +2187,7 @@ types, creating a unified wall+turret defense system across the mod.
 - [x] Theme: imperial Sardaukars, elite heavy infantry, uparmored harvesters, Death Hand support power.
 - [x] Add `StartingUnits@corrino` once the full roster is in place (Ixian `faction.yaml` already references `corrino_mobileconstructionvehicle` and `corrino_sardaukar_bazooka`).
 - [x] Boot-gate + `utility.cmd cameo --check-yaml`.
+- [x] Add four Corrino Sardaukar variants: Berserker (melee axe), Swordmaster (melee blade), Javelin (ranged spear), and Laser (laser rifle), with sequences, weapons, and boot-gate.
 
 ### Phase 4 — Shared/global pass (Devin-Blaze + Devin-Echo) — IN PROGRESS
 - [ ] Add shared D2k templates, fix cross-faction prerequisites, walls/turrets/superweapons/promotions.
