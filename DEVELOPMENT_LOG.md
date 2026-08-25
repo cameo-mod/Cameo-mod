@@ -3388,7 +3388,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
   three-layer composition:
   - RA2120xmm: ^Warhead_CannonAP_Light, ^Projectile_Shell_Light,
     ^Effect_CannonAP_Light, with ^Effect_Apoc_Explosion_RA2 as an RA2 visual
-    addon and a local EffectAir override to preserve ig_explosion_air.
+    addon and a local EffectAir override to preserve big_explosion_air.
   - RA2120xmm_rad: ^Warhead_Chemical_Light, ^Projectile_Shell_Light,
     ^Effect_Chem_Light, with ^Effect_Apoc_Explosion_RA2 and ^RA2RadShell as
     addons; local EffectAir, smudges, and radiation behaviour preserved.
@@ -3398,10 +3398,10 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   for both weapons and child variants (RA2120xmm_fire, RA2120xmm_tesla,
   RA2120xmm_elite, RA2120xmm_rad_elite, RA2120xmm_fire_elite,
   RA2120xmm_tesla_elite).
-- Audits: ind_empty_warhead.py 0; ind_orphan_old_keys.py 0 real;
-  udit_warhead_split broadcast baseline lowered 939 -> 931;
-  udit_doc_claims all 19 green after updating doc_claims.yaml and affected
-  docs; extract_stats.py --check 0 drift; erify_generator_sync 0 drift.
+- Audits: find_empty_warhead.py 0; find_orphan_old_keys.py 0 real;
+  audit_warhead_split broadcast baseline lowered 939 -> 931;
+  audit_doc_claims all 19 green after updating doc_claims.yaml and affected
+  docs; extract_stats.py --check 0 drift; verify_generator_sync 0 drift.
 - Re-extracted balance ledgers with 	ools/balance/extract_stats.py; only
   docs/balance/redalert2_soviets.json + docs/balance/derived/redalert2_soviets.json
   changed.
