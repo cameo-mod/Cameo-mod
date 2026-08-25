@@ -50,7 +50,7 @@ Devin-Aether name — they are committed and do not need renaming.
   - `BALANCE_PROGRAM_PLAN.md` A6 metric updated to 816
   - `doc_claims.yaml` `multi_main_fired_weapons` value updated to 816
   - `docs/audit/SUMMARY.md` W24 debt updated to 816
-- Verification: `review_resolve_diff` against `wt_base` shows resolved damage totals preserved and `Inherits` clean; `find_empty_warhead.py` = 0; `audit_doc_claims` green; `extract_stats --check` 0 drifted; `audit_warhead_split` below baseline; boot-gated before commit.
+- Verification: `review_resolve_diff` against `wt_base` shows resolved damage totals preserved and `Inherits` clean; `find_empty_warhead.py` = 0; `audit_doc_claims` green; `extract_stats --check` 0 drifted; `audit_warhead_split` below baseline; boot-gated and committed as `f08becd6d`.
 
 ## Devin-Aurora — W24 RedAlert (RA1) Allies + Soviets same-family collapses (2026-08-25)
 
@@ -65,7 +65,7 @@ Devin-Aether name — they are committed and do not need renaming.
   - `BTRMachineGun` (Soviets): `Bullet_Light` 2000 + `Bullet_Medium` 2000 -> single `Bullet_Medium` 4000; `BTRMachineGun_AA` child inherits and only keeps `ValidTargets: Air`.
 - Decision basis: same W24 pattern (one damage main, preserve per-shot total, drop duplicate warhead inherit). `review_resolve_diff` against `wt_base` confirms resolved projectile and effect fields unchanged and damage sum preserved.
 - These weapons were not claimed in the current `HANDOFF.md` roster; including them in this commit keeps the ledgers and `doc_claims` consistent. If the original agent objects, the changes can be reverted and re-committed under the correct owner.
-- Verification: `find_empty_warhead.py` = 0; `find_orphan_old_keys.py` = 0 real; `review_resolve_diff` OK for all five weapons; `extract_stats` re-extracted; `audit_doc_claims` green; `audit_warhead_split` 826 at baseline.
+- Verification: `find_empty_warhead.py` = 0; `find_orphan_old_keys.py` = 0 real; `review_resolve_diff` OK for all five weapons; `extract_stats` re-extracted; `audit_doc_claims` green; `audit_warhead_split` 826 at baseline; committed as `f08becd6d`.
 
 ## Agent registry (2026-08-25)
 
@@ -76,7 +76,7 @@ file's mtime.** If another agent claimed it in the last 30 minutes, do not touch
 
 | name | identity | current file-set | current task | status |
 |---|---|---|---|---|
-| **Devin-Aurora** (was Devin-Aether) | this session | `mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml`, `mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml`, `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` | W24 same-family collapses in Naxis + RedAlert/Allies/Soviets; PPM credit attribution | active |
+| **Devin-Aurora** (was Devin-Aether) | this session | `mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml`, `mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml`, `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` | W24 same-family collapses in Naxis + RedAlert/Allies/Soviets; PPM credit attribution | committed f08becd6d |
 | **Devin-Dawn** | prior sessions (A10–A14 committer) | `mods/cameo/weapons/tiberiansun.yaml`, `RedAlert2Mod/TKM/`, `RedAlert2Mod/AsianAlliance/`, `RedAlert/Japan/`, `TiberianSun/GDI/`, `TiberianSun/Nod/`, `RedAlert/Shared/` | W24 bullet/missile collapses; ATMine rework | check mtime |
 | **Devin-Blaze** | active 2026-08-25 13:50 | `mods/cameo/weapons/d2k.yaml`, `mods/cameo/weapons/redalert2mod.yaml` | W24 bullet collapse for `LMG`, `light_inf_lmg`, `d2k_shotgun`, `naxis_sssoldier_smg` | active |
 | **Devin-Cyrus** | active 2026-08-25 13:48 | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` | WC2 hero weapon rework (Alleria FirepowerMultiplier, Hellscream slice) | active |
