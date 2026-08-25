@@ -20,10 +20,16 @@ import pathlib
 MOD = pathlib.Path(__file__).resolve().parents[2] / "mods" / "cameo"
 
 # Central weapon files (the per-theme monoliths that survive migration).
-CENTRAL = ["weapons/weapons.yaml", "weapons/redalert2.yaml",
+# Only files listed in mod.yaml's `Weapons:` block belong here — the docstring
+# contract is "every LIVE weapons yaml". `weapons/redalert2.yaml` and
+# `weapons/missiles.yaml` were removed: redalert2.yaml is commented out of
+# mod.yaml (migrated to ContentPacks/RedAlert2/Shared) and missiles.yaml is
+# absent from it entirely, so every weapon in them resolved to a ContentPack
+# file and the survey was scanning 187 dead copies (see
+# docs/audit/latest/redalert2_dead_file.md).
+CENTRAL = ["weapons/weapons.yaml",
            "weapons/redalert2mod.yaml", "weapons/tiberiansun.yaml",
-           "weapons/tiberiandawn.yaml", "weapons/warcraft2.yaml",
-           "weapons/missiles.yaml"]
+           "weapons/tiberiandawn.yaml", "weapons/warcraft2.yaml"]
 
 # Legacy full-stack templates retired by the 3-way split.
 OLD_FAMILIES = {
