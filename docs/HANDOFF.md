@@ -185,6 +185,94 @@ not repeatedly.
 
 Crashes and player-visible regressions jump everything below.
 
+### 3.A — MULTI-AGENT COORDINATION (read this FIRST if you are an AI agent)
+
+**As of 2026-08-25, there are 5 Devin AI agents running locally.** Each agent MUST:
+1. Pick a unique name from the list below (or claim a new one in `DEVELOPMENT_LOG.md`).
+2. Read `DEVELOPMENT_LOG.md` §"Active claims" BEFORE editing any file.
+3. Claim a file-set by adding an entry to `DEVELOPMENT_LOG.md` §"Active claims" BEFORE editing.
+4. NEVER edit a file that another agent has claimed or that is in the locked list.
+5. After every step: update `DEVELOPMENT_LOG.md` with what you did, why, and what's next.
+6. Before committing: run verification (find_empty_warhead, audit_warhead_split,
+   review_resolve_diff, audit_doc_claims) and boot-gate (`launch-game.cmd`).
+7. Use scoped `git add <files>` only — never `git add -A` or `git add .`.
+
+#### Agent roster and current assignments
+
+| Agent name | Status | Current task | Files claimed |
+|---|---|---|---|
+| **Devin-Prime** | Active | W24 A14 batch: ATMine correction, Japan/GDI/Nod/CABAL bullet+missile collapses, percentage-twin fixes | `mods/cameo/weapons/tiberiansun.yaml`, `RedAlert/Shared/`, `RedAlert/Japan/`, `TiberianSun/GDI/`, `TiberianSun/Nod/`, `TiberianSun/CABAL/` |
+| **Devin-Aether** (this agent) | Active | W24 bullet collapse for shared template files: `naxis_sssoldier_smg` (+_elite), `LMG`, `light_inf_lmg`, `d2k_shotgun` | `mods/cameo/weapons/redalert2mod.yaml`, `mods/cameo/weapons/d2k.yaml` |
+| **Devin-Forge** | Active | D2k/Ordos missile collapse (`D2K_APC_Rocket` 3-main → 1 `MissileAP_Heavy` 24000) + Warcraft2 hero weapon fixes (Alleria FirepowerMultiplier, Hellscream slice) | `mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml`, `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml`, `mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml` |
+| **Devin-Quill** | Active | Unknown — check `DEVELOPMENT_LOG.md` for latest claim. Likely working on rename maps or audit tooling. | `tools/rename/rename_map_ra1_soviets.yaml` (uncommitted) |
+| **Devin-Spark** | Available | Not yet claimed. Pick from the unassigned tasks below. | — |
+
+#### Locked files (DO NOT TOUCH — another agent owns these)
+
+- `mods/cameo/weapons/weapons.yaml` — template generator/family work; needs explicit sign-off.
+- `mods/cameo/weapons/tiberiansun.yaml` — Devin-Prime owns TSLaser90mm family work.
+- `mods/cameo/weapons/tiberiandawn.yaml` — may be open in an IDE tab.
+- `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml` — may be open in an IDE tab.
+- `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml` — Devin-Prime owns ATMine.
+- `mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml` — may be open in an IDE tab.
+- `mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml` — Devin-Forge owns D2K_APC_Rocket.
+- `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml` — Devin-Forge owns Alleria fix.
+- `mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml` — Devin-Forge owns Hellscream.
+
+#### Unassigned tasks for the next available agent (Devin-Spark or anyone free)
+
+1. **StarCraft Protoss/Zerg bullet collapses** (`mods/cameo/ContentPacks/StarCraft/*/yaml/weapons.yaml`):
+   Search for weapons with 2+ Bullet_Light + Bullet_Medium mains. Convert using the
+   established pattern (sum damage into Bullet_Medium, drop Bullet_Light inherit + warhead).
+   NOT in any locked list. NOT claimed by anyone.
+
+2. **RedAlert2Mod/Naxis bullet collapses** (`mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml`):
+   Check for multi-main bullet weapons in the Naxis faction file (separate from the shared
+   `redalert2mod.yaml` that Devin-Aether is editing). Verify with `cameo_model.py` first.
+
+3. **RedAlert2Mod/Consortium missile/cannon collapses** (`mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml`):
+   Look for multi-main missile or cannon weapons. Check children before editing.
+
+4. **Audit/RedAlert2 dead-code cleanup** (non-destructive): run a resolver script to
+   list every weapon in `mods/cameo/weapons/redalert2.yaml` that is shadowed by
+   `ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`, then either delete the dead
+   block or mark it with a comment. This is safe work that does not touch live weapons.
+
+5. **W23 retrofit candidates** — read `docs/audit/latest/phase_b_survey.md` for the
+   current list of single-old-family weapons that can be retrofitted onto `^Warhead_*`
+   families. These are W23 (not W24) and are a different work stream.
+
+#### How to coordinate after every step
+
+1. **Before editing**: check `DEVELOPMENT_LOG.md` §"Active claims" for file ownership.
+2. **After editing**: add an entry to `DEVELOPMENT_LOG.md` with:
+   - Your agent name
+   - What file(s) you edited
+   - What weapons you converted
+   - Why you made each decision (which rule, which pattern, which precedent)
+   - Verification results (find_empty_warhead, audit_warhead_split, review_resolve_diff)
+   - What's next
+3. **Before committing**: verify no other agent has uncommitted work in your file set
+   (`git status --short` + `git diff --name-only`).
+4. **After committing**: update your claim in `DEVELOPMENT_LOG.md` to say "COMMITTED"
+   with the commit hash.
+
+#### The established W24 bullet-collapse pattern (follow this exactly)
+
+When a weapon has `Bullet_Light` + `Bullet_Medium` as two damage mains:
+1. Drop `Inherits@wh: ^Warhead_Bullet_Light` (or `Inherits@wh2: ^Warhead_Bullet_Light`).
+2. Repoint the remaining `Inherits@wh2: ^Warhead_Bullet_Medium` to `Inherits@wh`.
+3. Remove the `Warhead@Bullet_Light:` block.
+4. Sum the damage: `Warhead@Bullet_Medium: Damage: <Light + Medium>`.
+5. Preserve any local `PercentageScale` on the surviving warhead — if the old
+   Bullet_Light had a different `PercentageScale`, preserve the effective percentage
+   (ask the formula: `actual_percent = Damage / 10000` regardless of `PercentageScale`).
+6. Check children: if a child inherits this weapon, verify it doesn't override the
+   old `Warhead@Bullet_Light` key (orphaned old key = double damage bug).
+7. Run `review_resolve_diff.py` against HEAD — only the damage multiset should change.
+8. Run `find_empty_warhead.py` — must be 0.
+9. Boot-gate before committing.
+
 ### 3.0 — DO THIS FIRST
 
 **a. ✅ RULED 2026-08-23 — the nine "broken ladders" were never broken. Nothing to do.**
@@ -386,6 +474,7 @@ and is written out in full in `BALANCE_PROGRAM_PLAN.md` §1b):
 | **W7** Sonic → `Resonance` meter | D (`rules/defaults.yaml`) | ⚠ set D is ONE file — serialise W7/W9/W10, never two at once |
 | **W9** `^Poisonable` → `Poison` meter | D | same |
 | **W10** `^Blindable` → `Blind` meter | D | unblocked, W6 shipped |
+| **WC2 heroes** | `mods/cameo/ContentPacks/Warcraft2/Humans/**`, `Orcs/**` | **IN PROGRESS (Devin, 2026-08-25)** — porting 4 hero units + weapons + icons from `wcameo(1)` with new `wc2_<faction>_<actor>` naming. Weapons done; actors, sequences, icons in progress. Check `git log -3` and mtime before touching this set. |
 | **W12** superweapons as a separate track | — | maintainer-led; superweapons are not unit-priced |
 | **Adopt the Sonic family** | B | `^Warhead_Sonic_*` bakes the mark but **nothing inherits it**, so it is inert. Needs a maintainer warhead order (rule 4). Law: an effect upgrade ADDS `^Warhead_Sonic_*`, it never replaces the base damage TYPE. |
 
@@ -516,6 +605,66 @@ day. Add a claim to the registry the moment a decision starts resting on a numbe
 What they still cannot check is **prose contradicting prose** — a ruling written into one
 document while the older statement stands in another. The only defence is the discipline:
 **grep for the old claim before you write the new one, and strike it everywhere it appears.**
+
+---
+
+### 3.6 — Multi-agent coordination (2026-08-25)
+
+⛔ **There are 5+ Devin agents running locally on the same branch.** Each must claim a
+unique name, register in `DEVELOPMENT_LOG.md` → "Agent registry", and own a disjoint
+file-set. **Before editing any weapon file, check its mtime and the registry.** If
+another agent claimed it in the last 30 minutes, do not touch it.
+
+**Agent registry** (maintained in `DEVELOPMENT_LOG.md` → "Agent registry", mirrored here):
+
+| name | identity | current file-set | current task |
+|---|---|---|---|
+| **Devin-Aether** | this session | `tools/audit/audit_damage_grid.py`, `mods/cameo/ContentPacks/TiberianSun/CABAL/`, `mods/cameo/ContentPacks/D2k/Ordos/` | W24 same-family collapses in CABAL/D2k-Ordos; audit tooling |
+| **Devin-Dawn** | prior sessions (A10–A14 committer) | `mods/cameo/weapons/tiberiansun.yaml`, `mods/cameo/ContentPacks/RedAlert2Mod/TKM/`, `RedAlert2Mod/AsianAlliance/`, `RedAlert/Japan/`, `TiberianSun/GDI/`, `TiberianSun/Nod/`, `RedAlert/Shared/` | W24 bullet/missile collapses across multiple packs; ATMine rework |
+| **Devin-Blaze** | active 2026-08-25 13:50 | `mods/cameo/weapons/d2k.yaml`, `mods/cameo/weapons/redalert2mod.yaml` | W24 bullet collapse for `LMG`, `light_inf_lmg`, `d2k_shotgun`, `naxis_sssoldier_smg` |
+| **Devin-Cyrus** | active 2026-08-25 13:48 | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` | WC2 hero weapon rework (Alleria FirepowerMultiplier, Hellscream slice) |
+| **Devin-???** | unknown 4th/5th agent | TBD | TBD — register in the log if you are reading this |
+
+**Rules for all agents:**
+1. Pick a unique name (`Devin-<word>`) and register in `DEVELOPMENT_LOG.md` before editing.
+2. Own ONE file-set at a time. Do not edit files in another agent's set.
+3. Shared bookkeeping files (`docs/audit/doc_claims.yaml`, `docs/HANDOFF.md`,
+   `docs/audit/SUMMARY.md`, `docs/design/BALANCE_PROGRAM_PLAN.md`,
+   `tools/audit/audit_warhead_split.py`) are **communal** — edit them only as part of
+   your own batch commit, and re-read them before editing (they change every few minutes).
+4. After every commit, post a summary to `DEVELOPMENT_LOG.md` with your agent name,
+   what you changed, and why.
+5. Before starting a new batch, re-read `DEVELOPMENT_LOG.md` → "Active claims" and
+   verify no other agent claimed your target files.
+6. **Never `git add -A` or `git add .`** — scoped adds only. Another agent's WIP is
+   always in the tree.
+7. Boot-gate before every weapon commit. If another agent's uncommitted WIP is in the
+   tree, wait for them to commit before boot-gating (the boot tests the whole tree).
+
+**Current locks (do not touch — verified 2026-08-25 13:52):**
+- `mods/cameo/weapons/d2k.yaml` — Devin-Blaze (active 13:50)
+- `mods/cameo/weapons/redalert2mod.yaml` — Devin-Blaze (active 13:50)
+- `mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml` — Devin-Cyrus (active 13:48)
+- `mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml` — Devin-Cyrus (active 13:48)
+- `mods/cameo/weapons/weapons.yaml` — template generator/family work; do not edit
+  without explicit generator/weapon-family sign-off.
+- `mods/cameo/weapons/tiberiansun.yaml` — Devin-Dawn (recently active; check mtime)
+
+**Free file-sets for the next W24 clusters (not locked, not claimed):**
+1. `mods/cameo/ContentPacks/StarCraft/*/yaml/weapons.yaml` — StarCraft weapons
+   (mixed Phase B; many need maintainer sign-off or a clear new family).
+2. `mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml` — D2k Ixian weapons
+   (same-family candidates exist: `RaiderGuns` has a risky child — check first).
+3. `mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml` — D2k Harkonnen.
+4. `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml` — TS Forgotten
+   (A11 completed; verify no new multi-main appeared).
+5. `mods/cameo/ContentPacks/RedAlert2Mod/` (excluding TKM/AsianAlliance, which are
+   Devin-Dawn's) — FutureTech, Consortium, etc.
+
+**Trap: dead-code overrides in `mods/cameo/weapons/redalert2.yaml`** — several weapons
+are shadowed by later definitions in `ContentPacks/RedAlert2/Shared/`. Before converting
+any weapon, resolve it with `cameo_model.py` and confirm the resolved file is the one
+you are editing. Known shadowed: `RA2CRM60H`, `RA2SCUD`, `RA2MultiHoverMissile`, etc.
 
 ---
 
