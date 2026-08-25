@@ -5659,22 +5659,15 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
         "tag": "MissileHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5023",
       "reloaddelay": "64",
@@ -5682,13 +5675,11 @@
       "slot": "Armament@Missile",
       "versus_templates": [
        "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Medium"
       ],
       "weapon": "SheridanMissiles",
       "weapon_class_source": "template"
@@ -5726,14 +5717,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -5741,20 +5725,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5023",
       "reloaddelay": "58",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@MG",
       "versus_templates": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SheridanVulcan",

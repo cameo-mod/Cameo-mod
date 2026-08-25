@@ -7262,14 +7262,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -7277,18 +7270,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5660",
       "reloaddelay": "14",
       "requires": "ifv-mg",
       "slot": "Armament@mg",
       "versus_templates": [
-       "^RA2SmallArms",
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "RA2CRM60",
@@ -8285,22 +8276,15 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
         "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
@@ -8308,13 +8292,11 @@
       "slot": "Armament@primaryThunderbolt",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2ThunderboltMissile",
       "weapon_class_source": "template"
@@ -8324,22 +8306,15 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
         "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6760",
       "reloaddelay": "25",
@@ -8350,8 +8325,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2ThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -8360,22 +8334,15 @@
       "armament_name": "primary",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
         "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8640",
       "reloaddelay": "25",
@@ -8385,8 +8352,7 @@
        "RA2ThunderboltMissile"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2ThunderboltMissile_AA",
       "weapon_class_source": "template"
@@ -8396,22 +8362,15 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
         "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9640",
       "reloaddelay": "25",
@@ -8421,8 +8380,7 @@
        "RA2ThunderboltMissile_elite"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2ThunderboltMissile_AA_elite",
       "weapon_class_source": "template"
@@ -8536,22 +8494,15 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
         "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
@@ -8559,13 +8510,11 @@
       "slot": "Armament@missileThunderbolt",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2MultiThunderboltMissile",
       "weapon_class_source": "template"
@@ -8574,22 +8523,15 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
         "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "25",
@@ -8600,8 +8542,7 @@
        "^Effect_Grey_Explosion_Medium_RA2"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
       "weapon_class_source": "template"
@@ -8609,22 +8550,15 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
         "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "25",
@@ -8634,8 +8568,7 @@
        "RA2MultiThunderboltMissile"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA",
       "weapon_class_source": "template"
@@ -8644,22 +8577,15 @@
       "burst": "4",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
         "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "25",
@@ -8669,8 +8595,7 @@
        "RA2MultiThunderboltMissile_elite"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Heavy",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "RA2MultiThunderboltMissile_AA_elite",
       "weapon_class_source": "template"

@@ -93,7 +93,7 @@ are still scheduled to change across most of the roster. Pricing now means prici
 are about to be replaced.
 
 ```
-W24  one damage warhead per weapon          848 fired weapons still carry 2+
+W24  one damage warhead per weapon          825 fired weapons still carry 2+
  └─> W23  retrofit the legacy templates      1124 direct inheritors left; 1256 fired
  │        (its old "33-collision" blocker    weapons already reach a ^Warhead_* family
  │         is DISSOLVED — W24 removes it)
@@ -202,7 +202,7 @@ Crashes and player-visible regressions jump everything below.
 | Agent name | Status | Current task | Files claimed |
 |---|---|---|---|
 | **Devin-Dawn** (was Devin-Prime) | Committed A10–A14 | W24 bullet/missile collapses across multiple packs; ATMine rework. Work is committed. | `mods/cameo/weapons/tiberiansun.yaml`, `RedAlert/Shared/`, `RedAlert/Japan/`, `TiberianSun/GDI/`, `TiberianSun/Nod/`, `TiberianSun/CABAL/`, `RedAlert2Mod/TKM/`, `RedAlert2Mod/AsianAlliance/` |
-| **Devin-Aurora** (was Devin-Aether, this agent, SWE-1.7 Max) | Active | PPM credit attribution (Orion Tank, Land Carrier, Guardian Tank); moving to unassigned StarCraft Protoss/Zerg bullet collapses (HANDOFF §1). | `mods/cameo/ContentPacks/StarCraft/*/yaml/`, `mods/cameo/credits.txt`, `mods/cameo/bits/ra2/credits.txt`, `mods/cameo/bits/ra2/voxel2/credits.txt` |
+| **Devin-Aurora** (was Devin-Aether, this agent, SWE-1.7 Max) | Active | PPM credit attribution (Orion Tank, Land Carrier, Guardian Tank); W24 RedAlert2Mod/Naxis + RedAlert/Allies + RedAlert/Soviets same-family collapses completed and ready to commit. | `mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml`, `mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml`, `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`, `mods/cameo/credits.txt`, `mods/cameo/bits/ra2/credits.txt`, `mods/cameo/bits/ra2/voxel2/credits.txt` |
 | **Devin-Cyrus** (was Devin-Forge) | Active — **BOOT-GATE BLOCKER** | WC2 hero weapon rework. Missing `wc2_orcs_hellscream_icon.png` crashes the game on shellmap load. Must fix before anyone can commit. | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` |
 | **Devin-Echo** (SWE-1.7 Max) | Active | W24 A15: collapse `MongooseRocket`, `facedancer_grenade`, `D2K_APC_Rocket` in D2k/Ixian + D2k/Ordos + CABAL. | `mods/cameo/ContentPacks/D2k/Ixian/`, `D2k/Ordos/`, `TiberianSun/CABAL/` |
 | **Devin-Blaze** | **DUPLICATE — STOP** | Was assigned to d2k.yaml/redalert2mod.yaml — same files as Devin-Aether. Must pick a different file-set from the unassigned tasks below. | — |
@@ -228,9 +228,9 @@ Crashes and player-visible regressions jump everything below.
    established pattern (sum damage into Bullet_Medium, drop Bullet_Light inherit + warhead).
    NOT in any locked list. NOT claimed by anyone.
 
-2. **RedAlert2Mod/Naxis bullet collapses** (`mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml`):
-   Check for multi-main bullet weapons in the Naxis faction file (separate from the shared
-   `redalert2mod.yaml` that Devin-Aether is editing). Verify with `cameo_model.py` first.
+2. **~~RedAlert2Mod/Naxis bullet collapses~~** (`mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml`) — **DONE** in this session by Devin-Aurora. Seven machinegun weapons collapsed onto a single `Bullet_Medium` main; `multi_main_fired_weapons` 848 → 816.
+
+2b. **~~RedAlert (RA1) Allies + Soviets same-family collapses~~** (`mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml`, `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`) — **DONE** in this session by Devin-Aurora. Uncommitted `SheridanMissiles`, `SheridanVulcan`, `ra1_soviets_ak47conscript_rifle`, `BTRMachineGun` + `_AA` collapsed to one main; per-shot totals preserved.
 
 3. **RedAlert2Mod/Consortium missile/cannon collapses** (`mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml`):
    Look for multi-main missile or cannon weapons. Check children before editing.
@@ -468,7 +468,7 @@ holds.
 
 | step | what | how you know it moved |
 |---|---|---|
-| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` in `doc_claims.yaml` goes DOWN from 848 |
+| **W24** | collapse each fired weapon to ONE damage warhead (DESIGN §11b) | `multi_main_fired_weapons` in `doc_claims.yaml` goes DOWN from 825 |
 | **W23** | retrofit the legacy templates onto `^Warhead_*` families | `unconverted_template_inheritors` goes DOWN from 1110; `warhead_family_reach` goes UP from 1256 |
 | **A5** | retire the remaining inline-`Versus` weapons onto templates | rule 4 — `Versus` only in `^Warhead_*` |
 

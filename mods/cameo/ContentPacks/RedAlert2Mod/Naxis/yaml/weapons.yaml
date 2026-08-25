@@ -33,8 +33,7 @@ NaxBrummbarArty_elite:
 	BurstDelays: 3
 
 NaxiWW2KübelwagenMachinegun:
-	Inherits: ^RA2SmallArms
-	Inherits@2: ^RA2Chaingun
+	Inherits: ^RA2Chaingun
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
 	ReloadDelay: 80
 	Burst: 6
@@ -51,15 +50,11 @@ NaxiWW2KübelwagenMachinegun:
 		Speed: 10000
 		Width: 100
 		Inaccuracy: 400
-	Warhead@Bullet_Light:
-		Damage: 2000
-		ValidTargets: Ground, Water, Air
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 		ValidTargets: Ground, Water, Air
 NaxiWW2Machinegun:
-	Inherits: ^RA2SmallArms
-	Inherits@2: ^RA2Chaingun
+	Inherits: ^RA2Chaingun
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
 	ReloadDelay: 60
 	Burst: 6
@@ -76,18 +71,13 @@ NaxiWW2Machinegun:
 		Speed: 10000
 		Width: 100
 		Inaccuracy: 400
-	Warhead@Bullet_Light:
-		Damage: 4000
-		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium:
-		Damage: 4000
+		Damage: 8000
 		ValidTargets: Ground, Water
 NaxiWW2Machinegun_AA:
 	Inherits: NaxiWW2Machinegun
 	Range: 8355
 	ValidTargets: Air
-	Warhead@Bullet_Light:
-		ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 NaxiWW2MachinegunSmall:
@@ -95,18 +85,13 @@ NaxiWW2MachinegunSmall:
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
 	ReloadDelay: 60
 	Burst: 3
-	Warhead@Bullet_Light:
-		Damage: 2000
-		ValidTargets: Ground, Water
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 		ValidTargets: Ground, Water
 NaxiWW2MachinegunSmall_AA:
 	Inherits: NaxiWW2MachinegunSmall
 	Range: 8355
 	ValidTargets: Air
-	Warhead@Bullet_Light:
-		ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 NaxiWW2MachinegunTop:
@@ -119,8 +104,6 @@ NaxiWW2MachinegunTop_AA:
 	Range: 7555
 	Report: nax_mgun3.wav
 	ValidTargets: Air
-	Warhead@Bullet_Light:
-		ValidTargets: Air
 	Warhead@Bullet_Medium:
 		ValidTargets: Air
 NaxiWW2Machinegunner:

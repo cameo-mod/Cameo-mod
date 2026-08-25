@@ -12,8 +12,7 @@ IncendiaryM1Carbine:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 ra1_soviets_ak47conscript_rifle:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 11
@@ -23,10 +22,8 @@ ra1_soviets_ak47conscript_rifle:
 	SoundVolume: 0.5
 	ValidTargets: Ground, Water
 	Report: conscriptak.wav
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 CommissarPistol:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
@@ -933,8 +930,7 @@ FLAK-23-AA:
 		ValidTargets: Air
 
 BTRMachineGun:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water
@@ -943,16 +939,12 @@ BTRMachineGun:
 	BurstDelays: 4
 	Range: 5454
 	Report: mgun11.aud
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 BTRMachineGun_AA:
 	Inherits: BTRMachineGun
 	Range: 8181
 	ValidTargets: Air
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
 BTRTeslaMachineGun:

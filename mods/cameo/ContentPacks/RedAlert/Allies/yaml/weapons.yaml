@@ -207,7 +207,6 @@ SheridanCannonCryo:
 		ValidTargets: Ground, Water
 SheridanMissiles:
 	Inherits@wh: ^Warhead_MissileHE_Medium
-	Inherits@wh2: ^Warhead_MissileHE_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
 	Report: bazook1.aud
@@ -216,10 +215,7 @@ SheridanMissiles:
 	ValidTargets: Ground, Water, Air
 	Warhead@MissileHE_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@MissileHE_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 16000
 SheridanMissilesCryo:
 	Inherits@wh: ^Warhead_MissileCryo_Medium
 	Inherits@proj: ^Projectile_Missile_Light
@@ -232,8 +228,7 @@ SheridanMissilesCryo:
 		Damage: 16000
 		ValidTargets: Ground, Water, Air
 SheridanVulcan:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 58
@@ -242,10 +237,8 @@ SheridanVulcan:
 	BurstDelays: 2
 	Report: gun13.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 SheridanVulcanCryo:
 	Inherits@wh: ^Warhead_BulletCryo_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium

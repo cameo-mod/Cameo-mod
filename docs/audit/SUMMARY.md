@@ -120,7 +120,7 @@ its §0a.
 
 | id | debt | measured |
 |---|---|--:|
-| W24 | fired weapons carrying more than one damage main | **848** |
+| W24 | fired weapons carrying more than one damage main | **816** |
 | W23 | fired weapons reaching a `^Warhead_*` family | **1256** |
 | W23 | direct inheritors of the legacy weapon templates | **1110** |
 | W26 | live `DamageMultiplier` declarations | **353** |

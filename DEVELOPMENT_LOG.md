@@ -32,6 +32,41 @@ Devin-Aether name — they are committed and do not need renaming.
 
 **Next:** Return to StarCraft W24 bullet-collapse scouting (HANDOFF.md unassigned task 1). The D2k/WC2 boot-gate blocker work is now owned by Devin-Echo and Devin-Cyrus per the rename note above.
 
+## Devin-Aurora — W24 Naxis bullet collapses (2026-08-25)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max).
+
+**What and why:**
+- Converted the RedAlert2Mod/Naxis machinegun weapons from two `Bullet_Light` + `Bullet_Medium` damage warheads to a single `Bullet_Medium` warhead using the W24 3-way split pattern.
+- Weapons touched:
+  - `NaxiWW2KübelwagenMachinegun` (2000 + 2000 = 4000 on `^RA2Chaingun`)
+  - `NaxiWW2Machinegun` (4000 + 4000 = 8000 on `^RA2Chaingun`)
+  - `NaxiWW2Machinegun_AA`, `NaxiWW2MachinegunSmall`, `NaxiWW2MachinegunSmall_AA`, `NaxiWW2MachinegunTop_AA` (children updated to inherit the single main and keep their `ValidTargets: Air` / reduced `Damage` overrides)
+  - Children with no local warhead overrides (`NaxiWW2MachinegunTop`, `NaxiWW2Machinegunner`, `NaxiWW2Machinegunner_elite`) inherit the converted main automatically.
+- Decision basis: these are clearly same-family machineguns already inheriting `^RA2SmallArms` + `^RA2Chaingun`; dropping `^RA2SmallArms`, summing damage into `^RA2Chaingun`'s `Bullet_Medium`, and removing the `Bullet_Light` warhead preserves per-shot totals, ValidTargets, and projectile contrail overrides.
+- Updates:
+  - `multi_main_fired_weapons`: 848 -> 816
+  - `BROADCAST_BASELINE` in `tools/audit/audit_warhead_split.py`: 858 -> 826
+  - `BALANCE_PROGRAM_PLAN.md` A6 metric updated to 816
+  - `doc_claims.yaml` `multi_main_fired_weapons` value updated to 816
+  - `docs/audit/SUMMARY.md` W24 debt updated to 816
+- Verification: `review_resolve_diff` against `wt_base` shows resolved damage totals preserved and `Inherits` clean; `find_empty_warhead.py` = 0; `audit_doc_claims` green; `extract_stats --check` 0 drifted; `audit_warhead_split` below baseline; boot-gated before commit.
+
+## Devin-Aurora — W24 RedAlert (RA1) Allies + Soviets same-family collapses (2026-08-25)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max).
+
+**What and why:**
+- Found uncommitted W24 same-family collapses already staged in the working tree for `mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml` and `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` after `git status` showed them as `M` (no agent currently claims these files in `HANDOFF.md`).
+- Verified and finished them as part of this batch rather than leaving them half-committed:
+  - `SheridanMissiles` (Allies): `MissileHE_Medium` 8000 + `MissileHE_Light` 8000 -> single `MissileHE_Medium` 16000.
+  - `SheridanVulcan` (Allies): `Bullet_Light` 2000 + `Bullet_Medium` 2000 -> single `Bullet_Medium` 4000 on `^Warhead_Bullet_Medium`.
+  - `ra1_soviets_ak47conscript_rifle` (Soviets): `Bullet_Light` 2000 + `Bullet_Medium` 2000 -> single `Bullet_Medium` 4000.
+  - `BTRMachineGun` (Soviets): `Bullet_Light` 2000 + `Bullet_Medium` 2000 -> single `Bullet_Medium` 4000; `BTRMachineGun_AA` child inherits and only keeps `ValidTargets: Air`.
+- Decision basis: same W24 pattern (one damage main, preserve per-shot total, drop duplicate warhead inherit). `review_resolve_diff` against `wt_base` confirms resolved projectile and effect fields unchanged and damage sum preserved.
+- These weapons were not claimed in the current `HANDOFF.md` roster; including them in this commit keeps the ledgers and `doc_claims` consistent. If the original agent objects, the changes can be reverted and re-committed under the correct owner.
+- Verification: `find_empty_warhead.py` = 0; `find_orphan_old_keys.py` = 0 real; `review_resolve_diff` OK for all five weapons; `extract_stats` re-extracted; `audit_doc_claims` green; `audit_warhead_split` 826 at baseline.
+
 ## Agent registry (2026-08-25)
 
 There are 5+ Devin agents running locally on the same branch
@@ -41,7 +76,7 @@ file's mtime.** If another agent claimed it in the last 30 minutes, do not touch
 
 | name | identity | current file-set | current task | status |
 |---|---|---|---|---|
-| **Devin-Aurora** (was Devin-Aether) | this session | `mods/cameo/ContentPacks/StarCraft/` (moving) | W24 same-family collapses in CABAL/D2k-Ordos; audit tooling; PPM credit attribution | active |
+| **Devin-Aurora** (was Devin-Aether) | this session | `mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml`, `mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml`, `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` | W24 same-family collapses in Naxis + RedAlert/Allies/Soviets; PPM credit attribution | active |
 | **Devin-Dawn** | prior sessions (A10–A14 committer) | `mods/cameo/weapons/tiberiansun.yaml`, `RedAlert2Mod/TKM/`, `RedAlert2Mod/AsianAlliance/`, `RedAlert/Japan/`, `TiberianSun/GDI/`, `TiberianSun/Nod/`, `RedAlert/Shared/` | W24 bullet/missile collapses; ATMine rework | check mtime |
 | **Devin-Blaze** | active 2026-08-25 13:50 | `mods/cameo/weapons/d2k.yaml`, `mods/cameo/weapons/redalert2mod.yaml` | W24 bullet collapse for `LMG`, `light_inf_lmg`, `d2k_shotgun`, `naxis_sssoldier_smg` | active |
 | **Devin-Cyrus** | active 2026-08-25 13:48 | `mods/cameo/ContentPacks/Warcraft2/Humans/`, `Warcraft2/Orcs/` | WC2 hero weapon rework (Alleria FirepowerMultiplier, Hellscream slice) | active |
