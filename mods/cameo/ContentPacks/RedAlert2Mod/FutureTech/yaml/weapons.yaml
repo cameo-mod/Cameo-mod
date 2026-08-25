@@ -1,18 +1,14 @@
 ACV_Machinegun:
-	Inherits: ^RA2SmallArms
-	Inherits@2: ^RA2Chaingun
+	Inherits@wh: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 21
 	Burst: 4
 	BurstDelays: 2
 	Range: 5555
 	Report: AUACV_mgFireA.wav, AUACV_mgFireB.wav, AUACV_mgFireC.wav, AUACV_mgFireD.wav
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
-		Damage: 2000
+		Damage: 4000
 Future_Cryocopter_Rocket:
 	Inherits: ^Grenade
 	Inherits@2: ^D2KRocket
@@ -852,23 +848,22 @@ FutureJavelinRocketsDeployed_elite:
 	Burst: 2
 	BurstDelays: 3
 Future_Wheel_MG:
-	Inherits: ^RA2SmallArms
-	Inherits@2: ^RA2Chaingun
+	Inherits@wh: ^RA2Chaingun
 	ReloadDelay: 40
 	Burst: 4
 	BurstDelays: 2
 	Range: 5806
 	Report: heavy_mgun1_3.wav
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 Future_Wheel_MG_elite:
 	Inherits: Future_Wheel_MG
 	Inherits@2: ^SteelChaingun
 	Report: gun8.aud
 	Range: 6806
 	Burst: 8
+	Warhead@Bullet_Medium:
+		Damage: 4000
 
 ShotgunAttackRobotGun:
 	Inherits: ^Warhead_CannonHE_Medium

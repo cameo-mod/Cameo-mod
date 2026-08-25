@@ -805,8 +805,7 @@ RA2MortarBike_elite:
 	BurstDelays: 3
 
 LatinBuggyMG:
-	Inherits: ^RA2SmallArms
-	Inherits@2: ^RA2Chaingun
+	Inherits@wh: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 35
 	Range: 6000
@@ -822,12 +821,9 @@ LatinBuggyMG:
 		ContrailLength: 8
 		Speed: 3000
 		Width: 100
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 8000
 LatinBuggyMG_elite:
 	Inherits: LatinBuggyMG
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
@@ -1192,8 +1188,7 @@ RA2APCFlakCannonAA_elite:
 	Projectile: Bullet
 
 RA2APCMachineGun:
-	Inherits: ^RA2SmallArms
-	Inherits@2: ^RA2Chaingun
+	Inherits@wh: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	Range: 5740
 	ReloadDelay: 12
@@ -1209,13 +1204,10 @@ RA2APCMachineGun:
 		ContrailLength: 8
 		Speed: 3000
 		Width: 100
-	Warhead@Bullet_Light:
-		PercentageScale: 20000
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium:
+		PercentageScale: 10000
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 RA2APCMachineGun_elite:
 	Inherits: RA2APCMachineGun
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
