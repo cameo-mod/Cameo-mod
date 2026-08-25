@@ -294,3 +294,57 @@ gun_turret.harkonnen:
 rocket_turret.harkonnen:
 	Inherits: harkonnen_flameturret
 
+harkonnen_sardaukar_baron_elite:
+	Defaults:
+		Filename: harkonnen_sardaukar_baron_elite.png
+		Scale: 1.2
+	stand:
+		Start: 0
+		Facings: 16
+		Length: 1
+		Tick: 100
+	prone-stand:
+		Start: 0
+		Facings: 16
+		Length: 1
+		Tick: 100
+	run:
+		Start: 16
+		Facings: 16
+		Length: 6
+		Tick: 100
+	prone-run:
+		Start: 16
+		Facings: 16
+		Length: 6
+		Tick: 100
+	shoot:
+		Start: 112
+		Facings: 16
+		Length: 4
+		Tick: 100
+	garrison-muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4028
+		Tick: 60
+		Facings: -32
+		BlendMode: Additive
+	die:
+		Start: 176
+		Facings: 16
+		Length: 4
+		Tick: 120
+	die-crushed:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 386, 393, 400, 407, 414, 421, 428, 435, 442, 447, 452, 457
+		Length: 12
+		Tick: 800
+		ZOffset: -511
+	icon:
+		Filename: d2k_sardaukar_elite_icon.shp
+		Scale: 1
+

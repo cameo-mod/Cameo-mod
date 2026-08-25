@@ -147,8 +147,10 @@ harkonnen_sardaukar:
 		MuzzlePalette: d2keffect
 		RequiresCondition: !rank-elite
 	WithInfantryBody:
+		IdleSequences: stand
+		StandSequences: stand
 		DefaultAttackSequence: shoot
 	RenderSprites:
-		Image: d2k_sardaukar_elite
+		Image: harkonnen_sardaukar_baron_elite
 	Voiced:
 		VoiceSet: D2KInfantryVoice
