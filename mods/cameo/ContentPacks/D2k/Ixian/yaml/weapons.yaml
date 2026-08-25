@@ -580,13 +580,9 @@ RaiderGuns_upgrade:
 		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 HMG_turret:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 22
@@ -595,12 +591,9 @@ HMG_turret:
 	Range: 7394
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
-		Damage: 2000
+		Damage: 4000
 HMG_turret_upgrade:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
 	Inherits@proj: ^Projectile_Shell_Heavy
@@ -620,10 +613,7 @@ HMG_turret_upgrade:
 		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 HMG_Duelist:
 	Inherits: ^LightMissile
 	Inherits@2: ^Grenade
@@ -920,10 +910,9 @@ D2K_RocketsCymek:
 		Damage: 6000
 d2k_air_drone_guns:
 	Inherits: ^D2KMissile
-	Inherits@2: ^Warhead_Bullet_Light
-	Inherits@3: ^Warhead_Bullet_Medium
-	Inherits@4: ^Projectile_Bullet_Medium
-	Inherits@5: ^Effect_Bullet_Medium
+	Inherits@2: ^Warhead_Bullet_Medium
+	Inherits@3: ^Projectile_Bullet_Medium
+	Inherits@4: ^Effect_Bullet_Medium
 	ReloadDelay: 28
 	Burst: 4
 	BurstDelays: 2
@@ -934,12 +923,9 @@ d2k_air_drone_guns:
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 8000
 	MinRange: 1300
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
@@ -958,10 +944,7 @@ d2k_air_drone_guns_upgrade:
 		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 	MinRange: 1300
 d2k_laser:
 	Inherits@wh: ^Warhead_Laser_Heavy

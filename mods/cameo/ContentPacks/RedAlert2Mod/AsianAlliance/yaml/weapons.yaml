@@ -158,7 +158,6 @@ RA2AsianShotgunFanatic1:
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Concussion_Medium
-	Inherits@3: ^RA2SmallArms
 	Inherits@4: ^RA2Chaingun
 	ReloadDelay: 50
 	Range: 5000
@@ -167,10 +166,8 @@ RA2AsianShotgunFanatic1:
 		Damage: 2000
 	Warhead@Concussion_Medium:
 		Damage: 2000
-	Warhead@Bullet_Light: AreaDamage
-		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
-		Damage: 2000
+		Damage: 4000
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -363,7 +360,6 @@ AsianLynxTankCannon_elite:
 	BurstDelays: 3
 
 AsianLynxMG:
-	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 51
@@ -371,12 +367,9 @@ AsianLynxMG:
 	BurstDelays: 2
 	Range: 5357
 	Report: vifvat2a.wav, vifvat2b.wav, vifvat2c.wav
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water
-		Damage: 2000
+		Damage: 4000
 AsianLynxMG_elite:
 	Inherits: AsianLynxMG
 	Inherits@Elite: ^RA2EliteEffects
@@ -384,7 +377,6 @@ AsianLynxMG_elite:
 	Burst: 6
 
 AsianKamikazeChaingun:
-	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 12
@@ -393,12 +385,9 @@ AsianKamikazeChaingun:
 	Range: 7000
 	MinRange: 1400
 	Report: vifvat2a.wav, vifvat2b.wav, vifvat2c.wav
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 AsianPhotonCannon:
 	Inherits: ^MediumMissile
 	Inherits@2: ^FlakWeapon
@@ -774,8 +763,7 @@ AsianQuasarBoat_AA:
 		MinimumLaunchSpeed: 256
 
 AsianHowitzerCannon:
-	Inherits: ^RA2MediumCannon
-	Inherits@2: ^RA2HeavyCannon
+	Inherits: ^RA2HeavyCannon
 	ReloadDelay: 160
 	Report: aa_bgart.wav
 	Range: 16000
@@ -795,10 +783,8 @@ AsianHowitzerCannon:
 		ContrailEndWidth: 20
 		TrailInterval: 1
 		Inaccuracy: 320
-	Warhead@CannonHE_Medium:
-		Damage: 20000
 	Warhead@CannonHE_Heavy:
-		Damage: 20000
+		Damage: 40000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 125
@@ -905,12 +891,9 @@ AsianPulverizerGatling:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Air, Water
 		Damage: 2000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Air, Water
-		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Air, Water
-		Damage: 2000
+		Damage: 4000
 AsianPulverizerMechaGatling:
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^MediumMissile
@@ -1590,7 +1573,6 @@ AsianPelicanMissile_elite:
 
 AsianPelicanMG:
 	Inherits: ^RA2HeavyCannon
-	Inherits@2: ^RA2SmallArms
 	Inherits@3: ^RA2Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 18
@@ -1601,12 +1583,9 @@ AsianPelicanMG:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 	# Pinned: this weapon stacks TWO projectile templates, so the hitscan
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
@@ -1752,7 +1731,6 @@ AsianPhoenixRocket_elite:
 		ContrailEndWidth: 1
 
 ASDFGun:
-	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	Report: varmatta.wav, varmattb.wav
 	Range: 5935
@@ -1761,12 +1739,9 @@ ASDFGun:
 	BurstDelays: 2
 	InvalidTargets: Structure, Bridge, wall
 	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 ASDFGun2:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -1880,8 +1855,6 @@ AsianSniperAP:
 		Damage: 8
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 16000
-	Warhead@Bullet_Light: AreaDamage
-		Damage: 16000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@FlakWeapon: SpreadDamage
@@ -1889,7 +1862,7 @@ AsianSniperAP:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Bullet_Medium: AreaDamage
-		Damage: 16000
+		Damage: 32000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Effect: CreateEffect
@@ -1933,11 +1906,6 @@ AsianSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 32000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
@@ -1956,7 +1924,7 @@ AsianSniperLockdown:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 32000
+		Damage: 64000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air

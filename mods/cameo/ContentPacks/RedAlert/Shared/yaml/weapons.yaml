@@ -1847,7 +1847,6 @@ DepthChargeCryo:
 
 8Inch:
 	Inherits@wh: ^Warhead_Demolition_Heavy
-	Inherits@wh2: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Light
 	ReloadDelay: 250
@@ -1867,9 +1866,7 @@ DepthChargeCryo:
 		ContrailStartColor: FF9933
 		ContrailEndColor: FFFFFF
 	Warhead@Demolition_Heavy:
-		Damage: 40000
-	Warhead@Demolition_Light:
-		Damage: 40000
+		Damage: 80000
 8InchCryo:
 	Inherits@wh: ^Warhead_CryoBlast_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light
