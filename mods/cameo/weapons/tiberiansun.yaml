@@ -211,54 +211,17 @@ TSLaser90mm:
 	Inherits@wh: ^Warhead_CannonAP_Medium
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_CannonAP_Medium
+	Inherits@tslaser: ^TSLaserEffect
 	ValidTargets: Ground, Water
 	ReloadDelay: 32
 	Range: 5423
 	Report: obelray1.aud
 	Projectile: LaserZap
-		Image: 120MM
-		InaccuracyPercentage: 1
-		ProjectileSpeedPercentage: 10
-		Shadow: true
-		Color: FF000080
-		Duration: 15
-		SecondaryBeam: true
-		SecondaryBeamColor: FFFFFF
-		SecondaryBeamWidth: 36
-		SecondaryBeamZOffset: 2047
 		Width: 72
-		ZOffset: 2047
-		Blockable: false
-		HitAnim: laserfire
+		SecondaryBeamWidth: 36
 	Warhead@CannonAP_Medium:
-		Damage: 12000
-		PercentageScale: 10000
+		Damage: 12600
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, FireDeath, Incendiary
-	Warhead@LaserExtraDamage: SpreadDamage
-		Damage: 600
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-		Spread: 300
-		UpdatesUnitStatistics: false
-		ValidTargets: Ground, Water, Air
-		Versus:
-			Bomber: 1
-			Concrete: 1
-			Fighter: 1
-			Flak: 1
-			Heavy: 1
-			Helicopter: 1
-			Heroic: 1
-			Light: 1
-			Medium: 1
-			None: 1
-			Plate: 1
-			REFLECTOR: 50
-			Scout: 1
-			Shield: 100
-			Spaceship: 1
-			Steel: 1
-			Superheavy: 1
-			Wood: 1
 	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactActors: false

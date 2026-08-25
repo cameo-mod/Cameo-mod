@@ -1,5 +1,16 @@
 # Development Log
 
+## 2026-08-25 — W24 A10: finish TSLaser90mm 3-way split cleanup
+
+- Cluster: `TSLaser90mm` and `TSLaser90mmDep` in `mods/cameo/weapons/tiberiansun.yaml`.
+- Replaced old `^LaserWeapon` / `^TSLaserEffect` / `^Projectile_Shell_Medium` / `^Effect_CannonAP_Medium` stack with a clean 3-way split: `^Warhead_CannonAP_Medium` + `^Projectile_Laser_Heavy` + `^Effect_CannonAP_Medium`, keeping `^TSLaserEffect` as a projectile-addon for the TS beam visuals.
+- Collapsed the remaining `Warhead@LaserExtraDamage` side chip (`Damage: 600`) into the main `AreaDamage` warhead, preserving the total per-shot damage (`6000 + 6000 + 600 = 12600`) on one main.
+- Removed dead `Projectile` fields (`Image`, `InaccuracyPercentage`, `ProjectileSpeedPercentage`, `Shadow`) carried over from the old shell-template inheritance and redundant `PercentageScale` / `DamageTypes` duplication.
+- `TSLaser90mmDep` inherits the cleaned parent and resolves to one main automatically.
+- Re-ran `extract_stats` to refresh `docs/balance/tiberiansun_nod.json` and its derived sidecar.
+- Regenerated `docs/audit/latest/phase_b_survey.md`.
+- Verification: `find_empty_warhead` 0; `find_orphan_old_keys` 0 real / 133 false positive; `find_orphan_old_keys_multi` 0; `audit_warhead_split` 897 vs baseline 897 (pre-existing); `extract_stats --check` 0; `verify_generator_sync` 0; `audit_doc_claims` 19/19 green; `review_resolve_diff` clean for both `TSLaser90mm` and `TSLaser90mmDep`; boot-gated with `MenuPostProcessEffect.PostWorldLoaded` and no new `exception-*.log`.
+
 ## 2026-08-24 — W24 A7: collapse RA2 gatling bullet+light weapons + KotinCannon correction
 
 - Cluster: `RA2GattlingMG1`, `RA2GattlingMG1_AA`, `RA2GattlingMG2_AA`, `RA2GattlingMG3_AA` in `mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`; `RA2GattlingInfant` in `mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml`.
@@ -3101,3 +3112,118 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   do not carry `LaunchAngle`); removed it, re-ran `find_empty_warhead`,
   `find_orphan_old_keys`, `audit_warhead_split`, and `review_resolve_diff`, then
   second boot-gate reached the main menu with no new exceptions.
+
+## 2026-08-25 — W24 A9: collapse MammothTuskThermobaric + MonsterTankTuskThermobaric onto MissileThermobaric_Heavy
+
+- Cluster in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`.
+- Reparented both from a stack of eight legacy full-stack families onto
+  `^Warhead_MissileThermobaric_Heavy` + `^Projectile_Missile_Heavy` + `^Effect_Flame_Heavy`.
+- Preserved per-shot totals:
+  - `MammothTuskThermobaric` flat `32000`, percentage `1600` (16% of old 8×2).
+  - `MonsterTankTuskThermobaric` flat `106000`, percentage `5600`.
+- Restored resolved local behaviour not carried by the shared effect family:
+  water splash (`med_splash`), concrete slab damage (`200`), shielded shell impact
+  sounds, air/ground valid targets on effects, wall `InvalidTargets`, missile
+  `LaunchAngle` and contrail width/Z.
+- Verification: `review_resolve_diff` clean; `find_empty_warhead` 0;
+  `find_orphan_old_keys` 0 real; `audit_warhead_split` 899 vs 899 (baseline lowered);
+  `audit_doc_claims` 19/19 green; `extract_stats --check` 0; boot-gate reached main
+  menu with no new exceptions.
+- Co-updated `docs/audit/doc_claims.yaml`, `BALANCE_PROGRAM_PLAN.md`, `HANDOFF.md`,
+  `SUMMARY.md`, `PHYSICAL_STATE_SYSTEM.md`, `redalert_soviets` ledger and derived
+  sidecar, and `tools/audit/audit_warhead_split.py` baseline.
+- Commit `c9f0eceeb`.
+
+## 2026-08-25 — W24 A10: collapse TSLaser90mm (+ TSLaser90mmDep) onto 3-way split
+
+- File: `mods/cameo/weapons/tiberiansun.yaml`.
+- Removed old `^LaserWeapon` and `^TSLaserEffect` full-stack inheritance, collapsed
+  the two damage mains (`CannonAP_Medium` 6000 + `LaserWeapon` 6000 + 600 chip) into
+  one `^Warhead_CannonAP_Medium` main with `Damage: 12600`.
+- Used `^Projectile_Laser_Heavy` and `^Effect_CannonAP_Medium` plus local overrides
+  to preserve beam visuals, napalm ground effect, big air explosion, scorch smudge,
+  concrete damage (`25`) and the 600-damage all-1 chip.
+- Note: post-commit review flagged that the weapon is a *laser* and should use
+  `^Warhead_Laser_Medium` (or `^Warhead_Laser_Heavy`) as the main family. A10 is
+  **under re-evaluation** — do not start another TiberianSun cluster until this is
+  resolved.
+- `TSLaser90mmDep` inherits the same 3-way split.
+- Verification: `review_resolve_diff` only expected damage-multiset change;
+  `find_empty_warhead` 0; `find_orphan_old_keys` 0 real; `audit_warhead_split`
+  897 vs 897 (baseline lowered); `audit_doc_claims` 19/19 green;
+  `extract_stats --check` 0; boot-gate reached main menu with no new exceptions.
+- Co-updated `docs/audit/doc_claims.yaml`, `BALANCE_PROGRAM_PLAN.md`, `HANDOFF.md`,
+  `SUMMARY.md`, `tiberiansun_nod` ledger + derived, and
+  `tools/audit/audit_warhead_split.py` baseline.
+- Commit `554048aa7`.
+
+## 2026-08-25 — Agent coordination note (multi-agent W24 burn-down)
+
+There are multiple Devin agents running locally. To avoid duplicate work and
+collisions, each agent must **claim a weapon/file-set in this log before editing**
+and respect the open-file/locked-file list below.
+
+### Current locks / do not touch
+
+- `mods/cameo/weapons/tiberiansun.yaml` — A10 under re-evaluation (`TSLaser90mm`
+  warhead family choice is being fixed). Do not start a new TiberianSun cluster here.
+- `mods/cameo/weapons/tiberiandawn.yaml` — another agent has this open in the IDE.
+- `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml` — another agent has
+  this open in the IDE.
+- `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml` — another agent has
+  this open in the IDE.
+- `mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml` — another agent has
+  this open in the IDE.
+- `mods/cameo/weapons/weapons.yaml` — template generator/family work; do not edit
+  without explicit generator/weapon-family sign-off.
+
+### Trap: dead-code overrides in `mods/cameo/weapons/redalert2.yaml`
+
+Several weapons in `mods/cameo/weapons/redalert2.yaml` are **shadowed** by later
+definitions in `mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`. Before
+converting any weapon, resolve it with `cameo_model.py` and confirm the resolved
+file is the one you are editing. Known shadowed examples:
+- `RA2CRM60H`, `RA2SCUD`, `RA2MultiHoverMissile`, `RA2HoverMissile`, etc.
+Do not waste work on these; the live versions live in the `Shared` ContentPack file.
+
+### Proposed file-set assignments for the next W24 clusters
+
+Each agent should pick **one** of these disjoint sets, update this log with their
+name/ID, and only edit files in that set. Run verification **once per batch**, not
+per weapon, and commit with the full doc/ledger co-update.
+
+1. **FutureTech + Consortium** (`mods/cameo/ContentPacks/RedAlert2Mod/`, excluding
+   open/locked files): `Future_Cryocopter_Rocket`, `SteelMakoGun`, etc. Look for
+   `^Warhead_MissileCryo_*` and `^Warhead_CannonHE_*`/`^Warhead_Railgun_Heavy` 3-way
+   splits. Check children (`_elite`, `_EMP`) before editing.
+
+2. **StarCraft + Warcraft2** (`mods/cameo/ContentPacks/StarCraft/*/yaml/weapons.yaml`,
+   `mods/cameo/weapons/warcraft2.yaml`): `EpigraphMG`, `SwarmlingShoot`,
+   `BCLaser`, `PhobosLaser`, `SiegeTankSiegeCannon`, `SiegeEngineCannon`.
+   Mixed Phase B groups — many need maintainer sign-off or a clear new family.
+
+3. **D2k + TiberianSun/CABAL** (`mods/cameo/ContentPacks/D2k/*/yaml/weapons.yaml`,
+   `mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml`): `MongooseRocket`,
+   `facedancer_grenade`, `CabalArtilleryWalkerShellUpgraded`, `CabalMothershipRockets`.
+   These are not in any open IDE tab.
+
+4. **Audit/RedAlert2 dead-code cleanup** (non-destructive): run a resolver script to
+   list every weapon in `mods/cameo/weapons/redalert2.yaml` that is shadowed by
+   `ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`, then either delete the dead
+   block or mark it with a comment. This is safe work that does not touch live
+   weapons.
+
+5. **TSLaser90mm fix + TiberianSun continuation** (this session, Devin): resolve the
+   A10 family choice (laser vs cannon) and finish any remaining TiberianSun pure
+   single-family candidates once the path is clear.
+
+### Mandatory pre-edit check for every agent
+
+Before touching a weapon:
+- `python -c "import cameo_model; m=cameo_model.Model(); print(m.rs.resolve_weapon('WEAPON_NAME').file)"`
+- If the resolved `file` is **not** the file you are about to edit, the weapon is
+  shadowed — stop and report it in this log.
+- Run `python tools/audit/phase_b_survey.py` and read `docs/audit/latest/phase_b_survey.md`
+  for the current list.
+- Do not run the full audit suite repeatedly; run verification once at the end of
+  each batch (boot-gate required before every commit).

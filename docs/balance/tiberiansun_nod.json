@@ -5432,18 +5432,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "12600",
         "falloff": "100, 0",
         "spread": "120",
         "tag": "CannonAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -5456,7 +5449,8 @@
       "versus_templates": [
        "^Warhead_CannonAP_Medium",
        "^Projectile_Laser_Heavy",
-       "^Effect_CannonAP_Medium"
+       "^Effect_CannonAP_Medium",
+       "^TSLaserEffect"
       ],
       "warheads": [
        "^Warhead_CannonAP_Medium"
@@ -5495,18 +5489,11 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "12000",
+        "damage": "12600",
         "falloff": "100, 0",
         "spread": "120",
         "tag": "CannonAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "600",
-        "falloff": null,
-        "spread": "300",
-        "tag": "LaserExtraDamage",
-        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
