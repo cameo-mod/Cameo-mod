@@ -1120,15 +1120,23 @@ light_inf_lmg_ordos_upgrade:
 		Damage: 2000
 
 ordos_laserturret:
-	Inherits@wh: ^Warhead_Laser_Heavy
-	Inherits@proj: ^Projectile_Laser_Heavy
-	Inherits@fx: ^Effect_Laser_Heavy
+	Inherits: ^LaserWeapon
+	ReloadDelay: 55
+	Range: 7275
 	Report: LaserTankAttack.wav
-	ValidTargets: Ground, Water, Air
-	-Warhead@Laser_Heavy_ExtraDamage:
+	Projectile: LaserZap
+		Width: 55
+		ZOffset: 2047
+		Color: 00ffbb
+	Warhead@LaserWeapon:
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 
 ordos_chemturret:
-	Inherits@wh: ^Warhead_Chemical_Light
-	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
-	Inherits@fx: ^Effect_Chem_Light
+	Inherits: D2K_MortarChem
+	ReloadDelay: 90
+	Range: 14000
 	Report: MORTAR1.WAV
+	Warhead@CannonChem_Medium:
+		Damage: 40000

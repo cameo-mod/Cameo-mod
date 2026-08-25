@@ -2935,6 +2935,7 @@
 		Categories: Aircraft
 	SpawnActorOnDeath:
 		RequiresCondition: airborne
+		Actor: aircraft_husk
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
@@ -3023,6 +3024,7 @@
 	WithFacingSpriteBody:
 	SpawnActorOnDeath:
 		RequiresCondition: airborne
+		Actor: aircraft_husk
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
@@ -3116,6 +3118,7 @@
 		Categories: Infantry
 	SpawnActorOnDeath:
 		RequiresCondition: airborne
+		Actor: aircraft_husk
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode

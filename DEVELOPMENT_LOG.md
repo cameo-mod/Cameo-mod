@@ -1,5 +1,46 @@
 # Development Log
 
+## Devin-Aurora — D2k Ordos turret laser/chemical mortar rework (2026-08-25)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max), D2k rollout coordinator / weapons pass.
+
+**What and why:**
+- Completed the maintainer request to align the Ordos laser turret with the Ordos laser tank and to give the Ordos chemical mortar turret a long-range, high-damage chemical mortar.
+- Added the D2k mortar family to `ContentPacks/D2k/Shared/yaml/weapons.yaml`:
+  - `D2K_Mortar` = `CannonHE_Medium` × `Concussion` mortar shell.
+  - `D2K_MortarFire` = `CannonFire_Medium` × `Concussion` mortar shell.
+  - `D2K_MortarChem` = `CannonChem_Medium` × `Concussion` mortar shell.
+- Reworked `ordos_laserturret` to inherit `^LaserWeapon` with the same `LaserZap` projectile, 55 reload, 7275 range, and 10000 `Damage`/`ElectricityDeath` damage type as the resolved `ordos_lasertank` laser.
+- Reworked `ordos_chemturret` to inherit `D2K_MortarChem` and override `Range: 14000` (exceeds the 10000 of the 155mm artillery platform and the 5177 of infantry `d2k_chemgun`) and `Damage: 40000` (exceeds the infantry chem gun's 30000) using the balance pipeline (`extract_stats` → ledger edit → `apply_balance --confirm` on maintainer order).
+
+**Decision basis:**
+- The 3-way split was verified against `docs/design/WEAPON_3WAY_SPLIT.md`: each mortar keeps the resolved `Damage`, projectile fields, and picks up the shared Concussion mortar effect template.
+- The turret ranges and damage are explicit maintainer orders, so they were routed through `apply_balance` rather than hand-edited.
+- `ordos_laserturret` could not simply `Inherits: ordos_lasertank` because the tank carries four co-equal 10000-damage warheads (`FlakWeapon`, `MediumMissile`, `RailgunWeapon`, `LaserWeapon`); that would add a new W24 broadcast. Instead, the turret uses the same `^LaserWeapon` template the tank's laser is built from, preserving the laser behaviour without the multi-main over-damage.
+
+**Verification:**
+- `python tools/audit/find_empty_warhead.py` — 0 empty warheads.
+- `python tools/audit/audit_warhead_split.py` — 824 vs baseline 824, no new broadcasts.
+- `python tools/balance/extract_stats.py` followed by `python tools/balance/extract_stats.py --check` — 33 ledgers, 0 drifted (chained run on the working tree with all current WIP).
+- `python tools/audit/audit_balance_drift.py` — clean, 33 ledgers match live rules.
+- `python tools/balance/verify_generator_sync.py` — 0 drift across 142 shared templates.
+- `launch-game.cmd` reached the main menu (`perf.log` ends `MenuPostProcessEffect.PostWorldLoaded`); zero new `exception-*.log` files.
+
+**Commit:** `5b43f5f3e` — D2k Ordos turret laser/chemical mortar rework + shared mortar family
+
+**Files changed (scoped commit):**
+- `mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml`
+- `mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml`
+- `mods/cameo/rules/defaults.yaml` — adds `Actor: aircraft_husk` to bare `SpawnActorOnDeath` nodes (boot-gate safety fix).
+- `mods/cameo/rules/husks.yaml` — adds a generic `aircraft_husk` actor.
+- `docs/balance/d2k_ordos.json`
+- `docs/balance/shared_d2k.json`
+- `docs/HANDOFF.md` — updated agent status and task notes.
+
+**Next:**
+- Coordinate with Devin-Echo (owner of `D2k/Ordos/yaml/weapons.yaml` per `HANDOFF.md`) to review the turret changes and to include the derived sidecar refresh in the next full `extract_stats` pass.
+- Return to D2k Phase 4 shared/global pass once the Atreides/Harkonnen/Corrino WIP is committed.
+
 ## Devin-Aurora - D2k faction rollout: all 3 factions functionally complete (2026-08-25)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max), D2k rollout coordinator.
@@ -3402,7 +3443,7 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   audit_warhead_split broadcast baseline lowered 939 -> 931;
   audit_doc_claims all 19 green after updating doc_claims.yaml and affected
   docs; extract_stats.py --check 0 drift; verify_generator_sync 0 drift.
-- Re-extracted balance ledgers with 	ools/balance/extract_stats.py; only
+- Re-extracted balance ledgers with tools/balance/extract_stats.py; only
   docs/balance/redalert2_soviets.json + docs/balance/derived/redalert2_soviets.json
   changed.
 - Updated documentation counts: docs/audit/doc_claims.yaml,
