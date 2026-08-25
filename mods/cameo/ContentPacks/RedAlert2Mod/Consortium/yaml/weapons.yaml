@@ -64,18 +64,15 @@ SteelCloneGunResonanceBounce2_elite:
 
 SteelVulcan:
 	Inherits: ^SteelHeavyCannon
-	Inherits@2: ^SteelSmallArms
-	Inherits@3: ^SteelChaingun
+	Inherits@2: ^SteelChaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 10
 	Range: 6666
 	Report: bsenatta.wav, bsenattb.wav, bsenattc.wav, bsenattd.wav
 	Warhead@CannonHE_Heavy:
 		Damage: 2000
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 	Report: pulseturretfire.wav
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
@@ -457,9 +454,8 @@ SteelMakoGun_EMP_elite:
 
 SteelMantaAG:
 	Inherits: ^SteelLightMissile
-	Inherits@2: ^SteelSmallArms
-	Inherits@3: ^RA2FlakWeapon
-	Inherits@4: ^SteelChaingun
+	Inherits@2: ^RA2FlakWeapon
+	Inherits@3: ^SteelChaingun
 	ReloadDelay: 20
 	Range: 6666
 	ValidTargets: Ground, Water
@@ -476,15 +472,12 @@ SteelMantaAG:
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 SteelManta_AA:
 	Inherits: SteelMantaAG
 	Report: steel_chaingunfire.wav
@@ -1918,8 +1911,7 @@ SteelCruiserCannons_elite:
 	BurstDelays: 1
 
 SteelCargoshipCannons:
-	Inherits: ^SteelSmallArms
-	Inherits@2: ^SteelChaingun
+	Inherits: ^SteelChaingun
 	ReloadDelay: 3
 	ValidTargets: Ground, Air, Water
 	Range: 4750
@@ -1933,12 +1925,9 @@ SteelCargoshipCannons:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Air, Water
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Air, Water
-		Damage: 2000
+		Damage: 4000
 ####################################################################################################
 #		Red Alert 2 Steel Support Generator
 ####################################################################################################
