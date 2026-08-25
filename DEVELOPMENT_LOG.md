@@ -1,5 +1,31 @@
 # Development Log
 
+## Devin-Aurora - D2k faction rollout: all 3 factions functionally complete (2026-08-25)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max), D2k rollout coordinator.
+
+**Commits this session:**
+- `f07d8d35e` — Phase 0: Atreides completion + Corrino skeleton + Ordos/Harkonnen additions + boot-gate fixes (48 files)
+- `afdaae46c` — Phase 1: Harkonnen infantry/aircraft/upgrades/StartingUnits (9 files)
+- `07135e6f4` — Phase 3: Corrino buggy + missing buildings + weapons (5 files)
+- `af3ff5f9d` — Phase 3: Corrino infantry/aircraft/upgrades/BMP/StartingUnits + Ordos/Harkonnen sequence polish (12 files)
+- `d519ceaf6` — Phase 3: Corrino cannon weapon + building fixes (3 files)
+
+**Final faction actor counts:**
+| Faction | Buildings | Infantry | Vehicles | Aircraft | Upgrades | Selectable |
+|---|---|---|---|---|---|---|
+| Atreides | 15 | 4 | 8 | 2 | 5 | yes |
+| Harkonnen | 17 | 4 | 5 | 2 | 5 | yes |
+| Corrino | 13 | 3 | 5 | 2 | 5 | yes (default) |
+
+**Boot-gate:** All commits boot-gated. Menu reached in 50-80s, zero content-related exceptions.
+
+**Remaining work:**
+- Phase 4: Shared/global pass — clean up legacy `mods/cameo/weapons/d2k.yaml` and `mods/cameo/rules/d2k.yaml`, run full audit suite.
+- `utility.cmd cameo --check-yaml` clean run for all three packs.
+- Art replacement: Harkonnen/Corrino still reference some shared art (e.g. `*.harkonnen` images); unique faction art pass deferred.
+- Corrino needs more infantry variety (trooper/rockettrooper) and potentially a palace superweapon.
+
 ## Devin-Aurora - D2k rollout plan synchronized; Phases 0-2 done, Corrino/shared pass remaining (2026-08-25)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max), D2k rollout coordinator.
