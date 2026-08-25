@@ -22,7 +22,7 @@
 - Zero new `exception-*.log` files.
 - All 43 files (Atreides, Corrino, Harkonnen, Ordos, Shared, mod.yaml, PNG assets, docs) boot-gated together.
 
-## Devin-Aurora - D2k Phase 0 foundation complete; synchronized rollout plan (2026-08-25)
+## Devin-Aurora - D2k Phase 0 committed; synchronized rollout plan (2026-08-25)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max), D2k Phase 0 coordinator.
 
@@ -32,7 +32,7 @@
 - Created `Atreides/yaml/promotions.yaml` (required by `Atreides/content.yaml`) and `Atreides/yaml/weapons.yaml` (loaded by `Atreides/content.yaml`) so the pack's manifest is consistent.
 - Fixed non-existent parent templates in the Atreides pack: replaced `^TankHusk` with `^D2KVehicleHusk` for `sonic_tank_husk.atreides` and `siege_tank_husk.atreides`, and replaced `^Upgrade` with `^UpgradeTemplate` for the five Atreides upgrade actors.
 - Fixed `ContentPacks/D2k/Atreides/yaml/upgrades.yaml` indentation for `IconPalette` so the value sits inside `Buildable` rather than becoming a top-level junk trait.
-- Applied an emergency boot-gate fix in `ContentPacks/D2k/Ordos/yaml/sequences.yaml`: `ordos_laserturret` and `ordos_chemturret` `turret` sequences used `Length: 64` with `Facings: -64`, requesting 64 frames per facing from PNGs that only contain 96/80 frames total. Changed `Length` to `1` so each of the 64 facings consumes one frame. The new `ordos_lasertur.png`, `ordos_chemtur.png`, and weapon definitions are owned by Devin-Echo; this is only a frame-layout rescue so the game boots.
+- Applied an emergency boot-gate fix in `ContentPacks/D2k/Ordos/yaml/sequences.yaml`: `ordos_laserturret` and `ordos_chemturret` `turret` sequences originally used `Length: 64` with `Facings: -64`, requesting 64 frames per facing from PNGs with only 96/80 frames total. The turret sequences were corrected to `Facings: 32` (default `Length: 1`) so the 32 turret facings each consume one frame. The new `ordos_lasertur.png`, `ordos_chemtur.png`, and weapon definitions are owned by Devin-Echo; this is only a frame-layout rescue so the game boots.
 - Updated `docs/design/ROADMAP.md` to mark Phase 0 complete and record the Ordos/Corrino side notes.
 - Deduplicated and synchronized the canonical plan across `docs/HANDOFF.md` §3.B, `docs/design/ROADMAP.md`, and this log.
 
@@ -46,7 +46,7 @@
 
 | Phase | Owner | File-set | What to build | Verification before commit |
 |---|---|---|---|---|
-| **0 - Foundation** | **Devin-Aurora** (done) | `ContentPacks/D2k/Atreides/`, `ContentPacks/D2k/Harkonnen/`, `bits/d2k/` | Harvester actors/sequences/refinery wiring, `Atreides` manifest fixes | boot-gate (passed) |
+| **0 - Foundation** | **Devin-Aurora** (committed `f07d8d35e`) | `ContentPacks/D2k/Atreides/`, `ContentPacks/D2k/Harkonnen/`, `bits/d2k/` | Harvester actors/sequences/refinery wiring, `Atreides` manifest fixes | boot-gate (passed) |
 | **1 - Harkonnen** | **Devin-Blaze** | `ContentPacks/D2k/Harkonnen/**` | Full brute-force tech tree (infantry, vehicles, aircraft, naval, defenses, upgrades, promotions, ai, weapons, sequences). Replace `ordos_*`/`ixian_*`/global refs with unique `harkonnen_*` assets/actors. Enable `FactionCA@Harkonnen` (`Selectable: true`) only when roster complete. | `utility.cmd cameo --check-yaml`, `find_empty_warhead.py`, `review_resolve_diff`, boot-gate |
 | **2 - Atreides** | **Devin-Echo** | `ContentPacks/D2k/Atreides/**` | Full noble/air/Fremen tech tree. Uncomment `FactionCA@Atreides`, set `Selectable: true` when complete. | same |
 | **3 - Corrino** | **Devin-Cyrus** (after WC2 hero fix and after phases 1-2) | `ContentPacks/D2k/Corrino/**` | Imperial Sardaukar faction from scratch; skeleton already exists from Devin-Dawn. Add `mod.yaml` include (already present) and `Shared/yaml/faction.yaml` entry. | same |
@@ -62,10 +62,10 @@
 7. `launch-game.cmd` before every commit; scoped `git add` only.
 
 **Next:**
-- Devin-Aurora will stage and commit the scoped Phase 0 batch if the owning agents confirm no conflicts, OR will wait for Devin-Echo (Ordos turrets) and Devin-Dawn (Corrino skeleton) to commit their portions first.
-- Devin-Blaze begins Phase 1 Harkonnen once Phase 0 is committed.
-- Devin-Echo begins Phase 2 Atreides once Phase 0 is committed and Ordos turret art/weapon definitions are finalized.
-- Devin-Cyrus begins Phase 3 Corrino after the WC2 hero icon blocker is resolved and phases 1-2 are committed.
+- Phase 0 is committed as `f07d8d35e`. Devin-Blaze begins Phase 1 Harkonnen immediately.
+- Devin-Echo begins Phase 2 Atreides immediately; the Ordos turret art/weapons were included in the foundation commit but still need final review/ownership sign-off.
+- Devin-Cyrus resolves the WC2 hero icon blocker first, then begins Phase 3 Corrino after phases 1-2 are committed.
+- Devin-Blaze + Devin-Echo run the Phase 4 shared/global pass after the three packs are selectable.
 
 ## ⚠️ Name collision resolution (2026-08-25 14:16)
 

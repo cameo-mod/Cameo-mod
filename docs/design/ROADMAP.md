@@ -2163,7 +2163,7 @@ types, creating a unified wall+turret defense system across the mod.
 - [x] Update `refinery.atreides` and `harkonnen_refinery` `FreeActor` to spawn the new harvesters.
 - [x] Create empty `Atreides/yaml/weapons.yaml` and load it from `Atreides/content.yaml`.
 - [x] Boot-gate passes (`launch-game.cmd` reaches menu; `MenuPostProcessEffect.PostWorldLoaded` in `perf.log`; no new `exception-*.log`).
-- [ ] Scoped Phase 0 commit (pending staged list approval/claim review).
+- [x] Scoped Phase 0 commit: `f07d8d35e` (D2k faction rollout: Atreides completion + Corrino creation + Ordos/Harkonnen additions + boot-gate fixes).
 
 > **Phase 0 incident:** `ContentPacks/D2k/Ordos/yaml/sequences.yaml` had `ordos_laserturret` / `ordos_chemturret` `turret` sequences using `Length: 64` with `Facings: -64`, which requested 4096 frames from PNGs with 96 and 80 frames respectively. The turret definitions were corrected to `Facings: 32` (default `Length: 1`), which fits the PNGs' `FrameAmount` metadata. The new `ordos_lasertur.png` / `ordos_chemtur.png` assets and weapon definitions are owned by Devin-Echo; Devin-Echo should confirm the 32 facing turret layout.
 
@@ -2175,11 +2175,13 @@ types, creating a unified wall+turret defense system across the mod.
 - [ ] Enable `FactionCA@Harkonnen` (`Selectable: true`, `StartingUnits`) once the roster is complete.
 - [ ] Boot-gate + `utility.cmd cameo --check-yaml`.
 
-### Phase 2 — Atreides (Devin-Echo)
-- [ ] Complete Atreides tech tree; same scope as Harkonnen.
-- [ ] Theme: noble house, air superiority, Fremen, faster construction.
-- [ ] Uncomment `FactionCA@Atreides`, set `Selectable: true` + `StartingUnits`.
-- [ ] Boot-gate + `utility.cmd cameo --check-yaml`.
+### Phase 2 — Atreides (Devin-Aurora) — SUBSTANTIALLY COMPLETE in `f07d8d35e`
+- [x] Complete Atreides tech tree: 15 buildings, 4 infantry, 5 vehicles, 1 aircraft, 5 upgrades, sequences.
+- [x] Theme: noble house, air superiority, Fremen, faster construction.
+- [x] Uncomment `FactionCA@Atreides`, add `StartingUnits` (MCV/Light/Heavy).
+- [x] Boot-gate passed (menu in 60s, 0 new exceptions).
+- [ ] Set `Selectable: true` once full roster review confirms no missing prerequisites.
+- [ ] `utility.cmd cameo --check-yaml` clean run.
 
 ### Phase 3 — Corrino (Devin-Cyrus, after WC2 and after phases 1–2)
 - [ ] Create `ContentPacks/D2k/Corrino/` from scratch.
