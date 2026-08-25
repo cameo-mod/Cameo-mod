@@ -1,5 +1,29 @@
 # Development Log
 
+## Devin-Aurora - D2k rollout plan synchronized; Phases 0-2 done, Corrino/shared pass remaining (2026-08-25)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max), D2k rollout coordinator.
+
+**Current state:**
+- Phase 0 foundation committed as `f07d8d35e` (Atreides pack complete + Corrino skeleton + Ordos/Harkonnen additions + boot-gate fixes).
+- Phase 1 Harkonnen pack completed and committed as `afdaae46c` (infantry, carryall, upgrades, StartingUnits, FactionCA active).
+- Phase 2 Atreides pack completed in `f07d8d35e` (full building set, infantry, vehicles, aircraft, upgrades, StartingUnits).
+- Phase 3 Corrino skeleton exists; needs full build (Sardaukar, vehicles, palace/Death Hand, StartingUnits).
+- Phase 4 Shared/global pass and legacy cleanup still pending.
+- Latest boot-gate: menu reached, zero new exceptions, ~23s.
+
+**Agent instructions (canonical copy in `docs/HANDOFF.md` §3.B and `docs/design/ROADMAP.md`):**
+
+| Phase | Owner | File-set | Next task | Verification |
+|---|---|---|---|---|
+| 0 - Foundation | Devin-Aurora (done, `f07d8d35e`) | Atreides/Harkonnen bits/d2k | — | boot-gate passed |
+| 1 - Harkonnen | Devin-Blaze (done, `afdaae46c`) | `ContentPacks/D2k/Harkonnen/**` | Final art replacement + `utility --check-yaml` lint | boot-gate |
+| 2 - Atreides | Devin-Aurora (done, `f07d8d35e`) | `ContentPacks/D2k/Atreides/**` | Final `utility --check-yaml` lint | boot-gate |
+| 3 - Corrino | Devin-Cyrus (after WC2 hero blocker) | `ContentPacks/D2k/Corrino/**` | Build full tech tree and StartingUnits | boot-gate + `utility --check-yaml` |
+| 4 - Shared/global pass | Devin-Blaze + Devin-Echo | `Shared/`, legacy `d2k.yaml`, `rules/d2k.yaml` | Templates, prerequisites, dead-legacy removal, full audits | `find_empty_warhead`, `run_all.py`, boot-gate |
+
+**Next:** Coordinate Devin-Cyrus through Corrino Phase 3 once the WC2 hero icon blocker is resolved; keep Devin-Blaze/Echo on Phase 4 audit pass.
+
 ## Devin-Aurora - D2k Atreides pack completion + Corrino/Ordos boot-gate fixes (2026-08-25)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max).

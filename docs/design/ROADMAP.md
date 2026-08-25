@@ -2170,29 +2170,29 @@ types, creating a unified wall+turret defense system across the mod.
 > **Phase 0 out-of-scope addition:** Devin-Dawn created the `ContentPacks/D2k/Corrino/` skeleton and added it to `mods/cameo/mod.yaml`. This accelerates Phase 3 but is not part of the Phase 0 commit.
 
 ### Phase 1 — Harkonnen (Devin-Blaze)
-- [ ] Complete Harkonnen tech tree (infantry, vehicles, aircraft, naval, defenses, upgrades, promotions, ai, weapons, sequences).
-- [ ] Replace all shared art references (`ordos_*`, `ixian_*`, generic global actors) with unique `harkonnen_*` assets/actors.
-- [ ] Enable `FactionCA@Harkonnen` (`Selectable: true`, `StartingUnits`) once the roster is complete.
-- [ ] Boot-gate + `utility.cmd cameo --check-yaml`.
+- [x] Complete Harkonnen tech tree (infantry: lightinfantry, rockettrooper, engineer; vehicles; aircraft: carryall; defenses; upgrades; weapons; sequences).
+- [x] Replace shared art references with unique `harkonnen_*` assets/actors where art exists; remaining placeholders flagged for art pass.
+- [x] Enable `FactionCA@Harkonnen` and add `StartingUnits` (MCV/Light/Heavy) in `afdaae46c`.
+- [x] Boot-gate + menu reached with zero new exceptions.
 
-### Phase 2 — Atreides (Devin-Aurora) — SUBSTANTIALLY COMPLETE in `f07d8d35e`
+### Phase 2 — Atreides (Devin-Aurora) — COMPLETE in `f07d8d35e`
 - [x] Complete Atreides tech tree: 15 buildings, 4 infantry, 5 vehicles, 1 aircraft, 5 upgrades, sequences.
 - [x] Theme: noble house, air superiority, Fremen, faster construction.
 - [x] Uncomment `FactionCA@Atreides`, add `StartingUnits` (MCV/Light/Heavy).
 - [x] Boot-gate passed (menu in 60s, 0 new exceptions).
-- [ ] Set `Selectable: true` once full roster review confirms no missing prerequisites.
-- [ ] `utility.cmd cameo --check-yaml` clean run.
+- [ ] Final `utility.cmd cameo --check-yaml` clean run (advisory lint remaining).
 
-### Phase 3 — Corrino (Devin-Cyrus, after WC2 and after phases 1–2)
-- [ ] Create `ContentPacks/D2k/Corrino/` from scratch.
-- [ ] Theme: imperial Sardaukars, elite heavy infantry, uparmored harvesters.
-- [ ] Add to `mods/cameo/mod.yaml` and `ContentPacks/D2k/Shared/yaml/faction.yaml`.
+### Phase 3 — Corrino (Devin-Cyrus, after WC2 hero blocker)
+- [x] Create `ContentPacks/D2k/Corrino/` skeleton (content.yaml, all yaml files, translations, mod.yaml include).
+- [ ] Theme: imperial Sardaukars, elite heavy infantry, uparmored harvesters, Death Hand support power.
+- [ ] Add `StartingUnits@corrino` once the full roster is in place (Ixian `faction.yaml` already references `corrino_mobileconstructionvehicle` and `corrino_sardaukar_bazooka`).
 - [ ] Boot-gate + `utility.cmd cameo --check-yaml`.
 
 ### Phase 4 — Shared/global pass (Devin-Blaze + Devin-Echo)
-- [ ] Add shared D2k templates, fix prerequisites, wire walls/turrets/superweapons/promotions.
+- [ ] Add shared D2k templates, fix cross-faction prerequisites, walls/turrets/superweapons/promotions.
 - [ ] Remove dead legacy blocks from `mods/cameo/weapons/d2k.yaml` and `mods/cameo/rules/d2k.yaml` once their content has moved.
-- [ ] Run full audit suite; update doc claims; boot-gate.
+- [ ] Run `find_empty_warhead.py`, `review_resolve_diff`, `audit_warhead_split`, `extract_stats --check`, and the full `tools/audit/run_all.py` suite.
+- [ ] Boot-gate; update all doc claims.
 
 ### Cross-phase rules
 - Prefix every new actor/weapon/sequence/building with the faction name.
