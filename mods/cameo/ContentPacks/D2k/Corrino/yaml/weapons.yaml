@@ -1,2 +1,13 @@
 # Corrino faction-specific weapons.
-# Currently empty; Sardaukar Bazooka uses D2K_Rocket_Trooper and D2K_TowerMissile from shared/global weapons.
+# Sardaukar Bazooka uses D2K_Rocket_Trooper and D2K_TowerMissile from shared/global weapons.
+
+corrino_buggy_gun:
+	Inherits@wh: ^Warhead_CannonAP_Light
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_CannonAP_Light
+	ReloadDelay: 30
+	Range: 5c0
+	Report: MEDTANK1.WAV
+	ValidTargets: Ground, Water
+	Warhead@CannonAP_Light:
+		Damage: 3000

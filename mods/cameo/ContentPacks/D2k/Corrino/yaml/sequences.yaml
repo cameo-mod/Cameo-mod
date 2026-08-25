@@ -49,3 +49,52 @@ saudakar_bazooka:
 		Scale: 1
 		Start: 0
 		Length: 1
+
+corrino_buggy:
+	Defaults:
+		Filename: corrino_buggy.png
+		Scale: 1
+	idle:
+		Start: 0
+		Facings: 64
+		Length: 1
+	move:
+		Start: 0
+		Facings: 64
+		Length: 1
+	turret:
+		Start: 64
+		Facings: 64
+		Length: 1
+	muzzle:
+		Start: 64
+		Facings: 64
+		Length: 1
+	icon:
+		Start: 0
+		Length: 1
+		Facings: 1
+
+corrino_tank:
+	Defaults:
+		Filename: corrino_tank.png
+		Scale: 1
+	idle:
+		Start: 0
+		Facings: 32
+	turret:
+		Start: 32
+		Length: 7
+		Facings: 32
+		Tick: 60
+	muzzle:
+		Start: 32
+		Length: 7
+		Facings: 32
+		Tick: 60
+		BlendMode: Additive
+	icon:
+		Start: 0
+		Length: 1
+		Facings: 1
+

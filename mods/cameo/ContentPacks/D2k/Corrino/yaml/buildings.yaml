@@ -101,3 +101,155 @@ corrino_heavyfactory:
 		Prerequisite: heavy.corrino_combat
 	ProvidesPrerequisite@mcv_production:
 		Prerequisite: corrino_mcv_production
+
+corrino_lightfactory:
+	Inherits: ^D2KBuilding
+	Inherits@UPGRADEABLE: ^D2kUpgradeable
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^2x2Shape
+	Buildable:
+		Prerequisites: ~corrino_constructionyard, corrino_refinery
+		Description: Produces light vehicles.
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Corrino Light Factory
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 352,576,0
+		ExitCell: 0,2
+	Exit@2:
+		SpawnOffset: 512,480,0
+		ExitCell: 1,2
+	RenderSprites:
+		Image: light.harkonnen
+	ProvidesPrerequisite@vehicle_production:
+		Prerequisite: corrino_light_vehicle_production
+	ProvidesPrerequisite@light:
+		Prerequisite: light.corrino
+	ProvidesPrerequisite@factionlight:
+		Prerequisite: corrino_lightfactory
+
+corrino_repairpad:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^2x2Shape
+	Buildable:
+		Prerequisites: ~corrino_heavyfactory
+		Description: Repairs vehicles.
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Corrino Repair Pad
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RenderSprites:
+		Image: repair.harkonnen
+	RepairsUnits:
+		FinishRepairingNotification: RepairingFinish
+		StartRepairingNotification: RepairingStart
+	RallyPoint:
+
+corrino_outpost:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^2x2Shape
+	Buildable:
+		Prerequisites: ~corrino_constructionyard, corrino_refinery, corrino_barracks
+		Description: Provides radar and reveals terrain.
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Corrino Outpost
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RenderSprites:
+		Image: outpost.harkonnen
+	ProvidesPrerequisite@outpost:
+		Prerequisite: outpost
+	DetectCloaked:
+		Range: 5c0
+	RevealsShroud:
+		Range: 8c0
+
+corrino_hightechfactory:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^3x2Shape
+	Buildable:
+		Prerequisites: ~corrino_heavyfactory
+		Description: Produces aircraft and provides tech upgrades.
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Corrino High Tech Factory
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	RenderSprites:
+		Image: hightech.harkonnen
+	ProvidesPrerequisite@hightech:
+		Prerequisite: hightech.corrino
+
+corrino_ixresearchcenter:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^2x2Shape
+	Buildable:
+		Prerequisites: ~corrino_heavyfactory
+		Description: Unlocks advanced technology.
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Corrino Research Centre
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RenderSprites:
+		Image: research.harkonnen
+	ProvidesPrerequisite@research:
+		Prerequisite: research_centre
+
+corrino_starport:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^3x2Shape
+	Buildable:
+		Prerequisites: ~corrino_hightechfactory, corrino_ixresearchcenter
+		Description: Orders units from orbit.
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Corrino Starport
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	RenderSprites:
+		Image: starport.harkonnen
+	ProvidesPrerequisite@starport:
+		Prerequisite: starport.corrino
+
+corrino_palace:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^2x2Shape
+	Buildable:
+		Prerequisites: ~corrino_hightechfactory, corrino_ixresearchcenter
+		Description: Unlocks superweapons and elite units.
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Corrino Palace
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RenderSprites:
+		Image: palace.harkonnen
+	ProvidesPrerequisite@palace:
+		Prerequisite: palace
+

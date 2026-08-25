@@ -77,3 +77,71 @@ corrino_spiceharvester:
 	RenderSprites:
 		Image: harkonnen_harvester
 		PlayerPalette: player_rgba
+
+corrino_combattank:
+	Inherits: ^CombatTank
+	Buildable:
+		Prerequisites: ~heavy.corrino_combat
+		Description: Imperial Sardaukar battle tank.\n  Strong vs Tanks\n  Weak vs Infantry
+	Armament:
+		Weapon: 80mm_H
+	RenderSprites:
+		Image: corrino_tank
+
+corrino_buggy:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~corrino_light_vehicle_production
+		BuildPaletteOrder: 20
+		Description: Fast scout buggy with a mounted turret.\n  Strong vs Vehicles\n  Weak vs Infantry
+		IconPalette: d2kunit
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Corrino Buggy
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 25000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 85
+		TurnSpeed: 60
+	BodyOrientation:
+		QuantizedFacings: 64
+	WithMoveAnimation:
+		MoveSequence: move
+	Turreted:
+		Offset: 0,0,0
+		TurnSpeed: 60
+	Armament:
+		Weapon: corrino_buggy_gun
+		Recoil: 75
+		RecoilRecovery: 19
+		LocalOffset: 256,0,320
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+	AttackTurreted:
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeMed
+		EmptyWeapon: D2KUnitExplodeMed
+	AutoTarget:
+		InitialStanceAI: Defend
+	Voiced:
+		VoiceSet: D2KVehicleVoice
+	RenderSprites:
+		Image: corrino_buggy
+
