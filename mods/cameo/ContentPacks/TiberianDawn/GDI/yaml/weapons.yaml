@@ -1178,8 +1178,7 @@ ExosuitRailgun:
 		ValidTargets: Ground, Water
 		Damage: 20000
 OfficerMachineGun:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ValidTargets: Ground, Water, Air
@@ -1188,12 +1187,9 @@ OfficerMachineGun:
 	BurstDelays: 4
 	Range: 5596
 	Report: mgun11.aud
-	Warhead@Bullet_Light:
-		PercentageScale: 2500
-		Damage: 8000
 	Warhead@Bullet_Medium:
 		PercentageScale: 2500
-		Damage: 8000
+		Damage: 16000
 OfficerMachineGunAP:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1750,8 +1746,7 @@ td_gdi_minigunner_minigun_ap:
 # SoundVolume 1/burst so the simultaneous shots aren't deafening.
 # TDShotgun stays for its vehicle/map users.
 td_gdi_shotgunner_shotgun:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 70
@@ -1763,7 +1758,5 @@ td_gdi_shotgunner_shotgun:
 	SoundVolume: 0.2
 	Projectile: Bullet
 		Inaccuracy: 800
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
