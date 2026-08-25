@@ -1,9 +1,8 @@
 MarineMG:
-	Inherits: ^Warhead_Bullet_Light
-	Inherits@2: ^Warhead_Bullet_Medium
-	Inherits@3: ^Warhead_CannonHE_Heavy
-	Inherits@4: ^Projectile_Shell_Heavy
-	Inherits@5: ^Effect_CannonHE_Heavy
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@2: ^Warhead_CannonHE_Heavy
+	Inherits@3: ^Projectile_Shell_Heavy
+	Inherits@4: ^Effect_CannonHE_Heavy
 	ReloadDelay: 26
 	Range: 6105
 	Burst: 3
@@ -16,11 +15,7 @@ MarineMG:
 	Warhead@Bullet_Medium:
 		PercentageScale: 1667
 		ValidTargets: Ground, Water, Air
-		Damage: 12000
-	Warhead@Bullet_Light:
-		PercentageScale: 1667
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
+		Damage: 24000
 JimRaynorMachineGun:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
 	Inherits@wh2: ^Warhead_CannonHE_Heavy
@@ -50,11 +45,10 @@ JimRaynorMachineGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 MadcapGun:
-	Inherits: ^Warhead_Bullet_Light
-	Inherits@2: ^Warhead_Bullet_Medium
-	Inherits@3: ^Warhead_CannonHE_Heavy
-	Inherits@4: ^Projectile_Shell_Heavy
-	Inherits@5: ^Effect_CannonHE_Heavy
+	Inherits@wh: ^Warhead_Bullet_Medium
+	Inherits@2: ^Warhead_CannonHE_Heavy
+	Inherits@3: ^Projectile_Shell_Heavy
+	Inherits@4: ^Effect_CannonHE_Heavy
 	ReloadDelay: 25
 	Range: 5542
 	Report: madcapshoot.wav
@@ -66,11 +60,7 @@ MadcapGun:
 	Warhead@Bullet_Medium:
 		PercentageScale: 1667
 		ValidTargets: Ground, Water, Air
-		Damage: 12000
-	Warhead@Bullet_Light:
-		PercentageScale: 1667
-		ValidTargets: Ground, Water, Air
-		Damage: 12000
+		Damage: 24000
 FirebatF:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium
@@ -700,8 +690,7 @@ VultureGrenade:
 
 SiegeTankCannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
-	Inherits@wh2: ^Warhead_CannonHE_Medium
-	Inherits@wh3: ^Warhead_CannonAP_Light
+	Inherits@wh2: ^Warhead_CannonAP_Light
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	ReloadDelay: 37
@@ -710,9 +699,7 @@ SiegeTankCannon:
 	Projectile: Bullet
 		Speed: 611
 	Warhead@CannonHE_Heavy:
-		Damage: 10000
-	Warhead@CannonHE_Medium:
-		Damage: 10000
+		Damage: 20000
 	Warhead@CannonAP_Light:
 		Damage: 10000
 SiegeTankSiegeCannon:
