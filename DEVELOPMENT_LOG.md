@@ -4108,3 +4108,18 @@ Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorld
 
 **Next:**
 - The `baron_elite.png` asset remains in `mods/cameo/bits/d2k/` as user WIP; replace `d2k_sardaukar_elite` placeholder with a full `baron_elite` sprite atlas when ready.
+
+## Devin AI - Harkonnen baron_elite custom atlas (2026-08-25, continued)
+
+**What and why:**
+- User supplied a proper `harkonnen_sardaukar_baron_elite.png` and 16-facing `harkonnen_sardaukar_baron_elite` sequence.
+- Updated `harkonnen_sardaukar` actor `Image` to `harkonnen_sardaukar_baron_elite` and added `IdleSequences`/`StandSequences: stand`.
+- Committed the new sprite atlas and sequence.
+
+**Verification:**
+- `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
+- `find_empty_warhead.py` = 0.
+
+**Commit:** `d1a312b31` feat(d2k_harkonnen): add custom harkonnen_sardaukar_baron_elite sprite atlas.
+
+**Note:** Working tree still has Ixian weapon edits that needed a structural fix (`-Warhead@Bullet_Light:` removal lines referencing non-existent nodes were removed to allow boot). I left the rest of the Ixian WIP uncommitted.
