@@ -139,13 +139,14 @@ devastator:
 	Inherits@GAINSEXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
+	-WithDeathAnimation:
 	Inherits@EXT: ^ExternalConditions
 	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
 	Inherits@AntiTank: ^PrioritizeTank
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 100
-		Prerequisites: ~heavy.harkonnen, research_centre, ~faction.harkonnen
+		Prerequisites: ~harkonnen_vehicle_production, ~heavy.harkonnen, research_centre
 		BuildDuration: 1000
 		BuildDurationModifier: 100
 		Description: Super Heavy Tank\n  Strong vs Tanks\n  Weak vs Artillery
@@ -218,7 +219,7 @@ devastator:
 	Selectable:
 		DecorationBounds: 1280, 1280, 0, 0
 	RenderSprites:
-		Image: harkonnen_devastatormech
+		Image: devastator
 		PlayerPalette: playerd2k
 	Cloak@TDcloak:
 		Palette: d2kcloak
@@ -232,7 +233,7 @@ devastator.husk:
 	TransformOnCapture:
 		IntoActor: devastator
 	RenderSprites:
-		Image: harkonnen_devastatormech
+		Image: devastator
 		PlayerPalette: playerd2k
 
 harkonnen_devastatormech:
@@ -299,12 +300,6 @@ harkonnen_devastatormech:
 		DeployedCondition: overload
 		PauseOnCondition: overload
 		RequiresCondition: !unit-captured
-	WithIdleOverlay@OVERLOAD:
-		Sequence: active
-		RequiresCondition: overload
-	WithIdleOverlay@OVERLOAD2:
-		Sequence: active-2
-		RequiresCondition: overload
 	KillsSelf@MELTDOWN:
 		Delay: 150
 		RequiresCondition: overload

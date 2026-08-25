@@ -113,7 +113,7 @@ harkonnen_sardaukar:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir
 	Tooltip:
-		Name: Harkonnen Sardaukar
+		Name: Baron Elite
 	Valued:
 		Cost: 500
 	Buildable:
@@ -149,6 +149,6 @@ harkonnen_sardaukar:
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 	RenderSprites:
-		Image: saudakar_bazooka
+		Image: d2k_sardaukar_elite
 	Voiced:
 		VoiceSet: D2KInfantryVoice

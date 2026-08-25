@@ -1707,7 +1707,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/infantry.yaml#Health.HP",
      "v": "120000"
     },
-    "name": "Harkonnen Sardaukar",
+    "name": "Baron Elite",
     "prerequisites": [
      "~harkonnen_barracks",
      "harkonnen_palace"
@@ -2027,9 +2027,9 @@
     },
     "name": "Devastator",
     "prerequisites": [
+     "~harkonnen_vehicle_production",
      "~heavy.harkonnen",
-     "research_centre",
-     "~faction.harkonnen"
+     "research_centre"
     ],
     "queue": [
      "Vehicle",
