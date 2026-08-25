@@ -3072,3 +3072,32 @@ eview_resolve_diff.py before/after passes: behavioural invariants preserved
   924→921, and `BALANCE_PROGRAM_PLAN.md` / `SUMMARY.md` counts.
 - Re-extracted `docs/balance/redalert_soviets.json` + derived sidecar.
 - Boot-gate passed; no new exceptions.
+
+## 2026-08-24 — W24 A8: collapse 25mm, RA2LasherCannon, AsianLynxTankCannon onto CannonHE_Medium
+
+- `25mm` (RedAlert/Allies): reparented from five legacy full-stack families
+  (`^Grenade`, `^ShrapnelWeapon`, `^LightFlameWeapon`, `^MediumChemicalWeapon`,
+  `^TankDestroyerCannon`) to `^Warhead_CannonHE_Medium` + `^Projectile_Shell_Medium`
+  + `^Effect_CannonHE_Medium`; one main `Damage: 12000`; kept local `Image: 50CAL`,
+  `Speed: 472`, `Inaccuracy: 150`, `-LaunchAngle:`, `Concrete: 100`, `poof` ground
+  effect with `xplos.aud`, and `big_explosion_air` for air.
+- `RA2LasherCannon` (RedAlert2/Yuri) and `AsianLynxTankCannon`
+  (RedAlert2Mod/AsianAlliance): reparented from the same five legacy families to
+  `^RA2MediumCannon` (`^Warhead_CannonHE_Medium` + `^Projectile_Shell_Medium` +
+  `^Effect_Explosion_Medium_RA2`); one main `Damage: 12000`; kept local `Speed`/`Inaccuracy`
+  and RA2 `ra2_medium_explosion` effect with glow/ImpactActors preserved.
+- Per-shot totals preserved (6 × 2000 = 12000) for all three; percentage twin now
+  auto-derived from the single `AreaDamage` main.
+- `review_resolve_diff.py` (base=HEAD worktree) for all three: OK
+  (behavioural invariants preserved).
+- `find_empty_warhead` 0; `find_orphan_old_keys` 0 real; `audit_warhead_split`
+  broadcast 902 at baseline 902 (lowered from 908); `audit_doc_claims` all 19 green
+  after updating `doc_claims.yaml` and affected docs (`BALANCE_PROGRAM_PLAN.md`,
+  `PHYSICAL_STATE_SYSTEM.md`, `HANDOFF.md`, `SUMMARY.md`); `extract_stats` re-extracted
+  all 32 ledgers.
+- Updated `docs/audit/doc_claims.yaml`, `tools/audit/audit_warhead_split.py`
+  `BROADCAST_BASELINE`, and `docs/audit/latest/doc_claims.md` via `run_all.py`.
+- First boot-gate failed due to stale `-LaunchAngle:` removal on `25mm` (new families
+  do not carry `LaunchAngle`); removed it, re-ran `find_empty_warhead`,
+  `find_orphan_old_keys`, `audit_warhead_split`, and `review_resolve_diff`, then
+  second boot-gate reached the main menu with no new exceptions.

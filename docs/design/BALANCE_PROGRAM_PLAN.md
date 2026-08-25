@@ -37,9 +37,9 @@ roster, so pricing first means pricing inputs we are about to replace:
 
 | what is still in flux | measured 2026-08-17 |
 |---|---|
-| W24 — fired weapons with **more than one** damage main | **910 of 1622 = 56.1%** (histogram runs out to 15 mains) |
+| W24 — fired weapons with **more than one** damage main | **887 of 1622 = 54.7%** (histogram runs out to 15 mains) |
 | armament slots whose `K` moves when those collapse | **1 547** |
-| fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1157 inheritors) |
+| fired weapons that reach a `^Warhead_*` family at all | **665 of 1622 = 41.0%** — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1142 inheritors) |
 
 Collapsing N mains into 1 preserves the damage SUM (`formula.spread_damage_sum`) but **not
 `K`** — `K` is share-weighted over each warhead's armor profile, so picking ONE family changes
@@ -590,7 +590,7 @@ delivery and price number measured before it lands is measuring the wrong object
 | A3 | Fix the three misclassifications onto templates that already exist (`CannonChem` ×2, `Plasma` ×1) | invariant diff = 0 |
 | A4 | Rename `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1` + its condition, then the Su-57 and MonsterTank weapon pairs per ruling 2 | ✅ DONE — renamed `^HighExplosiveRocketsUpgradeRA1` → `^ThermobaricRocketsUpgradeRA1`, condition `ra1_soviets_upgrade_highexplosiverockets` → `ra1_soviets_upgrade_thermobaricrockets`, fluent keys and icon, `NuclearMaverick` → `Su57Maverick`, `ThermobaricNuclearMaverick` → `Su57MaverickThermobaric`, `MonsterTank120mmThermobaric` → `MonsterTank120mmInferno`; safe_rename.py 90 replacements across 12 files + icon git mv; post-rename validation clean; boot-gated. |
 | A5 | Collapse the 27 single-user templates | template census |
-| A6 | Continue the burn-down: `w24_multi_main_fed` **380**, `multi_main_fired_weapons` **892** | W24 A5/A6 batch: collapsed `ra120mmThermobaric`, `ra120mmThermobaricTargetingComputer`, `ra120mm2Thermobaric`, `ra120mm2ThermobaricTargetingComputer` onto `^Warhead_CannonFire_Heavy`; per-shot damage preserved (24 000 / 48 000); `review_resolve_diff` clean, `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `extract_stats --check` 0, `audit_doc_claims` 18/19 green after claim update, boot-gated. This batch adds `HammerTankCannonThermobaric` and `KotinCannonThermobaric` (16000 each, `Temperature: 25`) collapsed onto `^Warhead_CannonFire_Heavy`; `review_resolve_diff` clean, `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `extract_stats --check` 0, `audit_doc_claims` 19 green, boot-gated. This batch adds `105mmThermobaric` (12000 `^Warhead_CannonFire_Medium` + `^Projectile_Shell_Medium` + `^Effect_Flame_Medium` + `^Effect_CannonHE_Medium`, napalm effect override), `HammerTankCannon` (12000 `^Warhead_CannonHE_Heavy` + `^Projectile_Shell_Heavy` + `^Effect_CannonHE_Heavy`), and `KotinCannon` (12000 `^Warhead_CannonHE_Heavy` + `^Projectile_Shell_Heavy` + `^Effect_CannonHE_Heavy`; Kotin retains local radiation) and `KotinCannonNuclearShell` (16000 `^Warhead_CannonNuke_Heavy` + `^Projectile_Shell_Heavy` + `^Effect_CannonHE_Heavy` + `^Effect_Nuclear_Super`); `review_resolve_diff` clean, `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split` baseline 924→921, `audit_doc_claims` 19 green, `extract_stats` redalert_soviets re-extracted, boot-gated. This A7 batch collapses the RA2 gatling chain (`RA2GattlingMG1`, `RA2GattlingMG1_AA`, `RA2GattlingMG2_AA`, `RA2GattlingMG3_AA`, `RA2GattlingInf`) from two bullet warheads (`Bullet_Light` + `Bullet_Medium`) onto the `^RA2Chaingun` (`^Warhead_Bullet_Medium`) 3-way split; per-shot totals preserved (`RA2GattlingMG1` 4000, `_AA` variants 8000, `RA2GattlingInf` 16000 with `PercentageScale: 2500`); `find_empty_warhead` 0, `extract_stats --check` 0, `audit_warhead_split` baseline 921→908, `audit_doc_claims` 19 green after claim update, boot-gated. Kotin correction: reverted `KotinCannon` to `^Warhead_CannonHE_Heavy` and renamed/reclassified the upgrade from `KotinCannonThermobaric` to `KotinCannonNuclearShell` (`^Warhead_CannonNuke_Heavy`); `review_resolve_diff` clean, `find_empty_warhead` 0, `audit_warhead_split` 908 vs 908, `audit_doc_claims` 19 green, boot-gated. |
+| A6 | Continue the burn-down: `w24_multi_main_fed` **375**, `multi_main_fired_weapons` **887** | W24 A5/A6 batch: collapsed `ra120mmThermobaric`, `ra120mmThermobaricTargetingComputer`, `ra120mm2Thermobaric`, `ra120mm2ThermobaricTargetingComputer` onto `^Warhead_CannonFire_Heavy`; per-shot damage preserved (24 000 / 48 000); `review_resolve_diff` clean, `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `extract_stats --check` 0, `audit_doc_claims` 18/19 green after claim update, boot-gated. This batch adds `HammerTankCannonThermobaric` and `KotinCannonThermobaric` (16000 each, `Temperature: 25`) collapsed onto `^Warhead_CannonFire_Heavy`; `review_resolve_diff` clean, `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `extract_stats --check` 0, `audit_doc_claims` 19 green, boot-gated. This batch adds `105mmThermobaric` (12000 `^Warhead_CannonFire_Medium` + `^Projectile_Shell_Medium` + `^Effect_Flame_Medium` + `^Effect_CannonHE_Medium`, napalm effect override), `HammerTankCannon` (12000 `^Warhead_CannonHE_Heavy` + `^Projectile_Shell_Heavy` + `^Effect_CannonHE_Heavy`), and `KotinCannon` (12000 `^Warhead_CannonHE_Heavy` + `^Projectile_Shell_Heavy` + `^Effect_CannonHE_Heavy`; Kotin retains local radiation) and `KotinCannonNuclearShell` (16000 `^Warhead_CannonNuke_Heavy` + `^Projectile_Shell_Heavy` + `^Effect_CannonHE_Heavy` + `^Effect_Nuclear_Super`); `review_resolve_diff` clean, `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split` baseline 924→921, `audit_doc_claims` 19 green, `extract_stats` redalert_soviets re-extracted, boot-gated. This A7 batch collapses the RA2 gatling chain (`RA2GattlingMG1`, `RA2GattlingMG1_AA`, `RA2GattlingMG2_AA`, `RA2GattlingMG3_AA`, `RA2GattlingInf`) from two bullet warheads (`Bullet_Light` + `Bullet_Medium`) onto the `^RA2Chaingun` (`^Warhead_Bullet_Medium`) 3-way split; per-shot totals preserved (`RA2GattlingMG1` 4000, `_AA` variants 8000, `RA2GattlingInf` 16000 with `PercentageScale: 2500`); `find_empty_warhead` 0, `extract_stats --check` 0, `audit_warhead_split` baseline 921→908, `audit_doc_claims` 19 green after claim update, boot-gated. Kotin correction: reverted `KotinCannon` to `^Warhead_CannonHE_Heavy` and renamed/reclassified the upgrade from `KotinCannonThermobaric` to `KotinCannonNuclearShell` (`^Warhead_CannonNuke_Heavy`); `review_resolve_diff` clean, `find_empty_warhead` 0, `audit_warhead_split` 908 vs 908, `audit_doc_claims` 19 green, boot-gated. |
 
 ### Phase B — the physical-state half (parallel to A, different file set)
 
@@ -1404,7 +1404,7 @@ that that were not converted yet?"*) — `tools/audit/audit_unconverted_template
 inheriting no `^Warhead_*` parent has not been converted, and is simultaneously a live
 violation of "Versus lives ONLY in `^Warhead_*` templates".
 
-**45 unconverted templates, 1157 direct inheritors.** Biggest: `^ShrapnelWeapon` (88) →
+**45 unconverted templates, 1142 direct inheritors.** Biggest: `^ShrapnelWeapon` (88) →
 Concussion · `^Grenade` (84) → Demolition/Concussion · `^FlakWeapon` (78) → Flak ·
 `^MediumChemicalWeapon` (70) · `^MediumMissile` (67) · `^TankDestroyerCannon` (66) → CannonAP ·
 `^MediumFlameWeapon` (64) · `^Chaingun` (59) → Bullet. Every target family already EXISTS, so these are retrofits, not
@@ -1726,7 +1726,7 @@ mains.** `Armament` builds `DamageModifiers` ONCE and passes it to every warhead
 `HealthPercentageDamageWarhead.cs:24` all apply it, and `ApplyPhysicalStateWarhead.cs:49`
 applies it to the METER amount as well. The worklist's `is_main()` excludes
 `percentage` / `extradamage` / `friendlyfire`, so folding only mains leaves **1610 twin and
-chip warheads across 380 weapons** silently scaled by `1/FP` — an actor at FP 0.5 would have
+chip warheads across 375 weapons** silently scaled by `1/FP` — an actor at FP 0.5 would have
 its %-twin and chip DOUBLE. The fold must cover every damaging warhead on the weapon plus any
 `ApplyPhysicalState` amount.
 
@@ -2756,7 +2756,7 @@ generator ships that matrix on purpose and `verify_generator_sync.py` requires i
 ## W24 / W25 — see `ARMOR_LAYERS.md` and DESIGN.md §11b
 
 **W24 (one warhead per weapon)** is now a written binding rule — DESIGN.md **§11b**. Among
-fired weapons, **34.5%** comply (560 of 1622); **56.1%** (910 of 1622) carry 2 or more damage
+fired weapons, **45.3%** comply (735 of 1622); **54.7%** (887 of 1622) carry 2 or more damage
 warheads, worst case **15**. This is the debt the W23 retrofit exposed, and it must be paid before the retrofit
 content ships, because same-family collisions are a symptom of it rather than a bug in the
 conversion. Collapsing preserves the SUM; where no family fits, a NEW family is created

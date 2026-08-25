@@ -65,7 +65,7 @@ Python files: **275** (min 5 statements), C# files: **348** (min 8 lines)
 | 2 | c15459229a835d70 | tools/tilesets/build_tc_basalt_from_gimp.py:18 ACTORS; tools/tilesets/fix_tc_basalt_shadow_outlines.py:18 ACTORS |
 | 2 | de57d7955065e638 | tools/balance/gen_effects.py:38 LEVELORDER; tools/balance/gen_projectiles.py:30 LEVELORDER |
 | 2 | e82cdb37ffc15514 | tools/audit/audit_versus_profile.py:66 LADDERS; tools/balance/gen_weapon_template.py:35 LADDERS |
-| 2 | eba2f9dc1c86d3e4 | tools/audit/audit_tier_weapon_class.py:59 LADDER; tools/balance/gen_weapon_template.py:2168 STORM_LEVELS |
+| 2 | eba2f9dc1c86d3e4 | tools/audit/audit_tier_weapon_class.py:59 LADDER; tools/balance/gen_weapon_template.py:2171 STORM_LEVELS |
 | 2 | ee8795bea6c56142 | tools/audit/audit_versus_profile.py:73 LEVELS; tools/reference/propose_family_profiles.py:113 LEVEL_ORDER |
 | 2 | eed204ad8ec23410 | tools/audit/propose_sonic_mapping.py:104 OLD_FAMILIES; tools/audit/weapon_families.py:29 OLD_FAMILIES |
 | 2 | efe4c032c5c937c9 | tools/audit/audit_three_way_split.py:62 MAIN_DAMAGE_TYPES; tools/audit/audit_tier_weapon_class.py:54 MAIN_DAMAGE_TYPES |

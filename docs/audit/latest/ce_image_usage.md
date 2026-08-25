@@ -4,7 +4,7 @@ tsdig: ALSO-USED (3)
   mods\cameo\sequences\tiberiansun.yaml:1246: 		Filename: tsdig.shp
 tsioncannon: ALSO-USED (11)
   mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\buildings.yaml:1046: 		Effect: tsioncannon
-  mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:1506: 		RingImage: tsioncannon
+  mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:1460: 		RingImage: tsioncannon
   mods\cameo\ContentPacks\RedAlert2Mod\Consortium\yaml\buildings.yaml:384: 		Effect: tsioncannon
   mods\cameo\ContentPacks\StarCraft\Protoss\yaml\buildings.yaml:603: 		Effect: tsioncannon
   mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\buildings.yaml:257: 		Effect: tsioncannon

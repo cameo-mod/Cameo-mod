@@ -1,14 +1,11 @@
 # audit_sequences — art/sequence references (B6)
 
-S1 missing images: **2**, S2 missing sequences: **0**, S3 unreferenced sequence images: **595** (of 3048 defined)
+S1 missing images: **0**, S2 missing sequences: **0**, S3 unreferenced sequence images: **594** (of 3048 defined)
 
 
 ## S1 — actor render image not defined in sequences
 
-| actor | image | rules file |
-|---|---|---|
-| ts_gdi_strike_orca | tsgdi_strike_orca | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml |
-| ts_gdi_strike_orca_husk | tsgdi_strike_orca | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml |
+_none found_
 
 
 ## S2 — trait sequence missing from image

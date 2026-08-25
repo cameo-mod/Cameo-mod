@@ -1,16 +1,16 @@
-# audit_three_way_split — 1176 of 2345 weapons fire more than ONE main warhead
+# audit_three_way_split — 1138 of 2345 weapons fire more than ONE main warhead
 
-    933  correct — exactly one main warhead
+    971  correct — exactly one main warhead
     236  none — utility / effect-only weapons
-   1176  VIOLATIONS — stacked mains
+   1138  VIOLATIONS — stacked mains
 
   mains  weapons
-      2    429
-      3    277
-      4    219
+      2    412
+      3    266
+      4    217
       5     60
-      6    110
-      7     21
+      6    105
+      7     18
       8     35
       9     10
      10      8
@@ -19,11 +19,11 @@
      13      1
      14      3
 
-455 distinct stacked combinations; the 20 most common:
+446 distinct stacked combinations; the 20 most common:
 
 | count | combination |
 |---|---|
-| 79 | Bullet_Light + Bullet_Medium |
+| 66 | Bullet_Light + Bullet_Medium |
 | 17 | Bullet_Light + Bullet_Medium + CannonHE_Heavy |
 | 17 | 1Dam + MissileAP_Heavy |
 | 14 | Concussion_Medium + Demolition_Heavy |
@@ -44,5 +44,5 @@
 | 8 | Chaingun + Flak_Medium + LightMissile + TankDestroyerCannon |
 | 8 | CannonHE_Heavy + Concussion_Medium + Demolition_Light |
 
-WARN 1176 violating weapons (ratchet 1176)
+WARN 1138 violating weapons (ratchet 1176)
 Lower `SPLIT_BASELINE` as W24 converts weapons; never raise it.

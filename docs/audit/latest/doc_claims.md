@@ -6,24 +6,24 @@ A number in prose is true only on the day it is written. These are the claims a 
 
 | claim | documented | measured | status |
 |---|--:|--:|---|
-| `shield_versus_mean` | 189.088 | 189.805 | ✅ |
-| `shield_hp_factor` | 0.528855 | 0.526855 | ✅ |
-| `shield_damage_share` | 0.01432 | 0.0146486 | ✅ |
+| `shield_versus_mean` | 189.088 | 190.803 | ✅ |
+| `shield_hp_factor` | 0.528855 | 0.5241 | ✅ |
+| `shield_damage_share` | 0.01432 | 0.0146385 | ✅ |
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
 | `live_damage_multipliers` | 354 | 354 | ✅ |
-| `multi_main_fired_weapons` | 914 | 914 | ✅ |
+| `multi_main_fired_weapons` | 887 | 887 | ✅ |
 | `percentage_denominator_unset` | 0 | 0 | ✅ |
 | `unmigrated_scout_damage_multiplier` | 15 | 15 | ✅ |
 | `meters_filling_before_death` | 143 | 143 | ✅ |
 | `corrosion_meter_actors` | 785 | 785 | ✅ |
-| `w24_multi_main_fed` | 381 | 381 | ✅ |
-| `physical_state_fired_weapons` | 462 | 462 | ✅ |
+| `w24_multi_main_fed` | 375 | 375 | ✅ |
+| `physical_state_fired_weapons` | 456 | 456 | ✅ |
 | `plating_row_ties` | 0 | 0 | ✅ |
 | `plating_families` | 47 | 47 | ✅ |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
 | `warhead_family_reach` | 1245 | 1245 | ✅ |
-| `unconverted_template_inheritors` | 1157 | 1157 | ✅ |
+| `unconverted_template_inheritors` | 1142 | 1142 | ✅ |
 | `ledgers_drifted` | 0 | 0 | ✅ |
 
 _clean_ — every registered claim still matches the tree.

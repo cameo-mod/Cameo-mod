@@ -42,7 +42,7 @@ _(2 more — pass `--all`)_
 - 2.0-3.0x: **2**
 - 3.0x+: **9**
 
-## condition-gated actors the model cannot judge — 175
+## condition-gated actors the model cannot judge — 173
 
 Every armament is gated, so no two can be shown to fire together. This is the IFV
 shape, DEFERRED by maintainer ruling; it needs a variant-aware model, not a count.

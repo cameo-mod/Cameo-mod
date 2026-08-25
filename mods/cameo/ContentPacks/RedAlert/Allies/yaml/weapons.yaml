@@ -583,76 +583,32 @@ ChronoTuskCryo:
 	MinRange: 2035
 
 25mm:
-	Inherits: ^Warhead_CannonHE_Medium
-	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
-	Inherits@4: ^Grenade
-	Inherits@5: ^ShrapnelWeapon
-	Inherits@6: ^LightFlameWeapon
-	Inherits@7: ^MediumChemicalWeapon
-	Inherits@8: ^TankDestroyerCannon
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 37
 	Range: 4720
 	Report: cannon2.aud
 	Projectile: Bullet
 		Speed: 472
 		Image: 50CAL
-		-LaunchAngle:
-	Warhead@Grenade: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Inaccuracy: 150
 	Warhead@CannonHE_Medium:
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 12000
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
 	Warhead@Effect: CreateEffect
+		Explosions: poof
 		ImpactSounds: xplos.aud
+		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
 
 90mm:
 	Inherits@wh: ^Warhead_CannonHE_Medium

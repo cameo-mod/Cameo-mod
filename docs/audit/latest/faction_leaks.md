@@ -151,7 +151,6 @@ Factions checked: **29** — L1 leaks: **435**, L3 concrete-inherit leaks: **20*
 | ra1_soviets | ra1_soviets_upgrade_hazmatsuits | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_heatraytank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_heavyteslatank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
-| ra1_soviets | ra1_soviets_upgrade_highexplosiverockets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_incendiarybullets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_kotinnucleartank | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_massproduction | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
@@ -165,6 +164,7 @@ Factions checked: **29** — L1 leaks: **435**, L3 concrete-inherit leaks: **20*
 | ra1_soviets | ra1_soviets_upgrade_teslaarcing | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_teslarockets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_teslayak | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
+| ra1_soviets | ra1_soviets_upgrade_thermobaricrockets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_thermonuclearrockets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_unstableisotopes | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |
 | ra1_soviets | ra1_soviets_upgrade_vengeance | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/upgrades.yaml |

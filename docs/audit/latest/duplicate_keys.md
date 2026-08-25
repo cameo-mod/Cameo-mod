@@ -1,98 +1,16 @@
 # audit_duplicate_keys — duplicate keys in one node (silent override)
 
-Files scanned: **635** — D1 dropped inherits: **88**, D2 merged duplicates: **439**
+Files scanned: **635** — D1 dropped inherits: **6**, D2 merged duplicates: **439**
 
 
 ## D1 — duplicate Inherits key with different values (one template is dropped)
 
 | file | lines | node | key | values |
 |---|---|---|---|---|
-| mods/cameo/audio/d2k.yaml | 30, 31 | D2KGenericVoice | Inherits | ^D2KAudioDefaults vs ^D2KInfantryDeath |
-| mods/cameo/audio/d2k.yaml | 51, 52 | D2KInfantryVoice | Inherits | ^D2KAudioDefaults vs ^D2KInfantryDeath |
-| mods/cameo/audio/d2k.yaml | 79, 80 | D2KFremenVoice | Inherits | ^D2KAudioDefaults vs ^D2KInfantryDeath |
-| mods/cameo/audio/d2k.yaml | 93, 94 | D2KSaboteurVoice | Inherits | ^D2KAudioDefaults vs ^D2KInfantryDeath |
-| mods/cameo/chrome.yaml | 2659, 2660 | sidebar-swempire | Inherits | sidebar-allies vs ^SidebarStarWars |
-| mods/cameo/chrome.yaml | 2684, 2685 | sidebar-swrebels | Inherits | sidebar-soviets vs ^SidebarStarWars |
-| mods/cameo/chrome.yaml | 2711, 2712 | sidebar-swseparatist | Inherits | sidebar-allies vs ^SidebarStarWars2 |
-| mods/cameo/chrome.yaml | 2736, 2737 | sidebar-swhutt | Inherits | sidebar-soviets vs ^SidebarStarWars2 |
-| mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml | 202, 203 | harkonnen_repairpad | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
-| mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml | 283, 284 | ixian_repairpad | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
-| mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml | 336, 337 | ordos_repairpad | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
-| mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml | 221, 222 | japan_waveforceturret | Inherits@AntiTank | ^PrioritizeVehicle vs ^PrioritizeTank |
-| mods/cameo/ContentPacks/RedAlert/Japan/yaml/templates.yaml | 432, 433 | ^RAFIX | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml | 14, 15 | ra1_soviets_barracks | Inherits@ra1_soviets_barracks | ^IsBarrack vs ^Conscription |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 1948, 1950 | HammerTankCannonThermobaric | Inherits@3 | ^Projectile_Flame_Medium vs HammerTankCannon |
-| mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 2053, 2055 | KotinCannonThermobaric | Inherits@3 | ^Projectile_Flame_Medium vs KotinCannon |
-| mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml | 255, 256 | ra2_allies_alliedservicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
-| mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml | 246, 247 | ra2_soviets_servicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
-| mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml | 161, 162 | asianalliance_asianservicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
-| mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml | 545, 553 | naxis_naxibunker | Inherits | ^RA2Defense vs ^BuildingPlugProducer |
-| mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml | 200, 201 | latinsyndicate_mig21 | Inherits@flamerup | ^CartelRocketsUpgrade vs ^LatinFlameUpgrades |
-| mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml | 554, 555 | latinsyndicate_syndicateservicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
-| mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml | 955, 956 | latinsyndicate_missiletruck | Inherits@flamerup | ^CartelRocketsUpgrade vs ^LatinFlameUpgrades |
-| mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml | 1026, 1027 | latinsyndicate_burrito | Inherits@flamerup | ^CartelRocketsUpgrade vs ^LatinFlameUpgrades |
-| mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml | 1095, 1096 | latinsyndicate_lars | Inherits@flamerup | ^CartelRocketsUpgrade vs ^LatinFlameUpgrades |
-| mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml | 69, 73 | tkm_orerefinery | Inherits | ^RA2Building vs ^BuildingPlugProducer |
-| mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml | 205, 207 | tkm_airpad | Inherits@shape | ^4x3Shape vs ^3x3Shape |
-| mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml | 199, 202 | tkmratflakdeployed | Inherits@Template | ^BasicDefenseTemplate vs ^AntiAirDefenseTemplate |
 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml | 689, 690 | tkmkatyushalalauncherrocketsfire | Inherits@3 | ^Effect_Flame_Light vs tkmkatyushalalauncherrockets |
 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml | 791, 795 | SandmarineTuskFire | Inherits | ^Warhead_MissileAP_Light vs SandmarineTusk |
 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml | 842, 846 | ViperMissilesFire | Inherits | ^Warhead_MissileAP_Light vs ViperMissiles |
-| mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml | 137, 142 | protoss_assimilator | Inherits | ^BaseBuildingProtoss vs ^BuildingPlugProducer |
-| mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml | 455, 456 | terran_pythean | Inherits@weapon | ^TerranVehicleArmorUpgrades vs ^TerranShipArmorUpgrades |
-| mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml | 543, 544 | terran_medivac | Inherits@weapon | ^TerranShipArmorUpgrades vs ^TerranInfantryArmorUpgrades |
-| mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml | 83, 87 | terran_supplydepot | Inherits | ^BaseBuilding vs ^BuildingPlugProducer |
-| mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml | 173, 176 | terran_refinery | Inherits | ^BaseBuilding vs ^BuildingPlugProducer |
-| mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml | 225, 228 | zerg_extractor | Inherits | ^BaseBuildingZerg vs ^BuildingPlugProducer |
-| mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml | 514, 517 | zerg_spire | Inherits | ^BaseBuildingZerg vs ^BuildingPlugProducer |
-| mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml | 2, 12 | zerg_creepcolony | Inherits | ^Defense vs ^BuildingPlugProducer |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml | 189, 190 | td_gdi_repairfacility | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml | 218, 226 | td_gdi_advancedcommunicationscenter | Inherits | ^TDBuilding vs ^BuildingPlugProducer |
-| mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml | 442, 443 | td_gdi_advancedguardtower | Inherits@AntiTank | ^PrioritizeVehicle vs ^PrioritizeTank |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml | 199, 200 | td_nod_repairfacility | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml | 228, 236 | td_nod_templeofnod | Inherits | ^TDBuilding vs ^BuildingPlugProducer |
-| mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml | 526, 531 | td_nod_chemicalattackbike | Inherits | ^Vehicle vs ^GenericGroundDetector |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml | 216, 217 | cabal_servicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml | 767, 768 | cabal_cyborgcommando | Inherits@Template | ^HeavyInfantryTemplate vs ^HeroInfantryTemplate |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml | 854, 855 | cabal_cyborgcommandov2 | Inherits@Template | ^HeavyInfantryTemplate vs ^HeroInfantryTemplate |
-| mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml | 943, 949 | cabal_eliminator800 | Inherits@EXPERIENCE | ^GainsExperienceTD vs ^GainsExperienceRA2 |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml | 272, 273 | forgotten_servicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml | 118, 122 | ts_gdi_powerplant | Inherits | ^BaseBuilding vs ^BuildingPlugProducer |
-| mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml | 322, 323 | ts_gdi_servicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 531, 532, 533 | TSDestroyerMissiles | Inherits | ^FlakWeapon vs ^MediumMissile vs ^ShrapnelWeapon |
-| mods/cameo/ContentPacks/TiberianSun/Nod/yaml/buildings.yaml | 362, 363 | ts_nod_servicedepot | Inherits@repair | ^RepairsUnits vs ^RepairFacility |
-| mods/cameo/ContentPacks/Warcraft2/Humans/yaml/defenses.yaml | 2, 10 | wc2_humans_humanscouttower | Inherits | ^Defense vs ^BuildingPlugProducer |
-| mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml | 2, 10 | wc2_orcs_orcwatchtower | Inherits | ^Defense vs ^BuildingPlugProducer |
-| mods/cameo/rules/advancewars.yaml | 4608, 4610 | awcity | Inherits | OILB.Building vs ^BaseBuilding |
-| mods/cameo/rules/darkreign.yaml | 366, 367 | drwaterextract.freedomguard | Inherits@2 | ^BaseBuilding vs ^CashTricklerMultipliers |
-| mods/cameo/rules/darkreign.yaml | 8627, 8631 | drahq.eodalien | Inherits | ^BaseBuilding vs ^Conyard |
-| mods/cameo/rules/defaults.yaml | 1578, 1579 | ^ScoutVehicleTemplate | Inherits@upgrade | ^LightWeightArmorPlating vs ^AdvancedGuerillaTactics |
-| mods/cameo/rules/defaults.yaml | 1600, 1601 | ^SupportVehicleTemplate | Inherits@upgrade | ^LightWeightArmorPlating vs ^AdvancedGuerillaTactics |
-| mods/cameo/rules/defaults.yaml | 2407, 2410 | ^BasicUnit | Inherits@cloak | ^AcceptsCloakCrate vs ^StealthGenCloakable |
-| mods/cameo/rules/generals.yaml | 2502, 2504 | glblackmarket | Inherits | OILB.Building vs ^BaseBuilding |
-| mods/cameo/rules/generals.yaml | 11876, 11878 | usadropzone | Inherits | OILB.Building vs ^BaseBuilding |
-| mods/cameo/rules/simcity.yaml | 586, 591 | CITYR | Inherits@2 | ^BaseBuilding vs ^CashTricklerMultipliers |
-| mods/cameo/rules/simcity.yaml | 923, 925 | CITYHARBOR | Inherits | SimCityBuildingLevelUp vs ^BaseBuilding |
-| mods/cameo/rules/simcity.yaml | 1041, 1043 | CITYAIRPORT | Inherits | SimCityBuildingLevelUp vs ^BaseBuilding |
-| mods/cameo/rules/simcity.yaml | 1192, 1194 | CITYLIBRARY | Inherits | SimCityBuildingLevelUp vs ^BaseBuilding |
-| mods/cameo/rules/simcity.yaml | 1222, 1224 | CITYBANK | Inherits | SimCityBuildingLevelUp vs ^BaseBuilding |
-| mods/cameo/rules/simcity.yaml | 1265, 1267 | CITYPARK | Inherits | SimCityBuildingLevelUp vs ^BaseBuilding |
-| mods/cameo/rules/simcity.yaml | 1296, 1298 | CITYFOUNTAIN | Inherits | SimCityBuildingLevelUp vs ^BaseBuilding |
-| mods/cameo/rules/simcity.yaml | 1327, 1329 | CITYSTADIUM | Inherits | SimCityBuildingLevelUp vs ^BaseBuilding |
-| mods/cameo/rules/simcity.yaml | 1355, 1357 | CITYEXPO | Inherits | SimCityBuildingLevelUp vs ^BaseBuilding |
-| mods/cameo/rules/simcity.yaml | 1381, 1383 | CITYSTATION | Inherits | SimCityBuildingLevelUp vs ^BaseBuilding |
-| mods/cameo/rules/simcity.yaml | 1439, 1441 | CITYMARIO | Inherits | SimCityBuildingLevelUp vs ^BaseBuilding |
-| mods/cameo/rules/simcity.yaml | 1467, 1469 | CITYCASINO | Inherits | SimCityBuildingLevelUp vs ^BaseBuilding |
-| mods/cameo/rules/simcity.yaml | 1526, 1528 | CITYWINDMILL | Inherits | SimCityBuildingLevelUp vs ^BaseBuilding |
-| mods/cameo/rules/simcity.yaml | 1551, 1553 | CITYAMUSE | Inherits | SimCityBuildingLevelUp vs ^BaseBuilding |
-| mods/cameo/rules/simcity.yaml | 1576, 1578 | CITYZOO | Inherits | SimCityBuildingLevelUp vs ^BaseBuilding |
-| mods/cameo/rules/sow.yaml | 960, 962 | sowgoldmine | Inherits | OILB.Building vs ^BaseBuilding |
-| mods/cameo/rules/wz2100.yaml | 307, 310 | 2100OIL | Inherits | OILB.Building vs ^BaseBuilding |
-| mods/cameo/rules/wz2100.yaml | 1193, 1194 | 2100WCMG | Inherits@AUTOTARGET | ^2100WallTurreted vs ^AutoTargetAll |
-| mods/cameo/rules/wz2100.yaml | 1214, 1215 | 2100WCL | Inherits@AUTOTARGET | ^2100WallTurreted vs ^AutoTargetGround |
-| mods/cameo/rules/wz2100.yaml | 1232, 1233 | 2100WCM | Inherits@AUTOTARGET | ^2100WallTurreted vs ^AutoTargetGround |
-| mods/cameo/rules/wz2100.yaml | 1252, 1253 | 2100WCH | Inherits@AUTOTARGET | ^2100WallTurreted vs ^AutoTargetGround |
-| mods/cameo/rules/xcom.yaml | 588, 597 | XCOMHQ | Inherits | ^BaseBuilding vs ^CashTricklerMultipliers |
 | mods/cameo/weapons/redalert2mod.yaml | 1278, 1280 | 12MissilesSpawnerScud | Inherits@3 | ^Projectile_Flame_Medium vs ^RA2Grenade |
 | mods/cameo/weapons/redalert2mod.yaml | 1279, 1281 | 12MissilesSpawnerScud | Inherits@4 | ^Effect_Flame_Medium vs ^RA2HeavyMissile |
 
@@ -279,12 +197,12 @@ Files scanned: **635** — D1 dropped inherits: **88**, D2 merged duplicates: **
 | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/sequences.yaml | 62, 66 | forgotten_chemsprayinfantry | prone-shoot |
 | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/sequences.yaml | 334, 375 | forgotten_zombiemutant | standup |
 | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/sequences.yaml | 369, 384 | forgotten_zombiemutant | die-crushed |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 557, 562 | TSJuggerFlakAA_boat | Range |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 722, 727 | TSVanMissile | Report |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 743, 748 | TSChemVanMissile | Report |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 778, 783 | TSMLRSMissile | Report |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 799, 804 | TSChemMLRSMissile | Report |
-| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1874, 1876, 1878, 1881, 1882 | TSMutApcCannon | ValidTargets |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 547, 552 | TSJuggerFlakAA_boat | Range |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 712, 717 | TSVanMissile | Report |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 733, 738 | TSChemVanMissile | Report |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 768, 773 | TSMLRSMissile | Report |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 789, 794 | TSChemMLRSMissile | Report |
+| mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml | 1864, 1866, 1868, 1871, 1872 | TSMutApcCannon | ValidTargets |
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml | 6, 41 | ts_gdi_constructionyard | Selectable |
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml | 215, 237 | ts_gdi_barracks | ProvidesPrerequisite@buildingname |
 | mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml | 269, 293 | ts_gdi_warfactory | ProvidesPrerequisite@buildingname |
@@ -394,7 +312,7 @@ Files scanned: **635** — D1 dropped inherits: **88**, D2 merged duplicates: **
 | mods/cameo/rules/iok.yaml | 1192, 1202 | IOKJETPLANE | AttackAircraft |
 | mods/cameo/rules/lostunits.yaml | 1214, 1323 | dalek | AttackFrontal |
 | mods/cameo/rules/mindustry.yaml | 110, 115 | mindclass_core | RenderSprites |
-| mods/cameo/rules/misc.yaml | 977, 1012 | spicebloom | RenderSprites |
+| mods/cameo/rules/misc.yaml | 982, 1017 | spicebloom | RenderSprites |
 | mods/cameo/rules/monsters.yaml | 158, 180 | trex | Buildable |
 | mods/cameo/rules/monsters.yaml | 284, 289 | RA2DEMON | RenderSprites |
 | mods/cameo/rules/monsters.yaml | 433, 447 | RA2SKELETON | Armament |

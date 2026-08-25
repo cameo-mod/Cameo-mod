@@ -3,9 +3,9 @@
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:804  Hakureiring2  Image: hakurei_giphy
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:868  ReimuYinYangDrone  Image: hakurei_giphy
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:885  THMiss  Image: hakurei_dream
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:3278  RA2CorpseSpawner  Image: ra2corpse
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:3314  RA2FlyingBody  Image: ra2corpse
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:1417  AsianTSIonCannon  Image: tsioncannon
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:3268  RA2CorpseSpawner  Image: ra2corpse
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:3304  RA2FlyingBody  Image: ra2corpse
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:1371  AsianTSIonCannon  Image: tsioncannon
 [VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1645  TDIonCannon  Image: tsioncannon
 [VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1657  TDIonCannon  Image: ionsfx
 [VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1001  TSIonCannon  Image: tsioncannon

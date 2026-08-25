@@ -74,7 +74,7 @@ ambiguous: Rifle Infantry -> ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry
 | sheet unit | actor | mismatches |
 |---|---|---|
 | Nod Light Tank | td_nod_lighttank | Damage 6000 vs game 6150 |
-| Allied Light Tank | ra1_allies_alliedlighttank | Damage 6000 vs game 12105 |
+| Allied Light Tank | ra1_allies_alliedlighttank | Damage 6000 vs game 12100 |
 | Ordos Combat Tank | ordos_combattank | Damage 8000 vs game 9000 |
 | Mongoose | ixian_mongoose | Damage 32000 vs game 33254 |
 | Lunar Panzer | schwarzermond_lunarpanzer | Damage 10000 vs game 31300 |
@@ -94,7 +94,7 @@ ambiguous: Rifle Infantry -> ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry
 | Archon | protoss_archon | Damage 30000 vs game 47000 |
 | Mirage Tank | ra2_allies_miragetank | Damage 24000 vs game 25108 |
 | Heavy Mirage Tank | ra2_allies_heavymiragetank | Damage 32000 vs game 33112 |
-| Apocalypse Tank | ra2_soviets_apocalypsetank | Damage 24000 vs game 138338 |
+| Apocalypse Tank | ra2_soviets_apocalypsetank | Damage 24000 vs game 139300 |
 | Robot Tank | futuretech_robottank | Damage 24000 vs game 31100 |
 | Megalodon | steelconsortium_megalodon | Damage 60000 vs game 316325 |
 | Defender Bot | steelconsortium_defenderbot | Damage 32000 vs game 98412 |

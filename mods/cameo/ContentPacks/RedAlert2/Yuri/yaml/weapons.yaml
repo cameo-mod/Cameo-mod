@@ -1,68 +1,22 @@
 RA2LasherCannon:
-	Inherits: ^Grenade
-	Inherits@2: ^ShrapnelWeapon
-	Inherits@3: ^LightFlameWeapon
-	Inherits@4: ^MediumChemicalWeapon
-	Inherits@5: ^TankDestroyerCannon
-	Inherits@6: ^RA2MediumCannon
+	Inherits: ^RA2MediumCannon
 	ReloadDelay: 68
 	Range: 5201
 	Report: vlasatta.wav
 	Projectile: Bullet
 		Speed: 520
-	Warhead@Grenade: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Inaccuracy: 150
 	Warhead@CannonHE_Medium:
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		Damage: 12000
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_medium_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ValidTargets: Ground, Ship
 RA2LasherCannon_elite:
 	Inherits: RA2LasherCannon
 	Inherits@Elite: ^RA2EliteEffects

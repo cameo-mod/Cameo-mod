@@ -1,13 +1,12 @@
 # Warhead-split guard (multi-warhead over-damage)
 
 
-## FAIL 1 — broadcast fingerprint / every MAIN identical (937 vs baseline 939)
+## FAIL 1 — broadcast fingerprint / every MAIN identical (902 vs baseline 902)
 
-_at or below baseline_ — pre-existing **W24** debt (937 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
+_at or below baseline_ — pre-existing **W24** debt (902 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
 
 | weapon | mains | per_warhead | total |
 |---|---|---|---|
-| 105mmThermobaric | 2 | 6000 | 12000 |
 | 110mm_Gun | 3 | 10000 | 30000 |
 | 120mm_cobra | 4 | 30000 | 120000 |
 | 120mm_cobra_deploy | 4 | 30000 | 120000 |
@@ -19,8 +18,6 @@ _at or below baseline_ — pre-existing **W24** debt (937 weapons), not a regres
 | 155mmBastion | 3 | 10000 | 30000 |
 | 155mmBastionCryo | 3 | 10000 | 30000 |
 | 155mmCryo | 3 | 10000 | 30000 |
-| 25mm | 6 | 2000 | 12000 |
-| 25mmWaveforce | 7 | 2000 | 14000 |
 | 8Inch | 2 | 40000 | 80000 |
 | ACV_Machinegun | 2 | 2000 | 4000 |
 | APCGun | 2 | 2000 | 4000 |
@@ -47,9 +44,12 @@ _at or below baseline_ — pre-existing **W24** debt (937 weapons), not a regres
 | AsianChemical_elite | 6 | 4000 | 24000 |
 | AsianGrenade | 2 | 4000 | 8000 |
 | AsianGrenade_elite | 2 | 4000 | 8000 |
+| AsianHarbingerPlasma | 8 | 2000 | 16000 |
+| AsianHowitzerCannon | 2 | 20000 | 40000 |
+| AsianHowitzerCannon_elite | 2 | 20000 | 40000 |
 
 
-_... and 897 more._
+_... and 862 more._
 
 
 ## FAIL 2 — FriendlyFire louder than the shot (0)
@@ -57,7 +57,7 @@ _... and 897 more._
 None. ✅
 
 
-## Review — high uniform stacks (informational, 237)
+## Review — high uniform stacks (informational, 232)
 
 Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (not flattening residue).
 
@@ -151,7 +151,6 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | IvanBombAir | 3 | 30000 | 90000 |
 | IxianBomb_EMP | 3 | 30000 | 90000 |
 | JapanSuperBomb | 5 | 10000 | 50000 |
-| JapanesePlasmaBomb | 3 | 10000 | 30000 |
 | KodiakCannon | 5 | 8000 | 40000 |
 | Laboratory_Bioball | 5 | 10000 | 50000 |
 | LatinBuggyRocket | 4 | 10000 | 40000 |
@@ -183,4 +182,5 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | MigMissiles_tesla | 4 | 8000 | 32000 |
 | MigMissiles_tesla_elite | 4 | 8000 | 32000 |
 | MissileSoldierWeapon | 5 | 10000 | 50000 |
+| MonsterTankTuskTesla | 4 | 26750 | 107000 |
 

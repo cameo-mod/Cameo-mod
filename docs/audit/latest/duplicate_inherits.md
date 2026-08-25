@@ -167,15 +167,15 @@ E1:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> e1 -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> e1 -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> e1 -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> e1 -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> e1 -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> e1 -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> e1 -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> e1 -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> e1 -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> e1 -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> e1 -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> e1 -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -265,15 +265,15 @@ E3:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> e3 -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> e3 -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> e3 -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> e3 -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> e3 -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> e3 -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> e3 -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> e3 -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> e3 -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> e3 -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> e3 -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> e3 -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -363,15 +363,15 @@ E6:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -1612,15 +1612,15 @@ TSE1:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -1710,15 +1710,15 @@ TSE3:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -1808,15 +1808,15 @@ TSENGINEER:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -2455,15 +2455,15 @@ YRSLAV:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> yrslav -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> yrslav -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> yrslav -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> yrslav -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> yrslav -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> yrslav -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> yrslav -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> yrslav -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> yrslav -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> yrslav -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> yrslav -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> yrslav -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -2556,15 +2556,15 @@ alien.nax:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> alien.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> alien.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> alien.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> alien.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> alien.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> alien.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> alien.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> alien.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> alien.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> alien.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> alien.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> alien.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -2674,15 +2674,15 @@ asianalliance_alligator:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_alligator -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> asianalliance_alligator -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_alligator -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_alligator -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> asianalliance_alligator -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> asianalliance_alligator -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> asianalliance_alligator -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> asianalliance_alligator -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_alligator -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> asianalliance_alligator -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> asianalliance_alligator -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> asianalliance_alligator -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -2775,15 +2775,15 @@ asianalliance_asdf:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_asdf -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> asianalliance_asdf -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_asdf -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_asdf -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> asianalliance_asdf -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> asianalliance_asdf -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> asianalliance_asdf -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> asianalliance_asdf -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_asdf -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> asianalliance_asdf -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> asianalliance_asdf -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> asianalliance_asdf -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -2906,15 +2906,15 @@ asianalliance_asiancommando:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> asianalliance_asiancommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> asianalliance_asiancommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -3017,15 +3017,15 @@ asianalliance_asianflametrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> asianalliance_asianflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> asianalliance_asianflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -3115,15 +3115,15 @@ asianalliance_asianmilitia:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> asianalliance_asianmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> asianalliance_asianmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -3268,15 +3268,15 @@ asianalliance_asiantankkiller:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> asianalliance_asiantankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> asianalliance_asiantankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -3411,15 +3411,15 @@ asianalliance_engineer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> asianalliance_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> asianalliance_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> asianalliance_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> asianalliance_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> asianalliance_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> asianalliance_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> asianalliance_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> asianalliance_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -3509,15 +3509,15 @@ asianalliance_fanatic:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_fanatic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> asianalliance_fanatic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_fanatic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_fanatic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> asianalliance_fanatic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> asianalliance_fanatic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> asianalliance_fanatic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> asianalliance_fanatic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_fanatic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> asianalliance_fanatic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> asianalliance_fanatic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> asianalliance_fanatic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -3697,15 +3697,15 @@ asianalliance_japanesesamurai:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_japanesesamurai -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> asianalliance_japanesesamurai -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_japanesesamurai -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_japanesesamurai -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> asianalliance_japanesesamurai -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> asianalliance_japanesesamurai -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> asianalliance_japanesesamurai -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> asianalliance_japanesesamurai -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_japanesesamurai -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> asianalliance_japanesesamurai -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> asianalliance_japanesesamurai -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> asianalliance_japanesesamurai -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -3918,15 +3918,15 @@ asianalliance_plasmatrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_plasmatrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> asianalliance_plasmatrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_plasmatrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_plasmatrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> asianalliance_plasmatrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> asianalliance_plasmatrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> asianalliance_plasmatrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> asianalliance_plasmatrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_plasmatrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> asianalliance_plasmatrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> asianalliance_plasmatrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> asianalliance_plasmatrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -4087,15 +4087,15 @@ asianalliance_shinobi:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_shinobi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> asianalliance_shinobi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_shinobi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_shinobi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> asianalliance_shinobi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> asianalliance_shinobi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> asianalliance_shinobi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> asianalliance_shinobi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_shinobi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> asianalliance_shinobi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> asianalliance_shinobi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> asianalliance_shinobi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -4213,15 +4213,15 @@ asianalliance_veteranarcher:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> asianalliance_veteranarcher -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> asianalliance_veteranarcher -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> asianalliance_veteranarcher -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> asianalliance_veteranarcher -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> asianalliance_veteranarcher -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> asianalliance_veteranarcher -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> asianalliance_veteranarcher -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> asianalliance_veteranarcher -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> asianalliance_veteranarcher -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> asianalliance_veteranarcher -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> asianalliance_veteranarcher -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> asianalliance_veteranarcher -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -4457,15 +4457,15 @@ cabal_ascended:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> cabal_ascended -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> cabal_ascended -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> cabal_ascended -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> cabal_ascended -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> cabal_ascended -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> cabal_ascended -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> cabal_ascended -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> cabal_ascended -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> cabal_ascended -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> cabal_ascended -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> cabal_ascended -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> cabal_ascended -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -4576,15 +4576,15 @@ cabal_berserker:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> cabal_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> cabal_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> cabal_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> cabal_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> cabal_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> cabal_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> cabal_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> cabal_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> cabal_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> cabal_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> cabal_berserker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> cabal_berserker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -4771,15 +4771,15 @@ cabal_cyborgcommando:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> cabal_cyborgcommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> cabal_cyborgcommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> cabal_cyborgcommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> cabal_cyborgcommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> cabal_cyborgcommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> cabal_cyborgcommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> cabal_cyborgcommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> cabal_cyborgcommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> cabal_cyborgcommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> cabal_cyborgcommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> cabal_cyborgcommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> cabal_cyborgcommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -4953,15 +4953,15 @@ cabal_cyborgcommandov2:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> cabal_cyborgcommandov2 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> cabal_cyborgcommandov2 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> cabal_cyborgcommandov2 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> cabal_cyborgcommandov2 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> cabal_cyborgcommandov2 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> cabal_cyborgcommandov2 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> cabal_cyborgcommandov2 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> cabal_cyborgcommandov2 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> cabal_cyborgcommandov2 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> cabal_cyborgcommandov2 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> cabal_cyborgcommandov2 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> cabal_cyborgcommandov2 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -5146,15 +5146,15 @@ cabal_cyborginfantry:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> cabal_cyborginfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> cabal_cyborginfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> cabal_cyborginfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> cabal_cyborginfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> cabal_cyborginfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> cabal_cyborginfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> cabal_cyborginfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> cabal_cyborginfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> cabal_cyborginfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> cabal_cyborginfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> cabal_cyborginfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> cabal_cyborginfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -5249,15 +5249,15 @@ cabal_devout:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> cabal_devout -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> cabal_devout -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> cabal_devout -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> cabal_devout -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> cabal_devout -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> cabal_devout -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> cabal_devout -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> cabal_devout -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> cabal_devout -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> cabal_devout -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> cabal_devout -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> cabal_devout -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -5347,15 +5347,15 @@ cabal_dissolver:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> cabal_dissolver -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> cabal_dissolver -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> cabal_dissolver -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> cabal_dissolver -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> cabal_dissolver -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> cabal_dissolver -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> cabal_dissolver -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> cabal_dissolver -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> cabal_dissolver -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> cabal_dissolver -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> cabal_dissolver -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> cabal_dissolver -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -5445,15 +5445,15 @@ cabal_eliminator800:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> cabal_eliminator800 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> cabal_eliminator800 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> cabal_eliminator800 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> cabal_eliminator800 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> cabal_eliminator800 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> cabal_eliminator800 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> cabal_eliminator800 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> cabal_eliminator800 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> cabal_eliminator800 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> cabal_eliminator800 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> cabal_eliminator800 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> cabal_eliminator800 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -5543,15 +5543,15 @@ cabal_engineer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> cabal_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> cabal_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> cabal_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> cabal_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> cabal_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> cabal_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> cabal_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> cabal_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> cabal_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> cabal_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> cabal_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> cabal_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -5641,15 +5641,15 @@ cabal_enlighted:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> cabal_enlighted -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> cabal_enlighted -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> cabal_enlighted -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> cabal_enlighted -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> cabal_enlighted -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> cabal_enlighted -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> cabal_enlighted -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> cabal_enlighted -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> cabal_enlighted -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> cabal_enlighted -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> cabal_enlighted -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> cabal_enlighted -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -5739,15 +5739,15 @@ cabal_hackercyborg:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> cabal_hackercyborg -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> cabal_hackercyborg -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> cabal_hackercyborg -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> cabal_hackercyborg -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> cabal_hackercyborg -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> cabal_hackercyborg -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> cabal_hackercyborg -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> cabal_hackercyborg -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> cabal_hackercyborg -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> cabal_hackercyborg -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> cabal_hackercyborg -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> cabal_hackercyborg -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -6480,15 +6480,15 @@ cabal_rocketcyborg:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> cabal_rocketcyborg -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> cabal_rocketcyborg -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> cabal_rocketcyborg -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> cabal_rocketcyborg -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> cabal_rocketcyborg -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> cabal_rocketcyborg -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> cabal_rocketcyborg -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> cabal_rocketcyborg -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> cabal_rocketcyborg -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> cabal_rocketcyborg -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> cabal_rocketcyborg -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> cabal_rocketcyborg -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -6731,15 +6731,15 @@ conehead2.nax:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> conehead2.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> conehead2.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> conehead2.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> conehead2.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> conehead2.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> conehead2.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> conehead2.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> conehead2.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> conehead2.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> conehead2.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> conehead2.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> conehead2.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -6914,15 +6914,15 @@ engineer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -7203,15 +7203,15 @@ forgotten_chemsprayinfantry:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_chemsprayinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_chemsprayinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_chemsprayinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_chemsprayinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_chemsprayinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_chemsprayinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_chemsprayinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_chemsprayinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_chemsprayinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_chemsprayinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_chemsprayinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_chemsprayinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -7415,15 +7415,15 @@ forgotten_engineer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -7526,15 +7526,15 @@ forgotten_ghoststalker:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -7624,15 +7624,15 @@ forgotten_ghoststalker_r4:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_ghoststalker_r4 -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_ghoststalker_r4 -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_ghoststalker_r4 -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_ghoststalker_r4 -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_ghoststalker_r4 -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_ghoststalker_r4 -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_ghoststalker_r4 -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_ghoststalker_r4 -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_ghoststalker_r4 -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_ghoststalker_r4 -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_ghoststalker_r4 -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_ghoststalker_r4 -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -7722,15 +7722,15 @@ forgotten_ghoststalker_sp:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_ghoststalker_sp -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_ghoststalker_sp -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_ghoststalker_sp -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_ghoststalker_sp -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_ghoststalker_sp -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_ghoststalker_sp -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_ghoststalker_sp -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_ghoststalker_sp -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_ghoststalker_sp -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_ghoststalker_sp -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_ghoststalker_sp -> forgotten_ghoststalker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_ghoststalker_sp -> forgotten_ghoststalker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -7919,15 +7919,15 @@ forgotten_mutant:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -8017,15 +8017,15 @@ forgotten_mutant_sp:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_mutant_sp -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_mutant_sp -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_mutant_sp -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_mutant_sp -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_mutant_sp -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_mutant_sp -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_mutant_sp -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_mutant_sp -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_mutant_sp -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_mutant_sp -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_mutant_sp -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_mutant_sp -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -8115,15 +8115,15 @@ forgotten_mutant_wild:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_mutant_wild -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_mutant_wild -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_mutant_wild -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_mutant_wild -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_mutant_wild -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_mutant_wild -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_mutant_wild -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_mutant_wild -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_mutant_wild -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_mutant_wild -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_mutant_wild -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_mutant_wild -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -8213,15 +8213,15 @@ forgotten_mutanthijacker:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_mutanthijacker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_mutanthijacker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_mutanthijacker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_mutanthijacker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_mutanthijacker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_mutanthijacker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_mutanthijacker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_mutanthijacker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_mutanthijacker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_mutanthijacker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_mutanthijacker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_mutanthijacker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -8350,15 +8350,15 @@ forgotten_mutantmortarman:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_mutantmortarman -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_mutantmortarman -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_mutantmortarman -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_mutantmortarman -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_mutantmortarman -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_mutantmortarman -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_mutantmortarman -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_mutantmortarman -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_mutantmortarman -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_mutantmortarman -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_mutantmortarman -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_mutantmortarman -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -8448,15 +8448,15 @@ forgotten_mutantsergeant:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_mutantsergeant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_mutantsergeant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_mutantsergeant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_mutantsergeant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_mutantsergeant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_mutantsergeant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_mutantsergeant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_mutantsergeant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_mutantsergeant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_mutantsergeant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_mutantsergeant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_mutantsergeant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -8546,15 +8546,15 @@ forgotten_mutantsniper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -8734,15 +8734,15 @@ forgotten_mutantsniper_r4:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_mutantsniper_r4 -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -8922,15 +8922,15 @@ forgotten_mutantsniper_sp:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_mutantsniper_sp -> forgotten_mutantsniper -> forgotten_mutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -9110,15 +9110,15 @@ forgotten_mutantsoldier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_mutantsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_mutantsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_mutantsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_mutantsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_mutantsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_mutantsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_mutantsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_mutantsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_mutantsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_mutantsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_mutantsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_mutantsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -9208,15 +9208,15 @@ forgotten_mutantsoldier_sp:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_mutantsoldier_sp -> forgotten_mutantsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_mutantsoldier_sp -> forgotten_mutantsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_mutantsoldier_sp -> forgotten_mutantsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_mutantsoldier_sp -> forgotten_mutantsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_mutantsoldier_sp -> forgotten_mutantsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_mutantsoldier_sp -> forgotten_mutantsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_mutantsoldier_sp -> forgotten_mutantsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_mutantsoldier_sp -> forgotten_mutantsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_mutantsoldier_sp -> forgotten_mutantsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_mutantsoldier_sp -> forgotten_mutantsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_mutantsoldier_sp -> forgotten_mutantsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_mutantsoldier_sp -> forgotten_mutantsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -9346,15 +9346,15 @@ forgotten_rocketinfantry:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_rocketinfantry -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_rocketinfantry -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_rocketinfantry -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_rocketinfantry -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_rocketinfantry -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_rocketinfantry -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_rocketinfantry -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_rocketinfantry -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_rocketinfantry -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_rocketinfantry -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_rocketinfantry -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_rocketinfantry -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -9449,15 +9449,15 @@ forgotten_runnershotgal:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_runnershotgal -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_runnershotgal -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_runnershotgal -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_runnershotgal -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_runnershotgal -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_runnershotgal -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_runnershotgal -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_runnershotgal -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_runnershotgal -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_runnershotgal -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_runnershotgal -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_runnershotgal -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -9613,15 +9613,15 @@ forgotten_tiberianfiend:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_tiberianfiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_tiberianfiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_tiberianfiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_tiberianfiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_tiberianfiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_tiberianfiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_tiberianfiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_tiberianfiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_tiberianfiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_tiberianfiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_tiberianfiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_tiberianfiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -9711,15 +9711,15 @@ forgotten_tiberianfiend_wild:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_tiberianfiend_wild -> forgotten_tiberianfiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_tiberianfiend_wild -> forgotten_tiberianfiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_tiberianfiend_wild -> forgotten_tiberianfiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_tiberianfiend_wild -> forgotten_tiberianfiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_tiberianfiend_wild -> forgotten_tiberianfiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_tiberianfiend_wild -> forgotten_tiberianfiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_tiberianfiend_wild -> forgotten_tiberianfiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_tiberianfiend_wild -> forgotten_tiberianfiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_tiberianfiend_wild -> forgotten_tiberianfiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_tiberianfiend_wild -> forgotten_tiberianfiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_tiberianfiend_wild -> forgotten_tiberianfiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_tiberianfiend_wild -> forgotten_tiberianfiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -9871,15 +9871,15 @@ forgotten_viniferafiend:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_viniferafiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_viniferafiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_viniferafiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_viniferafiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_viniferafiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_viniferafiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_viniferafiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_viniferafiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_viniferafiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_viniferafiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_viniferafiend -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_viniferafiend -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -10058,15 +10058,15 @@ forgotten_zombiemutant:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> forgotten_zombiemutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> forgotten_zombiemutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> forgotten_zombiemutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> forgotten_zombiemutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> forgotten_zombiemutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> forgotten_zombiemutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> forgotten_zombiemutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> forgotten_zombiemutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> forgotten_zombiemutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> forgotten_zombiemutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> forgotten_zombiemutant -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> forgotten_zombiemutant -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -10156,15 +10156,15 @@ frank.nax:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> frank.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> frank.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> frank.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> frank.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> frank.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> frank.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> frank.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> frank.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> frank.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> frank.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> frank.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> frank.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -10329,15 +10329,15 @@ futuretech_blackwidow:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> futuretech_blackwidow -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> futuretech_blackwidow -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> futuretech_blackwidow -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> futuretech_blackwidow -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> futuretech_blackwidow -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> futuretech_blackwidow -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> futuretech_blackwidow -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> futuretech_blackwidow -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> futuretech_blackwidow -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> futuretech_blackwidow -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> futuretech_blackwidow -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> futuretech_blackwidow -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -10481,15 +10481,15 @@ futuretech_cryolegionnaire:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> futuretech_cryolegionnaire -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> futuretech_cryolegionnaire -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> futuretech_cryolegionnaire -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> futuretech_cryolegionnaire -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> futuretech_cryolegionnaire -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> futuretech_cryolegionnaire -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> futuretech_cryolegionnaire -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> futuretech_cryolegionnaire -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> futuretech_cryolegionnaire -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> futuretech_cryolegionnaire -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> futuretech_cryolegionnaire -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> futuretech_cryolegionnaire -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -10617,15 +10617,15 @@ futuretech_enforcer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> futuretech_enforcer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> futuretech_enforcer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> futuretech_enforcer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> futuretech_enforcer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> futuretech_enforcer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> futuretech_enforcer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> futuretech_enforcer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> futuretech_enforcer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> futuretech_enforcer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> futuretech_enforcer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> futuretech_enforcer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> futuretech_enforcer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -10715,15 +10715,15 @@ futuretech_engineer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> futuretech_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> futuretech_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> futuretech_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> futuretech_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> futuretech_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> futuretech_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> futuretech_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> futuretech_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> futuretech_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> futuretech_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> futuretech_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> futuretech_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -10927,15 +10927,15 @@ futuretech_javelinsoldier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> futuretech_javelinsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> futuretech_javelinsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> futuretech_javelinsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> futuretech_javelinsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> futuretech_javelinsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> futuretech_javelinsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> futuretech_javelinsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> futuretech_javelinsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> futuretech_javelinsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> futuretech_javelinsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> futuretech_javelinsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> futuretech_javelinsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -11162,15 +11162,15 @@ futuretech_spyfutu:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> futuretech_spyfutu -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> futuretech_spyfutu -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> futuretech_spyfutu -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> futuretech_spyfutu -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> futuretech_spyfutu -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> futuretech_spyfutu -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> futuretech_spyfutu -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> futuretech_spyfutu -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> futuretech_spyfutu -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> futuretech_spyfutu -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> futuretech_spyfutu -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> futuretech_spyfutu -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -12789,15 +12789,15 @@ japan_archermaiden:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> japan_archermaiden -> japan_tankbuster -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> japan_archermaiden -> japan_tankbuster -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> japan_archermaiden -> japan_tankbuster -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> japan_archermaiden -> japan_tankbuster -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> japan_archermaiden -> japan_tankbuster -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> japan_archermaiden -> japan_tankbuster -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> japan_archermaiden -> japan_tankbuster -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> japan_archermaiden -> japan_tankbuster -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> japan_archermaiden -> japan_tankbuster -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> japan_archermaiden -> japan_tankbuster -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> japan_archermaiden -> japan_tankbuster -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> japan_archermaiden -> japan_tankbuster -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -13075,15 +13075,15 @@ japan_exorcist:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> japan_exorcist -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> japan_exorcist -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> japan_exorcist -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> japan_exorcist -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> japan_exorcist -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> japan_exorcist -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> japan_exorcist -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> japan_exorcist -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> japan_exorcist -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> japan_exorcist -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> japan_exorcist -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> japan_exorcist -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -13231,15 +13231,15 @@ japan_imperialscoutsman:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> japan_imperialscoutsman -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -13498,15 +13498,15 @@ japan_japaneseflamethrower:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> japan_japaneseflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> japan_japaneseflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> japan_japaneseflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> japan_japaneseflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> japan_japaneseflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> japan_japaneseflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> japan_japaneseflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> japan_japaneseflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> japan_japaneseflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> japan_japaneseflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> japan_japaneseflamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> japan_japaneseflamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -13810,15 +13810,15 @@ japan_samurai:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> japan_samurai -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> japan_samurai -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> japan_samurai -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> japan_samurai -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> japan_samurai -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> japan_samurai -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> japan_samurai -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> japan_samurai -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> japan_samurai -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> japan_samurai -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> japan_samurai -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> japan_samurai -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -13973,15 +13973,15 @@ japan_tankbuster:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> japan_tankbuster -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> japan_tankbuster -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> japan_tankbuster -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> japan_tankbuster -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> japan_tankbuster -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> japan_tankbuster -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> japan_tankbuster -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> japan_tankbuster -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> japan_tankbuster -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> japan_tankbuster -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> japan_tankbuster -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> japan_tankbuster -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -14501,15 +14501,15 @@ latinsyndicate_engineer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> latinsyndicate_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> latinsyndicate_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> latinsyndicate_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> latinsyndicate_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> latinsyndicate_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> latinsyndicate_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> latinsyndicate_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> latinsyndicate_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> latinsyndicate_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> latinsyndicate_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> latinsyndicate_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> latinsyndicate_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -14599,15 +14599,15 @@ latinsyndicate_freedomfighter:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> latinsyndicate_freedomfighter -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> latinsyndicate_freedomfighter -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> latinsyndicate_freedomfighter -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> latinsyndicate_freedomfighter -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> latinsyndicate_freedomfighter -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> latinsyndicate_freedomfighter -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> latinsyndicate_freedomfighter -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> latinsyndicate_freedomfighter -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> latinsyndicate_freedomfighter -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> latinsyndicate_freedomfighter -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> latinsyndicate_freedomfighter -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> latinsyndicate_freedomfighter -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -14775,15 +14775,15 @@ latinsyndicate_latinflametrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> latinsyndicate_latinflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> latinsyndicate_latinflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> latinsyndicate_latinflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> latinsyndicate_latinflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> latinsyndicate_latinflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> latinsyndicate_latinflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> latinsyndicate_latinflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> latinsyndicate_latinflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> latinsyndicate_latinflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> latinsyndicate_latinflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> latinsyndicate_latinflametrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> latinsyndicate_latinflametrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -14873,15 +14873,15 @@ latinsyndicate_latinmilitia:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> latinsyndicate_latinmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> latinsyndicate_latinmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> latinsyndicate_latinmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> latinsyndicate_latinmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> latinsyndicate_latinmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> latinsyndicate_latinmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> latinsyndicate_latinmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> latinsyndicate_latinmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> latinsyndicate_latinmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> latinsyndicate_latinmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> latinsyndicate_latinmilitia -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> latinsyndicate_latinmilitia -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -15060,15 +15060,15 @@ latinsyndicate_narco:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> latinsyndicate_narco -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> latinsyndicate_narco -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> latinsyndicate_narco -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> latinsyndicate_narco -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> latinsyndicate_narco -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> latinsyndicate_narco -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> latinsyndicate_narco -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> latinsyndicate_narco -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> latinsyndicate_narco -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> latinsyndicate_narco -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> latinsyndicate_narco -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> latinsyndicate_narco -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -15272,15 +15272,15 @@ latinsyndicate_tankkiller:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> latinsyndicate_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> latinsyndicate_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> latinsyndicate_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> latinsyndicate_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> latinsyndicate_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> latinsyndicate_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> latinsyndicate_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> latinsyndicate_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> latinsyndicate_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> latinsyndicate_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> latinsyndicate_tankkiller -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> latinsyndicate_tankkiller -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -15370,15 +15370,15 @@ latinsyndicate_terrorist:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> latinsyndicate_terrorist -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> latinsyndicate_terrorist -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> latinsyndicate_terrorist -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> latinsyndicate_terrorist -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> latinsyndicate_terrorist -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> latinsyndicate_terrorist -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> latinsyndicate_terrorist -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> latinsyndicate_terrorist -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> latinsyndicate_terrorist -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> latinsyndicate_terrorist -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> latinsyndicate_terrorist -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> latinsyndicate_terrorist -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -15740,15 +15740,15 @@ naxis_coneheadsknights:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> naxis_coneheadsknights -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> naxis_coneheadsknights -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> naxis_coneheadsknights -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> naxis_coneheadsknights -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> naxis_coneheadsknights -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> naxis_coneheadsknights -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> naxis_coneheadsknights -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> naxis_coneheadsknights -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> naxis_coneheadsknights -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> naxis_coneheadsknights -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> naxis_coneheadsknights -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> naxis_coneheadsknights -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -16081,15 +16081,15 @@ naxis_naxiflamer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> naxis_naxiflamer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> naxis_naxiflamer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> naxis_naxiflamer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> naxis_naxiflamer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> naxis_naxiflamer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> naxis_naxiflamer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> naxis_naxiflamer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> naxis_naxiflamer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> naxis_naxiflamer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> naxis_naxiflamer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> naxis_naxiflamer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> naxis_naxiflamer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -16179,15 +16179,15 @@ naxis_naximachinegunners:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> naxis_naximachinegunners -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> naxis_naximachinegunners -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> naxis_naximachinegunners -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> naxis_naximachinegunners -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> naxis_naximachinegunners -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> naxis_naximachinegunners -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> naxis_naximachinegunners -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> naxis_naximachinegunners -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> naxis_naximachinegunners -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> naxis_naximachinegunners -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> naxis_naximachinegunners -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> naxis_naximachinegunners -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -16277,15 +16277,15 @@ naxis_naximercenarysniper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> naxis_naximercenarysniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> naxis_naximercenarysniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> naxis_naximercenarysniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> naxis_naximercenarysniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> naxis_naximercenarysniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> naxis_naximercenarysniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> naxis_naximercenarysniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> naxis_naximercenarysniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> naxis_naximercenarysniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> naxis_naximercenarysniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> naxis_naximercenarysniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> naxis_naximercenarysniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -16380,15 +16380,15 @@ naxis_naxiriflerecruit:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> naxis_naxiriflerecruit -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> naxis_naxiriflerecruit -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> naxis_naxiriflerecruit -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> naxis_naxiriflerecruit -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> naxis_naxiriflerecruit -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> naxis_naxiriflerecruit -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> naxis_naxiriflerecruit -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> naxis_naxiriflerecruit -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> naxis_naxiriflerecruit -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> naxis_naxiriflerecruit -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> naxis_naxiriflerecruit -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> naxis_naxiriflerecruit -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -16478,15 +16478,15 @@ naxis_naxiriflesoldier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> naxis_naxiriflesoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> naxis_naxiriflesoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> naxis_naxiriflesoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> naxis_naxiriflesoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> naxis_naxiriflesoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> naxis_naxiriflesoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> naxis_naxiriflesoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> naxis_naxiriflesoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> naxis_naxiriflesoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> naxis_naxiriflesoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> naxis_naxiriflesoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> naxis_naxiriflesoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -16646,15 +16646,15 @@ naxis_panzerfausttrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> naxis_panzerfausttrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> naxis_panzerfausttrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> naxis_panzerfausttrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> naxis_panzerfausttrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> naxis_panzerfausttrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> naxis_panzerfausttrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> naxis_panzerfausttrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> naxis_panzerfausttrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> naxis_panzerfausttrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> naxis_panzerfausttrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> naxis_panzerfausttrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> naxis_panzerfausttrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -16744,15 +16744,15 @@ naxis_panzerschreck:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> naxis_panzerschreck -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> naxis_panzerschreck -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> naxis_panzerschreck -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> naxis_panzerschreck -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> naxis_panzerschreck -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> naxis_panzerschreck -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> naxis_panzerschreck -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> naxis_panzerschreck -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> naxis_panzerschreck -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> naxis_panzerschreck -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> naxis_panzerschreck -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> naxis_panzerschreck -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -16842,15 +16842,15 @@ naxis_portableflak:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> naxis_portableflak -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> naxis_portableflak -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> naxis_portableflak -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> naxis_portableflak -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> naxis_portableflak -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> naxis_portableflak -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> naxis_portableflak -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> naxis_portableflak -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> naxis_portableflak -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> naxis_portableflak -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> naxis_portableflak -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> naxis_portableflak -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -17038,15 +17038,15 @@ naxis_slave:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> naxis_slave -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> naxis_slave -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> naxis_slave -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> naxis_slave -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> naxis_slave -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> naxis_slave -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> naxis_slave -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> naxis_slave -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> naxis_slave -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> naxis_slave -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> naxis_slave -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> naxis_slave -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -17139,15 +17139,15 @@ naxis_slaveoverseer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> naxis_slaveoverseer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> naxis_slaveoverseer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> naxis_slaveoverseer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> naxis_slaveoverseer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> naxis_slaveoverseer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> naxis_slaveoverseer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> naxis_slaveoverseer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> naxis_slaveoverseer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> naxis_slaveoverseer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> naxis_slaveoverseer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> naxis_slaveoverseer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> naxis_slaveoverseer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -17237,15 +17237,15 @@ naxis_sssoldier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> naxis_sssoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> naxis_sssoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> naxis_sssoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> naxis_sssoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> naxis_sssoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> naxis_sssoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> naxis_sssoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> naxis_sssoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> naxis_sssoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> naxis_sssoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> naxis_sssoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> naxis_sssoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -17454,15 +17454,15 @@ ordos_antiairtrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ordos_antiairtrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ordos_antiairtrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ordos_antiairtrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ordos_antiairtrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ordos_antiairtrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ordos_antiairtrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ordos_antiairtrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ordos_antiairtrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ordos_antiairtrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ordos_antiairtrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ordos_antiairtrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ordos_antiairtrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -17985,15 +17985,15 @@ ordos_mortartrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ordos_mortartrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ordos_mortartrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ordos_mortartrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ordos_mortartrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ordos_mortartrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ordos_mortartrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ordos_mortartrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ordos_mortartrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ordos_mortartrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ordos_mortartrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ordos_mortartrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ordos_mortartrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -19310,15 +19310,15 @@ ra1_allies_alliedrocketsoldier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_allies_alliedrocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -19419,15 +19419,15 @@ ra1_allies_alliedsniper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_allies_alliedsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_allies_alliedsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -19698,15 +19698,15 @@ ra1_allies_machinegunner:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_allies_machinegunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_allies_machinegunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_allies_machinegunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_allies_machinegunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_allies_machinegunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_allies_machinegunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_allies_machinegunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_allies_machinegunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_allies_machinegunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_allies_machinegunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_allies_machinegunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_allies_machinegunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -19796,15 +19796,15 @@ ra1_allies_mechanic:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_allies_mechanic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_allies_mechanic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_allies_mechanic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_allies_mechanic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_allies_mechanic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_allies_mechanic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_allies_mechanic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_allies_mechanic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_allies_mechanic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_allies_mechanic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_allies_mechanic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_allies_mechanic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -19894,15 +19894,15 @@ ra1_allies_medic:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_allies_medic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_allies_medic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_allies_medic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_allies_medic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_allies_medic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_allies_medic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_allies_medic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_allies_medic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_allies_medic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_allies_medic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_allies_medic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_allies_medic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -20066,15 +20066,15 @@ ra1_allies_raspy:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_allies_raspy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_allies_raspy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_allies_raspy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_allies_raspy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_allies_raspy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_allies_raspy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_allies_raspy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_allies_raspy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_allies_raspy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_allies_raspy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_allies_raspy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_allies_raspy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -20181,15 +20181,15 @@ ra1_allies_rifleinfantry:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_allies_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_allies_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_allies_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_allies_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_allies_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_allies_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_allies_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_allies_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_allies_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_allies_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_allies_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_allies_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -20284,15 +20284,15 @@ ra1_allies_tanya:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_allies_tanya -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_allies_tanya -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_allies_tanya -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_allies_tanya -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_allies_tanya -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_allies_tanya -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_allies_tanya -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_allies_tanya -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_allies_tanya -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_allies_tanya -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_allies_tanya -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_allies_tanya -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -20388,15 +20388,15 @@ ra1_engineer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -20521,15 +20521,15 @@ ra1_soviets_ak47conscript:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_ak47conscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_ak47conscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_ak47conscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_ak47conscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_soviets_ak47conscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_soviets_ak47conscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_soviets_ak47conscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_soviets_ak47conscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_ak47conscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_soviets_ak47conscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_soviets_ak47conscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_soviets_ak47conscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -20676,15 +20676,15 @@ ra1_soviets_commissar:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_commissar -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_commissar -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_commissar -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_commissar -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_soviets_commissar -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_soviets_commissar -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_soviets_commissar -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_soviets_commissar -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_commissar -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_soviets_commissar -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_soviets_commissar -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_soviets_commissar -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -20782,15 +20782,15 @@ ra1_soviets_dragunovantimaterialsniper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_dragunovantimaterialsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_dragunovantimaterialsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_dragunovantimaterialsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_dragunovantimaterialsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_soviets_dragunovantimaterialsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_soviets_dragunovantimaterialsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_soviets_dragunovantimaterialsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_soviets_dragunovantimaterialsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_dragunovantimaterialsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_soviets_dragunovantimaterialsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_soviets_dragunovantimaterialsniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_soviets_dragunovantimaterialsniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -20880,15 +20880,15 @@ ra1_soviets_firerocketsoldier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_firerocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_firerocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_firerocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_firerocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_soviets_firerocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_soviets_firerocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_soviets_firerocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_soviets_firerocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_firerocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_soviets_firerocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_soviets_firerocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_soviets_firerocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -20992,15 +20992,15 @@ ra1_soviets_flamethrower:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_soviets_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_soviets_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -21119,15 +21119,15 @@ ra1_soviets_grenadier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_soviets_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_soviets_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -21531,15 +21531,15 @@ ra1_soviets_molotovconscript:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_molotovconscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_molotovconscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_molotovconscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_molotovconscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_soviets_molotovconscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_soviets_molotovconscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_soviets_molotovconscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_soviets_molotovconscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_molotovconscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_soviets_molotovconscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_soviets_molotovconscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_soviets_molotovconscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -21646,15 +21646,15 @@ ra1_soviets_mortarsoldier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_soviets_mortarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_soviets_mortarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -21853,15 +21853,15 @@ ra1_soviets_rifleinfantry:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_soviets_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_soviets_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_soviets_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_soviets_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_soviets_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_soviets_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_soviets_rifleinfantry -> ^ra1alliesrifleinfantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -21951,15 +21951,15 @@ ra1_soviets_rocketsoldier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_soviets_rocketsoldier -> ^ra1alliesalliedrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -22075,15 +22075,15 @@ ra1_soviets_shocktrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_shocktrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_shocktrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_shocktrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_shocktrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_soviets_shocktrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_soviets_shocktrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_soviets_shocktrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_soviets_shocktrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_shocktrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_soviets_shocktrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_soviets_shocktrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_soviets_shocktrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -22481,15 +22481,15 @@ ra1_soviets_volkov:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_volkov -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_volkov -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_volkov -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_volkov -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_soviets_volkov -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_soviets_volkov -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_soviets_volkov -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_soviets_volkov -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_volkov -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_soviets_volkov -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_soviets_volkov -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_soviets_volkov -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -22634,15 +22634,15 @@ ra1_soviets_zapper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra1_soviets_zapper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra1_soviets_zapper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra1_soviets_zapper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra1_soviets_zapper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra1_soviets_zapper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra1_soviets_zapper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra1_soviets_zapper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra1_soviets_zapper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra1_soviets_zapper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra1_soviets_zapper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra1_soviets_zapper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra1_soviets_zapper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -22907,15 +22907,15 @@ ra2_allies_chronolegionnaire:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_allies_chronolegionnaire -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2_allies_chronolegionnaire -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2_allies_chronolegionnaire -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2_allies_chronolegionnaire -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2_allies_chronolegionnaire -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2_allies_chronolegionnaire -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2_allies_chronolegionnaire -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2_allies_chronolegionnaire -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2_allies_chronolegionnaire -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2_allies_chronolegionnaire -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2_allies_chronolegionnaire -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2_allies_chronolegionnaire -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -23026,15 +23026,15 @@ ra2_allies_engineer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_allies_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2_allies_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2_allies_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2_allies_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2_allies_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2_allies_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2_allies_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2_allies_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2_allies_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2_allies_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2_allies_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2_allies_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -23139,15 +23139,15 @@ ra2_allies_gi:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_allies_gi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2_allies_gi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2_allies_gi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2_allies_gi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2_allies_gi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2_allies_gi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2_allies_gi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2_allies_gi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2_allies_gi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2_allies_gi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2_allies_gi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2_allies_gi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -23261,15 +23261,15 @@ ra2_allies_guardiangi:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_allies_guardiangi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2_allies_guardiangi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2_allies_guardiangi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2_allies_guardiangi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2_allies_guardiangi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2_allies_guardiangi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2_allies_guardiangi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2_allies_guardiangi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2_allies_guardiangi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2_allies_guardiangi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2_allies_guardiangi -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2_allies_guardiangi -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -23596,15 +23596,15 @@ ra2_allies_ra2spy:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_allies_ra2spy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2_allies_ra2spy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2_allies_ra2spy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2_allies_ra2spy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2_allies_ra2spy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2_allies_ra2spy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2_allies_ra2spy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2_allies_ra2spy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2_allies_ra2spy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2_allies_ra2spy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2_allies_ra2spy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2_allies_ra2spy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -23747,15 +23747,15 @@ ra2_allies_seal:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_allies_seal -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2_allies_seal -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2_allies_seal -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2_allies_seal -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2_allies_seal -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2_allies_seal -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2_allies_seal -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2_allies_seal -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2_allies_seal -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2_allies_seal -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2_allies_seal -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2_allies_seal -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -23845,15 +23845,15 @@ ra2_allies_sniper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2_allies_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2_allies_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -23964,15 +23964,15 @@ ra2_allies_tanyaii:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_allies_tanyaii -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2_allies_tanyaii -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2_allies_tanyaii -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2_allies_tanyaii -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2_allies_tanyaii -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2_allies_tanyaii -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2_allies_tanyaii -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2_allies_tanyaii -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2_allies_tanyaii -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2_allies_tanyaii -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2_allies_tanyaii -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2_allies_tanyaii -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -25715,15 +25715,15 @@ ra2_soviets_boris:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_soviets_boris -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2_soviets_boris -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2_soviets_boris -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2_soviets_boris -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2_soviets_boris -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2_soviets_boris -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2_soviets_boris -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2_soviets_boris -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2_soviets_boris -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2_soviets_boris -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2_soviets_boris -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2_soviets_boris -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -25819,15 +25819,15 @@ ra2_soviets_conscript:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_soviets_conscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2_soviets_conscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2_soviets_conscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2_soviets_conscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2_soviets_conscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2_soviets_conscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2_soviets_conscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2_soviets_conscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2_soviets_conscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2_soviets_conscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2_soviets_conscript -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2_soviets_conscript -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -25925,15 +25925,15 @@ ra2_soviets_crazyivan:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_soviets_crazyivan -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2_soviets_crazyivan -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2_soviets_crazyivan -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2_soviets_crazyivan -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2_soviets_crazyivan -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2_soviets_crazyivan -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2_soviets_crazyivan -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2_soviets_crazyivan -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2_soviets_crazyivan -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2_soviets_crazyivan -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2_soviets_crazyivan -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2_soviets_crazyivan -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -26023,15 +26023,15 @@ ra2_soviets_desolator:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_soviets_desolator -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2_soviets_desolator -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2_soviets_desolator -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2_soviets_desolator -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2_soviets_desolator -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2_soviets_desolator -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2_soviets_desolator -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2_soviets_desolator -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2_soviets_desolator -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2_soviets_desolator -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2_soviets_desolator -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2_soviets_desolator -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -26121,15 +26121,15 @@ ra2_soviets_engineer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_soviets_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2_soviets_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2_soviets_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2_soviets_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2_soviets_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2_soviets_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2_soviets_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2_soviets_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2_soviets_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2_soviets_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2_soviets_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2_soviets_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -26239,15 +26239,15 @@ ra2_soviets_flaktrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_soviets_flaktrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2_soviets_flaktrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2_soviets_flaktrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2_soviets_flaktrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2_soviets_flaktrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2_soviets_flaktrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2_soviets_flaktrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2_soviets_flaktrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2_soviets_flaktrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2_soviets_flaktrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2_soviets_flaktrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2_soviets_flaktrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -26643,15 +26643,15 @@ ra2_soviets_teslatrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2_soviets_teslatrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2_soviets_teslatrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2_soviets_teslatrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2_soviets_teslatrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2_soviets_teslatrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2_soviets_teslatrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2_soviets_teslatrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2_soviets_teslatrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2_soviets_teslatrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2_soviets_teslatrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2_soviets_teslatrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2_soviets_teslatrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -28117,15 +28117,15 @@ ra2e2.black:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2e2.black -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2e2.black -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2e2.black -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2e2.black -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2e2.black -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2e2.black -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2e2.black -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2e2.black -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2e2.black -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2e2.black -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2e2.black -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2e2.black -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -28313,15 +28313,15 @@ ra2shk.bot:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2shk.bot -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2shk.bot -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2shk.bot -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2shk.bot -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2shk.bot -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2shk.bot -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2shk.bot -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2shk.bot -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2shk.bot -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2shk.bot -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2shk.bot -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2shk.bot -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -28411,15 +28411,15 @@ ra2shkhero:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2shkhero -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2shkhero -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2shkhero -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2shkhero -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2shkhero -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2shkhero -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2shkhero -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2shkhero -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2shkhero -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2shkhero -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2shkhero -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2shkhero -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -28509,15 +28509,15 @@ ra2sidewind:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ra2sidewind -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ra2sidewind -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ra2sidewind -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ra2sidewind -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ra2sidewind -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ra2sidewind -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ra2sidewind -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ra2sidewind -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ra2sidewind -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ra2sidewind -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ra2sidewind -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ra2sidewind -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -28643,15 +28643,15 @@ sc_zerg_larva:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> sc_zerg_larva -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> sc_zerg_larva -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> sc_zerg_larva -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> sc_zerg_larva -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> sc_zerg_larva -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> sc_zerg_larva -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> sc_zerg_larva -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> sc_zerg_larva -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> sc_zerg_larva -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> sc_zerg_larva -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> sc_zerg_larva -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> sc_zerg_larva -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -29283,15 +29283,15 @@ schwarzermond_lunarrocket:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> schwarzermond_lunarrocket -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> schwarzermond_lunarrocket -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> schwarzermond_lunarrocket -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> schwarzermond_lunarrocket -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> schwarzermond_lunarrocket -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> schwarzermond_lunarrocket -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> schwarzermond_lunarrocket -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> schwarzermond_lunarrocket -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> schwarzermond_lunarrocket -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> schwarzermond_lunarrocket -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> schwarzermond_lunarrocket -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> schwarzermond_lunarrocket -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -29381,15 +29381,15 @@ schwarzermond_lunarsoldier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> schwarzermond_lunarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> schwarzermond_lunarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> schwarzermond_lunarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> schwarzermond_lunarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> schwarzermond_lunarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> schwarzermond_lunarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> schwarzermond_lunarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> schwarzermond_lunarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> schwarzermond_lunarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> schwarzermond_lunarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> schwarzermond_lunarsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> schwarzermond_lunarsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -29541,15 +29541,15 @@ schwarzermond_parzival:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> schwarzermond_parzival -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> schwarzermond_parzival -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> schwarzermond_parzival -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> schwarzermond_parzival -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> schwarzermond_parzival -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> schwarzermond_parzival -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> schwarzermond_parzival -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> schwarzermond_parzival -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> schwarzermond_parzival -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> schwarzermond_parzival -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> schwarzermond_parzival -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> schwarzermond_parzival -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -29714,15 +29714,15 @@ schwarzermond_ubermensch:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> schwarzermond_ubermensch -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> schwarzermond_ubermensch -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> schwarzermond_ubermensch -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> schwarzermond_ubermensch -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> schwarzermond_ubermensch -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> schwarzermond_ubermensch -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> schwarzermond_ubermensch -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> schwarzermond_ubermensch -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> schwarzermond_ubermensch -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> schwarzermond_ubermensch -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> schwarzermond_ubermensch -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> schwarzermond_ubermensch -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -29997,15 +29997,15 @@ steelconsortium_clonetrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> steelconsortium_clonetrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> steelconsortium_clonetrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> steelconsortium_clonetrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> steelconsortium_clonetrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> steelconsortium_clonetrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> steelconsortium_clonetrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> steelconsortium_clonetrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> steelconsortium_clonetrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> steelconsortium_clonetrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> steelconsortium_clonetrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> steelconsortium_clonetrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> steelconsortium_clonetrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -30358,15 +30358,15 @@ steelconsortium_engineer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> steelconsortium_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> steelconsortium_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> steelconsortium_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> steelconsortium_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> steelconsortium_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> steelconsortium_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> steelconsortium_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> steelconsortium_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> steelconsortium_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> steelconsortium_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> steelconsortium_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> steelconsortium_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -30504,15 +30504,15 @@ steelconsortium_hoverboardgrenadier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> steelconsortium_hoverboardgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> steelconsortium_hoverboardgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> steelconsortium_hoverboardgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> steelconsortium_hoverboardgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> steelconsortium_hoverboardgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> steelconsortium_hoverboardgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> steelconsortium_hoverboardgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> steelconsortium_hoverboardgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> steelconsortium_hoverboardgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> steelconsortium_hoverboardgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> steelconsortium_hoverboardgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> steelconsortium_hoverboardgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -30657,15 +30657,15 @@ steelconsortium_quantummissiletrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> steelconsortium_quantummissiletrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> steelconsortium_quantummissiletrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> steelconsortium_quantummissiletrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> steelconsortium_quantummissiletrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> steelconsortium_quantummissiletrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> steelconsortium_quantummissiletrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> steelconsortium_quantummissiletrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> steelconsortium_quantummissiletrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> steelconsortium_quantummissiletrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> steelconsortium_quantummissiletrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> steelconsortium_quantummissiletrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> steelconsortium_quantummissiletrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -30820,15 +30820,15 @@ steelconsortium_steelrunner:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> steelconsortium_steelrunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> steelconsortium_steelrunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> steelconsortium_steelrunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> steelconsortium_steelrunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> steelconsortium_steelrunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> steelconsortium_steelrunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> steelconsortium_steelrunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> steelconsortium_steelrunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> steelconsortium_steelrunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> steelconsortium_steelrunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> steelconsortium_steelrunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> steelconsortium_steelrunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -31112,15 +31112,15 @@ td_gdi_commando:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_gdi_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_gdi_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_gdi_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_gdi_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_gdi_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_gdi_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_gdi_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_gdi_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_gdi_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_gdi_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_gdi_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_gdi_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -31241,15 +31241,15 @@ td_gdi_empgrenadier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_gdi_empgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_gdi_empgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_gdi_empgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_gdi_empgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_gdi_empgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_gdi_empgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_gdi_empgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_gdi_empgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_gdi_empgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_gdi_empgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_gdi_empgrenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_gdi_empgrenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -31415,15 +31415,15 @@ td_gdi_grenadier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_gdi_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_gdi_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_gdi_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_gdi_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_gdi_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_gdi_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_gdi_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_gdi_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_gdi_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_gdi_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_gdi_grenadier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_gdi_grenadier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -31527,15 +31527,15 @@ td_gdi_havoc:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_gdi_havoc -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_gdi_havoc -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_gdi_havoc -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_gdi_havoc -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_gdi_havoc -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_gdi_havoc -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_gdi_havoc -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_gdi_havoc -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_gdi_havoc -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_gdi_havoc -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_gdi_havoc -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_gdi_havoc -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -31631,15 +31631,15 @@ td_gdi_heavysniper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_gdi_heavysniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_gdi_heavysniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_gdi_heavysniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_gdi_heavysniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_gdi_heavysniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_gdi_heavysniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_gdi_heavysniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_gdi_heavysniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_gdi_heavysniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_gdi_heavysniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_gdi_heavysniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_gdi_heavysniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -31794,15 +31794,15 @@ td_gdi_minigunner:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_gdi_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -31905,15 +31905,15 @@ td_gdi_officer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_gdi_officer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_gdi_officer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_gdi_officer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_gdi_officer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_gdi_officer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_gdi_officer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_gdi_officer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_gdi_officer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_gdi_officer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_gdi_officer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_gdi_officer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_gdi_officer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -32063,15 +32063,15 @@ td_gdi_rocketsoldier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_gdi_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -32161,15 +32161,15 @@ td_gdi_shotgunner:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_gdi_shotgunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_gdi_shotgunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_gdi_shotgunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_gdi_shotgunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_gdi_shotgunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_gdi_shotgunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_gdi_shotgunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_gdi_shotgunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_gdi_shotgunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_gdi_shotgunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_gdi_shotgunner -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_gdi_shotgunner -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -32268,15 +32268,15 @@ td_gdi_sonicmissilesoldier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_gdi_sonicmissilesoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_gdi_sonicmissilesoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_gdi_sonicmissilesoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_gdi_sonicmissilesoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_gdi_sonicmissilesoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_gdi_sonicmissilesoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_gdi_sonicmissilesoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_gdi_sonicmissilesoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_gdi_sonicmissilesoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_gdi_sonicmissilesoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_gdi_sonicmissilesoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_gdi_sonicmissilesoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -32474,15 +32474,15 @@ td_nod_blackhandflamer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_nod_blackhandflamer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_blackhandflamer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_nod_blackhandflamer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_nod_blackhandflamer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_nod_blackhandflamer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_nod_blackhandflamer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_nod_blackhandflamer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_nod_blackhandflamer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_nod_blackhandflamer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_nod_blackhandflamer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_nod_blackhandflamer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_nod_blackhandflamer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -32555,7 +32555,7 @@ td_nod_buggy:
     -> td_nod_buggy -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_buggy -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
   parent ^^ ^advancedguerillatactics  (2 paths)
-    -> td_nod_buggy -> ^scoutvehicletemplate -> Inherits@upgrade:^AdvancedGuerillaTactics
+    -> td_nod_buggy -> ^scoutvehicletemplate -> Inherits@AdvancedGuerillaTactics2:^AdvancedGuerillaTactics
     -> td_nod_buggy -> Inherits@AdvancedGuerillaTactics:^AdvancedGuerillaTactics
 
 td_nod_buggymkii:
@@ -32563,7 +32563,7 @@ td_nod_buggymkii:
     -> td_nod_buggymkii -> td_nod_buggy -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_buggymkii -> td_nod_buggy -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
   parent ^^ ^advancedguerillatactics  (3 paths)
-    -> td_nod_buggymkii -> td_nod_buggy -> ^scoutvehicletemplate -> Inherits@upgrade:^AdvancedGuerillaTactics
+    -> td_nod_buggymkii -> td_nod_buggy -> ^scoutvehicletemplate -> Inherits@AdvancedGuerillaTactics2:^AdvancedGuerillaTactics
     -> td_nod_buggymkii -> td_nod_buggy -> Inherits@AdvancedGuerillaTactics:^AdvancedGuerillaTactics
     -> td_nod_buggymkii -> Inherits@AdvancedGuerillaTactics:^AdvancedGuerillaTactics
   parent ^^ ^autotargetallassaultmove  (2 paths)
@@ -32615,15 +32615,15 @@ td_nod_chemicalrocketsoldier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_nod_chemicalrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_chemicalrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_nod_chemicalrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_nod_chemicalrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_nod_chemicalrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_nod_chemicalrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_nod_chemicalrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_nod_chemicalrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_nod_chemicalrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_nod_chemicalrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_nod_chemicalrocketsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_nod_chemicalrocketsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -32762,15 +32762,15 @@ td_nod_chemicalwarrior:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_nod_chemicalwarrior -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_chemicalwarrior -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_nod_chemicalwarrior -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_nod_chemicalwarrior -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_nod_chemicalwarrior -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_nod_chemicalwarrior -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_nod_chemicalwarrior -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_nod_chemicalwarrior -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_nod_chemicalwarrior -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_nod_chemicalwarrior -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_nod_chemicalwarrior -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_nod_chemicalwarrior -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -32904,15 +32904,15 @@ td_nod_commando:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_nod_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_nod_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_nod_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_nod_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_nod_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_nod_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_nod_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_nod_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_nod_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_nod_commando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_nod_commando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -33041,15 +33041,15 @@ td_nod_flamethrower:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_nod_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_nod_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_nod_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_nod_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_nod_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_nod_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_nod_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_nod_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_nod_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_nod_flamethrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_nod_flamethrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -33181,15 +33181,15 @@ td_nod_lasercommando:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_nod_lasercommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_lasercommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_nod_lasercommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_nod_lasercommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_nod_lasercommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_nod_lasercommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_nod_lasercommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_nod_lasercommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_nod_lasercommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_nod_lasercommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_nod_lasercommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_nod_lasercommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -33288,15 +33288,15 @@ td_nod_lasertrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_nod_lasertrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_lasertrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_nod_lasertrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_nod_lasertrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_nod_lasertrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_nod_lasertrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_nod_lasertrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_nod_lasertrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_nod_lasertrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_nod_lasertrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_nod_lasertrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_nod_lasertrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -33418,15 +33418,15 @@ td_nod_minigunner:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_nod_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_nod_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_nod_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_nod_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_nod_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_nod_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_nod_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_nod_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_nod_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_nod_minigunner -> ^e1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_nod_minigunner -> ^e1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -33499,7 +33499,7 @@ td_nod_mobileconstructionvehicle:
     -> td_nod_mobileconstructionvehicle -> ^tdmcv -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_mobileconstructionvehicle -> ^tdmcv -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
   parent ^^ ^advancedguerillatactics  (2 paths)
-    -> td_nod_mobileconstructionvehicle -> ^tdmcv -> ^supportvehicletemplate -> Inherits@upgrade:^AdvancedGuerillaTactics
+    -> td_nod_mobileconstructionvehicle -> ^tdmcv -> ^supportvehicletemplate -> Inherits@AdvancedGuerillaTactics3:^AdvancedGuerillaTactics
     -> td_nod_mobileconstructionvehicle -> Inherits@AdvancedGuerillaTactics:^AdvancedGuerillaTactics
 
 td_nod_obeliskoflight:
@@ -33552,15 +33552,15 @@ td_nod_rocketsoldier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_nod_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_nod_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_nod_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_nod_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_nod_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_nod_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_nod_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_nod_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_nod_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_nod_rocketsoldier -> ^e3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_nod_rocketsoldier -> ^e3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -33737,15 +33737,15 @@ td_nod_stealthsoldier:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> td_nod_stealthsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> td_nod_stealthsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> td_nod_stealthsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> td_nod_stealthsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> td_nod_stealthsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> td_nod_stealthsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> td_nod_stealthsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> td_nod_stealthsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> td_nod_stealthsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> td_nod_stealthsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> td_nod_stealthsoldier -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> td_nod_stealthsoldier -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -35708,15 +35708,15 @@ tkm_engineer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tkm_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tkm_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> tkm_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> tkm_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> tkm_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> tkm_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> tkm_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> tkm_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tkm_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tkm_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> tkm_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> tkm_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -35852,15 +35852,15 @@ tkm_juggernaut:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tkm_juggernaut -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tkm_juggernaut -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> tkm_juggernaut -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> tkm_juggernaut -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> tkm_juggernaut -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> tkm_juggernaut -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> tkm_juggernaut -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> tkm_juggernaut -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tkm_juggernaut -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tkm_juggernaut -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> tkm_juggernaut -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> tkm_juggernaut -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -35950,15 +35950,15 @@ tkm_marine:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tkm_marine -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tkm_marine -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> tkm_marine -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> tkm_marine -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> tkm_marine -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> tkm_marine -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> tkm_marine -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> tkm_marine -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tkm_marine -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tkm_marine -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> tkm_marine -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> tkm_marine -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -36119,15 +36119,15 @@ tkm_rifleman:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tkm_rifleman -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tkm_rifleman -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> tkm_rifleman -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> tkm_rifleman -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> tkm_rifleman -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> tkm_rifleman -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> tkm_rifleman -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> tkm_rifleman -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tkm_rifleman -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tkm_rifleman -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> tkm_rifleman -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> tkm_rifleman -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -36217,15 +36217,15 @@ tkm_rocketeer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tkm_rocketeer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tkm_rocketeer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> tkm_rocketeer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> tkm_rocketeer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> tkm_rocketeer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> tkm_rocketeer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> tkm_rocketeer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> tkm_rocketeer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tkm_rocketeer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tkm_rocketeer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> tkm_rocketeer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> tkm_rocketeer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -36323,15 +36323,15 @@ tkm_sniper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tkm_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tkm_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> tkm_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> tkm_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> tkm_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> tkm_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> tkm_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> tkm_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tkm_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tkm_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> tkm_sniper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> tkm_sniper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -36421,15 +36421,15 @@ tkm_spetsnaz:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tkm_spetsnaz -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tkm_spetsnaz -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> tkm_spetsnaz -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> tkm_spetsnaz -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> tkm_spetsnaz -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> tkm_spetsnaz -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> tkm_spetsnaz -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> tkm_spetsnaz -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tkm_spetsnaz -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tkm_spetsnaz -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> tkm_spetsnaz -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> tkm_spetsnaz -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -36691,15 +36691,15 @@ tkm_thermonaut:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tkm_thermonaut -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tkm_thermonaut -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> tkm_thermonaut -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> tkm_thermonaut -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> tkm_thermonaut -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> tkm_thermonaut -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> tkm_thermonaut -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> tkm_thermonaut -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tkm_thermonaut -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tkm_thermonaut -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> tkm_thermonaut -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> tkm_thermonaut -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -36920,15 +36920,15 @@ tkm_trooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tkm_trooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tkm_trooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> tkm_trooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> tkm_trooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> tkm_trooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> tkm_trooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> tkm_trooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> tkm_trooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tkm_trooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tkm_trooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> tkm_trooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> tkm_trooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -37059,15 +37059,15 @@ tkm_von:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tkm_von -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tkm_von -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> tkm_von -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> tkm_von -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> tkm_von -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> tkm_von -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> tkm_von -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> tkm_von -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tkm_von -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tkm_von -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> tkm_von -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> tkm_von -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -37300,15 +37300,15 @@ tkmvan:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tkmvan -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tkmvan -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> tkmvan -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> tkmvan -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> tkmvan -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> tkmvan -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> tkmvan -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> tkmvan -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tkmvan -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tkmvan -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> tkmvan -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> tkmvan -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -37398,15 +37398,15 @@ tkmworker:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> tkmworker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> tkmworker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> tkmworker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> tkmworker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> tkmworker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> tkmworker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> tkmworker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> tkmworker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> tkmworker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> tkmworker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> tkmworker -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> tkmworker -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -37548,15 +37548,15 @@ ts_gdi_discthrower:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_gdi_discthrower -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_gdi_discthrower -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -37714,15 +37714,15 @@ ts_gdi_engineer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_gdi_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_gdi_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_gdi_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_gdi_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_gdi_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_gdi_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_gdi_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_gdi_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_gdi_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_gdi_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_gdi_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_gdi_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -37815,15 +37815,15 @@ ts_gdi_falconenforcer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_gdi_falconenforcer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_gdi_falconenforcer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_gdi_falconenforcer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_gdi_falconenforcer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_gdi_falconenforcer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_gdi_falconenforcer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_gdi_falconenforcer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_gdi_falconenforcer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_gdi_falconenforcer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_gdi_falconenforcer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_gdi_falconenforcer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_gdi_falconenforcer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -38200,15 +38200,15 @@ ts_gdi_lightinfantry:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_gdi_lightinfantry -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_gdi_lightinfantry -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_gdi_lightinfantry -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_gdi_lightinfantry -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_gdi_lightinfantry -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_gdi_lightinfantry -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_gdi_lightinfantry -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_gdi_lightinfantry -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_gdi_lightinfantry -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_gdi_lightinfantry -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_gdi_lightinfantry -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_gdi_lightinfantry -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -38404,15 +38404,15 @@ ts_gdi_medic:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_gdi_medic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_gdi_medic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_gdi_medic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_gdi_medic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_gdi_medic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_gdi_medic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_gdi_medic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_gdi_medic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_gdi_medic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_gdi_medic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_gdi_medic -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_gdi_medic -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -38635,15 +38635,15 @@ ts_gdi_railguncommando:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_gdi_railguncommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_gdi_railguncommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_gdi_railguncommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_gdi_railguncommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_gdi_railguncommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_gdi_railguncommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_gdi_railguncommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_gdi_railguncommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_gdi_railguncommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_gdi_railguncommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_gdi_railguncommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_gdi_railguncommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -38736,15 +38736,15 @@ ts_gdi_riottrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_gdi_riottrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_gdi_riottrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_gdi_riottrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_gdi_riottrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_gdi_riottrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_gdi_riottrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_gdi_riottrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_gdi_riottrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_gdi_riottrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_gdi_riottrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_gdi_riottrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_gdi_riottrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -39160,15 +39160,15 @@ ts_gdi_zonetrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_gdi_zonetrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_gdi_zonetrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_gdi_zonetrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_gdi_zonetrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_gdi_zonetrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_gdi_zonetrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_gdi_zonetrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_gdi_zonetrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_gdi_zonetrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_gdi_zonetrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_gdi_zonetrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_gdi_zonetrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -39373,15 +39373,15 @@ ts_nod_chameleonspy:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_nod_chameleonspy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_nod_chameleonspy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_nod_chameleonspy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_nod_chameleonspy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_nod_chameleonspy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_nod_chameleonspy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_nod_chameleonspy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_nod_chameleonspy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_nod_chameleonspy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_nod_chameleonspy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_nod_chameleonspy -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_nod_chameleonspy -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -39489,15 +39489,15 @@ ts_nod_elitecadre:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_nod_elitecadre -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_nod_elitecadre -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_nod_elitecadre -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_nod_elitecadre -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_nod_elitecadre -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_nod_elitecadre -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_nod_elitecadre -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_nod_elitecadre -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_nod_elitecadre -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_nod_elitecadre -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_nod_elitecadre -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_nod_elitecadre -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -39587,15 +39587,15 @@ ts_nod_engineer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_nod_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_nod_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_nod_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_nod_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_nod_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_nod_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_nod_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_nod_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_nod_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_nod_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_nod_engineer -> tsengineer -> e6 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_nod_engineer -> tsengineer -> e6 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -39773,15 +39773,15 @@ ts_nod_lightinfantry:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_nod_lightinfantry -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_nod_lightinfantry -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_nod_lightinfantry -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_nod_lightinfantry -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_nod_lightinfantry -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_nod_lightinfantry -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_nod_lightinfantry -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_nod_lightinfantry -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_nod_lightinfantry -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_nod_lightinfantry -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_nod_lightinfantry -> tse1 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_nod_lightinfantry -> tse1 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -39943,15 +39943,15 @@ ts_nod_rocketinfantry:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_nod_rocketinfantry -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_nod_rocketinfantry -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_nod_rocketinfantry -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_nod_rocketinfantry -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_nod_rocketinfantry -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_nod_rocketinfantry -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_nod_rocketinfantry -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_nod_rocketinfantry -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_nod_rocketinfantry -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_nod_rocketinfantry -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_nod_rocketinfantry -> tse3 -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_nod_rocketinfantry -> tse3 -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -40061,15 +40061,15 @@ ts_nod_shadowteam:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_nod_shadowteam -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_nod_shadowteam -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_nod_shadowteam -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_nod_shadowteam -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_nod_shadowteam -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_nod_shadowteam -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_nod_shadowteam -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_nod_shadowteam -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_nod_shadowteam -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_nod_shadowteam -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_nod_shadowteam -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_nod_shadowteam -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -40212,15 +40212,15 @@ ts_nod_shotguncommando:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_nod_shotguncommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_nod_shotguncommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_nod_shotguncommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_nod_shotguncommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_nod_shotguncommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_nod_shotguncommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_nod_shotguncommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_nod_shotguncommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_nod_shotguncommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_nod_shotguncommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_nod_shotguncommando -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_nod_shotguncommando -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -40381,15 +40381,15 @@ ts_nod_toxintrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ts_nod_toxintrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ts_nod_toxintrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ts_nod_toxintrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> ts_nod_toxintrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> ts_nod_toxintrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> ts_nod_toxintrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> ts_nod_toxintrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> ts_nod_toxintrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> ts_nod_toxintrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> ts_nod_toxintrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> ts_nod_toxintrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> ts_nod_toxintrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -40538,15 +40538,15 @@ undead.nax:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> undead.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> undead.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> undead.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> undead.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> undead.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> undead.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> undead.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> undead.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> undead.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> undead.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> undead.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> undead.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -40636,15 +40636,15 @@ wc2_critter_boar:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_critter_boar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_critter_boar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_critter_boar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_critter_boar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_critter_boar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_critter_boar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_critter_boar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_critter_boar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_critter_boar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_critter_boar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_critter_boar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_critter_boar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -40749,15 +40749,15 @@ wc2_critter_helboar:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_critter_helboar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_critter_helboar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_critter_helboar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_critter_helboar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_critter_helboar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_critter_helboar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_critter_helboar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_critter_helboar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_critter_helboar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_critter_helboar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_critter_helboar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_critter_helboar -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -40862,15 +40862,15 @@ wc2_critter_seal:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_critter_seal -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_critter_seal -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_critter_seal -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_critter_seal -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_critter_seal -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_critter_seal -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_critter_seal -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_critter_seal -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_critter_seal -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_critter_seal -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_critter_seal -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_critter_seal -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -40975,15 +40975,15 @@ wc2_critter_sheep:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_critter_sheep -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_critter_sheep -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_critter_sheep -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_critter_sheep -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_critter_sheep -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_critter_sheep -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_critter_sheep -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_critter_sheep -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_critter_sheep -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_critter_sheep -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_critter_sheep -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_critter_sheep -> ^wc2critter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -41269,15 +41269,15 @@ wc2_humans_archmage:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_humans_archmage -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_archmage -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_archmage -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_archmage -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_humans_archmage -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_humans_archmage -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_humans_archmage -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_humans_archmage -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_humans_archmage -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_humans_archmage -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_humans_archmage -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_humans_archmage -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -41531,15 +41531,15 @@ wc2_humans_demolitionsquad:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_humans_demolitionsquad -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -41673,15 +41673,15 @@ wc2_humans_dwarvenrifleman:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_humans_dwarvenrifleman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -41815,15 +41815,15 @@ wc2_humans_elvenarcher:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -41965,15 +41965,15 @@ wc2_humans_elvenranger:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_humans_elvenranger -> wc2_humans_elvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -42174,15 +42174,15 @@ wc2_humans_footman:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_humans_footman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_footman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_footman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_footman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_humans_footman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_humans_footman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_humans_footman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_humans_footman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_humans_footman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_humans_footman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_humans_footman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_humans_footman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -42473,15 +42473,15 @@ wc2_humans_highelfpriest:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_humans_highelfpriest -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_highelfpriest -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_highelfpriest -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_highelfpriest -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_humans_highelfpriest -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_humans_highelfpriest -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_humans_highelfpriest -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_humans_highelfpriest -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_humans_highelfpriest -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_humans_highelfpriest -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_humans_highelfpriest -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_humans_highelfpriest -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -42618,15 +42618,15 @@ wc2_humans_highelfsorceress:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_humans_highelfsorceress -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -42763,15 +42763,15 @@ wc2_humans_highelvenarcher:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_humans_highelvenarcher -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -42987,15 +42987,15 @@ wc2_humans_mage:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_humans_mage -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_mage -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_mage -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_mage -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_humans_mage -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_humans_mage -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_humans_mage -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_humans_mage -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_humans_mage -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_humans_mage -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_humans_mage -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_humans_mage -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -43145,15 +43145,15 @@ wc2_humans_militiapeasant:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_humans_militiapeasant -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_militiapeasant -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_militiapeasant -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_militiapeasant -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_humans_militiapeasant -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_humans_militiapeasant -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_humans_militiapeasant -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_humans_militiapeasant -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_humans_militiapeasant -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_humans_militiapeasant -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_humans_militiapeasant -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_humans_militiapeasant -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -43320,15 +43320,15 @@ wc2_humans_mobileconstructionvehiclehuman:
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2vehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2mcv -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2mcv -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2vehicle -> ^vehicle -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2mcv -> ^vehicle -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2vehicle -> ^vehicle -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2mcv -> ^vehicle -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2vehicle -> ^vehicle -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2mcv -> ^vehicle -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2vehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2mcv -> ^vehicle -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2vehicle -> ^vehicle -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_humans_mobileconstructionvehiclehuman -> ^wc2mcv -> ^vehicle -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -43495,15 +43495,15 @@ wc2_humans_mortarteam:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_humans_mortarteam -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_mortarteam -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_mortarteam -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_mortarteam -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_humans_mortarteam -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_humans_mortarteam -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_humans_mortarteam -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_humans_mortarteam -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_humans_mortarteam -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_humans_mortarteam -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_humans_mortarteam -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_humans_mortarteam -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -43689,15 +43689,15 @@ wc2_humans_peasant:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_humans_peasant -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_peasant -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_peasant -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_peasant -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_humans_peasant -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_humans_peasant -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_humans_peasant -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_humans_peasant -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_humans_peasant -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_humans_peasant -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_humans_peasant -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_humans_peasant -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -43931,15 +43931,15 @@ wc2_humans_warcraft3footman:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_humans_warcraft3footman -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -44349,15 +44349,15 @@ wc2_orc_skeleton:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_orc_skeleton -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -44666,15 +44666,15 @@ wc2_orcs_deathknight:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_orcs_deathknight -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_orcs_deathknight -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_orcs_deathknight -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_orcs_deathknight -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_orcs_deathknight -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_orcs_deathknight -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_orcs_deathknight -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_orcs_deathknight -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_orcs_deathknight -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_orcs_deathknight -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_orcs_deathknight -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_orcs_deathknight -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -44878,15 +44878,15 @@ wc2_orcs_goblinsappers:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_orcs_goblinsappers -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -45098,15 +45098,15 @@ wc2_orcs_grunt:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_orcs_grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -45308,15 +45308,15 @@ wc2_orcs_mobileconstructionvehicleorc:
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2vehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2mcv -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2mcv -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2vehicle -> ^vehicle -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2mcv -> ^vehicle -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2vehicle -> ^vehicle -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2mcv -> ^vehicle -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2vehicle -> ^vehicle -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2mcv -> ^vehicle -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2vehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2mcv -> ^vehicle -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2vehicle -> ^vehicle -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_orcs_mobileconstructionvehicleorc -> ^wc2mcv -> ^vehicle -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -45625,15 +45625,15 @@ wc2_orcs_peon:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_orcs_peon -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_orcs_peon -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_orcs_peon -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_orcs_peon -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_orcs_peon -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_orcs_peon -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_orcs_peon -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_orcs_peon -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_orcs_peon -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_orcs_peon -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_orcs_peon -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_orcs_peon -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -45867,15 +45867,15 @@ wc2_orcs_trollaxethrower:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -46009,15 +46009,15 @@ wc2_orcs_trollberserker:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_orcs_trollberserker -> wc2_orcs_trollaxethrower -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -46151,15 +46151,15 @@ wc2_orcs_trollheadhunter:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_orcs_trollheadhunter -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -46301,15 +46301,15 @@ wc2_orcs_warcraft3grunt:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -46515,15 +46515,15 @@ yuri_biotrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> yuri_biotrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> yuri_biotrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> yuri_biotrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> yuri_biotrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> yuri_biotrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> yuri_biotrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> yuri_biotrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> yuri_biotrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> yuri_biotrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> yuri_biotrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> yuri_biotrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> yuri_biotrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -46621,15 +46621,15 @@ yuri_brute:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> yuri_brute -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> yuri_brute -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> yuri_brute -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> yuri_brute -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> yuri_brute -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> yuri_brute -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> yuri_brute -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> yuri_brute -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> yuri_brute -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> yuri_brute -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> yuri_brute -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> yuri_brute -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -46731,15 +46731,15 @@ yuri_clone:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> yuri_clone -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> yuri_clone -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> yuri_clone -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> yuri_clone -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> yuri_clone -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> yuri_clone -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> yuri_clone -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> yuri_clone -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> yuri_clone -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> yuri_clone -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> yuri_clone -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> yuri_clone -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -46915,15 +46915,15 @@ yuri_engineer:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> yuri_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> yuri_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> yuri_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> yuri_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> yuri_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> yuri_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> yuri_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> yuri_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> yuri_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> yuri_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> yuri_engineer -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> yuri_engineer -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -47071,15 +47071,15 @@ yuri_gatlingtrooper:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> yuri_gatlingtrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> yuri_gatlingtrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> yuri_gatlingtrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> yuri_gatlingtrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> yuri_gatlingtrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> yuri_gatlingtrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> yuri_gatlingtrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> yuri_gatlingtrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> yuri_gatlingtrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> yuri_gatlingtrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> yuri_gatlingtrooper -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> yuri_gatlingtrooper -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -47192,15 +47192,15 @@ yuri_initiate:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> yuri_initiate -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> yuri_initiate -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> yuri_initiate -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> yuri_initiate -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> yuri_initiate -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> yuri_initiate -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> yuri_initiate -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> yuri_initiate -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> yuri_initiate -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> yuri_initiate -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> yuri_initiate -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> yuri_initiate -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -47440,15 +47440,15 @@ yuri_virus:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> yuri_virus -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> yuri_virus -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> yuri_virus -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> yuri_virus -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> yuri_virus -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> yuri_virus -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> yuri_virus -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> yuri_virus -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> yuri_virus -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> yuri_virus -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> yuri_virus -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> yuri_virus -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -47552,15 +47552,15 @@ yuri_yurix:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> yuri_yurix -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> yuri_yurix -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> yuri_yurix -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> yuri_yurix -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> yuri_yurix -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
     -> yuri_yurix -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> yuri_yurix -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> yuri_yurix -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> yuri_yurix -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> yuri_yurix -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> yuri_yurix -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> yuri_yurix -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
@@ -47665,15 +47665,15 @@ zerg_behemoth:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> zerg_behemoth -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> zerg_behemoth -> ^helicopter -> ^raneutralplane -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> zerg_behemoth -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> zerg_behemoth -> ^helicopter -> ^raneutralplane -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
   parent ^^ ^lockon  (2 paths)
     -> zerg_behemoth -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^basicunit -> Inherits@LockOn:^LockOn
     -> zerg_behemoth -> ^helicopter -> ^raneutralplane -> ^basicunit -> Inherits@LockOn:^LockOn
   parent ^^ ^bombattachable  (2 paths)
     -> zerg_behemoth -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^basicunit -> Inherits@ivan:^BombAttachable
     -> zerg_behemoth -> ^helicopter -> ^raneutralplane -> ^basicunit -> Inherits@ivan:^BombAttachable
-  parent ^^ ^stealthgencloakable  (2 paths)
-    -> zerg_behemoth -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
-    -> zerg_behemoth -> ^helicopter -> ^raneutralplane -> ^basicunit -> Inherits@cloak:^StealthGenCloakable
   parent ^^ ^shieldedshieldable  (2 paths)
     -> zerg_behemoth -> ^airzerg -> ^helicopter -> ^raneutralplane -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
     -> zerg_behemoth -> ^helicopter -> ^raneutralplane -> ^basicunit -> Inherits@shielded:^ShieldedShieldable

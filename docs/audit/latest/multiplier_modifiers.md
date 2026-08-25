@@ -570,7 +570,6 @@
 | `FirepowerMultiplier@HelicopterBuff` |
 | `FirepowerMultiplier@HeroBuff` |
 | `FirepowerMultiplier@HighExplosionShell` |
-| `FirepowerMultiplier@HighExplosiveRockets` |
 | `FirepowerMultiplier@InfantryBuff` |
 | `FirepowerMultiplier@IonCannon` |
 | `FirepowerMultiplier@KamikazeCritical` |
@@ -632,6 +631,7 @@
 | `FirepowerMultiplier@TAxeUpg` |
 | `FirepowerMultiplier@TAxeUpg2` |
 | `FirepowerMultiplier@TankHunter` |
+| `FirepowerMultiplier@ThermobaricRockets` |
 | `FirepowerMultiplier@TripleBeam` |
 | `FirepowerMultiplier@TripleShot` |
 | `FirepowerMultiplier@Upgrade` |
@@ -749,11 +749,11 @@
 | `FirepowerMultiplier@ra1_soviets_doctrine_teslaandexperimentaltech` |
 | `FirepowerMultiplier@ra1_soviets_rifleinfantry` |
 | `FirepowerMultiplier@ra1_soviets_upgrade_afterburners` |
-| `FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets` |
 | `FirepowerMultiplier@ra1_soviets_upgrade_menofsteel` |
 | `FirepowerMultiplier@ra1_soviets_upgrade_nucleartankshells` |
 | `FirepowerMultiplier@ra1_soviets_upgrade_reactoroverload` |
 | `FirepowerMultiplier@ra1_soviets_upgrade_scorchedearth` |
+| `FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets` |
 | `FirepowerMultiplier@ra1_soviets_upgrade_unstableisotopes` |
 | `FirepowerMultiplier@ra2_allies_gi` |
 | `FirepowerMultiplier@ra2_allies_upgrade_advancedaeronautics` |
@@ -1272,7 +1272,7 @@
 | `RangeMultiplier@ra1_allies_upgrade_gpssatellitesupport` |
 | `RangeMultiplier@ra1_soviets_promotion_infantrysuperoptics` |
 | `RangeMultiplier@ra1_soviets_upgrade_afterburners` |
-| `RangeMultiplier@ra1_soviets_upgrade_highexplosiverockets` |
+| `RangeMultiplier@ra1_soviets_upgrade_thermobaricrockets` |
 | `RangeMultiplier@ra2_allies_upgrade_eliterocketeer` |
 | `RangeMultiplier@ra2_allies_upgrade_infiltratorstraining` |
 | `RangeMultiplier@ra2_allies_upgrade_intensifiedprismbeams` |
@@ -1546,7 +1546,7 @@
 | `RevealsShroudMultiplier@ra1_allies_upgrade_airsuperioritydoctrine` |
 | `RevealsShroudMultiplier@ra1_allies_upgrade_gpssatellitesupport` |
 | `RevealsShroudMultiplier@ra1_soviets_promotion_infantrysuperoptics` |
-| `RevealsShroudMultiplier@ra1_soviets_upgrade_highexplosiverockets` |
+| `RevealsShroudMultiplier@ra1_soviets_upgrade_thermobaricrockets` |
 | `RevealsShroudMultiplier@ra2_allies_upgrade_infiltratorstraining` |
 | `RevealsShroudMultiplier@ra2_allies_upgrade_tanklasertargeting` |
 | `RevealsShroudMultiplier@ra2_allies_upgrade_thunderboltmissiles` |
