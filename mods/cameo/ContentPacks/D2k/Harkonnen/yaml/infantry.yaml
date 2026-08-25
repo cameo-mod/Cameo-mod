@@ -113,13 +113,13 @@ harkonnen_sardaukar:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir
 	Tooltip:
-		Name: Baron Elite
+		Name: actor_harkonnen_sardaukar.name
 	Valued:
 		Cost: 500
 	Buildable:
 		BuildPaletteOrder: 40
 		Queue: Infantry, RAInfantry
-		Description: Elite heavy infantry with devastating firepower.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		Description: actor_harkonnen_sardaukar.description
 		IconPalette: d2kunit
 		Prerequisites: ~harkonnen_barracks, harkonnen_palace
 	UpdatesPlayerStatistics:

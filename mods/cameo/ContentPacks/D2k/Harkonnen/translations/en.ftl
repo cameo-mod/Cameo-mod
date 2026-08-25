@@ -1,10 +1,22 @@
 # d2k Harkonnen pack strings (faction descriptions live in mods/cameo/fluent/rules/en.ftl).
 
-Baron Elite = Baron Elite
-Elite heavy infantry with devastating firepower.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry = Elite heavy infantry with devastating firepower.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
-Devastator = Devastator
-Super Heavy Tank\n  Strong vs Tanks\n  Weak vs Artillery = Super Heavy Tank\n  Strong vs Tanks\n  Weak vs Artillery
-Devastator (Destroyed) = Devastator (Destroyed)
-Harkonnen Devastator Mech = Harkonnen Devastator Mech
-Super Heavy Mech\n  Strong vs Tanks\n  Weak vs Artillery = Super Heavy Mech\n  Strong vs Tanks\n  Weak vs Artillery
+actor_harkonnen_sardaukar =
+   .name = Baron Elite
+   .description = Elite heavy infantry with devastating firepower.
+      Strong vs Vehicles, Aircraft
+      Weak vs Infantry
 
+actor_devastator =
+   .name = Devastator
+   .description = Super Heavy Tank
+      Strong vs Tanks
+      Weak vs Artillery
+
+actor_devastator_husk =
+   .name = Devastator (Destroyed)
+
+actor_harkonnen_devastatormech =
+   .name = Harkonnen Devastator Mech
+   .description = Super Heavy Mech
+      Strong vs Tanks
+      Weak vs Artillery

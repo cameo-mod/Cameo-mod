@@ -1418,21 +1418,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -1440,45 +1426,27 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6185",
       "reloaddelay": "64",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Medium_D2K_Rocket_Trooper",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -1486,25 +1454,21 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6185",
       "reloaddelay": "64",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Medium_D2K_Rocket_Trooper",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1565,21 +1529,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -1587,26 +1537,22 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6185",
       "reloaddelay": "64",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Medium_D2K_Rocket_Trooper",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
@@ -1643,21 +1589,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "43",
-        "tag": "MissileAP_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "85",
         "tag": "MissileAP_Heavy",
@@ -1665,26 +1597,22 @@
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "6185",
       "reloaddelay": "64",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Medium_D2K_Rocket_Trooper",
        "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Light",
-       "^Warhead_MissileAP_Medium",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -1707,7 +1635,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/infantry.yaml#Health.HP",
      "v": "120000"
     },
-    "name": "Baron Elite",
+    "name": "actor_harkonnen_sardaukar.name",
     "prerequisites": [
      "~harkonnen_barracks",
      "harkonnen_palace"
@@ -2025,7 +1953,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Devastator",
+    "name": "actor_devastator.name",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.harkonnen",
@@ -2037,7 +1965,7 @@
     ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#ChangesHealth.Step",
-     "v": "50"
+     "v": "60"
     },
     "shield_flat": {
      "src": "inherited",
@@ -2323,7 +2251,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Harkonnen Devastator Mech",
+    "name": "actor_harkonnen_devastatormech.name",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.harkonnen",
