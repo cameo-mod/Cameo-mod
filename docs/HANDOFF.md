@@ -455,11 +455,21 @@ From [`audit/SUMMARY.md`](audit/SUMMARY.md), smallest first:
 
 ### 3.4 — Documentation and tooling debt this pass left behind
 
-* **`tools/audit/audit_damage_grid.py` is quarantined.** It still enforces the retired 2000-step
-  grid and the retired `main // 2000` percentage twin, so it reports ~300 false findings and is
-  deliberately excluded from `run_all.sh`. Re-derive it from `formula.DAMAGE_STEP` and
-  `formula.percentage_twin`, then wire it in. It is the last of the three audits
-  `audit_recent_changes` R2 flagged as unregistered (the other two are now in the suite).
+* **`tools/audit/audit_damage_grid.py` is re-derived (2026-08-25) but NOT yet wired into
+  `run_all.sh`.** It now imports `formula.DAMAGE_STEP` (100) and `formula.percentage_twin`
+  instead of the retired 2000-step literals, so the ~300 false off-grid findings are gone
+  (off-grid 83, unequal mains 215, basis-point percentage twin **0**, 50% twin 353 — all
+  existing legacy debt). It carries a ratchet baseline per check and exits 1 only on a
+  REGRESSION (count above baseline), so wiring it cannot block on the existing pile. The
+  percentage-twin check is narrow on purpose: basis-point `AreaDamagePercentage` nodes
+  (denominator 10000) are checked against `percentage_twin`; legacy whole-percent twins
+  (denominator 100, deliberately left by W18) and folded `PercentageScale` dials (a free
+  per-family dial, not a twin) are skipped. **Wiring is deferred until the W24 burn-down
+  settles** — W24 is actively collapsing multi-main weapons and the fold is replacing
+  separate twins, so the counts are moving targets and a gate could trip on in-flight
+  conversions. Run on demand: `python tools/audit/audit_damage_grid.py`. It is the last
+  of the three audits `audit_recent_changes` R2 flagged as unregistered (the other two
+  are now in the suite).
 * **`gen_sync` drift is 10, not 1** — and this one is real work, not bookkeeping. The accepted
   entry is `^Warhead_Sniper_Light` (a template the generator does not emit). The other **nine**
   are live disagreements introduced by the 2026-08-20 W24 chemical split, which edited the
