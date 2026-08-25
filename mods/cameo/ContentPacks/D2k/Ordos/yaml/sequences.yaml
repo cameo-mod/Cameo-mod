@@ -1682,6 +1682,13 @@ ordos_laserturret:
 		Filename: ordos_lasertur.png
 		Start: 0
 		Length: 1
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 38
+		Length: 1
+		Facings: 1
 	make:
 		Filename: ordos_lasertur.png
 		Start: 0
@@ -1691,6 +1698,15 @@ ordos_laserturret:
 		Filename: ordos_lasertur.png
 		Start: 16
 		Facings: 32
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4584
+		Length: 7
+		Offset: -16,16
+		Tick: 200
+		ZOffset: 1024
 	icon:
 		Filename: ordos_lasertur_icon.png
 
@@ -1702,6 +1718,13 @@ ordos_chemturret:
 		Filename: ordos_chemtur.png
 		Start: 0
 		Length: 1
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 38
+		Length: 1
+		Facings: 1
 	make:
 		Filename: ordos_chemtur.png
 		Start: 0
@@ -1711,5 +1734,14 @@ ordos_chemturret:
 		Filename: ordos_chemtur.png
 		Start: 16
 		Facings: 32
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4584
+		Length: 7
+		Offset: -16,16
+		Tick: 200
+		ZOffset: 1024
 	icon:
 		Filename: ordos_chemtur_icon.png

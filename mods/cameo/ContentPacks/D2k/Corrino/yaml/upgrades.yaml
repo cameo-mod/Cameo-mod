@@ -1,1 +1,54 @@
-# No upgrades yet.
+upgrade_conyard.corrino:
+	Inherits: ^UpgradeTemplate
+	Buildable:
+		Queue: Upgrades
+		BuildPaletteOrder: 10
+		Prerequisites: ~corrino_constructionyard, corrino_outpost
+		Description: Allows construction of larger buildings.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 200
+
+upgrade_barracks.corrino:
+	Inherits: ^UpgradeTemplate
+	Buildable:
+		Queue: Upgrades
+		BuildPaletteOrder: 20
+		Prerequisites: ~corrino_barracks
+		Description: Upgrades barracks for elite infantry training.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 200
+
+upgrade_light.corrino:
+	Inherits: ^UpgradeTemplate
+	Buildable:
+		Queue: Upgrades
+		BuildPaletteOrder: 30
+		Prerequisites: ~corrino_lightfactory
+		Description: Upgrades light factory for advanced vehicle production.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 200
+
+upgrade_heavy.corrino:
+	Inherits: ^UpgradeTemplate
+	Buildable:
+		Queue: Upgrades
+		BuildPaletteOrder: 40
+		Prerequisites: ~corrino_heavyfactory
+		Description: Reinforces heavy factory armor.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 400
+
+upgrade_radar.corrino:
+	Inherits: ^UpgradeTemplate
+	Buildable:
+		Queue: Upgrades
+		BuildPaletteOrder: 50
+		Prerequisites: ~corrino_outpost
+		Description: Expands radar range and detection.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 300

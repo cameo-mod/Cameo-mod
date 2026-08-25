@@ -10,3 +10,19 @@ World:
 		ClassName: MCV Only
 		BaseActor: corrino_mobileconstructionvehicle
 		Factions: corrino
+	StartingUnits@corrino_L:
+		Class: light
+		ClassName: Light Support
+		Factions: corrino
+		BaseActor: corrino_mobileconstructionvehicle
+		SupportActors: light_inf, light_inf, trooper, trooper, corrino_sardaukar_bazooka
+		InnerSupportRadius: 3
+		OuterSupportRadius: 5
+	StartingUnits@corrino_h:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: corrino
+		BaseActor: corrino_mobileconstructionvehicle
+		SupportActors: light_inf, light_inf, trooper, trooper, corrino_sardaukar_bazooka, corrino_sardaukar_bazooka, corrino_combattank, corrino_buggy
+		InnerSupportRadius: 3
+		OuterSupportRadius: 5

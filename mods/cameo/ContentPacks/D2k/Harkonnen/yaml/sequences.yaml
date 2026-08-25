@@ -141,6 +141,13 @@ harkonnen_devastatorturret:
 		Filename: harkonnen_devastatorturret.png
 		Start: 0
 		Length: 1
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 38
+		Length: 1
+		Facings: 1
 	make:
 		Filename: harkonnen_devastatorturret.png
 		Start: 0
@@ -150,5 +157,14 @@ harkonnen_devastatorturret:
 		Filename: harkonnen_devastatorturret.png
 		Start: 16
 		Facings: 64
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4584
+		Length: 7
+		Offset: -16,16
+		Tick: 200
+		ZOffset: 1024
 	icon:
 		Filename: harkonnen_devastatorturret_icon.png

@@ -670,7 +670,7 @@ ordos_laserturret:
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 	BodyOrientation:
-		QuantizedFacings: 64
+		QuantizedFacings: 32
 	WithSpriteBody:
 		Name: make
 		Sequence: invisible
@@ -681,7 +681,7 @@ ordos_laserturret:
 		TurnSpeed: 16
 		InitialFacing: 2048
 	RenderSprites:
-		Image: ordos_lasertur
+		Image: ordos_laserturret
 	FireProjectilesOnDeath:
 		Weapons: Debris2, Debris3
 		Pieces: 2, 4
@@ -734,7 +734,7 @@ ordos_chemturret:
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 	BodyOrientation:
-		QuantizedFacings: 64
+		QuantizedFacings: 32
 	WithSpriteBody:
 		Name: make
 		Sequence: invisible
@@ -745,7 +745,7 @@ ordos_chemturret:
 		TurnSpeed: 12
 		InitialFacing: 2048
 	RenderSprites:
-		Image: ordos_chemtur
+		Image: ordos_chemturret
 	FireProjectilesOnDeath:
 		Weapons: Debris2, Debris3
 		Pieces: 2, 4

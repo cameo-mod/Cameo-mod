@@ -1,1 +1,62 @@
-# No aircraft units.
+corrino_carryall:
+	Inherits: ^RANeutralPlane
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Tooltip:
+		Name: Corrino Carryall
+	Valued:
+		Cost: 600
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 10
+		Prerequisites: ~corrino_hightechfactory
+		Description: Lifts and transports vehicles across the battlefield.\n  Unarmed
+		IconPalette: d2kunit
+	Health:
+		HP: 50000
+	Armor:
+		Type: Light
+	Aircraft:
+		CruiseAltitude: 1920
+		Speed: 180
+		TurnSpeed: 20
+		Repulsable: False
+		CanSlide: True
+		VTOL: True
+	Carryall:
+		LocalOffset: 0,0,-256
+		CarryCondition: carrying
+	SpawnActorOnDeath:
+		Actor: carryall_husk.corrino
+	RevealsShroud:
+		Range: 4c0
+		Type: GroundPosition
+	WithFacingSpriteBody:
+		RequiresCondition: airborne
+	WithFacingSpriteBody@LANDED:
+		Sequence: idle-landed
+		RequiresCondition: !airborne
+	Selectable:
+		Class: carryall
+		Bounds: 1536, 1280, 0, 0
+	Targetable:
+		TargetTypes: Air
+	RenderSprites:
+		Image: carryall
+		PlayerPalette: playerd2k
+	Voiced:
+		VoiceSet: D2KVehicleVoice
+	MapEditorData:
+		Categories: Aircraft
+
+carryall_husk.corrino:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Carryall
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 180
+	RenderSprites:
+		Image: carryall
+		PlayerPalette: playerd2k
+	FallsToEarth:
+		Explosion: D2KUnitExplodeMed

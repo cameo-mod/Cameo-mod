@@ -54,3 +54,69 @@ corrino_sardaukar_bazooka:
 		Image: saudakar_bazooka
 	Voiced:
 		VoiceSet: D2KInfantryVoice
+
+corrino_lightinfantry:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Tooltip:
+		Name: Corrino Light Infantry
+	Valued:
+		Cost: 150
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Infantry, RAInfantry
+		Description: Imperial conscript infantry.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
+		IconPalette: d2kunit
+		Prerequisites: ~corrino_barracks
+	Health:
+		HP: 32000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Mobile:
+		Speed: 56
+	Armament@PRIMARY:
+		Weapon: light_inf_lmg
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: light_inf_lmg
+		MuzzleSequence: garrison-muzzle
+		MuzzlePalette: d2keffect
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	RenderSprites:
+		Image: light_inf
+	Voiced:
+		VoiceSet: D2KInfantryVoice
+
+corrino_engineer:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^EngineerInfantryTemplate
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Tooltip:
+		Name: Corrino Engineer
+	Valued:
+		Cost: 250
+	Buildable:
+		BuildPaletteOrder: 30
+		Queue: Infantry, RAInfantry
+		Description: Infiltrates and captures enemy buildings.\n  Strong vs Buildings\n  Weak vs Everything
+		IconPalette: d2kunit
+		Prerequisites: ~corrino_barracks
+	Health:
+		HP: 20000
+	Mobile:
+		Speed: 56
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	RenderSprites:
+		Image: engineer
+	Voiced:
+		VoiceSet: D2KInfantryVoice
