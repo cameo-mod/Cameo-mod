@@ -69,10 +69,10 @@ target's life still ahead of it, comfortably inside the 0.75 bar.
 
 | mechanism | bindings | reach full effect before 25% HP |
 |---|--:|--:|
-| damage-scaled (heat + corrosion) | 562 | **143** |
-| **total** | **562** | **143 (25.4%)** |
+| damage-scaled (heat + corrosion) | 562 | **146** |
+| **total** | **562** | **146 (26.0%)** |
 
-⛔ **`meters_filling_before_death` = 143 of 562 — NOT the 534 (97.3%) this section claimed until
+⛔ **`meters_filling_before_death` = 146 of 562 — NOT the 534 (97.3%) this section claimed until
 2026-08-19.** The correction is one term, and it is W24's term. Everything above assumes the
 damage that FILLS the meter is the damage that KILLS the target. It is not: a damage-scaled
 binding fills from the ONE warhead carrying `PhysicalStateName`, while the target dies to every
