@@ -5432,25 +5432,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "120",
         "tag": "CannonAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "600",
@@ -5469,10 +5455,8 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_CannonAP_Medium",
-       "^Projectile_Shell_Medium",
-       "^Effect_CannonAP_Medium",
-       "^LaserWeapon",
-       "^TSLaserEffect"
+       "^Projectile_Laser_Heavy",
+       "^Effect_CannonAP_Medium"
       ],
       "warheads": [
        "^Warhead_CannonAP_Medium"
@@ -5511,25 +5495,11 @@
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "6000",
+        "damage": "12000",
         "falloff": "100, 0",
         "spread": "120",
         "tag": "CannonAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3",
-        "falloff": null,
-        "spread": "75",
-        "tag": "LaserWeaponPercentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "600",
