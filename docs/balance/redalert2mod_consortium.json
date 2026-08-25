@@ -542,20 +542,13 @@
        },
        {
         "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -570,13 +563,11 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^SteelLightMissile",
-       "^SteelSmallArms",
        "^RA2FlakWeapon",
        "^SteelChaingun"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -925,14 +916,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -940,17 +924,15 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4750",
       "reloaddelay": "3",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SteelSmallArms",
        "^SteelChaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelCargoshipCannons",
@@ -2875,14 +2857,7 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -2890,23 +2865,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
       "slot": "Armament",
       "versus_templates": [
        "^SteelHeavyCannon",
-       "^SteelSmallArms",
        "^SteelChaingun"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelVulcan",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "primary",
@@ -2919,14 +2892,7 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -2934,7 +2900,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
@@ -2945,11 +2911,10 @@
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelVulcanResonance",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -8029,14 +7994,7 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -8044,23 +8002,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
       "slot": "Armament",
       "versus_templates": [
        "^SteelHeavyCannon",
-       "^SteelSmallArms",
        "^SteelChaingun"
       ],
       "warheads": [
        "^Warhead_CannonHE_Heavy",
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "SteelVulcan",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -10582,20 +10538,13 @@
        },
        {
         "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -10610,13 +10559,11 @@
       "slot": "Armament@AG1",
       "versus_templates": [
        "^SteelLightMissile",
-       "^SteelSmallArms",
        "^RA2FlakWeapon",
        "^SteelChaingun"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -10634,20 +10581,13 @@
        },
        {
         "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -10662,13 +10602,11 @@
       "slot": "Armament@AG2",
       "versus_templates": [
        "^SteelLightMissile",
-       "^SteelSmallArms",
        "^RA2FlakWeapon",
        "^SteelChaingun"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -10686,20 +10624,13 @@
        },
        {
         "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -10717,7 +10648,6 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -10735,20 +10665,13 @@
        },
        {
         "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -10766,7 +10689,6 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -10784,20 +10706,13 @@
        },
        {
         "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -10816,7 +10731,6 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -10834,20 +10748,13 @@
        },
        {
         "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -10866,7 +10773,6 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -10884,20 +10790,13 @@
        },
        {
         "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -10916,7 +10815,6 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],
@@ -10934,20 +10832,13 @@
        },
        {
         "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -10966,7 +10857,6 @@
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
-       "^Warhead_Bullet_Light",
        "^Warhead_Flak_Medium",
        "^Warhead_Bullet_Medium"
       ],

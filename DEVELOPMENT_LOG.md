@@ -4037,3 +4037,32 @@ must pass with no new exceptions before any commit.
 - `mods/cameo/sequences/d2k.yaml`: added a `shoot` sequence under `sardaukar`.
 - `ContentPacks/D2k/Corrino/yaml/infantry.yaml`: added `StandSequences: stand` to the four new Sardaukar `WithInfantryBody` blocks.
 Re-booted with `launch-game.cmd`: reached menu (`MenuPostProcessEffect.PostWorldLoaded`, 22.4 s, no new `exception-*.log`).
+
+## Devin-Aurora — D2k Phase 4 commit + audit refresh (2026-08-25, continued)
+
+**Identity:** Devin-Aurora (GLM-5.2 High).
+
+**What and why:**
+- Committed the scoped D2k Phase 4 batch (commit 94cd582bd) containing:
+  - Atreides: new aircraft (airdrone, advancedcarryall), new vehicles (sandbike, APC, repairtank, minotaurus, mongoose), new sprites for all new units, sequence overhauls, prerequisite fixes, -SpawnActorOnDeath/-WithDeathAnimation overrides for new aircraft.
+  - Harkonnen: new aircraft (gunship, advancedcarryall), new vehicles (assaulttank, buzzsaw, flametank, inkvine, ADP, rockettank), new sprites, sequence overhauls, new weapon harkonnen_inkvine_weapon.
+  - Corrino: new defenses (corrino_gunturret, corrino_rocketturret), new vehicle (corrino_missiletank), heavy.missile_tank prerequisite on corrino_heavyfactory, corrino_cannon converted to 3-way split (^Warhead_CannonHE_Medium).
+- Re-extracted balance ledgers (33 ledgers, 2195 actors). All 0 drifted.
+- Updated docs/audit/doc_claims.yaml with current measured values:
+  - multi_main_fired_weapons: 816 -> 818
+  - corrosion_meter_actors: 800 -> 814
+  - physical_state_fired_weapons: 457 -> 458
+  - warhead_family_reach: 1263 -> 1270
+  - unconverted_template_inheritors: 1110 -> 1111
+- udit_doc_claims.py now PASSES (0 mismatches).
+
+**Verification:**
+- ind_empty_warhead.py = 0
+- extract_stats.py --check = 0 drifted (33 ledgers)
+- udit_doc_claims.py = PASS (0 mismatches)
+- Boot-gate: MenuPostProcessEffect.PostWorldLoaded reached, 0 new exception-*.log files.
+
+**Next:**
+- W24 weapon collapses continue (818 fired weapons still carry 2+ mains).
+- User is actively editing in parallel (infantry cloak style, Corrino aircraft/vehicles, Atreides buildings, Shared weapons, d2k sequences).
+- Coordinate with other agents before touching their file-sets.

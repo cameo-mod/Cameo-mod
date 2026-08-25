@@ -1959,6 +1959,111 @@
      "v": "13"
     }
    },
+   "devastator": {
+    "armaments": [
+     {
+      "damage_warheads": [
+       {
+        "damage": "80000",
+        "falloff": null,
+        "spread": "666",
+        "tag": "CannonHE_Heavy_D2K_DevBullet",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "falloff": null,
+        "spread": "666",
+        "tag": "CannonHE_Heavy_D2K_DevBullet_Percentage",
+        "type": "AreaDamagePercentage"
+       }
+      ],
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6666",
+      "reloaddelay": "100",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Warhead_CannonHE_Heavy_D2K_DevBullet",
+       "^Projectile_Shell_Heavy_D2K_DevBullet",
+       "^Effect_CannonHE_Heavy_D2K_DevBullet"
+      ],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy_D2K_DevBullet",
+       "^Warhead_CannonHE_Heavy"
+      ],
+      "weapon": "DevBullet",
+      "weapon_class_source": "template"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Buildable.BuildDuration",
+     "v": "1000"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Vehicle",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Health.HP",
+     "v": "150000"
+    },
+    "integrity_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "name": "Devastator",
+    "prerequisites": [
+     "~heavy.harkonnen",
+     "research_centre",
+     "~faction.harkonnen"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#ChangesHealth.Step",
+     "v": "50"
+    },
+    "shield_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_init_flat": {
+     "src": "inherited",
+     "v": "0"
+    },
+    "shield_pct": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "4c768"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "33"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "48"
+    }
+   },
    "harkonnen_adp": {
     "armaments": [
      {
@@ -2218,7 +2323,7 @@
      "src": "inherited",
      "v": "100"
     },
-    "name": "Harkonnen Devastator Tank",
+    "name": "Harkonnen Devastator Mech",
     "prerequisites": [
      "~harkonnen_vehicle_production",
      "~heavy.harkonnen",
