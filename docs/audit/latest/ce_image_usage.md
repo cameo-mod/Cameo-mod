@@ -9,8 +9,8 @@ tsioncannon: ALSO-USED (11)
   mods\cameo\ContentPacks\StarCraft\Protoss\yaml\buildings.yaml:603: 		Effect: tsioncannon
   mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\buildings.yaml:257: 		Effect: tsioncannon
 ionsfx: ALSO-USED (3)
-  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1685: 		Image: ionsfx
-  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1689: 		TrailImage: ionsfx
+  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1681: 		Image: ionsfx
+  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1685: 		TrailImage: ionsfx
   mods\cameo\sequences\misc.yaml:3465: 		Filename: ionsfx.shp
 tspodring: ALSO-USED (3)
   mods\cameo\sequences\misc.yaml:2629: 	tspodring:
@@ -20,12 +20,12 @@ tsmcnealmechdrop: ALSO-USED (1)
   mods\cameo\weapons\heroes.yaml:799: 		Image: tsmcnealmechdrop
 tsdroppod: ALSO-USED (2)
   mods\cameo\ContentPacks\TiberianSun\GDI\yaml\aircraft.yaml:499: 		Image: tsdroppod
-  mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1169: 		Image: tsdroppod
+  mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1166: 		Image: tsdroppod
 hakurei_giphy: ALSO-USED (2)
-  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:850: 		Image: hakurei_giphy
+  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:847: 		Image: hakurei_giphy
   mods\cameo\sequences\misc.yaml:4534: 		Filename: hakurei_giphy.shp
 hakurei_dream: ALSO-USED (2)
-  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:839: 		Image: hakurei_dream
+  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:836: 		Image: hakurei_dream
   mods\cameo\sequences\misc.yaml:4526: 		Filename: hakurei_dream.shp
 ra2corpse: CE-ONLY
 wc2_effect_sparkle: ALSO-USED (5)

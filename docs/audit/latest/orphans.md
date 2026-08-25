@@ -1,6 +1,6 @@
 # audit_orphans — dead content (B10)
 
-Live weapons: **2787** — orphans: **377**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **15**
+Live weapons: **2800** — orphans: **373**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **15**
 
 
 ## O2 — dangling weapon references (crash-on-use class)
@@ -86,7 +86,6 @@ _none found_
 | Emperor_Sardaukar_E | mods/cameo/weapons/d2k.yaml |
 | ExplosiveDebris | mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml |
 | ForceShield | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
-| Fremen_S | mods/cameo/weapons/d2k.yaml |
 | Fremen_Upg | mods/cameo/weapons/d2k.yaml |
 | GLASCUD | mods/cameo/weapons/weapons.yaml |
 | GLASCUDPOWER | mods/cameo/weapons/weapons.yaml |
@@ -178,11 +177,8 @@ _none found_
 | NaxiV1Rocket | mods/cameo/weapons/redalert2mod.yaml |
 | NaxisBlackBomb | mods/cameo/weapons/redalert2mod.yaml |
 | OP2bombchassisTargeting | mods/cameo/weapons/outpost2.yaml |
-| OrniBomb | mods/cameo/weapons/d2k.yaml |
 | OrniBombC | mods/cameo/weapons/d2k.yaml |
-| OrniGun | mods/cameo/weapons/d2k.yaml |
 | OrniGunC | mods/cameo/weapons/d2k.yaml |
-| OrniMissile | mods/cameo/weapons/d2k.yaml |
 | PDLaser | mods/cameo/weapons/weapons.yaml |
 | Patriot | mods/cameo/weapons/weapons.yaml |
 | PhoenixRocket | mods/cameo/weapons/d2k.yaml |

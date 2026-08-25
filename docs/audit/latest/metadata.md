@@ -1,12 +1,14 @@
 # audit_metadata — tooltip/metadata rot (B7)
 
-Duplicate-tooltip groups: **32**, buildables missing Tooltip name: **0**
+Duplicate-tooltip groups: **34**, buildables missing Tooltip name: **0**
 
 
 ## M1 — same tooltip name on multiple buildables of one faction
 
 | faction | tooltip name | actors |
 |---|---|---|
+| atreides | concrete slab | concreteabuilding, concreteadefense |
+| corrino | concrete slab | concreteabuilding, concreteadefense |
 | eden | impulse items | eden_impulseitems, eden_impulseitems_2, eden_impulseitems_3 |
 | harkonnen | concrete slab | concreteabuilding, concreteadefense |
 | harkonnen | large concrete slab | concretebbuilding, concretebdefense |

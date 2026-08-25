@@ -1,13 +1,15 @@
 # audit_buildable_order — buildable actor order checks
 
-Buildable combat actors checked: **841**
-Prerequisite order violations: **0**
-Build palette order violations: **1012**
+Buildable combat actors checked: **873**
+Prerequisite order violations: **1**
+Build palette order violations: **1047**
 
 
 ## Prerequisite order violations
 
-_none found_
+| actor | queue | prerequisites | problem |
+|---|---|---|---|
+| atreides_fremen | Infantry, RAInfantry | ~atreides_barracks, upgrade_barracks, atreides_hightechfactory | tech token 'atreides_hightechfactory' appears after promotion token |
 
 
 ## Build palette order violations
@@ -48,6 +50,23 @@ _none found_
 | asianalliance | Vehicle | ptnk.asian | 3 | 2400 | 60 | should be before asianalliance_oiltruck (tier/cost order) |
 | asianalliance | Vehicle | asianalliance_pulverizermecha | 3 | 3000 | 75 | should be before asianalliance_oiltruck (tier/cost order) |
 | asianalliance | Vehicle | asianalliance_warturtle | 3 | 5000 | 80 | should be before asianalliance_oiltruck (tier/cost order) |
+| atreides | Infantry | light_inf | 3 | 150 | 10 | should be before atreides_rockettrooper (tier/cost order) |
+| atreides | Infantry | trooper | 3 | 300 | 20 | should be before atreides_engineer (tier/cost order) |
+| atreides | Infantry | heavy_inf.ixian | 3 | 400 | 10 | should be before atreides_rockettrooper (tier/cost order) |
+| atreides | RAInfantry | light_inf | 3 | 150 | 10 | should be before atreides_rockettrooper (tier/cost order) |
+| atreides | RAInfantry | trooper | 3 | 300 | 20 | should be before atreides_engineer (tier/cost order) |
+| atreides | RAInfantry | heavy_inf.ixian | 3 | 400 | 10 | should be before atreides_rockettrooper (tier/cost order) |
+| atreides | RAVehicle | atreides_siegetank | 3 | 600 | 50 | should be before atreides_mobileconstructionvehicle (tier/cost order) |
+| atreides | RAVehicle | ixian_kodatank | 3 | 800 | 40 | should be before atreides_mobileconstructionvehicle (tier/cost order) |
+| atreides | RAVehicle | rocket_raider.ixian | 3 | 1200 | 10 | should be before atreides_combattank (tier/cost order) |
+| atreides | RAVehicle | heavy_rocket_raider.ixian | 3 | 2000 | 10 | should be before atreides_combattank (tier/cost order) |
+| atreides | Starport | ixian_kodatank | 3 | 800 | 40 | should be before atreides_mobileconstructionvehicle (tier/cost order) |
+| atreides | Starport | rocket_raider.ixian | 3 | 1200 | 10 | should be before atreides_combattank (tier/cost order) |
+| atreides | Starport | heavy_rocket_raider.ixian | 3 | 2000 | 10 | should be before atreides_combattank (tier/cost order) |
+| atreides | Vehicle | atreides_siegetank | 3 | 600 | 50 | should be before atreides_mobileconstructionvehicle (tier/cost order) |
+| atreides | Vehicle | ixian_kodatank | 3 | 800 | 40 | should be before atreides_mobileconstructionvehicle (tier/cost order) |
+| atreides | Vehicle | rocket_raider.ixian | 3 | 1200 | 10 | should be before atreides_combattank (tier/cost order) |
+| atreides | Vehicle | heavy_rocket_raider.ixian | 3 | 2000 | 10 | should be before atreides_combattank (tier/cost order) |
 | cabal | Aircraft | cabal_hunterkillermk1 | 2 | 1500 | 20 | should be before cabal_repairdrone (tier/cost order) |
 | cabal | Aircraft | cabal_hunterkillermk1_elite | 2 | 3000 | 21 | should be before cabal_repairdrone (tier/cost order) |
 | cabal | Aircraft | cabal_hunterdronecarrier | 3 | 4000 | 20 | should be before cabal_repairdrone (tier/cost order) |
@@ -100,6 +119,16 @@ _none found_
 | cabal | Vehicle | cabal_spidercnc4 | 3 | 1500 | 11 | should be before cabal_mantis (tier/cost order) |
 | cabal | Vehicle | cabal_widow | 3 | 3500 | 40 | should be before cabal_tarantula (tier/cost order) |
 | cabal | Vehicle | cabal_avatar | 3 | 7500 | 30 | should be before cabal_tarantula (tier/cost order) |
+| corrino | Infantry | light_inf | 3 | 150 | 10 | should be before corrino_trooper (tier/cost order) |
+| corrino | Infantry | trooper | 3 | 300 | 20 | should be before corrino_engineer (tier/cost order) |
+| corrino | RAInfantry | light_inf | 3 | 150 | 10 | should be before corrino_trooper (tier/cost order) |
+| corrino | RAInfantry | trooper | 3 | 300 | 20 | should be before corrino_engineer (tier/cost order) |
+| corrino | RAVehicle | corrino_spiceharvester | 2 | 500 | 10 | should be before corrino_buggy (tier/cost order) |
+| corrino | RAVehicle | corrino_combattank | 2 | 600 | 40 | should be before corrino_apc (tier/cost order) |
+| corrino | RAVehicle | corrino_bmp | 3 | 400 | 30 | should be before corrino_apc (tier/cost order) |
+| corrino | Vehicle | corrino_spiceharvester | 2 | 500 | 10 | should be before corrino_buggy (tier/cost order) |
+| corrino | Vehicle | corrino_combattank | 2 | 600 | 40 | should be before corrino_apc (tier/cost order) |
+| corrino | Vehicle | corrino_bmp | 3 | 400 | 30 | should be before corrino_apc (tier/cost order) |
 | eden | RAVehicle | eden_lynx_laser | 2 | 750 | 30 | should be before eden_lynx_starflare (tier/cost order) |
 | eden | RAVehicle | eden_lynx_railgun | 2 | 900 | 50 | should be before eden_lynx_starflare (tier/cost order) |
 | eden | RAVehicle | eden_cargotruck_empty | 2 | 1000 | 10 | should be before eden_lynx_starflare (tier/cost order) |
@@ -216,24 +245,16 @@ _none found_
 | futuretech | Vehicle | futuretech_prospectormk2 | 3 | 1200 | 115 | should be before futuretech_energizer (tier/cost order) |
 | futuretech | Vehicle | futuretech_robottank | 3 | 1600 | 225 | should be before futuretech_energizer (tier/cost order) |
 | futuretech | Vehicle | futuretech_oriontank | 3 | 2400 | 435 | should be before futuretech_energizer (tier/cost order) |
-| harkonnen | Infantry | light_inf | 3 | 150 | 10 | should be before engineer (tier/cost order) |
-| harkonnen | Infantry | trooper | 3 | 300 | 20 | should be before engineer (tier/cost order) |
-| harkonnen | Infantry | heavy_inf.ixian | 3 | 400 | 10 | should be before engineer (tier/cost order) |
-| harkonnen | RAInfantry | light_inf | 3 | 150 | 10 | should be before engineer (tier/cost order) |
-| harkonnen | RAInfantry | trooper | 3 | 300 | 20 | should be before engineer (tier/cost order) |
-| harkonnen | RAInfantry | heavy_inf.ixian | 3 | 400 | 10 | should be before engineer (tier/cost order) |
+| harkonnen | Infantry | light_inf | 3 | 150 | 10 | should be before harkonnen_rockettrooper (tier/cost order) |
+| harkonnen | Infantry | trooper | 3 | 300 | 20 | should be before harkonnen_engineer (tier/cost order) |
+| harkonnen | RAInfantry | light_inf | 3 | 150 | 10 | should be before harkonnen_rockettrooper (tier/cost order) |
+| harkonnen | RAInfantry | trooper | 3 | 300 | 20 | should be before harkonnen_engineer (tier/cost order) |
+| harkonnen | RAVehicle | harkonnen_spiceharvester | 2 | 600 | 10 | should be before combat_tank.harkonnen (tier/cost order) |
 | harkonnen | RAVehicle | missile_tank | 3 | 750 | 60 | should be before devastator (tier/cost order) |
-| harkonnen | RAVehicle | ixian_kodatank | 3 | 800 | 40 | should be before devastator (tier/cost order) |
-| harkonnen | RAVehicle | rocket_raider.ixian | 3 | 1200 | 10 | should be before combat_tank.harkonnen (tier/cost order) |
-| harkonnen | RAVehicle | heavy_rocket_raider.ixian | 3 | 2000 | 10 | should be before combat_tank.harkonnen (tier/cost order) |
+| harkonnen | Starport | harkonnen_spiceharvester | 2 | 600 | 10 | should be before combat_tank.harkonnen (tier/cost order) |
 | harkonnen | Starport | missile_tank | 3 | 750 | 60 | should be before devastator (tier/cost order) |
-| harkonnen | Starport | ixian_kodatank | 3 | 800 | 40 | should be before devastator (tier/cost order) |
-| harkonnen | Starport | rocket_raider.ixian | 3 | 1200 | 10 | should be before combat_tank.harkonnen (tier/cost order) |
-| harkonnen | Starport | heavy_rocket_raider.ixian | 3 | 2000 | 10 | should be before combat_tank.harkonnen (tier/cost order) |
+| harkonnen | Vehicle | harkonnen_spiceharvester | 2 | 600 | 10 | should be before combat_tank.harkonnen (tier/cost order) |
 | harkonnen | Vehicle | missile_tank | 3 | 750 | 60 | should be before devastator (tier/cost order) |
-| harkonnen | Vehicle | ixian_kodatank | 3 | 800 | 40 | should be before devastator (tier/cost order) |
-| harkonnen | Vehicle | rocket_raider.ixian | 3 | 1200 | 10 | should be before combat_tank.harkonnen (tier/cost order) |
-| harkonnen | Vehicle | heavy_rocket_raider.ixian | 3 | 2000 | 10 | should be before combat_tank.harkonnen (tier/cost order) |
 | ixian | Aircraft | ixian_railgundrone | 3 | 2000 | 20 | should be before carryall (tier/cost order) |
 | ixian | Aircraft | ixian_empbomber | 3 | 2400 | 20 | should be before carryall (tier/cost order) |
 | ixian | Aircraft | ixian_resonancedrone | 3 | 2500 | 20 | should be before carryall (tier/cost order) |
@@ -959,7 +980,11 @@ _none found_
 | wc2_humans | Infantry | wc2_humans_highelvenarcher | 3 | 1100 | 20 | should be before wc2_humans_ballista (tier/cost order) |
 | wc2_humans | Infantry | wc2_humans_knight | 3 | 1600 | 30 | should be before wc2_humans_ballista (tier/cost order) |
 | wc2_humans | Infantry | wc2_humans_paladin | 3 | 1600 | 30 | should be before wc2_humans_ballista (tier/cost order) |
+| wc2_humans | Infantry | wc2_humans_danath | 3 | 2000 | 10 | should be before wc2_humans_dwarvenrifleman (tier/cost order) |
 | wc2_humans | Infantry | wc2_humans_warcraft3knight | 3 | 2200 | 30 | should be before wc2_humans_ballista (tier/cost order) |
+| wc2_humans | Infantry | wc2_humans_alleria | 3 | 2500 | 20 | should be before wc2_humans_ballista (tier/cost order) |
+| wc2_humans | Infantry | wc2_humans_danath_elite | 3 | 3500 | 10 | should be before wc2_humans_dwarvenrifleman (tier/cost order) |
+| wc2_humans | Infantry | wc2_humans_alleria_elite | 3 | 4500 | 20 | should be before wc2_humans_ballista (tier/cost order) |
 | wc2_humans | RAInfantry | wc2_humans_mortarteam | 2 | 800 | 10 | should be before wc2_humans_dwarvenrifleman (tier/cost order) |
 | wc2_humans | RAInfantry | wc2_humans_archmage | 2 | 1000 | 10 | should be before wc2_humans_dwarvenrifleman (tier/cost order) |
 | wc2_humans | RAInfantry | wc2_humans_highelfpriest | 2 | 1000 | 10 | should be before wc2_humans_dwarvenrifleman (tier/cost order) |
@@ -972,7 +997,11 @@ _none found_
 | wc2_humans | RAInfantry | wc2_humans_highelvenarcher | 3 | 1100 | 20 | should be before wc2_humans_ballista (tier/cost order) |
 | wc2_humans | RAInfantry | wc2_humans_knight | 3 | 1600 | 30 | should be before wc2_humans_ballista (tier/cost order) |
 | wc2_humans | RAInfantry | wc2_humans_paladin | 3 | 1600 | 30 | should be before wc2_humans_ballista (tier/cost order) |
+| wc2_humans | RAInfantry | wc2_humans_danath | 3 | 2000 | 10 | should be before wc2_humans_dwarvenrifleman (tier/cost order) |
 | wc2_humans | RAInfantry | wc2_humans_warcraft3knight | 3 | 2200 | 30 | should be before wc2_humans_ballista (tier/cost order) |
+| wc2_humans | RAInfantry | wc2_humans_alleria | 3 | 2500 | 20 | should be before wc2_humans_ballista (tier/cost order) |
+| wc2_humans | RAInfantry | wc2_humans_danath_elite | 3 | 3500 | 10 | should be before wc2_humans_dwarvenrifleman (tier/cost order) |
+| wc2_humans | RAInfantry | wc2_humans_alleria_elite | 3 | 4500 | 20 | should be before wc2_humans_ballista (tier/cost order) |
 | wc2_orcs | Infantry | wc2_orcs_deathknight | 2 | 1000 | 10 | should be before wc2_orcs_catapult (tier/cost order) |
 | wc2_orcs | Infantry | wc2_orcs_kodobeast | 2 | 1000 | 20 | should be before wc2_orcs_catapult (tier/cost order) |
 | wc2_orcs | Infantry | wc2_orcs_trollaxethrower | 3 | 500 | 20 | should be before wc2_orcs_catapult (tier/cost order) |
@@ -982,6 +1011,10 @@ _none found_
 | wc2_orcs | Infantry | wc2_orcs_warcraft3grunt | 3 | 1100 | 10 | should be before wc2_orcs_catapult (tier/cost order) |
 | wc2_orcs | Infantry | wc2_orcs_ogre | 3 | 1800 | 30 | should be before wc2_orcs_catapult (tier/cost order) |
 | wc2_orcs | Infantry | wc2_orcs_ogremage | 3 | 1800 | 30 | should be before wc2_orcs_catapult (tier/cost order) |
+| wc2_orcs | Infantry | wc2_orcs_hellscream | 3 | 2000 | 10 | should be before wc2_orcs_catapult (tier/cost order) |
+| wc2_orcs | Infantry | wc2_orcs_zuljin | 3 | 2500 | 20 | should be before wc2_orcs_catapult (tier/cost order) |
+| wc2_orcs | Infantry | wc2_orcs_hellscream_elite | 3 | 3500 | 10 | should be before wc2_orcs_catapult (tier/cost order) |
+| wc2_orcs | Infantry | wc2_orcs_zuljin_elite | 3 | 4500 | 20 | should be before wc2_orcs_catapult (tier/cost order) |
 | wc2_orcs | RAInfantry | wc2_orcs_deathknight | 2 | 1000 | 10 | should be before wc2_orcs_catapult (tier/cost order) |
 | wc2_orcs | RAInfantry | wc2_orcs_kodobeast | 2 | 1000 | 20 | should be before wc2_orcs_catapult (tier/cost order) |
 | wc2_orcs | RAInfantry | wc2_orcs_trollaxethrower | 3 | 500 | 20 | should be before wc2_orcs_catapult (tier/cost order) |
@@ -991,6 +1024,10 @@ _none found_
 | wc2_orcs | RAInfantry | wc2_orcs_warcraft3grunt | 3 | 1100 | 10 | should be before wc2_orcs_catapult (tier/cost order) |
 | wc2_orcs | RAInfantry | wc2_orcs_ogre | 3 | 1800 | 30 | should be before wc2_orcs_catapult (tier/cost order) |
 | wc2_orcs | RAInfantry | wc2_orcs_ogremage | 3 | 1800 | 30 | should be before wc2_orcs_catapult (tier/cost order) |
+| wc2_orcs | RAInfantry | wc2_orcs_hellscream | 3 | 2000 | 10 | should be before wc2_orcs_catapult (tier/cost order) |
+| wc2_orcs | RAInfantry | wc2_orcs_zuljin | 3 | 2500 | 20 | should be before wc2_orcs_catapult (tier/cost order) |
+| wc2_orcs | RAInfantry | wc2_orcs_hellscream_elite | 3 | 3500 | 10 | should be before wc2_orcs_catapult (tier/cost order) |
+| wc2_orcs | RAInfantry | wc2_orcs_zuljin_elite | 3 | 4500 | 20 | should be before wc2_orcs_catapult (tier/cost order) |
 | wc2_orcs | RAVehicle | wc2_orcs_goblinsappers | 2 | 800 | 20 | should be before wc2_orcs_catapult (tier/cost order) |
 | wc2_orcs | Vehicle | wc2_orcs_goblinsappers | 2 | 800 | 20 | should be before wc2_orcs_catapult (tier/cost order) |
 | yuri | Infantry | yuri_brute | 2 | 400 | 20 | should be before yuri_biotrooper (tier/cost order) |

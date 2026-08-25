@@ -69,14 +69,13 @@ unmatched: Minigunner, Minigunner (AP Bullets), Minigunner (Laser), Dune Light  
 ambiguous: Rifle Infantry -> ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry | High Elven Archer -> wc2_humans_highelvenarcher, wc2_humans_upgrade_highelvenarcher | Troll Headhunter -> wc2_orcs_trollheadhunter, wc2_orcs_upgrade_trollheadhunter
 
 
-## Tanks: 56 matched, 33 mismatched, 48 unmatched, 4 ambiguous
+## Tanks: 56 matched, 32 mismatched, 48 unmatched, 4 ambiguous
 
 | sheet unit | actor | mismatches |
 |---|---|---|
 | Nod Light Tank | td_nod_lighttank | Damage 6000 vs game 6150 |
 | Allied Light Tank | ra1_allies_alliedlighttank | Damage 6000 vs game 12100 |
 | Ordos Combat Tank | ordos_combattank | Damage 8000 vs game 9000 |
-| Mongoose | ixian_mongoose | Damage 32000 vs game 33254 |
 | Lunar Panzer | schwarzermond_lunarpanzer | Damage 10000 vs game 31300 |
 | Dragoon | protoss_dragoon | Damage 20000 vs game 40120 |
 | Rhino Heavy Tank | ra2_soviets_rhinoheavytank | Damage 10000 vs game 42600 |

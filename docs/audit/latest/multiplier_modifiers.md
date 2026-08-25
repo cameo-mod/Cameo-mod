@@ -1,6 +1,6 @@
 # audit_multiplier_modifiers — *Multiplier Modifier integer percent check
 
-*Multiplier trait families seen: 1812
+*Multiplier trait families seen: 1813
 
 | trait family |
 |---|
@@ -427,6 +427,7 @@
 | `DamageMultiplier@upgrade_conyard` |
 | `DamageMultiplier@upgrade_heavy` |
 | `DamageMultiplier@upgrade_hightech` |
+| `DamageMultiplier@upgrade_light` |
 | `DamageMultiplier@upmigarmor` |
 | `DamageMultiplier@upschheliarmor` |
 | `DamageMultiplier@upschrazerbomberarmor` |

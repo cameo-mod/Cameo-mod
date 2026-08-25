@@ -3,10 +3,10 @@
 | bucket | actors | priced today | belongs to |
 |---|--:|---|---|
 | spawns with a pool (**always-on**) | 56 | ✖ nothing | **E1 — this report** |
-| empty capacity, needs `shieldgen` | 1164 | ✔ correctly nothing | — (it has no shield) |
-| pool behind an upgrade | 210 | ✖ nothing | E5 (upgrade pricing) |
+| empty capacity, needs `shieldgen` | 1168 | ✔ correctly nothing | — (it has no shield) |
+| pool behind an upgrade | 214 | ✖ nothing | E5 (upgrade pricing) |
 
-Shield row mean Versus **190.80**, so one shield point is **0.5241 HP** BEFORE any shield-gated `DamageMultiplier` — measured off the live ladder every run, never frozen. The Shield row takes **1.464%** of all roster raw damage at baseline.
+Shield row mean Versus **190.80**, so one shield point is **0.5241 HP** BEFORE any shield-gated `DamageMultiplier` — measured off the live ladder every run, never frozen. The Shield row takes **1.439%** of all roster raw damage at baseline.
 
 ⚠ **Every one of these 56 actors also carries `DamageMultiplier@shielded: 150`**, so it takes 150% damage WHILE the shield holds — the deliberate counterweight to having one. That divides the pool's worth: a shield point is really **0.3494 HP**, and the roster-wide gap is 38.6% rather than the 57.8% a shield-only reading gives. `shield_damage_multiplier` and `shield_hp_per_point` are published per actor.
 
@@ -72,9 +72,9 @@ Shield row mean Versus **190.80**, so one shield point is **0.5241 HP** BEFORE a
 | starcraft_protoss | `protoss_probe` | 45,000 | 45,000 | 68,584 | ×1.524 | 500 | ×1.188 |
 | starcraft_protoss | `protoss_amaranth` | 70,000 | 70,000 | 106,687 | ×1.524 | 1,200 | ×1.178 |
 | starcraft_protoss | `protoss_observer` | 12,500 | 12,500 | 19,051 | ×1.524 | 500 | ×1.165 |
-| starcraft_protoss | `protoss_darktemplar` | 50,000 | 50,000 | 76,205 | ×1.524 | 600 | ×1.157 |
-| starcraft_protoss | `protoss_zealot` | 40,000 | 40,000 | 60,964 | ×1.524 | 300 | ×1.147 |
+| starcraft_protoss | `protoss_darktemplar` | 50,000 | 50,000 | 76,205 | ×1.524 | 600 | ×1.158 |
+| starcraft_protoss | `protoss_zealot` | 40,000 | 40,000 | 60,964 | ×1.524 | 300 | ×1.148 |
 | starcraft_protoss | `protoss_legionnaire` | 60,000 | 60,000 | 91,446 | ×1.524 | 700 | ×1.142 |
 | starcraft_protoss | `protoss_adept` | 30,000 | 30,000 | 45,723 | ×1.524 | 650 | ×1.123 |
 | starcraft_protoss | `protoss_manifold` | 25,000 | 25,000 | 38,102 | ×1.524 | 600 | ×1.115 |
-| starcraft_protoss | `protoss_photoncannon` | 200,000 | 200,000 | 304,820 | ×1.524 | 2,000 | ×1.061 |
+| starcraft_protoss | `protoss_photoncannon` | 200,000 | 200,000 | 304,820 | ×1.524 | 2,000 | ×1.062 |

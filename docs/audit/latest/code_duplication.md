@@ -50,7 +50,7 @@ Python files: **275** (min 5 statements), C# files: **348** (min 8 lines)
 
 | copies | fingerprint | sites |
 |---|---|---|
-| 5 | 28fac3656bc8fc3b | tools/audit/find_orphan_old_keys.py:20 CENTRAL; tools/audit/find_orphan_old_keys_multi.py:18 CENTRAL; tools/audit/weapon_families.py:23 CENTRAL; tools/balance/fix_orphan_old_keys.py:19 CENTRAL; tools/balance/fix_orphan_old_keys_multi.py:16 CENTRAL |
+| 4 | 28fac3656bc8fc3b | tools/audit/find_orphan_old_keys.py:20 CENTRAL; tools/audit/find_orphan_old_keys_multi.py:18 CENTRAL; tools/balance/fix_orphan_old_keys.py:19 CENTRAL; tools/balance/fix_orphan_old_keys_multi.py:16 CENTRAL |
 | 4 | 9a62b7cb0c6b46dc | tools/audit/audit_heaviness_bell.py:95 COMPANION; tools/audit/audit_three_way_split.py:65 COMPANION_MARKERS; tools/audit/audit_tier_weapon_class.py:55 COMPANION_MARKERS; tools/balance/preview_bell.py:44 COMPANION |
 | 2 | 153d4fc74c8cdd31 | tools/tilesets/build_ra_temperate_basalt_trees.py:20 ACTORS; tools/tilesets/build_volcanic_basalt_gimp_brushes.py:20 ACTORS |
 | 2 | 2665d6950cd4417a | tools/audit/find_orphan_old_keys.py:27 OLD_TO_NEW; tools/balance/fix_orphan_old_keys.py:25 OLD_TO_NEW |
@@ -67,7 +67,7 @@ Python files: **275** (min 5 statements), C# files: **348** (min 8 lines)
 | 2 | e82cdb37ffc15514 | tools/audit/audit_versus_profile.py:66 LADDERS; tools/balance/gen_weapon_template.py:35 LADDERS |
 | 2 | eba2f9dc1c86d3e4 | tools/audit/audit_tier_weapon_class.py:59 LADDER; tools/balance/gen_weapon_template.py:2171 STORM_LEVELS |
 | 2 | ee8795bea6c56142 | tools/audit/audit_versus_profile.py:73 LEVELS; tools/reference/propose_family_profiles.py:113 LEVEL_ORDER |
-| 2 | eed204ad8ec23410 | tools/audit/propose_sonic_mapping.py:104 OLD_FAMILIES; tools/audit/weapon_families.py:29 OLD_FAMILIES |
+| 2 | eed204ad8ec23410 | tools/audit/propose_sonic_mapping.py:104 OLD_FAMILIES; tools/audit/weapon_families.py:35 OLD_FAMILIES |
 | 2 | efe4c032c5c937c9 | tools/audit/audit_three_way_split.py:62 MAIN_DAMAGE_TYPES; tools/audit/audit_tier_weapon_class.py:54 MAIN_DAMAGE_TYPES |
 
 

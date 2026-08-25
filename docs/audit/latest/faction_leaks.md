@@ -1,6 +1,6 @@
 # audit_faction_leaks — cross-faction leaks (B1)
 
-Factions checked: **29** — L1 leaks: **435**, L3 concrete-inherit leaks: **20**, shared/unattributed buildables: **91**
+Factions checked: **31** — L1 leaks: **443**, L3 concrete-inherit leaks: **20**, shared/unattributed buildables: **91**
 
 
 ## L1 — buildable in faction X but owned by faction Y
@@ -307,12 +307,14 @@ Factions checked: **29** — L1 leaks: **435**, L3 concrete-inherit leaks: **20*
 | ordos | heavy_rocket_raider.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
 | ordos | ixian_kodatank | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
 | ordos | rocket_raider.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
-| harkonnen | duelist_tank.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
-| harkonnen | heavy_inf.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml |
-| harkonnen | heavy_rocket_raider.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
-| harkonnen | ixian_kodatank | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
+| atreides | duelist_tank.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
+| atreides | heavy_inf.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml |
+| atreides | heavy_rocket_raider.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
+| atreides | ixian_kodatank | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
+| atreides | rocket_raider.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
 | harkonnen | ordos_upgrade_lightfactory | d2k/ordos | mods/cameo/ContentPacks/D2k/Ordos/yaml/upgrades.yaml |
-| harkonnen | rocket_raider.ixian | d2k/ixian | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
+| wc2_humans | wc2_humans_alleria | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml |
+| wc2_humans | wc2_humans_alleria_elite | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml |
 | wc2_humans | wc2_humans_archmage | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml |
 | wc2_humans | wc2_humans_ballista | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml |
 | wc2_humans | wc2_humans_barracks | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml |
@@ -321,6 +323,8 @@ Factions checked: **29** — L1 leaks: **435**, L3 concrete-inherit leaks: **20*
 | wc2_humans | wc2_humans_cannontower_plug | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml |
 | wc2_humans | wc2_humans_castle | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml |
 | wc2_humans | wc2_humans_church | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/buildings.yaml |
+| wc2_humans | wc2_humans_danath | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml |
+| wc2_humans | wc2_humans_danath_elite | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml |
 | wc2_humans | wc2_humans_demolitionsquad | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml |
 | wc2_humans | wc2_humans_dwarvenrifleman | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml |
 | wc2_humans | wc2_humans_elvenarcher | warcraft2/humans | mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml |
@@ -399,6 +403,8 @@ Factions checked: **29** — L1 leaks: **435**, L3 concrete-inherit leaks: **20*
 | wc2_orcs | wc2_orcs_grunt | warcraft2/orcs | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml |
 | wc2_orcs | wc2_orcs_guardtower | warcraft2/orcs | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml |
 | wc2_orcs | wc2_orcs_guardtower_plug | warcraft2/orcs | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml |
+| wc2_orcs | wc2_orcs_hellscream | warcraft2/orcs | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml |
+| wc2_orcs | wc2_orcs_hellscream_elite | warcraft2/orcs | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml |
 | wc2_orcs | wc2_orcs_kodobeast | warcraft2/orcs | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml |
 | wc2_orcs | wc2_orcs_mobileconstructionvehicleorc | warcraft2/orcs | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/vehicles.yaml |
 | wc2_orcs | wc2_orcs_ogre | warcraft2/orcs | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml |
@@ -442,6 +448,8 @@ Factions checked: **29** — L1 leaks: **435**, L3 concrete-inherit leaks: **20*
 | wc2_orcs | wc2_orcs_upgrade_warcraft3grunt | warcraft2/orcs | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/upgrades.yaml |
 | wc2_orcs | wc2_orcs_wall | warcraft2/orcs | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml |
 | wc2_orcs | wc2_orcs_warcraft3grunt | warcraft2/orcs | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml |
+| wc2_orcs | wc2_orcs_zuljin | warcraft2/orcs | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml |
+| wc2_orcs | wc2_orcs_zuljin_elite | warcraft2/orcs | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml |
 
 
 ## L3 — buildable inherits concrete actor owned by another faction

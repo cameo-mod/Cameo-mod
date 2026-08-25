@@ -1,16 +1,16 @@
 === 52 VIOLATIONS + 0 REDUNDANT (Image: explosion) ===
 
-[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:804  Hakureiring2  Image: hakurei_giphy
-[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:868  ReimuYinYangDrone  Image: hakurei_giphy
-[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:885  THMiss  Image: hakurei_dream
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:3268  RA2CorpseSpawner  Image: ra2corpse
-[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:3304  RA2FlyingBody  Image: ra2corpse
+[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:801  Hakureiring2  Image: hakurei_giphy
+[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:865  ReimuYinYangDrone  Image: hakurei_giphy
+[VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:882  THMiss  Image: hakurei_dream
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:3254  RA2CorpseSpawner  Image: ra2corpse
+[VIOLATION] mods\cameo\ContentPacks\RedAlert2\Shared\yaml\weapons.yaml:3290  RA2FlyingBody  Image: ra2corpse
 [VIOLATION] mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:1371  AsianTSIonCannon  Image: tsioncannon
-[VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1645  TDIonCannon  Image: tsioncannon
-[VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1657  TDIonCannon  Image: ionsfx
-[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1001  TSIonCannon  Image: tsioncannon
-[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1175  E1Droppod  Image: tsdroppod
-[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1183  E1Droppod  Image: tsdroppod
+[VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1641  TDIonCannon  Image: tsioncannon
+[VIOLATION] mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1653  TDIonCannon  Image: ionsfx
+[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:998  TSIonCannon  Image: tsioncannon
+[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1172  E1Droppod  Image: tsdroppod
+[VIOLATION] mods\cameo\ContentPacks\TiberianSun\GDI\yaml\weapons.yaml:1180  E1Droppod  Image: tsdroppod
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:108  wc2paladinholyvision_hit  Image: wc2_effect_sparkle
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:138  wc2holyvisionSuper_hit  Image: wc2_effect_sparkle_circle
 [VIOLATION] mods\cameo\ContentPacks\Warcraft2\Humans\yaml\weapons.yaml:142  wc2holyvisionSuper_hit  Image: wc2_effect_sparkle_circle
@@ -39,10 +39,10 @@
 [VIOLATION] mods\cameo\weapons\redalert2.yaml:3071  RA2CorpseSpawner  Image: ra2corpse
 [VIOLATION] mods\cameo\weapons\redalert2.yaml:3117  RA2FlyingBody  Image: ra2corpse
 [VIOLATION] mods\cameo\weapons\simcity.yaml:253  CasinoCrateSpawner  Image: tspodring
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1497  MutSAPC  Image: tsdig
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1573  NODMutant  Image: tsdig
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1616  FloaterSpawner  Image: tsdig
-[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1638  TunnelDisappear  Image: tsdig
+[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1525  MutSAPC  Image: tsdig
+[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1601  NODMutant  Image: tsdig
+[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1644  FloaterSpawner  Image: tsdig
+[VIOLATION] mods\cameo\weapons\tiberiansun.yaml:1666  TunnelDisappear  Image: tsdig
 [VIOLATION] mods\cameo\weapons\warcraft2.yaml:391  wc2mageFire  Image: wc2_lightng
 [VIOLATION] mods\cameo\weapons\warcraft2.yaml:567  wc2mageBlizzard_Projectile  Image: wc2_effect_blizzard
 [VIOLATION] mods\cameo\weapons\warcraft2.yaml:667  wc2cannontowerFire  Image: wc2_cannon_impact

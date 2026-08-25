@@ -6,16 +6,18 @@
 | faction | compliant | % | proposal collisions | asset files to rename |
 |---|---|---|---|---|
 | asianalliance | 73/73 | 100% | 0 | 116 |
+| atreides | 13/15 | 86% | 0 | 3 |
 | cabal | 80/80 | 100% | 0 | 147 |
+| corrino | 17/20 | 85% | 0 | 4 |
 | eden | 43/43 | 100% | 0 | 2 |
 | forgotten | 78/78 | 100% | 0 | 49 |
 | futuretech | 56/56 | 100% | 0 | 36 |
-| harkonnen | 15/18 | 83% | 0 | 1 |
+| harkonnen | 22/30 | 73% | 0 | 4 |
 | ixian | 59/60 | 98% | 0 | 28 |
 | japan | 68/68 | 100% | 0 | 40 |
 | latinsyndicate | 65/65 | 100% | 0 | 44 |
 | naxis | 73/73 | 100% | 0 | 35 |
-| ordos | 69/69 | 100% | 0 | 31 |
+| ordos | 71/71 | 100% | 0 | 36 |
 | plymouth | 44/44 | 100% | 0 | 2 |
 | protoss | 72/72 | 100% | 0 | 46 |
 | ra1_allies | 0/62 | 0% | 0 | 123 |
@@ -30,8 +32,8 @@
 | tkm | 72/72 | 100% | 0 | 39 |
 | ts_gdi | 0/66 | 0% | 0 | 154 |
 | ts_nod | 0/46 | 0% | 0 | 127 |
-| wc2_humans | 69/69 | 100% | 0 | 15 |
-| wc2_orcs | 60/60 | 100% | 0 | 12 |
+| wc2_humans | 73/73 | 100% | 0 | 17 |
+| wc2_orcs | 64/64 | 100% | 0 | 14 |
 | yuri | 64/64 | 100% | 0 | 6 |
 | zerg | 75/75 | 100% | 0 | 60 |
 
@@ -41,16 +43,18 @@
 | faction | icons compliant | % |
 |---|---|---|
 | asianalliance | 71/72 | 98% |
+| atreides | 0/1 | 0% |
 | cabal | 80/80 | 100% |
+| corrino | 1/1 | 100% |
 | eden | 43/43 | 100% |
 | forgotten | 76/78 | 97% |
 | futuretech | 56/56 | 100% |
-| harkonnen | 1/1 | 100% |
+| harkonnen | 2/2 | 100% |
 | ixian | 44/44 | 100% |
 | japan | 64/67 | 95% |
 | latinsyndicate | 65/65 | 100% |
 | naxis | 73/73 | 100% |
-| ordos | 48/48 | 100% |
+| ordos | 50/50 | 100% |
 | plymouth | 44/44 | 100% |
 | protoss | 72/72 | 100% |
 | ra1_allies | 61/61 | 100% |
@@ -65,8 +69,8 @@
 | tkm | 72/72 | 100% |
 | ts_gdi | 64/66 | 96% |
 | ts_nod | 46/46 | 100% |
-| wc2_humans | 15/16 | 93% |
-| wc2_orcs | 6/6 | 100% |
+| wc2_humans | 19/20 | 95% |
+| wc2_orcs | 10/10 | 100% |
 | yuri | 63/64 | 98% |
 | zerg | 75/75 | 100% |
 

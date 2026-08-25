@@ -1,4 +1,4 @@
-# audit_duplicate_inherits — 1769 actor(s)/template(s) reach a parent through more than one path
+# audit_duplicate_inherits — 1814 actor(s)/template(s) reach a parent through more than one path
 
 A10Carrier:
   parent ^^ ^externalconditions  (2 paths)
@@ -4328,6 +4328,25 @@ assault.nax:
     -> assault.nax -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> assault.nax -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
+atreides_barracks:
+  parent ^^ ^globalbounty  (2 paths)
+    -> atreides_barracks -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> atreides_barracks -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> atreides_barracks -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> atreides_barracks -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> atreides_barracks -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> atreides_barracks -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> atreides_barracks -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> atreides_barracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
+atreides_combattank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> atreides_combattank -> ^combattank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> atreides_combattank -> ^combattank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
 atreides_constructionyard:
   parent ^^ ^globalbounty  (2 paths)
     -> atreides_constructionyard -> ^constructionyard -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
@@ -4338,6 +4357,20 @@ atreides_constructionyard:
   parent ^^ ^selectablebuilding  (2 paths)
     -> atreides_constructionyard -> ^constructionyard -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> atreides_constructionyard -> ^constructionyard -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+atreides_gunturret:
+  parent ^^ ^globalbounty  (2 paths)
+    -> atreides_gunturret -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> atreides_gunturret -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^1x1shape  (2 paths)
+    -> atreides_gunturret -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@shape:^1x1Shape
+    -> atreides_gunturret -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> atreides_gunturret -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> atreides_gunturret -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> atreides_gunturret -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> atreides_gunturret -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
 
 atreides_heavyfactory:
   parent ^^ ^globalbounty  (2 paths)
@@ -4353,10 +4386,217 @@ atreides_heavyfactory:
     -> atreides_heavyfactory -> ^heavyfactory -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> atreides_heavyfactory -> ^heavyfactory -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
+atreides_hightechfactory:
+  parent ^^ ^globalbounty  (2 paths)
+    -> atreides_hightechfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> atreides_hightechfactory -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> atreides_hightechfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> atreides_hightechfactory -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> atreides_hightechfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> atreides_hightechfactory -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+atreides_ixresearchcenter:
+  parent ^^ ^globalbounty  (2 paths)
+    -> atreides_ixresearchcenter -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> atreides_ixresearchcenter -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> atreides_ixresearchcenter -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> atreides_ixresearchcenter -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> atreides_ixresearchcenter -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> atreides_ixresearchcenter -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+atreides_lightfactory:
+  parent ^^ ^globalbounty  (2 paths)
+    -> atreides_lightfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> atreides_lightfactory -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> atreides_lightfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> atreides_lightfactory -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> atreides_lightfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> atreides_lightfactory -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+atreides_missiletank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> atreides_missiletank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> atreides_missiletank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^vehiclebuffs  (2 paths)
+    -> atreides_missiletank -> ^artillerytemplate -> ^artillerybuffs -> Inherits@VehicleBuffs:^VehicleBuffs
+    -> atreides_missiletank -> ^artillerytemplate -> Inherits@VehicleBuffs:^VehicleBuffs
+  parent ^^ ^globalbuffs  (2 paths)
+    -> atreides_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+    -> atreides_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+  parent ^^ ^gpssatellitesupport  (2 paths)
+    -> atreides_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+    -> atreides_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+  parent ^^ ^wayofthedragon  (2 paths)
+    -> atreides_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+    -> atreides_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+  parent ^^ ^helium3teamupgrademobile  (2 paths)
+    -> atreides_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+    -> atreides_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+  parent ^^ ^nanotechrepairs  (2 paths)
+    -> atreides_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+    -> atreides_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+  parent ^^ ^modernfirecontrolsystems  (2 paths)
+    -> atreides_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+    -> atreides_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+  parent ^^ ^blitzkrieg  (2 paths)
+    -> atreides_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+    -> atreides_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+  parent ^^ ^tiberiumadaptability  (2 paths)
+    -> atreides_missiletank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+    -> atreides_missiletank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+
 atreides_mobileconstructionvehicle:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> atreides_mobileconstructionvehicle -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> atreides_mobileconstructionvehicle -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+atreides_outpost:
+  parent ^^ ^globalbounty  (2 paths)
+    -> atreides_outpost -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> atreides_outpost -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> atreides_outpost -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> atreides_outpost -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> atreides_outpost -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> atreides_outpost -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+atreides_palace:
+  parent ^^ ^globalbounty  (2 paths)
+    -> atreides_palace -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> atreides_palace -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> atreides_palace -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> atreides_palace -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> atreides_palace -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> atreides_palace -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+atreides_refinery:
+  parent ^^ ^globalbounty  (2 paths)
+    -> atreides_refinery -> ^d2krefinery -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> atreides_refinery -> ^d2krefinery -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> atreides_refinery -> ^d2krefinery -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> atreides_refinery -> ^d2krefinery -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> atreides_refinery -> ^d2krefinery -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> atreides_refinery -> ^d2krefinery -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+atreides_repairpad:
+  parent ^^ ^globalbounty  (2 paths)
+    -> atreides_repairpad -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> atreides_repairpad -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> atreides_repairpad -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> atreides_repairpad -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> atreides_repairpad -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> atreides_repairpad -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+atreides_rocketturret:
+  parent ^^ ^globalbounty  (2 paths)
+    -> atreides_rocketturret -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> atreides_rocketturret -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^1x1shape  (2 paths)
+    -> atreides_rocketturret -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@shape:^1x1Shape
+    -> atreides_rocketturret -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> atreides_rocketturret -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> atreides_rocketturret -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> atreides_rocketturret -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> atreides_rocketturret -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+atreides_siegetank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> atreides_siegetank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> atreides_siegetank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^vehiclebuffs  (2 paths)
+    -> atreides_siegetank -> ^artillerytemplate -> ^artillerybuffs -> Inherits@VehicleBuffs:^VehicleBuffs
+    -> atreides_siegetank -> ^artillerytemplate -> Inherits@VehicleBuffs:^VehicleBuffs
+  parent ^^ ^globalbuffs  (2 paths)
+    -> atreides_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+    -> atreides_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@GlobalBuffs:^GlobalBuffs
+  parent ^^ ^gpssatellitesupport  (2 paths)
+    -> atreides_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+    -> atreides_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits:^GPSSatelliteSupport
+  parent ^^ ^wayofthedragon  (2 paths)
+    -> atreides_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+    -> atreides_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> ^globalbuffs -> Inherits@2:^WayOfTheDragon
+  parent ^^ ^helium3teamupgrademobile  (2 paths)
+    -> atreides_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+    -> atreides_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Helium3TeamUpgradeMobile:^Helium3TeamUpgradeMobile
+  parent ^^ ^nanotechrepairs  (2 paths)
+    -> atreides_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+    -> atreides_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits:^NanoTechRepairs
+  parent ^^ ^modernfirecontrolsystems  (2 paths)
+    -> atreides_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+    -> atreides_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@ModernFireControlSystems:^ModernFireControlSystems
+  parent ^^ ^blitzkrieg  (2 paths)
+    -> atreides_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+    -> atreides_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@Blitzkrieg:^Blitzkrieg
+  parent ^^ ^tiberiumadaptability  (2 paths)
+    -> atreides_siegetank -> ^artillerytemplate -> ^artillerybuffs -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+    -> atreides_siegetank -> ^artillerytemplate -> ^vehiclebuffs -> Inherits@TiberiumAdaptability:^TiberiumAdaptability
+  parent ^^ ^prioritizebuilding  (2 paths)
+    -> atreides_siegetank -> ^artillerytemplate -> Inherits@AntiBuil:^PrioritizeBuilding
+    -> atreides_siegetank -> Inherits@AntiBuil:^PrioritizeBuilding
+  parent ^^ ^prioritizeinfantry  (2 paths)
+    -> atreides_siegetank -> ^artillerytemplate -> Inherits@AntiInf:^PrioritizeInfantry
+    -> atreides_siegetank -> Inherits@AntiInf:^PrioritizeInfantry
+
+atreides_sonictank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> atreides_sonictank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> atreides_sonictank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+atreides_spiceharvester:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> atreides_spiceharvester -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> atreides_spiceharvester -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+atreides_starport:
+  parent ^^ ^globalbounty  (2 paths)
+    -> atreides_starport -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> atreides_starport -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> atreides_starport -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> atreides_starport -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> atreides_starport -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> atreides_starport -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+atreides_storagesilo:
+  parent ^^ ^globalbounty  (2 paths)
+    -> atreides_storagesilo -> ^d2ksilo -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> atreides_storagesilo -> ^d2ksilo -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^1x1shape  (2 paths)
+    -> atreides_storagesilo -> ^d2ksilo -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@shape:^1x1Shape
+    -> atreides_storagesilo -> ^d2ksilo -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> atreides_storagesilo -> ^d2ksilo -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> atreides_storagesilo -> ^d2ksilo -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> atreides_storagesilo -> ^d2ksilo -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> atreides_storagesilo -> ^d2ksilo -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+atreides_windtrap:
+  parent ^^ ^globalbounty  (2 paths)
+    -> atreides_windtrap -> ^windtrap -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> atreides_windtrap -> ^windtrap -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> atreides_windtrap -> ^windtrap -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> atreides_windtrap -> ^windtrap -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> atreides_windtrap -> ^windtrap -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> atreides_windtrap -> ^windtrap -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
 
 bio:
   parent ^^ ^shielddomeshapevisual  (2 paths)
@@ -6696,11 +6936,6 @@ cobra.steel:
     -> cobra.steel -> ^tank -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> cobra.steel -> ^tank -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
-combat_tank.atreides:
-  parent ^^ ^acceptscloakcrate  (2 paths)
-    -> combat_tank.atreides -> ^combattank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
-    -> combat_tank.atreides -> ^combattank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
 combat_tank.harkonnen:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> combat_tank.harkonnen -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -6804,6 +7039,284 @@ conehead2.nax:
     -> conehead2.nax -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
     -> conehead2.nax -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
 
+corrino_barracks:
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_barracks -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> corrino_barracks -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> corrino_barracks -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> corrino_barracks -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> corrino_barracks -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> corrino_barracks -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> corrino_barracks -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> corrino_barracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
+corrino_bmp:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> corrino_bmp -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> corrino_bmp -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+corrino_buggy:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> corrino_buggy -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> corrino_buggy -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+corrino_combattank:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> corrino_combattank -> ^combattank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> corrino_combattank -> ^combattank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+corrino_constructionyard:
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_constructionyard -> ^constructionyard -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> corrino_constructionyard -> ^constructionyard -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> corrino_constructionyard -> ^constructionyard -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> corrino_constructionyard -> ^constructionyard -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> corrino_constructionyard -> ^constructionyard -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> corrino_constructionyard -> ^constructionyard -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+corrino_heavyfactory:
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_heavyfactory -> ^heavyfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> corrino_heavyfactory -> ^heavyfactory -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> corrino_heavyfactory -> ^heavyfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> corrino_heavyfactory -> ^heavyfactory -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> corrino_heavyfactory -> ^heavyfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> corrino_heavyfactory -> ^heavyfactory -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> corrino_heavyfactory -> ^heavyfactory -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> corrino_heavyfactory -> ^heavyfactory -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
+corrino_hightechfactory:
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_hightechfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> corrino_hightechfactory -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> corrino_hightechfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> corrino_hightechfactory -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> corrino_hightechfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> corrino_hightechfactory -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+corrino_ixresearchcenter:
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_ixresearchcenter -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> corrino_ixresearchcenter -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> corrino_ixresearchcenter -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> corrino_ixresearchcenter -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> corrino_ixresearchcenter -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> corrino_ixresearchcenter -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+corrino_lightfactory:
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_lightfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> corrino_lightfactory -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> corrino_lightfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> corrino_lightfactory -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> corrino_lightfactory -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> corrino_lightfactory -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+  parent ^^ ^disabledoverlay  (2 paths)
+    -> corrino_lightfactory -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> corrino_lightfactory -> ^isweaponfactory -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+
+corrino_mobileconstructionvehicle:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> corrino_mobileconstructionvehicle -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> corrino_mobileconstructionvehicle -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+corrino_outpost:
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_outpost -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> corrino_outpost -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> corrino_outpost -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> corrino_outpost -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> corrino_outpost -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> corrino_outpost -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+corrino_palace:
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_palace -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> corrino_palace -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> corrino_palace -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> corrino_palace -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> corrino_palace -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> corrino_palace -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+corrino_refinery:
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_refinery -> ^d2krefinery -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> corrino_refinery -> ^d2krefinery -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> corrino_refinery -> ^d2krefinery -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> corrino_refinery -> ^d2krefinery -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> corrino_refinery -> ^d2krefinery -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> corrino_refinery -> ^d2krefinery -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+corrino_repairpad:
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_repairpad -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> corrino_repairpad -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> corrino_repairpad -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> corrino_repairpad -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> corrino_repairpad -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> corrino_repairpad -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+corrino_sardaukar_bazooka:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> corrino_sardaukar_bazooka -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+
+corrino_spiceharvester:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> corrino_spiceharvester -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> corrino_spiceharvester -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+corrino_starport:
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_starport -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> corrino_starport -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> corrino_starport -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> corrino_starport -> ^3x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> corrino_starport -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> corrino_starport -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+corrino_storagesilo:
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_storagesilo -> ^d2ksilo -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> corrino_storagesilo -> ^d2ksilo -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^1x1shape  (2 paths)
+    -> corrino_storagesilo -> ^d2ksilo -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@shape:^1x1Shape
+    -> corrino_storagesilo -> ^d2ksilo -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> corrino_storagesilo -> ^d2ksilo -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> corrino_storagesilo -> ^d2ksilo -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> corrino_storagesilo -> ^d2ksilo -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> corrino_storagesilo -> ^d2ksilo -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
+corrino_windtrap:
+  parent ^^ ^globalbounty  (2 paths)
+    -> corrino_windtrap -> ^windtrap -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> corrino_windtrap -> ^windtrap -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^shielddomeshapevisual  (2 paths)
+    -> corrino_windtrap -> ^windtrap -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> corrino_windtrap -> ^windtrap -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (2 paths)
+    -> corrino_windtrap -> ^windtrap -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> corrino_windtrap -> ^windtrap -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+
 cougar.steel:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> cougar.steel -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -6849,20 +7362,6 @@ cruiser_f.steel:
   parent ^^ ^wc2humansinvisibilitystatus  (2 paths)
     -> cruiser_f.steel -> ^raneutralplane -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> cruiser_f.steel -> ^bombertemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
-
-d2k_silo.atreides:
-  parent ^^ ^globalbounty  (2 paths)
-    -> d2k_silo.atreides -> ^d2ksilo -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> d2k_silo.atreides -> ^d2ksilo -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^1x1shape  (2 paths)
-    -> d2k_silo.atreides -> ^d2ksilo -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@shape:^1x1Shape
-    -> d2k_silo.atreides -> ^d2ksilo -> Inherits@shape:^1x1Shape
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> d2k_silo.atreides -> ^d2ksilo -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> d2k_silo.atreides -> ^d2ksilo -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^selectablebuilding  (2 paths)
-    -> d2k_silo.atreides -> ^d2ksilo -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
-    -> d2k_silo.atreides -> ^d2ksilo -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
 
 devastator:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -11481,6 +11980,93 @@ harkonnen_constructionyard:
     -> harkonnen_constructionyard -> ^constructionyard -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
     -> harkonnen_constructionyard -> ^constructionyard -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
 
+harkonnen_devastatorturret:
+  parent ^^ ^basebuilding  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> Inherits:^BaseBuilding
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> Inherits@1:^BaseBuilding
+  parent ^^ ^building  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits:^Building
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits:^Building
+  parent ^^ ^existsinworld  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@1:^ExistsInWorld
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@2:^SpriteActor
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (4 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^1x1shape  (3 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@shape:^1x1Shape
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@shape:^1x1Shape
+    -> harkonnen_devastatorturret -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (3 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> harkonnen_devastatorturret -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (3 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+  parent ^^ ^shroudable  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^ironcurtainable  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@2:^IronCurtainable
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@2:^IronCurtainable
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@bot:^BotProductionBehavior
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^mindcontrollablestructure  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@mindcontrol:^MindControllableStructure
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@mindcontrol:^MindControllableStructure
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^mindcontrollablestructure -> Inherits:^MindControllable
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^mindcontrollablestructure -> Inherits:^MindControllable
+  parent ^^ ^forceshieldable  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
+  parent ^^ ^sonicdebuff  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^boobytrappable  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
+  parent ^^ ^base-reveal  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@base-reveal:^Base-reveal
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^bombattachable  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@ivan:^BombAttachable
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@ivan:^BombAttachable
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@cloak:^StealthGenCloakable
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@cloak:^StealthGenCloakable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@shielded:^ShieldedShieldable
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@chrono:^ChronoBeamable
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^cryofreezable  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@CryoFreezable:^CryoFreezable
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^disabledoverlay  (4 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> harkonnen_devastatorturret -> ^advanceddefensetemplate -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> harkonnen_devastatorturret -> ^advanceddefensetemplate -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+  parent ^^ ^selectablecombatbuilding  (2 paths)
+    -> harkonnen_devastatorturret -> ^d2kdefense -> ^defense -> ^basicdefense -> Inherits@selection:^SelectableCombatBuilding
+    -> harkonnen_devastatorturret -> ^d2kdefense -> Inherits@selection:^SelectableCombatBuilding
+
 harkonnen_flameturret:
   parent ^^ ^basebuilding  (2 paths)
     -> harkonnen_flameturret -> ^d2kdefense -> ^defense -> Inherits:^BaseBuilding
@@ -11769,6 +12355,11 @@ harkonnen_rocketturret:
   parent ^^ ^selectablecombatbuilding  (2 paths)
     -> harkonnen_rocketturret -> ^d2kdefense -> ^defense -> ^basicdefense -> Inherits@selection:^SelectableCombatBuilding
     -> harkonnen_rocketturret -> ^d2kdefense -> Inherits@selection:^SelectableCombatBuilding
+
+harkonnen_spiceharvester:
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> harkonnen_spiceharvester -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> harkonnen_spiceharvester -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
 harkonnen_starport:
   parent ^^ ^globalbounty  (2 paths)
@@ -17764,6 +18355,93 @@ ordos_barracks:
     -> ordos_barracks -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
     -> ordos_barracks -> ^isbarrack -> ^disableonpowerdown -> Inherits:^DisabledOverlay
 
+ordos_chemturret:
+  parent ^^ ^basebuilding  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> Inherits:^BaseBuilding
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> Inherits@1:^BaseBuilding
+  parent ^^ ^building  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits:^Building
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits:^Building
+  parent ^^ ^existsinworld  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@1:^ExistsInWorld
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@2:^SpriteActor
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (4 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^1x1shape  (3 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@shape:^1x1Shape
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@shape:^1x1Shape
+    -> ordos_chemturret -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (3 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ordos_chemturret -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (3 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+  parent ^^ ^shroudable  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^ironcurtainable  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@2:^IronCurtainable
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@2:^IronCurtainable
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@bot:^BotProductionBehavior
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^mindcontrollablestructure  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@mindcontrol:^MindControllableStructure
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@mindcontrol:^MindControllableStructure
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^mindcontrollablestructure -> Inherits:^MindControllable
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^mindcontrollablestructure -> Inherits:^MindControllable
+  parent ^^ ^forceshieldable  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
+  parent ^^ ^sonicdebuff  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^boobytrappable  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
+  parent ^^ ^base-reveal  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@base-reveal:^Base-reveal
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^bombattachable  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@ivan:^BombAttachable
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@ivan:^BombAttachable
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@cloak:^StealthGenCloakable
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@cloak:^StealthGenCloakable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@shielded:^ShieldedShieldable
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@chrono:^ChronoBeamable
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^cryofreezable  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@CryoFreezable:^CryoFreezable
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^disabledoverlay  (4 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ordos_chemturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ordos_chemturret -> ^advanceddefensetemplate -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> ordos_chemturret -> ^advanceddefensetemplate -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+  parent ^^ ^selectablecombatbuilding  (2 paths)
+    -> ordos_chemturret -> ^d2kdefense -> ^defense -> ^basicdefense -> Inherits@selection:^SelectableCombatBuilding
+    -> ordos_chemturret -> ^d2kdefense -> Inherits@selection:^SelectableCombatBuilding
+
 ordos_cobratank:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ordos_cobratank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -17940,6 +18618,93 @@ ordos_lasertank:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> ordos_lasertank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> ordos_lasertank -> ^d2ktank -> ^d2kvehicle -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
+
+ordos_laserturret:
+  parent ^^ ^basebuilding  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> Inherits:^BaseBuilding
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> Inherits@1:^BaseBuilding
+  parent ^^ ^building  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits:^Building
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits:^Building
+  parent ^^ ^existsinworld  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@1:^ExistsInWorld
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@2:^SpriteActor
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (4 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^1x1shape  (3 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@shape:^1x1Shape
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@shape:^1x1Shape
+    -> ordos_laserturret -> Inherits@shape:^1x1Shape
+  parent ^^ ^shielddomeshapevisual  (3 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+    -> ordos_laserturret -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+  parent ^^ ^selectablebuilding  (3 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+  parent ^^ ^shroudable  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@Shroudable:^Shroudable
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@Blindable:^Blindable
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@Blindable:^Blindable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^ironcurtainable  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@2:^IronCurtainable
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@2:^IronCurtainable
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@bot:^BotProductionBehavior
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^mindcontrollablestructure  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@mindcontrol:^MindControllableStructure
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@mindcontrol:^MindControllableStructure
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> ^mindcontrollablestructure -> Inherits:^MindControllable
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> ^mindcontrollablestructure -> Inherits:^MindControllable
+  parent ^^ ^forceshieldable  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@forceshield:^ForceShieldable
+  parent ^^ ^sonicdebuff  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^boobytrappable  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@trap:^BoobyTrappable
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@trap:^BoobyTrappable
+  parent ^^ ^base-reveal  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@base-reveal:^Base-reveal
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^bombattachable  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@ivan:^BombAttachable
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@ivan:^BombAttachable
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@cloak:^StealthGenCloakable
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@cloak:^StealthGenCloakable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@shielded:^ShieldedShieldable
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@chrono:^ChronoBeamable
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^cryofreezable  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@CryoFreezable:^CryoFreezable
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^disabledoverlay  (4 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ordos_laserturret -> ^d2kdefense -> ^d2kbuilding -> ^basebuilding -> Inherits@DisabledOverlay:^DisabledOverlay
+    -> ordos_laserturret -> ^advanceddefensetemplate -> ^disableonlowpowerorpowerdown -> ^disableonlowpower -> Inherits:^DisabledOverlay
+    -> ordos_laserturret -> ^advanceddefensetemplate -> ^disableonlowpowerorpowerdown -> ^disableonpowerdown -> Inherits:^DisabledOverlay
+  parent ^^ ^selectablecombatbuilding  (2 paths)
+    -> ordos_laserturret -> ^d2kdefense -> ^defense -> ^basicdefense -> Inherits@selection:^SelectableCombatBuilding
+    -> ordos_laserturret -> ^d2kdefense -> Inherits@selection:^SelectableCombatBuilding
 
 ordos_lightfactory:
   parent ^^ ^globalbounty  (2 paths)
@@ -28601,17 +29366,6 @@ rammax.latin:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> rammax.latin -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> rammax.latin -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
-
-refinery.atreides:
-  parent ^^ ^globalbounty  (2 paths)
-    -> refinery.atreides -> ^d2krefinery -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> refinery.atreides -> ^d2krefinery -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> refinery.atreides -> ^d2krefinery -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> refinery.atreides -> ^d2krefinery -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^selectablebuilding  (2 paths)
-    -> refinery.atreides -> ^d2krefinery -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
-    -> refinery.atreides -> ^d2krefinery -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
 
 rocket_raider.ixian:
   parent ^^ ^acceptscloakcrate  (2 paths)
@@ -41244,6 +41998,290 @@ wc2_human_transport:
     -> wc2_human_transport -> ^wc2ship -> ^boatunit -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
     -> wc2_human_transport -> ^wc2ship -> ^boatunit -> ^vehicle -> Inherits@cloak:^AcceptsCloakCrate
 
+wc2_humans_alleria:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> wc2_humans_alleria -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+  parent ^^ ^externalconditions  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
+    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^sonicdebuff  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^defilerplague  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (3 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_humans_alleria -> ^wc2infantry -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (3 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_humans_alleria -> ^wc2infantry -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (3 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_humans_alleria -> ^wc2infantry -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (3 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_humans_alleria -> ^wc2infantry -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (3 paths)
+    -> wc2_humans_alleria -> ^wc2infantry -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_humans_alleria -> ^wc2infantry -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_humans_alleria -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
+wc2_humans_alleria_elite:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+  parent ^^ ^externalconditions  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
+    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^sonicdebuff  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^defilerplague  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (3 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (3 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (3 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (3 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (3 paths)
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_humans_alleria_elite -> ^wc2infantry -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_humans_alleria_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
 wc2_humans_archmage:
   parent ^^ ^defaultinfantry  (2 paths)
     -> wc2_humans_archmage -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
@@ -41505,6 +42543,290 @@ wc2_humans_church:
   parent ^^ ^shielddomeshapevisual  (2 paths)
     -> wc2_humans_church -> ^wc2humanbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
     -> wc2_humans_church -> ^wc2church -> ^3x3shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
+
+wc2_humans_danath:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> wc2_humans_danath -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+  parent ^^ ^externalconditions  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
+    -> wc2_humans_danath -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^sonicdebuff  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^defilerplague  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (3 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_humans_danath -> ^wc2infantry -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (3 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_humans_danath -> ^wc2infantry -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (3 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_humans_danath -> ^wc2infantry -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (3 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_humans_danath -> ^wc2infantry -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (3 paths)
+    -> wc2_humans_danath -> ^wc2infantry -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_humans_danath -> ^wc2infantry -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_humans_danath -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
+wc2_humans_danath_elite:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+  parent ^^ ^externalconditions  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
+    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^sonicdebuff  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^defilerplague  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (3 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_humans_danath_elite -> ^wc2infantry -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (3 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_humans_danath_elite -> ^wc2infantry -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (3 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_humans_danath_elite -> ^wc2infantry -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (3 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_humans_danath_elite -> ^wc2infantry -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (3 paths)
+    -> wc2_humans_danath_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_humans_danath_elite -> ^wc2infantry -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_humans_danath_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
 wc2_humans_demolitionsquad:
   parent ^^ ^defaultinfantry  (2 paths)
@@ -45232,6 +46554,290 @@ wc2_orcs_guardtower:
     -> wc2_orcs_guardtower -> wc2_orcs_orcwatchtower -> ^defense -> ^basicdefense -> ^gainsexperiencebuildings -> Inherits:^GainsExperience
     -> wc2_orcs_guardtower -> wc2_orcs_orcwatchtower -> ^gainsexperiencebuildings -> Inherits:^GainsExperience
 
+wc2_orcs_hellscream:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+  parent ^^ ^externalconditions  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
+    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^sonicdebuff  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^defilerplague  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (3 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_orcs_hellscream -> ^wc2infantry -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (3 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_orcs_hellscream -> ^wc2infantry -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (3 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_orcs_hellscream -> ^wc2infantry -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (3 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_orcs_hellscream -> ^wc2infantry -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (3 paths)
+    -> wc2_orcs_hellscream -> ^wc2infantry -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_orcs_hellscream -> ^wc2infantry -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_orcs_hellscream -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
+wc2_orcs_hellscream_elite:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+  parent ^^ ^externalconditions  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
+    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^sonicdebuff  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^defilerplague  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (3 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (3 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (3 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (3 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (3 paths)
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_orcs_hellscream_elite -> ^wc2infantry -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_orcs_hellscream_elite -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
 wc2_orcs_kodobeast:
   parent ^^ ^acceptscloakcrate  (2 paths)
     -> wc2_orcs_kodobeast -> ^wc2vehicle -> ^vehicle -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
@@ -46418,16 +48024,289 @@ wc2_orcs_warcraft3grunt:
     -> wc2_orcs_warcraft3grunt -> ^wc2infantry -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
     -> wc2_orcs_warcraft3grunt -> ^meleeinfantrytemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
-wind_trap.atreides:
+wc2_orcs_zuljin:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
   parent ^^ ^globalbounty  (2 paths)
-    -> wind_trap.atreides -> ^windtrap -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@bounty:^GlobalBounty
-    -> wind_trap.atreides -> ^windtrap -> ^d2kbuilding -> ^basebuilding -> Inherits@bounty:^GlobalBounty
-  parent ^^ ^shielddomeshapevisual  (2 paths)
-    -> wind_trap.atreides -> ^windtrap -> ^d2kbuilding -> ^basebuilding -> ^building -> ^1x1shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-    -> wind_trap.atreides -> ^windtrap -> ^2x2shape -> Inherits@shieldvisual:^ShieldDomeShapeVisual
-  parent ^^ ^selectablebuilding  (2 paths)
-    -> wind_trap.atreides -> ^windtrap -> ^d2kbuilding -> ^basebuilding -> ^building -> Inherits@selection:^SelectableBuilding
-    -> wind_trap.atreides -> ^windtrap -> ^d2kbuilding -> Inherits@selection:^SelectableBuilding
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+  parent ^^ ^externalconditions  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
+    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^sonicdebuff  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^defilerplague  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (3 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_orcs_zuljin -> ^wc2infantry -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (3 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_orcs_zuljin -> ^wc2infantry -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (3 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_orcs_zuljin -> ^wc2infantry -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (3 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_orcs_zuljin -> ^wc2infantry -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (3 paths)
+    -> wc2_orcs_zuljin -> ^wc2infantry -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_orcs_zuljin -> ^wc2infantry -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_orcs_zuljin -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+
+wc2_orcs_zuljin_elite:
+  parent ^^ ^defaultinfantry  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> Inherits:^DefaultInfantry
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> Inherits:^DefaultInfantry
+  parent ^^ ^basicunit  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@1:^BasicUnit
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@1:^BasicUnit
+  parent ^^ ^existsinworld  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@1:^ExistsInWorld
+  parent ^^ ^spriteactor  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@2:^SpriteActor
+  parent ^^ ^globalbounty  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bounty:^GlobalBounty
+  parent ^^ ^selectablecombatunit  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@selection:^SelectableCombatUnit
+  parent ^^ ^botproductionbehavior  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@bot:^BotProductionBehavior
+  parent ^^ ^acceptscloakcrate  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@cloak:^AcceptsCloakCrate
+  parent ^^ ^stealthgencloakable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@StealthGenCloakable:^StealthGenCloakable
+  parent ^^ ^lockon  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@LockOn:^LockOn
+  parent ^^ ^bombattachable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@ivan:^BombAttachable
+  parent ^^ ^shieldedshieldable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@shielded:^ShieldedShieldable
+  parent ^^ ^chronobeamable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@chrono:^ChronoBeamable
+  parent ^^ ^base-reveal  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@base-reveal:^Base-reveal
+  parent ^^ ^shroudable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Shroudable:^Shroudable
+  parent ^^ ^blindable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Blindable:^Blindable
+  parent ^^ ^snareable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@Snareable:^Snareable
+  parent ^^ ^artilleryjammable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@jammable:^ArtilleryJammable
+  parent ^^ ^propagandaeffectbuff  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@PropagandaEffectBuff:^PropagandaEffectBuff
+  parent ^^ ^cryofreezable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@CryoFreezable:^CryoFreezable
+  parent ^^ ^enemyinproximity  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@EnemyInProximity:^EnemyInProximity
+  parent ^^ ^affectedbyhealingfield  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@HealingField:^AffectedByHealingField
+  parent ^^ ^recallable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^basicunit -> Inherits@recall:^Recallable
+  parent ^^ ^mindcontrollable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@mindcontrol:^MindControllable
+  parent ^^ ^infantrydisable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@disable:^InfantryDisable
+  parent ^^ ^hospitalhealable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@heal:^HospitalHealable
+  parent ^^ ^techstructurehealable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^hospitalhealable -> Inherits:^TechStructureHealable
+  parent ^^ ^terrordronableinfantry  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@terrordrone:^TerrorDronableInfantry
+  parent ^^ ^terrordronable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> ^terrordronableinfantry -> Inherits:^TerrorDronable
+  parent ^^ ^cancapturedriverlessvehicles  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@driver-dead:^CanCaptureDriverlessVehicles
+  parent ^^ ^poisonable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@poisonable:^Poisonable
+  parent ^^ ^gravityweighter  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^defaultsoldier -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^soldier -> ^infantry -> ^defaultinfantry -> Inherits@GravityWeighter:^GravityWeighter
+  parent ^^ ^externalconditions  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> Inherits@EXT:^ExternalConditions
+    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> Inherits@EXT:^ExternalConditions
+  parent ^^ ^sonicdebuff  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@sonicdebuff:^SonicDebuff
+  parent ^^ ^defilerplague  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@defplague:^DefilerPlague
+  parent ^^ ^commandocallable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@commando:^CommandoCallable
+    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@commando:^CommandoCallable
+  parent ^^ ^darkswarmable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@darkswarm:^DarkSwarmable
+  parent ^^ ^industryspeed  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@industry:^IndustrySpeed
+  parent ^^ ^citycombatcallable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@police:^CityCombatCallable
+    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@police:^CityCombatCallable
+  parent ^^ ^berserkable  (2 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@berserk:^Berserkable
+    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@berserk:^Berserkable
+  parent ^^ ^wc2orcsbloodluststatus  (3 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2BLOODLUST:^WC2OrcsBloodlustStatus
+  parent ^^ ^wc2orcshastestatus  (3 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2HASTE:^WC2OrcsHasteStatus
+  parent ^^ ^wc2humansslowstatus  (3 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2SLOW:^WC2HumansSlowStatus
+  parent ^^ ^wc2humanspolymorphstatus  (3 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2POLYMORPH:^WC2HumansPolymorphStatus
+  parent ^^ ^wc2humansinvisibilitystatus  (3 paths)
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_orcs_zuljin_elite -> ^wc2infantry -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
+    -> wc2_orcs_zuljin_elite -> ^antitankantiairinfantrytemplate -> ^externalconditions -> Inherits@WC2INVISIBILITY:^WC2HumansInvisibilityStatus
 
 wirbelwind.nax:
   parent ^^ ^acceptscloakcrate  (2 paths)

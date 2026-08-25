@@ -202,3 +202,44 @@ corrino_bmp:
 	RenderSprites:
 		Image: corrino_bmp
 
+corrino_apc:
+	Inherits: ^D2KTank
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@CARGO: ^UnarmedCargoVehicle
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Tooltip:
+		Name: Corrino APC
+	Valued:
+		Cost: 600
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~corrino_light_vehicle_production
+		BuildPaletteOrder: 50
+		Description: Armored transport.\n  Can carry infantry
+		IconPalette: d2kunit
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 50000
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 100
+		TurnSpeed: 40
+	BodyOrientation:
+		QuantizedFacings: 32
+	WithMoveAnimation:
+		MoveSequence: move
+	Cargo:
+		Types: Infantry, Engineer
+		MaxWeight: 5
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeMed
+		EmptyWeapon: D2KUnitExplodeMed
+	Voiced:
+		VoiceSet: D2KVehicleVoice
+	RenderSprites:
+		Image: corrino_apc
+

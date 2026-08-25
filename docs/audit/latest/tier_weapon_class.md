@@ -1,17 +1,17 @@
-# audit_tier_weapon_class — 211 of 1218 classifiable weapons break the TYPES x LEVELS budget
+# audit_tier_weapon_class — 197 of 1238 classifiable weapons break the TYPES x LEVELS budget
 
 LEGAL shapes:
-    726  1 type, 1 level - squarely in tier
-    108  2 types, 2 adjacent levels - hybrid AND between-tier (budget 4)
+    815  1 type, 1 level - squarely in tier
+    111  2 types, 2 adjacent levels - hybrid AND between-tier (budget 4)
      88  2 types, 1 level - lore hybrid
-     85  1 type, 2 ADJACENT levels - between-tier mix
+     27  1 type, 2 ADJACENT levels - between-tier mix
 
-    913  weapons skipped — at least one LEGACY-named main warhead (no Family_Level), so the budget cannot be judged until they are 3-way split
+    906  weapons skipped — at least one LEGACY-named main warhead (no Family_Level), so the budget cannot be judged until they are 3-way split
 
 VIOLATIONS by shape:
-    123  3 LEVELS
-     43  NON-ADJACENT levels
+    117  3 LEVELS
      40  3 TYPES
+     35  NON-ADJACENT levels
       5  4 TYPES
 
 | weapon | problem | main warheads |
@@ -53,11 +53,11 @@ VIOLATIONS by shape:
 | D2K_155mm | 3 LEVELS (Heavy+Light+Medium) - max is 2 | CannonHE_Medium, Concussion_Medium, Demolition_Heavy, Demolition_Light |
 | D2K_155mm3 | 3 LEVELS (Heavy+Light+Medium) - max is 2 | Concussion_Medium, Demolition_Heavy, Demolition_Light |
 | D2K_155mm_turret | 3 LEVELS (Heavy+Light+Medium) - max is 2 | CannonHE_Medium, Concussion_Medium, Demolition_Heavy, Demolition_Light |
-| D2K_APC_Rocket | 3 LEVELS (Heavy+Light+Medium) - max is 2 | MissileAP_Heavy, MissileAP_Light, MissileAP_Medium |
-| D2K_APC_Rocket_AA | 3 LEVELS (Heavy+Light+Medium) - max is 2 | MissileAP_Heavy, MissileAP_Light, MissileAP_Medium |
 | D2K_Rocket_Trooper | 3 LEVELS (Heavy+Light+Medium) - max is 2 | MissileAP_Heavy, MissileAP_Light, MissileAP_Medium |
+| D2K_Rocket_Trooper1 | 3 LEVELS (Heavy+Light+Medium) - max is 2 | Flak_Medium, MissileAP_Heavy, MissileAP_Light |
+| D2K_Rocket_Trooper2 | 3 LEVELS (Heavy+Light+Medium) - max is 2 | CannonHE_Medium, Demolition_Light, Railgun_Heavy |
 
-_(171 more)_
+_(157 more)_
 
-WARN 211 budget violations (ratchet 218)
+WARN 197 budget violations (ratchet 218)
 Lower `TIER_BASELINE` as weapons are brought onto the law; never raise it.

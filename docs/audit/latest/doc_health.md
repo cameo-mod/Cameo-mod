@@ -1,6 +1,6 @@
 # audit_doc_health — is the documentation structurally sound?
 
-Documents scanned: **212**
+Documents scanned: **213**
 
 `audit_doc_claims.py` checks whether the NUMBERS are still true. This checks whether the documents themselves are intact.
 
@@ -18,11 +18,11 @@ Documents scanned: **212**
 
 ## D1 — Control characters (6)
 
-- `DEVELOPMENT_LOG.md`:2940 — control character 0x8
-- `DEVELOPMENT_LOG.md`:2950 — control character 0xc
-- `DEVELOPMENT_LOG.md`:2951 — control character 0x7
-- `DEVELOPMENT_LOG.md`:2952 — control character 0x7
-- `DEVELOPMENT_LOG.md`:2953 — control character 0xb
+- `DEVELOPMENT_LOG.md`:3391 — control character 0x8
+- `DEVELOPMENT_LOG.md`:3401 — control character 0xc
+- `DEVELOPMENT_LOG.md`:3402 — control character 0x7
+- `DEVELOPMENT_LOG.md`:3403 — control character 0x7
+- `DEVELOPMENT_LOG.md`:3404 — control character 0xb
 
 
 ## D2 — Mojibake (0)

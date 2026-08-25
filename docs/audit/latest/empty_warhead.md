@@ -1,3 +1,3 @@
-live files: 38  |  nodes: 2787  |  concrete weapons scanned
+live files: 40  |  nodes: 2800  |  concrete weapons scanned
 EMPTY-TYPE warheads (would NRE at CreateBasic): 0
 

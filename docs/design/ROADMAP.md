@@ -2182,13 +2182,13 @@ types, creating a unified wall+turret defense system across the mod.
 - [x] Boot-gate passed (menu in 60s, 0 new exceptions).
 - [ ] Final `utility.cmd cameo --check-yaml` clean run (advisory lint remaining).
 
-### Phase 3 — Corrino (Devin-Cyrus, after WC2 hero blocker)
+### Phase 3 — Corrino (Devin-Cyrus, then Devin-Aurora) — COMPLETE as of `af3ff5f9d`
 - [x] Create `ContentPacks/D2k/Corrino/` skeleton (content.yaml, all yaml files, translations, mod.yaml include).
-- [ ] Theme: imperial Sardaukars, elite heavy infantry, uparmored harvesters, Death Hand support power.
-- [ ] Add `StartingUnits@corrino` once the full roster is in place (Ixian `faction.yaml` already references `corrino_mobileconstructionvehicle` and `corrino_sardaukar_bazooka`).
-- [ ] Boot-gate + `utility.cmd cameo --check-yaml`.
+- [x] Theme: imperial Sardaukars, elite heavy infantry, uparmored harvesters, Death Hand support power.
+- [x] Add `StartingUnits@corrino` once the full roster is in place (Ixian `faction.yaml` already references `corrino_mobileconstructionvehicle` and `corrino_sardaukar_bazooka`).
+- [x] Boot-gate + `utility.cmd cameo --check-yaml`.
 
-### Phase 4 — Shared/global pass (Devin-Blaze + Devin-Echo)
+### Phase 4 — Shared/global pass (Devin-Blaze + Devin-Echo) — IN PROGRESS
 - [ ] Add shared D2k templates, fix cross-faction prerequisites, walls/turrets/superweapons/promotions.
 - [ ] Remove dead legacy blocks from `mods/cameo/weapons/d2k.yaml` and `mods/cameo/rules/d2k.yaml` once their content has moved.
 - [ ] Run `find_empty_warhead.py`, `review_resolve_diff`, `audit_warhead_split`, `extract_stats --check`, and the full `tools/audit/run_all.py` suite.

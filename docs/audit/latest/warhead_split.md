@@ -1,9 +1,9 @@
 # Warhead-split guard (multi-warhead over-damage)
 
 
-## FAIL 1 — broadcast fingerprint / every MAIN identical (902 vs baseline 902)
+## FAIL 1 — broadcast fingerprint / every MAIN identical (824 vs baseline 826)
 
-_at or below baseline_ — pre-existing **W24** debt (902 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
+_at or below baseline_ — pre-existing **W24** debt (824 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
 
 | weapon | mains | per_warhead | total |
 |---|---|---|---|
@@ -19,7 +19,6 @@ _at or below baseline_ — pre-existing **W24** debt (902 weapons), not a regres
 | 155mmBastionCryo | 3 | 10000 | 30000 |
 | 155mmCryo | 3 | 10000 | 30000 |
 | 8Inch | 2 | 40000 | 80000 |
-| ACV_Machinegun | 2 | 2000 | 4000 |
 | APCGun | 2 | 2000 | 4000 |
 | APCGunAllies | 2 | 2000 | 4000 |
 | APCGunAllies_AA | 2 | 2000 | 4000 |
@@ -47,9 +46,10 @@ _at or below baseline_ — pre-existing **W24** debt (902 weapons), not a regres
 | AsianHarbingerPlasma | 8 | 2000 | 16000 |
 | AsianHowitzerCannon | 2 | 20000 | 40000 |
 | AsianHowitzerCannon_elite | 2 | 20000 | 40000 |
+| AsianHowitzerSplash | 2 | 20000 | 40000 |
 
 
-_... and 862 more._
+_... and 784 more._
 
 
 ## FAIL 2 — FriendlyFire louder than the shot (0)
@@ -57,7 +57,7 @@ _... and 862 more._
 None. ✅
 
 
-## Review — high uniform stacks (informational, 232)
+## Review — high uniform stacks (informational, 228)
 
 Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (not flattening residue).
 
@@ -115,8 +115,6 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | D2K_155mm2 | 4 | 12000 | 48000 |
 | D2K_155mm3 | 3 | 8000 | 24000 |
 | D2K_155mm_turret | 4 | 12000 | 48000 |
-| D2K_APC_Rocket | 3 | 8000 | 24000 |
-| D2K_APC_Rocket_AA | 3 | 8000 | 24000 |
 | D2K_Rocket_Trooper | 3 | 8000 | 24000 |
 | D2K_Rocket_Trooper1 | 3 | 8000 | 24000 |
 | D2K_Rocket_Trooper2 | 3 | 8000 | 24000 |
@@ -183,4 +181,6 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | MigMissiles_tesla_elite | 4 | 8000 | 32000 |
 | MissileSoldierWeapon | 5 | 10000 | 50000 |
 | MonsterTankTuskTesla | 4 | 26750 | 107000 |
+| MortarTeamArtilleryShell | 4 | 20000 | 80000 |
+| MutaliskSpore | 4 | 8000 | 32000 |
 

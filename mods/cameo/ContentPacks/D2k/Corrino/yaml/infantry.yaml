@@ -120,3 +120,43 @@ corrino_engineer:
 		Image: engineer
 	Voiced:
 		VoiceSet: D2KInfantryVoice
+
+corrino_trooper:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^RocketTrooperInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiAir: ^PrioritizeAir
+	Tooltip:
+		Name: Corrino Trooper
+	Valued:
+		Cost: 200
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Infantry, RAInfantry
+		Description: Imperial anti-tank trooper armed with rockets.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		IconPalette: d2kunit
+		Prerequisites: ~corrino_barracks
+	Health:
+		HP: 40000
+	Mobile:
+		Speed: 42
+	Armament@PRIMARY:
+		Weapon: D2K_Rocket_Trooper
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: D2K_Rocket_Trooper
+		MuzzleSequence: garrison-muzzle
+		MuzzlePalette: d2keffect
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	RenderSprites:
+		Image: trooper
+	Voiced:
+		VoiceSet: D2KInfantryVoice
+

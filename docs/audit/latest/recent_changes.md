@@ -1,19 +1,27 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **382**, files touched: **10530**
+Commits reviewed: **384**, files touched: **10564**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
-| R1 | balance yaml edited without the ledger | 12 | yes |
+| R1 | balance yaml edited without the ledger | 20 | yes |
 | R2 | audit script never run by run_all.sh | 3 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 13 | partly |
-| R4 | engine/mod.config change (needs boot gate) | 8 | no |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 12 | partly |
+| R4 | engine/mod.config change (needs boot gate) | 6 | no |
 
 
-## R1 — hand-edited balance numbers (12)
+## R1 — hand-edited balance numbers (20)
 
 | commit | date | subject | fields |
 |---|---|---|---|
+| b5e439cb | 2026-08-25 | W24 TiberianDawn/GDI bullet collapses + Ordos bu | Damage |
+| d519ceaf | 2026-08-25 | D2k Corrino: corrino_cannon weapon, heavyfactory | ReloadDelay |
+| af3ff5f9 | 2026-08-25 | D2k Corrino pack expansion: infantry, aircraft,  | Cost, HP, Range, Speed |
+| 07135e6f | 2026-08-25 | D2k Corrino pack expansion: buggy vehicle + miss | Cost, Damage, HP, Range, ReloadDelay, Speed |
+| afdaae46 | 2026-08-25 | D2k Harkonnen pack completion: infantry, aircraf | Cost, HP, Range, Speed |
+| f07d8d35 | 2026-08-25 | D2k faction rollout: Atreides completion + Corri | BuildDuration, Cost, HP, Range, ReloadDelay, Speed |
+| d11b9072 | 2026-08-25 | feat(warcraft2): port 4 hero weapon pairs from w | Cost, Damage, HP, Range, ReloadDelay, Speed |
+| 5a74091b | 2026-08-25 | W24 A12: collapse ATMine (RedAlert Shared) onto  | Damage |
 | 71ea9200 | 2026-08-23 | separate AI chrono from chrono reinforcements an | Range, ReloadDelay |
 | c49a8f20 | 2026-08-23 | Add drop pods to the dropship bay and rework scr | Range, Speed |
 | 924e4f68 | 2026-08-23 | Add the dropship bay | BuildDuration, Cost, HP, Speed |
@@ -37,10 +45,11 @@ Commits reviewed: **382**, files touched: **10530**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (13)
+## R3 — commits without provenance (12)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| ccace5a5 | 2026-08-25 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 36ee102c | 2026-08-24 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | 75238eb3 | 2026-08-24 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | 5f0f2828 | 2026-08-24 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
@@ -52,11 +61,9 @@ Commits reviewed: **382**, files touched: **10530**
 | 7800eaab | 2026-08-17 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | 519105d4 | 2026-08-16 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | e62ac4ea | 2026-08-16 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
-| 988a7580 | 2026-08-11 | Devin AI | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
-| 1d5d5e55 | 2026-08-11 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 
 
-## R4 — engine/config changes to re-verify (8)
+## R4 — engine/config changes to re-verify (6)
 
 | commit | date | note |
 |---|---|---|
@@ -66,29 +73,27 @@ Commits reviewed: **382**, files touched: **10530**
 | a74638de | 2026-08-16 | mod.config changed (rebuild + boot gate required) |
 | 41f2870b | 2026-08-16 | mod.config changed (rebuild + boot gate required) |
 | d6e8712c | 2026-08-15 | mod.config changed (rebuild + boot gate required) |
-| 988a7580 | 2026-08-11 | mod.config changed (rebuild + boot gate required) |
-| 1d5d5e55 | 2026-08-11 | mod.config changed (rebuild + boot gate required) |
 
 
 ## R5 — most-churned files (re-read these first)
 
 | file | commits touching it |
 |---|---|
-| docs/design/BALANCE_PROGRAM_PLAN.md | 115 |
-| mods/cameo/weapons/weapons.yaml | 61 |
-| DEVELOPMENT_LOG.md | 60 |
-| docs/balance/derived/redalert_soviets.json | 54 |
-| tools/balance/gen_weapon_template.py | 48 |
-| docs/design/ROADMAP.md | 45 |
-| docs/balance/derived/tiberiansun_forgotten.json | 41 |
+| docs/design/BALANCE_PROGRAM_PLAN.md | 120 |
+| DEVELOPMENT_LOG.md | 75 |
+| mods/cameo/weapons/weapons.yaml | 59 |
+| docs/balance/derived/redalert_soviets.json | 55 |
+| tools/balance/gen_weapon_template.py | 46 |
+| docs/design/ROADMAP.md | 44 |
+| docs/audit/doc_claims.yaml | 42 |
+| docs/balance/derived/tiberiansun_forgotten.json | 42 |
+| docs/balance/derived/tiberiansun_nod.json | 42 |
+| docs/balance/derived/redalert2mod_futuretech.json | 41 |
 | docs/balance/derived/d2k_ixian.json | 40 |
 | docs/balance/derived/redalert2mod_consortium.json | 40 |
-| docs/balance/derived/redalert2mod_futuretech.json | 40 |
 | docs/balance/derived/tiberiandawn_nod.json | 40 |
+| docs/audit/SUMMARY.md | 39 |
 | docs/balance/derived/warcraft2_humans.json | 39 |
-| docs/balance/derived/shared_redalert.json | 38 |
-| docs/balance/derived/starcraft_protoss.json | 38 |
-| docs/balance/derived/tiberiansun_nod.json | 38 |
 
 
 ## Reviewer checklist (not machine-checkable)
@@ -102,10 +107,10 @@ Commits reviewed: **382**, files touched: **10530**
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 11 R1 and 0 R3 of 12/13 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 19 R1 and 0 R3 of 20/12 findings are in scope; the rest predate the gate.
 
 
 ## FAIL
 
-- 11 R1, 3 R2, 0 R3 blocking finding(s)
+- 19 R1, 3 R2, 0 R3 blocking finding(s)
 

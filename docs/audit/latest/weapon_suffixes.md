@@ -1,6 +1,6 @@
 # Weapon suffix audit (DESIGN.md §1)
 
-X1 elite weapons not ending _elite: **25**
+X1 elite weapons not ending _elite: **28**
 X2 EMP weapons not ending _EMP: **10**
 X3 AA weapons not ending _AA: **8**
 X4 deprecated E suffix (informational): **2**
@@ -9,6 +9,9 @@ X5 suffix ordering violations: **0**
 ## X1 — Elite weapons not following _elite convention
 | File | Line | Actor | Trait | Weapon |
 |---|---|---|---|---|
+| ContentPacks/D2k/Corrino/yaml/infantry.yaml | 35 | corrino_sardaukar_bazooka | Armament@ELITE | D2K_TowerMissile |
+| ContentPacks/D2k/Corrino/yaml/infantry.yaml | 45 | corrino_sardaukar_bazooka | Armament@GARRISONEDELITE | D2K_TowerMissile |
+| ContentPacks/D2k/Harkonnen/yaml/infantry.yaml | 139 | harkonnen_sardaukar | Armament@ELITE | D2K_TowerMissile |
 | ContentPacks/RedAlert2/Shared/yaml/misc.yaml | 2284 | ra2_c_ifv | Armament@elite | RA2GattlingMG2 |
 | ContentPacks/RedAlert2/Shared/yaml/misc.yaml | 2302 | ra2_c_ifv | Armament@eliteAA | RA2GattlingMG2_AA |
 | ContentPacks/RedAlert2/Shared/yaml/misc.yaml | 2362 | ra2_c_hum | Armament@elite | RA2GattlingMG2 |
@@ -52,12 +55,12 @@ X5 suffix ordering violations: **0**
 ## X3 — AA-only weapons not following _AA convention
 | File | Line | Weapon | ValidTargets |
 |---|---|---|---|
-| ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 358 | BallistaSingleShotAir | Air |
-| ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 366 | BallistaSingleShotAirEnergized | Air |
+| ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 355 | BallistaSingleShotAir | Air |
+| ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 363 | BallistaSingleShotAirEnergized | Air |
 | ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 977 | LaserBuggy2_AAInferno | Air |
 | ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml | 983 | LaserBuggy2_AABurning | Air |
-| ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 920 | CabalLaserBoatLaserAA | Air |
-| ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1245 | CabalManticoreMissilesAA | Air |
+| ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 914 | CabalLaserBoatLaserAA | Air |
+| ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 1239 | CabalManticoreMissilesAA | Air |
 | ContentPacks/TiberianSun/GDI/yaml/weapons.yaml | 568 | TSMammothTusk2 | Air |
 | weapons/darkreign.yaml | 404 | DRBionWeaponAA | Air |
 

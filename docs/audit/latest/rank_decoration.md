@@ -1,6 +1,6 @@
 # Rank decoration audit
 
-## Actor decoration issues: **52**
+## Actor decoration issues: **60**
 
 | File | Line | Actor | Issue | Found |
 |---|---|---|---|---|
@@ -21,6 +21,10 @@
 | ContentPacks/Warcraft2/Humans/yaml/infantry.yaml | 404 | wc2_humans_mortarteam | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Humans/yaml/infantry.yaml | 728 | wc2_humans_highelfpriest | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Humans/yaml/infantry.yaml | 842 | wc2_humans_highelfsorceress | TD actor missing RankDecoration | ? |
+| ContentPacks/Warcraft2/Humans/yaml/infantry.yaml | 964 | wc2_humans_alleria | TD actor missing RankDecoration | ? |
+| ContentPacks/Warcraft2/Humans/yaml/infantry.yaml | 1008 | wc2_humans_alleria_elite | TD actor missing RankDecoration | ? |
+| ContentPacks/Warcraft2/Humans/yaml/infantry.yaml | 1054 | wc2_humans_danath | TD actor missing RankDecoration | ? |
+| ContentPacks/Warcraft2/Humans/yaml/infantry.yaml | 1091 | wc2_humans_danath_elite | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml | 73 | wc2_humans_warcraft3knight | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml | 117 | wc2_humans_ballista | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml | 164 | wc2_humans_siegeengine | TD actor missing RankDecoration | ? |
@@ -32,6 +36,10 @@
 | ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml | 160 | wc2_orcs_trollheadhunter | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml | 205 | wc2_orcs_kodobeast | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml | 260 | wc2_orcs_ogre | TD actor missing RankDecoration | ? |
+| ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml | 508 | wc2_orcs_hellscream | TD actor missing RankDecoration | ? |
+| ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml | 545 | wc2_orcs_hellscream_elite | TD actor missing RankDecoration | ? |
+| ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml | 583 | wc2_orcs_zuljin | TD actor missing RankDecoration | ? |
+| ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml | 625 | wc2_orcs_zuljin_elite | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Orcs/yaml/templates.yaml | 628 | ^WC2Peasant | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Orcs/yaml/templates.yaml | 641 | ^WC2Demolitioner | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Orcs/yaml/templates.yaml | 660 | ^WC2Mage | TD actor missing RankDecoration | ? |

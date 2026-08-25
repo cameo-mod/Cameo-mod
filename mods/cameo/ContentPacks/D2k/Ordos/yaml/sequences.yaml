@@ -1677,7 +1677,7 @@ ordos_upgrade_heavycombattankrockets:
 ordos_laserturret:
 	Defaults:
 		Scale: 1
-		Offset: 0,-16
+		Offset: -2,0
 	invisible:
 		Filename: ordos_lasertur.png
 		Start: 0
@@ -1697,7 +1697,7 @@ ordos_laserturret:
 	turret:
 		Filename: ordos_lasertur.png
 		Start: 16
-		Facings: 32
+		Facings: 64
 	crumble-overlay:
 		Filename: DATA.R16
 		Scale: 1.5
@@ -1708,12 +1708,13 @@ ordos_laserturret:
 		Tick: 200
 		ZOffset: 1024
 	icon:
+		Offset: 0,0
 		Filename: ordos_lasertur_icon.png
 
 ordos_chemturret:
 	Defaults:
 		Scale: 1
-		Offset: 0,-16
+		Offset: -2,0
 	invisible:
 		Filename: ordos_chemtur.png
 		Start: 0
@@ -1733,7 +1734,7 @@ ordos_chemturret:
 	turret:
 		Filename: ordos_chemtur.png
 		Start: 16
-		Facings: 32
+		Facings: 64
 	crumble-overlay:
 		Filename: DATA.R16
 		Scale: 1.5
@@ -1744,4 +1745,5 @@ ordos_chemturret:
 		Tick: 200
 		ZOffset: 1024
 	icon:
+		Offset: 0,0
 		Filename: ordos_chemtur_icon.png
