@@ -3744,14 +3744,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -3759,19 +3752,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5800",
       "reloaddelay": "60",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "CabalCyborgChaingun",
@@ -3781,14 +3772,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
+        "damage": "20000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -3796,19 +3780,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5800",
       "reloaddelay": "60",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "CabalCyborgChaingun",
@@ -3889,14 +3871,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -3904,19 +3879,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6200",
       "reloaddelay": "45",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSDevoutChainguns",
@@ -3928,14 +3901,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "12000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -3943,19 +3909,17 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6200",
       "reloaddelay": "45",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "TSDevoutChainguns",

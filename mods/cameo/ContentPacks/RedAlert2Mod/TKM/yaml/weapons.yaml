@@ -60,7 +60,6 @@ tkmjuggap:
 		ValidTargets: Ground, Water
 		Damage: 6000
 tkmbunkmg:
-	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^RA2Chaingun
 	ReloadDelay: 41
 	Range: 7496
@@ -68,9 +67,7 @@ tkmbunkmg:
 	BurstDelays: 3
 	Report: mgun11.aud
 	Warhead@Bullet_Medium:
-		Damage: 2000
-	Warhead@Bullet_Light:
-		Damage: 2000
+		Damage: 4000
 HueyGun:
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1116,7 +1113,6 @@ tkmabramscannon:
 		PercentageScale: 5000
 		Damage: 20000
 tkmquadcannonmg:
-	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^RA2Chaingun
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 5000
@@ -1131,12 +1127,9 @@ tkmquadcannonmg:
 		ContrailLength: 8
 		Speed: 10000
 		Width: 100
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 HeavyAATankCannontkm:
 	Inherits: ^LightMissile
 	Inherits@2: ^FlakWeapon

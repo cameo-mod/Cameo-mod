@@ -1133,14 +1133,7 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -1148,18 +1141,16 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7496",
       "reloaddelay": "41",
       "requires": "!td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Bullet_Light",
        "^RA2Chaingun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "tkmbunkmg",

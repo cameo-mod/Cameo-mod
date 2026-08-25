@@ -858,8 +858,7 @@ d2kChainGun_upgrade:
 	Warhead@Laser_Heavy:
 		Damage: 4000
 HMGstealth:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 33
@@ -868,12 +867,9 @@ HMGstealth:
 	Range: 4857
 	StartBurstReport: hmgo1.wav, hmgo2.wav
 	ValidTargets: Ground, Water, Air
-	Warhead@Bullet_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 ordos_autogunturret:
 	Inherits: ^Warhead_Bullet_Light
 	Inherits@2: ^Warhead_Bullet_Medium

@@ -1,5 +1,34 @@
 # Development Log
 
+## 2026-08-25 — W24 A13: collapse TKM + AsianAlliance bullet weapons onto Bullet_Medium
+
+- Cluster across two files in set 1 (RedAlert2Mod):
+  - `mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml`:
+    `tkmbunkmg`, `tkmquadcannonmg` (no children).
+  - `mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml`:
+    `asianalliance_fanatic_shotgun` + children `_elite`, `_upgrade` (only Burst overrides).
+- Each carried two bullet damage mains (`Bullet_Light` + `Bullet_Medium`).
+  Collapsed onto one `^Warhead_Bullet_Medium` / `^RA2Chaingun` main at the summed
+  per-shot damage (2000 + 2000 -> 4000 each).
+- TKM weapons used `Inherits: ^Warhead_Bullet_Light` + `Inherits@2: ^RA2Chaingun`;
+  dropped the Bullet_Light inherit and the `Warhead@Bullet_Light` block, kept
+  `^RA2Chaingun` (already a 3-way split: `^Warhead_Bullet_Medium` + projectile + effect).
+- AsianAlliance used `Inherits@wh: ^Warhead_Bullet_Light` + `Inherits@wh2: ^Warhead_Bullet_Medium`;
+  dropped the Bullet_Light inherit and warhead, repointed wh2 to wh.
+- `tkmquadcannonmg` preserves its local `Projectile: Bullet` override (50CAL image,
+  contrail colors, Speed 10000, Width 100).
+- `asianalliance_fanatic_shotgun` preserves its local `Projectile: Bullet` Inaccuracy 800.
+- Verification: `review_resolve_diff` OK for all 5 (only damage-multiset change,
+  effects/projectile/concrete preserved); `find_empty_warhead` 0;
+  `find_orphan_old_keys` 0 real; `audit_warhead_split` 889 vs 894 (baseline
+  lowered 894 -> 889); `audit_doc_claims` 19/19 green; `extract_stats --check`
+  0 drifted (my factions); `multi_main_fired_weapons` 879 -> 875.
+- Co-updated `docs/audit/doc_claims.yaml`, `BALANCE_PROGRAM_PLAN.md`, `HANDOFF.md`,
+  `SUMMARY.md`, `redalert2mod_tkm` + `redalert2mod_asianalliance` ledgers + derived,
+  and `tools/audit/audit_warhead_split.py` baseline.
+- Did NOT touch the other Devin's uncommitted `tiberiansun.yaml` or `tiberiansun_nod`
+  ledger WIP.
+
 ## 2026-08-25 — W24 A11: collapse three Forgotten bullet weapons onto Bullet_Medium
 
 - Cluster in `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml`:
@@ -3276,6 +3305,25 @@ per weapon, and commit with the full doc/ledger co-update.
   into one `^DamagingExplosionHE` `Demolition_Light` 110k main, swapped projectile to
   `^Projectile_Missile_Heavy`, preserved mine effects/concrete). Verification, boot-gate,
   and doc-claim co-update passed; to be committed.
+- **Devin (this session, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml`
+  and `mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml` (item 1):
+  W24 bullet collapse for `tkmbunkmg`, `tkmquadcannonmg` (TKM, no children) and
+  `asianalliance_fanatic_shotgun` + `_elite` + `_upgrade` (AsianAlliance). Not in any
+  open IDE tab; not in the locked list; not claimed by another agent.
+- **(completed by this session, 2026-08-25)** — `mods/cameo/weapons/tiberiansun.yaml`:
+  Family correction for `TSLaser90mm` / `TSLaser90mmDep`: main warhead now contains
+  `Damage: 12600`, local `DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath,
+  FireDeath, Incendiary`, and `ValidTargets: Ground, Water`; kept `-PhysicalStateName`
+  and `-PhysicalStateScale` markers so the laser family template does not turn the
+  weapon into a metered physical-state weapon. Removed the off-grid `PercentageScale: 9524`
+  override so `^Warhead_Laser_Heavy`'s `PercentageScale: 10000` applies. Boot-gated; no new
+  exceptions.
+- **(integrated this session, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert2Mod/TKM/`,
+  `RedAlert2Mod/AsianAlliance/`, `D2k/Ordos/`, and `TiberianSun/CABAL/`:
+  integrated the uncommitted bullet-light collapse work from the other Devin agent
+  (`tkmbunkmg`, `tkmquadcannonmg`, `asianalliance_fanatic_shotgun`, `HMGstealth`,
+  `CabalCyborgChaingun`, `TSDevoutChainguns`) and co-updated `multi_main_fired_weapons`
+  875 → 872 plus all dependent docs. To be committed after boot-gate.
 
 ### Mandatory pre-edit check for every agent
 

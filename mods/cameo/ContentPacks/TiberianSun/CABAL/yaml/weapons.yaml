@@ -428,25 +428,21 @@ CabalBerserkerBlades:
 		ValidTargets: Ground, Water
 
 CabalCyborgChaingun:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	Report: cygun1.aud
 	ReloadDelay: 60
 	Range: 5800
-	Warhead@Bullet_Light:
-		Damage: 10000
 	Warhead@Bullet_Medium:
-		Damage: 10000
+		Damage: 20000
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ImpactSounds: methit1.aud
 		ValidTargets: Ground, Water, Air
 
 TSDevoutChainguns:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	Report: cygun1.aud
@@ -454,10 +450,8 @@ TSDevoutChainguns:
 	Burst: 2
 	BurstDelays: 3
 	Range: 6200
-	Warhead@Bullet_Light:
-		Damage: 12000
 	Warhead@Bullet_Medium:
-		Damage: 12000
+		Damage: 24000
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
 		ImpactSounds: methit1.aud

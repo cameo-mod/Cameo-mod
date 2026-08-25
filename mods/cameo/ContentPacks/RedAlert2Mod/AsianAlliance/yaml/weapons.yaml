@@ -2052,8 +2052,7 @@ AsianKamikazeImpactTargeting:
 # not double damage) @ 250% cost = 500. base burst 10; upgrade/elite tiers
 # ride the upgrade pass (pair law: all three dedicated).
 asianalliance_fanatic_shotgun:
-	Inherits@wh: ^Warhead_Bullet_Light
-	Inherits@wh2: ^Warhead_Bullet_Medium
+	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
 	Inherits@fx: ^Effect_Bullet_Medium
 	ReloadDelay: 70
@@ -2065,10 +2064,8 @@ asianalliance_fanatic_shotgun:
 	SoundVolume: 0.1
 	Projectile: Bullet
 		Inaccuracy: 800
-	Warhead@Bullet_Light:
-		Damage: 2000
 	Warhead@Bullet_Medium:
-		Damage: 2000
+		Damage: 4000
 asianalliance_fanatic_shotgun_upgrade:
 	Inherits: asianalliance_fanatic_shotgun
 	Burst: 13

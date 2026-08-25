@@ -4741,14 +4741,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -4756,20 +4749,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "70",
       "requires": "!rank-elite && !asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "asianalliance_fanatic_shotgun",
@@ -4780,14 +4771,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -4795,7 +4779,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "70",
@@ -4805,7 +4789,6 @@
        "asianalliance_fanatic_shotgun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "asianalliance_fanatic_shotgun_upgrade",
@@ -4816,14 +4799,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -4831,7 +4807,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3500",
       "reloaddelay": "70",
@@ -4841,7 +4817,6 @@
        "asianalliance_fanatic_shotgun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "asianalliance_fanatic_shotgun_elite",
@@ -4853,14 +4828,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -4868,20 +4836,18 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "70",
       "requires": "!rank-elite && !asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Bullet_Medium",
        "^Effect_Bullet_Medium"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "asianalliance_fanatic_shotgun",
@@ -4893,14 +4859,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -4908,7 +4867,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "70",
@@ -4918,7 +4877,6 @@
        "asianalliance_fanatic_shotgun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "asianalliance_fanatic_shotgun_upgrade",
@@ -4930,14 +4888,7 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -4945,7 +4896,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "3500",
       "reloaddelay": "70",
@@ -4955,7 +4906,6 @@
        "asianalliance_fanatic_shotgun"
       ],
       "warheads": [
-       "^Warhead_Bullet_Light",
        "^Warhead_Bullet_Medium"
       ],
       "weapon": "asianalliance_fanatic_shotgun_elite",
