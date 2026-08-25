@@ -144,8 +144,7 @@ HarrierMissiles_elite:
 		ContrailEndColor: FFFFFF
 
 BlackEagleMissiles:
-	Inherits@wh: ^Warhead_Demolition_Light
-	Inherits@wh2: ^Warhead_Demolition_Heavy
+	Inherits@wh: ^Warhead_Demolition_Heavy
 	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_Demolition_Heavy
 	Inherits@3: ^RA2MediumMissile
@@ -169,11 +168,8 @@ BlackEagleMissiles:
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Acceleration: 10
-	Warhead@Demolition_Light:
-		Damage: 16000
-		ValidTargets: Ground, Water, Air
 	Warhead@Demolition_Heavy:
-		Damage: 16000
+		Damage: 32000
 		ValidTargets: Ground, Water, Air
 	Warhead@MissileAP_Medium:
 		Damage: 16000

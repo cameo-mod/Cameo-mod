@@ -1221,17 +1221,13 @@ HovercraftPlasmaCannon:
 	Projectile: Missile
 		Speed: 974
 		ContrailStartColor: 8844FFAA
-	Warhead@Bullet_Light: AreaDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1397,7 +1393,6 @@ Type89PlasmaCannon:
 
 Type97Cannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy
-	Inherits@wh2: ^Warhead_CannonHE_Medium
 	Inherits@proj: ^Projectile_Shell_Heavy
 	Inherits@fx: ^Effect_CannonHE_Heavy
 	ReloadDelay: 56
@@ -1406,9 +1401,7 @@ Type97Cannon:
 	Projectile: Bullet
 		Speed: 569
 	Warhead@CannonHE_Heavy:
-		Damage: 6000
-	Warhead@CannonHE_Medium:
-		Damage: 6000
+		Damage: 12000
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: xplosml2.aud

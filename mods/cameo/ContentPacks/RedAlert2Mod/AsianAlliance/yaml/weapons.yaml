@@ -993,9 +993,6 @@ AsianSinglePlasma:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@CannonHE_Medium:
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -1012,7 +1009,7 @@ AsianSinglePlasma:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@CannonHE_Heavy:
-		Damage: 2000
+		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
@@ -1552,10 +1549,7 @@ AsianPelicanMissile:
 		Damage: 4000
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 8000
 AsianPelicanMissile_elite:
 	Inherits: AsianPelicanMissile
 	Range: 7100
@@ -1671,15 +1665,10 @@ AsianSubmarineBomb:
 	Warhead@Demolition_Heavy:
 		Spread: 2500
 		Falloff: 100, 75, 50, 25, 0
-		Damage: 50000
+		Damage: 100000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		ValidTargets: Ground, Water, Ship, Submarine, Underwater
-	Warhead@Demolition_Light: AreaDamage
-		Spread: 2500
-		Falloff: 100, 75, 50, 25, 0
-		Damage: 50000
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-		ValidTargets: Ground, Water, Ship, Submarine, Underwater
+	-Warhead@Demolition_Light:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: expnew09.wav
 
