@@ -1,5 +1,39 @@
 # Development Log
 
+## Devin AI — W24 batch: 48 same-family equal-damage collapses across 19 clean files (2026-08-25)
+
+**Identity:** Devin AI (GLM-5.2 High), W24 weapons pass.
+
+**What and why:**
+- Used the resolved-weapon classifier (`rs.resolve_weapon`) to find all same-family multi-main weapons with equal damage across the entire corpus.
+- Filtered out files being actively edited by other agents (Ixian, Ordos, FutureTech, SchwarzerMond, Syndicate, StarCraft/Zerg, rename maps).
+- Applied 48 safe same-family equal-damage collapses (commit `2e605c566`):
+  - TiberianSun/CABAL: CabalReaperMissiles, CabalHeavyReaperMissiles, CabalManticoreMissilesAA (MissileHE)
+  - TiberianSun/GDI: TSZoneHellfireSonic (Sonic)
+  - TiberianDawn/GDI: CommandoRocketLauncher, RocketsHumvee2AMT (Missile)
+  - TiberianDawn/Nod: FireballLauncherBuggy2 (Flame 3-way)
+  - RedAlert2/Shared: IvanBomb, SealBomb, TanyaBomb, RA2HornetMissile (Demolition/CannonHE)
+  - RedAlert2/Soviets: IvanBombAir, RA2vulcan
+  - RedAlert2/Yuri: RA2Chemspray2, RA2LasherToxicMortar_elite
+  - RedAlert/Shared: RAVulcan, JapanSpeedBoatGun, RocketsRA, TigerCannon
+  - StarCraft/Terran: GhostSniperLockdown, SpecterSniperLockdown
+  - StarCraft/Protoss: GladiusCannon
+  - Warcraft2/Humans: wc2ballistaFire
+  - Naxis: NaxShoeRocket, NaxiMissileUboat, NaxPlaneRockets_elite
+  - Consortium: SteelInspectorIonCannonDamage
+  - TKM: VonSniperAP, VonSniperLockdown
+  - Central: IonCannon, PulseMissile, TSBikeMissile, Support_EMP_Bomb, HMG, LMG_upgrade, light_inf_lmg_upgrade, D2K_155mm, D2K_Rocket_Trooper, LatinBuggyRocket, SyndicateFireballLauncher, plymouthStickyDefence
+- Reverted changes to deprecated `mods/cameo/weapons/redalert2.yaml` (not loaded).
+- Applied IvanBomb/SealBomb/TanyaBomb/RA2HornetMissile collapses to the LOADED file (`ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`).
+
+**Verification:**
+- `find_empty_warhead.py` = 0
+- `audit_warhead_split.py` = 716 (lowered baseline 721 -> 716)
+- `audit_doc_claims.py` = all pass (multi_main_fired_weapons 799 matches)
+- Boot-gate: menu reached in ~50s, 0 new exceptions.
+
+**Next:** W24 safe pool nearly exhausted. Remaining candidates are unequal-damage same-family (need analysis) or in user-edited files.
+
 ## Devin-Aurora — W24 batch 4: RedAlert/Japan + RedAlert2/Allies + AsianAlliance (2026-08-25)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max), W24 weapons pass.
