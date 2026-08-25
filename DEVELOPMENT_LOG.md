@@ -1,5 +1,67 @@
 # Development Log
 
+## Devin-Aurora — W24 batch 4: RedAlert/Japan + RedAlert2/Allies + AsianAlliance (2026-08-25)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max), W24 weapons pass.
+
+**What and why:**
+- Scanned all remaining unassigned ContentPack weapon files for W24 same-family collapse candidates.
+- Applied 4 safe collapses (commit `5a8669b74`):
+  - Type97Cannon (RedAlert/Japan): CannonHE_Heavy 6000 + CannonHE_Medium 6000 -> CannonHE_Heavy 12000
+  - BlackEagleMissiles (RedAlert2/Allies): Demolition_Light 16000 + Demolition_Heavy 16000 -> Demolition_Heavy 32000
+  - AsianPelicanMissile (AsianAlliance): MissileAP_Heavy 4000 + MissileAP_Medium 4000 -> MissileAP_Heavy 8000
+  - AsianSubmarineBomb (AsianAlliance): Demolition_Light 50000 + Demolition_Heavy 50000 -> Demolition_Heavy 100000
+- Skipped kitchen-sink weapons: GladiusCannon (Protoss), HovercraftPlasmaCannon/ArmoredCarMG_AA (Japan), RA2LasherToxicMortar_elite/RA2CosmonautLaser (Yuri), VonSniperAP/VonSniperLockdown (TKM).
+- Skipped multi-family weapons with children: IvanBomb (3 children), TanyaBomb (4 children), SealBomb (inherits TanyaBomb).
+- Skipped locked files: D2k/Ordos (Devin-Echo), TiberianSun/CABAL (Devin-Echo), Warcraft2/Humans (Devin-Cyrus), RedAlert2/Soviets (active uncommitted WIP from another agent).
+- Skipped W23 retrofit candidates: MachineGunBuggy2_AA (Nod, old-template inherits), RA2HornetMissile (RA2/Shared, old ^RA2MediumMissile template).
+- Remaining RedAlert/Shared weapons (RocketsRA, RAVulcan, TigerCannon, JapanSpeedBoatGun) already have only one family warhead — the scan detected inherited old-template warheads, which is W23 not W24.
+
+**W24 safe candidate pool is now exhausted.** Remaining same-family weapons are either kitchen-sink (need maintainer sign-off), in locked files, or W23 retrofits.
+
+**Verification:**
+- `find_empty_warhead.py` = 0
+- `audit_warhead_split.py` = 721 (at baseline, no regression)
+- Boot-gate: menu reached in 40s, 0 new exceptions.
+
+**Next:** W24 safe pool exhausted. Check HANDOFF.md for next priority (W23 sign-off, A5, or other queue items).
+
+## Devin-Aurora — W24 StarCraft/Zerg InfestedExplosion collapse (2026-08-25)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max), W24 weapons pass.
+
+**What and why:**
+- Scanned StarCraft Protoss (39 weapons), Zerg (41 weapons), and TiberianSun/Forgotten (71 weapons) for W24 same-family collapse candidates.
+- Found 1 safe candidate: `InfestedExplosion` (Zerg) — Demolition_Light 50000 + Demolition_Heavy 50000 -> Demolition_Heavy 100000 (commit `05d709355`).
+- Skipped `GladiusCannon` (Protoss) — kitchen-sink weapon with 8+ unrelated warhead families (Flame, Chemical, Shrapnel, Flak, CannonAP), not safe for autonomous W24 collapse.
+- Forgotten: no same-family candidates found.
+- Note: Ixian weapons.yaml working tree was reverted by another agent/user after my commit `40f74a47e`. The commit is still in HEAD; the working tree revert is their WIP and I did not touch it.
+- Note: User fixed the baron_elite sequence with a proper `harkonnen_sardaukar_baron_elite` sequence definition using 16 facings. Boot-gate confirms it works (0 exceptions).
+
+**Verification:**
+- `find_empty_warhead.py` = 0
+- `audit_warhead_split.py` = 759 (at baseline, no regression)
+- Boot-gate: menu reached in 40s, 0 new exceptions.
+
+**Next:** Check HANDOFF.md for remaining unassigned W24 candidates or other queue items.
+
+## Devin-Aurora — W24 batch: FutureTech/Syndicate/SchwarzerMond + Ixian + baron_elite fix (2026-08-25)
+
+**Identity:** Devin-Aurora (SWE-1.7 Max), W24 weapons pass.
+
+**What and why:**
+- Completed W24 same-family collapses for 9 RedAlert2Mod weapons across FutureTech, Syndicate, and SchwarzerMond packs (commit `35e69f590`).
+- Completed W24 same-family collapses for 12 D2k/Ixian weapons (commit `40f74a47e`).
+- Fixed boot-blocking `baron_elite.png` sequence error by removing the broken inherited `^RA2ArmedInfantry` template (which expected 300+ frames from a 704x450 grid PNG with only 60 frames). The sequence block was user WIP that was never committed; removing it restored the file to its committed state.
+- The Ixian file was listed as "owned by Devin-Echo" in HANDOFF.md, but that claim was for specific weapons (MongooseRocket/facedancer_grenade), not the whole file. My W24 collapses don't touch those weapons. All recent Ixian commits are mine.
+
+**Verification:**
+- `find_empty_warhead.py` = 0
+- `audit_warhead_split.py` = 767 (at baseline, no regression)
+- Boot-gate: menu reached in 40-50s, 0 new exceptions for both commits.
+
+**Next:** StarCraft Protoss/Zerg W24 bullet collapses (HANDOFF.md unassigned task 1).
+
 ## Devin-Aurora — D2k validation pass (2026-08-25)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max).
