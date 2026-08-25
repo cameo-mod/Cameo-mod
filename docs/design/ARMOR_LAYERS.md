@@ -663,7 +663,7 @@ Measured against `formula.py`, `weapon_efficiency.py` and `target_model.py`.
 | **E1** | ✅ **FIXED 2026-08-17 (both halves).** Weapon side: `armor_weights()` now carries a 17th `Shield` row at its measured damage share, and `weighted_versus` iterates the weights instead of `ARMORS`. Unit side: `extract_stats.survivability()` publishes `effective_hp` for actors that SPAWN with a pool. | ⚠ **The "51% of the roster" figure was wrong** — it counted the 1592 actors carrying `Shielded`, but 1318 of those hold an EMPTY capacity behind `shieldgen >= 1`. Only **58** spawn with a pool, so baseline Shield exposure is **1.432%**, and the weapon-side correction is +0.65% (Bullet) to +3.47% (Tesla), not a repricing. The real hole is the unit side: those 58 carry **+57.8% effective HP at zero cost**. Report: `audit_survivability_pricing.py`. | ~~high~~ **done** |
 | **E2** | `PhysicalState` (heat / cold / corrosion) is priced at zero — `extract_stats` contains **0** references to it. | ⚠ **"~89 live bindings" was wrong by 8×. Measured 2026-08-18: 722 bindings on 453 weapons, of which 367 are actually FIRED, carried by 578 armaments** — roughly a quarter of the damaging roster delivers a status meter for free. It is also TWO mechanisms, not one (see below), and the earlier count saw only part of one. Design work exists, the extractor does not. | **high** |
 | **E3** | `IntegrityScale` is priced at zero. | 1233 actors carry the pool; a disable at 50% HP is worth real money. | medium |
-| **E4** | ✅ **FIXED 2026-08-17 — `K` was not damage-independent.** The `%`-twin's damage is a share of the TARGET's max HP, so it does not scale with the weapon's flat `Damage` — yet `k` folded it in as `share = ref_hp × pct_damage / 100 / flat_total`, putting `flat_total` in a DENOMINATOR. | Not a mis-price of anything shipped: `effective_per_shot = damage_total × k_context` is exact at the current Damage, and `propose_class_rebalance` never routes through K (it sums flat warheads, twins excluded). It was a **documented wrong recipe** — the inversion `Damage_required = target_dps × eff_reload / (burst × FP × K)` was stated in 6 places and is only correct at λ=1. Fix: the affine split `k_flat_context` + `pct_absolute_context`, `required_damage()`, and `dps_floor` in the ledger. Guard: `audit_k_linearity.py`. | ~~high~~ **done** |
+| **E4** | ✅ **CORRECTED 2026-08-25 — percentage damage has two shapes.** Standalone percentage warheads are absolute at the reference HP; folded `PercentageScale` damage derives from the main Damage and is scalable. The first E4 fix recognized only specially named standalone twins and missed most standalone nodes plus every folded hit. | The model now discovers percentage applications by warhead type. `k_flat_context` includes flat, chip and folded damage; `pct_absolute_context`/`dps_floor` contain standalone damage only; folded basis-point rounding is a separate current-shot residual. Full burst cadence also includes every inter-shot delay and the engine default. Guard: `audit_k_linearity.py`; fixtures: `test_percentage_damage_model.py`. | ~~high~~ **done** |
 | **E5** | Upgrades are priced at zero — there is no ΔP report, so a weapon swap is free. | The maintainer has already flagged this; it is the whole upgrade-rebalance prerequisite. | high (deferred by design) |
 | **E6** | Inaccuracy and projectile speed are not priced. | A weapon that misses is worth less than one that does not; `reliability` covers spatial falloff, not aim. | medium |
 | **E7** | `MinRange` is not priced. | A real artillery drawback that costs nothing. | low |
@@ -797,17 +797,17 @@ exposure is zero and they belong to E5 with the conditional shields. Their colum
 pinned to a common mean by construction (§F), so once E5 does price them, a plating changes
 *where* damage lands, not how much on average.
 
-#### E4, as measured and fixed (2026-08-17)
+#### E4, as measured and corrected (2026-08-17; percentage-shape repair 2026-08-25)
 
 Two things had to be separated that the single `k` conflated, and getting the severity right
 mattered as much as the fix:
 
-* **`k` as a MEASUREMENT is sound.** `effective_per_shot = damage_total × k_context`
-  reproduces the truth exactly at the weapon's current Damage, and the identity
-  `k == k_flat + pct_absolute / flat_total` (checked on all 2016 concrete weapons, L2) shows
-  the new split is a decomposition of the published number, not a second opinion. **No
-  shipped price was wrong.** The `_Percentage`-excluding `spread_damage_sum` also keeps the
-  live `propose_class_rebalance` inversion clear of K entirely.
+* **`k` as a MEASUREMENT is sound only when every runtime application is counted.** The
+  corrected identity is `k == k_flat + (pct_absolute + folded_rounding) / damage_total`.
+  `k_flat` contains flat, chip and folded `PercentageScale` damage; `pct_absolute` contains
+  standalone `AreaDamagePercentage` / `HealthPercentageDamage`; `folded_rounding` is the
+  tiny current basis-point residual. `audit_k_linearity` now compares modeled parts against
+  every runtime percentage node by TYPE, not a `_Percentage` naming convention.
 * **`k` as a SHAPE COEFFICIENT was false**, and that is what six documents told the reader
   to invert. Measured on the worst case, `AnthraxCloudLarge` (twin = 75% of output):
 
@@ -822,18 +822,18 @@ mattered as much as the fix:
   The old form is exact **only at λ=1**, its own fixed point — which is exactly why nothing
   caught it: every check that re-derived a weapon's current Damage passed.
 
-**The `%`-twin is a DPS FLOOR.** This fell out of the fix and is a design fact, not a bug: a
-weapon delivers `pct_absolute_context` at `Damage: 0`, so lowering flat Damage can never
-price it below that. 52 weapons have a floor ≥25% of output. `required_damage()` returns
-`None` there instead of a positive number, and `dps_floor` is now published per weapon so the
-balance pass sees the bound before it prescribes an impossible target. To price one of these
-lower, the **twin** must shrink.
+**A standalone percentage warhead is a DPS FLOOR; a folded hit is not.** A weapon delivers
+`pct_absolute_context` from standalone percentage nodes at `Damage: 0`, so lowering flat
+Damage cannot price it below that. `required_damage()` returns `None` there and `dps_floor`
+publishes the bound. Folded `PercentageScale` damage becomes zero with its main Damage and
+therefore stays in `k_flat`; putting it in the floor would create damage the engine does not.
 
-**What this leaves for W18.** W18 rebases the twin's `Versus` to basis points (`×5`,
-`PercentageDenominator: 10000`). That changes the twin's magnitude and therefore every
-`pct_absolute` — but not the SHAPE of the model, because the affine split already puts the
-twin on the correct side of the equation. Re-run `extract_stats` after W18 and the floors
-move; nothing needs re-deriving.
+**Unit handling is per node.** `HealthPercentageDamage` always uses fixed whole-percent
+units; its C# type has no denominator field. Legacy `AreaDamagePercentage` defaults to
+`PercentageDenominator: 100` and may author a different positive denominator, including
+basis points. Folded `AreaDamage.PercentageScale` defaults to denominator 10000 and uses
+the engine's rounded derived units. The shared evaluator reads each form directly; no tag
+spelling or global denominator guess is allowed.
 
 ---
 
