@@ -6079,22 +6079,15 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
         "tag": "MissileHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7320",
       "reloaddelay": "35",
@@ -6102,13 +6095,11 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Medium"
       ],
       "weapon": "CycloneRockets",
       "weapon_class_source": "template"
@@ -6118,22 +6109,15 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 45, 15, 0",
         "spread": "150",
         "tag": "MissileHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 45, 15, 0",
-        "spread": "100",
-        "tag": "MissileHE_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "35",
@@ -6143,8 +6127,7 @@
        "CycloneRockets"
       ],
       "warheads": [
-       "^Warhead_MissileHE_Medium",
-       "^Warhead_MissileHE_Light"
+       "^Warhead_MissileHE_Medium"
       ],
       "weapon": "CycloneRocketsLockOn",
       "weapon_class_source": "template"
@@ -6788,21 +6771,7 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "300",
-        "tag": "Flame_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
         "tag": "Flame_Heavy",
@@ -6810,25 +6779,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5938",
       "reloaddelay": "18",
       "requires": "undeployed",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy",
        "^Effect_Flame_Heavy"
       ],
       "warheads": [
-       "^Warhead_Flame_Light",
-       "^Warhead_Flame_Medium",
        "^Warhead_Flame_Heavy"
       ],
       "weapon": "MatadorFlamer",
-      "weapon_class_source": "illegal_mix"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
