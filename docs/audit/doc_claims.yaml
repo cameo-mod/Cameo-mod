@@ -467,7 +467,7 @@ claims:
                 and any(a.startswith('^Warhead_') for a in ancestors(w))))
 
   - id: unconverted_template_inheritors
-    value: 1125
+    value: 1124
     tolerance: 0
     what: >
       Direct inheritors of the 47 remaining legacy weapon templates (W23's scope).

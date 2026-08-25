@@ -39,7 +39,7 @@ roster, so pricing first means pricing inputs we are about to replace:
 |---|---|
 | W24 — fired weapons with **more than one** damage main | **879 of 1622 = 54.2%** (histogram runs out to 15 mains) |
 | armament slots whose `K` moves when those collapse | **1 547** |
-| fired weapons that reach a `^Warhead_*` family at all | **1248 of 1622 = 76.9%** — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1125 inheritors) |
+| fired weapons that reach a `^Warhead_*` family at all | **1248 of 1622 = 76.9%** — the rest still route through legacy templates (`audit_unconverted_templates`: 45 templates, 1124 inheritors) |
 
 Collapsing N mains into 1 preserves the damage SUM (`formula.spread_damage_sum`) but **not
 `K`** — `K` is share-weighted over each warhead's armor profile, so picking ONE family changes
@@ -1404,7 +1404,7 @@ that that were not converted yet?"*) — `tools/audit/audit_unconverted_template
 inheriting no `^Warhead_*` parent has not been converted, and is simultaneously a live
 violation of "Versus lives ONLY in `^Warhead_*` templates".
 
-**45 unconverted templates, 1125 direct inheritors.** Biggest: `^ShrapnelWeapon` (88) →
+**45 unconverted templates, 1124 direct inheritors.** Biggest: `^ShrapnelWeapon` (88) →
 Concussion · `^Grenade` (84) → Demolition/Concussion · `^FlakWeapon` (78) → Flak ·
 `^MediumChemicalWeapon` (70) · `^MediumMissile` (67) · `^TankDestroyerCannon` (66) → CannonAP ·
 `^MediumFlameWeapon` (64) · `^Chaingun` (59) → Bullet. Every target family already EXISTS, so these are retrofits, not

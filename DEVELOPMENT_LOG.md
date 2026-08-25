@@ -3258,7 +3258,7 @@ per weapon, and commit with the full doc/ledger co-update.
 
 5. **TSLaser90mm fix + TiberianSun continuation** (this session, Devin): resolve the
    A10 family choice (laser vs cannon) and finish any remaining TiberianSun pure
-   single-family candidates once the path is clear.
+   single-family candidates once the path is clear. **COMPLETED** (see A10/A11 commits).
 
 ### Active claims
 
@@ -3266,6 +3266,16 @@ per weapon, and commit with the full doc/ledger co-update.
   W24 bullet collapse for `TSMutVulcanTurret`, `TSBowlerCannon`, `TSSergGun`
   (Bullet_Light + Bullet_Medium → one Bullet_Medium at the summed damage; no children).
   Verification and boot-gate passed; committed.
+- **Devin (this session, 2026-08-25)** — `mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml` and
+  `mods/cameo/ContentPacks/D2k/*/yaml/weapons.yaml` (item 3):
+  W24 multi-main collapse for `MongooseRocket`, `facedancer_grenade`,
+  `CabalArtilleryWalkerShellUpgraded`, `CabalMothershipRockets`, and any D2k candidates
+  found in `phase_b_survey`. Not in any open IDE tab.
+- **(completed by this session, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml`:
+  W24 collapse for `ATMine` (removed legacy `^HeavyMissile`, merged 60k Demolition + 50k HeavyMissile
+  into one `^DamagingExplosionHE` `Demolition_Light` 110k main, swapped projectile to
+  `^Projectile_Missile_Heavy`, preserved mine effects/concrete). Verification, boot-gate,
+  and doc-claim co-update passed; to be committed.
 
 ### Mandatory pre-edit check for every agent
 

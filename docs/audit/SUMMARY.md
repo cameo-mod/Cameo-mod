@@ -122,7 +122,7 @@ its §0a.
 |---|---|--:|
 | W24 | fired weapons carrying more than one damage main | **879** |
 | W23 | fired weapons reaching a `^Warhead_*` family | **1248** |
-| W23 | direct inheritors of the legacy weapon templates | **1125** |
+| W23 | direct inheritors of the legacy weapon templates | **1124** |
 | W26 | live `DamageMultiplier` declarations | **353** |
 | W11 | class anchors the maintainer has signed off | **0** — so no price is final |
 

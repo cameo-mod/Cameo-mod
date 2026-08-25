@@ -1334,22 +1334,27 @@ BarrelExplode:
 
 ATMine:
 	Inherits: ^DamagingExplosionHE
-	Inherits@2: ^HeavyMissile
+	Inherits@2: ^Projectile_Missile_Heavy
 	Report: mineblo1.aud
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water
+	Warhead@Demolition_Light:
+		Damage: 110000
+		ValidTargets: Ground, Water, Air
 		InvalidTargets: Mine
-		Damage: 50000
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		InvalidTargets: Mine
-		Damage: 25
 	Warhead@Effect: CreateEffect
 		Explosions: large_explosion
 		ImpactSounds: mineblo1.aud
+		ValidTargets: Ground, Water
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Structure, wall
+	Warhead@Concrete: DamagesConcrete
+		Damage: 200
 
 UnitExplodePlane:
 	Inherits: UnitExplode
