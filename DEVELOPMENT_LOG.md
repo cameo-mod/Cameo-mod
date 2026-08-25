@@ -3354,6 +3354,18 @@ per weapon, and commit with the full doc/ledger co-update.
   `CabalCyborgChaingun`, `TSDevoutChainguns`) and co-updated `multi_main_fired_weapons`
   875 → 872 plus all dependent docs. Committed.
 
+- **(completed by this session, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml`:
+  `ATMine` correction — moved from `^Projectile_Missile_Heavy` to `^Projectile_InstantHit`,
+  restricted `ValidTargets` to `Ground`, removed `Warhead@EffectAir`. Per-shot `Damage: 110000`
+  unchanged; re-extracted affected RedAlert ledgers.
+- **(completed by this session, 2026-08-25)** — `mods/cameo/ContentPacks/RedAlert/Japan/`,
+  `TiberianSun/GDI/`, `TiberianSun/Nod/`, `TiberianSun/CABAL/`:
+  integrated the uncommitted W24 bullet/missile collapse work from another Devin agent
+  (`CHGuardRifle`, `JHighV`, `TSVulcanGun`, `elitecadregun`, `CabalRocketCyborgRockets`,
+  `CabalRocketCyborgRocketsUpgraded`). Co-updated `multi_main_fired_weapons` 872 → 867,
+  `BROADCAST_BASELINE` 880 → 878, ledgers, and all dependent docs. Boot-gated; no new
+  exceptions.
+
 ### Mandatory pre-edit check for every agent
 
 Before touching a weapon:
