@@ -67,6 +67,15 @@ def parse_file(path):
     for h_i, start in enumerate(headers):
         end = headers[h_i + 1] if h_i + 1 < len(headers) else len(lines)
         name = RE_TOPNAME.match(lines[start].rstrip("\r\n")).group(1).strip()
+        # Several active files repeat the same weapon name. MiniYAML keeps only
+        # the winning definition, so counting every source block inflates the
+        # remaining debt and can recommend editing a shadowed definition.
+        winner = RULESET.weapons.get(name)
+        if winner is None:
+            continue
+        winner_path = (MOD.parents[1] / winner.file).resolve()
+        if winner_path != path.resolve() or winner.line != start + 1:
+            continue
         block = lines[start:end]
         old_inherits = set()
         deleted_warheads = set()

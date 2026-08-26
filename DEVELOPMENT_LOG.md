@@ -19,8 +19,8 @@
 - Whole-history comparison against the original upstream base preserves flat damage, runtime
   percentage damage at every tested health, cadence, range, targeting, reports, projectiles,
   effects, smudges, shields, and concrete. The only reported behavioral changes are the selected
-  missile-family blast/profile changes plus the earlier chemical-cannon blast-profile change. The active survey is now 285 concrete legacy-family
-  weapons in 204 mixed groups, and the broadcast guard is 923.
+  missile-family blast/profile changes plus the earlier chemical-cannon blast-profile change. The active survey is now 276 concrete legacy-family
+  weapons, with 267 mixed weapons in 203 groups, and the broadcast guard is 923. The survey now counts only the winning active definition when multiple files repeat a weapon name.
 - Verification: 396 tests pass (11 optional spreadsheet tests skipped); all 32 ledgers match live
   YAML; empty-warhead and orphan-old-key findings are zero; the physical-state audit passes. The
   first controlled launch caught one restored reference to a wrapper removed by earlier structural
