@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-26
-Total concrete weapons on old families: 271
+Total concrete weapons on old families: 267
 Single old-family with new inherits (Phase B completion): 0
 Pure single old-family (mechanical Phase A candidates): 12
-Mixed old-family (Phase B maintainer sign-off): 259 in 203 groups
+Mixed old-family (Phase B maintainer sign-off): 255 in 202 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `SteelMakoGun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Railgun_Heavy=2000, CannonHE_Medium=2000, Effect=0
@@ -205,12 +205,6 @@ Mixed old-family (Phase B maintainer sign-off): 259 in 203 groups
 - `HeavyAATankCannontkm` (ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml) | dominant: LightMissile(2000) | LightMissile=2000, LightMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1 | → collapse to LightMissile
 - `SkyshieldCannon` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, LightMissile=2000, LightMissilePercentage=1, Chaingun=2000, ChaingunPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1 | → collapse to SmallArms
 - `tkmheavyaaturret` (ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml) | dominant: LightMissile(2000) | LightMissile=2000, LightMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1 | → collapse to LightMissile
-
-### Chaingun, FlakWeapon, MediumMissile, SmallArms (4 weapons)
-- `AsianSniper` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | dominant: MediumMissile(6000) | MediumMissile=6000, MediumMissilePercentage=3, CannonHE_Heavy=6000, SmallArms=6000, SmallArmsPercentage=3, FlakWeapon=6000, FlakWeaponPercentage=3, Chaingun=6000, ChaingunPercentage=3, Effect=0 | → collapse to MediumMissile
-- `GhostSniper` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | dominant: MediumMissile(2000) | MediumMissile=2000, MediumMissilePercentage=1, CannonHE_Heavy=2000, SmallArms=2000, SmallArmsPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, Chaingun=2000, ChaingunPercentage=1, Effect=0 | → collapse to MediumMissile
-- `SpecterSniper` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | dominant: MediumMissile(4000) | MediumMissile=4000, MediumMissilePercentage=2, CannonHE_Heavy=4000, SmallArms=4000, SmallArmsPercentage=2, FlakWeapon=4000, FlakWeaponPercentage=2, Chaingun=4000, ChaingunPercentage=2, Effect=0 | → collapse to MediumMissile
-- `VonSniper` (ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml) | dominant: MediumMissile(6000) | MediumMissile=6000, MediumMissilePercentage=3, CannonHE_Heavy=6000, SmallArms=6000, SmallArmsPercentage=3, FlakWeapon=6000, FlakWeaponPercentage=3, Chaingun=6000, ChaingunPercentage=3, Effect=0 | → collapse to MediumMissile
 
 ### Chaingun, LaserWeapon, MediumMissile, SmallArms (4 weapons)
 - `LunarNaxiDroneLaser` (ContentPacks\RedAlert2Mod\Naxis\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to SmallArms

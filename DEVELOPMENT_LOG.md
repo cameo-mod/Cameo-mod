@@ -1,5 +1,30 @@
 # Development Log
 
+## 2026-08-26 — W24 A13: active sniper family consolidated
+
+- Collapsed `AsianSniper`, `GhostSniper`, `SpecterSniper`, and `VonSniper` onto
+  their existing `^Warhead_CannonHE_Heavy` damage family. Their AP, bunker, and
+  lockdown children inherit the cleanup, giving eleven resolved definitions in
+  the batch.
+- Whole-tree comparison preserves flat and runtime percentage damage on all 2345
+  weapons. The AP children preserve 92000 flat damage; the lockdown children keep
+  their Tesla and EMP components separate and unchanged. A local
+  `PercentageScale: 2308` preserves the inherited Ghost/Specter lockdown percentage
+  totals exactly after their sniper components are folded.
+- Resolver comparisons preserve cadence, range, reports, bullet projectiles and
+  contrails, ground/water/air impacts, shield duration and sounds, and 25 concrete
+  damage. The standard heavy CannonHE armor and blast profile replaces the five
+  simultaneous legacy CannonHE/Missile/Flak/Bullet profiles; this is the intended
+  classification consequence.
+- Survey debt falls 271 -> 267 weapons (259 -> 255 mixed, 203 -> 202 groups), and
+  the broadcast ratchet tightens 912 -> 907.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; generator drift 0; empty-warhead 0; orphan-old-key real bugs 0;
+  physical-state audit PASS. A controlled launch remained alive and responsive through
+  startup with no new exception log, then its exact test process was stopped.
+- No pricing, engine/runtime source, engine pin, or percentage-damage runtime
+  behavior changed.
+
 ## 2026-08-26 — W24 A12: active shotgun family consolidated
 
 - Collapsed `FutureEnforcerShotgun`, `TSCommandoShotgun`, `TSMutShotgun`, and
