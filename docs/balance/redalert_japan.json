@@ -4641,21 +4641,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "250",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
+        "damage": "3000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
@@ -4786,6 +4772,13 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "250",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -4796,7 +4789,6 @@
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@UpgradeAG",
       "versus_templates": [
-       "^HeavyAAWeapon",
        "^WaveforceBulletWarhead",
        "ArmoredCarMG",
        "^WaveforceBulletProjectile"
@@ -4810,21 +4802,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "250",
-        "tag": "HeavyAAWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
+        "damage": "3000",
         "falloff": "100, 0",
         "spread": "96",
         "tag": "Railgun_Heavy",
@@ -4955,6 +4933,13 @@
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1",
+        "falloff": null,
+        "spread": "250",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -4965,7 +4950,6 @@
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@UpgradeAA",
       "versus_templates": [
-       "^HeavyAAWeapon",
        "^WaveforceBulletWarhead",
        "ArmoredCarMG_AA",
        "^WaveforceBulletProjectile"

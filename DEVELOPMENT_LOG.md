@@ -13,15 +13,22 @@
   non-damage warheads. Blast/profile changes remain visible for maintainer review.
 - Consolidated nine missile roots, covering fourteen resolved weapons, onto their already-present
   standard missile families. Each now uses one standard damage profile; three retain a separate
-  same-profile slice solely to preserve the part of their old damage that could not hit walls. Explicit deletions remove the old
+  same-profile slice solely to preserve the part of their old damage that could not hit walls.
+  Explicit deletions remove the old
   flat mains while their independently rounded percentage and presentation behavior remains active
   until the parked runtime fix is handled separately.
+- Removed the last retired anti-air damage-family inheritance from the two Waveforce armored-car
+  variants. Their 1000-point flat hit is folded into the existing railgun main, while an explicit
+  compatibility percentage hit preserves the old independently rounded result at every active
+  health value. All non-damage behavior remains exactly resolved as before.
 - Whole-history comparison against the original upstream base preserves flat damage, runtime
   percentage damage at every tested health, cadence, range, targeting, reports, projectiles,
   effects, smudges, shields, and concrete. The only reported behavioral changes are the selected
-  missile-family blast/profile changes plus the earlier chemical-cannon blast-profile change. The active survey is now 276 concrete legacy-family
-  weapons, with 267 mixed weapons in 203 groups, and the broadcast guard is 923. The survey now counts only the winning active definition when multiple files repeat a weapon name.
-- Verification: 396 tests pass (11 optional spreadsheet tests skipped); all 32 ledgers match live
+  missile-family blast/profile changes, the two selected Waveforce blast-profile changes, plus the
+  earlier chemical-cannon blast-profile change. The active survey is now 274 concrete legacy-family
+  weapons, with 267 mixed weapons in 203 groups, and the broadcast guard is 923. The survey now
+  counts only the winning active definition when multiple files repeat a weapon name.
+- Verification: 397 tests pass (11 optional spreadsheet tests skipped); all 32 ledgers match live
   YAML; empty-warhead and orphan-old-key findings are zero; the physical-state audit passes. The
   first controlled launch caught one restored reference to a wrapper removed by earlier structural
   cleanup. Removing that stale reference left the explicit equivalent behavior in place; the next

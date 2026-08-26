@@ -2230,13 +2230,65 @@ ArmoredCarMG_AA:
 		ValidTargets: Air
 
 ArmoredCarMGWaveforce:
-	Inherits: ^HeavyAAWeapon
 	Inherits@2: ^WaveforceBulletWarhead
 	Inherits@3: ArmoredCarMG
 	Inherits@4: ^WaveforceBulletProjectile
+	Warhead@Railgun_Heavy:
+		Damage: 3000
+		PercentageScale: 6667
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 250
+		Damage: 1
+		Versus:
+			Shield: 35
+			Spaceship: 25
+			Helicopter: 24
+			Bomber: 23
+			Fighter: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Plate: 16
+			Flak: 15
+			None: 14
+			Heroic: 13
+			Steel: 12
+			Concrete: 11
+			Wood: 10
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
 
 ArmoredCarMGAAWaveforce:
-	Inherits: ^HeavyAAWeapon
 	Inherits@2: ^WaveforceBulletWarhead
 	Inherits@3: ArmoredCarMG_AA
 	Inherits@4: ^WaveforceBulletProjectile
+	Warhead@Railgun_Heavy:
+		Damage: 3000
+		PercentageScale: 6667
+	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Ground, Water, Air
+		Spread: 250
+		Damage: 1
+		Versus:
+			Shield: 35
+			Spaceship: 25
+			Helicopter: 24
+			Bomber: 23
+			Fighter: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Plate: 16
+			Flak: 15
+			None: 14
+			Heroic: 13
+			Steel: 12
+			Concrete: 11
+			Wood: 10
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
