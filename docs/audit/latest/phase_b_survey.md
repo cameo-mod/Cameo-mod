@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-26
-Total concrete weapons on old families: 281
+Total concrete weapons on old families: 280
 Single old-family with new inherits (Phase B completion): 0
 Pure single old-family (mechanical Phase A candidates): 12
-Mixed old-family (Phase B maintainer sign-off): 269 in 208 groups
+Mixed old-family (Phase B maintainer sign-off): 268 in 208 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `SteelMakoGun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Railgun_Heavy=2000, CannonHE_Medium=2000, Effect=0
@@ -594,10 +594,6 @@ Mixed old-family (Phase B maintainer sign-off): 269 in 208 groups
 - `RA2MirageGun` (weapons\redalert2.yaml) | dominant: RailgunWeapon(8000) | RailgunWeapon=8000, RailgunWeaponPercentage=4, MediumChemicalWeapon=8000, MediumChemicalWeaponFriendlyFire=4000, MediumChemicalWeaponPercentage=4, CannonAP_Light=8000, CannonAP_Light_Percentage=4, Effect=0 | → collapse to RailgunWeapon
 - `RA2MirageGun` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | dominant: RailgunWeapon(8000) | RailgunWeapon=8000, RailgunWeaponPercentage=4, MediumChemicalWeapon=8000, MediumChemicalWeaponPercentage=4, CannonAP_Light=8000 | → collapse to RailgunWeapon
 
-### MediumFlameWeapon, ShrapnelWeapon (2 weapons)
-- `GrenadeThermobaric` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: ShrapnelWeapon(4000) | ShrapnelWeapon=4000, ShrapnelWeaponFriendlyFire=2000, ShrapnelWeaponPercentage=2, Demolition_Light=4000, MediumFlameWeapon=4000, MediumFlameWeaponPercentage=2, Flame_Light=4000 | → collapse to ShrapnelWeapon
-- `SteelDaggerCannon` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | dominant: MediumFlameWeapon(2000) | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, Demolition_Light=2000, CannonHE_Heavy=2000, Effect=0 | → collapse to MediumFlameWeapon
-
 ### MediumFlameWeapon, TeslaWeapon (2 weapons)
 - `SkyHawkArrowsEnergized` (ContentPacks\RedAlert\Japan\yaml\weapons.yaml) | dominant: Arrow_Light(16000) | Arrow_Light=16000, MissileHE_Medium=16000, MediumFlameWeapon=16000, MediumFlameWeaponPercentage=8, TeslaWeapon=16000, TeslaExtraDamage=8000, TeslaWeaponPercentage=8, EMPUnit=16000, Effect=0, EffectAir=0 | → collapse to Arrow_Light
 - `VolkovMagneticWeaponIncendiaryTesla` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: EMPUnit(20000) | CannonHE_Heavy=8000, MediumChemicalWeapon=8000, MediumChemicalWeaponPercentage=4, Grenade=8000, GrenadeFriendlyFire=4000, GrenadePercentage=4, MediumFlameWeapon=8000, MediumFlameWeaponPercentage=4, TeslaWeapon=8000, TeslaExtraDamage=4000, TeslaWeaponPercentage=4, EMPUnit=20000, TeslaArc=0 | → collapse to EMPUnit
@@ -688,6 +684,9 @@ Mixed old-family (Phase B maintainer sign-off): 269 in 208 groups
 
 ### MediumFlameWeapon, NuclearWarhead (1 weapons)
 - `VolkovMagneticWeaponIncendiaryNuclearShells` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: MediumFlameWeapon(40000) | MediumFlameWeapon=40000, MediumFlameWeaponPercentage=20, CannonHE_Heavy=40000, MediumChemicalWeapon=40000, MediumChemicalWeaponPercentage=20, Grenade=40000, GrenadeFriendlyFire=20000, GrenadePercentage=20, NuclearWarhead=40000, NuclearWarheadPercentage=20, Effect=0 | → collapse to MediumFlameWeapon
+
+### MediumFlameWeapon, ShrapnelWeapon (1 weapons)
+- `SteelDaggerCannon` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | dominant: MediumFlameWeapon(2000) | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, Demolition_Light=2000, CannonHE_Heavy=2000, Effect=0 | → collapse to MediumFlameWeapon
 
 ### MediumFlameWeapon, TankDestroyerCannon (1 weapons)
 - `CannonAttackRobotGun` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | dominant: TankDestroyerCannon(2000) | TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Railgun_Heavy=2000, CannonHE_Medium=2000, Effect=0 | → collapse to TankDestroyerCannon

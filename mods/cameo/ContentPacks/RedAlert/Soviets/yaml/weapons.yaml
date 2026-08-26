@@ -68,68 +68,32 @@ GrenadeRAExplode:
 	Warhead@Flame_Light:
 		Damage: 4000
 GrenadeThermobaric:
-	Inherits: ^ShrapnelWeapon
-	Inherits@2: ^MediumFlameWeapon
-	Inherits@3: GrenadeRA
+	Inherits@wh: ^Warhead_Thermobaric_Light
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx1: ^Effect_Concussion_Medium
+	Inherits@fx2: ^Effect_Flame_Light
+	ReloadDelay: 40
+	Range: 5791
+	Report: toss1.aud
 	Projectile: Bullet
+		Speed: 150
+		LaunchAngle: 66
+		ContrailLength: 11
+		ContrailStartWidth: 66
+		ContrailEndWidth: 22
 		ContrailStartColor: FF8844FF
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@Demolition_Light:
-		Damage: 4000
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 2
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@Flame_Light:
-		Damage: 4000
+		ContrailEndColor: FFFFFF22
+	Warhead@Thermobaric_Light:
+		Damage: 16000
+	Warhead@Effect:
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 GrenadeThermobaricExplode:
 	Inherits: GrenadeThermobaric
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-	Warhead@Grenade: SpreadDamage
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		Damage: 1
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
+	Warhead@Thermobaric_Light:
+		Damage: 17000
+		PercentageScale: 9412
 
 FireRockets:
 	Inherits@wh: ^Warhead_MissileFire_Light

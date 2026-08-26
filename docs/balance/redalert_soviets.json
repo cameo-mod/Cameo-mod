@@ -5785,52 +5785,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "200",
-        "tag": "Flame_Light",
+        "damage": "16000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "169",
+        "tag": "Thermobaric_Light",
         "type": "AreaDamage"
        }
       ],
@@ -5842,13 +5800,13 @@
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^ShrapnelWeapon",
-       "^MediumFlameWeapon",
-       "GrenadeRA"
+       "^Warhead_Thermobaric_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Concussion_Medium",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Flame_Light"
+       "^Warhead_Thermobaric_Light"
       ],
       "weapon": "GrenadeThermobaric",
       "weapon_class_source": "template"
@@ -5857,52 +5815,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "200",
-        "tag": "Flame_Light",
+        "damage": "16000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "169",
+        "tag": "Thermobaric_Light",
         "type": "AreaDamage"
        }
       ],
@@ -5914,13 +5830,13 @@
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^ShrapnelWeapon",
-       "^MediumFlameWeapon",
-       "GrenadeRA"
+       "^Warhead_Thermobaric_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Concussion_Medium",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Flame_Light"
+       "^Warhead_Thermobaric_Light"
       ],
       "weapon": "GrenadeThermobaric",
       "weapon_class_source": "template"

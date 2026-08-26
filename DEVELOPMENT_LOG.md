@@ -1,5 +1,27 @@
 # Development Log
 
+## 2026-08-26 — W24 A10: thermobaric grenade pair consolidated
+
+- Collapsed `GrenadeThermobaric` and its inherited `GrenadeThermobaricExplode`
+  variant onto `^Warhead_Thermobaric_Light`.
+- Preserved 16000 flat damage on the fired grenade and 17000 on the explosion
+  variant. The latter includes a legacy 1000-damage node whose FriendlyFire name
+  had no ally-only relationship filter; the resolved behavior, not the label, is
+  authoritative. Folded percentage damage remains exact through a local scale.
+- Resolver comparisons preserve timing, range, report, grenade trajectory and
+  contrail, water and flame impacts, smudges, ground fire, shield effects, glow,
+  and concrete damage. The standard light Thermobaric armor, blast, friendly-fire,
+  and Temperature profile is the accepted classification consequence.
+- Updated `review_resolve_diff.py` to recognize friendly-fire twins by their actual
+  relationship filter. Whole-tree comparison preserves flat and percentage damage
+  for all 2345 weapons and reports only the two intended blast-profile replacements.
+- Survey debt falls 281 -> 280 weapons (269 -> 268 mixed), and the broadcast ratchet
+  tightens 927 -> 926. Verification: 394 tests passed (11 optional spreadsheet tests
+  skipped); 32 ledgers match live YAML; empty-warhead 0; orphan-old-key real bugs 0;
+  physical-state audit PASS; generator drift 0.
+- No pricing, engine/runtime source, pin, cadence, or range was changed. No game was
+  launched per maintainer instruction.
+
 ## 2026-08-26 — W24 A9: redundant flame and chemical tier stacks collapsed
 
 - Collapsed `HarakanF` and `MutHFlamer` from paired medium/heavy Flame mains onto
