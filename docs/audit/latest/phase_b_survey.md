@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-26
-Total concrete weapons on old families: 292
+Total concrete weapons on old families: 288
 Single old-family with new inherits (Phase B completion): 0
 Pure single old-family (mechanical Phase A candidates): 12
-Mixed old-family (Phase B maintainer sign-off): 280 in 210 groups
+Mixed old-family (Phase B maintainer sign-off): 276 in 209 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `SteelMakoGun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Railgun_Heavy=2000, CannonHE_Medium=2000, Effect=0
@@ -569,12 +569,6 @@ Mixed old-family (Phase B maintainer sign-off): 280 in 210 groups
 
 ### MediumMissile, RailgunWeapon, TankDestroyerCannon (1 weapons)
 - `wc2_dwarf_Rifle` (ContentPacks\Warcraft2\Humans\yaml\weapons.yaml) | dominant: RailgunWeapon(8000) | RailgunWeapon=8000, RailgunWeaponPercentage=4, MediumMissile=8000, MediumMissilePercentage=4, TankDestroyerCannon=8000, TankDestroyerCannonPercentage=4, Effect=0 | → collapse to RailgunWeapon
-
-### LightChemicalWeapon, TankDestroyerCannon (4 weapons)
-- `CabalDissolverSpray` (ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml) | dominant: LightChemicalWeapon(2000) | LightChemicalWeapon=2000, LightChemicalWeaponPercentage=1, TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, corroded=0, Effect=0 | → collapse to LightChemicalWeapon
-- `TSHighVelocity2Chem` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: TankDestroyerCannon(40000) | TankDestroyerCannon=40000, TankDestroyerCannonPercentage=20, LightChemicalWeapon=20000, MLightChemicalWeaponPercentage=10, Cloud=0 | → collapse to TankDestroyerCannon
-- `TSHighVelocityChem` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: TankDestroyerCannon(30000) | TankDestroyerCannon=30000, TankDestroyerCannonPercentage=15, LightChemicalWeapon=15000, LightChemicalWeaponPercentage=7, Cloud=0 | → collapse to TankDestroyerCannon
-- `TSHighVelocityTurChem` (weapons\tiberiansun.yaml) | dominant: TankDestroyerCannon(48000) | TankDestroyerCannon=48000, TankDestroyerCannonPercentage=24, LightChemicalWeapon=24000, MediumChemicalWeaponPercentage=12, Cloud=0, 1Dam=0, 3Eff=0 | → collapse to TankDestroyerCannon
 
 ### Chaingun, SniperWeapon (3 weapons)
 - `CommandoM16` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: SniperWeapon(4000) | SniperWeapon=4000, SniperWeaponExtraDamage=4000, SniperWeaponPercentage=2, Chaingun=4000, ChaingunPercentage=2 | → collapse to SniperWeapon

@@ -9287,36 +9287,15 @@
      {
       "damage_warheads": [
        {
-        "damage": "15000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "45000",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "60",
+        "tag": "CannonChem_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "7",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "30000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "15",
-        "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7701",
       "reloaddelay": "90",
@@ -9324,12 +9303,14 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^TSCannonEffect",
-       "^LightChemicalWeapon",
-       "^TankDestroyerCannon"
+       "^Warhead_CannonChem_Light",
+       "^Effect_CannonAP_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonChem_Light"
+      ],
       "weapon": "TSHighVelocityChem",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9675,43 +9656,15 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "60000",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "60",
+        "tag": "CannonChem_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "40000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "20",
-        "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10",
-        "falloff": null,
-        "spread": null,
-        "tag": "MLightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8207",
       "reloaddelay": "55",
@@ -9719,12 +9672,14 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^TSCannonEffect",
-       "^LightChemicalWeapon",
-       "^TankDestroyerCannon"
+       "^Warhead_CannonChem_Light",
+       "^Effect_CannonAP_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonChem_Light"
+      ],
       "weapon": "TSHighVelocity2Chem",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

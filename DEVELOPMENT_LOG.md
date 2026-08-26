@@ -1,5 +1,28 @@
 # Development Log
 
+## 2026-08-26 — W24 A7: light chemical-cannon group consolidated
+
+- Collapsed `TSHighVelocityChem`, `TSHighVelocity2Chem`, `TSHighVelocityTurChem`,
+  and `CabalDissolverSpray` from paired `^LightChemicalWeapon` and
+  `^TankDestroyerCannon` mains onto `^Warhead_CannonChem_Light`.
+- Main totals remain 45000, 60000, 72000, and 4000. Folded percentage totals also
+  remain exactly 22%, 31%, 37%, and 2%; the two larger Forgotten weapons retain a
+  legacy extra 1% that had survived through misspelled local override keys.
+- Resolver comparisons preserve cadence, range, reports, projectile type and accuracy,
+  custom corrosion clouds/conditions, smudges, water/air impacts, shield behavior, and
+  concrete damage. The standard CannonChem armor, blast, friendly-fire, and corrosion
+  profile is the accepted classification consequence.
+- Extended `review_batch_diff.py` to compare authored percentage damage using the runtime
+  integer model as well as flat main totals. This caught the inherited 1% hits before the
+  checkpoint and now passes across all 2345 weapons.
+- Survey debt falls 292 -> 288 weapons (280 -> 276 mixed, 210 -> 209 groups), and the
+  W24 broadcast ratchet is tightened from 939 to the current 933.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; empty-warhead 0; orphan-old-key real bugs 0; physical-state audit
+  PASS; generator drift 0; `git diff --check` clean.
+- No pricing, engine/runtime source, pin, cadence, range, or total damage was changed.
+  No game was launched per maintainer instruction.
+
 ## 2026-08-26 — W24 A6: Forgotten chemical turret pair consolidated
 
 - Collapsed `TS70mmTurChem` from three 4000-damage mains onto

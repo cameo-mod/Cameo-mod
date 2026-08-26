@@ -286,27 +286,22 @@ TSHighVelocity:
 		Damage: 30000
 TSHighVelocityChem:
 	Inherits: ^TSCannonEffect
-	Inherits@2: ^LightChemicalWeapon
-	Inherits@3: ^TankDestroyerCannon
+	Inherits@wh: ^Warhead_CannonChem_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 90
 	Range: 7701
 	Projectile: Bullet
 		Speed: 850
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 30000
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 15
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 15000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 7
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		Inaccuracy: 150
+	Warhead@CannonChem_Light:
+		Damage: 45000
+		PercentageScale: 9778
+	Warhead@Effect:
+		Explosions: poof
+	Warhead@EffectWater:
+		Explosions: med_splash
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
@@ -332,25 +327,22 @@ TSHighVelocity2:
 		Damage: 40000
 TSHighVelocity2Chem:
 	Inherits: ^TSCannonEffect
-	Inherits@2: ^LightChemicalWeapon
-	Inherits@3: ^TankDestroyerCannon
+	Inherits@wh: ^Warhead_CannonChem_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 55
 	Range: 8207
 	Projectile: Bullet
 		Speed: 850
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 40000
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 20
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MLightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 10
+		Inaccuracy: 150
+	Warhead@CannonChem_Light:
+		Damage: 60000
+		PercentageScale: 10333
+	Warhead@Effect:
+		Explosions: poof
+	Warhead@EffectWater:
+		Explosions: med_splash
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50
