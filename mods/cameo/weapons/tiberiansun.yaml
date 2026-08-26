@@ -208,32 +208,22 @@ TS90mmDep:
 
 TSLaser90mm:
 	# Anti-armour cannon half, as TS90mm above — this is its T3 laser variant.
-	Inherits@wh: ^Warhead_Laser_Heavy
-	Inherits@proj: ^Projectile_Laser_Heavy
-	Inherits@legacyfx: ^Effect_CannonAP_Medium
-	Inherits@fx: ^Effect_Laser_Heavy
-	Inherits@tsfx: ^TSLaserEffect
-	ValidTargets: Ground, Water
-	Report: obelray1.aud
+	Inherits: ^Warhead_CannonAP_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonAP_Medium
+	Inherits@4: ^LaserWeapon
+	Inherits@5: ^TSLaserEffect
 	Projectile: LaserZap
-		Image: 120MM
-		InaccuracyPercentage: 1
-		ProjectileSpeedPercentage: 10
-		Shadow: true
 		Width: 72
 		SecondaryBeamWidth: 36
 	ReloadDelay: 32
 	Range: 5423
-	Warhead@Laser_Heavy:
-		Damage: 11600
-		PercentageScale: 103
-		PercentageDenominator: 100
-	Warhead@Glow:
-		Scale: 0.55
-		FadeFrames: 10
-	Warhead@Effect:
-		ImpactSounds: kaboom12.aud
-		ValidTargets: Ground, Ship
+	Warhead@CannonAP_Medium:
+		Damage: 6000
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@LaserWeaponPercentage: AreaDamagePercentage
+		Damage: 3
 
 TSLaser90mmDep:
 	Inherits: TSLaser90mm
@@ -274,22 +264,27 @@ TS120mm_bluenuke:
 
 TSHighVelocityTurChem:
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^Warhead_CannonChem_Light
-	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^TankDestroyerCannon
 	ReloadDelay: 30
 	Range: 9483
 	Projectile: Bullet
 		Speed: 1280
-		Inaccuracy: 150
-	Warhead@CannonChem_Light:
-		Damage: 72000
-		PercentageScale: 10278
-	Warhead@Effect:
-		Explosions: poof
-	Warhead@EffectWater:
-		Explosions: med_splash
-	Warhead@EffectAir:
-		Explosions: big_explosion_air
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 48000
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		Damage: 24
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 24000
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 12
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 4
 		Duration: 50

@@ -1259,29 +1259,53 @@ RA2APCRocket:
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Acceleration: 10
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 2000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+	Warhead@MissileAP_Medium:
+		Damage: 8000
+		PercentageScale: 2500
+		PercentageDenominator: 10000
 		ValidTargets: Ground, Water, Air
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@FlakWeapon:
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 1
-		ValidTargets: Ground, Water, Air
-	Warhead@HeavyAAWeapon: SpreadDamage
-		Damage: 2000
 		ValidTargets: Ground, Water, Air
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water, Air
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
-	Warhead@MissileAP_Medium:
-		Damage: 2000
-		ValidTargets: Ground, Water, Air
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Water, Air
+	Warhead@Smudge1: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Smudge2: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Smudge2RA2: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall
+		Size: 2
+		Delay: 6
+	Warhead@Effect1: CreateEffect
+		Explosions: poof
+		ImpactSounds: siege_impact.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+	Warhead@Effect2: CreateEffect
+		Delay: 6
+		Explosions: napalm
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 
 RA2APCRocket_elite:
 	Inherits: RA2APCRocket

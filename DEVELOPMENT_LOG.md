@@ -1,5 +1,34 @@
 # Development Log
 
+## 2026-08-26 — retrospective compatibility repair and missile cleanup
+
+- Independent review found that the earlier one-target percentage comparison hid current-runtime
+  rounding and unchecked-integer overflow differences at other active health values. It also found
+  lost projectile fields, reports, targeting exclusions, glows, shield durations, smudge chances,
+  and one concrete-damage effect. The affected chemical, flame, thermobaric, shotgun, sniper,
+  railgun, and laser weapon blocks were restored from their exact pre-cleanup snapshots. The older
+  consolidation entries below are retained as history but are superseded by this repair.
+- Strengthened `review_batch_diff.py` to compare the runtime result at all 155 active/design health
+  values and to fail on complete resolved top-level operation, projectile definitions, and
+  non-damage warheads. Blast/profile changes remain visible for maintainer review.
+- Consolidated nine missile roots, covering fourteen resolved weapons, onto their already-present
+  standard missile families. Each now uses one standard damage profile; three retain a separate
+  same-profile slice solely to preserve the part of their old damage that could not hit walls. Explicit deletions remove the old
+  flat mains while their independently rounded percentage and presentation behavior remains active
+  until the parked runtime fix is handled separately.
+- Whole-history comparison against the original upstream base preserves flat damage, runtime
+  percentage damage at every tested health, cadence, range, targeting, reports, projectiles,
+  effects, smudges, shields, and concrete. The only reported behavioral changes are the selected
+  missile-family blast/profile changes plus the earlier chemical-cannon blast-profile change. The active survey is now 285 concrete legacy-family
+  weapons in 204 mixed groups, and the broadcast guard is 923.
+- Verification: 396 tests pass (11 optional spreadsheet tests skipped); all 32 ledgers match live
+  YAML; empty-warhead and orphan-old-key findings are zero; the physical-state audit passes. The
+  first controlled launch caught one restored reference to a wrapper removed by earlier structural
+  cleanup. Removing that stale reference left the explicit equivalent behavior in place; the next
+  launch stayed alive and responsive through startup with no new exception log, then its exact test
+  process was stopped. The comparator now rejects missing weapon parents before resolving them.
+- No pricing values, engine/runtime source, or engine pin changed.
+
 ## 2026-08-26 — W24 A15: laser weapon group consolidated
 
 - Collapsed six explicitly laser-identified roots onto `^Warhead_Laser_Heavy`:

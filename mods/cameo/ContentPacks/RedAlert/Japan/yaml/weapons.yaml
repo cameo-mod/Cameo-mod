@@ -103,14 +103,12 @@ TankBusterBeamCannonCharged:
 		Damage: 24000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 PlasmaFlamer:
-	Inherits@wh: ^Warhead_Plasma_Medium
-	Inherits@fx: ^Effect_Flame_Medium
-	Inherits@fx2: ^Effect_Chem_Medium
+	Inherits: ^MediumFlameWeapon
+	Inherits@2: ^MediumChemicalWeapon
 	ReloadDelay: 35
 	Burst: 15
 	BurstDelays: 1
 	Range: 3603
-	Report: flamer2.aud
 	StartBurstReport: flamer2.aud
 	Projectile: Bullet
 		Speed: 150
@@ -118,9 +116,32 @@ PlasmaFlamer:
 		Image: purple_fb3
 		LaunchAngle: 60
 		Inaccuracy: 850
-	Warhead@Plasma_Medium:
-		Damage: 4000
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: blue_small_napalm
 
@@ -1750,7 +1771,9 @@ JapaneseHeavyBomb:
 		ImpactSounds: kaboom15.aud
 
 JapanesePlasmaBomb:
-	Inherits@wh: ^Warhead_Plasma_Heavy
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@wh2: ^Warhead_Flame_Heavy
+	Inherits@wh3: ^Warhead_Demolition_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
 	Inherits@fx: ^Effect_Flame_Heavy
 	Inherits@fx2: ^Effect_Demolition_Heavy
@@ -1769,10 +1792,16 @@ JapanesePlasmaBomb:
 		TrailInterval: 1
 		Blockable: false
 		Shadow: True
-	Warhead@Plasma_Heavy:
+	Warhead@Chemical_Heavy:
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Flame_Heavy:
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Demolition_Heavy: AreaDamage
 		ValidTargets: Ground, Ship
 		ValidRelationships: Enemy
-		Damage: 30000
+		Damage: 10000
 		MaxRadius: 3200
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
