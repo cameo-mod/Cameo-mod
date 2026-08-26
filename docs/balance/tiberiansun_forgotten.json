@@ -7434,48 +7434,31 @@
      {
       "damage_warheads": [
        {
-        "damage": "28000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
+        "damage": "42000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "287",
+        "tag": "Plasma_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "14",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "14000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "7",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "2386",
       "reloaddelay": "50",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^MediumFlameWeapon",
-       "^MediumChemicalWeapon"
+       "^Warhead_Plasma_Medium",
+       "^Projectile_Chem_Medium",
+       "^Effect_Flame_Medium",
+       "^Effect_Chem_Medium"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Plasma_Medium"
+      ],
       "weapon": "MutFlamerChem",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

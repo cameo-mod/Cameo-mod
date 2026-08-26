@@ -1173,33 +1173,15 @@ MutFlamer:
 	Warhead@Flame_Medium:
 		Damage: 28000
 MutFlamerChem:
-	Inherits: ^MediumFlameWeapon
-	Inherits@2: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Plasma_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Flame_Medium
+	Inherits@fx2: ^Effect_Chem_Medium
 	ReloadDelay: 50
 	Range: 2386
 	Report: flamtnk1.aud
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 28000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 14
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 14000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 7
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+	Warhead@Plasma_Medium:
+		Damage: 42000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50

@@ -103,12 +103,14 @@ TankBusterBeamCannonCharged:
 		Damage: 24000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 PlasmaFlamer:
-	Inherits: ^MediumFlameWeapon
-	Inherits@2: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Plasma_Medium
+	Inherits@fx: ^Effect_Flame_Medium
+	Inherits@fx2: ^Effect_Chem_Medium
 	ReloadDelay: 35
 	Burst: 15
 	BurstDelays: 1
 	Range: 3603
+	Report: flamer2.aud
 	StartBurstReport: flamer2.aud
 	Projectile: Bullet
 		Speed: 150
@@ -116,32 +118,9 @@ PlasmaFlamer:
 		Image: purple_fb3
 		LaunchAngle: 60
 		Inaccuracy: 850
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
+	Warhead@Plasma_Medium:
+		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
 		Explosions: blue_small_napalm
 

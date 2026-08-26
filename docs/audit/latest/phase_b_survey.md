@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-26
-Total concrete weapons on old families: 288
+Total concrete weapons on old families: 286
 Single old-family with new inherits (Phase B completion): 0
 Pure single old-family (mechanical Phase A candidates): 12
-Mixed old-family (Phase B maintainer sign-off): 276 in 209 groups
+Mixed old-family (Phase B maintainer sign-off): 274 in 209 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `SteelMakoGun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Railgun_Heavy=2000, CannonHE_Medium=2000, Effect=0
@@ -580,11 +580,6 @@ Mixed old-family (Phase B maintainer sign-off): 276 in 209 groups
 - `SteelAirTurret` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | dominant: LaserWeapon(24000) | LaserWeapon=24000, LaserWeaponPercentage=12, RailgunWeapon=24000, RailgunWeaponPercentage=12, Effect=0 | → collapse to LaserWeapon
 - `SteelStalkerRailgun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | dominant: LaserWeapon(60000) | LaserWeapon=60000, LaserWeaponPercentage=30, RailgunWeapon=60000, RailgunWeaponPercentage=30, Effect=0 | → collapse to LaserWeapon
 
-### MediumChemicalWeapon, MediumFlameWeapon (3 weapons)
-- `Laboratory_Bioball` (ContentPacks\D2k\Ordos\yaml\weapons.yaml) | dominant: Demolition_Light(10000) | Demolition_Light=10000, Concussion_Medium=10000, CannonHE_Heavy=10000, MediumChemicalWeapon=10000, MediumChemicalWeaponPercentage=6, MediumFlameWeapon=10000, MediumFlameWeaponPercentage=5, Effect=0, Concrete=1875, Cloud=0 | → collapse to Demolition_Light
-- `MutFlamerChem` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: MediumFlameWeapon(28000) | MediumFlameWeapon=28000, MediumFlameWeaponPercentage=14, MediumChemicalWeapon=14000, MediumChemicalWeaponPercentage=7, Cloud=0 | → collapse to MediumFlameWeapon
-- `PlasmaFlamer` (ContentPacks\RedAlert\Japan\yaml\weapons.yaml) | dominant: MediumFlameWeapon(2000) | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, MediumChemicalWeapon=2000, MediumChemicalWeaponPercentage=1, Effect=0 | → collapse to MediumFlameWeapon
-
 ### MediumChemicalWeapon, MediumMissile (3 weapons)
 - `AsianPulverizerMechaGatling` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | dominant: MediumChemicalWeapon(2000) | MediumChemicalWeapon=2000, MediumChemicalWeaponPercentage=1, MediumMissile=2000, MediumMissilePercentage=1 | → collapse to MediumChemicalWeapon
 - `DeviatorMissile` (ContentPacks\D2k\Ordos\yaml\weapons.yaml) | dominant: MediumChemicalWeapon(10000) | MediumChemicalWeapon=10000, MediumChemicalWeaponPercentage=5, CannonHE_Heavy=10000, MediumMissile=10000, MediumMissilePercentage=5, MissileAP_Heavy=10000, Effect=0, OwnerChange=0, Concrete=1000 | → collapse to MediumChemicalWeapon
@@ -688,6 +683,9 @@ Mixed old-family (Phase B maintainer sign-off): 276 in 209 groups
 
 ### LightMissile, MediumMissile (1 weapons)
 - `ts_nod_mobilerepairvehicle` (weapons\tiberiansun.yaml) | dominant: MediumMissile(10000) | MediumMissile=10000, MediumMissilePercentage=5, LightMissile=10000, LightMissilePercentage=5 | → collapse to MediumMissile
+
+### MediumChemicalWeapon, MediumFlameWeapon (1 weapons)
+- `Laboratory_Bioball` (ContentPacks\D2k\Ordos\yaml\weapons.yaml) | dominant: Demolition_Light(10000) | Demolition_Light=10000, Concussion_Medium=10000, CannonHE_Heavy=10000, MediumChemicalWeapon=10000, MediumChemicalWeaponPercentage=6, MediumFlameWeapon=10000, MediumFlameWeaponPercentage=5, Effect=0, Concrete=1875, Cloud=0 | → collapse to Demolition_Light
 
 ### MediumChemicalWeapon, ShrapnelWeapon (1 weapons)
 - `TSChem120mmx` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: ShrapnelWeapon(30000) | ShrapnelWeapon=30000, ShrapnelWeaponFriendlyFire=15000, ShrapnelWeaponPercentage=15, CannonHE_Medium=30000, MediumChemicalWeapon=30000, MediumChemicalWeaponPercentage=15, Cloud=0 | → collapse to ShrapnelWeapon

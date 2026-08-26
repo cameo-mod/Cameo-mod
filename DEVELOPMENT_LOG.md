@@ -1,5 +1,25 @@
 # Development Log
 
+## 2026-08-26 — W24 A8: medium plasma pair consolidated
+
+- Collapsed `PlasmaFlamer` and `MutFlamerChem` from paired
+  `^MediumFlameWeapon` + `^MediumChemicalWeapon` mains onto the existing
+  `^Warhead_Plasma_Medium` family at 4000 and 42000 damage.
+- Flat totals and folded percentage totals (2% and 21%) are exact. Resolver
+  comparisons preserve cadence, burst operation, reports, projectiles, custom impact
+  visuals, corrosion cloud, smudges, ground fire, shield effects, and concrete damage.
+- The standard Plasma armor, blast, friendly-fire, Temperature, and Corrosion profile
+  is the accepted classification consequence. Upgrade-audit findings fall 75 -> 73 as
+  two old mixed-family role-shift rows disappear.
+- Whole-tree comparison preserves flat and percentage damage for all 2345 weapons;
+  only the two intended blast-profile replacements are reported. Survey debt falls
+  288 -> 286 weapons (276 -> 274 mixed), and the broadcast ratchet tightens 933 -> 932.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; empty-warhead 0; orphan-old-key real bugs 0; physical-state audit
+  PASS; generator drift 0.
+- No pricing, engine/runtime source, pin, cadence, range, or total damage was changed.
+  No game was launched per maintainer instruction.
+
 ## 2026-08-26 — W24 A7: light chemical-cannon group consolidated
 
 - Collapsed `TSHighVelocityChem`, `TSHighVelocity2Chem`, `TSHighVelocityTurChem`,
