@@ -1,5 +1,205 @@
 # Development Log
 
+## 2026-08-26 — W24 A10: thermobaric grenade pair consolidated
+
+- Collapsed `GrenadeThermobaric` and its inherited `GrenadeThermobaricExplode`
+  variant onto `^Warhead_Thermobaric_Light`.
+- Preserved 16000 flat damage on the fired grenade and 17000 on the explosion
+  variant. The latter includes a legacy 1000-damage node whose FriendlyFire name
+  had no ally-only relationship filter; the resolved behavior, not the label, is
+  authoritative. Folded percentage damage remains exact through a local scale.
+- Resolver comparisons preserve timing, range, report, grenade trajectory and
+  contrail, water and flame impacts, smudges, ground fire, shield effects, glow,
+  and concrete damage. The standard light Thermobaric armor, blast, friendly-fire,
+  and Temperature profile is the accepted classification consequence.
+- Updated `review_resolve_diff.py` to recognize friendly-fire twins by their actual
+  relationship filter. Whole-tree comparison preserves flat and percentage damage
+  for all 2345 weapons and reports only the two intended blast-profile replacements.
+- Survey debt falls 281 -> 280 weapons (269 -> 268 mixed), and the broadcast ratchet
+  tightens 927 -> 926. Verification: 394 tests passed (11 optional spreadsheet tests
+  skipped); 32 ledgers match live YAML; empty-warhead 0; orphan-old-key real bugs 0;
+  physical-state audit PASS; generator drift 0.
+- No pricing, engine/runtime source, pin, cadence, or range was changed. No game was
+  launched per maintainer instruction.
+
+## 2026-08-26 — W24 A9: redundant flame and chemical tier stacks collapsed
+
+- Collapsed `HarakanF` and `MutHFlamer` from paired medium/heavy Flame mains onto
+  `^Warhead_Flame_Heavy` at 4000 and 40000 damage.
+- Collapsed `TSFiendShardUP`, `TSChemsprayUP`, and `TSVisceroidSprayUP` from
+  light+medium+heavy Chemical stacks onto `^Warhead_Chemical_Heavy` at 18000,
+  96000, and 30000 damage.
+- Flat and percentage totals remain exact for all five. Resolver comparisons preserve
+  timing, bursts, reports, projectile operation, custom clouds/effects, smudges, ground
+  fire, shield effects, and concrete damage.
+- Standard Heavy Flame/Chemical armor, blast, friendly-fire, and meter profiles are the
+  accepted tier-classification consequences. The Forgotten heavy-flamethrower correction
+  adds one role-shift row for its later chemical upgrade; upgrade findings are now 74.
+- Whole-tree comparison preserves flat and percentage damage for all 2345 weapons and
+  reports only the five intended blast-profile replacements. Survey debt falls 286 -> 281
+  weapons (274 -> 269 mixed, 209 -> 208 groups), while broadcast debt falls 932 -> 927.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; empty-warhead 0; orphan-old-key real bugs 0; physical-state audit
+  PASS; generator drift 0.
+- No pricing, engine/runtime source, pin, cadence, range, or total damage was changed.
+  No game was launched per maintainer instruction.
+
+## 2026-08-26 — W24 A8: medium plasma pair consolidated
+
+- Collapsed `PlasmaFlamer` and `MutFlamerChem` from paired
+  `^MediumFlameWeapon` + `^MediumChemicalWeapon` mains onto the existing
+  `^Warhead_Plasma_Medium` family at 4000 and 42000 damage.
+- Flat totals and folded percentage totals (2% and 21%) are exact. Resolver
+  comparisons preserve cadence, burst operation, reports, projectiles, custom impact
+  visuals, corrosion cloud, smudges, ground fire, shield effects, and concrete damage.
+- The standard Plasma armor, blast, friendly-fire, Temperature, and Corrosion profile
+  is the accepted classification consequence. Upgrade-audit findings fall 75 -> 73 as
+  two old mixed-family role-shift rows disappear.
+- Whole-tree comparison preserves flat and percentage damage for all 2345 weapons;
+  only the two intended blast-profile replacements are reported. Survey debt falls
+  288 -> 286 weapons (276 -> 274 mixed), and the broadcast ratchet tightens 933 -> 932.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; empty-warhead 0; orphan-old-key real bugs 0; physical-state audit
+  PASS; generator drift 0.
+- No pricing, engine/runtime source, pin, cadence, range, or total damage was changed.
+  No game was launched per maintainer instruction.
+
+## 2026-08-26 — W24 A7: light chemical-cannon group consolidated
+
+- Collapsed `TSHighVelocityChem`, `TSHighVelocity2Chem`, `TSHighVelocityTurChem`,
+  and `CabalDissolverSpray` from paired `^LightChemicalWeapon` and
+  `^TankDestroyerCannon` mains onto `^Warhead_CannonChem_Light`.
+- Main totals remain 45000, 60000, 72000, and 4000. Folded percentage totals also
+  remain exactly 22%, 31%, 37%, and 2%; the two larger Forgotten weapons retain a
+  legacy extra 1% that had survived through misspelled local override keys.
+- Resolver comparisons preserve cadence, range, reports, projectile type and accuracy,
+  custom corrosion clouds/conditions, smudges, water/air impacts, shield behavior, and
+  concrete damage. The standard CannonChem armor, blast, friendly-fire, and corrosion
+  profile is the accepted classification consequence.
+- Extended `review_batch_diff.py` to compare authored percentage damage using the runtime
+  integer model as well as flat main totals. This caught the inherited 1% hits before the
+  checkpoint and now passes across all 2345 weapons.
+- Survey debt falls 292 -> 288 weapons (280 -> 276 mixed, 210 -> 209 groups), and the
+  W24 broadcast ratchet is tightened from 939 to the current 933.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; empty-warhead 0; orphan-old-key real bugs 0; physical-state audit
+  PASS; generator drift 0; `git diff --check` clean.
+- No pricing, engine/runtime source, pin, cadence, range, or total damage was changed.
+  No game was launched per maintainer instruction.
+
+## 2026-08-26 — W24 A6: Forgotten chemical turret pair consolidated
+
+- Collapsed `TS70mmTurChem` from three 4000-damage mains onto
+  `^Warhead_CannonChem_Light` at 12000, and `TSScoopDualTurChem` from three
+  16000-damage mains onto `^Warhead_CannonChem_Medium` at 48000.
+- Resolver comparisons caught projectile/effect inheritance that the removed old parents
+  had supplied. Those surviving fields were restored locally: Ratty turret inaccuracy,
+  both ground/air explosion sets, Scooper water effect, and both concrete-damage values.
+  Final comparisons preserve projectile behavior, reports, effects, smudges, clouds,
+  shield behavior, and concrete damage.
+- Main totals are preserved. Standard CannonChem armour/blast profiles are the accepted
+  classification consequence: the upgraded broken Ratty turret now bottoms at 0.98x
+  versus Wood; the broken Scooper turret at 0.83x versus Wood and 0.91x versus None.
+- Whole-tree comparison preserves every unchanged-name weapon's main total. The survey
+  falls 294 → 292 (mixed 282 → 280), and W24 broadcast debt falls 936 → 934 versus the
+  939 ratchet.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 balance
+  ledgers match live YAML; empty-warhead 0; orphan-old-key real bugs 0; dangling
+  inheritance targets 0; physical-state audit PASS; generator drift 0.
+- No pricing, engine/runtime source, pin, cadence, range, or total damage was changed.
+  No game was launched, and nothing was committed or pushed.
+
+## 2026-08-26 — W24 A5 complete: final D2K one-user wrapper pairs removed
+
+- Removed the dedicated projectile/effect wrappers for `D2K_TowerMissile` and
+  `mtank_pri2`, one weapon at a time. Both now inherit the generic D2K heavy-missile
+  projectile/effect parents and keep their surviving weapon-specific fields locally.
+- Exact resolved comparisons preserve both weapons' complete projectile guidance,
+  trails/contrails, speeds, accuracy, launch behavior, warhead order, explosions, sounds,
+  smudges, shield effects, concrete damage, and Tower Missile ground-fire effect.
+- This clears all 14 live one-user templates created by the W24 batch. The older plan's
+  27-template figure was an historical estimate; the refreshed upstream-based census found
+  14 still live at this checkpoint, and all 14 have now been removed.
+- Whole-tree comparison preserves main-damage totals for every unchanged-name weapon.
+  The only blast-profile differences remain the three accepted A3 family corrections.
+- Final verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 balance
+  ledgers match live YAML; empty-warhead 0; orphan-old-key real bugs 0; dangling inheritance
+  targets 0; physical-state audit PASS; generator drift 0; and W24 broadcast debt remains
+  below its ratchet at 936 versus 939. The old-family survey remains 294 weapons.
+- No pricing, engine/runtime source, pin, cadence, range, or damage was changed. No game
+  was launched, and nothing was committed or pushed.
+- Trialed the next survey pair, `ArmoredCarMGWaveforce` and its AA variant, by removing
+  their apparently shadowed `^HeavyAAWeapon` parent. The resolver exposed a hidden 1000
+  damage plus percentage component, so the trial was fully reverted. Both weapons again
+  resolve exactly to upstream and are deferred to a deliberate multi-main collapse.
+
+## 2026-08-25 — W24 A5: D2K Rocket Trooper projectile wrappers removed
+
+- Removed five one-user projectile wrappers for `D2K_Rocket_Trooper`,
+  `D2K_Rocket_Trooper1`, `D2K_Rocket_Trooper2`, `D2K_Rocket_Trooper_AA`, and
+  `D2K_Rocket_Trooper_AGOnly`. Each weapon now inherits the corresponding generic
+  projectile family and keeps its D2K-specific projectile fields locally.
+- Full inheritance comparisons are exactly equal for all five weapons: projectile type,
+  image, palette, trail, speed, inaccuracy, launch behavior, warheads, effects, and
+  concrete damage are unchanged. This deliberately preserves the unusual AG-only weapon's
+  missile projectile on top of the generic grenade parent.
+- Final verification: all unchanged-name weapons preserve main-damage totals; 394 tests
+  passed (11 optional spreadsheet tests skipped); 32 balance ledgers match live YAML;
+  empty-warhead 0; orphan-old-key real bugs 0; dangling inheritance targets 0;
+  physical-state audit PASS; generator drift 0; W24 broadcast debt remains below its
+  ratchet at 936 versus 939. The old-family survey remains 294 weapons.
+- No pricing, engine/runtime source, pin, weapon operation, or accepted A3 profile was
+  changed. No game was launched, and nothing was committed or pushed.
+
+## 2026-08-25 — W24 A4 naming cleanup + A5 one-user-template pilot
+
+- Aligned the RA1 rocket-upgrade name with its active thermobaric payload, including its
+  condition, icon, player-facing text, AI references, sequences, and survival-map script.
+  Also renamed the Su-57 weapons away from the obsolete nuclear wording and renamed the
+  Monster Tank thermobaric weapon to its active inferno family. `safe_rename.py` changed
+  89 references in 12 text files plus the icon; no old identifiers remain, and weapon
+  values did not change.
+- Removed five templates that each had exactly one consumer: the Juggerboat artillery
+  projectile, Dune siege-mortar projectile and effect, D2K 155mm2 effect, and Fremen RPG
+  blast effect. The surviving fields now live with their sole consumers or use the
+  appropriate generic parent.
+- Full inheritance comparisons are exactly equal for all five consumers. The mortar
+  comparison caught an inheritance-order trap: later `^D2K_Cannon` already overrode the
+  apparent one-user template's speed, inaccuracy, and explosion, so those dead values
+  were not copied into the live weapon.
+- This is a structure-only pilot. No prices, engine/runtime source, weapon damage, or
+  weapon operation were changed. Verification is static-only; no game was launched at
+  maintainer request.
+- Final verification: all 2342 unchanged-name weapons preserve main-damage totals; the three
+  renamed weapons are name-only changes, and the five A5
+  consumers preserve their fully resolved warheads and projectile invariants exactly;
+  394 tests passed (11 optional spreadsheet tests skipped); 32 balance ledgers match the
+  live rules; empty-warhead 0; orphan-old-key real bugs 0; dangling inheritance targets 0;
+  physical-state audit PASS; generator drift 0; and `git diff --check` clean. The refreshed
+  old-family survey remains 294 weapons (12 pure single, 282 mixed in 210 groups). The only
+  Fluent missing-key finding is the pre-existing `upgrade_burninglasers.description`.
+
+## 2026-08-25 — W24 A3: Japanese plasma-bomb consolidation
+
+- Refreshed `phase_b_survey.md` from upstream master `95c7cba27`: 294 concrete
+  weapons remain on old full-stack families (12 pure single, 282 mixed in 210 groups).
+- Trialed the two documented `CannonChem` corrections first, then backed them out when
+  `audit_upgrade_regression.py` added role-shift findings for the Ratty and Scooper tanks.
+- Collapsed `JapanesePlasmaBomb` onto the existing `^Warhead_Plasma_Heavy`. Its 30000
+  main-damage total, cadence, range, targets, projectile, reports, effects, and concrete
+  damage stay fixed. The old chemical/fire/demolition radial profiles become the standard
+  Plasma profile; the upgrade audit reports 0.96x versus Wood. The maintainer accepted
+  family-profile changes that directly result from correcting a weapon classification.
+- Finished A3 by collapsing `TS70mmChem` onto `^Warhead_CannonChem_Light` at 6000
+  and `TSScoopDualChem` onto `^Warhead_CannonChem_Medium` at 30000. Their cadence,
+  range, projectile, reports, effects, and concrete damage stay fixed; their standard
+  Chemical Cannon profiles make the upgraded Ratty 0.75x and Scooper 0.80x versus Wood.
+- `review_batch_diff.py` preserves main damage on all 2345 weapons and reports the three
+  accepted family-profile changes. Verification: 394 tests passed (11 skipped); 32
+  balance ledgers clean; empty-warhead 0; orphan-old-key real bugs 0; physical-state
+  audit PASS; generator drift 0. Pricing and the percentage-damage runtime source remain
+  untouched. Verification is static-only and in-game review is deferred by maintainer request.
+
 ## 2026-08-24 — old-repo reconciliation, no-file-change merge, full verification
 
 - Investigated `cameo-mod/Cameo-mod/compare/master...Zeruel87:Cameo-mod:master` showing 2 stray commits on the old fork.

@@ -247,14 +247,22 @@ Dune_SiegeMortar:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Concussion_Medium
 	Inherits@wh3: ^Warhead_CannonAP_Light
-	Inherits@proj: ^Projectile_Shell_Light_D2K_Mortar
-	Inherits@fx: ^Effect_CannonAP_Light_D2K_Mortar
+	Inherits@proj: ^Projectile_Shell_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	Inherits@4: ^D2K_Cannon
 	ReloadDelay: 80
 	Range: 9920
 	MinRange: 1985
 	Report: MORTAR1.WAV
 	TargetActorCenter: true
+	Projectile: Bullet
+		LaunchAngle: 125
+		ContrailLength: 30
+		ContrailStartWidth: 60
+		ContrailEndWidth: 15
+		ContrailStartColor: FEDCBA98
+		ContrailEndColor: 87654321
+		InaccuracyType: PerCellIncrement
 	Warhead@Concussion_Medium:
 		Damage: 10000
 	Warhead@Demolition_Light:
@@ -272,12 +280,25 @@ D2K_Rocket_Trooper_AGOnly:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@wh3: ^Warhead_CannonHE_Medium
-	Inherits@proj: ^Projectile_Grenade_Light_D2K_Rocket_Trooper_AGOnly
+	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_CannonHE_Medium_D2K
 	ReloadDelay: 50
 	Range: 6252
 	Report: ROCKET1.WAV
 	ValidTargets: Ground, Water
+	Projectile: Missile
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		Speed: 333
+		Inaccuracy: 11
+		InaccuracyType: PerCellIncrement
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		LaunchAngle: 66
+		Shadow: true
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water
 		Damage: 10000
@@ -290,12 +311,27 @@ D2K_Rocket_Trooper_AA:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_MissileAP_Light
 	Inherits@wh3: ^Warhead_MissileAP_Heavy
-	Inherits@proj: ^Projectile_Missile_Light_D2K_Rocket_Trooper_AA
+	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
 	ReloadDelay: 75
 	Range: 9716
 	Report: ROCKET1.WAV
 	ValidTargets: Air
+	Projectile: Missile
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		Speed: 888
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		LaunchAngle: 125
+		MaximumLaunchSpeed: 222
+		MinimumLaunchSpeed: 222
+		HorizontalRateOfTurn: 22
+		VerticalRateOfTurn: 22
+		Acceleration: 8
 	Warhead@MissileAP_Light:
 		ValidTargets: Air
 		Damage: 10000

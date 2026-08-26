@@ -28,9 +28,10 @@ instantaneous thump. A damage check alone cannot see that, so `Spread`/`Falloff`
 `MaxRadius` are diffed too — as a REPORT, because changing the shape is often the whole point
 of moving a weapon onto a family.
 
-EXIT CODE: 1 if any weapon's non-concrete main damage changed — that is the "Damage verbatim"
-law from `WEAPON_3WAY_SPLIT.md` and it is not a judgement call. Everything else is reported but
-does not fail, because a retrofit may legitimately change `Burst` cadence or add a projectile.
+EXIT CODE: 1 if any weapon's non-concrete main damage or authored percentage-damage total changed
+— those are the "Damage verbatim" law from `WEAPON_3WAY_SPLIT.md` and are not judgement calls.
+Everything else is reported but does not fail, because a retrofit may legitimately change `Burst`
+cadence or add a projectile.
 """
 from __future__ import annotations
 
@@ -43,7 +44,14 @@ if hasattr(sys.stdout, "reconfigure"):          # Windows consoles default to cp
     sys.stdout.reconfigure(encoding="utf-8")
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "balance"))
 from cameo_model import Model  # noqa: E402
+import percentage_damage as pd  # noqa: E402
+
+
+# Match the repository's upgrade audit. This stays below the legacy Int32
+# multiplication overflow boundary for the current authored percentage units.
+PERCENTAGE_REFERENCE_HP = 200_000
 
 
 def _dmg(node) -> float | None:
@@ -85,6 +93,10 @@ def snapshot(root: str, with_concrete: bool) -> dict[str, dict]:
         out[name] = {
             "damage": total,
             "mains": sorted(mains, reverse=True),
+            "percentage_damage": sum(
+                app["runtime_hp"]
+                for app in pd.percentage_applications(node, PERCENTAGE_REFERENCE_HP)
+                if "friendlyfire" not in app["tag"].lower()),
             "shape": sorted(shape),
             "Range": node.get("Range"),
             "ReloadDelay": node.get("ReloadDelay"),
@@ -107,6 +119,9 @@ def compare(base: dict, head: dict) -> tuple[dict, list, list]:
         diffs = []
         if abs(b["damage"] - h["damage"]) > 0.5:
             diffs.append(["main_damage", b["damage"], h["damage"]])
+        if abs(b["percentage_damage"] - h["percentage_damage"]) > 0.5:
+            diffs.append([
+                "percentage_damage", b["percentage_damage"], h["percentage_damage"]])
         for k in SOFT:
             if (b[k] or "") != (h[k] or ""):
                 diffs.append([k, b[k], h[k]])
@@ -166,6 +181,20 @@ def main() -> int:
     else:
         print("\n## ✅ main damage preserved on every weapon")
 
+    pct = by_kind.get("percentage_damage", [])
+    if pct:
+        print(f"\n## ⛔ FAIL — percentage damage changed on {len(pct)} weapon(s)\n")
+        print("Values are runtime HP at a 200,000 HP reference target, so both standalone "
+              "percentage twins and folded `PercentageScale` hits are compared with the "
+              "engine's integer arithmetic.\n")
+        print("| before | after | weapon |")
+        print("|--:|--:|---|")
+        for w in pct:
+            b, h = base[w]["percentage_damage"], head[w]["percentage_damage"]
+            print(f"| {b:.0f} | {h:.0f} | `{w}` |")
+    else:
+        print("\n## ✅ percentage damage preserved on every weapon")
+
     for kind in SOFT + ("Report", "blast_shape"):
         ws = by_kind.get(kind)
         if not ws:
@@ -183,7 +212,7 @@ def main() -> int:
             encoding="utf-8")
         print(f"\n_wrote {a.json}_")
 
-    return 1 if dmg else 0
+    return 1 if dmg or pct else 0
 
 
 if __name__ == "__main__":

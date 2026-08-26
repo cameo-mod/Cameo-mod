@@ -625,7 +625,7 @@ ra1_soviets_missilesubmarine:
 	Inherits@sub: ^Submarine
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
-	Inherits@HighExplosiveRocketsUpgradeRA1: ^HighExplosiveRocketsUpgradeRA1
+	Inherits@ThermobaricRocketsUpgradeRA1: ^ThermobaricRocketsUpgradeRA1
 	Inherits@InfernoDoctrineRA1: ^InfernoDoctrineRA1
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
 	Valued:
@@ -670,14 +670,14 @@ ra1_soviets_missilesubmarine:
 	RenderSprites:
 		Image: ramsub
 		#PlayerPalette: raplayer
-	FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+	FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 110
-	RangeMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+	RangeMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 110
-	RevealsShroudMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+	RevealsShroudMultiplier@ra1_soviets_upgrade_thermobaricrockets:
 		Modifier: 120
 	ActorStatValues:
-		Upgrades: ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_highexplosiverockets, ra1_soviets_doctrine_inferno, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_thermobaricrockets, ra1_soviets_doctrine_inferno, ra1_soviets_upgrade_stalinium
 
 ra1_navaltransport:
 	Inherits: ^BoatUnit

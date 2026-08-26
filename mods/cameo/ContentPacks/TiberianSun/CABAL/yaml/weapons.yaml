@@ -942,8 +942,8 @@ CabalLaserBoatLaserAA:
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 CabalDissolverSpray:
-	Inherits: ^LightChemicalWeapon
-	Inherits@TANKDESTROYER: ^TankDestroyerCannon
+	Inherits@wh: ^Warhead_CannonChem_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	Report: tsdissolver.wav
 	ReloadDelay: 4
 	Range: 5142
@@ -955,21 +955,8 @@ CabalDissolverSpray:
 		Image: tsdissolvereffect
 		Palette: alpha50
 		Inaccuracy: 512
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 1
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 2000
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 1
+	Warhead@CannonChem_Light:
+		Damage: 4000
 	Warhead@corroded: GrantExternalCondition
 		Range: 1500
 		Condition: corroded
@@ -979,6 +966,10 @@ CabalDissolverSpray:
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_dissolveimpact
 		ImpactSounds: drtelectro.wav
+	Warhead@EffectWater:
+		Explosions: med_splash
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
 CabalCommandoPlasma:
 	Inherits: ^HeavyCannon
 	Inherits@FLAME: ^MediumFlameWeapon

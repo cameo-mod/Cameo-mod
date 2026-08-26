@@ -227,7 +227,7 @@
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
-      "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_hurricanerocketpods",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@Missiles",
       "versus_templates": [
        "^Warhead_Demolition_Light",
@@ -273,7 +273,7 @@
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
-      "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesRocketPod1",
       "versus_templates": [
        "^Warhead_Demolition_Light",
@@ -319,7 +319,7 @@
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
-      "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesRocketPod2",
       "versus_templates": [
        "^Warhead_Demolition_Light",
@@ -421,7 +421,7 @@
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_promotion_hurricanerocketpods",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesHE",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
@@ -523,7 +523,7 @@
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets && ra1_soviets_promotion_hurricanerocketpods",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesHERocketPod1",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
@@ -625,7 +625,7 @@
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets && ra1_soviets_promotion_hurricanerocketpods",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesHERocketPod2",
       "versus_templates": [
        "^Warhead_CannonHE_Heavy",
@@ -2546,7 +2546,7 @@
       "pricing": true,
       "range": "7890",
       "reloaddelay": "50",
-      "requires": "!ra1_soviets_upgrade_highexplosiverockets",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
@@ -2556,7 +2556,7 @@
       "warheads": [
        "^Warhead_MissileHE_Heavy"
       ],
-      "weapon": "NuclearMaverick",
+      "weapon": "Su57Maverick",
       "weapon_class_source": "template"
      },
      {
@@ -2577,7 +2577,7 @@
       "pricing": true,
       "range": "7890",
       "reloaddelay": "50",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets",
       "slot": "Armament@HE",
       "versus_templates": [
        "^Warhead_MissileThermobaric_Heavy",
@@ -2587,7 +2587,7 @@
       "warheads": [
        "^Warhead_MissileThermobaric_Heavy"
       ],
-      "weapon": "ThermobaricNuclearMaverick",
+      "weapon": "Su57MaverickThermobaric",
       "weapon_class_source": "template"
      },
      {
@@ -2753,8 +2753,8 @@
      "unit_class": null
     },
     "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets.Modifier",
-     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets",
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
+     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
      "v": 1.15
     },
     "hp": {
@@ -4492,8 +4492,8 @@
      "unit_class": 0.225
     },
     "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml#FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets.Modifier",
-     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets",
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
+     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
      "v": 1.1
     },
     "hp": {
@@ -5785,52 +5785,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "200",
-        "tag": "Flame_Light",
+        "damage": "16000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "169",
+        "tag": "Thermobaric_Light",
         "type": "AreaDamage"
        }
       ],
@@ -5842,13 +5800,13 @@
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^ShrapnelWeapon",
-       "^MediumFlameWeapon",
-       "GrenadeRA"
+       "^Warhead_Thermobaric_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Concussion_Medium",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Flame_Light"
+       "^Warhead_Thermobaric_Light"
       ],
       "weapon": "GrenadeThermobaric",
       "weapon_class_source": "template"
@@ -5857,52 +5815,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "111, 33, 11, 3",
-        "spread": "375",
-        "tag": "MediumFlameWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "200",
-        "tag": "Flame_Light",
+        "damage": "16000",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "169",
+        "tag": "Thermobaric_Light",
         "type": "AreaDamage"
        }
       ],
@@ -5914,13 +5830,13 @@
       "requires": "ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "^ShrapnelWeapon",
-       "^MediumFlameWeapon",
-       "GrenadeRA"
+       "^Warhead_Thermobaric_Light",
+       "^Projectile_Grenade_Light",
+       "^Effect_Concussion_Medium",
+       "^Effect_Flame_Light"
       ],
       "warheads": [
-       "^Warhead_Demolition_Light",
-       "^Warhead_Flame_Light"
+       "^Warhead_Thermobaric_Light"
       ],
       "weapon": "GrenadeThermobaric",
       "weapon_class_source": "template"
@@ -8675,33 +8591,6 @@
      "Upgrades"
     ]
    },
-   "ra1_soviets_upgrade_highexplosiverockets": {
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "inherited",
-     "v": "7500"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "TechUpgrade",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "name": "High Explosive Rockets",
-    "prerequisites": [
-     "~ra1_soviets_techcenter",
-     "~ra1_soviets_doctrine_heavyarmor",
-     "!ra1_soviets_upgrade_highexplosiverockets"
-    ],
-    "queue": [
-     "Research"
-    ]
-   },
    "ra1_soviets_upgrade_incendiarybullets": {
     "build_limit": {
      "src": "inherited",
@@ -9053,6 +8942,33 @@
     ],
     "queue": [
      "Upgrades"
+    ]
+   },
+   "ra1_soviets_upgrade_thermobaricrockets": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "TechUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Thermobaric Rockets",
+    "prerequisites": [
+     "~ra1_soviets_techcenter",
+     "~ra1_soviets_doctrine_heavyarmor",
+     "!ra1_soviets_upgrade_thermobaricrockets"
+    ],
+    "queue": [
+     "Research"
     ]
    },
    "ra1_soviets_upgrade_thermonuclearrockets": {
@@ -10048,7 +9964,7 @@
       "pricing": true,
       "range": "13820",
       "reloaddelay": "115",
-      "requires": "!(ra1_soviets_upgrade_highexplosiverockets || ra1_soviets_upgrade_scorchedearth)",
+      "requires": "!(ra1_soviets_upgrade_thermobaricrockets || ra1_soviets_upgrade_scorchedearth)",
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
@@ -10116,7 +10032,7 @@
       "pricing": true,
       "range": "13820",
       "reloaddelay": "115",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets || ra1_soviets_upgrade_scorchedearth",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets || ra1_soviets_upgrade_scorchedearth",
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^MediumChemicalWeapon",
@@ -12194,7 +12110,7 @@
       "warheads": [
        "^Warhead_CannonFire_Heavy"
       ],
-      "weapon": "MonsterTank120mmThermobaric",
+      "weapon": "MonsterTank120mmInferno",
       "weapon_class_source": "template"
      },
      {
@@ -12504,8 +12420,8 @@
      "unit_class": 0.4
     },
     "firepower_multiplier": {
-     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets.Modifier",
-     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets",
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets.Modifier",
+     "trait": "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets",
      "v": 1.05
     },
     "hp": {
@@ -13095,7 +13011,7 @@
       "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
-      "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
        "^LightFlameWeapon",
@@ -13160,7 +13076,7 @@
       "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
-      "requires": "!ra1_soviets_upgrade_highexplosiverockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@SECONDARYTargetingComputer",
       "versus_templates": [
        "MammothTusk2"
@@ -13222,7 +13138,7 @@
       "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@UpgradeSECONDARY",
       "versus_templates": [
        "^HeavyFlameWeapon",
@@ -13286,7 +13202,7 @@
       "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@UpgradeSECONDARYTargetingComputer",
       "versus_templates": [
        "MammothTusk2Thermobaric"
@@ -13785,7 +13701,7 @@
       "pricing": true,
       "range": "14110",
       "reloaddelay": "120",
-      "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_teslarockets",
+      "requires": "!ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_upgrade_teslarockets",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_MissileHE_Heavy",
@@ -13857,7 +13773,7 @@
       "pricing": true,
       "range": "14110",
       "reloaddelay": "120",
-      "requires": "ra1_soviets_upgrade_highexplosiverockets",
+      "requires": "ra1_soviets_upgrade_thermobaricrockets",
       "slot": "Armament@HE",
       "versus_templates": [
        "^Warhead_Demolition_Heavy",

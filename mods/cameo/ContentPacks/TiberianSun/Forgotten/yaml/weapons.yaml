@@ -9,8 +9,7 @@ TS70mm:
 	Warhead@CannonHE_Medium:
 		Damage: 4000
 TS70mmChem:
-	Inherits@wh: ^Warhead_CannonHE_Medium
-	Inherits@wh2: ^Warhead_Chemical_Light
+	Inherits@wh: ^Warhead_CannonChem_Light
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits@fx2: ^TSCannonEffect
@@ -19,13 +18,11 @@ TS70mmChem:
 	Report: flamer2.aud
 	Projectile: Bullet
 		Speed: 3500
-	Warhead@CannonHE_Medium:
-		Damage: 4000
-	Warhead@Chemical_Light:
+	Warhead@CannonChem_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		Damage: 2000
+		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@Effect: CreateEffect
 		Explosions: chemball
@@ -68,35 +65,34 @@ TS70mmTur:
 	Warhead@CannonAP_Light:
 		Damage: 4000
 TS70mmTurChem:
-	Inherits: ^Warhead_CannonHE_Medium
+	Inherits: ^Warhead_CannonChem_Light
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
 	Inherits@4: ^TSCannonEffect
-	Inherits@5: ^LightChemicalWeapon
-	Inherits@6: ^TankDestroyerCannon
 	ReloadDelay: 10
 	Range: 6574
 	Projectile: Bullet
 		Speed: 850
 		Blockable: false
 		LaunchAngle: 0
-	Warhead@CannonHE_Medium:
-		Damage: 4000
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@LightChemicalWeapon: AreaDamage
+		Inaccuracy: 150
+	Warhead@CannonChem_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactSounds: xplosml2.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
@@ -177,8 +173,7 @@ TSScoopDual:
 	Warhead@CannonHE_Medium:
 		Damage: 20000
 TSScoopDualChem:
-	Inherits@wh: ^Warhead_CannonHE_Medium
-	Inherits@wh2: ^Warhead_Chemical_Medium
+	Inherits@wh: ^Warhead_CannonChem_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits@fx2: ^TSCannonEffect
@@ -189,13 +184,11 @@ TSScoopDualChem:
 	Report: flamer2.aud
 	Projectile: Bullet
 		Speed: 3500
-	Warhead@CannonHE_Medium:
-		Damage: 20000
-	Warhead@Chemical_Medium:
+	Warhead@CannonChem_Medium:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		Damage: 10000
+		Damage: 30000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@Effect: CreateEffect
 		Explosions: med_tibnapalm
@@ -237,37 +230,37 @@ TSScoopDualTur:
 	Warhead@Concussion_Medium:
 		Damage: 16000
 TSScoopDualTurChem:
-	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits: ^Warhead_CannonChem_Medium
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^TSCannonEffect
-	Inherits@5: ^MediumChemicalWeapon
-	Inherits@6: ^ShrapnelWeapon
 	ReloadDelay: 48
 	Burst: 2
 	BurstDelays: 2
 	Range: 6404
 	Projectile: Bullet
 		Speed: 850
-	Warhead@CannonHE_Heavy:
-		Damage: 16000
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 16000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		Damage: 8
-	Warhead@MediumChemicalWeapon: AreaDamage
+	Warhead@CannonChem_Medium:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		Damage: 16000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 8
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		Damage: 48000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Concrete: DamagesConcrete
+		Damage: 175
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50
@@ -293,27 +286,22 @@ TSHighVelocity:
 		Damage: 30000
 TSHighVelocityChem:
 	Inherits: ^TSCannonEffect
-	Inherits@2: ^LightChemicalWeapon
-	Inherits@3: ^TankDestroyerCannon
+	Inherits@wh: ^Warhead_CannonChem_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 90
 	Range: 7701
 	Projectile: Bullet
 		Speed: 850
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 30000
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 15
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 15000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 7
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		Inaccuracy: 150
+	Warhead@CannonChem_Light:
+		Damage: 45000
+		PercentageScale: 9778
+	Warhead@Effect:
+		Explosions: poof
+	Warhead@EffectWater:
+		Explosions: med_splash
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
@@ -339,25 +327,22 @@ TSHighVelocity2:
 		Damage: 40000
 TSHighVelocity2Chem:
 	Inherits: ^TSCannonEffect
-	Inherits@2: ^LightChemicalWeapon
-	Inherits@3: ^TankDestroyerCannon
+	Inherits@wh: ^Warhead_CannonChem_Light
+	Inherits@fx: ^Effect_CannonAP_Light
 	ReloadDelay: 55
 	Range: 8207
 	Projectile: Bullet
 		Speed: 850
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 40000
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 20
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MLightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 10
+		Inaccuracy: 150
+	Warhead@CannonChem_Light:
+		Damage: 60000
+		PercentageScale: 10333
+	Warhead@Effect:
+		Explosions: poof
+	Warhead@EffectWater:
+		Explosions: med_splash
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50
@@ -610,7 +595,6 @@ TSBoatcannon:
 		Spread: 400
 TSChemJuggerboat90mm:
 	Inherits@wh: ^Warhead_CannonChem_Medium
-	Inherits@proj: ^Projectile_ArtilleryShell_Medium
 	Inherits@fx: ^Effect_Chem_Medium
 	ReloadDelay: 69
 	Range: 12834
@@ -620,7 +604,14 @@ TSChemJuggerboat90mm:
 	Report: jugger1.aud
 	TargetActorCenter: true
 	Projectile: Bullet
+		Image: 120MM
 		Speed: 280
+		Blockable: false
+		LaunchAngle: 165
+		Inaccuracy: 1c0
+		Shadow: true
+		ContrailLength: 10
+		ContrailWidth: 0c32
 	Warhead@CannonChem_Medium:
 		PercentageScale: 14000
 		Damage: 30000
@@ -1182,33 +1173,15 @@ MutFlamer:
 	Warhead@Flame_Medium:
 		Damage: 28000
 MutFlamerChem:
-	Inherits: ^MediumFlameWeapon
-	Inherits@2: ^MediumChemicalWeapon
+	Inherits@wh: ^Warhead_Plasma_Medium
+	Inherits@proj: ^Projectile_Chem_Medium
+	Inherits@fx: ^Effect_Flame_Medium
+	Inherits@fx2: ^Effect_Chem_Medium
 	ReloadDelay: 50
 	Range: 2386
 	Report: flamtnk1.aud
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 28000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 14
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 14000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 7
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+	Warhead@Plasma_Medium:
+		Damage: 42000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50
@@ -1221,33 +1194,14 @@ MutFlamerChem:
 		InvalidTargets: Water
 
 MutHFlamer:
-	Inherits: ^MediumFlameWeapon
-	Inherits@2: ^HeavyFlameWeapon
+	Inherits@wh: ^Warhead_Flame_Heavy
+	Inherits@proj: ^Projectile_Flame_Heavy
+	Inherits@fx: ^Effect_Flame_Heavy
 	ReloadDelay: 65
 	Range: 2425
 	Report: flamtnk1.aud
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 10
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 20000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 10
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
+	Warhead@Flame_Heavy:
+		Damage: 40000
 
 MutHFlamerChem:
 	Inherits: ^MediumFlameWeapon
@@ -1335,9 +1289,9 @@ TSFiendShard:
 		ValidTargets: Ground, Air
 
 TSFiendShardUP:
-	Inherits: ^LightChemicalWeapon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^HeavyChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@proj: ^Projectile_Chem_Heavy
+	Inherits@fx: ^Effect_Chem_Heavy
 	ReloadDelay: 36
 	Burst: 3
 	BurstDelays: 2
@@ -1349,39 +1303,8 @@ TSFiendShardUP:
 		RangeLimit: 33333
 		Image: ra2txgasg
 		TrailImage: green_smokey
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 6000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 6000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 6000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 3
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+	Warhead@Chemical_Heavy:
+		Damage: 18000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
@@ -1557,44 +1480,14 @@ TSChemspray:
 	Warhead@Chemical_Light:
 		Damage: 32000
 TSChemsprayUP:
-	Inherits: ^LightChemicalWeapon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^HeavyChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@proj: ^Projectile_Chem_Heavy
+	Inherits@fx: ^Effect_Chem_Heavy
+	Report: flamer2.aud
 	ReloadDelay: 55
 	Range: 3183
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 32000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 16
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 32000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 16
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 32000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 16
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+	Warhead@Chemical_Heavy:
+		Damage: 96000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 3
 		Duration: 50
@@ -1616,44 +1509,14 @@ TSVisceroidSpray:
 	Warhead@Chemical_Light:
 		Damage: 10000
 TSVisceroidSprayUP:
-	Inherits: ^LightChemicalWeapon
-	Inherits@2: ^MediumChemicalWeapon
-	Inherits@3: ^HeavyChemicalWeapon
+	Inherits@wh: ^Warhead_Chemical_Heavy
+	Inherits@proj: ^Projectile_Chem_Heavy
+	Inherits@fx: ^Effect_Chem_Heavy
+	Report: flamer2.aud
 	ReloadDelay: 25
 	Range: 1618
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 10000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 5
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 10000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 5
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@HeavyChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 10000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@HeavyChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 5
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+	Warhead@Chemical_Heavy:
+		Damage: 30000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
