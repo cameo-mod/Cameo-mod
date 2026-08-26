@@ -1,5 +1,34 @@
 # Development Log
 
+## 2026-08-26 — W24 A15: laser weapon group consolidated
+
+- Collapsed six explicitly laser-identified roots onto `^Warhead_Laser_Heavy`:
+  `RA2CosmonautLaser`, `LunarNaxiDroneLaser`, `NaxLaserT`,
+  `NaxiBeetleLaser_elite`, `NaxiTank2Laser`, and `TSLaser90mm`. Their targeting,
+  lens-upgrade, amplified, anti-air, and deployed descendants inherit the cleanup,
+  giving nineteen resolved definitions.
+- Whole-tree comparison preserves flat and runtime percentage damage on all 2345
+  weapons. Local `PercentageScale` values with whole-percent denominators retain the
+  legacy 4% and 6% totals, including hidden folded CannonAP percentage damage on the TS
+  laser and six inherited percentage twins on the Cosmonaut laser. They also avoid newly
+  exposing the parked Int32 overflow bug on the active 3,750,000-HP maximum target.
+- The shared `^NaxiLegacyLaserDelivery` mixin preserves the legacy hybrid LaserZap fields,
+  reports, targeting, cadence, water/air/ground effects, smudges, shield effects, and
+  concrete damage without retaining any legacy damage family. The standard heavy Laser
+  armor, blast, friendly-fire, and Temperature profile is the intended classification
+  consequence.
+- Survey debt falls 265 -> 259 weapons (253 -> 248 mixed, 202 -> 200 groups), and the
+  broadcast ratchet tightens 901 -> 889.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; generator drift 0; empty-warhead 0; orphan-old-key real bugs 0;
+  physical-state audit PASS. Independent review restored baseline actor-center targeting
+  and the smaller TS impact glow before approval. The first controlled launch caught one
+  redundant missing-key removal that static resolution tolerated; after removing it, the
+  second launch stayed alive and responsive through startup with no new exception log,
+  then its exact test process was stopped.
+- No pricing values, engine/runtime source, engine pin, cadence, or range changed;
+  runtime percentage totals remain exact for every active targetable HP value.
+
 ## 2026-08-26 — W24 A14: Steel railgun pair consolidated
 
 - Collapsed `SteelAirTurret` and `SteelStalkerRailgun` from simultaneous legacy

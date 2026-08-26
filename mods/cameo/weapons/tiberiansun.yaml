@@ -208,22 +208,32 @@ TS90mmDep:
 
 TSLaser90mm:
 	# Anti-armour cannon half, as TS90mm above — this is its T3 laser variant.
-	Inherits: ^Warhead_CannonAP_Medium
-	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonAP_Medium
-	Inherits@4: ^LaserWeapon
-	Inherits@5: ^TSLaserEffect
+	Inherits@wh: ^Warhead_Laser_Heavy
+	Inherits@proj: ^Projectile_Laser_Heavy
+	Inherits@legacyfx: ^Effect_CannonAP_Medium
+	Inherits@fx: ^Effect_Laser_Heavy
+	Inherits@tsfx: ^TSLaserEffect
+	ValidTargets: Ground, Water
+	Report: obelray1.aud
 	Projectile: LaserZap
+		Image: 120MM
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		Shadow: true
 		Width: 72
 		SecondaryBeamWidth: 36
 	ReloadDelay: 32
 	Range: 5423
-	Warhead@CannonAP_Medium:
-		Damage: 6000
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 6000
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Damage: 3
+	Warhead@Laser_Heavy:
+		Damage: 11600
+		PercentageScale: 103
+		PercentageDenominator: 100
+	Warhead@Glow:
+		Scale: 0.55
+		FadeFrames: 10
+	Warhead@Effect:
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Ground, Ship
 
 TSLaser90mmDep:
 	Inherits: TSLaser90mm
