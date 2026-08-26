@@ -604,9 +604,12 @@ v1rockets:
 	Warhead@Demolition_Light:
 		Damage: 12000
 v1rocketsThermobaric:
-	Inherits: ^MediumMissile
-	Inherits@2: ^Grenade
-	Inherits@3: ^HeavyFlameWeapon
+	Inherits@wh: ^Warhead_MissileThermobaric_Medium
+	Inherits@proj: ^Projectile_Grenade_Light
+	Inherits@fx1: ^Effect_MissileHE_Medium
+	Inherits@fx2: ^Effect_Concussion_Light
+	Inherits@fx3: ^Effect_Flame_Heavy
+	ValidTargets: Ground, Water
 	ReloadDelay: 115
 	Burst: 4
 	BurstDelays: 5
@@ -626,27 +629,9 @@ v1rocketsThermobaric:
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 8000
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		Damage: 4
-	Warhead@Grenade: SpreadDamage
-		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 4000
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		Damage: 4
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 8000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		Damage: 4
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
+	Warhead@MissileThermobaric_Medium:
+		ValidTargets: Ground, Water
+		Damage: 24000
 
 GradRockets:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
@@ -1031,13 +1016,11 @@ HindMissiles:
 		ImpactActors: false
 
 HindMissilesThermobaric:
-	Inherits: ^Warhead_CannonHE_Heavy
-	Inherits@2: ^Projectile_Shell_Heavy
-	Inherits@3: ^Effect_CannonHE_Heavy
-	Inherits@4: ^Grenade
-	Inherits@5: ^ShrapnelWeapon
-	Inherits@6: ^MediumFlameWeapon
-	Inherits@7: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileThermobaric_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx1: ^Effect_Concussion_Medium
+	Inherits@fx2: ^Effect_Flame_Medium
+	Inherits@fx3: ^Effect_MissileHE_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5528
@@ -1056,46 +1039,9 @@ HindMissilesThermobaric:
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@Grenade: SpreadDamage
+	Warhead@MissileThermobaric_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@CannonHE_Heavy:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 10000
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
@@ -2075,14 +2021,11 @@ MammothTuskTargetingComputer:
 	ValidTargets: Ground, Water, Air
 
 MammothTuskThermobaric:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^MediumFlameWeapon
-	Inherits@3: ^HeavyFlameWeapon
-	Inherits@4: ^Grenade
-	Inherits@5: ^FlakWeapon
-	Inherits@6: ^ShrapnelWeapon
-	Inherits@7: ^MediumMissile
-	Inherits@8: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileThermobaric_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx1: ^Effect_Flame_Heavy
+	Inherits@fx2: ^Effect_Concussion_Light
+	Inherits@fx3: ^Effect_MissileHE_Heavy
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 91
 	Burst: 2
@@ -2100,81 +2043,9 @@ MammothTuskThermobaric:
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
+	Warhead@MissileThermobaric_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
+		Damage: 32000
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
 		GlowScale: 2.0
@@ -2488,9 +2359,11 @@ MammothTusk2TargetingComputer:
 	ValidTargets: Ground, Water, Air
 
 MammothTusk2Thermobaric:
-	Inherits: ^HeavyFlameWeapon
-	Inherits@2: ^HeavyBomb
-	Inherits@3: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileThermobaric_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx1: ^Effect_Flame_Heavy
+	Inherits@fx2: ^Effect_Concussion_Heavy
+	Inherits@fx3: ^Effect_MissileHE_Heavy
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 125
 	Burst: 2
@@ -2508,31 +2381,11 @@ MammothTusk2Thermobaric:
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
+	Warhead@MissileThermobaric_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 8
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-	Warhead@HeavyBombPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 8
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 8
+		Damage: 48000
+	Warhead@Effect1:
+		Explosions: poof
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
 		GlowScale: 2.0
@@ -2689,14 +2542,11 @@ MonsterTankTuskTesla:
 		AimTargetStances: Enemy, Neutral
 
 MonsterTankTuskThermobaric:
-	Inherits: ^LightFlameWeapon
-	Inherits@2: ^MediumFlameWeapon
-	Inherits@3: ^HeavyFlameWeapon
-	Inherits@4: ^Grenade
-	Inherits@5: ^FlakWeapon
-	Inherits@6: ^ShrapnelWeapon
-	Inherits@7: ^MediumMissile
-	Inherits@8: ^HeavyMissile
+	Inherits@wh: ^Warhead_MissileThermobaric_Heavy
+	Inherits@proj: ^Projectile_Missile_Heavy
+	Inherits@fx1: ^Effect_Flame_Heavy
+	Inherits@fx2: ^Effect_Concussion_Light
+	Inherits@fx3: ^Effect_MissileHE_Heavy
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 125
 	Burst: 4
@@ -2714,81 +2564,10 @@ MonsterTankTuskThermobaric:
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
-	Warhead@LightFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
+	Warhead@MissileThermobaric_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 13250
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@LightFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 7
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 7
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 7
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6750
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 7
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-	Warhead@FlakWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 7
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6750
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 7
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 7
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 13250
-	Warhead@HeavyMissilePercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 7
+		Damage: 106000
+		PercentageScale: 10566
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
 		GlowScale: 2.0

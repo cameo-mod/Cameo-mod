@@ -1,5 +1,52 @@
 # Development Log
 
+## 2026-08-26 — W24 A12: active shotgun family consolidated
+
+- Collapsed `FutureEnforcerShotgun`, `TSCommandoShotgun`, `TSMutShotgun`, and
+  `TSShotgun` onto one `^Warhead_CannonHE_Medium` damage family each. The FutureTech
+  elite/deployed children inherit the cleanup, giving seven resolved definitions in the
+  batch.
+- Preserved flat totals at 12000/48000/24000/24000 and their exact reference-target
+  percentage totals. Resolver comparisons also preserve cadence, range, reports, the
+  legacy 50CAL projectile and contrail, ground/water/air impacts, shield duration and
+  sounds, smudges, glow, and 25 concrete damage.
+- The standard medium CannonHE armor/blast profile replaces the six simultaneous legacy
+  CannonHE/Grenade/Shrapnel/TankDestroyer/SmallArms/Chaingun profiles. This is the intended
+  classification consequence; no pricing or runtime arithmetic changed.
+- Combined with A11, whole-tree comparison preserves flat and percentage damage on all
+  2345 weapons and reports exactly 14 intended blast-profile replacements. Survey debt
+  falls 275 -> 271 weapons (263 -> 259 mixed, 204 -> 203 groups), and the broadcast
+  ratchet tightens 919 -> 912.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers match
+  live YAML; generator drift 0; empty-warhead 0; orphan-old-key real bugs 0; physical-state
+  audit PASS. A controlled launch remained alive and responsive through startup with no new
+  exception log, then its exact test process was stopped.
+
+## 2026-08-26 — W24 A11: Soviet thermobaric missile group consolidated
+
+- Collapsed seven resolved definitions in one coherent batch: `v1rocketsThermobaric`,
+  `HindMissilesThermobaric`, both Mammoth Tusk thermobaric weapons and their targeting-
+  computer children, and `MonsterTankTuskThermobaric`. They now use the medium or heavy
+  `MissileThermobaric` family instead of broadcasting one damage number through three to
+  eight unrelated legacy families.
+- Whole-tree comparison preserves flat and percentage damage on all 2345 weapons. The
+  seven replacements adopt the intended standard thermobaric blast and armor profile;
+  resolver comparisons preserve targeting, cadence, range, reports, projectile operation,
+  contrails, water/air/ground impacts, smudges, ground fire, shield effects, glow, and
+  concrete damage.
+- Preserved the Monster Tank's legacy 106000 flat versus 112000 reference-target percentage
+  totals with a local `PercentageScale: 10566`; this avoids silently normalizing an existing
+  gameplay asymmetry during structural cleanup.
+- Survey debt falls 280 -> 275 weapons (268 -> 263 mixed, 208 -> 204 groups), and the
+  broadcast ratchet tightens 926 -> 919. `ThermobaricMaverick` remains separate because its
+  nuclear effect/upgrade identity needs an explicit classification decision.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers match
+  live YAML; generator drift 0; empty-warhead 0; orphan-old-key real bugs 0; physical-state
+  audit PASS. A controlled launch remained alive and responsive through full startup with no
+  new exception log, then its exact test process was stopped.
+- No pricing, engine/runtime source, engine pin, or percentage-damage runtime behavior was
+  changed.
+
 ## 2026-08-26 — W24 A10: thermobaric grenade pair consolidated
 
 - Collapsed `GrenadeThermobaric` and its inherited `GrenadeThermobaricExplode`
