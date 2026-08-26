@@ -1,5 +1,27 @@
 # Development Log
 
+## 2026-08-26 — W24 A9: redundant flame and chemical tier stacks collapsed
+
+- Collapsed `HarakanF` and `MutHFlamer` from paired medium/heavy Flame mains onto
+  `^Warhead_Flame_Heavy` at 4000 and 40000 damage.
+- Collapsed `TSFiendShardUP`, `TSChemsprayUP`, and `TSVisceroidSprayUP` from
+  light+medium+heavy Chemical stacks onto `^Warhead_Chemical_Heavy` at 18000,
+  96000, and 30000 damage.
+- Flat and percentage totals remain exact for all five. Resolver comparisons preserve
+  timing, bursts, reports, projectile operation, custom clouds/effects, smudges, ground
+  fire, shield effects, and concrete damage.
+- Standard Heavy Flame/Chemical armor, blast, friendly-fire, and meter profiles are the
+  accepted tier-classification consequences. The Forgotten heavy-flamethrower correction
+  adds one role-shift row for its later chemical upgrade; upgrade findings are now 74.
+- Whole-tree comparison preserves flat and percentage damage for all 2345 weapons and
+  reports only the five intended blast-profile replacements. Survey debt falls 286 -> 281
+  weapons (274 -> 269 mixed, 209 -> 208 groups), while broadcast debt falls 932 -> 927.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; empty-warhead 0; orphan-old-key real bugs 0; physical-state audit
+  PASS; generator drift 0.
+- No pricing, engine/runtime source, pin, cadence, range, or total damage was changed.
+  No game was launched per maintainer instruction.
+
 ## 2026-08-26 — W24 A8: medium plasma pair consolidated
 
 - Collapsed `PlasmaFlamer` and `MutFlamerChem` from paired
