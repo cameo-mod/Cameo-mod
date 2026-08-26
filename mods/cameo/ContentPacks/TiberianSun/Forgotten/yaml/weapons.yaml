@@ -1635,44 +1635,40 @@ TSLocustBombChem:
 		SmudgeType: Crater
 
 TSMutShotgun:
-	Inherits: ^Warhead_CannonHE_Medium
-	Inherits@2: ^Projectile_Shell_Medium
-	Inherits@3: ^Effect_CannonHE_Medium
-	Inherits@4: ^Grenade
-	Inherits@5: ^ShrapnelWeapon
-	Inherits@6: ^TankDestroyerCannon
-	Inherits@7: ^SmallArms
-	Inherits@8: ^Chaingun
+	Inherits@wh: ^Warhead_CannonHE_Medium
+	Inherits@proj: ^Projectile_Shell_Medium
+	Inherits@fx: ^Effect_CannonHE_Medium
 	ReloadDelay: 32
 	Range: 3112
 	Report: DSDSHTGN.wav
 	ValidTargets: Ground, Water
-	Warhead@Grenade: SpreadDamage
-		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@GrenadePercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 2
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailZOffset: 4000
+		ContrailStartColor: EECCAA88
+		ContrailEndColor: 88664422
+		ContrailStartWidth: 40
+		ContrailEndWidth: 80
+		ContrailLength: 8
+		Speed: 4000
+		Inaccuracy: 200
 	Warhead@CannonHE_Medium:
-		Damage: 4000
-	Warhead@SmallArms: SpreadDamage
-		Damage: 4000
-	Warhead@SmallArmsPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@Chaingun: SpreadDamage
-		Damage: 4000
-	Warhead@ChaingunPercentage: AreaDamagePercentage
-		Damage: 2
+		Damage: 24000
+	Warhead@Effect:
+		Explosions: piffs
+		ImpactSounds: xplosml2.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship, Air
+	Warhead@EffectWater:
+		Explosions: water_piffs
+	Warhead@EffectAir:
+		Explosions: big_explosion_air
+	Warhead@ShieldHit:
+		Duration: 4
+	Warhead@Concrete:
+		Damage: 25
+	Warhead@ShieldHitEffect:
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 
 TSMutVulcanTurret:
 	Inherits@wh: ^Warhead_Bullet_Light
