@@ -12,17 +12,10 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -115,30 +108,16 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -236,17 +215,10 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "12",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -280,17 +252,10 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -389,7 +354,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "600",
@@ -410,7 +375,7 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -443,7 +408,7 @@
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -457,7 +422,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -478,7 +443,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -499,7 +464,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -513,7 +478,7 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -527,7 +492,7 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -619,7 +584,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "600",
@@ -640,7 +605,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -661,7 +626,7 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -695,7 +660,7 @@
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -709,7 +674,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -730,7 +695,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -751,7 +716,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -765,7 +730,7 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -779,7 +744,7 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -862,17 +827,10 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "10",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -922,7 +880,7 @@
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -936,7 +894,7 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -985,7 +943,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -999,7 +957,7 @@
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -1088,17 +1046,10 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -1190,17 +1141,10 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -1288,17 +1232,10 @@
       "damage_warheads": [
        {
         "damage": "12500",
-        "falloff": "100, 50, 25, 10, 5, 0",
+        "falloff": "100, 0",
         "spread": "256",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -1329,17 +1266,10 @@
       "damage_warheads": [
        {
         "damage": "12500",
-        "falloff": "100, 50, 25, 10, 5, 0",
+        "falloff": "100, 0",
         "spread": "256",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -1447,7 +1377,7 @@
         "falloff": "100",
         "spread": "1000",
         "tag": "RepairWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -2110,7 +2040,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "70000",
@@ -2124,7 +2054,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "600",
@@ -2271,17 +2201,10 @@
       "damage_warheads": [
        {
         "damage": "36000",
-        "falloff": "100, 50, 25, 10, 5, 0",
+        "falloff": "100, 0",
         "spread": "250",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "18",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "500",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -2424,30 +2347,16 @@
        {
         "damage": "10000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -2653,7 +2562,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -2667,7 +2576,7 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -2681,7 +2590,7 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -2695,7 +2604,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -2709,7 +2618,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -2723,7 +2632,7 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -2763,7 +2672,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -2777,7 +2686,7 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -2791,7 +2700,7 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -2805,7 +2714,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -2819,7 +2728,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -2833,7 +2742,7 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -2940,7 +2849,7 @@
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -3001,7 +2910,7 @@
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -3050,7 +2959,7 @@
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -3064,7 +2973,7 @@
         "falloff": "111, 88, 44, 22, 11",
         "spread": "111",
         "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "888",
@@ -3085,7 +2994,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -3129,7 +3038,7 @@
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -3191,7 +3100,7 @@
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -3240,7 +3149,7 @@
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -3254,7 +3163,7 @@
         "falloff": "111, 88, 44, 22, 11",
         "spread": "111",
         "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "888",
@@ -3275,7 +3184,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -3393,7 +3302,7 @@
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -3454,7 +3363,7 @@
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -3503,7 +3412,7 @@
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -3517,7 +3426,7 @@
         "falloff": "111, 88, 44, 22, 11",
         "spread": "111",
         "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "888",
@@ -3538,7 +3447,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -3582,7 +3491,7 @@
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -3644,7 +3553,7 @@
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -3693,7 +3602,7 @@
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "50000",
@@ -3707,7 +3616,7 @@
         "falloff": "111, 88, 44, 22, 11",
         "spread": "111",
         "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "888",
@@ -3728,7 +3637,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -3837,30 +3746,16 @@
        {
         "damage": "10000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "10000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -3888,30 +3783,16 @@
        {
         "damage": "10000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "10000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -4010,30 +3891,16 @@
        {
         "damage": "12000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -4063,30 +3930,16 @@
        {
         "damage": "12000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "12000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -4181,47 +4034,28 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "4000",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "60",
+        "tag": "CannonChem_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5142",
       "reloaddelay": "4",
       "slot": "Armament",
       "versus_templates": [
-       "^LightChemicalWeapon",
-       "^TankDestroyerCannon"
+       "^Warhead_CannonChem_Light",
+       "^Effect_CannonAP_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonChem_Light"
+      ],
       "weapon": "CabalDissolverSpray",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4298,16 +4132,9 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "16",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -4333,16 +4160,9 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "16",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -4474,7 +4294,7 @@
         "falloff": "100",
         "spread": "1000",
         "tag": "RepairWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -4573,7 +4393,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "70000",
@@ -4587,7 +4407,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "600",
@@ -4672,7 +4492,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "70000",
@@ -4686,7 +4506,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "600",
@@ -4837,17 +4657,10 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "200",
+        "falloff": "100, 55, 0",
+        "spread": "116",
         "tag": "Tesla_Super",
-        "type": "TargetDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "100",
-        "tag": "Tesla_Super_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1000",
@@ -4972,31 +4785,17 @@
       "damage_warheads": [
        {
         "damage": "6000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 15, 0",
+        "spread": "100",
         "tag": "MissileHE_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileHE_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "6000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
         "tag": "MissileHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "3",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -5025,31 +4824,17 @@
       "damage_warheads": [
        {
         "damage": "6000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 15, 0",
+        "spread": "100",
         "tag": "MissileHE_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileHE_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "6000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
         "tag": "MissileHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "3",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -5079,31 +4864,17 @@
       "damage_warheads": [
        {
         "damage": "6000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 15, 0",
+        "spread": "100",
         "tag": "MissileHE_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileHE_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "6000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
         "tag": "MissileHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "3",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -5201,17 +4972,10 @@
       "damage_warheads": [
        {
         "damage": "40000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "22",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -5242,17 +5006,10 @@
       "damage_warheads": [
        {
         "damage": "36000",
-        "falloff": "100, 50, 25, 10, 5, 0",
+        "falloff": "100, 0",
         "spread": "250",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "18",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "500",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -5284,17 +5041,10 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
@@ -5446,7 +5196,7 @@
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "25000",
@@ -5584,17 +5334,10 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "200",
+        "falloff": "100, 55, 0",
+        "spread": "116",
         "tag": "Tesla_Super",
-        "type": "TargetDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "100",
-        "tag": "Tesla_Super_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamage"
        },
        {
         "damage": "1000",
@@ -6385,7 +6128,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "42000",
@@ -6406,7 +6149,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "42000",
@@ -6420,7 +6163,7 @@
         "falloff": null,
         "spread": "150",
         "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "42000",
@@ -6434,7 +6177,7 @@
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -6476,7 +6219,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "42000",
@@ -6497,7 +6240,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "42000",
@@ -6511,7 +6254,7 @@
         "falloff": null,
         "spread": "150",
         "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "42000",
@@ -6525,7 +6268,7 @@
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "42000",
@@ -6560,7 +6303,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "42000",
@@ -6574,7 +6317,7 @@
         "falloff": "111, 88, 44, 22, 11",
         "spread": "111",
         "tag": "MagicWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "888",
@@ -6595,7 +6338,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -6693,17 +6436,10 @@
       "damage_warheads": [
        {
         "damage": "80000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -6734,17 +6470,10 @@
       "damage_warheads": [
        {
         "damage": "80000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -6850,7 +6579,7 @@
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -6871,7 +6600,7 @@
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -6885,7 +6614,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -6906,7 +6635,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "600",
@@ -7001,17 +6730,10 @@
       "damage_warheads": [
        {
         "damage": "74000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "37",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -7022,7 +6744,7 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
+       "^Projectile_InstantHit",
        "^Effect_Melee_Medium"
       ],
       "warheads": [
@@ -7152,17 +6874,10 @@
       "damage_warheads": [
        {
         "damage": "160000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "80",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -7193,17 +6908,10 @@
       "damage_warheads": [
        {
         "damage": "160000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "80",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -7303,59 +7011,31 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 15, 0",
+        "spread": "100",
         "tag": "MissileHE_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileHE_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
         "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -7387,59 +7067,31 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 15, 0",
+        "spread": "100",
         "tag": "MissileHE_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileHE_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
         "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -7565,59 +7217,31 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
         "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "12000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
         "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "12000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "12000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -7649,59 +7273,31 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
         "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "12000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
         "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "12000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "12000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -7811,17 +7407,10 @@
       "damage_warheads": [
        {
         "damage": "44000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "22",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -7916,17 +7505,10 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -7959,59 +7541,31 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 15, 0",
+        "spread": "100",
         "tag": "MissileHE_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileHE_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "12000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 45, 15, 0",
+        "spread": "150",
         "tag": "MissileHE_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "12000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "12000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -8099,30 +7653,16 @@
        {
         "damage": "6000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "6000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "3",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -8280,17 +7820,10 @@
       "damage_warheads": [
        {
         "damage": "32000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
         "tag": "Chemical_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "16",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Chemical_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -8315,17 +7848,10 @@
       "damage_warheads": [
        {
         "damage": "32000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
         "tag": "Chemical_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "16",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Chemical_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -8479,17 +8005,10 @@
       "damage_warheads": [
        {
         "damage": "44000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "22",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -8582,17 +8101,10 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -8617,17 +8129,10 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
@@ -8784,30 +8289,16 @@
        {
         "damage": "60000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "30",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "60000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "30",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",

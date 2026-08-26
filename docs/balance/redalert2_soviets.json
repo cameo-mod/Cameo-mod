@@ -10,17 +10,10 @@
       "damage_warheads": [
        {
         "damage": "80000",
-        "falloff": "100, 50, 25, 10, 5, 0",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "800",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "4000",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -44,31 +37,17 @@
       "damage_warheads": [
        {
         "damage": "48000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "366",
         "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "24",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "Chemical_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "48000",
-        "falloff": "100, 50, 25, 10, 5, 0",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "800",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "24",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "4000",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -96,17 +75,10 @@
       "damage_warheads": [
        {
         "damage": "80000",
-        "falloff": "100, 50, 25, 10, 5, 0",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "800",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "4000",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -129,17 +101,10 @@
       "damage_warheads": [
        {
         "damage": "80000",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "200",
+        "falloff": "100, 55, 0",
+        "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "100",
-        "tag": "Tesla_Super_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "40000",
@@ -150,17 +115,10 @@
        },
        {
         "damage": "80000",
-        "falloff": "100, 50, 25, 10, 5, 0",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "800",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "4000",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -197,21 +155,14 @@
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "4000",
         "tag": "Nuclear_Super_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "80000",
-        "falloff": "100, 50, 25, 10, 5, 0",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "800",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "40",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "4000",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -247,21 +198,14 @@
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "5000",
         "tag": "Nuclear_Super_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "100000",
-        "falloff": "100, 50, 25, 10, 5, 0",
+        "falloff": "100, 45, 18, 6, 0",
         "spread": "1000",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "50",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "5000",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -357,7 +301,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -371,7 +315,7 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -385,21 +329,14 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -429,17 +366,10 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
         "tag": "Chemical_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Chemical_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -453,7 +383,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -467,7 +397,7 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -481,21 +411,14 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -536,7 +459,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -550,7 +473,7 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -564,21 +487,14 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -615,7 +531,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -629,7 +545,7 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -643,21 +559,14 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -694,7 +603,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -708,7 +617,7 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -722,21 +631,14 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -772,7 +674,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -786,7 +688,7 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -800,21 +702,14 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -850,7 +745,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -864,7 +759,7 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -878,21 +773,14 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -928,7 +816,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -942,7 +830,7 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -956,21 +844,14 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -1052,30 +933,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -1118,31 +985,17 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "30",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -1170,45 +1023,24 @@
       "damage_warheads": [
        {
         "damage": "36000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "18",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Chemical_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "36000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "18",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "36000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "18",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -1239,31 +1071,17 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "30",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -1289,31 +1107,17 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "30",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -1341,31 +1145,17 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "30",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -1402,49 +1192,28 @@
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0",
         "spread": "1000",
         "tag": "Nuclear_Super_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "36000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
-        "tag": "Chemical_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "18",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Chemical_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "36000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
+        "tag": "Chemical_Light",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "36000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "18",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "36000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "18",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -1475,31 +1244,17 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "30",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -1527,31 +1282,17 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "30",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -1642,30 +1383,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -2429,17 +2156,10 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -2641,14 +2361,14 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        }
@@ -2728,17 +2448,10 @@
       "damage_warheads": [
        {
         "damage": "64000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "32",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
@@ -2770,17 +2483,10 @@
       "damage_warheads": [
        {
         "damage": "64000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "32",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
@@ -2810,17 +2516,10 @@
       "damage_warheads": [
        {
         "damage": "64000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "32",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
@@ -2850,17 +2549,10 @@
       "damage_warheads": [
        {
         "damage": "64000",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "200",
+        "falloff": "100, 55, 0",
+        "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "32",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "100",
-        "tag": "Tesla_Super_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
@@ -2892,17 +2584,10 @@
       "damage_warheads": [
        {
         "damage": "64000",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "200",
+        "falloff": "100, 55, 0",
+        "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "32",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "100",
-        "tag": "Tesla_Super_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
@@ -2932,17 +2617,10 @@
       "damage_warheads": [
        {
         "damage": "64000",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "200",
+        "falloff": "100, 55, 0",
+        "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "32",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "100",
-        "tag": "Tesla_Super_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "32000",
@@ -3112,30 +2790,16 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -3163,30 +2827,16 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -3213,30 +2863,16 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -3282,30 +2918,16 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -3334,30 +2956,16 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -3440,16 +3048,9 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -3475,16 +3076,9 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -3511,30 +3105,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -3702,17 +3282,10 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
         "tag": "Chemical_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Chemical_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -3739,17 +3312,10 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
         "tag": "Chemical_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Chemical_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -3773,17 +3339,10 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
         "tag": "Chemical_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Chemical_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -3954,17 +3513,10 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -3988,17 +3540,10 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -4022,17 +3567,10 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -4056,17 +3594,10 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -4092,17 +3623,10 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -4128,17 +3652,10 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -4164,17 +3681,10 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -4200,17 +3710,10 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -4295,17 +3798,10 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "12",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "12000",
@@ -4337,17 +3833,10 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "12",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "12000",
@@ -4377,17 +3866,10 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "12",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "12000",
@@ -4420,7 +3902,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -4439,17 +3921,10 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "12",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "12000",
@@ -4482,17 +3957,10 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "12",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "12000",
@@ -4523,17 +3991,10 @@
       "damage_warheads": [
        {
         "damage": "24000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "12",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "12000",
@@ -4618,17 +4079,10 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -4660,7 +4114,7 @@
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -4681,7 +4135,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -4695,21 +4149,14 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -5268,7 +4715,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -5289,21 +4736,14 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -5384,7 +4824,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -5405,21 +4845,14 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -5433,7 +4866,7 @@
         "falloff": null,
         "spread": null,
         "tag": "CannonAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -5473,7 +4906,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -5494,21 +4927,14 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -5544,7 +4970,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -5565,21 +4991,14 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -5604,17 +5023,10 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -5650,7 +5062,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -5671,21 +5083,14 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -5764,7 +5169,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -5785,21 +5190,14 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -5813,7 +5211,7 @@
         "falloff": null,
         "spread": null,
         "tag": "CannonAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -5850,7 +5248,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -5871,21 +5269,14 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -5922,7 +5313,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -5943,21 +5334,14 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -5983,17 +5367,10 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -6093,7 +5470,7 @@
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -6114,7 +5491,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -6128,21 +5505,14 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -6175,7 +5545,7 @@
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -6196,7 +5566,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -6210,21 +5580,14 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -6262,7 +5625,7 @@
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -6283,7 +5646,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -6297,21 +5660,14 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -6346,7 +5702,7 @@
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -6367,7 +5723,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -6381,21 +5737,14 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -6549,17 +5898,10 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -6583,31 +5925,17 @@
       "damage_warheads": [
        {
         "damage": "6000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
         "tag": "Chemical_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Chemical_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "6000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "3",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -6636,17 +5964,10 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -6670,17 +5991,10 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -6706,17 +6020,10 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -6743,31 +6050,17 @@
       "damage_warheads": [
        {
         "damage": "6000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
         "tag": "Chemical_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "3",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Chemical_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "6000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "3",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -6795,17 +6088,10 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -6832,17 +6118,10 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
@@ -7025,7 +6304,7 @@
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
-     "v": "200"
+     "v": "40"
     }
    },
    "ra2_soviets_teslatank": {
@@ -7036,17 +6315,10 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
@@ -7080,17 +6352,10 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
@@ -7122,17 +6387,10 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 55, 0",
+        "spread": "93",
         "tag": "Tesla_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Tesla_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "6000",
@@ -7312,7 +6570,7 @@
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
-     "v": "15"
+     "v": "30"
     }
    },
    "ra2_soviets_warminer": {
@@ -7322,30 +6580,16 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",

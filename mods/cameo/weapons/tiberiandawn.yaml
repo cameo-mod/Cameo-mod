@@ -43,11 +43,6 @@ M16:
 	Report: mgun2.aud
 	Warhead@Bullet_Light:
 		Damage: 2000
-	Warhead@Bullet_Light_Percentage: HealthPercentageDamage
-		Damage: 1
-
-
-
 Grenade:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@proj: ^Projectile_Grenade_Light
@@ -65,9 +60,6 @@ Grenade:
 		ContrailEndColor: FF884422
 	Warhead@Demolition_Light:
 		Damage: 16000
-	Warhead@Demolition_Light_Percentage: HealthPercentageDamage
-		Damage: 8
-
 Rockets:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -77,9 +69,6 @@ Rockets:
 	Report: bazook1.aud
 	Warhead@MissileAP_Light:
 		Damage: 18000
-	Warhead@MissileAP_Light_Percentage: HealthPercentageDamage
-		Damage: 9
-
 Flamethrower:
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
@@ -89,9 +78,6 @@ Flamethrower:
 	Report: flamer2.aud
 	Warhead@Flame_Light:
 		Damage: 20000
-	Warhead@Flame_Light_Percentage: AreaDamagePercentage
-		Damage: 10
-
 Chemspray:
 	Inherits@wh: ^Warhead_Chemical_Light
 	Inherits@proj: ^Projectile_Chem_Light
@@ -101,9 +87,6 @@ Chemspray:
 	Report: flamer2.aud
 	Warhead@Chemical_Light:
 		Damage: 48000
-	Warhead@Chemical_Light_Percentage: AreaDamagePercentage
-		Damage: 24
-
 TiberiumExplosion:
 	Inherits@wh: ^Warhead_Chemical_Medium
 	Inherits@proj: ^Projectile_Chem_Medium
@@ -111,8 +94,6 @@ TiberiumExplosion:
 	Report: flamer2.aud
 	Warhead@Chemical_Medium:
 		Damage: 40000
-	Warhead@Chemical_Medium_Percentage: AreaDamagePercentage
-		Damage: 20
 	Warhead@Resource: CreateResource
 		AddsResourceType: Tiberium
 		Size: 1,1
@@ -128,7 +109,7 @@ ra1_allies_alliedsniper:
 		Damage: 40000
 	Warhead@Sniper_Light_ExtraDamage: OpenToppedDamage
 		Damage: 40000
-	Warhead@Sniper_Light_Percentage: HealthPercentageDamage
+	Warhead@Sniper_Light_Percentage: AreaDamagePercentage
 		Damage: 20
 
 ArtilleryShell:
@@ -151,12 +132,8 @@ ArtilleryShell:
 		ContrailEndColor: FF884422
 	Warhead@Demolition_Light:
 		Damage: 16000
-	Warhead@Demolition_Light_Percentage:
-		Damage: 8
 	Warhead@Concussion_Medium:
 		Damage: 16000
-	Warhead@Concussion_Medium_Percentage:
-		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
@@ -172,8 +149,6 @@ BigFlamer:
 	Report: flamer2.aud
 	Warhead@Flame_Medium:
 		Damage: 14000
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 7
 	Warhead@Glow: GlowImpact
 		Color: FF6600
 		Scale: 1.5
@@ -186,8 +161,6 @@ FlametankExplode:
 	Inherits@fx: ^Effect_Flame_Medium
 	Warhead@Flame_Medium:
 		Damage: 28000
-	Warhead@Flame_Medium_Percentage: AreaDamagePercentage
-		Damage: 14
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
 		GlowScale: 2.0
@@ -196,10 +169,9 @@ FlametankExplode:
 		ImpactSounds: xplobig6.aud
 
 227mm:
-	Inherits: ^FlakWeapon
-	Inherits@2: ^Grenade
-	Inherits@3: ^HeavyMissile
-	Inherits@4: ^MediumMissile
+	Inherits@wh: ^Warhead_MissileHE_Medium
+	Inherits@proj: ^Projectile_Missile_Medium
+	Inherits@fx: ^Effect_MissileHE_Medium
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 111
 	Range: 9920
@@ -217,37 +189,20 @@ FlametankExplode:
 		MinimumLaunchAngle: 125
 		MaximumLaunchAngle: 125
 		Speed: 500
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+	Warhead@MissileHE_Medium:
+		Damage: 8000
 	Warhead@Effect: CreateEffect
 		Explosions: med_frag
 		ImpactSounds: kaboom25.aud
 		ValidTargets: Ground, Ship
+		ImpactActors: false
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 
 HighVAP:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -261,9 +216,6 @@ HighVAP:
 	StartBurstReport: gun8.aud
 	Warhead@Bullet_Medium:
 		Damage: 4000
-	Warhead@Bullet_Medium_Percentage: HealthPercentageDamage
-		Damage: 2
-
 ChemTibAtomic:
 	Inherits: Atomic
 	Warhead@Effect: CreateEffect

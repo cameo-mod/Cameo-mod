@@ -9,6 +9,8 @@ protoss_probe:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@SHADOWS: ^Shadows
 	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Mobile:
+		TurnSpeed: 40
 	FireWarheadsOnDeath:
 		Weapon: SCWorkerExplodeProtoss
 		EmptyWeapon: SCWorkerExplodeProtoss
@@ -62,7 +64,7 @@ protoss_dragoon:
 		Description: actor_scdragoon.description
 	Mobile:
 		Speed: 80
-		TurnSpeed: 1023
+		TurnSpeed: 32
 		Locomotor: wheeled
 	Health:
 		HP: 75000
@@ -97,7 +99,6 @@ protoss_dragoon:
 
 protoss_manifold:
 	Inherits: ^LargeProtoss
-	Inherits@corr: ^Corrodible
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@Template: ^SupportVehicleTemplate
@@ -173,7 +174,6 @@ protoss_manifold:
 
 protoss_analogue:
 	Inherits: ^LargeProtoss
-	Inherits@corr: ^Corrodible
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@Template: ^SupportVehicleTemplate
@@ -256,7 +256,6 @@ protoss_analogue:
 
 protoss_idol:
 	Inherits: ^LargeProtoss
-	Inherits@corr: ^Corrodible
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@Template: ^EpicVehicleTemplate
@@ -294,20 +293,20 @@ protoss_idol:
 		Step: 140
 	Shielded:
 		RegenAmount: 280
-	Armament@Upgrade1: ##########
+	Armament@Upgrade1:
 		Weapon: WaveforceCannonChargedLaser
 		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 600,0,100
 		MuzzleSequence: muzzle
-	Armament@Upgrade2: ##########
+	Armament@Upgrade2:
 		Weapon: WaveforceCannonDistortedBeam1
 		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 600,0,100
 		FireDelay: 1
 		MuzzleSequence: muzzle
-	Armament@Upgrade3: ##########
+	Armament@Upgrade3:
 		Weapon: WaveforceCannonDistortedBeam2
 		Recoil: 128
 		RecoilRecovery: 32
@@ -353,7 +352,6 @@ protoss_idol:
 
 protoss_reaver:
 	Inherits: ^LargeProtoss
-	Inherits@corr: ^Corrodible
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@Template: ^FireSupportTemplate
@@ -493,7 +491,7 @@ protoss_archon:
 	Passenger:
 		CustomPipType: blue
 	Voiced:
-		VoiceSet: SCArchonVoice ##########
+		VoiceSet: SCArchonVoice
 	-WithDeathAnimation:
 	-Crushable:
 	Selectable:
@@ -538,7 +536,6 @@ protoss_mobilenexus:
 
 protoss_atreus:
 	Inherits: ^LargeProtoss
-	Inherits@corr: ^Corrodible
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@Template: ^HighTechTankTemplate
@@ -605,7 +602,6 @@ protoss_atreus:
 
 protoss_positron:
 	Inherits: ^LargeProtoss
-	Inherits@corr: ^Corrodible
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD

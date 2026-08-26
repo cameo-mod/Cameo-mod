@@ -76,7 +76,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -104,7 +104,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -125,7 +125,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "TeslaChargedWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
@@ -1088,7 +1088,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -1109,7 +1109,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -1123,7 +1123,7 @@
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
@@ -1147,21 +1147,14 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
+        "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "Flame_Light",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Flame_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.25,
       "minrange": "2100",
       "pricing": true,
       "range": "10500",
@@ -1169,12 +1162,12 @@
       "requires": "cannon",
       "slot": "Armament@cannon",
       "versus_templates": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "wc2cannontowerFire",
       "weapon_class_source": "template"
@@ -1247,7 +1240,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -1268,7 +1261,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -1282,7 +1275,7 @@
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
@@ -1306,21 +1299,14 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
+        "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "Flame_Light",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Flame_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.25,
       "minrange": "2100",
       "pricing": true,
       "range": "10500",
@@ -1328,12 +1314,12 @@
       "requires": "cannon",
       "slot": "Armament@cannon",
       "versus_templates": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "wc2cannontowerFire",
       "weapon_class_source": "template"
@@ -1406,7 +1392,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -1427,7 +1413,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "6000",
@@ -1441,7 +1427,7 @@
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
@@ -1465,21 +1451,14 @@
       "damage_warheads": [
        {
         "damage": "60000",
-        "falloff": "100, 50, 33, 25, 20, 0",
+        "falloff": "100, 50, 20, 0",
         "spread": "400",
-        "tag": "Flame_Light",
+        "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "30",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Flame_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.25,
       "minrange": "2100",
       "pricing": true,
       "range": "10500",
@@ -1487,12 +1466,12 @@
       "requires": "cannon",
       "slot": "Armament@cannon",
       "versus_templates": [
-       "^Warhead_Flame_Light",
-       "^Projectile_Flame_Light",
-       "^Effect_Flame_Light"
+       "^Warhead_CannonHE_Heavy",
+       "^Projectile_Shell_Heavy",
+       "^Effect_CannonHE_Heavy"
       ],
       "warheads": [
-       "^Warhead_Flame_Light"
+       "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "wc2cannontowerFire",
       "weapon_class_source": "template"
@@ -1588,17 +1567,10 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "200",
+        "falloff": "100, 55, 0",
+        "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "100",
-        "tag": "Tesla_Super_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
@@ -1631,17 +1603,10 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "200",
+        "falloff": "100, 55, 0",
+        "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "100",
-        "tag": "Tesla_Super_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
@@ -1672,315 +1637,45 @@
       "armament_name": "fireball",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "150",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "225",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
+        "damage": "18000",
+        "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
       "slot": "Armament@FIREBALL_VISIBLE",
       "versus_templates": [
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^HeavyCannon",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^MediumMissile",
-       "^Chaingun",
-       "^FlakWeapon"
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "wc2mageFireballVisible",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "5",
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "150",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "225",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
+        "damage": "18000",
+        "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
@@ -1989,9 +1684,11 @@
       "versus_templates": [
        "wc2mageFireballVisible"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "wc2mageFireballExplosion",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "slow",
@@ -2122,7 +1819,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -2143,7 +1840,7 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -2157,7 +1854,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
@@ -2190,7 +1887,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -2211,7 +1908,7 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "8000",
@@ -2225,7 +1922,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
@@ -2310,17 +2007,10 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2334,7 +2024,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2348,7 +2038,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2369,7 +2059,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2383,7 +2073,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2397,7 +2087,7 @@
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
@@ -2427,17 +2117,10 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2451,7 +2134,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2465,7 +2148,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2486,7 +2169,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2500,7 +2183,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2514,7 +2197,7 @@
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
@@ -2607,17 +2290,10 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2631,7 +2307,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2645,7 +2321,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2666,7 +2342,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2680,7 +2356,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2694,7 +2370,7 @@
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
@@ -2724,17 +2400,10 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2748,7 +2417,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2762,7 +2431,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2783,7 +2452,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2797,7 +2466,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -2811,7 +2480,7 @@
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
@@ -2898,17 +2567,10 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
@@ -2919,7 +2581,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
+       "^Projectile_InstantHit",
        "^Effect_Melee_Medium"
       ],
       "warheads": [
@@ -2991,17 +2653,10 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "200",
+        "falloff": "100, 55, 0",
+        "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "100",
-        "tag": "Tesla_Super_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
@@ -3132,17 +2787,10 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "200",
+        "falloff": "100, 55, 0",
+        "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "100",
-        "tag": "Tesla_Super_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
@@ -3283,7 +2931,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "600",
@@ -3304,7 +2952,7 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3318,21 +2966,14 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3346,7 +2987,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3360,7 +3001,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3381,7 +3022,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3395,7 +3036,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3409,7 +3050,7 @@
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
@@ -3445,7 +3086,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "600",
@@ -3466,7 +3107,7 @@
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3480,21 +3121,14 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3508,7 +3142,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3522,7 +3156,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3543,7 +3177,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3557,7 +3191,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "4000",
@@ -3571,7 +3205,7 @@
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
         "tag": "ArrowWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
@@ -3653,17 +3287,10 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
@@ -3675,7 +3302,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
+       "^Projectile_InstantHit",
        "^Effect_Melee_Medium"
       ],
       "warheads": [
@@ -3815,17 +3442,10 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "200",
+        "falloff": "100, 55, 0",
+        "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "100",
-        "tag": "Tesla_Super_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
@@ -3858,17 +3478,10 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "200",
+        "falloff": "100, 55, 0",
+        "spread": "116",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 40, 20, 10, 5, 0",
-        "spread": "100",
-        "tag": "Tesla_Super_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "4000",
@@ -3899,315 +3512,45 @@
       "armament_name": "fireball",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "150",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "225",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
+        "damage": "18000",
+        "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
       "slot": "Armament@FIREBALL_VISIBLE",
       "versus_templates": [
-       "^TankDestroyerCannon",
-       "^MediumCannon",
-       "^HeavyCannon",
-       "^Grenade",
-       "^ShrapnelWeapon",
-       "^HeavyBomb",
-       "^MediumMissile",
-       "^Chaingun",
-       "^FlakWeapon"
+       "^Warhead_Flame_Heavy",
+       "^Projectile_Flame_Heavy",
+       "^Effect_Flame_Heavy"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "wc2mageFireballVisible",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "5",
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "150",
-        "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "225",
-        "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 33, 25, 20",
+        "damage": "18000",
+        "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "400",
-        "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
@@ -4216,9 +3559,11 @@
       "versus_templates": [
        "wc2mageFireballVisible"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "wc2mageFireballExplosion",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "slow",
@@ -4339,17 +3684,10 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
@@ -4360,7 +3698,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
+       "^Projectile_InstantHit",
        "^Effect_Melee_Medium"
       ],
       "warheads": [
@@ -4434,17 +3772,10 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "10",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -4493,7 +3824,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
@@ -4522,17 +3853,10 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "10",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -4581,7 +3905,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
@@ -4663,17 +3987,10 @@
       "damage_warheads": [
        {
         "damage": "18000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "9",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
@@ -4684,7 +4001,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
+       "^Projectile_InstantHit",
        "^Effect_Melee_Medium"
       ],
       "warheads": [
@@ -5439,45 +4756,24 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "30000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
@@ -5580,17 +4876,10 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
@@ -5719,8 +5008,8 @@
      "v": "75"
     },
     "turn_speed": {
-     "src": "inherited",
-     "v": "15"
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "30"
     }
    },
    "wc2_humans_paladin": {
@@ -5729,17 +5018,10 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
@@ -5751,7 +5033,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
+       "^Projectile_InstantHit",
        "^Effect_Melee_Medium"
       ],
       "warheads": [
@@ -5883,8 +5165,8 @@
      "v": "115"
     },
     "turn_speed": {
-     "src": "inherited",
-     "v": "92"
+     "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "46"
     }
    },
    "wc2_humans_peasant": {
@@ -5893,17 +5175,10 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
@@ -5997,7 +5272,7 @@
         "falloff": "100, 90, 80, 70, 60, 50, 40, 30, 20, 10",
         "spread": "500",
         "tag": "NuclearWarheadPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -6011,7 +5286,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -6116,7 +5391,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -6137,7 +5412,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -6151,7 +5426,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -6165,7 +5440,7 @@
         "falloff": null,
         "spread": "225",
         "tag": "HeavyCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -6179,7 +5454,7 @@
         "falloff": null,
         "spread": "150",
         "tag": "MediumCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -6193,7 +5468,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
@@ -6291,17 +5566,10 @@
       "damage_warheads": [
        {
         "damage": "16000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "8",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
@@ -6313,7 +5581,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
+       "^Projectile_InstantHit",
        "^Effect_Melee_Medium"
       ],
       "warheads": [
@@ -6447,7 +5715,7 @@
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/vehicles.yaml#Mobile.TurnSpeed",
-     "v": "96"
+     "v": "48"
     }
    }
   }

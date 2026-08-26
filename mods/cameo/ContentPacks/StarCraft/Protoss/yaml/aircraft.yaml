@@ -24,7 +24,7 @@ protoss_shuttle:
 		Queue: Vehicle, RAVehicle
 		Description: actor_scshuttle.description
 	Aircraft:
-		TurnSpeed: 20
+		TurnSpeed: 30
 		Speed: 150
 	Health:
 		HP: 100000
@@ -532,7 +532,7 @@ protoss_carrier:
 		Description: actor_sccarrier.description
 	Aircraft:
 		InitialFacing: 896
-		TurnSpeed: 18
+		TurnSpeed: 9
 		Speed: 45
 		RepulsionSpeed: 36
 	Health:
@@ -605,7 +605,7 @@ protoss_starshipsovereign:
 		Description: actor_scstarshipsovereign.description
 	Aircraft:
 		Speed: 40
-		TurnSpeed: 16
+		TurnSpeed: 8
 		RepulsionSpeed: 16
 	Health:
 		HP: 750000
@@ -678,7 +678,7 @@ protoss_arbiter:
 		Description: actor_scarbiter.description
 	Aircraft:
 		InitialFacing: 896
-		TurnSpeed: 28
+		TurnSpeed: 15
 		Speed: 75
 		IdealSeparation: 1c0
 		RepulsionSpeed: 10

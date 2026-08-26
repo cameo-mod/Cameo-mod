@@ -362,7 +362,7 @@
 		TargetTypes: Water, Ship, Submarine
 		RequiresCondition: in_water
 	Building:
-		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,Water ##########
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,Water
 	SpawnActorsOnSell@in_water:
 		ActorTypes: steelconsortium_hoverboardgrenadier, steelconsortium_hoverboardgrenadier, steelconsortium_manta
 		RequiresCondition: in_water

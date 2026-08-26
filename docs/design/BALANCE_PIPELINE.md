@@ -15,14 +15,19 @@ the same pipeline.
 ```
 1. pull    yaml ──► JSON ledger          python tools/balance/extract_stats.py
 2. edit    change values in the ledger (or in the generated sheet)
-3. sheet   JSON ──► cameo_balance_v2.xlsx python tools/balance/build_workbook.py
+3. sheet   JSON ──► cameo_balance_by_faction.xlsx + cameo_balance_by_type.xlsx
+                                         python tools/balance/build_workbook.py
 4. tune    set Cost, the sheet solves Range (or check O/P/Q deltas)
-5. import  xlsx ──► JSON                 python tools/balance/import_workbook.py
+5. import  xlsx ──► JSON                 python tools/balance/import_workbook.py --workbook faction|type
 6. push    JSON ──► yaml                 python tools/balance/apply_balance.py --confirm
 7. verify  drift audit: yaml ≡ ledger    python tools/balance/extract_stats.py --check
 8. verify  multiplier audit: all `*Multiplier Modifier` values are integer percentages    python tools/audit/audit_multiplier_modifiers.py
-9. decode  audit reports (if UTF-16)     python tools/balance/_decode_audit.py
+9. decode  audit reports (if UTF-16)     — no longer needed; `run_all.sh` forces UTF-8
 ```
+
+`cameo_balance_v2.xlsx` is the frozen pre-split prototype. It remains tracked
+for historical comparison, but the builder and importer no longer read or write
+it; only the faction/type workbooks above are active.
 
 Class rebalances add two extra proposal steps before the normal push:
 
@@ -71,7 +76,7 @@ number appears exactly as the yaml states it, with provenance:
 > | tree | contents | a diff means |
 > |---|---|---|
 > | `docs/balance/<faction>.json` | raw stats + provenance | **the game changed** — yaml was edited |
-> | `docs/balance/derived/<faction>.json` | `k`, `avg_versus`, `effective_per_shot`, `eff_reload`, `effective_dps`, `effective_damage`, `damage_total`, `footprint`, `reliability`, `sigma` | **the model changed** — a tool was edited |
+> | `docs/balance/derived/<faction>.json` | scalable `k_flat`, measured `k`, standalone percentage floor, folded rounding residual, `effective_per_shot`, full-cycle `eff_reload` / `effective_dps`, and spatial diagnostics | **the model changed** — a tool was edited |
 > | `docs/balance/derived/_model.json` | the constants every derived number depends on (`SWARM_W`, `BLOB_UPTIME`, `DENSITY`, `ENGAGEMENT`, `reference_hp`, the armor census …) | the model was **retuned** |
 >
 > Each diff now answers exactly one question. `audit_balance_drift` reads only the raw
@@ -140,13 +145,17 @@ number appears exactly as the yaml states it, with provenance:
   writes per-warhead Damage through the ONE canonical reducer
   `formula.distribute_damage`, which applies the fixed DESIGN.md law:
   **every main class warhead gets the IDENTICAL value `total ÷ N` snapped
-  to the 2000-damage grid** ("all class warheads carry the identical
+  to the 100-damage grid** ("all class warheads carry the identical
   value" — never proportional, never off-grid), `*FriendlyFire` and
-  `*ExtraDamage` twins = **50%** of the main, `*Percentage` twins = **1 per
-  2000**. `*ExtraDamage` (the energy-weapon shield/AoE-compensation chip) is
+  `*ExtraDamage` twins = **50%** of the main. Standalone `*Percentage`
+  companions track **0.01% per 100 flat Damage** in their own denominator;
+  folded `PercentageScale` damage derives from the main Damage. The calculator mirrors
+  the current runtime quirk that direct-Actor `AreaDamage` impacts skip that folded hit;
+  it does not assume the separate runtime repair has landed.
+  `*ExtraDamage` (the energy-weapon shield/AoE-compensation chip) is
   always 50% of the main but is **excluded from the damage total**.
-  Fine-tuning the effective damage is done with the actor
-  **FirepowerMultiplier**, never by nudging or un-equalising warhead Damage. A single number can therefore never be
+  Fine-tuning is done on the 100-Damage grid or with reload timing;
+  unconditional actor `FirepowerMultiplier` is retired as a tuning knob. A single number can therefore never be
   broadcast identically onto every warhead (the 2026-07-22 over-damage
   regression, commit `04de392b3`). `audit_warhead_split` fails the suite if
   that fingerprint ever reappears.
@@ -161,23 +170,31 @@ indented WEAPON row per armament (mirroring yaml structure):
 
 | col | content | kind |
 |---|---|---|
-| A–C | Mod, Name, Actor id | identity (locked) |
-| D–H | HP, Speed, Armor, TechTier, UnitClass, Special | raw + design inputs |
-| I–N (weapon rows) | Damage, ReloadDelay, Burst, BurstDelays, Range(wdist), WeaponClass | raw |
-| O | EffReload `= ReloadDelay + BurstDelays*(Burst-1)` | helper formula |
-| P | DPS `= Damage*Burst/EffReload*WeaponClass` (summed to the unit row) | helper formula |
-| Q–S | O, P, Q estimators (burst-aware, from raw cells) | formula |
-| T | Price `=(O+P+Q)/3` — Formula v2 swaps in the class-anchor form | formula |
-| U | Cost (actual, from ledger) | value |
-| V | Δ = Price − Cost, traffic-light conditional formatting | formula |
-| W | **Range-solver**: Range required for Price = Cost (closed form — the estimator mean is linear in Range, so the legacy inverse survives the raw-stat refactor) | formula |
+| A–C | Mod, Actor id, Name | identity (locked) |
+| D | Class | design input |
+| E–G | HP, Speed, Armor | raw values; Armor is locked |
+| H–J | TechTier, UnitClass, Special | design inputs |
+| K | FirepowerMultiplier | compatibility value (locked; retired as a tuning input) |
+| L–Q (weapon rows) | Damage, Reload, Burst, BurstDel, Range(wd), WeapClass | raw + design inputs |
+| R | EffReload `= Reload + sum(all Burst-1 gaps)`; one delay repeats, blank uses engine default 5 | helper formula |
+| S | DPS `= Damage*Burst/EffReload*FirepowerMultiplier` (summed to the unit row; WeapClass is design-only) | helper formula |
+| T–V | O, P, Q estimators (burst-aware, from raw cells) | formula |
+| W | Price `=(O+P+Q)/3` — Formula v2 swaps in the class-anchor form | formula |
+| X | Cost (actual, from ledger) | raw input |
+| Y–Z | Δ = Price − Cost; absolute Δ% with traffic-light formatting | formula |
+| AA | **Range-solver**: Range required for Price = Cost (closed form — the estimator mean is linear in Range, so the legacy inverse survives the raw-stat refactor) | formula |
+| AB | WeaponTypes | resolved classification (locked) |
 
 - Helper columns instead of monster formulas: every intermediate is a
   visible, debuggable cell (maintainer's "all stats included" rule).
 - Constants tab: armor ladder, weapon-class tables, class-anchor
   baselines (Formula v2), rounding conventions. All formulas reference
   it by named range — tune the law in ONE place.
-- Locked cells everywhere except raw-stat and design-input columns.
+- Missing Reload, Burst, and Range fields display their engine defaults (1, 1,
+  and 0). Editing one creates the top-level weapon field; an unchanged default
+  remains absent. Blank BurstDel means the engine's five-tick default.
+- Cells stay locked when there is no safe backing field to edit, such as a
+  synthetic defense Speed or a weapon row with no main damage warhead.
 - `formula.py` implements the identical math; equivalence-tested
   against the sheet on every build (legacy workbook's own computed
   values are the ground truth for the overlap set).
@@ -187,7 +204,7 @@ indented WEAPON row per armament (mirroring yaml structure):
 | command | direction | gate / notes |
 |---|---|---|
 | `python tools/balance/extract_stats.py [--faction X]` | yaml → ledger | overwrites `docs/balance/*.json`; run `--check` to detect drift |
-| `python tools/balance/build_workbook.py` | ledger → `docs/design/cameo_balance_*.xlsx` | workbench regen; gitignored; safe to regenerate |
+| `python tools/balance/build_workbook.py` | ledger → `docs/design/cameo_balance_*.xlsx` | tracked generated workbenches; regenerate and review the binary diff |
 | `python tools/balance/import_workbook.py` | xlsx → ledger | validates and prints every input-cell diff |
 | `python tools/balance/apply_balance.py [--faction X]` | ledger → yaml (dry-run) | prints diff; **does not write** |
 | `python tools/balance/apply_balance.py --confirm [--faction X]` | ledger → yaml | **maintainer order only**; auto-runs `extract_stats.py` + `tools/audit/audit_multiplier_modifiers.py`; full `run_all.sh` + boot gate before commit |
@@ -195,6 +212,10 @@ indented WEAPON row per armament (mirroring yaml structure):
 | `python tools/balance/_patch_ledgers_from_reports.py` | `proposal_*.md` → ledger | patches `docs/balance/*.json` from the three class reports |
 
 Round-trip invariants tested in CI-style: `extract_stats.py` ∘ `apply_balance.py --confirm` = identity, `build_workbook.py` ∘ `import_workbook.py` = identity.
+Each generated workbook also carries a SHA-256 fingerprint of the builder,
+formula/tier helpers, active ordering files, and raw/derived ledgers. `--check`
+rejects a workbook that predates any of those inputs; manual formula edits still
+require the normal regeneration/review gate.
 
 ## 5. Formula v2 — per-unit-type baselines (DESIGN §12 second iteration)
 
@@ -296,7 +317,8 @@ First customer: the SM full rebalance (ROADMAP P1b) runs on Phases
   weapon-class templates per DESIGN's weapon-construction law); the
   sheet's WeaponClass stays the design scalar. Formalizing versus
   into pricing is a Formula-v3 question, deliberately out of scope.
-- xlsx never committed → no binary merge conflicts, ever.
+- The active xlsx workbenches are tracked generated artifacts; regenerate them
+  from the ledger and review binary conflicts instead of treating them as sources.
 
 ## 8. HARDENING — deterministic, agent-independent, memory-free (2026-07-25)
 

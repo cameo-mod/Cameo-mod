@@ -182,13 +182,14 @@ ra2_allies_chronosphere:
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 	DetonateWeaponPower@aichrono:
 		OrderName: RA2ChronoshiftAI
+		Prerequisites:
 			1: botplayer, ~techlevel.superweapons
 		PauseOnCondition: disabled
 		IconImage: ra2_allies_chronosphere
 		Icons:
 			1: icon2
 		Cursor: ability
-		ChargeInterval: 6000
+		ChargeInterval: 4500
 		Names:
 			1: power_chronoshift.name
 		ActivationDelay: 25
@@ -205,6 +206,7 @@ ra2_allies_chronosphere:
 		DisplayRadarPing: True
 		LaunchSound: schrmov.wav
 		IncomingSound: schrmov.wav
+		DisplayTimerRelationships: Ally, Neutral, Enemy
 	SupportPowerChargeBar:
 	MustBeDestroyed:
 		RequiredForShortGame: false

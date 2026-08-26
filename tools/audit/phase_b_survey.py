@@ -8,6 +8,7 @@ Output: a markdown report at docs/audit/latest/phase_b_survey.md with:
 """
 import re
 import sys
+from datetime import date
 from pathlib import Path
 from collections import defaultdict
 
@@ -87,7 +88,7 @@ for w in weapons:
         key = tuple(sorted(w["old_inherits"]))
         groups[key].append(w)
 
-out = ["# Phase B Mixed-Weapon Survey", "", f"Generated: 2026-08-08"]
+out = ["# Phase B Mixed-Weapon Survey", "", f"Generated: {date.today().isoformat()}"]
 
 # split templates (^) vs concrete
 concrete_groups = {k: [w for w in v if not w["name"].startswith("^")] for k, v in groups.items()}

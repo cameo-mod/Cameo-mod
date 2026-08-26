@@ -215,7 +215,7 @@ td_nod_repairfacility:
 		RequiresCondition: !build-incomplete
 	Reservable:
 	RallyPoint:
-	GivesBuildableArea: ##########
+	GivesBuildableArea:
 		AreaTypes: building, cityi
 	RenderSprites:
 		Image: FIX
@@ -652,7 +652,7 @@ CNCSPEN:
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite:
 		Prerequisite: ranavaltransport
-	GivesBuildableArea: ##########
+	GivesBuildableArea:
 		AreaTypes: building, cityi
 	Targetable:
 		TargetTypes: Ground, Water, C4, Structure

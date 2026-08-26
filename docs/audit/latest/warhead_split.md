@@ -1,28 +1,9 @@
-﻿# Warhead-split guard (multi-warhead over-damage)
+# Warhead-split guard (multi-warhead over-damage)
 
 
-## FAIL 1 — broadcast fingerprint (4)
+## FAIL 1 — broadcast fingerprint / every MAIN identical (937 vs baseline 939)
 
-Every SpreadDamage warhead (mains + sides) shares one identical value — the 2026-07-22 broadcast bug. Fix by editing the per-shot TOTAL through the workbook so `distribute_damage` splits it, or by restoring the intended per-warhead values.
-
-| weapon | mains | sides | damage |
-|---|---|---|---|
-| HydraSpit | 4 | 1 | 18000 |
-| NanoArtilleryAG | 3 | 2 | 7777 |
-| NaxiAlienPistol | 3 | 1 | 8000 |
-| NaxiAlienPistol_elite | 3 | 1 | 8000 |
-
-
-## FAIL 2 — FriendlyFire louder than the shot (0)
-
-None. ✅
-
-
-## FAIL 3 — every MAIN identical, on a ratchet (982 vs baseline 982)
-
-This is the fingerprint FAIL 1 *describes* but cannot catch: FAIL 1 also requires a SIDE warhead, which is why it reports 4 where the fingerprint is on 982.
-
-_at or below baseline_ — pre-existing **W24** debt (982 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
+_at or below baseline_ — pre-existing **W24** debt (937 weapons), not a regression. The ratchet catches new broadcasts without blocking every commit on the existing pile. **Lower `BROADCAST_BASELINE` as W24 collapses weapons; never raise it.**
 
 | weapon | mains | per_warhead | total |
 |---|---|---|---|
@@ -38,8 +19,6 @@ _at or below baseline_ — pre-existing **W24** debt (982 weapons), not a regres
 | 155mmBastion | 3 | 10000 | 30000 |
 | 155mmBastionCryo | 3 | 10000 | 30000 |
 | 155mmCryo | 3 | 10000 | 30000 |
-| 227mm | 4 | 2000 | 8000 |
-| 227mmAMT | 4 | 2000 | 8000 |
 | 25mm | 6 | 2000 | 12000 |
 | 25mmWaveforce | 7 | 2000 | 14000 |
 | 8Inch | 2 | 40000 | 80000 |
@@ -66,12 +45,19 @@ _at or below baseline_ — pre-existing **W24** debt (982 weapons), not a regres
 | AsianChemical | 6 | 4000 | 24000 |
 | AsianChemicalBombs | 2 | 2000 | 4000 |
 | AsianChemical_elite | 6 | 4000 | 24000 |
+| AsianGrenade | 2 | 4000 | 8000 |
+| AsianGrenade_elite | 2 | 4000 | 8000 |
 
 
-_... and 942 more._
+_... and 897 more._
 
 
-## Review — high uniform stacks (informational, 246)
+## FAIL 2 — FriendlyFire louder than the shot (0)
+
+None. ✅
+
+
+## Review — high uniform stacks (informational, 237)
 
 Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (not flattening residue).
 
@@ -154,13 +140,10 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | FutureTankCannons_elite | 6 | 100000 | 600000 |
 | Future_Cryocopter_Rocket | 3 | 16000 | 48000 |
 | Future_MultiMissile_Sigma | 5 | 10000 | 50000 |
-| GDIRigMissilePod | 4 | 8000 | 32000 |
-| GDIRigMissilePodAMT | 4 | 8000 | 32000 |
 | GDISniperRifle | 4 | 8000 | 32000 |
 | GladiusCannon | 11 | 10000 | 110000 |
 | GoliathMk2Rockets | 4 | 8000 | 32000 |
 | GuardianShoot | 3 | 8000 | 24000 |
-| HammerheadArtillery | 3 | 11111 | 33333 |
 | HydraSpit | 4 | 18000 | 72000 |
 | IdolCannon | 4 | 10000 | 40000 |
 | InfestedExplosion | 3 | 50000 | 150000 |
@@ -197,4 +180,7 @@ Allowed, but 8000+ per-warhead x N is a big total — confirm it is intended (no
 | MigMissiles_elite | 4 | 8000 | 32000 |
 | MigMissiles_fire | 4 | 8000 | 32000 |
 | MigMissiles_fire_elite | 4 | 8000 | 32000 |
+| MigMissiles_tesla | 4 | 8000 | 32000 |
+| MigMissiles_tesla_elite | 4 | 8000 | 32000 |
+| MissileSoldierWeapon | 5 | 10000 | 50000 |
 

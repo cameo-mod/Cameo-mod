@@ -13,16 +13,9 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -49,17 +42,10 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -71,16 +57,9 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -164,16 +143,9 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -200,17 +172,10 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -222,16 +187,9 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -327,7 +285,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -355,7 +313,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -369,7 +327,7 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -383,21 +341,14 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "10000",
@@ -484,45 +435,24 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "10000",
@@ -577,45 +507,24 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -639,45 +548,24 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -781,7 +669,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -830,7 +718,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -844,7 +732,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -933,16 +821,9 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -969,17 +850,10 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -991,16 +865,9 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -1108,7 +975,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -1126,17 +993,10 @@
        },
        {
         "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -1164,21 +1024,14 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -1271,59 +1124,31 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "12000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "466",
         "tag": "Demolition_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "Demolition_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "12000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "12000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -1336,8 +1161,8 @@
        "^Warhead_Demolition_Light",
        "^Warhead_Demolition_Heavy",
        "^Warhead_Concussion_Medium",
-       "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Heavy",
+       "^Projectile_Grenade_Light_D2K_155mm",
+       "^Effect_Demolition_Heavy_D2K_155mm",
        "^D2K_Cannon"
       ],
       "warheads": [
@@ -1410,44 +1235,23 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -2243,45 +2047,24 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -2293,9 +2076,9 @@
       "versus_templates": [
        "^Warhead_Flak_Medium",
        "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Light",
-       "^Effect_MissileAP_Light",
-       "^D2KRocket"
+       "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
        "^Warhead_Flak_Medium",
@@ -2309,31 +2092,17 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -2344,17 +2113,10 @@
        },
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -2366,9 +2128,9 @@
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
+       "^Warhead_CannonHE_Medium",
        "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Light",
-       "^D2K_Cannon"
+       "^Effect_CannonHE_Medium_D2K"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -2383,45 +2145,24 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "110",
         "tag": "Flak_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Flak_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -2433,9 +2174,9 @@
       "versus_templates": [
        "^Warhead_Flak_Medium",
        "^Warhead_MissileAP_Light",
+       "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Light",
-       "^Effect_MissileAP_Light",
-       "^D2KRocket"
+       "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
        "^Warhead_Flak_Medium",
@@ -2450,31 +2191,17 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "96",
         "tag": "Railgun_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Railgun_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -2485,17 +2212,10 @@
        },
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -2507,9 +2227,9 @@
       "versus_templates": [
        "^Warhead_Demolition_Light",
        "^Warhead_Railgun_Heavy",
+       "^Warhead_CannonHE_Medium",
        "^Projectile_Grenade_Light",
-       "^Effect_Demolition_Light",
-       "^D2K_Cannon"
+       "^Effect_CannonHE_Medium_D2K"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -2581,17 +2301,10 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Chemical_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -2616,17 +2329,10 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "183",
         "tag": "Chemical_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Chemical_Light_Percentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -2708,17 +2414,10 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -2729,7 +2428,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
+       "^Projectile_InstantHit",
        "^Effect_Melee_Medium"
       ],
       "warheads": [
@@ -2743,17 +2442,10 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Melee_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Melee_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -2764,7 +2456,7 @@
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^Warhead_Melee_Medium",
-       "^Projectile_Melee_Medium",
+       "^Projectile_InstantHit",
        "^Effect_Melee_Medium"
       ],
       "warheads": [
@@ -2835,17 +2527,10 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "10",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -2887,7 +2572,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -2908,7 +2593,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -2929,7 +2614,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -2943,7 +2628,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -2957,21 +2642,14 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "10",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -3006,17 +2684,10 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "10",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -3058,7 +2729,7 @@
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
         "tag": "HeavyBombPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -3079,7 +2750,7 @@
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
         "tag": "GrenadePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -3100,7 +2771,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -3114,7 +2785,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
@@ -3128,21 +2799,14 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "10",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -3322,30 +2986,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
@@ -3372,17 +3022,10 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -3394,30 +3037,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -3447,30 +3076,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
@@ -3498,17 +3113,10 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -3520,30 +3128,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -3633,59 +3227,31 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "80",
         "tag": "CannonAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "CannonAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -3717,59 +3283,31 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "80",
         "tag": "CannonAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "CannonAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -3854,45 +3392,24 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
@@ -3904,9 +3421,9 @@
       "versus_templates": [
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium",
-       "^D2KRocket"
+       "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
@@ -3921,45 +3438,24 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/d2k.yaml",
@@ -3971,9 +3467,9 @@
       "versus_templates": [
        "^Warhead_MissileAP_Light",
        "^Warhead_MissileAP_Medium",
+       "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Medium",
-       "^Effect_MissileAP_Medium",
-       "^D2KRocket"
+       "^Effect_MissileAP_Heavy_D2K_Rocket_Trooper"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light",
@@ -4701,45 +4197,24 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -4835,59 +4310,31 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "30000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "80",
         "tag": "CannonAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "CannonAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -4919,59 +4366,31 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "30000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "80",
         "tag": "CannonAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "CannonAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -5056,7 +4475,7 @@
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
-     "v": "18"
+     "v": "9"
     }
    },
    "ordos_combatautoguntank": {
@@ -5067,31 +4486,17 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -5105,7 +4510,7 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -5119,7 +4524,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -5133,7 +4538,7 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -5147,7 +4552,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -5244,17 +4649,10 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -5362,7 +4760,7 @@
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -5380,17 +4778,10 @@
        },
        {
         "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -5418,21 +4809,14 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -5525,17 +4909,10 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -5563,21 +4940,14 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -5674,45 +5044,24 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -5809,31 +5158,17 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "2000",
@@ -5847,7 +5182,7 @@
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -5861,7 +5196,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -5875,7 +5210,7 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "2000",
@@ -5889,7 +5224,7 @@
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -5983,7 +5318,7 @@
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
-     "v": "30"
+     "v": "15"
     }
    },
    "ordos_heavycombattank": {
@@ -5992,17 +5327,10 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "5",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -6025,74 +5353,11 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
+        "damage": "10000",
+        "falloff": "100, 45, 15, 0",
         "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "ChaingunPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "125",
-        "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "100",
-        "tag": "LightMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": null,
-        "spread": "200",
-        "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
-        "tag": "MissileAP_Heavy",
+        "tag": "MissileHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -6103,14 +5368,12 @@
       "requires": "ordos_upgrade_heavycombattankrockets",
       "slot": "Armament@Rockets",
       "versus_templates": [
-       "^Chaingun",
-       "^FlakWeapon",
-       "^LightMissile",
-       "^MediumMissile",
-       "^D2KRocket"
+       "^Warhead_MissileHE_Heavy",
+       "^Projectile_Missile_Heavy_D2K",
+       "^Effect_MissileHE_Heavy_D2K"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy"
+       "^Warhead_MissileHE_Heavy"
       ],
       "weapon": "HeavyOrdosCombatTankRockets",
       "weapon_class_source": "template"
@@ -6186,45 +5449,24 @@
       "damage_warheads": [
        {
         "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "5",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "6",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
         "tag": "CannonHE_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "6",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "10000",
@@ -6279,45 +5521,24 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -6341,45 +5562,24 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "43",
         "tag": "MissileAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "MissileAP_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "4",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "MissileAP_Medium_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "8000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "800",
+        "falloff": "100, 0",
+        "spread": "85",
         "tag": "MissileAP_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "400",
-        "tag": "MissileAP_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -6481,7 +5681,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -6495,7 +5695,7 @@
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "10000",
@@ -6509,7 +5709,7 @@
         "falloff": null,
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -6530,7 +5730,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "LaserWeaponPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        },
        {
         "damage": "600",
@@ -6695,59 +5895,31 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "30000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "80",
         "tag": "CannonAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "CannonAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -6776,59 +5948,31 @@
       "damage_warheads": [
        {
         "damage": "30000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 45, 18, 6, 0",
+        "spread": "233",
         "tag": "Demolition_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "Demolition_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
         "tag": "Concussion_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "Concussion_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "30000",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "80",
         "tag": "CannonAP_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "15",
-        "falloff": "100, 50, 33, 25, 20, 0",
-        "spread": "200",
-        "tag": "CannonAP_Light_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "30000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "15",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -6913,7 +6057,7 @@
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Mobile.TurnSpeed",
-     "v": "16"
+     "v": "8"
     }
    },
    "ordos_raider": {
@@ -6925,16 +6069,9 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -6961,17 +6098,10 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "AreaDamagePercentage"
        },
        {
         "damage": "1000",
@@ -6983,30 +6113,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -7174,30 +6290,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -7226,17 +6328,10 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "64",
         "tag": "Laser_Heavy",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 50, 25, 10, 5, 0",
-        "spread": "50",
-        "tag": "Laser_Heavy_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "1000",
@@ -7248,30 +6343,16 @@
        {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "400",
+        "spread": "67",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "200",
-        "tag": "Bullet_Light_Percentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
         "damage": "2000",
         "falloff": "100, 0",
-        "spread": "600",
+        "spread": "100",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "1",
-        "falloff": "100, 0",
-        "spread": "300",
-        "tag": "Bullet_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -7394,17 +6475,10 @@
        },
        {
         "damage": "14000",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "600",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "7",
-        "falloff": "100, 60, 30, 15, 5, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium_Percentage",
-        "type": "HealthPercentageDamage"
        },
        {
         "damage": "14000",
@@ -7418,7 +6492,7 @@
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
-        "type": "HealthPercentageDamage"
+        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
