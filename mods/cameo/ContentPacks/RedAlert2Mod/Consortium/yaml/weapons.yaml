@@ -1040,8 +1040,9 @@ SteelMegaSword_elite:
 		Damage: 120000
 
 SteelAirTurret:
-	Inherits: ^LaserWeapon
-	Inherits@2: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	Range: 8000
 	ReloadDelay: 60
 	Report: steel_quantumfire.wav
@@ -1049,22 +1050,27 @@ SteelAirTurret:
 	Projectile: Railgun
 		BeamColor: 00EEFF88
 		Railgun: 96
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 24000
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 12
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 24000
-	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 12
+		Damage: 48600
+		PercentageScale: 9875
+	-Warhead@Glow:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
 
 SteelAirTurret_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -1079,21 +1085,10 @@ SteelAirTurret_EMP:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 8
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water, Air
-		Damage: 8
+		Damage: 32600
+		PercentageScale: 9813
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water, Air
@@ -1111,14 +1106,9 @@ SteelAirTurret_elite:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 12000
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 24000
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Damage: 12
-	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 24000
-	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
-		Damage: 12
+	Warhead@Railgun_Heavy:
+		Damage: 48600
+		PercentageScale: 9875
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 36000
 	Warhead@Effect: CreateEffect
@@ -1145,14 +1135,9 @@ SteelAirTurretEScatter:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 2000
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
-		Damage: 2
+	Warhead@Railgun_Heavy:
+		Damage: 8600
+		PercentageScale: 9292
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 6000
 	-Warhead@Scatter:
@@ -1512,30 +1497,37 @@ SteelKatyCannons_EMP_elite:
 	BurstDelays: 5
 
 SteelStalkerRailgun:
-	Inherits: ^LaserWeapon
-	Inherits@2: ^RailgunWeapon
+	Inherits@wh: ^Warhead_Railgun_Heavy
+	Inherits@proj: ^Projectile_Railgun_Heavy
+	Inherits@fx: ^Effect_Railgun_Heavy
 	Range: 9000
 	ReloadDelay: 103
 	Report: bigggun1.aud
+	-ValidTargets:
 	Projectile: Railgun
 		BeamColor: 00EEFF88
 		BeamWidth: 128
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 60000
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 30
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 60000
-	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 30
+		Damage: 120600
+		PercentageScale: 9950
+	-Warhead@Glow:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
+		ImpactActors: false
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
 
 SteelStalkerRailgun_EMP:
 	Inherits@wh: ^Warhead_Tesla_Heavy
@@ -1550,21 +1542,10 @@ SteelStalkerRailgun_EMP:
 		ValidTargets: Ground, Water
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LaserWeapon: SpreadDamage
+	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water
-		Damage: 40000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 40000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Ground, Water
-		Damage: 20
+		Damage: 80600
+		PercentageScale: 9925
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water
@@ -1582,14 +1563,9 @@ SteelStalkerRailgun_elite:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 30000
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 60000
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Damage: 30
-	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 60000
-	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
-		Damage: 30
+	Warhead@Railgun_Heavy:
+		Damage: 120600
+		PercentageScale: 9950
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 90000
 	Warhead@Effect: CreateEffect
@@ -1616,14 +1592,9 @@ SteelStalkerRailgunEScatter:
 	Warhead@Tesla_Heavy_ExtraDamage: SpreadDamage
 		DamageTypes: Tesla
 		Damage: 5000
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 10000
-	Warhead@LaserWeaponPercentage: AreaDamagePercentage
-		Damage: 5
-	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 10000
-	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
-		Damage: 5
+	Warhead@Railgun_Heavy:
+		Damage: 20600
+		PercentageScale: 9704
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 15000
 	-Warhead@Scatter:

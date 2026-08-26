@@ -1,5 +1,28 @@
 # Development Log
 
+## 2026-08-26 — W24 A14: Steel railgun pair consolidated
+
+- Collapsed `SteelAirTurret` and `SteelStalkerRailgun` from simultaneous legacy
+  Laser/Railgun damage stacks onto `^Warhead_Railgun_Heavy`. Their EMP, elite, and
+  scatter descendants inherit the cleanup, giving eight resolved definitions.
+- Whole-tree comparison preserves flat and runtime percentage damage on all 2345
+  weapons. The legacy 600-point Laser residual is folded into each new railgun main;
+  local percentage scales preserve every descendant's reference-target total exactly.
+- Resolver comparison preserves targeting, cadence, range, reports, railgun and scatter
+  projectiles, air/ground impacts, smudges, shield effects, and concrete damage. The
+  standard heavy Railgun armor/blast profile replaces the simultaneous Laser/Railgun
+  profiles as the intended classification consequence.
+- Survey debt falls 267 -> 265 weapons (255 -> 253 mixed), and the broadcast ratchet
+  tightens 907 -> 901.
+- Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers
+  match live YAML; generator drift 0; empty-warhead 0; orphan-old-key real bugs 0;
+  physical-state audit PASS. Independent review caught and verified the restoration of
+  one inherited `ImpactActors: false`; no blockers remain. A controlled launch remained
+  alive and responsive through startup with no new exception log, then its exact test
+  process was stopped.
+- No pricing, engine/runtime source, engine pin, or percentage-damage runtime behavior
+  changed.
+
 ## 2026-08-26 — W24 A13: active sniper family consolidated
 
 - Collapsed `AsianSniper`, `GhostSniper`, `SpecterSniper`, and `VonSniper` onto
