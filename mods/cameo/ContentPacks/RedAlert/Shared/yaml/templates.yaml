@@ -21,20 +21,20 @@
 		Upgrades: ra1_soviets_upgrade_unstableisotopes
 
 ^RocketEnhancements:
-	FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets:
-		RequiresCondition: ra1_soviets_upgrade_highexplosiverockets
+	FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets:
+		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets
 		Modifier: 125
-	RangeMultiplier@ra1_soviets_upgrade_highexplosiverockets:
-		RequiresCondition: ra1_soviets_upgrade_highexplosiverockets
+	RangeMultiplier@ra1_soviets_upgrade_thermobaricrockets:
+		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets
 		Modifier: 125
-	RevealsShroudMultiplier@ra1_soviets_upgrade_highexplosiverockets:
-		RequiresCondition: ra1_soviets_upgrade_highexplosiverockets
+	RevealsShroudMultiplier@ra1_soviets_upgrade_thermobaricrockets:
+		RequiresCondition: ra1_soviets_upgrade_thermobaricrockets
 		Modifier: 150
-	GrantConditionOnPrerequisite@ra1_soviets_upgrade_highexplosiverockets:
-		Condition: ra1_soviets_upgrade_highexplosiverockets
-		Prerequisites: ra1_soviets_upgrade_highexplosiverockets
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_thermobaricrockets:
+		Condition: ra1_soviets_upgrade_thermobaricrockets
+		Prerequisites: ra1_soviets_upgrade_thermobaricrockets
 	ActorStatValues:
-		Upgrades: ra1_soviets_upgrade_highexplosiverockets
+		Upgrades: ra1_soviets_upgrade_thermobaricrockets
 
 ^SovietAutoLoaders:
 	ReloadDelayMultiplier@ra1_soviets_upgrade_autoloaders:

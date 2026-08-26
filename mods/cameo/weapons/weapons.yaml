@@ -9319,17 +9319,6 @@ DefuseKit:
 	# silently switch the derivation back off for every weapon in this tier.
 	Inherits: ^Projectile_Shell
 
-^Projectile_ArtilleryShell_Medium:
-	Projectile: Bullet
-		Image: 120MM
-		Speed: 300
-		Blockable: false
-		LaunchAngle: 165
-		Inaccuracy: 1c0
-		Shadow: true
-		ContrailLength: 10
-		ContrailWidth: 0c32
-
 ^Projectile_ArtilleryRocket_Medium:
 	Projectile: Bullet
 		Image: d2k_missile2

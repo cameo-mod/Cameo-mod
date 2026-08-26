@@ -250,12 +250,27 @@ D2K_Rocket_Trooper:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@wh3: ^Warhead_MissileAP_Heavy
-	Inherits@proj: ^Projectile_Missile_Medium_D2K_Rocket_Trooper
+	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
 	ReloadDelay: 64
 	Range: 6185
 	Report: ROCKET1.WAV
 	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		Speed: 666
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		LaunchAngle: 125
+		MaximumLaunchSpeed: 222
+		MinimumLaunchSpeed: 222
+		HorizontalRateOfTurn: 22
+		VerticalRateOfTurn: 22
+		Acceleration: 6
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -1288,7 +1303,7 @@ Arrakis_Tanya_Guns:
 
 Fremen_RPG:
 	Inherits: ^D2KMissile
-	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Missile_Blast
+	Inherits@fx: ^Effect_MissileAP_Heavy
 	ReloadDelay: 45
 	Range: 4864
 	ValidTargets: Air, Vehicle, Structure
@@ -1296,6 +1311,17 @@ Fremen_RPG:
 	Projectile: Missile
 		Image: d2k_RPG
 		TrailImage: bazooka_trail2
+	-Warhead@DuneRock:
+	-Warhead@DuneSand:
+	-Warhead@RA2Crater:
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_rocket_explosion
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
+		ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
 		Damage: 3200
 		ValidTargets: Air, Vehicle, Structure

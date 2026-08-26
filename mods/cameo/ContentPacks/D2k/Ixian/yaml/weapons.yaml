@@ -123,7 +123,7 @@ D2K_155mm2:
 	Inherits@3: ^ShrapnelWeapon
 	Inherits@4: ^HeavyBomb
 	Inherits@proj: ^Projectile_Grenade_Light_D2K_155mm
-	Inherits@fx: ^Effect_Demolition_Heavy_D2K_155mm2
+	Inherits@fx: ^Effect_Demolition_Heavy
 	Range: 12000
 	Burst: 3
 	BurstDelays: 12
@@ -141,6 +141,12 @@ D2K_155mm2:
 		ContrailStartWidth: 120
 		ContrailEndWidth: 24
 		InaccuracyType: PerCellIncrement
+	-Warhead@Concrete
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_large_explosion
+		ImpactSounds: EXPLMD2.WAV
+		ExplosionPalette: effect75alpha
+		ImpactActors: false
 	Warhead@Grenade: SpreadDamage
 		Damage: 12000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -224,12 +230,25 @@ D2K_Rocket_Trooper2:
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_Railgun_Heavy
 	Inherits@wh3: ^Warhead_CannonHE_Medium
-	Inherits@proj: ^Projectile_Grenade_Light_D2K_Rocket_Trooper2
+	Inherits@proj: ^Projectile_Grenade_Light
 	Inherits@fx: ^Effect_CannonHE_Medium_D2K
 	ReloadDelay: 64
 	Range: 6502
 	Report: ROCKET1.WAV
 	ValidTargets: Ground, Water, Air
+	Projectile: Bullet
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		Speed: 333
+		Inaccuracy: 33
+		InaccuracyType: PerCellIncrement
+		InaccuracyPercentage: 1
+		ProjectileSpeedPercentage: 10
+		LaunchAngle: 66
+		Shadow: true
 	Warhead@Demolition_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -242,12 +261,27 @@ D2K_Rocket_Trooper1:
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_MissileAP_Light
 	Inherits@wh3: ^Warhead_MissileAP_Heavy
-	Inherits@proj: ^Projectile_Missile_Light_D2K_Rocket_Trooper1
+	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_Rocket_Trooper
 	ReloadDelay: 64
 	Range: 6502
 	Report: ROCKET1.WAV
 	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		Speed: 666
+		Inaccuracy: 25
+		InaccuracyType: PerCellIncrement
+		LaunchAngle: 125
+		MaximumLaunchSpeed: 222
+		MinimumLaunchSpeed: 222
+		HorizontalRateOfTurn: 22
+		VerticalRateOfTurn: 22
+		Acceleration: 6
 	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -259,8 +293,8 @@ D2K_Rocket_Trooper1:
 		Damage: 8000
 D2K_TowerMissile:
 	Inherits: ^D2KMissile
-	Inherits@proj: ^Projectile_Missile_Heavy_D2K_TowerMissile
-	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_TowerMissile
+	Inherits@proj: ^Projectile_Missile_Heavy_D2K
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 42
 	Range: 10684
@@ -270,20 +304,164 @@ D2K_TowerMissile:
 	MinRange: 2135
 	Burst: 2
 	BurstDelays: 5
+	Projectile: Missile
+		Speed: 3333
+		Blockable: false
+		LaunchAngle: 66
+		Inaccuracy: 33
+		Image: d2k_missile2
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		ContrailLength: 0
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 80
+		VerticalRateOfTurn: 20
+		TrailImage: large_trail
+		TrailInterval: 1
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 666
+		Acceleration: 6
+		HomingActivationDelay: 3
+		RangeLimit: 33333
+		PointDefenseTypes: Missile
+		Palette: d2keffect
+		CruiseAltitude: 1000
+		MinimumLaunchAngle: 64
 	Warhead@MissileAP_Heavy:
 		Damage: 16000
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_explosion
+		ImpactSounds: EXPLSML1.WAV
+		ValidTargets: Ground, Air
+		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ExplosionPalette: effect75alpha
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 12
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 750
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@RA2Scorch: LeaveSmudge
+		SmudgeType: RA2Scorch
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ValidTargets: Air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
 mtank_pri2:
 	Inherits: ^D2KMissile
-	Inherits@proj: ^Projectile_Missile_Heavy_D2K_mtank_pri2
-	Inherits@fx: ^Effect_MissileAP_Heavy_D2K_mtank_pri2
+	Inherits@proj: ^Projectile_Missile_Heavy_D2K
+	Inherits@fx: ^Effect_MissileAP_Heavy_D2K
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 5
 	Range: 10052
 	TargetActorCenter: true
 	MinRange: 2010
 	Report: ROCKET1.WAV
+	Projectile: Missile
+		Speed: 500
+		Blockable: false
+		LaunchAngle: 66
+		Inaccuracy: 150
+		Image: d2k_missile2
+		Arm: 0
+		AllowSnapping: true
+		Shadow: true
+		HorizontalRateOfTurn: 25
+		VerticalRateOfTurn: 25
+		TrailImage: large_trail
+		TrailInterval: 1
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		CloseEnough: 500
+		Acceleration: 5
+		HomingActivationDelay: 3
+		RangeLimit: 45000
+		PointDefenseTypes: Missile
+		Palette: d2keffect
+		CruiseAltitude: 1000
+		MinimumLaunchAngle: 64
+		InaccuracyType: PerCellIncrement
 	Warhead@MissileAP_Heavy:
 		Damage: 24000
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater, RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_med_explosion
+		ImpactSounds: EXPLSML1.WAV
+		ValidTargets: Ground, Air
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 12
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 750
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
 IxRailgunDroneBullet:
 	Inherits: ^FlakWeapon
 	Inherits@2: ^TankDestroyerCannon

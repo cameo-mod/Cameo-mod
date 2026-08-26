@@ -9,8 +9,7 @@ TS70mm:
 	Warhead@CannonHE_Medium:
 		Damage: 4000
 TS70mmChem:
-	Inherits@wh: ^Warhead_CannonHE_Medium
-	Inherits@wh2: ^Warhead_Chemical_Light
+	Inherits@wh: ^Warhead_CannonChem_Light
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits@fx2: ^TSCannonEffect
@@ -19,13 +18,11 @@ TS70mmChem:
 	Report: flamer2.aud
 	Projectile: Bullet
 		Speed: 3500
-	Warhead@CannonHE_Medium:
-		Damage: 4000
-	Warhead@Chemical_Light:
+	Warhead@CannonChem_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		Damage: 2000
+		Damage: 6000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@Effect: CreateEffect
 		Explosions: chemball
@@ -68,35 +65,34 @@ TS70mmTur:
 	Warhead@CannonAP_Light:
 		Damage: 4000
 TS70mmTurChem:
-	Inherits: ^Warhead_CannonHE_Medium
+	Inherits: ^Warhead_CannonChem_Light
 	Inherits@2: ^Projectile_Shell_Medium
 	Inherits@3: ^Effect_CannonHE_Medium
 	Inherits@4: ^TSCannonEffect
-	Inherits@5: ^LightChemicalWeapon
-	Inherits@6: ^TankDestroyerCannon
 	ReloadDelay: 10
 	Range: 6574
 	Projectile: Bullet
 		Speed: 850
 		Blockable: false
 		LaunchAngle: 0
-	Warhead@CannonHE_Medium:
-		Damage: 4000
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 4000
-	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
-		Damage: 2
-	Warhead@LightChemicalWeapon: AreaDamage
+		Inaccuracy: 150
+	Warhead@CannonChem_Light:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 2
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactSounds: xplosml2.aud
+		ValidTargets: Ground, Ship
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_explosion_air
+		ImpactSounds: kaboom25.aud
+		ImpactActors: false
+		ValidTargets: Air
+	Warhead@Concrete: DamagesConcrete
+		Damage: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
@@ -177,8 +173,7 @@ TSScoopDual:
 	Warhead@CannonHE_Medium:
 		Damage: 20000
 TSScoopDualChem:
-	Inherits@wh: ^Warhead_CannonHE_Medium
-	Inherits@wh2: ^Warhead_Chemical_Medium
+	Inherits@wh: ^Warhead_CannonChem_Medium
 	Inherits@proj: ^Projectile_Shell_Medium
 	Inherits@fx: ^Effect_CannonHE_Medium
 	Inherits@fx2: ^TSCannonEffect
@@ -189,13 +184,11 @@ TSScoopDualChem:
 	Report: flamer2.aud
 	Projectile: Bullet
 		Speed: 3500
-	Warhead@CannonHE_Medium:
-		Damage: 20000
-	Warhead@Chemical_Medium:
+	Warhead@CannonChem_Medium:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		Damage: 10000
+		Damage: 30000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@Effect: CreateEffect
 		Explosions: med_tibnapalm
@@ -237,37 +230,37 @@ TSScoopDualTur:
 	Warhead@Concussion_Medium:
 		Damage: 16000
 TSScoopDualTurChem:
-	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits: ^Warhead_CannonChem_Medium
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^TSCannonEffect
-	Inherits@5: ^MediumChemicalWeapon
-	Inherits@6: ^ShrapnelWeapon
 	ReloadDelay: 48
 	Burst: 2
 	BurstDelays: 2
 	Range: 6404
 	Projectile: Bullet
 		Speed: 850
-	Warhead@CannonHE_Heavy:
-		Damage: 16000
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 16000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 8000
-	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
-		Damage: 8
-	Warhead@MediumChemicalWeapon: AreaDamage
+	Warhead@CannonChem_Medium:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		Damage: 16000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		Damage: 8
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
+		Damage: 48000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ValidTargets: Ground, Ship
+	Warhead@EffectWater: CreateEffect
+		Explosions: med_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@Concrete: DamagesConcrete
+		Damage: 175
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 50
@@ -610,7 +603,6 @@ TSBoatcannon:
 		Spread: 400
 TSChemJuggerboat90mm:
 	Inherits@wh: ^Warhead_CannonChem_Medium
-	Inherits@proj: ^Projectile_ArtilleryShell_Medium
 	Inherits@fx: ^Effect_Chem_Medium
 	ReloadDelay: 69
 	Range: 12834
@@ -620,7 +612,14 @@ TSChemJuggerboat90mm:
 	Report: jugger1.aud
 	TargetActorCenter: true
 	Projectile: Bullet
+		Image: 120MM
 		Speed: 280
+		Blockable: false
+		LaunchAngle: 165
+		Inaccuracy: 1c0
+		Shadow: true
+		ContrailLength: 10
+		ContrailWidth: 0c32
 	Warhead@CannonChem_Medium:
 		PercentageScale: 14000
 		Damage: 30000

@@ -1030,7 +1030,7 @@
       "reliability": 0.5289,
       "sigma": 360.4,
       "slot": "Armament",
-      "weapon": "NuclearMaverick"
+      "weapon": "Su57Maverick"
      },
      {
       "avg_versus": 1.0561,
@@ -1055,7 +1055,7 @@
       "reliability": 0.7464,
       "sigma": 360.4,
       "slot": "Armament@HE",
-      "weapon": "ThermobaricNuclearMaverick"
+      "weapon": "Su57MaverickThermobaric"
      },
      {
       "avg_versus": 1.1323,
@@ -3232,10 +3232,6 @@
     "tier_chain_cost": 16000.0,
     "tier_multiplier": 0.5593
    },
-   "ra1_soviets_upgrade_highexplosiverockets": {
-    "tier_chain_cost": 16000.0,
-    "tier_multiplier": 0.5593
-   },
    "ra1_soviets_upgrade_incendiarybullets": {
     "tier_chain_cost": 16000.0,
     "tier_multiplier": 0.5593
@@ -3287,6 +3283,10 @@
    "ra1_soviets_upgrade_teslayak": {
     "tier_chain_cost": 11000.0,
     "tier_multiplier": 0.8462
+   },
+   "ra1_soviets_upgrade_thermobaricrockets": {
+    "tier_chain_cost": 16000.0,
+    "tier_multiplier": 0.5593
    },
    "ra1_soviets_upgrade_thermonuclearrockets": {
     "tier_chain_cost": 16000.0,
@@ -4493,7 +4493,7 @@
       "reliability": 0.6629,
       "sigma": 1022.2,
       "slot": "Armament@Upgrade",
-      "weapon": "MonsterTank120mmThermobaric"
+      "weapon": "MonsterTank120mmInferno"
      },
      {
       "avg_versus": 1.0532,
@@ -4568,7 +4568,7 @@
      }
     ],
     "physical_state_multiplier": 1.1849,
-    "physical_state_weapon": "MonsterTank120mmThermobaric",
+    "physical_state_weapon": "MonsterTank120mmInferno",
     "physical_state_weight": 0.7395,
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,

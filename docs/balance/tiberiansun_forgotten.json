@@ -1391,58 +1391,28 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "damage": "12000",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "60",
+        "tag": "CannonChem_Light",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": "99, 66, 33",
-        "spread": "175",
-        "tag": "LightChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "2",
-        "falloff": null,
-        "spread": "75",
-        "tag": "TankDestroyerCannonPercentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6574",
       "reloaddelay": "10",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium",
+       "^Warhead_CannonChem_Light",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
-       "^TSCannonEffect",
-       "^LightChemicalWeapon",
-       "^TankDestroyerCannon"
+       "^TSCannonEffect"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium"
+       "^Warhead_CannonChem_Light"
       ],
       "weapon": "TS70mmTurChem",
       "weapon_class_source": "template"
@@ -1547,65 +1517,28 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "damage": "48000",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "90",
+        "tag": "CannonChem_Medium",
         "type": "AreaDamage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "MediumChemicalWeaponPercentage",
-        "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "16000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponPercentage",
-        "type": "AreaDamagePercentage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6404",
       "reloaddelay": "48",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
+       "^Warhead_CannonChem_Medium",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
-       "^TSCannonEffect",
-       "^MediumChemicalWeapon",
-       "^ShrapnelWeapon"
+       "^TSCannonEffect"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_CannonChem_Medium"
       ],
       "weapon": "TSScoopDualTurChem",
       "weapon_class_source": "template"
@@ -6380,7 +6313,6 @@
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^Warhead_CannonChem_Medium",
-       "^Projectile_ArtilleryShell_Medium",
        "^Effect_Chem_Medium"
       ],
       "warheads": [
@@ -8749,37 +8681,28 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "183",
-        "tag": "Chemical_Light",
+        "damage": "6000",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "60",
+        "tag": "CannonChem_Light",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": 0.875,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5566",
       "reloaddelay": "24",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_Chemical_Light",
+       "^Warhead_CannonChem_Light",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
        "^TSCannonEffect"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_Chemical_Light"
+       "^Warhead_CannonChem_Light"
       ],
       "weapon": "TS70mmChem",
       "weapon_class_source": "template"
@@ -9243,17 +9166,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "20000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "275",
-        "tag": "Chemical_Medium",
+        "damage": "30000",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "90",
+        "tag": "CannonChem_Medium",
         "type": "AreaDamage"
        }
       ],
@@ -9265,15 +9181,13 @@
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_Chemical_Medium",
+       "^Warhead_CannonChem_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
        "^TSCannonEffect"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Medium",
-       "^Warhead_Chemical_Medium"
+       "^Warhead_CannonChem_Medium"
       ],
       "weapon": "TSScoopDualChem",
       "weapon_class_source": "template"
