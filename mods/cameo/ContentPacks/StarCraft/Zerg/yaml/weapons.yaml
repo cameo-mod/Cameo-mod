@@ -54,6 +54,7 @@ ShriekStinger:
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
 HydraSpit:
+	Inherits@collapsewh: ^Warhead_Chemical_Light
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^LightMissile
 	Inherits@3: ^SmallArms
@@ -71,34 +72,17 @@ HydraSpit:
 		Speed: 2500
 		Width: 25
 		TrailImage: sczhsplash
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 18000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 18000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 18000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@ArrowWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 18000
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -106,6 +90,14 @@ HydraSpit:
 		Explosions: sczhsplash
 	Warhead@EffectAir: CreateEffect
 		Explosions: sczhsplash
+	-Warhead@LightChemicalWeapon:
+	-Warhead@LightMissile:
+	-Warhead@SmallArms:
+	-Warhead@ArrowWeapon:
+	Warhead@Chemical_Light:
+		ValidTargets: Ground, Water, Air
+		Damage: 72000
+		PercentageScale: 0
 
 SpithidSpit:
 	Inherits@collapsewh: ^Warhead_Bullet_Light
@@ -817,6 +809,7 @@ SwarmlingShoot:
 		ValidTargets: Ground, Water, Air
 
 QueenSpine:
+	Inherits@collapsewh: ^Warhead_Chemical_Medium
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^ArrowWeapon
 	ReloadDelay: 78
@@ -831,16 +824,6 @@ QueenSpine:
 		ContrailLength: 5
 		Speed: 2500
 		Width: 25
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		InvalidTargets: Broodling
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, QueenBroodlingSpawn
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Broodling
 		ValidTargets: Ground, Water, Air
@@ -848,11 +831,6 @@ QueenSpine:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, QueenBroodlingSpawn
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@ArrowWeapon: SpreadDamage
-		InvalidTargets: Broodling
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, QueenBroodlingSpawn
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		InvalidTargets: Broodling
 		ValidTargets: Ground, Water, Air
@@ -868,6 +846,14 @@ QueenSpine:
 		ImpactActors: false
 		ImpactSounds: zquhit00.aud,zquhit01.aud
 		ValidTargets: Ground, Water, Air
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@ArrowWeapon:
+	Warhead@Chemical_Medium:
+		InvalidTargets: Broodling
+		ValidTargets: Ground, Water, Air
+		Damage: 20000
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, QueenBroodlingSpawn
+		PercentageScale: 0
 
 UltraliskHusk:
 	Inherits@wh: ^Warhead_Melee_Medium
@@ -920,18 +906,10 @@ LurkerSpines:
 		ImpactSounds: zquhit00.aud,zquhit01.aud
 
 LurkerSpinesImpact:
+	Inherits@collapsewh: ^Warhead_Chemical_Medium
 	Inherits: ^MediumChemicalWeapon
 	Inherits@2: ^SwordWeapon
 	Projectile: InstantHit
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
@@ -939,16 +917,6 @@ LurkerSpinesImpact:
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@SwordWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
-		ValidRelationships: Enemy, Neutral
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 1000
-		ValidRelationships: Enemy, Neutral
-		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
@@ -958,6 +926,13 @@ LurkerSpinesImpact:
 		Explosions: sczlspine
 		ImpactSounds: zquhit00.aud,zquhit01.aud
 		ValidTargets: Ground, Water, Air
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@SwordWeapon:
+	-Warhead@SwordWeaponFriendlyFire:
+	Warhead@Chemical_Medium:
+		Damage: 5000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PercentageScale: 0
 
 InfestedExplosion:
 	Inherits@wh: ^Warhead_Demolition_Light

@@ -54,7 +54,7 @@ REVIEW_DMG = 8000
 # FIRED by a concrete actor, while this audit scans EVERY concrete weapon
 # (`rs.weapons`), fired or not. Two populations, both correct for their own
 # question — don't reconcile them by changing one.
-BROADCAST_BASELINE = 845
+BROADCAST_BASELINE = 838
 
 
 def _int(v) -> int:

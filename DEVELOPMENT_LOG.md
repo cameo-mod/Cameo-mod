@@ -1,5 +1,26 @@
 # Development Log
 
+## 2026-08-28 — Remaining override-free element roles
+
+- Consolidated ten actual roots without descendant flat-damage overrides: Hydra and Leech spit,
+  Lurker and Queen spines, three Forgotten chemical weapons plus both blue Fiend shards, and Yak
+  napalm. Their destinations are standard light/medium/heavy Chemical, medium chemical missile,
+  and heavy Flame roles.
+- Direct totals and all separate percentage applications remain unchanged. Projectiles, cadence,
+  reports, effects, smoke clouds, Leech infection, Queen broodling spawning, and the old
+  ground/air firing declarations remain intact.
+- Standard family armor, blast, allied-damage, wall, death, physical-state, and damage-target
+  profiles are intentional role-normalization consequences. The active survey falls from 224 to
+  214 roots: 211 mixed weapons in 166 groups and three isolated roots. The classifier now has
+  seven corroborated, 12 legacy-only, and 195 human-decision roots; broadcast debt falls from 845
+  to 838. Pricing and the parked runtime fix remain separate.
+- Independent review approved the resolved comparison: exactly the selected ten weapons changed,
+  with no projectile, cadence, effect, condition, top-level, direct-total, or percentage-profile
+  drift. Verification passes 433 tests (11 optional spreadsheet tests skipped), all balance
+  ledgers, generator, inheritance, empty-warhead, orphan-key, and physical-state checks. The
+  controlled pinned-engine launch stayed alive for 90 seconds with no YAML, exception, fatal, or
+  crash log matches; its exact process was stopped.
+
 ## 2026-08-28 — Projectile-role backlog checkpoint
 
 - Consolidated 13 actual retired-family roots, covering 34 resolved parent/child weapons, into

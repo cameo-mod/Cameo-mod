@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
-Generated: 2026-08-27
-Total concrete weapons on old families: 224
+Generated: 2026-08-28
+Total concrete weapons on old families: 214
 Single old-family with new inherits (Phase B completion): 0
 Pure single old-family (mechanical Phase A candidates): 3
-Mixed old-family (Phase B maintainer sign-off): 221 in 175 groups
+Mixed old-family (Phase B maintainer sign-off): 211 in 166 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `RA2CRM60H` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, Bullet_Medium=2000, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
@@ -98,9 +98,6 @@ Mixed old-family (Phase B maintainer sign-off): 221 in 175 groups
 ### FlakWeapon, LaserWeapon, LightFlameWeapon, MediumChemicalWeapon, MediumMissile, ShrapnelWeapon (1 weapons)
 - `DreadshroudSpore` (ContentPacks\StarCraft\Zerg\yaml\weapons.yaml) | dominant: LightFlameWeapon(2000) | LightFlameWeapon=2000, LightFlameWeaponPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, MediumChemicalWeapon=2000, MediumChemicalWeaponPercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1, Condition=0, Effect=0, EffectAir=0 | → collapse to LightFlameWeapon
 
-### Grenade, HeavyBomb, HeavyChemicalWeapon, LightChemicalWeapon, MediumChemicalWeapon, ShrapnelWeapon (1 weapons)
-- `TSFiendShardBlueUP` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: Grenade(6000) | Grenade=6000, GrenadeFriendlyFire=3000, GrenadePercentage=3, ShrapnelWeapon=6000, ShrapnelWeaponFriendlyFire=3000, ShrapnelWeaponPercentage=3, LightChemicalWeapon=6000, LightChemicalWeaponPercentage=3, MediumChemicalWeapon=6000, MediumChemicalWeaponPercentage=3, HeavyChemicalWeapon=6000, HeavyChemicalWeaponPercentage=3, HeavyBomb=6000, HeavyBombPercentage=3, Cloud=0, 3Eff=0 | → collapse to Grenade
-
 ### Grenade, HeavyBomb, HeavyMissile, LightFlameWeapon, MediumChemicalWeapon, ShrapnelWeapon (1 weapons)
 - `BehemothShoot` (ContentPacks\StarCraft\Zerg\yaml\weapons.yaml) | dominant: LightFlameWeapon(2000) | LightFlameWeapon=2000, LightFlameWeaponPercentage=1, MediumChemicalWeapon=2000, MediumChemicalWeaponPercentage=1, HeavyMissile=2000, HeavyMissilePercentage=1, Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, HeavyBomb=2000, HeavyBombPercentage=1, Effect=0, Effect2=0, EffectAir=0 | → collapse to LightFlameWeapon
 
@@ -180,10 +177,6 @@ Mixed old-family (Phase B maintainer sign-off): 221 in 175 groups
 - `SkyshieldCannon` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, LightMissile=2000, LightMissilePercentage=1, Chaingun=2000, ChaingunPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1 | → collapse to SmallArms
 - `tkmheavyaaturret` (ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml) | dominant: LightMissile(2000) | LightMissile=2000, LightMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1 | → collapse to LightMissile
 
-### ArrowWeapon, LightChemicalWeapon, LightMissile, SmallArms (2 weapons)
-- `HydraSpit` (ContentPacks\StarCraft\Zerg\yaml\weapons.yaml) | dominant: LightChemicalWeapon(18000) | LightChemicalWeapon=18000, LightChemicalWeaponPercentage=1, LightMissile=18000, LightMissilePercentage=1, SmallArms=18000, SmallArmsPercentage=1, ArrowWeapon=18000, ArrowWeaponPercentage=1, Effect=0, EffectAir=0 | → collapse to LightChemicalWeapon
-- `LeechSpit` (weapons\d2k.yaml) | dominant: LightChemicalWeapon(4000) | LightChemicalWeapon=4000, LightChemicalWeaponPercentage=1, LightMissile=4000, LightMissilePercentage=1, SmallArms=2000, SmallArmsPercentage=1, ArrowWeapon=2000, ArrowWeaponPercentage=1, Effect=0, EffectAir=0 | → collapse to LightChemicalWeapon
-
 ### FlakWeapon, Grenade, SmallArms, TankDestroyerCannon (2 weapons)
 - `PositronGrenade` (ContentPacks\StarCraft\Protoss\yaml\weapons.yaml) | dominant: SmallArms(8000) | SmallArms=8000, SmallArmsPercentage=1, FlakWeapon=8000, FlakWeaponPercentage=1, Grenade=8000, GrenadeFriendlyFire=4000, GrenadePercentage=1, CannonHE_Medium=8000, TankDestroyerCannon=8000, TankDestroyerCannonPercentage=1, Effect=0, shrapnel=0 | → collapse to SmallArms
 - `VultureGrenade` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | dominant: SmallArms(4000) | SmallArms=4000, SmallArmsPercentage=2, FlakWeapon=4000, FlakWeaponPercentage=2, Grenade=4000, GrenadeFriendlyFire=2000, GrenadePercentage=2, CannonHE_Medium=4000, TankDestroyerCannon=4000, TankDestroyerCannonPercentage=2, Effect=0 | → collapse to SmallArms
@@ -249,12 +242,6 @@ Mixed old-family (Phase B maintainer sign-off): 221 in 175 groups
 ### Grenade, HeavyCannon, MediumCannon, ShrapnelWeapon (1 weapons)
 - `CabalArtilleryWalkerShell` (ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml) | dominant: Grenade(42000) | Grenade=42000, GrenadeFriendlyFire=21000, GrenadePercentage=21, ShrapnelWeapon=42000, ShrapnelWeaponFriendlyFire=21000, ShrapnelWeaponPercentage=21, MediumCannon=42000, MediumCannonPercentage=21, HeavyCannon=42000, HeavyCannonPercentage=21, Effect=0 | → collapse to Grenade
 
-### Grenade, LightChemicalWeapon, MediumChemicalWeapon, MediumMissile (1 weapons)
-- `TSChemRuinerMissile` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: Grenade(18000) | LightChemicalWeapon=10000, LightChemicalWeaponPercentage=5, MediumChemicalWeapon=8000, MediumChemicalWeaponPercentage=4, Grenade=18000, GrenadeFriendlyFire=9000, GrenadePercentage=9, MediumMissile=18000, MediumMissilePercentage=9, Cloud=0 | → collapse to Grenade
-
-### Grenade, LightChemicalWeapon, MediumChemicalWeapon, ShrapnelWeapon (1 weapons)
-- `TSFiendShardBlue` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: Grenade(6000) | Grenade=6000, GrenadeFriendlyFire=3000, GrenadePercentage=3, ShrapnelWeapon=6000, ShrapnelWeaponFriendlyFire=3000, ShrapnelWeaponPercentage=3, LightChemicalWeapon=6000, LightChemicalWeaponPercentage=3, MediumChemicalWeapon=6000, MediumChemicalWeaponPercentage=3, 3Eff=0 | → collapse to Grenade
-
 ### Grenade, LightFlameWeapon, MediumMissile, ShrapnelWeapon (1 weapons)
 - `HueyFireMissiles` (ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml) | dominant: LightMissile(6000) | Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, CannonHE_Heavy=2000, MediumMissile=2000, MediumMissilePercentage=0, LightFlameWeaponPercentage=2, LightMissile=6000, LightMissilePercentage=2, Smudge=0, Effect=0, EffectAir=0 | → collapse to LightMissile
 
@@ -275,12 +262,6 @@ Mixed old-family (Phase B maintainer sign-off): 221 in 175 groups
 
 ### HeavyBomb, HeavyChemicalWeapon, HeavyMissile, RailgunWeapon (1 weapons)
 - `KodiakCannon` (ContentPacks\TiberianSun\GDI\yaml\weapons.yaml) | dominant: HeavyChemicalWeapon(8000) | HeavyChemicalWeapon=8000, HeavyChemicalWeaponPercentage=4, RailgunWeapon=8000, RailgunWeaponPercentage=4, HeavyMissile=8000, HeavyMissilePercentage=4, CannonHE_Heavy=8000, HeavyBomb=8000, HeavyBombPercentage=4 | → collapse to HeavyChemicalWeapon
-
-### HeavyBomb, HeavyChemicalWeapon, MediumChemicalWeapon, ShrapnelWeapon (1 weapons)
-- `TSBusMortarChem` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: ShrapnelWeapon(32000) | ShrapnelWeapon=32000, ShrapnelWeaponFriendlyFire=16000, ShrapnelWeaponPercentage=16, HeavyBomb=32000, HeavyBombPercentage=16, MediumChemicalWeapon=32000, MediumChemicalWeaponPercentage=16, HeavyChemicalWeapon=32000, HeavyChemicalWeaponPercentage=16, Cloud=0 | → collapse to ShrapnelWeapon
-
-### HeavyBomb, HeavyFlameWeapon, MediumFlameWeapon, ShrapnelWeapon (1 weapons)
-- `YakNapalm` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: ShrapnelWeapon(10000) | ShrapnelWeapon=10000, ShrapnelWeaponFriendlyFire=5000, ShrapnelWeaponPercentage=5, HeavyBomb=10000, HeavyBombPercentage=5, MediumFlameWeapon=10000, MediumFlameWeaponPercentage=5, HeavyFlameWeapon=10000, HeavyFlameWeaponPercentage=5, Effect=0 | → collapse to ShrapnelWeapon
 
 ### HeavyBomb, LightChemicalWeapon, MediumFlameWeapon, ShrapnelWeapon (1 weapons)
 - `RA2GrandCannonWeapon` (ContentPacks\RedAlert2\Allies\yaml\weapons.yaml) | dominant: CannonHE_Heavy(50000) | CannonHE_Heavy=50000, HeavyBomb=50000, HeavyBombPercentage=25, MediumFlameWeapon=50000, MediumFlameWeaponPercentage=25, ShrapnelWeapon=50000, ShrapnelWeaponFriendlyFire=25000, ShrapnelWeaponPercentage=25, LightChemicalWeapon=50000, LightChemicalWeaponPercentage=25, Demolition_Light=50000, EffectWater=0 | → collapse to CannonHE_Heavy
@@ -403,9 +384,6 @@ Mixed old-family (Phase B maintainer sign-off): 221 in 175 groups
 ### HeavyBomb, LightChemicalWeapon, MediumFlameWeapon (1 weapons)
 - `LunarTigerCannon` (ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml) | dominant: LightChemicalWeapon(4000) | LightChemicalWeapon=4000, LightChemicalWeaponPercentage=2, HeavyBomb=4000, HeavyBombPercentage=2, MediumFlameWeapon=4000, MediumFlameWeaponPercentage=2, CannonHE_Medium=4000 | → collapse to LightChemicalWeapon
 
-### HeavyBomb, MediumChemicalWeapon, ShrapnelWeapon (1 weapons)
-- `TSChemBoatcannon` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: HeavyBomb(16000) | HeavyBomb=16000, HeavyBombPercentage=8, MediumChemicalWeapon=8000, MediumChemicalWeaponPercentage=4 | → collapse to HeavyBomb
-
 ### HeavyBomb, MediumFlameWeapon, ShrapnelWeapon (1 weapons)
 - `RA2RBurritoRocket` (ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml) | dominant: Demolition_Light(4000) | Demolition_Light=4000, ShrapnelWeapon=4000, ShrapnelWeaponFriendlyFire=2000, ShrapnelWeaponPercentage=2, MediumFlameWeapon=4000, MediumFlameWeaponPercentage=2, HeavyBomb=4000, HeavyBombPercentage=2, MissileAP_Heavy=4000, FireShrapnel=0 | → collapse to Demolition_Light
 
@@ -500,9 +478,6 @@ Mixed old-family (Phase B maintainer sign-off): 221 in 175 groups
 ### ArrowWeapon, Grenade (1 weapons)
 - `AsianMaidenBow` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | dominant: Grenade(2000) | Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, ArrowWeapon=2000, ArrowWeaponPercentage=1, Effect=0, EffectAir=0 | → collapse to Grenade
 
-### ArrowWeapon, MediumChemicalWeapon (1 weapons)
-- `QueenSpine` (ContentPacks\StarCraft\Zerg\yaml\weapons.yaml) | dominant: MediumChemicalWeapon(10000) | MediumChemicalWeapon=10000, MediumChemicalWeaponPercentage=5, ArrowWeapon=10000, ArrowWeaponPercentage=5, Effect=0, EffectAir=0 | → collapse to MediumChemicalWeapon
-
 ### ArrowWeapon, TeslaWeapon (1 weapons)
 - `ConsortiumMissileSystem` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | dominant: TeslaWeapon(6000) | TeslaWeapon=6000, TeslaExtraDamage=3000, TeslaWeaponPercentage=3, ArrowWeapon=6000, ArrowWeaponPercentage=3, Flak_Medium=6000, MissileAP_Medium=6000 | → collapse to TeslaWeapon
 
@@ -559,9 +534,6 @@ Mixed old-family (Phase B maintainer sign-off): 221 in 175 groups
 
 ### MediumChemicalWeapon, RailgunWeapon (1 weapons)
 - `RA2MirageGun` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | dominant: RailgunWeapon(8000) | RailgunWeapon=8000, RailgunWeaponPercentage=4, MediumChemicalWeapon=8000, MediumChemicalWeaponPercentage=4, CannonAP_Light=8000 | → collapse to RailgunWeapon
-
-### MediumChemicalWeapon, SwordWeapon (1 weapons)
-- `LurkerSpinesImpact` (ContentPacks\StarCraft\Zerg\yaml\weapons.yaml) | dominant: MediumChemicalWeapon(2000) | MediumChemicalWeapon=2000, MediumChemicalWeaponPercentage=1, SwordWeapon=2000, SwordWeaponFriendlyFire=1000, SwordWeaponPercentage=1, Effect=0 | → collapse to MediumChemicalWeapon
 
 ### MediumFlameWeapon, NuclearWarhead (1 weapons)
 - `VolkovMagneticWeaponIncendiaryNuclearShells` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: MediumFlameWeapon(40000) | MediumFlameWeapon=40000, MediumFlameWeaponPercentage=20, CannonHE_Heavy=40000, MediumChemicalWeapon=40000, MediumChemicalWeaponPercentage=20, Grenade=40000, GrenadeFriendlyFire=20000, GrenadePercentage=20, NuclearWarhead=40000, NuclearWarheadPercentage=20, Effect=0 | → collapse to MediumFlameWeapon

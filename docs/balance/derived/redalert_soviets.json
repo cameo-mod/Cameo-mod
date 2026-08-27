@@ -1380,29 +1380,29 @@
    "ra1_soviets_yakscoutplane": {
     "armaments": [
      {
-      "avg_versus": 0.7359,
+      "avg_versus": 1.156,
       "damage_total": 40000.0,
       "dps_floor": 197.07,
       "eff_reload": 119.0,
-      "effective_damage": 87414.55,
-      "effective_dps": 1840.23,
-      "effective_per_shot": 54746.73,
+      "effective_damage": 82440.14,
+      "effective_dps": 2762.97,
+      "effective_per_shot": 82198.29,
       "factor_deadzone": 1.0,
       "factor_range": 0.8267,
       "factor_targets": 0.95,
-      "footprint": 18.0858,
-      "k": 1.7428,
-      "k_context": 1.3687,
-      "k_flat": 1.5561,
-      "k_flat_context": 1.2221,
+      "footprint": 4.244,
+      "k": 2.6167,
+      "k_context": 2.055,
+      "k_flat": 2.43,
+      "k_flat_context": 1.9084,
       "model_limitations": [
        "unmodeled_projectile_trajectory:GravityBomb"
       ],
       "model_status": "provisional",
-      "overkill": 0.9563,
+      "overkill": 0.9554,
       "pct_absolute": 7465.48,
       "pct_absolute_context": 5862.89,
-      "reliability": 1.055,
+      "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament@BOMBS",
       "weapon": "YakNapalm"
@@ -1500,9 +1500,9 @@
       "weapon": "IncendiaryYakChainGun"
      }
     ],
-    "physical_state_multiplier": 1.1852,
-    "physical_state_weapon": "IncendiaryYakChainGun",
-    "physical_state_weight": 0.7407,
+    "physical_state_multiplier": 1.3681,
+    "physical_state_weapon": "YakNapalm",
+    "physical_state_weight": 1.4722,
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
     "shield_pool": 32000.0,
