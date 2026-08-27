@@ -3,13 +3,13 @@
 This report is read-only triage. A suggested destination is not approval to edit YAML;
 each group still needs a proposed resolved diff and the full behavior comparator.
 
-Active concrete roots still using retired flat families: **237**.
+Active concrete roots still using retired flat families: **224**.
 
 | review bucket | roots | meaning |
 |---|--:|---|
 | one inherited destination | 0 | one family and tier appears in the actual inheritance chain without conflicting evidence |
-| corroborated suggestion | 16 | weapon-name and weighted legacy evidence agree |
-| legacy-only suggestion | 26 | one weighted legacy signal exists, but the name does not confirm it |
+| corroborated suggestion | 11 | weapon-name and weighted legacy evidence agree |
+| legacy-only suggestion | 18 | one weighted legacy signal exists, but the name does not confirm it |
 | human decision required | 195 | conflicting, exceptional, or missing destination evidence |
 
 The machine-readable JSON includes every flat hit's targets, exclusions, relationships,
@@ -21,18 +21,13 @@ closure, and descendant overrides of retired flat keys.
 | weapon | proposed family | retired families | descendants | old-key child overrides | evidence |
 |---|---|---|--:|--:|---|
 
-## Corroborated Suggestion (16)
+## Corroborated Suggestion (11)
 
 | weapon | proposed family | retired families | descendants | old-key child overrides | evidence |
 |---|---|---|--:|--:|---|
 | `ArmoredCarMG` | Bullet | ArrowWeapon, Chaingun, FlakWeapon, Grenade, MediumCannon, MediumMissile, SmallArms, TankDestroyerCannon | 3 | 1 | delivery word 'mg' |
-| `CabalAscendedRockets` | MissileHE | FlakWeapon, HeavyAAWeapon, HeavyMissile, LightMissile, MediumMissile, TankDestroyerCannon | 0 | 0 | delivery word 'rocket' |
 | `ChemRockets` | Chemical | Grenade, LightChemicalWeapon, LightMissile | 1 | 1 | family word 'chem' |
-| `CommandoGrenadeLauncher` | Concussion | Grenade, ShrapnelWeapon | 0 | 0 | delivery word 'grenade' |
 | `EMPGrenade` | Tesla | HeavyCannon, HeavyMissile, MediumCannon, MediumFlameWeapon, MediumMissile, ShrapnelWeapon, TeslaChargedWeapon, TeslaWeapon | 1 | 1 | family word 'emp' |
-| `HMG_Duelist` | Bullet | Chaingun, FlakWeapon, Grenade, LightMissile, MediumMissile, SmallArms | 1 | 0 | delivery word 'mg' |
-| `MachineGunBuggy2` | Bullet | Chaingun, HeavyCannon, SmallArms | 1 | 0 | delivery word 'machinegun' |
-| `NanoArtilleryAG` | Concussion | Grenade, HeavyCannon, ShrapnelWeapon | 0 | 0 | delivery word 'artillery' |
 | `TDShotgun` | Bullet | Chaingun, Grenade, MediumCannon, ShrapnelWeapon, SmallArms, TankDestroyerCannon | 0 | 0 | delivery word 'shotgun' |
 | `TSBusMortarChem` | Chemical | HeavyBomb, HeavyChemicalWeapon, MediumChemicalWeapon, ShrapnelWeapon | 0 | 0 | family word 'chem' |
 | `TSChemBoatcannon` | Chemical | HeavyBomb, MediumChemicalWeapon, ShrapnelWeapon | 0 | 0 | family word 'chem' |
@@ -42,35 +37,27 @@ closure, and descendant overrides of retired flat keys.
 | `japan_imperialscoutsman_rifle` | Bullet | Chaingun, RailgunWeapon, SmallArms | 1 | 0 | delivery word 'rifle' |
 | `plymouth_EMP` | Tesla | HeavyCannon, HeavyMissile, MediumCannon, MediumFlameWeapon, MediumMissile, ShrapnelWeapon, TeslaChargedWeapon, TeslaWeapon | 3 | 0 | family word 'emp' |
 
-## Legacy-Only Suggestion (26)
+## Legacy-Only Suggestion (18)
 
 | weapon | proposed family | retired families | descendants | old-key child overrides | evidence |
 |---|---|---|--:|--:|---|
-| `155mm` | Concussion | Grenade, HeavyCannon, ShrapnelWeapon | 4 | 0 | legacy score Concussion=4 |
 | `AsianMaidenBow` | Concussion | ArrowWeapon, Grenade | 1 | 1 | legacy score Concussion=2 |
 | `BHRedDarts` | Tesla | Chaingun, MediumMissile, ShrapnelWeapon, TankDestroyerCannon, TeslaChargedWeapon | 0 | 0 | legacy score Tesla=4 |
-| `ChronoTusk` | MissileHE | Chaingun, FlakWeapon, Grenade, HeavyMissile, MediumMissile | 1 | 0 | legacy score MissileHE=4 |
 | `CommandoM16` | Bullet | Chaingun, SniperWeapon | 0 | 0 | legacy score Bullet=3 |
-| `GDIRigPhalanx` | Bullet | Chaingun, FlakWeapon, Grenade, MediumCannon, SmallArms, TankDestroyerCannon | 1 | 0 | legacy score Bullet=6 |
 | `GuardianShoot` | Concussion | Grenade, HeavyBomb, ShrapnelWeapon | 0 | 0 | legacy score Concussion=4 |
-| `HermitShoot` | Concussion | Chaingun, FlakWeapon, Grenade, HeavyBomb, MediumMissile, ShrapnelWeapon | 4 | 0 | legacy score Concussion=4 |
 | `HydraSpit` | Chemical | ArrowWeapon, LightChemicalWeapon, LightMissile, SmallArms | 0 | 0 | legacy score Chemical=4 |
 | `LeechSpit` | Chemical | ArrowWeapon, LightChemicalWeapon, LightMissile, SmallArms | 0 | 0 | legacy score Chemical=4 |
 | `LurkerSpinesImpact` | Chemical | MediumChemicalWeapon, SwordWeapon | 0 | 0 | legacy score Chemical=4 |
 | `MutaliskSpore` | Chemical | ArrowWeapon, MediumChemicalWeapon, SmallArms, SwordWeapon | 3 | 3 | legacy score Chemical=4 |
-| `Nike` | MissileHE | FlakWeapon, HeavyMissile, LightMissile, MediumMissile | 0 | 0 | legacy score MissileHE=6 |
-| `PatriarchShoot` | Concussion | Chaingun, FlakWeapon, Grenade, HeavyBomb, MediumMissile, ShrapnelWeapon | 4 | 0 | legacy score Concussion=4 |
 | `QueenSpine` | Chemical | ArrowWeapon, MediumChemicalWeapon | 0 | 0 | legacy score Chemical=4 |
 | `RashidanGun` | Bullet | Chaingun, LightMissile, MediumMissile, SmallArms | 1 | 1 | legacy score Bullet=6 |
 | `SamuraiBladeCharged` | Tesla | SwordWeapon, TeslaWeapon | 0 | 0 | legacy score Tesla=4 |
-| `SpithidSpit` | Bullet | ArrowWeapon, LightMissile, SmallArms | 0 | 0 | legacy score Bullet=3 |
 | `SteelAirTurret` | Laser | LaserWeapon, RailgunWeapon | 3 | 3 | legacy score Laser=4 |
 | `TS30mmRail` | Flak | FlakWeapon, MediumMissile, RailgunWeapon | 0 | 0 | legacy score Flak=3 |
 | `TSFiendShardBlue` | Chemical | Grenade, LightChemicalWeapon, MediumChemicalWeapon, ShrapnelWeapon | 0 | 0 | legacy score Chemical=8 |
 | `TSFiendShardBlueUP` | Chemical | Grenade, HeavyBomb, HeavyChemicalWeapon, LightChemicalWeapon, MediumChemicalWeapon, ShrapnelWeapon | 0 | 0 | legacy score Chemical=12 |
 | `TurretGun` | Concussion | Grenade, MediumCannon, ShrapnelWeapon, TankDestroyerCannon | 1 | 0 | legacy score Concussion=4 |
 | `plymouthSticky` | Chemical | LightChemicalWeapon, TankDestroyerCannon | 2 | 2 | legacy score Chemical=4 |
-| `ra120mm` | CannonHE | HeavyCannon, MediumCannon, ShrapnelWeapon, TankDestroyerCannon | 5 | 0 | legacy score CannonHE=4 |
 | `tkmheavyaaturret` | Bullet | Chaingun, FlakWeapon, LightMissile, SmallArms | 0 | 0 | legacy score Bullet=6 |
 
 ## Human Decision Required (195)
@@ -129,7 +116,7 @@ closure, and descendant overrides of retired flat keys.
 | `GoliathMk2MG` | ? | Grenade, TankDestroyerCannon | 0 | 0 | multiple inherited family/tier destinations; canonical and legacy signals disagree; name and legacy signals disagree |
 | `GradHeavyRockets` | ? | HeavyBomb, MediumChemicalWeapon | 0 | 0 | multiple inherited family/tier destinations; canonical and legacy signals disagree; name and legacy signals disagree |
 | `GrenadeThermobaric` | ? | MediumFlameWeapon, ShrapnelWeapon | 1 | 1 | multiple inherited family/tier destinations; name and canonical destination disagree; name and legacy signals disagree |
-| `HMG_Duelist_upgrade` | CannonHE_Heavy | HeavyMissile, LaserWeapon | 0 | 0 | name and canonical destination disagree; canonical and legacy signals disagree; name and legacy signals disagree |
+| `HMG_Duelist_upgrade` | ? | HeavyMissile, LaserWeapon | 0 | 0 | multiple inherited family/tier destinations; canonical and legacy signals disagree; name and legacy signals disagree |
 | `HeavyAATankCannonAG` | ? | Chaingun, FlakWeapon, LightMissile, SmallArms | 1 | 1 | name and legacy signals disagree |
 | `HeavyAATankCannontkm` | ? | Chaingun, FlakWeapon, LightMissile, SmallArms | 0 | 0 | name and legacy signals disagree |
 | `HindMissilesNuclear` | ? | MediumFlameWeapon, MediumMissile, NuclearWarhead, TankDestroyerCannon | 0 | 0 | exception-bearing retired family |

@@ -830,6 +830,7 @@ ChemicalHonestJohn:
 		ImpactSounds: xplobig6.aud
 
 MachineGunBuggy2:
+	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits: ^HeavyCannon
 	Inherits@2: ^SmallArms
 	Inherits@3: ^Chaingun
@@ -839,24 +840,25 @@ MachineGunBuggy2:
 	Range: 5274
 	Report: mgun11.aud
 	ValidTargets: Ground, Water
-	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+	-TargetActorCenter:
+	-Warhead@HeavyCannon:
+	-Warhead@SmallArms:
+	-Warhead@Chaingun:
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water
+		Damage: 6000
+		FriendlyFireDamage: 100
+		FriendlyFireSpread: 100
+		PercentageScale: 0
 
 MachineGunBuggy2_AA:
 	Inherits: MachineGunBuggy2

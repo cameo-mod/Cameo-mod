@@ -7737,11 +7737,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "7777",
-        "falloff": null,
-        "spread": "777",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
+        "damage": "23331",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "466",
+        "tag": "Concussion_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "7",
@@ -7751,39 +7751,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "7777",
-        "falloff": "100, 75, 50, 25",
-        "spread": "777",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7777",
-        "falloff": "100, 75, 50, 25",
-        "spread": "777",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "7",
         "falloff": "100, 75, 50, 25",
         "spread": "777",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "7777",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "777",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "7777",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "777",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "7",
@@ -7794,20 +7766,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "1555",
       "pricing": true,
       "range": "7777",
       "reloaddelay": "77",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_Concussion_Heavy",
        "^HeavyCannon",
        "^ShrapnelWeapon",
        "^Grenade"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Heavy"
+      ],
       "weapon": "NanoArtilleryAG",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

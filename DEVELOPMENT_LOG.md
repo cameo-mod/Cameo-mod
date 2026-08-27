@@ -1,5 +1,26 @@
 # Development Log
 
+## 2026-08-28 — Projectile-role backlog checkpoint
+
+- Consolidated 13 actual retired-family roots, covering 34 resolved parent/child weapons, into
+  standard bullet, concussion, cannon, and high-explosive missile roles.
+- Direct shot totals and all independently rounded percentage applications remain unchanged.
+  Projectiles, cadence, reports, effects, integrity damage, recursive shrapnel chains, and
+  descendant overrides remain in place; the Nike main remains explicitly air-only.
+- Intended standard-family consequences are the new armor/blast profiles, allied-damage rules,
+  death types, and target exclusions. The buggy anti-air child now applies its authored air-only
+  canonical override instead of inheriting ground/water-only legacy damage.
+- The active survey falls from 237 to 224 roots: 221 mixed weapons in 175 groups and three
+  isolated roots. The classifier now has 11 corroborated, 18 legacy-only, and 195 human-decision
+  roots. The broadcast-debt ratchet falls from 878 to 845. Pricing and the parked runtime fix
+  remain separate.
+- Independent review caught and repaired actor-center drift, excess CABAL air damage, and an
+  unintended no-friendly-splash override on the GDI Phalanx. Verification passes 430 tests (11
+  optional spreadsheet tests skipped), all 32 balance ledgers, generator, inheritance,
+  empty-warhead, orphan-key, and physical-state checks. The controlled pinned-engine launch stayed
+  alive for 90 seconds with no YAML, exception, fatal, or crash log matches; its exact process was
+  stopped.
+
 ## 2026-08-28 — Percentage-safe chemical and flame role batch
 
 - Consolidated 13 roots covering 15 resolved weapons: four light chemical cannons, three heavy

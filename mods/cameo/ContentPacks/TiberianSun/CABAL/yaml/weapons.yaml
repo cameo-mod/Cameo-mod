@@ -1541,6 +1541,7 @@ CabalWaspLaserStriker:
 		ValidTargets: Ground, Water, Air
 
 CabalAscendedRockets:
+	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^HeavyMissile
@@ -1565,42 +1566,67 @@ CabalAscendedRockets:
 		Acceleration: 2
 		HomingActivationDelay: 3
 		RangeLimit: 30000
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 6000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 3
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@HeavyAAWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
+	-TargetActorCenter:
+	-Warhead@LightMissile:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyMissile:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@FlakWeapon:
+	-Warhead@HeavyAAWeapon:
+	Warhead@MissileHE_Heavy:
+		Damage: 30000
+		PercentageScale: 0
+	Warhead@MissileHE_HeavyGroundBonus: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 200
+		Damage: 6000
+		Falloff: 100, 45, 15, 0
+		Versus:
+			HAZMAT: 77
+			COMPOSITE: 88
+			BLAST: 45
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 169
+			Scout: 129
+			Wood: 128
+			Light: 126
+			Medium: 118
+			Steel: 116
+			Concrete: 115
+			Heavy: 114
+			Superheavy: 113
+			Fighter: 103
+			Bomber: 95
+			Helicopter: 85
+			None: 79
+			Spaceship: 76
+			Flak: 75
+			Plate: 63
+			Heroic: 62
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
 
 CabalRavagerPlasma:
 	Inherits@wh: ^Warhead_Chemical_Medium

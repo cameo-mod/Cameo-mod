@@ -809,6 +809,7 @@ HMG_turret_upgrade:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 HMG_Duelist:
+	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits: ^LightMissile
 	Inherits@2: ^Grenade
 	Inherits@3: ^SmallArms
@@ -825,45 +826,34 @@ HMG_Duelist:
 		-LaunchAngle:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Air
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+	-Warhead@LightMissile:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@SmallArms:
+	-Warhead@MediumMissile:
+	-Warhead@FlakWeapon:
+	-Warhead@Chaingun:
+	Warhead@Bullet_Medium:
+		Damage: 12000
+		PercentageScale: 0
 
 HMG_Duelist_upgrade:
 	Inherits: ^Warhead_CannonHE_Heavy

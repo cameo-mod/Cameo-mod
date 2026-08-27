@@ -1113,6 +1113,7 @@ SkyHawkArrowsEnergized:
 		ValidTargets: Air
 
 155mm:
+	Inherits@collapsewh: ^Warhead_Concussion_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^Grenade
@@ -1130,25 +1131,23 @@ SkyHawkArrowsEnergized:
 		ContrailEndWidth: 25
 		ContrailStartColor: FEDCBA98
 		ContrailEndColor: 87654321
-	Warhead@HeavyCannon: SpreadDamage
-		Damage: 10000
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 5
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 10000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 5
-	Warhead@Grenade: SpreadDamage
-		Damage: 10000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 5000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 5
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
+	-Warhead@HeavyCannon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	Warhead@Concussion_Heavy:
+		Damage: 30000
+		PercentageScale: 0
 
 HovercraftCannon:
 	Inherits: ^SmallArms
@@ -1865,6 +1864,7 @@ ExecutionerSword:
 		AffectsParent: true
 
 NanoArtilleryAG:
+	Inherits@collapsewh: ^Warhead_Concussion_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^Grenade
@@ -1882,33 +1882,13 @@ NanoArtilleryAG:
 		TrailInterval: 1
 		Image: black_smokey
 		TrailImage: black_smokey
-	Warhead@HeavyCannon: SpreadDamage
-		Spread: 777
-		Damage: 7777
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Spread: 777
 		Damage: 7
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Spread: 777
-		Damage: 7777
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Spread: 777
-		Damage: 7777
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Spread: 777
 		Damage: 7
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Grenade: SpreadDamage
-		Spread: 777
-		Damage: 7777
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Spread: 777
-		Damage: 7777
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Spread: 777
@@ -1930,6 +1910,16 @@ NanoArtilleryAG:
 		ImpactActors: false
 		AirThreshold: 7777
 		ValidTargets: Air, Ground, Water
+	-Warhead@HeavyCannon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	Warhead@Concussion_Heavy:
+		Damage: 23331
+		FriendlyFireDamage: 100
+		FriendlyFireSpread: 100
+		PercentageScale: 0
 
 NanoReturnHeal:
 	Inherits: NanoReturn

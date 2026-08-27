@@ -2536,11 +2536,11 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": null,
+        "damage": "30000",
+        "falloff": "100, 45, 15, 0",
         "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -2550,25 +2550,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2578,25 +2564,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2606,27 +2578,28 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_HeavyGroundBonus",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "60",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_MissileHE_Heavy",
        "^LightMissile",
        "^MediumMissile",
        "^HeavyMissile",
@@ -2636,9 +2609,11 @@
        "^CabalMissileMedium",
        "^CabalMissileEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy"
+      ],
       "weapon": "CabalAscendedRockets",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2646,11 +2621,11 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": null,
+        "damage": "30000",
+        "falloff": "100, 45, 15, 0",
         "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -2660,25 +2635,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2688,25 +2649,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "75",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -2716,27 +2663,28 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "250",
         "tag": "HeavyAAWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "6000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_HeavyGroundBonus",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "9000",
       "reloaddelay": "60",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_MissileHE_Heavy",
        "^LightMissile",
        "^MediumMissile",
        "^HeavyMissile",
@@ -2746,9 +2694,11 @@
        "^CabalMissileMedium",
        "^CabalMissileEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy"
+      ],
       "weapon": "CabalAscendedRockets",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

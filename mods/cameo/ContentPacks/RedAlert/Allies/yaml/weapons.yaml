@@ -506,6 +506,7 @@ APTuskCryo:
 		Range: 300
 
 ChronoTusk:
+	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^Chaingun
@@ -517,39 +518,30 @@ ChronoTusk:
 	Range: 6102
 	Report: missile6.aud
 	ValidTargets: Ground, Water, Air
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@Chaingun:
+	-Warhead@HeavyMissile:
+	-Warhead@MediumMissile:
+	Warhead@MissileHE_Heavy:
+		Damage: 20000
+		PercentageScale: 0
 
 ChronoTuskCryo:
 	Inherits: ChronoTusk

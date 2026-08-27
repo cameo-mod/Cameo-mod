@@ -108,6 +108,7 @@ HydraSpit:
 		Explosions: sczhsplash
 
 SpithidSpit:
+	Inherits@collapsewh: ^Warhead_Bullet_Light
 	Inherits: ^LightMissile
 	Inherits@2: ^SmallArms
 	Inherits@3: ^ArrowWeapon
@@ -124,21 +125,12 @@ SpithidSpit:
 		Speed: 2500
 		Width: 25
 		TrailImage: sczhsplash
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@ArrowWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -146,6 +138,13 @@ SpithidSpit:
 		Explosions: sczhsplash
 	Warhead@EffectAir: CreateEffect
 		Explosions: sczhsplash
+	-TargetActorCenter:
+	-Warhead@LightMissile:
+	-Warhead@SmallArms:
+	-Warhead@ArrowWeapon:
+	Warhead@Bullet_Light:
+		Damage: 6000
+		PercentageScale: 0
 
 MutaliskSpore:
 	Inherits: ^SwordWeapon
@@ -582,6 +581,7 @@ HermitExplode:
 		ValidTargets: Ground, Water, Air
 
 HermitShoot:
+	Inherits@collapsewh: ^Warhead_Concussion_Medium
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^HeavyBomb
@@ -610,45 +610,21 @@ HermitShoot:
 		AllowSnapping: true
 		CloseEnough: 600
 		TrailImage: sczhsplash
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -671,6 +647,18 @@ HermitShoot:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
+	-Warhead@MediumMissile:
+	-Warhead@Chaingun:
+	-Warhead@FlakWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
+	Warhead@Concussion_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
 
 HermitShoot1:
 	Inherits: HermitShoot
