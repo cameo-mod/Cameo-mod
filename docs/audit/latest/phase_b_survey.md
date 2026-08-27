@@ -1,16 +1,15 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-27
-Total concrete weapons on old families: 272
+Total concrete weapons on old families: 271
 Single old-family with new inherits (Phase B completion): 0
-Pure single old-family (mechanical Phase A candidates): 7
+Pure single old-family (mechanical Phase A candidates): 6
 Mixed old-family (Phase B maintainer sign-off): 265 in 201 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `SteelMakoGun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Railgun_Heavy=2000, CannonHE_Medium=2000, Effect=0
 - `Future_Cryocopter_Rocket` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | old: Grenade | Grenade=16000, GrenadeFriendlyFire=8000, GrenadePercentage=8, MissileAP_Heavy=16000, MissileAP_Medium=16000, PhysicalStateCryo1=0, PhysicalStateCryo2=0, PhysicalStateCryo3=0, Effect=0, EffectAir=0
 - `RA2CRM60H` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, Bullet_Medium=2000, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
-- `RA2SCUD` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=30000, MediumFlameWeaponPercentage=15, Demolition_Light=30000, MissileAP_Heavy=30000, Effect=0
 - `ATMine` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | old: HeavyMissile | HeavyMissile=50000, HeavyMissilePercentage=25, Effect=0, Smudge=0
 - `ZeroFighterChainGunWaveforce` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | old: Grenade | Bullet_Medium=4000, Railgun_Heavy=4000, GrenadeFriendlyFire=500, GrenadePercentage=2
 - `TSLaser90mm` (weapons\tiberiansun.yaml) | old: LaserWeapon | CannonAP_Medium=6000, LaserWeapon=6000, LaserWeaponPercentage=3
@@ -364,7 +363,7 @@ Mixed old-family (Phase B maintainer sign-off): 265 in 201 groups
 
 ### HeavyChemicalWeapon, LightChemicalWeapon, MediumChemicalWeapon (5 weapons)
 - `RA2120xmm_rad` (ContentPacks\RedAlert2\Soviets\yaml\weapons.yaml) | dominant: LightChemicalWeapon(2000) | LightChemicalWeapon=2000, LightChemicalWeaponPercentage=1, MediumChemicalWeapon=2000, MediumChemicalWeaponPercentage=1, HeavyChemicalWeapon=2000, HeavyChemicalWeaponPercentage=1, CannonAP_Light=2000, CannonAP_Light_Percentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, CannonHE_Heavy=2000 | → collapse to LightChemicalWeapon
-- `RA2SCUD_rad` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | dominant: LightChemicalWeapon(18000) | LightChemicalWeapon=18000, LightChemicalWeaponPercentage=9, MediumChemicalWeapon=18000, MediumChemicalWeaponPercentage=9, HeavyChemicalWeapon=18000, HeavyChemicalWeaponPercentage=9, MediumFlameWeapon=18000, MediumFlameWeaponPercentage=9, Demolition_Light=18000, MissileAP_Heavy=18000, Radiation=0 | → collapse to LightChemicalWeapon
+- `RA2SCUD_rad` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | dominant: LightChemicalWeapon(18000) | LightChemicalWeapon=18000, LightChemicalWeaponPercentage=9, MediumChemicalWeapon=18000, MediumChemicalWeaponPercentage=9, HeavyChemicalWeapon=18000, HeavyChemicalWeaponPercentage=9, MediumFlameWeaponPercentage=9, Demolition_Light=18000, MissileAP_Heavy=18000, RA2SCUDMissileAP_Heavy_NoWall=18000, Radiation=0 | → collapse to LightChemicalWeapon
 - `TSChemsprayUP` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: LightChemicalWeapon(32000) | LightChemicalWeapon=32000, LightChemicalWeaponPercentage=16, MediumChemicalWeapon=32000, MediumChemicalWeaponPercentage=16, HeavyChemicalWeapon=32000, HeavyChemicalWeaponPercentage=16, Cloud=0 | → collapse to LightChemicalWeapon
 - `TSFiendShardUP` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: LightChemicalWeapon(6000) | LightChemicalWeapon=6000, LightChemicalWeaponPercentage=3, MediumChemicalWeapon=6000, MediumChemicalWeaponPercentage=3, HeavyChemicalWeapon=6000, HeavyChemicalWeaponPercentage=3, Cloud=0, 3Eff=0 | → collapse to LightChemicalWeapon
 - `TSVisceroidSprayUP` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: LightChemicalWeapon(10000) | LightChemicalWeapon=10000, LightChemicalWeaponPercentage=5, MediumChemicalWeapon=10000, MediumChemicalWeaponPercentage=5, HeavyChemicalWeapon=10000, HeavyChemicalWeaponPercentage=5, Cloud=0 | → collapse to LightChemicalWeapon

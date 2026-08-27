@@ -2186,10 +2186,48 @@ DreadnoughtLaunch:
 	Range: 25000
 	MinRange: 5000
 
+^RA2SCUDMissileCompatibility:
+	Warhead@RA2SCUDMissileAP_Heavy_NoWall: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: wall
+		Spread: 85
+		Damage: 30000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 161
+			Superheavy: 160
+			Spaceship: 146
+			Heavy: 142
+			Medium: 126
+			Helicopter: 115
+			Light: 112
+			Concrete: 105
+			Scout: 99
+			Bomber: 98
+			Plate: 91
+			Steel: 82
+			Fighter: 75
+			Flak: 73
+			Wood: 66
+			Heroic: 57
+			None: 54
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+
 RA2SCUD:
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^RA2Grenade
 	Inherits@3: ^RA2HeavyMissile
+	Inherits@compat: ^RA2SCUDMissileCompatibility
 	ReloadDelay: 125
 	Range: 20000
 	MinRange: 4000
@@ -2206,14 +2244,7 @@ RA2SCUD:
 		ContrailLength: 0
 		Speed: 128
 		Inaccuracy: 1000
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 30000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
+	-Warhead@MediumFlameWeapon:
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 15
@@ -2268,13 +2299,6 @@ RA2SCUD_rad:
 		Damage: 9
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 18000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 9
 		PhysicalStateName: Temperature
@@ -2282,6 +2306,8 @@ RA2SCUD_rad:
 	Warhead@Demolition_Light:
 		Damage: 18000
 	Warhead@MissileAP_Heavy:
+		Damage: 18000
+	Warhead@RA2SCUDMissileAP_Heavy_NoWall:
 		Damage: 18000
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
@@ -2324,13 +2350,6 @@ RA2SCUDELITE:
 
 V3Explode:
 	Inherits: RA2SCUD
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 10000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 5
 		PhysicalStateName: Temperature
@@ -2338,6 +2357,8 @@ V3Explode:
 	Warhead@Demolition_Light:
 		Damage: 10000
 	Warhead@MissileAP_Heavy:
+		Damage: 10000
+	Warhead@RA2SCUDMissileAP_Heavy_NoWall:
 		Damage: 10000
 DredMissile:
 	Inherits: RA2SCUD

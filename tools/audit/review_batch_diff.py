@@ -95,6 +95,22 @@ def _target_tokens(raw: str | None) -> tuple[str, ...]:
     return tuple(sorted(token.strip() for token in (raw or "").split(",") if token.strip()))
 
 
+def _physical_state_entries(node) -> tuple[tuple[str, str], ...]:
+    """Enabled physical-state bindings, including the singular and map forms."""
+    out: list[tuple[str, str]] = []
+    name = node.get("PhysicalStateName")
+    scale = node.get("PhysicalStateScale") or "0"
+    if name and scale.strip() != "0":
+        out.append((name, scale))
+    states = node.child("PhysicalStates")
+    if states is not None:
+        for entry in states.children:
+            entry_scale = entry.value or "0"
+            if entry.key and entry_scale.strip() != "0":
+                out.append((entry.key, entry_scale))
+    return tuple(sorted(out))
+
+
 def snapshot(root: str, with_concrete: bool, health_values: list[int]) -> dict[str, dict]:
     """Resolved behavioural fingerprint for every concrete weapon in one repo root."""
     rs = Model(pathlib.Path(root)).rs
@@ -118,6 +134,7 @@ def snapshot(root: str, with_concrete: bool, health_values: list[int]) -> dict[s
         valid_target_damage: dict[str, float] = {}
         invalid_target_damage: dict[str, float] = {}
         relationship_stat_damage: dict[tuple[str, bool, str], float] = {}
+        physical_state_bindings: dict[tuple, float] = {}
         for wh in node.children:
             if not wh.key.startswith("Warhead"):
                 continue
@@ -125,6 +142,16 @@ def snapshot(root: str, with_concrete: bool, health_values: list[int]) -> dict[s
                 continue
             rel = (wh.get("ValidRelationships") or "").strip()
             d = _dmg(wh)
+            if d is not None and d > 0:
+                for physical_state, state_scale in _physical_state_entries(wh):
+                    state_key = (
+                        physical_state,
+                        state_scale,
+                        wh.value,
+                        _target_tokens(wh.get("ValidTargets")),
+                        _target_tokens(wh.get("InvalidTargets")),
+                    )
+                    physical_state_bindings[state_key] = physical_state_bindings.get(state_key, 0) + d
             if d is not None and d > 0 and "Percentage" not in wh.key:
                 relationships = _target_tokens(rel) or ("Ally", "Enemy", "Neutral")
                 targets = _target_tokens(wh.get("ValidTargets")) or ("*",)
@@ -181,6 +208,7 @@ def snapshot(root: str, with_concrete: bool, health_values: list[int]) -> dict[s
             "valid_target_damage": tuple(sorted(valid_target_damage.items())),
             "invalid_target_damage": tuple(sorted(invalid_target_damage.items())),
             "relationship_stat_damage": tuple(sorted(relationship_stat_damage.items())),
+            "physical_state_bindings": tuple(sorted(physical_state_bindings.items())),
             "Range": node.get("Range"),
             "ReloadDelay": node.get("ReloadDelay"),
             "Burst": node.get("Burst"),
@@ -199,6 +227,7 @@ OPERATING_BEHAVIOR = (
     "Range", "ReloadDelay", "Burst", "ValidTargets", "InvalidTargets",
     "Report", "StartBurstReport", "valid_target_damage", "invalid_target_damage",
     "relationship_stat_damage",
+    "physical_state_bindings",
     "top_level", "projectile", "non_damage_warheads",
 )
 

@@ -1,5 +1,28 @@
 # Development Log
 
+## 2026-08-27 — RA2 SCUD missile-family consolidation
+
+- Consolidated the active RA2 SCUD root and its Dreadnought, V3 explosion, radioactive,
+  incendiary, tesla, and elite descendants away from the retired medium-flame flat profile.
+- A local standard heavy-missile compatibility slice preserves the original no-wall damage split.
+  The modern demolition and original heavy-missile hits remain independent, as do all three
+  separately rounded percentage contributions; radioactive and V3 children retain their local
+  18000/10000 payloads exactly.
+- Whole-tree comparison preserves flat damage, all active/design-health percentage results,
+  targets, relationships, score/stat accounting, cadence, projectiles, reports, effects,
+  radiation, shields, concrete, and child overrides across all 2345 resolved weapons. Only the
+  selected heavy-missile blast profile changes on the seven SCUD-family definitions.
+- The refreshed active survey now reports 271 concrete weapons on retired families: 265 mixed
+  weapons in 201 groups and 6 single-family candidates. Prices, pricing logic, engine/runtime
+  source, the parked runtime change, and the engine pin remain untouched.
+- Independent review retained the flame hit's Temperature-state binding and extended the
+  comparator to gate singular and mapped physical-state applications, including the engine's
+  disabled-by-default scale. Verification passes 401 tests (11 optional spreadsheet tests
+  skipped), all ledger/generator/warhead/physical-state audits, and the full resolver comparison.
+  The first launch caught redundant child removals rejected by engine MiniYAML; after removing
+  them, the controlled pinned-engine launch stayed alive and responsive with no new exception log,
+  and its exact test process was stopped.
+
 ## 2026-08-27 — Naxis quad-cannon flak consolidation
 
 - Consolidated the active Naxis quad-cannon root and eleven ground, anti-air, elite, portable,

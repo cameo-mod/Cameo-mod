@@ -7,6 +7,7 @@ import unittest
 import _bootstrap  # noqa: F401 — sys.path side effect
 
 import review_batch_diff as review
+from miniyaml import Node
 
 
 def weapon(**overrides):
@@ -17,6 +18,7 @@ def weapon(**overrides):
         "valid_target_damage": (("Ground", 1000),),
         "invalid_target_damage": (("wall", 1000),),
         "relationship_stat_damage": ((('Enemy', True, 'Ground'), 1000),),
+        "physical_state_bindings": (),
         "Range": "5000",
         "ReloadDelay": "25",
         "Burst": None,
@@ -71,6 +73,34 @@ class ReviewBatchDiffTests(unittest.TestCase):
         changed, _, _ = review.compare({"Gun": before}, {"Gun": after})
 
         self.assertIn("relationship_stat_damage", {finding[0] for finding in changed["Gun"]})
+
+    def test_physical_state_binding_change_is_detected(self):
+        before = weapon(physical_state_bindings=((('Temperature', '100', 'AreaDamage', ('Ground',), ()), 1000),))
+        after = weapon(physical_state_bindings=())
+
+        changed, _, _ = review.compare({"Gun": before}, {"Gun": after})
+
+        self.assertIn("physical_state_bindings", {finding[0] for finding in changed["Gun"]})
+
+    def test_omitted_physical_state_scale_is_disabled(self):
+        omitted = Node("Warhead@Test", "AreaDamage", [Node("PhysicalStateName", "Temperature")])
+        enabled = Node("Warhead@Test", "AreaDamage", [
+            Node("PhysicalStateName", "Temperature"),
+            Node("PhysicalStateScale", "100"),
+        ])
+
+        self.assertEqual((), review._physical_state_entries(omitted))
+        self.assertEqual((("Temperature", "100"),), review._physical_state_entries(enabled))
+
+    def test_physical_states_map_is_fingerprinted(self):
+        mapped = Node("Warhead@Test", "AreaDamage", [
+            Node("PhysicalStates", "", [
+                Node("Corrosion", "100"),
+                Node("Temperature", "0"),
+            ]),
+        ])
+
+        self.assertEqual((("Corrosion", "100"),), review._physical_state_entries(mapped))
 
 
 if __name__ == "__main__":
