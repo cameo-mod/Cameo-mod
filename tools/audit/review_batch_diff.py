@@ -117,16 +117,29 @@ def snapshot(root: str, with_concrete: bool, health_values: list[int]) -> dict[s
         total, mains, shape = 0.0, [], []
         valid_target_damage: dict[str, float] = {}
         invalid_target_damage: dict[str, float] = {}
+        relationship_stat_damage: dict[tuple[str, bool, str], float] = {}
         for wh in node.children:
             if not wh.key.startswith("Warhead"):
                 continue
             if not with_concrete and "Concrete" in wh.key:
                 continue
             rel = (wh.get("ValidRelationships") or "").strip()
-            if "Ally" in rel and "Enemy" not in rel:      # friendly-fire twin, not a main
-                continue
             d = _dmg(wh)
             if d is not None and d > 0 and "Percentage" not in wh.key:
+                relationships = _target_tokens(rel) or ("Ally", "Enemy", "Neutral")
+                targets = _target_tokens(wh.get("ValidTargets")) or ("*",)
+                updates_stats = (wh.get("UpdatesUnitStatistics") or "true").lower() != "false"
+                try:
+                    friendly_modifier = float(wh.get("FriendlyFireDamage") or 100) / 100
+                except ValueError:
+                    friendly_modifier = 1.0
+                for relationship in relationships:
+                    relationship_damage = d * (friendly_modifier if relationship == "Ally" else 1)
+                    for target in targets:
+                        key = (relationship, updates_stats, target)
+                        relationship_stat_damage[key] = relationship_stat_damage.get(key, 0) + relationship_damage
+                if "Ally" in rel and "Enemy" not in rel:  # friendly-fire twin, not a main
+                    continue
                 total += d
                 mains.append(int(d))
                 for target in _target_tokens(wh.get("ValidTargets")):
@@ -167,6 +180,7 @@ def snapshot(root: str, with_concrete: bool, health_values: list[int]) -> dict[s
             "shape": sorted(shape),
             "valid_target_damage": tuple(sorted(valid_target_damage.items())),
             "invalid_target_damage": tuple(sorted(invalid_target_damage.items())),
+            "relationship_stat_damage": tuple(sorted(relationship_stat_damage.items())),
             "Range": node.get("Range"),
             "ReloadDelay": node.get("ReloadDelay"),
             "Burst": node.get("Burst"),
@@ -184,6 +198,7 @@ def snapshot(root: str, with_concrete: bool, health_values: list[int]) -> dict[s
 OPERATING_BEHAVIOR = (
     "Range", "ReloadDelay", "Burst", "ValidTargets", "InvalidTargets",
     "Report", "StartBurstReport", "valid_target_damage", "invalid_target_damage",
+    "relationship_stat_damage",
     "top_level", "projectile", "non_damage_warheads",
 )
 

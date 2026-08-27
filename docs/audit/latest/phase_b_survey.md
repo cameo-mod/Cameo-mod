@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-27
-Total concrete weapons on old families: 273
+Total concrete weapons on old families: 272
 Single old-family with new inherits (Phase B completion): 0
 Pure single old-family (mechanical Phase A candidates): 7
-Mixed old-family (Phase B maintainer sign-off): 266 in 202 groups
+Mixed old-family (Phase B maintainer sign-off): 265 in 201 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `SteelMakoGun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Railgun_Heavy=2000, CannonHE_Medium=2000, Effect=0
@@ -410,9 +410,6 @@ Mixed old-family (Phase B maintainer sign-off): 266 in 202 groups
 
 ### Chaingun, FlakWeapon, SmallArms (1 weapons)
 - `NaxiInterceptorGun` (ContentPacks\RedAlert2Mod\Naxis\yaml\weapons.yaml) | dominant: CannonHE_Heavy(6000) | CannonHE_Heavy=6000, FlakWeapon=6000, FlakWeaponPercentage=3, Chaingun=6000, ChaingunPercentage=3, SmallArms=6000, SmallArmsPercentage=3 | → collapse to CannonHE_Heavy
-
-### Chaingun, Grenade, HeavyMissile (1 weapons)
-- `NaxQuadCannon` (ContentPacks\RedAlert2Mod\Naxis\yaml\weapons.yaml) | dominant: HeavyMissile(2000) | GrenadeFriendlyFire=1000, GrenadePercentage=1, HeavyMissile=2000, HeavyMissilePercentage=1, Chaingun=2000, ChaingunPercentage=1, Flak_Medium=2000 | → collapse to HeavyMissile
 
 ### Chaingun, Grenade, SmallArms (1 weapons)
 - `RA2FlakTrackGun` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, Chaingun=2000, ChaingunPercentage=1, Flak_Medium=2000 | → collapse to SmallArms

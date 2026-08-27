@@ -16,6 +16,7 @@ def weapon(**overrides):
         "shape": ["100|-|-|-"],
         "valid_target_damage": (("Ground", 1000),),
         "invalid_target_damage": (("wall", 1000),),
+        "relationship_stat_damage": ((('Enemy', True, 'Ground'), 1000),),
         "Range": "5000",
         "ReloadDelay": "25",
         "Burst": None,
@@ -62,6 +63,14 @@ class ReviewBatchDiffTests(unittest.TestCase):
         changed, _, _ = review.compare({"Gun": before}, {"Gun": after})
 
         self.assertIn("invalid_target_damage", {finding[0] for finding in changed["Gun"]})
+
+    def test_relationship_and_statistics_accounting_change_is_detected(self):
+        before = weapon()
+        after = weapon(relationship_stat_damage=((('Enemy', False, 'Ground'), 1000),))
+
+        changed, _, _ = review.compare({"Gun": before}, {"Gun": after})
+
+        self.assertIn("relationship_stat_damage", {finding[0] for finding in changed["Gun"]})
 
 
 if __name__ == "__main__":

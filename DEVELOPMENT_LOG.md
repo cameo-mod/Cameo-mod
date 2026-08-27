@@ -1,5 +1,26 @@
 # Development Log
 
+## 2026-08-27 — Naxis quad-cannon flak consolidation
+
+- Consolidated the active Naxis quad-cannon root and eleven ground, anti-air, elite, portable,
+  Sky Mage, and long-range descendants onto the existing standard medium-flak damage profile.
+- Preserved the original payload split: ground variants retain 7000 enemy and 6000 allied flat
+  damage, while anti-air variants retain 5000 Air damage plus the inherited 2000 Ground/Water
+  splash. Compatibility-only flak slices keep allied damage and its score/stat accounting exact.
+- Kept all four independently rounded percentage contributions, every target relationship,
+  projectile, report, effect, shield/concrete behavior, cadence, range, and descendant override.
+- Extended the whole-tree comparator to gate damage by relationship, target, and
+  `UpdatesUnitStatistics`, closing the blind spot found by independent review. It preserves flat
+  and percentage damage at every active/design health value across all 2345 resolved weapons;
+  only the selected medium-flak blast profile changes on the twelve Naxis definitions.
+- The refreshed active survey now reports 272 concrete weapons on retired families: 265 mixed
+  weapons in 201 groups and 7 single-family candidates. Ledgers were refreshed, but prices,
+  pricing logic, engine/runtime source, the parked runtime change, and the engine pin are untouched.
+- Verification: 398 tests pass (11 optional spreadsheet tests skipped); 32 ledgers match live
+  YAML; generator drift, empty warheads, real orphaned old keys, and dangling inheritance targets
+  are zero; the physical-state audit passes. A controlled pinned-engine launch remained alive and
+  responsive through startup with no new exception log, then its exact test process was stopped.
+
 ## 2026-08-27 — MiG missile family consolidation
 
 - Consolidated the active MiG missile root and all ten resolved ground-attack, anti-air,
