@@ -20,8 +20,9 @@
 - Whole-tree comparison preserves main and percentage totals across all 2345 resolved weapons and
   limits guarded differences to the eight selected laser definitions. Verification passes 415
   tests (11 optional spreadsheet tests skipped), all 32 balance ledgers, generator, empty-warhead,
-  orphan-key, and physical-state audits. Independent adversarial review found no blocker; the
-  controlled boot test is the remaining publication gate.
+  orphan-key, and physical-state audits. Independent adversarial review found no blocker. A
+  controlled pinned-engine launch stayed alive and responsive for 90 seconds with no exception,
+  fatal, crash, or YAML error line; its exact test process was then stopped.
 
 ## 2026-08-27 — Bulk shotgun and sniper profile consolidation
 
