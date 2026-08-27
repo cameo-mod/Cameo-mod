@@ -1,5 +1,5 @@
 {
-  "roots": 257,
+  "roots": 250,
   "weapons": [
     {
       "bucket": "human decision required",
@@ -2006,7 +2006,7 @@
         "family": null,
         "reason": "legacy tie: Concussion/Chemical/Flame"
       },
-      "line": 128,
+      "line": 133,
       "name_signal": {
         "family": "Concussion",
         "reason": "delivery word 'artillery'"
@@ -6746,7 +6746,7 @@
         "family": "Tesla",
         "reason": "legacy score Tesla=4"
       },
-      "line": 1211,
+      "line": 1216,
       "name_signal": {
         "family": null,
         "reason": ""
@@ -7980,7 +7980,7 @@
         "family": null,
         "reason": "legacy tie: Flak/CannonAP"
       },
-      "line": 223,
+      "line": 228,
       "name_signal": {
         "family": "MissileHE",
         "reason": "delivery word 'rocket'"
@@ -12448,7 +12448,7 @@
         "family": "Chemical",
         "reason": "legacy score Chemical=4"
       },
-      "line": 574,
+      "line": 579,
       "name_signal": {
         "family": "Chemical",
         "reason": "family word 'chem'"
@@ -12661,7 +12661,7 @@
         "family": "Chemical",
         "reason": "legacy score Chemical=4"
       },
-      "line": 652,
+      "line": 657,
       "name_signal": {
         "family": "Chemical",
         "reason": "family word 'chem'"
@@ -12916,7 +12916,7 @@
         "family": null,
         "reason": "legacy tie: Chemical/Flame"
       },
-      "line": 785,
+      "line": 790,
       "name_signal": {
         "family": "Chemical",
         "reason": "family word 'chem'"
@@ -13176,7 +13176,7 @@
         "family": "Chemical",
         "reason": "legacy score Chemical=4"
       },
-      "line": 721,
+      "line": 726,
       "name_signal": {
         "family": "Chemical",
         "reason": "family word 'chem'"
@@ -13679,7 +13679,7 @@
         "family": "Concussion",
         "reason": "legacy score Concussion=4"
       },
-      "line": 1532,
+      "line": 1530,
       "name_signal": {
         "family": "Concussion",
         "reason": "delivery word 'grenade'"
@@ -13818,7 +13818,7 @@
         "family": "Bullet",
         "reason": "legacy score Bullet=3"
       },
-      "line": 1560,
+      "line": 1558,
       "name_signal": {
         "family": null,
         "reason": ""
@@ -17629,7 +17629,7 @@
         "family": "Nuclear",
         "reason": "legacy score Nuclear=5"
       },
-      "line": 1628,
+      "line": 1626,
       "name_signal": {
         "family": "Flame",
         "reason": "delivery word 'fire'"
@@ -20133,7 +20133,7 @@
         "family": "Bullet",
         "reason": "legacy score Bullet=6"
       },
-      "line": 1300,
+      "line": 1299,
       "name_signal": {
         "family": null,
         "reason": ""
@@ -26991,7 +26991,7 @@
         "family": null,
         "reason": "legacy tie: Concussion/Chemical/Flame"
       },
-      "line": 1024,
+      "line": 1023,
       "name_signal": {
         "family": "Demolition",
         "reason": "delivery word 'bomb'"
@@ -28883,7 +28883,7 @@
         "family": "Chemical",
         "reason": "legacy score Chemical=4"
       },
-      "line": 1010,
+      "line": 1015,
       "name_signal": {
         "family": "CannonHE",
         "reason": "delivery word 'cannon'"
@@ -28985,248 +28985,6 @@
       ],
       "valid_targets": "Ground, Water",
       "weapon": "LightTank2Cannon"
-    },
-    {
-      "bucket": "human decision required",
-      "candidate_family": null,
-      "canonical_templates": [],
-      "descendant_old_flat_overrides": [],
-      "descendants": [],
-      "file": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "flat_hits": [
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "BulletImmune",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "SmallArms",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "Chaingun",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "MediumMissile",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "LaserWeapon",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 600,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "LaserExtraDamage",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": false
-        }
-      ],
-      "legacy_signal": {
-        "family": "Bullet",
-        "reason": "legacy score Bullet=6"
-      },
-      "line": 242,
-      "name_signal": {
-        "family": "Laser",
-        "reason": "family word 'laser'"
-      },
-      "old_families": [
-        "^Chaingun",
-        "^LaserWeapon",
-        "^MediumMissile",
-        "^SmallArms"
-      ],
-      "percentage_hits": [
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 8,
-            "Concrete": 4,
-            "Fighter": 11,
-            "Flak": 15,
-            "Heavy": 3,
-            "Helicopter": 5,
-            "Heroic": 13,
-            "Light": 9,
-            "Medium": 6,
-            "None": 16,
-            "Plate": 14,
-            "Scout": 12,
-            "Shield": 17,
-            "Spaceship": 2,
-            "Steel": 7,
-            "Superheavy": 1,
-            "Wood": 10
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "SmallArmsPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 12,
-            "Concrete": 11,
-            "Fighter": 15,
-            "Flak": 19,
-            "Heavy": 7,
-            "Helicopter": 9,
-            "Heroic": 17,
-            "Light": 13,
-            "Medium": 10,
-            "None": 20,
-            "Plate": 18,
-            "Scout": 16,
-            "Shield": 25,
-            "Spaceship": 6,
-            "Steel": 8,
-            "Superheavy": 5,
-            "Wood": 14
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "ChaingunPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 14,
-            "Concrete": 13,
-            "Fighter": 11,
-            "Flak": 7,
-            "Heavy": 18,
-            "Helicopter": 17,
-            "Heroic": 5,
-            "Light": 12,
-            "Medium": 15,
-            "None": 6,
-            "Plate": 8,
-            "Scout": 9,
-            "Shield": 25,
-            "Spaceship": 19,
-            "Steel": 16,
-            "Superheavy": 20,
-            "Wood": 10
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "MediumMissilePercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 16,
-            "Concrete": 19,
-            "Fighter": 12,
-            "Flak": 14,
-            "Heavy": 21,
-            "Helicopter": 20,
-            "Heroic": 22,
-            "Light": 13,
-            "Medium": 17,
-            "None": 11,
-            "Plate": 18,
-            "REFLECTOR": 50,
-            "Scout": 10,
-            "Shield": 35,
-            "Spaceship": 24,
-            "Steel": 23,
-            "Superheavy": 25,
-            "Wood": 15
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "LaserWeaponPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        }
-      ],
-      "projectile": "LaserZap",
-      "reasons": [
-        "name and legacy signals disagree"
-      ],
-      "valid_targets": "Ground, Water, Air",
-      "weapon": "LunarNaxiDroneLaser"
     },
     {
       "bucket": "human decision required",
@@ -29663,198 +29421,6 @@
       "weapon": "LurkerSpinesImpact"
     },
     {
-      "bucket": "human decision required",
-      "candidate_family": null,
-      "canonical_templates": [],
-      "descendant_old_flat_overrides": [],
-      "descendants": [],
-      "file": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "flat_hits": [
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "BulletImmune",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "SmallArms",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "Chaingun",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "LaserWeapon",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 600,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "LaserExtraDamage",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": false
-        }
-      ],
-      "legacy_signal": {
-        "family": "Bullet",
-        "reason": "legacy score Bullet=6"
-      },
-      "line": 1,
-      "name_signal": {
-        "family": "Laser",
-        "reason": "family word 'laser'"
-      },
-      "old_families": [
-        "^Chaingun",
-        "^LaserWeapon",
-        "^SmallArms"
-      ],
-      "percentage_hits": [
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 8,
-            "Concrete": 4,
-            "Fighter": 11,
-            "Flak": 15,
-            "Heavy": 3,
-            "Helicopter": 5,
-            "Heroic": 13,
-            "Light": 9,
-            "Medium": 6,
-            "None": 16,
-            "Plate": 14,
-            "Scout": 12,
-            "Shield": 17,
-            "Spaceship": 2,
-            "Steel": 7,
-            "Superheavy": 1,
-            "Wood": 10
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "SmallArmsPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 12,
-            "Concrete": 11,
-            "Fighter": 15,
-            "Flak": 19,
-            "Heavy": 7,
-            "Helicopter": 9,
-            "Heroic": 17,
-            "Light": 13,
-            "Medium": 10,
-            "None": 20,
-            "Plate": 18,
-            "Scout": 16,
-            "Shield": 25,
-            "Spaceship": 6,
-            "Steel": 8,
-            "Superheavy": 5,
-            "Wood": 14
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "ChaingunPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 16,
-            "Concrete": 19,
-            "Fighter": 12,
-            "Flak": 14,
-            "Heavy": 21,
-            "Helicopter": 20,
-            "Heroic": 22,
-            "Light": 13,
-            "Medium": 17,
-            "None": 11,
-            "Plate": 18,
-            "REFLECTOR": 50,
-            "Scout": 10,
-            "Shield": 35,
-            "Spaceship": 24,
-            "Steel": 23,
-            "Superheavy": 25,
-            "Wood": 15
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "LaserWeaponPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        }
-      ],
-      "projectile": "LaserZap",
-      "reasons": [
-        "name and legacy signals disagree"
-      ],
-      "valid_targets": "Ground, Water, Air",
-      "weapon": "M16Laser"
-    },
-    {
       "bucket": "corroborated suggestion",
       "candidate_family": "Bullet",
       "canonical_templates": [],
@@ -29905,7 +29471,7 @@
         "family": "Bullet",
         "reason": "legacy score Bullet=6"
       },
-      "line": 851,
+      "line": 856,
       "name_signal": {
         "family": "Bullet",
         "reason": "delivery word 'machinegun'"
@@ -34388,251 +33954,6 @@
     },
     {
       "bucket": "human decision required",
-      "candidate_family": null,
-      "canonical_templates": [],
-      "descendant_old_flat_overrides": [],
-      "descendants": [
-        "Lunar_AmplifiedLaserT",
-        "Lunar_YellowLaserT"
-      ],
-      "file": "mods/cameo/weapons/redalert2mod.yaml",
-      "flat_hits": [
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "BulletImmune",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "SmallArms",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "Chaingun",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "MediumMissile",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "LaserWeapon",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 600,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "LaserExtraDamage",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": false
-        }
-      ],
-      "legacy_signal": {
-        "family": "Bullet",
-        "reason": "legacy score Bullet=6"
-      },
-      "line": 637,
-      "name_signal": {
-        "family": "Laser",
-        "reason": "family word 'laser'"
-      },
-      "old_families": [
-        "^Chaingun",
-        "^LaserWeapon",
-        "^MediumMissile",
-        "^SmallArms"
-      ],
-      "percentage_hits": [
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 8,
-            "Concrete": 4,
-            "Fighter": 11,
-            "Flak": 15,
-            "Heavy": 3,
-            "Helicopter": 5,
-            "Heroic": 13,
-            "Light": 9,
-            "Medium": 6,
-            "None": 16,
-            "Plate": 14,
-            "Scout": 12,
-            "Shield": 17,
-            "Spaceship": 2,
-            "Steel": 7,
-            "Superheavy": 1,
-            "Wood": 10
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "SmallArmsPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 12,
-            "Concrete": 11,
-            "Fighter": 15,
-            "Flak": 19,
-            "Heavy": 7,
-            "Helicopter": 9,
-            "Heroic": 17,
-            "Light": 13,
-            "Medium": 10,
-            "None": 20,
-            "Plate": 18,
-            "Scout": 16,
-            "Shield": 25,
-            "Spaceship": 6,
-            "Steel": 8,
-            "Superheavy": 5,
-            "Wood": 14
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "ChaingunPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 14,
-            "Concrete": 13,
-            "Fighter": 11,
-            "Flak": 7,
-            "Heavy": 18,
-            "Helicopter": 17,
-            "Heroic": 5,
-            "Light": 12,
-            "Medium": 15,
-            "None": 6,
-            "Plate": 8,
-            "Scout": 9,
-            "Shield": 25,
-            "Spaceship": 19,
-            "Steel": 16,
-            "Superheavy": 20,
-            "Wood": 10
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "MediumMissilePercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 16,
-            "Concrete": 19,
-            "Fighter": 12,
-            "Flak": 14,
-            "Heavy": 21,
-            "Helicopter": 20,
-            "Heroic": 22,
-            "Light": 13,
-            "Medium": 17,
-            "None": 11,
-            "Plate": 18,
-            "REFLECTOR": 50,
-            "Scout": 10,
-            "Shield": 35,
-            "Spaceship": 24,
-            "Steel": 23,
-            "Superheavy": 25,
-            "Wood": 15
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "LaserWeaponPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        }
-      ],
-      "projectile": "LaserZap",
-      "reasons": [
-        "name and legacy signals disagree"
-      ],
-      "valid_targets": "Ground, Water, Air",
-      "weapon": "NaxLaserT"
-    },
-    {
-      "bucket": "human decision required",
       "candidate_family": "CannonHE_Medium",
       "canonical_templates": [
         {
@@ -34754,7 +34075,7 @@
         "family": null,
         "reason": "legacy tie: Flame/Chemical"
       },
-      "line": 630,
+      "line": 634,
       "name_signal": {
         "family": "CannonHE",
         "reason": "delivery word 'cannon'"
@@ -35084,7 +34405,7 @@
         "family": "Chemical",
         "reason": "legacy score Chemical=4"
       },
-      "line": 700,
+      "line": 704,
       "name_signal": {
         "family": "CannonHE",
         "reason": "delivery word 'cannon'"
@@ -35227,262 +34548,6 @@
     },
     {
       "bucket": "human decision required",
-      "candidate_family": null,
-      "canonical_templates": [],
-      "descendant_old_flat_overrides": [
-        {
-          "keys": [
-            "LaserWeapon",
-            "MediumMissile"
-          ],
-          "weapon": "NaxiBeetleLaser_AA_elite"
-        }
-      ],
-      "descendants": [
-        "Lunar_AmplifiedBeetleLaser",
-        "Lunar_AmplifiedBeetleLaser_AA",
-        "Lunar_YellowBeetleLaser",
-        "Lunar_YellowBeetleLaser_AA",
-        "NaxiBeetleLaser_AA_elite"
-      ],
-      "file": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "flat_hits": [
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "BulletImmune",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "SmallArms",
-          "targets": "Ground, Water",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "Chaingun",
-          "targets": "Ground, Water",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "MediumMissile",
-          "targets": "Ground, Water",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "LaserWeapon",
-          "targets": "Ground, Water",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 600,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "LaserExtraDamage",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": false
-        }
-      ],
-      "legacy_signal": {
-        "family": "Bullet",
-        "reason": "legacy score Bullet=6"
-      },
-      "line": 34,
-      "name_signal": {
-        "family": "Laser",
-        "reason": "family word 'laser'"
-      },
-      "old_families": [
-        "^Chaingun",
-        "^LaserWeapon",
-        "^MediumMissile",
-        "^SmallArms"
-      ],
-      "percentage_hits": [
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 8,
-            "Concrete": 4,
-            "Fighter": 11,
-            "Flak": 15,
-            "Heavy": 3,
-            "Helicopter": 5,
-            "Heroic": 13,
-            "Light": 9,
-            "Medium": 6,
-            "None": 16,
-            "Plate": 14,
-            "Scout": 12,
-            "Shield": 17,
-            "Spaceship": 2,
-            "Steel": 7,
-            "Superheavy": 1,
-            "Wood": 10
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "SmallArmsPercentage",
-          "targets": "Ground, Water",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 12,
-            "Concrete": 11,
-            "Fighter": 15,
-            "Flak": 19,
-            "Heavy": 7,
-            "Helicopter": 9,
-            "Heroic": 17,
-            "Light": 13,
-            "Medium": 10,
-            "None": 20,
-            "Plate": 18,
-            "Scout": 16,
-            "Shield": 25,
-            "Spaceship": 6,
-            "Steel": 8,
-            "Superheavy": 5,
-            "Wood": 14
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "ChaingunPercentage",
-          "targets": "Ground, Water",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 14,
-            "Concrete": 13,
-            "Fighter": 11,
-            "Flak": 7,
-            "Heavy": 18,
-            "Helicopter": 17,
-            "Heroic": 5,
-            "Light": 12,
-            "Medium": 15,
-            "None": 6,
-            "Plate": 8,
-            "Scout": 9,
-            "Shield": 25,
-            "Spaceship": 19,
-            "Steel": 16,
-            "Superheavy": 20,
-            "Wood": 10
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "MediumMissilePercentage",
-          "targets": "Ground, Water",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 16,
-            "Concrete": 19,
-            "Fighter": 12,
-            "Flak": 14,
-            "Heavy": 21,
-            "Helicopter": 20,
-            "Heroic": 22,
-            "Light": 13,
-            "Medium": 17,
-            "None": 11,
-            "Plate": 18,
-            "REFLECTOR": 50,
-            "Scout": 10,
-            "Shield": 35,
-            "Spaceship": 24,
-            "Steel": 23,
-            "Superheavy": 25,
-            "Wood": 15
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "LaserWeaponPercentage",
-          "targets": "Ground, Water",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        }
-      ],
-      "projectile": "LaserZap",
-      "reasons": [
-        "name and legacy signals disagree"
-      ],
-      "valid_targets": "Ground, Water",
-      "weapon": "NaxiBeetleLaser_elite"
-    },
-    {
-      "bucket": "human decision required",
       "candidate_family": "CannonHE_Heavy",
       "canonical_templates": [
         {
@@ -35549,7 +34614,7 @@
         "family": "Bullet",
         "reason": "legacy score Bullet=6"
       },
-      "line": 1044,
+      "line": 1048,
       "name_signal": {
         "family": null,
         "reason": ""
@@ -35819,7 +34884,7 @@
         "family": "Nuclear",
         "reason": "legacy score Nuclear=5"
       },
-      "line": 967,
+      "line": 971,
       "name_signal": {
         "family": null,
         "reason": ""
@@ -36154,7 +35219,7 @@
         "family": null,
         "reason": "legacy tie: Flame/Chemical"
       },
-      "line": 383,
+      "line": 387,
       "name_signal": {
         "family": null,
         "reason": ""
@@ -36538,7 +35603,7 @@
         "family": null,
         "reason": "legacy tie: Flame/Chemical"
       },
-      "line": 470,
+      "line": 474,
       "name_signal": {
         "family": null,
         "reason": ""
@@ -36801,262 +35866,6 @@
     },
     {
       "bucket": "human decision required",
-      "candidate_family": null,
-      "canonical_templates": [],
-      "descendant_old_flat_overrides": [
-        {
-          "keys": [
-            "LaserWeapon",
-            "MediumMissile"
-          ],
-          "weapon": "NaxiTank2Laser_AA"
-        }
-      ],
-      "descendants": [
-        "Lunar_AmplifiedTank2Laser",
-        "Lunar_AmplifiedTank2Laser_AA",
-        "Lunar_YellowTank2Laser",
-        "Lunar_YellowTank2Laser_AA",
-        "NaxiTank2Laser_AA"
-      ],
-      "file": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "flat_hits": [
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "BulletImmune",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "SmallArms",
-          "targets": "Ground, Water",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "Chaingun",
-          "targets": "Ground, Water",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "MediumMissile",
-          "targets": "Ground, Water",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "LaserWeapon",
-          "targets": "Ground, Water",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 600,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "LaserExtraDamage",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": false
-        }
-      ],
-      "legacy_signal": {
-        "family": "Bullet",
-        "reason": "legacy score Bullet=6"
-      },
-      "line": 109,
-      "name_signal": {
-        "family": "Laser",
-        "reason": "family word 'laser'"
-      },
-      "old_families": [
-        "^Chaingun",
-        "^LaserWeapon",
-        "^MediumMissile",
-        "^SmallArms"
-      ],
-      "percentage_hits": [
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 8,
-            "Concrete": 4,
-            "Fighter": 11,
-            "Flak": 15,
-            "Heavy": 3,
-            "Helicopter": 5,
-            "Heroic": 13,
-            "Light": 9,
-            "Medium": 6,
-            "None": 16,
-            "Plate": 14,
-            "Scout": 12,
-            "Shield": 17,
-            "Spaceship": 2,
-            "Steel": 7,
-            "Superheavy": 1,
-            "Wood": 10
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "SmallArmsPercentage",
-          "targets": "Ground, Water",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 12,
-            "Concrete": 11,
-            "Fighter": 15,
-            "Flak": 19,
-            "Heavy": 7,
-            "Helicopter": 9,
-            "Heroic": 17,
-            "Light": 13,
-            "Medium": 10,
-            "None": 20,
-            "Plate": 18,
-            "Scout": 16,
-            "Shield": 25,
-            "Spaceship": 6,
-            "Steel": 8,
-            "Superheavy": 5,
-            "Wood": 14
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "ChaingunPercentage",
-          "targets": "Ground, Water",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 14,
-            "Concrete": 13,
-            "Fighter": 11,
-            "Flak": 7,
-            "Heavy": 18,
-            "Helicopter": 17,
-            "Heroic": 5,
-            "Light": 12,
-            "Medium": 15,
-            "None": 6,
-            "Plate": 8,
-            "Scout": 9,
-            "Shield": 25,
-            "Spaceship": 19,
-            "Steel": 16,
-            "Superheavy": 20,
-            "Wood": 10
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "MediumMissilePercentage",
-          "targets": "Ground, Water",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 16,
-            "Concrete": 19,
-            "Fighter": 12,
-            "Flak": 14,
-            "Heavy": 21,
-            "Helicopter": 20,
-            "Heroic": 22,
-            "Light": 13,
-            "Medium": 17,
-            "None": 11,
-            "Plate": 18,
-            "REFLECTOR": 50,
-            "Scout": 10,
-            "Shield": 35,
-            "Spaceship": 24,
-            "Steel": 23,
-            "Superheavy": 25,
-            "Wood": 15
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "LaserWeaponPercentage",
-          "targets": "Ground, Water",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        }
-      ],
-      "projectile": "LaserZap",
-      "reasons": [
-        "name and legacy signals disagree"
-      ],
-      "valid_targets": "Ground, Water",
-      "weapon": "NaxiTank2Laser"
-    },
-    {
-      "bucket": "human decision required",
       "candidate_family": "CannonHE_Medium",
       "canonical_templates": [
         {
@@ -37122,7 +35931,7 @@
         "family": "Chemical",
         "reason": "legacy score Chemical=4"
       },
-      "line": 1089,
+      "line": 1093,
       "name_signal": {
         "family": "Demolition",
         "reason": "delivery word 'bomb'"
@@ -51589,7 +50398,7 @@
         "family": null,
         "reason": "legacy tie: CannonHE/Chemical/Flame"
       },
-      "line": 1320,
+      "line": 1325,
       "name_signal": {
         "family": "Concussion",
         "reason": "delivery word 'artillery'"
@@ -57344,7 +56153,7 @@
         "family": "Bullet",
         "reason": "legacy score Bullet=6"
       },
-      "line": 1049,
+      "line": 1048,
       "name_signal": {
         "family": "Bullet",
         "reason": "delivery word 'shotgun'"
@@ -63659,7 +62468,7 @@
         "family": "Bullet",
         "reason": "legacy score Bullet=6"
       },
-      "line": 12465,
+      "line": 12528,
       "name_signal": {
         "family": "Laser",
         "reason": "family word 'laser'"
@@ -65347,7 +64156,7 @@
         "family": "Concussion",
         "reason": "legacy score Concussion=4"
       },
-      "line": 406,
+      "line": 411,
       "name_signal": {
         "family": null,
         "reason": ""
@@ -65622,7 +64431,7 @@
         "family": null,
         "reason": "legacy tie: Demolition/CannonHE"
       },
-      "line": 437,
+      "line": 442,
       "name_signal": {
         "family": null,
         "reason": ""
@@ -67801,7 +66610,7 @@
         "family": "Tesla",
         "reason": "legacy score Tesla=4"
       },
-      "line": 839,
+      "line": 838,
       "name_signal": {
         "family": "Waveforce",
         "reason": "family word 'waveforce'"
@@ -72661,198 +71470,6 @@
       "weapon": "japan_imperialscoutsman_rifle"
     },
     {
-      "bucket": "human decision required",
-      "candidate_family": null,
-      "canonical_templates": [],
-      "descendant_old_flat_overrides": [],
-      "descendants": [],
-      "file": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml",
-      "flat_hits": [
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "BulletImmune",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "SmallArms",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "Chaingun",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "LaserWeapon",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 600,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "LaserExtraDamage",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": false
-        }
-      ],
-      "legacy_signal": {
-        "family": "Bullet",
-        "reason": "legacy score Bullet=6"
-      },
-      "line": 337,
-      "name_signal": {
-        "family": "Laser",
-        "reason": "family word 'laser'"
-      },
-      "old_families": [
-        "^Chaingun",
-        "^LaserWeapon",
-        "^SmallArms"
-      ],
-      "percentage_hits": [
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 8,
-            "Concrete": 4,
-            "Fighter": 11,
-            "Flak": 15,
-            "Heavy": 3,
-            "Helicopter": 5,
-            "Heroic": 13,
-            "Light": 9,
-            "Medium": 6,
-            "None": 16,
-            "Plate": 14,
-            "Scout": 12,
-            "Shield": 17,
-            "Spaceship": 2,
-            "Steel": 7,
-            "Superheavy": 1,
-            "Wood": 10
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "SmallArmsPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 12,
-            "Concrete": 11,
-            "Fighter": 15,
-            "Flak": 19,
-            "Heavy": 7,
-            "Helicopter": 9,
-            "Heroic": 17,
-            "Light": 13,
-            "Medium": 10,
-            "None": 20,
-            "Plate": 18,
-            "Scout": 16,
-            "Shield": 25,
-            "Spaceship": 6,
-            "Steel": 8,
-            "Superheavy": 5,
-            "Wood": 14
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "ChaingunPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 16,
-            "Concrete": 19,
-            "Fighter": 12,
-            "Flak": 14,
-            "Heavy": 21,
-            "Helicopter": 20,
-            "Heroic": 22,
-            "Light": 13,
-            "Medium": 17,
-            "None": 11,
-            "Plate": 18,
-            "REFLECTOR": 50,
-            "Scout": 10,
-            "Shield": 35,
-            "Spaceship": 24,
-            "Steel": 23,
-            "Superheavy": 25,
-            "Wood": 15
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "LaserWeaponPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        }
-      ],
-      "projectile": "LaserZap",
-      "reasons": [
-        "name and legacy signals disagree"
-      ],
-      "valid_targets": "Ground, Air",
-      "weapon": "laserelitecadregun"
-    },
-    {
       "bucket": "legacy-only suggestion",
       "candidate_family": "Chemical",
       "canonical_templates": [],
@@ -74340,7 +72957,7 @@
         "family": "CannonHE",
         "reason": "legacy score CannonHE=4"
       },
-      "line": 930,
+      "line": 929,
       "name_signal": {
         "family": null,
         "reason": ""
@@ -74775,7 +73392,7 @@
         "family": "Magic",
         "reason": "legacy score Magic=4"
       },
-      "line": 2142,
+      "line": 2141,
       "name_signal": {
         "family": null,
         "reason": ""
@@ -75112,198 +73729,6 @@
       ],
       "valid_targets": "Ground, Water, Air",
       "weapon": "ra2roktgun"
-    },
-    {
-      "bucket": "human decision required",
-      "candidate_family": null,
-      "canonical_templates": [],
-      "descendant_old_flat_overrides": [],
-      "descendants": [],
-      "file": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "flat_hits": [
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "BulletImmune",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "SmallArms",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "Chaingun",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 2000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "LaserWeapon",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 600,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "LaserExtraDamage",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": false
-        }
-      ],
-      "legacy_signal": {
-        "family": "Bullet",
-        "reason": "legacy score Bullet=6"
-      },
-      "line": 1611,
-      "name_signal": {
-        "family": "Laser",
-        "reason": "family word 'laser'"
-      },
-      "old_families": [
-        "^Chaingun",
-        "^LaserWeapon",
-        "^SmallArms"
-      ],
-      "percentage_hits": [
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 8,
-            "Concrete": 4,
-            "Fighter": 11,
-            "Flak": 15,
-            "Heavy": 3,
-            "Helicopter": 5,
-            "Heroic": 13,
-            "Light": 9,
-            "Medium": 6,
-            "None": 16,
-            "Plate": 14,
-            "Scout": 12,
-            "Shield": 17,
-            "Spaceship": 2,
-            "Steel": 7,
-            "Superheavy": 1,
-            "Wood": 10
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "SmallArmsPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 12,
-            "Concrete": 11,
-            "Fighter": 15,
-            "Flak": 19,
-            "Heavy": 7,
-            "Helicopter": 9,
-            "Heroic": 17,
-            "Light": 13,
-            "Medium": 10,
-            "None": 20,
-            "Plate": 18,
-            "Scout": 16,
-            "Shield": 25,
-            "Spaceship": 6,
-            "Steel": 8,
-            "Superheavy": 5,
-            "Wood": 14
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "ChaingunPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 1,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 16,
-            "Concrete": 19,
-            "Fighter": 12,
-            "Flak": 14,
-            "Heavy": 21,
-            "Helicopter": 20,
-            "Heroic": 22,
-            "Light": 13,
-            "Medium": 17,
-            "None": 11,
-            "Plate": 18,
-            "REFLECTOR": 50,
-            "Scout": 10,
-            "Shield": 35,
-            "Spaceship": 24,
-            "Steel": 23,
-            "Superheavy": 25,
-            "Wood": 15
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 1,
-          "scale": null,
-          "tag": "LaserWeaponPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        }
-      ],
-      "projectile": "LaserZap",
-      "reasons": [
-        "name and legacy signals disagree"
-      ],
-      "valid_targets": "Ground, Water",
-      "weapon": "td_nod_minigunner_minigun_laser"
     },
     {
       "bucket": "legacy-only suggestion",

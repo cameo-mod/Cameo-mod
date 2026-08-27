@@ -1,5 +1,31 @@
 # Development Log
 
+## 2026-08-27 — Remaining rapid/light laser role batch
+
+- Consolidated seven genuine rapid/light laser roots, covering 19 resolved weapons, onto the
+  standard heavy Laser profile: the M16 laser, elite cadre laser, Nod minigunner laser, Lunar
+  Naxis drone laser, Naxis turret laser, elite Beetle laser, and Tank 2 laser families.
+- Flat totals, every independently rounded percentage application, cadence, projectiles, effects,
+  reports, targets, and the legacy 600-damage shield chip are preserved. The Beetle and Tank 2
+  anti-air children retain their original 4000 air plus 4000 ground/water target split through a
+  ground-only compatibility remainder.
+- The intentional role changes are the standard laser impact and armor profile, half allied
+  damage, Explosion death type, Temperature meter, and removal of the old bullet-immunity
+  exclusion so these energy weapons behave as lasers rather than bullets.
+- The refreshed survey reports 250 remaining concrete roots: 247 mixed weapons in 191 groups and
+  three isolated roots. The conservative classifier leaves 195 roots for human decisions, with
+  25 corroborated and 30 legacy-only suggestions. The broadcast-debt ratchet falls from 897 to
+  890. No prices, pricing rules, runtime source, parked percentage-runtime change, or engine pin
+  are included.
+- Independent adversarial review caught a Naxis percentage-warhead inheritance regression before
+  publication. The original inherited slot was restored, the orphan audit learned to distinguish
+  retained percentage overrides from genuinely orphaned flat keys, and the whole-tree comparator
+  now fingerprints percentage armor, shape, targeting, and statistics behavior. Verification
+  passes 421 tests (11 optional spreadsheet tests skipped), all 32 balance ledgers, generator,
+  inheritance, empty-warhead, orphan-key, and physical-state checks. After the repair, a controlled
+  pinned-engine launch stayed alive for 90 seconds without YAML, exception, fatal, or crash log
+  matches; its exact test process was then stopped.
+
 ## 2026-08-27 — Remaining direct-hit sniper follow-up
 
 - Consolidated the GDI heavy sniper, Havoc's commando sniper, and Soviet Dragunov away from

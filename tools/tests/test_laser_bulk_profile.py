@@ -19,10 +19,29 @@ ROOT_LASERS = {
     "TSLaser25mmDep": (2000, 2000, 2),
     "edenMobileLaser": (8000, 0, 4),
     "ordos_lasertank": (40000, 0, 4),
+    "M16Laser": (6000, 0, 3),
+    "laserelitecadregun": (6000, 0, 3),
+    "td_nod_minigunner_minigun_laser": (6000, 0, 3),
+    "LunarNaxiDroneLaser": (8000, 0, 4),
+    "NaxLaserT": (8000, 0, 4),
+    "NaxiBeetleLaser_elite": (4000, 4000, 4),
+    "NaxiTank2Laser": (4000, 4000, 4),
 }
 RESOLVED_LASERS = tuple(ROOT_LASERS) + (
     "edenMobileLaserTiger",
     "edenMobileDefenceLaser",
+    "Lunar_AmplifiedLaserT",
+    "Lunar_YellowLaserT",
+    "Lunar_AmplifiedBeetleLaser",
+    "Lunar_AmplifiedBeetleLaser_AA",
+    "Lunar_YellowBeetleLaser",
+    "Lunar_YellowBeetleLaser_AA",
+    "NaxiBeetleLaser_AA_elite",
+    "Lunar_AmplifiedTank2Laser",
+    "Lunar_AmplifiedTank2Laser_AA",
+    "Lunar_YellowTank2Laser",
+    "Lunar_YellowTank2Laser_AA",
+    "NaxiTank2Laser_AA",
 )
 RETIRED_FLAT_TAGS = {
     "TankDestroyerCannon",
@@ -99,6 +118,58 @@ class LaserBulkProfileTests(unittest.TestCase):
             rail_chip = child(weapon, "Warhead@LegacyRailgunExtraDamage")
             self.assertIsNotNone(rail_chip, name)
             self.assertEqual("1000", child(rail_chip, "Damage").value, name)
+
+    def test_remaining_lasers_adopt_the_standard_energy_traits(self):
+        for name in (
+            "M16Laser",
+            "laserelitecadregun",
+            "td_nod_minigunner_minigun_laser",
+            "LunarNaxiDroneLaser",
+            "NaxLaserT",
+            "NaxiBeetleLaser_elite",
+            "NaxiTank2Laser",
+        ):
+            weapon = self.rules.resolve_weapon(name)
+            laser = child(weapon, "Warhead@Laser_Heavy")
+            self.assertEqual("Ally, Neutral, Enemy", child(laser, "ValidRelationships").value, name)
+            self.assertEqual("50", child(laser, "FriendlyFireDamage").value, name)
+            self.assertEqual("50", child(laser, "FriendlyFireSpread").value, name)
+            self.assertIsNone(child(laser, "InvalidTargets"), name)
+
+    def test_naxi_aa_children_preserve_the_air_ground_damage_split(self):
+        for name in (
+            "NaxiBeetleLaser_AA_elite",
+            "Lunar_AmplifiedBeetleLaser_AA",
+            "Lunar_YellowBeetleLaser_AA",
+            "NaxiTank2Laser_AA",
+            "Lunar_AmplifiedTank2Laser_AA",
+            "Lunar_YellowTank2Laser_AA",
+        ):
+            weapon = self.rules.resolve_weapon(name)
+            laser = child(weapon, "Warhead@Laser_Heavy")
+            remainder = child(weapon, "Warhead@LaserHeavyGroundRemainder")
+            self.assertEqual("4000", child(laser, "Damage").value, name)
+            self.assertEqual("Air", child(laser, "ValidTargets").value, name)
+            self.assertEqual("4000", child(remainder, "Damage").value, name)
+            self.assertEqual("Ground, Water", child(remainder, "ValidTargets").value, name)
+
+    def test_naxi_laser_percentage_profile_survives_inheritance(self):
+        for name in (
+            "NaxiBeetleLaser_elite",
+            "NaxiBeetleLaser_AA_elite",
+            "NaxiTank2Laser",
+            "NaxiTank2Laser_AA",
+        ):
+            weapon = self.rules.resolve_weapon(name)
+            percentage = child(weapon, "Warhead@LaserWeaponPercentage")
+            self.assertIsNotNone(percentage, name)
+            self.assertEqual("1", child(percentage, "Damage").value, name)
+            self.assertEqual("75", child(percentage, "Spread").value, name)
+            self.assertEqual("false", child(percentage, "UpdatesUnitStatistics").value, name)
+            versus = child(percentage, "Versus")
+            self.assertEqual("35", child(versus, "Shield").value, name)
+            self.assertEqual("25", child(versus, "Superheavy").value, name)
+            self.assertEqual("21", child(versus, "Heavy").value, name)
 
 
 if __name__ == "__main__":

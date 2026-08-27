@@ -32,10 +32,13 @@ schwarzermond_lunarsoldier_rifle_elite:
 	BurstDelays: 3
 
 NaxiBeetleLaser_elite:
+	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits: ^SmallArms
 	Inherits@2: ^Chaingun
 	Inherits@3: ^MediumMissile
 	Inherits@4: ^LaserWeapon
+	Inherits@legacychip: ^LegacyLaserChipCompatibility
+	Inherits@groundremainder: ^LaserHeavyGroundRemainderCompatibility
 	Range: 6448
 	ReloadDelay: 60
 	Burst: 2
@@ -44,30 +47,29 @@ NaxiBeetleLaser_elite:
 	ValidTargets: Ground, Water
 	Projectile: LaserZap
 		Width: 25
-	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	TargetActorCenter: false
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 0
+	-Warhead@Laser_Heavy_ExtraDamage:
 
 NaxiBeetleLaser_AA_elite:
 	Inherits: NaxiBeetleLaser_elite
@@ -81,11 +83,9 @@ NaxiBeetleLaser_AA_elite:
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@Laser_Heavy:
 		ValidTargets: Air
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		ValidTargets: Air
-	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Air
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
@@ -107,10 +107,13 @@ LunarPanzerCannon_elite:
 	BurstDelays: 3
 
 NaxiTank2Laser:
+	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits: ^SmallArms
 	Inherits@2: ^Chaingun
 	Inherits@3: ^MediumMissile
 	Inherits@4: ^LaserWeapon
+	Inherits@legacychip: ^LegacyLaserChipCompatibility
+	Inherits@groundremainder: ^LaserHeavyGroundRemainderCompatibility
 	Range: 6500
 	ReloadDelay: 52
 	Burst: 4
@@ -119,30 +122,29 @@ NaxiTank2Laser:
 	ValidTargets: Ground, Water
 	Projectile: LaserZap
 		Width: 25
-	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	TargetActorCenter: false
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water
+	Warhead@Laser_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 0
+	-Warhead@Laser_Heavy_ExtraDamage:
 
 NaxiTank2Laser_AA:
 	Inherits: NaxiTank2Laser
@@ -156,11 +158,9 @@ NaxiTank2Laser_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-	Warhead@MediumMissile: SpreadDamage
+	Warhead@Laser_Heavy:
 		ValidTargets: Air
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		ValidTargets: Air
-	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Air
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air

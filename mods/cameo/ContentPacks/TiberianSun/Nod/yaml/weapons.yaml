@@ -335,10 +335,12 @@ elitecadregun:
 		PercentageScale: 2500
 		Damage: 8000
 laserelitecadregun:
+	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits: ^SmallArms
 	Inherits@2: ^Chaingun
 	Inherits@3: ^LaserWeapon
 	Inherits@4: ^TSLaserEffect
+	Inherits@legacychip: ^LegacyLaserChipCompatibility
 	Projectile: LaserZap
 		Width: 36
 		Duration: 8
@@ -349,18 +351,21 @@ laserelitecadregun:
 	Report: cygun1.aud
 	Range: 6677
 	ValidTargets: Ground, Air
-	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
+	TargetActorCenter: false
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
+	Warhead@Laser_Heavy:
+		Damage: 6000
+		PercentageScale: 0
+	-Warhead@Laser_Heavy_ExtraDamage:
 
 ChamBlade:
 	Inherits@wh: ^Warhead_Sniper_Light
