@@ -1,5 +1,108 @@
 # Development Log
 
+## 2026-08-27 — Final low-risk single-family weapon cleanup
+
+- Consolidated four isolated active weapons away from their last retired flat-damage family:
+  the FutureTech cryocopter rocket onto medium missiles, the anti-tank mine onto light
+  demolition, the Waveforce chain gun onto medium bullets, and the Tiberian Sun laser 90mm
+  family onto medium anti-armour cannon damage.
+- Percentage-inert compatibility slices preserve the existing flat totals, enemy/ally target
+  splits, score accounting, and the laser's shield-only chip while adopting each selected
+  standard armour and blast profile. Every pre-existing percentage path remains independent, so
+  runtime rounding is unchanged; projectiles, effects, reports, cryo states, and mine exclusions
+  are untouched.
+- `RA2CRM60H` remains the only isolated candidate because its heavy-cannon and medium-bullet
+  signals conflict and its passenger-only damage needs an explicit classification decision. The
+  refreshed active survey now reports 266 concrete retired-family weapons: 265 mixed weapons in
+  201 groups and this one deferred isolated weapon. Pricing, runtime source, the parked percentage
+  runtime change, and the engine pin remain outside this work.
+- Independent review approved all four conversions after checking the actual resolved diff. The
+  whole-tree comparator preserves every guarded behavior across all 2345 weapons and reports only
+  the intended profile shapes. Verification passes 401 tests (11 optional spreadsheet tests
+  skipped), all ledger, generator, warhead, inheritance, and physical-state audits, and a
+  controlled pinned-engine launch that stayed alive and responsive with no new exception log;
+  its exact test process was then stopped.
+
+## 2026-08-27 — Steel Mako cannon-family consolidation
+
+- Consolidated the Steel Mako cannon root and its elite, EMP, and EMP-elite descendants away from
+  the retired medium-flame flat profile onto their already-selected standard medium CannonHE class.
+- A local percentage-inert CannonHE slice preserves the 2000 no-wall flat hit, allied half damage,
+  score/stat accounting, and Temperature binding. EMP variants retain their electrical damage
+  types; all independent flame, demolition, railgun, cannon, chemical, and tesla percentage paths
+  remain separately rounded.
+- Whole-tree comparison preserves every guarded behavior across all 2345 resolved weapons; only
+  the intended CannonHE blast/profile replacement reports on the four Steel Mako definitions.
+  The active survey now reports 270 concrete retired-family weapons: 265 mixed weapons in 201
+  groups and 5 single-family candidates. No prices, pricing logic, runtime source, parked runtime
+  change, or engine pin changed.
+- Independent review approved the CannonHE classification and compatibility design. Verification
+  passes 401 tests (11 optional spreadsheet tests skipped), all ledger/generator/warhead and
+  physical-state audits, and the full resolver comparison. A controlled pinned-engine launch
+  stayed alive and responsive with no new exception log, then its exact test process was stopped.
+
+## 2026-08-27 — RA2 SCUD missile-family consolidation
+
+- Consolidated the active RA2 SCUD root and its Dreadnought, V3 explosion, radioactive,
+  incendiary, tesla, and elite descendants away from the retired medium-flame flat profile.
+- A local standard heavy-missile compatibility slice preserves the original no-wall damage split.
+  The modern demolition and original heavy-missile hits remain independent, as do all three
+  separately rounded percentage contributions; radioactive and V3 children retain their local
+  18000/10000 payloads exactly.
+- Whole-tree comparison preserves flat damage, all active/design-health percentage results,
+  targets, relationships, score/stat accounting, cadence, projectiles, reports, effects,
+  radiation, shields, concrete, and child overrides across all 2345 resolved weapons. Only the
+  selected heavy-missile blast profile changes on the seven SCUD-family definitions.
+- The refreshed active survey now reports 271 concrete weapons on retired families: 265 mixed
+  weapons in 201 groups and 6 single-family candidates. Prices, pricing logic, engine/runtime
+  source, the parked runtime change, and the engine pin remain untouched.
+- Independent review retained the flame hit's Temperature-state binding and extended the
+  comparator to gate singular and mapped physical-state applications, including the engine's
+  disabled-by-default scale. Verification passes 401 tests (11 optional spreadsheet tests
+  skipped), all ledger/generator/warhead/physical-state audits, and the full resolver comparison.
+  The first launch caught redundant child removals rejected by engine MiniYAML; after removing
+  them, the controlled pinned-engine launch stayed alive and responsive with no new exception log,
+  and its exact test process was stopped.
+
+## 2026-08-27 — Naxis quad-cannon flak consolidation
+
+- Consolidated the active Naxis quad-cannon root and eleven ground, anti-air, elite, portable,
+  Sky Mage, and long-range descendants onto the existing standard medium-flak damage profile.
+- Preserved the original payload split: ground variants retain 7000 enemy and 6000 allied flat
+  damage, while anti-air variants retain 5000 Air damage plus the inherited 2000 Ground/Water
+  splash. Compatibility-only flak slices keep allied damage and its score/stat accounting exact.
+- Kept all four independently rounded percentage contributions, every target relationship,
+  projectile, report, effect, shield/concrete behavior, cadence, range, and descendant override.
+- Extended the whole-tree comparator to gate damage by relationship, target, and
+  `UpdatesUnitStatistics`, closing the blind spot found by independent review. It preserves flat
+  and percentage damage at every active/design health value across all 2345 resolved weapons;
+  only the selected medium-flak blast profile changes on the twelve Naxis definitions.
+- The refreshed active survey now reports 272 concrete weapons on retired families: 265 mixed
+  weapons in 201 groups and 7 single-family candidates. Ledgers were refreshed, but prices,
+  pricing logic, engine/runtime source, the parked runtime change, and the engine pin are untouched.
+- Verification: 398 tests pass (11 optional spreadsheet tests skipped); 32 ledgers match live
+  YAML; generator drift, empty warheads, real orphaned old keys, and dangling inheritance targets
+  are zero; the physical-state audit passes. A controlled pinned-engine launch remained alive and
+  responsive through startup with no new exception log, then its exact test process was stopped.
+
+## 2026-08-27 — MiG missile family consolidation
+
+- Consolidated the active MiG missile root and all ten resolved ground-attack, anti-air,
+  radioactive, incendiary, tesla, and elite variants onto the existing standard medium-missile
+  damage profile.
+- Preserved the original target split: 32000 flat damage on Ground/Ship and 24000 on Water for
+  ground-attack variants, while both anti-air variants retain 32000 Air damage. A compatibility-only
+  8000-point standard-profile slice carries the Ground/Ship difference without entering the
+  generated family library or shared pricing model.
+- Kept the three independently rounded percentage hits and every variant-specific projectile,
+  report, effect, fragment, radiation field, smudge, shield, glow, sound, and concrete behavior.
+- Whole-tree comparison preserves flat and runtime percentage damage at every active/design health
+  value, targeting, cadence, projectiles, and non-damage warheads across all 2345 resolved weapons.
+  Only the selected medium-missile blast profile changes on the ten MiG definitions.
+- The refreshed active survey now reports 273 concrete weapons on retired families: 266 mixed
+  weapons in 202 groups and 7 single-family candidates. Pricing and the parked runtime change remain
+  untouched.
+
 ## 2026-08-26 — retrospective compatibility repair and missile cleanup
 
 - Independent review found that the earlier one-target percentage comparison hid current-runtime

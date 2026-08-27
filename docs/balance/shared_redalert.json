@@ -2481,20 +2481,6 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -2506,6 +2492,20 @@
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "ZeroFighterBullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "ZeroFighterBullet_MediumFriendly",
         "type": "AreaDamage"
        }
       ],
@@ -2521,7 +2521,8 @@
        "^WaveforceBulletWarhead",
        "^Grenade",
        "ZeroFighterChainGun",
-       "^WaveforceBulletProjectile"
+       "^WaveforceBulletProjectile",
+       "^ZeroFighterWaveforceBulletCompatibility"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",
@@ -2549,20 +2550,6 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "500",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -2574,6 +2561,20 @@
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "ZeroFighterBullet_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "500",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "ZeroFighterBullet_MediumFriendly",
         "type": "AreaDamage"
        }
       ],
@@ -2589,7 +2590,8 @@
        "^WaveforceBulletWarhead",
        "^Grenade",
        "ZeroFighterChainGun",
-       "^WaveforceBulletProjectile"
+       "^WaveforceBulletProjectile",
+       "^ZeroFighterWaveforceBulletCompatibility"
       ],
       "warheads": [
        "^Warhead_Railgun_Heavy",

@@ -745,11 +745,107 @@ NaxRatteCannon_elite:
 	Burst: 4
 	BurstDelays: 3
 
+^NaxQuadCannonFlakAllyCompatibility:
+	Warhead@NaxFlakAllyCounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 110
+		Damage: 1500
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@NaxFlakAllyUncounted: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water
+		Spread: 110
+		Damage: 1000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+
+^NaxQuadCannonFlakGroundWaterCompatibility:
+	Warhead@NaxFlakGroundWater: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		ValidTargets: Ground, Water
+		Spread: 110
+		Damage: 2000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus:
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+
 NaxQuadCannon:
 	Inherits: ^Grenade
 	Inherits@2: ^HeavyMissile
 	Inherits@3: ^Chaingun
 	Inherits@4: ^RA2FlakWeapon
+	Inherits@compat: ^NaxQuadCannonFlakAllyCompatibility
 	ValidTargets: Ground, Water
 	ReloadDelay: 47
 	Burst: 6
@@ -760,27 +856,24 @@ NaxQuadCannon:
 		-LaunchAngle:
 		ValidTargets: Ground, Water
 		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 1000
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
+	-Warhead@HeavyMissile:
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
-		Damage: 2000
+		Damage: 7000
+		PercentageScale: 2857
+		PercentageDenominator: 10000
 NaxQuadCannon_elite:
 	Inherits: NaxQuadCannon
 	Range: 6368
@@ -789,15 +882,10 @@ NaxQuadCannon_elite:
 
 NaxQuadCannon_AA:
 	Inherits: NaxQuadCannon
+	Inherits@compat: ^NaxQuadCannonFlakGroundWaterCompatibility
 	ValidTargets: Air
 	Range: 8052
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Air
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Air
 	Warhead@GrenadePercentage: AreaDamagePercentage
-		ValidTargets: Air
-	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Air
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Air
@@ -807,6 +895,14 @@ NaxQuadCannon_AA:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
+		Damage: 5000
+		PercentageScale: 4000
+	Warhead@NaxFlakAllyCounted:
+		ValidTargets: Air
+		Damage: 500
+	Warhead@NaxFlakAllyUncounted:
+		ValidTargets: Air
+		Damage: 1000
 	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
 
