@@ -3,12 +3,12 @@
 This report is read-only triage. A suggested destination is not approval to edit YAML;
 each group still needs a proposed resolved diff and the full behavior comparator.
 
-Active concrete roots still using retired flat families: **266**.
+Active concrete roots still using retired flat families: **260**.
 
 | review bucket | roots | meaning |
 |---|--:|---|
 | one inherited destination | 0 | one family and tier appears in the actual inheritance chain without conflicting evidence |
-| corroborated suggestion | 31 | weapon-name and weighted legacy evidence agree |
+| corroborated suggestion | 25 | weapon-name and weighted legacy evidence agree |
 | legacy-only suggestion | 30 | one weighted legacy signal exists, but the name does not confirm it |
 | human decision required | 205 | conflicting, exceptional, or missing destination evidence |
 
@@ -21,15 +21,12 @@ closure, and descendant overrides of retired flat keys.
 | weapon | proposed family | retired families | descendants | old-key child overrides | evidence |
 |---|---|---|--:|--:|---|
 
-## Corroborated Suggestion (31)
+## Corroborated Suggestion (25)
 
 | weapon | proposed family | retired families | descendants | old-key child overrides | evidence |
 |---|---|---|--:|--:|---|
 | `ArmoredCarMG` | Bullet | ArrowWeapon, Chaingun, FlakWeapon, Grenade, MediumCannon, MediumMissile, SmallArms, TankDestroyerCannon | 3 | 1 | delivery word 'mg' |
-| `BlackHandLaser` | Laser | FlakWeapon, LaserWeapon, TankDestroyerCannon | 0 | 0 | family word 'laser' |
 | `CabalAscendedRockets` | MissileHE | FlakWeapon, HeavyAAWeapon, HeavyMissile, LightMissile, MediumMissile, TankDestroyerCannon | 0 | 0 | delivery word 'rocket' |
-| `CabalHunterKillerLasers` | Laser | LaserWeapon, MediumMissile | 0 | 0 | family word 'laser' |
-| `CabalHunterKillerLasers_elite` | Laser | HeavyMissile, LaserWeapon, RailgunWeapon | 0 | 0 | family word 'laser' |
 | `ChemRockets` | Chemical | Grenade, LightChemicalWeapon, LightMissile | 1 | 1 | family word 'chem' |
 | `ChemicalBikeRockets` | Chemical | FlakWeapon, LightChemicalWeapon, MediumMissile, TankDestroyerCannon | 1 | 0 | family word 'chem' |
 | `ChemicalStealthTankMissiles` | Chemical | MediumChemicalWeapon, MediumMissile, ShrapnelWeapon | 1 | 0 | family word 'chem' |
@@ -48,13 +45,10 @@ closure, and descendant overrides of retired flat keys.
 | `TSHighVelocity2Chem` | Chemical | LightChemicalWeapon, TankDestroyerCannon | 0 | 0 | family word 'chem' |
 | `TSHighVelocityChem` | Chemical | LightChemicalWeapon, TankDestroyerCannon | 0 | 0 | family word 'chem' |
 | `TSHighVelocityTurChem` | Chemical | LightChemicalWeapon, TankDestroyerCannon | 0 | 0 | family word 'chem' |
-| `TSLaser25mmDep` | Laser | FlakWeapon, LaserWeapon | 0 | 0 | family word 'laser' |
 | `TSMammothTuskChem` | Chemical | HeavyChemicalWeapon, HeavyMissile | 0 | 0 | family word 'chem' |
 | `YakNapalm` | Flame | HeavyBomb, HeavyFlameWeapon, MediumFlameWeapon, ShrapnelWeapon | 0 | 0 | family word 'napalm' |
-| `edenMobileLaser` | Laser | Chaingun, FlakWeapon, LaserWeapon, TankDestroyerCannon | 2 | 0 | family word 'laser' |
 | `eden_EMP` | Tesla | HeavyCannon, HeavyMissile, MediumCannon, MediumFlameWeapon, MediumMissile, ShrapnelWeapon, TeslaChargedWeapon, TeslaWeapon | 3 | 0 | family word 'emp' |
 | `japan_imperialscoutsman_rifle` | Bullet | Chaingun, RailgunWeapon, SmallArms | 1 | 0 | delivery word 'rifle' |
-| `ordos_lasertank` | Laser | FlakWeapon, LaserWeapon, MediumMissile, RailgunWeapon | 0 | 0 | family word 'laser' |
 | `plymouth_EMP` | Tesla | HeavyCannon, HeavyMissile, MediumCannon, MediumFlameWeapon, MediumMissile, ShrapnelWeapon, TeslaChargedWeapon, TeslaWeapon | 3 | 0 | family word 'emp' |
 
 ## Legacy-Only Suggestion (30)
