@@ -3,14 +3,14 @@
 This report is read-only triage. A suggested destination is not approval to edit YAML;
 each group still needs a proposed resolved diff and the full behavior comparator.
 
-Active concrete roots still using retired flat families: **257**.
+Active concrete roots still using retired flat families: **250**.
 
 | review bucket | roots | meaning |
 |---|--:|---|
 | one inherited destination | 0 | one family and tier appears in the actual inheritance chain without conflicting evidence |
 | corroborated suggestion | 25 | weapon-name and weighted legacy evidence agree |
 | legacy-only suggestion | 30 | one weighted legacy signal exists, but the name does not confirm it |
-| human decision required | 202 | conflicting, exceptional, or missing destination evidence |
+| human decision required | 195 | conflicting, exceptional, or missing destination evidence |
 
 The machine-readable JSON includes every flat hit's targets, exclusions, relationships,
 score flag, friendly-fire modifiers, physical-state bindings, full percentage hits, descendant
@@ -86,7 +86,7 @@ closure, and descendant overrides of retired flat keys.
 | `ra120mm` | CannonHE | HeavyCannon, MediumCannon, ShrapnelWeapon, TankDestroyerCannon | 5 | 0 | legacy score CannonHE=4 |
 | `tkmheavyaaturret` | Bullet | Chaingun, FlakWeapon, LightMissile, SmallArms | 0 | 0 | legacy score Bullet=6 |
 
-## Human Decision Required (202)
+## Human Decision Required (195)
 
 | weapon | proposed family | retired families | descendants | old-key child overrides | evidence |
 |---|---|---|--:|--:|---|
@@ -159,9 +159,7 @@ closure, and descendant overrides of retired flat keys.
 | `Laboratory_Bioball` | ? | MediumChemicalWeapon, MediumFlameWeapon | 0 | 0 | multiple inherited family/tier destinations; legacy tie: Chemical/Flame |
 | `LatinSmokerCannon` | ? | HeavyBomb, MediumFlameWeapon, RailgunWeapon, ShrapnelWeapon | 1 | 0 | multiple inherited family/tier destinations; canonical and legacy signals disagree; name and legacy signals disagree |
 | `LightTank2Cannon` | ? | LightChemicalWeapon, MediumCannon | 0 | 0 | name and legacy signals disagree |
-| `LunarNaxiDroneLaser` | ? | Chaingun, LaserWeapon, MediumMissile, SmallArms | 0 | 0 | name and legacy signals disagree |
 | `LunarTigerCannon` | CannonHE_Medium | HeavyBomb, LightChemicalWeapon, MediumFlameWeapon | 3 | 0 | legacy tie: Chemical/Flame |
-| `M16Laser` | ? | Chaingun, LaserWeapon, SmallArms | 0 | 0 | name and legacy signals disagree |
 | `MammothTusk2` | ? | HeavyMissile, LightFlameWeapon, MediumChemicalWeapon | 1 | 0 | exception-bearing retired family; legacy tie: Flame/Chemical |
 | `MammothTusk2Thermobaric` | ? | HeavyBomb, HeavyFlameWeapon, HeavyMissile | 1 | 0 | name and legacy signals disagree |
 | `MammothTuskTesla` | ? | Grenade, HeavyMissile, LightFlameWeapon, TeslaWeapon | 3 | 2 | exception-bearing retired family; legacy tie: Flame/Tesla |
@@ -175,15 +173,12 @@ closure, and descendant overrides of retired flat keys.
 | `MutFlamerChem` | ? | MediumChemicalWeapon, MediumFlameWeapon | 0 | 0 | legacy tie: Chemical/Flame |
 | `MutHFlamerChem` | ? | HeavyChemicalWeapon, HeavyFlameWeapon, MediumChemicalWeapon, MediumFlameWeapon | 0 | 0 | legacy tie: Chemical/Flame |
 | `NanoSmokeAG` | ? | LightFlameWeapon, MagicWeapon, MediumChemicalWeapon | 0 | 0 | exception-bearing retired family; legacy tie: Flame/Magic/Chemical |
-| `NaxLaserT` | ? | Chaingun, LaserWeapon, MediumMissile, SmallArms | 2 | 0 | name and legacy signals disagree |
 | `NaxMausCannon` | CannonHE_Medium | HeavyBomb, HeavyFlameWeapon, LightChemicalWeapon, ShrapnelWeapon, TankDestroyerCannon | 1 | 0 | legacy tie: Flame/Chemical |
 | `NaxRatteCannon` | CannonHE_Medium | HeavyBomb, LightChemicalWeapon | 1 | 0 | canonical and legacy signals disagree; name and legacy signals disagree |
-| `NaxiBeetleLaser_elite` | ? | Chaingun, LaserWeapon, MediumMissile, SmallArms | 5 | 1 | name and legacy signals disagree |
 | `NaxiInterceptorGun` | CannonHE_Heavy | Chaingun, FlakWeapon, SmallArms | 0 | 0 | canonical and legacy signals disagree |
 | `NaxiMeteor` | ? | Grenade, HeavyBomb, MediumFlameWeapon, NuclearWarhead, ShrapnelWeapon | 0 | 0 | exception-bearing retired family |
 | `NaxiShrek` | MissileAP_Medium | Grenade, HeavyBomb, HeavyFlameWeapon, MediumChemicalWeapon, TankDestroyerCannon | 1 | 0 | legacy tie: Flame/Chemical |
 | `NaxiShrekCons` | MissileAP_Medium | Grenade, HeavyBomb, HeavyFlameWeapon, MediumChemicalWeapon, TankDestroyerCannon | 1 | 0 | legacy tie: Flame/Chemical |
-| `NaxiTank2Laser` | ? | Chaingun, LaserWeapon, MediumMissile, SmallArms | 5 | 1 | name and legacy signals disagree |
 | `NaxisBlackBombSmaller` | CannonHE_Medium | HeavyBomb, LightChemicalWeapon | 0 | 0 | name and canonical destination disagree; canonical and legacy signals disagree; name and legacy signals disagree |
 | `Naxis_Komet` | ? | FlakWeapon, Grenade, HeavyAAWeapon, MediumMissile | 1 | 0 | legacy tie: Flak/MissileAA |
 | `OISmallPlasmaCannon` | ? | HeavyCannon, HeavyChemicalWeapon, RailgunWeapon, TeslaWeapon | 0 | 0 | legacy tie: Chemical/Tesla |
@@ -277,13 +272,11 @@ closure, and descendant overrides of retired flat keys.
 | `facedancer_grenade` | ? | Grenade, HeavyBomb, LightFlameWeapon, LightMissile, MediumChemicalWeapon, MediumMissile, ShrapnelWeapon | 0 | 0 | exception-bearing retired family; multiple inherited family/tier destinations; legacy tie: Concussion/Flame/MissileHE/Chemical; name and canonical destination disagree |
 | `ixian_airdrone` | MissileAP_Heavy | FlakWeapon, HeavyBomb, LightChemicalWeapon, MediumMissile, TankDestroyerCannon | 1 | 0 | canonical and legacy signals disagree |
 | `ixian_farasha` | ? | HeavyFlameWeapon, RailgunWeapon, TeslaWeapon | 1 | 1 | legacy tie: Flame/Tesla |
-| `laserelitecadregun` | ? | Chaingun, LaserWeapon, SmallArms | 0 | 0 | name and legacy signals disagree |
 | `plymouthStickyDefence` | ? | HeavyChemicalWeapon | 0 | 0 | multiple inherited family/tier destinations; canonical and legacy signals disagree |
 | `plymouthStickyTiger` | CannonHE_Medium | MediumChemicalWeapon | 1 | 1 | canonical and legacy signals disagree |
 | `ra120mm2` | CannonHE_Heavy | LightChemicalWeapon, MediumFlameWeapon | 1 | 0 | legacy tie: Chemical/Flame |
 | `ra1_allies_chronovortex` | ? | HeavyBomb, MagicWeapon | 0 | 0 | exception-bearing retired family |
 | `ra2roktgun` | Bullet_Medium | FlakWeapon, LightMissile, SmallArms | 1 | 1 | legacy tie: Flak/Bullet |
-| `td_nod_minigunner_minigun_laser` | ? | Chaingun, LaserWeapon, SmallArms | 0 | 0 | name and legacy signals disagree |
 | `v1rocketsThermobaric` | ? | Grenade, HeavyFlameWeapon, MediumMissile | 0 | 0 | name and legacy signals disagree |
 | `wc2_dwarf_Rifle` | ? | MediumMissile, RailgunWeapon, TankDestroyerCannon | 0 | 0 | name and legacy signals disagree |
 | `wc2_tower_arrow` | ? | ArrowWeapon, Chaingun, RailgunWeapon | 1 | 0 | name and legacy signals disagree |

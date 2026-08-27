@@ -2749,11 +2749,11 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -2763,25 +2763,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2794,25 +2780,29 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "40",
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Warhead_Laser_Heavy",
        "^SmallArms",
        "^Chaingun",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^LegacyLaserChipCompatibility"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "td_nod_minigunner_minigun_laser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2820,11 +2810,11 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "Laser_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "1",
@@ -2834,25 +2824,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -2865,25 +2841,29 @@
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "LegacyLaserExtraDamage",
         "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "40",
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
+       "^Warhead_Laser_Heavy",
        "^SmallArms",
        "^Chaingun",
-       "^LaserWeapon"
+       "^LaserWeapon",
+       "^LegacyLaserChipCompatibility"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Laser_Heavy"
+      ],
       "weapon": "td_nod_minigunner_minigun_laser",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

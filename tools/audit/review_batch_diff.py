@@ -28,9 +28,9 @@ instantaneous thump. A damage check alone cannot see that, so `Spread`/`Falloff`
 `MaxRadius` are diffed too — as a REPORT, because changing the shape is often the whole point
 of moving a weapon onto a family.
 
-EXIT CODE: 1 if damage, runtime percentage damage, cadence, targeting, reports, projectiles,
-or non-damage warheads change. Blast shape remains report-only because choosing a standard family
-may intentionally replace the old stack's geometry.
+EXIT CODE: 1 if damage, runtime percentage damage, percentage-warhead profiles, cadence,
+targeting, reports, projectiles, or non-damage warheads change. Blast shape remains report-only
+because choosing a standard family may intentionally replace the old stack's geometry.
 """
 from __future__ import annotations
 
@@ -86,6 +86,14 @@ def _node_fingerprint(node) -> tuple:
     """Order-insensitive recursive MiniYAML fingerprint."""
     return (
         node.key,
+        node.value,
+        tuple(sorted(_node_fingerprint(child) for child in node.children)),
+    )
+
+
+def _behavior_fingerprint(node) -> tuple:
+    """Recursive fingerprint that ignores only the local slot name."""
+    return (
         node.value,
         tuple(sorted(_node_fingerprint(child) for child in node.children)),
     )
@@ -186,11 +194,14 @@ def snapshot(root: str, with_concrete: bool, health_values: list[int]) -> dict[s
             if child.key != "Projectile" and not child.key.startswith("Warhead")
         ))
         non_damage_warheads = []
+        percentage_warheads = []
         for wh in node.children:
             if not wh.key.startswith("Warhead"):
                 continue
             if wh.value in ("AreaDamage", "SpreadDamage", "AreaDamagePercentage",
                             "HealthPercentageDamage"):
+                if wh.value in ("AreaDamagePercentage", "HealthPercentageDamage"):
+                    percentage_warheads.append(_behavior_fingerprint(wh))
                 continue
             non_damage_warheads.append(_node_fingerprint(wh))
 
@@ -219,6 +230,7 @@ def snapshot(root: str, with_concrete: bool, health_values: list[int]) -> dict[s
             "top_level": top_level,
             "projectile": _node_fingerprint(projectile) if projectile is not None else None,
             "non_damage_warheads": tuple(sorted(non_damage_warheads)),
+            "percentage_warheads": tuple(sorted(percentage_warheads)),
         }
     return out
 
@@ -228,6 +240,7 @@ OPERATING_BEHAVIOR = (
     "Report", "StartBurstReport", "valid_target_damage", "invalid_target_damage",
     "relationship_stat_damage",
     "physical_state_bindings",
+    "percentage_warheads",
     "top_level", "projectile", "non_damage_warheads",
 )
 

@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-27
-Total concrete weapons on old families: 257
+Total concrete weapons on old families: 250
 Single old-family with new inherits (Phase B completion): 0
 Pure single old-family (mechanical Phase A candidates): 3
-Mixed old-family (Phase B maintainer sign-off): 254 in 193 groups
+Mixed old-family (Phase B maintainer sign-off): 247 in 191 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `RA2CRM60H` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, Bullet_Medium=2000, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
@@ -196,12 +196,6 @@ Mixed old-family (Phase B maintainer sign-off): 254 in 193 groups
 - `SkyshieldCannon` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, LightMissile=2000, LightMissilePercentage=1, Chaingun=2000, ChaingunPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1 | → collapse to SmallArms
 - `tkmheavyaaturret` (ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml) | dominant: LightMissile(2000) | LightMissile=2000, LightMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1 | → collapse to LightMissile
 
-### Chaingun, LaserWeapon, MediumMissile, SmallArms (4 weapons)
-- `LunarNaxiDroneLaser` (ContentPacks\RedAlert2Mod\Naxis\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to SmallArms
-- `NaxLaserT` (weapons\redalert2mod.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to SmallArms
-- `NaxiBeetleLaser_elite` (ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to SmallArms
-- `NaxiTank2Laser` (ContentPacks\RedAlert2Mod\SchwarzerMond\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to SmallArms
-
 ### ArrowWeapon, LightChemicalWeapon, LightMissile, SmallArms (2 weapons)
 - `HydraSpit` (ContentPacks\StarCraft\Zerg\yaml\weapons.yaml) | dominant: LightChemicalWeapon(18000) | LightChemicalWeapon=18000, LightChemicalWeaponPercentage=1, LightMissile=18000, LightMissilePercentage=1, SmallArms=18000, SmallArmsPercentage=1, ArrowWeapon=18000, ArrowWeaponPercentage=1, Effect=0, EffectAir=0 | → collapse to LightChemicalWeapon
 - `LeechSpit` (weapons\d2k.yaml) | dominant: LightChemicalWeapon(4000) | LightChemicalWeapon=4000, LightChemicalWeaponPercentage=1, LightMissile=4000, LightMissilePercentage=1, SmallArms=2000, SmallArmsPercentage=1, ArrowWeapon=2000, ArrowWeaponPercentage=1, Effect=0, EffectAir=0 | → collapse to LightChemicalWeapon
@@ -352,11 +346,6 @@ Mixed old-family (Phase B maintainer sign-off): 254 in 193 groups
 - `TSChemsprayUP` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: LightChemicalWeapon(32000) | LightChemicalWeapon=32000, LightChemicalWeaponPercentage=16, MediumChemicalWeapon=32000, MediumChemicalWeaponPercentage=16, HeavyChemicalWeapon=32000, HeavyChemicalWeaponPercentage=16, Cloud=0 | → collapse to LightChemicalWeapon
 - `TSFiendShardUP` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: LightChemicalWeapon(6000) | LightChemicalWeapon=6000, LightChemicalWeaponPercentage=3, MediumChemicalWeapon=6000, MediumChemicalWeaponPercentage=3, HeavyChemicalWeapon=6000, HeavyChemicalWeaponPercentage=3, Cloud=0, 3Eff=0 | → collapse to LightChemicalWeapon
 - `TSVisceroidSprayUP` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: LightChemicalWeapon(10000) | LightChemicalWeapon=10000, LightChemicalWeaponPercentage=5, MediumChemicalWeapon=10000, MediumChemicalWeaponPercentage=5, HeavyChemicalWeapon=10000, HeavyChemicalWeaponPercentage=5, Cloud=0 | → collapse to LightChemicalWeapon
-
-### Chaingun, LaserWeapon, SmallArms (3 weapons)
-- `M16Laser` (ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to SmallArms
-- `laserelitecadregun` (ContentPacks\TiberianSun\Nod\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to SmallArms
-- `td_nod_minigunner_minigun_laser` (ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to SmallArms
 
 ### HeavyCannon, MediumChemicalWeapon, MediumFlameWeapon (3 weapons)
 - `CabalCommandoPlasma` (ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml) | dominant: HeavyCannon(50000) | HeavyCannon=50000, HeavyCannonPercentage=25, MediumFlameWeapon=50000, MediumFlameWeaponPercentage=25, MediumChemicalWeapon=50000, MediumChemicalWeaponPercentage=25, Effect=0 | → collapse to HeavyCannon

@@ -19,6 +19,7 @@ def weapon(**overrides):
         "invalid_target_damage": (("wall", 1000),),
         "relationship_stat_damage": ((('Enemy', True, 'Ground'), 1000),),
         "physical_state_bindings": (),
+        "percentage_warheads": (),
         "Range": "5000",
         "ReloadDelay": "25",
         "Burst": None,
@@ -81,6 +82,14 @@ class ReviewBatchDiffTests(unittest.TestCase):
         changed, _, _ = review.compare({"Gun": before}, {"Gun": after})
 
         self.assertIn("physical_state_bindings", {finding[0] for finding in changed["Gun"]})
+
+    def test_percentage_profile_change_is_detected_even_when_raw_hp_matches(self):
+        before = weapon(percentage_warheads=(("AreaDamagePercentage", (("Spread", "75", ()),)),))
+        after = weapon(percentage_warheads=(("AreaDamagePercentage", ()),))
+
+        changed, _, _ = review.compare({"Gun": before}, {"Gun": after})
+
+        self.assertIn("percentage_warheads", {finding[0] for finding in changed["Gun"]})
 
     def test_omitted_physical_state_scale_is_disabled(self):
         omitted = Node("Warhead@Test", "AreaDamage", [Node("PhysicalStateName", "Temperature")])
