@@ -29,7 +29,7 @@
   old-key overrides for later proposed-diff review.
 - Verification passes 412 tests (11 optional spreadsheet tests skipped), all 32 balance ledgers,
   generator, empty-warhead, orphan-key, physical-state, and dangling-inheritance checks. A
-  controlled pinned-engine launch stayed alive and responsive for 25 seconds with no exception
+  controlled pinned-engine launch stayed alive and responsive for 105 seconds with no exception
   or crash line, then its exact test process was stopped. Pricing, runtime source, the parked
   percentage runtime change, and the engine pin remain outside this work.
 
