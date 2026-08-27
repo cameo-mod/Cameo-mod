@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-27
-Total concrete weapons on old families: 260
+Total concrete weapons on old families: 257
 Single old-family with new inherits (Phase B completion): 0
 Pure single old-family (mechanical Phase A candidates): 3
-Mixed old-family (Phase B maintainer sign-off): 257 in 195 groups
+Mixed old-family (Phase B maintainer sign-off): 254 in 193 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `RA2CRM60H` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, Bullet_Medium=2000, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
@@ -157,9 +157,6 @@ Mixed old-family (Phase B maintainer sign-off): 257 in 195 groups
 ### FlakWeapon, HeavyBomb, LightChemicalWeapon, MediumMissile, TankDestroyerCannon (1 weapons)
 - `ixian_airdrone` (weapons\d2k.yaml) | dominant: TankDestroyerCannon(2000) | TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, LightChemicalWeapon=2000, LightChemicalWeaponPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, HeavyBomb=2000, HeavyBombPercentage=1, MissileAP_Heavy=2000, Shrapnel=0 | → collapse to TankDestroyerCannon
 
-### FlakWeapon, HeavyCannon, LightMissile, RailgunWeapon, TankDestroyerCannon (1 weapons)
-- `DragunovSniper` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | dominant: TankDestroyerCannon(80000) | TankDestroyerCannon=80000, TankDestroyerCannonPercentage=4, RailgunWeapon=80000, RailgunWeaponPercentage=4, LightMissile=80000, LightMissilePercentage=4, HeavyCannon=80000, HeavyCannonPercentage=4, FlakWeapon=80000, FlakWeaponPercentage=4 | → collapse to TankDestroyerCannon
-
 ### FlakWeapon, MagicWeapon, MediumMissile, ShrapnelWeapon, TeslaChargedWeapon (1 weapons)
 - `Future_MultiMissile_Sigma` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | dominant: EMPUnit(25000) | TeslaChargedWeapon=10000, TeslaChargedExtraDamage=5000, TeslaChargedWeaponPercentage=5, MagicWeapon=10000, MagicWeaponPercentage=5, FlakWeapon=10000, FlakWeaponPercentage=5, ShrapnelWeapon=10000, ShrapnelWeaponFriendlyFire=5000, ShrapnelWeaponPercentage=5, MediumMissile=10000, MediumMissilePercentage=5, EMPUnit=25000, Effect=0 | → collapse to EMPUnit
 
@@ -237,9 +234,6 @@ Mixed old-family (Phase B maintainer sign-off): 257 in 195 groups
 
 ### ArrowWeapon, MediumChemicalWeapon, SmallArms, SwordWeapon (1 weapons)
 - `MutaliskSpore` (ContentPacks\StarCraft\Zerg\yaml\weapons.yaml) | dominant: SwordWeapon(8000) | SwordWeapon=8000, SwordWeaponFriendlyFire=4000, SwordWeaponPercentage=4, MediumChemicalWeapon=8000, MediumChemicalWeaponPercentage=4, SmallArms=8000, SmallArmsPercentage=4, ArrowWeapon=8000, ArrowWeaponPercentage=4, Effect=0, shrapnel=0 | → collapse to SwordWeapon
-
-### Chaingun, FlakWeapon, Grenade, SmallArms (1 weapons)
-- `GDISniperRifle` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: SmallArms(8000) | SmallArms=8000, SmallArmsPercentage=4, Grenade=8000, GrenadeFriendlyFire=4000, GrenadePercentage=4, FlakWeapon=8000, FlakWeaponPercentage=4, Chaingun=8000, ChaingunPercentage=4, Effect=0 | → collapse to SmallArms
 
 ### Chaingun, FlakWeapon, HeavyAAWeapon, MediumMissile (1 weapons)
 - `autogun_tank` (ContentPacks\D2k\Ordos\yaml\weapons.yaml) | dominant: MissileAP_Heavy(2000) | MissileAP_Heavy=2000, CannonHE_Heavy=2000, HeavyAAWeapon=2000, HeavyAAWeaponPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, Chaingun=2000, ChaingunPercentage=1, Effect=0 | → collapse to MissileAP_Heavy
@@ -523,11 +517,6 @@ Mixed old-family (Phase B maintainer sign-off): 257 in 195 groups
 - `TSHighVelocityTurChem` (weapons\tiberiansun.yaml) | dominant: TankDestroyerCannon(48000) | TankDestroyerCannon=48000, TankDestroyerCannonPercentage=24, LightChemicalWeapon=24000, MediumChemicalWeaponPercentage=12, Cloud=0 | → collapse to TankDestroyerCannon
 - `plymouthSticky` (weapons\outpost2.yaml) | dominant: LightChemicalWeapon(6000) | LightChemicalWeapon=6000, LightChemicalWeaponPercentage=3, TankDestroyerCannon=6000, TankDestroyerCannonPercentage=3, stickyfoam=0, snared=0, Effect=0 | → collapse to LightChemicalWeapon
 
-### Chaingun, SniperWeapon (3 weapons)
-- `CommandoM16` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: SniperWeapon(4000) | SniperWeapon=4000, SniperWeaponExtraDamage=4000, SniperWeaponPercentage=2, Chaingun=4000, ChaingunPercentage=2 | → collapse to SniperWeapon
-- `CommandoSniper` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: SniperWeapon(20000) | SniperWeapon=20000, SniperWeaponExtraDamage=20000, SniperWeaponPercentage=10, Chaingun=20000, ChaingunPercentage=10, Effect=0 | → collapse to SniperWeapon
-- `RA2FreedomAK47` (ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml) | dominant: CannonHE_Heavy(6000) | CannonHE_Heavy=6000, Chaingun=6000, ChaingunPercentage=3, SniperWeapon=6000, SniperWeaponExtraDamage=6000, SniperWeaponPercentage=3 | → collapse to CannonHE_Heavy
-
 ### LaserWeapon, RailgunWeapon (3 weapons)
 - `RA2CosmonautLaser` (ContentPacks\RedAlert2\Yuri\yaml\weapons.yaml) | dominant: RailgunWeapon(2000) | LightMissile=0, LightMissilePercentage=0, Bullet_Light=0, Bullet_Light_Percentage=0, FlakWeapon=0, FlakWeaponPercentage=0, Bullet_Medium=0, RailgunWeapon=2000, RailgunWeaponPercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1, Smudge=0 | → collapse to RailgunWeapon
 - `SteelAirTurret` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | dominant: LaserWeapon(24000) | LaserWeapon=24000, LaserWeaponPercentage=12, RailgunWeapon=24000, RailgunWeaponPercentage=12, Effect=0 | → collapse to LaserWeapon
@@ -542,6 +531,10 @@ Mixed old-family (Phase B maintainer sign-off): 257 in 195 groups
 - `AsianPulverizerMechaGatling` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | dominant: MediumChemicalWeapon(2000) | MediumChemicalWeapon=2000, MediumChemicalWeaponPercentage=1, MediumMissile=2000, MediumMissilePercentage=1 | → collapse to MediumChemicalWeapon
 - `DeviatorMissile` (ContentPacks\D2k\Ordos\yaml\weapons.yaml) | dominant: MediumChemicalWeapon(10000) | MediumChemicalWeapon=10000, MediumChemicalWeaponPercentage=5, CannonHE_Heavy=10000, MediumMissile=10000, MediumMissilePercentage=5, MissileAP_Heavy=10000, Effect=0, OwnerChange=0, Concrete=1000 | → collapse to MediumChemicalWeapon
 - `TSStankTibTusk` (ContentPacks\TiberianSun\Nod\yaml\weapons.yaml) | dominant: MediumMissile(10000) | MediumMissile=10000, MediumMissilePercentage=5, MediumChemicalWeapon=10000, MediumChemicalWeaponPercentage=5, CannonHE_Medium=10000, MediumCannonFriendlyFire=5000 | → collapse to MediumMissile
+
+### Chaingun, SniperWeapon (2 weapons)
+- `CommandoM16` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: SniperWeapon(4000) | SniperWeapon=4000, SniperWeaponExtraDamage=4000, SniperWeaponPercentage=2, Chaingun=4000, ChaingunPercentage=2 | → collapse to SniperWeapon
+- `RA2FreedomAK47` (ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml) | dominant: CannonHE_Heavy(6000) | CannonHE_Heavy=6000, Chaingun=6000, ChaingunPercentage=3, SniperWeapon=6000, SniperWeaponExtraDamage=6000, SniperWeaponPercentage=3 | → collapse to CannonHE_Heavy
 
 ### Grenade, MediumChemicalWeapon (2 weapons)
 - `FutureMechPlasma` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | dominant: Grenade(10000) | Grenade=10000, GrenadeFriendlyFire=5000, GrenadePercentage=5, MediumChemicalWeapon=10000, MediumChemicalWeaponPercentage=5, CannonHE_Heavy=10000, Effect=0 | → collapse to Grenade

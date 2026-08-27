@@ -3126,45 +3126,49 @@
        {
         "damage": "20000",
         "falloff": "100, 0",
-        "spread": "40",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
+        "spread": "1",
+        "tag": "Bullet_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "20000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "falloff": null,
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperChaingun",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7750",
       "reloaddelay": "100",
       "slot": "Armament@ra1_allies_alliedsniper",
       "versus_templates": [
+       "^Warhead_Bullet_Heavy",
        "^SniperWeapon",
-       "^Chaingun"
+       "^Chaingun",
+       "^SniperBulletHeavyCompatibility"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Heavy"
+      ],
       "weapon": "CommandoSniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -3315,45 +3319,49 @@
        {
         "damage": "20000",
         "falloff": "100, 0",
-        "spread": "40",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
+        "spread": "1",
+        "tag": "Bullet_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
-        "falloff": "100, 75, 50, 25, 0",
-        "spread": "5",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "SniperWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "20000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "10",
-        "falloff": null,
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperChaingun",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "7750",
       "reloaddelay": "100",
       "slot": "Armament@SniperGARRISONED",
       "versus_templates": [
+       "^Warhead_Bullet_Heavy",
        "^SniperWeapon",
-       "^Chaingun"
+       "^Chaingun",
+       "^SniperBulletHeavyCompatibility"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Heavy"
+      ],
       "weapon": "CommandoSniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3584,166 +3592,174 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Bullet_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
-        "falloff": null,
-        "spread": "50",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "125",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperFlak",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperSmallArms",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperChaingun",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperGrenadeFriendlyFire",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8655",
       "reloaddelay": "75",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_Bullet_Heavy",
        "^SmallArms",
        "^Grenade",
        "^FlakWeapon",
-       "^Chaingun"
+       "^Chaingun",
+       "^SniperBulletHeavyCompatibility"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Heavy"
+      ],
       "weapon": "GDISniperRifle",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Bullet_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
-        "falloff": null,
-        "spread": "50",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "GrenadePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "125",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperFlak",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperSmallArms",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperChaingun",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperGrenadeFriendlyFire",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "8655",
       "reloaddelay": "75",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_Bullet_Heavy",
        "^SmallArms",
        "^Grenade",
        "^FlakWeapon",
-       "^Chaingun"
+       "^Chaingun",
+       "^SniperBulletHeavyCompatibility"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Heavy"
+      ],
       "weapon": "GDISniperRifle",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -1,5 +1,5 @@
 {
-  "roots": 260,
+  "roots": 257,
   "weapons": [
     {
       "bucket": "human decision required",
@@ -13679,7 +13679,7 @@
         "family": "Concussion",
         "reason": "legacy score Concussion=4"
       },
-      "line": 1441,
+      "line": 1532,
       "name_signal": {
         "family": "Concussion",
         "reason": "delivery word 'grenade'"
@@ -13818,7 +13818,7 @@
         "family": "Bullet",
         "reason": "legacy score Bullet=3"
       },
-      "line": 1469,
+      "line": 1560,
       "name_signal": {
         "family": null,
         "reason": ""
@@ -13907,147 +13907,6 @@
       "reasons": [],
       "valid_targets": "Ground, Water, Air",
       "weapon": "CommandoM16"
-    },
-    {
-      "bucket": "human decision required",
-      "candidate_family": null,
-      "canonical_templates": [],
-      "descendant_old_flat_overrides": [],
-      "descendants": [],
-      "file": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "flat_hits": [
-        {
-          "damage": 20000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "SniperWeapon",
-          "targets": "Infantry, Monster, Garrisoned",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 20000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "SniperWeaponExtraDamage",
-          "targets": "Infantry, Monster, Garrisoned",
-          "type": "OpenToppedDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 20000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "Chaingun",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        }
-      ],
-      "legacy_signal": {
-        "family": "Bullet",
-        "reason": "legacy score Bullet=3"
-      },
-      "line": 1378,
-      "name_signal": {
-        "family": "Sniper",
-        "reason": "family word 'sniper'"
-      },
-      "old_families": [
-        "^Chaingun",
-        "^SniperWeapon"
-      ],
-      "percentage_hits": [
-        {
-          "damage": 10,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 12,
-            "Concrete": 16,
-            "Fighter": 14,
-            "Flak": 36,
-            "Heavy": 24,
-            "Helicopter": 10,
-            "Heroic": 32,
-            "Light": 28,
-            "Medium": 26,
-            "None": 38,
-            "Plate": 34,
-            "Scout": 30,
-            "Shield": 40,
-            "Spaceship": 8,
-            "Steel": 18,
-            "Superheavy": 22,
-            "Wood": 20
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 10,
-          "scale": null,
-          "tag": "SniperWeaponPercentage",
-          "targets": "Infantry, Monster, Garrisoned",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 10,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 12,
-            "Concrete": 11,
-            "Fighter": 15,
-            "Flak": 19,
-            "Heavy": 7,
-            "Helicopter": 9,
-            "Heroic": 17,
-            "Light": 13,
-            "Medium": 10,
-            "None": 20,
-            "Plate": 18,
-            "Scout": 16,
-            "Shield": 25,
-            "Spaceship": 6,
-            "Steel": 8,
-            "Superheavy": 5,
-            "Wood": 14
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 10,
-          "scale": null,
-          "tag": "ChaingunPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        }
-      ],
-      "projectile": "Bullet",
-      "reasons": [
-        "name and legacy signals disagree"
-      ],
-      "valid_targets": "Ground, Water, Air",
-      "weapon": "CommandoSniper"
     },
     {
       "bucket": "human decision required",
@@ -15858,297 +15717,6 @@
       ],
       "valid_targets": "Ground, Water",
       "weapon": "DiabloCannon"
-    },
-    {
-      "bucket": "human decision required",
-      "candidate_family": null,
-      "canonical_templates": [],
-      "descendant_old_flat_overrides": [],
-      "descendants": [],
-      "file": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "flat_hits": [
-        {
-          "damage": 80000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "TankDestroyerCannon",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 80000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "RailgunWeapon",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 1000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "RailgunExtraDamage",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 80000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "LightMissile",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 80000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "HeavyCannon",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 80000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "FlakWeapon",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        }
-      ],
-      "legacy_signal": {
-        "family": null,
-        "reason": "legacy tie: Flak/CannonAP"
-      },
-      "line": 205,
-      "name_signal": {
-        "family": "Sniper",
-        "reason": "family word 'sniper'"
-      },
-      "old_families": [
-        "^FlakWeapon",
-        "^HeavyCannon",
-        "^LightMissile",
-        "^RailgunWeapon",
-        "^TankDestroyerCannon"
-      ],
-      "percentage_hits": [
-        {
-          "damage": 4,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 2,
-            "Concrete": 10,
-            "Fighter": 1,
-            "Flak": 7,
-            "Heavy": 15,
-            "Helicopter": 3,
-            "Heroic": 5,
-            "Light": 13,
-            "Medium": 14,
-            "None": 6,
-            "Plate": 8,
-            "Scout": 12,
-            "Shield": 17,
-            "Spaceship": 4,
-            "Steel": 11,
-            "Superheavy": 16,
-            "Wood": 9
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 4,
-          "scale": null,
-          "tag": "TankDestroyerCannonPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 4,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 11,
-            "Concrete": 15,
-            "Fighter": 10,
-            "Flak": 18,
-            "Heavy": 24,
-            "Helicopter": 12,
-            "Heroic": 20,
-            "Light": 22,
-            "Medium": 23,
-            "None": 17,
-            "Plate": 19,
-            "REFLECTOR": 50,
-            "Scout": 21,
-            "Shield": 35,
-            "Spaceship": 13,
-            "Steel": 16,
-            "Superheavy": 25,
-            "Wood": 14
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 4,
-          "scale": null,
-          "tag": "RailgunWeaponPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 4,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 10,
-            "Concrete": 9,
-            "Fighter": 7,
-            "Flak": 3,
-            "Heavy": 14,
-            "Helicopter": 13,
-            "Heroic": 1,
-            "Light": 8,
-            "Medium": 11,
-            "None": 2,
-            "Plate": 4,
-            "Scout": 5,
-            "Shield": 17,
-            "Spaceship": 15,
-            "Steel": 12,
-            "Superheavy": 16,
-            "Wood": 6
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 4,
-          "scale": null,
-          "tag": "LightMissilePercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 4,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 12,
-            "Concrete": 22,
-            "Fighter": 13,
-            "Flak": 16,
-            "Heavy": 19,
-            "Helicopter": 11,
-            "Heroic": 14,
-            "Light": 23,
-            "Medium": 21,
-            "None": 18,
-            "Plate": 15,
-            "Scout": 25,
-            "Spaceship": 10,
-            "Steel": 20,
-            "Superheavy": 17,
-            "Wood": 24
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 4,
-          "scale": null,
-          "tag": "HeavyCannonPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 4,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 19,
-            "Concrete": 6,
-            "Fighter": 20,
-            "Flak": 15,
-            "Heavy": 9,
-            "Helicopter": 18,
-            "Heroic": 13,
-            "Light": 11,
-            "Medium": 10,
-            "None": 16,
-            "Plate": 14,
-            "Scout": 12,
-            "Shield": 25,
-            "Spaceship": 17,
-            "Steel": 5,
-            "Superheavy": 8,
-            "Wood": 7
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 4,
-          "scale": null,
-          "tag": "FlakWeaponPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        }
-      ],
-      "projectile": "Bullet",
-      "reasons": [
-        "legacy tie: Flak/CannonAP"
-      ],
-      "valid_targets": "Ground, Water, Air",
-      "weapon": "DragunovSniper"
     },
     {
       "bucket": "human decision required",
@@ -18061,7 +17629,7 @@
         "family": "Nuclear",
         "reason": "legacy score Nuclear=5"
       },
-      "line": 1537,
+      "line": 1628,
       "name_signal": {
         "family": "Flame",
         "reason": "delivery word 'fire'"
@@ -20565,7 +20133,7 @@
         "family": "Bullet",
         "reason": "legacy score Bullet=6"
       },
-      "line": 1254,
+      "line": 1300,
       "name_signal": {
         "family": null,
         "reason": ""
@@ -20806,247 +20374,6 @@
       "reasons": [],
       "valid_targets": "Ground, Water, Air",
       "weapon": "GDIRigPhalanx"
-    },
-    {
-      "bucket": "human decision required",
-      "candidate_family": null,
-      "canonical_templates": [],
-      "descendant_old_flat_overrides": [],
-      "descendants": [],
-      "file": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "flat_hits": [
-        {
-          "damage": 8000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "BulletImmune",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "SmallArms",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 8000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Neutral, Enemy",
-          "tag": "Grenade",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 4000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally",
-          "tag": "GrenadeFriendlyFire",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 8000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "FlakWeapon",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        },
-        {
-          "damage": 8000,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "tag": "Chaingun",
-          "targets": "Ground, Water, Air",
-          "type": "SpreadDamage",
-          "updates_statistics": true
-        }
-      ],
-      "legacy_signal": {
-        "family": "Bullet",
-        "reason": "legacy score Bullet=6"
-      },
-      "line": 876,
-      "name_signal": {
-        "family": "Sniper",
-        "reason": "family word 'sniper'"
-      },
-      "old_families": [
-        "^Chaingun",
-        "^FlakWeapon",
-        "^Grenade",
-        "^SmallArms"
-      ],
-      "percentage_hits": [
-        {
-          "damage": 4,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 8,
-            "Concrete": 4,
-            "Fighter": 11,
-            "Flak": 15,
-            "Heavy": 3,
-            "Helicopter": 5,
-            "Heroic": 13,
-            "Light": 9,
-            "Medium": 6,
-            "None": 16,
-            "Plate": 14,
-            "Scout": 12,
-            "Shield": 17,
-            "Spaceship": 2,
-            "Steel": 7,
-            "Superheavy": 1,
-            "Wood": 10
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 4,
-          "scale": null,
-          "tag": "SmallArmsPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 4,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 3,
-            "Concrete": 13,
-            "Fighter": 4,
-            "Flak": 7,
-            "Heavy": 10,
-            "Helicopter": 2,
-            "Heroic": 5,
-            "Light": 14,
-            "Medium": 12,
-            "None": 9,
-            "Plate": 6,
-            "Scout": 16,
-            "Shield": 17,
-            "Spaceship": 1,
-            "Steel": 11,
-            "Superheavy": 8,
-            "Wood": 15
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 4,
-          "scale": null,
-          "tag": "GrenadePercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 4,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 19,
-            "Concrete": 6,
-            "Fighter": 20,
-            "Flak": 15,
-            "Heavy": 9,
-            "Helicopter": 18,
-            "Heroic": 13,
-            "Light": 11,
-            "Medium": 10,
-            "None": 16,
-            "Plate": 14,
-            "Scout": 12,
-            "Shield": 25,
-            "Spaceship": 17,
-            "Steel": 5,
-            "Superheavy": 8,
-            "Wood": 7
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 4,
-          "scale": null,
-          "tag": "FlakWeaponPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        },
-        {
-          "damage": 4,
-          "denominator": 100,
-          "friendly_damage": "100",
-          "friendly_spread": "100",
-          "invalid_targets": "",
-          "kind": "pct_standalone",
-          "percentage_spread": null,
-          "percentage_versus": {
-            "Bomber": 12,
-            "Concrete": 11,
-            "Fighter": 15,
-            "Flak": 19,
-            "Heavy": 7,
-            "Helicopter": 9,
-            "Heroic": 17,
-            "Light": 13,
-            "Medium": 10,
-            "None": 20,
-            "Plate": 18,
-            "Scout": 16,
-            "Shield": 25,
-            "Spaceship": 6,
-            "Steel": 8,
-            "Superheavy": 5,
-            "Wood": 14
-          },
-          "physical_states": [],
-          "relationships": "Ally, Neutral, Enemy",
-          "runtime_overflow": false,
-          "runtime_units": 4,
-          "scale": null,
-          "tag": "ChaingunPercentage",
-          "targets": "Ground, Water, Air",
-          "type": "AreaDamagePercentage",
-          "updates_statistics": false
-        }
-      ],
-      "projectile": "Bullet",
-      "reasons": [
-        "name and legacy signals disagree"
-      ],
-      "valid_targets": "Ground, Water, Air",
-      "weapon": "GDISniperRifle"
     },
     {
       "bucket": "human decision required",
@@ -27664,7 +26991,7 @@
         "family": null,
         "reason": "legacy tie: Concussion/Chemical/Flame"
       },
-      "line": 985,
+      "line": 1024,
       "name_signal": {
         "family": "Demolition",
         "reason": "delivery word 'bomb'"
@@ -58017,7 +57344,7 @@
         "family": "Bullet",
         "reason": "legacy score Bullet=6"
       },
-      "line": 1003,
+      "line": 1049,
       "name_signal": {
         "family": "Bullet",
         "reason": "delivery word 'shotgun'"
@@ -68474,7 +67801,7 @@
         "family": "Tesla",
         "reason": "legacy score Tesla=4"
       },
-      "line": 800,
+      "line": 839,
       "name_signal": {
         "family": "Waveforce",
         "reason": "family word 'waveforce'"
@@ -75013,7 +74340,7 @@
         "family": "CannonHE",
         "reason": "legacy score CannonHE=4"
       },
-      "line": 891,
+      "line": 930,
       "name_signal": {
         "family": null,
         "reason": ""
@@ -75448,7 +74775,7 @@
         "family": "Magic",
         "reason": "legacy score Magic=4"
       },
-      "line": 2103,
+      "line": 2142,
       "name_signal": {
         "family": null,
         "reason": ""

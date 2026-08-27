@@ -1,5 +1,22 @@
 # Development Log
 
+## 2026-08-27 — Remaining direct-hit sniper follow-up
+
+- Consolidated the GDI heavy sniper, Havoc's commando sniper, and Soviet Dragunov away from
+  their retired flat-damage stacks. The GDI and commando rifles now use the infantry-favoured
+  heavy Bullet profile; Dragunov keeps a heavy anti-armour CannonAP profile and air targeting.
+- Every spatial damage path now uses `Spread: 1` and `Falloff: 100, 0`, including percentage,
+  open-topped passenger, friendly-fire, and Dragunov shield-chip damage. This makes all three
+  weapons direct-hit only instead of allowing inherited splash.
+- Dragunov's folded flat damage is deliberately 200000: it still removes about 84% of a baseline
+  Mammoth Tank's health on a centre hit, but no longer one-shots it and loses the stationary
+  return-fire duel. A regression test locks the direct-hit rule, tank-focused armour profile,
+  no-one-shot result, and losing duel.
+- The refreshed active survey reports 257 remaining concrete roots: 254 mixed weapons in 193
+  groups and three isolated roots. The conservative classifier leaves 202 roots for human
+  decisions, with 25 corroborated and 30 legacy-only suggestions. No prices, pricing rules,
+  runtime source, parked percentage-runtime change, or engine pin are included.
+
 ## 2026-08-27 — Named heavy-laser bulk consolidation
 
 - Consolidated six laser roots and eight resolved weapons onto the standard heavy Laser profile:

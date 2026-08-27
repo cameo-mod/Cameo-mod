@@ -7555,100 +7555,75 @@
      {
       "damage_warheads": [
        {
-        "damage": "80000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
+        "damage": "200000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "CannonAP_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
-        "falloff": null,
-        "spread": "75",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "TankDestroyerCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "80000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "RailgunWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "125",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "1000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "RailgunExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "80000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "LightMissilePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "80000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "225",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "HeavyCannonPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "80000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "125",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "1000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "LegacyRailgunExtraDamage",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5804",
       "reloaddelay": "85",
       "requires": "ifv-flak",
       "slot": "Armament@flak",
       "versus_templates": [
+       "^Warhead_CannonAP_Heavy",
        "^TankDestroyerCannon",
        "^RailgunWeapon",
        "^LightMissile",
        "^HeavyCannon",
        "^FlakWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonAP_Heavy"
+      ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
