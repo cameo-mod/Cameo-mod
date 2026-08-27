@@ -46,7 +46,11 @@ FAMILY_FLAT_WARHEADS = {
     family: inherited_flat_warhead_keys(family) for family in OLD_FAMILIES
 }
 RE_INHERITS_OLD = re.compile(r"^\s*Inherits(?:@\w+)?\s*:\s*\^\w+")
-RE_TOPNAME = re.compile(r"^(\w+):\s*$")
+# MiniYAML template names begin with ``^`` and concrete weapon names may contain
+# punctuation.  ``\w+`` silently merged a concrete block with the following
+# template block, attributing that template's retired inherits to the concrete
+# weapon above it.
+RE_TOPNAME = re.compile(r"^([^\s:#][^:]*):\s*$")
 RE_WARHEAD = re.compile(r"^\s*Warhead@(\w+)\s*:\s*(\S*)")
 RE_DAMAGE = re.compile(r"^\s*Damage\s*:\s*(\d+)")
 

@@ -1,5 +1,38 @@
 # Development Log
 
+## 2026-08-27 — Bulk shotgun and sniper profile consolidation
+
+- Consolidated four shotgun roots (seven resolved weapons) onto the standard medium CannonHE
+  damage profile. Four sniper roots (eleven resolved weapons) now use the infantry-favoured
+  standard heavy Bullet profile while retaining reduced damage against vehicle armor.
+- Separate compatibility slices preserve every old damage application instead of combining
+  equal hits. This keeps per-hit integer rounding, event counts, friendly-fire splits, score
+  accounting, `BulletImmune` exclusions, and every independently rounded percentage path intact.
+  Armour-piercing and lockdown sniper descendants retain their extra bullet hits, relationship
+  restrictions, and electrical damage types.
+- The intentional gameplay change is the selected standard CannonHE profile for shotguns and
+  heavy Bullet armor profile for snipers replacing the retired flat profiles. Every resolved
+  sniper damage warhead uses `Spread: 1` with `Falloff: 100, 0`, removing practical splash.
+  Projectiles, impact effects, reports, concrete damage, cadence, targets, damage strengths,
+  relationship restrictions, and damage types are unchanged.
+- Independent reviewers approved the repaired 18-weapon closure. The whole-tree comparator
+  preserves guarded flat and percentage behavior on all 2345 resolved weapons and reports only
+  those 18 intended profile changes.
+- Repaired two survey blind spots: its active central-file list omitted D2K, StarCraft, and
+  Outpost 2 while retaining inactive files, and its top-level-name parser failed to recognize
+  `^Template` blocks. The corrected survey reports 266 concrete roots after this batch (274 on
+  the same corrected basis before it): 263 mixed weapons in 201 groups and three isolated roots.
+  A new machine-readable classification report conservatively leaves 205 roots for human
+  decisions while prioritizing 31 roots where name and legacy evidence agree and 30 with a
+  legacy-only suggestion. It preserves full family-and-tier identities and records flat and
+  percentage hit inventories, physical-state bindings, descendant closure, and descendant
+  old-key overrides for later proposed-diff review.
+- Verification passes 412 tests (11 optional spreadsheet tests skipped), all 32 balance ledgers,
+  generator, empty-warhead, orphan-key, physical-state, and dangling-inheritance checks. A
+  controlled pinned-engine launch stayed alive and responsive for 105 seconds with no exception
+  or crash line, then its exact test process was stopped. Pricing, runtime source, the parked
+  percentage runtime change, and the engine pin remain outside this work.
+
 ## 2026-08-27 — Final low-risk single-family weapon cleanup
 
 - Consolidated four isolated active weapons away from their last retired flat-damage family:
@@ -194,7 +227,7 @@
 ## 2026-08-26 — W24 A13: active sniper family consolidated
 
 - Collapsed `AsianSniper`, `GhostSniper`, `SpecterSniper`, and `VonSniper` onto
-  their existing `^Warhead_CannonHE_Heavy` damage family. Their AP, bunker, and
+  `^Warhead_Bullet_Heavy`. Their AP, bunker, and
   lockdown children inherit the cleanup, giving eleven resolved definitions in
   the batch.
 - Whole-tree comparison preserves flat and runtime percentage damage on all 2345
@@ -204,9 +237,10 @@
   totals exactly after their sniper components are folded.
 - Resolver comparisons preserve cadence, range, reports, bullet projectiles and
   contrails, ground/water/air impacts, shield duration and sounds, and 25 concrete
-  damage. The standard heavy CannonHE armor and blast profile replaces the five
-  simultaneous legacy CannonHE/Missile/Flak/Bullet profiles; this is the intended
-  classification consequence.
+  damage. The standard heavy Bullet armor profile replaces the five simultaneous legacy
+  CannonHE/Missile/Flak/Bullet profiles. All resolved spatial damage warheads use a
+  one-world-unit impact footprint, removing practical splash while keeping positional
+  projectile hits functional; this is the intended classification consequence.
 - Survey debt falls 271 -> 267 weapons (259 -> 255 mixed, 203 -> 202 groups), and
   the broadcast ratchet tightens 912 -> 907.
 - Verification: 394 tests passed (11 optional spreadsheet tests skipped); 32 ledgers

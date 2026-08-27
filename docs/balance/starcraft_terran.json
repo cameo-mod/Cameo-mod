@@ -3120,106 +3120,106 @@
       "damage_warheads": [
        {
         "damage": "20000",
-        "falloff": "100, 55, 0",
-        "spread": "116",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
        },
        {
         "damage": "20000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Tesla_Super_ExtraDamage",
         "type": "SpreadDamage"
        },
        {
         "damage": "20000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Bullet_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "20000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "falloff": null,
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "falloff": null,
-        "spread": "50",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "20000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "falloff": null,
-        "spread": "125",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "falloff": null,
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
-        "falloff": null,
-        "spread": null,
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperMediumMissile",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperFlak",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperSmallArms",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperChaingun",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "20000",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": null,
-        "spread": null,
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "20000",
-        "falloff": null,
-        "spread": null,
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "2",
-        "falloff": null,
-        "spread": null,
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -3238,7 +3238,7 @@
       ],
       "warheads": [
        "^Warhead_Tesla_Super",
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Bullet_Heavy"
       ],
       "weapon": "GhostSniperLockdown",
       "weapon_class_source": "template"
@@ -3247,66 +3247,66 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Bullet_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "falloff": null,
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "falloff": null,
-        "spread": "50",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "falloff": null,
-        "spread": "125",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "falloff": null,
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperMediumMissile",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperFlak",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperSmallArms",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperChaingun",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -3316,16 +3316,17 @@
       "reloaddelay": "22",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^MediumMissile",
        "^SmallArms",
        "^FlakWeapon",
-       "^Chaingun"
+       "^Chaingun",
+       "^SniperBulletHeavyCompatibility"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Bullet_Heavy"
       ],
       "weapon": "GhostSniper",
       "weapon_class_source": "template"
@@ -3335,66 +3336,66 @@
       "damage_warheads": [
        {
         "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Bullet_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "falloff": null,
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "falloff": null,
-        "spread": "50",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "falloff": null,
-        "spread": "125",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
-        "falloff": null,
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperMediumMissile",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperFlak",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperSmallArms",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperChaingun",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -3404,16 +3405,17 @@
       "reloaddelay": "22",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^MediumMissile",
        "^SmallArms",
        "^FlakWeapon",
-       "^Chaingun"
+       "^Chaingun",
+       "^SniperBulletHeavyCompatibility"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Bullet_Heavy"
       ],
       "weapon": "GhostSniper",
       "weapon_class_source": "template"
@@ -4885,106 +4887,106 @@
       "damage_warheads": [
        {
         "damage": "40000",
-        "falloff": "100, 55, 0",
-        "spread": "116",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Tesla_Super",
         "type": "AreaDamage"
        },
        {
         "damage": "40000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Tesla_Super_ExtraDamage",
         "type": "SpreadDamage"
        },
        {
         "damage": "40000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Bullet_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "40000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "falloff": null,
-        "spread": "50",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "40000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
-        "falloff": null,
-        "spread": "125",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "falloff": null,
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "40000",
-        "falloff": null,
-        "spread": null,
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperMediumMissile",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperFlak",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperSmallArms",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperChaingun",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "40000",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Bullet_Light",
         "type": "AreaDamage"
        },
        {
         "damage": "4",
-        "falloff": null,
-        "spread": null,
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Bullet_Light_Percentage",
         "type": "AreaDamagePercentage"
        },
        {
         "damage": "40000",
-        "falloff": null,
-        "spread": null,
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Bullet_Medium",
         "type": "AreaDamage"
        },
        {
         "damage": "4",
-        "falloff": null,
-        "spread": null,
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "Bullet_Medium_Percentage",
         "type": "AreaDamagePercentage"
        }
@@ -5003,7 +5005,7 @@
       ],
       "warheads": [
        "^Warhead_Tesla_Super",
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Bullet_Heavy"
       ],
       "weapon": "SpecterSniperLockdown",
       "weapon_class_source": "template"
@@ -5012,66 +5014,66 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Bullet_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "falloff": null,
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "falloff": null,
-        "spread": "50",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "falloff": null,
-        "spread": "125",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "falloff": null,
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperMediumMissile",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperFlak",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperSmallArms",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperChaingun",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -5081,16 +5083,17 @@
       "reloaddelay": "33",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^MediumMissile",
        "^SmallArms",
        "^FlakWeapon",
-       "^Chaingun"
+       "^Chaingun",
+       "^SniperBulletHeavyCompatibility"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Bullet_Heavy"
       ],
       "weapon": "SpecterSniper",
       "weapon_class_source": "template"
@@ -5100,66 +5103,66 @@
       "damage_warheads": [
        {
         "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "Bullet_Heavy",
         "type": "AreaDamage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "falloff": null,
-        "spread": "200",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "falloff": null,
-        "spread": "50",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "falloff": null,
-        "spread": "125",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
-        "falloff": null,
-        "spread": "100",
+        "falloff": "100, 0",
+        "spread": "1",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperMediumMissile",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperFlak",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperSmallArms",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "1",
+        "tag": "SniperChaingun",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
@@ -5169,16 +5172,17 @@
       "reloaddelay": "33",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^Warhead_CannonHE_Heavy",
+       "^Warhead_Bullet_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
        "^MediumMissile",
        "^SmallArms",
        "^FlakWeapon",
-       "^Chaingun"
+       "^Chaingun",
+       "^SniperBulletHeavyCompatibility"
       ],
       "warheads": [
-       "^Warhead_CannonHE_Heavy"
+       "^Warhead_Bullet_Heavy"
       ],
       "weapon": "SpecterSniper",
       "weapon_class_source": "template"
