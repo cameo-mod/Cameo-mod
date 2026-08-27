@@ -1,5 +1,23 @@
 # Development Log
 
+## 2026-08-27 — MiG missile family consolidation
+
+- Consolidated the active MiG missile root and all ten resolved ground-attack, anti-air,
+  radioactive, incendiary, tesla, and elite variants onto the existing standard medium-missile
+  damage profile.
+- Preserved the original target split: 32000 flat damage on Ground/Ship and 24000 on Water for
+  ground-attack variants, while both anti-air variants retain 32000 Air damage. A compatibility-only
+  8000-point standard-profile slice carries the Ground/Ship difference without entering the
+  generated family library or shared pricing model.
+- Kept the three independently rounded percentage hits and every variant-specific projectile,
+  report, effect, fragment, radiation field, smudge, shield, glow, sound, and concrete behavior.
+- Whole-tree comparison preserves flat and runtime percentage damage at every active/design health
+  value, targeting, cadence, projectiles, and non-damage warheads across all 2345 resolved weapons.
+  Only the selected medium-missile blast profile changes on the ten MiG definitions.
+- The refreshed active survey now reports 273 concrete weapons on retired families: 266 mixed
+  weapons in 202 groups and 7 single-family candidates. Pricing and the parked runtime change remain
+  untouched.
+
 ## 2026-08-26 — retrospective compatibility repair and missile cleanup
 
 - Independent review found that the earlier one-target percentage comparison hid current-runtime

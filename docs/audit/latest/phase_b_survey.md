@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
-Generated: 2026-08-26
-Total concrete weapons on old families: 274
+Generated: 2026-08-27
+Total concrete weapons on old families: 273
 Single old-family with new inherits (Phase B completion): 0
 Pure single old-family (mechanical Phase A candidates): 7
-Mixed old-family (Phase B maintainer sign-off): 267 in 203 groups
+Mixed old-family (Phase B maintainer sign-off): 266 in 202 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `SteelMakoGun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Railgun_Heavy=2000, CannonHE_Medium=2000, Effect=0
@@ -434,9 +434,6 @@ Mixed old-family (Phase B maintainer sign-off): 267 in 203 groups
 
 ### FlakWeapon, Grenade, MediumMissile (1 weapons)
 - `AtreusMG` (ContentPacks\StarCraft\Protoss\yaml\weapons.yaml) | dominant: Grenade(2000) | Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, CannonHE_Heavy=2000, MediumMissile=2000, MediumMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, Bullet_Medium=2000, Effect=0 | → collapse to Grenade
-
-### FlakWeapon, HeavyAAWeapon, HeavyBomb (1 weapons)
-- `MigMissiles` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | dominant: HeavyBomb(8000) | HeavyBomb=8000, HeavyBombPercentage=4, HeavyAAWeapon=8000, HeavyAAWeaponPercentage=4, FlakWeapon=8000, FlakWeaponPercentage=4, MissileAP_Medium=8000 | → collapse to HeavyBomb
 
 ### FlakWeapon, LaserWeapon, TankDestroyerCannon (1 weapons)
 - `BlackHandLaser` (ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml) | dominant: TankDestroyerCannon(48000) | TankDestroyerCannon=48000, TankDestroyerCannonPercentage=4, FlakWeapon=48000, FlakWeaponPercentage=4, LaserWeapon=48000, LaserWeaponPercentage=4 | → collapse to TankDestroyerCannon

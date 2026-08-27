@@ -3740,6 +3740,40 @@ DefuseKit:
 			None: 33
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
+^Compatibility_MissileAP_Medium_GroundShip:
+	Warhead@MissileAP_Medium_GroundShipExtraDamage: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Ship
+		Spread: 64
+		Damage: 2000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+
 ^Warhead_MissileAP_Heavy:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
