@@ -1,5 +1,29 @@
 # Development Log
 
+## 2026-08-27 — Named heavy-laser bulk consolidation
+
+- Consolidated six laser roots and eight resolved weapons onto the standard heavy Laser profile:
+  Black Hand, normal and elite CABAL Hunter-Killers, the Tiberian Sun laser emplacement,
+  Outpost 2 Eden mobile lasers, and the Ordos laser tank.
+- Flat totals, target-specific totals, every independently rounded percentage application,
+  shield-only compatibility chips, cadence, targets, projectiles, effects, reports, and concrete
+  damage are preserved. Black Hand and the Tiberian Sun emplacement retain their lower air total
+  through a ground-and-water-only remainder.
+- The intentional gameplay classification changes are the standard heavy-Laser armor table,
+  tight `Spread: 64` impact shape, half allied damage, Explosion death type, and Temperature meter.
+  The six roots leave the retired-family survey without changing prices, pricing rules, runtime
+  source, the parked percentage runtime fix, or the engine pin.
+- The refreshed active survey reports 260 remaining concrete roots: 257 mixed weapons in 195
+  groups and three isolated roots. The conservative classification report leaves 205 roots for
+  human decisions, with 25 corroborated and 30 legacy-only suggestions. The uniform-stack guard
+  ratchet is lowered from its stale 923 baseline to the measured 898 remaining weapons.
+- Whole-tree comparison preserves main and percentage totals across all 2345 resolved weapons and
+  limits guarded differences to the eight selected laser definitions. Verification passes 415
+  tests (11 optional spreadsheet tests skipped), all 32 balance ledgers, generator, empty-warhead,
+  orphan-key, and physical-state audits. Independent adversarial review found no blocker. A
+  controlled pinned-engine launch stayed alive and responsive for 90 seconds with no exception,
+  fatal, crash, or YAML error line; its exact test process was then stopped.
+
 ## 2026-08-27 — Bulk shotgun and sniper profile consolidation
 
 - Consolidated four shotgun roots (seven resolved weapons) onto the standard medium CannonHE

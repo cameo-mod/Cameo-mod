@@ -153,6 +153,7 @@ TS25mmDep:
 		ValidTargets: Ground, Water
 		Damage: 2000
 TSLaser25mmDep:
+	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits: ^FlakWeapon
 	Inherits@2: ^LaserWeapon
 	Inherits@3: ^TSLaserEffect
@@ -165,18 +166,79 @@ TSLaser25mmDep:
 	ReloadDelay: 8
 	Range: 6679
 	Report: chaingn1.aud
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
-		ValidTargets: Ground, Water
+	TargetActorCenter: false
+	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
+	-Warhead@LaserWeapon:
+	-Warhead@LaserExtraDamage:
+	Warhead@LegacyLaserExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
+		Spread: 300
+		Damage: 600
+		Versus:
+			REFLECTOR: 50
+			Shield: 100
+			None: 1
+			Flak: 1
+			Plate: 1
+			Heroic: 1
+			Superheavy: 1
+			Heavy: 1
+			Medium: 1
+			Light: 1
+			Scout: 1
+			Steel: 1
+			Concrete: 1
+			Wood: 1
+			Fighter: 1
+			Bomber: 1
+			Helicopter: 1
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
 	Warhead@LaserWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		ValidTargets: Ground, Water, Air
+	Warhead@Laser_Heavy:
+		Damage: 2000
+		PercentageScale: 0
+	-Warhead@Laser_Heavy_ExtraDamage:
+	Warhead@LaserHeavyGroundRemainder: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 64
+		Damage: 2000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 56
+			COMPOSITE: 71
+			BLAST: 95
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 294
+			Superheavy: 162
+			Spaceship: 144
+			Concrete: 141
+			Plate: 134
+			Heavy: 124
+			Helicopter: 114
+			Steel: 103
+			Medium: 100
+			Flak: 97
+			Bomber: 88
+			Light: 80
+			Wood: 75
+			None: 70
+			Fighter: 68
+			Scout: 55
+			Heroic: 45
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 75
 
 TS90mm:
 	# ⭐ ANTI-ARMOUR, NOT ANTI-EVERYTHING. Destined 2026-08-22: the tick tank *"should be tanky

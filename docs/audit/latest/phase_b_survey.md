@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-27
-Total concrete weapons on old families: 266
+Total concrete weapons on old families: 260
 Single old-family with new inherits (Phase B completion): 0
 Pure single old-family (mechanical Phase A candidates): 3
-Mixed old-family (Phase B maintainer sign-off): 263 in 201 groups
+Mixed old-family (Phase B maintainer sign-off): 257 in 195 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `RA2CRM60H` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, Bullet_Medium=2000, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
@@ -244,9 +244,6 @@ Mixed old-family (Phase B maintainer sign-off): 263 in 201 groups
 ### Chaingun, FlakWeapon, HeavyAAWeapon, MediumMissile (1 weapons)
 - `autogun_tank` (ContentPacks\D2k\Ordos\yaml\weapons.yaml) | dominant: MissileAP_Heavy(2000) | MissileAP_Heavy=2000, CannonHE_Heavy=2000, HeavyAAWeapon=2000, HeavyAAWeaponPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, Chaingun=2000, ChaingunPercentage=1, Effect=0 | → collapse to MissileAP_Heavy
 
-### Chaingun, FlakWeapon, LaserWeapon, TankDestroyerCannon (1 weapons)
-- `edenMobileLaser` (weapons\outpost2.yaml) | dominant: TankDestroyerCannon(2000) | TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, Chaingun=2000, ChaingunPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to TankDestroyerCannon
-
 ### Chaingun, LightMissile, MediumMissile, SmallArms (1 weapons)
 - `RashidanGun` (ContentPacks\D2k\Ixian\yaml\weapons.yaml) | dominant: LightMissile(2000) | LightMissile=2000, LightMissilePercentage=1, MediumMissile=2000, MediumMissilePercentage=1, SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1 | → collapse to LightMissile
 
@@ -267,9 +264,6 @@ Mixed old-family (Phase B maintainer sign-off): 263 in 201 groups
 
 ### FlakWeapon, HeavyMissile, LightMissile, MediumMissile (1 weapons)
 - `Nike` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: FlakWeapon(4000) | FlakWeapon=4000, FlakWeaponPercentage=2, HeavyMissile=4000, HeavyMissilePercentage=2, MediumMissile=4000, MediumMissilePercentage=2, LightMissile=4000, LightMissilePercentage=2, EffectAir=0 | → collapse to FlakWeapon
-
-### FlakWeapon, LaserWeapon, MediumMissile, RailgunWeapon (1 weapons)
-- `ordos_lasertank` (ContentPacks\D2k\Ordos\yaml\weapons.yaml) | dominant: FlakWeapon(10000) | FlakWeapon=10000, FlakWeaponPercentage=5, MediumMissile=10000, MediumMissilePercentage=5, RailgunWeapon=10000, RailgunWeaponPercentage=5, LaserWeapon=10000, LaserWeaponPercentage=5 | → collapse to FlakWeapon
 
 ### FlakWeapon, LightChemicalWeapon, LightFlameWeapon, ShrapnelWeapon (1 weapons)
 - `wc2mageBlizzard_Projectile` (weapons\warcraft2.yaml) | dominant: ShrapnelWeapon(4000) | ShrapnelWeapon=4000, ShrapnelWeaponFriendlyFire=2000, ShrapnelWeaponPercentage=2, FlakWeapon=4000, FlakWeaponPercentage=2, LightChemicalWeapon=4000, LightChemicalWeaponPercentage=2, LightFlameWeapon=4000, LightFlameWeaponPercentage=2, Effect=0 | → collapse to ShrapnelWeapon
@@ -428,9 +422,6 @@ Mixed old-family (Phase B maintainer sign-off): 263 in 201 groups
 ### FlakWeapon, Grenade, MediumMissile (1 weapons)
 - `AtreusMG` (ContentPacks\StarCraft\Protoss\yaml\weapons.yaml) | dominant: Grenade(2000) | Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, CannonHE_Heavy=2000, MediumMissile=2000, MediumMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, Bullet_Medium=2000, Effect=0 | → collapse to Grenade
 
-### FlakWeapon, LaserWeapon, TankDestroyerCannon (1 weapons)
-- `BlackHandLaser` (ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml) | dominant: TankDestroyerCannon(48000) | TankDestroyerCannon=48000, TankDestroyerCannonPercentage=4, FlakWeapon=48000, FlakWeaponPercentage=4, LaserWeapon=48000, LaserWeaponPercentage=4 | → collapse to TankDestroyerCannon
-
 ### FlakWeapon, LightChemicalWeapon, LightMissile (1 weapons)
 - `TSChemAdatsMissile` (weapons\tiberiansun.yaml) | dominant: LightChemicalWeapon(4000) | LightChemicalWeapon=4000, LightChemicalWeaponPercentage=2, FlakWeapon=4000, FlakWeaponPercentage=2, LightMissile=4000, LightMissilePercentage=2, Cloud=0 | → collapse to LightChemicalWeapon
 
@@ -490,9 +481,6 @@ Mixed old-family (Phase B maintainer sign-off): 263 in 201 groups
 
 ### HeavyFlameWeapon, RailgunWeapon, TeslaWeapon (1 weapons)
 - `ixian_farasha` (ContentPacks\D2k\Ixian\yaml\weapons.yaml) | dominant: TeslaWeapon(2000) | TeslaWeapon=2000, TeslaExtraDamage=1000, TeslaWeaponPercentage=1, HeavyFlameWeapon=2000, HeavyFlameWeaponPercentage=1, RailgunWeapon=2000, RailgunWeaponPercentage=1, Effect=0, Smudge=0 | → collapse to TeslaWeapon
-
-### HeavyMissile, LaserWeapon, RailgunWeapon (1 weapons)
-- `CabalHunterKillerLasers_elite` (ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml) | dominant: LaserWeapon(10000) | LaserWeapon=10000, LaserWeaponPercentage=5, RailgunWeapon=10000, RailgunWeaponPercentage=5, HeavyMissile=10000, HeavyMissilePercentage=5, Effect=0 | → collapse to LaserWeapon
 
 ### HeavyMissile, LightFlameWeapon, MediumChemicalWeapon (1 weapons)
 - `MammothTusk2` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: LightFlameWeapon(16000) | LightFlameWeapon=16000, LightFlameWeaponPercentage=8, MediumChemicalWeapon=16000, MediumChemicalWeaponPercentage=8, HeavyMissile=16000, HeavyMissilePercentage=8, Effect=0 | → collapse to LightFlameWeapon
@@ -591,9 +579,6 @@ Mixed old-family (Phase B maintainer sign-off): 263 in 201 groups
 ### FlakWeapon, HeavyMissile (1 weapons)
 - `AsianMLRS` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | dominant: HeavyMissile(2000) | HeavyMissile=2000, HeavyMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, Demolition_Light=2000, MissileAP_Medium=2000 | → collapse to HeavyMissile
 
-### FlakWeapon, LaserWeapon (1 weapons)
-- `TSLaser25mmDep` (weapons\tiberiansun.yaml) | dominant: FlakWeapon(2000) | FlakWeapon=2000, FlakWeaponPercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to FlakWeapon
-
 ### FlakWeapon, ShrapnelWeapon (1 weapons)
 - `RA2FreedomRocket` (ContentPacks\RedAlert2Mod\Syndicate\yaml\weapons.yaml) | dominant: FlakWeapon(60000) | FlakWeapon=60000, FlakWeaponPercentage=30, ShrapnelWeapon=60000, ShrapnelWeaponFriendlyFire=30000, ShrapnelWeaponPercentage=30, MissileAP_Medium=60000 | → collapse to FlakWeapon
 
@@ -635,9 +620,6 @@ Mixed old-family (Phase B maintainer sign-off): 263 in 201 groups
 
 ### LaserWeapon, MediumFlameWeapon (1 weapons)
 - `TSProton` (ContentPacks\TiberianSun\Nod\yaml\weapons.yaml) | dominant: MediumFlameWeapon(30000) | MediumFlameWeapon=30000, MediumFlameWeaponPercentage=15, LaserWeapon=30000, LaserWeaponPercentage=15, 2Eff=0 | → collapse to MediumFlameWeapon
-
-### LaserWeapon, MediumMissile (1 weapons)
-- `CabalHunterKillerLasers` (ContentPacks\TiberianSun\CABAL\yaml\weapons.yaml) | dominant: MediumMissile(8000) | MediumMissile=8000, MediumMissilePercentage=4, LaserWeapon=8000, LaserWeaponPercentage=4, Effect=0 | → collapse to MediumMissile
 
 ### LaserWeapon, TankDestroyerCannon (1 weapons)
 - `SteelFighterRailgun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | dominant: LaserWeapon(2000) | LaserWeapon=2000, LaserWeaponPercentage=1, Railgun_Heavy=2000, CannonHE_Medium=2000, TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, MissileAP_Light=2000, Effect=0, EffectAir=0 | → collapse to LaserWeapon
