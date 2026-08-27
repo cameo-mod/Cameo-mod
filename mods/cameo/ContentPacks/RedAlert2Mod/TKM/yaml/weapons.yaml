@@ -871,14 +871,14 @@ DronePodTruckLaser:
 		Spread: 3
 		Damage: 1
 VonSniper:
-	Inherits: ^Warhead_CannonHE_Heavy
+	Inherits: ^Warhead_Bullet_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
 	Inherits@4: ^MediumMissile
 	Inherits@5: ^SmallArms
 	Inherits@6: ^FlakWeapon
 	Inherits@7: ^Chaingun
-	Inherits@compat: ^SniperCannonHEHeavyCompatibility
+	Inherits@compat: ^SniperBulletHeavyCompatibility
 	ReloadDelay: 25
 	Range: 7879
 	Report: TGhFir00.aud
@@ -897,21 +897,31 @@ VonSniper:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
-	Warhead@CannonHE_Heavy:
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Bullet_Heavy: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
+		Spread: 1
+		Falloff: 100, 0
 	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
+		Spread: 1
+		Falloff: 100, 0
 	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
+		Spread: 1
+		Falloff: 100, 0
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -929,17 +939,25 @@ VonSniperAP:
 		Damage: 16000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 8
-	Warhead@CannonHE_Heavy: AreaDamage
+	Warhead@Bullet_Heavy: AreaDamage
 		Damage: 16000
 	Warhead@Bullet_Light: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
 		Damage: 16000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
+		Spread: 1
+		Falloff: 100, 0
 		Damage: 8
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 8
 	Warhead@Bullet_Medium: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
 		Damage: 16000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
+		Spread: 1
+		Falloff: 100, 0
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
@@ -957,11 +975,15 @@ VonSniperLockdown:
 		ContrailEndWidth: 150
 		ContrailStartColor: 4488FF
 		ContrailEndColor: 22446688
-	Warhead@Tesla_Super:
+	Warhead@Tesla_Super: AreaDamage
+		Spread: 1
+		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Tesla_Super_ExtraDamage: SpreadDamage
+		Spread: 1
+		Falloff: 100, 0
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16000
@@ -979,7 +1001,7 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@CannonHE_Heavy: AreaDamage
+	Warhead@Bullet_Heavy: AreaDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
