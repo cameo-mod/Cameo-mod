@@ -366,25 +366,11 @@
       "burstdelays": "9",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "500",
-        "tag": "HeavyAAWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -394,25 +380,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "1",
@@ -422,13 +394,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "100, 85, 70, 55, 40, 25, 10",
-        "spread": "70",
-        "tag": "ArrowWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 85, 70, 55, 40, 25, 10",
         "spread": "35",
@@ -436,10 +401,18 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "10000",
+        "falloff": "100, 0",
+        "percentage_denominator": "10000",
+        "spread": "43",
+        "tag": "MissileAP_Light",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "2000",
         "falloff": "100, 0",
         "spread": "43",
-        "tag": "MissileAP_Light",
+        "tag": "MissileAP_Light_WallExcludedExtraDamage",
         "type": "AreaDamage"
        }
       ],
@@ -455,7 +428,8 @@
        "^MediumMissile",
        "^FlakWeapon",
        "^ArrowWeapon",
-       "^RA2LightMissile"
+       "^RA2LightMissile",
+       "^Compatibility_MissileAP_Light_WallExcluded"
       ],
       "warheads": [
        "^Warhead_MissileAP_Light"

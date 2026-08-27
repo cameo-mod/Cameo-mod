@@ -276,6 +276,7 @@ LunarNaxiDroneMissile:
 	Inherits@4: ^FlakWeapon
 	Inherits@5: ^ArrowWeapon
 	Inherits@6: ^RA2LightMissile
+	Inherits@WallExcluded: ^Compatibility_MissileAP_Light_WallExcluded
 	Range: 5760
 	ReloadDelay: 100
 	Burst: 2
@@ -297,50 +298,41 @@ LunarNaxiDroneMissile:
 		Acceleration: 10
 		ContrailStartColor: EEEE00
 		ContrailEndColor: FFFFFF
-	Warhead@HeavyMissile: SpreadDamage
+	Warhead@MissileAP_Light:
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 10000
+		PercentageScale: 2000
+		PercentageDenominator: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MissileAP_Light_WallExcludedExtraDamage:
+		Damage: 2000
+	-Warhead@HeavyMissile:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@FlakWeapon:
+	-Warhead@ArrowWeapon:
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@HeavyAAWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@ArrowWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-	Warhead@MissileAP_Light:
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Effect: CreateEffect
+		ImpactActors: false
 NaxiMP40_elite:
 	Inherits: NaxiMP40
 	Range: 5000

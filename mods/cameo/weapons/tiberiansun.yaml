@@ -264,22 +264,27 @@ TS120mm_bluenuke:
 
 TSHighVelocityTurChem:
 	Inherits: ^TSCannonEffect
-	Inherits@wh: ^Warhead_CannonChem_Light
-	Inherits@fx: ^Effect_CannonAP_Light
+	Inherits@2: ^LightChemicalWeapon
+	Inherits@3: ^TankDestroyerCannon
 	ReloadDelay: 30
 	Range: 9483
 	Projectile: Bullet
 		Speed: 1280
-		Inaccuracy: 150
-	Warhead@CannonChem_Light:
-		Damage: 72000
-		PercentageScale: 10278
-	Warhead@Effect:
-		Explosions: poof
-	Warhead@EffectWater:
-		Explosions: med_splash
-	Warhead@EffectAir:
-		Explosions: big_explosion_air
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 48000
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		Damage: 24
+	Warhead@LightChemicalWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 24000
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		Damage: 12
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 4
 		Duration: 50

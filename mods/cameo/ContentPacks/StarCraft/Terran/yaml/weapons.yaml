@@ -88,22 +88,40 @@ FirebatF:
 	Warhead@Flame_Medium:
 		Damage: 2000
 HarakanF:
-	Inherits@wh: ^Warhead_Flame_Heavy
-	Inherits@proj: ^Projectile_Flame_Medium
-	Inherits@fx: ^Effect_Flame_Medium
+	Inherits: ^HeavyFlameWeapon
+	Inherits@2: ^MediumFlameWeapon
 	ReloadDelay: 47
 	Burst: 20
 	BurstDelays: 2
 	Range: 4185
-	Report: flamer2.aud
 	StartBurstReport: TFBFir00.aud,TFBFir01.aud
 	Projectile: Bullet
 		Speed: 210
 		Image: tsflameall
 		Inaccuracy: 840
 		Palette: tseffect
-	Warhead@Flame_Heavy:
-		Damage: 4000
+	Warhead@HeavyFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 2000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeapon: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		Damage: 2000
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
 
 MatadorFlamer:
 	Inherits: ^Warhead_Flame_Light
@@ -302,30 +320,26 @@ SCTyrAA:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		Acceleration: 10
-	Warhead@Grenade: SpreadDamage
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+	Warhead@MissileAP_Medium:
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 16000
+		PercentageScale: 2500
+		PercentageDenominator: 10000
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@HeavyMissile:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@MissileAP_Medium:
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 ReaperPistols:
 	Inherits@wh: ^Warhead_Sniper_Light
 	Inherits@proj: ^Projectile_Sniper_Light
@@ -977,20 +991,34 @@ GoliathMk2Rockets:
 		Acceleration: 5
 		CloseEnough: 500
 		AllowSnapping: true
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 8000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+	Warhead@MissileAP_Heavy:
+		Damage: 32000
+		PercentageScale: 2500
+		PercentageDenominator: 10000
+	-Warhead@FlakWeapon:
+	-Warhead@LightMissile:
+	-Warhead@MediumMissile:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@LightMissile: SpreadDamage
-		Damage: 8000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 8000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@MissileAP_Heavy:
-		Damage: 8000
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@DuneRock: LeaveSmudge
+		SmudgeType: RockCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@DuneSand: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
+	Warhead@RA2Crater: LeaveSmudge
+		SmudgeType: RA2Crater
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 WraithRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_Heavy_D2K
@@ -1102,20 +1130,23 @@ ValkyrieRockets:
 		AllowSnapping: true
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: 88BBFF44
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
+	Warhead@MissileAP_Heavy:
+		Damage: 8000
+		PercentageScale: 2500
+		PercentageDenominator: 10000
+	-Warhead@FlakWeapon:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyAAWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 2000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@HeavyAAWeapon: SpreadDamage
-		Damage: 2000
 	Warhead@HeavyAAWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@MissileAP_Heavy:
-		Damage: 2000
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 WyvernRockets:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy

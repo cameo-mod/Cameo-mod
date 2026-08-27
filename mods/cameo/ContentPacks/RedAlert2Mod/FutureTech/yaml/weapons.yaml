@@ -715,40 +715,44 @@ Future_MultiMissile_Sigma:
 		ValidTargets: Ground, Ship
 
 FutureEnforcerShotgun:
-	Inherits@wh: ^Warhead_CannonHE_Medium
-	Inherits@proj: ^Projectile_Shell_Medium
-	Inherits@fx: ^Effect_CannonHE_Medium
+	Inherits: ^Warhead_CannonHE_Medium
+	Inherits@2: ^Projectile_Shell_Medium
+	Inherits@3: ^Effect_CannonHE_Medium
+	Inherits@4: ^Grenade
+	Inherits@5: ^ShrapnelWeapon
+	Inherits@6: ^TankDestroyerCannon
+	Inherits@7: ^SmallArms
+	Inherits@8: ^Chaingun
 	ReloadDelay: 40
 	Range: 3000
 	Report: DSDSHTGN.wav
 	ValidTargets: Ground, Water
-	Projectile: Bullet
-		Image: 50CAL
-		ContrailZOffset: 4000
-		ContrailStartColor: EECCAA88
-		ContrailEndColor: 88664422
-		ContrailStartWidth: 40
-		ContrailEndWidth: 80
-		ContrailLength: 8
-		Speed: 4000
-		Inaccuracy: 200
+	Warhead@Grenade: SpreadDamage
+		Damage: 2000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 1000
+	Warhead@GrenadePercentage: AreaDamagePercentage
+		Damage: 1
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
+		Damage: 1
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 2000
+	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
+		Damage: 1
 	Warhead@CannonHE_Medium:
-		Damage: 12000
-	Warhead@Effect:
-		Explosions: piffs
-		ImpactSounds: xplosml2.aud
-		ImpactActors: false
-		ValidTargets: Ground, Ship, Air
-	Warhead@EffectWater:
-		Explosions: water_piffs
-	Warhead@EffectAir:
-		Explosions: big_explosion_air
-	Warhead@ShieldHit:
-		Duration: 4
-	Warhead@Concrete:
-		Damage: 25
-	Warhead@ShieldHitEffect:
-		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		Damage: 2000
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: AreaDamagePercentage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: AreaDamagePercentage
+		Damage: 1
 
 FutureEnforcerShotgun_elite:
 	Inherits: FutureEnforcerShotgun
