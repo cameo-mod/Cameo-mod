@@ -16,6 +16,11 @@
   groups and three isolated roots. The conservative classifier leaves 202 roots for human
   decisions, with 25 corroborated and 30 legacy-only suggestions. No prices, pricing rules,
   runtime source, parked percentage-runtime change, or engine pin are included.
+- Verification passes 417 tests (11 optional spreadsheet tests skipped), all balance-ledger,
+  generator, warhead, inheritance, orphan, physical-state, and classifier checks. Independent
+  adversarial review found no blocker. The first launch caught invalid removals of nonexistent
+  generated slots; after repairing them, the pinned engine stayed alive and responsive for 90
+  seconds with no exception, fatal, crash, or YAML error, then its exact test process was stopped.
 
 ## 2026-08-27 — Named heavy-laser bulk consolidation
 

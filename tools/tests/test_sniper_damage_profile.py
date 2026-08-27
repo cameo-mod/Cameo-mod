@@ -71,7 +71,7 @@ def center_hit_damage(weapon, armor, hp):
     for warhead in weapon.children:
         if not warhead.key.startswith("Warhead") or warhead.value not in FLAT_DAMAGE_TYPES:
             continue
-        if "FriendlyFire" in warhead.key or "ExtraDamage" in warhead.key:
+        if "FriendlyFire" in warhead.key:
             continue
         damage = int_field(warhead, "Damage", 0)
         versus = child(warhead, "Versus")
