@@ -59,7 +59,7 @@ class RemainingWeaponClassificationTests(unittest.TestCase):
 
     def test_percentage_physical_state_map_is_recorded(self):
         rows = {row["weapon"]: row for row in self.rows}
-        weapon = rows["TSHighVelocity2Chem"]
+        weapon = rows["120mm_td"]
         states = [state for hit in weapon["percentage_hits"]
                   for state in hit["physical_states"]]
         self.assertIn({"name": "Corrosion", "scale": "100", "source": "map"}, states)

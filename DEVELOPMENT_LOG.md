@@ -1,5 +1,25 @@
 # Development Log
 
+## 2026-08-28 — Percentage-safe chemical and flame role batch
+
+- Consolidated 13 roots covering 15 resolved weapons: four light chemical cannons, three heavy
+  chemical weapons, two heavy flamethrowers, and four light/medium/heavy chemical missiles.
+- Every legacy percentage application remains separate under its original key and retains its
+  armor table, spread, targets, statistics behavior, and physical-state binding. Flat totals,
+  cadence, projectiles, effects, reports, conditions, and the ADATS ground/water-only damage target
+  are preserved.
+- The deliberate role changes are the standard destination families' armor tables, compact blast
+  shapes, wall interaction, half allied damage, death types, and tiered Corrosion/Temperature feed.
+  The whole-tree comparator limits these findings to the 15 selected resolved definitions.
+- The active survey falls from 250 to 237 roots: 234 mixed weapons in 186 groups and three isolated
+  roots. The classifier now has 16 corroborated, 26 legacy-only, and 195 human-decision roots. The
+  broadcast-debt ratchet falls from 890 to 878. Pricing and the parked runtime fix remain separate.
+- Verification passes 424 tests (11 optional spreadsheet tests skipped), all 32 balance ledgers,
+  generator, inheritance, empty-warhead, orphan-key, and physical-state checks. Independent review
+  caught and repaired eleven invalid nonexistent-warhead deletions before publication. The final
+  controlled pinned-engine launch stayed alive for 90 seconds with no YAML, exception, fatal, or
+  crash log matches; its exact test process was stopped.
+
 ## 2026-08-27 — Remaining rapid/light laser role batch
 
 - Consolidated seven genuine rapid/light laser roots, covering 19 resolved weapons, onto the

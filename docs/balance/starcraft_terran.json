@@ -3467,10 +3467,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
+        "damage": "4000",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -3481,13 +3481,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -3496,28 +3489,31 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "4185",
       "reloaddelay": "47",
       "slot": "Armament@1",
       "versus_templates": [
+       "^Warhead_Flame_Heavy",
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "HarakanF",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "20",
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
+        "damage": "4000",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -3528,13 +3524,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -3543,18 +3532,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "4185",
       "reloaddelay": "47",
       "slot": "Armament@2",
       "versus_templates": [
+       "^Warhead_Flame_Heavy",
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "HarakanF",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3562,10 +3554,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
+        "damage": "4000",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -3576,13 +3568,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -3591,18 +3576,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "4185",
       "reloaddelay": "47",
       "slot": "Armament@GARRISONED1",
       "versus_templates": [
+       "^Warhead_Flame_Heavy",
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "HarakanF",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3610,10 +3598,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
+        "damage": "4000",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -3624,13 +3612,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -3639,18 +3620,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "4185",
       "reloaddelay": "47",
       "slot": "Armament@GARRISONED2",
       "versus_templates": [
+       "^Warhead_Flame_Heavy",
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "HarakanF",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -4019,10 +4019,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "4000",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "60",
+        "tag": "CannonChem_Light",
         "type": "AreaDamage"
        },
        {
@@ -4033,13 +4033,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "75",
@@ -4048,18 +4041,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5142",
       "reloaddelay": "4",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_CannonChem_Light",
        "^LightChemicalWeapon",
        "^TankDestroyerCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonChem_Light"
+      ],
       "weapon": "CabalDissolverSpray",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

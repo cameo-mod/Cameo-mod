@@ -385,6 +385,7 @@ TS120mm_bluenuke:
 		Explosions: magicnuke_med
 
 TSHighVelocityTurChem:
+	Inherits@collapsewh: ^Warhead_CannonChem_Light
 	Inherits: ^TSCannonEffect
 	Inherits@2: ^LightChemicalWeapon
 	Inherits@3: ^TankDestroyerCannon
@@ -392,17 +393,8 @@ TSHighVelocityTurChem:
 	Range: 9483
 	Projectile: Bullet
 		Speed: 1280
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 48000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 24
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 24000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 12
 		PhysicalStateName: Corrosion
@@ -418,6 +410,12 @@ TSHighVelocityTurChem:
 		Weapon: TSSmoke
 		InvalidTargets: Water
 
+	TargetActorCenter: false
+	-Warhead@LightChemicalWeapon:
+	-Warhead@TankDestroyerCannon:
+	Warhead@CannonChem_Light:
+		Damage: 72000
+		PercentageScale: 0
 ^TSArtilleryWeapon:
 	Inherits: ^TSCannon
 	Inherits@glow: ^ImpactGlow
@@ -1080,6 +1078,7 @@ TSRedEye2:
 		ImpactActors: false
 
 TSChemAdatsMissile:
+	Inherits@collapsewh: ^Warhead_MissileChem_Light
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^LightMissile
@@ -1093,27 +1092,13 @@ TSChemAdatsMissile:
 		MaximumLaunchAngle: 75
 		TrailImage: spittrail
 	ValidTargets: Ground, Water
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
-		ValidTargets: Ground, Water
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		ValidTargets: Ground, Water
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 4000
-		ValidTargets: Ground, Water
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-		ValidTargets: Ground, Water
-	Warhead@LightMissile: SpreadDamage
-		Damage: 4000
 		ValidTargets: Ground, Water
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 2
@@ -1129,6 +1114,14 @@ TSChemAdatsMissile:
 		Weapon: TSSmoke
 		InvalidTargets: Water
 
+	TargetActorCenter: false
+	-Warhead@LightChemicalWeapon:
+	-Warhead@FlakWeapon:
+	-Warhead@LightMissile:
+	Warhead@MissileChem_Light:
+		Damage: 12000
+		PercentageScale: 0
+		ValidTargets: Ground, Water
 TSChemAdatsMissileAA:
 	Inherits: TSAdatsMissile_AA
 	Projectile: Missile

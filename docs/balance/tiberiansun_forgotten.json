@@ -2066,10 +2066,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "32000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "96000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "366",
+        "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -2080,25 +2080,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "32000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "16",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "32000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "16",
@@ -2109,20 +2095,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "3183",
       "reloaddelay": "55",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Warhead_Chemical_Heavy",
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Heavy"
+      ],
       "weapon": "TSChemsprayUp",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -2157,10 +2146,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "32000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "96000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "366",
+        "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -2171,25 +2160,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "32000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "16",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "32000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "16",
@@ -2200,20 +2175,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "3183",
       "reloaddelay": "55",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
+       "^Warhead_Chemical_Heavy",
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Heavy"
+      ],
       "weapon": "TSChemsprayUP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -4819,10 +4797,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "18000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "366",
+        "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -4833,25 +4811,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "3",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -4862,20 +4826,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5690",
       "reloaddelay": "36",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Warhead_Chemical_Heavy",
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Heavy"
+      ],
       "weapon": "TSFiendShardUP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -4883,10 +4850,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "18000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "366",
+        "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -4897,25 +4864,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "3",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -4926,20 +4879,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5690",
       "reloaddelay": "36",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
+       "^Warhead_Chemical_Heavy",
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Heavy"
+      ],
       "weapon": "TSFiendShardUP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5062,10 +5018,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "18000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "366",
+        "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -5076,25 +5032,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "3",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -5105,20 +5047,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5690",
       "reloaddelay": "36",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Warhead_Chemical_Heavy",
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Heavy"
+      ],
       "weapon": "TSFiendShardUP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -5126,10 +5071,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "18000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "366",
+        "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -5140,25 +5085,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "3",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -5169,20 +5100,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "5690",
       "reloaddelay": "36",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
+       "^Warhead_Chemical_Heavy",
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Heavy"
+      ],
       "weapon": "TSFiendShardUP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -5782,10 +5716,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "30000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "366",
+        "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -5796,25 +5730,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -5825,29 +5745,32 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "1618",
       "reloaddelay": "25",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Warhead_Chemical_Heavy",
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Heavy"
+      ],
       "weapon": "TSVisceroidSprayUP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "30000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "366",
+        "tag": "Chemical_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -5858,25 +5781,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "700",
-        "tag": "MediumChemicalWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "5",
         "falloff": "99, 66, 33",
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -5887,20 +5796,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "1618",
       "reloaddelay": "25",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@GARRISONEDUPGRADE",
       "versus_templates": [
+       "^Warhead_Chemical_Heavy",
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Chemical_Heavy"
+      ],
       "weapon": "TSVisceroidSprayUP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7363,11 +7275,11 @@
       "burstdelays": "6",
       "damage_warheads": [
        {
-        "damage": "20000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
+        "damage": "40000",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "88",
+        "tag": "MissileChem_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
@@ -7375,13 +7287,6 @@
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "10",
@@ -7392,18 +7297,21 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6172",
       "reloaddelay": "48",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
+       "^Warhead_MissileChem_Heavy",
        "^HeavyMissile",
        "^HeavyChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileChem_Heavy"
+      ],
       "weapon": "TSMammothTuskChem",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -7832,10 +7740,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
+        "damage": "40000",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -7846,13 +7754,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "20000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "10",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
@@ -7861,19 +7762,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "2425",
       "reloaddelay": "65",
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_Flame_Heavy",
        "^MediumFlameWeapon",
        "^HeavyFlameWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "MutHFlamer",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -9365,10 +9269,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "15000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "45000",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "60",
+        "tag": "CannonChem_Light",
         "type": "AreaDamage"
        },
        {
@@ -9379,13 +9283,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "30000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
         "falloff": null,
         "spread": "75",
@@ -9394,20 +9291,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7701",
       "reloaddelay": "90",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Warhead_CannonChem_Light",
        "^TSCannonEffect",
        "^LightChemicalWeapon",
        "^TankDestroyerCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonChem_Light"
+      ],
       "weapon": "TSHighVelocityChem",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -9753,10 +9653,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
-        "falloff": "99, 66, 33",
-        "spread": "350",
-        "tag": "LightChemicalWeapon",
+        "damage": "60000",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "60",
+        "tag": "CannonChem_Light",
         "type": "AreaDamage"
        },
        {
@@ -9765,13 +9665,6 @@
         "spread": "175",
         "tag": "LightChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "40000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "20",
@@ -9789,20 +9682,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8207",
       "reloaddelay": "55",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Warhead_CannonChem_Light",
        "^TSCannonEffect",
        "^LightChemicalWeapon",
        "^TankDestroyerCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonChem_Light"
+      ],
       "weapon": "TSHighVelocity2Chem",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
