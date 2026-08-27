@@ -362,21 +362,53 @@ superbfg10kCannon:
 	Inherits: bfg10kCannon
 	Range: 10238976
 
+^SteelMakoGunCannonCompatibility:
+	Warhead@SteelMakoCannonHE_Medium_NoWall: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		InvalidTargets: wall
+		Spread: 300
+		Damage: 2000
+		Falloff: 100, 50, 20, 0
+		Versus:
+			HAZMAT: 71
+			COMPOSITE: 99
+			BLAST: 40
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 147
+			Wood: 150
+			Scout: 144
+			Light: 129
+			Medium: 128
+			None: 127
+			Heavy: 111
+			Steel: 107
+			Fighter: 98
+			Concrete: 92
+			Superheavy: 90
+			Flak: 87
+			Plate: 79
+			Heroic: 76
+			Bomber: 75
+			Helicopter: 64
+			Spaceship: 41
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStateName: Temperature
+		PhysicalStateScale: 100
+
 SteelMakoGun:
 	Inherits: ^MediumFlameWeapon
 	Inherits@2: ^RA2Grenade
 	Inherits@3: ^RA2RailgunWeapon
 	Inherits@4: ^SteelMediumCannon
+	Inherits@compat: ^SteelMakoGunCannonCompatibility
 	Range: 6050
 	ReloadDelay: 25
 	Report: steel_quantumfire.wav
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
+	-Warhead@MediumFlameWeapon:
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		PhysicalStateName: Temperature
@@ -401,14 +433,9 @@ SteelMakoGun_EMP:
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^TeslaWeapon
 	Inherits@3: SteelMakoGun
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
+	Warhead@SteelMakoCannonHE_Medium_NoWall:
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla

@@ -133,13 +133,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -172,6 +165,13 @@
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "SteelMakoCannonHE_Medium_NoWall",
         "type": "AreaDamage"
        }
       ],
@@ -4298,13 +4298,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -4337,6 +4330,13 @@
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "SteelMakoCannonHE_Medium_NoWall",
         "type": "AreaDamage"
        }
       ],
@@ -4351,7 +4351,8 @@
        "^MediumFlameWeapon",
        "^RA2Grenade",
        "^RA2RailgunWeapon",
-       "^SteelMediumCannon"
+       "^SteelMediumCannon",
+       "^SteelMakoGunCannonCompatibility"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -4365,13 +4366,6 @@
       "burst": "2",
       "burstdelays": "3",
       "damage_warheads": [
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
@@ -4405,6 +4399,13 @@
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "SteelMakoCannonHE_Medium_NoWall",
         "type": "AreaDamage"
        }
       ],
@@ -4430,13 +4431,6 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -4470,6 +4464,13 @@
         "spread": "300",
         "tag": "CannonHE_Medium",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "SteelMakoCannonHE_Medium_NoWall",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
@@ -4483,7 +4484,8 @@
        "^MediumFlameWeapon",
        "^RA2Grenade",
        "^RA2RailgunWeapon",
-       "^SteelMediumCannon"
+       "^SteelMediumCannon",
+       "^SteelMakoGunCannonCompatibility"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -4499,13 +4501,6 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -4538,6 +4533,13 @@
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "SteelMakoCannonHE_Medium_NoWall",
         "type": "AreaDamage"
        }
       ],
@@ -4597,13 +4599,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -4636,6 +4631,13 @@
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "SteelMakoCannonHE_Medium_NoWall",
         "type": "AreaDamage"
        }
       ],
@@ -4699,13 +4701,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -4738,6 +4733,13 @@
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "SteelMakoCannonHE_Medium_NoWall",
         "type": "AreaDamage"
        }
       ],
@@ -4798,13 +4800,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -4837,6 +4832,13 @@
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "SteelMakoCannonHE_Medium_NoWall",
         "type": "AreaDamage"
        }
       ],
@@ -4901,13 +4903,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -4940,6 +4935,13 @@
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "SteelMakoCannonHE_Medium_NoWall",
         "type": "AreaDamage"
        }
       ],
@@ -10181,13 +10183,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -10220,6 +10215,13 @@
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "SteelMakoCannonHE_Medium_NoWall",
         "type": "AreaDamage"
        }
       ],
@@ -10234,7 +10236,8 @@
        "^MediumFlameWeapon",
        "^RA2Grenade",
        "^RA2RailgunWeapon",
-       "^SteelMediumCannon"
+       "^SteelMediumCannon",
+       "^SteelMakoGunCannonCompatibility"
       ],
       "warheads": [
        "^Warhead_Demolition_Light",
@@ -10248,13 +10251,6 @@
       "burst": "2",
       "burstdelays": "3",
       "damage_warheads": [
-       {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
        {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
@@ -10288,6 +10284,13 @@
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "SteelMakoCannonHE_Medium_NoWall",
         "type": "AreaDamage"
        }
       ],
@@ -10347,13 +10350,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -10386,6 +10382,13 @@
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "SteelMakoCannonHE_Medium_NoWall",
         "type": "AreaDamage"
        }
       ],
@@ -10449,13 +10452,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -10488,6 +10484,13 @@
         "falloff": "100, 50, 20, 0",
         "spread": "300",
         "tag": "CannonHE_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "2000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "300",
+        "tag": "SteelMakoCannonHE_Medium_NoWall",
         "type": "AreaDamage"
        }
       ],

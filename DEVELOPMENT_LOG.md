@@ -1,5 +1,23 @@
 # Development Log
 
+## 2026-08-27 — Steel Mako cannon-family consolidation
+
+- Consolidated the Steel Mako cannon root and its elite, EMP, and EMP-elite descendants away from
+  the retired medium-flame flat profile onto their already-selected standard medium CannonHE class.
+- A local percentage-inert CannonHE slice preserves the 2000 no-wall flat hit, allied half damage,
+  score/stat accounting, and Temperature binding. EMP variants retain their electrical damage
+  types; all independent flame, demolition, railgun, cannon, chemical, and tesla percentage paths
+  remain separately rounded.
+- Whole-tree comparison preserves every guarded behavior across all 2345 resolved weapons; only
+  the intended CannonHE blast/profile replacement reports on the four Steel Mako definitions.
+  The active survey now reports 270 concrete retired-family weapons: 265 mixed weapons in 201
+  groups and 5 single-family candidates. No prices, pricing logic, runtime source, parked runtime
+  change, or engine pin changed.
+- Independent review approved the CannonHE classification and compatibility design. Verification
+  passes 401 tests (11 optional spreadsheet tests skipped), all ledger/generator/warhead and
+  physical-state audits, and the full resolver comparison. A controlled pinned-engine launch
+  stayed alive and responsive with no new exception log, then its exact test process was stopped.
+
 ## 2026-08-27 — RA2 SCUD missile-family consolidation
 
 - Consolidated the active RA2 SCUD root and its Dreadnought, V3 explosion, radioactive,

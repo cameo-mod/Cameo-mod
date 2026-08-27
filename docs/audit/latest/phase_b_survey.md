@@ -1,13 +1,12 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-27
-Total concrete weapons on old families: 271
+Total concrete weapons on old families: 270
 Single old-family with new inherits (Phase B completion): 0
-Pure single old-family (mechanical Phase A candidates): 6
+Pure single old-family (mechanical Phase A candidates): 5
 Mixed old-family (Phase B maintainer sign-off): 265 in 201 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
-- `SteelMakoGun` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | old: MediumFlameWeapon | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Railgun_Heavy=2000, CannonHE_Medium=2000, Effect=0
 - `Future_Cryocopter_Rocket` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | old: Grenade | Grenade=16000, GrenadeFriendlyFire=8000, GrenadePercentage=8, MissileAP_Heavy=16000, MissileAP_Medium=16000, PhysicalStateCryo1=0, PhysicalStateCryo2=0, PhysicalStateCryo3=0, Effect=0, EffectAir=0
 - `RA2CRM60H` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, Bullet_Medium=2000, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
 - `ATMine` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | old: HeavyMissile | HeavyMissile=50000, HeavyMissilePercentage=25, Effect=0, Smudge=0
@@ -651,7 +650,7 @@ Mixed old-family (Phase B maintainer sign-off): 265 in 201 groups
 - `ra120mm2` (ContentPacks\RedAlert\Soviets\yaml\weapons.yaml) | dominant: LightChemicalWeapon(16000) | LightChemicalWeapon=16000, LightChemicalWeaponPercentage=8, MediumFlameWeapon=16000, MediumFlameWeaponPercentage=8, CannonHE_Heavy=16000, Effect=0 | → collapse to LightChemicalWeapon
 
 ### LightChemicalWeapon, TeslaWeapon (1 weapons)
-- `SteelMakoGun_EMP` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | dominant: EMPUnit(6000) | MediumFlameWeapon=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Railgun_Heavy=2000, CannonHE_Medium=2000, LightChemicalWeapon=2000, LightChemicalWeaponPercentage=1, TeslaWeapon=2000, TeslaExtraDamage=1000, TeslaWeaponPercentage=1, EMPUnit=6000 | → collapse to EMPUnit
+- `SteelMakoGun_EMP` (ContentPacks\RedAlert2Mod\Consortium\yaml\weapons.yaml) | dominant: EMPUnit(6000) | SteelMakoCannonHE_Medium_NoWall=2000, MediumFlameWeaponPercentage=1, Demolition_Light=2000, Railgun_Heavy=2000, CannonHE_Medium=2000, LightChemicalWeapon=2000, LightChemicalWeaponPercentage=1, TeslaWeapon=2000, TeslaExtraDamage=1000, TeslaWeaponPercentage=1, EMPUnit=6000 | → collapse to EMPUnit
 
 ### LightMissile, MediumMissile (1 weapons)
 - `ts_nod_mobilerepairvehicle` (weapons\tiberiansun.yaml) | dominant: MediumMissile(10000) | MediumMissile=10000, MediumMissilePercentage=5, LightMissile=10000, LightMissilePercentage=5 | → collapse to MediumMissile
