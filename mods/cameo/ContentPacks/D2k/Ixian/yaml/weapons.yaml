@@ -656,6 +656,7 @@ d2k_munitions_explosion:
 		Delay: 20
 
 RashidanGun:
+	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^SmallArms
@@ -666,30 +667,27 @@ RashidanGun:
 	BurstDelays: 0
 	Report: DSDSHTGN.wav
 	ValidTargets: Ground, Water
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
+	-TargetActorCenter:
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+	-Warhead@LightMissile:
+	-Warhead@MediumMissile:
+	-Warhead@SmallArms:
+	-Warhead@Chaingun:
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 0
 
 RashidanGun_upgrade:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -707,27 +705,25 @@ RashidanGun_upgrade:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
+		PercentageScale: 0
+	Warhead@RashidanGroundCompatibility: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -809,6 +805,7 @@ HMG_turret_upgrade:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 HMG_Duelist:
+	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits: ^LightMissile
 	Inherits@2: ^Grenade
 	Inherits@3: ^SmallArms
@@ -825,45 +822,34 @@ HMG_Duelist:
 		-LaunchAngle:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Air
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+	-Warhead@LightMissile:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@SmallArms:
+	-Warhead@MediumMissile:
+	-Warhead@FlakWeapon:
+	-Warhead@Chaingun:
+	Warhead@Bullet_Medium:
+		Damage: 12000
+		PercentageScale: 0
 
 HMG_Duelist_upgrade:
 	Inherits: ^Warhead_CannonHE_Heavy

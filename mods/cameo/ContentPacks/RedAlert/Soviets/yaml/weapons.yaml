@@ -1493,6 +1493,7 @@ YakTeslaArcFragment2:
 	-Warhead@TeslaArc:
 
 YakNapalm:
+	Inherits@collapsewh: ^Warhead_Flame_Heavy
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^MediumFlameWeapon
@@ -1508,32 +1509,12 @@ YakNapalm:
 		Acceleration: 0, 0, -10
 		Image: BOMBLET
 		Shadow: true
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 10000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 5000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 5
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 10000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 5
-	Warhead@MediumFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 10000
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		Damage: 5
-		PhysicalStateName: Temperature
-		PhysicalStateScale: 100
-	Warhead@HeavyFlameWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 10000
 		PhysicalStateName: Temperature
 		PhysicalStateScale: 100
 	Warhead@HeavyFlameWeaponPercentage: AreaDamagePercentage
@@ -1546,6 +1527,14 @@ YakNapalm:
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@HeavyFlameWeapon:
+	Warhead@Flame_Heavy:
+		Damage: 40000
+		PercentageScale: 0
 
 YakTeslaBomb:
 	Inherits: ^TeslaWeapon
@@ -3371,6 +3360,7 @@ CyberneticDogJaw:
 		DamageTypes: RippedApartDeath
 
 Nike:
+	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^FlakWeapon
 	Inherits@2: ^HeavyMissile
 	Inherits@3: ^MediumMissile
@@ -3384,26 +3374,27 @@ Nike:
 		AllowSnapping: true
 		CloseEnough: 600
 	ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 4000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@HeavyMissile: SpreadDamage
-		Damage: 4000
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 4000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@LightMissile: SpreadDamage
-		Damage: 4000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@EffectAir: CreateEffect
 		Explosions: med_explosion_air
 		ImpactSounds: kaboom25.aud
 		ValidTargets: Air
+	-TargetActorCenter:
+	-Warhead@FlakWeapon:
+	-Warhead@HeavyMissile:
+	-Warhead@MediumMissile:
+	-Warhead@LightMissile:
+	Warhead@MissileHE_Heavy:
+		ValidTargets: Air
+		Damage: 16000
+		PercentageScale: 0
 
 RAGatlingTankCannon:
 	Inherits@wh: ^Warhead_Bullet_Medium

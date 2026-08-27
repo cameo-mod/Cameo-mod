@@ -1186,39 +1186,37 @@ HeavyAATankCannontkm:
 		Damage: 1
 
 tkmheavyaaturret:
+	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits: ^LightMissile
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^SmallArms
 	Inherits@4: ^Chaingun
 	ValidTargets: Ground, Water, Air
+	-TargetActorCenter:
 	ReloadDelay: 10
 	Range: 10588
 	MinRange: 2120
 	Report: gun13.aud
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+	-Warhead@LightMissile:
+	-Warhead@FlakWeapon:
+	-Warhead@SmallArms:
+	-Warhead@Chaingun:
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
 
 tkmrh120gun:
 	Inherits@wh: ^Warhead_CannonHE_Medium

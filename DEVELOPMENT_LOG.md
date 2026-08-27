@@ -1,5 +1,88 @@
 # Development Log
 
+## 2026-08-28 — Under-200 mixed-role backlog checkpoint
+
+- Consolidated 15 selected roots and their descendant closure across standard bullet, Tesla,
+  concussion, and chemical roles. Two descendant roots retired with their parents, so the active
+  survey falls by 17 overall, from 214 to 197: 196 mixed roots in 157 groups and one isolated root.
+- The resolved 34-weapon comparison preserves every direct main total, every independently rounded
+  percentage application and profile, every valid-target total, projectile, cadence, report, and
+  top-level behavior. Explicit compatibility slices retain the commando's infantry/open-topped
+  damage, Japanese railgun and shield chip, EMP integrity and Temperature feed, sticky/snare
+  conditions, Mutalisk bounce chain, and authored ground/air damage splits.
+- Standard destination-family armor, blast, allied-damage, wall/BulletImmune, death, and meter
+  profiles are the intended gameplay normalization. The classifier now leaves four legacy-only
+  and 193 human-decision roots; broadcast debt falls from 838 to 818. Pricing and the parked
+  percentage-damage runtime fix remain separate.
+- Independent review caught and repaired an EMP relationship regression before publication. The
+  launch test then exposed redundant inherited-warhead removals in the sticky-foam descendants;
+  those loader-invalid removals were deleted without changing their resolved damage. Verification
+  passes 438 tests (11 optional spreadsheet tests skipped), the focused role-profile comparison,
+  all generated-balance and weapon-structure audits, and a controlled 90-second launch with no
+  crash or exception log. The exact test process was stopped afterward.
+
+## 2026-08-28 — Remaining override-free element roles
+
+- Consolidated ten actual roots without descendant flat-damage overrides: Hydra and Leech spit,
+  Lurker and Queen spines, three Forgotten chemical weapons plus both blue Fiend shards, and Yak
+  napalm. Their destinations are standard light/medium/heavy Chemical, medium chemical missile,
+  and heavy Flame roles.
+- Direct totals and all separate percentage applications remain unchanged. Projectiles, cadence,
+  reports, effects, smoke clouds, Leech infection, Queen broodling spawning, and the old
+  ground/air firing declarations remain intact.
+- Standard family armor, blast, allied-damage, wall, death, physical-state, and damage-target
+  profiles are intentional role-normalization consequences. The active survey falls from 224 to
+  214 roots: 211 mixed weapons in 166 groups and three isolated roots. The classifier now has
+  seven corroborated, 12 legacy-only, and 195 human-decision roots; broadcast debt falls from 845
+  to 838. Pricing and the parked runtime fix remain separate.
+- Independent review approved the resolved comparison: exactly the selected ten weapons changed,
+  with no projectile, cadence, effect, condition, top-level, direct-total, or percentage-profile
+  drift. Verification passes 433 tests (11 optional spreadsheet tests skipped), all balance
+  ledgers, generator, inheritance, empty-warhead, orphan-key, and physical-state checks. The
+  controlled pinned-engine launch stayed alive for 90 seconds with no YAML, exception, fatal, or
+  crash log matches; its exact process was stopped.
+
+## 2026-08-28 — Projectile-role backlog checkpoint
+
+- Consolidated 13 actual retired-family roots, covering 34 resolved parent/child weapons, into
+  standard bullet, concussion, cannon, and high-explosive missile roles.
+- Direct shot totals and all independently rounded percentage applications remain unchanged.
+  Projectiles, cadence, reports, effects, integrity damage, recursive shrapnel chains, and
+  descendant overrides remain in place; the Nike main remains explicitly air-only.
+- Intended standard-family consequences are the new armor/blast profiles, allied-damage rules,
+  death types, and target exclusions. The buggy anti-air child now applies its authored air-only
+  canonical override instead of inheriting ground/water-only legacy damage.
+- The active survey falls from 237 to 224 roots: 221 mixed weapons in 175 groups and three
+  isolated roots. The classifier now has 11 corroborated, 18 legacy-only, and 195 human-decision
+  roots. The broadcast-debt ratchet falls from 878 to 845. Pricing and the parked runtime fix
+  remain separate.
+- Independent review caught and repaired actor-center drift, excess CABAL air damage, and an
+  unintended no-friendly-splash override on the GDI Phalanx. Verification passes 430 tests (11
+  optional spreadsheet tests skipped), all 32 balance ledgers, generator, inheritance,
+  empty-warhead, orphan-key, and physical-state checks. The controlled pinned-engine launch stayed
+  alive for 90 seconds with no YAML, exception, fatal, or crash log matches; its exact process was
+  stopped.
+
+## 2026-08-28 — Percentage-safe chemical and flame role batch
+
+- Consolidated 13 roots covering 15 resolved weapons: four light chemical cannons, three heavy
+  chemical weapons, two heavy flamethrowers, and four light/medium/heavy chemical missiles.
+- Every legacy percentage application remains separate under its original key and retains its
+  armor table, spread, targets, statistics behavior, and physical-state binding. Flat totals,
+  cadence, projectiles, effects, reports, conditions, and the ADATS ground/water-only damage target
+  are preserved.
+- The deliberate role changes are the standard destination families' armor tables, compact blast
+  shapes, wall interaction, half allied damage, death types, and tiered Corrosion/Temperature feed.
+  The whole-tree comparator limits these findings to the 15 selected resolved definitions.
+- The active survey falls from 250 to 237 roots: 234 mixed weapons in 186 groups and three isolated
+  roots. The classifier now has 16 corroborated, 26 legacy-only, and 195 human-decision roots. The
+  broadcast-debt ratchet falls from 890 to 878. Pricing and the parked runtime fix remain separate.
+- Verification passes 424 tests (11 optional spreadsheet tests skipped), all 32 balance ledgers,
+  generator, inheritance, empty-warhead, orphan-key, and physical-state checks. Independent review
+  caught and repaired eleven invalid nonexistent-warhead deletions before publication. The final
+  controlled pinned-engine launch stayed alive for 90 seconds with no YAML, exception, fatal, or
+  crash log matches; its exact test process was stopped.
+
 ## 2026-08-27 — Remaining rapid/light laser role batch
 
 - Consolidated seven genuine rapid/light laser roots, covering 19 resolved weapons, onto the

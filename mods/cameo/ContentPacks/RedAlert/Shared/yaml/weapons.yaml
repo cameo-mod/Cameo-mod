@@ -927,6 +927,7 @@ WaveforceCannonDistortedBeam2:
 		ValidTargets: Air
 
 ra120mm:
+	Inherits@collapsewh: ^Warhead_CannonHE_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@2: ^MediumCannon
 	Inherits@3: ^ShrapnelWeapon
@@ -939,28 +940,27 @@ ra120mm:
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 641
-	Warhead@HeavyCannon: SpreadDamage
-		Damage: 6000
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		Damage: 3
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 6000
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		Damage: 3
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 6000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 3
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 6000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		Explosions: small_building
 		ImpactSounds: kaboom15.aud
 		ValidTargets: Ground
+	-Warhead@HeavyCannon:
+	-Warhead@MediumCannon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@TankDestroyerCannon:
+	Warhead@CannonHE_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 24000
+		PercentageScale: 0
 
 MammothTusk:
 	Inherits@wh: ^Warhead_MissileHE_Heavy

@@ -3324,18 +3324,11 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "10000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "5000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "40000",
+        "falloff": "100, 90, 78, 60, 0",
+        "spread": "400",
+        "tag": "Flame_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -3345,13 +3338,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "5",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
@@ -3359,25 +3345,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "5",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "5",
@@ -3388,20 +3360,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "1840",
       "reloaddelay": "110",
       "slot": "Armament@BOMBS",
       "versus_templates": [
+       "^Warhead_Flame_Heavy",
        "^ShrapnelWeapon",
        "^HeavyBomb",
        "^MediumFlameWeapon",
        "^HeavyFlameWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Flame_Heavy"
+      ],
       "weapon": "YakNapalm",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "8",
@@ -4401,11 +4376,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
+        "damage": "16000",
+        "falloff": "100, 45, 15, 0",
+        "spread": "200",
+        "tag": "MissileHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -4415,13 +4390,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "300",
@@ -4429,25 +4397,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "LightMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -4458,20 +4412,23 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "12790",
       "reloaddelay": "27",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileHE_Heavy",
        "^FlakWeapon",
        "^HeavyMissile",
        "^MediumMissile",
        "^LightMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileHE_Heavy"
+      ],
       "weapon": "Nike",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -11159,11 +11116,11 @@
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
+        "damage": "24000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -11173,13 +11130,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "150",
@@ -11187,32 +11137,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -11223,32 +11152,35 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
       "requires": "!ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_CannonHE_Heavy",
        "^HeavyCannon",
        "^MediumCannon",
        "^ShrapnelWeapon",
        "^TankDestroyerCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "ra120mm",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",
       "burstdelays": "8",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
+        "damage": "24000",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -11258,13 +11190,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "150",
@@ -11272,32 +11197,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "6000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "3000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "3",
@@ -11308,7 +11212,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
@@ -11317,9 +11221,11 @@
       "versus_templates": [
        "ra120mm"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_CannonHE_Heavy"
+      ],
       "weapon": "ra120mmTargetingComputer",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "2",

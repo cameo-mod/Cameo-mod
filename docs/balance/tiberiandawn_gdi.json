@@ -2643,18 +2643,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "TeslaChargedExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "32000",
+        "falloff": "100, 55, 0",
+        "spread": "116",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -2664,32 +2657,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -2699,32 +2671,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2734,25 +2685,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "150",
         "tag": "MediumCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2762,18 +2699,25 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "32000",
+        "falloff": null,
+        "spread": null,
+        "tag": "TeslaSharedCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": null,
+        "tag": "TemperatureCompatibility",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -2783,6 +2727,7 @@
       "reloaddelay": "111",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_Tesla_Super",
        "^TeslaChargedWeapon",
        "^TeslaWeapon",
        "^MediumFlameWeapon",
@@ -2792,26 +2737,21 @@
        "^MediumMissile",
        "^HeavyMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Super"
+      ],
       "weapon": "EMPGrenade",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      },
      {
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "TeslaChargedWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "400",
-        "tag": "TeslaChargedExtraDamage",
-        "type": "SpreadDamage"
+        "damage": "32000",
+        "falloff": "100, 55, 0",
+        "spread": "116",
+        "tag": "Tesla_Super",
+        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -2821,32 +2761,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "200",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "50",
         "tag": "TeslaWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "750",
-        "tag": "MediumFlameWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "4",
@@ -2856,32 +2775,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": "100, 75, 50, 25",
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "450",
-        "tag": "HeavyCannon",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2891,25 +2789,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "150",
         "tag": "MediumCannonPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "400",
-        "tag": "MediumMissile",
-        "type": "SpreadDamage"
        },
        {
         "damage": "4",
@@ -2919,18 +2803,25 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "8000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "300",
         "tag": "HeavyMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "32000",
+        "falloff": null,
+        "spread": null,
+        "tag": "TeslaSharedCompatibility",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": null,
+        "spread": null,
+        "tag": "TemperatureCompatibility",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -2940,6 +2831,7 @@
       "reloaddelay": "111",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^Warhead_Tesla_Super",
        "^TeslaChargedWeapon",
        "^TeslaWeapon",
        "^MediumFlameWeapon",
@@ -2949,9 +2841,11 @@
        "^MediumMissile",
        "^HeavyMissile"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Tesla_Super"
+      ],
       "weapon": "EMPGrenade",
-      "weapon_class_source": "none"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -3209,18 +3103,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "20000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "40000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
@@ -3228,20 +3115,6 @@
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "10",
@@ -3252,19 +3125,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7750",
       "reloaddelay": "100",
       "slot": "Armament@Grenade",
       "versus_templates": [
+       "^Warhead_Concussion_Medium",
        "^ShrapnelWeapon",
        "^Grenade",
        "^EMPDamage"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "CommandoGrenadeLauncher",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "5",
@@ -3273,9 +3149,9 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "40",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -3285,33 +3161,36 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "40",
+        "tag": "SniperCompatibility",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7750",
       "reloaddelay": "92",
       "slot": "Armament@M16",
       "versus_templates": [
+       "^Warhead_Bullet_Medium",
        "^SniperWeapon",
        "^Chaingun"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "CommandoM16",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3404,18 +3283,11 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "20000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "600",
-        "tag": "ShrapnelWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 75, 50, 25",
-        "spread": "300",
-        "tag": "ShrapnelWeaponFriendlyFire",
-        "type": "SpreadDamage"
+        "damage": "40000",
+        "falloff": "100, 72, 50, 32, 18, 8, 0",
+        "spread": "350",
+        "tag": "Concussion_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "10",
@@ -3423,20 +3295,6 @@
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "10",
@@ -3447,19 +3305,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "7750",
       "reloaddelay": "100",
       "slot": "Armament@GrenadeGARRISONED",
       "versus_templates": [
+       "^Warhead_Concussion_Medium",
        "^ShrapnelWeapon",
        "^Grenade",
        "^EMPDamage"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Concussion_Medium"
+      ],
       "weapon": "CommandoGrenadeLauncher",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "garrisoned",
@@ -3469,9 +3330,9 @@
        {
         "damage": "4000",
         "falloff": "100, 0",
-        "spread": "40",
-        "tag": "SniperWeapon",
-        "type": "SpreadDamage"
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -3481,33 +3342,36 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "100",
         "tag": "ChaingunPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "4000",
+        "falloff": "100, 0",
+        "spread": "40",
+        "tag": "SniperCompatibility",
+        "type": "SpreadDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "7750",
       "reloaddelay": "92",
       "slot": "Armament@M16GARRISONED",
       "versus_templates": [
+       "^Warhead_Bullet_Medium",
        "^SniperWeapon",
        "^Chaingun"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "CommandoM16",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "secondary",
@@ -6847,11 +6711,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
+        "damage": "24000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -6861,32 +6725,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6896,13 +6739,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "150",
@@ -6910,25 +6746,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -6939,13 +6761,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "8",
       "requires": "undeployed",
       "slot": "Armament@mobile",
       "versus_templates": [
+       "^Warhead_Bullet_Medium",
        "^TankDestroyerCannon",
        "^SmallArms",
        "^Grenade",
@@ -6953,19 +6776,21 @@
        "^FlakWeapon",
        "^Chaingun"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "GDIRigPhalanx",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "TankDestroyerCannon",
-        "type": "SpreadDamage"
+        "damage": "24000",
+        "falloff": "100, 0",
+        "spread": "100",
+        "tag": "Bullet_Medium",
+        "type": "AreaDamage"
        },
        {
         "damage": "2",
@@ -6975,32 +6800,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "100",
-        "tag": "SmallArms",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "50",
         "tag": "SmallArmsPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -7010,13 +6814,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "300",
-        "tag": "MediumCannon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "150",
@@ -7024,25 +6821,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "250",
-        "tag": "FlakWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": null,
-        "spread": "200",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
        },
        {
         "damage": "2",
@@ -7053,7 +6836,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9350",
       "reloaddelay": "10",
@@ -7062,9 +6845,11 @@
       "versus_templates": [
        "GDIRigPhalanx"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_Bullet_Medium"
+      ],
       "weapon": "GDIRigPhalanxTower",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "armament_name": "deployed",

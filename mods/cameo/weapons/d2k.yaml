@@ -622,6 +622,7 @@ facedancer_attack:
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 
 LeechSpit:
+	Inherits@collapsewh: ^Warhead_Chemical_Light
 	Inherits: ^LightChemicalWeapon
 	Inherits@2: ^LightMissile
 	Inherits@3: ^SmallArms
@@ -640,37 +641,17 @@ LeechSpit:
 		Speed: 2500
 		Width: 25
 		TrailImage: sczhsplash
-	Warhead@LightChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Vehicle
-		Damage: 4000
-		DamageTypes: Prone50Percent, TriggerProne, LeechTankInfect
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Vehicle
 		Damage: 1
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Vehicle
-		Damage: 4000
-		DamageTypes: Prone50Percent, TriggerProne, LeechTankInfect
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Vehicle
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Vehicle
-		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Vehicle
 		Damage: 1
-	Warhead@ArrowWeapon: SpreadDamage
-		ValidTargets: Vehicle
-		Damage: 2000
-		DamageTypes: Prone50Percent, TriggerProne, LeechTankInfect
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Vehicle
 		Damage: 1
@@ -678,6 +659,15 @@ LeechSpit:
 		Explosions: sczhsplash
 	Warhead@EffectAir: CreateEffect
 		Explosions: sczhsplash
+	-Warhead@LightChemicalWeapon:
+	-Warhead@LightMissile:
+	-Warhead@SmallArms:
+	-Warhead@ArrowWeapon:
+	Warhead@Chemical_Light:
+		ValidTargets: Vehicle
+		Damage: 12000
+		DamageTypes: Prone50Percent, TriggerProne, LeechTankInfect
+		PercentageScale: 0
 
 WormJaw:
 	ReloadDelay: 10
