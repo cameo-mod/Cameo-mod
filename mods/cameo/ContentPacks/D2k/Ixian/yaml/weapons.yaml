@@ -656,6 +656,7 @@ d2k_munitions_explosion:
 		Delay: 20
 
 RashidanGun:
+	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^SmallArms
@@ -666,30 +667,27 @@ RashidanGun:
 	BurstDelays: 0
 	Report: DSDSHTGN.wav
 	ValidTargets: Ground, Water
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
+	-TargetActorCenter:
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
+	-Warhead@LightMissile:
+	-Warhead@MediumMissile:
+	-Warhead@SmallArms:
+	-Warhead@Chaingun:
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 0
 
 RashidanGun_upgrade:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -707,27 +705,25 @@ RashidanGun_upgrade:
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
+		PercentageScale: 0
+	Warhead@RashidanGroundCompatibility: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 4000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1

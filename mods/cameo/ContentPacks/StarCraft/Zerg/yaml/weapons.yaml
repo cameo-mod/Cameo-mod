@@ -139,6 +139,7 @@ SpithidSpit:
 		PercentageScale: 0
 
 MutaliskSpore:
+	Inherits@collapsewh: ^Warhead_Chemical_Medium
 	Inherits: ^SwordWeapon
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^SmallArms
@@ -158,37 +159,17 @@ MutaliskSpore:
 		ContrailLength: 5
 		Width: 25
 		AllowSnapping: true
-	Warhead@SwordWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@ArrowWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
@@ -204,66 +185,62 @@ MutaliskSpore:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
+	-Warhead@SwordWeapon:
+	-Warhead@SwordWeaponFriendlyFire:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@SmallArms:
+	-Warhead@ArrowWeapon:
+	Warhead@Chemical_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 0
+	Warhead@MutaliskCompatibility: AreaDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
 
 MutaBounce1:
 	Inherits: MutaliskSpore
 	Range: 2222
-	Warhead@SwordWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 4000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@Bullet_Light: AreaDamage
-		Damage: 4000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 2
-	Warhead@ArrowWeapon: SpreadDamage
-		Damage: 4000
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		Damage: 2
+	Warhead@Chemical_Medium:
+		Damage: 8000
+		PercentageScale: 0
+	Warhead@MutaliskCompatibility:
+		Damage: 12000
+	Warhead@MutaWildcardCompatibility: AreaDamage
+		Damage: 4000
 	Warhead@shrapnel: FireShrapnel
 		Weapon: MutaBounce2
 
 MutaBounce2:
 	Inherits: MutaliskSpore
 	Range: 1111
-	Warhead@SwordWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
 	Warhead@SwordWeaponPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@MediumChemicalWeapon: AreaDamage
-		ValidRelationships: Ally, Neutral, Enemy
-		FriendlyFireDamage: 50
-		FriendlyFireSpread: 50
-		Damage: 2000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
 	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
 		Damage: 1
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
-	Warhead@Bullet_Light: AreaDamage
-		Damage: 2000
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@ArrowWeapon: SpreadDamage
-		Damage: 2000
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		Damage: 1
+	Warhead@Chemical_Medium:
+		Damage: 4000
+		PercentageScale: 0
+	Warhead@MutaliskCompatibility:
+		Damage: 10000
+	Warhead@MutaWildcardCompatibility: AreaDamage
+		Damage: 2000
 	-Warhead@shrapnel:
 
 CorruptorSpore:
@@ -399,17 +376,24 @@ SCDevourerAA:
 		Amplitude: 128
 		WaveLength: 512
 		Color: 8800FF
-	Warhead@MediumChemicalWeapon: AreaDamage
+	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
+		ValidTargets: Air
+		Damage: 10
+		PhysicalStateName: Corrosion
+		PhysicalStateScale: 100
+	Warhead@Chemical_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 0
+	Warhead@MutaliskCompatibility:
+		ValidTargets: Air
+		Damage: 4000
+	Warhead@DevourerChemicalAirCompatibility: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
 		ValidTargets: Air
-		Damage: 20000
-		PhysicalStateName: Corrosion
-		PhysicalStateScale: 100
-	Warhead@MediumChemicalWeaponPercentage: AreaDamagePercentage
-		ValidTargets: Air
-		Damage: 10
+		Damage: 16000
 		PhysicalStateName: Corrosion
 		PhysicalStateScale: 100
 	Warhead@Effect: CreateEffect
@@ -464,6 +448,8 @@ SCScourgeExplosion:
 		ImpactSounds: zavdth00.aud
 
 GuardianShoot:
+	Inherits@collapsewh: ^Warhead_Concussion_Medium
+	Inherits@compatwh: ^Warhead_Concussion_Light
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^HeavyBomb
@@ -487,20 +473,10 @@ GuardianShoot:
 		Image: d2k_155mm
 		Palette: d2keffect
 		TrailImage: sczhsplash
-	Warhead@Grenade: SpreadDamage
-		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 4000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 8000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@HeavyBomb: SpreadDamage
-		Damage: 8000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		Damage: 4
 	-Warhead@Effect1:
@@ -509,6 +485,19 @@ GuardianShoot:
 		Explosions: d2k_med_explosion
 		ImpactSounds: zguhit00.aud
 		ExplosionPalette: ra_temperat
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@HeavyBomb:
+	Warhead@Concussion_Medium:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 0
+	Warhead@Concussion_Light:
+		ValidTargets: Ground, Ship
+		Damage: 8000
+		PercentageScale: 0
 
 SporemawShoot:
 	Inherits@wh: ^Warhead_Concussion_Medium

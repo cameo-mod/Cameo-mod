@@ -1,5 +1,26 @@
 # Development Log
 
+## 2026-08-28 — Under-200 mixed-role backlog checkpoint
+
+- Consolidated 15 selected roots and their descendant closure across standard bullet, Tesla,
+  concussion, and chemical roles. Two descendant roots retired with their parents, so the active
+  survey falls by 17 overall, from 214 to 197: 196 mixed roots in 157 groups and one isolated root.
+- The resolved 34-weapon comparison preserves every direct main total, every independently rounded
+  percentage application and profile, every valid-target total, projectile, cadence, report, and
+  top-level behavior. Explicit compatibility slices retain the commando's infantry/open-topped
+  damage, Japanese railgun and shield chip, EMP integrity and Temperature feed, sticky/snare
+  conditions, Mutalisk bounce chain, and authored ground/air damage splits.
+- Standard destination-family armor, blast, allied-damage, wall/BulletImmune, death, and meter
+  profiles are the intended gameplay normalization. The classifier now leaves four legacy-only
+  and 193 human-decision roots; broadcast debt falls from 838 to 818. Pricing and the parked
+  percentage-damage runtime fix remain separate.
+- Independent review caught and repaired an EMP relationship regression before publication. The
+  launch test then exposed redundant inherited-warhead removals in the sticky-foam descendants;
+  those loader-invalid removals were deleted without changing their resolved damage. Verification
+  passes 438 tests (11 optional spreadsheet tests skipped), the focused role-profile comparison,
+  all generated-balance and weapon-structure audits, and a controlled 90-second launch with no
+  crash or exception log. The exact test process was stopped afterward.
+
 ## 2026-08-28 — Remaining override-free element roles
 
 - Consolidated ten actual roots without descendant flat-damage overrides: Hydra and Leech spit,

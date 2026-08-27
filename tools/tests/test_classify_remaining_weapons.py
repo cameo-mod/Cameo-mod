@@ -17,7 +17,7 @@ class RemainingWeaponClassificationTests(unittest.TestCase):
     def test_active_central_files_are_included_without_template_bleed(self):
         names = {row["weapon"] for row in self.rows}
         self.assertIn("ixian_airdrone", names)     # active D2K central file
-        self.assertIn("plymouthSticky", names)    # active Outpost 2 central file
+        self.assertIn("edenRailgun", names)       # active Outpost 2 central file
         self.assertNotIn("ts_nod_mobilerepairvehicle", names)
 
     def test_every_root_has_a_review_bucket_and_flat_ledger(self):

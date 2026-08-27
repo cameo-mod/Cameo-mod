@@ -22,25 +22,78 @@ japan_imperialscoutsman_rifle:
 	# or blue impact â€” ^SmallArms is inherited LAST so its Bullet + Effect
 	# win). Air-capable. The RailgunExtraDamage warhead inherits untouched
 	# (shield-only chip damage; ignored for pricing, per maintainer).
+	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits: ^RailgunWeapon
 	Inherits@cg: ^Chaingun
 	Inherits@sa: ^SmallArms
 	ReloadDelay: 50
 	Range: 6000
 	ValidTargets: Ground, Water, Air
+	-TargetActorCenter:
 	Report: iredweaa.wav, iredweab.wav, iredweac.wav, iredwead.wav
-	Warhead@SmallArms: SpreadDamage
-		Damage: 4000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		Damage: 4000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 1
-	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 4000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 1
+	-Warhead@SmallArms:
+	-Warhead@Chaingun:
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
+	Warhead@RailgunCompatibility: SpreadDamage
+		AffectsParent: false
+		Spread: 250
+		Damage: 4000
+		Versus:
+			REFLECTOR: 50
+			Shield: 140
+			Superheavy: 100
+			Heavy: 96
+			Medium: 92
+			Light: 88
+			Scout: 84
+			Heroic: 80
+			Plate: 76
+			Flak: 72
+			None: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
+	Warhead@RailgunShieldCompatibility: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 500
+		Damage: 1000
+		Versus:
+			REFLECTOR: 50
+			Shield: 100
+			None: 1
+			Flak: 1
+			Plate: 1
+			Heroic: 1
+			Superheavy: 1
+			Heavy: 1
+			Medium: 1
+			Light: 1
+			Scout: 1
+			Steel: 1
+			Concrete: 1
+			Wood: 1
+			Fighter: 1
+			Bomber: 1
+			Helicopter: 1
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
 
 # paired upgrade variant (LAW: renaming a base weapon ALWAYS renames its
 # upgraded variant with it). Waveforce flavor rides the baseline stats.
@@ -2112,6 +2165,7 @@ WaveTurretImpact:
 		ValidTargets: Ground, Water, Structure, wall
 
 ArmoredCarMG:
+	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits: ^ArrowWeapon
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^SmallArms
@@ -2126,66 +2180,50 @@ ArmoredCarMG:
 	Report: vgatlo5a.wav, vgatlo5b.wav
 	Projectile: Bullet
 		-LaunchAngle:
-	Warhead@ArrowWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 1000
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@MediumCannon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@MediumCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water
-		Damage: 2000
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: piffs
+	-Warhead@ArrowWeapon:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@SmallArms:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@MediumCannon:
+	-Warhead@MediumMissile:
+	-Warhead@FlakWeapon:
+	-Warhead@Chaingun:
+	Warhead@Bullet_Medium:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 0
 
 ArmoredCarMG_AA:
 	Inherits: ArmoredCarMG
 	Range: 7518
 	ValidTargets: Air
-	Warhead@ArrowWeapon: SpreadDamage
-		ValidTargets: Air
 	Warhead@ArrowWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@CannonAP_Light: AreaDamage
@@ -2196,28 +2234,24 @@ ArmoredCarMG_AA:
 		ValidTargets: Air
 	Warhead@Bullet_Light_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Air
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Air
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@CannonHE_Medium: AreaDamage
 		ValidTargets: Air
 	Warhead@CannonHE_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Air
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
-		ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Air
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Air
+		Damage: 8000
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
+	Warhead@ArmoredCarGroundCompatibility: AreaDamage
+		ValidTargets: Ground, Water
+		Damage: 8000
 
 ArmoredCarMGWaveforce:
 	Inherits@2: ^WaveforceBulletWarhead
