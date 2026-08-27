@@ -1,10 +1,10 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-27
-Total concrete weapons on old families: 266
+Total concrete weapons on old families: 258
 Single old-family with new inherits (Phase B completion): 0
 Pure single old-family (mechanical Phase A candidates): 1
-Mixed old-family (Phase B maintainer sign-off): 265 in 201 groups
+Mixed old-family (Phase B maintainer sign-off): 257 in 199 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
 - `RA2CRM60H` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, Bullet_Medium=2000, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
@@ -125,12 +125,6 @@ Mixed old-family (Phase B maintainer sign-off): 265 in 201 groups
 ### HeavyBomb, HeavyCannon, MediumCannon, MediumChemicalWeapon, MediumFlameWeapon, TankDestroyerCannon (1 weapons)
 - `SpecterArtilleryShellUpgrade` (ContentPacks\TiberianDawn\Nod\yaml\weapons.yaml) | dominant: Demolition_Light(4000) | Demolition_Light=4000, Concussion_Medium=4000, MediumChemicalWeapon=4000, MediumChemicalWeaponPercentage=2, MediumFlameWeapon=4000, MediumFlameWeaponPercentage=2, HeavyBomb=4000, HeavyBombPercentage=2, TankDestroyerCannon=4000, TankDestroyerCannonPercentage=2, MediumCannon=4000, MediumCannonPercentage=2, HeavyCannon=4000, HeavyCannonPercentage=2 | → collapse to Demolition_Light
 
-### Chaingun, Grenade, ShrapnelWeapon, SmallArms, TankDestroyerCannon (4 weapons)
-- `FutureEnforcerShotgun` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | dominant: Grenade(2000) | Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, CannonHE_Medium=2000, SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1 | → collapse to Grenade
-- `TSCommandoShotgun` (ContentPacks\TiberianSun\Nod\yaml\weapons.yaml) | dominant: Grenade(8000) | Grenade=8000, GrenadeFriendlyFire=4000, GrenadePercentage=4, ShrapnelWeapon=8000, ShrapnelWeaponFriendlyFire=4000, ShrapnelWeaponPercentage=4, TankDestroyerCannon=8000, TankDestroyerCannonPercentage=4, CannonHE_Medium=8000, SmallArms=8000, SmallArmsPercentage=4, Chaingun=8000, ChaingunPercentage=4 | → collapse to Grenade
-- `TSMutShotgun` (ContentPacks\TiberianSun\Forgotten\yaml\weapons.yaml) | dominant: Grenade(4000) | Grenade=4000, GrenadeFriendlyFire=2000, GrenadePercentage=2, ShrapnelWeapon=4000, ShrapnelWeaponFriendlyFire=2000, ShrapnelWeaponPercentage=2, TankDestroyerCannon=4000, TankDestroyerCannonPercentage=2, CannonHE_Medium=4000, SmallArms=4000, SmallArmsPercentage=2, Chaingun=4000, ChaingunPercentage=2 | → collapse to Grenade
-- `TSShotgun` (ContentPacks\TiberianSun\GDI\yaml\weapons.yaml) | dominant: Grenade(4000) | Grenade=4000, GrenadeFriendlyFire=2000, GrenadePercentage=2, ShrapnelWeapon=4000, ShrapnelWeaponFriendlyFire=2000, ShrapnelWeaponPercentage=2, TankDestroyerCannon=4000, TankDestroyerCannonPercentage=2, CannonHE_Medium=4000, SmallArms=4000, SmallArmsPercentage=2, Chaingun=4000, ChaingunPercentage=2 | → collapse to Grenade
-
 ### Grenade, LightFlameWeapon, MediumChemicalWeapon, ShrapnelWeapon, TankDestroyerCannon (3 weapons)
 - `25mm` (ContentPacks\RedAlert\Allies\yaml\weapons.yaml) | dominant: Grenade(2000) | Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, LightFlameWeapon=2000, LightFlameWeaponPercentage=1, MediumChemicalWeapon=2000, MediumChemicalWeaponPercentage=1, TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, CannonHE_Medium=2000, Effect=0 | → collapse to Grenade
 - `AsianLynxTankCannon` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | dominant: Grenade(2000) | Grenade=2000, GrenadeFriendlyFire=1000, GrenadePercentage=1, ShrapnelWeapon=2000, ShrapnelWeaponFriendlyFire=1000, ShrapnelWeaponPercentage=1, LightFlameWeapon=2000, LightFlameWeaponPercentage=1, MediumChemicalWeapon=2000, MediumChemicalWeaponPercentage=1, TankDestroyerCannon=2000, TankDestroyerCannonPercentage=1, CannonHE_Medium=2000 | → collapse to Grenade
@@ -194,12 +188,6 @@ Mixed old-family (Phase B maintainer sign-off): 265 in 201 groups
 - `HeavyAATankCannontkm` (ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml) | dominant: LightMissile(2000) | LightMissile=2000, LightMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1 | → collapse to LightMissile
 - `SkyshieldCannon` (ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, LightMissile=2000, LightMissilePercentage=1, Chaingun=2000, ChaingunPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1 | → collapse to SmallArms
 - `tkmheavyaaturret` (ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml) | dominant: LightMissile(2000) | LightMissile=2000, LightMissilePercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1 | → collapse to LightMissile
-
-### Chaingun, FlakWeapon, MediumMissile, SmallArms (4 weapons)
-- `AsianSniper` (ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml) | dominant: MediumMissile(6000) | MediumMissile=6000, MediumMissilePercentage=3, CannonHE_Heavy=6000, SmallArms=6000, SmallArmsPercentage=3, FlakWeapon=6000, FlakWeaponPercentage=3, Chaingun=6000, ChaingunPercentage=3, Effect=0 | → collapse to MediumMissile
-- `GhostSniper` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | dominant: MediumMissile(2000) | MediumMissile=2000, MediumMissilePercentage=1, CannonHE_Heavy=2000, SmallArms=2000, SmallArmsPercentage=1, FlakWeapon=2000, FlakWeaponPercentage=1, Chaingun=2000, ChaingunPercentage=1, Effect=0 | → collapse to MediumMissile
-- `SpecterSniper` (ContentPacks\StarCraft\Terran\yaml\weapons.yaml) | dominant: MediumMissile(4000) | MediumMissile=4000, MediumMissilePercentage=2, CannonHE_Heavy=4000, SmallArms=4000, SmallArmsPercentage=2, FlakWeapon=4000, FlakWeaponPercentage=2, Chaingun=4000, ChaingunPercentage=2, Effect=0 | → collapse to MediumMissile
-- `VonSniper` (ContentPacks\RedAlert2Mod\TKM\yaml\weapons.yaml) | dominant: MediumMissile(6000) | MediumMissile=6000, MediumMissilePercentage=3, CannonHE_Heavy=6000, SmallArms=6000, SmallArmsPercentage=3, FlakWeapon=6000, FlakWeaponPercentage=3, Chaingun=6000, ChaingunPercentage=3, Effect=0 | → collapse to MediumMissile
 
 ### Chaingun, LaserWeapon, MediumMissile, SmallArms (4 weapons)
 - `LunarNaxiDroneLaser` (ContentPacks\RedAlert2Mod\Naxis\yaml\weapons.yaml) | dominant: SmallArms(2000) | SmallArms=2000, SmallArmsPercentage=1, Chaingun=2000, ChaingunPercentage=1, MediumMissile=2000, MediumMissilePercentage=1, LaserWeapon=2000, LaserWeaponPercentage=1 | → collapse to SmallArms

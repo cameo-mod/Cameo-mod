@@ -278,36 +278,44 @@ TSCommandoShotgun:
 	Inherits@6: ^TankDestroyerCannon
 	Inherits@7: ^SmallArms
 	Inherits@8: ^Chaingun
+	Inherits@compat: ^ShotgunCannonHEMediumCompatibility
 	ReloadDelay: 20
 	Range: 4146
 	Report: DSDSHTGN.wav
 	ValidTargets: Ground, Water
-	Warhead@Grenade: SpreadDamage
-		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 4000
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 8000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 8000
+	-Warhead@TankDestroyerCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		Damage: 4
 	Warhead@CannonHE_Medium:
 		Damage: 8000
-	Warhead@SmallArms: SpreadDamage
-		Damage: 8000
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		Damage: 4
-	Warhead@Chaingun: SpreadDamage
-		Damage: 8000
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 4
+	Warhead@ShotgunGrenadeEnemy:
+		Damage: 8000
+	Warhead@ShotgunGrenadeAlly:
+		Damage: 4000
+	Warhead@ShotgunShrapnelEnemy:
+		Damage: 8000
+	Warhead@ShotgunShrapnelAlly:
+		Damage: 4000
+	Warhead@ShotgunTankDestroyer:
+		Damage: 8000
+	Warhead@ShotgunSmallArms:
+		Damage: 8000
+	Warhead@ShotgunChaingun:
+		Damage: 8000
 
 elitecadregun:
 	Inherits@wh: ^Warhead_Bullet_Light

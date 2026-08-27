@@ -1,5 +1,28 @@
 # Development Log
 
+## 2026-08-27 — Bulk shotgun and sniper profile consolidation
+
+- Consolidated four shotgun roots (seven resolved weapons) onto the standard medium CannonHE
+  damage profile and four sniper roots (eleven resolved weapons) onto the standard heavy
+  CannonHE profile.
+- Separate compatibility slices preserve every old damage application instead of combining
+  equal hits. This keeps per-hit integer rounding, event counts, friendly-fire splits, score
+  accounting, `BulletImmune` exclusions, and every independently rounded percentage path intact.
+  Armour-piercing and lockdown sniper descendants retain their extra bullet hits, relationship
+  restrictions, and electrical damage types.
+- The intentional gameplay change is the selected standard CannonHE armour, blast, and ordinary
+  death-animation profile on those retired flat hits. Projectiles, impact effects, reports,
+  concrete damage, cadence, targets, and all other special warheads are unchanged.
+- Independent reviewers approved the repaired 18-weapon closure. The whole-tree comparator
+  preserves guarded flat and percentage behavior on all 2345 resolved weapons and reports only
+  those 18 intended profile changes. The refreshed survey now reports 258 concrete weapons on
+  retired families: 257 mixed weapons in 199 groups plus the deferred `RA2CRM60H` decision.
+- Verification passes 401 tests (11 optional spreadsheet tests skipped), all 32 balance ledgers,
+  generator, empty-warhead, orphan-key, physical-state, and dangling-inheritance checks. A
+  controlled pinned-engine launch stayed alive and responsive for 25 seconds with no exception
+  or crash line, then its exact test process was stopped. Pricing, runtime source, the parked
+  percentage runtime change, and the engine pin remain outside this work.
+
 ## 2026-08-27 — Final low-risk single-family weapon cleanup
 
 - Consolidated four isolated active weapons away from their last retired flat-damage family:

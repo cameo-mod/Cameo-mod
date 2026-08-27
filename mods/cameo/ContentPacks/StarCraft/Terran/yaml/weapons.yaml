@@ -408,6 +408,7 @@ GhostSniper:
 	Inherits@5: ^SmallArms
 	Inherits@6: ^FlakWeapon
 	Inherits@7: ^Chaingun
+	Inherits@compat: ^SniperCannonHEHeavyCompatibility
 	ReloadDelay: 22
 	Range: 8428
 	Report: TGhFir00.aud
@@ -422,36 +423,36 @@ GhostSniper:
 		Speed: 2500
 		Width: 100
 		Inaccuracy: 0
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
+	Warhead@SniperMediumMissile:
+		Damage: 2000
+	Warhead@SniperFlak:
+		Damage: 2000
+	Warhead@SniperSmallArms:
+		Damage: 2000
+	Warhead@SniperChaingun:
+		Damage: 2000
 
 GhostSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
@@ -476,8 +477,11 @@ GhostSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
+	Warhead@SniperMediumMissile:
+		ValidRelationships: Enemy, Neutral
+		Damage: 20000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@SniperFlak:
 		ValidRelationships: Enemy, Neutral
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -501,11 +505,6 @@ GhostSniperLockdown:
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 2
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -536,6 +535,7 @@ SpecterSniper:
 	Inherits@5: ^SmallArms
 	Inherits@6: ^FlakWeapon
 	Inherits@7: ^Chaingun
+	Inherits@compat: ^SniperCannonHEHeavyCompatibility
 	ReloadDelay: 33
 	Range: 7922
 	Report: TGhFir00.aud
@@ -550,36 +550,36 @@ SpecterSniper:
 		Speed: 2500
 		Width: 100
 		Inaccuracy: 0
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+	-Warhead@MediumMissile:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@CannonHE_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
+	Warhead@SniperMediumMissile:
+		Damage: 4000
+	Warhead@SniperFlak:
+		Damage: 4000
+	Warhead@SniperSmallArms:
+		Damage: 4000
+	Warhead@SniperChaingun:
+		Damage: 4000
 
 SpecterSniperLockdown:
 	Inherits@wh: ^Warhead_Tesla_Super
@@ -604,8 +604,11 @@ SpecterSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
+	Warhead@SniperMediumMissile:
+		ValidRelationships: Enemy, Neutral
+		Damage: 40000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@SniperFlak:
 		ValidRelationships: Enemy, Neutral
 		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -629,11 +632,6 @@ SpecterSniperLockdown:
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 4
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		ValidRelationships: Enemy, Neutral
-		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
