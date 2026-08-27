@@ -1,5 +1,28 @@
 # Development Log
 
+## 2026-08-27 — Final low-risk single-family weapon cleanup
+
+- Consolidated four isolated active weapons away from their last retired flat-damage family:
+  the FutureTech cryocopter rocket onto medium missiles, the anti-tank mine onto light
+  demolition, the Waveforce chain gun onto medium bullets, and the Tiberian Sun laser 90mm
+  family onto medium anti-armour cannon damage.
+- Percentage-inert compatibility slices preserve the existing flat totals, enemy/ally target
+  splits, score accounting, and the laser's shield-only chip while adopting each selected
+  standard armour and blast profile. Every pre-existing percentage path remains independent, so
+  runtime rounding is unchanged; projectiles, effects, reports, cryo states, and mine exclusions
+  are untouched.
+- `RA2CRM60H` remains the only isolated candidate because its heavy-cannon and medium-bullet
+  signals conflict and its passenger-only damage needs an explicit classification decision. The
+  refreshed active survey now reports 266 concrete retired-family weapons: 265 mixed weapons in
+  201 groups and this one deferred isolated weapon. Pricing, runtime source, the parked percentage
+  runtime change, and the engine pin remain outside this work.
+- Independent review approved all four conversions after checking the actual resolved diff. The
+  whole-tree comparator preserves every guarded behavior across all 2345 weapons and reports only
+  the intended profile shapes. Verification passes 401 tests (11 optional spreadsheet tests
+  skipped), all ledger, generator, warhead, inheritance, and physical-state audits, and a
+  controlled pinned-engine launch that stayed alive and responsive with no new exception log;
+  its exact test process was then stopped.
+
 ## 2026-08-27 — Steel Mako cannon-family consolidation
 
 - Consolidated the Steel Mako cannon root and its elite, EMP, and EMP-elite descendants away from

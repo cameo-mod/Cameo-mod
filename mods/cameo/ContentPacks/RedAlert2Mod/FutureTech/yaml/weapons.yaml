@@ -13,22 +13,83 @@ ACV_Machinegun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
+
+^FutureCryocopterRocketMissileCompatibility:
+	Warhead@FutureCryocopterMissileAP_Medium: AreaDamage
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Water, Air
+		Spread: 64
+		Damage: 16000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@FutureCryocopterMissileAP_MediumFriendly: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water, Air
+		Spread: 64
+		Damage: 8000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 95
+			COMPOSITE: 44
+			BLAST: 68
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 145
+			Superheavy: 200
+			Heavy: 177
+			Medium: 161
+			Light: 146
+			Spaceship: 124
+			Helicopter: 123
+			Scout: 114
+			Bomber: 112
+			Concrete: 82
+			Fighter: 75
+			Plate: 64
+			Steel: 55
+			Wood: 53
+			Flak: 44
+			Heroic: 37
+			None: 33
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+
 Future_Cryocopter_Rocket:
 	Inherits: ^Grenade
 	Inherits@2: ^D2KRocket
 	Inherits@3: ^SteelMediumMissile
+	Inherits@compat: ^FutureCryocopterRocketMissileCompatibility
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 4
 	Range: 5200
 	Report: vifvatta.wav
 	TargetActorCenter: true
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 16000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 8

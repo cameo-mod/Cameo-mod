@@ -5439,13 +5439,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "75",
@@ -5453,10 +5446,17 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "120",
+        "tag": "TSLaserCannonAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "TSLaserShieldChip",
         "type": "SpreadDamage"
        }
       ],
@@ -5472,7 +5472,8 @@
        "^Projectile_Shell_Medium",
        "^Effect_CannonAP_Medium",
        "^LaserWeapon",
-       "^TSLaserEffect"
+       "^TSLaserEffect",
+       "^TSLaser90mmCannonCompatibility"
       ],
       "warheads": [
        "^Warhead_CannonAP_Medium"
@@ -5518,13 +5519,6 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "6000",
-        "falloff": null,
-        "spread": "150",
-        "tag": "LaserWeapon",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "3",
         "falloff": null,
         "spread": "75",
@@ -5532,10 +5526,17 @@
         "type": "AreaDamagePercentage"
        },
        {
+        "damage": "6000",
+        "falloff": "100, 0",
+        "spread": "120",
+        "tag": "TSLaserCannonAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
         "damage": "600",
         "falloff": null,
         "spread": "300",
-        "tag": "LaserExtraDamage",
+        "tag": "TSLaserShieldChip",
         "type": "SpreadDamage"
        }
       ],

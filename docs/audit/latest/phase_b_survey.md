@@ -1,17 +1,13 @@
 # Phase B Mixed-Weapon Survey
 
 Generated: 2026-08-27
-Total concrete weapons on old families: 270
+Total concrete weapons on old families: 266
 Single old-family with new inherits (Phase B completion): 0
-Pure single old-family (mechanical Phase A candidates): 5
+Pure single old-family (mechanical Phase A candidates): 1
 Mixed old-family (Phase B maintainer sign-off): 265 in 201 groups
 
 ## Pure single old-family (mechanical Phase A candidates)
-- `Future_Cryocopter_Rocket` (ContentPacks\RedAlert2Mod\FutureTech\yaml\weapons.yaml) | old: Grenade | Grenade=16000, GrenadeFriendlyFire=8000, GrenadePercentage=8, MissileAP_Heavy=16000, MissileAP_Medium=16000, PhysicalStateCryo1=0, PhysicalStateCryo2=0, PhysicalStateCryo3=0, Effect=0, EffectAir=0
 - `RA2CRM60H` (ContentPacks\RedAlert2\Shared\yaml\weapons.yaml) | old: SniperWeapon | CannonHE_Heavy=2000, Bullet_Medium=2000, SniperWeapon=2000, SniperWeaponExtraDamage=2000, SniperWeaponPercentage=1
-- `ATMine` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | old: HeavyMissile | HeavyMissile=50000, HeavyMissilePercentage=25, Effect=0, Smudge=0
-- `ZeroFighterChainGunWaveforce` (ContentPacks\RedAlert\Shared\yaml\weapons.yaml) | old: Grenade | Bullet_Medium=4000, Railgun_Heavy=4000, GrenadeFriendlyFire=500, GrenadePercentage=2
-- `TSLaser90mm` (weapons\tiberiansun.yaml) | old: LaserWeapon | CannonAP_Medium=6000, LaserWeapon=6000, LaserWeaponPercentage=3
 
 ## Single old-family with new inherits (finish conversion)
 ## Mixed-inherit (Phase B) — dominant-damage analysis for maintainer sign-off

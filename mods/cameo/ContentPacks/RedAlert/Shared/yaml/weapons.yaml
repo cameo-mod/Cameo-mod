@@ -636,11 +636,76 @@ ZeroFighterChainGun:
 	Warhead@Bullet_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
+
+^ZeroFighterWaveforceBulletCompatibility:
+	Warhead@ZeroFighterBullet_Medium: AreaDamage
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Water
+		Spread: 100
+		Damage: 1000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ZeroFighterBullet_MediumFriendly: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		Damage: 500
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 150
+			None: 200
+			Flak: 160
+			Plate: 151
+			Scout: 117
+			Light: 108
+			Fighter: 99
+			Wood: 98
+			Bomber: 92
+			Heroic: 89
+			Steel: 85
+			Medium: 84
+			Helicopter: 75
+			Heavy: 67
+			Concrete: 62
+			Spaceship: 57
+			Superheavy: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
+
 ZeroFighterChainGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: ^Grenade
 	Inherits@3: ZeroFighterChainGun
 	Inherits@4: ^WaveforceBulletProjectile
+	Inherits@compat: ^ZeroFighterWaveforceBulletCompatibility
 	Warhead@Bullet_Medium:
 		PercentageScale: 6667
 	Projectile: Bullet
@@ -650,9 +715,8 @@ ZeroFighterChainGunWaveforce:
 	Warhead@Railgun_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 500
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -1332,14 +1396,47 @@ BarrelExplode:
 		Size: 2
 		Delay: 5
 
+^ATMineDemolitionCompatibility:
+	Warhead@ATMineDemolition_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 100
+		FriendlyFireSpread: 100
+		ValidTargets: Ground, Water
+		InvalidTargets: Mine
+		Spread: 233
+		Damage: 50000
+		Falloff: 100, 45, 18, 6, 0
+		Versus:
+			HAZMAT: 63
+			COMPOSITE: 101
+			BLAST: 41
+			REFLECTOR: 75
+			ARMOR: 70
+			Shield: 143
+			Wood: 200
+			None: 183
+			Steel: 165
+			Flak: 143
+			Concrete: 136
+			Scout: 109
+			Plate: 107
+			Light: 86
+			Fighter: 70
+			Medium: 69
+			Bomber: 62
+			Heroic: 59
+			Heavy: 58
+			Helicopter: 54
+			Superheavy: 51
+			Spaceship: 47
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+
 ATMine:
 	Inherits: ^DamagingExplosionHE
 	Inherits@2: ^HeavyMissile
+	Inherits@compat: ^ATMineDemolitionCompatibility
 	Report: mineblo1.aud
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water
-		InvalidTargets: Mine
-		Damage: 50000
+	-Warhead@HeavyMissile:
 	Warhead@HeavyMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
 		InvalidTargets: Mine

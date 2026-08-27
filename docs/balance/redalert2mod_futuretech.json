@@ -12,20 +12,6 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "400",
-        "tag": "Grenade",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "8000",
-        "falloff": "100, 50, 33, 25, 20",
-        "spread": "200",
-        "tag": "GrenadeFriendlyFire",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "8",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -45,6 +31,20 @@
         "spread": "64",
         "tag": "MissileAP_Medium",
         "type": "AreaDamage"
+       },
+       {
+        "damage": "16000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "FutureCryocopterMissileAP_Medium",
+        "type": "AreaDamage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "FutureCryocopterMissileAP_MediumFriendly",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
@@ -56,7 +56,8 @@
       "versus_templates": [
        "^Grenade",
        "^D2KRocket",
-       "^SteelMediumMissile"
+       "^SteelMediumMissile",
+       "^FutureCryocopterRocketMissileCompatibility"
       ],
       "warheads": [
        "^Warhead_MissileAP_Heavy",
