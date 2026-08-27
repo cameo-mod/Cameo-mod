@@ -203,6 +203,7 @@ RocketsRACryo:
 		Damage: 20000
 		ValidTargets: Ground, Water, Air
 DragunovSniper:
+	Inherits@wh: ^Warhead_CannonAP_Heavy
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^RailgunWeapon
 	Inherits@3: ^LightMissile
@@ -210,36 +211,73 @@ DragunovSniper:
 	Inherits@5: ^FlakWeapon
 	ReloadDelay: 85
 	Range: 5804
-	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 80000
+	TargetActorCenter: false
+	-Warhead@TankDestroyerCannon:
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 80000
+		Spread: 1
+		Falloff: 100, 0
+	-Warhead@RailgunWeapon:
+	-Warhead@RailgunExtraDamage:
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 80000
+		Spread: 1
+		Falloff: 100, 0
+	-Warhead@LightMissile:
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 80000
+		Spread: 1
+		Falloff: 100, 0
+	-Warhead@HeavyCannon:
 	Warhead@HeavyCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 80000
+		Spread: 1
+		Falloff: 100, 0
+	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@CannonAP_Heavy:
+		ValidTargets: Ground, Water, Air
+		FriendlyFireDamage: 100
+		FriendlyFireSpread: 100
+		Spread: 1
+		Falloff: 100, 0
+		# Still heavily damages tanks, but cannot one-shot a Mammoth or win the return-fire duel.
+		Damage: 200000
+		PercentageScale: 0
+	Warhead@LegacyRailgunExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 1
+		Damage: 1000
+		Falloff: 100, 0
+		Versus:
+			REFLECTOR: 50
+			Shield: 100
+			None: 1
+			Flak: 1
+			Plate: 1
+			Heroic: 1
+			Superheavy: 1
+			Heavy: 1
+			Medium: 1
+			Light: 1
+			Scout: 1
+			Steel: 1
+			Concrete: 1
+			Wood: 1
+			Fighter: 1
+			Bomber: 1
+			Helicopter: 1
+			Spaceship: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
 
 Flamer:
 	Inherits@wh: ^Warhead_Flame_Light

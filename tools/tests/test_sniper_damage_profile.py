@@ -15,20 +15,38 @@ from formula import dps
 from percentage_damage import percentage_applications
 
 
-ROOT_SNIPERS = ("AsianSniper", "GhostSniper", "SpecterSniper", "VonSniper")
+ROOT_SNIPERS = (
+    "AsianSniper", "GhostSniper", "SpecterSniper", "VonSniper",
+    "GDISniperRifle", "CommandoSniper",
+)
 RESOLVED_SNIPERS = (
     "AsianSniper", "AsianSniperAP", "AsianSniperLockdown",
     "GhostSniper", "GhostSniperBunker", "GhostSniperLockdown",
     "SpecterSniper", "SpecterSniperLockdown",
     "VonSniper", "VonSniperAP", "VonSniperLockdown",
+    "GDISniperRifle", "CommandoSniper", "DragunovSniper",
 )
-SPATIAL_DAMAGE_TYPES = {"AreaDamage", "AreaDamagePercentage", "SpreadDamage"}
+SPATIAL_DAMAGE_TYPES = {
+    "AreaDamage", "AreaDamagePercentage", "OpenToppedDamage", "SpreadDamage",
+}
 FLAT_DAMAGE_TYPES = {"AreaDamage", "SpreadDamage", "TargetDamage"}
 SNIPER_ACTORS = {
     "AsianSniper": "asianalliance_asiancommando",
     "GhostSniper": "terran_ghost",
     "SpecterSniper": "terran_specter",
     "VonSniper": "tkm_von",
+}
+RETIRED_FOLLOWUP_WARHEADS = {
+    "GDISniperRifle": {
+        "Warhead@SmallArms", "Warhead@Grenade", "Warhead@GrenadeFriendlyFire",
+        "Warhead@FlakWeapon", "Warhead@Chaingun",
+    },
+    "CommandoSniper": {"Warhead@SniperWeapon", "Warhead@SniperWeaponExtraDamage", "Warhead@Chaingun"},
+    "DragunovSniper": {
+        "Warhead@TankDestroyerCannon", "Warhead@RailgunWeapon",
+        "Warhead@RailgunExtraDamage", "Warhead@LightMissile",
+        "Warhead@HeavyCannon", "Warhead@FlakWeapon",
+    },
 }
 
 
@@ -53,7 +71,7 @@ def center_hit_damage(weapon, armor, hp):
     for warhead in weapon.children:
         if not warhead.key.startswith("Warhead") or warhead.value not in FLAT_DAMAGE_TYPES:
             continue
-        if "FriendlyFire" in warhead.key or "ExtraDamage" in warhead.key:
+        if "FriendlyFire" in warhead.key:
             continue
         damage = int_field(warhead, "Damage", 0)
         versus = child(warhead, "Versus")
@@ -133,6 +151,33 @@ class SniperDamageProfileTests(unittest.TestCase):
             sniper_ttk = mammoth_hp / damage_per_tick(rifle, mammoth_armor, mammoth_hp)
             mammoth_ttk = sniper_hp / damage_per_tick(tusk, sniper_armor, sniper_hp)
             self.assertGreater(sniper_ttk, mammoth_ttk, weapon_name)
+
+    def test_dragunov_keeps_anti_materiel_profile_and_loses_to_mammoth(self):
+        weapon = self.rules.resolve_weapon("DragunovSniper")
+        warhead = child(weapon, "Warhead@CannonAP_Heavy")
+        self.assertIsNotNone(warhead)
+        self.assertEqual("Ground, Water, Air", child(warhead, "ValidTargets").value)
+
+        versus = {item.key: int(item.value) for item in child(warhead, "Versus").children}
+        self.assertGreater(versus["Heavy"], versus["None"])
+        self.assertGreater(versus["Superheavy"], versus["Flak"])
+
+        mammoth = self.rules.resolve("ra1_soviets_mammothtank")
+        mammoth_armor, mammoth_hp = armor_and_hp(mammoth)
+        dragunov = self.rules.resolve("ra1_soviets_dragunovantimaterialsniper")
+        dragunov_armor, dragunov_hp = armor_and_hp(dragunov)
+        tusk = self.rules.resolve_weapon("MammothTusk")
+
+        dragunov_ttk = mammoth_hp / damage_per_tick(weapon, mammoth_armor, mammoth_hp)
+        mammoth_ttk = dragunov_hp / damage_per_tick(tusk, dragunov_armor, dragunov_hp)
+        self.assertLess(center_hit_damage(weapon, mammoth_armor, mammoth_hp), mammoth_hp)
+        self.assertGreater(dragunov_ttk, mammoth_ttk)
+
+    def test_followup_snipers_remove_retired_flat_damage_slots(self):
+        for name, retired in RETIRED_FOLLOWUP_WARHEADS.items():
+            weapon = self.rules.resolve_weapon(name)
+            resolved_keys = {node.key for node in weapon.children}
+            self.assertFalse(retired & resolved_keys, f"{name}: {retired & resolved_keys}")
 
 
 if __name__ == "__main__":

@@ -874,10 +874,12 @@ EMPGrenadeExplode:
 		ValidTargets: Ground, Ship
 
 GDISniperRifle:
+	Inherits@wh: ^Warhead_Bullet_Heavy
 	Inherits: ^SmallArms
 	Inherits@2: ^Grenade
 	Inherits@3: ^FlakWeapon
 	Inherits@4: ^Chaingun
+	Inherits@compat: ^SniperBulletHeavyCompatibility
 	ReloadDelay: 75
 	Range: 8655
 	Report: silencer.aud
@@ -892,33 +894,76 @@ GDISniperRifle:
 		Speed: 2500
 		Width: 100
 		-LaunchAngle:
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
+	-Warhead@SmallArms:
 	Warhead@SmallArmsPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Spread: 1
+		Falloff: 100, 0
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
 	Warhead@GrenadePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Spread: 1
+		Falloff: 100, 0
+	-Warhead@FlakWeapon:
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Spread: 1
+		Falloff: 100, 0
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Bullet_Heavy:
+		ValidRelationships: Neutral, Enemy
+		Spread: 1
+		Falloff: 100, 0
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 0
+	-Warhead@SniperMediumMissile:
+	Warhead@SniperFlak:
+		Damage: 8000
+	Warhead@SniperSmallArms:
+		Damage: 8000
+	Warhead@SniperChaingun:
+		Damage: 8000
+	Warhead@SniperGrenadeFriendlyFire: AreaDamage
+		ValidRelationships: Ally
+		ValidTargets: Ground, Water, Air
+		Spread: 1
+		Damage: 4000
+		Falloff: 100, 0
+		Versus:
+			HAZMAT: 99
+			COMPOSITE: 42
+			BLAST: 68
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 173
+			None: 200
+			Flak: 182
+			Plate: 162
+			Scout: 114
+			Light: 99
+			Fighter: 95
+			Wood: 94
+			Heroic: 93
+			Bomber: 80
+			Steel: 73
+			Concrete: 71
+			Helicopter: 69
+			Medium: 68
+			Spaceship: 67
+			Heavy: 66
+			Superheavy: 65
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
@@ -1376,8 +1421,10 @@ GDIRigMissilePodAMT:
 	Inherits@2: ^AMTProjectile
 
 CommandoSniper:
+	Inherits@wh: ^Warhead_Bullet_Heavy
 	Inherits: ^SniperWeapon
 	Inherits@2: ^Chaingun
+	Inherits@compat: ^SniperBulletHeavyCompatibility
 	ValidTargets: Ground, Water, Air
 	InvalidTargets: Structure
 	ReloadDelay: 100
@@ -1393,16 +1440,58 @@ CommandoSniper:
 		Speed: 3333
 		Width: 111
 		Inaccuracy: 11
-	Warhead@SniperWeapon: SpreadDamage
+	TargetActorCenter: false
+	-Warhead@SniperWeapon:
+	-Warhead@SniperWeaponExtraDamage:
+	Warhead@LegacySniperOpenToppedDamage: OpenToppedDamage
+		ValidTargets: Infantry, Monster, Garrisoned
+		Amount: 1
 		Damage: 20000
-	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
-		Damage: 20000
+		Spread: 1
+		Falloff: 100, 0
+		Versus:
+			Shield: 110
+			None: 100
+			Flak: 94
+			Plate: 88
+			Heroic: 82
+			Scout: 76
+			Light: 70
+			Medium: 64
+			Heavy: 58
+			Superheavy: 52
+			Wood: 46
+			Steel: 40
+			Concrete: 34
+			Fighter: 28
+			Bomber: 22
+			Helicopter: 16
+			Spaceship: 10
+		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@SniperWeaponPercentage: AreaDamagePercentage
 		Damage: 10
-	Warhead@Chaingun: SpreadDamage
-		Damage: 20000
+		Spread: 1
+		Falloff: 100, 0
+	-Warhead@Chaingun:
 	Warhead@ChaingunPercentage: AreaDamagePercentage
 		Damage: 10
+		Spread: 1
+		Falloff: 100, 0
+	Warhead@Bullet_Heavy:
+		ValidTargets: Infantry, Monster, Garrisoned
+		FriendlyFireDamage: 100
+		FriendlyFireSpread: 100
+		Spread: 1
+		Falloff: 100, 0
+		Damage: 20000
+		PercentageScale: 0
+	-Warhead@SniperMediumMissile:
+	-Warhead@SniperFlak:
+	-Warhead@SniperSmallArms:
+	Warhead@SniperChaingun:
+		Damage: 20000
+		FriendlyFireDamage: 100
+		FriendlyFireSpread: 100
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
