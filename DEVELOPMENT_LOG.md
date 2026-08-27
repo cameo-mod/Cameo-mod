@@ -15,8 +15,16 @@
   concrete damage, cadence, targets, and all other special warheads are unchanged.
 - Independent reviewers approved the repaired 18-weapon closure. The whole-tree comparator
   preserves guarded flat and percentage behavior on all 2345 resolved weapons and reports only
-  those 18 intended profile changes. The refreshed survey now reports 258 concrete weapons on
-  retired families: 257 mixed weapons in 199 groups plus the deferred `RA2CRM60H` decision.
+  those 18 intended profile changes.
+- Repaired two survey blind spots: its active central-file list omitted D2K, StarCraft, and
+  Outpost 2 while retaining inactive files, and its top-level-name parser failed to recognize
+  `^Template` blocks. The corrected survey reports 266 concrete roots after this batch (274 on
+  the same corrected basis before it): 263 mixed weapons in 201 groups and three isolated roots.
+  A new machine-readable classification report conservatively leaves 205 roots for human
+  decisions while prioritizing 31 roots where name and legacy evidence agree and 30 with a
+  legacy-only suggestion. It preserves full family-and-tier identities and records flat and
+  percentage hit inventories, physical-state bindings, descendant closure, and descendant
+  old-key overrides for later proposed-diff review.
 - Verification passes 401 tests (11 optional spreadsheet tests skipped), all 32 balance ledgers,
   generator, empty-warhead, orphan-key, physical-state, and dangling-inheritance checks. A
   controlled pinned-engine launch stayed alive and responsive for 25 seconds with no exception
