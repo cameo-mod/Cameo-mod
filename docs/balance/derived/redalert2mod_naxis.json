@@ -12,37 +12,34 @@
    "horten_bomber.nax": {
     "armaments": [
      {
-      "avg_versus": 0.708,
+      "avg_versus": 1.0928,
       "damage_total": 50000.0,
       "dps_floor": 1270.39,
       "eff_reload": 5.0,
-      "effective_damage": 98535.49,
-      "effective_dps": 12269.02,
-      "effective_per_shot": 61345.08,
+      "effective_damage": 68813.52,
+      "effective_dps": 11746.4,
+      "effective_per_shot": 58732.01,
       "factor_deadzone": 1.0,
       "factor_range": 0.875,
       "factor_targets": 0.95,
-      "footprint": 19.0142,
-      "k": 1.476,
-      "k_context": 1.2269,
-      "k_flat": 1.3231,
-      "k_flat_context": 1.0999,
+      "footprint": 1.5051,
+      "k": 1.4131,
+      "k_context": 1.1746,
+      "k_flat": 1.2603,
+      "k_flat_context": 1.0476,
       "model_limitations": [
        "unmodeled_projectile_trajectory:GravityBomb"
       ],
       "model_status": "provisional",
-      "overkill": 0.9034,
+      "overkill": 0.9436,
       "pct_absolute": 7641.45,
       "pct_absolute_context": 6351.96,
-      "reliability": 1.02,
+      "reliability": 1.0,
       "sigma": 0.0,
       "slot": "Armament",
       "weapon": "JapanSuperBomb"
      }
     ],
-    "physical_state_multiplier": 1.1474,
-    "physical_state_weapon": "JapanSuperBomb",
-    "physical_state_weight": 0.5896,
     "shield_always_on": false,
     "shield_gated_on_upgrade": false,
     "shield_pool": 150000.0

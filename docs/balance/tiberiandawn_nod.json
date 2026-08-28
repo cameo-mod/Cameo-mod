@@ -5029,11 +5029,11 @@
      {
       "damage_warheads": [
        {
-        "damage": "30000",
-        "falloff": null,
-        "spread": "600",
-        "tag": "HeavyMissile",
-        "type": "SpreadDamage"
+        "damage": "120000",
+        "falloff": "100, 82, 61, 38, 0",
+        "spread": "88",
+        "tag": "MissileChem_Heavy",
+        "type": "AreaDamage"
        },
        {
         "damage": "15",
@@ -5043,13 +5043,6 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "30000",
-        "falloff": "100, 50, 25, 10, 5",
-        "spread": "800",
-        "tag": "HeavyBomb",
-        "type": "SpreadDamage"
-       },
-       {
         "damage": "15",
         "falloff": "100, 50, 25, 10, 5",
         "spread": "400",
@@ -5057,25 +5050,11 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "30000",
-        "falloff": "111, 33, 11, 3",
-        "spread": "1000",
-        "tag": "HeavyFlameWeapon",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "15",
         "falloff": "111, 33, 11, 3",
         "spread": "500",
         "tag": "HeavyFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "30000",
-        "falloff": "99, 66, 33",
-        "spread": "1050",
-        "tag": "HeavyChemicalWeapon",
-        "type": "AreaDamage"
        },
        {
         "damage": "15",
@@ -5086,21 +5065,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
       "reloaddelay": "142",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileChem_Heavy",
        "^HeavyMissile",
        "^HeavyBomb",
        "^HeavyFlameWeapon",
        "^HeavyChemicalWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileChem_Heavy"
+      ],
       "weapon": "ChemicalHonestJohn",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

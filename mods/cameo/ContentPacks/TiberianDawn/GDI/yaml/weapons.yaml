@@ -398,6 +398,7 @@ MammothMissilesAMT:
 	Inherits@2: ^AMTProjectile
 
 OrcaMissiles:
+	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@2: ^TankDestroyerCannon
 	Inherits@3: ^ShrapnelWeapon
@@ -449,6 +450,18 @@ OrcaMissiles:
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+	-Warhead@HeavyCannon:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyMissile:
+	-Warhead@MediumMissile:
+	Warhead@MissileHE_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 0
 
 OrcaMissilesAMT:
 	Inherits: OrcaMissiles
@@ -567,6 +580,7 @@ A10CarrierMissiles_AA:
 
 
 TowerMissile:
+	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^TankDestroyerCannon
 	Inherits@2: ^Grenade
 	Inherits@3: ^ShrapnelWeapon
@@ -653,6 +667,19 @@ TowerMissile:
 		ImpactSounds: xplobig4.aud
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
+	-Warhead@TankDestroyerCannon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@HeavyAAWeapon:
+	-Warhead@HeavyMissile:
+	-Warhead@MediumMissile:
+	Warhead@MissileHE_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 0
 
 TowerMissileAMT:
 	Inherits: TowerMissile

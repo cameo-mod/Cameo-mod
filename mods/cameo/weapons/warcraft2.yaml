@@ -500,6 +500,7 @@ wc2mageBlizzard_Spread:
 		#Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
 
 wc2mageBlizzard_Projectile:
+	Inherits@collapsewh: ^Warhead_Cryo_Heavy
 	Inherits: ^ShrapnelWeapon
 	Inherits@2: ^FlakWeapon
 	Inherits@3: ^LightChemicalWeapon
@@ -567,6 +568,15 @@ wc2mageBlizzard_Projectile:
 		Image: wc2_effect_blizzard
 		Explosions: hit
 		ImpactSounds: wc2_firehit.aud
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@LightChemicalWeapon:
+	-Warhead@LightFlameWeapon:
+	Warhead@Cryo_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 0
 
 # Super weapon blizzard.
 

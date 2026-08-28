@@ -749,6 +749,7 @@ ChemicalStealthTankExplosion:
 		Size: 1,1
 
 ChemicalHonestJohn:
+	Inherits@collapsewh: ^Warhead_MissileChem_Heavy
 	Inherits: ^HeavyMissile
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^HeavyFlameWeapon
@@ -813,6 +814,14 @@ ChemicalHonestJohn:
 		GlowFadeFrames: 60
 		GlowFadeInFrames: 12
 		ImpactSounds: xplobig6.aud
+	-Warhead@HeavyMissile:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@HeavyChemicalWeapon:
+	Warhead@MissileChem_Heavy:
+		ValidTargets: Ground, Water
+		Damage: 120000
+		PercentageScale: 0
 
 MachineGunBuggy2:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium

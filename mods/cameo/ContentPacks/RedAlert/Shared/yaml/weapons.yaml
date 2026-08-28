@@ -1021,6 +1021,7 @@ ParaBombCryo:
 	Warhead@CryoBlast_Heavy:
 
 JapanSuperBomb:
+	Inherits@collapsewh: ^Warhead_Demolition_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumChemicalWeapon
@@ -1085,6 +1086,17 @@ JapanSuperBomb:
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@MediumChemicalWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@HeavyBomb:
+	Warhead@Demolition_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 50000
+		PercentageScale: 0
 
 JapanCarrierFighterBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy

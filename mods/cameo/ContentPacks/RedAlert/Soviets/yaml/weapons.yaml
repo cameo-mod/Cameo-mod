@@ -2100,6 +2100,7 @@ MammothTuskTargetingComputer:
 	ValidTargets: Ground, Water, Air
 
 MammothTuskThermobaric:
+	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^HeavyFlameWeapon
@@ -2212,6 +2213,21 @@ MammothTuskThermobaric:
 		GlowFadeFrames: 60
 		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
+
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyMissile:
+	Warhead@Thermobaric_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 32000
+		PercentageScale: 0
 
 MammothTuskThermobaricTargetingComputer:
 	Inherits: MammothTuskThermobaric
@@ -2519,6 +2535,7 @@ MammothTusk2TargetingComputer:
 	ValidTargets: Ground, Water, Air
 
 MammothTusk2Thermobaric:
+	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
 	Inherits: ^HeavyFlameWeapon
 	Inherits@2: ^HeavyBomb
 	Inherits@3: ^HeavyMissile
@@ -2576,6 +2593,14 @@ MammothTusk2Thermobaric:
 		GlowFadeFrames: 60
 		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
+
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@HeavyBomb:
+	-Warhead@HeavyMissile:
+	Warhead@Thermobaric_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 48000
+		PercentageScale: 0
 
 MammothTusk2ThermobaricTargetingComputer:
 	Inherits: MammothTusk2Thermobaric
@@ -2720,6 +2745,7 @@ MonsterTankTuskTesla:
 		AimTargetStances: Enemy, Neutral
 
 MonsterTankTuskThermobaric:
+	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
 	Inherits: ^LightFlameWeapon
 	Inherits@2: ^MediumFlameWeapon
 	Inherits@3: ^HeavyFlameWeapon
@@ -2832,6 +2858,21 @@ MonsterTankTuskThermobaric:
 		GlowFadeFrames: 60
 		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
+
+	-Warhead@LightFlameWeapon:
+	-Warhead@MediumFlameWeapon:
+	-Warhead@HeavyFlameWeapon:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@FlakWeapon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@MediumMissile:
+	-Warhead@HeavyMissile:
+	Warhead@Thermobaric_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 106000
+		PercentageScale: 0
 
 VolkovMagneticWeapon:
 	Inherits: ^Warhead_CannonHE_Heavy

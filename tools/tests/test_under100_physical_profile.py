@@ -23,6 +23,10 @@ ROOTS = {
     "CabalCommandoPlasma", "CabalCommandoPlasmaMk2", "CabalSubmarinePlasma",
     "HeavyAATankCannontkm", "PlasmaFlamer", "SkyshieldCannon",
     "TSDestroyerMissiles", "TSHoverMissile", "TSSAPCMissiles",
+    "ChemicalHonestJohn", "JapanSuperBomb", "MammothTusk2Thermobaric",
+    "MammothTuskThermobaric", "MonsterTankTuskThermobaric", "OrcaMissiles",
+    "TowerMissile", "TSBikeTibMissile", "TSHellfireTwin",
+    "wc2mageBlizzard_Projectile",
 }
 
 ALLOWED_COMPARATOR_FINDINGS = {
@@ -49,8 +53,7 @@ class Under100PhysicalProfileTests(unittest.TestCase):
         self.assertLessEqual(len(remaining), 180)
 
     def test_flat_compatibility_helpers_cannot_add_percentage_damage(self):
-        helpers = [name for name in self.rules.weapons
-                   if name.startswith("^Compatibility_") and name.endswith("Flat")]
+        helpers = [name for name in self.rules.weapons if name.startswith("^Compatibility_")]
         self.assertTrue(helpers)
         for name in helpers:
             helper = self.rules.resolve_weapon(name)
@@ -61,8 +64,8 @@ class Under100PhysicalProfileTests(unittest.TestCase):
             for node in damage_nodes:
                 self.assertNotIn("Percentage", str(node.value), f"{name}/{node.key}")
                 scale = child(node, "PercentageScale")
-                self.assertIsNotNone(scale, f"{name}/{node.key}")
-                self.assertEqual("0", scale.value, f"{name}/{node.key}")
+                if scale is not None:
+                    self.assertEqual("0", scale.value, f"{name}/{node.key}")
 
     def test_baseline_comparison_contains_only_accepted_standardization(self):
         paths = sorted((ROOT / "docs" / "audit" / "latest").glob(

@@ -241,6 +241,7 @@ TSCABALObeliskLaserFire:
 		ValidTargets: Ground, Ship
 
 TSHellfireTwin:
+	Inherits@collapsewh: ^Warhead_MissileHE_Heavy
 	Inherits: ^HeavyCannon
 	Inherits@TD: ^TankDestroyerCannon
 	Inherits@SHRAP: ^ShrapnelWeapon
@@ -299,6 +300,18 @@ TSHellfireTwin:
 		Explosions: cabal_missileexplosion
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Water, Air
+	-Warhead@HeavyCannon:
+	-Warhead@TankDestroyerCannon:
+	-Warhead@ShrapnelWeapon:
+	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@HeavyMissile:
+	-Warhead@MediumMissile:
+	Warhead@MissileHE_Heavy:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 0
 TSCABALEnlightedLaser:
 	Range: 10088
 	ReloadDelay: 120
