@@ -98,7 +98,7 @@ class FinalBulkWeaponConsolidationTests(unittest.TestCase):
             self.assertTrue(own.isdisjoint(inherited), weapon)
 
     def test_structural_backlog_ratchet_was_lowered(self):
-        self.assertEqual(699, SPLIT_BASELINE)
+        self.assertEqual(693, SPLIT_BASELINE)
 
     def test_rejected_runtime_and_role_hazards_remain_unconverted(self):
         rules = Ruleset(ROOT)

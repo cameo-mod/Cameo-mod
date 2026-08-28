@@ -34,6 +34,9 @@ from miniyaml import Ruleset  # noqa: E402
 
 PAIR = {"Bullet_Light", "Bullet_Medium"}
 FINALIZED_DOWNSTREAM = {
+    "JHighVWaveforce": ("Waveforce_HeavyFlatCompatibility", 12000, 8325),
+    "JapanSpeedBoatGunWaveforce": (
+        "Waveforce_HeavyFlatCompatibility", 6000, 9984),
     "light_inf_lmg_ordos_upgrade": ("Laser_HeavyFlatCompatibility", 6000, 9984),
 }
 

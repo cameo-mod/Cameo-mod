@@ -1157,11 +1157,18 @@ NambuMG:
 	Warhead@Bullet_Light:
 		Damage: 4000
 NambuMGWaveforce:
+	Inherits@roleflat: ^Compatibility_Waveforce_HeavyFlat
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: NambuMG
 	Inherits@3: ^WaveforceBulletProjectile
 	Warhead@Bullet_Light: AreaDamage
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Railgun_Heavy:
+	Warhead@Waveforce_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 ZeroFighterArrows:
 	Inherits: SkyHawkArrows
 	Range: 6615
@@ -2198,6 +2205,7 @@ JHighV:
 		Damage: 8000
 		PercentageScale: 7488
 JHighVWaveforce:
+	Inherits@roleflat: ^Compatibility_Waveforce_HeavyFlat
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JHighV
 	Inherits@3: ^WaveforceBulletProjectile
@@ -2208,6 +2216,12 @@ JHighVWaveforce:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 7488
+	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Railgun_Heavy:
+	Warhead@Waveforce_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		PercentageScale: 8325
 ExecutionerDeath:
 	Inherits: MiniNuke
 	Report: JUShoEx_OmegaShockwaveStereo.wav

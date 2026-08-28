@@ -550,6 +550,7 @@ t30shell:
 	# 	AimChance: 0
 	# 	AimTargetStances: Enemy, Neutral
 HueyCryoMissiles:
+	Inherits@roleflat: ^Compatibility_Cryo_MediumFlat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@wh3: ^Warhead_Concussion_Medium
@@ -588,6 +589,13 @@ HueyCryoMissiles:
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship
 		ImpactActors: false
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
+	Warhead@Cryo_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 HueyTwinMissiles:
 	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
 	Inherits@wh: ^Warhead_Demolition_Light

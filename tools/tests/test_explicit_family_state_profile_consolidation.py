@@ -112,8 +112,8 @@ class ExplicitFamilyStateProfileTests(unittest.TestCase):
             self.assertEqual(expected, cohort.full_hash(self.rules, name), name)
 
     def test_ratchets_match_the_live_reduction(self):
-        self.assertEqual(699, SPLIT_BASELINE)
-        self.assertEqual(381, BROADCAST_BASELINE)
+        self.assertEqual(693, SPLIT_BASELINE)
+        self.assertEqual(379, BROADCAST_BASELINE)
 
 
 if __name__ == "__main__":

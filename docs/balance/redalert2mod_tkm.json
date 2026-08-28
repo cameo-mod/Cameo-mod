@@ -64,24 +64,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 72, 50, 32, 18, 8, 0",
-        "spread": "350",
-        "tag": "Concussion_Medium",
+        "damage": "6000",
+        "falloff": "100, 45, 0",
+        "spread": "42",
+        "tag": "Cryo_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -94,6 +80,7 @@
       "requires": "tkm_upgrade_cryorocketsupgrade",
       "slot": "Armament@PRIMARYNATO",
       "versus_templates": [
+       "^Compatibility_Cryo_MediumFlat",
        "^Warhead_Demolition_Light",
        "^Warhead_MissileAP_Medium",
        "^Warhead_Concussion_Medium",

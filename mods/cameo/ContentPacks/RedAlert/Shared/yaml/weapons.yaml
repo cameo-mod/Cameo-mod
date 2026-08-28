@@ -2138,6 +2138,7 @@ JapanSpeedBoatGun:
 		Damage: 4000
 		PercentageScale: 9975
 JapanSpeedBoatGunWaveforce:
+	Inherits@roleflat: ^Compatibility_Waveforce_HeavyFlat
 	Inherits: ^WaveforceBulletWarhead
 	Inherits@2: JapanSpeedBoatGun
 	Inherits@3: ^WaveforceBulletProjectile
@@ -2145,6 +2146,12 @@ JapanSpeedBoatGunWaveforce:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	-Warhead@Bullet_MediumFlatCompatibility:
+	-Warhead@Railgun_Heavy:
+	Warhead@Waveforce_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 YamatoCannon:
 	Inherits@wh: ^Warhead_Demolition_Heavy

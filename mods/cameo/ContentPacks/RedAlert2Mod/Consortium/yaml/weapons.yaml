@@ -1846,8 +1846,9 @@ SteelQuantumTurretRail:
 	-Warhead@TeslaWeapon:
 	Warhead@Quantum_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 12600
-		PercentageScale: 0
+		Damage: 14600
+		PercentageScale: 1364
+	-Warhead@CannonHE_Heavy:
 
 SteelQuantumTurretRail_EMP:
 	Inherits: SteelQuantumTurretRail
@@ -1900,8 +1901,9 @@ SteelQuantumTurretRail_EMP:
 	-Warhead@TeslaWeapon:
 	Warhead@Quantum_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 12600
-		PercentageScale: 0
+		Damage: 14600
+		PercentageScale: 1364
+	-Warhead@CannonHE_Heavy:
 
 SteelInspectorIonCannon:
 	Inherits: SteelInspectorIonCannonDamage
