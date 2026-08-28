@@ -1,11 +1,11 @@
 {
   "counts": {
     "concrete_weapons": 2345,
-    "stacked_main_all_concrete": 777,
-    "stacked_main_direct_actor_armament": 572,
+    "stacked_main_all_concrete": 771,
+    "stacked_main_direct_actor_armament": 567,
     "stacked_main_indirect_weapon_graph": 87,
-    "stacked_main_transitive_weapon_graph": 659,
-    "stacked_main_unreached": 118
+    "stacked_main_transitive_weapon_graph": 654,
+    "stacked_main_unreached": 117
   },
   "predicate": "positive Damage on AreaDamage, SpreadDamage, HealthPercentageDamage, or TargetDamage; excludes designed companions and friendly-fire twins",
   "reference_fields": [
@@ -38,7 +38,6 @@
       "AsianChemical",
       "AsianChemicalBombs",
       "AsianChemical_elite",
-      "AsianGrenade",
       "AsianHarbingerPlasma",
       "AsianHowitzerCannon",
       "AsianHowitzerCannon_elite",
@@ -179,7 +178,6 @@
       "IncendiaryRAGatlingTankCannon",
       "IncendiaryRAGatlingTankCannon_AA",
       "IncendiaryYakChainGun",
-      "IxRailgunDroneBullet",
       "IxianCombatTankCannon",
       "JHighVWaveforce",
       "JapanMaidenBowEnergized",
@@ -437,7 +435,6 @@
       "TSAdatsMissile_AA",
       "TSAegisMissile",
       "TSAssaultCannonSonic",
-      "TSAssaultCannonTalSonic",
       "TSAux155mm",
       "TSBikeMissile",
       "TSBoatcannon",
@@ -523,8 +520,6 @@
       "ZeroFighterArrows",
       "ZeroFighterArrowsEnergized",
       "ZeroFighterChainGunWaveforce",
-      "asianalliance_asianmilitia_grenade",
-      "asianalliance_asianmilitia_grenade_elite",
       "autogun_tank",
       "autogun_tank_small",
       "bigshieemortar",
@@ -681,7 +676,6 @@
     "unreached": [
       "12MissilesSpawnerScud",
       "25mmWaveforce",
-      "AsianGrenade_elite",
       "AsianHowitzerSplash",
       "Atomic",
       "CHFlameBlue",

@@ -6790,17 +6790,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 75, 50, 25, 0",
         "spread": "400",
-        "tag": "Sonic_Medium",
+        "tag": "Sonic_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -6812,6 +6805,7 @@
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Sonic_MediumFlat",
        "TSAssaultCannonTal",
        "^Warhead_Sonic_Medium",
        "^Projectile_Sonic_Shell",

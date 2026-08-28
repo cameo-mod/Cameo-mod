@@ -4018,17 +4018,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4040,6 +4033,7 @@
       "requires": "asianalliance_doctrine_modernizedinfantryequipment && !rank-elite",
       "slot": "Armament@GRENADE",
       "versus_templates": [
+       "^Compatibility_Concussion_MediumFlat",
        "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium",
        "^RA2MediumCannon"
@@ -4056,17 +4050,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4148,17 +4135,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -4170,6 +4150,7 @@
       "requires": "asianalliance_doctrine_modernizedinfantryequipment && !rank-elite",
       "slot": "Armament@GRENADEG",
       "versus_templates": [
+       "^Compatibility_Concussion_MediumFlat",
        "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium",
        "^RA2MediumCannon"
@@ -4187,17 +4168,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10216,17 +10190,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 72, 50, 32, 18, 8, 0",
         "spread": "350",
-        "tag": "Concussion_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "Concussion_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -10237,6 +10204,7 @@
       "reloaddelay": "92",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Concussion_MediumFlat",
        "^Warhead_Concussion_Medium",
        "^Effect_Concussion_Medium",
        "^RA2MediumCannon"

@@ -637,10 +637,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "18000",
+        "damage": "24000",
         "falloff": "100, 0",
         "spread": "96",
-        "tag": "Railgun_Heavy",
+        "tag": "Railgun_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -670,13 +670,6 @@
         "spread": "125",
         "tag": "RailgunWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -686,6 +679,7 @@
       "reloaddelay": "24",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Railgun_HeavyFlat",
        "^Warhead_Railgun_Heavy",
        "^Compatibility_Railgun_ExtraDamage",
        "^FlakWeapon",

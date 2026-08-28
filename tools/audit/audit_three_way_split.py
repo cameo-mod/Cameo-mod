@@ -54,7 +54,7 @@ from miniyaml import Ruleset  # noqa: E402
 
 # Weapons resolving to >1 main damaging warhead when this was measured (2026-08-28). LOWER ONLY.
 # 1190 -> 1178 the same day: a MEASUREMENT fix, not converted weapons. See FRIENDLY_FIRE below.
-SPLIT_BASELINE = 777
+SPLIT_BASELINE = 771
 
 # Warhead types that inflict damage on a normal target. Everything else (CreateEffect,
 # LeaveSmudge, GrantExternalCondition, SpawnActor, GlowImpact, ...) is cosmetic or utility and

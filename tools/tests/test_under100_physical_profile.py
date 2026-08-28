@@ -128,7 +128,7 @@ class Under100PhysicalProfileTests(unittest.TestCase):
         expected = {
             "AsianHarbingerPlasma": "Plasma_Medium",
             "FutureMechPlasma": "Plasma_Heavy",
-            "IxRailgunDroneBullet": "Railgun_Heavy",
+            "IxRailgunDroneBullet": "Railgun_HeavyFlatCompatibility",
             "Laboratory_Bioball": "Chemical_Medium",
             "PhobosLaser": "Laser_Heavy",
             "SteelFighterRailgun": "Laser_Heavy",

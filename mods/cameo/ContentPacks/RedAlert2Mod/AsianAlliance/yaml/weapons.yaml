@@ -13,6 +13,7 @@ RA2AsianShotgun_elite:
 	BurstDelays: 3
 
 AsianGrenade:
+	Inherits@roleflat: ^Compatibility_Concussion_MediumFlat
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@2: ^RA2MediumCannon
@@ -25,6 +26,12 @@ AsianGrenade:
 		Damage: 4000
 	Warhead@CannonHE_Medium:
 		Damage: 4000
+	-Warhead@CannonHE_Medium:
+	-Warhead@Concussion_Medium:
+	Warhead@Concussion_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 AsianGrenade_elite:
 	Inherits: AsianGrenade
 	Range: 5567
@@ -46,6 +53,7 @@ asianalliance_asianmilitia_shotgun_elite:
 	BurstDelays: 3
 
 asianalliance_asianmilitia_grenade:
+	Inherits@roleflat: ^Compatibility_Concussion_MediumFlat
 	Inherits@wh: ^Warhead_Concussion_Medium
 	Inherits@fx: ^Effect_Concussion_Medium
 	Inherits@2: ^RA2MediumCannon
@@ -58,6 +66,12 @@ asianalliance_asianmilitia_grenade:
 		Damage: 4000
 	Warhead@CannonHE_Medium:
 		Damage: 4000
+	-Warhead@CannonHE_Medium:
+	-Warhead@Concussion_Medium:
+	Warhead@Concussion_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 asianalliance_asianmilitia_grenade_elite:
 	Inherits: asianalliance_asianmilitia_grenade
 	Range: 5500

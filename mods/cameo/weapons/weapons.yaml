@@ -18863,3 +18863,61 @@ generic_bullet_casing:
 			Helicopter: 12
 			Bomber: 11
 			Fighter: 10
+
+# Percentage-inert flat compatibility profiles for the final reviewed
+# retired-family consolidation. Percentage applications stay on their
+# legacy nodes to preserve shipped per-node rounding and overflow.
+
+^Compatibility_Sonic_MediumFlat:
+	Warhead@Sonic_MediumFlatCompatibility: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 400
+		Damage: 0
+		Falloff: 100, 75, 50, 25, 0
+		Versus:
+			HAZMAT: 68
+			COMPOSITE: 96
+			BLAST: 58
+			REFLECTOR: 59
+			ARMOR: 70
+			Shield: 233
+			Bomber: 100
+			Concrete: 100
+			Fighter: 100
+			Flak: 100
+			Heavy: 100
+			Helicopter: 100
+			Heroic: 100
+			Light: 100
+			Medium: 100
+			None: 100
+			Plate: 100
+			Scout: 100
+			Spaceship: 100
+			Steel: 100
+			Superheavy: 100
+			Wood: 100
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 8
+			Bomber: 8
+			Concrete: 8
+			Fighter: 8
+			Flak: 8
+			Heavy: 8
+			Helicopter: 8
+			Heroic: 8
+			Light: 8
+			Medium: 8
+			None: 8
+			Plate: 8
+			Scout: 8
+			Spaceship: 8
+			Steel: 8
+			Superheavy: 8
+			Wood: 8
