@@ -412,10 +412,10 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "42000",
+        "damage": "48000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -431,13 +431,6 @@
         "spread": "500",
         "tag": "RailgunExtraDamageCompatibility",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "6000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        },
        {
         "damage": "3",
@@ -496,6 +489,7 @@
       "reloaddelay": "80",
       "slot": "Armament",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Laser_Heavy",
        "^Compatibility_Laser_ExtraDamage",
        "^Compatibility_Railgun_ExtraDamage",

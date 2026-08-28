@@ -41,10 +41,10 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -53,13 +53,6 @@
         "spread": "200",
         "tag": "Laser_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -70,6 +63,7 @@
       "requires": "ordos_upgrade_lasercartridges",
       "slot": "Armament@PRIMARYLaser",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
        "^Effect_Laser_Heavy",
@@ -171,10 +165,10 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -183,13 +177,6 @@
         "spread": "200",
         "tag": "Laser_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -200,6 +187,7 @@
       "requires": "ordos_upgrade_lasercartridges",
       "slot": "Armament@PRIMARYLaser",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
        "^Effect_Laser_Heavy",
@@ -777,10 +765,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -789,13 +777,6 @@
         "spread": "200",
         "tag": "Laser_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -806,6 +787,7 @@
       "requires": "ordos_upgrade_lasercartridges",
       "slot": "Armament@PRIMARYLaser",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
        "^Effect_Laser_Heavy",
@@ -2794,10 +2776,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2806,13 +2788,6 @@
         "spread": "200",
         "tag": "Laser_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_LightFlatCompatibility",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -2823,6 +2798,7 @@
       "requires": "ordos_upgrade_lasercartridges",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
        "^Effect_Laser_Heavy",
@@ -2872,10 +2848,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2884,13 +2860,6 @@
         "spread": "200",
         "tag": "Laser_Heavy_ExtraDamage",
         "type": "SpreadDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_LightFlatCompatibility",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
@@ -2901,6 +2870,7 @@
       "requires": "ordos_upgrade_lasercartridges",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
        "^Effect_Laser_Heavy",

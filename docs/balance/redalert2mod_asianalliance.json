@@ -824,17 +824,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 88, 72, 50, 0",
         "spread": "366",
-        "tag": "Chemical_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_Medium",
+        "tag": "Chemical_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -845,6 +838,7 @@
       "reloaddelay": "8",
       "slot": "Armament@Secondary",
       "versus_templates": [
+       "^Compatibility_Chemical_HeavyFlat",
        "^Warhead_Chemical_Heavy",
        "^RA2MediumCannon"
       ],

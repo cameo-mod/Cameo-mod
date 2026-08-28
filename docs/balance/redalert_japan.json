@@ -5789,17 +5789,10 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "366",
-        "tag": "Chemical_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_Heavy",
+        "tag": "Flame_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5811,6 +5804,7 @@
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@UpgradePRIMARYFlame",
       "versus_templates": [
+       "^Compatibility_Flame_HeavyFlat",
        "^Warhead_Chemical_Heavy",
        "^Warhead_Flame_Heavy",
        "^Projectile_Chem_Heavy",
@@ -5829,17 +5823,10 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "366",
-        "tag": "Chemical_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_Heavy",
+        "tag": "Flame_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -5851,6 +5838,7 @@
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@UpgradeSECONDARYFlame",
       "versus_templates": [
+       "^Compatibility_Flame_HeavyFlat",
        "^Warhead_Chemical_Heavy",
        "^Warhead_Flame_Heavy",
        "^Projectile_Chem_Heavy",
@@ -5962,7 +5950,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "40000",
+        "damage": "60000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "191",
         "tag": "Plasma_LightFlatCompatibility",
@@ -5981,13 +5969,6 @@
         "spread": "300",
         "tag": "ShrapnelWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "20000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -6106,17 +6087,10 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "366",
-        "tag": "Chemical_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_Heavy",
+        "tag": "Flame_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -6128,6 +6102,7 @@
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Flame_HeavyFlat",
        "^Warhead_Chemical_Heavy",
        "^Warhead_Flame_Heavy",
        "^Projectile_Chem_Heavy",
@@ -7407,17 +7382,10 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "366",
-        "tag": "Chemical_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_Heavy",
+        "tag": "Flame_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7429,6 +7397,7 @@
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@UpgradePRIMARYFlame",
       "versus_templates": [
+       "^Compatibility_Flame_HeavyFlat",
        "^Warhead_Chemical_Heavy",
        "^Warhead_Flame_Heavy",
        "^Projectile_Chem_Heavy",
@@ -7447,17 +7416,10 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "366",
-        "tag": "Chemical_Heavy",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "400",
-        "tag": "Flame_Heavy",
+        "tag": "Flame_HeavyFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -7469,6 +7431,7 @@
       "requires": "japan_upgrade_advancedplasmaweapons",
       "slot": "Armament@UpgradeSECONDARYFlame",
       "versus_templates": [
+       "^Compatibility_Flame_HeavyFlat",
        "^Warhead_Chemical_Heavy",
        "^Warhead_Flame_Heavy",
        "^Projectile_Chem_Heavy",

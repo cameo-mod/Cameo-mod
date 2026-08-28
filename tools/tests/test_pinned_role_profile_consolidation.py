@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / "tools" / "audit"))
 sys.path.insert(0, str(ROOT / "tools" / "balance"))
 
 import consolidate_pinned_role_profiles as cohort
+import consolidate_explicit_family_state_profiles as explicit
 from audit_three_way_split import SPLIT_BASELINE, main_warheads
 from audit_warhead_split import BROADCAST_BASELINE
 from miniyaml import Ruleset
@@ -77,13 +78,14 @@ class PinnedRoleProfileConsolidationTests(unittest.TestCase):
             for _health, before, after in rows:
                 self.assertEqual(1, after - before, name)
 
-    def test_state_carrying_candidates_remain_deferred(self):
+    def test_state_carrying_candidates_are_now_explicitly_reviewed(self):
         for name in STATE_DEFERRED:
-            self.assertGreater(len(main_warheads(self.rules.resolve_weapon(name))), 1, name)
+            self.assertIn(name, explicit.SPECS)
+            self.assertEqual(1, len(main_warheads(self.rules.resolve_weapon(name))), name)
 
     def test_ratchets_match_reduction(self):
-        self.assertEqual(717, SPLIT_BASELINE)
-        self.assertEqual(390, BROADCAST_BASELINE)
+        self.assertEqual(699, SPLIT_BASELINE)
+        self.assertEqual(381, BROADCAST_BASELINE)
 
 
 if __name__ == "__main__":

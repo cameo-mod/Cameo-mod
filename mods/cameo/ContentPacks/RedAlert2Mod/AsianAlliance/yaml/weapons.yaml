@@ -1271,6 +1271,7 @@ AsianChemical_elite:
 	BurstDelays: 3
 
 AsianChemicalBombs:
+	Inherits@roleflat: ^Compatibility_Chemical_HeavyFlat
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@2: ^RA2MediumCannon
 	ValidTargets: Ground, Water
@@ -1322,6 +1323,12 @@ AsianChemicalBombs:
 		Palette: ra2effect
 		Weapon: RA2Cloud
 		InvalidTargets: Water
+	-Warhead@CannonHE_Medium:
+	-Warhead@Chemical_Heavy:
+	Warhead@Chemical_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 
 AsianHowitzerCannon:
 	Inherits: ^RA2MediumCannon

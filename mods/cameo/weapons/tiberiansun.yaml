@@ -1009,6 +1009,7 @@ TSSAPCMissiles:
 		PercentageScale: 0
 
 TSSAPCCoreMissiles:
+	Inherits@roleflat: ^Compatibility_Chemical_LightFlat
 	Inherits@wh: ^Warhead_Chemical_Light
 	Inherits@proj: ^Projectile_Chem_Light
 	Inherits@fx: ^Effect_Chem_Light
@@ -1020,6 +1021,12 @@ TSSAPCCoreMissiles:
 	Warhead@Chemical_Light:
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
+	-Warhead@Chemical_Light:
+	-Warhead@MissileHE_Medium:
+	Warhead@Chemical_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 24000
+		PercentageScale: 3330
 TSDragon:
 	Inherits: ^TSDefaultMissile
 	ReloadDelay: 50

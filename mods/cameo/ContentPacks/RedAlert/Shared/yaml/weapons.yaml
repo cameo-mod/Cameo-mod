@@ -171,6 +171,7 @@ ConscriptMolotov:
 		InvalidTargets: Water
 
 ConscriptMolotovExplode:
+	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits: ConscriptMolotov
 	Warhead@Demolition_Light:
 		Damage: 4000
@@ -179,6 +180,12 @@ ConscriptMolotovExplode:
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
 		Duration: 25
+	-Warhead@Demolition_Light:
+	-Warhead@Flame_Light:
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 
 RocketsRA:
 	Inherits@wh: ^Warhead_MissileHE_Medium

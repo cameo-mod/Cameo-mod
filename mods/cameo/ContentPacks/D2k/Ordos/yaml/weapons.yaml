@@ -940,6 +940,7 @@ d2kChainGun:
 	Warhead@Bullet_Medium:
 		Damage: 4000
 d2kChainGun_upgrade:
+	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -953,6 +954,12 @@ d2kChainGun_upgrade:
 		Color: 00ffbb
 	Warhead@Laser_Heavy:
 		Damage: 4000
+	-Warhead@Bullet_Medium:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		PercentageScale: 9988
 HMGstealth:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -1310,6 +1317,7 @@ HMGstealth_upgrade:
 		Damage: 4000
 		PercentageScale: 9975
 d2kCarryallChainGun_upgrade:
+	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -1322,7 +1330,14 @@ d2kCarryallChainGun_upgrade:
 		Color: 00ffbb
 	Warhead@Laser_Heavy:
 		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 LMG_ordos_upgrade:
+	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -1337,7 +1352,15 @@ LMG_ordos_upgrade:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 light_inf_lmg_ordos_upgrade:
+	Inherits@roleflat: ^Compatibility_Laser_HeavyFlat
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
 	Inherits@fx: ^Effect_Laser_Heavy
@@ -1364,3 +1387,9 @@ light_inf_lmg_ordos_upgrade:
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		PercentageScale: 9975
+	-Warhead@Bullet_LightFlatCompatibility:
+	-Warhead@Laser_Heavy:
+	Warhead@Laser_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984

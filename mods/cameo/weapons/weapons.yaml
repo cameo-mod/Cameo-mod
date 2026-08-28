@@ -19152,3 +19152,117 @@ generic_bullet_casing:
 			Bomber: 7
 			Helicopter: 6
 			Spaceship: 5
+
+# Canonical flat profiles for explicit full-family state expansion.
+
+^Compatibility_Chemical_LightFlat:
+	Warhead@Chemical_LightFlatCompatibility: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 183
+		Damage: 0
+		Falloff: 100, 88, 72, 50, 0
+		Versus:
+			HAZMAT: 51
+			COMPOSITE: 62
+			BLAST: 72
+			REFLECTOR: 96
+			ARMOR: 70
+			Shield: 191
+			Plate: 141
+			Superheavy: 140
+			Heavy: 138
+			Flak: 134
+			Medium: 130
+			Light: 125
+			Scout: 119
+			Heroic: 118
+			None: 115
+			Concrete: 80
+			Steel: 76
+			Wood: 72
+			Spaceship: 60
+			Helicopter: 54
+			Bomber: 50
+			Fighter: 48
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Corrosion: 100
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 17
+			Superheavy: 16
+			Heroic: 15
+			Heavy: 14
+			Plate: 13
+			Medium: 12
+			Flak: 11
+			Light: 10
+			None: 9
+			Scout: 8
+			Concrete: 7
+			Steel: 6
+			Wood: 5
+			Spaceship: 4
+			Helicopter: 3
+			Bomber: 2
+			Fighter: 1
+
+^Compatibility_Thermobaric_HeavyFlat:
+	Warhead@Thermobaric_HeavyFlatCompatibility: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Ground, Water
+		Spread: 338
+		Damage: 0
+		Falloff: 100, 76, 57, 43, 31, 17, 0
+		Versus:
+			HAZMAT: 54
+			COMPOSITE: 92
+			BLAST: 50
+			REFLECTOR: 83
+			ARMOR: 70
+			Shield: 212
+			Wood: 154
+			None: 150
+			Steel: 148
+			Flak: 147
+			Concrete: 130
+			Plate: 128
+			Scout: 89
+			Light: 85
+			Medium: 84
+			Heavy: 83
+			Superheavy: 82
+			Heroic: 74
+			Fighter: 69
+			Bomber: 63
+			Helicopter: 58
+			Spaceship: 54
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PhysicalStates:
+			Temperature: 33
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus:
+			Shield: 35
+			Wood: 24
+			None: 23
+			Steel: 22
+			Flak: 21
+			Scout: 20
+			Concrete: 20
+			Plate: 19
+			Light: 18
+			Heroic: 17
+			Medium: 17
+			Heavy: 15
+			Superheavy: 14
+			Fighter: 13
+			Bomber: 12
+			Helicopter: 11
+			Spaceship: 10

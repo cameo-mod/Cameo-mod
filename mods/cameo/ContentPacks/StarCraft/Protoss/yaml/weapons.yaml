@@ -72,10 +72,12 @@ PositronGrenade:
 	-Warhead@TankDestroyerCannon:
 	Warhead@Quantum_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 32000
-		PercentageScale: 0
+		Damage: 40000
+		PercentageScale: 498
+	-Warhead@CannonHE_Medium:
 
 PositronBounce1:
+	Inherits@pinnedcannon: ^Warhead_CannonHE_Medium
 	Inherits: PositronGrenade
 	Range: 2522
 	Warhead@Bullet_Light: AreaDamage
@@ -110,6 +112,7 @@ PositronBounce1:
 		PercentageScale: 0
 
 PositronBounce2:
+	Inherits@pinnedcannon: ^Warhead_CannonHE_Medium
 	Inherits: PositronGrenade
 	Range: 1261
 	Warhead@Bullet_Light: AreaDamage

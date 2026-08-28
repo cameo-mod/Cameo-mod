@@ -1183,6 +1183,7 @@ FutureMechGatling:
 	-Warhead@FlakWeapon:
 	-Warhead@Bullet_MediumFlatCompatibility:
 FutureMechPlasma:
+	Inherits@roleflat: ^Compatibility_Plasma_HeavyFlat
 	Inherits@collapsewh: ^Warhead_Plasma_Heavy
 	Inherits: ^Grenade
 	Inherits@2: ^MediumChemicalWeapon
@@ -1237,15 +1238,18 @@ FutureMechPlasma:
 		ValidTargets: Ground, Water
 		Damage: 20000
 		PercentageScale: 0
+	-Warhead@CannonHE_Heavy:
+	-Warhead@Plasma_Heavy:
+	Warhead@Plasma_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 30000
+		PercentageScale: 3330
 
 FutureMechPlasma_elite:
-	Inherits@roleflat: ^Compatibility_Plasma_HeavyFlat
 	Inherits: FutureMechPlasma
 	Range: 8000
 	Burst: 4
 	BurstDelays: 5
-	-Warhead@CannonHE_Heavy:
-	-Warhead@Plasma_Heavy:
 	Warhead@Plasma_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 30000

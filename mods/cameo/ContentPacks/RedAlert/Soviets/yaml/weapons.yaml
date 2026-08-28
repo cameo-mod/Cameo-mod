@@ -1,4 +1,5 @@
 IncendiaryM1Carbine:
+	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
@@ -11,6 +12,12 @@ IncendiaryM1Carbine:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Flame_Light:
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 ra1_soviets_ak47conscript_rifle:
 	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
@@ -69,11 +76,18 @@ GrenadeRA:
 	Warhead@Flame_Light:
 		Damage: 8000
 GrenadeRAExplode:
+	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits: GrenadeRA
 	Warhead@Demolition_Light:
 		Damage: 4000
 	Warhead@Flame_Light:
 		Damage: 4000
+	-Warhead@Demolition_Light:
+	-Warhead@Flame_Light:
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 GrenadeThermobaric:
 	Inherits@roleflat: ^Compatibility_Thermobaric_LightFlat
 	Inherits: ^ShrapnelWeapon
@@ -2068,6 +2082,7 @@ TeslaMaverickFragment2:
 	-Warhead@TeslaArc:
 
 ThermobaricMaverick:
+	Inherits@roleflat: ^Compatibility_Thermobaric_HeavyFlat
 	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
 	Inherits: ^NuclearWarhead
 	Inherits@2: ^HeavyMissile
@@ -2128,6 +2143,12 @@ ThermobaricMaverick:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		PercentageScale: 0
+	-Warhead@MissileAP_Medium:
+	-Warhead@Thermobaric_Heavy:
+	Warhead@Thermobaric_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 48000
+		PercentageScale: 2498
 
 Su57Maverick:
 	Inherits@wh: ^Warhead_MissileHE_Heavy
@@ -4055,6 +4076,7 @@ ra1_soviets_rifleinfantry_carbine:
 	Warhead@Bullet_Light:
 		Damage: 2000
 ra1_soviets_rifleinfantry_carbine_incendiary:
+	Inherits@roleflat: ^Compatibility_Flame_LightFlat
 	Inherits@wh: ^Warhead_Flame_Light
 	Inherits@proj: ^Projectile_Flame_Light
 	Inherits@fx: ^Effect_Flame_Light
@@ -4067,3 +4089,9 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 	Warhead@Bullet_Light: AreaDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Flame_Light:
+	Warhead@Flame_LightFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975

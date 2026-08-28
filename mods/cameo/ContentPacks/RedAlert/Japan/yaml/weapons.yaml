@@ -249,6 +249,7 @@ HeavyFlamer:
 		GlowFadeInFrames: 12
 
 HeavyPlasmaFlamer:
+	Inherits@roleflat: ^Compatibility_Flame_HeavyFlat
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@wh2: ^Warhead_Flame_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
@@ -273,6 +274,12 @@ HeavyPlasmaFlamer:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building_napalm
+	-Warhead@Chemical_Heavy:
+	-Warhead@Flame_Heavy:
+	Warhead@Flame_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 
 SamuraiBlade:
 	Inherits@wh: ^Warhead_Melee_Medium
@@ -1994,6 +2001,7 @@ OIFlamer:
 	Warhead@Flame_Medium:
 		Damage: 2000
 OIPlasmaFlamer:
+	Inherits@roleflat: ^Compatibility_Flame_HeavyFlat
 	Inherits@wh: ^Warhead_Chemical_Heavy
 	Inherits@wh2: ^Warhead_Flame_Heavy
 	Inherits@proj: ^Projectile_Chem_Heavy
@@ -2018,6 +2026,12 @@ OIPlasmaFlamer:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building_napalm
+	-Warhead@Chemical_Heavy:
+	-Warhead@Flame_Heavy:
+	Warhead@Flame_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 
 OIHakureiring:
 	Inherits: Hakureiring
@@ -2087,8 +2101,9 @@ BuggyPlasmaGrenade:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@Plasma_LightFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 40000
-		PercentageScale: 0
+		Damage: 60000
+		PercentageScale: 3332
+	-Warhead@Demolition_Light:
 
 JapaneseHeavyBomb:
 	Inherits@wh: ^Warhead_Demolition_Heavy

@@ -5770,10 +5770,10 @@
       "burstdelays": "10",
       "damage_warheads": [
        {
-        "damage": "20000",
+        "damage": "30000",
         "falloff": "100, 89, 75, 55, 0",
         "spread": "383",
-        "tag": "Plasma_Heavy",
+        "tag": "Plasma_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -5789,13 +5789,6 @@
         "spread": "350",
         "tag": "MediumChemicalWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "10000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml",
@@ -5807,6 +5800,7 @@
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Plasma_HeavyFlat",
        "^Warhead_Plasma_Heavy",
        "^Grenade",
        "^MediumChemicalWeapon",
@@ -5854,7 +5848,6 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "^Compatibility_Plasma_HeavyFlat",
        "FutureMechPlasma"
       ],
       "warheads": [

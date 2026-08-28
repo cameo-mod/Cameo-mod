@@ -88,7 +88,9 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
         for weapon, destination in machineguns.selections(self.rules).items():
             mains = set(main_warheads(self.rules.resolve_weapon(weapon)))
             self.assertTrue(mains.isdisjoint(machineguns.PAIR), weapon)
-            self.assertIn(f"{destination}FlatCompatibility", mains, weapon)
+            expected = machineguns.FINALIZED_DOWNSTREAM.get(
+                weapon, (f"{destination}FlatCompatibility", 0, 0))[0]
+            self.assertIn(expected, mains, weapon)
         for weapon, (destination, pair, _root) in delivery.selections(self.rules).items():
             mains = set(main_warheads(self.rules.resolve_weapon(weapon)))
             self.assertTrue(mains.isdisjoint(pair), weapon)
@@ -112,8 +114,8 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
         self.assertIn("Warhead@Bullet_Medium", keys)
 
     def test_ratchets_match_the_live_reduction(self):
-        self.assertEqual(717, SPLIT_BASELINE)
-        self.assertEqual(390, BROADCAST_BASELINE)
+        self.assertEqual(699, SPLIT_BASELINE)
+        self.assertEqual(381, BROADCAST_BASELINE)
 
 
 if __name__ == "__main__":
