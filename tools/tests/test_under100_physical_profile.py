@@ -87,6 +87,32 @@ class Under100PhysicalProfileTests(unittest.TestCase):
                 if scale is not None:
                     self.assertEqual("0", scale.value, f"{name}/{node.key}")
 
+    def test_naxis_interceptor_is_air_first_without_anti_infantry_gun_bias(self):
+        rockets = self.rules.resolve_weapon("NaxPlaneRockets_elite")
+        self.assertEqual("Air", child(rockets, "ValidTargets").value)
+        for key in ("MissileAP_Medium", "MissileAP_Heavy"):
+            self.assertEqual("Air", child(child(rockets, f"Warhead@{key}"),
+                                          "ValidTargets").value)
+
+        gun = child(self.rules.resolve_weapon("NaxiInterceptorGun"),
+                    "Warhead@Bullet_MediumFlatCompatibility")
+        versus = child(gun, "Versus")
+        for armor in ("None", "Flak", "Plate", "Heroic"):
+            self.assertEqual("100", child(versus, armor).value, armor)
+
+    def test_missile_consolidations_follow_the_weapon_roles(self):
+        expected = {
+            "HindMissilesThermobaric": "Thermobaric_Medium",
+            "ThermobaricMaverick": "Thermobaric_Heavy",
+            "MarauderMissiles": "MissileAP_MediumFlatCompatibility",
+            "RA2RBurritoRocket": "CannonHE_HeavyFlatCompatibility",
+            "TSStankTibTusk": "MissileAP_MediumFlatCompatibility",
+        }
+        for weapon_name, warhead_name in expected.items():
+            weapon = self.rules.resolve_weapon(weapon_name)
+            self.assertIsNotNone(child(weapon, f"Warhead@{warhead_name}"),
+                                 weapon_name)
+
     def test_baseline_comparison_contains_only_accepted_standardization(self):
         paths = sorted((ROOT / "docs" / "audit" / "latest").glob(
             "under100_checkpoint*_diff.json"))

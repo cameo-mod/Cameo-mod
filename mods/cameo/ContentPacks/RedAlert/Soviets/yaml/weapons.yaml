@@ -1085,7 +1085,7 @@ HindMissiles:
 		ImpactActors: false
 
 HindMissilesThermobaric:
-	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@collapsewh: ^Warhead_Thermobaric_Medium
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -1165,7 +1165,7 @@ HindMissilesThermobaric:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@MediumMissile:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@Thermobaric_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
 		PercentageScale: 0
@@ -1802,7 +1802,7 @@ TeslaMaverickFragment2:
 	-Warhead@TeslaArc:
 
 ThermobaricMaverick:
-	Inherits@collapseflat: ^Compatibility_MissileAP_MediumFlat
+	Inherits@collapsewh: ^Warhead_Thermobaric_Heavy
 	Inherits: ^NuclearWarhead
 	Inherits@2: ^HeavyMissile
 	Inherits@3: ^MediumFlameWeapon
@@ -1858,7 +1858,7 @@ ThermobaricMaverick:
 	-Warhead@NuclearWarhead:
 	-Warhead@HeavyMissile:
 	-Warhead@MediumFlameWeapon:
-	Warhead@MissileAP_MediumFlatCompatibility:
+	Warhead@Thermobaric_Heavy:
 		ValidTargets: Ground, Water, Air
 		Damage: 36000
 		PercentageScale: 0

@@ -198,7 +198,7 @@ CycloneRocketsLockOn:
 	Range: 10000
 
 MarauderMissiles:
-	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
+	Inherits@collapseflat: ^Compatibility_MissileAP_MediumFlat
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
 	Inherits@3: ^Effect_CannonHE_Heavy
@@ -236,7 +236,7 @@ MarauderMissiles:
 
 	-Warhead@TankDestroyerCannon:
 	-Warhead@MediumMissile:
-	Warhead@CannonHE_HeavyFlatCompatibility:
+	Warhead@MissileAP_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
 		Damage: 20000
 		PercentageScale: 0

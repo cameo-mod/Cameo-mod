@@ -1025,6 +1025,7 @@ NaxPlaneRockets_elite:
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
 	Inherits@2: ^D2KRocket
+	ValidTargets: Air
 	ReloadDelay: 100
 	Burst: 2
 	BurstDelays: 9
@@ -1042,8 +1043,10 @@ NaxPlaneRockets_elite:
 		TrailInterval: 1
 		TrailDelay: 1
 	Warhead@MissileAP_Medium:
+		ValidTargets: Air
 		Damage: 10000
 	Warhead@MissileAP_Heavy: AreaDamage
+		ValidTargets: Air
 		Damage: 10000
 NaxiInterceptorGun:
 	Inherits@collapseflat: ^Compatibility_Bullet_MediumFlat
@@ -1090,6 +1093,11 @@ NaxiInterceptorGun:
 		ValidTargets: Ground, Water, Air
 		Damage: 18000
 		PercentageScale: 0
+		Versus:
+			None: 100
+			Flak: 100
+			Plate: 100
+			Heroic: 100
 
 NaxShoeRocket:
 	Inherits@wh: ^Warhead_Demolition_Heavy

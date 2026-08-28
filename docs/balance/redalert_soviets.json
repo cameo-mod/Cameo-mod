@@ -340,9 +340,9 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "253",
+        "tag": "Thermobaric_Medium",
         "type": "AreaDamage"
        },
        {
@@ -382,14 +382,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesHE",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_Thermobaric_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -399,6 +399,7 @@
        "^MediumMissile"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "HindMissilesThermobaric",
@@ -408,9 +409,9 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "253",
+        "tag": "Thermobaric_Medium",
         "type": "AreaDamage"
        },
        {
@@ -450,14 +451,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesHERocketPod1",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_Thermobaric_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -467,6 +468,7 @@
        "^MediumMissile"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "HindMissilesThermobaric",
@@ -476,9 +478,9 @@
       "damage_warheads": [
        {
         "damage": "8000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "253",
+        "tag": "Thermobaric_Medium",
         "type": "AreaDamage"
        },
        {
@@ -518,14 +520,14 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.25,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesHERocketPod2",
       "versus_templates": [
-       "^Compatibility_CannonHE_HeavyFlat",
+       "^Warhead_Thermobaric_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
        "^Effect_CannonHE_Heavy",
@@ -535,6 +537,7 @@
        "^MediumMissile"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Medium",
        "^Warhead_CannonHE_Heavy"
       ],
       "weapon": "HindMissilesThermobaric",
@@ -1887,9 +1890,9 @@
       "damage_warheads": [
        {
         "damage": "36000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "338",
+        "tag": "Thermobaric_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -1922,7 +1925,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -1930,13 +1933,14 @@
       "requires": "ra1_soviets_upgrade_thermonuclearrockets",
       "slot": "Armament@NuclearUpgrade1",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_Thermobaric_Heavy",
        "^NuclearWarhead",
        "^HeavyMissile",
        "^MediumFlameWeapon",
        "Maverick"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ThermobaricMaverick",
@@ -1948,9 +1952,9 @@
       "damage_warheads": [
        {
         "damage": "36000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
+        "falloff": "100, 76, 57, 43, 31, 17, 0",
+        "spread": "338",
+        "tag": "Thermobaric_Heavy",
         "type": "AreaDamage"
        },
        {
@@ -1983,7 +1987,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "minrange": "1180",
       "pricing": true,
       "range": "5900",
@@ -1991,13 +1995,14 @@
       "requires": "ra1_soviets_upgrade_thermonuclearrockets",
       "slot": "Armament@NuclearUpgrade2",
       "versus_templates": [
-       "^Compatibility_MissileAP_MediumFlat",
+       "^Warhead_Thermobaric_Heavy",
        "^NuclearWarhead",
        "^HeavyMissile",
        "^MediumFlameWeapon",
        "Maverick"
       ],
       "warheads": [
+       "^Warhead_Thermobaric_Heavy",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "ThermobaricMaverick",

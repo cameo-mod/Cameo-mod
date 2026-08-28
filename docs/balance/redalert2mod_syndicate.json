@@ -4914,9 +4914,9 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -4963,7 +4963,7 @@
       "reloaddelay": "122",
       "slot": "Armament",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Compatibility_CannonHE_HeavyFlat",
        "^RA2Grenade",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",
@@ -4984,9 +4984,9 @@
       "damage_warheads": [
        {
         "damage": "12000",
-        "falloff": "100, 0",
-        "spread": "85",
-        "tag": "MissileAP_HeavyFlatCompatibility",
+        "falloff": "100, 50, 20, 0",
+        "spread": "400",
+        "tag": "CannonHE_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -5034,7 +5034,7 @@
       "requires": "rank-elite",
       "slot": "Armament@PRIMARYELITE",
       "versus_templates": [
-       "^Compatibility_MissileAP_HeavyFlat",
+       "^Compatibility_CannonHE_HeavyFlat",
        "^RA2Grenade",
        "^ShrapnelWeapon",
        "^MediumFlameWeapon",

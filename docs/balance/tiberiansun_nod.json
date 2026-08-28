@@ -3682,9 +3682,9 @@
       "damage_warheads": [
        {
         "damage": "25000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_MediumFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -3717,7 +3717,7 @@
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "^Compatibility_CannonHE_MediumFlat",
+       "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",
@@ -4989,9 +4989,9 @@
       "damage_warheads": [
        {
         "damage": "25000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "300",
-        "tag": "CannonHE_MediumFlatCompatibility",
+        "falloff": "100, 0",
+        "spread": "64",
+        "tag": "MissileAP_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -5024,7 +5024,7 @@
       "requires": "ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
-       "^Compatibility_CannonHE_MediumFlat",
+       "^Compatibility_MissileAP_MediumFlat",
        "^Warhead_CannonHE_Medium",
        "^Projectile_Shell_Medium",
        "^Effect_CannonHE_Medium",

@@ -377,7 +377,7 @@ LatinMonkeyGrenadeExplode:
 	Warhead@CannonHE_Heavy: AreaDamage
 		Damage: 4000
 RA2RBurritoRocket:
-	Inherits@collapseflat: ^Compatibility_MissileAP_HeavyFlat
+	Inherits@collapseflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^RA2Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^MediumFlameWeapon
@@ -445,7 +445,7 @@ RA2RBurritoRocket:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@HeavyBomb:
-	Warhead@MissileAP_HeavyFlatCompatibility:
+	Warhead@CannonHE_HeavyFlatCompatibility:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 0
