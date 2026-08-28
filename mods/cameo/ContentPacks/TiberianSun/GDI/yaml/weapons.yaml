@@ -897,6 +897,7 @@ TSJumpCannon:
 		PercentageScale: 9988
 
 TSAssaultCannonSonic:
+	Inherits@roleflat: ^Compatibility_Sonic_MediumFlat
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@wh2: ^Warhead_Sonic_Medium
 	Inherits@proj: ^Projectile_Sonic_Shell
@@ -914,6 +915,12 @@ TSAssaultCannonSonic:
 	Warhead@Sonic_Medium: AreaDamage
 		PercentageScale: 5000
 		Damage: 4000
+	-Warhead@Flak_Medium:
+	-Warhead@Sonic_Medium:
+	Warhead@Sonic_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 4988
 
 TSAssaultCannonTal:
 	Inherits@wh: ^Warhead_Bullet_Medium
@@ -973,6 +980,7 @@ TSVulcanGun:
 		Damage: 8000
 		PercentageScale: 9988
 TSVulcanGunSonic:
+	Inherits@roleflat: ^Compatibility_Sonic_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Sonic_Medium
 	Inherits@proj: ^Projectile_Sonic_Shell
@@ -988,6 +996,12 @@ TSVulcanGunSonic:
 	Warhead@Sonic_Medium: AreaDamage
 		PercentageScale: 2500
 		Damage: 8000
+	-Warhead@Bullet_Medium:
+	-Warhead@Sonic_Medium:
+	Warhead@Sonic_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 16000
+		PercentageScale: 2494
 
 KodiakAAGuns:
 	Inherits@wh: ^Warhead_Flak_Medium

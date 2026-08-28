@@ -223,17 +223,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -252,6 +245,7 @@
       "requires": "ts_nod_upgrade_tiberiumlenses && !ts_nod_upgrade_auxiliaryweapon",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -270,17 +264,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "0",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "4000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -327,17 +314,10 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 50, 25",
         "spread": "300",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2389,17 +2369,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2418,6 +2391,7 @@
       "requires": "ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",
@@ -2435,17 +2409,10 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "64",
-        "tag": "Laser_Heavy",
+        "tag": "Laser_HeavyFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -2464,6 +2431,7 @@
       "requires": "ts_nod_upgrade_tiberiumlenses",
       "slot": "Armament@UPGRADEGARRISONED",
       "versus_templates": [
+       "^Compatibility_Laser_HeavyFlat",
        "^Warhead_Bullet_Light",
        "^Warhead_Laser_Heavy",
        "^Projectile_Laser_Heavy",

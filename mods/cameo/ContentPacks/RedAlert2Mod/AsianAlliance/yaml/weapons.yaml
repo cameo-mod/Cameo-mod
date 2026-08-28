@@ -1260,8 +1260,9 @@ AsianChemical:
 	-Warhead@ShrapnelWeaponFriendlyFire:
 	Warhead@Chemical_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 20000
-		PercentageScale: 0
+		Damage: 24000
+		PercentageScale: 1663
+	-Warhead@Demolition_Light:
 
 AsianChemical_elite:
 	Inherits: AsianChemical
@@ -1853,6 +1854,7 @@ AsianTurretPlasma:
 		Amount: 8
 
 AsianHarbingerPlasma:
+	Inherits@roleflat: ^Compatibility_Plasma_MediumFlat
 	Inherits@collapsewh: ^Warhead_Plasma_Medium
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -1986,6 +1988,13 @@ AsianHarbingerPlasma:
 		ValidTargets: Ground, Water, Air
 		Damage: 12000
 		PercentageScale: 0
+	-Warhead@CannonHE_Medium:
+	-Warhead@MissileAP_Medium:
+	-Warhead@Plasma_Medium:
+	Warhead@Plasma_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 2494
 
 AsianRailgun:
 	Inherits@wh: ^Warhead_Railgun_Heavy

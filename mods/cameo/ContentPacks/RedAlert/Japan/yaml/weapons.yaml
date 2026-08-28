@@ -1595,13 +1595,17 @@ HovercraftPlasmaCannon:
 	-Warhead@TeslaWeapon:
 	Warhead@Plasma_MediumFlatCompatibility:
 		ValidTargets: Ground, Water, Air
-		Damage: 19000
+		Damage: 27000
 		PercentageScale: 0
 	-Warhead@Bullet_MediumFlatCompatibility:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
+	-Warhead@CannonHE_Medium:
+	-Warhead@CannonAP_Light:
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
 
 JapaneseHovercraftFlak:
 	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
@@ -1715,8 +1719,9 @@ Type89PlasmaCannon:
 	-Warhead@TeslaWeapon:
 	Warhead@Plasma_MediumFlatCompatibility:
 		ValidTargets: Ground, Water
-		Damage: 11000
+		Damage: 15000
 		PercentageScale: 0
+	-Warhead@CannonHE_Medium:
 
 Type97Cannon:
 	Inherits@wh: ^Warhead_CannonHE_Heavy

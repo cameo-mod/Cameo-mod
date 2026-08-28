@@ -98,7 +98,7 @@ class FinalBulkWeaponConsolidationTests(unittest.TestCase):
             self.assertTrue(own.isdisjoint(inherited), weapon)
 
     def test_structural_backlog_ratchet_was_lowered(self):
-        self.assertEqual(771, SPLIT_BASELINE)
+        self.assertEqual(748, SPLIT_BASELINE)
 
     def test_rejected_runtime_and_role_hazards_remain_unconverted(self):
         rules = Ruleset(ROOT)
@@ -106,10 +106,10 @@ class FinalBulkWeaponConsolidationTests(unittest.TestCase):
             # Percentage overflow or inherited percentage drift.
             "RA2FreedomRocket_elite", "RA2120xmm_rad",
             # Split ground/air routing.
-            "FLAK-23-AA", "TSLaserHarpyAOEClaw", "d2k_shotgun",
+            "FLAK-23-AA", "d2k_shotgun",
             # Friendly-fire or physical-state behavior would change.
             "BCYamatoCannon", "HMGo_upgrade", "LightTank2Missiles",
-            "TSLasergun", "latinsyndicate_latinmilitia_molotov",
+            "latinsyndicate_latinmilitia_molotov",
             # Semantic name/delivery traps from the independent review.
             "RA2MortarBike", "RA2ThunderboltMissile_AA", "SteelAirTurret_elite",
         }

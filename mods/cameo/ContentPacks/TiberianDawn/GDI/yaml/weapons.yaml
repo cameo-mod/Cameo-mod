@@ -576,6 +576,7 @@ VulcanA10Carrier:
 		Damage: 6000
 		Spread: 300
 NapalmA10Carrier:
+	Inherits@roleflat: ^Compatibility_Flame_HeavyFlat
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Heavy
 	Inherits@3: ^Effect_Flame_Heavy
@@ -595,6 +596,12 @@ NapalmA10Carrier:
 		GlowScale: 1.5
 		GlowFadeFrames: 30
 		GlowFadeInFrames: 12
+	-Warhead@Demolition_Heavy:
+	-Warhead@Flame_Heavy:
+	Warhead@Flame_HeavyFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 
 A10CarrierMissiles_AA:
 	Inherits@wh: ^Warhead_MissileAP_Heavy

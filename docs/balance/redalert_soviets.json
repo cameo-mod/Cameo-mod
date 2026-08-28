@@ -70,17 +70,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -108,17 +101,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -300,17 +286,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "10000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
         "spread": "253",
-        "tag": "Thermobaric_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Thermobaric_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -350,6 +329,7 @@
       "requires": "ra1_soviets_upgrade_thermobaricrockets && !ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesHE",
       "versus_templates": [
+       "^Compatibility_Thermobaric_MediumFlat",
        "^Warhead_Thermobaric_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -369,17 +349,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "10000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
         "spread": "253",
-        "tag": "Thermobaric_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Thermobaric_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -419,6 +392,7 @@
       "requires": "ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesHERocketPod1",
       "versus_templates": [
+       "^Compatibility_Thermobaric_MediumFlat",
        "^Warhead_Thermobaric_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -438,17 +412,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "10000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
         "spread": "253",
-        "tag": "Thermobaric_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_Heavy",
+        "tag": "Thermobaric_MediumFlatCompatibility",
         "type": "AreaDamage"
        },
        {
@@ -488,6 +455,7 @@
       "requires": "ra1_soviets_upgrade_thermobaricrockets && ra1_soviets_promotion_hurricanerocketpods",
       "slot": "Armament@MissilesHERocketPod2",
       "versus_templates": [
+       "^Compatibility_Thermobaric_MediumFlat",
        "^Warhead_Thermobaric_Medium",
        "^Warhead_CannonHE_Heavy",
        "^Projectile_Shell_Heavy",
@@ -738,17 +706,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -760,6 +721,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
+       "^Compatibility_Flame_LightFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
@@ -777,17 +739,10 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -799,6 +754,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
+       "^Compatibility_Flame_LightFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
@@ -1369,17 +1325,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1391,6 +1340,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
+       "^Compatibility_Flame_LightFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
@@ -1408,17 +1358,10 @@
       "armament_name": "secondary",
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1430,6 +1373,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
+       "^Compatibility_Flame_LightFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
@@ -1968,17 +1912,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1991,6 +1928,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
+       "^Compatibility_Flame_LightFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
@@ -2010,17 +1948,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2033,6 +1964,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
+       "^Compatibility_Flame_LightFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
@@ -2238,17 +2170,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2261,6 +2186,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
+       "^Compatibility_Flame_LightFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
@@ -2279,17 +2205,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2302,6 +2221,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
+       "^Compatibility_Flame_LightFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
@@ -2739,17 +2659,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2762,6 +2675,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
+       "^Compatibility_Flame_LightFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
@@ -2781,17 +2695,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -2804,6 +2711,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
+       "^Compatibility_Flame_LightFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
@@ -3007,17 +2915,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3030,6 +2931,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade1",
       "versus_templates": [
+       "^Compatibility_Flame_LightFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
@@ -3049,17 +2951,10 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -3072,6 +2967,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade2",
       "versus_templates": [
+       "^Compatibility_Flame_LightFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
@@ -5241,7 +5137,7 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
         "spread": "169",
         "tag": "Thermobaric_LightFlatCompatibility",
@@ -5260,20 +5156,6 @@
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -5300,7 +5182,7 @@
       "armament_name": "garrisoned",
       "damage_warheads": [
        {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 76, 57, 43, 31, 17, 0",
         "spread": "169",
         "tag": "Thermobaric_LightFlatCompatibility",
@@ -5319,20 +5201,6 @@
         "spread": "375",
         "tag": "MediumFlameWeaponPercentage",
         "type": "AreaDamagePercentage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 45, 18, 6, 0",
-        "spread": "233",
-        "tag": "Demolition_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
-        "falloff": "100, 90, 78, 60, 0",
-        "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
@@ -8909,17 +8777,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -8931,6 +8792,7 @@
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@UpgradeAG",
       "versus_templates": [
+       "^Compatibility_Flame_LightFlat",
        "^Warhead_Flame_Light",
        "^Warhead_Bullet_Medium",
        "^Projectile_Flame_Light",
@@ -8947,17 +8809,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 90, 78, 60, 0",
         "spread": "200",
-        "tag": "Flame_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Flame_LightFlatCompatibility",
         "type": "AreaDamage"
        }
       ],

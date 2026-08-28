@@ -1925,17 +1925,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "8000",
+        "damage": "16000",
         "falloff": "100, 75, 50, 25, 0",
         "spread": "400",
-        "tag": "Sonic_Medium",
+        "tag": "Sonic_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -1947,6 +1940,7 @@
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Sonic_MediumFlat",
        "^Warhead_Bullet_Medium",
        "^Warhead_Sonic_Medium",
        "^Projectile_Sonic_Shell",
@@ -6657,17 +6651,10 @@
       "burstdelays": "2",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "110",
-        "tag": "Flak_Medium",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "4000",
+        "damage": "8000",
         "falloff": "100, 75, 50, 25, 0",
         "spread": "400",
-        "tag": "Sonic_Medium",
+        "tag": "Sonic_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -6679,6 +6666,7 @@
       "requires": "ts_gdi_upgrade_sonicweaponry",
       "slot": "Armament@Upgrade",
       "versus_templates": [
+       "^Compatibility_Sonic_MediumFlat",
        "^Warhead_Flak_Medium",
        "^Warhead_Sonic_Medium",
        "^Projectile_Sonic_Shell",
