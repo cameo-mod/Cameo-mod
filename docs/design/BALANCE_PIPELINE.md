@@ -29,6 +29,24 @@ verify stage is clean it prints the command for the maintainer to type.
 Steps 2, 4 and 6 are human by definition — a balance decision is not a transformation —
 and the runner lists them as such instead of skipping them quietly.
 
+**The compiler property is measured, not assumed:**
+
+```sh
+python tools/balance/check_determinism.py                  # all ledgers
+python tools/balance/check_determinism.py --faction d2k_ordos
+python tools/balance/run_pipeline.py --determinism         # as a pipeline stage
+```
+
+It extracts twice in **separate processes** under different `PYTHONHASHSEED` and `TZ`,
+builds the ledgers in memory, and compares every artifact byte for byte. Separate
+processes are the point: inside one interpreter the hash seed is fixed, so set and dict
+iteration order is stable by accident and an ordering leak stays invisible.
+
+Nothing is written under `docs/balance/` — a tool that verifies the ledgers must never
+be able to be the thing that moved them. `serialize()` already writes `sort_keys=True`,
+so mapping order is safe; what this catches is a **list** built by iterating a set,
+plus timestamps, timezone-dependent values and absolute paths reaching an artifact.
+
 ```
 1. pull    yaml ──► JSON ledger          python tools/balance/extract_stats.py
 2. edit    change values in the ledger (or in the generated sheet)

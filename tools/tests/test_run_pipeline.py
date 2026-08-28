@@ -29,7 +29,8 @@ import run_pipeline as rp  # noqa: E402
 
 
 def args(**kw):
-    ns = argparse.Namespace(extract=False, workbook=False, faction=None, dry_run=False)
+    ns = argparse.Namespace(extract=False, workbook=False, faction=None,
+                            dry_run=False, determinism=False)
     for k, v in kw.items():
         setattr(ns, k, v)
     return ns
@@ -93,6 +94,21 @@ class PlanOrder(unittest.TestCase):
         self.assertTrue(passing)
         for c in passing:
             self.assertIn("extract_stats.py", c)
+
+
+class DeterminismStage(unittest.TestCase):
+    def test_off_by_default(self):
+        self.assertTrue(all("check_determinism" not in " ".join(s.cmd)
+                            for s in rp.plan(args())))
+
+    def test_runs_last_when_asked_for(self):
+        # It answers "is the compiler property holding", which is not worth asking of
+        # a tree that already failed a structural gate.
+        p = rp.plan(args(determinism=True, workbook=True))
+        self.assertIn("check_determinism", " ".join(p[-1].cmd))
+
+    def test_it_writes_nothing(self):
+        self.assertFalse(rp.plan(args(determinism=True))[-1].writes)
 
 
 class ExitCode(unittest.TestCase):

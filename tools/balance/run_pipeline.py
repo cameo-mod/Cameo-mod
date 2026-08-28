@@ -12,6 +12,7 @@ This runs the loop and stops where the law says to stop.
     python tools/balance/run_pipeline.py                 # verify: writes nothing
     python tools/balance/run_pipeline.py --extract       # + refresh the ledgers
     python tools/balance/run_pipeline.py --workbook      # + rebuild the workbooks
+    python tools/balance/run_pipeline.py --determinism   # + extract twice and compare
     python tools/balance/run_pipeline.py --faction ra1_soviets
 
 WHAT IT DELIBERATELY WILL NOT DO
@@ -100,6 +101,12 @@ def plan(args) -> list[Stage]:
     if args.workbook:
         stages.append(Stage("3", "build the faction/type workbooks",
                             [PYTHON, "tools/balance/build_workbook.py"], writes=True))
+    if args.determinism:
+        # Opt-in: it extracts twice, so it costs roughly two full runs. Last, because
+        # it answers "is the compiler property holding" rather than "is the tree sane",
+        # and there is no point asking that of a tree that already failed a gate.
+        stages.append(Stage("-", "determinism: same inputs, same ledgers",
+                            [PYTHON, "tools/balance/check_determinism.py", *fac]))
     return stages
 
 
@@ -118,6 +125,9 @@ def main() -> int:
     ap.add_argument("--workbook", action="store_true",
                     help="rebuild the faction/type workbooks (writes tracked files)")
     ap.add_argument("--faction", help="ledger-name substring filter")
+    ap.add_argument("--determinism", action="store_true",
+                    help="also extract twice under different hash seeds and compare "
+                         "(costs two full extractions)")
     ap.add_argument("--dry-run", action="store_true",
                     help="print the plan and run nothing")
     args = ap.parse_args()
