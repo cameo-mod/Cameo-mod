@@ -83,6 +83,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [`docs/audit/latest/` is environment-bound — an incomplete tree reports LESS and still says PASS (2026-08-23)](#docsauditlatest-is-environment-bound--an-incomplete-tree-reports-less-and-still-says-pass-2026-08-23)
 - [Two ways a gate passes its own verification and is still broken (2026-08-23)](#two-ways-a-gate-passes-its-own-verification-and-is-still-broken-2026-08-23)
 - ["Regenerable" is a claim about a tool, and it needs running (2026-08-28)](#regenerable-is-a-claim-about-a-tool-and-it-needs-running-2026-08-28)
+- ["Not found" is not "not there" — three ways a grep lies (2026-08-28)](#not-found-is-not-not-there--three-ways-a-grep-lies-2026-08-28)
 
 ---
 
@@ -1077,6 +1078,53 @@ at risk were the ones it did not cover. Run the generator, or keep the file.
 ⭐ **Group deletions inherit the safety of the group's weakest member.** Fourteen files
 were removed under one justification; thirteen deserved it. A filename that merely looks
 like the others is the one to check individually, because resemblance is not provenance.
+
+## "Not found" is not "not there" — three ways a grep lies (2026-08-28)
+
+Three separate disagreements in one week, between careful people looking at the same
+project, all with the same shape: someone searched, found nothing, and concluded the thing
+did not exist. Every time, it did.
+
+**1. Wrong commit.** Five outside reviews declared seven documents missing —
+`MASTER_REPORT`, `audit/FINDINGS`, `BALANCE_MEGAPLAN`, `PROJECT_CONTEXT` and others. All
+seven had been merged away by the 83→43 compaction. The reviewers were not describing this
+repository; they were describing it on an earlier date, and disagreeing with each other
+about *when* rather than about *what*.
+
+> `git log --all -- <path>` separates **moved** from **never existed**. A path with commits
+> behind it and none at HEAD was relocated, and the report's substance may still be sound.
+
+**2. Wrong load state.** Four USA doctrine conditions in `defaults.yaml` looked like dead
+wiring: nothing on master grants them, so five multipliers hang off conditions that can
+never fire. The provider exists and works — `usacommand` in `rules/generals.yaml`, which
+`mod.yaml` has commented out. Dormant content can be the sole provider for live wiring, so
+the defect is real on master and invisible to anyone working with that pack enabled.
+
+> Check `mod.yaml` before calling wiring dead. State which files were loaded when reporting
+> it.
+
+**3. Wrong namespace.** The same four tokens then vanished from a contributor's tree
+entirely. That tree had renamed 874 actors plus every id that doubles as a string match, so
+`usabombardament` had become `usa_doctrine_bombardmentbattleplan` — locally, and nowhere
+else. Searching master's names against a renamed tree returns nothing, and nothing looks
+identical to deleted.
+
+> Before concluding a rename removed something, search for what it was renamed *to*. A
+> rename map is the fastest way to translate between naming generations.
+
+⭐ **A finding is scoped to a commit, a load state, and a namespace.** All three must be
+established before "I could not find it" becomes "it is not there" — and each failure is
+invisible from inside, because a search that returns nothing looks the same in every case.
+
+⭐ **Trace a mechanism end to end rather than inferring its absence from an empty grep.**
+The load-state case took four links to settle — production grant, prerequisite, condition,
+multiplier — and stopping at any one of them produced a confident wrong answer. Two of the
+three disagreements above were resolved only by walking the whole chain; none was resolved
+by a better search term.
+
+The worked instances, with line numbers, are in
+[`design/BALANCE_PIPELINE_GAPS.md`](design/BALANCE_PIPELINE_GAPS.md) §0–§0b.
+
 ## `Inherits` POSITION is semantic, not cosmetic (2026-08-16)
 
 **The last node wins, and `Inherits` is a node.** `MiniYaml` walks a definition's children
