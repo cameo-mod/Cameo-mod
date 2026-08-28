@@ -201,8 +201,15 @@ Sorting keys does nothing for the order of a **list**, which is where a set leak
 ## 4. Design guidance worth keeping — non-binding
 
 The review round produced RTS and live-service balance material that is genuinely useful as
-*shape*. It is recorded here as provenance only. Its citations were not verifiable from this
+*shape*. It is recorded as provenance only. Its citations were not verifiable from this
 repository, and where any of it meets `DESIGN.md`, **DESIGN.md wins**.
+
+📖 **The full treatment now lives in
+[`RTS_BALANCE_REFERENCE.md`](RTS_BALANCE_REFERENCE.md)** — counterplay as a checkable
+taxonomy, TTK decomposed, the economy profile and its archetypes, tempo, snowball slope,
+role coverage, reachability, and what needs its own model instead of class pricing. The
+first pass through this material compressed it to the six headlines below and lost the
+structure; the reference page is where it was put back.
 
 * **Balance is viability, not equality.** The target is that many options stay playable at high
   skill with no strategy crowding the rest out — not equal damage per credit, and not a 50%
