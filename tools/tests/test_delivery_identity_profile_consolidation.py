@@ -76,13 +76,23 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
             "SteelMantaHunterCannonsAAResonanceBounce2",
         }
         for weapon in ground:
-            self.assertIn(
-                "Bullet_MediumFlatCompatibility",
-                main_warheads(self.rules.resolve_weapon(weapon)), weapon)
+            mains = main_warheads(self.rules.resolve_weapon(weapon))
+            self.assertIn("Bullet_MediumFlatCompatibility", mains, weapon)
+            self.assertNotIn("Flak_MediumFlatCompatibility", mains, weapon)
         for weapon in air:
-            self.assertIn(
-                "Flak_MediumFlatCompatibility",
-                main_warheads(self.rules.resolve_weapon(weapon)), weapon)
+            mains = main_warheads(self.rules.resolve_weapon(weapon))
+            self.assertIn("Flak_MediumFlatCompatibility", mains, weapon)
+            self.assertNotIn("Bullet_MediumFlatCompatibility", mains, weapon)
+
+    def test_selected_old_profile_pairs_are_absent(self):
+        for weapon, destination in machineguns.selections(self.rules).items():
+            mains = set(main_warheads(self.rules.resolve_weapon(weapon)))
+            self.assertTrue(mains.isdisjoint(machineguns.PAIR), weapon)
+            self.assertIn(f"{destination}FlatCompatibility", mains, weapon)
+        for weapon, (destination, pair, _root) in delivery.selections(self.rules).items():
+            mains = set(main_warheads(self.rules.resolve_weapon(weapon)))
+            self.assertTrue(mains.isdisjoint(pair), weapon)
+            self.assertIn(f"{destination}FlatCompatibility", mains, weapon)
 
     def test_routing_and_overflow_hazards_remain_unconverted(self):
         deferred = {
