@@ -735,6 +735,11 @@ RA2FlakTrackGun_elite:
 	Range: 6528
 	Burst: 2
 	BurstDelays: 3
+	-Warhead@Flak_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 2488
 
 RA2FlakTrackAAGun:
 	Inherits: RA2FlakTrackGun
@@ -763,13 +768,12 @@ RA2FlakTrackAAGun:
 	Warhead@Bullet_Medium_Percentage: AreaDamagePercentage
 		ValidTargets: Air
 	Warhead@Flak_Medium:
+		PercentageScale: 2488
+		Damage: 8000
 		ValidTargets: Air
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
-	Warhead@Flak_MediumFlatCompatibility:
-		ValidTargets: Air
-		Damage: 6000
-		PercentageScale: 0
+	-Warhead@Flak_MediumFlatCompatibility:
 RA2FlakTrackAAGun_elite:
 	Inherits: RA2FlakTrackAAGun
 	Range: 9292
@@ -796,12 +800,20 @@ BorisAKM_elite:
 	Inherits: BorisAKM
 	Range: 9167
 	Burst: 8
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 
 BorisAKM2:
 	Inherits: BorisAKM
 	ValidTargets: Structure, Bridge, wall
 	-InvalidTargets:
 	Range: 9167
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 8000
+		PercentageScale: 9988
 
 MigTarget:
 	ValidTargets: Structure, Bridge, wall

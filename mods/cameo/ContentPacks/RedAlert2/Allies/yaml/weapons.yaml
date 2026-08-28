@@ -488,7 +488,8 @@ RA2GrandCannonWeapon:
 		ContrailEndWidth: 25
 		TrailInterval: 1
 	Warhead@CannonHE_Heavy:
-		Damage: 50000
+		PercentageScale: 2000
+		Damage: 250000
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 50000
 	Warhead@HeavyBombPercentage: AreaDamagePercentage
@@ -532,11 +533,7 @@ RA2GrandCannonWeapon:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@CannonHE_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 200000
-		PercentageScale: 0
-
+	-Warhead@CannonHE_HeavyFlatCompatibility:
 RA2MirageGun_elite:
 	Inherits: RA2MirageGun
 	Inherits@Elite: ^RA2EliteEffects

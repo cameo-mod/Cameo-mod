@@ -61,8 +61,9 @@ wc2arrowFire:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@CannonHE_Medium:
+		PercentageScale: 1663
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 24000
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
@@ -94,11 +95,7 @@ wc2arrowFire:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@TankDestroyerCannon:
 	-Warhead@ArrowWeapon:
-	Warhead@CannonHE_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 20000
-		PercentageScale: 0
-
+	-Warhead@CannonHE_MediumFlatCompatibility:
 wc2highArrowFire:
 	Inherits@collapseextra1: ^Compatibility_Laser_ExtraDamage
 	Inherits: ^LaserWeapon
@@ -143,11 +140,9 @@ wc2highArrowFire:
 	-Warhead@LaserExtraDamage:
 	-Warhead@HeavyMissile:
 	-Warhead@HeavyAAWeapon:
-	Warhead@CannonHE_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 29000
-		PercentageScale: 0
-
+	Warhead@CannonHE_Medium:
+		Damage: 33000
+		PercentageScale: 1210
 SiegeEngineCannon:
 	Inherits@roleflat: ^Compatibility_CannonHE_HeavyFlat
 	Inherits: ^NuclearWarhead

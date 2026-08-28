@@ -721,7 +721,8 @@ AsianLynxTankCannon:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@CannonHE_Medium:
-		Damage: 2000
+		PercentageScale: 1659
+		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
@@ -730,10 +731,7 @@ AsianLynxTankCannon:
 	-Warhead@LightFlameWeapon:
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@TankDestroyerCannon:
-	Warhead@CannonHE_MediumFlatCompatibility:
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		Damage: 10000
-		PercentageScale: 0
+	-Warhead@CannonHE_MediumFlatCompatibility:
 AsianLynxTankCannon_elite:
 	Inherits: AsianLynxTankCannon
 	Inherits@Elite: ^RA2EliteEffects
@@ -1477,11 +1475,10 @@ AsianPulverizerMechaGatling:
 
 	-Warhead@MediumChemicalWeapon:
 	-Warhead@MediumMissile:
-	Warhead@Bullet_MediumFlatCompatibility:
-		ValidTargets: Ground, Air, Water
-		Damage: 4000
-		PercentageScale: 0
-
+	Warhead@Bullet_Medium:
+		Damage: 6000
+		PercentageScale: 3317
+	-Warhead@Bullet_MediumFlatCompatibility:
 AsianSinglePlasma:
 	Inherits: ^Warhead_CannonHE_Medium
 	Inherits@2: ^Projectile_Shell_Medium
@@ -2523,6 +2520,7 @@ AsianPhoenixRocket_elite:
 		ContrailEndWidth: 1
 
 ASDFGun:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^RA2SmallArms
 	Inherits@2: ^RA2Chaingun
 	Report: varmatta.wav, varmattb.wav
@@ -2538,6 +2536,12 @@ ASDFGun:
 	Warhead@Bullet_Medium: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 ASDFGun2:
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
@@ -2550,6 +2554,11 @@ ASDFGun2:
 	# ^Projectile_Bullet_* would take the type and orphan the other one's
 	# guidance fields. Keeps today's resolved type verbatim.
 	Projectile: Bullet
+	-Warhead@Railgun_Heavy:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 
 ASDFKamikazeTargeting:
 	Range: 7250
@@ -2849,6 +2858,7 @@ AsianKamikazeImpactTargeting:
 # not double damage) @ 250% cost = 500. base burst 10; upgrade/elite tiers
 # ride the upgrade pass (pair law: all three dedicated).
 asianalliance_fanatic_shotgun:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -2866,10 +2876,24 @@ asianalliance_fanatic_shotgun:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 asianalliance_fanatic_shotgun_upgrade:
 	Inherits: asianalliance_fanatic_shotgun
 	Burst: 13
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 
 asianalliance_fanatic_shotgun_elite:
 	Inherits: asianalliance_fanatic_shotgun
 	Burst: 20
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975

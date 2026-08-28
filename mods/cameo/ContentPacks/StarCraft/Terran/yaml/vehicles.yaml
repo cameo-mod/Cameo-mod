@@ -502,7 +502,7 @@ terran_goliath:
 		Amount: -80
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~terran_armory
+		Prerequisites: ~terran_armory, ~!terran_promotion_goliathmk2
 		Description: actor_scgoliath.description
 	Mobile:
 		Speed: 90

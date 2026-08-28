@@ -320,6 +320,7 @@ tkmcryorockets:
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
 TKMQuadCannonAG:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -343,9 +344,19 @@ TKMQuadCannonAG:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Flak_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 TKMQuadCannonAA:
 	Inherits: TKMQuadCannonAG
 	Range: 7880
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 tkmturretcannon:
 	Inherits@wh: ^Warhead_CannonAP_Light
 	Inherits@wh2: ^Warhead_CannonHE_Medium
@@ -386,6 +397,7 @@ tkm2a46gun:
 	Warhead@CannonHE_Medium:
 		Damage: 10000
 TKMZazaCannonAG:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -409,10 +421,21 @@ TKMZazaCannonAG:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Flak_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 TKMZazaCannonAA:
 	Inherits: TKMZazaCannonAG
 	Range: 7926
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975
 TKMAATurretCannon:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits@wh: ^Warhead_MissileHE_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -428,6 +451,12 @@ TKMAATurretCannon:
 	Warhead@Flak_Medium:
 		ValidTargets: Air
 		Damage: 2000
+	-Warhead@Flak_Medium:
+	-Warhead@MissileHE_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 4000
+		PercentageScale: 14975
 tkmstrykerrockets:
 	Inherits@wh: ^Warhead_MissileAP_Medium
 	Inherits@proj: ^Projectile_Missile_Medium
@@ -560,6 +589,7 @@ HueyCryoMissiles:
 		ValidTargets: Ground, Ship
 		ImpactActors: false
 HueyTwinMissiles:
+	Inherits@finalmain: ^Compatibility_MissileAP_MediumFlat
 	Inherits@wh: ^Warhead_Demolition_Light
 	Inherits@wh2: ^Warhead_MissileAP_Medium
 	Inherits@wh3: ^Warhead_Concussion_Medium
@@ -585,6 +615,13 @@ HueyTwinMissiles:
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship
 		ImpactActors: false
+	-Warhead@Concussion_Medium:
+	-Warhead@Demolition_Light:
+	-Warhead@MissileAP_Medium:
+	Warhead@MissileAP_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		PercentageScale: 9984
 sandmarinemortar:
 	Inherits: ^Warhead_Demolition_Heavy
 	Inherits@2: ^Warhead_Flame_Medium

@@ -339,6 +339,7 @@ TSCommandoShotgun:
 		Damage: 8000
 
 elitecadregun:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -355,6 +356,12 @@ elitecadregun:
 	Warhead@Bullet_Medium:
 		PercentageScale: 2500
 		Damage: 8000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 16000
+		PercentageScale: 2494
 laserelitecadregun:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits: ^SmallArms

@@ -65,6 +65,7 @@ td_gdi_commando_sniper_elite:
 		Explosions: small_poof
 
 APCGun:
+	Inherits@finalmain: ^Compatibility_Flak_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Medium
 	Inherits@wh2: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
@@ -79,6 +80,12 @@ APCGun:
 	Warhead@Flak_Medium:
 		ValidTargets: Ground, Water
 		Damage: 2000
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Ground, Water
+		Damage: 4000
+		PercentageScale: 9975
 APCGun_AA:
 	Inherits: APCGun
 	Range: 8502
@@ -87,6 +94,12 @@ APCGun_AA:
 		ValidTargets: Air
 	Warhead@Flak_Medium:
 		ValidTargets: Air
+	-Warhead@Bullet_Medium:
+	-Warhead@Flak_Medium:
+	Warhead@Flak_MediumFlatCompatibility:
+		ValidTargets: Air
+		Damage: 4000
+		PercentageScale: 9975
 BoxerCannonAG:
 	Inherits@roleflat: ^Compatibility_Bullet_MediumFlat
 	Inherits: ^SmallArms
@@ -1980,6 +1993,7 @@ td_gdi_minigunner_minigun_ap:
 # SoundVolume 1/burst so the simultaneous shots aren't deafening.
 # TDShotgun stays for its vehicle/map users.
 td_gdi_shotgunner_shotgun:
+	Inherits@finalmain: ^Compatibility_Bullet_MediumFlat
 	Inherits@wh: ^Warhead_Bullet_Light
 	Inherits@wh2: ^Warhead_Bullet_Medium
 	Inherits@proj: ^Projectile_Bullet_Medium
@@ -1997,3 +2011,9 @@ td_gdi_shotgunner_shotgun:
 		Damage: 2000
 	Warhead@Bullet_Medium:
 		Damage: 2000
+	-Warhead@Bullet_Light:
+	-Warhead@Bullet_Medium:
+	Warhead@Bullet_MediumFlatCompatibility:
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		PercentageScale: 9975

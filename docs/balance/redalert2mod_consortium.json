@@ -811,17 +811,10 @@
      {
       "damage_warheads": [
        {
-        "damage": "2000",
-        "falloff": "100, 0",
-        "spread": "67",
-        "tag": "Bullet_Light",
-        "type": "AreaDamage"
-       },
-       {
-        "damage": "2000",
+        "damage": "4000",
         "falloff": "100, 0",
         "spread": "100",
-        "tag": "Bullet_Medium",
+        "tag": "Bullet_MediumFlatCompatibility",
         "type": "AreaDamage"
        }
       ],
@@ -832,6 +825,7 @@
       "reloaddelay": "3",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Compatibility_Bullet_MediumFlat",
        "^SteelSmallArms",
        "^SteelChaingun"
       ],
@@ -902,13 +896,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -930,7 +917,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -962,13 +949,6 @@
       "burstdelays": "1",
       "damage_warheads": [
        {
-        "damage": "6000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": null,
         "spread": "100",
@@ -990,7 +970,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
+        "damage": "8000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",
@@ -1518,13 +1498,6 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "9000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -1553,7 +1526,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
+        "damage": "11000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
@@ -1588,13 +1561,6 @@
       "burstdelays": "5",
       "damage_warheads": [
        {
-        "damage": "9000",
-        "falloff": "100, 0",
-        "spread": "64",
-        "tag": "MissileAP_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 50, 33, 25, 20",
         "spread": "200",
@@ -1623,7 +1589,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "2000",
+        "damage": "11000",
         "falloff": "100, 0",
         "spread": "64",
         "tag": "MissileAP_Medium",
@@ -8220,13 +8186,6 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -8248,7 +8207,7 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
@@ -8282,13 +8241,6 @@
       "burstdelays": "0",
       "damage_warheads": [
        {
-        "damage": "4000",
-        "falloff": "100, 50, 20, 0",
-        "spread": "400",
-        "tag": "CannonHE_HeavyFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "111, 33, 11, 3",
         "spread": "375",
@@ -8310,7 +8262,7 @@
         "type": "AreaDamage"
        },
        {
-        "damage": "2000",
+        "damage": "6000",
         "falloff": "100, 50, 20, 0",
         "spread": "400",
         "tag": "CannonHE_Heavy",
@@ -11162,13 +11114,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "16000",
-        "falloff": "100, 0",
-        "spread": "100",
-        "tag": "Bullet_MediumFlatCompatibility",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "2",
         "falloff": null,
         "spread": "225",
@@ -11197,7 +11142,7 @@
         "type": "AreaDamagePercentage"
        },
        {
-        "damage": "4000",
+        "damage": "20000",
         "falloff": "100, 0",
         "spread": "100",
         "tag": "Bullet_Medium",

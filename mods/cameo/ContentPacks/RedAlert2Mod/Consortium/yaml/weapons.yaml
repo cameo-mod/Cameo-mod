@@ -2276,16 +2276,14 @@ WhiteRabbitGatling:
 		ValidTargets: Ground, Air, Water
 		Damage: 2
 	Warhead@Bullet_Medium:
+		PercentageScale: 1995
 		ValidTargets: Ground, Air, Water
-		Damage: 4000
+		Damage: 20000
 	-Warhead@HeavyCannon:
 	-Warhead@SmallArms:
 	-Warhead@MediumMissile:
 	-Warhead@FlakWeapon:
-	Warhead@Bullet_MediumFlatCompatibility:
-		ValidTargets: Ground, Air, Water
-		Damage: 16000
-		PercentageScale: 0
+	-Warhead@Bullet_MediumFlatCompatibility:
 HammerheadTankCannon:
 	Inherits: ^RA2MediumCannon
 	ReloadDelay: 55
@@ -2439,8 +2437,9 @@ SteelDaggerCannon:
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@CannonHE_Heavy:
+		PercentageScale: 3317
 		ValidTargets: Ground, Water
-		Damage: 2000
+		Damage: 6000
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
@@ -2449,11 +2448,7 @@ SteelDaggerCannon:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@CannonHE_HeavyFlatCompatibility:
-		ValidTargets: Ground, Water
-		Damage: 4000
-		PercentageScale: 0
-
+	-Warhead@CannonHE_HeavyFlatCompatibility:
 SteelDaggerCannon_elite:
 	Inherits: SteelDaggerCannon
 	Range: 25000
@@ -2526,15 +2521,13 @@ SteelCruiserCannons:
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 	Warhead@Bullet_Medium:
+		PercentageScale: 2488
 		ValidTargets: Ground, Air, Water
-		Damage: 2000
+		Damage: 8000
 	-Warhead@LightMissile:
 	-Warhead@SmallArms:
 	-Warhead@FlakWeapon:
-	Warhead@Bullet_MediumFlatCompatibility:
-		ValidTargets: Ground, Air, Water
-		Damage: 6000
-		PercentageScale: 0
+	-Warhead@Bullet_MediumFlatCompatibility:
 SteelCruiserCannons_elite:
 	Inherits: SteelCruiserCannons
 	Range: 8000

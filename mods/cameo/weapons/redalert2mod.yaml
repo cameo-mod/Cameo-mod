@@ -393,8 +393,9 @@ SteelTwisterMissiles:
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
 	Warhead@MissileAP_Medium:
+		PercentageScale: 1810
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 11000
 	Warhead@Effect: CreateEffect
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
@@ -409,10 +410,7 @@ SteelTwisterMissiles:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@FlakWeapon:
 	-Warhead@HeavyAAWeapon:
-	Warhead@MissileAP_MediumFlatCompatibility:
-		ValidTargets: Ground, Water, Air
-		Damage: 9000
-		PercentageScale: 0
+	-Warhead@MissileAP_MediumFlatCompatibility:
 SteelTwisterMissiles_elite:
 	Inherits: SteelTwisterMissiles
 	Range: 6000

@@ -334,7 +334,8 @@ MortarTeamArtilleryShell:
 		TrailImage: black_smokey
 		TrailPalette: effect75alpha
 	Warhead@CannonHE_Medium:
-		Damage: 20000
+		PercentageScale: 2499
+		Damage: 80000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -380,10 +381,7 @@ MortarTeamArtilleryShell:
 	-Warhead@MediumFlameWeapon:
 	-Warhead@ShrapnelWeapon:
 	-Warhead@ShrapnelWeaponFriendlyFire:
-	Warhead@CannonHE_MediumFlatCompatibility:
-		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
-		Damage: 60000
-		PercentageScale: 0
+	-Warhead@CannonHE_MediumFlatCompatibility:
 wc2gryphonFireVisible:
 	Inherits@roleflat: ^Compatibility_MissileTesla_MediumFlat
 	Inherits: ^LightMissile
