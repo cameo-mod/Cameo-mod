@@ -103,7 +103,6 @@ GrenadeThermobaric:
 		Damage: 8000
 		PercentageScale: 0
 GrenadeThermobaricExplode:
-	Inherits@roleflat: ^Compatibility_Thermobaric_LightFlat
 	Inherits: GrenadeThermobaric
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 2000
@@ -2573,7 +2572,6 @@ MammothTuskTesla:
 		PercentageScale: 0
 
 MammothTuskTeslaFragment1:
-	Inherits@roleflat: ^Compatibility_MissileTesla_HeavyFlat
 	Inherits: MammothTuskTesla
 	ValidTargets: Ground, Water, Air
 	Range: 3206
@@ -2629,7 +2627,6 @@ MammothTuskTeslaFragment1:
 		PercentageScale: 0
 
 MammothTuskTeslaFragment2:
-	Inherits@roleflat: ^Compatibility_MissileTesla_HeavyFlat
 	Inherits: MammothTuskTeslaFragment1
 	Range: 1603
 	Warhead@Grenade: SpreadDamage
@@ -3229,7 +3226,6 @@ VolkovMagneticWeapon:
 		PercentageScale: 0
 
 VolkovMagneticWeaponTesla:
-	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: VolkovMagneticWeapon
 	Inherits@wh: ^Warhead_Tesla_Heavy
 	Inherits@proj: ^Projectile_Lightning_Heavy
@@ -3297,7 +3293,6 @@ VolkovMagneticWeaponTesla:
 		PercentageScale: 0
 
 VolkovMagneticWeaponTeslaFragment1:
-	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: VolkovMagneticWeaponTesla
 	ValidTargets: Ground, Water, Air
 	Range: 2830
@@ -3343,7 +3338,6 @@ VolkovMagneticWeaponTeslaFragment1:
 		PercentageScale: 0
 
 VolkovMagneticWeaponTeslaFragment2:
-	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: VolkovMagneticWeaponTeslaFragment1
 	Range: 1415
 	Warhead@CannonHE_Heavy: AreaDamage
@@ -3382,7 +3376,6 @@ VolkovMagneticWeaponTeslaFragment2:
 		PercentageScale: 0
 
 VolkovMagneticWeaponNuclearShells:
-	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits@wh: ^Warhead_Nuclear_Super
 	Inherits@fx: ^Effect_Nuclear_Super
 	Inherits: VolkovMagneticWeapon
@@ -3538,7 +3531,6 @@ VolkovMagneticWeaponIncendiaryTesla:
 		PercentageScale: 0
 
 VolkovMagneticWeaponIncendiaryTeslaFragment1:
-	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: VolkovMagneticWeaponTesla
 	ValidTargets: Ground, Water, Air
 	Range: 2830
@@ -3595,7 +3587,6 @@ VolkovMagneticWeaponIncendiaryTeslaFragment1:
 		PercentageScale: 0
 
 VolkovMagneticWeaponIncendiaryTeslaFragment2:
-	Inherits@roleflat: ^Compatibility_Railgun_HeavyFlat
 	Inherits: VolkovMagneticWeaponIncendiaryTeslaFragment1
 	Range: 1415
 	Warhead@CannonHE_Heavy: AreaDamage

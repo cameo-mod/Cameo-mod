@@ -462,7 +462,6 @@ AsianMaidenBow:
 		DamageCalculationType: ClosestTargetablePosition
 
 AsianMaidenBow_elite:
-	Inherits@roleflat: ^Compatibility_Arrow_LightFlat
 	Inherits: AsianMaidenBow
 	Range: 7740
 	MinRange: 1550
@@ -2827,7 +2826,6 @@ AsianMLRS:
 		Damage: 4000
 		PercentageScale: 0
 AsianSpitfireRockets:
-	Inherits@roleflat: ^Compatibility_MissileAA_MediumFlat
 	Inherits: AsianMLRS
 	Inherits@fx: ^Effect_Explosion_Large_RA2
 	ReloadDelay: 90

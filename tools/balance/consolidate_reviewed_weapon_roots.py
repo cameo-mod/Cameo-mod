@@ -366,14 +366,15 @@ def apply_exact_preservation_block(
 def apply_compatibility_block(changed: dict[pathlib.Path, list[str]], path: pathlib.Path,
                               weapon: str, destination: str, removals: set[str],
                               total: int, targets: str,
-                              extra_removals: set[str] | None = None) -> None:
+                              extra_removals: set[str] | None = None,
+                              inherit_template: bool = True) -> None:
     targets = targets.strip()
     if not targets or targets == "*":
         raise RuntimeError(f"{weapon}: compatibility target mask is empty")
     lines = changed.setdefault(path, path.read_text(encoding="utf-8-sig").splitlines(True))
     start, end = block_bounds(lines, weapon)
     template = f"^Compatibility_{destination}Flat"
-    if total > 0:
+    if total > 0 and inherit_template:
         inherit_present = any(
             re.match(r"^\tInherits(?:@[^:]+)?:\s*" + re.escape(template) + r"\s*$",
                      lines[i].rstrip("\r\n"))
@@ -506,7 +507,8 @@ def main() -> int:
             apply_compatibility_block(
                 changed, ROOT / child_local.file, child_name, child_role,
                 child_removals,
-                child_total, child_node.get("ValidTargets") or row["valid_targets"], extra)
+                child_total, child_node.get("ValidTargets") or row["valid_targets"], extra,
+                inherit_template=child_role != destination)
             repaired_children += 1
         summary.append((weapon, destination, f"{len(flats)} slices -> {total}"))
         if repaired_children:

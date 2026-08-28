@@ -1502,7 +1502,6 @@ SteelMegaSword_EMP:
 		PercentageScale: 0
 
 SteelMegaSword_elite:
-	Inherits@roleflat: ^Compatibility_Quantum_HeavyFlat
 	Inherits@wh: ^Warhead_Railgun_Heavy
 	Inherits@proj: ^Projectile_Railgun_Heavy
 	Inherits@fx: ^Effect_Railgun_Heavy
@@ -1630,7 +1629,6 @@ SteelAirTurret_EMP:
 		PercentageScale: 0
 
 SteelAirTurret_elite:
-	Inherits@roleflat: ^Compatibility_Quantum_HeavyFlat
 	Inherits: SteelAirTurret_EMP
 	Range: 9000
 	Projectile: Railgun
@@ -1672,7 +1670,6 @@ SteelAirTurret_elite:
 		PercentageScale: 0
 
 SteelAirTurretEScatter:
-	Inherits@roleflat: ^Compatibility_Quantum_HeavyFlat
 	Inherits: SteelAirTurret_elite
 	Warhead@Tesla_Heavy:
 		PercentageScale: 1667
@@ -1799,7 +1796,6 @@ SteelQuantumTurretRail:
 		PercentageScale: 0
 
 SteelQuantumTurretRail_EMP:
-	Inherits@roleflat: ^Compatibility_Quantum_HeavyFlat
 	Inherits: SteelQuantumTurretRail
 	Warhead@TeslaWeapon: SpreadDamage
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -2174,7 +2170,6 @@ SteelStalkerRailgun_EMP:
 		PercentageScale: 0
 
 SteelStalkerRailgun_elite:
-	Inherits@roleflat: ^Compatibility_Quantum_HeavyFlat
 	Inherits: SteelStalkerRailgun_EMP
 	Range: 10000
 	Projectile: Railgun
@@ -2216,7 +2211,6 @@ SteelStalkerRailgun_elite:
 		PercentageScale: 0
 
 SteelStalkerRailgunEScatter:
-	Inherits@roleflat: ^Compatibility_Quantum_HeavyFlat
 	Inherits: SteelStalkerRailgun_elite
 	Warhead@Tesla_Heavy:
 		PercentageScale: 1667

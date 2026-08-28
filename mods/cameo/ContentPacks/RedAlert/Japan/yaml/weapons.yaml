@@ -553,7 +553,6 @@ BallistaSingleShotAir:
 		Damage: 160000
 	MinRange: 1845
 BallistaSingleShotAirEnergized:
-	Inherits@roleflat: ^Compatibility_Arrow_LightFlat
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Light
@@ -1161,7 +1160,6 @@ ZeroFighterArrows:
 	Warhead@Arrow_Light:
 		Damage: 18000
 ZeroFighterArrowsEnergized:
-	Inherits@roleflat: ^Compatibility_Arrow_MediumFlat
 	Inherits: SkyHawkArrowsEnergized
 	Range: 6615
 	MinRange: 1325

@@ -731,7 +731,6 @@ RA2FlakTrackGun_elite:
 	BurstDelays: 3
 
 RA2FlakTrackAAGun:
-	Inherits@roleflat: ^Compatibility_Flak_MediumFlat
 	Inherits: RA2FlakTrackGun
 	ReloadDelay: 25
 	Report: aacanon3.aud

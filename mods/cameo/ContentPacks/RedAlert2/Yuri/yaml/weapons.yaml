@@ -225,7 +225,6 @@ RA2LasherToxicMortar:
 		PercentageScale: 0
 
 RA2LasherToxicMortar_elite:
-	Inherits@roleflat: ^Compatibility_CannonChem_MediumFlat
 	Inherits: RA2LasherToxicMortar
 	Range: 10000
 	Warhead@Grenade: SpreadDamage
@@ -837,7 +836,6 @@ RA2Virusgun:
 		PercentageScale: 0
 
 RA2Virusgun2:
-	Inherits@roleflat: ^Compatibility_Sniper_LightFlat
 	Inherits@wh: ^Warhead_Flak_Medium
 	Inherits@proj: ^Projectile_Flak_Medium
 	Inherits@fx: ^Effect_Flak_Medium
